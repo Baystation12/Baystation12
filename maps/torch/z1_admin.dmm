@@ -49,7 +49,7 @@
 /area/rescue_base/base)
 "aaj" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -12911,7 +12911,7 @@
 	pixel_y = 0
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/material/hatchet/tacknife,
+/obj/item/weapon/material/knife/combat,
 /obj/item/weapon/melee/telebaton,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
@@ -14411,7 +14411,7 @@
 	dir = 5
 	},
 /obj/item/clothing/under/suit_jacket,
-/obj/item/clothing/accessory/wcoat,
+/obj/item/clothing/accessory/wcoat/black,
 /obj/item/clothing/head/that{
 	pixel_x = 4;
 	pixel_y = 6

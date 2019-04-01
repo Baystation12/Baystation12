@@ -243,6 +243,6 @@ obj/structure/net/Initialize(var/mapload)
 	name = "Dead carp fisher"
 	uniform = /obj/item/clothing/under/color/green
 	suit = /obj/item/clothing/suit/apron/overalls
-	belt = /obj/item/weapon/material/hatchet/tacknife
+	belt = /obj/item/weapon/material/knife/combat
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/hardhat/dblue

@@ -160,7 +160,9 @@
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
-		if(islist(armor)) piece.armor = armor.Copy()
+		if(islist(armor))
+			remove_extension(piece, /datum/extension/armor)
+			set_extension(piece, /datum/extension/armor, /datum/extension/armor/rig, armor)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)
@@ -287,10 +289,9 @@
 								helmet.update_light(wearer)
 
 					//sealed pieces become airtight, protecting against diseases
-					if (!seal_target)
-						piece.armor["bio"] = 100
-					else
-						piece.armor["bio"] = src.armor["bio"]
+					var/datum/extension/armor/rig/armor_datum = get_extension(piece, /datum/extension/armor)
+					if(istype(armor_datum))
+						armor_datum.sealed = !seal_target
 
 				else
 					failed_to_seal = 1

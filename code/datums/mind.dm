@@ -164,57 +164,57 @@
 
 /datum/mind/Topic(href, href_list)
 
+	var/is_admin =   FALSE
+	var/can_modify = FALSE
+	is_admin = check_rights(R_ADMIN, FALSE)
+	can_modify = is_admin
+
 	if(href_list["add_goal"])
 
 		var/mob/caller = locate(href_list["add_goal_caller"])
-
-		var/is_admin =   FALSE
-		var/can_modify = FALSE
-		if(!caller || caller != current)
-			is_admin = check_rights(R_ADMIN)
-			can_modify = is_admin
-		else
-			can_modify = TRUE
+		if(caller && caller == current) can_modify = TRUE
 
 		if(can_modify)
 			if(is_admin)
 				log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
 			to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
 			generate_goals(assigned_job, TRUE, 1)
-			return TRUE // To avoid 'you are not an admin' spam.
+		return TRUE // To avoid 'you are not an admin' spam.
 
-	if(check_rights(R_ADMIN))
+	if(href_list["abandon_goal"])
+		var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
 
-		if(href_list["abandon_goal"])
-			var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
-			if(goal)
-				if(usr == current)
-					to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				else
-					to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
-					to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				qdel(goal)
-			. = TRUE
+		var/mob/caller = locate(href_list["abandon_goal_caller"])
+		if(caller && caller == current) can_modify = TRUE
 
-		if(href_list["reroll_goal"])
-			var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
-			if(goal && (goal in goals))
-				qdel(goal)
-				generate_goals(assigned_job, TRUE, 1)
+		if(goal && can_modify)
+			if(usr == current)
+				to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			else
+				to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			qdel(goal)
+		return TRUE
+
+	if(href_list["reroll_goal"])
+		var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
+
+		var/mob/caller = locate(href_list["reroll_goal_caller"])
+		if(caller && caller == current) can_modify = TRUE
+
+		if(goal && (goal in goals) && can_modify)
+			qdel(goal) 
+			generate_goals(assigned_job, TRUE, 1)
+			if(goals)
 				goal = goals[LAZYLEN(goals)]
 				if(usr == current)
 					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 				else
 					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-			. = TRUE
+		return TRUE
 
-		if(.)
-			var/datum/admins/admin = GLOB.admins[usr.key]
-			if(istype(admin)) admin.show_player_panel(current)
-			return
-
-	if(!check_rights(R_ADMIN))	return
+	if(!is_admin) return
 
 	if(current && isliving(current))
 		if(href_list["set_psi_faculty"] && href_list["set_psi_faculty_rank"])

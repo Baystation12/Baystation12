@@ -622,9 +622,9 @@ BLIND     // can't see anything
 	..()
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/tacknife)))
-		if(istype(I, /obj/item/weapon/material/kitchen/utensil/knife/folding))
-			var/obj/item/weapon/material/kitchen/utensil/knife/folding/W = I
+	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/knife)))
+		if(istype(I, /obj/item/weapon/material/knife/folding))
+			var/obj/item/weapon/material/knife/folding/W = I
 			if(W.open)
 				to_chat(user, "<span class='warning'>Close \the [W] first.</span>")
 				return

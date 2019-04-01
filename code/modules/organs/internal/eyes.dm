@@ -17,7 +17,7 @@
 	set desc = "Changes your robotic eye color."
 	set category = "IC"
 	set src in usr
-	if (owner.incapacitated())
+	if (!owner || owner.incapacitated())
 		return
 	var/new_eyes = input("Please select eye color.", "Eye Color", rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes)) as color|null
 	if(new_eyes)

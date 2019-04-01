@@ -94,8 +94,11 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if(!power_supply)
 		to_chat(user, "Seems like it's dead.")
 		return
-	var/shots_remaining = round(power_supply.charge / charge_cost)
-	to_chat(user, "Has [shots_remaining] shot\s remaining.")
+	if (charge_cost == 0)
+		to_chat(user, "This gun seems to have an unlimited number of shots.")
+	else
+		var/shots_remaining = round(power_supply.charge / charge_cost)
+		to_chat(user, "Has [shots_remaining] shot\s remaining.")
 	return
 
 /obj/item/weapon/gun/energy/on_update_icon()

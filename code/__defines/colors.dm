@@ -11,6 +11,7 @@
 #define COLOR_DARK_ORANGE      "#b95a00"
 #define COLOR_GRAY40           "#666666"
 #define COLOR_GRAY20           "#333333"
+#define COLOR_GRAY15           "#151515"
 #define COLOR_SEDONA           "#cc6600"
 #define COLOR_DARK_BROWN       "#917448"
 #define COLOR_BLUE             "#0000ff"
@@ -77,6 +78,7 @@
 #define COLOR_CRYSTAL          "#00c8a5"
 #define COLOR_ASTEROID_ROCK    "#735555"
 #define COLOR_NULLGLASS        "#ff6088"
+#define COLOR_DIAMOND          "#a0fff1"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
 #define	PIPE_COLOR_RED         "#ff0000"

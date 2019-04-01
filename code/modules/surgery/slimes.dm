@@ -83,6 +83,7 @@
 	allowed_tools = list(
 		/obj/item/weapon/scalpel/manager = 100,
 		/obj/item/weapon/circular_saw = 100,
+		/obj/item/weapon/material/knife = 75,
 		/obj/item/weapon/material/hatchet = 75
 	)
 	min_duration = 1 SECOND

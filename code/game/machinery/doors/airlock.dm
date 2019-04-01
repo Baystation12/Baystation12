@@ -18,7 +18,7 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock
 	name = "airlock"
 	icon = 'icons/obj/doors/station/door.dmi'
-	icon_state = "closed"
+	icon_state = "preview"
 	power_channel = ENVIRON
 
 	explosion_resistance = 10
@@ -166,6 +166,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
+	icon_state = "preview_glass"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 300
 	explosion_resistance = 5
@@ -270,7 +271,6 @@ var/list/airlock_overlays = list()
 	frequency = 1379
 
 /obj/machinery/door/airlock/external/bolted_open
-	icon_state = "open"
 	density = 0
 	locked = 1
 	opacity = 0
@@ -288,7 +288,6 @@ var/list/airlock_overlays = list()
 	frequency = 1379
 
 /obj/machinery/door/airlock/external/glass/bolted_open
-	icon_state = "open"
 	density = 0
 	locked = 1
 	opacity = 0

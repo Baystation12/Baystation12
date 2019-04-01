@@ -250,14 +250,15 @@
 		return 0
 
 	var/damage_mod = 1
+	var/damage_flags = W.damage_flags()
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
 	var/obj/item/clothing/head/helmet = affecting.get_equipped_item(slot_head)
 	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE))
-		//we don't do an armor_check here because this is not an impact effect like a weapon swung with momentum, that either penetrates or glances off.
-		damage_mod = 1.0 - (helmet.armor["melee"]/100)
+		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
+		if(armor_datum)
+			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags)
 
 	var/total_damage = 0
-	var/damage_flags = W.damage_flags()
 	for(var/i in 1 to 3)
 		var/damage = min(W.force*1.5, 20)*damage_mod
 		affecting.apply_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)

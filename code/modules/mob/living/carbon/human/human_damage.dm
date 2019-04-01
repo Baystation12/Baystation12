@@ -388,6 +388,8 @@ This function restores all organs.
 	//Handle other types of damage
 	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
 		return ..()
+	if(!istype(organ))
+		return 0 // This is reasonable and means the organ is missing.
 
 	handle_suit_punctures(damagetype, damage, def_zone)
 

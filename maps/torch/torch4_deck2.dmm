@@ -5180,11 +5180,16 @@
 	pixel_x = -24;
 	pixel_y = 0
 	},
+/obj/machinery/power/apc/super{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc/super,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/seconddeck)
 "ln" = (

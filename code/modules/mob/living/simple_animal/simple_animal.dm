@@ -273,7 +273,7 @@
 			return
 
 	if(meat_type && (stat == DEAD) && meat_amount)
-		if(istype(O, /obj/item/weapon/material/knife/butch))
+		if(istype(O, /obj/item/weapon/material/knife/kitchen/cleaver))
 			var/victim_turf = get_turf(src)
 			if(!locate(/obj/structure/table, victim_turf))
 				to_chat(user, SPAN_NOTICE("You need to place \the [src] on a table to butcher it."))

@@ -5614,9 +5614,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/cos)
 "mF" = (
-/obj/machinery/recharger/wallcharger{
-	pixel_x = -24
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -5627,6 +5624,12 @@
 /obj/item/device/radio,
 /obj/item/weapon/crowbar/prybar,
 /obj/item/device/binoculars,
+/obj/machinery/recharger/wallcharger{
+	dir = 4;
+	icon_state = "wrecharger0";
+	pixel_x = -23;
+	pixel_y = -3
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "mG" = (
@@ -13003,11 +13006,11 @@
 /area/bridge)
 "Hx" = (
 /obj/machinery/recharger/wallcharger{
-	pixel_x = 3;
-	pixel_y = 34
+	pixel_x = -8;
+	pixel_y = 24
 	},
 /obj/machinery/recharger/wallcharger{
-	pixel_x = 3;
+	pixel_x = 6;
 	pixel_y = 24
 	},
 /obj/structure/table/glass,
@@ -15638,7 +15641,7 @@
 "Uc" = (
 /obj/machinery/recharger/wallcharger{
 	pixel_x = 0;
-	pixel_y = 30
+	pixel_y = 24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/computer/account_database,
@@ -15993,24 +15996,22 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/recharger/wallcharger{
-	pixel_x = 32;
-	pixel_y = 0
-	},
 /obj/random/maintenance/solgov/clean,
 /obj/structure/closet/secure_closet{
 	name = "Security Equipment Locker";
 	req_access = list("ACCESS_SECURITY")
-	},
-/obj/machinery/recharger/wallcharger{
-	pixel_x = 32;
-	pixel_y = -16
 	},
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/recharger/wallcharger{
+	dir = 8;
+	icon_state = "wrecharger0";
+	pixel_x = 23;
+	pixel_y = -3
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bridgecheck)
 "Wb" = (

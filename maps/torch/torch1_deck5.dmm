@@ -8,6 +8,11 @@
 	},
 /turf/space,
 /area/space)
+"ac" = (
+/obj/structure/table/steel,
+/obj/item/weapon/pen/fancy,
+/turf/simulated/floor/lino,
+/area/command/pilot)
 "ag" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
@@ -1959,7 +1964,7 @@
 	dir = 4
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /obj/item/weapon/beartrap,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/cargo)
@@ -3809,13 +3814,6 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/storage)
-"iN" = (
-/obj/structure/table/steel,
-/obj/machinery/photocopier/faxmachine{
-	department = "Pilot's Lounge"
-	},
-/turf/simulated/floor/lino,
-/area/command/pilot)
 "iO" = (
 /obj/structure/table/steel,
 /obj/item/weapon/paper_bin{
@@ -30878,7 +30876,7 @@ iE
 rd
 lt
 iC
-iN
+ac
 jx
 jQ
 wF

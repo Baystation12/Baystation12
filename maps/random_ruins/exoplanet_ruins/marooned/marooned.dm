@@ -31,7 +31,7 @@
 	shoes = /obj/item/clothing/shoes/jungleboots 
 	gloves = /obj/item/clothing/gloves/thick 
 	head = /obj/item/clothing/head/beret 
-	l_pocket = /obj/item/weapon/material/kitchen/utensil/knife/folding/balisong/switchblade 
+	l_pocket = /obj/item/weapon/material/knife/folding/combat/switchblade 
  
 /obj/item/weapon/gun/projectile/revolver/medium/marooned
 	name = "worn-out revolver"

@@ -93,7 +93,6 @@
 	allowed_tools = list(
 		/obj/item/weapon/scalpel = 100,
 		/obj/item/weapon/material/knife = 75,
-		/obj/item/weapon/material/kitchen/utensil/knife = 75,
 		/obj/item/weapon/broken_bottle = 50,
 		/obj/item/weapon/material/shard = 50
 	)
@@ -149,6 +148,7 @@
 	min_duration = 40
 	max_duration = 60
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_INCISION
+	strict_access_requirement = FALSE
 
 /decl/surgery_step/generic/clamp_bleeders/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()

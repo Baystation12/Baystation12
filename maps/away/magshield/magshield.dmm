@@ -2359,6 +2359,7 @@
 	tag_north = 2;
 	tag_south = 1;
 	tag_south_con = 0.79;
+	
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -3632,7 +3633,7 @@
 /area/magshield/south)
 "jy" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jz" = (
@@ -3785,7 +3786,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jU" = (
@@ -4088,7 +4089,7 @@
 /area/magshield/south)
 "kJ" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kK" = (
@@ -4155,7 +4156,7 @@
 /area/magshield/south)
 "kT" = (
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kU" = (

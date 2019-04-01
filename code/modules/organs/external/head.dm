@@ -6,6 +6,7 @@
 	max_damage = 75
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_NORMAL
+	cavity_max_w_class = ITEM_SIZE_SMALL
 	body_part = HEAD
 	parent_organ = BP_CHEST
 	joint = "jaw"
