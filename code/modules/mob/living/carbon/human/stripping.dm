@@ -6,24 +6,22 @@
 		show_browser(user, null, "window=mob[src.name]")
 		return TRUE
 
-	// Are we placing or stripping?
-	var/stripping = FALSE
 	var/obj/item/held = user.get_active_hand()
-	if(!istype(held) || is_robot_module(held))
-		stripping = TRUE
 
 	switch(slot_to_strip_text)
 		// Handle things that are part of this interface but not removing/replacing a given item.
 		if("pockets")
-			if(stripping)
-				visible_message("<span class='danger'>\The [user] is trying to empty [src]'s pockets!</span>")
-				if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-					empty_pockets(user)
-			else
+			// Try to place in pockets if holding something
+			if(istype(held) && !is_robot_module(held))
 				//should it be possible to discreetly slip something into someone's pockets?
 				visible_message("<span class='danger'>\The [user] is trying to stuff \a [held] into [src]'s pocket!</span>")
 				if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 					place_in_pockets(held, user)
+			// Empty pockets if hand is empty
+			else
+				visible_message("<span class='danger'>\The [user] is trying to empty [src]'s pockets!</span>")
+				if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+					empty_pockets(user)
 			return
 		if("splints")
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s splints!</span>")
@@ -68,9 +66,9 @@
 				return
 
 	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip_text))
+	// We are stripping if the active hand or target slot is empty
+	var/stripping = !istype(held) || istype(target_slot) || is_robot_module(held)
 	if(stripping)
-		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
-			return
 		if(!target_slot.mob_can_unequip(src, text2num(slot_to_strip_text), disable_warning=1))
 			to_chat(user, "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>")
 			return
