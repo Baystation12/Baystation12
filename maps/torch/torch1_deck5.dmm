@@ -140,6 +140,12 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
+"ax" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/anomaly_container,
+/obj/machinery/artifact,
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/cell1)
 "aC" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
@@ -13189,6 +13195,12 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/cockpit)
+"IG" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/anomaly_container,
+/obj/machinery/artifact,
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/cell2)
 "IH" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -15810,6 +15822,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"SY" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/anomaly_container,
+/obj/machinery/artifact,
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/cell3)
 "Tc" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/binary/pump,
@@ -45819,7 +45837,7 @@ xO
 Nq
 Mo
 Kb
-Zy
+ax
 Oq
 aa
 aa
@@ -46627,7 +46645,7 @@ gZ
 Dh
 Fy
 At
-RX
+IG
 Sb
 aa
 aa
@@ -47435,7 +47453,7 @@ zp
 Di
 Vy
 AP
-GM
+SY
 Bi
 aa
 aa
