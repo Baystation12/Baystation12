@@ -169,24 +169,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		adjustBruteLoss(1)
 		return 1 //One at a time.
 
-/mob/living/simple_animal/hostile/flood/infestor/proc/heal_nearby_combatforms()
-	for(var/mob/living/simple_animal/hostile/flood/combat_form/floodform in view(2,src))
-		if(floodform.health < floodform.maxHealth)
-			visible_message("<span class = 'danger'>[src] leaps at [floodform], melding into its flesh...</span>")
-			var/newhealth = floodform.health + (floodform.maxHealth/4)
-			if(newhealth > floodform.maxHealth)
-				floodform.health = floodform.maxHealth
-			else
-				floodform.health = newhealth
-		return 1 //One at a time.
-
 /mob/living/simple_animal/hostile/flood/infestor/Move()
 	. = ..()
 	if(ckey || client)
 		return
 	if(!attempt_nearby_infect())
-		if(!revive_nearby_combatforms())
-			heal_nearby_combatforms()
+		revive_nearby_combatforms()
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
 	. = ..()
@@ -308,11 +296,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/combat_form/verb/create_infestor_form()
 	set name = "Create Infestor Form"
 	set category = "Abilities"
-	
+
 	if(stat == DEAD)
 		to_chat(usr,"<span class = 'notice'>You can't do that, you're dead!</span>")
 		return
-		
+
 	spawn_infestor()
 
 /mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
