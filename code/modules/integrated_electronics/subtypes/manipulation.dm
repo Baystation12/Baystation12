@@ -82,7 +82,7 @@
 		if(1)
 			var/datum/integrated_io/xo = inputs[1]
 			var/datum/integrated_io/yo = inputs[2]
-			if(assembly && xo.data && yo.data)
+			if(assembly && !isnull(xo.data) && !isnull(yo.data))
 				if(isnum(xo.data))
 					xo.data = round(xo.data, 1)
 				if(isnum(yo.data))
