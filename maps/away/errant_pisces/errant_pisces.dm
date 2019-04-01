@@ -13,6 +13,7 @@
 	description = "Xynergy carp trawler"
 	suffixes = list("errant_pisces/errant_pisces.dmm")
 	cost = 1
+	area_usage_test_exempted_root_areas = list(/area/errant_pisces)
 
 /mob/living/simple_animal/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
 	name = "cosmoshark"
