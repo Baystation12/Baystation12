@@ -52,8 +52,9 @@
 	mobs_to_alert += GLOB.mobs_in_sectors[om_obj]
 	for(var/obj/effect/overmap/om in range(SLIPSPACE_JUMP_ALERT_RANGE,alert_origin))
 		mobs_to_alert |= GLOB.mobs_in_sectors[om]
+	var/list/dirlist = list("north","south","n/a","east","northeast","southeast","n/a","west","northwest","southwest")
 	for(var/mob/m in mobs_to_alert)
-		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [get_dir(map_sectors["[m.z]"],alert_origin)]</span>")
+		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[get_dir(map_sectors["[m.z]"],alert_origin)]]</span>")
 
 /obj/machinery/slipspace_engine/proc/overload_engine(var/mob/user)
 	jump_charging = -1
@@ -68,6 +69,7 @@
 	if(!do_after(user, SLIPSPACE_ENGINE_BASE_INTERACTION_DELAY * 3, src, same_direction = 1))
 		return
 	visible_message("<span class = 'notice'>[user] preps [src] for mobile core detonation..</span>")
+	message2discord(config.oni_discord, "@here, [user.real_name] ([user.ckey]) has overloaded the slipspace engine @ ([loc.x],[loc.y],[loc.z])")
 	overload_engine(user)
 
 /obj/machinery/slipspace_engine/proc/set_next_jump_allowed(var/to_add)
@@ -82,33 +84,30 @@
 	return 1
 
 /obj/machinery/slipspace_engine/proc/do_slipspace_enter_effects()
+	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS, MODIFIED.//
 	var/obj/effect/overmap/ship/om_ship = om_obj
-	if(!istype(om_ship))
-		return
-	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS//
-	om_ship.speed = list(0,0)
+	if(istype(om_ship))
+		om_ship.speed = list(0,0)
+		om_ship.break_umbilicals()
 	//animate the slipspacejump
-	var/headingdir = om_ship.get_heading()
-	if(!headingdir)
-		headingdir = om_ship.dir
-	var/turf/T = om_ship.loc
+	var/headingdir = om_obj.dir
+	var/turf/T = om_obj.loc
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
 	play_jump_sound(T)
 	//rapidly move into the portal
-	om_ship.break_umbilicals()
-	walk_to(om_ship,T,0,1,0)
+	walk_to(om_obj,T,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
 		om_obj.loc = null
-		walk_to(om_ship,null)
+		walk_to(om_obj,null)
 
 /obj/machinery/slipspace_engine/proc/do_slipspace_exit_effects(var/exit_loc)
 	var/obj/effect/overmap/ship/om_ship = om_obj
-	if(!istype(om_ship))
-		return
-	om_ship.speed = list(0,0)
-	var/headingdir = om_ship.dir
+	if(istype(om_ship))
+		om_ship.speed = list(0,0)
+
+	var/headingdir = om_obj.dir
 	var/turf/T = exit_loc
 	//Below code should flip the dirs.
 	T = get_step(T,headingdir)
@@ -119,10 +118,10 @@
 	new /obj/effect/slipspace_rupture(T)
 	play_jump_sound(T)
 	send_jump_alert(T)
-	om_ship.loc = T
-	walk_to(om_ship,exit_loc,0,1,0)
+	om_obj.loc = T
+	walk_to(om_obj,exit_loc,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
-		walk_to(om_ship,null)
+		walk_to(om_obj,null)
 
 /obj/machinery/slipspace_engine/proc/slipspace_to_location(var/turf/location)
 	do_slipspace_exit_effects(location)
@@ -156,8 +155,6 @@
 	spawn(jump_delay)
 		visible_message("<span class = 'notice'>[src] momentarily glows bright, then activates!</span>")
 		slipspace_to_location(input_loc)
-		set_next_jump_allowed(jump_cooldown)
-		jump_charging = 1
 
 /obj/machinery/slipspace_engine/proc/user_slipspace_to_nullspace(var/mob/user)
 	if(!precise_jump && !check_jump_allowed(om_obj.loc))
@@ -166,16 +163,20 @@
 	visible_message("<span class = 'notice'>[user] starts prepping [src] for a jump to slipspace...</span>")
 	if(!do_after(user, SLIPSPACE_ENGINE_BASE_INTERACTION_DELAY, src, same_direction = 1))
 		return
+	set_next_jump_allowed(jump_cooldown/4) //Smaller delay when jumping to nullspace than when jumping back to realspace.
+	jump_charging = 2
 	visible_message("<span class = 'notice'>[user] preps [src] for a jump to slipspace.</span>")
 	log_admin("[user] the [user.mind.assigned_role] (CKEY: [user.ckey]) activated a slipspace engine, transporting [om_obj] to nullspace. Jump timer: [jump_delay / 10] seconds.")
 	spawn(jump_delay)
 		visible_message("<span class = 'notice'>[src] momentarily glows bright, then activates!</span>")
 		slipspace_to_nullspace()
-		set_next_jump_allowed(jump_cooldown/4) //Smaller delay when jumping to nullspace than when jumping back to realspace.
-		jump_charging = 1
 
 /obj/machinery/slipspace_engine/process()
-	if(jump_charging == 1)
+	if(jump_charging == 2)
+		var/obj/effect/overmap/ship/om_ship = om_obj
+		if(istype(om_ship))
+			om_ship.speed = list(0,0)
+	if(jump_charging == (1 || 2))
 		var/area/area_contained = loc.loc
 		if(!istype(area_contained))
 			return
@@ -228,8 +229,8 @@
 	desc = "A self-contained device allowing for traversal of slipspace, providing methods of quick travel across large distances without sacrificing accuracy. Can perform slipspace jumps within the gravity wells of large objects."
 	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
 	icon_state = "slipspace"
-	bounds = "64;64"
-	core_to_spawn = null
+	bounds = "64,64"
+	core_to_spawn = /obj/payload/slipspace_core/cov
 	precise_jump = 1
 
 /obj/machinery/slipspace_engine/covenant/allow_user_operate(var/mob/user)
@@ -245,13 +246,46 @@
 	desc = "A self-contained device allowing for traversal of slipspace, providing methods of quick travel across large distances. Calculation inaccuracies lead to endpoints being offset from the targeted position. Gravity wells of large objects halt the drive's ability to function."
 	icon = 'code/modules/halo/icons/machinery/slipspace_drive.dmi'
 	icon_state = "slipspace"
-	bounds = "64;64"
-	core_to_spawn = null
+	bounds = "64,64"
+	core_to_spawn = /obj/payload/slipspace_core/human
+
+//CORE PAYLOADS//
+/obj/payload/slipspace_core
+	name = "Slipspace Core"
+	desc = "The core of a slipspace device, detached and armed. Slipspace cores are unstable and cannot be disarmed."
+	explodetype = /datum/explosion/slipspace_core
+	seconds_to_explode = 300 //5 minutes
+
+/obj/payload/slipspace_core/Initialize()
+	. = ..()
+	explode_at = world.time + seconds_to_explode SECONDS
+	exploding = 1
+	GLOB.processing_objects += src
+
+/obj/payload/slipspace_core/attack_hand(var/attacker)
+	to_chat(attacker,"<span class = 'danger'>[src] is armed and beeping. </span>")
+
+/datum/explosion/slipspace_core/New(var/obj/payload/b)
+	if(config.oni_discord)
+		message2discord(config.oni_discord, "@here, slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
+	for(var/area/a in range(50,b.loc))
+		for(var/obj in a.contents)
+			spawn(0)
+				qdel(obj)
+		new /area/space/ (a.loc)
+
+/obj/payload/slipspace_core/cov
+	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
+	icon_state = "core"
+
+/obj/payload/slipspace_core/human
+	icon = 'code/modules/halo/icons/machinery/slipspace_drive.dmi'
+	icon_state = "core"
 
 //SLIPSPACE RUPTURE EFFECT//
 /obj/effect/slipspace_rupture
 	name = "slipspace rupture"
-	icon = 'code/modules/halo/covenant/slipspace.dmi'
+	icon = 'code/modules/halo/icons/machinery/slipspace_jump_effects.dmi'
 	icon_state = "slipspace_effect"
 	pixel_x = -16
 	pixel_y = -16
