@@ -79,12 +79,12 @@
 		"Kanin-Katish" = list(
 			"Xiqarr-Ketish", 
 			"Mero'tol-Ketish",
-			"Goxo’i-Ketish"
+			"Goxo'i-Ketish"
 		),
 		"Raskinta-Katish" = list(
 			"Me'kerr-Ketish", 
 			"Qi'kerr-Ketish",
-			"Me’xoal-Ketish"
+			"Me'xoal-Ketish"
 		)
 	)
 		
