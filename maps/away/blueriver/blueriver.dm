@@ -17,10 +17,15 @@
 	..()
 
 /datum/map_template/ruin/away_site/blueriver
- 	name = "Bluespace River"
- 	id = "awaysite_blue"
- 	description = "Two z-level map with an arctic planet and an alien underground surface"
- 	suffixes = list("blueriver/blueriver-1.dmm", "blueriver/blueriver-2.dmm")
+	name = "Bluespace River"
+	id = "awaysite_blue"
+	description = "Two z-level map with an arctic planet and an alien underground surface"
+	suffixes = list("blueriver/blueriver-1.dmm", "blueriver/blueriver-2.dmm")
+	area_usage_test_exempted_root_areas = list(/area/bluespaceriver)
+	apc_test_exempt_areas = list(
+		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 
 //This is ported from /vg/ and isn't entirely functional. If it sees a threat, it moves towards it, and then activates it's animation.
 //At that point while it sees threats, it will remain in it's attack stage. It's a bug, but I figured it nerfs it enough to not be impossible to deal with

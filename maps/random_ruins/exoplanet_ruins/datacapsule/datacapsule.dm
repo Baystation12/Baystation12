@@ -5,6 +5,9 @@
 	suffixes = list("datacapsule/datacapsule.dmm")
 	cost = 1
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
+	apc_test_exempt_areas = list(
+		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 
 
 

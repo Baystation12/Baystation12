@@ -26,6 +26,14 @@
 	cost = 1
 	accessibility_weight = 10
 	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
+	apc_test_exempt_areas = list(
+		/area/outpost/abandoned = NO_SCRUBBER,
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_usage_test_exempted_root_areas = list(/area/mine)
+	area_usage_test_exempted_areas = list(/area/djstation)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
@@ -80,6 +88,12 @@
 	suffixes = list("mining/mining-signal.dmm")
 	cost = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	area_usage_test_exempted_root_areas = list(/area/mine, /area/outpost)
+	apc_test_exempt_areas = list(
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/away
 	base_area = /area/mine/explored
@@ -136,6 +150,13 @@
 	cost = 1
 	accessibility_weight = 10
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	area_usage_test_exempted_root_areas = list(/area/mine)
+	area_usage_test_exempted_areas = list(/area/djstation)
+	apc_test_exempt_areas = list(
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/orb/nav1
 	name = "Anchor point A"
