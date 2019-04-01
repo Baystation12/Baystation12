@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "Admins will now be informed why antagonist autospawn fails, instead of printing to debug logs."

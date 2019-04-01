@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Rogue maintenance drones now spawn in separate smaller groups instead of one massive blob. Total number of drones spawned per event is unchanged."
