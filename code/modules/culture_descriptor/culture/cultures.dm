@@ -64,7 +64,7 @@
 	name = CULTURE_HUMAN_LUNARICH
 	description = "You are from Luna, Earths only natural satellite and home to some of the richest, most highly cultured, or influential people of humanity. Fortunately for you, you are one of this elite and well \
 	off class of people. The rich of Luna are politically and economically influential not just in Luna, but in the various corporations, organizations and government bodies of the SCG. \
-	Luna’s upper class isn’t equal; generally divided between new, corporate money and old, dynastic money; many members of the old dynasties look down on the newly wealthy. \
+	Luna's upper class isn't equal; generally divided between new, corporate money and old, dynastic money; many members of the old dynasties look down on the newly wealthy. \
 	Much of the elite of Luna is embroiled in 'The Game' a state of political manoeuvring and intrigue among various factions and persons of influence and power \
 	with implications far beyond the squabbles of the prefectures."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
@@ -146,7 +146,7 @@
 
 /decl/cultural_info/culture/human/confederate
 	name = CULTURE_HUMAN_CONFED
-	description = "You are from Terra (not Earth), in the Gilgamesh system. The capital world of the Terran Colonial Confederation, your people embody what it means to be a part of the TCC. \
+	description = "You are from Terra (not Earth), in the Gilgamesh system. The capital world of the Gilgamesh Colonial Confederation, your people embody what it means to be a part of the GCC. \
 	Unfortunately, the years since the war have not been easy on Terra and the long period of economic recovery has not made life easy. The people of Terra are typically employed \
 	in the military, industrial, government or service sectors, with an emphasis being placed on military service. Terrans today are generally poor, bitter and a somewhat broken people angry and \
 	resentful about their loss in the Gaia Conflict. An upbringing on Terra emphasises an odd mix of service to the state, liberalism and militarism."
