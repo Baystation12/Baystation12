@@ -1,0 +1,4 @@
+author: "Loaf && Banditoz"
+delete-after: True
+changes: 
+  - rscadd: "Added four flying robot modules: repair, cultivator, surveyor, and forensics."

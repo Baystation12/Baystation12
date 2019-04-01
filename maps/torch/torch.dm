@@ -82,6 +82,8 @@
 	#include "machinery/keycard authentication.dm"
 	#include "machinery/suit_storage.dm"
 
+	#include "robot/module_flying_surveyor.dm"
+
 	#include "structures/signs.dm"
 	#include "structures/closets.dm"
 	#include "structures/closets/closet_appearances.dm"

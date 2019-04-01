@@ -55,6 +55,18 @@
 	applies_material_colour = 0
 	hitsound = "chop"
 
+/obj/item/weapon/material/hatchet/unbreakable
+	unbreakable = TRUE
+
+/obj/item/weapon/material/hatchet/tacknife
+	name = "tactical knife"
+	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Space."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	item_state = "knife"
+	attack_verb = list("stabbed", "chopped", "cut")
+	applies_material_colour = 1
+
 /obj/item/weapon/material/hatchet/machete
 	name = "machete"
 	desc = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
@@ -64,6 +76,9 @@
 	default_material = MATERIAL_TITANIUM
 	base_parry_chance = 50
 	attack_cooldown_modifier = 1
+
+/obj/item/weapon/material/hatchet/machete/unbreakable
+	unbreakable = TRUE
 
 /obj/item/weapon/material/hatchet/machete/Initialize()
 	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"
@@ -87,6 +102,9 @@
 	thrown_force_divisor = 0.25 // as above
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
+
+/obj/item/weapon/material/minihoe/unbreakable
+	unbreakable = TRUE
 
 /obj/item/weapon/material/scythe
 	icon_state = "scythe0"

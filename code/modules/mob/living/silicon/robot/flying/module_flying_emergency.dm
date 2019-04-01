@@ -1,7 +1,7 @@
 /obj/item/weapon/robot_module/flying/emergency
 	name = "emergency response drone module"
 	display_name = "Emergency Response"
-	channels = list("Medical" = 1)
+	channels = list("Medical" = TRUE)
 	networks = list(NETWORK_MEDICAL)
 	subsystems = list(/datum/nano_module/crew_monitor)
 	sprites = list(
@@ -23,13 +23,11 @@
 		/obj/item/weapon/crowbar,
 		/obj/item/weapon/wirecutters,
 		/obj/item/device/multitool,
-		 /obj/item/stack/medical/ointment,
-		 /obj/item/stack/medical/bruise_pack,
-		 /obj/item/stack/medical/splint
+		/obj/item/stack/medical/ointment,
+		/obj/item/stack/medical/bruise_pack,
+		/obj/item/stack/medical/splint
 	)
-	synths = list(
-		/datum/matter_synth/medicine = 15000
-	)
+	synths = list(/datum/matter_synth/medicine = 15000)
 	emag = /obj/item/weapon/reagent_containers/spray
 
 /obj/item/weapon/robot_module/flying/emergency/finalize_emag()
