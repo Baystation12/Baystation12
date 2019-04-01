@@ -64,7 +64,7 @@
 	user.machine = src
 	user.reset_view(map_sectors["[z]"])
 
-/obj/machinery/overmap_weapon_console/proc/aim_tool_attackself(var/mob/user)
+/obj/machinery/overmap_weapon_console/proc/aim_tool_attackself(var/mob/user,var/obj/item/weapon/gun/aim_tool/tool)
 
 /obj/machinery/overmap_weapon_console/proc/consume_external_ammo()
 	var/obj/ammo_to_remove = loaded_ammo[loaded_ammo.len]
@@ -152,7 +152,7 @@
 	creator_console = console
 
 /obj/item/weapon/gun/aim_tool/attack_self(var/mob/user)
-	creator_console.aim_tool_attackself(user)
+	creator_console.aim_tool_attackself(user,src)
 
 /obj/item/weapon/gun/aim_tool/afterattack(var/atom/target,var/mob/user,adjacent,var/clickparams)
 	creator_console.fire(target,user,clickparams)
