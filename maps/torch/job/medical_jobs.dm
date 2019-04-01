@@ -117,7 +117,7 @@
 	minimal_access = list()
 
 /datum/job/biomech/get_description_blurb()
-	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMI�s and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
+	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMI's and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
 
 /datum/job/medical_trainee
 	title = "Trainee Medical Technician"
