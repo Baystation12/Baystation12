@@ -1,0 +1,4 @@
+author: "CSCMe"
+delete-after: True
+changes: 
+  - rscadd: "Adds extracting a specific amount of slime cores as a departmental goal for science"
