@@ -163,6 +163,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		newform.name = floodform.name
 		newform.icon = floodform.icon
 		newform.icon_state = initial(floodform.icon_state)
+		newform.corpse_pulped = 1
 		visible_message("<span class = 'notice'>[src] leaps at [floodform]'s chest cavity and burrows in.</span>")
 		visible_message("<span class = 'danger'>[floodform] lurches back to life, the new infection form twitching in place...</span>")
 		qdel(floodform)
@@ -283,6 +284,13 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/our_infestor
 
 	var/obj/item/weapon/gun/our_gun
+
+	var/corpse_pulped = 0
+
+/mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
+	. = ..()
+	if(corpse_pulped == 1)
+		to_chat(examiner,"<span class = 'notice'>[src] has been heavily damaged. Once dead, it's dead for good.</span>")
 
 /mob/living/simple_animal/hostile/flood/combat_form/proc/spawn_infestor()
 	if(world.time < next_infestor_spawn)
