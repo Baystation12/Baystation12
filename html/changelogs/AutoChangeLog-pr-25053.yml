@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Some tweaks have been made to job spawn code. Beware of any anomalies."
