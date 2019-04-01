@@ -386,3 +386,29 @@
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+
+/datum/job/bridgeofficer/equip(mob/living/carbon/human/H, alt_title, datum/mil_branch/branch, datum/mil_rank/grade)
+	. = ..()
+	spawn()
+		if(QDELETED(H))
+			return
+		var/list/languages = H.languages.Copy()
+		var/obj/item/id_card = H.GetIdCard()
+		var/name = H.name
+		var/gender = H.gender
+		H.drop_from_inventory(id_card)
+		var/mob/living/simple_animal/corgi/corgi = H.corgize()
+		corgi.forceMove(get_turf(corgi))
+		corgi.SetName("Bridge Officer [name]")
+		corgi.gender = gender
+		for(var/language in languages)
+			corgi.add_language(language)
+		id_card.forceMove(corgi)
+		corgi.id_card = id_card
+
+/mob/living/simple_animal/corgi
+	var/obj/item/id_card
+	mob_size = MOB_MEDIUM
+
+/mob/living/simple_animal/corgi/GetIdCard()
+	return id_card
