@@ -346,8 +346,8 @@
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 3
+	spawn_positions = 3
 	supervisors = "the Commanding Officer and heads of staff"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
