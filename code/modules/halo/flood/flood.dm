@@ -45,7 +45,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
-	if(client)
+	if(client || ckey)
 		target_mob = null
 	if(assault_target && stance == HOSTILE_STANCE_IDLE)
 		//spawn(rand(-1,20))
@@ -308,7 +308,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/combat_form/verb/create_infestor_form()
 	set name = "Create Infestor Form"
 	set category = "Abilities"
-
+	
+	if(stat == DEAD)
+		to_chat(usr,"<span class = 'notice'>You can't do that, you're dead!</span>")
+		return
+		
 	spawn_infestor()
 
 /mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
@@ -355,6 +359,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
 	. = ..()
+	if(stat == DEAD)
+		return
 	if(ckey || client)
 		return
 	if(locate(/mob/living/carbon/human) in view(1,src) && isnull(our_infestor))
