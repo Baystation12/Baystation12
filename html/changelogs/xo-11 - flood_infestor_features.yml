@@ -33,7 +33,7 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Makes flood infestors able to heal and revive flood combat forms.
+  - rscadd: "Makes flood infestors able to heal and revive flood combat forms."
   - rscadd: "Allows hostile mobs to both attack and move, so simply running away should be less viable."
   - rscadd: "Allows flood combat forms to produce infestors, but only one can live at a time."
   - tweak: "Tones down the effect of slipspade drive overloading. Sadly it's now just a really big explosion, but it shouldn't crash the server anymore."
