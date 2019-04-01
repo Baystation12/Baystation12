@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Prospector locker will now always spawn with a duffle bag"
