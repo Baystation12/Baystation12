@@ -227,7 +227,7 @@
 			on = 0
 
 	if(istype(lightbulb, /obj/item/weapon/light/))
-		var/image.I = image(icon, src, _state)
+		var/image/I = image(icon, src, _state)
 		I.color = lightbulb.b_colour
 		overlays += I
 
