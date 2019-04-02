@@ -157,12 +157,16 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/revive_nearby_combatforms()
 	for(var/mob/living/simple_animal/hostile/flood/combat_form/floodform in view(2,src))
+		if(floodform.corpse_pulped == 1)
+			continue
 		var/mob/living/simple_animal/hostile/flood/combat_form/newform = new floodform.type (floodform.loc)
 		if(floodform.ckey || floodform.client)
 			newform.ckey = floodform.ckey
 		newform.name = floodform.name
 		newform.icon = floodform.icon
 		newform.icon_state = initial(floodform.icon_state)
+		if(floodform.corpse_pulped != -1)
+			newform.corpse_pulped = 1
 		visible_message("<span class = 'notice'>[src] leaps at [floodform]'s chest cavity and burrows in.</span>")
 		visible_message("<span class = 'danger'>[floodform] lurches back to life, the new infection form twitching in place...</span>")
 		qdel(floodform)
@@ -283,6 +287,15 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/our_infestor
 
 	var/obj/item/weapon/gun/our_gun
+
+	var/corpse_pulped = 0 //1 = cannot be revived, -1 = can be revived infinitely.
+
+/mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
+	. = ..()
+	if(corpse_pulped == 1)
+		to_chat(examiner,"<span class = 'notice'>[src] has been heavily damaged. Once dead, it's dead for good.</span>")
+	if(corpse_pulped == -1)
+		to_chat(examiner,"<span class = 'notice'>[src]'s flesh looks tougher than normal. It could likely endure the revivification process many times.</span>")
 
 /mob/living/simple_animal/hostile/flood/combat_form/proc/spawn_infestor()
 	if(world.time < next_infestor_spawn)
