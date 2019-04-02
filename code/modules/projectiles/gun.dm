@@ -519,9 +519,9 @@
 /obj/item/weapon/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
 	var/shot_sound = (istype(P) && fire_sound)? fire_sound : P.fire_sound //Tweaked to favour gun firesound over projectile firesound.;
 	if(silenced)
-		playsound(user, shot_sound, 10, 1)
+		playsound(user, shot_sound, 10, 0)
 	else
-		playsound(user, shot_sound, 50, 1)
+		playsound(user, shot_sound, 50, 0)
 
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
