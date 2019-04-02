@@ -189,14 +189,11 @@
 
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
 	new_corgi.a_intent = I_HURT
-	if(mind)
-		mind.transfer_to(new_corgi)
-	else
-		new_corgi.key = key
+	new_corgi.key = key
 
 	to_chat(new_corgi, "<B>You are now a Corgi. Yap Yap!</B>")
 	qdel(src)
-	return new_corgi
+	return
 
 /mob/living/carbon/human/Animalize()
 
