@@ -42,7 +42,7 @@
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()
-	minor_announcement = new(new_sound = sound('sound/items/air_horn_2.ogg', volume = 45))
+	minor_announcement = new(new_sound = sound('sound/AI/torch/commandreport.ogg', volume = 45))
 
 /datum/map/torch/map_info(victim)
 	to_chat(victim, "<h2>Current map information</h2>")
