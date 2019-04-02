@@ -69,6 +69,10 @@
 
 /datum/computer/file/embedded_program/docking/receive_user_command(command)
 	if(command == "dock" || command == "undock")
+
+		if(!tag_target)			//Prevents from self destructing if no docking buddy
+			return FALSE
+
 		var/datum/signal/signal = new()
 		signal.data["tag"] = tag_target
 		signal.data["command"] = "request_[command]"
