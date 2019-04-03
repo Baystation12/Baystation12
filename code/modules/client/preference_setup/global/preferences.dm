@@ -145,7 +145,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/show_typing_indicator/changed(var/mob/preference_mob, var/new_value)
 	if(new_value == GLOB.PREF_HIDE)
-		QDEL_NULL(preference_mob.typing_indicator)
+		preference_mob.remove_typing_indicator()
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
