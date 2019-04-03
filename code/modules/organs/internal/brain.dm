@@ -12,7 +12,8 @@
 	throw_range = 5
 	origin_tech = list(TECH_BIO = 3)
 	attack_verb = list("attacked", "slapped", "whacked")
-	relative_size = 60
+	relative_size = 85
+	damage_reduction = 0
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
