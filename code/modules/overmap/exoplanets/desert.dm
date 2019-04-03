@@ -171,6 +171,8 @@
 /obj/structure/quicksand/Crossed(AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
+		if (L.can_overcome_gravity())
+			return
 		buckle_mob(L)
 		if(!exposed)
 			expose()
