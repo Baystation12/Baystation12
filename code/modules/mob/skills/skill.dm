@@ -190,6 +190,17 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You're good at hand-to-hand combat. You've trained explicitly in a martial art or as a close combatant as part of a military or police unit. You can use weaponry competently and you can think strategically and quickly in a melee. You're in good shape and you spend time training.",
 						"Master"		= "You specialize in hand-to-hand combat. You're well-trained in a practical martial art, and in good shape. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or special forces member.")
 
+/decl/hierarchy/skill/security/combat/get_cost(var/level)
+	switch(level)
+		if(SKILL_BASIC)
+			return difficulty
+		if(SKILL_ADEPT, SKILL_EXPERT)
+			return 2*difficulty
+		if(SKILL_PROF)
+			return 4*difficulty
+		else
+			return 0
+
 /decl/hierarchy/skill/security/weapons
 	ID = "weapons"
 	name = "Weapons Expertise"

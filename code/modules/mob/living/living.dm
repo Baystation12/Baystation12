@@ -435,7 +435,7 @@ default behaviour is:
 	druggy = 0
 	jitteriness = 0
 	confused = 0
-		
+
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
 	// fix all of our organs
@@ -817,7 +817,7 @@ default behaviour is:
 
 /mob/living/proc/melee_accuracy_mods()
 	. = 0
-	if(incapacitated())
+	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
 	if(eye_blind)
 		. += 75
