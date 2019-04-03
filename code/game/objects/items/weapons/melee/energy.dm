@@ -94,7 +94,6 @@
  * Energy Sword
  */
 /obj/item/weapon/melee/energy/sword
-	color
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "sword0"
@@ -112,25 +111,27 @@
 	base_parry_chance = 50
 	var/blade_color
 
+/obj/item/weapon/melee/energy/sword/Initialize()
+	. = ..()
+	if(!blade_color)
+		blade_color = pick("red","blue","green","purple")
+
+/obj/item/weapon/melee/energy/sword/green
+	blade_color = "green"
+
+/obj/item/weapon/melee/energy/sword/red
+	blade_color = "red"
+
+/obj/item/weapon/melee/energy/sword/blue
+	blade_color = "blue"
+
+/obj/item/weapon/melee/energy/sword/purple
+	blade_color = "purple"
+
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
 	if(!istype(loc,/mob))
 		deactivate(user)
-
-/obj/item/weapon/melee/energy/sword/New()
-	blade_color = pick("red","blue","green","purple")
-
-/obj/item/weapon/melee/energy/sword/green/New()
-	blade_color = "green"
-
-/obj/item/weapon/melee/energy/sword/red/New()
-	blade_color = "red"
-
-/obj/item/weapon/melee/energy/sword/blue/New()
-	blade_color = "blue"
-
-/obj/item/weapon/melee/energy/sword/purple/New()
-	blade_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
@@ -169,7 +170,6 @@
  *Energy Blade
  */
 
-//Can't be activated or deactivated, so no reason to be a subtype of energy
 /obj/item/weapon/melee/energy/blade
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
