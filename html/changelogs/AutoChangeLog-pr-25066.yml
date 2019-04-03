@@ -1,0 +1,7 @@
+author: "Higgin"
+delete-after: True
+changes: 
+  - tweak: "Push-time now depends on the difference of CQC skill between the two parties."
+  - tweak: "At equal skill levels, pushing has a very short duration."
+  - tweak: "Grabbing a prone person is no longer automatically an upgraded grab unless the victim is stunned, unconscious, or on help intent."
+  - tweak: "CQC costs more. Check your skill loadouts!"
