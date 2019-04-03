@@ -174,8 +174,7 @@
 	desc = "It's a machine that prints replacement organs."
 	icon_state = "bioprinter"
 	var/list/amount_list = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat = 50,
-		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet = 15
+		/obj/item/weapon/reagent_containers/food/snacks/biomass = 50
 		)
 	var/loaded_dna //Blood sample for DNA hashing.
 	var/datum/species/loaded_species //For quick refrencing

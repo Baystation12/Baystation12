@@ -3052,6 +3052,34 @@
 	nutriment_desc = list("bread" = 3)
 	nutriment_amt = 3
 
+/obj/item/weapon/reagent_containers/food/snacks/biomass
+	name = "biomass sample"
+	desc = "A tasty meat slice."
+	icon = 'icons/obj/food_custom.dmi'
+	icon_state = "biomass"
+	bitesize = 2
+	center_of_mass = "x=16;y=17"
+	nutriment_desc = list("processed goop" = 3)
+	var/dna_sample
+	var/datum/species/species_sample
+
+/obj/item/weapon/reagent_containers/food/snacks/biomass/New(var/weakref/R, var/datum/species/S)
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 12)
+	if(R)
+		dna_sample = R
+	if(S)
+		species_sample = S
+		name = "[species_sample.name] [initial(name)]"
+	update_icon()
+
+/obj/item/weapon/reagent_containers/food/snacks/biomass/on_update_icon()
+	overlays.Cut()
+	var/image/I = image(icon = icon, icon_state = "[name]_filling")
+	if(dna_sample)
+		I.color = dna_sample["blood_colour"]
+	overlays += I
+
 // potato + knife = raw sticks
 /obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/material/knife))
