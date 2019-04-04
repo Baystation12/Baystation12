@@ -39,7 +39,6 @@
 	average level of comfort expected in Sol space. Most surfacers are like many across the galaxy, though a few harbour rivalries with other Martian cultural \
 	groups or are generally overly proud of their heritage, as is the case with the Gideons, to the point that they constantly refer to it."
 	secondary_langs = list(LANGUAGE_SOL_COMMON)
-	economic_power = 1
 
 /decl/cultural_info/culture/human/martian_tunneller
 	name = CULTURE_HUMAN_MARSTUN
@@ -49,7 +48,6 @@
 	criminal presence stemming from centuries of poor policing and a focus on the surface by the martian government. Most Tunnellers are resilient, though distrusting \
 	and wary of outsiders, and tend to strongly dislike non-Martians."
 	secondary_langs = list(LANGUAGE_GUTTER, LANGUAGE_SIGN)
-	economic_power = 0.9
 
 /decl/cultural_info/culture/human/luna_poor
 	name = CULTURE_HUMAN_LUNAPOOR
@@ -58,7 +56,6 @@
 	of one of the various corporations, persons hired in service roles in one of the many prefectures or a resident of New Vegas. The 'poor' of Luna typically resent the rich because of their \
 	financial, cultural and political power and influence over their lives."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
-	economic_power = 1
 
 /decl/cultural_info/culture/human/luna_rich
 	name = CULTURE_HUMAN_LUNARICH
@@ -68,7 +65,6 @@
 	Much of the elite of Luna is embroiled in 'The Game' a state of political manoeuvring and intrigue among various factions and persons of influence and power \
 	with implications far beyond the squabbles of the prefectures."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
-	economic_power = 1.3
 
 /decl/cultural_info/culture/human/venusian_upper
 	name = CULTURE_HUMAN_VENUSIAN
@@ -76,7 +72,6 @@
 	SCG. As a Venusian, you know luxury, wealth and entertainment. Primarily a tourist destination, many of the permanent residents work in the tourism industry and are notably middle-income. \
 	Those above are exceptionally wealthy, being hotel, casino, resort owners, politicians, bankers or rich retirees."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
-	economic_power = 1.4
 
 /decl/cultural_info/culture/human/venusian_surfacer
 	name = CULTURE_HUMAN_VENUSLOW
@@ -85,7 +80,6 @@
 	surfacers are a people who value hard work, solidarity, unity and democracy. Unfortunately, while they support noble ideals, the reality of their situation does not always \
 	match them, and much of the surface of Venus finds itself rife with organised crime, separatist groups and other criminal organisations."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GUTTER)
-	economic_power = 0.9
 
 /decl/cultural_info/culture/human/belter
 	name = CULTURE_HUMAN_BELTER
@@ -95,7 +89,6 @@
 	culture being mainly about embracing change, new people and new experiences, as well as a sense of pride in their work, as the reputation of Ceres shipbuilding is widely known across \
 	human space."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
-	economic_power = 1
 
 /decl/cultural_info/culture/human/plutonian
 	name = CULTURE_HUMAN_PLUTO
@@ -104,7 +97,6 @@
 	the planet has led to the people of Pluto having something of a seedy reputation, its citizens being viewed with disrepute. The people themselves, however, are usually \
 	just happy to get off the rock and to healthier locales. Unfortunately, despite the efforts of the wider SCG, many Plutonians tend to maintain criminal ties, even offworld."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GUTTER)
-	economic_power = 0.8
 
 /decl/cultural_info/culture/human/earthling
 	name = CULTURE_HUMAN_EARTH
@@ -114,7 +106,6 @@
 	The long recovery period of Earth has resulted in much of the population being environmentally aware and heavily conservationist, eager to avoid past mistakes. Most Earthers are \
 	a content folk who see themselves as close to nature and keepers of the heritage of humanity."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
-	economic_power = 1.1
 
 /decl/cultural_info/culture/human/ceti
 	name = CULTURE_HUMAN_CETI
@@ -124,7 +115,6 @@
 	being considered some of the best qualified technical specialists in humanity. Recently there has been a rising transhumanist element in Ceti society resulting in a large \
 	cybernetics culture; it is not uncommon to see many Cetites sporting some chrome."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
-	economic_power = 1.1
 
 /decl/cultural_info/culture/human/spacer_core
 	name = CULTURE_HUMAN_SPACER
@@ -133,7 +123,6 @@
 	places, meeting a myriad of people and experiencing many of the cultures and worlds close to humanity's home. As such, Spacers of the core systems tend to be busy, sociable and \
 	mobile, rarely satisfied with settled life. They almost universally know how to live and work in the void and take to such jobs more readily than their planet-bound counterparts."
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SOL_COMMON)
-	economic_power = 1
 
 /decl/cultural_info/culture/human/spacer_frontier
 	name = CULTURE_HUMAN_SPAFRO
@@ -142,7 +131,6 @@
 	vital goods, a lonely outpost on the edge of a dreary backwater, such people are raised in small, confined environments with few others, and tend to be most familiar with older, reliable but outdated \
 	technology. An independent sort, people on the frontier are more likely to be isolationist and self-driven."
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
-	economic_power = 0.9
 
 /decl/cultural_info/culture/human/confederate
 	name = CULTURE_HUMAN_CONFED
@@ -151,10 +139,8 @@
 	in the military, industrial, government or service sectors, with an emphasis being placed on military service. Terrans today are generally poor, bitter and a somewhat broken people angry and \
 	resentful about their loss in the Gaia Conflict. An upbringing on Terra emphasises an odd mix of service to the state, liberalism and militarism."
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_INDEPENDENT)
-	economic_power = 0.9
 
 /decl/cultural_info/culture/human/other
 	name = CULTURE_HUMAN_OTHER
 	description = "Some people are from places no one has ever heard of or places too wild and fantastical to make it into Encyclopedia Galactica. You are one of these. "
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
-	economic_power = 1

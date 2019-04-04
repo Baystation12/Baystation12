@@ -36,7 +36,6 @@
 	science, and the corporate desire to make a quick buck off whatever is found. Rumours also abound about shady practices, hidden \
 	protocols, and xenoartifacts being 'lost' in transit, but nothing has been conclusively proven as of yet, and SCG doubtless is \
 	reluctant to harpoon their own project."
-	economic_power = 1.2
 	subversive_potential = 35
 	language = LANGUAGE_SOL_COMMON
 
@@ -50,7 +49,6 @@
 	scale conflict between the SCG and GCC that saw a great deal of death and destruction. In Sol space \"Indies\" as they are known are \
 	heavily mistrusted and in some instances, met with downright hostility. Today the GCC continues to be an economic powerhouse following \
 	a period of steady economic recovery, with most of its exports being manufactured goods, primarily armaments."
-	economic_power = 0.9
 	subversive_potential = 50
 	language = LANGUAGE_INDEPENDENT
 
@@ -76,7 +74,6 @@
 	- a distressing rival to some minor star systems, and a powerful administrative branch sitting atop it all, directing their company's actions. \
 	NanoTrasen is characterized by its aggression and questionable ethics, which, combined with the high emphasis they put on new, untested and dangerous \
 	technology, means their installations are often considered unsafe and hazardous."
-	economic_power = 1.2
 	subversive_potential = 15
 
 /decl/cultural_info/faction/remote/xynergy
@@ -85,7 +82,6 @@
 	produce products such as the netgun and dociler used for capturing or taming xenofauna. In addition, they are the largest \
 	fisher of space faring animals such as space carp and pike. They recently gained media presence by discovering and \
 	training the giant armoured serpentids."
-	economic_power = 1.1
 	subversive_potential = 15
 
 /decl/cultural_info/faction/remote/hephaestus
@@ -96,7 +92,6 @@
 	exploit Unathi equipment and assets for their own gains. In spite of this, Hephaestus maintains a reputation for the quality and \
 	reliability of its equipment as well as its general affordability. Internally, Hephaestus is a desirable employer as a result of its \
 	many employee benefits and focus on employee development, though many dread being transferred to one of the 'remote' branches."
-	economic_power = 1.2
 	subversive_potential = 15
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_GALCOM)
@@ -109,7 +104,6 @@
 	keeping FTU members free from pirates. The FTU has a large amount of economic power across Sol space and operates large trade hubs and stations near most \
 	Gateway installations and planets. Somewhat unscrupulous, FTU stations and merchants are known for \
 	selling a great many restricted items and supplying all manner of goods indiscriminately."
-	economic_power = 1.3
 	subversive_potential = 15
 	language = LANGUAGE_SPACER
 
@@ -132,7 +126,6 @@
 	few corporate members of the Solar Assembly. DAIS is also a major investor in the Torch project, and is on the Expeditionary Corps Organization board of directors. \
 	Currently DAIS is invested in bluespace computing research and artificial intelligence research. Despite recent intrusions by NanoTrasen into their sector with NTNet \
 	and related products, they still remain the market leader in computer technologies."
-	economic_power = 1.1
 	subversive_potential = 15
 	language = LANGUAGE_SOL_COMMON
 

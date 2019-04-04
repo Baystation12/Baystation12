@@ -5,7 +5,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Executive Officer"
-	economic_power = 5
+	economic_power = 1.1
 	minimal_player_age = 0
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
@@ -78,7 +78,6 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Deck Chief, the Corporate Liaison and the Executive Officer"
-	economic_power = 7
 	ideal_character_age = 25
 	alt_titles = list(
 		"Drill Technician",

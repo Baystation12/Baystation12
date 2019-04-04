@@ -13,6 +13,13 @@
 /obj/item/weapon/pen/fancy,
 /turf/simulated/floor/lino,
 /area/command/pilot)
+"ad" = (
+/obj/structure/table/reinforced,
+/obj/machinery/recharger{
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/white,
+/area/shuttle/petrov/cockpit)
 "ag" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
@@ -16654,14 +16661,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
-"Wp" = (
-/obj/structure/table/reinforced,
-/obj/machinery/recharger{
-	pixel_y = 0
-	},
-/obj/random/cash,
-/turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/cockpit)
 "Wt" = (
 /obj/machinery/light{
 	dir = 8
@@ -41781,7 +41780,7 @@ Zc
 Al
 Jk
 xh
-Wp
+ad
 JM
 LP
 xh

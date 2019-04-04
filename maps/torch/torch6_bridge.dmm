@@ -13279,8 +13279,6 @@
 /area/bridge)
 "Ig" = (
 /obj/structure/table/steel,
-/obj/random/cash,
-/obj/random/cash,
 /obj/random/single{
 	icon = 'icons/obj/drinks.dmi';
 	icon_state = "cola";

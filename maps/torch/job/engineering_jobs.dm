@@ -6,7 +6,7 @@
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
-	economic_power = 6
+	economic_power = 1.2
 	minimal_player_age = 3
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer
@@ -53,7 +53,7 @@
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "the Chief Engineer"
-	economic_power = 5
+	economic_power = 1.1
 	minimal_player_age = 0
 	ideal_character_age = 30
 	alt_titles = list(
@@ -169,7 +169,7 @@
 	minimal_player_age = 0
 	supervisors = "the Chief Engineer and the Corporate Liaison."
 	selection_color = "#5b4d20"
-	economic_power = 6
+	economic_power = 1.1
 	alt_titles = list(
 		"Mechsuit Technician")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist

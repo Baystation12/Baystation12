@@ -11,7 +11,6 @@
 	than most with a fierce pride that often clashes not just with those from other planets, but those from other parts of Mars."
 	distance = "1.5AU"
 	capital = "Olympus"
-	economic_power = 1.1
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_GALCOM)
 
@@ -27,7 +26,6 @@
 	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_LUNAR)
 	distance = "1AU"
 	capital = "Geneva"
-	economic_power = 1.2
 
 /decl/cultural_info/location/human/luna
 	name = HOME_SYSTEM_LUNA
@@ -45,7 +43,6 @@
 	ties. Most of the people of Luna are rich, cultured and refined. Not all are, however, and many of the people of the city of New Vegas are on \
 	the poverty line, often holding feelings of resentment against the other people of Luna."
 	capital = "Selene"
-	economic_power = 1.3
 	language = LANGUAGE_LUNAR
 	secondary_langs = list(LANGUAGE_SIGN,LANGUAGE_SOL_COMMON)
 
@@ -64,7 +61,6 @@
 	of their employment. The second group, the surfacers are hardy labourers who work in large, windowless, industrial complexes on the planets \
 	surface. These surfacers often resent and are at odds with their rich, carefree employers."
 	capital = "Central Administration Zone"
-	economic_power = 1.4
 
 /decl/cultural_info/location/human/ceres
 	name = HOME_SYSTEM_CERES
@@ -92,7 +88,6 @@
 	part of the local culture. Most of the people of Pluto are very rough around the edges, hardened by years of poverty or criminality. Those that \
 	manage to escape rarely wish to return, though often possess a looser set of morales as a result of their time on the planet."
 	capital = "New Santa Domingo"
-	economic_power = 0.8
 	language = LANGUAGE_GUTTER
 	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
 
@@ -110,7 +105,6 @@
 	the cutting edge, most Episoloners are tech-savvy, at the very least and are usually well educated, with a focus on the sciences. The people \
 	of Ceti Episilon have developed a reputation for being some of the best and brightest that Sol has to offer."
 	capital = "Verlize"
-	economic_power = 1.4
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
@@ -126,7 +120,6 @@
 	capital = "Surya"
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SPACER)
-	economic_power = 1.3
 	distance = "10 light years"
 
 /decl/cultural_info/location/human/terra
@@ -141,7 +134,6 @@
 	language = LANGUAGE_INDEPENDENT
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GALCOM)
 	distance = "22.5 light years."
-	economic_power = 0.9
 	ruling_body = "Gilgamesh Colonial Confederation"
 
 /decl/cultural_info/location/human/tersten
@@ -160,7 +152,6 @@
 	Typically untrusting, once a Terstener has made a friend, they will often be that way for life.  Known for their community and attitudes to strangers, they are considered the cowboys of Sol Central. \
 	Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
 	capital = "Tersten City"
-	economic_power = 1.0
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
@@ -176,7 +167,6 @@
 	Lorrimanians are a quiet, unassuming, academically-driven bunch. They are often sought as researchers or other scientifically-driven career.  It is rare for anyone to immigrate \
 	to the planet, but exceptions have been made. A scientifically driven people, they have served many organisations loyally."
 	capital = "The Hub"
-	economic_power = 1.0
 	secondary_langs = list(LANGUAGE_SIGN)
 
 /decl/cultural_info/location/human/cinu
@@ -193,7 +183,6 @@
 	are known for characteristic firmness disguising fierce friendliness. Its people have suffered in the past, but today look towards a bright future. They are known to be pacifist,\
 	with many refusing to participate in the Defence Forces. Instead, they serve as peacekeepers and diplomats. The Cinuan People were controversially non-aligned during the Gaian Conflict."
 	capital = "Al-Mular"
-	economic_power = 1.0
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
@@ -208,7 +197,6 @@
 	Being from a small colonial system, those that do join the Defence Forces have usually never seen the level of development the Sol System has. \
 	More recently, a spiritualist movement has developed on the planet, taking aspects of religious theory and the hippocratic oath."
 	capital = "Iyeegi"
-	economic_power = 0.9
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
@@ -224,7 +212,6 @@
 	typically only seen on the planet, or in entertainment medias. Lower Lordanians are more common, and many opt leave their home planet. Historically, Lordanians have a superiority complex, \
 	and often see themselves as better. Most Lordanians are seen as untrustworthy, or selfish. As such, they are rarely seen within Sol's Defence Forces."
 	capital = "New Ares"
-	economic_power = 1.2
 	language = LANGUAGE_GALCOM
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
 
@@ -240,7 +227,6 @@
 	their Sol brothers, and are usually seen onboard most SCG Vessels.  Growing up on a waterworld, most Kingstonians can sail a boat, something rare in the 26th Century.  \
 	Typically dark in skin due to the planet's proximity to it's sun, Kingstonians come in various forms."
 	capital = "New Havana"
-	economic_power = 1.1
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_GALCOM)
 
@@ -254,7 +240,6 @@
 	the current Mayor of New Venice serves as a vital mediator between both sides. <br><br> The Gaian People are tired of war, and long to see their families \
 	once again.  They suffered hard twenty years prior, and fear they may suffer again."
 	capital = "New Venice"
-	economic_power = 1.0
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_INDEPENDENT, LANGUAGE_GALCOM)
 
@@ -267,7 +252,6 @@
 	Unfortunately, Magnitka's economy is in a decline as its principle export, iron, grows cheaper by the day. The primary careers available to Magnitkans are military service, mining, or organized crime.  \
 	Though historically relatively isolationist, today Magnitka finds itself more and more closely associated with the Gilgamesh Colonial Confederation, in an effort to offset its economic decline."
 	capital = "Labortown"
-	economic_power = 0.8
 	language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_GALCOM)
 	ruling_body = "Magnitka"

@@ -8,7 +8,7 @@
 	spawn_positions = 3
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
-	economic_power = 8
+	economic_power = 1.2
 	alt_titles = list(
 		"Surgeon",
 		"Trauma Surgeon")
@@ -48,7 +48,7 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "Physicians and the Chief Medical Officer"
-	economic_power = 7
+	economic_power = 1.15
 	ideal_character_age = 40
 	minimal_player_age = 0
 	alt_titles = list(
@@ -97,7 +97,7 @@
 	spawn_positions = 1
 	supervisors = "the Chief Medical Officer and the Corporate Liaison"
 	selection_color = "#013d3b"
-	economic_power = 6
+	economic_power = 1.1
 	alt_titles = null
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/biomech
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -171,7 +171,7 @@
 	spawn_positions = 1
 	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
 	selection_color = "#013d3b"
-	economic_power = 4
+	economic_power = 1.05
 	ideal_character_age = 30
 	minimal_player_age = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
@@ -192,7 +192,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40
-	economic_power = 5
+	economic_power = 1.05
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
 	alt_titles = list(

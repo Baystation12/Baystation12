@@ -9,7 +9,7 @@
 	supervisors = "the captain"
 	selection_color = "#026865"
 	req_admin_notify = 1
-	economic_power = 10
+	economic_power = 1.4
 	access = list(access_medical, access_medical_equip, access_morgue, access_bridge, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_maint_tunnels, access_external_airlocks)
@@ -31,7 +31,7 @@
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
-	economic_power = 7
+	economic_power = 1.2
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology)
 	alt_titles = list(
@@ -52,7 +52,7 @@
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
-	economic_power = 5
+	economic_power = 1.2
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 	alt_titles = list("Pharmacist")
@@ -68,7 +68,7 @@
 	minimal_player_age = 7
 	supervisors = "the Chief Medical Officer and Chief Science Officer"
 	selection_color = "#013d3b"
-	economic_power = 7
+	economic_power = 1.2
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_research)
 	minimal_access = list(access_medical, access_morgue, access_research)
 	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
@@ -80,7 +80,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	economic_power = 5
+	economic_power = 1.15
 	minimal_player_age = 3
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
@@ -98,7 +98,7 @@
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
-	economic_power = 4
+	economic_power = 1.1
 	minimal_player_age = 7
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)

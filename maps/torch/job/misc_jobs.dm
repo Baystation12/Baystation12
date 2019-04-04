@@ -26,7 +26,7 @@ Civilian
 	total_positions = 12
 	spawn_positions = 12
 	supervisors = "the Executive Officer"
-	economic_power = 6
+	economic_power = 1
 	announced = FALSE
 	alt_titles = list(
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,

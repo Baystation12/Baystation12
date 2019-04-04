@@ -3,7 +3,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
-	economic_power = 5
+	economic_power = 1.15
 	minimal_player_age = 7
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer
@@ -41,7 +41,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
-	economic_power = 5
+	economic_power = 1.1
 	minimal_player_age = 7
 	ideal_character_age = 35
 	skill_points = 14
@@ -89,7 +89,6 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Chief of Security"
-	economic_power = 4
 	minimal_player_age = 7
 	ideal_character_age = 25
 	alt_titles = list() // This is a hack. Overriding a list var with null does not actually override it due to the particulars of dm list init. Do not "clean up" without testing.

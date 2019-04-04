@@ -6,7 +6,7 @@
 	spawn_positions = 1
 	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
 	selection_color = "#2f2f7f"
-	economic_power = 15
+	economic_power = 1.2
 	minimal_player_age = 0
 	alt_titles = list(
 		"Corporate Liaison",
@@ -44,7 +44,7 @@
 	spawn_positions = 1
 	supervisors = "the Workplace Liaison"
 	selection_color = "#3d3d7f"
-	economic_power = 12
+	economic_power = 1.05
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard
 	allowed_branches = list(/datum/mil_branch/civilian)

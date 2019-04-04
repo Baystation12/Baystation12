@@ -111,7 +111,7 @@
 /obj/item/weapon/spacecash/bundle/c1
 	name = "1 Thaler"
 	icon_state = "spacecash1"
-	desc = "It's worth 1 credit."
+	desc = "It's worth 1 Thaler."
 	worth = 1
 
 /obj/item/weapon/spacecash/bundle/c10
