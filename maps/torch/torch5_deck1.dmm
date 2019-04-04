@@ -4092,8 +4092,7 @@
 /area/shield/firstdeck)
 "akb" = (
 /obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
-	dir = 1
+	dir = 2
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod12/station)
@@ -5009,8 +5008,7 @@
 /area/crew_quarters/safe_room/firstdeck)
 "anb" = (
 /obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
-	dir = 1
+	dir = 2
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod13/station)
@@ -11094,8 +11092,7 @@
 /area/crew_quarters/sleep/cryo/aux)
 "aMb" = (
 /obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
-	dir = 1
+	dir = 2
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod14/station)
@@ -15471,19 +15468,22 @@
 /area/command/armoury/access)
 "bZb" = (
 /obj/machinery/cryopod{
-	dir = 2
+	icon_state = "body_scanner_0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod15/station)
 "cab" = (
 /obj/machinery/cryopod{
-	dir = 2
+	icon_state = "body_scanner_0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod16/station)
 "cbb" = (
 /obj/machinery/cryopod{
-	dir = 2
+	icon_state = "body_scanner_0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod17/station)
