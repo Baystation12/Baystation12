@@ -24,7 +24,7 @@
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 
 	var/account_allowed = 1               // Does this job type come with a station account?
-	var/economic_power = 2             // With how much does this job modify the initial account amount?
+	var/economic_power = 1             // With how much does this job modify the initial account amount?
 
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
@@ -95,23 +95,11 @@
 		return
 
 	// Calculate our pay and apply all relevant modifiers.
-	var/money_amount = 4 * rand(75, 100) * economic_power
-
-	// Get an average economic power for our cultures.
-	var/culture_mod =   0
-	var/culture_count = 0
-	for(var/token in H.cultural_info)
-		var/decl/cultural_info/culture = H.get_cultural_value(token)
-		if(culture && !isnull(culture.economic_power))
-			culture_count++
-			culture_mod += culture.economic_power
-	if(culture_count)
-		culture_mod /= culture_count
-	money_amount *= culture_mod
+	var/money_amount = rand(100, 250) * economic_power
 
 	// Apply other mods.
 	money_amount *= GLOB.using_map.salary_modifier
-	money_amount *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
+	money_amount *= (1 + H.get_skill_value(SKILL_FINANCE)/(2*SKILL_MAX))
 	money_amount = round(money_amount)
 
 	if(money_amount <= 0)
