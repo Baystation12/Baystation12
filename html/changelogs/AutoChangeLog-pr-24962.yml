@@ -1,8 +1,0 @@
-author: "Higgin"
-delete-after: True
-changes: 
-  - tweak: "Increased global miss chances to head, feet, and legs."
-  - tweak: "Additionally reduced knockdown chances."
-  - tweak: "Made organ damage much less likely before ribs/skull are broken."
-  - tweak: "Increased likelihood of organ damage after encasing bones are broken"
-  - tweak: "Increased damage to brain when dealt and probability of brain damage from damage to the head."

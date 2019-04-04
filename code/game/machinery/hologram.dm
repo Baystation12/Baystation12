@@ -32,7 +32,7 @@ Possible to do for anyone motivated enough:
 var/const/HOLOPAD_MODE = RANGE_BASED
 
 /obj/machinery/hologram/holopad
-	name = "\improper AI holopad"
+	name = "\improper holopad"
 	desc = "It's a floor-mounted device for projecting holographic images."
 	icon_state = "holopad-B0"
 
@@ -51,8 +51,6 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	var/obj/machinery/hologram/holopad/sourcepad
 	var/obj/machinery/hologram/holopad/targetpad
 	var/last_message
-
-	var/map_range = -1 //how far on overmap can it connect, -1 for local zlevels only
 
 	var/holopadType = HOLOPAD_SHORT_RANGE //Whether the holopad is short-range or long-range.
 	var/base_icon = "holopad-B"
@@ -81,11 +79,11 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 		audible_message("Severing connection to distant holopad.")
 		end_call(user)
 		return
-	
+
 	var/handle_type = "Holocomms"
 	if(allow_ai)
 		handle_type = alert(user,"Would you like to request an AI's presence or establish communications with another pad?", "Holopad","AI","Holocomms","Cancel")
-	
+
 	switch(handle_type)
 		if("AI")
 			if(last_request + 200 < world.time) //don't spam the AI with requests you jerk!
@@ -105,10 +103,11 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				last_request = world.time
 				var/list/holopadlist = list()
 				var/zlevels = GetConnectedZlevels(z)
-				if(GLOB.using_map.use_overmap && map_range >= 0)
-					var/obj/effect/overmap/O = map_sectors["[z]"]
-					for(var/obj/effect/overmap/OO in range(O,map_range))
-						zlevels |= OO.map_z
+				if(GLOB.using_map.use_overmap && holopadType == HOLOPAD_LONG_RANGE)
+					for(var/zlevel in map_sectors)
+						var/obj/effect/overmap/O = map_sectors["[zlevel]"]
+						if(!isnull(O))
+							zlevels |= O.map_z
 				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
 					if((H.z in zlevels) && H.operable())
 						holopadlist["[H.loc.loc.name]"] = H	//Define a list and fill it with the area of every holopad in the world
@@ -199,7 +198,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(M)
 		for(var/mob/living/silicon/ai/master in masters)
 			var/ai_text = text
-			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.			
+			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
 				if(speaking)
 					ai_text = speaking.scramble(text)
 				else
@@ -416,7 +415,6 @@ Holographic project of everything else.
 	name = "long range holopad"
 	desc = "It's a floor-mounted device for projecting holographic images. This one utilizes bluespace transmitter to communicate with far away locations."
 	icon_state = "holopad-Y0"
-	map_range = 2
 	power_per_hologram = 1000 //per usage per hologram
 	holopadType = HOLOPAD_LONG_RANGE
 	base_icon = "holopad-Y"

@@ -4092,8 +4092,7 @@
 /area/shield/firstdeck)
 "akb" = (
 /obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
-	dir = 1
+	dir = 2
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod12/station)
@@ -5009,8 +5008,7 @@
 /area/crew_quarters/safe_room/firstdeck)
 "anb" = (
 /obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
-	dir = 1
+	dir = 2
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod13/station)
@@ -11094,8 +11092,7 @@
 /area/crew_quarters/sleep/cryo/aux)
 "aMb" = (
 /obj/machinery/cryopod{
-	icon_state = "body_scanner_0";
-	dir = 1
+	dir = 2
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod14/station)
@@ -15471,19 +15468,22 @@
 /area/command/armoury/access)
 "bZb" = (
 /obj/machinery/cryopod{
-	dir = 2
+	icon_state = "body_scanner_0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod15/station)
 "cab" = (
 /obj/machinery/cryopod{
-	dir = 2
+	icon_state = "body_scanner_0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod16/station)
 "cbb" = (
 /obj/machinery/cryopod{
-	dir = 2
+	icon_state = "body_scanner_0";
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod17/station)
@@ -16312,7 +16312,6 @@
 /obj/machinery/door/airlock/medical{
 	name = "Operating Theatre"
 	},
-/obj/machinery/holosign/surgery,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -16324,6 +16323,11 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/holosign/surgery{
+	dir = 8;
+	icon_state = "sign_off";
+	id = "operating1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -16780,6 +16784,7 @@
 /area/command/conference)
 "dAb" = (
 /obj/machinery/button/holosign{
+	id = "operating1";
 	pixel_x = 6;
 	pixel_y = -24
 	},
@@ -16994,8 +16999,10 @@
 /obj/machinery/door/airlock/medical{
 	name = "Operating Theatre"
 	},
-/obj/machinery/holosign/surgery,
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/holosign/surgery{
+	id = "operating1"
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
 "dQb" = (
@@ -19091,6 +19098,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/holosign/surgery{
+	dir = 8;
+	icon_state = "sign_off";
 	id = "operating2"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -19140,6 +19149,8 @@
 	name = "Operating Theater 2"
 	},
 /obj/machinery/holosign/surgery{
+	dir = 4;
+	icon_state = "sign_off";
 	id = "operating2"
 	},
 /turf/simulated/floor/tiled/white,
@@ -23231,14 +23242,16 @@
 /obj/machinery/door/airlock/engineering{
 	name = "Robotics Surgical Theater"
 	},
-/obj/machinery/holosign/surgery{
-	id = "robosurg"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/holosign/surgery{
+	dir = 4;
+	icon_state = "sign_off";
+	id = "robosurg"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/robotics/surgery)
