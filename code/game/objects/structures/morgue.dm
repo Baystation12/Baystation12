@@ -72,7 +72,7 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
 		step(src.connected, src.dir)
-		src.connected.layer = OBJ_LAYER
+		src.connected.layer = BELOW_OBJ_LAYER
 		var/turf/T = get_step(src, src.dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -113,7 +113,7 @@
 		return
 	src.connected = new /obj/structure/m_tray( src.loc )
 	step(src.connected, EAST)
-	src.connected.layer = OBJ_LAYER
+	src.connected.layer = BELOW_OBJ_LAYER
 	var/turf/T = get_step(src, EAST)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
@@ -257,7 +257,7 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray(src.loc)
 		step(src.connected, dir)
-		src.connected.layer = OBJ_LAYER
+		src.connected.layer = BELOW_OBJ_LAYER
 		var/turf/T = get_step(src, dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -290,7 +290,7 @@
 		return
 	src.connected = new /obj/structure/c_tray( src.loc )
 	step(src.connected, SOUTH)
-	src.connected.layer = OBJ_LAYER
+	src.connected.layer = BELOW_OBJ_LAYER
 	var/turf/T = get_step(src, SOUTH)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
