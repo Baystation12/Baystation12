@@ -405,7 +405,6 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 50
 	ext_cooldown = 1
-	var/max_w_class = ITEM_SIZE_SMALL
 	var/obj/item/pulling
 
 /obj/item/integrated_circuit/manipulation/claw/Destroy()
@@ -443,7 +442,7 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/claw/proc/can_pull(var/obj/item/I)
-	return I && I.w_class <= max_w_class && !I.anchored
+	return assembly && I && I.w_class <= assembly.w_class && !I.anchored
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
 	var/obj/acting_object = get_object()
