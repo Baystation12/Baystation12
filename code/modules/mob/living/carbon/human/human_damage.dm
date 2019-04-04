@@ -292,21 +292,15 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	updatehealth()
 
 
-//Heal MANY external organs, in random order. Revisit this if you ever want shadows or diona with robotics!
+//Heal MANY external organs, in random order.
 /mob/living/carbon/human/heal_overall_damage(var/brute, var/burn)
 	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
 
 	while(parts.len && (brute>0 || burn>0) )
 		var/obj/item/organ/external/picked = pick(parts)
-
 		var/brute_was = picked.brute_dam
 		var/burn_was = picked.burn_dam
-
-		if(!BP_IS_ROBOTIC(picked))
-			picked.heal_damage(brute,burn)
-		else
-			picked.heal_damage(brute,burn,robo_repair = TRUE)
-
+		picked.heal_damage(brute,burn)
 		brute -= (brute_was-picked.brute_dam)
 		burn -= (burn_was-picked.burn_dam)
 		parts -= picked
