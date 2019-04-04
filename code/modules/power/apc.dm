@@ -1155,8 +1155,8 @@
 // on 0=off, 1=on, 2=autooff
 // defines a state machine, returns the new state
 obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
+	//autoset will never turn on a channel set to off
 	switch(cur_state)
-		if(POWERCHAN_OFF); //autoset will never turn on a channel set to off
 		if(POWERCHAN_OFF_TEMP)
 			if(on == 1 || on == 2)
 				return POWERCHAN_ON
