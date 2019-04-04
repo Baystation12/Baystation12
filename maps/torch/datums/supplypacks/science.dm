@@ -110,7 +110,7 @@
 					/obj/item/weapon/storage/belt/holster/machete = 2,
 					/obj/item/weapon/storage/plants = 2,
 					/obj/item/device/analyzer/plant_analyzer = 2,
-					/obj/item/weapon/mining_scanner = 2
+					/obj/item/weapon/mining_scanner = 2)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
 	containername = "exploration equipment crate"
