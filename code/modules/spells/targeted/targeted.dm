@@ -146,8 +146,11 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		for(var/obj/item/organ/external/affecting in H.organs)
-			if(affecting && istype(affecting))
+			if(affecting && istype(affecting) && affecting.status != ORGAN_ROBOTIC)
 				affecting.heal_damage(amt_organ, amt_organ)
+				continue
+			if(affecting && istype(affecting) && affecting.status == ORGAN_ROBOTIC)
+				affecting.heal_damage(-((amt_dam_brute)/2), -((amt_dam_fire)/2), robo_repair = 1)
 		H.vessel.add_reagent(/datum/reagent/blood,amt_blood)
 		H.adjustBrainLoss(amt_brain)
 		H.radiation += min(H.radiation, amt_radiation)
