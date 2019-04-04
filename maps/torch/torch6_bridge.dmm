@@ -15650,9 +15650,9 @@
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/computer/account_database,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/papershredder,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
 "Ud" = (
@@ -16369,7 +16369,6 @@
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
 "Yc" = (
-/obj/machinery/papershredder,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
@@ -16378,6 +16377,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/machinery/photocopier,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "Yd" = (
@@ -16518,12 +16518,12 @@
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
 "Zc" = (
-/obj/machinery/photocopier,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "Zd" = (
