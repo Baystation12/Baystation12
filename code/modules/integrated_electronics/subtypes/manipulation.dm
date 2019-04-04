@@ -97,6 +97,7 @@
 		if(2)
 			var/datum/firemode/next_firemode = installed_gun.switch_firemodes()
 			set_pin_data(IC_OUTPUT, 2, next_firemode ? next_firemode.name : null)
+			push_data()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/proc/shootAt(turf/target)
 	var/turf/T = get_turf(src)
