@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - admin: "A new admin tool, Toggle Harddelete Queue, has been added to the Secrets panel, under Debug. Do not use this unless you know what you're doing."

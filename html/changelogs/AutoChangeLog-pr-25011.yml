@@ -1,7 +1,0 @@
-author: "Higgin"
-delete-after: True
-changes: 
-  - tweak: "Chances of collapsing from limb damage can now be mitigated by walking and moving along walls/other objects you could reasonably use to prop yourself up."
-  - tweak: "This mitigation only works if at least one of your legs fully works."
-  - tweak: "Stools and beds are collapse-exempt. IPCs at funerals rejoice."
-  - tweak: "The chance of collapsing when not doing these things to mitigate it is now significantly higher to compensate."
