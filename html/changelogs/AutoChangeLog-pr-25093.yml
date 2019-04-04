@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Wallets can hold ribbons, armor tags, and patches."
+  - tweak: "Ribbons, armor tags, and patches are now tiny instead of small."
