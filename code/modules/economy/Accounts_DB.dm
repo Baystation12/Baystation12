@@ -143,7 +143,7 @@
 				starting_funds = Clamp(starting_funds, 0, station_account.money)	// Not authorized to put the station in debt.
 				starting_funds = min(starting_funds, fund_cap)						// Not authorized to give more than the fund cap.
 
-				var/datum/money_account/new_account = create_account("[account_name]'s Personal Account", account_name, starting_funds, src)
+				var/datum/money_account/new_account = create_account("[account_name]'s Personal Account", account_name, starting_funds, ACCOUNT_TYPE_PERSONAL, src)
 				if(starting_funds > 0)
 					//subtract the money
 					station_account.money -= starting_funds

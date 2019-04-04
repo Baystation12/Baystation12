@@ -26,12 +26,12 @@
 		T.sanitize_amount()
 		. += T.amount
 
-/proc/create_account(var/account_name = "Default account name", var/owner_name = "Default name", var/starting_funds = 0, var/obj/machinery/computer/account_database/source_db, var/account_type = ACCOUNT_TYPE_PERSONAL)
+/proc/create_account(var/account_name = "Default account name", var/owner_name, var/starting_funds = 0, var/account_type = ACCOUNT_TYPE_PERSONAL, var/obj/machinery/computer/account_database/source_db)
 
 	//create a new account
 	var/datum/money_account/M = new()
 	M.account_name = account_name
-	M.owner_name = owner_name
+	M.owner_name = (owner_name ? owner_name : account_name)
 	M.account_type = account_type
 	M.remote_access_pin = rand(1111, 111111)
 

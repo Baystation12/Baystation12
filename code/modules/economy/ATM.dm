@@ -88,6 +88,12 @@
 
 	else if(authenticated_account)
 		if(istype(I,/obj/item/weapon/spacecash))
+			// Nope. Don't allow cash deposits into departmental accounts
+			if(authenticated_account.account_type == ACCOUNT_TYPE_DEPARTMENT)
+				playsound(src, 'sound/machines/buzz-two.ogg', 50, 1)
+				to_chat(user, "\icon[src]<span class='info'>Departmental accounts cannot accept cash transactions.</span>")
+				return
+
 			var/obj/item/weapon/spacecash/dolla = I
 
 			//create a transaction log entry
@@ -319,6 +325,11 @@
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
+					if(authenticated_account.account_type == ACCOUNT_TYPE_DEPARTMENT)
+						playsound(src, 'sound/machines/buzz-two.ogg', 50, 1)
+						to_chat(usr, "\icon[src]<span class='info'>Departmental accounts cannot accept cash transactions.</span>")
+						return
+
 					//create an entry in the account transaction log
 					var/datum/transaction/singular/T = new(FALSE, authenticated_account, machine_id, amount, "Credit withdrawal")
 					if(T.perform())
@@ -332,6 +343,11 @@
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
+					if(authenticated_account.account_type == ACCOUNT_TYPE_DEPARTMENT)
+						playsound(src, 'sound/machines/buzz-two.ogg', 50, 1)
+						to_chat(usr, "\icon[src]<span class='info'>Departmental accounts cannot accept cash transactions.</span>")
+						return
+
 					//remove the money
 					var/datum/transaction/singular/T = new(FALSE, authenticated_account, machine_id, amount, "Credit withdrawal")
 					if(T.perform())
