@@ -865,7 +865,7 @@
 	if(affected)
 		affected.implants -= implant
 		for(var/datum/wound/wound in affected.wounds)
-			wound.embedded_objects -= implant
+			LAZYREMOVE(wound.embedded_objects, implant)
 		if(!surgical_removal)
 			shock_stage+=20
 			affected.take_external_damage((implant.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
