@@ -106,7 +106,7 @@
 		BP_CELL = /obj/item/organ/internal/cell,
 		BP_EYES = /obj/item/organ/internal/eyes/robot,
 		BP_BRAIN = /obj/item/organ/internal/mmi_holder,
-		BP_FBP_STOMACH = /obj/item/organ/internal/stomach/robot
+		BP_FBP_STOMACH = /obj/item/organ/internal/stomach/fuel_processor
 		)
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
@@ -135,6 +135,11 @@
 		)
 	)
 
+	allowed_fuel = list(/datum/reagent/fuel/,
+						/datum/reagent/ethanol,
+						/datum/reagent/hydrazine,
+						/datum/reagent/nutriment)
+
 /datum/species/machine/ipc/handle_death(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))
@@ -153,3 +158,4 @@
 /datum/species/machine/ipc/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"
+
