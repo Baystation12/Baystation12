@@ -439,6 +439,10 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	melee_damage_lower = 40
 	melee_damage_upper = 55
 	attacktext = "Whips"
+	mob_size = MOB_LARGE
+	resistance = 20
+	bound_width = 96
+	bound_height = 96
 
 //below are prison related flood
 //these flood are gamemode specific and shouldn't be used elsewhere as they're crafted
@@ -502,6 +506,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "abomination"
 	icon_dead = "abomination_dead"
 	move_to_delay = 2 //fast enough to give a sense of danger and muscle
+	resistance = 5
 	health = 200
 	maxHealth = 250 //these will be specifically put in certain locations and not RNG based
 	melee_damage_lower = 30
