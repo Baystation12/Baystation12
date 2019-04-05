@@ -36,6 +36,20 @@
 	suffixes = list("bearcat/bearcat-1.dmm", "bearcat/bearcat-2.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/ferry/lift)
+	area_usage_test_exempted_root_areas = list(/area/ship)
+	apc_test_exempt_areas = list(
+		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/port= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/starboard= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/hallway = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/lower = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
+		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
+	)
 
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"
