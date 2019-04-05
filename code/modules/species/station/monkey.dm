@@ -79,7 +79,7 @@
 	if(!held && !H.restrained() && prob(5))
 		var/list/touchables = list()
 		for(var/obj/O in range(1,get_turf(H)))
-			if(O.simulated && O.Adjacent(H))
+			if(O.simulated && O.Adjacent(get_turf(H)))
 				touchables += O
 		var/obj/touchy = pick(touchables)
 		touchy.attack_hand(H)
