@@ -81,8 +81,9 @@
 		for(var/obj/O in range(1,get_turf(H)))
 			if(O.simulated && O.Adjacent(get_turf(H)))
 				touchables += O
-		var/obj/touchy = pick(touchables)
-		touchy.attack_hand(H)
+		if(touchables.len)
+			var/obj/touchy = pick(touchables)
+			touchy.attack_hand(H)
 
 	if(prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
