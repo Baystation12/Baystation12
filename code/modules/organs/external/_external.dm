@@ -1430,6 +1430,11 @@ obj/item/organ/external/proc/remove_clamps()
 				unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
+	if(internal_organs.len)
+		for(var/A in internal_organs)
+			var/obj/item/organ/internal/augment/aug = A
+			if(istype(aug) && aug.known)
+				. += "[capitalize(aug.name)] implanted"
 
 /obj/item/organ/external/proc/inspect(mob/user)
 	if(is_stump())

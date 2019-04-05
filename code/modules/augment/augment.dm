@@ -2,6 +2,7 @@
 	name = "embedded augment"
 	desc = "Embedded augment."
 	icon = 'icons/obj/augment.dmi'
+	var/known = TRUE
 	//By default these fit on both flesh and robotic organs and are robotic
 	status = ORGAN_ROBOTIC
 	var/augment_flags = AUGMENTATION_MECHANIC | AUGMENTATION_ORGANIC
