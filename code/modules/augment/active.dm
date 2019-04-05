@@ -2,15 +2,20 @@
 /obj/item/organ/internal/augment/active
 	action_button_name = "Activate"
 	var/obj/item/organ/external/limb
+	var/obj/item/organ/external/part = null
 
 /obj/item/organ/internal/augment/active/proc/activate()
 
 //Give verbs on install
 /obj/item/organ/internal/augment/active/onInstall()
 	limb = owner.get_organ(parent_organ)
+	limb.implants += src
+	part = limb
 
 /obj/item/organ/internal/augment/active/onRemove()
-	limb = null
+	if(part)
+		part.implants -= src
+		part = null
 
 /obj/item/organ/internal/augment/active/proc/can_activate()
 	if(!owner || owner.incapacitated() || !is_usable())

@@ -1422,10 +1422,15 @@ obj/item/organ/external/proc/remove_clamps()
 		. += capitalize(broken_description)
 	if (implants.len)
 		var/unknown_body = 0
-		for(var/I in implants)
-			var/obj/item/weapon/implant/imp = I
-			if(istype(imp) && imp.known)
-				. += "[capitalize(imp.name)] implanted"
+		for (var/I in implants)
+			if(istype(I,/obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp = I
+				if(imp.known)
+					. += "[capitalize(imp.name)] implanted"
+			else if(istype(I,/obj/item/organ/internal/augment))
+				var/obj/item/organ/internal/augment/aug = I
+				if(aug.known)
+					. += "[capitalize(aug.name)] augmented"
 			else
 				unknown_body++
 		if(unknown_body)
