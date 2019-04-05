@@ -53,6 +53,8 @@
 
 /obj/item/projectile/overmap/proc/do_sector_hit(var/z_level,var/obj/effect/overmap/object_hit)
 	var/list/hit_bounds = object_hit.map_bounds
+	if(!isnull(overmap_fired_by) && object_hit == overmap_fired_by.targeting_datum.current_target)
+		hit_bounds = overmap_fired_by.targeting_datum.get_target_location_coord_list()
 	/*if(prob(15))
 		hit_bounds  = pick(object_hit.weapon_locations)*/
 
@@ -72,12 +74,16 @@
 /obj/item/projectile/overmap/proc/do_z_level_proj_spawn(var/z_level,var/obj/effect/overmap/ship/overmap_object_hit)
 	var/start_co_ords
 	var/end_co_ords
+	var/list/bounds_to_use = overmap_object_hit.map_bounds
+	if(!isnull(overmap_fired_by) && overmap_object_hit == overmap_fired_by.targeting_datum.current_target)
+		bounds_to_use = overmap_fired_by.targeting_datum.get_target_location_coord_list()
+
 	if(overmap_object_hit.fore_dir == EAST || WEST)
-		start_co_ords = generate_co_ords_x_start(overmap_object_hit.map_bounds)
-		end_co_ords = generate_co_ords_x_end(start_co_ords,overmap_object_hit.map_bounds)
+		start_co_ords = generate_co_ords_x_start(bounds_to_use)
+		end_co_ords = generate_co_ords_x_end(start_co_ords,bounds_to_use)
 	else if(overmap_object_hit.fore_dir == NORTH || SOUTH)
-		start_co_ords = generate_co_ords_y_start(overmap_object_hit.map_bounds)
-		end_co_ords = generate_co_ords_y_end(start_co_ords,overmap_object_hit.map_bounds)
+		start_co_ords = generate_co_ords_y_start(bounds_to_use)
+		end_co_ords = generate_co_ords_y_end(start_co_ords,bounds_to_use)
 	var/turf/proj_spawn_loc = locate(start_co_ords[1],start_co_ords[2],z_level)
 	var/turf/proj_end_loc = locate(end_co_ords[1],end_co_ords[2],z_level)
 	var/obj/item/projectile/new_proj = new ship_damage_projectile (proj_spawn_loc)

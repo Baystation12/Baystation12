@@ -59,7 +59,7 @@
 		)
 
 /obj/item/weapon/gun/energy/beam_rifle/verb/scope()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Use Scope"
 	set popup_menu = 1
 

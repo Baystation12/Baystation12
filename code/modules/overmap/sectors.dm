@@ -11,7 +11,7 @@ var/list/points_of_interest = list()
 	icon_state = "object"
 	var/list/map_z = list()
 	var/list/map_z_data = list()
-	var/list/weapon_locations = list(list(1,255,255,1)) //used for orbital unaimed MAC bombardment. Format: list(top_left_x,top_left_y,bottom_right_x,bottom_right_y) for each "visible" ground-to-ship weapon on the map.
+	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 	var/weapon_miss_chance = 0
 	var hit // for icon changes  when damaged
 
@@ -32,6 +32,8 @@ var/list/points_of_interest = list()
 	var/superstructure_failing = 0
 	var/list/connectors = list() //Used for docking umbilical type-items.
 	var/faction = "civilian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
+
+	var/datum/targeting_datum/targeting_datum = new
 
 	var/glassed = 0
 	var/nuked = 0
@@ -56,7 +58,7 @@ var/list/points_of_interest = list()
 	. = ..()
 	setup_object()
 
-/obj/effect/overmap/proc/get_superstructure_strength() //Returns a list containing [current hull strength],[max hull strength]
+/obj/effect/overmap/proc/get_superstructure_strength() //Returns a decimal percentage calculated from currstrength/maxstrength
 	var/list/hull_strengths = list(0,0)
 	for(var/obj/effect/hull_segment/hull_segment in hull_segments)
 		if(hull_segment.is_segment_destroyed() == 0)
@@ -191,6 +193,9 @@ var/list/points_of_interest = list()
 		do_superstructure_fail()
 
 /obj/effect/overmap/process()
+	if(!isnull(targeting_datum.current_target) && !(targeting_datum.current_target in range(src,7)))
+		targeting_datum.current_target = null
+		targeting_datum.targeted_location = "target lost"
 	if(superstructure_failing == -1)
 		return
 	if(superstructure_failing == 1)
