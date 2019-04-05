@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Refilling a fire extinguisher from a tank no longer tells you the extinguisher is full when the tank is empty."
