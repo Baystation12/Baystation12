@@ -6,7 +6,7 @@
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 
 /obj/item/clothing/suit/storage/vest/solgov
-	name = "\improper Sol Central Government heavy armored vest"
+	name = "\improper Terran Defence Force heavy armored vest"
 	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive red lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'

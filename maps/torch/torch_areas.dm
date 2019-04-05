@@ -192,7 +192,7 @@
 	name = "\improper Second Deck Safe Room"
 
 /area/maintenance/bluespace
-	name = "Bluespace Drive"
+	name = "FTL Drive"
 	icon_state = "engineering"
 
 
@@ -343,28 +343,28 @@
 //Charon
 
 /area/exploration_shuttle/
-	name = "\improper Charon"
+	name = "\improper Willow"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/exploration_shuttle/cockpit
-	name = "\improper Charon - Cockpit"
+	name = "\improper Willow - Cockpit"
 /area/exploration_shuttle/atmos
-	name = "\improper Charon - Atmos Compartment"
+	name = "\improper Willow - Atmos Compartment"
 /area/exploration_shuttle/power
-	name = "\improper Charon - Power Compartment"
+	name = "\improper Willow - Power Compartment"
 /area/exploration_shuttle/crew
-	name = "\improper Charon - Crew Compartment"
+	name = "\improper Willow - Crew Compartment"
 /area/exploration_shuttle/cargo
-	name = "\improper Charon - Cargo Bay"
+	name = "\improper Willow - Cargo Bay"
 /area/exploration_shuttle/airlock
-	name = "\improper Charon - Airlock Compartment"
+	name = "\improper Willow - Airlock Compartment"
 
 //Aquila
 
 /area/aquila
-	name = "\improper SEV Aquila"
+	name = "\improper TAV Thompson"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/reinforced/airless
 	requires_power = 1
@@ -372,28 +372,28 @@
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/aquila/cockpit
-	name = "\improper SEV Aquila - Cockpit"
+	name = "\improper TAV Thompson - Cockpit"
 /area/aquila/maintenance
-	name = "\improper SEV Aquila - Maintenance"
+	name = "\improper TAV Thompson - Maintenance"
 /area/aquila/storage
-	name = "\improper SEV Aquila - Storage"
+	name = "\improper TAV Thompson - Storage"
 /area/aquila/secure_storage
-	name = "\improper SEV Aquila - Secure Storage"
+	name = "\improper TAV Thompsona - Secure Storage"
 /area/aquila/mess
-	name = "\improper SEV Aquila - Mess Hall"
+	name = "\improper TAV Thompson - Mess Hall"
 /area/aquila/passenger
-	name = "\improper SEV Aquila - Passenger Compartment"
+	name = "\improper TAV Thompson - Passenger Compartment"
 /area/aquila/medical
-	name = "\improper SEV Aquila - Medical"
+	name = "\improper TAV Thompson - Medical"
 /area/aquila/head
-	name = "\improper SEV Aquila - Head"
+	name = "\improper TAV Thompson - Head"
 /area/aquila/airlock
-	name = "\improper SEV Aquila - Airlock Compartment"
+	name = "\improper TAV Thompson - Airlock Compartment"
 
 //Guppy
 
 /area/guppy_hangar/start
-	name = "\improper Guppy"
+	name = "\improper Pokolov"
 	icon_state = "shuttlered"
 	requires_power = 1
 	dynamic_lighting = 1
@@ -403,71 +403,71 @@
 //Petrov
 
 /area/shuttle/petrov
-	name = "\improper NSV Petrov"
+	name = "\improper TRV Queen Maria"
 	requires_power = 1
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/shuttle/petrov/cell1
-	name = "\improper NSV Petrov - Isolation Cell 1"
+	name = "\improper TRV Queen Maria - Isolation Cell 1"
 	icon_state = "shuttle"
 /area/shuttle/petrov/cell2
-	name = "\improper NSV Petrov - Isolation Cell 2"
+	name = "\improper TRV Queen Maria - Isolation Cell 2"
 	icon_state = "shuttlegrn"
 /area/shuttle/petrov/cell3
-	name = "\improper NSV Petrov - Isolation Cell 3"
+	name = "\improper TRV Queen Maria - Isolation Cell 3"
 	icon_state = "shuttle"
 
 /area/shuttle/petrov/hallwaya
-	name = "\improper NSV Petrov - Lower Hallway"
+	name = "\improper TRV Queen Maria - Lower Hallway"
 	icon_state = "hallA"
 
 /area/shuttle/petrov/security
-	name = "\improper NSV Petrov - Security Office"
+	name = "\improper TRV Queen Maria - Security Office"
 	icon_state = "checkpoint1"
 
 /area/shuttle/petrov/rd
-	name = "\improper NSV Petrov - CSO's Office"
+	name = "\improper TRV Queen Maria - CSO's Office"
 	icon_state = "head_quarters"
 
 /area/shuttle/petrov/cockpit
-	name = "\improper NSV Petrov - Cockpit"
+	name = "\improper TRV Queen Maria - Cockpit"
 	icon_state = "shuttlered"
 
 /area/shuttle/petrov/maint
-	name = "\improper NSV Petrov - Maintenance"
+	name = "\improper TRV Queen Maria - Maintenance"
 	icon_state = "engine"
 
 /area/shuttle/petrov/analysis
-	name = "\improper NSV Petrov - Analysis Lab"
+	name = "\improper TRV Queen Maria - Analysis Lab"
 	icon_state = "devlab"
 
 /area/shuttle/petrov/toxins
-	name = "\improper NSV Petrov - Toxins Lab"
+	name = "\improper TRV Queen Maria - Toxins Lab"
 	icon_state = "toxstorage"
 
 /area/shuttle/petrov/rnd
-	name = "\improper NSV Petrov - Fabricator Lab"
+	name = "\improper TRV Queen Maria - Fabricator Lab"
 	icon_state = "devlab"
 
 /area/shuttle/petrov/isolation
-	name = "\improper NSV Petrov - Isolation Lab"
+	name = "\improper TRV Queen Maria - Isolation Lab"
 	icon_state = "xeno_lab"
 
 /area/shuttle/petrov/phoron
-	name = "\improper NSV Petrov - Sublimation Lab"
+	name = "\improper TRV Queen Maria - Sublimation Lab"
 	icon_state = "toxstorage"
 
 /area/shuttle/petrov/custodial
-	name = "\improper NSV Petrov - Custodial"
+	name = "\improper TRV Queen Maria - Custodial"
 	icon_state = "decontamination"
 
 /area/shuttle/petrov/equipment
-	name = "\improper NSV Petrov - Equipment Storage"
+	name = "\improper TRV Queen Maria - Equipment Storage"
 	icon_state = "locker"
 
 /area/shuttle/petrov/eva
-	name = "\improper NSV Petrov - EVA Storage"
+	name = "\improper TRV Queen Maria - EVA Storage"
 	icon_state = "locker"
 
 //Turbolift
@@ -597,13 +597,13 @@
 	name = "lift (third deck)"
 	lift_floor_label = "Deck 3"
 	lift_floor_name = "Habitation Deck"
-	lift_announce_str = "Arriving at Habitation Deck: EVA. Telecommunications. Mess Hall. Officer's Mess. Lounge. Diplomatic Quarters. Hydroponics. Cryogenic Storage. Holodeck. Gym."
+	lift_announce_str = "Arriving at Habitation Deck: EVA. Telecommunications. Mess Halls. Lounge. Diplomatic Quarters. Hydroponics. Cryogenic Storage. Holodeck. Gym."
 
 /area/turbolift/torch_first
 	name = "lift (fourth deck)"
 	lift_floor_label = "Deck 4"
 	lift_floor_name = "Supply Deck"
-	lift_announce_str = "Arriving at Supply Deck: Shuttle Docks. Pathfinder's Office. Cargo Storage. Supply Office. Laundry."
+	lift_announce_str = "Arriving at Supply Deck: Shuttle Docks. Chief Exploration Officer's Office. Cargo Storage. Supply Office. Laundry."
 
 /area/turbolift/torch_ground
 	name = "lift (fifth deck)"
@@ -624,12 +624,12 @@
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/command/pathfinder
-	name = "\improper Pathfinder's Office"
+	name = "\improper Chief Exploration Officer's Office"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/command/pilot
-	name = "\improper Pilot's Lounge"
+	name = "\improper Shuttle Pilot's Lounge"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
@@ -645,22 +645,22 @@
 	icon_state = "Tactical"
 
 /area/command/bsa
-	name = "\improper Bluespace Artillery"
+	name = "\improper Hyperkinetic Artillery"
 	icon_state = "firingrange"
 
 /area/crew_quarters/heads
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/cobed
-	name = "\improper Command - CO's Quarters"
+	name = "\improper Command - Captain's Quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/office/co
-	name = "\improper Command - CO's Office"
+	name = "\improper Command - Captain's Office"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/office/xo
-	name = "\improper Command - XO's Office"
+	name = "\improper Command - FO's Office"
 
 /area/crew_quarters/heads/office/rd
 	name = "\improper Command - CSO's Office"
@@ -675,13 +675,13 @@
 	name = "\improper Command - CoS' Office"
 
 /area/crew_quarters/heads/office/cl
-	name = "\improper Command - CL's Office"
+	name = "\improper Command - Foreign Diplomat's Office"
 
 /area/crew_quarters/heads/office/sgr
-	name = "\improper Command - SCGR's Office"
+	name = "\improper Command - Human Resources Office"
 
 /area/crew_quarters/heads/office/sea
-	name = "\improper Command - SEA's Office"
+	name = "\improper Command - SNA's Office"
 
 // Engineering
 
@@ -710,7 +710,7 @@
 	icon_state = "construction"
 
 /area/vacant/armory
-	name = "\improper Marine Armory"
+	name = "\improper Shirked Armory"
 	icon_state = "Tactical"
 
 /area/vacant/cabin
@@ -789,7 +789,7 @@
 // Supply
 
 /area/quartermaster/deckofficer
-	name = "\improper Deck Chief"
+	name = "\improper Logistics Agent"
 	icon_state = "quart"
 
 /area/quartermaster/expedition
@@ -932,7 +932,7 @@
 // Security
 
 /area/security/bo
-	name = "\improper Security - Brig Officer"
+	name = "\improper Security - Master At Arms"
 	icon_state = "Warden"
 
 /area/security/equipment
@@ -1127,7 +1127,7 @@
 	name = "\improper Centcom Control"
 
 /area/centcom/creed
-	name = "Creed's Office"
+	name = "Admiral Lexius' Office"
 
 /area/centcom/evac
 	name = "\improper Centcom Emergency Shuttle"
@@ -1431,7 +1431,7 @@
 	icon_state = "Warden"
 
 /area/security/detectives_office
-	name = "\improper Security - Forensic Office"
+	name = "\improper Security - NCIS"
 	icon_state = "detective"
 	sound_env = MEDIUM_SOFTFLOOR
 
@@ -1446,7 +1446,7 @@
 
 // Cargo
 /area/quartermaster/office
-	name = "\improper Supply Office"
+	name = "\improper Requisitions Office"
 	icon_state = "quartoffice"
 
 /area/quartermaster/storage

@@ -208,7 +208,7 @@
 
 //Merchant
 /obj/item/weapon/card/id/torch/merchant
-	desc = "An identification card issued to Merchants, indicating their right to sell and buy goods."
+	desc = "A Holo-Card issued to Merchants by the Skrell, indicating their right to sell and buy goods in their space."
 	job_access_type = /datum/job/merchant
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_BEIGE

@@ -94,7 +94,7 @@ Unique items
 
 /obj/item/weapon/storage/fakebook
 	name = "Workplace Crisis Management"
-	desc = "Also known as 'I fucked up, what do?'. A very popular book amongst corporate management."
+	desc = "Also known as 'I fucked up, what do?'. A very popular book amongst management."
 	icon = 'icons/obj/library.dmi'
 	icon_state = "booknanoregs"
 	attack_verb = list("bashed", "whacked", "educated")
@@ -121,7 +121,7 @@ Weapons
 	name = "\improper Final Argument"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "mosley"
-	desc = "A shiny al-Maliki & Mosley Autococker automatic revolver, with black accents. Marketed as the 'Revolver for the Modern Era'. This one has 'To the Captain of SEV Torch' engraved."
+	desc = "A shiny al-Maliki & Mosley Autococker automatic revolver, with black accents. Marketed as the 'Revolver for the Modern Era'. This one has 'To the Captain of TRCV Sandros' engraved."
 	fire_delay = 5.7 //Autorevolver. Also synced with the animation
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)

@@ -127,7 +127,7 @@
 	)
 
 /obj/structure/closet/secure_closet/forensics
-	name = "forensics technician's locker"
+	name = "NCIS Agent's locker"
 	req_access = list(access_forensics_lockers)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/security/forensics
 
@@ -148,7 +148,6 @@
 		/obj/item/device/holowarrant,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/weapon/storage/belt/holster/forensic,
-		/obj/item/weapon/storage/belt/holster/security,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel/sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)

@@ -77,7 +77,7 @@
 	)
 
 /obj/structure/closet/secure_closet/scientist_torch
-	name = "researcher's locker"
+	name = "research associate's locker"
 	req_one_access = list(access_research)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/science
 
@@ -144,7 +144,7 @@
 	)
 
 /obj/structure/closet/secure_closet/ec_scientist
-	name = "scientist locker"
+	name = "researcher's locker"
 	req_one_access = list(access_research)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/science
 

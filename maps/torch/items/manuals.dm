@@ -68,7 +68,7 @@
 /obj/item/weapon/folder/nt/rd
 
 /obj/item/weapon/folder/envelope/blanks
-	desc = "A thick envelope. A Terran logo is stamped in the corner, along with 'CONFIDENTIAL'."
+	desc = "A thick envelope. A Terran Crest is stamped in the corner, along with 'CONFIDENTIAL'."
 
 /obj/item/weapon/folder/envelope/blanks/Initialize()
 	. = ..()
@@ -81,14 +81,14 @@
 	<h3>RESEARCH DIVISION</h3>
 	<img src = torchltd.png>
 	</center>
-	<b>FROM:</b> Hieronimus Blackstone, Overseer of Sandros Cooperation Project<br>
+	<b>FROM:</b> Amy Trallassen, Overseer of Sandros Cooperation Project<br>
 	<b>TO:</b> Chief Science Officer of SEV Torch branch<br>
 	<b>CC:</b> Liason with TAR services aboard TRCV Sandros<br>
 	<b>SUBJECT:</b> RE: Testing Materials<br>
 	<hr>
 	We have reviewed your request, and would like to make an addition to the list of needed materials.<br>
 	As we hold very high hopes for this branch, it would be only right to provide our scientists with the most accurate testing environment. And by that we mean the living human subjects. Our Ethics Review Board suggested a workaround for that pesky 'consent' requierment.<br>
-	In the Research Wing you should find a small section labeled 'Aux Custodial Supplies'. Inside we have provided several mind-blank vatgrown clones. Our Law Special Response Team so far had not found TAR legislation that explicitly forbids their use in research.<br>
+	In the Research Wing you should find a small section labeled 'Aux Custodial Supplies'. Inside we have provided several mind-blank vatgrown clones. Our Response Team so far had not found TAR legislation that explicitly forbids their use in research.<br>
 	They come in self-contained life support bags, with additional measures to make them easier to use for, let's say, more sensitive personnel. As our preliminary study showed, 75% more subjects were more willing to harm a (consenting) intern if their face was fully hidden.<br>
 	We are expecting great results from this program. Do not disappoint us.<br>
 	<i>H.B.</i></tt>

@@ -180,7 +180,7 @@
 //Petrov
 
 /datum/shuttle/autodock/ferry/petrov
-	name = "Petrov"
+	name = "Queen Maria"
 	warmup_time = 10
 	dock_target = "petrov_shuttle_airlock"
 	waypoint_station = "nav_petrov_start"
@@ -227,7 +227,7 @@
 	shuttle_area = /area/ninja_dojo/start
 	current_location = "nav_ninja_start"
 	landmark_transition = "nav_ninja_transition"
-	announcer = "SEV Torch Sensor Array"
+	announcer = "TRCV Sandros Sensor Array"
 	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
 	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
 
@@ -351,7 +351,7 @@
 	dock_target = "merc_shuttle"
 	current_location = "nav_merc_start"
 	landmark_transition = "nav_merc_transition"
-	announcer = "SEV Torch Sensor Array"
+	announcer = "TRCV Sandros Sensor Array"
 	home_waypoint = "nav_merc_start"
 	arrival_message = "Attention, vessel detected entering vessel proximity."
 	departure_message = "Attention, vessel detected leaving vessel proximity."
@@ -418,7 +418,7 @@
 	dock_target = "skipjack_shuttle"
 	current_location = "nav_skipjack_start"
 	landmark_transition = "nav_skipjack_transition"
-	announcer = "SEV Torch Sensor Array"
+	announcer = "TRCV Sandros Sensor Array"
 	home_waypoint = "nav_skipjack_start"
 	arrival_message = "Attention, vessel detected entering vessel proximity."
 	departure_message = "Attention, vessel detected leaving vessel proximity."
@@ -486,9 +486,9 @@
 	current_location = "nav_ert_start"
 	landmark_transition = "nav_ert_transition"
 	home_waypoint = "nav_ert_start"
-	announcer = "SEV Torch Sensor Array"
-	arrival_message = "Attention, vessel detected entering vessel proximity."
-	departure_message = "Attention, vessel detected leaving vessel proximity."
+	announcer = "TRCV Sandros Sensor Array"
+	arrival_message = "Attention, vessel dispatched from the TRCV Artemis, entering close proximity."
+	departure_message = "Attention, vessel returning to the TRCV Artemis."
 
 /obj/effect/shuttle_landmark/ert/start
 	name = "Response Team Base"
@@ -565,7 +565,7 @@
 	base_turf = /turf/simulated/floor/plating
 
 /datum/shuttle/autodock/overmap/exploration_shuttle
-	name = "Charon"
+	name = "Willow"
 	move_time = 90
 	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock)
 	dock_target = "calypso_shuttle"
@@ -578,7 +578,7 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
 
 /obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle
-	name = "Charon Hangar"
+	name = "Willow Hangar"
 	landmark_tag = "nav_hangar_calypso"
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
@@ -608,7 +608,7 @@
 	landmark_tag = "nav_transit_calypso"
 
 /datum/shuttle/autodock/overmap/guppy
-	name = "Guppy"
+	name = "Pokolov"
 	warmup_time = 5
 	move_time = 30
 	shuttle_area = /area/guppy_hangar/start
@@ -624,7 +624,7 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
 
 /obj/effect/shuttle_landmark/torch/hangar/guppy
-	name = "Guppy Hangar"
+	name = "Pokolov Hangar"
 	landmark_tag = "nav_hangar_guppy"
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
@@ -654,7 +654,7 @@
 	landmark_tag = "nav_transit_guppy"
 
 /datum/shuttle/autodock/overmap/aquila
-	name = "Aquila"
+	name = "Thompson"
 	move_time = 60
 	shuttle_area = list(/area/aquila/cockpit, /area/aquila/maintenance, /area/aquila/storage, /area/aquila/secure_storage, /area/aquila/mess, /area/aquila/passenger, /area/aquila/medical, /area/aquila/head, /area/aquila/airlock)
 	current_location = "nav_hangar_aquila"
@@ -666,7 +666,7 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
 
 /obj/effect/shuttle_landmark/torch/hangar/aquila
-	name = "Aquila Hangar"
+	name = "Thompson Hangar"
 	landmark_tag = "nav_hangar_aquila"
 	docking_controller = "aquila_shuttle_dock_airlock"
 	base_turf = /turf/simulated/floor/reinforced/airless

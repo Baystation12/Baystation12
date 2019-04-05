@@ -28,7 +28,7 @@
 	)
 
 /obj/structure/closet/secure_closet/CO
-	name = "commanding officer's locker"
+	name = "captain's locker"
 	req_access = list(access_captain)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/co
 
@@ -49,7 +49,7 @@
 	)
 
 /obj/structure/closet/secure_closet/XO
-	name = "executive officer's locker"
+	name = "first officer's locker"
 	req_access = list(access_hop)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/xo
 
@@ -75,7 +75,7 @@
 	)
 
 /obj/structure/closet/secure_closet/sea
-	name = "senior enlisted advisor's locker"
+	name = "senior naval advisor's locker"
 	req_access = list(access_senadv)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/command
 
@@ -96,7 +96,7 @@
 	)
 
 /obj/structure/closet/secure_closet/bridgeofficer
-	name = "bridge officer's locker"
+	name = "helmsman's locker"
 	req_access = list(access_bridge)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/bo
 

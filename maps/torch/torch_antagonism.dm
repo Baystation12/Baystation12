@@ -19,7 +19,7 @@
 
 /datum/antagonist/ert
 	var/sic //Second-In-Command
-	leader_welcome_text = "As leader of the Emergency Response Team, you are part of the Sol Central Government Fleet, and are there with the intention of restoring normal operation to the vessel or the safe evacuation of crew and passengers. You should, to this effect, aid the Commanding Officer or ranking officer aboard in their endeavours to achieve this."
+	leader_welcome_text = "As leader of the Quick Reactionary Force, you are part of the Terran Defense Force, and are there with the intention of restoring normal operation to the vessel or the safe evacuation of crew and passengers. You should, to this effect, aid the Captain or ranking officer aboard in their endeavours to achieve this."
 
 /datum/antagonist/ert/equip(var/mob/living/carbon/human/player)
 
@@ -28,7 +28,7 @@
 
 	player.char_branch = mil_branches.get_branch("Fleet")
 	if(player.mind == leader)
-		player.char_rank = mil_branches.get_rank("Fleet", "Lieutenant")
+		player.char_rank = mil_branches.get_rank("Fleet", "Staff Lieutenant")
 	else if(!sic)
 		sic = player.mind
 		player.char_rank = mil_branches.get_rank("Fleet", "Chief Petty Officer")

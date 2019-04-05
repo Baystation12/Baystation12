@@ -77,7 +77,7 @@
 	)
 
 /obj/structure/closet/secure_closet/pilot
-	name = "pilot's locker"
+	name = "shuttle pilot's locker"
 	req_access = list(access_pilot)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/exploration/pilot
 

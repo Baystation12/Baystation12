@@ -62,7 +62,7 @@
 	)
 
 /obj/structure/closet/secure_closet/medical_torchsenior
-	name = "physician's locker"
+	name = "senior physician's locker"
 	req_access = list(access_senmed)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/physician
 
@@ -90,7 +90,7 @@
 	)
 
 /obj/structure/closet/secure_closet/medical_torch
-	name = "corpsman's locker"
+	name = "medical technician's locker"
 	req_access = list(access_medical_equip)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical
 
@@ -116,7 +116,7 @@
 	)
 
 /obj/structure/closet/secure_closet/medical_contractor
-	name = "medical contractor's locker"
+	name = "medical resident's locker"
 	req_access = list(access_medical)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/contractor
 

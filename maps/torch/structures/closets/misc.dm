@@ -25,7 +25,7 @@
 	)
 
 /obj/structure/closet/secure_closet/liaison
-	name = "\improper corporate liaison's locker"
+	name = "\improper foreign diplomat's locker"
 	req_access = list(access_liaison)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/corporate/liaison
 
@@ -54,7 +54,7 @@
 	)
 
 /obj/structure/closet/secure_closet/bodyguard
-	name = "\improper corporate protection locker"
+	name = "\improper foreign protection locker"
 	req_access = list(access_sec_guard)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/corporate/bodyguard
 
@@ -73,7 +73,7 @@
 	)
 
 /obj/structure/closet/secure_closet/representative
-	name = "\improper Sol Central Government representative's locker"
+	name = "\improper Human Resources Official's locker"
 	req_access = list(access_representative)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/sol/rep
 

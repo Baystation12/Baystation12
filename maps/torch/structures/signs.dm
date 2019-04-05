@@ -1,24 +1,24 @@
 /obj/structure/sign/dedicationplaque
-	name = "\improper SEV Torch dedication plaque"
+	name = "\improper TRCV Sandros dedication plaque"
 	icon_state = "lightplaque"
 
 /obj/structure/sign/dedicationplaque/Initialize()
 	. = ..()
-	desc = "S.E.V. Torch - Mako Class - Sol Expeditionary Corps Registry 95519 - Shiva Fleet Yards, Mars - First Vessel To Bear The Name - Launched [game_year-5] - Sol Central Government - 'Never was anything great achieved without danger.'"
+	desc = "T.R.C.V. Sandros - Yammato Class - Terran Defence Force Registry 19512 - Hidekio Prefecture , Earth - First Vessel To Bear The Name - Launched [game_year-37] - Terran Amalgamated Republics - 'We walk into darkness, fear, and death. But remember,when death is closing fast. It's when you try your hardest, for the darkness will not last.'"
 
 /obj/structure/sign/ecplaque
-	name = "\improper Expeditionary Directives"
-	desc = "A plaque with Expeditionary Corps logo etched in it."
+	name = "\improper Sandros Mission Directives"
+	desc = "A plaque with the Terran Crest etched in it."
 	icon = 'maps/torch/icons/obj/solgov-decals.dmi'
 	icon_state = "ecplaque"
 	var/directives = {"<hr><center>
-		1. <b>Exploring the unknown is your Primary Mission</b><br>
+		1. <b>Settlement Colonization is your primary directive.</b><br>
 
-		You are to look for land and resources that can be used by Humanity to advance and prosper. Explore. Document. Explain. Knowledge is the most valuable resource.<br>
+		You are to look for a suitable location, particularly one that can sustain human life if at all possible with a minimal of terraforming, and colonize it to report back to Terra.<br>
 
-		2. <b>Every member of the Expeditionary Corps is an explorer</b><br>
+		2. <b>Every Man, Woman, Soldier, or Child aboard is a colonist.</b><br>
 
-		Some are Explorers by rank or position, but everyone has to be one when duty calls. You should always expect being assigned to an expedition if needed. You have already volunteered when you signed up.<br>
+		Some are Colonists by rank, but everyone has to be one when you find home. It takes all hands on deck to bring us to a location we can thrive in. You're responsible for your future.<br>
 
 		3. <b>Danger is a part of the mission - avoid, not run away</b> <br>
 
@@ -27,7 +27,7 @@
 
 /obj/structure/sign/ecplaque/examine()
 	..()
-	to_chat(usr, "The founding principles of EC are written there: <A href='?src=\ref[src];show_info=1'>Expeditionary Directives</A>")
+	to_chat(usr, "The founding principles of Sandros Mission are written there: <A href='?src=\ref[src];show_info=1'>Sandros Mission Directives</A>")
 
 /obj/structure/sign/ecplaque/CanUseTopic()
 	return STATUS_INTERACTIVE

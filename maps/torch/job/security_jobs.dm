@@ -34,7 +34,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/detective
-	title = "Forensic Technician"
+	title = "NCIS Agent"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
