@@ -6,7 +6,7 @@
 /obj/machinery/mac_cannon
 	name = "MAC Component"
 	desc = "A component for a MAC."
-	icon = 'code/modules/halo/machinery/mac_cannon.dmi'
+	icon = 'code/modules/halo/overmap/weapons/mac_cannon.dmi'
 	icon_state = "mac_connector"
 	density = 1
 	anchored = 1
@@ -16,7 +16,7 @@
 	name = "ammunition loading console"
 	desc = "A console used for the management of loading ammunition"
 	icon_state = "mac_ammo_loader"
-	var/load_sound = 'code/modules/halo/machinery/mac_gun_load.ogg'
+	var/load_sound = 'code/modules/halo/overmap/weapons/mac_gun_load.ogg'
 	var/load_delay = 7 SECONDS //This should ideally be the same length as the loading sound clip.
 	var/ammo_cap = BASE_AMMO_LIMIT
 	var/list/linked_consoles = list()

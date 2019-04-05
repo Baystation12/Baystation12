@@ -8,7 +8,7 @@
 /obj/machinery/Energy_projector
 	name = "An Energy projector component."
 	desc = "A component for an Energy projector."
-	icon = 'code/modules/halo/machinery/plasma_cannon.dmi'
+	icon = 'code/modules/halo/overmap/weapons/plasma_cannon.dmi'
 	icon_state = ""
 	density = 1
 	anchored = 1
@@ -17,7 +17,7 @@
 /obj/machinery/Energy_projector/cannon
 	name = "Plasma projector"
 	desc = "A plasma cannon capable of launching powerful plasma beams"
-	icon = 'code/modules/halo/machinery/plasma_cannon.dmi'
+	icon = 'code/modules/halo/overmap/weapons/plasma_cannon.dmi'
 	icon_state = "lrport"
 
 /obj/machinery/Energy_projector/energy_loader
@@ -47,7 +47,7 @@
 		return
 	visible_message("[user] activates the projector's loading mechanism.")
 	loading = 1
-	playsound(loc, 'code/modules/halo/machinery/mac_gun_load.ogg', 100,1, 255)
+	playsound(loc, 'code/modules/halo/overmap/weapons/mac_gun_load.ogg', 100,1, 255)
 	spawn(140) //Loading sound take 70 seconds to complete
 		var/obj/new_round = new /obj/overmap_weapon_ammo/Projector_laser
 		contents += new_round
@@ -172,7 +172,7 @@
 /obj/item/projectile/overmap/beam
 	name = "Super laser"
 	desc = "An incredibly hot beam of pure light"
-	icon = 'code/modules/halo/machinery/pulse_turret_tracers.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
 	icon_state = "pulse_mega_proj"
 	ship_damage_projectile = /obj/item/projectile/projector_laser_damage_proj
 	step_delay = 0.0 SECONDS
@@ -208,13 +208,13 @@
 	hit.glassed = 1
 
 /obj/effect/projectile/projector_laser_proj
-	icon = 'code/modules/halo/machinery/pulse_turret_tracers.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
 	icon_state = "pulse_mega_proj"
 
 /obj/item/projectile/projector_laser_damage_proj
 	name = "laser"
 	desc = "An incredibly hot beam of pure light"
-	icon = 'code/modules/halo/machinery/pulse_turret.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret.dmi'
 	icon_state = ""
 	alpha = 0
 	damage = 900

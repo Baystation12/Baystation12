@@ -2,7 +2,7 @@
 /obj/item/projectile/overmap/flood_pod
 	name = "Spores"
 	desc = "A fleshy pod surrounded by spores."
-	icon = 'code/modules/halo/overmap/overmap_projectiles/flood_overmap_proj.dmi'
+	icon = 'code/modules/halo/overmap/weapons/flood/flood_overmap_proj.dmi'
 	icon_state = "spores"
 
 	ship_damage_projectile = /obj/item/projectile/flood_pod_onmap

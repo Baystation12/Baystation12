@@ -46,7 +46,7 @@
 /obj/item/projectile/missile_damage_proj
 	name = "missile"
 	desc = "An explosive warhead on the end of a guided thruster."
-	icon = 'code/modules/halo/machinery/deck_missile_pod.dmi'
+	icon = 'code/modules/halo/overmap/weapons/deck_missile_pod.dmi'
 	icon_state = "missile"
 	damage = 0 //It's a missile, it has no innate damage.
 

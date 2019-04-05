@@ -8,7 +8,7 @@
 /obj/overmap_weapon_ammo/mac
 	name = "MAC Slug"
 	desc = "A tungsten slug designed to be accelerated by a MAC"
-	icon = 'code/modules/halo/machinery/mac_ammo.dmi'
+	icon = 'code/modules/halo/overmap/weapons/mac_ammo.dmi'
 	icon_state = "slug"
 
 /obj/overmap_weapon_ammo/mac/Move()
@@ -21,7 +21,7 @@
 /obj/overmap_weapon_ammo/Projector_laser
 	name = "Projector laser"
 	desc = "A powerful beam of plasma used for extraordinary destruction"
-	icon = 'code/modules/halo/machinery/mac_ammo.dmi'
+	icon = 'code/modules/halo/overmap/weapons/mac_ammo.dmi'
 	icon_state = "slug"
 
 /obj/overmap_weapon_ammo/mac/Move()

@@ -44,13 +44,13 @@
 /obj/item/projectile/overmap/pulse_laser/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 
 /obj/effect/projectile/pulse_laser_proj
-	icon = 'code/modules/halo/machinery/pulse_turret_tracers.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
 	icon_state = "pulse_proj"
 
 /obj/item/projectile/pulse_laser_damage_proj
 	name = "laser"
 	desc = "An incredibly hot beam of pure light"
-	icon = 'code/modules/halo/machinery/pulse_turret.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret.dmi'
 	icon_state = ""
 	alpha = 0
 	damage = 300
@@ -81,6 +81,6 @@
 	. = ..()
 
 /obj/effect/projectile/pulse_laser_dam_proj
-	icon = 'code/modules/halo/machinery/pulse_turret_tracers.dmi'
+	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
 	icon_state = "pulse_dam_proj"
 

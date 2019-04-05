@@ -3,7 +3,7 @@
 
 /obj/item/weapon/laser_designator
 	name = "Laser Designator"
-	icon = 'code/modules/halo/machinery/laser_designator.dmi'
+	icon = 'code/modules/halo/overmap/weapons/laser_designator.dmi'
 	icon_state = "designator"
 	w_class = ITEM_SIZE_SMALL
 	var/obj/creator
