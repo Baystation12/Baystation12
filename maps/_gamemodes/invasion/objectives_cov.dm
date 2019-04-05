@@ -6,6 +6,7 @@
 	explanation_text = "The most skilled warriors lead the fight. Their loss is a terrible setback to the Great Journey."
 	lose_points = 50
 	find_specific_target = 1
+	slipspace_affected = 1
 
 /datum/objective/protect/protect_cov_leader/find_target_specific(var/datum/mind/check_mind)
 	if(check_mind)
@@ -26,10 +27,18 @@
 	if(explanation_text == "Free Objective")
 		explanation_text  = "Protect your shipmaster."
 
+/datum/objective/protect/protect_cov_leader/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+	return ..()
+
 /datum/objective/destroy_unsc_ship
 	short_text = "Destroy the UNSC warship"
 	explanation_text = "The human weapons are crude but occasionally effective. Eliminate the warship in the area."
 	win_points = 100
+	slipspace_affected = 1
 
 /datum/objective/destroy_unsc_ship/check_completion()
 	var/datum/game_mode/invasion/game_mode = ticker.mode
@@ -42,11 +51,17 @@
 	short_text = "Protect Covenant ship"
 	explanation_text = "Your ship is your only route back to Covenant space. Do not allow it to be destroyed."
 	lose_points = 100
+	slipspace_affected = 1
 
 /datum/objective/protect_cov_ship/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
 	var/datum/game_mode/invasion/game_mode = ticker.mode
 	if(istype(game_mode))
-		if(game_mode.cov_ship)
+		if(game_mode.cov_ship && game_mode.cov_ship.loc)
 			return 1
 	return 0
 
@@ -55,8 +70,14 @@
 	var/ai_stolen = 0
 	short_text = "Capture human AI"
 	explanation_text = "These humans store tactical and navigational data in their intelligent constructs. What a prize!"
+	slipspace_affected = 1
 
 /datum/objective/steal_ai/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
 	var/datum/game_mode/invasion/game_mode = ticker.mode
 	ai_stolen = 0
 	if(istype(game_mode))
@@ -76,8 +97,14 @@
 	explanation_text = "The humans are hiding a Forerunner artifact somewhere in this system. Locate it and bring it to High Charity."
 	var/artifacts_recovered = 0
 	var/points_per_artifact = 200
+	slipspace_affected = 1
 
 /datum/objective/retrieve_artifact/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
 	var/datum/game_mode/invasion/game_mode = ticker.mode
 	if(istype(game_mode))
 		for(var/area/area in game_mode.covenant_ship_areas)
@@ -92,11 +119,17 @@
 	return points_per_artifact
 
 /datum/objective/steal_nav_data
-	short_text = "Steal navigation datachips from the humans."
+	short_text = "Steal navigation datachips from the humans"
 	explanation_text = "We must locate the hideout of these humans! Retrieve as many nav data chips you can for examination."
 	var/points_per_nav = 30
+	slipspace_affected = 1
 
 /datum/objective/steal_nav_data/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
 	var/list/cov_ship_areas = list()
 	win_points = 0
 	for(var/area/area in cov_ship_areas)
@@ -117,9 +150,10 @@
 	return points_per_nav * 4
 
 /datum/objective/glass_colony
-	short_text = "Glass the human colony."
+	short_text = "Glass the human colony"
 	explanation_text = "These humans cannot be allowed to live. The surface of their worlds must burn until they are glass!"
 	win_points = 100
+	slipspace_affected = 1
 
 /datum/objective/glass_colony/check_completion()
 	var/datum/game_mode/invasion/game_mode = ticker.mode

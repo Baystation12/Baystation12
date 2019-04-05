@@ -8,9 +8,14 @@ GLOBAL_LIST_EMPTY(covenant_base_spawns)
 /datum/spawnpoint/cov_base
 	display_name = "Covenant Base Spawns"
 	restrict_job_type = list(\
+		/datum/job/covenant/skirmminor,\
+		/datum/job/covenant/skirmmajor,\
+		/datum/job/covenant/skirmmurmillo,\
+		/datum/job/covenant/skirmcommando,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_ultra,\
+		/datum/job/covenant/sangheili_shipmaster,\
 		/datum/job/covenant/kigyarminor,\
 		/datum/job/covenant/kigyarmajor,
 		/datum/job/covenant/kigyarcorvette/captain,\

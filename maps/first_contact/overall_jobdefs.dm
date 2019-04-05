@@ -65,13 +65,7 @@
 		"Research Facility Spawn",\
 		"Research Facility Director Spawn",\
 		"Research Facility Security Spawn",\
-		"Listening Post Spawn",\
-		"Listening Post Commander Spawn",\
-		"Depot Guard Spawn",\
-		"UNSC Aegis Ship Crew Spawn",\
-		"UNSC Aegis ODST Spawn",\
-		"UNSC Aegis ODST Officer Spawn",\
-		"AI")
+		"Depot Guard Spawn")
 
 	default_spawn = DEFAULT_SPAWNPOINT_ID
 

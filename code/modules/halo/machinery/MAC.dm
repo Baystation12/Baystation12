@@ -247,7 +247,8 @@
 		play_fire_sound()
 		var/obj/effect/overmap/targ_overmap = map_sectors["target.z"]
 		play_fire_sound(targ_overmap,target_turf)
-		explosion(target_turf,4,5,6,20)
+		explosion(target_turf,4,5,6,20, adminlog = 0)
+		targ_overmap.adminwarn_attack()
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attackby(var/obj/item/weapon/W, var/mob/user)
 	var/obj/item/weapon/laser_designator/designator = W
@@ -258,7 +259,7 @@
 //MAC OVERMAP PROJECTILE//
 /obj/item/projectile/overmap/mac
 	name = "MAC Slug"
-	step_delay = 0.5 SECONDS
+	step_delay = 0.5
 	ship_damage_projectile = /obj/item/projectile/mac_round
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/mac_cannon_impact.wav'
 
@@ -266,6 +267,7 @@
 /obj/item/projectile/mac_round
 	name = "MAC Slug"
 	penetrating = 2
+	var/warned = 0
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
@@ -274,7 +276,11 @@
 		increase_from_damage = (increase_from_damage-2)/4
 	else
 		increase_from_damage = 0
-	explosion(impacted,3 + increase_from_damage,5 + increase_from_damage,7 + increase_from_damage,10 + increase_from_damage)
+	explosion(impacted,3 + increase_from_damage,5 + increase_from_damage,7 + increase_from_damage,10 + increase_from_damage, adminlog = 0)
+	if(!warned)
+		warned = 1
+		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
+		S.adminwarn_attack()
 
 #undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE

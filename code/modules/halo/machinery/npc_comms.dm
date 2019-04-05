@@ -16,7 +16,7 @@
 	hitscan = 1
 	var/authority_level = 0
 
-/obj/item/projectile/overmap/npc_comms_projectile/New(var/obj/spawner)
+/obj/item/projectile/overmap/npc_comms_projectile/New(var/spawnloc,var/obj/spawner)
 	. = ..()
 	var/obj/machinery/overmap_weapon_console/npc_comms_console/console = spawner
 	if(istype(console))
