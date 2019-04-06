@@ -157,7 +157,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/revive_nearby_combatforms()
 	for(var/mob/living/simple_animal/hostile/flood/combat_form/floodform in view(2,src))
-		if(floodform.corpse_pulped == 1)
+		if(floodform.health > 0 || floodform.corpse_pulped == 1)
 			continue
 		var/mob/living/simple_animal/hostile/flood/combat_form/newform = new floodform.type (floodform.loc)
 		if(floodform.ckey || floodform.client)
@@ -354,6 +354,10 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		contents -= our_gun
 		ranged = 0
 
+/mob/living/simple_animal/hostile/flood/combat_form/proc/human_in_sight()
+	for(var/mob/living/carbon/human/h in view(7,src))
+		return 1
+
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
 	. = ..()
@@ -364,7 +368,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return
 	if(ckey || client)
 		return
-	if(locate(/mob/living/carbon/human) in view(1,src) && isnull(our_infestor))
+	if(human_in_sight() && isnull(our_infestor))
 		spawn_infestor()
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
