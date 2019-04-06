@@ -472,6 +472,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/hand_labeler
 	category = "General"
 
+/datum/autolathe/recipe/machete
+	name = "fabricated machete"
+	path = /obj/item/weapon/material/hatchet/machete/steel
+	category = "Arms and Ammunition"
+	resources = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 2500)
+
 /datum/autolathe/recipe/flamethrower
 	name = "flamethrower"
 	path = /obj/item/weapon/flamethrower/full
