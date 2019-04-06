@@ -86,8 +86,8 @@
 
 /datum/job/officer
 	title = "Master at Arms"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the Chief of Security"
 	economic_power = 4
 	minimal_player_age = 7
