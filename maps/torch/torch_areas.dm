@@ -938,11 +938,6 @@
 	icon_state = "xeno_lab"
 	req_access = list() // This is a separate vestibule thing, needs low access.
 
-/area/rnd/checkpoint
-	name = "\improper Research Security Checkpoint"
-	icon_state = "checkpoint1"
-	req_access = list(list(access_research, access_nanotrasen, access_security))
-
 // Crew areas
 /area/crew_quarters/bar
 	name = "\improper Bar"
@@ -1056,6 +1051,10 @@
 
 /area/security/opscheck
 	name = "\improper First Deck Security Checkpoint"
+	icon_state = "checkpoint"
+
+/area/security/oldopscheck
+	name = "\improper Decommissioned First Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
 /area/security/habcheck
