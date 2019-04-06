@@ -7,9 +7,9 @@ SUBSYSTEM_DEF(ticker)
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
 	var/pregame_timeleft = 3 MINUTES
-	var/start_ASAP = FALSE          //the game will start as soon as possible, bypassing all pre-game nonsense
+	var/start_ASAP = TRUE          //the game will start as soon as possible, bypassing all pre-game nonsense
 	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(config_tag = number of votes).
-	var/bypass_gamemode_vote = 0    //Intended for use with admin tools. Will avoid voting and ignore any results.
+	var/bypass_gamemode_vote = 1    //Intended for use with admin tools. Will avoid voting and ignore any results.
 
 	var/master_mode = "extended"    //The underlying game mode (so "secret" or the voted mode). Saved to default back to previous round's mode in case the vote failed. This is a config_tag.
 	var/datum/game_mode/mode        //The actual gamemode, if selected.

@@ -141,37 +141,5 @@
 	name = "fuel processor"
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "motor"
-	dead_icon = "motor_broken"
-
-/obj/item/organ/internal/stomach/fuel_processor/Process()
-	/mob/living/carbon/human/prosthetic/M = loc
-	if(!istype(M) || !M.cell || M.cell.fully_charged() || !contents.len)
-		return
-
-	var/generating_power
-	var/using_item
-
-	for(var/fuel_item in contents)
-		var/atom/A = fuel_reagent
-		if(type(A) in M.allowed_fuel)
-			generating_power = base_power_generation
-			using_item = A
-		else 
-			for(var/fuel_type in fuel_types)
-				if(istype(A, fuel_type))
-					generating_power = fuel_types[fuel_type] * base_power_generation
-					using_item = A
-					break
-		if(using_item)
-			break
-
-	if(istype(using_item, /obj/item/stack))
-		var/obj/item/stack/stack = using_item
-		stack.use(1)
-	else if(using_item)
-		qdel(using_item)
-
-	if(generating_power)
-		M.cell.give(generating_power * CELLRATE)
 
 #undef PUKE_ACTION_NAME

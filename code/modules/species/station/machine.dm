@@ -135,7 +135,7 @@
 		)
 	)
 
-	allowed_fuel = list(/datum/reagent/fuel/,
+	var/list/allowed_fuel = list(/datum/reagent/fuel/,
 						/datum/reagent/ethanol,
 						/datum/reagent/hydrazine,
 						/datum/reagent/nutriment)

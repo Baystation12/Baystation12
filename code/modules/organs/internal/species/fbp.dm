@@ -29,6 +29,12 @@
 		return 0
 	return round(cell.charge*(1 - damage/max_damage))
 
+/obj/item/organ/internal/cell/proc/give_power(amount)
+	if(!isnull(get_charge()))
+		cell.give(amount * CELLRATE)
+		return 1
+	return 0
+
 /obj/item/organ/internal/cell/proc/check_charge(var/amount)
 	return get_charge() >= amount
 

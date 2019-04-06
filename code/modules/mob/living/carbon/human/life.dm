@@ -225,6 +225,8 @@
 
 			return
 
+		var/obj/item/organ/internal/mmi_holder/M = locate() in internal_organs
+
 		var/damage = 0
 		radiation -= 1 * RADIATION_SPEED_COEFFICIENT
 		if(prob(25))
