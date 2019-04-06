@@ -75,8 +75,8 @@
 	title = "Prospector"
 	department = "Supply"
 	department_flag = SUP
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Deck Chief, the Corporate Liaison and the Executive Officer"
 	economic_power = 7
 	ideal_character_age = 25
