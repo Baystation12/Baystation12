@@ -215,8 +215,8 @@
 					take_damage(1)
 
 		//gradually heal brain damage
-		if(last_damage_time + 30 SECONDS < world.time)
-			damage = max(min_bruised_damage, damage  - 1)
+		/*if(last_damage_time + 30 SECONDS < world.time)
+			damage = max(min_bruised_damage, damage  - 1)*/
 	..()
 
 /obj/item/organ/internal/brain/take_damage(amount, var/silent=0)
