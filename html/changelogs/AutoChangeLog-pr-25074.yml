@@ -1,0 +1,5 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - tweak: "Increased explorer job slots from 3 to 5."
+  - tweak: "Lowered prospector job slots from 4 to 2."
