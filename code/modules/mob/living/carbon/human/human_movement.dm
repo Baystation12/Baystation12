@@ -6,10 +6,10 @@
 
 	tally += species.handle_movement_delay_special(src)
 
-	if (istype(loc, /turf/space)) // It's hard to be slowed down in space by... anything
+	if (istype(loc, /turf/space))
 		if(skill_check(SKILL_EVA, SKILL_PROF))
-			return -2
-		return -1
+			tally -= 2
+		tally -= 1
 
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if(embedded_flag || (stomach && stomach.contents.len))
