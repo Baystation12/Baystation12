@@ -113,6 +113,13 @@
 	id_tag = "xil_dock_outer";
 	locked = 1
 	},
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1289;
+	master_tag = "xil_dock";
+	pixel_x = -32;
+	pixel_y = 6
+	},
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/dock)
 "aq" = (
@@ -170,15 +177,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/r_wall,
 /area/ship/skrellscoutship/dock)
-"az" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1289;
-	master_tag = "xil_dock";
-	pixel_y = -24
-	},
-/turf/space,
-/area/space)
 "aA" = (
 /obj/machinery/alarm{
 	req_access = list("ACCESS_SKRELLSCOUT");
@@ -1525,15 +1523,6 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock/alt)
-"dh" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1290;
-	master_tag = "xil_air";
-	pixel_y = 24
-	},
-/turf/space,
-/area/space)
 "di" = (
 /obj/effect/landmark/map_data{
 	height = 2
@@ -1578,6 +1567,13 @@
 	name = "Airlock Blast Doors";
 	pixel_x = 32;
 	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1290;
+	master_tag = "xil_air";
+	pixel_x = -32;
+	pixel_y = -6
 	},
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/dock/alt)
@@ -8684,7 +8680,7 @@ aa
 aa
 aa
 aa
-az
+aa
 vb
 cA
 ay
@@ -8836,7 +8832,7 @@ cW
 bR
 bR
 bR
-dh
+aa
 aa
 aa
 aa
