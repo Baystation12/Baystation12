@@ -69,7 +69,7 @@ var/list/mob_hat_cache = list()
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
-
+	default_language = all_languages["Drone Talk"]
 	// NO BRAIN.
 	mmi = null
 

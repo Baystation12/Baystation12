@@ -18,8 +18,7 @@
 		"Basic" = "Engineering",
 		"Antique" = "engineerrobot",
 		"Landmate" = "landmate",
-		"Landmate - Treaded" = "engiborg+tread",
-		"Doot" = "eyebot-engineering"
+		"Landmate - Treaded" = "engiborg+tread"
 	)
 	no_slip = 1
 	equipment = list(
@@ -50,8 +49,8 @@
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
-		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/material/cyborg/glass,
+		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel
 	)

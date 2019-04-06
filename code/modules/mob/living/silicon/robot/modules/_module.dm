@@ -38,6 +38,7 @@
 
 	// Gear lists/types.
 	var/obj/item/emag
+	// Please note that due to how locate() works, equipments that are subtypes of other equipment need to be placed after their closest parent
 	var/list/equipment = list()
 	var/list/synths = list()
 

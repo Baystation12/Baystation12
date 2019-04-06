@@ -58,7 +58,7 @@
 //Material walls
 
 /turf/simulated/wall/r_wall/rglass_wall/New(var/newloc)
-	..(newloc, MATERIAL_REINFORCED_GLASS, MATERIAL_STEEL)
+	..(newloc, MATERIAL_GLASS, MATERIAL_STEEL)
 	icon_state = "r_generic"
 
 /turf/simulated/wall/iron/New(var/newloc)
