@@ -307,10 +307,9 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 			ping("Unable to access account: incorrect credentials.")
 			return 0
 
-	if(total_price > customer_account.money)
-		ping("Insufficient funds in account.")
-		return 0
-	else
-		var/datum/transaction/T = new("Computer Manufacturer (via [src.name])", "Purchase of [(devtype == 1) ? "laptop computer" : "tablet microcomputer"].", -total_price, src.name)
-		customer_account.do_transaction(T)
+	var/datum/transaction/singular/T = new(FALSE, customer_account, "Computer Manufacturer (via [src.name])", total_price, "Purchase of [(devtype == 1) ? "laptop computer" : "tablet microcomputer"].")
+	if(T.perform())
 		return 1
+	else
+		ping("Transaction failed! Please try again.")
+		return 0
