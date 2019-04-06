@@ -213,4 +213,6 @@
 		dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
 		user << browse(dat,"window=plant_analyzer")
 
-	return
+	if(grown_seed.mysterious && !grown_seed.scanned && !(get_z(src) in GLOB.using_map.station_levels))
+		grown_seed.scanned = TRUE
+		SSstatistics.add_field("xenoplants_scanned", 1)

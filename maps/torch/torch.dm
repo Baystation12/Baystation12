@@ -23,7 +23,7 @@
 	#include "datums/shackle_law_sets.dm"
 	#include "datums/supplypacks/security.dm"
 	#include "datums/supplypacks/science.dm"
-
+	#include "datums/department_exploration.dm"
 	#include "items/cards_ids.dm"
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
