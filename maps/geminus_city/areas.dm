@@ -34,9 +34,9 @@
 	name = "\improper Geminus City - level 1 exterior"
 	icon_state = "red"
 
-/area/planets/Geminus/outdoor/level2
+/*/area/planets/Geminus/outdoor/level2
 	name = "\improper Geminus City - level 2 exterior"
-	icon_state = "red"
+	icon_state = "red"*/
 
 /area/planets/Geminus/outdoor/central
 	name = "\improper Geminus City - Central"
@@ -103,17 +103,17 @@
 	name = "\improper Southwest Appartment Level 1"
 	icon_state = "courtroom"
 
-/area/planets/Geminus/indoor/living2nw
+/*/area/planets/Geminus/indoor/living2nw
 	name = "\improper Northwest Appartment Level 2"
-	icon_state = "courtroom"
+	icon_state = "courtroom"*/
 
-/area/planets/Geminus/indoor/living2ne
+/*/area/planets/Geminus/indoor/living2ne
 	name = "\improper Northeast Appartment Level 2"
-	icon_state = "courtroom"
+	icon_state = "courtroom"*/
 
-/area/planets/Geminus/indoor/living2sw
+/*/area/planets/Geminus/indoor/living2sw
 	name = "\improper Southwest Appartment Level 2"
-	icon_state = "courtroom"
+	icon_state = "courtroom"*/
 
 /area/planets/Geminus/indoor/labs1
 	name = "\improper Research and development level 1"
