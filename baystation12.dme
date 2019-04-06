@@ -1638,6 +1638,7 @@
 #include "code\modules\events\grid_check.dm"
 #include "code\modules\events\infestation.dm"
 #include "code\modules\events\ion_storm.dm"
+#include "code\modules\events\mail.dm"
 #include "code\modules\events\maint_drones.dm"
 #include "code\modules\events\meteors.dm"
 #include "code\modules\events\money_hacker.dm"
