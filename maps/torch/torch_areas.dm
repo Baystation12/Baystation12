@@ -1059,7 +1059,7 @@
 	icon_state = "checkpoint"
 
 /area/security/oldopscheck
-	name = "\improper Decomissioned First Deck Security Checkpoint"
+	name = "\improper Decommissioned First Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
 /area/security/habcheck

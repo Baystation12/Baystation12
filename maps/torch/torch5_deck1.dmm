@@ -8294,7 +8294,7 @@
 /area/teleporter/firstdeck)
 "aAR" = (
 /obj/machinery/door/airlock/security{
-	name = "Security Checkpoint";
+	name = "Decommissioned Security Checkpoint";
 	secured_wires = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -20364,7 +20364,7 @@
 	dir = 4;
 	icon_state = "shutter0";
 	id = "concheckwindow";
-	name = "Research Checkpoint Shutters";
+	name = "Deck One Checkpoint Shutters";
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced,
@@ -20642,7 +20642,7 @@
 	dir = 4;
 	icon_state = "shutter0";
 	id = "concheckwindow";
-	name = "Research Checkpoint Shutters";
+	name = "Deck One Checkpoint Shutters";
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced,
@@ -20900,10 +20900,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "ijh" = (
-/obj/machinery/door/airlock/maintenance{
-	name = "Security Checkpoint Maintenance"
-	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/security{
+	name = "Decommissioned Security Checkpoint";
+	secured_wires = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/oldopscheck)
 "ikb" = (
@@ -20951,27 +20952,27 @@
 /area/thruster/d1port)
 "ilb" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/door/window/brigdoor/eastleft{
-	dir = 4;
-	name = "Research Checkpoint Desk"
-	},
-/obj/machinery/door/window/brigdoor/westright{
-	dir = 8;
-	name = "Research Checkpoint Desk"
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
 	id = "concheckwindow";
-	name = "Research Checkpoint Shutters";
+	name = "Deck One Checkpoint Shutters";
 	opacity = 0
 	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
+	},
+/obj/machinery/door/window/southleft{
+	dir = 4;
+	name = "Security Checkpoint"
+	},
+/obj/machinery/door/window/brigdoor/northleft{
+	dir = 8;
+	name = "Security Checkpoint"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
@@ -23809,6 +23810,9 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "lwe" = (
@@ -23837,6 +23841,9 @@
 	},
 /obj/item/device/taperecorder{
 	pixel_y = 0
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 10
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
@@ -24495,14 +24502,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
-"mpq" = (
-/obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (WEST)";
-	icon_state = "corner_white";
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/firstdeck/aft)
 "mpy" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/aftstarboard)
@@ -26623,10 +26622,6 @@
 /area/turbolift/robotics_lift)
 "oOb" = (
 /obj/machinery/disposal,
-/obj/effect/floor_decal/corner/red{
-	icon_state = "corner_white";
-	dir = 9
-	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/light{
 	dir = 8
@@ -26648,6 +26643,7 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
+/obj/effect/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "oPb" = (
@@ -28634,9 +28630,6 @@
 	dir = 8
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/security/research{
-	name = "Checkpoint"
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -28644,6 +28637,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/security{
+	name = "Security Checkpoint";
+	secured_wires = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "rsV" = (
@@ -28727,10 +28724,6 @@
 /obj/effect/floor_decal/corner/research/half,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
-"rvY" = (
-/obj/effect/floor_decal/corner/research,
-/turf/simulated/floor/tiled,
-/area/hallway/primary/firstdeck/aft)
 "rwb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -53356,7 +53349,7 @@ ovb
 aju
 dMe
 hnN
-mpq
+tiz
 htb
 ljb
 hVb
@@ -53962,7 +53955,7 @@ oxb
 aju
 axw
 hnN
-rvY
+tiz
 htb
 lkb
 nLb
