@@ -1,7 +1,0 @@
-author: "Higgin"
-delete-after: True
-changes: 
-  - tweak: "Prevents material weapons from taking damage on parry except against other material weapons."
-  - tweak: "Increases material weapon health."
-  - tweak: "Reduces crowbar and toolbox accuracy penalties."
-  - rscadd: "Adds an inferior, expensive, steel machete to the autolathe."
