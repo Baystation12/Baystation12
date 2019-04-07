@@ -92,11 +92,11 @@
 	containertype = /obj/structure/closet/crate/large
 	containername = "\improper Wheelchair crate"
 
-/decl/hierarchy/supply_pack/medical/bodybag
+/decl/hierarchy/supply_pack/medical/rescuebag
 	name = "Equipment - Rescue bags"
 	contains = list(/obj/item/bodybag/rescue = 3)
 	cost = 30
-	containername = "body bag crate"
+	containername = "\improper Rescue bag crate"
 
 /decl/hierarchy/supply_pack/medical/medicalextragear
 	name = "Gear - Medical surplus equipment"
