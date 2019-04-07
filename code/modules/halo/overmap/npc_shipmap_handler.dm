@@ -10,7 +10,6 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 
 /datum/npc_ship_map_handler/New()
 	. = ..()
-	max_z_cached = world.maxz
 
 /datum/npc_ship_map_handler/proc/free_map(var/z_to_free)
 	if(z_to_free in free_ship_map_zs)
