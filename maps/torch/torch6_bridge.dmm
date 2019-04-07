@@ -481,7 +481,8 @@
 /area/hallway/primary/bridge/aft)
 "aY" = (
 /obj/structure/closet/secure_closet/CO,
-/turf/simulated/floor/wood/walnut,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "aZ" = (
 /obj/item/modular_computer/console/preset/civilian,
@@ -562,8 +563,8 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/structure/table/woodentable_reinforced/walnut,
-/turf/simulated/floor/wood/walnut,
+/obj/structure/table/woodentable/mahogany,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "bg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -931,7 +932,7 @@
 /area/crew_quarters/heads/cobed)
 "cn" = (
 /obj/structure/bookcase,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "co" = (
 /turf/simulated/wall/prepainted,
@@ -1156,11 +1157,14 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "cU" = (
 /obj/structure/filingcabinet,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/heads/cobed)
+"cV" = (
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/cobed)
 "cW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1187,7 +1191,7 @@
 	pixel_x = 26;
 	pixel_y = 24
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "cX" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1560,11 +1564,13 @@
 	pixel_y = 0
 	},
 /obj/item/device/flashlight/lamp/green,
-/obj/structure/table/woodentable_reinforced/walnut,
-/turf/simulated/floor/wood/walnut,
+/obj/structure/table/woodentable/mahogany,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "dG" = (
-/turf/simulated/floor/wood/walnut,
+/obj/machinery/hologram/holopad,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "dH" = (
 /obj/structure/cable/green,
@@ -1727,6 +1733,7 @@
 /area/maintenance/bridge/forestarboard)
 "eo" = (
 /obj/machinery/disposal,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 20
@@ -1734,7 +1741,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "eq" = (
 /obj/structure/displaycase,
@@ -1892,7 +1899,7 @@
 	icon_state = "comfychair_preview";
 	dir = 8
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "eP" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -11712,9 +11719,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
-"zE" = (
-/turf/simulated/wall/mahogany,
-/area/crew_quarters/heads/cobed)
 "zQ" = (
 /obj/structure/railing/mapped{
 	dir = 4;
@@ -12208,8 +12212,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/maintenance/bridge/aftport)
 "CV" = (
-/obj/machinery/hologram/holopad,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "Db" = (
 /obj/machinery/door/airlock/hatch{
@@ -12259,7 +12262,7 @@
 	pixel_x = 26
 	},
 /obj/structure/flora/pottedplant/bamboo,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "Df" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -12801,7 +12804,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "GY" = (
 /obj/machinery/alarm{
@@ -12818,7 +12821,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "GZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -12832,7 +12835,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "Ha" = (
 /obj/machinery/door/airlock/sol{
@@ -12865,7 +12868,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "Hd" = (
 /obj/machinery/papershredder,
@@ -12880,7 +12883,7 @@
 	},
 /obj/structure/cable/green,
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "He" = (
 /obj/machinery/disposal,
@@ -12906,8 +12909,8 @@
 	pixel_y = -10
 	},
 /obj/item/device/camera,
-/obj/structure/table/woodentable_reinforced/walnut,
-/turf/simulated/floor/wood/walnut,
+/obj/structure/table/woodentable/mahogany,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "Hg" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
@@ -13756,8 +13759,8 @@
 	pixel_x = -32
 	},
 /obj/item/weapon/storage/secure/briefcase/nukedisk,
-/obj/structure/table/woodentable_reinforced/walnut,
-/turf/simulated/floor/wood/walnut,
+/obj/structure/table/woodentable/mahogany,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "Ji" = (
 /obj/random/obstruction,
@@ -13899,8 +13902,8 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/structure/table/woodentable_reinforced/walnut,
-/turf/simulated/floor/wood/walnut,
+/obj/structure/table/woodentable/mahogany,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/cobed)
 "Kf" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
@@ -14031,6 +14034,9 @@
 /obj/machinery/light/navigation,
 /turf/space,
 /area/space)
+"KW" = (
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/heads/cobed)
 "KZ" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14352,7 +14358,7 @@
 	pixel_y = 0
 	},
 /obj/random/action_figure,
-/obj/structure/table/woodentable_reinforced/walnut,
+/obj/structure/table/woodentable/mahogany,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/cobed)
 "Mj" = (
@@ -15758,9 +15764,6 @@
 	},
 /turf/space,
 /area/space)
-"UG" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/bridge/foreport)
 "UP" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -16324,9 +16327,6 @@
 /obj/structure/lattice,
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
-"Xr" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/bridge/forestarboard)
 "Xz" = (
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/heads/cobed)
@@ -24216,13 +24216,13 @@ af
 ai
 ay
 YI
+YI
+YI
+bG
 ci
 cR
-Xr
-Xr
-Xr
-Xr
-Xr
+at
+af
 af
 ad
 ad
@@ -24242,7 +24242,7 @@ aa
 ad
 ad
 tg
-UG
+tg
 ux
 vc
 oB
@@ -24421,10 +24421,10 @@ YI
 aK
 aK
 aK
-zE
-zE
-zE
-zE
+aK
+aK
+aK
+Xz
 Xz
 ed
 eM
@@ -24444,7 +24444,7 @@ Ng
 Id
 th
 Fp
-qO
+Fp
 qO
 qO
 ti
@@ -24619,11 +24619,11 @@ af
 af
 YI
 ay
-at
+YI
 aK
 GW
 bH
-zE
+cV
 aY
 dE
 Jh
@@ -24821,7 +24821,7 @@ af
 af
 YI
 ay
-bG
+YI
 aK
 Oi
 bI
@@ -25023,15 +25023,15 @@ af
 af
 YI
 ay
-Au
+YI
 aK
 aK
-zE
-zE
+aK
+cV
 GY
 dG
 CV
-dG
+KW
 Je
 Ne
 Je
@@ -25225,14 +25225,14 @@ af
 af
 YI
 ay
+YI
 aL
 bo
-Xr
-zE
+aK
 cU
 GZ
 Hc
-dG
+CV
 De
 Mi
 Oe
@@ -25427,10 +25427,10 @@ af
 af
 ak
 ay
+YI
 aL
 aj
-Xr
-zE
+aK
 cn
 cW
 Hd
@@ -25632,7 +25632,7 @@ aA
 al
 al
 bq
-co
+bq
 co
 Ha
 co

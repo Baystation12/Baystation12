@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Carp shoal map hazard now works for overmap shuttles such as the Charon, Aquila and Guppy."

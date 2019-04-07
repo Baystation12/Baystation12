@@ -1,0 +1,4 @@
+author: "Cronac"
+delete-after: True
+changes: 
+  - tweak: "Adds egg cartons as an item the biogenerator can produce."

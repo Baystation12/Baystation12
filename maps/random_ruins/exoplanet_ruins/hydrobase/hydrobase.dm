@@ -5,10 +5,6 @@
 	suffixes = list("hydrobase/hydrobase.dmm")
 	cost = 2
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
-	apc_test_exempt_areas = list(
-		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/hydrobase/station = NO_SCRUBBER
-	)
 
 // Areas //
 /area/map_template/hydrobase

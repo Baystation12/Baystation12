@@ -12,7 +12,6 @@
 	description = "An orbital virus research station."
 	suffixes = list("lar_maria/lar_maria-1.dmm", "lar_maria/lar_maria-2.dmm")
 	cost = 2
-	area_usage_test_exempted_root_areas = list(/area/lar_maria)
 
 ///////////////////////////////////custom virus for prisoners to spread
 /datum/disease2/disease/lar_maria

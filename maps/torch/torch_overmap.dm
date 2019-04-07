@@ -49,7 +49,6 @@
 	max_speed = 1/(4 SECONDS)
 	burn_delay = 2 SECONDS
 	fore_dir = NORTH
-	skill_needed = SKILL_BASIC
 
 /obj/effect/overmap/ship/landable/aquila
 	name = "Aquila"
@@ -66,7 +65,6 @@
 	burn_delay = 2 SECONDS
 	vessel_mass = 2000
 	fore_dir = SOUTH
-	skill_needed = SKILL_BASIC
 
 /obj/machinery/computer/shuttle_control/explore/aquila
 	name = "aquila control console"
