@@ -799,9 +799,6 @@
 	},
 /turf/simulated/open,
 /area/maintenance/seconddeck/central)
-"bE" = (
-/turf/simulated/wall/walnut,
-/area/vacant/chapel)
 "bF" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
@@ -1730,9 +1727,7 @@
 /area/maintenance/seconddeck/aftstarboard)
 "dN" = (
 /obj/random/junk,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken5"
-	},
+/turf/simulated/floor/plating,
 /area/vacant/chapel)
 "dO" = (
 /obj/structure/table/rack{
@@ -1741,7 +1736,7 @@
 	icon_state = "churchaltar";
 	name = "wooden altar"
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/plating,
 /area/vacant/chapel)
 "dP" = (
 /obj/structure/railing/mapped,
@@ -2155,7 +2150,7 @@
 /area/maintenance/seconddeck/forestarboard)
 "ey" = (
 /obj/item/device/flashlight/lantern,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/plating,
 /area/vacant/chapel)
 "ez" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -2467,9 +2462,7 @@
 /area/vacant/chapel)
 "fg" = (
 /obj/effect/decal/cleanable/generic,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
+/turf/simulated/floor/plating,
 /area/vacant/chapel)
 "fh" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
@@ -3146,7 +3139,7 @@
 "gO" = (
 /obj/structure/table/standard,
 /obj/item/weapon/flame/candle,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/plating,
 /area/vacant/chapel)
 "gP" = (
 /obj/structure/disposalpipe/segment,
@@ -3456,7 +3449,7 @@
 "hD" = (
 /obj/structure/table/standard,
 /obj/random/maintenance/solgov,
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/plating,
 /area/vacant/chapel)
 "hG" = (
 /obj/structure/cable/yellow{
@@ -5912,9 +5905,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
-"mT" = (
-/turf/simulated/wall/walnut,
-/area/vacant/cargo)
 "mV" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
@@ -6675,10 +6665,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
-"oV" = (
-/obj/structure/table/marble,
-/turf/simulated/floor/wood/walnut,
-/area/vacant/chapel)
 "oY" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -9962,11 +9948,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
-"wR" = (
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
-/area/vacant/chapel)
 "wS" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -14141,12 +14122,6 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/locker_room)
-"Hz" = (
-/obj/random/junk,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
-/area/vacant/chapel)
 "HB" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -15304,13 +15279,6 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/seconddeck/fore)
-"LU" = (
-/obj/structure/table/standard,
-/obj/item/weapon/flame/candle,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
-/area/vacant/chapel)
 "LY" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -16462,7 +16430,7 @@
 /obj/effect/landmark/start{
 	name = "Stowaway"
 	},
-/turf/simulated/floor/wood/walnut,
+/turf/simulated/floor/plating,
 /area/vacant/chapel)
 "Pq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -31994,11 +31962,11 @@ JX
 JX
 JX
 cH
-bE
-bE
-bE
-bE
-bE
+cH
+cH
+cH
+cH
+cH
 cH
 bI
 pA
@@ -32200,7 +32168,7 @@ ey
 ff
 fZ
 gN
-LU
+gO
 iu
 Kv
 ci
@@ -32598,7 +32566,7 @@ JX
 JX
 JX
 JX
-wR
+dq
 dq
 dr
 fg
@@ -32801,12 +32769,12 @@ JX
 JX
 Po
 dr
-Hz
-bE
+dN
+cH
 se
-bE
-bE
-bE
+cH
+cH
+cH
 cH
 bI
 ci
@@ -33003,8 +32971,8 @@ JX
 JX
 cG
 ds
-oV
-bE
+cG
+cH
 fi
 gb
 dP
@@ -33203,10 +33171,10 @@ JX
 JX
 JX
 JX
-bE
-bE
-bE
-bE
+cH
+cH
+cH
+cH
 fi
 gc
 gP
@@ -35253,11 +35221,11 @@ yk
 zd
 nc
 AF
-mT
+Bk
 BO
 Cq
 CU
-mT
+Bk
 pi
 Wp
 Wp
@@ -35455,11 +35423,11 @@ yl
 zb
 nc
 AF
-mT
+Bk
 BP
 Cr
 CV
-mT
+Bk
 pi
 Wp
 Wp
@@ -35859,11 +35827,11 @@ yn
 qf
 nc
 AF
-mT
+Bk
 BR
 Ct
 CW
-mT
+Bk
 pi
 Wp
 fT
@@ -36065,7 +36033,7 @@ Bl
 BS
 Cu
 CX
-mT
+Bk
 pi
 Wp
 fT
@@ -36263,11 +36231,11 @@ yo
 ze
 xs
 AF
-mT
+Bk
 BT
 Cr
 CY
-mT
+Bk
 pi
 Wp
 ag
@@ -36667,10 +36635,10 @@ yq
 zg
 zN
 Bn
-mT
+Bk
 BU
 Cr
-mT
+Bk
 pi
 pi
 Wp
@@ -36869,10 +36837,10 @@ xs
 xs
 xs
 Fn
-mT
+Bk
 BV
 Cr
-mT
+Bk
 Ds
 Wp
 Wp
@@ -37071,7 +37039,7 @@ yr
 zh
 zO
 Fn
-mT
+Bk
 BW
 Cr
 Bk
@@ -37273,7 +37241,7 @@ yr
 zh
 vK
 Fn
-mT
+Bk
 BX
 Cr
 RT
@@ -37475,7 +37443,7 @@ ys
 zi
 zO
 Fn
-mT
+Bk
 BX
 Cw
 RT

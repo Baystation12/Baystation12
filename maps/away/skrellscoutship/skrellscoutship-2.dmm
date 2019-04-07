@@ -8,7 +8,7 @@
 "ae" = (
 /obj/machinery/door/firedoor/autoset,
 /obj/machinery/door/airlock/glass{
-	name = "Exercise Room"
+	name = "Recreation Area"
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/fit)
@@ -363,10 +363,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor/autoset,
 /obj/machinery/door/airlock/command{
-	name = "Helm"
+	name = "Bridge"
 	},
+/obj/machinery/door/firedoor/autoset,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/command/bridge)
 "aW" = (
@@ -450,7 +450,7 @@
 	},
 /obj/machinery/door/firedoor/autoset,
 /obj/machinery/door/airlock/glass{
-	name = "Exercise Room"
+	name = "Recreation Area"
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/fit)
@@ -488,8 +488,6 @@
 /obj/structure/table/woodentable/ebony,
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao,
 /obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine,
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/rec)
 "bl" = (
@@ -897,11 +895,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/airlock/command{
+	name = "Bridge"
+	},
 /obj/machinery/door/firedoor/autoset,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/command{
-	name = "Helm"
-	},
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/command/bridge)
 "cf" = (
@@ -915,6 +913,7 @@
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/command/bridge)
 "cg" = (
+/obj/machinery/door/airlock/engineering,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -922,9 +921,6 @@
 	pixel_y = 0
 	},
 /obj/machinery/door/firedoor/autoset,
-/obj/machinery/door/airlock/engineering{
-	name = "Engineering"
-	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/maintenance/power)
 "ch" = (
@@ -1209,15 +1205,13 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
 "cF" = (
+/obj/machinery/door/airlock/engineering,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor/autoset,
-/obj/machinery/door/airlock/engineering{
-	name = "Engineering"
-	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/maintenance/power)
 "cG" = (
@@ -1981,7 +1975,7 @@
 "Rr" = (
 /obj/machinery/door/firedoor/autoset,
 /obj/machinery/door/airlock/glass{
-	name = "Recreation Area"
+	name = "Exercise Room"
 	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/rec)

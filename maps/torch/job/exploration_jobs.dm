@@ -80,8 +80,8 @@
 	title = "Explorer"
 	department = "Exploration"
 	department_flag = EXP
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 3
+	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
 	ideal_character_age = 20

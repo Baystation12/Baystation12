@@ -457,7 +457,8 @@ var/list/turret_icons
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
-			popDown() // no valid targets, close the cover
+			spawn()
+				popDown() // no valid targets, close the cover
 
 	if(auto_repair && (health < maxhealth))
 		use_power_oneoff(20000)
@@ -561,7 +562,6 @@ var/list/turret_icons
 	update_icon()
 
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
-	set waitfor = FALSE
 	last_target = null
 	if(disabled)
 		return
