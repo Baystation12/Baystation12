@@ -1515,9 +1515,6 @@
 /obj/item/weapon/book/manual/nt_regs,
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
-"fd" = (
-/turf/simulated/wall/mahogany,
-/area/command/captainmess)
 "fh" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/up,
@@ -2693,9 +2690,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
-"iS" = (
-/turf/simulated/wall/walnut,
-/area/crew_quarters/lounge)
 "iZ" = (
 /obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3402,7 +3396,7 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/turf/simulated/wall/walnut,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/lounge)
 "lY" = (
 /obj/effect/floor_decal/corner/brown/half{
@@ -32727,11 +32721,11 @@ WI
 bo
 Yl
 Yr
-iS
-iS
-iS
-iS
-iS
+Sd
+Sd
+Sd
+Sd
+Sd
 Ra
 MZ
 Ze
@@ -32927,13 +32921,13 @@ aY
 Wf
 WI
 Sd
-iS
-iS
-iS
+Sd
+Sd
+Sd
 Nb
 Li
 fa
-iS
+Sd
 IM
 Or
 Pu
@@ -33135,7 +33129,7 @@ YD
 SP
 RY
 RY
-iS
+Sd
 PR
 Or
 Pu
@@ -33337,7 +33331,7 @@ PC
 MY
 YZ
 Ml
-iS
+Sd
 IN
 Rk
 QJ
@@ -33539,7 +33533,7 @@ Zq
 Mu
 NZ
 UD
-iS
+Sd
 Nr
 Pp
 Pk
@@ -33743,8 +33737,8 @@ Vq
 Vq
 Sd
 uw
-iS
-iS
+Sd
+Sd
 Uu
 Uu
 aa
@@ -33916,7 +33910,7 @@ WV
 MX
 MX
 MX
-fd
+Mp
 hl
 Mp
 Mp
@@ -34113,7 +34107,7 @@ ak
 aS
 bv
 Lu
-fd
+Mp
 QA
 dR
 eA
@@ -34315,7 +34309,7 @@ ak
 er
 er
 Xl
-fd
+Mp
 QA
 dS
 eB
@@ -34517,7 +34511,7 @@ ak
 rr
 er
 VR
-fd
+Mp
 Tz
 dS
 OI
@@ -34719,7 +34713,7 @@ ak
 aV
 er
 VR
-fd
+Mp
 Rq
 dS
 em
@@ -34750,11 +34744,11 @@ FB
 Rf
 Sd
 Sd
-iS
-iS
+Sd
+Sd
 Ux
 lX
-iS
+Sd
 Uu
 Uu
 aa
@@ -34921,7 +34915,7 @@ ak
 aU
 er
 VR
-fd
+Mp
 py
 KW
 RT
@@ -34951,7 +34945,7 @@ ES
 TY
 Gp
 GY
-iS
+Sd
 NX
 Kz
 rt
@@ -35153,7 +35147,7 @@ EW
 PK
 Pe
 Qt
-iS
+Sd
 YF
 zx
 Ss
@@ -35326,7 +35320,7 @@ bN
 bw
 bZ
 dU
-fd
+Mp
 OZ
 eC
 WU
@@ -35355,7 +35349,7 @@ Wh
 TY
 Gp
 Gq
-iS
+Sd
 Ib
 eq
 IT
@@ -35528,7 +35522,7 @@ bN
 bw
 bZ
 dU
-fd
+Mp
 Un
 XM
 XM
@@ -35730,8 +35724,8 @@ bN
 bw
 bZ
 dU
-fd
-fd
+Mp
+Mp
 cq
 gw
 RL
@@ -35759,7 +35753,7 @@ EZ
 TY
 Uj
 Tx
-iS
+Sd
 Id
 eq
 IT
@@ -36160,9 +36154,9 @@ Cs
 lr
 yp
 Sd
-iS
-iS
-iS
+Sd
+Sd
+Sd
 Sd
 If
 kw

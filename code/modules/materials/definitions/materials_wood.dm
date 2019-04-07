@@ -5,7 +5,7 @@
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = WOOD_COLOR_GENERIC
 	integrity = 75
-	icon_base = "wood"
+	icon_base = "solid"
 	table_icon_base = "wood"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER

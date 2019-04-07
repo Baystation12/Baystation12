@@ -179,8 +179,7 @@
 		loot = affected.implants
 	else
 		for(var/datum/wound/wound in affected.wounds)
-			if(LAZYLEN(wound.embedded_objects))
-				loot |= wound.embedded_objects
+			loot |= wound.embedded_objects
 			find_prob += 50
 
 	if (loot.len)

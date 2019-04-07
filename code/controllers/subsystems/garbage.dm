@@ -21,7 +21,6 @@ SUBSYSTEM_DEF(garbage)
 	var/list/fail_counts
 
 	var/list/items = list()         // Holds our qdel_item statistics datums
-	var/harddel_halt = FALSE        // If true, will avoid harddeleting from the final queue; will still respect HARDDEL_NOW.
 
 	//Queue
 	var/list/queues
@@ -165,6 +164,7 @@ SUBSYSTEM_DEF(garbage)
 			continue
 
 		// Something's still referring to the qdel'd object.
+		fail_counts[level]++
 		switch (level)
 			if (GC_QUEUE_CHECK)
 				#ifdef TESTING
@@ -181,11 +181,7 @@ SUBSYSTEM_DEF(garbage)
 				if(!I.failures)
 					crash_with("GC: -- \ref[D] | [type] was unable to be GC'd --")
 				I.failures++
-				fail_counts[level]++
 			if (GC_QUEUE_HARDDELETE)
-				if(harddel_halt)
-					continue
-				fail_counts[level]++
 				HardDelete(D)
 				if (MC_TICK_CHECK)
 					break
@@ -264,10 +260,6 @@ SUBSYSTEM_DEF(garbage)
 		for (var/i in 1 to SSgarbage.queues.len)
 			queues[i] |= SSgarbage.queues[i]
 
-/datum/controller/subsystem/garbage/proc/toggle_harddel_halt(new_state = FALSE)
-	if(new_state == harddel_halt)
-		return
-	harddel_halt = new_state
 
 /datum/qdel_item
 	var/name = ""

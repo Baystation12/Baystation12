@@ -56,7 +56,7 @@
 	if(!material)
 		qdel(src)
 	else
-		health = round(material.integrity/5)
+		health = round(material.integrity/10)
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)
@@ -87,9 +87,8 @@
 	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE) * 100 >= material.hardness/5)
 		check_shatter()
 
-/obj/item/weapon/material/on_parry(damage_source)
-	if(istype(damage_source, /obj/item/weapon/material))
-		check_shatter()
+/obj/item/weapon/material/on_parry()
+	check_shatter()
 
 /obj/item/weapon/material/proc/check_shatter()
 	if(!unbreakable && prob(material.hardness))

@@ -103,7 +103,7 @@
 	name = "black bodysuit"
 	desc = "A sleek, skin-tight bodysuit designed to not wick moisture away from the body. The inner stitching appears to contain something written in Skrellian."
 	icon_state = "skrell_suit"
-	item_state = "skrell_suit"
+	item_state = "black"
 	worn_state = "skrell_suit"
 
 /decl/hierarchy/outfit/job/skrellscoutship
