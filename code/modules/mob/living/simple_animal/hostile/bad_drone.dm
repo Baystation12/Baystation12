@@ -17,6 +17,7 @@
 	minbodytemp = 0
 	speed = 4
 	mob_size = MOB_TINY
+	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
 
 /mob/living/simple_animal/hostile/rogue_drone/Initialize()
 	. = ..()
@@ -35,3 +36,9 @@
 				return FALSE
 			if(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg))
 				return FALSE
+
+/mob/living/simple_animal/hostile/rogue_drone/death(gibbed, deathmessage, show_dead_message)
+	.=..()
+	if(corpse)
+		new corpse (loc)
+	qdel(src)
