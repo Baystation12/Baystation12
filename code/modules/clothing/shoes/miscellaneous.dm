@@ -184,3 +184,8 @@
 	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints/reversed
 	item_flags = ITEM_FLAG_SILENT
+
+/obj/item/clothing/shoes/heels
+	name = "high heels"
+	icon_state = "heels"
+	desc = "A pair of colourable high heels."
