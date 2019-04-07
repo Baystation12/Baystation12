@@ -2324,7 +2324,7 @@
 	name = "Resin Globule"
 	result = null
 	required_reagents = list(
-		/datum/reagent/crystal = 1, 
+		/datum/reagent/crystal = 1,
 		/datum/reagent/silicon = 2
 	)
 	catalysts = list(
@@ -2340,3 +2340,10 @@
 		var/create_stacks = Floor(created_volume)
 		if(create_stacks > 0)
 			new /obj/item/stack/medical/resin/handmade(T, create_stacks)
+
+/datum/chemical_reaction/crystal_agent
+	result = /datum/reagent/crystal
+	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/tungsten = 1, /datum/reagent/acid/polyacid = 1)
+	minimum_temperature = 150 CELSIUS
+	maximum_temperature = 200 CELSIUS
+	result_amount = 3
