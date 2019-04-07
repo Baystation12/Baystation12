@@ -39,12 +39,6 @@
 	away_site_budget = 3
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 
-	departments = list(
-		/datum/department/medbay,
-		/datum/department/science,
-		/datum/department/exploration
-	)
-
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()
