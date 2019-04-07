@@ -390,3 +390,10 @@
 /datum/species/nabber/check_background(var/datum/job/job, var/datum/preferences/prefs)
 	var/decl/cultural_info/culture/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_CULTURE])
 	. = istype(grade) ? (job.type in grade.valid_jobs) : ..()
+
+/datum/species/nabber/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
+	switch(age)
+		if(0 to 18) 	. = 8
+		if(19 to 27) 	. = 2
+		if(28 to 40)	. = -2
+		else			. = -4
