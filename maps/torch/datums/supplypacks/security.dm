@@ -152,18 +152,27 @@
 	access = access_solgov_crew
 
 /decl/hierarchy/supply_pack/security/securityextragear
-	name = "Gear - Security equipment"
-	contains = list(/obj/item/weapon/storage/belt/holster/security = 2,
-					/obj/item/device/radio/headset/headset_sec = 2,
-					/obj/item/clothing/glasses/sunglasses/sechud/goggles = 2,
-					/obj/item/taperoll/police = 2,
-					/obj/item/device/hailer = 2,
-					/obj/item/clothing/gloves/thick = 2,
-					/obj/item/device/holowarrant = 2,
-					/obj/item/device/flashlight/maglight = 2)
+	name = "Gear - Master at Arms equipment"
+	contains = list(/obj/item/device/radio/headset/headset_sec,
+					/obj/item/device/radio/headset/headset_sec/alt,
+					/obj/item/weapon/storage/belt/holster/security,
+					/obj/item/device/flash,
+					/obj/item/weapon/reagent_containers/spray/pepper,
+					/obj/item/weapon/grenade/chem_grenade/teargas,
+					/obj/item/weapon/melee/baton/loaded,
+					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
+					/obj/item/taperoll/police,
+					/obj/item/device/hailer,
+					/obj/item/clothing/accessory/storage/black_vest,
+					/obj/item/device/megaphone,
+					/obj/item/clothing/gloves/thick,
+					/obj/item/clothing/gloves/thick/duty/solgov/sec,
+					/obj/item/device/holowarrant,
+					/obj/item/device/flashlight/maglight,
+					/obj/item/weapon/storage/belt/security)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
-	containername = "security equipment crate"
+	containername = "\improper Master at Arms equipment crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/cosextragear

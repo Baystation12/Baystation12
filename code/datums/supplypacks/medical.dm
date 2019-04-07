@@ -92,6 +92,12 @@
 	containertype = /obj/structure/closet/crate/large
 	containername = "\improper Wheelchair crate"
 
+/decl/hierarchy/supply_pack/medical/bodybag
+	name = "Equipment - Rescue bags"
+	contains = list(/obj/item/bodybag/rescue = 3)
+	cost = 30
+	containername = "body bag crate"
+
 /decl/hierarchy/supply_pack/medical/medicalextragear
 	name = "Gear - Medical surplus equipment"
 	contains = list(/obj/item/weapon/storage/belt/medical = 3,
@@ -333,5 +339,13 @@
 	contains = list(/obj/item/weapon/defibrillator/compact)
 	cost = 75
 	containername = "\improper Compact Defibrilator crate"
+	containertype = /obj/structure/closet/crate/secure
+	access = access_medical_equip
+
+/decl/hierarchy/supply_pack/medical/autocomp
+	name = "Electronics - Auto-Compressor crate"
+	contains = list(/obj/item/auto_cpr)
+	cost = 50
+	containername = "\improper Auto-Compressor crate"
 	containertype = /obj/structure/closet/crate/secure
 	access = access_medical_equip
