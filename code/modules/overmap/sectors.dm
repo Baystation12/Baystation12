@@ -258,6 +258,7 @@ var/list/points_of_interest = list()
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
 	report_progress("Overmap build complete.")
+	shipmap_handler.max_z_cached = world.maxz
 	return 1
 
 
