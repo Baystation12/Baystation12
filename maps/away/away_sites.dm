@@ -9,10 +9,13 @@
 	if (map_name != null)
 		SetName(map_name)
 	
-	for (var/area/A in world)
-		if (istype(A, area_type))
-			A.SetName("\improper [name] - [A.name]")
-			GLOB.using_map.area_purity_test_exempt_areas += A.type
+	var/list/area_list = area_repository.get_areas_by_name(area_type)
+	var/area/a
+	for (var/i = 1, i <= area_list.len, i++)
+		a = area_list[i]
+		world.log << "Prefixing '[name]' to '[a.name]'"
+		a.SetName("\improper [name] - [a.name]")
+		GLOB.using_map.area_purity_test_exempt_areas += a.type
 	
 	if (map_name != null)
 		SetName("[name], \a [initial(name)]")
