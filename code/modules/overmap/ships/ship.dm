@@ -30,7 +30,6 @@
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1  //global thrust limit for all engines, 0..1
 	var/halted = 0        //admin halt or other stop.
-	var/skill_needed = SKILL_ADEPT  //piloting skill needed to steer it without going in random dir
 
 /obj/effect/overmap/ship/Initialize()
 	. = ..()

@@ -1,0 +1,4 @@
+author: "Cronac"
+delete-after: True
+changes: 
+  - bugfix: "Adds missing biohoods to CSO locker."

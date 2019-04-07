@@ -9436,9 +9436,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
-"ub" = (
-/turf/simulated/wall/walnut,
-/area/vacant/cabin)
 "uc" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 10
@@ -10675,7 +10672,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
 "wW" = (
-/turf/simulated/wall/walnut,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/sleep/bunk)
 "wX" = (
 /obj/machinery/light/small{
@@ -17850,9 +17847,6 @@
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
-"Pg" = (
-/turf/simulated/wall/mahogany,
-/area/crew_quarters/diplomat)
 "Ph" = (
 /obj/machinery/light{
 	dir = 1
@@ -42094,11 +42088,11 @@ AN
 Ez
 Ny
 Hn
-ub
+Dn
 FI
 Gi
 Gj
-ub
+Dn
 HD
 Ts
 HE
@@ -42296,11 +42290,11 @@ TV
 AN
 RT
 CE
-ub
+Dn
 Gj
 GI
 Hi
-ub
+Dn
 sS
 tz
 tz
@@ -42498,11 +42492,11 @@ nu
 YZ
 Ts
 CE
-ub
+Dn
 Fj
 GI
 Hj
-ub
+Dn
 vk
 or
 or
@@ -42700,11 +42694,11 @@ Cv
 AN
 qi
 So
-ub
+Dn
 FJ
 Gk
 GJ
-ub
+Dn
 Ts
 Ts
 HG
@@ -42902,11 +42896,11 @@ Cw
 AN
 Ov
 JV
-ub
+Dn
 ED
 II
 FN
-ub
+Dn
 ko
 ny
 Hf
@@ -43104,11 +43098,11 @@ Cx
 AN
 TN
 JV
-ub
+Dn
 Fj
 Fj
 GK
-ub
+Dn
 ug
 Hf
 Hf
@@ -43306,11 +43300,11 @@ Cy
 AN
 tZ
 EB
-ub
+Dn
 FK
 ED
 GL
-ub
+Dn
 xm
 Hf
 Hf
@@ -44315,12 +44309,12 @@ Uw
 vh
 Ba
 CE
-ub
+Dn
 Fi
 Fj
 ED
 ED
-ub
+Dn
 Ba
 jZ
 jZ
@@ -44517,12 +44511,12 @@ AS
 vh
 Nq
 CU
-ub
+Dn
 Fj
 FM
 Go
 GN
-ub
+Dn
 Ba
 jZ
 jZ
@@ -44719,12 +44713,12 @@ WV
 vh
 Do
 DZ
-ub
+Dn
 Fk
 IH
 Gm
 GO
-ub
+Dn
 Ba
 jZ
 jZ
@@ -44921,12 +44915,12 @@ vg
 vh
 wl
 CU
-ub
+Dn
 Fj
 FK
 Fj
 GP
-ub
+Dn
 Ba
 jZ
 jZ
@@ -45123,12 +45117,12 @@ BO
 CI
 zP
 Lr
-ub
+Dn
 ED
 Fj
 Gp
-ub
-ub
+Dn
+Dn
 Ba
 jZ
 jZ
@@ -45325,11 +45319,11 @@ BP
 CJ
 wl
 CU
-ub
+Dn
 ED
-ub
-ub
-ub
+Dn
+Dn
+Dn
 IJ
 Tk
 jZ
@@ -45527,9 +45521,9 @@ vn
 Bc
 Bc
 CU
-ub
+Dn
 Ya
-ub
+Dn
 Gq
 GQ
 EE
@@ -46130,7 +46124,7 @@ zw
 Ai
 Ta
 vn
-Bc
+Ba
 Fq
 FZ
 Bc
@@ -46331,7 +46325,7 @@ XU
 yz
 Rm
 Sc
-Pg
+vn
 Bc
 Bc
 JY
@@ -46533,9 +46527,9 @@ yB
 TY
 JR
 SB
-Pg
+vn
+Fq
 Bc
-Ba
 JT
 Dq
 EE
@@ -46729,15 +46723,15 @@ rx
 sR
 uk
 vn
-Pg
-Pg
+vn
+vn
 yC
-Pg
-Pg
-Pg
-Pg
-Bc
+vn
+vn
+vn
+vn
 Ba
+Dq
 Eb
 EE
 EE
@@ -46937,8 +46931,8 @@ Nm
 Xa
 KB
 vn
-ZX
-Fq
+BU
+Ba
 Dq
 Eb
 EE
@@ -47139,9 +47133,9 @@ yE
 hq
 VB
 vn
-BU
+ZX
 CN
-Dq
+Bc
 Ed
 EG
 Fp

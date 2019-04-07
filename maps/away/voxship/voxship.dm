@@ -8,7 +8,6 @@
 	suffixes = list("voxship/voxship-1.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_shuttle)
-	area_usage_test_exempted_root_areas = list(/area/voxship)
 
 /obj/effect/overmap/sector/vox_base
 	name = "large asteroid"
