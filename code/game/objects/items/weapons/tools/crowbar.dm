@@ -7,7 +7,7 @@
 	slot_flags = SLOT_BELT
 	force = 14
 	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
-	melee_accuracy_bonus = -20
+	melee_accuracy_bonus = -10
 	throwforce = 7
 	throw_range = 3
 	item_state = "crowbar"

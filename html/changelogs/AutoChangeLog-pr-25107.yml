@@ -1,5 +1,0 @@
-author: "Cakey"
-delete-after: True
-changes: 
-  - tweak: "AI holopads have been renamed to holopads."
-  - tweak: "Removed the long range holopad's Z-range."

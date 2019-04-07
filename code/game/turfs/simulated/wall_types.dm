@@ -82,17 +82,37 @@
 /turf/simulated/wall/sandstone/New(var/newloc)
 	..(newloc,MATERIAL_SANDSTONE)
 
+/turf/simulated/wall/wood
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
 /turf/simulated/wall/wood/New(var/newloc)
 	..(newloc,MATERIAL_WOOD)
+
+/turf/simulated/wall/mahogany
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
 
 /turf/simulated/wall/mahogany/New(var/newloc)
 	..(newloc,MATERIAL_MAHOGANY)
 
+/turf/simulated/wall/maple
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
 /turf/simulated/wall/maple/New(var/newloc)
 	..(newloc,MATERIAL_MAPLE)
 
+/turf/simulated/wall/ebony
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
 /turf/simulated/wall/ebony/New(var/newloc)
 	..(newloc,MATERIAL_EBONY)
+
+/turf/simulated/wall/walnut
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
 
 /turf/simulated/wall/walnut/New(var/newloc)
 	..(newloc,MATERIAL_WALNUT)
@@ -114,7 +134,7 @@
 
 /turf/simulated/wall/voxshuttle/New(var/newloc)
 	..(newloc, MATERIAL_VOX)
-	
+
 /turf/simulated/wall/voxshuttle/attackby()
 	return
 

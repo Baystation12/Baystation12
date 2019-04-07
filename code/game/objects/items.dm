@@ -481,17 +481,17 @@ var/list/global/slot_flags_enumeration = list(
 //Otherwise should return 0 to indicate that the attack is not affected in any way.
 /obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/parry_chance = get_parry_chance(user)
-	if(attacker)	
+	if(attacker)
 		parry_chance = max(0, parry_chance - 10 * attacker.get_skill_difference(SKILL_COMBAT, user))
 	if(parry_chance)
 		if(default_parry_check(user, attacker, damage_source) && prob(parry_chance))
 			user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 			playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
-			on_parry()
+			on_parry(damage_source)
 			return 1
 	return 0
 
-/obj/item/proc/on_parry()
+/obj/item/proc/on_parry(damage_source)
 	return
 
 /obj/item/proc/get_parry_chance(mob/user)

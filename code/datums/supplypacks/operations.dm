@@ -36,6 +36,13 @@
 	containertype = /obj/structure/largecrate/hoverpod
 	containername = "hoverpod crate"
 
+/decl/hierarchy/supply_pack/operations/orebox
+	name = "Equipment - Ore box"
+	contains = list(/obj/structure/ore_box)
+	cost = 15
+	containertype = /obj/structure/largecrate
+	containername = "Ore box crate"
+
 /decl/hierarchy/supply_pack/operations/webbing
 	name = "Gear - Webbing, vests, holsters."
 	num_contained = 4

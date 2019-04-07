@@ -78,13 +78,12 @@
 			H.unequip_item()
 	if(!held && !H.restrained() && prob(5))
 		var/list/touchables = list()
-		for(var/obj/O in range(1,get_turf(H)))
-			if(O.simulated && O.Adjacent(get_turf(H)))
+		for(var/obj/O in range(1,H))
+			if(O.simulated && O.Adjacent(H))
 				touchables += O
-		if(touchables.len)
-			var/obj/touchy = pick(touchables)
-			touchy.attack_hand(H)
-
+		var/obj/touchy = pick(touchables)
+		touchy.attack_hand(H)
+	
 	if(prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
 
