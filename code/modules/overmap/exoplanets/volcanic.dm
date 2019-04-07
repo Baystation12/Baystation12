@@ -110,9 +110,6 @@
 	..()
 	if(locate(/obj/structure/catwalk/) in src)
 		return
-	var/mob/living/L = AM
-	if (istype(L) && L.can_overcome_gravity())
-		return
 	if(AM.is_burnable())
 		LAZYADD(victims, weakref(AM))
 		START_PROCESSING(SSobj, src)

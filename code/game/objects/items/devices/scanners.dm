@@ -1,3 +1,14 @@
+/*
+CONTAINS:
+T-RAY
+DETECTIVE SCANNER
+HEALTH ANALYZER
+GAS ANALYZER
+MASS SPECTROMETER
+REAGENT SCANNER
+*/
+
+
 /obj/item/device/healthanalyzer
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
@@ -324,3 +335,268 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 		to_chat(usr, "The scanner now shows specific limb damage.")
 	else
 		to_chat(usr, "The scanner no longer shows limb damage.")
+
+/obj/item/device/analyzer
+	name = "analyzer"
+	desc = "A hand-held environmental scanner which reports current gas levels."
+	icon_state = "atmos"
+	item_state = "analyzer"
+	w_class = ITEM_SIZE_SMALL
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BELT
+	throwforce = 5
+	throw_speed = 4
+	throw_range = 20
+
+	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
+
+	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
+	var/advanced_mode = 0
+
+/obj/item/device/analyzer/verb/verbosity(mob/user)
+	set name = "Toggle Advanced Gas Analysis"
+	set category = "Object"
+	set src in usr
+
+	if (!user.incapacitated())
+		advanced_mode = !advanced_mode
+		to_chat(user, "You toggle advanced gas analysis [advanced_mode ? "on" : "off"].")
+
+/obj/item/device/analyzer/attack_self(mob/user)
+
+	if (user.incapacitated())
+		return
+	if (!user.IsAdvancedToolUser())
+		return
+
+	analyze_gases(user.loc, user,advanced_mode)
+	return 1
+
+/obj/item/device/analyzer/afterattack(obj/O, mob/user, proximity)
+	if(!proximity)
+		return
+	if (user.incapacitated())
+		return
+	if (!user.IsAdvancedToolUser())
+		return
+	if(istype(O) && O.simulated)
+		analyze_gases(O, user, advanced_mode)
+
+/obj/item/device/mass_spectrometer
+	name = "mass spectrometer"
+	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
+	icon_state = "spectrometer"
+	item_state = "analyzer"
+	w_class = ITEM_SIZE_SMALL
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BELT
+	throwforce = 5
+	throw_speed = 4
+	throw_range = 20
+
+	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
+
+	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
+	var/details = 0
+	var/recent_fail = 0
+
+/obj/item/device/mass_spectrometer/New()
+	..()
+	create_reagents(5)
+
+/obj/item/device/mass_spectrometer/on_reagent_change()
+	update_icon()
+
+/obj/item/device/mass_spectrometer/on_update_icon()
+	icon_state = initial(icon_state)
+	if(reagents.total_volume)
+		icon_state += "_s"
+
+/obj/item/device/mass_spectrometer/attack_self(mob/user as mob)
+	if (user.incapacitated())
+		return
+	if (!user.IsAdvancedToolUser())
+		return
+	if(reagents.total_volume)
+		var/list/blood_traces = list()
+		var/list/blood_doses = list()
+		for(var/datum/reagent/R in reagents.reagent_list)
+			if(length(reagents.reagent_list) == 1)
+				var/datum/reagent/random/random = R
+				if(istype(random))
+					random.on_chemicals_analyze(user)
+					return
+			if(R.type != /datum/reagent/blood)
+				reagents.clear_reagents()
+				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")
+				return
+			else
+				blood_traces = R.data["trace_chem"]
+				blood_doses = R.data["dose_chem"]
+				break
+		var/dat = "Trace Chemicals Found: "
+		for(var/T in blood_traces)
+			var/datum/reagent/R = T
+			if(details)
+				dat += "[initial(R.name)] ([blood_traces[T]] units) "
+			else
+				dat += "[initial(R.name)] "
+		if(details)
+			dat += "\nMetabolism Products of Chemicals Found:"
+			for(var/T in blood_doses)
+				var/datum/reagent/R = T
+				dat += "[initial(R.name)] ([blood_doses[T]] units) "
+		to_chat(user, "[dat]")
+		reagents.clear_reagents()
+	return
+
+/obj/item/device/mass_spectrometer/adv
+	name = "advanced mass spectrometer"
+	icon_state = "adv_spectrometer"
+	details = 1
+	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
+
+/obj/item/device/reagent_scanner
+	name = "reagent scanner"
+	desc = "A hand-held reagent scanner which identifies chemical agents."
+	icon_state = "spectrometer"
+	item_state = "analyzer"
+	w_class = ITEM_SIZE_SMALL
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BELT
+	throwforce = 5
+	throw_speed = 4
+	throw_range = 20
+	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
+
+	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
+	var/details = 0
+	var/recent_fail = 0
+
+/obj/item/device/reagent_scanner/afterattack(obj/O, mob/user as mob, proximity)
+	if(!proximity)
+		return
+	if (user.incapacitated())
+		return
+	if (!user.IsAdvancedToolUser())
+		return
+	if(!istype(O))
+		return
+	var/dat = reagent_scan_results(O, details)
+	to_chat(user, "<span class = 'notice'>[jointext(dat,"<br>")]</span>")
+
+/proc/reagent_scan_results(obj/O, details = 0)
+	if(isnull(O.reagents))
+		return list("No significant chemical agents found in [O].")
+	if(O.reagents.reagent_list.len == 0)
+		return list("No active chemical agents found in [O].")
+	. = list("Chemicals found:")
+	var/one_percent = O.reagents.total_volume / 100
+	for (var/datum/reagent/R in O.reagents.reagent_list)
+		. += "[R][details ? ": [R.volume / one_percent]%" : ""]"
+
+/obj/item/device/reagent_scanner/adv
+	name = "advanced reagent scanner"
+	icon_state = "adv_spectrometer"
+	details = 1
+	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
+
+/obj/item/device/price_scanner
+	name = "price scanner"
+	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
+	icon_state = "price_scanner"
+	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
+	slot_flags = SLOT_BELT
+	w_class = ITEM_SIZE_SMALL
+	throwforce = 0
+	throw_speed = 3
+	throw_range = 3
+	matter = list(MATERIAL_ALUMINIUM = 25, MATERIAL_GLASS = 25)
+
+/obj/item/device/price_scanner/afterattack(atom/movable/target, mob/user as mob, proximity)
+	if(!proximity)
+		return
+
+	var/value = get_value(target)
+	user.visible_message("\The [user] scans \the [target] with \the [src]")
+	user.show_message("Price estimation of \the [target]: [value ? value : "N/A"] Thalers")
+
+/obj/item/device/slime_scanner
+	name = "xenolife scanner"
+	desc = "Multipurpose organic life scanner. With spectral breath analyzer you can find out what snacks Ian had! Or what gasses alien life breathes."
+	icon_state = "xenobio"
+	item_state = "analyzer"
+	slot_flags = SLOT_BELT
+	w_class = ITEM_SIZE_SMALL
+	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	matter = list(MATERIAL_ALUMINIUM = 30 ,MATERIAL_GLASS = 20, MATERIAL_PLASTIC = 15)
+
+/obj/item/device/slime_scanner/proc/list_gases(var/gases)
+	. = list()
+	for(var/g in gases)
+		. += "[gas_data.name[g]] ([gases[g]]%)"
+	return english_list(.)
+
+/obj/item/device/slime_scanner/afterattack(mob/target, mob/user, proximity)
+	if(!proximity)
+		return
+
+	if(!istype(target))
+		return
+
+	user.visible_message("\The [user] scans \the [target] with \the [src]")
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = target
+		user.show_message("<span class='notice'>Data for [H]:</span>")
+		user.show_message("Species:\t[H.species]")
+		user.show_message("Breathes:\t[gas_data.name[H.species.breath_type]]")
+		user.show_message("Exhales:\t[gas_data.name[H.species.exhale_type]]")
+		user.show_message("Known toxins:\t[english_list(H.species.poison_types)]")
+		user.show_message("Temperature comfort zone:\t[H.species.cold_discomfort_level] K to [H.species.heat_discomfort_level] K")
+		user.show_message("Pressure comfort zone:\t[H.species.warning_low_pressure] kPa to [H.species.warning_high_pressure] kPa")
+	else if(istype(target, /mob/living/simple_animal))
+		var/mob/living/simple_animal/A = target
+		user.show_message("<span class='notice'>Data for [A]:</span>")
+		user.show_message("Species:\t[initial(A.name)]")
+		user.show_message("Breathes:\t[list_gases(A.min_gas)]")
+		user.show_message("Known toxins:\t[list_gases(A.max_gas)]")
+		user.show_message("Temperature comfort zone:\t[A.minbodytemp] K to [A.maxbodytemp] K")
+	else if(istype(target, /mob/living/carbon/slime/))
+		var/mob/living/carbon/slime/T = target
+		user.show_message("<span class='notice'>Slime scan result for \the [T]:</span>")
+		user.show_message("[T.colour] [T.is_adult ? "adult" : "baby"] slime")
+		user.show_message("Nutrition:\t[T.nutrition]/[T.get_max_nutrition()]")
+		if(T.nutrition < T.get_starve_nutrition())
+			user.show_message("<span class='alert'>Warning:\tthe slime is starving!</span>")
+		else if (T.nutrition < T.get_hunger_nutrition())
+			user.show_message("<span class='warning'>Warning:\tthe slime is hungry.</span>")
+		user.show_message("Electric charge strength:\t[T.powerlevel]")
+		user.show_message("Health:\t[round((T.health * 100) / T.maxHealth)]%")
+
+		var/list/mutations = T.GetMutations()
+
+		if(!mutations.len)
+			user.show_message("This slime will never mutate.")
+		else
+			var/list/mutationChances = list()
+			for(var/i in mutations)
+				if(i == T.colour)
+					continue
+				if(mutationChances[i])
+					mutationChances[i] += T.mutation_chance / mutations.len
+				else
+					mutationChances[i] = T.mutation_chance / mutations.len
+
+			var/list/mutationTexts = list("[T.colour] ([100 - T.mutation_chance]%)")
+			for(var/i in mutationChances)
+				mutationTexts += "[i] ([mutationChances[i]]%)"
+
+			user.show_message("Possible colours on splitting:\t[english_list(mutationTexts)]")
+
+		if (T.cores > 1)
+			user.show_message("Anomalous slime core amount detected.")
+		user.show_message("Growth progress:\t[T.amount_grown]/10.")
+	else
+		user.show_message("Incompatible life form, analysis failed.")
