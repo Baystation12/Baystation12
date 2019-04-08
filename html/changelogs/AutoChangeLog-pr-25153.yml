@@ -1,0 +1,6 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - maptweak: "Moves Security's Deck 1 checkpoint to the old Research Checkpoint. Decommissions old Deck 1 Checkpoint. Adds lockdown shutters by ladderwell."
+  - maptweak: "Adds 2 prisoner lockers for Communal. Also changes newscasters in the Brig to the SEC variant where appropriate."
+  - maptweak: "SEC-VEND now has new stock. More cuffs, more evidence bags, and now carries pepper spray and holowarrant projectors."
