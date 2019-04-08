@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Glowing slime extracts now create light."
+  - bugfix: "Lit flares now process fuel and shut off when out of fuel again."
