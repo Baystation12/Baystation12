@@ -1,4 +1,0 @@
-author: "xales"
-delete-after: True
-changes: 
-  - tweak: "Antag selection now defaults to NONE. You may need to update your antag prefs."

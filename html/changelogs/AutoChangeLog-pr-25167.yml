@@ -1,5 +1,0 @@
-author: "Cronac"
-delete-after: True
-changes: 
-  - bugfix: "Monkeys are no longer ripping out their augments and throwing them across the room."
-  - tweak: "Augments now show up on medical scanners and related admin scans."
