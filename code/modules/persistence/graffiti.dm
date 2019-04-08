@@ -48,9 +48,8 @@
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			user.visible_message("<span class='notice'>\The [user] clears away some graffiti.</span>")
 			qdel(src)
-	else if(thing.sharp)
-
-		if(jobban_isbanned(user, "Graffiti"))
+	else if(thing.sharp && user.client)
+		if(user.client.is_banned(BAN_GRAFFITI))
 			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
 			return
 

@@ -122,7 +122,7 @@
 		return
 
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
-		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
+		SSdatabase.db.SetStaffwarn(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
@@ -134,12 +134,27 @@
 		qdel(src)
 		return
 
+	var/list/admin = SSdatabase.db.GetAdmin(ckey)
+	if (admin)
+		holder = new(ckey, admin[1], admin[2], admin[3])
+	if (world.host && key == world.host)
+		holder = new("!HOST!", R_EVERYTHING)
+	else if (isnull(address) || address in list("127.0.0.1", "::1"))
+		holder = new("!LOCALHOST!", R_EVERYTHING)
+
 	if(config.player_limit != 0)
-		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
+		if((GLOB.clients.len >= config.player_limit) && !(holder))
 			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
 			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 			qdel(src)
 			return
+
+	GLOB.clients += src
+	GLOB.ckey_directory[ckey] = src
+
+	if (holder)
+		GLOB.admins += src
+		control_freak = 0
 
 	// Change the way they should download resources.
 	if(config.resource_urls && config.resource_urls.len)
@@ -150,14 +165,6 @@
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
-	GLOB.clients += src
-	GLOB.ckey_directory[ckey] = src
-
-	//Admin Authorisation
-	holder = admin_datums[ckey]
-	if(holder)
-		GLOB.admins += src
-		holder.owner = src
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = SScharacter_setup.preferences_datums[ckey]
@@ -189,8 +196,6 @@
 			sleep(2) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
-	log_client_to_db()
-
 	send_resources()
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
@@ -206,8 +211,6 @@
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
-	if(holder)
-		src.control_freak = 0 //Devs need 0 for profiler access
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -216,110 +219,61 @@
 	if(src && watched_variables_window)
 		STOP_PROCESSING(SSprocessing, watched_variables_window)
 	if(holder)
-		holder.owner = null
 		GLOB.admins -= src
+		handle_admin_logout()
 	GLOB.ckey_directory -= ckey
 	GLOB.clients -= src
 	return ..()
+
+/client/proc/handle_admin_logout()
+	var/datum/admins/holder = get_holder()
+	if (holder && GAME_STATE == RUNLEVEL_GAME) // Only report if currently playing
+		message_staff("Staff logout: [key_name(src)]")
+		if (!GLOB.admins.len)
+			send2adminirc("[key_name(src)] logged out - no more admins online.")
+			if (config.delist_when_no_admins && GLOB.visibility_pref)
+				world.update_hub_visibility() // Despite the name, this toggles
+				send2adminirc("Toggled hub visibility. The server is now invisible ([GLOB.visibility_pref]).")
 
 /client/Destroy()
 	..()
 	return QDEL_HINT_HARDDEL_NOW
 
-// here because it's similar to below
-
-// Returns null if no DB connection can be established, or -1 if the requested key was not found in the database
-
-/proc/get_player_age(key)
-	establish_db_connection()
-	if(!dbcon.IsConnected())
-		return null
-
-	var/sql_ckey = sql_sanitize_text(ckey(key))
-
-	var/DBQuery/query = dbcon.NewQuery("SELECT datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
-	query.Execute()
-
-	if(query.NextRow())
-		return text2num(query.item[1])
-	else
-		return -1
-
-
-/client/proc/log_client_to_db()
-
-	if ( IsGuestKey(src.key) )
-		return
-
-	establish_db_connection()
-	if(!dbcon.IsConnected())
-		return
-
-	var/sql_ckey = sql_sanitize_text(src.ckey)
-
-	var/DBQuery/query = dbcon.NewQuery("SELECT id, datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
-	query.Execute()
-	var/sql_id = 0
-	player_age = 0	// New players won't have an entry so knowing we have a connection we set this to zero to be updated if their is a record.
-	while(query.NextRow())
-		sql_id = query.item[1]
-		player_age = text2num(query.item[2])
-		break
-
-	var/DBQuery/query_ip = dbcon.NewQuery("SELECT ckey FROM erro_player WHERE ip = '[address]'")
-	query_ip.Execute()
-	related_accounts_ip = ""
-	while(query_ip.NextRow())
-		related_accounts_ip += "[query_ip.item[1]], "
-		break
-
-	var/DBQuery/query_cid = dbcon.NewQuery("SELECT ckey FROM erro_player WHERE computerid = '[computer_id]'")
-	query_cid.Execute()
-	related_accounts_cid = ""
-	while(query_cid.NextRow())
-		related_accounts_cid += "[query_cid.item[1]], "
-		break
-
-	var/DBQuery/query_staffwarn = dbcon.NewQuery("SELECT staffwarn FROM erro_player WHERE ckey = '[sql_ckey]' AND !ISNULL(staffwarn)")
-	query_staffwarn.Execute()
-	if(query_staffwarn.NextRow())
-		src.staffwarn = query_staffwarn.item[1]
-
-	//Just the standard check to see if it's actually a number
-	if(sql_id)
-		if(istext(sql_id))
-			sql_id = text2num(sql_id)
-		if(!isnum(sql_id))
-			return
-
-	var/admin_rank = "Player"
-	if(src.holder)
-		admin_rank = src.holder.rank
-		for(var/client/C in GLOB.clients)
-			if(C.staffwarn)
-				C.mob.send_staffwarn(src, "is connected", 0)
-
-	var/sql_ip = sql_sanitize_text(src.address)
-	var/sql_computerid = sql_sanitize_text(src.computer_id)
-	var/sql_admin_rank = sql_sanitize_text(admin_rank)
-
-
-	if(sql_id)
-		//Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables
-		var/DBQuery/query_update = dbcon.NewQuery("UPDATE erro_player SET lastseen = Now(), ip = '[sql_ip]', computerid = '[sql_computerid]', lastadminrank = '[sql_admin_rank]' WHERE id = [sql_id]")
-		query_update.Execute()
-	else
-		//New player!! Need to insert all the stuff
-		var/DBQuery/query_insert = dbcon.NewQuery("INSERT INTO erro_player (id, ckey, firstseen, lastseen, ip, computerid, lastadminrank) VALUES (null, '[sql_ckey]', Now(), Now(), '[sql_ip]', '[sql_computerid]', '[sql_admin_rank]')")
-		query_insert.Execute()
-
-	//Logging player access
-	var/serverip = "[world.internet_address]:[world.port]"
-	var/DBQuery/query_accesslog = dbcon.NewQuery("INSERT INTO `erro_connection_log`(`id`,`datetime`,`serverip`,`ckey`,`ip`,`computerid`) VALUES(null,Now(),'[serverip]','[sql_ckey]','[sql_ip]','[sql_computerid]');")
-	query_accesslog.Execute()
-
-
 #undef UPLOAD_LIMIT
+
+/client/proc/is_whitelisted(var/scope)
+	. = (scope in whitelist)
+
+/client/proc/is_banned(var/check_scope)
+	. = FALSE
+	var/list/check_scopes
+	if (islist(check_scope))
+		check_scopes = check_scope
+	else
+		check_scopes = list(check_scope)
+	
+	for (var/scope in check_scopes)
+		for (var/list/ban in bans)
+			if (ban["scope"] == scope)
+				return TRUE
+
+/client/proc/is_rank_banned(var/datum/mil_rank/rank, var/datum/mil_branch/branch, var/client/client)
+	. = FALSE
+	var/grade = rank.grade()
+	if (!grade)
+		return FALSE
+	var/list/check_slugs = list()
+	var/min_sort = 0
+	if (rank.sort_order > 10)
+		min_sort = 10
+	for (var/rankname in branch.ranks)
+		var/datum/mil_rank/check_rank = branch.ranks[rankname]
+		if (check_rank.sort_order > min_sort && check_rank.sort_order <= rank.sort_order)
+			var/slug = "[branch.name_short]_[check_rank.grade()]"
+			check_slugs |= slug
+			log_world("check [slug]")
+	if (is_banned(check_slugs))
+		return TRUE
 
 //checks if a client is afk
 //3000 frames = 5 minutes
@@ -389,3 +343,10 @@ client/verb/character_setup()
 /client/proc/apply_fps(var/client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
 		vars["fps"] = prefs.clientfps
+
+/client/proc/get_holder()
+	if (holder)
+		return holder
+	if (deadmin_holder)
+		return deadmin_holder
+	return null

@@ -31,6 +31,8 @@
 
 //show all memos
 /client/proc/admin_memo_show()
+	if(!check_rights(0, 0, src))
+		return
 	if(ENABLE_MEMOS)
 		var/savefile/F = new(MEMOFILE)
 		if(F)

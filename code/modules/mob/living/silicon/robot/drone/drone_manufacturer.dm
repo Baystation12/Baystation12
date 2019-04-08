@@ -92,6 +92,8 @@
 	try_drone_spawn(src)
 
 /proc/try_drone_spawn(var/mob/user, var/obj/machinery/drone_fabricator/fabricator)
+	if (!user.client)
+		return
 
 	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(user, "<span class='danger'>The game hasn't started yet!</span>")
@@ -101,8 +103,8 @@
 		to_chat(user, "<span class='danger'>That verb is not currently permitted.</span>")
 		return
 
-	if(jobban_isbanned(user,"Robot"))
-		to_chat(user, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
+	if(user.client.is_banned(BAN_MAINTDRONE))
+		to_chat(user, "<span class='danger'>You are banned from playing as a drone.</span>")
 		return
 
 	if(config.use_age_restriction_for_jobs && isnum(user.client.player_age))

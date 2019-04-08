@@ -49,7 +49,6 @@
 // It is safe to assume that any UI or sound related calls will fall into that category.
 /mob/new_player/proc/deferred_login()
 	if(client)
-		handle_privacy_poll()
 		client.playtitlemusic()
 		maybe_send_staffwarns("connected as new player")
 

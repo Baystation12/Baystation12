@@ -34,22 +34,7 @@ The answer was five and a half years -ZeroBits
 	else if(current_book)
 		data["current_book"] = current_book
 	else
-		var/list/all_entries[0]
-		establish_old_db_connection()
-		if(!dbcon_old.IsConnected())
-			error_message = "Unable to contact External Archive. Please contact your system administrator for assistance."
-		else
-			var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY "+sanitizeSQL(sort_by))
-			query.Execute()
-
-			while(query.NextRow())
-				all_entries.Add(list(list(
-				"id" = query.item[1],
-				"author" = query.item[2],
-				"title" = query.item[3],
-				"category" = query.item[4]
-			)))
-		data["book_list"] = all_entries
+		data["book_list"] = SSdatabase.db.GetAllLibraryBooks()
 		data["scanner"] = istype(scanner)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -66,7 +51,7 @@ The answer was five and a half years -ZeroBits
 		view_book(href_list["viewbook"])
 		return 1
 	if(href_list["viewid"])
-		view_book(sanitizeSQL(input("Enter USBN:") as num|null))
+		view_book(input("Enter USBN:") as num|null)
 		return 1
 	if(href_list["closebook"])
 		current_book = null
@@ -99,35 +84,20 @@ The answer was five and a half years -ZeroBits
 
 		if(!B.author)
 			B.author = "Anonymous"
-		else if(lowertext(B.author) == "edgar allen poe" || lowertext(B.author) == "edgar allan poe")
-			error_message = "User Error: Upload something original."
-			return 1
 
 		if(!B.title)
 			B.title = "Untitled"
 
 		var/choice = input(usr, "Upload [B.name] by [B.author] to the External Archive?") in list("Yes", "No")
 		if(choice == "Yes")
-			establish_old_db_connection()
-			if(!dbcon_old.IsConnected())
-				error_message = "Network Error: Connection to the Archive has been severed."
-				return 1
-
 			var/upload_category = input(usr, "Upload to which category?") in list("Fiction", "Non-Fiction", "Reference", "Religion")
 
-			var/sqltitle = sanitizeSQL(B.name)
-			var/sqlauthor = sanitizeSQL(B.author)
-			var/sqlcontent = sanitizeSQL(B.dat)
-			var/sqlcategory = sanitizeSQL(upload_category)
-			var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]')")
-			if(!query.Execute())
-				to_chat(usr, query.ErrorMsg())
-				error_message = "Network Error: Unable to upload to the Archive. Contact your system Administrator for assistance."
-				return 1
-			else
-				log_and_message_admins("has uploaded the book titled [B.name], [length(B.dat)] signs")
-				log_game("[usr.name]/[usr.key] has uploaded the book titled [B.name], [length(B.dat)] signs")
-				alert("Upload Complete.")
+			if (!SSdatabase.db.CreateLibraryBook(usr.ckey, upload_category, B.author, B.name, B.dat))
+				to_chat(usr, "Network Error: Unable to upload to the Archive. Contact your System Administrator for assistance.")
+				return 0
+			
+			log_and_message_admins("has uploaded a book titled [B.name], [length(B.dat)] characters")
+			alert("Upload complete.")
 			return 1
 
 		return 0
@@ -171,21 +141,6 @@ The answer was five and a half years -ZeroBits
 	if(current_book || !id)
 		return 0
 
-	var/sqlid = sanitizeSQL(id)
-	establish_old_db_connection()
-	if(!dbcon_old.IsConnected())
-		error_message = "Network Error: Connection to the Archive has been severed."
-		return 1
-
-	var/DBQuery/query = dbcon_old.NewQuery("SELECT * FROM library WHERE id=[sqlid]")
-	query.Execute()
-
-	while(query.NextRow())
-		current_book = list(
-			"id" = query.item[1],
-			"author" = query.item[2],
-			"title" = query.item[3],
-			"content" = query.item[4]
-			)
-		break
+	current_book = SSdatabase.db.GetLibraryBook(id)
+	
 	return 1

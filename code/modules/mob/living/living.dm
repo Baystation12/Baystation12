@@ -758,7 +758,7 @@ default behaviour is:
 	if(!possession_candidate)
 		to_chat(possessor, "<span class='warning'>That animal cannot be possessed.</span>")
 		return 0
-	if(jobban_isbanned(possessor, "Animal"))
+	if(possessor.client.is_banned(BAN_ANIMAL))
 		to_chat(possessor, "<span class='warning'>You are banned from animal roles.</span>")
 		return 0
 	if(!possessor.MayRespawn(1,ANIMAL_SPAWN_DELAY))

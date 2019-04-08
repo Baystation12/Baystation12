@@ -26,7 +26,7 @@
 /datum/category_item/player_setup_item/background/records/content(var/mob/user)
 	. = list()
 	. += "<br/><b>Records</b>:<br/>"
-	if(jobban_isbanned(user, "Records"))
+	if(user.client && user.client.is_banned(BAN_RECORDS))
 		. += "<span class='danger'>You are banned from using character records.</span><br>"
 	else
 		. += "General Notes (Public): "
@@ -42,33 +42,35 @@
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/records/OnTopic(var/href,var/list/href_list, var/mob/user)
+	if (!CanUseTopic(user) || !user.client || user.client.is_banned(BAN_RECORDS))
+		return TOPIC_REFRESH
 	if (href_list["set_public_record"])
 		var/new_public = sanitize(input(user,"Enter general public record information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.public_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
-		if (!isnull(new_public) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+		if (!isnull(new_public))
 			pref.public_record = new_public
 		return TOPIC_REFRESH
 
 	else if(href_list["set_medical_records"])
 		var/new_medical = sanitize(input(user,"Enter medical information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.med_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
-		if(!isnull(new_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+		if(!isnull(new_medical))
 			pref.med_record = new_medical
 		return TOPIC_REFRESH
 
 	else if(href_list["set_general_records"])
 		var/new_general = sanitize(input(user,"Enter employment information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.gen_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
-		if(!isnull(new_general) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+		if(!isnull(new_general))
 			pref.gen_record = new_general
 		return TOPIC_REFRESH
 
 	else if(href_list["set_security_records"])
 		var/sec_medical = sanitize(input(user,"Enter security information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.sec_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
-		if(!isnull(sec_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+		if(!isnull(sec_medical))
 			pref.sec_record = sec_medical
 		return TOPIC_REFRESH
 
 	else if(href_list["set_memory"])
 		var/memes = sanitize(input(user,"Enter memorized information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.memory)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
-		if(!isnull(memes) && CanUseTopic(user))
+		if(!isnull(memes))
 			pref.memory = memes
 		return TOPIC_REFRESH
 

@@ -1,7 +1,7 @@
 /datum/antagonist/proc/can_become_antag(var/datum/mind/player, var/ignore_role)
 
 	if(player.current)
-		if(jobban_isbanned(player.current, id))
+		if(player.current.client.is_banned(id) || player.current.client.is_banned(BAN_ANTAG))
 			return 0
 		if(player.current.faction != MOB_FACTION_NEUTRAL)
 			return 0

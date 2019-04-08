@@ -268,5 +268,10 @@ var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	if(pref.client)
 		return pref.client.mob
 
+/datum/category_item/player_setup_item/proc/target_is_banned(var/scopes)
+	if (!preference_mob() || !preference_mob().client)
+		return FALSE // we can't check, whatever. rely on the actual on-join checks, since these should be advisory at best anyway
+	return preference_mob().client.is_banned(scopes)
+
 /datum/category_item/player_setup_item/proc/preference_species()
 	return all_species[pref.species] || all_species[SPECIES_HUMAN]

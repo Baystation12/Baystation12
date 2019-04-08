@@ -74,7 +74,7 @@
 	if (required_language)
 		H.add_language(required_language)
 		H.set_default_language(all_languages[required_language])
-	
+
 	if (!H.languages.len)
 		H.add_language(LANGUAGE_SPACER)
 		H.set_default_language(all_languages[LANGUAGE_SPACER])
@@ -351,9 +351,9 @@
 
 /datum/job/proc/get_unavailable_reasons(var/client/caller)
 	var/list/reasons = list()
-	if(jobban_isbanned(caller, title))
+	if(is_banned(caller))
 		reasons["You are jobbanned."] = TRUE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if(is_semi_antagonist && caller.is_banned(BAN_AGITATOR))
 		reasons["You are semi-antagonist banned."] = TRUE
 	if(!player_old_enough(caller))
 		reasons["Your player age is too low."] = TRUE
@@ -372,6 +372,26 @@
 	if(LAZYLEN(reasons))
 		. = reasons
 
+/datum/job/proc/is_banned(var/client/client)
+	if (client.is_banned(title))
+		return TRUE
+	if (client.is_banned(department))
+		return TRUE
+	if (department_flag)
+		for (var/I in 1 to GLOB.bitflags.len)
+			if (department_flag & GLOB.bitflags[I])
+				if (client.is_banned(department_flag_to_name["[GLOB.bitflags[I]]"]))
+					return TRUE
+	if (!isnull(allowed_branches))
+		var/datum/mil_branch/branch = mil_branches.get_branch(client.prefs.branches[title])
+		if (client.is_banned(branch.name_short))
+			return TRUE
+		if (!isnull(allowed_ranks))
+			var/datum/mil_rank/rank = mil_branches.get_rank(client.prefs.branches[title], client.prefs.ranks[title])
+			if (client.is_rank_banned(rank, branch))
+				return TRUE
+	return FALSE
+
 /datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
 	mannequin.delete_inventory(TRUE)
 	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)
@@ -379,9 +399,9 @@
 /datum/job/proc/is_available(var/client/caller)
 	if(!is_position_available())
 		return FALSE
-	if(jobban_isbanned(caller, title))
+	if(is_banned(caller))
 		return FALSE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if(is_semi_antagonist && caller.is_banned(BAN_AGITATOR))
 		return FALSE
 	if(!player_old_enough(caller))
 		return FALSE

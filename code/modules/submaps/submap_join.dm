@@ -25,11 +25,11 @@
 		to_chat(joining, SPAN_WARNING("Unfortunately, that job is no longer available."))
 		return FALSE
 
-	if(jobban_isbanned(joining, "Offstation Roles"))
+	if(joining.client.is_banned(BAN_OFFSTATION))
 		to_chat(joining, SPAN_WARNING("You are banned from playing offstation roles."))
 		return FALSE
 
-	if(job.is_semi_antagonist && jobban_isbanned(joining, MODE_MISC_AGITATOR))
+	if(job.is_semi_antagonist && joining.client.is_banned(MODE_MISC_AGITATOR))
 		to_chat(joining, SPAN_WARNING("You are banned from playing semi-antagonist roles."))
 		return FALSE
 

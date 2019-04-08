@@ -10,6 +10,21 @@ var/const/SUP               =(1<<8)
 var/const/SPT               =(1<<9)
 var/const/EXP               =(1<<10)
 
+var/list/departments_by_name = list(
+	"Engineering" = ENG,
+	"Security" = SEC,
+	"Medical" = MED,
+	"Science" = SCI,
+	"Civilian" = CIV,
+	"Command" = COM,
+	"Misc" = MSC,
+	"Service" = SRV,
+	"Supply" = SUP,
+	"Support" = SPT,
+	"Expedition" = EXP)
+	
+var/list/department_flag_to_name = list()
+
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
 	init_order = SS_INIT_JOBS
@@ -112,6 +127,11 @@ SUBSYSTEM_DEF(jobs)
 					if(job.department_flag & GLOB.bitflags[I])
 						LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.title)
 
+	// Update job flag lookup
+	for (var/name in departments_by_name)
+		var/flag = departments_by_name[name]
+		department_flag_to_name["[flag]"] = name
+
 	// Set up syndicate phrases.
 	syndicate_code_phrase = generate_code_phrase()
 	syndicate_code_response	= generate_code_phrase()
@@ -186,14 +206,14 @@ SUBSYSTEM_DEF(jobs)
 	return TRUE
 
 
-/datum/controller/subsystem/jobs/proc/assign_role(var/mob/new_player/player, var/rank, var/latejoin = 0)
-	if(player && player.mind && rank)
-		var/datum/job/job = get_by_title(rank)
+/datum/controller/subsystem/jobs/proc/assign_role(var/mob/new_player/player, var/role, var/latejoin = 0)
+	if(player && player.mind && player.client && role)
+		var/datum/job/job = get_by_title(role)
 		if(!job)
 			return 0
 		if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 			return 0
-		if(jobban_isbanned(player, rank))
+		if(job.is_banned(player.client))
 			return 0
 		if(!job.player_old_enough(player.client))
 			return 0
@@ -205,7 +225,7 @@ SUBSYSTEM_DEF(jobs)
 			position_limit = job.spawn_positions
 		if((job.current_positions < position_limit) || position_limit == -1)
 			player.mind.assigned_job = job
-			player.mind.assigned_role = rank
+			player.mind.assigned_role = role
 			player.mind.role_alt_title = job.get_alt_title_for(player.client)
 			unassigned_roundstart -= player
 			job.current_positions++
@@ -215,7 +235,7 @@ SUBSYSTEM_DEF(jobs)
 /datum/controller/subsystem/jobs/proc/find_occupation_candidates(datum/job/job, level, flag)
 	var/list/candidates = list()
 	for(var/mob/new_player/player in unassigned_roundstart)
-		if(jobban_isbanned(player, job.title))
+		if(job.is_banned(player.client))
 			continue
 		if(!job.player_old_enough(player.client))
 			continue
@@ -239,7 +259,7 @@ SUBSYSTEM_DEF(jobs)
 			continue
 		if(job.title in titles_by_department(COM)) //If you want a command position, select it!
 			continue
-		if(jobban_isbanned(player, job.title))
+		if(job.is_banned(player.client))
 			continue
 		if(!job.player_old_enough(player.client))
 			continue
@@ -373,7 +393,7 @@ SUBSYSTEM_DEF(jobs)
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/attempt_role_assignment(var/mob/new_player/player, var/datum/job/job, var/level)
-	if(!jobban_isbanned(player, job.title) && \
+	if(!job.is_banned(player.client) && \
 	 job.player_old_enough(player.client) && \
 	 player.client.prefs.CorrectLevel(job, level) && \
 	 job.is_position_available())

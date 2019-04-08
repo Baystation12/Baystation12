@@ -40,11 +40,10 @@ var/list/ghost_traps
 	if(!candidate.MayRespawn(feedback, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
-		for(var/bantype in ban_checks)
-			if(jobban_isbanned(candidate, "[bantype]"))
-				if(feedback)
-					to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
-				return 0
+		if(candidate.client.is_banned(ban_checks))
+			if(feedback)
+				to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
+			return 0
 	return 1
 
 // Print a message to all ghosts with the right prefs/lack of bans.

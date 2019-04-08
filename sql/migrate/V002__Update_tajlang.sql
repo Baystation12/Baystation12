@@ -1,1 +1,0 @@
-UPDATE whitelist SET race="siik'maas" WHERE race="siik'tajr";

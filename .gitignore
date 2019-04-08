@@ -45,3 +45,5 @@ baystation12.code-workspace
 # ignore webhooks libs
 byhttp.dll
 libbyhttp.so
+# dotenv
+.env

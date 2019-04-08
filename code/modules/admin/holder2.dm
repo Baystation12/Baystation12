@@ -2,13 +2,16 @@
 #define STEALTH_MANUAL 1
 #define STEALTH_AUTO 2
 
-var/list/admin_datums = list()
+GLOBAL_LIST_EMPTY(granted_admins)
+GLOBAL_PROTECT(granted_admins)
 
 /datum/admins
-	var/rank         = "Temporary Admin"
-	var/client/owner = null
+	var/rank         = "Unknown"
 	var/rights       = 0
-	var/stealthy_    = STEALTH_OFF
+	var/flags		 = 0
+	var/stealthy     = STEALTH_OFF
+
+	var/ckey
 
 	var/weakref/marked_datum_weak
 
@@ -21,39 +24,14 @@ var/list/admin_datums = list()
 	if(marked_datum_weak)
 		return marked_datum_weak.resolve()
 
-/datum/admins/New(initial_rank = "Temporary Admin", initial_rights = 0, ckey)
-	if(!ckey)
-		error("Admin datum created without a ckey argument. Datum has been deleted")
-		qdel(src)
-		return
-	admincaster_signature = "[GLOB.using_map.company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
-	rank = initial_rank
-	rights = initial_rights
-	admin_datums[ckey] = src
+/datum/admins/CanProcCall(procname)
+	return FALSE
 
-/datum/admins/proc/associate(client/C)
-	if(istype(C))
-		if(admin_datums[C.ckey] != src)
-			return
-		owner = C
-		owner.holder = src
-		owner.add_admin_verbs()	//TODO
-		GLOB.admins |= C
-
-/datum/admins/proc/disassociate()
-	if(owner)
-		GLOB.admins -= owner
-		owner.remove_admin_verbs()
-		owner.deadmin_holder = owner.holder
-		owner.holder = null
-
-/datum/admins/proc/reassociate()
-	if(owner)
-		GLOB.admins += owner
-		owner.holder = src
-		owner.deadmin_holder = null
-		owner.add_admin_verbs()
-
+/datum/admins/New(ckey, rank, rights, flags = 0)
+	src.ckey = ckey
+	src.rank = rank
+	src.rights = rights
+	src.flags = flags
 
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)
@@ -73,7 +51,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		C = M.client
 	if(!C)
 		return FALSE
-	if(!C.holder)
+	if(!C.holder || C.holder.needs_grant())
 		if(show_msg)
 			to_chat(C, "<span class='warning'>Error: You are not an admin.</span>")
 		return FALSE
@@ -83,7 +61,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 			return TRUE
 		else
 			if(show_msg)
-				to_chat(C, "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</span>")
+				to_chat(C, "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags: [rights2text(rights_required," ")].</span>")
 			return FALSE
 	else
 		return TRUE
@@ -100,11 +78,28 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
 	return 0
 
+/datum/admins/proc/needs_grant()
+	return ((flags & AF_NEEDSGRANT) && (!GLOB.granted_admins[ckey]))
+
+/datum/admins/proc/grant_rights()
+	if (needs_grant())
+		GLOB.granted_admins |= ckey
+		log_and_message_admins("has granted [rank] rights to [ckey]")
+
 /client/proc/deadmin()
 	if(holder)
-		holder.disassociate()
-		//qdel(holder)
+		deadmin_holder = holder
+		holder = null
+		remove_admin_verbs()
+		GLOB.admins -= src
 	return 1
+
+/client/proc/readmin()
+	if (deadmin_holder)
+		holder = deadmin_holder
+		deadmin_holder = null
+		add_admin_verbs()
+		GLOB.admins += src
 
 /mob/Stat()
 	. = ..()
@@ -113,7 +108,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 
 	var/stealth_status = client.is_stealthed()
 	if(stealth_status && statpanel("Status"))
-		stat("Stealth", "Engaged [client.holder.stealthy_ == STEALTH_AUTO ? "(Auto)" : "(Manual)"]")
+		stat("Stealth", "Engaged [client.holder.stealthy == STEALTH_AUTO ? "(Auto)" : "(Manual)"]")
 
 /client/proc/is_stealthed()
 	if(!holder)
@@ -121,12 +116,12 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 
 	// If someone has been AFK since round-start or longer, stealth them
 	// BYOND keeps track of inactivity between rounds as long as it's not a full stop/start.
-	if(holder.stealthy_ == STEALTH_OFF && ((inactivity >= world.time) || (config.autostealth && inactivity >= MinutesToTicks(config.autostealth))))
-		holder.stealthy_ = STEALTH_AUTO
-	else if(holder.stealthy_ == STEALTH_AUTO && inactivity < world.time)
+	if(holder.stealthy == STEALTH_OFF && ((inactivity >= world.time) || (config.autostealth && inactivity >= MinutesToTicks(config.autostealth))))
+		holder.stealthy = STEALTH_AUTO
+	else if(holder.stealthy == STEALTH_AUTO && inactivity < world.time)
 		// And if someone has been set to auto-stealth and returns, unstealth them
-		holder.stealthy_ = STEALTH_OFF
-	return holder.stealthy_
+		holder.stealthy = STEALTH_OFF
+	return holder.stealthy
 
 /mob/proc/is_stealthed()
 	return client && client.is_stealthed()
@@ -135,16 +130,15 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	set category = "Admin"
 	set name = "Stealth Mode"
 
-	if(!holder)
-		to_chat(src, "<span class='warning'>Error: You are not an admin.</span>")
+	if(!check_rights())
 		return
 
-	holder.stealthy_ = holder.stealthy_ == STEALTH_OFF ? STEALTH_MANUAL : STEALTH_OFF
-	if(holder.stealthy_)
+	holder.stealthy = holder.stealthy == STEALTH_OFF ? STEALTH_MANUAL : STEALTH_OFF
+	if(holder.stealthy)
 		to_chat(src, "<span class='notice'>You are now stealthed.</span>")
 	else
 		to_chat(src, "<span class='notice'>You are no longer stealthed.</span>")
-	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
+	log_and_message_admins("has turned stealth mode [holder.stealthy ? "ON" : "OFF"]")
 	SSstatistics.add_field_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 #undef STEALTH_OFF

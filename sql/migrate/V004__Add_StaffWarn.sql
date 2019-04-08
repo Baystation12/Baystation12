@@ -1,1 +1,0 @@
-ALTER TABLE erro_player ADD COLUMN staffwarn TEXT DEFAULT NULL;

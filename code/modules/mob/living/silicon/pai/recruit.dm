@@ -347,18 +347,19 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 /datum/paiController/proc/requestRecruits(var/mob/user)
 	inquirer = user
 	for(var/mob/observer/ghost/O in GLOB.player_list)
+		if(!O.client)
+			return
 		if(!O.MayRespawn())
 			continue
-		if(jobban_isbanned(O, "pAI"))
+		if(O.client.is_banned(BAN_PAI))
 			continue
 		if(asked.Find(O.key))
 			if(world.time < asked[O.key] + askDelay)
 				continue
 			else
 				asked.Remove(O.key)
-		if(O.client)
-			if(BE_PAI in O.client.prefs.be_special_role)
-				question(O.client)
+		if(BE_PAI in O.client.prefs.be_special_role)
+			question(O.client)
 
 /datum/paiController/proc/question(var/client/C)
 	spawn(0)

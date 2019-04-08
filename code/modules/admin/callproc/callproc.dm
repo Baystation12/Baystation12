@@ -94,6 +94,10 @@
 			to_chat(usr, "Your callproc target no longer exists.")
 			clear()
 			return
+		if(!target.CanProcCall(procname))
+			to_chat(usr, "Proccall on [target.type]/proc/[procname] is forbidden.")
+			clear()
+			return
 		if(!hascall(target, procname))
 			to_chat(usr, "\The [target] has no call [procname]()")
 			clear()

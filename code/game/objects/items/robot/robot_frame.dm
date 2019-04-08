@@ -96,7 +96,7 @@
 			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
 			return
 
-		if(jobban_isbanned(B, "Robot"))
+		if(!B.client || !B.client.is_banned(BAN_ROBOT))
 			to_chat(user, SPAN_WARNING("\The [W] does not seem to fit."))
 			return
 

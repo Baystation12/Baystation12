@@ -146,14 +146,14 @@ SUBSYSTEM_DEF(statistics)
 		var/datum/death/death = new
 		var/area/placeofdeath = get_area(dead)
 		death.place_of_death = placeofdeath ? placeofdeath.name : "Unknown area"
-		death.place_of_death = sanitizeSQL(death.place_of_death)
-		death.name = sanitizeSQL(dead.real_name)
-		death.key = sanitizeSQL(dead.key)
-		death.special_role = sanitizeSQL(dead.mind.special_role)
-		death.job = sanitizeSQL(dead.mind.assigned_role)
+		death.place_of_death = death.place_of_death
+		death.name = dead.real_name
+		death.key = dead.key
+		death.special_role = dead.mind.special_role
+		death.job = dead.mind.assigned_role
 		if(dead.last_attacker_)
-			death.last_attacker_name = sanitizeSQL(dead.last_attacker_.name)
-			death.last_attacker_key =  sanitizeSQL(dead.last_attacker_.client.key)
+			death.last_attacker_name = dead.last_attacker_.name
+			death.last_attacker_key =  dead.last_attacker_.client.key
 		death.gender = dead.gender
 		death.time_of_death = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 		death.coords = "[dead.x], [dead.y], [dead.z]"

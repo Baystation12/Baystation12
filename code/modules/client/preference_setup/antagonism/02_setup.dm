@@ -51,7 +51,7 @@
 		. += "<span class='warning'>You will not receive an uplink unless you add an uplink source!</span>"
 	. +="<br>"
 	. +="Exploitable information:<br>"
-	if(jobban_isbanned(user, "Records"))
+	if(user.client && user.client.is_banned(BAN_RECORDS))
 		. += "<b>You are banned from using character records.</b><br>"
 	else
 		. +="<a href='?src=\ref[src];exploitable_record=1'>[TextPreview(pref.exploit_record,40)]</a><br>"
@@ -91,7 +91,7 @@
 
 	if(href_list["exploitable_record"])
 		var/exploitmsg = sanitize(input(user,"Set exploitable information about you here.","Exploitable Information", html_decode(pref.exploit_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
-		if(!isnull(exploitmsg) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+		if(!isnull(exploitmsg) && user.client && !user.client.is_banned(BAN_RECORDS) && CanUseTopic(user))
 			pref.exploit_record = exploitmsg
 			return TOPIC_REFRESH
 

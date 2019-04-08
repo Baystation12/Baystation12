@@ -38,7 +38,7 @@
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.role_text]: </td><td>"
-		if(jobban_isbanned(preference_mob(), antag.id) || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
+		if(target_is_banned(antag.id) || target_is_banned(BAN_ANTAG) || (antag.id == MODE_MALFUNCTION && target_is_banned(BAN_AI)))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
 		else if(antag.id in pref.be_special_role)
 			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
@@ -56,7 +56,7 @@
 			continue
 
 		. += "<tr><td>[(ghost_trap.ghost_trap_role)]: </td><td>"
-		if(banned_from_ghost_role(preference_mob(), ghost_trap))
+		if(target_is_banned(ghost_trap.ban_checks))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
 		else if(ghost_trap.pref_check in pref.be_special_role)
 			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[ghost_trap.pref_check]'>Low</a> <a href='?src=\ref[src];del_special=[ghost_trap.pref_check]'>Never</a></br>"
@@ -69,12 +69,6 @@
 	. += "<tr><td>Select All: </td><td><a href='?src=\ref[src];select_all=2'>High</a> <a href='?src=\ref[src];select_all=1'>Low</a> <a href='?src=\ref[src];select_all=0'>Never</a></td></tr>"
 	. += "</table>"
 	. = jointext(.,null)
-
-/datum/category_item/player_setup_item/proc/banned_from_ghost_role(var/mob, var/datum/ghosttrap/ghost_trap)
-	for(var/ban_type in ghost_trap.ban_checks)
-		if(jobban_isbanned(mob, ban_type))
-			return 1
-	return 0
 
 /datum/category_item/player_setup_item/antagonism/candidacy/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["add_special"])
@@ -120,9 +114,9 @@
 
 	for(var/antag_type in GLOB.all_antag_types_)
 		if(!include_bans)
-			if(jobban_isbanned(preference_mob(), antag_type))
+			if(target_is_banned(antag_type) || target_is_banned(BAN_ANTAG))
 				continue
-			if(((antag_type  == MODE_MALFUNCTION) && jobban_isbanned(preference_mob(), "AI")))
+			if(((antag_type  == MODE_MALFUNCTION) && target_is_banned(BAN_AI)))
 				continue
 		private_valid_special_roles += antag_type
 
@@ -132,7 +126,7 @@
 		if(!ghost_trap.list_as_special_role)
 			continue
 		if(!include_bans)
-			if(banned_from_ghost_role(preference_mob(), ghost_trap))		
+			if(target_is_banned(ghost_trap.ban_checks))		
 				continue
 		private_valid_special_roles += ghost_trap.pref_check
 

@@ -24,19 +24,7 @@
 	return vars
 
 /decl/global_vars/VV_hidden()
-	return list("forumsqladdress",
-				"forumsqldb",
-				"forumsqllogin",
-				"forumsqlpass",
-				"forumsqlport",
-				"sqladdress",
-				"sqldb",
-				"sqlfdbkdb",
-				"sqlfdbklogin",
-				"sqlfdbkpass",
-				"sqllogin",
-				"sqlpass",
-				"sqlport",
+	return list(
 				"comms_password",
 				"ban_comms_password",
 				"login_export_addr"

@@ -9,16 +9,9 @@
 #define MUTE_AOOC      0x20
 #define MUTE_ALL       0xFFFF
 
-// Some constants for DB_Ban
-#define BANTYPE_PERMA       1
-#define BANTYPE_TEMP        2
-#define BANTYPE_JOB_PERMA   3
-#define BANTYPE_JOB_TEMP    4
-#define BANTYPE_ANY_FULLBAN 5 // Used to locate stuff to unban.
-
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 // Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
-// Admin permissions.
+// Admin permissions
 #define R_BUILDMODE     0x1
 #define R_ADMIN         0x2
 #define R_BAN           0x4
@@ -35,8 +28,11 @@
 #define R_MOD           0x2000
 #define R_HOST          0x8000 //higher than this will overflow
 #define R_INVESTIGATE   (R_ADMIN|R_MOD)
+#define R_EVERYTHING    0xFFFF
 
-#define R_MAXPERMISSION 0x8000 // This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+// Admin rank flags
+#define AF_NEEDSGRANT   0x01
+
 
 #define ADDANTAG_PLAYER 1	// Any player may call the add antagonist vote.
 #define ADDANTAG_ADMIN 2	// Any player with admin privilegies may call the add antagonist vote.

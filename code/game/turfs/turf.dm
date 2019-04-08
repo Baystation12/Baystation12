@@ -274,10 +274,10 @@ var/const/enterloopsanity = 100
 
 /turf/proc/try_graffiti(var/mob/vandal, var/obj/item/tool)
 
-	if(!tool.sharp || !can_engrave() || vandal.a_intent != I_HELP)
+	if(!tool.sharp || !can_engrave() || vandal.a_intent != I_HELP || !vandal.client)
 		return FALSE
 
-	if(jobban_isbanned(vandal, "Graffiti"))
+	if(vandal.client.is_banned(BAN_GRAFFITI))
 		to_chat(vandal, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
 		return
 
