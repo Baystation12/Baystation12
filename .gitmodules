@@ -1,0 +1,3 @@
+[submodule "lib/dmpg"]
+	path = lib/dmpg
+	url = https://github.com/xales/dmpg.git
