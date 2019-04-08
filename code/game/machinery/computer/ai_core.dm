@@ -97,18 +97,19 @@
 					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
 					A.amount = 5
 
-			if(istype(P, /obj/item/stack/material) && P.get_material_name() == MATERIAL_REINFORCED_GLASS)
-				var/obj/item/stack/RG = P
-				if (RG.get_amount() < 2)
-					to_chat(user, "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>")
-					return
-				to_chat(user, "<span class='notice'>You start to put in the glass panel.</span>")
-				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-				if (do_after(user, 20,src) && state == 3)
-					if(RG.use(2))
-						to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
-						state = 4
-						icon_state = "4"
+			if(istype(P, /obj/item/stack/material))
+				var/obj/item/stack/material/RG = P
+				if(RG.material.name == MATERIAL_GLASS && RG.reinf_material)
+					if (RG.get_amount() < 2)
+						to_chat(user, "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>")
+						return
+					to_chat(user, "<span class='notice'>You start to put in the glass panel.</span>")
+					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					if (do_after(user, 20,src) && state == 3)
+						if(RG.use(2))
+							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
+							state = 4
+							icon_state = "4"
 
 			if(istype(P, /obj/item/weapon/aiModule/asimov))
 				laws.add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")

@@ -16,5 +16,7 @@
 		/obj/item/weapon/scalpel/laser1,
 		/obj/item/weapon/circular_saw,
 		/obj/item/weapon/extinguisher,
-		/obj/item/weapon/gripper/cultivator
+		/obj/item/weapon/gripper/cultivator,
+		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/weapon/robot_harvester
 	)

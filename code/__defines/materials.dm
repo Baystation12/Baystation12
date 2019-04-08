@@ -14,7 +14,6 @@
 #define MATERIAL_IRON                    "iron"
 #define MATERIAL_PLATINUM                "platinum"
 #define MATERIAL_BRONZE                  "bronze"
-#define MATERIAL_REINFORCED_GLASS        "rglass"
 #define MATERIAL_PHORON_GLASS            "phglass"
 #define MATERIAL_REINFORCED_PHORON_GLASS "rphglass"
 #define MATERIAL_MARBLE                  "marble"

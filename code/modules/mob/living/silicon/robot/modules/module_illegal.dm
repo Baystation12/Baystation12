@@ -4,7 +4,7 @@
 	hide_on_manifest = 1
 	upgrade_locked = TRUE
 	sprites = list(
-		"Dread" = "securityrobot",
+		"Dread" = "securityrobot"
 	)
 	equipment = list(
 		/obj/item/device/flash,

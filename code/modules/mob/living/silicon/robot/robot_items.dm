@@ -522,14 +522,15 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
 
-	var/base_power_generation = 3
+	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5
 	var/list/fuel_types = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat = 2
+		/obj/item/weapon/reagent_containers/food/snacks/meat = 2,
+		/obj/item/weapon/reagent_containers/food/snacks/fish = 1.5
 	)
 
 /obj/item/bioreactor/attack_self(var/mob/user)
-	if(contents)
+	if(contents.len >= 1)
 		var/obj/item/removing = contents[1]
 		user.put_in_hands(removing)
 		to_chat(user, SPAN_NOTICE("You remove \the [removing] from \the [src]."))

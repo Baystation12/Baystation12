@@ -32,19 +32,25 @@
 		/obj/item/device/floor_painter,
 		/obj/item/weapon/inflatable_dispenser/robot,
 		/obj/item/inducer/borg,
+		/obj/item/stack/material/cyborg/steel,
+		/obj/item/stack/material/cyborg/aluminium,
+		/obj/item/stack/material/rods/cyborg,
+		/obj/item/stack/tile/floor/cyborg,
+		/obj/item/stack/material/cyborg/glass,
+		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/cable_coil/cyborg,
+		/obj/item/stack/material/cyborg/plasteel,
 		/obj/item/device/plunger/robot
 	)
 	synths = list(
-		/datum/matter_synth/metal = 	60000,
-		/datum/matter_synth/glass = 	40000,
-		/datum/matter_synth/plasteel = 	20000,
+		/datum/matter_synth/metal = 	30000,
+		/datum/matter_synth/glass = 	20000,
+		/datum/matter_synth/plasteel = 	10000,
 		/datum/matter_synth/wire
 	)
 	emag = /obj/item/weapon/melee/baton/robot/electrified_arm
 
 /obj/item/weapon/robot_module/flying/repair/finalize_synths()
-
 	. = ..()
 	var/datum/matter_synth/metal/metal =       locate() in synths
 	var/datum/matter_synth/glass/glass =       locate() in synths
@@ -73,6 +79,7 @@
 
 	var/obj/item/stack/material/cyborg/plasteel/PL = locate() in equipment
 	PL.synths = list(plasteel)
+	. = ..()
 
 /obj/item/weapon/robot_module/flying/repair/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
