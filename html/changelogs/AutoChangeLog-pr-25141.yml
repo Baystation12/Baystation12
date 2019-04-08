@@ -1,0 +1,4 @@
+author: "Cronac"
+delete-after: True
+changes: 
+  - bugfix: "Targeted healing spells such as those used by wizards should now properly heal synthetics."
