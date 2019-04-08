@@ -1,0 +1,10 @@
+author: "ChaosAlpha"
+delete-after: True
+changes: 
+  - bugfix: "Drones spawn with modules once again."
+  - bugfix: "All robots/drones material synthesizers should be functional once again."
+  - bugfix: "AI cores should once again be constructible."
+  - bugfix: "Surveyor bioreactor doesn't runtime and actually gives a reasonable amount of power now."
+  - tweak: "Flying repair robot module comes with slightly nerfed synthesizers."
+  - tweak: "When remote controlling a maintenance drone, the AI can now use its radio as normal."
+  - tweak: "Cultivator module comes with a robot harvester."
