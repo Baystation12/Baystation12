@@ -1,6 +1,5 @@
 FROM xales/byond:512-latest
 
-
 ENV PATH=/root/cargo/bin:/root/rustup/bin:$PATH\
 	CARGO_HOME=/root/cargo\
 	RUSTUP_HOME=/root/rustup
@@ -21,18 +20,20 @@ RUN mkdir to_copy;\
 
 FROM xales/byond:512-latest
 
-ARG BUILD_ARGS
 ENV RUNAS=root
-
-COPY . /bs12
-COPY --from=0 /byhttp/to_copy /bs12/lib
-
-WORKDIR /bs12
-RUN apt-get update && apt-get install -y gosu
-RUN scripts/dm.sh $BUILD_ARGS baystation12.dme
 
 EXPOSE 8000
 VOLUME /bs12/data
 VOLUME /bs12/config
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
+
+RUN apt-get update && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*
+
+COPY --from=0 /byhttp/to_copy /bs12/lib
+COPY . /bs12
+
+WORKDIR /bs12
+
+ARG BUILD_ARGS
+RUN scripts/dm.sh $BUILD_ARGS baystation12.dme
