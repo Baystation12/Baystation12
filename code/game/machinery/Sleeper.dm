@@ -8,12 +8,18 @@
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
 	var/mob/living/carbon/human/occupant = null
-	var/list/available_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
+	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
+	var/list/available_chemicals = list()
+	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane)
+	var/list/upgrade2_chemicals = list("Hyronalin" = /datum/reagent/hyronalin)
+	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover, "Chloral Hydrate" = /datum/reagent/chloralhydrate)
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
 	var/pump
 	var/list/stasis_settings = list(1, 2, 5, 10)
 	var/stasis = 1
+	var/synth_modifier = 1
+	var/pump_speed
 
 	idle_power_usage = 15
 	active_power_usage = 1 KILOWATTS //builtin health analyzer, dialysis machine, injectors.
@@ -41,6 +47,9 @@
 			to_chat(user, "It is loaded with a beaker.")
 		if(occupant)
 			occupant.examine(user)
+		if (emagged && user.skill_check(SKILL_MEDICAL, SKILL_EXPERT))
+			to_chat(user, "The sleeper chemical synthesis controls look tampered with.")
+
 
 /obj/machinery/sleeper/Process()
 	if(stat & (NOPOWER|BROKEN))
@@ -51,7 +60,7 @@
 			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
 				var/pumped = 0
 				for(var/datum/reagent/x in occupant.reagents.reagent_list)
-					occupant.reagents.trans_to_obj(beaker, 3)
+					occupant.reagents.trans_to_obj(beaker, pump_speed)
 					pumped++
 				if(ishuman(occupant))
 					occupant.vessel.trans_to_obj(beaker, pumped + 1)
@@ -63,7 +72,7 @@
 				var/datum/reagents/ingested = occupant.get_ingested_reagents()
 				if(ingested)
 					for(var/datum/reagent/x in ingested.reagent_list)
-						ingested.trans_to_obj(beaker, 3)
+						ingested.trans_to_obj(beaker, pump_speed)
 		else
 			toggle_pump()
 
@@ -281,10 +290,41 @@
 	var/chemical_type = available_chemicals[chemical_name]
 	if(occupant && occupant.reagents)
 		if(occupant.reagents.get_reagent_amount(chemical_type) + amount <= 20)
-			use_power_oneoff(amount * CHEM_SYNTH_ENERGY)
+			use_power_oneoff(amount * CHEM_SYNTH_ENERGY * synth_modifier)
 			occupant.reagents.add_reagent(chemical_type, amount)
 			to_chat(user, "Occupant now has [occupant.reagents.get_reagent_amount(chemical_type)] unit\s of [chemical_name] in their bloodstream.")
 		else
 			to_chat(user, "The subject has too many chemicals.")
 	else
 		to_chat(user, "There's no suitable occupant in \the [src].")
+
+/obj/machinery/sleeper/RefreshParts()
+	var/T = 0
+
+	for (var/obj/item/weapon/stock_parts/scanning_module/S in component_parts) // scanning modules reduce power required and increase speed of dialysis / stomach pump
+		T += S.rating
+
+	T = max(T,1)
+	synth_modifier = 1/T
+	pump_speed = 2 + T
+	T = 0
+
+	for (var/obj/item/weapon/stock_parts/manipulator/M in component_parts) // manipulators unlock new drugs
+		T += M.rating
+
+	available_chemicals = base_chemicals.Copy()
+	if (T >= 4)
+		available_chemicals |= upgrade_chemicals
+	if (T >= 6)
+		available_chemicals |= upgrade2_chemicals
+
+
+/obj/machinery/sleeper/emag_act(var/remaining_charges, var/mob/user)
+	emagged = !emagged
+	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] \the [src]'s chemical synthesis safety checks.</span>")
+
+	if (emagged)
+		available_chemicals |= antag_chemicals
+	else
+		available_chemicals -= antag_chemicals
+	return 1
