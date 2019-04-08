@@ -31,10 +31,11 @@
 	var/list/themes = list()
 
 	var/list/map_generators = list()
+
+	//Flags deciding what features to pick
+	var/ruin_tags_whitelist
+	var/ruin_tags_blacklist
 	var/features_budget = 4
-	//pre-defined list of features templates to pick from
-	var/list/ruin_tags_whitelist
-	var/list/ruin_tags_blacklist
 	var/list/possible_features = list()
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
@@ -55,12 +56,12 @@
 		themes += new T
 
 	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
-		var/datum/map_template/ruin/exoplanet/ruin = new T
-		if(LAZYLEN(ruin_tags_whitelist) && !length(ruin_tags_whitelist & ruin.ruin_tags))
+		var/datum/map_template/ruin/exoplanet/ruin = T
+		if(ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
 			continue
-		if(LAZYLEN(ruin_tags_blacklist) && length(ruin_tags_blacklist & ruin.ruin_tags))
+		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
 			continue
-		possible_features += ruin
+		possible_features += new ruin
 	..()
 
 /obj/effect/overmap/sector/exoplanet/proc/build_level()

@@ -6,7 +6,7 @@
 	rock_colors = list(COLOR_BEIGE, COLOR_GRAY80, COLOR_BROWN)
 	possible_themes = list(/datum/exoplanet_theme/mountains)
 	map_generators = list(/datum/random_map/noise/exoplanet/barren, /datum/random_map/noise/ore/rich)
-	ruin_tags_blacklist = list(RUIN_HABITAT, RUIN_WATER)
+	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	features_budget = 6
 
 /obj/effect/overmap/sector/exoplanet/barren/generate_atmosphere()

@@ -5,7 +5,7 @@
 	planetary_area = /area/exoplanet/chlorine
 	rock_colors = list(COLOR_GRAY80, COLOR_PALE_GREEN_GRAY, COLOR_PALE_BTL_GREEN)
 	map_generators = list(/datum/random_map/noise/exoplanet/chlorine, /datum/random_map/noise/ore/poor)
-	ruin_tags_blacklist = list(RUIN_HABITAT, RUIN_WATER)
+	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 
 /obj/effect/overmap/sector/exoplanet/chlorine/generate_map()
 	if(prob(50))

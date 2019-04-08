@@ -25,6 +25,7 @@
 			set_light(E.lightlevel, 0.1, 2)
 			if(E.planetary_area && istype(loc, world.area))
 				E.planetary_area.contents.Add(src)
+				E.planetary_area.Entered(src)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)

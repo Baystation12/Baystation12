@@ -5,6 +5,7 @@
 	planetary_area = /area/exoplanet/shrouded
 	rock_colors = list(COLOR_INDIGO, COLOR_DARK_BLUE_GRAY, COLOR_NAVY_BLUE)
 	map_generators = list(/datum/random_map/noise/exoplanet/shrouded, /datum/random_map/noise/ore/poor)
+	ruin_tags_blacklist = RUIN_HABITAT
 
 /obj/effect/overmap/sector/exoplanet/shrouded/generate_atmosphere()
 	..()
