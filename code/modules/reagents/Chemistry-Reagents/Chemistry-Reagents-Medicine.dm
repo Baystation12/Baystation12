@@ -172,8 +172,19 @@
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-100 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
-		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.heal_organ_damage(15 * removed, 15 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(BP_IS_ROBOTIC(I))
+					continue
+				if(I.organ_tag == BP_BRAIN)
+					H.confused++
+					H.drowsyness++
+					if(I.damage >= I.min_bruised_damage)
+						continue
+					I.damage = max(I.damage - (15*removed), 0)
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
@@ -195,6 +206,17 @@
 		M.add_chemical_effect(CE_OXYGENATED, 2)
 		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(BP_IS_ROBOTIC(I))
+					continue
+				if(I.organ_tag == BP_BRAIN)
+					H.confused++
+					H.drowsyness++
+					if(I.damage >= I.min_bruised_damage)
+						continue
+					I.damage = max(I.damage - (25*removed), 0)
 
 /* Painkillers */
 
