@@ -1,0 +1,4 @@
+author: "Cronac"
+delete-after: True
+changes: 
+  - tweak: "Rogue drones now leave cleanable corpses when killed."
