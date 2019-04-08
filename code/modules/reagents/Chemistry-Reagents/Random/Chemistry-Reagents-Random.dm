@@ -105,6 +105,9 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		effect.affect_blood(M, alien, removed, data[effect.type])
 
 /datum/reagent/random/proc/on_chemicals_analyze(mob/user)
+	to_chat(user, get_scan_data(user))
+
+/datum/reagent/random/proc/get_scan_data(mob/user)
 	var/list/dat = list()
 	var/chem_skill = user.get_skill_value(SKILL_CHEMISTRY)
 	if(chem_skill < SKILL_BASIC)
@@ -140,7 +143,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		else
 			dat += "Here are the chemicals you suspect this one will interact with, probably when heated or cooled:"
 			dat += JOINTEXT(interactions)
-	to_chat(user, jointext(dat, "<br>"))
+	return jointext(dat, "<br>")
 
 /datum/reagent/random/Value()
 	. = 0

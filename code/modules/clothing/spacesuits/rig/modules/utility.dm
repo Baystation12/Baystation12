@@ -33,7 +33,7 @@
 	interface_desc = "Shows an informative health readout when used on a subject."
 	use_power_cost = 200
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
-	device_type = /obj/item/device/healthanalyzer
+	device_type = /obj/item/device/scanner/health
 
 /obj/item/rig_module/device/drill
 	name = "hardsuit drill mount"

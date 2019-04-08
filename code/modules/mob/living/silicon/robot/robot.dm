@@ -679,7 +679,7 @@
 				to_chat(usr, "Upgrade error!")
 
 	else
-		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
+		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/scanner/health)) )
 			spark_system.start()
 		return ..()
 

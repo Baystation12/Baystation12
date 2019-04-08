@@ -475,10 +475,10 @@
 "aU" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/device/analyzer,
-/obj/item/device/analyzer,
-/obj/item/device/analyzer/plant_analyzer,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/plant,
+/obj/item/device/scanner/health,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -16213,7 +16213,7 @@
 	pixel_y = 4
 	},
 /obj/item/weapon/storage/firstaid/empty,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/power/apc/high{
 	dir = 1;

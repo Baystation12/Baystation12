@@ -85,7 +85,7 @@
 	    /obj/item/device/flashlight,
 	    /obj/item/weapon/tank/emergency/oxygen/engi,
 	    /obj/item/clothing/glasses/hud/health,
-	    /obj/item/device/healthanalyzer,
+	    /obj/item/device/scanner/health,
 	    /obj/item/device/radio/off,
 	    /obj/random/medical,
 	    /obj/item/weapon/crowbar,
@@ -192,7 +192,7 @@
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
-		/obj/item/device/healthanalyzer,
+		/obj/item/device/scanner/health,
 		/obj/item/clothing/glasses/hud/health
 	)
 

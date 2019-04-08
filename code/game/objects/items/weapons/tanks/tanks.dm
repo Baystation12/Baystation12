@@ -98,7 +98,7 @@ var/list/global/tank_gauge_cache = list()
 	if (istype(loc, /obj/item/assembly))
 		icon = loc
 
-	if (istype(W, /obj/item/device/analyzer))
+	if (istype(W, /obj/item/device/scanner/gas))
 		return
 
 	if (istype(W,/obj/item/latexballon))

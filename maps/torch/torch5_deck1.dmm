@@ -13937,7 +13937,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/device/slime_scanner,
+/obj/item/device/scanner/xenobio,
 /obj/machinery/vending/wallmed2{
 	pixel_y = 32;
 	req_access = newlist()
@@ -17685,8 +17685,8 @@
 /obj/structure/table/standard,
 /obj/item/stack/material/uranium,
 /obj/item/stack/material/uranium,
-/obj/item/device/reagent_scanner,
-/obj/item/device/mass_spectrometer/adv,
+/obj/item/device/scanner/reagent,
+/obj/item/device/scanner/spectrometer/adv,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
 "eGl" = (
@@ -19465,7 +19465,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/item/device/mass_spectrometer,
+/obj/item/device/scanner/spectrometer,
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "gGb" = (
@@ -24068,8 +24068,8 @@
 /area/engineering/hardstorage/aux)
 "lNI" = (
 /obj/structure/table/glass,
-/obj/item/device/mass_spectrometer,
-/obj/item/device/reagent_scanner,
+/obj/item/device/scanner/spectrometer,
+/obj/item/device/scanner/reagent,
 /obj/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -31528,7 +31528,7 @@
 /obj/random/medical,
 /obj/random/medical,
 /obj/random/firstaid,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /obj/structure/closet/medical_wall{
 	pixel_y = 32
 	},

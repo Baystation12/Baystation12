@@ -1,24 +1,18 @@
-/obj/item/device/healthanalyzer
+/obj/item/device/scanner/health
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon_state = "health"
 	item_state = "analyzer"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
-	throwforce = 3
-	w_class = ITEM_SIZE_SMALL
-	throw_speed = 5
-	throw_range = 10
 	matter = list(MATERIAL_ALUMINIUM = 200)
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
-	var/mode = 1;
+	var/mode = 1
 
-/obj/item/device/healthanalyzer/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
+/obj/item/device/scanner/health/is_valid_scan_target(atom/O)
+	return istype(O, /mob/living/carbon/human) || istype(O, /obj/structure/closet/body_bag)
 
-	medical_scan_action(target, user, src, mode)
+/obj/item/device/scanner/health/scan(atom/A, mob/user)
+	scan_data = medical_scan_action(A, user, src, mode)
 
 /proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, var/verbose)
 	if (!user.IsAdvancedToolUser())
@@ -70,17 +64,17 @@
 	var/dat = list()
 
 	if(skill_level >= SKILL_BASIC)
-		header += "<style> .scan_notice{color: #000099;}</style>"
+		header += "<style> .scan_notice{color: #5f94af;}</style>"
 		header += "<style> .scan_warning{color: #ff0000; font-style: italic;}</style>"
 		header += "<style> .scan_danger{color: #ff0000; font-weight: bold;}</style>"
 		header += "<style> .scan_red{color:red}</style>"
 		header += "<style> .scan_green{color:green}</style>"
-		header += "<style> .scan_blue{color:blue}</style>"
+		header += "<style> .scan_blue{color: #5f94af}</style>"
 		header += "<style> .scan_orange{color:#ffa500}</style>"
 		b		= "<b>"
 		endb	= "</b>"
 
-	. += "<span class='scan_notice'>[b]Scan results for \the [H]:[endb]</span>"
+	. += "[b]Scan results for \the [H]:[endb]"
 
 	// Brain activity.
 	var/brain_result = "normal"
@@ -97,7 +91,7 @@
 				else
 					switch(brain.get_current_damage_threshold())
 						if(0)
-							brain_result = "<span class='scan_notice'>normal</span>"
+							brain_result = "normal"
 						if(1 to 2)
 							brain_result = "<span class='scan_notice'>minor brain damage</span>"
 						if(3 to 5)
@@ -110,42 +104,55 @@
 							brain_result = "<span class='scan_danger'>ERROR - Hardware fault</span>"
 	else
 		brain_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
-	dat += "<span class='scan_notice'>Brain activity:</span> [brain_result]."
+	dat += "Brain activity: [brain_result]."
 
 	if(H.stat == DEAD || (H.status_flags & FAKEDEATH))
-		dat += "<span class='scan_notice'>[b]Time of Death:[endb] [time2text(worldtime2stationtime(H.timeofdeath), "hh:mm")]</span>"
+		dat += "<span class='scan_warning'>[b]Time of Death:[endb] [time2text(worldtime2stationtime(H.timeofdeath), "hh:mm")]</span>"
 
 	if (H.internal_organs_by_name[BP_STACK])
 		dat += "<span class='scan_notice'>Subject has a neural lace implant.</span>"
 
 	// Pulse rate.
 	var/pulse_result = "normal"
-	var/pulse_suffix = "bpm"
 	if(H.should_have_organ(BP_HEART))
 		if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
 		else
 			pulse_result = H.get_pulse(GETPULSE_TOOL)
+		pulse_result = "[pulse_result]bpm"
+		if(H.pulse() == PULSE_NONE)
+			pulse_result = "<span class='scan_danger'>[pulse_result]</span>"
+		else if(H.pulse() < PULSE_NORM)
+			pulse_result = "<span class='scan_notice'>[pulse_result]</span>"
+		else if(H.pulse() > PULSE_NORM)
+			pulse_result = "<span class='scan_warning'>[pulse_result]</span>"
 	else
 		pulse_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
-		pulse_suffix = ""
-	dat += "<span class='scan_notice'>Pulse rate: [pulse_result][pulse_suffix].</span>"
+	dat += "Pulse rate: [pulse_result]."
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
 	if(H.should_have_organ(BP_HEART))
 		if(H.get_blood_volume() <= 70)
 			dat += "<span class='scan_danger'>Severe blood loss detected.</span>"
-		dat += "[b]Blood pressure:[endb] [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
+		var/oxygenation_string = "[H.get_blood_oxygenation()]% blood oxygenation"
+		switch(H.get_blood_oxygenation())
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				oxygenation_string = "<span class='scan_notice'>[oxygenation_string]</span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_OKAY)
+				oxygenation_string = "<span class='scan_warning'>[oxygenation_string]</span>"
+			if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
+				oxygenation_string = "<span class='scan_danger'>[oxygenation_string]</span>"
+		dat += "[b]Blood pressure:[endb] [H.get_blood_pressure()] ([oxygenation_string])"
 	else
 		dat += "[b]Blood pressure:[endb] N/A"
 
 	// Body temperature.
-	dat += "<span class='scan_notice'>Body temperature: [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)</span>"
+	dat += "Body temperature: [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
 
 	// Radiation.
 	switch(H.radiation)
 		if(-INFINITY to 0)
-			dat += "<span class='scan_notice'>No radiation detected.</span>"
+			dat += "No radiation detected."
 		if(1 to 30)
 			dat += "<span class='scan_notice'>Patient shows minor traces of radiation exposure.</span>"
 		if(31 to 60)
@@ -216,7 +223,7 @@
 
 	if(verbose)
 		// Limb status.
-		. += "<span class='scan_notice'>[b]Specific limb damage:[endb]</span>"
+		. += "[b]Specific limb damage:[endb]"
 
 		var/list/damaged = H.get_damaged_organs(1,1)
 		if(damaged.len)
@@ -234,7 +241,7 @@
 	. += (skill_level < SKILL_BASIC) ? shuffle(dat) : dat
 
 	// Reagent data.
-	. += "<span class='scan_notice'>[b]Reagent scan:[endb]</span>"
+	. += "[b]Reagent scan:[endb]"
 
 	var/print_reagent_default_message = TRUE
 	if(H.reagents.total_volume)
@@ -315,7 +322,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 
 	return degree
 
-/obj/item/device/healthanalyzer/verb/toggle_mode()
+/obj/item/device/scanner/health/verb/toggle_mode()
 	set name = "Switch Verbosity"
 	set category = "Object"
 

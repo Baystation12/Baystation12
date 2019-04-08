@@ -403,7 +403,7 @@
 	d2 = 4
 	},
 /obj/structure/table/glass,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /obj/item/weapon/storage/box/bodybags,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
@@ -2468,9 +2468,9 @@
 /obj/item/device/radio{
 	name = "captured shortwave radio"
 	},
-/obj/item/device/analyzer,
-/obj/item/device/analyzer,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutshuttle)
 "rq" = (

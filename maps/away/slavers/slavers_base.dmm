@@ -3955,7 +3955,7 @@
 /area/slavers_base/demo)
 "jM" = (
 /obj/structure/table/standard,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jN" = (

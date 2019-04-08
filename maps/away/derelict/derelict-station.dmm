@@ -431,7 +431,7 @@
 /area/constructionsite/maintenance)
 "bj" = (
 /obj/structure/table/standard,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bk" = (

@@ -1175,7 +1175,7 @@
 	if(istype(W, /obj/item/device/pipe_painter))
 		return
 
-	if(istype(W, /obj/item/device/analyzer))
+	if(istype(W, /obj/item/device/scanner/gas))
 		return
 
 /obj/machinery/atmospherics/pipe/tank/air

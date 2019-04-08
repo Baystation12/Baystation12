@@ -144,7 +144,7 @@
 				   /obj/item/weapon/tank,
 			 	   /obj/item/device/suit_cooling_unit,
 				   /obj/item/weapon/storage/firstaid,
-				   /obj/item/device/healthanalyzer,
+				   /obj/item/device/scanner/health,
 				   /obj/item/stack/medical,
 				   /obj/item/roller)
 
@@ -263,7 +263,7 @@
 				   /obj/item/device/suit_cooling_unit,
 			       /obj/item/stack/flag,
 				   /obj/item/weapon/storage/excavation,
-				   /obj/item/device/healthanalyzer,
+				   /obj/item/device/scanner/health,
 				   /obj/item/device/measuring_tape,
 				   /obj/item/device/ano_scanner,
 				   /obj/item/device/depth_scanner,

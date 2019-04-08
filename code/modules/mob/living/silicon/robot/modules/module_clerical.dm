@@ -28,7 +28,7 @@
 		/obj/item/weapon/reagent_containers/glass/bucket,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
-		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/device/scanner/plant,
 		/obj/item/weapon/storage/plants,
 		/obj/item/weapon/robot_harvester,
 		/obj/item/weapon/material/kitchen/rollingpin,
