@@ -360,6 +360,34 @@
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
+/obj/effect/rune/obscure
+	cultname = "obscure"
+
+/obj/effect/rune/obscure/cast(var/mob/living/user)
+	var/runecheck = 0
+	for(var/obj/effect/rune/R in orange(1, src))
+		if(R != src)
+			R.set_invisibility(INVISIBILITY_OBSERVER)
+		runecheck = 1
+	if(runecheck)
+		speak_incantation(user, "Kla[pick("'","`")]atu barada nikt'o!")
+		visible_message("<span class='warning'>\ The rune turns into gray dust that conceals the surrounding runes.</span>")
+		qdel(src)
+
+/obj/effect/rune/reveal
+	cultname = "reveal"
+
+/obj/effect/rune/reveal/cast(var/mob/living/user)
+	var/irunecheck = 0
+	for(var/obj/effect/rune/R in orange(1, src))
+		if(R != src)
+			R.set_invisibility(SEE_INVISIBLE_NOLIGHTING)
+		irunecheck = 1
+	if(irunecheck)
+		speak_incantation(user, "Nikt[pick("'","`")]o barada kla'atu!")
+		visible_message("<span class='warning'>\ The rune turns into red dust that reveals the surrounding runes.</span>")
+		qdel(src)
+
 /* Tier 2 runes */
 
 
@@ -834,6 +862,10 @@
 	new papertype(get_turf(src))
 	qdel(target)
 	qdel(src)
+
+/obj/effect/rune/imbue/stun
+	cultname = "stun imbue"
+	papertype = /obj/item/weapon/paper/talisman/stun
 
 /obj/effect/rune/imbue/emp
 	cultname = "destroy technology imbue"
