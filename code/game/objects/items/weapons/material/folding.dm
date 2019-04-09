@@ -91,7 +91,7 @@
 /obj/item/weapon/material/knife/folding/combat //master obj
 	name = "the concept of a fighting knife in which the blade can be stowed in its own handle"
 	desc = "This is a master item - berate the admin or mapper who spawned this"
-	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
+	force_divisor = 0.15 // 9 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	attack_cooldown_modifier = -1
 	takes_colour = FALSE
