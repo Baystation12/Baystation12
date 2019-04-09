@@ -1,7 +1,7 @@
 macro "borghotkeymode"
 	elem 
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=borgmacro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5\""
+		command = ".winset \"mainwindow.macro=borgmacro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
 	elem 
 		name = "Center+REP"
 		command = ".center"
@@ -222,7 +222,7 @@ macro "borghotkeymode"
 macro "macro"
 	elem 
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
+		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
 	elem 
 		name = "Center+REP"
 		command = ".center"
@@ -392,7 +392,7 @@ macro "macro"
 macro "hotkeymode"
 	elem 
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true\""
+		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
 	elem 
 		name = "Center+REP"
 		command = ".center"
@@ -633,7 +633,7 @@ macro "hotkeymode"
 macro "borgmacro"
 	elem 
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=borghotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#F0F0F0\""
+		command = ".winset \"mainwindow.macro=borghotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
 	elem 
 		name = "Center+REP"
 		command = ".center"
@@ -1184,7 +1184,7 @@ window "mainwindow"
 		background-color = none
 		saved-params = ""
 		text = "Hotkey Toggle"
-		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
+		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5 : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
 		button-type = pushbox
 	elem "mainvsplit"
 		type = CHILD

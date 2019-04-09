@@ -42,13 +42,22 @@
 	QDEL_NULL(mob.skillset.NM)
 	QDEL_NULL_LIST(nm_viewing)
 	QDEL_NULL_LIST(mob.skillset.nm_viewing)
-
-	update_verbs()
+	on_levels_change()
 
 //Called when a player is added as an antag and the antag datum processes the skillset.
 /datum/skillset/proc/on_antag_initialize()
+	on_levels_change()
+
+/datum/skillset/proc/on_levels_change()
 	update_verbs()
+	update_special_effects()
 	refresh_uis()
+
+/datum/skillset/proc/update_special_effects()
+	if(!owner)
+		return
+	for(var/decl/hierarchy/skill/skill in GLOB.skills)
+		skill.update_special_effects(owner, get_value(skill.type))
 
 /datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client, override = 0)
 	if(!skills_transferable)
@@ -62,10 +71,9 @@
 	skill_list = list()
 
 	for(var/decl/hierarchy/skill/S in GLOB.skills)
-		var/min = given_client.prefs.get_min_skill(job, S)
+		var/min = job ? given_client.prefs.get_min_skill(job, S) : SKILL_MIN
 		skill_list[S.type] = min + (allocation[S] || 0)
-	update_verbs()
-	refresh_uis()
+	on_levels_change()
 
 //Skill-related mob helper procs
 
@@ -76,7 +84,7 @@
 	qdel(skillset)
 	var/new_type = initial(skillset)
 	skillset = new new_type(src)
-	var/datum/job/job = mind && job_master.GetJob(mind.assigned_role)
+	var/datum/job/job = mind && SSjobs.get_by_title(mind.assigned_role)
 	skillset.obtain_from_client(job, client)
 
 // Use to perform skill checks
@@ -108,6 +116,10 @@
 		return 0
 	else
 		return fail_chance * 2 ** (factor*(SKILL_MIN - points))
+
+// Simple prob using above
+/mob/proc/skill_fail_prob(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
+	return prob(skill_fail_chance(skill_path, fail_chance, no_more_fail, factor ))
 
 // Show skills verb
 

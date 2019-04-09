@@ -15,7 +15,7 @@
 
 /obj/item/clothing/under/lawyer/fiendsuit
 	name = "black suit"
-	desc = "A snappy black suit with red trim. The undershirt’s stained with something, though..."
+	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
 	icon_state = "fiendsuit"
 	species_restricted = list(SPECIES_HUMAN)
 
@@ -38,5 +38,5 @@
 
 /obj/item/clothing/under/devildress
 	name = "old dress"
-	desc = "An elegant - if tattered - black and red dress. There’s nothing visible through the holes in the fabric; nothing but darkness."
+	desc = "An elegant - if tattered - black and red dress. There's nothing visible through the holes in the fabric; nothing but darkness."
 	icon_state = "fienddress"

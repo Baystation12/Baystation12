@@ -38,6 +38,7 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
 	var/material/implicit_material
+	autoset_access = FALSE // Uses different system with buttons.
 
 /obj/machinery/door/blast/Initialize()
 	. = ..()
@@ -219,6 +220,14 @@
 	min_force = 30
 	maxhealth = 1000
 	block_air_zones = 1
+
+/obj/machinery/door/blast/regular/escape_pod
+	name = "Escape Pod release Door"
+
+/obj/machinery/door/blast/regular/escape_pod/Process()	
+	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)		
+		src.force_open()
+	. = ..()
 
 /obj/machinery/door/blast/regular/open
 	begins_closed = FALSE

@@ -14,6 +14,7 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
+	var/plural_icon_state
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stacktype //determines whether different stack types can merge
@@ -74,7 +75,7 @@
 				continue
 			t1+="<br>"
 			var/max_multiplier = round(src.get_amount() / R.req_amount)
-			var/title as text
+			var/title
 			var/can_build = 1
 			can_build = can_build && (max_multiplier>0)
 			if (R.res_amount>1)
@@ -335,6 +336,7 @@
 	var/use_reinf_material
 	var/difficulty = 1 // higher difficulty requires higher skill level to make.
 	var/send_material_data = 0 //Whether the recipe will send the material name as an argument when creating product.
+	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
 
 /datum/stack_recipe/New(material/material, var/reinforce_material)
 	if(material)
@@ -344,7 +346,7 @@
 		use_reinf_material = reinforce_material
 
 /datum/stack_recipe/proc/display_name()
-	if(!use_material)
+	if(!use_material || !apply_material_name)
 		return title
 	. = "[material_display_name(use_material)] [title]"
 	if(use_reinf_material)

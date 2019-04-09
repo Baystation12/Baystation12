@@ -89,9 +89,13 @@
 	SetName(get_visible_name())
 
 /mob/living/carbon/human/set_stat(var/new_stat)
+	var/old_stat = stat
 	. = ..()
 	if(stat)
 		update_skin(1)
+	if(client && client.is_afk())
+		if(old_stat == UNCONSCIOUS && stat == CONSCIOUS)
+			playsound_local(null, 'sound/effects/bells.ogg', 100, is_global=TRUE)
 
 /mob/living/carbon/human/proc/handle_some_updates()
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
@@ -588,11 +592,7 @@
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 					if(client || sleeping > 3)
 						AdjustSleeping(-1)
-				if(prob(2) && !failed_last_breath && !isSynthetic())
-					if(!paralysis)
-						emote("snore")
-					else
-						emote("groan")
+				species.handle_sleeping(src)
 			if(prob(2) && is_asystole() && isSynthetic())
 				visible_message(src, "<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
 		//CONSCIOUS
@@ -835,7 +835,7 @@
 	if(chem_effects[CE_ALCOHOL])
 		vomit_score += 10
 	if(stat != DEAD && vomit_score > 25 && prob(10))
-		spawn vomit(1, vomit_score, vomit_score/25)
+		vomit(vomit_score, vomit_score/25)
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
@@ -848,24 +848,6 @@
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
-
-/mob/living/carbon/human/handle_stomach()
-	spawn(0)
-		for(var/a in stomach_contents)
-			if(!(a in contents) || isnull(a))
-				stomach_contents.Remove(a)
-				continue
-			if(iscarbon(a)|| isanimal(a))
-				var/mob/living/M = a
-				if(M.stat == DEAD)
-					M.death(1)
-					stomach_contents.Remove(M)
-					qdel(M)
-					continue
-				if(life_tick % 3 == 1)
-					if(!(M.status_flags & GODMODE))
-						M.adjustBruteLoss(5)
-					nutrition += 10
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)
@@ -1001,7 +983,7 @@
 		if(wear_id)
 			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
 			if(I)
-				var/datum/job/J = job_master.GetJob(I.GetJobName())
+				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
 					holder.icon_state = J.hud_icon
 
@@ -1141,5 +1123,5 @@
 
 /mob/living/carbon/human/update_living_sight()
 	..()
-	if(MUTATION_XRAY in mutations)
+	if((CE_THIRDEYE in chem_effects) || (MUTATION_XRAY in mutations))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

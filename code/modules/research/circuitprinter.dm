@@ -11,7 +11,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	var/list/datum/design/queue = list()
 	var/progress = 0
 
-	var/max_material_storage = 75000
+	var/max_material_storage = 100000
 	var/mat_efficiency = 1
 	var/speed = 1
 
@@ -60,7 +60,10 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	var/T = 0
 	for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
 		T += G.reagents.maximum_volume
-	create_reagents(T)
+	if(!reagents)
+		create_reagents(T)
+	else
+		reagents.maximum_volume = T
 	max_material_storage = 0
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
 		max_material_storage += M.rating * 75000
@@ -132,15 +135,16 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	return
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/removeFromQueue(var/index)
+	if(!is_valid_index(index, queue))
+		return
 	queue.Cut(index, index + 1)
-	return
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/canBuild(var/datum/design/D)
 	for(var/M in D.materials)
 		if(materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	for(var/C in D.chemicals)
-		if(!reagents.has_reagent(C, D.chemicals[C]))
+		if(!reagents.has_reagent(C, D.chemicals[C] * mat_efficiency))
 			return 0
 	return 1
 

@@ -26,6 +26,14 @@
 	cost = 1
 	accessibility_weight = 10
 	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
+	apc_test_exempt_areas = list(
+		/area/outpost/abandoned = NO_SCRUBBER,
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_usage_test_exempted_root_areas = list(/area/mine)
+	area_usage_test_exempted_areas = list(/area/djstation)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
@@ -80,6 +88,12 @@
 	suffixes = list("mining/mining-signal.dmm")
 	cost = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	area_usage_test_exempted_root_areas = list(/area/mine, /area/outpost)
+	apc_test_exempt_areas = list(
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/away
 	base_area = /area/mine/explored
@@ -136,6 +150,13 @@
 	cost = 1
 	accessibility_weight = 10
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	area_usage_test_exempted_root_areas = list(/area/mine)
+	area_usage_test_exempted_areas = list(/area/djstation)
+	apc_test_exempt_areas = list(
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/orb/nav1
 	name = "Anchor point A"
@@ -165,36 +186,6 @@
 	name = "Landing zone A"
 	landmark_tag = "nav_orb_7"
 	base_area = /area/mine/explored
-
-/mob/living/simple_animal/parrot/space
-	name = "space parrot"
-	desc = "It could be some all-knowing being that, for reasons we could never hope to understand, is assuming the shape and general mannerisms of a parrot - or just a rather large bird."
-	icon = 'icons/mob/parrot_grey.dmi'
-	gender = FEMALE
-	health = 750 //how sweet it is to be a god!
-	maxHealth = 750
-	mob_size = MOB_LARGE
-	speak_emote = list("professes","speaks unto you","elaborates","proclaims")
-	emote_hear = list("sings a song to herself", "preens herself")
-	melee_damage_lower = 20
-	melee_damage_upper = 40
-	attacktext = "pecked"
-	min_gas = null
-	max_gas = null
-	minbodytemp = 0
-	universal_understand = 1
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	see_in_dark = 7
-	can_escape = 1
-
-/mob/living/simple_animal/parrot/space/Initialize()
-	. = ..()
-	name = pick("Simurgh", "Ziz", "Phoenix", "Fenghuang", "Roc of Ages")
-	var/matrix/M = new
-	M.Scale(2)
-	transform = M
-	color = get_random_colour(lower = 190)
-
 
 /obj/structure/totem
 	name = "totem"

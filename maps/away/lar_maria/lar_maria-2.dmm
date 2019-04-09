@@ -1466,7 +1466,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -2417,7 +2417,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -2512,7 +2512,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
@@ -2637,7 +2637,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
@@ -3050,7 +3050,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
@@ -3571,7 +3571,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)

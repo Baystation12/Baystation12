@@ -12,8 +12,7 @@
 	min_age = 17
 	max_age = 100
 	hidden_from_codex = FALSE
-
-	gluttonous = GLUT_TINY
+	bandages_icon = 'icons/mob/bandage.dmi'
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
@@ -99,6 +98,7 @@
 	icobase = 'icons/mob/human_races/species/skrell/body.dmi'
 	deform = 'icons/mob/human_races/species/skrell/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/skrell/preview.dmi'
+	bandages_icon = 'icons/mob/bandage.dmi'
 	primitive_form = "Neaera"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	description = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \

@@ -241,6 +241,15 @@
 	nutriment_factor = 1
 	color = "#ffffff"
 
+/datum/reagent/nutriment/rice/chazuke
+	name = "Chazuke"
+	description = "Green tea over rice. How rustic!"
+	taste_description = "green tea and rice"
+	taste_mult = 0.4
+	reagent_state = LIQUID
+	nutriment_factor = 1
+	color = "#f1ffdb"
+
 /datum/reagent/nutriment/cherryjelly
 	name = "Cherry Jelly"
 	description = "Totally the best. Only to be spread on foods with excellent lateral symmetry."
@@ -295,7 +304,7 @@
 	description = "Also known as Mentha."
 	taste_description = "sweet mint"
 	reagent_state = LIQUID
-	color = "#cf3600"
+	color = "#07aab2"
 
 /datum/reagent/lipozine // The anti-nutriment.
 	name = "Lipozine"
@@ -742,44 +751,6 @@
 
 	glass_name = "soy milk"
 	glass_desc = "White and nutritious soy goodness!"
-
-/datum/reagent/drink/tea
-	name = "Tea"
-	description = "Tasty black tea, it has antioxidants, it's good for you!"
-	taste_description = "tart black tea"
-	color = "#101000"
-	adj_dizzy = -2
-	adj_drowsy = -1
-	adj_sleepy = -3
-	adj_temp = 20
-
-	glass_name = "tea"
-	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
-	glass_special = list(DRINK_VAPOR)
-
-/datum/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(alien == IS_DIONA)
-		return
-	M.adjustToxLoss(-0.5 * removed)
-
-/datum/reagent/drink/tea/icetea
-	name = "Iced Tea"
-	description = "It's the tea you know and love, but now it's cold."
-	taste_description = "cold black tea"
-	adj_temp = -5
-
-	glass_name = "iced tea"
-	glass_desc = "It's the tea you know and love, but now it's cold."
-	glass_special = list(DRINK_ICE)
-
-/datum/reagent/drink/tea/icetea/sweet
-	name = "Sweet Tea"
-	description = "It's the tea you know and love, but now it's cold. And sweet."
-	taste_description = "sweet tea"
-
-	glass_name = "sweet tea"
-	glass_desc = "It's the tea you know and love, but now it's cold. And sweet."
 
 /datum/reagent/drink/coffee
 	name = "Coffee"
@@ -1324,10 +1295,6 @@
 
 	glass_name = "vodka"
 	glass_desc = "The glass contain wodka. Xynta."
-
-/datum/reagent/ethanol/vodka/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.apply_effect(max(M.radiation - 1 * removed, 0), IRRADIATE, blocked = 0)
 
 /datum/reagent/ethanol/vodka/premium
 	name = "Premium Vodka"
@@ -2109,3 +2076,77 @@
 
 	glass_name = "special blend whiskey"
 	glass_desc = "Just when you thought regular whiskey was good... This silky, amber goodness has to come along and ruin everything."
+
+//black tea
+/datum/reagent/drink/tea
+	name = "Black Tea"
+	description = "Tasty black tea, it has antioxidants, it's good for you!"
+	taste_description = "tart black tea"
+	color = "#101000"
+	adj_dizzy = -2
+	adj_drowsy = -1
+	adj_sleepy = -3
+	adj_temp = 20
+
+	glass_name = "black tea"
+	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
+	glass_special = list(DRINK_VAPOR)
+
+/datum/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+	M.adjustToxLoss(-0.5 * removed)
+
+/datum/reagent/drink/tea/icetea
+	name = "Iced Black Tea"
+	description = "It's the tea you know and love, but now it's cold."
+	taste_description = "cold black tea"
+	adj_temp = -5
+
+	glass_name = "iced black tea"
+	glass_desc = "It's the tea you know and love, but now it's cold."
+	glass_special = list(DRINK_ICE)
+
+/datum/reagent/drink/tea/icetea/sweet
+	name = "Sweet Black Tea"
+	description = "It's the tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet tea"
+
+	glass_name = "sweet black tea"
+	glass_desc = "It's the tea you know and love, but now it's cold. And sweet."
+
+/datum/reagent/drink/tea/barongrey
+	name = "Baron Grey Tea"
+	description = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
+	taste_description = "tangy black tea"
+
+	glass_name = "Baron Grey tea"
+	glass_desc = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
+
+//green tea
+/datum/reagent/drink/tea/green
+	name = "Green Tea"
+	taste_description = "subtle green tea"
+	color = "#b4cd94"
+	glass_name = "green tea"
+
+/datum/reagent/drink/tea/icetea/green
+	name = "Iced Green Tea"
+	taste_description = "cold green tea"
+	color = "#b4cd94"
+	glass_name = "iced green tea"
+
+/datum/reagent/drink/tea/icetea/green/sweet
+	name = "Sweet Green Tea"
+	taste_description = "sweet green tea"
+	color = "#b4cd94"
+	glass_name = "sweet green tea"
+
+/datum/reagent/drink/tea/icetea/green/sweet/mint
+	name = "Maghrebi Tea"
+	description = "Iced green tea prepared with mint and sugar. Refreshing!"
+	taste_description = "refreshing mint tea"
+
+	glass_name = "Maghrebi mint tea"
+	glass_desc = "Iced green tea prepared with mint and sugar. Refreshing!"

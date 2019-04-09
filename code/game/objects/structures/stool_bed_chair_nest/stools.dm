@@ -18,10 +18,8 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
 
-/obj/item/weapon/stool/New(var/newloc, var/new_material, var/new_padding_material)
+/obj/item/weapon/stool/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
 	..(newloc)
-	if(!new_material)
-		new_material = MATERIAL_STEEL
 	material = SSmaterials.get_material_by_name(new_material)
 	if(new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
@@ -31,8 +29,8 @@ var/global/list/stool_cache = list() //haha stool
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
-/obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
-	..(newloc, MATERIAL_STEEL, MATERIAL_CARPET)
+/obj/item/weapon/stool/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, new_material, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/bar
 	name = "bar stool"
@@ -43,8 +41,8 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/bar/padded
 	icon_state = "bar_stool_padded_preview"
 
-/obj/item/weapon/stool/bar/padded/New(var/newloc, var/new_material)
-	..(newloc, MATERIAL_STEEL, MATERIAL_CARPET)
+/obj/item/weapon/stool/bar/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, new_material, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/on_update_icon()
 	// Prep icon.
@@ -91,12 +89,12 @@ var/global/list/stool_cache = list() //haha stool
 		user.do_attack_animation(target)
 		dismantle() //This deletes self.
 
-		var/blocked = target.run_armor_check(hit_zone, "melee")
-		target.Weaken(10 * blocked_mult(blocked))
-		target.apply_damage(20, BRUTE, hit_zone, blocked, src)
-		return
+		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE)
+		target.Weaken(10 * (1 - blocked))
+		target.apply_damage(20, BRUTE, hit_zone, src)
+		return 1
 
-	..()
+	return ..()
 
 /obj/item/weapon/stool/ex_act(severity)
 	switch(severity)

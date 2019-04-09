@@ -1,6 +1,8 @@
 /datum/job/submap
 	branch = /datum/mil_branch/civilian
 	rank =   /datum/mil_rank/civ/civ
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 /datum/map/torch
 	branch_types = list(
@@ -8,23 +10,39 @@
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
-		/datum/mil_branch/army
+		/datum/mil_branch/army,
+		/datum/mil_branch/alien,
+		/datum/mil_branch/skrell_fleet
 	)
 
 	spawn_branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/solgov
+		/datum/mil_branch/solgov,
+		/datum/mil_branch/alien,
+		/datum/mil_branch/skrell_fleet
+	)
+
+	species_to_branch_blacklist = list(
+		/datum/species/human   = list(/datum/mil_branch/alien, /datum/mil_branch/skrell_fleet),
+		/datum/species/machine = list(/datum/mil_branch/alien, /datum/mil_branch/skrell_fleet),
+		/datum/species/vox     = list(
+			/datum/mil_branch/expeditionary_corps,
+			/datum/mil_branch/fleet,
+			/datum/mil_branch/civilian,
+			/datum/mil_branch/solgov, 
+			/datum/mil_branch/skrell_fleet
+		)
 	)
 
 	species_to_branch_whitelist = list(
 		/datum/species/diona      = list(/datum/mil_branch/civilian),
 		/datum/species/nabber     = list(/datum/mil_branch/civilian),
-		/datum/species/skrell     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/skrell     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps, /datum/mil_branch/skrell_fleet),
 		/datum/species/unathi     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/vox        = list(),
-		/datum/species/adherent   = list(/datum/mil_branch/civilian)
+		/datum/species/adherent   = list(/datum/mil_branch/civilian),
+		/datum/species/vox        = list(/datum/mil_branch/alien)
 	)
 
 	species_to_rank_whitelist = list(
@@ -32,6 +50,7 @@
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
+				/datum/mil_rank/ec/e7,
 				/datum/mil_rank/ec/o1
 			),
 			/datum/mil_branch/fleet = list(
@@ -40,6 +59,8 @@
 				/datum/mil_rank/fleet/e3,
 				/datum/mil_rank/fleet/e4,
 				/datum/mil_rank/fleet/e5,
+				/datum/mil_rank/fleet/e6,
+				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
 			),
 			/datum/mil_branch/solgov = list(
@@ -50,6 +71,7 @@
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
+				/datum/mil_rank/ec/e7,
 				/datum/mil_rank/ec/o1
 			)
 		),
@@ -58,9 +80,13 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5
 			)
+		),
+		/datum/species/vox = list(
+			/datum/mil_branch/alien = list(
+				/datum/mil_rank/alien
+			)
 		)
 	)
-
 
 /*
  *  Branches
@@ -92,7 +118,7 @@
 		/datum/mil_rank/ec/o6
 	)
 
-	assistant_job = "Crewman"
+	assistant_job = /datum/job/crew
 
 	min_skill = list(	SKILL_SCIENCE = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
@@ -116,11 +142,6 @@
 		/datum/mil_rank/fleet/e9_alt2,
 		/datum/mil_rank/fleet/e9_alt3,
 		/datum/mil_rank/fleet/e9_alt4,
-		/datum/mil_rank/fleet/w1,
-		/datum/mil_rank/fleet/w2,
-		/datum/mil_rank/fleet/w3,
-		/datum/mil_rank/fleet/w4,
-		/datum/mil_rank/fleet/w5,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
@@ -151,7 +172,7 @@
 		/datum/mil_rank/fleet/o5
 	)
 
-	assistant_job = "Crewman"
+	assistant_job = /datum/job/crew
 	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
 						SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
@@ -187,14 +208,14 @@
 		/datum/mil_rank/army/o10_alt
 	)
 
-	assistant_job = "Crewman"
+	assistant_job = /datum/job/crew
 	min_skill = list(	SKILL_HAULING = SKILL_ADEPT,
 	                    SKILL_WEAPONS = SKILL_BASIC,
 	                    SKILL_COMBAT  = SKILL_BASIC)
 
 /datum/mil_branch/civilian
 	name = "Civilian"
-	name_short = "civ"
+	name_short = "Civ"
 	email_domain = "freemail.net"
 
 	rank_types = list(
@@ -208,8 +229,6 @@
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/civ/synthetic
 	)
-
-	assistant_job = "Passenger"
 
 /datum/mil_branch/solgov
 	name = "SolGov Employee"
@@ -252,8 +271,6 @@
 		/datum/mil_rank/terran/o9,
 		/datum/mil_rank/terran/o10
 	)
-
-	assistant_job = "Sailor"
 	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
 						SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
@@ -347,31 +364,6 @@
 	name_short = "MCPOF"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt4, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 9
-
-/datum/mil_rank/fleet/w1
-	name = "Warrant Officer 1"
-	name_short = "WO1"
-	sort_order = -1
-
-/datum/mil_rank/fleet/w2
-	name = "Chief Warrant Officer 2"
-	name_short = "CWO2"
-	sort_order = -2
-
-/datum/mil_rank/fleet/w3
-	name = "Chief Warrant Officer 3"
-	name_short = "CWO3"
-	sort_order = -3
-
-/datum/mil_rank/fleet/w4
-	name = "Chief Warrant Officer 4"
-	name_short = "CWO4"
-	sort_order = -4
-
-/datum/mil_rank/fleet/w5
-	name = "Chief Warrant Officer 5"
-	name_short = "CWO5"
-	sort_order = -5
 
 /datum/mil_rank/fleet/o1
 	name = "Ensign"
@@ -644,10 +636,9 @@
  *  Civilians
  *  =========
  */
-
+ 
 /datum/mil_rank/civ/civ
 	name = "Civilian"
-	name_short = null
 
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
@@ -662,6 +653,7 @@
 
 /datum/mil_rank/sol/gov
 	name = "SolGov Representative"
+	name_short = "SGR"
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/representative)
 
 /datum/mil_rank/sol/agent
@@ -671,6 +663,7 @@
 
 /datum/mil_rank/sol/scientist
 	name = "Government Scientist"
+	name_short = "GOVT"
 
 /*
  *  Terrans
@@ -778,3 +771,13 @@
 	name_short = "AdmNvy"
 	accessory = list(/obj/item/clothing/accessory/terran/rank/navy/flag/o10)
 	sort_order = 20
+
+// Vox/foreign alien branch.
+/datum/mil_branch/alien
+	name = "Alien"
+	name_short = "Alien"
+	rank_types = list(/datum/mil_rank/alien)
+	spawn_rank_types = list(/datum/mil_rank/alien)
+
+/datum/mil_rank/alien
+	name = "Alien"

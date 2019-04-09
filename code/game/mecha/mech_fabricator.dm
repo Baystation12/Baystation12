@@ -1,8 +1,8 @@
 /obj/machinery/mecha_part_fabricator
-	icon = 'icons/obj/robotics.dmi'
-	icon_state = "fab-idle"
 	name = "Exosuit Fabricator"
 	desc = "A machine used for construction of robotics and mechas."
+	icon = 'icons/obj/robotics.dmi'
+	icon_state = "fab-idle"
 	density = 1
 	anchored = 1
 	idle_power_usage = 20
@@ -11,7 +11,7 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(MATERIAL_STEEL = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_DIAMOND = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0)
+	var/list/materials = list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_PLASTIC = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0, MATERIAL_DIAMOND = 0)
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -305,6 +305,10 @@
 			mattype = /obj/item/stack/material/steel
 		if(MATERIAL_GLASS)
 			mattype = /obj/item/stack/material/glass
+		if(MATERIAL_ALUMINIUM)
+			mattype = /obj/item/stack/material/aluminium
+		if(MATERIAL_PLASTIC)
+			mattype = /obj/item/stack/material/plastic
 		if(MATERIAL_GOLD)
 			mattype = /obj/item/stack/material/gold
 		if(MATERIAL_SILVER)

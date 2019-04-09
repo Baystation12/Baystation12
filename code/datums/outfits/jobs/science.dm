@@ -14,7 +14,7 @@
 	l_ear = /obj/item/device/radio/headset/heads/rd
 	uniform = /obj/item/clothing/under/rank/research_director
 	shoes = /obj/item/clothing/shoes/brown
-	l_hand = /obj/item/weapon/clipboard
+	l_hand = /obj/item/weapon/material/clipboard
 	id_type = /obj/item/weapon/card/id/science/head
 	pda_type = /obj/item/modular_computer/pda/heads/rd
 

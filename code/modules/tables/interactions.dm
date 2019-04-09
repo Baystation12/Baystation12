@@ -75,41 +75,6 @@
 		step(O, get_dir(O, src))
 	return
 
-
-/obj/structure/table/grab_attack(var/obj/item/grab/G)
-	if (!G.force_danger())
-		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
-		return TRUE
-	if (G.assailant.a_intent == I_HURT)
-		// Slam their face against the table.
-		var/blocked = G.affecting.run_armor_check(BP_HEAD, "melee")
-		if (prob(30 * blocked_mult(blocked)))
-			G.affecting.Weaken(5)
-		G.affecting.apply_damage(8, BRUTE, BP_HEAD, blocked)
-		visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
-		if (material)
-			playsound(loc, material.tableslam_noise, 50, 1)
-		else
-			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-		var/list/L = take_damage(rand(1,5))
-		for(var/obj/item/weapon/material/shard/S in L)
-			if(S.sharp && prob(50))
-				G.affecting.visible_message("<span class='danger'>\The [S] slices into [G.affecting]'s face!</span>",
-				                  "<span class='danger'>\The [S] slices into your face!</span>")
-				G.affecting.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, BP_HEAD)
-		qdel(G)
-	else
-		// Attempt to put them on the table instead.
-		var/obj/occupied = turf_is_crowded()
-		if (occupied)
-			to_chat(G.assailant, "<span class='danger'>There's \a [occupied] in the way.</span>")
-			return TRUE
-		G.affecting.forceMove(src.loc)
-		G.affecting.Weaken(rand(2,5))
-		visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
-		qdel(G)
-	return TRUE
-
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
 	if (!W) return
 
@@ -120,7 +85,7 @@
 	if(W.loc != user) // This should stop mounted modules ending up outside the module.
 		return
 
-	if(istype(W, /obj/item/weapon/melee/energy/blade))
+	if(istype(W, /obj/item/weapon/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master/grand/paramount))
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, src.loc)
 		spark_system.start()

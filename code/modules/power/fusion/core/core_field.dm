@@ -361,21 +361,24 @@
 				possible_s_reacts.Remove(cur_p_react)
 
 			//loop through and work out all the possible reactions
-			var/list/possible_reactions = new/list
+			var/list/possible_reactions
 			for(var/cur_s_react in possible_s_reacts)
 				if(possible_s_reacts[cur_s_react] < 1)
 					continue
 				var/decl/fusion_reaction/cur_reaction = get_fusion_reaction(cur_p_react, cur_s_react)
 				if(cur_reaction && plasma_temperature >= cur_reaction.minimum_energy_level)
-					possible_reactions.Add(cur_reaction)
+					LAZYDISTINCTADD(possible_reactions, cur_reaction)
 
 			//if there are no possible reactions here, abandon this primary reactant and move on
-			if(!possible_reactions.len)
+			if(!LAZYLEN(possible_reactions))
 				continue
+
+			/// Sort based on reaction priority to avoid deut-deut eating all the deut before deut-trit can run etc.
+			sortTim(possible_reactions, /proc/cmp_fusion_reaction_des)
 
 			//split up the reacting atoms between the possible reactions
 			while(possible_reactions.len)
-				var/decl/fusion_reaction/cur_reaction = pick(possible_reactions)
+				var/decl/fusion_reaction/cur_reaction = possible_reactions[1]
 				possible_reactions.Remove(cur_reaction)
 
 				//set the randmax to be the lower of the two involved reactants

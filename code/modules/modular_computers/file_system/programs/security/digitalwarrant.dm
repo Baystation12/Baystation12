@@ -189,7 +189,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 
 		// only works if they are in the crew records with a valid job
 		var/datum/computer_file/report/crew_record/warrant_subject
-		var/datum/job/J = job_master.GetJob(activewarrant.fields["jobwarrant"])
+		var/datum/job/J = SSjobs.get_by_title(activewarrant.fields["jobwarrant"])
 		if(!J)
 			to_chat(user, "Lookup error: Unable to locate specified job in access database.")
 			return

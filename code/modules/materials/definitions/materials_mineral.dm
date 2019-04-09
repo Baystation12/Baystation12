@@ -190,7 +190,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"
 	chem_products = list(
-		/datum/reagent/aluminum = 20
+		/datum/reagent/aluminum = 15
 		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -198,8 +198,9 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	ore_smelts_to = MATERIAL_ALUMINIUM
 	ore_compresses_to = MATERIAL_BAUXITE
-	sale_price = 2
+	sale_price = 1
 
 /material/sand
 	name = MATERIAL_SAND

@@ -77,9 +77,6 @@
 	diary << "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
-	if(byond_version < RECOMMENDED_VERSION)
-		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
-
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
@@ -87,7 +84,10 @@
 	if(config && config.log_runtime)
 		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
 		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
-		log = runtime_log
+		log = runtime_log // Note that, as you can see, this is misnamed: this simply moves world.log into the runtime log file.
+
+	if(byond_version < RECOMMENDED_VERSION)
+		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
 
 	callHook("startup")
 	//Emergency Fix
@@ -508,7 +508,6 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
-	world.load_mentors() // no need to write another hook.
 	return 1
 
 /world/proc/load_mods()
@@ -526,26 +525,6 @@ var/world_topic_spam_protect_time = world.timeofday
 					continue
 
 				var/title = "Moderator"
-				var/rights = admin_ranks[title]
-
-				var/ckey = copytext(line, 1, length(line)+1)
-				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(GLOB.ckey_directory[ckey])
-
-/world/proc/load_mentors()
-	if(config.admin_legacy_system)
-		var/text = file2text("config/mentors.txt")
-		if (!text)
-			error("Failed to load config/mentors.txt")
-		else
-			var/list/lines = splittext(text, "\n")
-			for(var/line in lines)
-				if (!line)
-					continue
-				if (copytext(line, 1, 2) == ";")
-					continue
-
-				var/title = "Mentor"
 				var/rights = admin_ranks[title]
 
 				var/ckey = copytext(line, 1, length(line)+1)
@@ -605,8 +584,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (src.status != s)
 		src.status = s
 
-#define WORLD_LOG_START(X) WRITE_FILE(GLOB.world_##X##_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
-#define WORLD_SETUP_LOG(X) GLOB.world_##X##_log = file("[GLOB.log_directory]/[#X].log") ; WORLD_LOG_START(X)
 /world/proc/SetupLogs()
 	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
 	if(game_id)
@@ -614,11 +591,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	else
 		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
 
-	WORLD_SETUP_LOG(runtime)
-	WORLD_SETUP_LOG(qdel)
-
-#undef WORLD_SETUP_LOG
-#undef WORLD_LOG_START
+	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
+	WRITE_FILE(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0

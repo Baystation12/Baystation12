@@ -40,7 +40,7 @@
 	idle_power_usage = 80
 	active_power_usage = 1000 //For heating/cooling rooms. 1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
 	power_channel = ENVIRON
-	req_one_access = list(access_atmospherics, access_engine_equip)
+	req_access = list(list(access_atmospherics, access_engine_equip))
 	clicksound = "button"
 	clickvol = 30
 
@@ -986,14 +986,16 @@ FIRE ALARM
 					if (C.use(5))
 						to_chat(user, "<span class='notice'>You wire \the [src].</span>")
 						buildstage = 2
+						update_icon()
 						return
 					else
 						to_chat(user, "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>")
 						return
 				else if(isCrowbar(W))
-					to_chat(user, "You pry out the circuit!")
+					to_chat(user, "You start prying out the circuit.")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-					spawn(20)
+					if (do_after(user,20))
+						to_chat(user, "You pry out the circuit!")
 						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
 						circuit.dropInto(user.loc)
 						buildstage = 0
@@ -1130,13 +1132,14 @@ FIRE ALARM
 	..(loc)
 
 	if(dir)
-		src.set_dir(dir)
+		src.set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])
 
 	if(istype(frame))
 		buildstage = 0
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
+		update_icon()
 		frame.transfer_fingerprints_to(src)
 
 /obj/machinery/firealarm/Initialize()

@@ -1,6 +1,8 @@
 /obj/effect/overmap/sector/exoplanet
 	name = "exoplanet"
 	icon_state = "globe"
+	in_space = 0
+	var/area/planetary_area
 	var/list/seeds = list()
 	var/list/animals = list()
 	var/max_animal_count
@@ -14,10 +16,10 @@
 	var/daycolumn = 0 //Which column's light needs to be updated next?
 	var/daycycle_column_delay = 10 SECONDS
 
-	in_space = 0
 	var/maxx
 	var/maxy
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
+	var/list/rock_colors = list(COLOR_ASTEROID_ROCK)
 
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
 	var/list/species = list() //list of names to use for simple animals
@@ -25,7 +27,10 @@
 	var/repopulating = 0
 	var/repopulate_types = list() // animals which have died that may come back
 
-	var/features_budget = 2
+	var/list/possible_themes = list(/datum/exoplanet_theme/mountains,/datum/exoplanet_theme)
+	var/list/themes = list()
+
+	var/features_budget = 4
 	//pre-defined list of features templates to pick from
 	var/list/possible_features = list(
 									/datum/map_template/ruin/exoplanet/monolith,
@@ -40,11 +45,16 @@
 
 	maxx = max_x ? max_x : world.maxx
 	maxy = max_y ? max_y : world.maxy
+	planetary_area = new planetary_area()
 
 	name = "[generate_planet_name()], \a [name]"
 
 	world.maxz++
 	forceMove(locate(1,1,world.maxz))
+
+	if(LAZYLEN(possible_themes))
+		var/datum/exoplanet_theme/T = pick(possible_themes)
+		themes += new T
 
 	var/list/feature_types = possible_features.Copy()
 	possible_features.Cut()
@@ -75,11 +85,6 @@
 		engravings += ", [pick("they seem to be enjoying themselves","they seem extremely angry","they look pensive","they are making gestures of supplication","the scene is one of subtle horror","the scene conveys a sense of desperation","the scene is completely bizarre")]"
 	engravings += "."
 	return engravings
-
-//Not that it should ever get deleted but just in case
-/obj/effect/overmap/sector/exoplanet/Destroy()
-	. = ..()
-	STOP_PROCESSING(SSobj, src)
 
 /obj/effect/overmap/sector/exoplanet/Process(wait, tick)
 	if(animals.len < 0.5*max_animal_count && !repopulating)
@@ -137,6 +142,8 @@
 	repopulate_types |= M.type
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
+	for(var/datum/exoplanet_theme/T in themes)
+		T.before_map_generation(src)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_features()
 	seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
@@ -353,12 +360,11 @@
 	var/list/big_flora_types = list()
 	var/list/plantcolors = list("RANDOM")
 
-/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/_planetary_area)
 	target_turf_type = world.turf
-	planetary_area = new planetary_area()
 	water_level = rand(water_level_min,water_level_max)
 	generate_flora()
-
+	planetary_area = _planetary_area
 	//automagically adjust probs for bigger maps to help with lag
 	var/size_mod = intended_x / tlx * intended_y / tly
 	flora_prob *= size_mod
@@ -397,7 +403,6 @@
 		return land_type
 
 /datum/random_map/noise/exoplanet/get_additional_spawns(var/value, var/turf/T)
-	planetary_area.contents.Add(T)
 	switch(noise2value(value))
 		if(2 to 3)
 			if(prob(flora_prob))
@@ -463,6 +468,7 @@
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 	has_resources = 1
+	footstep_type = FOOTSTEP_CARPET
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
 
@@ -487,6 +493,8 @@
 				temperature = E.atmosphere.temperature
 			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
 			set_light(E.lightlevel, 0.1, 2)
+			if(E.planetary_area && istype(loc, world.area))
+				E.planetary_area.contents.Add(src)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
@@ -515,6 +523,7 @@
 	icon_state = "seashallow"
 	movement_delay = 2
 	mudpit = 1
+	footstep_type = FOOTSTEP_WATER
 	var/reagent_type = /datum/reagent/water
 
 /turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)

@@ -216,12 +216,9 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/ecig.dmi'
 	icon_state = "ecartridge"
-	matter = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 10)
+	matter = list(MATERIAL_ALUMINIUM = 50, MATERIAL_GLASS = 10)
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
-
-/obj/item/weapon/reagent_containers/ecig_cartridge/New()
-	create_reagents(volume)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/examine(mob/user as mob)//to see how much left
 	..()

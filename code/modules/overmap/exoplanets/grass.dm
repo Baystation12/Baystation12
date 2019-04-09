@@ -2,6 +2,8 @@
 	name = "lush exoplanet"
 	desc = "Planet with abundant flora and fauna."
 	color = "#538224"
+	planetary_area = /area/exoplanet/grass
+	rock_colors = list(COLOR_ASTEROID_ROCK, COLOR_GRAY80, COLOR_BROWN)
 	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
 							 /datum/map_template/ruin/exoplanet/hydrobase,
 							 /datum/map_template/ruin/exoplanet/marooned,
@@ -12,13 +14,15 @@
 							 /datum/map_template/ruin/exoplanet/lodge,
 							 /datum/map_template/ruin/exoplanet/crashed_pod,
 							 /datum/map_template/ruin/exoplanet/hut,
-							 /datum/map_template/ruin/exoplanet/playablecolony)
+							 /datum/map_template/ruin/exoplanet/playablecolony,
+							 /datum/map_template/ruin/exoplanet/datacapsule)
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
+	..()
 	if(prob(40))
 		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
 	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/grass(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)
+		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/grass(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
 		get_biostuff(M)
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_atmosphere()
@@ -62,13 +66,12 @@
 	smoothing_iterations = 2
 	land_type = /turf/simulated/floor/exoplanet/grass
 	water_type = /turf/simulated/floor/exoplanet/water/shallow
-	planetary_area = /area/exoplanet/grass
 	plantcolors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 
 	flora_prob = 30
 	large_flora_prob = 50
 	flora_diversity = 6
-	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/jelly)
+	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 
 	var/grass_color
 
@@ -77,12 +80,6 @@
 	colors -= "RANDOM"
 	grass_color = pick(colors)
 	..()
-
-/datum/random_map/noise/exoplanet/grass/spawn_fauna(var/turf/T, value)
-	if(prob(5))
-		new/mob/living/simple_animal/hostile/giant_spider/nurse(T)
-	else
-		..()
 
 /datum/random_map/noise/exoplanet/grass/get_additional_spawns(var/value, var/turf/T)
 	..()
@@ -95,6 +92,7 @@
 	icon_state = "greygrass"
 	color = "#799c4b"
 	mudpit = 1
+	footstep_type = FOOTSTEP_GRASS
 
 /turf/simulated/floor/exoplanet/grass/Initialize()
 	. = ..()

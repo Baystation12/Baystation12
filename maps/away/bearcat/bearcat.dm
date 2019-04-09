@@ -7,7 +7,7 @@
 	archetype = /decl/submap_archetype/derelict/bearcat
 
 /decl/submap_archetype/derelict/bearcat
-	descriptor = "derelict"
+	descriptor = "derelict cargo vessel"
 	map = "Bearcat Wreck"
 	crew_jobs = list(
 		/datum/job/submap/bearcat_captain,
@@ -36,6 +36,20 @@
 	suffixes = list("bearcat/bearcat-1.dmm", "bearcat/bearcat-2.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/ferry/lift)
+	area_usage_test_exempted_root_areas = list(/area/ship)
+	apc_test_exempt_areas = list(
+		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/port= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/starboard= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/hallway = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/lower = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
+		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
+	)
 
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"
@@ -79,11 +93,9 @@
 
 /obj/machinery/door/airlock/autoname/command
 	door_color = COLOR_COMMAND_BLUE
-	req_access = list(access_heads)
 
 /obj/machinery/door/airlock/autoname/engineering
 	door_color = COLOR_AMBER
-	req_access = list(access_engine)
 
 /turf/simulated/floor/usedup
 	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)

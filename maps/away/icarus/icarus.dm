@@ -42,6 +42,12 @@ obj/effect/icarus/irradiate/Destroy()
 	description = "The crashlanding site of the SEV Icarus."
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
+	area_usage_test_exempted_root_areas = list(/area/icarus)
+	area_coherency_test_exempt_areas = list(/area/icarus/vessel, /area/icarus/open)
+	apc_test_exempt_areas = list(
+		/area/icarus/vessel = NO_APC,
+		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 
 /obj/effect/shuttle_landmark/nav_icarus/nav1
 	name = "Planetary Navpoint #1"

@@ -5,84 +5,92 @@
 	item_cost = 4
 	category = /datum/uplink_category/ammunition
 
-/datum/uplink_item/item/ammo/c45m
-	name = ".45"
-	path = /obj/item/ammo_magazine/c45m
-
-/datum/uplink_item/item/ammo/mc9mm
-	name = "9mm"
+/datum/uplink_item/item/ammo/holdout
+	name = "Holdout Pistol Magazine"
 	item_cost = 3
-	path = /obj/item/ammo_magazine/mc9mm
+	path = /obj/item/ammo_magazine/pistol/small
+
+/datum/uplink_item/item/ammo/holdout_speedloader
+	name = "Holdout Revolver Speedloader"
+	item_cost = 3
+	path = /obj/item/ammo_magazine/speedloader/small
 
 /datum/uplink_item/item/ammo/darts
 	name = "Darts"
 	path = /obj/item/ammo_magazine/chemdart
 
-/datum/uplink_item/item/ammo/mc9mmds
-	name = "9mm double-stack"
-	item_cost = 6
-	path = /obj/item/ammo_magazine/mc9mmds
-
-/datum/uplink_item/item/ammo/a44
-	name = ".44"
+/datum/uplink_item/item/ammo/speedloader
+	name = "Revolver Speedloader"
 	item_cost = 8
-	path = /obj/item/ammo_magazine/a44
+	path = /obj/item/ammo_magazine/speedloader
 
-/datum/uplink_item/item/ammo/a556
-	name = "5.56mm"
+/datum/uplink_item/item/ammo/rifle
+	name = "Assault Rifle Magazine"
 	item_cost = 8
-	path = /obj/item/ammo_magazine/c556
+	path = /obj/item/ammo_magazine/rifle
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/sniperammo
-	name = "14.5mm"
+	name = "Sniper Shells"
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/sniperammo
+	path = /obj/item/weapon/storage/box/ammo/sniperammo
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/sniperammo/apds
-	name = "14.5mm APDS"
+	name = "Sniper APDS Shells"
 	item_cost = 12
-	path = /obj/item/weapon/storage/box/sniperammo/apds
+	path = /obj/item/weapon/storage/box/ammo/sniperammo/apds
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Shotgun Shells box"
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/shotgunshells
+	path = /obj/item/weapon/storage/box/ammo/shotgunshells
 
 /datum/uplink_item/item/ammo/shotgun_slugs
 	name = "Shotgun Slugs box"
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/shotgunammo
+	path = /obj/item/weapon/storage/box/ammo/shotgunammo
 
-/datum/uplink_item/item/ammo/c45uzi
-	name = ".45 SMG Magazine"
+/datum/uplink_item/item/ammo/machine_pistol
+	name = "Machine Pistol Magazine"
 	item_cost = 8
-	path = /obj/item/ammo_magazine/c45uzi
+	path = /obj/item/ammo_magazine/machine_pistol
 
-/datum/uplink_item/item/ammo/a10mm
-	name = "10mm SMG Magazine"
+/datum/uplink_item/item/ammo/smg
+	name = "SMG Magazine"
 	item_cost = 8
-	path = /obj/item/ammo_magazine/a10mm
+	path = /obj/item/ammo_magazine/smg
+	antag_roles = list(MODE_MERCENARY)
 
-/datum/uplink_item/item/ammo/p10mm
-	name = "10mm Pistol Magazine"
+/datum/uplink_item/item/ammo/pistol
+	name = "Pistol Magazine"
 	item_cost = 6
-	path = /obj/item/ammo_magazine/p10mm
+	path = /obj/item/ammo_magazine/pistol
 
-/datum/uplink_item/item/ammo/a50
-	name = ".50 AE magazine"
+/datum/uplink_item/item/ammo/magnum
+	name = "Magnum Magazine"
 	item_cost = 8
-	path = /obj/item/ammo_magazine/a50
+	path = /obj/item/ammo_magazine/magnum
 
-/datum/uplink_item/item/ammo/c50
-	name = ".50 AE speedloader"
+/datum/uplink_item/item/ammo/speedloader_magnum
+	name = "Magnum Speedloader"
 	item_cost = 8
-	path = /obj/item/ammo_magazine/c50
-
-/datum/uplink_item/item/ammo/c38
-	name = ".38 speedloader"
-	path = /obj/item/ammo_magazine/c38
+	path = /obj/item/ammo_magazine/speedloader/magnum
 
 /datum/uplink_item/item/ammo/flechette
-	name = "Flechette Magazine"
+	name = "Flechette Rifle Magazine"
 	item_cost = 8
 	path = /obj/item/weapon/magnetic_ammo
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/item/ammo/pistol_emp
+	name = "Pistol EMP Ammmo Box (10 rounds)"
+	item_cost = 6
+	path = /obj/item/ammo_magazine/box/emp/pistol
+
+/datum/uplink_item/item/ammo/holdout_emp
+	name = "Small Pistol EMP Ammmo Box (10 rounds)"
+	desc = "EMP ammo for holdout pistols and revolvers."
+	item_cost = 6
+	path = /obj/item/ammo_magazine/box/emp/smallpistol

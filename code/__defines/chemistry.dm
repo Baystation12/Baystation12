@@ -45,6 +45,8 @@
 #define CE_CRYO 	     "cryogenic"    // Prevents damage from being frozen
 #define CE_BLOCKAGE	     "blockage"     // Gets in the way of blood circulation, higher the worse
 #define CE_SQUEAKY		 "squeaky"      // Helium voice. Squeak squeak.
+#define CE_THIRDEYE      "thirdeye"     // Gives xray vision.
+#define CE_SEDATE        "sedate"       // Applies sedation effects, i.e. paralysis, inability to use items, etc.
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

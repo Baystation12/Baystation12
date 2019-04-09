@@ -10,14 +10,13 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 	var/core_skill = SKILL_COMPUTER       // The skill which is checked
 	var/skill_needed = SKILL_EXPERT       // How much skill the user needs to use this. This is not for critical failure effects at unskilled; those are handled globally.
 	var/req_access = list()               // Stores access needed, if any
-	var/req_one_access = list()           // Like for objects
 
 /datum/terminal_command/New()
 	regex = new (pattern, regex_flags)
 	..()
 
 /datum/terminal_command/proc/check_access(mob/user)
-	return has_access(req_access, req_one_access, user.GetAccess())
+	return has_access(req_access, user.GetAccess())
 
 // null return: continue. "" return will break and show a blank line. Return list() to break and not show anything.
 /datum/terminal_command/proc/parse(text, mob/user, datum/terminal/terminal)
@@ -85,7 +84,7 @@ Subtypes
 		return "No network adaptor found."
 	if(!terminal.computer.network_card.check_functionality())
 		return "Network adaptor not activated."
-	return terminal.computer.network_card.get_network_tag()
+	return "Visible tag: [terminal.computer.network_card.get_network_tag()]. Real nid: [terminal.computer.network_card.identification_id]."
 
 /datum/terminal_command/hwinfo
 	name = "hwinfo"
@@ -153,11 +152,11 @@ Subtypes
 	if(length(text) < 8)
 		return
 	var/obj/item/modular_computer/origin = terminal.computer
-	if(!ntnet_global.check_function() || !origin || !origin.network_card || !origin.network_card.check_functionality())
+	if(!origin || !origin.get_ntnet_status())
 		return
 	var/nid = text2num(copytext(text, 8))
 	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
-	if(!comp || !comp.enabled || !comp.network_card || !comp.network_card.check_functionality())
+	if(!comp || !comp.enabled || !comp.get_ntnet_status())
 		return
 	return "... Estimating location: [get_area(comp)]"
 
@@ -173,12 +172,12 @@ Subtypes
 		. += "ping: Improper syntax. Use ping nid."
 		return
 	var/obj/item/modular_computer/origin = terminal.computer
-	if(!ntnet_global.check_function() || !origin || !origin.network_card || !origin.network_card.check_functionality())
+	if(!origin || !origin.get_ntnet_status())
 		. += "failed. Check network status."
 		return
 	var/nid = text2num(copytext(text, 6))
 	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
-	if(!comp || !comp.enabled || !comp.network_card || !comp.network_card.check_functionality())
+	if(!comp || !comp.enabled || !comp.get_ntnet_status())
 		. += "failed. Target device not responding."
 		return
 	. += "ping successful."
@@ -195,13 +194,13 @@ Subtypes
 	if(length(text) < 5)
 		return "ssh: Improper syntax. Use ssh nid."
 	var/obj/item/modular_computer/origin = terminal.computer
-	if(!ntnet_global.check_function() || !origin || !origin.network_card || !origin.network_card.check_functionality())
+	if(!origin || !origin.get_ntnet_status())
 		return "ssh: Check network connectivity."
 	var/nid = text2num(copytext(text, 5))
 	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
 	if(comp == origin)
 		return "ssh: Error; can not open remote terminal to self."
-	if(!comp || !comp.enabled || !comp.network_card || !comp.network_card.check_functionality())
+	if(!comp || !comp.enabled || !comp.get_ntnet_status())
 		return "ssh: No active device with this nid found."
 	if(comp.has_terminal(user))
 		return "ssh: A remote terminal to this device is already active."
@@ -209,3 +208,50 @@ Subtypes
 	LAZYADD(comp.terminals, new_term)
 	LAZYADD(origin.terminals, new_term)
 	return "ssh: Connection established."
+
+/datum/terminal_command/proxy
+	name = "proxy"
+	man_entry = list(
+		"Format: proxy \[-s <nid>\]",
+		"Without options, displays the proxy state of network device.",
+		"With -s option and no further arguments, clears proxy settings.",
+		"With -s followed by nid (number), sets proxy to nid.",
+		"A set proxy will tunnel all network connections through the designated device.",
+		"It is recommended that the user ensure that the target device is accessible."
+	)
+	pattern = "^proxy"
+	req_access = list(access_network)
+
+/datum/terminal_command/proxy/proper_input_entered(text, mob/user, datum/terminal/terminal)
+	var/obj/item/modular_computer/comp = terminal.computer
+	if(!comp || !comp.get_ntnet_status())
+		return "proxy: Error; check networking hardware."
+	if(text == "proxy")
+		if(!comp.network_card.proxy_id)
+			return "proxy: This device is not using a proxy."
+		return "proxy: This device is set to connect via proxy with nid [comp.network_card.proxy_id]."
+	if(text == "proxy -s")
+		if(!comp.network_card.proxy_id)
+			return "proxy: Error; this device is not using a proxy."
+		comp.network_card.proxy_id = null
+		return "proxy: Device proxy cleared."
+	var/syntax_error = "proxy: Invalid input. Enter man proxy for syntax help."
+	if(length(text) < 10)
+		return syntax_error
+	if(copytext(text, 1, 10) != "proxy -s ")
+		return syntax_error
+	var/id = text2num(copytext(text, 10))
+	if(!id)
+		return syntax_error
+	var/obj/item/modular_computer/target = ntnet_global.get_computer_by_nid(id)
+	if(!target || !target.enabled || !target.get_ntnet_status())
+		return "proxy: Error; cannot locate target device."
+	if(target.hard_drive)
+		var/datum/computer_file/data/logfile/file = target.hard_drive.find_file_by_name("proxy")
+		if(!istype(file))
+			file = new()
+			file.filename = "proxy"
+			target.hard_drive.store_file(file) // May fail, which is fine with us.
+		file.stored_data += "([time_stamp()]) Proxy routing request accepted from: [comp.network_card.get_network_tag()].\[br\]"
+	comp.network_card.proxy_id = id
+	return "proxy: Device proxy set to [id]."

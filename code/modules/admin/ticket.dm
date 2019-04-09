@@ -30,9 +30,9 @@ var/list/ticket_panels = list()
 	src.status = TICKET_CLOSED
 	src.closed_by = closed_by
 
-	to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has been closed by [closed_by.ckey].</b></span>")
-	message_staff("<span class='notice'><b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key_name(0)]</b>.</span>")
-	send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key_name(0)].")
+	to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has been closed by [closed_by.key].</b></span>")
+	message_staff("<span class='notice'><b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key]</b>.</span>")
+	send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key].")
 
 	update_ticket_panels()
 
@@ -51,9 +51,9 @@ var/list/ticket_panels = list()
 	assigned_admins |= assigned_admin
 	src.status = TICKET_ASSIGNED
 
-	message_staff("<span class='notice'><b>[assigned_admin.key_name(0)]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket.</span>")
-	send2adminirc("[assigned_admin.key_name(0)] has assigned themself to [src.owner.key_name(0)]'s ticket.")
-	to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>[assigned_admin.ckey] has added themself to your ticket and should respond shortly. Thanks for your patience!</b></span>")
+	message_staff("<span class='notice'><b>[assigned_admin.key]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket.</span>")
+	send2adminirc("[assigned_admin.key] has assigned themself to [src.owner.key_name(0)]'s ticket.")
+	to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>[assigned_admin.key] has added themself to your ticket and should respond shortly. Thanks for your patience!</b></span>")
 
 	update_ticket_panels()
 
@@ -64,6 +64,12 @@ var/list/ticket_panels = list()
 
 	for(var/datum/client_lite/assigned_admin in assigned_admins)
 		. |= assigned_admin.ckey
+
+/datum/ticket/proc/assigned_admin_keys()
+	. = list()
+
+	for(var/datum/client_lite/assigned_admin in assigned_admins)
+		. |= assigned_admin.key
 
 proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	for(var/datum/ticket/ticket in tickets)
@@ -118,15 +124,15 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 					status = "Opened [round((world.time - ticket.opened_time) / (1 MINUTE))] minute\s ago, unassigned"
 				if(TICKET_ASSIGNED)
 					open = 2
-					status = "Assigned to [english_list(ticket.assigned_admin_ckeys(), "no one")]"
+					status = "Assigned to [english_list(ticket.assigned_admin_keys(), "no one")]"
 					color = "#ffffff"
 				if(TICKET_CLOSED)
-					status = "Closed by [ticket.closed_by.ckey]"
+					status = "Closed by [ticket.closed_by.key]"
 					color = "#cc2222"
 			ticket_dat += "<li style='padding-bottom:10px;color:[color]'>"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "<i>"
-			ticket_dat += "Ticket #[id] - [ticket.owner.ckey] [owner_client ? "" : "(DC)"] - [status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
+			ticket_dat += "Ticket #[id] - [ticket.owner.key_name(0)] [owner_client ? "" : "(DC)"]<br />[status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
 			if(open)
 				ticket_dat += " - <a href='byond://?src=\ref[src];action=pm;ticket=\ref[ticket]'>PM</a>"
 				if(C.holder)

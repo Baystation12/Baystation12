@@ -61,6 +61,10 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 				if(attempt_dismemberment(pure_brute, burn, edge, used_weapon, spillover, total_damage > threshold*6))
 					return
 
+	//blunt damage is gud at fracturing
+	if(brute_dam + brute > min_broken_damage && prob(brute_dam + brute * (1+blunt)) )
+		fracture()
+
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs && internal_organs.len)
 		var/damage_amt = brute
@@ -68,12 +72,15 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		if(laser || BP_IS_ROBOTIC(src))
 			damage_amt += burn
 			cur_damage += burn_dam
-		var/organ_damage_threshold = 10
+		var/organ_damage_threshold = 5
 		if(sharp)
 			organ_damage_threshold *= 0.5
-		var/organ_damage_prob = 5 * damage_amt/organ_damage_threshold //more damage, higher chance to damage
+		var/organ_damage_prob = 10 * damage_amt/organ_damage_threshold //more damage, higher chance to damage
 		if(encased && !(status & ORGAN_BROKEN)) //ribs protect
-			organ_damage_prob *= 0.5
+			if(!laser)
+				organ_damage_prob *= 0.2
+			else
+				organ_damage_prob *= 0.5
 		if ((cur_damage + damage_amt >= max_damage || damage_amt >= organ_damage_threshold) && prob(organ_damage_prob))
 			// Damage an internal organ
 			var/list/victims = list()
@@ -87,16 +94,13 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 				brute /= 2
 				if(laser)
 					burn /= 2
-				damage_amt /= 2
+				damage_amt -= max(damage_amt*victim.damage_reduction, 0)
 				victim.take_internal_damage(damage_amt)
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
 			owner.emote("scream")	//getting hit on broken hand hurts
-
-	if(brute_dam > min_broken_damage && prob(brute_dam + brute * (1+blunt)) ) //blunt damage is gud at fracturing
-		fracture()
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
@@ -142,6 +146,8 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	// sync the organ's damage with its wounds
 	update_damages()
 	owner.updatehealth()
+	if(status & ORGAN_BLEEDING)
+		owner.update_bandages()
 
 	if(owner && update_damstate())
 		owner.UpdateDamageIcon()

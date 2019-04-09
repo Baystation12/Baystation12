@@ -333,9 +333,9 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<tr><td width='50%' align='right'><b>Duration:</b> <input type='text' name='dbbaddduration'></td>"
 	output += "<td width='50%' align='right'><b>Job:</b><select name='dbbanaddjob'>"
 	output += "<option value=''>--</option>"
-	for(var/j in get_all_jobs())
+	for(var/j in SSjobs.titles_to_datums)
 		output += "<option value='[j]'>[j]</option>"
-	for(var/j in GLOB.nonhuman_positions)
+	for(var/j in SSjobs.titles_by_department(MSC))
 		output += "<option value='[j]'>[j]</option>"
 	var/list/bantypes = list("traitor","changeling","operative","revolutionary","cultist","wizard") //For legacy bans.
 	var/list/all_antag_types = GLOB.all_antag_types_

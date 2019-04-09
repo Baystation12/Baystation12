@@ -6,7 +6,7 @@
 	idle_power_usage = 30
 	active_power_usage = 5000
 
-	var/max_material_storage = 100000
+	var/max_material_storage = 250000
 
 	var/list/datum/design/queue = list()
 	var/progress = 0
@@ -133,8 +133,9 @@
 	return
 
 /obj/machinery/r_n_d/protolathe/proc/removeFromQueue(var/index)
+	if(!is_valid_index(index, queue))
+		return
 	queue.Cut(index, index + 1)
-	return
 
 /obj/machinery/r_n_d/protolathe/proc/canBuild(var/datum/design/D)
 	for(var/M in D.materials)

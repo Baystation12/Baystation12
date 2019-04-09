@@ -2,7 +2,7 @@
 
 //All devices that link into the R&D console fall into thise type for easy identification and some shared procs.
 
-var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0, MATERIAL_DIAMOND = 0)
+var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_PLASTIC = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0, MATERIAL_DIAMOND = 0)
 /obj/machinery/r_n_d
 	name = "R&D Device"
 	icon = 'icons/obj/machines/research.dmi'
@@ -22,11 +22,8 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_GLASS 
 			reagents.trans_to_obj(I, reagents.total_volume)
 	for(var/f in materials)
 		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
-			var/path = SSmaterials.get_material_by_name(f)
-			if(path)
-				var/obj/item/stack/S = new f(loc)
-				S.amount = round(materials[f] / SHEET_MATERIAL_AMOUNT)
-	..()
+			new /obj/item/stack/material(loc, round(materials[f] / SHEET_MATERIAL_AMOUNT), f)
+	return ..()
 
 
 /obj/machinery/r_n_d/proc/eject(var/material, var/amount)

@@ -56,6 +56,9 @@
 
 /obj/item/integrated_circuit/output/access_displayer/do_work()
 	var/list/signature_and_data = splittext(get_pin_data(IC_INPUT, 1), ":")
+	if(signature_and_data.len < 2)
+		return
+
 	var/signature = signature_and_data[1]
 	var/result = signature_and_data[2]
 

@@ -127,7 +127,7 @@
 		var/mob/living/carbon/human/H = target_mob
 		var/dam_zone = pick(BP_CHEST, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG)
 		var/obj/item/organ/external/affecting = H.get_organ(ran_zone(dam_zone))
-		H.apply_damage(damage, BRUTE, affecting, H.run_armor_check(affecting, "melee"), DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
+		H.apply_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
 		return H
 	else if(isliving(target_mob))
 		var/mob/living/L = target_mob

@@ -79,7 +79,8 @@
 	//If the computer is being hacked or is emagged, display the reboot message.
 	if(hacking || emag)
 		message = rebootmsg
-	var/dat = "<head><title>Message Monitor Console</title></head><body>"
+	var/list/dat = list()
+	dat += "<head><title>Message Monitor Console</title></head><body>"
 	dat += "<center><h2>Message Monitor Console</h2></center><hr>"
 	dat += "<center><h4><font color='blue'[message]</h5></center>"
 
@@ -186,8 +187,9 @@
 
 	dat += "</body>"
 	message = defaultmsg
-	user << browse(dat, "window=message;size=700x700")
-	onclose(user, "message")
+	var/datum/browser/popup = new(user, "message", "Message Monitoring Console", 700, 700)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 	return
 
 /obj/machinery/computer/message_monitor/attack_ai(mob/user as mob)

@@ -629,7 +629,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "cg" = (
@@ -638,7 +638,7 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "ch" = (
@@ -1271,7 +1271,7 @@
 /area/outpost/abandoned)
 "eg" = (
 /obj/effect/decal/cleanable/cobweb2,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eh" = (
@@ -1392,13 +1392,13 @@
 /area/outpost/abandoned)
 "eB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/plating{
 	icon_state = "dmg1"
 	},
 /area/outpost/abandoned)
 "eC" = (
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eD" = (
@@ -1596,12 +1596,12 @@
 "fc" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fd" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fe" = (
@@ -1709,7 +1709,7 @@
 "fx" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fy" = (
@@ -2606,7 +2606,7 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "rb" = (
@@ -2618,7 +2618,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "sb" = (

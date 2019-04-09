@@ -27,7 +27,7 @@
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
 	var/breathing = 0
-	var/last_failed_breath
+	var/last_successful_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
 
 /obj/item/organ/internal/lungs/proc/can_drown()
@@ -207,11 +207,8 @@
 
 	// Were we able to breathe?
 	var/failed_breath = failed_inhale || failed_exhale
-	if(failed_breath)
-		if(isnull(last_failed_breath))
-			last_failed_breath = world.time
-	else
-		last_failed_breath = null
+	if(!failed_breath)
+		last_successful_breath = world.time
 		owner.adjustOxyLoss(-5 * inhale_efficiency)
 		if(!BP_IS_ROBOTIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)
@@ -237,7 +234,7 @@
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_failed_breath + 2 MINUTES)
+	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_successful_breath + 2 MINUTES)
 		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)

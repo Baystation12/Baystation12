@@ -1,32 +1,34 @@
 language: generic
 sudo: false
-dist: trusty
+dist: xenial
+jdk: openjdk8
 
 env:
   global:
     BYOND_MAJOR="512"
-    BYOND_MINOR="1454"
+    BYOND_MINOR="1463"
 
 # ALL MAPS MUST BE PRESENT HERE
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
-  matrix:
-    - TEST=CODE
-    - TEST=WEB
-    - TEST=MAP MAP_PATH=example
-    - TEST=MAP MAP_PATH=torch
-    - TEST=MAP MAP_PATH=overmap_example
-    - TEST=MAP MAP_PATH=away_sites_testing
+matrix:
+    include:
+    - name: "Code"
+      env: TEST=CODE
+    - name: "Web"
+      env: TEST=WEB
+    - name: "Map - Example"
+      env: TEST=MAP MAP_PATH=example
+    - name: "Map - Torch"
+      env: TEST=MAP MAP_PATH=torch
+    - name: "Map - Bearcat"
+      env: TEST=MAP MAP_PATH=bearcat
+    - name: "Map - Away Sites"
+      env: TEST=MAP MAP_PATH=away_sites_testing
 
 cache:
   directories:
     - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
-
-before_script:
-  - jdk_switcher use openjdk8
-
-before_install:
-  - unset _JAVA_OPTIONS
 
 addons:
   apt:
@@ -36,6 +38,7 @@ addons:
       - libstdc++6:i386
       - python
       - python-pip
+      - uchardet
 
 script:
   - test/run-test.sh

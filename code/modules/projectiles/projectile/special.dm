@@ -4,8 +4,8 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	damage = 0
 	damage_type = BURN
+	damage_flags = 0
 	nodamage = 1
-	check_armour = "energy"
 	var/heavy_effect_range = 1
 	var/light_effect_range = 2
 
@@ -18,13 +18,15 @@
 	heavy_effect_range = 0
 	light_effect_range = 1
 
+/obj/item/projectile/ion/tiny
+	heavy_effect_range = 0
+	light_effect_range = 0
+
 /obj/item/projectile/bullet/gyro
 	name ="explosive bolt"
 	icon_state= "bolter"
 	damage = 50
-	check_armour = "bullet"
-	sharp = 1
-	edge = 1
+	damage_flags = DAM_BULLET | DAM_SHARP | DAM_EDGE
 
 	on_hit(var/atom/target, var/blocked = 0)
 		explosion(target, -1, 0, 2)
@@ -36,8 +38,8 @@
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	damage = 0
 	damage_type = BURN
+	damage_flags = 0
 	nodamage = 1
-	check_armour = "energy"
 	var/firing_temperature = 300
 
 	on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
@@ -53,7 +55,6 @@
 	damage = 0
 	damage_type = BRUTE
 	nodamage = 1
-	check_armour = "bullet"
 
 	Bump(atom/A as mob|obj|turf|area)
 		if(A == firer)
@@ -83,7 +84,6 @@
 	damage = 0
 	damage_type = TOX
 	nodamage = 1
-	check_armour = "energy"
 
 	on_hit(var/atom/target, var/blocked = 0)
 		var/mob/living/M = target
@@ -91,7 +91,7 @@
 			var/mob/living/carbon/human/H = M
 			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 				if(prob(15))
-					H.apply_effect((rand(30,80)),IRRADIATE,blocked = H.getarmor(null, "rad"))
+					H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
 					H.Weaken(5)
 					for (var/mob/V in viewers(src))
 						V.show_message("<span class='warning'>[M] writhes in pain as \his vacuoles boil.</span>", 3, "<span class='warning'>You hear the crunching of leaves.</span>", 2)
@@ -117,7 +117,6 @@
 	damage = 0
 	damage_type = TOX
 	nodamage = 1
-	check_armour = "energy"
 	var/decl/plantgene/gene = null
 
 /obj/item/projectile/energy/florayield
@@ -127,7 +126,6 @@
 	damage = 0
 	damage_type = TOX
 	nodamage = 1
-	check_armour = "energy"
 
 	on_hit(var/atom/target, var/blocked = 0)
 		var/mob/M = target
@@ -156,6 +154,7 @@
 	embed = 0 // nope
 	nodamage = 1
 	damage_type = PAIN
+	damage_flags = 0
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
 /obj/item/projectile/venom
@@ -163,7 +162,7 @@
 	icon_state = "venom"
 	damage = 5 //most damage is in the reagent
 	damage_type = TOX
-	check_armour = "bio"
+	damage_flags = 0
 
 /obj/item/projectile/venom/on_hit(atom/target, blocked, def_zone)
 	. = ..()

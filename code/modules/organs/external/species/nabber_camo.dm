@@ -3,6 +3,7 @@
 	icon_position = UNDER
 	encased = "carapace"
 	action_button_name = "Toggle Active Camo"
+	cavity_max_w_class = ITEM_SIZE_LARGE
 
 /obj/item/organ/external/groin/nabber/refresh_action_button()
 	. = ..()

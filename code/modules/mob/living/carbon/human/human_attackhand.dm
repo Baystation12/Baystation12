@@ -45,7 +45,6 @@
 				visible_message("<span class='danger'>\The [H] has attempted to punch \the [src]!</span>")
 				return 0
 			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-			var/armor_block = run_armor_check(affecting, "melee")
 
 			if(MUTATION_HULK in H.mutations)
 				damage += 5
@@ -57,9 +56,10 @@
 
 			visible_message("<span class='danger'>[H] has punched \the [src]!</span>")
 
-			apply_damage(damage, PAIN, affecting, armor_block)
+			apply_damage(damage, PAIN, affecting)
 			if(damage >= 9)
 				visible_message("<span class='danger'>[H] has weakened \the [src]!</span>")
+				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE)
 				apply_effect(4, WEAKEN, armor_block)
 
 			return
@@ -76,51 +76,59 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
-			if(istype(H) && (is_asystole() || (status_flags & FAKEDEATH)))
+			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath))
 				if (!cpr_time)
 					return 0
 
+				var/pumping_skill = max(M.get_skill_value(SKILL_MEDICAL),M.get_skill_value(SKILL_ANATOMY))
+				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2) 
 				cpr_time = 0
-				spawn(30)
-					cpr_time = 1
 
 				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
 
-				if(!do_after(H, 30, src))
+				if(!do_after(H, cpr_delay, src))
+					cpr_time = 1
 					return
+				cpr_time = 1
 
 				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
-				if(prob(5 + 5 * (SKILL_EXPERT - M.get_skill_value(SKILL_ANATOMY))))
-					var/obj/item/organ/external/chest = get_organ(BP_CHEST)
-					if(chest)
-						chest.fracture()
-				if(stat != DEAD)
-					if(prob(10 + 5 * M.get_skill_value(SKILL_ANATOMY)))
+
+				if(is_asystole())
+					if(prob(5 + 5 * (SKILL_EXPERT - pumping_skill)))
+						var/obj/item/organ/external/chest = get_organ(BP_CHEST)
+						if(chest)
+							chest.fracture()
+
+					var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+					if(heart)
+						heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
+
+					if(stat != DEAD && prob(10 + 5 * pumping_skill))
 						resuscitate()
 
-					if(!H.check_has_mouth())
-						to_chat(H, "<span class='warning'>You don't have a mouth, you cannot do mouth-to-mouth resustication!</span>")
-						return
-					if(!check_has_mouth())
-						to_chat(H, "<span class='warning'>They don't have a mouth, you cannot do mouth-to-mouth resustication!</span>")
-						return
-					if((H.head && (H.head.body_parts_covered & FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & FACE)))
-						to_chat(H, "<span class='warning'>You need to remove your mouth covering for mouth-to-mouth resustication!</span>")
-						return 0
-					if((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
-						to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resustication!</span>")
-						return 0
-					if (!H.internal_organs_by_name[H.species.breathing_organ])
-						to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resustication!</span>")
-						return
-					if(!need_breathe())
-						return
-					var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
-					if(L)
-						var/datum/gas_mixture/breath = H.get_breath_from_environment()
-						var/fail = L.handle_breath(breath, 1)
-						if(!fail)
-							to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
+				if(!H.check_has_mouth())
+					to_chat(H, "<span class='warning'>You don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
+					return
+				if(!check_has_mouth())
+					to_chat(H, "<span class='warning'>They don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
+					return
+				if((H.head && (H.head.body_parts_covered & FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & FACE)))
+					to_chat(H, "<span class='warning'>You need to remove your mouth covering for mouth-to-mouth resuscitation!</span>")
+					return 0
+				if((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
+					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!</span>")
+					return 0
+				if (!H.internal_organs_by_name[H.species.breathing_organ])
+					to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resuscitation!</span>")
+					return
+				if(!need_breathe())
+					return
+				var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
+				if(L)
+					var/datum/gas_mixture/breath = H.get_breath_from_environment()
+					var/fail = L.handle_breath(breath, 1)
+					if(!fail)
+						to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
@@ -130,6 +138,9 @@
 			return H.species.attempt_grab(H, src)
 
 		if(I_HURT)
+			if(H.incapacitated())
+				to_chat(H, "<span class='notice'>You can't attack while incapacitated.</span>")
+				return
 
 			if(!istype(H))
 				attack_generic(H,rand(1,3),"punched")
@@ -235,13 +246,11 @@
 				real_damage *= 2 // Hulks do twice the damage
 				rand_damage *= 2
 			real_damage = max(1, real_damage)
-
-			var/armour = run_armor_check(hit_zone, "melee")
 			// Apply additional unarmed effects.
-			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
+			attack.apply_effects(H, src, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(real_damage, attack.get_damage_type(), hit_zone, armour, damage_flags=attack.damage_flags())
+			apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
 
 		if(I_DISARM)
 			if(H.species)
@@ -263,8 +272,7 @@
 
 	var/dam_zone = pick(organs_by_name)
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	var/armor_block = run_armor_check(affecting, armorcheck)
-	apply_damage(damage, damtype, affecting, armor_block)
+	apply_damage(damage, damtype, affecting)
 	updatehealth()
 	return 1
 

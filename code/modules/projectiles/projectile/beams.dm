@@ -6,11 +6,12 @@
 	damage = 40
 	damage_type = BURN
 	sharp = 1 //concentrated burns
-	check_armour = "laser"
+	damage_flags = DAM_LASER
 	eyeblur = 4
 	hitscan = 1
 	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
 	penetration_modifier = 0.3
+	distance_falloff = 2.5
 
 	muzzle_type = /obj/effect/projectile/laser/muzzle
 	tracer_type = /obj/effect/projectile/laser/tracer
@@ -28,6 +29,7 @@
 /obj/item/projectile/beam/midlaser
 	damage = 50
 	armor_penetration = 20
+	distance_falloff = 1
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
@@ -35,6 +37,7 @@
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 	damage = 60
 	armor_penetration = 30
+	distance_falloff = 0.5
 
 	muzzle_type = /obj/effect/projectile/laser/heavy/muzzle
 	tracer_type = /obj/effect/projectile/laser/heavy/tracer
@@ -81,6 +84,19 @@
 	if(isturf(target))
 		target.ex_act(2)
 	..()
+	
+/obj/item/projectile/beam/pulse/skrell
+	icon_state = "pu_laser"
+	damage = 20
+	muzzle_type = /obj/effect/projectile/laser/pulse/skrell/muzzle
+	tracer_type = /obj/effect/projectile/laser/pulse/skrell/tracer
+	impact_type = /obj/effect/projectile/laser/pulse/skrell/impact
+	
+/obj/item/projectile/beam/pulse/skrell/heavy
+	damage = 30
+	
+/obj/item/projectile/beam/pulse/skrell/single
+	damage = 50
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
@@ -99,7 +115,6 @@
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
-	check_armour = "laser"
 
 	muzzle_type = /obj/effect/projectile/laser/blue/muzzle
 	tracer_type = /obj/effect/projectile/laser/blue/tracer
@@ -119,7 +134,6 @@
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
-	check_armour = "laser"
 
 /obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
@@ -134,7 +148,6 @@
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
 	damage_type = BURN
-	check_armour = "laser"
 
 	muzzle_type = /obj/effect/projectile/laser/omni/muzzle
 	tracer_type = /obj/effect/projectile/laser/omni/tracer
@@ -165,7 +178,7 @@
 	name = "stun beam"
 	icon_state = "stun"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	check_armour = "energy"
+	damage_flags = 0
 	sharp = 0 //not a laser
 	agony = 40
 	damage_type = STUN
@@ -198,9 +211,9 @@
 	sharp = 1
 	edge = 1
 	damage_type = BURN
-	check_armour = "laser"
 	kill_count = 5
 	pass_flags = PASS_FLAG_TABLE
+	distance_falloff = 4
 
 	muzzle_type = /obj/effect/projectile/trilaser/muzzle
 	tracer_type = /obj/effect/projectile/trilaser/tracer

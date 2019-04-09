@@ -23,7 +23,8 @@
 		if(stat & (BROKEN|NOPOWER))
 			return
 		user.set_machine(src)
-		var/dat = "<TITLE>Telecommunications Monitor</TITLE><center><b>Telecommunications Monitor</b></center>"
+		var/list/dat = list()
+		dat += "<TITLE>Telecommunications Monitor</TITLE><center><b>Telecommunications Monitor</b></center>"
 
 		switch(screen)
 
@@ -57,9 +58,9 @@
 				dat += "</ol>"
 
 
-
-		user << browse(dat, "window=comm_monitor;size=575x400")
-		onclose(user, "server_control")
+		var/datum/browser/popup = new(user, "comm_monitor", "Autholathe", 575, 400)
+		popup.set_content(JOINTEXT(dat))
+		popup.open()
 
 		temp = ""
 		return

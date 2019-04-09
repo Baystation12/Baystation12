@@ -64,7 +64,7 @@
 					access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen, access_robotics_engineering,
 					access_emergency_armory, access_sec_guard, access_gun, access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_senadv,
 					access_explorer, access_pathfinder, access_pilot, access_commissary, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
-					access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint)
+					access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint, access_rd, access_petrov_rd)
 	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads, access_medical, access_morgue, access_tox, access_tox_storage,
 						access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_change_ids,
 						access_ai_upload, access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_chapel_office, access_tech_storage,
@@ -76,7 +76,7 @@
 						access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen, access_robotics_engineering,
 						access_emergency_armory, access_sec_guard, access_gun, access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_senadv,
 						access_explorer, access_pathfinder, access_pilot, access_commissary, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
-						access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint)
+						access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint, access_rd, access_petrov_rd)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
@@ -272,39 +272,6 @@
 /datum/job/hos/get_description_blurb()
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
 
-/datum/job/liaison
-	title = "Workplace Liaison"
-	department = "Support"
-	department_flag = SPT
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
-	selection_color = "#2f2f7f"
-	economic_power = 15
-	minimal_player_age = 0
-	alt_titles = list(
-		"Corporate Liaison",
-		"Union Representative" = /decl/hierarchy/outfit/job/torch/passenger/research/cl/union,
-		"Corporate Representative",
-		"Corporate Executive"
-		)
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERT,
-	                    SKILL_FINANCE		= SKILL_BASIC)
-	skill_points = 20
-
-	access = list(access_liaison, access_tox, access_tox_storage, access_bridge, access_research,
-						access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar,
-						access_petrov, access_petrov_helm, access_maint_tunnels, access_emergency_storage,
-						access_janitor, access_hydroponics, access_kitchen, access_bar, access_commissary)
-	software_on_spawn = list(/datum/computer_file/program/reports)
-
-/datum/job/liaison/get_description_blurb()
-	return "You are the Workplace Liaison. You are a civilian employee of the Expeditionary Corps Organisation, the corporate conglomerate partially funding the Torch, assigned to the vessel to promote corporate interests and protect the rights of the contractors on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on corporate matters and try to push corporate interests on the CO, and speak for the workers where required. Maximise profit. Be the shady corporate shill you always wanted to be."
-
 /datum/job/representative
 	title = "SolGov Representative"
 	department = "Support"
@@ -373,14 +340,14 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/sea/get_description_blurb()
-	return "You are the Senior Enlisted Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and “advising” them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
+	return "You are the Senior Enlisted Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and \"advising\" them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
 
 /datum/job/bridgeofficer
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 3
+	spawn_positions = 3
 	supervisors = "the Commanding Officer and heads of staff"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
@@ -403,7 +370,7 @@
 
 
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
-			            access_bridge, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
+			            access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
 			            access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
 			            access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm)
 

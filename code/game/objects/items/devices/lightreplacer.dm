@@ -66,7 +66,7 @@
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
 		for(var/obj/item/weapon/light/L in S.contents)
-			if(!user.stat && src.uses < src.max_uses)
+			if(!user.stat && src.uses < src.max_uses && L.status == 0)
 				src.AddUses(1)
 				amt_inserted++
 				S.remove_from_storage(L, T, 1)

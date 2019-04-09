@@ -3,7 +3,6 @@
 ****************************************************/
 
 /mob/living/carbon/human/var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
-/mob/living/carbon/human/var/var/pale = 0          // Should affect how mob sprite is drawn, but currently doesn't.
 
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
@@ -111,9 +110,7 @@
 /mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
 	var/datum/reagent/blood/B = get_blood(container.reagents)
 	if(!B)
-		B = new /datum/reagent/blood
-		B.sync_to(src)
-		container.reagents.add_reagent(/datum/reagent/blood, amount, B.data)
+		container.reagents.add_reagent(/datum/reagent/blood, amount, get_blood_data())
 	else
 		B.sync_to(src)
 		B.volume += amount
@@ -149,22 +146,17 @@
 	chems = injected.data["trace_chem"]
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
-	reagents.update_total()
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
-
 	if(!should_have_organ(BP_HEART))
 		reagents.add_reagent(/datum/reagent/blood, amount, injected.data)
-		reagents.update_total()
 		return
 
 	if(blood_incompatible(injected.data["blood_type"], injected.data["species"]))
 		reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
-		reagents.update_total()
 	else
 		vessel.add_reagent(/datum/reagent/blood, amount, injected.data)
-		vessel.update_total()
 	..()
 
 //Gets human's own blood.
@@ -198,16 +190,32 @@
 		//AB is a universal receiver.
 	return 0
 
-/mob/living/carbon/human/proc/regenerate_blood(var/amount, var/volume_scale = TRUE)
+/mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
 	var/blood_volume_raw = vessel.get_reagent_amount(/datum/reagent/blood)
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
-		var/datum/reagent/blood/B = get_blood(vessel)
-		if(istype(B))
-			B.volume += amount
-			vessel.update_total()
+		vessel.add_reagent(/datum/reagent/blood, amount, get_blood_data())
 	return amount
+
+/mob/living/carbon/proc/get_blood_data()
+	var/data = list()
+	data["donor"] = weakref(src)
+	if (!data["virus2"])
+		data["virus2"] = list()
+	data["virus2"] |= virus_copylist(virus2)
+	data["antibodies"] = antibodies
+	data["blood_DNA"] = dna.unique_enzymes
+	data["blood_type"] = dna.b_type
+	data["species"] = species.name
+	data["has_oxy"] = species.blood_oxy
+	var/list/temp_chem = list()
+	for(var/datum/reagent/R in reagents.reagent_list)
+		temp_chem[R.type] = R.volume
+	data["trace_chem"] = temp_chem
+	data["dose_chem"] = chem_doses.Copy()
+	data["blood_colour"] = species.get_blood_colour(src)
+	return data
 
 proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
 
@@ -274,20 +282,34 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 /mob/living/carbon/human/proc/get_blood_circulation()
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
 	var/blood_volume = get_blood_volume()
-	if(!heart || (heart.pulse == PULSE_NONE && !(status_flags & FAKEDEATH) && !BP_IS_ROBOTIC(heart)))
-		blood_volume *= 0.25
+	if(!heart)
+		return 0.25 * blood_volume
+
+	var/recent_pump = LAZYACCESS(heart.external_pump, 1) > world.time - (20 SECONDS)
+	var/pulse_mod = 1
+	if((status_flags & FAKEDEATH) || BP_IS_ROBOTIC(heart))
+		pulse_mod = 1
 	else
-		var/pulse_mod = 1
 		switch(heart.pulse)
+			if(PULSE_NONE)
+				if(recent_pump)
+					pulse_mod = LAZYACCESS(heart.external_pump, 2)
+				else
+					pulse_mod *= 0.25
 			if(PULSE_SLOW)
 				pulse_mod *= 0.9
 			if(PULSE_FAST)
 				pulse_mod *= 1.1
 			if(PULSE_2FAST, PULSE_THREADY)
 				pulse_mod *= 1.25
-		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage))) * pulse_mod
-		if(!heart.open && chem_effects[CE_BLOCKAGE])
-			blood_volume *= max(0, 1-chem_effects[CE_BLOCKAGE])
+	blood_volume *= pulse_mod
+
+	var/min_efficiency = recent_pump ? 0.5 : 0.3
+	blood_volume *= max(min_efficiency, (1-(heart.damage / heart.max_damage)))
+
+	if(!heart.open && chem_effects[CE_BLOCKAGE])
+		blood_volume *= max(0, 1-chem_effects[CE_BLOCKAGE])
+
 	return min(blood_volume, 100)
 
 //Whether the species needs blood to carry oxygen. Used in get_blood_oxygenation and may be expanded based on blood rather than species in the future.
@@ -321,5 +343,5 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 		for(var/datum/reagent/blood/B in vessel.reagent_list)
 			var/list/viruses = list()
 			viruses = B.data["virus2"]
-			viruses.Remove(virus_uuid)
+			viruses.Remove("[virus_uuid]")
 			B.data["virus2"] = viruses

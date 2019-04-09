@@ -9,11 +9,11 @@
 	name = "syringe"
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
-	item_state = "syringe_0"
+	item_state = "rg0"
 	icon_state = "rg"
 	matter = list(MATERIAL_GLASS = 150)
 	amount_per_transfer_from_this = 5
-	possible_transfer_amounts = null
+	possible_transfer_amounts = "1;2;5"
 	volume = 15
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
@@ -56,14 +56,6 @@
 /obj/item/weapon/reagent_containers/syringe/attackby(obj/item/I as obj, mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/syringe/do_surgery(mob/living/carbon/M, mob/living/user)
-	if(user.a_intent == I_HURT)
-		return 0
-	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-		return ..()
-	afterattack(M, user, 1)
-	return 1
-
 /obj/item/weapon/reagent_containers/syringe/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)
 		return
@@ -92,7 +84,7 @@
 		icon_state = "broken"
 		return
 
-	var/rounded_vol = Clamp(round((reagents.total_volume / volume * 15),5), 1, 15)
+	var/rounded_vol = Clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if (reagents.total_volume == 0)
 		rounded_vol = 0
 	if(ismob(loc))
@@ -278,7 +270,7 @@
 		if((user != target) && H.check_shields(7, src, user, "\the [src]"))
 			return
 
-		if (target != user && H.getarmor(target_zone, "melee") > 5 && prob(50))
+		if (target != user && H.get_blocked_ratio(target_zone, BRUTE) > 0.05 && prob(50))
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message(text("<span class='danger'>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</span>"), 1)
 			qdel(src)

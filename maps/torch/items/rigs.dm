@@ -1,3 +1,7 @@
+/////////////////////////
+//~~Bless this mess~~//
+/////////////////////
+
 /*
  * BASE TYPE
  */
@@ -17,7 +21,13 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/command
 	glove_type = /obj/item/clothing/gloves/rig/command
 
-	allowed = list(/obj/item/weapon/gun, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit)
+	allowed = list(/obj/item/weapon/gun,
+				   /obj/item/ammo_magazine,
+				   /obj/item/device/flashlight,
+				   /obj/item/weapon/tank,
+				   /obj/item/device/suit_cooling_unit,
+				   /obj/item/weapon/storage/secure/briefcase)
+
 	req_access = list(access_bridge)
 
 /obj/item/clothing/head/helmet/space/rig/command
@@ -44,7 +54,6 @@
 
 
 /obj/item/weapon/rig/command/equipped
-
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/flash,
@@ -66,7 +75,6 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/command
 	glove_type = /obj/item/clothing/gloves/rig/command
 
-	allowed = list(/obj/item/weapon/gun, /obj/item/ammo_magazine, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/storage/secure/briefcase)
 	req_access = list(access_hop)
 
 /obj/item/clothing/head/helmet/space/rig/command/xo
@@ -99,8 +107,6 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/command
 	glove_type = /obj/item/clothing/gloves/rig/command
 
-	allowed = list(/obj/item/weapon/gun, /obj/item/ammo_magazine, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/storage/secure/briefcase)
-
 	req_access = list(access_captain)
 
 /obj/item/clothing/head/helmet/space/rig/command/co
@@ -132,7 +138,15 @@
 	chest_type = /obj/item/clothing/suit/space/rig/command/medical
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/medical
 
-	allowed = list(/obj/item/weapon/gun, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/storage/firstaid, /obj/item/device/healthanalyzer, /obj/item/stack/medical, /obj/item/roller)
+	allowed = list(/obj/item/weapon/gun,
+				   /obj/item/ammo_magazine,
+				   /obj/item/device/flashlight,
+				   /obj/item/weapon/tank,
+			 	   /obj/item/device/suit_cooling_unit,
+				   /obj/item/weapon/storage/firstaid,
+				   /obj/item/device/healthanalyzer,
+				   /obj/item/stack/medical,
+				   /obj/item/roller)
 
 	req_access = list(access_cmo)
 
@@ -166,7 +180,13 @@
 	chest_type = /obj/item/clothing/suit/space/rig/command/security
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/security
 
-	allowed = list(/obj/item/weapon/gun, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/handcuffs, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/melee/baton)
+	allowed = list(/obj/item/weapon/gun,
+	 			  /obj/item/ammo_magazine, 
+	  			  /obj/item/weapon/handcuffs,
+	   			  /obj/item/device/flashlight,
+	    		  /obj/item/weapon/tank,
+				  /obj/item/device/suit_cooling_unit,
+				  /obj/item/weapon/melee/baton)
 
 	req_access = list(access_hos)
 
@@ -185,7 +205,9 @@
 		/obj/item/rig_module/vision/sechud,
 		/obj/item/rig_module/cooling_unit)
 
-//PATHFINDER
+/*
+* PATHFINDER
+*/
 /obj/item/weapon/rig/command/exploration
 	name = "exploration command HCM"
 	suit_type = "exploration command hardsuit"
@@ -196,18 +218,76 @@
 	chest_type = /obj/item/clothing/suit/space/rig/command/exploration
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/exploration
 
-	allowed = list(/obj/item/weapon/gun, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit)
+	allowed = list(/obj/item/weapon/gun,
+				   /obj/item/ammo_magazine,
+				   /obj/item/device/flashlight,
+				   /obj/item/weapon/tank,
+				   /obj/item/device/suit_cooling_unit)
 
 	req_access = list(access_pathfinder)
 
 /obj/item/clothing/head/helmet/space/rig/command/exploration
+	camera = /obj/machinery/camera/network/exploration
 	icon_state = "command_exp_rig"
 /obj/item/clothing/suit/space/rig/command/exploration
 	icon_state = "command_exp_rig"
 /obj/item/clothing/shoes/magboots/rig/command/exploration
 /obj/item/clothing/gloves/rig/command/exploration
 
+
 /obj/item/weapon/rig/command/exploration/equipped
+	initial_modules = list(
+		/obj/item/rig_module/maneuvering_jets,
+		/obj/item/rig_module/device/flash,
+		/obj/item/rig_module/device/anomaly_scanner,
+		/obj/item/rig_module/grenade_launcher/light,
+		/obj/item/rig_module/cooling_unit)
+
+/*
+* CHIEF SCIENCE OFFICER
+*/
+/obj/item/weapon/rig/command/science
+	name = "research command HCM"
+	suit_type = "research command hardsuit"
+	desc = "A specialized hardsuit rig control module issued to ranking research officers of the Expeditionary Corps."
+	icon_state = "command_sci_rig"
+	armor = list(melee = 25, bullet = 15, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
+
+	chest_type = /obj/item/clothing/suit/space/rig/command/science
+	helm_type = /obj/item/clothing/head/helmet/space/rig/command/science
+
+	allowed = list(/obj/item/weapon/gun,
+				   /obj/item/ammo_magazine,
+				   /obj/item/device/flashlight,
+				   /obj/item/weapon/tank,
+				   /obj/item/device/suit_cooling_unit,
+			       /obj/item/stack/flag,
+				   /obj/item/weapon/storage/excavation,
+				   /obj/item/device/healthanalyzer,
+				   /obj/item/device/measuring_tape,
+				   /obj/item/device/ano_scanner,
+				   /obj/item/device/depth_scanner,
+				   /obj/item/device/core_sampler,
+				   /obj/item/device/gps,
+				   /obj/item/weapon/pinpointer/radio,
+				   /obj/item/device/radio/beacon,
+				   /obj/item/weapon/pickaxe/xeno,
+				   /obj/item/weapon/storage/bag/fossils,
+				   /obj/item/rig_module/grenade_launcher/light)
+
+	req_access = list(access_rd)
+
+/obj/item/clothing/head/helmet/space/rig/command/science
+	icon_state = "command_sci_rig"
+
+/obj/item/clothing/suit/space/rig/command/science
+	icon_state = "command_sci_rig"
+
+/obj/item/clothing/shoes/magboots/rig/command/science
+/obj/item/clothing/gloves/rig/command/science
+
+
+/obj/item/weapon/rig/command/science/equipped
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/flash,

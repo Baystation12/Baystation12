@@ -25,6 +25,7 @@
 	desc = "Woefully underpowered in D20. This one looks pretty sharp."
 	icon_state = "katana"
 	item_state = "katana"
+	furniture_icon = "katana_handle"
 	slot_flags = SLOT_BELT | SLOT_BACK
 
 /obj/item/weapon/material/sword/katana/replica

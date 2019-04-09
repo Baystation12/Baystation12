@@ -12,8 +12,13 @@
 	QDEL_NULL(touching)
 	bloodstr = null // We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	QDEL_NULL_LIST(internal_organs)
-	QDEL_NULL_LIST(stomach_contents)
 	QDEL_NULL_LIST(hallucinations)
+	if(loc)
+		for(var/mob/M in contents)
+			M.dropInto(loc)
+	else
+		for(var/mob/M in contents)
+			qdel(M)
 	return ..()
 
 /mob/living/carbon/rejuvenate()
@@ -42,7 +47,7 @@
 		germ_level++
 
 /mob/living/carbon/relaymove(var/mob/living/user, direction)
-	if((user in src.stomach_contents) && istype(user))
+	if((user in contents) && istype(user))
 		if(user.last_special <= world.time)
 			user.last_special = world.time + 50
 			src.visible_message("<span class='danger'>You hear something rumbling inside [src]'s stomach...</span>")
@@ -61,19 +66,12 @@
 				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 				if(prob(src.getBruteLoss() - 50))
-					for(var/atom/movable/A in stomach_contents)
-						A.dropInto(loc)
-						stomach_contents.Remove(A)
-					src.gib()
+					gib()
 
 /mob/living/carbon/gib()
-	for(var/mob/M in src)
-		if(M in src.stomach_contents)
-			src.stomach_contents.Remove(M)
+	for(var/mob/M in contents)
 		M.dropInto(loc)
-		for(var/mob/N in viewers(src, null))
-			if(N.client)
-				N.show_message(text("<span class='danger'>[M] bursts out of [src]!</span>"), 2)
+		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
@@ -144,7 +142,7 @@
 	return
 
 /mob/living/carbon/swap_hand()
-	src.hand = !( src.hand )
+	hand = !hand
 	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
 		if(hand)	//This being 1 means the left hand is in use
 			hud_used.l_hand_hud_object.icon_state = "l_hand_active"
@@ -152,7 +150,9 @@
 		else
 			hud_used.l_hand_hud_object.icon_state = "l_hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
-	return
+	var/obj/item/I = get_active_hand()
+	if(istype(I))
+		I.on_active_hand()
 
 /mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
 
@@ -234,9 +234,6 @@
 				AdjustWeakened(-3)
 
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-
-/mob/living/carbon/proc/eyecheck()
-	return 0
 
 /mob/living/carbon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(eyecheck() < intensity || override_blindness_check)
@@ -424,21 +421,8 @@
  *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
  */
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
-	if((MUTATION_FAT in mutations) && issmall(victim))
-		return DEVOUR_FAST
-
 	return FALSE
 
-/mob/living/carbon/onDropInto(var/atom/movable/AM)
-	for(var/e in stomach_contents)
-		var/atom/movable/stomach_content = e
-		if(stomach_content.contains(AM))
-			if(can_devour(AM))
-				stomach_contents += AM
-				return null
-			src.visible_message("<span class='warning'>\The [src] regurgitates \the [AM]!</span>")
-			return loc
-	return ..()
 /mob/living/carbon/proc/should_have_organ(var/organ_check)
 	return 0
 

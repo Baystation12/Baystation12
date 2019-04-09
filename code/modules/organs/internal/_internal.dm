@@ -6,6 +6,7 @@
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
 	var/min_bruised_damage = 10       // Damage before considered bruised
+	var/damage_reduction = 0.5     //modifier for internal organ injury
 
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	if(max_damage)
@@ -20,7 +21,6 @@
 			if(!E)
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
 			E.internal_organs |= src
-			E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
 
 /obj/item/organ/internal/Destroy()
 	if(owner)

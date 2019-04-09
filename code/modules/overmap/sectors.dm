@@ -42,6 +42,7 @@
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
 
 	LAZYADD(SSshuttle.sectors_to_initialize, src) //Queued for further init. Will populate the waypoint lists; waypoints not spawned yet will be added in as they spawn.
+	SSshuttle.clear_init_queue()
 
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/proc/populate_sector_objects()
@@ -70,7 +71,7 @@
 
 //If shuttle_name is false, will add to generic waypoints; otherwise will add to restricted. Does not do checks.
 /obj/effect/overmap/proc/add_landmark(obj/effect/shuttle_landmark/landmark, shuttle_name)
-	landmark.sector_set(src)
+	landmark.sector_set(src, shuttle_name)
 	if(shuttle_name)
 		LAZYADD(restricted_waypoints[shuttle_name], landmark)
 	else
@@ -87,12 +88,18 @@
 	. = generic_waypoints.Copy()
 	if(shuttle_name in restricted_waypoints)
 		. += restricted_waypoints[shuttle_name]
+	for(var/obj/effect/overmap/contained in src)
+		. += contained.get_waypoints(shuttle_name)
 
 /obj/effect/overmap/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	icon_state = "sector"
 	anchored = 1
+
+// Because of the way these are spawned, they will potentially have their invisibility adjusted by the turfs they are mapped on
+// prior to being moved to the overmap. This blocks that. Use set_invisibility to adjust invisibility as needed instead.
+/obj/effect/overmap/sector/hide()
 
 /obj/effect/overmap/sector/Initialize()
 	. = ..()

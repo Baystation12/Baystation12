@@ -2,14 +2,16 @@
 	name = "settled exoplanet"
 	desc = "An arid exoplanet with unnatural formations covering the surface. Hotspots of radiation detected."
 	color = "#a5a18b"
+	planetary_area = /area/exoplanet/garbage
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_map()
+	..()
 	if(prob(50))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
 	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/garbage/M = new /datum/random_map/noise/exoplanet/garbage(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)
+		var/datum/random_map/noise/exoplanet/garbage/M = new /datum/random_map/noise/exoplanet/garbage(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
 		get_biostuff(M)
-		new /datum/random_map/noise/ore/poor(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)
+		new /datum/random_map/noise/ore/poor(null,1,1,zlevel,maxx,maxy,0,1,1)
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_atmosphere()
 	..()
@@ -36,7 +38,6 @@
 	descriptor = "garbage exoplanet"
 	smoothing_iterations = 4
 	land_type = /turf/simulated/floor/exoplanet/desert
-	planetary_area = /area/exoplanet/garbage
 	plantcolors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
 	flora_prob = 1
 	large_flora_prob = 0

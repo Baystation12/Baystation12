@@ -62,7 +62,7 @@
 	log_and_message_staff(" - SubtleMessage -> [key_name_admin(M)] : [msg]")
 	SSstatistics.add_field_details("admin_verb","SMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_mentor_check_new_players()	//Allows mentors / admins to determine who the newer players are.
+/client/proc/cmd_check_new_players()	//Allows admins to determine who the newer players are.
 	set category = "Admin"
 	set name = "Check new Players"
 	if(!holder)
@@ -78,16 +78,12 @@
 	var/missing_ages = 0
 	var/msg = ""
 
-	var/highlight_special_characters = 1
-	if(is_mentor(usr.client))
-		highlight_special_characters = 0
-
 	for(var/client/C in GLOB.clients)
 		if(C.player_age == "Requires database")
 			missing_ages = 1
 			continue
 		if(C.player_age < age)
-			msg += "[key_name(C, 1, 1, highlight_special_characters)]: account is [C.player_age] days old<br>"
+			msg += "[key_name(C, 1, 1, 1)]: account is [C.player_age] days old<br>"
 
 	if(missing_ages)
 		to_chat(src, "Some accounts did not have proper ages set in their clients.  This function requires database to be present")
@@ -457,7 +453,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.mind.special_verbs = list()
 	else
 		new_character.mind_initialize()
-	if(!new_character.mind.assigned_role)	new_character.mind.assigned_role = "Assistant"//If they somehow got a null assigned role.
+	if(!new_character.mind.assigned_role)	new_character.mind.assigned_role = GLOB.using_map.default_assistant_title//If they somehow got a null assigned role.
 
 	//DNA
 	new_character.dna.ready_dna(new_character)
@@ -479,7 +475,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		antag_data.add_antagonist(new_character.mind)
 		antag_data.place_mob(new_character)
 	else
-		job_master.EquipRank(new_character, new_character.mind.assigned_role, 1)
+		SSjobs.equip_rank(new_character, new_character.mind.assigned_role, 1)
 
 	//Announces the character on all the systems, based on the record.
 	if(!issilicon(new_character))//If they are not a cyborg/AI.
@@ -587,9 +583,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
-	if(job_master)
-		for(var/datum/job/job in job_master.occupations)
-			to_chat(src, "[job.title]: [job.total_positions]")
+	for(var/datum/job/job in SSjobs.primary_job_datums)
+		to_chat(src, "[job.title]: [job.total_positions]")
 	SSstatistics.add_field_details("admin_verb","LFS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in range(world.view))

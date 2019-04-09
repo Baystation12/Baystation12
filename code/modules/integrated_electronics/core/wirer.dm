@@ -14,6 +14,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
+	matter = list(MATERIAL_ALUMINIUM = 1500, MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_PLASTIC = 500)
 
 /obj/item/device/integrated_electronics/wirer/on_update_icon()
 	icon_state = "wirer-[mode]"
@@ -24,10 +25,10 @@
 		return
 	switch(mode)
 		if(WIRE)
-			selected_io = io
+			select_io(io)
 			to_chat(user, "<span class='notice'>You attach a data wire to \the [selected_io.holder]'s [selected_io.name] data channel.</span>")
-			mode = WIRING
 			update_icon()
+
 		if(WIRING)
 			if(!selected_io)
 				mode = WIRE
@@ -45,21 +46,17 @@
 			selected_io.connect_pin(io)
 
 			to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
-			mode = WIRE
 			update_icon()
 			selected_io.holder.interact(user) // This is to update the UI.
-			selected_io = null
+			unselect_io(selected_io)
 
 		if(UNWIRE)
-			selected_io = io
 			if(!io.linked.len)
-				to_chat(user, "<span class='warning'>There is nothing connected to \the [selected_io] data channel.</span>")
-				selected_io = null
+				to_chat(user, "<span class='warning'>There is nothing connected to \the [io] data channel.</span>")
 				return
+			select_io(io)
 			to_chat(user, "<span class='notice'>You prepare to detach a data wire from \the [selected_io.holder]'s [selected_io.name] data channel.</span>")
-			mode = UNWIRING
 			update_icon()
-			return
 
 		if(UNWIRING)
 			if(!selected_io)
@@ -74,13 +71,33 @@
 				to_chat(user, "<span class='notice'>You disconnect \the [selected_io.holder]'s [selected_io.name] from \
 				\the [io.holder]'s [io.name].</span>")
 				selected_io.holder.interact(user) // This is to update the UI.
-				selected_io = null
-				mode = UNWIRE
+				unselect_io(selected_io)
 				update_icon()
 			else
 				to_chat(user, "<span class='warning'>\The [selected_io.holder]'s [selected_io.name] and \the [io.holder]'s \
 				[io.name] are not connected.</span>")
-				return
+
+/obj/item/device/integrated_electronics/wirer/proc/select_io(datum/integrated_io/io)
+	if(selected_io)
+		unselect_io(selected_io)
+	selected_io = io
+	GLOB.destroyed_event.register(selected_io, src, .proc/unselect_io)
+	switch(mode)
+		if(UNWIRE)
+			mode = UNWIRING
+		if(WIRE)
+			mode = WIRING
+
+/obj/item/device/integrated_electronics/wirer/proc/unselect_io(datum/integrated_io/io)
+	if(selected_io != io)
+		return
+	GLOB.destroyed_event.unregister(selected_io, src)
+	selected_io = null
+	switch(mode)
+		if(UNWIRING)
+			mode = UNWIRE
+		if(WIRING)
+			mode = WIRE
 
 /obj/item/device/integrated_electronics/wirer/attack_self(mob/user)
 	switch(mode)
@@ -88,16 +105,14 @@
 			mode = UNWIRE
 		if(WIRING)
 			if(selected_io)
+				unselect_io(selected_io)
 				to_chat(user, "<span class='notice'>You decide not to wire the data channel.</span>")
-			selected_io = null
-			mode = WIRE
 		if(UNWIRE)
 			mode = WIRE
 		if(UNWIRING)
 			if(selected_io)
+				unselect_io(selected_io)
 				to_chat(user, "<span class='notice'>You decide not to disconnect the data channel.</span>")
-			selected_io = null
-			mode = UNWIRE
 	update_icon()
 	to_chat(user, "<span class='notice'>You set \the [src] to [mode].</span>")
 

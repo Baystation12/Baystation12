@@ -2,17 +2,18 @@
 	var/list/goals
 
 /datum/mind/proc/show_roundend_summary(var/department_goals)
-	if(department_goals && current.get_preference_value(/datum/client_preference/show_department_goals) == GLOB.PREF_SHOW) 
-		to_chat(current, SPAN_NOTICE(department_goals))
-	if(LAZYLEN(goals))
-		to_chat(current, SPAN_NOTICE("<br><br><b>You had the following personal goals this round:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
+	if(current)
+		if(department_goals && current.get_preference_value(/datum/client_preference/show_department_goals) == GLOB.PREF_SHOW) 
+			to_chat(current, SPAN_NOTICE(department_goals))
+		if(LAZYLEN(goals))
+			to_chat(current, SPAN_NOTICE("<br><br><b>You had the following personal goals this round:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
 
-/datum/mind/proc/summarize_goals(var/show_success = FALSE, var/allow_modification = FALSE, var/datum/admins/admin)
+/datum/mind/proc/summarize_goals(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/caller)
 	. = list()
 	if(LAZYLEN(goals))
 		for(var/i = 1 to LAZYLEN(goals))
 			var/datum/goal/goal = goals[i]
-			. += "[i]. [goal.summarize(show_success, allow_modification, admin, position = i)]"
+			. += "[i]. [goal.summarize(show_success, allow_modification, caller, position = i)]"
 
 // Create and display personal goals for this round.
 /datum/mind/proc/generate_goals(var/datum/job/job, var/adding_goals = FALSE, var/add_amount)

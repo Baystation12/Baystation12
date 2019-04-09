@@ -12,7 +12,8 @@
 	throw_range = 5
 	origin_tech = list(TECH_BIO = 3)
 	attack_verb = list("attacked", "slapped", "whacked")
-	relative_size = 60
+	relative_size = 85
+	damage_reduction = 0
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
@@ -122,17 +123,26 @@
 /obj/item/organ/internal/brain/proc/past_damage_threshold(var/threshold)
 	return (get_current_damage_threshold() > threshold)
 
+/obj/item/organ/internal/brain/proc/handle_severe_brain_damage()
+	set waitfor = FALSE
+	healed_threshold = 0
+	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
+	sleep(5 SECONDS)
+	if(!owner)
+		return
+	to_chat(owner, "<span class = 'notice' font size='10'><B>What's going on...?</B></span>")
+	sleep(10 SECONDS)
+	if(!owner)
+		return
+	to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
+	alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
+	if(owner.psi)
+		owner.psi.check_latency_trigger(20, "physical trauma")
+
 /obj/item/organ/internal/brain/Process()
 	if(owner)
 		if(damage > max_damage / 2 && healed_threshold)
-			spawn()
-				to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
-				sleep(5 SECONDS)
-				to_chat(owner, "<span class = 'notice' font size='10'><B>What's going on...?</B></span>")
-				sleep(10 SECONDS)
-				to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
-				alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
-			healed_threshold = 0
+			handle_severe_brain_damage()
 
 		if(damage < (max_damage / 4))
 			healed_threshold = 1

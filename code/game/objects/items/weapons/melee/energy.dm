@@ -94,7 +94,6 @@
  * Energy Sword
  */
 /obj/item/weapon/melee/energy/sword
-	color
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "sword0"
@@ -112,25 +111,27 @@
 	base_parry_chance = 50
 	var/blade_color
 
+/obj/item/weapon/melee/energy/sword/Initialize()
+	. = ..()
+	if(!blade_color)
+		blade_color = pick("red","blue","green","purple")
+
+/obj/item/weapon/melee/energy/sword/green
+	blade_color = "green"
+
+/obj/item/weapon/melee/energy/sword/red
+	blade_color = "red"
+
+/obj/item/weapon/melee/energy/sword/blue
+	blade_color = "blue"
+
+/obj/item/weapon/melee/energy/sword/purple
+	blade_color = "purple"
+
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
 	if(!istype(loc,/mob))
 		deactivate(user)
-
-/obj/item/weapon/melee/energy/sword/New()
-	blade_color = pick("red","blue","green","purple")
-
-/obj/item/weapon/melee/energy/sword/green/New()
-	blade_color = "green"
-
-/obj/item/weapon/melee/energy/sword/red/New()
-	blade_color = "red"
-
-/obj/item/weapon/melee/energy/sword/blue/New()
-	blade_color = "blue"
-
-/obj/item/weapon/melee/energy/sword/purple/New()
-	blade_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
@@ -169,7 +170,6 @@
  *Energy Blade
  */
 
-//Can't be activated or deactivated, so no reason to be a subtype of energy
 /obj/item/weapon/melee/energy/blade
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
@@ -226,3 +226,40 @@
 			host.embedded -= src
 			host.drop_from_inventory(src)
 		QDEL_IN(src, 0)
+		
+/obj/item/weapon/melee/energy/machete
+	name = "energy machete"
+	desc = "A machete handle that extends out into a long, purple machete blade. It appears to be Skrellian in origin."
+	icon_state = "machete_skrell_x"
+	active_force = 16		//In line with standard machetes at time of creation.
+	active_throwforce = 17.25
+	force = 3
+	throwforce = 1
+	w_class = ITEM_SIZE_SMALL
+	origin_tech = list(TECH_MAGNET = 3)
+	
+/obj/item/weapon/melee/energy/machete/activate(mob/living/user)
+	if(!active)
+		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
+	..()
+	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	sharp = 1
+	edge = 1
+	update_icon()
+	
+/obj/item/weapon/melee/energy/machete/get_mob_overlay(mob/living/user, slot)
+	var/image/mobsprite = ..()
+	. = mobsprite
+	if(active)
+		var/image/laser = overlay_image(mobsprite.icon, "machete_skrell_light", flags=RESET_COLOR)
+		laser.layer = ABOVE_LIGHTING_LAYER
+		laser.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		mobsprite.overlays += laser
+	
+/obj/item/weapon/melee/energy/machete/on_update_icon()
+	if(active)
+		icon_state = "machete_skrell"
+		set_light(0.5, 1, 2, 4, "#6600cc")
+	else
+		icon_state = "machete_skrell_x"
+		set_light(0)

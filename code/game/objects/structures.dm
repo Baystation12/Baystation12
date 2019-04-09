@@ -2,18 +2,15 @@
 	icon = 'icons/obj/structures.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER
+
 	var/breakable
 	var/parts
-
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/other_connections = list("0", "0", "0", "0")
 	var/list/blend_objects = newlist() // Objects which to blend with
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
-
-	var/list/footstep_sounds	//footstep sounds when stepped on
-
-/obj/structure/proc/get_footstep_sound()
-	if(LAZYLEN(footstep_sounds)) return pick(footstep_sounds)
+	var/material/material = null
+	var/footstep_type
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(wallbreaker && damage && breakable)
@@ -62,6 +59,38 @@
 
 /obj/structure/attack_tk()
 	return
+
+/obj/structure/grab_attack(var/obj/item/grab/G)
+	if (!G.force_danger())
+		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
+		return TRUE
+	if (G.assailant.a_intent == I_HURT)
+		// Slam their face against the table.
+		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE)
+		if (prob(30 * (1 - blocked)))
+			G.affecting.Weaken(5)
+		G.affecting.apply_damage(8, BRUTE, BP_HEAD)
+		visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
+		if (material)
+			playsound(loc, material.tableslam_noise, 50, 1)
+		else
+			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+		var/list/L = take_damage(rand(1,5))
+		for(var/obj/item/weapon/material/shard/S in L)
+			if(S.sharp && prob(50))
+				G.affecting.visible_message("<span class='danger'>\The [S] slices into [G.affecting]'s face!</span>", "<span class='danger'>\The [S] slices into your face!</span>")
+				G.affecting.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
+		qdel(G)
+	else if(atom_flags & ATOM_FLAG_CLIMBABLE)
+		var/obj/occupied = turf_is_crowded()
+		if (occupied)
+			to_chat(G.assailant, "<span class='danger'>There's \a [occupied] in the way.</span>")
+			return TRUE
+		G.affecting.forceMove(src.loc)
+		G.affecting.Weaken(rand(2,5))
+		visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
+		qdel(G)
+		return TRUE
 
 /obj/structure/ex_act(severity)
 	switch(severity)

@@ -210,7 +210,7 @@
 /area/map_template/colony/surgery)
 "aH" = (
 /obj/structure/closet/crate,
-/obj/item/weapon/circuitboard/fusion_core_control,
+/obj/item/weapon/circuitboard/fusion/core_control,
 /obj/item/weapon/circuitboard/fusion_core,
 /obj/item/weapon/circuitboard/fusion_fuel_compressor,
 /obj/item/weapon/circuitboard/fusion_fuel_control,
@@ -2771,7 +2771,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engineering{
-	req_one_access = list()
+	req_access = list()
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -2860,7 +2860,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/vending/engivend{
-	req_one_access = list()
+	req_access = list()
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -3365,6 +3365,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/pitcher,
 /obj/item/weapon/reagent_containers/glass/beaker/bowl,
 /obj/item/weapon/reagent_containers/food/condiment/salt,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gf" = (
@@ -4201,20 +4202,17 @@
 /area/map_template/colony)
 "hB" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/mc9mm,
-/obj/item/ammo_magazine/c45m,
-/obj/item/ammo_magazine/c45m,
-/obj/item/ammo_magazine/c45m/rubber,
-/obj/item/ammo_magazine/mc9mm/flash,
-/obj/item/ammo_magazine/mc9mm/flash,
-/obj/item/ammo_magazine/c45m/rubber,
-/obj/item/ammo_magazine/c45m/flash,
-/obj/item/weapon/storage/box/shotgunshells,
-/obj/item/weapon/storage/box/shotgunshells,
-/obj/item/weapon/storage/box/shotgunammo,
-/obj/item/weapon/storage/box/shotgunammo,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol/rubber,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/rubber,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -4575,9 +4573,9 @@
 /area/map_template/colony)
 "ii" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/pistol,
-/obj/item/weapon/gun/projectile/pistol,
-/obj/item/weapon/gun/projectile/sec/wood/lethal,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/sec/lethal,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 8
@@ -6690,12 +6688,12 @@
 /area/map_template/colony/jail)
 "lH" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
-/obj/item/ammo_magazine/c556,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -6977,13 +6975,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/structure/closet/emcloset/legacy,
+/obj/structure/closet/emcloset,
+/obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mb" = (
@@ -7377,8 +7372,8 @@
 /area/map_template/colony/hydroponics)
 "mI" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/automatic/sts35,
-/obj/item/weapon/gun/projectile/automatic/sts35,
+/obj/item/weapon/gun/projectile/automatic/assault_rifle,
+/obj/item/weapon/gun/projectile/automatic/assault_rifle,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -7929,11 +7924,9 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/structure/closet/emcloset/legacy,
+/obj/structure/closet/emcloset,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -8344,19 +8337,19 @@
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/structure/table/rack,
 /obj/item/weapon/gun/projectile/heavysniper/ant{
-	desc = "A large, unwieldy bolt-action rifle in shoddy condition. Chambered in 9mm, looks far scarier than it is. Vamoos ya varmint!";
+	desc = "A large, unwieldy bolt-action rifle in shoddy condition. Chambered in small caliber, looks far scarier than it is. Vamoos ya varmint!";
 	name = "anti-varmint rifle"
 	},
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
 /obj/machinery/door/window/northright,
 /obj/structure/window/reinforced{
 	dir = 4

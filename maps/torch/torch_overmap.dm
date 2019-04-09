@@ -33,12 +33,14 @@
 		"nav_deck3_guppy",
 		"nav_deck4_guppy",
 		"nav_bridge_guppy",
-		"nav_hangar_aquila",
 		"nav_deck1_aquila",
 		"nav_deck2_aquila",
 		"nav_deck3_aquila",
 		"nav_deck4_aquila",
-		"nav_bridge_aquila"
+		"nav_bridge_aquila",
+		"nav_skrellscoutsh_altdock",
+		"nav_ert_dock"
+		
 	)
 
 /obj/effect/overmap/ship/landable/exploration_shuttle
@@ -47,6 +49,7 @@
 	max_speed = 1/(4 SECONDS)
 	burn_delay = 2 SECONDS
 	fore_dir = NORTH
+	skill_needed = SKILL_BASIC
 
 /obj/effect/overmap/ship/landable/aquila
 	name = "Aquila"
@@ -63,6 +66,7 @@
 	burn_delay = 2 SECONDS
 	vessel_mass = 2000
 	fore_dir = SOUTH
+	skill_needed = SKILL_BASIC
 
 /obj/machinery/computer/shuttle_control/explore/aquila
 	name = "aquila control console"

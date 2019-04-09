@@ -3,7 +3,8 @@
 	desc = "Some rods. Can be used for building, or something."
 	singular_name = "rod"
 	plural_name = "rods"
-	icon_state = "rods"
+	icon_state = "single-rod"
+	plural_icon_state = "rods"
 	w_class = ITEM_SIZE_LARGE
 	attack_cooldown = 21
 	melee_accuracy_bonus = -20
@@ -76,13 +77,6 @@
 	if(!istype(user.loc,/turf)) return 0
 
 	place_grille(user, user.loc, src)
-
-/obj/item/stack/rods/on_update_icon()
-	..()
-	if(amount == 1)
-		icon_state = "single-rod"
-	else
-		icon_state = initial(icon_state)
 
 /obj/item/stack/material/rods/use()
 	. = ..()

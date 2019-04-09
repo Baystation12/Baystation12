@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 10
 	one_hand_penalty = 2
-	accuracy = 2
+	bulk = GUN_BULK_RIFLE
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(MATERIAL_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
@@ -145,19 +145,13 @@ obj/item/weapon/gun/energy/retro
 	force = 10
 	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
-	scoped_accuracy = 0
+	scoped_accuracy = 9
+	scope_zoom = 2
 	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/sniperrifle/on_update_icon()
 	..()
 	item_state_slots[slot_back_str] = icon_state //so that the on-back overlay uses the different charged states
-
-/obj/item/weapon/gun/energy/sniperrifle/verb/scope()
-	set category = "Object"
-	set name = "Use Scope"
-	set popup_menu = 1
-
-	toggle_scope(usr, 2.0)
 
 ////////Laser Tag////////////////////
 

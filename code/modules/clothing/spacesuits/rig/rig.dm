@@ -12,8 +12,6 @@
 	icon = 'icons/obj/rig_modules.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
-	req_one_access = list()
-	req_access = list()
 	w_class = ITEM_SIZE_HUGE
 	center_of_mass = null
 
@@ -81,6 +79,7 @@
 	var/vision_restriction = TINT_NONE
 	var/offline_vision_restriction = TINT_HEAVY               // tint value given to helmet
 	var/airtight = 1 //If set, will adjust ITEM_FLAG_AIRTIGHT and ITEM_FLAG_STOPPRESSUREDAMAGE flags on components. Otherwise it should leave them untouched.
+	var/visible_name
 
 	var/emp_protection = 0
 
@@ -113,7 +112,7 @@
 	item_state = icon_state
 	wires = new(src)
 
-	if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
+	if(!length(req_access))
 		locked = 0
 
 	spark_system = new()
@@ -161,7 +160,9 @@
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
-		if(islist(armor)) piece.armor = armor.Copy()
+		if(islist(armor))
+			remove_extension(piece, /datum/extension/armor)
+			set_extension(piece, /datum/extension/armor, /datum/extension/armor/rig, armor)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)
@@ -288,10 +289,9 @@
 								helmet.update_light(wearer)
 
 					//sealed pieces become airtight, protecting against diseases
-					if (!seal_target)
-						piece.armor["bio"] = 100
-					else
-						piece.armor["bio"] = src.armor["bio"]
+					var/datum/extension/armor/rig/armor_datum = get_extension(piece, /datum/extension/armor)
+					if(istype(armor_datum))
+						armor_datum.sealed = !seal_target
 
 				else
 					failed_to_seal = 1

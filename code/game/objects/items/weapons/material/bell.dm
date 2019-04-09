@@ -8,7 +8,7 @@
 	force_divisor = 0.8
 	thrown_force_divisor = 0.3
 	hitsound = 'sound/items/oneding.ogg'
-	default_material = MATERIAL_SILVER
+	default_material = MATERIAL_ALUMINIUM
 
 /obj/item/weapon/material/bell/attack_hand(mob/user as mob)
 	if (user.a_intent == I_GRAB)

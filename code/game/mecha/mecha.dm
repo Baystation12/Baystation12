@@ -621,7 +621,7 @@
 	if(Proj.damage_type == PAIN && !(src.r_deflect_coeff > 1))
 		use_power(Proj.agony * 5)
 
-	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)
+	src.log_message("Hit by projectile. Type: [Proj.name]([get_armor_key(Proj.damage_type, Proj.damage_flags())]).",1)
 	if(deflect_hit(is_melee=0))
 		src.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
 		src.visible_message("The [src.name] armor deflects the projectile.")
@@ -632,7 +632,7 @@
 		var/ignore_threshold
 		if(istype(Proj, /obj/item/projectile/beam/pulse))
 			ignore_threshold = 1
-		src.hit_damage(Proj.damage, Proj.check_armour, is_melee=0)
+		src.hit_damage(Proj.damage, get_armor_key(Proj.damage_type, Proj.damage_flags()), is_melee=0)
 		if(prob(25)) spark_system.start()
 		src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
 
@@ -1017,11 +1017,16 @@
 		to_chat(usr, "<span class='warning'>You can't climb into the exosuit while buckled!</span>")
 		return
 
+	var/mob/living/carbon/human/H = usr
+	if (H.mob_size >= MOB_LARGE)
+		to_chat(usr, SPAN_WARNING("You're too big to fit in the exosuit!"))
+		return
+
 	src.log_message("[usr] tries to move in.")
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>")
+			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed, don't you think?</span>")
 			return
 	if (src.occupant)
 		to_chat(usr, "<span class='danger'>The [src.name] is already occupied!</span>")
@@ -1571,12 +1576,12 @@
 		return
 	if(href_list["add_req_access"] && add_req_access && F.getObj("id_card"))
 		if(!in_range(src, usr))	return
-		operation_req_access += F.getNum("add_req_access")
+		operation_req_access += F.get("add_req_access")
 		output_access_dialog(F.getObj("id_card"),F.getMob("user"))
 		return
 	if(href_list["del_req_access"] && add_req_access && F.getObj("id_card"))
 		if(!in_range(src, usr))	return
-		operation_req_access -= F.getNum("del_req_access")
+		operation_req_access -= F.get("del_req_access")
 		output_access_dialog(F.getObj("id_card"),F.getMob("user"))
 		return
 	if(href_list["finish_req_access"])

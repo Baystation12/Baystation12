@@ -406,14 +406,14 @@
 
 /obj/item/clothing/suit/storage/toggle/hoodie/cti
 	name = "\improper CTI hoodie"
-	desc = "A warm, black sweatshirt.  It bears the letters CTI on the back, a lettering to the prestigious university in Tau Ceti, Ceti Technical Institute.  There is a blue supernova embroidered on the front, the emblem of CTI."
+	desc = "A warm, black sweatshirt.  It bears the letters 'CTI' on the back, a lettering to the prestigious university in Tau Ceti, Ceti Technical Institute.  There is a blue supernova embroidered on the front, the emblem of CTI."
 	icon_state = "cti_hoodie"
 	icon_open = "cti_hoodie_open"
 	icon_closed = "cti_hoodie"
 
 /obj/item/clothing/suit/storage/toggle/hoodie/mu
 	name = "\improper Mariner University hoodie"
-	desc = "A warm, gray sweatshirt.  It bears the letters MU on the front, a lettering to the well-known public college, Mariner University."
+	desc = "A warm, gray sweatshirt.  It bears the letters 'MU' on the front, a lettering to the well-known public college, Mariner University."
 	icon_state = "mu_hoodie"
 	icon_open = "mu_hoodie_open"
 	icon_closed = "mu_hoodie"

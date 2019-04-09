@@ -2,9 +2,10 @@
 #define FLIGHTSUIT_PROCESSING_NONE 0
 #define FLIGHTSUIT_PROCESSING_FULL 1
 
-#define INITIALIZATION_INSSATOMS     0	//New should not call Initialize
-#define INITIALIZATION_INNEW_MAPLOAD 1	//New should call Initialize(TRUE)
-#define INITIALIZATION_INNEW_REGULAR 2	//New should call Initialize(FALSE)
+#define INITIALIZATION_INSSATOMS      0	//New should not call Initialize
+#define INITIALIZATION_INSSATOMS_LATE 1	//New should not call Initialize; after the first pass is complete (handled differently)
+#define INITIALIZATION_INNEW_MAPLOAD  2	//New should call Initialize(TRUE)
+#define INITIALIZATION_INNEW_REGULAR  3	//New should call Initialize(FALSE)
 
 #define INITIALIZE_HINT_NORMAL   0  //Nothing happens
 #define INITIALIZE_HINT_LATELOAD 1  //Call LateInitialize
@@ -23,16 +24,17 @@
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
-#define SS_INIT_GARBAGE          15
-#define SS_INIT_CHEMISTRY        14
-#define SS_INIT_MATERIALS        13
-#define SS_INIT_PLANTS           12
-#define SS_INIT_ANTAGS           11
-#define SS_INIT_CULTURE          10
-#define SS_INIT_MISC             9
-#define SS_INIT_CHAR_SETUP       8
-#define SS_INIT_SKYBOX           7
-#define SS_INIT_MAPPING          6
+#define SS_INIT_GARBAGE          16
+#define SS_INIT_CHEMISTRY        15
+#define SS_INIT_MATERIALS        14
+#define SS_INIT_PLANTS           13
+#define SS_INIT_ANTAGS           12
+#define SS_INIT_CULTURE          11
+#define SS_INIT_MISC             10
+#define SS_INIT_SKYBOX           9
+#define SS_INIT_MAPPING          8
+#define SS_INIT_JOBS             7
+#define SS_INIT_CHAR_SETUP       6
 #define SS_INIT_CIRCUIT          5
 #define SS_INIT_OPEN_SPACE       4
 #define SS_INIT_ATOMS            3

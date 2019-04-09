@@ -21,6 +21,7 @@
 	max_gas = null
 	minbodytemp = 0
 	speed = 4
+	natural_armor = list(melee = 20)
 
 	bleed_colour = SYNTH_BLOOD_COLOUR
 
@@ -39,6 +40,7 @@
 	health = 80
 	ranged = 1
 	can_escape = 1
+	natural_armor = list(melee = 30)
 
 /mob/living/simple_animal/hostile/hivebot/death()
 	..(null, "blows apart!")

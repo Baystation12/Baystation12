@@ -667,6 +667,10 @@ I said no!
 	reagents = list(/datum/reagent/water = 10, /datum/reagent/nutriment/rice = 10)
 	result = /obj/item/weapon/reagent_containers/food/snacks/boiledrice
 
+/datum/recipe/chazuke
+	reagents = list(/datum/reagent/nutriment/rice/chazuke = 10)
+	result = /obj/item/weapon/reagent_containers/food/snacks/boiledrice/chazuke
+
 /datum/recipe/katsucurry
 	fruit = list("apple" = 1, "carrot" = 1, "potato" = 1)
 	reagents = list(/datum/reagent/water = 10, /datum/reagent/nutriment/rice = 10, /datum/reagent/nutriment/flour = 5)

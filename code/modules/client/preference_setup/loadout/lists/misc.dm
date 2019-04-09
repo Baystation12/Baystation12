@@ -61,9 +61,19 @@
 	path = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/boot_knife
-	display_name = "boot knife"
-	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
+/datum/gear/knife
+	display_name = "folding knife"
+	path = /obj/item/weapon/material/knife/folding
+	cost = 3
+
+/datum/gear/knife_wood
+	display_name = "peasant knife"
+	path = /obj/item/weapon/material/knife/folding/wood
+	cost = 3
+
+/datum/gear/knife_tacticool
+	display_name = "tactical folding knife"
+	path = /obj/item/weapon/material/knife/folding/tacticool
 	cost = 3
 
 /datum/gear/lunchbox

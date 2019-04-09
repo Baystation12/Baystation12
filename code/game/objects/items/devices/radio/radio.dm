@@ -24,7 +24,7 @@
 	throw_range = 9
 	w_class = ITEM_SIZE_SMALL
 
-	matter = list(MATERIAL_GLASS = 25,MATERIAL_STEEL = 75)
+	matter = list(MATERIAL_GLASS = 25, MATERIAL_ALUMINIUM = 75)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
@@ -136,7 +136,7 @@
 
 /mob/proc/has_internal_radio_channel_access(var/list/req_one_accesses)
 	var/obj/item/weapon/card/id/I = GetIdCard()
-	return has_access(list(), req_one_accesses, I ? I.GetAccess() : list())
+	return has_access(list(req_one_accesses), I ? I.GetAccess() : list()) // Double list does an OR check instead of the usual AND.
 
 /mob/observer/ghost/has_internal_radio_channel_access(var/list/req_one_accesses)
 	return can_admin_interact()
@@ -248,12 +248,18 @@
 	// If we were to send to a channel we don't have, drop it.
 	return null
 
-/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, var/verb = "says", var/datum/language/speaking = null)
+/obj/item/device/radio/talk_into(mob/living/M, message, channel, var/verb = "says", var/datum/language/speaking = null)
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0
 
 	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
+
+	// Sedation chemical effect should prevent radio use (Chloral and Soporific)
+	var/mob/living/carbon/C = M
+	if ((istype(C)) && (C.chem_effects[CE_SEDATE]))
+		to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
+		return 0
 
 	if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
 

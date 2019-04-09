@@ -14,14 +14,21 @@
 	Adds an instance of color_type to the mob's client_colors list
 	color_type - a typepath (subtyped from /datum/client_color)
 */
-/mob/proc/add_client_color(color_type)
-	if(!ispath(/datum/client_color))
-		return
+/mob/proc/has_client_color(color_type)
+	if(!ispath(/datum/client_color) || !LAZYLEN(client_colors))
+		return FALSE
+	for(var/thing in client_colors)
+		var/datum/client_color/col = thing
+		if(col.type == color_type)
+			return TRUE
+	return FALSE
 
-	var/datum/client_color/CC = new color_type()
-	client_colors |= CC
-	sortTim(client_colors, /proc/cmp_clientcolor_priority)
-	update_client_color()
+/mob/proc/add_client_color(color_type)
+	if(!has_client_color(color_type))
+		var/datum/client_color/CC = new color_type()
+		client_colors |= CC
+		sortTim(client_colors, /proc/cmp_clientcolor_priority)
+		update_client_color()
 
 
 /*
@@ -55,23 +62,23 @@
 	client.color = null
 	if(!client_colors.len)
 		return
-	var/color = list(1,0,0, 0,1,0, 0,0,1) //Star at normal
+	var/list/c = list(1,0,0, 0,1,0, 0,0,1) //Star at normal
 	for(var/datum/client_color/CC in client_colors)
 		//Matrix multiplication newcolor * current
+		var/list/current = c.Copy()
 
-		var/current = color
 		for(var/m = 1; m <= 3; m += 1) //For each row
 			for(var/i = 1; i <= 3; i += 1) //go over each column of the second matrix
 				var/sum = 0
 				for(var/j = 1; j <= 3; j += 1) //multiply each pair
 					sum += CC.client_color[(m-1)*3 + j] * current[(j-1)*3 + i]
 
-				color[(m-1)*3 + i] = sum
+				c[(m-1)*3 + i] = sum
 
 		if(CC.override)
 			break
 
-	animate(client, color = color)
+	animate(client, color = c)
 
 /datum/client_color/monochrome
 	client_color = list(0.33,0.33,0.33, 0.33,0.33,0.33, 0.33,0.33,0.33)
@@ -82,6 +89,9 @@
 	client_color = list(0.299,0.299,0.299, 0.587,0.587,0.587, 0.114,0.114,0.114)
 	priority = 200
 
+/datum/client_color/thirdeye
+	client_color = list(0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.05, 0.05, 0.05)
+	priority = 300
 
 //Disabilities, could be hooked to brain damage or chargen if so desired.
 /datum/client_color/deuteranopia

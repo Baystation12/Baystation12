@@ -67,7 +67,6 @@
 	else
 		powered = 0
 
-
 // ARMOUR
 // Protects the cyborg from damage. Usually first module to be hit
 // No power usage
@@ -75,7 +74,6 @@
 	name = "armour plating"
 	external_type = /obj/item/robot_parts/robot_component/armour
 	max_damage = 150
-
 
 // ACTUATOR
 // Enables movement.

@@ -33,7 +33,7 @@
 	if(istype(O, /obj/item/weapon/virusdish))
 
 		if(dish)
-			to_chat(user, "The dish tray is aleady full!")
+			to_chat(user, "The dish tray is already full!")
 			return
 		if(!user.unEquip(O, src))
 			return
@@ -138,7 +138,7 @@
 			foodsupply = min(100, foodsupply+(food_taken * 2))
 			SSnano.update_uis(src)
 
-		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list && toxins < 100)
+		if ((locate(/datum/reagent/toxin) in beaker.reagents.reagent_list) && toxins < 100)
 			for(var/datum/reagent/toxin/T in beaker.reagents.reagent_list)
 				toxins += max(T.strength,1)
 				beaker.reagents.remove_reagent(T.type,1)

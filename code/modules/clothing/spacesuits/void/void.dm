@@ -55,6 +55,8 @@
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
 	action_button_name = "Toggle Helmet"
+	var/helmet_deploy_sound = 'sound/items/helmet_close.ogg'
+	var/helmet_retract_sound = 'sound/items/helmet_open.ogg'
 
 #define VOIDSUIT_INIT_EQUIPMENT(equipment_var, expected_path) \
 if(ispath(##equipment_var, ##expected_path )){\
@@ -113,6 +115,7 @@ else if(##equipment_var) {\
 			to_chat(M, "You are unable to deploy your suit's helmet as \the [H.head] is in the way.")
 		else if (H.equip_to_slot_if_possible(helmet, slot_head))
 			to_chat(M, "Your suit's helmet deploys with a hiss.")
+			playsound(loc, helmet_deploy_sound, 30)
 			helmet.canremove = 0
 
 	if(tank)
@@ -167,6 +170,7 @@ else if(##equipment_var) {\
 	if(H.head == helmet)
 		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
 		helmet.canremove = 1
+		playsound(loc, helmet_retract_sound, 30)
 		H.drop_from_inventory(helmet, src)
 	else
 		if(H.head)
@@ -175,6 +179,7 @@ else if(##equipment_var) {\
 		if(H.equip_to_slot_if_possible(helmet, slot_head))
 			helmet.pickup(H)
 			helmet.canremove = 0
+			playsound(loc, helmet_deploy_sound, 30)
 			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
 	helmet.update_light(H)
 

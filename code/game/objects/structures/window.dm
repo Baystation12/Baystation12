@@ -9,7 +9,6 @@
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	alpha = 180
-	var/material/material
 	var/material/reinf_material
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
@@ -40,7 +39,7 @@
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	
+
 	if(new_reinf_material)
 		reinf_material = SSmaterials.get_material_by_name(new_reinf_material)
 
@@ -77,7 +76,7 @@
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 	if(reinf_material)
-		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>") 
+		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>")
 	if(health == maxhealth)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
@@ -250,14 +249,17 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
-			material.place_sheet(loc, is_fulltile() ? 4 : 2)
+			var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 2)
+			if(S && reinf_material)
+				S.reinf_material = reinf_material
+				S.update_strings()
+				S.update_icon()
 			qdel(src)
 	else if(isCoil(W) && reinf_material && !polarized)
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
-			qdel(src)
 	else if(polarized && isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the window.", src.name, null), MAX_NAME_LEN)
 		if(user.incapacitated() || !user.Adjacent(src))
@@ -289,17 +291,16 @@
 		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
 		return TRUE
 	var/def_zone = ran_zone(BP_HEAD, 20)
-	var/blocked = G.affecting.run_armor_check(def_zone, "melee")
 	if(G.damage_stage() < 2)
 		G.affecting.visible_message("<span class='danger'>[G.assailant] bashes [G.affecting] against \the [src]!</span>")
 		if (prob(50))
 			G.affecting.Weaken(1)
-		G.affecting.apply_damage(10, BRUTE, def_zone, blocked, used_weapon = src)
+		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
 	else
 		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
 		G.affecting.Weaken(5)
-		G.affecting.apply_damage(20, BRUTE, def_zone, blocked, used_weapon = src)
+		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
 	return TRUE
 
@@ -532,12 +533,15 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
- 
+
 /obj/machinery/button/windowtint/proc/toggle_tint()
 	use_power_oneoff(5)
 
 	active = !active
 	queue_icon_update()
+	for(var/obj/structure/window/W in range(src,range))
+		if(W.polarized && (W.id == src.id || !W.id))
+			W.toggle()
 
 /obj/machinery/button/windowtint/power_change()
 	. = ..()
@@ -585,6 +589,6 @@
 				return
 
 		if (ST.use(1))
-			var/obj/structure/window/WD = new(loc, dir_to_set, 1, ST.material.name, ST.reinf_material && ST.reinf_material.name)
+			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.name, ST.reinf_material && ST.reinf_material.name)
 			to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
 			WD.update_icon()

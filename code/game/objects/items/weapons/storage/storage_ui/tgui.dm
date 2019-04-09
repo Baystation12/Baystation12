@@ -35,7 +35,7 @@
 
 		var/list/items_by_name_and_type = list()
 		for(var/obj/item/W in storage)
-			group_by(items_by_name_and_type, "[W.name]�[W.type]", W)
+			group_by(items_by_name_and_type, "[W.name]§[W.type]", W)
 
 		var/list/item_list = list()
 		for(var/name_and_type in items_by_name_and_type)

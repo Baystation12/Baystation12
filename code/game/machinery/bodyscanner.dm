@@ -21,6 +21,12 @@
 		new /obj/item/weapon/stock_parts/console_screen(src))
 	RefreshParts()
 
+
+/obj/machinery/bodyscanner/examine(mob/user)
+	. = ..()
+	if (. && occupant && user.Adjacent(src))
+		occupant.examine(user)
+
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	..()
 	src.go_out()
@@ -53,7 +59,7 @@
 /obj/machinery/bodyscanner/proc/go_out()
 	if ((!( src.occupant ) || src.locked))
 		return
-	drop_contents()	
+	drop_contents()
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
@@ -61,6 +67,7 @@
 	src.occupant = null
 	update_use_power(POWER_USE_IDLE)
 	update_icon()
+	SetName(initial(name))
 
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
 	if(!istype(G))
@@ -73,7 +80,7 @@
 			return
 	var/mob/M = G.affecting
 	if(!user_can_move_target_inside(M, user))
-		return	
+		return
 	qdel(G)
 
 /obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
@@ -95,6 +102,7 @@
 	update_use_power(POWER_USE_ACTIVE)
 	update_icon()
 	drop_contents()
+	SetName("[name] ([occupant])")
 
 	src.add_fingerprint(user)
 	return TRUE
@@ -106,7 +114,7 @@
 		src.icon_state = "body_scanner_1"
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)	
+/obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)
 	if(!CanMouseDrop(target, user) || !istype(target))
 		return FALSE
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
@@ -120,7 +128,7 @@
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
 				A.dropInto(loc)
-				A.ex_act(severity)				
+				A.ex_act(severity)
 			qdel(src)
 		if(2.0)
 			if (prob(50))

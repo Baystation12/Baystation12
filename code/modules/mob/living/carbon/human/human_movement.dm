@@ -6,12 +6,13 @@
 
 	tally += species.handle_movement_delay_special(src)
 
-	if (istype(loc, /turf/space)) // It's hard to be slowed down in space by... anything
+	if (istype(loc, /turf/space))
 		if(skill_check(SKILL_EVA, SKILL_PROF))
-			return -2
-		return -1
+			tally -= 2
+		tally -= 1
 
-	if(embedded_flag || (stomach_contents && stomach_contents.len))
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	if(embedded_flag || (stomach && stomach.contents.len))
 		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
 
 	if(CE_SPEEDBOOST in chem_effects)
@@ -122,7 +123,7 @@
 	return prob_slip
 
 /mob/living/carbon/human/Check_Shoegrip()
-	if(species.species_flags & SPECIES_FLAG_NO_SLIP)
+	if(species.check_no_slip(src))
 		return 1
 	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1

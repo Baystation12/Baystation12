@@ -25,7 +25,8 @@
 		"Food" = list(
 			/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 30,
 			/obj/item/weapon/reagent_containers/food/drinks/milk = 50,
-			/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 50),
+			/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 50,
+			/obj/item/weapon/storage/fancy/egg_box = 300),
 		"Nutrients" = list(
 			/obj/item/weapon/reagent_containers/glass/bottle/eznutrient = 60,
 			/obj/item/weapon/reagent_containers/glass/bottle/left4zed = 120,

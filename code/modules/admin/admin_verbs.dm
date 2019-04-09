@@ -10,7 +10,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/watched_variables,
 	/client/proc/debug_global_variables,//as above but for global variables,
 //	/client/proc/check_antagonists,		//shows all antags,
-	/client/proc/cmd_mentor_check_new_players
+	/client/proc/cmd_check_new_players
 //	/client/proc/deadchat				//toggles deadchat on/off,
 	)
 var/list/admin_verbs_admin = list(
@@ -140,7 +140,8 @@ var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		// allows us to spawn instances,
 	/client/proc/respawn_character,
 	/client/proc/virus2_editor,
-	/client/proc/spawn_chemdisp_cartridge
+	/client/proc/spawn_chemdisp_cartridge,
+	/datum/admins/proc/mass_debug_closet_icons
 	)
 var/list/admin_verbs_server = list(
 	/datum/admins/proc/capture_map_part,
@@ -181,7 +182,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_tog_aliens,
 	/client/proc/air_report,
 	/client/proc/reload_admins,
-	/client/proc/reload_mentors,
 	/client/proc/restart_controller,
 	/client/proc/print_random_map,
 	/client/proc/create_random_map,
@@ -319,17 +319,6 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/view_persistent_data
 )
 
-var/list/admin_verbs_mentor = list(
-	/client/proc/cmd_admin_pm_context,
-	/client/proc/cmd_admin_pm_panel,
-	/datum/admins/proc/PlayerNotes,
-	/client/proc/admin_ghost,
-	/client/proc/cmd_mod_say,
-	/datum/admins/proc/show_player_info,
-//	/client/proc/dsay,
-	/client/proc/cmd_admin_subtle_message
-)
-
 /client/proc/add_admin_verbs()
 	if(holder)
 		verbs += admin_verbs_default
@@ -349,7 +338,6 @@ var/list/admin_verbs_mentor = list(
 		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
-		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -410,16 +398,8 @@ var/list/admin_verbs_mentor = list(
 	set name = "Aghost"
 	if(!holder)	return
 	if(isghost(mob))
-		//re-enter
 		var/mob/observer/ghost/ghost = mob
-		if(!is_mentor(usr.client))
-			ghost.can_reenter_corpse = 1
-		if(ghost.can_reenter_corpse)
-			ghost.reenter_corpse()
-		else
-			to_chat(ghost, "<font color='red'>Error:  Aghost:  Can't reenter corpse, mentors that use adminHUD while aghosting are not permitted to enter their corpse again</font>")
-			return
-
+		ghost.reenter_corpse()
 		SSstatistics.add_field_details("admin_verb","P") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 	else if(istype(mob,/mob/new_player))
@@ -890,16 +870,17 @@ var/list/admin_verbs_mentor = list(
 	set category = "Admin"
 	if(holder)
 		var/list/jobs = list()
-		for (var/datum/job/J in job_master.occupations)
+		for (var/datum/job/J in SSjobs.primary_job_datums)
 			if(!J.is_position_available())
-				jobs += J.title
+				jobs[J.title] = J
 		if (!jobs.len)
 			to_chat(usr, "There are no fully staffed jobs.")
 			return
-		var/job = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
-		if (job)
-			job_master.FreeRole(job)
-			message_admins("A job slot for [job] has been opened by [key_name_admin(usr)]")
+		var/job_title = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
+		var/datum/job/job = jobs[job_title]
+		if(job && !job.is_position_available())
+			job.make_position_available()
+			message_admins("A job slot for [job_title] has been opened by [key_name_admin(usr)]")
 			return
 
 /client/proc/toggleghostwriters()

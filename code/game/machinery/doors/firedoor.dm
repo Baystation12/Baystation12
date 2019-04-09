@@ -15,12 +15,14 @@
 	var/panel_file = 'icons/obj/doors/hazard/panel.dmi'
 	var/welded_file = 'icons/obj/doors/hazard/welded.dmi'
 	icon_state = "open"
-	req_one_access = list(access_atmospherics, access_engine_equip)
+	req_access = list(list(access_atmospherics, access_engine_equip))
+	autoset_access = FALSE
 	opacity = 0
 	density = 0
 	layer = BELOW_DOOR_LAYER
 	open_layer = BELOW_DOOR_LAYER
 	closed_layer = ABOVE_WINDOW_LAYER
+	movable_flags = MOVABLE_FLAG_Z_INTERACT
 
 	//These are frequenly used with windows, so make sure zones can pass.
 	//Generally if a firedoor is at a place where there should be a zone boundery then there will be a regular door underneath it.
@@ -51,6 +53,10 @@
 	)
 
 	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
+	
+/obj/machinery/door/firedoor/autoset
+	autoset_access = TRUE	//subtype just to make mapping away sites with custom access usage
+	req_access = list()
 
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()

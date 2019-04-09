@@ -9,6 +9,7 @@
 	var/type_butt = null
 	var/chem_volume = 0
 	var/smoketime = 0
+	var/genericmes = "<span class='notice'>USER lights their NAME with the FLAME.</span>"
 	var/matchmes = "USER lights NAME with FLAME"
 	var/lightermes = "USER lights NAME with FLAME"
 	var/zippomes = "USER lights NAME with FLAME"
@@ -83,11 +84,13 @@
 			extinguish(no_message = TRUE)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
-	if(!src.lit)
+	if(QDELETED(src))
+		return
+	if(!lit)
 		if(submerged())
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
-		src.lit = 1
+		lit = 1
 		damtype = "fire"
 		if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
 			var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -118,7 +121,7 @@
 
 /obj/item/clothing/mask/smokable/attackby(var/obj/item/weapon/W, var/mob/user)
 	..()
-	if(isflamesource(W))
+	if(isflamesource(W) || is_hot(W))
 		var/text = matchmes
 		if(istype(W, /obj/item/weapon/flame/match))
 			text = matchmes
@@ -130,6 +133,8 @@
 			text = weldermes
 		else if(istype(W, /obj/item/device/assembly/igniter))
 			text = ignitermes
+		else
+			text = genericmes
 		text = replacetext(text, "USER", "[user]")
 		text = replacetext(text, "NAME", "[name]")
 		text = replacetext(text, "FLAME", "[W.name]")
@@ -652,11 +657,11 @@
 	name = "empty [initial(name)]"
 
 /obj/item/clothing/mask/smokable/pipe/light(var/flavor_text = "[usr] lights the [name].")
-	if(!src.lit && src.smoketime)
+	if(!lit && smoketime)
 		if(submerged())
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
-		src.lit = 1
+		lit = 1
 		damtype = "fire"
 		icon_state = icon_on
 		item_state = icon_on

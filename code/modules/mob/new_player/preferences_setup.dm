@@ -48,21 +48,20 @@
 	copy_to(mannequin, TRUE)
 
 	var/datum/job/previewJob
-	if(equip_preview_mob && job_master)
+	if(equip_preview_mob)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
-		if("Assistant" in job_low)
-			previewJob = job_master.GetJob("Assistant")
+		if(GLOB.using_map.default_assistant_title in job_low)
+			previewJob = SSjobs.get_by_title(GLOB.using_map.default_assistant_title)
 		else
-			for(var/datum/job/job in job_master.occupations)
-				if(job.title == job_high)
-					previewJob = job
-					break
+			previewJob = SSjobs.get_by_title(job_high)
 	else
 		return
 
 	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
 		mannequin.job = previewJob.title
-		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], mannequin.char_branch, mannequin.char_rank)
+		var/datum/mil_branch/branch = mil_branches.get_branch(branches[previewJob.title])
+		var/datum/mil_rank/rank = mil_branches.get_rank(branches[previewJob.title], ranks[previewJob.title])
+		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
 		update_icon = TRUE
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))

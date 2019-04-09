@@ -66,6 +66,14 @@
 	..()
 	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
 
+/obj/item/modular_computer/pda/mining/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/atmos(src)
+
+/obj/item/modular_computer/pda/explorer/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/atmos(src)
+
 /obj/item/modular_computer/pda/captain/install_default_hardware()
 	..()
 	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)

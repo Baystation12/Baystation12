@@ -88,6 +88,14 @@
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
 
+/obj/item/Initialize()
+	. = ..()
+	if(islist(armor))
+		for(var/type in armor)
+			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
+				set_extension(src, /datum/extension/armor, /datum/extension/armor, armor)
+				break
+
 /obj/item/Destroy()
 	QDEL_NULL(hidden_uplink)
 	if(ismob(loc))
@@ -473,17 +481,17 @@ var/list/global/slot_flags_enumeration = list(
 //Otherwise should return 0 to indicate that the attack is not affected in any way.
 /obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/parry_chance = get_parry_chance(user)
-	if(attacker)	
+	if(attacker)
 		parry_chance = max(0, parry_chance - 10 * attacker.get_skill_difference(SKILL_COMBAT, user))
 	if(parry_chance)
 		if(default_parry_check(user, attacker, damage_source) && prob(parry_chance))
 			user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 			playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
-			on_parry()
+			on_parry(damage_source)
 			return 1
 	return 0
 
-/obj/item/proc/on_parry()
+/obj/item/proc/on_parry(damage_source)
 	return
 
 /obj/item/proc/get_parry_chance(mob/user)
@@ -777,16 +785,21 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /obj/item/proc/get_examine_line()
-	if(blood_DNA)
-		. = "<span class='warning'>\icon[src] [gender==PLURAL?"some":"a"] [(blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained [src]</span>"
+	if(blood_color)
+		. = SPAN_WARNING("\icon[src] [gender==PLURAL?"some":"a"] <font color='[blood_color]'>stained</font> [src]")
 	else
 		. = "\icon[src] \a [src]"
 	var/ID = GetIdCard()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
 
+/obj/item/proc/on_active_hand()
+
 /obj/item/is_burnable()
 	return simulated
 
 /obj/item/lava_act()
 	. = (!throwing) ? ..() : FALSE
+
+/obj/item/proc/has_embedded()
+	return

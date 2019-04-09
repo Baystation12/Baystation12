@@ -112,6 +112,7 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = MATERIAL_GLASS
+	does_spin = FALSE
 
 /obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
@@ -128,7 +129,7 @@
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	default_material = MATERIAL_WOOD
+	default_material = MATERIAL_MAPLE
 	force_divisor = 1.1           // 22 when wielded with weight 20 (steel)
 	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
 	attack_cooldown_modifier = 1
@@ -136,7 +137,7 @@
 
 //Predefined materials go here.
 /obj/item/weapon/material/twohanded/baseballbat/metal/New(var/newloc)
-	..(newloc,MATERIAL_STEEL)
+	..(newloc,MATERIAL_ALUMINIUM)
 
 /obj/item/weapon/material/twohanded/baseballbat/uranium/New(var/newloc)
 	..(newloc,MATERIAL_URANIUM)

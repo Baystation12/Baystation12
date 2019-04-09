@@ -132,7 +132,7 @@ ARMCHAIR(yellow)
 	result_type = /obj/item/weapon/stool
 
 /datum/stack_recipe/furniture/bar_stool
-	title = "bar_stool"
+	title = "bar stool"
 	result_type = /obj/item/weapon/stool/bar
 
 /datum/stack_recipe/furniture/bed
@@ -240,6 +240,12 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/coffin
 	title = "coffin"
 	result_type = /obj/structure/closet/coffin
+	req_amount = 5
+	time = 15
+
+/datum/stack_recipe/furniture/coffin/wooden
+	title = "coffin"
+	result_type = /obj/structure/closet/coffin/wooden
 	req_amount = 5
 	time = 15
 

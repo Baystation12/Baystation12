@@ -36,21 +36,7 @@
 	return
 
 /datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)
-	data["donor"] = weakref(C)
-	if (!data["virus2"])
-		data["virus2"] = list()
-	data["virus2"] |= virus_copylist(C.virus2)
-	data["antibodies"] = C.antibodies
-	data["blood_DNA"] = C.dna.unique_enzymes
-	data["blood_type"] = C.dna.b_type
-	data["species"] = C.species.name
-	data["has_oxy"] = C.species.blood_oxy
-	var/list/temp_chem = list()
-	for(var/datum/reagent/R in C.reagents.reagent_list)
-		temp_chem[R.type] = R.volume
-	data["trace_chem"] = temp_chem
-	data["dose_chem"] = C.chem_doses.Copy()
-	data["blood_colour"] = C.species.get_blood_colour(C)
+	data = C.get_blood_data()
 	color = data["blood_colour"]
 
 /datum/reagent/blood/mix_data(var/newdata, var/newamount)
@@ -146,7 +132,6 @@
 	chilling_point = T0C
 	heating_products = list(/datum/reagent/water/boiling)
 	heating_point = T100C
-	heating_message = "starts to boil."
 
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
@@ -217,7 +202,7 @@
 /datum/reagent/water/boiling
 	name = "Boiling water"
 	chilling_products = list(/datum/reagent/water)
-	chilling_point =   99 CELCIUS
+	chilling_point =   99 CELSIUS
 	chilling_message = "stops boiling."
 	heating_products =  list(null)
 	heating_point =    null

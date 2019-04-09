@@ -13,6 +13,7 @@
 	#include "torch_ranks.dm"
 	#include "torch_security_state.dm"
 	#include "torch_shuttles.dm"
+	#include "torch_submaps.dm"
 	#include "torch_unit_testing.dm"
 
 	#include "datums/uniforms.dm"
@@ -22,7 +23,7 @@
 	#include "datums/shackle_law_sets.dm"
 	#include "datums/supplypacks/security.dm"
 	#include "datums/supplypacks/science.dm"
-
+	#include "datums/department_exploration.dm"
 	#include "items/cards_ids.dm"
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
@@ -33,10 +34,12 @@
 	#include "items/uniform_vendor.dm"
 	#include "items/rigs.dm"
 	#include "items/solbanner.dm"
+	#include "items/explo_shotgun.dm"
 
 	#include "items/clothing/solgov-accessory.dm"
 	#include "items/clothing/solgov-armor.dm"
 	#include "items/clothing/solgov-feet.dm"
+	#include "items/clothing/solgov-hands.dm"
 	#include "items/clothing/solgov-head.dm"
 	#include "items/clothing/solgov-suit.dm"
 	#include "items/clothing/solgov-under.dm"
@@ -46,12 +49,13 @@
 	#include "items/clothing/terran-head.dm"
 	#include "items/clothing/terran-suit.dm"
 	#include "items/clothing/terran-under.dm"
-
+	
+	#include "items/weapon/storage/wallets.dm"
 
 	#include "job/torch_access.dm"
-	#include "job/torch_outfits.dm"
 	#include "job/torch_jobs.dm"
 	#include "job/command_jobs.dm"
+	#include "job/corporate_jobs.dm"
 	#include "job/engineering_jobs.dm"
 	#include "job/exploration_jobs.dm"
 	#include "job/medical_jobs.dm"
@@ -61,12 +65,29 @@
 	#include "job/service_jobs.dm"
 	#include "job/supply_jobs.dm"
 
+	#include "job/outfits/torch_outfits.dm"
+	#include "job/outfits/command_outfits.dm"
+	#include "job/outfits/corporate_outfits.dm"
+	#include "job/outfits/engineering_outfits.dm"
+	#include "job/outfits/exploration_outfits.dm"
+	#include "job/outfits/medical_outfits.dm"
+	#include "job/outfits/misc_outfits.dm"
+	#include "job/outfits/research_outfits.dm"
+	#include "job/outfits/security_outfits.dm"
+	#include "job/outfits/service_outfits.dm"
+	#include "job/outfits/supply_outfits.dm"
+	#include "job/outfits/unused_outfits.dm"
+
+
 	#include "machinery/apc_shuttle.dm"
 	#include "machinery/keycard authentication.dm"
 	#include "machinery/suit_storage.dm"
 
-	#include "structures/closets.dm"
+	#include "robot/module_flying_surveyor.dm"
+
 	#include "structures/signs.dm"
+	#include "structures/closets.dm"
+	#include "structures/closets/closet_appearances.dm"
 	#include "structures/closets/command.dm"
 	#include "structures/closets/engineering.dm"
 	#include "structures/closets/medical.dm"
@@ -88,14 +109,14 @@
 	#include "loadout/loadout_xeno.dm"
 	#include "loadout/~defines.dm"
 
-	#include "torch-0.dmm"
-	#include "torch-1.dmm"
-	#include "torch-2.dmm"
-	#include "torch-3.dmm"
-	#include "torch-4.dmm"
-	#include "torch-5.dmm"
-	#include "torch-6.dmm"
-	#include "torch-7.dmm"
+	#include "torch1_deck5.dmm"
+	#include "torch2_deck4.dmm"
+	#include "torch3_deck3.dmm"
+	#include "torch4_deck2.dmm"
+	#include "torch5_deck1.dmm"
+	#include "torch6_bridge.dmm"
+	#include "z1_admin.dmm"
+	#include "z2_transit.dmm"
 	#include "../away/empty.dmm"
 	#include "../away/mining/mining.dm"
 	#include "../away/derelict/derelict.dm"
@@ -112,6 +133,8 @@
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lar_maria/lar_maria.dm"
 	#include "../away/unishi/unishi.dm"
+	#include "../away/voxship/voxship.dm"
+	#include "../away/skrellscoutship/skrellscoutship.dm"
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 

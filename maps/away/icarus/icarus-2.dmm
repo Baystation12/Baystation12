@@ -831,7 +831,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1148,7 +1148,7 @@
 	pixel_y = 0
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/flashshells,
+/obj/item/weapon/storage/box/ammo/flashshells,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dD" = (
@@ -1190,7 +1190,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = newlist()
 	},
 /obj/item/modular_computer/console{
 	dir = 1

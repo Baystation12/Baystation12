@@ -103,26 +103,26 @@
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/engineering
-	species_restricted = list(SPECIES_HUMAN)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi'
 		)
 
 /obj/item/clothing/suit/space/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi'
 		)
 
 /obj/item/clothing/shoes/magboots/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi'
 		)
 
 /obj/item/clothing/gloves/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	siemens_coefficient = 0
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi'
@@ -315,7 +315,7 @@
 /obj/item/weapon/rig/zero
 	name = "null suit control module"
 	suit_type = "null hardsuit"
-	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you were wearing nothing at all"
+	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you're wearing nothing at all."
 	icon_state = "null_rig"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 20)
 	online_slowdown = 0

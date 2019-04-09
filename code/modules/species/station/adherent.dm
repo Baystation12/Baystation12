@@ -7,10 +7,10 @@
 	whose home system and burgeoning stellar empire was scoured to bedrock by a solar flare. \
 	Physically, they are large, floating squidlike machines made of a crystalline composite."
 	hidden_from_codex = FALSE
+	silent_steps = TRUE
 
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
-	silent_steps =            TRUE // Antigravity squids.
 
 	icon_template =           'icons/mob/human_races/species/adherent/template.dmi'
 	icobase =                 'icons/mob/human_races/species/adherent/body.dmi'
@@ -20,6 +20,7 @@
 	damage_mask =             'icons/mob/human_races/species/adherent/damage_mask.dmi'
 	blood_mask =              'icons/mob/human_races/species/adherent/blood_mask.dmi'
 
+	siemens_coefficient =     0
 	rarity_value =            6
 	min_age =                 8000
 	max_age =                 12000
@@ -100,7 +101,9 @@
 		"Amethyst"    = "_purple",
 		"Sapphire"    = "_blue",
 		"Ruby"        = "_red",
-		"Topaz"       = "_yellow"
+		"Topaz"       = "_yellow",
+		"Quartz"      = "_white",
+		"Jet"         = "_black"
 	)
 
 /datum/species/adherent/New()
@@ -119,7 +122,7 @@
 	. = FALSE
 	if(H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
-			if(istype(float) && float.active && float.is_usable())
+			if(float.active && float.is_usable())
 				. = TRUE
 				break
 

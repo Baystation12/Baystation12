@@ -1,15 +1,31 @@
 /*
  * Torch Medical
  */
+/decl/closet_appearance/secure_closet/torch/medical
+	extra_decals = list(
+		"stripe_vertical_mid_full" = COLOR_BABY_BLUE,
+		"medical" = COLOR_BABY_BLUE
+	)
+
+/decl/closet_appearance/secure_closet/torch/medical/physician
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_BABY_BLUE,
+		"stripe_vertical_right_full" = COLOR_BABY_BLUE,
+		"medical" = COLOR_BABY_BLUE
+	)
+
+/decl/closet_appearance/secure_closet/torch/medical/cmo
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_BABY_BLUE,
+		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_right_full" = COLOR_BABY_BLUE,
+		"medical" = COLOR_GOLD
+	)
 
 /obj/structure/closet/secure_closet/CMO_torch
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
-	icon_state = "cmosecure1"
-	icon_closed = "cmosecure"
-	icon_locked = "cmosecure1"
-	icon_opened = "cmosecureopen"
-	icon_off = "cmosecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/cmo
 
 /obj/structure/closet/secure_closet/CMO_torch/WillContain()
 	return list(
@@ -42,11 +58,7 @@
 /obj/structure/closet/secure_closet/medical_torchsenior
 	name = "physician's locker"
 	req_access = list(access_senmed)
-	icon_state = "securesenmed1"
-	icon_closed = "securesenmed"
-	icon_locked = "securesenmed1"
-	icon_opened = "securesenmedopen"
-	icon_off = "securesenmedoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical/physician
 
 /obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
 	return list(
@@ -72,13 +84,9 @@
 	)
 
 /obj/structure/closet/secure_closet/medical_torch
-	name = "corpsman's locker"
+	name = "medical technician's locker"
 	req_access = list(access_medical_equip)
-	icon_state = "securemed1"
-	icon_closed = "securemed"
-	icon_locked = "securemed1"
-	icon_opened = "securemedopen"
-	icon_off = "securemedoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical
 
 /obj/structure/closet/secure_closet/medical_torch/WillContain()
 	return list(
@@ -101,41 +109,9 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
 
-/obj/structure/closet/secure_closet/medical_contractor
-	name = "medical contractor's locker"
-	req_access = list(access_medical)
-	icon_state = "securemed1"
-	icon_closed = "securemed"
-	icon_locked = "securemed1"
-	icon_opened = "securemedopen"
-	icon_off = "securemedoff"
-
-/obj/structure/closet/secure_closet/medical_contractor/WillContain()
-	return list(
-		/obj/item/clothing/under/sterile,
-		/obj/item/clothing/head/soft/mime,
-		/obj/item/clothing/under/rank/orderly,
-		/obj/item/clothing/accessory/storage/white_vest,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/fr_jacket,
-		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_med,
-		/obj/item/device/radio/headset/headset_med/alt,
-		/obj/item/taperoll/medical,
-		/obj/item/weapon/storage/belt/medical/emt,
-		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/tank/emergency/oxygen/engi,
-		/obj/item/device/healthanalyzer,
-		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/adv,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
-	)
-
 /obj/structure/closet/wardrobe/medic_torch
 	name = "medical wardrobe"
-	icon_state = "white"
-	icon_closed = "white"
+	closet_appearance = /decl/closet_appearance/wardrobe/white
 
 /obj/structure/closet/wardrobe/medic_torch/WillContain()
 	return list(

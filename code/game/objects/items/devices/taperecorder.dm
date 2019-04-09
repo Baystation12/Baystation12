@@ -5,7 +5,7 @@
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
 
-	matter = list(MATERIAL_STEEL = 60,MATERIAL_GLASS = 30)
+	matter = list(MATERIAL_ALUMINIUM = 60,MATERIAL_GLASS = 30)
 
 	var/emagged = 0.0
 	var/recording = 0.0
@@ -228,6 +228,8 @@
 
 	if(usr.incapacitated())
 		return
+	if(!mytape)
+		return
 	if(emagged || mytape.ruined)
 		audible_message("<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
@@ -382,7 +384,7 @@
 	icon_state = "tape_white"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_TINY
-	matter = list(MATERIAL_STEEL=20, MATERIAL_GLASS=5)
+	matter = list(MATERIAL_PLASTIC=20, MATERIAL_STEEL=5, MATERIAL_GLASS=5)
 	force = 1
 	throwforce = 0
 	var/max_capacity = 600
@@ -516,7 +518,8 @@
 	used_capacity = min(used_capacity,index)
 
 //Random colour tapes
-/obj/item/device/tape/random/New()
+/obj/item/device/tape/random/Initialize()
+	. = ..()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
 
 /obj/item/device/tape/loose

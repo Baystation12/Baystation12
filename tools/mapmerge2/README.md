@@ -2,7 +2,7 @@
 
 **Map Merge 2** is an improvement over previous map merging scripts, with
 better merge-conflict prevention, multi-Z support, and automatic handling of
-key overflow.
+key overflow. For up-to-date tips and tricks, also visit the [Map Merger] wiki article.
 
 ## What Map Merging Is
 
@@ -15,28 +15,27 @@ contains the desired changes.
 
 ## Installation
 
-To install Python dependencies, run `requirements-install.bat`, or run
-`python -m pip install -r requirements.txt` directly. Make sure you have Python 3.5 or higher before doing so. See the [Git hooks]
-documentation to install the Git pre-commit hook which runs the map merger
-automatically, or use `tools/mapmerge/Prepare Maps.bat` to save backups before
-running `mapmerge.bat`.
+To install Python dependencies, run `requirements-install.bat`, OR run
+`python -m pip install -r requirements.txt` directly. Make sure you have Python 3.5
+or higher before doing so.
 
 For up-to-date installation and detailed troubleshooting instructions, visit
 the [Map Merger] wiki article.
 
 ## Usage
 
-Assuming you've already installed the Python dependencies. Follow the steps below,
+Make sure you've performed the installation steps above! You have two choices for using this tool: Either view the [Git hooks] documentation to install the hook to automate this process,
+or to perform merges manually, follow the steps below.
 
-1. Run Prepare Maps.bat as this provides backups before making changes to a map. It also makes the mapmerger actually work.
+1. Run Prepare Maps.bat as this provides backups before making changes to a map. It also makes sure the mapmerger actually works.
 
-2. Edit your map.
+2. Edit your map and save. Close DM.**
 
-3. Run mapmerge.bat (unless you've setup the mapmerger2 hooks)
+3. Run mapmerge.bat
 
 4. Commit your changes and you're done!
 
-Note: Do not open the map in dreammaker before committing the results of mapmerger - this can cause dreammaker to save back into the default dmm format. If you're having issues with your map getting stuck in dmm mode, try committing and pushing the mapmerger changes before reopening in dreammaker.
+**Note: Do not open the map in dreammaker before committing the results of mapmerger - this can cause dreammaker to save back into the default dmm format. If you're having issues with your map getting stuck in dmm mode, try committing and pushing the mapmerger changes before reopening in dreammaker.
 
 ## Code Structure
 

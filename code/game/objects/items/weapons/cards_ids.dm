@@ -166,7 +166,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/Initialize()
 	.=..()
 	if(job_access_type)
-		var/datum/job/j = job_master.GetJobByType(job_access_type)
+		var/datum/job/j = SSjobs.get_by_path(job_access_type)
 		if(j)
 			rank = j.title
 			assignment = rank
@@ -197,7 +197,7 @@ var/const/NO_EMAG_ACT = -50
 			return TOPIC_HANDLED
 
 /obj/item/weapon/card/id/examine(mob/user)
-	..()
+	. = ..()
 	to_chat(user, "It says '[get_display_name()]'.")
 	if(in_range(user, src))
 		show(user)
@@ -376,6 +376,39 @@ var/const/NO_EMAG_ACT = -50
 	..()
 	access |= get_all_station_access()
 
+/obj/item/weapon/card/id/foundation
+	name = "\improper Foundation warrant card"
+	desc = "A warrant card in a handsome leather case."
+	assignment = "Field Agent"
+	icon_state = "warrantcard"
+
+/obj/item/weapon/card/id/foundation/examine(var/mob/user)
+	. = ..(user, 1)
+	if(. && isliving(user))
+		var/mob/living/M = user
+		if(M.psi)
+			to_chat(user, SPAN_WARNING("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'"))
+		else
+			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
+
+/obj/item/weapon/card/id/foundation/attack_self(var/mob/living/user)
+	. = ..()
+	if(istype(user))
+		for(var/mob/M in viewers(world.view, get_turf(user))-user)
+			if(user.psi && isliving(M))
+				var/mob/living/L = M
+				if(!L.psi)
+					to_chat(L, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
+					continue
+			to_chat(M, SPAN_WARNING("There is a psionic compulsion surrounding \the [src] in a flicker of indescribable light."))
+
+/obj/item/weapon/card/id/foundation/on_update_icon()
+	return
+
+/obj/item/weapon/card/id/foundation/New()
+	..()
+	access |= get_all_station_access()
+
 /obj/item/weapon/card/id/all_access
 	name = "\improper Administrator's spare ID"
 	desc = "The spare ID of the Lord of Lords himself."
@@ -437,9 +470,6 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A card issued to engineering staff."
 	job_access_type = /datum/job/engineer
 	detail_color = COLOR_SUN
-
-/obj/item/weapon/card/id/engineering/atmos
-	job_access_type = /datum/job/atmos
 
 /obj/item/weapon/card/id/engineering/head
 	name = "identification card"

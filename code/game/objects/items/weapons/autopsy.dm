@@ -150,11 +150,7 @@
 
 	sleep(10)
 
-	var/obj/item/weapon/paper/P = new(usr.loc)
-	P.SetName("Autopsy Data ([target_name])")
-	P.info = "<tt>[scan_data]</tt>"
-	P.icon_state = "paper_words"
-
+	var/obj/item/weapon/paper/P = new(usr.loc, "<tt>[scan_data]</tt>", "Autopsy Data ([target_name])")
 	if(istype(usr,/mob/living/carbon))
 		// place the item in the usr's hand if possible
 		usr.put_in_hands(P)
@@ -163,14 +159,9 @@
 	if(!istype(M))
 		return 0
 
-	if(target_name != M.name)
-		target_name = M.name
-		src.wdata = list()
-		src.chemtraces = list()
-		src.timeofdeath = null
-		to_chat(user, "<span class='notice'>A new patient has been registered. Purging data for previous patient.</span>")
+	set_target(M, user)
 
-	src.timeofdeath = M.timeofdeath
+	timeofdeath = M.timeofdeath
 
 	var/obj/item/organ/external/S = M.get_organ(user.zone_sel.selecting)
 	if(!S)
@@ -181,12 +172,29 @@
 		return
 	M.visible_message("<span class='notice'>\The [user] scans the wounds on [M]'s [S.name] with [src]</span>")
 
-	src.add_data(S)
+	add_data(S)
 	for(var/T in M.chem_doses)
 		var/datum/reagent/R = T
-		chemtraces += initial(R.name)
+		chemtraces |= initial(R.name)
 
 	return 1
+
+/obj/item/weapon/autopsy_scanner/proc/set_target(atom/new_target, user)
+	if(target_name != new_target.name)
+		target_name = new_target.name
+		wdata.Cut()
+		chemtraces.Cut()
+		timeofdeath = null
+		to_chat(user, "<span class='notice'>A new patient has been registered. Purging data for previous patient.</span>")
+
+/obj/item/weapon/autopsy_scanner/afterattack(obj/item/organ/external/target, mob/user, proximity_flag, click_parameters)
+	if(!proximity_flag)
+		return
+	if(!istype(target))
+		return
+	
+	set_target(target, user)
+	add_data(target)
 
 /obj/item/weapon/autopsy_scanner/attack_self(mob/user)
 	print_data(user)

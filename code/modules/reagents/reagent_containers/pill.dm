@@ -230,6 +230,15 @@
 	reagents.add_reagent(/datum/reagent/hyperzine, 5)
 	color = reagents.get_color()
 
+/obj/item/weapon/reagent_containers/pill/three_eye
+	name = "strange pill"
+	desc = "The surface of this unlabelled pill crawls against your skin."
+	icon_state = "pill2"
+
+/obj/item/weapon/reagent_containers/pill/three_eye/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/three_eye, 10)
+	color = reagents.get_color()
 
 /obj/item/weapon/reagent_containers/pill/spaceacillin
 	name = "Spaceacillin (10u)"
@@ -341,3 +350,40 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 /obj/item/weapon/reagent_containers/pill/detergent/New()
 	..()
 	reagents.add_reagent(/datum/reagent/ammonia, 30)
+
+/obj/item/weapon/reagent_containers/pill/pod
+	name = "master flavorpod item"
+	desc = "A cellulose pod containing some kind of flavoring."
+	icon_state = "pill4"
+
+/obj/item/weapon/reagent_containers/pill/pod/cream
+	name = "creamer pod"
+	
+/obj/item/weapon/reagent_containers/pill/pod/cream/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/milk, 5)
+	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/pod/cream_soy
+	name = "non-dairy creamer pod"
+	
+/obj/item/weapon/reagent_containers/pill/pod/cream_soy/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/milk/soymilk, 5)
+	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/pod/orange
+	name = "orange flavorpod"
+	
+/obj/item/weapon/reagent_containers/pill/pod/orange/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/juice/orange, 5)
+	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/pod/mint
+	name = "mint flavorpod"
+	
+/obj/item/weapon/reagent_containers/pill/pod/mint/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing
+	color = reagents.get_color()

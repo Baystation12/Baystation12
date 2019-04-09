@@ -17,25 +17,32 @@
 	allowed_roles = list(/datum/job/merchant)
 
 /datum/gear/suit/medical_poncho
-	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/senior_doctor, /datum/job/doctor, /datum/job/psychiatrist, /datum/job/biomech, /datum/job/roboticist, /datum/job/merchant, /datum/job/chemist)
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/engineering_poncho
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/engineer, /datum/job/roboticist, /datum/job/merchant)
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/science_poncho
-	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant)
+	allowed_roles = list(/datum/job/scientist, /datum/job/senior_scientist, /datum/job/scientist_assistant)
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/nanotrasen_poncho
-	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant, /datum/job/merchant)
+	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant, /datum/job/senior_scientist, /datum/job/merchant)
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/cargo_poncho
-	allowed_roles = list(/datum/job/cargo_contractor, /datum/job/merchant)
+	allowed_roles = list(/datum/job/cargo_tech, /datum/job/merchant)
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/suit_jacket
 	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/custom_suit_jacket
 	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/hoodie
 	allowed_roles = RESTRICTED_ROLES
@@ -47,14 +54,24 @@
 	allowed_roles = STERILE_ROLES
 
 /datum/gear/suit/labcoat_corp
-	allowed_roles = list(/datum/job/scientist, /datum/job/engineer_contractor, /datum/job/scientist, /datum/job/rd, /datum/job/biomech, /datum/job/roboticist)
+	allowed_roles = STERILE_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/suit/labcoat_corp_rd
+/datum/gear/suit/labcoat_ec
+	display_name = "labcoat, Expeditionary Corps"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/ec
+	allowed_roles = list(/datum/job/scientist_assistant, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/rd)
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+/datum/gear/suit/labcoat_ec_cso
+	display_name = "labcoat, chief science officer, Expeditionary Corps"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/cso
 	allowed_roles = list(/datum/job/rd)
 
 /datum/gear/suit/wintercoat_dais
 	display_name = "winter coat, DAIS"
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/scientist, /datum/job/rd)
+	allowed_roles = list(/datum/job/engineer, /datum/job/scientist_assistant, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/rd)
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/coat
 	allowed_branches = CIVILIAN_BRANCHES

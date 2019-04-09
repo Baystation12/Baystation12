@@ -119,8 +119,8 @@
 	var/obj/item/device/multitool/P = get_multitool(user)
 
 	user.set_machine(src)
-	var/dat
-	dat = "<font face = \"Courier\"><HEAD><TITLE>[src.name]</TITLE></HEAD><center><H3>[src.name] Access</H3></center>"
+	var/list/dat = list()
+	dat += "<font face = \"Courier\"><HEAD><TITLE>[src.name]</TITLE></HEAD><center><H3>[src.name] Access</H3></center>"
 	dat += "<br>[temp]<br>"
 	dat += "<br>Power Status: <a href='?src=\ref[src];input=toggle'>[src.toggled ? "On" : "Off"]</a>"
 	if(overloaded_for)
@@ -182,9 +182,10 @@
 
 	dat += "</font>"
 	temp = ""
-	user << browse(dat, "window=tcommachine;size=520x500;can_resize=0")
-	onclose(user, "dormitory")
-
+	
+	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
 // Off-Site Relays
 //

@@ -4,10 +4,9 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	damage = 50
 	damage_type = BRUTE
+	damage_flags = DAM_BULLET | DAM_SHARP
 	nodamage = 0
-	check_armour = "bullet"
 	embed = 1
-	sharp = 1
 	penetration_modifier = 1.0
 	var/mob_passthrough_check = 0
 
@@ -123,44 +122,36 @@
 
 /obj/item/projectile/bullet/pistol
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	damage = 25 //9mm, .38, etc
+	damage = 30
+	distance_falloff = 3
 
-/obj/item/projectile/bullet/pistol/medium
-	damage = 26.5 //.45
+/obj/item/projectile/bullet/pistol/holdout
+	damage = 25
+	penetration_modifier = 1.2
+	distance_falloff = 4
 
-/obj/item/projectile/bullet/pistol/medium/smg
-	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
-	damage = 28 //10mm
-	penetration_modifier = 0.8
-
-/obj/item/projectile/bullet/pistol/medium/revolver
+/obj/item/projectile/bullet/pistol/strong
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
-	damage = 30 //.44 magnum or something
-
-/obj/item/projectile/bullet/pistol/strong //matebas
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
-	damage = 60 //.50AE
-	armor_penetration = 30
-
-/obj/item/projectile/bullet/pistol/strong/revolver //revolvers
-	damage = 50 //Revolvers get snowflake bullets, to keep them relevant
+	damage = 50
 	armor_penetration = 20
+	penetration_modifier = 0.8
+	distance_falloff = 2.5
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
-	check_armour = "melee"
+	damage_flags = 0
 	damage = 5
 	agony = 30
 	embed = 0
-	sharp = 0
 
 //4mm. Tiny, very low damage, does not embed, but has very high penetration. Only to be used for the experimental SMG.
-/obj/item/projectile/bullet/c4mm
+/obj/item/projectile/bullet/flechette
 	fire_sound = 'sound/weapons/gunshot/gunshot_4mm.ogg'
 	damage = 8
 	penetrating = 1
 	armor_penetration = 70
 	embed = 0
+	distance_falloff = 2
 
 /* shotgun projectiles */
 
@@ -172,12 +163,12 @@
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
-	check_armour = "melee"
 	damage = 25
+	damage_flags = 0
 	agony = 60
 	embed = 0
-	sharp = 0
 	armor_penetration = 0
+	distance_falloff = 3
 
 //Should do about 80 damage at 1 tile distance (adjacent), and 50 damage at 3 tiles distance.
 //Overall less damage than slugs in exchange for more damage at very close range and more embedding
@@ -192,19 +183,20 @@
 /* "Rifle" rounds */
 
 /obj/item/projectile/bullet/rifle
-	armor_penetration = 25
-	penetrating = 1
-
-/obj/item/projectile/bullet/rifle/a556
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	damage = 30
+	armor_penetration = 25
+	penetration_modifier = 1.5
+	penetrating = 1
+	distance_falloff = 1.5
 
-/obj/item/projectile/bullet/rifle/a762
+/obj/item/projectile/bullet/rifle/military
 	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
-	damage = 35
-	armor_penetration = 30
+	damage = 25
+	armor_penetration = 40
+	penetration_modifier = 1
 
-/obj/item/projectile/bullet/rifle/a145
+/obj/item/projectile/bullet/rifle/shell
 	fire_sound = 'sound/weapons/gunshot/sniper.ogg'
 	damage = 80
 	stun = 3
@@ -213,32 +205,17 @@
 	armor_penetration = 80
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
 	penetration_modifier = 1.25
+	distance_falloff = 0.5
 
-/obj/item/projectile/bullet/rifle/a145/apds
+/obj/item/projectile/bullet/rifle/shell/apds
 	damage = 75
 	penetrating = 6
 	armor_penetration = 95
 	penetration_modifier = 1.5
 
 /* Miscellaneous */
-
-/obj/item/projectile/bullet/suffocationbullet//How does this even work?
-	name = "co bullet"
-	damage = 25
-	damage_type = OXY
-
-/obj/item/projectile/bullet/cyanideround
-	name = "poison bullet"
-	damage = 45
-	damage_type = TOX
-
-/obj/item/projectile/bullet/burstbullet
-	name = "exploding bullet"
-	damage = 25
-	embed = 0
-	edge = 1
-
 /obj/item/projectile/bullet/gyro
+	name = "minirocket"
 	fire_sound = 'sound/effects/Explosion1.ogg'
 
 /obj/item/projectile/bullet/gyro/on_hit(var/atom/target, var/blocked = 0)
@@ -256,7 +233,7 @@
 /obj/item/projectile/bullet/pistol/practice
 	damage = 5
 
-/obj/item/projectile/bullet/rifle/a762/practice
+/obj/item/projectile/bullet/rifle/military/practice
 	damage = 5
 
 /obj/item/projectile/bullet/shotgun/practice
@@ -268,10 +245,10 @@
 	invisibility = 101
 	fire_sound = null
 	damage_type = PAIN
+	damage_flags = 0
 	damage = 0
 	nodamage = 1
 	embed = 0
-	sharp = 0
 
 /obj/item/projectile/bullet/pistol/cap/Process()
 	qdel(src)
@@ -283,6 +260,7 @@
 	damage = 40
 	armor_penetration = 25
 	kill_count = 255
+	distance_falloff = 0
 
 /obj/item/projectile/bullet/rock/New()
 	icon_state = "rock[rand(1,3)]"

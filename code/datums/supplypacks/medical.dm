@@ -79,12 +79,6 @@
 	cost = 10
 	containername = "body bag crate"
 
-/decl/hierarchy/supply_pack/medical/cryobag
-	name = "Equipment - Stasis bags"
-	contains = list(/obj/item/bodybag/cryobag = 3)
-	cost = 50
-	containername = "stasis bag crate"
-
 /decl/hierarchy/supply_pack/medical/stretcher
 	name = "Equipment - Roller bed crate"
 	contains = list(/obj/item/roller = 3)
@@ -201,7 +195,7 @@
 					/obj/item/clothing/shoes/laceup,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/shoes/white,
-					/obj/item/weapon/clipboard,
+					/obj/item/weapon/material/clipboard,
 					/obj/item/weapon/folder/white,
 					/obj/item/weapon/pen)
 	cost = 15

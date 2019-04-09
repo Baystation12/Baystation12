@@ -14,6 +14,7 @@
 	slot_flags = SLOT_BACK
 	loaded = /obj/item/weapon/rcd_ammo/large // ~30 shots
 	combustion = 1
+	bulk = GUN_BULK_RIFLE + 3
 
 	var/initial_cell_type = /obj/item/weapon/cell/hyper
 	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
@@ -168,3 +169,25 @@
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/out_of_ammo()
 	visible_message("<span class='warning'>\The [src] beeps to indicate the magazine is empty.</span>")
+	
+
+/obj/item/weapon/gun/magnetic/railgun/flechette/skrell
+	name = "skrellian rifle"
+	desc = "The Zquiv*Tzuuli-8, or ZT-8, is a railgun rarely seen by anyone other than those within Skrellian SDTF ranks. The rotary magazine houses a cylinder with individual chambers, that press against the barrel when loaded."
+	icon = 'icons/obj/guns/skrell_rifle.dmi'
+	icon_state = "skrell_rifle"
+	item_state = "skrell_rifle"
+	one_hand_penalty = 3
+	fire_delay = 10
+	slowdown_held = 1
+	slowdown_worn = 1
+	removable_components = FALSE
+	initial_cell_type = /obj/item/weapon/cell/hyper
+	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
+	load_type = /obj/item/weapon/magnetic_ammo/skrell
+	loaded = /obj/item/weapon/magnetic_ammo/skrell/slug
+	projectile_type = /obj/item/projectile/bullet/magnetic/slug
+	slot_flags = SLOT_BACK
+	power_cost = 100
+	wielded_item_state = "skrell_rifle-wielded"
+	firemodes = list()

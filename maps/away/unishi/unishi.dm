@@ -6,13 +6,12 @@
 	archetype = /decl/submap_archetype/derelict/unishi
 
 /decl/submap_archetype/derelict/unishi
-	descriptor = "derelict"
+	descriptor = "derelict research vessel"
 	map = "SRV Verne"
 	crew_jobs = list(
 		/datum/job/submap/unishi_crew,
 		/datum/job/submap/unishi_researcher
 	)
-	whitelisted_species = list(SPECIES_HUMAN)
 
 /obj/effect/overmap/ship/unishi
 	name = "SRV Verne"
@@ -32,6 +31,7 @@
 	description = "CTI research ship.."
 	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
 	cost = 2
+	area_usage_test_exempted_root_areas = list(/area/unishi)
 
 
 /obj/effect/shuttle_landmark/nav_unishi/nav1

@@ -7,7 +7,7 @@
 	icon_state = "forensic0-old" //GET A BETTER SPRITE.
 	item_state = "electronic"
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
-	matter = list(MATERIAL_STEEL = 150)
+	matter = list(MATERIAL_PLASTIC = 200, MATERIAL_STEEL = 150)
 	var/survey_data = 0
 
 /obj/item/weapon/mining_scanner/examine(mob/user)

@@ -111,15 +111,14 @@
 /obj/item/clothing/gloves/latex/nitrile/modified
 	item_flags = ITEM_FLAG_PREMODIFIED
 
-/obj/item/clothing/gloves/duty
+/obj/item/clothing/gloves/thick/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
 	name = "work gloves"
 	icon_state = "work"
 	item_state = "wgloves"
-	siemens_coefficient = 0.50
 	armor = list(melee = 10, bullet = 10, laser = 10, energy = 5, bomb = 0, bio = 0, rad = 0)
 
-/obj/item/clothing/gloves/duty/modified
+/obj/item/clothing/gloves/thick/duty/modified
 	item_flags = ITEM_FLAG_PREMODIFIED
 
 /obj/item/clothing/gloves/tactical

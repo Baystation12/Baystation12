@@ -16,6 +16,7 @@
 
 	var/attacking = 0
 	var/target_zone
+	var/done_struggle = FALSE // Used by struggle grab datum to keep track of state.
 
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_NO_CONTAINER
@@ -61,6 +62,14 @@
 			upgrade()
 
 /obj/item/grab/attack(mob/M, mob/living/user)
+
+	// Relying on BYOND proc ordering isn't working, so go go ugly workaround.
+	if(ishuman(user) && affecting == M)
+		var/mob/living/carbon/human/H = user
+		if(H.check_psi_grab(src))
+			return
+	// End workaround
+
 	current_grab.hit_with_grab(src)
 
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)

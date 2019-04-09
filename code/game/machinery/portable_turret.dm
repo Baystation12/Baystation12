@@ -87,8 +87,7 @@
 
 /obj/machinery/porta_turret/New()
 	..()
-	req_access.Cut()
-	req_one_access = list(access_security, access_bridge)
+	req_access = list(list(access_security, access_bridge))
 
 	//Sets up a spark system
 	spark_system = new /datum/effect/effect/system/spark_spread
@@ -99,7 +98,6 @@
 
 /obj/machinery/porta_turret/crescent/New()
 	..()
-	req_one_access.Cut()
 	req_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/Destroy()
@@ -459,8 +457,7 @@ var/list/turret_icons
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
-			spawn()
-				popDown() // no valid targets, close the cover
+			popDown() // no valid targets, close the cover
 
 	if(auto_repair && (health < maxhealth))
 		use_power_oneoff(20000)
@@ -564,6 +561,7 @@ var/list/turret_icons
 	update_icon()
 
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
+	set waitfor = FALSE
 	last_target = null
 	if(disabled)
 		return

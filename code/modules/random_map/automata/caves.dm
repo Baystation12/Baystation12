@@ -138,7 +138,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 
 		num_applied += 1
 		T.ChangeTurf(new_path, minerals)
-
+		get_additional_spawns(map[tmp_cell], T)
 		CHECK_TICK
 
 	game_log("ASGEN", "Applied [num_applied] turfs.")

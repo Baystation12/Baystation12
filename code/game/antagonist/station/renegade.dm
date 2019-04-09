@@ -24,28 +24,28 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	hard_cap_round = 12
 	initial_spawn_req = 3
 	initial_spawn_target = 6
-	antaghud_indicator = "hudrenegade"
+	antaghud_indicator = "hud_renegade"
 	skill_setter = /datum/antag_skill_setter/station
 
 	var/list/spawn_guns = list(
-		/obj/item/weapon/gun/energy/laser,
+		/obj/item/weapon/gun/energy/retro,
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/weapon/gun/energy/crossbow,
-		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
+		/obj/item/weapon/gun/energy/pulse_rifle/pistol,
 		/obj/item/weapon/gun/projectile/automatic,
-		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
-		/obj/item/weapon/gun/projectile/automatic/c20r,
-		/obj/item/weapon/gun/projectile/automatic/wt550,
-		/obj/item/weapon/gun/projectile/colt,
-		/obj/item/weapon/gun/projectile/sec/wood/lethal,
-		/obj/item/weapon/gun/projectile/silenced,
-		/obj/item/weapon/gun/projectile/beretta,
-		/obj/item/weapon/gun/projectile/pistol,
+		/obj/item/weapon/gun/projectile/automatic/machine_pistol,
+		/obj/item/weapon/gun/projectile/automatic/sec_smg,
+		/obj/item/weapon/gun/projectile/pistol/magnum_pistol,
+		/obj/item/weapon/gun/projectile/pistol/military,
+		/obj/item/weapon/gun/projectile/pistol/military/alt,
+		/obj/item/weapon/gun/projectile/pistol/sec/lethal,
+		/obj/item/weapon/gun/projectile/pistol/holdout,
 		/obj/item/weapon/gun/projectile/revolver,
-		/obj/item/weapon/gun/projectile/revolver/webley,
+		/obj/item/weapon/gun/projectile/revolver/medium,
 		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
-		/obj/item/weapon/gun/projectile/magnum_pistol,
-		list(/obj/item/weapon/gun/projectile/revolver/detective, /obj/item/weapon/gun/projectile/revolver/deckard)
+		/obj/item/weapon/gun/projectile/pistol/magnum_pistol,
+		/obj/item/weapon/gun/projectile/revolver/holdout,
+		/obj/item/weapon/gun/projectile/pistol/throwback
 		)
 
 /datum/antagonist/renegade/create_objectives(var/datum/mind/player)

@@ -1,5 +1,6 @@
-/obj/item/weapon/clipboard
+/obj/item/weapon/material/clipboard
 	name = "clipboard"
+	desc = "It's a board with a clip used to organise papers."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "clipboard"
 	item_state = "clipboard"
@@ -10,12 +11,18 @@
 	var/obj/item/weapon/pen/haspen		//The stored pen.
 	var/obj/item/weapon/toppaper	//The topmost piece of paper.
 	slot_flags = SLOT_BELT
-	matter = list(MATERIAL_STEEL = 70)
+	default_material = MATERIAL_WOOD
+	applies_material_name = FALSE
+	matter = list(MATERIAL_WOOD = 70)
 
-/obj/item/weapon/clipboard/New()
+/obj/item/weapon/material/clipboard/New(newloc, material_key)
+	..()
 	update_icon()
+	if(material)
+		desc = initial(desc)
+		desc += " It's made of [material.use_name]."
 
-/obj/item/weapon/clipboard/MouseDrop(obj/over_object as obj) //Quick clipboard fix. -Agouri
+/obj/item/weapon/material/clipboard/MouseDrop(obj/over_object as obj) //Quick clipboard fix. -Agouri
 	if(ishuman(usr))
 		var/mob/M = usr
 		if(!(istype(over_object, /obj/screen) ))
@@ -33,17 +40,17 @@
 			add_fingerprint(usr)
 			return
 
-/obj/item/weapon/clipboard/on_update_icon()
-	overlays.Cut()
+/obj/item/weapon/material/clipboard/on_update_icon()
+	..()
 	if(toppaper)
-		overlays += toppaper.icon_state
+		overlays += overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR)
 		overlays += toppaper.overlays
 	if(haspen)
-		overlays += "clipboard_pen"
-	overlays += "clipboard_over"
+		overlays += overlay_image(icon, "clipboard_pen", flags=RESET_COLOR)
+	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
 	return
 
-/obj/item/weapon/clipboard/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/material/clipboard/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/photo))
 		if(!user.unEquip(W, src))
@@ -59,7 +66,7 @@
 
 	return
 
-/obj/item/weapon/clipboard/attack_self(mob/user as mob)
+/obj/item/weapon/material/clipboard/attack_self(mob/user as mob)
 	var/dat = "<title>Clipboard</title>"
 	if(haspen)
 		dat += "<A href='?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"
@@ -83,7 +90,7 @@
 	add_fingerprint(usr)
 	return
 
-/obj/item/weapon/clipboard/Topic(href, href_list)
+/obj/item/weapon/material/clipboard/Topic(href, href_list)
 	..()
 	if((usr.stat || usr.restrained()))
 		return
@@ -167,3 +174,22 @@
 		attack_self(usr)
 		update_icon()
 	return
+
+/obj/item/weapon/material/clipboard/ebony
+	default_material = MATERIAL_EBONY
+
+/obj/item/weapon/material/clipboard/steel
+	default_material = MATERIAL_STEEL
+	matter = list(MATERIAL_STEEL = 70)
+
+/obj/item/weapon/material/clipboard/aluminium
+	default_material = MATERIAL_ALUMINIUM
+	matter = list(MATERIAL_ALUMINIUM = 70)
+
+/obj/item/weapon/material/clipboard/glass
+	default_material = MATERIAL_GLASS
+	matter = list(MATERIAL_GLASS = 70)
+
+/obj/item/weapon/material/clipboard/plastic
+	default_material = MATERIAL_PLASTIC
+	matter = list(MATERIAL_PLASTIC = 70)

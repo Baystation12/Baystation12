@@ -2,11 +2,11 @@ SUBSYSTEM_DEF(codex)
 	name = "Codex"
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_LATE
-	var/list/entries_by_path = list()
+
+	var/list/entries_by_path =   list()
 	var/list/entries_by_string = list()
-	var/list/index_file = list()
-	var/list/search_cache = list()
-	var/list/entry_cache = list()
+	var/list/index_file =        list()
+	var/list/search_cache =      list()
 
 /datum/controller/subsystem/codex/Initialize()
 
@@ -18,9 +18,10 @@ SUBSYSTEM_DEF(codex)
 			for(var/associated_path in centry.associated_paths)
 				entries_by_path[associated_path] = centry
 			for(var/associated_string in centry.associated_strings)
-				entries_by_string[associated_string] = centry
+				add_entry_by_string(associated_string, centry)
 			if(centry.display_name)
-				entries_by_string[centry.display_name] = centry
+				add_entry_by_string(centry.display_name, centry)
+			centry.update_links()
 
 	// Create categorized entries.
 	for(var/ctype in subtypesof(/datum/codex_category))
@@ -38,27 +39,22 @@ SUBSYSTEM_DEF(codex)
 	index_file = sortAssoc(index_file)
 	. = ..()
 
-/datum/controller/subsystem/codex/proc/get_codex_entry(var/datum/codex_entry/entry)
-	if(!initialized)
-		return
-	var/searching = "\ref[entry]"
-	if(!entry_cache[searching])
-		if(istype(entry))
-			entry_cache[searching] = entry
-		else
-			entry_cache[searching] = FALSE
-			if(ispath(entry))
-				entry_cache[searching] = entries_by_path[entry]
-			else if(istype(entry, /atom))
-				var/atom/entity = entry
-				var/check = entries_by_string[lowertext(entity.name)]
-				if(check)
-					entry_cache[searching] = check
-				else
-					check = entries_by_path[entity.type]
-					if(check)
-						entry_cache[searching] = check
-	return entry_cache[searching]
+/datum/controller/subsystem/codex/proc/get_codex_entry(var/entry)
+	if(istype(entry, /atom))
+		var/atom/entity = entry
+		if(entity.get_specific_codex_entry())
+			return entity.get_specific_codex_entry()
+		return get_entry_by_string(entity.name) || entries_by_path[entity.type]
+	else if(entries_by_path[entry])
+		return entries_by_path[entry]
+	else if(entries_by_string[lowertext(entry)])
+		return entries_by_string[lowertext(entry)]
+
+/datum/controller/subsystem/codex/proc/add_entry_by_string(var/string, var/entry)
+	entries_by_string[lowertext(trim(string))] = entry
+
+/datum/controller/subsystem/codex/proc/get_entry_by_string(var/string)
+	return entries_by_string[lowertext(trim(string))]
 
 /datum/controller/subsystem/codex/proc/present_codex_entry(var/mob/presenting_to, var/datum/codex_entry/entry)
 	if(entry && istype(presenting_to) && presenting_to.client)
@@ -102,9 +98,18 @@ SUBSYSTEM_DEF(codex)
 /datum/controller/subsystem/codex/Topic(href, href_list)
 	. = ..()
 	if(!. && href_list["show_examined_info"] && href_list["show_to"])
-		var/atom/showing_atom = locate(href_list["show_examined_info"])
 		var/mob/showing_mob =   locate(href_list["show_to"])
-		var/entry = get_codex_entry(showing_atom)
-		if(entry && showing_mob.can_use_codex())
+		if(!istype(showing_mob) || !showing_mob.can_use_codex())
+			return 
+		var/atom/showing_atom = locate(href_list["show_examined_info"])
+		var/entry
+		if(istype(showing_atom, /datum/codex_entry))
+			entry = showing_atom
+		else
+			if(istype(showing_atom))
+				entry = get_codex_entry(showing_atom.get_codex_value())
+			else
+				entry = get_codex_entry(showing_atom)
+		if(entry)
 			present_codex_entry(showing_mob, entry)
 			return TRUE

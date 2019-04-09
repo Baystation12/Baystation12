@@ -106,7 +106,7 @@
 		if((H.species.name == SPECIES_ADHERENT || H.species.name == SPECIES_GOLEM) && prob(10))
 			for(var/limb_type in H.species.has_limbs)
 				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-				if(E && !E.is_usable())
+				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
 					E.removed()
 					qdel(E)
 					E = null

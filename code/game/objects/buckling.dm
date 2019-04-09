@@ -62,7 +62,7 @@
 			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, 4, 1, LINEAR_EASING)
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
-	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user, /mob/living/silicon/pai))
+	if(!user.Adjacent(M) || istype(user, /mob/living/silicon/pai) || (M != user && user.incapacitated()))
 		return 0
 	if(M == buckled_mob)
 		return 0

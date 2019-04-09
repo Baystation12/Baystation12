@@ -156,11 +156,10 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
 	var/jobs = list()
-	if(job_master)
-		for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
-			var/datum/job/J = job_master.occupations_by_title[job_title]
-			if(J)
-				dd_insertObjectList(jobs, J)
+	for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
+		var/datum/job/J = SSjobs.get_by_title(job_title)
+		if(J)
+			dd_insertObjectList(jobs, J)
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
@@ -171,14 +170,7 @@ var/list/gear_datums = list()
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
 		var/allowed = 1
-		if(length(G.allowed_branches))
-			var/datum/mil_branch/player_branch = mil_branches.get_branch(pref.char_branch)
-			if(!player_branch)
-				entry += "<br><i><font color=cc5555>Needs branch selected</font></i>"
-				allowed = 0
-			else if(!(player_branch.type in G.allowed_branches))
-				entry += "<br><i><font color=cc5555>[player_branch.name]</font></i>"
-				allowed = 0
+
 		if(allowed && G.allowed_roles)
 			var/good_job = 0
 			var/bad_job = 0
@@ -348,7 +340,6 @@ var/list/gear_datums = list()
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_item(H, metadata)
 	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
-		to_chat(H, "<span class='notice'>Equipping you with \the [item]!</span>")
 		. = item
 
 /datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)

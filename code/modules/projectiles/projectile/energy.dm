@@ -3,8 +3,8 @@
 	icon_state = "spark"
 	damage = 0
 	damage_type = BURN
-	check_armour = "energy"
-
+	damage_flags = 0
+	distance_falloff = 2.5
 
 //releases a burst of light on impact or after travelling a distance
 /obj/item/projectile/energy/flash

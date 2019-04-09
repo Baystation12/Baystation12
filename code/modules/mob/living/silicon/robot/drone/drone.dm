@@ -21,7 +21,7 @@ var/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone
 	name = "maintenance drone"
 	real_name = "drone"
-	icon = 'icons/mob/robots.dmi'
+	icon = 'icons/mob/robots_drones.dmi'
 	icon_state = "repairbot"
 	maxHealth = 35
 	health = 35
@@ -62,8 +62,25 @@ var/list/mob_hat_cache = list()
 
 	holder_type = /obj/item/weapon/holder/drone
 
-/mob/living/silicon/robot/drone/New()
-	..()
+/mob/living/silicon/robot/drone/Initialize()
+	. = ..()
+
+	verbs += /mob/living/proc/hide
+	remove_language("Robot Talk")
+	add_language("Robot Talk", 0)
+	add_language("Drone Talk", 1)
+	default_language = all_languages["Drone Talk"]
+	// NO BRAIN.
+	mmi = null
+
+	//We need to screw with their HP a bit. They have around one fifth as much HP as a full borg.
+	for(var/V in components) if(V != "power cell")
+		var/datum/robot_component/C = components[V]
+		C.max_damage = 10
+
+	verbs -= /mob/living/silicon/robot/verb/Namepick
+	update_icon()
+
 	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
 /mob/living/silicon/robot/drone/Destroy()
@@ -122,26 +139,6 @@ var/list/mob_hat_cache = list()
 	hat_y_offset = -12
 	can_pull_size = ITEM_SIZE_NO_CONTAINER
 	can_pull_mobs = MOB_PULL_SAME
-
-/mob/living/silicon/robot/drone/New()
-
-	..()
-
-	verbs += /mob/living/proc/hide
-	remove_language("Robot Talk")
-	add_language("Robot Talk", 0)
-	add_language("Drone Talk", 1)
-
-	// NO BRAIN.
-	mmi = null
-
-	//We need to screw with their HP a bit. They have around one fifth as much HP as a full borg.
-	for(var/V in components) if(V != "power cell")
-		var/datum/robot_component/C = components[V]
-		C.max_damage = 10
-
-	verbs -= /mob/living/silicon/robot/verb/Namepick
-	update_icon()
 
 /mob/living/silicon/robot/drone/init()
 	additional_law_channels["Drone"] = ":d"

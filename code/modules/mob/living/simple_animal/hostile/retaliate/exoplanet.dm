@@ -79,6 +79,7 @@
 	speak = list("Hruuugh!","Hrunnph")
 	emote_see = list("paws the ground","shakes its mane","stomps")
 	emote_hear = list("snuffles")
+	natural_armor = list(melee = 20)
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
 	desc = "A fast, armoured predator accustomed to hiding and ambushing."
@@ -198,7 +199,8 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 	attacktext = "pinched"
 	speak_chance = 1
 	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
+	natural_armor = list(melee = 20)
 
-/mob/living/simple_animal/hostile/jelly/New()
+/mob/living/simple_animal/hostile/retaliate/jelly/New()
 	..()
 	color = color_rotation(round(rand(0,360),20))

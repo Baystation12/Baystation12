@@ -5,7 +5,7 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 	role_text = "Head Revolutionary"
 	role_text_plural = "Revolutionaries"
 	feedback_tag = "rev_objective"
-	antag_indicator = "hudheadrevolutionary"
+	antag_indicator = "hud_rev_head"
 	welcome_text = "Down with the capitalists! Down with the Bourgeoise!"
 	victory_text = "The heads of staff were relieved of their posts! The revolutionaries win!"
 	loss_text = "The heads of staff managed to stop the revolution!"
@@ -25,7 +25,7 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 	faction_descriptor = "Revolution"
 	faction_verb = /mob/living/proc/convert_to_rev
 	faction_welcome = "Help the cause overturn the ruling class. Do not harm your fellow freedom fighters."
-	faction_indicator = "hudrevolutionary"
+	faction_indicator = "hud_rev"
 	faction_invisible = 1
 	faction = "revolutionary"
 
@@ -39,7 +39,7 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 		return
 	global_objectives = list()
 	for(var/mob/living/carbon/human/player in SSmobs.mob_list)
-		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in GLOB.command_positions))
+		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(COM)))
 			continue
 		var/datum/objective/rev/rev_obj = new
 		rev_obj.target = player.mind

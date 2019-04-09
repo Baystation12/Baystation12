@@ -4,7 +4,7 @@
 	var/radio_desc = ""
 	icon_state = "headset"
 	item_state = "headset"
-	matter = list(MATERIAL_STEEL = 75)
+	matter = list(MATERIAL_ALUMINIUM = 75)
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 
@@ -252,6 +252,13 @@
 /obj/item/device/radio/headset/ert
 	name = "emergency response team radio headset"
 	desc = "The headset of the boss's boss."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/ert
+
+/obj/item/device/radio/headset/foundation
+	name = "\improper Foundation radio headset"
+	desc = "The headeset of the occult cavalry."
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/ert

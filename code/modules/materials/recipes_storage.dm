@@ -29,7 +29,7 @@
 	result_type = /obj/item/weapon/storage/box/mousetraps/empty
 
 /datum/stack_recipe/box/pizza
-	title = "mouse traps box"
+	title = "pizza box"
 	result_type = /obj/item/pizzabox
 
 /datum/stack_recipe/bag

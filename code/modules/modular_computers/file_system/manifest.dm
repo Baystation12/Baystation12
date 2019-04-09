@@ -60,7 +60,7 @@
 		else
 			isactive[name] = CR.get_status()
 
-		var/datum/job/job = job_master.occupations_by_title[rank]
+		var/datum/job/job = SSjobs.get_by_title(rank)
 		var/found_place = 0
 		if(job)
 			for(var/list/department in dept_data)
@@ -126,22 +126,21 @@
 	return filtered_entries
 
 /proc/nano_crew_manifest()
-	return list(\
-		"heads" = filtered_nano_crew_manifest(GLOB.command_positions),\
-		"spt" = filtered_nano_crew_manifest(GLOB.support_positions),\
-		"sci" = filtered_nano_crew_manifest(GLOB.science_positions),\
-		"sec" = filtered_nano_crew_manifest(GLOB.security_positions),\
-		"eng" = filtered_nano_crew_manifest(GLOB.engineering_positions),\
-		"med" = filtered_nano_crew_manifest(GLOB.medical_positions),\
-		"sup" = filtered_nano_crew_manifest(GLOB.supply_positions),\
-		"exp" = filtered_nano_crew_manifest(GLOB.exploration_positions),\
-		"srv" = filtered_nano_crew_manifest(GLOB.service_positions),\
-		"bot" = silicon_nano_crew_manifest(GLOB.nonhuman_positions),\
-		"civ" = filtered_nano_crew_manifest(GLOB.civilian_positions),\
-		"misc" = filtered_nano_crew_manifest(GLOB.unsorted_positions)\
+	return list(
+		"heads" = filtered_nano_crew_manifest(SSjobs.titles_by_department(COM)),
+		"spt" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(SPT)),
+		"sci" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(SCI)),
+		"sec" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(SEC)),
+		"eng" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(ENG)),
+		"med" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(MED)),
+		"sup" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(SUP)),
+		"exp" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(EXP)),
+		"srv" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(SRV)),
+		"bot" =   silicon_nano_crew_manifest(SSjobs.titles_by_department(MSC)),
+		"civ" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(CIV))
 		)
 
 /proc/flat_nano_crew_manifest()
 	. = list()
 	. += filtered_nano_crew_manifest(null, TRUE)
-	. += silicon_nano_crew_manifest(GLOB.nonhuman_positions)
+	. += silicon_nano_crew_manifest(SSjobs.titles_by_department(MSC))

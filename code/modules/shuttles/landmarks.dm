@@ -62,7 +62,8 @@
 			map_destination.add_landmark(src, shuttle_restricted)
 
 //Called when the landmark is added to an overmap sector.
-/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/O)
+/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/O, shuttle_name)
+	shuttle_restricted = shuttle_name
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
@@ -70,6 +71,10 @@
 	for(var/area/A in shuttle.shuttle_area)
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
 		if(check_collision(base_area, list_values(translation)))
+			return FALSE		
+	var/conn = GetConnectedZlevels(z)
+	for(var/w in (z - shuttle.multiz) to z)
+		if(!(w in conn))
 			return FALSE
 	return TRUE
 

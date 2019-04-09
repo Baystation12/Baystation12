@@ -9,6 +9,9 @@
 /datum/codex_entry/dd_SortValue()
 	return display_name
 
+/datum/codex_entry/proc/update_links()
+	return
+
 /datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
 
 	if(_display_name)       display_name =       _display_name

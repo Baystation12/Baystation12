@@ -16,18 +16,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
 
-///obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
-//	..()
-//	reagents.add_reagent(/datum/reagent/tricordrazine, 30)
-//	return
-
-/obj/item/weapon/reagent_containers/hypospray/do_surgery(mob/living/carbon/M, mob/living/user)
-	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-		return ..()
-	attack(M, user)
-	return 1
-
-/obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
+/obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M, mob/user)
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
 		return
@@ -64,6 +53,8 @@
 	item_state = "autoinjector"
 	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
 	var/obj/item/weapon/reagent_containers/glass/beaker/vial/loaded_vial
+	possible_transfer_amounts = "1;2;5;10;15;20;30"
+	amount_per_transfer_from_this = 5
 	volume = 0
 
 /obj/item/weapon/reagent_containers/hypospray/vial/New()
@@ -72,42 +63,56 @@
 	volume = loaded_vial.volume
 	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 
-/obj/item/weapon/reagent_containers/hypospray/vial/attack_hand(mob/user as mob)
-	if(user.get_inactive_hand() == src)
-		if(loaded_vial)
-			reagents.trans_to_holder(loaded_vial.reagents,volume)
-			reagents.maximum_volume = 0
-			loaded_vial.update_icon()
-			user.put_in_hands(loaded_vial)
-			loaded_vial = null
-			to_chat(user, "You remove the vial from the [src].")
-			update_icon()
-			playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-			return
-		..()
-	else
-		return ..()
+/obj/item/weapon/reagent_containers/hypospray/vial/proc/remove_vial(mob/user, swap_mode)
+	if(!loaded_vial)
+		return
+	reagents.trans_to_holder(loaded_vial.reagents,volume)
+	reagents.maximum_volume = 0
+	loaded_vial.update_icon()
+	user.put_in_hands(loaded_vial)
+	loaded_vial = null
+	if (swap_mode != "swap") // if swapping vials, we will print a different message in another proc
+		to_chat(user, "You remove the vial from the [src].")
 
-/obj/item/weapon/reagent_containers/hypospray/vial/attackby(obj/item/weapon/W, mob/user as mob)
-	if(istype(W, /obj/item/weapon/reagent_containers/glass/beaker/vial))
+/obj/item/weapon/reagent_containers/hypospray/vial/attack_hand(mob/user)
+	if(user.get_inactive_hand() == src)
 		if(!loaded_vial)
-			if(!do_after(user,10) || loaded_vial || !(W in user))
-				return 0
-			if(!user.unEquip(W, src))
-				return
-			if(W.is_open_container())
-				W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
-				W.update_icon()
-			loaded_vial = W
-			reagents.maximum_volume = loaded_vial.reagents.maximum_volume
-			loaded_vial.reagents.trans_to_holder(reagents,volume)
-			user.visible_message("<span class='notice'>[user] has loaded [W] into \the [src].</span>","<span class='notice'>You load \the [W] into \the [src].</span>")
-			update_icon()
-			playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
+			to_chat(user, "<span class='notice'>There is no vial loaded in the [src].</span>")
+			return
+		remove_vial(user)
+		update_icon()
+		playsound(loc, 'sound/weapons/flipblade.ogg', 50, 1)
+		return
+	return ..()
+
+/obj/item/weapon/reagent_containers/hypospray/vial/attackby(obj/item/weapon/W, mob/user)
+	var/usermessage = ""
+	if(istype(W, /obj/item/weapon/reagent_containers/glass/beaker/vial))
+		if(!do_after(user,10) || !(W in user))
+			return 0
+		if(!user.unEquip(W, src))
+			return
+		if(loaded_vial)
+			remove_vial(user, "swap")
+			usermessage = "You load \the [W] into \the [src] as you remove the old one."
 		else
-			to_chat(user,"<span class='notice'>\The [src] already has a vial.</span>")
-	else
-		..()
+			usermessage = "You load \the [W] into \the [src]."
+		if(W.is_open_container())
+			W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
+			W.update_icon()
+		loaded_vial = W
+		reagents.maximum_volume = loaded_vial.reagents.maximum_volume
+		loaded_vial.reagents.trans_to_holder(reagents,volume)
+		user.visible_message("<span class='notice'>[user] has loaded [W] into \the [src].</span>","<span class='notice'>[usermessage]</span>")
+		update_icon()
+		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
+		return
+	..()
+
+/obj/item/weapon/reagent_containers/hypospray/vial/afterattack(obj/target, mob/user, proximity) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
+	if(!proximity)
+		return
+	standard_pour_into(user, target)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector
 	name = "autoinjector"

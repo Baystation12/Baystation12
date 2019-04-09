@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - rscdel: "Removed Xenolife Technician and NT Guard."
-  - tweak: "Research Director is now the Chief Science Officer and may only be EC-ranked, not contractor."
-  - tweak: "All other science roles are now available to EC staff as well as contractors."

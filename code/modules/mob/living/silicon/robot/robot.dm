@@ -14,6 +14,7 @@
 
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
+	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -21,6 +22,8 @@
 	var/crisis_override = 0
 	var/integrated_light_max_bright = 0.75
 	var/datum/wires/robot/wires
+	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
+	var/dismantle_type = /obj/item/robot_parts/robot_suit
 
 //Icon stuff
 
@@ -97,7 +100,8 @@
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
 
-/mob/living/silicon/robot/New(loc,var/unfinished = 0)
+/mob/living/silicon/robot/Initialize()
+	. = ..()
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -121,12 +125,9 @@
 		camera.replace_networks(list(NETWORK_EXODUS,NETWORK_ROBOTS))
 		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
 			camera.status = 0
-
-	..() // Laws, among other things, are initialized in parent New()
 	init()
 	initialize_components()
-	//if(!unfinished)
-	// Create all the robot parts.
+
 	for(var/V in components) if(V != "power cell")
 		var/datum/robot_component/C = components[V]
 		C.installed = 1
@@ -152,8 +153,6 @@
 	hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 
-/mob/living/silicon/robot/Initialize()
-	. = ..()
 	AddMovementHandler(/datum/movement_handler/robot/use_power, /datum/movement_handler/mob/space)
 
 /mob/living/silicon/robot/proc/recalculate_synth_capacities()
@@ -224,8 +223,9 @@
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	connected_ai = null
+	QDEL_NULL(module)
 	QDEL_NULL(wires)
-	return ..()
+	. = ..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
 	if(new_sprites && new_sprites.len)
@@ -252,44 +252,46 @@
 	// Clear hands and module icon.
 	uneq_all()
 	modtype = initial(modtype)
-	hands.icon_state = initial(hands.icon_state)
-
+	if(hands)
+		hands.icon_state = initial(hands.icon_state)
 	// If the robot had a module and this wasn't an uncertified change, let the AI know.
-	if (module)
+	if(module)
 		if (!suppress_alert)
 			notify_ai(ROBOT_NOTIFICATION_MODULE_RESET, module.name)
-
 		// Delete the module.
 		module.Reset(src)
 		QDEL_NULL(module)
-
 	updatename("Default")
 
-/mob/living/silicon/robot/proc/pick_module(var/override = null)
+/mob/living/silicon/robot/proc/pick_module(var/override)
 	if(module && !override)
 		return
 
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/is_crisis_mode = crisis_override || (crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
+	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode, override)
+
 	if(!override)
-		var/list/modules = list()
-		modules.Add(GLOB.robot_module_types)
-		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-		if((crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)) || crisis_override) //Leaving this in until it's balanced appropriately.
-			to_chat(src, "<span class='warning'>Crisis mode active. Combat module available.</span>")
-			modules+="Combat"
-		modtype = input("Please, select a module!", "Robot module", null, null) as null|anything in modules
-
-		if(module)
-			return
-		if(!(modtype in robot_modules))
-			return
-
+		if(is_crisis_mode)
+			to_chat(src, SPAN_WARNING("Crisis mode active. Additional modules available."))
+		modtype = input("Please select a module!", "Robot module", null, null) as null|anything in robot_modules
 	else
+		if(module)
+			QDEL_NULL(module)
 		modtype = override
 
+	if(module || !modtype)
+		return
+
 	var/module_type = robot_modules[modtype]
+	if(!module_type)
+		to_chat(src, SPAN_WARNING("You are unable to select a module."))
+		return
+
 	new module_type(src)
 
-	hands.icon_state = lowertext(modtype)
+	if(hands)
+		hands.icon_state = lowertext(modtype)
 	SSstatistics.add_field("cyborg_[lowertext(modtype)]",1)
 	updatename()
 	recalculate_synth_capacities()
@@ -448,7 +450,7 @@
 // this function returns the robots jetpack, if one is installed
 /mob/living/silicon/robot/proc/installed_jetpack()
 	if(module)
-		return (locate(/obj/item/weapon/tank/jetpack) in module.modules)
+		return (locate(/obj/item/weapon/tank/jetpack) in module.equipment)
 	return 0
 
 
@@ -555,15 +557,7 @@
 
 				user.visible_message("<span class='notice'>\The [user] begins ripping [mmi] from [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
 				if(do_after(user, 50, src))
-					to_chat(user, "<span class='notice'>You damage some parts of the chassis, but eventually manage to rip out [mmi]!</span>")
-					var/obj/item/robot_parts/robot_suit/C = new/obj/item/robot_parts/robot_suit(loc)
-					C.parts[BP_L_LEG] = new/obj/item/robot_parts/l_leg(C)
-					C.parts[BP_R_LEG] = new/obj/item/robot_parts/r_leg(C)
-					C.parts[BP_L_ARM] = new/obj/item/robot_parts/l_arm(C)
-					C.parts[BP_R_ARM] = new/obj/item/robot_parts/r_arm(C)
-					C.update_icon()
-					new/obj/item/robot_parts/chest(loc)
-					qdel(src)
+					dismantle(user)
 
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?
@@ -744,18 +738,7 @@
 	return 0
 
 /mob/living/silicon/robot/proc/check_access(obj/item/weapon/card/id/I)
-	if(!istype(req_access, /list)) //something's very wrong
-		return 1
-
-	var/list/L = req_access
-	if(!L.len) //no requirements
-		return 1
-	if(!I || !istype(I, /obj/item/weapon/card/id) || !I.access) //not ID or no access
-		return 0
-	for(var/req in req_access)
-		if(req in I.access) //have one of the required accesses
-			return 1
-	return 0
+	return has_access(req_access, I.access)
 
 /mob/living/silicon/robot/on_update_icon()
 	overlays.Cut()
@@ -810,7 +793,7 @@
 	<B>Installed Modules</B><BR><BR>"}
 
 
-	for (var/obj in module.modules)
+	for (var/obj in module.equipment)
 		if (!obj)
 			dat += text("<B>Resource depleted</B><BR>")
 		else if(activated(obj))
@@ -852,7 +835,7 @@
 		if (!istype(O))
 			return 1
 
-		if(!((O in src.module.modules) || (O == src.module.emag)))
+		if(!((O in module.equipment) || (O == src.module.emag)))
 			return 1
 
 		if(activated(O))
@@ -994,6 +977,7 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
+	set waitfor = 0
 	if(!module_sprites.len)
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
 		return
@@ -1015,9 +999,10 @@
 			choose_icon(icon_selection_tries, module_sprites)
 			return
 
-	icon_selected = 1
+	icon_selected = TRUE
 	icon_selection_tries = 0
 	to_chat(src, "Your icon has been set. You now require a module reset to change it.")
+
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Set Sensor Augmentation"
 	set category = "Silicon Commands"
@@ -1091,8 +1076,9 @@
 			to_chat(user, "The cover is already unlocked.")
 		return
 
-	if(opened)//Cover is open
-		if(emagged)	return//Prevents the X has hit Y with Z message also you cant emag them twice
+	if(opened) //Cover is open
+		if(emagged)
+			return //Prevents the X has hit Y with Z message also you cant emag them twice
 		if(wiresexposed)
 			to_chat(user, "You must close the panel first")
 			return
@@ -1130,20 +1116,13 @@
 					to_chat(src, "<b>Obey these laws:</b>")
 					laws.show_laws(src)
 					to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>")
-					if(src.module)
-						var/rebuild = 0
-						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)
-							qdel(D)
-							rebuild = 1
-						if(rebuild)
-							src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
-							src.module.rebuild()
+					if(module)
+						module.handle_emagged()
 					update_icon()
 			else
 				to_chat(user, "You fail to hack [src]'s interface.")
 				to_chat(src, "Hack attempt detected.")
 			return 1
-		return
 
 /mob/living/silicon/robot/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator")))
@@ -1151,3 +1130,9 @@
 	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("actuator"))
 		return 1
 	return ..()
+
+/mob/living/silicon/robot/proc/dismantle(var/mob/user)
+	to_chat(user, SPAN_NOTICE("You damage some parts of the chassis, but eventually manage to rip out the central processor."))
+	var/obj/item/robot_parts/robot_suit/C = new dismantle_type(loc)
+	C.dismantled_from(src)
+	qdel(src)

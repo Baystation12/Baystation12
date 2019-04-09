@@ -1,13 +1,6 @@
 /decl/hierarchy/supply_pack/operations
 	name = "Operations"
 
-/decl/hierarchy/supply_pack/operations/mule
-	name = "Equipment - MULEbot"
-	contains = list()
-	cost = 20
-	containertype = /obj/structure/largecrate/animal/mulebot
-	containername = "mulebot crate"
-
 /decl/hierarchy/supply_pack/operations/cargotrain
 	name = "Equipment - Cargo Train Tug"
 	contains = list(/obj/vehicle/train/cargo/engine)
@@ -27,6 +20,7 @@
 	contains = list(/obj/item/seeds/bloodtomatoseed,
 					/obj/item/weapon/storage/pill_bottle/zoom,
 					/obj/item/weapon/storage/pill_bottle/happy,
+					/obj/item/weapon/storage/pill_bottle/three_eye,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine)
 
 	name = "UNLISTED - Contraband crate"
@@ -41,6 +35,13 @@
 	cost = 80
 	containertype = /obj/structure/largecrate/hoverpod
 	containername = "hoverpod crate"
+
+/decl/hierarchy/supply_pack/operations/orebox
+	name = "Equipment - Ore box"
+	contains = list(/obj/structure/ore_box)
+	cost = 15
+	containertype = /obj/structure/largecrate
+	containername = "Ore box crate"
 
 /decl/hierarchy/supply_pack/operations/webbing
 	name = "Gear - Webbing, vests, holsters."
@@ -87,8 +88,8 @@
 	access = access_brig
 
 /decl/hierarchy/supply_pack/operations/bureaucracy
-	contains = list(/obj/item/weapon/clipboard,
-					 /obj/item/weapon/clipboard,
+	contains = list(/obj/item/weapon/material/clipboard,
+					 /obj/item/weapon/material/clipboard,
 					 /obj/item/weapon/pen/red,
 					 /obj/item/weapon/pen/blue,
 					 /obj/item/weapon/pen/green,

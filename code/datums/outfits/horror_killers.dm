@@ -25,7 +25,7 @@
 	l_ear = /obj/item/device/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/apron
-	l_pocket = /obj/item/weapon/material/hatchet/tacknife
+	l_pocket = /obj/item/weapon/material/knife/combat
 	r_pocket = /obj/item/weapon/scalpel
 	r_hand = /obj/item/weapon/material/twohanded/fireaxe
 
@@ -37,7 +37,7 @@
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"
-	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat) }
+	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat/black) }
 	shoes = /obj/item/clothing/shoes/black
 	gloves = /obj/item/clothing/gloves/thick
 	l_ear = /obj/item/device/radio/headset
@@ -57,7 +57,7 @@
 	for(var/i=3, i>0, i--)
 		sec_briefcase.contents += new /obj/item/weapon/spacecash/bundle/c1000
 	sec_briefcase.contents += new /obj/item/weapon/gun/energy/crossbow
-	sec_briefcase.contents += new /obj/item/weapon/gun/projectile/revolver/mateba
-	sec_briefcase.contents += new /obj/item/ammo_magazine/c50
+	sec_briefcase.contents += new /obj/item/weapon/gun/projectile/revolver
+	sec_briefcase.contents += new /obj/item/ammo_magazine/speedloader/magnum
 	sec_briefcase.contents += new /obj/item/weapon/plastique
 	H.equip_to_slot_or_del(sec_briefcase, slot_l_hand)

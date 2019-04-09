@@ -77,13 +77,7 @@
 	else
 		target_zone = pick(BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG)
 
-	//armour
-	var/blocked = L.run_armor_check(target_zone, "melee")
-
-	if(blocked >= 100)
-		return
-
-	if(!L.apply_damage(30, BRUTE, target_zone, blocked, used_weapon=src))
+	if(!L.apply_damage(30, BRUTE, target_zone, used_weapon=src))
 		return 0
 
 	//trap the victim in place

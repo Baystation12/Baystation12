@@ -83,3 +83,14 @@
 	head = /obj/item/clothing/head/helmet/space/void/merc
 	back = /obj/item/weapon/tank/jetpack/oxygen
 	l_pocket = /obj/item/weapon/tank/emergency/oxygen
+
+/decl/hierarchy/outfit/foundation
+	name = "Cuchulain Foundation Agent"
+	glasses =  /obj/item/clothing/glasses/sunglasses
+	uniform =  /obj/item/clothing/under/suit_jacket/charcoal
+	shoes =    /obj/item/clothing/shoes/black
+	l_hand =   /obj/item/weapon/storage/briefcase/foundation
+	l_ear =    /obj/item/device/radio/headset/foundation
+	holster =  /obj/item/clothing/accessory/storage/holster/armpit
+	id_type =  /obj/item/weapon/card/id/foundation
+	id_slot =  slot_wear_id

@@ -8,6 +8,7 @@
 	average person. Even so, they do their jobs well and are thriving in this \
 	new environment."
 	hidden_from_codex = FALSE
+	silent_steps = TRUE
 
 	antaghud_offset_y = 8
 
@@ -245,8 +246,7 @@
 /obj/item/grab/nab/special/init()
 	if(!(. = ..()))
 		return
-	var/armor = affecting.run_armor_check(BP_CHEST, "melee")
-	affecting.apply_damage(15, BRUTE, BP_CHEST, armor, DAM_SHARP, "organic punctures")
+	affecting.apply_damage(15, BRUTE, BP_CHEST, DAM_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
 
@@ -390,3 +390,10 @@
 /datum/species/nabber/check_background(var/datum/job/job, var/datum/preferences/prefs)
 	var/decl/cultural_info/culture/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_CULTURE])
 	. = istype(grade) ? (job.type in grade.valid_jobs) : ..()
+
+/datum/species/nabber/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
+	switch(age)
+		if(0 to 18) 	. = 8
+		if(19 to 27) 	. = 2
+		if(28 to 40)	. = -2
+		else			. = -4

@@ -59,6 +59,7 @@
 	var/resistance		  = 0	// Damage reduction
 	var/damtype = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
+	var/list/natural_armor //what armor animal has
 	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
 
 	//Null rod stuff
@@ -71,6 +72,11 @@
 
 	// contained in a cage
 	var/in_stasis = 0
+
+/mob/living/simple_animal/Initialize()
+	. = ..()
+	if(LAZYLEN(natural_armor))
+		set_extension(src, /datum/extension/armor, /datum/extension/armor, natural_armor)
 
 /mob/living/simple_animal/Life()
 	. = ..()
@@ -203,7 +209,12 @@
 
 	var/damage = Proj.damage
 	if(Proj.damtype == STUN)
-		damage = (Proj.damage / 8)
+		damage = Proj.damage / 6
+	if(Proj.agony)
+		damage += Proj.agony / 6
+		if(health < Proj.agony * 3)
+			Paralyse(Proj.agony / 20)
+			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	adjustBruteLoss(damage)
 	Proj.on_hit(src)
@@ -261,9 +272,27 @@
 			O.attack(src, user, user.zone_sel.selecting)
 			return
 
-	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(O.edge)
-			harvest(user)
+	if(meat_type && (stat == DEAD) && meat_amount)
+		if(istype(O, /obj/item/weapon/material/knife/kitchen/cleaver))
+			var/victim_turf = get_turf(src)
+			if(!locate(/obj/structure/table, victim_turf))
+				to_chat(user, SPAN_NOTICE("You need to place \the [src] on a table to butcher it."))
+				return
+			var/time_to_butcher = (mob_size)
+			to_chat(user, SPAN_NOTICE("You begin harvesting \the [src]."))
+			if(do_after(user, time_to_butcher, src, same_direction = TRUE))
+				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
+					to_chat(user, SPAN_NOTICE("You botch harvesting \the [src], and ruin some of the meat in the process."))
+					subtract_meat(user)
+					return
+				else	
+					harvest(user, user.get_skill_value(SKILL_COOKING))
+					return
+			else
+				to_chat(user, SPAN_NOTICE("Your hand slips with your movement, and some of the meat is ruined."))
+				subtract_meat(user)
+				return
+				
 	else
 		if(!O.force)
 			visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
@@ -276,7 +305,7 @@
 
 	if(O.force <= resistance)
 		to_chat(user, "<span class='danger'>This weapon is ineffective; it does no damage.</span>")
-		return 2
+		return 0
 
 	var/damage = O.force
 	if (O.damtype == PAIN)
@@ -290,7 +319,7 @@
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)
 
-	return 0
+	return 1
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = ..() //Incase I need to add stuff other than "speed" later
@@ -323,18 +352,16 @@
 
 	var/damage
 	switch (severity)
-		if (1.0)
+		if (1)
 			damage = 500
-			if(!prob(getarmor(null, "bomb")))
-				gib()
 
-		if (2.0)
+		if (2)
 			damage = 120
 
-		if(3.0)
+		if(3)
 			damage = 30
 
-	adjustBruteLoss(damage * blocked_mult(getarmor(null, "bomb")))
+	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	..()
@@ -380,22 +407,23 @@
 	return 1
 
 // Harvest an animal's delicious byproducts
-/mob/living/simple_animal/proc/harvest(var/mob/user)
-	var/actual_meat_amount = max(1,(meat_amount/2))
-	if(meat_type && actual_meat_amount>0 && (stat == DEAD))
+/mob/living/simple_animal/proc/harvest(var/mob/user, var/skill_level)
+	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
+	user.visible_message("<span class='danger'>\The [user] chops up \the [src]!</span>")
+	if(meat_type && actual_meat_amount > 0 && (stat == DEAD))
 		for(var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))
 			meat.SetName("[src.name] [meat.name]")
-		if(issmall(src))
-			user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
 			if(can_bleed)
 				var/obj/effect/decal/cleanable/blood/splatter/splat = new(get_turf(src))
 				splat.basecolor = bleed_colour
 				splat.update_icon()
 			qdel(src)
-		else
-			user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
-			gib()
+
+/mob/living/simple_animal/proc/subtract_meat(var/mob/user)
+	meat_amount--
+	if(meat_amount <= 0)
+		to_chat(user, SPAN_NOTICE("\The [src] carcass is ruined beyond use."))
 
 /mob/living/simple_animal/handle_fire()
 	return
@@ -428,3 +456,17 @@
 	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour
 	drip.update_icon()
+
+/mob/living/simple_animal/get_digestion_product()
+	return /datum/reagent/nutriment
+
+/mob/living/simple_animal/eyecheck()
+	switch(flash_vulnerability)
+		if(2 to INFINITY)
+			return FLASH_PROTECTION_REDUCED
+		if(1)
+			return FLASH_PROTECTION_NONE
+		if(0)
+			return FLASH_PROTECTION_MAJOR
+		else 
+			return FLASH_PROTECTION_MAJOR

@@ -74,7 +74,7 @@ var/list/_client_preferences_by_type
 	if(!default_value)
 		default_value = options[1]
 
-/datum/client_preference/proc/may_set(var/mob/preference_mob)
+/datum/client_preference/proc/may_set(client/given_client)
 	return TRUE
 
 /datum/client_preference/proc/changed(var/mob/preference_mob, var/new_value)
@@ -145,7 +145,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/show_typing_indicator/changed(var/mob/preference_mob, var/new_value)
 	if(new_value == GLOB.PREF_HIDE)
-		QDEL_NULL(preference_mob.typing_indicator)
+		preference_mob.remove_typing_indicator()
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
@@ -205,6 +205,11 @@ var/list/_client_preferences_by_type
 	description = "Show End Titles"
 	key = "SHOW_CREDITS"
 
+/datum/client_preference/show_ckey_credits
+	description = "Show Ckey in End Credits"
+	key = "SHOW_CKEY_CREDITS"
+	options = list(GLOB.PREF_HIDE, GLOB.PREF_SHOW)
+
 /datum/client_preference/play_instruments
 	description ="Play instruments"
 	key = "SOUND_INSTRUMENTS"
@@ -219,6 +224,11 @@ var/list/_client_preferences_by_type
 	key = "DEPT_GOALS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
+/datum/client_preference/examine_messages
+	description ="Examining messages"
+	key = "EXAMINE_MESSAGES"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
 /********************
 * General Staff Preferences *
 ********************/
@@ -226,11 +236,16 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff
 	var/flags
 
-/datum/client_preference/staff/may_set(var/mob/preference_mob)
+/datum/client_preference/staff/may_set(client/given_client)
+	if(ismob(given_client))
+		var/mob/M = given_client
+		given_client = M.client
+	if(!given_client)
+		return FALSE
 	if(flags)
-		return check_rights(flags, 0, preference_mob)
+		return check_rights(flags, 0, given_client)
 	else
-		return preference_mob && preference_mob.client && preference_mob.client.holder
+		return given_client && given_client.holder
 
 /datum/client_preference/staff/show_chat_prayers
 	description = "Chat Prayers"

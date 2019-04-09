@@ -1,7 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/var/list/req_access = list()
-/obj/var/list/req_one_access = list()
 
 //returns 1 if this mob has sufficient access to use this object
 /obj/proc/allowed(mob/M)
@@ -13,8 +12,12 @@
 	return check_access_list(M.GetAccess())
 
 /atom/movable/proc/GetAccess()
+	. = list()
 	var/obj/item/weapon/card/id/id = GetIdCard()
-	return id ? id.GetAccess() : list()
+	if(id)
+		. += id.GetAccess()
+	if(maint_all_access)
+		. |= access_maint_tunnels
 
 /atom/movable/proc/GetIdCard()
 	return null
@@ -23,28 +26,32 @@
 	return check_access_list(I ? I.GetAccess() : list())
 
 /obj/proc/check_access_list(var/list/L)
-	if(!req_access)		req_access = list()
-	if(!req_one_access)	req_one_access = list()
-	if(!istype(L, /list))	return 0
-	return has_access(req_access, req_one_access, L)
-
-/proc/has_access(var/list/req_access, var/list/req_one_access, var/list/accesses)
-	for(var/req in req_access)
-		if(!(req in accesses)) //doesn't have this access
-			return 0
-	if(req_one_access.len)
-		for(var/req in req_one_access)
-			if(req in accesses) //has an access from the single access list
-				return 1
+	if(!req_access)
+		req_access = list()
+	if(!istype(L, /list))
 		return 0
-	return 1
+	return has_access(req_access, L)
+
+/proc/has_access(var/list/req_access, var/list/accesses)
+	for(var/req in req_access)
+		if(islist(req))
+			var/found = FALSE
+			for(var/req_one in req)
+				if(req_one in accesses)
+					found = TRUE
+					break
+			if(!found)
+				return FALSE
+		else if(!(req in accesses)) //doesn't have this access
+			return FALSE
+	return TRUE
 
 //Checks if the access (constant or list) is contained in one of the entries of access_patterns, a list of lists.
 /proc/has_access_pattern(list/access_patterns, access)
 	if(!islist(access))
 		access = list(access)
 	for(var/access_pattern in access_patterns)
-		if(has_access(access_pattern, list(), access))
+		if(has_access(access_pattern, access))
 			return 1
 
 /proc/get_centcom_access(job)
@@ -178,17 +185,7 @@
 
 /proc/get_access_by_id(id)
 	var/list/AS = priv_all_access_datums_id || get_all_access_datums_by_id()
-	return AS[num2text(id)]
-
-/proc/get_all_jobs()
-	var/list/all_jobs = list()
-	var/list/all_datums = typesof(/datum/job)
-	all_datums -= exclude_jobs
-	var/datum/job/jobdatum
-	for(var/jobtype in all_datums)
-		jobdatum = new jobtype
-		all_jobs.Add(jobdatum.title)
-	return all_jobs
+	return AS[id]
 
 /proc/get_all_centcom_jobs()
 	return list("VIP Guest",
@@ -245,7 +242,7 @@
 	return missing_id_name
 
 /proc/get_all_job_icons() //For all existing HUD icons
-	return joblist + list("Prisoner")
+	return SSjobs.titles_to_datums + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
 	var/obj/item/weapon/card/id/I = GetIdCard()

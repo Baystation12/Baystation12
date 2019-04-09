@@ -30,9 +30,9 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
-/mob/living/silicon/New()
+/mob/living/silicon/Initialize()
 	GLOB.silicon_mob_list += src
-	..()
+	. = ..()
 
 	if(silicon_radio)
 		silicon_radio = new silicon_radio(src)
@@ -262,24 +262,18 @@
 		if(1.0)
 			brute = 400
 			burn = 100
-			if(!anchored && !prob(getarmor(null, "bomb")))
-				gib()
 		if(2.0)
 			brute = 60
 			burn = 60
 		if(3.0)
 			brute = 30
 
-	var/protection = blocked_mult(getarmor(null, "bomb"))
-	brute *= protection
-	burn *= protection
-
-	adjustBruteLoss(brute)
-	adjustFireLoss(burn)
-
-	updatehealth()
+	apply_damage(brute, BRUTE, damage_flags = DAM_EXPLODE)
+	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
+	if(!(alarm.alarm_z() in GetConnectedZlevels(get_z(src))))
+		return // Didn't actually hear it as far as we're concerned.
 	if(!next_alarm_notice)
 		next_alarm_notice = world.time + SecondsToTicks(10)
 
@@ -360,19 +354,19 @@
 
 /mob/living/silicon/proc/clear_client()
 	//Handle job slot/tater cleanup.
-	var/job = mind.assigned_role
-
-	job_master.ClearSlot(job)
-
-	if(mind.objectives.len)
-		qdel(mind.objectives)
-		mind.special_role = null
-
-	clear_antag_roles(mind)
-
+	if(mind)
+		if(mind.assigned_job)
+			mind.assigned_job.clear_slot()
+		if(mind.objectives.len)
+			qdel(mind.objectives)
+			mind.special_role = null
+		clear_antag_roles(mind)
 	ghostize(0)
 	qdel(src)
 
 /mob/living/silicon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(affect_silicon)
 		return ..()
+
+/mob/living/silicon/seizure()
+	flash_eyes(affect_silicon = TRUE)

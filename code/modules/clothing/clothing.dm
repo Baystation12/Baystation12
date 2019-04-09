@@ -234,9 +234,10 @@ BLIND     // can't see anything
 	var/see_invisible = -1
 	var/light_protection = 0
 	sprite_sheets = list(
-		SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/onmob_eyes_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_eyes_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_eyes_unathi.dmi',
-		)
+	)
 
 /obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
 	if(item_state_slots && item_state_slots[slot])
@@ -266,9 +267,10 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
-	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI,SPECIES_VOX)
+	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI,SPECIES_VOX, SPECIES_VOX_ARMALIS)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_hands_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_hands_vox_armalis.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_hands_gas.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi',
 		)
@@ -383,6 +385,7 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_head_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_head_unathi.dmi',
 		)
 	blood_overlay_type = "helmetblood"
@@ -444,7 +447,7 @@ BLIND     // can't see anything
 	if(!Adjacent(user))
 		return 0
 	var/success
-	if(istype(user, /mob/living/silicon/robot/drone))
+	if(is_drone(user))
 		var/mob/living/silicon/robot/drone/D = user
 		if(D.hat)
 			success = 2
@@ -494,6 +497,7 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_mask_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_mask_unathi.dmi',
 		)
 
@@ -572,14 +576,16 @@ BLIND     // can't see anything
 	slot_flags = SLOT_FEET
 
 	var/can_hold_knife
+	var/image/knife_overlay
 	var/obj/item/holding
 
 	permeability_coefficient = 0.50
 	force = 2
 	var/overshoes = 0
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_VOX)
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_feet_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_feet_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi',
 		)
 	blood_overlay_type = "shoeblood"
@@ -600,7 +606,7 @@ BLIND     // can't see anything
 		holding = null
 		playsound(get_turf(src), 'sound/effects/holster/sheathout.ogg', 25)
 	else
-		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
+		to_chat(usr, "<span class='warning'>You need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)
 
 	if(!holding)
@@ -616,7 +622,12 @@ BLIND     // can't see anything
 	..()
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/butterfly, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/tacknife)))
+	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/knife)))
+		if(istype(I, /obj/item/weapon/material/knife/folding))
+			var/obj/item/weapon/material/knife/folding/W = I
+			if(W.open)
+				to_chat(user, "<span class='warning'>Close \the [W] first.</span>")
+				return
 		if(holding)
 			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
 			return
@@ -630,9 +641,13 @@ BLIND     // can't see anything
 		return ..()
 
 /obj/item/clothing/shoes/on_update_icon()
-	overlays.Cut()
+	if (knife_overlay == null)
+		knife_overlay = image(icon, "[icon_state]_knife")
+
 	if(holding)
-		overlays += image(icon, "[icon_state]_knife")
+		overlays |= knife_overlay
+	if(holding == null)
+		overlays -= knife_overlay
 	return ..()
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
@@ -659,6 +674,7 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_suit_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_suit_gas.dmi',
 		)
@@ -675,6 +691,9 @@ BLIND     // can't see anything
 	else
 		ret.icon_state = icon_state
 	return ret
+
+/obj/item/clothing/suit/handle_shield()
+	return FALSE
 
 /obj/item/clothing/suit/proc/get_collar()
 	var/icon/C = new('icons/mob/collar.dmi')
@@ -709,9 +728,10 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_under_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_under_vox_armalis.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_under_gas.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_unathi.dmi',
-		)
+	)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
@@ -953,75 +973,3 @@ BLIND     // can't see anything
 	gender = NEUTER
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	var/undergloves = 1
-
-// Clothing armour values.
-/obj/item/clothing
-	var/global/list/armour_to_descriptive_term = list(
-		"melee" = "blunt force",
-		"bullet" = "ballistics",
-		"laser" = "lasers",
-		"energy" = "energy",
-		"bomb" = "explosions",
-		"bio" = "biohazards",
-		"rad" = "radiation"
-		)
-
-/obj/item/clothing/examine(var/mob/user)
-	. = ..()
-	if(. && user)
-		var/list/armor_strings = list()
-		for(var/armor_type in armour_to_descriptive_term)
-			if(armor[armor_type])
-				switch(armor[armor_type])
-					if(1 to 20)
-						armor_strings += "It barely protects against [armour_to_descriptive_term[armor_type]]."
-					if(21 to 30)
-						armor_strings += "It provides a very small defense against [armour_to_descriptive_term[armor_type]]."
-					if(31 to 40)
-						armor_strings += "It offers a small amount of protection against [armour_to_descriptive_term[armor_type]]."
-					if(41 to 50)
-						armor_strings += "It offers a moderate defense against [armour_to_descriptive_term[armor_type]]."
-					if(51 to 60)
-						armor_strings += "It provides a strong defense against [armour_to_descriptive_term[armor_type]]."
-					if(61 to 70)
-						armor_strings += "It is very strong against [armour_to_descriptive_term[armor_type]]."
-					if(71 to 80)
-						armor_strings += "This gives a very robust defense against [armour_to_descriptive_term[armor_type]]."
-					if(81 to 99)
-						armor_strings += "Wearing this would make you nigh-invulerable against [armour_to_descriptive_term[armor_type]]."
-					if(100)
-						armor_strings += "You would be immune to [armour_to_descriptive_term[armor_type]] if you wore this."
-
-		if(item_flags & ITEM_FLAG_AIRTIGHT)
-			armor_strings += "It is airtight."
-
-		if(item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE)
-			armor_strings += "Wearing this will protect you from the vacuum of space."
-
-		if(item_flags & ITEM_FLAG_THICKMATERIAL)
-			armor_strings += "The material is exceptionally thick."
-
-		if(max_heat_protection_temperature >= FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
-			armor_strings += "You could probably safely skydive into the Sun wearing this."
-		else if(max_heat_protection_temperature >= SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
-			armor_strings += "It provides good protection against fire and heat."
-
-		if(!isnull(min_cold_protection_temperature) && min_cold_protection_temperature <= SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE)
-			armor_strings += "It provides very good protection against very cold temperatures."
-
-		var/list/covers = list()
-		var/list/slots = list()
-		for(var/name in string_part_flags)
-			if(body_parts_covered & string_part_flags[name])
-				covers += name
-		for(var/name in string_slot_flags)
-			if(slot_flags & string_slot_flags[name])
-				slots += name
-
-		if(covers.len)
-			armor_strings += "It covers the [english_list(covers)]."
-
-		if(slots.len)
-			armor_strings += "It can be worn on your [english_list(slots)]."
-
-		to_chat(user, jointext(armor_strings, "<br>"))

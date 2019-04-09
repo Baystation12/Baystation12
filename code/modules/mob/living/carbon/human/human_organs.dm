@@ -54,10 +54,20 @@
 					Stun(2)
 
 				//Moving makes open wounds get infected much faster
-				if (E.wounds.len)
-					for(var/datum/wound/W in E.wounds)
-						if (W.infection_check())
-							W.germ_level += 1
+				for(var/datum/wound/W in E.wounds)
+					if (W.infection_check())
+						W.germ_level += 1
+
+/mob/living/carbon/human/proc/Check_Proppable_Object()
+	for(var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
+		if(T.density)	//walls work
+			return 1
+
+	for(var/obj/O in orange(1, src))
+		if(O && O.density && O.anchored)
+			return 1
+
+	return 0
 
 /mob/living/carbon/human/proc/handle_stance()
 	// Don't need to process any of this if they aren't standing anyways
@@ -107,8 +117,32 @@
 	if (r_hand && istype(r_hand, /obj/item/weapon/cane))
 		stance_damage -= 2
 
+	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
+		var/working_pair = 2
+		if(!organs_by_name[BP_L_LEG] || !organs_by_name[BP_L_FOOT]) //are we down a limb?
+			working_pair -= 1
+		else if((!organs_by_name[BP_L_LEG].is_usable()) || (!organs_by_name[BP_L_FOOT].is_usable())) //if not, is it usable?
+			working_pair -= 1
+		if(!organs_by_name[BP_R_LEG] || !organs_by_name[BP_R_FOOT])
+			working_pair -= 1
+		else if((!organs_by_name[BP_R_LEG].is_usable()) || (!organs_by_name[BP_R_FOOT].is_usable()))
+			working_pair -= 1
+		if(working_pair >= 1)
+			stance_damage -= 1
+			if(Check_Proppable_Object()) //it helps to lean on something if you've got another leg to stand on
+				stance_damage -= 1
+
+	var/list/objects_to_sit_on = list(
+			/obj/item/weapon/stool,
+			/obj/structure/bed,
+		)
+
+	for(var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
+		if(locate(type) in src.loc)
+			return
+
 	// standing is poor
-	if(stance_damage >= 4 || (stance_damage >= 2 && prob(5)))
+	if(stance_damage >= 4 || (stance_damage >= 2 && prob(2)) || (stance_damage >= 3 && prob(8)))
 		if(!(lying || resting))
 			if(limb_pain)
 				emote("scream")

@@ -87,5 +87,5 @@
 	icon_state = "vox-scrap"
 	icon_state = "vox-scrap"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
-	species_restricted = list(SPECIES_VOX)
+	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
 	siemens_coefficient = 1 //Its literally metal

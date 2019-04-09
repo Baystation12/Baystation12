@@ -247,7 +247,24 @@ var/global/list/damage_icon_parts = list()
 		standing_image.overlays += DI
 
 	overlays_standing[HO_DAMAGE_LAYER]	= standing_image
+	update_bandages(update_icons)
+	if(update_icons)
+		queue_icon_update()
 
+/mob/living/carbon/human/proc/update_bandages(var/update_icons=1)
+	var/bandage_icon = species.bandages_icon
+	if(!bandage_icon)
+		return
+	var/image/standing_image = overlays_standing[HO_DAMAGE_LAYER]
+	if(standing_image)
+		for(var/obj/item/organ/external/O in organs)
+			if(O.is_stump())
+				continue
+			var/bandage_level = O.bandage_level()
+			if(bandage_level)
+				standing_image.overlays += image(bandage_icon, "[O.icon_name][bandage_level]")
+
+		overlays_standing[HO_DAMAGE_LAYER]	= standing_image
 	if(update_icons)
 		queue_icon_update()
 
@@ -781,9 +798,32 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_SURGERY_LAYER] = null
 	var/image/total = new
 	for(var/obj/item/organ/external/E in organs)
-		if(!BP_IS_ROBOTIC(E) && E.how_open())
-			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.icon_name][round(E.how_open())]", "layer"=-HO_SURGERY_LAYER)
-			total.overlays += I
+		if(BP_IS_ROBOTIC(E) || E.is_stump())
+			continue
+		var/how_open = round(E.how_open())
+		if(how_open <= 0)
+			continue
+		var/surgery_icon = E.species.get_surgery_overlay_icon(src)
+		if(!surgery_icon)
+			continue
+		var/list/surgery_states = icon_states(surgery_icon)
+		var/base_state = "[E.icon_name][how_open]"
+		var/overlay_state = "[base_state]-flesh"
+		var/list/overlays_to_add
+		if(overlay_state in surgery_states)
+			var/image/flesh = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
+			flesh.color = E.species.get_flesh_colour(src)
+			LAZYADD(overlays_to_add, flesh)
+		overlay_state = "[base_state]-blood"
+		if(overlay_state in surgery_states)
+			var/image/blood = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
+			blood.color = E.species.get_blood_colour(src)
+			LAZYADD(overlays_to_add, blood)
+		overlay_state = "[base_state]-bones"
+		if(overlay_state in surgery_states)
+			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
+		total.overlays |= overlays_to_add
+
 	total.appearance_flags = RESET_COLOR
 	overlays_standing[HO_SURGERY_LAYER] = total
 	if(update_icons)

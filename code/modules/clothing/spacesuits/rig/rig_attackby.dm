@@ -20,7 +20,7 @@
 			to_chat(user, "<span class='danger'>It looks like the locking system has been shorted out.</span>")
 			return
 
-		if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
+		if(!length(req_access))
 			locked = 0
 			to_chat(user, "<span class='danger'>\The [src] doesn't seem to have a locking mechanism.</span>")
 			return
@@ -203,7 +203,6 @@
 /obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
 		req_access.Cut()
-		req_one_access.Cut()
 		locked = 0
 		subverted = 1
 		to_chat(user, "<span class='danger'>You short out the access protocol for the suit.</span>")

@@ -2,13 +2,10 @@
 // Mapping location doesn't matter, so long as on a map loaded at the same time as the shuttle areas.
 // Multiz shuttles currently not supported. Non-autodock shuttles currently not supported.
 
-#define SHIP_STATUS_LANDED   1
-#define SHIP_STATUS_TRANSIT  2
-#define SHIP_STATUS_OVERMAP  3
-
 /obj/effect/overmap/ship/landable
 	var/shuttle                                         // Name of assotiated shuttle. Must be autodock.
 	var/obj/effect/shuttle_landmark/ship/landmark       // Record our open space landmark for easy reference.
+	var/multiz = 0										// Index of multi-z levels, starts at 0
 	var/status = SHIP_STATUS_LANDED
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
@@ -37,12 +34,26 @@
 
 // We autobuild our z levels.
 /obj/effect/overmap/ship/landable/find_z_levels()
-	world.maxz++
-	map_z += world.maxz
-	// Not really the center, but rather where the shuttle landmark should be
-	var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
-	landmark = new (center_loc, shuttle)
-	add_landmark(landmark, shuttle)
+	for(var/i = 0 to multiz)
+		world.maxz++
+		map_z += world.maxz
+		// Autobuild carpspawns for shuttles, it boxes them in
+		for(var/x = round(world.maxx/2) - 12, x <= round(world.maxx/2) + 12, x+= 12)
+			for(var/y = round(world.maxy/2) - 18, y <= round(world.maxy/2) + 18, y+= 18)
+				if(x == round(world.maxx/2) && y == round(world.maxy/2))//Skips the center spawn
+					continue
+				new /obj/effect/landmark/carpspawn(locate(x + rand(-2, 2), y + rand(-4, 4), world.maxz))//not too far, not too close
+		// Not really the center, but rather where the shuttle landmark should be
+		if(i == multiz)
+			var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
+			landmark = new (center_loc, shuttle)
+			add_landmark(landmark, shuttle)
+			if(multiz)
+				new /obj/effect/landmark/map_data(center_loc, (multiz + 1))
+
+/obj/effect/landmark/carpspawn
+	name ="carpspawn"
+	movable_flags = MOVABLE_FLAG_DEL_SHUTTLE
 
 /obj/effect/overmap/ship/landable/get_areas()
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
@@ -88,6 +99,12 @@
 
 /obj/effect/overmap/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
 	var/obj/effect/overmap/target = map_sectors["[into.z]"]
+	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
+	if(into.landmark_tag == shuttle_datum.motherdock) // If our motherdock is a landable ship, it won't be found properly here so we need to find it manually.
+		for(var/obj/effect/overmap/ship/landable/landable in SSshuttle.ships)
+			if(landable.shuttle == shuttle_datum.mothershuttle)
+				target = landable
+				break
 	if(!target || target == src)
 		return
 	forceMove(target)
@@ -111,7 +128,3 @@
 			return "Maneuvering under secondary thrust."
 		if(SHIP_STATUS_OVERMAP)
 			return "In open space."
-
-#undef SHIP_STATUS_LANDED
-#undef SHIP_STATUS_TRANSIT
-#undef SHIP_STATUS_OVERMAP

@@ -61,6 +61,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/screen = 1.0	//Which screen is currently showing.
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
+	var/can_analyze = TRUE //If the console is allowed to use destructive analyzers
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
@@ -69,8 +70,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	switch(return_name)
 		if(MATERIAL_STEEL)
 			return_name = "Steel"
+		if(MATERIAL_ALUMINIUM)
+			return_name = "Aluminium"
 		if(MATERIAL_GLASS)
 			return_name = "Glass"
+		if(MATERIAL_PLASTIC)
+			return_name = "Plastic"
 		if(MATERIAL_GOLD)
 			return_name = "Gold"
 		if(MATERIAL_SILVER)
@@ -91,7 +96,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	for(var/obj/machinery/r_n_d/D in range(4, src))
 		if(D.linked_console != null || D.panel_open)
 			continue
-		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer))
+		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer) && can_analyze == TRUE) // Only science R&D consoles can do research
 			if(linked_destroy == null)
 				linked_destroy = D
 				D.linked_console = src
@@ -428,7 +433,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
 			PR.name = "fabricator report"
 			PR.info = "<center><b>[station_name()] Fabricator Laboratory</b>"
-			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Fabricator Status Report</h2>"
+			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : null ] Fabricator Status Report</h2>"
 			PR.info += "<i>report prepared at [stationtime2text()] local time</i></center><br>"
 			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
@@ -671,7 +676,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_destroy)
 				dat += "<LI>Destructive Analyzer <A href='?src=\ref[src];disconnect=destroy'>(Disconnect)</A>"
 			else
-				dat += "<LI>(No Destructive Analyzer Linked)"
+				if (can_analyze == TRUE) 
+					dat += "<LI>(No Destructive Analyzer Linked)"
 			if(linked_lathe)
 				dat += "<LI>Protolathe <A href='?src=\ref[src];disconnect=lathe'>(Disconnect)</A>"
 			else
@@ -880,10 +886,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	name = "robotics fabrication console"
 	id = 2
 	req_access = list(access_robotics)
+	can_analyze = FALSE
 
 /obj/machinery/computer/rdconsole/core
 	name = "core fabricator console"
 	id = 1
+	
 
 #undef CHECK_LATHE
 #undef CHECK_IMPRINTER

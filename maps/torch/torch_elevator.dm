@@ -16,7 +16,7 @@
 
 /obj/machinery/computer/shuttle_control/lift/cargo
 	name = "cargo lift controls"
-	shuttle_tag = "Cargo Lift"
+	shuttle_tag = "Primary Cargo Lift"
 	ui_template = "shuttle_control_console_lift.tmpl"
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
@@ -33,7 +33,7 @@
 	density = 0
 
 /datum/shuttle/autodock/ferry/cargo_lift
-	name = "Cargo Lift"
+	name = "Primary Cargo Lift"
 	shuttle_area = /area/turbolift/cargo_lift
 	warmup_time = 3
 	waypoint_station = "nav_cargo_lift_top"

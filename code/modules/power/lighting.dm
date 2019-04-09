@@ -227,7 +227,7 @@
 			on = 0
 
 	if(istype(lightbulb, /obj/item/weapon/light/))
-		var/image.I = image(icon, src, _state)
+		var/image/I = image(icon, src, _state)
 		I.color = lightbulb.b_colour
 		overlays += I
 
@@ -581,7 +581,7 @@
 	icon_state = "ltube"
 	base_state = "ltube"
 	item_state = "c_tube"
-	matter = list(MATERIAL_GLASS = 100)
+	matter = list(MATERIAL_GLASS = 100, MATERIAL_ALUMINIUM = 20)
 
 	b_outer_range = 5
 	b_colour = "#fffee0"

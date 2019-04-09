@@ -1,8 +1,35 @@
+/datum/stack_recipe/rod
+	title = "rod"
+	result_type = /obj/item/stack/material/rods
+	res_amount = 2
+	max_res_amount = 60
+	send_material_data = 1
+	time = 5
+	difficulty = 1
+
+/datum/stack_recipe/rod/spawn_result(user, location, amount)
+	var/obj/item/stack/S = new result_type(location, amount, use_material)
+	S.add_to_stacks(user, 1)
+	return S
+
+// Tiles 
 /datum/stack_recipe/tile
 	res_amount = 4
 	max_res_amount = 20
 	time = 5
 	difficulty = 1
+	apply_material_name = FALSE
+
+/datum/stack_recipe/tile/nullglass
+	title = "nullglass floor tile"
+	result_type = /obj/item/stack/tile/floor_nullglass
+
+/datum/stack_recipe/tile/spawn_result(user, location, amount)
+	var/obj/item/stack/S = ..()
+	if(istype(S))
+		S.amount = amount
+		S.add_to_stacks(user, 1)
+	return S
 
 /datum/stack_recipe/tile/metal/floor
 	title = "regular floor tile"
@@ -52,19 +79,19 @@
 	title = "wood floor tile"
 	result_type = /obj/item/stack/tile/wood
 
-/datum/stack_recipe/rod
-	title = "rod"
-	result_type = /obj/item/stack/material/rods
-	res_amount = 2
-	max_res_amount = 60
-	send_material_data = 1
-	time = 5
-	difficulty = 1
+/datum/stack_recipe/tile/mahogany
+	title = "mahogany floor tile"
+	result_type = /obj/item/stack/tile/mahogany
 
-/datum/stack_recipe/rod/spawn_result(user, location, amount)
-	if(send_material_data && use_material)
-		. = new result_type(location, amount, use_material)
-	else
-		. = new result_type(location)
-	var/obj/item/stack/S = .
-	S.add_to_stacks(user, 1)
+/datum/stack_recipe/tile/maple
+	title = "maple floor tile"
+	result_type = /obj/item/stack/tile/maple
+
+/datum/stack_recipe/tile/ebony
+	title = "ebony floor tile"
+	difficulty = 3
+	result_type = /obj/item/stack/tile/ebony
+
+/datum/stack_recipe/tile/walnut
+	title = "walnut floor tile"
+	result_type = /obj/item/stack/tile/walnut

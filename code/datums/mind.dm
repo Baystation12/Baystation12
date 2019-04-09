@@ -164,45 +164,65 @@
 
 /datum/mind/Topic(href, href_list)
 
-	if(check_rights(R_ADMIN) || usr == current)
+	var/is_admin =   FALSE
+	var/can_modify = FALSE
+	is_admin = check_rights(R_ADMIN, FALSE)
+	can_modify = is_admin
 
-		if(href_list["add_goal"])
-			log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
+	if(href_list["add_goal"])
+
+		var/mob/caller = locate(href_list["add_goal_caller"])
+		if(caller && caller == current) can_modify = TRUE
+
+		if(can_modify)
+			if(is_admin)
+				log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
 			to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
 			generate_goals(assigned_job, TRUE, 1)
-			. = TRUE
+		return TRUE // To avoid 'you are not an admin' spam.
 
-		if(href_list["abandon_goal"])
-			var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
-			if(goal)
-				if(usr == current)
-					to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				else
-					to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
-					to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				qdel(goal)
-			. = TRUE
+	if(href_list["abandon_goal"])
+		var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
 
-		if(href_list["reroll_goal"])
-			var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
-			if(goal)
-				qdel(goal)
-				generate_goals(assigned_job, TRUE, 1)
+		var/mob/caller = locate(href_list["abandon_goal_caller"])
+		if(caller && caller == current) can_modify = TRUE
+
+		if(goal && can_modify)
+			if(usr == current)
+				to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			else
+				to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
+			qdel(goal)
+		return TRUE
+
+	if(href_list["reroll_goal"])
+		var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
+
+		var/mob/caller = locate(href_list["reroll_goal_caller"])
+		if(caller && caller == current) can_modify = TRUE
+
+		if(goal && (goal in goals) && can_modify)
+			qdel(goal) 
+			generate_goals(assigned_job, TRUE, 1)
+			if(goals)
 				goal = goals[LAZYLEN(goals)]
 				if(usr == current)
 					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 				else
 					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-			. = TRUE
+		return TRUE
 
-		if(.)
+	if(!is_admin) return
+
+	if(current && isliving(current))
+		if(href_list["set_psi_faculty"] && href_list["set_psi_faculty_rank"])
+			current.set_psi_rank(href_list["set_psi_faculty"], text2num(href_list["set_psi_faculty_rank"]))
+			log_and_message_admins("set [key_name(current)]'s [href_list["set_psi_faculty"]] faculty to [text2num(href_list["set_psi_faculty_rank"])].")
 			var/datum/admins/admin = GLOB.admins[usr.key]
-			if(istype(admin))
-				admin.show_player_panel(current)
-			return
-
-	if(!check_rights(R_ADMIN))	return
+			if(istype(admin)) admin.show_player_panel(current)
+			return TRUE
 
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["add_antagonist"]]
@@ -229,9 +249,9 @@
 		if(antag) antag.place_mob(src.current)
 
 	else if (href_list["role_edit"])
-		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in job_master.occupations_by_title
+		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in SSjobs.titles_to_datums
 		if (!new_role) return
-		var/datum/job/job = job_master.occupations_by_title[new_role]
+		var/datum/job/job = SSjobs.get_by_title(new_role)
 		if(job)
 			assigned_job = job
 			assigned_role = job.title
@@ -562,7 +582,8 @@
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
 	..()
-	if(!mind.assigned_role)	mind.assigned_role = "Assistant"	//defualt
+	if(!mind.assigned_role)
+		mind.assigned_role = GLOB.using_map.default_assistant_title
 
 //slime
 /mob/living/carbon/slime/mind_initialize()

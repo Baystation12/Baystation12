@@ -955,8 +955,7 @@
 /area/constructionsite/hallway/fore)
 "cZ" = (
 /obj/machinery/door/airlock/glass/command{
-	name = "Bridge";
-	req_access = list(19)
+	name = "Bridge"
 	},
 /obj/machinery/door/blast/regular,
 /turf/simulated/floor/tiled/dark/airless,
@@ -1121,22 +1120,19 @@
 /area/constructionsite/hallway/fore)
 "dG" = (
 /obj/machinery/door/airlock/glass/command{
-	name = "Bridge";
-	req_access = list(19)
+	name = "Bridge"
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dH" = (
 /obj/machinery/door/airlock/glass/command{
-	name = "Bridge";
-	req_access = list(19)
+	name = "Bridge"
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "dI" = (
 /obj/machinery/door/airlock/glass{
-	name = "Kitchen";
-	req_access = list(28)
+	name = "Kitchen"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
@@ -1482,7 +1478,7 @@
 	master_tag = "constructionsite_airlock";
 	pixel_x = 20;
 	pixel_y = 0;
-	req_access = list(10)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
@@ -1494,7 +1490,7 @@
 	master_tag = "constructionsite_airlock";
 	pixel_x = -20;
 	pixel_y = 0;
-	req_access = list(10)
+	req_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -1548,8 +1544,7 @@
 	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_outer";
-	locked = 1;
-	req_access = list(10)
+	locked = 1
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1569,8 +1564,7 @@
 	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
-	locked = 1;
-	req_access = list(10)
+	locked = 1
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1614,7 +1608,7 @@
 	id_tag = "constructionsite_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
-	req_access = list(10);
+	req_access = newlist();
 	tag_airpump = "constructionsite_vent";
 	tag_chamber_sensor = "constructionsite_sensor";
 	tag_exterior_door = "constructionsite_outer";
@@ -1649,8 +1643,7 @@
 	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
-	locked = 1;
-	req_access = list(10)
+	locked = 1
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1988,8 +1981,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
 	locked = 0;
-	name = "AI Upload Access";
-	req_access = list(16)
+	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/hallway/fore)
@@ -2022,8 +2014,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
 	locked = 0;
-	name = "AI Upload";
-	req_access = list(16)
+	name = "AI Upload"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/ai)
@@ -2091,15 +2082,13 @@
 /area/constructionsite/maintenance)
 "gB" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Messaging Server";
-	req_access = list(30)
+	name = "Messaging Server"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "gC" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Messaging Server";
-	req_access = list(30)
+	name = "Messaging Server"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/ai)
@@ -2114,8 +2103,7 @@
 /area/constructionsite/ai)
 "gE" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Cyborg Station";
-	req_access = list(16)
+	name = "Cyborg Station"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/ai)
@@ -2133,8 +2121,7 @@
 /area/constructionsite/ai)
 "gH" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Cyborg Station";
-	req_access = list(16)
+	name = "Cyborg Station"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/hallway/fore)
@@ -2213,8 +2200,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
 	locked = 0;
-	name = "AI Upload Access";
-	req_access = list(16)
+	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/hallway/aft)
@@ -2366,8 +2352,7 @@
 /area/constructionsite/medical)
 "hD" = (
 /obj/machinery/door/airlock/glass/medical{
-	name = "Medbay";
-	req_one_access = list(65,5)
+	name = "Medbay"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
@@ -2508,15 +2493,13 @@
 /area/constructionsite/medical)
 "ii" = (
 /obj/machinery/door/airlock/glass/medical{
-	name = "Medbay Storage";
-	req_one_access = list(65,5)
+	name = "Medbay Storage"
 	},
 /turf/simulated/wall,
 /area/constructionsite/hallway/aft)
 "ij" = (
 /obj/machinery/door/airlock/glass/atmos{
-	name = "Atmospherics";
-	req_access = list(24)
+	name = "Atmospherics"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
@@ -2558,10 +2541,6 @@
 /obj/random/medical/lite,
 /turf/space,
 /area/constructionsite/medical)
-"is" = (
-/obj/structure/girder,
-/turf/simulated/floor/airless,
-/area/constructionsite/hallway/aft)
 "it" = (
 /obj/effect/shuttle_landmark/derelict/nav5,
 /turf/space,
@@ -2690,8 +2669,7 @@
 /area/constructionsite/atmospherics)
 "iJ" = (
 /obj/machinery/door/airlock/glass/medical{
-	name = "Medbay";
-	req_one_access = list(65,5)
+	name = "Medbay"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
@@ -2986,12 +2964,7 @@
 	},
 /area/constructionsite)
 "jE" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
-	name = "Wardrobe"
-	},
+/obj/structure/closet/cabinet,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jF" = (
@@ -3216,8 +3189,7 @@
 /area/constructionsite/engineering)
 "kA" = (
 /obj/machinery/door/airlock/glass/engineering{
-	name = "Engine Access";
-	req_access = list(11)
+	name = "Engine Access"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3399,8 +3371,7 @@
 /area/space)
 "lo" = (
 /obj/machinery/door/airlock/glass/engineering{
-	name = "SMES";
-	req_access = list(11)
+	name = "SMES"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -23011,7 +22982,7 @@ ii
 gS
 gS
 gO
-is
+hA
 gO
 gQ
 gQ
@@ -25436,7 +25407,7 @@ hP
 hP
 hr
 hr
-hr
+iu
 hs
 hr
 hr

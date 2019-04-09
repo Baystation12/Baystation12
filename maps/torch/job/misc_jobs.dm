@@ -7,9 +7,15 @@ Synthetic
 	spawn_positions = 3
 	supervisors = "your laws"
 	minimal_player_age = 3
+	allowed_ranks = list(
+		/datum/mil_rank/civ/synthetic
+	)
 
 /datum/job/ai
 	minimal_player_age = 7
+	allowed_ranks = list(
+		/datum/mil_rank/civ/synthetic
+	)
 
 /*******
 Civilian
@@ -20,7 +26,6 @@ Civilian
 	total_positions = 12
 	spawn_positions = 12
 	supervisors = "the Executive Officer"
-	selection_color = "#515151"
 	economic_power = 6
 	announced = FALSE
 	alt_titles = list(
@@ -49,13 +54,18 @@ Civilian
 	spawn_positions = 2
 	availablity_chance = 30
 	supervisors = "the invisible hand of the market"
-	selection_color = "#515151"
 	ideal_character_age = 30
 	minimal_player_age = 0
 	create_record = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/merchant
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/alien
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/civ,
+		/datum/mil_rank/alien
+	)
 	latejoin_at_spawnpoints = 1
 	access = list(access_merchant)
 	announced = FALSE
@@ -73,13 +83,18 @@ Civilian
 	spawn_positions = 1
 	availablity_chance = 20
 	supervisors = "yourself"
-	selection_color = "#515151"
 	ideal_character_age = 30
 	minimal_player_age = 0
 	create_record = 0
 	account_allowed = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/stowaway
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/alien
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/civ,
+		/datum/mil_rank/alien
+	)
 	latejoin_at_spawnpoints = 1
 	announced = FALSE

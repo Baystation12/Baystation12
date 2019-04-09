@@ -4,6 +4,7 @@
 	icon_state = "red"
 	slot = ACCESSORY_SLOT_ARMBAND
 	species_restricted = null
+	on_rolled = list("down" = "none")
 	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/onmob_accessories_gas.dmi')
 
 /obj/item/clothing/accessory/armband/cargo

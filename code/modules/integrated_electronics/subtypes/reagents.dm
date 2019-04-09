@@ -305,7 +305,7 @@
 		"volume used" = IC_PINTYPE_NUMBER,
 		"self reference" = IC_PINTYPE_REF
 		)
-	activators = list("push ref" = IC_PINTYPE_PULSE_OUT)
+	activators = list("push ref" = IC_PINTYPE_PULSE_IN)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 
@@ -374,12 +374,18 @@
 		activate_pin(3)
 		return FALSE
 	var/obj/item/I = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
+
+	if(isnull(I))
+		return FALSE
+
 	if(!I.reagents || !I.reagents.total_volume)
 		activate_pin(3)
 		return FALSE
+	
 	I.reagents.trans_to(src,I.reagents.total_volume)
 	if(!I.reagents.total_volume)
 		qdel(I)
+
 	activate_pin(2)
 	return FALSE
 

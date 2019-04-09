@@ -49,14 +49,15 @@ var/global/list/sparring_attack_cache = list()
 /datum/unarmed_attack/proc/get_unarmed_damage()
 	return damage
 
-/datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
+/datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
 
 	if(target.stat == DEAD)
 		return
 
 	var/stun_chance = rand(0, 100)
+	var/armour = target.get_blocked_ratio(zone, BRUTE)
 
-	if(attack_damage >= 5 && armour < 100 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
+	if(attack_damage >= 5 && armour < 1 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit
 			if(BP_HEAD, BP_EYES, BP_MOUTH)
 				// Induce blurriness
@@ -89,12 +90,12 @@ var/global/list/sparring_attack_cache = list()
 				if(!target.lying)
 					target.visible_message("<span class='warning'>[target] gives way slightly.</span>")
 					target.apply_effect(attack_damage*3, PAIN, armour)
-	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 100) // Chance to get the usual throwdown as well (25% standard chance)
+	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 1) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
 			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
 		else
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
-		target.apply_effect(3, WEAKEN, armour)
+		target.apply_effect(3, WEAKEN, armour * 100)
 
 	var/obj/item/clothing/C = target.get_covering_equipped_item_by_zone(zone)
 	if(istype(C) && prob(10))

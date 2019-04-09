@@ -79,7 +79,7 @@
 	info = {"
 	<tt><center><b><font color='red'>CONFIDENTIAL: UPPER MANAGEMENT ONLY</font></b>
 	<h3>CORPORATE RESEARCH DIVISION</h3>
-	<img src = torchltd.png>
+	<img src = exologo.png>
 	</center>
 	<b>FROM:</b> Hieronimus Blackstone, Overseer of Torch Cooperation Project<br>
 	<b>TO:</b> Chief Science Officer of SEV Torch branch<br>
@@ -166,7 +166,7 @@
 	The signal to initiate the procedure are codewords 'GOOD NIGHT WORLD' used in this order as one phrase. You do not need to send acknowledgement.
 	<li>Information about this expedition's findings is to be treated as secret and vital to SCG's national security, and is protected under codeword UMBRA. Only SCG government employees and Skrell citizens aboard the SEV Torch are allowed access to this information on a need-to-know basis.</li>
 	<li>The secrecy of this information is to be applied retroactively. Any non-cleared personnel who were exposed to such information are to be secured and transferred to DIA on arrival at home port.</li>
-	<li>Any devices capable of transmitting data on interstellar range are to be confiscated from private possession.</li>
+	<li>Any devices capable of transmitting or receiving data at interstellar range are to be confiscated from private possession.</li>
 	<li>Disregard any systems remaining in your flight plan and set course for Sol, Neptune orbit. You will be contacted upon your arrival. Do not make stops in ports on the way unless absolutely necessary.</li>
 	<br>
 	While drastic, I assure you this is a simple precaution, lest any issues. Just keep the option open, and carry on with your normal duties.

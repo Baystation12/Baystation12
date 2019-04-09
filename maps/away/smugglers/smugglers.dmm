@@ -31,11 +31,11 @@
 /turf/simulated/floor/asteroid,
 /area/space)
 "aj" = (
-/obj/item/ammo_casing/a50{
+/obj/item/ammo_casing/pistol/magnum{
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /obj/item/weapon/shovel{
 	pixel_x = 10;
 	pixel_y = -5
@@ -127,7 +127,7 @@
 	name = "interior access button";
 	pixel_x = 28;
 	pixel_y = 24;
-	req_one_access = list(13)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 5
@@ -275,7 +275,7 @@
 	name = "interior access button";
 	pixel_x = -28;
 	pixel_y = 24;
-	req_one_access = list(13)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
