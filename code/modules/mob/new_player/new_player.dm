@@ -565,3 +565,12 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/say(var/message)
 	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
+
+/mob/new_player/verb/next_lobby_track()
+	set name = "Play Different Lobby Track"
+	set category = "OOC"
+
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
+		return
+	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	new_track.play_to(src)
