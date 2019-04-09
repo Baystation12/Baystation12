@@ -6,6 +6,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter
 	name = "circuit imprinter"
+	desc = "Accessed by a connected core fabricator console, it produces circuits from various materials and sulphuric acid."
 	icon_state = "circuit_imprinter"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/list/datum/design/queue = list()
