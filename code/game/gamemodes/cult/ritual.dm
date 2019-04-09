@@ -145,8 +145,11 @@ var/list/Tier1Runes = list(
 	/mob/proc/wall_rune,
 	/mob/proc/ajorney_rune,
 	/mob/proc/defile_rune,
+	/mob/proc/stun_imbue,
 	/mob/proc/emp_imbue,
-	/mob/proc/cult_communicate
+	/mob/proc/cult_communicate,
+	/mob/proc/obscure,
+	/mob/proc/reveal
 	)
 
 var/list/Tier2Runes = list(
@@ -273,6 +276,12 @@ var/list/Tier4Runes = list(
 
 	make_rune(/obj/effect/rune/tearreality, cost = 50, tome_required = 1)
 
+/mob/proc/stun_imbue()
+	set category = "Cult Magic"
+	set name = "Imbue: Stun"
+
+	make_rune(/obj/effect/rune/imbue/stun, cost = 20, tome_required = 1)
+
 /mob/proc/emp_imbue()
 	set category = "Cult Magic"
 	set name = "Imbue: EMP"
@@ -313,3 +322,15 @@ var/list/Tier4Runes = list(
 
 /mob/living/carbon/human/message_cult_communicate()
 	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")
+
+/mob/proc/obscure()
+	set category = "Cult Magic"
+	set name = "Rune: Obscure"
+
+	make_rune(/obj/effect/rune/obscure)
+
+/mob/proc/reveal()
+	set category = "Cult Magic"
+	set name = "Rune: Reveal"
+
+	make_rune(/obj/effect/rune/reveal)
