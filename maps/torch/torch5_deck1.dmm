@@ -23781,7 +23781,7 @@
 "lwb" = (
 /obj/structure/table/steel,
 /obj/machinery/button/remote/blast_door{
-	id = "concheckwindow";
+	id = "d1ladderwindow";
 	name = "Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = 6
