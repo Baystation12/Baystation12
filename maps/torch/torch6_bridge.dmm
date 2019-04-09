@@ -1857,7 +1857,7 @@
 	dir = 2;
 	icon_state = "shutter0";
 	id = "hop_office_desk";
-	name = "HoP Office Privacy Shutters";
+	name = "XO Office Privacy Shutters";
 	opacity = 0
 	},
 /obj/item/weapon/material/bell,
@@ -2259,7 +2259,7 @@
 	dir = 2;
 	icon_state = "shutter0";
 	id = "hop_office_desk";
-	name = "HoP Office Privacy Shutters";
+	name = "XO Office Privacy Shutters";
 	opacity = 0
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -14093,7 +14093,7 @@
 	dir = 2;
 	icon_state = "shutter0";
 	id = "hop_office_desk";
-	name = "HoP Office Privacy Shutters";
+	name = "XO Office Privacy Shutters";
 	opacity = 0
 	},
 /obj/effect/floor_decal/industrial/loading{
