@@ -27,3 +27,11 @@
 			params["trg_char"] = target.mob.real_name || target.mob.name
 		spawn(-1)
 			world.Export("[config.discord_bot_address]/ahelp?[list2params(params)]")
+
+//Message the general channel on server startup
+/hook/startup/proc/notifyDiscord()
+	if(config.server)
+		message2discord("general", "A new round is starting! Join at: [config.server]")
+	else
+		message2discord("general", "A new round is starting!")
+	return 1
