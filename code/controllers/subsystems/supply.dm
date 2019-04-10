@@ -202,7 +202,7 @@ SUBSYSTEM_DEF(supply)
 	if(!clear_turfs.len)
 		return FALSE
 
-	var/turf/pickedloc = pick_n_take(clear_turfs)
+	var/turf/pickedloc = pick(clear_turfs)
 
 	A.forceMove(pickedloc)
 

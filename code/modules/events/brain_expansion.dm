@@ -7,7 +7,7 @@
 
 /datum/event/brain_expansion
 	startWhen	= 0
-	endWhen		= 100
+	endWhen		= 150
 
 /datum/event/brain_expansion/announce()
 	command_announcement.Announce("Anomalous efficiency rates detected in destructive analysis neural networks. Analysis results may be impacted.", "Neural Network Monitor", zlevels = affecting_z)

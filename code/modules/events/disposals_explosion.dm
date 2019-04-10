@@ -10,29 +10,30 @@
 	var/obj/structure/disposalpipe/segment/bursting_pipe = null
 
 // Predicates for the pick_area and pick_area_turf proc
-/datum/event/disposals_explosion/proc/area_has_disposals_pipe(var/area/A)
+/proc/area_has_disposals_pipe(var/area/A)
 	for(var/turf/T in A)
-		if(call(/datum/event/disposals_explosion/proc/has_disposals_pipe)(T))
+		if(has_disposals_pipe(T))
 			return TRUE
 	return FALSE
 
-/datum/event/disposals_explosion/proc/has_disposals_pipe(var/turf/T)
+/proc/has_disposals_pipe(var/turf/T)
 	for(var/atom/A in T)
 		if(istype(A, /obj/structure/disposalpipe/segment))
 			return TRUE
 	return FALSE
 
+// Event listener for the marked pipe's destruction
+/datum/event/disposals_explosion/proc/pipe_destroyed()
+	GLOB.destroyed_event.unregister(bursting_pipe, src, .proc/pipe_destroyed)
+
+	bursting_pipe = null
+	kill()
+
 /datum/event/disposals_explosion/setup()
-	var/list/predicates = GLOB.is_station_but_not_maint_area
-	predicates.Add(/datum/event/disposals_explosion/proc/area_has_disposals_pipe)
+	var/list/area_predicates = GLOB.is_station_but_not_maint_area.Copy()
+	area_predicates += /proc/area_has_disposals_pipe
 
-	var/area/chosen_area = pick_area(predicates)
-	if(!chosen_area)
-		log_debug("Couldn't find a place to start disposals damage. Aborting.")
-		kill()
-		return
-
-	var/turf/containing_turf = pick_area_turf(chosen_area.type, list(/datum/event/disposals_explosion/proc/has_disposals_pipe))
+	var/turf/containing_turf = pick_area_and_turf(area_predicates, list(/proc/has_disposals_pipe))
 	if(isnull(containing_turf))
 		log_debug("Couldn't find a turf containing a disposals pipe. Aborting.")
 		kill()
@@ -41,6 +42,8 @@
 	for(var/atom/A in containing_turf)
 		if(istype(A, /obj/structure/disposalpipe/segment))
 			bursting_pipe = A
+			// Subscribe to pipe destruction facts
+			GLOB.destroyed_event.register(A, src, .proc/pipe_destroyed)
 			break
 
 	if(isnull(bursting_pipe))
@@ -66,6 +69,8 @@
 /datum/event/disposals_explosion/end()
 	if(isnull(bursting_pipe))
 		return
+
+	GLOB.destroyed_event.unregister(bursting_pipe, src, .proc/pipe_destroyed)
 
 	if(bursting_pipe.health < 5)
 		// Make a disposals holder for the trash
