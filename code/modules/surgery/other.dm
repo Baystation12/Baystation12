@@ -62,6 +62,7 @@
 	max_duration = 90
 	shock_level = 40
 	delicate = 1
+	strict_access_requirement = FALSE
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_RETRACTED
 
 /decl/surgery_step/fix_vein/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
