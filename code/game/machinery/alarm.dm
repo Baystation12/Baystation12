@@ -159,7 +159,8 @@
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
-	handle_heating_cooling(environment)
+	if(environment.return_pressure() > ONE_ATMOSPHERE*0.05)
+		handle_heating_cooling(environment)
 
 	var/old_level = danger_level
 	var/old_pressurelevel = pressure_dangerlevel
