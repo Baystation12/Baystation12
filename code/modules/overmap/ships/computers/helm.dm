@@ -102,12 +102,18 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["d_x"] = dx
 		data["d_y"] = dy
 		data["speedlimit"] = speedlimit ? speedlimit*1000 : "None"
-		data["speed"] = round(linked.get_speed()*1000, 0.01)
 		data["accel"] = round(linked.get_acceleration()*1000, 0.01)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
 		data["manual_control"] = manual_control
 		data["canburn"] = linked.can_burn()
+
+		var/speed = round(linked.get_speed()*1000, 0.01)
+		if(linked.get_speed() < SHIP_SPEED_SLOW)
+			speed = "<span class='good'>[speed]</span>"
+		if(linked.get_speed() > SHIP_SPEED_FAST)
+			speed = "<span class='average'>[speed]</span>"
+		data["speed"] = speed
 
 		if(linked.get_speed())
 			data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
