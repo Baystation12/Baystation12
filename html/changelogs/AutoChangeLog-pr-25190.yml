@@ -1,0 +1,5 @@
+author: "BiscuitCookie"
+delete-after: True
+changes: 
+  - maptweak: "Renamed the HoP Office Privacy Shutters to XO Office Privacy Shutters"
+  - bugfix: "Removed objects outside the ship that didn't belong there."
