@@ -1017,6 +1017,10 @@
 /area/hydroponics/storage
 	name = "\improper Hydroponics Storage"
 
+/area/crew_quarters/smokingparlour
+	name = "\improper Smoking Parlour"
+	icon_state = "bar"
+
 // Tcomms
 /area/tcommsat/storage
 	name = "\improper Telecoms Storage"
