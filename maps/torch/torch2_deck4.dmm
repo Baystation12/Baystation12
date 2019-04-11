@@ -6444,7 +6444,8 @@
 	id = "qm_warehouse2";
 	name = "Warehouse Door Control";
 	pixel_x = -6;
-	pixel_y = 24
+	pixel_y = 24;
+	req_access = newlist()
 	},
 /obj/machinery/light_switch{
 	pixel_x = 10;
@@ -12390,7 +12391,8 @@
 	id = "qm_warehouse2";
 	name = "Warehouse Door Control";
 	pixel_x = 26;
-	pixel_y = -24
+	pixel_y = -24;
+	req_access = list("ACCESS_CARGO")
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled,
