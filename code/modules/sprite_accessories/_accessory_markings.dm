@@ -12,10 +12,10 @@
 	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines
 	//Reminder: BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN,BP_HEAD
 
-/datum/sprite_accessory/marking/tat_heart
-	name = "Tattoo (Heart, Torso)"
-	icon_state = "tat_heart"
-	body_parts = list(BP_CHEST)
+//datum/sprite_accessory/marking/tat_heart_torso
+	//name = "Tattoo (Heart, Torso)"
+	//icon_state = "tat_heart-chest"
+	//body_parts = list(BP_CHEST)
 
 /datum/sprite_accessory/marking/tat_hive
 	name = "Tattoo (Hive, Back)"
@@ -45,3 +45,23 @@
 	name = "Tattoo (Tiger Stripes, Body/Legs)"
 	icon_state = "tat_tiger"
 	body_parts = list(BP_L_LEG,BP_R_LEG,BP_CHEST,BP_GROIN)
+
+/datum/sprite_accessory/marking/tat_tiger_arm/left
+	name = "Tattoo (Tiger Left Arm)"
+	icon_state = "tat_tiger"
+	body_parts = list(BP_L_ARM)
+
+/datum/sprite_accessory/marking/tat_tiger_arm/right
+	name = "Tattoo (Tiger Right Arm)"
+	icon_state = "tat_tiger"
+	body_parts = list(BP_R_ARM)
+
+/datum/sprite_accessory/marking/tat_tiger_leg
+	name = "Tattoo (Tiger Left Leg)"
+	icon_state = "tat_tiger"
+	body_parts = list(BP_L_LEG)
+
+/datum/sprite_accessory/marking/tat_tiger_leg/right
+	name = "Tattoo (Tiger Right Leg)"
+	icon_state = "tat_tiger"
+	body_parts = list(BP_R_LEG)
