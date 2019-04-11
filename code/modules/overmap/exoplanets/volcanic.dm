@@ -126,12 +126,13 @@
 		return PROCESS_KILL
 	for(var/weakref/W in victims)
 		var/atom/movable/AM = W.resolve()
-		if(!(AM && AM.is_burnable()))
+		if (AM == null || get_turf(AM) != src || AM.is_burnable() == FALSE)
 			victims -= W
 			continue
 		var/datum/gas_mixture/environment = return_air()
 		var/pressure = environment.return_pressure()
-		if(AM.lava_act(environment, 5000 + environment.temperature, pressure))
+		var/destroyed = AM.lava_act(environment, 5000 + environment.temperature, pressure)
+		if(destroyed == TRUE)
 			victims -= W
 	if(!LAZYLEN(victims))
 		return PROCESS_KILL
