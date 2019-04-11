@@ -1,0 +1,4 @@
+author: "Randall"
+delete-after: True
+changes: 
+  - maptweak: "The Supply Office and Supply Warehouse shutters now require Supply access from the outside."
