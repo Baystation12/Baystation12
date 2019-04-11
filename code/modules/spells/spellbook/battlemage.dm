@@ -35,6 +35,7 @@
 							/obj/item/weapon/material/twohanded/fireaxe,
 							/obj/item/weapon/melee,
 							/obj/item/weapon/material/knife/ritual,
-							/obj/item/weapon/material/knife/butch,
-							/obj/item/weapon/material/butterfly,
+							/obj/item/weapon/material/knife/kitchen/cleaver,
+							/obj/item/weapon/material/knife/folding/combat/balisong,
+							/obj/item/weapon/material/knife/folding/tacticool,
 							/obj/item/weapon/material/star)
