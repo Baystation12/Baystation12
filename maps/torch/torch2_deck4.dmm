@@ -3605,9 +3605,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/newscaster{
-	pixel_y = 32
-	},
 /obj/machinery/light{
 	dir = 1
 	},
@@ -3629,6 +3626,9 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/newscaster{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/fore)
 "mq" = (
@@ -6444,7 +6444,8 @@
 	id = "qm_warehouse2";
 	name = "Warehouse Door Control";
 	pixel_x = -6;
-	pixel_y = 24
+	pixel_y = 24;
+	req_access = newlist()
 	},
 /obj/machinery/light_switch{
 	pixel_x = 10;
@@ -12386,11 +12387,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "Pq" = (
-/obj/machinery/button/remote/blast_door{
-	id = "qm_warehouse2";
-	name = "Warehouse Door Control";
-	pixel_x = 26;
-	pixel_y = -24
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled,
@@ -13326,12 +13322,6 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "RN" = (
-/obj/machinery/button/remote/blast_door{
-	id = "starboardaux_warehouse";
-	name = "Warehouse Door Control";
-	pixel_x = -24;
-	pixel_y = 6
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -38179,6 +38169,7 @@ yC
 gM
 ZS
 Pq
+bE
 fA
 Vb
 Np
