@@ -1,0 +1,5 @@
+author: "Cronac"
+delete-after: True
+changes: 
+  - bugfix: "The Adherent mineral bath will no longer kill Adherent users by deleting their tendril junction."
+  - tweak: "The Adherent mineral bath now removed embedded objects like shrapnel, but will not remove implants such as tracking implants etc."
