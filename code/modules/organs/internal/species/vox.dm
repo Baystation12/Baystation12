@@ -78,7 +78,8 @@
 		MATERIAL_POTASH =      TRUE,
 		MATERIAL_BAUXITE =     TRUE,
 		MATERIAL_COPPER =      TRUE,
-		MATERIAL_ALUMINIUM =   TRUE
+		MATERIAL_ALUMINIUM =   TRUE,
+		MATERIAL_RUTILE = 	   TRUE
 	)
 	var/list/stored_matter = list()
 

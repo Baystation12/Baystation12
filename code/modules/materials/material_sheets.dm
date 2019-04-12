@@ -319,6 +319,18 @@
 /obj/item/stack/material/aluminium/fifty
 	amount = 50
 
+/obj/item/stack/material/titanium
+	name = "titanium"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
+	default_type = MATERIAL_TITANIUM
+
+/obj/item/stack/material/titanium/ten
+	amount = 10
+
+/obj/item/stack/material/titanium/fifty
+	amount = 50
+
 /obj/item/stack/material/plasteel
 	name = "plasteel"
 	icon_state = "sheet-reinf"
