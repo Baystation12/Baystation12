@@ -186,7 +186,7 @@
 	integrity = 200
 	melting_point = 3000
 	weight = 18
-	stack_type = null
+	stack_type = /obj/item/stack/material/titanium
 	icon_base = "metal"
 	door_icon_base = "metal"
 	icon_colour = "#d1e6e3"
@@ -362,3 +362,15 @@
 	ore_name = "hematite"
 	ore_icon_overlay = "lump"
 	sale_price = 1
+
+/material/rutile
+	name = MATERIAL_RUTILE
+	stack_type = null
+	icon_colour = "#d8ad97"
+	ore_smelts_to = MATERIAL_TITANIUM
+	ore_result_amount = 5
+	ore_spread_chance = 15
+	ore_scan_icon = "mineral_uncommon"
+	ore_name = "rutile"
+	ore_icon_overlay = "lump"
+	sale_price = 2

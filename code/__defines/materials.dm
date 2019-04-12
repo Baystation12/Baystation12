@@ -22,6 +22,7 @@
 #define MATERIAL_REINFORCED_CULT         "cult2"
 #define MATERIAL_VOX                     "voxalloy"
 #define MATERIAL_TITANIUM                "titanium"
+#define MATERIAL_RUTILE					 "rutile"
 #define MATERIAL_OSMIUM_CARBIDE_PLASTEEL "osmium-carbide plasteel"
 #define MATERIAL_OSMIUM                  "osmium"
 #define MATERIAL_HYDROGEN                "hydrogen"
