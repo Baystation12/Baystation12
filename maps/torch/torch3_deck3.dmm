@@ -499,6 +499,35 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
+"bz" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/stack/material/glass/phoronrglass{
+	amount = 20
+	},
+/obj/item/stack/material/glass/phoronrglass{
+	amount = 20
+	},
+/obj/effect/floor_decal/corner/yellow/mono,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/item/stack/material/titanium/ten,
+/obj/item/stack/material/titanium/ten,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/engineering/hardstorage)
 "bA" = (
 /turf/simulated/wall/prepainted,
 /area/hydroponics)
@@ -4801,33 +4830,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/holocontrol)
-"ke" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/stack/material/glass/phoronrglass{
-	amount = 20
-	},
-/obj/item/stack/material/glass/phoronrglass{
-	amount = 20
-	},
-/obj/effect/floor_decal/corner/yellow/mono,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/engineering/hardstorage)
 "ki" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -42676,7 +42678,7 @@ da
 dD
 bv
 nA
-ke
+bz
 Xz
 Ve
 VY
