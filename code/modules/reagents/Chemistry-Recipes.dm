@@ -273,6 +273,16 @@
 	maximum_temperature = -25 CELSIUS
 	mix_message = "The solution becomes sludge-like."
 
+/datum/chemical_reaction/nanitefluid
+	name = "Nanite Fluid"
+	result = /datum/reagent/nanitefluid
+	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/aluminum = 1, /datum/reagent/lube = 1)
+	catalysts = list(/datum/reagent/toxin/phoron = 5)
+	result_amount = 3
+	minimum_temperature = (-25 CELSIUS) - 100
+	maximum_temperature = -25 CELSIUS
+	mix_message = "The solution becomes a metallic slime."
+
 /datum/chemical_reaction/venaxilin
 	name = "Venaxilin"
 	result = /datum/reagent/dylovene/venaxilin
