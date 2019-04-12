@@ -99,6 +99,7 @@
 	max_age = 100
 	hidden_from_codex = FALSE
 	reagent_tag = IS_PROSTHETIC
+	radiation_mod = 0.1 // this is so low because all the rad damage goes to one organ
 
 	passive_temp_gain = 3
 

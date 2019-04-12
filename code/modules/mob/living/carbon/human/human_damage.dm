@@ -182,8 +182,11 @@
 
 // TODO: better internal organ damage procs.
 /mob/living/carbon/human/adjustToxLoss(var/amount)
+	var/list/pick_organs = null
 
-	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
+	if(species.get_bodytype(src) == SPECIES_PROSTHETIC) // FBPs will only take tox (rad) damage to their MMI
+		pick_organs = internal_organs_by_name[BP_BRAIN]
+	else if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())	
 		return
 
 	var/heal = amount < 0
@@ -192,7 +195,8 @@
 	if(!heal && (CE_ANTITOX in chem_effects))
 		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
-	var/list/pick_organs = shuffle(internal_organs.Copy())
+	if(!pick_organs)
+		pick_organs = shuffle(internal_organs.Copy())
 
 	// Prioritize damaging our filtration organs first.
 	var/obj/item/organ/internal/kidneys/kidneys = internal_organs_by_name[BP_KIDNEYS]
