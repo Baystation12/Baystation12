@@ -1,6 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - rscadd: "Added speed indication to helm console. Green means 'slow', red means 'too fast'."
-  - rscadd: "Pilotable shuttles now can pass through meteor fields safely. Keep at green speed and you'll make it. Need Trained skill for Charon/Aquila and Basic for GUP. At Master/Experienced can do this at normal speed too."
-  - tweak: "Torch now accelerates roughly 2x slower"

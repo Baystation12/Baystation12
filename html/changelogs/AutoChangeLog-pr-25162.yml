@@ -1,5 +1,0 @@
-author: "zaredman"
-delete-after: True
-changes: 
-  - tweak: "Security Equipment supply order replaced with Master at Arms supply order."
-  - tweak: "Auto-Compressor and Rescue Bags can now be ordered via Supply."
