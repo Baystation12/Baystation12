@@ -17,6 +17,7 @@
 	fore_dir = WEST
 	color = "#ff00ff"
 	vessel_mass = 1000
+	vessel_size = SHIP_SIZE_SMALL
 	initial_restricted_waypoints = list(
 		"Skrellian Shuttle" = list("nav_skrellscoutsh_dock")
 	)
@@ -32,6 +33,7 @@
 	fore_dir = WEST
 	color = "#880088"
 	vessel_mass = 750
+	vessel_size = SHIP_SIZE_TINY
 
 /datum/shuttle/autodock/overmap/skrellscoutship
 	name = "Skrellian Scout"
