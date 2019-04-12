@@ -7,7 +7,7 @@
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
 	apc_test_exempt_areas = list(
-		/area/map_template/oldpod = NO_SCRUBBER|NO_VENT
+		/area/map_template/oldpod = NO_APC
 	)
 
 /area/map_template/oldpod
