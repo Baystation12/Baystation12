@@ -5,6 +5,7 @@
 	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
 	density = 1
 	anchored = 1
+	layer = BELOW_OBJ_LAYER
 
 	var/closed = 0
 	var/bee_count = 0 // Percent
