@@ -13,7 +13,7 @@
 	encased = "ceramic hull"
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
-	limb_flags = ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_HEALS_OVERKILL
 
 /obj/item/organ/external/groin/crystal
 	name =                    "trailing tendrils"

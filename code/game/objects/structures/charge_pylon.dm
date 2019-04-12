@@ -28,6 +28,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(power_cell)
 		user.visible_message("<span class='notice'>There is a loud crack and the smell of ozone as \the [user] touches \the [src].</span>")
+		playsound(loc, 'sound/effects/snap.ogg', 50, 1)
 		power_cell.charge = power_cell.maxcharge
 		to_chat(user, "<span class='notice'><b>Your [power_cell] has been charged to capacity.</b></span>")
 		if(istype(H) && H.species.name == SPECIES_ADHERENT)
@@ -41,7 +42,7 @@
 		visible_message("<span class='danger'>\The [user] has been shocked by \the [src]!</span>")
 
 /obj/structure/adherent_pylon/attackby(obj/item/grab/normal/G, mob/user)
-	if(!istype(G))		
+	if(!istype(G))
 		return
-	var/mob/M = G.affecting	
+	var/mob/M = G.affecting
 	charge_user(M)
