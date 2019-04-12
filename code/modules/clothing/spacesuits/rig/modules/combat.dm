@@ -144,7 +144,8 @@
 	module_cooldown = 0
 	icon_state = "lcannon"
 
-	suit_overlay = "mounted-lascannon"
+	suit_overlay_active = "mounted-lascannon"
+	suit_overlay_inactive = null
 
 	engage_string = "Configure"
 
@@ -205,6 +206,34 @@
 	interface_desc = "A knee-mounted suit-powered plasma cutter. Don't question it."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 7, TECH_COMBAT = 5)
 	gun = /obj/item/weapon/gun/energy/plasmacutter/mounted
+
+/obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
+
+	if(!check())
+		return 0
+
+	if(!target)
+		playsound(src.loc, 'sound/weapons/guns/selector.ogg', 50, 1)
+		if(!active)
+			active=1
+			to_chat(usr, "<span class='notice'>\The [src] is now set to close range mode.</span>")
+		else
+			active=0
+			to_chat(usr, "<span class='notice'>\The [src] is now set to firing mode.</span>")
+		return
+
+	if(!active)
+		gun.Fire(target,holder.wearer)
+	else
+		var/turf/T = get_turf(target)
+		if(istype(T) && !T.Adjacent(get_turf(src)))
+			return 0
+
+		var/resolved = target.attackby(gun,holder.wearer)
+		if(!resolved && gun && target)
+			gun.afterattack(target,holder.wearer,1)
+			return 1
+	return 1
 
 /obj/item/rig_module/mounted/energy_blade
 

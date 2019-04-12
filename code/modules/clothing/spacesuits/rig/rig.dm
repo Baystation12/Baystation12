@@ -595,7 +595,7 @@
 				if("engage")
 					module.engage()
 				if("select")
-					selected_module = module
+					module.select()
 				if("select_charge_type")
 					module.charge_selected = href_list["charge_type"]
 		return 1
