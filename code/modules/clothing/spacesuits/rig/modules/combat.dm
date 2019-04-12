@@ -3,7 +3,8 @@
  * /obj/item/rig_module/device/flash
  * /obj/item/rig_module/device/flash/advanced
  * /obj/item/rig_module/grenade_launcher (cleaner, smoke, mfoam)
- * /obj/item/rig_module/mounted (laser cannon)
+ * /obj/item/rig_module/mounted
+ * /obj/item/rig_module/mounted/lcannon
  * /obj/item/rig_module/mounted/egun
  * /obj/item/rig_module/mounted/taser
  * /obj/item/rig_module/mounted/plasmacutter
@@ -137,8 +138,8 @@
 
 /obj/item/rig_module/mounted
 
-	name = "mounted laser cannon"
-	desc = "A shoulder-mounted battery-powered laser cannon mount."
+	name = "mounted gun"
+	desc = "Somesort of mounted gun."
 	selectable = 1
 	usable = 1
 	module_cooldown = 0
@@ -149,10 +150,10 @@
 
 	engage_string = "Configure"
 
-	interface_name = "mounted laser cannon"
-	interface_desc = "A shoulder-mounted cell-powered laser cannon."
+	interface_name = "mounted gun"
+	interface_desc = "A shoulder-mounted cell-powered laser gun."
 
-	var/obj/item/weapon/gun/gun = /obj/item/weapon/gun/energy/lasercannon/mounted
+	var/obj/item/weapon/gun/gun
 
 /obj/item/rig_module/mounted/Initialize()
 	. = ..()
@@ -171,6 +172,16 @@
 	gun.Fire(target,holder.wearer)
 	return 1
 
+/obj/item/rig_module/mounted/lcannon
+
+	name = "mounted laser cannon"
+	desc = "A shoulder-mounted battery-powered laser cannon mount."
+
+	interface_name = "mounted laser cannon"
+	interface_desc = "A shoulder-mounted cell-powered laser cannon."
+
+	gun = /obj/item/weapon/gun/energy/lasercannon/mounted
+
 /obj/item/rig_module/mounted/egun
 
 	name = "mounted energy gun"
@@ -180,6 +191,7 @@
 	interface_name = "mounted energy gun"
 	interface_desc = "A forearm-mounted suit-powered energy gun."
 	origin_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+
 	gun = /obj/item/weapon/gun/energy/gun/mounted
 
 /obj/item/rig_module/mounted/taser
@@ -187,24 +199,26 @@
 	name = "mounted taser"
 	desc = "A palm-mounted nonlethal energy projector."
 	icon_state = "taser"
-
 	usable = 0
-
-	suit_overlay_active = null
-	suit_overlay_inactive = null
 
 	interface_name = "mounted taser"
 	interface_desc = "A palm-mounted, cell-powered taser."
 	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
+
 	gun = /obj/item/weapon/gun/energy/taser/mounted
 
 /obj/item/rig_module/mounted/plasmacutter
+
 	name = "mounted plasma cutter"
 	desc = "A knee-mounted plasma cutter. Don't question it."
 	icon_state = "plasmacutter"
+
+	use_power_cost = 9000 //5Wh per use
+
 	interface_name = "mounted plasma cutter"
 	interface_desc = "A knee-mounted suit-powered plasma cutter. Don't question it."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 7, TECH_COMBAT = 5)
+
 	gun = /obj/item/weapon/gun/energy/plasmacutter/mounted
 
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
@@ -241,7 +255,8 @@
 	desc = "A powerful cutting beam projector."
 	icon_state = "eblade"
 
-	suit_overlay = null
+	suit_overlay_active = null
+	suit_overlay_inactive = null
 
 	activate_string = "Project Blade"
 	deactivate_string = "Cancel Blade"
@@ -256,7 +271,7 @@
 	active_power_cost = 500
 	passive_power_cost = 0
 
-	gun = /obj/item/weapon/gun/energy/crossbow/ninja
+	gun = /obj/item/weapon/gun/energy/crossbow/ninja/mounted
 
 /obj/item/rig_module/mounted/energy_blade/Process()
 
