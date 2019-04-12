@@ -1,6 +1,6 @@
 /obj/machinery/autolathe
 	name = "autolathe"
-	desc = "It produces items using metal and glass."
+	desc = "It produces items using metal, glass, plastic, and aluminium. It has a built in shredder that can recycle most items, although any materials it cannot use will be wasted."
 	icon_state = "autolathe"
 	density = 1
 	anchored = 1

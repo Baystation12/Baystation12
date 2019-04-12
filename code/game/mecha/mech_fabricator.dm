@@ -1,6 +1,6 @@
 /obj/machinery/mecha_part_fabricator
 	name = "Exosuit Fabricator"
-	desc = "A machine used for construction of robotics and mechas."
+	desc = "A machine used for construction of robotics and mechs."
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
 	density = 1

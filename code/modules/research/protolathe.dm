@@ -1,5 +1,6 @@
 /obj/machinery/r_n_d/protolathe
 	name = "protolathe"
+	desc = "Accessed by a connected core fabricator console, it produces items from various materials."
 	icon_state = "protolathe"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 
