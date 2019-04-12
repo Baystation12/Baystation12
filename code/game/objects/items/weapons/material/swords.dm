@@ -33,3 +33,14 @@
 	sharp = 0
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2
+
+/obj/item/weapon/material/sword/katana/vibro
+	name = "vibrokatana"
+	desc = "A high-tech take on a woefully underpowered weapon. Can't mistake its sound for anything."
+	default_material = MATERIAL_TITANIUM
+	hitsound = 'sound/weapons/anime_sword.wav'
+
+/obj/item/weapon/material/sword/katana/vibro/equipped(mob/user, slot)
+	if(slot == slot_l_hand || slot == slot_r_hand)
+		playsound(src, 'sound/weapons/katana_out.wav', 50, 1, -5)
+	
