@@ -1,4 +1,0 @@
-author: "Aurum22"
-delete-after: True
-changes: 
-  - bugfix: "Fixes various layering issues with stasis cages, honey extractors, and reagent dispensers (chemistry and bar varieties)."

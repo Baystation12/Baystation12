@@ -1,6 +1,0 @@
-author: "Cronac"
-delete-after: True
-changes: 
-  - bugfix: "Cryogenic tubes will no longer heal anything without containing a drug."
-  - tweak: "Clonexadone and Cryoxadone have been buffed due to cryogenic tube changes."
-  - rscadd: "Adds nanite fluid, which is like cryoxadone for robotic parts.  It can be made with cryoxadone, space lube, and aluminum chilled down to -25C. Requires 5 phoron as a catalyst. This is NOT safe to use on its own and should be used on conjunction with cryoxadone or clonexadone."
