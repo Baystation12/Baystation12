@@ -172,8 +172,14 @@
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-100 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
-		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(!BP_IS_ROBOTIC(I))
+					I.heal_damage(20*removed)
+
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
@@ -193,8 +199,32 @@
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-300 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
-		M.heal_organ_damage(30 * removed, 30 * removed)
+		M.heal_organ_damage(50 * removed, 50 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(!BP_IS_ROBOTIC(I))
+					I.heal_damage(30*removed)
+
+/datum/reagent/nanitefluid
+	name = "Nanite Fluid"
+	description = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
+	taste_description = "metallic sludge"
+	reagent_state = LIQUID
+	color = "#c2c2d6"
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/nanitefluid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 1)
+	if(M.bodytemperature < 170)
+		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(BP_IS_ROBOTIC(I))
+					I.heal_damage(20*removed)
 
 /* Painkillers */
 
@@ -406,14 +436,13 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/internal/I in H.internal_organs)
-			if(BP_IS_ROBOTIC(I))
-				continue
-			if(I.organ_tag == BP_BRAIN)
-				H.confused++
-				H.drowsyness++
-				if(I.damage >= I.min_bruised_damage)
-					continue
-			I.damage = max(I.damage - removed, 0)
+			if(!BP_IS_ROBOTIC(I))
+				if(I.organ_tag == BP_BRAIN)
+					if(I.damage >= I.min_bruised_damage)
+						continue
+					H.confused++
+					H.drowsyness++
+				I.heal_damage(removed)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
