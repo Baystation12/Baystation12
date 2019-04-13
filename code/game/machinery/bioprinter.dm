@@ -230,7 +230,6 @@
 
 	..(user, choice)
 
-
 /obj/machinery/organ_printer/flesh/attackby(obj/item/weapon/W, mob/user)
 	// Load with matter for printing.
 	for(var/path in amount_list)
@@ -255,7 +254,24 @@
 		var/mob/living/carbon/human/H = R.resolve()
 		if(H && istype(H) && H.species)
 			loaded_species = H.species
-			products = loaded_species.bioprint_products
+			products = get_possible_products()
 		return
 	return ..()
+
+/obj/machinery/organ_printer/flesh/proc/get_possible_products()
+	. = list()
+	if(!loaded_species)
+		return
+	var/list/organs = list()
+	for(var/organ in loaded_species.has_organ)
+		organs += loaded_species.has_organ[organ]
+	for(var/organ in loaded_species.has_limbs)
+		organs += loaded_species.has_limbs[organ]["path"]
+	for(var/organ in organs)
+		var/obj/item/organ/O = organ
+		if(initial(O.can_be_printed))
+			var/cost = initial(O.print_cost)
+			if(!cost)
+				cost = round(0.75 * initial(O.max_damage))
+			.[initial(O.organ_tag)] = list(O, cost)
 // END FLESH ORGAN PRINTER

@@ -62,6 +62,7 @@
 	color = "#ed81f1"
 	organ_tag = BP_PHORON
 	parent_organ = BP_CHEST
+	can_be_printed = FALSE
 	var/dexalin_level = 10
 	var/phoron_level = 5
 	var/raw_amount = 0.1
