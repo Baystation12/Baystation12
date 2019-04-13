@@ -214,11 +214,6 @@
 	name = "Responsible medbay habits, No #3"
 	desc = "A safety poster with a purple-haired surgeon. She looks a bit cross. \"Let the surgeons do their work. NEVER replace or remove a surgery tool from where the surgeon put it.\""
 
-/decl/poster/bay_44
-	icon_state="bsposter44"
-	name = "Time for a drink?"
-	desc = "This poster depicts a friendly-looking alien holding a tray of drinks."
-
 /decl/poster/bay_45
 	icon_state="bsposter45"
 	name = "Responsible engineering habits, No #1"
