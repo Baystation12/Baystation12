@@ -4,6 +4,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "stasis_cage"
 	density = 1
+	layer = ABOVE_OBJ_LAYER
 
 	var/mob/living/simple_animal/contained
 
