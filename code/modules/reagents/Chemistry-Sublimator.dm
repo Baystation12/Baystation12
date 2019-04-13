@@ -22,10 +22,11 @@
 	gas_data.breathed_product[gas_id] = reagent.type
 
 	if(reagent.gas_overlay)
-		var/image/I = image('icons/effects/tile_effects.dmi', reagent.gas_overlay, FLY_LAYER)
-		I.appearance_flags = RESET_COLOR
+		var/obj/effect/gas_overlay/I = new()
+		I.icon_state = reagent.gas_overlay
 		I.color = initial(reagent.color)
 		gas_data.tile_overlay[gas_id] = I
+		gas_data.tile_overlay_color[gas_id] = reagent.color
 
 	if(kill_later)
 		qdel(reagent)
