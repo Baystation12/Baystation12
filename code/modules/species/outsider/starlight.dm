@@ -103,7 +103,7 @@
 	radiation_mod = 0
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 
-	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unbreakable/blueforged)
+	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 
 /datum/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
 	..()

@@ -31,7 +31,6 @@
 	name =                    "chassis core"
 	amputation_point =        "connector socket"
 	joint =                   "connector socket"
-	eye_icon_location =       'icons/mob/human_races/species/adherent/eyes.dmi'
 	glowing_eyes =            TRUE
 	arterial_bleed_severity = 0
 	dislocated =              -1
