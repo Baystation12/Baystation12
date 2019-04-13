@@ -112,13 +112,13 @@
 	var/list/ui_users
 
 /obj/item/weapon/mirror/attack_self(mob/user as mob)
-	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;")
+	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", APPEARANCE_HAIR)
 
 /obj/item/weapon/mirror/Destroy()
 	clear_ui_users(ui_users)
 	. = ..()
 
-/proc/open_mirror_ui(var/mob/user, var/ui_users, var/title)
+/proc/open_mirror_ui(var/mob/user, var/ui_users, var/title, var/flags)
 	if(!ishuman(user))
 		return
 
@@ -127,7 +127,8 @@
 	if(!AC)
 		AC = new(src, user)
 		AC.name = title
-		AC.flags = APPEARANCE_HAIR
+		if(flags)
+			AC.flags = flags
 		LAZYSET(ui_users, W, AC)
 	AC.ui_interact(user)
 
