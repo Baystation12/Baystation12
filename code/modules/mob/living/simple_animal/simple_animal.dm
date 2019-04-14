@@ -62,7 +62,7 @@
 	var/purge = 0
 
 	var/list/pain_scream_sounds = list()
-	var/list/death_sounds
+	var/list/death_sounds = list()
 
 /mob/living/simple_animal/Life()
 	..()
