@@ -95,6 +95,10 @@
 	desc = "Sleek flats."
 	icon_state = "flatswhite"
 
+/obj/item/clothing/shoes/flats/black
+	name = "black flats"
+	color = COLOR_GRAY15
+
 /obj/item/clothing/shoes/hightops
 	name = "white high tops"
 	desc = "A pair of shoes that extends past the ankle. Based on a centuries-old, timeless design."
