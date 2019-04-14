@@ -1,6 +1,6 @@
 /material/diamond
 	name = MATERIAL_DIAMOND
-	lore_text = "An extremely hard allotrope of carbon. Valued for use in industrial tools."
+	lore_text = "An extremely hard allotrope of carbon. Valued for its use in industrial tools."
 	stack_type = /obj/item/stack/material/diamond
 	flags = MATERIAL_UNMELTABLE
 	cut_delay = 60

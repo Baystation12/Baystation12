@@ -190,7 +190,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"
 	chem_products = list(
-		/datum/reagent/aluminum = 15
+		/datum/reagent/aluminium = 15
 		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"

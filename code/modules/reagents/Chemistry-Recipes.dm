@@ -125,7 +125,7 @@
 /datum/chemical_reaction/thermite
 	name = "Thermite"
 	result = /datum/reagent/thermite
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
 	mix_message = "The solution thickens into a coarse metallic paste."
 
@@ -276,7 +276,7 @@
 /datum/chemical_reaction/nanitefluid
 	name = "Nanite Fluid"
 	result = /datum/reagent/nanitefluid
-	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/aluminum = 1, /datum/reagent/lube = 1)
+	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/aluminium = 1, /datum/reagent/lube = 1)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 3
 	minimum_temperature = (-25 CELSIUS) - 100
@@ -536,7 +536,7 @@
 /datum/chemical_reaction/flash_powder
 	name = "Flash powder"
 	result = null
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
 	result_amount = null
 	mix_message = "The solution bubbles vigorously!"
 
@@ -601,7 +601,7 @@
 /datum/chemical_reaction/phlogiston
 	name = "Phlogiston"
 	result = null
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
 	mix_message = "The solution thickens and begins to bubble."
 
@@ -615,7 +615,7 @@
 /datum/chemical_reaction/napalm
 	name = "Napalm"
 	result = /datum/reagent/napalm
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
 	result_amount = 2
 	mix_message = "The solution thickens and takes on a slimy sheen."
 
@@ -666,7 +666,7 @@
 /datum/chemical_reaction/metalfoam
 	name = "Metal Foam"
 	result = null
-	required_reagents = list(/datum/reagent/aluminum = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
+	required_reagents = list(/datum/reagent/aluminium = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"
 
@@ -924,14 +924,14 @@
 /datum/chemical_reaction/carbon_paint/send_data()
 	return "#333333"
 
-/datum/chemical_reaction/aluminum_paint
-	name = "Aluminum paint"
+/datum/chemical_reaction/aluminium_paint
+	name = "Aluminium paint"
 	result = /datum/reagent/paint
-	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/aluminum = 1)
+	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/aluminium = 1)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy white sheen."
 
-/datum/chemical_reaction/aluminum_paint/send_data()
+/datum/chemical_reaction/aluminium_paint/send_data()
 	return "#f0f8ff"
 
 /* Slime cores */
@@ -2253,7 +2253,7 @@
 /datum/chemical_reaction/anfo_plus
 	name = "ANFO+"
 	result = /datum/reagent/anfo/plus
-	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminum=5)
+	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminium=5)
 	result_amount = 20
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
