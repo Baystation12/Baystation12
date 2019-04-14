@@ -3,16 +3,16 @@
 	desc = "A sleek, modern combat exosuit."
 
 /mob/living/exosuit/premade/combat/New()
-	if(!arms) 
+	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/combat(src)
 		arms.color = COLOR_DARK_GUNMETAL
-	if(!legs) 
+	if(!legs)
 		legs = new /obj/item/mech_component/propulsion/combat(src)
 		legs.color = COLOR_DARK_GUNMETAL
-	if(!head) 
+	if(!head)
 		head = new /obj/item/mech_component/sensors/combat(src)
 		head.color = COLOR_DARK_GUNMETAL
-	if(!body) 
+	if(!body)
 		body = new /obj/item/mech_component/chassis/combat(src)
 		body.color = COLOR_DARK_GUNMETAL
 
@@ -25,11 +25,14 @@
 	name = "combat arms"
 	exosuit_desc_string = "flexible, advanced manipulators"
 	icon_state = "combat_arms"
+	melee_damage = 5
+	action_delay = 10
 
 /obj/item/mech_component/propulsion/combat
 	name = "combat legs"
 	exosuit_desc_string = "sleek hydraulic legs"
 	icon_state = "combat_legs"
+	move_delay = 3
 
 /obj/item/mech_component/sensors/combat
 	name = "combat sensors"
@@ -59,4 +62,6 @@
 			"[WEST]"  = list("x" = 12, "y" = 8)
 		)
 	)
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
 	..()

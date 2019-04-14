@@ -8,6 +8,16 @@
 	if(. && !istype(loc, /turf/space))
 		playsound(src.loc, mech_step_sound, 40, 1)
 
+/mob/living/exosuit/can_ztravel()
+	return TRUE
+
+
+/mob/living/exosuit/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
+	//mechs are always anchored, so falling should always ignore it
+	if(..(TRUE, location_override))
+		return !(can_overcome_gravity())
+
+
 /datum/movement_handler/mob/exosuit
 	expected_host_type = /mob/living/exosuit
 	var/next_move
