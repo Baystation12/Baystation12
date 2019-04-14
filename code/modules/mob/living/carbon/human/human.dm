@@ -69,6 +69,12 @@
 			return stomach.ingested
 	return touching // Kind of a shitty hack, but makes more sense to me than digesting them.
 
+/mob/living/carbon/human/proc/metabolize_ingested_reagents()
+	if(should_have_organ(BP_STOMACH))
+		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+		if(stomach)
+			stomach.metabolize()
+
 /mob/living/carbon/human/get_fullness()
 	if(!should_have_organ(BP_STOMACH))
 		return ..()

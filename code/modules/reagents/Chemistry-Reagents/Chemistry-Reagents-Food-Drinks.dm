@@ -762,7 +762,7 @@
 	adj_drowsy = -3
 	adj_sleepy = -2
 	adj_temp = 25
-	overdose = 45
+	overdose = 60
 
 	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
@@ -772,9 +772,12 @@
 	if(alien == IS_DIONA)
 		return
 	..()
+
 	if(adj_temp > 0)
 		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
 	if(volume > 15)
+		M.add_chemical_effect(CE_PULSE, 1)
+	if(volume > 45)
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -785,7 +788,7 @@
 	if(alien == IS_DIONA)
 		return
 	M.make_jittery(5)
-	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/drink/coffee/icecoffee
 	name = "Iced Coffee"
