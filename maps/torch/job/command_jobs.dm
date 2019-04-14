@@ -118,8 +118,8 @@
 		access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 		access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
 		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
-		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd, 
-		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew, 
+		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd,
+		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew,
 		access_expedition_shuttle, access_expedition_shuttle_helm
 	)
 	minimal_access = list()
@@ -386,3 +386,34 @@
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+
+/datum/job/jag
+	title = "Judge Advocate"
+	department = "Support"
+	department_flag = SPT
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Commanding Officer, Executive Officer, and Judge Advocate General"
+	selection_color = "#2f2f7f"
+	minimal_player_age = 7
+	economic_power = 10
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/jag/fleet
+	allowed_branches = list(
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/command/jag/ec
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/ec/o1
+	)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_EXPERT)
+	skill_points = 20
+
+
+	access = list(access_maint_tunnels, access_bridge, access_RC_announce, access_solgov_crew, access_cent_creed)
+
+	software_on_spawn = list(/datum/computer_file/program/reports)
+
+/datum/job/jag/get_description_blurb()
+	return "You are a Judge Advocate. You are a uniformed lawyer assigned to provide legal counsel to uniformed personnel and advise command staff on matters of SCUJ. While on [GLOB.using_map.full_name] you are subordinate to the CO and XO, but ultimately answer to the Judge Advocate General. You may be called upon to assist in hearings and courts-martial."

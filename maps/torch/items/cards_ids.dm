@@ -143,6 +143,10 @@
 	job_access_type = /datum/job/bridgeofficer
 	detail_color = COLOR_COMMAND_BLUE
 
+/obj/item/weapon/card/id/torch/crew/jag
+	job_access_type = /datum/job/jag
+	detail_color = COLOR_COMMAND_BLUE
+
 /obj/item/weapon/card/id/torch/crew/pathfinder
 	job_access_type = /datum/job/pathfinder
 	detail_color = COLOR_PURPLE
