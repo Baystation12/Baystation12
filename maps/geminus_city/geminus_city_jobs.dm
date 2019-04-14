@@ -1,7 +1,7 @@
 
 /datum/map/geminus_city
-	allowed_jobs = list(/datum/job/colonist,/datum/job/innie_sympathiser,/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/marine,/datum/job/marine_leader,/datum/job/police,/datum/job/cop)
-	allowed_spawns = list("Colony Arrival Shuttle","UNSC Peacekeeping Ship","UNSC Peacekeeping Ship - Leader Quarters")
+	allowed_jobs = list(/datum/job/colonist,/datum/job/innie_sympathiser,/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/marine,/datum/job/marine_leader,/datum/job/police,/datum/job/cop,/datum/job/colony_ai)
+//	allowed_spawns = list("Colony Arrival Shuttle","UNSC Peacekeeping Ship","UNSC Peacekeeping Ship - Leader Quarters")
 
 /datum/job/colonist
 	title = "Colonist"
@@ -230,3 +230,40 @@
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
+
+/datum/job/colony_ai
+	title = "UEG Colonial AI"
+	department_flag = SHIPAI
+	spawn_positions = 1
+	is_whitelisted = 1
+	outfit_type = /decl/hierarchy/outfit/job/colony_AI
+	selection_color = "#ccffcc"
+	req_admin_notify = 1
+	//job_guide = "Your responsibility is to aid the captain and ship's crew and you are given a vast amount of autonomy to that end. You are entirely loyal to the UNSC and your current mission however."
+	equip(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		return 1
+
+/datum/job/colony_ai/is_position_available()
+	return (empty_playable_ai_cores.len != 0)
+
+/datum/job/colony_ai/equip_preview(mob/living/carbon/human/H)
+	H.equip_to_slot_or_del(new /obj/item/clothing/suit/straight_jacket(H), slot_wear_suit)
+	H.equip_to_slot_or_del(new /obj/item/clothing/head/cardborg(H), slot_head)
+
+/decl/hierarchy/outfit/job/colony_AI
+	name = "Artificial Intelligence"
+
+	l_ear = null
+	r_ear = null
+	uniform = null
+	suit = null
+	shoes = null
+	head = null
+	belt = null
+	l_pocket = null
+	r_pocket = null
+
+	id_type = null
+
+	flags = 0

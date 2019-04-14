@@ -575,6 +575,18 @@ default behaviour is:
 		for(var/mob/living/carbon/slime/M in view(1,src))
 			M.UpdateFeed()
 
+	if(z != last_z)
+		var/obj/om_obj_old = map_sectors["[last_z]"]
+		var/obj/om_obj_new = map_sectors["[z]"]
+		if(om_obj_old == om_obj_new) //Some overmap objects span multiple z's.
+			return
+		if(om_obj_old)
+			GLOB.mobs_in_sectors[om_obj_old] -= src
+		if(om_obj_new)
+			GLOB.mobs_in_sectors[om_obj_new] |= list(src) // |= is used instead of += to avoid duplication
+
+		last_z = z
+
 /mob/living/verb/resist()
 	set name = "Resist"
 	set category = "IC"
@@ -654,8 +666,10 @@ default behaviour is:
 	set name = "Rest"
 	set category = "IC"
 
+	to_chat(src, "<span class='notice'>You are now [resting ? "getting up" : "resting"]</span>")
+	if(resting)
+		sleep(2 SECONDS) //Wait for two seconds if we're going from resting to non-resting.
 	resting = !resting
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash, duration = 25)

@@ -104,11 +104,11 @@
 	output += memory
 
 	if(objectives.len>0)
-		output += "<HR><B>Objectives:</B>"
+		output += "<HR><B>Objectives:</B><br>"
 
 		var/obj_count = 1
 		for(var/datum/objective/objective in objectives)
-			output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]<br>"
 			obj_count++
 	if(ambitions)
 		output += "<HR><B>Ambitions:</B> [ambitions]<br>"

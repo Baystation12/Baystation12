@@ -148,6 +148,8 @@
 	var/mob/living/carbon/human/h = user
 	if(!istype(h))
 		return
+	if(h.stat != CONSCIOUS)
+		return
 	if(world.time < h.next_scream_at)
 		return
 	var/datum/species/s = h.species

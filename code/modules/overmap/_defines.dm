@@ -3,6 +3,7 @@
 //Dimension of overmap (squares 4 lyfe)
 var/global/list/map_sectors = list()
 var/global/list/map_datas = list()
+GLOBAL_LIST_EMPTY(mobs_in_sectors)
 
 /area/overmap/
 	name = "System Map"

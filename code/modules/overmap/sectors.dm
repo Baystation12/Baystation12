@@ -11,7 +11,7 @@ var/list/points_of_interest = list()
 	icon_state = "object"
 	var/list/map_z = list()
 	var/list/map_z_data = list()
-	var/list/weapon_locations = list(list(1,255,255,1)) //used for orbital unaimed MAC bombardment. Format: list(top_left_x,top_left_y,bottom_right_x,bottom_right_y) for each "visible" ground-to-ship weapon on the map.
+	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 	var/weapon_miss_chance = 0
 	var hit // for icon changes  when damaged
 
@@ -28,13 +28,25 @@ var/list/points_of_interest = list()
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
+	var/list/hull_segments = list()
+	var/superstructure_failing = 0
 	var/list/connectors = list() //Used for docking umbilical type-items.
 	var/faction = "civilian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
+
+	var/datum/targeting_datum/targeting_datum = new
+
+	var/glassed = 0
+	var/nuked = 0
+
+	var/last_adminwarn_attack = 0
 
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
 	if(name == "map object")
 		name = "invalid-\ref[src]"
+
+	if(!(src in GLOB.mobs_in_sectors))
+		GLOB.mobs_in_sectors[src] = list()
 
 	//custom tags are allowed to be set in map or elsewhere
 	if(!tag)
@@ -45,6 +57,18 @@ var/list/points_of_interest = list()
 /obj/effect/overmap/Initialize()
 	. = ..()
 	setup_object()
+
+/obj/effect/overmap/proc/get_superstructure_strength() //Returns a decimal percentage calculated from currstrength/maxstrength
+	var/list/hull_strengths = list(0,0)
+	for(var/obj/effect/hull_segment/hull_segment in hull_segments)
+		if(hull_segment.is_segment_destroyed() == 0)
+			hull_strengths[1] += hull_segment.segment_strength
+		hull_strengths[2] += hull_segment.segment_strength
+
+	if(hull_strengths[2] == 0)
+		return null
+
+	return (hull_strengths[1]/hull_strengths[2])
 
 /obj/effect/overmap/proc/get_faction()
 	return faction
@@ -150,6 +174,40 @@ var/list/points_of_interest = list()
 	if(shuttle_name in restricted_waypoints)
 		. += restricted_waypoints[shuttle_name]
 
+/obj/effect/overmap/proc/do_superstructure_fail()
+	for(var/mob/player in GLOB.mobs_in_sectors[src])
+		player.dust()
+	loc = null
+	message_admins("NOTICE: Overmap object [src] has been destroyed. Please wait as it is deleted.")
+	log_admin("NOTICE: Overmap object [src] has been destroyed.")
+	sleep(10)//To allow the previous message to actually be seen
+	for(var/z_level in map_z)
+		shipmap_handler.free_map(z_level)
+	qdel(src)
+
+/obj/effect/overmap/proc/pre_superstructure_failing()
+	for(var/mob/player in GLOB.mobs_in_sectors[src])
+		to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
+	superstructure_failing = 1
+	spawn(SUPERSTRUCTURE_FAIL_TIME)
+		do_superstructure_fail()
+
+/obj/effect/overmap/process()
+	if(!isnull(targeting_datum.current_target) && !(targeting_datum.current_target in range(src,7)))
+		targeting_datum.current_target = null
+		targeting_datum.targeted_location = "target lost"
+	if(superstructure_failing == -1)
+		return
+	if(superstructure_failing == 1)
+		//TODO: Special messages/other effects whilst the superstructure fails.
+		return
+	var/list/superstructure_strength = get_superstructure_strength()
+	if(isnull(superstructure_strength))
+		superstructure_failing = -1
+		return
+	if(superstructure_strength <= SUPERSTRUCTURE_FAIL_PERCENT)
+		pre_superstructure_failing()
+
 /obj/effect/overmap/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
@@ -164,14 +222,23 @@ var/list/points_of_interest = list()
 		H.get_known_sectors()
 
 /obj/effect/overmap/sector/process()
+	. = ..()
 	if(15<=hit)
 		src.icon_state="bombed"
+
+
+/obj/effect/overmap/proc/adminwarn_attack(var/attacker)
+	if(world.time > last_adminwarn_attack + 1 MINUTE)
+		last_adminwarn_attack = world.time
+		var/msg = "[src] is under attack[attacker ? " by [attacker]" : ""]"
+		log_admin(msg)
+		message_admins(msg)
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)
 		return 1
 
-	testing("Building overmap...")
+	report_progress("Building overmap...")
 	world.maxz++
 	GLOB.using_map.overmap_z = world.maxz
 	var/list/turfs = list()
@@ -190,7 +257,8 @@ var/list/points_of_interest = list()
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
-	testing("Overmap build complete.")
+	report_progress("Overmap build complete.")
+	shipmap_handler.max_z_cached = world.maxz
 	return 1
 
 

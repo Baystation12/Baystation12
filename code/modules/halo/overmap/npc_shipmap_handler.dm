@@ -6,6 +6,11 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 
 	var/list/free_ship_map_zs = list()
 
+	var/max_z_cached = 0
+
+/datum/npc_ship_map_handler/New()
+	. = ..()
+
 /datum/npc_ship_map_handler/proc/free_map(var/z_to_free)
 	if(z_to_free in free_ship_map_zs)
 		return
@@ -17,7 +22,7 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	set background = 1
 	if(isnull(z_level))
 		return
-	to_world("Clearing unused ship-z level:[z_level]. This may lag.")
+	message_admins("Clearing unused ship-z level:[z_level]. This may lag.")
 	sleep(10)//Ensure above message is shown.
 	var/list/z_level_toclear = block(locate(1,1,z_level),locate(255,255,z_level))
 	for(var/turf/to_clear in z_level_toclear)
@@ -36,4 +41,5 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	if(free_ship_map_zs.len > 0)
 		return pick(free_ship_map_zs)
 	else
-		return world.maxz + 1
+		max_z_cached += 1
+		return max_z_cached

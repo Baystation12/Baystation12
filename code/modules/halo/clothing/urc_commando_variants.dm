@@ -118,29 +118,35 @@
 	icon_state = "socks-boots_obj"
 
 //MCLOVIN
-/obj/item/clothing/head/helmet/urfc/mclovin1
-	name = "Eagle Helmet"
-
-	item_state = "mclovin_worn"
-	icon_state = "mclovin_helmet"
-
-/obj/item/clothing/head/helmet/urfc/mclovin2
+/obj/item/clothing/head/helmet/urfc/mclovin
 	name = "Jaguar Helmet"
 
-	item_state = "mclovin2_worn"
-	icon_state = "mclovin2_helmet"
+	item_state = "mclovin-jaguar_worn"
+	icon_state = "mclovin-jaguar_helmet"
 
 /obj/item/clothing/suit/armor/special/urfc/mclovin
+	name = "Jaguar Armour"
+
+	item_state = "mclovin-jaguar_armour_worn"
+	icon_state = "mclovin-jaguar_armour_obj"
+
+/obj/item/clothing/head/helmet/zeal/mclovin
+	name = "Eagle Helmet"
+	desc = "A heavily modified helmet resembling an Eagle"
+
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "mclovin-eagle_worn"
+	icon_state = "mclovin-eagle_helmet"
+
+/obj/item/clothing/suit/justice/zeal/mclovin
 	name = "Eagle Armour"
+	desc = "A heavily modified piece of armour resembling an Eagle"
 
-	item_state = "mclovin_armour_worn"
-	icon_state = "mclovin_armour_obj"
-
-/obj/item/clothing/under/urfc_jumpsuit/mclovin
-	name = "Eagle Jumpsuit"
-
-	item_state = "mclovin_uniform_s"
-	icon_state = "mclovin_uniform"
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "mclovin-eagle_armour_worn"
+	icon_state = "mclovin-eagle_armour_obj"
 
 /obj/item/weapon/material/machete/mclovin
 	name = "Aztec Sword"

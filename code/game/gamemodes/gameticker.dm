@@ -71,6 +71,7 @@ var/global/datum/controller/gameticker/ticker
 			if(pregame_timeleft <= 0 || ((initialization_stage & INITIALIZATION_NOW_AND_COMPLETE) == INITIALIZATION_NOW_AND_COMPLETE))
 				current_state = GAME_STATE_SETTING_UP
 				Master.SetRunLevel(RUNLEVEL_SETUP)
+				callHook("game_initialised")
 
 	while (!setup())
 
@@ -284,7 +285,7 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
-					if(player.create_character())
+					if(player.create_character(job_master.get_roundstart_spawnpoint(player.mind.assigned_role)))
 						qdel(player)
 
 

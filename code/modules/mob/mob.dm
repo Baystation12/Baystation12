@@ -46,6 +46,12 @@
 	GLOB.mob_list += src
 	..()
 
+/mob/LateInitialize()
+	last_z = z
+	var/obj/om_obj = map_sectors["[z]"]
+	if(om_obj)
+		GLOB.mobs_in_sectors[om_obj] |= list(src) // |= is used instead of += to avoid duplication
+
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	if(!client)	return
 
@@ -700,8 +706,10 @@
 
 	if(lying)
 		set_density(0)
-		if(l_hand) unEquip(l_hand)
-		if(r_hand) unEquip(r_hand)
+		var/obj/item/l_hand_item = l_hand
+		var/obj/item/r_hand_item = r_hand
+		if(l_hand_item && l_hand_item.w_class > ITEM_SIZE_NORMAL) unEquip(l_hand)
+		if(r_hand_item && r_hand_item.w_class > ITEM_SIZE_NORMAL) unEquip(r_hand)
 	else
 		set_density(initial(density))
 	reset_layer()

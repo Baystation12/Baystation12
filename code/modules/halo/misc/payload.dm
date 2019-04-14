@@ -29,9 +29,10 @@
 				u = user
 				u.visible_message("<span class = 'userdanger'>[user.name] primes the [src] for detonation</span>","<span class ='notice'>You prime the [src] for detonation</span>")
 				admin_attack_log("([user.name]) primed a nuke/anti-matter charge.")
-				explode_at = world.time + seconds_to_explode*10
+				explode_at = world.time + seconds_to_explode SECONDS
 				exploding = 1
 				GLOB.processing_objects += src
+				message2discord(config.oni_discord, "@here, Payload device armed by [user.real_name] ([user.ckey]) @ ([loc.x],[loc.y],[loc.z])")
 				set_anchor(1)
 				checkoverlay(1)
 	else
@@ -144,10 +145,12 @@
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
-	qdel(b)
+	if(config.oni_discord)
+		message2discord(config.oni_discord, "@here, nuclear detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
 	qdel(src)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
 	radiation_repository.radiate(b.loc,1000,10000)
 	..()
-
+	var/obj/effect/overmap/OM = map_sectors["[b.z]"]
+	OM.nuked = 1

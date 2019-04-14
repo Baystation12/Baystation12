@@ -4,7 +4,7 @@
 
 	GLOB.hostile_attackables += /obj/structure/evac_pelican
 	GLOB.hostile_attackables += /obj/structure/tanktrap
-	GLOB.max_flood_simplemobs = 300
+	GLOB.max_flood_simplemobs = 100
 
 	//loop over the map creating resupply spawn points
 	spawn(-1)

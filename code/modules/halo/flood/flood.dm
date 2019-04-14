@@ -45,7 +45,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
-	if(client)
+	if(client || ckey)
 		target_mob = null
 	if(assault_target && stance == HOSTILE_STANCE_IDLE)
 		//spawn(rand(-1,20))
@@ -91,7 +91,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	new_combat_form.forceMove(h.loc)
 	new_combat_form.ckey = h.ckey
 	new_combat_form.name = h.real_name
-	if(prob(25))
+	if(prob(50))
 		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
 	if(new_combat_form.ckey)
 		new_combat_form.stop_automated_movement = 1
@@ -151,15 +151,34 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
-		if(mob_healthdam > h.maxHealth/4) //Less than quarter health? Jump 'em.
+		if((mob_healthdam > h.maxHealth/4) || h.stat != CONSCIOUS) //Less than quarter health or unconscious/dead? Jump 'em.
 			if(infect_mob(h))
-				return //No more than one at a time.
+				return 1//No more than one at a time.
+
+/mob/living/simple_animal/hostile/flood/infestor/proc/revive_nearby_combatforms()
+	for(var/mob/living/simple_animal/hostile/flood/combat_form/floodform in view(2,src))
+		if(floodform.health > 0 || floodform.corpse_pulped == 1)
+			continue
+		var/mob/living/simple_animal/hostile/flood/combat_form/newform = new floodform.type (floodform.loc)
+		if(floodform.ckey || floodform.client)
+			newform.ckey = floodform.ckey
+		newform.name = floodform.name
+		newform.icon = floodform.icon
+		newform.icon_state = initial(floodform.icon_state)
+		if(floodform.corpse_pulped != -1)
+			newform.corpse_pulped = 1
+		visible_message("<span class = 'notice'>[src] leaps at [floodform]'s chest cavity and burrows in.</span>")
+		visible_message("<span class = 'danger'>[floodform] lurches back to life, the new infection form twitching in place...</span>")
+		qdel(floodform)
+		adjustBruteLoss(1)
+		return 1 //One at a time.
 
 /mob/living/simple_animal/hostile/flood/infestor/Move()
 	. = ..()
 	if(ckey || client)
 		return
-	attempt_nearby_infect()
+	if(!attempt_nearby_infect())
+		revive_nearby_combatforms()
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
 	. = ..()
@@ -265,8 +284,18 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form
 	var/next_infestor_spawn = 0
+	var/our_infestor
 
 	var/obj/item/weapon/gun/our_gun
+
+	var/corpse_pulped = 0 //1 = cannot be revived, -1 = can be revived infinitely.
+
+/mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
+	. = ..()
+	if(corpse_pulped == 1)
+		to_chat(examiner,"<span class = 'notice'>[src] has been heavily damaged. Once dead, it's dead for good.</span>")
+	if(corpse_pulped == -1)
+		to_chat(examiner,"<span class = 'notice'>[src]'s flesh looks tougher than normal. It could likely endure the revivification process many times.</span>")
 
 /mob/living/simple_animal/hostile/flood/combat_form/proc/spawn_infestor()
 	if(world.time < next_infestor_spawn)
@@ -274,12 +303,16 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 			to_chat(src,"<span class = 'notice'>Your biomass hasn't recovered from the previous formation.</span>")
 		return
 	next_infestor_spawn = world.time + COMBAT_FORM_INFESTOR_SPAWN_DELAY
-	new /mob/living/simple_animal/hostile/flood/infestor (src.loc)
+	our_infestor = new /mob/living/simple_animal/hostile/flood/infestor (src.loc)
 	visible_message("<span class = 'warning'>[src]'s flesh writhes for a moment, blood-red feelers emerging, followed by a singular infection form.</span>")
 
 /mob/living/simple_animal/hostile/flood/combat_form/verb/create_infestor_form()
 	set name = "Create Infestor Form"
 	set category = "Abilities"
+
+	if(stat == DEAD)
+		to_chat(usr,"<span class = 'notice'>You can't do that, you're dead!</span>")
+		return
 
 	spawn_infestor()
 
@@ -321,15 +354,22 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		contents -= our_gun
 		ranged = 0
 
+/mob/living/simple_animal/hostile/flood/combat_form/proc/human_in_sight()
+	for(var/mob/living/carbon/human/h in view(7,src))
+		return 1
+
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
 	. = ..()
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
 	. = ..()
+	if(stat == DEAD)
+		return
 	if(ckey || client)
 		return
-	//spawn_infestor() //Had too much of a performance hit over the duration of a round.
+	if(human_in_sight() && isnull(our_infestor))
+		spawn_infestor()
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)
