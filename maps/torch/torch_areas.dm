@@ -667,7 +667,6 @@
 	icon_state = "legal"
 	req_access = list(access_bridge)
 
-
 /area/command/captainmess
 	name = "Officer's Mess"
 	icon_state = "bar"
@@ -1236,10 +1235,6 @@
 /area/bridge/disciplinary_board_room
 	name = "\improper Disciplinary Board Room"
 	sound_env = SMALL_ENCLOSED
-
-/area/crew_quarters/heads
-	icon_state = "head_quarters"
-	req_access = list(access_heads)
 
 /area/crew_quarters/heads
 	icon_state = "head_quarters"
