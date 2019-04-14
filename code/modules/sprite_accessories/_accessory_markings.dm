@@ -12,11 +12,6 @@
 	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines
 	//Reminder: BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN,BP_HEAD
 
-//datum/sprite_accessory/marking/tat_heart_torso
-	//name = "Tattoo (Heart, Torso)"
-	//icon_state = "tat_heart-chest"
-	//body_parts = list(BP_CHEST)
-
 /datum/sprite_accessory/marking/tat_hive
 	name = "Tattoo (Hive, Back)"
 	icon_state = "tat_hive"
@@ -41,11 +36,6 @@
 	icon_state = "tat_tiger"
 	body_parts = list(BP_CHEST,BP_GROIN)
 
-/datum/sprite_accessory/marking/tat_tiger2
-	name = "Tattoo (Tiger Stripes, Body/Legs)"
-	icon_state = "tat_tiger"
-	body_parts = list(BP_L_LEG,BP_R_LEG,BP_CHEST,BP_GROIN)
-
 /datum/sprite_accessory/marking/tat_tiger_arm/left
 	name = "Tattoo (Tiger Left Arm)"
 	icon_state = "tat_tiger"
@@ -65,3 +55,40 @@
 	name = "Tattoo (Tiger Right Leg)"
 	icon_state = "tat_tiger"
 	body_parts = list(BP_R_LEG)
+
+/datum/sprite_accessory/marking/tigerhead
+	name = "Tattoo (Tiger Head)"
+	icon_state = "tigerhead"
+	body_parts = list(BP_HEAD)
+
+/datum/sprite_accessory/marking/tat_bands_body
+	name = "Tattoo (Bands Body)"
+	icon_state = "bands"
+	body_parts = list(BP_CHEST,BP_GROIN)
+
+/datum/sprite_accessory/marking/tat_bands_arm/right
+	name = "Tattoo (Bands Right Arm)"
+	icon_state = "bands"
+	body_parts = list(BP_R_ARM)
+
+/datum/sprite_accessory/marking/tat_bands_arm/left
+	name = "Tattoo (Bands Left Arm)"
+	icon_state = "bands"
+	body_parts = list(BP_L_ARM)
+
+/datum/sprite_accessory/marking/tat_bands_hand/right
+	name = "Tattoo (Bands Right Hand)"
+	icon_state = "bands"
+	body_parts = list(BP_R_HAND)
+/datum/sprite_accessory/marking/tat_bands_hand/left
+	name = "Tattoo (Bands Left Hand)"
+	icon_state = "bands"
+	body_parts = list(BP_L_HAND)
+/datum/sprite_accessory/marking/tat_bands_leg/right
+	name = "Tattoo (Bands Right Leg)"
+	icon_state = "bands"
+	body_parts = list(BP_R_LEG)
+/datum/sprite_accessory/marking/tat_bands_leg/left
+	name = "Tattoo (Bands Left Leg)"
+	icon_state = "bands"
+	body_parts = list(BP_L_LEG)
