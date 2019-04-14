@@ -89,15 +89,16 @@
 
 	item_state = "death_worn"
 	icon_state = "death_helmet"
-	
-//DONATOR GEAR	
-	
+
+//DONATOR GEAR
+//SOCKS
+
 /obj/item/clothing/head/helmet/urfc/socks
 	name = "H34D Dome Protector (TEXUS)"
 
 	item_state = "socks-helmet_worn"
-	icon_state = "socks-helmet_obj"	
-	
+	icon_state = "socks-helmet_obj"
+
 /obj/item/clothing/suit/armor/special/urfc/socks
 	name = "I25B Heavy Chest Rig (TEXUS)"
 
@@ -106,14 +107,49 @@
 
 /obj/item/clothing/under/urfc_jumpsuit/socks
 	name = "Eridanus Uniform (TEXUS)"
-	
+
 	item_state = "socks-jumpsuit_worn"
 	icon_state = "socks-jumpsuit_obj"
-	
-/obj/item/clothing/shoes/magboots/urfc/socks	
+
+/obj/item/clothing/shoes/magboots/urfc/socks
 	name = "F76F Mag Boots (TEXUS)"
-	
+
 	item_state = "socks-boots_worn"
 	icon_state = "socks-boots_obj"
-	
+
+//MCLOVIN
+/obj/item/clothing/head/helmet/urfc/mclovin1
+	name = "Eagle Helmet"
+
+	item_state = "mclovin_worn"
+	icon_state = "mclovin_helmet"
+
+/obj/item/clothing/head/helmet/urfc/mclovin2
+	name = "Jaguar Helmet"
+
+	item_state = "mclovin2_worn"
+	icon_state = "mclovin2_helmet"
+
+/obj/item/clothing/suit/armor/special/urfc/mclovin
+	name = "Eagle Armour"
+
+	item_state = "mclovin_armour_worn"
+	icon_state = "mclovin_armour_obj"
+
+/obj/item/clothing/under/urfc_jumpsuit/mclovin
+	name = "Eagle Jumpsuit"
+
+	item_state = "mclovin_uniform_s"
+	icon_state = "mclovin_uniform"
+
+/obj/item/weapon/material/machete/mclovin
+	name = "Aztec Sword"
+	desc = "An Aztec sword used to spill the blood of a warrior's enemy."
+	icon_state = "mclovin-machete_obj"
+	item_state = "mclovin-machete"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+
 //END DONATOR GEAR

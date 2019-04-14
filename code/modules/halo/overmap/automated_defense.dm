@@ -1,10 +1,11 @@
-#define AUTO_DEFENSE_LOCKON_DELAY 12 SECONDS
-#define AUTO_DEFENSE_FIRE_DELAY 5 SECONDS
+#define AUTO_DEFENSE_LOCKON_DELAY 21 SECONDS
+#define AUTO_DEFENSE_FIRE_DELAY 3 SECONDS
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses
 	name = "Automated Defenses"
-	icon = 'code/modules/halo/icons/overmap/human_stations.dmi'
-	icon_state = "s_station_1"
+	desc = "An automated defense emplacment. Stay away."
+	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
+	icon_state = "SMAC"
 
 	faction = "civilian"
 	available_ship_requests = newlist(/datum/npc_ship_request/automated_defense_process)
@@ -16,7 +17,12 @@
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
 	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(defense_range,src)
+	GLOB.overmap_tiles_uncontrolled -= range(defense_range*2,src)
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
+	. = ..()
+	for(var/datum/npc_ship_request/automated_defense_process/p in available_ship_requests)
+		p.start_target_fire_at = 1
 
 /datum/npc_ship_request/automated_defense_process
 	request_auth_levels = list()
@@ -28,6 +34,7 @@
 	var/next_fire_at = 0
 
 /datum/npc_ship_request/automated_defense_process/do_request_process(var/obj/effect/overmap/ship/npc_ship/automated_defenses/ship_source) //Return 1 in this to stop normal NPC ship move processing.
+	. = 1
 	if(!istype(ship_source))
 		return 0
 	var/list/in_range = range(ship_source.defense_range,ship_source)
@@ -37,6 +44,10 @@
 	if(current_target)
 		current_target.overlays.Cut()
 		if(current_target in in_range)
+			if(current_target.get_faction() == ship_source.get_faction())
+				previous_target = current_target
+				current_target = null
+				return
 			if(start_target_fire_at != 0 && world.time > start_target_fire_at)
 				firing_on_target = 1
 				current_target.overlays += icon('icons/effects/Targeted.dmi',"locked")
@@ -48,6 +59,9 @@
 			start_target_fire_at = 0
 
 	if(firing_on_target)
+		if(current_target.get_faction() == ship_source.get_faction())
+			current_target = null
+			return
 		if(world.time > next_fire_at)
 			var/obj/item/projectile/overmap/fired = new ship_source.proj_fired (ship_source.loc)
 			fired.permutated = ship_source
@@ -58,18 +72,18 @@
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
-			if(ship.get_faction() != "civilian" && ship.get_faction() != ship_source.get_faction())
+			if(!istype(ship,/obj/effect/overmap/ship/faction_base) && ship.get_faction() != ship_source.get_faction())
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
-			return 1
+			previous_target = current_target
+			current_target = null
+			return
 		current_target = pick(unauthed_ships)
 		var/obj/effect/overmap/ship/npc_ship/npc = current_target
 		if(istype(npc))
 			npc.ship_targetedby_defenses()
 		if(current_target == previous_target)
 			start_target_fire_at = world.time //Don't need to lock on again if it's the same ship.
-
-	return 1
 
 /obj/item/projectile/overmap/auto_defense_proj
 	name = "SMAC Round"
@@ -97,8 +111,8 @@
 	kill_count = 999
 
 /obj/item/projectile/auto_defense_proj/check_penetrate(var/atom/A)
-	. = ..()
 	explosion(A.loc,5,10,15,30)
+	. = ..()
 
 /obj/item/projectile/auto_defense_proj/covenant
 	name = "glassing beam"
@@ -108,20 +122,45 @@
 	tracer_delay_time = 5 SECONDS
 
 //FACTION DEFINES//
+/datum/npc_ship/unsc_defenseplatform
+	mapfile_links = list('maps/first_contact/maps/faction_bases/Human_Defense.dmm')
+	fore_dir = EAST
+	map_bounds = list(50,146,165,107)
+
+/datum/npc_ship/cov_defenseplatform
+	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Defense.dmm')
+	fore_dir = WEST
+	map_bounds = list(29,70,66,32)
+
 /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
+	icon_state = "SMAC"
 	faction = "unsc"
 	ship_name_list = list()
+	ship_datums = list(/datum/npc_ship/unsc_defenseplatform)
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc/generate_ship_name()
 	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
 
+/obj/effect/overmap/ship/npc_ship/automated_defenses/innie
+	icon_state = "SMAC"
+	faction = "innie"
+	ship_name_list = list()
+	ship_datums = list(/datum/npc_ship/unsc_defenseplatform)
+
+/obj/effect/overmap/ship/npc_ship/automated_defenses/innie/generate_ship_name()
+	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
+
 /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
+	icon_state = "cov_defenseplatform"
 	faction = "covenant"
-	proj_fired = /obj/item/projectile/auto_defense_proj/covenant
+	proj_fired = /obj/item/projectile/overmap/auto_defense_proj/covenant
+	ship_datums = list(/datum/npc_ship/cov_defenseplatform)
 	ship_name_list = list(\
 	"Woe of the Treacherous",
 	"Faithful Vanguard",
 	"Ardent Shield",
 	"Unyielding Faith",
-	"Resolute Prophecy"
+	"Resolute Prophecy",
+	"Journey's Shield",
+	"Vanguard of Charity"
 	)

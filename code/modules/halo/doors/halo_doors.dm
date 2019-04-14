@@ -6,9 +6,6 @@
 	opacity = 0
 	glass = 1
 
-/obj/machinery/door/airlock/halo_lifepod
-	name = "Specialty Armor Storage"
-
 /obj/machinery/door/airlock/halo_maint
 	name = "Maintenance Airlock"
 	icon = 'code/modules/halo/doors/airlockmaint.dmi'
@@ -20,11 +17,13 @@
 	name = "Airlock"
 	icon = 'code/modules/halo/doors/Airlocksingle.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
+	maxhealth = 1000
 
 /obj/machinery/door/airlock/multi_tile/halo
 	name = "Airlock"
 	icon = 'code/modules/halo/doors/Airlockdouble.dmi'
 	assembly_type = /obj/structure/door_assembly/multi_tile
+	maxhealth = 1500
 
 /obj/machinery/door/airlock/multi_tile/halo/blast
 	name = "Blast doors"
@@ -32,6 +31,7 @@
 	opacity = 0
 	glass = 1
 	assembly_type = /obj/structure/door_assembly/multi_tile
+	maxhealth = 2000
 
 /obj/machinery/door/airlock/multi_tile/secure
 	name = "Secure Airlock"
@@ -40,7 +40,7 @@
 
 obj/machinery/door/blast/regular/triple
 	icon = 'code/modules/halo/doors/blastdoor.dmi'
-	maxhealth = 1800
+	maxhealth = 2000
 
 obj/machinery/door/blast/regular/triple/New()
 	..()
@@ -59,7 +59,7 @@ obj/machinery/door/blast/regular/triple/New()
 
 obj/machinery/door/blast/regular/quadruple
 	icon = 'code/modules/halo/doors/Longer Blastdoor.dmi'
-	maxhealth = 2400
+	maxhealth = 2500
 
 obj/machinery/door/blast/regular/quadruple/New()
 	..()

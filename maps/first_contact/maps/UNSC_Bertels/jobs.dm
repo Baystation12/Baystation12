@@ -10,7 +10,7 @@
 	spawn_positions = 8
 	selection_color = "#0A0A95"
 	access = list(142)
-	spawnpoint_override = "UNSC Bertels Ship Crew Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 
 /datum/job/unscbertels_medical_crew
 	title = "UNSC Bertels Hospital Corpsman"
@@ -19,7 +19,7 @@
 	spawn_positions = 4
 	selection_color = "#0A0A95"
 	access = list(142)
-	spawnpoint_override = "UNSC Bertels Medical Staff Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
@@ -28,7 +28,7 @@
 	spawn_positions = 1
 	selection_color = "#0A0A95"
 	access = list(142,143,144,145)
-	spawnpoint_override = "UNSC Bertels CO Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	faction_whitelist = "UNSC"
 
 /datum/job/unscbertels_xo
@@ -38,7 +38,7 @@
 	spawn_positions = 1
 	selection_color = "#0A0A95"
 	access = list(142,144,145)
-	spawnpoint_override = "UNSC Bertels XO Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 
 
 
@@ -54,7 +54,7 @@
 	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
 	"EVA Combat Marine")
 	access = list(142,144,192)
-	spawnpoint_override = "UNSC Bertels Marine Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -63,7 +63,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
 	access = list(142,144,145,192)
-	spawnpoint_override = "UNSC Bertels Marine Platoon Leader Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 
 
 
@@ -85,7 +85,7 @@
 
 	selection_color = "#0A0A95"
 	access = list(142,144,110,192,309,310)
-	spawnpoint_override = "UNSC Bertels ODST Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
 
 /datum/job/bertelsODSTO
@@ -101,5 +101,5 @@
 	"Colonel" = /decl/hierarchy/outfit/job/bertelsODSTcolonel)
 	selection_color = "#0A0A95"
 	access = list(142,144,145,110,192,300,306,309,310,311)
-	spawnpoint_override = "UNSC Bertels ODST Officer Spawn"
+	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1

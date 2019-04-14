@@ -384,13 +384,15 @@
 "ht" = (/obj/machinery/telecomms/relay/long_range_planetary{tag = "icon-default"; icon_state = ""},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/central_hallway_1)
 "hu" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/asteroid_base/north_airlock_1)
 "hv" = (/obj/effect/landmark/map_data{name = "New New Antarctica"},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/central_hallway_1)
+"hw" = (/obj/item/device/mobilecomms/commsbackpack/innie/permanant,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/central_hallway_2)
+"hx" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/central_hallway_2)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababacacacacacacacacacacacacacababab
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaeadadacacacabababababababacafagahaiajagakalamaganacababab
+aahwaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaeadadacacacabababababababacafagahaiajagakalamaganacababab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaoaoaoapaqapaoarasacabababababababacatauavawaiagakaiaiagaxacababab
-aaaaaaaaaaaaaaaaaaaaaaaaadadaeadadaoaoaoaoaqaoaoararacayayayayayababacaiagavaiazagakaiaAagaxacababab
+aahxaaaaaaaaaaaaaaaaaaaaadadaeadadaoaoaoaoaqaoaoararacayayayayayababacaiagavaiazagakaiaAagaxacababab
 aaaaaaaBaBaBaBaBaBaBaBaBadaCaDaEadaoaoaqaqaqaqaqararacayaFaGaHayayayacaIagakaJaKagakaLaMagaxacababab
 aaaaaaaBaCaNaNaNaCaCaNaNaNaOaPaNadaqaqaqaoaQaoaqaRaRacayaSaTaUaHaHayacaVaWaXaVaVaWaYaZaZaWaxacababab
 aaaaaaaBaCaBaBaBaBaBaBaBadaNbaaNadbbaoaqaoaoaoaqarbcacayaHaHaGayaGaHbdbeaxaxbfaxaxaxbgaxaxaxacababab
