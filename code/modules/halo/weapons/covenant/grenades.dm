@@ -35,14 +35,14 @@
 		for(var/mob/living/hit_mob in range(alt_explosion_range,src))
 			hit_mob.adjustFireLoss(alt_explosion_damage_max/2)
 			to_chat(hit_mob,"<span class = 'danger'>[src] explodes! Heat from the explosion washes over your body...</span>")
-
+	var/turf/epicenter = get_turf(src)
 	//the custom sfx itself
 	for(var/mob/M in GLOB.player_list)
 		if(M.z == epicenter.z)
 			var/turf/M_turf = get_turf(M)
 			var/dist = get_dist(M_turf, epicenter)
 			// If inside the blast radius + world.view - 2
-			if(dist <= round(max_range + world.view - 2, 1))
+			if(dist <= round(alt_explosion_range + world.view - 2, 1))
 				M.playsound_local(epicenter, 'code/modules/halo/sounds/Plasmanadedetonate.ogg', 100, 1)
 
 	for(var/obj/item/organ/external/o in mob_containing.bad_external_organs)
