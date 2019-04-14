@@ -732,3 +732,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(armor_thickness <= 0)
 		desc_addition_to_apply = "<span class = 'warning'> It has [damage_type == BURN ? "melted away" : "become scarred and deformed"].</span>"
 	desc = initial(desc) + desc_addition_to_apply
+
+/obj/item/proc/can_use_when_prone()
+	return (w_class <= ITEM_SIZE_NORMAL)
