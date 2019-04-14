@@ -105,6 +105,9 @@
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/storage/firstaid/adv,
+		/obj/item/device/flash,
+		/obj/item/clothing/suit/armor/pcarrier/medium/medic,
+		/obj/item/clothing/head/helmet/solgov,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
