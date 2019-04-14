@@ -42,7 +42,16 @@
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
 
-	var/pulse_mod = owner.chem_effects[CE_PULSE]
+	var/pulse_chem_level = owner.chem_effects[CE_PULSE]
+	var/is_stable = owner.chem_effects[CE_STABLE]
+		
+	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
+	if(pulse_chem_level > 2 && !is_stable)
+		var/damage_chance = (pulse_chem_level - 2) ** 2
+		if(prob(damage_chance))
+			take_internal_damage(0.5)
+	
+	var/pulse_mod = pulse_chem_level
 
 	if(owner.shock_stage > 30)
 		pulse_mod++
@@ -71,13 +80,16 @@
 			pulse = PULSE_NONE
 			return
 
-	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
-	if(pulse && fibrillation && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
-		pulse = PULSE_THREADY
-		return
-
+	// Pulse normally shouldn't go above PULSE_2FAST
 	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
-	if(pulse != PULSE_NORM && owner.chem_effects[CE_STABLE])
+
+	// If fibrillation, then it can be PULSE_THREADY
+	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
+	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
+		pulse = PULSE_THREADY
+
+	// Stablising chemicals pull the heartbeat towards the center
+	if(pulse != PULSE_NORM && is_stable)
 		if(pulse > PULSE_NORM)
 			pulse--
 		else
@@ -89,6 +101,8 @@
 		//High pulse value corresponds to a fast rate of heartbeat.
 		//Divided by 2, otherwise it is too slow.
 		var/rate = (PULSE_THREADY - pulse)/2
+		if(owner.chem_effects[CE_PULSE] > 2)
+			heartbeat++
 
 		if(heartbeat >= rate)
 			heartbeat = 0
