@@ -43,7 +43,6 @@
 	icon_state = "brain-prosthetic"
 
 /obj/item/organ/internal/brain/Initialize()
-	. = ..()
 	..()
 	if(species)
 		set_max_damage(species.total_health)
