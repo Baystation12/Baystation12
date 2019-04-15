@@ -120,12 +120,12 @@
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
 	)
 
-/obj/structure/closet/secure_closet/JAG
+/obj/structure/closet/secure_closet/lawyer
 	name = "judge advocate's locker"
 	req_access = list(access_bridge)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/bo
 
-/obj/structure/closet/secure_closet/JAG/WillContain()
+/obj/structure/closet/secure_closet/lawyer/WillContain()
 	return list(
 		/obj/item/device/flash,
 		/obj/item/device/camera,

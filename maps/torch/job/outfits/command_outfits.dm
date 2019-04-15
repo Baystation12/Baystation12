@@ -143,18 +143,15 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/command/jag/fleet
-	name = OUTFIT_JOB_NAME("Judge Advocate - Fleet")
+/decl/hierarchy/outfit/job/torch/crew/command/lawyer
+	name = OUTFIT_JOB_NAME("Judge Advocate")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/crew/jag
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
+	id_type = /obj/item/weapon/card/id/torch/crew/lawyer
+	pda_type = /obj/item/modular_computer/pda/heads
 	l_ear = /obj/item/device/radio/headset/headset_com
 
-/decl/hierarchy/outfit/job/torch/crew/command/jag/ec
+/decl/hierarchy/outfit/job/torch/crew/command/lawyer/ec
 	name = OUTFIT_JOB_NAME("Judge Advocate - EC")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/crew/jag
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
-	l_ear = /obj/item/device/radio/headset/headset_com

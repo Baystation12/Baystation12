@@ -387,7 +387,7 @@
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
 
-/datum/job/jag
+/datum/job/lawyer
 	title = "Judge Advocate"
 	department = "Support"
 	department_flag = SPT
@@ -398,10 +398,10 @@
 	minimal_player_age = 7
 	economic_power = 10
 	ideal_character_age = 30
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/jag/fleet
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/lawyer
 	allowed_branches = list(
 		/datum/mil_branch/fleet,
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/command/jag/ec
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/command/lawyer/ec
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o1,
@@ -411,9 +411,9 @@
 	skill_points = 20
 
 
-	access = list(access_maint_tunnels, access_bridge, access_RC_announce, access_solgov_crew, access_cent_creed)
+	access = list(access_bridge, access_RC_announce, access_solgov_crew)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
-/datum/job/jag/get_description_blurb()
+/datum/job/lawyer/get_description_blurb()
 	return "You are a Judge Advocate. You are a uniformed lawyer assigned to provide legal counsel to uniformed personnel and advise command staff on matters of SCUJ. While on [GLOB.using_map.full_name] you are subordinate to the CO and XO, but ultimately answer to the Judge Advocate General. You may be called upon to assist in hearings and courts-martial."
