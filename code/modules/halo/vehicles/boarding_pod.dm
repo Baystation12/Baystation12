@@ -78,7 +78,7 @@
 	name = "Boarding Pod"
 	desc = "A modified escape pod, with extra armour plating to enable survival on impact with other spacefaring vessels."
 	icon = 'code/modules/halo/vehicles/covenant_pods.dmi'
-	icon_state = "boarding"
+	icon_state = "cov_boarding"
 
 	bound_width = 64
 	bound_height = 96

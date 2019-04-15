@@ -63,7 +63,7 @@
 	name = "Escape Pod"
 	desc = "An enclosed environment for use in emergency evacuation procedures."
 	icon = 'code/modules/halo/vehicles/covenant_pods.dmi'
-	icon_state = "escape"
+	icon_state = "cov_escape"
 
 	bound_width = 64
 	bound_height = 96
