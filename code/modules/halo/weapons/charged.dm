@@ -13,7 +13,7 @@
 	icon_state = "spartanlaser"
 	item_state = "m41"
 	slot_flags = SLOT_BACK
-	w_class = 3
+	w_class = ITEM_SIZE_HUGE
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

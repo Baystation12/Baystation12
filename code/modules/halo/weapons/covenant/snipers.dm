@@ -5,6 +5,7 @@
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "type 51"
 	item_state = "type 51"
+	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/cov_carbine_fire.ogg'
 	magazine_type = /obj/item/ammo_magazine/type51mag
@@ -19,6 +20,9 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+/obj/item/weapon/gun/projectile/type51carbine/can_use_when_prone()
+	return 1
 
 /obj/item/weapon/gun/projectile/type51carbine/verb/scope()
 	set category = "Weapon"
@@ -43,7 +47,8 @@
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "beam rifle"
 	item_state = "beam rifle"
-	slot_flags = SLOT_BACK | SLOT_BELT
+	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
 	charge_meter = 1
 	max_shots = 10
@@ -57,6 +62,9 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+/obj/item/weapon/gun/energy/beam_rifle/can_use_when_prone()
+	return 1
 
 /obj/item/weapon/gun/energy/beam_rifle/verb/scope()
 	set category = "Weapon"
@@ -90,6 +98,7 @@ obj/item/weapon/gun/projectile/type31needlerifle
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Needle rifle"
 	item_state = "Needle rifle"
+	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/cov_needlerifle_fire.ogg'
 	magazine_type = /obj/item/ammo_magazine/rifleneedlepack
@@ -103,6 +112,9 @@ obj/item/weapon/gun/projectile/type31needlerifle
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+/obj/item/weapon/gun/projectile/type31needlerifle/can_use_when_prone()
+	return 1
 
 /obj/item/weapon/gun/projectile/type31needlerifle/verb/scope()
 	set category = "Weapon"
