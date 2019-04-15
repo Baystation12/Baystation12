@@ -109,7 +109,8 @@
 	if(!is_same(M))
 		return 0
 	var/transfer = ..(M,tamount,1)
-	update_strings()
+	if(!QDELETED(src))
+ 	   update_strings()
 	if(!QDELETED(M))
 		M.update_strings()
 	return transfer
