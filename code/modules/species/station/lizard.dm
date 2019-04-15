@@ -25,7 +25,7 @@
 	weaken_mod = 1.1
 	blood_volume = 800
 	natural_armour_values = list(melee = 25, bullet = 15, laser = 10, energy = 0, bomb = 30, bio = 0, rad = 0)
-	breath_pressure = 20
+	breath_pressure = 19
 
 	has_organ = list(
 		BP_HEAD =     /obj/item/organ/external/head/unathi,

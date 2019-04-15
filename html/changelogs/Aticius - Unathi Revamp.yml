@@ -8,7 +8,7 @@ changes:
   - rscadd: "Unathi have three new organs, the Mogendrix, which aids with blood regeneration,  the Cardioasylant, which may restart the heart after cardiac arrest and the Air Sack, a fragile lung equvialent."
   - tweak: "Unathi's Brute Mod has been moved into Armor. Guns and E-Swords hurt them just fine, now."
   - tweak: "Unathi require more oxygen to survive than a human- 20 kpa partial pressure, compared to 16."
-  - tweak: "Unathi have stronger heads, and 50% more brain health."
+  - tweak: "Unathi have 50% more brain health."
   - tweak: "Replacement Organs for Unathi are markedly more expensive in the Bioprinter."
   - rscadd: "Adds Mogine, a reagent that regenerates blood much like Nanoblood, but far less effective. Made by the Mogendrix. You can steal it from them."
   - rscadd: "Unathi take longer to build up a bad case of Radiation."

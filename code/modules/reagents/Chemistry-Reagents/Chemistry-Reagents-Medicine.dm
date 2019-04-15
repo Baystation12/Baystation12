@@ -925,4 +925,4 @@
 /datum/reagent/mogine/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.add_chemical_effect(CE_BLOODRESTORE, 3)
+	M.add_chemical_effect(CE_BLOODRESTORE, 3 * removed)

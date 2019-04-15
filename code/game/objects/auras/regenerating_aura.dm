@@ -18,6 +18,7 @@
 	var/grow_threshold = 0
 	var/ignore_tag//organ tag to ignore
 	var/last_nutrition_warning = 0
+	var/last_cannibalism_alarm = 0
 	var/innate_heal = TRUE // Whether the aura is on, basically.
 
 
@@ -74,13 +75,17 @@
 	if(prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && E.organ_tag != BP_HEAD && E.organ_tag != BP_GROIN && !E.vital && !E.is_usable())	//Skips heads and vital bits...
-				if (H.nutrition > grow_threshold)
-					E.removed()			//...because no one wants their head to explode to make way for a new one.
-					qdel(E)
-					E= null
+			if(E)
+				var/noregen = FALSE
+				for(var/obj/item/organ/internal/organ in E.internal_organs)
+					if(organ.parent_organ == E.organ_tag)
+						noregen = TRUE
+						break
+				if( (!noregen) && !E.vital && !E.is_usable())    //Skips heads and vital bits...
+					if (H.nutrition > grow_threshold)
+						E.removed()            //...because no one wants their head to explode to make way for a new one.
+						qdel(E)
 				else
-					low_nut_warning(E.name)
 					return
 			if(!E)
 				var/list/organ_data = H.species.has_limbs[limb_type]
