@@ -110,7 +110,7 @@
 		return 0
 	var/transfer = ..(M,tamount,1)
 	if(!QDELETED(src))
- 	   update_strings()
+ 		update_strings()
 	if(!QDELETED(M))
 		M.update_strings()
 	return transfer
