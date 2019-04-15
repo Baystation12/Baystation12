@@ -207,7 +207,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			var/datum/job/job = jtype
 			if(initial(job.available_by_default))
 				allowed_jobs += jtype
-	if(!planet_size)
+	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 
 /datum/map/proc/get_lobby_track(var/exclude)

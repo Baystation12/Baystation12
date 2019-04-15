@@ -4,28 +4,12 @@
 	color = "#d6cca4"
 	planetary_area = /area/exoplanet/desert
 	rock_colors = list(COLOR_BEIGE, COLOR_PALE_YELLOW, COLOR_GRAY80, COLOR_BROWN)
-	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-							 /datum/map_template/ruin/exoplanet/oasis,
-							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
-							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
-							 /datum/map_template/ruin/exoplanet/fountain,
-							 /datum/map_template/ruin/exoplanet/marooned,
-							 /datum/map_template/ruin/exoplanet/hydrobase,
-							 /datum/map_template/ruin/exoplanet/lodge,
-							 /datum/map_template/ruin/exoplanet/crashed_pod,
-							 /datum/map_template/ruin/exoplanet/drill_site,
-							 /datum/map_template/ruin/exoplanet/radshrine,
-							 /datum/map_template/ruin/exoplanet/playablecolony,
-							 /datum/map_template/ruin/exoplanet/datacapsule)
+	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
-	..()
 	if(prob(70))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
-	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/desert(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
-		get_biostuff(M)
-		new /datum/random_map/noise/ore/rich(null,1,1,zlevel,maxx,maxy,0,1,1)
+	..()
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_atmosphere()
 	..()
@@ -56,15 +40,13 @@
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
+	if(is_edge_turf(T))
+		return
 	var/v = noise2value(value)
 	if(v > 6)
 		T.icon_state = "desert[v-1]"
 		if(prob(10))
 			new/obj/structure/quicksand(T)
-
-/datum/random_map/noise/ore/rich
-	deep_val = 0.7
-	rare_val = 0.5
 
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')

@@ -4,25 +4,7 @@
 	color = "#e8faff"
 	planetary_area = /area/exoplanet/snow
 	rock_colors = list(COLOR_DARK_BLUE_GRAY, COLOR_GUNMETAL, COLOR_GRAY80, COLOR_DARK_GRAY)
-	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
-							 /datum/map_template/ruin/exoplanet/oasis,
-							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
-							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
-							 /datum/map_template/ruin/exoplanet/fountain,
-							 /datum/map_template/ruin/exoplanet/hydrobase,
-							 /datum/map_template/ruin/exoplanet/lodge,
-							 /datum/map_template/ruin/exoplanet/crashed_pod,
-							 /datum/map_template/ruin/exoplanet/drill_site,
-							 /datum/map_template/ruin/exoplanet/hut,
-							 /datum/map_template/ruin/exoplanet/playablecolony,
-							 /datum/map_template/ruin/exoplanet/datacapsule)
-
-/obj/effect/overmap/sector/exoplanet/snow/generate_map()
-	..()
-	for(var/zlevel in map_z)
-		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/snow(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
-		get_biostuff(M)
-		new /datum/random_map/noise/ore/poor(null,1,1,zlevel,maxx,maxy,0,1,1)
+	map_generators = list(/datum/random_map/noise/exoplanet/snow, /datum/random_map/noise/ore/poor)
 
 /obj/effect/overmap/sector/exoplanet/snow/generate_atmosphere()
 	..()
@@ -44,12 +26,6 @@
 /area/exoplanet/snow
 	ambience = list('sound/effects/wind/tundra0.ogg','sound/effects/wind/tundra1.ogg','sound/effects/wind/tundra2.ogg','sound/effects/wind/spooky0.ogg','sound/effects/wind/spooky1.ogg')
 	base_turf = /turf/simulated/floor/exoplanet/snow/
-
-/datum/random_map/noise/ore/poor
-	deep_val = 0.8
-	rare_val = 0.7
-	min_rare_ratio = 0.02
-	min_rare_ratio = 0.01
 
 /turf/simulated/floor/exoplanet/ice
 	name = "ice"
