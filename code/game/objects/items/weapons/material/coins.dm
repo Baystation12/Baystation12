@@ -15,6 +15,7 @@
 	..()
 
 /obj/item/weapon/material/coin/on_update_icon()
+	..()
 	if(!isnull(string_colour))
 		var/image/I = image(icon = icon, icon_state = "coin_string_overlay")
 		I.appearance_flags |= RESET_COLOR
