@@ -173,8 +173,14 @@
 	alt_titles = list(
 		"Mechsuit Technician")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps,
+							/datum/mil_branch/civilian,
+							/datum/mil_branch/solgov)
+	allowed_ranks = list(
+						/datum/mil_rank/ec/o1,
+						/datum/mil_rank/ec/e7,
+						/datum/mil_rank/civ/contractor,
+						/datum/mil_rank/sol/scientist)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT)
 
