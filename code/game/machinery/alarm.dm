@@ -353,6 +353,11 @@
 			return
 	if(!signal || signal.encryption)
 		return
+	if(alarm_id == signal.data["alarm_id"] && signal.data["command"] == "shutdown")
+		mode = AALARM_MODE_OFF
+		apply_mode()
+		return
+
 	var/id_tag = signal.data["tag"]
 	if (!id_tag)
 		return

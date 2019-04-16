@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - maptweak: "Charon laoyout changed, it now has a cargo bay that can be cycled to outside air."

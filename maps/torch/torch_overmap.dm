@@ -49,6 +49,7 @@
 	shuttle = "Charon"
 	max_speed = 1/(2 SECONDS)
 	burn_delay = 1 SECONDS
+	vessel_mass = 5000
 	fore_dir = NORTH
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_SMALL
