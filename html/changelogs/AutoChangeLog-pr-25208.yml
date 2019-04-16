@@ -1,0 +1,6 @@
+author: "Crackers5"
+delete-after: True
+changes: 
+  - rscdel: "Removes some existing body markings"
+  - rscdel: "Removes species restriction from tattoos"
+  - rscadd: "Splits up existing body markings/tattoos to be selectable per limb instead of full body."
