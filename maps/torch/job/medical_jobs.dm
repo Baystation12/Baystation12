@@ -91,7 +91,7 @@
 	title = "Biomechanical Engineer"
 	department = "Medical"
 	department_flag = MED
-	minimal_player_age = 25
+	minimal_player_age = 0
 	ideal_character_age = 45
 	total_positions = 1
 	spawn_positions = 1
