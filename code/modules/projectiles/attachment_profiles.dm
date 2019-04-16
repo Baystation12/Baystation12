@@ -56,3 +56,14 @@
 		"underslung grenade launcher" = list(0,0,0,2),
 		"flashlight attachment" = list(0,0,0.1)
 		)
+
+/datum/attachment_profile/BR55
+	weapon_name = "\improper BR55 Battle Rifle"
+	on_item_icon_states = list(\
+		"BR55 barrel attachment" = "BR55-Barrel",
+		"BR55 suppressor" = "BR55-Suppressor",
+		"BR55 scope" = "BR55-CarryHandle-Scope",
+		"BR55 cheekrest" = "BR55-Cheekrest",
+		"BR55 hand guard" = "BR55-Bottom",
+		"BR55 vertical grip" = "BR55-Grip",
+		"BR55 carry handle" = "BR55-CarryHandle",)

@@ -155,7 +155,7 @@
 
 /obj/item/ammo_magazine/m95_sap
 	name = "magazine (9.5mm) M634 X-HP-SAP"
-	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 rounds. Standard issue."
+	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 rounds. Specific to the BR85."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Br85_mag"
 	mag_type = MAGAZINE
@@ -164,6 +164,10 @@
 	caliber = "9.5mm"
 	max_ammo = 36		//lets try 20 instead of 60 for now
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m95_sap/br55
+	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 rounds. Specific to the BR55."
+	icon_state = "BR55_Mag"
 
 /obj/item/ammo_casing/a95_sap
 	desc = "A 7.62mm bullet casing."
