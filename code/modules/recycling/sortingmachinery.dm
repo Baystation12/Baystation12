@@ -133,9 +133,14 @@
 	var/tag_x
 
 /obj/item/smallDelivery/proc/unwrap(var/mob/user)
-	if (!wrapped || !Adjacent(user))
+	if (!contents.len || !Adjacent(user))
 		return
+
 	user.put_in_hands(wrapped)
+	// Take out any other items that might be in the package
+	for(var/obj/item/I in src)
+		user.put_in_hands(I)
+
 	qdel(src)
 
 /obj/item/smallDelivery/attack_robot(mob/user as mob)
