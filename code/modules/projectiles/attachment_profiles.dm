@@ -15,8 +15,8 @@
 	weapon_name = "\improper MA5B Assault Rifle"
 
 	on_item_icon_states = list(\
-		"Suppressor" = "MA5-Suppressor",
-		"Scope" = "MA5-Scope",
+		"MA5B suppressor" = "MA5-Suppressor",
+		"MA5B scope" = "MA5-Scope",
 		"underslung shotgun" = "MA5-Shotgun",
 		"MA5 stock cheekrest" = "MA5-Cheekrest",
 		"MA5 basic stock butt" = "MA5-Butt-Basic",
@@ -29,8 +29,8 @@
 		"flashlight attachment" = "MA5-Grip-Basic-FlashlightOff")
 
 	weapon_pixel_offsets = list(\
-	"Suppressor" = list(0,0),
-	"Scope" = list(0,0),
+	"MA5B suppressor" = list(0,0),
+	"MA5B scope" = list(0,0),
 	"underslung shotgun" = list(0,0), //most of these are pre-aligned for the ma5b and therfore require no modification
 	"MA5 stock cheekrest" = list(0,0),
 	"MA5 basic stock butt" = list(0,0),
@@ -44,8 +44,8 @@
 	)
 
 	attribute_modifications = list(\
-		"scope" = list(0,0.5,0.1),
-		"Suppressor" = list(0.5,0,0.1),
+		"MA5B scope" = list(0,0.5,0.1),
+		"MA5B suppressor" = list(0.5,0,0.1),
 		"MA5 stock cheekrest" = list(0,0,0),
 		"MA5 basic stock butt" = list(0,0,0),
 		"MA5 extended stock butt" = list(-0.25,0,0.1),
