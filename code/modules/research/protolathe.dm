@@ -2,6 +2,7 @@
 	name = "protolathe"
 	desc = "Accessed by a connected core fabricator console, it produces items from various materials."
 	icon_state = "protolathe"
+	layer = BELOW_OBJ_LAYER
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 
 	idle_power_usage = 30
