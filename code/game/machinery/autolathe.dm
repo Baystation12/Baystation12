@@ -2,6 +2,7 @@
 	name = "autolathe"
 	desc = "It produces items using metal, glass, plastic, and aluminium. It has a built in shredder that can recycle most items, although any materials it cannot use will be wasted."
 	icon_state = "autolathe"
+	layer = BELOW_OBJ_LAYER
 	density = 1
 	anchored = 1
 	idle_power_usage = 10
