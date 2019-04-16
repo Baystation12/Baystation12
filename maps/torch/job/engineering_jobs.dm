@@ -54,7 +54,7 @@
 	spawn_positions = 6
 	supervisors = "the Chief Engineer"
 	economic_power = 5
-	minimal_player_age = 0
+	minimal_player_age = 21
 	ideal_character_age = 30
 	alt_titles = list(
 		"Maintenance Technician",
