@@ -2,17 +2,40 @@
 /mob/living/simple_animal/npc/colonist
 	name = "colonist"
 	desc = "A human from one of Earth's diverse cultures who decided to try a future offplanet."
-	emote_hear = list("coughs","sneezes","sniffs","clears their throat","whistles tunelessly")
-	emote_see = list("shifts from side to side","scratches their arm","examines their nails","stares at at the ground aimlessly","looks bored")
+	emote_hear = list("coughs","sneezes","sniffs","clears their throat","whistles tunelessly","sighs deeply","yawns","gasps loudly")
+	emote_see = list("shifts from side to side","scratches their arm","examines their nails","stares at at the ground aimlessly","looks bored","Places their hands in thier pockets","Stares at you with a blank expression")
 	speak = list("Have you heard the latest news from Earth?",\
 		"I'd love to visit Reach one day.",\
 		"If you ever want to visit a frontier world, check out the Draetheus V colony.",\
 		"I hope the weather improves.",\
-		"The price of starship fuel is insane right now.",\
-		"Did you hear the rioting worsened on Far Isle yesterday?",\
+		"I hope this war ends soon",\
+		"If I were you I'd leave this place before you end up dead.",\
+		"The 111 Tauri System isn't like the inner colonies or Earth, we play other rules out here!",\
+		"Who knows the UEG might bless us with less taxes and more biofoam!",\
+		"Oof",\
+		"I swear I hate KS7 nothing but snow and rocks, Geminus is a way better colony!",\
+		"Sometimes the UNSC can be full of madlads.",\
+		"Sometimes I think the URF can do good for us outer colonist!",\
+		"I swear that gun smuggler has the most awful prices",\
+		"Will the UEG ever let KS7 rejoin them?",\
+		"I really need a drink right now.",\
+		"Anyone here got a smoke?",\
+		"Just great I lost my credits!",\
+		"I could care less about UNSC or URF, I just want to fish!",\
+		"Born to fish, forced to work.",\
+		"I use to be a UNSC marine like you,then I took an bullet to the knee",\
+		"I can't believe they took the kids after leaving me.",\
+		"I met this guy named Blackburn and we hit it off, I hope he calls me back because I have some news to tell him.",\
+		"The price of these UEG taxes is insane right now.",\
+		"Did you hear about the colonies going dark?",\
+		"Nah, that's all just propaganda about the colonies going dark."
+		"Theres nothing like coffee in the morning,let me tell you,that stuff brings you back from the dead.",\
+		"Did you hear about that ODST that murder those civilians  on the CCV Deliverance medical ship,I heard they are still on the run hiding in Geminus"
+		"Still can't believe it has been five years since Far Isle got nuked.",\
 		"Have you heard the plans for the spaceport upgrade?",\
+		"You heard the plans for the spaceport upgrade?",\
 		"Let me tell you, Martian made means low quality knockoffs.",\
-		"I have relatives on Coral. I should really go visit them.")
+		"I have relatives on Harvest. I should really go visit them because I haven't heard from them for awhile.")
 	speak_chance = 5
 	jumpsuits = list(\
 		/obj/item/clothing/under/color/aqua,\
