@@ -1,0 +1,4 @@
+author: "Roaper"
+delete-after: True
+changes: 
+  - rscdel: "Removed old contraband poster that depicted a spess cat. Also commented out it in the code."
