@@ -23,8 +23,8 @@
 		responses = list(\
 		"The UNSC are only doing what's best.",\
 		"These high taxes make me feel safe becasue I know the UNSC will get stronger!",\
-		"Can't wait for the UNSC to kick the URF out of here!"
-		"Don't like the UNSC, fucking leave then buddy!"
+		"Can't wait for the UNSC to kick the URF out of here!",\
+		"Don't like the UNSC, fucking leave then buddy!",\
 		"UNSC is the UEG's sword and my colony's shield, you better show respect to the UNSC!",\
 		"The UNSC will protect us from the URF scum!",\
 		"UNSC pride colony wide!",\
