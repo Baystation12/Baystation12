@@ -636,6 +636,12 @@
 /obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"bk" = (
+/obj/effect/floor_decal/corner/white/full,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/suit_storage_unit/command,
+/turf/simulated/floor/tiled/dark,
+/area/aux_eva)
 "bm" = (
 /obj/random/closet,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -8510,14 +8516,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
-"si" = (
-/obj/machinery/suit_storage_unit/pilot/sol{
-	req_access = list("ACCESS_BRIDGE")
-	},
-/obj/effect/floor_decal/corner/white/full,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
-/area/aux_eva)
 "sn" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Secure Storage"
@@ -33328,7 +33326,7 @@ on
 Th
 Dq
 Uh
-si
+bk
 Bi
 IW
 CO
