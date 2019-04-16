@@ -6574,6 +6574,17 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/waterstore)
+"vi" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/button/remote/blast_door{
+	id = "qm_warehouse2";
+	name = "Warehouse Door Control";
+	pixel_x = 26;
+	pixel_y = -25;
+	req_access = list("ACCESS_CARGO")
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/aft)
 "vj" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
@@ -38365,7 +38376,7 @@ yC
 yC
 gM
 yC
-bE
+vi
 fA
 sj
 Pg
