@@ -177,7 +177,7 @@
 	one_hand_penalty = -1
 
 	slowdown_general = 7
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	can_rename = 0
 	item_icons = list( //Null here due to this version being used only when manning the turret, Every turret requires a /detached define with the item_icons set.
 		slot_l_hand_str = null,
