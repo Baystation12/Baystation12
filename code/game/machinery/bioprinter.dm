@@ -6,6 +6,7 @@
 	desc = "It's a machine that prints organs."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bioprinter"
+	layer = BELOW_OBJ_LAYER
 
 	anchored = 1
 	density = 1
