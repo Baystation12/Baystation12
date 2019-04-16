@@ -28,9 +28,9 @@
 		"I met this guy named Blackburn and we hit it off, I hope he calls me back because I have some news to tell him.",\
 		"The price of these UEG taxes is insane right now.",\
 		"Did you hear about the colonies going dark?",\
-		"Nah, that's all just propaganda about the colonies going dark."
+		"Nah, that's all just propaganda about the colonies going dark.",\
 		"Theres nothing like coffee in the morning,let me tell you,that stuff brings you back from the dead.",\
-		"Did you hear about that ODST that murder those civilians  on the CCV Deliverance medical ship,I heard they are still on the run hiding in Geminus"
+		"Did you hear about that ODST that murder those civilians  on the CCV Deliverance medical ship,I heard they are still on the run hiding in Geminus",\
 		"Still can't believe it has been five years since Far Isle got nuked.",\
 		"Have you heard the plans for the spaceport upgrade?",\
 		"You heard the plans for the spaceport upgrade?",\

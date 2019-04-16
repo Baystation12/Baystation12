@@ -82,8 +82,8 @@
 		"I'm going to report any innie to the local UNSC forces!",\
 		"Damn the URF, they aren't trying to help us at all!",\
 		"A good innie is a dead innie in my book.",\
-		"UNSC shall save us from the URF scum!".\
-		"Insurrection needs to learn their place, nothing but killers and junkies!",\
+		"UNSC shall save us from the URF scum!",\
+		"Insurrection needs to learn their place nothing but killers and junkies!",\
 		"Can't wait for the United Rebel Front to fall at the hands of the UNSC!",\
 		"The insurrection wants to burn everything we've built here.",\
 		"I hope the insurrection doesn't come to Geminus.",\
