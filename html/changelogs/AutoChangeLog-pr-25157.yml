@@ -1,5 +1,0 @@
-author: "Atebite"
-delete-after: True
-changes: 
-  - rscadd: "Three new random events have been added"
-  - tweak: "The T-ray scanner can now inspect disposal pipes for damage"
