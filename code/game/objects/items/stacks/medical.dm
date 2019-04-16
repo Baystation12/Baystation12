@@ -144,7 +144,7 @@
 	desc = "An advanced trauma kit for severe injuries."
 	icon_state = "traumakit"
 	heal_brute = 0
-	amount 10
+	amount = 10
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 12
 
@@ -197,7 +197,7 @@
 	desc = "An advanced treatment kit for severe burns."
 	icon_state = "burnkit"
 	heal_burn = 0
-	amount 10
+	amount = 10
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 7
 

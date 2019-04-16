@@ -66,4 +66,22 @@
 		"BR55 cheekrest" = "BR55-Cheekrest",
 		"BR55 hand guard" = "BR55-Bottom",
 		"BR55 vertical grip" = "BR55-Grip",
-		"BR55 carry handle" = "BR55-CarryHandle",)
+		"BR55 carry handle" = "BR55-CarryHandle")
+	weapon_pixel_offsets = list(\
+	"BR55 suppressor" = list(3,0),
+	"BR55 barrel attachment" = list(3,0),
+	"BR55 scope" = list(0,0),
+	"BR55 cheekrest" = list(0,0),
+	"BR55 hand guard" = list(0,0),
+	"BR55 vertical grip" = list(0,0),
+	"BR55 carry handle" = list(0,0)
+	)
+	attribute_modifications = list(\
+		"BR55 suppressor" = list(-0.5,0.5,0),
+		"BR55 barrel attachment" = list(0,1,0),
+		"BR55 scope" = list(0,0,0),
+		"BR55 cheekrest" = list(0,0,0),
+		"BR55 hand guard" = list(0,0,0),
+		"BR55 vertical grip" = list(-0.75,0.5,0),
+		"BR55 carry handle" = list(0,0,0)
+		)
