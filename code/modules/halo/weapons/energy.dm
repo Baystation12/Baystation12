@@ -5,7 +5,7 @@
 	item_state = "phantom"
 	fire_sound = 'sound/weapons/pulse.ogg'
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 3
+	w_class = ITEM_SIZE_LARGE
 	max_shots = 4
 	charge_meter = 0
 	force = 10
@@ -20,7 +20,7 @@
 	item_state = "spartanlaser"
 	fire_sound = 'sound/weapons/pulse.ogg'
 	slot_flags = SLOT_BACK
-	w_class = 3
+	w_class = ITEM_SIZE_LARGE
 	max_shots = 2
 	charge_meter = 0
 	force = 10
