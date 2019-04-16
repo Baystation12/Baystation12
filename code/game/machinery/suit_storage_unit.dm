@@ -135,6 +135,16 @@
 	helmet_type = /obj/item/clothing/head/helmet/space/void/security/alt
 	mask_type = /obj/item/clothing/mask/breath
 
+/obj/machinery/suit_storage_unit/command
+	name = "Command Voidsuit Storage Unit"
+	suit_type = /obj/item/clothing/suit/space/void/command
+	helmet_type = /obj/item/clothing/head/helmet/space/void/command
+	boots_type = /obj/item/clothing/shoes/magboots
+	tank_type = /obj/item/weapon/tank/oxygen
+	mask_type = /obj/item/clothing/mask/breath
+	req_access = list(access_bridge, access_keycard_auth)
+	islocked = 1
+
 /obj/machinery/suit_storage_unit/merc
 	name = "Nonstandard Voidsuit Storage Unit"
 	suit_type = /obj/item/clothing/suit/space/void/merc
