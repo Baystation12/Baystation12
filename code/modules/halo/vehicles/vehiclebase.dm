@@ -111,8 +111,8 @@
 			shift_by = (occupant_counter*5) - 16 //*2 multiplier is applied to lower the amount of overlap on the head icons.
 		else
 			shift_by = -16 + (occupant_counter*5) //+5 is derived from half the size of a normal human head, applied to ensure there is no cut-off.
-		mob_head.opacity = 110
-		mob_head.pixel_y = 3
+		mob_head.opacity = 55
+		mob_head.pixel_y = (bound_height-32) + 3
 		mob_head.pixel_x = shift_by
 		overlays += mob_head
 
