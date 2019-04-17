@@ -20,7 +20,7 @@
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("brute"=65,"burn"=50,"emp"=40,,"explosion"=60)
+	resistances = list("brute"=65,"burn"=50,"emp"=40,,"explosion"=70)
 
 /datum/component_profile/scorpion
 	pos_to_check = "driver"
@@ -54,8 +54,8 @@
 	name = "Scorpion Machinegun"
 	desc = "A short burst machinegun, used for anti-infantry purposes."
 	burst_size = 3
-	burst_delay = 0.3 SECONDS
-	fire_delay = 1.5 SECONDS
+	burst_delay = 0.1 SECONDS
+	fire_delay = 0.5 SECONDS
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 	proj_fired = /obj/item/projectile/bullet/a762_ap
 

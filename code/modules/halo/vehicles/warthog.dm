@@ -34,8 +34,8 @@
 
 	projectile_fired = /obj/item/projectile/bullet/a762_ap
 
-	fire_delay = 2.5 SECONDS
+	fire_delay = 1.25 SECONDS
 
-	burst_delay = 0.4 SECONDS
+	burst_delay = 0.2 SECONDS
 
 	burst = 5
