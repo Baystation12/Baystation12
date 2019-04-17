@@ -136,7 +136,7 @@
 		return
 	explosion(drop_turf,0,0,2,5)
 
-/obj/vehicles/drop_pod/Move() //We're a drop pod, we don't move normally.
+/obj/vehicles/drop_pod/relayMove() //We're a drop pod, we don't move normally.
 	return
 
 /obj/vehicles/drop_pod/overmap/launch_pod()
