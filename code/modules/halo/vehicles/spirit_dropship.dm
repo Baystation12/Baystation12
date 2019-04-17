@@ -4,7 +4,7 @@
 
 	icon = 'code/modules/halo/vehicles/spirit.dmi'
 	icon_state = "base"
-	vehicle_move_delay = 1.45
+	vehicle_move_delay = 1.2
 	faction = "covenant"
 	density = 1
 
@@ -19,7 +19,7 @@
 
 	comp_prof = /datum/component_profile/spirit
 
-	occupants = list(15,0)
+	occupants = list(14,1)
 
 	exposed_positions = list()//No-one can get hit when inside this.
 
@@ -52,16 +52,16 @@
 
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/spirit
-	integrity = 300
-	resistances = list("brute"=30,"burn"=30,"emp"=40)
+	integrity = 750
+	resistances = list("brute"=50,"burn"=40,"emp"=40)
 
 /datum/component_profile/spirit
-	pos_to_check = "driver"
+	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/spirit_main)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/spirit)
 	cargo_capacity = 24
 	max_vehicle_size = 64
-	vehicle_capacity = 32
+	vehicle_capacity = 64
 
 /obj/item/weapon/gun/vehicle_turret/spirit_main
 	name = "Heavy Plasma Cannon"
@@ -75,7 +75,7 @@
 	burst = 3
 
 /obj/item/projectile/covenant/spirit_cannon
-	damage = 70
+	damage = 50
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "heavy_plas_cannon"
 
