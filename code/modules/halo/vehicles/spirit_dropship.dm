@@ -19,7 +19,7 @@
 
 	comp_prof = /datum/component_profile/spirit
 
-	occupants = list(15,0)
+	occupants = list(14,1)
 
 	exposed_positions = list()//No-one can get hit when inside this.
 
@@ -56,7 +56,7 @@
 	resistances = list("brute"=50,"burn"=40,"emp"=40)
 
 /datum/component_profile/spirit
-	pos_to_check = "driver"
+	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/spirit_main)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/spirit)
 	cargo_capacity = 24

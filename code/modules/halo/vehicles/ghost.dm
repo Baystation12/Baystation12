@@ -20,6 +20,20 @@
 
 	vehicle_size = 16
 
+/obj/vehicles/ghost/update_object_sprites()
+	. = ..()
+	var/list/offsets_to_use = sprite_offsets["[dir]"]
+	var/list/drivers = get_occupants_in_position("driver")
+	if(isnull(offsets_to_use) || isnull(drivers) || drivers.len == 0)
+		return 0
+	var/image/driver_image = image(pick(drivers))
+	driver_image.pixel_x = offsets_to_use[1]
+	driver_image.pixel_y = offsets_to_use[2]
+	if(dir == SOUTH || NORTH)
+		underlays += driver_image
+	else
+		overlays += driver_image
+
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 350
 	resistances = list("brute"=35,"burn"=30,"emp"=15)

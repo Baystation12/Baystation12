@@ -103,6 +103,7 @@
 		var/gender_suffix = "m"
 		if(h.gender == "female")
 			gender_suffix = "f"
+		var/image/head_bg = image('code/modules/halo/vehicles/headrep_base.dmi',"base")
 		var/image/mob_head = image(h.species.icobase,icon_state = "head_[gender_suffix]",dir = SOUTH)
 		var/shift_by
 		if(occupant_counter*5 >= bound_width) //Don't bother with more than one line of heads
@@ -111,9 +112,11 @@
 			shift_by = (occupant_counter*5) - 16 //*2 multiplier is applied to lower the amount of overlap on the head icons.
 		else
 			shift_by = -16 + (occupant_counter*5) //+5 is derived from half the size of a normal human head, applied to ensure there is no cut-off.
-		mob_head.opacity = 55
 		mob_head.pixel_y = (bound_height-32) + 3
+		head_bg.pixel_y = (bound_height-32) + 3
 		mob_head.pixel_x = shift_by
+		head_bg.pixel_x = shift_by
+		overlays += head_bg
 		overlays += mob_head
 
 /obj/vehicles/Move()

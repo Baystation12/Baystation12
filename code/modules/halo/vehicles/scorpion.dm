@@ -14,7 +14,7 @@
 	vehicle_move_delay = 5
 	exposed_positions = list("passenger" = 40,"gunner" = 25)
 
-	occupants = list(4,0)
+	occupants = list(4,1)
 
 	vehicle_size = 64
 
@@ -23,7 +23,7 @@
 	resistances = list("brute"=65,"burn"=50,"emp"=40,,"explosion"=65)
 
 /datum/component_profile/scorpion
-	pos_to_check = "driver"
+	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/scorpion_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/scorpion)
 	cargo_capacity = 8 //Can hold, at max, two normals

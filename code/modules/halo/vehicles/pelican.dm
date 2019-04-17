@@ -27,7 +27,6 @@
 
 /obj/vehicles/air/pelican/update_object_sprites()
 
-
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/pelican
 	integrity = 600
