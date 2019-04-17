@@ -28,11 +28,13 @@
 	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size. Will use generic inventory_sizes.dm defines with a +5 to w_class.
 
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
+	var/move_sound = null
 
 /obj/vehicles/New()
 	. = ..()
 	comp_prof = new comp_prof(src)
 	GLOB.processing_objects += src
+	update_object_sprites()
 
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
@@ -92,24 +94,31 @@
 			if(!drivers.len || isnull(drivers))
 				inactive_pilot_effects()
 
-/obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc.
+/obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc, a basic render of playerheads in the top right is used if no overidden.
 	underlays.Cut()
 	overlays.Cut()
-	var/list/offsets_to_use = sprite_offsets["[dir]"]
-	var/list/drivers = get_occupants_in_position("driver")
-	if(isnull(offsets_to_use) || isnull(drivers) || drivers.len == 0)
-		return 0
-	var/image/driver_image = image(pick(drivers))
-	driver_image.pixel_x = offsets_to_use[1]
-	driver_image.pixel_y = offsets_to_use[2]
-	if(dir == SOUTH || NORTH)
-		underlays += driver_image
-	else
-		overlays += driver_image
-	return 1
+	var/occupant_counter = 0
+	for(var/mob/living/carbon/human/h in occupants)
+		occupant_counter++
+		var/gender_suffix = "m"
+		if(h.gender == "female")
+			gender_suffix = "f"
+		var/image/mob_head = image(h.species.icobase,icon_state = "head_[gender_suffix]",dir = SOUTH)
+		var/shift_by
+		if(occupant_counter*5 >= bound_width) //Don't bother with more than one line of heads
+			return
+		if(occupant_counter*5 >= bound_width/2) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
+			shift_by = (occupant_counter*5) - bound_width //*2 multiplier is applied to lower the amount of overlap on the head icons.
+		else
+			shift_by = (-(bound_width/2)) + (occupant_counter*5) //+5 is derived from half the size of a normal human head, applied to ensure there is no cut-off.
+		mob_head.pixel_y = 3
+		mob_head.pixel_x = shift_by
+		overlays += mob_head
 
 /obj/vehicles/Move()
 	. = ..()
+	if(move_sound)
+		playsound(loc,move_sound,75,0,4)
 	update_object_sprites()
 
 /obj/vehicles/proc/get_occupants_in_position(var/position = null)
