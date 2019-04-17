@@ -7,11 +7,11 @@
 	icon_state = "move"
 
 	bound_height = 64
-	bound_width = 64
+	bound_width = 96
 
 	comp_prof = /datum/component_profile/scorpion
 
-	vehicle_move_delay = 2.25
+	vehicle_move_delay = 5
 	exposed_positions = list("passenger" = 40,"gunner" = 25)
 
 	occupants = list(4,0)
@@ -35,10 +35,11 @@
 	projectile_fired = /obj/item/projectile/bullet/scorp_cannon
 
 	fire_delay = 5 SECONDS
+	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 
 	burst = 1
 
-	guns_switchto = list(/datum/vehicle_gun/scorp_cannon,/datum/vehicle_gun/scorp_machinegun)
+	guns_switchto = newlist(/datum/vehicle_gun/scorp_cannon,/datum/vehicle_gun/scorp_machinegun)
 
 /datum/vehicle_gun/scorp_cannon
 	name = "Scorpion Cannon"
@@ -62,5 +63,5 @@
 	damage = 50
 
 /obj/item/projectile/bullet/scorp_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,-1,1,3,guaranteed_damage = 50,guaranteed_damage_range = 2)
+	explosion(impacted,0,2,4,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	. = ..()
