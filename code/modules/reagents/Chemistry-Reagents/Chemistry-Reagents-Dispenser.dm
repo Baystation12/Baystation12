@@ -405,6 +405,7 @@
 	taste_mult = 1.8
 	reagent_state = SOLID
 	color = "#ffffff"
+	scannable = 1
 
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
