@@ -124,7 +124,12 @@
 		overlays += mob_head
 
 /obj/vehicles/Move()
-	. = ..()
+	if(anchored)
+		anchored = 0
+		. = ..()
+		anchored = 1
+	else
+		. = ..()
 	if(move_sound)
 		playsound(loc,move_sound,75,0,4)
 	update_object_sprites()

@@ -5,6 +5,7 @@
 
 	icon = 'code/modules/halo/vehicles/finalwarthog-chaingun.dmi'
 	icon_state = "warthog-chaingun"
+	anchored = 1
 
 	bound_height = 64
 	bound_width = 64

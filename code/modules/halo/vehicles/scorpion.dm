@@ -5,6 +5,7 @@
 
 	icon = 'code/modules/halo/vehicles/Scorpion.dmi'
 	icon_state = "move"
+	anchored = 1
 
 	bound_height = 64
 	bound_width = 96
