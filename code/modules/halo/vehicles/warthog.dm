@@ -1,7 +1,7 @@
 
 /obj/vehicles/warthog
-	name = "whog"
-	desc = "warthog"
+	name = "M12 Warthog LRV"
+	desc = "A nimble vehicle capable of providing anti-infantry support and small-scale troop transport."
 
 	icon = 'code/modules/halo/vehicles/finalwarthog-chaingun.dmi'
 	icon_state = "warthog-chaingun"
