@@ -35,6 +35,7 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/
 	skill_needed = SKILL_NONE
 	defer_initialisation = TRUE
+	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/shuttle_landmark/vox_base/hangar/vox_shuttle
 	name = "Vox Ship Docked"
