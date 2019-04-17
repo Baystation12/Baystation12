@@ -47,5 +47,36 @@
 	new_projectile_fired.loc = pick(linked_vehicle.locs)
 	new_projectile_fired.launch(target)
 
+/obj/item/weapon/gun/vehicle_turret/switchable
+	var/list/guns_switchto = list()
+
+/obj/item/weapon/gun/vehicle_turret/switchable/attack_self(var/mob/user)
+	var/current_gun_index = null
+	for(var/datum/vehicle_gun/gun in guns_switchto)
+		if(gun.name == name && gun.proj_fired == projectile_fired)
+			current_gun_index = guns_switchto.Find(gun)
+	var/next_gun_index = current_gun_index + 1
+	if(next_gun_index > guns_switchto.len)
+		next_gun_index -= guns_switchto.len
+
+	var/datum/vehicle_gun/next_gun = guns_switchto[next_gun_index]
+	name = next_gun.name
+	desc = next_gun.desc
+	projectile_fired = next_gun.proj_fired
+	burst = next_gun.burst_size
+	fire_delay = next_gun.fire_delay
+	burst_delay = next_gun.burst_delay
+	fire_sound = next_gun.fire_sound
+	to_chat(user,"<span class = 'notice'>Switched to [name]</span>")
+
+/datum/vehicle_gun
+	var/name = "gun"
+	var/desc = "gun"
+	var/burst_size = 1
+	var/burst_delay = 1
+	var/fire_delay = 1
+	var/fire_sound
+	var/proj_fired = /obj/item/projectile
+
 #undef REFILL_SUCCEED
 #undef REFILL_FAIL
