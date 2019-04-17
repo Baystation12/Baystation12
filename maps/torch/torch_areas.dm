@@ -872,6 +872,21 @@
 
 // Supply
 
+/area/quartermaster
+	req_access = list(access_cargo)
+
+/area/quartermaster/office
+	name = "\improper Supply Office"
+	icon_state = "quartoffice"
+
+/area/quartermaster/storage
+	name = "\improper Supply Warehouse"
+	icon_state = "quartstorage"
+	sound_env = LARGE_ENCLOSED
+
+/area/quartermaster/storage/upper
+	name = "\improper Supply Upper Warehouse"
+
 /area/quartermaster/deckchief
 	name = "\improper Deck Chief's Office"
 	icon_state = "quart"
@@ -1608,22 +1623,6 @@
 	name = "\improper Decommissioned Firing Range"
 	icon_state = "firingrange"
 	req_access = list(access_solgov_crew)
-
-// Cargo
-/area/quartermaster
-	req_access = list(access_cargo)
-
-/area/quartermaster/office
-	name = "\improper Supply Office"
-	icon_state = "quartoffice"
-
-/area/quartermaster/storage
-	name = "\improper Supply Warehouse"
-	icon_state = "quartstorage"
-	sound_env = LARGE_ENCLOSED
-
-/area/quartermaster/storage/upper
-	name = "\improper Supply Upper Warehouse"
 
 // Crew
 
