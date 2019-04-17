@@ -107,10 +107,11 @@
 		var/shift_by
 		if(occupant_counter*5 >= bound_width) //Don't bother with more than one line of heads
 			return
-		if(occupant_counter*5 >= bound_width/2) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
-			shift_by = (occupant_counter*5) - bound_width //*2 multiplier is applied to lower the amount of overlap on the head icons.
+		if(occupant_counter*5 >= 16) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
+			shift_by = (occupant_counter*5) - 16 //*2 multiplier is applied to lower the amount of overlap on the head icons.
 		else
-			shift_by = (-(bound_width/2)) + (occupant_counter*5) //+5 is derived from half the size of a normal human head, applied to ensure there is no cut-off.
+			shift_by = -16 + (occupant_counter*5) //+5 is derived from half the size of a normal human head, applied to ensure there is no cut-off.
+		mob_head.opacity = 110
 		mob_head.pixel_y = 3
 		mob_head.pixel_x = shift_by
 		overlays += mob_head
@@ -277,6 +278,11 @@
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
+	var/list/occupants_to_damage = list()
+	for(var/position in exposed_positions)
+		occupants_to_damage += get_occupants_in_position(position)
+	for(var/mob/living/m in occupants_to_damage)
+		m.apply_damage(60/severity,BRUTE,,m.run_armor_check(null,"bomb"))
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)

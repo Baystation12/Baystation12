@@ -54,6 +54,7 @@
 #undef MONGOOSE_BASE_PASSENGER_OFFSETS
 //Mongoose component profile define//
 /obj/item/vehicle_component/health_manager/mongoose
+	integrity = 250
 	resistances = list("brute"=30,"burn"=25,"emp"=15)
 
 /datum/component_profile/mongoose
