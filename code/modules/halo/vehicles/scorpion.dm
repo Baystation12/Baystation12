@@ -12,7 +12,7 @@
 	comp_prof = /datum/component_profile/scorpion
 
 	vehicle_move_delay = 5
-	exposed_positions = list("passenger" = 40)
+	exposed_positions = list("passenger" = 40,"driver" = 5,"gunner" = 5)
 
 	occupants = list(4,1)
 
