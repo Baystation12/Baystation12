@@ -20,7 +20,7 @@
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("brute"=65,"burn"=50,"emp"=40,,"explosion"=70)
+	resistances = list("brute"=65,"burn"=50,"emp"=40,,"explosion"=65)
 
 /datum/component_profile/scorpion
 	pos_to_check = "driver"

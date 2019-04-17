@@ -11,7 +11,7 @@
 
 	comp_prof = /datum/component_profile/warthog
 
-	vehicle_move_delay = 2
+	vehicle_move_delay = 1.5
 
 	occupants = list(1,1)
 	exposed_positions = list("driver" = 25,"passenger" = 25,"gunner" = 25)
