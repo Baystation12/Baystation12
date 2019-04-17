@@ -4,8 +4,8 @@
 	department_flag = MED
 	minimal_player_age = 2
 	ideal_character_age = 45
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 8
@@ -45,8 +45,8 @@
 
 /datum/job/doctor
 	title = "Medical Technician"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 3
+	spawn_positions = 3
 	supervisors = "Physicians and the Chief Medical Officer"
 	economic_power = 7
 	ideal_character_age = 40
@@ -123,8 +123,8 @@
 	title = "Trainee Medical Technician"
 	department = "Medical"
 	department_flag = MED
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "Medical personnel, and the Chief Medical Officer"
 	selection_color = "#013d3b"
 	ideal_character_age = 20
