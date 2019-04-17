@@ -116,10 +116,10 @@
 		var/extra_shiftby_y = 0
 		if(mob_head_icon.Height() > 32)
 			extra_shiftby_y = mob_head_icon.Height() - 32
-		mob_head.pixel_y = ((bound_height-(32 + extra_shiftby_y)) + 3)
-		head_bg.pixel_y = (bound_height-32) + 3
-		mob_head.pixel_x = shift_by
-		head_bg.pixel_x = shift_by
+		mob_head.pixel_y = ((bound_height-(32 + extra_shiftby_y)) + 3) + h.species.pixel_offset_y
+		head_bg.pixel_y = (bound_height-32) + 3 + h.species.pixel_offset_y
+		mob_head.pixel_x = shift_by + h.species.pixel_offset_x
+		head_bg.pixel_x = shift_by + h.species.pixel_offset_x
 		overlays += head_bg
 		overlays += mob_head
 
