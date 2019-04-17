@@ -38,7 +38,7 @@
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican)
 	cargo_capacity = 24
 	max_vehicle_size = 64
-	vehicle_capacity = 32
+	vehicle_capacity = 64
 
 /obj/vehicles/air/pelican/unsc
 	faction = "unsc"

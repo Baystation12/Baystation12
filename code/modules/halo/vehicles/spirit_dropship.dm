@@ -61,7 +61,7 @@
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/spirit)
 	cargo_capacity = 24
 	max_vehicle_size = 64
-	vehicle_capacity = 32
+	vehicle_capacity = 64
 
 /obj/item/weapon/gun/vehicle_turret/spirit_main
 	name = "Heavy Plasma Cannon"
