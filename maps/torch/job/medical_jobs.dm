@@ -95,13 +95,18 @@
 	ideal_character_age = 45
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Medical Officer and the Corporate Liaison"
+	supervisors = "the Chief Medical Officer if EC and the Corporate Liaison if Contractor"
 	selection_color = "#013d3b"
 	economic_power = 6
 	alt_titles = null
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/biomech
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps,
+							/datum/mil_branch/civilian,
+							/datum/mil_branch/solgov)
+	allowed_ranks = list(
+						/datum/mil_rank/ec/o1,
+						/datum/mil_rank/civ/contractor,
+						/datum/mil_rank/sol/scientist)
 	min_skill = list(   SKILL_ANATOMY		= SKILL_ADEPT,
 		                SKILL_MEDICAL       = SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT)

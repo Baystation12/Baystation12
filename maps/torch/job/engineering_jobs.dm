@@ -167,14 +167,20 @@
 	total_positions = 1
 	spawn_positions = 1
 	minimal_player_age = 0
-	supervisors = "the Chief Engineer and the Corporate Liaison."
+	supervisors = "the Chief Engineer if EC and the Corporate Liaison if Contractor."
 	selection_color = "#5b4d20"
 	economic_power = 6
 	alt_titles = list(
 		"Mechsuit Technician")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps,
+							/datum/mil_branch/civilian,
+							/datum/mil_branch/solgov)
+	allowed_ranks = list(
+						/datum/mil_rank/ec/e3,
+						/datum/mil_rank/ec/e5,
+						/datum/mil_rank/civ/contractor,
+						/datum/mil_rank/sol/scientist)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT)
 
