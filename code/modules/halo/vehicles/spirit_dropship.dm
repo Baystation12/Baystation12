@@ -4,7 +4,7 @@
 
 	icon = 'code/modules/halo/vehicles/spirit.dmi'
 	icon_state = "base"
-	vehicle_move_delay = 1.45
+	vehicle_move_delay = 1.2
 	faction = "covenant"
 	density = 1
 

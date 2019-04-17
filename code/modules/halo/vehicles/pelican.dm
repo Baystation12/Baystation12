@@ -4,7 +4,7 @@
 
 	icon = 'code/modules/halo/shuttles/pelican.dmi'
 	icon_state = "base"
-	vehicle_move_delay = 1.5
+	vehicle_move_delay = 1.25
 
 	density = 1
 
