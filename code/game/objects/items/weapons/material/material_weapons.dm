@@ -24,6 +24,7 @@
 
 /obj/item/weapon/material/New(var/newloc, var/material_key)
 	..(newloc)
+	queue_icon_update()
 	if(!material_key)
 		material_key = default_material
 	set_material(material_key)
@@ -70,7 +71,7 @@
 
 /obj/item/weapon/material/on_update_icon()
 	overlays.Cut()
-	if(applies_material_colour)
+	if(applies_material_colour && istype(material))
 		color = material.icon_colour
 		alpha = 100 + material.opacity * 255
 	if(furniture_icon)
