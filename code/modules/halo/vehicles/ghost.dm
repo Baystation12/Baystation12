@@ -21,8 +21,8 @@
 	vehicle_size = 16
 
 /obj/item/vehicle_component/health_manager/ghost
-	integrity = 300
-	resistances = list("brute"=35,"burn"=20,"emp"=15)
+	integrity = 350
+	resistances = list("brute"=35,"burn"=30,"emp"=15)
 
 /datum/component_profile/ghost
 	pos_to_check = "driver"

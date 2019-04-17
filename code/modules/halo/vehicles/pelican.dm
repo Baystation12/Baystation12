@@ -30,8 +30,8 @@
 
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/pelican
-	integrity = 300
-	resistances = list("brute"=30,"burn"=20,"emp"=50)
+	integrity = 600
+	resistances = list("brute"=45,"burn"=40,"emp"=50)
 
 /datum/component_profile/pelican
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)

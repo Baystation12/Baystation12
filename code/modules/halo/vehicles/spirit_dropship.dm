@@ -52,8 +52,8 @@
 
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/spirit
-	integrity = 300
-	resistances = list("brute"=30,"burn"=30,"emp"=40)
+	integrity = 750
+	resistances = list("brute"=50,"burn"=40,"emp"=40)
 
 /datum/component_profile/spirit
 	pos_to_check = "driver"
@@ -75,7 +75,7 @@
 	burst = 3
 
 /obj/item/projectile/covenant/spirit_cannon
-	damage = 70
+	damage = 50
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "heavy_plas_cannon"
 
