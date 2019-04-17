@@ -248,6 +248,9 @@
 	selectable = 1
 	disruptive = 1
 
+	suit_overlay_active = "mounted-injector"
+	suit_overlay_inactive = null
+
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
 

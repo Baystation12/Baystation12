@@ -34,6 +34,9 @@
 	icon_state = "grenadelauncher"
 	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
 
+	suit_overlay_active = "grenade"
+	suit_overlay_inactive = null
+
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
 
@@ -176,6 +179,7 @@
 
 	name = "mounted laser cannon"
 	desc = "A shoulder-mounted battery-powered laser cannon mount."
+	usable = 0
 
 	interface_name = "mounted laser cannon"
 	interface_desc = "A shoulder-mounted cell-powered laser cannon."
@@ -187,6 +191,8 @@
 	name = "mounted energy gun"
 	desc = "A forearm-mounted energy projector."
 	icon_state = "egun"
+
+	suit_overlay_active = "mounted-taser"
 
 	interface_name = "mounted energy gun"
 	interface_desc = "A forearm-mounted suit-powered energy gun."
@@ -201,6 +207,8 @@
 	icon_state = "taser"
 	usable = 0
 
+	suit_overlay_active = "mounted-taser"
+
 	interface_name = "mounted taser"
 	interface_desc = "A palm-mounted, cell-powered taser."
 	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
@@ -212,6 +220,8 @@
 	name = "mounted plasma cutter"
 	desc = "A knee-mounted plasma cutter. Don't question it."
 	icon_state = "plasmacutter"
+
+	suit_overlay_active = "plasmacutter"
 
 	use_power_cost = 9000 //5Wh per use
 
@@ -256,7 +266,6 @@
 	icon_state = "eblade"
 
 	suit_overlay_active = null
-	suit_overlay_inactive = null
 
 	activate_string = "Project Blade"
 	deactivate_string = "Cancel Blade"
@@ -284,7 +293,8 @@
 
 /obj/item/rig_module/mounted/energy_blade/activate()
 
-	..()
+	if(!..() || !gun)
+		return 0
 
 	var/mob/living/M = holder.wearer
 
