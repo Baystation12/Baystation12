@@ -20,10 +20,14 @@
 	. = ..()
 
 /obj/item/weapon/gun/vehicle_turret/dropped(var/mob/user)
+	loc = null
 	qdel(src)
 
 //Inside-vehicle attack related procs.
 /obj/item/weapon/gun/vehicle_turret/afterattack(atom/target, var/mob/living/carbon/human/user, inrange, params)
+	if(target == linked_vehicle)
+		to_chat(user,"<span class = 'notice'>You can't fire at yourself.</span>")
+		return
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
