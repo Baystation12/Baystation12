@@ -290,11 +290,9 @@
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
-	var/list/occupants_to_damage = list()
 	for(var/position in exposed_positions)
-		occupants_to_damage += get_occupants_in_position(position)
-	for(var/mob/living/m in occupants_to_damage)
-		m.apply_damage(60/severity,BRUTE,,m.run_armor_check(null,"bomb"))
+		for(var/mob/living/m in get_occupants_in_position(position))
+			m.apply_damage((300/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
@@ -341,6 +339,7 @@
 obj/vehicles/MouseDrop(var/obj/over_object)
 	var/mob/user = usr
 	var/obj/vehicles/v = over_object
+	if(isnull(user.loc)) return
 	if(!istype(v)) return
 	var/list/adj_turfs = get_adjacent_turfs()
 	if(!(user.loc in adj_turfs) || !vehicle_loading_adjacent(v,adj_turfs))
@@ -355,7 +354,6 @@ obj/vehicles/MouseDrop(var/obj/over_object)
 	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
 	over_object.loc = pick(src.locs)
 	comp_prof.cargo_transfer(over_object)
-
 
 /obj/vehicles/verb/get_cargo_item()
 	set name = "Retrieve Cargo"
