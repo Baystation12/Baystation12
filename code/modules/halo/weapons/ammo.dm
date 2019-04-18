@@ -329,3 +329,29 @@
 	shake_camera(L,disorient_time,2)
 	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
 	return 1
+
+//M41 rocket launcher
+/obj/item/ammo_magazine/spnkr
+	name = "M19 SPNKr"
+	desc = "A dual tube of M19 102mm HEAT rockets for the M41 SSR."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "SPNKr"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/spnkr
+	caliber = "spnkr"
+	max_ammo = 2
+
+/obj/item/ammo_casing/spnkr
+	caliber = "spnkr"
+	projectile_type = /obj/item/projectile/bullet/ssr
+
+/obj/item/projectile/bullet/ssr
+	icon_state = "ssr"
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	check_armour = "bomb"
+	step_delay = 1.2
+
+/obj/item/projectile/bullet/ssr/on_hit(var/atom/target, var/blocked = 0)
+	if(isturf(target))
+		explosion(target, -1, 0, 2)
+	..()
