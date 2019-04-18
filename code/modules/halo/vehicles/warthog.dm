@@ -19,6 +19,8 @@
 
 	vehicle_size = 32
 
+	move_sound = 'code/modules/halo/sounds/warthog_move.ogg'
+
 /obj/item/vehicle_component/health_manager/warthog
 	integrity = 500
 	resistances = list("brute"=40,"burn"=35,"emp"=25,"explosion"=25)
