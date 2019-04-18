@@ -76,12 +76,13 @@
 	kick_occupants()
 	for(var/obj/item/I in comp_prof.current_cargo)
 		comp_prof.cargo_transfer(I,1)
+	sleep(1)
 	explosion(loc,-1,-1,2,5)
 	qdel(src)
 
 /obj/vehicles/proc/kick_occupants()
 	for(var/mob/m in occupants)
-		exit_vehicle(m)
+		exit_vehicle(m,1)
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
