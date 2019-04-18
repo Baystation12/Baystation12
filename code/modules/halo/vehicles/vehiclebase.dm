@@ -28,11 +28,13 @@
 	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size. Will use generic inventory_sizes.dm defines with a +5 to w_class.
 
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
+	var/move_sound = null
 
 /obj/vehicles/New()
 	. = ..()
 	comp_prof = new comp_prof(src)
 	GLOB.processing_objects += src
+	update_object_sprites()
 
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
@@ -92,24 +94,44 @@
 			if(!drivers.len || isnull(drivers))
 				inactive_pilot_effects()
 
-/obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc.
+/obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc, a basic render of playerheads in the top right is used if no overidden.
 	underlays.Cut()
 	overlays.Cut()
-	var/list/offsets_to_use = sprite_offsets["[dir]"]
-	var/list/drivers = get_occupants_in_position("driver")
-	if(isnull(offsets_to_use) || isnull(drivers) || drivers.len == 0)
-		return 0
-	var/image/driver_image = image(pick(drivers))
-	driver_image.pixel_x = offsets_to_use[1]
-	driver_image.pixel_y = offsets_to_use[2]
-	if(dir == SOUTH || NORTH)
-		underlays += driver_image
-	else
-		overlays += driver_image
-	return 1
+	var/occupant_counter = 0
+	for(var/mob/living/carbon/human/h in occupants)
+		occupant_counter++
+		var/gender_suffix = "m"
+		if(h.gender == "female")
+			gender_suffix = "f"
+		var/image/head_bg = image('code/modules/halo/vehicles/headrep_base.dmi',"base")
+		var/image/mob_head = image(h.species.icobase,icon_state = "head_[gender_suffix]",dir = SOUTH)
+		var/shift_by
+		if(occupant_counter*9 >= bound_width) //Don't bother with more than one line of heads
+			return
+		if(occupant_counter*9 >= 16) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
+			shift_by = (occupant_counter*9) - 16 //*9 multiplier is applied to lower the amount of overlap on the head icons.
+		else
+			shift_by = -16 + (occupant_counter*9)
+		var/icon/mob_head_icon = new(mob_head.icon,mob_head.icon_state,SOUTH)
+		var/extra_shiftby_y = 0
+		if(mob_head_icon.Height() > 32)
+			extra_shiftby_y = mob_head_icon.Height() - 32
+		mob_head.pixel_y = ((bound_height-(32 + extra_shiftby_y)) + 3) + h.species.pixel_offset_y
+		head_bg.pixel_y = (bound_height-32) + 3 + h.species.pixel_offset_y
+		mob_head.pixel_x = shift_by + h.species.pixel_offset_x
+		head_bg.pixel_x = shift_by + h.species.pixel_offset_x
+		overlays += head_bg
+		overlays += mob_head
 
 /obj/vehicles/Move()
-	. = ..()
+	if(anchored)
+		anchored = 0
+		. = ..()
+		anchored = 1
+	else
+		. = ..()
+	if(move_sound)
+		playsound(loc,move_sound,75,0,4)
 	update_object_sprites()
 
 /obj/vehicles/proc/get_occupants_in_position(var/position = null)
@@ -268,6 +290,11 @@
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
+	var/list/occupants_to_damage = list()
+	for(var/position in exposed_positions)
+		occupants_to_damage += get_occupants_in_position(position)
+	for(var/mob/living/m in occupants_to_damage)
+		m.apply_damage(60/severity,BRUTE,,m.run_armor_check(null,"bomb"))
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)

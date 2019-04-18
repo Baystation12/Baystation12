@@ -23,7 +23,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //Essentially, the entire body besides the head
 
 	flags_inv = HIDESUITSTORAGE|HIDEBACK
-	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 30, bio = 0, rad = 0)
+	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 40, bio = 0, rad = 0)
 	armor_thickness_modifiers = list()
 
 	allowed = list(/obj/item/weapon/tank)
@@ -42,7 +42,7 @@
 
 	body_parts_covered = HEAD|FACE
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT | FLEXIBLEMATERIAL
-	armor = list(melee = 40, bullet = 20, laser = 35,energy = 35, bomb = 15, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 20, laser = 35,energy = 35, bomb = 20, bio = 0, rad = 0)
 	armor_thickness = 10
 
 	var/rebreath_efficiency = 50 //Rebreather efficiency: Percentile
@@ -140,7 +140,7 @@
 	icon_state = "utility_jumpsuit"
 	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	species_restricted = list("Unggoy")
-	armor = list(melee = 3, bullet = 3, laser = 3, energy = 3, bomb = 3, bio = 0, rad = 0)
+	armor = list(melee = 5, bullet = 5, laser = 5, energy = 5, bomb = 5, bio = 0, rad = 0)
 
 /obj/item/clothing/under/unggoy_thrall
 	name = "Unggoy thrall robe"
@@ -181,7 +181,7 @@
 	icon_state = "combatharness_ultra"
 	item_state = "combatharness_ultra"
 
-	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 50, bio = 0, rad = 0)
+	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 60, bio = 0, rad = 0)
 
 	totalshields = 100
 	specials = list(/datum/armourspecials/shields/unggoy)
