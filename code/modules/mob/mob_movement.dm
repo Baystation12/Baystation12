@@ -124,6 +124,12 @@
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(var/turf/newloc , direct)
+	if(newloc.density == 0) //No need to deal with elevation if there's a wall in the way. This also fixes projectiles phasing through walls.
+	for(var/atom/movable/AM in newloc.contents)
+		if(AM.elevation != src.elevation && AM.density != 0)
+			AM.density = 0
+			spawn(5)//Delay for a very short time.
+				AM.density = 1 //Reset the changed atoms
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
@@ -169,16 +175,6 @@
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
 	return
-
-/atom/movable/Move(var/turf/newloc, direct) //This is duplicated for a reason, it needs to be able to control when the rest of movecode fires.
-	if(newloc.density == 0) //No need to deal with elevation if there's a wall in the way. This also fixes projectiles phasing through walls.
-		for(var/atom/movable/AM in newloc.contents)
-			if(AM.elevation != src.elevation && AM.density != 0)
-				AM.density = 0
-				. = ..()
-				AM.density = 1 //Reset the changed atoms
-	else
-		. = ..()
 
 /client/proc/Move_object(direct)
 	if(mob && mob.control_object)
