@@ -266,13 +266,13 @@
 	throwforce = 15
 	var/fire_sound  //The lack of this var causes runtimes with the rocket launcher
 
-	throw_impact(atom/hit_atom)
-		if(primed)
-			explosion(hit_atom, 0, 1, 2, 4)
-			qdel(src)
-		else
-			..()
-		return
+/obj/item/missile/throw_impact(atom/hit_atom)
+	if(primed)
+		explosion(hit_atom, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
+		qdel(src)
+	else
+		..()
+	return
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang
 	name = "\improper SGL-6 grenade launcher"

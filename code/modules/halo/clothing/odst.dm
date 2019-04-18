@@ -31,7 +31,7 @@
 	heat_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 100, rad = 25)
+	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 100, rad = 25)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
@@ -52,10 +52,10 @@
 	icon_state = "Odst Armour"
 	icon_override = ODST_OVERRIDE
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 100, rad = 25)
 	//specials = list(/datum/armourspecials/internal_air_tank/human) This line is disabled untill a dev can fix the internals code for it.
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS

@@ -12,7 +12,7 @@
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 5)
 	fire_sound = 'sound/effects/bang.ogg'
 
-	release_force = 15
+	release_force = 2
 	throw_distance = 30
 	var/max_rockets = 1
 	var/list/rockets = new/list()

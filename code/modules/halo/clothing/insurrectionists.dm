@@ -36,7 +36,7 @@
 	icon_state = "armor1"
 	icon_override = INNIE_OVERRIDE
 	blood_overlay_type = "armor1"
-	armor = list(melee = 45, bullet = 40, laser = 40, energy = 40, bomb = 40, bio = 20, rad = 15)
+	armor = list(melee = 45, bullet = 40, laser = 40, energy = 40, bomb = 35, bio = 20, rad = 15)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = THICKMATERIAL
 	flags_inv = HIDETAIL
@@ -73,7 +73,7 @@
 	siemens_coefficient = 0
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 80, bio = 20, rad = 15)
+	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 50, bio = 20, rad = 15)
 	armor_thickness= 30
 	slowdown_general = 2
 	siemens_coefficient = 0.7
@@ -91,7 +91,7 @@
 	slowdown_general = 1
 	siemens_coefficient = 1.5
 	armor_thickness = 60
-	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 80, bio = 20, rad = 15)
+	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 50, bio = 20, rad = 15)
 	gas_transfer_coefficient = 0.90
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"

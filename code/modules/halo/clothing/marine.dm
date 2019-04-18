@@ -54,7 +54,7 @@
 	icon_state = "M52B Body Armor regular"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 35, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
@@ -80,7 +80,7 @@
 	item_state = "boots"
 	icon_state = "boots"
 	force = 5
-	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
@@ -134,14 +134,14 @@
 	item_state = "salvage_void"
 	w_class = ITEM_SIZE_HUGE
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 60, bullet = 30, laser = 60, energy = 25, bomb = 50, bio = 100, rad = 100)
+	armor = list(melee = 60, bullet = 30, laser = 60, energy = 25, bomb = 30, bio = 100, rad = 100)
 
 /obj/item/clothing/head/helmet/space/void/unsc
 	name = "\improper Salvage Helmet"
 	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	armor = list(melee = 30, bullet = 10, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 50)
+	armor = list(melee = 30, bullet = 10, laser = 20, energy = 5, bomb = 30, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	icon_state = "rig0-salvage"
 	item_state = "rig0-salvage"
@@ -205,7 +205,7 @@
 	armor_thickness = 20
 	w_class = ITEM_SIZE_HUGE
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 55, bullet = 40, laser = 25, energy = 25, bomb = 50, bio = 100, rad = 100)
+	armor = list(melee = 55, bullet = 40, laser = 25, energy = 25, bomb = 30, bio = 100, rad = 100)
 
 /obj/item/clothing/head/helmet/eva/marine
 	name = "\improper EVA Marine Helmet"
@@ -217,7 +217,7 @@
 	item_state = "eva"
 	icon_state = "eva"
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
-	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 20, bio = 100, rad = 50)
+	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 15, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/shoes/eva/marine
@@ -230,7 +230,7 @@
 	item_state = "evalegs"
 	icon_state = "evalegs"
 	item_flags = NOSLIP|STOPPRESSUREDAMAGE|AIRTIGHT
-	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 35, bio = 100, rad = 50)
+	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 30, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/weapon/card/id/unsc
@@ -262,7 +262,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS
-	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 20, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
