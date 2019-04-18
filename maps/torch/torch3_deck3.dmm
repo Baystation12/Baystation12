@@ -14018,7 +14018,9 @@
 /area/maintenance/thirddeck/port)
 "Ff" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Cargo Storage Maintenance"
+	autoset_access = 0;
+	name = "Cargo Storage Maintenance";
+	req_access = list("ACCESS_MAINT","ACCESS_CARGO")
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
