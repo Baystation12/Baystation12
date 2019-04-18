@@ -326,12 +326,29 @@
 		user.drop_from_inventory(O)
 	comp_prof.cargo_transfer(O)
 
+/obj/vehicles/proc/get_adjacent_turfs()
+	var/list/adj_turfs = list()
+	for(var/turf/t in locs)
+		adj_turfs += range(1,t)
+	return adj_turfs
+
+/obj/vehicles/proc/vehicle_loading_adjacent(var/obj/vehicle,var/list/adj_turfs)
+	for(var/loc in vehicle.locs)
+		if(loc in adj_turfs)
+			return 1
+	return 0
+
 obj/vehicles/MouseDrop(var/obj/over_object)
 	var/mob/user = usr
 	var/obj/vehicles/v = over_object
 	if(!istype(v)) return
-	if(!Adjacent(user) || !user.Adjacent(over_object)) return
-	if(!comp_prof.can_attach_vehicle(v.vehicle_size)) return
+	var/list/adj_turfs = get_adjacent_turfs()
+	if(!(user.loc in adj_turfs) || !vehicle_loading_adjacent(v,adj_turfs))
+		to_chat(user,"<span class = 'notice'>Both the vehicle and the person loading the vehicle must be next to the targeted storage vehicle.</span>")
+		return
+	if(!comp_prof.can_attach_vehicle(v.vehicle_size))
+		to_chat(user,"<span class = 'notice'>[src] is full or cannot fit vehicles of [v]'s size.</span>")
+		return
 	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] into [src]\'s storage.</span>")
 	if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
 		return

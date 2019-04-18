@@ -42,8 +42,6 @@
 /obj/item/weapon/gun/vehicle_turret/shadow_cannon
 	name = "Shadow Cannon"
 	desc = "A fast firing plasma weapon capable of inflicting heavy damage."
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
-	icon_state = "Plasmarifle Shot"
 
 	projectile_fired = /obj/item/projectile/covenant/shadow_cannon
 
@@ -55,6 +53,8 @@
 
 /obj/item/projectile/covenant/shadow_cannon
 	damage = 15
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/covenant/shadow_cannon/on_impact(var/atom/impacted)
 	explosion(impacted,-1,-1,0,0,adminlog = 0,guaranteed_damage = 15,guaranteed_damage_range = 2)
