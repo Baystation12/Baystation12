@@ -131,8 +131,6 @@
 		anchored = 1
 	else
 		. = ..()
-	if(move_sound)
-		playsound(loc,move_sound,75,0,4)
 	update_object_sprites()
 
 /obj/vehicles/proc/get_occupants_in_position(var/position = null)
@@ -310,6 +308,8 @@
 	if(!is_driver)
 		return
 	Move(new_loc,direction)
+	if(move_sound)
+		playsound(loc,move_sound,75,0,4)
 	user.client.move_delay = world.time + vehicle_move_delay
 
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
