@@ -34,7 +34,6 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/
 	skill_needed = SKILL_NONE
 	defer_initialisation = TRUE
-	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/shuttle_landmark/vox_base/hangar/vox_shuttle
 	name = "Vox Ship Docked"
@@ -52,6 +51,7 @@
 	name = "Unknown Signature"
 	shuttle = "Vox Shuttle"
 	fore_dir = NORTH
+	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/submap_landmark/joinable_submap/voxship
 	archetype = /decl/submap_archetype/derelict/voxship
