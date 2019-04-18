@@ -328,10 +328,10 @@
 
 obj/vehicles/MouseDrop(var/obj/over_object)
 	var/mob/user = usr
-	if(!istype(over_object,/obj)) return
-	if(istype(over_object,/obj/vehicles)) return
-	if(over_object.anchored) return
+	var/obj/vehicles/v = over_object
+	if(!istype(v)) return
 	if(!Adjacent(user) || !user.Adjacent(over_object)) return
+	if(!comp_prof.can_attach_vehicle(v.vehicle_size)) return
 	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] into [src]\'s storage.</span>")
 	if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
 		return

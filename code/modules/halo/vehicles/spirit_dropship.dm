@@ -29,26 +29,12 @@
 
 	vehicle_view_modifier = 1.3
 
-/obj/vehicles/air/overmap/spirit_dropship/proc/update_pixel_xy()
-	pixel_x = 0
-	pixel_y = 0
-	bounds = "32,32"
-	switch (dir)
-		if(SOUTH)
-			pixel_x = -19
-			bounds = "128,160"
-		if(NORTH)
-			pixel_x = -19
-			bounds = "128,160"
-		if(EAST)
-			pixel_y = -19
-			bounds = "160,128"
-		if(WEST)
-			pixel_y = -19
-			bounds = "160,128"
-
 /obj/vehicles/air/overmap/spirit_dropship/update_object_sprites()
-	update_pixel_xy()
+	. = ..()
+	if(dir == NORTH || dir == SOUTH)
+		bounds = "128,256"
+	else
+		bounds = "256,128"
 
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/spirit
