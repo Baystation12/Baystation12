@@ -25,7 +25,7 @@
 		contained_vehicle.contents += comp
 
 /datum/component_profile/proc/can_attach_vehicle(var/vehicle_size)
-	return can_put_cargo(vehicle_size + 5,1)//+5 to start at inventory size huge.(value of 16)
+	return can_put_cargo(vehicle_size,1)
 
 /datum/component_profile/proc/can_put_cargo(var/item_w_class,var/for_vehicle = 0)
 	var/used_capacity = cargo_capacity
@@ -33,16 +33,18 @@
 		used_capacity = vehicle_capacity
 		if(item_w_class > max_vehicle_size)
 			return 0
-	if(item_w_class == ITEM_SIZE_NO_CONTAINER)
+	if(item_w_class == ITEM_SIZE_NO_CONTAINER && !for_vehicle)
 		return 0
-	if(!cargo_allow_massive)
+	if(!cargo_allow_massive && !for_vehicle)
 		if((item_w_class == ITEM_SIZE_HUGE || item_w_class == ITEM_SIZE_GARGANTUAN))
 			return 0
-	var/new_used = get_cargo_used(for_vehicle) + base_storage_cost(item_w_class)
+	var/new_used = get_cargo_used(for_vehicle)
 	if(for_vehicle)
+		new_used += item_w_class
 		if(new_used > vehicle_capacity)
 			return 0
 	else
+		new_used = base_storage_cost(item_w_class)
 		if(new_used > used_capacity)
 			return 0
 	return 1
@@ -51,7 +53,7 @@
 	var/total_amount = 0
 	if(get_vehicle)
 		for(var/obj/vehicles/vehicle in current_cargo)
-			total_amount += base_storage_cost(vehicle.vehicle_size + 5)
+			total_amount += vehicle.vehicle_size
 	else
 		for(var/obj/item in current_cargo)
 			total_amount +=  base_storage_cost(item.w_class)

@@ -290,11 +290,9 @@
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
-	var/list/occupants_to_damage = list()
 	for(var/position in exposed_positions)
-		occupants_to_damage += get_occupants_in_position(position)
-	for(var/mob/living/m in occupants_to_damage)
-		m.apply_damage(60/severity,BRUTE,,m.run_armor_check(null,"bomb"))
+		for(var/mob/living/m in get_occupants_in_position(position))
+			m.apply_damage((300/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
@@ -326,19 +324,36 @@
 		user.drop_from_inventory(O)
 	comp_prof.cargo_transfer(O)
 
+/obj/vehicles/proc/get_adjacent_turfs()
+	var/list/adj_turfs = list()
+	for(var/turf/t in locs)
+		adj_turfs += range(1,t)
+	return adj_turfs
+
+/obj/vehicles/proc/vehicle_loading_adjacent(var/obj/vehicle,var/list/adj_turfs)
+	for(var/loc in vehicle.locs)
+		if(loc in adj_turfs)
+			return 1
+	return 0
+
 obj/vehicles/MouseDrop(var/obj/over_object)
 	var/mob/user = usr
-	if(!istype(over_object,/obj)) return
-	if(istype(over_object,/obj/vehicles)) return
-	if(over_object.anchored) return
-	if(!Adjacent(user) || !user.Adjacent(over_object)) return
+	var/obj/vehicles/v = over_object
+	if(isnull(user.loc)) return
+	if(!istype(v)) return
+	var/list/adj_turfs = get_adjacent_turfs()
+	if(!(user.loc in adj_turfs) || !vehicle_loading_adjacent(v,adj_turfs))
+		to_chat(user,"<span class = 'notice'>Both the vehicle and the person loading the vehicle must be next to the targeted storage vehicle.</span>")
+		return
+	if(!comp_prof.can_attach_vehicle(v.vehicle_size))
+		to_chat(user,"<span class = 'notice'>[src] is full or cannot fit vehicles of [v]'s size.</span>")
+		return
 	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] into [src]\'s storage.</span>")
 	if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
 		return
 	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
 	over_object.loc = pick(src.locs)
 	comp_prof.cargo_transfer(over_object)
-
 
 /obj/vehicles/verb/get_cargo_item()
 	set name = "Retrieve Cargo"

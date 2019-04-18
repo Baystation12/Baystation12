@@ -13,7 +13,7 @@
 	comp_prof = /datum/component_profile/scorpion
 
 	vehicle_move_delay = 5
-	exposed_positions = list("passenger" = 40,"driver" = 5,"gunner" = 5)
+	exposed_positions = list("passenger" = 40,"gunner" = 10)
 
 	occupants = list(4,1)
 
@@ -21,7 +21,7 @@
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("brute"=65,"burn"=50,"emp"=40,,"explosion"=65)
+	resistances = list("brute"=65,"burn"=50,"emp"=40,"explosion"=65)
 
 /datum/component_profile/scorpion
 	pos_to_check = "gunner"
