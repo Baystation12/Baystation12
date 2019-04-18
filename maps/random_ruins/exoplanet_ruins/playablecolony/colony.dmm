@@ -3832,6 +3832,11 @@
 /obj/effect/floor_decal/industrial/hatch/orange,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/colony/airlock)
+"gS" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/exoplanet/concrete,
+/area/map_template/colony/mineralprocessing)
 "gT" = (
 /obj/machinery/atmospherics/binary/pump,
 /obj/effect/floor_decal/corner_techfloor_grid{
@@ -5151,6 +5156,19 @@
 	},
 /turf/simulated/floor/wood,
 /area/map_template/colony/commons)
+"jb" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/mineral/stacking_machine{
+	input_turf = 8;
+	output_turf = 4
+	},
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/colony/mineralprocessing)
 "jc" = (
 /obj/structure/sign/warning/smoking{
 	pixel_y = -28
@@ -5481,10 +5499,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "jC" = (
-/obj/machinery/conveyor{
-	id = "colonymine"
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/loading{
+	dir = 4
 	},
-/turf/simulated/floor/tiled/steel_ridged,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "jD" = (
 /obj/effect/floor_decal/borderfloorwhite,
@@ -5949,9 +5970,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "ko" = (
-/obj/machinery/mineral/processing_unit{
-	input_turf = 2;
-	output_turf = 1
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -6228,12 +6249,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
 "kK" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/loading{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/obj/structure/closet/crate,
+/turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/colony/mineralprocessing)
 "kL" = (
 /obj/effect/decal/cleanable/dirt,
@@ -6314,6 +6331,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
+"kU" = (
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/colony/mineralprocessing)
 "kV" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
@@ -6367,13 +6387,19 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony/airlock)
 "kZ" = (
-/obj/machinery/computer/mining,
-/obj/structure/table/steel_reinforced,
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
+	},
+/obj/machinery/computer/mining,
+/obj/structure/table/steel_reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
@@ -6408,6 +6434,17 @@
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/map_template/colony/atmospherics)
+"ld" = (
+/obj/machinery/computer/mining,
+/obj/structure/table/steel_reinforced,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/colony/mineralprocessing)
 "le" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -6458,12 +6495,9 @@
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
 	},
-/obj/machinery/conveyor_switch{
-	id = "colonymine"
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/steel_ridged,
+/obj/machinery/recharge_station,
+/obj/structure/railing/mapped,
+/turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lj" = (
 /obj/structure/cable{
@@ -6614,14 +6648,12 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony/commons)
 "lz" = (
-/obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/loading{
+	icon_state = "loadingarea";
+	dir = 1
 	},
-/obj/machinery/computer/mining,
-/obj/structure/table/steel_reinforced,
-/obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
@@ -6675,6 +6707,16 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/exoplanet/concrete,
+/area/map_template/colony/mineralprocessing)
+"lE" = (
+/obj/structure/railing/mapped,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/exoplanet/concrete,
+/area/map_template/colony/mineralprocessing)
+"lF" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/crate,
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lG" = (
@@ -7476,15 +7518,12 @@
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mQ" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/railing/mapped,
-/obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+/obj/machinery/mineral/processing_unit{
+	input_turf = 2;
+	output_turf = 1
 	},
-/obj/machinery/recharge_station,
-/turf/simulated/floor/exoplanet/concrete,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/colony/mineralprocessing)
 "mR" = (
 /obj/structure/bed/chair/comfy/beige{
@@ -8130,12 +8169,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
 "nT" = (
-/obj/machinery/mineral/stacking_machine{
-	input_turf = 8;
-	output_turf = 4
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/steel_ridged,
+/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/warning/dust,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/crate,
+/turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "nU" = (
 /obj/structure/cable{
@@ -8259,23 +8298,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
-"od" = (
-/obj/structure/railing/mapped,
-/obj/effect/floor_decal/industrial/warning/dust,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/loading{
-	icon_state = "loadingarea";
-	dir = 1
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
-/area/map_template/colony/mineralprocessing)
-"oe" = (
-/obj/structure/railing/mapped,
-/obj/effect/floor_decal/industrial/warning/dust,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
-/area/map_template/colony/mineralprocessing)
 "of" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
@@ -8947,16 +8969,6 @@
 /obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/hydroponics)
-"Og" = (
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
-	},
-/obj/structure/railing/mapped,
-/turf/simulated/floor/exoplanet/concrete,
-/area/map_template/colony/mineralprocessing)
 "Ot" = (
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/bathroom)
@@ -9357,13 +9369,13 @@ ku
 du
 mN
 bd
-jC
-jC
-jC
+kK
 ko
-jC
+mQ
+kU
 nX
-od
+lz
+nT
 ny
 fc
 "}
@@ -9398,13 +9410,13 @@ kO
 lO
 kv
 bd
-nT
+lF
+jb
 kZ
+ld
 li
-lz
-Og
-mQ
-oe
+lE
+nT
 nz
 fc
 "}
@@ -9439,13 +9451,13 @@ hr
 jT
 hr
 bd
-kK
-la
-la
+kL
+jC
 la
 la
 kL
-oe
+kL
+of
 nz
 fc
 "}
@@ -9480,7 +9492,7 @@ lf
 lP
 mA
 bd
-kL
+gS
 kL
 kL
 kL

@@ -14,7 +14,7 @@
 
 /obj/machinery/mineral/unloading_machine/Process()
 	if(input_turf && output_turf)
-		var/ore_this_tick = 25
+		var/ore_this_tick = 50
 		for(var/obj/structure/ore_box/unloading in input_turf)
 			for(var/obj/item/weapon/ore/_ore in unloading)
 				_ore.dropInto(output_turf)

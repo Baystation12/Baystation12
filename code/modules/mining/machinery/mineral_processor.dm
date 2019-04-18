@@ -10,7 +10,7 @@
 	input_turf =  NORTH
 	output_turf = SOUTH
 
-	var/sheets_per_tick = 10
+	var/sheets_per_tick = 50
 	var/list/ores_processing
 	var/list/ores_stored
 	var/report_all_ores

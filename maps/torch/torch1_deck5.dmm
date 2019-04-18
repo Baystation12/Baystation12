@@ -13,6 +13,21 @@
 /obj/item/weapon/pen/fancy,
 /turf/simulated/floor/lino,
 /area/command/pilot)
+"ad" = (
+/obj/machinery/light/spot,
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
+"ae" = (
+/obj/effect/floor_decal/industrial/loading{
+	icon_state = "loadingarea";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
+"af" = (
+/obj/effect/floor_decal/industrial/loading,
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
 "ag" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
@@ -56,6 +71,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
+"aj" = (
+/obj/structure/closet/crate,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "ak" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
 	icon_state = "map";
@@ -81,6 +100,26 @@
 "an" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fifthdeck/fore)
+"ao" = (
+/obj/machinery/mineral/stacking_machine{
+	input_turf = 2;
+	output_turf = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"ap" = (
+/obj/machinery/mineral/unloading_machine{
+	input_turf = 1;
+	output_turf = 2
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"aq" = (
+/obj/structure/plasticflaps,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -148,6 +187,49 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
+"ax" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"ay" = (
+/obj/machinery/mineral/processing_unit{
+	input_turf = 4;
+	output_turf = 8
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"az" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/camera/network/hangar{
+	icon_state = "camera";
+	dir = 1
+	},
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
+"aA" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
+"aB" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "aC" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
@@ -166,6 +248,10 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/maintenance/fifthdeck/aftstarboard)
+"aE" = (
+/obj/machinery/light/spot,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "aF" = (
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
@@ -4265,14 +4351,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/shuttlefuel)
-"jZ" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/mineral/stacking_machine{
-	input_turf = 2;
-	output_turf = 1
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
 "ka" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/light/spot{
@@ -4971,68 +5049,6 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
-"lF" = (
-/obj/machinery/conveyor{
-	dir = 2;
-	id = "mining_internal"
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
-"lG" = (
-/obj/machinery/conveyor{
-	dir = 8;
-	id = "mining_internal"
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
-"lH" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
-"lK" = (
-/obj/machinery/conveyor{
-	dir = 5;
-	id = "mining_internal"
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
-"lL" = (
-/obj/machinery/mineral/processing_unit{
-	input_turf = 4;
-	output_turf = 8
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
-"lM" = (
-/obj/machinery/conveyor{
-	dir = 1;
-	id = "mining_internal"
-	},
-/obj/structure/plasticflaps,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
-"lN" = (
-/obj/machinery/mineral/unloading_machine{
-	input_turf = 1;
-	output_turf = 2
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
-"lQ" = (
-/obj/effect/floor_decal/industrial/loading{
-	icon_state = "loadingarea";
-	dir = 1
-	},
-/obj/structure/closet/crate,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
-"lR" = (
-/obj/effect/floor_decal/industrial/loading,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
 "lS" = (
 /obj/machinery/computer/mining,
 /turf/simulated/wall/r_wall/prepainted,
@@ -5040,23 +5056,6 @@
 "lT" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
-/area/quartermaster/hangar)
-"lV" = (
-/obj/machinery/light/spot,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
-"lW" = (
-/obj/structure/closet/crate,
-/turf/simulated/floor/tiled,
-/area/quartermaster/hangar)
-"lX" = (
-/obj/machinery/conveyor_switch/oneway{
-	id = "mining_internal";
-	name = "mining conveyor"
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/light/spot,
-/turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "lZ" = (
 /obj/structure/closet/crate,
@@ -5954,13 +5953,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
-"nJ" = (
-/obj/machinery/light/spot,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
 "nK" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -33300,11 +33292,11 @@ kU
 aX
 aX
 aX
-aX
-lQ
-lM
-jZ
-lH
+kU
+UH
+UH
+aj
+aj
 ag
 ny
 ob
@@ -33503,10 +33495,10 @@ Ho
 Ho
 hT
 aX
-lV
+UH
+ad
 lS
-pF
-lG
+aq
 ag
 nz
 oc
@@ -33706,9 +33698,9 @@ bi
 fS
 aX
 UH
-lW
-pF
-lG
+ae
+ao
+ax
 ag
 nz
 oc
@@ -33910,7 +33902,7 @@ aX
 UH
 kD
 lS
-lL
+ay
 ag
 nz
 oc
@@ -34110,9 +34102,9 @@ gy
 fS
 aX
 UH
-kD
-pF
-lH
+af
+ap
+ax
 ag
 uD
 hb
@@ -34311,10 +34303,10 @@ gi
 gz
 fS
 aX
-lX
-pF
+UH
+ad
 lT
-lG
+aq
 ag
 nz
 oc
@@ -34513,10 +34505,10 @@ gj
 gz
 fS
 aX
-lR
-lN
-lF
-lK
+UH
+UH
+aj
+aj
 ag
 nW
 og
@@ -34714,7 +34706,7 @@ Kz
 gx
 gy
 fS
-oO
+az
 gO
 gO
 gO
@@ -35522,7 +35514,7 @@ Cp
 gm
 gz
 fS
-Bm
+aA
 gO
 gO
 gO
@@ -35927,7 +35919,7 @@ gx
 gy
 fS
 nR
-nJ
+aB
 aJ
 mS
 mX
@@ -36129,7 +36121,7 @@ go
 bi
 fS
 Bm
-UH
+aE
 aJ
 mK
 nD
