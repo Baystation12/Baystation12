@@ -353,5 +353,14 @@
 
 /obj/item/projectile/bullet/ssr/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
-		explosion(target, -1, 0, 2)
+		explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	..()
+
+/obj/item/weapon/storage/box/spnkr
+	name = "102mm HEAT SPNKr crate"
+	desc = "UNSC certified crate containing two tubes of SPNKr rockets for a total of four rockets to be loaded in the M41 SSR."
+	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
+	icon_state = "ssrcrate"
+	startswith = list(/obj/item/ammo_magazine/spnkr = 2)
+	can_hold = list(/obj/item/ammo_magazine/spnkr)
+	slot_flags = SLOT_BACK
