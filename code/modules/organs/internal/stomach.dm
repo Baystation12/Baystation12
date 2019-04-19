@@ -10,8 +10,6 @@
 	var/stomach_capacity
 	var/datum/reagents/metabolism/ingested
 	var/next_cramp = 0
-	var/functioning = TRUE
-	var/functioning_set = FALSE
 
 /obj/item/organ/internal/stomach/Destroy()
 	QDEL_NULL(ingested)
@@ -94,27 +92,17 @@
 	if(is_usable())
 		ingested.metabolize()
 	
-// This makes sure that the ingested metabolism call and the Process() call both have the
-// same value for is_usable() due to the probability involved
-/obj/item/organ/internal/stomach/is_usable()
-	if(functioning_set)
-		return functioning
-	
-	functioning_set = TRUE
-	functioning = ..()
-	
-	if(damage >= min_bruised_damage && prob((damage / max_damage) * 100))
-		functioning = FALSE
-		
-	return functioning
-
 #define STOMACH_VOLUME 65
 	
 /obj/item/organ/internal/stomach/Process()
 	..()
 
 	if(owner)
-		if(is_usable())
+		var/functioning = is_usable()
+		if(damage >= min_bruised_damage && prob((damage / max_damage) * 100))
+			functioning = FALSE
+
+		if(functioning)
 			for(var/mob/living/M in contents)
 				if(M.stat == DEAD)
 					qdel(M)
@@ -132,18 +120,19 @@
 			next_cramp = world.time + rand(200,800)
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
 
-		var/alcohol_threshold_met = (ingested.get_reagent_amount(/datum/reagent/ethanol) > STOMACH_VOLUME / 2)
+		var/alcohol_volume = ingested.get_reagent_amount(/datum/reagent/ethanol)
+		
+		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
 		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
 			owner.seizure()
 		
-		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
-		var/vomit_probability = (ingested.total_volume / STOMACH_VOLUME) ** 6
+		// Alcohol counts as double volume for the purposes of vomit probability
+		var/effective_volume = ingested.total_volume + alcohol_volume
 		
-		// They need to have had more than their volume of reagent to vomit from it
-		if((alcohol_threshold_met || ingested.total_volume > STOMACH_VOLUME) && prob(vomit_probability))
+		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
+		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6
+		if(prob(vomit_probability))
 			owner.vomit()
-
-	functioning_set = FALSE
 
 #undef STOMACH_VOLUME
 #undef PUKE_ACTION_NAME
