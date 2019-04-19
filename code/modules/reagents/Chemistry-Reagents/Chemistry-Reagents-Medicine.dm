@@ -455,14 +455,13 @@
 /datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/needs_update = M.mutations.len > 0
 
-	M.mutations = list()
 	M.disabilities = 0
 	M.sdisabilities = 0
 
-	// Might need to update appearance for hulk etc.
 	if(needs_update && ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.update_mutations()
+		M.dna.ResetUI()
+		M.dna.ResetSE()
+		domutcheck(M, null, MUTCHK_FORCED)
 
 /datum/reagent/hyperzine
 	name = "Hyperzine"
