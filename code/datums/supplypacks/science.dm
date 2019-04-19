@@ -70,7 +70,7 @@
 					/obj/item/clothing/under/rank/miner,
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/black,
-					/obj/item/device/analyzer,
+					/obj/item/device/scanner/gas,
 					/obj/item/weapon/storage/ore,
 					/obj/item/device/flashlight/lantern,
 					/obj/item/weapon/shovel,

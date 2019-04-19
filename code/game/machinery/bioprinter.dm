@@ -194,7 +194,7 @@
 
 /obj/machinery/organ_printer/flesh/New()
 	..()
-	component_parts += new /obj/item/device/healthanalyzer
+	component_parts += new /obj/item/device/scanner/health
 	component_parts += new /obj/item/weapon/circuitboard/bioprinter
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)

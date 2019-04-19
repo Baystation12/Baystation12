@@ -4790,7 +4790,7 @@
 	},
 /obj/structure/table/standard,
 /obj/item/weapon/book/manual/mass_spectrometry,
-/obj/item/device/mass_spectrometer,
+/obj/item/device/scanner/spectrometer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lS" = (

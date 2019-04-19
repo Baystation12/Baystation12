@@ -32,7 +32,7 @@
 		/obj/item/weapon/wirecutters,
 		/obj/item/device/multitool,
 		/obj/item/device/t_scanner,
-		/obj/item/device/analyzer,
+		/obj/item/device/scanner/gas,
 		/obj/item/device/geiger,
 		/obj/item/taperoll/engineering,
 		/obj/item/taperoll/atmos,

@@ -13259,7 +13259,7 @@
 	pixel_y = 0
 	},
 /obj/item/clothing/glasses/hud/health,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
 "aEM" = (
@@ -22830,7 +22830,7 @@
 	dir = 8
 	},
 /obj/item/weapon/reagent_containers/spray/cleaner,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
 "sOi" = (

@@ -280,7 +280,7 @@
 "aG" = (
 /obj/structure/closet/crate,
 /obj/effect/floor_decal/industrial/hatch/orange,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
 /obj/item/weapon/circuitboard/unary_atmos/cooler,
 /obj/item/weapon/circuitboard/unary_atmos/heater,
 /obj/item/weapon/circuitboard/oxyregenerator,
@@ -1049,7 +1049,7 @@
 /obj/item/weapon/cell/device/high,
 /obj/item/weapon/cell/crap,
 /obj/item/weapon/storage/box/lights,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
 /obj/item/weapon/reagent_containers/food/drinks/cans/speer,
 /obj/item/weapon/reagent_containers/food/drinks/cans/speer,
 /obj/item/weapon/reagent_containers/food/drinks/cans/speer,

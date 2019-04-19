@@ -12,6 +12,6 @@
 		/obj/item/weapon/extinguisher,
 		/obj/item/weapon/wrench,
 		/obj/item/weapon/crowbar,
-		/obj/item/device/healthanalyzer
+		/obj/item/device/scanner/health
 	)
 	emag = /obj/item/weapon/melee/energy/sword

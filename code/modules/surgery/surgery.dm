@@ -1,7 +1,7 @@
 // A list of types that will not attempt to perform surgery if the user is on help intent.
 GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
 	/obj/item/auto_cpr,
-	/obj/item/device/healthanalyzer,
+	/obj/item/device/scanner/health,
 	/obj/item/weapon/shockpaddles,
 	/obj/item/weapon/reagent_containers/hypospray,
 	/obj/item/modular_computer,
