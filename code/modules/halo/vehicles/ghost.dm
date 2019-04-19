@@ -20,6 +20,8 @@
 
 	vehicle_size = 16
 
+	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
+
 /obj/vehicles/ghost/update_object_sprites()
 	. = ..()
 	var/list/offsets_to_use = sprite_offsets["[dir]"]

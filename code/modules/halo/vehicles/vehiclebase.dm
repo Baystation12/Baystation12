@@ -76,12 +76,13 @@
 	kick_occupants()
 	for(var/obj/item/I in comp_prof.current_cargo)
 		comp_prof.cargo_transfer(I,1)
+	sleep(1)
 	explosion(loc,-1,-1,2,5)
 	qdel(src)
 
 /obj/vehicles/proc/kick_occupants()
 	for(var/mob/m in occupants)
-		exit_vehicle(m)
+		exit_vehicle(m,1)
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
@@ -130,8 +131,6 @@
 		anchored = 1
 	else
 		. = ..()
-	if(move_sound)
-		playsound(loc,move_sound,75,0,4)
 	update_object_sprites()
 
 /obj/vehicles/proc/get_occupants_in_position(var/position = null)
@@ -309,6 +308,8 @@
 	if(!is_driver)
 		return
 	Move(new_loc,direction)
+	if(move_sound)
+		playsound(loc,move_sound,75,0,4)
 	user.client.move_delay = world.time + vehicle_move_delay
 
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)

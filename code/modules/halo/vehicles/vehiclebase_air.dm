@@ -107,23 +107,14 @@
 	//Crashing this vehicle with potential casualties.
 	visible_message("<span class = 'danger'>[name] spirals towards the ground, driverless!</span>")
 	for(var/mob/living/carbon/human/h in occupants)
-		if(prob(33))
-			visible_message("<span class = 'warning'>[h.name] is violently thrown from [src]</span>")
-			exit_vehicle(h)
-			h.forceMove(pick(view(5,src) - view(2,src))) //Let's not throw these people into the epicenter of the ensuing explosion.
-			if(prob(5))
-				//Make it hurt, badly.
-				h.visible_message("<span class = 'danger'>[h.name] skids along [loc].</span>")
-				h.adjustBruteLoss(rand(25,50))
-			else
-				h.visible_message("<span class = 'danger'>[h.name] slams into [loc].</span>")
-				h.adjustBruteLoss(rand(5,20))
+		if(prob(15))
+			h.adjustBruteLoss(rand(25,50))
+		else
+			h.adjustBruteLoss(rand(5,20))
+	kick_occupants()
 	land_vehicle(1)
 	if(crash_sound)
 		playsound(src,crash_sound,100,0)
 	explosion(src.loc,-1,3,4,7)
-
-/obj/vehicles/air/update_object_sprites()
-
 
 #undef VEHICLE_CONNECT_DELAY
