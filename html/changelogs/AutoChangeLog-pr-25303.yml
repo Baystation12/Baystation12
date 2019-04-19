@@ -1,0 +1,4 @@
+author: "Flying_loulou"
+delete-after: True
+changes: 
+  - tweak: "Blood bags are now small if containing a reaggent, and tiny if empty."
