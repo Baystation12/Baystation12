@@ -275,7 +275,7 @@
 	density = 0
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
-	if(!isnull(death_sounds) || death_sounds.len > 0)
+	if(death_sounds.len > 0)
 		playsound(loc, pick(death_sounds),75,0,7)
 	return ..(gibbed,deathmessage,show_dead_message)
 

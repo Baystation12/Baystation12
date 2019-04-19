@@ -126,6 +126,7 @@
 	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m95_sap
+	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
@@ -150,4 +151,33 @@
 		icon_state = "Br85"
 	else
 		icon_state = "Br85_unloaded"
+	. = ..()
+
+/obj/item/weapon/gun/projectile/br55
+	name = "\improper BR55 Battle Rifle"
+	desc = "The BR55 is an all-round infantry weapon with a 2x magnification scope."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "BR55-Loaded-Base"
+	magazine_type = /obj/item/ammo_magazine/m95_sap/br55
+	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap/br55)
+	caliber = "9.5mm"
+	slot_flags = SLOT_BACK
+	fire_sound = 'code/modules/halo/sounds/BattleRifleShotSoundEffect.ogg'
+	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
+	load_method = MAGAZINE
+	one_hand_penalty = -1
+	burst = 3
+	burst_delay = 0.5
+	fire_delay = 9
+	accuracy = 1
+	w_class = ITEM_SIZE_LARGE
+	dispersion=list(0.1, 0.8, 0.8)
+	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock")
+	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/br55,/obj/item/weapon_attachment/br55_stock_cheekrest,/obj/item/weapon_attachment/br55_bottom,/obj/item/weapon_attachment/br55_upper,/obj/item/weapon_attachment/sight/br55_scope)
+
+/obj/item/weapon/gun/projectile/br85/br55/update_icon()
+	if(ammo_magazine)
+		icon_state = "BR55-Loaded-Base"
+	else
+		icon_state = "BR55-Unloaded-Base"
 	. = ..()

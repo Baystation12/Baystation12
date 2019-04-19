@@ -15,8 +15,8 @@
 	weapon_name = "\improper MA5B Assault Rifle"
 
 	on_item_icon_states = list(\
-		"Suppressor" = "MA5-Suppressor",
-		"Scope" = "MA5-Scope",
+		"MA5B suppressor" = "MA5-Suppressor",
+		"MA5B scope" = "MA5-Scope",
 		"underslung shotgun" = "MA5-Shotgun",
 		"MA5 stock cheekrest" = "MA5-Cheekrest",
 		"MA5 basic stock butt" = "MA5-Butt-Basic",
@@ -29,8 +29,8 @@
 		"flashlight attachment" = "MA5-Grip-Basic-FlashlightOff")
 
 	weapon_pixel_offsets = list(\
-	"Suppressor" = list(0,0),
-	"Scope" = list(0,0),
+	"MA5B suppressor" = list(0,0),
+	"MA5B scope" = list(0,0),
 	"underslung shotgun" = list(0,0), //most of these are pre-aligned for the ma5b and therfore require no modification
 	"MA5 stock cheekrest" = list(0,0),
 	"MA5 basic stock butt" = list(0,0),
@@ -44,8 +44,8 @@
 	)
 
 	attribute_modifications = list(\
-		"scope" = list(0,0.5,0.1),
-		"Suppressor" = list(0.5,0,0.1),
+		"MA5B scope" = list(0,0.5,0.1),
+		"MA5B suppressor" = list(0.5,0,0.1),
 		"MA5 stock cheekrest" = list(0,0,0),
 		"MA5 basic stock butt" = list(0,0,0),
 		"MA5 extended stock butt" = list(-0.25,0,0.1),
@@ -55,4 +55,33 @@
 		"MA5 railed upper" = list(0,0,0.1),
 		"underslung grenade launcher" = list(0,0,0,2),
 		"flashlight attachment" = list(0,0,0.1)
+		)
+
+/datum/attachment_profile/BR55
+	weapon_name = "\improper BR55 Battle Rifle"
+	on_item_icon_states = list(\
+		"BR55 barrel attachment" = "BR55-Barrel",
+		"BR55 suppressor" = "BR55-Suppressor",
+		"BR55 scope" = "BR55-CarryHandle-Scope",
+		"BR55 cheekrest" = "BR55-Cheekrest",
+		"BR55 hand guard" = "BR55-Bottom",
+		"BR55 vertical grip" = "BR55-Grip",
+		"BR55 carry handle" = "BR55-CarryHandle")
+	weapon_pixel_offsets = list(\
+	"BR55 suppressor" = list(3,0),
+	"BR55 barrel attachment" = list(3,0),
+	"BR55 scope" = list(0,0),
+	"BR55 cheekrest" = list(0,0),
+	"BR55 hand guard" = list(0,0),
+	"BR55 vertical grip" = list(0,0),
+	"BR55 carry handle" = list(0,0)
+	)
+	attribute_modifications = list(\
+		"BR55 suppressor" = list(-0.5,0.5,0),
+		"BR55 barrel attachment" = list(0,1,0),
+		"BR55 scope" = list(0,0,0),
+		"BR55 cheekrest" = list(0,0,0),
+		"BR55 hand guard" = list(0,0,0),
+		"BR55 vertical grip" = list(-0.75,0.5,0),
+		"BR55 carry handle" = list(0,0,0)
 		)
