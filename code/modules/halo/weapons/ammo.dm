@@ -170,7 +170,7 @@
 	icon_state = "BR55_Mag"
 
 /obj/item/ammo_casing/a95_sap
-	desc = "A 7.62mm bullet casing."
+	desc = "A 9.5mm bullet casing."
 	caliber = "9.5mm"
 	projectile_type = /obj/item/projectile/bullet/m95_sap
 
@@ -340,6 +340,7 @@
 	ammo_type = /obj/item/ammo_casing/spnkr
 	caliber = "spnkr"
 	max_ammo = 2
+	w_class = ITEM_SIZE_HUGE
 
 /obj/item/ammo_casing/spnkr
 	caliber = "spnkr"
