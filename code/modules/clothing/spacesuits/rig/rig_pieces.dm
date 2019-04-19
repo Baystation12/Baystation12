@@ -18,7 +18,7 @@
 
 /obj/item/clothing/gloves/rig
 	name = "gauntlets"
-	item_flags = ITEM_FLAG_THICKMATERIAL
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
 	cold_protection =    HANDS
@@ -27,6 +27,7 @@
 
 /obj/item/clothing/shoes/magboots/rig
 	name = "boots"
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	body_parts_covered = FEET
 	cold_protection = FEET
 	heat_protection = FEET
