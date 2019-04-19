@@ -5,7 +5,7 @@
 	speech_verb = "hisses"
 	ask_verb = "hisses"
 	exclaim_verb = "hisses"
-	key = "4"
+	key = "l"
 	flags = RESTRICTED
 	syllables = list("sss","sSs","SSS")
 	machine_understands = 0
@@ -55,7 +55,7 @@
 	ask_verb = "sings"
 	exclaim_verb = "sings"
 	colour = "alien"
-	key = "x"
+	key = "z"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
 
@@ -80,7 +80,7 @@
 	ask_verb = "creels"
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
-	key = "5"
+	key = "x"
 	flags = WHITELISTED
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")

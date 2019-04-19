@@ -10,15 +10,14 @@
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(
-		LANGUAGE_SOL_COMMON = 1,
-		LANGUAGE_LUNAR = 1,
+		LANGUAGE_HUMAN_EURO = 1,
 		LANGUAGE_UNATHI = 0,
 		LANGUAGE_SIIK_MAAS = 0,
 		LANGUAGE_SKRELLIAN = 0,
 		LANGUAGE_GUTTER = 1,
 		LANGUAGE_SIGN = 0,
-		LANGUAGE_INDEPENDENT = 1,
-		LANGUAGE_SPACER = 1)
+		LANGUAGE_HUMAN_RUSSIAN = 1
+		)
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0

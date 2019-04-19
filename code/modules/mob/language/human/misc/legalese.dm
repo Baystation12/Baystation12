@@ -7,4 +7,4 @@
 	space_chance = 100
 	key = "u"
 	syllables = list("hitherto","whereof","hereunto","deed","hereinbefore","whereas","consensus","nonwithstanding","exonerated","effecuate","accord","caveat", "stipulation", "pledgee", "covenant", "rights", "lawful", "suit of law", "sequestrator", "et al", "et", "ex", "quid", "bono","quo","pro","ad")
-	partial_understanding = list(LANGUAGE_GALCOM = 20, LANGUAGE_SKRELLIAN = 10)
+	partial_understanding = list(LANGUAGE_GALCOM = 20, LANGUAGE_SKRELLIAN = 5, LANGUAGE_HUMAN_EURO = 10)
