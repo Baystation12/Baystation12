@@ -1,7 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - rscadd: "Most handheld scanners  (plant, health, gas, mass spectrometer, reagent, xenobio, price) now store last scan result. Click inhand to see it.
-tweak : Mass spectrometers now can be used directly on open reagent containers or syringes to take sample. Old behaviour is still supported too."
-  - rscadd: "Price scanners keep adding scan results instead of overwriting them. You can clear buffer in scan result view window.
-tweak : Tweaked health analyzer colorings a bit. Now not coloring things like section headers, coloring more deviations from norm (blood oxygenation / pulse)"
