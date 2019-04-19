@@ -20,8 +20,14 @@
 	desc = "A red dot sight which provides an increase in accuracy, resulting in a tighter grouping of consecutive shots."
 */
 /obj/item/weapon_attachment/sight/ma5_scope
-	name = "Scope"
+	name = "MA5B scope"
 	desc = "A scope which provides slight magnification and an increase in accuracy."
 	icon_state = "MA5-Scope"
 
 	zoom_amount = 1.1
+
+/obj/item/weapon_attachment/sight/br55_scope
+	name = "BR55 scope"
+	desc = "A scope specific to the BR55 that allows 2x magnification."
+	icon_state = "BR55-CarryHandle-Scope"
+	zoom_amount = 1.3

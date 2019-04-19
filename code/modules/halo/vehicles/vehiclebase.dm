@@ -76,12 +76,13 @@
 	kick_occupants()
 	for(var/obj/item/I in comp_prof.current_cargo)
 		comp_prof.cargo_transfer(I,1)
+	sleep(1)
 	explosion(loc,-1,-1,2,5)
 	qdel(src)
 
 /obj/vehicles/proc/kick_occupants()
 	for(var/mob/m in occupants)
-		exit_vehicle(m)
+		exit_vehicle(m,1)
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
@@ -130,8 +131,6 @@
 		anchored = 1
 	else
 		. = ..()
-	if(move_sound)
-		playsound(loc,move_sound,75,0,4)
 	update_object_sprites()
 
 /obj/vehicles/proc/get_occupants_in_position(var/position = null)
@@ -290,11 +289,9 @@
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
-	var/list/occupants_to_damage = list()
 	for(var/position in exposed_positions)
-		occupants_to_damage += get_occupants_in_position(position)
-	for(var/mob/living/m in occupants_to_damage)
-		m.apply_damage(60/severity,BRUTE,,m.run_armor_check(null,"bomb"))
+		for(var/mob/living/m in get_occupants_in_position(position))
+			m.apply_damage((300/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
@@ -311,6 +308,8 @@
 	if(!is_driver)
 		return
 	Move(new_loc,direction)
+	if(move_sound)
+		playsound(loc,move_sound,75,0,4)
 	user.client.move_delay = world.time + vehicle_move_delay
 
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
@@ -326,19 +325,36 @@
 		user.drop_from_inventory(O)
 	comp_prof.cargo_transfer(O)
 
+/obj/vehicles/proc/get_adjacent_turfs()
+	var/list/adj_turfs = list()
+	for(var/turf/t in locs)
+		adj_turfs += range(1,t)
+	return adj_turfs
+
+/obj/vehicles/proc/vehicle_loading_adjacent(var/obj/vehicle,var/list/adj_turfs)
+	for(var/loc in vehicle.locs)
+		if(loc in adj_turfs)
+			return 1
+	return 0
+
 obj/vehicles/MouseDrop(var/obj/over_object)
 	var/mob/user = usr
-	if(!istype(over_object,/obj)) return
-	if(istype(over_object,/obj/vehicles)) return
-	if(over_object.anchored) return
-	if(!Adjacent(user) || !user.Adjacent(over_object)) return
+	var/obj/vehicles/v = over_object
+	if(isnull(user.loc)) return
+	if(!istype(v)) return
+	var/list/adj_turfs = get_adjacent_turfs()
+	if(!(user.loc in adj_turfs) || !vehicle_loading_adjacent(v,adj_turfs))
+		to_chat(user,"<span class = 'notice'>Both the vehicle and the person loading the vehicle must be next to the targeted storage vehicle.</span>")
+		return
+	if(!comp_prof.can_attach_vehicle(v.vehicle_size))
+		to_chat(user,"<span class = 'notice'>[src] is full or cannot fit vehicles of [v]'s size.</span>")
+		return
 	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] into [src]\'s storage.</span>")
 	if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
 		return
 	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
 	over_object.loc = pick(src.locs)
 	comp_prof.cargo_transfer(over_object)
-
 
 /obj/vehicles/verb/get_cargo_item()
 	set name = "Retrieve Cargo"

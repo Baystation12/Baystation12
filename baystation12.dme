@@ -1693,6 +1693,7 @@
 #include "code\modules\halo\vehicles\mongoose.dm"
 #include "code\modules\halo\vehicles\pelican.dm"
 #include "code\modules\halo\vehicles\scorpion.dm"
+#include "code\modules\halo\vehicles\shadow.dm"
 #include "code\modules\halo\vehicles\SOEIV.dm"
 #include "code\modules\halo\vehicles\spirit_dropship.dm"
 #include "code\modules\halo\vehicles\vehicle_component_profiles.dm"
