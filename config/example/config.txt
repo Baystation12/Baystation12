@@ -346,7 +346,7 @@ EVENT_CUSTOM_START_MAJOR 80;100
 #DISABLE_AOOC
 
 ## Uncomment to disable ghost chat by default.
-#DISABLE_DSAY
+DISABLE_DSAY
 
 ## Uncomment to disable respawning by default.
 #DISABLE_RESPAWN
