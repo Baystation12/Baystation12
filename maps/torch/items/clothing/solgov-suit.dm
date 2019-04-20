@@ -352,3 +352,30 @@
 /obj/item/clothing/suit/space/void/medical/alt/sol/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/sol
 	boots = /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/head/helmet/space/void/command
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
+	name = "command voidsuit helmet"
+	desc = "A light, radiation resistant voidsuit helmet commonly used among SCG uniformed services."
+	icon_state = "void_command"
+	item_state = "void_command"
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
+	light_overlay = "helmet_light_dual_green"
+
+/obj/item/clothing/suit/space/void/command
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	icon_state = "void_command"
+	name = "command voidsuit"
+	desc = "A light, radiation resistant voidsuit commonly used among SCG uniformed services. This one has an EC seal on its chest plate and command department markings."
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
+
+/obj/item/clothing/suit/space/void/command/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 0
+
+/obj/item/clothing/suit/space/void/command/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/command
+	boots = /obj/item/clothing/shoes/magboots
