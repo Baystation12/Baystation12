@@ -208,10 +208,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			master.show_message(get_hear_message(name_used, ai_text, verb, speaking), 2)
 	var/name_used = M.GetVoice()
 	var/message = get_hear_message(name_used, text, verb, speaking)
-	if(targetpad) //If this is the pad you're making the call from
+	if(targetpad && !targetpad.incoming_connection) //If this is the pad you're making the call from and the call is accepted
 		targetpad.audible_message(message)
 		targetpad.last_message = message
-	if(sourcepad) //If this is a pad receiving a call
+	if(sourcepad && sourcepad.targetpad && !sourcepad.targetpad.incoming_connection) //If this is a pad receiving a call and the call is accepted
 		if(name_used==caller_id||text==last_message||findtext(text, "Holopad received")) //prevent echoes
 			return
 		sourcepad.audible_message(message)
