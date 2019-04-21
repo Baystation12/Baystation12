@@ -35,7 +35,6 @@
 	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
 
 	suit_overlay_active = "grenade"
-	suit_overlay_inactive = null
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
@@ -149,7 +148,6 @@
 	icon_state = "lcannon"
 
 	suit_overlay_active = "mounted-lascannon"
-	suit_overlay_inactive = null
 
 	engage_string = "Configure"
 
@@ -223,8 +221,6 @@
 
 	suit_overlay_active = "plasmacutter"
 
-	use_power_cost = 9000 //5Wh per use
-
 	interface_name = "mounted plasma cutter"
 	interface_desc = "A knee-mounted suit-powered plasma cutter. Don't question it."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 7, TECH_COMBAT = 5)
@@ -256,6 +252,7 @@
 		var/resolved = target.attackby(gun,holder.wearer)
 		if(!resolved && gun && target)
 			gun.afterattack(target,holder.wearer,1)
+			holder.check_power_cost(usr, 9000, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) )//Uses 5 wh per use
 			return 1
 	return 1
 
