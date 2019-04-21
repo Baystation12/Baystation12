@@ -10,10 +10,13 @@
 
 	desc = copy.desc
 	name = copy.name
+	icon = copy.icon
+	color = copy.color
 	icon_state = copy.icon_state
 	item_state = copy.item_state
 	body_parts_covered = copy.body_parts_covered
 	flags_inv = copy.flags_inv
+	gender = copy.gender
 
 	if(copy.item_icons)
 		item_icons = copy.item_icons.Copy()
@@ -38,6 +41,7 @@
 			if(name in .)
 				name += " \[[i++]\]"
 			.[name] = typepath
+	return sortAssoc(.)
 
 /obj/item/clothing/under/chameleon
 //starts off as a jumpsuit
@@ -49,8 +53,8 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/global/list/clothing_choices
 
-/obj/item/clothing/under/chameleon/New()
-	..()
+/obj/item/clothing/under/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		var/blocked = list(src.type, /obj/item/clothing/under/cloud, /obj/item/clothing/under/gimmick)//Prevent infinite loops and bad jumpsuits.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under, blocked)
@@ -78,8 +82,8 @@
 	body_parts_covered = 0
 	var/global/list/clothing_choices
 
-/obj/item/clothing/head/chameleon/New()
-	..()
+/obj/item/clothing/head/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		var/blocked = list(src.type, /obj/item/clothing/head/justice,)//Prevent infinite loops and bad hats.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/head, blocked)
@@ -107,8 +111,8 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/global/list/clothing_choices
 
-/obj/item/clothing/suit/chameleon/New()
-	..()
+/obj/item/clothing/suit/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		var/blocked = list(src.type, /obj/item/clothing/suit/cyborg_suit, /obj/item/clothing/suit/justice, /obj/item/clothing/suit/greatcoat)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/suit, blocked)
@@ -135,8 +139,8 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/global/list/clothing_choices
 
-/obj/item/clothing/shoes/chameleon/New()
-	..()
+/obj/item/clothing/shoes/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		var/blocked = list(src.type, /obj/item/clothing/shoes/syndigaloshes, /obj/item/clothing/shoes/cyborg)//prevent infinite loops and bad shoes.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/shoes, blocked)
@@ -163,8 +167,8 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/global/list/clothing_choices
 
-/obj/item/weapon/storage/backpack/chameleon/New()
-	..()
+/obj/item/weapon/storage/backpack/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		var/blocked = list(src.type, /obj/item/weapon/storage/backpack/satchel/grey/withwallet)
 		clothing_choices = generate_chameleon_choices(/obj/item/weapon/storage/backpack, blocked)
@@ -224,8 +228,8 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/global/list/clothing_choices
 
-/obj/item/clothing/mask/chameleon/New()
-	..()
+/obj/item/clothing/mask/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/mask, list(src.type))
 
@@ -252,8 +256,8 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	var/list/global/clothing_choices
 
-/obj/item/clothing/glasses/chameleon/New()
-	..()
+/obj/item/clothing/glasses/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/glasses, list(src.type))
 
@@ -267,6 +271,79 @@
 
 	disguise(clothing_choices[picked], usr)
 	update_clothing_icon()	//so our overlays update.
+
+//*********************
+//**Chameleon Headset**
+//*********************
+
+/obj/item/device/radio/headset/chameleon
+	name = "radio headset"
+	icon_state = "headset"
+	item_state = "headset"
+	desc = "An updated, modular intercom that fits over the head. This one seems to have a small dial on it."
+	origin_tech = list(TECH_ILLEGAL = 3)
+	var/list/global/clothing_choices
+
+/obj/item/device/radio/headset/chameleon/Initialize()
+	. = ..()
+	if(!clothing_choices)
+		clothing_choices = generate_chameleon_choices(/obj/item/device/radio/headset, list(type))
+
+/obj/item/device/radio/headset/chameleon/verb/change(picked in clothing_choices)
+	set name = "Change Headset Appearance"
+	set category = "Chameleon Items"
+	set src in usr
+
+	if(!ispath(clothing_choices[picked]))
+		return
+
+	disguise(clothing_choices[picked], usr)
+	if (ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_ears()
+
+//***********************
+//**Chameleon Accessory**
+//***********************
+
+/obj/item/clothing/accessory/chameleon
+	name = "tie"
+	icon_state = "tie"
+	item_state = ""
+	desc = "A neosilk clip-on tie. It seems to have a small dial on its back."
+	origin_tech = list(TECH_ILLEGAL = 3)
+	var/list/global/clothing_choices
+
+/obj/item/clothing/accessory/chameleon/Initialize()
+	. = ..()
+	if(!clothing_choices)
+		clothing_choices = generate_chameleon_choices(/obj/item/clothing/accessory, list(type))
+
+/obj/item/clothing/accessory/chameleon/verb/change(picked in clothing_choices)
+	set name = "Change Accessory Appearance"
+	set category = "Chameleon Items"
+	set src in usr
+
+	if(!ispath(clothing_choices[picked]))
+		return
+
+	disguise(clothing_choices[picked], usr)
+	update_clothing_icon()
+
+/obj/item/clothing/accessory/chameleon/disguise(var/newtype, var/mob/user)
+	var/obj/item/clothing/accessory/copy = ..()
+	if (!copy)
+		return
+
+	slot = copy.slot
+	has_suit = copy.has_suit
+	inv_overlay = copy.inv_overlay
+	mob_overlay = copy.mob_overlay
+	overlay_state = copy.overlay_state
+	accessory_icons = copy.accessory_icons
+	on_rolled = copy.on_rolled
+	high_visibility	= copy.high_visibility
+	return copy
 
 //*****************
 //**Chameleon Gun**
