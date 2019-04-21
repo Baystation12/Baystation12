@@ -96,9 +96,6 @@
 	max_shots = 5
 
 /obj/item/weapon/gun/energy/crossbow/ninja/mounted
-	name = "energy dart thrower"
-	projectile_type = /obj/item/projectile/energy/dart
-	max_shots = 5
 	use_external_power = 1
 	has_safety = FALSE
 
