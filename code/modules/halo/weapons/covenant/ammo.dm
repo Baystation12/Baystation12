@@ -18,13 +18,13 @@
 	icon_state = "Trainingpistol Shot"
 
 /obj/item/projectile/covenant/plasmapistol
-	damage = 25
+	damage = 20
 	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 
 /obj/item/projectile/covenant/plasmapistol/overcharge
-	damage = 75
+	damage = 50
 	icon_state = "Overcharged_Plasmapistol shot"
 
 /obj/item/projectile/covenant/plasmapistol/overcharge/on_impact()
@@ -32,13 +32,13 @@
 	empulse(src.loc,1,2)
 
 /obj/item/projectile/covenant/plasmarifle
-	damage = 40 // more damage than MA5B.
+	damage = 35 // more damage than MA5B.
 	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/covenant/plasmarifle/brute
-	damage = 38
+	damage = 33
 	accuracy = 0.5
 	icon_state = "heavy_plas_cannon"
 
@@ -162,7 +162,7 @@
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
-	damage = 40
+	damage = 45
 	accuracy = 2
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
@@ -202,7 +202,7 @@
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
-	damage = 25
+	damage = 30
 	accuracy = 2
 	shards_to_explode = 3
 	shard_name = "Rifle Needle shrapnel"
