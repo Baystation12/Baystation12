@@ -6,6 +6,8 @@
 	emote_see = list("shifts from side to side","scratches their arm","examines their nails","stares at at the ground aimlessly","looks bored","Places their hands in thier pockets","Stares at you with a blank expression")
 	speak = list("Have you heard the latest news from Earth?",\
 		"I'd love to visit Reach one day.",\
+		"Do the UNSC Really care about us? I haven't see any unsc in years!",\
+		"Did you hear the urf are managing to steal unsc ships easily, they have already stolen two so far!",\
 		"If you ever want to visit a frontier world, check out the Draetheus V colony.",\
 		"I hope the weather improves.",\
 		"I hope this war ends soon",\
