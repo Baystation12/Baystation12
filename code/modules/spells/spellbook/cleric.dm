@@ -38,7 +38,7 @@
 	sacrifice_reagents = list(/datum/reagent/peridaxon,
 							/datum/reagent/adminordrazine)
 	sacrifice_objects = list(/obj/item/stack/nanopaste,
-							/obj/item/device/healthanalyzer,
+							/obj/item/device/scanner/health,
 							/obj/item/stack/medical/advanced/bruise_pack,
 							/obj/item/stack/medical/advanced/ointment,
 							/obj/item/bodybag/rescue,

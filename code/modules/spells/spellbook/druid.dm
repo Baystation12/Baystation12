@@ -36,6 +36,6 @@
 				)
 	sacrifice_objects = list(/obj/item/seeds,
 							/obj/item/weapon/wirecutters/clippers,
-							/obj/item/device/analyzer/plant_analyzer,
+							/obj/item/device/scanner/plant,
 							/obj/item/weapon/material/hatchet,
 							/obj/item/weapon/material/minihoe)
