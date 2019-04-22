@@ -19,4 +19,3 @@ __pycache__
 # ignore config, but not subdirs
 config/*
 !config/*/
-code/modules/halo/vehicles/Bull.dmi
