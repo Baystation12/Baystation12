@@ -13,7 +13,7 @@
 	name = "Local Plasma Torpedo Control Console"
 	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
 	icon_state = "covie_console"
-	fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
+	fire_sound = 'code/modules/halo/sounds/plasma_torpedoes_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/plas_torp
 	deck_gun_area = null
 
@@ -27,11 +27,11 @@
 	desc = "Generates magnetic fields to channel and store the plasma needed for plasma torpedoes."
 	icon = 'code/modules/halo/overmap/weapons/plasma_torpedo.dmi'
 	icon_state = "plasma_pod"
-	fire_sound = 'code/modules/halo/sounds/rocket_pod_fire.ogg'
+	fire_sound = 'code/modules/halo/sounds/plasma_torpedoes_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/plas_torp
 	round_reload_time = 20 SECONDS
-	rounds_loaded = 2
-	max_rounds_loadable = 2
+	rounds_loaded = 1
+	max_rounds_loadable = 1
 
 /obj/machinery/deck_gun/missile_pod/plasma_torpedo/return_list_addto()
 	return list(src,src)
@@ -43,7 +43,7 @@
 	icon = 'code/modules/halo/overmap/weapons/plasma_torpedo.dmi'
 	icon_state = "plasma_torp_om_proj"
 	ship_damage_projectile = /obj/item/projectile/plas_torp_damage_proj
-	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/rocketpod_missile_impact.wav'
+	ship_hit_sound = 'code/modules/halo/sounds/plasma_torpedoes_impact.ogg'
 	step_delay = 0.8 SECOND
 
 /obj/item/projectile/overmap/plas_torp/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
