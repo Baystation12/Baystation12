@@ -10,7 +10,7 @@
 		"I hope the weather improves.",\
 		"I hope this war ends soon",\
 		"If I were you I'd leave this place before you end up dead.",\
-		"The 111 Tauri System isn't like the inner colonies or Earth, we play other rules out here!",\
+		"The 111 Tauri System isn't like the inner colonies or Earth, we play by other rules out here!",\
 		"Who knows the UEG might bless us with less taxes and more biofoam!",\
 		"Oof",\
 		"I swear I hate KS7 nothing but snow and rocks, Geminus is a way better colony!",\
@@ -35,6 +35,19 @@
 		"Have you heard the plans for the spaceport upgrade?",\
 		"You heard the plans for the spaceport upgrade?",\
 		"Let me tell you, Martian made means low quality knockoffs.",\
+		"Hey did you hear that rumour of those big green walking tanks?",\
+		"Bleh, this sucks, why does nothing interesting ever happen to this colony?",\
+		"Been seeing a lot more traffic in these parts, I wonder why?",\
+		"I use to be a soldier like you, then I took a landmine to the knee.",\
+		"Use to live on Far Isle, still don’t know what happened to that place.. wiped from existence.",\
+		"Have you seen those uh.. Helljumpers? In that sleek black armor?.. man I wanna be one of them some day.",\
+		"Hey, did you hear they reopened recruitment for the Hellbringers? I wonder what that’s all about.",\
+		"Feels good to live on a free planet!",\
+		"Went hunting last week, found me one of those ice-boar things, they may smell terrible but they taste pretty good!",\
+		"Have you ever been to Space? Sometimes I long for my chance.",\
+		"I eat crayons.",\
+		"I heard Earth it quite beautiful this time of year. Maybe I’ll visit it one day.",\
+		"Tried my hand at the International War Photography Prize last year, came in last place..",\
 		"I have relatives on Harvest. I should really go visit them because I haven't heard from them for awhile.")
 	speak_chance = 5
 	jumpsuits = list(\
