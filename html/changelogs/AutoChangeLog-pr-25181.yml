@@ -1,5 +1,0 @@
-author: "Higgin"
-delete-after: True
-changes: 
-  - rscadd: "Cult members can now make stun talismans again. Requires a tome, paper, and a substantial amount of blood."
-  - rscadd: "Ported obscure and reveal runes back into cult. Obscure runes make all runes around them invisible, reveal runes reveal them. Runes cannot be used while invisible."

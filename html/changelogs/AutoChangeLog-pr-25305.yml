@@ -1,5 +1,0 @@
-author: "Flying_loulou"
-delete-after: True
-changes: 
-  - rscadd: "Adds a new command voidsuit type for bridge officers and the SEA."
-  - maptweak: "Replaces the pilot voidsuit in the bridge EVA storage by the command voidsuit."
