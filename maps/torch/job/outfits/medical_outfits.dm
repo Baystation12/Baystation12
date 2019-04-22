@@ -23,6 +23,19 @@
 	name = OUTFIT_JOB_NAME("Physician - Contractor")
 	id_type = /obj/item/weapon/card/id/torch/contractor/medical/senior
 
+/decl/hierarchy/outfit/job/torch/crew/medical/coordinator
+	name = OUTFIT_JOB_NAME("First Response Coordinator")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/medical/coordinator
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
+
+/decl/hierarchy/outfit/job/torch/crew/medical/coordinator/fleet
+	name = OUTFIT_JOB_NAME("First Response Coordinator - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
+
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor
 	name = OUTFIT_JOB_NAME("Medical Technician")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical

@@ -376,6 +376,12 @@
 	desc = "Command"
 	region = ACCESS_REGION_COMMAND
 
+/var/const/access_frc = "ACCESS_FIRST_RESPONSE_COORDINATOR" //68
+/datum/access/frc
+	id = access_frc
+	desc = "First Response Coordinator"
+	region = ACCESS_REGION_MEDBAY
+
 /******************
 * Central Command *
 ******************/

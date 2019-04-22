@@ -866,6 +866,10 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
+"abD" = (
+/obj/structure/closet/secure_closet/medical_torch_coordinator,
+/turf/simulated/floor/tiled/white,
+/area/medical/locker)
 "abE" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/firstdeck/forestarboard)
@@ -16171,24 +16175,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
-"cXb" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/closet/secure_closet/medical_torch,
-/turf/simulated/floor/tiled/white,
-/area/medical/locker)
 "cYb" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
@@ -55105,7 +55091,7 @@ acP
 uXe
 adt
 afZ
-cXb
+abD
 dpb
 dHb
 dVb

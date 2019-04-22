@@ -37,8 +37,8 @@
 	job_access_type = /datum/job/cmo
 	detail_color = COLOR_PALE_BLUE_GRAY
 
-/obj/item/weapon/card/id/torch/crew/medical
-	job_access_type = /datum/job/doctor
+/obj/item/weapon/card/id/torch/crew/medical/coordinator
+	job_access_type = /datum/job/doctor_coordinator
 	detail_color = COLOR_PALE_BLUE_GRAY
 
 /obj/item/weapon/card/id/torch/crew/medical/senior

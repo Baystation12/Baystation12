@@ -43,6 +43,46 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/doctor_coordinator
+	title = "First Response Coordinator"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "Physicians and the Chief Medical Officer"
+	selection_color = "#013d3b"
+	economic_power = 7
+	ideal_character_age = 40
+	minimal_player_age = 2
+	alt_titles = list(
+		"Senior Nurse",
+		"Senior Medical Technician",
+		"Senior Corpsman")
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/coordinator
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/coordinator/fleet,
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
+	)
+	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
+	                    SKILL_MEDICAL = SKILL_BASIC,
+	                    SKILL_ANATOMY = SKILL_BASIC)
+
+	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
+	                    SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_CHEMISTRY   = SKILL_MAX,
+	                    SKILL_VIROLOGY    = SKILL_MAX)
+
+	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar, access_frc)
+	minimal_access = list()
+
+	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
+							 /datum/computer_file/program/camera_monitor)
+	skill_points = 29
+
 /datum/job/doctor
 	title = "Medical Technician"
 	total_positions = 3

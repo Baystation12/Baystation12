@@ -122,3 +122,30 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
 		/obj/item/clothing/mask/surgical = 2
 	)
+
+/obj/structure/closet/secure_closet/medical_torch_coordinator
+	name = "First Response Coordinator's locker"
+	req_access = list(access_frc)
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical
+
+/obj/structure/closet/secure_closet/medical_torch_coordinator/WillContain()
+	return list(
+		/obj/item/clothing/under/sterile,
+		/obj/item/clothing/accessory/storage/white_vest,
+		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/toggle/fr_jacket,
+		/obj/item/clothing/shoes/white,
+		/obj/item/device/radio/headset/headset_med,
+		/obj/item/device/radio/headset/headset_corpsman/alt,
+		/obj/item/taperoll/medical,
+		/obj/item/weapon/storage/belt/medical/emt,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/weapon/tank/emergency/oxygen/engi,
+		/obj/item/weapon/storage/box/autoinjectors,
+		/obj/item/device/scanner/health,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/weapon/storage/firstaid/adv,
+		/obj/item/device/megaphone,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
+	)
