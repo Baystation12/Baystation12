@@ -140,8 +140,8 @@
 	penetrating = 0
 
 /obj/item/projectile/bullet/a762_M392
-	damage = 35
-	armor_penetration = 10
+	damage = 40
+	armor_penetration = 60
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"
