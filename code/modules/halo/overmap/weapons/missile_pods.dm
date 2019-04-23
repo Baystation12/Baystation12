@@ -35,8 +35,8 @@
 /obj/item/projectile/overmap/missile
 	name = "missile"
 	desc = "An explosive warhead on the end of a guided thruster."
-	//icon = 'code/modules/halo/machinery/deck_missile_pod.dmi'
-	//icon_state = "missile"
+	icon = 'code/modules/halo/overmap/weapons/deck_missile_pod.dmi'
+	icon_state = "missile_om_proj"
 	ship_damage_projectile = /obj/item/projectile/missile_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/rocketpod_missile_impact.wav'
 	step_delay = 0.75 SECOND
@@ -51,7 +51,7 @@
 	damage = 0 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/missile_damage_proj/on_impact(var/atom/impacted)
-	explosion(loc,-1,1,3,5, adminlog = 0)
+	explosion(loc,-1,2,4,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
 	. = ..()

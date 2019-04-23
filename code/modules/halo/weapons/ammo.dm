@@ -140,8 +140,8 @@
 	penetrating = 0
 
 /obj/item/projectile/bullet/a762_M392
-	damage = 35
-	armor_penetration = 10
+	damage = 40
+	armor_penetration = 60
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"
@@ -362,6 +362,8 @@
 	desc = "UNSC certified crate containing two tubes of SPNKr rockets for a total of four rockets to be loaded in the M41 SSR."
 	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
 	icon_state = "ssrcrate"
+	max_storage_space = base_storage_capacity(6)
 	startswith = list(/obj/item/ammo_magazine/spnkr = 2)
 	can_hold = list(/obj/item/ammo_magazine/spnkr)
 	slot_flags = SLOT_BACK
+	max_w_class = ITEM_SIZE_HUGE

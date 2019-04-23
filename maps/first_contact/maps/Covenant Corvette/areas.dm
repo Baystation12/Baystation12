@@ -71,3 +71,5 @@
 //Weapon areas
 /area/covenant_corvette/pulse_lasersstarboard
 /area/covenant_corvette/pulse_lasersport
+
+/area/covenant_corvette/plastorps
