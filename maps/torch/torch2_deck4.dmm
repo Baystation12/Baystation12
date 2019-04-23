@@ -2068,7 +2068,8 @@
 	id = "starboardaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
-	pixel_y = 6
+	pixel_y = 6;
+	req_access = list("ACCESS_CARGO")
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/fore)
@@ -8408,7 +8409,8 @@
 	id = "portaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
-	pixel_y = -6
+	pixel_y = -6;
+	req_access = list("ACCESS_CARGO")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
