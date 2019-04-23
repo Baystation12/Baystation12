@@ -370,7 +370,8 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.stat) return
+	if(!CanPhysicallyInteract(usr))
+		return
 
 	if (src.anchored)
 		to_chat(usr, "It is anchored in place!")
@@ -383,3 +384,6 @@
 	if(connected)
 		disconnect()
 	..()
+
+/obj/machinery/mining/brace/AltClick()
+	rotate()
