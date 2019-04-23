@@ -1,4 +1,0 @@
-author: "Datraen"
-delete-after: True
-changes: 
-  - bugfix: "Ion Thrusters now respect on state and thrust modifier when calculating thrust"
