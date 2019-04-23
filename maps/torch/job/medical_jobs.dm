@@ -52,10 +52,6 @@
 	economic_power = 7
 	ideal_character_age = 40
 	minimal_player_age = 2
-	alt_titles = list(
-		"Senior Nurse",
-		"Senior Medical Technician",
-		"Senior Corpsman")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/coordinator
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -76,12 +72,16 @@
 	                    SKILL_VIROLOGY    = SKILL_MAX)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar, access_frc)
+			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 	skill_points = 29
+
+/datum/job/biomech/get_description_blurb()
+	return "You are the First response coordinator. Your job is to coordinate and supervise the medical technicians. Unless under exeptionnal circumpstances, you shall not respond to a call yourself, but make sure a medical technician gets on it instead. Keep in mind that you're not allowed to perform physician's tasks such as surgeries."
+
 
 /datum/job/doctor
 	title = "Medical Technician"

@@ -187,6 +187,15 @@
 	name = "Fleet medical SNCO"
 	min_rank = 7
 
+	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/medical,
+						 /obj/item/clothing/head/ushanka/solgov/fleet,
+						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+						 /obj/item/clothing/head/soft/solgov/fleet,
+						 /obj/item/clothing/under/solgov/utility/fleet/combat/medical,
+						 /obj/item/clothing/shoes/jungleboots,
+						 /obj/item/clothing/gloves/thick/duty/solgov/med)
+	utility_under = /obj/item/clothing/under/solgov/utility/fleet/medical
+
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
 

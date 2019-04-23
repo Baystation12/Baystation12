@@ -867,7 +867,19 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
 "abD" = (
-/obj/structure/closet/secure_closet/medical_torch_coordinator,
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc{
+	step_y = 31
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/medical_torch/coordinator,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "abE" = (
