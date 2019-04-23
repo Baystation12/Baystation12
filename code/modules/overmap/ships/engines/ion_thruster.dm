@@ -67,10 +67,10 @@
 	if(!on && !powered())
 		return 0
 	use_power_oneoff(burn_cost)
-	. = generated_thrust
+	. = thrust_limit * generated_thrust
 	
 /obj/machinery/engine/ion/proc/get_thrust()
-	return generated_thrust
+	return thrust_limit * generated_thrust * on
 	
 /obj/item/weapon/circuitboard/engine/ion
 	name = T_BOARD("ion propulsion device")
