@@ -37,9 +37,9 @@
 /obj/item/organ/internal/cardioasylant/Process()
 	if(is_broken())
 		return
-		if(owner && (prob(5) && owner.is_asystole()))
-			(owner.resuscitate())
-				take_internal_damage(max_damage * 0.25)
+	if(owner && (prob(5) && owner.is_asystole()))
+		(owner.resuscitate())
+			take_internal_damage(max_damage * 0.25)
 
 /obj/item/organ/internal/brain/unathi
 	name = "large brain"
