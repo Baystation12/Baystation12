@@ -1,0 +1,7 @@
+author: "FTangSteve"
+delete-after: True
+changes: 
+  - bugfix: "ingested reagents are now handled properly"
+  - tweak: "pulse impacting reagents now have stronger effects when compounded"
+  - tweak: "stomach volume is now 65 units instead of 30"
+  - tweak: "vomiting when stomach is overfull now based on chance, higher with the more you're over the limit"
