@@ -4182,6 +4182,7 @@
 	dir = 8;
 	pixel_x = 21
 	},
+/obj/item/weapon/mop,
 /turf/simulated/floor/tiled/techfloor,
 /area/janitor/aux)
 "nZ" = (
