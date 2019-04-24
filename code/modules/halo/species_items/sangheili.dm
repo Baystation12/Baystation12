@@ -482,7 +482,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 //Organ Defines + misc//
 
-/obj/item/organ/heart_secondary
+/obj/item/organ/internal/heart_secondary
 	name = "Secondary Heart"
 	parent_organ = "chest"
 	organ_tag = "second heart"
@@ -490,7 +490,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	min_broken_damage = 30
 	var/useheart = 0
 
-/obj/item/organ/heart_secondary/process()
+/obj/item/organ/internal/heart_secondary/process()
 	if(is_broken())
 		return
 	var/obj/item/organ/internal/heart = owner.internal_organs_by_name["heart"]

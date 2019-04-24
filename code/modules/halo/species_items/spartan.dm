@@ -90,7 +90,7 @@
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
 			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
-			w.damage -= pick(0,0,1)
+			w.damage -= 0.05
 
 /decl/hierarchy/outfit/spartan_two
 	name = "Spartan II"
