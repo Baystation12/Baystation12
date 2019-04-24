@@ -1,4 +1,0 @@
-author: "Draxtheros"
-delete-after: True
-changes: 
-  - rscadd: "Robots will now announce via chatlog when they enter an emergency power state."

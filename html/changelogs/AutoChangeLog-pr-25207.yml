@@ -1,7 +1,0 @@
-author: "Lilja"
-delete-after: True
-changes: 
-  - bugfix: "Fixed sheet materials stacking bug where icon wasn't updating."
-  - tweak: "Recolored & adjusted all sheet material icons to have more contrast."
-  - rscadd: "New aluminium sprite, new plastic sprite, new glass sprite, new reinforced glass sprite, new diamond sprite, new wood sprite, new uranium sprite, new rod sprites, new cable wire sprites, new deuterium and tritium sprites."
-  - rscadd: "Sheet material stacks now change appearance when they have reached maximum stack."
