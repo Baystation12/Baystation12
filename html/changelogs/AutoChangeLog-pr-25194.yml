@@ -1,0 +1,13 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Hardsuit overlay icons will now change depending on what module is selected"
+  - tweak: "Hardsuit drill mount now functions like a normal drill, being able to mine multiple tiles at once"
+  - tweak: "Hardsuit drill mount energy usage has increase to a non insignificant amount"
+  - rscadd: "Mounted plasma cutter has a close range mode to enable object interaction accessible by configuring"
+  - bugfix: "Selecting a hardsuit module now checks for energy and suit status"
+  - bugfix: "The energy blade projector can now fire darts again"
+  - rscadd: "Mounted plasma cutter now has a sprite"
+  - rscadd: "Mounted energy gun and Tazer now has a sprite"
+  - rscadd: "Mounted medical injector now has a sprite"
+  - rscadd: "Mounted grenade launchers now has a sprite"
