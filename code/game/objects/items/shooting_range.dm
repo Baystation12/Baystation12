@@ -22,7 +22,7 @@
 			overlays.Cut()
 			bulletholes.Cut()
 			hp = initial(hp)
-			to_chat(usr, "<span class='notice'>You slice off [src]'s uneven chunks of aluminum and scorch marks.</span>")
+			to_chat(usr, "<span class='notice'>You slice off [src]'s uneven chunks of aluminium and scorch marks.</span>")
 			return
 
 /obj/item/target/attack_hand(var/mob/user)

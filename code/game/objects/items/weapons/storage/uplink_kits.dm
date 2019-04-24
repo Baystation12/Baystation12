@@ -115,11 +115,11 @@
 	..()
 	var/obj/item/weapon/storage/fancy/cigarettes/pack
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)

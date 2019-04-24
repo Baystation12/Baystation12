@@ -29,8 +29,8 @@
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 	return
 
-/datum/reagent/aluminum
-	name = "Aluminum"
+/datum/reagent/aluminium
+	name = "Aluminium"
 	taste_description = "metal"
 	taste_mult = 1.1
 	description = "A silvery white and ductile member of the boron group of chemical elements."

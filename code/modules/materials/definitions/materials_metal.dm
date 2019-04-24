@@ -109,8 +109,8 @@
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	chem_products = list(
-				/datum/reagent/iron = 15,
-				/datum/reagent/carbon = 5
+				/datum/reagent/iron = 19.6,
+				/datum/reagent/carbon = 0.4
 				)
 	alloy_materials = list(MATERIAL_HEMATITE = 1875, MATERIAL_GRAPHENE = 1875)
 	alloy_product = TRUE
@@ -134,14 +134,14 @@
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	stack_type = /obj/item/stack/material/aluminium
 	chem_products = list(
-				/datum/reagent/aluminum = 20
+				/datum/reagent/aluminium = 20
 				)
 	integrity = 125
 	weight = 18
 	brute_armor = 3
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#b5b5b5"
+	icon_colour = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	sale_price = 1
 
@@ -158,7 +158,7 @@
 
 /material/plasteel
 	name = MATERIAL_PLASTEEL
-	lore_text = "When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
+	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
