@@ -86,7 +86,7 @@
 	registered_user = null
 
 /obj/item/weapon/card/id/syndicate/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if(!href_list["look_at_id"] && (user != registered_user))
+	if(!(href_list && href_list["look_at_id"]) && (user != registered_user))
 		return STATUS_CLOSE
 	return ..()
 
