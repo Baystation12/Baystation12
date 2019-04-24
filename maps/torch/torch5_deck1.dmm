@@ -23771,7 +23771,7 @@
 "lwb" = (
 /obj/structure/table/steel,
 /obj/machinery/button/remote/blast_door{
-	id = "d1ladderwindow";
+	id = "concheckwindow";
 	name = "Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = 6
@@ -23782,8 +23782,7 @@
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/machinery/button/remote/airlock{
-	desc = "A remote control-switch for airlocks.";
+/obj/machinery/button/remote/blast_door{
 	id = "d1ladderwindow";
 	name = "Ladderwell Shutter Control";
 	pixel_x = -5;
