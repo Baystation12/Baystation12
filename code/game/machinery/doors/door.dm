@@ -371,9 +371,10 @@
 	return
 
 
-/obj/machinery/door/proc/open(var/forced = 0)
-	if(!can_open(forced))
-		return
+/obj/machinery/door/proc/open(var/forced = 0,var/no_checks = 0)
+	if(!no_checks)
+		if(!can_open(forced))
+			return
 	operating = 1
 
 	do_animate("opening")
