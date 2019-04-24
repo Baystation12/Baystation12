@@ -170,24 +170,41 @@ var/list/gear_datums = list()
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
 		var/allowed = 1
-
 		if(allowed && G.allowed_roles)
 			var/good_job = 0
 			var/bad_job = 0
 			entry += "<br><i>"
-			var/ind = 0
+			var/list/jobchecks = list()
 			for(var/datum/job/J in jobs)
-				++ind
-				if(ind > 1)
-					entry += ", "
 				if(J.type in G.allowed_roles)
-					entry += "<font color=55cc55>[J.title]</font>"
+					jobchecks += "<font color=55cc55>[J.title]</font>"
 					good_job = 1
 				else
-					entry += "<font color=cc5555>[J.title]</font>"
+					jobchecks += "<font color=cc5555>[J.title]</font>"
 					bad_job = 1
 			allowed = good_job || !bad_job
-			entry += "</i>"
+			entry += "[english_list(jobchecks)]</i>"
+
+		if(allowed && G.allowed_branches)
+			var/list/branches = list()
+			for(var/datum/job/J in jobs)
+				if(pref.branches[J.title])
+					branches |= pref.branches[J.title]
+			if(length(branches))
+				var/list/branch_checks = list()
+				var/good_branch = 0
+				entry += "<br><i>"
+				for(var/branch in branches)
+					var/datum/mil_branch/player_branch = mil_branches.get_branch(branch)
+					if(player_branch.type in G.allowed_branches)
+						branch_checks += "<font color=55cc55>[player_branch.name]</font>"
+						good_branch = 1
+					else
+						branch_checks += "<font color=cc5555>[player_branch.name]</font>"
+				allowed = good_branch
+					
+				entry += "[english_list(branch_checks)]</i>"
+
 		entry += "</tr>"
 		if(ticked)
 			entry += "<tr><td colspan=3>"
