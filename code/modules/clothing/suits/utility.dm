@@ -52,7 +52,7 @@
 
 /obj/item/clothing/suit/fire/heavy/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 1.5
+	slowdown_per_slot[slot_wear_suit] = 0.8
 
 /*
  * Bomb protection

@@ -80,7 +80,7 @@
 		/obj/item/device/flashlight,
 		/obj/item/weapon/tank/oxygen/red,
 		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /*
  * Tool Closet
@@ -191,7 +191,7 @@
 		/obj/item/device/flashlight,
 		/obj/item/weapon/tank/oxygen/red,
 		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /*
  * First Aid
