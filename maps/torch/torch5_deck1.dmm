@@ -867,10 +867,6 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
 "abD" = (
-/obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
-	},
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
@@ -880,7 +876,6 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24
-	},
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/medical_torch/coordinator,
