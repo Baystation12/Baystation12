@@ -262,14 +262,17 @@
 	else
 		enter_as_position(user,player_pos_choice)
 
-/obj/vehicles/proc/damage_occupant(var/position,var/obj/item/projectile/P)
+/obj/vehicles/proc/damage_occupant(var/position,var/obj/item/P,var/mob/user = null)
 	var/list/occ_list = get_occupants_in_position(position)
 	if(isnull(occ_list) || !occ_list.len)
 		return
 	var/mob/mob_to_hit = pick(occ_list)
 	if(isnull(mob_to_hit))
 		return
-	mob_to_hit.bullet_act(P)
+	if(user)
+		mob_to_hit.attackby(P,user)
+	else
+		mob_to_hit.bullet_act(P)
 
 /obj/vehicles/proc/should_damage_occ()
 	for(var/position in exposed_positions)
@@ -428,7 +431,13 @@ obj/vehicles/MouseDrop(var/obj/over_object)
 		handle_grab_attack(I,user)
 		return
 	if(user.a_intent == I_HURT)
-		return ..()
+		. = ..()
+		var/pos_to_dam = should_damage_occ()
+		if(!isnull(pos_to_dam))
+			damage_occupant(pos_to_dam,I,user)
+			return
+		comp_prof.take_component_damage(I.force,I.damtype)
+		return
 	put_cargo_item(user,I)
 
 #undef ALL_VEHICLE_POSITIONS
