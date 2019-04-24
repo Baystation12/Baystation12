@@ -16,7 +16,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_SMALL
 
 	//Cost to make in the autolathe
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 30)
@@ -342,7 +342,7 @@
 	desc = "A smaller welder, meant for quick or emergency use."
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(MATERIAL_STEEL = 15, MATERIAL_GLASS = 5)
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_TINY
 	tank = /obj/item/weapon/welder_tank/mini
 
 /obj/item/weapon/weldingtool/largetank
@@ -352,7 +352,7 @@
 	desc = "A heavy-duty portable welder, made to ensure it won't suddenly go cold on you."
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 60)
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_NORMAL
 	tank = /obj/item/weapon/welder_tank/large
 
 /obj/item/weapon/weldingtool/hugetank
@@ -360,7 +360,7 @@
 	icon_state = "welder_h"
 	item_state = "welder"
 	desc = "A sizable welding tool with room to accomodate the largest of fuel tanks."
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 120)
 	tank = /obj/item/weapon/welder_tank/huge
@@ -370,7 +370,7 @@
 	icon_state = "welder_l"
 	item_state = "welder"
 	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 120)
 	tank = /obj/item/weapon/welder_tank/experimental
