@@ -1,0 +1,4 @@
+author: "Randall"
+delete-after: True
+changes: 
+  - maptweak: "The auxiliary sanitation closet now holds a spare mop."
