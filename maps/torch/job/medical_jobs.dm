@@ -45,6 +45,8 @@
 
 /datum/job/doctor_coordinator
 	title = "First Response Coordinator"
+	department = "Medical"
+	department_flag = MED
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "Physicians and the Chief Medical Officer"
@@ -79,7 +81,7 @@
 							 /datum/computer_file/program/camera_monitor)
 	skill_points = 29
 
-/datum/job/biomech/get_description_blurb()
+/datum/job/doctor_coordinator/get_description_blurb()
 	return "You are the First response coordinator. Your job is to coordinate and supervise the medical technicians. Unless under exeptionnal circumpstances, you shall not respond to a call yourself, but make sure a medical technician gets on it instead. Keep in mind that you're not allowed to perform physician's tasks such as surgeries."
 
 
