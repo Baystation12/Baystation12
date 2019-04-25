@@ -6,12 +6,3 @@
 /obj/prefab/test_heatcool
 	name = "heating-cooling test"
 	prefab_type = /decl/prefab/ic_assembly/test_heatercooler
-
-/decl/prefab/ic_assembly/test_interactor
-	assembly_name = "interactor-test"
-	data = {"{'assembly':{'type':'type-b electronic drone'},'components':\[{'type':'interactor'},{'type':'constant chip'},{'type':'button','name':'Toggle Hatch'},{'type':'starter'},{'type':'text-to-speech circuit','inputs':\[\[1,0,'Interaction happened']]}],'wires':\[\[\[1,'I',1],\[2,'O',1]],\[\[1,'A',1],\[3,'A',1]],\[\[1,'A',2],\[5,'A',1]],\[\[2,'A',1],\[4,'A',1]]]}"}
-	power_cell_type = /obj/item/weapon/cell/hyper
-
-/obj/prefab/test_interactor
-	name = "interactor test"
-	prefab_type = /decl/prefab/ic_assembly/test_heatercooler
