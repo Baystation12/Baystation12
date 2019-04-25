@@ -3,10 +3,10 @@
 //*****************
 
 /obj/item/proc/disguise(var/newtype, var/mob/user)
-	if(!user || user.incapacitated())
+	if(!user || !CanPhysicallyInteract(user))
 		return
 	//this is necessary, unfortunately, as initial() does not play well with list vars
-	var/obj/item/copy = new newtype(null) //so that it is GCed once we exit
+	var/obj/item/copy = new newtype(null)
 
 	desc = copy.desc
 	name = copy.name
@@ -23,13 +23,19 @@
 		sprite_sheets = copy.sprite_sheets.Copy()
 	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
 
-	return copy //for inheritance
+	OnDisguise(copy, user)
+	qdel(copy)
+
+// Subtypes shall override this, not /disguise()
+/obj/item/proc/OnDisguise(var/obj/item/copy, var/mob/user)
+	return
 
 /proc/generate_chameleon_choices(var/basetype, var/blacklist=list())
 	. = list()
 
+	var/types = islist(basetype) ? basetype : typesof(basetype)
 	var/i = 1 //in case there is a collision with both name AND icon_state
-	for(var/typepath in typesof(basetype) - blacklist)
+	for(var/typepath in (types - blacklist))
 		var/obj/O = typepath
 		if(initial(O.icon) && initial(O.icon_state))
 			var/name = initial(O.name)
@@ -311,9 +317,8 @@
 		P.impact_type = initial(copy_projectile.impact_type)
 	return P
 
-/obj/item/weapon/gun/energy/chameleon/disguise(var/newtype)
-	var/obj/item/weapon/gun/copy = ..()
-	if(!copy)
+/obj/item/weapon/gun/energy/chameleon/OnDisguise(var/obj/item/weapon/gun/copy)
+	if(!istype(copy))
 		return
 
 	flags_inv = copy.flags_inv
