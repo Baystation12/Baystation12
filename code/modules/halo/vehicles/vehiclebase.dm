@@ -109,7 +109,7 @@
 		var/shift_by
 		if(occupant_counter*9 >= bound_width) //Don't bother with more than one line of heads
 			return
-		if(occupant_counter*9 >= 16) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
+		if(occupant_counter*9 >= bound_width/2) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
 			shift_by = (occupant_counter*9) - 16 //*9 multiplier is applied to lower the amount of overlap on the head icons.
 		else
 			shift_by = -16 + (occupant_counter*9)
