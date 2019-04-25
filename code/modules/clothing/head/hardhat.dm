@@ -40,3 +40,6 @@
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA, "Xenophage")
 	flash_protection = FLASH_PROTECTION_MAJOR
+
+/obj/item/clothing/head/hardhat/firefighter/Chief
+	icon_state = "Firefighter-Helmet-Chief"

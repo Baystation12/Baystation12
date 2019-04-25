@@ -64,6 +64,10 @@
 		/obj/item/weapon/folder/yellow,
 		/obj/item/weapon/storage/box/armband/engine,
 		/obj/item/weapon/storage/box/secret_project_disks,
+		/obj/item/clothing/head/hardhat/firefighter/Chief,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/weapon/extinguisher,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -88,6 +92,10 @@
 		/obj/item/taperoll/atmos,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/gloves/thick/duty/solgov/eng,
+		/obj/item/clothing/head/hardhat/firefighter,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/weapon/extinguisher,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -115,6 +123,10 @@
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/gloves/thick/duty/solgov/eng,
+		/obj/item/clothing/head/hardhat/firefighter,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/weapon/extinguisher,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -127,10 +139,11 @@
 /obj/structure/closet/secure_closet/atmos_torch/WillContain()
 	return list(
 		/obj/item/clothing/under/hazard,
+		/obj/item/clothing/head/hardhat/firefighter,
 		/obj/item/clothing/suit/fire/firefighter,
-		/obj/item/clothing/head/hardhat/red,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/storage/belt/utility/full,
+		/obj/item/weapon/tank/oxygen/red,
 		/obj/item/weapon/extinguisher,
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/device/radio/headset/headset_eng/alt,
