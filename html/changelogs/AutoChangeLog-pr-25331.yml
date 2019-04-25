@@ -1,4 +1,0 @@
-author: "Randall"
-delete-after: True
-changes: 
-  - maptweak: "The Auxiliary Warehouse shutter buttons now require Supply access from the outside."
