@@ -65,6 +65,10 @@
 			to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
 		new /obj/item/stack/material/rods(loc, 1, material.name)
 		qdel(src)
+	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
+		new /obj/item/stack/material/rods(loc, 1, material.name)
+		qdel(src)
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/R = C
 		if(R.use(2))

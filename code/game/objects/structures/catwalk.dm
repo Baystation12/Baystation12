@@ -81,6 +81,18 @@
 				new plated_tile.build_type(src.loc)
 			qdel(src)
 		return
+	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		playsound(src, 'sound/items/Welder.ogg', 100, 1)
+		to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
+		new /obj/item/stack/material/rods(src.loc)
+		new /obj/item/stack/material/rods(src.loc)
+		//Lattice would delete itself, but let's save ourselves a new obj
+		if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
+			new /obj/structure/lattice/(src.loc)
+		if(plated_tile)
+			new plated_tile.build_type(src.loc)
+		qdel(src)
+		return
 	if(isCrowbar(C) && plated_tile)
 		hatch_open = !hatch_open
 		if(hatch_open)
