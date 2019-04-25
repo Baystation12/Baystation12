@@ -1,0 +1,6 @@
+author: mikomyazaki
+
+delete-after: True
+
+changes: 
+  - tweak: "Allows changing a cryptographic sequencer's icon and name in a similar way to chameleon items."
