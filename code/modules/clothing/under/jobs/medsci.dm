@@ -32,6 +32,7 @@
 	icon_state = "chemistry"
 	item_state = "w_suit"
 	worn_state = "chemistrywhite"
+	gender_icons = 1
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -62,6 +63,7 @@
 	icon_state = "virology"
 	item_state = "w_suit"
 	worn_state = "virologywhite"
+	gender_icons = 1
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -91,6 +93,7 @@
 	icon_state = "orderly"
 	item_state = "nursesuit"
 	worn_state = "orderly"
+	gender_icons = 1
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -100,6 +103,7 @@
 	icon_state = "medical"
 	item_state = "w_suit"
 	worn_state = "medical"
+	gender_icons = 1
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -116,6 +120,7 @@
 	desc = "A loose-fitting garment designed to provide minor protection against biohazards."
 	icon_state = "scrubs"
 	worn_state = "scrubs"
+	gender_icons = 1
 
 /obj/item/clothing/under/rank/medical/scrubs/blue
 	name = "blue scrubs"
@@ -155,6 +160,7 @@
 	icon_state = "psych"
 	item_state = "w_suit"
 	worn_state = "psych"
+	gender_icons = 1
 
 /obj/item/clothing/under/rank/psych/turtleneck
 	desc = "A turqouise sweater and a pair of dark blue slacks."
