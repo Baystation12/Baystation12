@@ -129,8 +129,7 @@
 					var/purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
 					purpose += ", paid by [E.owner_name]"
 
-					var/datum/transaction/singular/T = new(TRUE, linked_account, machine_id, transaction_amount, purpose)
-					if(T.perform())
+					if(linked_account.deposit(transaction_amount, purpose, machine_id))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						src.visible_message("\icon[src] \The [src] chimes.")
 						transaction_paid = 1
@@ -237,8 +236,7 @@
 					D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
 					if(D)
 						//transfer the money
-						var/datum/transaction/T = new(D, linked_account, transaction_amount, "[transaction_purpose] (via [eftpos_name]/[machine_id])")
-						if(T.perform())
+						if(D.transfer(linked_account, transaction_amount, "[transaction_purpose] (via [eftpos_name]/[machine_id])"))
 							playsound(src, 'sound/machines/chime.ogg', 50, 1)
 							src.visible_message("\icon[src] \The [src] chimes.")
 							transaction_paid = 1

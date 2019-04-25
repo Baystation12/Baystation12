@@ -21,14 +21,6 @@
 		else if(access_hop in held_card.access || access_captain in held_card.access)
 			return 1
 
-	proc/create_singular_transaction(target, reason, amount)
-		var/is_deposit = TRUE
-		if(amount < 0)
-			is_deposit = FALSE
-
-		var/datum/transaction/singular/T = new(is_deposit, target, machine_id, amount, reason)
-		return T
-
 	proc/accounting_letterhead(report_name)
 		return {"
 			<center><h1><b>[report_name]</b></h1></center>
@@ -149,8 +141,7 @@
 					station_account.money -= starting_funds
 
 					//create a transaction log entry
-					var/datum/transaction/singular/trx = create_singular_transaction(new_account, "New account activation", starting_funds)
-					trx.perform()
+					new_account.deposit(starting_funds, "New account activation", machine_id)
 
 					creating_new_account = 0
 					ui.close()
@@ -182,8 +173,7 @@
 
 			if("revoke_payroll")
 				var/funds = detailed_account_view.money
-				var/datum/transaction/payroll_revocation = new(detailed_account_view, station_account, funds, "Revocation of payroll")
-				payroll_revocation.perform()
+				detailed_account_view.transfer(station_account, funds, "Revocation of payroll")
 
 				callHook("revoke_payroll", list(detailed_account_view))
 

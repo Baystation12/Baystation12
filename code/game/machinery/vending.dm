@@ -299,8 +299,7 @@
 		return 0
 	else
 		// Okay to move the money at this point
-		var/datum/transaction/T = new(customer_account, vendor_account, currently_vending.price, "Purchase of [currently_vending.item_name]")
-		T.perform()
+		customer_account.transfer(vendor_account, currently_vending.price, "Purchase of [currently_vending.item_name]")
 		
 		return 1
 
@@ -310,8 +309,7 @@
  *  Called after the money has already been taken from the customer.
  */
 /obj/machinery/vending/proc/credit_purchase(var/target as text)
-	var/datum/transaction/singular/T = new(TRUE, vendor_account, target, currently_vending.price, "Purchase of [currently_vending.item_name]")
-	T.perform()
+	vendor_account.deposit(currently_vending.price, "Purchase of [currently_vending.item_name]", target)
 
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)

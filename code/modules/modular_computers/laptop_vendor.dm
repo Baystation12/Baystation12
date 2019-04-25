@@ -307,8 +307,7 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 			ping("Unable to access account: incorrect credentials.")
 			return 0
 
-	var/datum/transaction/singular/T = new(FALSE, customer_account, "Computer Manufacturer (via [src.name])", total_price, "Purchase of [(devtype == 1) ? "laptop computer" : "tablet microcomputer"].")
-	if(T.perform())
+	if(customer_account.withdraw(total_price, "Purchase of [(devtype == 1) ? "laptop computer" : "tablet microcomputer"].", "Computer Manufacturer (via [src.name])"))
 		return 1
 	else
 		ping("Transaction failed! Please try again.")

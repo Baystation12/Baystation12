@@ -90,9 +90,8 @@
 		if(istype(I,/obj/item/weapon/spacecash))
 			var/obj/item/weapon/spacecash/dolla = I
 
-			//create a transaction log entry
-			var/datum/transaction/singular/T = new(TRUE, authenticated_account, machine_id, dolla.worth, "Credit deposit")
-			if(T.perform())
+			//deposit the cash
+			if(authenticated_account.deposit(dolla.worth, "Credit deposit", machine_id))
 				if(prob(50))
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
 				else
@@ -240,7 +239,8 @@
 					else if(transfer_amount <= authenticated_account.money)
 						var/target_account_number = text2num(href_list["target_acc_number"])
 						var/transfer_purpose = href_list["purpose"]
-						if(charge_to_account(target_account_number, authenticated_account, transfer_amount, transfer_purpose))
+						var/datum/money_account/target_account = get_account(target_account_number)
+						if(target_account && authenticated_account.transfer(target_account, transfer_amount, transfer_purpose))
 							to_chat(usr, "\icon[src]<span class='info'>Funds transfer successful.</span>")
 						else
 							to_chat(usr, "\icon[src]<span class='warning'>Funds transfer failed.</span>")
@@ -291,9 +291,7 @@
 
 								//create an entry in the account transaction log
 								var/datum/money_account/failed_account = get_account(tried_account_num)
-
-								var/datum/transaction/log/T = new(failed_account, "Unauthorised login attempt", machine_id)
-								T.perform()
+								failed_account.log_msg("Unauthorized login attempt", machine_id)
 							else
 								to_chat(usr, "\icon[src] <span class='warning'>Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining.</span>")
 								previous_account_number = tried_account_num
@@ -307,8 +305,7 @@
 						view_screen = NO_SCREEN
 
 						//create a transaction log entry
-						var/datum/transaction/log/T = new(authenticated_account, "Remote terminal access", machine_id)
-						T.perform()
+						authenticated_account.log_msg("Remote terminal access", machine_id)
 
 						to_chat(usr, "\icon[src] <span class='info'>Access granted. Welcome user '[authenticated_account.owner_name].'</span>")
 
@@ -320,8 +317,7 @@
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
 					//create an entry in the account transaction log
-					var/datum/transaction/singular/T = new(FALSE, authenticated_account, machine_id, amount, "Credit withdrawal")
-					if(T.perform())
+					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						spawn_ewallet(amount,src.loc,usr)
 					else
@@ -333,8 +329,7 @@
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
 					//remove the money
-					var/datum/transaction/singular/T = new(FALSE, authenticated_account, machine_id, amount, "Credit withdrawal")
-					if(T.perform())
+					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						spawn_money(amount,src.loc,usr)
 					else

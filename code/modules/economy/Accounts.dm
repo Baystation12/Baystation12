@@ -14,17 +14,29 @@
 /datum/money_account/New(var/account_type)
 	account_type = account_type ? account_type : ACCOUNT_TYPE_PERSONAL
 
-/datum/money_account/proc/add_transaction(var/datum/transaction/T, var/is_target)
-	money = max(0, is_target ? (money + T.amount) : (money - T.amount))
+/datum/money_account/proc/add_transaction(var/datum/transaction/T)
+	money = max(0, money + T.amount)
 	transaction_log += T
 
 /datum/money_account/proc/get_balance()
-	. = 0
-	for(var/datum/transaction/T in transaction_log)
-		if(T.purpose == "Account creation")
-			continue
-		T.sanitize_amount()
-		. += T.amount
+	return money
+
+/datum/money_account/proc/log_msg(msg, machine_id)
+	var/datum/transaction/log/T = new(src, msg, machine_id)
+	return T.perform()
+
+/datum/money_account/proc/deposit(amount, purpose, machine_id)
+	var/datum/transaction/singular/T = new(src, machine_id, amount, purpose)
+	return T.perform()
+
+/datum/money_account/proc/withdraw(amount, purpose, machine_id)
+	var/datum/transaction/singular/T = new(src, machine_id, -amount, purpose)
+	return T.perform()
+
+/datum/money_account/proc/transfer(to_account, amount, purpose)
+	var/datum/transaction/T = new(src, to_account, amount, purpose)
+	return T.perform()
+
 
 /proc/create_account(var/account_name = "Default account name", var/owner_name, var/starting_funds = 0, var/account_type = ACCOUNT_TYPE_PERSONAL, var/obj/machinery/computer/account_database/source_db)
 
@@ -36,7 +48,8 @@
 	M.remote_access_pin = rand(1111, 111111)
 
 	//create an entry in the account transaction log for when it was created
-	var/datum/transaction/singular/T = new(TRUE, M, (source_db ? source_db.machine_id : "NTGalaxyNet Terminal #[rand(111,1111)]"), starting_funds, "Account creation")
+	//note that using the deposit proc on the account isn't really feasible because we need to change the transaction data before performing it
+	var/datum/transaction/singular/T = new(M, (source_db ? source_db.machine_id : "NTGalaxyNet Terminal #[rand(111,1111)]"), starting_funds, "Account creation")
 	if(!source_db)
 		//set a random date, time and location some time over the past few decades
 		T.date = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [game_year-rand(8,18)]"
@@ -76,15 +89,6 @@
 	all_money_accounts.Add(M)
 
 	return M
-
-/proc/charge_to_account(var/attempt_account_number, var/source, var/purpose, var/amount)
-	var/datum/money_account/D = get_account(attempt_account_number)
-	if(!D)
-		return FALSE
-
-	//create a transaction log entry
-	var/datum/transaction/T = new(source, D, amount, purpose)
-	return T.perform()
 
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account
 /proc/attempt_account_access(var/attempt_account_number, var/attempt_pin_number, var/security_level_passed = 0)

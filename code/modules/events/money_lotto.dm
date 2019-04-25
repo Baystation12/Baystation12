@@ -10,8 +10,7 @@
 			var/datum/money_account/D = pick(all_money_accounts)
 			winner_name = D.owner_name
 
-			var/datum/transaction/singular/T = new(TRUE, D, "Biesel TCD Terminal #[rand(111,333)]", winner_sum, "Nyx Daily Loan Lottery winner!")
-			deposit_success = T.perform()
+			deposit_success = D.deposit(winner_sum, "Nyx Daily Loan Lottery winner!", "Biesel TCD Terminal #[rand(111,333)]")
 	else
 		winner_name = random_name(pick(MALE,FEMALE), species = SPECIES_HUMAN)
 		deposit_success = pick(0,1)
