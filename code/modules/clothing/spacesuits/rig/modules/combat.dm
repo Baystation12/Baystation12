@@ -229,21 +229,22 @@
 
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
 
-	if(!check())
+	if(!check() || !gun)
 		return 0
 
 	if(!target)
 		playsound(src.loc, 'sound/weapons/guns/selector.ogg', 50, 1)
 		if(!active)
 			active=1
-			to_chat(usr, "<span class='notice'>\The [src] is now set to close range mode.</span>")
+			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to close range mode.</span>")
 		else
 			active=0
-			to_chat(usr, "<span class='notice'>\The [src] is now set to firing mode.</span>")
+			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to firing mode.</span>")
 		return
 
 	if(!active)
 		gun.Fire(target,holder.wearer)
+		return 1
 	else
 		var/turf/T = get_turf(target)
 		if(istype(T) && !T.Adjacent(get_turf(src)))
@@ -254,7 +255,6 @@
 			gun.afterattack(target,holder.wearer,1)
 			holder.check_power_cost(usr, 9000, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) )//Uses 5 wh per use
 			return 1
-	return 1
 
 /obj/item/rig_module/mounted/energy_blade
 
