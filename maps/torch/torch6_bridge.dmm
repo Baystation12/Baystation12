@@ -642,11 +642,39 @@
 /obj/machinery/suit_storage_unit/command,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
+"bl" = (
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset/chief,
+/turf/simulated/floor/tiled/monotile,
+/area/crew_quarters/heads/office/ce)
 "bm" = (
 /obj/random/closet,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/aftstarboard)
+"bn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 9;
+	icon_state = "intact"
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/plating,
+/area/aquila/maintenance)
 "bo" = (
 /obj/random/plushie/large,
 /turf/simulated/floor/plating,
@@ -3802,18 +3830,6 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
-"iO" = (
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/crew_quarters/heads/office/ce)
 "iP" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -11728,18 +11744,6 @@
 /obj/effect/shuttle_landmark/merc/deck5,
 /turf/space,
 /area/space)
-"Ac" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	dir = 9;
-	icon_state = "intact"
-	},
-/obj/machinery/power/terminal{
-	dir = 4
-	},
-/obj/structure/cable,
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/aquila/maintenance)
 "Ad" = (
 /obj/machinery/power/apc{
 	dir = 4;
@@ -28065,7 +28069,7 @@ Pe
 gL
 hx
 if
-iO
+bl
 jI
 Df
 ie
@@ -35348,7 +35352,7 @@ pX
 Ww
 Vb
 Zb
-Ac
+bn
 tL
 uw
 vL

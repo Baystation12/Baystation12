@@ -248,6 +248,24 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
+"au" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/supply{
+	icon_state = "intact-supply";
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
+	icon_state = "intact-scrubbers";
+	dir = 6
+	},
+/obj/structure/disposalpipe/segment,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/tiled/techfloor,
+/area/engineering/atmos)
 "av" = (
 /turf/simulated/floor/airless,
 /area/space)
@@ -9643,22 +9661,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/turret_protected/ai_cyborg_station)
-"vT" = (
-/obj/effect/floor_decal/techfloor{
-	icon_state = "techfloor_edges";
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 6
-	},
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/techfloor,
-/area/engineering/atmos)
 "vU" = (
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
 	dir = 4
@@ -41710,7 +41712,7 @@ sW
 Ws
 Js
 PV
-vT
+au
 Xx
 xc
 yC

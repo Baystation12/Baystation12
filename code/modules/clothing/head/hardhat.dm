@@ -27,7 +27,7 @@
 /obj/item/clothing/head/hardhat/firefighter
 	icon_state = "Firefighter-Helmet"
 	name = "firefighter helmet"
-	desc = "A helmet specially designed for firefighters."
+	desc = "A complete, face covering helmet specially designed for firefighting. It is airtight and has a port for internals."
 	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	flags_inv = BLOCKHAIR
 	permeability_coefficient = 0
