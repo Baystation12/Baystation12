@@ -2,7 +2,7 @@
 	name = "Anomaly power battery"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anobattery0"
-	var/datum/artifact_effect/battery_effect = null
+	var/datum/artifact_effect/battery_effect
 	var/capacity = 300
 	var/stored_charge = 0
 	var/effect_id = ""
@@ -53,7 +53,7 @@
 		if(activated)
 			dat += "Device active.<br>"
 
-		dat += "[inserted_battery] inserted, anomaly ID: [(inserted_battery.battery_effect && inserted_battery.battery_effect.artifact_id) ? inserted_battery.battery_effect.artifact_id : "NA"]<BR>"
+		dat += "[inserted_battery] inserted, anomaly ID: [(inserted_battery.battery_effect?.artifact_id) ? inserted_battery.battery_effect.artifact_id : "NA"]<BR>"
 		dat += "<b>Charge:</b> [inserted_battery.stored_charge] / [inserted_battery.capacity]<BR>"
 		dat += "<b>Time left activated:</b> [round(max((time_end - last_process) / 10, 0))]<BR>"
 		if(activated)
