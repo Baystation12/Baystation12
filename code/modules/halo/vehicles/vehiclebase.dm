@@ -432,6 +432,7 @@ obj/vehicles/MouseDrop(var/obj/over_object)
 		return
 	if(user.a_intent == I_HURT)
 		. = ..()
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/pos_to_dam = should_damage_occ()
 		if(!isnull(pos_to_dam))
 			damage_occupant(pos_to_dam,I,user)
