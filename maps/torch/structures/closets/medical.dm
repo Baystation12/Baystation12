@@ -92,7 +92,6 @@
 	return list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/accessory/storage/white_vest,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,

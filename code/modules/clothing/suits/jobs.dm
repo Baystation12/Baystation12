@@ -202,8 +202,8 @@
 	icon_closed = "ems_jacket_closed"
 
 /obj/item/clothing/suit/storage/medical_chest_rig
-	name = "MT Chest Rig"
-	desc = "A black chest rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
+	name = "\improper MT chest-rig"
+	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
 	icon_state = "Med-chest-rig"
 	item_state = "Med-chest-rig"
 	blood_overlay_type = "armor"

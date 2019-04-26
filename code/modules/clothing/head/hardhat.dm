@@ -26,7 +26,7 @@
 	icon_state = "hardhat0_dblue"
 
 /obj/item/clothing/head/hardhat/EMS
-	name = "EMS Helmet"
+	name = "\improper EMS helmet"
 	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
 	icon_state = "EMS_helmet"
 	light_overlay = "EMS_light"
