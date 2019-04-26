@@ -58,10 +58,11 @@
 		vehicle_view_modifier = 1
 		comp_prof.gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/cobra_cannon)
 
-	for(var/mob/occupant in occupants)
-		update_user_view(occupants,1)
-		spawn(1)
-			update_user_view(user)
+	spawn(5)
+		for(var/mob/occupant in occupants)
+			update_user_view(occupant,1)
+			spawn(1)
+				update_user_view(occupant)
 
 /obj/vehicles/cobra/verb/toggle_zoom()
 	set name = "Toggle Zoom"
@@ -83,10 +84,11 @@
 	else
 		vehicle_view_modifier = 1.5
 
-	for(var/mob/occupant in occupants)
-		update_user_view(occupants,1)
-		spawn(1)
-			update_user_view(user)
+	spawn(5)
+		for(var/mob/occupant in occupants)
+			update_user_view(occupant,1)
+			spawn(1)
+				update_user_view(occupant)
 
 /obj/item/vehicle_component/health_manager/cobra
 	integrity = 500
