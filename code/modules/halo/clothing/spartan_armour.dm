@@ -17,7 +17,7 @@
 	siemens_coefficient = 1
 	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 35,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
-	armor_thickness = 60
+	armor_thickness = 20
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -34,7 +34,7 @@
 	icon_override = 'code/modules/halo/clothing/spartan_armour.dmi'
 
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 70, bio = 100, rad = 25)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDETAIL
