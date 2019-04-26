@@ -32,7 +32,7 @@
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
-	if(!linked_vehicle.comp_prof.gunner_fire_check(user,linked_vehicle))
+	if(!linked_vehicle.comp_prof.gunner_fire_check(user,linked_vehicle,src))
 		user.drop_from_inventory(src)
 		return
 	for(var/i = 0,i<burst,i++)
@@ -55,6 +55,9 @@
 	var/list/guns_switchto = list()
 
 /obj/item/weapon/gun/vehicle_turret/switchable/attack_self(var/mob/user)
+	if(world.time < next_fire_time)
+		to_chat(user,"<span class = 'notice'>Wait for the current burst to finish.</span>")
+		return
 	var/current_gun_index = null
 	for(var/datum/vehicle_gun/gun in guns_switchto)
 		if(gun.name == name && gun.proj_fired == projectile_fired)

@@ -56,7 +56,12 @@
 			total_amount += vehicle.vehicle_size
 	else
 		for(var/obj/item in current_cargo)
-			total_amount +=  base_storage_cost(item.w_class)
+			if(istype(item,/obj/vehicles))
+				continue
+			if(istype(item,/obj/structure/closet))
+				total_amount += base_storage_cost(ITEM_SIZE_GARGANTUAN)
+			else
+				total_amount +=  base_storage_cost(item.w_class)
 	return total_amount
 
 /datum/component_profile/proc/get_coverage_sum()
@@ -105,8 +110,8 @@
 	else if(prob(100 - max_comp_coverage))
 		comps_to_dam = vital_components
 	for(var/obj/item/vehicle_component/component in comps_to_dam)
-		var/comp_resistance = component.get_resistance_for("explosion")
-		component.damage_integrity((initial(component.integrity)/(ex_severity*2)) * (1- comp_resistance/100),)
+		var/comp_resistance = component.get_resistance_for("bomb")
+		component.damage_integrity(400/ex_severity * (1- comp_resistance/100),)
 
 /datum/component_profile/proc/give_gunner_weapons(var/obj/vehicles/source_vehicle)
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)
@@ -118,8 +123,13 @@
 			continue
 		weapon = new weapon(source_vehicle)
 		gunner.put_in_hands(weapon)
+		source_vehicle.update_user_view(gunner,1)
+		spawn(1)
+			source_vehicle.update_user_view(gunner)
 
-/datum/component_profile/proc/gunner_fire_check(var/mob/user,var/obj/vehicles/source_vehicle)
+/datum/component_profile/proc/gunner_fire_check(var/mob/user,var/obj/vehicles/source_vehicle,var/obj/gun)
+	if(!(gun.type in gunner_weapons))
+		return 0
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)
 	if(user in gunners)
 		return 1
@@ -134,7 +144,7 @@
 
 	var/integrity = 100
 	var/coverage = 10
-	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0,"explosion" = 0.0) //Functions as a percentage reduction of damage of the type taken.
+	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0,"bomb" = 0.0) //Functions as a percentage reduction of damage of the type taken.
 
 /obj/item/vehicle_component/proc/get_resistance_for(var/damage_type)
 	var/resistance = resistances[damage_type]

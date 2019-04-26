@@ -88,11 +88,11 @@
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
 	default_faction = "Covenant"
 
-	pain_mod = 0.9
+	pain_mod = 0.8
 	brute_mod = 1.1
 	slowdown = -2
 
-	total_health = 150
+	total_health = 175
 	pixel_offset_x = -4
 
 	item_icon_offsets = list(4,-1)

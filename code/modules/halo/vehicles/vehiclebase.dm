@@ -25,7 +25,7 @@
 	var/list/exposed_positions = list("driver" = 0.0,"gunner" = 0.0,"passenger" = 0.0) //Assoc. Value is the chance of hitting this position
 
 	//Vehicle ferrying//
-	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size. Will use generic inventory_sizes.dm defines with a +5 to w_class.
+	var/vehicle_size = 0//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size.
 
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 	var/move_sound = null
@@ -39,6 +39,15 @@
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
 	show_occupants_contained(user)
+
+/obj/vehicles/proc/update_user_view(var/mob/user,var/reset = 0)
+	if(user.client)
+		if(reset)
+			user.client.view = world.view
+			user.client.pixel_x = 0
+			user.client.pixel_y = 0
+		else
+			user.client.view *= vehicle_view_modifier
 
 /obj/vehicles/proc/show_occupants_contained(var/mob/user)
 	to_chat(user,"<span class = 'notice'>Its visible occupants are:</span>")
@@ -109,7 +118,7 @@
 		var/shift_by
 		if(occupant_counter*9 >= bound_width) //Don't bother with more than one line of heads
 			return
-		if(occupant_counter*9 >= 16) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
+		if(occupant_counter*9 >= bound_width/2) //Handles basic occupant representation by creating small images of their heads and then shifting them in the top left corner of the icon.
 			shift_by = (occupant_counter*9) - 16 //*9 multiplier is applied to lower the amount of overlap on the head icons.
 		else
 			shift_by = -16 + (occupant_counter*9)
@@ -186,8 +195,7 @@
 	user.loc = contents
 	contents += user
 	update_object_sprites()
-	if(user.client)
-		user.client.view *= vehicle_view_modifier
+	update_user_view(user)
 	return 1
 
 /obj/vehicles/proc/do_seat_switch(var/mob/user,var/position)
@@ -243,10 +251,9 @@
 		return
 	occupants -= user
 	contents -= user
-	user.loc = loc_moveto
+	user.forceMove(loc_moveto)
 	update_object_sprites()
-	if(user.client)
-		user.client.view = world.view
+	update_user_view(user,1)
 
 /obj/vehicles/verb/enter_vehicle()
 	set name = "Enter Vehicle"
@@ -262,14 +269,17 @@
 	else
 		enter_as_position(user,player_pos_choice)
 
-/obj/vehicles/proc/damage_occupant(var/position,var/obj/item/projectile/P)
+/obj/vehicles/proc/damage_occupant(var/position,var/obj/item/P,var/mob/user = null)
 	var/list/occ_list = get_occupants_in_position(position)
 	if(isnull(occ_list) || !occ_list.len)
 		return
 	var/mob/mob_to_hit = pick(occ_list)
 	if(isnull(mob_to_hit))
 		return
-	mob_to_hit.bullet_act(P)
+	if(user)
+		mob_to_hit.attackby(P,user)
+	else
+		mob_to_hit.bullet_act(P)
 
 /obj/vehicles/proc/should_damage_occ()
 	for(var/position in exposed_positions)
@@ -285,7 +295,7 @@
 	if(!isnull(pos_to_dam))
 		damage_occupant(pos_to_dam,P)
 		return
-	comp_prof.take_component_damage(P.damage,P.damtype)
+	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
@@ -337,11 +347,7 @@
 			return 1
 	return 0
 
-obj/vehicles/MouseDrop(var/obj/over_object)
-	var/mob/user = usr
-	var/obj/vehicles/v = over_object
-	if(isnull(user.loc)) return
-	if(!istype(v)) return
+/obj/vehicles/proc/load_vehicle(var/obj/vehicles/v,var/mob/user)
 	var/list/adj_turfs = get_adjacent_turfs()
 	if(!(user.loc in adj_turfs) || !vehicle_loading_adjacent(v,adj_turfs))
 		to_chat(user,"<span class = 'notice'>Both the vehicle and the person loading the vehicle must be next to the targeted storage vehicle.</span>")
@@ -349,12 +355,31 @@ obj/vehicles/MouseDrop(var/obj/over_object)
 	if(!comp_prof.can_attach_vehicle(v.vehicle_size))
 		to_chat(user,"<span class = 'notice'>[src] is full or cannot fit vehicles of [v]'s size.</span>")
 		return
-	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] into [src]\'s storage.</span>")
-	if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
+	user.visible_message("<span class = 'notice'>[user] starts loading [v] into [src]\'s storage.</span>")
+	if(!do_after(user,VEHICLE_ITEM_LOAD,v))
 		return
-	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
-	over_object.loc = pick(src.locs)
-	comp_prof.cargo_transfer(over_object)
+	user.visible_message("<span class = 'notice'>[user] loads [v] into [src].</span>")
+	v.forceMove(pick(src.locs))
+	comp_prof.cargo_transfer(v)
+
+/obj/vehicles/MouseDrop(var/obj/over_object)
+	var/mob/user = usr
+	var/obj/vehicles/v = over_object
+	if(isnull(user.loc)) return 0
+	if(istype(v))
+		load_vehicle(v,user)
+	else
+		var/item_size_use = over_object.w_class
+		if(istype(over_object,/obj/structure/closet))
+			item_size_use = ITEM_SIZE_GARGANTUAN
+		if(!comp_prof.can_put_cargo(item_size_use))
+			to_chat(user,"<span class = 'notice'>[src] is full or cannot fit objects of [over_object]'s size.</span>")
+			return
+		if(!do_after(user,VEHICLE_ITEM_LOAD,over_object))
+			return
+		user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
+		over_object.forceMove(pick(src.locs))
+		comp_prof.cargo_transfer(over_object)
 
 /obj/vehicles/verb/get_cargo_item()
 	set name = "Retrieve Cargo"
@@ -428,7 +453,14 @@ obj/vehicles/MouseDrop(var/obj/over_object)
 		handle_grab_attack(I,user)
 		return
 	if(user.a_intent == I_HURT)
-		return ..()
+		. = ..()
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		var/pos_to_dam = should_damage_occ()
+		if(!isnull(pos_to_dam))
+			damage_occupant(pos_to_dam,I,user)
+			return
+		comp_prof.take_component_damage(I.force,I.damtype)
+		return
 	put_cargo_item(user,I)
 
 #undef ALL_VEHICLE_POSITIONS

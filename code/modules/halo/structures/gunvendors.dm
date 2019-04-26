@@ -183,12 +183,13 @@
 	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 2,
-	/obj/item/weapon/gun/projectile/m392_dmr/innie = 1,
+	/obj/item/weapon/gun/projectile/m392_dmr/innie = 2,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
 	/obj/item/weapon/gun/projectile/m739_lmg/lmg30cal = 1,
 	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 8,
 	/obj/item/ammo_box/heavysniper = 2,
 	/obj/item/ammo_magazine/m762_ap/MA3 = 16,
+	/obj/item/ammo_magazine/m762_ap/M392/innie = 12,
 	/obj/item/ammo_magazine/m95_sap = 10,
 	/obj/item/ammo_magazine/m5 = 24,
 	/obj/item/ammo_box/shotgun = 10,
@@ -205,9 +206,9 @@
 	/obj/item/device/binoculars = 4,
 	/obj/item/weapon/handcuffs/ = 5,
 	/obj/item/weapon/grenade/smokebomb = 8,
-	/obj/item/device/landmine = 2,
+	/obj/item/device/landmine = 4,
 	/obj/item/weapon/grenade/frag/m9_hedp = 4,
-	/obj/item/weapon/armor_patch = 2,
+	/obj/item/weapon/armor_patch = 4,
 	/obj/item/drop_pod_beacon = 1
 	)
 
