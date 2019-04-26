@@ -89,11 +89,10 @@
 	..()
 
 /obj/item/projectile/covenant/wraith_cannon/process()
-	if((get_dist(starting,original) % 2) == 0)
-		if(get_dist(loc,original) > (get_dist(starting,original)/2))
-			change_elevation(1)
-		else
-			change_elevation(-1)
+	if(get_dist(loc,original) > (get_dist(starting,original)/2))
+		change_elevation(1)
+	else
+		change_elevation(-1)
 	. = ..()
 
 /obj/item/projectile/covenant/wraith_cannon/on_impact(var/atom/impacted)
