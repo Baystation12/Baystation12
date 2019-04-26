@@ -73,11 +73,11 @@
 	if(vehicle_view_modifier != 1.5)
 		vehicle_view_modifier = 1.5
 	else
-		vehicle_view_modifier = 3
+		vehicle_view_modifier = 2.75
 
 /obj/item/vehicle_component/health_manager/cobra
 	integrity = 500
-	resistances = list("brute"=65,"burn"=50,"emp"=40,"bomb"=65)
+	resistances = list("brute"=35,"burn"=30,"emp"=25,"bomb"=20)
 
 /datum/component_profile/cobra
 	pos_to_check = "gunner"
@@ -118,4 +118,4 @@
 	armor_penetration = 100
 
 /obj/item/projectile/bullet/cobra_sniper/get_structure_damage()
-	return damage * 5
+	return damage * 4.5

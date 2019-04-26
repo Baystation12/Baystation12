@@ -1,7 +1,7 @@
 
 /obj/vehicles/wraith
-	name = "wraith"
-	desc = "wraith"
+	name = "Type-26 Assault Gun Carriage"
+	desc = "The Type-26 Assault Gun Carriage is equipped with a heavy plasma mortar and a set of twin linked medium plasma cannons."
 
 	icon = 'code/modules/halo/vehicles/Wraith.dmi'
 	icon_state = "wraith"
@@ -33,7 +33,7 @@
 
 /obj/item/vehicle_component/health_manager/wraith
 	integrity = 700
-	resistances = list("brute"=65,"burn"=50,"emp"=40,"explosion"=65)
+	resistances = list("brute"=65,"burn"=50,"emp"=40,"bomb"=65)
 
 /datum/component_profile/wraith
 	pos_to_check = "gunner"
@@ -62,7 +62,7 @@
 	proj_fired = /obj/item/projectile/covenant/wraith_cannon
 
 /datum/vehicle_gun/wraith_machinegun
-	name = "Wraith Mounted Plasma Rifle"
+	name = "Wraith Medium Plasma Cannons"
 	desc = "A short burst, mounted Plasma Rifle, used for anti-infantry purposes."
 	burst_size = 3
 	burst_delay = 0.15 SECONDS
@@ -71,11 +71,16 @@
 	proj_fired = /obj/item/projectile/covenant/plasmarifle
 
 /obj/item/projectile/covenant/wraith_cannon
-	damage = 50
+	damage = 100
 	icon = 'code/modules/halo/vehicles/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
+	damage_type = "bomb"
 	density = 0
-	step_delay = 1
+	step_delay = 1.5
+	armor_penetration = 25
+
+/obj/item/projectile/covenant/wraith_cannon/change_elevation()
+	return
 
 /obj/item/projectile/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(dir == NORTH || dir == SOUTH)
@@ -83,18 +88,19 @@
 	else
 		bounds = "96,32"
 
-	if(original in range(2,loc))
+	if(original in range(1,loc))
 		Bump(loc)
 		return
-	..()
-
-/obj/item/projectile/covenant/wraith_cannon/process()
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
 		change_elevation(1)
 	else
 		change_elevation(-1)
 	. = ..()
 
+/obj/item/projectile/covenant/wraith_cannon/process()
+	set_density(0)
+	. = ..()
+
 /obj/item/projectile/covenant/wraith_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,1,2,5,guaranteed_damage = 75,guaranteed_damage_range = 3)
+	explosion(impacted,0,1,4,5,guaranteed_damage = 75,guaranteed_damage_range = 3)
 	. = ..()

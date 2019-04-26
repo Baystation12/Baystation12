@@ -1688,6 +1688,7 @@
 #include "code\modules\halo\turfs\covenant\walls.dm"
 #include "code\modules\halo\vehicles\boarding_pod.dm"
 #include "code\modules\halo\vehicles\bull.dm"
+#include "code\modules\halo\vehicles\cobra.dm"
 #include "code\modules\halo\vehicles\drop_pod.dm"
 #include "code\modules\halo\vehicles\escape_pods.dm"
 #include "code\modules\halo\vehicles\fuel.dm"

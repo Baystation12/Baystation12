@@ -209,7 +209,7 @@
 /obj/item/vehicle_component/health_manager/drop_pod
 	integrity = 100
 	coverage = 100
-	resistances = list("brute"= 100.0,"burn"= 100.0,"emp"= 100.0,"explosion" = 100.0) //Negates all damage. Let's pretend drop-pods are invincible.
+	resistances = list("brute"= 100.0,"burn"= 100.0,"emp"= 100.0,"bomb" = 100.0) //Negates all damage. Let's pretend drop-pods are invincible.
 
 /obj/structure/drop_pod_launchbay
 	name = "Drop Pod Launch Bay"
