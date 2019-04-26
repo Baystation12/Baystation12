@@ -74,7 +74,8 @@
 	damage = 50
 	icon = 'code/modules/halo/vehicles/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
-	step_delay = 2
+	density = 0
+	step_delay = 1
 
 /obj/item/projectile/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(dir == NORTH || dir == SOUTH)
@@ -82,7 +83,7 @@
 	else
 		bounds = "96,32"
 
-	if(original in range(1,loc))
+	if(original in range(2,loc))
 		Bump(loc)
 		return
 	..()
