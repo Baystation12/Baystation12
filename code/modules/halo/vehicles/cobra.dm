@@ -24,6 +24,7 @@
 	vehicle_view_modifier = 1.0
 
 	var/lockdown = 0
+	var/zoomed = 0
 
 /obj/vehicles/cobra/update_object_sprites()
 	. = ..()
@@ -75,10 +76,12 @@
 		to_chat(user,"<span class = 'notice'>Magnification apparatus deploys only in lockdown mode.</span>")
 		return
 
-	if(vehicle_view_modifier != 1.5)
-		vehicle_view_modifier = 1.5
-	else
+	zoomed = !zoomed
+
+	if(zoomed)
 		vehicle_view_modifier = 2.75
+	else
+		vehicle_view_modifier = 1.5
 
 	for(var/mob/occupant in occupants)
 		update_user_view(occupants,1)
