@@ -20,8 +20,9 @@
 #define SS_PRIORITY_CIRCUIT_COMP   20	// Processing circuit component do_work.
 #define SS_PRIORITY_TEMPERATURE    20	// Cooling and heating of atoms.
 #define SS_PRIORITY_RADIATION      20   // Radiation processing and cache updates.
-#define SS_PRIORITY_OPEN_SPACE     20    // Open turf updates.
+#define SS_PRIORITY_OPEN_SPACE     20   // Open turf updates.
 #define SS_PRIORITY_AIRFLOW        15	// Object movement from ZAS airflow.
+#define SS_PRIORITY_CONVEYOR       15   // Conveyors moving stuff around.
 #define SS_PRIORITY_VOTE           10   // Vote management.
 #define SS_PRIORITY_INACTIVITY     10	// Idle kicking.
 #define SS_PRIORITY_SUPPLY         10   // Supply point accumulation.

@@ -8,6 +8,7 @@
 	desc = "A conveyor belt."
 	layer = BELOW_OBJ_LAYER	// so they appear under stuff
 	anchored = 1
+	active_power_usage = 100
 
 	var/operating = 0	// 1 if running forward, -1 if backwards, 0 if off
 	var/operable = 1	// true if can operate (no broken segments in this belt run)
@@ -22,8 +23,8 @@
 	id = "round_end_belt"
 
 	// create a conveyor
-/obj/machinery/conveyor/New(loc, newdir, on = 0)
-	..(loc)
+/obj/machinery/conveyor/Initialize(mapload, newdir, on = 0)
+	. = ..()
 	if(newdir)
 		set_dir(newdir)
 
@@ -35,49 +36,27 @@
 		backwards = turn(dir, 180)
 
 	if(on)
-		operating = 1
-		setmove()
+		setmove(1)
+	set_extension(src, /datum/extension/conveyor, /datum/extension/conveyor/belt)
 
-
-
-/obj/machinery/conveyor/proc/setmove()
+/obj/machinery/conveyor/proc/setmove(position)
+	operating = position
 	if(operating == 1)
 		movedir = forwards
+		update_use_power(POWER_USE_ACTIVE)
 	else if(operating == -1)
 		movedir = backwards
-	else operating = 0
+		update_use_power(POWER_USE_ACTIVE)
+	else 
+		operating = 0
+		update_use_power(POWER_USE_IDLE)
 	update_icon()
 
 /obj/machinery/conveyor/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "conveyor-broken"
-		operating = 0
 		return
-	if(!operable)
-		operating = 0
-	if(stat & NOPOWER)
-		operating = 0
 	icon_state = "conveyor[operating]"
-
-	// machine process
-	// move items to the target location
-/obj/machinery/conveyor/Process()
-	if(stat & (BROKEN | NOPOWER))
-		return
-	if(!operating)
-		return
-	use_power_oneoff(100)
-
-	affecting = loc.contents - src		// moved items will be all in loc
-	spawn(1)	// slight delay to prevent infinite propagation due to map order	//TODO: please no spawn() in process(). It's a very bad idea
-		var/items_moved = 0
-		for(var/atom/movable/A in affecting)
-			if(!A.anchored)
-				if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
-					step(A,movedir)
-					items_moved++
-			if(items_moved >= 10)
-				break
 
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
@@ -130,6 +109,8 @@
 	if(id != match_id)
 		return
 	operable = op
+	if(!op)
+		setmove(0)
 
 	update_icon()
 	var/obj/machinery/conveyor/C = locate() in get_step(src, stepdir)
@@ -155,17 +136,18 @@
 
 
 
-/obj/machinery/conveyor_switch/New(loc, newid)
-	..(loc)
+/obj/machinery/conveyor_switch/Initialize(mapload, newid)
+	..()
 	if(!id)
 		id = newid
 	update_icon()
+	return INITIALIZE_HINT_LATELOAD
 
-	spawn(5)		// allow map load
-		conveyors = list()
-		for(var/obj/machinery/conveyor/C in world)
-			if(C.id == id)
-				conveyors += C
+/obj/machinery/conveyor_switch/LateInitialize()
+	conveyors = list()
+	for(var/obj/machinery/conveyor/C in SSconveyor.all_conveyors)
+		if(C.id == id)
+			conveyors += C
 
 // update the icon depending on the position
 
@@ -187,8 +169,7 @@
 	operated = 0
 
 	for(var/obj/machinery/conveyor/C in conveyors)
-		C.operating = position
-		C.setmove()
+		C.setmove(position)
 
 // attack with hand, switch position
 /obj/machinery/conveyor_switch/attack_hand(mob/user)
