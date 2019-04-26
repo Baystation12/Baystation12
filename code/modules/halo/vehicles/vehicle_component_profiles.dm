@@ -123,6 +123,9 @@
 			continue
 		weapon = new weapon(source_vehicle)
 		gunner.put_in_hands(weapon)
+		update_user_view(gunner,1)
+		spawn(1)
+			update_user_view(gunner)
 
 /datum/component_profile/proc/gunner_fire_check(var/mob/user,var/obj/vehicles/source_vehicle,var/obj/gun)
 	if(!(gun.type in gunner_weapons))
