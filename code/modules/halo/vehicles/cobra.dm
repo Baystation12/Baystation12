@@ -41,7 +41,7 @@
 	if(!istype(user))
 		return
 	if(!(user in get_occupants_in_position("driver")))
-		to_chat(user,"<span class = 'notice'>You need to be the driver to do that.<span>")
+		to_chat(user,"<span class = 'notice'>You need to be the driver to do that.</span>")
 		return
 
 	visible_message("<span class = 'notice'>[user] [ lockdown ? "deactivates":"activates"] lockdown mode on [src]</span>")
