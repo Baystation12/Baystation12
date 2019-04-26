@@ -20076,14 +20076,6 @@
 /area/hallway/primary/firstdeck/aft)
 "hqb" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 2;
-	icon_state = "shutter0";
-	id = "outercheckwindow";
-	name = "Outer Checkpoint Shutters";
-	opacity = 0
-	},
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
 	d2 = 2;
@@ -20094,6 +20086,14 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id = "d1secouter";
+	name = "Outer Checkpoint Shutters";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/security/opscheck)
 "hqX" = (
@@ -20103,17 +20103,17 @@
 /area/crew_quarters/safe_room/firstdeck)
 "hrb" = (
 /obj/effect/wallframe_spawn/reinforced,
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "outercheckwindow";
+	id = "d1secouter";
 	name = "Outer Checkpoint Shutters";
 	opacity = 0
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
 /area/security/opscheck)
@@ -20153,7 +20153,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "d1ladderwindow";
+	id = "d1ladderlockdown";
 	name = "Ladderwell Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20191,7 +20191,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "d1ladderwindow";
+	id = "d1ladderlockdown";
 	name = "Ladderwell Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20216,7 +20216,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "d1ladderwindow";
+	id = "d1ladderlockdown";
 	name = "Ladderwell Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20374,18 +20374,18 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "hDb" = (
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 4;
-	icon_state = "shutter0";
-	id = "concheckwindow";
-	name = "Operation Checkpoint Shutters";
-	opacity = 0
-	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
+	},
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id = "d1secmain";
+	name = "Operation Checkpoint Shutters";
+	opacity = 0
 	},
 /turf/simulated/floor/plating,
 /area/security/opscheck)
@@ -20662,7 +20662,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "concheckwindow";
+	id = "d1secmain";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20978,14 +20978,6 @@
 "ilb" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 4;
-	icon_state = "shutter0";
-	id = "concheckwindow";
-	name = "Operation Checkpoint Shutters";
-	opacity = 0
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
@@ -20998,6 +20990,14 @@
 /obj/machinery/door/window/brigdoor/northleft{
 	dir = 8;
 	name = "Security Checkpoint"
+	},
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id = "d1secmain";
+	name = "Operation Checkpoint Shutters";
+	opacity = 0
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
@@ -23771,23 +23771,16 @@
 "lwb" = (
 /obj/structure/table/steel,
 /obj/machinery/button/remote/blast_door{
-	id = "d1ladderwindow";
+	id = "d1secmain";
 	name = "Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = 6
 	},
 /obj/machinery/button/remote/blast_door{
-	id = "outercheckwindow";
+	id = "d1secouter";
 	name = "Outer Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
-	},
-/obj/machinery/button/remote/airlock{
-	desc = "A remote control-switch for airlocks.";
-	id = "d1ladderwindow";
-	name = "Ladderwell Shutter Control";
-	pixel_x = -5;
-	pixel_y = 6
 	},
 /obj/machinery/power/apc{
 	dir = 2;
@@ -23799,6 +23792,12 @@
 /obj/structure/disposalpipe/segment{
 	dir = 8;
 	icon_state = "pipe-c"
+	},
+/obj/machinery/button/remote/blast_door{
+	id = "d1ladderlockdown";
+	name = "Ladderwell Shutter Control";
+	pixel_x = -5;
+	pixel_y = -3
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
