@@ -190,7 +190,7 @@
 	icon_closed = "fr_jacket"
 	blood_overlay_type = "armor"
 	allowed = list(/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
-	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency)
+	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency, /obj/item/weapon/reagent_containers/ivbag)
 	body_parts_covered = UPPER_TORSO|ARMS
 
 /obj/item/clothing/suit/storage/toggle/fr_jacket/ems
@@ -200,6 +200,16 @@
 	item_state = "ems_jacket_closed"
 	icon_open = "ems_jacket_open"
 	icon_closed = "ems_jacket_closed"
+
+/obj/item/clothing/suit/storage/medical_chest_rig
+	name = "MT Chest Rig"
+	desc = "A black chest rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
+	icon_state = "Med-chest-rig"
+	item_state = "Med-chest-rig"
+	blood_overlay_type = "armor"
+	allowed = list(/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
+	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency, /obj/item/weapon/reagent_containers/ivbag)
+	body_parts_covered = UPPER_TORSO
 
 /obj/item/clothing/suit/surgicalapron
 	name = "surgical apron"
