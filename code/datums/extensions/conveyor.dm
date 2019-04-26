@@ -1,5 +1,6 @@
 /datum/extension/conveyor
 	expected_type = /atom
+	flags = EXTENSION_FLAG_IMMEDIATE
 	var/move_capacity = 10
 
 /datum/extension/conveyor/New()
