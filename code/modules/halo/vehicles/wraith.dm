@@ -19,6 +19,10 @@
 
 	vehicle_size = 64
 
+	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
+
+	vehicle_view_modifier = 1.4
+
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()
 	if(dir == EAST || dir == WEST)
@@ -33,24 +37,64 @@
 
 /datum/component_profile/wraith
 	pos_to_check = "gunner"
-	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/wraith_cannon)
+	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/wraith)
 	cargo_capacity = 12 //Can hold, at max, two normals
 
-/obj/item/weapon/gun/vehicle_turret/wraith_cannon
+/obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon
 	name = "Wraith Cannon"
 	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."
 
 	projectile_fired = /obj/item/projectile/covenant/wraith_cannon
 
-	fire_delay = 1 SECOND
-	fire_sound = 'code/modules/halo/sounds/shadow_cannon_fire.ogg'
+	fire_delay = 4.5 SECONDS
+	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
+
+	guns_switchto = newlist(/datum/vehicle_gun/wraith_cannon,/datum/vehicle_gun/wraith_machinegun)
+
+/datum/vehicle_gun/wraith_cannon
+	name = "Wraith Cannon"
+	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."
+	burst_size = 1
+	burst_delay = 1
+	fire_delay = 4.5 SECONDS
+	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
+	proj_fired = /obj/item/projectile/covenant/wraith_cannon
+
+/datum/vehicle_gun/wraith_machinegun
+	name = "Wraith Mounted Plasma Rifle"
+	desc = "A short burst, mounted Plasma Rifle, used for anti-infantry purposes."
+	burst_size = 3
+	burst_delay = 0.15 SECONDS
+	fire_delay = 0.6 SECONDS
+	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
+	proj_fired = /obj/item/projectile/covenant/plasmarifle
 
 /obj/item/projectile/covenant/wraith_cannon
-	damage = 25
+	damage = 50
 	icon = 'code/modules/halo/vehicles/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
+	step_delay = 2
+
+/obj/item/projectile/covenant/wraith_cannon/Move(var/newloc,var/dir)
+	if(dir == NORTH || dir == SOUTH)
+		bounds = "64,64"
+	else
+		bounds = "96,32"
+
+	if(original in range(1,loc))
+		Bump(loc)
+		return
+	..()
+
+/obj/item/projectile/covenant/wraith_cannon/process()
+	if((get_dist(starting,original) % 2) == 0)
+		if(get_dist(loc,original) > (get_dist(starting,original)/2))
+			change_elevation(1)
+		else
+			change_elevation(-1)
+	. = ..()
 
 /obj/item/projectile/covenant/wraith_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,1,4,7,guaranteed_damage = 75,guaranteed_damage_range = 4)
+	explosion(impacted,-1,1,2,5,guaranteed_damage = 75,guaranteed_damage_range = 3)
 	. = ..()

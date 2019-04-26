@@ -21,6 +21,8 @@
 
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
+	vehicle_view_modifier = 1.2
+
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
 	resistances = list("brute"=65,"burn"=50,"emp"=40,"explosion"=65)

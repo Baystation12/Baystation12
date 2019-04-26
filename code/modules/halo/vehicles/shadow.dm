@@ -19,6 +19,8 @@
 
 	vehicle_size = 64
 
+	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
+
 /obj/vehicles/shadow/update_object_sprites()
 	. = ..()
 	if(dir == NORTH || dir == SOUTH)
