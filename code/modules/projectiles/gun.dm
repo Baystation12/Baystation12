@@ -90,6 +90,7 @@
 	var/is_charged_weapon = 0 //Does the weapon require charging? Defaults to 0 unless it's from /charged weapon sets
 	var/arm_time = 25 //Default charge time for weapons that charge
 	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Charge_Sound_Effect.ogg'
+	var/is_charging = 0
 	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
 
 /obj/item/weapon/gun/New()
@@ -245,13 +246,19 @@
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 		return
 
+	if(is_charging)
+		to_chat(user,"<span class = 'notice'>[src] is charging and cannot fire</span>")
+		return
+
 	if(is_charged_weapon==1)
 		playsound(src.loc, charge_sound, 100, 1)
 		user.visible_message("<span class = 'notice'>[user] starts charging the [src]!</span>")
 
+		is_charging = 1
 		if (!do_after(user,arm_time,src))
 			return
 		Fire(A,user,params)
+		is_charging = 0
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
 
