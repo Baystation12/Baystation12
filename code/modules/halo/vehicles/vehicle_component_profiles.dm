@@ -194,7 +194,7 @@
 	var/list/repair_materials = list("steel") //Material names go here. Vehicles can be repaired with any material in this list.
 	var/integrity_restored_per_sheet = BASE_INTEGRITY_RESTORE_PERSHEET
 	var/integrity_to_restore = 0 //The amount of integrity to restore once repair tools are applied.
-	var/repair_tool_amount = 2 //How many repair tools will be needed to repair this component. Can be any /obj/item.
+	var/repair_tool_amount = 3 //How many repair tools will be needed to repair this component. Can be any /obj/item.
 	var/list/repair_tools_typepaths = list()
 
 /obj/item/vehicle_component/proc/set_repair_tools_needed(var/set_null = 0)
