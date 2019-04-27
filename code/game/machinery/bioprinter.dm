@@ -269,9 +269,24 @@
 		organs += loaded_species.has_limbs[organ]["path"]
 	for(var/organ in organs)
 		var/obj/item/organ/O = organ
-		if(initial(O.can_be_printed))
+		if(check_printable(organ))
 			var/cost = initial(O.print_cost)
 			if(!cost)
 				cost = round(0.75 * initial(O.max_damage))
 			.[initial(O.organ_tag)] = list(O, cost)
+
+/obj/machinery/organ_printer/flesh/proc/check_printable(var/organtype)
+	var/obj/item/organ/O = organtype
+	if(!initial(O.can_be_printed))
+		return FALSE
+	if(initial(O.vital))
+		return FALSE
+	if(initial(O.status) & ORGAN_ROBOTIC)
+		return FALSE
+	if(ispath(organtype, /obj/item/organ/external))
+		var/obj/item/organ/external/E = organtype
+		if(initial(E.limb_flags) & ORGAN_FLAG_HEALS_OVERKILL)
+			return FALSE
+	return TRUE
+
 // END FLESH ORGAN PRINTER
