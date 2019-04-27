@@ -159,7 +159,7 @@
 	if(isnull(component_last_inspected))
 		return
 	if(!component_last_inspected.requires_sheet_repair())
-		to_chat("<span class = 'notice'>[contained_vehicle]'s [component_last_inspected] does not require any more repair. Finalise the repair with tools!</span>")
+		to_chat(user,"<span class = 'notice'>[contained_vehicle]'s [component_last_inspected] does not require any more repair. Finalise the repair with tools!</span>")
 		return
 	if(I.get_material_name() in component_last_inspected.repair_materials)
 		user.visible_message("<span class = 'notice'>[user] starts patching damage to [contained_vehicle]'s [component_last_inspected]</span>")
