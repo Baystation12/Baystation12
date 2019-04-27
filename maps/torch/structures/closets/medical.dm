@@ -92,7 +92,6 @@
 	return list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/accessory/storage/white_vest,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
@@ -105,6 +104,8 @@
 		/obj/item/device/scanner/health,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/storage/firstaid/adv,
+		/obj/item/clothing/suit/storage/medical_chest_rig,
+		/obj/item/clothing/head/hardhat/EMS,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)

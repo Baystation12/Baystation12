@@ -24,3 +24,13 @@
 
 /obj/item/clothing/head/hardhat/dblue
 	icon_state = "hardhat0_dblue"
+
+/obj/item/clothing/head/hardhat/EMS
+	name = "\improper EMS helmet"
+	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
+	icon_state = "EMS_helmet"
+	light_overlay = "EMS_light"
+	w_class = ITEM_SIZE_NORMAL
+	armor = list(melee = 30, bullet = 10, laser = 10,energy = 10, bomb = 20, bio = 10, rad = 5)
+	max_heat_protection_temperature = 1300
+
