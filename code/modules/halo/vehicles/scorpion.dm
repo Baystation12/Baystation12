@@ -21,9 +21,11 @@
 
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
+	vehicle_view_modifier = 1.2
+
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("brute"=65,"burn"=50,"emp"=40,"explosion"=65)
+	resistances = list("brute"=65,"burn"=50,"emp"=40,"bomb"=65)
 
 /datum/component_profile/scorpion
 	pos_to_check = "gunner"
@@ -64,7 +66,14 @@
 
 /obj/item/projectile/bullet/scorp_cannon
 	damage = 50
+	damage_type = "bomb"
+	armor_penetration = 25
 
 /obj/item/projectile/bullet/scorp_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,1,4,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
+	explosion(impacted,0,1,4,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	. = ..()
+
+/obj/item/projectile/bullet/scorp_cannon/attack_mob()
+	damage_type = BRUTE
+	damtype = BRUTE
+	return ..()

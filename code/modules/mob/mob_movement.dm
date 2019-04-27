@@ -124,7 +124,7 @@
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(var/turf/newloc , direct)
-	if(newloc.density == 0) //No need to deal with elevation if there's a wall in the way. This also fixes projectiles phasing through walls.
+	if(newloc && newloc.density == 0) //No need to deal with elevation if there's a wall in the way. This also fixes projectiles phasing through walls.
 		for(var/atom/movable/AM in newloc.contents)
 			if(AM.elevation != src.elevation && AM.density != 0)
 				AM.density = 0

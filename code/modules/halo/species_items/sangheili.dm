@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
-	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 65, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
+	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 55, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
 	armor_thickness_modifiers = list()
 	allowed = list(/obj/item/weapon/melee/energy/elite_sword, /obj/item/weapon/grenade/plasma, /obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle)
 
@@ -482,7 +482,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 //Organ Defines + misc//
 
-/obj/item/organ/heart_secondary
+/obj/item/organ/internal/heart_secondary
 	name = "Secondary Heart"
 	parent_organ = "chest"
 	organ_tag = "second heart"
@@ -490,7 +490,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	min_broken_damage = 30
 	var/useheart = 0
 
-/obj/item/organ/heart_secondary/process()
+/obj/item/organ/internal/heart_secondary/process()
 	if(is_broken())
 		return
 	var/obj/item/organ/internal/heart = owner.internal_organs_by_name["heart"]
@@ -506,7 +506,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
 			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
-			w.damage -= pick(0,0,1)
+			w.damage -= 0.05
 
 /obj/effect/armoursets/Initialize()
 	..()

@@ -19,6 +19,8 @@
 
 	vehicle_size = 64
 
+	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
+
 /obj/vehicles/shadow/update_object_sprites()
 	. = ..()
 	if(dir == NORTH || dir == SOUTH)
@@ -26,10 +28,10 @@
 	else
 		bounds = "96,64"
 
-
 /obj/item/vehicle_component/health_manager/shadow
 	integrity = 650
-	resistances = list("brute"=35,"burn"=40,"emp"=20,"explosion"=30)
+	resistances = list("brute"=35,"burn"=40,"emp"=20,"bomb"=30)
+	repair_materials = list("nanolaminate")
 
 /datum/component_profile/shadow
 	pos_to_check = "gunner"
@@ -37,7 +39,8 @@
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/shadow)
 	max_vehicle_size = 16
 	vehicle_capacity = 16
-	cargo_capacity = 12 //Can hold, at max, two normals
+	cargo_capacity = 36 //Can hold, at max, 9 normals
+	cargo_allow_massive = 1
 
 /obj/item/weapon/gun/vehicle_turret/shadow_cannon
 	name = "Shadow Cannon"

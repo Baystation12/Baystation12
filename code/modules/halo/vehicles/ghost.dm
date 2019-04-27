@@ -39,6 +39,7 @@
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 350
 	resistances = list("brute"=35,"burn"=30,"emp"=15)
+	repair_materials = list("nanolaminate")
 
 /datum/component_profile/ghost
 	pos_to_check = "driver"

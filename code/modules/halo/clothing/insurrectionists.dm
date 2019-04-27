@@ -90,7 +90,7 @@
 	permeability_coefficient = 0.01
 	slowdown_general = 1
 	siemens_coefficient = 1.5
-	armor_thickness = 60
+	armor_thickness = 20
 	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 50, bio = 20, rad = 15)
 	gas_transfer_coefficient = 0.90
 	action_button_name = "Toggle Helmet Light"

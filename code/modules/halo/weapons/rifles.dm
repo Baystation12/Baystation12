@@ -159,7 +159,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "BR55-Loaded-Base"
 	magazine_type = /obj/item/ammo_magazine/m95_sap/br55
-	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap/br55)
+	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	caliber = "9.5mm"
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/BattleRifleShotSoundEffect.ogg'
