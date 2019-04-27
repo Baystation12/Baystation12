@@ -278,3 +278,8 @@
 	if(vehicle_contain.movement_destroyed)
 		return
 	vehicle_contain.on_death()
+
+/obj/item/vehicle_component/health_manager/finalise_repair()
+	. = ..()
+	movement_destroyed = 0
+	icon_state = initial(icon_state)
