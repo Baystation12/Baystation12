@@ -347,14 +347,14 @@
 	projectile_type = /obj/item/projectile/bullet/ssr
 
 /obj/item/projectile/bullet/ssr
+	name = "rocket"
 	icon_state = "ssr"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	check_armour = "bomb"
 	step_delay = 1.2
 
-/obj/item/projectile/bullet/ssr/on_hit(var/atom/target, var/blocked = 0)
-	if(isturf(target))
-		explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
+/obj/item/projectile/bullet/ssr/on_impact(var/atom/target)
+	explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	..()
 
 /obj/item/weapon/storage/box/spnkr

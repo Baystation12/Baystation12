@@ -193,6 +193,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	. = ..()
 	if(ckey || client)
 		return
+	if(health <= 0)
+		return
 	if(!attempt_nearby_infect())
 		if(!revive_nearby_combatforms())
 			infest_airlocks_nearby()

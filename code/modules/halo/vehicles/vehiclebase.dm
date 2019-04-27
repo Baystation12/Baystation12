@@ -10,6 +10,8 @@
 	layer = ABOVE_HUMAN_LAYER
 
 	var/active = 1
+	var/guns_disabled = 0
+	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
 
 	//Advanced Damage Handling
@@ -38,6 +40,12 @@
 
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
+	if(!active)
+		to_chat(user,"[src]'s engine is inactive.")
+	if(guns_disabled)
+		to_chat(user,"[src]'s guns are damaged beyond use.")
+	if(movement_destroyed)
+		to_chat(user,"[src]'s movement is damaged beyond use.")
 	show_occupants_contained(user)
 
 /obj/vehicles/proc/update_user_view(var/mob/user,var/reset = 0)
@@ -82,12 +90,9 @@
 	. = ..()
 
 /obj/vehicles/proc/on_death()
-	kick_occupants()
-	for(var/obj/item/I in comp_prof.current_cargo)
-		comp_prof.cargo_transfer(I,1)
-	sleep(1)
 	explosion(loc,-1,-1,2,5)
-	qdel(src)
+	movement_destroyed = 1
+	icon_state = "[initial(icon_state)]_destroyed"
 
 /obj/vehicles/proc/kick_occupants()
 	for(var/mob/m in occupants)
@@ -101,7 +106,7 @@
 		update_object_sprites()
 		if(active)
 			var/list/drivers = get_occupants_in_position("driver")
-			if(!drivers.len || isnull(drivers))
+			if(!drivers.len || isnull(drivers) || movement_destroyed)
 				inactive_pilot_effects()
 
 /obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc, a basic render of playerheads in the top right is used if no overidden.
@@ -272,14 +277,16 @@
 /obj/vehicles/proc/damage_occupant(var/position,var/obj/item/P,var/mob/user = null)
 	var/list/occ_list = get_occupants_in_position(position)
 	if(isnull(occ_list) || !occ_list.len)
-		return
+		return 1
 	var/mob/mob_to_hit = pick(occ_list)
 	if(isnull(mob_to_hit))
-		return
+		return 1
 	if(user)
 		mob_to_hit.attackby(P,user)
+		return 0
 	else
 		mob_to_hit.bullet_act(P)
+		return 0
 
 /obj/vehicles/proc/should_damage_occ()
 	for(var/position in exposed_positions)
@@ -293,8 +300,9 @@
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
 	if(!isnull(pos_to_dam))
-		damage_occupant(pos_to_dam,P)
-		return
+		var/should_continue = damage_occupant(pos_to_dam,P)
+		if(!should_continue)
+			return
 	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
 
 /obj/vehicles/ex_act(var/severity)
@@ -305,6 +313,9 @@
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
+	if(movement_destroyed)
+		to_chat(user,"<span class = 'notice'>[src] is in no state to move!</span>")
+		return
 	if(!active)
 		to_chat(user,"<span class = 'notice'>[src] needs to be active to move!</span>")
 		return
@@ -363,7 +374,7 @@
 	comp_prof.cargo_transfer(v)
 
 /obj/vehicles/MouseDrop(var/obj/over_object)
-	var/mob/user = usr
+	var/mob/living/user = usr
 	var/obj/vehicles/v = over_object
 	if(isnull(user.loc)) return 0
 	if(istype(v))
@@ -386,7 +397,7 @@
 	set category = "Vehicle"
 	set src in view(1)
 
-	var/mob/user = usr
+	var/mob/living/user = usr
 	if(!istype(user) || user.incapacitated())
 		return
 
@@ -424,7 +435,7 @@
 	set category = "Vehicle"
 	set src in view(1)
 
-	var/mob/puller = usr
+	var/mob/living/puller = usr
 	if(!istype(puller) || puller.incapacitated())
 		return
 
@@ -443,6 +454,17 @@
 			return
 	exit_vehicle(chosen_occ,1)
 
+/obj/vehicles/verb/verb_inspect_components()
+	set name = "Inspect Components"
+	set category = "Vehicle"
+	set src in view(1)
+
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+
+	comp_prof.inspect_components(user)
+
 /obj/vehicles/attackby(var/obj/item/I,var/mob/user)
 	if(elevation > user.elevation || elevation > I.elevation)
 		to_chat(user,"<span class = 'notice'>[name] is too far away to interact with!</span>")
@@ -453,6 +475,12 @@
 		handle_grab_attack(I,user)
 		return
 	if(user.a_intent == I_HURT)
+		if(comp_prof.is_repair_tool(I))
+			comp_prof.repair_inspected_with_tool(I,user)
+			return
+		if(istype(I,/obj/item/stack))
+			comp_prof.repair_inspected_with_sheet(I,user)
+			return
 		. = ..()
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/pos_to_dam = should_damage_occ()

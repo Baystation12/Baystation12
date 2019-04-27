@@ -72,3 +72,8 @@
 /obj/item/projectile/bullet/scorp_cannon/on_impact(var/atom/impacted)
 	explosion(impacted,0,1,4,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	. = ..()
+
+/obj/item/projectile/bullet/scorp_cannon/attack_mob()
+	damage_type = BRUTE
+	damtype = BRUTE
+	return ..()

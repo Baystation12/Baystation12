@@ -28,10 +28,10 @@
 	else
 		bounds = "96,64"
 
-
 /obj/item/vehicle_component/health_manager/shadow
 	integrity = 650
 	resistances = list("brute"=35,"burn"=40,"emp"=20,"bomb"=30)
+	repair_materials = list("nanolaminate")
 
 /datum/component_profile/shadow
 	pos_to_check = "gunner"
