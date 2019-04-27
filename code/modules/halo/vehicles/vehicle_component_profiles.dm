@@ -216,10 +216,11 @@
 
 /obj/item/vehicle_component/proc/finalise_repair()
 	var/new_integ = integrity + integrity_to_restore
-	if(new_integ > initial(integrity))
+	if(new_integ >= initial(integrity))
 		integrity = initial(integrity)
 	else
 		integrity = new_integ
+		set_repair_tools_needed()
 
 /obj/item/vehicle_component/proc/requires_sheet_repair()
 	var/integ_lost = initial(integrity) - integrity
@@ -281,5 +282,8 @@
 
 /obj/item/vehicle_component/health_manager/finalise_repair()
 	. = ..()
-	movement_destroyed = 0
-	icon_state = initial(icon_state)
+	var/obj/vehicles/vehicle_contain = loc
+	if(!istype(loc))
+		return
+	vehicle_contain.movement_destroyed = 0
+	vehicle_contain.icon_state = initial(vehicle_contain.icon_state)
