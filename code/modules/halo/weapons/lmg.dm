@@ -43,7 +43,7 @@
 	desc = "A light machine gun."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Innie 30cal LMG - Full Closed"
-	item_state = "SAW"
+	item_state = "30cal"
 	caliber = "a762"
 	slot_flags = 0	//too unwieldy to carry on your back
 	load_method = MAGAZINE
