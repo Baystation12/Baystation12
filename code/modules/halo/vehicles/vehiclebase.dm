@@ -92,7 +92,6 @@
 /obj/vehicles/proc/on_death()
 	explosion(loc,-1,-1,2,5)
 	movement_destroyed = 1
-	active = 0
 	icon_state = "[initial(icon_state)]_destroyed"
 
 /obj/vehicles/proc/kick_occupants()
@@ -278,14 +277,16 @@
 /obj/vehicles/proc/damage_occupant(var/position,var/obj/item/P,var/mob/user = null)
 	var/list/occ_list = get_occupants_in_position(position)
 	if(isnull(occ_list) || !occ_list.len)
-		return
+		return 1
 	var/mob/mob_to_hit = pick(occ_list)
 	if(isnull(mob_to_hit))
-		return
+		return 1
 	if(user)
 		mob_to_hit.attackby(P,user)
+		return 0
 	else
 		mob_to_hit.bullet_act(P)
+		return 0
 
 /obj/vehicles/proc/should_damage_occ()
 	for(var/position in exposed_positions)
@@ -299,8 +300,9 @@
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
 	if(!isnull(pos_to_dam))
-		damage_occupant(pos_to_dam,P)
-		return
+		var/should_continue = damage_occupant(pos_to_dam,P)
+		if(!should_continue)
+			return
 	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
 
 /obj/vehicles/ex_act(var/severity)
