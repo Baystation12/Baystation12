@@ -35,6 +35,9 @@
 	if(!linked_vehicle.comp_prof.gunner_fire_check(user,linked_vehicle,src))
 		user.drop_from_inventory(src)
 		return
+	if(linked_vehicle.guns_disabled)
+		to_chat(user,"<span class = 'notice'>[linked_vehicle]'s weapons have been heavily damaged.</span>")
+		return
 	for(var/i = 0,i<burst,i++)
 	//	linked_vehicle.controller.gunner_turret_fire(user,target)
 		if(i == 0) //First shot: Don't delay.

@@ -1,3 +1,6 @@
+#define REPAIR_TOOLS_LIST list(/obj/item/weapon/screwdriver,/obj/item/weapon/wrench,/obj/item/weapon/weldingtool,/obj/item/weapon/crowbar,/obj/item/weapon/wirecutters)
+#define BASE_INTEGRITY_RESTORE_PERSHEET 30 //Amount of integrity restored per sheet of material.
+#define COMPONENT_REPAIR_DELAY 10 SECONDS
 
 /datum/component_profile
 
@@ -7,6 +10,7 @@
 
 	var/list/components = list() //Non-vital components such as armor plating, ect.
 	var/list/vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
+	var/obj/item/vehicle_component/component_last_inspected
 
 	var/cargo_capacity = 0 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
 	var/vehicle_capacity = 0 //The capacity of the vehicle hold. Vehicles increase space taken by base_storage_cost(vehicle_size + 5)
@@ -137,6 +141,42 @@
 		to_chat(user,"<span class = 'notice'>You need to be in the [pos_to_check] position to fire that!</span>")
 	return 0
 
+/datum/component_profile/proc/inspect_components(var/mob/user)
+	var/obj/item/vehicle_component/chosen = input(user, "Which component would you like to inspect?","Compoenent Inspection") in components + vital_components
+	if(isnull(chosen))
+		return
+	user.visible_message("<span class = 'notice'>[user] starts inspecting the damage to [contained_vehicle].</span>")
+	if(!do_after(user,COMPONENT_REPAIR_DELAY/5,contained_vehicle))
+		return
+	user.visible_message("<span class = 'notice'>[user] inspects the damage to [contained_vehicle]</span>")
+	component_last_inspected = chosen
+	var/tools_required = ""
+	for(var/typepath in chosen.repair_tools_typepaths)
+		tools_required += "[chosen.repair_tools_typepaths[typepath]] "
+	to_chat(user,"[chosen] integrity: [chosen.integrity]/[initial(chosen.integrity)]\n[chosen] repair tools required: [tools_required]")
+
+/datum/component_profile/proc/repair_inspected_with_sheet(var/obj/item/stack/I,var/mob/user)
+	if(isnull(component_last_inspected))
+		return
+	if(I.get_material_name() in component_last_inspected.repair_materials)
+		user.visible_message("<span class = 'notice'>[user] starts patching damage to [contained_vehicle]'s [component_last_inspected]</span>")
+		if(!do_after(user,COMPONENT_REPAIR_DELAY/5,contained_vehicle))
+			return
+		if(!I.use(1))
+			return
+		user.visible_message("<span class = 'notice'>[user] uses a sheet of [I.get_material_name()] to repair [contained_vehicle]'s [component_last_inspected]</span>")
+		component_last_inspected.material_sheet_repair()
+
+/datum/component_profile/proc/repair_inspected_with_tool(var/obj/item/I,var/mob/user)
+	if(isnull(component_last_inspected))
+		return
+	if(I.type in component_last_inspected.repair_tools_typepaths)
+		user.visible_message("<span class = 'notice'>[user] starts repairing [contained_vehicle] with [I]</span>")
+		if(!do_after(user,COMPONENT_REPAIR_DELAY,contained_vehicle))
+			return
+		user.visible_message("<span class = 'notice'>[user] repairs [contained_vehicle] with [I]</span>")
+		component_last_inspected.repair_with_tool(I)
+
 //BASE VEHICLE COMPONENT DEFINE
 /obj/item/vehicle_component
 	name = "Vehicle Component"
@@ -145,6 +185,42 @@
 	var/integrity = 100
 	var/coverage = 10
 	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0,"bomb" = 0.0) //Functions as a percentage reduction of damage of the type taken.
+	var/list/repair_materials = list("steel") //Material names go here. Vehicles can be repaired with any material in this list.
+	var/integrity_restored_per_sheet = BASE_INTEGRITY_RESTORE_PERSHEET
+	var/integrity_to_restore = 0 //The amount of integrity to restore once repair tools are applied.
+	var/repair_tool_amount = 2 //How many repair tools will be needed to repair this component. Can be any /obj/item.
+	var/list/repair_tools_typepaths = list()
+
+/obj/item/vehicle_component/proc/set_repair_tools_needed()
+	if(repair_tools_typepaths.len > 0)
+		return
+	for(var/i = 0, i < repair_tool_amount, i++)
+		var/list/tools_pickfrom = REPAIR_TOOLS_LIST - repair_tools_typepaths
+		var/picked_tool = pick(tools_pickfrom)
+		var/obj/temp = new picked_tool
+		repair_tools_typepaths[picked_tool] = "[temp.name]"
+		qdel(temp)
+
+/obj/item/vehicle_component/proc/finalise_repair()
+	var/new_integ = integrity + integrity_to_restore
+	if(new_integ > initial(integrity))
+		integrity = initial(integrity)
+	else
+		integrity = new_integ
+
+/obj/item/vehicle_component/proc/material_sheet_repair()
+	var/integ_lost = initial(integrity) - integrity
+	if(integ_lost == 0)
+		return 0
+	integrity_to_restore += integrity_restored_per_sheet
+
+/obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool)
+	if(tool.type in repair_tools_typepaths)
+		repair_tools_typepaths -= tool.type
+
+	if(repair_tools_typepaths.len == 0)
+		finalise_repair()
+		set_repair_tools_needed()
 
 /obj/item/vehicle_component/proc/get_resistance_for(var/damage_type)
 	var/resistance = resistances[damage_type]
@@ -166,6 +242,7 @@
 		integrity = new_integ
 
 /obj/item/vehicle_component/health_manager //Essentially a way for vehicles to just use basic "health" instead of the component system.
+	name = "Vital components"
 	integrity = 200
 	coverage = 10000
 
@@ -174,4 +251,3 @@
 	if(!istype(loc))
 		return
 	vehicle_contain.on_death()
-	qdel(src)

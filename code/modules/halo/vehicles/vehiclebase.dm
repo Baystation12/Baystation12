@@ -10,6 +10,8 @@
 	layer = ABOVE_HUMAN_LAYER
 
 	var/active = 1
+	var/guns_disabled = 0
+	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
 
 	//Advanced Damage Handling
@@ -82,12 +84,8 @@
 	. = ..()
 
 /obj/vehicles/proc/on_death()
-	kick_occupants()
-	for(var/obj/item/I in comp_prof.current_cargo)
-		comp_prof.cargo_transfer(I,1)
-	sleep(1)
 	explosion(loc,-1,-1,2,5)
-	qdel(src)
+	movement_destroyed = 1
 
 /obj/vehicles/proc/kick_occupants()
 	for(var/mob/m in occupants)
@@ -305,6 +303,9 @@
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
+	if(movement_destroyed)
+		to_chat(user,"<span class = 'notice'>[src] is in no state to move!</span>")
+		return
 	if(!active)
 		to_chat(user,"<span class = 'notice'>[src] needs to be active to move!</span>")
 		return
@@ -363,7 +364,7 @@
 	comp_prof.cargo_transfer(v)
 
 /obj/vehicles/MouseDrop(var/obj/over_object)
-	var/mob/user = usr
+	var/mob/living/user = usr
 	var/obj/vehicles/v = over_object
 	if(isnull(user.loc)) return 0
 	if(istype(v))
@@ -386,7 +387,7 @@
 	set category = "Vehicle"
 	set src in view(1)
 
-	var/mob/user = usr
+	var/mob/living/user = usr
 	if(!istype(user) || user.incapacitated())
 		return
 
@@ -424,7 +425,7 @@
 	set category = "Vehicle"
 	set src in view(1)
 
-	var/mob/puller = usr
+	var/mob/living/puller = usr
 	if(!istype(puller) || puller.incapacitated())
 		return
 
@@ -443,6 +444,17 @@
 			return
 	exit_vehicle(chosen_occ,1)
 
+/obj/vehicles/verb/verb_inspect_components()
+	set name = "Inspect Components"
+	set category = "Vehicle"
+	set src in view(1)
+
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+
+	comp_prof.inspect_components(user)
+
 /obj/vehicles/attackby(var/obj/item/I,var/mob/user)
 	if(elevation > user.elevation || elevation > I.elevation)
 		to_chat(user,"<span class = 'notice'>[name] is too far away to interact with!</span>")
@@ -454,6 +466,17 @@
 		return
 	if(user.a_intent == I_HURT)
 		. = ..()
+		var/is_repair_tool = 0
+		for(var/type in REPAIR_TOOLS_LIST)
+			if(istype(I,type))
+				is_repair_tool = 1
+				break
+		if(is_repair_tool)
+			comp_prof.repair_inspected_with_tool(I,user)
+			return
+		if(istype(I,/obj/item/stack))
+			comp_prof.repair_inspected_with_sheet(I,user)
+			return
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/pos_to_dam = should_damage_occ()
 		if(!isnull(pos_to_dam))
