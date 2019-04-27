@@ -1,4 +1,4 @@
-#define POD_FAIL_CHANCE 5 //This is the chance a drop-pod will fail on impact and auto-eject the user + exploding.
+#define POD_FAIL_CHANCE 1 //This is the chance a drop-pod will fail on impact and auto-eject the user + exploding.
 
 /obj/vehicles/drop_pod
 	name = "SOEIV Drop Pod"
@@ -26,6 +26,9 @@
 	var/launch_arm_time = 5 SECONDS
 
 	var/pod_range = 3 //Range of pod in overmap tiles
+
+/obj/vehicles/drop_pod/on_death()
+	return
 
 /obj/vehicles/drop_pod/update_object_sprites()
 	overlays.Cut()
@@ -177,7 +180,7 @@
 			valid_points += l
 	var/beacons_present = 1
 	for(var/obj/item/drop_pod_beacon/b in world)
-		if(!(b.z  in om_targ_zs))
+		if(!(text2num("[b.z]")  in om_targ_zs))
 			continue
 		if(b.is_active == 1)
 			if(!beacons_present) //If we've not already realised we have beacons, remove all normal drop-pod markers from pick-choice.
