@@ -21,7 +21,7 @@
 
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
-	vehicle_view_modifier = 1.2
+	vehicle_view_modifier = 1.5
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
