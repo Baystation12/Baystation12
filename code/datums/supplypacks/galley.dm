@@ -8,7 +8,8 @@
 					/obj/item/weapon/reagent_containers/food/drinks/soymilk = 2,
 					/obj/item/weapon/storage/fancy/egg_box = 2,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/meat = 4
+					/obj/item/weapon/reagent_containers/food/snacks/meat = 4,
+					/obj/item/weapon/reagent_containers/food/condiment/enzyme = 1
 					)
 	cost = 10
 	containertype = /obj/structure/closet/crate/freezer
