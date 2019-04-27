@@ -92,6 +92,7 @@
 /obj/vehicles/proc/on_death()
 	explosion(loc,-1,-1,2,5)
 	movement_destroyed = 1
+	active = 0
 
 /obj/vehicles/proc/kick_occupants()
 	for(var/mob/m in occupants)
@@ -105,7 +106,7 @@
 		update_object_sprites()
 		if(active)
 			var/list/drivers = get_occupants_in_position("driver")
-			if(!drivers.len || isnull(drivers))
+			if(!drivers.len || isnull(drivers) || movement_destroyed)
 				inactive_pilot_effects()
 
 /obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc, a basic render of playerheads in the top right is used if no overidden.

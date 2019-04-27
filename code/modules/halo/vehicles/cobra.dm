@@ -41,6 +41,9 @@
 	var/mob/user = usr
 	if(!istype(user))
 		return
+	if(movement_destroyed)
+		to_chat(user,"<span class = 'notice'>[src]'s engines have been damaged beyond use!</span>")
+		return
 	if(!(user in get_occupants_in_position("driver")))
 		to_chat(user,"<span class = 'notice'>You need to be the driver to do that.</span>")
 		return

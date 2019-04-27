@@ -181,7 +181,7 @@
 		if(!do_after(user,COMPONENT_REPAIR_DELAY,contained_vehicle))
 			return
 		user.visible_message("<span class = 'notice'>[user] repairs [contained_vehicle] with [I]</span>")
-		component_last_inspected.repair_with_tool(I)
+		component_last_inspected.repair_with_tool(I,user)
 
 //BASE VEHICLE COMPONENT DEFINE
 /obj/item/vehicle_component
@@ -191,6 +191,7 @@
 	var/integrity = 100
 	var/coverage = 10
 	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0,"bomb" = 0.0) //Functions as a percentage reduction of damage of the type taken.
+
 	var/list/repair_materials = list("steel") //Material names go here. Vehicles can be repaired with any material in this list.
 	var/integrity_restored_per_sheet = BASE_INTEGRITY_RESTORE_PERSHEET
 	var/integrity_to_restore = 0 //The amount of integrity to restore once repair tools are applied.
@@ -223,12 +224,13 @@
 		return 0
 	integrity_to_restore += integrity_restored_per_sheet
 
-/obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool)
+/obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool,var/mob/user)
 	if(tool.type in repair_tools_typepaths)
 		repair_tools_typepaths -= tool.type
 
 	if(repair_tools_typepaths.len == 0)
 		finalise_repair()
+		user.visible_message("<span class = 'notice'>[user] finalises the repairs on [src]</span>")
 		set_repair_tools_needed(1)
 
 /obj/item/vehicle_component/proc/get_resistance_for(var/damage_type)

@@ -53,6 +53,9 @@
 	set category = "Vehicle"
 	set src in range(1)
 
+	if(movement_destroyed)
+		to_chat(usr,"<span class = 'notice'>[src]'s engines have been damaged beyond use!</span>")
+		return
 	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
@@ -105,7 +108,7 @@
 
 /obj/vehicles/air/inactive_pilot_effects()
 	//Crashing this vehicle with potential casualties.
-	visible_message("<span class = 'danger'>[name] spirals towards the ground, driverless!</span>")
+	visible_message("<span class = 'danger'>[name] spirals towards the ground, engines uncontrolled!!</span>")
 	for(var/mob/living/carbon/human/h in occupants)
 		if(prob(15))
 			h.adjustBruteLoss(rand(25,50))
