@@ -299,19 +299,19 @@
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
-	if(!isnull(pos_to_dam) || guns_disabled)
-		var/position_found = 0
-		while(position_found)
-			if(guns_disabled)
-				var/positions_pickfrom = list("driver","gunner","passenger")
-				pos_to_dam = pick(positions_pickfrom)
-			var/should_continue = damage_occupant(pos_to_dam,P)
-			position_found = 1
-			if(!should_continue && guns_disabled)
-				position_found = 0
-				positions_pickfrom -= pos_to_dam
-			else if(!should_continue)
-				return
+	var/mob/mob_to_dam
+	if(guns_disabled)
+		var/list/mobs = list()
+		for(var/mob/m in occupants)
+			mobs += m
+		mob_to_dam = pick(mobs)
+		if(!isnull(mob_to_dam))
+			mob_to_dam.bullet_act(P)
+			return
+	if(!isnull(pos_to_dam))
+		var/should_continue = damage_occupant(pos_to_dam,P)
+		if(!should_continue)
+			return
 	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
 
 /obj/vehicles/ex_act(var/severity)
