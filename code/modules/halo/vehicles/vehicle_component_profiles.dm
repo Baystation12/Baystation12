@@ -158,6 +158,9 @@
 /datum/component_profile/proc/repair_inspected_with_sheet(var/obj/item/stack/I,var/mob/user)
 	if(isnull(component_last_inspected))
 		return
+	if(!component_last_inspected.requires_sheet_repair())
+		to_chat("<span class = 'notice'>[contained_vehicle]'s [component_last_inspected] does not require any more repair. Finalise the repair with tools!</span>")
+		return
 	if(I.get_material_name() in component_last_inspected.repair_materials)
 		user.visible_message("<span class = 'notice'>[user] starts patching damage to [contained_vehicle]'s [component_last_inspected]</span>")
 		if(!do_after(user,COMPONENT_REPAIR_DELAY/5,contained_vehicle))
@@ -218,10 +221,13 @@
 	else
 		integrity = new_integ
 
-/obj/item/vehicle_component/proc/material_sheet_repair()
+/obj/item/vehicle_component/proc/requires_sheet_repair()
 	var/integ_lost = initial(integrity) - integrity
 	if(integ_lost == 0)
 		return 0
+	return 1
+
+/obj/item/vehicle_component/proc/material_sheet_repair()
 	integrity_to_restore += integrity_restored_per_sheet
 
 /obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool,var/mob/user)
