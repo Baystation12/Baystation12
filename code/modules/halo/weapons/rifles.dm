@@ -158,6 +158,7 @@
 	desc = "The BR55 is an all-round infantry weapon with a 2x magnification scope."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "BR55-Loaded-Base"
+	item_state = "br85"
 	magazine_type = /obj/item/ammo_magazine/m95_sap/br55
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	caliber = "9.5mm"
@@ -172,6 +173,10 @@
 	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.1, 0.8, 0.8)
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock")
 	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/br55,/obj/item/weapon_attachment/br55_stock_cheekrest,/obj/item/weapon_attachment/br55_bottom,/obj/item/weapon_attachment/br55_upper,/obj/item/weapon_attachment/sight/br55_scope)
 
