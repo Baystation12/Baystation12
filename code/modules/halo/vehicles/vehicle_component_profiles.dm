@@ -223,7 +223,7 @@
 
 /obj/item/vehicle_component/proc/requires_sheet_repair()
 	var/integ_lost = initial(integrity) - integrity
-	if(integ_lost == 0)
+	if(integ_lost <= 0)
 		return 0
 	return 1
 
