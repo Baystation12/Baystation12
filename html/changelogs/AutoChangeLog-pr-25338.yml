@@ -1,0 +1,4 @@
+author: "Randall"
+delete-after: True
+changes: 
+  - tweak: "The advanced mop now synthesizes space cleaner instead of water."
