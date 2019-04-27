@@ -1,0 +1,8 @@
+author: "Flying_loulou"
+delete-after: True
+changes: 
+  - rscadd: "Medical Technicians rejoice ! Following OHS inspections, EXCOM decided to grant you a light polymer helmet, as in most of other EMS services throughout human space."
+  - rscadd: "Medical Technicians rejoice ! EXCOM also issues you a 'medical technician chest rig', to help you carry your equipment without being forced to sweat in a jacket."
+  - tweak: "Medical personnel rejoice ! your paramedic and EMS jackets have been modified, and now allow you to store a blood bag on the suit storage slot."
+  - maptweak: "The MT chest rig and the EMS helmet are now available in the medical technician's lockers."
+  - maptweak: "Due to budget cuts, EXCOM had to sell the labcoat from the MTs lockers, in order to aquire the new equipment. Therefore, you will no longer find labcoats in the MT lockers."
