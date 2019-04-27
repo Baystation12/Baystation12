@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - rscadd: "Cooking supply pack now has a bottle of universal enzyme."
