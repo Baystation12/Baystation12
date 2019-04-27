@@ -41,7 +41,7 @@
 
 /obj/machinery/suit_storage_unit/standard_unit
 	suit_type = /obj/item/clothing/suit/space
-	helmet_type = /obj/item/clothing/head/helmet/space
+	helmet_type = /obj/item/clothing/head/helmet/space/fishbowl
 	tank_type = /obj/item/weapon/tank/oxygen
 	mask_type = /obj/item/clothing/mask/breath
 	req_access = list(access_eva)
