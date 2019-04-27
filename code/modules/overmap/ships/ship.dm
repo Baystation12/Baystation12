@@ -91,6 +91,8 @@
 		return INFINITY
 	if(is_still())
 		return 0
+	if(!burn_delay)
+		return 0
 	var/num_burns = get_speed()/get_acceleration() + 2 //some padding in case acceleration drops form fuel usage
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns/burns_per_grid)
