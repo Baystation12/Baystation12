@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Deck 1 security checkpoint shutters work as intended now. (Actually fixed this time)."
