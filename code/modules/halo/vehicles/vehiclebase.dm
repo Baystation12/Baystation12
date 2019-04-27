@@ -40,6 +40,12 @@
 
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
+	if(!active)
+		to_chat(user,"[src]'s engine is inactive.")
+	if(guns_disabled)
+		to_chat(user,"[src]'s guns are damaged beyond use.")
+	if(movement_destroyed)
+		to_chat(user,"[src]'s movement is damaged beyond use.")
 	show_occupants_contained(user)
 
 /obj/vehicles/proc/update_user_view(var/mob/user,var/reset = 0)
