@@ -353,7 +353,7 @@
 	check_armour = "bomb"
 	step_delay = 1.2
 
-/obj/item/projectile/bullet/ssr/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/bullet/ssr/on_impact(var/atom/target)
 	explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	..()
 
