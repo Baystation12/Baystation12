@@ -93,6 +93,7 @@
 	explosion(loc,-1,-1,2,5)
 	movement_destroyed = 1
 	active = 0
+	icon_state = "[initial(icon_state)]_destroyed"
 
 /obj/vehicles/proc/kick_occupants()
 	for(var/mob/m in occupants)

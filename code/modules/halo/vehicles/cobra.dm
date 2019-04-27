@@ -67,6 +67,13 @@
 			spawn(1)
 				update_user_view(occupant)
 
+/obj/vehicles/cobra/on_death()
+	. = ..()
+	vehicle_view_modifier = 1
+	lockdown = 0
+	zoomed = 0
+	comp_prof.gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/cobra_cannon)
+
 /obj/vehicles/cobra/verb/toggle_zoom()
 	set name = "Toggle Zoom"
 	set category = "Vehicle"
