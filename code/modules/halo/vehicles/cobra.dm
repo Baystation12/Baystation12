@@ -1,7 +1,7 @@
 
 /obj/vehicles/cobra
-	name = "cobra"
-	desc = "cobra"
+	name = "SP42 Cobra"
+	desc = "An anti-fortification and anti-materiel tank capable of providing high damage anti-armour at incredible ranges, however, its durability is low."
 
 	icon = 'code/modules/halo/vehicles/Cobra.dmi'
 	icon_state = "cobra"
@@ -102,7 +102,7 @@
 
 /obj/item/vehicle_component/health_manager/cobra
 	integrity = 500
-	resistances = list("brute"=35,"burn"=30,"emp"=25,"bomb"=20)
+	resistances = list("brute"=35,"burn"=30,"emp"=25,"bomb"=25)
 
 /datum/component_profile/cobra
 	pos_to_check = "gunner"
