@@ -303,7 +303,7 @@
 		var/should_continue = damage_occupant(pos_to_dam,P)
 		if(!should_continue)
 			return
-	comp_prof.take_comp_ent_damage(P.get_structure_damage(),P.damtype)
+	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
