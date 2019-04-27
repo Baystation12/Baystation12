@@ -167,10 +167,16 @@
 		user.visible_message("<span class = 'notice'>[user] uses a sheet of [I.get_material_name()] to repair [contained_vehicle]'s [component_last_inspected]</span>")
 		component_last_inspected.material_sheet_repair()
 
+/datum/component_profile/proc/is_repair_tool(var/obj/item/I)
+	for(var/type in REPAIR_TOOLS_LIST)
+		if(istype(I,type))
+			return 1
+	return 0
+
 /datum/component_profile/proc/repair_inspected_with_tool(var/obj/item/I,var/mob/user)
 	if(isnull(component_last_inspected))
 		return
-	if(I.type in component_last_inspected.repair_tools_typepaths)
+	if(is_repair_tool(I))
 		user.visible_message("<span class = 'notice'>[user] starts repairing [contained_vehicle] with [I]</span>")
 		if(!do_after(user,COMPONENT_REPAIR_DELAY,contained_vehicle))
 			return
@@ -191,7 +197,10 @@
 	var/repair_tool_amount = 2 //How many repair tools will be needed to repair this component. Can be any /obj/item.
 	var/list/repair_tools_typepaths = list()
 
-/obj/item/vehicle_component/proc/set_repair_tools_needed()
+/obj/item/vehicle_component/proc/set_repair_tools_needed(var/set_null = 0)
+	if(set_null)
+		repair_tools_typepaths = list()
+		return
 	if(repair_tools_typepaths.len > 0)
 		return
 	for(var/i = 0, i < repair_tool_amount, i++)
@@ -220,7 +229,7 @@
 
 	if(repair_tools_typepaths.len == 0)
 		finalise_repair()
-		set_repair_tools_needed()
+		set_repair_tools_needed(1)
 
 /obj/item/vehicle_component/proc/get_resistance_for(var/damage_type)
 	var/resistance = resistances[damage_type]
@@ -232,8 +241,16 @@
 /obj/item/vehicle_component/proc/full_integ_loss() //This is called when the vehicle loses it's integrity entirely.
 
 /obj/item/vehicle_component/proc/damage_integrity(var/adjust_by = 0)
+	set_repair_tools_needed()
 	var/new_integ = integrity - adjust_by
-	if(new_integ > initial(integrity))
+	if(integrity == 0 && adjust_by >0) //This stops the on-death explosion from constantly looping and as such crashing the server.
+		new_integ = integrity_to_restore - adjust_by
+		if(new_integ < 0)
+			integrity_to_restore = 0
+		else
+			integrity = new_integ
+		return
+	else if(new_integ > initial(integrity))
 		integrity = initial(integrity)
 	else if(new_integ < 0)
 		integrity = 0
@@ -249,5 +266,7 @@
 /obj/item/vehicle_component/health_manager/full_integ_loss()
 	var/obj/vehicles/vehicle_contain = loc
 	if(!istype(loc))
+		return
+	if(vehicle_contain.movement_destroyed)
 		return
 	vehicle_contain.on_death()

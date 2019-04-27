@@ -471,18 +471,13 @@
 		handle_grab_attack(I,user)
 		return
 	if(user.a_intent == I_HURT)
-		. = ..()
-		var/is_repair_tool = 0
-		for(var/type in REPAIR_TOOLS_LIST)
-			if(istype(I,type))
-				is_repair_tool = 1
-				break
-		if(is_repair_tool)
+		if(comp_prof.is_repair_tool(I))
 			comp_prof.repair_inspected_with_tool(I,user)
 			return
 		if(istype(I,/obj/item/stack))
 			comp_prof.repair_inspected_with_sheet(I,user)
 			return
+		. = ..()
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/pos_to_dam = should_damage_occ()
 		if(!isnull(pos_to_dam))
