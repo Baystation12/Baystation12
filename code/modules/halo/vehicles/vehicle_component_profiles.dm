@@ -218,6 +218,7 @@
 	var/new_integ = integrity + integrity_to_restore
 	if(new_integ >= initial(integrity))
 		integrity = initial(integrity)
+		set_repair_tools_needed(1)
 	else
 		integrity = new_integ
 		set_repair_tools_needed()
@@ -238,7 +239,6 @@
 	if(repair_tools_typepaths.len == 0)
 		finalise_repair()
 		user.visible_message("<span class = 'notice'>[user] finalises the repairs on [src]</span>")
-		set_repair_tools_needed(1)
 
 /obj/item/vehicle_component/proc/get_resistance_for(var/damage_type)
 	var/resistance = resistances[damage_type]
