@@ -179,6 +179,9 @@
 /datum/component_profile/proc/repair_inspected_with_tool(var/obj/item/I,var/mob/user)
 	if(isnull(component_last_inspected))
 		return
+	if(component_last_inspected.integrity_to_restore <= 0)
+		to_chat(user,"<span class = 'notice'>You need to repair the component with relevant repair materials first.</span>")
+		return
 	if(is_repair_tool(I))
 		user.visible_message("<span class = 'notice'>[user] starts repairing [contained_vehicle] with [I]</span>")
 		if(!do_after(user,COMPONENT_REPAIR_DELAY,contained_vehicle))

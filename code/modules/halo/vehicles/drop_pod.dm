@@ -211,6 +211,9 @@
 	coverage = 100
 	resistances = list("brute"= 100.0,"burn"= 100.0,"emp"= 100.0,"bomb" = 100.0) //Negates all damage. Let's pretend drop-pods are invincible.
 
+/obj/item/vehicle_component/health_manager/drop_pod/damage_integrity()
+	return
+
 /obj/structure/drop_pod_launchbay
 	name = "Drop Pod Launch Bay"
 	desc = "Machinery to secure and launch a drop pod."

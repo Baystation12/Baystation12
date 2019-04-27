@@ -21,7 +21,7 @@
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
-	vehicle_view_modifier = 1.4
+	vehicle_view_modifier = 1.65
 
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()

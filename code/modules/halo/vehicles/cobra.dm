@@ -90,7 +90,7 @@
 	zoomed = !zoomed
 
 	if(zoomed)
-		vehicle_view_modifier = 2.75
+		vehicle_view_modifier = 2
 	else
 		vehicle_view_modifier = 1.5
 
