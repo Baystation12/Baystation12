@@ -133,4 +133,9 @@
 	armor_penetration = 100
 
 /obj/item/projectile/bullet/cobra_sniper/get_structure_damage()
-	return damage * 4.5
+	return damage * 5
+
+/obj/item/projectile/bullet/cobra_sniper/attack_mob()
+	damage_type = BRUTE
+	damtype = BRUTE
+	return ..()
