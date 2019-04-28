@@ -107,8 +107,8 @@ GLOBAL_LIST_EMPTY(emsville_marshall_spawns)
 
 /datum/job/IGUARD
 	title = "Depot Guard"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 6
+	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/IGUARD
 	selection_color = "#008000"
 	access = list(532,110)
