@@ -1479,7 +1479,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
 "dh" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "di" = (
@@ -4006,7 +4006,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "iI" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
@@ -4017,6 +4016,7 @@
 	name = "Engineering Desk Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/engineering/locker_room)
 "iJ" = (
@@ -5687,11 +5687,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/item/modular_computer/console/preset/engineering{
 	icon_state = "console";
 	dir = 8
@@ -5927,7 +5922,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/storage)
 "mW" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -5941,6 +5935,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/engineering/locker_room)
 "mX" = (
@@ -6501,11 +6496,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
 "om" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -6516,6 +6506,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor/border_only,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
 "on" = (
@@ -7384,7 +7375,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
 "qi" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/vacant/prototype/control)
 "qj" = (
@@ -8065,13 +8056,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "rq" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/structure/cable/green,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -8081,6 +8065,7 @@
 	opacity = 0
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
 "rs" = (
@@ -13847,7 +13832,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/seconddeck/fore)
 "GA" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -13857,6 +13841,7 @@
 	name = "Engineering Desk Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/engineering/locker_room)
 "GF" = (
@@ -14656,11 +14641,6 @@
 /obj/machinery/door/window/northright{
 	dir = 2;
 	name = "engineering front desk"
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
 	},
 /obj/machinery/door/window/brigdoor/northleft{
 	name = "engineering front desk"
@@ -18880,11 +18860,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
 	},
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{

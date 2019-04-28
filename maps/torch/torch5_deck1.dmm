@@ -2794,7 +2794,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/surgery)
 "agg" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "surgery_windows"
 	},
 /turf/simulated/floor/plating,
@@ -5118,7 +5118,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "anH" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "exam_windows"
 	},
 /turf/simulated/floor/plating,
@@ -5129,11 +5129,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/sleeper)
 "anM" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/sleeper)
 "anN" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "recov_windows"
 	},
 /turf/simulated/floor/plating,
@@ -5359,7 +5359,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/mentalhealth)
 "apR" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "counsel_windows"
 	},
 /turf/simulated/floor/plating,
@@ -5524,7 +5524,7 @@
 /turf/simulated/wall/prepainted,
 /area/medical/equipstorage)
 "aqP" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/equipstorage)
 "aqQ" = (
@@ -5727,7 +5727,6 @@
 /turf/simulated/wall/prepainted,
 /area/medical/infirmreception)
 "arL" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -5736,6 +5735,7 @@
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/infirmreception)
 "arT" = (
@@ -6900,7 +6900,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
 "awg" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "robotics_external_windows"
 	},
 /turf/simulated/floor/plating,
@@ -6943,7 +6943,7 @@
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/equipstorage)
 "awu" = (
@@ -7014,12 +7014,12 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/chapel/main)
 "awB" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/chapel/main)
 "awC" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/disposalpipe/segment,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/chapel/main)
 "awE" = (
@@ -8180,7 +8180,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/sleep/cryo/aux)
 "aAt" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/crew_quarters/sleep/cryo/aux)
 "aAu" = (
@@ -8216,7 +8216,6 @@
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "aAJ" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -8228,6 +8227,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/development)
 "aAK" = (
@@ -8239,7 +8239,6 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -8247,6 +8246,7 @@
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/breakroom)
 "aAN" = (
@@ -8266,7 +8266,6 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -8274,6 +8273,7 @@
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/breakroom)
 "aAO" = (
@@ -8281,7 +8281,6 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -8289,6 +8288,7 @@
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/breakroom)
 "aAP" = (
@@ -9406,7 +9406,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "aFb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -9433,6 +9432,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/development)
 "aFd" = (
@@ -9804,7 +9804,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "aGE" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/development)
 "aGG" = (
@@ -9812,7 +9812,7 @@
 /area/rnd/breakroom)
 "aGI" = (
 /obj/structure/disposalpipe/segment,
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/breakroom)
 "aGJ" = (
@@ -14674,7 +14674,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "bmb" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenoflora)
 "bmB" = (
@@ -19664,7 +19664,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "gUb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -19674,6 +19673,7 @@
 	opacity = 0
 	},
 /obj/structure/disposalpipe/segment,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/infirmreception)
 "gVb" = (
@@ -19717,9 +19717,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "gWb" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "exam_windows"
-	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -19727,6 +19724,9 @@
 	id = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
+	id = "exam_windows"
 	},
 /turf/simulated/floor/plating,
 /area/medical/exam_room)
@@ -20148,7 +20148,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/opscheck)
 "htb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -20157,6 +20156,7 @@
 	name = "Ladderwell Checkpoint Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/entry)
 "htK" = (
@@ -20276,7 +20276,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/rnd/development)
 "hyb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -20294,6 +20293,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/development)
 "hyj" = (
@@ -20765,7 +20765,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "hZb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -20778,6 +20777,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/development)
 "ibb" = (
@@ -21025,7 +21025,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/aftport)
 "imK" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "conference_window"
 	},
 /turf/simulated/floor/plating,
@@ -21375,13 +21375,12 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/security/detectives_office)
 "iGb" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "robotics_windows"
 	},
 /turf/simulated/floor/plating,
 /area/medical/surgery2)
 "iHb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -21391,6 +21390,7 @@
 	opacity = 0
 	},
 /obj/structure/cable/green,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/development)
 "iKb" = (
@@ -22540,7 +22540,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "jZb" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "misc_lab"
 	},
 /turf/simulated/floor/plating,
@@ -22981,7 +22981,7 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "kyb" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/assembly/robotics)
 "kym" = (
@@ -23073,13 +23073,13 @@
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/surgery)
 "kEb" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "robotics_surg"
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
+	id = "robotics_surg"
 	},
 /turf/simulated/floor/plating,
 /area/assembly/robotics/surgery)
@@ -23317,7 +23317,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/chargebay)
 "kUb" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "robotics_surg"
 	},
 /turf/simulated/floor/plating,
@@ -25406,8 +25406,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/teleporter/firstdeck)
 "npQ" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "robotics_external_windows"
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
+	id = "robotics_surg"
 	},
 /turf/simulated/floor/plating,
 /area/assembly/chargebay)
@@ -27283,10 +27283,10 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "pBb" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "misc_lab"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/plating,
 /area/rnd/misc_lab)
 "pBL" = (
@@ -27852,7 +27852,7 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "qtb" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
 "qtQ" = (
@@ -27961,9 +27961,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "qzb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/meter,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
 "qAb" = (
@@ -28453,11 +28453,11 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "rdb" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenoflora)
 "reb" = (
