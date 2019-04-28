@@ -103,6 +103,7 @@
 /obj/item/vehicle_component/health_manager/cobra
 	integrity = 500
 	resistances = list("brute"=35,"burn"=30,"emp"=25,"bomb"=25)
+	repair_materials = list("plasteel")
 
 /datum/component_profile/cobra
 	pos_to_check = "gunner"
