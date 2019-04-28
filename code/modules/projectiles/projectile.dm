@@ -293,7 +293,9 @@
 	//the bullet passes through a dense object!
 	if(passthrough)
 		//move ourselves onto A so we can continue on our way.
-		forceMove(get_turf(A))
+		var/turf/T = get_turf(A)
+		if(T)
+			forceMove(T)
 		permutated.Add(A)
 		bumped = 0 //reset bumped variable!
 		return 0
