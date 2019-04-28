@@ -1,0 +1,5 @@
+author: "Higgin"
+delete-after: True
+changes: 
+  - tweak: "Being stunned, weakened, or paralyzed now all prevent radio use."
+  - tweak: "Getting hit can apply a very brief cooldown before you can use your radio - guaranteed for stun weapons, projectiles, and powerful melee weapons."
