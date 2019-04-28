@@ -299,6 +299,15 @@
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
+	var/mob/mob_to_dam
+	if(guns_disabled)
+		var/list/mobs = list()
+		for(var/mob/m in occupants)
+			mobs += m
+		mob_to_dam = pick(mobs)
+		if(!isnull(mob_to_dam))
+			mob_to_dam.bullet_act(P)
+			return
 	if(!isnull(pos_to_dam))
 		var/should_continue = damage_occupant(pos_to_dam,P)
 		if(!should_continue)
