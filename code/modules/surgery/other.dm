@@ -161,23 +161,9 @@
 	min_duration = 50
 	max_duration = 60
 
-/decl/surgery_step/sterilize/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/weapon/reagent_containers/container = tool
-	if(istype(container) && container.is_open_container())
-		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
-			return TRUE
-		else
-			var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
-			if(istype(booze))
-				if(booze.strength >= 40)
-					to_chat(user, SPAN_WARNING("[capitalize(booze.name)] is too weak, you need something of higher proof for this..."))
-				else
-					return TRUE
-	return FALSE
-
 /decl/surgery_step/sterilize/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && !affected.is_disinfected())
+	if(affected && !affected.is_disinfected() && check_chemicals(tool))
 		return affected
 
 /decl/surgery_step/sterilize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -222,3 +208,13 @@
 	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
 	affected.disinfect()
 
+/decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/weapon/reagent_containers/container)
+	if(istype(container) && container.is_open_container())
+		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
+			return TRUE
+		else
+			var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
+			if(istype(booze))
+				if(booze.strength <= 40)
+					return TRUE
+	return FALSE
