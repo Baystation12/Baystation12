@@ -51,6 +51,7 @@
 	edge = 1
 	sharp = 1
 	force = 40
+	is_heavy = 1
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 
