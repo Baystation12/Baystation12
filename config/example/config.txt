@@ -413,6 +413,9 @@ RADIATION_LOWER_LIMIT 0.15
 ## Uncomment this to prevent players from printing copy/pasted circuits
 #DISABLE_CIRCUIT_PRINTING
 
+## Uncomment this to allow admins to narrate using HTML tags
+#ALLOW_UNSAFE_NARRATES
+
 ##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
 #MINIMUM_BYOND_VERSION
 
