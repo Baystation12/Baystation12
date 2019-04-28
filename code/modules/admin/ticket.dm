@@ -9,12 +9,19 @@ var/list/ticket_panels = list()
 	var/datum/client_lite/closed_by
 	var/id
 	var/opened_time
+	var/timeout = FALSE
 
 /datum/ticket/New(var/datum/client_lite/owner)
 	src.owner = owner
 	tickets |= src
 	id = tickets.len
 	opened_time = world.time
+	addtimer(CALLBACK(src, .proc/timeoutcheck), 5 MINUTES)
+
+/datum/ticket/proc/timeoutcheck()
+	if(status == TICKET_OPEN)
+		timeout = TRUE
+		close()
 
 /datum/ticket/proc/close(var/datum/client_lite/closed_by)
 	if(status == TICKET_CLOSED)
@@ -23,16 +30,20 @@ var/list/ticket_panels = list()
 	if(status == TICKET_ASSIGNED && !((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey) && alert(client_by_ckey(closed_by.ckey), "You are not assigned to this ticket. Are you sure you want to close it?",  "Close ticket?" , "Yes" , "No") != "Yes")
 		return
 
-	var/client/real_client = client_by_ckey(closed_by.ckey)
-	if(status == TICKET_ASSIGNED && (!real_client || !real_client.holder)) // non-admins can only close a ticket if no admin has taken it
-		return
+	if(timeout == FALSE)
+		var/client/real_client = client_by_ckey(closed_by.ckey)
+		if(status == TICKET_ASSIGNED && (!real_client || !real_client.holder)) // non-admins can only close a ticket if no admin has taken it
+			return
 
 	src.status = TICKET_CLOSED
-	src.closed_by = closed_by
 
-	to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has been closed by [closed_by.key].</b></span>")
-	message_staff("<span class='notice'><b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key]</b>.</span>")
-	send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key].")
+	if(timeout == TRUE)
+		to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has timed out. Please adminhelp again if your issue is not resolved.</b></span>")
+	else
+		src.closed_by = closed_by
+		to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has been closed by [closed_by.key].</b></span>")
+		message_staff("<span class='notice'><b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key]</b>.</span>")
+		send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key].")
 
 	update_ticket_panels()
 
@@ -127,7 +138,10 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 					status = "Assigned to [english_list(ticket.assigned_admin_keys(), "no one")]"
 					color = "#ffffff"
 				if(TICKET_CLOSED)
-					status = "Closed by [ticket.closed_by.key]"
+					if(ticket.timeout == FALSE)
+						status = "Closed by [ticket.closed_by.key]"
+					else
+						status = "Closed by timeout"
 					color = "#cc2222"
 			ticket_dat += "<li style='padding-bottom:10px;color:[color]'>"
 			if(open_ticket && open_ticket == ticket)
