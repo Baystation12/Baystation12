@@ -108,7 +108,14 @@
 	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	var/uses = 10
 
-	var/static/list/card_choices
+	var/static/list/card_choices = list(
+							/obj/item/weapon/card/emag,
+							/obj/item/weapon/card/union,
+							/obj/item/weapon/card/data,
+							/obj/item/weapon/card/data/full_color,
+							/obj/item/weapon/card/data/disk,
+							/obj/item/weapon/card/id,
+						) //Should be enough of a selection for most purposes
 
 var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/emag/resolve_attackby(atom/A, mob/user)
@@ -129,30 +136,10 @@ var/const/NO_EMAG_ACT = -50
 
 	return 1
 
-/obj/item/weapon/card/emag/proc/generate_emag_choices(var/card_choices)
-	. = list()
-
-	var/i = 1 //in case there is a collision with both name AND icon_state
-	for(var/typepath in card_choices)
-		var/obj/O = typepath
-		if(initial(O.icon) && initial(O.icon_state))
-			var/name = initial(O.name)
-			if(name in .)
-				name += " ([initial(O.icon_state)])"
-			if(name in .)
-				name += " \[[i++]\]"
-			.[name] = typepath
-
 /obj/item/weapon/card/emag/Initialize()
 	. = ..()
-	if(!card_choices)
-		card_choices = list(/obj/item/weapon/card/union,
-							/obj/item/weapon/card/data,
-							/obj/item/weapon/card/data/full_color,
-							/obj/item/weapon/card/data/disk,
-							/obj/item/weapon/card/id,
-						) //Should be enough of a selection for most purposes
-		card_choices = generate_emag_choices(card_choices)
+	if(length(card_choices) && !card_choices[card_choices[1]])
+		card_choices = generate_chameleon_choices(card_choices)
 
 /obj/item/weapon/card/emag/verb/change(picked in card_choices)
 	set name = "Change Cryptographic Sequencer Appearance"
@@ -163,14 +150,10 @@ var/const/NO_EMAG_ACT = -50
 		return
 
 	disguise(card_choices[picked], usr)
-	update_icon()
 
 /obj/item/weapon/card/emag/examine(mob/user)
 	. = ..()
-	if(!.)
-		return
-		
-	if(user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
+	if(. && user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
 		to_chat(user, SPAN_WARNING("This ID card has some non-standard modifications commonly used to gain illicit access to computer systems."))
 
 /obj/item/weapon/card/id
