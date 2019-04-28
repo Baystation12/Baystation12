@@ -89,6 +89,7 @@
 	caliber = "needler"
 	load_method = MAGAZINE
 	burst = 3
+	is_heavy = 1
 	slowdown_general = 0
 
 	item_icons = list(
