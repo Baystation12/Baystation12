@@ -4,7 +4,7 @@
 
 	icon = 'code/modules/halo/vehicles/spirit.dmi'
 	icon_state = "base"
-	vehicle_move_delay = 1.45
+	vehicle_move_delay = 1.2
 	faction = "covenant"
 	density = 1
 
@@ -19,7 +19,7 @@
 
 	comp_prof = /datum/component_profile/spirit
 
-	occupants = list(15,0)
+	occupants = list(14,1)
 
 	exposed_positions = list()//No-one can get hit when inside this.
 
@@ -29,39 +29,27 @@
 
 	vehicle_view_modifier = 1.3
 
-/obj/vehicles/air/overmap/spirit_dropship/proc/update_pixel_xy()
-	pixel_x = 0
-	pixel_y = 0
-	bounds = "32,32"
-	switch (dir)
-		if(SOUTH)
-			pixel_x = -19
-			bounds = "128,160"
-		if(NORTH)
-			pixel_x = -19
-			bounds = "128,160"
-		if(EAST)
-			pixel_y = -19
-			bounds = "160,128"
-		if(WEST)
-			pixel_y = -19
-			bounds = "160,128"
-
 /obj/vehicles/air/overmap/spirit_dropship/update_object_sprites()
-	update_pixel_xy()
+	. = ..()
+	if(dir == NORTH || dir == SOUTH)
+		bounds = "128,256"
+	else
+		bounds = "256,128"
 
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/spirit
-	integrity = 300
-	resistances = list("brute"=30,"burn"=30,"emp"=40)
+	integrity = 750
+	resistances = list("brute"=50,"burn"=40,"emp"=40,"bomb"=50)
+	repair_materials = list("nanolaminate")
 
 /datum/component_profile/spirit
-	pos_to_check = "driver"
+	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/spirit_main)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/spirit)
-	cargo_capacity = 24
+	cargo_capacity = 48 //Can hold, at max, 9 normals
 	max_vehicle_size = 64
-	vehicle_capacity = 32
+	vehicle_capacity = 64
+	cargo_allow_massive = 1
 
 /obj/item/weapon/gun/vehicle_turret/spirit_main
 	name = "Heavy Plasma Cannon"
@@ -75,7 +63,7 @@
 	burst = 3
 
 /obj/item/projectile/covenant/spirit_cannon
-	damage = 70
+	damage = 50
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "heavy_plas_cannon"
 

@@ -21,11 +21,14 @@
 	screen_shake = 0
 	burst = 1
 	burst_delay = 2
-	w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+/obj/item/weapon/gun/projectile/srs99_sniper/can_use_when_prone()
+	return 1
 
 /obj/item/weapon/gun/projectile/srs99_sniper/verb/scope()
 	set category = "Weapon"
@@ -69,6 +72,9 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+/obj/item/weapon/gun/projectile/m392_dmr/can_use_when_prone()
+	return 1
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
 	set category = "Weapon"

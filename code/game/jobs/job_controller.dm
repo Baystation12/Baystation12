@@ -644,10 +644,13 @@ var/global/datum/controller/occupations/job_master
 	if(job_datum.spawnpoint_override)
 		to_chat(H,"<span class = 'notice'>Job has spawnpoint override set. Ignoring preference-set spawnpoint.</span>")
 		var/datum/spawnpoint/candidate = spawntypes()[job_datum.spawnpoint_override]
-		if(isnull(candidate))
-			to_chat(H,"<span class = 'warning'>ERROR: Spawnpoint override set, yet spawnpoint not allowed on current map!</span>")
-		if(candidate.check_job_spawning(rank))
-			return candidate
+		if(candidate)
+			if(candidate.check_job_spawning(rank))
+				return candidate
+			else
+				to_chat(H,"<span class = 'warning'>ERROR: Spawnpoint override set to \'[job_datum.spawnpoint_override]\', yet spawning is not allowed as \'[rank]\'!</span>")
+		else
+			to_chat(H,"<span class = 'warning'>ERROR: Spawnpoint override set, yet spawnpoint does not exist!</span>")
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
 		spawnpoint = GLOB.using_map.get_default_spawn(C, job_datum)
@@ -676,6 +679,8 @@ var/global/datum/controller/occupations/job_master
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
 				break
+			else
+				message_admins("JOB CONTROLLER WARNING: spawntype \'[spawntype]\' is currently not allowing spawning for [rank]. Inform Cael if you get this warning longer than 1 week.")
 
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one

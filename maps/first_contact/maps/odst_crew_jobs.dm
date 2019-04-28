@@ -1,6 +1,7 @@
 
 /datum/job/ODST
 	title = "Orbital Drop Shock Trooper"
+	spawn_faction = "UNSC"
 	total_positions = 5
 	spawn_positions = 5
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
@@ -20,6 +21,7 @@
 
 /datum/job/ODSTO
 	title = "Orbital Drop Shock Trooper Officer"
+	spawn_faction = "UNSC"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/ODSTsecondlieutenant

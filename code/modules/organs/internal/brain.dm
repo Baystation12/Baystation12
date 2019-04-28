@@ -19,6 +19,7 @@
 	var/const/damage_threshold_count = 10
 	var/damage_threshold_value
 	var/healed_threshold = 1
+	var/last_damage_time = 0
 
 /obj/item/organ/internal/brain/robotize()
 	replace_self_with(/obj/item/organ/internal/mmi_holder/posibrain)
@@ -212,4 +213,13 @@
 				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					take_damage(1)
+
+		//gradually heal brain damage
+		/*if(last_damage_time + 30 SECONDS < world.time)
+			damage = max(min_bruised_damage, damage  - 1)*/
 	..()
+
+/obj/item/organ/internal/brain/take_damage(amount, var/silent=0)
+	. = ..()
+	if(amount > 0)
+		last_damage_time = world.time

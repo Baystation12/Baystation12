@@ -1,6 +1,7 @@
 /datum/job/UNSC_ship
 	title = "unknown" //For travis
 	faction_flag = UNSC //Defining here rather than in every job
+	spawn_faction = "UNSC"
 	req_admin_notify = 1
 
 //ship commanding officer
@@ -59,6 +60,7 @@
 	spawn_positions = 1
 	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/cag
+	is_whitelisted = 1
 	selection_color = "#777777"
 	//job_guide = "You are the ultimate commander of all strike craft (fighters, shuttles, dropships) on the ship. You have the final word on docking approaches, fire missions, strike deployments and whether to engage or retreat. Remember to trust the word of your pilots though as you're stuck on the bridge and it's probably been decades since you flew yourself."
 

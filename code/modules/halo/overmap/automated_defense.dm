@@ -19,6 +19,9 @@
 	. = ..()
 	GLOB.overmap_tiles_uncontrolled -= range(defense_range*2,src)
 
+/obj/effect/overmap/ship/npc_ship/automated_defenses/can_board() //Now you can board them, any time you want!
+	return 1
+
 /obj/effect/overmap/ship/npc_ship/automated_defenses/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	. = ..()
 	for(var/datum/npc_ship_request/automated_defense_process/p in available_ship_requests)
@@ -127,6 +130,11 @@
 	fore_dir = EAST
 	map_bounds = list(50,146,165,107)
 
+/datum/npc_ship/innie_defenseplatform
+	mapfile_links = list('maps/first_contact/maps/faction_bases/Innie_Defense.dmm')
+	fore_dir = EAST
+	map_bounds = list(50,146,165,107)
+
 /datum/npc_ship/cov_defenseplatform
 	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Defense.dmm')
 	fore_dir = WEST
@@ -145,7 +153,7 @@
 	icon_state = "SMAC"
 	faction = "innie"
 	ship_name_list = list()
-	ship_datums = list(/datum/npc_ship/unsc_defenseplatform)
+	ship_datums = list(/datum/npc_ship/innie_defenseplatform)
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/innie/generate_ship_name()
 	name = "ODP [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"

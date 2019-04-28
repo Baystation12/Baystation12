@@ -79,6 +79,8 @@
 		else
 			stance = HOSTILE_STANCE_ATTACKING
 			walk_to(src, target_mob, 1, move_to_delay)
+			spawn(get_dist(src,target_mob)*move_to_delay) //If the target is within range after our original move, we attack them.
+				AttackTarget()
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1

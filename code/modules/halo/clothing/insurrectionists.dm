@@ -36,7 +36,7 @@
 	icon_state = "armor1"
 	icon_override = INNIE_OVERRIDE
 	blood_overlay_type = "armor1"
-	armor = list(melee = 45, bullet = 40, laser = 40, energy = 40, bomb = 40, bio = 20, rad = 15)
+	armor = list(melee = 45, bullet = 40, laser = 40, energy = 40, bomb = 35, bio = 20, rad = 15)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = THICKMATERIAL
 	flags_inv = HIDETAIL
@@ -73,9 +73,9 @@
 	siemens_coefficient = 0
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 80, bio = 20, rad = 15)
+	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 50, bio = 20, rad = 15)
 	armor_thickness= 30
-	slowdown_general = 2
+	slowdown_general = 1
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/bomb_hood/security/colossus
@@ -90,8 +90,8 @@
 	permeability_coefficient = 0.01
 	slowdown_general = 1
 	siemens_coefficient = 1.5
-	armor_thickness = 60
-	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 80, bio = 20, rad = 15)
+	armor_thickness = 20
+	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 50, bio = 20, rad = 15)
 	gas_transfer_coefficient = 0.90
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -122,14 +122,14 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 	flags_inv = 29|HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/weapon/gun)
-	slowdown_general = 1
-	armor_thickness = 10 //Should be able to take 5-6 bullets before shattering.
+	slowdown_general = -2
+	armor_thickness = 15 //Should be able to take 5-6 bullets before shattering.
 	siemens_coefficient = 1.5
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 
 /obj/item/clothing/suit/justice/zeal/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = -2
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/zeal
 	name = "Zeal Scout Suit Helmet"
@@ -141,7 +141,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	w_class = ITEM_SIZE_LARGE//bulky item
 	siemens_coefficient = 1.5
-	armor_thickness = 10
+	armor_thickness = 15
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 	gas_transfer_coefficient = 0.90
 

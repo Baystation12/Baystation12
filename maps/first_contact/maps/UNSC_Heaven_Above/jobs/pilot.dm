@@ -9,6 +9,7 @@
 	spawn_positions = 1
 	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/cmdr_wing
+	is_whitelisted = 1
 	selection_color = "#995500"
 	req_admin_notify = 1
 	//job_guide = "Your responsibility is to lead the strike craft (fighters, dropships, shuttles) in battle, all pilots are directly under you and the CAG gives you orders from the bridge."
@@ -27,6 +28,7 @@
 	spawn_positions = 1
 	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/cmdr_sqr
+	is_whitelisted = 1
 	selection_color = "#995500"
 	//job_guide = "You are the wing commander's 2IC, meaning you help him lead strike craft (fighters, dropships, shuttles) in battle. The CAG will also give orders from the bridge."
 

@@ -24,7 +24,7 @@
 	heat_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 100, rad = 25)
+	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 100, rad = 25)
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -41,7 +41,7 @@
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	blood_overlay_type = "armor"
 	item_state_slots = list(slot_l_hand_str = "urf_armour", slot_r_hand_str = "urf_armour")
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 100, rad = 25)
 	item_flags = THICKMATERIAL | STOPPRESSUREDAMAGE
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS

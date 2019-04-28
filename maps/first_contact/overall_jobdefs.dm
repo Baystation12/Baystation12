@@ -40,6 +40,8 @@
 		/datum/job/UNSC_ship/gunnery,\
 		/datum/job/UNSC_ship/technician_chief,\
 		/datum/job/UNSC_ship/technician,\
+		/datum/job/ODST,\
+		/datum/job/ODSTO,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_ultra,\
@@ -63,13 +65,7 @@
 		"Research Facility Spawn",\
 		"Research Facility Director Spawn",\
 		"Research Facility Security Spawn",\
-		"Listening Post Spawn",\
-		"Listening Post Commander Spawn",\
-		"Depot Guard Spawn",\
-		"UNSC Aegis Ship Crew Spawn",\
-		"UNSC Aegis ODST Spawn",\
-		"UNSC Aegis ODST Officer Spawn",\
-		"AI")
+		"Depot Guard Spawn")
 
 	default_spawn = DEFAULT_SPAWNPOINT_ID
 

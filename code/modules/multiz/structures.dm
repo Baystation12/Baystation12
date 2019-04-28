@@ -156,6 +156,10 @@
 	allowed_directions = UP|DOWN
 	icon_state = "ladder11"
 
+/obj/structure/ladder/down
+	allowed_directions = DOWN
+	icon_state = "ladder01"
+
 /obj/structure/stairs
 	name = "Stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."

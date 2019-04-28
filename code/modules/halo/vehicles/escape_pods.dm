@@ -58,3 +58,32 @@
 	bound_width = 96
 	bound_height = 64
 	dir = 8
+
+/obj/vehicles/drop_pod/escape_pod/covenant
+	name = "Escape Pod"
+	desc = "An enclosed environment for use in emergency evacuation procedures."
+	icon = 'code/modules/halo/vehicles/covenant_pods.dmi'
+	icon_state = "cov_escape"
+
+	bound_width = 64
+	bound_height = 96
+
+/obj/vehicles/drop_pod/escape_pod/covenant/north
+	bound_width = 64
+	bound_height = 96
+	dir = 1
+
+/obj/vehicles/drop_pod/escape_pod/covenant/south
+	bound_width = 64
+	bound_height = 96
+	dir = 2
+
+/obj/vehicles/drop_pod/escape_pod/covenant/east
+	bound_width = 96
+	bound_height = 64
+	dir = 4
+
+/obj/vehicles/drop_pod/escape_pod/covenant/west
+	bound_width = 96
+	bound_height = 64
+	dir = 8

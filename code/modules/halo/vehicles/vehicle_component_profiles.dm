@@ -1,3 +1,6 @@
+#define REPAIR_TOOLS_LIST list(/obj/item/weapon/screwdriver,/obj/item/weapon/wrench,/obj/item/weapon/weldingtool,/obj/item/weapon/crowbar,/obj/item/weapon/wirecutters)
+#define BASE_INTEGRITY_RESTORE_PERSHEET 20 //Amount of integrity restored per sheet of material.
+#define COMPONENT_REPAIR_DELAY 10 SECONDS
 
 /datum/component_profile
 
@@ -7,6 +10,7 @@
 
 	var/list/components = list() //Non-vital components such as armor plating, ect.
 	var/list/vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
+	var/obj/item/vehicle_component/component_last_inspected
 
 	var/cargo_capacity = 0 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
 	var/vehicle_capacity = 0 //The capacity of the vehicle hold. Vehicles increase space taken by base_storage_cost(vehicle_size + 5)
@@ -25,7 +29,7 @@
 		contained_vehicle.contents += comp
 
 /datum/component_profile/proc/can_attach_vehicle(var/vehicle_size)
-	return can_put_cargo(vehicle_size + 5,1)//+5 to start at inventory size huge.(value of 16)
+	return can_put_cargo(vehicle_size,1)
 
 /datum/component_profile/proc/can_put_cargo(var/item_w_class,var/for_vehicle = 0)
 	var/used_capacity = cargo_capacity
@@ -33,16 +37,18 @@
 		used_capacity = vehicle_capacity
 		if(item_w_class > max_vehicle_size)
 			return 0
-	if(item_w_class == ITEM_SIZE_NO_CONTAINER)
+	if(item_w_class == ITEM_SIZE_NO_CONTAINER && !for_vehicle)
 		return 0
-	if(!cargo_allow_massive)
+	if(!cargo_allow_massive && !for_vehicle)
 		if((item_w_class == ITEM_SIZE_HUGE || item_w_class == ITEM_SIZE_GARGANTUAN))
 			return 0
-	var/new_used = get_cargo_used(for_vehicle) + base_storage_cost(item_w_class)
+	var/new_used = get_cargo_used(for_vehicle)
 	if(for_vehicle)
+		new_used += item_w_class
 		if(new_used > vehicle_capacity)
 			return 0
 	else
+		new_used = base_storage_cost(item_w_class)
 		if(new_used > used_capacity)
 			return 0
 	return 1
@@ -51,10 +57,15 @@
 	var/total_amount = 0
 	if(get_vehicle)
 		for(var/obj/vehicles/vehicle in current_cargo)
-			total_amount += base_storage_cost(vehicle.vehicle_size + 5)
+			total_amount += vehicle.vehicle_size
 	else
 		for(var/obj/item in current_cargo)
-			total_amount +=  base_storage_cost(item.w_class)
+			if(istype(item,/obj/vehicles))
+				continue
+			if(istype(item,/obj/structure/closet))
+				total_amount += base_storage_cost(ITEM_SIZE_GARGANTUAN)
+			else
+				total_amount +=  base_storage_cost(item.w_class)
 	return total_amount
 
 /datum/component_profile/proc/get_coverage_sum()
@@ -69,7 +80,7 @@
 	else if(remove)
 		contained_vehicle.contents -= object
 		current_cargo -= object
-		object.loc = pick(contained_vehicle.locs)
+		object.loc = contained_vehicle.pick_valid_exit_loc()
 		return object
 	else
 		var/obj/vehicles/vehicle = object
@@ -103,8 +114,8 @@
 	else if(prob(100 - max_comp_coverage))
 		comps_to_dam = vital_components
 	for(var/obj/item/vehicle_component/component in comps_to_dam)
-		var/comp_resistance = component.get_resistance_for("explosion")
-		component.damage_integrity((initial(component.integrity)/2 /(ex_severity)) * (1- comp_resistance/100),)
+		var/comp_resistance = component.get_resistance_for("bomb")
+		component.damage_integrity(400/ex_severity * (1- comp_resistance/100),)
 
 /datum/component_profile/proc/give_gunner_weapons(var/obj/vehicles/source_vehicle)
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)
@@ -116,14 +127,67 @@
 			continue
 		weapon = new weapon(source_vehicle)
 		gunner.put_in_hands(weapon)
+		source_vehicle.update_user_view(gunner,1)
+		spawn(1)
+			source_vehicle.update_user_view(gunner)
 
-/datum/component_profile/proc/gunner_fire_check(var/mob/user,var/obj/vehicles/source_vehicle)
+/datum/component_profile/proc/gunner_fire_check(var/mob/user,var/obj/vehicles/source_vehicle,var/obj/gun)
+	if(!(gun.type in gunner_weapons))
+		return 0
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)
 	if(user in gunners)
 		return 1
 	else
 		to_chat(user,"<span class = 'notice'>You need to be in the [pos_to_check] position to fire that!</span>")
 	return 0
+
+/datum/component_profile/proc/inspect_components(var/mob/user)
+	var/obj/item/vehicle_component/chosen = input(user, "Which component would you like to inspect?","Compoenent Inspection") in components + vital_components
+	if(isnull(chosen))
+		return
+	user.visible_message("<span class = 'notice'>[user] starts inspecting the damage to [contained_vehicle].</span>")
+	if(!do_after(user,COMPONENT_REPAIR_DELAY/5,contained_vehicle))
+		return
+	user.visible_message("<span class = 'notice'>[user] inspects the damage to [contained_vehicle]</span>")
+	component_last_inspected = chosen
+	var/tools_required = ""
+	for(var/typepath in chosen.repair_tools_typepaths)
+		tools_required += "[chosen.repair_tools_typepaths[typepath]] "
+	to_chat(user,"[chosen] integrity: [chosen.integrity]/[initial(chosen.integrity)]\n[chosen] repair tools required: [tools_required]")
+
+/datum/component_profile/proc/repair_inspected_with_sheet(var/obj/item/stack/I,var/mob/user)
+	if(isnull(component_last_inspected))
+		return
+	if(!component_last_inspected.requires_sheet_repair())
+		to_chat(user,"<span class = 'notice'>[contained_vehicle]'s [component_last_inspected] does not require any more repair. Finalise the repair with tools!</span>")
+		return
+	if(I.get_material_name() in component_last_inspected.repair_materials)
+		user.visible_message("<span class = 'notice'>[user] starts patching damage to [contained_vehicle]'s [component_last_inspected]</span>")
+		if(!do_after(user,COMPONENT_REPAIR_DELAY/5,contained_vehicle))
+			return
+		if(!I.use(1))
+			return
+		user.visible_message("<span class = 'notice'>[user] uses a sheet of [I.get_material_name()] to repair [contained_vehicle]'s [component_last_inspected]</span>")
+		component_last_inspected.material_sheet_repair()
+
+/datum/component_profile/proc/is_repair_tool(var/obj/item/I)
+	for(var/type in REPAIR_TOOLS_LIST)
+		if(istype(I,type))
+			return 1
+	return 0
+
+/datum/component_profile/proc/repair_inspected_with_tool(var/obj/item/I,var/mob/user)
+	if(isnull(component_last_inspected))
+		return
+	if(component_last_inspected.integrity_to_restore <= 0)
+		to_chat(user,"<span class = 'notice'>You need to repair the component with relevant repair materials first.</span>")
+		return
+	if(is_repair_tool(I))
+		user.visible_message("<span class = 'notice'>[user] starts repairing [contained_vehicle] with [I]</span>")
+		if(!do_after(user,COMPONENT_REPAIR_DELAY,contained_vehicle))
+			return
+		user.visible_message("<span class = 'notice'>[user] repairs [contained_vehicle] with [I]</span>")
+		component_last_inspected.repair_with_tool(I,user)
 
 //BASE VEHICLE COMPONENT DEFINE
 /obj/item/vehicle_component
@@ -132,7 +196,52 @@
 
 	var/integrity = 100
 	var/coverage = 10
-	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0,"explosion" = 0.0) //Functions as a percentage reduction of damage of the type taken.
+	var/list/resistances = list("brute"=0.0,"burn"=0.0,"emp"=0.0,"bomb" = 0.0) //Functions as a percentage reduction of damage of the type taken.
+
+	var/list/repair_materials = list("steel") //Material names go here. Vehicles can be repaired with any material in this list.
+	var/integrity_restored_per_sheet = BASE_INTEGRITY_RESTORE_PERSHEET
+	var/integrity_to_restore = 0 //The amount of integrity to restore once repair tools are applied.
+	var/repair_tool_amount = 3 //How many repair tools will be needed to repair this component. Can be any /obj/item.
+	var/list/repair_tools_typepaths = list()
+
+/obj/item/vehicle_component/proc/set_repair_tools_needed(var/set_null = 0)
+	if(set_null)
+		repair_tools_typepaths = list()
+		return
+	if(repair_tools_typepaths.len > 0)
+		return
+	for(var/i = 0, i < repair_tool_amount, i++)
+		var/list/tools_pickfrom = REPAIR_TOOLS_LIST - repair_tools_typepaths
+		var/picked_tool = pick(tools_pickfrom)
+		var/obj/temp = new picked_tool
+		repair_tools_typepaths[picked_tool] = "[temp.name]"
+		qdel(temp)
+
+/obj/item/vehicle_component/proc/finalise_repair()
+	var/new_integ = integrity + integrity_to_restore
+	if(new_integ >= initial(integrity))
+		integrity = initial(integrity)
+		set_repair_tools_needed(1)
+	else
+		integrity = new_integ
+		set_repair_tools_needed()
+
+/obj/item/vehicle_component/proc/requires_sheet_repair()
+	var/integ_lost = initial(integrity) - integrity
+	if(integ_lost <= 0)
+		return 0
+	return 1
+
+/obj/item/vehicle_component/proc/material_sheet_repair()
+	integrity_to_restore += integrity_restored_per_sheet
+
+/obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool,var/mob/user)
+	if(tool.type in repair_tools_typepaths)
+		repair_tools_typepaths -= tool.type
+
+	if(repair_tools_typepaths.len == 0)
+		finalise_repair()
+		user.visible_message("<span class = 'notice'>[user] finalises the repairs on [src]</span>")
 
 /obj/item/vehicle_component/proc/get_resistance_for(var/damage_type)
 	var/resistance = resistances[damage_type]
@@ -144,8 +253,16 @@
 /obj/item/vehicle_component/proc/full_integ_loss() //This is called when the vehicle loses it's integrity entirely.
 
 /obj/item/vehicle_component/proc/damage_integrity(var/adjust_by = 0)
+	set_repair_tools_needed()
 	var/new_integ = integrity - adjust_by
-	if(new_integ > initial(integrity))
+	if(integrity == 0 && adjust_by >0) //This stops the on-death explosion from constantly looping and as such crashing the server.
+		new_integ = integrity_to_restore - adjust_by
+		if(new_integ < 0)
+			integrity_to_restore = 0
+		else
+			integrity = new_integ
+		return
+	else if(new_integ > initial(integrity))
 		integrity = initial(integrity)
 	else if(new_integ < 0)
 		integrity = 0
@@ -154,6 +271,7 @@
 		integrity = new_integ
 
 /obj/item/vehicle_component/health_manager //Essentially a way for vehicles to just use basic "health" instead of the component system.
+	name = "Vital components"
 	integrity = 200
 	coverage = 10000
 
@@ -161,5 +279,14 @@
 	var/obj/vehicles/vehicle_contain = loc
 	if(!istype(loc))
 		return
+	if(vehicle_contain.movement_destroyed)
+		return
 	vehicle_contain.on_death()
-	qdel(src)
+
+/obj/item/vehicle_component/health_manager/finalise_repair()
+	. = ..()
+	var/obj/vehicles/vehicle_contain = loc
+	if(!istype(loc))
+		return
+	vehicle_contain.movement_destroyed = 0
+	vehicle_contain.icon_state = initial(vehicle_contain.icon_state)

@@ -46,7 +46,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	species_restricted = list("Sangheili")
 	body_parts_covered = HEAD | FACE
 	item_flags = THICKMATERIAL
-	armor = list(melee = 40,bullet = 20,laser = 40,energy = 5,bomb = 25,bio = 0,rad = 0) //Slightly higher bullet resist than Spartan helmets. Lower laser, energy and melee.
+	armor = list(melee = 40,bullet = 20,laser = 40,energy = 5,bomb = 30,bio = 0,rad = 0) //Slightly higher bullet resist than Spartan helmets. Lower laser, energy and melee.
 
 /obj/item/clothing/suit/armor/special/combatharness
 	name = "Sangheili Combat Harness"
@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
-	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 60, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
+	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 55, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
 	armor_thickness_modifiers = list()
 	allowed = list(/obj/item/weapon/melee/energy/elite_sword, /obj/item/weapon/grenade/plasma, /obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle)
 
@@ -70,7 +70,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	species_restricted = list("Sangheili")
 	item_flags = NOSLIP // Because marines get it.
 	body_parts_covered = LEGS
-	armor = list(melee = 40, bullet = 60, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 60, laser = 5, energy = 5, bomb = 45, bio = 0, rad = 0)
 
 /obj/item/clothing/gloves/thick/sangheili
 	name = "Sangheili Combat Gauntlets"
@@ -82,7 +82,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS
-	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 20, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 30, bio = 0, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
@@ -482,7 +482,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 //Organ Defines + misc//
 
-/obj/item/organ/heart_secondary
+/obj/item/organ/internal/heart_secondary
 	name = "Secondary Heart"
 	parent_organ = "chest"
 	organ_tag = "second heart"
@@ -490,7 +490,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	min_broken_damage = 30
 	var/useheart = 0
 
-/obj/item/organ/heart_secondary/process()
+/obj/item/organ/internal/heart_secondary/process()
 	if(is_broken())
 		return
 	var/obj/item/organ/internal/heart = owner.internal_organs_by_name["heart"]
@@ -506,7 +506,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
 			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
-			w.damage -= pick(0,0,1)
+			w.damage -= 0.05
 
 /obj/effect/armoursets/Initialize()
 	..()

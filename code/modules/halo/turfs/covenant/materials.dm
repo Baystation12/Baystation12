@@ -23,12 +23,16 @@
 
 	integrity = 600
 
-	explosion_resistance = 50
+	explosion_resistance = 20
 
 	stack_type = /obj/item/stack/material/nanolaminate
 
 	hardness = 80
 	weight = 25
+
+/material/nanolaminate/generate_recipes()
+	..()
+	recipes += new/datum/stack_recipe("nanolaminate floor tile", /obj/item/stack/tile/covenant, 1, 4, 20)
 
 /obj/item/stack/material/nanolaminate
 	name = "nanolaminate"

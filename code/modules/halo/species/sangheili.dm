@@ -21,13 +21,13 @@
 	pain_mod = 0.75 //Pain has quarter an effect on them
 	slowdown = -0.5
 	pixel_offset_x = -8
-	item_icon_offsets = list(0,2)
+	item_icon_offsets = list(16,0)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	default_faction = "Covenant"
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
-	"second heart" =	 /obj/item/organ/heart_secondary,
+	"second heart" =	 /obj/item/organ/internal/heart_secondary,
 	BP_LUNGS =    /obj/item/organ/internal/lungs,
 	BP_LIVER =    /obj/item/organ/internal/liver,
 	BP_KIDNEYS =  /obj/item/organ/internal/kidneys,

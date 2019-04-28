@@ -2,8 +2,8 @@
 	name = "medical pack"
 	singular_name = "medical pack"
 	icon = 'icons/obj/items.dmi'
-	amount = 5
-	max_amount = 5
+	amount = 20
+	max_amount = 40
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 20
@@ -144,6 +144,7 @@
 	desc = "An advanced trauma kit for severe injuries."
 	icon_state = "traumakit"
 	heal_brute = 0
+	amount = 10
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 12
 
@@ -196,6 +197,7 @@
 	desc = "An advanced treatment kit for severe burns."
 	icon_state = "burnkit"
 	heal_burn = 0
+	amount = 10
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 7
 

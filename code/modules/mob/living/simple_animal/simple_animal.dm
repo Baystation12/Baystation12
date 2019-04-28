@@ -1,3 +1,4 @@
+#define SIMPLE_ANIMAL_SCREAM_COOLDOWN 1 SECOND
 /mob/living/simple_animal
 	name = "animal"
 	icon = 'icons/mob/animal.dmi'
@@ -59,6 +60,9 @@
 	//Null rod stuff
 	var/supernatural = 0
 	var/purge = 0
+
+	var/list/pain_scream_sounds = list()
+	var/list/death_sounds = list()
 
 /mob/living/simple_animal/Life()
 	..()
@@ -161,11 +165,25 @@
 /mob/living/simple_animal/proc/audible_emote(var/act_desc)
 	custom_emote(2, act_desc)
 
+/mob/living/simple_animal/proc/do_pain_scream()
+	if(health <= 0)
+		return
+	if(world.time < next_scream_at)
+		return
+	if(isnull(pain_scream_sounds) || pain_scream_sounds.len == 0)
+		return
+
+	var/scream_sound = pick(pain_scream_sounds)
+
+	playsound(loc, scream_sound,50,0,7)
+	next_scream_at = world.time + SIMPLE_ANIMAL_SCREAM_COOLDOWN
+
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
 
 	adjustBruteLoss(Proj.damage)
+	do_pain_scream()
 	return 0
 
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
@@ -186,6 +204,7 @@
 			adjustBruteLoss(harm_intent_damage)
 			M.visible_message("<span class='warning'>[M] [response_harm] \the [src]</span>")
 			M.do_attack_animation(src)
+			do_pain_scream()
 
 	return
 
@@ -232,8 +251,7 @@
 		damage *= 2
 		purge = 3
 	adjustBruteLoss(damage)
-
-	return 0
+	do_pain_scream()
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = ..() //Incase I need to add stuff other than "speed" later
@@ -257,6 +275,8 @@
 	density = 0
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
+	if(death_sounds.len > 0)
+		playsound(loc, pick(death_sounds),75,0,7)
 	return ..(gibbed,deathmessage,show_dead_message)
 
 /mob/living/simple_animal/ex_act(severity)

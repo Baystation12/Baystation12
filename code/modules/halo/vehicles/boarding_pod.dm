@@ -73,3 +73,32 @@
 	bound_width = 96
 	bound_height = 64
 	dir = 8
+
+/obj/vehicles/drop_pod/overmap/boarding_pod/covenant
+	name = "Boarding Pod"
+	desc = "A modified escape pod, with extra armour plating to enable survival on impact with other spacefaring vessels."
+	icon = 'code/modules/halo/vehicles/covenant_pods.dmi'
+	icon_state = "cov_boarding"
+
+	bound_width = 64
+	bound_height = 96
+
+/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/north
+	bound_width = 64
+	bound_height = 96
+	dir = 1
+
+/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/south
+	bound_width = 64
+	bound_height = 96
+	dir = 2
+
+/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/east
+	bound_width = 96
+	bound_height = 64
+	dir = 4
+
+/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/west
+	bound_width = 96
+	bound_height = 64
+	dir = 8
