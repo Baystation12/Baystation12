@@ -2104,21 +2104,21 @@
 
 /datum/reagent/drink/tea/icetea
 	name = "Iced Black Tea"
-	description = "It's the tea you know and love, but now it's cold."
+	description = "It's the black tea you know and love, but now it's cold."
 	taste_description = "cold black tea"
 	adj_temp = -5
 
 	glass_name = "iced black tea"
-	glass_desc = "It's the tea you know and love, but now it's cold."
+	glass_desc = "It's the black tea you know and love, but now it's cold."
 	glass_special = list(DRINK_ICE)
 
 /datum/reagent/drink/tea/icetea/sweet
 	name = "Sweet Black Tea"
-	description = "It's the tea you know and love, but now it's cold. And sweet."
+	description = "It's the black tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet tea"
 
 	glass_name = "sweet black tea"
-	glass_desc = "It's the tea you know and love, but now it's cold. And sweet."
+	glass_desc = "It's the black tea you know and love, but now it's cold. And sweet."
 
 /datum/reagent/drink/tea/barongrey
 	name = "Baron Grey Tea"
@@ -2131,21 +2131,30 @@
 //green tea
 /datum/reagent/drink/tea/green
 	name = "Green Tea"
+	description = "Subtle green tea, it has antioxidants, it's good for you!"
 	taste_description = "subtle green tea"
 	color = "#b4cd94"
+	
 	glass_name = "green tea"
+	glass_desc = "Subtle green tea, it has antioxidants, it's good for you!"
 
 /datum/reagent/drink/tea/icetea/green
 	name = "Iced Green Tea"
+	description = "It's the green tea you know and love, but now it's cold."
 	taste_description = "cold green tea"
 	color = "#b4cd94"
+	
 	glass_name = "iced green tea"
-
+	glass_desc = "It's the green tea you know and love, but now it's cold."
+	
 /datum/reagent/drink/tea/icetea/green/sweet
 	name = "Sweet Green Tea"
+	description = "It's the green tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet green tea"
 	color = "#b4cd94"
+	
 	glass_name = "sweet green tea"
+	glass_desc = "It's the green tea you know and love, but now it's cold. And sweet."
 
 /datum/reagent/drink/tea/icetea/green/sweet/mint
 	name = "Maghrebi Tea"
