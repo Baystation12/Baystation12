@@ -26,7 +26,7 @@
 
 /obj/item/clothing/under/solgov/pt/fleet
 	name = "fleet pt uniform"
-	desc = "A pair of black shorts and two tank tops, seems impractical. Looks good though."
+	desc = "A tight-fitting navy blue shirt paired with black shorts. For when you need to 'get physical'."
 	icon_state = "fleetpt"
 	worn_state = "fleetpt"
 
