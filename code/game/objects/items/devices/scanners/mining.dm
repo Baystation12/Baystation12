@@ -12,6 +12,8 @@
 	use_delay = 50
 	var/survey_data = 0
 
+	scan_sound = 'sound/effects/ping.ogg'
+
 /obj/item/device/scanner/mining/examine(mob/user)
 	..()
 	to_chat(user,"A tiny indicator on the [src] shows it holds [survey_data] good explorer points.")

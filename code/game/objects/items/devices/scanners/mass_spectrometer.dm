@@ -8,6 +8,7 @@
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	window_width = 550
 	window_height = 300
+	scan_sound = 'sound/effects/scanbeep.ogg'
 	var/details = 0
 
 /obj/item/device/scanner/spectrometer/Initialize()

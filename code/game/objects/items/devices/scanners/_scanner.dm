@@ -15,6 +15,7 @@
 	var/window_height = 600
 	
 	var/use_delay
+	var/scan_sound
 	
 /obj/item/device/scanner/attack_self(mob/user)
 	show_results(user)
@@ -41,6 +42,8 @@
 		return
 	if(is_valid_scan_target(A) && A.simulated)
 		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
+		if(scan_sound)
+			playsound(src, scan_sound, 30)
 		if(use_delay && !do_after(user, use_delay, A))
 			to_chat(user, "You stop scanning \the [A] with \the [src].")
 			return
