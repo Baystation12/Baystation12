@@ -1,0 +1,4 @@
+author: "RyanSmake"
+delete-after: True
+changes: 
+  - bugfix: "The Torch is now a valid target for the BSA (for BSAs not on the Torch)."
