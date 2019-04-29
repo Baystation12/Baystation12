@@ -10,7 +10,7 @@ var/global/datum/loot_distributor/loot_distributor = new
 /datum/loot_distributor/proc/get_loot_for_type(var/type_name)
 	var/list/loot_pickfrom = list()
 	loot_pickfrom = loot_list[type_name]
-	if(isnull(loot_pickfrom) || loot_pickfrom.len == 0)
+	if(loot_pickfrom.len == 0)
 		return
 	var/picked = pick(loot_pickfrom)
 	loot_list[type_name] = loot_pickfrom - picked
