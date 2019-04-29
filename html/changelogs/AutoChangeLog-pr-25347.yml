@@ -1,0 +1,4 @@
+author: "Higgin"
+delete-after: True
+changes: 
+  - tweak: "Tactical armor plates now offer extra resistance against brute and bullet damage over regular medium plates."
