@@ -24,15 +24,19 @@
 /obj/item/mech_component/manipulators/powerloader
 	name = "exosuit arms"
 	exosuit_desc_string = "heavy-duty industrial lifters"
+	max_damage = 70
 
 /obj/item/mech_component/propulsion/powerloader
 	name = "exosuit legs"
 	exosuit_desc_string = "reinforced hydraulic legs"
+	max_damage = 70
+	move_delay = 4
 
 /obj/item/mech_component/sensors/powerloader
 	name = "exosuit sensors"
 	gender = PLURAL
 	exosuit_desc_string = "simple collision detection sensors"
+	max_damage = 100
 
 /mob/living/exosuit/premade/powerloader/firefighter
 	name = "firefighter exosuit"
@@ -47,6 +51,7 @@
 	hatch_descriptor = "roll cage"
 	pilot_coverage = 40
 	exosuit_desc_string = "an industrial rollcage"
+	max_damage = 100
 
 /obj/item/mech_component/chassis/powerloader/New()
 	pilot_positions = list(
