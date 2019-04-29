@@ -71,7 +71,7 @@
 	usable = 1
 	selectable = 0
 	use_power_cost = 200
-	device_type = /obj/item/weapon/mining_scanner
+	device_type = /obj/item/device/scanner/mining
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/rcd

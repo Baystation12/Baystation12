@@ -75,7 +75,7 @@
 					/obj/item/device/flashlight/lantern,
 					/obj/item/weapon/shovel,
 					/obj/item/weapon/pickaxe,
-					/obj/item/weapon/mining_scanner,
+					/obj/item/device/scanner/mining,
 					/obj/item/clothing/glasses/material,
 					/obj/item/clothing/glasses/meson)
 	cost = 15
