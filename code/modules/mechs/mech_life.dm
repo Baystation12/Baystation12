@@ -91,5 +91,9 @@
 	return
 
 /mob/living/exosuit/handle_vision()
-	if(head && head.sight_flags)
-		sight = head.sight_flags
+	if(head)
+		sight = head.get_sight()
+		see_invisible = head.get_invisible()
+	if(body.pilot_coverage < 100 || body.transparent_cabin)
+		sight &= ~BLIND
+

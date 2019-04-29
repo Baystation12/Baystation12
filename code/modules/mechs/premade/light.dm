@@ -34,7 +34,7 @@
 	exosuit_desc_string = "aerodynamic electromechanic legs"
 	icon_state = "light_legs"
 	move_delay = 2
-	max_damage = 30
+	max_damage = 40
 
 /obj/item/mech_component/sensors/light
 	name = "light sensors"
@@ -42,6 +42,8 @@
 	exosuit_desc_string = "minimalistic sensors"
 	icon_state = "light_head"
 	max_damage = 30
+	vision_flags = SEE_TURFS
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
 
 /obj/item/mech_component/sensors/light/prebuild()
 	..()

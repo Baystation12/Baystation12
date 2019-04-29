@@ -3,11 +3,13 @@
 	icon_state = "loader_head"
 	gender = NEUTER
 
-	var/sight_flags = 0
+	var/vision_flags = 0
+	var/see_invisible = 0
 	var/obj/item/robot_parts/robot_component/radio/radio
 	var/obj/item/robot_parts/robot_component/camera
 	var/obj/item/mech_component/control_module/software
 	has_hardpoints = list(HARDPOINT_HEAD)
+	var/active_sensors = 0
 
 /obj/item/mech_component/sensors/Destroy()
 	QDEL_NULL(camera)
@@ -31,6 +33,23 @@
 	radio = locate() in src
 	camera = locate() in src
 	software = locate() in src
+
+/obj/item/mech_component/sensors/proc/get_sight()
+	var/flags = 0
+	if(total_damage >= 0.8 * max_damage)
+		flags |= BLIND
+	else if(active_sensors)
+		flags |= vision_flags
+
+	return flags
+
+/obj/item/mech_component/sensors/proc/get_invisible()
+	var/invisible = 0
+	if((total_damage <= 0.8 * max_damage) && active_sensors)
+		invisible = see_invisible
+	return invisible
+
+
 
 /obj/item/mech_component/sensors/ready_to_install()
 	return (radio && camera)

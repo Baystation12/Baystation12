@@ -27,7 +27,8 @@
 			/obj/screen/movable/exosuit/toggle/hatch,
 			/obj/screen/movable/exosuit/toggle/hatch_open,
 			/obj/screen/movable/exosuit/radio,
-			/obj/screen/movable/exosuit/rename
+			/obj/screen/movable/exosuit/rename,
+			/obj/screen/movable/exosuit/toggle/camera
 			)
 		i = 1
 		var/pos = 7

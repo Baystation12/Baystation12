@@ -213,4 +213,20 @@
 	name = "exosuit integrity"
 	icon_state = "health"
 
+//Controls if cameras set the vision flags
+/obj/screen/movable/exosuit/toggle/camera
+	name = "toggle camera matrix"
+	icon_state = "camera"
+
+/obj/screen/movable/exosuit/toggle/camera/toggled()
+	if(!owner.head)
+		to_chat(usr, SPAN_WARNING("I/O Error: Camera systems not found."))
+		return
+	if(!owner.head.vision_flags)
+		to_chat(usr,  SPAN_WARNING("Alternative sensor configurations not found. Contact manufacturer for more details."))
+		return
+	owner.head.active_sensors = ..()
+	to_chat(usr, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
+	
+
 #undef BAR_CAP

@@ -37,8 +37,10 @@
 /obj/item/mech_component/sensors/combat
 	name = "combat sensors"
 	gender = PLURAL
-	exosuit_desc_string = "high-resolution combat sensors"
+	exosuit_desc_string = "high-resolution thermal sensors"
 	icon_state = "combat_head"
+	vision_flags = SEE_MOBS
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
 
 /obj/item/mech_component/sensors/combat/prebuild()
 	..()

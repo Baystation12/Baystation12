@@ -27,7 +27,8 @@
 		weapon_sharp = 0
 		weapon_edge = 0
 	var/damflags = (weapon_sharp ? DAM_SHARP : 0) |(weapon_edge ? DAM_EDGE : 0)
-	apply_damage(I.force, I.damtype, damage_flags = damflags, used_weapon=I)
+
+	apply_damage(damage = I.force, damagetype= I.damtype, def_zone = def_zone, damage_flags = damflags)
 
 	return // Return null so that we don't apply item effects like stun.
 
@@ -41,24 +42,57 @@
 	maxHealth = body.mech_health
 	health = maxHealth-(getFireLoss()+getBruteLoss())
 
-/mob/living/exosuit/adjustFireLoss(var/amount)
-	var/obj/item/mech_component/MC = pick(list(arms, legs, body, head))
+/mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
 	if(MC)
 		MC.take_burn_damage(amount)
 		MC.update_health()
 
-/mob/living/exosuit/adjustBruteLoss(var/amount)
-	var/obj/item/mech_component/MC = pick(list(arms, legs, body, head))
+/mob/living/exosuit/adjustBruteLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
 	if(MC)
 		MC.take_brute_damage(amount)
 		MC.update_health()
 
+/mob/living/exosuit/proc/zoneToComponent(var/zone)
+	switch(zone)
+		if(BP_EYES , BP_HEAD)
+			return head
+		if(BP_L_ARM , BP_R_ARM)
+			return arms
+		if(BP_L_LEG , BP_R_LEG)
+			return legs
+		else
+			return body
+
+
 /mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/armor_pen, var/silent = FALSE)
-	..()
+	if(!damage)
+		return 0
+
+	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, silent)
+	damage = after_armor[1]
+	damagetype = after_armor[2]
+
+	if(!damage)
+		return 0
+	
+	var/target = zoneToComponent(def_zone)
+	//Only 3 types of damage concern mechs and vehicles
+	switch(damagetype)
+		if(BRUTE)
+			adjustBruteLoss(damage, target)
+		if(BURN)
+			adjustFireLoss(damage, target)
+		if(IRRADIATE)
+			radiation += damage
+
 	if((damagetype == BRUTE || damagetype == BURN) && prob(25+(damage*2)))
 		sparks.set_up(3,0,src)
 		sparks.start()
 	updatehealth()
+
+	return 1
+
+
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0
