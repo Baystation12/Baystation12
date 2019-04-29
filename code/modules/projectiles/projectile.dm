@@ -75,14 +75,6 @@
 	else animate_movement = NO_STEPS
 	. = ..()
 
-/obj/item/projectile/Destroy()
-	return ..()
-
-/obj/item/projectile/forceMove()
-	..()
-	if(istype(loc, /turf/space/) && istype(loc.loc, /area/space))
-		qdel(src)
-
 /obj/item/projectile/damage_flags()
 	return damage_flags
 
