@@ -4870,7 +4870,7 @@
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space,
 /obj/item/clothing/mask/breath,
-/obj/item/clothing/head/helmet/space,
+/obj/item/clothing/head/helmet/space/fishbowl,
 /obj/item/weapon/tank/oxygen,
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/dark/monotile,

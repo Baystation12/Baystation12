@@ -96,8 +96,8 @@
 //Orange emergency space suit
 /obj/item/clothing/head/helmet/space/emergency
 	name = "Emergency Space Helmet"
-	icon_state = "emergencyhelm"
-	item_state = "emergencyhelm"
+	icon_state = "spacebowl"
+	light_overlay = "yellow_light"
 	desc = "A simple helmet with a built in light, smells like mothballs."
 	flash_protection = FLASH_PROTECTION_NONE
 
@@ -109,3 +109,37 @@
 /obj/item/clothing/suit/space/emergency/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 4
+
+/obj/item/clothing/head/helmet/space/fishbowl
+	name = "spacesuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. The tinting can be toggled for flash protection at the cost of worse visibility."
+	icon_state = "spacebowl"
+	light_overlay = "yellow_light"
+	var/tinted = FALSE
+
+/obj/item/clothing/head/helmet/space/fishbowl/Initialize()
+	. = ..()
+	update_tint()
+
+/obj/item/clothing/head/helmet/space/fishbowl/proc/update_tint()
+	if(tinted)
+		icon_state = "spacebowl_dark"
+		flash_protection = FLASH_PROTECTION_MAJOR
+		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+		tint = TINT_MODERATE
+	else
+		icon_state = "spacebowl"
+		flash_protection = FLASH_PROTECTION_NONE
+		flags_inv = HIDEEARS|BLOCKHAIR
+		tint = TINT_NONE
+	update_icon()
+	update_clothing_icon()
+
+/obj/item/clothing/head/helmet/space/fishbowl/verb/toggle_tint()
+	set name = "Toggle Helmet Tint"
+	set category = "Object"
+	set src in usr
+
+	tinted = !tinted
+	to_chat(usr, "You toggle [src]'s visor tint.")
+	update_tint()
