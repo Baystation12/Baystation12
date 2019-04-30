@@ -1,0 +1,4 @@
+author: "ChaosAlpha"
+delete-after: True
+changes: 
+  - bugfix: "Fix robots click-dragging things on catwalks."
