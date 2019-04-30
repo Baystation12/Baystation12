@@ -62,6 +62,10 @@
 		do_pull_click(user, src)
 	..()
 
+/obj/structure/catwalk/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
+
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
 	if(isWelder(C))
 		var/obj/item/weapon/weldingtool/WT = C
