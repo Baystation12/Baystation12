@@ -84,6 +84,8 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 /datum/admins/proc/grant_rights()
 	if (needs_grant())
 		GLOB.granted_admins |= ckey
+		if (ckey in GLOB.ckey_directory)
+			GLOB.admins |= GLOB.ckey_directory[ckey]
 		log_and_message_admins("has granted [rank] rights to [ckey]")
 
 /client/proc/deadmin()

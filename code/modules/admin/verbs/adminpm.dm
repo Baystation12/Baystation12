@@ -41,19 +41,21 @@
 		to_chat(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")
 		return
 
+	var/isstaff = check_rights(0, 0)
+	var/targetstaff = check_rights(0, 0, C)
+
 	if(!istype(C,/client))
-		if(holder)	to_chat(src, "<span class='warning'>Error: Private-Message: Client not found.</span>")
+		if(isstaff)	to_chat(src, "<span class='warning'>Error: Private-Message: Client not found.</span>")
 		else		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so please be patient!</span>")
 		return
 
 	var/recieve_pm_type = "Player"
-	if(holder)
+	if(isstaff)
 		//mod PMs are maroon
 		//PMs sent from admins and mods display their rank
-		if(holder)
-			recieve_pm_type = holder.rank
+		recieve_pm_type = holder.rank
 
-	else if(C && !C.holder)
+	else if(!targetstaff)
 		to_chat(src, "<span class='warning'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>")
 		return
 
@@ -61,11 +63,11 @@
 
 	//get message text, limit it's length.and clean/escape html
 	if(!msg)
-		msg = input(src,"Message:", "Private message to [key_name(C, 0, holder ? 1 : 0)]") as text|null
+		msg = input(src,"Message:", "Private message to [key_name(C, 0, isstaff ? 1 : 0)]") as text|null
 
 		if(!msg)	return
 		if(!C)
-			if(holder)	to_chat(src, "<span class='warning'>Error: Private-Message: Client not found.</span>")
+			if(isstaff)	to_chat(src, "<span class='warning'>Error: Private-Message: Client not found.</span>")
 			else		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!</span>")
 			return
 
@@ -77,16 +79,16 @@
 	// searches for an open ticket, in case an outdated link was clicked
 	// I'm paranoid about the problems that could be caused by accidentally finding the wrong ticket, which is why this is strict
 	if(isnull(ticket))
-		if(holder)
+		if(isstaff)
 			ticket = get_open_ticket_by_client(receiver_lite) // it's more likely an admin clicked a different PM link, so check admin -> player with ticket first
-			if(isnull(ticket) && C.holder)
+			if(isnull(ticket) && targetstaff)
 				ticket = get_open_ticket_by_client(sender_lite) // if still no dice, try an admin with ticket -> admin
 		else
 			ticket = get_open_ticket_by_client(sender_lite) // lastly, check player with ticket -> admin
 
 
 	if(isnull(ticket)) // finally, accept that no ticket exists
-		if(holder && sender_lite.ckey != receiver_lite.ckey)
+		if(isstaff && sender_lite.ckey != receiver_lite.ckey)
 			ticket = new /datum/ticket(receiver_lite)
 			ticket.take(sender_lite)
 		else
@@ -97,13 +99,13 @@
 		return
 
 	// if the sender is an admin and they're not assigned to the ticket, ask them if they want to take/join it, unless the admin is responding to their own ticket
-	if(holder && !(sender_lite.ckey in ticket.assigned_admin_ckeys()))
+	if(isstaff && !(sender_lite.ckey in ticket.assigned_admin_ckeys()))
 		if(sender_lite.ckey != ticket.owner.ckey && !ticket.take(sender_lite))
 			return
 
 	var/recieve_message
 
-	if(holder && !C.holder)
+	if(isstaff && !targetstaff)
 		recieve_message = "<span class='pm'><span class='howto'><b>-- Click the [recieve_pm_type]'s name to reply --</b></span></span>\n"
 		if(C.adminhelped)
 			to_chat(C, recieve_message)
@@ -122,8 +124,8 @@
 						adminhelp(reply)													//sender has left, adminhelp instead
 				return
 
-	var/sender_message = "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>"
-	if(holder)
+	var/sender_message = "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, isstaff ? 1 : 0, isstaff ? 1 : 0, 1)]</span>"
+	if(isstaff)
 		sender_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
 		sender_message += ": <span class='message'>[generate_ahelp_key_words(mob, msg)]</span>"
 	else
@@ -131,8 +133,8 @@
 	sender_message += "</span></span>"
 	to_chat(src, sender_message)
 
-	var/receiver_message = "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>"
-	if(C.holder)
+	var/receiver_message = "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, targetstaff ? 1 : 0, targetstaff ? 1 : 0, 1)]</span>"
+	if(targetstaff)
 		receiver_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
 		receiver_message += ": <span class='message'>[generate_ahelp_key_words(C.mob, msg)]</span>"
 	else
@@ -156,7 +158,7 @@
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
-		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD))
+		if(X.key != key && X.key != C.key && (check_rights(R_INVESTIGATE, 0, X)))
 			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0, ticket)]</span> to <span class='name'>[key_name(C, X, 0, ticket)]</span> (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message'>[msg]</span></span></span>")
 
 /client/proc/cmd_admin_irc_pm(sender)
@@ -183,5 +185,5 @@
 	for(var/client/X in GLOB.admins)
 		if(X == src)
 			continue
-		if(X.holder.rights & R_ADMIN|R_MOD)
+		if(check_rights(R_INVESTIGATE, 0, X))
 			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>[sender]</span>: <span class='message'>[msg]</span></span></span>")

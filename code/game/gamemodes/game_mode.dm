@@ -538,7 +538,7 @@ proc/display_roundstart_logout_report()
 	msg += "</span>" // close the span from right at the top
 
 	for(var/mob/M in SSmobs.mob_list)
-		if(M.client && M.client.holder)
+		if(check_rights(R_INVESTIGATE, 0, M))
 			to_chat(M, msg)
 
 /proc/show_objectives(var/datum/mind/player)

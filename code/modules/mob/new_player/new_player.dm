@@ -99,7 +99,9 @@
 			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
 			return
 
-		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
+		var/isstaff = check_rights(0, 0)
+
+		if(!config.respawn_delay || isstaff || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
 			var/mob/observer/ghost/observer = new()
 
@@ -117,7 +119,7 @@
 				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
-			if(isnull(client.holder))
+			if(!isstaff)
 				announce_ghost_joinleave(src)
 
 			var/mob/living/carbon/human/dummy/mannequin = new()
@@ -129,7 +131,7 @@
 				client.prefs.real_name = random_name(client.prefs.gender)
 			observer.real_name = client.prefs.real_name
 			observer.SetName(observer.real_name)
-			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
+			if(!isstaff && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
 				observer.verbs -= /mob/observer/ghost/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 			observer.key = key
 			qdel(src)

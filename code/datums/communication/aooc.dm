@@ -12,7 +12,7 @@
 	if(!.)
 		return
 
-	if(!C.holder)
+	if(!check_rights(R_INVESTIGATE, 0, C))
 		if(isghost(C.mob))
 			to_chat(src, "<span class='warning'>You cannot use [name] while ghosting/observing!</span>")
 			return FALSE
@@ -22,9 +22,11 @@
 
 /decl/communication_channel/aooc/do_communicate(var/client/C, var/message)
 	var/datum/admins/holder = C.holder
+	if (!check_rights(R_INVESTIGATE, 0, C))
+		holder = null
 
 	for(var/client/target in GLOB.clients)
-		if(target.holder)
+		if(check_rights(R_INVESTIGATE, 0, target))
 			receive_communication(C, target, "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", target)] <EM>[get_options_bar(C, 0, 1, 1)]:</EM> <span class='message'>[message]</span></span></span>")
 		else if(target.mob && target.mob.mind && target.mob.mind.special_role)
 			var/display_name = C.key

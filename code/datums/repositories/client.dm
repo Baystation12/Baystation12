@@ -51,7 +51,7 @@ var/repository/client/client_repository = new()
 
 /datum/client_lite/proc/rank2text()
 	var/client/C = client_by_ckey(ckey)
-	if(!C || (C && !C.holder))
+	if(check_rights(0, 0, C))
 		return
 	return " \[[C.holder.rank]\]"
 

@@ -119,7 +119,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/admin_number_afk = 0
 
 	for(var/client/X in GLOB.admins)
-		if((R_ADMIN|R_MOD) & X.holder.rights)
+		if(check_rights(R_INVESTIGATE, 0, X))
 			if(X.is_afk())
 				admin_number_afk++
 			if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
@@ -136,4 +136,3 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	SSstatistics.add_field_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
-

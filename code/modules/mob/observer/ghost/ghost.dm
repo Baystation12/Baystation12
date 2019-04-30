@@ -146,7 +146,7 @@ Works together with spawning an observer, noted above.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.timeofdeath = src.stat == DEAD ? src.timeofdeath : world.time
 		ghost.key = key
-		if(ghost.client && !ghost.client.holder && !config.antag_hud_allowed)		// For new ghosts we remove the verb from even showing up if it's not allowed.
+		if(ghost.client && !check_rights(0, 0, ghost) && !config.antag_hud_allowed)		// For new ghosts we remove the verb from even showing up if it's not allowed.
 			ghost.verbs -= /mob/observer/ghost/verb/toggle_antagHUD	// Poor guys, don't know what they are missing!
 		return ghost
 
@@ -162,7 +162,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		announce_ghost_joinleave(ghostize(1))
 	else
 		var/response
-		if(src.client && src.client.holder)
+		if(src.client && check_rights(R_INVESTIGATE, 0))
 			response = alert(src, "You have the ability to Admin-Ghost. The regular Ghost verb will announce your presence to dead chat. Both variants will allow you to return to your body using 'aghost'.\n\nWhat do you wish to do?", "Are you sure you want to ghost?", "Ghost", "Admin Ghost", "Stay in body")
 			if(response == "Admin Ghost")
 				if(!src.client)
@@ -229,18 +229,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(!client)
 		return
-	if(!config.antag_hud_allowed && !client.holder)
+	var/isstaff = check_rights(0, 0)
+	if(!config.antag_hud_allowed && !isstaff)
 		to_chat(src, SPAN_WARNING("Admins have disabled this for this round"))
 		return
 	var/mob/observer/ghost/M = src
 	if(M.client.is_banned(BAN_ANTAGHUD))
 		to_chat(src, SPAN_WARNING("You have been banned from using this feature"))
 		return
-	if(config.antag_hud_restricted && !M.has_enabled_antagHUD && !client.holder)
+	if(config.antag_hud_restricted && !M.has_enabled_antagHUD && !isstaff)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
 		if(response == "No") return
 		M.can_reenter_corpse = 0
-	if(!M.has_enabled_antagHUD && !client.holder)
+	if(!M.has_enabled_antagHUD && !isstaff)
 		M.has_enabled_antagHUD = 1
 	if(M.antagHUD)
 		M.antagHUD = 0
@@ -519,7 +520,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return 0
 
 	var/timedifference = world.time - timeofdeath
-	if(!client.holder && respawn_time && timeofdeath && timedifference < respawn_time MINUTES)
+	if(!check_rights(0, 0) && respawn_time && timeofdeath && timedifference < respawn_time MINUTES)
 		var/timedifference_text = time2text(respawn_time MINUTES - timedifference,"mm:ss")
 		to_chat(src, "<span class='warning'>You must have been dead for [respawn_time] minute\s to respawn. You have [timedifference_text] left.</span>")
 		return 0

@@ -12,7 +12,7 @@
 	if(!.)
 		return
 
-	if(!C.holder)
+	if(!check_rights(0, 0, C))
 		if(!config.dooc_allowed && (C.mob.stat == DEAD))
 			to_chat(C, "<span class='danger'>[name] for dead mobs has been turned off.</span>")
 			return FALSE
@@ -26,7 +26,7 @@
 	var/is_stealthed = C.is_stealthed()
 
 	var/ooc_style = "everyone"
-	if(holder && !is_stealthed)
+	if(check_rights(0, 0, C) && !is_stealthed)
 		ooc_style = "elevated"
 		if(holder.rights & R_MOD)
 			ooc_style = "moderator"

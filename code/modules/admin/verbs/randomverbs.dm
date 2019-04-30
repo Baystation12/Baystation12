@@ -264,7 +264,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 		return
 	if(!M.client)
 		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>")
-	if(M.client.holder)
+	if(check_rights(0, 0, M))
 		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>")
 	if(!M.client)		return
 	if(M.client.holder)	return
@@ -388,7 +388,7 @@ Ccomp's first proc.
 	var/action=""
 	if(config.antag_hud_allowed)
 		for(var/mob/observer/ghost/g in get_ghosts())
-			if(!g.client.holder)						//Remove the verb from non-admin ghosts
+			if(!check_rights(R_INVESTIGATE, 0, g))						//Remove the verb from non-admin ghosts
 				g.verbs -= /mob/observer/ghost/verb/toggle_antagHUD
 			if(g.antagHUD)
 				g.antagHUD = 0						// Disable it on those that have it enabled
@@ -399,7 +399,7 @@ Ccomp's first proc.
 		action = "disabled"
 	else
 		for(var/mob/observer/ghost/g in get_ghosts())
-			if(!g.client.holder)						// Add the verb back for all non-admin ghosts
+			if(!check_rights(R_INVESTIGATE, 0, g))						// Add the verb back for all non-admin ghosts
 				g.verbs += /mob/observer/ghost/verb/toggle_antagHUD
 				to_chat(g, "<span class='notice'><B>The Administrator has enabled AntagHUD </B></span>")// Notify all observers they can now use AntagHUD
 
@@ -731,37 +731,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	for(var/t in L)
 		to_chat(usr, "[t]")
 	SSstatistics.add_field_details("admin_verb","CC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/* This proc is DEFERRED. Does not do anything.
-/client/proc/cmd_admin_remove_phoron()
-	set category = "Debug"
-	set name = "Stabilize Atmos."
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
-		return
-	SSstatistics.add_field_details("admin_verb","STATM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-// DEFERRED
-	spawn(0)
-		for(var/turf/T in view())
-			T.poison = 0
-			T.oldpoison = 0
-			T.tmppoison = 0
-			T.oxygen = 755985
-			T.oldoxy = 755985
-			T.tmpoxy = 755985
-			T.co2 = 14.8176
-			T.oldco2 = 14.8176
-			T.tmpco2 = 14.8176
-			T.n2 = 2.844e+006
-			T.on2 = 2.844e+006
-			T.tn2 = 2.844e+006
-			T.tsl_gas = 0
-			T.osl_gas = 0
-			T.sl_gas = 0
-			T.temp = 293.15
-			T.otemp = 293.15
-			T.ttemp = 293.15
-*/
 
 /client/proc/toggle_view_range()
 	set category = "Special Verbs"

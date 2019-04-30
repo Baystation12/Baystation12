@@ -32,7 +32,7 @@ var/list/ticket_panels = list()
 
 	if(timeout == FALSE)
 		var/client/real_client = client_by_ckey(closed_by.ckey)
-		if(status == TICKET_ASSIGNED && (!real_client || !real_client.holder)) // non-admins can only close a ticket if no admin has taken it
+		if(status == TICKET_ASSIGNED && (!real_client || !check_rights(0, 0, real_client))) // non-admins can only close a ticket if no admin has taken it
 			return
 
 	src.status = TICKET_CLOSED
@@ -124,7 +124,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	var/list/ticket_dat = list()
 	for(var/id = tickets.len, id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
-		if(C.holder || ticket.owner.ckey == C.ckey)
+		if(check_rights(0, 0, C)|| ticket.owner.ckey == C.ckey)
 			var/client/owner_client = client_by_ckey(ticket.owner.ckey)
 			var/open = 0
 			var/status = "Unknown status"
@@ -149,11 +149,11 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			ticket_dat += "Ticket #[id] - [ticket.owner.key_name(0)] [owner_client ? "" : "(DC)"]<br />[status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
 			if(open)
 				ticket_dat += " - <a href='byond://?src=\ref[src];action=pm;ticket=\ref[ticket]'>PM</a>"
-				if(C.holder)
+				if(check_rights(0, 0, C))
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=take;ticket=\ref[ticket]'>[(open == 1) ? "TAKE" : "JOIN"]</a>"
-				if(ticket.status != TICKET_CLOSED && (C.holder || ticket.status == TICKET_OPEN))
+				if(ticket.status != TICKET_CLOSED && (check_rights(0, 0, C) || ticket.status == TICKET_OPEN))
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=close;ticket=\ref[ticket]'>CLOSE</a>"
-			if(C.holder)
+			if(check_rights(0, 0, C))
 				var/ref_mob = ""
 				if(owner_client)
 					ref_mob = "\ref[owner_client.mob]"
@@ -171,7 +171,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			var/list/msg_dat = list()
 			for(var/datum/ticket_msg/msg in open_ticket.msgs)
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
-				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [C.holder ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
+				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [check_rights(0, 0, C) ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
 			if(msg_dat.len)
 				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
@@ -220,7 +220,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			ticket.close(client_repository.get_lite_client(usr.client))
 		if("pm")
 			ticket.take(client_repository.get_lite_client(usr.client))
-			if(usr.client.holder && ticket.owner.ckey != usr.ckey)
+			if(check_rights(0, 0) && ticket.owner.ckey != usr.ckey)
 				usr.client.cmd_admin_pm(client_by_ckey(ticket.owner.ckey), ticket = ticket)
 			else if(ticket.status == TICKET_ASSIGNED)
 				// manually check that the target client exists here as to not spam the usr for each logged out admin on the ticket

@@ -33,7 +33,7 @@
 		else if(istext(target))
 			params["type"] = "ircpm"
 			params["target"] = target
-			params["rank"] = source.holder ? source.holder.rank : "Player"
+			params["rank"] = check_rights(0, 0, source) ? source.holder.rank : "Player"
 		else
 			params["type"] = "adminpm"
 			params["trg_key"] = target.key

@@ -152,7 +152,7 @@
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
-	if (holder)
+	if (check_rights(0, 0))
 		GLOB.admins += src
 		control_freak = 0
 
@@ -251,7 +251,7 @@
 		check_scopes = check_scope
 	else
 		check_scopes = list(check_scope)
-	
+
 	for (var/scope in check_scopes)
 		for (var/list/ban in bans)
 			if (ban["scope"] == scope)

@@ -489,7 +489,7 @@
 				take_uplink()
 				memory = null//Remove any memory they may have had.
 			if("crystals")
-				if (usr.client.holder.rights & R_FUN)
+				if (check_rights(R_FUN, 1))
 					var/obj/item/device/uplink/suplink = find_syndicate_uplink()
 					if(!suplink)
 						to_chat(usr, "<span class='warning'>Failed to find an uplink.</span>")

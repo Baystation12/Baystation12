@@ -624,10 +624,10 @@
 			stat("Local Time", stationtime2text())
 			stat("Local Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
-		if(client.holder || isghost(client.mob))
+		if(check_rights(R_INVESTIGATE, 0, client) || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
 
-	if(client.holder)
+	if(check_rights(0, 0, client))
 		if(statpanel("MC"))
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")

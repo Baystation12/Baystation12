@@ -1,6 +1,6 @@
 
 /datum/admins/proc/player_panel_new()//The new one
-	if (!usr.client.holder)
+	if (!check_rights(0, 1))
 		return
 	var/dat = "<html><head><title>Admin Player Panel</title></head>"
 

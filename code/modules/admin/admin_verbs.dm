@@ -308,7 +308,7 @@ var/list/admin_verbs_mod = list(
 )
 
 /client/proc/add_admin_verbs()
-	if(check_rights(0, 1, src))
+	if(check_rights(0, 0, src))
 		verbs += admin_verbs_default
 		if(holder.rights & R_BUILDMODE)		verbs += /client/proc/togglebuildmodeself
 		if(holder.rights & R_ADMIN)			verbs += admin_verbs_admin

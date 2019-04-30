@@ -79,7 +79,7 @@
 
 	var/text = get_result_announcement()
 	log_vote(text)
-	to_world("<font color='purple'>[text]</font>")	
+	to_world("<font color='purple'>[text]</font>")
 
 	if(!(result[result[1]] > 0))
 		return 1
@@ -123,7 +123,7 @@
 
 // Checks if the mob is participating in the round sufficiently to vote, as per config settings.
 /datum/vote/proc/mob_not_participating(mob/voter)
-	if(config.vote_no_dead && voter.stat == DEAD && !voter.client.holder)
+	if(config.vote_no_dead && voter.stat == DEAD && (!check_rights(0, 0, voter)))
 		return 1
 
 //null = no toggle set. This is for UI purposes; a text return will give a link (toggle; currently "return") in the vote panel.

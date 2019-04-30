@@ -232,10 +232,7 @@ var/list/_client_preferences_by_type
 		given_client = M.client
 	if(!given_client)
 		return FALSE
-	if(flags)
-		return check_rights(flags, 0, given_client)
-	else
-		return given_client && given_client.holder
+	return check_rights(flags, 0, given_client)
 
 /datum/client_preference/staff/show_chat_prayers
 	description = "Chat Prayers"

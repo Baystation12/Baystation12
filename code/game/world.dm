@@ -143,6 +143,9 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/legacy = input["status"] != "2"
 		for(var/client/C in GLOB.clients)
 			if(C.holder)
+				// defer proc-call to avoid smallish performance hit
+				if(!check_rights(0, 0, C))
+					return
 				if(C.is_stealthed())
 					continue	//so stealthmins aren't revealed by the hub
 				admins[C.key] = C.holder.rank
