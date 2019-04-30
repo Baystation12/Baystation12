@@ -28,6 +28,10 @@ var/list/organ_cache = list()
 
 	var/death_time
 
+	// Bioprinter stats
+	var/can_be_printed = TRUE
+	var/print_cost
+
 /obj/item/organ/Destroy()
 	owner = null
 	dna = null

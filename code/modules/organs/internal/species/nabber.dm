@@ -12,8 +12,19 @@
 	innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 	phoron_guard = 1
 	action_button_name = "Toggle Eye Shields"
+	eye_icon = 'icons/mob/human_races/species/nabber/eyes.dmi'
 
 	var/eyes_shielded
+
+/obj/item/organ/internal/eyes/nabber/get_special_overlay()
+	var/icon/I = get_onhead_icon()
+	if(I)
+		var/image/eye_overlay = image(I)
+		if(owner && owner.is_cloaked())
+			eye_overlay.alpha = 100
+		if(eyes_shielded)
+			eye_overlay.color = "#aaaaaa"
+		return eye_overlay
 
 /obj/item/organ/internal/eyes/nabber/additional_flash_effects(var/intensity)
 	if(!eyes_shielded)
@@ -62,6 +73,7 @@
 	color = "#ed81f1"
 	organ_tag = BP_PHORON
 	parent_organ = BP_CHEST
+	can_be_printed = FALSE
 	var/dexalin_level = 10
 	var/phoron_level = 5
 	var/raw_amount = 0.1

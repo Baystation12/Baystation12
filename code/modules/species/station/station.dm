@@ -149,8 +149,6 @@
 
 	reagent_tag = IS_SKRELL
 
-	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/skrell)
-
 	descriptors = list(
 		/datum/mob_descriptor/height = 1,
 		/datum/mob_descriptor/build = 0,
@@ -192,7 +190,7 @@
 		BP_LIVER =    /obj/item/organ/internal/liver,
 		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes
+		BP_EYES =     /obj/item/organ/internal/eyes/skrell
 		)
 
 /datum/species/skrell/get_sex(var/mob/living/carbon/H)

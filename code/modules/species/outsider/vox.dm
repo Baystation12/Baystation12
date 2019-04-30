@@ -72,8 +72,7 @@
 		)
 
 	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_HEAD = /obj/item/organ/external/head/vox
+		BP_GROIN = /obj/item/organ/external/groin/vox
 	)
 
 	has_organ = list(
@@ -83,7 +82,7 @@
 		BP_LIVER =      /obj/item/organ/internal/liver/vox,
 		BP_KIDNEYS =    /obj/item/organ/internal/kidneys/vox,
 		BP_BRAIN =      /obj/item/organ/internal/brain,
-		BP_EYES =       /obj/item/organ/internal/eyes,
+		BP_EYES =       /obj/item/organ/internal/eyes/vox,
 		BP_STACK =      /obj/item/organ/internal/stack/vox,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
@@ -152,10 +151,7 @@
 	brute_mod = 0.8
 	burn_mod = 0.8
 
-	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_HEAD = /obj/item/organ/external/head/vox_armalis
-	)
+	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/vox/armalis)
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 2,

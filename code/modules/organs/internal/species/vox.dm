@@ -19,6 +19,14 @@
 	parent_organ = BP_CHEST
 	color = "#0033cc"
 
+/obj/item/organ/internal/eyes/vox
+	eye_icon = 'icons/mob/human_races/species/vox/eyes.dmi'
+	color = "#0033cc"
+
+/obj/item/organ/internal/eyes/vox/armalis
+	eye_icon = 'icons/mob/human_races/species/vox/armalis_eyes.dmi'
+	color = "#0033cc"
+
 /obj/item/organ/internal/stomach/vox
 	name = "gizzard"
 	color = "#0033cc"

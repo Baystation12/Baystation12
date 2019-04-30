@@ -121,10 +121,20 @@
 	max_damage = 50
 	min_broken_damage = 25
 	glowing_eyes = TRUE
-	eye_icon_location = 'icons/mob/human_races/species/diona/eyes.dmi'
-	apply_eye_colour = FALSE
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 	cavity_max_w_class = ITEM_SIZE_SMALL
+	var/eye_icon_location = 'icons/mob/human_races/species/diona/eyes.dmi'
+
+/obj/item/organ/external/head/diona/get_eye_overlay()
+	var/icon/I = get_eyes()
+	if(glowing_eyes)
+		var/image/eye_glow = image(I)
+		eye_glow.layer = EYE_GLOW_LAYER
+		eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		return eye_glow
+
+/obj/item/organ/external/head/diona/get_eyes()
+	return icon(icon = eye_icon_location, icon_state = "")
 
 /obj/item/organ/external/head/diona/removed()
 	if(BP_IS_ROBOTIC(src))

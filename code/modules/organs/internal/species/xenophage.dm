@@ -71,6 +71,9 @@
 	organ_tag = BP_RESIN
 	associated_power = /mob/living/carbon/human/proc/resin
 
+/obj/item/organ/internal/eyes/xeno
+	eye_icon = 'icons/mob/human_races/species/xenos/eyes.dmi'
+
 /obj/item/organ/internal/eyes/xeno/update_colour()
 	if(!owner)
 		return
