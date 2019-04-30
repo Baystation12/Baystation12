@@ -176,11 +176,11 @@
 /obj/vehicles/drop_pod/overmap/get_drop_point(var/list/om_targ_zs)
 	var/list/valid_points = list()
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
-		if(l.z in om_targ_zs)
+		if(l.loc.z in om_targ_zs)
 			valid_points += l
-	var/beacons_present = 1
+	var/beacons_present = 0
 	for(var/obj/item/drop_pod_beacon/b in world)
-		if(!(text2num("[b.z]")  in om_targ_zs))
+		if(!(b.loc.z  in om_targ_zs))
 			continue
 		if(b.is_active == 1)
 			if(!beacons_present) //If we've not already realised we have beacons, remove all normal drop-pod markers from pick-choice.
