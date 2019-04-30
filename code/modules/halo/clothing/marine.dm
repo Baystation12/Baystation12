@@ -54,7 +54,7 @@
 	icon_state = "M52B Body Armor regular"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 35, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 45, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
