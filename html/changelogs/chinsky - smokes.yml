@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "You can now make handrolled cigs out of any dried plants."
+  - tweak: "Tobacco from cig vendomats can be put in pipes."
