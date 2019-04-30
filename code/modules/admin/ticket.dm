@@ -119,12 +119,14 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	if(!C)
 		return
 
+	var/isstaff = check_rights(0, 0, C)
+
 	var/list/dat = list()
 
 	var/list/ticket_dat = list()
 	for(var/id = tickets.len, id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
-		if(check_rights(0, 0, C)|| ticket.owner.ckey == C.ckey)
+		if(isstaff|| ticket.owner.ckey == C.ckey)
 			var/client/owner_client = client_by_ckey(ticket.owner.ckey)
 			var/open = 0
 			var/status = "Unknown status"
@@ -149,11 +151,11 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			ticket_dat += "Ticket #[id] - [ticket.owner.key_name(0)] [owner_client ? "" : "(DC)"]<br />[status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
 			if(open)
 				ticket_dat += " - <a href='byond://?src=\ref[src];action=pm;ticket=\ref[ticket]'>PM</a>"
-				if(check_rights(0, 0, C))
+				if(isstaff)
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=take;ticket=\ref[ticket]'>[(open == 1) ? "TAKE" : "JOIN"]</a>"
-				if(ticket.status != TICKET_CLOSED && (check_rights(0, 0, C) || ticket.status == TICKET_OPEN))
+				if(ticket.status != TICKET_CLOSED && (isstaff || ticket.status == TICKET_OPEN))
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=close;ticket=\ref[ticket]'>CLOSE</a>"
-			if(check_rights(0, 0, C))
+			if(isstaff)
 				var/ref_mob = ""
 				if(owner_client)
 					ref_mob = "\ref[owner_client.mob]"
@@ -171,7 +173,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			var/list/msg_dat = list()
 			for(var/datum/ticket_msg/msg in open_ticket.msgs)
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
-				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [check_rights(0, 0, C) ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
+				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [isstaff ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
 			if(msg_dat.len)
 				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
