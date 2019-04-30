@@ -621,13 +621,13 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "bN" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "bP" = (
@@ -2554,6 +2554,10 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/isolation)
+"fH" = (
+/obj/item/weapon/stool,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "fI" = (
 /obj/structure/handrai{
 	icon_state = "handrail";
@@ -3092,7 +3096,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
 "hl" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/quartermaster/exploration)
 "hm" = (
@@ -3444,7 +3448,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
 "iy" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/command/pilot)
 "iz" = (
@@ -4172,7 +4176,7 @@
 /area/command/pilot)
 "jR" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/quartermaster/shuttlefuel)
 "jS" = (
@@ -4378,8 +4382,8 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kq" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor/border_only,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/quartermaster/exploration)
 "kr" = (
@@ -4428,7 +4432,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/weapon/stool,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "kx" = (
@@ -4608,11 +4611,6 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/quartermaster/exploration)
-"kO" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
 /area/quartermaster/exploration)
 "kP" = (
 /obj/machinery/suit_storage_unit/explorer,
@@ -4888,17 +4886,17 @@
 /area/hallway/primary/fifthdeck/aft)
 "lv" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "lw" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "lx" = (
@@ -5832,8 +5830,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/disposalpipe/segment,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "ny" = (
@@ -6912,7 +6910,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "pF" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "pG" = (
@@ -7212,7 +7210,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition/eva)
 "ql" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/quartermaster/expedition)
 "qm" = (
@@ -8017,7 +8015,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "rF" = (
@@ -9558,12 +9556,12 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "uU" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "uV" = (
@@ -9652,9 +9650,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "vj" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "vm" = (
@@ -9906,7 +9904,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
 "wk" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "wl" = (
@@ -10781,6 +10779,9 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
+"zv" = (
+/turf/simulated/floor/plating,
+/area/quartermaster/expedition)
 "zw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/random/junk,
@@ -13251,6 +13252,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
+"IQ" = (
+/obj/effect/wallframe_spawn/no_grille,
+/turf/simulated/wall/prepainted,
+/area/quartermaster/expedition)
 "IR" = (
 /obj/machinery/portable_atmospherics/canister,
 /obj/machinery/light_switch{
@@ -15067,7 +15072,6 @@
 /area/shuttle/petrov/hallwaya)
 "Pv" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/sign/directions/bridge{
 	dir = 1;
 	pixel_y = 3;
@@ -15078,6 +15082,7 @@
 	pixel_y = -4;
 	pixel_z = 0
 	},
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fifthdeck/aft)
 "Px" = (
@@ -17612,12 +17617,12 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/fifthdeck/fore)
 "Zm" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "Zn" = (
@@ -32686,7 +32691,7 @@ rT
 oW
 hl
 kn
-hz
+fH
 hz
 kw
 ky
@@ -33095,9 +33100,9 @@ kq
 kq
 OX
 OX
-kO
+kq
 kt
-kO
+kq
 eu
 OX
 OX
@@ -39548,7 +39553,7 @@ Lp
 UG
 UG
 sp
-WU
+IQ
 qz
 um
 Xz
@@ -39750,7 +39755,7 @@ qe
 qf
 qh
 Eg
-ql
+zv
 qA
 un
 qG
