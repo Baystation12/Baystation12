@@ -1,0 +1,6 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - rscadd: "Adds a new chameleon headset to the chameleon kit."
+  - rscadd: "Adds three new chameleon accessories to the chameleon kit."
+  - bugfix: "Fixes chameleon items having broken sprites."
