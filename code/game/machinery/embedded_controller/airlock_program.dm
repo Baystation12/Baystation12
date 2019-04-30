@@ -278,12 +278,14 @@
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 	memory["purge"] = cycle_to_external_air
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
 	target_state = TARGET_OUTOPEN
 	memory["purge"] = cycle_to_external_air
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()
