@@ -247,7 +247,7 @@
 		return 1
 	else
 		var/turf/T = get_turf(target)
-		if(istype(T) && !T.Adjacent(get_turf(src)))
+		if(istype(T) && !target.Adjacent(holder.wearer))
 			return 0
 
 		var/resolved = target.attackby(gun,holder.wearer)
