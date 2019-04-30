@@ -200,6 +200,8 @@
 	if(get_dist(overmap_fired_by,hit) > 1)
 		console_fired_by.visible_message("<span class = 'notice'>[console_fired_by] emits a warning: \"Beam impact dissipated due to atmospheric interference. Orbit the object to perform glassing.\"</span>")
 		return
+	for(var/mob/m in GLOB.mobs_in_sectors[hit])
+		to_chat(m,"<span class = 'danger'>A wave of heat washes over you as the atmosphere boils and the ground liquefies. [hit] is being glassed!</span>")
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	if(istype(turf_to_explode,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
 		var/prev_index = hit.map_z.Find(z_level)
