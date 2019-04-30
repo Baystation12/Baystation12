@@ -120,28 +120,28 @@
 					if(welder.isOn())
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-						if(do_after(user, 5 SECONDS) && welder.isOn())
-							if(!(is_plating()) || broken || burnt) return
+						if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
-							burnt = 1
-							remove_decals()
-							update_icon()
 					else
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return
 		else if(istype(C, /obj/item/weapon/gun/energy/plasmacutter) && (is_plating()) && !broken && !burnt)
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
-			visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-			if(do_after(user, 3 SECONDS))
-				if(!(is_plating()) || broken || burnt) return
-				visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
+			visible_message("<span class='notice'>[user] has started slicing through the plating's reinforcements!</span>")
+			if(do_after(user, 3 SECONDS) && welder_melt())
+				visible_message("<span class='warning'>[user] has sliced through the plating's reinforcements! It should be possible to pry it off.</span>")
 				playsound(src, 'sound/items/Welder.ogg', 80, 1)
-				burnt = 1
-				remove_decals()
-				update_icon()
 
 	return ..()
+
+/turf/simulated/floor/proc/welder_melt()
+	if(!(is_plating()) || broken || burnt)
+		return 0
+	burnt = 1
+	remove_decals()
+	update_icon()
+	return 1
 
 /turf/simulated/floor/acid_melt()
 	. = FALSE
