@@ -152,7 +152,7 @@
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
-	if (check_rights(0, 0))
+	if (check_rights(0, 0, src))
 		GLOB.admins += src
 		control_freak = 0
 
