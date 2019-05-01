@@ -184,3 +184,20 @@ obj/item/clothing/mask/chewable/Destroy()
 				/datum/reagent/kelotane,
 				/datum/reagent/inaprovaline)), 10)
 	color = reagents.get_color()
+
+/obj/item/clothing/mask/chewable/candy/lolli/weak_meds
+	name = "medicine lollipop"
+	desc = "A sucrose sphere on a small handle, it has been infused with medication."
+	filling = list(/datum/reagent/sugar = 6)
+
+/obj/item/clothing/mask/chewable/candy/lolli/weak_meds/New()
+	..()
+	var/datum/reagent/payload = pick(list(
+				/datum/reagent/antidexafen,
+				/datum/reagent/paracetamol,
+				/datum/reagent/tricordrazine,
+				/datum/reagent/dylovene,
+				/datum/reagent/inaprovaline))
+	reagents.add_reagent(payload, 15)
+	color = reagents.get_color()
+	desc = "[desc]. This one is labeled '[initial(payload.name)]'"
