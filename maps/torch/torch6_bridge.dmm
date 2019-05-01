@@ -13903,6 +13903,7 @@
 "Kf" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
+/obj/item/weapon/storage/medical_lolli_jar,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "Kg" = (

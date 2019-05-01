@@ -149,7 +149,7 @@
 	make_exact_fit()
 
 /obj/item/weapon/storage/chewables/candy/medicallollis
-	name = "pack of medicinal lolipops"
+	name = "pack of medicinal lollipops"
 	desc = "A mixed pack of medicinal flavored lollipops. These have no business being on store shelves."
 	icon_state = "lollipack"
 	max_storage_space = 20

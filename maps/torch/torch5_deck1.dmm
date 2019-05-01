@@ -18798,6 +18798,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
+/obj/item/weapon/storage/medical_lolli_jar,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "fRN" = (
