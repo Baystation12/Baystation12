@@ -176,6 +176,7 @@
 	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 	to_chat(user, sound('sound/mecha/nominal.ogg',volume=50))
 	if(user.client) user.client.screen |= hud_elements
+	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()
 	return 1
 
@@ -205,6 +206,7 @@
 			to_chat(user, SPAN_NOTICE("You climb out of \the [src]."))
 
 	user.forceMove(get_turf(src))
+	LAZYREMOVE(user.additional_vision_handlers, src)
 	if(user.client)
 		user.client.screen -= hud_elements
 		user.client.eye = user
