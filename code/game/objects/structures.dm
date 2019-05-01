@@ -114,9 +114,6 @@
 	var/list/dirs = list()
 	var/list/other_dirs = list()
 
-	if(!anchored)
-		return
-
 	for(var/obj/structure/S in orange(src, 1))
 		if(can_visually_connect_to(S))
 			if(S.can_visually_connect())
@@ -124,6 +121,11 @@
 					S.update_connections()
 					S.update_icon()
 				dirs += get_dir(src, S)
+
+	if(!can_visually_connect())
+		connections = list("0", "0", "0", "0")
+		other_connections = list("0", "0", "0", "0")
+		return
 
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
