@@ -19,7 +19,7 @@ obj/item/clothing/mask/chewable/New()
 
 /obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
 	..()
-	if(slot == SLOT_MASK)
+	if(slot == slot_wear_mask)
 		if(user.check_has_mouth())
 			START_PROCESSING(SSobj, src)
 		else
@@ -45,13 +45,9 @@ obj/item/clothing/mask/chewable/Destroy()
 			STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/chewable/Process()
-	if(!equipped())
-		STOP_PROCESSING(SSobj, src)
-		return
 	chew(1)
 	if(chewtime < 1)
 		extinguish()
-		return
 
 /obj/item/clothing/mask/chewable/tobacco
 	name = "wad"
