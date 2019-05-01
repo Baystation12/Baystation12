@@ -17,6 +17,12 @@
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sanshyuum)
 
+/datum/job/covenant/lesser_prophet/equip()
+	.=..()
+	var/datum/job/to_modify = job_master.occupations_by_type[/datum/job/covenant/sangheili_honour_guard]
+	to_modify.total_positions = 2
+
+
 /datum/job/covenant/sangheili_shipmaster
 	title = "Sangheili - Shipmaster"
 	total_positions = 1
@@ -26,6 +32,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/sangheili)
 
 /*/datum/job/covenant/sangheili_ultra
 	title = "Sangheili - Ultra"
@@ -42,7 +49,7 @@
 
 /datum/job/covenant/sangheili_honour_guard
 	title = "Sangheili - Honour Guard"
-	total_positions = 1
+	total_positions = 0
 	spawn_positions = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/zealot //PLACEHOLDER UNTIL SPRITES ARE IN

@@ -3,9 +3,9 @@ GLOBAL_LIST_INIT(sanshyuum_virtues, world.file2list('code/modules/halo/species_i
 GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/species_items/sanshyuum_titles.txt'))
 
 /datum/species/sanshyuum
-	name = "San'Shyuum"
-	name_plural = "San'Shyuum"
-	blurb = "San'Shyuum (Latin Perfidia vermis, meaning \"Worms of Treachery\"), also \
+	name = "San Shyuum"
+	name_plural = "San Shyuum"
+	blurb = "San Shyuum (Latin Perfidia vermis, meaning \"Worms of Treachery\"), also \
 		known as Prophets by humanity, are a species who are the leadership caste within the \
 		Covenant. Prophets to exert complete control over religious and political \
 		affairs.  Although physically frail compared to other Covenant species, they wield \
