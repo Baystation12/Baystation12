@@ -1,5 +1,5 @@
 /mob/living/exosuit/premade/light
-	name = "combat exosuit"
+	name = "light exosuit"
 	desc = "A light and agile exosuit."
 
 /mob/living/exosuit/premade/light/New()
@@ -22,7 +22,7 @@
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 
 /obj/item/mech_component/manipulators/light
-	name = "combat arms"
+	name = "light arms"
 	exosuit_desc_string = "lightweight, segmented manipulators"
 	icon_state = "light_arms"
 	melee_damage = 5

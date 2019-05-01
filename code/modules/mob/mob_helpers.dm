@@ -706,3 +706,16 @@ proc/is_blind(A)
 
 /mob/proc/unset_sdisability(sdisability)
 	sdisabilities &= ~sdisability
+
+/mob/proc/get_accumulated_vision_handlers()
+	var/result[2]
+	var/asight = 0
+	var/ainvis = 0
+	for(var/atom/vision_handler in additional_vision_handlers)
+		//Grab their flags
+		asight |= vision_handler.additional_sight_flags()
+		ainvis = max(ainvis, vision_handler.additional_see_invisible())
+	result[1] = asight
+	result[2] = ainvis
+
+	return result

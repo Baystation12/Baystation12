@@ -188,3 +188,5 @@
 
 	var/datum/skillset/skillset = /datum/skillset
 
+
+	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved
