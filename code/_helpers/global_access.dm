@@ -655,6 +655,8 @@
 			return global.lobby_image;
 		if("log_end")
 			return global.log_end;
+		if("loot_distributor")
+			return global.loot_distributor;
 		if("loyalists")
 			return global.loyalists;
 		if("lunchables_drink_reagents_")
@@ -1884,6 +1886,8 @@
 			global.lobby_image=newval;
 		if("log_end")
 			global.log_end=newval;
+		if("loot_distributor")
+			global.loot_distributor=newval;
 		if("loyalists")
 			global.loyalists=newval;
 		if("lunchables_drink_reagents_")
@@ -2785,6 +2789,7 @@
 	"loadout_categories",
 	"lobby_image",
 	"log_end",
+	"loot_distributor",
 	"loyalists",
 	"lunchables_drink_reagents_",
 	"lunchables_drinks_",
