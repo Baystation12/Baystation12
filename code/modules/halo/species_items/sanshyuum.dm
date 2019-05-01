@@ -19,3 +19,8 @@
 	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "P"
 	flags = RESTRICTED
+
+/decl/hierarchy/outfit/lesser_prophet
+	name = "Lesser Prophet"
+	suit = /obj/item/clothing/suit/prophet_robe
+	l_ear = /obj/item/device/radio/headset/covenant

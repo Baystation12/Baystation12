@@ -6,6 +6,17 @@
 	announced = 0
 	create_record = 0
 
+/datum/job/covenant/lesser_prophet
+	title = "Lesser Prophet"
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#80080"
+	outfit_type = /decl/hierarchy/outfit/lesser_prophet
+	access = list(240,250)
+	spawnpoint_override = "Covenant Base Spawns"
+	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sanshyuum)
+
 /datum/job/covenant/sangheili_shipmaster
 	title = "Sangheili - Shipmaster"
 	total_positions = 1
@@ -16,7 +27,7 @@
 	spawnpoint_override = "Covenant Base Spawns"
 	is_whitelisted = 1
 
-/datum/job/covenant/sangheili_ultra
+/*/datum/job/covenant/sangheili_ultra
 	title = "Sangheili - Ultra"
 	total_positions = 1
 	spawn_positions = 1
@@ -25,6 +36,19 @@
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
 	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/sangheili)
+*/
+//Ultra is disabled now
+
+/datum/job/covenant/sangheili_honour_guard
+	title = "Sangheili - Honour Guard"
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/sangheili/zealot //PLACEHOLDER UNTIL SPRITES ARE IN
+	access = list(240,250)
+	spawnpoint_override = "Covenant Base Spawns"
+	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/sangheili)
 
 /datum/job/covenant/sangheili_major
