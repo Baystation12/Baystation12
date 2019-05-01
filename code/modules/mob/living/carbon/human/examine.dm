@@ -311,6 +311,9 @@
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 
+	if(isghost(user) && (public_record || med_record || sec_record || gen_record))
+		msg += "<span class = 'deptradio'>Records:</span> <a href='?src=\ref[src];check_records=1'>\[View\]</a>\n"
+
 	if(mind && user.mind && name == real_name)
 		var/list/relations = matchmaker.get_relationships_between(user.mind, mind, TRUE)
 		if(length(relations))

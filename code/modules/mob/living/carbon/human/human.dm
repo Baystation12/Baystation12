@@ -403,6 +403,23 @@
 		if(!handle_strip(href_list["item"],usr,locate(href_list["holder"])))
 			show_inv(usr)
 
+	if(href_list["check_records"])
+		if(!isghost(usr))
+			return
+		var/dat = list()
+		if(public_record)
+			dat += "<b>GENERAL NOTES:</b><br>[pencode2html(public_record)]<br><hr>"
+		if(med_record)
+			dat += "<b>MEDICAL RECORD:</b><br>[pencode2html(med_record)]<br><hr>"
+		if(sec_record)
+			dat += "<b>SECURITY RECORD:</b><br>[pencode2html(sec_record)]<br><hr>"
+		if(gen_record)
+			dat += "<b>EMPLOYMENT RECORD:</b><br>[pencode2html(gen_record)]<br><hr>"
+
+		var/datum/browser/popup = new(usr, "records", "[real_name]'s records", 520, 640)
+		popup.set_content(jointext(dat, null))
+		popup.open()
+
 	if (href_list["criminal"])
 		if(hasHUD(usr, HUD_SECURITY))
 
