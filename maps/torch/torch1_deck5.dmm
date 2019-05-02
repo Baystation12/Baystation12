@@ -2281,10 +2281,15 @@
 	icon_state = "techfloor_edges";
 	dir = 9
 	},
+/obj/machinery/conveyor_switch/oneway{
+	id = "cargobay";
+	name = "mining conveyor"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "eY" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 4;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2362,6 +2367,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 8;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2430,6 +2436,7 @@
 /area/exploration_shuttle/cargo)
 "fo" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2444,6 +2451,7 @@
 "fq" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2452,6 +2460,7 @@
 /area/exploration_shuttle/cargo)
 "fr" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 2;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_internal"
@@ -2584,6 +2593,7 @@
 /area/exploration_shuttle/cargo)
 "fK" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 4;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_internal"
@@ -2617,6 +2627,7 @@
 /area/exploration_shuttle/cargo)
 "fP" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 8;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_internal"
@@ -3032,6 +3043,7 @@
 	pixel_y = 20
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_external"
@@ -12145,7 +12157,7 @@
 "Ep" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	id = "garbage"
+	id = "cargobay"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/light{
@@ -13080,7 +13092,7 @@
 "Id" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	id = "garbage"
+	id = "cargobay"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/sign/warning/moving_parts{
@@ -14203,7 +14215,7 @@
 "Mk" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	id = "garbage"
+	id = "cargobay"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -14826,6 +14838,7 @@
 	pixel_y = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_external"
@@ -17385,6 +17398,14 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
+"Yu" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Yw" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/structure/dispenser,
@@ -36729,7 +36750,7 @@ mC
 mC
 im
 mE
-mF
+Yu
 mF
 mF
 mF
