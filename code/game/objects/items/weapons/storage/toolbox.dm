@@ -20,7 +20,13 @@
 
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
-	startswith = list(/obj/item/weapon/crowbar/red, /obj/item/weapon/extinguisher/mini, /obj/item/device/radio)
+	startswith = list(
+		/obj/item/weapon/crowbar/red,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/device/radio,
+		/obj/item/weapon/weldingtool/mini,
+		/obj/item/weapon/welder_tank/mini
+	)
 
 /obj/item/weapon/storage/toolbox/emergency/Initialize()
 	. = ..()
