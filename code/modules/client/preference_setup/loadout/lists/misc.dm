@@ -213,3 +213,9 @@
 	display_name = "bible"
 	path = /obj/item/weapon/storage/bible
 	cost = 2
+
+/datum/gear/swiss
+	display_name = "multi-tool"
+	path = /obj/item/weapon/material/knife/folding/swiss
+	cost = 4
+	flags = GEAR_HAS_COLOR_SELECTION

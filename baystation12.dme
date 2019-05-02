@@ -1033,6 +1033,7 @@
 #include "code\game\objects\items\weapons\material\misc.dm"
 #include "code\game\objects\items\weapons\material\shards.dm"
 #include "code\game\objects\items\weapons\material\stick.dm"
+#include "code\game\objects\items\weapons\material\swiss.dm"
 #include "code\game\objects\items\weapons\material\swords.dm"
 #include "code\game\objects\items\weapons\material\thrown.dm"
 #include "code\game\objects\items\weapons\material\twohanded.dm"

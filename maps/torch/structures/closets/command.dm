@@ -45,6 +45,7 @@
 		/obj/item/weapon/material/clipboard,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue,
+		/obj/item/weapon/material/knife/folding/swiss/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel/cap)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/captain, /obj/item/weapon/storage/backpack/messenger/com))
 	)
@@ -70,6 +71,7 @@
 		/obj/item/weapon/material/clipboard,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue,
+		/obj/item/weapon/material/knife/folding/swiss/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel/cap)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/captain, /obj/item/weapon/storage/backpack/messenger/com)),
 		/obj/item/weapon/storage/box/imprinting
@@ -92,6 +94,7 @@
 		/obj/item/weapon/material/clipboard,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue,
+		/obj/item/weapon/material/knife/folding/swiss/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger))
 	)
@@ -115,6 +118,7 @@
 		/obj/item/device/radio/headset/bridgeofficer,
 		/obj/item/device/radio/headset/bridgeofficer/alt,
 		/obj/item/weapon/storage/belt/general,
+		/obj/item/weapon/material/knife/folding/swiss/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
