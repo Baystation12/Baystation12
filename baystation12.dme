@@ -1457,6 +1457,7 @@
 #include "code\modules\clothing\masks\boxing.dm"
 #include "code\modules\clothing\masks\breath.dm"
 #include "code\modules\clothing\masks\chewable.dm"
+#include "code\modules\clothing\masks\cig_crafting.dm"
 #include "code\modules\clothing\masks\gasmask.dm"
 #include "code\modules\clothing\masks\miscellaneous.dm"
 #include "code\modules\clothing\masks\monitor.dm"

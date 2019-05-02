@@ -94,20 +94,20 @@
 
 /obj/item/weapon/storage/chewables/rollable/bad
 	name = "bag of Men at Arms tobacco"
-	desc = "A bag of coarse gritty tobacco marketed towards leather-necks, "
-	startswith = list(/obj/item/weapon/reagent_containers/terrbacco/bad = 8)
+	desc = "A bag of coarse gritty tobacco marketed towards leather-necks."
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco/bad = 8)
 	icon_state = "rollcoarse"
 
 /obj/item/weapon/storage/chewables/rollable/generic
 	name = "bag of BluSpace tobacco"
 	desc = "Decent quality tobacco for mid-income earners and long haul space sailors."
-	startswith = list(/obj/item/weapon/reagent_containers/terrbacco = 8)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco = 8)
 	icon_state = "rollgeneric"
 
 /obj/item/weapon/storage/chewables/rollable/fine
 	name = "bag of Golden Sol tobacco"
 	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a lagrange point station in Sol system."
-	startswith = list(/obj/item/weapon/reagent_containers/terrbacco/fine = 8)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco/fine = 8)
 	icon_state = "rollfine"
 
 //chewing tobacco
