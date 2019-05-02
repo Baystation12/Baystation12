@@ -88,6 +88,13 @@
 
 	// Removing components.
 	if(isCrowbar(thing))
+		if(is_reinforced == 1)
+			if(!do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
+				return
+			user.visible_message(SPAN_NOTICE("\The [user] crowbars the reinforcement off \the [src]."))
+			material.place_sheet(src.loc, 10)
+			material = null
+			return
 		var/obj/item/component
 		if(arms)
 			component = arms
@@ -198,12 +205,12 @@
 	// Installing metal.
 	else if(istype(thing, /obj/item/stack/material))
 		var/obj/item/stack/material/M = thing
-		if(M.material && M.material.name == "plasteel")
+		if(M.material)
 			if(is_reinforced)
-				to_chat(user, SPAN_WARNING("There is already plasteel reinforcement installed in \the [src]."))
+				to_chat(user, SPAN_WARNING("There is already a material reinforcement installed in \the [src]."))
 				return
 			if(M.amount < 10)
-				to_chat(user, SPAN_WARNING("You need at least fifteen sheets of plasteel to reinforce \the [src]."))
+				to_chat(user, SPAN_WARNING("You need at least ten sheets to reinforce \the [src]."))
 				return
 
 			visible_message("\The [user] begins layering the interior of the \the [src] with \the [M].")
@@ -213,6 +220,7 @@
 
 			visible_message("\The [user] reinforces \the [src] with \the [M].")
 			playsound(user.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			material = M.material
 			is_reinforced = 1
 			M.use(10)
 		else

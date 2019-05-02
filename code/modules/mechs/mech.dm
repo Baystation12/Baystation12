@@ -44,6 +44,9 @@
 	var/hardpoints_locked
 	var/maintenance_protocols
 
+	// Material
+	var/material/material
+
 	// Cockpit access vars.
 	var/hatch_closed = FALSE
 	var/hatch_locked = FALSE
@@ -83,6 +86,8 @@
 		if(source_frame.body)
 			source_frame.body.forceMove(src)
 			body = source_frame.body
+		if(source_frame.material)
+			material = source_frame.material
 
 	updatehealth()
 

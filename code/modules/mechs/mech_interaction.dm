@@ -228,7 +228,8 @@
 		var/obj/item/mech_equipment/realThing = thing
 		if(realThing.owner)
 			return
-		var/to_place = input("Where would you like to install it?") as null|anything in realThing.restricted_hardpoints
+
+		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & hardpoints)
 		if(install_system(thing, to_place, user))
 			return
 		to_chat(user, SPAN_WARNING("\The [src] could not be installed in that hardpoint."))
@@ -254,7 +255,12 @@
 					to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
 					return
 
-				var/to_remove = input("Which component would you like to remove") as null|anything in hardpoints
+				var/list/parts = list()
+				for(var/hardpoint in hardpoints)
+					if(hardpoints[hardpoint])
+						parts += hardpoint
+
+				var/to_remove = input("Which component would you like to remove") as null|anything in parts
 
 				if(remove_system(to_remove, user))
 					return
