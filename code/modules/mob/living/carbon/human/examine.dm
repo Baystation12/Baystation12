@@ -311,8 +311,13 @@
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 
-	if(isghost(user) && (public_record || med_record || sec_record || gen_record))
-		msg += "<span class = 'deptradio'>Records:</span> <a href='?src=\ref[src];check_records=1'>\[View\]</a>\n"
+	if(isghost(user))
+		var/datum/computer_file/report/crew_record/E = get_crewmember_record(real_name)
+		if(E && (E.get_public_record() && E.get_public_record() != "No record supplied") || \
+				(E.get_medRecord() && E.get_medRecord() != "No record supplied") || \
+				(E.get_secRecord() && E.get_secRecord() != "No record supplied") || \
+				(E.get_emplRecord() && E.get_emplRecord() != "No record supplied"))
+			msg += "<span class = 'deptradio'>Records:</span> <a href='?src=\ref[src];check_records=1'>\[View\]</a>\n"
 
 	if(mind && user.mind && name == real_name)
 		var/list/relations = matchmaker.get_relationships_between(user.mind, mind, TRUE)

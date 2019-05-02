@@ -406,19 +406,20 @@
 	if(href_list["check_records"])
 		if(!isghost(usr))
 			return
-		var/dat = list()
-		if(public_record)
-			dat += "<b>GENERAL NOTES:</b><br>[pencode2html(public_record)]<br><hr>"
-		if(med_record)
-			dat += "<b>MEDICAL RECORD:</b><br>[pencode2html(med_record)]<br><hr>"
-		if(sec_record)
-			dat += "<b>SECURITY RECORD:</b><br>[pencode2html(sec_record)]<br><hr>"
-		if(gen_record)
-			dat += "<b>EMPLOYMENT RECORD:</b><br>[pencode2html(gen_record)]<br><hr>"
-
 		var/datum/browser/popup = new(usr, "records", "[real_name]'s records", 520, 640)
-		popup.set_content(jointext(dat, null))
-		popup.open()
+		var/datum/computer_file/report/crew_record/E = get_crewmember_record(real_name)
+		if(E)
+			if(E.get_public_record() && E.get_public_record() != "No record supplied")
+				popup.add_content("<h1><b>GENERAL NOTES</b></h1>[pencode2html(E.get_public_record())]<br><hr>")
+			if(E.get_medRecord() && E.get_medRecord() != "No record supplied")
+				popup.add_content("<h1><b>MEDICAL RECORD</b></h1>[pencode2html(E.get_medRecord())]<br><hr>")
+			if(E.get_secRecord() && E.get_secRecord() != "No record supplied")
+				popup.add_content("<h1><b>SECURITY RECORD</b></h1>[pencode2html(E.get_secRecord())]<br><hr>")
+			if(E.get_emplRecord() && E.get_emplRecord() != "No record supplied")
+				popup.add_content("<h1><b>EMPLOYMENT RECORD</b></h1>[pencode2html(E.get_emplRecord())]<br><hr>")
+
+		if(popup.content)
+			popup.open()
 
 	if (href_list["criminal"])
 		if(hasHUD(usr, HUD_SECURITY))
