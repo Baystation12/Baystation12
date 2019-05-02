@@ -1,0 +1,9 @@
+author: "Higgin"
+delete-after: True
+changes: 
+  - tweak: "Pepperspray no longer automatically stuns/weakens targets without mouth/nose protection."
+  - tweak: "Pepperspray briefly confuses targets without eye protection."
+  - tweak: "Pepperspray has a 50/50 chance to stun targets without full mouth/nose protection."
+  - tweak: "Partial mouth/nose protection (masks, bandanas) reduces pepperspray stun chance."
+  - tweak: "Pepperspray weakens stunned targets without full face protection."
+  - tweak: "Buffs pepperspray gas pain damage and adds a chance of stun to gas effects."
