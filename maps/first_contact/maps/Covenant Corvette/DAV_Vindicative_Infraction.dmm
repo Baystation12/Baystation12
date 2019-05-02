@@ -226,7 +226,7 @@
 "er" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Auxiliary Tool Storage"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_corvette/bridge)
 "es" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Backup Medical Room"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_corvette/auxmedical)
 "et" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Backup Surgery Room"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_corvette/auxmedical)
-"eu" = (/obj/machinery/optable,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/auxmedical)
+"eu" = (/obj/machinery/optable,/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/auxmedical)
 "ev" = (/obj/structure/closet/crate/covenant,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/forwardcargo)
 "ew" = (/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/mainhangar)
 "ex" = (/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (WEST)"; icon_state = "window"; dir = 8},/obj/machinery/Energy_projector/plasma_battery,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_corvette/mainhangar)
