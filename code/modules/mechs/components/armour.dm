@@ -11,3 +11,8 @@
 	name = "EM-shielded armour plating"
 	desc = "A shielded plating that sorrounds the eletronics and protects them from electromagnetic radiation"
 	armor = list(melee = 65, bullet = 20, laser = 25, energy = 100, bomb = 10, bio = 0, rad = 60)
+
+/obj/item/robot_parts/robot_component/armour/exosuit/combat
+	name = "heavy combat plating"
+	desc = "Plating designed to deflect incoming attacks and explosions"
+	armor = list(melee = 85, bullet = 70, laser = 60, energy = 10, bomb = 70, bio = 0, rad = 0)
