@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Welding tools are now all just one pocket-sized item with swappable tanks. Tanks change the size of the tool when attached."
+  - tweak: "Emergency toolboxes now also contain a welder with a tiny fuel tank."
