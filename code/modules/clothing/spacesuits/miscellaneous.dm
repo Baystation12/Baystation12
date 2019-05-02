@@ -103,7 +103,7 @@
 
 /obj/item/clothing/suit/space/emergency
 	name = "Emergency Softsuit"
-	icon_state = "syndicate-orange"
+	icon_state = "space_emergency"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
 
 /obj/item/clothing/suit/space/emergency/New()
