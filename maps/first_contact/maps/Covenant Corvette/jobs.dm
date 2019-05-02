@@ -52,7 +52,7 @@
 	total_positions = 0
 	spawn_positions = 1
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/sangheili/zealot //PLACEHOLDER UNTIL SPRITES ARE IN
+	outfit_type = /decl/hierarchy/outfit/sangheili/honour_guard
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
 	is_whitelisted = 1
