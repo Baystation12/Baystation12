@@ -202,6 +202,9 @@
 			var/obj/item/weapon/weldingtool/welder = tool
 			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return FALSE
+		if(istype(tool, /obj/item/weapon/gun/energy/plasmacutter))
+			var/obj/item/weapon/gun/energy/plasmacutter/cutter = tool
+			cutter.slice(user)
 		return TRUE
 	return FALSE
 
@@ -496,7 +499,7 @@
 			to_chat(user, SPAN_WARNING("You're pretty sure [target.species.name_plural] don't normally have a brain."))
 		else if(target.internal_organs[BP_BRAIN])
 			to_chat(user, SPAN_WARNING("Your subject already has a brain."))
-		else 
+		else
 			return TRUE
 	return FALSE
 

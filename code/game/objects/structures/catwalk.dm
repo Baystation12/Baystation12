@@ -46,8 +46,6 @@
 		I.color = plated_tile.color
 		overlays += I
 
-
-
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
 		if(1)
@@ -85,6 +83,8 @@
 			deconstruct(user)
 		return
 	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
+		cutter.slice(user)
 		deconstruct(user)
 		return
 	if(isCrowbar(C) && plated_tile)
