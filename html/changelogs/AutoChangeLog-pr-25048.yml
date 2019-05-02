@@ -1,0 +1,4 @@
+author: "CarefulLilCassie"
+delete-after: True
+changes: 
+  - rscadd: "Adds folding knives based on the Swiss Army Knives made by Victorinox & adds them to lockers based on job as well as the loadout for a basic one."
