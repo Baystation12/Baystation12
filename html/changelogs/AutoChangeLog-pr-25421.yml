@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Secure guns are slightly more informative about registration changes and have shorter ranged interaction logging."
