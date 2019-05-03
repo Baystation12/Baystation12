@@ -101,7 +101,7 @@ var/list/worths = list(
 //WEAPONS,
 					/obj/item/weapon/spacecash = -1,
 					/obj/item/weapon/ore = -10,
-					/obj/item/weapon/mining_scanner =  130,
+					/obj/item/device/scanner/mining =  130,
 //PICK AXES,
 					/obj/item/weapon/pickaxe/silver = 300,
 					/obj/item/weapon/pickaxe/drill = 100,

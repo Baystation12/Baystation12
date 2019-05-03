@@ -5,6 +5,7 @@
 	item_state = "analyzer"
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
+	scan_sound = 'sound/effects/scanbeep.ogg'
 	var/details = 0
 
 /obj/item/device/scanner/reagent/is_valid_scan_target(obj/O)

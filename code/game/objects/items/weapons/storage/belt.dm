@@ -389,7 +389,7 @@
 		/obj/item/device/flashlight,
 		/obj/item/device/radio,
 		/obj/item/device/gps,
-		/obj/item/weapon/mining_scanner,
+		/obj/item/device/scanner/mining,
 		/obj/item/device/scanner/xenobio,
 		/obj/item/device/scanner/plant,
 		/obj/item/weapon/folder,

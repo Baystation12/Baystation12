@@ -1,0 +1,6 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "New sprite for mining scanner, look for air analyzer-like thingie in miner colors."
+  - tweak: "Mining scanner now behaves like other scanners, storing last scans. To use it click on a tile you want to scan. It will keep all scans unless buffer is cleared."
+  - rscadd: "Scanners now make sounds when used."
