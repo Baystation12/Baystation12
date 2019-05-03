@@ -1,0 +1,5 @@
+author: "ChaosAlpha"
+delete-after: True
+changes: 
+  - rscadd: "Robots can now use the , and . hotkeys to move up and down z-levels in hotkey-mode."
+  - rscadd: "Everyone can now use > and < in non hotkey-mode to move up and down z-levels."
