@@ -46,6 +46,7 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 		/datum/job/bertelsODSTO,\
 		/datum/job/unsc_ship_marineplatoon,\
 		/datum/job/bertelsunsc_ship_marine,\
+		/datum/job/unsc_ship_iwo,\
 		/datum/job/unscbertels_xo,\
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_medical_crew,\

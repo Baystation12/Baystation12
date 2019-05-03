@@ -14,6 +14,7 @@
 		/datum/job/URF_commando_officer,\
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_xo,\
+		/datum/job/unsc_ship_iwo,\
 		/datum/job/unscbertels_ship_crew,\
 		/datum/job/unscbertels_medical_crew,\
 		/datum/job/bertelsunsc_ship_marine,\
