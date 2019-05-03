@@ -218,6 +218,12 @@ macro "borghotkeymode"
 	elem 
 		name = "F12"
 		command = "F12"
+	elem 
+		name = ","
+		command = "move-upwards"
+	elem 
+		name = "."
+		command = "move-down"
 
 macro "macro"
 	elem 
@@ -388,6 +394,15 @@ macro "macro"
 	elem 
 		name = "F12"
 		command = "F12"
+	elem 
+		name = "SHIFT+<"
+		command = "move-upwards"
+	elem 
+		name = ">"
+		command = "move-upwards"
+	elem 
+		name = "<"
+		command = "move-down"
 
 macro "hotkeymode"
 	elem 
@@ -793,6 +808,15 @@ macro "borgmacro"
 	elem 
 		name = "F12"
 		command = "F12"
+	elem 
+		name = "SHIFT+<"
+		command = "move-upwards"
+	elem 
+		name = ">"
+		command = "move-upwards"
+	elem 
+		name = "<"
+		command = "move-down"
 
 
 menu "menu"
