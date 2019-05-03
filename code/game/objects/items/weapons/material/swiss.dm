@@ -28,12 +28,15 @@
 	if(!choice || !CanPhysicallyInteract(user))
 		return
 	if(choice == SWISSKNF_CLOSED)
+		open = FALSE
 		user.visible_message("<span class='notice'>\The [user] closes the [name].</span>")
-	else if(choice == SWISSKNF_LBLADE || choice == SWISSKNF_SBLADE)
-		user.visible_message("<span class='warning'>\The [user] opens the [lowertext(choice)].</span>")
-		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 	else
-		user.visible_message("<span class='notice'>\The [user] opens the [lowertext(choice)].</span>")
+		open = TRUE
+		if(choice == SWISSKNF_LBLADE || choice == SWISSKNF_SBLADE)
+			user.visible_message("<span class='warning'>\The [user] opens the [lowertext(choice)].</span>")
+			playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
+		else
+			user.visible_message("<span class='notice'>\The [user] opens the [lowertext(choice)].</span>")
 	active_tool = choice
 	update_force()
 	update_icon()
@@ -47,7 +50,6 @@
 
 /obj/item/weapon/material/knife/folding/swiss/update_force()
 	if(active_tool in sharp_tools)
-		open = 1
 		..()
 		if(active_tool == SWISSKNF_GBLADE)
 			siemens_coefficient = 0
