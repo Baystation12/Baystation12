@@ -550,3 +550,19 @@
 	name = "unathi suit"
 	desc = "A Unathi suit made out of rubber."
 	icon_state = "lizsuit"
+
+/obj/item/clothing/suit/hospital
+	name = "hospital gown"
+	desc = "A thin, long and loose robe-like garment worn by people undergoing active medical treatment."
+	icon_state = "hospitalgown"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	allowed = null
+
+/obj/item/clothing/suit/hospital/blue
+	color = "#99ccff"
+
+/obj/item/clothing/suit/hospital/green
+	color = "#8dd7a3"
+
+/obj/item/clothing/suit/hospital/pink
+	color = "#ffb7db"
