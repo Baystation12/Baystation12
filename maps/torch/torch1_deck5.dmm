@@ -10791,9 +10791,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
-"zv" = (
-/turf/simulated/floor/plating,
-/area/quartermaster/expedition)
 "zw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/random/junk,
@@ -39776,7 +39773,7 @@ qe
 qf
 qh
 Eg
-zv
+WU
 qA
 un
 qG

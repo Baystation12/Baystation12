@@ -2701,9 +2701,6 @@
 "iS" = (
 /turf/simulated/wall/walnut,
 /area/crew_quarters/lounge)
-"iW" = (
-/turf/simulated/floor/plating,
-/area/storage/primary)
 "iZ" = (
 /obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -6893,6 +6890,7 @@
 /obj/machinery/door/airlock/maintenance{
 	name = "Hangar Maintenance"
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
 "we" = (
@@ -28679,7 +28677,7 @@ ld
 mm
 ns
 Zj
-iW
+wF
 pQ
 ra
 su
