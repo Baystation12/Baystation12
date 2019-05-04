@@ -5,11 +5,14 @@
 	name = "\improper Xeno Plant"
 	desc = "A plant of unknown origin."
 	icon = 'code/modules/halo/misc/xeno_plant.dmi'
+	anchored = 0
+	density = 1
 
 	var/list/reagents_can_spawn = list(\
 	/datum/reagent/toxin/hair_remover,/datum/reagent/hyperzine,/datum/reagent/bicaridine,\
 	/datum/reagent/space_drugs,/datum/reagent/dermaline,/datum/reagent/dylovene,/datum/reagent/dexalin,\
-	/datum/reagent/dexalinp,/datum/reagent/oxycodone)
+	/datum/reagent/dexalinp,/datum/reagent/oxycodone,/datum/reagent/toxin/carpotoxin,/datum/reagent/lexorin,\
+	/datum/reagent/impedrezene,/datum/reagent/mindbreaker)
 	var/datum/reagents/internal_container
 	var/next_fruit_at = 0
 	var/next_smoke_at = 0
