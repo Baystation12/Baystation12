@@ -1709,6 +1709,7 @@
 #include "code\modules\halo\vehicles\wraith.dm"
 #include "code\modules\halo\weapons\ammo.dm"
 #include "code\modules\halo\weapons\ammo_boxes.dm"
+#include "code\modules\halo\weapons\autoturret.dm"
 #include "code\modules\halo\weapons\charged.dm"
 #include "code\modules\halo\weapons\drop_pod_beacon.dm"
 #include "code\modules\halo\weapons\dual_wielding.dm"
