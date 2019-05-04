@@ -3,7 +3,7 @@
 	language = LANGUAGE_VOX
 	default_language = LANGUAGE_VOX
 	name_language = LANGUAGE_VOX
-	secondary_langs = list(LANGUAGE_GALCOM, LANGUAGE_SPACER)
+	secondary_langs = list(LANGUAGE_GALCOM)
 	description = "The vast majority of vox are born and die on the enormous moon-sized arkships that form the only \
 	permanent home any of the creatures have. Tending to the vast, decaying vessels is a full-time job for crews of thousands, \
 	and although the glamour and allure of the raider life appeals to many, staying home is seen as a more responsible and mature \

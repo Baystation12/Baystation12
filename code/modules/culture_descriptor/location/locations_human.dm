@@ -12,8 +12,8 @@
 	distance = "1.5AU"
 	capital = "Olympus"
 	economic_power = 1.1
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_GALCOM)
+	language = LANGUAGE_GALCOM
+	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_GUTTER, LANGUAGE_HUMAN_EURO, LANGUAGE_HUMAN_ARABIC, LANGUAGE_HUMAN_CHINESE, LANGUAGE_HUMAN_IBERIAN, LANGUAGE_HUMAN_INDIAN, LANGUAGE_HUMAN_RUSSIAN)
 
 /decl/cultural_info/location/human/earth
 	name = HOME_SYSTEM_EARTH
@@ -24,7 +24,6 @@
 	Earth are among the wealthier humans on average, though they are still comparable with those of Mars. Remarkably average, the people of Earth are \
 	much as they have been for hundreds of years, and are generally content with their lot in life. From a variety of ancient cultures, the people of \
 	Earth are as diverse as they have always been."
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_LUNAR)
 	distance = "1AU"
 	capital = "Geneva"
 	economic_power = 1.2
@@ -46,8 +45,6 @@
 	the poverty line, often holding feelings of resentment against the other people of Luna."
 	capital = "Selene"
 	economic_power = 1.3
-	language = LANGUAGE_LUNAR
-	secondary_langs = list(LANGUAGE_SIGN,LANGUAGE_SOL_COMMON)
 
 /decl/cultural_info/location/human/venus
 	name = HOME_SYSTEM_VENUS
@@ -77,8 +74,6 @@
 	employed in shipbuilding, manufacturing, vessel services and hospitality. Belters generally regard themselves as adaptive, proud members of the SCG \
 	and some of the best engineers Humanity has to offer."
 	capital = "Government Zone, Ceres Station"
-	language = LANGUAGE_SPACER
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SOL_COMMON, LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/human/pluto
 	name = HOME_SYSTEM_PLUTO
@@ -93,8 +88,6 @@
 	manage to escape rarely wish to return, though often possess a looser set of morales as a result of their time on the planet."
 	capital = "New Santa Domingo"
 	economic_power = 0.8
-	language = LANGUAGE_GUTTER
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
 
 /decl/cultural_info/location/human/cetiepsilon
 	name = HOME_SYSTEM_TAU_CETI
@@ -111,8 +104,6 @@
 	of Ceti Episilon have developed a reputation for being some of the best and brightest that Sol has to offer."
 	capital = "Verlize"
 	economic_power = 1.4
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
 /decl/cultural_info/location/human/eos
 	name = HOME_SYSTEM_HELIOS
@@ -124,8 +115,6 @@
 	SCG. This process was hindered during the Gaia conflict, when the Helios Gateway was destroyed in a suicide action of the Fourth Fleet to stop the GCC advance. It has recovered rapidly \
 	since the occupation, though the memories of that event carry in the collective consciousness of those who remained through it."
 	capital = "Surya"
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SPACER)
 	economic_power = 1.3
 	distance = "10 light years"
 
@@ -138,8 +127,6 @@
 	increasingly high taxes. This state of affairs has seen the immigration of many Terran citizens to the SCG in recent years, hoping to escape the poor conditions they found themselves in. Despite this,\
 	the people of Terra are a proud and unbroken people who are heavily patriotic and tend to bring this with them wherever they go."
 	capital = "Ameranth"
-	language = LANGUAGE_INDEPENDENT
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GALCOM)
 	distance = "22.5 light years."
 	economic_power = 0.9
 	ruling_body = "Gilgamesh Colonial Confederation"
@@ -161,8 +148,6 @@
 	Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
 	capital = "Tersten City"
 	economic_power = 1.0
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
 /decl/cultural_info/location/human/lorriman
 	name = HOME_SYSTEM_LORRIMAN
@@ -177,7 +162,6 @@
 	to the planet, but exceptions have been made. A scientifically driven people, they have served many organisations loyally."
 	capital = "The Hub"
 	economic_power = 1.0
-	secondary_langs = list(LANGUAGE_SIGN)
 
 /decl/cultural_info/location/human/cinu
 	name = HOME_SYSTEM_CINU
@@ -194,8 +178,6 @@
 	with many refusing to participate in the Defence Forces. Instead, they serve as peacekeepers and diplomats. The Cinuan People were controversially non-aligned during the Gaian Conflict."
 	capital = "Al-Mular"
 	economic_power = 1.0
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
 /decl/cultural_info/location/human/yuklid
 	name = HOME_SYSTEM_YUKLID
@@ -209,8 +191,6 @@
 	More recently, a spiritualist movement has developed on the planet, taking aspects of religious theory and the hippocratic oath."
 	capital = "Iyeegi"
 	economic_power = 0.9
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
 /decl/cultural_info/location/human/lordania
 	name = HOME_SYSTEM_LORDANIA
@@ -225,8 +205,6 @@
 	and often see themselves as better. Most Lordanians are seen as untrustworthy, or selfish. As such, they are rarely seen within Sol's Defence Forces."
 	capital = "New Ares"
 	economic_power = 1.2
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
 
 /decl/cultural_info/location/human/kingston
 	name = HOME_SYSTEM_KINGSTON
@@ -241,8 +219,6 @@
 	Typically dark in skin due to the planet's proximity to it's sun, Kingstonians come in various forms."
 	capital = "New Havana"
 	economic_power = 1.1
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_GALCOM)
 
 /decl/cultural_info/location/human/gaia
 	name = HOME_SYSTEM_GAIA
@@ -255,8 +231,6 @@
 	once again.  They suffered hard twenty years prior, and fear they may suffer again."
 	capital = "New Venice"
 	economic_power = 1.0
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_INDEPENDENT, LANGUAGE_GALCOM)
 
 /decl/cultural_info/location/human/magnitka
 	name = HOME_SYSTEM_MAGNITKA
@@ -268,6 +242,4 @@
 	Though historically relatively isolationist, today Magnitka finds itself more and more closely associated with the Gilgamesh Colonial Confederation, in an effort to offset its economic decline."
 	capital = "Labortown"
 	economic_power = 0.8
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_GALCOM)
 	ruling_body = "Magnitka"

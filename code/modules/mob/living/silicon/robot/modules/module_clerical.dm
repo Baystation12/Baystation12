@@ -3,14 +3,17 @@
 		"Service" = TRUE
 	)
 	languages = list(
-		LANGUAGE_SOL_COMMON  = TRUE,
-		LANGUAGE_UNATHI      = TRUE,
-		LANGUAGE_SKRELLIAN   = TRUE,
-		LANGUAGE_LUNAR       = TRUE,
-		LANGUAGE_GUTTER      = TRUE,
-		LANGUAGE_INDEPENDENT = TRUE,
-		LANGUAGE_SPACER      = TRUE
-	)
+		LANGUAGE_HUMAN_EURO       = TRUE,
+		LANGUAGE_HUMAN_ARABIC     = TRUE,
+		LANGUAGE_HUMAN_INDIAN     = TRUE,
+		LANGUAGE_HUMAN_CHINESE    = TRUE,
+		LANGUAGE_HUMAN_IBERIAN    = TRUE,
+		LANGUAGE_HUMAN_RUSSIAN    = TRUE,
+		LANGUAGE_UNATHI           = TRUE,
+		LANGUAGE_SKRELLIAN        = TRUE,
+		LANGUAGE_GUTTER           = TRUE,
+		LANGUAGE_SPACER           = TRUE
+		)
 
 /obj/item/weapon/robot_module/clerical/butler
 	name = "service robot module"

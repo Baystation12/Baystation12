@@ -3,7 +3,7 @@
 	description = "The Sol Central Government, commonly referred to as SolGov or the SCG, is a federal republic \
 	composed of numerous human member states spanning many systems.\
 	Based in the Sol System and with most seats of Government on Olympus, Mars,\
-	the SCG governs the majority of human space. Currently engaged in a Cold War with the Terran Colonial Confederation \
+	the SCG governs the majority of human space. Currently engaged in a cold war with the Confederation of Gilgamesh \
 	Its primary governing bodies are the Assemblies which are led by an Assembly-elected secretary general. \
 	Member states have a great degree of freedom in their actions, though the SCG manages sapient rights, \
 	domestic security, economic policy, and diplomacy for humanity as a whole. The SCG's population is diverse \
@@ -11,7 +11,7 @@
 	habitats, and celestial bodies. However, it is large, cumbersome, divided and slow to respond to issues due to \
 	its massive bureaucracy and the distance between worlds. Through its member states, the SCG governs as one of the \
 	most advanced and powerful civilisations in the known galaxy."
-	language = LANGUAGE_SOL_COMMON
+	language = LANGUAGE_HUMAN_EURO
 
 /decl/cultural_info/faction/scg/fleet
 	name = FACTION_FLEET
@@ -24,7 +24,7 @@
 	It is well funded, but seen as complacent and bloated. Until recently the Fleet have not had a serious enemy to deal with, \
 	but is generally respected by the populace due to their work keeping away pirates, putting down insurrections, destroying \
 	smugglers and taking potshots at the ocassional Vox. Currently undergoing major \
-	overhauls to improve efficiency and capabilities, publicly to counter encroachment by the Terran Colonial Confederation."
+	overhauls to improve efficiency and capabilities, publicly to counter encroachment by the Confederation of Gilgamesh."
 
 /decl/cultural_info/faction/torchco
 	name = FACTION_CORPORATE
@@ -38,7 +38,7 @@
 	reluctant to harpoon their own project."
 	economic_power = 1.2
 	subversive_potential = 35
-	language = LANGUAGE_SOL_COMMON
+	language = LANGUAGE_HUMAN_EURO
 
 /decl/cultural_info/faction/gcc
 	name = FACTION_INDIE_CONFED
@@ -52,7 +52,7 @@
 	a period of steady economic recovery, with most of its exports being manufactured goods, primarily armaments."
 	economic_power = 0.9
 	subversive_potential = 50
-	language = LANGUAGE_INDEPENDENT
+	language = LANGUAGE_HUMAN_RUSSIAN
 
 /decl/cultural_info/faction/remote
 	name = FACTION_EXPEDITIONARY
@@ -64,8 +64,7 @@
 	The primary purpose of the Expeditionary Corps is the exploration of uncharted space and worlds, mineralogy surveys and \
 	Xenoarchaeological studies and, most importantly, the discovery of new alien life. The Expeditionary Corps is \
 	often considered a motivated, starry-eyed organisation that genuinely strives to be the best it can."
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON)
+	language = LANGUAGE_HUMAN_EURO
 
 /decl/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN
@@ -98,8 +97,6 @@
 	many employee benefits and focus on employee development, though many dread being transferred to one of the 'remote' branches."
 	economic_power = 1.2
 	subversive_potential = 15
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_GALCOM)
 
 /decl/cultural_info/faction/free
 	name = FACTION_FREETRADE
@@ -111,7 +108,6 @@
 	selling a great many restricted items and supplying all manner of goods indiscriminately."
 	economic_power = 1.3
 	subversive_potential = 15
-	language = LANGUAGE_SPACER
 
 /decl/cultural_info/faction/pcrc
 	name = FACTION_PCRC
@@ -121,8 +117,6 @@
 	it has quickly established itself as a reliable and effective provider of security solutions. This has often put it at odds with its main \
 	competitor, SAARE."
 	subversive_potential = 15
-	language = LANGUAGE_SPACER
-	secondary_langs = list(LANGUAGE_GALCOM, LANGUAGE_SOL_COMMON)
 
 /decl/cultural_info/faction/dais
 	name = FACTION_DAIS
@@ -134,10 +128,8 @@
 	and related products, they still remain the market leader in computer technologies."
 	economic_power = 1.1
 	subversive_potential = 15
-	language = LANGUAGE_SOL_COMMON
 
 /decl/cultural_info/faction/other
 	name = FACTION_OTHER
 	description = "You belong to one of the many other factions that operate in the galaxy. Numerous, too numerous to list, these factions represent a variety of interests, purposes, intents and goals."
 	subversive_potential = 25
-	language = LANGUAGE_GALCOM
