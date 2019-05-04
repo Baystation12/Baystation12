@@ -132,7 +132,10 @@
 	loaded_ammo -= to_fire
 	to_fire.loc = loc
 	to_fire.starting = loc
-	to_fire.launch(target.loc)
+	if(isnull(target))
+		to_fire.launch(target.loc)
+	else
+		to_fire.launch(target)
 	if(fire_sound)
 		playsound(loc, fire_sound, 75, 1)
 	dir = get_dir(loc,target.loc)

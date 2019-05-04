@@ -35,6 +35,7 @@
 	if(g.bitesize == 0)
 		g.bitesize = 1
 	visible_message("<span class = 'notice'>[M] picks one of the fruits off of [src]</span>")
+	next_fruit_at = world.time + XENO_PLANT_FRUITGROW_DELAY
 
 /obj/structure/xeno_plant/process()
 	if(world.time > next_smoke_at)
