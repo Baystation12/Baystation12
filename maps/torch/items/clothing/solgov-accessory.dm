@@ -350,6 +350,7 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/command/service
 	icon_state = "dept_exped_service"
+	color = "#d6bb64"
 
 /obj/item/clothing/accessory/solgov/department/command/fleet
 	icon_state = "dept_fleet"
@@ -386,6 +387,7 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/security/service
 	icon_state = "dept_exped_service"
+	color = "#721b1b"
 
 /obj/item/clothing/accessory/solgov/department/security/fleet
 	icon_state = "dept_fleet"
@@ -404,6 +406,7 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/medical/service
 	icon_state = "dept_exped_service"
+	color = "#7faad1"
 
 /obj/item/clothing/accessory/solgov/department/medical/fleet
 	icon_state = "dept_fleet"
@@ -440,6 +443,7 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/service/service
 	icon_state = "dept_exped_service"
+	color = "#7b965d"
 
 /obj/item/clothing/accessory/solgov/department/service/fleet
 	icon_state = "dept_fleet"
@@ -476,6 +480,7 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/research/service
 	icon_state = "dept_exped_service"
+	color = "#563768"
 
 /*********
 ranks - ec

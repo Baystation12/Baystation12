@@ -90,6 +90,11 @@
 	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
 	icon_state = "greydresscap_com"
 
+/obj/item/clothing/head/solgov/service/expedition/senior_command
+	name = "senior expedition officer's peaked cap"
+	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold and blue."
+	icon_state = "greydresscap_senior"
+
 /obj/item/clothing/head/solgov/service/army
 	name = "army wheel cover"
 	desc = "A green service uniform cover with an SCG Army crest."
@@ -396,7 +401,7 @@
 
 /obj/item/clothing/head/helmet/space/void/exploration
 	camera = /obj/machinery/camera/network/exploration
-	
+
 //SolGov Hardsuits
 
 /obj/item/clothing/head/helmet/space/void/engineering/alt/sol

@@ -20,12 +20,19 @@
 	dress_over = /obj/item/clothing/suit/dress/solgov/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
+/decl/hierarchy/mil_uniform/ec/com/senior
+	name = "EC senior command"
+	min_rank = 15
+
+	service_hat = /obj/item/clothing/head/solgov/service/expedition/senior_command
+	dress_hat = /obj/item/clothing/head/solgov/service/expedition/senior_command
+
 /decl/hierarchy/mil_uniform/ec/eng
 	name = "EC engineering"
 	departments = ENG
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/engineering, 
+	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/engineering,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
@@ -39,8 +46,8 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
-						 /obj/item/clothing/head/ushanka/solgov, 
-						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov, 
+						 /obj/item/clothing/head/ushanka/solgov,
+						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
 
@@ -264,7 +271,7 @@
 	departments = SCI
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/research
-	utility_extra = list(/obj/item/clothing/head/ushanka/solgov, 
+	utility_extra = list(/obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec)
 
@@ -275,8 +282,8 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command, 
-						 /obj/item/clothing/head/ushanka/solgov, 
+	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec)
 
@@ -294,8 +301,8 @@
 	name = "EC science command"
 	departments = SCI|COM
 
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command, 
-						 /obj/item/clothing/head/ushanka/solgov, 
+	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/cso)

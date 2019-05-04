@@ -6,8 +6,8 @@
 //Service
 
 /obj/item/clothing/suit/storage/solgov/service
-	name = "service jacket"
-	desc = "A uniform service jacket, plain and undecorated."
+	name = "service jumper"
+	desc = "A uniform service jumper, plain and undecorated."
 	icon_state = "blackservice"
 	item_state = "blackservice"
 	body_parts_covered = UPPER_TORSO|ARMS
@@ -18,53 +18,67 @@
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary
-	name = "expeditionary jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps."
+	name = "expeditionary jumper"
+	desc = "A uniform service jumper belonging to the SCG Expeditionary Corps."
 	icon_state = "ecservice_crew"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 		)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
+	name = "medical expeditionary jumper"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical/command
+	name = "medical officer's expeditionary jumper"
 	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering
+	name = "engineering expeditionary jumper"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering/command
+	name = "engineering officer's expeditionary jumper"
 	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/supply
+	name = "supply expeditionary jumper"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/security
+	name = "security expeditionary jumper"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/security/command
+	name = "security officer's expeditionary jumper"
 	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/service
+	name = "service expeditionary jumper"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
+	name = "service officer's expeditionary jumper"
 	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration
+	name = "exploration expeditionary jumper"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration/command
+	name = "exploration officer's expeditionary jumper"
 	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/research
+	name = "research expeditionary jumper"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/research/command
+	name = "research officer's expeditionary jumper"
 	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	name = "officer's expeditionary jumper"
 	icon_state = "ecservice_officer"
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/service)
 
