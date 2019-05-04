@@ -5,9 +5,6 @@
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
-		/datum/job/IGUARD,\
-		/datum/job/Emsville_Colonist,\
-		/datum/job/Emsville_Marshall,\
 		/datum/job/ship_crew_innie,\
 		/datum/job/ship_cap_innie,\
 		/datum/job/URF_commando,\
@@ -60,12 +57,9 @@
 		"Innie Base Spawns",\
 		"UNSC Base Spawns",\
 		"Covenant Base Spawns",\
-		"Emsville Spawn",\
-		"Emsville Spawn Marshall",\
 		"Research Facility Spawn",\
 		"Research Facility Director Spawn",\
-		"Research Facility Security Spawn",\
-		"Depot Guard Spawn")
+		"Research Facility Security Spawn")
 
 	default_spawn = DEFAULT_SPAWNPOINT_ID
 
