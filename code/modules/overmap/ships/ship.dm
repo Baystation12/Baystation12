@@ -93,6 +93,8 @@
 		return 0
 	if(!burn_delay)
 		return 0
+	if(!get_speed())
+		return 0
 	var/num_burns = get_speed()/get_acceleration() + 2 //some padding in case acceleration drops form fuel usage
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns/burns_per_grid)
@@ -153,7 +155,7 @@
 		return 0
 	for(var/datum/ship_engine/E in engines)
 		. |= E.can_burn()
-		
+
 //deciseconds to next step
 /obj/effect/overmap/ship/proc/ETA()
 	. = INFINITY
