@@ -313,10 +313,7 @@
 
 	if(isghost(user))
 		var/datum/computer_file/report/crew_record/E = get_crewmember_record(real_name)
-		if(E && (E.get_public_record() && E.get_public_record() != "No record supplied") || \
-				(E.get_medRecord() && E.get_medRecord() != "No record supplied") || \
-				(E.get_secRecord() && E.get_secRecord() != "No record supplied") || \
-				(E.get_emplRecord() && E.get_emplRecord() != "No record supplied"))
+		if(E)
 			msg += "<span class = 'deptradio'>Records:</span> <a href='?src=\ref[src];check_records=1'>\[View\]</a>\n"
 
 	if(mind && user.mind && name == real_name)
