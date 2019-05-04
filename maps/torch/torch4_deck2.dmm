@@ -3896,6 +3896,9 @@
 	dir = 1
 	},
 /obj/machinery/vending/wallmed1{
+	dir = 1;
+	icon_state = "wallmed";
+	layer = 3.3;
 	name = "Emergency NanoMed";
 	pixel_x = 0;
 	pixel_y = -32
@@ -7021,6 +7024,7 @@
 	icon_state = "bordercolorhalf";
 	dir = 1
 	},
+/obj/structure/reagent_dispensers/water_cooler,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/foyer)
 "pG" = (
@@ -7356,16 +7360,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/foyer)
-"qf" = (
-/obj/item/weapon/storage/mirror{
-	pixel_x = 28
-	},
-/obj/effect/floor_decal/corner/yellow/diagonal,
-/obj/structure/hygiene/toilet{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/maintenance/seconddeck/foreport)
 "qh" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
@@ -10395,18 +10389,12 @@
 /area/maintenance/seconddeck/foreport)
 "yk" = (
 /obj/effect/floor_decal/corner/yellow/diagonal,
-/obj/effect/landmark{
-	name = "xeno_spawn";
-	pixel_x = -1
-	},
+/obj/random_multi/single_item/punitelly,
 /turf/simulated/floor/tiled/freezer,
 /area/maintenance/seconddeck/foreport)
 "yl" = (
 /obj/effect/floor_decal/corner/yellow/diagonal,
-/obj/structure/hygiene/urinal{
-	pixel_y = 32
-	},
-/obj/random_multi/single_item/punitelly,
+/obj/machinery/vending/lavatory,
 /turf/simulated/floor/tiled/freezer,
 /area/maintenance/seconddeck/foreport)
 "yn" = (
@@ -10692,7 +10680,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
 "zb" = (
-/obj/machinery/vending/lavatory,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22
@@ -10719,6 +10706,10 @@
 	pixel_x = -28
 	},
 /obj/item/weapon/caution,
+/obj/effect/landmark{
+	name = "xeno_spawn";
+	pixel_x = -1
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/maintenance/seconddeck/foreport)
 "ze" = (
@@ -18668,6 +18659,14 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/maintenance/seconddeck/forestarboard)
+"Xz" = (
+/obj/item/weapon/storage/mirror{
+	pixel_x = 28
+	},
+/obj/effect/floor_decal/corner/yellow/diagonal,
+/obj/structure/hygiene/toilet,
+/turf/simulated/floor/tiled/freezer,
+/area/maintenance/seconddeck/foreport)
 "XA" = (
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
@@ -35628,8 +35627,8 @@ jV
 jV
 jV
 lr
-xq
 nc
+xq
 nc
 AF
 Bk
@@ -35830,8 +35829,8 @@ PX
 Ua
 Yp
 lr
+Xz
 yn
-qf
 nc
 AF
 mT

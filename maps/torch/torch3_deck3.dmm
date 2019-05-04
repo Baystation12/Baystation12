@@ -2022,10 +2022,13 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/vending/snix,
 /obj/item/device/radio/intercom/entertainment{
 	dir = 8;
 	pixel_x = 22
+	},
+/obj/machinery/vending/snix{
+	icon_state = "snix";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
@@ -2413,7 +2416,10 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/vending/fitness,
+/obj/machinery/vending/fitness{
+	icon_state = "fitness";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "fv" = (
@@ -4337,7 +4343,10 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/vending/coffee,
+/obj/machinery/vending/coffee{
+	icon_state = "coffee";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "jk" = (
@@ -4672,11 +4681,15 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
 "jT" = (
-/obj/machinery/vending/wallmed1{
-	pixel_x = 25
-	},
 /obj/effect/floor_decal/corner/green/three_quarters{
 	dir = 1
+	},
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	icon_state = "wallmed";
+	dir = 8;
+	pixel_x = 28;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
@@ -7522,9 +7535,12 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "qt" = (
-/obj/machinery/vending/cola,
 /obj/effect/floor_decal/corner/lime/three_quarters{
 	dir = 1
+	},
+/obj/machinery/vending/cola{
+	icon_state = "Cola_Machine";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -9740,7 +9756,10 @@
 /turf/simulated/wall/prepainted,
 /area/vacant/office)
 "vi" = (
-/obj/machinery/vending/snack,
+/obj/machinery/vending/snack{
+	icon_state = "snack";
+	dir = 8
+	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "vj" = (
@@ -10027,9 +10046,12 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/sleep/bunk)
 "vR" = (
-/obj/machinery/vending/snack,
 /obj/machinery/light/spot{
 	dir = 8
+	},
+/obj/machinery/vending/snack{
+	icon_state = "snack";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
@@ -10548,9 +10570,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/sleep/bunk)
 "wY" = (
-/obj/machinery/vending/cola,
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Cryogenic Storage - Fore Starboard";
+	dir = 4
+	},
+/obj/machinery/vending/cola{
+	icon_state = "Cola_Machine";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -11230,7 +11255,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/machinery/vending/lavatory,
+/obj/machinery/vending/lavatory{
+	icon_state = "lavatory";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "yi" = (
@@ -11689,6 +11717,10 @@
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
+	},
+/obj/structure/reagent_dispensers/water_cooler{
+	icon_state = "water_cooler";
+	dir = 4
 	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
@@ -12353,6 +12385,7 @@
 /obj/structure/closet/secure_closet/freezer/kitchen{
 	req_access = newlist()
 	},
+/obj/item/weapon/reagent_containers/food/snacks/mint,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "AY" = (
@@ -12524,7 +12557,10 @@
 /area/crew_quarters/sleep/cryo)
 "Bw" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/uniform_vendor,
+/obj/machinery/uniform_vendor{
+	icon_state = "robotics";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "Bx" = (
@@ -13636,9 +13672,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
 "Et" = (
-/obj/machinery/vending/coffee,
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Cryogenic Storage - Fore Port";
+	dir = 4
+	},
+/obj/machinery/vending/coffee{
+	icon_state = "coffee";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -13819,12 +13858,15 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
 "EV" = (
-/obj/machinery/vending/cigarette,
 /obj/machinery/light/spot{
 	dir = 8
 	},
 /obj/structure/sign/ecplaque{
 	pixel_y = -30
+	},
+/obj/machinery/vending/cigarette{
+	icon_state = "cigs";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
@@ -17282,7 +17324,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
 "NI" = (
-/obj/machinery/vending/coffee,
+/obj/machinery/vending/coffee{
+	icon_state = "coffee";
+	dir = 8
+	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "NJ" = (
@@ -17351,7 +17396,10 @@
 /turf/space,
 /area/space)
 "Oc" = (
-/obj/machinery/vending/fitness,
+/obj/machinery/vending/fitness{
+	icon_state = "fitness";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
 "Od" = (
@@ -17956,8 +18004,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/engineering/hardstorage)
 "PT" = (
-/obj/machinery/vending/coffee,
 /obj/effect/floor_decal/corner/lime/three_quarters{
+	dir = 4
+	},
+/obj/machinery/vending/coffee{
+	icon_state = "coffee";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -18003,7 +18054,8 @@
 /area/space)
 "Qd" = (
 /obj/structure/reagent_dispensers/water_cooler{
-	pixel_x = -6
+	icon_state = "water_cooler";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
@@ -18100,16 +18152,15 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "Qu" = (
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/obj/machinery/smartfridge/foods,
 /obj/machinery/door/blast/shutters{
 	dir = 2;
 	id = "kitchen";
 	name = "Kitchen Shutters"
 	},
-/obj/effect/floor_decal/corner/grey/diagonal{
-	dir = 4
-	},
-/obj/machinery/smartfridge/foods,
-/obj/item/weapon/reagent_containers/food/snacks/mint,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "Qv" = (
@@ -18535,9 +18586,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
 "RW" = (
-/obj/machinery/vending/fitness,
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/machinery/vending/fitness{
+	icon_state = "fitness";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
@@ -19213,7 +19267,10 @@
 /turf/simulated/floor/airless,
 /area/thruster/d3port)
 "Ug" = (
-/obj/machinery/smartfridge/drinks,
+/obj/machinery/smartfridge/drinks{
+	icon_state = "fridge_dark";
+	dir = 4
+	},
 /obj/machinery/door/blast/shutters{
 	dir = 4;
 	id = "bar";
