@@ -8,7 +8,7 @@
 	dynamic_lighting = 0
 	requires_power= 0
 	has_gravity = 1
-	luminosity = 1
+	luminosity = 0
 
 /area/exo_Ice_facility/ground/interior/living
 	name = "KS7-535 Facility Living Quarters"
@@ -48,14 +48,14 @@
 	dynamic_lighting = 0
 	requires_power= 0
 	has_gravity = 1
-	luminosity = 1
+	luminosity = 0
 
 /area/exo_Ice_facility/ground/exterior/south
 	name = "KS7-535 Southern Wilderness"
 	dynamic_lighting = 0
 	requires_power= 0
 	has_gravity = 1
-	luminosity = 1
+	luminosity = 0
 
 /area/exo_Ice_facility/ground/exterior/north
 	name = "KS7-535 Northern Wilderness"
