@@ -42,3 +42,34 @@
 	burst_delay = 0.2 SECONDS
 
 	burst = 5
+
+/obj/vehicles/warthog/turretless
+	name = "M12 Warthog LRV Recon Modified"
+	desc = "A nimble vehicle capable of performing small scale recon operations."
+
+	icon = 'code/modules/halo/vehicles/finalwarthog-turretless.dmi'
+	icon_state = "warthog-turretless"
+
+	vehicle_move_delay = 1.6
+
+	occupants = list(2,0)
+	exposed_positions = list("driver" = 15,"passenger" = 20)
+
+/obj/vehicles/warthog/troop
+	name = "M12 Warthog LRV Troop Transport Modified"
+	desc = "A nimble vehicle capable of providing small to medium scale troop transport."
+
+	icon = 'code/modules/halo/vehicles/finalwarthog.dmi'
+	icon_state = "Warthog"
+
+	vehicle_move_delay = 1.4
+
+	occupants = list(4,0)
+	exposed_positions = list("driver" = 15,"passenger" = 30)
+
+/obj/vehicles/warthog/troop/police
+	name = "M12 Warthog LRV Police Modified"
+	desc = "A nimble vehicle capable of providing small to medium scale troop transport."
+
+	icon = 'code/modules/halo/vehicles/GCPD_Warthog.dmi'
+	icon_state = "Warthog"
