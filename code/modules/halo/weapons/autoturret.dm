@@ -1,7 +1,7 @@
-#define BASE_AUTOTURRET_INTERACT_DELAY 15 SECONDS
+#define BASE_AUTOTURRET_INTERACT_DELAY 10 SECONDS
 
 /obj/structure/autoturret
-	name = "Autoturret"
+	name = "\improper Autoturret"
 	desc = "A mounted weapon powered by a simple AI and a sensor package. It has a slot for materials."
 
 	icon = 'code/modules/halo/weapons/turrets/turrets_unsc.dmi'
@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_HUGE
 
 	var/vision_range = 9
-	var/burst_size = 5
+	var/burst_size = 7
 	var/list/friendlies_stored = list()
 	var/list/allowed_materials = list("steel" = 5) //Format: material name = amount of bullets created
 	var/obj/item/projectile/to_fabricate = /obj/item/projectile/bullet/a762_ap
@@ -40,7 +40,7 @@
 	if(!istype(user))
 		return
 	visible_message("<span class = 'notice'>[user] starts to activate [src]...</span>")
-	if(!do_after(user,BASE_AUTOTURRET_INTERACT_DELAY*0.66,src))
+	if(!do_after(user,BASE_AUTOTURRET_INTERACT_DELAY*0.5,src))
 		return
 	visible_message("<span class = 'notice'>[user] activates [src]</span>")
 	targets_in_view.Cut()
@@ -84,7 +84,7 @@
 	if(!istype(user))
 		return
 	visible_message("<span class = 'notice'>[user] starts to activate [src]'s FoF scanning arrays...</span>")
-	if(!do_after(user,BASE_AUTOTURRET_INTERACT_DELAY*0.66,src))
+	if(!do_after(user,BASE_AUTOTURRET_INTERACT_DELAY*0.5,src))
 		return
 	visible_message("<span class = 'notice'>[src] performs a scan of its surroundings, logging any nearby creatures as friendly.</span>")
 	for(var/mob/living/m in view(7,loc))
@@ -100,13 +100,12 @@
 	if(loaded_ammo.len == 0)
 		return
 	visible_message("<span class = 'danger'>[p] damages [src]'s ammunition storage!</span>")
-	loaded_ammo.Cut(loaded_ammo.len-p.damage)
+	loaded_ammo.Cut(loaded_ammo.len-(p.damage/2))
 
 /obj/structure/autoturret/process()
 	for(var/mob/living/m in view(vision_range,loc))
 		if(!(m in targets_in_view) && !(m in friendlies_stored) && !(m.health <= 0))
 			targets_in_view += m
-			visible_message("<span class = 'danger'>[src] beeps at [m]!</span>")
 
 	if(targets_in_view.len > 0)
 		var/list/targets_fireat = targets_in_view.Copy()
@@ -160,5 +159,5 @@
 	. = ..()
 
 /obj/structure/autoturret/ONI
-	name = "Automated Turret"
+	name = "\improper Automated Turret"
 	desc = "An automatic turret with integrated forerunner technology for ammunition manufacturing and long-range targeting."
