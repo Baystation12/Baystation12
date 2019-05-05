@@ -1,0 +1,4 @@
+author: "ChaosAlpha"
+delete-after: True
+changes: 
+  - bugfix: "New < and > keybinds are now CTRL+. and CTRL+ in non hotkey-mode, to circumvent a byond limitation. You will need to update your skin."
