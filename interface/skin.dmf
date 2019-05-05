@@ -395,13 +395,10 @@ macro "macro"
 		name = "F12"
 		command = "F12"
 	elem 
-		name = "SHIFT+<"
+		name = "CTRL+,"
 		command = "move-upwards"
 	elem 
-		name = ">"
-		command = "move-upwards"
-	elem 
-		name = "<"
+		name = "CTRL+."
 		command = "move-down"
 
 macro "hotkeymode"
@@ -809,13 +806,10 @@ macro "borgmacro"
 		name = "F12"
 		command = "F12"
 	elem 
-		name = "SHIFT+<"
+		name = "CTRL+,"
 		command = "move-upwards"
 	elem 
-		name = ">"
-		command = "move-upwards"
-	elem 
-		name = "<"
+		name = "CTRL+."
 		command = "move-down"
 
 
