@@ -22,30 +22,29 @@
 		goals = null
 
 	var/pref_val = current.get_preference_value(/datum/client_preference/give_personal_goals)
-	if(pref_val != GLOB.PREF_NEVER && (pref_val != GLOB.PREF_NON_ANTAG || !player_is_antag(src)))
-		var/list/available_goals = SSgoals.global_personal_goals ? SSgoals.global_personal_goals.Copy() : list()
-		if(ishuman(current))
-			var/mob/living/carbon/human/H = current
-			for(var/token in H.cultural_info)
-				var/decl/cultural_info/culture = H.get_cultural_value(token)
-				var/list/new_goals = culture.get_possible_personal_goals(job ? job.department_flag : null)
-				if(LAZYLEN(new_goals))
-					available_goals |= new_goals
-
-		if(isnull(add_amount))
-			var/min_goals = 1
-			var/max_goals = 3
-			if(job && LAZYLEN(job.possible_goals))
-				available_goals |= job.possible_goals
-				min_goals = job.min_goals
-				max_goals = job.max_goals
-			add_amount = rand(min_goals, max_goals)
-
-		for(var/i = 1 to min(LAZYLEN(available_goals), add_amount))
-			var/goal = pick_n_take(available_goals)
-			new goal(src)
-		return TRUE
-	else
+	if(pref_val == GLOB.PREF_NEVER || (pref_val == GLOB.PREF_NON_ANTAG && player_is_antag(src)))
 		if(!is_spawning)
 			to_chat(src.current, "<span class='warning'>Your preferences do not allow you to add random goals.</span>")
 		return FALSE
+
+	var/list/available_goals = SSgoals.global_personal_goals ? SSgoals.global_personal_goals.Copy() : list()
+	if(ishuman(current))
+		var/mob/living/carbon/human/H = current
+		for(var/token in H.cultural_info)
+			var/decl/cultural_info/culture = H.get_cultural_value(token)
+			var/list/new_goals = culture.get_possible_personal_goals(job ? job.department_flag : null)
+			if(LAZYLEN(new_goals))
+				available_goals |= new_goals
+	if(isnull(add_amount))
+		var/min_goals = 1
+		var/max_goals = 3
+		if(job && LAZYLEN(job.possible_goals))
+			available_goals |= job.possible_goals
+			min_goals = job.min_goals
+			max_goals = job.max_goals
+		add_amount = rand(min_goals, max_goals)
+
+	for(var/i = 1 to min(LAZYLEN(available_goals), add_amount))
+		var/goal = pick_n_take(available_goals)
+		new goal(src)
+	return TRUE
