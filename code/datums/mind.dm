@@ -177,8 +177,9 @@
 		if(can_modify)
 			if(is_admin)
 				log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
-			to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
-			generate_goals(assigned_job, TRUE, 1)
+			var/did_generate_goal = generate_goals(assigned_job, TRUE, 1)
+			if(did_generate_goal)
+				to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
 		return TRUE // To avoid 'you are not an admin' spam.
 
 	if(href_list["abandon_goal"])
@@ -203,7 +204,7 @@
 		if(caller && caller == current) can_modify = TRUE
 
 		if(goal && (goal in goals) && can_modify)
-			qdel(goal) 
+			qdel(goal)
 			generate_goals(assigned_job, TRUE, 1)
 			if(goals)
 				goal = goals[LAZYLEN(goals)]
