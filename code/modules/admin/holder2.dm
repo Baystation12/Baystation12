@@ -79,13 +79,16 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	return 0
 
 /datum/admins/proc/needs_grant()
-	return ((flags & AF_NEEDSGRANT) && (!GLOB.granted_admins[ckey]))
+	return ((flags & AF_NEEDSGRANT) && (!(ckey in GLOB.granted_admins)))
 
 /datum/admins/proc/grant_rights()
 	if (needs_grant())
 		GLOB.granted_admins |= ckey
 		if (ckey in GLOB.ckey_directory)
-			GLOB.admins |= GLOB.ckey_directory[ckey]
+			var/client/target = GLOB.ckey_directory[ckey]
+			GLOB.admins |= target
+			target.add_admin_verbs()
+			to_chat(target, SPAN_LOGMESSAGE("NOTICE: You have been granted [rank] rights"))
 		log_and_message_admins("has granted [rank] rights to [ckey]")
 
 /client/proc/deadmin()

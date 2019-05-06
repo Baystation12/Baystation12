@@ -327,8 +327,8 @@ var/list/admin_verbs_mod = list(
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
 	else if (holder && holder.needs_grant())
-		to_chat(src, SPAN_NOTICE("You have grantable [holder.rank] rights available."))
-		message_admins("[key_name_admin(src)] has connected with grantable [holder.rank] rights")
+		to_chat(src, SPAN_LOGMESSAGE("NOTICE: You have grantable [holder.rank] rights available."))
+		message_admins("[key_name_admin(src)] has connected with grantable [holder.rank] rights (<a href='?_src_=holder;grantrights=\ref[src]'>GRANT</a>)")
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(

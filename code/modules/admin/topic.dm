@@ -1083,11 +1083,14 @@
 
 	else if (href_list["grantrights"])
 		if(check_rights(R_PERMISSIONS, 1))
-			var/mob/M = locate(href_list["grantrights"])
-			if (!istype(M) || !M.client || !M.client.holder || !M.client.holder.needs_grant())
+			var/client/C = locate(href_list["grantrights"])
+			if (istype(C, /mob))
+				var/mob/M = C
+				C = M.client
+			if (!istype(C) || !C.holder || !C.holder.needs_grant())
 				to_chat(usr, SPAN_WARNING("Invalid target for granting rights"))
 			else
-				M.client.holder.grant_rights()
+				C.holder.grant_rights()
 	// player info stuff
 
 	if(href_list["add_player_info"])
