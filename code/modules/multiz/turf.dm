@@ -159,11 +159,10 @@
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/floor/S = C
-			if (S.get_amount() < 1)
+			if (!S.use(1))
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			S.use(1)
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else

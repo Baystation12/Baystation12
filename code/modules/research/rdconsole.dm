@@ -471,8 +471,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			qdel(M)
 		if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
 			var/obj/item/stack/material/S = I
-			if(S.get_amount() > 1)
-				S.use(1)
+			if(S.use(1))
 				linked_destroy.loaded_item = S
 			else
 				qdel(S)
