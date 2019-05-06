@@ -116,8 +116,8 @@
 	dispersion = list(0.2)
 
 	firemodes = list(
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.4, 0.4)),
-		list(mode_name="semi-automatic", 	burst=1, fire_delay=null, move_delay=6,    burst_accuracy=list(1), dispersion=list(0.0)),
+		list(mode_name="2-round bursts", burst=2, fire_delay=3.5, move_delay=6,    burst_accuracy=list(-1,-1),       dispersion=list(0.0, 0.4, 0.4)),
+		list(mode_name="semi-automatic", 	burst=1, fire_delay=1.5, move_delay=6,    burst_accuracy=list(1), dispersion=list(0.0)),
 		)
 
 /obj/item/weapon/gun/projectile/m392_dmr/innie/update_icon()
