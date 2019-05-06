@@ -18,13 +18,13 @@
 	icon_state = "Trainingpistol Shot"
 
 /obj/item/projectile/covenant/plasmapistol
-	damage = 20
+	damage = 45
 	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 
 /obj/item/projectile/covenant/plasmapistol/overcharge
-	damage = 50
+	damage = 60
 	icon_state = "Overcharged_Plasmapistol shot"
 
 /obj/item/projectile/covenant/plasmapistol/overcharge/on_impact()

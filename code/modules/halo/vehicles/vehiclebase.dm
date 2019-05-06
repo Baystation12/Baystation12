@@ -318,7 +318,7 @@
 	comp_prof.take_comp_explosion_dam(severity)
 	for(var/position in exposed_positions)
 		for(var/mob/living/m in get_occupants_in_position(position))
-			m.apply_damage((300/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
+			m.apply_damage((250/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)

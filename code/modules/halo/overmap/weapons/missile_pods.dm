@@ -51,7 +51,8 @@
 	damage = 0 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/missile_damage_proj/on_impact(var/atom/impacted)
-	explosion(loc,-1,2,4,5, adminlog = 0)
+	if(!istype(impacted,/obj/effect/shield))
+		explosion(loc,-1,2,4,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
 	. = ..()
