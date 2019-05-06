@@ -52,7 +52,7 @@
 					w.embedded_objects -= embedded //Removing the embedded item from the wound
 
 	mob_containing.contents -= src
-	loc = mob_containing.loc //And placing it on the ground below
+	loc = null
 	qdel(src)
 
 /obj/item/weapon/grenade/plasma/heavy_plasma
