@@ -30,7 +30,7 @@
 #define MATERIAL_ELEVATORIUM             "elevatorium"
 #define MATERIAL_ALIENALLOY              "aliumium"
 #define MATERIAL_SAND                    "sand"
-#define MATERIAL_GRAPHENE                "graphene"
+#define MATERIAL_GRAPHITE                "graphite"
 #define MATERIAL_DEUTERIUM               "deuterium"
 #define MATERIAL_TRITIUM                 "tritium"
 #define MATERIAL_SUPERMATTER             "supermatter"

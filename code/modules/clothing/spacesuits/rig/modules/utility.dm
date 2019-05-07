@@ -69,7 +69,7 @@
 	interface_desc = "A sonar system for detecting large masses of ore."
 	engage_string = "Begin Scan"
 	usable = 1
-	selectable = 0
+	selectable = 1
 	use_power_cost = 200
 	device_type = /obj/item/device/scanner/mining
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
