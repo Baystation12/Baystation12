@@ -30,16 +30,16 @@
 			/obj/screen/movable/exosuit/rename,
 			/obj/screen/movable/exosuit/toggle/camera
 			)
-		i = 1
+		i = 0
 		var/pos = 7
 		for(var/additional_hud in additional_hud_elements)
 			var/obj/screen/movable/exosuit/M = new additional_hud(src)
-			M.screen_loc = "1:6,[pos]:11"
+			M.screen_loc = "1:6,[pos]:[i * -12]"
 			hud_elements |= M
 			i++
-			if(i>=3)
-				i = 0
+			if(i == 3)
 				pos--
+				i = 0
 
 		hud_health = new /obj/screen/movable/exosuit/health(src)
 		hud_health.screen_loc = "EAST-1:28,CENTER-3:11"
