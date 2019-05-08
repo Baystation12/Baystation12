@@ -10,6 +10,10 @@
 			message = copytext(message,2+length(speaking.key))
 		else
 			speaking = get_default_language()
+			if (!speaking)
+				to_chat(src, SPAN_WARNING("You don't know a language and cannot speak."))
+				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
+				return
 
 	message = sanitize(message)
 	var/obj/item/organ/internal/voicebox/vox = locate() in internal_organs

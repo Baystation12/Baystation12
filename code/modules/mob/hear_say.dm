@@ -69,7 +69,7 @@
 	else
 		if(language)
 			var/nverb = null
-			if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check to see if we can understand what the speaker is saying. If so, add the name of the language after the verb. Don't do this for Galactic Common.
+			if(!say_understands(speaker,language)) //Check to see if we can understand what the speaker is saying. If so, add the name of the language after the verb. Don't do this for Galactic Common.
 				on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, verb)]</span>")
 			else //Check if the client WANTS to see language names.
 				switch(src.get_preference_value(/datum/client_preference/language_display))
@@ -201,7 +201,7 @@
 
 	var/formatted
 	if(language)
-		if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check if we understand the message. If so, add the language name after the verb. Don't do this for Galactic Common.
+		if(!say_understands(speaker,language)) //Check if we understand the message. If so, add the language name after the verb. Don't do this for Galactic Common.
 			formatted = language.format_message_radio(message, verb)
 		else
 			var/nverb = null

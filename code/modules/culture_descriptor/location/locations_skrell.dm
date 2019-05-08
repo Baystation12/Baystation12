@@ -6,8 +6,6 @@
 		mountains in the south to temperate zones in the inner areas. Composed of hundreds of city-states, Qerr'Balak is still home to a sizable population of Skrell. \
 		While no longer the sole powerhouse of the Skrell civilisation, it is still widely respected among skrellkind as their homeworld, and for its academic and \
 		scientific prowess."
-	language = LANGUAGE_SKRELLIAN
-	additional_langs = list(LANGUAGE_GALCOM)
 	capital = "None"
 	ruling_body = "None"
 	distance = "67 light years"
@@ -21,8 +19,6 @@
 	warmer than Qerr'Balak, with hundreds of city-states dotting the surface, most of which are heavily invested in manufacturing and logistics, benefiting from the \
 	trade of raw resources with frontier worlds.This rising star of the Skrell territories is considered an economic powerhouse, with its city states wielding influence \
 	across the frontier."
-	language = LANGUAGE_SKRELLIAN
-	additional_langs = list(LANGUAGE_GALCOM)
 	capital = "None"
 	ruling_body = "None"
 	distance = "300 light years"
@@ -37,8 +33,6 @@
 	The primary export of the planet is rare minerals, though it possesses a strong military defence industry also. In spite of their situation the city-state regularly \
 	attempts to negotiate and open diplomatic channels with their assailants to little avail.Geographically, the planet is fairly mountainous and rocky, with a few deep lakes \
 	in mountain valleys, around which most mining stations are built."
-	language = LANGUAGE_SKRELLIAN
-	additional_langs = list(LANGUAGE_GALCOM)
 	capital = "None"
 	ruling_body = "None"
 	distance = "350 light years"
@@ -51,9 +45,6 @@
 	humanity, and it is here that a number of skrellian corporations offer loan services of skilled Skrell to human organizations. Many inner-system city states use their \
 	counterparts and their corporations as an intermediary to trade with humanity while remaining obscure. Despite the planet's prosperity there is a growing conservative \
 	movement in many city-states concerned with the perceived invasive influence of humankind and its potential long-term damage."
-	language = LANGUAGE_SKRELLIAN
-	additional_langs = list(LANGUAGE_GALCOM)
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_HUMAN_EURO)
 	capital = "None"
 	ruling_body = "None"
 	distance = "32 light years"
@@ -65,9 +56,6 @@
 	and instead are governed by the SDTF of the system in which they reside, with all services and installations under the control of the local Raskinta SDTF Commander \
 	rather than a Qerr-Skria.Life in these circumstances is often more regimented and disciplined, with a stronger emphasis on community and collaboration, with varying extremes \
 	depending on the status, funding and level of military engagements the SDTF is currently in."
-	language = LANGUAGE_SKRELLIAN
-	additional_langs = list(LANGUAGE_GALCOM)
-	secondary_langs = list(LANGUAGE_SIGN)
 	capital = "None"
 	ruling_body = "Your local SDTF"
 	distance = "None"

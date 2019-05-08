@@ -167,6 +167,10 @@
 
 #define JOINTEXT(X) jointext(X, null)
 
+#define SPAN_ITALIC(X) "<span class='italic'>[X]</span>"
+
+#define SPAN_BOLD(X) "<span class='bold'>[X]</span>"
+
 #define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
 
 #define SPAN_WARNING(X) "<span class='warning'>[X]</span>"

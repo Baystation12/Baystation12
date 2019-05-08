@@ -148,7 +148,6 @@ var/list/ai_verbs_default = list(
 
 	//Languages
 	add_language("Robot Talk", 1)
-	add_language(LANGUAGE_GALCOM, 1)
 	add_language(LANGUAGE_EAL, 1)
 	add_language(LANGUAGE_HUMAN_EURO, 1)
 	add_language(LANGUAGE_HUMAN_ARABIC, 1)
@@ -156,7 +155,8 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_HUMAN_IBERIAN, 1)
 	add_language(LANGUAGE_HUMAN_INDIAN, 1)
 	add_language(LANGUAGE_HUMAN_RUSSIAN, 1)
-	add_language(LANGUAGE_UNATHI, 1)
+	add_language(LANGUAGE_HUMAN_SELENIAN, 1)
+	add_language(LANGUAGE_UNATHI_SINTA, 1)
 	add_language(LANGUAGE_SKRELLIAN, 1)
 	add_language(LANGUAGE_GUTTER, 1)
 	add_language(LANGUAGE_SPACER, 1)

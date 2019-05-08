@@ -80,6 +80,7 @@
 	allowed_ranks = list(
 		/datum/mil_rank/civ/civ
 	)
+	required_language = LANGUAGE_HUMAN_EURO
 
 /datum/map/torch
 	default_assistant_title = "Passenger"

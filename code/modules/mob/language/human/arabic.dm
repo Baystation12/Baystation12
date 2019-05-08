@@ -6,10 +6,16 @@
 	key = "4"
 	shorthand = "PSA"
 	space_chance = 35
-	partial_understanding = list(LANGUAGE_HUMAN_INDIAN = 10, LANGUAGE_HUMAN_CHINESE = 5, LANGUAGE_HUMAN_EURO = 5)
-
-/datum/language/human/arabic/syllables = list(
-	"af", "if", "ba", "ta", "tha", "id", "jem", "ha", "kha", "dal", "dhl", "ra", "zay", "sen", "um", "shn", "sid", "ad",
-	"ta", "za", "ayn", "gha", "zir", "yn", "fa", "qaf", "iam", "mim", "al", "ja", "non", "ha", "waw", "ya", "hem", "zah", "hml",
-	"ks", "ini", "da", "ks", "iga", "ih", "la", "ulf", "xe", "ayw", "'", "-"
-)
+	partial_understanding = list(
+		LANGUAGE_HUMAN_EURO = 5,
+		LANGUAGE_HUMAN_CHINESE = 5,
+		LANGUAGE_HUMAN_INDIAN = 10,
+		LANGUAGE_HUMAN_SELENIAN = 5,
+		LANGUAGE_SPACER = 20
+	)
+	syllables = list(
+		"af", "if", "ba", "ta", "tha", "id", "jem", "ha", "kha", "dal", "dhl", "ra", "zay",
+		"sen", "um", "shn", "sid", "ad", "ta", "za", "ayn", "gha", "zir", "yn", "fa", "qaf",
+		"iam", "mim", "al", "ja", "non", "ha", "waw", "ya", "hem", "zah", "hml", "ks", "ini",
+		"da", "ks", "iga", "ih", "la", "ulf", "xe", "ayw", "'", "-"
+	)

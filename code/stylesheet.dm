@@ -74,6 +74,8 @@ h1.alert, h2.alert		{color: #000000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
+.italic				{font-style: italic;}
+.bold					{font-weight: bold;}
 .danger					{color: #ff0000; font-weight: bold;}
 .warning				{color: #ff0000; font-style: italic;}
 .boldannounce			{color: #ff0000; font-weight: bold;}
@@ -100,13 +102,13 @@ h1.alert, h2.alert		{color: #000000;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 .adherent				{color: #526c7a;}
 
-.solcom					{color: #22228b;}
 .chinese				{color: #d4a52a;}
 .indian					{color: #422863;}
 .iberian				{color: #ff6600;}
 .russian				{color: #9c250b;}
 .arabic					{color: #128b11;}
 .spacer					{color: #9c660b;}
+.selenian       {color: #22228b;}
 
 .interface				{color: #330033;}
 

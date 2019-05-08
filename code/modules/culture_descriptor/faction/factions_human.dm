@@ -11,7 +11,6 @@
 	habitats, and celestial bodies. However, it is large, cumbersome, divided and slow to respond to issues due to \
 	its massive bureaucracy and the distance between worlds. Through its member states, the SCG governs as one of the \
 	most advanced and powerful civilisations in the known galaxy."
-	language = LANGUAGE_HUMAN_EURO
 
 /decl/cultural_info/faction/scg/fleet
 	name = FACTION_FLEET
@@ -38,7 +37,6 @@
 	reluctant to harpoon their own project."
 	economic_power = 1.2
 	subversive_potential = 35
-	language = LANGUAGE_HUMAN_EURO
 
 /decl/cultural_info/faction/gcc
 	name = FACTION_INDIE_CONFED
@@ -52,7 +50,6 @@
 	a period of steady economic recovery, with most of its exports being manufactured goods, primarily armaments."
 	economic_power = 0.9
 	subversive_potential = 50
-	language = LANGUAGE_HUMAN_RUSSIAN
 
 /decl/cultural_info/faction/remote
 	name = FACTION_EXPEDITIONARY
@@ -64,7 +61,6 @@
 	The primary purpose of the Expeditionary Corps is the exploration of uncharted space and worlds, mineralogy surveys and \
 	Xenoarchaeological studies and, most importantly, the discovery of new alien life. The Expeditionary Corps is \
 	often considered a motivated, starry-eyed organisation that genuinely strives to be the best it can."
-	language = LANGUAGE_HUMAN_EURO
 
 /decl/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN

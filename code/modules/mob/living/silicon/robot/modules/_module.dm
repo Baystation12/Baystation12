@@ -11,8 +11,7 @@
 	var/networks = list()
 	var/languages = list(
 		LANGUAGE_HUMAN_EURO = 1,
-		LANGUAGE_UNATHI = 0,
-		LANGUAGE_SIIK_MAAS = 0,
+		LANGUAGE_UNATHI_SINTA = 0,
 		LANGUAGE_SKRELLIAN = 0,
 		LANGUAGE_GUTTER = 1,
 		LANGUAGE_SIGN = 0,
