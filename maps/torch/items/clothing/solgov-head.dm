@@ -27,7 +27,7 @@
 		)
 
 /obj/item/clothing/head/soft/solgov/expedition/co
-	name = "\improper Expeditionary Corps command cap"
+	name = "\improper Expeditionary Corps captain's cap"
 	desc = "It's a black ballcap bearing the Expeditonary Corps crest. The brim has gold trim."
 	icon_state = "expeditioncomsoft"
 
@@ -78,17 +78,22 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/solgov/service/expedition
-	name = "expedition peaked cap"
-	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps."
-	icon_state = "greydresscap"
+	name = "expeditionary peaked cap"
+	desc = "A peaked black uniform cap belonging to the SCG Expeditionary Corps."
+	icon_state = "ecdresscap"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi'
 		)
 
 /obj/item/clothing/head/solgov/service/expedition/command
-	name = "expedition officer's peaked cap"
-	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
-	icon_state = "greydresscap_com"
+	name = "expeditionary officer's peaked cap"
+	desc = "A peaked black uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
+	icon_state = "ecdresscap_ofcr"
+
+/obj/item/clothing/head/solgov/service/expedition/captain
+	name = "expeditionary captain's peaked cap"
+	desc = "A gold-trimmed peaked black uniform cap belonging to a Captain of the SCG Expeditionary Corps."
+	icon_state = "ecdresscap_capt"
 
 /obj/item/clothing/head/solgov/service/army
 	name = "army wheel cover"
@@ -396,7 +401,7 @@
 
 /obj/item/clothing/head/helmet/space/void/exploration
 	camera = /obj/machinery/camera/network/exploration
-	
+
 //SolGov Hardsuits
 
 /obj/item/clothing/head/helmet/space/void/engineering/alt/sol

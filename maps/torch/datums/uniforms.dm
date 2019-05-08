@@ -50,10 +50,12 @@
 
 	dress_under = /obj/item/clothing/under/solgov/service/expeditionary
 	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt
-	dress_over = /obj/item/clothing/suit/dress/solgov/expedition
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition
 	dress_shoes = /obj/item/clothing/shoes/dress
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition
 	dress_gloves = /obj/item/clothing/gloves/white
+
+	dress_extra = list(/obj/item/clothing/accessory/solgov/ec_scarf)
 
 /decl/hierarchy/mil_uniform/fleet
 	name = "Master fleet outfit"
