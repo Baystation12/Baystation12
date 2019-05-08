@@ -248,3 +248,8 @@
 
 //Lying animation
 #define ANIM_LYING_TIME 2
+
+//Planet habitability class
+#define HABITABILITY_IDEAL  1
+#define HABITABILITY_OKAY  2
+#define HABITABILITY_BAD  3
