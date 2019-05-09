@@ -7,6 +7,10 @@
 	gear_type = /obj/item/clothing/under/unggoy_internal
 	equip_slot = slot_w_uniform
 
+/datum/armourspecials/gear/prophet_jumpsuit
+	gear_type = /obj/item/clothing/under/prophet_internal
+	equip_slot = slot_w_uniform
+
 /datum/armourspecials/gear/unggoy_tank
 	gear_type = /obj/item/weapon/tank/methane/unggoy_internal
 	equip_slot = slot_back
