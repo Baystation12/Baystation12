@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - rscadd: "Adds jars of medical lollipops (holding 15u of a random common medicine) to infirmary lobby and CMO office"
