@@ -11,6 +11,17 @@
 	item_state = "robe"
 	species_restricted = list("San Shyuum")
 
+/obj/item/clothing/suit/armor/special/shielded_prophet_robe
+	name = "San Shyuum Robe - Reinforced"
+	desc = "A robe shaped for a San Shyuum, with shield generating apparatus inlaid into the fabric to provide more protection."
+	icon = 'code/modules/halo/icons/species/r_sanshyuum.dmi'
+	icon_override = 'code/modules/halo/icons/species/r_sanshyuum.dmi'
+	icon_state = "robe"
+	item_state = "robe"
+	species_restricted = list("San Shyuum")
+	specials = list(/datum/armourspecials/shields)
+	totalshields = 150 //Equal to Ultra, but they don't have any armour to protect them once it goes down.
+
 /datum/language/sanshyuum
 	name = "Janjur Qomi"
 	desc = "The language of the SanShyuum"
@@ -22,5 +33,5 @@
 
 /decl/hierarchy/outfit/lesser_prophet
 	name = "Lesser Prophet"
-	suit = /obj/item/clothing/suit/prophet_robe
+	suit = /obj/item/clothing/suit/armor/special/shielded_prophet_robe
 	l_ear = /obj/item/device/radio/headset/covenant
