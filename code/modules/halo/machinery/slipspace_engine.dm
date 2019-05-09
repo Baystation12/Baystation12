@@ -268,7 +268,9 @@
 /datum/explosion/slipspace_core/New(var/obj/payload/b)
 	if(config.oni_discord)
 		message2discord(config.oni_discord, "@here, slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
-	explosion(50, 100, 0, 0, 255)
+	spawn(0)
+		explosion(100, -1, -1, -1, 255)
+		qdel(b)
 
 /obj/payload/slipspace_core/cov
 	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
