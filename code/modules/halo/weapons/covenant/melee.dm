@@ -1,7 +1,6 @@
 #define ESWORD_LEAP_DIST 2
 #define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan, /datum/species/kig_yar_skirmisher)
 #define LUNGE_DELAY 5 SECONDS
-#define STAFF_LEAP_DIST 7
 
 /obj/effect/esword_path
 	name = "displaced air"
@@ -191,77 +190,6 @@
 		slot_r_hand_str = "en_dag_r_hand" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
 
-//HONOUR GUARD STAFF
-
-/obj/item/weapon/honour_staff
-	name = "Honour Guard Staff"
-	desc = "A ceremonial staff typically wielded by Sangheili Honour Guards. While not fit for a true battle, it serves well for beating unruly unngoy."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
-	icon_state = "honourstaff"
-	//icon_state_deployed = "honourstaff-active"
-	w_class = ITEM_SIZE_HUGE
-	slot_flags = SLOT_BACK
-	force = 40
-	var/next_leapwhen
-	//active_force = 60
-	throwforce = 10
-	damtype = PAIN
-	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
-		)
-
-//I had to define lunge again due to the fact I'm not basing this on the /elite_sword/ path.
-
-/obj/item/weapon/honour_staff/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
-	if(isnull(mob) || !istype(mob))
-		return 0
-	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
-		return 7
-	return STAFF_LEAP_DIST
-
-/obj/item/weapon/honour_staff/afterattack(var/atom/target,var/mob/user)
-	if(user.loc.Adjacent(target))
-		return
-	if(world.time < next_leapwhen)
-		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
-		return
-	if(!istype(target,/mob))
-		if(istype(target,/turf))
-			var/turf/targ_turf = target
-			var/list/turf_mobs = list()
-			for(var/mob/m in targ_turf.contents)
-				turf_mobs += m
-			if(turf_mobs.len > 0)
-				target = pick(turf_mobs)
-			else
-				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-				return
-		else
-			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-			return
-	if(!(target in view(8,user.loc)))
-		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
-		return
-	if(get_dist(user,target) <= get_species_leap_dist(user))
-		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
-		var/image/user_image = image(user)
-		user_image.dir = user.dir
-		for(var/i = 0 to get_dist(user,target))
-			var/obj/after_image = new /obj/effect/esword_path
-			if(i == 0)
-				after_image.loc = user.loc
-			else
-				after_image.loc = get_step(user,get_dir(user,target))
-				if(!user.Move(after_image.loc))
-					break
-			after_image.dir = user.dir
-			after_image.overlays += user_image
-			spawn(7)
-				qdel(after_image)
-		if(user.Adjacent(target) && ismob(target))
-			attack(target,user)
-		next_leapwhen = world.time + LUNGE_DELAY
 
 //DONER
 
