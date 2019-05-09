@@ -196,8 +196,8 @@
 /area/corvette/unscbertels/deck3/starboardhangar
 	name = "UNSC Bertels Deck 3 Starboard Hangar"
 
-/area/corvette/unscbertels/deck3/prestageprep
-	name = "UNSC Bertels Deck 3 Prestage Prep Area"
+/area/corvette/unscbertels/deck3/battle_bridge
+	name = "UNSC Bertels Deck 3 Battle Bridge"
 
 /area/corvette/unscbertels/deck3/cryopods
 	name = "UNSC Bertels Deck 3 Cryogenic Storage"
