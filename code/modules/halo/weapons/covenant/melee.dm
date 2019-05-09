@@ -197,7 +197,7 @@
 	name = "Honour Guard Staff"
 	desc = "A ceremonial staff typically wielded by Sangheili Honour Guards. While not fit for a true battle, it serves well for beating unruly unngoy."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
-	icon_state = "honourstaff-active"
+	icon_state = "honourstaff"
 	//icon_state_deployed = "honourstaff-active"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
@@ -206,6 +206,10 @@
 	//active_force = 60
 	throwforce = 10
 	damtype = PAIN
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
 
 //I had to define lunge again due to the fact I'm not basing this on the /elite_sword/ path.
 
