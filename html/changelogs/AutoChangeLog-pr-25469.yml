@@ -1,0 +1,4 @@
+author: "Novacat"
+delete-after: True
+changes: 
+  - tweak: "Fixes a UI bug with the modular computer downloader and antag programs"
