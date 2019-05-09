@@ -1,6 +1,7 @@
 #define ESWORD_LEAP_DIST 2
 #define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan, /datum/species/kig_yar_skirmisher)
 #define LUNGE_DELAY 5 SECONDS
+#define STAFF_LEAP_DIST 7
 
 /obj/effect/esword_path
 	name = "displaced air"
@@ -17,6 +18,7 @@
 	throwforce = 1
 	active_force = 65
 	active_throwforce = 12
+	var/hits_burn_mobs = 1
 	edge = 0
 	sharp = 0
 	var/failsafe = 0
@@ -151,7 +153,7 @@
 				deactivate(user)
 
 /obj/item/weapon/melee/energy/elite_sword/attack(var/mob/m,var/mob/user)
-	if(ismob(m))
+	if(ismob(m) && hits_burn_mobs)
 		damtype = BURN
 	return ..()
 
@@ -189,6 +191,39 @@
 		slot_l_hand_str = "en_dag_l_hand",
 		slot_r_hand_str = "en_dag_r_hand" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+
+//HONOUR GUARD STAFF
+
+/obj/item/weapon/melee/energy/elite_sword/honour_staff
+	name = "Honour Guard Staff"
+	desc = "A ceremonial staff typically wielded by Sangheili Honour Guards. While not fit for a true battle, it serves well for beating unruly unngoy."
+	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon_state = "honourstaff"
+	//icon_state_deployed = "honourstaff-active"
+	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
+	force = 40
+	hits_burn_mobs = 0
+	//active_force = 60
+	throwforce = 10
+	damtype = PAIN
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+
+/obj/item/weapon/melee/energy/elite_sword/honour_staff/get_species_leap_dist(var/mob/living/carbon/human/mob)
+	if(isnull(mob) || !istype(mob))
+		return 0
+	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
+		return 7
+	return STAFF_LEAP_DIST
+
+/obj/item/weapon/melee/energy/elite_sword/honour_staff/activate(mob/living/user)
+	return
+
+/obj/item/weapon/melee/energy/elite_sword/honour_staff/deactivate(mob/living/user)
+	return
 
 
 //DONER

@@ -15,7 +15,7 @@
 	name = "San Shyuum Undersuit"
 	desc = "To be worn under San Shyuum robes"
 	icon = 'code/modules/halo/clothing/spartan_gear.dmi'
-	icon_state = "neuralsuit"
+	icon_state = ""
 	icon_override = 'code/modules/halo/clothing/spartan_gear.dmi'
 	species_restricted = list("San Shyuum")
 

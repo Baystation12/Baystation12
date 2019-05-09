@@ -35,6 +35,7 @@
 
 	suit = /obj/item/clothing/suit/armor/special/combatharness/honour_guard
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/melee/energy/elite_sword/honour_staff
 	l_hand = /obj/item/weapon/melee/energy/elite_sword
 	gloves = /obj/item/clothing/gloves/thick/sangheili/honour_guard
 	shoes = /obj/item/clothing/shoes/sangheili/honour_guard
