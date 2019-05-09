@@ -11,6 +11,14 @@
 	item_state = "robe"
 	species_restricted = list("San Shyuum")
 
+/obj/item/clothing/under/prophet_internal
+	name = "San Shyuum Undersuit"
+	desc = "To be worn under San Shyuum robes"
+	icon = 'code/modules/halo/clothing/spartan_gear.dmi'
+	icon_state = "neuralsuit"
+	icon_override = 'code/modules/halo/clothing/spartan_gear.dmi'
+	species_restricted = list("San Shyuum")
+
 /obj/item/clothing/suit/armor/special/shielded_prophet_robe
 	name = "San Shyuum Robe - Reinforced"
 	desc = "A robe shaped for a San Shyuum, with shield generating apparatus inlaid into the fabric to provide more protection."
@@ -20,7 +28,7 @@
 	item_state = "robe"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	species_restricted = list("San Shyuum")
-	specials = list(/datum/armourspecials/shields)
+	specials = list(/datum/armourspecials/shields,/datum/armourspecials/gear/prophet_jumpsuit)
 	totalshields = 175 //Between Ultra and Zealot, but they don't have any armour to protect them once it goes down.
 
 /datum/language/sanshyuum
