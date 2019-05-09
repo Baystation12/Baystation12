@@ -18,6 +18,7 @@
 	icon_override = 'code/modules/halo/icons/species/r_sanshyuum.dmi'
 	icon_state = "robe"
 	item_state = "robe"
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	species_restricted = list("San Shyuum")
 	specials = list(/datum/armourspecials/shields)
 	totalshields = 150 //Equal to Ultra, but they don't have any armour to protect them once it goes down.
