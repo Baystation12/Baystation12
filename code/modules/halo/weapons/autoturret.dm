@@ -110,7 +110,7 @@
 
 /obj/structure/autoturret/process()
 	for(var/mob/living/m in view(vision_range,loc))
-		if(!(m in targets_in_view) && !(m in friendlies_stored) && !(m.health <= 0))
+		if(!(m in targets_in_view) && !(m in friendlies_stored) && (!(m.health <= 0) || m.stat == CONSCIOUS))
 			targets_in_view += m
 
 	if(targets_in_view.len > 0)
@@ -174,6 +174,6 @@
 	icon_state = "artifact"
 
 /obj/structure/autoturret/ONI/New()
-	fabricate_rounds(max_rounds*0.33)
+	fabricate_rounds(max_rounds*0.5)
 	anchored = 1
 	GLOB.processing_objects += src
