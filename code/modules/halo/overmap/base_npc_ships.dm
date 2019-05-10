@@ -214,6 +214,7 @@
 		return
 	if(!chosen_ship_datum)
 		pick_ship_datum()
+	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	map_bounds = chosen_ship_datum.map_bounds
 	fore_dir = chosen_ship_datum.fore_dir
 	map_z = list()
@@ -232,7 +233,6 @@
 			create_lighting_overlays_zlevel(z_to_load_at) //Wait a tick, then do the overlays again.
 	cargo_init()
 	damage_spawned_ship()
-	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	GLOB.processing_objects += src
 
 /obj/effect/overmap/ship/npc_ship/proc/damage_spawned_ship()
