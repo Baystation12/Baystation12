@@ -39,6 +39,9 @@
 	var/mob/living/user = usr
 	if(!istype(user))
 		return
+	if(anchored)
+		to_chat(user,"<span class = 'notice'>[src] is already active!</span>")
+		return
 	visible_message("<span class = 'notice'>[user] starts to activate [src]...</span>")
 	if(!do_after(user,BASE_AUTOTURRET_INTERACT_DELAY*0.5,src))
 		return
@@ -53,6 +56,9 @@
 	set src in view(1)
 	var/mob/living/user = usr
 	if(!istype(user))
+		return
+	if(!anchored)
+		to_chat(user,"<span class = 'notice'>[src] is already inactive!</span>")
 		return
 	visible_message("<span class = 'notice'>[user] starts to deactivate [src]...</span>")
 	if(!do_after(user,BASE_AUTOTURRET_INTERACT_DELAY,src))
@@ -164,3 +170,10 @@
 /obj/structure/autoturret/ONI
 	name = "\improper Automated Turret"
 	desc = "An automatic turret with integrated forerunner technology for ammunition manufacturing and long-range targeting."
+	icon = 'code/modules/halo/icons/sentry.dmi'
+	icon_state = "artifact"
+
+/obj/structure/autoturret/ONI/New()
+	fabricate_rounds(max_rounds*0.33)
+	anchored = 1
+	GLOB.processing_objects += src
