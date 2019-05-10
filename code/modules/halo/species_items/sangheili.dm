@@ -247,6 +247,31 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	icon_state = "major_gloves_obj"
 	item_state = "major_gloves"
 
+/obj/item/clothing/head/helmet/sangheili/honour_guard
+	name = "Sangheili Helmet (Honour Guard)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "honour_helm_obj"
+	item_state = "honour_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/honour_guard
+	name = "Sangheili Combat Harness (Honour Guard)"
+	icon_state = "honour_chest_obj"
+	item_state = "honour_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/honour_guard
+	name = "Sanghelli Leg Armour (Honour Guard)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "honour_legs_obj"
+	item_state = "honour_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/honour_guard
+	name = "Sanghelli Combat Gauntlets (Honour Guard)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "honour_gloves_obj"
+	item_state = "honour_gloves"
+
 /obj/item/clothing/head/helmet/sangheili/ultra
 	name = "Sangheili Helmet (Ultra)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
