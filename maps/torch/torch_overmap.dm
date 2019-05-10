@@ -66,9 +66,9 @@
 /obj/effect/overmap/ship/landable/guppy
 	name = "Guppy"
 	shuttle = "Guppy"
-	max_speed = 1/(10 SECONDS)
+	max_speed = 1/(5 SECONDS)
 	burn_delay = 2 SECONDS
-	vessel_mass = 2000
+	vessel_mass = 2500 //very inefficient pod
 	fore_dir = SOUTH
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_TINY
