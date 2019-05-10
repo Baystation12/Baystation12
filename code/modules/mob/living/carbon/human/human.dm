@@ -409,16 +409,11 @@
 		var/datum/browser/popup = new(usr, "records", "[real_name]'s records", 520, 640)
 		var/datum/computer_file/report/crew_record/E = get_crewmember_record(real_name)
 		if(E)
-			if(E.get_public_record())
-				popup.add_content("<h1><b>GENERAL NOTES</b></h1>[pencode2html(E.get_public_record())]<br><hr>")
-			if(E.get_medRecord())
-				popup.add_content("<h1><b>MEDICAL RECORD</b></h1>[pencode2html(E.get_medRecord())]<br><hr>")
-			if(E.get_secRecord())
-				popup.add_content("<h1><b>SECURITY RECORD</b></h1>[pencode2html(E.get_secRecord())]<br><hr>")
-			if(E.get_emplRecord())
-				popup.add_content("<h1><b>EMPLOYMENT RECORD</b></h1>[pencode2html(E.get_emplRecord())]<br><hr>")
-
-		if(popup.content)
+			popup.add_content(pencode2html("\
+			<h1><b>GENERAL NOTES</b></h1>[E.get_public_record()]<br><hr>	\
+			<h1><b>MEDICAL RECORD</b></h1>[E.get_medRecord()]<br><hr>		\
+			<h1><b>SECURITY RECORD</b></h1>[E.get_secRecord()]<br><hr>		\
+			<h1><b>EMPLOYMENT RECORD</b></h1>[E.get_emplRecord()]<br><hr>"))
 			popup.open()
 
 	if (href_list["criminal"])
