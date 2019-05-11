@@ -477,8 +477,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
 "bw" = (
-/obj/machinery/vending/hydronutrients,
 /obj/effect/floor_decal/corner/green/mono,
+/obj/machinery/vending/hydronutrients/generic,
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
 "bx" = (
@@ -4894,7 +4894,7 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "kn" = (
-/obj/machinery/vending/hydronutrients,
+/obj/machinery/vending/hydronutrients/generic,
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics)
 "ko" = (

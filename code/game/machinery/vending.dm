@@ -981,6 +981,11 @@
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
+/obj/machinery/vending/hydronutrients/generic
+	icon_state = "nutri_generic"
+	icon_vend = "nutri_generic-vend"
+	icon_deny = "nutri_generic-deny"
+
 /obj/machinery/vending/hydroseeds
 	name = "MegaSeed Servitor"
 	desc = "When you need seeds fast!"
@@ -1005,7 +1010,6 @@
 	flick("[icon_state]-shelf[rand(3)]", src)
 
 /obj/machinery/vending/hydroseeds/generic
-	name = "seed vendor"
 	icon_state = "seeds_generic"
 	icon_vend = "seeds_generic-vend"
 	icon_deny = "seeds_generic-deny"
