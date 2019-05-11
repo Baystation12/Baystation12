@@ -90,6 +90,16 @@
 #define CULTURE_SKRELL_RASKINTA "Raskinta-Katish"
 
 #define HOME_SYSTEM_QERRBALAK  "Qerrbalak"
+#define HOME_SYSTEM_TALAMIRA "Talamira"
+#define HOME_SYSTEM_ROASORA "Roa'sora"
+#define HOME_SYSTEM_MITORQI "Mi'tor'qi"
+#define HOME_SYSTEM_SKRELLSPACE "Skrell Space"
+
+#define FACTION_SKRELL_QERRVOAL "Qerr'voal"
+#define FACTION_SKRELL_QALAOA "Qala'oa"
+#define FACTION_SKRELL_YIITALANA "Yii'talana"
+#define FACTION_SKRELL_KRIGLI "Kri'gli"
+#define FACTION_SKRELL_QONPRRI "Qon'prri"
 
 // Adherent cultures.
 #define CULTURE_ADHERENT             "The Vigil"

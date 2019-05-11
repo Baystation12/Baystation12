@@ -1579,6 +1579,7 @@
 #include "code\modules\culture_descriptor\faction\factions_adherent.dm"
 #include "code\modules\culture_descriptor\faction\factions_hidden.dm"
 #include "code\modules\culture_descriptor\faction\factions_ipc.dm"
+#include "code\modules\culture_descriptor\faction\factions_skrell.dm"
 #include "code\modules\culture_descriptor\faction\factions_unathi.dm"
 #include "code\modules\culture_descriptor\faction\factions_vox.dm"
 #include "code\modules\culture_descriptor\faction\factions_xenophage.dm"
