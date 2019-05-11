@@ -43,7 +43,7 @@
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = null
-	use_power_cost = 1800
+	use_power_cost = 3600 //2 Wh per use
 	module_cooldown = 0
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
@@ -67,12 +67,21 @@
 	icon_state = "scanner"
 	interface_name = "ore detector"
 	interface_desc = "A sonar system for detecting large masses of ore."
-	engage_string = "Begin Scan"
+	activate_string = "Get Survey Data Disk"
+	engage_string = "Display Readout"
 	usable = 1
 	selectable = 1
+	toggleable = 1
 	use_power_cost = 200
 	device_type = /obj/item/device/scanner/mining
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+
+/obj/item/rig_module/device/orescanner/activate()
+	if(!check() || !device)
+		return 0
+
+	var/obj/item/device/scanner/mining/scanner = device
+	scanner.put_disk_in_hand(holder.wearer)
 
 /obj/item/rig_module/device/rcd
 	name = "RCD mount"
