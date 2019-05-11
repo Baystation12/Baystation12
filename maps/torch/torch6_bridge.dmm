@@ -6723,6 +6723,7 @@
 /area/maintenance/bridge/aftport)
 "oU" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/medical)
 "oW" = (
@@ -7335,13 +7336,13 @@
 	dir = 8
 	},
 /obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/rig/command/science,
 /obj/machinery/door/window/brigdoor/westright{
 	autoset_access = 0;
 	dir = 4;
 	name = "CSO's suit storage";
 	req_access = list("ACCESS_RESEARCH_DIRECTOR")
 	},
+/obj/item/weapon/rig/command/science/equipped,
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "qj" = (
