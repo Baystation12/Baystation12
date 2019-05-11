@@ -1,0 +1,6 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - rscadd: "Can now scan overmap things with sensor console. By default just shows site description."
+  - rscadd: "For ships, shows heading and speed, if ship is moving."
+  - rscadd: "For planets output depends on Science skill - atmosphere / plantlife / wildlife presence (Basic), number of non-natural ruins (Trained), compoisition / temp / pressure of atmosphere (Expert)."
