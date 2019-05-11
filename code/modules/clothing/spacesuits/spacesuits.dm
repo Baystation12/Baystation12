@@ -31,6 +31,8 @@
 	brightness_on = 4
 	on = 0
 
+	var/tinted = null	//Set to non-null for toggleable tint helmets
+
 /obj/item/clothing/head/helmet/space/Destroy()
 	if(camera && !ispath(camera))
 		QDEL_NULL(camera)
@@ -40,6 +42,9 @@
 	. = ..()
 	if(camera)
 		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_camera
+	if(!isnull(tinted))
+		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_tint
+		update_tint()
 
 /obj/item/clothing/head/helmet/space/proc/toggle_camera()
 	set name = "Toggle Helmet Camera"
@@ -61,6 +66,31 @@
 /obj/item/clothing/head/helmet/space/examine(var/mob/user)
 	if(..(user, 1) && camera)
 		to_chat(user, "This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active.")
+
+/obj/item/clothing/head/helmet/space/proc/update_tint()
+	if(tinted)
+		icon_state = "[initial(icon_state)]_dark"
+		flash_protection = FLASH_PROTECTION_MAJOR
+		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	else
+		icon_state = initial(icon_state)
+		flash_protection = FLASH_PROTECTION_NONE
+		flags_inv = HIDEEARS|BLOCKHAIR
+	update_icon()
+	update_clothing_icon()
+
+/obj/item/clothing/head/helmet/space/proc/toggle_tint()
+	set name = "Toggle Helmet Tint"
+	set category = "Object"
+	set src in usr
+
+	var/mob/user = usr
+	if(istype(user) && user.incapacitated())
+		return
+
+	tinted = !tinted
+	to_chat(usr, "You toggle [src]'s visor tint.")
+	update_tint()
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
