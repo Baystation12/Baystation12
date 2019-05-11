@@ -20,6 +20,8 @@
 	burst = 5
 	burst_delay = 0.5
 	fire_delay = 2
+	burst_accuracy = list(0,-1,-1,-2,-2)
+	dispersion = list(0.8, 1.0, 1.1, 1.1, 1.2)
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -55,6 +57,9 @@
 	burst = 5
 	burst_delay = 0.4
 	fire_delay = 2.5
+	burst_accuracy = list(0,-1,-1,-2,-2)
+	dispersion = list(0.6, 1.2, 1.3, 1.4, 1.4)
+
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
