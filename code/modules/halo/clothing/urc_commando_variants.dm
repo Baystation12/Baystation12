@@ -158,4 +158,75 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
+//PANTAS
+
+/obj/item/clothing/head/helmet/urfc/pantascmdo
+	name = "Eridanus Order's Helmet"
+
+	item_state = "pantascmdo_worn"
+	icon_state = "pantascmdo_helmet"
+
+/obj/item/clothing/suit/armor/special/urfc/pantascmdo
+	name = "Eridanus Order's Armour"
+
+	item_state = "pantascmdo_armour_worn"
+	icon_state = "pantascmdo_armour_obj"
+
+/obj/item/weapon/storage/backpack/cmdo/pantascmdo
+	name = "Eridanus Order's Backpack"
+
+	icon_state = "c_packO_pantascmdo"
+	item_state = "c_pack_pantascmdo_worn"
+
+	item_state_slots = list(
+	slot_l_hand_str = "c_pack_pantascmdo",
+	slot_r_hand_str = "c_pack_pantascmdo",
+	)
+
+/obj/item/weapon/material/machete/pantascmdo
+	name = "Judgement of Eridanus"
+	desc = "A Holy-Looking sword used to Judge the enemies of Eridanus"
+	icon_state = "pantascmdo-machete_obj"
+	item_state = "pantascmdo-machete"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+
+/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
+	name = "Ancient AK-47"
+	desc = "An ancient weapon used in forgettable times. How does it even still work?"
+	icon_state = "pantasAK47"
+	item_state = "pantasAK47"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+
+
+/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3/update_icon()
+	. = ..()
+	if(ammo_magazine)
+		icon_state = "pantasAK47"
+	else
+		icon_state = "pantasAK47_unloaded"
+
+//Pantas's Innie Donator armour. I didn't move this to other sections for the sake of keeping it all in one place.
+
+/obj/item/clothing/under/urfc_jumpsuit/pantasinnie
+	name = "Woodland Camo Jumpsuit"
+
+	item_state = "pantas-jumpsuit_worn"
+	icon_state = "pantas-jumpsuit_obj"
+
+/*/obj/item/clothing/head/helmet/tactical/pantasinnie
+	name = "Woodland Camo Helmet"
+	desc = "A woodland camo helmet."
+
+	icon = 'inniearmor.dmi'
+	icon_state = "pantashelmet_obj"
+	item_state = "pantashelmet_worn"
+*/
+//Not doing this -yet?- because default ss13 clothing is an ass to find the correct stuff for, at least for me
+
 //END DONATOR GEAR
