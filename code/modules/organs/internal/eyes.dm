@@ -114,3 +114,6 @@
 	dead_icon = "camera_broken"
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 	update_colour()
+
+/obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
+	return "retinal overlayed [name]"
