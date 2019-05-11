@@ -53,6 +53,16 @@
 			data["status"] = "VACUUM SEAL BROKEN"
 		else
 			data["status"] = "OK"
+		var/list/contacts = list()
+		for(var/obj/effect/overmap/O in view(7,linked))
+			if(linked == O)
+				continue
+			var/bearing = round(90 - Atan2(O.x - linked.x, O.y - linked.y),5)
+			if(bearing < 0)
+				bearing += 360
+			contacts.Add(list(list("name"=O.name, "ref"="\ref[O]", "bearing"=bearing)))
+		if(contacts.len)
+			data["contacts"] = contacts
 	else
 		data["status"] = "MISSING"
 		data["range"] = "N/A"
@@ -133,6 +143,13 @@
 		if (href_list["toggle"])
 			sensors.toggle()
 			return TOPIC_REFRESH
+
+	if (href_list["scan"])
+		var/obj/effect/overmap/O = locate(href_list["scan"])
+		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
+			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
+			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
+		return TOPIC_HANDLED
 
 /obj/machinery/computer/ship/sensors/CouldNotUseTopic(mob/user)
 	unlook(user)

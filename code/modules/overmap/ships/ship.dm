@@ -51,6 +51,11 @@
 /obj/effect/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
+/obj/effect/overmap/ship/get_scan_data(mob/user)
+	. = ..()
+	if(!is_still())
+		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * 1000]"
+
 //Projected acceleration based on information from engines
 /obj/effect/overmap/ship/proc/get_acceleration()
 	return round(get_total_thrust()/vessel_mass, SHIP_MOVE_RESOLUTION)

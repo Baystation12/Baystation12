@@ -37,6 +37,7 @@
 	var/ruin_tags_blacklist
 	var/features_budget = 4
 	var/list/possible_features = list()
+	var/list/spawned_features
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -162,7 +163,7 @@
 				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_features()
-	seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
+	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/sector/exoplanet/proc/get_biostuff(var/datum/random_map/noise/exoplanet/random_map)
 	if(!istype(random_map))
@@ -325,6 +326,38 @@
 	var/list/badgases = gas_data.gases.Copy()
 	badgases -= atmosphere.gas
 	badgas = pick(badgases)
+
+/obj/effect/overmap/sector/exoplanet/get_scan_data(mob/user)
+	. = ..()
+	var/list/extra_data = list("<hr>")
+	if(atmosphere)
+		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT))
+			var/list/gases = list()
+			for(var/g in atmosphere.gas)
+				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
+					gases += gas_data.name[g]
+			extra_data += "Atmosphere composition: [english_list(gases)]"
+			var/inaccuracy = rand(8,12)/10
+			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
+		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+			extra_data += "Atmosphere present"
+		extra_data += "<hr>"
+
+	if(seeds.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		extra_data += "Xenoflora detected"
+
+	if(animals.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		extra_data += "Life traces detected"
+
+	if(LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
+		var/ruin_num = 0
+		for(var/datum/map_template/ruin/exoplanet/R in spawned_features)
+			if(!(R.ruin_tags & RUIN_NATURAL))
+				ruin_num++
+		if(ruin_num)
+			extra_data += "<hr>[ruin_num] possible artificial structure\s detected."
+
+	. += jointext(extra_data, "<br>")
 
 /area/exoplanet
 	name = "\improper Planetary surface"
