@@ -393,7 +393,7 @@
 	sprite_sheets_obj = list()
 	armor = list(melee = 20, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 90)
 	light_overlay = "yellow_light"
-	tinted = TRUE
+	tinted = FALSE
 
 /obj/item/clothing/suit/space/void/exploration
 	name = "exploration voidsuit"
