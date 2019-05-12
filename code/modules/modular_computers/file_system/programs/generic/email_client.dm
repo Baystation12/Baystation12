@@ -11,6 +11,7 @@
 	var/stored_login = ""
 	var/stored_password = ""
 	usage_flags = PROGRAM_ALL
+	category = PROG_OFFICE
 
 	nanomodule_path = /datum/nano_module/email_client
 

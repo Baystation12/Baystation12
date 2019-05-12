@@ -13,6 +13,7 @@
 	var/open_file
 	var/error
 	usage_flags = PROGRAM_ALL
+	category = PROG_UTIL
 
 /datum/computer_file/program/filemanager/Topic(href, href_list)
 	if(..())

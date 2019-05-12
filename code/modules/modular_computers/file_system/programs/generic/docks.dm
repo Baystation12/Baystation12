@@ -11,6 +11,7 @@
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	available_on_ntnet = 1
 	requires_ntnet = 1
+	category = PROG_SUPPLY
 
 /datum/nano_module/docking
 	name = "Docking Control program"
