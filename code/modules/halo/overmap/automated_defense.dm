@@ -20,7 +20,7 @@
 	GLOB.overmap_tiles_uncontrolled -= range(defense_range*2,src)
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/can_board() //Now you can board them, any time you want!
-	return 1
+	return 0
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	. = ..()
