@@ -3408,7 +3408,10 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/vending/cigarette,
+/obj/machinery/vending/coffee{
+	icon_state = "coffee";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "iq" = (
@@ -3532,7 +3535,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/storage)
 "iE" = (
-/obj/machinery/vending/coffee,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "iF" = (
@@ -4890,9 +4892,12 @@
 	icon_state = "bordercolorhalf";
 	dir = 4
 	},
-/obj/machinery/vending/snack,
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/machinery/vending/snack{
+	icon_state = "snack";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
@@ -6572,11 +6577,14 @@
 	icon_state = "bordercolorhalf";
 	dir = 4
 	},
-/obj/machinery/vending/cigarette,
 /obj/structure/sign/deck/fifth{
 	dir = 8;
 	icon_state = "deck-5";
 	pixel_x = 40
+	},
+/obj/machinery/vending/cigarette{
+	icon_state = "cigs";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
@@ -6585,7 +6593,10 @@
 	icon_state = "bordercolorhalf";
 	dir = 4
 	},
-/obj/machinery/vending/cola,
+/obj/machinery/vending/cola{
+	icon_state = "Cola_Machine";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "oS" = (
@@ -9837,7 +9848,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "vN" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_rack{
+	icon_state = "drying_rack";
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "vO" = (
@@ -12197,7 +12211,6 @@
 /area/quartermaster/hangar)
 "Ex" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/vending/phoronresearch,
 /obj/machinery/light_switch{
 	pixel_x = -24;
 	pixel_y = 12
@@ -12210,6 +12223,10 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/vending/phoronresearch{
+	icon_state = "generic";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)

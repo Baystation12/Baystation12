@@ -1875,8 +1875,11 @@
 	},
 /obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
-	pixel_x = 32;
-	req_access = newlist()
+	icon_state = "wallmed";
+	dir = 8;
+	layer = 3.3;
+	pixel_x = 28;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod6/station)
@@ -1897,9 +1900,10 @@
 	dir = 4
 	},
 /obj/machinery/vending/wallmed1{
+	dir = 4;
 	name = "Emergency NanoMed";
-	pixel_x = -32;
-	req_access = newlist()
+	pixel_x = -30;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod7/station)
@@ -4666,10 +4670,13 @@
 /turf/simulated/floor/tiled,
 /area/storage/primary)
 "pS" = (
-/obj/machinery/vending/tool,
 /obj/machinery/firealarm{
 	dir = 2;
 	pixel_y = 24
+	},
+/obj/machinery/vending/tool{
+	icon_state = "tool";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/storage/primary)
@@ -5039,7 +5046,10 @@
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "rc" = (
-/obj/machinery/lapvend,
+/obj/machinery/lapvend{
+	icon_state = "robotics";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/storage/primary)
 "rd" = (
@@ -9302,8 +9312,11 @@
 	},
 /obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
-	pixel_x = 32;
-	req_access = newlist()
+	icon_state = "wallmed";
+	dir = 8;
+	layer = 3.3;
+	pixel_x = 28;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod8/station)
@@ -9312,9 +9325,10 @@
 	dir = 4
 	},
 /obj/machinery/vending/wallmed1{
+	dir = 4;
 	name = "Emergency NanoMed";
-	pixel_x = -32;
-	req_access = newlist()
+	pixel_x = -30;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod9/station)
@@ -9344,7 +9358,10 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/machinery/vending/snack,
+/obj/machinery/vending/snack{
+	icon_state = "snack";
+	dir = 8
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "FK" = (
@@ -9541,7 +9558,10 @@
 	dir = 1
 	},
 /obj/machinery/light/small,
-/obj/structure/reagent_dispensers/water_cooler,
+/obj/structure/reagent_dispensers/water_cooler{
+	icon_state = "water_cooler";
+	dir = 1
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Gr" = (
@@ -9557,7 +9577,10 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/machinery/vending/cigarette,
+/obj/machinery/vending/cigarette{
+	icon_state = "cigs";
+	dir = 8
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Gu" = (
@@ -9728,7 +9751,10 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "GZ" = (
-/obj/machinery/vending/games,
+/obj/machinery/vending/games{
+	icon_state = "games";
+	dir = 8
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
 "Hg" = (
