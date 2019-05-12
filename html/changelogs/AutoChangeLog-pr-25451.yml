@@ -1,0 +1,4 @@
+author: "Cakey and Marie Taylor"
+delete-after: True
+changes: 
+  - imageadd: "Adds directional sprites for vending machines, smartfridges, watercoolers, drying racks and medivendors. Sprites by Marie Taylor."
