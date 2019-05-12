@@ -82,7 +82,7 @@
 "bD" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "bE" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "bF" = (/obj/machinery/door/airlock/halo{name = "Medical Storage"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
-"bG" = (/obj/machinery/door/airlock/halo{name = "Morgue"},/turf/space,/area/corvette/unscbertels/deck2/starboardbay)
+"bG" = (/obj/machinery/door/airlock/halo{name = "Morgue"},/turf/simulated/floor/tiled/white,/area/corvette/unscbertels/deck2/starboardbay)
 "bH" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/starboardhallwaycentral)
 "bI" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo_lifepod{name = "Escape Pod"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/starboardhallwaycentral)
 "bJ" = (/obj/item/device/radio/intercom{dir = 4; icon_state = "intercom"; name = "intercom"; pixel_x = -32; pixel_y = 0; tag = "icon-intercom (EAST)"},/obj/structure/closet/wall_medical{pixel_y = 32},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/starboardhallwaycentral)
