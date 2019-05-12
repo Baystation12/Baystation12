@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Helm console layout changed, mostly to prevent sector descriptions shifting movement keys down at WRONG FUCKIGN MOMENT."
+  - rscadd: "Added acceleration limiter to helm console. Hard value vs engine thruster's percentage. Doesn't affect fuel usage, use engine limiters for that."
