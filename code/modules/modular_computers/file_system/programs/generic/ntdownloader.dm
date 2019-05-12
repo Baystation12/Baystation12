@@ -22,6 +22,7 @@
 	var/file_info //For logging, can be faked by antags.
 	var/server
 	usage_flags = PROGRAM_ALL
+	category = PROG_UTIL
 
 /datum/computer_file/program/ntnetdownload/kill_program()
 	..()
@@ -167,19 +168,23 @@
 	data["disk_size"] = my_computer.hard_drive.max_capacity
 	data["disk_used"] = my_computer.hard_drive.used_capacity
 	var/list/all_entries[0]
-	for(var/datum/computer_file/program/P in ntnet_global.available_station_software)
-		// Only those programs our user can run will show in the list
-		if(!P.can_run(user) && P.requires_access_to_download)
-			continue
-		if(!P.is_supported_by_hardware(my_computer.hardware_flag, 1, user))
-			continue
-		all_entries.Add(list(list(
-		"filename" = P.filename,
-		"filedesc" = P.filedesc,
-		"fileinfo" = P.extended_desc,
-		"size" = P.size,
-		"icon" = P.program_menu_icon
-		)))
+	for(var/category in ntnet_global.available_software_by_category)
+		var/list/category_list[0]
+		for(var/datum/computer_file/program/P in ntnet_global.available_software_by_category[category])
+			// Only those programs our user can run will show in the list
+			if(!P.can_run(user) && P.requires_access_to_download)
+				continue
+			if(!P.is_supported_by_hardware(my_computer.hardware_flag, 1, user))
+				continue
+			category_list.Add(list(list(
+			"filename" = P.filename,
+			"filedesc" = P.filedesc,
+			"fileinfo" = P.extended_desc,
+			"size" = P.size,
+			"icon" = P.program_menu_icon
+			)))
+		all_entries.Add(list(list("category"=category, "programs"=category_list)))
+
 	data["hackedavailable"] = 0
 	if(prog.computer_emagged) // If we are running on emagged computer we have access to some "bonus" software
 		var/list/hacked_programs[0]

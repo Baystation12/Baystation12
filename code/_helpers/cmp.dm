@@ -72,3 +72,6 @@
 
 /proc/cmp_fusion_reaction_des(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)
 	return B.priority - A.priority
+
+/proc/cmp_program(var/datum/computer_file/program/A, var/datum/computer_file/program/B)
+	return cmp_text_asc(A.filedesc, B.filedesc)

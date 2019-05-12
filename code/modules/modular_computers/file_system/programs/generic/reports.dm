@@ -10,6 +10,7 @@
 	available_on_ntnet = 1
 	requires_ntnet = 0
 	usage_flags = PROGRAM_ALL
+	category = PROG_OFFICE
 
 /datum/nano_module/program/reports
 	name = "Report Editor"
