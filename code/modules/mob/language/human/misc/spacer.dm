@@ -6,3 +6,4 @@
 	syllables = list("ada","zir","bian","ach","usk","ado","ich","cuan",
 					"iga","qing","le","que","ki","qaf","dei","eta")
 	partial_understanding = list(LANGUAGE_HUMAN_EURO = 66, LANGUAGE_HUMAN_IBERIAN = 55, LANGUAGE_HUMAN_CHINESE = 44, LANGUAGE_HUMAN_ARABIC = 44, LANGUAGE_HUMAN_INDIAN = 33, LANGUAGE_HUMAN_RUSSIAN = 33)
+	colour = "spacer"
