@@ -11,7 +11,7 @@
 
 	preview_icon = 'icons/mob/human_races/species/ipc/preview.dmi'
 
-	unarmed_types = list(/datum/unarmed_attack/punch)
+	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/kick, /datum/unarmed_attack/stomp)
 	rarity_value = 2
 	strength = STR_HIGH
 
@@ -42,7 +42,7 @@
 
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES = /obj/item/organ/internal/eyes/robot	
+		BP_EYES = /obj/item/organ/internal/eyes/robot
 		)
 
 	heat_discomfort_level = 373.15
