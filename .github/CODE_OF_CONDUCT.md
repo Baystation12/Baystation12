@@ -8,6 +8,14 @@ The following conduct may result in a warning being logged against your account:
 * Derogatory comments.
 * Trolling.
 * Inappropriate content.
+* Comments on pull requests not addressing technical or code-related issues.
+	* Comments expressing general attitude towards or criticism of the change, giving constructive feedback on non-technical aspects, or discussing balance should be made in appropriate non-repo channels, such as the forum, IRC, or Discord.
+	* The same rule applies to sprite, sound, or map contributions, though there the definition of "technical" will be interpreted rather broadly.
+	* The following are exempt from this rule: 
+		* The PR's author(s).
+		* Developers discussing what changes would be needed for the PR to attain approval.
+		* Other staff members with the right to approve or veto the pull request.
+	* Emote reactions to pull requests are exempt. Comments on issue reports are exempt so long as they remain on topic.
 * Issuing commits, editing wiki pages, commenting, or opening bug reports in bad faith.
 	* The Head Developer and Developers are obligated to assume good faith until evidence otherwise surfaces.
     * Examples:
