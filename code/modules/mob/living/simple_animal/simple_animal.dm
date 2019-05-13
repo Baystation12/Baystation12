@@ -96,7 +96,15 @@
 			if(turns_since_move >= turns_per_move)
 				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
 					var/moving_to = 0 // otherwise it always picks 4, fuck if I know.   Did I mention fuck BYOND
-					moving_to = pick(GLOB.cardinal)
+					var/list/dirs_pickfrom = GLOB.cardinal
+					var/allow_move = 0
+					while(!allow_move)
+						if(dirs_pickfrom.len == 0)
+							allow_move = 1
+							break
+						moving_to = pick(dirs_pickfrom)
+						if(!istype(get_step(src,moving_to),/turf/simulated/open))
+							allow_move = 1
 					set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
 					Move(get_step(src,moving_to))
 					turns_since_move = 0

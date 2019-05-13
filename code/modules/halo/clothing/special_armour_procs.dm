@@ -1,7 +1,7 @@
 
 /obj/item/clothing/suit/armor/special/proc/toggle_eva_mode()
 	set name = "Toggle Shield EVA Mode"
-	set category = "Object"
+	set category = "EVA"
 
 	var/mob/living/toggler = usr
 	if(!istype(toggler))
