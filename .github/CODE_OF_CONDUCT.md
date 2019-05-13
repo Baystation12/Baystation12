@@ -53,7 +53,7 @@ All Developers have the right to:
     * Any such ban issued will be accompanied by a warning, and should be logged
 
 ## Enforcement
-Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the Head Developer on Discord (@sabiram). The Head Developer will review and investigate all complaints, and will respond in a way that they deem appropriate to the circumstances. The Head Developer is obligated to maintain confidentiality with regard to the reporter of an incident.
+Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the Head Developer on Discord. The Head Developer will review and investigate all complaints, and will respond in a way that they deem appropriate to the circumstances. The Head Developer is obligated to maintain confidentiality with regard to the reporter of an incident.
 
 Developers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by the Head Developer.
 
