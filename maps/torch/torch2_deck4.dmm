@@ -5047,8 +5047,8 @@
 /area/storage/primary)
 "rc" = (
 /obj/machinery/lapvend{
-	icon_state = "robotics";
-	dir = 8
+	dir = 8;
+	icon_state = "laptop"
 	},
 /turf/simulated/floor/tiled,
 /area/storage/primary)
