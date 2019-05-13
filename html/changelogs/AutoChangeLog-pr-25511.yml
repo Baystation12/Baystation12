@@ -1,0 +1,4 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscadd: "IPCs can now select kicking and stomping as their default unarmed attack."
