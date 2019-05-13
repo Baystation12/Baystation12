@@ -106,6 +106,7 @@ h1.alert, h2.alert		{color: #000000;}
 .iberian				{color: #ff6600;}
 .russian				{color: #9c250b;}
 .arabic					{color: #128b11;}
+.spacer					{color: #9c660b;}
 
 .interface				{color: #330033;}
 
