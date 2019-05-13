@@ -197,7 +197,7 @@
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/eprojector_hit_sound.wav'
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
-	if(get_dist(overmap_fired_by,hit) > 1)
+	if(initial(kill_count) - kill_count > 1)
 		console_fired_by.visible_message("<span class = 'notice'>[console_fired_by] emits a warning: \"Beam impact dissipated due to atmospheric interference. Orbit the object to perform glassing.\"</span>")
 		return
 	hit.glassed += 1
