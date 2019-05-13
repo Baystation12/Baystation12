@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "Energy guns no longer become invisible if cell charge exceeds cell capacity due to adminbus."
