@@ -183,7 +183,8 @@
 			"size" = P.size,
 			"icon" = P.program_menu_icon
 			)))
-		all_entries.Add(list(list("category"=category, "programs"=category_list)))
+		if(category_list.len)
+			all_entries.Add(list(list("category"=category, "programs"=category_list)))
 
 	data["hackedavailable"] = 0
 	if(prog.computer_emagged) // If we are running on emagged computer we have access to some "bonus" software
