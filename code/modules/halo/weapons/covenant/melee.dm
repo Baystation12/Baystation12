@@ -177,8 +177,8 @@
 	..()
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/melee/energy/elite_sword/dagger/get_species_leap_dist()
-	return 0
+/obj/item/weapon/melee/energy/elite_sword/dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
+	return ESWORD_LEAP_DIST
 
 /obj/item/weapon/melee/energy/elite_sword/dagger/change_misc_variables(var/deactivate = 0)
 	if(deactivate)
