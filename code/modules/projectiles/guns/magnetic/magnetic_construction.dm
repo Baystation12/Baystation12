@@ -13,10 +13,9 @@
 		var/obj/item/stack/material/reinforcing = thing
 		var/material/reinforcing_with = reinforcing.get_material()
 		if(reinforcing_with.name == MATERIAL_STEEL) // Steel
-			if(reinforcing.get_amount() < 5)
+			if(!reinforcing.use(5))
 				to_chat(user, "<span class='warning'>You need at least 5 [reinforcing.singular_name]\s for this task.</span>")
 				return
-			reinforcing.use(5)
 			user.visible_message("<span class='notice'>\The [user] shapes some steel sheets around \the [src] to form a body.</span>")
 			increment_construction_stage()
 			return
@@ -50,7 +49,7 @@
 
 	if(isCoil(thing) && construction_stage == 5)
 		var/obj/item/stack/cable_coil/cable = thing
-		if(cable.get_amount() < 5)
+		if(!cable.can_use(5))
 			to_chat(user, "<span class='warning'>You need at least 5 lengths of cable for this task.</span>")
 			return
 		cable.use(5)

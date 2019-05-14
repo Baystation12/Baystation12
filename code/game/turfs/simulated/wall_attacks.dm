@@ -280,8 +280,7 @@
 					return
 				else if( istype(W, /obj/item/stack/material/rods) )
 					var/obj/item/stack/O = W
-					if(O.get_amount()>0)
-						O.use(1)
+					if(O.use(1))
 						construction_stage = 6
 						update_icon()
 						to_chat(user, "<span class='notice'>You replace the outer grille.</span>")

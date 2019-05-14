@@ -592,13 +592,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 	if(ishuman(M) && !M.incapacitated())
 		if(!istype(usr.loc,/turf)) return
-		if(src.amount <= 14)
+		if(!src.use(15))
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
 		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
 		B.color = color
 		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
-		src.use(15)
 	else
 		to_chat(usr, "<span class='notice'>You cannot do that.</span>")
 	..()

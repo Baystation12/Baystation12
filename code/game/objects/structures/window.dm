@@ -571,7 +571,7 @@
 
 /proc/place_window(mob/user, loc, dir_to_set, obj/item/stack/material/ST)
 	var/required_amount = (dir_to_set & (dir_to_set - 1)) ? 4 : 1
-	if (ST.amount < required_amount)
+	if (!ST.can_use(required_amount))
 		to_chat(user, "<span class='notice'>You do not have enough sheets.</span>")
 		return
 	for(var/obj/structure/window/WINDOW in loc)

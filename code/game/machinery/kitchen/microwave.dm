@@ -104,9 +104,8 @@
 			return 1
 		if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
-			if(S.get_amount() > 1)
+			if(S.use(1))
 				new O.type (src)
-				S.use(1)
 				user.visible_message( \
 					"<span class='notice'>\The [user] has added one of [O] to \the [src].</span>", \
 					"<span class='notice'>You add one of [O] to \the [src].</span>")

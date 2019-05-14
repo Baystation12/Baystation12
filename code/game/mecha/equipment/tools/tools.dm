@@ -1232,10 +1232,9 @@
 		occupant_message("Cable depleted, [src] deactivated.")
 		log_message("Cable depleted, [src] deactivated.")
 		return
-	if(cable.amount < amount)
+	if(!cable.use(amount))
 		occupant_message("No enough cable to finish the task.")
 		return
-	cable.use(amount)
 	update_equip_info()
 	return 1
 

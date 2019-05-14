@@ -294,10 +294,9 @@
 		else
 			var/obj/item/stack/cable_coil/C = tool
 			if(istype(C))
-				if(C.get_amount() < 3)
+				if(!C.use(3))
 					to_chat(user, SPAN_WARNING("You need three or more cable pieces to repair this damage."))
 				else
-					C.use(3)
 					return TRUE
 	return FALSE
 
