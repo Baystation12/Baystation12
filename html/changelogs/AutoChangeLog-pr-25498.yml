@@ -1,0 +1,4 @@
+author: "Eckles"
+delete-after: True
+changes: 
+  - rscadd: "Adds new Skrell factions and home systems."
