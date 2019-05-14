@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "Movement delay handling from items has been tweaked slightly to give more fine-grained effects."
