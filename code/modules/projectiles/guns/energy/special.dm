@@ -219,15 +219,14 @@
 	max_shots = 4
 	has_safety = FALSE
 
-/obj/item/weapon/gun/energy/plasmacutter/New()
-	..()
+/obj/item/weapon/gun/energy/plasmacutter/Initialize()
+	. = ..()
 	src.spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
 /obj/item/weapon/gun/energy/plasmacutter/Destroy()
-	qdel(spark_system)
-	spark_system = null
+	QDEL_NULL(spark_system)
 	return ..()
 
 /obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)//makes spark and eyecheck for deconstructing things
