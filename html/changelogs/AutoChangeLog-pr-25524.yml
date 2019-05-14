@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Being incapacitated no longer affects talking and radio use if the radio's microphone is set to on."
+  - bugfix: "Talking normally with a nearby radio set to on will no longer trigger aim-mode shooting."
