@@ -37,6 +37,7 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 	var/clamshell_open = 0
+	slowdown_general = 1.5
 
 /obj/item/weapon/gun/projectile/m41/special_check(mob/user)
 	if(clamshell_open)
