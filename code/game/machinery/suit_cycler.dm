@@ -143,8 +143,7 @@
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
-
-		update_icon()
+		
 		updateUsrDialog()
 		return
 
@@ -166,7 +165,6 @@
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		suit = I
 
-		update_icon()
 		updateUsrDialog()
 		return
 
@@ -202,7 +200,8 @@
 
 	user.set_machine(src)
 
-	var/dat = "<HEAD><TITLE>Suit Cycler Interface</TITLE></HEAD>"
+	var/dat = list()
+	dat += "<HEAD><TITLE>Suit Cycler Interface</TITLE></HEAD>"
 
 	if(active)
 		dat+= "<br><font color='red'><B>The [model_text ? "[model_text] " : ""]suit cycler is currently in use. Please wait...</b></font>"
@@ -233,7 +232,7 @@
 	if(panel_open)
 		wires.Interact(user)
 
-	user << browse(dat, "window=suit_cycler")
+	show_browser(user, JOINTEXT(dat), "window=suit_cycler")
 	onclose(user, "suit_cycler")
 	return
 
@@ -346,8 +345,7 @@
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
-	T.visible_message("\icon[src]<span class='notice'>The [src] pings loudly.</span>")
-	icon_state = initial(icon_state)
+	T.visible_message("\icon[src]<span class='notice'>\The [src] pings loudly.</span>")
 	active = 0
 	updateUsrDialog()
 
@@ -358,14 +356,12 @@
 	suit.breaches = list()
 	suit.calc_breach_damage()
 
-	return
-
 /obj/machinery/suit_cycler/verb/leave()
 	set name = "Eject Cycler"
 	set category = "Object"
 	set src in oview(1)
 
-	if (usr.stat != 0)
+	if (usr.incapacitated())
 		return
 
 	eject_occupant(usr)
@@ -379,16 +375,12 @@
 	if (!occupant)
 		return
 
-	if (occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
-
-	occupant.dropInto(occupant.loc)
+	occupant.reset_view()
+	occupant.dropInto(loc)
 	occupant = null
 
 	add_fingerprint(user)
 	updateUsrDialog()
-	update_icon()
 
 	return
 

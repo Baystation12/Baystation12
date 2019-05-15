@@ -1,3 +1,21 @@
+// Only sane way to do this is with marcos.
+#define TRY_INSERT_SUIT_PIECE(slot, path)\
+	if(istype(I, /obj/item/##path)){\
+		if(!isopen) return;\
+		if(##slot){\
+			to_chat(user, SPAN_NOTICE("The unit already contains \a [slot]."));\
+			return\
+		};\
+		if(!user.unEquip(I, src)) return;\
+		to_chat(user, SPAN_NOTICE("You load the [I.name] into the storage compartment."));\
+		##slot = I;\
+		update_icon();\
+		SSnano.update_uis(src);\
+		return\
+	}
+
+#define dispense_clothing(item) if(!isopen){return}if(item){item.dropInto(loc); item = null}
+
 /obj/machinery/suit_storage_unit
 	name = "Suit Storage Unit"
 	desc = "An industrial U-Stor-It Storage unit designed to accomodate all kinds of space suits. Its on-board equipment also allows the user to decontaminate the contents through a UV-ray purging cycle. There's a warning label dangling from the control pad, reading \"STRICTLY NO BIOLOGICALS IN THE CONFINES OF THE UNIT\"."
@@ -73,12 +91,10 @@
 			if(prob(50))
 				dump_everything()
 			qdel(src)
-			return
 		if(2)
 			if(prob(35))
 				dump_everything()
 				qdel(src)
-			return
 
 /obj/machinery/suit_storage_unit/attackby(var/obj/item/I, var/mob/user)
 	if(isScrewdriver(I))
@@ -128,22 +144,6 @@
 			update_icon()
 		return
 
-// Only sane way to do this is with marcos.
-#define TRY_INSERT_SUIT_PIECE(slot, path)\
-	if(istype(I, /obj/item/##path)){\
-		if(!isopen) return;\
-		if(##slot){\
-			to_chat(user, SPAN_NOTICE("The unit already contains \a [slot]."));\
-			return\
-		};\
-		if(!user.unEquip(I, src)) return;\
-		to_chat(user, SPAN_NOTICE("You load the [I.name] into the storage compartment."));\
-		##slot = I;\
-		update_icon();\
-		SSnano.update_uis(src);\
-		return\
-	}
-
 	TRY_INSERT_SUIT_PIECE(suit, clothing/suit/space)
 	TRY_INSERT_SUIT_PIECE(helmet, clothing/head/helmet/space)
 	TRY_INSERT_SUIT_PIECE(boots, clothing/shoes/magboots)
@@ -151,15 +151,12 @@
 	TRY_INSERT_SUIT_PIECE(mask, clothing/mask)
 	update_icon()
 	SSnano.update_uis(src)
-#undef TRY_INSERT_SUIT_PIECE
 
 /obj/machinery/suit_storage_unit/attack_ai(var/mob/user)
 	return attack_hand(user)
 
 /obj/machinery/suit_storage_unit/attack_hand(var/mob/user)
 	..()
-	if(!user.IsAdvancedToolUser())
-		return 0
 	ui_interact(user)
 
 /obj/machinery/suit_storage_unit/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -182,6 +179,11 @@
 		ui = new(user, src, ui_key, "suit_storage_unit.tmpl", "Suit Storage Unit", 400, 500)
 		ui.set_initial_data(data)
 		ui.open()
+
+/obj/machinery/suit_storage_unit/CanUseTopic(var/mob/user)
+	if(!user.IsAdvancedToolUser())
+		return STATUS_CLOSE
+	return ..()
 
 /obj/machinery/suit_storage_unit/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
 	if(href_list["toggleUV"])
@@ -226,9 +228,6 @@
 		update_icon()
 		return TOPIC_REFRESH
 
-// Only sane way to do this is with marcos.
-#define dispense_clothing(item) if(!isopen){return}if(item){item.dropInto(loc); item = null}
-
 /obj/machinery/suit_storage_unit/proc/dispense_helmet()
 	dispense_clothing(helmet)
 
@@ -256,8 +255,6 @@
 	dispense_clothing(mask)
 	if(occupant)
 		eject_occupant(occupant)
-
-#undef dispense_clothing
 
 /obj/machinery/suit_storage_unit/proc/toggleUV(var/mob/user)
 	if(!panelopen)
@@ -417,9 +414,7 @@
 		return
 	visible_message(SPAN_NOTICE("\The [usr] starts squeezing into the suit storage unit!"))
 	if(do_after(usr, 10, src))
-		if(usr.client)
-			usr.client.perspective = EYE_PERSPECTIVE
-			usr.client.eye = src
+		usr.reset_view(src)
 		usr.stop_pulling()
 		usr.forceMove(src)
 		occupant = usr
@@ -427,3 +422,6 @@
 		update_icon()
 		add_fingerprint(usr)
 		SSnano.update_uis(src)
+
+#undef TRY_INSERT_SUIT_PIECE
+#undef dispense_clothing
