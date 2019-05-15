@@ -1,5 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - tweak: "Hardsuit ore scanner module can now print survey data disk."
-  - tweak: "Hardsuit mounted drill now has an increased energy cost of 2Wh per use."
