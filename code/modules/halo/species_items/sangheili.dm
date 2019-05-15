@@ -185,6 +185,10 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(h.l_hand == src || h.r_hand == src)
 			return 1
 	return 0
+
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
+	return 2
+
 /obj/item/weapon/melee/energy/elite_sword/g_dagger/dropped()
 	if(!inhand_check())
 		creator_dagger.on_dagger_dropped()
