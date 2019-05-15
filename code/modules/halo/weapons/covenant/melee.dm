@@ -16,7 +16,7 @@
 	var/icon_state_deployed = "T1EW-deployed"
 	force = 1
 	throwforce = 1
-	active_force = 65
+	active_force = 75
 	active_throwforce = 12
 	var/hits_burn_mobs = 1
 	edge = 0
