@@ -1,8 +1,12 @@
 /obj/structure/closet/secure_closet/bertels_mp
 	name = "naval security locker"
 	desc = "It's a storage unit for naval security gear."
-	icon_state = "red"
-	icon_closed = "red"
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_broken = "secbroken"
+	icon_off = "secoff"
 	req_access = list(308)
 
 /obj/structure/closet/secure_closet/bertels_mp/New()
