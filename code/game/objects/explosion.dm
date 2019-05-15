@@ -82,7 +82,12 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 						AM.ex_act(dist)
 		if(guaranteed_damage_range > 0)
 			for(var/mob/living/m in range(guaranteed_damage_range,epicenter))
-				if(check_shields(guaranteed_damage*2, null, null, null, "the explosion"))
+				var/mob/living/carbon/human/h = m
+				if(istype(h))
+					if(h.check_shields(guaranteed_damage*2, null, null, null, "the explosion"))
+						m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
+						m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
+				else
 					m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
 					m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
 
