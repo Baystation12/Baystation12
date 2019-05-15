@@ -61,6 +61,12 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
+/obj/item/clothing/suit/storage/marine/military_police
+	name = "M52B Body Armor NavSec"
+	desc = "An armored protective vest worn by the members of the UNSC Marine Corps. This one is modified for the use of naval security officers."
+	armor = list(melee = 50, bullet = 50, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
+	armor_thickness = 20
+
 /obj/item/clothing/suit/storage/marine/medic
 	name = "M52B Body Armor Medic"
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
