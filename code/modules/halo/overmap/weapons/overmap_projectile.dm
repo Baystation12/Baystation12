@@ -8,11 +8,6 @@
 	var/sound/ship_hit_sound //This sound is played across the entire impacted ship when the overmap projectile spawns the ship_damage_projectile
 	accuracy = 100
 
-/obj/item/projectile/overmap/New(var/obj/spawner)
-	if(map_sectors["[spawner.z]"])
-		overmap_fired_by = map_sectors["[spawner.z]"]
-		console_fired_by = spawner
-
 /obj/item/projectile/overmap/Move(var/newloc,var/dir)
 	if(istype(newloc,/turf/unsimulated/map/edge))
 		qdel(src)

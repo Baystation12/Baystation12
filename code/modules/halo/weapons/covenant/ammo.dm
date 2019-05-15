@@ -200,6 +200,8 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
+#define RIFLENEEDLE_TRACK_DIST 5
+
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
 	damage = 30
@@ -210,10 +212,16 @@
 	tracer_delay_time = 0.5 SECONDS
 	invisibility = 101
 
+/obj/item/projectile/bullet/covenant/needles/rifleneedle/Move()
+	if(kill_count - initial(kill_count) > RIFLENEEDLE_TRACK_DIST)
+		locked_target = null
+	. = ..()
+
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needlerifle_trail"
 
+#undef RIFLENEEDLE_TRACK_DIST
 #define FUEL_ROD_IRRADIATE_RANGE 2
 #define FUEL_ROD_IRRADIATE_AMOUNT 15
 

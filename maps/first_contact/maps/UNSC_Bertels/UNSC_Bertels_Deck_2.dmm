@@ -230,7 +230,7 @@
 "ev" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinemesshall)
 "ew" = (/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinemesshall)
 "ex" = (/obj/machinery/vending/armory/hybrid,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
-"ey" = (/obj/machinery/door/airlock/halo{name = "Heavy Weapons Requisition Room"; req_access = list(308)},/turf/simulated/wall/r_wall,/area/corvette/unscbertels/deck2/marinearmory)
+"ey" = (/obj/machinery/door/airlock/halo{name = "Heavy Weapons Requisition Room"; req_access = list(308)},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "ez" = (/obj/machinery/light/colored/green,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "eA" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "eB" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
