@@ -8,7 +8,8 @@
 	fire_sound = 'code/modules/halo/sounds/fuel_rod_fire.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/fuel_rod
-	fire_delay = 4
+	fire_delay = 6
+	one_hand_penalty = -1
 	caliber = "fuel rod"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE
