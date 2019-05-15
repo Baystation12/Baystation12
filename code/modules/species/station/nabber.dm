@@ -334,9 +334,10 @@
 /datum/species/nabber/toggle_stance(var/mob/living/carbon/human/H)
 	if(H.incapacitated())
 		return FALSE
+	var/datum/gender/T = gender_datums[H.get_gender()]
 	to_chat(H, "<span class='notice'>You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using.</span>")
 	var/hidden = H.is_cloaked()
-	if(!hidden) H.visible_message("<span class='warning'>\The [H] shifts \his arms.</span>")
+	if(!hidden) H.visible_message("<span class='warning'>\The [H] shifts [T.his] arms.</span>")
 	H.unEquip(H.l_hand)
 	H.unEquip(H.r_hand)
 	if(do_after(H, 30))
@@ -349,25 +350,26 @@
 	H.unEquip(H.l_hand)
 	H.unEquip(H.r_hand)
 	var/hidden = H.is_cloaked()
+	var/datum/gender/T = gender_datums[H.get_gender()]
 	H.pulling_punches = !H.pulling_punches
 	if(H.pulling_punches)
 		H.current_grab_type = all_grabobjects[GRAB_NORMAL]
 		if(forced)
 			to_chat(H, "<span class='notice'>You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms.</span>")
 			if(!hidden)
-				H.visible_message("<span class='notice'>[H] falters, hunting arms failing.</span>")
+				H.visible_message("<span class='notice'>[H] falters, [T.his] hunting arms failing.</span>")
 		else
-			to_chat(H, "<span class='notice'>You relax your hunting arms, lowering the pressure and folding them tight to your thorax.\
+			to_chat(H, "<span class='notice'>You relax your hunting arms, lowering the pressure and folding them tight to your thorax. \
 			You reach out with your manipulation arms, ready to use complex items.</span>")
 			if(!hidden)
-				H.visible_message("<span class='notice'>[H] seems to relax as \he folds \his massive curved arms to \his thorax and reaches out \
-				with \his small handlike limbs.</span>")
+				H.visible_message("<span class='notice'>[H] seems to relax as [T.he] folds [T.his] massive curved arms to [T.his] thorax and reaches out \
+				with [T.his] small handlike limbs.</span>")
 	else
 		H.current_grab_type = all_grabobjects[GRAB_NAB]
 		to_chat(H, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
 		if(!hidden)
-			H.visible_message("<span class='warning'>[H] tenses as \he brings \his smaller arms in close to \his body. \His two massive spiked arms reach \
-			out. \He looks ready to attack.</span>")
+			H.visible_message("<span class='warning'>[H] tenses as [T.he] brings [T.his] smaller arms in close to [T.his] body. [T.His] two massive spiked arms reach \
+			out. [T.He] looks ready to attack.</span>")
 
 /datum/species/nabber/check_background(var/datum/job/job, var/datum/preferences/prefs)
 	var/decl/cultural_info/culture/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_CULTURE])
