@@ -281,6 +281,12 @@
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
 
+/datum/computer/file/embedded_program/airlock/proc/begin_dock_cycle()
+	state = STATE_IDLE
+	target_state = TARGET_INOPEN
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	shutAlarm()
+
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
 	target_state = TARGET_OUTOPEN
