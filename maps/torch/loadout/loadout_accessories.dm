@@ -38,6 +38,13 @@
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
 
+/datum/gear/accessory/ec_scarf
+	display_name = "Expeditionary Corps dress scarf"
+	path = /obj/item/clothing/accessory/solgov/ec_scarf
+	description = "A section-specific scarf for Expeditionary Corps dress uniforms."
+	flags = GEAR_HAS_TYPE_SELECTION
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
 /datum/gear/accessory/ec_patch
 	display_name = "Expeditionary Corps patch"
 	path = /obj/item/clothing/accessory/solgov/ec_patch

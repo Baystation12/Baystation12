@@ -31,7 +31,7 @@
 			/datum/mil_branch/expeditionary_corps,
 			/datum/mil_branch/fleet,
 			/datum/mil_branch/civilian,
-			/datum/mil_branch/solgov, 
+			/datum/mil_branch/solgov,
 			/datum/mil_branch/skrell_fleet
 		)
 	)
@@ -488,7 +488,7 @@
 	name = "Admiral"
 	name_short = "ADM"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
-	sort_order = 16
+	sort_order = 18
 
 /*
  *  Army
@@ -636,7 +636,7 @@
  *  Civilians
  *  =========
  */
- 
+
 /datum/mil_rank/civ/civ
 	name = "Civilian"
 
