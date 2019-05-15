@@ -1,0 +1,60 @@
+{{if data.locked}}
+
+	Card locked. Swipe ID to continue: <br>
+	{{:helper.link('Unlock', 'unlock', {'unlock' : 1})}}
+
+{{else}}
+
+<div>
+	{{:helper.link((data.oneAccess ? "One" : "All") + ' Required', data.oneAccess ? "lock" : "unlock", {'one_access' : 1})}}
+	{{:helper.link('Access Setup: ' + (data.autoset ? "AUTO" : "MANUAL"), data.autoset ? "lock" : "unlock", {'autoset' : 1})}}
+	{{:helper.link('Clear', 'refresh', {'clear' : 1})}}
+	{{if data.lockable}}
+		{{:helper.link('Lock', 'lock', {'lock' : 1})}}
+	{{/if}}
+</div>
+
+<table>
+	<thead>
+		<tr>
+		{{for data.regions}}
+			<th><span class='highlight bold'>{{:value.name}}</span></th>
+		{{/for}}
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		{{for data.regions}}
+			<td>
+			{{for value.accesses :access:access_i}}
+				{{:helper.link(access.name, access.req ? "check-square-o" : "square-o", {'access' : access.id}, null, access.req ? "selected" : null)}}
+				<br/>
+			{{/for}}
+			<br/>
+			</td>
+		{{/for}}
+		</tr>
+	</tbody>
+</table>
+
+{{/if}}
+
+<style>
+	table {
+		width: 100%;
+		border-spacing: 2px;
+	}
+	th {
+		text-align: left;
+	}
+	td {
+		vertical-align: top;
+	}
+	td .button {
+		margin-top: 4px
+	}
+	.link {
+		float: none;
+		display: inline-block;
+	}
+</style>
