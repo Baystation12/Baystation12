@@ -224,12 +224,10 @@
 		shipmap_handler.un_free_map(z_to_load_at)
 		map_sectors["[z_to_load_at]"] = src
 		maploader.load_map(link,z_to_load_at)
-		create_lighting_overlays_zlevel(z_to_load_at)
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
-		spawn(10)
-			create_lighting_overlays_zlevel(z_to_load_at) //Wait a tick, then do the overlays again.
+		create_lighting_overlays_zlevel(z_to_load_at)
 	cargo_init()
 	damage_spawned_ship()
 	unload_at = world.time + NPC_SHIP_LOSE_DELAY
