@@ -212,7 +212,7 @@
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
-			new /turf/unsimulated/floor/lava/glassed_turf
+			new /turf/unsimulated/floor/lava/glassed_turf(F)
 
 
 /obj/effect/projectile/projector_laser_proj
