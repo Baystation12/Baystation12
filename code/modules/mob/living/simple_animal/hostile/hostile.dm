@@ -295,7 +295,8 @@
 				if(!obstacle.can_open(1))
 					return
 				face_atom(obstacle)
-				pry_door(src, pry_time, obstacle)
+				var/pry_time_holder = (obstacle.pry_mod * pry_time)
+				pry_door(src, pry_time_holder, obstacle)
 				return
 
 /mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
