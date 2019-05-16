@@ -82,8 +82,14 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 						AM.ex_act(dist)
 		if(guaranteed_damage_range > 0)
 			for(var/mob/living/m in range(guaranteed_damage_range,epicenter))
-				m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
-				m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
+				var/mob/living/carbon/human/h = m
+				if(istype(h))
+					if(h.check_shields(guaranteed_damage*2, null, null, null, "the explosion"))
+						m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
+						m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
+				else
+					m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
+					m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
 
 		var/took = (world.timeofday-start)/10
 		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
