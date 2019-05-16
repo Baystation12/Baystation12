@@ -309,6 +309,7 @@
 	dir = 4
 	},
 /obj/machinery/vending/medical/torch{
+	dir = 1;
 	density = 0;
 	pixel_y = -32;
 	req_access = list("ACCESS_SKRELLSCOUT")
@@ -876,7 +877,9 @@
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutshuttle)
 "cl" = (
-/obj/machinery/seed_storage/garden,
+/obj/machinery/seed_storage/garden{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/kitchen)
 "cm" = (
@@ -945,7 +948,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/vending/dinnerware,
+/obj/machinery/vending/dinnerware{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/kitchen)
 "cu" = (
@@ -1009,6 +1014,7 @@
 /area/ship/skrellscoutshuttle)
 "cA" = (
 /obj/machinery/vending/hydronutrients{
+	dir = 1;
 	categories = 3
 	},
 /turf/simulated/floor/tiled/skrell/orange,
