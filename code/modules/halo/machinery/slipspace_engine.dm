@@ -65,10 +65,10 @@
 	if(isnull(core_to_spawn))
 		to_chat(user,"<span class = 'notice'>Physical limiters disallow core overloading on [src]</span>")
 		return
-	visible_message("<span class = 'notice'>[user] starts prepping [src] for mobile core detonation...</span>")
+	visible_message("<span class = 'danger'>[user] starts prepping [src] for mobile core detonation...</span>")
 	if(!do_after(user, SLIPSPACE_ENGINE_BASE_INTERACTION_DELAY * 3, src, same_direction = 1))
 		return
-	visible_message("<span class = 'notice'>[user] preps [src] for mobile core detonation..</span>")
+	visible_message("<span class = 'danger'>[user] preps [src] for mobile core detonation..</span>")
 	message2discord(config.oni_discord, "@here, [user.real_name] ([user.ckey]) has overloaded the slipspace engine @ ([loc.x],[loc.y],[loc.z])")
 	overload_engine(user)
 
