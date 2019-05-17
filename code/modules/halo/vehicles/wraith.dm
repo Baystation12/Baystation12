@@ -21,7 +21,9 @@
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
-	vehicle_view_modifier = 1.65
+	vehicle_view_modifier = 1.75
+
+	light_color = "#C1CEFF"
 
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()

@@ -8,7 +8,7 @@
 		slaves, or in combat situations, as cannon fodder. Unggoy sometimes feud with\
 		Kig'Yar for status as the lowest ranked species of the Covenant."
 	flesh_color = "#4F4F7F"
-	blood_color = "#4A4A64" //Same blood colour as Elites.
+	blood_color = "#00F7FF" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_unggoy.dmi'
 	deform = 'code/modules/halo/icons/species/r_unggoy.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet

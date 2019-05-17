@@ -22,6 +22,8 @@
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
+	light_color = "#C1CEFF"
+
 /obj/vehicles/ghost/update_object_sprites()
 	. = ..()
 	var/list/offsets_to_use = sprite_offsets["[dir]"]
