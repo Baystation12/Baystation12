@@ -41,17 +41,34 @@
 /decl/hierarchy/outfit/caelumz_spartan
 	name = "caelumz - spartan"
 	uniform = /obj/item/clothing/under/spartan_internal
-	suit = /obj/item/clothing/suit/armor/special/spartan
+	suit = /obj/item/clothing/suit/armor/special/spartan/praetor
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	head = /obj/item/clothing/head/helmet/spartan
+	head = /obj/item/clothing/head/helmet/spartan/praetor
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	l_pocket = /obj/item/ammo_magazine/m762_ap
 	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	back = /obj/item/weapon/gun/projectile/ma5b_ar
+
+////////Boltersam\\\\\\\\
+
+//JIRALHANAE
+
+/obj/item/clothing/head/helmet/jiralhanae/boltersam
+	icon_state = "bolter_helm"
+/obj/item/clothing/suit/armor/jiralhanae/boltersam
+	icon_state = "bolter_armour"
+
+/obj/item/clothing/shoes/jiralhanae/boltersam
+	icon_state = "bolter_greaves"
+
+/decl/hierarchy/outfit/boltersam_jiralhanae
+	name = "boltersam - jiralhanae"
+	head = /obj/item/clothing/head/helmet/jiralhanae/boltersam
+	suit = /obj/item/clothing/suit/armor/jiralhanae/boltersam
 
 ////////eonoc\\\\\\\\
 
@@ -201,11 +218,11 @@ obj/item/clothing/head/helmet/odst/donator/gulag
 /decl/hierarchy/outfit/kelso_spartan
 	name = "kelso - spartan"
 	uniform = /obj/item/clothing/under/spartan_internal
-	suit = /obj/item/clothing/suit/armor/special/spartan
+	suit = /obj/item/clothing/suit/armor/special/spartan/mkiv_kelso
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	head = /obj/item/clothing/head/helmet/spartan
+	head = /obj/item/clothing/head/helmet/spartan/mkiv_kelso
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	l_pocket = /obj/item/ammo_magazine/m762_ap
@@ -535,6 +552,44 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	head = /obj/item/clothing/head/helmet/odst/donator/moerk
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/moerk
 
+////////M.Green/Dogler\\\\\\\\
+
+//Sangheili
+
+/obj/item/clothing/head/helmet/sangheili/dogler
+	name = "Sya'tenee's Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "dogler_helm_obj"
+	item_state = "dogler_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/dogler
+	name = "Sya'tenee's Sangheili Combat Harness"
+	icon_state = "dogler_chest_obj"
+	item_state = "dogler_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/dogler
+	name = "Sya'tenee's Sanghelli Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "dogler_legs_obj"
+	item_state = "dogler_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/dogler
+	name = "Sya'tenee's Sanghelli Combat Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "dogler_gloves_obj"
+	item_state = "dogler_gloves"
+
+/decl/hierarchy/outfit/dogler_sangheili
+	name = "dogler/m.green - sangheili"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/dogler
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/dogler
+	shoes = /obj/item/clothing/shoes/sangheili/dogler
+	head = /obj/item/clothing/head/helmet/sangheili/dogler
+	l_pocket = /obj/item/weapon/grenade/plasma
 ////////PANTAS\\\\\\\\
 
 //URFC
@@ -598,6 +653,74 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	l_hand = /obj/item/weapon/material/machete/pantascmdo
 	r_hand = /obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
 
+//SANGHEILI (MINOR)
+
+// Sorcerer (Thousand Sons Chaos Space Marine)
+
+/obj/item/clothing/head/helmet/sangheili/minor/pantas
+	name = "Sangheili Helmet (Sorcerer pattern)"
+	icon_state = "pantas2_helm_obj"
+	item_state = "pantas2_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/minor/pantas
+	name = "Sangheili Combat Harness (Sorcerer pattern)"
+	icon_state = "pantas2_chest_obj"
+	item_state = "pantas2_chest"
+
+/obj/item/clothing/shoes/sangheili/minor/pantas
+	name = "Sanghelli Leg Armour (Sorcerer pattern)"
+	icon_state = "pantas2_legs_obj"
+	item_state = "pantas2_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/minor/pantas
+	name = "Sanghelli Combat Gauntlets (Sorcerer pattern)"
+	icon_state = "pantas2_gloves_obj"
+	item_state = "pantas2_gloves"
+
+/decl/hierarchy/outfit/pantas_sangheili_minor
+	name = "pantas - sangheili minor"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/minor/pantas
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/minor/pantas
+	shoes = /obj/item/clothing/shoes/sangheili/minor/pantas
+	head = /obj/item/clothing/head/helmet/sangheili/minor/pantas
+	mask = null
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = null
+
+//SANGHEILI (MAJOR)
+
+/obj/item/clothing/head/helmet/sangheili/major/pantas
+	name = "Sangheili Helmet (Berserker pattern)"
+	icon_state = "pantas_helm_obj"
+	item_state = "pantas_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/major/pantas
+	name = "Sangheili Combat Harness (Berserker pattern)"
+	icon_state = "pantas_chest_obj"
+	item_state = "pantas_chest"
+
+/obj/item/clothing/shoes/sangheili/major/pantas
+	name = "Sanghelli Leg Armour (Berserker pattern)"
+	icon_state = "pantas_legs_obj"
+	item_state = "pantas_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/major/pantas
+	name = "Sanghelli Combat Gauntlets (Berserker pattern)"
+	icon_state = "pantas_gloves_obj"
+	item_state = "pantas_gloves"
+
+/decl/hierarchy/outfit/pantas_sangheili_major
+	name = "pantas - sangheili major"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/major/pantas
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/major/pantas
+	shoes = /obj/item/clothing/shoes/sangheili/major/pantas
+	head = /obj/item/clothing/head/helmet/sangheili/major/pantas
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 ////////Pinstripe\\\\\\\\
 
