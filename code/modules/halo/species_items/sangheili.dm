@@ -262,7 +262,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	name = "Sangheili Combat Harness (Honour Guard)"
 	icon_state = "honour_chest_obj"
 	item_state = "honour_chest"
-	totalshields = 125
+	totalshields = 150
 
 /obj/item/clothing/shoes/sangheili/honour_guard
 	name = "Sanghelli Leg Armour (Honour Guard)"
@@ -450,7 +450,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
 			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
-			w.damage -= 0.05
+			w.damage -= 0.1
 
 /obj/effect/armoursets/Initialize()
 	..()
