@@ -21,6 +21,8 @@
 
 	move_sound = 'code/modules/halo/sounds/warthog_move.ogg'
 
+	light_color = "#E1FDFF"
+
 /obj/item/vehicle_component/health_manager/warthog
 	integrity = 500
 	resistances = list("brute"=40,"burn"=35,"emp"=25,"bomb"=25)

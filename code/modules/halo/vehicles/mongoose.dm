@@ -21,6 +21,8 @@
 
 	vehicle_size = 16
 
+	light_color = "#E1FDFF"
+
 /obj/vehicles/mongoose/update_object_sprites()
 	. = ..()
 	update_occupant_weight()

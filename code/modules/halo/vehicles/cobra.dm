@@ -23,6 +23,8 @@
 
 	vehicle_view_modifier = 1.0
 
+	light_color = "#FEFFE1"
+
 	var/lockdown = 0
 	var/zoomed = 0
 

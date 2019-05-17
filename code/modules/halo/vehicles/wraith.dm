@@ -23,6 +23,8 @@
 
 	vehicle_view_modifier = 1.65
 
+	light_color = "#C1CEFF"
+
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()
 	if(dir == EAST || dir == WEST)
