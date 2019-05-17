@@ -23,6 +23,8 @@
 
 	vehicle_view_modifier = 1.3
 
+	light_color = "#E1FDFF"
+
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
 	resistances = list("brute"=65,"burn"=50,"emp"=40,"bomb"=65)
