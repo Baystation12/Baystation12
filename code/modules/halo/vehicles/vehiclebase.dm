@@ -32,8 +32,8 @@
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 	var/move_sound = null
 
-	light_power = 2
-	light_range = 4
+	light_power = 4
+	light_range = 6
 
 /obj/vehicles/verb/toggle_headlights()
 	set name = "Toggle Headlights"
