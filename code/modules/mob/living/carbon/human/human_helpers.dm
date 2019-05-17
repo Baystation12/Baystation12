@@ -218,6 +218,37 @@
 /mob/living/carbon/human/proc/has_headset_in_ears()
 	return istype(get_equipped_item(slot_l_ear), /obj/item/device/radio/headset) || istype(get_equipped_item(slot_r_ear), /obj/item/device/radio/headset)
 
+/mob/living/carbon/human/welding_eyecheck()
+	var/obj/item/organ/internal/eyes/E = src.internal_organs_by_name[species.vision_organ]
+	if(!E)
+		return
+	var/safety = eyecheck()
+	switch(safety)
+		if(FLASH_PROTECTION_MODERATE)
+			to_chat(src, "<span class='warning'>Your eyes sting a little.</span>")
+			E.damage += rand(1, 2)
+			if(E.damage > 12)
+				eye_blurry += rand(3,6)
+		if(FLASH_PROTECTION_NONE)
+			to_chat(src, "<span class='warning'>Your eyes burn.</span>")
+			E.damage += rand(2, 4)
+			if(E.damage > 10)
+				E.damage += rand(4,10)
+		if(FLASH_PROTECTION_REDUCED)
+			to_chat(src, "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>")
+			eye_blurry += rand(12,20)
+			E.damage += rand(12, 16)
+	if(safety<FLASH_PROTECTION_MAJOR)
+		if(E.damage > 10)
+			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
+		if (E.damage >= E.min_bruised_damage)
+			to_chat(src, "<span class='danger'>You go blind!</span>")
+			eye_blind = 5
+			eye_blurry = 5
+			disabilities |= NEARSIGHTED
+			spawn(100)
+				disabilities &= ~NEARSIGHTED
+
 /mob/living/carbon/human/proc/make_grab(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/victim, var/grab_tag)
 	var/obj/item/grab/G
 	if(!grab_tag)

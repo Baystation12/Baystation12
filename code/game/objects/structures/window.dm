@@ -270,6 +270,16 @@
 			src.id = t
 			to_chat(user, "<span class='notice'>The new ID of the window is [id]</span>")
 		return
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) && anchored)
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+		cutter.slice(user)
+		playsound(src, 'sound/items/Welder.ogg', 80, 1)
+		visible_message("<span class='notice'>[user] has started slicing through the window's frame!</span>")
+		if(do_after(user,30,src))
+			visible_message("<span class='warning'>[user] has sliced through the window's frame!</span>")
+			playsound(src, 'sound/items/Welder.ogg', 80, 1)
+			construction_state = 0
+			set_anchored(0)
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)

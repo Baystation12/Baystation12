@@ -175,7 +175,7 @@
 	if(get_fuel() >= amount)
 		burn_fuel(amount)
 		if(M)
-			eyecheck(M)
+			M.welding_eyecheck()//located in mob_helpers.dm
 		return 1
 	else
 		if(M)
@@ -269,42 +269,6 @@
 		src.damtype = BRUTE
 		src.welding = 0
 		update_icon()
-
-//Decides whether or not to damage a player's eyes based on what they're wearing as protection
-//Note: This should probably be moved to mob
-/obj/item/weapon/weldingtool/proc/eyecheck(mob/user as mob)
-	if(!iscarbon(user))	return 1
-	if(istype(user, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[H.species.vision_organ]
-		if(!E)
-			return
-		var/safety = H.eyecheck()
-		switch(safety)
-			if(FLASH_PROTECTION_MODERATE)
-				to_chat(H, SPAN_WARNING("Your eyes sting a little."))
-				E.damage += rand(1, 2)
-				if(E.damage > 12)
-					H.eye_blurry += rand(3,6)
-			if(FLASH_PROTECTION_NONE)
-				to_chat(H, SPAN_WARNING("Your eyes burn!"))
-				E.damage += rand(2, 4)
-				if(E.damage > 10)
-					E.damage += rand(4,10)
-			if(FLASH_PROTECTION_REDUCED)
-				to_chat(H, SPAN_DANGER("Your equipment intensifies the welder's glow. Your eyes burn severely!"))
-				H.eye_blurry += rand(12,20)
-				E.damage += rand(12, 16)
-		if(safety<FLASH_PROTECTION_MAJOR)
-			if(E.damage > 10)
-				to_chat(user, SPAN_WARNING("Your eyes are really starting to hurt. This can't be good for you!"))
-			if (E.damage >= E.min_bruised_damage)
-				to_chat(H, SPAN_DANGER("You go blind!"))
-				H.eye_blind = 5
-				H.eye_blurry = 5
-				H.disabilities |= NEARSIGHTED
-				spawn(100)
-					H.disabilities &= ~NEARSIGHTED
 
 /obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
 	if(ishuman(M))
