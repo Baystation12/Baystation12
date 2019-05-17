@@ -7,7 +7,7 @@
 		due to their enhanced hearing and eyesight. Kig'Yar feud with Unggoy for status as the lowest ranked\
 		members of the Covenant."
 	flesh_color = "#FF9463"
-	blood_color = "#4A4A64" //Same blood colour as Elites.
+	blood_color = "#532476" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_kig-yar.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_kig-yar.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet

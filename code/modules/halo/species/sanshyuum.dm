@@ -12,7 +12,6 @@ GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/species_it
 		near absolute power over the Covenant. They have a strong religious importance \
 		throughout the Covenant Hierarchy."
 	flesh_color = "#4A4A64"
-	blood_color = "#4A4A64"
 	icobase = 'code/modules/halo/icons/species/r_sanshyuum.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_sanshyuum.dmi'
 	icon_template = 'code/modules/halo/icons/species/sanshyuum_template.dmi'
