@@ -1,0 +1,4 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - tweak: "Simple animals' speed prying doors open now depends on the door."
