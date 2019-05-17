@@ -23,4 +23,4 @@
 
 	use_overmap = 1
 
-	map_admin_faxes = list("Ministry of Tranquility","Ministry of Resolution","Ministry of Fervent Intercession")
+	map_admin_faxes = list("Ministry of Tranquility (General)","Ministry of Resolution (War Matters)","Ministry of Fervent Intercession (Internal Affairs)")
