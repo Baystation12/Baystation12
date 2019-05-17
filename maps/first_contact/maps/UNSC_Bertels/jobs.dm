@@ -41,7 +41,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#0A0A95"
-	access = list(142,144,145,192)
+	access = list(142,144,145,192,308)
 	spawnpoint_override = "UNSC Base Spawns"
 
 /datum/job/unsc_ship_iwo

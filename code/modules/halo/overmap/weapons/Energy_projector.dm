@@ -208,12 +208,11 @@
 		var/prev_index = hit.map_z.Find(z_level)
 		if(hit.map_z.len > 1 && prev_index != 1)
 			z_level = hit.map_z[prev_index++]
-	turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
-	 //explosion(turf_to_explode,3,5,7,10) original tiny explosion
+		turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
-		if(!istype(turf_to_explode,/turf/simulated/open) && !istype(turf_to_explode,/turf/unsimulated/floor/lava) && !istype(turf_to_explode,/turf/space))
-			new /turf/unsimulated/floor/lava/glassed_turf
+		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
+			new /turf/unsimulated/floor/lava/glassed_turf(F)
 
 
 /obj/effect/projectile/projector_laser_proj

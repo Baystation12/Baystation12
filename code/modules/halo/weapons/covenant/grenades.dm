@@ -6,7 +6,7 @@
 	icon_state = "plasmagrenade"
 	throw_speed = 1.2
 	throw_range = 4
-	var/alt_explosion_damage_max = 60 //The amount of damage done when grenade is stuck inside someone
+	var/alt_explosion_damage_max = 100 //The amount of damage done when grenade is stuck inside someone
 	var/alt_explosion_range = 2
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 
@@ -62,5 +62,5 @@
 
 	throw_range = 1
 
-	alt_explosion_damage_max = 100
+	alt_explosion_damage_max = 150
 	alt_explosion_range = 1
