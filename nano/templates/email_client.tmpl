@@ -36,7 +36,7 @@
 		<table>
 		<tr><td>Address book:
 		{{for data.accounts}}
-			<tr class="candystripe"><td>{{:helper.link(value.login, null, {'set_recipient' : value.login})}}
+			<tr class="candystripe"><td>{{:value.name}}<td>{{:value.job}}<td>{{:helper.link(value.login, null, {'set_recipient' : value.login})}}
 		{{/for}}
 		</table>
 	{{else data.new_message}}
