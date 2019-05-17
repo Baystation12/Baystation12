@@ -22,3 +22,5 @@
 	overmap_size= 125
 
 	use_overmap = 1
+
+	map_admin_faxes = list("Ministry of Tranquility","Ministry of Resolution","Ministry of Fervent Intercession")
