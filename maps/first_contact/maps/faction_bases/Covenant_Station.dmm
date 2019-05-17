@@ -51,7 +51,7 @@
 "aY" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "aZ" = (/obj/random/medical/lite,/turf/simulated/floor/plating,/area/faction_base/cov)
 "ba" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/grille/broken,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
-"bb" = (/obj/structure/closet/covenant,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
+"bb" = (/obj/structure/closet/covenant,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "bc" = (/obj/machinery/photocopier/faxmachine{department = "Missionary Ship"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "bd" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
 "be" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/cov)
