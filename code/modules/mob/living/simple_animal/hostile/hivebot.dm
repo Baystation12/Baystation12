@@ -13,6 +13,7 @@
 	maxHealth = 15
 	melee_damage_lower = 2
 	melee_damage_upper = 3
+	melee_damage_flags = DAM_SHARP|DAM_EDGE
 	attacktext = "clawed"
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	projectiletype = /obj/item/projectile/hivebotbullet
