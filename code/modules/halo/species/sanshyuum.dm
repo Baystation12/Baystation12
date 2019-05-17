@@ -12,13 +12,12 @@ GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/species_it
 		near absolute power over the Covenant. They have a strong religious importance \
 		throughout the Covenant Hierarchy."
 	flesh_color = "#4A4A64"
-	blood_color = "#4A4A64"
 	icobase = 'code/modules/halo/icons/species/r_sanshyuum.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_sanshyuum.dmi'
 	icon_template = 'code/modules/halo/icons/species/sanshyuum_template.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
-	secondary_langs = list("Janjur Qomi")
+	secondary_langs = list("Janjur Qomi","Galactic Common")
 	num_alternate_languages = 1
 	spawn_flags = SPECIES_CAN_JOIN
 	total_health = 150		//weaker than a human
