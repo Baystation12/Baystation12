@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "Deck 1 security checkpoint windoors have the correct access flags now."

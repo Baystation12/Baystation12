@@ -1,7 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - rscadd: "Plasma cutters can now cut through the following: bulkhead walls, floor platings, girders, catwalks, windows, low wall frames and lattices."
-  - rscadd: "Plasma cutters will now spark and require eye protection when interacting with object."
-  - tweak: "Mounted plasma cutter has an increased object interaction energy cost, 10 Wh per use."
-  - bugfix: "Drills will now have a delay and sound when drilling through girders."
