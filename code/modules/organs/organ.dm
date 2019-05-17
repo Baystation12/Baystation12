@@ -376,3 +376,6 @@ var/list/organ_cache = list()
 //used by stethoscope
 /obj/item/organ/proc/listen()
 	return
+
+/obj/item/organ/proc/get_mechanical_assisted_descriptor()
+	return "mechanically-assisted [name]"
