@@ -1,0 +1,5 @@
+author: "Chittersky"
+delete-after: True
+changes: 
+  - tweak: "If you are wearing a voidsuit, spiders now need to breach it before injecting poison. On other hand, spiders now can breach voidsuits."
+  - tweak: "Spider venom's toxin damage is now slightly weaker, but can cause confusion."
