@@ -943,6 +943,7 @@
 /area/rnd/entry
 	name = "\improper Research and Development Access"
 	icon_state = "decontamination"
+	req_access = list()
 
 /area/rnd/locker
 	name = "\improper Research Locker Room"
