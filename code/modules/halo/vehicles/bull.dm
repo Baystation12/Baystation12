@@ -15,7 +15,7 @@
 	vehicle_move_delay = 1.75
 
 	occupants = list(4,1)
-	exposed_positions = list("driver" = 5,"passenger" = 10,"gunner" = 30)
+	exposed_positions = list("driver" = 5,"gunner" = 5)
 
 	vehicle_size = 64
 
