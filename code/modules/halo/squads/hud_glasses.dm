@@ -30,9 +30,11 @@
 	var/mob/user = loc
 	if(!istype(user))
 		return
+	if(isnull(user.client))
+		return
 	remove_all_pointers(user)
 	for(var/obj/effect/waypoint_holder/waypoint in known_waypoints)
-		if(waypoint in view(world.view,get_loc_used()))
+		if(waypoint in view(user.client.view,get_loc_used()))
 			process_visible_marker(waypoint,user)
 			continue
 		var/dir_to_point = get_dir(get_loc_used(),waypoint)
@@ -54,3 +56,6 @@
 
 /obj/item/clothing/glasses/hud/tactical/process_hud()
 	process_hud_pointers()
+
+/obj/item/clothing/glasses/hud/tactical/covenant
+	icon_state = "hud_covie"

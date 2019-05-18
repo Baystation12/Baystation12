@@ -8,7 +8,7 @@
 	icon_state = "waypoint_manager"
 	w_class = ITEM_SIZE_SMALL
 	var/datum/waypoint_controller/linked_controller
-	var/waypoint_limit = 5
+	var/waypoint_limit = 8
 
 /obj/item/squad_manager/New()
 	if(!linked_controller)
@@ -99,10 +99,7 @@
 			linked_controller = manager.linked_controller
 			to_chat(user,"<span class = 'notice'>[name] linked to [manager.name]'s internal controller.</span>")
 	else
-		var/turf/turf_to_use
-		if(isturf(A))
-			turf_to_use = A
-		else
-			turf_to_use = A.loc
-		linked_controller.create_waypoint(turf_to_use,user)
+		if(is_adjacent)
+			return
+		linked_controller.create_waypoint(A,user)
 		linked_controller.update_linked_waypoint_locations()
