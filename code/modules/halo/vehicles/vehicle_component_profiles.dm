@@ -32,6 +32,8 @@
 	return can_put_cargo(vehicle_size,1)
 
 /datum/component_profile/proc/can_put_cargo(var/item_w_class,var/for_vehicle = 0)
+	if(isnull(item_w_class))
+		return 0
 	var/used_capacity = cargo_capacity
 	if(for_vehicle)
 		used_capacity = vehicle_capacity

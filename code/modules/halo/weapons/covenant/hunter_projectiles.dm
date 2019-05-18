@@ -9,4 +9,4 @@
 
 /obj/item/projectile/covenant/hunter_fuel_rod/on_impact(var/atom/A)
 	. = ..()
-	explosion(A,0,1,2,5,guaranteed_damage = 30, guaranteed_damage_range = 2)
+	explosion(A,0,1,2,5,guaranteed_damage = 60, guaranteed_damage_range = 2)

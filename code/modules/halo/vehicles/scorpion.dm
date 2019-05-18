@@ -13,7 +13,7 @@
 	comp_prof = /datum/component_profile/scorpion
 
 	vehicle_move_delay = 5
-	exposed_positions = list("passenger" = 40,"gunner" = 10)
+	exposed_positions = list("passenger" = 40,"gunner" = 5)
 
 	occupants = list(4,1)
 
@@ -22,6 +22,8 @@
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
 	vehicle_view_modifier = 1.3
+
+	light_color = "#E1FDFF"
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750

@@ -30,6 +30,19 @@
 	head = /obj/item/clothing/head/helmet/sangheili/major
 	l_pocket = /obj/item/weapon/grenade/plasma
 
+/decl/hierarchy/outfit/sangheili/honour_guard
+	name = "Sangheili (Honour Guard)"
+
+	suit = /obj/item/clothing/suit/armor/special/combatharness/honour_guard
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/melee/energy/elite_sword/honour_staff
+	l_hand = /obj/item/weapon/melee/energy/elite_sword
+	gloves = /obj/item/clothing/gloves/thick/sangheili/honour_guard
+	shoes = /obj/item/clothing/shoes/sangheili/honour_guard
+	head = /obj/item/clothing/head/helmet/sangheili/honour_guard
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/gun/energy/plasmapistol
+
 /decl/hierarchy/outfit/sangheili/ultra
 	name = "Sangheili (Ultra)"
 

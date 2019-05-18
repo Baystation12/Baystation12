@@ -32,11 +32,33 @@
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 	var/move_sound = null
 
+	light_power = 4
+	light_range = 6
+
+/obj/vehicles/verb/toggle_headlights()
+	set name = "Toggle Headlights"
+	set category = "Vehicle"
+	set src in view(1)
+	var/mob/living/user = usr
+	if(!istype(user) || !(user in get_occupants_in_position("driver")))
+		to_chat(user,"<span class = 'notice'>You must be the driver of [src] to toggle the headlights.</span>")
+		return
+
+	if(light_range == 0)
+		to_chat(user,"<span class = 'notice'>You toggle [src]'s headlights on.</span>")
+		set_light(initial(light_range))
+	else
+		to_chat(user,"<span class = 'notice'>You toggle [src]'s headlights off.</span>")
+		set_light(0)
+
 /obj/vehicles/New()
 	. = ..()
 	comp_prof = new comp_prof(src)
 	GLOB.processing_objects += src
 	update_object_sprites()
+	if(light_range != 0)
+		verbs += /obj/vehicles/verb/toggle_headlights
+		set_light(0) //Switch off at spawn.
 
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
@@ -318,7 +340,7 @@
 	comp_prof.take_comp_explosion_dam(severity)
 	for(var/position in exposed_positions)
 		for(var/mob/living/m in get_occupants_in_position(position))
-			m.apply_damage((300/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
+			m.apply_damage((250/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)

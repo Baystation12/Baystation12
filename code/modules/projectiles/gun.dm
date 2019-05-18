@@ -433,7 +433,7 @@
 	if(irradiate_non_cov > 0 && istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/h = user
 		if(istype(h.species,/datum/species/human))
-			h.radiation += irradiate_non_cov
+			h.rad_act(irradiate_non_cov)
 
 	if(screen_shake)
 		spawn()

@@ -185,6 +185,10 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(h.l_hand == src || h.r_hand == src)
 			return 1
 	return 0
+
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
+	return 2
+
 /obj/item/weapon/melee/energy/elite_sword/g_dagger/dropped()
 	if(!inhand_check())
 		creator_dagger.on_dagger_dropped()
@@ -246,6 +250,31 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "major_gloves_obj"
 	item_state = "major_gloves"
+
+/obj/item/clothing/head/helmet/sangheili/honour_guard
+	name = "Sangheili Helmet (Honour Guard)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "honour_helm_obj"
+	item_state = "honour_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/honour_guard
+	name = "Sangheili Combat Harness (Honour Guard)"
+	icon_state = "honour_chest_obj"
+	item_state = "honour_chest"
+	totalshields = 150
+
+/obj/item/clothing/shoes/sangheili/honour_guard
+	name = "Sanghelli Leg Armour (Honour Guard)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "honour_legs_obj"
+	item_state = "honour_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/honour_guard
+	name = "Sanghelli Combat Gauntlets (Honour Guard)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "honour_gloves_obj"
+	item_state = "honour_gloves"
 
 /obj/item/clothing/head/helmet/sangheili/ultra
 	name = "Sangheili Helmet (Ultra)"
@@ -394,91 +423,6 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "ranger_gloves_obj"
 	item_state = "ranger_gloves"
-//DONATOR GEAR
-
-//PANTASTHEDARK
-
-/obj/item/clothing/head/helmet/sangheili/pantas
-	name = "Sangheili Helmet (Berzerker)"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon = SANGHEILI_ARMOUR_ICON
-	icon_state = "pantas_helm_obj"
-	item_state = "pantas_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/pantas
-	name = "Sangheili Combat Harness (Berzerker)"
-	icon_state = "pantas_chest_obj"
-	item_state = "pantas_chest"
-	totalshields = 125
-
-/obj/item/clothing/shoes/sangheili/pantas
-	name = "Sanghelli Leg Armour (Berzerker)"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "pantas_legs_obj"
-	item_state = "pantas_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/pantas
-	name = "Sanghelli Combat Gauntlets (Berzerker)"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "pantas_gloves_obj"
-	item_state = "pantas_gloves"
-
-
-//PANTASTHEDARK2
-
-/obj/item/clothing/head/helmet/sangheili/pantas2
-	name = "Sangheili Helmet (Scribe-Minor)"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon = SANGHEILI_ARMOUR_ICON
-	icon_state = "pantas2_helm_obj"
-	item_state = "pantas2_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/pantas2
-	name = "Sangheili Combat Harness (Scribe-Minor)"
-	icon_state = "pantas2_chest_obj"
-	item_state = "pantas2_chest"
-	totalshields = 100
-
-/obj/item/clothing/shoes/sangheili/pantas2
-	name = "Sanghelli Leg Armour (Scribe-Minor)"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "pantas2_legs_obj"
-	item_state = "pantas2_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/pantas2
-	name = "Sanghelli Combat Gauntlets (Scribe-Minor)"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "pantas2_gloves_obj"
-	item_state = "pantas2_gloves"
-
-//DOGLER
-
-/obj/item/clothing/head/helmet/sangheili/dogler
-	name = "Sya'tenee's Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon = SANGHEILI_ARMOUR_ICON
-	icon_state = "dogler_helm_obj"
-	item_state = "dogler_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/dogler
-	name = "Sya'tenee's Sangheili Combat Harness"
-	icon_state = "dogler_chest_obj"
-	item_state = "dogler_chest"
-	totalshields = 125
-
-/obj/item/clothing/shoes/sangheili/dogler
-	name = "Sya'tenee's Sanghelli Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "dogler_legs_obj"
-	item_state = "dogler_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/dogler
-	name = "Sya'tenee's Sanghelli Combat Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "dogler_gloves_obj"
-	item_state = "dogler_gloves"
-
-//END DONATOR GEAR
 
 //Organ Defines + misc//
 
@@ -506,7 +450,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
 			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
-			w.damage -= 0.05
+			w.damage -= 0.1
 
 /obj/effect/armoursets/Initialize()
 	..()

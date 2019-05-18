@@ -11,6 +11,8 @@
 
 	vehicle_size = 128
 
+	light_color = "#E1FDFF"
+
 /obj/vehicles/drop_pod/overmap/boarding_pod/update_object_sprites()
 	//Enclosed, we don't need to care about the person-sprites.
 
@@ -82,6 +84,8 @@
 
 	bound_width = 64
 	bound_height = 96
+
+	light_color = "#C1CEFF"
 
 /obj/vehicles/drop_pod/overmap/boarding_pod/covenant/north
 	bound_width = 64

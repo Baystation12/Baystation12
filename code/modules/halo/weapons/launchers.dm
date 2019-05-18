@@ -28,7 +28,8 @@
 	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/spnkr
-	fire_delay = 6
+	fire_delay = 8
+	one_hand_penalty = -1
 	caliber = "spnkr"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE
@@ -37,6 +38,7 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 	var/clamshell_open = 0
+	slowdown_general = 2
 
 /obj/item/weapon/gun/projectile/m41/special_check(mob/user)
 	if(clamshell_open)

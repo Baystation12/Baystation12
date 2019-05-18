@@ -13,7 +13,7 @@
 	comp_prof = /datum/component_profile/wraith
 
 	vehicle_move_delay = 4.75
-	exposed_positions = list("gunner" = 10)
+	exposed_positions = list("gunner" = 5)
 
 	occupants = list(0,1)
 
@@ -21,7 +21,9 @@
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
-	vehicle_view_modifier = 1.65
+	vehicle_view_modifier = 1.75
+
+	light_color = "#C1CEFF"
 
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()
