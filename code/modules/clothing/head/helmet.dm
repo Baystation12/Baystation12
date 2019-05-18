@@ -31,8 +31,7 @@
 	. = ..()
 	if(integrated_hud && istype(h) && h.head == src && h.glasses == null)
 		contents -= integrated_hud
-		h.contents += integrated_hud
-		h.glasses = integrated_hud
+		h.equip_to_slot(integrated_hud, slot_glasses)
 
 /obj/item/clothing/head/helmet/dropped()
 	var/mob/living/carbon/human/h = loc

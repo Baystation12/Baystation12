@@ -34,7 +34,7 @@
 		return
 	remove_all_pointers(user)
 	for(var/obj/effect/waypoint_holder/waypoint in known_waypoints)
-		if(waypoint in view(user.client.view,get_loc_used()))
+		if(get_dist(waypoint,get_loc_used()) <= user.client.view)
 			process_visible_marker(waypoint,user)
 			continue
 		var/dir_to_point = get_dir(get_loc_used(),waypoint)
