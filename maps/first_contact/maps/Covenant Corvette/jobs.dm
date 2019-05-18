@@ -88,6 +88,7 @@
 	outfit_type = /decl/hierarchy/outfit/skirmisher_minor
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
+	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
 /datum/job/covenant/skirmmajor
@@ -98,6 +99,7 @@
 	outfit_type = /decl/hierarchy/outfit/skirmisher_major
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
+	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
 /datum/job/covenant/skirmmurmillo
@@ -108,6 +110,7 @@
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
+	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
 /datum/job/covenant/skirmcommando
@@ -118,6 +121,7 @@
 	outfit_type = /decl/hierarchy/outfit/skirmisher_commando
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
+	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
 /datum/job/covenant/kigyarminor
@@ -138,7 +142,6 @@
 	outfit_type = /decl/hierarchy/outfit/kigyarcorvette
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
-	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/covenant/kigyarcorvette/captain
