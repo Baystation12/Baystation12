@@ -129,7 +129,7 @@
 	if(!selected_device)
 		selected_device = get_next_camera()
 	attacker.machine = src
-	attacker.client.view *= active_viewmod
+	attacker.client.view = world.view * active_viewmod
 	set_view_to(selected_device,attacker)
 	place_holder_obj(attacker)
 
