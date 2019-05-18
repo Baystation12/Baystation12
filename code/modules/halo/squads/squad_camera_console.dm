@@ -33,12 +33,18 @@
 	if(linked.linked_devices.len > 0)
 		selected_device = get_next_camera()
 
+/obj/machinery/squad_camera_console/proc/set_view_to(var/obj/selected_device,var/mob/u)
+	var/obj/view_reset_to = selected_device
+	if(!istype(selected_device.loc,/mob))
+		view_reset_to = selected_device.loc
+	u.reset_view(view_reset_to)
+
 /obj/machinery/squad_camera_console/verb/switch_next_camera()
 	set name = "Switch To Next Camera"
 	set desc = "Switches to the next camera"
 	set category = "Object"
 
-	set src in view(1)
+	set src in range(1)
 
 	var/mob/living/u = usr
 	if(!istype(u))
@@ -49,14 +55,14 @@
 		return
 
 	selected_device = get_next_camera()
-	u.reset_view(selected_device)
+	set_view_to(selected_device,u)
 
 /obj/machinery/squad_camera_console/verb/switch_to_camera()
 	set name = "Switch To Camera"
 	set desc = "Switches to a specific camera"
 	set category = "Object"
 
-	set src in view(1)
+	set src in range(1)
 
 	var/mob/living/u = usr
 	if(!istype(u))
@@ -74,7 +80,7 @@
 	if(chosen == "Cancel")
 		return
 	selected_device = linked.linked_devices[locs_choosefrom.Find(chosen)]
-	u.reset_view(selected_device)
+	set_view_to(selected_device,u)
 
 /obj/machinery/squad_camera_console/attack_hand(var/mob/living/attacker)
 	if(!istype(attacker))
