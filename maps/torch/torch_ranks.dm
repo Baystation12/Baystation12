@@ -173,8 +173,7 @@
 	)
 
 	assistant_job = /datum/job/crew
-	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
-						SKILL_WEAPONS = SKILL_BASIC,
+	min_skill = list(	SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/army
