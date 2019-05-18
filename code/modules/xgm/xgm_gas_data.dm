@@ -25,6 +25,8 @@
 	var/list/condensation_points = list()
 	// Reagent path resulting from condesation.
 	var/list/condensation_products = list()
+	//If it shouldn't autogenerate a codex entry
+	var/list/hidden_from_codex = list()
 
 /decl/xgm_gas
 	var/id = ""
@@ -41,6 +43,7 @@
 	var/breathed_product
 	var/condensation_point = INFINITY
 	var/condensation_product
+	var/hidden_from_codex
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
@@ -71,6 +74,7 @@
 			gas_data.condensation_products[gas.id] = gas.condensation_product
 
 		gas_data.breathed_product[gas.id] = gas.breathed_product
+		gas_data.hidden_from_codex[gas.id] = gas.hidden_from_codex
 
 	return 1
 

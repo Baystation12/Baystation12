@@ -64,6 +64,7 @@
 /decl/xgm_gas/alium
 	id = "aliether"
 	name = "Aliether"
+	hidden_from_codex = TRUE
 
 /decl/xgm_gas/alium/New()
 	name = "Compound #[rand(100,999)]"
