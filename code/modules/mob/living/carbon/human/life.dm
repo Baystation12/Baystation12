@@ -406,11 +406,12 @@
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
 	if(status_flags & GODMODE)	return 1	//godmode
 
-	if(adjusted_pressure >= species.hazard_high_pressure)
+	//Make people not take  highpressure damage in cryo. Bloxgate - 2019-05-18
+	if(adjusted_pressure >= species.hazard_high_pressure && !istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
 		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
 		pressure_alert = 2
-	else if(adjusted_pressure >= species.warning_high_pressure)
+	else if(adjusted_pressure >= species.warning_high_pressure && !istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 		pressure_alert = 1
 	else if(adjusted_pressure >= species.warning_low_pressure)
 		pressure_alert = 0
