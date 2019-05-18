@@ -83,7 +83,7 @@
 	if(waypoint_names_list.len >= waypoint_limit)
 		to_chat(user,"<span class = 'warning'>Maximum waypoint count reached.</span>")
 		return
-	if(is_adjacent && (ishuman(A) || istype(A,/obj/item/clothing/glasses/hud/tactical) || istype(A, /obj/item/squad_manager)))
+	if(is_adjacent && (ishuman(A) || istype(A,/obj/item/clothing/glasses/hud/tactical) || istype(A, /obj/item/squad_manager) && !(A in linked_controller.linked_devices)))
 		if(ishuman(A))
 			var/mob/living/carbon/human/h = A
 			var/obj/item/clothing/glasses/hud/tactical/glasses = h.glasses
@@ -91,9 +91,6 @@
 				linked_controller.linked_devices += glasses
 				to_chat(h,"<span class = 'notice'>You have been added to [linked_controller.squad_name]</span>")
 		else if(istype(A,/obj/item/clothing/glasses/hud/tactical))
-			if(A in linked_controller.linked_devices)
-				to_chat(user,"<span class = 'notice'>[A.name] is already linked.</span>")
-				return
 			linked_controller.linked_devices += A
 			to_chat(user,"<span class = 'notice'>[A.name] added to linker.</span>")
 		else if(istype(A,/obj/item/squad_manager) && (A != src))

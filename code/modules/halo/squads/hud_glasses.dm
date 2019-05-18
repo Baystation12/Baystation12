@@ -28,8 +28,9 @@
 		qdel(pointer)
 
 /obj/item/clothing/glasses/hud/tactical/proc/process_hud_pointers() //This is for directional pointers around the character, for waypoints off-screen.
-	remove_all_pointers(last_user)
-	last_user = null
+	if(!isnull(last_user))
+		remove_all_pointers(last_user)
+		last_user = null
 	var/mob/user = loc
 	if(!istype(user))
 		return
