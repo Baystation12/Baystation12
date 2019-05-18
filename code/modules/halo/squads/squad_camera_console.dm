@@ -92,7 +92,7 @@
 		selected_device = get_next_camera()
 	attacker.machine = src
 	attacker.client.view = initial(attacker.client.view) * active_viewmod
-	attacker.reset_view(selected_device)
+	set_view_to(selected_device,attacker)
 
 /obj/machinery/squad_camera_console/proc/get_next_camera()
 	var/our_camera_index = linked.linked_devices.Find(selected_device)
