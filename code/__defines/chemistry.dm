@@ -41,6 +41,7 @@
 #define CE_BRAIN_REGEN   "brainfix"     // Alkysine.
 #define CE_ANTIVIRAL     "antiviral"    // Anti-virus effect.
 #define CE_TOXIN         "toxins"       // Generic toxins, stops autoheal.
+#define CE_CRYO			 "cryoprotectant" //Protects from extreme cold damage
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1
