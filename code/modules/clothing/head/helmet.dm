@@ -36,7 +36,9 @@
 /obj/item/clothing/head/helmet/dropped()
 	var/mob/living/carbon/human/h = loc
 	if(integrated_hud && istype(h))
+		integrated_hud.canremove = 1
 		h.drop_from_inventory(integrated_hud)
+		integrated_hud.canremove = 0
 	contents += integrated_hud
 
 /obj/item/clothing/head/helmet/solgov

@@ -2,6 +2,8 @@
 /obj/machinery/squad_camera_console
 	name = "Squad Camera Console"
 	desc = "A console that allows a user to access tactical HUD cameras. Advanced signal propagation technology ensures near-infinite range communication."
+	density = 1
+	anchored = 1
 
 	icon = 'code/modules/halo/squads/camera_console.dmi'
 	icon_state = "camera_console"
@@ -9,6 +11,7 @@
 	var/datum/waypoint_controller/linked
 	var/squad_manager_spawn = /obj/item/squad_manager
 	var/obj/selected_device
+	var/active_viewmod = 1.7
 
 /obj/machinery/squad_camera_console/examine(var/mob/examiner)
 	. = ..()
@@ -82,6 +85,7 @@
 	if(!selected_device)
 		selected_device = get_next_camera()
 	attacker.machine = src
+	attacker.client.view = initial(attacker.client.view) * active_viewmod
 	attacker.reset_view(selected_device)
 
 /obj/machinery/squad_camera_console/proc/get_next_camera()
@@ -97,6 +101,7 @@
 /obj/machinery/squad_camera_console/check_eye(var/mob/user)
 	if(get_dist(user,src) > 1)
 		user.machine = null
+		user.client.view = initial(user.client.view)
 		user.reset_view(null)
 		return -1
 	return 0

@@ -91,6 +91,9 @@
 				linked_controller.linked_devices += glasses
 				to_chat(h,"<span class = 'notice'>You have been added to [linked_controller.squad_name]</span>")
 		else if(istype(A,/obj/item/clothing/glasses/hud/tactical))
+			if(A in linked_controller.linked_devices)
+				to_chat(user,"<span class = 'notice'>[A.name] is already linked.</span>")
+				return
 			linked_controller.linked_devices += A
 			to_chat(user,"<span class = 'notice'>[A.name] added to linker.</span>")
 		else if(istype(A,/obj/item/squad_manager) && (A != src))
