@@ -4,5 +4,5 @@
 #include "spawns_jobs.dm"
 #include "lift.dm"
 
-#include "KS7_535_1.dmm"
-#include "KS7_535_2.dmm"
+#include "KS7_535_1_Glassed.dmm"
+#include "KS7_535_2_Glassed.dmm"
