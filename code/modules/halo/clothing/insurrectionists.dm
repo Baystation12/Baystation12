@@ -29,6 +29,8 @@
 		slot_r_hand_str = null,
 		)
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/suit/armor/innie
 	name = "Salvaged Armor"
 	desc = "A worn set of armor composed of materials usually found in UNSC equipment, modified for superior bullet resistance."
@@ -144,6 +146,8 @@
 	armor_thickness = 15
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 	gas_transfer_coefficient = 0.90
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 
 #undef INNIE_OVERRIDE
