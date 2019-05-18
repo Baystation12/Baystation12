@@ -54,7 +54,6 @@
 	var/datum/waypoint_controller/linked
 	var/squad_manager_spawn = /obj/item/squad_manager
 	var/obj/selected_device
-	var/active_viewmod = 1.7
 
 /obj/machinery/squad_camera_console/examine(var/mob/examiner)
 	. = ..()
@@ -129,7 +128,6 @@
 	if(!selected_device)
 		selected_device = get_next_camera()
 	attacker.machine = src
-	attacker.client.view = world.view * active_viewmod
 	set_view_to(selected_device,attacker)
 	place_holder_obj(attacker)
 
@@ -146,7 +144,6 @@
 /obj/machinery/squad_camera_console/check_eye(var/mob/user)
 	if(get_dist(user,src) > 1)
 		user.machine = null
-		user.client.view = world.view
 		user.reset_view(null)
 		remove_holder_obj(user)
 		return -1
