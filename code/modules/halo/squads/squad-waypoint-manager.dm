@@ -103,3 +103,6 @@
 			return
 		linked_controller.create_waypoint(A,user)
 		linked_controller.update_linked_waypoint_locations()
+
+/obj/item/squad_manager/covenant
+	icon_state = "waypoint_manager_cov"
