@@ -1,4 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - rscadd: "Added 'Known Implants' field to medical record, that gets auto-filled with roundstart robotic organs"

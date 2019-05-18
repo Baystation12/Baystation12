@@ -1,4 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - rscadd: "Added buddy tags to explorer lockers. These can be worn as an accessory, and will start pinging every half a minute or so if they don't detect another tag with the same ID in 10 tile range. They can be clicked in hand to set ID and toggle on/off."

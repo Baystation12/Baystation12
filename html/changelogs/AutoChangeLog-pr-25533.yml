@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Helm and navigation consoles now show 'gigameters/hour' for speed and acceleration."
