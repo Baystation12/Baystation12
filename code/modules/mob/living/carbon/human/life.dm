@@ -390,15 +390,18 @@
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
+		var/needed_cryo = 1 //What level of cryoprotection is needed?
 		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 			var/burn_dam = 0
 			if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_1))
 				burn_dam = COLD_DAMAGE_LEVEL_1
 			else if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_3))
 				burn_dam = COLD_DAMAGE_LEVEL_2
+				needed_cryo = 2
 			else
 				burn_dam = COLD_DAMAGE_LEVEL_3
-			if(!chem_effects[CE_CRYO])
+				needed_cryo = 3
+			if(chem_effects[CE_CRYO] != needed_cryo)
 				take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 				fire_alert = max(fire_alert, 1)
 
