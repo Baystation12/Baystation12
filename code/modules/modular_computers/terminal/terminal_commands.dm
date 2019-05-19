@@ -244,7 +244,7 @@ Subtypes
 	if(!id)
 		return syntax_error
 	var/obj/item/modular_computer/target = ntnet_global.get_computer_by_nid(id)
-	if(target == comp) return "<font color = '#ff0000'>proxy: YOU CAN'T USE PROXY ON THIS DEVICE</font>"
+	if(target == comp) return "proxy: YOU CAN'T USE PROXY ON THIS DEVICE<"
 	if(!target || !target.enabled || !target.get_ntnet_status())
 		return "proxy: Error; cannot locate target device."
 	if(target.hard_drive)
