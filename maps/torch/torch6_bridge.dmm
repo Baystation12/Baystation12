@@ -283,17 +283,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aM" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/random/firstaid,
-/obj/random/firstaid,
-/obj/random/medical,
-/obj/random/medical,
-/obj/random/medical,
-/obj/machinery/vending/wallmed1{
-	name = "Emergency NanoMed";
-	pixel_x = -32;
-	req_access = newlist()
-	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
@@ -1300,19 +1289,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/ce)
-"dq" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/dark,
-/area/aquila/airlock)
 "dr" = (
 /obj/machinery/atmospherics/binary/pump/on{
 	dir = 1;
@@ -2144,10 +2120,6 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
 /obj/machinery/computer/ship/engines,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
@@ -2417,6 +2389,10 @@
 	icon_state = "alarm0";
 	pixel_x = -22;
 	pixel_y = 0
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -26
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
@@ -3670,10 +3646,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled/freezer,
 /area/aquila/head)
 "jg" = (
@@ -3721,11 +3693,6 @@
 	},
 /obj/machinery/light{
 	dir = 4
-	},
-/obj/machinery/firealarm{
-	dir = 4;
-	layer = 3.3;
-	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/mess)
@@ -4016,6 +3983,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -26
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/aquila/head)
 "kc" = (
@@ -4112,6 +4083,10 @@
 /obj/structure/bed/chair/shuttle/blue{
 	icon_state = "shuttle_chair_preview";
 	dir = 1
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/mess)
@@ -6426,6 +6401,11 @@
 "pc" = (
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/airlock)
 "pd" = (
@@ -6783,6 +6763,13 @@
 	icon_state = "handrail";
 	dir = 1
 	},
+/obj/machinery/vending/wallmed1{
+	dir = 1;
+	icon_state = "wallmed";
+	name = "Emergency NanoMed";
+	pixel_x = 0;
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/airlock)
 "pY" = (
@@ -6864,11 +6851,6 @@
 "qe" = (
 /obj/machinery/light{
 	dir = 4
-	},
-/obj/machinery/firealarm{
-	dir = 4;
-	layer = 3.3;
-	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
@@ -7158,11 +7140,6 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/machinery/firealarm{
-	dir = 4;
-	layer = 3.3;
-	pixel_x = 26
-	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 4
@@ -7579,9 +7556,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/alarm{
-	pixel_y = 24
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4;
 	icon_state = "intact"
@@ -7633,6 +7607,10 @@
 /obj/machinery/camera/network/aquila{
 	c_tag = "Aquila - Infirmary";
 	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
@@ -8176,10 +8154,6 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
 /turf/simulated/floor/tiled,
 /area/aquila/secure_storage)
 "sV" = (
@@ -8290,6 +8264,9 @@
 /obj/item/weapon/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,
 /obj/structure/iv_drip,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/firstaid,
 /turf/simulated/floor/tiled/white,
 /area/aquila/medical)
 "tf" = (
@@ -8509,6 +8486,10 @@
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
 	pixel_x = 11;
 	pixel_y = 1
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/aquila/secure_storage)
@@ -16888,6 +16869,9 @@
 	icon_state = "2-4"
 	},
 /obj/structure/catwalk,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
 "Yd" = (
@@ -35924,7 +35908,7 @@ ke
 XI
 lX
 nk
-dq
+pd
 pd
 pW
 Ok
