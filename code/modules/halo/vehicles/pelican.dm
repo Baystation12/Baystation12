@@ -25,6 +25,8 @@
 
 	vehicle_size = 128
 
+	light_color = "#E1FDFF"
+
 /obj/vehicles/air/pelican/update_object_sprites()
 
 //Pelican component profile define//
@@ -85,6 +87,8 @@
 
 	vehicle_size = 128
 
+	light_color = "#E1FDFF"
+
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
 
@@ -97,6 +101,8 @@
 	occupants = list(13,1)
 
 	comp_prof = /datum/component_profile/pelican/urf
+
+	light_color = "#FEFFE1"
 
 /obj/vehicles/air/pelican/innie/update_object_sprites()
 	. = ..()
@@ -142,6 +148,8 @@
 	occupants = list(13,1)
 
 	comp_prof = /datum/component_profile/pelican/innie
+
+	light_color = "#FEFFE1"
 
 /obj/vehicles/air/pelican/innie/update_object_sprites()
 	. = ..()

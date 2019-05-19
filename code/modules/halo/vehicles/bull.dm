@@ -21,6 +21,8 @@
 
 	move_sound = 'code/modules/halo/sounds/warthog_move.ogg'
 
+	light_color = "#FEFFE1"
+
 /obj/vehicles/bull/update_object_sprites()
 	. = ..()
 	pixel_x = 0

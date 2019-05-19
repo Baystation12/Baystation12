@@ -29,6 +29,8 @@
 
 	vehicle_view_modifier = 1.3
 
+	light_color = "#C1CEFF"
+
 /obj/vehicles/air/overmap/spirit_dropship/update_object_sprites()
 	. = ..()
 	if(dir == NORTH || dir == SOUTH)
