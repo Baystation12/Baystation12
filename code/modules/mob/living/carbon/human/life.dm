@@ -401,7 +401,7 @@
 			else
 				burn_dam = COLD_DAMAGE_LEVEL_3
 				needed_cryo = 3
-			if(chem_effects[CE_CRYO] != needed_cryo)
+			if(chem_effects[CE_CRYO] < needed_cryo)
 				take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 				fire_alert = max(fire_alert, 1)
 
