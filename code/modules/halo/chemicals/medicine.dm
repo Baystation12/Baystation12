@@ -195,7 +195,7 @@
 	if(istype(M, /mob/living/carbon/human))
 		M.add_chemical_effect(CE_CRYO, 1)
 
-/datum/reagent/cryoprethaline/overdose(var/mob/living/carbon/M)
+/datum/reagent/hexaline/overdose(var/mob/living/carbon/M)
 	if(istype(M, /mob/living/carbon/human))
 		M.adjustToxLoss(1)
 
