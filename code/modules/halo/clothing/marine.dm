@@ -29,6 +29,8 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/head/helmet/marine/medic
 	name = "CH252 Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
@@ -152,6 +154,8 @@
 	icon_state = "rig0-salvage"
 	item_state = "rig0-salvage"
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/suit/space/void/unsc/prepared/New()
 	..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/unsc
@@ -225,6 +229,8 @@
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
 	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 15, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/shoes/eva/marine
 	name = "\improper EVA Armoured Boots"

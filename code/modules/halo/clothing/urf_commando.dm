@@ -32,6 +32,8 @@
 	on = 0
 	armor_thickness = 20
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/suit/armor/special/urfc
 	name = "URFC Rifleman Armour"
 	desc = "Somewhat expensive and hand crafted, this armor is the pinnacle of the work force of the URF and it's many workers. Filled with pouches and storage compartments, while still keeping a scary amount of both mobility and protection. An ideal collage of the strengths of the URF, but with the added protection found only in high tier UNSC equipment. It's quite comfy, probably won't last long in space."

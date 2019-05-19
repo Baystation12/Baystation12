@@ -9,9 +9,10 @@
 /datum/waypoint_controller/New(var/creator)
 	controller_manager_device = creator
 
-/datum/waypoint_controller/proc/create_waypoint(var/turf/waypoint_turf,var/mob/user)
+/datum/waypoint_controller/proc/create_waypoint(var/atom/waypoint_turf,var/mob/user)
 	var/obj/effect/waypoint_holder/created_waypoint = new
 	created_waypoint.loc = waypoint_turf
+	waypoint_turf.contents += created_waypoint
 	active_waypoints += created_waypoint
 	created_waypoint.waypoint_name = "Waypoint-[active_waypoints.Find(created_waypoint)]"
 	inform_waypoint_modification(created_waypoint)

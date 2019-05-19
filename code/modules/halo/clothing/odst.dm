@@ -44,6 +44,8 @@
 	var/visr_on = 1
 	armor_thickness = 20
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 
 /obj/item/clothing/suit/armor/special/odst
 	name = "ODST Armour"
