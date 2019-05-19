@@ -17,11 +17,11 @@
 				material_info += "It has average resistance to physical impacts."
 
 			if(mat.burn_armor < 2)
-				material_info += "It is weak to applied heat."
+				material_info += "It is weak to applied energy."
 			else if(mat.burn_armor > 2)
-				material_info += "It is [mat.burn_armor > 4 ? "very " : null]resistant to applied heat."
+				material_info += "It is [mat.burn_armor > 4 ? "very " : null]resistant to applied energy."
 			else
-				material_info += "It has average resistance to applied heat."
+				material_info += "It has average resistance to applied energy."
 
 			if(mat.conductive)
 				material_info += "It conducts electricity."
@@ -29,7 +29,7 @@
 				material_info += "It does not conduct electricity."
 			
 			if(mat.opacity < 0.5)
-				material_info += "It is transparent to light."
+				material_info += "It is transparent."
 
 			if(mat.weight <= MATERIAL_LIGHT)
 				material_info += "It is very light."
@@ -62,17 +62,17 @@
 				for(var/chemial in mat.chem_products)
 					var/datum/reagent/R = chemial
 					chems += "[initial(R.name)] ([mat.chem_products[chemial]]u)"
-				material_info += "Following chemicals can be extracted from it (per [mat.sheet_singular_name]): [english_list(chems)]"
+				material_info += "The following chemicals can be extracted from it (per [mat.sheet_singular_name]):<br>[english_list(chems)]"
 			
 			if(LAZYLEN(mat.alloy_materials))
 				var/parts = list()
 				for(var/alloy_part in mat.alloy_materials)
 					var/material/part = SSmaterials.materials_by_name[alloy_part]
 					parts += "[mat.alloy_materials[alloy_part]]u [part.display_name]"
-				material_info += "Is an alloy of the following materials: [english_list(parts)]"
+				material_info += "It is an alloy of the following materials: [english_list(parts)]"
 
 			if(mat.radioactivity)
-				material_info += "It radioactive."
+				material_info += "It is radioactive."
 
 			if(mat.is_fusion_fuel)
 				material_info += "It can be used as fusion fuel."
