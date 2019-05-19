@@ -52,7 +52,8 @@
 	counterparts and their corporations as an intermediary to trade with humanity while remaining obscure. Despite the planet's prosperity there is a growing conservative \
 	movement in many city-states concerned with the perceived invasive influence of humankind and its potential long-term damage."
 	language = LANGUAGE_SKRELLIAN
-	additional_langs = list(LANGUAGE_GALCOM, LANGUAGE_SIGN, LANGUAGE_HUMAN_EURO)
+	additional_langs = list(LANGUAGE_GALCOM)
+	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_HUMAN_EURO)
 	capital = "None"
 	ruling_body = "None"
 	distance = "32 light years"
@@ -65,7 +66,8 @@
 	rather than a Qerr-Skria.Life in these circumstances is often more regimented and disciplined, with a stronger emphasis on community and collaboration, with varying extremes \
 	depending on the status, funding and level of military engagements the SDTF is currently in."
 	language = LANGUAGE_SKRELLIAN
-	additional_langs = list(LANGUAGE_GALCOM, LANGUAGE_SIGN)
+	additional_langs = list(LANGUAGE_GALCOM)
+	secondary_langs = list(LANGUAGE_SIGN)
 	capital = "None"
 	ruling_body = "Your local SDTF"
 	distance = "None"
