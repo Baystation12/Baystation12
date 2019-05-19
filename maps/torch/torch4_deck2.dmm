@@ -4782,6 +4782,14 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
+/obj/machinery/airlock_sensor{
+	command = "cycle_exterior";
+	frequency = 1379;
+	id_tag = "engine_airlock_exterior_sensor";
+	master_tag = "engine_airlock";
+	pixel_x = -24;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
 "ks" = (
@@ -5057,11 +5065,6 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
 "kY" = (
-/obj/machinery/door/airlock/hatch{
-	frequency = 1379;
-	id_tag = "engine_airlock_exterior";
-	name = "Engine Airlock Exterior"
-	},
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
@@ -5069,6 +5072,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
+	},
+/obj/machinery/door/airlock/hatch{
+	frequency = 1379;
+	id_tag = "engine_airlock_interior";
+	name = "Engine Airlock Interior"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
@@ -5082,27 +5090,28 @@
 	icon_state = "warning";
 	dir = 9
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/universal{
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "la" = (
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller{
-	id_tag = "engine_room_airlock";
+	cycle_to_external_air = 1;
+	id_tag = "engine_airlock";
 	name = "Engine Room Airlock";
 	pixel_x = 0;
 	pixel_y = 24;
 	tag_airpump = "engine_airlock_pump";
-	tag_chamber_sensor = "eng_al_c_snsr";
+	tag_chamber_sensor = "engine_airlock_sensor";
 	tag_exterior_door = "engine_airlock_exterior";
-	tag_exterior_sensor = "eng_al_ext_snsr";
+	tag_exterior_sensor = "engine_airlock_exterior_sensor";
 	tag_interior_door = "engine_airlock_interior";
-	tag_interior_sensor = "eng_al_int_snsr"
+	tag_interior_sensor = "engine_airlock_interior_sensor"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1379;
-	id_tag = "eng_al_c_snsr";
+	id_tag = "engine_airlock_sensor";
 	pixel_x = -24;
 	pixel_y = 24
 	},
@@ -5115,7 +5124,7 @@
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -5129,25 +5138,26 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 10;
-	icon_state = "intact"
-	},
 /obj/machinery/light/small{
 	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1379;
+	id_tag = "engine_airlock_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "lc" = (
-/obj/machinery/door/airlock/hatch{
-	frequency = 1379;
-	id_tag = "engine_airlock_interior";
-	name = "Engine Airlock Interior"
-	},
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/hatch{
+	frequency = 1379;
+	id_tag = "engine_airlock_exterior";
+	name = "Engine Airlock Exterior"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
@@ -5449,39 +5459,35 @@
 	pixel_x = 5;
 	pixel_y = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/universal{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
-	},
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "lQ" = (
-/obj/machinery/atmospherics/binary/dp_vent_pump/high_volume{
-	dir = 8;
-	frequency = 1379;
-	id = "engine_airlock_pump"
-	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/camera/network/engine{
 	c_tag = "Engine - Access";
 	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "lR" = (
 /obj/structure/closet/radiation,
 /obj/item/clothing/glasses/meson,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
 /obj/item/clothing/glasses/meson,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1379;
+	id_tag = "engine_airlock_pump_out_internal"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "lT" = (
@@ -5729,18 +5735,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
 "mD" = (
-/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller{
-	id_tag = "engine_room_airlock";
-	name = "Engine Room Airlock";
-	pixel_x = 24;
-	pixel_y = 24;
-	tag_airpump = "engine_airlock_pump";
-	tag_chamber_sensor = "eng_al_c_snsr";
-	tag_exterior_door = "engine_airlock_exterior";
-	tag_exterior_sensor = "eng_al_ext_snsr";
-	tag_interior_door = "engine_airlock_interior";
-	tag_interior_sensor = "eng_al_int_snsr"
-	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
@@ -5755,6 +5749,14 @@
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 4
+	},
+/obj/machinery/airlock_sensor{
+	command = "cycle_interior";
+	frequency = 1379;
+	id_tag = "engine_airlock_interior_sensor";
+	master_tag = "engine_airlock";
+	pixel_x = 24;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
