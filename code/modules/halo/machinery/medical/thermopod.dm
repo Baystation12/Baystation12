@@ -135,7 +135,7 @@
 
 	ui_interact(user)
 
-/obj/machinery/themopod/attack_ai(var/mob/user)
+/obj/machinery/thermopod/attack_ai(var/mob/user)
 	return attack_hand(user)
 
 
