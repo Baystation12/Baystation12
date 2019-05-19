@@ -241,7 +241,7 @@
 "eG" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
 "eH" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/belt/medical,/obj/item/weapon/storage/belt/medical,/obj/item/weapon/reagent_containers/pill/rumble,/obj/item/weapon/reagent_containers/pill/rumble,/obj/item/weapon/reagent_containers/pill/rumble,/obj/item/weapon/reagent_containers/pill/rumble,/obj/item/weapon/reagent_containers/pill/rumble,/obj/item/weapon/reagent_containers/pill/rumble,/obj/item/clothing/accessory/stethoscope,/obj/item/clothing/accessory/stethoscope,/obj/item/clothing/accessory/storage,/obj/item/clothing/accessory/storage,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
 "eI" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/machinery/cell_charger,/obj/machinery/light,/obj/effect/decal/cleanable/dirt,/obj/item/weapon/wrench,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
-"eJ" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
+"eJ" = (/obj/machinery/thermopod,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
 "eK" = (/obj/machinery/door/airlock/halo{name = "Crew Quarters"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/corvette/unscthorin/portcrew)
 "eL" = (/obj/effect/decal/cleanable/dirt,/obj/effect/hull_segment,/turf/simulated/wall,/area/corvette/unscthorin/powercore)
 "eM" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/obj/structure/table/rack,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/corvette/unscthorin/powercore)
@@ -668,6 +668,7 @@
 "mR" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/corvette/unscthorin/Troopbunks)
 "mS" = (/obj/effect/landmark/map_data{mouse_over_pointer = 0; name = "URFS Thorn"},/turf/space,/area/space)
 "mT" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
+"mU" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/corvette/unscthorin/medicalbay)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -714,7 +715,7 @@ aaaaaaaaaaaaaaaaaabZcacbdidjdkdldmdndododpdqdodrdsbBdtdtdudtdtdtdtdtdvdvdvdvdwdv
 aaaaaaaaaaaaaaaaaabcbAcbcbcbcbcbdDdDdEdFdGdHdIdJdKbBdtdLdMdNdOdOdPdtdQdRdSdTdUdVdWdXaIdYdZeaebebebecedeeebefegehebebeiaCejbadhbbaCaEaFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaabcbAbAbAbAbAbAbAcbcwdJdJdJdJcwekbBdteldOemdOdOdOdteneoepeqereseteuaIeaaIaIevdzebdzdzewewexewewebewewaCaCaCaCaCaCaEaFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaabcaGaGaGaGaGaGaGeyezezeAeBeAezdKcydteCdOeDeEdOdOdteFeGeHeoeIeoeoeJaIeaaIaIdzdzebdzdzewewexewewebewewdzdzabababaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaGaGaGaGaGaGaGeyezezezeKezezdKcDeLeMdOeNeOePeQeLeRdvdveSdveTeoeUaIdYaIaIdzdzeddzdzeVeweWeweVebeweVdzabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaGaGaGaGaGaGaGeyezezezeKezezdKcDeLeMdOeNeOePeQeLeRdvdveSdvmUeoeUaIdYaIaIdzdzeddzdzeVeweWeweVebeweVdzabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeyezezeXeYeYeZfacDeLePdOemdOdOdOdtfbeTfceofdeTeTfeaIeaffaIfgfgfhfgfifififififififififiabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaafjfkflfmfmfmfmezezezeKezfnfocSdtfpfqemdOdOdOdtfrfseTeofdeoeTftaIeaaIaIfufvfgfwfifxfyfzfyfyfyfzfyfAfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaafCfDfEfFfGfHfmezezeAfIeAezfJfKdtfLfMfNeEdOfOdtfPeofQfRfSeoeofTaIdYfUdyfVfVfWfgfifXfYfyfyfyfYfyfyfAfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
