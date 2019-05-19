@@ -11,6 +11,7 @@
 	siemens_coefficient = 0.9
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 
 /obj/item/clothing/head/hardhat/orange
 	icon_state = "hardhat0_orange"

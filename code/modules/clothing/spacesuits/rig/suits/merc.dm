@@ -44,6 +44,8 @@
 	armor = list(melee = 80, bullet = 65, laser = 70, energy = 35, bomb = 100, bio = 100, rad = 80)
 	online_slowdown = 3
 	offline_slowdown = 4
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
 
 /obj/item/weapon/rig/merc/heavy/empty
 	initial_modules = list(
