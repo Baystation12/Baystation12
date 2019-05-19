@@ -14,34 +14,59 @@
 	)
 
 	initial_generic_waypoints = list(
-		"nav_merc_deck1",
-		"nav_merc_deck2",
-		"nav_merc_deck3",
-		"nav_merc_deck4",
+		//start Bridge Deck
 		"nav_merc_deck5",
-		"nav_ert_deck1",
-		"nav_ert_deck2",
-		"nav_ert_deck3",
-		"nav_ert_deck4",
+		"nav_ninja_deck5",
+		"nav_skipjack_deck5",
 		"nav_ert_deck5",
-		"nav_deck1_calypso",
-		"nav_deck2_calypso",
-		"nav_deck3_calypso",
-		"nav_deck4_calypso",
 		"nav_bridge_calypso",
-		"nav_deck1_guppy",
-		"nav_deck2_guppy",
-		"nav_deck3_guppy",
-		"nav_deck4_guppy",
 		"nav_bridge_guppy",
-		"nav_deck1_aquila",
-		"nav_deck2_aquila",
-		"nav_deck3_aquila",
-		"nav_deck4_aquila",
 		"nav_bridge_aquila",
+
+		//start First Deck
+		"nav_merc_deck1",
+		"nav_ninja_deck1",
+		"nav_skipjack_deck1",
+		"nav_ert_deck4",
+		"nav_deck4_calypso",
+		"nav_deck4_guppy",
+		"nav_deck4_aquila",
+
+		//start Second Deck
+		"nav_merc_deck2",
+		"nav_ninja_deck2",
+		"nav_skipjack_deck2",
+		"nav_ert_deck3",
+		"nav_deck3_calypso",
+		"nav_deck3_guppy",
+		"nav_deck3_aquila",
+
+		//start Third Deck
+		"nav_merc_deck3",
+		"nav_ninja_deck3",
+		"nav_skipjack_deck3",
+		"nav_ert_deck2",
+		"nav_deck2_calypso",
+		"nav_deck2_guppy",
+		"nav_deck2_aquila",
+		
+		//start Forth Deck
+		"nav_merc_deck4",
+		"nav_ninja_deck4",
+		"nav_skipjack_deck4",
+		"nav_ert_deck1",
+		"nav_deck1_calypso",
+		"nav_deck1_guppy",
+		"nav_deck1_aquila",
+
+		//start Hanger Deck
+		"nav_merc_hanger",
+		"nav_ninja_hanger",
+		"nav_skipjack_hanger",
+		"nav_ert_hanger",
+
 		"nav_skrellscoutsh_altdock",
 		"nav_ert_dock"
-		
 	)
 
 /obj/effect/overmap/ship/landable/exploration_shuttle
