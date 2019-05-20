@@ -13,6 +13,37 @@
 /obj/item/weapon/pen/fancy,
 /turf/simulated/floor/lino,
 /area/command/pilot)
+"ad" = (
+/obj/effect/floor_decal/corner/brown/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/fifthdeck/fore)
+"ae" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled,
+/area/exploration_shuttle/airlock)
+"af" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/tiled,
+/area/exploration_shuttle/airlock)
 "ag" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
@@ -1864,30 +1895,6 @@
 /obj/effect/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
-"dY" = (
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 4
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/exploration_shuttle/airlock)
-"dZ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden,
-/turf/simulated/floor/tiled,
-/area/exploration_shuttle/airlock)
 "ea" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -7500,15 +7507,6 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
-/area/hallway/primary/fifthdeck/fore)
-"qJ" = (
-/obj/structure/closet/emcloset,
-/obj/effect/floor_decal/corner/brown/half{
-	icon_state = "bordercolorhalf";
-	dir = 1
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
 "qK" = (
 /obj/effect/catwalk_plated,
@@ -32923,7 +32921,7 @@ kl
 kl
 kl
 Sd
-qJ
+ad
 aF
 oX
 eu
@@ -35145,7 +35143,7 @@ cO
 di
 dz
 cN
-dY
+af
 ek
 Ls
 eA
@@ -35347,7 +35345,7 @@ cP
 dj
 dA
 dL
-dZ
+ae
 el
 et
 eC
