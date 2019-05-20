@@ -17,7 +17,6 @@
 
 /obj/item/clothing/head/hardhat/red
 	icon_state = "hardhat0_red"
-	name = "firefighter helmet"
 
 /obj/item/clothing/head/hardhat/white
 	icon_state = "hardhat0_white"
@@ -33,4 +32,23 @@
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(melee = 30, bullet = 10, laser = 10,energy = 10, bomb = 20, bio = 10, rad = 5)
 	max_heat_protection_temperature = 1300
+
+/obj/item/clothing/head/hardhat/firefighter
+	icon_state = "Firefighter-Helmet"
+	name = "firefighter helmet"
+	desc = "A complete, face covering helmet specially designed for firefighting. It is airtight and has a port for internals."
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
+	permeability_coefficient = 0
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	body_parts_covered = HEAD|FACE|EYES
+	cold_protection = HEAD
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.9
+	center_of_mass = null
+	randpixel = 0
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA, "Xenophage")
+	flash_protection = FLASH_PROTECTION_MAJOR
+
+/obj/item/clothing/head/hardhat/firefighter/Chief
+	icon_state = "Firefighter-Helmet-Chief"
 
