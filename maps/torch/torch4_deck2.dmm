@@ -2837,7 +2837,9 @@
 "gi" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/engineering{
-	name = "Tech Storage"
+	autoset_access = 0;
+	name = "Tech Storage";
+	req_access = list("ACCESS_TECH_STORAGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3625,6 +3627,10 @@
 	amount = 50
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/door/window/northleft{
+	autoset_access = 0;
+	req_access = list("ACCESS_ENGINE_EQUIP")
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/locker_room)
 "hV" = (
@@ -3645,6 +3651,13 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light,
+/obj/machinery/door/window/northleft{
+	autoset_access = 0;
+	req_access = list("ACCESS_ENGINE_EQUIP")
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/locker_room)
 "hW" = (
@@ -5017,11 +5030,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/door/airlock/maintenance,
+/obj/structure/catwalk,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/aftstarboard)
 "kU" = (
@@ -6413,6 +6425,10 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/window/northleft{
+	autoset_access = 0;
+	req_access = list("ACCESS_ENGINE_EQUIP")
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/locker_room)
 "oe" = (
@@ -14547,6 +14563,10 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/stack/material/aluminium/fifty,
 /obj/item/stack/material/aluminium/fifty,
+/obj/machinery/door/window/northleft{
+	autoset_access = 0;
+	req_access = list("ACCESS_ENGINE_EQUIP")
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/locker_room)
 "Jc" = (
@@ -15208,6 +15228,12 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
+"Lx" = (
+/obj/machinery/door/airlock/engineering{
+	name = "Robotics"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/assembly/robotics/lower)
 "LD" = (
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -17898,9 +17924,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/expedition)
 "UM" = (
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 32
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)
 "UN" = (
@@ -37833,7 +37856,7 @@ fu
 gj
 gg
 gg
-gg
+Lx
 gg
 gg
 pg

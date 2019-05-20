@@ -73,7 +73,7 @@
 	desc = "A headset for the guy or gal who advises the enlisted whilst from a position of seniority."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/heads/sea	
+	ks1type = /obj/item/device/encryptionkey/heads/sea
 
 /obj/item/device/radio/headset/sea/alt
 	name = "senior enlisted advisor's bowman headset"
@@ -116,13 +116,6 @@
 	name = "pathfinder's bowman headset"
 	icon_state = "exp_headset_alt"
 	item_state = "exp_headset_alt"
-
-/obj/item/device/radio/headset/torchroboticist
-	name = "roboticist's headset"
-	desc = "A headset with access to the engineering and medical channels."
-	icon_state = "eng_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchroboticist
 
 /obj/item/device/radio/headset/headset_cargo
 	desc = "A headset used by the Deck Chief and his slaves."
