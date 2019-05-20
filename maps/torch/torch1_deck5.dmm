@@ -4636,7 +4636,7 @@
 /obj/structure/table/rack,
 /obj/machinery/door/window/northright{
 	dir = 1;
-	name = "pathfinder suit storage"
+	name = "heavy suit storage"
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -4645,7 +4645,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/weapon/rig/command/exploration/equipped,
+/obj/item/weapon/rig/exploration/equipped,
 /obj/item/clothing/mask/gas/half,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light,

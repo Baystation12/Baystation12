@@ -292,6 +292,7 @@
 					var/datum/extension/armor/rig/armor_datum = get_extension(piece, /datum/extension/armor)
 					if(istype(armor_datum))
 						armor_datum.sealed = !seal_target
+					playsound(src, 'sound/machines/suitstorage_lockdoor.ogg', 10, 0)
 
 				else
 					failed_to_seal = 1
