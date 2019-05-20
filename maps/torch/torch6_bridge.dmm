@@ -442,6 +442,9 @@
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
+/obj/structure/sign/warning/smoking{
+	pixel_x = 26
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "bd" = (
@@ -1733,7 +1736,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "eA" = (
@@ -1876,6 +1879,9 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "eZ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "fb" = (
@@ -2199,34 +2205,34 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "fP" = (
-/obj/structure/closet/emcloset,
 /obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
 	},
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
 "fQ" = (
-/obj/structure/closet/emcloset,
 /obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/item/weapon/storage/box/cups,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
 "fR" = (
-/obj/machinery/disposal,
 /obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/disposalpipe/trunk,
 /obj/machinery/camera/network/command{
 	c_tag = "Bridge - Entry Starboard"
 	},
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/reagent_dispensers/water_cooler,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
 "fS" = (
@@ -2848,10 +2854,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark,
@@ -4919,7 +4921,8 @@
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/disposalpipe/segment{
-	dir = 4
+	dir = 1;
+	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
@@ -5314,11 +5317,20 @@
 	name = "plastic table frame"
 	},
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/machinery/keycard_auth/torch{
-	pixel_x = 0;
-	pixel_y = -24
-	},
 /obj/item/weapon/stamp/sea,
+/obj/machinery/button/remote/airlock{
+	desc = "A remote control-switch for the office door.";
+	id = "seaforedoor";
+	name = "SEA's Office Door Control";
+	pixel_x = -6;
+	pixel_y = -25;
+	req_access = list("ACCESS_TORCH_SENIOR_ADVISOR")
+	},
+/obj/machinery/button/windowtint{
+	pixel_x = 9;
+	pixel_y = -24;
+	id = "sea_windows"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/sea)
 "mA" = (
@@ -5366,12 +5378,12 @@
 "mG" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/device/radio/intercom{
-	pixel_y = 23
-	},
 /obj/item/device/radio,
 /obj/item/weapon/crowbar/prybar,
 /obj/item/device/binoculars,
+/obj/structure/noticeboard{
+	pixel_y = 30
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "mH" = (
@@ -6833,6 +6845,11 @@
 /obj/structure/bed/chair/comfy/beige{
 	dir = 4
 	},
+/obj/structure/sign/warning/nosmoking_1{
+	icon_state = "nosmoking";
+	dir = 4;
+	pixel_x = -37
+	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/xo)
 "qb" = (
@@ -7064,6 +7081,7 @@
 /obj/item/weapon/paper_bin,
 /obj/item/weapon/pen,
 /obj/item/weapon/pen/blue,
+/obj/random/clipboard,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "qw" = (
@@ -7248,6 +7266,7 @@
 	pixel_x = 23;
 	pixel_y = 24
 	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "qR" = (
@@ -7699,12 +7718,10 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "rK" = (
@@ -7905,6 +7922,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"sb" = (
+/obj/effect/floor_decal/corner/blue,
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/dark,
+/area/bridge/hallway/starboard)
 "se" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -8425,6 +8449,9 @@
 /obj/structure/table/woodentable/walnut,
 /obj/item/sticky_pad/random,
 /obj/item/device/flashlight/lamp/green,
+/obj/structure/noticeboard{
+	pixel_x = 32
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/sgr)
 "tA" = (
@@ -8727,9 +8754,6 @@
 /area/crew_quarters/heads/office/sgr)
 "un" = (
 /obj/structure/table/woodentable/walnut,
-/obj/structure/noticeboard{
-	pixel_y = -30
-	},
 /obj/item/weapon/storage/secure/safe{
 	pixel_x = 36;
 	pixel_y = 0
@@ -9733,18 +9757,9 @@
 /obj/structure/noticeboard{
 	pixel_x = -32
 	},
-/obj/machinery/button/remote/airlock{
-	desc = "A remote control-switch for the office door.";
-	id = "seaforedoor";
-	name = "SEA's Office Door Control";
-	pixel_x = -6;
-	pixel_y = -25;
-	req_access = list("ACCESS_TORCH_SENIOR_ADVISOR")
-	},
-/obj/machinery/button/windowtint{
-	pixel_x = 9;
-	pixel_y = -24;
-	id = "sea_windows"
+/obj/machinery/keycard_auth/torch{
+	pixel_x = 0;
+	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/sea)
@@ -9858,6 +9873,10 @@
 	},
 /obj/structure/cable/green,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/camera/network/command{
+	c_tag = "Disciplinary Board Room - Deliberations";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -12213,6 +12232,14 @@
 "Fp" = (
 /turf/simulated/wall/r_wall/hull,
 /area/bridge/storage)
+"Fv" = (
+/obj/structure/sign/warning/nosmoking_1{
+	icon_state = "nosmoking";
+	dir = 4;
+	pixel_x = -37
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/heads/office/cl/backroom)
 "Fy" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -12386,13 +12413,14 @@
 	name = "plastic table frame"
 	},
 /obj/effect/floor_decal/corner/red/mono,
-/obj/structure/noticeboard{
-	pixel_x = 32
-	},
 /obj/machinery/newscaster/security_unit{
 	pixel_y = 32
 	},
 /obj/item/device/flashlight/lamp,
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 20
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "Gy" = (
@@ -12426,6 +12454,10 @@
 	pixel_x = 29
 	},
 /obj/machinery/light,
+/obj/structure/sign/warning/smoking{
+	pixel_x = 0;
+	pixel_y = -26
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "GV" = (
@@ -12980,7 +13012,9 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "Io" = (
@@ -12992,6 +13026,9 @@
 	name = "Captain RC";
 	pixel_x = 30;
 	pixel_y = 0
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
@@ -13446,6 +13483,7 @@
 "Kf" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
+/obj/item/weapon/storage/medical_lolli_jar,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "Kg" = (
@@ -13513,6 +13551,9 @@
 /area/maintenance/bridge/aftport)
 "Kq" = (
 /obj/structure/closet/secure_closet/CO,
+/obj/structure/noticeboard{
+	pixel_y = 30
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/cobed)
 "Ks" = (
@@ -13627,12 +13668,6 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/random/clipboard,
-/obj/item/weapon/stamp/cmo,
-/obj/item/device/radio{
-	frequency = 1487;
-	name = "medbay emergency radio link"
-	},
 /obj/machinery/button/remote/airlock{
 	name = "CMO's Office Door Control";
 	desc = "A remote control-switch for the office door.";
@@ -13646,6 +13681,14 @@
 	pixel_y = -34;
 	id = "cmo_windows";
 	range = 11
+	},
+/obj/machinery/photocopier/faxmachine{
+	department = "Chief Medical Officer's Office - Torch"
+	},
+/obj/item/weapon/stamp/cmo,
+/obj/item/device/radio{
+	frequency = 1487;
+	name = "medbay emergency radio link"
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
@@ -13877,6 +13920,7 @@
 /area/maintenance/bridge/aftport)
 "LN" = (
 /obj/structure/table/woodentable/mahogany,
+/obj/item/weapon/material/ashtray/glass,
 /turf/simulated/floor/carpet/blue2,
 /area/bridge/meeting_room)
 "LP" = (
@@ -14053,6 +14097,10 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/sign/warning/smoking{
+	pixel_x = 0;
+	pixel_y = 26
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/meeting_room)
 "MD" = (
@@ -14214,8 +14262,8 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/reagent_containers/food/condiment/small/packet/tea,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/teacup,
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/pawn,
+/obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "Np" = (
@@ -14341,6 +14389,11 @@
 	icon_state = "1-2"
 	},
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined,
+/obj/structure/sign/warning/nosmoking_1{
+	icon_state = "nosmoking";
+	dir = 4;
+	pixel_x = -37
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "NM" = (
@@ -15094,7 +15147,9 @@
 /area/aquila/medical)
 "Rd" = (
 /obj/machinery/hologram/holopad,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "Re" = (
@@ -15269,6 +15324,7 @@
 	icon_state = "water_cooler";
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
 "RE" = (
@@ -15382,6 +15438,9 @@
 "Sd" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/item/device/flashlight/lamp,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/cl)
 "Se" = (
@@ -15729,9 +15788,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
-"Tk" = (
-/turf/simulated/wall/prepainted,
-/area/bridge/disciplinary_board_room/deliberation)
 "Tl" = (
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
@@ -16390,6 +16446,11 @@
 "VW" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/captain,
+/obj/structure/sign/warning/nosmoking_1{
+	desc = "A warning sign which reads 'NO SMOKING'. Someone has scratched a variety of crude words in gutter across the entire sign.";
+	pixel_x = 0;
+	pixel_y = 26
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/cobed)
 "VY" = (
@@ -26826,7 +26887,7 @@ aB
 za
 fx
 fR
-gC
+gB
 hp
 Eh
 eP
@@ -27027,8 +27088,8 @@ aO
 eq
 aO
 yg
-fS
-gB
+sb
+gC
 lQ
 hX
 cl
@@ -30052,7 +30113,7 @@ bg
 dk
 Zc
 Kd
-dn
+Fv
 BB
 eA
 fb
@@ -30079,7 +30140,7 @@ sL
 Tf
 wb
 wH
-Tk
+vv
 xi
 xr
 xB
@@ -30281,7 +30342,7 @@ sL
 Uf
 wc
 wI
-Tk
+vv
 Lr
 vs
 tg
@@ -30483,7 +30544,7 @@ sL
 vy
 wd
 wJ
-Tk
+vv
 xj
 xs
 tg
@@ -30682,10 +30743,10 @@ Pi
 Pi
 Pi
 Pi
-Tk
+vv
 nI
-Tk
-Tk
+vv
+vv
 xk
 xc
 tg
