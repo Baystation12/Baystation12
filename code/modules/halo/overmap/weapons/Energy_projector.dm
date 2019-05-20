@@ -208,7 +208,7 @@
 		var/prev_index = hit.map_z.Find(z_level)
 		if(hit.map_z.len > 1 && prev_index != 1)
 			z_level = hit.map_z[prev_index++]
-		turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
+			turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
