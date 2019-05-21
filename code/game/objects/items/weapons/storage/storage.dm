@@ -118,7 +118,7 @@
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
-	if(user && user.isEquipped(W) && !user.canUnEquip(W))
+	if(user && !user.canUnEquip(W))
 		return 0
 
 	if(src.loc == W)

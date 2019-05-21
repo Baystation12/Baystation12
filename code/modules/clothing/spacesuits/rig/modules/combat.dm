@@ -19,12 +19,12 @@
 	icon_state = "flash"
 	interface_name = "mounted flash"
 	interface_desc = "Disorientates your target by blinding them with a bright light."
-	device_type = /obj/item/device/flash
+	device = /obj/item/device/flash
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 
 /obj/item/rig_module/device/flash/advanced
 	name = "advanced mounted flash"
-	device_type = /obj/item/device/flash/advanced
+	device = /obj/item/device/flash/advanced
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 
 /obj/item/rig_module/grenade_launcher
@@ -160,6 +160,7 @@
 	. = ..()
 	if(ispath(gun))
 		gun = new gun(src)
+		gun.canremove = 0
 
 /obj/item/rig_module/mounted/engage(atom/target)
 
