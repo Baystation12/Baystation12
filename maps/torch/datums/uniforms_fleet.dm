@@ -104,7 +104,8 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/sec)
+						 /obj/item/clothing/gloves/thick/duty/solgov/sec,
+						 /obj/item/clothing/under/solgov/utility/fleet/security)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/combat/security
 
 /decl/hierarchy/mil_uniform/fleet/sec/noncom
