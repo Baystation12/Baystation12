@@ -113,7 +113,7 @@
 	                    SKILL_CONSTRUCTION 	= SKILL_EXPERT,
 	                    SKILL_ELECTRICAL 	= SKILL_EXPERT)
 	skill_points = 24
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_solgov_crew)
+	access = list(access_robotics, access_robotics_engineering, access_morgue, access_medical, access_solgov_crew)
 	minimal_access = list()
 
 /datum/job/biomech/get_description_blurb()
