@@ -2,6 +2,8 @@
 
 #define ODST_OVERRIDE 'code/modules/halo/clothing/odst.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/odst_items.dmi'
+#define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
+#define MARINE_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 
 
 ////////caelumz\\\\\\\\
@@ -53,6 +55,22 @@
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
+////////BurnedSweetPotato\\\\\\\\
+
+//Spartan
+
+/*
+/////This is commented out until he fixes his sprites. They're not in-code because they currently do not work (32x42 vs 32x36 max)
+/obj/item/clothing/head/helmet/spartan/burnedsweetpotato
+	name = "Burned FOTUS Helmet"
+	icon_state = "burned-fotus-helm"
+	item_state = "burned-fotus-helm_worn"
+
+/obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
+	name = "Burned FOTUS Armour"
+	icon_state = "burned-fotus-suit"
+	item_state = "burned-fotus-suit_worn"
+*/
 ////////Boltersam\\\\\\\\
 
 //JIRALHANAE
@@ -184,7 +202,7 @@
 
 //ODST
 
-obj/item/clothing/head/helmet/odst/donator/gulag
+/obj/item/clothing/head/helmet/odst/donator/gulag
 	name = "Murmillo Helmet"
 	item_state = "gulag-helmet_worn"
 	icon_state = "gulag-helmet_obj"
@@ -200,6 +218,46 @@ obj/item/clothing/head/helmet/odst/donator/gulag
 	name = "gulag - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/gulag
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/gulag
+
+////////karmac\\\\\\\
+
+//Marine
+
+/obj/item/clothing/head/helmet/marine/karmac
+	name = "Marine Hat"
+	item_state = "karmac-marinehelmet_worn"
+	icon_state = "karmac-marinehelmet_obj"
+	desc = "The standard issue combat hat worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+
+/obj/item/clothing/suit/storage/marine/karmac
+	item_state = "karmac-marine_worn"
+	icon_state = "karmac-marine_obj"
+//For whatever goddamn reason I can only get jumpsuits to work with the urfc path... If you can change this to /unsc/marine_fatigues/ or whatever it is, please do and tell me what I did wrong -Stingray
+/obj/item/clothing/under/urfc_jumpsuit/karmac
+	desc = "Standard issue uniform for UNSC marine corps."
+	name = "UNSC Marine fatigues"
+	icon = 'code/modules/halo/clothing/marine_items.dmi'
+	icon_override = 'code/modules/halo/clothing/marine_items.dmi'
+	item_state = "Karmac_uniform"
+	icon_state = "Karmac_uniform"
+
+/obj/item/clothing/shoes/marine/karmac
+	item_state = "karmac-marineboots_worn"
+	icon_state = "karmac-marineboots_obj"
+
+/obj/item/clothing/gloves/thick/unsc/karmac
+	icon = MARINE_INHAND
+	item_state = "karmac-marinegloves_worn"
+	icon_state = "karmac-marinegloves_obj"
+
+/decl/hierarchy/outfit/karmac_marine
+	name = "karmac - marine"
+	uniform = /obj/item/clothing/under/urfc_jumpsuit/karmac
+	suit = /obj/item/clothing/suit/storage/marine/karmac
+	shoes = /obj/item/clothing/shoes/marine/karmac
+	gloves = /obj/item/clothing/gloves/thick/unsc/karmac
+	head = /obj/item/clothing/head/helmet/marine/karmac
+
 
 ////////Kelso\\\\\\\\
 
@@ -290,6 +348,29 @@ obj/item/clothing/head/helmet/odst/donator/gulag
 	name = "liam gallagher - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/liam_gallagher
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/liam_gallagher
+
+//Marine
+
+/obj/item/clothing/suit/storage/marine/donator/liam_gallagher
+	name = "Experimental Marine Armor"
+
+	item_state = "osama-UNSCarmor_worn"
+
+/obj/item/clothing/head/helmet/marine/donator/liam_gallagher
+	name = "Experimental Marine Helmet"
+
+	item_state = "osama-UNSChelm_worn"
+	icon_state = "osama-UNSChelm_obj"
+
+/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher
+	desc = "A specialized set of fatigues with latches and hooks for a special set of UNSC armor."
+	name = "UNSC Experimental Fatigues"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "osama-UNSCsuit_worn"
+	icon_state = "osama-UNSCsuit_worn"
+	worn_state = "UNSC Marine Fatigues"
+
 
 //Spartan
 
@@ -792,6 +873,61 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	head = /obj/item/clothing/head/helmet/odst/donator/ragnarok
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/ragnarok
 
+////////Sleepy Retard\\\\\\\\
+
+//Marine
+
+/obj/item/clothing/head/helmet/marine/sleepy_retard
+	name = "UNSC Patrol Cap"
+	item_state = "sleepy-marinehelmet_worn"
+	icon_state = "sleepy-marinehelmet_obj"
+	desc = "A comfortable and effective way to attract gunfire towards the head. This one is lightly faded."
+
+/obj/item/clothing/suit/storage/marine/sleepy_retard
+	name = "M52B-S Body Armour"
+	desc = "A variant of the standard issue M52B armour, with plating removed, allowing greater freedom of movement."
+	item_state = "sleepy-marine_worn"
+	icon_state = "sleepy-marine_obj"
+
+/obj/item/clothing/under/urfc_jumpsuit/sleepy_retard
+	desc = "Standard issue uniform for UNSC marine corps."
+	name = "UNSC Marine fatigues"
+	icon = 'code/modules/halo/clothing/marine_items.dmi'
+	icon_override = 'code/modules/halo/clothing/marine_items.dmi'
+	item_state = "sleepy_uniform"
+	icon_state = "sleepy_uniform"
+
+/obj/item/clothing/shoes/marine/sleepy_retard
+	name = "VZG-S Armored Boots."
+	desc = "A variant of the standard issue VZG7 armoured boots, this one has trimmed ankle guards."
+	item_state = "sleepy-marineboots_worn"
+	icon_state = "sleepy-marineboots_obj"
+
+/obj/item/clothing/gloves/thick/unsc/sleepy_retard
+	name = "UNSC Custom Gloves:"
+	desc = "Standard issue UNSC gloves, but with a coarse material for better grip. Or just poor materials."
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "sleepy-gloves"
+	icon_state = "sleepy-gloves"
+
+/obj/item/clothing/mask/marine/sleepy_retard
+	name = "UNSC Bandana"
+	desc = "A UNSC issued rag that is used to conceal one's identity, and to look untrustworthy."
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "sleepybandana"
+	icon_state = "sleepybandana"
+
+/decl/hierarchy/outfit/sleepy_marine
+	name = "sleepy - marine"
+	uniform = /obj/item/clothing/under/urfc_jumpsuit/sleepy_retard
+	mask = /obj/item/clothing/mask/marine/sleepy_retard
+	suit = /obj/item/clothing/suit/storage/marine/sleepy_retard
+	shoes = /obj/item/clothing/shoes/marine/sleepy_retard
+	gloves = /obj/item/clothing/gloves/thick/unsc/sleepy_retard
+	head = /obj/item/clothing/head/helmet/marine/sleepy_retard
+
 ////////Spartankiller\\\\\\\\
 
 //ODST
@@ -1044,3 +1180,5 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
+#undef MARINE_OVERRIDE
+#undef MARINE_INHAND

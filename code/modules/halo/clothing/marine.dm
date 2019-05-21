@@ -29,6 +29,8 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/head/helmet/marine/medic
 	name = "CH252 Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
@@ -152,6 +154,8 @@
 	icon_state = "rig0-salvage"
 	item_state = "rig0-salvage"
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/suit/space/void/unsc/prepared/New()
 	..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/unsc
@@ -226,6 +230,8 @@
 	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 15, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/shoes/eva/marine
 	name = "\improper EVA Armoured Boots"
 	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
@@ -274,29 +280,6 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
-//DONATOR GEAR
-
-/obj/item/clothing/suit/storage/marine/donator/liam_gallagher
-	name = "Experimental Marine Armor"
-
-	item_state = "osama-UNSCarmor_worn"
-
-/obj/item/clothing/head/helmet/marine/donator/liam_gallagher
-	name = "Experimental Marine Helmet"
-
-	item_state = "osama-UNSChelm_worn"
-	icon_state = "osama-UNSChelm_obj"
-
-/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher
-	desc = "A specialized set of fatigues with latches and hooks for a special set of UNSC armor."
-	name = "UNSC Experimental Fatigues"
-	icon = ITEM_INHAND
-	icon_override = MARINE_OVERRIDE
-	item_state = "osama-UNSCsuit_worn"
-	icon_state = "osama-UNSCsuit_worn"
-	worn_state = "UNSC Marine Fatigues"
-
-//END DONATOR GEAR
 
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND
