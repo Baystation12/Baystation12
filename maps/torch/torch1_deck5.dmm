@@ -11863,6 +11863,10 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/camera/network/exploration_shuttle{
+	icon_state = "camera";
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "Ds" = (
