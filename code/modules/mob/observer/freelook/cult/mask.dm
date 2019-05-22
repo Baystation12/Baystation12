@@ -11,8 +11,8 @@
 	return ..()
 
 mob/observer/eye/cult/EyeMove()
-	if(owner && istype(owner, /mob/living/deity))
-		var/mob/living/deity/D = owner
+	if(owner && istype(owner, /mob/living/chorus))
+		var/mob/living/chorus/D = owner
 		if(D.following)
 			D.stop_follow()
 	return ..()

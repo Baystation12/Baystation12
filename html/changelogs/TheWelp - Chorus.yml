@@ -1,0 +1,6 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds Chorus gamemode and mechanics"
+  - rscadd: "Adds a helper function to get nearest atoms from a list"
+  - rscdel: "Removes Deity"

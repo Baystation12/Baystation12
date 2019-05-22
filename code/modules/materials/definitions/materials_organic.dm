@@ -152,3 +152,19 @@
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
+
+/material/growth
+	name = MATERIAL_GROWTH
+	display_name = "organic material"
+	icon_base = "cult"
+	door_icon_base = "cult"
+	table_icon_base = "cult"
+	icon_reinf = "reinf_cult"
+	icon_colour = "#281744"
+	hardness = 80
+	brute_armor = 60
+	burn_armor = 20
+	stack_type = null
+	conductive = 0
+	construction_difficulty = 10
+	hidden_from_codex = TRUE

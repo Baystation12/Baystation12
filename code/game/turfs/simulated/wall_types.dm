@@ -118,6 +118,9 @@
 /turf/simulated/wall/voxshuttle/attackby()
 	return
 
+/turf/simulated/wall/growth/New(var/newloc)
+	..(newloc, MATERIAL_GROWTH)
+
 //Alien metal walls
 /turf/simulated/wall/alium
 	icon_state = "jaggy"

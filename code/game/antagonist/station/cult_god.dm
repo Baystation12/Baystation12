@@ -2,19 +2,19 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 
 /datum/antagonist/godcultist
 	id = MODE_GODCULTIST
-	role_text = "God Cultist"
-	role_text_plural = "God Cultists"
+	role_text = "Chorus Cultist"
+	role_text_plural = "Chorus Cultists"
 	restricted_jobs = list(/datum/job/lawyer, /datum/job/captain, /datum/job/hos)
 	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain, /datum/job/submap)
 	feedback_tag = "godcult_objective"
 	antag_indicator = "hudcultist"
 	faction_verb = /mob/living/proc/dpray
-	welcome_text = "You are under the guidance of a powerful otherwordly being. Spread its will and keep your faith.<br>Use dpray to communicate directly with your master!<br>Ask your master for spells to start building!"
-	victory_text = "The cult wins! It has succeeded in serving its dark masters!"
-	loss_text = "The staff managed to stop the cult!"
-	victory_feedback_tag = "win - cult win"
-	loss_feedback_tag = "loss - staff stopped the cult"
+	welcome_text = "You have been inthralled by a parasitic entity intent on growing on your station. Help them!"
+	victory_text = "The Chorus wins!"
+	loss_text = "The staff managed to stop the Chorus!"
+	victory_feedback_tag = "win - chorus win"
+	loss_feedback_tag = "loss - staff stopped the Chorus"
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	hard_cap = 5
 	hard_cap_round = 6
@@ -23,25 +23,25 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 	antaghud_indicator = "hudcultist"
 	skill_setter = /datum/antag_skill_setter/station
 
-/datum/antagonist/godcultist/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg, var/mob/living/deity/specific_god)
+/datum/antagonist/godcultist/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg, var/mob/living/chorus/specific_chorus)
 	if(!..())
 		return 0
 
-	if(specific_god)
-		add_cultist(player, specific_god)
+	if(specific_chorus)
+		add_cultist(player, specific_chorus)
 
 	return 1
 
 /datum/antagonist/godcultist/post_spawn()
-	if(!GLOB.deity || !GLOB.deity.current_antagonists.len)
+	if(!GLOB.chorus || !GLOB.chorus.current_antagonists.len)
 		return
 
 	var/count = 1
 	var/deity_count = 1
 	while(count <= current_antagonists.len)
-		if(deity_count > GLOB.deity.current_antagonists.len)
+		if(deity_count > GLOB.chorus.current_antagonists.len)
 			deity_count = 1
-		var/datum/mind/deity_mind = GLOB.deity.current_antagonists[deity_count]
+		var/datum/mind/deity_mind = GLOB.chorus.current_antagonists[deity_count]
 		var/datum/mind/mind = current_antagonists[count]
 		add_cultist(mind, deity_mind.current)
 		count++
@@ -49,7 +49,7 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 
 
 /datum/antagonist/godcultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
-	var/mob/living/deity/god = get_deity(player)
+	var/mob/living/chorus/god = get_deity(player)
 	if(!..())
 		return 0
 	remove_cultist(player, god)
@@ -63,15 +63,15 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 		return 1
 	if(href_list["selectgod"])
 		var/list/god_list = list()
-		if(GLOB.deity && GLOB.deity.current_antagonists.len)
-			for(var/m in GLOB.deity.current_antagonists)
+		if(GLOB.chorus && GLOB.chorus.current_antagonists.len)
+			for(var/m in GLOB.chorus.current_antagonists)
 				var/datum/mind/mind = m
 				god_list += mind.current
 		else
-			for(var/mob/living/deity/deity in GLOB.player_list)
-				god_list += deity
+			for(var/mob/living/chorus/chorus in GLOB.player_list)
+				god_list += chorus
 		if(god_list.len)
-			var/mob/living/deity/D = input(usr, "Select a deity for this cultist.") in null|god_list
+			var/mob/living/chorus/D = input(usr, "Select a deity for this cultist.") in null|god_list
 			if(D)
 				var/datum/mind/player = locate(href_list["selectgod"])
 				remove_cultist(player) //Remove him from any current deity.
@@ -81,19 +81,19 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 			to_chat(usr, "<span class='warning'>There are no deities to be linked to.</span>")
 		return 1
 
-/datum/antagonist/godcultist/proc/add_cultist(var/datum/mind/player, var/mob/living/deity/deity)
-	deity.add_follower(player.current)
+/datum/antagonist/godcultist/proc/add_cultist(var/datum/mind/player, var/mob/living/chorus/chorus)
+	chorus.add_follower(player.current)
 	player.current.add_language(LANGUAGE_CULT)
 
-/datum/antagonist/godcultist/proc/remove_cultist(var/datum/mind/player, var/mob/living/deity/god)
+/datum/antagonist/godcultist/proc/remove_cultist(var/datum/mind/player, var/mob/living/chorus/god)
 	god.remove_follower(player.current)
 	player.current.remove_language(LANGUAGE_CULT)
 
 /datum/antagonist/godcultist/proc/get_deity(var/datum/mind/player)
-	for(var/m in GLOB.deity.current_antagonists)
+	for(var/m in GLOB.chorus.current_antagonists)
 		var/datum/mind/mind = m
-		var/mob/living/deity/god = mind.current
-		if(god && god.is_follower(player.current,1))
+		var/mob/living/chorus/god = mind.current
+		if(god && god.get_implant(player.current,1))
 			return god
 
 /mob/living/proc/dpray(var/msg as text)
@@ -102,7 +102,7 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 	if(!src.mind || !GLOB.godcult || !GLOB.godcult.is_antagonist(mind))
 		return
 	msg = sanitize(msg)
-	var/mob/living/deity/D = GLOB.godcult.get_deity(mind)
+	var/mob/living/chorus/D = GLOB.godcult.get_deity(mind)
 	if(!D || !msg)
 		return
 
