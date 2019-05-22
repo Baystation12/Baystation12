@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Medical drop pouch and Medical webbing is now available on the loadout to medical trainee, chemist and biomech."
