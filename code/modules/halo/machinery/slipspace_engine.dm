@@ -267,7 +267,7 @@
 
 /datum/explosion/slipspace_core/New(var/obj/payload/b)
 	if(config.oni_discord)
-		message2discord(config.oni_discord, "@here, slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
+		message2discord(config.oni_discord, "Alert: slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
 	explosion(100, -1, -1, -1, 255)
 	qdel(src)
 
