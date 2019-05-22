@@ -36,6 +36,10 @@
 	allowed_roles = list(/datum/job/cargo_tech, /datum/job/merchant)
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/suit/explo_poncho
+	allowed_roles = list(/datum/job/nt_pilot)
+	allowed_branches = CIVILIAN_BRANCHES
+
 /datum/gear/suit/suit_jacket
 	allowed_roles = FORMAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES

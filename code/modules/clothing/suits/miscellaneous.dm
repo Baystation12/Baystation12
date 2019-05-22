@@ -486,6 +486,13 @@
 	icon_state = "cargoponcho"
 	item_state = "cargoponcho"
 
+/obj/item/clothing/suit/poncho/roles/explo
+	name = "exploration poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is green and black, which are standard Exploration colors."
+	species_restricted = null
+	icon_state = "exploponcho"
+	item_state = "exploponcho"
+
 /*
  * Track Jackets
  */

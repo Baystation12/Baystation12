@@ -33,6 +33,10 @@
 	display_name = "poncho, supply"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 
+/datum/gear/suit/explo_poncho
+	display_name = "poncho, exploration"
+	path = /obj/item/clothing/suit/poncho/roles/explo
+
 /datum/gear/suit/suit_jacket
 	display_name = "standard suit jackets"
 	path = /obj/item/clothing/suit/storage/toggle/suit
