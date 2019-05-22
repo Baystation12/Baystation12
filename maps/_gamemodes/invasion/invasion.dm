@@ -87,7 +87,7 @@
 	unsc_base_areas = list(/area/faction_base/unsc_upperlevel, /area/faction_base/unsc_lowerlevel)
 	covenant_ship_area_parent = /area/covenant_corvette
 	cov_ship = locate(/obj/effect/overmap/ship/covenant_corvette) in world
-	unsc_ship = locate(/obj/effect/overmap/ship/unsc_frigate) in world
+	unsc_ship = locate(/obj/effect/overmap/ship/odst_corvette) in world
 	human_colony = locate(/obj/effect/overmap/sector/exo_depot) in world
 	//**** finish hard codes. remove these later ****//
 

@@ -7,7 +7,7 @@
 		due to their enhanced hearing and eyesight. Kig'Yar feud with Unggoy for status as the lowest ranked\
 		members of the Covenant."
 	flesh_color = "#FF9463"
-	blood_color = "#4A4A64" //Same blood colour as Elites.
+	blood_color = "#532476" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_kig-yar.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_kig-yar.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet
@@ -19,10 +19,10 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 6
-	brute_mod = 1.1
+	brute_mod = 1.5
 	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(0,0)
-	total_health = 150
+	total_health = 200
 	default_faction = "Covenant"
 
 	has_limbs = list(
@@ -88,11 +88,11 @@
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
 	default_faction = "Covenant"
 
-	pain_mod = 0.9
-	brute_mod = 1.1
+	pain_mod = 0.8
+	brute_mod = 1.5
 	slowdown = -2
 
-	total_health = 150
+	total_health = 200
 	pixel_offset_x = -4
 
 	item_icon_offsets = list(4,-1)

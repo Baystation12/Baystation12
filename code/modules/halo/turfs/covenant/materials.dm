@@ -23,7 +23,7 @@
 
 	integrity = 600
 
-	explosion_resistance = 50
+	explosion_resistance = 20
 
 	stack_type = /obj/item/stack/material/nanolaminate
 

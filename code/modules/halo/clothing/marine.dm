@@ -29,6 +29,8 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/head/helmet/marine/medic
 	name = "CH252 Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
@@ -54,12 +56,18 @@
 	icon_state = "M52B Body Armor regular"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 45, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/marine/military_police
+	name = "M52B Body Armor NavSec"
+	desc = "An armored protective vest worn by the members of the UNSC Marine Corps. This one is modified for the use of naval security officers."
+	armor = list(melee = 50, bullet = 50, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
+	armor_thickness = 20
 
 /obj/item/clothing/suit/storage/marine/medic
 	name = "M52B Body Armor Medic"
@@ -80,7 +88,7 @@
 	item_state = "boots"
 	icon_state = "boots"
 	force = 5
-	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
@@ -134,17 +142,19 @@
 	item_state = "salvage_void"
 	w_class = ITEM_SIZE_HUGE
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 60, bullet = 30, laser = 60, energy = 25, bomb = 50, bio = 100, rad = 100)
+	armor = list(melee = 60, bullet = 30, laser = 60, energy = 25, bomb = 30, bio = 100, rad = 100)
 
 /obj/item/clothing/head/helmet/space/void/unsc
 	name = "\improper Salvage Helmet"
 	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	armor = list(melee = 30, bullet = 10, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 50)
+	armor = list(melee = 30, bullet = 10, laser = 20, energy = 5, bomb = 30, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	icon_state = "rig0-salvage"
 	item_state = "rig0-salvage"
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/suit/space/void/unsc/prepared/New()
 	..()
@@ -205,7 +215,7 @@
 	armor_thickness = 20
 	w_class = ITEM_SIZE_HUGE
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 55, bullet = 40, laser = 25, energy = 25, bomb = 50, bio = 100, rad = 100)
+	armor = list(melee = 55, bullet = 40, laser = 25, energy = 25, bomb = 30, bio = 100, rad = 100)
 
 /obj/item/clothing/head/helmet/eva/marine
 	name = "\improper EVA Marine Helmet"
@@ -217,8 +227,10 @@
 	item_state = "eva"
 	icon_state = "eva"
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
-	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 20, bio = 100, rad = 50)
+	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 15, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/shoes/eva/marine
 	name = "\improper EVA Armoured Boots"
@@ -230,7 +242,7 @@
 	item_state = "evalegs"
 	icon_state = "evalegs"
 	item_flags = NOSLIP|STOPPRESSUREDAMAGE|AIRTIGHT
-	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 35, bio = 100, rad = 50)
+	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 30, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/weapon/card/id/unsc
@@ -262,35 +274,12 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS
-	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 20, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
-//DONATOR GEAR
-
-/obj/item/clothing/suit/storage/marine/donator/liam_gallagher
-	name = "Experimental Marine Armor"
-
-	item_state = "osama-UNSCarmor_worn"
-
-/obj/item/clothing/head/helmet/marine/donator/liam_gallagher
-	name = "Experimental Marine Helmet"
-
-	item_state = "osama-UNSChelm_worn"
-	icon_state = "osama-UNSChelm_obj"
-
-/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher
-	desc = "A specialized set of fatigues with latches and hooks for a special set of UNSC armor."
-	name = "UNSC Experimental Fatigues"
-	icon = ITEM_INHAND
-	icon_override = MARINE_OVERRIDE
-	item_state = "osama-UNSCsuit_worn"
-	icon_state = "osama-UNSCsuit_worn"
-	worn_state = "UNSC Marine Fatigues"
-
-//END DONATOR GEAR
 
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND

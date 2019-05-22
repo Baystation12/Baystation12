@@ -209,11 +209,12 @@
 	chosen_ship_datum = new chosen_ship_datum
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
-	//set background = 1
+	set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)
 		pick_ship_datum()
+	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	map_bounds = chosen_ship_datum.map_bounds
 	fore_dir = chosen_ship_datum.fore_dir
 	map_z = list()
@@ -224,13 +225,12 @@
 		shipmap_handler.un_free_map(z_to_load_at)
 		map_sectors["[z_to_load_at]"] = src
 		maploader.load_map(link,z_to_load_at)
-		create_lighting_overlays_zlevel(z_to_load_at)
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
+		create_lighting_overlays_zlevel(z_to_load_at)
 	cargo_init()
 	damage_spawned_ship()
-	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	GLOB.processing_objects += src
 
 /obj/effect/overmap/ship/npc_ship/proc/damage_spawned_ship()

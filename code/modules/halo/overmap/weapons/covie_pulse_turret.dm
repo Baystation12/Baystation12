@@ -66,14 +66,6 @@
 	damtype = BURN
 	. = ..()
 
-/obj/item/projectile/pulse_laser_damage_proj/check_penetrate(var/atom/a)
-	. = ..()
-	explosion(a,-1,1,2,3, adminlog = 0)
-	if(!warned)
-		warned = 1
-		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
-		S.adminwarn_attack()
-
 /obj/item/projectile/pulse_laser_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
 	if(istype(wall) && wall.reinf_material)

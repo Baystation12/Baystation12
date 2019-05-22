@@ -1075,9 +1075,10 @@ About the new airlock wires panel:
 	update_icon()
 	return
 
-/obj/machinery/door/airlock/open(var/forced=0)
-	if(!can_open(forced))
-		return 0
+/obj/machinery/door/airlock/open(var/forced=0,var/no_checks = 0)
+	if(!no_checks)
+		if(!can_open(forced))
+			return 0
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 
 	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator

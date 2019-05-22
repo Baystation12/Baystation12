@@ -2,6 +2,7 @@ GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define PLAYER_FLOOD_HEALTH_MOD 1.5
+#define AIRLOCK_INFEST_TIME 15 SECONDS
 #define COMBAT_FORM_INFESTOR_SPAWN_DELAY 30SECONDS
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
@@ -140,6 +141,19 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return 1
 	return 0
 
+/mob/living/simple_animal/hostile/flood/infestor/proc/infest_airlocks_nearby()
+	for(var/obj/machinery/door/airlock/door in view(2,src))
+		if(door.stat & BROKEN)
+			continue
+		visible_message("<span class = 'danger'>[name] leaps at [door], burrowing into the access control mechanisms...</span>")
+		adjustBruteLoss(1)
+		door.set_broken()
+		spawn(AIRLOCK_INFEST_TIME)
+			door.visible_message("<spanc class = 'danger>[door] sprouts tendrils of biomass from its control console, fully opening and then bolting.</span>")
+			door.open(1,1)
+		return 1//Only one airlock per loop.
+	return 0
+
 /mob/living/simple_animal/hostile/flood/infestor/proc/infect_mob(var/mob/living/carbon/human/h)
 	if(is_being_infested(h))
 		return 0
@@ -154,6 +168,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		if((mob_healthdam > h.maxHealth/4) || h.stat != CONSCIOUS) //Less than quarter health or unconscious/dead? Jump 'em.
 			if(infect_mob(h))
 				return 1//No more than one at a time.
+	return 0
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/revive_nearby_combatforms()
 	for(var/mob/living/simple_animal/hostile/flood/combat_form/floodform in view(2,src))
@@ -172,13 +187,17 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		qdel(floodform)
 		adjustBruteLoss(1)
 		return 1 //One at a time.
+	return 0
 
 /mob/living/simple_animal/hostile/flood/infestor/Move()
 	. = ..()
 	if(ckey || client)
 		return
+	if(health <= 0)
+		return
 	if(!attempt_nearby_infect())
-		revive_nearby_combatforms()
+		if(!revive_nearby_combatforms())
+			infest_airlocks_nearby()
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
 	. = ..()

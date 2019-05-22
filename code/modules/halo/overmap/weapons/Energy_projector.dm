@@ -5,6 +5,22 @@
 #define CAPACITOR_MAX_STORED_CHARGE 150000
 #define CAPACITOR_RECHARGE_TIME 15 //This is in seconds.
 
+/turf/unsimulated/floor/lava/glassed_turf
+	var/cool_at = 0
+	var/cooling_delay = 30 SECONDS
+	var/turf_replacewith = /turf/unsimulated/floor/scorched
+
+/turf/unsimulated/floor/lava/glassed_turf/New()
+	cool_at = world.time + cooling_delay
+	GLOB.processing_objects += src
+	. = ..()
+
+/turf/unsimulated/floor/lava/glassed_turf/process()
+	if(world.time >= cool_at)
+		GLOB.processing_objects -= src
+		new turf_replacewith (locate(x,y,z))
+
+
 /obj/machinery/Energy_projector
 	name = "An Energy projector component."
 	desc = "A component for an Energy projector."
@@ -181,31 +197,23 @@
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/eprojector_hit_sound.wav'
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
+	if(initial(kill_count) - kill_count > 1)
+		console_fired_by.visible_message("<span class = 'notice'>[console_fired_by] emits a warning: \"Beam impact dissipated due to atmospheric interference. Orbit the object to perform glassing.\"</span>")
+		return
+	hit.glassed += 1
+	for(var/mob/m in GLOB.mobs_in_sectors[hit])
+		to_chat(m,"<span class = 'danger'>A wave of heat washes over you as the atmosphere boils and the ground liquefies. [hit] is being glassed!</span>")
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	if(istype(turf_to_explode,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
 		var/prev_index = hit.map_z.Find(z_level)
 		if(hit.map_z.len > 1 && prev_index != 1)
 			z_level = hit.map_z[prev_index++]
-	turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
-	 //explosion(turf_to_explode,3,5,7,10) original tiny explosion
+		turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
-		if(!istype(turf_to_explode,/turf/simulated/open) && !istype(turf_to_explode,/turf/unsimulated/floor/lava) && !istype(turf_to_explode,/turf/space))
-			new /turf/unsimulated/floor/scorched(F)
+		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
+			new /turf/unsimulated/floor/lava/glassed_turf(F)
 
-	for(var/turf/unsimulated/F in circlerange(turf_to_explode,15))
-		new /turf/unsimulated/floor/lava(F)
-
-	for(var/obj/O in circlerange(turf_to_explode,15))
-		qdel(O)
-
-	for(var/mob/living/m in range(25,turf_to_explode))
-		to_chat(m,"<span class = 'userdanger'>A heatwave engulfs your body as you slowly turn to dust...</span>")
-		m.dust() // Game over.
-	for(var/mob/living/m in range(30,turf_to_explode))
-		m.adjustFireLoss(90)
-
-	hit.glassed = 1
 
 /obj/effect/projectile/projector_laser_proj
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
@@ -239,7 +247,7 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,1,2,4,5, adminlog = 0)
+	explosion(a,0,1,2,4, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

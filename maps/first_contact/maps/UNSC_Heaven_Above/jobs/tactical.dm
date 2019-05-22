@@ -9,6 +9,7 @@
 	spawn_positions = 1
 	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/gunnery_chief
+	is_whitelisted = 1
 	selection_color = "#cc0000"
 	req_admin_notify = 1
 	//job_guide = "Your responsibility is to oversee the gunnery operators manning the ship's turrets. Unfortunately your job has no content yet but it's coming soon."
@@ -25,6 +26,7 @@
 	spawn_positions = 2
 	spawnpoint_override = "UNSC Base Spawns"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/gunnery
+	is_whitelisted = 1
 	selection_color = "#cc0000"
 	//job_guide = "Your responsibility is to man the ship's turrets. Unfortunately your job has no content yet but it's coming soon."
 

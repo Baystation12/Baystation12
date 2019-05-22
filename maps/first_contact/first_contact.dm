@@ -18,7 +18,7 @@
 
 	#include "../first_contact/maps/Admin Planet/includes.dm"
 
-	#include "../first_contact/maps/UNSC_Heaven_Above/unsc_frigate_base_includes.dm"
+	#include "../first_contact/maps/UNSC_Bertels/includes.dm"
 
 	#include "../first_contact/maps/URF Commando Ship/includes.dm"
 

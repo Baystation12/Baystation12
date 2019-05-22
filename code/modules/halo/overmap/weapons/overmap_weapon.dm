@@ -85,10 +85,12 @@
 
 /obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user,var/directly_above = 0)
 	var/obj/om_obj = map_sectors["[z]"]
-	var/obj/item/projectile/new_projectile = new fired_projectile (om_obj.loc,om_obj)
+	var/obj/item/projectile/overmap/new_projectile = new fired_projectile (om_obj.loc)
 	new_projectile.damage += get_linked_device_damage_mod()
-	new_projectile.permutated = map_sectors["[z]"] //Ensuring we don't hit ourselves somehow
+	new_projectile.permutated += om_obj //Ensuring we don't hit ourselves somehow
 	new_projectile.firer = user
+	new_projectile.overmap_fired_by = om_obj
+	new_projectile.console_fired_by = src
 	if(directly_above)
 		new_projectile.on_impact(target)
 		qdel(new_projectile)

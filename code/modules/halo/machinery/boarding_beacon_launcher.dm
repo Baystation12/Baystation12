@@ -14,7 +14,7 @@
 	ship_damage_projectile = /obj/item/projectile/boarding_beacon
 
 /obj/item/projectile/overmap/boarding_beacon/on_impact(var/obj/effect/overmap/ship/npc_ship/ship)
-	if(istype(ship) && ship.unload_at == 0)
+	if(istype(ship) && !istype(ship,/obj/effect/overmap/ship/npc_ship/automated_defenses) && ship.unload_at == 0)
 		ship.load_mapfile()
 	. = ..()
 

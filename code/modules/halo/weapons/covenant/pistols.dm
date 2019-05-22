@@ -53,7 +53,7 @@
 		else
 			if(user)
 				visible_message("<span class='notice'>[user.name]'s [src]'s lights darken</span>","<span class='notice'>You deactivate your [src]'s overcharge</span>")
-			projectile_type = /obj/item/projectile/covenant/plasmapistol
+			projectile_type = initial(projectile_type)
 			overcharge = 0
 			charge_cost = initial(charge_cost)
 			overlays -= "overcharge"
@@ -73,6 +73,9 @@
 	icon_state = "Training Pistol"
 	projectile_type = /obj/item/projectile/covenant/trainingpistol
 
+/obj/item/weapon/gun/energy/plasmapistol/trainingpistol/set_overcharge(var/new_overcharge = 1, var/mob/user = null)
+	return
+
 /obj/item/weapon/gun/projectile/needler // Uses "magazines" to reload rather than inbuilt cells.
 	name = "Type-33 Guided Munitions Launcher"
 	desc = "This weapon fire razor-sharp crystalline shards which can explode violently when embedded into targets."
@@ -86,6 +89,7 @@
 	caliber = "needler"
 	load_method = MAGAZINE
 	burst = 3
+	is_heavy = 1
 	slowdown_general = 0
 
 	item_icons = list(

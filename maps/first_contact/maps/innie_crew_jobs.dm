@@ -42,3 +42,4 @@
 	outfit_type = /decl/hierarchy/outfit/job/innie_crew_captain
 	selection_color = "#ff0000"
 	spawnpoint_override = "Innie Base Spawns"
+	faction_whitelist = "Insurrection"

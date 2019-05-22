@@ -140,8 +140,8 @@
 	penetrating = 0
 
 /obj/item/projectile/bullet/a762_M392
-	damage = 35
-	armor_penetration = 10
+	damage = 40
+	armor_penetration = 60
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"
@@ -155,7 +155,7 @@
 
 /obj/item/ammo_magazine/m95_sap
 	name = "magazine (9.5mm) M634 X-HP-SAP"
-	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 rounds. Standard issue."
+	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 rounds. Specific to the BR85."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Br85_mag"
 	mag_type = MAGAZINE
@@ -165,8 +165,12 @@
 	max_ammo = 36		//lets try 20 instead of 60 for now
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/m95_sap/br55
+	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 rounds. Specific to the BR55."
+	icon_state = "BR55_Mag"
+
 /obj/item/ammo_casing/a95_sap
-	desc = "A 7.62mm bullet casing."
+	desc = "A 9.5mm bullet casing."
 	caliber = "9.5mm"
 	projectile_type = /obj/item/projectile/bullet/m95_sap
 
@@ -325,3 +329,41 @@
 	shake_camera(L,disorient_time,2)
 	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
 	return 1
+
+//M41 rocket launcher
+/obj/item/ammo_magazine/spnkr
+	name = "M19 SPNKr"
+	desc = "A dual tube of M19 102mm HEAT rockets for the M41 SSR."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "SPNKr"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/spnkr
+	caliber = "spnkr"
+	max_ammo = 2
+	w_class = ITEM_SIZE_HUGE
+
+/obj/item/ammo_casing/spnkr
+	caliber = "spnkr"
+	projectile_type = /obj/item/projectile/bullet/ssr
+
+/obj/item/projectile/bullet/ssr
+	name = "rocket"
+	icon_state = "ssr"
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	check_armour = "bomb"
+	step_delay = 1.2
+
+/obj/item/projectile/bullet/ssr/on_impact(var/atom/target)
+	explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
+	..()
+
+/obj/item/weapon/storage/box/spnkr
+	name = "102mm HEAT SPNKr crate"
+	desc = "UNSC certified crate containing two tubes of SPNKr rockets for a total of four rockets to be loaded in the M41 SSR."
+	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
+	icon_state = "ssrcrate"
+	max_storage_space = base_storage_capacity(6)
+	startswith = list(/obj/item/ammo_magazine/spnkr = 2)
+	can_hold = list(/obj/item/ammo_magazine/spnkr)
+	slot_flags = SLOT_BACK
+	max_w_class = ITEM_SIZE_HUGE

@@ -10,6 +10,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	selection_color = "#995500"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/mechanic_chief
+	is_whitelisted = 1
 	req_admin_notify = 1
 	//job_guide = "Your job is to oversee the flight crew as they repair, maintain, upgrade, rearm and refuel the various strike craft (fighters, shuttles and drophips). You're probably a decent pilot as well but not necessarily combat qualified."
 
@@ -27,6 +28,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	selection_color = "#995500"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/mechanic
+	is_whitelisted = 1
 	alt_titles = list("Deck Mechanic","Hangar Mechanic","Structural Mechanic","Reserve Pilot","Ordnance Mechanic")
 	//job_guide = "Your job is to repair, maintain, upgrade, rearm and refuel the various strike craft (fighters, shuttles and drophips). You're probably a decent pilot as well but not necessarily combat qualified."
 

@@ -15,15 +15,17 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
-	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 25,bio = 100,rad = 25)
+	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 35,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
-	armor_thickness = 60
+	armor_thickness = 20
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
 	on = 0
 	item_state_slots = list(slot_l_hand_str = "syndicate-helm-black", slot_r_hand_str = "syndicate-helm-black")
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/suit/armor/special/spartan
 	name = "MJOLNIR Powered Assault Armor Mark IV"

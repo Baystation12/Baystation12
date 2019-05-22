@@ -1,4 +1,4 @@
-#define POD_FAIL_CHANCE 5 //This is the chance a drop-pod will fail on impact and auto-eject the user + exploding.
+#define POD_FAIL_CHANCE 1 //This is the chance a drop-pod will fail on impact and auto-eject the user + exploding.
 
 /obj/vehicles/drop_pod
 	name = "SOEIV Drop Pod"
@@ -26,6 +26,9 @@
 	var/launch_arm_time = 5 SECONDS
 
 	var/pod_range = 3 //Range of pod in overmap tiles
+
+/obj/vehicles/drop_pod/on_death()
+	return
 
 /obj/vehicles/drop_pod/update_object_sprites()
 	overlays.Cut()
@@ -136,7 +139,7 @@
 		return
 	explosion(drop_turf,0,0,2,5)
 
-/obj/vehicles/drop_pod/Move() //We're a drop pod, we don't move normally.
+/obj/vehicles/drop_pod/relaymove() //We're a drop pod, we don't move normally.
 	return
 
 /obj/vehicles/drop_pod/overmap/launch_pod()
@@ -173,11 +176,11 @@
 /obj/vehicles/drop_pod/overmap/get_drop_point(var/list/om_targ_zs)
 	var/list/valid_points = list()
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
-		if(l.z in om_targ_zs)
+		if(l.loc.z in om_targ_zs)
 			valid_points += l
-	var/beacons_present = 1
+	var/beacons_present = 0
 	for(var/obj/item/drop_pod_beacon/b in world)
-		if(!(b.z  in om_targ_zs))
+		if(!(b.loc.z  in om_targ_zs))
 			continue
 		if(b.is_active == 1)
 			if(!beacons_present) //If we've not already realised we have beacons, remove all normal drop-pod markers from pick-choice.
@@ -209,7 +212,10 @@
 /obj/item/vehicle_component/health_manager/drop_pod
 	integrity = 100
 	coverage = 100
-	resistances = list("brute"= 100.0,"burn"= 100.0,"emp"= 100.0,"explosion" = 100.0) //Negates all damage. Let's pretend drop-pods are invincible.
+	resistances = list("brute"= 100.0,"burn"= 100.0,"emp"= 100.0,"bomb" = 100.0) //Negates all damage. Let's pretend drop-pods are invincible.
+
+/obj/item/vehicle_component/health_manager/drop_pod/damage_integrity()
+	return
 
 /obj/structure/drop_pod_launchbay
 	name = "Drop Pod Launch Bay"

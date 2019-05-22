@@ -4,7 +4,7 @@
 
 	icon = 'code/modules/halo/shuttles/pelican.dmi'
 	icon_state = "base"
-	vehicle_move_delay = 1.5
+	vehicle_move_delay = 1.25
 
 	density = 1
 
@@ -25,20 +25,22 @@
 
 	vehicle_size = 128
 
-/obj/vehicles/air/pelican/update_object_sprites()
+	light_color = "#E1FDFF"
 
+/obj/vehicles/air/pelican/update_object_sprites()
 
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/pelican
-	integrity = 300
-	resistances = list("brute"=30,"burn"=20,"emp"=50)
+	integrity = 600
+	resistances = list("brute"=45,"burn"=40,"emp"=50,"bomb" = 50)
 
 /datum/component_profile/pelican
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican)
-	cargo_capacity = 24
+	cargo_capacity = 48 //Can hold, at max, 9 normals
 	max_vehicle_size = 64
-	vehicle_capacity = 32
+	vehicle_capacity = 64
+	cargo_allow_massive = 1
 
 /obj/vehicles/air/pelican/unsc
 	faction = "unsc"
@@ -85,6 +87,8 @@
 
 	vehicle_size = 128
 
+	light_color = "#E1FDFF"
+
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
 
@@ -97,6 +101,8 @@
 	occupants = list(13,1)
 
 	comp_prof = /datum/component_profile/pelican/urf
+
+	light_color = "#FEFFE1"
 
 /obj/vehicles/air/pelican/innie/update_object_sprites()
 	. = ..()
@@ -142,6 +148,8 @@
 	occupants = list(13,1)
 
 	comp_prof = /datum/component_profile/pelican/innie
+
+	light_color = "#FEFFE1"
 
 /obj/vehicles/air/pelican/innie/update_object_sprites()
 	. = ..()

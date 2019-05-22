@@ -2,7 +2,7 @@
 /datum/job/ODST
 	title = "Orbital Drop Shock Trooper"
 	spawn_faction = "UNSC"
-	total_positions = 5
+	total_positions = 8
 	spawn_positions = 5
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
 	alt_titles = list("Private First Class"= /decl/hierarchy/outfit/job/ODSTCQC,
@@ -15,14 +15,14 @@
 	"Master Sergeant" = /decl/hierarchy/outfit/job/ODSTFireteamLead)
 
 	selection_color = "#008000"
-	access = list(142,144,110,309,311)
+	access = list(142,144,110,300,301,309,311,313)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
 
 /datum/job/ODSTO
 	title = "Orbital Drop Shock Trooper Officer"
 	spawn_faction = "UNSC"
-	total_positions = 1
+	total_positions = 2
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/ODSTsecondlieutenant
 	alt_titles = list("Second Lieutenant" = /decl/hierarchy/outfit/job/ODSTsecondlieutenant,
@@ -32,6 +32,6 @@
 	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/ODSTltcolonel,
 	"Colonel" = /decl/hierarchy/outfit/job/ODSTcolonel)
 	selection_color = "#008000"
-	access = list(142,144,110,300,306,309,310,311)
+	access = list(142,144,110,300,301,306,309,310,311,313)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1

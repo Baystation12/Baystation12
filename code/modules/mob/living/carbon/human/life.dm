@@ -398,8 +398,9 @@
 				burn_dam = COLD_DAMAGE_LEVEL_2
 			else
 				burn_dam = COLD_DAMAGE_LEVEL_3
-			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
-			fire_alert = max(fire_alert, 1)
+			if(!chem_effects[CE_CRYO])
+				take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
+				fire_alert = max(fire_alert, 1)
 
 	// Account for massive pressure differences.  Done by Polymorph
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!

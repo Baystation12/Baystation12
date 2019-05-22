@@ -21,7 +21,7 @@
 	icon_state = "Oni_Helmet_Novisor"
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
-	armor = list(melee = 50, bullet = 25, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 25, laser = 50,energy = 20, bomb = 20, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -29,6 +29,8 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = 3
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/oni_guard/visor
 	name = "CH252-V Helmet"
@@ -48,7 +50,7 @@
 	icon_state = "armor"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 35, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 35, laser = 20, energy = 20, bomb = 35, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
@@ -63,7 +65,7 @@
 	item_state = "boots"
 	icon_state = "boots_ico"
 	force = 5
-	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 20, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS

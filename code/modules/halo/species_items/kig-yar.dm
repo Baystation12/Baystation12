@@ -32,7 +32,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
 	icon_state = "scouthelm"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
-	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 20, bio = 0, rad = 0)
 	species_restricted = list("Kig-Yar")
 	action_button_name = "Toggle Night Vision"
 	var/linked_glasses
@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	flags_inv = null
 
 /obj/item/clothing/head/helmet/kigyar/proc/try_equip_NV()
-	if(u.equip_to_slot_if_possible(new /obj/item/clothing/glasses/kigyarNV,slot_glasses))
+	if(u.equip_to_slot_if_possible(new /obj/item/clothing/glasses/hud/tactical/kigyar_nv,slot_glasses))
 		linked_glasses = u.glasses
 		to_chat(u,"<span class ='notice'>Night Vision active.</span>")
 	else
@@ -62,7 +62,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 		del(linked_glasses)
 		to_chat(u,"<span class = 'notice'>Night Vision deactivated.</span>")
 
-/obj/item/clothing/glasses/kigyarNV
+/obj/item/clothing/glasses/hud/tactical/kigyar_nv
 	name = "Kig-Yar Scout Helmet Night Vision"
 	desc = "Scout Helmet night vision active."
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
@@ -100,7 +100,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 		"Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',\
 		"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
-	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
+	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 45, bio = 25, rad = 20)
 	armor_thickness_modifiers = list()
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 

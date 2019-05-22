@@ -1,4 +1,6 @@
 
+#define COLONY_GLASSED_AMOUNT_REQUIRED 5 //5 projector hit for glassing to count.
+
 /* COVENANT */
 
 /datum/objective/protect/protect_cov_leader
@@ -158,6 +160,8 @@
 /datum/objective/glass_colony/check_completion()
 	var/datum/game_mode/invasion/game_mode = ticker.mode
 	if(istype(game_mode))
-		if(game_mode.human_colony && game_mode.human_colony.glassed)
+		if(game_mode.human_colony && game_mode.human_colony.glassed >= COLONY_GLASSED_AMOUNT_REQUIRED)
 			return 1
 	return 0
+
+#undef COLONY_GLASSED_AMOUNT_REQUIRED
