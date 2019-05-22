@@ -233,7 +233,7 @@ Subtypes
 			return "proxy: Error; this device is not using a proxy."
 		comp.network_card.proxy_id = null
 		return "proxy: Device proxy cleared."
-	if(!comp.network_card && comp.network_card.operable())
+	if(!comp.network_card && !comp.network_card.operable())
 		return "proxy: Error; check networking hardware."
 	var/syntax_error = "proxy: Invalid input. Enter man proxy for syntax help."
 	if(length(text) < 10)
