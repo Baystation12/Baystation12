@@ -866,6 +866,10 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/virology)
+"abD" = (
+/obj/structure/extinguisher_cabinet,
+/turf/simulated/wall/prepainted,
+/area/medical/surgery2)
 "abE" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/firstdeck/forestarboard)
@@ -918,6 +922,12 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
+"abJ" = (
+/obj/structure/closet/hydrant{
+	step_y = 1
+	},
+/turf/simulated/wall/prepainted,
+/area/medical/locker)
 "abK" = (
 /obj/structure/closet/wardrobe/virology_white,
 /obj/effect/floor_decal/industrial/warning{
@@ -17347,18 +17357,6 @@
 	icon_state = "2-4"
 	},
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/white,
-/area/medical/locker)
-"ekb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "elb" = (
@@ -51543,7 +51541,7 @@ ddb
 aeo
 aeo
 aeo
-tCw
+abD
 tCw
 tCw
 glb
@@ -54976,8 +54974,8 @@ dsb
 dGb
 dGb
 qtQ
-ekb
-afZ
+cVb
+abJ
 fhb
 aoT
 hYb
