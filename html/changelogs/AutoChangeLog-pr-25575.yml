@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - maptweak: "Various map tweaks to Aquila to fix clickable sprites being under other sprites and other mapping nonsense."

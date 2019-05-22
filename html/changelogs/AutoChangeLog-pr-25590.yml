@@ -1,8 +1,0 @@
-author: "Devildabeast"
-delete-after: True
-changes: 
-  - tweak: "The Roboticist and Biomechanical Engineer have had their access adjusted to better reflect their respective departments, and the Roboticist can now access the Engineering Locker Room and front desk, but has had Tech Storage access removed (which was unusable anyway)."
-  - rscdel: "The Roboticist's headset has been removed; the Roboticist and Biomechanical Engineer now spawn with their respective department's headset."
-  - tweak: "The Roboticist is now Trained in EVA and exosuit operation by default."
-  - maptweak: "The Engineering Locker Room's material reserves have been locked behind windoors in order to prevent certain nerds from thieving."
-  - maptweak: "Robotics now gets two loaded toolbelts and multitools instead of one, as well as two pairs of insulated gloves."
