@@ -376,6 +376,10 @@ department tags
 /obj/item/clothing/accessory/solgov/department/command/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/command/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#d6bb64"
+
 /obj/item/clothing/accessory/solgov/department/command/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the command department. These fit Fleet uniforms."
@@ -393,6 +397,9 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/engineering/service
 	icon_state = "dept_exped_service"
+
+/obj/item/clothing/accessory/solgov/department/engineering/jumper
+	icon_state = "dept_exped_jumper"
 
 /obj/item/clothing/accessory/solgov/department/engineering/fleet
 	icon_state = "dept_fleet"
@@ -412,6 +419,10 @@ department tags
 /obj/item/clothing/accessory/solgov/department/security/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/security/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#721b1b"
+
 /obj/item/clothing/accessory/solgov/department/security/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the security department. These fit Fleet uniforms."
@@ -429,6 +440,11 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/medical/service
 	icon_state = "dept_exped_service"
+	color = "#7faad1"
+
+/obj/item/clothing/accessory/solgov/department/medical/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#7faad1"
 
 /obj/item/clothing/accessory/solgov/department/medical/fleet
 	icon_state = "dept_fleet"
@@ -448,6 +464,10 @@ department tags
 /obj/item/clothing/accessory/solgov/department/supply/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/supply/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#7faad1"
+
 /obj/item/clothing/accessory/solgov/department/supply/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the supply department. These fit Fleet uniforms."
@@ -465,6 +485,10 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/service/service
 	icon_state = "dept_exped_service"
+
+/obj/item/clothing/accessory/solgov/department/service/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#7b965d"
 
 /obj/item/clothing/accessory/solgov/department/service/fleet
 	icon_state = "dept_fleet"
@@ -484,6 +508,9 @@ department tags
 /obj/item/clothing/accessory/solgov/department/exploration/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/exploration/jumper
+	icon_state = "dept_exped_jumper"
+
 /obj/item/clothing/accessory/solgov/department/exploration/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the exploration department. These fit Fleet uniforms."
@@ -501,6 +528,10 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/research/service
 	icon_state = "dept_exped_service"
+
+/obj/item/clothing/accessory/solgov/department/research/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#563768"
 
 /*********
 ranks - ec
