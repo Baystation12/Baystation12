@@ -224,8 +224,6 @@ Subtypes
 
 /datum/terminal_command/proxy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/obj/item/modular_computer/comp = terminal.computer
-	if(!comp || !comp.get_ntnet_status())
-		return "proxy: Error; check networking hardware."
 	if(text == "proxy")
 		if(!comp.network_card.proxy_id)
 			return "proxy: This device is not using a proxy."
@@ -235,6 +233,8 @@ Subtypes
 			return "proxy: Error; this device is not using a proxy."
 		comp.network_card.proxy_id = null
 		return "proxy: Device proxy cleared."
+	if(!comp.network_card && comp.network_card.operable())
+		return "proxy: Error; check networking hardware."
 	var/syntax_error = "proxy: Invalid input. Enter man proxy for syntax help."
 	if(length(text) < 10)
 		return syntax_error
