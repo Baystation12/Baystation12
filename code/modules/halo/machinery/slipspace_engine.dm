@@ -69,7 +69,7 @@
 	if(!do_after(user, SLIPSPACE_ENGINE_BASE_INTERACTION_DELAY * 3, src, same_direction = 1))
 		return
 	visible_message("<span class = 'danger'>[user] preps [src] for mobile core detonation..</span>")
-	message2discord(config.oni_discord, "@here, [user.real_name] ([user.ckey]) has overloaded the slipspace engine @ ([loc.x],[loc.y],[loc.z])")
+	message2discord(config.oni_discord, "Alert: [user.real_name] ([user.ckey]) has overloaded the slipspace engine @ ([loc.x],[loc.y],[loc.z])")
 	overload_engine(user)
 
 /obj/machinery/slipspace_engine/proc/set_next_jump_allowed(var/to_add)
