@@ -306,9 +306,6 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		var/used_gas_fuel = min(max(0.25, used_fuel*(gas_reaction_progress/total_reaction_progress)), gas_fuel) //remove in proportion to the relative reaction progress
 		var/used_liquid_fuel = min(max(0.25, used_fuel-used_gas_fuel), liquid_fuel)
 
-		//world << "DEBUG: used_gas_fuel:[used_gas_fuel] gas_reaction_progress:[gas_reaction_progress] total_reaction_progress:[total_reaction_progress] gas_fuel:[gas_fuel]"
-		//world << "DEBUG: used_liquid_fuel:[used_liquid_fuel] used_fuel:[used_fuel]"
-
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_gas_fuel)

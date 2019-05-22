@@ -611,9 +611,7 @@
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
 	var/max_range = max(created_volume / 10, 1)
-	world << "/datum/chemical_reaction/napalm/on_reaction([holder], [created_volume]) location:[location] max_range:[max_range]"
 	for(var/turf/simulated/floor/target_tile in range(max_range,location))
-		//world << "	check1 ([target_tile.x],[target_tile.y])"
 		var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F = new(target_tile, created_volume)
 		F.Spread()
 		//target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
