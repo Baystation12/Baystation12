@@ -7,7 +7,7 @@
 
 /turf/unsimulated/floor/lava/glassed_turf
 	var/cool_at = 0
-	var/cooling_delay = 30 SECONDS
+	var/cooling_delay = 5 MINUTES
 	var/turf_replacewith = /turf/unsimulated/floor/scorched
 
 /turf/unsimulated/floor/lava/glassed_turf/New()
