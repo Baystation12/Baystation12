@@ -62,6 +62,7 @@
 
 /obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
+	if(mover.loc.z != loc.z) return 1 //On a different Z, let's let them pass. To assist with ladder and stair shenanigans.
 	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
 		return 1
 	else if(istype(mover, /mob/living))
