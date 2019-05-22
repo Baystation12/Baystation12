@@ -153,7 +153,7 @@
 									fed--
 								busy = 0
 								stop_automated_movement = 0
-					else
+					/*else
 						//fourthly, cocoon any nearby items so those pesky pinkskins can't use them
 						for(var/obj/O in can_see)
 
@@ -166,7 +166,7 @@
 								stop_automated_movement = 1
 								walk_to(src, O, 1, move_to_delay)
 								//give up if we can't reach them after 10 seconds
-								GiveUp(O)
+								GiveUp(O)*/
 
 			else if(busy == MOVING_TO_TARGET && cocoon_target)
 				if(get_dist(src, cocoon_target) <= 1)
