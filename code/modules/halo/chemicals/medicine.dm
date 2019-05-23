@@ -212,5 +212,12 @@
 /datum/reagent/ketoprofen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 40)
 	M.add_chemical_effect(CE_CRYO, -1)
-	if(M.bodytemperature > 310)
-		M.bodytemperature = max(310, M.bodytemperature - (50 * TEMPERATURE_DAMAGE_COEFFICIENT)) //A bit better than leporazine
+
+	var/target = 310 //Target body temperature
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.species.body_temperature)
+			target = H.species.body_temperature //Target the species optimal body temperature - if one exists
+
+	if(M.bodytemperature > target)
+		M.bodytemperature = max(target, M.bodytemperature - (50 * TEMPERATURE_DAMAGE_COEFFICIENT)) //A bit better than leporazine
