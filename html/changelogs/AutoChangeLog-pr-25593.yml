@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Flying borgs are no longer capable of having infinite VTEC modules installed."
