@@ -323,6 +323,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/implanter
 	category = "Medical"
 
+/datum/autolathe/recipe/pill_bottle
+	name = "pill bottle"
+	path = /obj/item/weapon/storage/pill_bottle
+	category = "Medical"
+
 /datum/autolathe/recipe/syringegun_ammo
 	name = "syringe gun cartridge"
 	path = /obj/item/weapon/syringe_cartridge
