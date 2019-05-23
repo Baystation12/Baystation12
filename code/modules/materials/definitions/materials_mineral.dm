@@ -231,7 +231,7 @@
 	chem_products = list(
 		/datum/reagent/toxin/phoron = 20
 		)
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	ore_name = "phoron"
 	ore_compresses_to = MATERIAL_PHORON
 	ore_result_amount = 5

@@ -34,6 +34,12 @@
 			if(entry.antag_text && !entry.mechanics_text && !entry.lore_text)
 				all_entries -= entry
 
+	//Put entries with match in the name first
+	for(var/datum/codex_entry/entry in all_entries)
+		if(findtext(entry.display_name, searching))
+			all_entries -= entry
+			all_entries.Insert(1, entry)
+
 	if(LAZYLEN(all_entries) == 1)
 		SScodex.present_codex_entry(mob, all_entries[1])
 	else
