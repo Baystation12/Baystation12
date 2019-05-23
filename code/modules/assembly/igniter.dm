@@ -14,6 +14,9 @@
 		if(holder && istype(holder.loc,/obj/item/weapon/grenade/chem_grenade))
 			var/obj/item/weapon/grenade/chem_grenade/grenade = holder.loc
 			grenade.detonate()
+		else if(holder && istype(holder.loc,/obj/item/device/landmine))
+			var/obj/item/device/landmine/landmine = holder.loc
+			landmine.detonate()
 		else
 			var/turf/location = get_turf(loc)
 			if(location)
