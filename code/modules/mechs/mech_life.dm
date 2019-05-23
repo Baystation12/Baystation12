@@ -24,7 +24,7 @@
 	if(health <= 0 && stat != DEAD)
 		death()
 
-	..()
+	..() //Handles stuff like environment
 
 	handle_hud_icons()
 
@@ -39,6 +39,19 @@
 	// Count up hardpoints, charge them if necessary.
 	// Count up body components that are pulling power, multiply by ratings.
 	return 1
+
+/mob/living/exosuit/handle_environment(var/datum/gas_mixture/environment)
+	if(!environment) return
+	//Mechs and vehicles in general can be assumed to just tend to whatever ambient temperature
+	if(abs(environment.temperature - bodytemperature) > 10 )
+		bodytemperature += ((environment.temperature - bodytemperature) / 3)
+
+	if(environment.temperature > material.melting_point * 1.25 ) //A bit higher because I like to assume there's a difference between a mech and a wall
+		apply_damage(damage = (environment.temperature - (material.melting_point))/5 , damagetype = BURN)
+	// 	if (fire) fire.icon_state = "fire2"  //TODO: UI for overheating
+		if(prob(5))
+			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))
+			
 
 /mob/living/exosuit/death(var/gibbed)
 
