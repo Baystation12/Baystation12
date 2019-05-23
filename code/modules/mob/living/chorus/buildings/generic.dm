@@ -70,7 +70,7 @@
 	converting = FALSE
 	update_icon()
 
-/obj/structure/chorus/converter/update_icon()
+/obj/structure/chorus/converter/on_update_icon()
 	icon_state = "[initial(icon_state)][converting ? "_convert" : ""]"
 
 /obj/structure/chorus/pylon
