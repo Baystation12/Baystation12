@@ -60,9 +60,8 @@
 	GLOB.entered_event.unregister(get_turf(src), src)
 	. = ..()
 
-/obj/structure/chorus/biter/proc/bite_victim(var/mob/living/L, var/atom/movable/enterer)
+/obj/structure/chorus/biter/proc/bite_victim(var/atom/a, var/mob/living/L)
 	if(istype(L))
-		var/mob/living/L = enterer
 		if((owner && owner.get_implant(L)) || !can_activate(owner))
 			return
 		flick("growth_biter_attack", src)
