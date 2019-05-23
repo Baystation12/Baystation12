@@ -100,7 +100,7 @@
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "v" = (
-/obj/structure/deity{
+/obj/structure/cult/talisman{
 	alpha = 130;
 	color = "BLUE";
 	desc = "Looks like an eerie transparent table. It emits a soft glow. "

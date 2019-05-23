@@ -46,8 +46,3 @@
 	invisibility = 0
 	anchored = TRUE
 	phase = CHORUS_PHASE_EGG
-
-/mob/living/chorus/proc/upgrade_to_adult()
-	if(phase != CHORUS_PHASE_EGG)
-		return
-	world << "Make me big again"

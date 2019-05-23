@@ -84,6 +84,8 @@
 			to_chat(L, "<span class='warning'>[form.leave_message][src]</span>")
 		chorus_net.remove_source(L)
 		update_buildings_followers()
+		if(L.mind in GLOB.godcult.current_antagonists)
+			GLOB.godcult.remove_cultist(L.mind, src)
 		var/obj/item/weapon/implant/chorus_loyalty/imp = get_implant(L)
 		if(imp) //Do all the remove steps if it isn't removed already and delete the implant
 			imp.part.implants -= imp

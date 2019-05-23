@@ -64,7 +64,6 @@
 	if(istype(enterer, /mob/living))
 		var/mob/living/L = enterer
 		if((owner && owner.get_implant(L)) || !can_activate(owner))
-			world << "RIP"
 			return
 		flick("growth_biter_attack", src)
 		visible_message("<span class='danger'>\The [src] bites at \the [L]'s feet!</span>")
