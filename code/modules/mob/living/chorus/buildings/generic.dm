@@ -2,7 +2,7 @@
 	name = "Processor"
 	desc = "Activates through process, not clicking"
 
-/obj/structure/chorus/processor/New()
+/obj/structure/chorus/processor/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
@@ -35,8 +35,8 @@
 	desc = "Building supplies, it looks like."
 	var/construct_increase = 1
 
-/obj/structure/chorus/construct_bonus/New()
-	..()
+/obj/structure/chorus/construct_bonus/Initialize()
+	. =..()
 	if(owner)
 		owner.construct_speed += construct_increase
 

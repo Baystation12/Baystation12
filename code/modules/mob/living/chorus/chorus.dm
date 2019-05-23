@@ -14,8 +14,8 @@
 	var/phase = CHORUS_PHASE_OBSERVE
 	var/datum/visualnet/chorus_net
 
-/mob/living/chorus/New()
-	..()
+/mob/living/chorus/Initialize()
+	. = ..()
 	chorus_net = new /datum/visualnet/cultnet()
 	var/mob/observer/eye/eye = new /mob/observer/eye/cult(get_turf(src), chorus_net)
 	eye.possess(src)

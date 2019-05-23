@@ -46,7 +46,7 @@
 			health = min(maxHealth, health + construct_speed)
 
 /mob/living/chorus/Destroy()
-	for(var/bp in currently_building + buildings)
+	for(var/bp in (currently_building + buildings))
 		qdel(bp)
 	currently_building = null
 	buildings = null

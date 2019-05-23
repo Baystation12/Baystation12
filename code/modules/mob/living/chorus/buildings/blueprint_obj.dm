@@ -6,8 +6,8 @@
 	var/mob/living/chorus/owner
 	alpha = 25
 
-/obj/structure/chorus_blueprint/New(var/newloc, var/datum/chorus_building/cb, var/constructor)
-	..(newloc)
+/obj/structure/chorus_blueprint/Initialize(var/maploading, var/datum/chorus_building/cb, var/constructor)
+	. = ..()
 	construct_path = cb.building_type_to_build
 	name = "[cb.get_name()] (blueprint)"
 	icon_state = cb.get_icon_state()

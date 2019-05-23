@@ -52,16 +52,16 @@
 /obj/structure/chorus/biter/chorus_click(var/mob/living/chorus/c)
 	to_chat(c, "<span class='warning'>\The [src] automatically bites those who walk on it</span>")
 
-/obj/structure/chorus/biter/New(var/newloc, var/o)
-	..()
+/obj/structure/chorus/biter/Initialize(var/maploading, var/o)
+	. = ..()
 	GLOB.entered_event.register(get_turf(src), src, .proc/bite_victim)
 
 /obj/structure/chorus/biter/Destroy()
 	GLOB.entered_event.unregister(get_turf(src), src)
 	. = ..()
 
-/obj/structure/chorus/biter/proc/bite_victim(var/atom/entered, var/atom/movable/enterer)
-	if(istype(enterer, /mob/living))
+/obj/structure/chorus/biter/proc/bite_victim(var/mob/living/L, var/atom/movable/enterer)
+	if(istype(L))
 		var/mob/living/L = enterer
 		if((owner && owner.get_implant(L)) || !can_activate(owner))
 			return

@@ -10,8 +10,8 @@
 	density = 1
 	anchored = 1
 
-/obj/structure/chorus/New(var/newloc, var/o)
-	..(newloc)
+/obj/structure/chorus/Initialize(var/maploading, var/o)
+	. = ..()
 	if(o)
 		owner = o
 		owner.add_building(src)

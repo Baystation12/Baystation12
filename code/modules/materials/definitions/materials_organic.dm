@@ -162,8 +162,8 @@
 	icon_reinf = "reinf_cult"
 	icon_colour = "#281744"
 	hardness = 80
-	brute_armor = 60
-	burn_armor = 20
+	brute_armor = 4
+	burn_armor = 3
 	stack_type = null
 	conductive = 0
 	construction_difficulty = 10
