@@ -79,6 +79,7 @@
 		))
 
 	recipes += new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade)
+	recipes += new/datum/stack_recipe("landmine shell", /obj/item/device/landmine, 10)
 	recipes += new/datum/stack_recipe("light fixture frame", /obj/item/frame/light, 2)
 	recipes += new/datum/stack_recipe("small light fixture frame", /obj/item/frame/light/small, 1)
 	recipes += new/datum/stack_recipe("apc frame", /obj/item/frame/apc, 2)

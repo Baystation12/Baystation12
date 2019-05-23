@@ -123,8 +123,7 @@
 	for(var/datum/reagent/current in reagent_list)
 		if(current.type == reagent_type)
 			current.volume += amount
-			if(!isnull(data)) // For all we know, it could be zero or empty string and meaningful
-				current.mix_data(data, amount)
+			current.mix_data(data, amount)
 			update_total()
 			if(!safety)
 				handle_reactions()

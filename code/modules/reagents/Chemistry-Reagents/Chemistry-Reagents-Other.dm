@@ -321,16 +321,46 @@
 	reagent_state = LIQUID
 	color = "#808080"
 
+/datum/reagent/nitric_acid
+	name = "Nitric Acid"
+	description = "A highly corrosive mineral acid."
+	taste_description = "acid"
+	reagent_state = LIQUID
+	color = "#ffffee"
+
 /datum/reagent/nitroglycerin
 	name = "Nitroglycerin"
-	description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol."
+	description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol. \
+				Will detonate if over 90% concentrated and quantity of 50 or more. This solution is 100% concentrated."
 	taste_description = "oil"
 	reagent_state = LIQUID
 	color = "#808080"
+	data = 0
 
 /datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
+
+/datum/reagent/nitroglycerin/mix_data(var/newdata, var/newamount)
+	data += newdata
+	var/explosiveness = 1 - data/volume
+	if(explosiveness > 0.9 && volume > 50)
+		var/datum/effect/effect/system/reagents_explosion/e = new()
+		e.set_up(round ((explosiveness*volume)/2, 1), holder.my_atom, 0, 0)
+		if(isliving(holder.my_atom))
+			e.amount *= 0.5
+			var/mob/living/L = holder.my_atom
+			if(L.stat!=DEAD)
+				e.amount *= 0.5
+		e.start()
+
+		holder.clear_reagents()
+
+	var/concentrate = 100
+	if(data > 0)
+		concentrate = round((data/volume)*100)
+	description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol. \
+		Will detonate if over 90% concentrated and quantity of 50 or more. This solution is [concentrate]% concentrated."
 
 /datum/reagent/coolant
 	name = "Coolant"
@@ -365,3 +395,10 @@
 
 /datum/reagent/luminol/touch_mob(var/mob/living/L)
 	L.reveal_blood()
+
+/datum/reagent/latex
+	name = "Latex"
+	description = "A milky fluid often harvested from plants."
+	taste_description = "chalk"
+	reagent_state = LIQUID
+	color = "#ccffdd"
