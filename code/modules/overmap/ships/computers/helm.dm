@@ -13,7 +13,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/dx		//desitnation
 	var/dy		//coordinates
 	var/speedlimit = 1/(45 SECONDS) //top speed for autopilot
-	var/accellimit = 10 //manual limiter for acceleration
+	var/accellimit = 0.001 //manual limiter for acceleration
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
@@ -106,12 +106,12 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["d_x"] = dx
 		data["d_y"] = dy
 		data["speedlimit"] = speedlimit ? speedlimit*1000 : "None"
-		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit)
+		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit*1000)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
 		data["manual_control"] = manual_control
 		data["canburn"] = linked.can_burn()
-		data["accellimit"] = accellimit
+		data["accellimit"] = accellimit*1000
 
 		var/speed = round(linked.get_speed()*1000, 0.01)
 		if(linked.get_speed() < SHIP_SPEED_SLOW)
@@ -210,9 +210,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		if(newlimit)
 			speedlimit = Clamp(newlimit/1000, 0, 100)
 	if (href_list["accellimit"])
-		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit) as num|null
+		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit*1000) as num|null
 		if(newlimit)
-			accellimit = max(newlimit, 0)
+			accellimit = max(newlimit/1000, 0)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
