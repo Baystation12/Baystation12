@@ -10,7 +10,7 @@
 
 /obj/structure/chorus/processor/sentry/tendril/thorned
 	name = "thorned tendril"
-	desc = "A large mucus covered tentacle. <span class='notice>This one has a large spike on the end</span>"
+	desc = "A large mucus covered tentacle. <span class='notice'>This one has a large spike on the end</span>"
 	icon_state = "growth_tendril_thorned"
 	damage = 14
 
