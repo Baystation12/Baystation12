@@ -23,7 +23,10 @@
 	spawn(3 + metal * 3)
 		process()
 		checkReagents()
-	spawn(120)
+	var/locktime = 120
+	if(metal == 2)
+		locktime = 10
+	spawn(locktime)
 		GLOB.processing_objects.Remove(src)
 		sleep(30)
 		if(metal)
