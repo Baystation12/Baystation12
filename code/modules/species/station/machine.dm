@@ -49,7 +49,10 @@
 	heat_discomfort_strings = list(
 		"Your CPU temperature probes warn you that you are approaching critical heat levels!"
 		)
+
 	genders = list(NEUTER)
+
+	inherent_verbs = list(/mob/living/carbon/human/proc/detach_limb, /mob/living/carbon/human/proc/attach_limb)
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
