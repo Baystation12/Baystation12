@@ -56,6 +56,8 @@
 	burst_delay = 0.15 SECONDS
 	burst = 5
 
+	irradiate_non_cov = 10
+
 /obj/item/projectile/covenant/shadow_cannon
 	damage = 15
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'

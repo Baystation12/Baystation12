@@ -64,6 +64,8 @@
 
 	burst = 3
 
+	irradiate_non_cov = 12
+
 /obj/item/projectile/covenant/spirit_cannon
 	damage = 50
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
