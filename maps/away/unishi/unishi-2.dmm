@@ -1759,7 +1759,7 @@
 /area/unishi/xenobio)
 "ev" = (
 /obj/structure/table/glass,
-/obj/item/device/slime_scanner,
+/obj/item/device/scanner/xenobio,
 /obj/item/weapon/storage/box/monkeycubes,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,
@@ -3112,6 +3112,12 @@
 /obj/structure/lattice,
 /turf/space,
 /area/unishi/smresearch)
+"Ul" = (
+/obj/effect/landmark{
+	name = "carpspawn"
+	},
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 aa
@@ -6426,7 +6432,7 @@ aa
 aa
 aa
 aa
-aa
+Ul
 aa
 aa
 aa
@@ -8119,7 +8125,7 @@ aa
 aa
 aa
 aa
-aa
+Ul
 aa
 aa
 aa
@@ -9205,7 +9211,7 @@ gJ
 aa
 aa
 aa
-aa
+Ul
 aa
 aa
 aa
@@ -9793,7 +9799,7 @@ aa
 aa
 aa
 aa
-aa
+Ul
 aa
 aa
 aa

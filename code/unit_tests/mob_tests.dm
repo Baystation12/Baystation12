@@ -574,3 +574,20 @@ datum/unit_test/species_base_skin/start_test()
 	// No failure state, we just rely on the general runtime check to fail the entire build for us
 	pass("Mob nullspace test concluded.")
 	return TRUE
+/datum/unit_test/mob_organ_size
+	name = "MOB: Internal organs fit inside external organs."
+
+/datum/unit_test/mob_organ_size/start_test()
+	var/failed = FALSE
+	for(var/species_name in all_species)
+		var/mob/living/carbon/human/H = new(null, species_name)
+		for(var/obj/item/organ/external/E in H.organs)
+			for(var/obj/item/organ/internal/I in E.internal_organs)
+				if(I.w_class > E.cavity_max_w_class)
+					failed = TRUE
+					log_bad("Internal organ [I] inside external organ [E] on species [species_name] was too large to fit.")
+	if(failed)
+		fail("A mob had an internal organ too large for its external organ.")
+	else
+		pass("All mob organs fit.")
+	return TRUE

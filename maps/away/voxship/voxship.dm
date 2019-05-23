@@ -8,6 +8,7 @@
 	suffixes = list("voxship/voxship-1.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_shuttle)
+	area_usage_test_exempted_root_areas = list(/area/voxship)
 
 /obj/effect/overmap/sector/vox_base
 	name = "large asteroid"
@@ -51,6 +52,7 @@
 	name = "Unknown Signature"
 	shuttle = "Vox Shuttle"
 	fore_dir = NORTH
+	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/submap_landmark/joinable_submap/voxship
 	archetype = /decl/submap_archetype/derelict/voxship

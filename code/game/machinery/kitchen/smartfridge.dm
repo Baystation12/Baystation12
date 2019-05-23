@@ -4,7 +4,7 @@
 /obj/machinery/smartfridge
 	name = "\improper SmartFridge"
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "smartfridge"
+	icon_state = "fridge_sci"
 	layer = BELOW_OBJ_LAYER
 	density = 1
 	anchored = 1
@@ -12,9 +12,8 @@
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
-	var/icon_on = "smartfridge"
-	var/icon_off = "smartfridge-off"
-	var/icon_panel = "smartfridge-panel"
+	var/icon_base = "fridge_sci"
+	var/icon_contents = "chem"
 	var/list/item_records = list()
 	var/datum/stored_items/currently_vending = null	//What we're putting out of the machine.
 	var/seconds_electrified = 0;
@@ -33,6 +32,7 @@
 		wires = new/datum/wires/smartfridge/secure(src)
 	else
 		wires = new/datum/wires/smartfridge(src)
+	update_icon()
 
 /obj/machinery/smartfridge/Destroy()
 	qdel(wires)
@@ -50,10 +50,6 @@
 /obj/machinery/smartfridge/seeds
 	name = "\improper MegaSeed Servitor"
 	desc = "When you need seeds fast!"
-	icon = 'icons/obj/vending.dmi'
-	icon_state = "seeds"
-	icon_on = "seeds"
-	icon_off = "seeds-off"
 
 /obj/machinery/smartfridge/seeds/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/seeds/))
@@ -63,6 +59,7 @@
 /obj/machinery/smartfridge/secure/extract
 	name = "\improper Slime Extract Storage"
 	desc = "A refrigerated storage unit for slime extracts."
+	icon_contents = "slime"
 	req_access = list(access_research)
 
 /obj/machinery/smartfridge/secure/extract/accept_check(var/obj/item/O as obj)
@@ -73,8 +70,7 @@
 /obj/machinery/smartfridge/secure/medbay
 	name = "\improper Refrigerated Medicine Storage"
 	desc = "A refrigerated storage unit for storing medicine and chemicals."
-	icon_state = "smartfridge" //To fix the icon in the map editor.
-	icon_on = "smartfridge_chem"
+	icon_contents = "chem"
 	req_access = list(list(access_medical,access_chemistry))
 
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O as obj)
@@ -90,9 +86,7 @@
 	name = "\improper Refrigerated Virus Storage"
 	desc = "A refrigerated storage unit for storing viral material."
 	req_access = list(access_virology)
-	icon_state = "smartfridge_virology"
-	icon_on = "smartfridge_virology"
-	icon_off = "smartfridge_virology-off"
+	icon_contents = "chem"
 
 /obj/machinery/smartfridge/secure/virology/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/glass/beaker/vial/))
@@ -104,6 +98,7 @@
 /obj/machinery/smartfridge/chemistry
 	name = "\improper Smart Chemical Storage"
 	desc = "A refrigerated storage unit for medicine and chemical storage."
+	icon_contents = "chem"
 
 /obj/machinery/smartfridge/chemistry/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/storage/pill_bottle) || istype(O,/obj/item/weapon/reagent_containers))
@@ -118,6 +113,9 @@
 /obj/machinery/smartfridge/drinks
 	name = "\improper Drink Showcase"
 	desc = "A refrigerated storage unit for tasty tasty alcohol."
+	icon_state = "fridge_dark"
+	icon_base = "fridge_dark"
+	icon_contents = "drink"
 
 /obj/machinery/smartfridge/drinks/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/glass) || istype(O,/obj/item/weapon/reagent_containers/food/drinks) || istype(O,/obj/item/weapon/reagent_containers/food/condiment))
@@ -126,9 +124,9 @@
 /obj/machinery/smartfridge/foods
 	name = "\improper Hot Foods Display"
 	desc = "A heated storage unit for piping hot meals."
-	icon_state = "smartfridge_food"
-	icon_on = "smartfridge_food"
-	icon_off = "smartfridge_food-off"
+	icon_state = "fridge_food"
+	icon_state = "fridge_food"
+	icon_contents = "food"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks) || istype(O,/obj/item/weapon/material/kitchen/utensil))
@@ -138,8 +136,6 @@
 	name = "\improper Drying Rack"
 	desc = "A machine for drying plants."
 	icon_state = "drying_rack"
-	icon_on = "drying_rack_on"
-	icon_off = "drying_rack"
 
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/))
@@ -159,13 +155,16 @@
 /obj/machinery/smartfridge/drying_rack/on_update_icon()
 	overlays.Cut()
 	if(inoperable())
-		icon_state = icon_off
+		if(contents.len)
+			icon_state = "drying_rack-plant-off"
+		else
+			icon_state = "drying_rack-off"
 	else
-		icon_state = icon_on
+		icon_state = "dring_rack"
 	if(contents.len)
-		overlays += "drying_rack_filled"
+		icon_state = "drying_rack-plant"
 		if(!inoperable())
-			overlays += "drying_rack_drying"
+			icon_state = "drying_rack-close"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
 	for(var/datum/stored_items/I in item_records)
@@ -191,10 +190,42 @@
 		src.throw_item()
 
 /obj/machinery/smartfridge/on_update_icon()
+	overlays.Cut()
 	if(stat & (BROKEN|NOPOWER))
-		icon_state = icon_off
+		icon_state = "[icon_base]-off"
 	else
-		icon_state = icon_on
+		icon_state = icon_base
+
+	if(is_secure)
+		overlays += image(icon, "[icon_base]-sidepanel")
+
+	if(panel_open)
+		overlays += image(icon, "[icon_base]-panel")
+
+	var/image/I
+	var/is_off = ""
+	if(inoperable())
+		is_off = "-off"
+
+	// Fridge contents
+	switch(contents.len)
+		if(0)
+			I = image(icon, "empty[is_off]")
+		if(1 to 2)
+			I = image(icon, "[icon_contents]-1[is_off]")
+		if(3 to 5)
+			I = image(icon, "[icon_contents]-2[is_off]")
+		if(6 to 8)
+			I = image(icon, "[icon_contents]-3[is_off]")
+		else
+			I = image(icon, "[icon_contents]-4[is_off]")
+	overlays += I
+
+	// Fridge top
+	I = image(icon, "[icon_base]-top")
+	I.pixel_z = 32
+	I.layer = ABOVE_WINDOW_LAYER
+	overlays += I
 
 /*******************
 *   Item Adding
@@ -204,9 +235,7 @@
 	if(isScrewdriver(O))
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
-		overlays.Cut()
-		if(panel_open)
-			overlays += image(icon, icon_panel)
+		update_icon()
 		SSnano.update_uis(src)
 		return
 
@@ -224,6 +253,7 @@
 			return
 		stock_item(O)
 		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
+		update_icon()
 
 	else if(istype(O, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/bag/P = O
@@ -326,6 +356,7 @@
 				amount = count
 			for(var/i = 1 to amount)
 				I.get_product(get_turf(src))
+				update_icon()
 
 		return 1
 	return 0
@@ -347,6 +378,7 @@
 	spawn(0)
 		throw_item.throw_at(target,16,3,src)
 	src.visible_message("<span class='warning'>[src] launches [throw_item.name] at [target.name]!</span>")
+	update_icon()
 	return 1
 
 /************************
@@ -356,7 +388,7 @@
 /obj/machinery/smartfridge/secure/Topic(href, href_list)
 	if(stat & (NOPOWER|BROKEN)) return 0
 	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
-		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"])
+		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"] && scan_id)
 			to_chat(usr, "<span class='warning'>Access denied.</span>")
 			return 0
 	return ..()

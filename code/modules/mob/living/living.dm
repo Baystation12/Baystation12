@@ -431,6 +431,11 @@ default behaviour is:
 	eye_blurry = 0
 	ear_deaf = 0
 	ear_damage = 0
+	drowsyness = 0
+	druggy = 0
+	jitteriness = 0
+	confused = 0
+
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
 	// fix all of our organs
@@ -812,6 +817,8 @@ default behaviour is:
 
 /mob/living/proc/melee_accuracy_mods()
 	. = 0
+	if(incapacitated(INCAPACITATION_UNRESISTING))
+		. += 100
 	if(eye_blind)
 		. += 75
 	if(eye_blurry)
@@ -872,3 +879,6 @@ default behaviour is:
 
 /mob/living/proc/get_digestion_product()
 	return null
+
+/mob/living/proc/eyecheck()
+	return FLASH_PROTECTION_NONE

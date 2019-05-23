@@ -52,7 +52,7 @@
 	id = "price_scanner"
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3000, MATERIAL_SILVER = 250)
-	build_path = /obj/item/device/price_scanner
+	build_path = /obj/item/device/scanner/price
 	sort_string = "VAGAF"
 
 /datum/design/item/tool/experimental_welder

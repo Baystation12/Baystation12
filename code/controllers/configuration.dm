@@ -224,6 +224,8 @@ var/list/gamemode_cache = list()
 
 	var/allow_ic_printing = TRUE //Whether players should be allowed to print IC circuits from scripts.
 
+	var/allow_unsafe_narrates = FALSE //Whether admins can use unsanitized narration; when true, allows HTML etc.
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -339,6 +341,9 @@ var/list/gamemode_cache = list()
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
+				
+				if ("log_runtime")
+					config.log_runtime = 1
 
 				if ("generate_asteroid")
 					config.generate_map = 1
@@ -742,6 +747,9 @@ var/list/gamemode_cache = list()
 					player_limit = text2num(value)
 				if("hub")
 					world.update_hub_visibility()
+
+				if ("allow_unsafe_narrates")
+					config.allow_unsafe_narrates = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

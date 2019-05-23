@@ -193,6 +193,7 @@
 	if(AM == user)
 		user.visible_message("<span class='danger'>[user] climbs into [src].</span>", \
 							 "<span class='notice'>You climb into [src].</span>")
+		log_and_message_admins("has stuffed themselves into [src].", AM)		 
 	else
 		user.visible_message("<span class='[is_dangerous ? "danger" : "notice"]'>[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]</span>", \
 							 "<span class='notice'>You stuff [AM] into [src].</span>")
@@ -417,6 +418,9 @@
 	if(wrapcheck == 1)
 		H.tomail = 1
 
+	for(var/mob/living/L in src)
+		if (L.ckey)
+			log_and_message_admins("has been flushed down [src].", L)
 
 	sleep(10)
 	if(last_sound < world.time + 1)
@@ -487,6 +491,7 @@
 	var/destinationTag = "" // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
 	var/hasmob = 0 //If it contains a mob
+	var/speed = 2
 
 	var/partialTag = "" //set by a partial tagger the first time round, then put in destinationTag if it goes through again.
 
@@ -535,31 +540,32 @@
 	forceMove(D.trunk)
 	active = 1
 	set_dir(DOWN)
-	START_PROCESSING(SSfastprocess, src)
+	START_PROCESSING(SSdisposals, src)
 
 	// movement process, persists while holder is moving through pipes
 /obj/structure/disposalholder/Process()
-	if(!(count--))
-		active = 0
-	if(!active)
-		return PROCESS_KILL
-	
-	var/obj/structure/disposalpipe/last
+	for (var/i in 1 to speed)
+		if(!(count--))
+			active = 0
+		if(!active)
+			return PROCESS_KILL
+		
+		var/obj/structure/disposalpipe/last
 
-	if(hasmob && prob(3))
-		for(var/mob/living/H in src)
-			if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
-				H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
+		if(hasmob && prob(3))
+			for(var/mob/living/H in src)
+				if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
+					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
 
-	var/obj/structure/disposalpipe/curr = loc
-	last = curr
-	curr = curr.transfer(src)
+		var/obj/structure/disposalpipe/curr = loc
+		last = curr
+		curr = curr.transfer(src)
 
-	if(QDELETED(src))
-		return PROCESS_KILL
+		if(QDELETED(src))
+			return PROCESS_KILL
 
-	if(!curr)
-		last.expel(src, loc, dir)
+		if(!curr)
+			last.expel(src, loc, dir)
 
 	// find the turf which should contain the next pipe
 /obj/structure/disposalholder/proc/nextloc()
@@ -624,7 +630,7 @@
 /obj/structure/disposalholder/Destroy()
 	QDEL_NULL(gas)
 	active = 0
-	STOP_PROCESSING(SSfastprocess, src)
+	STOP_PROCESSING(SSdisposals, src)
 	return ..()
 
 // Disposal pipes
@@ -860,16 +866,18 @@
 
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				// check if anything changed over 2 seconds
-				var/turf/uloc = user.loc
-				var/atom/wloc = W.loc
-				to_chat(user, "Slicing the disposal pipe.")
-				sleep(30)
-				if(!W.isOn()) return
-				if(user.loc == uloc && wloc == W.loc)
-					welded()
+
+				if(do_after(user, 20, src))
+					if(!src || !W.isOn())
+						return
+					if(health == 10)
+						to_chat(user, "<span class='info'>You slice the disposal pipe.</span>")
+						welded()
+					else
+						health = 10
+						to_chat(user, "<span class='info'>You repair the disposal pipe.</span>")
 				else
-					to_chat(user, "You must stay still while welding the pipe.")
+					to_chat(user, "<span class='info'>You must stay still while welding the pipe.</span>")
 			else
 				to_chat(user, "You need more welding fuel to cut the pipe.")
 				return

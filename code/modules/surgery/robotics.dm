@@ -35,7 +35,7 @@
 	allowed_tools = list(
 		/obj/item/weapon/screwdriver = 100,
 		/obj/item/weapon/material/coin = 50,
-		/obj/item/weapon/material/kitchen/utensil/knife = 50
+		/obj/item/weapon/material/knife = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -70,7 +70,7 @@
 	allowed_tools = list(
 		/obj/item/weapon/screwdriver = 100,
 		/obj/item/weapon/material/coin = 50,
-		/obj/item/weapon/material/kitchen/utensil/knife = 50
+		/obj/item/weapon/material/knife = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -202,6 +202,9 @@
 			var/obj/item/weapon/weldingtool/welder = tool
 			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return FALSE
+		if(istype(tool, /obj/item/weapon/gun/energy/plasmacutter))
+			var/obj/item/weapon/gun/energy/plasmacutter/cutter = tool
+			cutter.slice(user)
 		return TRUE
 	return FALSE
 
@@ -294,10 +297,9 @@
 		else
 			var/obj/item/stack/cable_coil/C = tool
 			if(istype(C))
-				if(C.get_amount() < 3)
+				if(!C.use(3))
 					to_chat(user, SPAN_WARNING("You need three or more cable pieces to repair this damage."))
 				else
-					C.use(3)
 					return TRUE
 	return FALSE
 
@@ -337,7 +339,7 @@
 	)
 	min_duration = 70
 	max_duration = 90
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP
 
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -496,7 +498,7 @@
 			to_chat(user, SPAN_WARNING("You're pretty sure [target.species.name_plural] don't normally have a brain."))
 		else if(target.internal_organs[BP_BRAIN])
 			to_chat(user, SPAN_WARNING("Your subject already has a brain."))
-		else 
+		else
 			return TRUE
 	return FALSE
 

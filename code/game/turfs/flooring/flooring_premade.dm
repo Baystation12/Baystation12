@@ -60,6 +60,10 @@
 	icon_state = "walnut"
 	initial_flooring = /decl/flooring/wood/walnut
 
+/turf/simulated/floor/wood/bamboo
+	icon_state = "maple"
+	initial_flooring = /decl/flooring/wood/bamboo
+
 /turf/simulated/floor/grass
 	name = "grass patch"
 	icon = 'icons/turf/flooring/grass.dmi'

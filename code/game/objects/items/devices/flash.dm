@@ -90,13 +90,16 @@
 
 	else if(isanimal(M))
 		var/mob/living/simple_animal/SA = M
-		if(SA.flash_vulnerability)
-			SA.Stun(flash_strength - 2)
-			SA.flash_eyes(2)
-			SA.eye_blurry += flash_strength
-			SA.confused += flash_strength
-			if(SA.flash_vulnerability > 1)
-				SA.Weaken(2)
+		var/safety = SA.eyecheck()
+		if(safety < FLASH_PROTECTION_MAJOR)
+			SA.Weaken(2)
+			if(safety < FLASH_PROTECTION_MODERATE)
+				SA.Stun(flash_strength - 2)
+				SA.flash_eyes(2)
+				SA.eye_blurry += flash_strength
+				SA.confused += flash_strength
+		else 
+			flashfail = 1
 
 	else if(issilicon(M))
 		M.Weaken(rand(str_min,6))

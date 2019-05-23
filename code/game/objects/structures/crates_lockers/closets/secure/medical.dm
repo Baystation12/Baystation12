@@ -85,7 +85,7 @@
 	    /obj/item/device/flashlight,
 	    /obj/item/weapon/tank/emergency/oxygen/engi,
 	    /obj/item/clothing/glasses/hud/health,
-	    /obj/item/device/healthanalyzer,
+	    /obj/item/device/scanner/health,
 	    /obj/item/device/radio/off,
 	    /obj/random/medical,
 	    /obj/item/weapon/crowbar,
@@ -157,7 +157,6 @@
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
 		/obj/item/weapon/nullrod,
 		/obj/item/weapon/storage/bible,
-		/obj/item/clothing/suit/straight_jacket,
 		/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/weapon/storage/pill_bottle/citalopram,
@@ -193,7 +192,7 @@
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
-		/obj/item/device/healthanalyzer,
+		/obj/item/device/scanner/health,
 		/obj/item/clothing/glasses/hud/health
 	)
 

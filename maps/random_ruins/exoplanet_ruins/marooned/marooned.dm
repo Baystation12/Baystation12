@@ -5,6 +5,10 @@
 	suffixes = list("marooned/marooned.dmm") 
 	cost = 1 
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
+	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	apc_test_exempt_areas = list(
+		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 
 /obj/item/clothing/under/magintka_uniform 
 	name = "officer uniform" 
@@ -31,7 +35,7 @@
 	shoes = /obj/item/clothing/shoes/jungleboots 
 	gloves = /obj/item/clothing/gloves/thick 
 	head = /obj/item/clothing/head/beret 
-	l_pocket = /obj/item/weapon/material/butterfly/switchblade 
+	l_pocket = /obj/item/weapon/material/knife/folding/combat/switchblade 
  
 /obj/item/weapon/gun/projectile/revolver/medium/marooned
 	name = "worn-out revolver"
@@ -60,11 +64,11 @@
 /obj/item/weapon/paper/marooned/note01
 	info = "Horacy Warda, Captain First Rank of Magnitka Defence Forces, Special Observation Flotilia. I have been betrayed by my crew and illegally marooned.<br>Main conspirators were Lieutenant Igor Pytlak, Lieutenant Hans Kovac and Captain Third Rank Dragomir Mladic.<br>If you find this, please make sure those dogs face justice."
 /obj/item/weapon/paper/marooned/note02
-	info = "Day 3. I’ve done the best I could to fix up the hole in my side, but I am not optimistic.<br>The dullness of this place is impossible. I think I forgot the word for 'pencil' yesterday. Will start writing this log to keep myself occupied. Just need to figure out what I can write without getting court-martialed when I get home."
+	info = "Day 3. I've done the best I could to fix up the hole in my side, but I am not optimistic.<br>The dullness of this place is impossible. I think I forgot the word for 'pencil' yesterday. Will start writing this log to keep myself occupied. Just need to figure out what I can write without getting court-martialed when I get home."
 /obj/item/weapon/paper/marooned/note03
 	info = "Day 4. Saw some animals outside. Look pretty ferocious, and probably not edible. I'll stick to MREs for now.<br>I guess I'll start with how I ended up here. We were on a special mission far away from Magnitka, checking something for the Academy of Sciences, anomalous readings of some sort. The professor looked pretty excited, but I didn't really understand the technical details. We got few scientists embedded in our crew, a civilian hull paintjob and 'alternative' transponder codes. Business as usual."
 /obj/item/weapon/paper/marooned/note04
-	info = "Day 5.<br>We got to the destination without much trouble. A planetoid, in an uncharted sector of space. Scientists locked down the readings they were looking for, and we sent a team down. They returned with some sort of obelisk, etched with symbols I’ve never seen before, maybe 3 meters tall. Should've ditched that thing out of airlock there and then."
+	info = "Day 5.<br>We got to the destination without much trouble. A planetoid, in an uncharted sector of space. Scientists locked down the readings they were looking for, and we sent a team down. They returned with some sort of obelisk, etched with symbols I've never seen before, maybe 3 meters tall. Should've ditched that thing out of airlock there and then."
 /obj/item/weapon/paper/marooned/note05
 	info = "Day 8. Made a running wave antenna and jury rigged some amplification for the radio. Hope someone will hear the signal.<br>That obelisk was trouble. People on guard duty in cargo hold kept complaining about headaches and hearing things. Some didn't. They were nice enough to offer to take the shifts of those who complained. Now that I think about it, that's when they started acting weird."
 /obj/item/weapon/paper/marooned/note06

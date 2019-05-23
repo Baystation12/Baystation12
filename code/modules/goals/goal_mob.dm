@@ -30,16 +30,16 @@
 
 	to_chat(src, "<hr>")
 	if(LAZYLEN(mind.goals))
-		to_chat(src, SPAN_NOTICE("<b>This round, you have the following personal goals:</b><br>[jointext(mind.summarize_goals(show_success, allow_modification), "<br>")]"))
+		to_chat(src, SPAN_NOTICE("<b>This round, you have the following personal goals:</b><br>[jointext(mind.summarize_goals(show_success, allow_modification, mind.current), "<br>")]"))
 	else
 		to_chat(src, SPAN_NOTICE("<b>You have no personal goals this round.</b>"))
 	if(allow_modification && LAZYLEN(mind.goals) < 5)
 		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
-
-	if(LAZYLEN(dept.goals))
-		to_chat(src, SPAN_NOTICE("<br><b>This round, [dept.name] has the following departmental goals:</b><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
-	else
-		to_chat(src, SPAN_NOTICE("<br><b>[dept.name] has no departmental goals this round.</b>"))
+	if(dept)
+		if(LAZYLEN(dept.goals))
+			to_chat(src, SPAN_NOTICE("<br><b>This round, [dept.name] has the following departmental goals:</b><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
+		else
+			to_chat(src, SPAN_NOTICE("<br><b>[dept.name] has no departmental goals this round.</b>"))
 
 	if(LAZYLEN(mind.goals))
 		to_chat(mind.current, SPAN_NOTICE("<br><br>You can check your round goals with the <b>Show Goals</b> verb."))

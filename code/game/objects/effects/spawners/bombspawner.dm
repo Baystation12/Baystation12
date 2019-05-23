@@ -86,7 +86,7 @@
 		if(3)
 			var/obj/item/clothing/suit/armor/a_i_a_ptank/R = new /obj/item/clothing/suit/armor/a_i_a_ptank(src.loc)
 			var/obj/item/weapon/tank/phoron/p4 = new /obj/item/weapon/tank/phoron(R)
-			var/obj/item/device/healthanalyzer/p1 = new /obj/item/device/healthanalyzer(R)
+			var/obj/item/device/scanner/health/p1 = new /obj/item/device/scanner/health(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			var/obj/item/clothing/suit/armor/vest/p3 = new /obj/item/clothing/suit/armor/vest(R)
 			R.part1 = p1
@@ -140,8 +140,8 @@
 /obj/effect/spawner/newbomb/traitor
 	name = "TTV bomb - traitor"
 	assembly_type = /obj/item/device/assembly/signaler
-	phoron_amt = 18.5
-	oxygen_amt = 28.5
+	phoron_amt = 14
+	oxygen_amt = 21
 
 /obj/effect/spawner/newbomb/timer
 	name = "TTV bomb - timer"

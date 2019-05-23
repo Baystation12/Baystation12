@@ -144,6 +144,7 @@
 "av" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/hologram/holopad/longrange/remoteship,
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "aw" = (
@@ -2839,7 +2840,7 @@
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 4
@@ -5752,6 +5753,12 @@
 /obj/machinery/meter/turf,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
+"mB" = (
+/obj/effect/landmark{
+	name = "carpspawn"
+	},
+/turf/space,
+/area/space)
 "nS" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -9214,7 +9221,7 @@ aa
 aa
 aa
 aa
-aa
+mB
 aa
 aa
 aa
@@ -10102,7 +10109,7 @@ aa
 aa
 aa
 aa
-aa
+mB
 aa
 aa
 aa
@@ -12924,7 +12931,7 @@ aa
 aa
 aa
 aa
-aa
+mB
 aa
 aa
 aa
@@ -13098,7 +13105,7 @@ aa
 aa
 aa
 aa
-aa
+mB
 aa
 aa
 aa
@@ -15593,7 +15600,7 @@ aa
 aa
 aa
 aa
-aa
+mB
 aa
 aa
 aa
@@ -16898,7 +16905,7 @@ aa
 aa
 aa
 aa
-aa
+mB
 aa
 aa
 aa

@@ -79,6 +79,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/on_update_icon()
 	overlays.Cut()
+	underlays.Cut()
 
 	if(mode == SYRINGE_BROKEN)
 		icon_state = "broken"
@@ -104,7 +105,7 @@
 		filling.icon_state = "syringe[rounded_vol]"
 
 		filling.color = reagents.get_color()
-		overlays += filling
+		underlays += filling
 
 /obj/item/weapon/reagent_containers/syringe/proc/handleTarget(var/atom/target, var/mob/user)
 	switch(mode)

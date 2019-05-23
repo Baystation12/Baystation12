@@ -2648,7 +2648,7 @@
 "gf" = (
 /obj/structure/closet/crate,
 /obj/item/weapon/folder/white,
-/obj/item/weapon/material/kitchen/utensil/knife/boot,
+/obj/item/weapon/material/knife/folding,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "gg" = (

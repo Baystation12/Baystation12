@@ -2451,7 +2451,7 @@
 	dir = 5
 	},
 /obj/item/weapon/storage/belt/medical,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /obj/item/weapon/storage/pill_bottle/tramadol,
 /obj/item/weapon/storage/pill_bottle/tramadol,
 /obj/item/weapon/storage/pill_bottle/spaceacillin,
@@ -3365,6 +3365,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/pitcher,
 /obj/item/weapon/reagent_containers/glass/beaker/bowl,
 /obj/item/weapon/reagent_containers/food/condiment/salt,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gf" = (
@@ -5116,9 +5117,9 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/obj/item/device/analyzer,
-/obj/item/device/analyzer,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
 /obj/item/clamp,
 /obj/item/clamp,
 /obj/item/clamp,
@@ -8322,7 +8323,7 @@
 /obj/item/weapon/cell/super,
 /obj/item/weapon/cell/super,
 /obj/item/weapon/cell/super,
-/obj/item/weapon/mining_scanner,
+/obj/item/device/scanner/mining,
 /obj/item/weapon/storage/box/greenglowsticks,
 /obj/item/weapon/storage/box/greenglowsticks,
 /obj/item/weapon/storage/box/greenglowsticks,

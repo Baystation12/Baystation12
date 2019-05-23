@@ -117,6 +117,12 @@ research holder datum.
 //Refreshes the levels of a given tech.
 //Input: Tech's ID and Level; Output: null
 /datum/research/proc/UpdateTech(var/ID, var/level)
+	// If a "brain expansion" event is active, we gain 1 extra level
+	for(var/datum/event/E in SSevent.active_events)
+		if(istype(E, /datum/event/brain_expansion))
+			level += 1
+			break
+
 	for(var/datum/tech/KT in known_tech)
 		if(KT.id == ID && KT.level <= level)
 			KT.level = max(KT.level + 1, level - 1)

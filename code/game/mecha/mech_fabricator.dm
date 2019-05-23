@@ -1,6 +1,6 @@
 /obj/machinery/mecha_part_fabricator
 	name = "Exosuit Fabricator"
-	desc = "A machine used for construction of robotics and mechas."
+	desc = "A machine used for construction of robotics and mechs."
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
 	density = 1
@@ -177,7 +177,7 @@
 		return
 
 	if(materials[material] + amnt <= res_max_amount)
-		if(stack && stack.amount >= 1)
+		if(stack && stack.can_use(1))
 			var/count = 0
 			overlays += "fab-load-metal"
 			spawn(10)

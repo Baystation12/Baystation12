@@ -172,8 +172,14 @@
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-100 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
-		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(!BP_IS_ROBOTIC(I))
+					I.heal_damage(20*removed)
+
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
@@ -185,7 +191,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	heating_products = list(/datum/reagent/cryoxadone, /datum/reagent/sodium)
-	heating_point = 50 CELCIUS
+	heating_point = 50 CELSIUS
 	heating_message = "turns back to sludge."
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -193,8 +199,32 @@
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-300 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
-		M.heal_organ_damage(30 * removed, 30 * removed)
+		M.heal_organ_damage(50 * removed, 50 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(!BP_IS_ROBOTIC(I))
+					I.heal_damage(30*removed)
+
+/datum/reagent/nanitefluid
+	name = "Nanite Fluid"
+	description = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
+	taste_description = "metallic sludge"
+	reagent_state = LIQUID
+	color = "#c2c2d6"
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/nanitefluid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 1)
+	if(M.bodytemperature < 170)
+		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(BP_IS_ROBOTIC(I))
+					I.heal_damage(20*removed)
 
 /* Painkillers */
 
@@ -284,6 +314,7 @@
 	description = "An effective and very addictive painkiller. Don't mix with alcohol."
 	taste_description = "bitterness"
 	color = "#800080"
+	scannable = 1
 	overdose = 20
 	pain_power = 200
 	effective_dose = 2
@@ -322,7 +353,7 @@
 	reagent_state = LIQUID
 	color = "#99ccff"
 	metabolism = REM * 0.05
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE / 6 // 5
 	scannable = 1
 
 /datum/reagent/synaptizine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -343,6 +374,7 @@
 	description = "Venixalin is a strong, specialised antivenom for dealing with advanced toxins and venoms."
 	taste_description = "overpowering sweetness"
 	color = "#dadd98"
+	scannable = 1
 	metabolism = REM * 2
 	remove_generic = 0
 	remove_toxins = list(
@@ -406,14 +438,13 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/internal/I in H.internal_organs)
-			if(BP_IS_ROBOTIC(I))
-				continue
-			if(I.organ_tag == BP_BRAIN)
-				H.confused++
-				H.drowsyness++
-				if(I.damage >= I.min_bruised_damage)
-					continue
-			I.damage = max(I.damage - removed, 0)
+			if(!BP_IS_ROBOTIC(I))
+				if(I.organ_tag == BP_BRAIN)
+					if(I.damage >= I.min_bruised_damage)
+						continue
+					H.confused++
+					H.drowsyness++
+				I.heal_damage(removed)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
@@ -421,19 +452,19 @@
 	taste_description = "acid"
 	reagent_state = SOLID
 	color = "#004000"
+	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/needs_update = M.mutations.len > 0
 
-	M.mutations = list()
 	M.disabilities = 0
 	M.sdisabilities = 0
 
-	// Might need to update appearance for hulk etc.
 	if(needs_update && ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.update_mutations()
+		M.dna.ResetUI()
+		M.dna.ResetSE()
+		domutcheck(M, null, MUTCHK_FORCED)
 
 /datum/reagent/hyperzine
 	name = "Hyperzine"
@@ -450,13 +481,14 @@
 	if(prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
-	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_chemical_effect(CE_PULSE, 3)
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
 	description = "A powerful oxidizer that reacts with ethanol."
 	reagent_state = SOLID
 	color = "#605048"
+	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/ethylredoxrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -564,10 +596,10 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	chilling_products = list(/datum/reagent/leporazine/cold)
-	chilling_point = -10 CELCIUS
+	chilling_point = -10 CELSIUS
 	chilling_message = "Takes on the consistency of slush."
 	heating_products = list(/datum/reagent/leporazine/hot)
-	heating_point = 110 CELCIUS
+	heating_point = 110 CELSIUS
 	heating_message = "starts swirling, glowing occasionally."
 
 /datum/reagent/leporazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -579,12 +611,12 @@
 /datum/reagent/leporazine/hot
 	name = "Pyrogenic Leporazine"
 	chilling_products = list(/datum/reagent/leporazine)
-	chilling_point = 0 CELCIUS
+	chilling_point = 0 CELSIUS
 	chilling_message = "Stops swirling and glowing."
 	heating_products = null
 	heating_point = null
 	heating_message = null
-	scannable = 0
+	scannable = 1
 
 /datum/reagent/leporazine/hot/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 330)
@@ -596,9 +628,9 @@
 	chilling_point = null
 	chilling_message = null
 	heating_products = list(/datum/reagent/leporazine)
-	heating_point = 100 CELCIUS
+	heating_point = 100 CELSIUS
 	heating_message = "Becomes clear and smooth."
-	scannable = 0
+	scannable = 1
 
 /datum/reagent/leporazine/cold/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature > 290)
@@ -614,6 +646,7 @@
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#bf80bf"
+	scannable = 1
 	metabolism = 0.01
 	data = 0
 
@@ -634,6 +667,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#ff80ff"
+	scannable = 1
 	metabolism = 0.01
 	data = 0
 
@@ -654,6 +688,7 @@
 	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
 	reagent_state = LIQUID
 	color = "#ff80bf"
+	scannable = 1
 	metabolism = 0.01
 	data = 0
 

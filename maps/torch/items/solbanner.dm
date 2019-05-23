@@ -52,3 +52,8 @@
 			dudename = "[ID.military_rank.name] [dudename]"
 		E.plantedby = "Planted on [stationdate2text()] by [dudename], [user.get_assignment()] of [GLOB.using_map.full_name]."
 		T.visible_message("<span class='notice'>[user] successfully claims this world with \the [E]!</span>")
+		
+		if(GLOB.using_map.use_overmap)
+			var/obj/effect/overmap/sector/exoplanet/P = map_sectors["[z]"]
+			if(istype(P))
+				SSstatistics.add_field("planet_flags", 1)

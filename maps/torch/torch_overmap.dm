@@ -1,7 +1,8 @@
 /obj/effect/overmap/ship/torch
 	name = "SEV Torch"
 	fore_dir = WEST
-	vessel_mass = 40000
+	vessel_mass = 100000
+	burn_delay = 2 SECONDS
 	start_x = 4
 	start_y = 5
 	base = TRUE
@@ -46,17 +47,21 @@
 /obj/effect/overmap/ship/landable/exploration_shuttle
 	name = "Charon"
 	shuttle = "Charon"
-	max_speed = 1/(4 SECONDS)
-	burn_delay = 2 SECONDS
+	max_speed = 1/(2 SECONDS)
+	burn_delay = 1 SECONDS
+	vessel_mass = 5000
 	fore_dir = NORTH
+	skill_needed = SKILL_BASIC
+	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/overmap/ship/landable/aquila
 	name = "Aquila"
 	shuttle = "Aquila"
 	vessel_mass = 20000
-	max_speed = 1/(2 SECONDS)
+	max_speed = 1/(1 SECONDS)
 	burn_delay = 0.5 SECONDS //spammable, but expensive
 	fore_dir = NORTH
+	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/overmap/ship/landable/guppy
 	name = "Guppy"
@@ -65,6 +70,8 @@
 	burn_delay = 2 SECONDS
 	vessel_mass = 2000
 	fore_dir = SOUTH
+	skill_needed = SKILL_BASIC
+	vessel_size = SHIP_SIZE_TINY
 
 /obj/machinery/computer/shuttle_control/explore/aquila
 	name = "aquila control console"

@@ -58,6 +58,7 @@
 		. += wielded_parry_bonus
 
 /obj/item/weapon/material/twohanded/on_update_icon()
+	..()
 	icon_state = "[base_icon][wielded]"
 	item_state_slots[slot_l_hand_str] = icon_state
 	item_state_slots[slot_r_hand_str] = icon_state
@@ -92,6 +93,9 @@
 		else if(istype(A,/obj/effect/vine))
 			var/obj/effect/vine/P = A
 			P.die_off()
+
+/obj/item/weapon/material/twohanded/fireaxe/ishatchet()
+	return TRUE
 
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear

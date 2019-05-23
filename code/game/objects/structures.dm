@@ -2,19 +2,15 @@
 	icon = 'icons/obj/structures.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER
+
 	var/breakable
 	var/parts
-
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/other_connections = list("0", "0", "0", "0")
 	var/list/blend_objects = newlist() // Objects which to blend with
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
-
-	var/list/footstep_sounds	//footstep sounds when stepped on
 	var/material/material = null
-
-/obj/structure/proc/get_footstep_sound()
-	if(LAZYLEN(footstep_sounds)) return pick(footstep_sounds)
+	var/footstep_type
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(wallbreaker && damage && breakable)
@@ -118,9 +114,6 @@
 	var/list/dirs = list()
 	var/list/other_dirs = list()
 
-	if(!anchored)
-		return
-
 	for(var/obj/structure/S in orange(src, 1))
 		if(can_visually_connect_to(S))
 			if(S.can_visually_connect())
@@ -128,6 +121,11 @@
 					S.update_connections()
 					S.update_icon()
 				dirs += get_dir(src, S)
+
+	if(!can_visually_connect())
+		connections = list("0", "0", "0", "0")
+		other_connections = list("0", "0", "0", "0")
+		return
 
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)

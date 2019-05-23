@@ -179,6 +179,8 @@
 	item_state = "skrell_rifle"
 	one_hand_penalty = 3
 	fire_delay = 10
+	slowdown_held = 1
+	slowdown_worn = 1
 	removable_components = FALSE
 	initial_cell_type = /obj/item/weapon/cell/hyper
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv

@@ -8,9 +8,9 @@
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
-
 	var/list/stance_limbs
 	var/list/grasp_limbs
+	var/step_count
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
@@ -68,6 +68,12 @@
 		if(stomach)
 			return stomach.ingested
 	return touching // Kind of a shitty hack, but makes more sense to me than digesting them.
+
+/mob/living/carbon/human/proc/metabolize_ingested_reagents()
+	if(should_have_organ(BP_STOMACH))
+		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+		if(stomach)
+			stomach.metabolize()
 
 /mob/living/carbon/human/get_fullness()
 	if(!should_have_organ(BP_STOMACH))
@@ -413,7 +419,7 @@
 
 			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 			if(R)
-				var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) in GLOB.security_statuses as null|text
+				var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
 					R.set_criminalStatus(setcriminal)
 					modified = 1
@@ -462,7 +468,7 @@
 
 			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
-				var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) in GLOB.physical_statuses as null|text
+				var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
 				if(hasHUD(usr, HUD_MEDICAL) && setmedical)
 					E.set_status(setmedical)
 					modified = 1
@@ -536,8 +542,8 @@
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
 	var/total_protection = flash_protection
-	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
-		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[BP_EYES]
+	if(species.has_organ[species.vision_organ])
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
 		if(!I.is_usable())
 			return FLASH_PROTECTION_MAJOR
 		else
@@ -547,9 +553,10 @@
 	return total_protection
 
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
-		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[BP_EYES]
-		I.additional_flash_effects(intensity)
+	if(species.has_organ[species.vision_organ])
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		if(!isnull(I))
+			I.additional_flash_effects(intensity)
 	return ..()
 
 //Used by various things that knock people out by applying blunt trauma to the head.
@@ -1077,7 +1084,7 @@
 	if(LAZYLEN(species.descriptors))
 		descriptors = list()
 		for(var/desctype in species.descriptors)
-			var/datum/mob_descriptor.descriptor = species.descriptors[desctype]
+			var/datum/mob_descriptor/descriptor = species.descriptors[desctype]
 			descriptors[desctype] = descriptor.default_value
 
 	if(!(species.appearance_flags & HAS_UNDERWEAR))
@@ -1682,3 +1689,6 @@
 				vessel.trans_to_obj(vomit, 5)
 			else
 				reagents.trans_to_obj(vomit, 5)
+
+/mob/living/carbon/human/get_footstep(var/footstep_type)
+	. = species.get_footstep(src, footstep_type) || ..()

@@ -118,15 +118,21 @@
 /mob/living/carbon/human/proc/get_pressure_weakness()
 
 	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
+	var/list/suit_items = list(head, wear_suit, gloves, shoes)
+	var/nonairtight_zones = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //we want all these zones to be covered to be airtight
 
-	if(wear_suit && (wear_suit.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE) && head && (head.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
+	for(var/obj/item/clothing/C in suit_items)
+		if(C && (C.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE))
+			nonairtight_zones &= ~C.body_parts_covered
+	if(!nonairtight_zones)
 		pressure_adjustment_coefficient = 0
+	
 
-		// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.
-		if(istype(wear_suit,/obj/item/clothing/suit/space))
-			var/obj/item/clothing/suit/space/S = wear_suit
-			if(S.can_breach && S.damage)
-				pressure_adjustment_coefficient += S.damage * 0.1
+	// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.
+	if(istype(wear_suit,/obj/item/clothing/suit/space))
+		var/obj/item/clothing/suit/space/S = wear_suit
+		if(S.can_breach && S.damage)
+			pressure_adjustment_coefficient += S.damage * 0.1
 
 	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) // So it isn't less than 0 or larger than 1.
 
@@ -526,12 +532,14 @@
 	if(isSynthetic())
 		return
 
+	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
+
 	if(reagents)
 		if(touching) touching.metabolize()
 		if(bloodstr) bloodstr.metabolize()
+		if(ingested) metabolize_ingested_reagents()
 
 	// Trace chemicals
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
 	for(var/T in chem_doses)
 		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
 			continue

@@ -1159,7 +1159,7 @@
 	name = "tobacco"
 	seed_name = "tobacco"
 	display_name = "tobacco leaves"
-	mutants = list("finetobacco", "puretobacco")
+	mutants = list("finetobacco", "puretobacco", "badtobacco")
 	chems = list(/datum/reagent/tobacco = list(1,10))
 
 /datum/seed/tobacco/New()
@@ -1202,6 +1202,13 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#b7c61a")
 	set_trait(TRAIT_PLANT_COLOUR,"#b7c61a")
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.30)
+
+/datum/seed/tobacco/bad
+	name = "badtobacco"
+	seed_name = "low-grade tobacco"
+	display_name = "low-grade tobacco leaves"
+	mutants = list("tobacco")
+	chems = list(/datum/reagent/tobacco/bad = list(1,10))
 
 // Alien weeds.
 /datum/seed/xenomorph
@@ -1248,3 +1255,24 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
+/datum/seed/bamboo
+	name = "bamboo"
+	seed_name = "bamboo"
+	display_name = "bamboo"
+	chems = list(/datum/reagent/bamboo = list(6,1))
+	mutants = null
+
+/datum/seed/bamboo/New()
+	..()
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,1)
+	set_trait(TRAIT_PRODUCT_ICON,"stalk")
+	set_trait(TRAIT_PRODUCT_COLOUR, WOOD_COLOR_GENERIC)
+	set_trait(TRAIT_PLANT_COLOUR,"#99bc20")
+	set_trait(TRAIT_PLANT_ICON,"stalk3")
+	set_trait(TRAIT_IDEAL_HEAT, 298)
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)

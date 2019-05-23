@@ -138,9 +138,17 @@
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined/WillContain()
 	return list(
-		/obj/item/weapon/gun/energy/gun/small/secure = 2,
-		/obj/item/weapon/storage/belt/holster/general = 2,
-		/obj/item/weapon/gun/energy/gun/secure = 2,
+		/obj/item/weapon/storage/belt/holster/general = 3,
+		/obj/item/weapon/gun/energy/gun/secure = 3,
+		/obj/item/weapon/gun/energy/gun/small/secure = 1,
+	)
+
+/obj/structure/closet/secure_closet/guncabinet/PPE
+	name = "Bridge PPE cabinet"
+
+/obj/structure/closet/secure_closet/guncabinet/PPE/WillContain()
+	return list(
+		/obj/item/weapon/gun/energy/gun/small/secure = 3,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command = 3,
 		/obj/item/clothing/head/helmet/solgov/command = 3
 	)

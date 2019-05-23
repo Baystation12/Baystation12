@@ -196,9 +196,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 
 	// List of /datum/department types to instantiate at roundstart.
-	var/list/departments = list(
-		/datum/department/medbay
-	)
+	var/list/departments
 
 /datum/map/New()
 	if(!map_levels)
@@ -209,17 +207,19 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			var/datum/job/job = jtype
 			if(initial(job.available_by_default))
 				allowed_jobs += jtype
-	if(!planet_size)
+	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 
-/datum/map/proc/setup_map()
+/datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(lobby_tracks.len)
-		lobby_track_type = pick(lobby_tracks)
+		lobby_track_type = pick(lobby_tracks - exclude)
 	else
-		lobby_track_type = pick(subtypesof(/music_track))
+		lobby_track_type = pick(subtypesof(/music_track) - exclude)
+	return decls_repository.get_decl(lobby_track_type)
 
-	lobby_track = decls_repository.get_decl(lobby_track_type)
+/datum/map/proc/setup_map()
+	lobby_track = get_lobby_track()
 	world.update_status()
 
 /datum/map/proc/setup_job_lists()
@@ -327,7 +327,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	vendor_account = department_accounts["Vendor"]
 
 /datum/map/proc/map_info(var/client/victim)
-	return
+	to_chat(victim, "<h2>Current map information</h2>")
+	to_chat(victim, get_map_info())
+
+/datum/map/proc/get_map_info()
+	return "No map information available"
 
 /datum/map/proc/bolt_saferooms()
 	return // overriden by torch

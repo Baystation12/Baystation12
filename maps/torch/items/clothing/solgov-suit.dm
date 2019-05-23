@@ -13,7 +13,7 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/analyzer,/obj/item/device/radio,/obj/item/taperoll)
+	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll)
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
@@ -178,50 +178,56 @@
 
 //Dress - murder me with a gun why are these 3 different types
 
-/obj/item/clothing/suit/dress/solgov
+/obj/item/clothing/suit/storage/solgov/dress
 	name = "dress jacket"
-	desc = "A uniform dress jacket, fancy."
-	icon_state = "greydress"
-	item_state = "greydress"
-	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
-	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	desc = "A uniform dress jacket, plain and undecorated."
+	icon_state = "ecdress_xpl"
+	item_state = "ecdress_xpl"
 	body_parts_covered = UPPER_TORSO|ARMS
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/device/radio,/obj/item/weapon/pen)
 	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
-/obj/item/clothing/suit/dress/solgov/expedition
-	name = "expeditionary dress jacket"
-	desc = "A silver and grey dress jacket belonging to the SCG Expeditionary Corps. Fashionable, for the 25th century at least."
-	icon_state = "greydress"
-	item_state = "greydress"
+/obj/item/clothing/suit/storage/solgov/dress/expedition
+	name = "expeditionary dress coat"
+	desc = "A silver and black dress peacoat belonging to the SCG Expeditionary Corps. Fashionable, for the 25th century at least."
+	icon_state = "ecdress_xpl"
+	item_state = "ecdress_xpl"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 		)
 
-/obj/item/clothing/suit/dress/solgov/expedition/command
-	name = "expeditionary officer's dress jacket"
-	desc = "A gold and grey dress jacket belonging to the SCG Expeditionary Corps. The height of fashion."
-	icon_state = "greydress_com"
-	item_state = "greydress_com"
+/obj/item/clothing/suit/storage/solgov/dress/expedition/senior
+	name = "expeditionary senior's dress coat"
+	icon_state = "ecdress_sxpl"
+	item_state = "ecdress_sxpl"
 
-/obj/item/clothing/suit/dress/solgov/fleet/sailor
-	name = "fleet dress overwear"
-	desc = "A navy blue SCG Fleet dress suit. Almost looks like a school-girl outfit."
-	icon_state = "sailordress"
-	item_state = "whitedress"
+/obj/item/clothing/suit/storage/solgov/dress/expedition/chief
+	name = "expeditionary chief's dress coat"
+	icon_state = "ecdress_cxpl"
+	item_state = "ecdress_cxpl"
 
-/obj/item/clothing/suit/storage/solgov/dress
-	name = "dress jacket"
-	desc = "A uniform dress jacket, plain and undecorated."
-	icon_state = "whitedress"
-	item_state = "whitedress"
-	body_parts_covered = UPPER_TORSO|ARMS
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0.9
-	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+/obj/item/clothing/suit/storage/solgov/dress/expedition/command
+	name = "expeditionary officer's dress coat"
+	desc = "A gold and black dress peacoat belonging to the SCG Expeditionary Corps. The height of fashion."
+	icon_state = "ecdress_ofcr"
+	item_state = "ecdress_ofcr"
+
+/obj/item/clothing/suit/storage/solgov/dress/expedition/command/cdr
+	name = "expeditionary commander's dress coat"
+	icon_state = "ecdress_cdr"
+	item_state = "ecdress_cdr"
+
+/obj/item/clothing/suit/storage/solgov/dress/expedition/command/capt
+	name = "expeditionary captain's dress coat"
+	icon_state = "ecdress_capt"
+	item_state = "ecdress_capt"
+
+/obj/item/clothing/suit/storage/solgov/dress/expedition/command/adm
+	name = "expeditionary admiral's dress coat"
+	icon_state = "ecdress_adm"
+	item_state = "ecdress_adm"
 
 /obj/item/clothing/suit/storage/solgov/dress/fleet
 	name = "fleet dress jacket"
@@ -252,6 +258,25 @@
 	desc = "A navy blue SCG Fleet dress jacket with red accents. Don't get near pasta sauce or vox."
 	icon_state = "whitedress_flag"
 	item_state = "whitedress_flag"
+
+/obj/item/clothing/suit/dress/solgov
+	name = "dress jacket"
+	desc = "A uniform dress jacket, fancy."
+	icon_state = "blackdress"
+	item_state = "blackdress"
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	body_parts_covered = UPPER_TORSO|ARMS
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/device/radio,/obj/item/weapon/pen)
+	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK)
+
+/obj/item/clothing/suit/dress/solgov/fleet/sailor
+	name = "fleet dress overwear"
+	desc = "A navy blue SCG Fleet dress suit. Almost looks like a school-girl outfit."
+	icon_state = "sailordress"
+	item_state = "whitedress"
 
 /obj/item/clothing/suit/dress/solgov/army
 	name = "army dress jacket"
@@ -351,4 +376,63 @@
 
 /obj/item/clothing/suit/space/void/medical/alt/sol/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/sol
+	boots = /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/head/helmet/space/void/command
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
+	name = "command voidsuit helmet"
+	desc = "A light, radiation resistant voidsuit helmet commonly used among SCG uniformed services."
+	icon_state = "void_command"
+	item_state = "void_command"
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
+	light_overlay = "helmet_light_dual_green"
+
+/obj/item/clothing/suit/space/void/command
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	icon_state = "void_command"
+	name = "command voidsuit"
+	desc = "A light, radiation resistant voidsuit commonly used among SCG uniformed services. This one has an EC seal on its chest plate and command department markings."
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase/inflatable)
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
+
+/obj/item/clothing/suit/space/void/command/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 0
+
+/obj/item/clothing/suit/space/void/command/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/command
+	boots = /obj/item/clothing/shoes/magboots
+
+//Exploration
+/obj/item/clothing/head/helmet/space/void/exploration
+	name = "exploration voidsuit helmet"
+	desc = "A helmet of Exoplanet Exploration Unit, standard issue for Expeditionary Corps away missions. It has an armored glass dome for superiour visibility and extra anti-radiation lining."
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
+	icon_state = "helm_explorer"
+	sprite_sheets = list(
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_head_solgov_skrell.dmi'
+		)
+	sprite_sheets_obj = list()
+	armor = list(melee = 20, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 90)
+	light_overlay = "yellow_light"
+	tinted = FALSE
+
+/obj/item/clothing/suit/space/void/exploration
+	name = "exploration voidsuit"
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	desc = "The bulky Exoplanet Exploration Unit is a standard voidsuit for Expeditionary Corps field operations. It features extra padding and respectable radiation-resistant lining."
+	icon_state = "void_explorer"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
+		)
+	sprite_sheets_obj = list()
+	armor = list(melee = 30, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 90)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/scanner/health,/obj/item/device/gps,/obj/item/weapon/pinpointer/radio,/obj/item/device/radio/beacon,/obj/item/weapon/material/hatchet/machete,/obj/item/weapon/shovel)
+
+/obj/item/clothing/suit/space/void/exploration/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/exploration
 	boots = /obj/item/clothing/shoes/magboots

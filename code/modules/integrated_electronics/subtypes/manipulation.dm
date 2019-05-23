@@ -82,7 +82,7 @@
 		if(1)
 			var/datum/integrated_io/xo = inputs[1]
 			var/datum/integrated_io/yo = inputs[2]
-			if(assembly && xo.data && yo.data)
+			if(assembly && !isnull(xo.data) && !isnull(yo.data))
 				if(isnum(xo.data))
 					xo.data = round(xo.data, 1)
 				if(isnum(yo.data))
@@ -97,6 +97,7 @@
 		if(2)
 			var/datum/firemode/next_firemode = installed_gun.switch_firemodes()
 			set_pin_data(IC_OUTPUT, 2, next_firemode ? next_firemode.name : null)
+			push_data()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/proc/shootAt(turf/target)
 	var/turf/T = get_turf(src)
@@ -347,7 +348,6 @@
 	var/max_items = 10
 
 /obj/item/integrated_circuit/manipulation/grabber/do_work()
-	var/max_w_class = assembly.w_class
 	var/atom/movable/acting_object = get_object()
 	var/turf/T = get_turf(acting_object)
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
@@ -355,7 +355,7 @@
 		var/mode = get_pin_data(IC_INPUT, 2)
 		if(mode == 1)
 			if(check_target(AM))
-				if((contents.len < max_items) && AM.w_class <= max_w_class)
+				if((contents.len < max_items) && AM.w_class <= assembly.w_class)
 					AM.forceMove(src)
 		if(mode == 0)
 			if(contents.len)
@@ -404,7 +404,6 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 50
 	ext_cooldown = 1
-	var/max_w_class = ITEM_SIZE_SMALL
 	var/obj/item/pulling
 
 /obj/item/integrated_circuit/manipulation/claw/Destroy()
@@ -442,7 +441,7 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/claw/proc/can_pull(var/obj/item/I)
-	return I && I.w_class <= max_w_class && !I.anchored
+	return assembly && I && I.w_class <= assembly.w_class && !I.anchored
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
 	var/obj/acting_object = get_object()
@@ -490,7 +489,6 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
 	power_draw_per_use = 50
-	var/max_w_class = ITEM_SIZE_SMALL
 
 /obj/item/integrated_circuit/manipulation/thrower/do_work()
 	var/target_x_rel = round(get_pin_data(IC_INPUT, 1))
@@ -503,7 +501,7 @@
 	if (istype(assembly.loc, /obj/item/weapon/implant/compressed)) //Prevents the more abusive form of chestgun.
 		return
 
-	if(max_w_class && (A.w_class > max_w_class))
+	if(A.w_class > assembly.w_class)
 		return
 
 	if(!(IC_FLAG_CAN_FIRE & assembly.circuit_flags) && ishuman(assembly.loc))

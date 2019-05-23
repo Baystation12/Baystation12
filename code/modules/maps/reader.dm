@@ -473,7 +473,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	var/position
 	var/old_position = 1
-	var/list_index = 1
 
 	do
 		//find next delimiter that is not within  "..."
@@ -486,15 +485,18 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		old_position = position + 1
 
 		if(!length(trim_left))
+			if(position == 0)
+				break // That terminal commas are ignored is real dm behavior.
+			to_return.len++
 			continue
+
 		var/left = readlistitem(trim_left)
 		if(equal_position)
 			if(!left && trim_left != "null")
 				left = trim_left // This is dm behavior: unindentifiable keys in associative lists are parsed as literal strings.
 			if(left == 1.#INF || left == -1.#INF)
 				left = trim_left // This is not valid as a list index; we could let it runtime, but if associative it should be parsed as "inf" or "-inf" instead.
-		to_return.len++
-		to_return[list_index++] = left
+		to_return += left
 
 		if(equal_position)//associative var, so do the association
 			if(isnum(left))

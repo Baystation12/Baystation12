@@ -38,4 +38,5 @@
 				)
 
 	sacrifice_reagents = list(/datum/reagent/hyperzine)
-	sacrifice_objects = list(/obj/item/stack/telecrystal)
+	sacrifice_objects = list(/obj/item/stack/telecrystal,
+							/obj/item/stack/material/diamond)

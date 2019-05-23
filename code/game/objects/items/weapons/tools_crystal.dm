@@ -45,6 +45,7 @@
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
 	matter = list(MATERIAL_CRYSTAL = 1250)
+	build_from_parts = FALSE
 
 /obj/item/weapon/wirecutters/crystal/Initialize()
 	. = ..()
@@ -58,6 +59,7 @@
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
 	matter = list(MATERIAL_CRYSTAL = 1250)
+	build_from_parts = FALSE
 
 /obj/item/weapon/screwdriver/crystal/Initialize()
 	. = ..()

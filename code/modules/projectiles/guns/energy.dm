@@ -94,8 +94,11 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if(!power_supply)
 		to_chat(user, "Seems like it's dead.")
 		return
-	var/shots_remaining = round(power_supply.charge / charge_cost)
-	to_chat(user, "Has [shots_remaining] shot\s remaining.")
+	if (charge_cost == 0)
+		to_chat(user, "This gun seems to have an unlimited number of shots.")
+	else
+		var/shots_remaining = round(power_supply.charge / charge_cost)
+		to_chat(user, "Has [shots_remaining] shot\s remaining.")
 	return
 
 /obj/item/weapon/gun/energy/on_update_icon()
@@ -104,10 +107,11 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 		var/ratio = power_supply.percent()
 
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
+		// Also make sure cells adminbussed with higher-than-max charge don't break sprites
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
-			ratio = max(round(ratio, 25), 25)
+			ratio = Clamp(round(ratio, 25), 25, 100)
 
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"

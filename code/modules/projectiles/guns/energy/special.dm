@@ -211,9 +211,25 @@
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
 	self_recharge = 1
+	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/weapon/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"
 	use_external_power = 1
 	max_shots = 4
 	has_safety = FALSE
+
+/obj/item/weapon/gun/energy/plasmacutter/Initialize()
+	. = ..()
+	src.spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system.set_up(5, 0, src)
+	spark_system.attach(src)
+
+/obj/item/weapon/gun/energy/plasmacutter/Destroy()
+	QDEL_NULL(spark_system)
+	return ..()
+
+/obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)//makes spark and eyecheck for deconstructing things
+	src.spark_system.start()
+	if(M)
+		M.welding_eyecheck()

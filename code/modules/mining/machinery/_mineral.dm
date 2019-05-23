@@ -48,7 +48,7 @@
 		. += "<b>Output</b>: [dir2text(get_dir(src, output_turf))]."
 	else
 		. += "<b>Output</b>: disabled."
-	. += "<br><a href='?src=\ref[src];configure_input_output=1'>Configure.</a>"
+	. += "<br><a href='?src=\ref[src];configure_input_output=1'>Configure</a>"
 
 /obj/machinery/mineral/CanUseTopic(var/mob/user)
 	return max(..(), (console && console.CanUseTopic(user)))

@@ -185,7 +185,7 @@
 	if ((drowsyness > 0) && !MOVING_DELIBERATELY(src))
 		. += 6
 	if(lying) //Crawling, it's slower
-		. += 8 + (weakened * 2)
+		. += (8 + ((weakened * 3) + (confused * 2)))
 	. += move_intent.move_delay
 	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
 
@@ -253,6 +253,9 @@
 			return 1
 		if(buckling == FULLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_FULLY))
 			return 1
+
+	if((incapacitation_flags & INCAPACITATION_WEAKENED) && weakened)
+		return 1
 
 	return 0
 
@@ -450,7 +453,7 @@
 	src << browse('html/changelog.html', "window=changes;size=675x650")
 	if(prefs.lastchangelog != changelog_hash)
 		prefs.lastchangelog = changelog_hash
-		prefs.save_preferences()
+		SScharacter_setup.queue_preferences_save(prefs)
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
 
 /mob/verb/cancel_camera()
@@ -857,7 +860,7 @@
 
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
 	if(!affected) //Grab the organ holding the implant.
-		for(var/obj/item/organ/external/organ in organs) 
+		for(var/obj/item/organ/external/organ in organs)
 			for(var/obj/item/O in organ.implants)
 				if(O == implant)
 					affected = organ
@@ -865,7 +868,7 @@
 	if(affected)
 		affected.implants -= implant
 		for(var/datum/wound/wound in affected.wounds)
-			wound.embedded_objects -= implant
+			LAZYREMOVE(wound.embedded_objects, implant)
 		if(!surgical_removal)
 			shock_stage+=20
 			affected.take_external_damage((implant.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
@@ -1107,3 +1110,6 @@
 				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
 		return TRUE
 	return FALSE
+
+/mob/proc/get_footstep(var/footstep_type)
+	return

@@ -745,7 +745,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cE" = (
-/obj/structure/icarus/broken_cryo{
+/obj/structure/broken_cryo/icarus{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -762,7 +762,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cH" = (
-/obj/structure/icarus/broken_cryo{
+/obj/structure/broken_cryo/icarus{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -898,7 +898,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dc" = (
-/obj/structure/icarus/broken_cryo{
+/obj/structure/broken_cryo/icarus{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -990,7 +990,7 @@
 /area/icarus/vessel)
 "dq" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dr" = (
@@ -1415,7 +1415,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eK" = (

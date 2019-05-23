@@ -98,18 +98,29 @@
 		/obj/item/weapon/tank
 		)
 
+/obj/item/weapon/gripper/cultivator
+	name = "cultivator gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool used to perform tasks in the xenobiology division, such as handling plant samples and disks."
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/glass,
+		/obj/item/seeds,
+		/obj/item/weapon/grown,
+		/obj/item/slime_extract,
+		/obj/item/weapon/disk/botany
+	)
+
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
 	name = "service gripper"
 	icon_state = "gripper"
 	desc = "A simple grasping tool used to perform tasks in the service sector, such as handling food, drinks, and seeds."
-
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food,
 		/obj/item/seeds,
 		/obj/item/weapon/grown,
 		/obj/item/weapon/glass_extra
-		)
+	)
 
 /obj/item/weapon/gripper/organ //Used to handle organs.
 	name = "organ gripper"
@@ -425,7 +436,7 @@
 	var/tools = "<B>Tools and devices</B><BR>"
 	var/resources = "<BR><B>Resources</B><BR>"
 
-	for (var/O in module.modules)
+	for (var/O in module.equipment)
 
 		var/module_string = ""
 

@@ -28,6 +28,10 @@ var/list/organ_cache = list()
 
 	var/death_time
 
+	// Bioprinter stats
+	var/can_be_printed = TRUE
+	var/print_cost
+
 /obj/item/organ/Destroy()
 	owner = null
 	dna = null
@@ -372,3 +376,6 @@ var/list/organ_cache = list()
 //used by stethoscope
 /obj/item/organ/proc/listen()
 	return
+
+/obj/item/organ/proc/get_mechanical_assisted_descriptor()
+	return "mechanically-assisted [name]"

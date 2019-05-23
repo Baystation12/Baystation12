@@ -57,7 +57,7 @@ var/list/client_preference_stats_
 	if(!usr.cycle_preference(client_preference))
 		return
 
-	usr.client.prefs.save_preferences()
+	SScharacter_setup.queue_preferences_save(usr.client.prefs)
 	to_chat(usr, "[client_preference.description]: [usr.get_preference_value(client_preference)]")
 
 /stat_client_preference/proc/update_name(var/mob/user)

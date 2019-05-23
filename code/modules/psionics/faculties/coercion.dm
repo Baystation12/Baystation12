@@ -8,6 +8,10 @@
 	faculty = PSI_COERCION
 
 /decl/psionic_power/coercion/invoke(var/mob/living/user, var/mob/living/target)
+	if (!istype(target))
+		to_chat(user, SPAN_WARNING("You cannot mentally attack \the [target]."))
+		return FALSE
+	
 	. = ..()
 	if(.)
 		var/blocked = 100 * target.get_blocked_ratio(null, "psi")

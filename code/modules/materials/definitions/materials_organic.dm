@@ -5,7 +5,7 @@
 	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = COLOR_GRAY80
+	icon_colour = COLOR_WHITE
 	hardness = 10
 	weight = 5
 	melting_point = T0C+371 //assuming heat resistant plastic

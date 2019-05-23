@@ -70,9 +70,10 @@
 
 /obj/item/clothing/accessory/armorplate/tactical
 	name = "tactical armor plate"
-	desc = "A medium armor plate with additional ablative coating. Attaches to a plate carrier."
+	desc = "A heavier armor plate with additional ablative coating. Attaches to a plate carrier."
 	icon_state = "armor_tactical"
-	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 50, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	slowdown = 0.5
 
 /obj/item/clothing/accessory/armorplate/merc
 	name = "heavy armor plate"
@@ -206,6 +207,7 @@
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "null"
 	slot = ACCESSORY_SLOT_ARMOR_M
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/clothing/accessory/armor/tag/nt
 	name = "\improper CORPORATE SECURITY tag"

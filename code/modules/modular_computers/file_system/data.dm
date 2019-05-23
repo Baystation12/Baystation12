@@ -3,7 +3,7 @@
 /datum/computer_file/data
 	var/stored_data = "" 			// Stored data in string format.
 	filetype = "DAT"
-	var/block_size = 250
+	var/block_size = 2000			// Turns out, text is small.
 	var/do_not_edit = 0				// Whether the user will be reminded that the file probably shouldn't be edited.
 	var/read_only = 0				// Protects files that should never be edited by the user due to special properties.
 

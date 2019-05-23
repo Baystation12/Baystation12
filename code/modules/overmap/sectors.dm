@@ -47,7 +47,11 @@
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/proc/populate_sector_objects()
 
+/obj/effect/overmap/proc/get_scan_data(mob/user)
+	return desc
+
 /obj/effect/overmap/proc/get_areas()
+	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
 
 /obj/effect/overmap/proc/find_z_levels()
 	map_z = GetConnectedZlevels(z)
@@ -97,6 +101,10 @@
 	icon_state = "sector"
 	anchored = 1
 
+// Because of the way these are spawned, they will potentially have their invisibility adjusted by the turfs they are mapped on
+// prior to being moved to the overmap. This blocks that. Use set_invisibility to adjust invisibility as needed instead.
+/obj/effect/overmap/sector/hide()
+
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
 	if(known)
@@ -104,9 +112,6 @@
 		plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
 			H.get_known_sectors()
-
-/obj/effect/overmap/sector/get_areas()
-	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)

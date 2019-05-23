@@ -19,11 +19,18 @@
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
 	#include "datums/uniforms_fleet.dm"
-	#include "datums/reports.dm"
+	#include  "datums/reports/command.dm"
+	#include  "datums/reports/corporate.dm"
+	#include  "datums/reports/exploration.dm"
+	#include  "datums/reports/robotics.dm"
+	#include  "datums/reports/science.dm"
+	#include  "datums/reports/security.dm"
+	#include  "datums/reports/solgov.dm"
+	#include  "datums/reports/deck.dm"
 	#include "datums/shackle_law_sets.dm"
 	#include "datums/supplypacks/security.dm"
 	#include "datums/supplypacks/science.dm"
-
+	#include "datums/department_exploration.dm"
 	#include "items/cards_ids.dm"
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
@@ -49,7 +56,8 @@
 	#include "items/clothing/terran-head.dm"
 	#include "items/clothing/terran-suit.dm"
 	#include "items/clothing/terran-under.dm"
-
+	
+	#include "items/weapon/storage/wallets.dm"
 
 	#include "job/torch_access.dm"
 	#include "job/torch_jobs.dm"
@@ -81,6 +89,8 @@
 	#include "machinery/apc_shuttle.dm"
 	#include "machinery/keycard authentication.dm"
 	#include "machinery/suit_storage.dm"
+
+	#include "robot/module_flying_surveyor.dm"
 
 	#include "structures/signs.dm"
 	#include "structures/closets.dm"

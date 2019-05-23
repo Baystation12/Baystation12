@@ -18,8 +18,8 @@
 	var/obj/item/weapon/shockpaddles/linked/paddles
 	var/obj/item/weapon/cell/bcell = null
 
-/obj/item/weapon/defibrillator/New() //starts without a cell for rnd
-	..()
+/obj/item/weapon/defibrillator/Initialize() //starts without a cell for rnd
+	. = ..()
 	if(ispath(paddles))
 		paddles = new paddles(src, src)
 	else
@@ -386,7 +386,7 @@
 /obj/item/weapon/shockpaddles/proc/lowskill_revive(mob/living/carbon/human/H, mob/living/user)
 	if(prob(60))
 		playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 100, 1, -1)
-		H.electrocute_act(burn_damage_amt*4, src, def_zone = BP_CHEST)	
+		H.electrocute_act(burn_damage_amt*4, src, def_zone = BP_CHEST)
 		user.visible_message("<span class='warning'><i>The paddles were misaligned! \The [user] shocks [H] with \the [src]!</i></span>", "<span class='warning'>The paddles were misaligned! You shock [H] with \the [src]!</span>")
 		return 0
 	if(prob(50))

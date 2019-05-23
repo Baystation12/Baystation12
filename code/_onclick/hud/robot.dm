@@ -169,14 +169,14 @@ var/obj/screen/robot_inventory
 			to_chat(usr, "<span class='danger'>No module selected</span>")
 			return
 
-		if(!r.module.modules)
+		if(!r.module.equipment)
 			to_chat(usr, "<span class='danger'>Selected module has no modules to select</span>")
 			return
 
 		if(!r.robot_modules_background)
 			return
 
-		var/display_rows = -round(-(r.module.modules.len) / 8)
+		var/display_rows = -round(-(r.module.equipment.len) / 8)
 		r.robot_modules_background.screen_loc = "CENTER-4:16,SOUTH+1:7 to CENTER+3:16,SOUTH+[display_rows]:7"
 		r.client.screen += r.robot_modules_background
 
@@ -187,13 +187,13 @@ var/obj/screen/robot_inventory
 		//be emagged before they actually select a module. - or some situation can cause them to get a new module
 		// - or some situation might cause them to get de-emagged or something.
 		if(r.emagged)
-			if(!(r.module.emag in r.module.modules))
-				r.module.modules.Add(r.module.emag)
+			if(!(r.module.emag in r.module.equipment))
+				r.module.equipment.Add(r.module.emag)
 		else
-			if(r.module.emag in r.module.modules)
-				r.module.modules.Remove(r.module.emag)
+			if(r.module.emag in r.module.equipment)
+				r.module.equipment.Remove(r.module.emag)
 
-		for(var/atom/movable/A in r.module.modules)
+		for(var/atom/movable/A in r.module.equipment)
 			if( (A != r.module_state_1) && (A != r.module_state_2) && (A != r.module_state_3) )
 				//Module is not currently active
 				r.client.screen += A
@@ -211,7 +211,7 @@ var/obj/screen/robot_inventory
 	else
 		//Modules display is hidden
 		//r.client.screen -= robot_inventory	//"store" icon
-		for(var/atom/A in r.module.modules)
+		for(var/atom/A in r.module.equipment)
 			if( (A != r.module_state_1) && (A != r.module_state_2) && (A != r.module_state_3) )
 				//Module is not currently active
 				r.client.screen -= A

@@ -88,17 +88,17 @@ proc/getsensorlevel(A)
 
 //The base miss chance for the different defence zones
 var/list/global/base_miss_chance = list(
-	BP_HEAD = 50,
+	BP_HEAD = 70,
 	BP_CHEST = 10,
 	BP_GROIN = 20,
-	BP_L_LEG = 50,
-	BP_R_LEG = 50,
+	BP_L_LEG = 60,
+	BP_R_LEG = 60,
 	BP_L_ARM = 30,
 	BP_R_ARM = 30,
 	BP_L_HAND = 50,
 	BP_R_HAND = 50,
-	BP_L_FOOT = 60,
-	BP_R_FOOT = 60,
+	BP_L_FOOT = 70,
+	BP_R_FOOT = 70,
 )
 
 //Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
@@ -172,13 +172,17 @@ var/list/global/organ_rel_size = list(
 				return zone
 
 	var/miss_chance = 10
+	var/scatter_chance
 	if (zone in base_miss_chance)
 		miss_chance = base_miss_chance[zone]
 	miss_chance = max(miss_chance + miss_chance_mod, 0)
+	scatter_chance = min(95, miss_chance + 60)
 	if(prob(miss_chance))
-		if(ranged_attack || prob(70))
+		if(ranged_attack && prob(scatter_chance))
 			return null
-		return pick(base_miss_chance)
+		else if(prob(70))
+			return null
+		return (ran_zone())
 	return zone
 
 //Replaces some of the characters with *, used in whispers. pr = probability of no star.
@@ -406,6 +410,9 @@ proc/is_blind(A)
 		if(C.sdisabilities & BLIND || C.blinded)
 			return 1
 	return 0
+
+/mob/proc/welding_eyecheck()
+	return
 
 /proc/broadcast_security_hud_message(var/message, var/broadcast_source)
 	broadcast_hud_message(message, broadcast_source, GLOB.sec_hud_users, /obj/item/clothing/glasses/hud/security)

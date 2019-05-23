@@ -19,6 +19,14 @@
 	parent_organ = BP_CHEST
 	color = "#0033cc"
 
+/obj/item/organ/internal/eyes/vox
+	eye_icon = 'icons/mob/human_races/species/vox/eyes.dmi'
+	color = "#0033cc"
+
+/obj/item/organ/internal/eyes/vox/armalis
+	eye_icon = 'icons/mob/human_races/species/vox/armalis_eyes.dmi'
+	color = "#0033cc"
+
 /obj/item/organ/internal/stomach/vox
 	name = "gizzard"
 	color = "#0033cc"
@@ -67,7 +75,7 @@
 		MATERIAL_TITANIUM =    TRUE,
 		MATERIAL_OSMIUM =      TRUE,
 		MATERIAL_SAND =        TRUE,
-		MATERIAL_GRAPHENE =    TRUE,
+		MATERIAL_GRAPHITE =    TRUE,
 		MATERIAL_PITCHBLENDE = TRUE,
 		MATERIAL_HEMATITE =    TRUE,
 		MATERIAL_QUARTZ =      TRUE,
@@ -78,7 +86,8 @@
 		MATERIAL_POTASH =      TRUE,
 		MATERIAL_BAUXITE =     TRUE,
 		MATERIAL_COPPER =      TRUE,
-		MATERIAL_ALUMINIUM =   TRUE
+		MATERIAL_ALUMINIUM =   TRUE,
+		MATERIAL_RUTILE = 	   TRUE
 	)
 	var/list/stored_matter = list()
 

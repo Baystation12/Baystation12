@@ -75,14 +75,6 @@
 	else animate_movement = NO_STEPS
 	. = ..()
 
-/obj/item/projectile/Destroy()
-	return ..()
-
-/obj/item/projectile/forceMove()
-	..()
-	if(istype(loc, /turf/space/) && istype(loc.loc, /area/space))
-		qdel(src)
-
 /obj/item/projectile/damage_flags()
 	return damage_flags
 
@@ -293,7 +285,9 @@
 	//the bullet passes through a dense object!
 	if(passthrough)
 		//move ourselves onto A so we can continue on our way.
-		forceMove(get_turf(A))
+		var/turf/T = get_turf(A)
+		if(T)
+			forceMove(T)
 		permutated.Add(A)
 		bumped = 0 //reset bumped variable!
 		return 0

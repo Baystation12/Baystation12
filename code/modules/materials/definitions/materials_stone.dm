@@ -1,10 +1,10 @@
 /material/diamond
 	name = MATERIAL_DIAMOND
-	lore_text = "An extremely hard allotrope of carbon. Valued for use in industrial tools."
+	lore_text = "An extremely hard allotrope of carbon. Valued for its use in industrial tools."
 	stack_type = /obj/item/stack/material/diamond
 	flags = MATERIAL_UNMELTABLE
 	cut_delay = 60
-	icon_colour = "#a0fff1"
+	icon_colour = COLOR_DIAMOND
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'

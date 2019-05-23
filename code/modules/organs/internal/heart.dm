@@ -42,8 +42,17 @@
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
 
+	// pulse mod starts out as just the chemical effect amount
 	var/pulse_mod = owner.chem_effects[CE_PULSE]
-
+	var/is_stable = owner.chem_effects[CE_STABLE]
+		
+	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
+	if(pulse_mod > 2 && !is_stable)
+		var/damage_chance = (pulse_mod - 2) ** 2
+		if(prob(damage_chance))
+			take_internal_damage(0.5)
+	
+	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > 30)
 		pulse_mod++
 	if(owner.shock_stage > 80)
@@ -71,13 +80,16 @@
 			pulse = PULSE_NONE
 			return
 
-	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
-	if(pulse && fibrillation && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
-		pulse = PULSE_THREADY
-		return
-
+	// Pulse normally shouldn't go above PULSE_2FAST
 	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
-	if(pulse != PULSE_NORM && owner.chem_effects[CE_STABLE])
+
+	// If fibrillation, then it can be PULSE_THREADY
+	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
+	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
+		pulse = PULSE_THREADY
+
+	// Stablising chemicals pull the heartbeat towards the center
+	if(pulse != PULSE_NORM && is_stable)
 		if(pulse > PULSE_NORM)
 			pulse--
 		else
@@ -89,6 +101,8 @@
 		//High pulse value corresponds to a fast rate of heartbeat.
 		//Divided by 2, otherwise it is too slow.
 		var/rate = (PULSE_THREADY - pulse)/2
+		if(owner.chem_effects[CE_PULSE] > 2)
+			heartbeat++
 
 		if(heartbeat >= rate)
 			heartbeat = 0
@@ -139,7 +153,7 @@
 				if(bleed_amount)
 					if(open_wound)
 						blood_max += bleed_amount
-						do_spray += "the [temp.artery_name] in \the [owner]'s [temp.name]"
+						do_spray += "[temp.name]"
 					else
 						owner.vessel.remove_reagent(/datum/reagent/blood, bleed_amount)
 
@@ -155,9 +169,16 @@
 			blood_max *= 0.8
 
 		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
-			owner.visible_message("<span class='danger'>Blood squirts from [pick(do_spray)]!</span>")
-			// It becomes very spammy otherwise. Arterial bleeding will still happen outside of this block, just not the squirt effect.
-			next_blood_squirt = world.time + 100
+			var/spray_organ = pick(do_spray)
+			owner.visible_message(
+				SPAN_DANGER("Blood sprays out from \the [owner]'s [spray_organ]!"),
+				FONT_HUGE(SPAN_DANGER("Blood sprays out from your [spray_organ]!"))
+			)
+			owner.Stun(1)
+			owner.eye_blurry = 2
+
+			//AB occurs every heartbeat, this only throttles the visible effect
+			next_blood_squirt = world.time + 80
 			var/turf/sprayloc = get_turf(owner)
 			blood_max -= owner.drip(ceil(blood_max/3), sprayloc)
 			if(blood_max > 0)
@@ -198,3 +219,6 @@
 			pulsesound = "extremely fast and faint"
 
 	. = "[pulsesound] pulse"
+
+/obj/item/organ/internal/heart/get_mechanical_assisted_descriptor()
+	return "pacemaker-assisted [name]"

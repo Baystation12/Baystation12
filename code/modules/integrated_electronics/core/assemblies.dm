@@ -104,6 +104,7 @@
 	STOP_PROCESSING(SScircuit, src)
 	for(var/circ in assembly_components)
 		remove_component(circ)
+		qdel(circ)
 	return ..()
 
 /obj/item/device/electronic_assembly/Process()
@@ -199,11 +200,11 @@
 
 		if(length(assembly_components) > components_per_page)
 			HTML += "<br>\["
-			for(var/i = 0 to round(length(assembly_components)/components_per_page))
-				if(i == interact_page)
-					HTML += " [i+1]"
+			for(var/i = 1 to ceil(length(assembly_components)/components_per_page))
+				if((i-1) == interact_page)
+					HTML += " [i]"
 				else
-					HTML += " <a href='?src=\ref[src];select_page=[i]'>[i+1]</a>"
+					HTML += " <a href='?src=\ref[src];select_page=[i-1]'>[i]</a>"
 			HTML += " \]"
 
 	HTML += "</body></html>"
@@ -387,6 +388,9 @@
 		playsound(src, 'sound/items/crowbar.ogg', 50, 1)
 		user.put_in_hands(IC)
 	add_allowed_scanner(user.ckey)
+
+	// Make sure we're not on an invalid page
+	interact_page = Clamp(interact_page, 0, ceil(length(assembly_components)/components_per_page)-1)
 
 	return TRUE
 

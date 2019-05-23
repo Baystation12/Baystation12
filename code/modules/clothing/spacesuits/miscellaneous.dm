@@ -96,16 +96,23 @@
 //Orange emergency space suit
 /obj/item/clothing/head/helmet/space/emergency
 	name = "Emergency Space Helmet"
-	icon_state = "emergencyhelm"
-	item_state = "emergencyhelm"
+	icon_state = "spacebowl"
+	light_overlay = "yellow_light"
 	desc = "A simple helmet with a built in light, smells like mothballs."
 	flash_protection = FLASH_PROTECTION_NONE
 
 /obj/item/clothing/suit/space/emergency
 	name = "Emergency Softsuit"
-	icon_state = "syndicate-orange"
+	icon_state = "space_emergency"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
 
 /obj/item/clothing/suit/space/emergency/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 4
+
+/obj/item/clothing/head/helmet/space/fishbowl
+	name = "spacesuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. The tinting can be toggled for flash protection at the cost of worse visibility."
+	icon_state = "spacebowl"
+	light_overlay = "yellow_light"
+	tinted = FALSE

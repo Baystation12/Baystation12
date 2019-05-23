@@ -42,6 +42,12 @@ var/list/floor_light_cache = list()
 		set_broken(FALSE)
 		damaged = null
 		update_brightness()
+	else if(isWrench(W))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		to_chat(user, "<span class='notice'>You dismantle the floor light.</span>")
+		new /obj/item/stack/material/steel(src.loc, 1)
+		new /obj/item/stack/material/glass(src.loc, 1)
+		qdel(src)
 	else if(W.force && user.a_intent == "hurt")
 		attack_hand(user)
 	return

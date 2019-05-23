@@ -127,7 +127,7 @@
 /obj/structure/closet/crate/freezer
 	name = "freezer"
 	desc = "A freezer."
-	temperature = -16 CELCIUS
+	temperature = -16 CELSIUS
 	closet_appearance = /decl/closet_appearance/crate/freezer
 
 	var/target_temp = T0C - 40
@@ -230,7 +230,7 @@
 		/obj/item/weapon/storage/plants = 2,
 		/obj/item/weapon/material/hatchet = 2,
 		/obj/item/weapon/wirecutters/clippers = 2,
-		/obj/item/device/analyzer/plant_analyzer = 2
+		/obj/item/device/scanner/plant = 2
 	)
 
 /obj/structure/closet/crate/secure/biohazard

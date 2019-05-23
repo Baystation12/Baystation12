@@ -6,7 +6,7 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ammonia,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sodium,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminum,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminium,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/silicon,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/phosphorus,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sulfur,

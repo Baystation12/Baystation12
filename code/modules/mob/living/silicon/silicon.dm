@@ -30,9 +30,9 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
-/mob/living/silicon/New()
+/mob/living/silicon/Initialize()
 	GLOB.silicon_mob_list += src
-	..()
+	. = ..()
 
 	if(silicon_radio)
 		silicon_radio = new silicon_radio(src)
@@ -272,6 +272,8 @@
 	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
+	if(!(alarm.alarm_z() in GetConnectedZlevels(get_z(src))))
+		return // Didn't actually hear it as far as we're concerned.
 	if(!next_alarm_notice)
 		next_alarm_notice = world.time + SecondsToTicks(10)
 

@@ -1017,11 +1017,16 @@
 		to_chat(usr, "<span class='warning'>You can't climb into the exosuit while buckled!</span>")
 		return
 
+	var/mob/living/carbon/human/H = usr
+	if (H.mob_size >= MOB_LARGE)
+		to_chat(usr, SPAN_WARNING("You're too big to fit in the exosuit!"))
+		return
+
 	src.log_message("[usr] tries to move in.")
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>")
+			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed, don't you think?</span>")
 			return
 	if (src.occupant)
 		to_chat(usr, "<span class='danger'>The [src.name] is already occupied!</span>")
@@ -1571,12 +1576,12 @@
 		return
 	if(href_list["add_req_access"] && add_req_access && F.getObj("id_card"))
 		if(!in_range(src, usr))	return
-		operation_req_access += F.getNum("add_req_access")
+		operation_req_access += F.get("add_req_access")
 		output_access_dialog(F.getObj("id_card"),F.getMob("user"))
 		return
 	if(href_list["del_req_access"] && add_req_access && F.getObj("id_card"))
 		if(!in_range(src, usr))	return
-		operation_req_access -= F.getNum("del_req_access")
+		operation_req_access -= F.get("del_req_access")
 		output_access_dialog(F.getObj("id_card"),F.getMob("user"))
 		return
 	if(href_list["finish_req_access"])

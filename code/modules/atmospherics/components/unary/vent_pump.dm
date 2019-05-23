@@ -48,6 +48,8 @@
 	var/radio_filter_out
 	var/radio_filter_in
 
+	var/controlled = TRUE  //if we should register with an air alarm on spawn
+
 /obj/machinery/atmospherics/unary/vent_pump/on
 	use_power = POWER_USE_IDLE
 	icon_state = "map_vent_out"
@@ -84,7 +86,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
 	power_channel = EQUIP
-	power_rating = 15000	//15 kW ~ 20 HP
+	power_rating = 45000
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
 	..()
@@ -93,7 +95,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
-	power_rating = 30000	//15 kW ~ 20 HP
+	power_rating = 30000
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/New()
 	..()
@@ -223,8 +225,8 @@
 	signal.source = src
 
 	signal.data = list(
-		"area" = src.area_uid,
-		"tag" = src.id_tag,
+		"area" = controlled ? area_uid : "NONE",
+		"tag" = id_tag,
 		"device" = "AVP",
 		"power" = use_power,
 		"direction" = pump_direction?("release"):("siphon"),
@@ -237,11 +239,12 @@
 		"flow_rate" = last_flow_rate,
 	)
 
-	if(!initial_loc.air_vent_names[id_tag])
-		var/new_name = "[initial_loc.name] Vent Pump #[initial_loc.air_vent_names.len+1]"
-		initial_loc.air_vent_names[id_tag] = new_name
-		src.SetName(new_name)
-	initial_loc.air_vent_info[id_tag] = signal.data
+	if(controlled)
+		if(!initial_loc.air_vent_names[id_tag])
+			var/new_name = "[initial_loc.name] Vent Pump #[initial_loc.air_vent_names.len+1]"
+			initial_loc.air_vent_names[id_tag] = new_name
+			SetName(new_name)
+		initial_loc.air_vent_info[id_tag] = signal.data
 
 	radio_connection.post_signal(src, signal, radio_filter_out)
 

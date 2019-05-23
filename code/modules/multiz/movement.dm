@@ -4,6 +4,7 @@
 
 	if(zMove(UP))
 		to_chat(src, "<span class='notice'>You move upwards.</span>")
+		zPull(UP)
 
 /mob/verb/down()
 	set name = "Move Down"
@@ -11,6 +12,7 @@
 
 	if(zMove(DOWN))
 		to_chat(src, "<span class='notice'>You move down.</span>")
+		zPull(DOWN)
 
 /mob/proc/zMove(direction)
 	if(eyeobj)
@@ -52,6 +54,34 @@
 
 	forceMove(destination)
 	return 1
+
+/mob/proc/zPull(direction)
+	//checks and handles pulled items across z levels
+	if(!pulling)
+		return 0
+
+	var/turf/start = pulling.loc
+	var/turf/destination = (direction == UP) ? GetAbove(pulling) : GetBelow(pulling)
+
+	if(!start.CanZPass(pulling, direction))
+		to_chat(src, "<span class='warning'>\The [start] blocked your pulled object!</span>")
+		stop_pulling()
+		return 0
+
+	if(!destination.CanZPass(pulling, direction))
+		to_chat(src, "<span class='warning'>The [pulling] you were pulling bumps up against \the [destination].</span>")
+		stop_pulling()
+		return 0
+
+	for(var/atom/A in destination)
+		if(!A.CanMoveOnto(pulling, start, 1.5, direction))
+			to_chat(src, "<span class='warning'>\The [A] blocks the [pulling] you were pulling.</span>")
+			stop_pulling()
+			return 0
+
+	pulling.forceMove(destination)
+	return 1
+
 
 
 /atom/proc/CanMoveOnto(atom/movable/mover, turf/target, height=1.5, direction = 0)
@@ -198,7 +228,7 @@
 	if(anchored)
 		return FALSE
 
-	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up in below))
+	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
 /mob/living/carbon/human/can_fall()

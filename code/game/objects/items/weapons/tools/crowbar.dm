@@ -7,8 +7,8 @@
 	slot_flags = SLOT_BELT
 	force = 14
 	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN
-	melee_accuracy_bonus = -20
-	throwforce = 7.0
+	melee_accuracy_bonus = -10
+	throwforce = 7
 	throw_range = 3
 	item_state = "crowbar"
 	w_class = ITEM_SIZE_NORMAL
@@ -23,15 +23,21 @@
 
 /obj/item/weapon/crowbar/prybar
 	name = "pry bar"
-	desc = "A steel bar with a wedge. It comes in a variety of configurations - collect them all."
-	icon_state = "prybar"
+	desc = "A steel bar with a wedge. It comes in a variety of configurations and colours - collect them all."
+	icon_state = "prybar_preview"
 	item_state = "crowbar"
-	force = 4.0
-	throwforce = 6.0
+	force = 4
+	throwforce = 6
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_STEEL = 80)
 
+	var/prybar_types = list("1","2","3","4","5")
+	var/valid_colours = list(COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BOTTLE_GREEN, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_VIOLET, COLOR_GRAY20)
+
 /obj/item/weapon/crowbar/prybar/Initialize()
-	icon_state = "prybar[pick("","_red","_green","_aubergine","_blue")]"
+	var/shape = pick(prybar_types)
+	icon_state = "bar[shape]_handle"
+	color = pick(valid_colours)
+	overlays += overlay_image(icon, "bar[shape]_hardware", flags=RESET_COLOR)
 	. = ..()

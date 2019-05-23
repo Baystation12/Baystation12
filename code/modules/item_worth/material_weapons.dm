@@ -7,7 +7,7 @@
 /obj/item/weapon/material/kitchen
 	worth_multiplier = 1.1
 
-/obj/item/weapon/material/butterfly
+/obj/item/weapon/material/knife/folding/balisong
 	worth_multiplier = 8
 
 /obj/item/weapon/material/harpoon

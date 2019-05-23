@@ -542,14 +542,14 @@
 			to_chat(user, "<span class='warning'>You must remove the floor plating in front of the APC first.</span>")
 			return
 		var/obj/item/stack/cable_coil/C = W
-		if(C.get_amount() < 10)
+		if(!C.can_use(10))
 			to_chat(user, "<span class='warning'>You need ten lengths of cable for APC.</span>")
 			return
 		user.visible_message("<span class='warning'>[user.name] adds cables to the APC frame.</span>", \
 							"You start adding cables to the APC frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 20, src))
-			if (C.amount >= 10 && !terminal && opened && has_electronics != 2)
+			if (C.can_use(10) && !terminal && opened && has_electronics != 2)
 				var/obj/structure/cable/N = T.get_cable_node()
 				if (prob(50) && electrocute_mob(usr, N, N))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -1155,8 +1155,8 @@
 // on 0=off, 1=on, 2=autooff
 // defines a state machine, returns the new state
 obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
+	//autoset will never turn on a channel set to off
 	switch(cur_state)
-		if(POWERCHAN_OFF); //autoset will never turn on a channel set to off
 		if(POWERCHAN_OFF_TEMP)
 			if(on == 1 || on == 2)
 				return POWERCHAN_ON

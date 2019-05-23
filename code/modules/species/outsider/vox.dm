@@ -1,10 +1,20 @@
 /datum/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
-	icobase = 'icons/mob/human_races/species/vox/body.dmi'
-	deform = 'icons/mob/human_races/species/vox/body.dmi'
-	husk_icon = 'icons/mob/human_races/species/vox/husk.dmi'
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws/strong, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/strong)
+	icobase =         'icons/mob/human_races/species/vox/body.dmi'
+	deform =          'icons/mob/human_races/species/vox/body.dmi'
+	husk_icon =       'icons/mob/human_races/species/vox/husk.dmi'
+	damage_overlays = 'icons/mob/human_races/species/vox/damage_overlay.dmi'
+	damage_mask =     'icons/mob/human_races/species/vox/damage_mask.dmi'
+	blood_mask =      'icons/mob/human_races/species/vox/blood_mask.dmi'
+
+	unarmed_types = list(
+		/datum/unarmed_attack/stomp, 
+		/datum/unarmed_attack/kick,  
+		/datum/unarmed_attack/claws/strong, 
+		/datum/unarmed_attack/punch, 
+		/datum/unarmed_attack/bite/strong
+	)
 	rarity_value = 4
 	description = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
 	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
@@ -62,9 +72,8 @@
 		)
 
 	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_HEAD = /obj/item/organ/external/head/vox
-		)
+		BP_GROIN = /obj/item/organ/external/groin/vox
+	)
 
 	has_organ = list(
 		BP_STOMACH =    /obj/item/organ/internal/stomach/vox,
@@ -73,7 +82,7 @@
 		BP_LIVER =      /obj/item/organ/internal/liver/vox,
 		BP_KIDNEYS =    /obj/item/organ/internal/kidneys/vox,
 		BP_BRAIN =      /obj/item/organ/internal/brain,
-		BP_EYES =       /obj/item/organ/internal/eyes,
+		BP_EYES =       /obj/item/organ/internal/eyes/vox,
 		BP_STACK =      /obj/item/organ/internal/stack/vox,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
@@ -123,4 +132,38 @@
 
 /datum/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "<span class='danger'>[T.His] beak is chipped! [T.He] [T.is] not even recognizable.</span>\n" //Pretty birds.
+	return "<span class='danger'>[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.</span>\n"
+
+/datum/species/vox/armalis
+	name = SPECIES_VOX_ARMALIS
+	name_plural = SPECIES_VOX_ARMALIS
+	icon_template =   'icons/mob/human_races/species/template_tall.dmi'
+	icobase =         'icons/mob/human_races/species/vox/armalis_body.dmi'
+	deform =          'icons/mob/human_races/species/vox/armalis_body.dmi'
+	husk_icon =       'icons/mob/human_races/species/vox/armalis_husk.dmi'
+	damage_overlays = 'icons/mob/human_races/species/vox/damage_overlay_armalis.dmi'
+	damage_mask =     'icons/mob/human_races/species/vox/damage_mask_armalis.dmi'
+	blood_mask =      'icons/mob/human_races/species/vox/blood_mask_armalis.dmi'
+
+	slowdown = 1
+	hidden_from_codex = TRUE
+	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
+	brute_mod = 0.8
+	burn_mod = 0.8
+
+	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/vox/armalis)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = 2,
+		/datum/mob_descriptor/build = 2,
+		/datum/mob_descriptor/vox_markings = 0
+	)
+
+/datum/species/vox/armalis/New()
+	..()
+	equip_adjust = list(
+		slot_l_hand_str = list("[NORTH]" = list("x" = 0, "y" = 4), "[EAST]" = list("x" = -3, "y" = 4), "[SOUTH]" = list("x" = 0, "y" = 4), "[WEST]" = list("x" =  3, "y" = 4)),
+		slot_r_hand_str = list("[NORTH]" = list("x" = 0, "y" = 4), "[EAST]" = list("x" =  3, "y" = 4), "[SOUTH]" = list("x" = 0, "y" = 4), "[WEST]" = list("x" = -3, "y" = 4)),
+		slot_back_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -3, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  3, "y" = 8)),
+		slot_belt_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -4, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  4, "y" = 8))
+	)

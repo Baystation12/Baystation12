@@ -71,51 +71,7 @@
 /obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	default_material = MATERIAL_PLASTIC
 
-/*
- * Knives
- */
-/obj/item/weapon/material/kitchen/utensil/knife
-	name = "knife"
-	desc = "A knife for eating with. Can cut through any food."
-	icon_state = "knife"
-	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
-	scoop_food = 0
-	sharp = 1
-	edge = 1
-
-// Identical to the tactical knife but nowhere near as stabby.
-// Kind of like the toy esword compared to the real thing.
-//Making the sprite clear that this is a small knife
-/obj/item/weapon/material/kitchen/utensil/knife/boot
-	name = "small knife"
-	desc = "A small, easily concealed knife."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "pocketknife_open"
-	item_state = "knife"
-	applies_material_colour = 0
-	unbreakable = 1
-
-/obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>You accidentally cut yourself with \the [src].</span>")
-		user.take_organ_damage(20)
-		return
-	return ..()
-
-/obj/item/weapon/material/kitchen/utensil/knife/unathiknife
-	name = "dueling knife"
-	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "unathiknife"
-	item_state = "knife"
-	attack_verb = list("ripped", "torn", "cut")
-	applies_material_colour = 0
-	unbreakable = 1
-
-/obj/item/weapon/material/kitchen/utensil/knife/plastic
-	default_material = MATERIAL_PLASTIC
-
-/*
+ /*
  * Rolling Pins
  */
 

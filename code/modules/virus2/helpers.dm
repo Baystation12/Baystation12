@@ -26,9 +26,11 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 			var/obj/item/I = M.wear_mask
 			//masks provide a small bonus and can replace overall bio protection
 			if(I)
-				score = max(score, round(0.06*I.armor["bio"]))
-				if (istype(I, /obj/item/clothing/mask))
-					score += 1 //this should be added after
+				var/datum/extension/armor/armor_datum = get_extension(I, /datum/extension/armor)
+				if(armor_datum)
+					score = max(score, round(0.06*armor_datum.get_value("bio")))
+					if (istype(I, /obj/item/clothing/mask))
+						score += 1 //this should be added after
 
 		if("Contact")
 			if(istype(H))
@@ -62,7 +64,7 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	if (vector == "Airborne")	//for airborne infections face-covering items give non-weighted protection value.
 		if(M.internal)
 			return 1
-		protection = max(protection, M.get_blocked_ratio(FACE, TOX, damage_flags = DAM_BIO))
+		protection = max(protection, M.get_blocked_ratio(BP_HEAD, TOX, damage_flags = DAM_BIO))
 
 	return prob(100 * protection + 15*M.chem_effects[CE_ANTIVIRAL])
 

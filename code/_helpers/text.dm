@@ -162,7 +162,7 @@
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-			if(127 to 255)	return			//rejects weird letters like �
+			if(127 to 255)	return			//rejects non-ASCII letters
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
@@ -420,6 +420,7 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "\[eclogo\]", "<img src = eclogo.png>")
 	t = replacetext(t, "\[xynlogo\]", "<img src = xynlogo.png>")
 	t = replacetext(t, "\[fleetlogo\]", "<img src = fleetlogo.png>")
+	t = replacetext(t, "\[ocielogo\]", "<img src = ocielogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
@@ -457,6 +458,7 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "<img src = eclogo.png>", "\[eclogo\]")
 	t = replacetext(t, "<img src = daislogo.png>", "\[daislogo\]")
 	t = replacetext(t, "<img src = xynlogo.png>", "\[xynlogo\]")
+	t = replacetext(t, "<img src = ocielogo.png>", "\[ocielogo\]")
 	t = replacetext(t, "<span class=\"paper_field\"></span>", "\[field\]")
 	t = strip_html_properly(t)
 	return t

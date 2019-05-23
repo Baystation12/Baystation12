@@ -4,7 +4,7 @@
 	name = "computer vendor"
 	desc = "A vending machine with a built-in microfabricator, capable of dispensing various computers."
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "robotics"
+	icon_state = "laptop"
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
@@ -27,6 +27,14 @@
 	var/dev_nanoprint = 0					// 0: None, 1: Standard
 	var/dev_card = 0						// 0: None, 1: Standard
 	var/dev_aislot = 0						// 0: None, 1: Standard
+
+/obj/machinery/lapvend/on_update_icon()
+	if(stat & BROKEN)
+		icon_state = "[initial(icon_state)]-broken"
+	else if(!(stat & NOPOWER))
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-off"
 
 // Removes all traces of old order and allows you to begin configuration from scratch.
 /obj/machinery/lapvend/proc/reset_order()
@@ -266,6 +274,7 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(state == 2)
 		if(process_payment(I,W))
 			fabricate_and_recalc_price(1)
+			flick("laptop-vend", src)
 			if((devtype == 1) && fabricated_laptop)
 				if(fabricated_laptop.battery_module)
 					fabricated_laptop.battery_module.charge_to_full()

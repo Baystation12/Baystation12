@@ -182,7 +182,6 @@
 		"freeze"		= 'sound/voice/bfreeze.ogg',
 		"god"			= 'sound/voice/bgod.ogg',
 		"i am the law"	= 'sound/voice/biamthelaw.ogg',
-		"insult"		= 'sound/voice/binsult.ogg',
 		"radio"			= 'sound/voice/bradio.ogg',
 		"secure day"	= 'sound/voice/bsecureday.ogg',
 		)

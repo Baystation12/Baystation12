@@ -138,6 +138,9 @@
 			return H.species.attempt_grab(H, src)
 
 		if(I_HURT)
+			if(H.incapacitated())
+				to_chat(H, "<span class='notice'>You can't attack while incapacitated.</span>")
+				return
 
 			if(!istype(H))
 				attack_generic(H,rand(1,3),"punched")
@@ -259,7 +262,7 @@
 /mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)
 	return
 
-/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message, var/environment_smash, var/damtype = BRUTE, var/armorcheck = "melee")
+/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message, var/environment_smash, var/damtype = BRUTE, var/armorcheck = "melee", dam_flags)
 
 	if(!damage || !istype(user))
 		return
@@ -269,7 +272,7 @@
 
 	var/dam_zone = pick(organs_by_name)
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	apply_damage(damage, damtype, affecting)
+	apply_damage(damage, damtype, affecting, dam_flags)
 	updatehealth()
 	return 1
 

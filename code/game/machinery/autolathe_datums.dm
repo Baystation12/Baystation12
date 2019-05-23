@@ -216,7 +216,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/knife
 	name = "kitchen knife"
-	path = /obj/item/weapon/material/knife
+	path = /obj/item/weapon/material/knife/kitchen
 	category = "General"
 
 /datum/autolathe/recipe/taperecorder
@@ -472,6 +472,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/hand_labeler
 	category = "General"
 
+/datum/autolathe/recipe/machete
+	name = "fabricated machete"
+	path = /obj/item/weapon/material/hatchet/machete/steel
+	category = "Arms and Ammunition"
+	resources = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 2500)
+
 /datum/autolathe/recipe/flamethrower
 	name = "flamethrower"
 	path = /obj/item/weapon/flamethrower/full
@@ -576,7 +582,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/tacknife
 	name = "tactical knife"
-	path = /obj/item/weapon/material/hatchet/tacknife
+	path = /obj/item/weapon/material/knife/combat
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -630,3 +636,15 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "plunger"
 	path = /obj/item/clothing/mask/plunger
 	category = "General"
+
+/datum/autolathe/recipe/skrellian_rifle_flechette
+	name = "ammunition (skrellian rifle, flechette)"
+	path = /obj/item/weapon/magnetic_ammo/skrell
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/skrellian_rifle_slug
+	name = "ammunition (skrellian rifle, slug)"
+	path = /obj/item/weapon/magnetic_ammo/skrell/slug
+	hidden = 1
+	category = "Arms and Ammunition"

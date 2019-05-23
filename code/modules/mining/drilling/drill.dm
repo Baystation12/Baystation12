@@ -28,8 +28,9 @@
 		MATERIAL_OSMIUM =   /obj/item/weapon/ore/osmium,
 		MATERIAL_HYDROGEN = /obj/item/weapon/ore/hydrogen,
 		MATERIAL_SAND =     /obj/item/weapon/ore/glass,
-		MATERIAL_GRAPHENE = /obj/item/weapon/ore/coal,
-		MATERIAL_ALUMINIUM = /obj/item/weapon/ore/aluminium
+		MATERIAL_GRAPHITE = /obj/item/weapon/ore/coal,
+		MATERIAL_ALUMINIUM = /obj/item/weapon/ore/aluminium,
+		MATERIAL_RUTILE = /obj/item/weapon/ore/rutile
 		)
 
 	//Upgrades
@@ -369,7 +370,8 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.stat) return
+	if(!CanPhysicallyInteract(usr))
+		return
 
 	if (src.anchored)
 		to_chat(usr, "It is anchored in place!")
@@ -382,3 +384,6 @@
 	if(connected)
 		disconnect()
 	..()
+
+/obj/machinery/mining/brace/AltClick()
+	rotate()

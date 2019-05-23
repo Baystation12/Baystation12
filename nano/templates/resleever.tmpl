@@ -1,0 +1,32 @@
+
+<div class='item'>
+	<div class='itemLabel'>
+		Occupant:
+	</div>
+	<div class='itemContent'>
+		{{:data.name}}
+	</div>
+</div>
+<div class='item'>
+	<div class='itemLabel'>
+		Neural Lace backup:
+	</div>
+	<div class='itemContent'>
+		{{:data.lace}}
+	</div>
+</div>
+<div class='item'>
+	<div class='itemLabel'>
+		Procedure Progress:
+	</div>
+	<div class='itemContent'>
+		{{:helper.displayBar(data.remaining, 0, data.timetosleeve, 'average')}}
+	</div>
+</div>
+<div class='item'>
+	{{:helper.link("Start Procedure", null, {'begin' : 1}, data.ready ? null : 'disabled', null)}}
+</div>
+<div class='item'>
+	{{:helper.link("Eject Occupan", null,  {'eject' : 1}, data.isOccupiedEjectable ? null : 'disabled', null)}}
+	{{:helper.link("Eject Neural Lace", null,  {'ejectlace' : 1}, data.isLaceEjectable ? null : 'disabled', null)}}
+</div>

@@ -14,6 +14,7 @@
 	var/error
 	var/is_edited
 	usage_flags = PROGRAM_ALL
+	category = PROG_OFFICE
 
 /datum/computer_file/program/wordprocessor/proc/open_file(var/filename)
 	var/datum/computer_file/data/F = get_file(filename)
@@ -79,7 +80,8 @@
 		\[daislogo\] - Inserts the Deimos Advanced Information Systems logo.
 		\[xynlogo\] - Inserts the Xyngergy logo.
 		\[iccgseal\] - Inserts ICCG seal
-		\[fleetlogo\] - Inserts the logo of the SCG Fleet"}
+		\[fleetlogo\] - Inserts the logo of the SCG Fleet"
+		\[ocielogo\] - Inserts the logo of the Office of Civil Investigation and Enforcement"}
 
 		to_chat(usr, help)
 		return 1

@@ -104,22 +104,24 @@
 			to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
 			return
 
-		if(!B.key)
-			var/ghost_can_reenter = 0
-			if(B.mind)
+		var/ghost_can_reenter = 0
+		if(B.mind)
+			if(!B.key)
 				for(var/mob/observer/ghost/G in GLOB.player_list)
 					if(G.can_reenter_corpse && G.mind == B.mind)
 						ghost_can_reenter = 1
 						break
-			if(!ghost_can_reenter)
-				to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
-				return
+			else
+				ghost_can_reenter = 1
+		if(!ghost_can_reenter)
+			to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
+			return
 
-			if(!user.unEquip(W))
-				return
+		if(!user.unEquip(W))
+			return
 
 		SSstatistics.add_field("cyborg_frames_built",1)
-		var/mob/living/silicon/robot/O = new product(get_turf(loc), unfinished = 1)
+		var/mob/living/silicon/robot/O = new product(get_turf(loc))
 		if(!O)
 			return
 
@@ -135,7 +137,6 @@
 
 		var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
 		chest.cell.forceMove(O)
-		user.drop_from_inventory(W)
 		W.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 
 		// Since we "magically" installed a cell, we also have to update the correct component.

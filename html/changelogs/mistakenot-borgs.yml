@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - rscdel: "The flying pizza sprites are no longer available to crew robot modules."
-  - rscadd: "A flying robot frame can now be constructed as an alternative to standard robot. It uses the same arms, chest and head as the regular robot, but needs the 'flyer' frame."
-  - rscadd: "Flying robot frames produce flying robots, which use the flying pizza sprites and can pass over tables. They have a selection of unique modules to pick from and are generally faster but more fragile."

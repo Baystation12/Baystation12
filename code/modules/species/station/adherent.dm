@@ -7,10 +7,10 @@
 	whose home system and burgeoning stellar empire was scoured to bedrock by a solar flare. \
 	Physically, they are large, floating squidlike machines made of a crystalline composite."
 	hidden_from_codex = FALSE
+	silent_steps = TRUE
 
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
-	silent_steps =            TRUE // Antigravity squids.
 
 	icon_template =           'icons/mob/human_races/species/adherent/template.dmi'
 	icobase =                 'icons/mob/human_races/species/adherent/body.dmi'

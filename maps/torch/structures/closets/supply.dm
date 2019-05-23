@@ -89,7 +89,7 @@
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/workboots,
-		/obj/item/device/analyzer,
+		/obj/item/device/scanner/gas,
 		/obj/item/weapon/storage/ore,
 		/obj/item/device/radio/headset/headset_mining,
 		/obj/item/device/radio/headset/headset_mining/alt,
@@ -99,6 +99,6 @@
 		/obj/item/weapon/crowbar,
 		/obj/item/clothing/glasses/material,
 		/obj/item/clothing/glasses/meson,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng, /obj/item/weapon/storage/backpack/messenger/engi)),
+		/obj/item/weapon/storage/backpack/dufflebag/eng
 	)

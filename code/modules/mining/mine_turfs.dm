@@ -43,10 +43,8 @@ var/list/mining_floors = list()
 	if (!mining_walls["[src.z]"])
 		mining_walls["[src.z]"] = list()
 	mining_walls["[src.z]"] += src
-	spawn(0)
-		MineralSpread()
-	spawn(2)
-		update_icon(1)
+	MineralSpread()
+	update_icon(1)
 
 /turf/simulated/mineral/Destroy()
 	if (mining_walls["[src.z]"])
@@ -423,6 +421,7 @@ var/list/mining_floors = list()
 	base_desc = "Gritty and unpleasant."
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	base_icon_state = "asteroid"
+	footstep_type = FOOTSTEP_ASTEROID
 
 	initial_flooring = null
 	initial_gas = null

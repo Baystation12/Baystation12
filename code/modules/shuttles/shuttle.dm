@@ -173,6 +173,9 @@
 		var/turf/dst_turf = turf_translation[src_turf]
 		if(src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it
 			for(var/atom/movable/AM in dst_turf)
+				if(AM.movable_flags & MOVABLE_FLAG_DEL_SHUTTLE)
+					qdel(AM)
+					continue
 				if(!AM.simulated)
 					continue
 				if(isliving(AM))

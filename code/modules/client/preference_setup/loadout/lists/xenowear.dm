@@ -166,5 +166,5 @@
 	display_name = "vox breathing mask"
 	path = /obj/item/clothing/mask/gas/vox
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_VOX)
+	whitelisted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
 

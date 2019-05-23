@@ -77,7 +77,7 @@
 /area/slavers_base/mort)
 "ar" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "as" = (
@@ -110,7 +110,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "az" = (
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aA" = (
@@ -3955,7 +3955,7 @@
 /area/slavers_base/demo)
 "jM" = (
 /obj/structure/table/standard,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jN" = (

@@ -36,7 +36,13 @@
 /obj/effect/overmap/ship/landable/find_z_levels()
 	for(var/i = 0 to multiz)
 		world.maxz++
-		map_z += world.maxz 
+		map_z += world.maxz
+		// Autobuild carpspawns for shuttles, it boxes them in
+		for(var/x = round(world.maxx/2) - 12, x <= round(world.maxx/2) + 12, x+= 12)
+			for(var/y = round(world.maxy/2) - 18, y <= round(world.maxy/2) + 18, y+= 18)
+				if(x == round(world.maxx/2) && y == round(world.maxy/2))//Skips the center spawn
+					continue
+				new /obj/effect/landmark/carpspawn(locate(x + rand(-2, 2), y + rand(-4, 4), world.maxz))//not too far, not too close
 		// Not really the center, but rather where the shuttle landmark should be
 		if(i == multiz)
 			var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
@@ -44,6 +50,10 @@
 			add_landmark(landmark, shuttle)
 			if(multiz)
 				new /obj/effect/landmark/map_data(center_loc, (multiz + 1))
+
+/obj/effect/landmark/carpspawn
+	name ="carpspawn"
+	movable_flags = MOVABLE_FLAG_DEL_SHUTTLE
 
 /obj/effect/overmap/ship/landable/get_areas()
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]

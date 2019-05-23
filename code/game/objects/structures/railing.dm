@@ -121,7 +121,7 @@
 			neighbor_status |= 64
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir))).
+	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir)))
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 4
 			if (UpdateNeighbors)

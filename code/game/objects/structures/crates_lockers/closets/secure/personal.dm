@@ -16,7 +16,7 @@
 /obj/structure/closet/secure_closet/personal/patient
 	name = "patient's closet"
 /obj/structure/closet/secure_closet/personal/patient/WillContain()
-	return
+	return list(/obj/item/clothing/suit/hospital/blue, /obj/item/clothing/suit/hospital/green, /obj/item/clothing/suit/hospital/pink)
 
 /obj/structure/closet/secure_closet/personal/cabinet
 	closet_appearance = /decl/closet_appearance/cabinet/secure
@@ -29,7 +29,7 @@
 
 /obj/structure/closet/secure_closet/personal/togglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
 	if (..() && !src.registered_name)
-		id_card = id_card ? id_card : user.GetIdCard()
+		id_card = istype(id_card) ? id_card : user.GetIdCard()
 		if (id_card)
 			set_owner(id_card.registered_name)
 

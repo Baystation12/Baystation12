@@ -6,6 +6,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol
 	accuracy_power = 7
 	var/empty_icon = TRUE  //If it should change icon when empty
+	var/ammo_indicator = FALSE
 
 /obj/item/weapon/gun/projectile/pistol/on_update_icon()
 	..()
@@ -14,7 +15,15 @@
 			icon_state = initial(icon_state)
 		else
 			icon_state = "[initial(icon_state)]-e"
-
+	if(ammo_indicator)
+		if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+			overlays += image(icon, "ammo_bad")
+		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+			overlays += image(icon, "ammo_warn")
+			return
+		else
+			overlays += image(icon, "ammo_ok")
+	
 /obj/item/weapon/gun/projectile/pistol/military
 	name = "military pistol"
 	desc = "The Hephaestus Industries P20 - a mass produced kinetic sidearm in widespread service with the SCGDF."
@@ -25,6 +34,7 @@
 	safety_icon = "safety"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	fire_delay = 7
+	ammo_indicator = TRUE
 
 /obj/item/weapon/gun/projectile/pistol/military/alt
 	desc = "The HelTek Optimus, best known as the standard-issue sidearm for the ICCG Navy."
@@ -66,6 +76,7 @@
 	accuracy = 2
 	one_hand_penalty = 2
 	bulk = 3
+	ammo_indicator = TRUE
 
 /obj/item/weapon/gun/projectile/pistol/throwback
 	name = "pistol"
@@ -100,8 +111,9 @@
 	max_shells = 8
 	caliber = CALIBER_GYROJET
 	origin_tech = list(TECH_COMBAT = 3)
-	ammo_type = /obj/item/ammo_casing/gyrojet
 	magazine_type = /obj/item/ammo_magazine/gyrojet
+	allowed_magazines = /obj/item/ammo_magazine/gyrojet
+	handle_casings = CLEAR_CASINGS	//the projectile is the casing
 	fire_delay = 25
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'

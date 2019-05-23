@@ -14,6 +14,7 @@
 	var/icon
 	var/icon_base
 	var/color
+	var/footstep_type = FOOTSTEP_BLANK
 
 	var/has_base_range
 	var/has_damage_range
@@ -63,6 +64,7 @@
 	damage_temperature = T0C+200
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 	can_engrave = FALSE
+	footstep_type = FOOTSTEP_CARPET
 
 /decl/flooring/carpet/blue
 	name = "blue carpet"
@@ -96,12 +98,13 @@
 
 /decl/flooring/linoleum
 	name = "linoleum"
-	desc = "It's like the 2390's all over again."
+	desc = "It's like the 2090's all over again."
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_base = "lino"
 	can_paint = 1
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
+	footstep_type = FOOTSTEP_TILES
 
 /decl/flooring/tiling
 	name = "floor"
@@ -114,6 +117,7 @@
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
 	build_type = /obj/item/stack/tile/floor
 	can_paint = 1
+	footstep_type = FOOTSTEP_TILES
 
 /decl/flooring/tiling/mono
 	icon_base = "monotile"
@@ -141,7 +145,8 @@
 
 /decl/flooring/tiling/dark/mono
 	icon_base = "monotile"
-
+	build_type = null
+	
 /decl/flooring/tiling/freezer
 	desc = "Don't slip."
 	icon_base = "freezer"
@@ -163,13 +168,16 @@
 /decl/flooring/tiling/new_tile
 	icon_base = "tile_full"
 	color = null
-
+	build_type = null
+	
 /decl/flooring/tiling/new_tile/cargo_one
 	icon_base = "cargo_one_full"
-
+	build_type = null
+	
 /decl/flooring/tiling/new_tile/kafel
 	icon_base = "kafel_full"
-
+	build_type = null
+	
 /decl/flooring/tiling/stone
 	icon_base = "stone"
 	build_type = /obj/item/stack/tile/stone
@@ -202,6 +210,7 @@
 	descriptor = "planks"
 	build_type = /obj/item/stack/tile/wood
 	flags = TURF_CAN_BREAK | TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER
+	footstep_type = FOOTSTEP_WOOD
 
 /decl/flooring/wood/mahogany
 	icon_base = "mahogany"
@@ -219,6 +228,10 @@
 	icon_base = "walnut"
 	build_type = /obj/item/stack/tile/walnut
 
+/decl/flooring/wood/bamboo
+	icon_base = "maple"
+	build_type = /obj/item/stack/tile/bamboo
+
 /decl/flooring/reinforced
 	name = "reinforced floor"
 	desc = "Heavily reinforced with steel plating."
@@ -231,6 +244,7 @@
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
 	can_paint = 1
+	footstep_type = FOOTSTEP_PLATING
 
 /decl/flooring/reinforced/circuit
 	name = "processing strata"
