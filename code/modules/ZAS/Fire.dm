@@ -39,7 +39,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /zone/proc/process_fire()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
 
-	var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
+	//datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
+	//var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
+	var/firelevel = burn_gas.zburn(src, force_burn = 1, no_check = 1)
 
 	air.merge(burn_gas)
 
@@ -78,7 +80,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			continue
 
 		fuel.amount -= fuel_to_remove
-		if(fuel.amount <= 0)
+		if(fuel.amount <= fuel_to_remove)
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
@@ -101,7 +103,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in src
 	zone.fire_tiles |= src
-	if(fuel) zone.fuel_objs += fuel
+	if(fuel)
+		zone.fuel_objs += fuel
+	fire.process()
 
 	return 0
 
@@ -305,8 +309,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_gas_fuel)
-		for(var/g in burned_fuel.gas)
-			adjust_gas(gas_data.burn_product[g], burned_fuel.gas[g])
+		if(burned_fuel)
+			for(var/g in burned_fuel.gas)
+				adjust_gas(gas_data.burn_product[g], burned_fuel.gas[g])
 
 		if(zone)
 			zone.remove_liquidfuel(used_liquid_fuel, !check_combustability())

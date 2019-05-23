@@ -606,12 +606,17 @@
 	result = null
 	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0,location))
-		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
+	var/max_range = max(created_volume / 10, 1)
+	for(var/turf/simulated/floor/target_tile in range(max_range,location))
+		var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F = new(target_tile, created_volume)
+		F.Spread()
+		//target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
+		break
 	holder.del_reagent("napalm")
 
 /datum/chemical_reaction/chemsmoke
@@ -1967,4 +1972,3 @@
 	name = "Antidexafen"
 	result = /datum/reagent/antidexafen
 	required_reagents = list(/datum/reagent/paracetamol = 1, /datum/reagent/carbon = 1)
-	result_amount = 2
