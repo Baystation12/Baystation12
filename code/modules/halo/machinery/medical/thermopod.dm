@@ -12,7 +12,7 @@
 	anchored = 1
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
-	var/mob/living/carbon/human/occupant = null
+	var/tmp/mob/living/carbon/human/occupant = null
 	var/list/chems = list("Leporazine" = LEPORAZINE, "Cryoprethaline" = CRYOP, "Hexaline" = HEXALINE, "Ketoprofen" = KETOPROF)
 
 	use_power = 1
@@ -27,9 +27,12 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 
+	var/targetTemp = 310 //Default to 310K
 	if(occupant)
+		if(occupant.species.body_temperature)
+			targetTemp = occupant.species.body_temperature
 		var/bodytemp = occupant.bodytemperature
-		if((bodytemp > 310 && bodytemp < (310 + 40 * TEMPERATURE_DAMAGE_COEFFICIENT)) || (bodytemp < 311 && bodytemp > (311 - 40 * TEMPERATURE_DAMAGE_COEFFICIENT))) //Would leporazine work fast?
+		if((bodytemp > targetTemp && bodytemp < (targetTemp + 40 * TEMPERATURE_DAMAGE_COEFFICIENT)) || (bodytemp < (targetTemp + 1) && bodytemp > ((targetTemp + 1) - 40 * TEMPERATURE_DAMAGE_COEFFICIENT))) //Would leporazine work fast?
 			if(occupant.reagents.get_reagent_amount(LEPORAZINE) < 10)
 				var/amount = 10 - occupant.reagents.get_reagent_amount(LEPORAZINE)
 				use_power(amount * CHEM_SYNTH_ENERGY)
