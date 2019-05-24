@@ -20,6 +20,7 @@
 	components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
 	components["camera"] =         new/datum/robot_component/camera(src)
 	components["comms"] =          new/datum/robot_component/binary_communication(src)
+	components["armour"] =         new/datum/robot_component/armour/light(src)
 
 /mob/living/silicon/robot/flying/Life()
 	. = ..()

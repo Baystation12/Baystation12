@@ -75,6 +75,13 @@
 	external_type = /obj/item/robot_parts/robot_component/armour
 	max_damage = 150
 
+// LIGHT ARMOUR
+// Same as armour, but for flying borgs - Less protection.
+/datum/robot_component/armour/light
+	name = "light armour plating"
+	external_type = /obj/item/robot_parts/robot_component/armour/light
+	max_damage = 75
+
 // ACTUATOR
 // Enables movement.
 // Uses no power when idle. Uses 200J for each tile the cyborg moves.
@@ -226,6 +233,9 @@
 	name = "armour plating"
 	icon_state = "armor"
 	icon_state_broken = "armor_broken"
+
+/obj/item/robot_parts/robot_component/armour/light
+	name = "light-weight armour plating"
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"
