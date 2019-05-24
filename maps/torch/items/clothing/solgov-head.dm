@@ -258,6 +258,16 @@
 	desc = "An SCG Expeditionary Corps beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_command"
 
+/obj/item/clothing/head/beret/solgov/expedition/branch
+	name = "\improper Field Operations beret"
+	desc = "An SCG Fleet beret carrying insignia of the Field Operations section of the Expeditionary Corps. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_fieldOps"
+
+/obj/item/clothing/head/beret/solgov/expedition/branch/observatory
+	name = "\improper Observatory beret"
+	desc = "An SCG Fleet beret carrying insignia of the Observatory section of the Expeditionary Corps. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_observatory"
+
 /obj/item/clothing/head/beret/solgov/fleet
 	name = "fleet beret"
 	desc = "A navy blue beret belonging to the SCG Fleet. For personnel that are more inclined towards style than safety."
