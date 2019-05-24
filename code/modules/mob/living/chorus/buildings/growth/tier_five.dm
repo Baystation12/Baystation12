@@ -43,8 +43,8 @@
 	dropamt = 5
 	var/mob/living/chorus/owner
 
-/obj/effect/meteor/egg/New(var/newloc, var/o)
-	..()
+/obj/effect/meteor/egg/Initialize(var/maploading, var/o)
+	. = ..()
 	if(o)
 		owner = o
 		GLOB.destroyed_event.register(owner, src, .proc/owner_died)

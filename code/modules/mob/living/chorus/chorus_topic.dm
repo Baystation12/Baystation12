@@ -16,12 +16,10 @@
 		if(href_list["follow"])
 			follow = 1
 		if(a)
-			if(following)
-				stop_follow()
-			eyeobj.setLoc(get_turf(a))
 			if(follow)
 				follow_follower(a)
-			to_chat(src, "<span class='notice'>[follow ? "Following" : "Jumping to"] \the [a]</span>")
+			else
+				eyeobj.EyeMove(get_turf(a))
 		return 1
 	if(href_list["selected"])
 		var/datum/chorus_building/cb = form.get_building_by_type(href_list["selected"])

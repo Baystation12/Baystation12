@@ -18,7 +18,7 @@
 
 	// Things you might plausibly want to follow
 	if(istype(A,/atom/movable))
-		ManualFollow(A)
+		start_following(A)
 	// Otherwise jump
 	else
 		stop_following()

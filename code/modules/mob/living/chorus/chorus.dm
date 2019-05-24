@@ -24,8 +24,8 @@
 
 /mob/living/chorus/Destroy()
 	eyeobj.release(src)
-	qdel(eyeobj)
-	qdel(chorus_net)
+	QDEL_NULL(eyeobj)
+	QDEL_NULL(chorus_net)
 	. = ..()
 
 /mob/living/chorus/update_sight()

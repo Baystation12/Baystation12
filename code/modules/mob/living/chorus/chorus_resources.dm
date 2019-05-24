@@ -38,9 +38,7 @@
 	return FALSE
 
 /mob/living/chorus/Destroy()
-	for(var/d in resources)
-		qdel(d)
-	resources = null
+	QDEL_NULL_LIST(resources)
 	. = ..()
 
 /mob/living/chorus/proc/update_resource(var/datum/chorus_resource/r)

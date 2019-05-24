@@ -102,3 +102,6 @@
 		var/datum/mind/mind = m
 		if(mind.current && get_dist(target, mind.current) <= dist)
 			. += mind.current
+
+/mob/living/chorus/proc/follow_follower(var/follow)
+	eyeobj.start_following(follow)
