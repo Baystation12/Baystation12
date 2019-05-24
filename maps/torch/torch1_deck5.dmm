@@ -2077,6 +2077,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
 	dir = 4
 	},
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "et" = (
@@ -15783,6 +15784,10 @@
 "Sd" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fifthdeck/fore)
+"Sf" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "Sg" = (
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -32529,7 +32534,7 @@ oU
 iT
 hw
 kg
-hz
+Sf
 ki
 kL
 hl

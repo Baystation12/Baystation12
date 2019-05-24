@@ -14704,6 +14704,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
+"bmJ" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/carpet/green,
+/area/rnd/breakroom)
 "bnG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -16256,6 +16260,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
 "daB" = (
@@ -23984,7 +23989,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/mob/living/simple_animal/cat/fluff/Runtime,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/carpet,
 /area/medical/mentalhealth)
 "lGb" = (
@@ -26412,6 +26417,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
+"ovZ" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/carpet/purple,
+/area/chapel/main)
 "owb" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
@@ -56407,7 +56416,7 @@ ugg
 jlb
 aAP
 pSA
-ozb
+bmJ
 ozb
 pSA
 aGG
@@ -57409,7 +57418,7 @@ apR
 oob
 nMb
 oob
-oob
+ovZ
 oob
 awE
 hiD
