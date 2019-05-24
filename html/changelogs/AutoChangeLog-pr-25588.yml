@@ -1,0 +1,5 @@
+author: "Flying_loulou"
+delete-after: True
+changes: 
+  - rscadd: "Following extensive training the personnel of the Torch is now able to clip their helmets on their plate carrier's suit storage slot."
+  - rscadd: "Following even more extensive training the medical technicians can now clip their EMT helmet on their MT Chest-rig's suit storage slot."
