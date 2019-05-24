@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Flying borg speed has been reduced one level. Flying borg default speed is now the same as a regular borg with a VTEC module. Flying borgs with a VTEC module will be as fast as the old default flying borg speed."
