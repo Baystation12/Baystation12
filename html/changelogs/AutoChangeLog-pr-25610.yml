@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "Pill bottles can now be printed at autolathes"
