@@ -18,13 +18,11 @@
 		/datum/job/unsc_ship_marineplatoon,\
 		/datum/job/bertelsODST,\
 		/datum/job/bertelsODSTO,\
-		//
 		/datum/job/colonist,\
 		/datum/job/colonist_mayor,\
 		/datum/job/police,\
 		/datum/job/police_chief,\
 		/datum/job/colony_ai,\
-		//
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_honour_guard,\
