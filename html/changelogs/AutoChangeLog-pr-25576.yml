@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Spacesuits etc now have maximum pressures they can handle. You can check their codex entry to see it."
