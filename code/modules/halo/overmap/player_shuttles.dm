@@ -68,7 +68,7 @@
 
 //FACTION DEFINES//
 /datum/npc_ship/cov_shuttle
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Shuttle.dmm')
+	mapfile_links = list('maps//faction_bases/Covenant_Shuttle.dmm')
 	fore_dir = WEST
 	map_bounds = list(3,26,48,3)
 
@@ -78,7 +78,7 @@
 	ship_datums = list(/datum/npc_ship/cov_shuttle)
 
 /datum/npc_ship/unsc_shuttle
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Human_Shuttle.dmm')
+	mapfile_links = list('maps/faction_bases/Human_Shuttle.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,29,48,5)
 

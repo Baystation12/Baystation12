@@ -4,8 +4,6 @@
 #include "spawn_jobs.dm"
 #include "lift.dm"
 
-#include "../../../geminus_city/areas.dm"
-
 
 #include "ExoResearch_0.dmm"
 #include "ExoResearch_1.dmm"

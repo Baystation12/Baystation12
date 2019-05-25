@@ -40,6 +40,8 @@ var/list/points_of_interest = list()
 
 	var/last_adminwarn_attack = 0
 
+	var/controlling_faction = null
+
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
 	if(name == "map object")

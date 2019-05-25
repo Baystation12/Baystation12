@@ -88,7 +88,7 @@
 	covenant_ship_area_parent = /area/covenant_corvette
 	cov_ship = locate(/obj/effect/overmap/ship/covenant_corvette) in world
 	unsc_ship = locate(/obj/effect/overmap/ship/odst_corvette) in world
-	human_colony = locate(/obj/effect/overmap/sector/exo_depot) in world
+	human_colony = locate(/obj/effect/overmap/sector/geminus_city) in world
 	//**** finish hard codes. remove these later ****//
 
 	//find the covenant ship for objective purposes
@@ -119,7 +119,7 @@
 	for(var/objective_type in objective_types)
 		var/datum/objective/objective = new objective_type()
 		faction.all_objectives.Add(objective)
-		faction.max_points += objective.get_award_points()
+		faction.max_points += objective.get_win_points()
 
 		//these ones might not be able to do all their setup prior to round start
 		if(objective.find_specific_target)
@@ -239,12 +239,16 @@
 		else if(!second_faction)
 			second_faction = faction
 		for(var/datum/objective/objective in faction.all_objectives)
-			if(objective.check_completion())
-				text += "<span class='good'>Completed (+[objective.win_points]): [objective.short_text]</span><br>"
-				faction.points += objective.win_points
+			var/result = objective.check_completion()
+			if(result == 1)
+				text += "<span class='good'>Completed (+[objective.get_win_points()]): [objective.short_text]</span><br>"
+				faction.points += objective.get_win_points()
+			else if(result == 2)
+				text += "<span class='mixed'>Partially Completed (+[objective.get_win_points()]): [objective.short_text]</span><br>"
+				faction.points += objective.get_win_points()
 			else if(objective.lose_points)
-				text += "<span class='bad'>Failed (-[objective.lose_points]): [objective.short_text]</span><br>"
-				faction.points -= objective.lose_points
+				text += "<span class='bad'>Failed (-[objective.get_lose_points()]): [objective.short_text]</span><br>"
+				faction.points -= objective.get_lose_points()
 			else
 				text += "<span class='prefix'>Not Completed: [objective.short_text]</span><br>"
 

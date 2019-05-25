@@ -82,3 +82,7 @@
 
 	if(explanation_text == "Free Objective")
 		explanation_text  = "Protect the Insurrectionist Commander."
+
+/datum/objective/colony_capture/innie
+	short_text = "Colonial revolt"
+	explanation_text = "Raise the colony in revolt! We must remove the UNSC from our world."

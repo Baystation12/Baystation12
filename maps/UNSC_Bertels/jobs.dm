@@ -45,7 +45,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 
 /datum/job/unsc_ship_iwo
-	title = "UNSC Infantry Weapons Officer"
+	title = "UNSC Bertels Infantry Weapons Officer"
 	spawn_faction = "UNSC"
 	total_positions = 1
 	spawn_positions = 1

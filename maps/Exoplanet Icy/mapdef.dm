@@ -1,9 +1,9 @@
 
-/datum/map/first_contact
+/datum/map/ks7_elmsville
 	name = "111 Tauri \"Elmsville\""
 	full_name = "111 Tauri System, Human Colony \"Emsville\""
 	system_name = "111 Tauri"
-	path = "first_contact"
+	path = "ks7_elmsville"
 	station_levels = list()
 	admin_levels = list()
 	accessible_z_levels = list()
