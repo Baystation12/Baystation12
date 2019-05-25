@@ -1,0 +1,5 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - rscadd: "You can now permanently disable radio/teleporter beacons with an emag or EMP attack. Any connected teleporters will also lose their connection."
+  - rscadd: "Anchored underfloor beacons can be repaired with nanopaste. Handheld or portable beacons are unrecoverable and must be replaced."
