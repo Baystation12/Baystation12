@@ -24,10 +24,8 @@
 
 /obj/structure/disposalconstruct/proc/update_verbs()
 	if(anchored)
-		verbs -= /obj/structure/disposalconstruct/proc/rotate
 		verbs -= /obj/structure/disposalconstruct/proc/flip
 	else
-		verbs += /obj/structure/disposalconstruct/proc/rotate
 		verbs += /obj/structure/disposalconstruct/proc/flip
 
 // update iconstate and dpdir due to dir and type
@@ -113,26 +111,6 @@
 /obj/structure/disposalconstruct/hide(var/intact)
 	set_invisibility((intact && level==1) ? 101: 0)	// hide if floor is intact
 	update()
-
-
-// flip and rotate verbs
-/obj/structure/disposalconstruct/proc/rotate()
-	set category = "Object"
-	set name = "Rotate Pipe"
-	set src in view(1)
-
-	if(usr.stat || usr.restrained() || !Adjacent(usr) || usr.incapacitated())
-		return
-
-	if(anchored)
-		to_chat(usr, "You must unfasten the pipe before rotating it.")
-		return
-
-	set_dir(turn(dir, -90))
-	update()
-
-/obj/structure/disposalconstruct/AltClick()
-	rotate()
 
 /obj/structure/disposalconstruct/proc/flip()
 	set category = "Object"
