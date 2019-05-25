@@ -3,7 +3,7 @@
 	name = "SDV Vindictive Infraction"
 	desc = "The sillhouette of this ship matches no known ship signatures"
 
-	icon = 'maps/first_contact/maps/Covenant Corvette/Corvette2.dmi'
+	icon = 'Corvette2.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 	vessel_mass = 5

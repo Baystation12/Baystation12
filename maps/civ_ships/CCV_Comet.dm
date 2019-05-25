@@ -5,7 +5,7 @@
 	name = "Civilian Vessel"
 	desc = "A Civilian vessel with a traditional cargo-hauler design."
 
-	icon = 'maps/first_contact/freighter.dmi'
+	icon = 'freighter.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 

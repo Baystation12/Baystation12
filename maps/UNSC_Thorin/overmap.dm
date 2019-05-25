@@ -3,7 +3,7 @@
 	name = "URFS Thorn"
 	desc = "A standard contruction-model corvette. Seems to have taken some battle damage."
 
-	icon = 'maps/first_contact/corvette.dmi'
+	icon = 'corvette.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 	vessel_mass = 2.75

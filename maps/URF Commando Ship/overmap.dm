@@ -2,7 +2,7 @@
 	name = "URFS Avarice"
 	desc = "A stealthy Chiroptera prowler."
 
-	icon = 'maps/first_contact/maps/URF Commando Ship/prowler.dmi'
+	icon = 'prowler.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 	vessel_mass = 4
