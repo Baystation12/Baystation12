@@ -16,7 +16,7 @@
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 40, energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.6
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE
+	item_flags = 0
 	flags_inv = 0
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
 
