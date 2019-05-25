@@ -2798,7 +2798,7 @@
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
 #include "maps\_gamemodes\faction.dm"
-#include "maps\_gamemodes\invasion\_includes.dm"
+#include "maps\_gamemodes\invasion\_includes_geminus_city.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"

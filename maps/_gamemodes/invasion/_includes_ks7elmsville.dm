@@ -14,9 +14,9 @@
 
 	#include "../../Exoplanet Research/includes.dm"
 
-	#include "../../geminus_city/geminus_city.dm"
+	//#include "../../geminus_city/geminus_city.dm"
 
-	//#include "../../Exoplanet Icy/includes.dm"
+	#include "../../Exoplanet Icy/includes.dm"
 
 	#include "../../Admin Planet/includes.dm"
 
@@ -38,7 +38,7 @@
 	#include "../../civ_ships/CCV_Comet.dmm"
 
 	#include "overall_outfits.dm"
-	#include "overall_jobdefs.dm"
+	#include "overall_jobdefs_ks7elmsville.dm"
 	#include "mapdef.dm"
 
 	#include "../../../code/modules/halo/lobby_music/odst_music.dm"
@@ -46,10 +46,10 @@
 
 	#include "gamemode.dm"
 
-	#define using_map_DATUM /datum/map/geminus_city
+	#define using_map_DATUM /datum/map/ks7_elmsville
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring Invasion
+	#warn A map has already been included, ignoring Invasion: KS7 Elmsville
 
 #endif
