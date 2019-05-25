@@ -220,7 +220,7 @@
 		return 0
 
 	//air_transfer.toxins = air_transfer.toxins * 5 // This is me not comprehending the air system. I realize this is retarded and I could probably make it work without fucking it up like this, but there you have it. -- TLE
-	var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F = new(target,amount,get_dir(loc,target))
+	new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/(target,amount,get_dir(loc,target))
 	//F.Spread()
 	air_transfer.gas["phoron"] = 0
 	target.assume_air(air_transfer)

@@ -448,6 +448,3 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	apply_damage(0.1*mx*legs_exposure,  BURN, BP_R_LEG, 0, 0, "Fire")
 	apply_damage(0.1*mx*arms_exposure,  BURN, BP_L_ARM, 0, 0, "Fire")
 	apply_damage(0.1*mx*arms_exposure,  BURN, BP_R_ARM, 0, 0, "Fire")
-
-	world << "/mob/living/carbon/human/FireBurn([firelevel], [last_temperature], [pressure])"
-	world << "	src:[src] mx:[mx]"
