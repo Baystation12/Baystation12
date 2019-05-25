@@ -1,4 +1,3 @@
-
 #define BIOFOAM_PROB_REMOVE_EMBEDDED 30
 #define BIOFOAM_PROB_OVERDOSE_DAMAGING 35
 #define BIOFOAM_PROB_OVERDOSE_WARNING 50
@@ -147,3 +146,78 @@
 		H.emote(pick("twitch", "blink_r", "shiver"))
 	H.add_chemical_effect(CE_SPEEDBOOST, 1)
 	H.add_chemical_effect(CE_PULSE, 2)
+
+/datum/reagent/cryoprethaline
+	name = "Cryoprethaline"
+	description = "A cellular ice crystal formation inhibitor. Protects from the extreme cold of cryostasis"
+	taste_description = "lemon-lime"
+	reagent_state = LIQUID
+	color = "#DCD9CD"
+	overdose = 5 //Extremely toxic
+	scannable = 1
+
+/datum/reagent/cryoprethaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(istype(M, /mob/living/carbon/human))
+		M.add_chemical_effect(CE_CRYO, 3)
+
+/datum/reagent/cryoprethaline/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(istype(M, /mob/living/carbon/human))
+		M.adjustFireLoss(removed)
+		if(prob(5))
+			to_chat(M,"<span class='userdanger'>Your skin feels like it's on fire!</span>")
+
+/datum/reagent/cryoprethaline/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(istype(M, /mob/living/carbon/human))
+		M.adjustToxLoss(5 * removed)
+		M.emote("vomit")
+
+/datum/reagent/cryoprethaline/overdose(var/mob/living/carbon/M)
+	if(istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/L = H.internal_organs_by_name[BP_LUNGS]
+		if(L)
+			if(prob(90))
+				L.take_damage(2)
+				if(prob(15))
+					H.emote("cough")
+		H.adjustToxLoss(5)
+
+/datum/reagent/hexaline
+	name = "Hexaline Glycol"
+	description = "A slighly less toxic, but less effective, cryoprotectant."
+	taste_description = "sweetness"
+	reagent_state = LIQUID
+	color = "#DCD9CD"
+	overdose = 5 //Same overdose as cryoprethaline, but does less harm
+	scannable = 1
+
+/datum/reagent/hexaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(istype(M, /mob/living/carbon/human))
+		M.add_chemical_effect(CE_CRYO, 1)
+
+/datum/reagent/hexaline/overdose(var/mob/living/carbon/M)
+	if(istype(M, /mob/living/carbon/human))
+		M.adjustToxLoss(1)
+
+/datum/reagent/ketoprofen
+	name = "Ketoprofen"
+	description = "An anti-pyretic and painkiller"
+	taste_description = "chalk"
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	scannable = 1
+	metabolism = 0.02
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/ketoprofen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 40)
+	M.add_chemical_effect(CE_CRYO, -1)
+
+	var/target = 310 //Target body temperature
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.species.body_temperature)
+			target = H.species.body_temperature //Target the species optimal body temperature - if one exists
+
+	if(M.bodytemperature > target)
+		M.bodytemperature = max(target, M.bodytemperature - (50 * TEMPERATURE_DAMAGE_COEFFICIENT)) //A bit better than leporazine
