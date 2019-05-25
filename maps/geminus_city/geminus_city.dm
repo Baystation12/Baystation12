@@ -7,6 +7,7 @@
 	#include "geminus_city_jobs.dm"
 	#include "geminus_city_spawns.dm"
 	#include "geminus_city_overmap.dm"
+	#include "geminus_city_outfits.dm"
 	#include "geminus_city_map.dm"
 
 	//#include "geminuscity_4.dmm"

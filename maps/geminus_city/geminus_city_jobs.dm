@@ -38,7 +38,7 @@
 	title = "Colonist - Insurrectionist Recruiter"
 	total_positions = 1
 	head_position = 1
-	outfit_type = /decl/hierarchy/outfit/job/civ_crewmember
+	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = INNIE
