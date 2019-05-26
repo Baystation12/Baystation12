@@ -16,4 +16,4 @@
 	lift_size_x = 4
 	lift_size_y = 3
 
-	areas_to_use = list(/area/turbolift/research/lifts/lift_1_ground,/area/turbolift/research/lifts/lift_1_second)
+	areas_to_use = list(/area/turbolift/KS7535/lifts/lift_1_ground,/area/turbolift/KS7535/lifts/lift_1_second)

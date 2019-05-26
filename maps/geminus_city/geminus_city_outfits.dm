@@ -112,17 +112,3 @@
 	id_type = /obj/item/weapon/card/id/security/warden
 
 	flags = 0
-
-/decl/hierarchy/outfit/job/marshall
-	name = "Emsville Marshall"
-
-	head = /obj/item/clothing/head/soft/sec/corp
-	uniform = /obj/item/clothing/under/marshall
-
-	belt = /obj/item/weapon/gun/projectile/m7_smg/rubber
-	shoes = /obj/item/clothing/shoes/dutyboots
-	pda_slot = null
-	l_ear = /obj/item/device/radio/headset/police
-	id_type = /obj/item/weapon/card/id/security/warden
-	starting_accessories = list (/obj/item/clothing/accessory/badge/security, /obj/item/clothing/accessory/holster/thigh)
-	flags = 0

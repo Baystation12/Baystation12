@@ -28,6 +28,9 @@
 /area/exo_Ice_facility/ground/interior/sushiems
 	name = "Sushi Stall"
 
+/area/exo_Ice_facility/ground/interior/mech
+	name = "Emsville Base Mech Lab"
+
 /area/exo_Ice_facility/ground/interior/livingtop
 	name = "Emsville Topside Living Quarters"
 

@@ -359,7 +359,7 @@
 "gU" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/table/rack,/obj/item/weapon/storage/box/matches,/obj/item/weapon/storage/box/matches,/obj/item/weapon/storage/box/matches,/turf/simulated/floor/decor{tag = "icon-cafeteria"; icon_state = "cafeteria"; dir = 2},/area/exo_Ice_facility/basement/interior/grocery)
 "gV" = (/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/basement/interior/emsmedical)
 "gW" = (/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/exo_Ice_facility/basement/exterior/cave)
-"gX" = (/obj/structure/co_ord_console/ks7,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/exo_Ice_facility/basement/exterior/cave)
+"gX" = (/obj/structure/co_ord_console,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/exo_Ice_facility/basement/exterior/cave)
 "gY" = (/mob/living/simple_animal/hostile/giant_spider/nurse,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/exo_Ice_facility/basement/exterior/cave)
 "gZ" = (/obj/machinery/door/airlock/multi_tile/covenant/eastwest{name = "Cockpit"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/exo_Ice_facility/basement/exterior/cave)
 "ha" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/table/rack,/obj/item/weapon/storage/box/mousetraps,/obj/item/weapon/storage/box/mousetraps,/turf/simulated/floor/decor{tag = "icon-cafeteria"; icon_state = "cafeteria"; dir = 2},/area/exo_Ice_facility/basement/interior/grocery)

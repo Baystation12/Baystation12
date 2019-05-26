@@ -218,7 +218,7 @@
 "ej" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/effect/decal/cleanable/dirt,/obj/item/weapon/grenade/frag/m9_hedp,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
 "ek" = (/obj/structure/ore_box,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/south)
 "el" = (/obj/machinery/light/spot,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/ground/exterior/south)
-"em" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/sublevel1/interior/mech)
+"em" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/obj/item/clothing/glasses/hud/health/mech)
 "en" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/effect/decal/cleanable/dirt,/obj/item/clothing/mask/gas/half,/obj/item/weapon/tank/emergency/oxygen/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/interior/armory)
 "eo" = (/turf/simulated/wall,/area/exo_Ice_facility/ground/exterior/south)
 "ep" = (/obj/machinery/door/airlock/mining{name = "Mining Outpost"},/obj/effect/floor_decal/corner/yellow/full,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/ground/exterior/south)
