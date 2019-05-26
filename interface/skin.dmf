@@ -395,10 +395,10 @@ macro "macro"
 		name = "F12"
 		command = "F12"
 	elem 
-		name = "CTRL+,"
+		name = "CTRL+Add"
 		command = "move-upwards"
 	elem 
-		name = "CTRL+."
+		name = "CTRL+Subtract"
 		command = "move-down"
 
 macro "hotkeymode"
@@ -806,10 +806,10 @@ macro "borgmacro"
 		name = "F12"
 		command = "F12"
 	elem 
-		name = "CTRL+,"
+		name = "CTRL+Add"
 		command = "move-upwards"
 	elem 
-		name = "CTRL+."
+		name = "CTRL+Subtract"
 		command = "move-down"
 
 
