@@ -360,6 +360,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/exploration,
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+						 /obj/item/clothing/under/solgov/utility/fleet/combat/exploration,
 						 /obj/item/clothing/head/soft/solgov/fleet,
 						 /obj/item/clothing/gloves/thick/duty/solgov/exp)
 
