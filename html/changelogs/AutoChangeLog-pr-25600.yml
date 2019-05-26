@@ -1,0 +1,4 @@
+author: "BearKingKrug"
+delete-after: True
+changes: 
+  - tweak: "Clicking on borgs/drones on harm intent with a welder/crowbar actually attacks them now"
