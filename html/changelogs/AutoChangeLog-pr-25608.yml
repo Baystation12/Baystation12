@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "Shield generator and shield generator monitor UI now includes a capacity percentage."
