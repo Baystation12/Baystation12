@@ -28,8 +28,8 @@
 	cost = 3
 	allowed_branches = UNIFORMED_BRANCHES
 
-/datum/gear/gloves/mittens
-	display_name = "gloves, mittens"
-	path = /obj/item/clothing/gloves/thick/duty/mittens
+/datum/gear/gloves/fingerless
+	display_name = "gloves, fingerless"
+	path = /obj/item/clothing/gloves/thick/duty/fingerless
 	cost = 3
 	allowed_branches = UNIFORMED_BRANCHES
