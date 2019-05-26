@@ -68,7 +68,7 @@
 	alt_titles = list("Governor")
 
 /datum/job/police
-	title = "Police Officer"
+	title = "GCPD Officer"
 	total_positions = 6
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
