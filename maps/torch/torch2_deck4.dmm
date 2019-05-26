@@ -1182,6 +1182,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/item/weapon/stool/bar/padded,
 /turf/simulated/floor/lino,
 /area/command/captainmess)
 "dU" = (
@@ -1290,7 +1291,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/fore)
 "em" = (
-/obj/structure/bed/chair/wood/wings/mahogany{
+/obj/structure/bed/chair/wood/wings/walnut{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 8
 	},
@@ -1385,7 +1386,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "eB" = (
-/obj/structure/bed/chair/wood/wings/mahogany{
+/obj/structure/bed/chair/wood/wings/walnut{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 4
 	},
@@ -2194,10 +2195,6 @@
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "hn" = (
-/obj/structure/bed/chair/wood/wings/mahogany{
-	icon_state = "wooden_chair_wings_preview";
-	dir = 8
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2206,6 +2203,10 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/structure/bed/chair/wood/wings/walnut{
+	icon_state = "wooden_chair_wings_preview";
+	dir = 8
 	},
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
@@ -11552,6 +11553,9 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
+"MV" = (
+/turf/simulated/wall/walnut,
+/area/command/captainmess)
 "MW" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
@@ -15162,6 +15166,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/item/weapon/stool/bar/padded,
 /turf/simulated/floor/lino,
 /area/command/captainmess)
 "Wy" = (
@@ -15404,7 +15409,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/bed/chair/wood/wings/mahogany{
+/obj/structure/bed/chair/wood/wings/walnut{
 	icon_state = "wooden_chair_wings_preview";
 	dir = 4
 	},
@@ -16630,6 +16635,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/item/weapon/stool/bar/padded,
 /turf/simulated/floor/lino,
 /area/command/captainmess)
 "ZS" = (
@@ -33952,7 +33958,7 @@ WV
 MX
 MX
 MX
-fd
+MV
 hl
 Mp
 Mp
@@ -34149,7 +34155,7 @@ ak
 aS
 bv
 Lu
-fd
+MV
 QA
 dR
 eA
@@ -34351,7 +34357,7 @@ ak
 er
 er
 Xl
-fd
+MV
 QA
 dS
 eB
@@ -34553,7 +34559,7 @@ ak
 rr
 er
 VR
-fd
+MV
 Tz
 dS
 OI
@@ -34755,7 +34761,7 @@ ak
 aV
 er
 VR
-fd
+MV
 Rq
 dS
 em
@@ -34957,7 +34963,7 @@ ak
 aU
 er
 VR
-fd
+MV
 py
 KW
 RT
@@ -35362,7 +35368,7 @@ bN
 bw
 bZ
 dU
-fd
+MV
 OZ
 eC
 WU
@@ -35564,7 +35570,7 @@ bN
 bw
 bZ
 dU
-fd
+MV
 Un
 XM
 XM
@@ -35766,7 +35772,7 @@ bN
 bw
 bZ
 dU
-fd
+MV
 fd
 cq
 gw

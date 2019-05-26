@@ -17772,7 +17772,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "Pg" = (
-/turf/simulated/wall/mahogany,
+/turf/simulated/wall/walnut,
 /area/crew_quarters/diplomat)
 "Ph" = (
 /obj/machinery/light{
