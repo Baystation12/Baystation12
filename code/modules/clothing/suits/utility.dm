@@ -30,7 +30,7 @@
 
 /obj/item/clothing/suit/fire/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 1.0
+	slowdown_per_slot[slot_wear_suit] = 0.6
 
 /obj/item/clothing/suit/fire/firefighter
 	icon_state = "firesuit"
@@ -52,7 +52,7 @@
 
 /obj/item/clothing/suit/fire/heavy/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 1.5
+	slowdown_per_slot[slot_wear_suit] = 0.6
 
 /*
  * Bomb protection
