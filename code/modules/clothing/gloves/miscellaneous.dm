@@ -142,3 +142,9 @@
 	permeability_coefficient = 0.03
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 
+/obj/item/clothing/gloves/thick/duty/mittens
+	desc = "These duty mittens are made from a durable synthetic."
+	name = "mittens"
+	icon_state = "mittens"
+	item_state = "mittens"
+
