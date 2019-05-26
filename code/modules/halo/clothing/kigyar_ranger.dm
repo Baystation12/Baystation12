@@ -63,3 +63,5 @@
 		slot_r_hand_str = null,
 		)
 	armor_thickness = 15
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv

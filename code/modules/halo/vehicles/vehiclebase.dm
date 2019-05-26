@@ -322,7 +322,7 @@
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
 	var/mob/mob_to_dam
-	if(guns_disabled)
+	if(movement_destroyed)
 		var/list/mobs = list()
 		for(var/mob/m in occupants)
 			mobs += m

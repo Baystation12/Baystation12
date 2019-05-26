@@ -30,6 +30,8 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
 /obj/item/clothing/head/helmet/oni_guard/visor
 	name = "CH252-V Helmet"
 	desc = "An ONI variant of the standard CH252 Helmet. Has an inbuilt VISOR for eye protection."

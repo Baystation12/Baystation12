@@ -55,6 +55,8 @@
 
 	guns_switchto = newlist(/datum/vehicle_gun/wraith_cannon,/datum/vehicle_gun/wraith_machinegun)
 
+	irradiate_non_cov = 15
+
 /datum/vehicle_gun/wraith_cannon
 	name = "Wraith Cannon"
 	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."

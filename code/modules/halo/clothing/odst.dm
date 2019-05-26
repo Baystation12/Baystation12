@@ -14,6 +14,10 @@
 		slot_r_hand_str = null,
 		)
 
+/obj/item/clothing/glasses/hud/tactical/odst_hud
+	darkness_view = 4
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Rifleman Helmet"
 	desc = "Standard issue short-EVA capable helmet issued to ODST forces"
@@ -27,8 +31,8 @@
 	body_parts_covered = HEAD|FACE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	flash_protection = FLASH_PROTECTION_MODERATE
-	cold_protection = HEAD
-	heat_protection = HEAD
+	cold_protection = HEAD | FACE
+	heat_protection = HEAD | FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 100, rad = 25)
@@ -44,6 +48,7 @@
 	var/visr_on = 1
 	armor_thickness = 20
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud
 
 /obj/item/clothing/suit/armor/special/odst
 	name = "ODST Armour"

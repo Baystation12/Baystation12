@@ -14,7 +14,7 @@
 	var/burst_size = 7
 	var/list/friendlies_stored = list()
 	var/list/allowed_materials = list("steel" = 5) //Format: material name = amount of bullets created
-	var/obj/item/projectile/to_fabricate = /obj/item/projectile/bullet/a762_ap
+	var/obj/item/projectile/to_fabricate = /obj/item/projectile/bullet/a762_M392
 	var/max_rounds = 100
 	var/list/loaded_ammo = list()
 	var/burst_delay = 0.3 SECONDS
@@ -174,6 +174,6 @@
 	icon_state = "artifact"
 
 /obj/structure/autoturret/ONI/New()
-	fabricate_rounds(max_rounds*0.5)
+	fabricate_rounds(max_rounds)
 	anchored = 1
 	GLOB.processing_objects += src

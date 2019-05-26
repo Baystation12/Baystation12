@@ -6,6 +6,7 @@
 	icon_state = "hud_visor"
 	var/list/known_waypoints = list()
 	var/list/waypoint_pointers = list()
+	var/mob/last_user
 	armor = list(melee = 5, bullet = 5, laser = 0, energy = 0, bomb = 5, bio = 0, rad = 0)
 
 /obj/item/clothing/glasses/hud/tactical/proc/get_loc_used()
@@ -27,12 +28,17 @@
 		qdel(pointer)
 
 /obj/item/clothing/glasses/hud/tactical/proc/process_hud_pointers() //This is for directional pointers around the character, for waypoints off-screen.
+	if(!isnull(last_user))
+		remove_all_pointers(last_user)
+		last_user = null
 	var/mob/user = loc
 	if(!istype(user))
 		return
-	remove_all_pointers(user)
+	if(isnull(user.client))
+		return
+	last_user = user
 	for(var/obj/effect/waypoint_holder/waypoint in known_waypoints)
-		if(waypoint in view(world.view,get_loc_used()))
+		if(get_dist(waypoint,get_loc_used()) <= user.client.view)
 			process_visible_marker(waypoint,user)
 			continue
 		var/dir_to_point = get_dir(get_loc_used(),waypoint)
@@ -54,3 +60,6 @@
 
 /obj/item/clothing/glasses/hud/tactical/process_hud()
 	process_hud_pointers()
+
+/obj/item/clothing/glasses/hud/tactical/covenant
+	icon_state = "hud_covie"

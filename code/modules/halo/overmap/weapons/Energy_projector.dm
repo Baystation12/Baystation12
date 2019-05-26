@@ -7,7 +7,7 @@
 
 /turf/unsimulated/floor/lava/glassed_turf
 	var/cool_at = 0
-	var/cooling_delay = 30 SECONDS
+	var/cooling_delay = 5 MINUTES
 	var/turf_replacewith = /turf/unsimulated/floor/scorched
 
 /turf/unsimulated/floor/lava/glassed_turf/New()
@@ -208,7 +208,7 @@
 		var/prev_index = hit.map_z.Find(z_level)
 		if(hit.map_z.len > 1 && prev_index != 1)
 			z_level = hit.map_z[prev_index++]
-		turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
+			turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))

@@ -48,6 +48,8 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	item_flags = THICKMATERIAL
 	armor = list(melee = 40,bullet = 20,laser = 40,energy = 5,bomb = 30,bio = 0,rad = 0) //Slightly higher bullet resist than Spartan helmets. Lower laser, energy and melee.
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
+
 /obj/item/clothing/suit/armor/special/combatharness
 	name = "Sangheili Combat Harness"
 	desc = "A Sangheili Combat Harness."
