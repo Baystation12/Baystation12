@@ -1195,22 +1195,23 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)
+	var/obj/item/weapon/cell/C = cell
 	switch(severity)
 		if(1.0)
-			if (cell)
-				cell.ex_act(1.0) // more lags woohoo
 			qdel(src)
+			if (C)
+				C.ex_act(1.0) // more lags woohoo
 			return
 		if(2.0)
 			if (prob(50))
 				set_broken(TRUE)
-				if (cell && prob(50))
-					cell.ex_act(2.0)
+				if (C && prob(50))
+					C.ex_act(2.0)
 		if(3.0)
 			if (prob(25))
 				set_broken(TRUE)
-				if (cell && prob(25))
-					cell.ex_act(3.0)
+				if (C && prob(25))
+					C.ex_act(3.0)
 	return
 
 /obj/machinery/power/apc/disconnect_terminal(var/obj/machinery/power/terminal/term)
