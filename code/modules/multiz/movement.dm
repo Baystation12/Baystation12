@@ -179,15 +179,17 @@
 		return
 
 	if(can_fall())
-		// We spawn here to let the current move operation complete before we start falling. fall() is normally called from
+		// We timer(0) here to let the current move operation complete before we start falling. fall() is normally called from
 		// Entered() which is part of Move(), by spawn()ing we let that complete.  But we want to preserve if we were in client movement
 		// or normal movement so other move behavior can continue.
-		var/mob/M = src
-		var/is_client_moving = (ismob(M) && M.moving)
-		spawn(0)
-			if(is_client_moving) M.moving = 1
-			handle_fall(below)
-			if(is_client_moving) M.moving = 0
+		addtimer(CALLBACK(src, /atom/movable/proc/fall_callback, below), 0)
+
+/atom/movable/proc/fall_callback(var/turf/below)
+	var/mob/M = src
+	var/is_client_moving = (ismob(M) && M.moving)
+	if(is_client_moving) M.moving = 1
+	handle_fall(below)
+	if(is_client_moving) M.moving = 0
 
 //For children to override
 /atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
