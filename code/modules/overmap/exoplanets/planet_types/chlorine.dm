@@ -7,6 +7,9 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/chlorine, /datum/random_map/noise/ore/poor)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 
+/obj/effect/overmap/sector/exoplanet/chlorine/generate_habitability()
+	return HABITABILITY_BAD
+
 /obj/effect/overmap/sector/exoplanet/chlorine/generate_map()
 	if(prob(50))
 		lightlevel = rand(7,10)/10 //It could be night.
