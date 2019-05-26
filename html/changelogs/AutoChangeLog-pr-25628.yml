@@ -1,9 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - maptweak: "The bridge deck has received some minor tweaks and fixes. See https://github.com/Baystation12/Baystation12/pull/25628 for details. Notable changes below:"
-  - maptweak: "CMO's office fax machine no longer blocks access to part of the table"
-  - maptweak: "Meeting room now has a fire alarm"
-  - maptweak: "Additional cameras were added to CO's office and aft hallway to fix blindspots"
-  - maptweak: "Fire doors were added to doors and windoors that were missing them"
-  - maptweak: "PPE closet access flags now match the sidearm closet"

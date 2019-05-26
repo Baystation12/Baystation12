@@ -1,4 +1,0 @@
-author: "ChaosAlpha"
-delete-after: True
-changes: 
-  - bugfix: "In non hotkey-mode, move-up/down have been moved to CTRL+Numpad_Add/Numpad_Substract to fix issues with some keyboard layouts."

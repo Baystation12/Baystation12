@@ -1,5 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "NTIRC client no longer spawns by default, freeing up some space on PDAs and such."
-  - tweak: "Reports editor now spawns on Cargo and Command PDAs by default."

@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - rscadd: "Flying borgs now have light-weight armor, providing half the armor value of a regular borg's armor. Light-weight armor can be printed from fabricators for half the cost of regular armor, and can also be applied to regular borgs (Not that you'd ever want to do this.)"

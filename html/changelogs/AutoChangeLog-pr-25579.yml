@@ -1,9 +1,0 @@
-author: "Flying_loulou"
-delete-after: True
-changes: 
-  - tweak: "Changes the firesuit sprite for a new one, based on TG's."
-  - tweak: "Lowered the firesuit slowdown to 0.6 (voidsuits' slowdown is at 1)."
-  - rscadd: "Based on TG's sprites, adds the firefighter helmet, and the chief firefighter helmet (for the CE). You don't need to wear a mask while wearing it, and it does connect to internals (you still have to toggle them on, of course)."
-  - maptweak: "Adds said helmet in the fire closets, to replace the already existing red hardhat."
-  - maptweak: "Adds fire closets throughout the ship."
-  - maptweak: "Adds fire closets in the Charon and the Aquila."
