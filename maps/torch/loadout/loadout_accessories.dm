@@ -201,6 +201,12 @@
 /datum/gear/accessory/ftupin
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/storage/webbing_explo
+	display_name = "webbing, exploration"
+	path = /obj/item/clothing/accessory/storage/webbing/explo
+	allowed_roles = list(/datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer)
+	cost = 3
+
 /*********************
  tactical accessories
 *********************/

@@ -51,12 +51,6 @@
 	path = /obj/item/clothing/accessory/storage/webbing_large
 	cost = 3
 
-/datum/gear/storage/webbing_explo
-	display_name = "webbing, exploration"
-	path = /obj/item/clothing/accessory/storage/webbing/explo
-	allowed_roles = list(/datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer)
-	cost = 3
-
 /datum/gear/storage/bandolier
 	display_name = "bandolier"
 	path = /obj/item/clothing/accessory/storage/bandolier
