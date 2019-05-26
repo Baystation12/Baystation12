@@ -579,6 +579,10 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 	item_state = "mclovin-eagle_worn"
 	icon_state = "mclovin-eagle_helmet"
 
+/obj/item/clothing/suit/justice/zeal/mclovin/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 1
+
 /obj/item/clothing/suit/justice/zeal/mclovin
 	name = "Eagle Armour"
 	desc = "A heavily modified piece of armour resembling an Eagle"
