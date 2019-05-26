@@ -7651,6 +7651,7 @@
 	},
 /obj/item/toy/torchmodel,
 /obj/structure/table/woodentable_reinforced/mahogany/walnut,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/heads/office/xo)
 "rE" = (
@@ -14033,6 +14034,7 @@
 "Mf" = (
 /obj/structure/table/woodentable_reinforced/walnut/maple,
 /obj/item/weapon/folder/envelope/captain,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "Mh" = (
@@ -16338,6 +16340,7 @@
 	dir = 4;
 	pixel_x = 21
 	},
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "Vi" = (
