@@ -157,3 +157,9 @@
 
 	for(var/i = 0, i < slots, i++)
 		new /obj/item/weapon/net_shell(hold)
+
+/obj/item/clothing/accessory/storage/webbing/explo
+	name = "exploration webbing"
+	desc = "A large collection of synthcotton pockets and pouches."
+	icon_state = "webbing_explo"
+	slots = 5
