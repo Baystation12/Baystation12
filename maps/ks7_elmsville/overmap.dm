@@ -11,6 +11,9 @@
 	"ks7unique" = list(/obj/structure/xeno_plant,/obj/structure/autoturret/ONI,null,null)
 	)
 
+//dummy path so this compiles
+/obj/effect/overmap/sector/exo_research
+
 /obj/structure/co_ord_console/ks7
 	known_locations = list(/obj/effect/overmap/sector/exo_research = "VT9-042")
 
