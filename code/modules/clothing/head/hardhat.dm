@@ -38,7 +38,7 @@
 	icon_state = "Firefighter-Helmet"
 	name = "firefighter helmet"
 	desc = "A complete, face covering helmet specially designed for firefighting. It is airtight and has a port for internals."
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	permeability_coefficient = 0
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
