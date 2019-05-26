@@ -27,3 +27,9 @@
 	path = /obj/item/clothing/gloves/thick/duty
 	cost = 3
 	allowed_branches = UNIFORMED_BRANCHES
+
+/datum/gear/gloves/mittens
+	display_name = "gloves, mittens"
+	path = /obj/item/clothing/gloves/thick/duty/mittens
+	cost = 3
+	allowed_branches = UNIFORMED_BRANCHES
