@@ -103,6 +103,14 @@
 	id = "armour"
 	build_path = /obj/item/robot_parts/robot_component/armour
 
+/datum/design/item/mechfab/robot/component/armour/light
+	name = "Light-weight armour plating"
+	id = "light_armour"
+	build_path = /obj/item/robot_parts/robot_component/armour/light
+	// Half the armor, half the cost
+	time = 10
+	materials = list(MATERIAL_STEEL = 2500)
+
 /datum/design/item/mechfab/ripley
 	category = "Ripley"
 
