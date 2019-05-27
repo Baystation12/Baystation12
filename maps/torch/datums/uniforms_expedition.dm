@@ -10,21 +10,24 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/cmd)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/command
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/command
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 /decl/hierarchy/mil_uniform/ec/com/cdr //Can only be officers
-	name = "EC commander"
+	name = "EC senior command"
 	min_rank = 15
 
+	service_hat = /obj/item/clothing/head/solgov/service/expedition/senior_command
+	
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command/cdr
+	dress_hat = /obj/item/clothing/head/solgov/service/expedition/senior_command
 
 /decl/hierarchy/mil_uniform/ec/com/capt //Can only be officers
 	name = "EC captain"
@@ -56,6 +59,12 @@
 						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/engineering
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/engineering
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/engineering
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/engineering
+
 
 /decl/hierarchy/mil_uniform/ec/eng/senior
 	name = "EC engineering senior"
@@ -80,13 +89,13 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/engineering
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/engineering
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/engineering
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/engineering
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -105,6 +114,11 @@
 						 /obj/item/clothing/gloves/thick/duty/solgov/sec)
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/security
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/security
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/security
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/security
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/security
 
 /decl/hierarchy/mil_uniform/ec/sec/senior
 	name = "EC security senior"
@@ -129,13 +143,13 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sec)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/security
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/security
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/security/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/security
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/security
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -154,6 +168,11 @@
 						 /obj/item/clothing/gloves/thick/duty/solgov/med)
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/medical
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/medical
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/medical
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/medical
 
 /decl/hierarchy/mil_uniform/ec/med/senior
 	name = "EC medical senior"
@@ -178,13 +197,13 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/med)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/medical
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/medical
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/medical
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/medical
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -203,6 +222,11 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/supply
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/supply
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/supply
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/supply
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/supply
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/supply
 
 /decl/hierarchy/mil_uniform/ec/sup/senior
 	name = "EC supply senior"
@@ -227,12 +251,12 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sup)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/supply
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/supply
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/supply
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/supply
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -247,6 +271,11 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/service
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/service
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/service
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/service
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/service
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/service
 
 /decl/hierarchy/mil_uniform/ec/srv/senior
 	name = "EC service senior"
@@ -271,13 +300,13 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/svc)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/service
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/service
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/service
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/service
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -292,6 +321,11 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/exploration
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/exploration
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/exploration
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/exploration
 
 /decl/hierarchy/mil_uniform/ec/exp/senior
 	name = "EC exploration senior"
@@ -316,13 +350,13 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/exp)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/exploration
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/exploration
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/exploration
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/exploration
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -337,8 +371,12 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/cmd)
 
-	service_under= /obj/item/clothing/under/solgov/service/expeditionary/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/command
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/command
 
 /decl/hierarchy/mil_uniform/ec/spt/senior
 	name = "EC command support senior"
@@ -358,12 +396,12 @@
 
 	utility_under= /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 
-	service_under= /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under= /obj/item/clothing/under/solgov/service/expeditionary/command/command
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/command
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -377,6 +415,11 @@
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec)
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/research
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/research
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/research
+
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/research
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/research
 
 /decl/hierarchy/mil_uniform/ec/sci/senior
 	name = "EC science senior"
@@ -400,13 +443,13 @@
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec)
 
-	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/research
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/research
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/research/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command
-	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary/command/research
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/research
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
