@@ -224,7 +224,7 @@ Subtypes
 
 /datum/terminal_command/proxy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/obj/item/modular_computer/comp = terminal.computer
-	if(!comp || !comp.get_ntnet_status())
+	if(!comp || !comp.network_card || !comp.network_card.check_functionality())
 		return "proxy: Error; check networking hardware."
 	if(text == "proxy")
 		if(!comp.network_card.proxy_id)
@@ -235,6 +235,8 @@ Subtypes
 			return "proxy: Error; this device is not using a proxy."
 		comp.network_card.proxy_id = null
 		return "proxy: Device proxy cleared."
+	if(!comp.network_card || !comp.network_card.check_functionality() || !comp.get_ntnet_status())
+		return "proxy: Error; check networking hardware."
 	var/syntax_error = "proxy: Invalid input. Enter man proxy for syntax help."
 	if(length(text) < 10)
 		return syntax_error
@@ -244,6 +246,7 @@ Subtypes
 	if(!id)
 		return syntax_error
 	var/obj/item/modular_computer/target = ntnet_global.get_computer_by_nid(id)
+	if(target == comp) return "proxy: Cannot setup a device to be its own proxy"
 	if(!target || !target.enabled || !target.get_ntnet_status())
 		return "proxy: Error; cannot locate target device."
 	if(target.hard_drive)
