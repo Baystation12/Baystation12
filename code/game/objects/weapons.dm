@@ -11,10 +11,10 @@
 
 /obj/item/weapon/handle_shield(var/mob/user, var/damage, var/atom/dam_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/damage_source = dam_source
-	if(!attacker)
+	if(!attacker && isnull(damage_source))
 		return 0
 	//Checks done, Parrycode starts here.//
-	if(istype(attacker,/mob/living) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
+	if(attacker && istype(attacker,/mob/living) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
 		return 0
 	var/parry_chance_divisor = 1
 	var/force_half_damage = 0
@@ -33,10 +33,13 @@
 		visible_message("<span class = 'danger'>[user] counters [attacker]'s unarmed attack with their [src.name]!</span>")
 		attack(attacker,user,pick("l_arm","r_arm","chest"))
 		force_half_damage = 1
-	else
+	else if (attacker)
 		visible_message("<span class = 'danger'>[user] parries [attacker]'s [damage_source.name] with their [src.name]</span>")
 		playsound(loc, hitsound, 50, 1, -1)
 		playsound(loc, damage_source.hitsound, 50, 1, -1)
+	else
+		visible_message("<span class = 'danger'>[user] deflects [damage_source] with their [src]!</span>")
+		playsound(loc, hitsound, 50, 1, -1)
 
 	var/obj/item/item_to_disintegrate
 	var/mob/living/mob_holding_disintegrated
