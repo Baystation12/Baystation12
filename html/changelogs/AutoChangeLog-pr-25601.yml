@@ -1,0 +1,5 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - rscadd: "EC service and dress under-uniforms have been replaced with service jumpers, with complimentary departmental colouring."
+  - rscadd: "EC senior officers (captain and above) now have a unique service cap."
