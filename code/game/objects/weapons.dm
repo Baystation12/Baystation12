@@ -14,7 +14,7 @@
 	if(!attacker)
 		return 0
 	//Checks done, Parrycode starts here.//
-	if(attacker.a_intent == "help") //We don't need to block helpful actions.
+	if(istype(attacker,/mob/living) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
 		return 0
 	var/parry_chance_divisor = 1
 	var/force_half_damage = 0
@@ -57,10 +57,17 @@
 
 	if(force_half_damage)
 		to_chat(user,"<span class = 'warning'>[src] fails to fully deflect [attacker]'s attack!</span>")
+		var/obj/item/projectile/proj = item_to_disintegrate
 		var/orig_force = item_to_disintegrate.force
-		item_to_disintegrate.force /= 2
-		spawn(2)
-			item_to_disintegrate.force = orig_force
+		if(istype(proj))
+			orig_force = proj.damage
+			proj.damage /= 2
+			spawn(2)
+				proj.damage = orig_force
+		else
+			item_to_disintegrate.force /= 2
+			spawn(2)
+				item_to_disintegrate.force = orig_force
 		return 0
 
 	visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]" : "[attacker]"] cuts through [mob_holding_disintegrated]'s [item_to_disintegrate.name] with their [item_to_disintegrate == damage_source ? "[src.name]" : "[damage_source.name]"], rendering it useless!</span>")
