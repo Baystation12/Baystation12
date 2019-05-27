@@ -15,7 +15,7 @@ var/list/dreams = list(
 	"a GAS", "a IPC", "a Dionaea", "a being made of light", "the commanding officer", "the executive officer", "the chief of security", "the corporate liason",
 	"the representative", "the senior advisor", "the bridge officer", "the senior engineer", "the physician", "the corpsman", "the counselor",
 	"the medical contractor", "the security contractor", "the stowaway", "an old friend", "the prospector", "the pilot", "the passenger", "the chief of security",
-	"the master at arms", "the forensic technician", "the brig officer", "the tower", "the man with no face", "a field of flowers", "an old home", "the merc",
+	"the master at arms", "the forensic technician", "the brig chief", "the tower", "the man with no face", "a field of flowers", "an old home", "the merc",
 	"a surgery table", "a needle", "a blade", "an ocean", "right behind you", "standing above you", "someone near by", "a place forgotten", "the exodus",
 	)
 

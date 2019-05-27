@@ -70,7 +70,7 @@
 	job_access_type = /datum/job/officer
 	detail_color = "#e00000"
 
-/obj/item/weapon/card/id/torch/crew/security/brigofficer
+/obj/item/weapon/card/id/torch/crew/security/brigchief
 	job_access_type = /datum/job/warden
 	extra_details = list("onegoldstripe")
 

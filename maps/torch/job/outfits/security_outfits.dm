@@ -7,15 +7,15 @@
 	..()
 	BACKPACK_OVERRIDE_SECURITY
 
-/decl/hierarchy/outfit/job/torch/crew/security/brig_officer
-	name = OUTFIT_JOB_NAME("Brig Officer")
+/decl/hierarchy/outfit/job/torch/crew/security/brig_chief
+	name = OUTFIT_JOB_NAME("Brig Chief")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/crew/security/brigofficer
+	id_type = /obj/item/weapon/card/id/torch/crew/security/brigchief
 	pda_type = /obj/item/modular_computer/pda/security
 
-/decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
-	name = OUTFIT_JOB_NAME("Brig Officer - Fleet")
+/decl/hierarchy/outfit/job/torch/crew/security/brig_chief/fleet
+	name = OUTFIT_JOB_NAME("Brig Chief - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 

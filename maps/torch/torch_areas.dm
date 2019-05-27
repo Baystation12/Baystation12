@@ -1047,7 +1047,7 @@
 // Security
 
 /area/security/bo
-	name = "\improper Security - Brig Officer"
+	name = "\improper Security - Brig Chief"
 	icon_state = "Warden"
 	req_access = list(access_armory)
 
@@ -1764,4 +1764,3 @@
 /area/tdome/tdomeobserve
 	name = "\improper Thunderdome (Observer.)"
 	icon_state = "purple"
-

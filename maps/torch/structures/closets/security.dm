@@ -99,12 +99,12 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
 
-/obj/structure/closet/secure_closet/brigofficer
-	name = "brig officer's locker"
+/obj/structure/closet/secure_closet/brigchief
+	name = "brig chief's locker"
 	req_access = list(access_armory)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/security/warden
 
-/obj/structure/closet/secure_closet/brigofficer/WillContain()
+/obj/structure/closet/secure_closet/brigchief/WillContain()
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
 		/obj/item/clothing/head/helmet/solgov/security,
