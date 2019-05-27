@@ -1,8 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - tweak: "Overmap Fast speed is now reduced from 20 to 15, this applies to dodging meteors in shuttles at experienced/master levels."
-  - tweak: "Gas thrusters for overmap travel, will now calculate thrust and fuel consumption by volume. Lower volume limit from the engine control for more fuel efficiency."
-  - tweak: "Guppy's mass and max speed has been increased."
-  - maptweak: "Charon's atmospheric and electric compartment has be reworked to accommodate for the fuel consumption."
-  - maptweak: "There are now shuttle navpoints on the hanger deck."

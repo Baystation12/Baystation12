@@ -1,4 +1,0 @@
-author: AlexMorgan3817/_Elar_
-delete-after: True
-changes: 
-  - bugfix: "Now device can't be its own proxy."
