@@ -2,6 +2,7 @@
 	name = "weapon"
 	icon = 'icons/obj/weapons.dmi'
 	hitsound = "swing_hit"
+	var/parry_projectiles = 0
 
 /obj/item/weapon/Bump(mob/M as mob)
 	spawn(0)
@@ -12,21 +13,26 @@
 	var/obj/item/damage_source = dam_source
 	if(!attacker)
 		return 0
-	if(istype(damage_source,/obj/item/projectile))
-		return 0
 	//Checks done, Parrycode starts here.//
 	if(attacker.a_intent == "help") //We don't need to block helpful actions.
 		return 0
 	var/parry_chance_divisor = 1
+	var/force_half_damage = 0
 	var/obj/item/weapon/gun/this_weapon = src
 	if(istype(this_weapon) && this_weapon.one_hand_penalty == -1 && !this_weapon.is_held_twohanded(user))//Ensure big twohanded guns are worse at parrying when not twohanded.
 		parry_chance_divisor = 2
+	if(istype(damage_source,/obj/item/projectile))
+		if(parry_projectiles)
+			parry_chance_divisor = 4
+			force_half_damage = 1
+		else
+			return 0
 	if(!prob((BASE_WEAPON_PARRYCHANCE * (w_class - 1))/parry_chance_divisor)) //Do our base parrychance calculation.
 		return 0
 	if(!damage_source || damage_source == attacker)
 		visible_message("<span class = 'danger'>[user] counters [attacker]'s unarmed attack with their [src.name]!</span>")
 		attack(attacker,user,pick("l_arm","r_arm","chest"))
-		return 1
+		force_half_damage = 1
 	else
 		visible_message("<span class = 'danger'>[user] parries [attacker]'s [damage_source.name] with their [src.name]</span>")
 		playsound(loc, hitsound, 50, 1, -1)
@@ -43,12 +49,19 @@
 		item_to_disintegrate = src
 		mob_holding_disintegrated = user
 
-	if(isnull(item_to_disintegrate) || isnull(mob_holding_disintegrated))
+	if(isnull(item_to_disintegrate) || isnull(mob_holding_disintegrated) && !force_half_damage)
 		return 1
 
-	if(istype(item_to_disintegrate,/obj/item/weapon/gun) && !prob(BASE_PARRY_PLASMA_DESTROY))
-		visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]":"[attacker]" ]</span>")
-		return 1
+	if(!isnull(item_to_disintegrate) && istype(item_to_disintegrate,/obj/item/weapon/gun) && !prob(BASE_PARRY_PLASMA_DESTROY))
+		force_half_damage = 1
+
+	if(force_half_damage)
+		to_chat(user,"<span class = 'warning'>[src] fails to fully deflect [attacker]'s attack!</span>")
+		var/orig_force = item_to_disintegrate.force
+		item_to_disintegrate.force /= 2
+		spawn(2)
+			item_to_disintegrate.force = orig_force
+		return 0
 
 	visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]" : "[attacker]"] cuts through [mob_holding_disintegrated]'s [item_to_disintegrate.name] with their [item_to_disintegrate == damage_source ? "[src.name]" : "[damage_source.name]"], rendering it useless!</span>")
 	mob_holding_disintegrated.drop_from_inventory(item_to_disintegrate)
