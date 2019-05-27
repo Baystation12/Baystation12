@@ -390,15 +390,18 @@
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
+		var/needed_cryo = 1 //What level of cryoprotection is needed?
 		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 			var/burn_dam = 0
 			if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_1))
 				burn_dam = COLD_DAMAGE_LEVEL_1
 			else if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_3))
 				burn_dam = COLD_DAMAGE_LEVEL_2
+				needed_cryo = 2
 			else
 				burn_dam = COLD_DAMAGE_LEVEL_3
-			if(!chem_effects[CE_CRYO])
+				needed_cryo = 3
+			if(chem_effects[CE_CRYO] < needed_cryo)
 				take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 				fire_alert = max(fire_alert, 1)
 
@@ -406,11 +409,12 @@
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
 	if(status_flags & GODMODE)	return 1	//godmode
 
-	if(adjusted_pressure >= species.hazard_high_pressure)
+	//Make people not take  highpressure damage in cryo. Bloxgate - 2019-05-18
+	if(adjusted_pressure >= species.hazard_high_pressure && !istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
 		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
 		pressure_alert = 2
-	else if(adjusted_pressure >= species.warning_high_pressure)
+	else if(adjusted_pressure >= species.warning_high_pressure && !istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 		pressure_alert = 1
 	else if(adjusted_pressure >= species.warning_low_pressure)
 		pressure_alert = 0
