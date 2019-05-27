@@ -2,7 +2,7 @@
 /datum/job/ship_crew_innie
 	title = "Insurrectionist"
 	spawn_faction = "Insurrection"
-	total_positions = 6
+	total_positions = 12
 	spawn_positions = 6
 	access = list(632)
 	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
