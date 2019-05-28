@@ -4058,7 +4058,6 @@
 	pixel_x = 3;
 	pixel_y = 0
 	},
-/obj/item/weapon/folder/envelope/blanks,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/cl/backroom)
 "ke" = (
