@@ -34,7 +34,7 @@
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/sangheili)
 
-/*/datum/job/covenant/sangheili_ultra
+/datum/job/covenant/sangheili_ultra
 	title = "Sangheili - Ultra"
 	total_positions = 1
 	spawn_positions = 1
@@ -44,8 +44,6 @@
 	spawnpoint_override = "Covenant Base Spawns"
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-*/
-//Ultra is disabled now
 
 /datum/job/covenant/sangheili_honour_guard
 	title = "Sangheili - Honour Guard"
@@ -60,7 +58,7 @@
 
 /datum/job/covenant/sangheili_major
 	title = "Sangheili - Major"
-	total_positions = 1
+	total_positions = 2
 	spawn_positions = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/major
@@ -71,7 +69,7 @@
 
 /datum/job/covenant/sangheili_minor
 	title = "Sangheili - Minor"
-	total_positions = 2
+	total_positions = 4
 	spawn_positions = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
