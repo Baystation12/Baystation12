@@ -24,6 +24,10 @@
 	if(istype(computer) && istype(prog))
 		if(computer.hidden_uplink && prog.password)
 			if(prog.authenticated)
+				if(istype(user, /mob/observer/ghost))
+					var/mob/observer/ghost/G = user
+					if(!G.admin_ghosted)
+						return
 				if(alert(user, "Resume or close and secure?", name, "Resume", "Close") == "Resume")
 					computer.hidden_uplink.trigger(user)
 					return
