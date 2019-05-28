@@ -91,6 +91,10 @@
 	var/has_safety = TRUE
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
 
+	var/can_make_turret = FALSE // Flag for whether or not the gun can be used in a turret
+	var/turret_name // Turret name prefix
+	var/list/turret_firemodes
+
 /obj/item/weapon/gun/Initialize()
 	. = ..()
 	for(var/i in 1 to firemodes.len)
@@ -98,7 +102,7 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
-	
+
 	if(scope_zoom)
 		verbs += /obj/item/weapon/gun/proc/scope
 
@@ -349,7 +353,7 @@
 	stood_still = max(0,round((world.time - stood_still)/10) - 1)
 	if(stood_still)
 		acc_mod += min(max(2, accuracy), stood_still)
-	else 
+	else
 		acc_mod -= w_class - ITEM_SIZE_NORMAL
 		acc_mod -= bulk
 

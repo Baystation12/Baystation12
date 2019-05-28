@@ -13,6 +13,13 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		)
 
+	can_make_turret = TRUE
+	name = "stun"
+	turret_firemodes = list(
+		TURRET_MODE_STUN,
+		TURRET_MODE_SHOCK
+	)
+
 /obj/item/weapon/gun/energy/taser/carbine
 	name = "taser carbine"
 	desc = "The NT Mk44 NL is a high capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
@@ -33,6 +40,12 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/heavy),
 		)
 
+	turret_name = "heavy stun"
+	turret_firemodes = list(
+		TURRET_MODE_STUN_HEAVY,
+		TURRET_MODE_SHOCK_HEAVY
+	)
+
 /obj/item/weapon/gun/energy/taser/mounted
 	name = "mounted taser gun"
 	self_recharge = 1
@@ -43,6 +56,9 @@
 	name = "taser gun"
 	max_shots = 6
 	recharge_time = 10 //Time it takes for shots to recharge (in ticks)
+
+	can_make_turret = FALSE
+	turret_firemodes = null
 
 
 /obj/item/weapon/gun/energy/stunrevolver
@@ -55,6 +71,8 @@
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 6
 	combustion = 0
+
+	can_make_turret = FALSE // Non-beam projectiles break turrets
 
 /obj/item/weapon/gun/energy/stunrevolver/rifle
 	name = "stun rifle"

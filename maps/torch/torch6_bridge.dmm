@@ -2616,10 +2616,8 @@
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "gZ" = (
-/obj/machinery/porta_turret{
-	dir = 8;
-	enabled = 0;
-	lethal = 1
+/obj/machinery/porta_turret/off{
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/airless,
@@ -2644,10 +2642,8 @@
 /area/aquila/cockpit)
 "hc" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/porta_turret{
-	dir = 8;
-	enabled = 0;
-	lethal = 1
+/obj/machinery/porta_turret/off{
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/aquila/cockpit)

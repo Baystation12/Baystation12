@@ -9378,10 +9378,7 @@
 	},
 /area/centcom/creed)
 "awP" = (
-/obj/machinery/porta_turret/crescent{
-	check_synth = 1;
-	enabled = 1
-	},
+/obj/machinery/porta_turret/crescent/secure,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -22053,15 +22050,6 @@
 /turf/simulated/shuttle/wall{
 	icon_state = "wall3"
 	},
-/area/syndicate_station/start)
-"fXG" = (
-/obj/machinery/porta_turret/crescent{
-	check_synth = 1;
-	enabled = 0;
-	installation = "";
-	name = "Incomplete turret"
-	},
-/turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "glo" = (
 /turf/simulated/floor/holofloor/concrete,
@@ -57300,7 +57288,7 @@ ayw
 aAd
 aAA
 aza
-fXG
+kUL
 ayw
 ayw
 aza

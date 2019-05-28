@@ -14,6 +14,12 @@
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
 
+	can_make_turret = TRUE
+	turret_name = "laser"
+	turret_firemodes = list(
+		TURRET_MODE_LASER_MID
+	)
+
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
 	use_external_power = 1
@@ -27,6 +33,10 @@
 	projectile_type = /obj/item/projectile/beam/practice
 	charge_cost = 10 //How much energy is needed to fire.
 
+	turret_firemodes = list(
+		TURRET_MODE_FAKE
+	)
+
 /obj/item/weapon/gun/energy/laser/practice/proc/hacked()
 	return projectile_type != /obj/item/projectile/beam/practice
 
@@ -38,6 +48,11 @@
 	projectile_type = /obj/item/projectile/beam/midlaser
 	charge_cost = 20
 	max_shots = rand(3,6) //will melt down after those
+
+	turret_firemodes = list(
+		TURRET_MODE_LASER_MID
+	)
+
 	return 1
 
 /obj/item/weapon/gun/energy/laser/practice/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
@@ -59,6 +74,12 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 15 //old technology, and a pistol
+
+	can_make_turret = TRUE
+	turret_name = "retro"
+	turret_firemodes = list(
+		TURRET_MODE_LASER
+	)
 
 /obj/item/weapon/gun/energy/captain
 	name = "antique laser gun"
@@ -92,6 +113,12 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 20
 	wielded_item_state = "gun_wielded"
 
+	can_make_turret = TRUE
+	turret_name = "heavy laser"
+	turret_firemodes = list(
+		TURRET_MODE_LASER_HEAVY
+	)
+
 /obj/item/weapon/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
 	self_recharge = 1
@@ -117,6 +144,12 @@ obj/item/weapon/gun/energy/retro
 	wielded_item_state = "gun_wielded"
 	combustion = 0
 
+	can_make_turret = TRUE
+	turret_name = "x-ray"
+	turret_firemodes = list(
+		TURRET_MODE_XRAY_MID
+	)
+
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
 	icon = 'icons/obj/guns/xray_pistol.dmi'
@@ -128,6 +161,11 @@ obj/item/weapon/gun/energy/retro
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
+
+	turret_name = "small x-ray"
+	turret_firemodes = list(
+		TURRET_MODE_XRAY_SMALL
+	)
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
@@ -167,6 +205,12 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 
+	can_make_turret = TRUE
+	turret_name = "laser tag"
+	turret_firemodes = list(
+		TURRET_MODE_LASERTAG(blue)
+	)
+
 /obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M))
 		if(!istype(M.wear_suit, required_vest))
@@ -180,8 +224,18 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	required_vest = /obj/item/clothing/suit/bluetag
 
+	turret_name = "blue laser tag"
+	turret_firemodes = list(
+		TURRET_MODE_LASERTAG(blue)
+	)
+
 /obj/item/weapon/gun/energy/lasertag/red
 	icon_state = "redtag"
 	item_state = "redtag"
 	projectile_type = /obj/item/projectile/beam/lastertag/red
 	required_vest = /obj/item/clothing/suit/redtag
+
+	turret_name = "red laser tag"
+	turret_firemodes = list(
+		TURRET_MODE_LASERTAG(red)
+	)

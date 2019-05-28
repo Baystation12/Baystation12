@@ -16,7 +16,15 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
-		
+
+	can_make_turret = TRUE
+	turret_name = "energy"
+	turret_firemodes = list(
+		TURRET_MODE_STUN,
+		TURRET_MODE_SHOCK,
+		TURRET_MODE_LASER
+	)
+
 /obj/item/weapon/gun/energy/gun/skrell
 	name = "skrellian handgun"
 	desc = "A common Skrellian side-arm, the Xuxquu*'Voom-5, or XV-5, is a more traditional energy weapon, tuned to dispense beams in three different wavelengths."
@@ -55,6 +63,13 @@
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
 		)
 
+	turret_name = "small energy"
+	turret_firemodes = list(
+		TURRET_MODE_STUN,
+		TURRET_MODE_SHOCK,
+		TURRET_MODE_LASER_SMALL
+	)
+
 /obj/item/weapon/gun/energy/gun/mounted
 	name = "mounted energy gun"
 	self_recharge = 1
@@ -81,6 +96,9 @@
 		)
 
 	var/fail_counter = 0
+
+	can_make_turret = FALSE
+	turret_firemodes = null
 
 //override for failcheck behaviour
 /obj/item/weapon/gun/energy/gun/nuclear/Process()

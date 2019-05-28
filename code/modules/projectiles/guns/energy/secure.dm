@@ -58,6 +58,14 @@
 	req_access = list(list(access_brig, access_heads))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
+	can_make_turret = TRUE
+	turret_name = "energy"
+	turret_firemodes = list(
+		TURRET_MODE_STUN,
+		TURRET_MODE_SHOCK,
+		TURRET_MODE_LASER
+	)
+
 /obj/item/weapon/gun/energy/gun/secure/mounted
 	name = "robot energy gun"
 	desc = "A robot-mounted equivalent of the LAEP90-S, which is always registered to its owner."
