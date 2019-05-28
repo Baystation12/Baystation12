@@ -13,37 +13,6 @@
 /obj/item/weapon/pen/fancy,
 /turf/simulated/floor/lino,
 /area/command/pilot)
-"ad" = (
-/obj/effect/floor_decal/corner/brown/half{
-	icon_state = "bordercolorhalf";
-	dir = 1
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/firecloset,
-/turf/simulated/floor/tiled/monotile,
-/area/hallway/primary/fifthdeck/fore)
-"ae" = (
-/obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden,
-/turf/simulated/floor/tiled,
-/area/exploration_shuttle/airlock)
-"af" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/firecloset,
-/turf/simulated/floor/tiled,
-/area/exploration_shuttle/airlock)
 "ag" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
@@ -317,6 +286,10 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/eva)
+"bd" = (
+/obj/effect/shuttle_landmark/ert/hanger,
+/turf/space,
+/area/space)
 "bf" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -1907,6 +1880,28 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
+"dY" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/tiled,
+/area/exploration_shuttle/airlock)
+"dZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled,
+/area/exploration_shuttle/airlock)
 "ea" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -1920,8 +1915,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -1989,11 +1984,11 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -2004,11 +1999,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	layer = 2.4;
-	level = 2
-	},
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
@@ -2102,6 +2092,9 @@
 /area/exploration_shuttle/power)
 "eq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -7540,6 +7533,15 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fifthdeck/fore)
+"qJ" = (
+/obj/effect/floor_decal/corner/brown/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/fifthdeck/fore)
 "qK" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -9702,6 +9704,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"vi" = (
+/obj/effect/shuttle_landmark/merc/hanger,
+/turf/space,
+/area/space)
 "vj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
@@ -10024,6 +10030,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
+"wy" = (
+/obj/effect/shuttle_landmark/ninja/hanger,
+/turf/space,
+/area/space)
 "wz" = (
 /obj/machinery/door/airlock/research{
 	id_tag = null;
@@ -10393,10 +10403,6 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/fore)
-"yb" = (
-/obj/effect/shuttle_landmark/ninja/hanger,
-/turf/space,
-/area/space)
 "yc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -10834,10 +10840,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/isolation)
-"zr" = (
-/obj/effect/shuttle_landmark/merc/hanger,
-/turf/space,
-/area/space)
 "zs" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -10883,10 +10885,6 @@
 "zC" = (
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/security)
-"zD" = (
-/obj/effect/shuttle_landmark/ert/hanger,
-/turf/space,
-/area/space)
 "zH" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -15023,6 +15021,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/rnd)
+"OV" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "OW" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -15180,11 +15182,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
 "PA" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
-	},
 /obj/machinery/pipedispenser,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "PC" = (
@@ -15267,6 +15268,10 @@
 	},
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
+"Qa" = (
+/obj/effect/shuttle_landmark/skipjack/hanger,
+/turf/space,
+/area/space)
 "Qd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/bar)
@@ -15297,10 +15302,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
-"Qh" = (
-/obj/effect/shuttle_landmark/skipjack/hanger,
-/turf/space,
-/area/space)
 "Qi" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/effect/paint/silver,
@@ -15832,10 +15833,6 @@
 "Sd" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fifthdeck/fore)
-"Sf" = (
-/obj/random_multi/single_item/runtime,
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
 "Sg" = (
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -24694,7 +24691,7 @@ aa
 aa
 aa
 aa
-yb
+wy
 aa
 aa
 aa
@@ -32580,7 +32577,7 @@ oU
 iT
 hw
 kg
-Sf
+OV
 ki
 kL
 hl
@@ -32978,7 +32975,7 @@ kl
 kl
 kl
 Sd
-ad
+qJ
 aF
 oX
 eu
@@ -33748,7 +33745,7 @@ aa
 aa
 aa
 aa
-Qh
+Qa
 aa
 aa
 aa
@@ -35200,7 +35197,7 @@ cO
 di
 dz
 cN
-af
+dY
 ek
 Ls
 eA
@@ -35402,7 +35399,7 @@ cP
 dj
 dA
 dL
-ae
+dZ
 el
 et
 eC
@@ -43316,7 +43313,7 @@ aa
 aa
 aa
 aa
-zD
+bd
 aa
 aa
 aa
@@ -48699,7 +48696,7 @@ aa
 aa
 aa
 aa
-zr
+vi
 aa
 aa
 aa
