@@ -24,13 +24,15 @@
 
 /datum/uplink_item/item/stealth_items/chameleon_kit
 	name = "Chameleon Kit"
-	desc = "Comes with a full set of appearance changing clothing you need to impersonate most people.  Accessories, backpack, and gun included!"
+	desc = "Comes with a full set of appearance changing clothing you need to impersonate most people.  \
+	Accessories, backpack, and gun included!"
 	item_cost = 20
 	path = /obj/item/weapon/storage/backpack/chameleon/sydie_kit
 
 /datum/uplink_item/item/stealth_items/voice
 	name = "Modified Gas Mask"
-	desc = "A fully functioning gas mask that is able to conceal your face and has a built in voice modulator, so you can become a true shadow operative!"
+	desc = "A fully functioning gas mask that is able to conceal your face and has a built in voice modulator, \
+	so you can become a true shadow operative!"
 	item_cost = 20
 	path = /obj/item/clothing/mask/chameleon/voice
 
@@ -42,12 +44,14 @@
 
 /datum/uplink_item/item/stealth_items/sneakies
 	name = "Sneakies"
-	desc = "A fashionable pair of polished dress shoes. The soles are made in a way so that any tracks you leave look like they are traveling the opposite direction."
+	desc = "A fashionable pair of polished dress shoes. The soles are made in a way so that any \
+	tracks you leave look like they are traveling in the opposite direction."
 	item_cost = 4
 	path = /obj/item/clothing/shoes/laceup/sneakies
 
 /datum/uplink_item/item/stealth_items/smuggler_satchel
 	name = "Smuggler's Satchel"
-	desc = "This satchel is thin enough to be hidden in the gap between plating and tiling, great for stashing your stolen goods. Comes with a crowbar and a floor tile inside."
+	desc = "This satchel is thin enough to be hidden in the gap between plating and tiling, \
+	great for stashing your stolen goods. Comes with a crowbar and a floor tile."
 	item_cost = 20
 	path = /obj/item/weapon/storage/backpack/satchel/flat
