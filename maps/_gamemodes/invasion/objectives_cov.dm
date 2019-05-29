@@ -37,7 +37,7 @@
 	return ..()
 
 /datum/objective/destroy_unsc_ship
-	short_text = "Destroy the UNSC warship"
+	short_text = "Destroy the human warship"
 	explanation_text = "The human weapons are crude but occasionally effective. Eliminate the warship in the area."
 	win_points = 100
 	slipspace_affected = 1
@@ -70,7 +70,7 @@
 /datum/objective/steal_ai
 	var/points_per_ai = 100
 	var/ai_stolen = 0
-	short_text = "Capture human AI"
+	short_text = "Capture human construct"
 	explanation_text = "These humans store tactical and navigational data in their intelligent constructs. What a prize!"
 	slipspace_affected = 1
 
@@ -91,7 +91,7 @@
 
 	return ai_stolen > 0
 
-/datum/objective/steal_ai/get_award_points()
+/datum/objective/steal_ai/get_win_points()
 	return points_per_ai
 
 /datum/objective/retrieve_artifact
@@ -117,7 +117,7 @@
 
 	return artifacts_recovered > 0
 
-/datum/objective/retrieve_artifact/get_award_points()
+/datum/objective/retrieve_artifact/get_win_points()
 	return points_per_artifact
 
 /datum/objective/steal_nav_data
@@ -148,7 +148,7 @@
 
 	return win_points > 0
 
-/datum/objective/steal_nav_data/get_award_points()
+/datum/objective/steal_nav_data/get_win_points()
 	return points_per_nav * 4
 
 /datum/objective/glass_colony
@@ -163,5 +163,9 @@
 		if(game_mode.human_colony && game_mode.human_colony.glassed >= COLONY_GLASSED_AMOUNT_REQUIRED)
 			return 1
 	return 0
+
+/datum/objective/colony_capture/cov
+	short_text = "Capture the human colony"
+	explanation_text = "Holding the human colony will give us time to search it for artifacts."
 
 #undef COLONY_GLASSED_AMOUNT_REQUIRED

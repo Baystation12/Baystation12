@@ -126,17 +126,17 @@
 
 //FACTION DEFINES//
 /datum/npc_ship/unsc_defenseplatform
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Human_Defense.dmm')
+	mapfile_links = list('maps/faction_bases/Human_Defense.dmm')
 	fore_dir = EAST
 	map_bounds = list(50,146,165,107)
 
 /datum/npc_ship/innie_defenseplatform
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Innie_Defense.dmm')
+	mapfile_links = list('maps/faction_bases/Innie_Defense.dmm')
 	fore_dir = EAST
 	map_bounds = list(50,146,165,107)
 
 /datum/npc_ship/cov_defenseplatform
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Defense.dmm')
+	mapfile_links = list('maps/faction_bases/Covenant_Defense.dmm')
 	fore_dir = WEST
 	map_bounds = list(29,70,66,32)
 

@@ -58,7 +58,7 @@
 
 	return !.
 
-/datum/objective/steal_nav_data/cole_protocol/get_award_points()
+/datum/objective/steal_nav_data/cole_protocol/get_win_points()
 	return 0
 
 /datum/objective/steal_ai/cole_protocol
@@ -80,7 +80,7 @@
 
 	return !.
 
-/datum/objective/steal_ai/cole_protocol/get_award_points()
+/datum/objective/steal_ai/cole_protocol/get_win_points()
 	return 0
 
 //todo: oni agent job role
@@ -145,3 +145,7 @@
 		if(!game_mode.cov_ship)
 			return 1
 	return 0
+
+/datum/objective/colony_capture/innie
+	short_text = "Hold the colony"
+	explanation_text = "We draw the line here. Do not allow rebels or aliens to capture our world."
