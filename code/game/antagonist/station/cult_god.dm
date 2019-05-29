@@ -10,7 +10,7 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 	feedback_tag = "godcult_objective"
 	antag_indicator = "hudcultist"
 	faction_verb = /mob/living/proc/dpray
-	welcome_text = "You have been inthralled by a parasitic entity intent on growing on your station. Help them!"
+	welcome_text = "You have been enthralled by a parasitic entity intent on growing on your station. Help them!"
 	victory_text = "The Chorus wins!"
 	loss_text = "The staff managed to stop the Chorus!"
 	victory_feedback_tag = "win - chorus win"

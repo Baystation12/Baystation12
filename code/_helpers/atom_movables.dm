@@ -47,7 +47,7 @@
 		return null
 	var/closest_distance = get_dist(a, possibilities[1])
 	. = possibilities[1]
-	for(var/p in possibilities - possibilities[1])
+	for(var/p in (possibilities - possibilities[1]))
 		var/dist = get_dist(a, p)
 		if(dist < closest_distance)
 			closest_distance = dist

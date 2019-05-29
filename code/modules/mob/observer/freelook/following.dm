@@ -1,7 +1,6 @@
 /mob/observer/eye/stop_following()
-	if(following)
-		if(owner)
-			to_chat(owner, "<span class='warning'>Stopped following \the [following]</span>")
+	if(following && owner)
+		to_chat(owner, "<span class='warning'>Stopped following \the [following]</span>")
 	..()
 
 /mob/observer/eye/start_following(var/atom/a)
