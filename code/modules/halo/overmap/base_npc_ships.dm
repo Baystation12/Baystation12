@@ -290,28 +290,28 @@
 		time_leave_at = world.time + STOP_DISEMBARK_TIME
 
 /datum/npc_ship
-	var/list/mapfile_links = list('maps/civ_hauler/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
+	var/list/mapfile_links = list('maps/civ_ships/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
 
 	var/fore_dir = WEST //The direction of "fore" for the mapfile.
 	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile. Format: Topleft-x,Topleft-y,bottomright-x,bottomright-y
 
 /datum/npc_ship/ccv_star
-	mapfile_links = list('maps/overmap_ships/CCV_Star.dmm')
+	mapfile_links = list('maps/civ_ships/CCV_Star.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_comet
-	mapfile_links = list('maps/overmap_ships/CCV_Comet.dmm')
+	mapfile_links = list('maps/civ_ships/CCV_Comet.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_sbs
-	mapfile_links = list('maps/overmap_ships/CCV_Slow_But_Steady.dmm')
+	mapfile_links = list('maps/civ_ships/CCV_Slow_But_Steady.dmm')
 	fore_dir = WEST
 	map_bounds = list(6,51,72,27)
 
 /datum/npc_ship/unsc_patrol
-	mapfile_links = list('maps/overmap_ships/UNSC_Corvette.dmm')
+	mapfile_links = list('maps/civ_ships/UNSC_Corvette.dmm')
 	fore_dir = WEST
 	map_bounds = list(7,70,54,29)
 

@@ -45,6 +45,9 @@
 			return
 		else
 			var/obj/effect/waypoint_holder/waypoint_to_delete = linked_controller.get_waypoint_from_name(new_value)
+			if(isnull(waypoint_to_delete))
+				to_chat(user,"<span class = 'notice'>Error deleting waypoint. Retry.</span>")
+				return
 			to_chat(user,"<span class = 'warning'>Waypoint [waypoint_to_delete.waypoint_name] deleted.</span>")
 			linked_controller.delete_waypoint(waypoint_to_delete)
 	else if(option == "Remove Squad Members")

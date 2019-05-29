@@ -29,6 +29,7 @@
 		"Jiralhanae" = null,\
 		"Sangheili" = null\
 		)
+	parry_projectiles = 1
 
 /obj/item/weapon/melee/energy/elite_sword/New()
 	. = ..()
@@ -168,6 +169,7 @@
 	active_throwforce = 12
 	edge = 0
 	sharp = 0
+	parry_projectiles = 0
 
 /obj/item/weapon/melee/energy/elite_sword/dagger/activate(mob/living/user)
 	..()
