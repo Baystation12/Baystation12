@@ -62,6 +62,8 @@
 
 	burst = 4
 
+	irradiate_non_cov = 10
+
 /obj/item/weapon/gun/vehicle_turret/covenant/ghost/relay_fire_action()
 	. = ..()
 	linked_vehicle.vehicle_move_delay = 2.5

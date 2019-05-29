@@ -64,4 +64,4 @@
 		)
 	armor_thickness = 15
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv

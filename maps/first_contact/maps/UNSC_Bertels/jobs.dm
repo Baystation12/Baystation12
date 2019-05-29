@@ -67,7 +67,7 @@
 	selection_color = "#0A0A95"
 	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
 	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
-	"EVA Combat Marine")
+	"EVA Combat Marine","Marine Combat Technician")
 	access = list(142,144,192)
 	spawnpoint_override = "UNSC Base Spawns"
 

@@ -12,7 +12,7 @@
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
 	screen_shake = 0
-	irradiate_non_cov = 2
+	irradiate_non_cov = 5
 	var/overcharge_cost = 1
 	sprite_sheets = list(
 		"Tvaoan Kig-Yar" = null,\
@@ -90,6 +90,7 @@
 	load_method = MAGAZINE
 	burst = 3
 	is_heavy = 1
+	irradiate_non_cov = 2
 	slowdown_general = 0
 
 	item_icons = list(

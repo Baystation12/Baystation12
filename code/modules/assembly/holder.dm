@@ -284,3 +284,21 @@
 					to_chat(usr, "<span class='notice'>Timer can't be [ntime<=0?"negative":"more than 1000 seconds"].</span>")
 		else
 			to_chat(usr, "<span class='notice'>You cannot do this while [usr.stat?"unconscious/dead":"restrained"].</span>")
+
+/obj/item/device/assembly_holder/prox_igniter
+	name = "proximity-igniter assembly"
+
+	New()
+		..()
+
+		var/obj/item/device/assembly/igniter/ign = new(src)
+		ign.secured = 1
+		ign.holder = src
+		var/obj/item/device/assembly/prox_sensor/prox = new(src)
+		prox.secured = 1
+		prox.holder = src
+		GLOB.processing_objects.Add(prox)
+		a_left = prox
+		a_right = ign
+		secured = 1
+		update_icon()

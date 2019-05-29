@@ -81,3 +81,18 @@
 		to_chat(user, "<span class='warning'>You need to open the cover to unload [src].</span>")
 		return
 	..()
+
+/obj/item/weapon/gun/launcher/rocket/rgl
+	name = "RGL-Mk12"
+	desc = "Rocket Grenade Launcher"
+	icon = 'code/modules/halo/weapons/icons/URF gadgetry.dmi'
+	icon_state = "1shot_launcher"
+	item_state = "m41"
+	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
+	//reload_sound = 'code/modules/halo/sounds/RocketLauncherReloadSoundEffect.ogg'
+	one_hand_penalty = -1
+	w_class = ITEM_SIZE_HUGE
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)

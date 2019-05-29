@@ -2,6 +2,8 @@
 /obj/item/squad_camera_control
 	name = "Camera Controller"
 	desc = "Interface for control of squad cameras."
+	icon = 'code/modules/halo/squads/waypoint_manager.dmi'
+	icon_state = "waypoint_manager"
 
 	var/obj/machinery/squad_camera_console/spawner
 
