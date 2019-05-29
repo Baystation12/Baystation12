@@ -3564,6 +3564,11 @@
 	pixel_x = -24;
 	pixel_y = 24
 	},
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "hQ" = (
@@ -3974,6 +3979,7 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/window/westleft,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "iC" = (
@@ -4385,6 +4391,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
 "ju" = (

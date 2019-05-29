@@ -15535,6 +15535,18 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
+"cgV" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/assembly/robotics)
 "chb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/iv_drip,
@@ -21295,6 +21307,11 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
 	},
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "izb" = (
@@ -22647,6 +22664,7 @@
 	icon_state = "techfloor_edges";
 	dir = 8
 	},
+/obj/machinery/door/window/westleft,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "kfG" = (
@@ -49335,7 +49353,7 @@ aji
 amA
 iyb
 kfb
-kfb
+cgV
 kub
 auS
 kep
