@@ -111,7 +111,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/small/practice
 
 /obj/item/ammo_magazine/smg
-	name = "submachine gun magazine"
+	name = "box magazine"
 	icon_state = "smg"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
@@ -207,14 +207,22 @@
 	ammo_type = /obj/item/ammo_casing/pistol/throwback
 
 /obj/item/ammo_magazine/box/emp/pistol
+	name = "ammunition box"
+	desc = "A box containing loose rounds of 10mm EMP ammo."
 	labels = list("haywire")
+	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol/emp
 	caliber = CALIBER_PISTOL
+	max_ammo = 15
 
 /obj/item/ammo_magazine/box/emp/smallpistol
+	name = "ammunition box"
+	desc = "A box containing loose rounds of 7mm EMP ammo."
 	labels = list("haywire")
-	ammo_type = /obj/item/ammo_casing/pistol/emp/small
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/pistol/small/emp
 	caliber = CALIBER_PISTOL_SMALL
+	max_ammo = 8
 
 /obj/item/ammo_magazine/proto_smg
 	name = "submachine gun magazine"

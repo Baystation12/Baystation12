@@ -179,7 +179,7 @@
 	icon_state = "pistolcasing_h"
 	matter = list(MATERIAL_STEEL = 130, MATERIAL_URANIUM = 100)
 
-/obj/item/ammo_casing/pistol/emp/small
+/obj/item/ammo_casing/pistol/small/emp
 	name = "small haywire round"
 	desc = "A small bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/tiny
