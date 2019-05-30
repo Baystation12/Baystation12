@@ -720,17 +720,19 @@
 	spawn_flags = IC_SPAWN_DEFAULT
 	origin_tech = list(TECH_ENGINEERING = 2)
 
+	var/lock_enabled = FALSE
+
 /obj/item/integrated_circuit/manipulation/hatchlock/do_work(ord)
 	if(ord == 1)
-		assembly.hatch_locked = !assembly.hatch_locked
+		lock_enabled = !lock_enabled
 
 		visible_message(
-			assembly.hatch_locked ? \
+			lock_enabled ? \
 			"<span class='notice'>\The [get_object()] whirrs. The screws are now covered.</span>" \
 			: \
 			"<span class='notice'>\The [get_object()] whirrs. The screws are now exposed!</span>"
 		)
 
-		set_pin_data(IC_OUTPUT, 1, assembly.hatch_locked)
+		set_pin_data(IC_OUTPUT, 1, lock_enabled)
 		push_data()
 		activate_pin(2)
