@@ -520,6 +520,30 @@
 		var/mob/living/silicon/robot/R = src.loc
 		return (R.cell && R.cell.checked_use(charge_amt))
 
+/obj/item/weapon/shockpaddles/rig
+	name = "mounted defibrillator"
+	desc = "If you can see this something is very wrong, report this bug."
+	cooldowntime = (4 SECONDS)
+	chargetime = (1 SECOND)
+	chargecost = 150
+	safety = 0
+	wielded = 1
+
+/obj/item/weapon/shockpaddles/rig/check_charge(var/charge_amt)
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		return (module.holder && module.holder.cell && module.holder.cell.check_charge(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/checked_use(var/charge_amt)
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		return (module.holder && module.holder.cell && module.holder.cell.checked_use(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/set_cooldown(var/delay)
+	..()
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		module.next_use = world.time + delay
 /*
 	Shockpaddles that are linked to a base unit
 */

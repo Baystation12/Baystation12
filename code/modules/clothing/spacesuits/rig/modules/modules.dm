@@ -144,7 +144,7 @@
 	holder = new_holder
 	return
 
-/obj/item/rig_module/proc/check()
+/obj/item/rig_module/proc/check(var/charge = 50)
 
 	if(damage >= 2)
 		to_chat(usr, "<span class='warning'>The [interface_name] is damaged beyond use!</span>")
@@ -170,7 +170,7 @@
 		to_chat(usr, "<span class='danger'>Access denied.</span>")
 		return 0
 
-	if(!holder.check_power_cost(usr, use_power_cost, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) ) )
+	if(!holder.check_power_cost(usr, charge, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) ) )
 		return 0
 
 	return 1
@@ -178,7 +178,7 @@
 //Proc for one-use abilities like teleport.
 /obj/item/rig_module/proc/engage()
 
-	if(!check())
+	if(!check(use_power_cost))
 		return 0
 
 	next_use = world.time + module_cooldown
