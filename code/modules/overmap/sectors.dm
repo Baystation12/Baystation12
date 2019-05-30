@@ -28,6 +28,7 @@ var/list/points_of_interest = list()
 	var/flagship = 0
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
+	var/block_slipspace = 0		//for planets with gravity wells etc
 
 	var/list/hull_segments = list()
 	var/superstructure_failing = 0

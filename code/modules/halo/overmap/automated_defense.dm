@@ -13,6 +13,7 @@
 	messages_on_hit = list("Automated Defense system taking hostile weapons fire.")
 	messages_on_death = list("Automated Defense system has sustained critical damage. Shutting down.")
 	var/defense_range = 7
+	block_slipspace = 1
 	var/obj/item/projectile/overmap/proj_fired = /obj/item/projectile/overmap/auto_defense_proj
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
@@ -75,7 +76,7 @@
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
-			if(!istype(ship,/obj/effect/overmap/ship/faction_base) && ship.get_faction() != ship_source.get_faction())
+			if(!ship.block_slipspace && ship.get_faction() != ship_source.get_faction())
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
 			previous_target = current_target
