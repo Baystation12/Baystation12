@@ -3683,7 +3683,7 @@
 	pixel_y = -7
 	},
 /obj/random/smokes,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/dais{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/dais{
 	pixel_x = -6;
 	pixel_y = 12
 	},
@@ -7532,7 +7532,7 @@
 /area/hallway/primary/thirddeck/aft)
 "qs" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup,
 /obj/effect/floor_decal/corner/lime{
 	dir = 5
 	},
@@ -13295,7 +13295,7 @@
 /area/maintenance/thirddeck/foreport)
 "DI" = (
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG,
 /obj/item/weapon/deck/cards,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)

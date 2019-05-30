@@ -863,11 +863,11 @@
 /area/crew_quarters/heads/office/xo)
 "cq" = (
 /obj/structure/table/woodentable/mahogany,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = -5;
 	pixel_y = 5
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = 8;
 	pixel_y = -3
 	},
@@ -1670,7 +1670,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = -5;
 	pixel_y = 5
 	},
@@ -8462,7 +8462,7 @@
 "tI" = (
 /obj/structure/table/rack,
 /obj/random/solgov,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = 11;
 	pixel_y = 1
 	},
@@ -8949,7 +8949,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = 11;
 	pixel_y = 1
 	},
@@ -14154,7 +14154,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/pawn,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/pawn,
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
@@ -16714,7 +16714,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = 3;
 	pixel_y = 0
 	},
@@ -17379,7 +17379,7 @@
 	pixel_x = -1;
 	pixel_y = 3
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/NT{
 	pixel_x = 11;
 	pixel_y = 1
 	},

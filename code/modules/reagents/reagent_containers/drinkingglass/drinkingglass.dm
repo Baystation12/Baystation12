@@ -9,6 +9,7 @@
 	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
 	icon = 'icons/obj/drink_glasses/square.dmi'
+	icon_state = null
 	base_icon = "square" // Base icon name
 	filling_states = "20;40;60;80;100"
 	volume = 30
@@ -17,6 +18,7 @@
 	var/list/extras = list() // List of extras. Two extras maximum
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
+	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
 
 	center_of_mass ="x=16;y=9"
 
@@ -77,11 +79,13 @@
 				return 1
 	return 0
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/New()
-	..()
-	icon_state = base_icon
+/obj/item/weapon/reagent_containers/food/drinks/glass2/Initialize()
+	. = ..()
+	if(!icon_state)
+		icon_state = base_icon
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/on_reagent_change()
+	temperature_coefficient = 4 / max(1, reagents.total_volume)
 	update_icon()
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/can_add_extra(obj/item/weapon/glass_extra/GE)
@@ -94,6 +98,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/on_update_icon()
 	underlays.Cut()
+	overlays.Cut()
 
 	if (reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
@@ -125,10 +130,13 @@
 
 		var/image/filling = image(icon, src, "[base_icon][amnt][R.glass_icon]", -2)
 		filling.color = reagents.get_color()
-		underlays += filling
+		if(filling_overlayed)
+			overlays += filling
+		else
+			underlays += filling
 
 		for(var/k in over_liquid)
-			underlays += image(icon, src, k, -1)
+			overlays += image(icon, src, k, -1)
 	else
 		SetName(initial(name))
 		desc = initial(desc)
@@ -170,9 +178,6 @@
 		user.visible_message("<span class='notice'>[user] gently strikes \the [src] with a spoon, calling the room to attention.</span>")
 		playsound(src, "sound/items/wineglass.ogg", 65, 1)
 	else return ..()
-
-/obj/item/weapon/reagent_containers/food/drinks/glass2/on_reagent_change()
-	temperature_coefficient = 4 / max(1, reagents.total_volume)
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/ProcessAtomTemperature()
 	var/old_temp = temperature

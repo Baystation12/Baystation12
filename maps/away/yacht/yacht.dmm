@@ -61,7 +61,7 @@
 /obj/item/weapon/folder/blue,
 /obj/item/weapon/form_printer,
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup,
 /obj/item/weapon/newspaper,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
