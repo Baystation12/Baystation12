@@ -1,6 +1,6 @@
 /obj/effect/overmap/sector/exo_listen
 	name = "Asteroid"
-	icon = 'sector_icon.dmi'
+	icon = 'asteroid_sector_icon.dmi'
 	icon_state = "listening_post"
 	known = 0
 
