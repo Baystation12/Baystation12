@@ -83,7 +83,7 @@
 	var/datum/game_mode/invasion/game_mode = ticker.mode
 	ai_stolen = 0
 	if(istype(game_mode))
-		for(var/area/area in game_mode.covenant_ship_areas)
+		for(var/area/area in game_mode.cov_ship_areas)
 			for(var/mob/living/silicon/ai/A in area)
 				ai_stolen += 1
 
@@ -100,6 +100,7 @@
 	var/artifacts_recovered = 0
 	var/points_per_artifact = 200
 	slipspace_affected = 1
+	var/list/win_areas
 
 /datum/objective/retrieve_artifact/check_completion()
 	if(override > 0)
@@ -107,10 +108,14 @@
 	else if(override < 0)
 		return 0
 
-	var/datum/game_mode/invasion/game_mode = ticker.mode
-	if(istype(game_mode))
-		for(var/area/area in game_mode.covenant_ship_areas)
-			for(var/obj/machinery/artifact/A in area)
+	if(!win_areas)
+		var/datum/game_mode/invasion/game_mode = ticker.mode
+		if(istype(game_mode))
+			win_areas = game_mode.cov_ship_areas
+
+	if(win_areas)
+		for(var/area/cur_area in win_areas)
+			for(var/obj/machinery/artifact/A in cur_area)
 				artifacts_recovered += 1
 
 	win_points = artifacts_recovered * points_per_artifact
@@ -125,6 +130,7 @@
 	explanation_text = "We must locate the hideout of these humans! Retrieve as many nav data chips you can for examination."
 	var/points_per_nav = 30
 	slipspace_affected = 1
+	var/list/win_areas
 
 /datum/objective/steal_nav_data/check_completion()
 	if(override > 0)
@@ -132,19 +138,23 @@
 	else if(override < 0)
 		return 0
 
-	var/list/cov_ship_areas = list()
-	win_points = 0
-	for(var/area/area in cov_ship_areas)
-		for(var/obj/item/nav_data_chip/C in area)
-			if(C.chip_faction == "covenant")
-				continue
-			if(istype(C, /obj/item/nav_data_chip/fragmented))
-				//award partial points for fragments
-				var/obj/item/nav_data_chip/fragmented/F = C
-				win_points += points_per_nav * (F.fragments_have / F.fragments_required)
-			else
-				//award full points for the chip
-				win_points += points_per_nav
+	if(!win_areas)
+		var/datum/game_mode/invasion/game_mode = ticker.mode
+		if(istype(game_mode))
+			win_areas = game_mode.cov_ship_areas
+
+	if(win_areas)
+		for(var/area/cur_area in win_areas)
+			for(var/obj/item/nav_data_chip/C in cur_area)
+				if(C.chip_faction == "covenant")
+					continue
+				if(istype(C, /obj/item/nav_data_chip/fragmented))
+					//award partial points for fragments
+					var/obj/item/nav_data_chip/fragmented/F = C
+					win_points += points_per_nav * (F.fragments_have / F.fragments_required)
+				else
+					//award full points for the chip
+					win_points += points_per_nav
 
 	return win_points > 0
 
