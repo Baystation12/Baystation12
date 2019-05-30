@@ -1,0 +1,4 @@
+author: "EcklesFire"
+delete-after: True
+changes: 
+  - rscdel: "Removed inappropriate boots from Fleet EMT."
