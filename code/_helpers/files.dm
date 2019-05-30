@@ -1,13 +1,15 @@
 //checks if a file exists and contains text
 //returns text as a string if these conditions are met
-/proc/return_file_text(filename)
+/proc/return_file_text(filename, var/log_error = 1)
 	if(fexists(filename) == 0)
-		error("File not found ([filename])")
+		if(log_error)
+			error("File not found ([filename])")
 		return
 
 	var/text = file2text(filename)
 	if(!text)
-		error("File empty ([filename])")
+		if(log_error)
+			error("File empty ([filename])")
 		return
 
 	return text
