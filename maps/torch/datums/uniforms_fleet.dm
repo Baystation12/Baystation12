@@ -171,7 +171,6 @@
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
 						 /obj/item/clothing/under/solgov/utility/fleet/combat/medical,
-						 /obj/item/clothing/shoes/jungleboots,
 						 /obj/item/clothing/gloves/thick/duty/solgov/med)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/medical
 
