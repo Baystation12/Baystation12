@@ -38,20 +38,23 @@
 /obj/effect/overmap/ship/faction_base/cov
 	name = "Vanguard's Mantle"
 	icon_state = "base_cov"
-	faction = "covenant"
+	faction = "Covenant"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
 	ships_spawnnear = list("SDV Vindictive Infraction","Kig-Yar Raider","Kig-Yar Missionary Vessel")
+	base = 1
 
 /obj/effect/overmap/ship/faction_base/unsc
 	name = "Deviance Station"
 	icon_state = "base_unsc"
-	faction = "unsc"
+	faction = "UNSC"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
 	ships_spawnnear = list("UNSC Bertels","UNSC Heavens Above")
+	base = 1
 
 /obj/effect/overmap/ship/faction_base/innie
 	name = "Camp New Hope"
 	icon_state = "base_innie"
-	faction = "innie"
+	faction = "Insurrection"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/innie
 	ships_spawnnear = list("URFS Thorn","URFS Avarice")
+	base = 1

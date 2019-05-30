@@ -1,7 +1,7 @@
 #if !defined(using_map_DATUM)
 
 	#include "../../faction_bases/base_areas.dm"
-
+	#include "../../faction_bases/faction_base.dm"
 	#include "../../faction_bases/faction_spawns.dm"
 
 	#include "../../faction_bases/Covenant_Station.dmm"
