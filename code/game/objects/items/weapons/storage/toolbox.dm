@@ -65,3 +65,12 @@
 	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
 	attack_cooldown = 10
 	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/weapon/wirecutters, /obj/item/device/multitool)
+
+/obj/item/weapon/storage/toolbox/crystal
+	name = "crystalline toolbox"
+	desc = "A translucent toolbox made out of an odd crystalline material. It is commonly used by Adherents that prefer them over tool harnesses, and is surprisingly light."
+	icon_state = "crystal"
+	item_state = "toolbox_crystal"
+	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 3)
+	attack_cooldown = 15
+	startswith = list (/obj/item/weapon/screwdriver/crystal, /obj/item/weapon/wrench/crystal, /obj/item/weapon/weldingtool/electric/crystal, /obj/item/weapon/crowbar/crystal, /obj/item/weapon/wirecutters/crystal, /obj/item/device/multitool/crystal)

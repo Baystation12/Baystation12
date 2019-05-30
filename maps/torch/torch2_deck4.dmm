@@ -849,6 +849,7 @@
 /area/shuttle/escape_pod6/station)
 "da" = (
 /obj/structure/table/glass,
+/obj/item/weapon/storage/toolbox/crystal,
 /turf/simulated/floor/crystal,
 /area/crew_quarters/adherent)
 "dd" = (
