@@ -236,7 +236,7 @@
 		text += "<h3>[faction.name] Objectives</h3>"
 		if(!winning_faction)
 			winning_faction = faction
-		else if(!second_faction)
+		else if(!second_faction && winning_faction != faction)
 			second_faction = faction
 		for(var/datum/objective/objective in faction.all_objectives)
 			var/result = objective.check_completion()
@@ -254,7 +254,7 @@
 
 		if(faction.points > 0)
 			all_points += faction.points
-		if(faction.points >= winning_faction.points)		//<= is necessary to correctly track second place
+		if(winning_faction != faction && faction.points >= winning_faction.points)		//<= is necessary to correctly track second place
 			second_faction = winning_faction
 			winning_faction = faction
 		text += "<h4>Total [faction.name] Score: [faction.points] points</h4><br>"
