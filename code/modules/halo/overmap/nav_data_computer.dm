@@ -206,7 +206,7 @@
 
 /obj/item/nav_data_chip/innie
 	chip_faction = "innie"
-	known_sectors = list("Camp New Hope","Asteroid","KS7-535")
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/fragmented/unsc
 	name = "Fragmented Nav Data Chip"
@@ -220,12 +220,12 @@
 	known_sectors = list("Vanguard's Mantle","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/covenant/kig_yar
-	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535")
+	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/fragmented/innie
 	name = "Fragmented Nav Data Chip"
 	chip_faction = "innie"
-	known_sectors = list("Camp New Hope","Asteroid","KS7-535")
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/machinery/nav_computer/npc/unsc
 	data_chip = new /obj/item/nav_data_chip/fragmented/unsc

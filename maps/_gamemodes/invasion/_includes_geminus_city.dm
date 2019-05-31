@@ -15,10 +15,8 @@
 	#include "../../Exoplanet Research/includes.dm"
 
 	#include "../../geminus_city/geminus_city.dm"
-	#include "jobdefs_geminus.dm"
 
-	//#include "../../ks7_elmsville/includes.dm"
-	//#include "jobdefs_ks7elmsville.dm
+	#include "../../ks7_elmsville/ks7_elmsville.dm"
 
 	#include "../../Admin Planet/includes.dm"
 
