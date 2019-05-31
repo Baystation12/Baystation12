@@ -300,6 +300,8 @@
 	name = "mining drill brace"
 	desc = "A machinery brace for an industrial drill. It looks easily two feet thick."
 	icon_state = "mining_brace"
+	obj_flags = OBJ_FLAG_ROTATABLE
+
 	var/obj/machinery/mining/drill/connected
 
 /obj/machinery/mining/brace/New()
@@ -365,25 +367,7 @@
 	connected.check_supports()
 	connected = null
 
-/obj/machinery/mining/brace/verb/rotate()
-	set name = "Rotate"
-	set category = "Object"
-	set src in oview(1)
-
-	if(!CanPhysicallyInteract(usr))
-		return
-
-	if (src.anchored)
-		to_chat(usr, "It is anchored in place!")
-		return 0
-
-	src.set_dir(turn(src.dir, 90))
-	return 1
-
 /obj/machinery/mining/brace/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
 	if(connected)
 		disconnect()
 	..()
-
-/obj/machinery/mining/brace/AltClick()
-	rotate()
