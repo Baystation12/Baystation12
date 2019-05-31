@@ -5,13 +5,13 @@
 	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = COLOR_GRAY80
+	icon_colour = COLOR_WHITE
 	hardness = 10
 	weight = 5
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	conductive = 0
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 	chem_products = list(
 				/datum/reagent/toxin/plasticide = 20
 				)
@@ -55,7 +55,7 @@
 	conductive = 0
 	stack_type = null
 	hidden_from_codex = TRUE
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 
 //TODO PLACEHOLDERS:
 /material/leather
@@ -68,7 +68,7 @@
 	conductive = 0
 	stack_type = null
 	hidden_from_codex = TRUE
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 
 /material/carpet
 	name = MATERIAL_CARPET
@@ -82,7 +82,7 @@
 	sheet_plural_name = "tiles"
 	conductive = 0
 	stack_type = null
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 
 /material/cloth
 	name = MATERIAL_COTTON
@@ -95,7 +95,7 @@
 	conductive = 0
 	stack_type = null
 	hidden_from_codex = TRUE
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 
 /material/cloth/carpet
 	name = "carpet"

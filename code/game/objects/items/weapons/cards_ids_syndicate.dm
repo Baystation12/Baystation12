@@ -85,8 +85,8 @@
 	GLOB.destroyed_event.unregister(registered_user, src)
 	registered_user = null
 
-/obj/item/weapon/card/id/syndicate/CanUseTopic(mob/user)
-	if(user != registered_user)
+/obj/item/weapon/card/id/syndicate/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
+	if(!(href_list && href_list["look_at_id"]) && (user != registered_user))
 		return STATUS_CLOSE
 	return ..()
 

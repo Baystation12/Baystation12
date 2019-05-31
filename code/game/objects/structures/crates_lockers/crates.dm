@@ -230,7 +230,7 @@
 		/obj/item/weapon/storage/plants = 2,
 		/obj/item/weapon/material/hatchet = 2,
 		/obj/item/weapon/wirecutters/clippers = 2,
-		/obj/item/device/analyzer/plant_analyzer = 2
+		/obj/item/device/scanner/plant = 2
 	)
 
 /obj/structure/closet/crate/secure/biohazard

@@ -32,4 +32,10 @@
 					)
 
 	sacrifice_objects = list(/obj/item/weapon/material/sword,
-							/obj/item/weapon/material/twohanded/fireaxe)
+							/obj/item/weapon/material/twohanded/fireaxe,
+							/obj/item/weapon/melee,
+							/obj/item/weapon/material/knife/ritual,
+							/obj/item/weapon/material/knife/kitchen/cleaver,
+							/obj/item/weapon/material/knife/folding/combat/balisong,
+							/obj/item/weapon/material/knife/folding/tacticool,
+							/obj/item/weapon/material/star)

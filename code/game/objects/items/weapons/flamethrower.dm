@@ -108,8 +108,8 @@
 		update_icon()
 		return
 
-	if(istype(W, /obj/item/device/analyzer))
-		var/obj/item/device/analyzer/A = W
+	if(istype(W, /obj/item/device/scanner/gas))
+		var/obj/item/device/scanner/gas/A = W
 		A.analyze_gases(src, user)
 		return
 	..()

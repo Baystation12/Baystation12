@@ -168,7 +168,7 @@
 
 /obj/item/weapon/forensics/sample_kit/powder
 	name = "fingerprint powder"
-	desc = "A jar containing aluminum powder and a specialized brush."
+	desc = "A jar containing alumiinum powder and a specialized brush."
 	icon_state = "dust"
 	evidence_type = "fingerprint"
 	evidence_path = /obj/item/weapon/sample/print

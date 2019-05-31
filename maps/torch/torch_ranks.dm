@@ -31,7 +31,7 @@
 			/datum/mil_branch/expeditionary_corps,
 			/datum/mil_branch/fleet,
 			/datum/mil_branch/civilian,
-			/datum/mil_branch/solgov, 
+			/datum/mil_branch/solgov,
 			/datum/mil_branch/skrell_fleet
 		)
 	)
@@ -173,8 +173,7 @@
 	)
 
 	assistant_job = /datum/job/crew
-	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
-						SKILL_WEAPONS = SKILL_BASIC,
+	min_skill = list(	SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/army
@@ -488,7 +487,7 @@
 	name = "Admiral"
 	name_short = "ADM"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
-	sort_order = 16
+	sort_order = 18
 
 /*
  *  Army
@@ -636,7 +635,7 @@
  *  Civilians
  *  =========
  */
- 
+
 /datum/mil_rank/civ/civ
 	name = "Civilian"
 

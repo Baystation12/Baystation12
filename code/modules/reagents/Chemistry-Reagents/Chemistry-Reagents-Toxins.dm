@@ -80,7 +80,12 @@
 	taste_description = "absolutely vile"
 	color = "#91d895"
 	target_organ = BP_LIVER
-	strength = 7
+	strength = 5
+
+/datum/reagent/toxin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(prob(volume*2))
+		M.confused = max(M.confused, 3)
+	..()
 
 /datum/reagent/toxin/chlorine
 	name = "Chlorine"
@@ -289,11 +294,12 @@
 	color = "#8e18a9"
 	power = 10
 	meltdose = 4
+	max_damage = 60
 
 /datum/reagent/acid/stomach
 	name = "stomach acid"
 	taste_description = "coppery foulness"
-	power = 1
+	power = 2
 	color = "#d8ff00"
 
 /datum/reagent/lexorin

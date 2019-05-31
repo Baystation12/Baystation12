@@ -9,6 +9,7 @@
 	anchored = 1
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0"
+	layer = BELOW_OBJ_LAYER
 	idle_power_usage = 20
 	clicksound = "button"
 	clickvol = 20

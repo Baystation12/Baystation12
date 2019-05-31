@@ -181,6 +181,7 @@
 	sort_string = "TBAAC"
 
 /datum/design/item/weapon/ammunition/ammo_emp_small
+	name = "haywire 7mm"
 	id = "ammo_emp_small"
 	desc = "A box of small pistol rounds with integrated EMP charges."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
@@ -189,6 +190,7 @@
 	sort_string = "TBAAD"
 
 /datum/design/item/weapon/ammunition/ammo_emp_pistol
+	name = "haywire 10mm"
 	id = "ammo_emp_pistol"
 	desc = "A box of pistol rounds fitted with integrated EMP charges."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)

@@ -260,10 +260,10 @@
 					/obj/item/weapon/folder/blue,
 					/obj/item/clothing/gloves/forensic,
 					/obj/item/device/taperecorder,
-					/obj/item/device/mass_spectrometer,
+					/obj/item/device/scanner/spectrometer,
 					/obj/item/device/camera_film = 2,
 					/obj/item/weapon/storage/photo_album,
-					/obj/item/device/reagent_scanner,
+					/obj/item/device/scanner/reagent,
 					/obj/item/weapon/storage/briefcase/crimekit = 2)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure

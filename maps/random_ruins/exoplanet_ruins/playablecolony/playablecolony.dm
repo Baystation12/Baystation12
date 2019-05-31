@@ -5,6 +5,10 @@
 	suffixes = list("playablecolony/colony.dmm")
 	cost = 2
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
+	ruin_tags = RUIN_HUMAN|RUIN_HABITAT
+	apc_test_exempt_areas = list(
+		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT
+	)
 
 /decl/submap_archetype/playablecolony
 	descriptor = "established colony"

@@ -16,6 +16,7 @@
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#c80000"
+	scannable = 1
 	taste_description = "iron"
 	taste_mult = 1.3
 	glass_name = "tomato juice"
@@ -124,6 +125,7 @@
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
 	color = "#0064c877"
+	scannable = 1
 	metabolism = REM * 10
 	taste_description = "water"
 	glass_name = "water"

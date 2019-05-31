@@ -362,7 +362,11 @@
 	for(var/obj/item/organ/internal/I in target.internal_organs)
 		if(I && !(I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_DEAD) && I.parent_organ == affected.organ_tag && !BP_IS_ROBOTIC(I))
 			dead_organs |= I
-	var/obj/item/organ/internal/organ_to_fix = input(user, "Which organ do you want to regenerate?") as null|anything in dead_organs
+	if(!dead_organs.len)
+		return FALSE
+	var/obj/item/organ/internal/organ_to_fix = dead_organs[1]
+	if(dead_organs.len > 1)
+		organ_to_fix = input(user, "Which organ do you want to regenerate?") as null|anything in dead_organs
 	if(!organ_to_fix)
 		return FALSE
 	if(!organ_to_fix.can_recover())

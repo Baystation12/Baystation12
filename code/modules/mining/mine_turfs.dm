@@ -43,10 +43,8 @@ var/list/mining_floors = list()
 	if (!mining_walls["[src.z]"])
 		mining_walls["[src.z]"] = list()
 	mining_walls["[src.z]"] += src
-	spawn(0)
-		MineralSpread()
-	spawn(2)
-		update_icon(1)
+	MineralSpread()
+	update_icon(1)
 
 /turf/simulated/mineral/Destroy()
 	if (mining_walls["[src.z]"])

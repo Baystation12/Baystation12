@@ -1757,7 +1757,7 @@
 /obj/item/weapon/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/weapon/storage/box/glowsticks,
-/obj/item/weapon/mining_scanner,
+/obj/item/device/scanner/mining,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "em" = (
@@ -2519,7 +2519,7 @@
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 9

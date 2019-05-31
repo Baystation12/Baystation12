@@ -10,7 +10,7 @@
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_sound = 'sound/effects/closet_open.ogg'
 	var/shattered = 0
-	var/list/ui_users = list()
+	var/list/ui_users
 
 	startswith = list(
 		/obj/item/weapon/haircomb/random,
@@ -33,14 +33,7 @@
 	if(shattered)
 		to_chat(user, "<spawn class='notice'>You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out.")
 		return
-
-	if(ishuman(user))
-		var/datum/nano_module/appearance_changer/AC = ui_users[user]
-		if(!AC)
-			AC = new(src, user)
-			AC.name = "SalonPro Nano-Mirror&trade;"
-			ui_users[user] = AC
-		AC.ui_interact(user)
+	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;")
 
 /obj/item/weapon/storage/mirror/proc/shatter()
 	if(shattered)	return
@@ -81,11 +74,8 @@
 	return 1
 
 /obj/item/weapon/storage/mirror/Destroy()
-	for(var/user in ui_users)
-		var/datum/nano_module/appearance_changer/AC = ui_users[user]
-		qdel(AC)
-	ui_users.Cut()
-	..()
+	clear_ui_users(ui_users)
+	. = ..()
 
 // The following mirror is ~special~.
 /obj/item/weapon/storage/mirror/raider
@@ -119,21 +109,31 @@
 	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "mirror"
-	var/list/ui_users = list()
+	var/list/ui_users
 
 /obj/item/weapon/mirror/attack_self(mob/user as mob)
-	if(ishuman(user))
-		var/datum/nano_module/appearance_changer/AC = ui_users[user]
-		if(!AC)
-			AC = new(src, user)
-			AC.name = "SalonPro Nano-Mirror&trade;"
-			AC.flags = APPEARANCE_HAIR
-			ui_users[user] = AC
-		AC.ui_interact(user)
+	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", APPEARANCE_HAIR)
 
 /obj/item/weapon/mirror/Destroy()
-	for(var/user in ui_users)
-		var/datum/nano_module/appearance_changer/AC = ui_users[user]
+	clear_ui_users(ui_users)
+	. = ..()
+
+/proc/open_mirror_ui(var/mob/user, var/ui_users, var/title, var/flags)
+	if(!ishuman(user))
+		return
+
+	var/W = weakref(user)
+	var/datum/nano_module/appearance_changer/AC = LAZYACCESS(ui_users, W)
+	if(!AC)
+		AC = new(src, user)
+		AC.name = title
+		if(flags)
+			AC.flags = flags
+		LAZYSET(ui_users, W, AC)
+	AC.ui_interact(user)
+
+/proc/clear_ui_users(var/list/ui_users)
+	for(var/W in ui_users)
+		var/AC = ui_users[W]
 		qdel(AC)
-	ui_users.Cut()
-	..()
+	LAZYCLEARLIST(ui_users)

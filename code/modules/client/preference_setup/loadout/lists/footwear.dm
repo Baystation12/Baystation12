@@ -59,3 +59,8 @@
 /datum/gear/shoes/sandal
 	display_name = "wooden sandals"
 	path = /obj/item/clothing/shoes/sandal
+
+/datum/gear/shoes/heels
+	display_name = "high heels, colour select"
+	path = /obj/item/clothing/shoes/heels
+	flags = GEAR_HAS_COLOR_SELECTION

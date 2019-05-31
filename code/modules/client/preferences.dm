@@ -57,7 +57,7 @@ datum/preferences
 /datum/preferences/proc/load_and_update_character(var/slot)
 	load_character(slot)
 	if(update_setup(loaded_preferences, loaded_character))
-		save_preferences()
+		SScharacter_setup.queue_preferences_save(src)
 		save_character()
 
 /datum/preferences/proc/ShowChoices(mob/user)

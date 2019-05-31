@@ -17,7 +17,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 
 	initial_modules = list(
-		/obj/item/rig_module/mounted,
+		/obj/item/rig_module/mounted/lcannon,
 		/obj/item/rig_module/vision/thermal,
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/ai_container,
@@ -44,6 +44,8 @@
 	armor = list(melee = 80, bullet = 65, laser = 70, energy = 35, bomb = 100, bio = 100, rad = 80)
 	online_slowdown = 3
 	offline_slowdown = 4
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
 
 /obj/item/weapon/rig/merc/heavy/empty
 	initial_modules = list(

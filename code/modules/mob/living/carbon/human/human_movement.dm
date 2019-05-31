@@ -6,10 +6,10 @@
 
 	tally += species.handle_movement_delay_special(src)
 
-	if (istype(loc, /turf/space)) // It's hard to be slowed down in space by... anything
+	if (istype(loc, /turf/space))
 		if(skill_check(SKILL_EVA, SKILL_PROF))
-			return -2
-		return -1
+			tally -= 2
+		tally -= 1
 
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if(embedded_flag || (stomach && stomach.contents.len))
@@ -48,7 +48,7 @@
 					else
 						item_slowdown = item_slowdown - species.strength - size_mod
 				total_item_slowdown += max(item_slowdown, 0)
-		tally += round(total_item_slowdown)
+		tally += total_item_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)

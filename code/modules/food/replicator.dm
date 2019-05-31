@@ -63,7 +63,7 @@
 /obj/machinery/food_replicator/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
-	else if( !(stat & NOPOWER) )
+	else if(!(stat & NOPOWER))
 		icon_state = initial(icon_state)
 	else
 		src.icon_state = "[initial(icon_state)]-off"
@@ -108,6 +108,7 @@
 		src.audible_message("<b>\The [src]</b> states, \"Error! I do not have enough biomass to serve any more dishes.\"")
 		queued_dishes.Cut()
 		return 0
+	flick("soda-vend", src)
 	biomass -= biomass_per
 	src.audible_message("<b>\The [src]</b> states, \"Your [text] is ready!\"")
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)

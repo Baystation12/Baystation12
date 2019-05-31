@@ -291,7 +291,8 @@
 
 								//create an entry in the account transaction log
 								var/datum/money_account/failed_account = get_account(tried_account_num)
-								failed_account.log_msg("Unauthorized login attempt", machine_id)
+								if(failed_account)
+									failed_account.log_msg("Unauthorized login attempt", machine_id)
 							else
 								to_chat(usr, "\icon[src] <span class='warning'>Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining.</span>")
 								previous_account_number = tried_account_num

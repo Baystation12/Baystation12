@@ -65,7 +65,7 @@
 /obj/random/technology_scanner/spawn_choices()
 	return list(/obj/item/device/t_scanner = 5,
 				/obj/item/device/radio = 2,
-				/obj/item/device/analyzer = 5)
+				/obj/item/device/scanner/gas = 5)
 
 /obj/random/powercell
 	name = "random powercell"

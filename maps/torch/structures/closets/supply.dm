@@ -89,7 +89,7 @@
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/workboots,
-		/obj/item/device/analyzer,
+		/obj/item/device/scanner/gas,
 		/obj/item/weapon/storage/ore,
 		/obj/item/device/radio/headset/headset_mining,
 		/obj/item/device/radio/headset/headset_mining/alt,

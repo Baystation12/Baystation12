@@ -2,8 +2,7 @@
 /obj/machinery/computer/account_database
 	name = "accounts uplink terminal"
 	desc = "Access transaction logs, account data and all kinds of other financial records."
-
-	req_access = list(list(access_hop, access_captain, access_cent_captain))
+	req_access = list(list(access_hop, access_captain))
 	var/receipt_num
 	var/machine_id = ""
 	var/obj/item/weapon/card/id/held_card
@@ -57,7 +56,7 @@
 	data["src"] = "\ref[src]"
 	data["id_inserted"] = !!held_card
 	data["id_card"] = held_card ? text("[held_card.registered_name], [held_card.assignment]") : "-----"
-	data["access_level"] = get_access_level()
+	data["access_level"] = check_access(held_card)
 	data["machine_id"] = machine_id
 	data["creating_new_account"] = creating_new_account
 	data["detailed_account_view"] = !!detailed_account_view
@@ -112,16 +111,6 @@
 		switch(href_list["choice"])
 			if("create_account")
 				creating_new_account = 1
-
-			if("add_funds")
-				var/amount = input("Enter the amount you wish to add", "Silently add funds") as num
-				if(detailed_account_view)
-					detailed_account_view.money = min(detailed_account_view.money + amount, fund_cap)
-
-			if("remove_funds")
-				var/amount = input("Enter the amount you wish to remove", "Silently remove funds") as num
-				if(detailed_account_view)
-					detailed_account_view.money = max(detailed_account_view.money - amount, -fund_cap)
 
 			if("toggle_suspension")
 				if(detailed_account_view)

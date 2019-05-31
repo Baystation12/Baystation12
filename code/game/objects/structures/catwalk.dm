@@ -46,8 +46,6 @@
 		I.color = plated_tile.color
 		overlays += I
 
-
-
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
 		if(1)
@@ -62,20 +60,32 @@
 		do_pull_click(user, src)
 	..()
 
+/obj/structure/catwalk/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
+
+/obj/structure/catwalk/proc/deconstruct(mob/user)
+	playsound(src, 'sound/items/Welder.ogg', 100, 1)
+	to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
+	new /obj/item/stack/material/rods(src.loc)
+	new /obj/item/stack/material/rods(src.loc)
+	//Lattice would delete itself, but let's save ourselves a new obj
+	if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
+		new /obj/structure/lattice/(src.loc)
+	if(plated_tile)
+		new plated_tile.build_type(src.loc)
+	qdel(src)
+
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
 	if(isWelder(C))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
-			new /obj/item/stack/material/rods(src.loc)
-			new /obj/item/stack/material/rods(src.loc)
-			//Lattice would delete itself, but let's save ourselves a new obj
-			if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
-				new /obj/structure/lattice/(src.loc)
-			if(plated_tile)
-				new plated_tile.build_type(src.loc)
-			qdel(src)
+			deconstruct(user)
+		return
+	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
+		cutter.slice(user)
+		deconstruct(user)
 		return
 	if(isCrowbar(C) && plated_tile)
 		hatch_open = !hatch_open

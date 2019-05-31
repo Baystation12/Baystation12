@@ -16,7 +16,7 @@
 	ammonia		spawn_reagent = /datum/reagent/ammonia
 	acetone		spawn_reagent = /datum/reagent/acetone
 	sodium		spawn_reagent = /datum/reagent/sodium
-	aluminum	spawn_reagent = /datum/reagent/aluminum
+	aluminium	spawn_reagent = /datum/reagent/aluminium
 	silicon		spawn_reagent = /datum/reagent/silicon
 	phosphorus	spawn_reagent = /datum/reagent/phosphorus
 	sulfur		spawn_reagent = /datum/reagent/sulfur

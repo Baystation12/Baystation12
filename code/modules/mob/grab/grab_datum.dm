@@ -273,7 +273,7 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
-		to_chat(G.assailant, "<span class='warning'>You can't resist in your current state!</span>")
+		to_chat(G.affecting, "<span class='warning'>You can't resist in your current state!</span>")
 	var/skill_mod = Clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
 	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
 
@@ -283,7 +283,7 @@
 		break_strength--
 
 	if(break_strength < 1)
-		to_chat(G.assailant, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
+		to_chat(G.affecting, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
 		return
 
 	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]

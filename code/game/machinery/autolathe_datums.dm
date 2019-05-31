@@ -323,6 +323,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/implanter
 	category = "Medical"
 
+/datum/autolathe/recipe/pill_bottle
+	name = "pill bottle"
+	path = /obj/item/weapon/storage/pill_bottle
+	category = "Medical"
+
 /datum/autolathe/recipe/syringegun_ammo
 	name = "syringe gun cartridge"
 	path = /obj/item/weapon/syringe_cartridge
@@ -471,6 +476,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "hand labeler"
 	path = /obj/item/weapon/hand_labeler
 	category = "General"
+
+/datum/autolathe/recipe/machete
+	name = "fabricated machete"
+	path = /obj/item/weapon/material/hatchet/machete/steel
+	category = "Arms and Ammunition"
+	resources = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 2500)
 
 /datum/autolathe/recipe/flamethrower
 	name = "flamethrower"

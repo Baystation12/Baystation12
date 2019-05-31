@@ -1,6 +1,7 @@
 /* Contains:
  * /obj/item/rig_module/device
  * /obj/item/rig_module/device/healthscanner
+ * /obj/item/rig_module/device/defib
  * /obj/item/rig_module/device/drill
  * /obj/item/rig_module/device/orescanner
  * /obj/item/rig_module/device/rcd
@@ -31,24 +32,38 @@
 	icon_state = "scanner"
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
+	engage_string = "Display Readout"
+	usable = 1
 	use_power_cost = 200
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
-	device_type = /obj/item/device/healthanalyzer
+	device_type = /obj/item/device/scanner/health
+
+/obj/item/rig_module/device/defib
+	name = "mounted defibrillator"
+	desc = "A complex Vey-Med circuit with two metal electrodes hanging from it."
+	icon_state = "defib"
+
+	interface_name = "mounted defibrillator"
+	interface_desc = "A prototype defibrillator, palm-mounted for ease of use."
+
+	use_power_cost = 0//Already handled by defib, but it's 150 Wh, normal defib takes 100
+	device_type = /obj/item/weapon/shockpaddles/rig
 
 /obj/item/rig_module/device/drill
-	name = "hardsuit drill mount"
+	name = "hardsuit mounted drill"
 	desc = "A very heavy diamond-tipped drill."
 	icon_state = "drill"
 	interface_name = "mounted drill"
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
-	suit_overlay_inactive = "mounted-drill"
-	use_power_cost = 75
+	suit_overlay_inactive = null
+	use_power_cost = 3600 //2 Wh per use
+	module_cooldown = 0
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
-	name = "hardsuit anomaly scanner"
+	name = "anomaly scanner module"
 	desc = "You think it's called an Elder Sarsparilla or something."
 	icon_state = "eldersasparilla"
 	interface_name = "Alden-Saraspova counter"
@@ -66,12 +81,20 @@
 	icon_state = "scanner"
 	interface_name = "ore detector"
 	interface_desc = "A sonar system for detecting large masses of ore."
-	engage_string = "Begin Scan"
+	activate_string = "Get Survey Data Disk"
+	engage_string = "Display Readout"
 	usable = 1
-	selectable = 0
+	toggleable = 1
 	use_power_cost = 200
-	device_type = /obj/item/weapon/mining_scanner
+	device_type = /obj/item/device/scanner/mining
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+
+/obj/item/rig_module/device/orescanner/activate()
+	if(!check() || !device)
+		return 0
+
+	var/obj/item/device/scanner/mining/scanner = device
+	scanner.put_disk_in_hand(holder.wearer)
 
 /obj/item/rig_module/device/rcd
 	name = "RCD mount"
@@ -98,7 +121,7 @@
 		return 1
 
 	var/turf/T = get_turf(target)
-	if(istype(T) && !T.Adjacent(get_turf(src)))
+	if(istype(T) && !target.Adjacent(holder.wearer))
 		return 0
 
 	var/resolved = target.attackby(device,holder.wearer)
@@ -246,6 +269,8 @@
 	usable = 0
 	selectable = 1
 	disruptive = 1
+
+	suit_overlay_active = "mounted-injector"
 
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."

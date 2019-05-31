@@ -14,6 +14,7 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	relative_size = 85
 	damage_reduction = 0
+	can_be_printed = FALSE
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
@@ -261,3 +262,6 @@
 
 /obj/item/organ/internal/brain/get_scarring_level()
 	. = (species.total_health - max_damage)/species.total_health
+
+/obj/item/organ/internal/brain/get_mechanical_assisted_descriptor()
+	return "machine-interface [name]"

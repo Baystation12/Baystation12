@@ -76,6 +76,7 @@
 			if(occupant.client)
 				occupant.client.eye = occupant.client.mob
 				occupant.client.perspective = MOB_PERSPECTIVE
+			occupant.regenerate_icons()
 			occupant = null
 			STOP_PROCESSING(SSobj, src)
 
@@ -125,22 +126,26 @@
 		if(prob(10))
 			for(var/thing in H.internal_organs)
 				var/obj/item/organ/internal/I = thing
-				if(BP_IS_CRYSTAL(I))
-					if(I.damage > 0)
-						I.damage = max(I.damage - rand(3,5), 0)
+				if(BP_IS_CRYSTAL(I) && I.damage)
+					I.heal_damage(rand(3,5))
+					if(prob(25))
 						to_chat(H, "<span class='notice'>The mineral-rich bath mends your [I.name].</span>")
-						repaired_organ = TRUE
-						break
 
 		// Repair robotic external organs.
 		if(!repaired_organ && prob(25))
 			for(var/thing in H.organs)
 				var/obj/item/organ/external/E = thing
 				if(BP_IS_ROBOTIC(E))
+					for(var/obj/implanted_object in E.implants)
+						if(!istype(implanted_object,/obj/item/weapon/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
+							E.implants -= implanted_object
+							to_chat(H, "<span class='notice'>The mineral-rich bath dissolves the [implanted_object.name].</span>")
+							qdel(implanted_object)
 					if(E.brute_dam || E.burn_dam)
-						E.heal_damage(rand(3,5), rand(3,5), TRUE, TRUE)
-						to_chat(H, "<span class='notice'>The mineral-rich bath mends your [E.name].</span>")
-						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E) && prob(25))
+						E.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
+						if(prob(25))
+							to_chat(H, "<span class='notice'>The mineral-rich bath mends your [E.name].</span>")
+						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))
 							E.status |= ORGAN_BRITTLE
 							to_chat(H, "<span class='warning'>It feels a bit brittle, though...</span>")
 						break

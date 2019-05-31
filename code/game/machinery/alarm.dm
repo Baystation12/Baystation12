@@ -159,7 +159,8 @@
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
-	handle_heating_cooling(environment)
+	if(environment.return_pressure() > ONE_ATMOSPHERE*0.05)
+		handle_heating_cooling(environment)
 
 	var/old_level = danger_level
 	var/old_pressurelevel = pressure_dangerlevel
@@ -352,6 +353,11 @@
 			return
 	if(!signal || signal.encryption)
 		return
+	if(alarm_id == signal.data["alarm_id"] && signal.data["command"] == "shutdown")
+		mode = AALARM_MODE_OFF
+		apply_mode()
+		return
+
 	var/id_tag = signal.data["tag"]
 	if (!id_tag)
 		return

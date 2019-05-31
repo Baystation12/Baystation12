@@ -411,6 +411,9 @@ proc/is_blind(A)
 			return 1
 	return 0
 
+/mob/proc/welding_eyecheck()
+	return
+
 /proc/broadcast_security_hud_message(var/message, var/broadcast_source)
 	broadcast_hud_message(message, broadcast_source, GLOB.sec_hud_users, /obj/item/clothing/glasses/hud/security)
 

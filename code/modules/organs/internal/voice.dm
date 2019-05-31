@@ -13,3 +13,6 @@
 			var/lang = all_languages[L]
 			if(lang) language_datums[lang] = TRUE
 	assists_languages = language_datums
+
+/obj/item/organ/internal/voicebox/get_mechanical_assisted_descriptor()
+	return "surgically altered [name]"

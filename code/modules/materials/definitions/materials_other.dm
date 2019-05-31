@@ -17,7 +17,7 @@
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	conductive = 0
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 	hidden_from_codex = TRUE
 
 /material/cult/place_dismantled_girder(var/turf/target)

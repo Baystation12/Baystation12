@@ -39,7 +39,7 @@
 	icon_state = "wall"
 
 	var/undeploy_path = null
-	var/health = 50.0
+	var/health = 10
 
 /obj/structure/inflatable/wall
 	name = "inflatable wall"
@@ -64,7 +64,7 @@
 	..()
 	if(health <= 0)
 		deflate(1)
-	return
+		return PROJECTILE_CONTINUE
 
 /obj/structure/inflatable/ex_act(severity)
 	switch(severity)

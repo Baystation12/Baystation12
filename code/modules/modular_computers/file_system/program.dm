@@ -11,6 +11,7 @@
 	var/obj/item/modular_computer/computer			// Device that runs this program.
 	var/filedesc = "Unknown Program"				// User-friendly name of this program.
 	var/extended_desc = "N/A"						// Short description of this program's function.
+	var/category = PROG_MISC
 	var/program_icon_state = null					// Program-specific screen icon state
 	var/program_key_state = "standby_key"			// Program-specific keyboard icon state
 	var/program_menu_icon = "newwin"				// Icon to use for program's link in main menu

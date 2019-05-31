@@ -1759,7 +1759,7 @@
 /area/unishi/xenobio)
 "ev" = (
 /obj/structure/table/glass,
-/obj/item/device/slime_scanner,
+/obj/item/device/scanner/xenobio,
 /obj/item/weapon/storage/box/monkeycubes,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,

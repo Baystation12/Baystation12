@@ -6,6 +6,6 @@
 	each other across the inky void."
 	language = LANGUAGE_ROOTLOCAL
 	additional_langs = list(LANGUAGE_ROOTGLOBAL)
-	secondary_langs =  list(LANGUAGE_SIGN, LANGUAGE_SPACER)
+	secondary_langs =  list(LANGUAGE_SIGN)
 	ruling_body = "The Diona Chorus"
 	distance = "63 light years"

@@ -70,12 +70,12 @@
 					/obj/item/clothing/under/rank/miner,
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/black,
-					/obj/item/device/analyzer,
+					/obj/item/device/scanner/gas,
 					/obj/item/weapon/storage/ore,
 					/obj/item/device/flashlight/lantern,
 					/obj/item/weapon/shovel,
 					/obj/item/weapon/pickaxe,
-					/obj/item/weapon/mining_scanner,
+					/obj/item/device/scanner/mining,
 					/obj/item/clothing/glasses/material,
 					/obj/item/clothing/glasses/meson)
 	cost = 15

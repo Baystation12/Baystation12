@@ -106,6 +106,7 @@
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
+	eye_icon = 'icons/mob/human_races/species/adherent/eyes.dmi'
 	icon_state = "eyes"
 	status = ORGAN_ROBOTIC
 	phoron_guard = TRUE

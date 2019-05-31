@@ -14,7 +14,6 @@
 #define MATERIAL_IRON                    "iron"
 #define MATERIAL_PLATINUM                "platinum"
 #define MATERIAL_BRONZE                  "bronze"
-#define MATERIAL_REINFORCED_GLASS        "rglass"
 #define MATERIAL_PHORON_GLASS            "phglass"
 #define MATERIAL_REINFORCED_PHORON_GLASS "rphglass"
 #define MATERIAL_MARBLE                  "marble"
@@ -23,6 +22,7 @@
 #define MATERIAL_REINFORCED_CULT         "cult2"
 #define MATERIAL_VOX                     "voxalloy"
 #define MATERIAL_TITANIUM                "titanium"
+#define MATERIAL_RUTILE					 "rutile"
 #define MATERIAL_OSMIUM_CARBIDE_PLASTEEL "osmium-carbide plasteel"
 #define MATERIAL_OSMIUM                  "osmium"
 #define MATERIAL_HYDROGEN                "hydrogen"
@@ -30,7 +30,7 @@
 #define MATERIAL_ELEVATORIUM             "elevatorium"
 #define MATERIAL_ALIENALLOY              "aliumium"
 #define MATERIAL_SAND                    "sand"
-#define MATERIAL_GRAPHENE                "graphene"
+#define MATERIAL_GRAPHITE                "graphite"
 #define MATERIAL_DEUTERIUM               "deuterium"
 #define MATERIAL_TRITIUM                 "tritium"
 #define MATERIAL_SUPERMATTER             "supermatter"
@@ -79,6 +79,16 @@
 #define MATERIAL_PADDING    0x4
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+
+//Weight thresholds
+#define MATERIAL_HEAVY 		24
+#define MATERIAL_LIGHT    	18
+
+//Construction difficulty
+#define MATERIAL_EASY_DIY 		0
+#define MATERIAL_NORMAL_DIY    	1
+#define MATERIAL_HARD_DIY    	2
+#define MATERIAL_VERY_HARD_DIY 	3
 
 //Stack flags
 #define USE_MATERIAL_COLOR 				0x1

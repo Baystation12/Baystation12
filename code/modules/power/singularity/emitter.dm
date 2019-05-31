@@ -32,20 +32,6 @@
 	anchored = 1
 	state = 2
 
-/obj/machinery/power/emitter/verb/rotate()
-	set name = "Rotate"
-	set category = "Object"
-	set src in oview(1)
-
-	if(usr.incapacitated())
-		return
-
-	if (src.anchored)
-		to_chat(usr, "It is fastened to the floor!")
-		return 0
-	src.set_dir(turn(src.dir, 90))
-	return 1
-
 /obj/machinery/power/emitter/Initialize()
 	. = ..()
 	if(state == 2 && anchored)

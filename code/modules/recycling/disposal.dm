@@ -193,6 +193,7 @@
 	if(AM == user)
 		user.visible_message("<span class='danger'>[user] climbs into [src].</span>", \
 							 "<span class='notice'>You climb into [src].</span>")
+		log_and_message_admins("has stuffed themselves into [src].", AM)		 
 	else
 		user.visible_message("<span class='[is_dangerous ? "danger" : "notice"]'>[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]</span>", \
 							 "<span class='notice'>You stuff [AM] into [src].</span>")
@@ -417,6 +418,9 @@
 	if(wrapcheck == 1)
 		H.tomail = 1
 
+	for(var/mob/living/L in src)
+		if (L.ckey)
+			log_and_message_admins("has been flushed down [src].", L)
 
 	sleep(10)
 	if(last_sound < world.time + 1)
@@ -862,16 +866,18 @@
 
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				// check if anything changed over 2 seconds
-				var/turf/uloc = user.loc
-				var/atom/wloc = W.loc
-				to_chat(user, "Slicing the disposal pipe.")
-				sleep(30)
-				if(!W.isOn()) return
-				if(user.loc == uloc && wloc == W.loc)
-					welded()
+
+				if(do_after(user, 20, src))
+					if(!src || !W.isOn())
+						return
+					if(health == 10)
+						to_chat(user, "<span class='info'>You slice the disposal pipe.</span>")
+						welded()
+					else
+						health = 10
+						to_chat(user, "<span class='info'>You repair the disposal pipe.</span>")
 				else
-					to_chat(user, "You must stay still while welding the pipe.")
+					to_chat(user, "<span class='info'>You must stay still while welding the pipe.</span>")
 			else
 				to_chat(user, "You need more welding fuel to cut the pipe.")
 				return

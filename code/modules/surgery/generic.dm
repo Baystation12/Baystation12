@@ -301,18 +301,9 @@
 	max_duration = 160
 	surgery_candidate_flags = 0
 
-/decl/surgery_step/generic/amputate/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	. = FALSE
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		if(affected.how_open())
-			to_chat(user, SPAN_WARNING("You can't get a clean cut with incisions getting in the way."))
-		else
-			. = TRUE
-
 /decl/surgery_step/generic/amputate/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+	if(affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && !affected.how_open())
 		return affected
 
 /decl/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

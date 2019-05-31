@@ -744,6 +744,11 @@
 	name = "\improper Command - CL's Office"
 	req_access = list(access_liaison)
 
+/area/crew_quarters/heads/office/cl/backroom
+	icon_state = "heads_cl"
+	name = "\improper Command - CL's Backroom"
+	req_access = list(access_liaison)
+
 /area/crew_quarters/heads/office/sgr
 	icon_state = "heads_sr"
 	name = "\improper Command - SCGR's Office"
@@ -872,6 +877,21 @@
 
 // Supply
 
+/area/quartermaster
+	req_access = list(access_cargo)
+
+/area/quartermaster/office
+	name = "\improper Supply Office"
+	icon_state = "quartoffice"
+
+/area/quartermaster/storage
+	name = "\improper Supply Warehouse"
+	icon_state = "quartstorage"
+	sound_env = LARGE_ENCLOSED
+
+/area/quartermaster/storage/upper
+	name = "\improper Supply Upper Warehouse"
+
 /area/quartermaster/deckchief
 	name = "\improper Deck Chief's Office"
 	icon_state = "quart"
@@ -928,6 +948,7 @@
 /area/rnd/entry
 	name = "\improper Research and Development Access"
 	icon_state = "decontamination"
+	req_access = list()
 
 /area/rnd/locker
 	name = "\improper Research Locker Room"
@@ -937,11 +958,6 @@
 	name = "\improper Xenobiology Access"
 	icon_state = "xeno_lab"
 	req_access = list() // This is a separate vestibule thing, needs low access.
-
-/area/rnd/checkpoint
-	name = "\improper Research Security Checkpoint"
-	icon_state = "checkpoint1"
-	req_access = list(list(access_research, access_nanotrasen, access_security))
 
 // Crew areas
 /area/crew_quarters/bar
@@ -1056,6 +1072,10 @@
 
 /area/security/opscheck
 	name = "\improper First Deck Security Checkpoint"
+	icon_state = "checkpoint"
+
+/area/security/oldopscheck
+	name = "\improper Decommissioned First Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
 /area/security/habcheck
@@ -1230,6 +1250,10 @@
 
 /area/bridge/disciplinary_board_room
 	name = "\improper Disciplinary Board Room"
+	sound_env = SMALL_ENCLOSED
+
+/area/bridge/disciplinary_board_room/deliberation
+	name = "\improper Deliberation Room"
 	sound_env = SMALL_ENCLOSED
 
 /area/crew_quarters/heads
@@ -1609,22 +1633,6 @@
 	name = "\improper Decommissioned Firing Range"
 	icon_state = "firingrange"
 	req_access = list(access_solgov_crew)
-
-// Cargo
-/area/quartermaster
-	req_access = list(access_cargo)
-
-/area/quartermaster/office
-	name = "\improper Supply Office"
-	icon_state = "quartoffice"
-
-/area/quartermaster/storage
-	name = "\improper Supply Warehouse"
-	icon_state = "quartstorage"
-	sound_env = LARGE_ENCLOSED
-
-/area/quartermaster/storage/upper
-	name = "\improper Supply Upper Warehouse"
 
 // Crew
 

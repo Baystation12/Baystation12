@@ -14,7 +14,9 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
+	var/base_state
 	var/plural_icon_state
+	var/max_icon_state
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stacktype //determines whether different stack types can merge
@@ -75,7 +77,7 @@
 				continue
 			t1+="<br>"
 			var/max_multiplier = round(src.get_amount() / R.req_amount)
-			var/title as text
+			var/title
 			var/can_build = 1
 			can_build = can_build && (max_multiplier>0)
 			if (R.res_amount>1)
@@ -172,6 +174,8 @@
 		amount -= used
 		if (amount <= 0)
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
+		else
+			update_icon()
 		return 1
 	else
 		if(get_amount() < used)
@@ -188,6 +192,7 @@
 			return 0
 		else
 			amount += extra
+			update_icon()
 		return 1
 	else if(!synths || synths.len < uses_charge)
 		return 0

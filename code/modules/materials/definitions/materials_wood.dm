@@ -5,7 +5,7 @@
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = WOOD_COLOR_GENERIC
 	integrity = 75
-	icon_base = "solid"
+	icon_base = "wood"
 	table_icon_base = "wood"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
@@ -23,7 +23,7 @@
 	sheet_plural_name = "planks"
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 	chem_products = list(
 				/datum/reagent/carbon = 10,
 				/datum/reagent/water = 5
@@ -44,7 +44,7 @@
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	adjective_name = MATERIAL_MAHOGANY
 	icon_colour = WOOD_COLOR_RICH
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	sale_price = 3
 
 /material/wood/maple
@@ -63,7 +63,7 @@
 	icon_colour = WOOD_COLOR_BLACK
 	weight = 22
 	integrity = 100
-	construction_difficulty = 4
+	construction_difficulty = MATERIAL_VERY_HARD_DIY
 	sale_price = 4
 
 /material/wood/walnut
@@ -74,7 +74,7 @@
 	adjective_name = MATERIAL_WALNUT
 	icon_colour = WOOD_COLOR_CHOCOLATE
 	weight = 20
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	sale_price = 2
 
 /material/wood/bamboo

@@ -4,8 +4,8 @@
 	department_flag = MED
 	minimal_player_age = 2
 	ideal_character_age = 45
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 8
@@ -45,8 +45,8 @@
 
 /datum/job/doctor
 	title = "Medical Technician"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 3
+	spawn_positions = 3
 	supervisors = "Physicians and the Chief Medical Officer"
 	economic_power = 7
 	ideal_character_age = 40
@@ -113,7 +113,7 @@
 	                    SKILL_CONSTRUCTION 	= SKILL_EXPERT,
 	                    SKILL_ELECTRICAL 	= SKILL_EXPERT)
 	skill_points = 24
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_solgov_crew)
+	access = list(access_robotics, access_robotics_engineering, access_morgue, access_medical, access_solgov_crew)
 	minimal_access = list()
 
 /datum/job/biomech/get_description_blurb()
@@ -123,8 +123,8 @@
 	title = "Trainee Medical Technician"
 	department = "Medical"
 	department_flag = MED
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "Medical personnel, and the Chief Medical Officer"
 	selection_color = "#013d3b"
 	ideal_character_age = 20

@@ -17,6 +17,7 @@
 	fore_dir = WEST
 	color = "#ff00ff"
 	vessel_mass = 1000
+	vessel_size = SHIP_SIZE_SMALL
 	initial_restricted_waypoints = list(
 		"Skrellian Shuttle" = list("nav_skrellscoutsh_dock")
 	)
@@ -32,6 +33,7 @@
 	fore_dir = WEST
 	color = "#880088"
 	vessel_mass = 750
+	vessel_size = SHIP_SIZE_TINY
 
 /datum/shuttle/autodock/overmap/skrellscoutship
 	name = "Skrellian Scout"
@@ -49,6 +51,7 @@
 		/area/ship/skrellscoutship/command/armory, /area/ship/skrellscoutship/crew/rec
 		)
 	defer_initialisation = TRUE
+	knockdown = FALSE
 	flags = SHUTTLE_FLAGS_PROCESS
 	skill_needed = SKILL_NONE
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
@@ -62,7 +65,7 @@
 	warmup_time = 5
 	current_location = "nav_skrellscoutsh_dock"
 	range = 2
-	current_dock_target = "xil_shuttle"
+	dock_target = "xil_shuttle"
 	shuttle_area = /area/ship/skrellscoutshuttle
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS
@@ -75,6 +78,7 @@
 	landmark_tag = "nav_skrellscoutsh_dock"
 	base_area = /area/ship/skrellscoutship/hangar
 	base_turf = /turf/simulated/floor/tiled/skrell
+	docking_controller = "xil_shuttle_dock"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 	
 /obj/effect/shuttle_landmark/skrellscoutshuttle/altdock

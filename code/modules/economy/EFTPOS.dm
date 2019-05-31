@@ -125,11 +125,12 @@
 			if(transaction_locked && !transaction_paid)
 				if(transaction_amount <= E.worth)
 					//transfer the money
-					E.worth -= transaction_amount
 					var/purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
 					purpose += ", paid by [E.owner_name]"
 
 					if(linked_account.deposit(transaction_amount, purpose, machine_id))
+						E.worth -= transaction_amount
+
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						src.visible_message("\icon[src] \The [src] chimes.")
 						transaction_paid = 1

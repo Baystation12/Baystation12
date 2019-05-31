@@ -58,7 +58,7 @@ Pipelines + Other Objects -> Pipe network
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/pipe_painter))
 		return
-	if(istype(A, /obj/item/device/analyzer))
+	if(istype(A, /obj/item/device/scanner/gas))
 		return
 	..()
 

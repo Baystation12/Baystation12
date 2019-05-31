@@ -18,7 +18,7 @@
 /datum/reagent/acetone
 	value = 0.27
 
-/datum/reagent/aluminum
+/datum/reagent/aluminium
 	value = 0.02
 
 /datum/reagent/ammonia

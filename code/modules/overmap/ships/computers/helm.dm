@@ -13,10 +13,12 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/dx		//desitnation
 	var/dy		//coordinates
 	var/speedlimit = 1/(45 SECONDS) //top speed for autopilot
+	var/accellimit = 0.001 //manual limiter for acceleration
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
 	get_known_sectors()
+	speedlimit = round(speedlimit)
 
 /obj/machinery/computer/ship/helm/attempt_hook_up(obj/effect/overmap/ship/sector)
 	if(!(. = ..()))
@@ -46,7 +48,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		else
 			var/brake_path = linked.get_brake_path()
 			var/direction = get_dir(linked.loc, T)
-			var/acceleration = linked.get_acceleration()
+			var/acceleration = min(linked.get_acceleration(), accellimit)
 			var/speed = linked.get_speed()
 			var/heading = linked.get_heading()
 
@@ -64,7 +66,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
 	if(manual_control && linked)
-		linked.relaymove(user,direction)
+		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
+			direction = turn(direction,pick(90,-90))
+		linked.relaymove(user, direction, accellimit)
 		return 1
 
 /obj/machinery/computer/ship/helm/check_eye(var/mob/user as mob)
@@ -102,12 +106,19 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["d_x"] = dx
 		data["d_y"] = dy
 		data["speedlimit"] = speedlimit ? speedlimit*1000 : "None"
-		data["speed"] = round(linked.get_speed()*1000, 0.01)
-		data["accel"] = round(linked.get_acceleration()*1000, 0.01)
+		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit*1000)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
 		data["manual_control"] = manual_control
 		data["canburn"] = linked.can_burn()
+		data["accellimit"] = accellimit*1000
+
+		var/speed = round(linked.get_speed()*1000, 0.01)
+		if(linked.get_speed() < SHIP_SPEED_SLOW)
+			speed = "<span class='good'>[speed]</span>"
+		if(linked.get_speed() > SHIP_SPEED_FAST)
+			speed = "<span class='average'>[speed]</span>"
+		data["speed"] = speed
 
 		if(linked.get_speed())
 			data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
@@ -128,7 +139,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
-			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 400, 630)
+			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 560, 545)
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -198,12 +209,16 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		var/newlimit = input("Input new speed limit for autopilot (0 to disable)", "Autopilot speed limit", speedlimit*1000) as num|null
 		if(newlimit)
 			speedlimit = Clamp(newlimit/1000, 0, 100)
+	if (href_list["accellimit"])
+		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit*1000) as num|null
+		if(newlimit)
+			accellimit = max(newlimit/1000, 0)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
-		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, SKILL_ADEPT, factor = 1)))
+		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
 			ndir = turn(ndir,pick(90,-90))
-		linked.relaymove(user, ndir)
+		linked.relaymove(user, ndir, accellimit)
 
 	if (href_list["brake"])
 		linked.decelerate()

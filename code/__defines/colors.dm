@@ -78,7 +78,8 @@
 #define COLOR_CRYSTAL          "#00c8a5"
 #define COLOR_ASTEROID_ROCK    "#735555"
 #define COLOR_NULLGLASS        "#ff6088"
-#define COLOR_DIAMOND          "#a0fff1"
+#define COLOR_DIAMOND          "#d8d4ea"
+
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
 #define	PIPE_COLOR_RED         "#ff0000"
@@ -135,6 +136,15 @@
 #define COLOR_ASSEMBLY_LBLUE   "#5d99be"
 #define COLOR_ASSEMBLY_BLUE    "#38559e"
 #define COLOR_ASSEMBLY_PURPLE  "#6f6192"
+
+//Colors defines used by e-sword lighting
+#define COLOR_SABER_BLUE       "#40ceff"
+#define COLOR_SABER_RED        "#ff0000"	//In case someone wants to tweak COLOR_RED, since COLOR_GREEN is not #00ff00
+#define COLOR_SABER_GREEN      "#00ff00"
+#define COLOR_SABER_PURPLE     "#6800f4"
+#define COLOR_SABER_SKRELL     "#6600cc"
+#define COLOR_SABER_AXE        "#00ccff"
+#define COLOR_SABER_CUTLASS    "#ff0033"
 
 // Used by fluid system.
 #define COLOR_OCEAN "#99f5ff"

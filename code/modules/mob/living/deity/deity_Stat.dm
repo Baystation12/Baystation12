@@ -6,7 +6,7 @@
 		var/boon_name = "None"
 		if(current_boon)
 			if(istype(current_boon, /spell))
-				var/spell/S = current_boon.
+				var/spell/S = current_boon
 				boon_name = S.name
 			else
 				var/obj/O = current_boon

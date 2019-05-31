@@ -46,7 +46,7 @@
 	icon_state = "entry_1"
 
 /area/ship/skrellscoutship/hangar
-	name = "\improper Hangar"
+	name = "\improper Shuttle Dock"
 	icon_state = "auxstorage"
 
 /area/ship/skrellscoutship/robotics

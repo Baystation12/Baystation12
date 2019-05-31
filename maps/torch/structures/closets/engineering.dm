@@ -64,6 +64,7 @@
 		/obj/item/weapon/folder/yellow,
 		/obj/item/weapon/storage/box/armband/engine,
 		/obj/item/weapon/storage/box/secret_project_disks,
+		/obj/item/weapon/material/knife/folding/swiss/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -88,6 +89,7 @@
 		/obj/item/taperoll/atmos,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/gloves/thick/duty/solgov/eng,
+		/obj/item/weapon/material/knife/folding/swiss/engineer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -115,6 +117,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/gloves/thick/duty/solgov/eng,
+		/obj/item/weapon/material/knife/folding/swiss/engineer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -137,5 +140,5 @@
 		/obj/item/weapon/tank/emergency/oxygen/double,
 		/obj/item/clothing/mask/gas,
 		/obj/item/taperoll/atmos,
-		/obj/item/device/analyzer
+		/obj/item/device/scanner/gas
 	)

@@ -1118,8 +1118,11 @@
 	initialize_directions = SOUTH
 	density = 1
 
-/obj/machinery/atmospherics/pipe/tank/Initialize()
+/obj/machinery/atmospherics/pipe/tank/air/New()
+	..()
 	icon_state = "air"
+
+/obj/machinery/atmospherics/pipe/tank/Initialize()
 	initialize_directions = dir
 	. = ..()
 
@@ -1175,7 +1178,7 @@
 	if(istype(W, /obj/item/device/pipe_painter))
 		return
 
-	if(istype(W, /obj/item/device/analyzer))
+	if(istype(W, /obj/item/device/scanner/gas))
 		return
 
 /obj/machinery/atmospherics/pipe/tank/air

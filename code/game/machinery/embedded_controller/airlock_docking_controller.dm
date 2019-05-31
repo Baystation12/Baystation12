@@ -82,7 +82,7 @@
 
 //tell the docking port to start getting ready for docking - e.g. pressurize
 /datum/computer/file/embedded_program/docking/airlock/prepare_for_docking()
-	airlock_program.begin_cycle_in()
+	airlock_program.begin_dock_cycle()
 
 //are we ready for docking?
 /datum/computer/file/embedded_program/docking/airlock/ready_for_docking()

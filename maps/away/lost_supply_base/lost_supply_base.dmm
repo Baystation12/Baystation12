@@ -1061,7 +1061,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cF" = (
-/obj/item/device/price_scanner,
+/obj/item/device/scanner/price,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cG" = (

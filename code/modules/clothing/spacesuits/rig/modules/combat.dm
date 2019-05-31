@@ -3,7 +3,8 @@
  * /obj/item/rig_module/device/flash
  * /obj/item/rig_module/device/flash/advanced
  * /obj/item/rig_module/grenade_launcher (cleaner, smoke, mfoam)
- * /obj/item/rig_module/mounted (laser cannon)
+ * /obj/item/rig_module/mounted
+ * /obj/item/rig_module/mounted/lcannon
  * /obj/item/rig_module/mounted/egun
  * /obj/item/rig_module/mounted/taser
  * /obj/item/rig_module/mounted/plasmacutter
@@ -28,10 +29,12 @@
 
 /obj/item/rig_module/grenade_launcher
 	name = "mounted grenade launcher"
-	desc = "A shoulder-mounted micro-explosive dispenser."
+	desc = "A forearm-mounted micro-explosive dispenser."
 	selectable = 1
 	icon_state = "grenadelauncher"
 	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
+
+	suit_overlay_active = "grenade"
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
@@ -137,21 +140,21 @@
 
 /obj/item/rig_module/mounted
 
-	name = "mounted laser cannon"
-	desc = "A shoulder-mounted battery-powered laser cannon mount."
+	name = "mounted gun"
+	desc = "Somesort of mounted gun."
 	selectable = 1
 	usable = 1
 	module_cooldown = 0
 	icon_state = "lcannon"
 
-	suit_overlay = "mounted-lascannon"
+	suit_overlay_active = "mounted-lascannon"
 
 	engage_string = "Configure"
 
-	interface_name = "mounted laser cannon"
-	interface_desc = "A shoulder-mounted cell-powered laser cannon."
+	interface_name = "mounted gun"
+	interface_desc = "A shoulder-mounted cell-powered laser gun."
 
-	var/obj/item/weapon/gun/gun = /obj/item/weapon/gun/energy/lasercannon/mounted
+	var/obj/item/weapon/gun/gun
 
 /obj/item/rig_module/mounted/Initialize()
 	. = ..()
@@ -170,41 +173,88 @@
 	gun.Fire(target,holder.wearer)
 	return 1
 
+/obj/item/rig_module/mounted/lcannon
+
+	name = "mounted laser cannon"
+	desc = "A shoulder-mounted battery-powered laser cannon mount."
+	usable = 0
+
+	interface_name = "mounted laser cannon"
+	interface_desc = "A shoulder-mounted cell-powered laser cannon."
+
+	gun = /obj/item/weapon/gun/energy/lasercannon/mounted
+
 /obj/item/rig_module/mounted/egun
 
 	name = "mounted energy gun"
-	desc = "A forearm-mounted energy projector."
+	desc = "A shoulder-mounted energy projector."
 	icon_state = "egun"
 
+	suit_overlay_active = "mounted-taser"
+
 	interface_name = "mounted energy gun"
-	interface_desc = "A forearm-mounted suit-powered energy gun."
+	interface_desc = "A shoulder-mounted suit-powered energy gun."
 	origin_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+
 	gun = /obj/item/weapon/gun/energy/gun/mounted
 
 /obj/item/rig_module/mounted/taser
 
 	name = "mounted taser"
-	desc = "A palm-mounted nonlethal energy projector."
+	desc = "A shoulder-mounted nonlethal energy projector."
 	icon_state = "taser"
-
 	usable = 0
 
-	suit_overlay_active = null
-	suit_overlay_inactive = null
+	suit_overlay_active = "mounted-taser"
 
 	interface_name = "mounted taser"
-	interface_desc = "A palm-mounted, cell-powered taser."
+	interface_desc = "A shoulder-mounted, cell-powered taser."
 	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
+
 	gun = /obj/item/weapon/gun/energy/taser/mounted
 
 /obj/item/rig_module/mounted/plasmacutter
+
 	name = "mounted plasma cutter"
-	desc = "A knee-mounted plasma cutter. Don't question it."
+	desc = "A forearm-mounted plasma cutter."
 	icon_state = "plasmacutter"
+
+	suit_overlay_active = "plasmacutter"
+
 	interface_name = "mounted plasma cutter"
-	interface_desc = "A knee-mounted suit-powered plasma cutter. Don't question it."
+	interface_desc = "A forearm-mounted suit-powered plasma cutter."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 7, TECH_COMBAT = 5)
+
 	gun = /obj/item/weapon/gun/energy/plasmacutter/mounted
+
+/obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
+
+	if(!check() || !gun)
+		return 0
+
+	if(!target)
+		playsound(src.loc, 'sound/weapons/guns/selector.ogg', 50, 1)
+		if(!active)
+			active=1
+			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to close range mode.</span>")
+		else
+			active=0
+			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to firing mode.</span>")
+		return
+
+	if(!active)
+		gun.Fire(target,holder.wearer)
+		return 1
+	else
+		var/turf/T = get_turf(target)
+		if(istype(T) && !target.Adjacent(holder.wearer))
+			return 0
+
+		var/resolved = target.attackby(gun,holder.wearer)
+		if(!resolved && gun && target)
+			gun.afterattack(target,holder.wearer,1)
+			holder.check_power_cost(usr, 18000, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) )//Uses 10 wh per use
+			return 1
 
 /obj/item/rig_module/mounted/energy_blade
 
@@ -212,7 +262,7 @@
 	desc = "A powerful cutting beam projector."
 	icon_state = "eblade"
 
-	suit_overlay = null
+	suit_overlay_active = null
 
 	activate_string = "Project Blade"
 	deactivate_string = "Cancel Blade"
@@ -227,7 +277,7 @@
 	active_power_cost = 500
 	passive_power_cost = 0
 
-	gun = /obj/item/weapon/gun/energy/crossbow/ninja
+	gun = /obj/item/weapon/gun/energy/crossbow/ninja/mounted
 
 /obj/item/rig_module/mounted/energy_blade/Process()
 
@@ -240,7 +290,8 @@
 
 /obj/item/rig_module/mounted/energy_blade/activate()
 
-	..()
+	if(!..() || !gun)
+		return 0
 
 	var/mob/living/M = holder.wearer
 

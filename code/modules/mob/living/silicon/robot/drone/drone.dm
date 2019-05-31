@@ -69,7 +69,7 @@ var/list/mob_hat_cache = list()
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
-
+	default_language = all_languages["Drone Talk"]
 	// NO BRAIN.
 	mmi = null
 
@@ -203,7 +203,7 @@ var/list/mob_hat_cache = list()
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return
 
-	else if(isCrowbar(W))
+	else if(isCrowbar(W) && user.a_intent != I_HURT)
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 

@@ -11,6 +11,35 @@
 	var/list/eye_colour = list(0,0,0)
 	var/innate_flash_protection = FLASH_PROTECTION_NONE
 	max_damage = 45
+	var/eye_icon = 'icons/mob/human_races/species/default_eyes.dmi'
+	var/apply_eye_colour = TRUE
+	var/tmp/last_cached_eye_colour
+	var/tmp/last_eye_cache_key
+
+/obj/item/organ/internal/eyes/proc/get_eye_cache_key()
+	last_cached_eye_colour = rgb(eye_colour[1],eye_colour[2], eye_colour[3])
+	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]"
+	return last_eye_cache_key
+
+/obj/item/organ/internal/eyes/proc/get_onhead_icon()
+	var/cache_key = get_eye_cache_key()
+	if(!human_icon_cache[cache_key])
+		var/icon/eyes_icon = icon(icon = eye_icon, icon_state = "")
+		if(apply_eye_colour)
+			eyes_icon.Blend(last_cached_eye_colour, ICON_ADD)
+		human_icon_cache[cache_key] = eyes_icon
+	return human_icon_cache[cache_key]
+
+/obj/item/organ/internal/eyes/proc/get_special_overlay()
+	var/icon/I = get_onhead_icon()
+	if(I)
+		var/cache_key = "[last_eye_cache_key]-glow"
+		if(!human_icon_cache[cache_key])
+			var/image/eye_glow = image(I)
+			eye_glow.layer = EYE_GLOW_LAYER
+			eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+			human_icon_cache[cache_key] = eye_glow
+		return human_icon_cache[cache_key]
 
 /obj/item/organ/internal/eyes/proc/change_eye_color()
 	set name = "Change Eye Color"
@@ -85,3 +114,6 @@
 	dead_icon = "camera_broken"
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 	update_colour()
+
+/obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
+	return "retinal overlayed [name]"
