@@ -10361,7 +10361,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
 "xV" = (
-/obj/structure/closet/crate/secure/biohazard/blanks,
+/obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/alarm{
 	alarm_id = "petrov2";
@@ -13532,7 +13532,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
 "JA" = (
-/obj/structure/closet/crate/secure/biohazard/blanks,
+/obj/structure/closet/crate/secure/biohazard,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/custodial)
 "JB" = (
@@ -15516,7 +15516,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "QR" = (
-/obj/structure/closet/crate/secure/biohazard/blanks,
+/obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	layer = 2.4;
