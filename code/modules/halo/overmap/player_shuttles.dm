@@ -94,7 +94,7 @@
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/innie
 	icon = 'code/modules/halo/icons/overmap/darter.dmi'
-	faction = "innie"
+	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/innie_shuttle)
 
 /obj/machinery/shuttle_spawner/cov
