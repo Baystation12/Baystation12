@@ -250,10 +250,10 @@
 	sort_order = 13
 	followed_type = /obj/item/weapon/card/id/captains_spare
 
-/datum/follow_holder/stack
+/datum/follow_holder/voxstack
 	sort_order = 14
-	followed_type = /obj/item/organ/internal/stack
+	followed_type = /obj/item/organ/internal/voxstack
 
-/datum/follow_holder/stack/show_entry()
-	var/obj/item/organ/internal/stack/S = followed_instance
+/datum/follow_holder/voxstack/show_entry()
+	var/obj/item/organ/internal/voxstack/S = followed_instance
 	return ..() && !S.owner
