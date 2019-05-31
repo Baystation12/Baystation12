@@ -66,3 +66,6 @@
 	var/updates = 0
 	var/update_progress = 0
 	var/update_postshutdown
+
+	var/interact_sounds
+	var/interact_sound_volume = 40

@@ -4,7 +4,7 @@
 	icon_state = "drone-standard"
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	dismantle_type = /obj/item/robot_parts/robot_suit/flyer
-	speed = -2 // nyoom
+	speed = -1 // nyoom
 	power_efficiency = 0.75
 
 	// They are not very heavy or strong.
@@ -20,6 +20,7 @@
 	components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
 	components["camera"] =         new/datum/robot_component/camera(src)
 	components["comms"] =          new/datum/robot_component/binary_communication(src)
+	components["armour"] =         new/datum/robot_component/armour/light(src)
 
 /mob/living/silicon/robot/flying/Life()
 	. = ..()

@@ -1648,6 +1648,12 @@
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/toilets)
+"lV" = (
+/obj/effect/paint/silver,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall/r_wall,
+/area/ship/skrellscoutship/crew/toilets)
 "nH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/skrell/orange,
@@ -1822,6 +1828,14 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/r_wall,
 /area/ship/skrellscoutship/dock)
+"Cl" = (
+/obj/effect/paint/silver,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall/r_wall,
+/area/ship/skrellscoutship/crew/toilets)
 "Cr" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -1967,9 +1981,6 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
 "Uk" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
 /obj/machinery/door/airlock/glass{
 	name = "Bathroom";
 	req_access = newlist()
@@ -7310,8 +7321,8 @@ bo
 FP
 Bz
 Uk
-wb
-wb
+Cl
+lV
 YX
 Gn
 ca

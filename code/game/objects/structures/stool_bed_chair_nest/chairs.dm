@@ -6,6 +6,8 @@
 	base_icon = "chair"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
+	obj_flags = OBJ_FLAG_ROTATABLE
+	
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -25,11 +27,11 @@
 		SK.master = E
 		qdel(src)
 
-/obj/structure/bed/chair/attack_tk(mob/user as mob)
+/obj/structure/bed/chair/attack_tk(mob/user)
 	if(buckled_mob)
 		..()
 	else
-		rotate()
+		rotate(user)
 	return
 
 /obj/structure/bed/chair/post_buckle_mob()
@@ -86,27 +88,6 @@
 	..()
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
-
-/obj/structure/bed/chair/AltClick()
-	rotate()
-
-/obj/structure/bed/chair/verb/rotate()
-	set name = "Rotate Chair"
-	set category = "Object"
-	set src in oview(1)
-
-	if(!usr || !Adjacent(usr))
-		return
-
-	if(usr.stat == DEAD)
-		if(!round_is_spooky())
-			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
-			return
-	else if(usr.incapacitated())
-		return
-
-	src.set_dir(turn(src.dir, 90))
-	return
 
 /obj/structure/bed/chair/padded/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, MATERIAL_CARPET)

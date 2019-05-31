@@ -4653,7 +4653,7 @@
 "alQ" = (
 /obj/machinery/requests_console{
 	announcementConsole = 1;
-	department = "Security";
+	department = "Medbay";
 	departmentType = 5;
 	pixel_y = 30
 	},
@@ -6649,11 +6649,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
-	},
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
 	},
 /obj/item/weapon/defibrillator/compact/loaded,
 /obj/item/auto_cpr,
@@ -10286,8 +10281,8 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/uniform_vendor{
-	icon_state = "robotics";
-	dir = 8
+	dir = 8;
+	icon_state = "uniform"
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
@@ -14709,6 +14704,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
+"bmJ" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/carpet/green,
+/area/rnd/breakroom)
 "bnG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -16261,6 +16260,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
 "daB" = (
@@ -17278,6 +17278,12 @@
 /obj/item/device/integrated_electronics/wirer,
 /obj/item/device/integrated_electronics/analyzer,
 /obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/device/multitool{
+	pixel_x = 3
+	},
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "ehT" = (
@@ -18081,8 +18087,8 @@
 /area/medical/subacute)
 "eZQ" = (
 /obj/machinery/lapvend{
-	icon_state = "robotics";
-	dir = 4
+	dir = 4;
+	icon_state = "laptop"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/teleporter/firstdeck)
@@ -23983,7 +23989,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/mob/living/simple_animal/cat/fluff/Runtime,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/carpet,
 /area/medical/mentalhealth)
 "lGb" = (
@@ -26232,6 +26238,11 @@
 	dir = 6
 	},
 /obj/random/medical/lite,
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "onb" = (
@@ -26406,6 +26417,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
+"ovZ" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/carpet/purple,
+/area/chapel/main)
 "owb" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
@@ -55382,9 +55397,9 @@ hYb
 apJ
 aqQ
 aqQ
-aqT
-auc
 aqQ
+auc
+aqT
 awz
 axA
 ayz
@@ -56401,7 +56416,7 @@ ugg
 jlb
 aAP
 pSA
-ozb
+bmJ
 ozb
 pSA
 aGG
@@ -57403,7 +57418,7 @@ apR
 oob
 nMb
 oob
-oob
+ovZ
 oob
 awE
 hiD

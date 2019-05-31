@@ -471,7 +471,7 @@ SUBSYSTEM_DEF(jobs)
 			else
 				domain = "freemail.net"
 			if(domain)
-				ntnet_global.create_email(H, H.real_name, domain)
+				ntnet_global.create_email(H, H.real_name, domain, rank)
 		// END EMAIL GENERATION
 
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)

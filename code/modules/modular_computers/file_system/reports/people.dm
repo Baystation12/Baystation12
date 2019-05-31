@@ -7,7 +7,16 @@
 	var/attach_report = (alert(user, "Do you wish to attach [owner.display_name()]?","Document Email", "Yes.", "No.") == "Yes.") ? 1 : 0
 	if(alert(user, "Are you sure you want to send this email?","Document Email", "Yes.", "No.") == "No.")
 		return
-	if(perform_send(subject, body, attach_report))
+	var/datum/computer_file/data/text/report_file
+	if(attach_report)
+		var/list/user_access = list()
+		var/obj/item/weapon/card/id/I = user.GetIdCard()
+		if(I)
+			user_access |= I.access
+		report_file = new
+		report_file.stored_data = owner.generate_pencode(user_access, no_html = 1) //TXT files can't have html; they use pencode only.
+		report_file.filename = owner.filename
+	if(perform_send(subject, body, report_file))
 		to_chat(user, "<span class='notice'>The email has been sent.</span>")
 
 //Helper procs.
@@ -20,8 +29,7 @@
 	message.title = subject
 	message.stored_data = body
 	message.source = server.login
-	if(attach_report)
-		message.attachment = owner.clone()
+	message.attachment = attach_report
 	server.send_mail(recipient, message)
 
 /datum/report_field/people/proc/format_output(name, rank, milrank)

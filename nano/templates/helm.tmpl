@@ -17,7 +17,7 @@
 					Speed:
 				</div>
 				<div style="float:right">
-					{{:data.speed}}
+					{{:data.speed}} Gm/h
 				</div>
 			</div>
 			<div class='item'>
@@ -25,7 +25,7 @@
 					Acceleration:
 				</div>
 				<div style="float:right">
-					{{:data.accel}}
+					{{:data.accel}} Gm/h
 				</div>
 			</div>
 			<div class='item'>
@@ -33,7 +33,7 @@
 					Heading:
 				</div>
 				<div style="float:right">
-					{{:data.heading}}
+					{{:data.heading}}&deg;
 				</div>
 			</div> 
 			<div class='item'>
@@ -41,7 +41,7 @@
 					Acceleration limiter:
 				</div>
 				<div style="float:right">
-					{{:helper.link(data.accellimit, null, { 'accellimit' : 1}, null, null)}}
+					{{:helper.link(data.accellimit, null, { 'accellimit' : 1}, null, null)}} Gm/h
 				</div>
 			</div> 
 		</div>
@@ -96,7 +96,7 @@
 					Speed limit:
 				</div>
 				<div class="itemContent">
-					{{:helper.link(data.speedlimit, null, { 'speedlimit' : 1 }, null, null)}}
+					{{:helper.link(data.speedlimit, null, { 'speedlimit' : 1 }, null, null)}} Gm/h
 				</div>
 			</div> 
 			<div class="item">

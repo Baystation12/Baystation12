@@ -38,8 +38,13 @@
 	if(item_flags & ITEM_FLAG_AIRTIGHT)
 		armor_strings += "It is airtight."
 
-	if(item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE)
+	if(min_pressure_protection == 0)
 		armor_strings += "Wearing this will protect you from the vacuum of space."
+	else if(min_pressure_protection != null)
+		armor_strings += "Wearing this will protect you from low pressures, but not the vacuum of space."
+
+	if(max_pressure_protection != null)
+		armor_strings += "This suit is rated for pressures up to [max_pressure_protection] kPa."
 
 	if(item_flags & ITEM_FLAG_THICKMATERIAL)
 		armor_strings += "The material is exceptionally thick."

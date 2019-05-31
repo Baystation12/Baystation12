@@ -204,6 +204,8 @@
 				if(!account.can_login)
 					continue
 				all_accounts.Add(list(list(
+					"name" = account.fullname,
+					"job" = account.assignment,
 					"login" = account.login
 				)))
 			data["addressbook"] = 1

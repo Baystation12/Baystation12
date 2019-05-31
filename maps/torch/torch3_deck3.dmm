@@ -2349,6 +2349,10 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/tcommsat/chamber)
+"fl" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/galleybackroom)
 "fn" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Engineering Hard Storage"
@@ -11257,7 +11261,7 @@
 	},
 /obj/machinery/vending/lavatory{
 	icon_state = "lavatory";
-	dir = 4
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
@@ -16872,6 +16876,13 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/diplomat)
+"Mm" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled,
+/area/hydroponics)
 "Mn" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -19520,6 +19531,13 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
+"UP" = (
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/galley)
 "UQ" = (
 /obj/item/device/radio/intercom{
 	dir = 1;
@@ -35924,7 +35942,7 @@ WQ
 dy
 iU
 gs
-gs
+fl
 gs
 Uq
 ih
@@ -37337,7 +37355,7 @@ cN
 YF
 ig
 fp
-fp
+UP
 Fw
 ii
 ev
@@ -38947,7 +38965,7 @@ aa
 aI
 be
 bC
-Oy
+Mm
 in
 wn
 nZ

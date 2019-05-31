@@ -6,7 +6,7 @@
 	name = "Space helmet"
 	icon_state = "space"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	flags_inv = BLOCKHAIR
 	item_state_slots = list(
 		slot_l_hand_str = "s_helmet",
@@ -18,6 +18,8 @@
 	body_parts_covered = HEAD|FACE|EYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	min_pressure_protection = 0
+	max_pressure_protection = SPACE_SUIT_MAX_PRESSURE
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0
@@ -28,7 +30,7 @@
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
-	brightness_on = 4
+	brightness_on = 0.5
 	on = 0
 
 	var/tinted = null	//Set to non-null for toggleable tint helmets
@@ -107,13 +109,15 @@
 	w_class = ITEM_SIZE_LARGE//large item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/device/suit_cooling_unit)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_pressure_protection = 0
+	max_pressure_protection = SPACE_SUIT_MAX_PRESSURE
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0

@@ -138,7 +138,6 @@
 				)
 	integrity = 125
 	weight = 18
-	brute_armor = 3
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#cccdcc"

@@ -50,7 +50,6 @@
 	name = OUTFIT_JOB_NAME("Biomechanical Engineer")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
 	shoes = /obj/item/clothing/shoes/black
-	l_ear = /obj/item/device/radio/headset/torchroboticist
 	id_type = /obj/item/weapon/card/id/torch/contractor/biomech
 	pda_type = /obj/item/modular_computer/pda/roboticist
 

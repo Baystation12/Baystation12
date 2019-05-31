@@ -39,6 +39,18 @@
 	var/list/possible_features = list()
 	var/list/spawned_features
 
+	var/habitability_class
+
+/obj/effect/overmap/sector/exoplanet/proc/generate_habitability()
+	var/roll = rand(1,100)
+	switch(roll)
+		if(1 to 10)
+			habitability_class = HABITABILITY_IDEAL
+		if(11 to 50)
+			habitability_class = HABITABILITY_OKAY
+		else
+			habitability_class = HABITABILITY_BAD
+
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
 		return
@@ -66,10 +78,11 @@
 	..()
 
 /obj/effect/overmap/sector/exoplanet/proc/build_level()
+	generate_habitability()
 	generate_atmosphere()
 	generate_map()
 	generate_features()
-	generate_landing(2)		//try making 4 landmarks
+	generate_landing(2)
 	update_biome()
 	generate_daycycle()
 	START_PROCESSING(SSobj, src)
@@ -223,6 +236,19 @@
 		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
 	if(atmosphere)
+		//Set up gases for living things
+		if(!LAZYLEN(breathgas))
+			var/list/goodgases = gas_data.gases.Copy()
+			var/gasnum = min(rand(1,3), goodgases.len)
+			for(var/i = 1 to gasnum)
+				var/gas = pick(goodgases)
+				breathgas[gas] = round(0.4*goodgases[gas])
+				goodgases -= gas
+		if(!badgas)
+			var/list/badgases = gas_data.gases.Copy()
+			badgases -= atmosphere.gas
+			badgas = pick(badgases)
+
 		A.minbodytemp = atmosphere.temperature - 20
 		A.maxbodytemp = atmosphere.temperature + 30
 		A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
@@ -283,7 +309,7 @@
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
-	if(prob(10))	//small chance of getting a perfectly habitable planet
+	if(habitability_class == HABITABILITY_IDEAL)
 		atmosphere.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
 		atmosphere.adjust_gas("nitrogen", MOLES_N2STANDARD)
 	else //let the fuckery commence
@@ -294,24 +320,30 @@
 			newgases -= "aliether"
 		newgases -= "watervapor"
 
-		var/sanity = prob(99.9)
-
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
+		var/badflag = 0
+
+		//Breathable planet
+		if(habitability_class == HABITABILITY_OKAY)
+			atmosphere.gas["oxygen"] += MOLES_O2STANDARD
+			total_moles -= MOLES_O2STANDARD
+			badflag = XGM_GAS_FUEL|XGM_GAS_CONTAMINANT
+
 		var/gasnum = rand(1,4)
 		var/i = 1
+		var/sanity = prob(99.9)
 		while(i <= gasnum && total_moles && newgases.len)
+			if(badflag && sanity)
+				for(var/g in newgases)
+					if(gas_data.flags[g] & badflag)
+						newgases -= g
 			var/ng = pick_n_take(newgases)	//pick a gas
 			if(sanity) //make sure atmosphere is not flammable... always
-				var/badflag = 0
 				if(gas_data.flags[ng] & XGM_GAS_OXIDIZER)
-					badflag = XGM_GAS_FUEL
+					badflag |= XGM_GAS_FUEL
 				if(gas_data.flags[ng] & XGM_GAS_FUEL)
-					badflag = XGM_GAS_OXIDIZER
-				if(badflag)
-					for(var/g in newgases)
-						if(gas_data.flags[g] & badflag)
-							newgases -= g
-					sanity = 0
+					badflag |= XGM_GAS_OXIDIZER
+				sanity = 0
 
 			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
 			if(i == gasnum || !newgases.len) //if it's last gas, let it have all remaining moles
@@ -319,13 +351,6 @@
 			atmosphere.gas[ng] += part
 			total_moles = max(total_moles - part, 0)
 			i++
-
-	//Set up gases for living things
-	for(var/gas in atmosphere.gas)
-		breathgas[gas] = round(0.4*atmosphere.gas[gas])
-	var/list/badgases = gas_data.gases.Copy()
-	badgases -= atmosphere.gas
-	badgas = pick(badgases)
 
 /obj/effect/overmap/sector/exoplanet/get_scan_data(mob/user)
 	. = ..()

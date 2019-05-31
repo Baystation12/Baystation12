@@ -176,7 +176,9 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
-	                    SKILL_DEVICES		= SKILL_ADEPT)
+	                    SKILL_DEVICES		= SKILL_ADEPT,
+	                    SKILL_EVA           = SKILL_ADEPT,
+	                    SKILL_MECH          = HAS_PERK)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
@@ -187,7 +189,7 @@
 	                    SKILL_MEDICAL      = SKILL_EXPERT)
 	skill_points = 20
 
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
+	access = list(access_robotics, access_robotics_engineering, access_engine, access_solgov_crew)
 	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()

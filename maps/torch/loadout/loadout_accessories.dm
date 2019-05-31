@@ -61,6 +61,10 @@
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/specialty/pilot
 	allowed_skills = list(SKILL_PILOT = SKILL_ADEPT)
+	allowed_branches = list(
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/expeditionary_corps
+	)
 
 /datum/gear/accessory/fleetpatch
 	display_name = "fleet patch"
@@ -119,7 +123,7 @@
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/merchant)
 
 /datum/gear/storage/white_vest
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/medical_trainee, /datum/job/chemist, /datum/job/biomech, /datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/storage/brown_drop_pouches
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
@@ -129,7 +133,7 @@
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/merchant)
 
 /datum/gear/storage/white_drop_pouches
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/medical_trainee, /datum/job/chemist, /datum/job/biomech, /datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/tactical/holster
 	allowed_roles = ARMED_ROLES

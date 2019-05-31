@@ -80,6 +80,16 @@
 
 #define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
+//Weight thresholds
+#define MATERIAL_HEAVY 		24
+#define MATERIAL_LIGHT    	18
+
+//Construction difficulty
+#define MATERIAL_EASY_DIY 		0
+#define MATERIAL_NORMAL_DIY    	1
+#define MATERIAL_HARD_DIY    	2
+#define MATERIAL_VERY_HARD_DIY 	3
+
 //Stack flags
 #define USE_MATERIAL_COLOR 				0x1
 #define USE_MATERIAL_SINGULAR_NAME    	0x2

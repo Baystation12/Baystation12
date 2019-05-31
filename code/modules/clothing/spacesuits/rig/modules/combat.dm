@@ -29,7 +29,7 @@
 
 /obj/item/rig_module/grenade_launcher
 	name = "mounted grenade launcher"
-	desc = "A shoulder-mounted micro-explosive dispenser."
+	desc = "A forearm-mounted micro-explosive dispenser."
 	selectable = 1
 	icon_state = "grenadelauncher"
 	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
@@ -187,13 +187,13 @@
 /obj/item/rig_module/mounted/egun
 
 	name = "mounted energy gun"
-	desc = "A forearm-mounted energy projector."
+	desc = "A shoulder-mounted energy projector."
 	icon_state = "egun"
 
 	suit_overlay_active = "mounted-taser"
 
 	interface_name = "mounted energy gun"
-	interface_desc = "A forearm-mounted suit-powered energy gun."
+	interface_desc = "A shoulder-mounted suit-powered energy gun."
 	origin_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
 
 	gun = /obj/item/weapon/gun/energy/gun/mounted
@@ -201,14 +201,14 @@
 /obj/item/rig_module/mounted/taser
 
 	name = "mounted taser"
-	desc = "A palm-mounted nonlethal energy projector."
+	desc = "A shoulder-mounted nonlethal energy projector."
 	icon_state = "taser"
 	usable = 0
 
 	suit_overlay_active = "mounted-taser"
 
 	interface_name = "mounted taser"
-	interface_desc = "A palm-mounted, cell-powered taser."
+	interface_desc = "A shoulder-mounted, cell-powered taser."
 	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 
 	gun = /obj/item/weapon/gun/energy/taser/mounted
@@ -216,45 +216,45 @@
 /obj/item/rig_module/mounted/plasmacutter
 
 	name = "mounted plasma cutter"
-	desc = "A knee-mounted plasma cutter. Don't question it."
+	desc = "A forearm-mounted plasma cutter."
 	icon_state = "plasmacutter"
 
 	suit_overlay_active = "plasmacutter"
 
 	interface_name = "mounted plasma cutter"
-	interface_desc = "A knee-mounted suit-powered plasma cutter. Don't question it."
+	interface_desc = "A forearm-mounted suit-powered plasma cutter."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 7, TECH_COMBAT = 5)
 
 	gun = /obj/item/weapon/gun/energy/plasmacutter/mounted
 
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
 
-	if(!check())
+	if(!check() || !gun)
 		return 0
 
 	if(!target)
 		playsound(src.loc, 'sound/weapons/guns/selector.ogg', 50, 1)
 		if(!active)
 			active=1
-			to_chat(usr, "<span class='notice'>\The [src] is now set to close range mode.</span>")
+			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to close range mode.</span>")
 		else
 			active=0
-			to_chat(usr, "<span class='notice'>\The [src] is now set to firing mode.</span>")
+			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to firing mode.</span>")
 		return
 
 	if(!active)
 		gun.Fire(target,holder.wearer)
+		return 1
 	else
 		var/turf/T = get_turf(target)
-		if(istype(T) && !T.Adjacent(get_turf(src)))
+		if(istype(T) && !target.Adjacent(holder.wearer))
 			return 0
 
 		var/resolved = target.attackby(gun,holder.wearer)
 		if(!resolved && gun && target)
 			gun.afterattack(target,holder.wearer,1)
-			holder.check_power_cost(usr, 9000, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) )//Uses 5 wh per use
+			holder.check_power_cost(usr, 18000, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) )//Uses 10 wh per use
 			return 1
-	return 1
 
 /obj/item/rig_module/mounted/energy_blade
 

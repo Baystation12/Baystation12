@@ -7,6 +7,8 @@
 	heat_protection = HEAD
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
+	min_pressure_protection = 0
 	siemens_coefficient = 0.4
 
 	//Species-specific stuff.
@@ -46,7 +48,7 @@
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
 	//With 0.2 resiliance, will reach 10 breach damage after 3 laser carbine blasts or 8 smg hits.
-	breach_threshold = 18
+	breach_threshold = 15
 	can_breach = 1
 
 	//Inbuilt devices.

@@ -1,6 +1,7 @@
 /* Contains:
  * /obj/item/rig_module/device
  * /obj/item/rig_module/device/healthscanner
+ * /obj/item/rig_module/device/defib
  * /obj/item/rig_module/device/drill
  * /obj/item/rig_module/device/orescanner
  * /obj/item/rig_module/device/rcd
@@ -31,12 +32,25 @@
 	icon_state = "scanner"
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
+	engage_string = "Display Readout"
+	usable = 1
 	use_power_cost = 200
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
 	device_type = /obj/item/device/scanner/health
 
+/obj/item/rig_module/device/defib
+	name = "mounted defibrillator"
+	desc = "A complex Vey-Med circuit with two metal electrodes hanging from it."
+	icon_state = "defib"
+
+	interface_name = "mounted defibrillator"
+	interface_desc = "A prototype defibrillator, palm-mounted for ease of use."
+
+	use_power_cost = 0//Already handled by defib, but it's 150 Wh, normal defib takes 100
+	device_type = /obj/item/weapon/shockpaddles/rig
+
 /obj/item/rig_module/device/drill
-	name = "hardsuit drill mount"
+	name = "hardsuit mounted drill"
 	desc = "A very heavy diamond-tipped drill."
 	icon_state = "drill"
 	interface_name = "mounted drill"
@@ -49,7 +63,7 @@
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
-	name = "hardsuit anomaly scanner"
+	name = "anomaly scanner module"
 	desc = "You think it's called an Elder Sarsparilla or something."
 	icon_state = "eldersasparilla"
 	interface_name = "Alden-Saraspova counter"
@@ -70,7 +84,6 @@
 	activate_string = "Get Survey Data Disk"
 	engage_string = "Display Readout"
 	usable = 1
-	selectable = 1
 	toggleable = 1
 	use_power_cost = 200
 	device_type = /obj/item/device/scanner/mining
@@ -108,7 +121,7 @@
 		return 1
 
 	var/turf/T = get_turf(target)
-	if(istype(T) && !T.Adjacent(get_turf(src)))
+	if(istype(T) && !target.Adjacent(holder.wearer))
 		return 0
 
 	var/resolved = target.attackby(device,holder.wearer)

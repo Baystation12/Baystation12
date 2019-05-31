@@ -8,6 +8,9 @@
 	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 
+/obj/effect/overmap/sector/exoplanet/volcanic/generate_habitability()
+	return HABITABILITY_BAD
+	
 /obj/effect/overmap/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
 	if(atmosphere)

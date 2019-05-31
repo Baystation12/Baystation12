@@ -75,3 +75,6 @@
 
 /proc/cmp_program(var/datum/computer_file/program/A, var/datum/computer_file/program/B)
 	return cmp_text_asc(A.filedesc, B.filedesc)
+
+/proc/cmp_emails_asc(var/datum/computer_file/data/email_account/A, var/datum/computer_file/data/email_account/B)
+	return cmp_text_asc(A.login,B.login)

@@ -5,6 +5,7 @@
 	var/attack_same = 0
 	var/ranged = 0
 	var/rapid = 0
+	var/melee_damage_flags //sharp, edge, etc
 	var/sa_accuracy = 85 //base chance to hit out of 100
 	var/projectiletype
 	var/projectilesound
@@ -139,7 +140,7 @@
 			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
 			return
 		var/mob/living/L = target_mob
-		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense)
+		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense,melee_damage_flags)
 		return L
 	if(istype(target_mob,/obj/mecha))
 		var/obj/mecha/M = target_mob
@@ -164,14 +165,7 @@
 	return L
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
-	var/accuracy_holder = sa_accuracy
-	if(eye_blind)
-		accuracy_holder -= 15
-	if(confused)
-		accuracy_holder -= 15
-	if(eye_blurry)
-		accuracy_holder -= 10
-	return Clamp(accuracy_holder, 0, 100)
+	return Clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
@@ -295,7 +289,8 @@
 				if(!obstacle.can_open(1))
 					return
 				face_atom(obstacle)
-				pry_door(src, pry_time, obstacle)
+				var/pry_time_holder = (obstacle.pry_mod * pry_time)
+				pry_door(src, pry_time_holder, obstacle)
 				return
 
 /mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)

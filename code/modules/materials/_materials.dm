@@ -101,7 +101,7 @@
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
-	var/construction_difficulty = 0
+	var/construction_difficulty = MATERIAL_EASY_DIY
 
 	// Mining behavior.
 	var/alloy_product
@@ -187,9 +187,9 @@
 	return hardness //todo
 
 /material/proc/get_attack_cooldown()
-	if(weight < 19)
+	if(weight <= MATERIAL_LIGHT)
 		return FAST_WEAPON_COOLDOWN
-	if(weight > 23)
+	if(weight >= MATERIAL_HEAVY)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 

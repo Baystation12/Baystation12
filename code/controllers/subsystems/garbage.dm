@@ -1,3 +1,14 @@
+//Check if an /atom/movable that has been Destroyed has been correctly placed into nullspace and if not, throws a runtime and moves it to nullspace
+#define GC_CHECK_AM_NULLSPACE(D, hint) \
+	if(istype(D,/atom/movable)) {\
+		var/atom/movable/AM = D; \
+		if(AM.loc != null) {\
+			crash_with("QDEL("+hint+"): "+AM.name+" was supposed to be in nullspace but isn't \
+						(LOCATION= "+AM.loc.name+" ("+AM.loc.x+","+AM.loc.y+","+AM.loc.z+") )! Destroy didn't do its job!"); \
+			AM.forceMove(null); \
+		} \
+	}
+
 SUBSYSTEM_DEF(garbage)
 	name = "Garbage"
 	priority = SS_PRIORITY_GARBAGE
@@ -317,6 +328,7 @@ SUBSYSTEM_DEF(garbage)
 			return
 		switch(hint)
 			if (QDEL_HINT_QUEUE)		//qdel should queue the object for deletion.
+				GC_CHECK_AM_NULLSPACE(D, "QDEL_HINT_QUEUE")
 				SSgarbage.PreQueue(D)
 			if (QDEL_HINT_IWILLGC)
 				D.gc_destroyed = world.time
@@ -339,6 +351,7 @@ SUBSYSTEM_DEF(garbage)
 
 				SSgarbage.PreQueue(D)
 			if (QDEL_HINT_HARDDEL)		//qdel should assume this object won't gc, and queue a hard delete using a hard reference to save time from the locate()
+				GC_CHECK_AM_NULLSPACE(D, "QDEL_HINT_HARDDEL")
 				SSgarbage.HardQueue(D)
 			if (QDEL_HINT_HARDDEL_NOW)	//qdel should assume this object won't gc, and hard del it post haste.
 				SSgarbage.HardDelete(D)

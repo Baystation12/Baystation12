@@ -212,6 +212,7 @@
 		"nav_ninja_deck3",
 		"nav_ninja_deck4",
 		"nav_ninja_deck5",
+		"nav_ninja_hanger",
 		"nav_away_6",
 		"nav_derelict_5",
 		"nav_cluster_6",
@@ -239,6 +240,10 @@
 /obj/effect/shuttle_landmark/ninja/internim
 	name = "In transit"
 	landmark_tag = "nav_ninja_transition"
+
+/obj/effect/shuttle_landmark/ninja/hanger
+	name = "West of Hanger Deck"
+	landmark_tag = "nav_ninja_hanger"
 
 /obj/effect/shuttle_landmark/ninja/deck1
 	name = "South of First Deck"
@@ -334,6 +339,7 @@
 		"nav_merc_deck3",
 		"nav_merc_deck4",
 		"nav_merc_deck5",
+		"nav_merc_hanger",
 		"nav_away_5",
 		"nav_derelict_6",
 		"nav_cluster_5",
@@ -370,6 +376,10 @@
 	landmark_tag = "nav_merc_dock"
 	docking_controller = "nuke_shuttle_dock_airlock"
 
+/obj/effect/shuttle_landmark/merc/hanger
+	name = "Northeast of Hanger Deck"
+	landmark_tag = "nav_merc_hanger"
+
 /obj/effect/shuttle_landmark/merc/deck1
 	name = "Northeast of First Deck"
 	landmark_tag = "nav_merc_deck1"
@@ -401,6 +411,7 @@
 		"nav_skipjack_deck3",
 		"nav_skipjack_deck4",
 		"nav_skipjack_deck5",
+		"nav_skipjack_hanger",
 		"nav_away_7",
 		"nav_derelict_7",
 		"nav_cluster_7",
@@ -437,6 +448,10 @@
 	landmark_tag = "nav_skipjack_dock"
 	docking_controller = "skipjack_shuttle_dock_airlock"
 
+/obj/effect/shuttle_landmark/skipjack/hanger
+	name = "North of Hanger Deck"
+	landmark_tag = "nav_skipjack_hanger"
+
 /obj/effect/shuttle_landmark/skipjack/deck1
 	name = "Northwest of First Deck"
 	landmark_tag = "nav_skipjack_deck1"
@@ -468,6 +483,7 @@
 		"nav_ert_deck3",
 		"nav_ert_deck4",
 		"nav_ert_deck5",
+		"nav_ert_hanger",
 		"nav_away_4",
 		"nav_derelict_4",
 		"nav_cluster_4",
@@ -503,6 +519,10 @@
 	name = "Docking Port"
 	landmark_tag = "nav_ert_dock"
 	docking_controller = "rescue_shuttle_dock_airlock"
+
+/obj/effect/shuttle_landmark/ert/hanger
+	name =  "Southeast of Hanger deck"
+	landmark_tag = "nav_ert_hanger"
 
 /obj/effect/shuttle_landmark/ert/deck1
 	name =  "Southwest of Fourth deck"
@@ -584,19 +604,19 @@
 	base_turf = /turf/simulated/floor/plating
 
 /obj/effect/shuttle_landmark/torch/deck1/exploration_shuttle
-	name = "Space near Deck Four"
+	name = "Space near Forth Deck"
 	landmark_tag = "nav_deck1_calypso"
 
 /obj/effect/shuttle_landmark/torch/deck2/exploration_shuttle
-	name = "Space near Deck Three"
+	name = "Space near Third Deck"
 	landmark_tag = "nav_deck2_calypso"
 
 /obj/effect/shuttle_landmark/torch/deck3/exploration_shuttle
-	name = "Space near Deck Two"
+	name = "Space near Second Deck"
 	landmark_tag = "nav_deck3_calypso"
 
 /obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle
-	name = "Space near Deck One"
+	name = "Space near First Deck"
 	landmark_tag = "nav_deck4_calypso"
 
 /obj/effect/shuttle_landmark/torch/deck5/exploration_shuttle
@@ -630,19 +650,19 @@
 	base_turf = /turf/simulated/floor/plating
 
 /obj/effect/shuttle_landmark/torch/deck1/guppy
-	name = "Space near Deck Four"
+	name = "Space near Forth Deck"
 	landmark_tag = "nav_deck1_guppy"
 
 /obj/effect/shuttle_landmark/torch/deck2/guppy
-	name = "Space near Deck Three"
+	name = "Space near Third Deck"
 	landmark_tag = "nav_deck2_guppy"
 
 /obj/effect/shuttle_landmark/torch/deck3/guppy
-	name = "Space near Deck Two"
+	name = "Space near Second Deck"
 	landmark_tag = "nav_deck3_guppy"
 
 /obj/effect/shuttle_landmark/torch/deck4/guppy
-	name = "Space near Deck One"
+	name = "Space near First Deck"
 	landmark_tag = "nav_deck4_guppy"
 
 /obj/effect/shuttle_landmark/torch/deck5/guppy
@@ -672,19 +692,19 @@
 	base_turf = /turf/simulated/floor/reinforced/airless
 
 /obj/effect/shuttle_landmark/torch/deck1/aquila
-	name = "Space near Deck Four"
+	name = "Space near Forth Deck"
 	landmark_tag = "nav_deck1_aquila"
 
 /obj/effect/shuttle_landmark/torch/deck2/aquila
-	name = "Space near Deck Three"
+	name = "Space near Third Deck"
 	landmark_tag = "nav_deck2_aquila"
 
 /obj/effect/shuttle_landmark/torch/deck3/aquila
-	name = "Space near Deck Two"
+	name = "Space near Second Deck"
 	landmark_tag = "nav_deck3_aquila"
 
 /obj/effect/shuttle_landmark/torch/deck4/aquila
-	name = "Space near Deck One"
+	name = "Space near First Deck"
 	landmark_tag = "nav_deck4_aquila"
 
 /obj/effect/shuttle_landmark/torch/deck5/aquila

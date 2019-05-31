@@ -208,7 +208,7 @@ var/list/ai_verbs_default = list(
 
 	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
 		show_laws()
-		to_chat(src, "<b>These laws may be changed by other players, or by you being the traitor.</b>")
+		to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
 
 	job = "AI"
 	setup_icon()

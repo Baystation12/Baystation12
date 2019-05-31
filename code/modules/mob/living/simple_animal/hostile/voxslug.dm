@@ -24,6 +24,7 @@ Small, little HP, poisonous.
 	pass_flags = PASS_FLAG_TABLE
 	melee_damage_lower = 5
 	melee_damage_upper = 10
+	melee_damage_flags = DAM_SHARP
 	holder_type = /obj/item/weapon/holder/voxslug
 	faction = SPECIES_VOX
 

@@ -23,6 +23,7 @@
 	open_layer = BELOW_DOOR_LAYER
 	closed_layer = ABOVE_WINDOW_LAYER
 	movable_flags = MOVABLE_FLAG_Z_INTERACT
+	pry_mod = 0.75
 
 	//These are frequenly used with windows, so make sure zones can pass.
 	//Generally if a firedoor is at a place where there should be a zone boundery then there will be a regular door underneath it.

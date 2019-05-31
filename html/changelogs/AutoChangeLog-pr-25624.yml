@@ -1,0 +1,5 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - tweak: "Many objects that were previously rotatable with a verb are now rotated using alt-click. Any such object will report in examine that it can be rotated."
+  - tweak: "You can now rotate vending machines with alt-click."
