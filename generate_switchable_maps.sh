@@ -67,7 +67,4 @@ grep "MAP_PATH=" .travis.yml | while read -r line ; do
 	fi
 done
 
-# just until first_contact is added to travis
-compile_map first_contact
-
 sleep 10 #Sleep for 10 seconds
