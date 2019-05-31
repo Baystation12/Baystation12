@@ -4653,7 +4653,7 @@
 "alQ" = (
 /obj/machinery/requests_console{
 	announcementConsole = 1;
-	department = "Security";
+	department = "Medbay";
 	departmentType = 5;
 	pixel_y = 30
 	},
