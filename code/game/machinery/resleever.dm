@@ -81,9 +81,9 @@ obj/machinery/resleever/Process()
 
 	ui_interact(user)
 
-/obj/machinery/resleever/ui_status(mob/user, datum/ui_state/state)
+/obj/machinery/resleever/CanUseTopic(user)
 	if(!anchored || inoperable())
-		return UI_CLOSE
+		return STATUS_CLOSE
 	return ..()
 
 /obj/machinery/resleever/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -104,7 +104,7 @@ obj/machinery/resleever/Process()
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-	
+
 
 /obj/machinery/resleever/OnTopic(var/mob/user, var/list/href_list, state)
 	if (href_list["begin"])

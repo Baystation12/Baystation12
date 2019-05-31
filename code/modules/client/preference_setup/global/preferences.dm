@@ -172,16 +172,6 @@ var/list/_client_preferences_by_type
 	key = "SHOW_PROGRESS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/datum/client_preference/tgui_style
-	description ="tgui Style"
-	key = "TGUI_FANCY"
-	options = list(GLOB.PREF_FANCY, GLOB.PREF_PLAIN)
-
-/datum/client_preference/tgui_monitor
-	description ="tgui Monitor"
-	key = "TGUI_MONITOR"
-	options = list(GLOB.PREF_PRIMARY, GLOB.PREF_ALL)
-
 /datum/client_preference/browser_style
 	description = "Fake NanoUI Browser Style"
 	key = "BROWSER_STYLED"

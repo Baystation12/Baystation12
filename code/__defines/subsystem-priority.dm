@@ -34,7 +34,6 @@
 #define SS_PRIORITY_VINES         50	// Spreading vine effects.
 #define SS_PRIORITY_PSYCHICS      45	// Psychic complexus processing.
 #define SS_PRIORITY_NANO          40    // Updates to nanoui uis.
-#define SS_PRIORITY_TGUI          40    // Updates to tgui uis.
 #define SS_PRIORITY_TURF          30    // Radioactive walls/blob.
 #define SS_PRIORITY_EVAC          30    // Processes the evac controller.
 #define SS_PRIORITY_CIRCUIT       30	// Processing Circuit's ticks and all that.
