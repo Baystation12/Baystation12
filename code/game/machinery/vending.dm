@@ -1129,7 +1129,8 @@
 					/obj/item/weapon/crowbar/crystal = 5,
 					/obj/item/weapon/wrench/crystal = 5,
 					/obj/item/device/multitool/crystal = 5,
-					/obj/item/weapon/storage/belt/utility/vigil = 5)
+					/obj/item/weapon/storage/belt/utility/crystal = 5,
+					/obj/item/weapon/storage/toolbox/crystal = 5)
 /obj/machinery/vending/tool/adherent/vend(var/datum/stored_items/vending_products/R, var/mob/living/carbon/user)
 	if((istype(user) && user.species.name == SPECIES_ADHERENT) || emagged)
 		. = ..()
