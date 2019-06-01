@@ -1,7 +1,8 @@
 #define IC_SMOKE_REAGENTS_MINIMUM_UNITS 10
 #define IC_REAGENTS_DRAW 0
 #define IC_REAGENTS_INJECT 1
-
+#define IC_HEATER_MODE_HEAT         "heat"
+#define IC_HEATER_MODE_COOL         "cool"
 
 /obj/item/integrated_circuit/reagent
 	category_text = "Reagent"
@@ -489,5 +490,151 @@
 	activate_pin(2)
 	push_data()
 
+// This is an input circuit because attackby_react is only called for input circuits
+/obj/item/integrated_circuit/input/funnel
+	category_text = "Reagent"
+	name = "reagent funnel"
+	desc = "A funnel with a small pump that lets you refill an internal reagent storage."
+	icon_state = "reagent_funnel"
+
+	inputs = list(
+		"target" = IC_PINTYPE_REF
+	)
+	activators = list(
+		"on transfer" = IC_PINTYPE_PULSE_OUT
+	)
+
+	unacidable = 1
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	complexity = 4
+	power_draw_per_use = 5
+
+/obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/living/user, intent)
+	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
+	var/obj/item/weapon/reagent_containers/container = I
+
+	if(!check_target(target))
+		return FALSE
+
+	if(!istype(container))
+		return FALSE
+
+	// Messages are provided by standard_pour_into
+	if(container.standard_pour_into(user, target))
+		activate_pin(1)
+		return TRUE
+
+	return FALSE
+
+// Most of this is just chemical heater code refitted for ICs
+/obj/item/integrated_circuit/reagent/temp
+	inputs = list(
+		"target temperature" = IC_PINTYPE_NUMBER
+	)
+	outputs = list(
+		"volume used" = IC_PINTYPE_NUMBER,
+		"temperature" = IC_PINTYPE_NUMBER,
+		"enabled" = IC_PINTYPE_BOOLEAN,
+		"self reference" = IC_PINTYPE_REF
+	)
+	activators = list(
+		"toggle" = IC_PINTYPE_PULSE_IN,
+		"on toggle" = IC_PINTYPE_PULSE_OUT,
+		"push ref" = IC_PINTYPE_PULSE_IN
+	)
+
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	complexity = 12
+	cooldown_per_use = 1
+	power_draw_per_use = 50
+	volume = 30
+
+	var/active = 0
+	var/min_temp = 40 CELSIUS
+	var/max_temp = 200 CELSIUS
+	var/heating_power = 5
+	var/target_temp = T20C
+	var/last_temperature = 0
+	var/mode = IC_HEATER_MODE_HEAT
+
+/obj/item/integrated_circuit/reagent/temp/Initialize()
+	. = ..()
+
+	set_pin_data(IC_OUTPUT, 2, temperature - T0C)
+	push_data()
+
+/obj/item/integrated_circuit/reagent/temp/do_work(ord)
+	switch(ord)
+		if(1)
+			target_temp = get_pin_data(IC_INPUT, 1)
+			if(isnull(target_temp))
+				return
+
+			// +/- T0C to convert to/from kelvin
+			target_temp = Clamp(target_temp + T0C, min_temp, max_temp)
+			set_pin_data(IC_INPUT, 1, target_temp - T0C)
+
+			active = !active
+			set_pin_data(IC_OUTPUT, 3, active)
+			push_data()
+			activate_pin(2)
+
+			// begin processing temperature
+			if(active)
+				QUEUE_TEMPERATURE_ATOMS(src)
+		if(3)
+			set_pin_data(IC_OUTPUT, 4, weakref(src))
+			push_data()
+
+/obj/item/integrated_circuit/reagent/temp/on_reagent_change()
+	push_vol()
+
+/obj/item/integrated_circuit/reagent/temp/power_fail()
+	active = 0
+
+/obj/item/integrated_circuit/reagent/temp/ProcessAtomTemperature()
+	if(!active)
+		return PROCESS_KILL
+
+	last_temperature = temperature
+
+	if(mode == IC_HEATER_MODE_HEAT && temperature < target_temp)
+		temperature = min(temperature + heating_power, max_temp)
+	else if(mode == IC_HEATER_MODE_COOL && temperature > target_temp)
+		temperature = max(temperature - heating_power, min_temp)
+
+	if(temperature != last_temperature)
+		// Lost power
+		if(!check_power())
+			power_fail()
+			return ..()
+	
+		set_pin_data(IC_OUTPUT, 2, temperature - T0C)
+		push_data()
+
+	return TRUE
+
+/obj/item/integrated_circuit/reagent/temp/heater
+	name = "reagent heater"
+	desc = "A small reagent container capable of heating reagents. It can hold up to 30u."
+	icon_state = "reagent_heater"
+	extended_desc = "This is effectively an internal beaker. It has a heating coil wrapped around it, which allows it to heat the contents of the beaker. Temperature is given in celsius."
+
+	spawn_flags = IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/reagent/temp/cooler
+	name = "reagent cooler"
+	desc = "A small reagent container capable of cooling reagents. It can hold up to 30u."
+	icon_state = "reagent_cooler"
+	extended_desc = "This is effectively an internal beaker. It has a cooling mechanism wrapped around it, which allows it to cool the contents of the beaker. Temperature is given in celsius."
+
+	spawn_flags = IC_SPAWN_RESEARCH
+
+	min_temp = -80 CELSIUS
+	max_temp = 30 CELSIUS
+	mode = IC_HEATER_MODE_COOL
+
+#undef IC_HEATER_MODE_HEAT
+#undef IC_HEATER_MODE_COOL
 #undef IC_REAGENTS_DRAW
 #undef IC_REAGENTS_INJECT

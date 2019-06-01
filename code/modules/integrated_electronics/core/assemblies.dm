@@ -462,6 +462,17 @@
 		detail_color = D.detail_color
 		update_icon()
 	else if(istype(I, /obj/item/weapon/screwdriver))
+		var/hatch_locked = FALSE
+		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
+			// If there's more than one hatch lock, only one needs to be enabled for the assembly to be locked
+			if(H.lock_enabled)
+				hatch_locked = TRUE
+				break
+
+		if(hatch_locked)
+			to_chat(user, "<span class='notice'>The screws are covered by a locking mechanism!</span>")
+			return FALSE
+
 		playsound(src, 'sound/items/Screwdriver.ogg', 25)
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")
