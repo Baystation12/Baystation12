@@ -120,17 +120,14 @@
 	testing("Building overmap...")
 	world.maxz++
 	GLOB.using_map.overmap_z = world.maxz
-	var/list/turfs = list()
+	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))
 		var/turf/T = square
 		if(T.x == GLOB.using_map.overmap_size || T.y == GLOB.using_map.overmap_size)
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
-			T = T.ChangeTurf(/turf/unsimulated/map/)
-		turfs += T
-
-	var/area/overmap/A = new
-	A.contents.Add(turfs)
+			T = T.ChangeTurf(/turf/unsimulated/map)
+		ChangeArea(T, A)
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 

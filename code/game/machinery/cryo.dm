@@ -41,8 +41,8 @@
 
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
-	var/turf/T = loc
-	T.contents += contents
+	for(var/atom/movable/A in src)
+		A.dropInto(loc)
 	if(beaker)
 		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
 		beaker = null

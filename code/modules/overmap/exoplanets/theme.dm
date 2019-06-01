@@ -28,7 +28,7 @@
 
 /datum/random_map/automata/cave_system/mountains/get_additional_spawns(value, var/turf/simulated/mineral/T)
 	T.color = rock_color
-	if(planetary_area)	
-		planetary_area.contents.Add(T)
+	if(planetary_area)
+		ChangeArea(T, planetary_area)
 		if(istype(T))
 			T.mined_turf = planetary_area.base_turf

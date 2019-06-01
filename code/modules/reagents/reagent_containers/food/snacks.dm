@@ -164,7 +164,7 @@
 
 			to_chat(user, "<span class='warning'>You slip \the [W] inside \the [src].</span>")
 			add_fingerprint(user)
-			contents += W
+			W.forceMove(src)
 			return
 
 		if (has_edge(W))
