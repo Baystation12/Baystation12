@@ -37,10 +37,12 @@
 /proc/ChangeArea(var/turf/T, var/area/A)
 	if(!istype(A))
 		CRASH("Area change attempt failed: invalid area supplied.")
-	var/old_area = get_area(T)
+	var/area/old_area = get_area(T)
 	if(old_area == A)
 		return
 	A.contents.Add(T)
+	if(old_area)
+		old_area.Exited(T, A)
 	A.Entered(T, old_area)
 
 /area/proc/get_contents()
