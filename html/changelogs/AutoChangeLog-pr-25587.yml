@@ -1,0 +1,8 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Plasma cutter can now deconstruct closet."
+  - tweak: "Hardsuit chemical dispenser now has inaprovaline instead of tricordrazine."
+  - tweak: "Rescue rig can now have auto-compressor hooked on the suit storage slot."
+  - tweak: "Ninja's chemical dispenser now has dermaline instead of radium, no more radioactive super powers today."
+  - bugfix: "Hardsuit module item will no longer be put into bags or closets."
