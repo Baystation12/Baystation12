@@ -1,0 +1,11 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - rscdel: "GalCom no longer exists."
+  - tweak: "Everyone on the Torch and Verne except stowaways and merchants are given ZAC on spawn."
+  - tweak: "Non-Torch jobs do not give a language on spawn unless you spawn with no languages, in which case you get Spacer."
+  - tweak: "The maximum number of preferences-selectable languages is 3 instead of 4 due to other changes."
+  - tweak: "Sinta Unathi speak Sinta. Yeosa Unathi speak Yeosa. Having the other language is optional for both."
+  - rscadd: "Selenian exists. It is a dialect of ZAC (high cross-understanding), not money-speak. It is the language of selenians, and optional for residents of luna."
+  - bugfix: "Having no languages at all prevents you from speaking in raw text that everyone understands."
+  - tweak: "Chimpanzee is renamed Primitive. Subtypes of Primitive no longer exist."
