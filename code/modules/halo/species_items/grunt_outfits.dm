@@ -3,6 +3,7 @@
 	name = "Unggoy (Minor)"
 
 	l_ear = /obj/item/device/radio/headset/covenant
+	glasses = /obj/item/clothing/glasses/hud/tactical/covenant
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness
 	back = /obj/item/weapon/tank/methane/unggoy_internal
 	uniform = /obj/item/clothing/under/unggoy_internal

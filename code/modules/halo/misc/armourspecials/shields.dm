@@ -71,7 +71,9 @@
 		mob_overlay.overlays += shieldoverlay
 
 /datum/armourspecials/shields/handle_shield(mob/m,damage,atom/damage_source)
-
+	var/mob/living/attacker = damage_source
+	if(istype(attacker) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
+		return 0
 	if(take_damage(damage))
 		connectedarmour.armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0) //This is needed because shields don't work if armour absorbs the blow instead.
 

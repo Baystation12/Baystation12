@@ -11,6 +11,8 @@
 
 	vehicle_size = 128
 
+	light_color = "#E1FDFF"
+
 /obj/vehicles/drop_pod/overmap/boarding_pod/update_object_sprites()
 	//Enclosed, we don't need to care about the person-sprites.
 
@@ -78,10 +80,12 @@
 	name = "Boarding Pod"
 	desc = "A modified escape pod, with extra armour plating to enable survival on impact with other spacefaring vessels."
 	icon = 'code/modules/halo/vehicles/covenant_pods.dmi'
-	icon_state = "boarding"
+	icon_state = "cov_boarding"
 
 	bound_width = 64
 	bound_height = 96
+
+	light_color = "#C1CEFF"
 
 /obj/vehicles/drop_pod/overmap/boarding_pod/covenant/north
 	bound_width = 64

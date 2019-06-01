@@ -7,7 +7,7 @@
 		backbone of the Covenant for almost the entirety of its existence. They had a very strong \
 		rivalry with the upstart, crude Jiralhanae."
 	flesh_color = "#4A4A64"
-	blood_color = "#4A4A64"
+	blood_color = "#AB36AF"
 	icobase = 'code/modules/halo/icons/species/r_elite.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_elite.dmi'
 	icon_template = 'code/modules/halo/icons/species/Sangheili_template.dmi'
@@ -27,7 +27,7 @@
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
-	"second heart" =	 /obj/item/organ/heart_secondary,
+	"second heart" =	 /obj/item/organ/internal/heart_secondary,
 	BP_LUNGS =    /obj/item/organ/internal/lungs,
 	BP_LIVER =    /obj/item/organ/internal/liver,
 	BP_KIDNEYS =  /obj/item/organ/internal/kidneys,

@@ -39,7 +39,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /zone/proc/process_fire()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
 
-	var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
+	//datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
+	//var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
+	var/firelevel = burn_gas.zburn(src, force_burn = 1, no_check = 1)
 
 	air.merge(burn_gas)
 
@@ -78,7 +80,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			continue
 
 		fuel.amount -= fuel_to_remove
-		if(fuel.amount <= 0)
+		if(fuel.amount <= fuel_to_remove)
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
@@ -101,7 +103,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in src
 	zone.fire_tiles |= src
-	if(fuel) zone.fuel_objs += fuel
+	if(fuel)
+		zone.fuel_objs += fuel
+	fire.process()
 
 	return 0
 
@@ -305,8 +309,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_gas_fuel)
-		for(var/g in burned_fuel.gas)
-			adjust_gas(gas_data.burn_product[g], burned_fuel.gas[g])
+		if(burned_fuel)
+			for(var/g in burned_fuel.gas)
+				adjust_gas(gas_data.burn_product[g], burned_fuel.gas[g])
 
 		if(zone)
 			zone.remove_liquidfuel(used_liquid_fuel, !check_combustability())
@@ -391,8 +396,8 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 
 /mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
-	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
-	apply_damage(2.5*mx, BURN)
+	var/mx = firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
+	apply_damage(mx, BURN)
 
 
 /mob/living/carbon/human/FireBurn(var/firelevel, var/last_temperature, var/pressure)
@@ -423,10 +428,11 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 			if(C.body_parts_covered & ARMS)
 				arms_exposure = 0
 	//minimize this for low-pressure enviroments
-	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
+	var/mx = firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
+	/*
 	apply_damage(2.5*mx*head_exposure,  BURN, BP_HEAD,  0, 0, "Fire")
 	apply_damage(2.5*mx*chest_exposure, BURN, BP_CHEST, 0, 0, "Fire")
 	apply_damage(2.0*mx*groin_exposure, BURN, BP_GROIN, 0, 0, "Fire")
@@ -434,3 +440,11 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, 0, 0, "Fire")
+	*/
+	apply_damage(0.3*mx*head_exposure,  BURN, BP_HEAD,  0, 0, "Fire")
+	apply_damage(0.3*mx*chest_exposure, BURN, BP_CHEST, 0, 0, "Fire")
+	apply_damage(0.05*mx*groin_exposure, BURN, BP_GROIN, 0, 0, "Fire")
+	apply_damage(0.1*mx*legs_exposure,  BURN, BP_L_LEG, 0, 0, "Fire")
+	apply_damage(0.1*mx*legs_exposure,  BURN, BP_R_LEG, 0, 0, "Fire")
+	apply_damage(0.1*mx*arms_exposure,  BURN, BP_L_ARM, 0, 0, "Fire")
+	apply_damage(0.1*mx*arms_exposure,  BURN, BP_R_ARM, 0, 0, "Fire")

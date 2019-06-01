@@ -37,7 +37,7 @@
 	suspicion_chance = 0
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 
-	list/valid_species =       list("San'Shyuum")
+	list/valid_species =       list("San Shyuum")
 	min_player_age = 0
 
 	antag_text = "You are a Prophet of the Covenant! Not only are you a religious leader, but you hold a great deal of practical power too. \

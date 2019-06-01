@@ -12,6 +12,7 @@
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_COMBAT = 1, TECH_PHORON = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	var/fire_dist = 6
 	var/status = 0
 	var/throw_amount = 100
 	var/lit = 0	//on or off
@@ -56,13 +57,42 @@
 	return
 
 /obj/item/weapon/flamethrower/afterattack(atom/target, mob/user, proximity)
-	if(!proximity) return
+	//if(!proximity) return
 	// Make sure our user is still holding us
 	if(user && user.get_active_hand() == src)
 		var/turf/target_turf = get_turf(target)
-		if(target_turf)
-			var/turflist = getline(user, target_turf)
+		if(target_turf && target_turf != get_turf(user))
+			var/turf/start_turf = get_turf(src)
+			var/turflist = get_turf_line(start_turf, target_turf)
+
+			//dont flame our own turf
+			turflist -= start_turf
 			flame_turf(turflist)
+
+			//flame the first turf after us
+			/*start_turf = turflist[1]
+			start_turf.hotspot_expose(700, 2)*/
+
+/obj/item/weapon/flamethrower/proc/get_turf_line(var/turf/start, var/turf/end)
+	var/list/turfline = list(start)
+	if(start != end)
+		var/turf/cur_turf = start
+		var/flipped = 0
+		for(var/i=0,i<fire_dist,i++)
+			if(flipped)
+				cur_turf = get_step_away(cur_turf, start)
+				turfline += cur_turf
+			else
+				cur_turf = get_step_towards(cur_turf, end)
+				turfline += cur_turf
+
+			if(cur_turf.density || istype(cur_turf, /turf/space))
+				break
+
+			if(cur_turf == end)
+				flipped = 1
+
+	return turfline
 
 /obj/item/weapon/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
@@ -162,21 +192,18 @@
 
 
 //Called from turf.dm turf/dblclick
-/obj/item/weapon/flamethrower/proc/flame_turf(turflist)
+/obj/item/weapon/flamethrower/proc/flame_turf(var/list/turflist)
 	if(!lit || operating)	return
 	operating = 1
+	var/success = 0
 	for(var/turf/T in turflist)
 		if(T.density || istype(T, /turf/space))
-			break
-		if(!previousturf && length(turflist)>1)
-			previousturf = get_turf(src)
-			continue	//so we don't burn the tile we be standin on
-		if(previousturf && LinkBlocked(previousturf, T))
-			break
-		ignite_turf(T)
+			continue
+		success = ignite_turf(T)
 		sleep(1)
-	previousturf = null
 	operating = 0
+	if(!success)
+		src.visible_message("\icon[src]<span class='warning'>[src] hisses as it runs out of fuel!</span>")
 	for(var/mob/M in viewers(1, loc))
 		if((M.client && M.machine == src))
 			attack_self(M)
@@ -187,15 +214,21 @@
 	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...
 	//Transfer 5% of current tank air contents to turf
 	var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.02*(throw_amount/100))
+	var/amount = air_transfer.gas["phoron"]
+	if(amount < 0.05)
+		ptank.air_contents.merge(air_transfer)
+		return 0
+
 	//air_transfer.toxins = air_transfer.toxins * 5 // This is me not comprehending the air system. I realize this is retarded and I could probably make it work without fucking it up like this, but there you have it. -- TLE
-	new/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(target,air_transfer.gas["phoron"],get_dir(loc,target))
+	new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/(target,amount,get_dir(loc,target))
+	//F.Spread()
 	air_transfer.gas["phoron"] = 0
 	target.assume_air(air_transfer)
 	//Burn it based on transfered gas
 	//target.hotspot_expose(part4.air_contents.temperature*2,300)
 	target.hotspot_expose((ptank.air_contents.temperature*2) + 380,500) // -- More of my "how do I shot fire?" dickery. -- TLE
 	//location.hotspot_expose(1000,500,1)
-	return
+	return 1
 
 /obj/item/weapon/flamethrower/full/New(var/loc)
 	..()
@@ -204,5 +237,6 @@
 	igniter = new /obj/item/device/assembly/igniter(src)
 	igniter.secured = 0
 	status = 1
+	ptank = new(src)
 	update_icon()
 	return

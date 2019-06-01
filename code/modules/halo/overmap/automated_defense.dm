@@ -13,6 +13,7 @@
 	messages_on_hit = list("Automated Defense system taking hostile weapons fire.")
 	messages_on_death = list("Automated Defense system has sustained critical damage. Shutting down.")
 	var/defense_range = 7
+	block_slipspace = 1
 	var/obj/item/projectile/overmap/proj_fired = /obj/item/projectile/overmap/auto_defense_proj
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
@@ -20,7 +21,7 @@
 	GLOB.overmap_tiles_uncontrolled -= range(defense_range*2,src)
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/can_board() //Now you can board them, any time you want!
-	return 1
+	return 0
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	. = ..()
@@ -75,7 +76,7 @@
 	else
 		var/list/unauthed_ships = list()
 		for(var/obj/effect/overmap/ship in in_range)
-			if(!istype(ship,/obj/effect/overmap/ship/faction_base) && ship.get_faction() != ship_source.get_faction())
+			if(!ship.block_slipspace && ship.get_faction() != ship_source.get_faction())
 				unauthed_ships += ship
 		if(unauthed_ships.len == 0)
 			previous_target = current_target
@@ -126,17 +127,17 @@
 
 //FACTION DEFINES//
 /datum/npc_ship/unsc_defenseplatform
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Human_Defense.dmm')
+	mapfile_links = list('maps/faction_bases/Human_Defense.dmm')
 	fore_dir = EAST
 	map_bounds = list(50,146,165,107)
 
 /datum/npc_ship/innie_defenseplatform
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Innie_Defense.dmm')
+	mapfile_links = list('maps/faction_bases/Innie_Defense.dmm')
 	fore_dir = EAST
 	map_bounds = list(50,146,165,107)
 
 /datum/npc_ship/cov_defenseplatform
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Defense.dmm')
+	mapfile_links = list('maps/faction_bases/Covenant_Defense.dmm')
 	fore_dir = WEST
 	map_bounds = list(29,70,66,32)
 

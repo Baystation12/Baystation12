@@ -14,6 +14,10 @@
 		slot_r_hand_str = null,
 		)
 
+/obj/item/clothing/glasses/hud/tactical/odst_hud
+	darkness_view = 4
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Rifleman Helmet"
 	desc = "Standard issue short-EVA capable helmet issued to ODST forces"
@@ -27,11 +31,11 @@
 	body_parts_covered = HEAD|FACE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	flash_protection = FLASH_PROTECTION_MODERATE
-	cold_protection = HEAD
-	heat_protection = HEAD
+	cold_protection = HEAD | FACE
+	heat_protection = HEAD | FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 100, rad = 25)
+	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 100, rad = 25)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
@@ -44,6 +48,7 @@
 	var/visr_on = 1
 	armor_thickness = 20
 
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud
 
 /obj/item/clothing/suit/armor/special/odst
 	name = "ODST Armour"
@@ -52,10 +57,10 @@
 	icon_state = "Odst Armour"
 	icon_override = ODST_OVERRIDE
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 100, rad = 25)
 	//specials = list(/datum/armourspecials/internal_air_tank/human) This line is disabled untill a dev can fix the internals code for it.
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
@@ -198,212 +203,6 @@
 	icon_state = "Odst Armor Squad Leader"
 
 
-
-
-
-//DONATOR GEAR
-
-/obj/item/clothing/head/helmet/odst/donator/liam_gallagher
-	name = "ODST EOD Helmet"
-
-	item_state = "osama-helmet_worn"
-	icon_state = "osama-helmet_obj"
-	item_state_novisr = "osama-helmet-open_worn"
-	icon_state_novisr = "osama-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/liam_gallagher
-	name = "ODST EOD Suit"
-
-	icon_state = "osama-armor_worn"
-
-/obj/item/clothing/head/helmet/odst/donator/ragnarok
-	name = "Bishop's ODST Helmet"
-
-	item_state = "ragnarok-helmet_worn"
-	icon_state = "ragnarok-helmet_obj"
-	item_state_novisr = "ragnarok-helmet-open_worn"
-	icon_state_novisr = "ragnarok-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/ragnarok
-	name = "Bishop's ODST Armour"
-
-	icon_state = "ragnarok-armor_worn"
-
-/obj/item/clothing/head/helmet/odst/donator/winterume
-	name = "Rose's Recon Helmet"
-
-	item_state = "amy-helmet_worn"
-	icon_state = "amy-helmet_obj"
-	item_state_novisr = "amy-helmet-open_worn"
-	icon_state_novisr = "amy-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/winterume
-	name = "Rose's Recon Armor"
-
-	icon_state = "amy-armor_worn"
-
-/obj/item/clothing/head/helmet/odst/donator/eonoc
-	name = "Barnabus's ODST Helmet"
-
-	item_state = "eonoc-helmet_worn"
-	icon_state = "eonoc-helmet_obj"
-	item_state_novisr = "eonoc-helmet-open_worn"
-	icon_state_novisr = "eonoc-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/eonoc
-	name = "Barnabus's ODST Armor"
-
-	icon_state = "eonoc-armor_worn"
-
-/obj/item/clothing/head/helmet/odst/donator/flaksim
-	name = "Kashada's ODST Helmet"
-
-	item_state = "Odst Helmet Flaksim"
-	icon_state = "Odst Helmet Flaksim"
-	item_state_novisr = "Odst Helmet Flaksim Transparent"
-	icon_state_novisr = "Odst Helmet Flaksim Transparent"
-
-/obj/item/clothing/suit/armor/special/odst/donator/flaksim
-	name = "Kashada's ODST Armour"
-
-	icon_state = "Odst Armor Flaksim"
-
-/obj/item/clothing/head/helmet/odst/donator/mann
-	name = "Mann's ODST Helmet"
-
-	item_state = "Odst Helmet Mann"
-	icon_state = "Odst Helmet Mann"
-	item_state_novisr = "Odst Helmet Mann"
-	icon_state_novisr = "Odst Helmet Mann"
-
-/obj/item/clothing/suit/armor/special/odst/donator/mann
-	name = "Mann's ODST Armour"
-
-	icon_state = "Odst Armor Mann"
-
-/obj/item/clothing/head/helmet/odst/donator/moerk
-	name = "Moerk's ODST Helmet"
-
-	item_state = "Odst Helmet Moerk"
-	icon_state = "Odst Helmet Moerk"
-	item_state_novisr = "Odst Helmet Moerk"
-	icon_state_novisr = "Odst Helmet Moerk"
-
-/obj/item/clothing/suit/armor/special/odst/donator/moerk
-	name = "Moerk's Customized ODST Armour"
-
-	icon_state = "Odst Armor Moerk"
-
-/obj/item/clothing/head/helmet/odst/donator/spartan
-	name = "Spartan's ODST Helmet"
-
-	item_state = "Odst Helmet Spartan"
-	icon_state = "Odst Helmet Spartan"
-	item_state_novisr = "Odst Helmet Spartan Transparent"
-	icon_state_novisr = "Odst Helmet Spartan Transparent"
-
-/obj/item/clothing/suit/armor/special/odst/donator/spartan
-	name = "Customized ODST CQB Armour"
-
-	icon_state = "Odst Armor Spartan"
-
-/obj/item/clothing/head/helmet/odst/donator/caelumz
-	name = "Customized ODST Sniper Helmet"
-
-	item_state = "Odst Helmet Caelum"
-	icon_state = "Odst Helmet Caelum"
-	item_state_novisr = "Odst Helmet Caelum Transparent"
-	icon_state_novisr = "Odst Helmet Caelum Transparent"
-
-/obj/item/clothing/suit/armor/special/odst/donator/caelumz
-	name = "Customized ODST Sniper Armour"
-
-	icon_state = "Odst Armor Caelum"
-
-/obj/item/clothing/head/helmet/odst/donator/maxattacker
-	name = "Customized ODST Helmet"
-
-	item_state = "Odst Helmet Maxattacker"
-	icon_state = "Odst Helmet Maxattacker"
-	item_state_novisr = "Odst Helmet Maxattacker Transparent"
-	icon_state_novisr = "Odst Helmet Maxattacker Transparent"
-
-/obj/item/clothing/suit/armor/special/odst/donator/maxattacker
-	name = "Customized ODST Recon Armour"
-
-	icon_state = "Odst Armor Maxattacker"
-
-/obj/item/clothing/head/helmet/odst/donator/wehraboo
-	name = "SPI Helmet Mk I"
-	item_state = "wehraboo-helmet_worn"
-	icon_state = "wehraboo-helmet_obj"
-	item_state_novisr = "wehraboo-helmet_worn"
-	icon_state_novisr = "wehraboo-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/wehraboo
-	name = "SPI Armour Mk I"
-	item_state = "wehraboo-armor_worn"
-	icon_state = "wehraboo-armor_obj"
-
-/obj/item/clothing/head/helmet/odst/donator/kozi
-	name = "Kozi's Hassar Helmet"
-	item_state = "kozi-helmet_worn"
-	icon_state = "kozi-helmet_obj"
-	item_state_novisr = "kozi-helmet_worn"
-	icon_state_novisr = "kozi-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/kozi
-	name = "Kozi's Hassar Armor"
-	icon_state = "kozi-armor_obj"
-	item_state = "kozi-armor_worn"
-//Kozi's sword
-
-/obj/item/weapon/material/machete/kozi
-	name = "Hassar Sabre"
-	icon_state = "kozi-sabre_obj"
-	item_state = "kozi-sabre"
-	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
-		)
-
-obj/item/clothing/head/helmet/odst/donator/gulag
-	name = "Murmillo Helmet"
-	item_state = "gulag-helmet_worn"
-	icon_state = "gulag-helmet_obj"
-	item_state_novisr = "gulag-helmet_worn"
-	icon_state_novisr = "gulag-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/gulag
-	name = "Murmillo Armour"
-	icon_state = "gulag-armor_obj"
-	item_state = "gulag-armor_worn"
-
-obj/item/clothing/head/helmet/odst/donator/maxattackeralt
-	name = "ODST 'Grasshopper' Helmet"
-	item_state = "maxattackeralt-helmet_worn"
-	icon_state = "maxattackeralt-helmet_obj"
-	item_state_novisr = "maxattackeralt-helmet_worn"
-	icon_state_novisr = "maxattackeralt-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/maxattackeralt
-	name = "ODST 'Thorn' Armour"
-	icon_state = "maxattackeralt-armor_obj"
-	item_state = "maxattackeralt-armor_worn"
-
-obj/item/clothing/head/helmet/odst/donator/pinstripe
-	name = "Pinstripe's ODST Helmet"
-	item_state = "pinstripe-helmet_worn"
-	icon_state = "pinstripe-helmet_obj"
-	item_state_novisr = "pinstripe-helmet_worn"
-	icon_state_novisr = "pinstripe-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/pinstripe
-	name = "Pinstripe's ODST Armour"
-	icon_state = "pinstripe-armor_obj"
-	item_state = "pinstripe-armor_worn"
-//END DONATOR GEAR
-
 /obj/effect/random_ODST_set/New()
 	.=..()
 	var/obj/armour_set = pick(list(/obj/effect/odst_armour_set/medic,/obj/effect/odst_armour_set/sharpshooter,/obj/effect/odst_armour_set/cqb,/obj/effect/odst_armour_set,/obj/effect/odst_armour_set/engineer))
@@ -469,33 +268,12 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 //DONATOR GEAR
 
-/obj/item/weapon/storage/backpack/odst/donator/flaksim
-	icon = ITEM_INHAND
-	icon_override = ODST_OVERRIDE
-	name = "Kashada's Backpack"
-	item_state = "Odst Flaksim Backpack"
-	icon_state = "Odst Flaksim Backpack"
-
-/obj/item/weapon/storage/backpack/odst/donator/spartan
-	icon = ITEM_INHAND
-	icon_override = ODST_OVERRIDE
-	name = "Spartan's Backpack"
-	item_state = "Odst Spartan Backpack"
-	icon_state = "Odst Spartan Backpack"
-
 /obj/item/weapon/storage/backpack/odst/donator/general
 	icon = ITEM_INHAND
 	icon_override = ODST_OVERRIDE
 	name = "Customized's Backpack"
 	item_state = "Odst customized Backpack"
 	icon_state = "Odst customized Backpack"
-
-/obj/item/weapon/storage/backpack/odst/kozi
-	icon = ITEM_INHAND
-	icon_override = ODST_OVERRIDE
-	name = "Kozi's Hassar Backpack"
-	item_state = "kozi-backpack_worn"
-	icon_state = "kozi-backpack_obj"
 
 //END DONATOR GEAR
 #undef ODST_OVERRIDE

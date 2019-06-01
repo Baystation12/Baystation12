@@ -40,3 +40,33 @@
 
 /obj/item/weapon_attachment/ma5_upper_railed/remove_attachment_effects(var/obj/item/weapon/gun/gun)
 	gun.attachment_slots -= "sight"
+
+/obj/item/weapon_attachment/br55_stock_cheekrest
+	name = "BR55 cheekrest"
+	desc = "More comfortable to shoot with."
+	icon_state = "BR55-Cheekrest"
+	weapon_slot = "upper stock"
+
+/obj/item/weapon_attachment/br55_grip
+	name = "BR55 vertical grip"
+	desc = "A vertical grip which reduces horizontal sway when firing."
+	icon_state = "BR55-Grip"
+	weapon_slot = "underbarrel rail"
+
+/obj/item/weapon_attachment/br55_upper
+	name = "BR55 carry handle"
+	desc = "Carry handle for a BR55."
+	icon_state = "BR55-CarryHandle"
+	weapon_slot = "upper rail"
+
+/obj/item/weapon_attachment/br55_upper/apply_attachment_effects(var/obj/item/weapon/gun/gun)
+	gun.attachment_slots += "sight"
+
+/obj/item/weapon_attachment/br55_upper/remove_attachment_effects(var/obj/item/weapon/gun/gun)
+	gun.attachment_slots -= "sight"
+
+/obj/item/weapon_attachment/br55_bottom
+	name = "BR55 hand guard"
+	desc = "Metal plate that stops the user from holding too close to the barrel."
+	icon_state = "BR55-Bottom"
+	weapon_slot = "underbarrel rail"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function compile_map {
 	mapname=$1
@@ -32,7 +32,7 @@ function compile_map {
 	rm $mapname.dme
 }
 
-source "$( dirname "${BASH_SOURCE[0]}" )\scripts\sourcedm.sh"
+source "$( dirname "${BASH_SOURCE[0]}" )/scripts/sourcedm.sh"
 
 if [[ $DM == "" ]]; then
     echo "Couldn't find the DreamMaker executable, aborting."
@@ -67,7 +67,4 @@ grep "MAP_PATH=" .travis.yml | while read -r line ; do
 	fi
 done
 
-# just until first_contact is added to travis
-compile_map first_contact
-
-sleep 100
+sleep 10 #Sleep for 10 seconds

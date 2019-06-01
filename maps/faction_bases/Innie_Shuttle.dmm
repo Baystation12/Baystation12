@@ -1,0 +1,80 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
+"c" = (/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"d" = (/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"e" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"f" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
+"g" = (/obj/machinery/door/airlock/halo_maint,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"h" = (/obj/structure/table/rack,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"i" = (/obj/structure/table/rack,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"j" = (/obj/structure/bed/chair{tag = "icon-chair_preview (EAST)"; icon_state = "chair_preview"; dir = 4},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"k" = (/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"l" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"m" = (/obj/effect/floor_decal/industrial/warning/dust/corner,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"n" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"o" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"p" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (WEST)"; icon_state = "warningcorner_dust"; dir = 8},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"q" = (/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/obj/structure/grille,/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+"r" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"s" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"t" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"u" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"v" = (/obj/structure/sign/warning/fall,/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
+"w" = (/turf/simulated/floor/tiled/dark,/area/faction_base/innie_shuttle)
+"x" = (/obj/structure/sign/warning/moving_parts,/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
+"y" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"z" = (/obj/machinery/computer/navigation{tag = "icon-engine (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 8},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"A" = (/obj/structure/bed/chair/comfy/captain{tag = "icon-capchair_preview (WEST)"; icon_state = "capchair_preview"; dir = 8},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"B" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"C" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"D" = (/obj/machinery/computer/helm{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"E" = (/obj/machinery/door/airlock/halo{name = "Bridge"},/turf/simulated/floor/tech,/area/faction_base/innie_shuttle)
+"F" = (/obj/machinery/computer/engines{dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-nav (NORTH)"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"G" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"H" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/machinery/door/window/northleft,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"I" = (/obj/machinery/power/apc/infinite{dir = 4; icon_state = "apc0"; pixel_x = 32; tag = "icon-apc0 (EAST)"},/obj/machinery/light/spot{dir = 4},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/door/window/northright,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"J" = (/obj/docking_umbilical/east{pixel_x = 0},/turf/simulated/wall/r_wall,/area/faction_base/innie_shuttle)
+"K" = (/obj/machinery/nav_computer/npc/innie,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"L" = (/obj/machinery/slipspace_engine/human,/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"M" = (/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"N" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"O" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"P" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"Q" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"R" = (/obj/structure/table/rack,/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/faction_base/innie_shuttle)
+"S" = (/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/faction_base/innie_shuttle)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaabbbbbbbbbbaaaa
+aaaaaaaaaaaaaabbbbaaabbbbbbbbbbaabbbbbbbbbbbaaaa
+aaaaaaaaaaaaabbccdaabbbbbbbbbbbaabbecccccecdaaaa
+aaaaaaaaaaaaabeccdaabbbbbbbbbbbaabbccccccccdaaaa
+aaaaaaaaabbbbbcbbbbbbbbbbbbbbbbfbbbccbbbbbbbaaaa
+aaaaaabbbbbbfbgbbbbbbhhhhihhhhbbbbbgbbbaaaaaaaaa
+aaaaabbbbbbjklmnoooonooooooooonoooopkkbbbaaaaaaa
+aaaqqbbrstbjkkuvwwwwwwwwwwwwwwwwwwxykklkbbaaaaaa
+aaqqzAlkkBbCkkuwwwwwwwwwwwwwwwwwwwwykkkkbbaaaaaa
+aaqqDkkkkkEkkkuwwwwwwwwwwwwwwwwwwwwykkkkbbaaaaaa
+aaqqFAGkHIbCkkuwwwwwwwwwwwwwwwwwwwwykkkkJbaaaaaa
+aaaqqbbKLMbjkkuxwwwwwwwwwwwwwwwwwwvykkGkbbaaaaaa
+aaaaabbbbbbjkGNOPPPPOPPPPPPPPPOPPPPQkkbbbaaaaaaa
+aaaaaabbbbbbfbgbbbbbbhhhhRhhhhbfbbbgbbbaaaaaaaaa
+aaaaaaaaabbbbbcbbbbbbbbbbbbbbbbbbbbccbbbbbbbaaaa
+aaaaaaaaaaaaabSccdaabbbbbbbbbbbaabbccccccccdaaaa
+aaaaaaaaaaaaabbccdaabbbbbbbbbbbaabbScccccScdaaaa
+aaaaaaaaaaaaaabbbbaaabbbbbbbbbbaabbbbbbbbbbbaaaa
+aaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaabbbbbbbbbbaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

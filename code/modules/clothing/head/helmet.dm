@@ -19,6 +19,36 @@
 
 	armor_thickness = 20
 
+	var/obj/item/clothing/integrated_hud
+
+/obj/item/clothing/head/helmet/New()
+	. = ..()
+	if(integrated_hud)
+		integrated_hud = new integrated_hud (src)
+		integrated_hud.canremove = 0
+
+/obj/item/clothing/head/helmet/equipped(var/mob/living/carbon/human/h)
+	. = ..()
+	if(integrated_hud && istype(h))
+		if(h.glasses == integrated_hud && h.head != src)
+			integrated_hud.canremove = 1
+			h.glasses = null
+			h.remove_from_mob(integrated_hud)
+			integrated_hud.canremove = 0
+			integrated_hud.forceMove(src)
+		if(h.head == src && h.glasses == null)
+			contents -= src
+			h.equip_to_slot(integrated_hud, slot_glasses)
+
+/obj/item/clothing/head/helmet/dropped(var/mob/living/carbon/human/h)
+	. = ..()
+	if(integrated_hud && istype(h) && h.glasses == integrated_hud && h.head != src)
+		integrated_hud.canremove = 1
+		h.glasses = null
+		h.remove_from_mob(integrated_hud)
+		integrated_hud.canremove = 0
+		integrated_hud.forceMove(src)
+
 /obj/item/clothing/head/helmet/solgov
 	name = "\improper UEG Government helmet"
 	desc = "A helmet painted in Peacekeeper blue. Stands out like a sore thumb."

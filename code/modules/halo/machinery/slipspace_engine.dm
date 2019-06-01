@@ -65,11 +65,11 @@
 	if(isnull(core_to_spawn))
 		to_chat(user,"<span class = 'notice'>Physical limiters disallow core overloading on [src]</span>")
 		return
-	visible_message("<span class = 'notice'>[user] starts prepping [src] for mobile core detonation...</span>")
+	visible_message("<span class = 'danger'>[user] starts prepping [src] for mobile core detonation...</span>")
 	if(!do_after(user, SLIPSPACE_ENGINE_BASE_INTERACTION_DELAY * 3, src, same_direction = 1))
 		return
-	visible_message("<span class = 'notice'>[user] preps [src] for mobile core detonation..</span>")
-	message2discord(config.oni_discord, "@here, [user.real_name] ([user.ckey]) has overloaded the slipspace engine @ ([loc.x],[loc.y],[loc.z])")
+	visible_message("<span class = 'danger'>[user] preps [src] for mobile core detonation..</span>")
+	message2discord(config.oni_discord, "Alert: [user.real_name] ([user.ckey]) has overloaded the slipspace engine @ ([loc.x],[loc.y],[loc.z])")
 	overload_engine(user)
 
 /obj/machinery/slipspace_engine/proc/set_next_jump_allowed(var/to_add)
@@ -79,7 +79,7 @@
 	if(jump_charging == -1)
 		return 0
 	for(var/obj/effect/overmap/om in range(SLIPSPACE_GRAV_WELL_RANGE,location))
-		if(istype(om,/obj/effect/overmap/sector) || istype(om,/obj/effect/overmap/ship/faction_base))
+		if(om.block_slipspace)
 			return 0
 	return 1
 
@@ -267,8 +267,9 @@
 
 /datum/explosion/slipspace_core/New(var/obj/payload/b)
 	if(config.oni_discord)
-		message2discord(config.oni_discord, "@here, slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
-	explosion(50, 100, 0, 0, 255)
+		message2discord(config.oni_discord, "Alert: slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
+	explosion(100, -1, -1, -1, 255)
+	qdel(src)
 
 /obj/payload/slipspace_core/cov
 	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'

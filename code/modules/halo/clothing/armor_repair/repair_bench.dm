@@ -6,8 +6,7 @@
 	density = 1
 	anchored = 1
 
-/obj/item/structure/repair_bench/proc/repair_armor(var/obj/item/clothing/c,var/mob/user)
-
+/obj/structure/repair_bench/proc/repair_armor(var/obj/item/clothing/c,var/mob/user)
 	user.visible_message("[user] starts repairing [c] using [src]'s tools and materials.")
 	if(!do_after(user,ITEM_REPAIR_DELAY/2,src,1,1,,1))
 		return
@@ -15,8 +14,8 @@
 	c.armor_thickness = initial(c.armor_thickness)
 	c.update_damage_description()
 
-/obj/item/structure/repair_bench/attackby(obj/item/I, mob/user)
-	if(istype(I,/obj/item/clothing/))
+/obj/structure/repair_bench/attackby(obj/item/I, mob/user)
+	if(istype(I,/obj/item/clothing))
 		repair_armor(I,user)
 	else
 		. = ..()

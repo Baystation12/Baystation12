@@ -149,6 +149,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 3)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-10 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
@@ -166,6 +167,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 3)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-30 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
@@ -460,10 +462,16 @@
 	scannable = 1
 
 /datum/reagent/leporazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature > 310)
-		M.bodytemperature = max(310, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
-	else if(M.bodytemperature < 311)
-		M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+	var/target = 310 //Target body temperature
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.species.body_temperature)
+			target = H.species.body_temperature //Target the species optimal body temperature - if one exists
+
+	if(M.bodytemperature > target)
+		M.bodytemperature = max(target, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+	else if(M.bodytemperature < target)
+		M.bodytemperature = min(target, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /* Antidepressants */
 

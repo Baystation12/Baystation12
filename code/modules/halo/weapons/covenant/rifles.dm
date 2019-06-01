@@ -11,13 +11,14 @@
 	burst = 3
 	projectile_type = /obj/item/projectile/covenant/plasmarifle
 	screen_shake = 0
+	is_heavy = 1
 	fire_delay = 10 //4 more ticks than usual
 	dispersion=list(0.0, 0.6, 0.8)
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
-	irradiate_non_cov = 1
+	irradiate_non_cov = 7
 	sprite_sheets = list(
 		"Tvaoan Kig-Yar" = null,\
 		"Jiralhanae" = null,\
@@ -59,4 +60,4 @@
 	projectile_type = /obj/item/projectile/covenant/plasmarifle/brute
 	fire_delay = 3
 	burst_delay = 1
-	irradiate_non_cov = 2
+	irradiate_non_cov = 8

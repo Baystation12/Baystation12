@@ -209,11 +209,12 @@
 	chosen_ship_datum = new chosen_ship_datum
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
-	//set background = 1
+	set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)
 		pick_ship_datum()
+	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	map_bounds = chosen_ship_datum.map_bounds
 	fore_dir = chosen_ship_datum.fore_dir
 	map_z = list()
@@ -224,13 +225,12 @@
 		shipmap_handler.un_free_map(z_to_load_at)
 		map_sectors["[z_to_load_at]"] = src
 		maploader.load_map(link,z_to_load_at)
-		create_lighting_overlays_zlevel(z_to_load_at)
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
+		create_lighting_overlays_zlevel(z_to_load_at)
 	cargo_init()
 	damage_spawned_ship()
-	unload_at = world.time + NPC_SHIP_LOSE_DELAY
 	GLOB.processing_objects += src
 
 /obj/effect/overmap/ship/npc_ship/proc/damage_spawned_ship()
@@ -290,28 +290,28 @@
 		time_leave_at = world.time + STOP_DISEMBARK_TIME
 
 /datum/npc_ship
-	var/list/mapfile_links = list('maps/civ_hauler/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
+	var/list/mapfile_links = list('maps/civ_ships/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
 
 	var/fore_dir = WEST //The direction of "fore" for the mapfile.
 	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile. Format: Topleft-x,Topleft-y,bottomright-x,bottomright-y
 
 /datum/npc_ship/ccv_star
-	mapfile_links = list('maps/overmap_ships/CCV_Star.dmm')
+	mapfile_links = list('maps/civ_ships/CCV_Star.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_comet
-	mapfile_links = list('maps/overmap_ships/CCV_Comet.dmm')
+	mapfile_links = list('maps/civ_ships/CCV_Comet.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_sbs
-	mapfile_links = list('maps/overmap_ships/CCV_Slow_But_Steady.dmm')
+	mapfile_links = list('maps/civ_ships/CCV_Slow_But_Steady.dmm')
 	fore_dir = WEST
 	map_bounds = list(6,51,72,27)
 
 /datum/npc_ship/unsc_patrol
-	mapfile_links = list('maps/overmap_ships/UNSC_Corvette.dmm')
+	mapfile_links = list('maps/civ_ships/UNSC_Corvette.dmm')
 	fore_dir = WEST
 	map_bounds = list(7,70,54,29)
 

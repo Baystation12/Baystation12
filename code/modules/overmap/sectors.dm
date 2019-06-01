@@ -25,8 +25,10 @@ var/list/points_of_interest = list()
 	var/start_y			//overmap zlevel
 
 	var/base = 0		//starting sector, counts as station_levels
+	var/flagship = 0
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
+	var/block_slipspace = 0		//for planets with gravity wells etc
 
 	var/list/hull_segments = list()
 	var/superstructure_failing = 0
@@ -39,6 +41,11 @@ var/list/points_of_interest = list()
 	var/nuked = 0
 
 	var/last_adminwarn_attack = 0
+
+	var/controlling_faction = null
+
+	//this is used for when we need to iterate over an entire sector's areas
+	var/parent_area_type
 
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point

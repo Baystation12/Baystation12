@@ -433,6 +433,7 @@
 	result = /datum/reagent/glycerol
 	required_reagents = list(/datum/reagent/nutriment/cornoil = 3, /datum/reagent/acid = 1)
 	result_amount = 1
+	mix_message = "The solution begins to goop and glop."
 
 /datum/chemical_reaction/sodiumchloride
 	name = "Sodium Chloride"
@@ -518,7 +519,7 @@
 	new /obj/item/stack/material/plastic(get_turf(holder.my_atom), created_volume)
 
 /* Grenade reactions */
-
+/*
 /datum/chemical_reaction/explosion_potassium
 	name = "Explosion"
 	result = null
@@ -537,7 +538,7 @@
 			e.amount *= 0.5
 	e.start()
 	holder.clear_reagents()
-
+*/
 /datum/chemical_reaction/flash_powder
 	name = "Flash powder"
 	result = null
@@ -581,24 +582,100 @@
 	empulse(location, round(created_volume / 24), round(created_volume / 14), 1)
 	holder.clear_reagents()
 
+/datum/chemical_reaction/nitric_acid
+	name = "Nitric Acid"
+	result = /datum/reagent/nitric_acid
+	required_reagents = list(/datum/reagent/copper = 1, /datum/reagent/silver = 1, /datum/reagent/water = 1, /datum/reagent/acid = 1)
+	mix_message = "The solution begins to fizz and hiss."
+	result_amount = 2
+
 /datum/chemical_reaction/nitroglycerin
 	name = "Nitroglycerin"
 	result = /datum/reagent/nitroglycerin
-	required_reagents = list(/datum/reagent/glycerol = 1, /datum/reagent/acid/polyacid = 1, /datum/reagent/acid = 1)
+	required_reagents = list(/datum/reagent/glycerol = 1, /datum/reagent/nitric_acid = 1)
 	result_amount = 2
 	log_is_important = 1
 	reaction_rate = HALF_LIFE(0)
+	mix_message = "The solution begins to fizz dangerously."
 
 /datum/chemical_reaction/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/datum/effect/effect/system/reagents_explosion/e = new()
-	e.set_up(round (created_volume/2, 1), holder.my_atom, 0, 0)
-	if(isliving(holder.my_atom))
-		e.amount *= 0.5
-		var/mob/living/L = holder.my_atom
-		if(L.stat!=DEAD)
-			e.amount *= 0.5
-	e.start()
+	//only detonate if we have a high enough amount
+	var/nitroglycerin_amount = holder.get_reagent_amount(/datum/reagent/nitroglycerin)
+	if(nitroglycerin_amount > 50)
+		var/concentration = holder.get_data(/datum/reagent/nitroglycerin) / nitroglycerin_amount
+		if(concentration < 0.1)
+			var/datum/effect/effect/system/reagents_explosion/e = new()
+			e.set_up(round ((1-concentration)*nitroglycerin_amount/2, 1), holder.my_atom, 0, 0)
+			if(isliving(holder.my_atom))
+				e.amount *= 0.5
+				var/mob/living/L = holder.my_atom
+				if(L.stat!=DEAD)
+					e.amount *= 0.5
+			e.start()
 
+			holder.clear_reagents()
+
+/datum/chemical_reaction/desentized_nitroglycerin
+	name = "Desensitized Nitroglycerin"
+	result = /datum/reagent/nitroglycerin
+	required_reagents = list(/datum/reagent/nitroglycerin = 1, /datum/reagent/ethanol = 1)
+	result_amount = 2
+	mix_message = "The solution begins to fizz less fiercely."
+
+/datum/chemical_reaction/desentized_nitroglycerin/send_data(var/datum/reagents/holder, var/reaction_limit)
+	return reaction_limit
+
+/datum/chemical_reaction/resentized_nitroglycerin
+	name = "Resensitized Nitroglycerin"
+	result = /datum/reagent/nitroglycerin
+	required_reagents = list(/datum/reagent/nitroglycerin = 1)
+	catalysts = list(/datum/reagent/ethylredoxrazine = 1)
+	result_amount = 1
+	mix_message = "The solution begins to bubble violently."
+
+/datum/chemical_reaction/resentized_nitroglycerin/can_happen(var/datum/reagents/holder)
+	. = ..()
+	if(.)
+		var/datum/reagent/nitroglycerin/N = locate() in holder.reagent_list
+		return N.data > 0
+
+/datum/chemical_reaction/resentized_nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
+
+	var/datum/reagent/nitroglycerin/N = locate() in holder.reagent_list
+
+	//work out how much ethanol is left
+	var/ethanol_removed = min(N.data, holder.get_reagent_amount(/datum/reagent/ethylredoxrazine))
+
+	//boil away the diluting ethanol
+	holder.remove_reagent(/datum/reagent/nitroglycerin, ethanol_removed)
+	holder.remove_reagent(/datum/reagent/ethylredoxrazine, ethanol_removed)
+	holder.add_reagent(/datum/reagent/water, ethanol_removed)
+
+	//update the new concentration amount
+	N.data -= ethanol_removed
+
+	//update the desc text
+	var/concentrate = 100
+	if(N.data > 0)
+		concentrate = round((N.data/N.volume)*100)
+	N.description = "Nitroglycerin is a heavy, colorless, oily, explosive liquid obtained by nitrating glycerol. \
+		Will detonate if over 90% concentrated and quantity of 50 or more. This solution is [concentrate]% concentrated."
+
+/datum/chemical_reaction/nitroglycerin_shrapnel
+	name = "Nitroglycerin shrapnel"
+	//result = /datum/reagent/nitroglycerin
+	required_reagents = list(/datum/reagent/nitroglycerin = 50)
+	catalysts = list(/datum/reagent/iron = 50)
+	log_is_important = 1
+	reaction_rate = HALF_LIFE(0)
+	mix_message = null
+
+/datum/chemical_reaction/nitroglycerin_shrapnel/on_reaction(var/datum/reagents/holder, var/created_volume)
+	//obj/proc/fragmentate(var/turf/T=get_turf(src), var/fragment_number = 30, var/spreading_range = 5, var/list/fragtypes=list(/obj/item/projectile/bullet/pellet/fragment/))
+	var/obj/O = holder.my_atom
+	if(O)
+		var/fragments = holder.get_reagent_amount(/datum/reagent/iron) / 5
+		O.fragmentate(fragment_number = fragments)
 	holder.clear_reagents()
 
 /datum/chemical_reaction/napalm
@@ -606,12 +683,17 @@
 	result = null
 	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0,location))
-		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
+	var/max_range = max(created_volume / 10, 1)
+	for(var/turf/simulated/floor/target_tile in range(max_range,location))
+		var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F = new(target_tile, created_volume)
+		F.Spread()
+		//target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
+		break
 	holder.del_reagent("napalm")
 
 /datum/chemical_reaction/chemsmoke
@@ -1967,4 +2049,3 @@
 	name = "Antidexafen"
 	result = /datum/reagent/antidexafen
 	required_reagents = list(/datum/reagent/paracetamol = 1, /datum/reagent/carbon = 1)
-	result_amount = 2

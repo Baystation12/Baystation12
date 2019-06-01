@@ -32,7 +32,7 @@
 				explode_at = world.time + seconds_to_explode SECONDS
 				exploding = 1
 				GLOB.processing_objects += src
-				message2discord(config.oni_discord, "@here, Payload device armed by [user.real_name] ([user.ckey]) @ ([loc.x],[loc.y],[loc.z])")
+				message2discord(config.oni_discord, "Alert! Payload device armed by [user.real_name] ([user.ckey]) @ ([loc.x],[loc.y],[loc.z])")
 				set_anchor(1)
 				checkoverlay(1)
 	else
@@ -80,6 +80,7 @@
 	if(exploding && world.time >= explode_at)
 		GLOB.processing_objects -= src
 		new explodetype(src)
+		loc = null
 		qdel(src)
 		return
 
@@ -141,13 +142,13 @@
 	return
 
 /datum/explosion/New(var/obj/payload/b)
+	if(config.oni_discord)
+		message2discord(config.oni_discord, "Nuclear detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
 	explosion(b.loc,b.strength*50,b.strength*70,b.strength*80,b.strength*80)
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
-	if(config.oni_discord)
-		message2discord(config.oni_discord, "@here, nuclear detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
-	qdel(src)
+		qdel(src)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
 	radiation_repository.radiate(b.loc,1000,10000)

@@ -62,6 +62,7 @@
 
 /obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
+	if(mover.loc.z != loc.z) return 1 //On a different Z, let's let them pass. To assist with ladder and stair shenanigans.
 	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
 		return 1
 	else if(istype(mover, /mob/living))
@@ -96,7 +97,7 @@
 /obj/effect/spider/eggcluster/process()
 	amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(6,24)
+		var/num = rand(1,3)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc

@@ -1,0 +1,65 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/wall/covenant,/area/faction_base/covenant_shuttle)
+"c" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/faction_base/covenant_shuttle)
+"d" = (/obj/docking_umbilical/covenant/north,/turf/simulated/wall/covenant,/area/faction_base/covenant_shuttle)
+"e" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"f" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"g" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"h" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"i" = (/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"j" = (/obj/machinery/repulsor_engine{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"k" = (/obj/machinery/door/airlock/covenant{name = "Cockpit"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"l" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Cargo Hold"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"m" = (/obj/machinery/door/airlock/covenant{name = "Engine Room 1"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"n" = (/obj/machinery/light/covenant/north,/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"o" = (/obj/machinery/telecomms/allinone{tag = "icon-covie_console_off"; name = "Battlenet Server Hub"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"p" = (/obj/structure/bed/chair/covenant_stool,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"q" = (/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"r" = (/obj/structure/bed/chair/covenant_stool,/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"s" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"t" = (/obj/machinery/light/invis,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"u" = (/obj/machinery/computer/helm{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_keyboard = ""; icon_screen = "covie_console_overlay"; icon_state = "covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"v" = (/obj/structure/bed/chair/covenant_stool,/obj/machinery/power/apc/infinite{pixel_y = 32},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"w" = (/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/obj/machinery/door/window/westleft,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"x" = (/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"y" = (/obj/machinery/computer/engines{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_keyboard = ""; icon_screen = "covie_console_overlay"; icon_state = "covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"z" = (/obj/machinery/door/airlock/multi_tile/covenant/eastwest{name = "Cockpit"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"A" = (/obj/machinery/door/airlock/multi_tile/covenant/eastwest{name = "Cargo Hold"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"B" = (/obj/machinery/slipspace_engine/covenant,/obj/structure/window/reinforced/projresist/covenant,/obj/machinery/door/window/westright,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"C" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"D" = (/obj/machinery/light/covenant/south,/obj/machinery/nav_computer/npc/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"E" = (/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/faction_base/covenant_shuttle)
+"F" = (/obj/docking_umbilical/covenant/south,/turf/simulated/wall/covenant,/area/faction_base/covenant_shuttle)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaabbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaabbbbbbbcbdbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabbbbbbbbeeeeebbbbbbcbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaabbbbbbbbfeeeeefbbbgeebbbbbbbbbbbbbbbbaaaaaaa
+aaaaabbbbbbbbeeeeeeeeebbeeeefebbbbbbbbbbbbbbbbaaaa
+aaaabbbbbbbbeheeeeeeheebeeeeeeefebeeeeeeeeijaaaaaa
+aaaabbbbbbbbkbeeeeeeblebeeeeeeeeemeeheeeehijaaaaaa
+aaaabbbbnobgebpqqqqrbesbgeeteeeeebbbbbbbbbbcaaaaaa
+aaaabbuveeeeebbbbbbbbeeeeeeeeeeeefwxbbbbaaaaaaaaaa
+aaaabbyqeezeebbbbbbbbeeAeeeeeeeeehBCbbbbaaaaaaaaaa
+aaaabbbbDEbgebpqqqqrbesbgeeteeeeebbbbbbbbbbcaaaaaa
+aaaabbbbbbbbkbeeeeeeblebeeeeeeeeemeefeeeefijaaaaaa
+aaaabbbbbbbbefeeeeeefeebeeeeeeehebeeeeeeeeijaaaaaa
+aaaaabbbbbbbbeeeeeeeeebbeeeehebbbbbbbbbbbbbbbbaaaa
+aaaaaabbbbbbbbheeeeehbbbgeebbbbbbbbbbbbbbbbaaaaaaa
+aaaaaaabbbbbbbbeeeeebbbbbbcbbbbbbbbbaaaaaaaaaaaaaa
+aaaaaaaabbbbbbbcbFbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaabbbbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

@@ -5,6 +5,10 @@
 	If the fire mode value for a setting is null, it will be replaced with the initial value of that gun's variable when the firemode is created.
 	Obviously not compatible with variables that take a null value. If a setting is not present, then the corresponding var will not be modified.
 */
+
+#define SPECIES_LARGE list(/datum/species/sangheili,/datum/species/brutes,/datum/species/spartan,/datum/species/orion)
+
+
 /datum/firemode
 	var/name = "default"
 	var/list/settings = list()
@@ -90,7 +94,9 @@
 	var/is_charged_weapon = 0 //Does the weapon require charging? Defaults to 0 unless it's from /charged weapon sets
 	var/arm_time = 25 //Default charge time for weapons that charge
 	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Charge_Sound_Effect.ogg'
+	var/is_charging = 0
 	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
+	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
 
 /obj/item/weapon/gun/New()
 	..()
@@ -241,17 +247,29 @@
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 		return
 
+	var/mob/living/carbon/human/h = user
+
+	if (is_heavy ==1 && istype(h) && !(h.species.type in SPECIES_LARGE) && !src.is_held_twohanded(user))
+		to_chat(user,"<span class = 'notice'>This weapon is far too heavy for you to fire with just one hand!</span>")
+		return
+
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
+		return
+
+	if(is_charging)
+		to_chat(user,"<span class = 'notice'>[src] is charging and cannot fire</span>")
 		return
 
 	if(is_charged_weapon==1)
 		playsound(src.loc, charge_sound, 100, 1)
 		user.visible_message("<span class = 'notice'>[user] starts charging the [src]!</span>")
 
+		is_charging = 1
 		if (!do_after(user,arm_time,src))
 			return
 		Fire(A,user,params)
+		is_charging = 0
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
 
@@ -415,7 +433,7 @@
 	if(irradiate_non_cov > 0 && istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/h = user
 		if(istype(h.species,/datum/species/human))
-			h.radiation += irradiate_non_cov
+			h.rad_act(irradiate_non_cov)
 
 	if(screen_shake)
 		spawn()
