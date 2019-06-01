@@ -1,5 +1,0 @@
-author: "babydoll"
-delete-after: True
-changes: 
-  - rscadd: "Blobs will now additionally attempt to attack a random nearby tile, even if they aren't expanding to that tile. The core nucleus itself is particularly aggressive."
-  - tweak: "Material coins are no longer effective weapons."
