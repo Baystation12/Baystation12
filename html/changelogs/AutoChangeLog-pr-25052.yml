@@ -1,0 +1,8 @@
+author: "Atebite"
+delete-after: True
+changes: 
+  - rscadd: "New integrated circuit components have been added:"
+  - rscadd: "Reagent funnels - Allows you to use reagent containers such as beakers on the assembly to refill internal reagent storages"
+  - rscadd: "Reagent heaters/coolers - Heats/cools contained reagents, similar to heater/cooler pads"
+  - rscadd: "Anchoring bolts - Anchors the assembly so that it cannot be moved"
+  - rscadd: "Hatch locks - Prevents opening the assembly with screwdrivers while enabled"
