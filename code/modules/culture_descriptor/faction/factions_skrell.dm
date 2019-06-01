@@ -3,7 +3,6 @@
 	description = "A famous name within the Raskinta-Katish community, the Qerr'voal is the SDTF in charge of defending the Qerr'Vallis system,\
 	a task the Qerr'Voal has carried out with distinction for 600 years. Despite the relative safety and stability of the system many young Skrell \
 	of Qerr'balak and the surrounding colonies try to enter the prestigious organisation in order to gain status and influence with their brethren."
-	language = LANGUAGE_SKRELLIAN
 
 /decl/cultural_info/faction/skrell/qalaoa
 	name = FACTION_SKRELL_QALAOA

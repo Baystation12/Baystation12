@@ -18,18 +18,6 @@
 	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two
 	return (copytext(message, length(message)) == "!") ? 4 : 2
 
-// 'basic' language; spoken by default.
-/datum/language/common
-	name = LANGUAGE_GALCOM
-	desc = "The common galactic tongue."
-	speech_verb = "says"
-	whisper_verb = "whispers"
-	key = "0"
-	flags = RESTRICTED
-	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
-	partial_understanding = list(LANGUAGE_SKRELLIAN = 30, LANGUAGE_HUMAN_EURO = 5)
-	shorthand = "GalCom"
-
 // Otherwise we end up with Blahblehmeh Nehnahwahblah, Captain.
 /datum/language/common/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))

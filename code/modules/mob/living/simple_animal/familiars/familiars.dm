@@ -18,7 +18,7 @@
 
 /mob/living/simple_animal/familiar/New()
 	..()
-	add_language(LANGUAGE_GALCOM)
+	add_language(LANGUAGE_HUMAN_EURO)
 	for(var/spell in wizardy_spells)
 		src.add_spell(new spell, "const_spell_ready")
 

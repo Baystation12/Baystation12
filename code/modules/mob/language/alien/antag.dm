@@ -121,7 +121,7 @@
 	shorthand = "CT"
 
 /datum/language/cult
-	name = LANGUAGE_OCCULT
+	name = LANGUAGE_CULT_GLOBAL
 	desc = "The initiated can share their thoughts by means defying all reason."
 	speech_verb = "intones"
 	ask_verb = "intones"
