@@ -30,6 +30,13 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	min_gas = list()
 	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
+	death_sounds = list('sound/flood/death.death10.ogg','sound/flood/death.death15.ogg',\
+						'sound/flood/death.death2.ogg','sound/flood/death.death20.ogg',\
+						'sound/flood/death.death3.ogg','sound/flood/death.death4.ogg',\
+						'sound/flood/death.death5.ogg','sound/flood/death.ogg')
+	pain_scream_sounds = list('sound/flood/pain.pain1.ogg','sound/flood/pain.pain15.ogg',\
+							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
+							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()
@@ -380,7 +387,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
-	playsound.src(pick('sound/flood/death.death10.ogg','
 	. = ..()
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()

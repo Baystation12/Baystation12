@@ -4,7 +4,7 @@
 	#include "achlys_objects.dm"
 	#include "achlys_outfits.dm"
 	#include "achlys_jobs.dm"
-	#include "../overmap_ships/om_ship_areas.dm"
+//	#include "../overmap_ships/om_ship_areas.dm"
 	#include "achlys_gm.dm"
 	#include "achlys_areas.dm"
 	#include "achlys_overmap.dm"
