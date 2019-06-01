@@ -269,9 +269,14 @@
 			return 0
 		if(isWelder(W))
 			var/obj/item/weapon/weldingtool/WT = W
-			if(WT.isOn())
-				slice_into_parts(WT, user)
+			if(WT.remove_fuel(0,user))
+				slice_into_parts(user)
 				return
+		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+			cutter.slice(user)
+			slice_into_parts(W, user)
+			return
 		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
 			var/obj/item/weapon/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
@@ -315,13 +320,10 @@
 	else
 		src.attack_hand(user)
 
-/obj/structure/closet/proc/slice_into_parts(obj/item/weapon/weldingtool/WT, mob/user)
-	if(!WT.remove_fuel(0,user))
-		to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-		return
+/obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
 	new /obj/item/stack/material/steel(src.loc, 2)
-	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", \
-						 "<span class='notice'>You have cut \the [src] apart with \the [WT].</span>", \
+	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
+						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
 						 "You hear welding.")
 	qdel(src)
 

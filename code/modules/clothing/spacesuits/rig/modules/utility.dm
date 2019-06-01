@@ -23,7 +23,6 @@
 	toggleable = 0
 	disruptive = 0
 
-	var/device_type
 	var/obj/item/device
 
 /obj/item/rig_module/device/healthscanner
@@ -36,7 +35,7 @@
 	usable = 1
 	use_power_cost = 200
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
-	device_type = /obj/item/device/scanner/health
+	device = /obj/item/device/scanner/health
 
 /obj/item/rig_module/device/defib
 	name = "mounted defibrillator"
@@ -47,7 +46,7 @@
 	interface_desc = "A prototype defibrillator, palm-mounted for ease of use."
 
 	use_power_cost = 0//Already handled by defib, but it's 150 Wh, normal defib takes 100
-	device_type = /obj/item/weapon/shockpaddles/rig
+	device = /obj/item/weapon/shockpaddles/rig
 
 /obj/item/rig_module/device/drill
 	name = "hardsuit mounted drill"
@@ -60,7 +59,7 @@
 	use_power_cost = 3600 //2 Wh per use
 	module_cooldown = 0
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
-	device_type = /obj/item/weapon/pickaxe/diamonddrill
+	device = /obj/item/weapon/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "anomaly scanner module"
@@ -72,7 +71,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device_type = /obj/item/device/ano_scanner
+	device = /obj/item/device/ano_scanner
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner
@@ -86,7 +85,7 @@
 	usable = 1
 	toggleable = 1
 	use_power_cost = 200
-	device_type = /obj/item/device/scanner/mining
+	device = /obj/item/device/scanner/mining
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner/activate()
@@ -106,11 +105,13 @@
 	engage_string = "Configure RCD"
 	use_power_cost = 300
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
-	device_type = /obj/item/weapon/rcd/mounted
+	device = /obj/item/weapon/rcd/mounted
 
 /obj/item/rig_module/device/Initialize()
 	. = ..()
-	if(device_type) device = new device_type(src)
+	if(ispath(device))
+		device = new device(src)
+		device.canremove = 0
 
 /obj/item/rig_module/device/engage(atom/target)
 	if(!..() || !device)
@@ -147,11 +148,11 @@
 
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
-		list("dylovene",    "dylovene",    /datum/reagent/dylovene,          80),
+		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
+		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         80),
-		list("spaceacillin",   "spaceacillin",   /datum/reagent/spaceacillin,      80),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80),
-		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     80)
+		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      80),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -162,13 +163,13 @@
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          20),
-		list("dylovene",    "dylovene",    /datum/reagent/dylovene,          20),
+		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      20),
+		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          20),
 		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         20),
-		list("radium",        "radium",        /datum/reagent/radium,            20),
-		list("spaceacillin",   "spaceacillin",   /datum/reagent/spaceacillin,      20),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20),
-		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     20)
+		list("dermaline",     "dermaline",     /datum/reagent/dermaline,         20),
+		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      20),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -407,7 +408,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device_type = /obj/item/weapon/paper_bin
+	device = /obj/item/weapon/paper_bin
 
 /obj/item/rig_module/device/paperdispenser/engage(atom/target)
 
@@ -426,7 +427,7 @@
 	interface_desc = "Signatures with style(tm)."
 	engage_string = "Change color"
 	usable = 1
-	device_type = /obj/item/weapon/pen/multi
+	device = /obj/item/weapon/pen/multi
 
 /obj/item/rig_module/device/stamp
 	name = "mounted internal affairs stamp"
@@ -465,7 +466,7 @@
 	interface_name = "mounted matter decompiler"
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
-	device_type = /obj/item/weapon/matter_decompiler
+	device = /obj/item/weapon/matter_decompiler
 
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"
