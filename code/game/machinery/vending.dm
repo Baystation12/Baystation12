@@ -296,14 +296,8 @@
 		return 0
 	else
 		// Okay to move the money at this point
-		var/datum/transaction/T = new("[vendor_account.owner_name] (via [name])", "Purchase of [currently_vending.item_name]", -currently_vending.price, name)
-
-		customer_account.do_transaction(T)
-
-		// Give the vendor the money. We use the account owner name, which means
-		// that purchases made with stolen/borrowed card will look like the card
-		// owner made them
-		credit_purchase(customer_account.owner_name)
+		customer_account.transfer(vendor_account, currently_vending.price, "Purchase of [currently_vending.item_name]")
+		
 		return 1
 
 /**
@@ -312,10 +306,7 @@
  *  Called after the money has already been taken from the customer.
  */
 /obj/machinery/vending/proc/credit_purchase(var/target as text)
-	vendor_account.money += currently_vending.price
-
-	var/datum/transaction/T = new(target, "Purchase of [currently_vending.item_name]", currently_vending.price, name)
-	vendor_account.do_transaction(T)
+	vendor_account.deposit(currently_vending.price, "Purchase of [currently_vending.item_name]", target)
 
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)

@@ -1621,6 +1621,7 @@
 #include "code\modules\economy\Events.dm"
 #include "code\modules\economy\Events_Mundane.dm"
 #include "code\modules\economy\TradeDestinations.dm"
+#include "code\modules\economy\Transactions.dm"
 #include "code\modules\emotes\emote_define.dm"
 #include "code\modules\emotes\emote_mob.dm"
 #include "code\modules\emotes\definitions\_mob.dm"
