@@ -196,27 +196,27 @@
 		qdel(f)
 
 /obj/item/nav_data_chip/unsc
-	chip_faction = "unsc"
+	chip_faction = "UNSC"
 	known_sectors = list("Deviance Station","VT9-042","KS7-535")
 
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
-	chip_faction = "covenant"
+	chip_faction = "Covenant"
 	known_sectors = list("Vanguard's Mantle","KS7-535")
 
 /obj/item/nav_data_chip/innie
-	chip_faction = "innie"
+	chip_faction = "Insurrection"
 	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/fragmented/unsc
 	name = "Fragmented Nav Data Chip"
-	chip_faction = "unsc"
+	chip_faction = "UNSC"
 	known_sectors = list("Deviance Station","VT9-042","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/covenant
 	name = "Fragmented Nav Data Chip"
 	icon_state = "nav_data_chip_cov"
-	chip_faction = "covenant"
+	chip_faction = "Covenant"
 	known_sectors = list("Vanguard's Mantle","KS7-535")
 
 /obj/item/nav_data_chip/fragmented/covenant/kig_yar
@@ -224,7 +224,7 @@
 
 /obj/item/nav_data_chip/fragmented/innie
 	name = "Fragmented Nav Data Chip"
-	chip_faction = "innie"
+	chip_faction = "Insurrection"
 	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/machinery/nav_computer/npc/unsc
