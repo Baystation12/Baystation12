@@ -139,7 +139,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
-			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 560, 545)
+			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 565, 545)
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
