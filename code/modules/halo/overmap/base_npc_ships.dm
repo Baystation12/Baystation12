@@ -223,7 +223,6 @@
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		var/z_to_load_at = shipmap_handler.get_next_usable_z()
 		shipmap_handler.un_free_map(z_to_load_at)
-		world.maxz = z_to_load_at
 		create_lighting_overlays_zlevel(z_to_load_at)
 		map_sectors["[z_to_load_at]"] = src
 		maploader.load_map(link,z_to_load_at)
