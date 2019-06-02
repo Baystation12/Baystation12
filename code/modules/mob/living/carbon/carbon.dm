@@ -399,6 +399,17 @@
 	if(default_language && can_speak(default_language))
 		return default_language
 
+/mob/living/carbon/proc/get_any_good_language(set_default=FALSE)
+	var/datum/language/result = get_default_language()
+	if (!result)
+		for (var/datum/language/L in languages)
+			if (can_speak(L))
+				result = L
+				if (set_default)
+					set_default_language(result)
+				break
+	return result
+
 /mob/living/carbon/show_inv(mob/user as mob)
 	user.set_machine(src)
 	var/dat = {"

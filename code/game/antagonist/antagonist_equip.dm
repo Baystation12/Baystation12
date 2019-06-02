@@ -2,6 +2,10 @@
 
 	if(!istype(player))
 		return 0
+	
+	if (required_language)
+		player.add_language(required_language)
+		player.set_default_language(all_languages[required_language])
 
 	// This could use work.
 	if(flags & ANTAG_CLEAR_EQUIPMENT)
