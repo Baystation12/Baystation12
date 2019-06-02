@@ -319,9 +319,9 @@
 		available_chemicals |= upgrade2_chemicals
 
 
-/obj/machinery/sleeper/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/sleeper/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	emagged = !emagged
-	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] \the [src]'s chemical synthesis safety checks.</span>")
+	user.visible_message(SPAN_WARNING("[user] swipes a card through \the [src]. The panel flashes [emagged ? "green" : "red"] then beeps quietly."), SPAN_DANGER("You [emagged ? "disable" : "enable"] \the [src]'s chemical synthesis safety checks with \the [emag_source]. The panel flashes [emagged ? "green" : "red"] then beeps quietly."), "You hear a quiet beep.", 1)
 
 	if (emagged)
 		available_chemicals |= antag_chemicals

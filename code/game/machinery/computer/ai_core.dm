@@ -12,7 +12,7 @@
 
 /obj/structure/AIcore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	if(!authorized)
-		to_chat(user, "<span class='warning'>You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!</span>")
+		user.visible_message(SPAN_WARNING("[user] swipes a card through \the [src]. The screen briefly flashes static then beeps quietly."), SPAN_DANGER("You swipe \the [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]! The screen briefly flashes static and emits a quiet beep."), "You hear a soft beep.", 1)
 		authorized = 1
 		return 1
 	. = ..()
