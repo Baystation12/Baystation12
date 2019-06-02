@@ -1,0 +1,7 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Hearing your current default language skips adding the language identity to the log."
+  - tweak: "You no longer grunt as if you have no languages if you have any language you can speak."
+  - tweak: "Team outsider special roles are given an appropriate team language."
+  - bugfix: "Legalese is enabled in the dme again. Derp."
