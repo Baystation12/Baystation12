@@ -19,7 +19,7 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 6
-	brute_mod = 1.2
+	brute_mod = 1.1
 	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(0,0)
 	total_health = 200
@@ -89,7 +89,7 @@
 	default_faction = "Covenant"
 
 	pain_mod = 0.8
-	brute_mod = 1.3
+	brute_mod = 1.2
 	slowdown = -2
 
 	total_health = 200
