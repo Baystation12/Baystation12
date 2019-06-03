@@ -87,12 +87,27 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	h.Stun(999)
 	h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 	new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew
 	if(istype(h.species,/datum/species/sangheili))
-		if(prob(50))
-			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
-		else
-			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
+	var/obj/item/clothing/suit/armor/special/combatharness/minor/MI = locate() in h.contents
+	if(istype(MI))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
+	var/obj/item/clothing/suit/armor/special/combatharness/major/MA = locate() in h.contents
+	if(istype(MA))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
+	var/obj/item/clothing/under/unsc/odst_jumpsuit/OD = locate() in h.contents
+	if(istype(OD))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/ODST
+	var/obj/item/clothing/under/unsc/marine_fatigues/MAR = locate() in h.contents
+	if(istype(MAR))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	var/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform/ONI = locate() in h.contents
+	if(istype(ONI))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/oni
+	var/obj/item/clothing/under/color/orange/PR = locate() in h.contents
+	if(istype(PR))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner
 
 	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
 	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
@@ -101,7 +116,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	new_combat_form.ckey = h.ckey
 	new_combat_form.name = h.real_name
 	if(prob(50))
-		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
+		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,70)
 	if(new_combat_form.ckey)
 		new_combat_form.stop_automated_movement = 1
 	for(var/obj/i in h.contents)
