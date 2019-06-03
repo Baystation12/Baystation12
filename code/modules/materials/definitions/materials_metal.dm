@@ -16,6 +16,7 @@
 				)
 	construction_difficulty = 2
 	sale_price = 2
+	value = 100
 
 /material/gold
 	name = MATERIAL_GOLD
@@ -45,6 +46,7 @@
 		)
 	ore_icon_overlay = "nugget"
 	sale_price = 3
+	value = 40	
 
 /material/gold/bronze //placeholder for ashtrays
 	name = MATERIAL_BRONZE
@@ -97,6 +99,7 @@
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "shiny"
 	sale_price = 2
+	value = 35
 
 /material/steel
 	name = MATERIAL_STEEL
@@ -117,6 +120,7 @@
 	sale_price = 1
 	ore_smelts_to = MATERIAL_STEEL
 	construction_difficulty = 1
+	value = 4
 
 /material/steel/holographic
 	name = "holo" + MATERIAL_STEEL
@@ -128,6 +132,7 @@
 	alloy_product = FALSE
 	sale_price = null
 	hidden_from_codex = TRUE
+	value = 0
 
 /material/aluminium
 	name = MATERIAL_ALUMINIUM
@@ -176,6 +181,7 @@
 	alloy_product = TRUE
 	sale_price = 2
 	ore_smelts_to = MATERIAL_PLASTEEL
+	value = 12
 
 /material/plasteel/titanium
 	name = MATERIAL_TITANIUM
@@ -193,6 +199,7 @@
 	construction_difficulty = 3
 	alloy_materials = null
 	alloy_product = FALSE
+	value = 30
 
 /material/plasteel/ocp
 	name = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
@@ -222,6 +229,7 @@
 	construction_difficulty = 3
 	sale_price = 3
 	ore_smelts_to = MATERIAL_OSMIUM
+	value = 30
 
 /material/tritium
 	name = MATERIAL_TRITIUM
@@ -234,6 +242,7 @@
 	sheet_plural_name = "ingots"
 	is_fusion_fuel = 1
 	construction_difficulty = 2
+	value = 300
 
 /material/deuterium
 	name = MATERIAL_DEUTERIUM
@@ -265,6 +274,7 @@
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"
 	sale_price = 5
+	value = 100
 
 /material/platinum
 	name = MATERIAL_PLATINUM
@@ -284,6 +294,7 @@
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "shiny"
 	sale_price = 5
+	value = 80
 
 /material/iron
 	name = MATERIAL_IRON
@@ -299,6 +310,7 @@
 				/datum/reagent/iron = 20
 				)
 	sale_price = 1
+	value = 5
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -313,6 +325,7 @@
 	weight = 500
 	construction_difficulty = 2
 	hidden_from_codex = TRUE
+	value = 100
 
 // Likewise.
 /material/voxalloy/elevatorium

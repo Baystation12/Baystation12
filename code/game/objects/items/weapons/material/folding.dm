@@ -96,6 +96,7 @@
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	attack_cooldown_modifier = -1
 	takes_colour = FALSE
+	worth_multiplier = 8
 
 /obj/item/weapon/material/knife/folding/combat/balisong
 	name = "butterfly knife"

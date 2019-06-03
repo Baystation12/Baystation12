@@ -21,6 +21,7 @@
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
 	sale_price = 1
+	value = 4
 
 /material/glass/proc/is_reinforced()
 	return (integrity > 75) //todo
@@ -45,3 +46,4 @@
 	alloy_product = TRUE
 	alloy_materials = list(MATERIAL_SAND = 2500, MATERIAL_PLATINUM = 1250)
 	sale_price = 2
+	value = 40
