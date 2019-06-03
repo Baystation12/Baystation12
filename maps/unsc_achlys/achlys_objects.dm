@@ -293,3 +293,11 @@
 
 /obj/machinery/door/airlock/maintenance/welded
 	welded = 1
+
+/obj/structure/vent
+	icon = 'icons/atmos/vent_pump.dmi'
+	icon_state = "hoff"
+	anchored = 1
+	mouse_opacity = 0
+	density = 0
+	throwpass = 1
