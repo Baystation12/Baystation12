@@ -62,7 +62,7 @@
 
 		for(var/i = 10; i >= 0; i -= 1)
 			if(src && !M.stat && in_range(M,src))
-				var/icon_picked = input(M, "Icon?", "Book Icon", null) in list("don't change", "bible", "koran", "scrapbook", "white", "holylight", "atheist", "kojiki", "torah", "kingyellow", "ithaqua", "necronomicon")
+				var/icon_picked = input(M, "Icon?", "Book Icon", null) in list("don't change", "bible", "koran", "scrapbook", "white", "holylight", "atheist", "kojiki", "torah", "kingyellow", "ithaqua", "necronomicon", "ninestar")
 				if(icon_picked != "don't change" && icon_picked)
 					icon_state = icon_picked
 				if(i != 0)
