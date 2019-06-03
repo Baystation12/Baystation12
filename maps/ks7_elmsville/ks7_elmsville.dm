@@ -15,10 +15,6 @@
 
 #elif !defined(MAP_OVERRIDE)
 
-	#if using_map_DATUM != /datum/map/ks7_elmsville
-
-		#warn A map has already been included, KS7 Elmsville included as well
-
-	#endif
+	#warn A map has already been included, KS7 Elmsville included as well
 
 #endif
