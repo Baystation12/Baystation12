@@ -1,4 +1,7 @@
 #if !defined(using_map_DATUM)
+
+	#define using_map_DATUM /datum/map/geminus_city
+
 	#include "areas.dm"
 
 	#include "unit_tests.dm"
@@ -14,8 +17,6 @@
 	//#include "geminuscity_4.dmm"
 	#include "geminuscity_3.dmm"
 	#include "geminuscity_2.dmm"
-
-	#define using_map_DATUM /datum/map/geminus_city
 
 #elif !defined(MAP_OVERRIDE)
 
