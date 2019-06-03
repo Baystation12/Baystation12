@@ -17,6 +17,7 @@ Buildable meters
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_NORMAL
 	level = 2
+	obj_flags = OBJ_FLAG_ROTATABLE 
 
 /obj/item/pipe/New(var/loc, var/pipe_type as num, var/dir as num, var/obj/machinery/atmospherics/make_from = null)
 	..()
@@ -306,17 +307,8 @@ Buildable meters
 	else
 		return ..()
 
-// rotate the pipe item clockwise
-
-/obj/item/pipe/verb/rotate()
-	set category = "Object"
-	set name = "Rotate Pipe"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained() || !Adjacent(usr) || usr.incapacitated())
-		return
-
-	src.set_dir(turn(src.dir, -90))
+/obj/item/pipe/rotate(mob/user)
+	..()
 
 	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_DVALVE, PIPE_SVALVE, PIPE_FUEL_STRAIGHT))
 		if(dir==2)
@@ -325,11 +317,7 @@ Buildable meters
 			set_dir(4)
 	else if (pipe_type in list (PIPE_MANIFOLD4W, PIPE_SUPPLY_MANIFOLD4W, PIPE_SCRUBBERS_MANIFOLD4W, PIPE_FUEL_MANIFOLD4W))
 		set_dir(2)
-	//src.pipe_set_dir(get_pipe_dir())
 	return
-
-/obj/item/pipe/AltClick()
-	rotate()
 
 /obj/item/pipe/Move()
 	..()
@@ -423,7 +411,7 @@ Buildable meters
 			return 0
 
 /obj/item/pipe/attack_self(mob/user as mob)
-	return rotate()
+	return rotate(user)
 
 /obj/item/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	..()

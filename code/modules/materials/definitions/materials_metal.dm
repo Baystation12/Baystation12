@@ -112,7 +112,7 @@
 				/datum/reagent/iron = 19.6,
 				/datum/reagent/carbon = 0.4
 				)
-	alloy_materials = list(MATERIAL_HEMATITE = 1875, MATERIAL_GRAPHENE = 1875)
+	alloy_materials = list(MATERIAL_HEMATITE = 1875, MATERIAL_GRAPHITE = 1875)
 	alloy_product = TRUE
 	sale_price = 1
 	ore_smelts_to = MATERIAL_STEEL
@@ -138,7 +138,6 @@
 				)
 	integrity = 125
 	weight = 18
-	brute_armor = 3
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#cccdcc"

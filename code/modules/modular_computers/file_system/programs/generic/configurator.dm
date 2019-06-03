@@ -16,6 +16,7 @@
 	requires_ntnet = 0
 	nanomodule_path = /datum/nano_module/program/computer_configurator/
 	usage_flags = PROGRAM_ALL
+	category = PROG_UTIL
 
 /datum/nano_module/program/computer_configurator
 	name = "NTOS Computer Configuration Tool"

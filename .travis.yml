@@ -14,8 +14,6 @@ matrix:
     include:
     - name: "Code"
       env: TEST=CODE
-    - name: "Web"
-      env: TEST=WEB
     - name: "Map - Example"
       env: TEST=MAP MAP_PATH=example
     - name: "Map - Torch"
@@ -27,7 +25,6 @@ matrix:
 
 cache:
   directories:
-    - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
 
 addons:

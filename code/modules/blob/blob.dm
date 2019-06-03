@@ -1,4 +1,3 @@
-//I will need to recode parts of this but I am way too tired atm
 /obj/effect/blob
 	name = "ravaging mass"
 	desc = "A pulsating mass of interwoven tendrils."
@@ -14,6 +13,7 @@
 	plane = BLOB_PLANE
 	layer = BLOB_SHIELD_LAYER
 
+	var/blob_may_process = 1
 	var/maxHealth = 30
 	var/health
 	var/regen_rate = 5
@@ -31,6 +31,10 @@
 	health = maxHealth
 	update_icon()
 	return ..(loc)
+
+/obj/effect/blob/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/blob/CanPass(var/atom/movable/mover, vra/turf/target, var/height = 0, var/air_group = 0)
 	if(air_group || height == 0)
@@ -51,6 +55,11 @@
 		icon_state = "blob"
 	else
 		icon_state = "blob_damaged"
+
+/obj/effect/blob/Process(wait, times_fired)
+	if(times_fired % 2)
+		return
+	attempt_attack(GLOB.alldirs)
 
 /obj/effect/blob/proc/take_damage(var/damage)
 	health -= damage
@@ -115,11 +124,8 @@
 	for(var/mob/living/L in T)
 		if(L.stat == DEAD)
 			continue
-		var/blob_damage = pick(BRUTE, BURN)
-		L.visible_message("<span class='danger'>A tendril flies out from \the [src] and smashes into \the [L]!</span>", "<span class='danger'>A tendril flies out from \the [src] and smashes into you!</span>")
-		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-		L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
-		return
+		attack_living(L)
+
 	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
 		new/obj/effect/blob/core/secondary(T)
 	else
@@ -138,6 +144,22 @@
 	if(forceLeft)
 		B.pulse(forceLeft - 1, dirs)
 
+/obj/effect/blob/proc/attack_living(var/mob/living/L)
+	if(!L)
+		return
+	var/blob_damage = pick(BRUTE, BURN)
+	L.visible_message("<span class='danger'>A tendril flies out from \the [src] and smashes into \the [L]!</span>", "<span class='danger'>A tendril flies out from \the [src] and smashes into you!</span>")
+	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
+	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
+
+/obj/effect/blob/proc/attempt_attack(var/list/dirs)
+	var/attackDir = pick(dirs)
+	var/turf/T = get_step(src, attackDir)
+	for(var/mob/living/victim in T)
+		if(victim.stat == DEAD)
+			continue
+		attack_living(victim)
+
 /obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)
 		return
@@ -155,7 +177,7 @@
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	if(isWirecutter(W))
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
-			to_chat(user, SPAN_NOTICE("You fail to collect a sample from \the [src]."))
+			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
 			return
 		else	
 			if(!pruned)
@@ -164,7 +186,7 @@
 				pruned = TRUE
 				return
 			else
-				to_chat(user, SPAN_NOTICE("\The [src] has already been pruned."))
+				to_chat(user, SPAN_WARNING("\The [src] has already been pruned."))
 				return
 
 	var/damage = 0
@@ -194,7 +216,6 @@
 	damage_max = 40
 	expandType = /obj/effect/blob/shield
 	product = /obj/item/weapon/blob_tendril/core
-	var/blob_may_process = 1
 	var/growth_range = 10 // Maximal distance for new blob pieces from this core.
 
 // Rough icon state changes that reflect the core's health
@@ -208,14 +229,6 @@
 		if(-INFINITY to 33)
 			icon_state = "blob_factory"
 
-/obj/effect/blob/core/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
-
-/obj/effect/blob/core/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	return ..()
-
 /obj/effect/blob/core/Process()
 	set waitfor = 0
 	if(!blob_may_process)
@@ -226,6 +239,8 @@
 	pulse(20, GLOB.alldirs)
 	pulse(20, GLOB.alldirs)
 	pulse(20, GLOB.alldirs)
+	attempt_attack(GLOB.alldirs)
+	attempt_attack(GLOB.alldirs)
 	blob_may_process = 1
 
 // Half the stats of a normal core. Blob has a very small probability of growing these when spreading. These will spread the blob further.
@@ -272,6 +287,7 @@
 /obj/effect/blob/shield/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
 	return !density
 
+//produce
 /obj/item/weapon/blob_tendril
 	name = "asteroclast tendril"
 	desc = "A tendril removed from an asteroclast. It's entirely lifeless."

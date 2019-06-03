@@ -1,13 +1,12 @@
 /obj
 	layer = OBJ_LAYER
+	animate_movement = 2
 
 	var/obj_flags
 
-	//Used to store information about the contents of the object.
-	var/list/matter
+	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
 	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
-	animate_movement = 2
 	var/throwforce = 1
 	var/sharp = 0		// whether this object cuts
 	var/edge = 0		// whether this object is more likely to dismember
@@ -81,7 +80,6 @@
 
 /obj/attack_ghost(mob/user)
 	ui_interact(user)
-	tg_ui_interact(user)
 	..()
 
 /obj/proc/interact(mob/user)
@@ -164,3 +162,25 @@
 
 /obj/proc/can_embed()
 	return is_sharp(src)
+
+/obj/AltClick(mob/user)
+	if(obj_flags & OBJ_FLAG_ROTATABLE)
+		rotate(user)
+	..()
+	
+/obj/examine(mob/user)
+	. = ..(user)
+	if(. && (obj_flags & OBJ_FLAG_ROTATABLE))
+		to_chat(user, "<span class='subtle'>Can be rotated with alt-click.</span>")
+
+/obj/proc/rotate(mob/user)
+	if(!CanPhysicallyInteract(user))
+		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
+		return
+
+	if(anchored)
+		to_chat(user, SPAN_NOTICE("\The [src] is secured to the floor!"))
+		return 
+
+	set_dir(turn(dir, 90))
+	update_icon() 

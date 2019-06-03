@@ -286,6 +286,10 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/eva)
+"bd" = (
+/obj/effect/shuttle_landmark/ert/hanger,
+/turf/space,
+/area/space)
 "bf" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -497,6 +501,7 @@
 	},
 /obj/machinery/camera/network/exploration_shuttle,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -535,7 +540,7 @@
 	frequency = 1431;
 	id_tag = "guppy_shuttle_outer";
 	name = "Guppy External Access";
-	req_access = list("ACCESS_TORCH_GUP")
+	req_access = list()
 	},
 /obj/machinery/shield_diffuser,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -600,7 +605,8 @@
 	id = "guppy_hatch";
 	name = "Rear Hatch Control";
 	pixel_x = 0;
-	pixel_y = -32
+	pixel_y = -32;
+	req_access = list("ACCESS_TORCH_GUP")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -805,7 +811,7 @@
 	frequency = 1431;
 	id_tag = "guppy_shuttle_outer";
 	name = "Guppy External Access";
-	req_access = list("ACCESS_TORCH_GUP")
+	req_access = list()
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -813,7 +819,7 @@
 "cg" = (
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/valve/open{
-	layer = 6;
+	layer = 5.1;
 	open = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -1538,12 +1544,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "dp" = (
-/obj/machinery/button/remote/blast_door{
-	id = "guppy_hatch";
-	name = "Rear Hatch Control";
-	pixel_x = 32;
-	pixel_y = -32
-	},
 /obj/machinery/hologram/holopad/longrange,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/yellow{
@@ -1750,6 +1750,13 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/button/remote/blast_door{
+	id = "guppy_hatch";
+	name = "Rear Hatch Control";
+	pixel_x = 0;
+	pixel_y = 0;
+	req_access = list("ACCESS_TORCH_GUP")
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "dK" = (
@@ -1816,12 +1823,12 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fifthdeck/aft)
 "dT" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 4
+/obj/effect/floor_decal/industrial/outline/orange,
+/obj/machinery/atmospherics/pipe/tank/carbon_dioxide{
+	dir = 4;
+	start_pressure = 1013.25
 	},
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "dU" = (
 /obj/machinery/meter,
@@ -1835,43 +1842,50 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "dV" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/machinery/firealarm{
 	dir = 2;
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/universal{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/portables_connector{
 	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/red,
+/obj/machinery/portable_atmospherics/canister/empty,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "dW" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 10
-	},
 /obj/effect/floor_decal/industrial/outline,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "dY" = (
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 4
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/airlock)
 "dZ" = (
@@ -1894,31 +1908,21 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
-	icon_state = "map-scrubbers";
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/manifold/visible/supply{
-	icon_state = "map-supply";
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
 	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "eb" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
-/obj/machinery/power/terminal{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/handrai,
 /obj/random_multi/single_item/boombox,
 /obj/machinery/firealarm{
 	dir = 2;
@@ -1928,6 +1932,17 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/machinery/alarm{
+	alarm_id = "petrov2";
+	dir = 4;
+	pixel_x = -21;
+	pixel_y = 0;
+	rcon_setting = 2
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
@@ -1956,12 +1971,12 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/canister/air,
-/obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "eh" = (
 /obj/structure/cable/cyan{
@@ -1969,19 +1984,23 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 10
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "ei" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -2031,52 +2050,64 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/structure/cable/cyan{
-	icon_state = "1-6";
-	d1 = 2;
-	d2 = 8
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "en" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
 /obj/machinery/power/terminal{
 	icon_state = "term";
 	dir = 1
+	},
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/structure/cable/cyan{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "eq" = (
-/obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/manifold/visible/cyan,
+/obj/machinery/atmospherics/pipe/manifold/visible/cyan{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "er" = (
 /turf/simulated/wall/prepainted,
 /area/vacant/infirmary)
 "es" = (
-/obj/machinery/atmospherics/pipe/simple/visible/universal{
+/obj/machinery/atmospherics/binary/pump,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "et" = (
@@ -2123,10 +2154,8 @@
 	dir = 1
 	},
 /obj/machinery/light/small,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 10
-	},
 /obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "ez" = (
@@ -2194,12 +2223,8 @@
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/airlock)
 "eE" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /obj/machinery/recharge_station,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "eF" = (
@@ -2281,10 +2306,15 @@
 	icon_state = "techfloor_edges";
 	dir = 9
 	},
+/obj/machinery/conveyor_switch/oneway{
+	id = "cargobay";
+	name = "mining conveyor"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "eY" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 4;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2362,6 +2392,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 8;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2430,6 +2461,7 @@
 /area/exploration_shuttle/cargo)
 "fo" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2444,6 +2476,7 @@
 "fq" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump"
@@ -2452,6 +2485,7 @@
 /area/exploration_shuttle/cargo)
 "fr" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 2;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_internal"
@@ -2493,11 +2527,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "fy" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -2508,6 +2537,11 @@
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/hull,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "fz" = (
@@ -2584,6 +2618,7 @@
 /area/exploration_shuttle/cargo)
 "fK" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 4;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_internal"
@@ -2617,6 +2652,7 @@
 /area/exploration_shuttle/cargo)
 "fP" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 8;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_internal"
@@ -2867,6 +2903,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -3032,6 +3069,7 @@
 	pixel_y = 20
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_external"
@@ -3396,7 +3434,10 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/vending/cigarette,
+/obj/machinery/vending/coffee{
+	icon_state = "coffee";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "iq" = (
@@ -3520,7 +3561,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/storage)
 "iE" = (
-/obj/machinery/vending/coffee,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "iF" = (
@@ -4456,10 +4496,10 @@
 /obj/item/stack/flag/red,
 /obj/item/stack/flag/red,
 /obj/item/stack/flag/red,
-/obj/item/weapon/mining_scanner,
-/obj/item/weapon/mining_scanner,
-/obj/item/weapon/mining_scanner,
-/obj/item/weapon/mining_scanner,
+/obj/item/device/scanner/mining,
+/obj/item/device/scanner/mining,
+/obj/item/device/scanner/mining,
+/obj/item/device/scanner/mining,
 /obj/effect/floor_decal/corner/mauve{
 	icon_state = "corner_white";
 	dir = 10
@@ -4622,7 +4662,7 @@
 /obj/structure/table/rack,
 /obj/machinery/door/window/northright{
 	dir = 1;
-	name = "pathfinder suit storage"
+	name = "heavy suit storage"
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -4631,7 +4671,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/weapon/rig/command/exploration/equipped,
+/obj/item/weapon/rig/exploration/equipped,
 /obj/item/clothing/mask/gas/half,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light,
@@ -4736,11 +4776,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/shuttlefuel)
 "le" = (
-/obj/structure/cable/cyan{
-	icon_state = "0-9";
-	d1 = 2;
-	d2 = 8
-	},
 /obj/machinery/power/apc/shuttle/charon{
 	icon_state = "apc0";
 	dir = 4
@@ -4751,6 +4786,15 @@
 /obj/structure/handrai{
 	icon_state = "handrail";
 	dir = 8
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
@@ -4878,9 +4922,12 @@
 	icon_state = "bordercolorhalf";
 	dir = 4
 	},
-/obj/machinery/vending/snack,
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/machinery/vending/snack{
+	icon_state = "snack";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
@@ -5119,6 +5166,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -6560,11 +6608,14 @@
 	icon_state = "bordercolorhalf";
 	dir = 4
 	},
-/obj/machinery/vending/cigarette,
 /obj/structure/sign/deck/fifth{
 	dir = 8;
 	icon_state = "deck-5";
 	pixel_x = 40
+	},
+/obj/machinery/vending/cigarette{
+	icon_state = "cigs";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
@@ -6573,7 +6624,10 @@
 	icon_state = "bordercolorhalf";
 	dir = 4
 	},
-/obj/machinery/vending/cola,
+/obj/machinery/vending/cola{
+	icon_state = "Cola_Machine";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "oS" = (
@@ -7191,9 +7245,9 @@
 /area/quartermaster/expedition)
 "qi" = (
 /obj/structure/table/rack,
-/obj/item/weapon/mining_scanner,
-/obj/item/weapon/mining_scanner,
-/obj/item/weapon/mining_scanner,
+/obj/item/device/scanner/mining,
+/obj/item/device/scanner/mining,
+/obj/item/device/scanner/mining,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/clothing/glasses/meson,
 /obj/item/clothing/glasses/meson,
@@ -7364,6 +7418,7 @@
 	dir = 1
 	},
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -7479,12 +7534,12 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/fifthdeck/fore)
 "qJ" = (
-/obj/structure/closet/emcloset,
 /obj/effect/floor_decal/corner/brown/half{
 	icon_state = "bordercolorhalf";
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
 "qK" = (
@@ -9649,6 +9704,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"vi" = (
+/obj/effect/shuttle_landmark/merc/hanger,
+/turf/space,
+/area/space)
 "vj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
@@ -9825,7 +9884,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "vN" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_rack{
+	icon_state = "drying_rack";
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "vO" = (
@@ -9968,6 +10030,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
+"wy" = (
+/obj/effect/shuttle_landmark/ninja/hanger,
+/turf/space,
+/area/space)
 "wz" = (
 /obj/machinery/door/airlock/research{
 	id_tag = null;
@@ -10295,9 +10361,10 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
 "xV" = (
-/obj/structure/closet/crate/secure/biohazard/blanks,
+/obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -10779,9 +10846,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
-"zv" = (
-/turf/simulated/floor/plating,
-/area/quartermaster/expedition)
 "zw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/random/junk,
@@ -11002,12 +11066,11 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
 "Ar" = (
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
-/obj/machinery/atmospherics/portables_connector{
+/obj/machinery/atmospherics/pipe/tank/air{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/orange,
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "As" = (
 /obj/structure/cable/cyan{
@@ -11710,6 +11773,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -11836,11 +11900,13 @@
 /obj/machinery/power/port_gen/pacman{
 	anchored = 1
 	},
-/obj/structure/cable/yellow{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/yellow,
+/obj/machinery/camera/network/exploration_shuttle{
+	icon_state = "camera";
+	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "Ds" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -12145,7 +12211,7 @@
 "Ep" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	id = "garbage"
+	id = "cargobay"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/light{
@@ -12188,7 +12254,6 @@
 /area/quartermaster/hangar)
 "Ex" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/vending/phoronresearch,
 /obj/machinery/light_switch{
 	pixel_x = -24;
 	pixel_y = 12
@@ -12201,6 +12266,10 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/vending/phoronresearch{
+	icon_state = "generic";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
@@ -13080,7 +13149,7 @@
 "Id" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	id = "garbage"
+	id = "cargobay"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/sign/warning/moving_parts{
@@ -13312,11 +13381,12 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
 "Ja" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
+/obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "Jc" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -13462,7 +13532,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
 "JA" = (
-/obj/structure/closet/crate/secure/biohazard/blanks,
+/obj/structure/closet/crate/secure/biohazard,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/custodial)
 "JB" = (
@@ -13493,6 +13563,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -13686,7 +13757,9 @@
 /area/shuttle/petrov/custodial)
 "Ko" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman{
+	anchored = 1
+	},
 /obj/structure/cable/yellow{
 	d2 = 4;
 	icon_state = "0-4"
@@ -13715,19 +13788,17 @@
 /obj/machinery/power/smes/buildable/preset/torch/shuttle{
 	RCon_tag = "Shuttle - Charon"
 	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/machinery/light/small{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "Kz" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	dir = 4
-	},
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
@@ -13735,6 +13806,9 @@
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/effect/floor_decal/techfloor,
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "KA" = (
@@ -14203,7 +14277,7 @@
 "Mk" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	id = "garbage"
+	id = "cargobay"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -14509,9 +14583,10 @@
 	icon_state = "handrail";
 	dir = 1
 	},
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	dir = 9
 	},
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "Np" = (
@@ -14826,6 +14901,7 @@
 	pixel_y = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 1;
 	frequency = 1331;
 	id_tag = "calypso_cargo_pump_out_external"
@@ -14945,6 +15021,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/rnd)
+"OV" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "OW" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -15102,13 +15182,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
 "PA" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/machinery/pipedispenser/orderable,
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 9
+/obj/machinery/pipedispenser,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -15192,6 +15268,10 @@
 	},
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
+"Qa" = (
+/obj/effect/shuttle_landmark/skipjack/hanger,
+/turf/space,
+/area/space)
 "Qd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/bar)
@@ -15199,6 +15279,7 @@
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -15435,7 +15516,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "QR" = (
-/obj/structure/closet/crate/secure/biohazard/blanks,
+/obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	layer = 2.4;
@@ -16511,22 +16592,19 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/hallwaya)
 "Vb" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/alarm{
-	alarm_id = "petrov2";
-	dir = 4;
-	pixel_x = -21;
-	pixel_y = 0;
-	rcon_setting = 2
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	layer = 2.4;
 	level = 2
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
@@ -17385,6 +17463,14 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
+"Yu" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Yw" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/structure/dispenser,
@@ -17726,6 +17812,7 @@
 	},
 /obj/machinery/portable_atmospherics/canister,
 /obj/machinery/alarm{
+	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -24604,7 +24691,7 @@ aa
 aa
 aa
 aa
-aa
+wy
 aa
 aa
 aa
@@ -32490,7 +32577,7 @@ oU
 iT
 hw
 kg
-hz
+OV
 ki
 kL
 hl
@@ -33658,7 +33745,7 @@ aa
 aa
 aa
 aa
-aa
+Qa
 aa
 aa
 aa
@@ -34670,7 +34757,7 @@ aa
 aa
 aa
 aa
-ab
+aa
 aa
 aa
 aa
@@ -36729,7 +36816,7 @@ mC
 mC
 im
 mE
-mF
+Yu
 mF
 mF
 mF
@@ -39553,7 +39640,7 @@ Lp
 UG
 UG
 sp
-IQ
+WU
 qz
 um
 Xz
@@ -39755,7 +39842,7 @@ qe
 qf
 qh
 Eg
-zv
+IQ
 qA
 un
 qG
@@ -43226,7 +43313,7 @@ aa
 aa
 aa
 aa
-aa
+bd
 aa
 aa
 aa
@@ -48609,7 +48696,7 @@ aa
 aa
 aa
 aa
-aa
+vi
 aa
 aa
 aa

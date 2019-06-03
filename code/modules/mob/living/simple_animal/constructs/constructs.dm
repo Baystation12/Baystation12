@@ -40,8 +40,8 @@
 	..()
 	name = text("[initial(name)] ([random_id(/mob/living/simple_animal/construct, 1000, 9999)])")
 	real_name = name
-	add_language("Cult")
-	add_language(LANGUAGE_OCCULT)
+	add_language(LANGUAGE_CULT)
+	add_language(LANGUAGE_CULT_GLOBAL)
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
 	update_icon()
@@ -256,7 +256,7 @@
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
 	overlays += eye_glow
-	set_light(-10, 0.1, 3, l_color = "#ffffff")
+	set_light(-2, 0.1, 1.5, l_color = "#ffffff")
 
 ////////////////HUD//////////////////////
 

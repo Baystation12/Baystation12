@@ -8,6 +8,13 @@ The following conduct may result in a warning being logged against your account:
 * Derogatory comments.
 * Trolling.
 * Inappropriate content.
+* Comments on pull requests not addressing technical or code-related issues.
+	* Comments expressing general attitude towards or criticism of the change, giving constructive feedback on non-technical aspects, or discussing balance should be made in appropriate non-repo channels, such as the forum, IRC, or Discord.
+	* The same rule applies to sprite, sound, or map contributions, though there the definition of "technical" will be interpreted rather broadly.
+	* The following are exempt from this rule: 
+		* The PR's author(s).
+		* Developers, or other staff members with the right to approve or veto the pull request.
+	* Emote reactions to pull requests are exempt. Comments on issue reports are exempt so long as they remain on topic.
 * Issuing commits, editing wiki pages, commenting, or opening bug reports in bad faith.
 	* The Head Developer and Developers are obligated to assume good faith until evidence otherwise surfaces.
     * Examples:
@@ -40,7 +47,7 @@ Warnings expire in six months from the date of warning.
 ## Developer Responsibilities
 The Head Developer has the responsiblity to:
 * Clarify the standards of acceptable behaviour
-* Handle the appeals process for all issued ban
+* Handle the appeals process for all issued bans
 
 All Developers have the responsibility to:
 * Take appropriate and fair corrective action in response to any instances of unacceptable behaviour
@@ -50,10 +57,10 @@ All Developers have the right to:
 * Remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct
 * Issue warnings in accordance with the Code of Conduct (except in the cases elaborated in the second section of the Rules category, which require conference with the Head Developer)
 * Temporarily ban any contributor from Discord development channels for behaviour not aligned to this Code of Conduct, for a period up to three days
-    * Any such ban issued will be accompanied by a warning, and should be logged
+    * Any such ban issued will be accompanied by a warning, and will be logged
 
 ## Enforcement
-Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the Head Developer on Discord (@sabiram). The Head Developer will review and investigate all complaints, and will respond in a way that they deem appropriate to the circumstances. The Head Developer is obligated to maintain confidentiality with regard to the reporter of an incident.
+Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the Head Developer on Discord. The Head Developer will review and investigate all complaints, and will respond in a way that they deem appropriate to the circumstances. The Head Developer is obligated to maintain confidentiality with regard to the reporter of an incident.
 
 Developers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by the Head Developer.
 

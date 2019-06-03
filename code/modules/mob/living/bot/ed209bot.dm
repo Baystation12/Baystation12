@@ -144,7 +144,7 @@
 		if(6)
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
-				if (C.get_amount() < 1)
+				if (!C.can_use(1))
 					to_chat(user, "<span class='warning'>You need one coil of wire to wire [src].</span>")
 					return
 				to_chat(user, "<span class='notice'>You start to wire [src].</span>")

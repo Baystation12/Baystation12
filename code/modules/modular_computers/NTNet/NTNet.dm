@@ -6,6 +6,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/relays = list()
 	var/list/logs = list()
 	var/list/available_station_software = list()
+	var/list/available_software_by_category = list()
 	var/list/available_antag_software = list()
 	var/list/available_news = list()
 	var/list/chat_channels = list()
@@ -115,9 +116,14 @@ var/global/datum/ntnet/ntnet_global = new()
 			continue
 		// Check whether the program should be available for station/antag download, if yes, add it to lists.
 		if(prog.available_on_ntnet)
-			available_station_software.Add(prog)
+			var/list/category_list = available_software_by_category[prog.category]
+			if(!category_list)
+				category_list = list()
+				available_software_by_category[prog.category] = category_list
+			ADD_SORTED(available_station_software, prog, /proc/cmp_program)
+			ADD_SORTED(category_list, prog, /proc/cmp_program)
 		if(prog.available_on_syndinet)
-			available_antag_software.Add(prog)
+			ADD_SORTED(available_antag_software, prog, /proc/cmp_program)
 
 // Builds lists that contain downloadable software.
 /datum/ntnet/proc/build_news_list()
@@ -227,7 +233,7 @@ var/global/datum/ntnet/ntnet_global = new()
 			my_client.stored_login = new_login
 
 //Used for initial email generation.
-/datum/ntnet/proc/create_email(mob/user, desired_name, domain)
+/datum/ntnet/proc/create_email(mob/user, desired_name, domain, assignment)
 	desired_name = sanitize_for_email(desired_name)
 	var/login = "[desired_name]@[domain]"
 	// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
@@ -239,9 +245,8 @@ var/global/datum/ntnet/ntnet_global = new()
 		to_chat(user, "You were not assigned an email address.")
 		user.mind.store_memory("You were not assigned an email address.")
 	else
-		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account(login, user.real_name, assignment)
 		EA.password = GenerateKey()
-		EA.login = login
 		if(user.mind)
 			user.mind.initial_email_login["login"] = EA.login
 			user.mind.initial_email_login["password"] = EA.password

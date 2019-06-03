@@ -10,6 +10,7 @@
 	requires_ntnet = 1
 	network_destination = "alarm monitoring network"
 	size = 5
+	category = PROG_MONITOR
 	var/has_alert = 0
 
 /datum/computer_file/program/alarm_monitor/process_tick()

@@ -5,6 +5,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
+	scan_sound = 'sound/effects/fastbeep.ogg'
 	var/global/list/valid_targets = list(
 		/obj/item/weapon/reagent_containers/food/snacks/grown,
 		/obj/item/weapon/grown,

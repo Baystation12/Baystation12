@@ -23,10 +23,6 @@
 	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
 
-/obj/machinery/r_n_d/server/Destroy()
-	griefProtection()
-	..()
-
 /obj/machinery/r_n_d/server/RefreshParts()
 	var/tot_rating = 0
 	for(var/obj/item/weapon/stock_parts/SP in src)
@@ -59,7 +55,6 @@
 		if((T20C + 20) to (T0C + 70))
 			health = max(0, health - 1)
 	if(health <= 0)
-		griefProtection() //I dont like putting this in process() but it's the best I can do without re-writing a chunk of rd servers.
 		files.known_designs = list()
 		for(var/datum/tech/T in files.known_tech)
 			if(prob(1))
@@ -70,23 +65,6 @@
 	else
 		produce_heat()
 		delay = initial(delay)
-
-/obj/machinery/r_n_d/server/emp_act(severity)
-	griefProtection()
-	..()
-
-/obj/machinery/r_n_d/server/ex_act(severity)
-	griefProtection()
-	..()
-
-//Backup files to centcomm to help admins recover data after greifer attacks
-/obj/machinery/r_n_d/server/proc/griefProtection()
-	for(var/obj/machinery/r_n_d/server/centcom/C in SSmachines.machinery)
-		for(var/datum/tech/T in files.known_tech)
-			C.files.AddTech2Known(T)
-		for(var/datum/design/D in files.known_designs)
-			C.files.AddDesign2Known(D)
-		C.files.RefreshResearch()
 
 /obj/machinery/r_n_d/server/proc/produce_heat()
 	if(!produces_heat)

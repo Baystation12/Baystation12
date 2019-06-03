@@ -2,13 +2,10 @@
 	name = "uniform vendor"
 	desc= "A uniform vendor for utility, service, and dress uniforms."
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "robotics"
+	icon_state = "uniform"
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
-
-	var/icon_deny = "robotics-deny"
-	var/icon_off = "robotics-off"
 
 	// Power
 	use_power = 1
@@ -19,6 +16,14 @@
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
 	var/global/list/issued_items = list()
+
+/obj/machinery/uniform_vendor/on_update_icon()
+	if(stat & BROKEN)
+		icon_state = "[initial(icon_state)]-broken"
+	else if(!(stat & NOPOWER))
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-off"
 
 /obj/machinery/uniform_vendor/attack_hand(mob/user)
 	if(..())
@@ -85,6 +90,7 @@
 		selected_outfit -= locate(href_list["rem"])
 		. = TOPIC_REFRESH
 	if(href_list["vend"])
+		flick("uniform-vend", src)
 		spawn_uniform(selected_outfit)
 		selected_outfit.Cut()
 		. = TOPIC_REFRESH

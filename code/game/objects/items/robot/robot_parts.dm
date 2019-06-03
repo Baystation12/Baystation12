@@ -119,9 +119,9 @@
 			return
 		else
 			var/obj/item/stack/cable_coil/coil = W
-			coil.use(1)
-			src.wires = 1.0
-			to_chat(user, "<span class='notice'>You insert the wire!</span>")
+			if(coil.use(1))
+				src.wires = 1.0
+				to_chat(user, "<span class='notice'>You insert the wire!</span>")
 	if(istype(W, /obj/item/robot_parts/head))
 		var/obj/item/robot_parts/head/head_part = W
 		// Attempt to create full-body prosthesis.

@@ -22,12 +22,12 @@
 	sheet_plural_name = "bricks"
 	sale_price = 2
 
-/material/graphene
-	name = MATERIAL_GRAPHENE
-	ore_compresses_to = MATERIAL_GRAPHENE
+/material/graphite
+	name = MATERIAL_GRAPHITE
+	ore_compresses_to = MATERIAL_GRAPHITE
 	icon_colour = "#444444"
 	ore_smelts_to = MATERIAL_PLASTIC
-	ore_name = "graphene"
+	ore_name = "graphite"
 	ore_smelts_to = MATERIAL_PLASTIC
 	ore_result_amount = 5
 	ore_spread_chance = 25
@@ -231,7 +231,7 @@
 	chem_products = list(
 		/datum/reagent/toxin/phoron = 20
 		)
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	ore_name = "phoron"
 	ore_compresses_to = MATERIAL_PHORON
 	ore_result_amount = 5

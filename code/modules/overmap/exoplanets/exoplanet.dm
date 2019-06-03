@@ -37,6 +37,19 @@
 	var/ruin_tags_blacklist
 	var/features_budget = 4
 	var/list/possible_features = list()
+	var/list/spawned_features
+
+	var/habitability_class
+
+/obj/effect/overmap/sector/exoplanet/proc/generate_habitability()
+	var/roll = rand(1,100)
+	switch(roll)
+		if(1 to 10)
+			habitability_class = HABITABILITY_IDEAL
+		if(11 to 50)
+			habitability_class = HABITABILITY_OKAY
+		else
+			habitability_class = HABITABILITY_BAD
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -65,10 +78,11 @@
 	..()
 
 /obj/effect/overmap/sector/exoplanet/proc/build_level()
+	generate_habitability()
 	generate_atmosphere()
 	generate_map()
 	generate_features()
-	generate_landing(2)		//try making 4 landmarks
+	generate_landing(2)
 	update_biome()
 	generate_daycycle()
 	START_PROCESSING(SSobj, src)
@@ -162,7 +176,7 @@
 				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_features()
-	seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
+	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/sector/exoplanet/proc/get_biostuff(var/datum/random_map/noise/exoplanet/random_map)
 	if(!istype(random_map))
@@ -222,6 +236,19 @@
 		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
 	if(atmosphere)
+		//Set up gases for living things
+		if(!LAZYLEN(breathgas))
+			var/list/goodgases = gas_data.gases.Copy()
+			var/gasnum = min(rand(1,3), goodgases.len)
+			for(var/i = 1 to gasnum)
+				var/gas = pick(goodgases)
+				breathgas[gas] = round(0.4*goodgases[gas])
+				goodgases -= gas
+		if(!badgas)
+			var/list/badgases = gas_data.gases.Copy()
+			badgases -= atmosphere.gas
+			badgas = pick(badgases)
+
 		A.minbodytemp = atmosphere.temperature - 20
 		A.maxbodytemp = atmosphere.temperature + 30
 		A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
@@ -282,7 +309,7 @@
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
-	if(prob(10))	//small chance of getting a perfectly habitable planet
+	if(habitability_class == HABITABILITY_IDEAL)
 		atmosphere.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
 		atmosphere.adjust_gas("nitrogen", MOLES_N2STANDARD)
 	else //let the fuckery commence
@@ -293,24 +320,30 @@
 			newgases -= "aliether"
 		newgases -= "watervapor"
 
-		var/sanity = prob(99.9)
-
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
+		var/badflag = 0
+
+		//Breathable planet
+		if(habitability_class == HABITABILITY_OKAY)
+			atmosphere.gas["oxygen"] += MOLES_O2STANDARD
+			total_moles -= MOLES_O2STANDARD
+			badflag = XGM_GAS_FUEL|XGM_GAS_CONTAMINANT
+
 		var/gasnum = rand(1,4)
 		var/i = 1
+		var/sanity = prob(99.9)
 		while(i <= gasnum && total_moles && newgases.len)
+			if(badflag && sanity)
+				for(var/g in newgases)
+					if(gas_data.flags[g] & badflag)
+						newgases -= g
 			var/ng = pick_n_take(newgases)	//pick a gas
 			if(sanity) //make sure atmosphere is not flammable... always
-				var/badflag = 0
 				if(gas_data.flags[ng] & XGM_GAS_OXIDIZER)
-					badflag = XGM_GAS_FUEL
+					badflag |= XGM_GAS_FUEL
 				if(gas_data.flags[ng] & XGM_GAS_FUEL)
-					badflag = XGM_GAS_OXIDIZER
-				if(badflag)
-					for(var/g in newgases)
-						if(gas_data.flags[g] & badflag)
-							newgases -= g
-					sanity = 0
+					badflag |= XGM_GAS_OXIDIZER
+				sanity = 0
 
 			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
 			if(i == gasnum || !newgases.len) //if it's last gas, let it have all remaining moles
@@ -319,12 +352,37 @@
 			total_moles = max(total_moles - part, 0)
 			i++
 
-	//Set up gases for living things
-	for(var/gas in atmosphere.gas)
-		breathgas[gas] = round(0.4*atmosphere.gas[gas])
-	var/list/badgases = gas_data.gases.Copy()
-	badgases -= atmosphere.gas
-	badgas = pick(badgases)
+/obj/effect/overmap/sector/exoplanet/get_scan_data(mob/user)
+	. = ..()
+	var/list/extra_data = list("<hr>")
+	if(atmosphere)
+		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT))
+			var/list/gases = list()
+			for(var/g in atmosphere.gas)
+				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
+					gases += gas_data.name[g]
+			extra_data += "Atmosphere composition: [english_list(gases)]"
+			var/inaccuracy = rand(8,12)/10
+			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
+		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+			extra_data += "Atmosphere present"
+		extra_data += "<hr>"
+
+	if(seeds.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		extra_data += "Xenoflora detected"
+
+	if(animals.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		extra_data += "Life traces detected"
+
+	if(LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
+		var/ruin_num = 0
+		for(var/datum/map_template/ruin/exoplanet/R in spawned_features)
+			if(!(R.ruin_tags & RUIN_NATURAL))
+				ruin_num++
+		if(ruin_num)
+			extra_data += "<hr>[ruin_num] possible artificial structure\s detected."
+
+	. += jointext(extra_data, "<br>")
 
 /area/exoplanet
 	name = "\improper Planetary surface"

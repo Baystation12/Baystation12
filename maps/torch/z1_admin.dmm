@@ -8514,7 +8514,6 @@
 	},
 /area/alien)
 "auD" = (
-/obj/machinery/resleever,
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "auE" = (
@@ -9670,7 +9669,6 @@
 	},
 /area/centcom/control)
 "axA" = (
-/obj/machinery/resleever,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},

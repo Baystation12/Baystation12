@@ -22,7 +22,7 @@
 		/obj/item/device/scanner/gas,
 		/obj/item/weapon/storage/plants,
 		/obj/item/weapon/wirecutters/clippers,
-		/obj/item/weapon/mining_scanner,
+		/obj/item/device/scanner/mining,
 		/obj/item/weapon/extinguisher,
 		/obj/item/weapon/gun/launcher/net/borg,
 		/obj/item/weapon/weldingtool/largetank,

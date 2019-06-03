@@ -48,6 +48,7 @@
 /obj/machinery/seed_storage/garden
 	name = "Garden seed storage"
 	scanner = list("stats")
+	icon_state = "seeds_generic"
 	starting_seeds = list(
 		/obj/item/seeds/ambrosiavulgarisseed = 15,
 		/obj/item/seeds/appleseed = 15,
@@ -285,6 +286,7 @@
 					if (N.amount <= 0 || N.seeds.len <= 0)
 						piles -= N
 						qdel(N)
+					flick("[initial(icon_state)]_vend", src)
 					O.dropInto(loc)
 				else
 					piles -= N
@@ -342,4 +344,5 @@
 			newID = N.ID + 1
 
 	piles += new /datum/seed_pile(O, newID)
+	flick("[initial(icon_state)]_vend", src)
 	return

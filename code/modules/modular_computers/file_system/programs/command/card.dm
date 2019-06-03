@@ -8,6 +8,7 @@
 	extended_desc = "Program for programming crew ID cards."
 	requires_ntnet = 0
 	size = 8
+	category = PROG_COMMAND
 
 /datum/nano_module/program/card_mod
 	name = "ID card modification program"

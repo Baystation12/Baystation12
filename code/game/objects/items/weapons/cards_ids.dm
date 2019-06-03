@@ -154,7 +154,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/emag/examine(mob/user)
 	. = ..()
 	if(. && user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
-		to_chat(user, SPAN_WARNING("This ID card has some non-standard modifications commonly used to gain illicit access to computer systems."))
+		to_chat(user, SPAN_WARNING("This ID card has some form of non-standard modifications."))
 
 /obj/item/weapon/card/id
 	name = "identification card"

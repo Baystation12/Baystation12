@@ -13,6 +13,7 @@
 	melee_damage_lower = 12
 	melee_damage_upper = 12
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/carp
+	melee_damage_flags = DAM_SHARP
 
 /mob/living/simple_animal/hostile/retaliate/aquatic/carp/New()
 	..()

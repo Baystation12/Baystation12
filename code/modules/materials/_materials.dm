@@ -101,7 +101,7 @@
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
-	var/construction_difficulty = 0
+	var/construction_difficulty = MATERIAL_EASY_DIY
 
 	// Mining behavior.
 	var/alloy_product
@@ -121,12 +121,12 @@
 
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
-	if(used_stack.get_amount() < 1)
+	if(!used_stack.can_use(1))
 		to_chat(user, "<span class='warning'>You need need at least one [used_stack.singular_name] to reinforce [target_stack].</span>")
 		return
 
 	var/needed_sheets = 2 * used_stack.matter_multiplier
-	if(target_stack.get_amount() < needed_sheets)
+	if(!target_stack.can_use(needed_sheets))
 		to_chat(user, "<span class='warning'>You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack].</span>")
 		return
 
@@ -147,7 +147,7 @@
 	if(!wire_product)
 		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
 		return
-	if(used_stack.get_amount() < 5 || target_stack.get_amount() < 1)
+	if(!used_stack.can_use(5) || !target_stack.can_use(1))
 		to_chat(user, "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>")
 		return
 
@@ -187,9 +187,9 @@
 	return hardness //todo
 
 /material/proc/get_attack_cooldown()
-	if(weight < 19)
+	if(weight <= MATERIAL_LIGHT)
 		return FAST_WEAPON_COOLDOWN
-	if(weight > 23)
+	if(weight >= MATERIAL_HEAVY)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 

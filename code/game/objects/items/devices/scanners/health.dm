@@ -13,6 +13,7 @@
 
 /obj/item/device/scanner/health/scan(atom/A, mob/user)
 	scan_data = medical_scan_action(A, user, src, mode)
+	playsound(src, 'sound/effects/fastbeep.ogg', 20)
 
 /proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, var/verbose)
 	if (!user.IsAdvancedToolUser())
@@ -108,9 +109,6 @@
 
 	if(H.stat == DEAD || (H.status_flags & FAKEDEATH))
 		dat += "<span class='scan_warning'>[b]Time of Death:[endb] [time2text(worldtime2stationtime(H.timeofdeath), "hh:mm")]</span>"
-
-	if (H.internal_organs_by_name[BP_STACK])
-		dat += "<span class='scan_notice'>Subject has a neural lace implant.</span>"
 
 	// Pulse rate.
 	var/pulse_result = "normal"

@@ -45,11 +45,16 @@
 	SSshuttle.ships -= src
 	. = ..()
 
-/obj/effect/overmap/ship/relaymove(mob/user, direction)
-	accelerate(direction)
+/obj/effect/overmap/ship/relaymove(mob/user, direction, accel_limit)
+	accelerate(direction, accel_limit)
 
 /obj/effect/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
+
+/obj/effect/overmap/ship/get_scan_data(mob/user)
+	. = ..()
+	if(!is_still())
+		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * 1000]"
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/ship/proc/get_acceleration()
@@ -93,6 +98,8 @@
 		return 0
 	if(!burn_delay)
 		return 0
+	if(!get_speed())
+		return 0
 	var/num_burns = get_speed()/get_acceleration() + 2 //some padding in case acceleration drops form fuel usage
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns/burns_per_grid)
@@ -105,18 +112,18 @@
 			adjust_speed(0, -SIGN(speed[2]) * min(get_burn_acceleration(),abs(speed[2])))
 		last_burn = world.time
 
-/obj/effect/overmap/ship/proc/accelerate(direction)
+/obj/effect/overmap/ship/proc/accelerate(direction, accel_limit)
 	if(can_burn())
 		last_burn = world.time
-
+		var/acceleration = min(get_burn_acceleration(), accel_limit)
 		if(direction & EAST)
-			adjust_speed(get_burn_acceleration(), 0)
+			adjust_speed(acceleration, 0)
 		if(direction & WEST)
-			adjust_speed(-get_burn_acceleration(), 0)
+			adjust_speed(-acceleration, 0)
 		if(direction & NORTH)
-			adjust_speed(0, get_burn_acceleration())
+			adjust_speed(0, acceleration)
 		if(direction & SOUTH)
-			adjust_speed(0, -get_burn_acceleration())
+			adjust_speed(0, -acceleration)
 
 /obj/effect/overmap/ship/Process()
 	if(!halted && !is_still())
@@ -153,7 +160,7 @@
 		return 0
 	for(var/datum/ship_engine/E in engines)
 		. |= E.can_burn()
-		
+
 //deciseconds to next step
 /obj/effect/overmap/ship/proc/ETA()
 	. = INFINITY

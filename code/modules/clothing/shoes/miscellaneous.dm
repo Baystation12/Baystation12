@@ -189,6 +189,7 @@
 	name = "high heels"
 	icon_state = "heels"
 	desc = "A pair of colourable high heels."
+	can_hold_knife = 1
 
 /obj/item/clothing/shoes/heels/black
 	name = "black high heels"

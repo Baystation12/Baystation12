@@ -38,7 +38,7 @@
 		return FALSE
 	var/obj/item/clothing/C = G.affecting.head
 	if(istype(C)) //hardsuit helmets etc
-		if((C.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE) && C.armor["melee"] > 20)
+		if((C.max_pressure_protection) && C.armor["melee"] > 20)
 			to_chat(G.assailant, "<span class='warning'>\The [C] is in the way!</span>")
 			return FALSE
 	return TRUE

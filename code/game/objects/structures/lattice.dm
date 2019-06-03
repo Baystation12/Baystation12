@@ -53,6 +53,11 @@
 	if(severity <= 2)
 		qdel(src)
 
+/obj/structure/lattice/proc/deconstruct(var/mob/user)
+	to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
+	new /obj/item/stack/material/rods(loc, 1, material.name)
+	qdel(src)
+
 /obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
 
 	if (istype(C, /obj/item/stack/tile/floor))
@@ -62,9 +67,13 @@
 	if(isWelder(C))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
-			to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
-		new /obj/item/stack/material/rods(loc, 1, material.name)
-		qdel(src)
+			deconstruct(user)
+		return
+	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
+		cutter.slice(user)
+		deconstruct(user)
+		return
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/R = C
 		if(R.use(2))

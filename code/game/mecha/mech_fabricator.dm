@@ -177,7 +177,7 @@
 		return
 
 	if(materials[material] + amnt <= res_max_amount)
-		if(stack && stack.amount >= 1)
+		if(stack && stack.can_use(1))
 			var/count = 0
 			overlays += "fab-load-metal"
 			spawn(10)

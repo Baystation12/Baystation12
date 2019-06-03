@@ -67,7 +67,8 @@
 /obj/item/clothing/suit/space/shadowsuit
 	name = "traitor's cloak"
 	desc = "There is absolutely nothing visible through the fabric. The shadows stick to your skin when you touch it."
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
+	min_pressure_protection = 0
 	icon_state = "star_traitor"
 
 /obj/item/clothing/head/helmet/space/shadowhood

@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - admin: "Admin narrations can be styled. SubtleMessage is part of DirrectNarrate. Moderators get limited DirectNarrate with a SubtleMessage style."

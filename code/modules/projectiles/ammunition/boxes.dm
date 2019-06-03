@@ -213,7 +213,7 @@
 
 /obj/item/ammo_magazine/box/emp/smallpistol
 	labels = list("haywire")
-	ammo_type = /obj/item/ammo_casing/pistol/emp
+	ammo_type = /obj/item/ammo_casing/pistol/emp/small
 	caliber = CALIBER_PISTOL_SMALL
 
 /obj/item/ammo_magazine/proto_smg

@@ -110,7 +110,7 @@
 					/obj/item/weapon/storage/belt/holster/machete = 2,
 					/obj/item/weapon/storage/plants = 2,
 					/obj/item/device/scanner/plant = 2,
-					/obj/item/weapon/mining_scanner = 2,
+					/obj/item/device/scanner/mining = 2,
 					/obj/item/device/binoculars = 2)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure

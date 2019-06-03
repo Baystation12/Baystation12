@@ -12,3 +12,8 @@
 	equip_to_appropriate_slot(C)
 	put_in_hands(new /obj/item/weapon/reagent_containers/food/drinks/coffeecup/punitelli)
 	equip_to_appropriate_slot(new /obj/item/clothing/mask/smokable/cigarette/jerichos)
+
+/obj/random_multi/single_item/runtime
+	name = "Multi Point - Runtime"
+	id = "Runtime"
+	item_path = /mob/living/simple_animal/cat/fluff/Runtime

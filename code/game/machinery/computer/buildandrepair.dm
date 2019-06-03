@@ -6,10 +6,11 @@
 	name = "computer frame"
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "0"
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	obj_flags = OBJ_FLAG_ROTATABLE
+
 	var/state = 0
 	var/obj/item/weapon/circuitboard/circuit = null
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
-//	weight = 1.0E8
 
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)
 	switch(state)
@@ -115,15 +116,7 @@
 				B.set_dir(src.dir)
 				qdel(src)
 
-/obj/structure/computerframe/verb/rotate()
-	set category = "Object"
-	set name = "Rotate Computer Frame"
-	set src in oview(1)
-
-	if (!Adjacent(usr) || usr.incapacitated() || src.state != 0)
+/obj/structure/computerframe/rotate(mob/user)
+	if(state != 0)
 		return
-
-	src.set_dir(turn(src.dir, 90))
-
-/obj/structure/computerframe/AltClick()
-	rotate()
+	..()

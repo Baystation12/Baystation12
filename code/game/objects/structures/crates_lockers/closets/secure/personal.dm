@@ -16,7 +16,7 @@
 /obj/structure/closet/secure_closet/personal/patient
 	name = "patient's closet"
 /obj/structure/closet/secure_closet/personal/patient/WillContain()
-	return
+	return list(/obj/item/clothing/suit/hospital/blue, /obj/item/clothing/suit/hospital/green, /obj/item/clothing/suit/hospital/pink)
 
 /obj/structure/closet/secure_closet/personal/cabinet
 	closet_appearance = /decl/closet_appearance/cabinet/secure

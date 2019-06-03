@@ -12,6 +12,8 @@
 	stores_pen = TRUE
 	stored_pen = /obj/item/weapon/pen
 	receives_updates = FALSE
+	interact_sounds = list('sound/machines/pda_click.ogg')
+	interact_sound_volume = 20
 
 /obj/item/modular_computer/pda/Initialize()
 	. = ..()
