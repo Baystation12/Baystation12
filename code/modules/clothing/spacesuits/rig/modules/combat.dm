@@ -219,6 +219,7 @@
 	name = "mounted plasma cutter"
 	desc = "A forearm-mounted plasma cutter."
 	icon_state = "plasmacutter"
+	usable = 0
 
 	suit_overlay_active = "plasmacutter"
 
@@ -233,24 +234,10 @@
 	if(!check() || !gun)
 		return 0
 
-	if(!target)
-		playsound(src.loc, 'sound/weapons/guns/selector.ogg', 50, 1)
-		if(!active)
-			active=1
-			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to close range mode.</span>")
-		else
-			active=0
-			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to firing mode.</span>")
-		return
-
-	if(!active)
+	if(holder.wearer.a_intent == I_HURT || !target.Adjacent(holder.wearer))
 		gun.Fire(target,holder.wearer)
 		return 1
 	else
-		var/turf/T = get_turf(target)
-		if(istype(T) && !target.Adjacent(holder.wearer))
-			return 0
-
 		var/resolved = target.attackby(gun,holder.wearer)
 		if(!resolved && gun && target)
 			gun.afterattack(target,holder.wearer,1)

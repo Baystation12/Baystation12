@@ -217,15 +217,8 @@
 	var/obj/item/rig_module/module = input("Which module do you wish to select?") as null|anything in selectable
 
 	if(!istype(module))
-		selected_module = null
+		deselect_module()
 		to_chat(usr, "<font color='blue'><b>Primary system is now: deselected.</b></font>")
-		for (var/obj/item/rig_module/M in installed_modules)//removes all selectable module icons
-			if(M.selectable)
-				if(M.suit_overlay_inactive)
-					M.suit_overlay = M.suit_overlay_inactive
-				else
-					M.suit_overlay = null
-				update_icon()
 		return
 
 	module.select()
