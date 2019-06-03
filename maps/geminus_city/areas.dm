@@ -54,11 +54,11 @@
 /area/planets/Geminus/indoor/arrivalbus
 	name = "\improper Arrival Bus"
 	icon_state = "yellow"
-
+/*
 /area/planets/Geminus/indoor/disco
 	name = "\improper Disco"
 	icon_state = "red"
-
+*/
 /area/planets/Geminus/indoor/backroom
 	name = "\improper Nightclub Backroom"
 	icon_state = "green"

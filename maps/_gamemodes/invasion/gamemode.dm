@@ -11,15 +11,14 @@
 	//uncomment this later
 	//required_players = 10
 	factions = list(/datum/faction/unsc, /datum/faction/insurrection, /datum/faction/covenant)
-	var/covenant_ship_area_parent
-	var/list/covenant_ship_areas = list()
-	var/list/unsc_base_areas = list()
 
 	var/faction_safe_time = 10 MINUTES
 	var/faction_safe_duration = 10 MINUTES
 	var/safe_expire_warning = 0
 
 	var/obj/effect/overmap/ship/cov_ship
+	var/list/cov_ship_areas = list()
+	var/list/unsc_base_areas = list()
 	var/obj/effect/overmap/ship/unsc_ship
 	var/obj/effect/overmap/human_colony
 
@@ -84,16 +83,12 @@
 /datum/game_mode/invasion/pre_setup()
 	. = ..()
 	//**** hard code some values which we will locate dynamically later ****//
-	unsc_base_areas = list(/area/faction_base/unsc_upperlevel, /area/faction_base/unsc_lowerlevel)
-	covenant_ship_area_parent = /area/covenant_corvette
-	cov_ship = locate(/obj/effect/overmap/ship/covenant_corvette) in world
-	unsc_ship = locate(/obj/effect/overmap/ship/odst_corvette) in world
-	human_colony = locate(/obj/effect/overmap/sector/geminus_city) in world
+	find_cov_ship()
+	find_cov_ship_areas()
+	find_unsc_ship()
+	find_unsc_base_areas()
+	find_human_colony()
 	//**** finish hard codes. remove these later ****//
-
-	//find the covenant ship for objective purposes
-	//note: this will not work here if the cov ship is loaded in by lobby vote, it must be called later
-	locate_cov_ship_areas()
 
 	//setup a couple of other objectives
 	for(var/datum/objective/objective in objectives_specific_target)
@@ -109,11 +104,29 @@
 	objectives_specific_target -= successful
 	return 1
 
-/datum/game_mode/invasion/proc/locate_cov_ship_areas()
-	if(covenant_ship_area_parent && !covenant_ship_areas.len)
-		for(var/area_type in typesof(covenant_ship_area_parent))
-			var/area/cur_area = locate(area_type) in world
-			covenant_ship_areas.Add(cur_area)
+/datum/game_mode/invasion/proc/find_cov_ship()
+	var/datum/faction/covenant/C = factions_by_name["Covenant"]
+	cov_ship = C.get_flagship()
+
+/datum/game_mode/invasion/proc/find_cov_ship_areas()
+	for(var/area_type in typesof(cov_ship.parent_area_type))
+		var/area/cur_area = locate(area_type) in world
+		cov_ship_areas.Add(cur_area)
+
+/datum/game_mode/invasion/proc/find_unsc_ship()
+	var/datum/faction/unsc/U = factions_by_name["UNSC"]
+	unsc_ship = U.get_flagship()
+
+/datum/game_mode/invasion/proc/find_unsc_base_areas()
+	var/datum/faction/unsc/U = factions_by_name["UNSC"]
+	var/obj/effect/overmap/unsc_base = U.get_base()
+	for(var/area_type in typesof(unsc_base.parent_area_type))
+		var/area/cur_area = locate(area_type) in world
+		unsc_base_areas.Add(cur_area)
+
+/datum/game_mode/invasion/proc/find_human_colony()
+	var/datum/faction/human_civ/H = factions_by_name["Civilian"]
+	human_colony = H.get_base()
 
 /datum/game_mode/invasion/proc/setup_faction_objectives(var/datum/faction/faction, var/list/objective_types)
 	for(var/objective_type in objective_types)
@@ -236,7 +249,7 @@
 		text += "<h3>[faction.name] Objectives</h3>"
 		if(!winning_faction)
 			winning_faction = faction
-		else if(!second_faction)
+		else if(!second_faction && winning_faction != faction)
 			second_faction = faction
 		for(var/datum/objective/objective in faction.all_objectives)
 			var/result = objective.check_completion()
@@ -254,7 +267,7 @@
 
 		if(faction.points > 0)
 			all_points += faction.points
-		if(faction.points >= winning_faction.points)		//<= is necessary to correctly track second place
+		if(winning_faction != faction && faction.points >= winning_faction.points)		//<= is necessary to correctly track second place
 			second_faction = winning_faction
 			winning_faction = faction
 		text += "<h4>Total [faction.name] Score: [faction.points] points</h4><br>"

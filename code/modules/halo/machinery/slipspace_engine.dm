@@ -79,7 +79,7 @@
 	if(jump_charging == -1)
 		return 0
 	for(var/obj/effect/overmap/om in range(SLIPSPACE_GRAV_WELL_RANGE,location))
-		if(istype(om,/obj/effect/overmap/sector) || istype(om,/obj/effect/overmap/ship/faction_base))
+		if(om.block_slipspace)
 			return 0
 	return 1
 

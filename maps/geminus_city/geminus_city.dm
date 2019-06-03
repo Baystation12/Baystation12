@@ -19,10 +19,6 @@
 
 #elif !defined(MAP_OVERRIDE)
 
-	#if using_map_DATUM != /datum/map/geminus_city
-
-		#warn A map has already been included, ignoring GeminusCity
-
-	#endif
+	#warn A map has already been included, ignoring GeminusCity
 
 #endif

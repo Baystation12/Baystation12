@@ -1,7 +1,7 @@
 #if !defined(using_map_DATUM)
 
 	#include "../../faction_bases/base_areas.dm"
-
+	#include "../../faction_bases/faction_base.dm"
 	#include "../../faction_bases/faction_spawns.dm"
 
 	#include "../../faction_bases/Covenant_Station.dmm"
@@ -17,8 +17,7 @@
 	#include "../../geminus_city/geminus_city.dm"
 	#include "jobdefs_geminus.dm"
 
-	//#include "../../ks7_elmsville/includes.dm"
-	//#include "jobdefs_ks7elmsville.dm
+	#include "../../ks7_elmsville/ks7_elmsville.dm"
 
 	#include "../../Admin Planet/includes.dm"
 

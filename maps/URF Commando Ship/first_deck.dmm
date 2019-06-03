@@ -139,7 +139,6 @@
 "cI" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
 "cJ" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
 "cK" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/powercore)
-"cL" = (/obj/structure/table/standard,/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
 "cM" = (/turf/simulated/floor/stairs/stairsdark/west,/area/commando_ship/urfs_avarice/Bridge)
 "cN" = (/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
 "cO" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tech/gray,/area/commando_ship/urfs_avarice/Bridge)
@@ -273,6 +272,7 @@
 "fm" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/commando_ship/urfs_avarice/medicalbay)
 "fn" = (/obj/effect/landmark/map_data{mouse_over_pointer = 0; name = "URFS Avarice"},/turf/space,/area/space)
 "fo" = (/obj/effect/overmap/ship/urfcommando_prowler{name = "URFS Avarice"},/turf/space,/area/space)
+"Hc" = (/obj/structure/table/standard,/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/obj/machinery/photocopier/faxmachine{department = "URFS Avarice"},/turf/simulated/floor/tech,/area/commando_ship/urfs_avarice/Bridge)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -303,7 +303,7 @@ aaaaaaaaaaaaaabwbBbCbDbwbMbNbObObwbPbQbPaYbPbQbPaYbPbQbPaYaEaeaRaTaTbIbRbSbTaRaR
 aaaaaaaaaaaaaabWbObXbYbZbZcabZbObwcbccaYaYaYccaYaYaYccaYaYcdaeaRaRceaRaRaRcfaRaRaGaGblcgcgaGbebAbvaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaachcicjbZcabZckckbZbZclbQaeaeaecmaeaeaeaeaeaecmaEaecmaeaeaeaecmcnaeaecoblblcpcqcrbeblbvaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaacsctcubZbZcvcwcxcyczcAcBaAaAaAaAaAcCaAaAaAaAaAcDcEaAaAaAaAcFaAcGaeaecHblblcIcJcKbebeaGaGaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaabwbwbxcLbZbZcMcNcOcPcQbwaYabababababcdaeababababcdaeabababakcnababababaGcRcScTcUcVblbkcWaGaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaabwbwbxHcbZbZcMcNcOcPcQbwaYabababababcdaeababababcdaeabababakcnababababaGcRcScTcUcVblbkcWaGaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaacXctcubZbZcYcZdadbczcAcBaAaAaAaAcCdcaAaAcCdddedfaAaAaAaAaAdcaAcCaAaAdgcScSdhdidjbebeaGaGaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaadkbWdlbZdmbZdndnbZbZclbQaeaeaeahcnaeaeaecndodpdqaeahaeaeaeaeahcnaeaecHblbldrdsdtbeblbvaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaacibOdudvbZbZdmbZbObwaYccaYaYaYdwaYaYdxdydxdxcdaedzdzdAdzdzdzdBdzdzaGaGbldCdDdtbebAbvaaaaaaaaaaaaaaaaaaaaaa
@@ -336,3 +336,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 fnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 foaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

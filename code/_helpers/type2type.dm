@@ -58,8 +58,8 @@
 	return num_list
 
 // Splits the text of a file at seperator and returns them in a list.
-/proc/file2list(filename, seperator="\n")
-	return splittext(return_file_text(filename),seperator)
+/proc/file2list(filename, seperator="\n", var/log_error = 1)
+	return splittext(return_file_text(filename, log_error),seperator)
 
 // Turns a direction into text
 /proc/num2dir(direction)
