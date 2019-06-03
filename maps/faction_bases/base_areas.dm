@@ -7,10 +7,10 @@
 	poweralm = 1
 	requires_power = 0
 
-/area/faction_base/unsc_upperlevel
+/area/faction_base/unsc/upperlevel
 	name = "UNSC Faction Base (Upper)"
 
-/area/faction_base/unsc_lowerlevel
+/area/faction_base/unsc/lowerlevel
 	name = "UNSC Faction Base (Lower)"
 
 /area/faction_base/unsc_defense_platform

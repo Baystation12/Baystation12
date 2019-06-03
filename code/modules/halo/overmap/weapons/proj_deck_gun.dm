@@ -81,12 +81,13 @@
 	for(var/obj/machinery/deck_gun/gun in available_deck_guns)
 		if(gun.can_fire(target,user,click_params))
 			gun.rounds_loaded--
-			gun.next_reload_time = world.time + DECK_GUN_ROUND_RELOAD_TIME
 			fired_projectile = gun.fired_projectile
 			gun.do_fire_animation()
 			fire_sound = gun.fire_sound
 			fire_projectile(target,user,directly_above)
 			sleep(rand(DECK_GUN_FIRE_DELAY_LOWER,DECK_GUN_FIRE_DELAY_UPPER))
+	for(var/obj/machinery/deck_gun/gun in available_deck_guns)
+		gun.next_reload_time = world.time + gun.round_reload_time
 	fire_sound = initial(fire_sound)
 	fired_projectile = initial(fired_projectile)
 	currently_firing = 0

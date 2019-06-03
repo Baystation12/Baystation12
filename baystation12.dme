@@ -1590,7 +1590,6 @@
 #include "code\modules\halo\overmap\automated_defense.dm"
 #include "code\modules\halo\overmap\base_npc_ships.dm"
 #include "code\modules\halo\overmap\combat_npc_ship.dm"
-#include "code\modules\halo\overmap\faction_base.dm"
 #include "code\modules\halo\overmap\fusion_thruster.dm"
 #include "code\modules\halo\overmap\nav_data_computer.dm"
 #include "code\modules\halo\overmap\npc_cargo_crate.dm"
