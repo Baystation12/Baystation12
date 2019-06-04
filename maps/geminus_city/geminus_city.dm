@@ -13,6 +13,7 @@
 
 	//#include "geminus_city_jobdefs.dm"
 	#include "invasion_geminus.dm"
+	#include "invasion_geminus_unit_tests.dm"
 
 	//#include "geminuscity_4.dmm"
 	#include "geminuscity_3.dmm"
