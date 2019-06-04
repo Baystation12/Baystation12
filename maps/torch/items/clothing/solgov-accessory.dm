@@ -531,7 +531,7 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/research/jumper
 	icon_state = "dept_exped_jumper"
-	color = "#563768"
+	color = "#916f8d"
 
 /*********
 ranks - ec
