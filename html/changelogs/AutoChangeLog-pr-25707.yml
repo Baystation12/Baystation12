@@ -1,4 +1,0 @@
-author: "SolarK"
-delete-after: True
-changes: 
-  - tweak: "Slowdown penalties based on cold now affected by species discomfort levels"

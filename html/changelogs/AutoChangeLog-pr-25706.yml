@@ -1,8 +1,0 @@
-author: "babydoll"
-delete-after: True
-changes: 
-  - tweak: "All types of blob will now launch bonus attacks less often overall, and will attack more or less often depending on their type."
-  - rscadd: "Added the 'ravaging mass', which forms an offensive line around the shield blob spawned by the cores. This type attacks most often and most potently of all the blob types."
-  - tweak: "The base type (which makes up the bulk of the blob) formerly known as 'ravaging mass' is now 'pulsating mass', and has had its maximum damage potential reduced."
-  - tweak: "Reduced damage potential of the shielding mass. Increased hit points."
-  - tweak: "Mecha are now valid targets for the blob's bonus attacks."
