@@ -460,7 +460,7 @@
 "iR" = (/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southwestb)
 "iS" = (/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southeastb)
 "iT" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southeastb)
-"iU" = (/obj/structure/ladder/updown,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southwestb)
+"iU" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southwestb)
 "iV" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southeastb)
 "iW" = (/obj/structure/table/rack,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southwestb)
 "iX" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/sublevel1/interior/southwestb)
