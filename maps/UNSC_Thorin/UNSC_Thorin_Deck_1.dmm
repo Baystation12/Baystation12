@@ -335,7 +335,6 @@
 "gw" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)
 "gx" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/bridge{tag = "icon-bridge (WEST)"; icon_state = "bridge"; dir = 8},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)
 "gy" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/sign/halo_floorsign/armory{dir = 4},/obj/machinery/light/invis,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)
-"gz" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)
 "gA" = (/obj/machinery/light{dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)
 "gB" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)
 "gC" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/corvette/unscthorin/Centralhallway)
@@ -720,7 +719,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeyezezeXeYeYeZfacDeLePdOemdOdOdOdtfbeTfceofdeT
 aaaaaaaaaaaaaaaaaaaaaafjfkflfmfmfmfmezezezeKezfnfocSdtfpfqemdOdOdOdtfrfseTeofdeoeTftaIeaaIaIfufvfgfwfifxfyfzfyfyfyfzfyfAfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaafCfDfEfFfGfHfmezezeAfIeAezfJfKdtfLfMfNeEdOfOdtfPeofQfRfSeoeofTaIdYfUdyfVfVfWfgfifXfYfyfyfyfYfyfyfAfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaafjfZgagbgcgdgageezezezezezezgfbBdtdtdtdtdtdtdtdtdvdvdvdveRggdveRaIdxdydyghgifgfvfigjfyfygkfyfyfyglfAfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaagmgngogpgpgqgrgsgtgugvgwgwgwgxgygzgAgBgwgCgDgwgEgwgAgwgBgBgFgwgBgGgwgwgHgIgBgJgwgKgLfygMgMfyfyfyfyfAgNgNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaagmgngogpgpgqgrgsgtgugvgwgwgwgxgygwgAgBgwgCgDgwgEgwgAgwgBgBgFgwgBgGgwgwgHgIgBgJgwgKgLfygMgMfyfyfyfyfAgNgNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaagmgOgPgpgpgpgagQgRfgfggSfvgTgUgVgTgWgBgXfgfgfggSfggYfgfgfgfWfgfWfggZfghahbfWhcfghdfyheglfyhffyfyfyfAgNgNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaahghhhihjhkhjhlfmhmhnhnhnhnhnhohphqhrhqhshqhqhqhthuhuhuhuhuhuhvhwhxhyhxhxhxhxhzhxfihAfyfyfyfyhefyfyfAfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaafChBhChDhEhFfmhGhnhHhIhHhnhJhphqhKhLhMhNhOhPhQhQhQhQhQhQhQhRhxhShThUhVhWhThXhYfifyfyfyglfyfyfyhefAfBfBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

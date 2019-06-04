@@ -42,4 +42,5 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		return pick(free_ship_map_zs)
 	else
 		max_z_cached += 1
+		world.maxz = max_z_cached
 		return max_z_cached

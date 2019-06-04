@@ -70,7 +70,7 @@
 "br" = (/obj/structure/turret/HMG,/turf/simulated/floor/planet,/area/exo_research_facility/roof/exterior/northeastr)
 "bs" = (/obj/structure/sandbag{tag = "icon-sandbag (SOUTHEAST)"; icon_state = "sandbag"; dir = 6},/turf/simulated/floor/planet,/area/exo_research_facility/roof/exterior/northeastr)
 "bt" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/planet,/area/exo_research_facility/roof/exterior/northeastr)
-"bu" = (/obj/machinery/door/airlock/halo{name = "Rooftop Access"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/roof/interior/Livingquar)
+"bu" = (/obj/machinery/door/airlock/halo{name = "Rooftop Access"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/roof/interior/Lunchhall)
 "bv" = (/obj/structure/sign/poster,/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_research_facility/roof/interior/Livingquar)
 "bw" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Science Dorm 21"; id = "Science Dorm 21"; name = "Privacy Shutter Control"; pixel_y = 32},/obj/effect/landmark/start/facil_researcher,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/roof/interior/Livingquar)
 "bx" = (/obj/structure/closet/secure_closet/personal{anchored = 1},/obj/item/clothing/suit/storage/toggle/labcoat/blue,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/roof/interior/Livingquar)
