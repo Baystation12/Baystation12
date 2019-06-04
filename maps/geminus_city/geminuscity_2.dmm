@@ -72,7 +72,7 @@
 "abt" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (EAST)"; icon_state = "warning"; dir = 4},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/cargo)
 "abu" = (/obj/structure/bookcase{name = "bookcase (Religious)"},/turf/simulated/floor/holofloor/wood,/area/planets/Geminus/indoor/chapel)
 "abv" = (/obj/machinery/power/port_gen/pacman/super,/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/chapel)
-"abw" = (/obj/machinery/mac_cannon/capacitor,/turf/simulated/floor/plating,/area/planets/Geminus/outdoor/MAC)
+"abw" = (/obj/machinery/mac_cannon/capacitor{charge_time = 30; name = "Planetary MAC Capacitor"},/turf/simulated/floor/plating,/area/planets/Geminus/outdoor/MAC)
 "abx" = (/obj/machinery/mac_cannon/accelerator,/turf/simulated/floor/plating,/area/planets/Geminus/outdoor/MAC)
 "aby" = (/obj/effect/decal/remains,/turf/simulated/floor/asteroid/planet,/area/planets/Geminus/indoor/mining)
 "abz" = (/obj/structure/closet/crate/secure/loot,/turf/simulated/floor/asteroid/planet,/area/planets/Geminus/indoor/mining)

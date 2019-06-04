@@ -35,5 +35,5 @@ delete-after: True
 changes:
   - maptweak: "rebalances the Geminus MAC to require time and effort to activate and use."
   - maptweak: "Geminus MAC starts with no generators or power supply, must be obtained by grabbing generators around the map and fuelling them with solid phoron / tritium."
-  - maptweak: "Geminus MAC also now has a much longer charge time of 30 seconds when fully powered. This, coupled with the lowered amount of capacitors (it now does ~2000 damage instead of 2600) means that the MAC doesn't draw 490000w of power per tick. Instead it now draws 1666.66w per tick."
+  - maptweak: "Geminus MAC also now has a much longer charge time of 30 seconds when fully powered. This, coupled with the lowered amount of capacitors (it now does ~2000 damage instead of 2600) means that the MAC doesn't draw 490000w of power per tick. Instead it now draws 12500w per tick."
   - tweak: "Lowers kig-yar brute mod by 1 (1.2 -> 1.1 / 1.3 -> 1.2)"
