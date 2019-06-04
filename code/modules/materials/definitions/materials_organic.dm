@@ -43,6 +43,7 @@
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
 	conductive = 0
+	value = 0
 
 /material/cloth //todo
 	name = MATERIAL_CLOTH
@@ -69,6 +70,7 @@
 	stack_type = null
 	hidden_from_codex = TRUE
 	construction_difficulty = MATERIAL_NORMAL_DIY
+	value = 3
 
 /material/carpet
 	name = MATERIAL_CARPET

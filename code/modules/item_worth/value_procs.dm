@@ -1,3 +1,23 @@
+/atom/proc/Value(var/base)
+	return base
+
+/obj/Value()
+	. = ..()
+	for(var/a in contents)
+		. += get_value(a)
+
+/obj/machinery/Value()
+	. = ..()
+	if(stat & BROKEN)
+		. *= 0.5
+	. = round(.)
+
+/obj/structure/barricade/Value()
+	return material.value
+
+/obj/structure/bed/Value()
+	return ..() * material.value
+
 /obj/item/slime_extract/Value(var/base)
 	return base * Uses
 
@@ -33,3 +53,8 @@
 
 /obj/item/weapon/spacecash/Value()
 	return worth
+
+/mob/living/carbon/human/Value(var/base)
+	. = ..()
+	if(species)
+		. *= species.rarity_value

@@ -80,6 +80,7 @@
 	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
+	worth_multiplier = 31
 
 /obj/item/weapon/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -105,9 +106,7 @@
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 10
 	applies_material_colour = 0
-
-	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
-	force_divisor = 0.33
+	force_divisor = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_force_divisor = 0.20
 	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
@@ -117,6 +116,7 @@
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = MATERIAL_GLASS
 	does_spin = FALSE
+	worth_multiplier = 7
 
 /obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
