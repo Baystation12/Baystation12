@@ -973,8 +973,14 @@
 
 /mob/set_dir()
 	if(facing_dir)
-		if(!canface() || lying || buckled || restrained())
+		if(!canface() || lying || restrained())
 			facing_dir = null
+		else if(buckled)
+			if(buckled.obj_flags & OBJ_FLAG_ROTATABLE)
+				buckled.set_dir(facing_dir)
+				return ..(facing_dir)
+			else
+				facing_dir = null
 		else if(dir != facing_dir)
 			return ..(facing_dir)
 	else
