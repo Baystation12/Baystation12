@@ -176,7 +176,6 @@
 
 /obj/item/projectile/bullet/m95_sap
 	damage = 35
-	accuracy = 1
 
 /obj/item/weapon/storage/box/m95_sap
 	name = "box of 9.5mm M634 magazines"
@@ -216,7 +215,7 @@
 
 /obj/item/ammo_magazine/m145_ap
 	name = "magazine (14.5mm) M112 AP-FS-DS"
-	desc = "14.5×114mm M112 armor piercing, fin-stabilized, discarding sabot magazine containing 4 rounds. Not much this won't penetrate"
+	desc = "14.5Ã—114mm M112 armor piercing, fin-stabilized, discarding sabot magazine containing 4 rounds. Not much this won't penetrate"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SRS99mag"
 	mag_type = MAGAZINE
@@ -241,7 +240,6 @@
 	step_delay = 0.1
 	penetrating = 5
 	armor_penetration = 80
-	accuracy = 6
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
 
@@ -290,7 +288,6 @@
 
 /obj/item/projectile/bullet/m5
 	damage = 20
-	accuracy = -3
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
 	name = "rubber bullet"
