@@ -1,7 +1,7 @@
 /decl/xgm_gas/oxygen
 	id = "oxygen"
 	name = "Oxygen"
-	specific_heat = 20	// J/(mol*K)
+	specific_heat = 29.4	// J/(mol*K)
 	molar_mass = 0.032	// kg/mol
 
 	flags = XGM_GAS_OXIDIZER | XGM_GAS_FUSION_FUEL
@@ -9,13 +9,13 @@
 /decl/xgm_gas/nitrogen
 	id = "nitrogen"
 	name = "Nitrogen"
-	specific_heat = 20	// J/(mol*K)
+	specific_heat = 29.1	// J/(mol*K)
 	molar_mass = 0.028	// kg/mol
 
 /decl/xgm_gas/carbon_dioxide
 	id = "carbon_dioxide"
 	name = "Carbon Dioxide"
-	specific_heat = 30	// J/(mol*K)
+	specific_heat = 37.1	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol
 
 /decl/xgm_gas/phoron
@@ -38,7 +38,7 @@
 /decl/xgm_gas/sleeping_agent
 	id = "sleeping_agent"
 	name = "Nitrous Oxide"
-	specific_heat = 40	// J/(mol*K)
+	specific_heat = 38.6	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol. N2O
 
 	tile_overlay = "sleeping_agent"
@@ -49,7 +49,7 @@
 	id = "methane"
 	name = "Methane"
 
-	specific_heat = 30	// J/(mol*K)
+	specific_heat = 35.7	// J/(mol*K)
 	molar_mass = 0.016	// kg/mol
 
 	flags = XGM_GAS_FUEL
@@ -75,7 +75,7 @@
 	id = "hydrogen"
 	name = "Hydrogen"
 
-	specific_heat = 100	// J/(mol*K)
+	specific_heat = 28.8	// J/(mol*K)
 	molar_mass = 0.002	// kg/mol
 
 	flags = XGM_GAS_FUEL|XGM_GAS_FUSION_FUEL
@@ -86,7 +86,7 @@
 	id = "helium"
 	name = "Helium"
 
-	specific_heat = 80	// J/(mol*K)
+	specific_heat = 20.8	// J/(mol*K)
 	molar_mass = 0.004	// kg/mol
 
 	flags = XGM_GAS_FUSION_FUEL
@@ -95,35 +95,35 @@
 	id = "argon"
 	name = "Argon"
 
-	specific_heat = 10	// J/(mol*K)
+	specific_heat = 20.8	// J/(mol*K)
 	molar_mass = 0.018	// kg/mol
 
 /decl/xgm_gas/krypton
 	id = "krypton"
 	name = "Krypton"
 
-	specific_heat = 5	// J/(mol*K)
+	specific_heat = 20.8	// J/(mol*K)
 	molar_mass = 0.036	// kg/mol
 
 /decl/xgm_gas/neon
 	id = "neon"
 	name = "Neon"
 
-	specific_heat = 20	// J/(mol*K)
+	specific_heat = 20.8	// J/(mol*K)
 	molar_mass = 0.01	// kg/mol
 
 /decl/xgm_gas/xenon
 	id = "xenon"
 	name = "Xenon"
 
-	specific_heat = 3	// J/(mol*K)
+	specific_heat = 20.8	// J/(mol*K)
 	molar_mass = 0.054	// kg/mol
 
 /decl/xgm_gas/nitrodioxide
 	id = "nitrodioxide"
 	name = "Nitrogen Dioxide"
 
-	specific_heat = 37	// J/(mol*K)
+	specific_heat = 37.2	// J/(mol*K)
 	molar_mass = 0.054	// kg/mol
 	flags = XGM_GAS_OXIDIZER
 
@@ -131,7 +131,7 @@
 	id = "nitricoxide"
 	name = "Nitric Oxide"
 
-	specific_heat = 10	// J/(mol*K)
+	specific_heat = 29.9	// J/(mol*K)
 	molar_mass = 0.030	// kg/mol
 	flags = XGM_GAS_OXIDIZER
 
@@ -139,7 +139,7 @@
 	id = "chlorine"
 	name = "Chlorine"
 
-	specific_heat = 5	// J/(mol*K)
+	specific_heat = 33.9	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
 	flags = XGM_GAS_CONTAMINANT
 
@@ -147,22 +147,19 @@
 	id = "watervapor"
 	name = "Water Vapor"
 
-	specific_heat = 30	// J/(mol*K)
+	specific_heat = 33.6	// J/(mol*K)
 	molar_mass = 0.020	// kg/mol
 
-
-
-//i dont know how to calculate specific_heat so 30 will do for these
 /decl/xgm_gas/sulfurdioxide
 	id = "sulfurdioxide"
 	name = "Sulfur Dioxide"
 
-	specific_heat = 30	// J/(mol*K)
+	specific_heat = 39.9	// J/(mol*K)
 	molar_mass = 0.064	// kg/mol
 
 /decl/xgm_gas/carbonmonoxide
 	id = "carbonmonoxide"
 	name = "Carbon Monoxide"
 
-	specific_heat = 30	// J/(mol*K)
+	specific_heat = 29.1	// J/(mol*K)
 	molar_mass = 0.028	// kg/mol
