@@ -444,7 +444,7 @@
 "aiB" = (/obj/structure/closet,/obj/item/ammo_casing/shotgun,/obj/item/ammo_casing/shotgun,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/weapon/gun/projectile/shotgun/doublebarrel{desc = "For keeping pesky varmints and bankers off your land."},/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/north)
 "aiC" = (/obj/structure/bed,/obj/item/weapon/bedsheet/red,/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/north)
 "aiD" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (NORTH)"; icon_state = "wooden_chair_preview"; dir = 1},/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/north)
-"aiE" = (/obj/vehicles/air/pelican/civ{tag = "icon-base (NORTH)"; icon_state = "base"; dir = 1},/obj/effect/landmark/dropship_land_point{faction = "police"; name = "Geminus City - Police Landing Pad"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/police_station)
+"aiE" = (/obj/effect/landmark/dropship_land_point{faction = "police"; name = "Geminus City - Police Landing Pad"},/obj/vehicles/air/overmap/pelican/civ{tag = "icon-base (NORTH)"; icon_state = "base"; dir = 1},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/police_station)
 "aiF" = (/obj/machinery/door/airlock/security{name = "Lethal Armory"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/armory)
 "aiG" = (/obj/structure/safe,/obj/machinery/light/colored/red{tag = "icon-red1 (EAST)"; icon_state = "red1"; dir = 4},/turf/simulated/floor/wood,/area/planets/Geminus/indoor/police_station)
 "aiH" = (/obj/item/weapon/paper_bin,/obj/structure/table/standard,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/police_station)
