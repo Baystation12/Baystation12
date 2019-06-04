@@ -276,7 +276,7 @@
 "fp" = (/turf/simulated/wall/r_wall,/area/corvette/unscthorin/Hangarbaystarboard)
 "fq" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Port Hangar"; req_access = list(632)},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbaystarboard)
 "fr" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscthorin/Hangarbaystarboard)
-"fs" = (/obj/structure/ladder/up,/turf/simulated/floor/plating{tag = "icon-dmg4"; icon_state = "dmg4"},/area/corvette/unscthorin/Starboardhallway2)
+"fs" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/corvette/unscthorin/observation)
 "ft" = (/obj/machinery/light,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
 "fu" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
 "fv" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(632)},/obj/structure/cable/blue{icon_state = "1-2"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
@@ -380,6 +380,8 @@
 "hp" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
 "hq" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/corvette/unscthorin/Starboardhallway2)
 "hr" = (/obj/effect/landmark/map_data{mouse_over_pointer = 0; name = "URFS Thorn"},/turf/space,/area/space)
+"hs" = (/obj/structure/ladder/up,/turf/simulated/floor/plating{tag = "icon-dmg4"; icon_state = "dmg4"},/area/corvette/unscthorin/observation)
+"ht" = (/obj/machinery/door/airlock/halo{name = "Maintenance Shaft"; req_access = list(632)},/turf/simulated/floor/plating{tag = "icon-dmg4"; icon_state = "dmg4"},/area/corvette/unscthorin/Starboardhallway2)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -436,8 +438,8 @@ aaaaaaaaaaaaaaaaaaaaaaaabCcococococodSdTdUdVdWdXdYdZdWdWeadXdXdXdWdWdXdXdWdWebdW
 aaaaaaaaaaaaaaaaaaaaaaaabCbWbWbWbWbXembYcoeneoepeqereseteteseueveseseteseseseseuevesesetewewexeyexexezezeAeBeBdGeCcneDcSdBcScScScnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaacXcYcYcYcYcZdabYcoeEeoeoeFeGeteHeHeIeJeJeJeKeLeMeHeIeHeHeHeIeHeJeweNeOePeHeHeQezeBeBeBdjdkcneRcScncVcVcVcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaabCbWbWbWbWbXcAbYcoeSeoeoeTeGeteUeJeJeJeVeWeVeVeXeJeJeYeZfafbfcfdeweUeHfeeHeHfffgeBeBeBcQdkcnfhcScnficVcVcWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaabCbWbWbWbWbXfjcocoeEeoeoeFereseHeHfkeHeVfleVeVeMfleHeHeYeJeJeJfleweJfmfeeHeHeJfnfofpfpfqfrfpfpfpfpcncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaabCbWbWbWbWbXbYeofsftfufvfweresfxfyfzeHfAeHeVeWeMeJeJeJfBeJfBeJeJeweJeJfCfDeJeJfnfEfFfGfHfIfJfKfLfpcncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaabCbWbWbWbWbXfjfscoeEeoeoeFereseHeHfkeHeVfleVeVeMfleHeHeYeJeJeJfleweJfmfeeHeHeJfnfofpfpfqfrfpfpfpfpcncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaabCbWbWbWbWbXhseEhtftfufvfweresfxfyfzeHfAeHeVeWeMeJeJeJfBeJfBeJeJeweJeJfCfDeJeJfnfEfFfGfHfIfJfKfLfpcncncncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaabCeoeoeoeofMeoepepepepeofNereAfOeHfOfleHeHeJeJfkeJfPeHfQeHfReHfSexeWeHfTfUeHeHfnfVfIfJfJfJfJfWfJfpfpfpfpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaafXfXfXfXfYfZgagafZgafZeTeresgbeHfOgceJgdeYeJeJeJgegegfeHgfeVffexggeHfeeJeHghgigjgkgkglfJfJfJgmfpfpfpfpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaafXfXfXfXfYgngogpgqgrgsgteSeseHgugvgweJeJgxgygzeHgAeJeHgBgCeVeHexeHeHfeeHfmeJfngDgkgkgkgmfJfJfJfpfpfpfpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

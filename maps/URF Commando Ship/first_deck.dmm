@@ -132,7 +132,6 @@
 "cB" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Troopbunks)
 "cC" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
 "cD" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
-"cE" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
 "cF" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
 "cG" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/Centralhallway)
 "cH" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Engine"; req_access = list(252)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/commando_ship/urfs_avarice/powercore)
@@ -302,7 +301,7 @@ aaaaaaaaaaaaaaaaaaaaaabwbBbCbDbxbxbEbFbGaYbGbFbEaYbEbFbGaYaEaeaRbHaTbIbJbKbLaRaR
 aaaaaaaaaaaaaabwbBbCbDbwbMbNbObObwbPbQbPaYbPbQbPaYbPbQbPaYaEaeaRaTaTbIbRbSbTaRaRbjbkbUblblbVbeblbvaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaabWbObXbYbZbZcabZbObwcbccaYaYaYccaYaYaYccaYaYcdaeaRaRceaRaRaRcfaRaRaGaGblcgcgaGbebAbvaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaachcicjbZcabZckckbZbZclbQaeaeaecmaeaeaeaeaeaecmaEaecmaeaeaeaecmcnaeaecoblblcpcqcrbeblbvaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaacsctcubZbZcvcwcxcyczcAcBaAaAaAaAaAcCaAaAaAaAaAcDcEaAaAaAaAcFaAcGaeaecHblblcIcJcKbebeaGaGaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaacsctcubZbZcvcwcxcyczcAcBaAaAaAaAaAcCaAaAaAaAaAcDaAaAaAaAaAcFaAcGaeaecHblblcIcJcKbebeaGaGaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaabwbwbxHcbZbZcMcNcOcPcQbwaYabababababcdaeababababcdaeabababakcnababababaGcRcScTcUcVblbkcWaGaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaacXctcubZbZcYcZdadbczcAcBaAaAaAaAcCdcaAaAcCdddedfaAaAaAaAaAdcaAcCaAaAdgcScSdhdidjbebeaGaGaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaadkbWdlbZdmbZdndnbZbZclbQaeaeaeahcnaeaeaecndodpdqaeahaeaeaeaeahcnaeaecHblbldrdsdtbeblbvaaaaaaaaaaaaaaaaaaaaaa
@@ -336,4 +335,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 fnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 foaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
