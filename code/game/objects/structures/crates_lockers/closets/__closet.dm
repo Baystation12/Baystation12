@@ -270,7 +270,7 @@
 		if(isWelder(W))
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.remove_fuel(0,user))
-				slice_into_parts(user)
+				slice_into_parts(WT, user)
 				return
 		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
