@@ -131,7 +131,7 @@
 	burst = 3
 	burst_delay = 0.5
 	fire_delay = 2
-	accuracy = 1
+	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.0, 0.6, 0.6)
 	item_icons = list(
@@ -170,7 +170,7 @@
 	burst = 3
 	burst_delay = 0.5
 	fire_delay = 9
-	accuracy = 1
+	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.1, 0.8, 0.8)
 	item_icons = list(
