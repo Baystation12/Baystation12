@@ -13,4 +13,5 @@
 		colony of sizable population and considerable wealth causes it to often be the target of various \
 		attempts of robbery, fraud and other malicious actions."
 	end_on_antag_death = FALSE
+	overmap_template = /datum/map_template/gamemode_site/heist_base
 	antag_tags = list(MODE_RAIDER)
