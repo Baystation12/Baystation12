@@ -23,6 +23,7 @@ var/list/nuke_disks = list()
 		"summary_nukewin",
 		"summary_nukefail"
 	)
+	overmap_template = /datum/map_template/gamemode_site/heist_base
 
 //checks if L has a nuke disk on their person
 /datum/game_mode/nuclear/proc/check_mob(mob/living/L)
