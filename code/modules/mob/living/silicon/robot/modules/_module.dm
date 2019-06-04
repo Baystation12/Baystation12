@@ -122,7 +122,7 @@
 
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
-	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
+	R.choose_icon(0, R.set_module_sprites(list("Default" = initial(R.icon_state))))
 
 /obj/item/weapon/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)
