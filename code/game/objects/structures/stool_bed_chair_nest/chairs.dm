@@ -84,6 +84,14 @@
 				stool_cache[cache_key] = I
 			overlays |= stool_cache[cache_key]
 
+/obj/structure/bed/chair/rotate(mob/user)
+	if(!CanPhysicallyInteract(user))
+		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
+		return
+
+	set_dir(turn(dir, 90))
+	update_icon() 
+
 /obj/structure/bed/chair/set_dir()
 	..()
 	if(buckled_mob)
