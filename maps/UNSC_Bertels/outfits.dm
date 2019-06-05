@@ -1,5 +1,9 @@
 //UNSC BERTELS Crew Outfits
 
+/decl/hierarchy/outfit/job/UNSC_ship
+	name = "UNSC ship"
+	hierarchy_type = /decl/hierarchy/outfit/job/UNSC_ship
+
 /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician
 	name = "UNSC Bertels Engineer"
 
