@@ -66,5 +66,7 @@
 				/obj/structure/largecrate,
 				/obj/structure/closet/wardrobe/xenos,
 				/obj/structure/closet/wardrobe/mixed,
-				/obj/structure/closet/wardrobe/suit,
-				/obj/structure/closet/wardrobe/orange)
+				/obj/structure/closet/wardrobe/suit)
+
+/obj/structure/closet/secure_closet/brig/WillContain()
+	return null

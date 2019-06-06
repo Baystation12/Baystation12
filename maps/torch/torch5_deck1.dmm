@@ -9612,6 +9612,7 @@
 /area/security/bo)
 "aFR" = (
 /obj/structure/table/steel,
+/obj/item/device/multitool,
 /obj/item/weapon/stamp/brig,
 /obj/item/weapon/stamp/denied{
 	pixel_x = 5
