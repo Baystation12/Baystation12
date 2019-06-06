@@ -31,7 +31,7 @@ var/global/datum/loot_distributor/loot_distributor = new
 	if(!istype(loc,/turf))
 		loc.contents += spawned_loot
 	do_loot_modifications(spawned_loot)
-	return
+	return .
 
 /obj/effect/loot_marker/proc/do_loot_modifications(var/obj/loot_spawned)
 	loot_spawned.dir = dir
