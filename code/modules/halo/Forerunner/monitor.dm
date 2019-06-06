@@ -10,4 +10,4 @@
 	health = 9999999999
 	maxHealth = 9999999999
 	resistance = 1000
-	speak = list("Let's see now...","Hmm, ah!","Oh dear","Oh, that's a good idea","Hah I am a genius","I am  genius hahahaha","Ah!")
+	speak = list("Let's see now...","Hmm, ah!","Oh dear","Oh, that's a good idea","Hah I am a genius","I am a genius hahahaha","Ah!")
