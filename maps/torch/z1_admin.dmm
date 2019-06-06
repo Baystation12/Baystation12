@@ -21931,7 +21931,7 @@
 /area/holodeck/source_temple)
 "dTZ" = (
 /obj/structure/table/holo_woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup{
 	holographic = 1
 	},
 /turf/simulated/floor/holofloor/wood,

@@ -2551,7 +2551,7 @@
 /obj/item/device/radio/intercom/entertainment{
 	pixel_y = 24
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = 3;
 	pixel_y = 5
 	},
@@ -21963,12 +21963,12 @@
 	pixel_x = -22
 	},
 /obj/structure/table/steel,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/corp,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/corp,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/corp,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/NT,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/NT,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG,
 /obj/effect/floor_decal/corner/research{
 	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
