@@ -90,7 +90,7 @@
 	return get_speed()/get_acceleration()
 
 /obj/effect/overmap/ship/proc/decelerate()
-	if(((speed[1]) || (speed[2])) && can_burn())
+	if(!is_still() && can_burn())
 		if (speed[1])
 			adjust_speed(-SIGN(speed[1]) * min(get_burn_acceleration(),abs(speed[1])), 0)
 		if (speed[2])
