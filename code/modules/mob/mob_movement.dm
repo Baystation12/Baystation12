@@ -106,9 +106,9 @@
 /client/verb/drop_item()
 	set hidden = 1
 	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
-		return mob.unequip_item()
-	return
-
+		var/obj/item/I = mob.get_active_hand()
+		if(I && I.can_be_dropped_by_client(mob))
+			mob.drop_item()
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(newloc, direct)

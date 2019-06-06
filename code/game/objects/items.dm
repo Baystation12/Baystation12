@@ -440,6 +440,9 @@ var/list/global/slot_flags_enumeration = list(
 		return 0
 	return 1
 
+/obj/item/proc/can_be_dropped_by_client(mob/M)
+	return M.canUnEquip(src)
+
 /obj/item/verb/verb_pickup()
 	set src in oview(1)
 	set category = "Object"
