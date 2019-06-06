@@ -224,6 +224,26 @@
 	name = "\improper Geminus Underground"
 	icon_state = "yellow"
 
+/area/geminus_underground/northwest
+	name = "\improper Geminus Underground Northwest"
+	icon_state = "blueold"
+
+/area/geminus_underground/north
+	name = "\improper Geminus Underground North"
+	icon_state = "sub_maint_fore"
+
+/area/geminus_underground/southwest
+	name = "\improper Geminus Underground South"
+	icon_state = "purple"
+
+/area/geminus_underground/south
+	name = "\improper Geminus Underground South"
+	icon_state = "hallA"
+
+/area/geminus_underground/southeast
+	name = "\improper Geminus Underground South"
+	icon_state = "green"
+
 /area/geminus_underground/innie
 	name = "\improper Geminus Insurrection Base"
 	icon_state = "red"
