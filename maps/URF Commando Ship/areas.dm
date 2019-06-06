@@ -8,16 +8,16 @@
 
 /area/commando_ship/urfs_avarice/Bridge
 	name = "URFS Avarice Bridge"
-
+/*
 /area/commando_ship/urfs_avarice/Porthallway
 	name = "URFS Avarice Deck 1 Port Hallway"
 
 /area/commando_ship/urfs_avarice/Porthallway2
 	name = "URFS Avarice Deck 2 Port Hallway"
-
+*/
 /area/commando_ship/urfs_avarice/Centralhallway
 	name = "URFS Avarice Deck 1 Central Hallway"
-
+/*
 /area/commando_ship/urfs_avarice/Centralhallway2
 	name = "URFS Avarice Deck 2 Central Hallway"
 
@@ -38,10 +38,10 @@
 
 /area/commando_ship/urfs_avarice/fuelstorage
 	name = "URFS Avarice Fuel Storage"
-
+*/
 /area/commando_ship/urfs_avarice/medicalbay
 	name = "URFS Avarice Medical Bay"
-
+/*
 /area/commando_ship/urfs_avarice/oxystorage
 	name = "URFS Avarice Oxygen Storage"
 
@@ -59,16 +59,15 @@
 
 /area/commando_ship/urfs_avarice/cells
 	name = "URFS Avarice Holding Cells"
-
+*/
 /area/commando_ship/urfs_avarice/janitorial
 	name = "URFS Avarice Janitorial Closet"
 
 /area/commando_ship/urfs_avarice/storageroom
 	name = "URFS Avarice Deck 1 Storage Room"
-
+/*
 /area/commando_ship/urfs_avarice/storageroom2
 	name = "URFS Avarice Deck 2 Storage Room"
-
 
 /area/commando_ship/urfs_avarice/portbatterycontrol
 	name = "URFS Avarice Port Battery Control"
@@ -81,7 +80,7 @@
 
 /area/commando_ship/urfs_avarice/starboardcrew
 	name = "URFS Avarice Starboard Crew Quarters"
-
+*/
 /area/commando_ship/urfs_avarice/Messhall
 	name = "URFS Avarice Mess Hall"
 
@@ -102,7 +101,7 @@
 
 /area/commando_ship/urfs_avarice/powercore
 	name = "URFS Avarice Power Core"
-
+/*
 /area/commando_ship/urfs_avarice/powercoreaux
 	name = "URFS Avarice Auxiliary Power Core"
 
@@ -132,3 +131,4 @@
 
 /area/commando_ship/urfs_avarice/starboardrockets
  	name = "URFS Avarice Starboard Rocket Pods"
+*/
