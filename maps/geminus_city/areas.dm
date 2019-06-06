@@ -218,3 +218,12 @@
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
+
+//UNDERGROUND//
+/area/geminus_underground
+	name = "\improper Geminus Underground"
+	icon_state = "yellow"
+
+/area/geminus_underground/innie
+	name = "\improper Geminus Insurrection Base"
+	icon_state = "red"

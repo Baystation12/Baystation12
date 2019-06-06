@@ -8,9 +8,15 @@
 #include "geminus_city_map.dm"
 #include "geminus_city_jobs.dm"
 
+#include "fakewall.dm"
+#include "sewer_tunnel_thin.dm"
+#include "bumpstairs.dm"
+
 //#include "geminuscity_4.dmm"
 #include "geminuscity_3.dmm"
 #include "geminuscity_2.dmm"
+#include "geminuscity_1.dmm"
+#include "geminus_innie_base.dmm"
 
 #if !defined(using_map_DATUM)
 
