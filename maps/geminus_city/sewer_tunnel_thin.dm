@@ -13,6 +13,7 @@
 	var/roomlocs_interval = 20
 	var/rat_chance = 0.5
 	var/closed_end = 0
+	var/light_intervals = 6
 	var/list/roomlocs = list()
 
 /obj/effect/landmark/sewer_tunnel_thin/New(var/loc, var/generate_now = 1)
@@ -52,10 +53,16 @@
 			tunnel_type = /turf/simulated/wall/tech
 		cur_turf.ChangeTurf(tunnel_type)
 
+		var/list/lightdirs = list()
+
 		//left wall
 		var/walltype = /turf/simulated/wall/tech
 		if(prob(33))
 			walltype = pick(/turf/simulated/mineral, /turf/simulated/floor/plating)
+		else if(cur_length % light_intervals == 0)
+			//check if we can place a light here
+			lightdirs.Add(leftdir)
+
 		var/turf/left = get_step(cur_turf,leftdir)
 		if(left)
 			left.ChangeTurf(walltype)
@@ -66,6 +73,10 @@
 		walltype = /turf/simulated/wall/tech
 		if(prob(33))
 			walltype = pick(/turf/simulated/mineral, /turf/simulated/floor/plating)
+		else if(cur_length % light_intervals == 0)
+			//check if we can place a light here
+			lightdirs.Add(rightdir)
+
 		var/turf/right = get_step(cur_turf,rightdir)
 		if(right)
 			right.ChangeTurf(walltype)
@@ -88,6 +99,12 @@
 				roomlocs += side_tunnel.do_path()
 				last_side_tunnel = cur_length
 
+		//generate a light?
+		if(lightdirs.len)
+			var/obj/machinery/light/small/S = new(cur_turf)
+			S.dir = pick(lightdirs)
+
+		//check if this is a possible spot to put a bumpstairs room
 		if(cur_length%roomlocs_interval == 0)
 			roomlocs[left] = leftdir
 			roomlocs[right] = rightdir

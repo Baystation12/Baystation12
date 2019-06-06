@@ -68,6 +68,9 @@
 	//
 	var/obj/structure/bumpstairs/sewers_one/sewers_one = new(cur_turf)
 	sewers_one.dir = turn(roomdir, 180)
+	//
+	var/obj/machinery/light/small/S = new(cur_turf)
+	S.dir = roomdir
 
 	cur_turf = get_step(cur_turf, roomdir)
 
