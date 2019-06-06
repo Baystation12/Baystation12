@@ -87,6 +87,10 @@
 	if(!QDELETED(src))
 		qdel(src)
 
+/obj/item/grab/can_be_dropped(mob/M)
+	if(M == assailant)
+		return TRUE
+
 /obj/item/grab/Destroy()
 	if(affecting)
 		GLOB.dismembered_event.unregister(affecting, src)
