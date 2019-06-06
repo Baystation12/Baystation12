@@ -44,9 +44,9 @@
 				if(item_slowdown >= 0)
 					var/size_mod = size_strength_mod()
 					if(size_mod + 1 > 0)
-						item_slowdown = item_slowdown / (species.strength + size_mod + 1)
+						item_slowdown = item_slowdown / (size_mod + 1)
 					else
-						item_slowdown = item_slowdown - species.strength - size_mod
+						item_slowdown = item_slowdown - size_mod
 				total_item_slowdown += max(item_slowdown, 0)
 		tally += total_item_slowdown
 
