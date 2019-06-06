@@ -85,7 +85,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/Retaliate()
 	..()
 	if(stat == CONSCIOUS && prob(5))
-		visible_message("<span class='warning'>\The [src] bellows indignantly, with a judgemental gleam in his eye.</span>")
+		visible_message(SPAN_WARNING("The [src] bellows indignantly, with a judgemental gleam in his eye."))
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Retaliate()
 	set waitfor = FALSE
@@ -93,46 +93,46 @@
 	if(spellscast < 5)
 		if(prob(5) && move_to_delay != 1) //speed buff
 			spellscast++
-			visible_message("<span class='cult'>\The [src] shimmers and seems to phase in and out of reality itself!</span>")
+			visible_message(SPAN_MFAUNA("\The [src] shimmers and seems to phase in and out of reality itself!"))
 			move_to_delay = 1
 
 		else if(prob(5) && melee_damage_lower != 50) //damage buff
 			spellscast++
-			visible_message("<span class='cult'>\The [src]' horns grow larger and more menacing!</span>")
+			visible_message(SPAN_MFAUNA("\The [src]' horns grow larger and more menacing!"))
 			melee_damage_lower = 50
 
 		else if(prob(5)) //stun move
 			spellscast++
-			visible_message("<span class='cult'>\The [src]' fleece flashes with blinding light!</span>")
+			visible_message(SPAN_MFAUNA("\The [src]' fleece flashes with blinding light!"))
 			new /obj/item/weapon/grenade/flashbang/instant(src.loc)
 
 		else if(prob(5)) //spawn adds
 			spellscast++
-			visible_message("<span class='cult'>\The [src] summons the imperial guard to his aid, and they appear in a flash!</span>")
+			visible_message(SPAN_MFAUNA("\The [src] summons the imperial guard to his aid, and they appear in a flash!"))
 			new /mob/living/simple_animal/hostile/retaliate/goat/guard/master(get_step(src,pick(GLOB.cardinal)))
 			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_step(src,pick(GLOB.cardinal)))
 			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_step(src,pick(GLOB.cardinal)))
 
 		else if(prob(5)) //EMP blast
 			spellscast++
-			visible_message("<span class='cult'>\The [src] disrupts nearby electrical equipment!</span>")
+			visible_message(SPAN_MFAUNA("\The [src] disrupts nearby electrical equipment!"))
 			empulse(get_turf(src), 5, 2, 0)
 
 		else if(prob(5) && damtype == BRUTE && !special_attacks) //elemental attacks
 			spellscast++
 			if(prob(50))
-				visible_message("<span class='cult'>\The [src]' horns flicker with holy white flame!</span>")
+				visible_message(SPAN_MFAUNA("\The [src]' horns flicker with holy white flame!"))
 				damtype = BURN
 			else
-				visible_message("<span class='cult'>\The [src]' horns glimmer, electricity arcing between them!</span>")
+				visible_message(SPAN_MFAUNA("\The [src]' horns glimmer, electricity arcing between them!"))
 				damtype = ELECTROCUTE
 
 		else if(prob(5)) //earthquake spell
-			visible_message("<span class='danger'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
+			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
 			stop_automation = TRUE
 			if(do_after(src, 6 SECONDS, src))
 				var/health_holder = health
-				visible_message("<span class='cult'>\The [src] raises its fore-hooves and stomps them into the ground with incredible force!</span>")
+				visible_message(SPAN_MFAUNA("\The [src] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(src,pick(GLOB.cardinal)), -1, 2, 2, 3, 6)
 				explosion(get_step(src,pick(GLOB.cardinal)), -1, 1, 4, 4, 6)
 				explosion(get_step(src,pick(GLOB.cardinal)), -1, 3, 4, 3, 6)
@@ -141,7 +141,7 @@
 				if(!health < health_holder)
 					health = health_holder //our own magicks cannot harm us
 			else
-				visible_message("<span class='notice'>\The [src] loses concentration and huffs haughtily.</span>")
+				visible_message(SPAN_NOTICE("The [src] loses concentration and huffs haughtily."))
 				stop_automation = FALSE
 
 		else return
@@ -155,7 +155,7 @@
 	boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
 	stun_chance = 10
 	update_icon()
-	visible_message("<span class='cult'>\The [src]' wounds close with a flash, and when he emerges, he's even larger than before!</span>")
+	visible_message("<span class='cultannounce'>\The [src]' wounds close with a flash, and when he emerges, he's even larger than before!</span>")
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/on_update_icon()
 	var/matrix/M = new
@@ -173,21 +173,21 @@
 	if(!.)
 		return FALSE
 	if(special_attacks >= 6 && damtype != BRUTE)
-		visible_message("<span class='cult'>The energy surrounding \the [src]'s horns dissipates.</span>")
+		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
 		damtype = BRUTE
 
 	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
-	visible_message("<span class='cult'>\The [src] lets loose a terrific wail as its wounds close shut with a flash of light, and its eyes glow even brighter than before!</span>")
+	visible_message("<span class='cultannounce'>\The [src] lets loose a terrific wail as its wounds close shut with a flash of light, and its eyes glow even brighter than before!</span>")
 	new /mob/living/simple_animal/hostile/retaliate/goat/king/phase2(src.loc)
 	Destroy()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/OnDeath()
 	QDEL_NULL(boss_theme)
 	if(phase3)
-		visible_message("<span class='cult'>\The [src] shrieks as the seal on his power breaks and his wool sheds off!</span>")
+		visible_message(SPAN_MFAUNA("\The [src] shrieks as the seal on his power breaks and his wool sheds off!"))
 		new /obj/item/weapon/towel/fleece(src.loc)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/death()
@@ -205,7 +205,7 @@
 		if(prob(stun_chance))
 			L.Weaken(0.5)
 			L.confused += 1
-			visible_message("<span class='warning'>\The [L] is bowled over by the impact of [src]'s attack!</span>")
+			visible_message(SPAN_WARNING("\The [L] is bowled over by the impact of [src]'s attack!"))
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/UnarmedAttack()
 	..()

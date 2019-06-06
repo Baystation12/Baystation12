@@ -3,6 +3,7 @@
 	icon = 'icons/mob/animal.dmi'
 	health = 20
 	maxHealth = 20
+	universal_speak = 0
 
 	mob_bump_flag = SIMPLE_ANIMAL
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
@@ -21,7 +22,6 @@
 
 	var/turns_per_move = 1
 	var/turns_since_move = 0
-	universal_speak = 0		//No, just no.
 	var/meat_amount = 0
 	var/meat_type
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
