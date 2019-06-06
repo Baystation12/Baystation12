@@ -141,7 +141,7 @@
 	access = list(240,250)
 	spawnpoint_override = "Covenant Base Spawns"
 	whitelisted_species = list(/datum/species/kig_yar)
-
+/*
 /datum/job/covenant/kigyarcorvette/captain
 	title = "Kig-Yar - Shipmistress"
 	total_positions = 1
@@ -152,7 +152,7 @@
 	spawnpoint_override = "Covenant Base Spawns"
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar)
-
+*/
 /datum/job/covenant/unggoy_minor
 	title = "Unggoy - Minor"
 	total_positions = 16

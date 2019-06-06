@@ -19,10 +19,10 @@
 
 /area/covenant_corvette/kigyarport
 	name = "SDV Vindicative Infraction Kig-yar Port Quarters"
-
+/*
 /area/covenant_corvette/kigyarstarboard
 	name = "SDV Vindicative Infraction Kig-yar Starboard Quarters"
-
+*/
 /area/covenant_corvette/mainmedicalbay
 	name = "SDV Vindicative Infraction Main Medical Bay"
 
@@ -49,16 +49,16 @@
 
 /area/covenant_corvette/auxmedical
 	name = "SDV Vindicative Infraction Auxiliary Medical Bay"
-
+/*
 /area/covenant_corvette/expansion
 	name = "SDV Vindicative Infraction Unassigned Section"
-
+*/
 /area/covenant_corvette/holdingcell
 	name = "SDV Vindicative Infraction Holding Cells"
-
+/*
 /area/covenant_corvette/toolstore
 	name = "SDV Vindicative Infraction Tool Storage"
-
+*/
 /area/covenant_corvette/centralengine
 	name = "SDV Vindicative Infraction Central Engine"
 

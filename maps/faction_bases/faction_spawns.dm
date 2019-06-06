@@ -19,7 +19,6 @@ GLOBAL_LIST_EMPTY(covenant_base_spawns)
 		/datum/job/covenant/lesser_prophet,\
 		/datum/job/covenant/kigyarminor,\
 		/datum/job/covenant/kigyarmajor,
-		/datum/job/covenant/kigyarcorvette/captain,\
 		/datum/job/covenant/unggoy_minor,\
 		/datum/job/covenant/unggoy_major)
 
