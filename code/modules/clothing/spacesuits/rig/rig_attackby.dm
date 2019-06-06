@@ -95,6 +95,8 @@
 				return
 			if(!user.unEquip(mod)) return
 			to_chat(user, "You install \the [mod] into \the [src].")
+			if(istype(mod,/obj/item/rig_module/voice))
+				verbs |= /obj/item/weapon/rig/proc/alter_voice
 			installed_modules |= mod
 			mod.forceMove(src)
 			mod.installed(src)
@@ -166,6 +168,8 @@
 
 					var/obj/item/rig_module/removed = possible_removals[removal_choice]
 					to_chat(user, "You detach \the [removed] from \the [src].")
+					if(istype(removed,/obj/item/rig_module/voice))
+						verbs -= /obj/item/weapon/rig/proc/alter_voice
 					removed.dropInto(loc)
 					removed.removed()
 					installed_modules -= removed

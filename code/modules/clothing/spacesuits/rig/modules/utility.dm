@@ -339,7 +339,7 @@
 	toggleable = 1
 	selectable = 0
 	disruptive = 0
-	active_power_cost = 50
+	active_power_cost = 200
 
 	suit_overlay_active = "maneuvering_active"
 	suit_overlay_inactive = null //"maneuvering_inactive"
