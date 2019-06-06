@@ -37,11 +37,9 @@
 	var/rightdir = turn(src.dir, -90)
 	var/cur_length = 0
 	var/target_length = rand(min_length, max_length)
-	var/turf/final_turf
 	var/last_side_tunnel = 0
 
 	do
-		//world << "	check1"
 		cur_turf = get_step(cur_turf, src.dir)
 		if(!cur_turf)
 			break
@@ -85,7 +83,7 @@
 
 		//hostile giant rat
 		if(prob(rat_chance))
-			var/mob/living/simple_animal/hostile/giant_rat/giant_rat = new(cur_turf)
+			new /mob/living/simple_animal/hostile/giant_rat/(cur_turf)
 
 		//side tunnel
 		if(cur_length - last_side_tunnel > side_tunnel_interval)
@@ -109,15 +107,10 @@
 			roomlocs[left] = leftdir
 			roomlocs[right] = rightdir
 
-		final_turf = cur_turf
-
 	while(cur_length < target_length)
 
 	//remove the diagonal corner tunnel ends
 	roomlocs.len -= 2
-
-	//add the end of the tunnel
-	//roomlocs[final_turf] = src.dir
 
 	if(bumpstairs_room)
 		var/turf/target_turf = pick(roomlocs)
