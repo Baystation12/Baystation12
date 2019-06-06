@@ -1,7 +1,6 @@
 
 /obj/item/grab
 	name = "grab"
-	canremove = 0
 
 	var/mob/living/carbon/human/affecting = null
 	var/mob/living/carbon/human/assailant = null
