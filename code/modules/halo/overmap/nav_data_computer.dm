@@ -197,7 +197,7 @@
 
 /obj/item/nav_data_chip/unsc
 	chip_faction = "UNSC"
-	known_sectors = list("Deviance Station","VT9-042","KS7-535")
+	known_sectors = list("Deviance Station","VT9-042","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
