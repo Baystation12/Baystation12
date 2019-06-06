@@ -87,7 +87,7 @@
 	if(!QDELETED(src))
 		qdel(src)
 
-/obj/item/grab/can_be_dropped(mob/M)
+/obj/item/grab/can_be_dropped_by_client(mob/M)
 	if(M == assailant)
 		return TRUE
 
