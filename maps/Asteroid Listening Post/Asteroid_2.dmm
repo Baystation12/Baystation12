@@ -332,6 +332,15 @@
 "gt" = (/obj/structure/table/standard,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
 "gu" = (/obj/structure/flora/pottedplant/aquatic,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
 "gv" = (/obj/effect/landmark/map_data{name = "Asteroid"},/turf/space,/area/space)
+"gw" = (/obj/effect/landmark/start/listen_staffl,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gx" = (/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gy" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gz" = (/obj/random/trash,/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gA" = (/obj/effect/decal/cleanable/vomit,/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gB" = (/obj/machinery/light{dir = 8},/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gC" = (/obj/effect/decal/cleanable/generic,/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gD" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
+"gE" = (/obj/effect/decal/cleanable/dirt,/obj/effect/landmark/start/listen_staff,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/Hallways)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaabababababababababababacacacacacacacacacacacadadadadadadadadadadaeaeafaeaeadadadad
@@ -367,11 +376,11 @@ aaaaaaaadWbububraaaaaadGdXdIdIdIdIdYdIdIdIdGdGdGdGdGdZdIeadGdSbububuebbrbrbububr
 egegegegegcPbubraaaaaadGdLeheiejdIdIdIekdIdGdGdGdGdGelekemdGbrbrbrbrbrbrbrbububreneoepdndndndndnefbr
 egeqeresegbubudWaaaaaadGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGetetetetetbrbrbububreuevewexeyezeAeBeCbr
 egeDereregbububraaaaaaeEeEeEeEeEeEeEeEeEeFeGeHeIeJeKeLeMbrbrbrbrbrbrbrbrbrbIbubrbrbrbrbrbrbrbrbrbrbr
-egerereregbububraaaaaaeEeNeOePeQeReSeTeUbubububububububububxbubRbubububxbubvbubububxbububububxbraaaa
+egerereregbububraaaaaaeEeNeOePeQeReSeTeUgwgwgwgwgwgwbubububxbubRbubububxbubvbubububxbububububxbraaaa
 egeDereregbububraaaaaaeEeVeSePeWeXeWeYeEeZeZeZfaeZeZbubufbbububVbubvbububububububububububububVbraaaa
-egerereregfcereEeEeEfdeEeEfeeEffeWeSfgeEbufhbubudFbubRbubrbrbrbrbrbrbrbrbrbIfibrbrbrbrbrbrbNbubraaaa
-egfjererfkererflflflfmeWfneSfoeSeWeSfpeEbNbubububububVebbraaaaaaaaaaaaaabrbNbubrfqfrfsbrbrbububraaaa
-egegegegegfterflflflflfueWeWeWeWeWeWfveEbubububvbRbubububraaaaaaaaaaaaaabrbubvbrbvbudFbrbrbububraaaa
+egerereregfcereEeEeEfdeEeEfeeEffeWeSfgeEgxgygxgxgzgxgAgxbrbrbrbrbrbrbrbrbrbIfibrbrbrbrbrbrbNbubraaaa
+egfjererfkererflflflfmeWfneSfoeSeWeSfpeEgBgxgxgxgxgxgCgDbraaaaaaaaaaaaaabrbNbubrfqfrfsbrbrbububraaaa
+egegegegegfterflflflflfueWeWeWeWeWeWfveEgxgxgxgEgAgxgxgxbraaaaaaaaaaaaaabrbubvbrbvbudFbrbrbububraaaa
 fwfwfwfwfxfyfyfxeEeEfdeEfefzfefefzfefeeEfAfBfCfhbvfAeZfCbraaaaaaaaaaaaaabrbubufDbufEfFbrbrbububraaaa
 fwfwfwfwfxfyfyfxeEeEeEeEfGeWeWeWeSeSfHeEfAfIfCbvfJfAfKfCbraaaaaaaaaaaaaabrbrbrbrbrbrbrbrbrbububraaaa
 fwfwfxfxfxfLfxfxfxfxeEeEfMfNfOfPfOeWfQeEbrbrbrbrbrbrbrbrbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaabrbvbubraaaa
