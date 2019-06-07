@@ -5,7 +5,7 @@
 	requires_power= 0
 	has_gravity = 1
 	luminosity = 1
-
+/*
 /area/admin/no_gravity
 	name = "Admin Area 2"
 	icon_state = "start"
@@ -21,7 +21,7 @@
 	requires_power= 0
 	has_gravity = 1
 	luminosity = 0
-
+*/
 /area/admin/forest
 	name = "Admin Area Forest"
 	icon_state = "green"

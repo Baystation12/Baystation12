@@ -8,8 +8,8 @@
 #define WARN_BOMB 2
 #define WARN_GENERAL 1
 
-/datum/game_mode/insurrection
-	name = "Insurrection"
+/datum/game_mode/operation_trebuchet
+	name = "operation_trebuchet"
 	round_description = "The UNSC has located an Insurrection base..."
 	config_tag = "Insurrection"
 	votable = 1
@@ -21,14 +21,14 @@
 	var/pods_launched = 0
 	var/warned = 0 //To stop bomb detonation warning spam
 
-/datum/game_mode/insurrection/proc/lockdown_bombs()
+/datum/game_mode/operation_trebuchet/proc/lockdown_bombs()
 	for(var/obj/payload/bomb in bombs)
 		if(istype(bomb,/obj/payload/innie))
 			var/obj/payload/innie/b = bomb
 			b.lockdown_bomb()
 			b.visible_message("<span class = 'danger'>The [b.name]'s automatic anchoring bolts engage!</span>")
 
-/datum/game_mode/insurrection/proc/get_roles_from_faction(var/faction)
+/datum/game_mode/operation_trebuchet/proc/get_roles_from_faction(var/faction)
 	var/list/allowed_roles = list()
 	if(faction == "UNSC")
 		allowed_roles = UNSC_ROLES
@@ -36,7 +36,7 @@
 		allowed_roles = INNIE_ROLES
 	return allowed_roles
 
-/datum/game_mode/insurrection/proc/message_faction(var/faction,var/message)
+/datum/game_mode/operation_trebuchet/proc/message_faction(var/faction,var/message)
 	var/list/allowed_roles = get_roles_from_faction(faction)
 	for(var/mob/living/l in GLOB.player_list)
 		var/datum/mind/m = l.mind
@@ -45,39 +45,39 @@
 	for(var/i in GLOB.ghost_mob_list)
 		to_chat(i,"[faction]:[message]")
 
-/datum/game_mode/insurrection/proc/obtain_all_pods()
+/datum/game_mode/operation_trebuchet/proc/obtain_all_pods()
 	for(var/obj/vehicles/drop_pod/p in world)
 		remaining_pods += p
 
-/datum/game_mode/insurrection/proc/update_pod_status()
+/datum/game_mode/operation_trebuchet/proc/update_pod_status()
 	for(var/obj/vehicles/drop_pod/p in remaining_pods)
 		if(p.launched)
 			remaining_pods -= p
 
-/datum/game_mode/insurrection/proc/modify_pod_launch(var/modify_to)
+/datum/game_mode/operation_trebuchet/proc/modify_pod_launch(var/modify_to)
 	for(var/obj/vehicles/drop_pod/p in remaining_pods)
 		p.launched = modify_to
 
-/datum/game_mode/insurrection/proc/inform_start_round()
+/datum/game_mode/operation_trebuchet/proc/inform_start_round()
 	message_faction("UNSC","<span class='danger'>Insurrection Base Located, time to Assault Pod effective range: [prepare_time/10] seconds</span>")
 	message_faction("Insurrection","<span class = 'danger'>UNSC Strike Craft detected on approach vector!</span>")
 	message_faction("Insurrection","<span class = 'danger'>Security of nuclear payload is not ensured, relocate payload if possible. Timed locking mechanisms are active.</span>")
 
 
-/datum/game_mode/insurrection/proc/inform_last_assault()
+/datum/game_mode/operation_trebuchet/proc/inform_last_assault()
 	message_faction("UNSC","<span class = 'danger'>All assault pods have been launched. Retreating to re-arm and re-fuel.</span>")
 	message_faction("Insurrection","<span class = 'danger'>UNSC Strike Craft retreating! Eliminate the remaining UNSC forces.</span>")
 
-/datum/game_mode/insurrection/proc/last_assault()
+/datum/game_mode/operation_trebuchet/proc/last_assault()
 	last_assault = TRUE
 	deny_respawn = 1 //No more respawn
 	modify_pod_launch(1)
 	warned = WARN_GENERAL
 
-/datum/game_mode/insurrection/proc/check_pods_left()
+/datum/game_mode/operation_trebuchet/proc/check_pods_left()
 	return remaining_pods.len
 
-/datum/game_mode/insurrection/proc/check_players_live(var/faction)
+/datum/game_mode/operation_trebuchet/proc/check_players_live(var/faction)
 	var/list/live_players = list()
 	var/list/allowed_roles = get_roles_from_faction(faction)
 	for(var/mob/living/player in GLOB.player_list)
@@ -88,7 +88,7 @@
 				live_players += player
 	return live_players
 
-/datum/game_mode/insurrection/proc/announce_win(var/faction)
+/datum/game_mode/operation_trebuchet/proc/announce_win(var/faction)
 	if(faction == "Insurrection")
 		message_faction("UNSC","<span class='danger'>All friendly transmitters have ceased operation aboard the asteroid. Asteroid defence systems have obtained a lock.</span>")
 		message_faction("Insurrection","<span class='danger'>No signs of UNSC intruders aboard the base. Defence systems have a lock on their strike craft.</span>")
@@ -103,10 +103,10 @@
 		return 1
 	return 0
 
-/datum/game_mode/insurrection/proc/update_bomb_timer()
+/datum/game_mode/operation_trebuchet/proc/update_bomb_timer()
 	bombs[1] = world.time + 30 SECONDS
 
-/datum/game_mode/insurrection/proc/update_bomb_status()
+/datum/game_mode/operation_trebuchet/proc/update_bomb_status()
 	update_bomb_timer()
 	for(var/obj/payload/b in bombs)
 		if(b.exploding == 1)
@@ -120,7 +120,7 @@
 			message_faction("Insurrection","<span class='danger'>Integrated self destruct device reports nearing time of detonation. Relocate all personnel to the evacuation wing.</span>")
 			warned = WARN_BOMB
 
-/datum/game_mode/insurrection/proc/bomb_exploded()
+/datum/game_mode/operation_trebuchet/proc/bomb_exploded()
 	if(last_assault == BOMB_ACTIVE)
 		for(var/obj/payload/b in bombs)
 			if(world.time >= (b.explode_at - 1) && (b.exploding))
@@ -129,7 +129,7 @@
 	else
 		return 0
 
-/datum/game_mode/insurrection/pre_setup()
+/datum/game_mode/operation_trebuchet/pre_setup()
 	..()
 	for(var/obj/effect/landmark/innie_bomb/b in world)
 		new /obj/effect/bomblocation (b.loc)
@@ -139,7 +139,7 @@
 	update_bomb_timer()
 	autolaunchtime = world.time + autolaunchtime
 
-/datum/game_mode/insurrection/post_setup()
+/datum/game_mode/operation_trebuchet/post_setup()
 	..()
 	obtain_all_pods()
 	update_bomb_status()
@@ -151,7 +151,7 @@
 	spawn(10 SECONDS) //Delay this for a little to allow for people to spawn in.
 		inform_start_round()
 
-/datum/game_mode/insurrection/process()
+/datum/game_mode/operation_trebuchet/process()
 	..()
 	if(last_assault == BOMB_ACTIVE) //When the bomb's active, check much more frequently.
 		update_bomb_status()
@@ -171,12 +171,12 @@
 		inform_last_assault()
 		last_assault()
 
-/datum/game_mode/insurrection/handle_mob_death()
+/datum/game_mode/operation_trebuchet/handle_mob_death()
 	update_pod_status()
 	update_bomb_status() //Placement of this is important, if passes successfully after last_assault, it will override the usual last assault measures.
 	return 1
 
-/datum/game_mode/insurrection/check_finished()
+/datum/game_mode/operation_trebuchet/check_finished()
 	if(bomb_exploded())
 		last_assault = ROUND_ENDED
 		return 1
