@@ -40,7 +40,7 @@
 	name = CULTURE_XENOPHAGE_D
 	language = LANGUAGE_XENOPHAGE
 	default_language = LANGUAGE_XENOPHAGE
-	additional_langs = list(LANGUAGE_XENOPHAGE_HIVE)
+	additional_langs = list(LANGUAGE_XENOPHAGE_GLOBAL)
 	var/caste_name = "drone"
 	var/caste_number = 0
 

@@ -12,7 +12,7 @@
 	shorthand = "Xeno"
 
 /datum/language/xenos
-	name = LANGUAGE_XENOPHAGE_HIVE
+	name = LANGUAGE_XENOPHAGE_GLOBAL
 	desc = "Xenophages have the strange ability to commune over a psychic hivemind."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
@@ -33,7 +33,7 @@
 	return 0
 
 /datum/language/ling
-	name = "Changeling"
+	name = LANGUAGE_CHANGELING_GLOBAL
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
 	speech_verb = "says"
 	colour = "changeling"
@@ -49,7 +49,7 @@
 		..(speaker,message)
 
 /datum/language/corticalborer
-	name = "Cortical Link"
+	name = LANGUAGE_BORER_GLOBAL
 	desc = "Cortical borers possess a strange link between their tiny minds."
 	speech_verb = "sings"
 	ask_verb = "sings"
