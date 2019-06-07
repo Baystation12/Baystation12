@@ -79,3 +79,5 @@
 	nextturf.ChangeTurf(/turf/simulated/wall/tech)
 	nextturf = get_step(cur_turf,rightdir)
 	nextturf.ChangeTurf(/turf/simulated/wall/tech)
+
+	qdel(src)
