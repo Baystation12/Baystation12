@@ -221,7 +221,7 @@
 
 //UNDERGROUND//
 /area/geminus_underground
-	name = "\improper Geminus Underground"
+	name = "\improper Geminus Underground Northeast"
 	icon_state = "yellow"
 
 /area/geminus_underground/northwest
