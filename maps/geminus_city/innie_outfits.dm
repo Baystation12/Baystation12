@@ -14,6 +14,13 @@
 
 	flags = 0
 
+/decl/hierarchy/outfit/job/geminus_innie/equip_id(mob/living/carbon/human/H, rank, assignment)
+	. = ..()
+
+	var/obj/item/weapon/card/id/W = .
+	if(W)
+		W.rank = "Colonist"
+
 /decl/hierarchy/outfit/job/geminus_innie_leader
 	name = "Insurrectionist Captain"
 
@@ -28,3 +35,11 @@
 	pda_slot = null
 
 	flags = 0
+
+
+/decl/hierarchy/outfit/job/geminus_innie_leader/equip_id(mob/living/carbon/human/H, rank, assignment)
+	. = ..()
+
+	var/obj/item/weapon/card/id/W = .
+	if(W)
+		W.rank = "Colonist"
