@@ -930,6 +930,7 @@
 
 /area/quartermaster/hangar/top
 	name = "\improper Hangar Upper Walkway"
+	req_access = list()
 
 /area/quartermaster/flightcontrol
 	name = "\improper Flight Control Tower"
