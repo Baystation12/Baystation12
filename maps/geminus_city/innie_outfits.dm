@@ -20,6 +20,8 @@
 	var/obj/item/weapon/card/id/W = .
 	if(W)
 		W.rank = "Colonist"
+		W.assignment = "Colonist"
+		W.update_name()
 
 /decl/hierarchy/outfit/job/geminus_innie_leader
 	name = "Insurrectionist Captain"
@@ -43,3 +45,5 @@
 	var/obj/item/weapon/card/id/W = .
 	if(W)
 		W.rank = "Colonist"
+		W.assignment = "Colonist"
+		W.update_name()
