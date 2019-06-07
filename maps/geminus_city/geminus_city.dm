@@ -12,6 +12,10 @@
 #include "sewer_tunnel_thin.dm"
 #include "bumpstairs.dm"
 
+#include "innie_outfits.dm"
+#include "innie_spawns.dm"
+#include "innie_jobs.dm"
+
 //#include "geminuscity_4.dmm"
 #include "geminuscity_3.dmm"
 #include "geminuscity_2.dmm"
