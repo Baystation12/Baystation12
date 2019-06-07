@@ -47,6 +47,7 @@
 	accuracy = -2
 	is_heavy = 1
 	icon_state = "m7smgs"
+	item_state = "m7s"
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/update_icon()
 	if(ammo_magazine)
