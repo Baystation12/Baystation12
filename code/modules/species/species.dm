@@ -225,8 +225,8 @@
 		/datum/mob_descriptor/build = 0
 	)
 
-	var/ranged_tackle_power = 0
-	var/ranged_grab_power =   0
+	var/standing_jump_range = 1
+	var/ranged_grab_distance =   0
 
 	var/list/available_cultural_info = list(
 		TAG_CULTURE =   list(CULTURE_OTHER),

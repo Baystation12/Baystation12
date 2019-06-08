@@ -58,61 +58,7 @@
 		if(istype(G) && G.Touch(A,0)) // for magic gloves
 			return TRUE
 
-	. = ..()
-
-	if(!. && a_intent == I_GRAB && istype(loc, /turf) && !incapacitated() && !lying)
-
-		if(world.time < last_special)
-			to_chat(src, SPAN_WARNING("You cannot leap again so soon."))
-			return TRUE
-
-		var/skill_amt = get_skill_value(SKILL_HAULING) * 0.33
-		var/can_leap_distance = ceil(max(species.ranged_tackle_power, species.ranged_grab_power) * skill_amt)
-		var/try_leap_distance = get_dist(src, A)
-
-		if(can_leap_distance <= 0 || try_leap_distance > can_leap_distance)
-			return FALSE
-
-		var/startloc = get_turf(src)
-		visible_message(SPAN_WARNING("\The [src] crouches, preparing to leap!"))
-		if(!do_after(src, 20) || world.time < last_special || lying)
-			return TRUE
-
-		last_special = world.time + 10 SECONDS
-		status_flags |= LEAPING
-		visible_message(SPAN_DANGER("\The [src] leaps towards \the [A]!"))
-
-		var/last_does_spin = does_spin
-		does_spin = FALSE
-
-		var/move_anim_time = try_leap_distance * 0.85
-		animate(src, pixel_z = 16, time = move_anim_time, easing = SINE_EASING | EASE_IN)
-		animate(pixel_z = 0, time = move_anim_time, easing = SINE_EASING | EASE_OUT)
-
-		throw_at(get_turf(A), can_leap_distance, 1, src)
-
-		does_spin = last_does_spin
-		if(status_flags & LEAPING)
-			status_flags &= ~LEAPING
-
-		if(skill_fail_prob(SKILL_HAULING, 100))
-			Weaken(rand(2,4))
-		
-		if(!ismob(A))
-			return TRUE
-
-		var/mob/M = A
-		var/targetdist = get_dist(startloc, src)
-
-		if(targetdist <= ceil(species.ranged_tackle_power * skill_amt))
-			playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
-			if(M.skill_fail_prob(SKILL_COMBAT, 50))
-				M.Weaken(rand(1,3))
-			visible_message(SPAN_DANGER("\The [src] [(!lying && M.lying) ? "knocks down" : "collides with"] with \the [M]!"))
-
-		if(targetdist <= species.ranged_grab_power && !lying && skill_check(SKILL_COMBAT, SKILL_ADEPT))
-			species.attempt_grab(src, M)
-			return TRUE
+	. = ..() || ((a_intent == I_GRAB || a_intent == I_DISARM) && try_ranged_maneuver(A))
 
 /mob/living/RestrainedClickOn(var/atom/A)
 	return

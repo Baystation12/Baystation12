@@ -1,5 +1,6 @@
 author: MistakeNot4892
 delete-after: True
 changes: 
+  - tweak: "Humans can now leap/tackle at a small distance based on their Athletics skill."
   - tweak: "Leaping and tackling (Vox and Xenophage powers) are now invoked by attempting to make a ranged grab - if it's not a mob you'll just hurl yourself in that direction like an idiot. They have had timing values tweaked and require a short channel before use."
   - tweak: "The various outcomes for leaping/tackling have been made dependant on skill levels in Athletics and Combat. Check the PR for specific values."

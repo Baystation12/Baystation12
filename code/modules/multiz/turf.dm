@@ -60,7 +60,7 @@
 /turf/simulated/open/update_dirt()
 	return 0
 
-/turf/simulated/open/Entered(var/atom/movable/mover)
+/turf/simulated/open/Entered(var/atom/movable/mover, var/atom/oldloc)
 	..()
 	mover.fall()
 

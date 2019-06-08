@@ -80,7 +80,7 @@ default behaviour is:
 			//Leaping mobs just land on the tile, no pushing, no anything.
 			if(status_flags & LEAPING)
 				status_flags &= ~LEAPING
-				loc = tmob.loc
+				forceMove(tmob.loc)
 				now_pushing = 0
 				return
 

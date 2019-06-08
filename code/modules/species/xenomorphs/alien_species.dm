@@ -252,8 +252,8 @@
 	slowdown = -3
 	total_health = 300
 	base_color = "#001a33"
-	ranged_tackle_power = 5
-	ranged_grab_power =   3
+	standing_jump_range = 3
+	ranged_grab_distance =   2
 
 	icobase = 'icons/mob/human_races/species/xenos/body_hunter.dmi'
 	deform =  'icons/mob/human_races/species/xenos/body_hunter.dmi'
@@ -291,8 +291,8 @@
 	total_health = 250
 	icobase = 'icons/mob/human_races/species/xenos/body_sentinel.dmi'
 	deform =  'icons/mob/human_races/species/xenos/body_sentinel.dmi'
-	ranged_tackle_power = 3
-	ranged_grab_power =   1
+	standing_jump_range = 3
+	ranged_grab_distance =   2
 
 	has_organ = list(
 		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
