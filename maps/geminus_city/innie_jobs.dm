@@ -3,8 +3,8 @@
 	title = "Insurrectionist"
 	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
-	total_positions = 12
-	spawn_positions = 6
+	total_positions = -1
+	spawn_positions = -1
 	access = list(632)
 	outfit_type = /decl/hierarchy/outfit/job/geminus_innie
 	selection_color = "#ff0000"
