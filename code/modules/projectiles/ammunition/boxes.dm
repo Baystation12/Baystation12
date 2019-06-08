@@ -210,7 +210,6 @@
 	name = "ammunition box"
 	desc = "A box containing loose rounds of standard EMP ammo."
 	labels = list("haywire")
-	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol/emp
 	caliber = CALIBER_PISTOL
 	max_ammo = 15
@@ -219,7 +218,6 @@
 	name = "ammunition box"
 	desc = "A box containing loose rounds of small EMP ammo."
 	labels = list("haywire")
-	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol/small/emp
 	caliber = CALIBER_PISTOL_SMALL
 	max_ammo = 8
