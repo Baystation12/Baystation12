@@ -302,6 +302,12 @@
 /obj/item/rig_module/voice/installed()
 	..()
 	holder.speech = src
+	holder.verbs |= /obj/item/weapon/rig/proc/alter_voice
+
+/obj/item/rig_module/voice/removed()
+	..()
+	holder.speech = null
+	holder.verbs -= /obj/item/weapon/rig/proc/alter_voice
 
 /obj/item/rig_module/voice/engage()
 

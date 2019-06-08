@@ -255,7 +255,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 											{{/if}}
 											{{if value.can_select == 1}}
 												<div class='inlineBlock'>
-													{{:helper.link((value.name == data.primarysystem) ? 'Selected' : ' Select ', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'select'}, null, (value.name == data.primarysystem) ? 'linkOn' : null)}}
+													{{:helper.link('Select', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'select'}, null, (value.name == data.primarysystem) ? 'linkOn' : null)}}
 												</div>
 											{{/if}}
 											{{if value.can_toggle == 1}}
