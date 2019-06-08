@@ -397,8 +397,8 @@
 	desc = "URF certified crate containing two four of M-26 Bottle Rocket rockets for a total of four rockets to be loaded in the ACL-55."
 	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
 	icon_state = "m26crate"
-	max_storage_space = base_storage_capacity(8)
-	startswith = list(/obj/item/ammo_magazine/m26 = 4)
+	max_storage_space = base_storage_capacity(6)
+	startswith = list(/obj/item/ammo_magazine/m26 = 2)
 	can_hold = list(/obj/item/ammo_magazine/m26)
 	slot_flags = SLOT_BACK
 	max_w_class = ITEM_SIZE_HUGE
