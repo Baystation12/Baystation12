@@ -177,7 +177,6 @@ GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
 		H.verbs |= /mob/living/carbon/human/proc/jumpstart
 
 	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
-	H.verbs |= /mob/living/carbon/human/proc/tackle
 	H.verbs |= /mob/living/carbon/proc/spawn_larvae
 
 	if(H.client)

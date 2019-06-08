@@ -40,7 +40,7 @@
 
 			var/area/location = get_area(loc)
 			if(location.has_gravity && !can_overcome_gravity())
-				return
+				return FALSE
 
 			visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
 			shadow.visible_message("<span class='notice'>[shadow] starts climbing onto \the [A]!</span>")
@@ -51,14 +51,64 @@
 			else
 				visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
 				shadow.visible_message("<span class='warning'>[shadow] gives up on trying to climb onto \the [A]!</span>")
-			return
+			return TRUE
 
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
 		if(istype(G) && G.Touch(A,0)) // for magic gloves
-			return
+			return TRUE
 
 	. = ..()
+
+	if(!. && a_intent == I_GRAB && istype(loc, /turf) && !incapacitated() && !lying)
+
+		if(world.time < last_special)
+			to_chat(src, SPAN_WARNING("You cannot leap again so soon."))
+			return TRUE
+
+		var/can_leap_distance = max(species.ranged_tackle_power, species.ranged_grab_power)
+		var/try_leap_distance = get_dist(src, A)
+		if(can_leap_distance <= 0 || try_leap_distance > can_leap_distance)
+			return FALSE
+		var/startloc = get_turf(src)
+		visible_message(SPAN_WARNING("\The [src] crouches, preparing to spring!"))
+		if(!do_after(src, 20) || world.time < last_special || lying)
+			return TRUE
+
+		last_special = world.time + (17.5 SECONDS)
+		status_flags |= LEAPING
+		visible_message(SPAN_DANGER("\The [src] leaps towards \the [A]!"))
+
+		var/last_does_spin = does_spin
+		does_spin = FALSE
+
+		var/move_anim_time = try_leap_distance * 0.85
+		animate(src, pixel_z = 16, time = move_anim_time, easing = SINE_EASING | EASE_IN)
+		animate(pixel_z = 0, time = move_anim_time, easing = SINE_EASING | EASE_OUT)
+
+		throw_at(get_step(get_turf(A),get_turf(src)), can_leap_distance, 1, src)
+
+		does_spin = last_does_spin
+		if(status_flags & LEAPING)
+			status_flags &= ~LEAPING
+
+		if(!mind || !player_is_antag(mind) || prob(25))
+			Weaken(rand(2,4))
+		
+		if(!ismob(A))
+			return TRUE
+
+		var/mob/M = A
+		var/targetdist = get_dist(startloc, src)
+
+		if(targetdist <= species.ranged_tackle_power)
+			playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
+			M.Weaken(rand(1,3))
+			visible_message(SPAN_DANGER("\The [src] collides with \the [M]!"))
+
+		if(targetdist <= species.ranged_grab_power && !lying)
+			species.attempt_grab(src, M)
+			return TRUE
 
 /mob/living/RestrainedClickOn(var/atom/A)
 	return

@@ -225,6 +225,9 @@
 		/datum/mob_descriptor/build = 0
 	)
 
+	var/ranged_tackle_power = 0
+	var/ranged_grab_power =   0
+
 	var/list/available_cultural_info = list(
 		TAG_CULTURE =   list(CULTURE_OTHER),
 		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
