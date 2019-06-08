@@ -235,10 +235,11 @@
 		if(index > 0 && index <= machine_recipes.len)
 			making = machine_recipes[index]
 
-		//Exploit detection, not sure if necessary after rewrite.
-		if(!making || multiplier < 0 || multiplier > 100)
-			log_and_message_admins("tried to exploit an autolathe to duplicate an item!", user)
+		if(!making)
 			return TOPIC_HANDLED
+		if(!making.is_stack && multiplier != 1)
+			return TOPIC_HANDLED
+		sanitize_integer(multiplier, 1, 100, 1)
 
 		busy = 1
 		update_use_power(POWER_USE_ACTIVE)
