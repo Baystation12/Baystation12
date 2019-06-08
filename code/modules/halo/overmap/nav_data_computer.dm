@@ -217,7 +217,7 @@
 	name = "Fragmented Nav Data Chip"
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "Covenant"
-	known_sectors = list("Vanguard's Mantle","KS7-535")
+	known_sectors = list("Vanguard's Mantle","VT9-042")
 
 /obj/item/nav_data_chip/fragmented/covenant/kig_yar
 	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535","Geminus City Colony")
