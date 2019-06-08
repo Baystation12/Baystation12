@@ -1146,7 +1146,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 /obj/item/clothing/suit/armor/special/odst/donator/winterume
 	name = "Rose's Recon Armor"
 
-	icon_state = "amy-armor_worn"
+	item_state = "amy-armor_worn"
+	icon_state = "amy-armor_obj"
 
 /decl/hierarchy/outfit/winterume_odst
 	name = "winterume - ODST"
