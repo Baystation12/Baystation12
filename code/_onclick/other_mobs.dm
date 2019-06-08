@@ -66,16 +66,19 @@
 			to_chat(src, SPAN_WARNING("You cannot leap again so soon."))
 			return TRUE
 
-		var/can_leap_distance = max(species.ranged_tackle_power, species.ranged_grab_power)
+		var/skill_amt = get_skill_value(SKILL_HAULING) * 0.33
+		var/can_leap_distance = ceil(max(species.ranged_tackle_power, species.ranged_grab_power) * skill_amt)
 		var/try_leap_distance = get_dist(src, A)
+
 		if(can_leap_distance <= 0 || try_leap_distance > can_leap_distance)
 			return FALSE
+
 		var/startloc = get_turf(src)
-		visible_message(SPAN_WARNING("\The [src] crouches, preparing to spring!"))
+		visible_message(SPAN_WARNING("\The [src] crouches, preparing to leap!"))
 		if(!do_after(src, 20) || world.time < last_special || lying)
 			return TRUE
 
-		last_special = world.time + (17.5 SECONDS)
+		last_special = world.time + 10 SECONDS
 		status_flags |= LEAPING
 		visible_message(SPAN_DANGER("\The [src] leaps towards \the [A]!"))
 
@@ -86,13 +89,13 @@
 		animate(src, pixel_z = 16, time = move_anim_time, easing = SINE_EASING | EASE_IN)
 		animate(pixel_z = 0, time = move_anim_time, easing = SINE_EASING | EASE_OUT)
 
-		throw_at(get_step(get_turf(A),get_turf(src)), can_leap_distance, 1, src)
+		throw_at(get_turf(A), can_leap_distance, 1, src)
 
 		does_spin = last_does_spin
 		if(status_flags & LEAPING)
 			status_flags &= ~LEAPING
 
-		if(!mind || !player_is_antag(mind) || prob(25))
+		if(skill_fail_prob(SKILL_HAULING, 100))
 			Weaken(rand(2,4))
 		
 		if(!ismob(A))
@@ -101,12 +104,13 @@
 		var/mob/M = A
 		var/targetdist = get_dist(startloc, src)
 
-		if(targetdist <= species.ranged_tackle_power)
+		if(targetdist <= ceil(species.ranged_tackle_power * skill_amt))
 			playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
-			M.Weaken(rand(1,3))
-			visible_message(SPAN_DANGER("\The [src] collides with \the [M]!"))
+			if(M.skill_fail_prob(SKILL_COMBAT, 50))
+				M.Weaken(rand(1,3))
+			visible_message(SPAN_DANGER("\The [src] [(!lying && M.lying) ? "knocks down" : "collides with"] with \the [M]!"))
 
-		if(targetdist <= species.ranged_grab_power && !lying)
+		if(targetdist <= species.ranged_grab_power && !lying && skill_check(SKILL_COMBAT, SKILL_ADEPT))
 			species.attempt_grab(src, M)
 			return TRUE
 
