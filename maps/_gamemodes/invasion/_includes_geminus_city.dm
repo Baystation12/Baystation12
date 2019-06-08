@@ -10,14 +10,14 @@
 
 	#include "../../faction_bases/Human_Station_2.dmm"
 
-	#include "../../faction_bases/Innie_Base.dmm"
+	//#include "../../faction_bases/Innie_Base.dmm"
 
 	#include "../../Exoplanet Research/includes.dm"
 
 	#include "../../geminus_city/geminus_city.dm"
 	#include "jobdefs_geminus.dm"
 
-	#include "../../ks7_elmsville/ks7_elmsville.dm"
+	//#include "../../ks7_elmsville/ks7_elmsville.dm"
 
 	#include "../../Admin Planet/includes.dm"
 
@@ -27,12 +27,10 @@
 
 	#include "../../Asteroid Listening Post/includes.dm"
 
-	#include "../../UNSC_Thorin/includes.dm"
+	//#include "../../UNSC_Thorin/includes.dm"
 
 	#include "../../Covenant Corvette/includes.dm"
 
-	#include "innie_crew_jobs.dm"
-	#include "innie_crew_spawns.dm"
 	#include "odst_crew_jobs.dm"
 
 	#include "../../civ_ships/CCV_Comet.dm"

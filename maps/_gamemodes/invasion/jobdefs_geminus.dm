@@ -5,8 +5,9 @@
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
-		/datum/job/ship_crew_innie,\
-		/datum/job/ship_cap_innie,\
+		/datum/job/geminus_innie,\
+		/datum/job/geminus_innie/officer,\
+		/datum/job/geminus_innie/commander,\
 		/datum/job/URF_commando,\
 		/datum/job/URF_commando_officer,\
 		/datum/job/unscbertels_co,\
@@ -38,7 +39,8 @@
 
 	allowed_spawns = list(\
 		DEFAULT_SPAWNPOINT_ID,\
-		"Innie Base Spawns",\
+		"Geminus Innie",\
+		"Listening Post Spawn",\
 		"UNSC Base Spawns",\
 		"Covenant Base Spawns",\
 		"Research Facility Spawn",\
