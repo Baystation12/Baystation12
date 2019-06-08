@@ -5,7 +5,7 @@
 	recharge_time = 0
 
 /mob/living/simple_animal/hostile/sentinel
-	name = "sentinel"
+	name = "Sentinel"
 	desc = "An automated defence drone made of advanced alien technology."
 	icon = 'code/modules/halo/Forerunner/Sentinel.dmi'
 	icon_state = "sentinel"
