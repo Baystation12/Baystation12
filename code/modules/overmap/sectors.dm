@@ -3,6 +3,8 @@
 //===================================================================================
 GLOBAL_LIST_EMPTY(overmap_tiles_uncontrolled) //This is any overmap sectors that are uncontrolled by any faction
 
+GLOBAL_LIST_EMPTY(overmap_spawn_near)
+
 var/list/points_of_interest = list()
 
 /obj/effect/overmap
@@ -47,6 +49,8 @@ var/list/points_of_interest = list()
 	//this is used for when we need to iterate over an entire sector's areas
 	var/parent_area_type
 
+	var/list/overmap_spawn_near_me = list()	//type path of other overmap objects to spawn near this object
+
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
 	if(name == "map object")
@@ -62,8 +66,23 @@ var/list/points_of_interest = list()
 	. = ..()
 
 /obj/effect/overmap/Initialize()
-	. = ..()
+	..()
+
+	for(var/entry in overmap_spawn_near_me)
+		GLOB.overmap_spawn_near[entry] = src
+
 	setup_object()
+
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/overmap/LateInitialize()
+	var/obj/effect/overmap/summoning_me = GLOB.overmap_spawn_near[src.type]
+	if(summoning_me)
+		var/list/spawn_locs = list()
+		for(var/turf/t in orange(1,summoning_me))
+			spawn_locs += t
+		src.forceMove(pick(spawn_locs))
+		GLOB.overmap_spawn_near -= src.type
 
 /obj/effect/overmap/proc/get_superstructure_strength() //Returns a decimal percentage calculated from currstrength/maxstrength
 	var/list/hull_strengths = list(0,0)

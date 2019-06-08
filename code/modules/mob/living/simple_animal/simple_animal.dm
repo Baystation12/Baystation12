@@ -25,6 +25,7 @@
 	universal_speak = 0		//No, just no.
 	var/meat_amount = 0
 	var/meat_type
+	var/list/harvest_products = list()
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = 1	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
@@ -235,7 +236,7 @@
 		else
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
 		return
-	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
+	if((meat_type || harvest_products.len) && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
 	else
@@ -278,7 +279,7 @@
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
-/mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
+/mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message = 1)
 	icon_state = icon_dead
 	density = 0
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
@@ -351,6 +352,10 @@
 
 // Harvest an animal's delicious byproducts
 /mob/living/simple_animal/proc/harvest(var/mob/user)
+
+	for(var/harvest_type in harvest_products)
+		new harvest_type(get_turf(src))
+
 	var/actual_meat_amount = max(1,(meat_amount/2))
 	if(meat_type && actual_meat_amount>0 && (stat == DEAD))
 		for(var/i=0;i<actual_meat_amount;i++)

@@ -73,6 +73,7 @@
 	if(target_mob in ListTargets(10))
 		if(ranged)
 			if(get_dist(src, target_mob) <= 6)
+				walk(src, 0)
 				OpenFire(target_mob)
 			else
 				walk_to(src, target_mob, 1, move_to_delay)
