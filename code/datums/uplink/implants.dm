@@ -35,7 +35,7 @@
 	activatable with an emotive trigger. You will have access to it, as long as it is still inside of you."
 
 /datum/uplink_item/item/implants/imp_imprinting
-	name = "Neural Subjugation Implant"
+	name = "Neural Imprinting Implant"
 	desc = "An implant able to be used on someone who is under the influence of Mindbreaker Toxin to give them a \
 	set of law-like instructions to follow. This kit contains a dose of Mindbreaker Toxin."
 	item_cost = 20
