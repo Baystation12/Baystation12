@@ -170,11 +170,8 @@
 
 /obj/item/projectile/deck_gun_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,-1,-1,3,4, adminlog = 0)
-	if(!warned)
-		warned = 1
-		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
-		S.adminwarn_attack()
+	if(!istype(a,/obj/effect/shield))
+		explosion(a,-1,-1,2,4, adminlog = 0)
 
 /obj/item/projectile/overmap/deck_gun_proj
 	name = "deck gun round"
