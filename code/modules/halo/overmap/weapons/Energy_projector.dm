@@ -218,7 +218,10 @@
 				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated/floor))
 					new /turf/simulated/open (F)
 					new /turf/unsimulated/floor/lava/glassed_turf (under_loc)
-			new /turf/unsimulated/floor/lava/glassed_turf(F)
+				else
+					new /turf/unsimulated/floor/lava/glassed_turf(F)
+			else
+				new /turf/unsimulated/floor/lava/glassed_turf(F)
 
 
 /obj/effect/projectile/projector_laser_proj
