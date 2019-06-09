@@ -1,6 +1,7 @@
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
+#DEFINE AUTOGEN_SCAN_DEPTH 2
 GLOBAL_LIST_EMPTY(overmap_tiles_uncontrolled) //This is any overmap sectors that are uncontrolled by any faction
 
 GLOBAL_LIST_EMPTY(overmap_spawn_near)
@@ -89,6 +90,10 @@ var/list/points_of_interest = list()
 	if(isnull(parent_area_type))
 		return
 	var/list/areas_scanthrough = typesof(parent_area_type) - parent_area_type
+	for(var/i = 0, i < AUTOGEN_SCAN_DEPTH,i++)
+		for(var/area in areas_scanthrough)
+			areas_scanthrough |= typesof(area)
+
 	if(areas_scanthrough.len == 0)
 		return
 	for(var/a in areas_scanthrough)
