@@ -66,10 +66,10 @@
 	nextturf = get_step(cur_turf,rightdir)
 	nextturf.ChangeTurf(/turf/simulated/wall/tech)
 	//
-	var/obj/structure/bumpstairs/mystairs = new(cur_turf)
+	var/obj/structure/bumpstairs/mystairs = new bumpstairs_type(cur_turf)
 	mystairs.dir = turn(roomdir, 180)
 	//
-	var/obj/machinery/light/small/S = new bumpstairs_type(cur_turf)
+	var/obj/machinery/light/small/S = new(cur_turf)
 	S.dir = roomdir
 
 	cur_turf = get_step(cur_turf, roomdir)

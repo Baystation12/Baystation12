@@ -8,7 +8,7 @@
 	var/max_length_sidetunnels = 10
 	var/side_chance = 15
 	var/side_tunnel_interval = 5
-	var/bumpstairs_room
+	var/bumpstairs_room_type
 	var/do_pathing = 1
 	var/roomlocs_interval = 20
 	var/rat_chance = 0.5
@@ -47,6 +47,8 @@
 
 		//tunnel
 		var/tunnel_type = /turf/simulated/floor/plating
+		if(prob(20))
+			tunnel_type = /turf/simulated/floor/water/shallow
 		if(cur_length == target_length && closed_end)
 			tunnel_type = /turf/simulated/wall/tech
 		cur_turf.ChangeTurf(tunnel_type)
@@ -56,7 +58,7 @@
 		//left wall
 		var/walltype = /turf/simulated/wall/tech
 		if(prob(33))
-			walltype = pick(/turf/simulated/mineral, /turf/simulated/floor/plating)
+			walltype = pick(/turf/simulated/mineral, /turf/simulated/floor/plating, /turf/simulated/floor/water)
 		else if(cur_length % light_intervals == 0)
 			//check if we can place a light here
 			lightdirs.Add(leftdir)
@@ -70,7 +72,7 @@
 		//right wall
 		walltype = /turf/simulated/wall/tech
 		if(prob(33))
-			walltype = pick(/turf/simulated/mineral, /turf/simulated/floor/plating)
+			walltype = pick(/turf/simulated/mineral, /turf/simulated/floor/plating, /turf/simulated/floor/water, /turf/simulated/floor/water/shallow)
 		else if(cur_length % light_intervals == 0)
 			//check if we can place a light here
 			lightdirs.Add(rightdir)
@@ -83,7 +85,8 @@
 
 		//hostile giant rat
 		if(prob(rat_chance))
-			new /mob/living/simple_animal/hostile/giant_rat/(cur_turf)
+			var/mob/living/simple_animal/hostile/giant_rat/rat = new(cur_turf)
+			rat.respawning = 1
 
 		//side tunnel
 		if(cur_length - last_side_tunnel > side_tunnel_interval)
@@ -112,12 +115,12 @@
 	//remove the diagonal corner tunnel ends
 	roomlocs.len -= 2
 
-	if(bumpstairs_room)
+	if(bumpstairs_room_type)
 		var/turf/target_turf = pick(roomlocs)
 		var/roomdir = roomlocs[target_turf]
-		var/obj/effect/landmark/bumpstairs_room/bumpstairs_room = new(target_turf)
-		bumpstairs_room.dir = roomdir
-		bumpstairs_room.generate_bumpstairs_room()
+		var/obj/effect/landmark/bumpstairs_room/my_room = new bumpstairs_room_type(target_turf)
+		my_room.dir = roomdir
+		my_room.generate_bumpstairs_room()
 
 	qdel(src)
 
