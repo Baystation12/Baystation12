@@ -65,6 +65,15 @@
 	var/list/pain_scream_sounds = list()
 	var/list/death_sounds = list()
 
+	var/respawning = 0
+	var/respawn_time = 5 MINUTES
+	var/turf/spawn_turf
+
+/mob/living/simple_animal/New()
+	. = ..()
+	if(respawning)
+		spawn_turf = get_turf(src)
+
 /mob/living/simple_animal/Life()
 	..()
 
@@ -75,6 +84,10 @@
 			switch_from_dead_to_living_mob_list()
 			set_stat(CONSCIOUS)
 			set_density(1)
+		else if(respawning)
+			if(world.time > timeofdeath + respawn_time)
+				health = maxHealth
+				src.forceMove(spawn_turf)
 		return 0
 
 
@@ -280,6 +293,7 @@
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message = 1)
+	timeofdeath = world.time
 	icon_state = icon_dead
 	density = 0
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
