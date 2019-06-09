@@ -49,10 +49,8 @@
 /obj/item/projectile/overmap/proc/do_sector_hit(var/z_level,var/obj/effect/overmap/object_hit)
 	var/list/hit_bounds = object_hit.map_bounds
 	if(!isnull(overmap_fired_by) && object_hit == overmap_fired_by.targeting_datum.current_target)
-		hit_bounds = overmap_fired_by.targeting_datum.get_target_location_coord_list()
-	/*if(prob(15))
-		hit_bounds  = pick(object_hit.weapon_locations)*/
-
+		var/list/new_bounds = overmap_fired_by.targeting_datum.get_target_location_coord_list()
+		hit_bounds = new_bounds
 	sector_hit_effects(z_level,object_hit,hit_bounds)
 
 /obj/item/projectile/overmap/proc/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
@@ -71,7 +69,16 @@
 	var/end_co_ords
 	var/list/bounds_to_use = overmap_object_hit.map_bounds
 	if(!isnull(overmap_fired_by) && overmap_object_hit == overmap_fired_by.targeting_datum.current_target)
-		bounds_to_use = overmap_fired_by.targeting_datum.get_target_location_coord_list()
+		var/list/new_bounds = overmap_fired_by.targeting_datum.get_target_location_coord_list()
+		var/prob_hit_newbounds
+		if(overmap_object_hit.fore_dir == EAST || WEST)
+			prob_hit_newbounds = ((new_bounds[3] - new_bounds[1])/(bounds_to_use[3] - bounds_to_use[1])) * 100
+		else
+			prob_hit_newbounds = ((new_bounds[4] - new_bounds[2])/(bounds_to_use[4] - bounds_to_use[2])) * 100
+		if(prob(prob_hit_newbounds))
+			bounds_to_use = new_bounds
+		else
+			return
 
 	if(overmap_object_hit.fore_dir == EAST || WEST)
 		start_co_ords = generate_co_ords_x_start(bounds_to_use)
