@@ -25,7 +25,7 @@
 
 	var/list/decals
 
-	var/movement_delay
+	var/movement_delay = 0
 
 /turf/New()
 	..()
@@ -255,3 +255,6 @@ var/const/enterloopsanity = 100
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, speed)
+
+/turf/proc/get_movement_delay()
+	return movement_delay
