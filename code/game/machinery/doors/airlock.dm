@@ -971,16 +971,14 @@ About the new airlock wires panel:
 
 	if(isWelder(item))
 		var/obj/item/weapon/weldingtool/WT = item
-		if(!WT.isOn())
-			return 0
 		if(!WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 	else if(istype(item,/obj/item/weapon/gun/energy/plasmacutter)) //They could probably just shoot them out, but who cares!
 		var/obj/item/weapon/gun/energy/plasmacutter/cutter = item
-		cutter.slice(user)
+		if(!cutter.slice(user))
+			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 		cut_delay *= 0.66

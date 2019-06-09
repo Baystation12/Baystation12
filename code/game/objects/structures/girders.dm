@@ -79,17 +79,22 @@
 	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
 		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
-			cutter.slice(user)
+			if(!cutter.slice(user))
+				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
-		if(do_after(user,30,src))
+		if(do_after(user,reinf_material ? 40: 20,src))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
+			if(reinf_material)
+				reinf_material.place_dismantled_product(get_turf(src))
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		if(do_after(user,40,src))
+		if(do_after(user,reinf_material ? 60 : 40,src))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
+			if(reinf_material)
+				reinf_material.place_dismantled_product(get_turf(src))
 			dismantle()
 
 	else if(isScrewdriver(W))
@@ -250,6 +255,10 @@
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+			if(!cutter.slice(user))
+				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
 		if(do_after(user,30,src))

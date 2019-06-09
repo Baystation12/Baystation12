@@ -274,7 +274,8 @@
 				return
 		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
-			cutter.slice(user)
+			if(!cutter.slice(user))
+				return
 			slice_into_parts(W, user)
 			return
 		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)

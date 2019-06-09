@@ -84,7 +84,8 @@
 		return
 	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
 		var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
-		cutter.slice(user)
+		if(!cutter.slice(user))
+			return
 		deconstruct(user)
 		return
 	if(isCrowbar(C) && plated_tile)
