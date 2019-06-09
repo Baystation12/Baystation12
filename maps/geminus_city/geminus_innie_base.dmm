@@ -48,7 +48,7 @@
 "aV" = (/obj/structure/table/steel_reinforced,/obj/item/clothing/suit/straight_jacket,/obj/item/clothing/suit/straight_jacket,/obj/item/clothing/mask/muzzle,/obj/item/clothing/mask/muzzle,/obj/effect/floor_decal/corner/red/full,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "aW" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/effect/floor_decal/corner/red/full,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "aX" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/melee/baton/loaded,/obj/item/weapon/melee/baton/loaded,/obj/effect/floor_decal/corner/red/full,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
-"aY" = (/obj/structure/table/steel_reinforced,/obj/machinery/cell_charger,/obj/effect/floor_decal/corner/red/full,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
+"aY" = (/obj/structure/table/steel_reinforced,/obj/machinery/cell_charger,/obj/effect/floor_decal/corner/red/full,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "aZ" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/reinforced,/area/geminus_underground/innie/echo)
 "ba" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/effect/floor_decal/corner/grey/diagonal,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "bb" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/effect/floor_decal/corner/grey/diagonal,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
@@ -179,7 +179,7 @@
 "dw" = (/obj/structure/table/standard,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (WEST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 8},/area/geminus_underground/innie/echo)
 "dx" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/payload{anchored = 1; free_explode = 1},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (EAST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 4},/area/geminus_underground/innie/echo)
 "dy" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor,/area/geminus_underground/innie/echo)
-"dz" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/item/device/multitool,/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"dz" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/item/device/multitool,/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (EAST)"; icon_state = "warning"; dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "dA" = (/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "dB" = (/obj/machinery/power/terminal{tag = "icon-term (EAST)"; icon_state = "term"; dir = 4},/obj/structure/cable/orange{icon_state = "0-2"},/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "dC" = (/obj/effect/floor_decal/industrial/warning/full,/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/smes/buildable/max_cap_in_out,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
@@ -190,7 +190,7 @@
 "dH" = (/obj/structure/bed/chair/comfy/captain{tag = "icon-capchair_preview (WEST)"; name = "Comfy Office chair"; icon_state = "capchair_preview"; dir = 8},/turf/simulated/floor/tech/orange,/area/geminus_underground/innie/echo)
 "dI" = (/obj/structure/table/standard,/turf/simulated/floor/tech/orange,/area/geminus_underground/innie/echo)
 "dJ" = (/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/nav_computer/innie,/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (SOUTHEAST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 6},/area/geminus_underground/innie/echo)
-"dK" = (/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"dK" = (/obj/structure/table/rack,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "dL" = (/obj/machinery/power/terminal{tag = "icon-term (EAST)"; icon_state = "term"; dir = 4},/obj/structure/cable/orange{icon_state = "0-2"},/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/cable/orange,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "dM" = (/obj/effect/floor_decal/industrial/warning/full,/obj/structure/cable/blue,/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/smes/buildable/max_cap_in_out,/obj/structure/sign/warning/high_voltage{pixel_x = 32},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "dN" = (/obj/machinery/button/remote/blast_door{id = 1996; name = "Brig Gate"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/wall/r_wall,/area/geminus_underground/innie/echo)
@@ -218,9 +218,9 @@
 "ej" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "ek" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate/hydroponics/prespawned,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "el" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate,/turf/simulated/floor,/area/geminus_underground/innie/delta)
-"em" = (/obj/structure/reagent_dispensers/watertank,/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"em" = (/obj/structure/reagent_dispensers/watertank,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "en" = (/obj/structure/table/rack,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
-"eo" = (/obj/structure/table/rack,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"eo" = (/obj/structure/table/rack,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "ep" = (/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "eq" = (/obj/structure/closet{name = "Tools Closet"},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "er" = (/turf/simulated/floor,/area/geminus_underground/innie/charlie)
@@ -236,15 +236,16 @@
 "eB" = (/obj/structure/table/woodentable,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/geminus_underground/innie/echo)
 "eC" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate/freezer,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "eD" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe/steroid,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor,/area/geminus_underground/innie/delta)
-"eE" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/vending/engivend,/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"eE" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/vending/engivend,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"eF" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
 "eG" = (/obj/structure/sign/neon/inn,/turf/simulated/wall/r_wall,/area/geminus_underground/innie/echo)
 "eH" = (/obj/structure/table/woodentable,/obj/machinery/reagentgrinder,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "eI" = (/obj/machinery/seed_extractor,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "eJ" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/syringes,/obj/item/weapon/storage/box/syringes,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "eK" = (/obj/machinery/biogenerator,/turf/simulated/floor,/area/geminus_underground/innie/delta)
-"eL" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
-"eM" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
-"eN" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"eL" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHEAST)"; icon_state = "warning"; dir = 6},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"eM" = (/obj/machinery/atmospherics/binary/pump/high_power{dir = 1},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"eN" = (/obj/machinery/atmospherics/binary/pump/high_power,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "eO" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (EAST)"; icon_state = "cooling_manifold"; dir = 4},/obj/structure/cable/orange{icon_state = "1-2"},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "eP" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "eQ" = (/obj/structure/cable{icon_state = "0-2"; pixel_y = 1; d2 = 2},/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 5},/obj/structure/closet,/obj/random/clothing,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
@@ -264,11 +265,11 @@
 "fe" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "ff" = (/obj/machinery/beehive,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "fg" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe/steroid,/turf/simulated/floor,/area/geminus_underground/innie/delta)
-"fh" = (/obj/structure/reagent_dispensers/fueltank,/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"fh" = (/obj/structure/reagent_dispensers/fueltank,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "fi" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{tag = "icon-map (WEST)"; icon_state = "map"; dir = 8},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
-"fj" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"fj" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "fk" = (/obj/machinery/power/fusion_drive,/obj/effect/floor_decal/industrial/warning/full,/obj/structure/cable/orange,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
-"fl" = (/obj/machinery/atmospherics/binary/fusion_cooling,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/effect/floor_decal/industrial/warning/full,/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"fl" = (/obj/machinery/atmospherics/binary/fusion_cooling,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/industrial/warning/full,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "fm" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
 "fn" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/geminus_underground/innie/charlie)
 "fo" = (/mob/living/simple_animal/npc/colonist/crop_trader,/turf/simulated/floor,/area/geminus_underground/innie/charlie)
@@ -277,9 +278,9 @@
 "fr" = (/mob/living/simple_animal/npc/colonist/mineral_trader,/turf/simulated/floor/plating,/area/geminus_underground/innie/charlie)
 "fs" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/geminus_underground/innie/charlie)
 "ft" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/crate,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor,/area/geminus_underground/innie/delta)
-"fu" = (/obj/machinery/vending/engineering,/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor,/area/geminus_underground/innie/delta)
-"fv" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
-"fw" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"fu" = (/obj/machinery/vending/engineering,/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"fv" = (/obj/machinery/atmospherics/binary/pump/high_power{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"fw" = (/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "fx" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "fy" = (/obj/effect/floor_decal/corner/red/full,/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "fz" = (/obj/structure/closet,/obj/random/gloves,/obj/random/clothing,/obj/random/clothing,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
@@ -293,7 +294,7 @@
 "fH" = (/obj/structure/table/steel,/turf/simulated/floor/plating,/area/geminus_underground/innie/charlie)
 "fI" = (/obj/structure/table/steel,/obj/random/glasses,/turf/simulated/floor,/area/geminus_underground/innie/charlie)
 "fJ" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/light,/turf/simulated/floor,/area/geminus_underground/innie/delta)
-"fK" = (/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"fK" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "fL" = (/obj/machinery/light,/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "fM" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/obj/machinery/door/blast/regular{id = 1996},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "fN" = (/obj/structure/extinguisher_cabinet,/turf/simulated/wall/r_wall,/area/geminus_underground/innie/delta)
@@ -684,7 +685,7 @@
 "ni" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/charlie)
 "nj" = (/obj/machinery/door/airlock/halo{name = "APC Room"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/geminus_underground/innie/charlie)
 "nk" = (/obj/machinery/light/small{dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/geminus_underground/innie/charlie)
-"nl" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/bravo)
+"nl" = (/obj/machinery/door/airlock/halo{name = "Atmospherics Storage"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
 "nm" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "nn" = (/turf/simulated/floor,/area/geminus_underground/innie/echo)
 "no" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/bravo)
@@ -693,14 +694,14 @@
 "nr" = (/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/decal/cleanable/dirt,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/bravo)
 "ns" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "nt" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
-"nu" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/cable/blue,/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"nu" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/cable/blue{icon_state = "0-2"},/obj/structure/cable/blue,/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
 "nv" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor,/area/geminus_underground/innie/delta)
 "nw" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/floor_decal/industrial/warning,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
 "nx" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/wall/r_wall,/area/geminus_underground/innie/delta)
 "ny" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
 "nz" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
 "nA" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
-"nB" = (/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/structure/cable/blue{tag = "icon-0-1 (EAST)"; icon_state = "0-1"; dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/charlie)
+"nB" = (/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/geminus_underground/innie/charlie)
 "nC" = (/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/bravo)
 "nD" = (/obj/structure/sign/directions/medical{dir = 1; pixel_x = -32},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/bravo)
 "nE" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/bravo)
@@ -715,6 +716,24 @@
 "nN" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
 "nO" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/charlie)
 "nP" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"nQ" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
+"nR" = (/obj/machinery/light{dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
+"nS" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
+"nT" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/bravo)
+"nU" = (/obj/machinery/light/small{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"nV" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/delta)
+"nW" = (/obj/machinery/pipedispenser,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie)
+"nX" = (/obj/machinery/door/airlock/halo{name = "Atmospherics Storage"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie)
+"nY" = (/obj/machinery/light/small,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie)
+"nZ" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"oa" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"ob" = (/obj/machinery/atmospherics/binary/pump/high_power{dir = 8},/turf/simulated/floor/plating,/area/geminus_underground/innie/delta)
+"oc" = (/obj/effect/floor_decal/industrial/warning/full,/obj/machinery/atmospherics/unary/freezer{dir = 4},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"od" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor,/area/geminus_underground/innie/delta)
+"oe" = (/obj/structure/table/rack,/obj/effect/floor_decal/corner/red/diagonal,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
+"of" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie)
+"og" = (/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie)
+"oh" = (/obj/machinery/light/small,/turf/simulated/floor/wood,/area/geminus_underground/innie/bravo)
 
 (1,1,1) = {"
 acacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacac
@@ -739,7 +758,7 @@ acagagagagagagagagagagagagagagagagagagagagagagagagagagahaiaTataEaEaEaEaEaEaEaEau
 acagagagagagagagagagagagagagagagagagagagagagagagagagagahbcbdauaEaEaEaEaEaEbeaEauaqaUaqaUaqaqaqbfahaIaJaJaJaJaJaJaJaJaJaKbabababgbabhbababibabjbkbjahagagagagagagagagagagagagagagagagagagagagagagagagagac
 acagagagagagagagagagagagagagagagagagagagagagagagagagagahahahahahahahahahaublauaubmboahahahahahahahahahahahahaIaJaJaJaJaKbababababababababababababaahagagagagagagagagagagagagagagagagagagagagagagagagagac
 acagagagagagagagagagagagagagagagagagagagagagagahahahahahahahbpnnnenfaqaqaqaqaqaqaUaUahahahahahahahahahahahahaZaJaJaJaJaKbababababababababibabjbkbqahagagagagagagagagagagagagagagagagagagagagagagagagagac
-acagagagagagagagagagagagagagagagagagagagagagahbrahahbsahahahbLdydNfyaqaqaqahahahahahahahbubvbwbxbybubybzahahaIaJaJaJaJaKbababAbBbCbDbababEbabababaahagagagagagagagagagagagagagagagagagagagagagagagagagac
+acagagagagagagagagagagagagagagagagagagagagagahbrahahbsahahahbLdydNfyaqaqaqahahahahahahahbubvbwbxbyoebybzahahaIaJaJaJaJaKbababAbBbCbDbababEbabababaahagagagagagagagagagagagagagagagagagagagagagagagagagac
 acagagagagagagagagagagagagagagagagagagagagahahbFbGbHbIbJbKahahahahfMbMahbtahbNbObQbRbSahbTbTbUbUbTbTbTbTahbVahahahahahahahahahahahahbWbeahahbXbXbXbXbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbZ
 acagagagagagagagagagagagagagagagagagagagagahcacbcbcbcbcbcbcccececcfWbTbTbTahcfbOcgchchahcicjbwclcmbucmbTbTbTcnaEcoaEaEaEaEaEaEaEaEaEaEaEaEaEcpcpbXbXbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbZ
 acagagagagagagagagagagagagagagagagagagagagahcrcbcscbcbcbcbcccecectfWbTcucvahcfbObObRbSahbTcjclbwcmcmbubTbTcwcnaEaEaEaEaEaEaEaEaEaEcxaEaEaEaEcpcpbXbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbZ
@@ -747,30 +766,30 @@ acagagagagagagagagagagagagagagagagagagagagahahcyczcbcbcAcBahahahcCgkbUahahahahcD
 acagagagagagagagagagagagagagagagagagagagagahahahcCcNcOahahahahahahgkbUahcPcQcPaqcPcQcPahbzbvbUbUbucRbybucScScScScScScTcUcScScScScScScScScScScVcpcWcXcYcZdabXbYbYbYbYcMcMcMcMcMcMcMcMbYbYbYbYbYbYbYbYbYbZ
 acagagagagagagagagagagagagagagagagagagagagagahdbdccbcbbJddahahahahfWdeahaUaUaUaUaUaUaUahahahdfbTcScScScScScSdgdhdicSdjdjcSdkdidhdgcSdgdhdicScpcpdlcXcXcXcXbXbYbYbYbYcMcMcMcMcMcMcMcMcMcMcMbYbYbYbYbYbYbZ
 fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbaCdmcbcbcbcbdnahahahahfWbTahdodpdoaUdodpdoahahahbTbTcScScScScScSdqdjdjdrdjdjdrdjdjdjdqcSdqdjdjdrcpcpdldsdtdudvbXbYbYbYcMcMcMcMcMcMcMcMcMcMcMcMbYbYbYbYbYbYbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbahdwcbcbcbcbdxahahahahnmbUahahahahcDahahahahbVahbTbUcSdzdAdBdCcSdDdjdEcSdjdjcSdjdEdjdDcSdDdjdEcScpcpdFbXbXbXbXbXbYbYbYcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMbYbYbYbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbahdwcbcbcbcbdxahahahahnmbUahahahahcDahahahahahbVbTbUcSdznUdBdCcSdDdjdEcSdjdjcSdjdEdjdDcSdDdjdEcScpcpdFbXbXbXbXbXbYbYbYcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMbYbYbYbZ
 fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbahdGdHdIdIcAdJahahahahfWbTbTbTbTbTbTbTbTbTbTbTbTbUbUcSdKdAdLdMcScScScScScTcUcScScScScScScScScScSnhninjnknBbXbYbYbYbYbYbYcMcMcMcMcMcMcMcMcMcMcMcMcMcMbYbYbYbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcahahahahahahahahahahahfWbTbTdObTbTbTbTbTbTbTdObTbUbUcSdKdAdLdPcSdgdhdicSdjdjcSdkdidhdgcSdgdhdicSnLcpbXeZeZbXbYbYbYbYbYbYcMcMcMcMcMcMcMcMcMcMcMcMcMcMbYbYbYbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcahdQdRdSdTahdUdVdWdXahnsbTcScScScScScScScScScScScSdYcSdKdAdZeacSdqdjdjdrdjdjdrdjdjdjdqcSdqdjdjdrnLcpbXbXbXbXbXbXbXbXbXbXbXbXbXbXcMcMcMcMcMcMcMcMcMcMbYbYbYbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcahebececedaheeeeeeefahfWbTcSegegegeheiejdAekelcSemdAeneoepdZeqcSdDdjdEcSdjdjcSdjdEdjdDcSdDdjdEcSnLcpbXereserereteuererereresevewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcfcfcaheyecezecaheeeAeBeAahntbTcSdAdAdAdAdAdAdAeCeDcSeEdAdAdAdAdZnPcScScScScScTcUcScScScScScScScScScSnMcpbXererererererererererererewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcfcfcahahaheGcDahcDahbVahahfWbTcSegdAeHeIeJeKdAekelcSemdAeLeMeNeOePcSdgdhdicSdjdjcSdjeQeReScSdgdhdicSnLcpbXereVeWeXeXeXeXeXeXeYeZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfdfdfdahbTbTbTfebTbTbTbTbTgkbUcSegdAeHeIeJffdAeCfgcSfhdAfieNfjfkflcSdqdjdjdrdjdjdrdjdjdjfmcSdqdjdjdrnLcpbXfnfofpeZeZeZeZeZeZfqfrfsewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfdfdfdahbTdObTbTbTbTbTbTcwgkbUcSdAdAdAdAdAdAdAekftcSfudAfvdAfwfxnucSdDdjdEcSdjdjcSdjfzdjfAcSdDdjdEcSnLcpfBerfCfDeZeZeZfFeZeZfGfHfIewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfdfdfdcScScScSdrcScScScScSfWbTcSegegegfJegegdAeCfgcSfKdAdAdAfLdAnvfNcScScScScTcUcScScScScScScScScScSnMcpfOererfQeZeZeZeZeZeZfReZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcahahahahahahahahahahahfWbTbTdObTbTbTbTbTbTbTdObTbUbUcSeodAdLdPcSdgdhdicSdjdjcSdkdidhdgcSdgdhdicSnLcpbXeZeZbXbYbYbYbYbYbYcMcMcMcMcMcMcMcMcMcMcMcMcMcMbYbYbYbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcahdQdRdSdTahdUdVdWdXahnsbTcScScScScScScScScScScScSdYcSeLdAdZeacSdqdjdjdrdjdjdrdjdjdjdqcSdqdjdjdrnLcpbXbXbXbXbXbXbXbXbXbXbXbXbXbXcMcMcMcMcMcMcMcMcMcMbYbYbYbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcahebececedaheeeeeeefahfWbTcSegegegeheiejdAekelcSemdAfwfwepdZeqcSdDdjdEcSdjdjcSdjdEdjdDcSdDdjdEcSnLcpbXereserereteuererereresevewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcfcfcaheyecezecaheeeAeBeAahntbTcSdAdAdAdAdAdAdAeCeDcSfhdAeMeNdAdZnPcScScScScScTcUcScScScScScScScScScSnMcpbXererererererererererererewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcfcfcahahaheGcDahcDahbVahahfWbTcSegdAeHeIeJeKdAekelcSfKdAfifjfveOePcSdgdhdicSdjdjcSdjeQeReScSdgdhdicSnLcpbXereVeWeXeXeXeXeXeXeYeZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfdfdfdahbTbTbTfebTbTbTbTbTgkbUcSegdAeHeIeJffdAeCfgcSocoanZdAdAfkflcSdqdjdjdrdjdjdrdjdjdjfmcSdqdjdjdrnLcpbXfnfofpeZeZeZeZeZeZfqfrfsewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfdfdfdahbTdObTbTbTbTbTbTcwgkbUcSdAdAdAdAdAdAdAekftcSfudAodoaobfxnucSdDdjdEcSdjdjcSdjfzdjfAcSdDdjdEcSnLcpfBerfCfDeZeZeZfFeZeZfGfHfIewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfdfdfdcScScScSdrcScScScScSfWbTcSegegegfJegegdAeCfgcSeEdAdAdAfLdAnvfNcScScScScTcUcScScScScScScScScScSnMcpfOererfQeZeZeZeZeZeZfReZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
 fafbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfdfdfdcSdjdjfSdjdjcSfTfVcSnwfXfYcScScScSfZfNdrcScSgacSdrcSfNcScSnxcSdjdjdjdjdjdjcSgbgcgdgecSgffmggcSnLcpbXererfQeZfFeZgheZeZfReZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdcSdjdjdjdjdjcSgiepgjnynznznzgGnznznznznznznznznznAnznznznznNnznznznznznznznznznznznznznznznznznOglcpererfQeZeZeZeZeZeZgmeZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdcSdjdjgngodjcSgpgqcSdjdjgndjjldjgrdjdjdjdjgndjdjdjdjdjdjdjdjgrdjdjdjgndjdjdjdjdjdjdjgndjdjdjdjcpglgsererfQfFeZeZeZeZeZfReZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdcScSgtcScScScScScScScScScScSjldjcScScSdrcScScScScScScScSdrcScScScScScSdjdjcScScSgucScScScScScScpcpbXfngvgwgxgxgygygygygzeZgAewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdfdfcfcfcgBgBcScScSgCgCgEgFcSjydjcSgHgHdjgHgHcSgIgJenengKepgLgMgNgOcScSdjdjcSfTdAdAgPcSdgdhdicScpcpgQergRgSerererererergTgRgUewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdfdfcfcfcgBgBgVgngVdjdjdjdjdrjldjcSgWgHdjgHgXcSepepepepepepepepepepcSfNdjdjcSgiepdAgYcSdqdjdjdrcpcpfBgZgZhaeserererererhaergUewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdfdfcfcfcfcgBcScShbhcdjdjdjcSjldjcSgHgHdjgHgHcShdheephfhgepephfhhhicShjdjcUcSgpgqhkhlcSdDdjdEcScphmbXhnhnhnhoerererererereseZewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfdfdfdfdfcfcfcfcfcfcfcfcfccShphqhrhscSmhdjcScScSdrcScScScScScScScSdrcScScScScScSdjdjcScScScScScScScScScScpcpbXbXbXbXbXbXfBbXhtbXbXbXbXbXbXcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfcfcfcfcfcfcfcfcfcfccScScScScShvjldjdjdjdjdjdjdjdjdjdjdjdjdjdjdjdjfSdjdjdjdjdjdjdjdjdjdjdjdjdjhwcpcpcpbXbXcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfcfcfcfcfcfcfcfcfcfccShxhyhzhAhBjldjgrdjdjdjdjdjgndjdjdjdjdjdjdjdjdjdjdjgrdjdjdjgndjdjdjdjdjdjcpcphChCbXbXcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfcfcfcfcfcfcfcfcfcfccShAhAhAhAhDnohEhFhFhFhFhFhFhFhFhFhFhFhFhGhEhFhFhFhFhFhHhFhFhFhFhFhFhFhGhEhFbXhIhJbXbXcMcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
-fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcfcfcfcfcfccScScScScScShLhMhNhOhDnohEhFhPhQhRhShThUhVhWhXhYhFhEhEhFhZiahZiaibicidieifieighFhEhEhFerihihiiijexcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
-ikilililililililililililililimimimimimimimimimimimhFhFhFhFhFhFhFhFhFhFhFhFnohEinhQiohPipiqirishWhXithFhEhEiuiviwiviwixiyidiziAiAiBiuhEhEhFererererijexcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
-ikilililililililililililililimimimimimimimimimimhFhFhFiDiEiDiDiFiDiDiDhEiGnohEiHhPhPhPiriIiJiKhWhXiLhFnlhEhEiviviviviviMidiNivivivhEhEhEhFeriOiPerijexcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
+fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdcSdjdjdjdjdjcSgiepgjnynznznzgGnznznznznznznznznznAnznznznVnNnznznznznzeFnznznznznznznznznznznznOglcpererfQeZeZeZeZeZeZgmeZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdcSdjdjgngodjcSgpgqcSdjdjgndjjldjgrdjdjdjdjgndjdjdjdjdjdjdjdjgrdjdjdjgnjldjdjdjdjdjdjgndjdjdjdjcpglgsererfQfFeZeZeZeZeZfReZerewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdcScSgtcScScScScScScScScScScSjldjcScScSnlcScScScScScScScSdrcScScScScScSjldjcScScSgucScScScScScScpcpbXfngvgwgxgxgygygygygzeZgAewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdfdfcfcfcgBgBcScScSgCgCgEgFcSjydjcSgHgHdjhfgHcSgIgJenengKepgLgMgNgOcScSjldjcSfTdAdAgPcSdgdhdicScpcpgQergRgSerererererergTgRgUewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdfdfcfcfcgBgBgVgngVdjdjdjdjdrjldjcSgWgHdjgHgXcSepepepepepepepepepepcSfNjldjcSgiepdAgYcSdqdjdjdrcpcpfBgZgZhaeserererererhaergUewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfdfdfdfdfdfdfdfcfcfcfcgBcScShbhcdjdjdjcSjldjcSgHgHdjgHgHcShdheephfhgepephfhhhicShjjlcUcSgpgqhkhlcSdDdjdEcScphmbXhnhnhnhoerererererereseZewexcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfdfdfdfdfcfcfcfcfcfcfcfcfccShphqhrhscSmhdjcScScSnlcScScScScScScScSdrcScScScScScSjldjcScScScScScScScScScScpcpbXbXbXbXbXbXfBbXhtbXbXbXbXbXbXcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfcfcfcfcfcfcfcfcfcfccScScScScShvjldjdjdjdjdjdjdjdjdjdjdjdjdjnQnznznRnznznznSdjdjdjdjdjdjdjdjdjhwcpcpcpbXbXcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfcfcfcfcfcfcfcfcfcfccShxhyhzhAhBjldjgrdjdjdjdjdjgndjdjdjdjdjjldjdjdjdjdjgrdjdjdjgndjdjdjdjdjdjcpcphChCbXbXcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMcMbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfdfdfdfcfcfcfcfcfcfcfcfcfccShAhAhAhAhDnohEhFhFhFhFhFhFhFhFhFhFhFhFnEhEhFhFhFhFhFhHhFhFhFhFhFhFhFhGhEhFbXhIhJbXbXcMcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
+fafbfbfbfbfbfbfbfbfbfbfbfbfbfcfcfcfcfcfcfcfcfcfcfcfccScScScScScShLhMhNhOhDnohEhFhPhQhRhShThUhVhWhXhYhFnohEhFhZiahZiaibicidieifieighFhEhEhFerihihiiijexcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
+ikilililililililililililililimimimimimimimimimimimhFhFhFhFhFhFhFhFhFhFhFhFnohEinhQiohPipiqirishWhXithFnohEiuiviwiviwixiyidiziAiAiBiuhEhEhFererererijexcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
+ikilililililililililililililimimimimimimimimimimhFhFhFiDiEiDiDiFiDiDiDhEiGnohEiHhPhPhPiriIiJiKhWhXiLhFnThEhEiviviviviviMidiNivivivhEhEhEhFeriOiPerijexcMcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
 ikilililililililililililililililililimimimimimimhFhFhFiFiFiDiQiDiRiSiSiThFnqhEiVhPhPhPhQioiWiXhWhXiYhFiUhEiZivivjaivivjbjcjdiviviviZhEjehFjfjgjherijexexcMcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
 ikilililililililililililililililililimimimimimimhFhFjijjiDiFiDiDiQiQiDhEjknrhEjmipjnhPhPjojohPjpjqjrhFhEhEiujsivivivivivivivivivjtiuhEhEhFerjujverijngexexcMcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
 ikilililililililililililililililililimimimimimimhFhFhFjwiDiDiDiFjxiDiDiDhEnChEhFhPhQjzjAjAjzjBjChPjDhFjEhEhFjFjIjJjKjLjNjKjLjOivjPhFhEhEhFerjQjRerijexexexexcMcMcMcMcMcMcMcMhKhKhKhKhKhKhKhKhKhKhKhKhKbZ
@@ -785,18 +804,18 @@ ikililililililililililililililililililililimimimimhFhFhFhFhFhFhFhFhFhFhFhFnEhEhF
 ikilililililililililililililililililililililililafafafafafafafafafafafafafnFhuhFmzlZlZlZmohFmAhXhXmBhXhXhXhXhXlqlMlqmChHmDlZlZlZmEhFhEhEinermFmFerbXafafafafafafafafeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTab
 ikilililililililililililililililililililililililafafhujGhuhuhujGhujHhuhuhunFhuhFmGlZlZlZmHhFmIhXhXlMlqhXhXhXhXhXhXhXhXhFmHlZlZlZmJhFhEjehFjfmFmFerbXhuhujHhujGhuafafeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTab
 ikilililililililililililililililililililililililafaahuhuhuhuhuhuhujMhuhuhunFhuinmDlZlZlZmKhFmLhXhXmMhXhXhXlBlMlqhXlqmNhFmOlZlZlZmPhFhEhEhFermQmQerbXjUhujMhuhuhuaeafeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTab
-ikilililililililililililililililililililililililafafhuhuhujXhuhuhujHhujXhunFhuhFmRlZlZlZmShFmThXiYmUkyhXhXhXhXhXlqlMlChFmVlZlZlZmSinhEhEhFbXmWhCbXbXhuhujHhuhuhuafafeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTab
+ikilililililililililililililililililililililililafafhuhuhujXhuhuhujHhujXhunFhuhFmRlZlZlZmShFmThXiYmUkyhXhXohhXhXlqlMlChFmVlZlZlZmSinhEhEhFbXmWhCbXbXhuhujHhuhuhuafafeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTab
 ikilililililililililililililililililililililililafafafafafayafafafafafafafnFhuhFhFmXmYmZhFhHhFinhFhFnahGhEhFnbhFhFhFinhFhFhFmYnchFhFhGhEhFhukjkkhuhuhuhuafafayafafafeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTeTab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrafnGnHnInJhuhuhuhuhuhuhuhuhuhuhuhuhuhuhukmhuhuhuhujGhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuknaflrlrlrlrlrlrlrlrlreTeTeTeTeTeTeTeTeTeTeTlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrafnKnpafhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhuhujXhukohuhuhuhuaflrlrlrlrlrlrlrlrlreTeTeTeTeTeTeTeTeTeTeTlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrafafafaffPaAafbnafbPcqafafhuhuhuafafafafafkeafafafafafafafafkebPaffPaAafafafafafafafafaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
-ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkpkqkrksktafkuaAkvafjUhuhuafkwcFcFcFcFcFcFgDkzkAkwafkuaAkvafiCiCafaAcdkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
+ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkpkqkrksktafkuaAkvafjUhuhuafkwcFcFcFcFcFcFgDkzkAkwafkuaAkvafiCiCafnWcdkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlraykCkDkqkEkFafkGiCkHafhuhuhuafkIcFcFcFcFcFcFcFcFkJcFafkKiCkHafiCiCafaAaAkLkMaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkNkOkqkPkQafkRaAkSafhuhuhuafcFcFcFcFcFcFcFcFcFcFcFafkTaAkUafiCiCafaAaAkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
-ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkVkqkWkEkXafaAaAkYafhuhuhuafkZcFcFkJcFkIcFcFcFlalbafaAckaAafiCiCcqaAaAkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
+ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkVkqkWkEkXafaAaAkYafhuhuhuafkZcFcFkJcFkIcFcFcFlalbafaAckaAafiCiCnXaAaAkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlraflckqkqkEldafafafafafhuhuknafafafafafafafafafafafafafafafafaflelfafaAaAkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
-ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkNkqkDkqkqlglhlikqaAhuljljaAlkiClllmiClnloiClpfUeTlsfUltlnlulniCafaAaAkBkMaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
-ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkCkqlvlwlxkqkqkqkqfEhuljljfEiCiClyiClnlolklpiClzlsfUeTltlplnluiCafaAaAkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
+ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkNkqkDkqkqlglhlikqaAhuljljaAlkiClllmiClnlooflpfUeTlsfUltoglulniCafaAaAkBkMaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
+ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafkCkqlvlwlxkqkqkqkqfEhuljljfEiCiClyiClnlolklpiClzlsfUeTltlplnluiCafaAnYkBkBaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrafafafafafafafafafafafjHjMjHafafafafafafafafafeTafeTafeTeTafafafafafafayafafaflrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrafklhuknayeTeTeUeUeUeTeTeTeTeTeTeTeTeTeTeTeTeTeUeUeUeTeTeTlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
 ikililililililililililililililililililililililillrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrafhuhuhuafeTeTeUeUeUeTeTeTeTeTeTeTeTeTeTeTeTeTeUeUeUeTeTeTlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrlrab
