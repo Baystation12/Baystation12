@@ -6,7 +6,7 @@
 	total_positions = -1
 	spawn_positions = -1
 	access = list(632)
-	outfit_type = /decl/hierarchy/outfit/job/geminus_innie
+	outfit_type = /decl/hierarchy/outfit/job/colonist
 	selection_color = "#ff0000"
 	spawnpoint_override = "Geminus Innie"
 	alt_titles = list(\
@@ -52,7 +52,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	access = list(632,633)
-	outfit_type = /decl/hierarchy/outfit/job/geminus_innie_leader
 	selection_color = "#ff0000"
 	spawnpoint_override = "Geminus Innie"
 	faction_whitelist = "Insurrection"
