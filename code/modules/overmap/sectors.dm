@@ -1,7 +1,7 @@
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
-#DEFINE AUTOGEN_SCAN_DEPTH 2
+#define AUTOGEN_SCAN_DEPTH 2
 GLOBAL_LIST_EMPTY(overmap_tiles_uncontrolled) //This is any overmap sectors that are uncontrolled by any faction
 
 GLOBAL_LIST_EMPTY(overmap_spawn_near)
