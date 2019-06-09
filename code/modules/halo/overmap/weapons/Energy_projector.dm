@@ -190,6 +190,7 @@
 	desc = "An incredibly hot beam of pure light"
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
 	icon_state = "pulse_mega_proj"
+	damage = 1500
 	ship_damage_projectile = /obj/item/projectile/projector_laser_damage_proj
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/projector_laser_proj
@@ -247,7 +248,7 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,0,1,2,4, adminlog = 0)
+	explosion(a,1,2,4,6, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
