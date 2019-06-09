@@ -40,6 +40,9 @@
 	if(isnull(parent_area_type))
 		return
 	var/list/areas_scanthrough = typesof(parent_area_type) - parent_area_type
+	for(var/i = 0, i < AUTOGEN_SCAN_DEPTH,i++)
+		for(var/area in areas_scanthrough + parent_area_type)
+			areas_scanthrough |= typesof(area)
 	if(areas_scanthrough.len == 0)
 		return
 	for(var/a in areas_scanthrough)
