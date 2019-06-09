@@ -213,6 +213,11 @@
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
+			if(hit.map_z.Find(z_level) < hit_map_z.len)
+				var/turf/under_loc = locate(F.x,F.y,(hit.map_z[hit.map_z.Find(z_level)++])
+				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated/floor))
+					new /turf/simulated/open (F)
+					new /turf/unsimulated/floor/laval/glassed_turf (under_loc)
 			new /turf/unsimulated/floor/lava/glassed_turf(F)
 
 
