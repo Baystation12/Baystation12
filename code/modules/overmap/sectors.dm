@@ -1,7 +1,6 @@
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
-#define AUTOGEN_SCAN_DEPTH 2
 GLOBAL_LIST_EMPTY(overmap_tiles_uncontrolled) //This is any overmap sectors that are uncontrolled by any faction
 
 GLOBAL_LIST_EMPTY(overmap_spawn_near)
@@ -90,14 +89,12 @@ var/list/points_of_interest = list()
 	if(isnull(parent_area_type))
 		return
 	var/list/areas_scanthrough = typesof(parent_area_type) - parent_area_type
-	for(var/i = 0, i < AUTOGEN_SCAN_DEPTH,i++)
-		for(var/area in areas_scanthrough + parent_area_type)
-			areas_scanthrough |= typesof(area)
-
 	if(areas_scanthrough.len == 0)
 		return
 	for(var/a in areas_scanthrough)
 		var/area/located_area = locate(a)
+		if(isnull(located_area))
+			continue
 		var/low_x = 255
 		var/upper_x = 0
 		var/low_y = 255
@@ -111,7 +108,7 @@ var/list/points_of_interest = list()
 				upper_x = t.x
 			if(t.y > upper_y)
 				upper_y = t.x
-		targeting_locations.Add("[located_area.name]" = list(low_x,upper_y,upper_x,low_y))
+		targeting_locations["[located_area.name]"] = list(low_x,upper_y,upper_x,low_y)
 
 /obj/effect/overmap/proc/get_superstructure_strength() //Returns a decimal percentage calculated from currstrength/maxstrength
 	var/list/hull_strengths = list(0,0)
