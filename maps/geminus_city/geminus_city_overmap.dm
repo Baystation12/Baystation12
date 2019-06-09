@@ -10,3 +10,5 @@
 	faction = "Human Civilian"
 	base = 1
 	block_slipspace = 1
+
+	parent_area_type = /area/planets/Geminus
