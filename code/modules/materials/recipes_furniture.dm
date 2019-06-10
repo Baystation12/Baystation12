@@ -153,11 +153,13 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/table_frame
 	title = "table frame"
 	result_type = /obj/structure/table
+	difficulty = 1
 	time = 10
 
 /datum/stack_recipe/furniture/rack
 	title = "rack"
 	result_type = /obj/structure/table/rack
+	req_amount = 2
 
 /datum/stack_recipe/furniture/closet
 	title = "closet"

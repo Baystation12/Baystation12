@@ -25,6 +25,12 @@
 
 	connections = list("nw0", "ne0", "sw0", "se0")
 
+	var/list/move_sounds = list( // nasty ironing board sounds!!!
+		'sound/effects/metalscrape1.ogg',
+		'sound/effects/metalscrape2.ogg',
+		'sound/effects/metalscrape3.ogg'
+	)
+
 /obj/structure/table/New()
 	if(istext(material))
 		material = SSmaterials.get_material_by_name(material)
@@ -37,10 +43,10 @@
 	if(!material)
 		maxhealth = 10
 	else
-		maxhealth = material.integrity / 2
+		maxhealth = material.integrity * 0.8
 
 		if(reinforced)
-			maxhealth += reinforced.integrity / 2
+			maxhealth += reinforced.integrity * 0.8
 
 	health += maxhealth - old_maxhealth
 
@@ -52,10 +58,21 @@
 				amount *= TABLE_BRITTLE_MATERIAL_MULTIPLIER
 		else
 			amount *= TABLE_BRITTLE_MATERIAL_MULTIPLIER
+	
+	
 	health -= amount
 	if(health <= 0)
 		visible_message("<span class='warning'>\The [src] breaks down!</span>")
+		if(material && material.is_brittle())
+			playsound(src, 'sound/effects/Glassbr2.ogg', 65, 1)
+		else
+			playsound(src, 'sound/effects/grillehit.ogg', 100, 1)
 		return break_to_parts() // if we break and form shards, return them to the caller to do !FUN! things with
+
+	else if(material && material.is_brittle())
+		playsound(src, 'sound/effects/Glasshit.ogg', 70, 1)
+	else
+		playsound(src, 'sound/effects/bang.ogg', 30, 1)//maybe I should rewrite this
 
 /obj/structure/table/Initialize()
 	. = ..()
@@ -80,23 +97,22 @@
 	material = null
 	reinforced = null
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
-	for(var/obj/structure/table/T in oview(src, 1))
-		T.update_icon()
 	. = ..()
 
 /obj/structure/table/examine(mob/user)
 	. = ..()
 	if(health < maxhealth)
 		switch(health / maxhealth)
-			if(0.0 to 0.5)
+			if(0.0 to 0.25)
 				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
 			if(0.25 to 0.5)
 				to_chat(user, "<span class='warning'>It looks damaged!</span>")
 			if(0.5 to 1.0)
 				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
+
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
-	if(reinforced && isScrewdriver(W))
+	if(reinforced && isScrewdriver(W) && user.a_intent == I_HURT)
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()
@@ -127,8 +143,6 @@
 		if(!material)
 			update_connections(1)
 			update_icon()
-			for(var/obj/structure/table/T in oview(src, 1))
-				T.update_icon()
 			update_desc()
 			update_material()
 		return 1
@@ -326,13 +340,15 @@
 			for(var/i = 1 to 4)
 				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
 				overlays += I
+		reset_plane_and_layer()
+
 	else
 		overlays.Cut()
 		var/type = 0
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
 			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
-			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.name == material.name)
+			if(can_connect(T))
 				type++
 				tabledirs |= direction
 
@@ -361,18 +377,30 @@
 
 		if(carpeted)
 			overlays += "carpet_flip[type]"
+		
+		if(dir != NORTH)//I hate spin view, I need a better solution to this
+			plane = ABOVE_HUMAN_PLANE
+			layer = ABOVE_HUMAN_LAYER
 
-/obj/structure/table/proc/can_connect()
-	return TRUE
+/obj/structure/table/proc/can_connect(var/obj/structure/table/T, var/flipmatter = TRUE)//proc that checks for all connection conditions
+	. = FALSE
+	if(anchored && material)//unsecured tables or table frames can't connect
+		if(T && T.anchored && T.material && T.material.name == material.name && !istype(T,/obj/structure/table/rack)) //checks if the other table has the basics
+			. = TRUE
+
+	if(. && flipmatter)
+		if(flipped != T.flipped || (flipped && dir != T.dir) )//checks if whether they're flipped and it's direction
+			. = FALSE
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/update_connections(propagate=0)
-	if(!material)
+	if(!material || !anchored)
 		connections = list("0", "0", "0", "0")
 
 		if(propagate)
 			for(var/obj/structure/table/T in oview(src, 1))
 				T.update_connections()
+				T.update_icon()
 		return
 
 	var/list/blocked_dirs = list()
@@ -409,11 +437,10 @@
 	var/list/connection_dirs = list()
 
 	for(var/obj/structure/table/T in orange(src, 1))
-		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
-			connection_dirs |= T_dir
+		if(!can_connect(T)) continue
+		connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)
 				T.update_connections()

@@ -8,10 +8,10 @@
 			return !density
 		else
 			return 1
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))//change so things can leap over tables even if it's flipped
 		return 1
 	var/obj/structure/table/T = (locate() in get_turf(mover))
-	return (T && !T.flipped) 	//If we are moving from a table, check if it is flipped.
+	return (T && !T.flipped && T != mover)//If we are moving from a table, check if it is flipped. + make sure you can't drag tables through each other
 								//If the table we are standing on is not flipped, then we can move freely to another table.
 
 
@@ -46,7 +46,7 @@
 	if(!(P.damage_type == BRUTE || P.damage_type == BURN))
 		return 0
 
-	if(take_damage(P.damage/2))
+	if(take_damage(P.damage))
 		//prevent tables with 1 health left from stopping bullets outright
 		return PROJECTILE_CONTINUE //the projectile destroyed the table, so it gets to keep going
 
@@ -75,6 +75,38 @@
 		step(O, get_dir(O, src))
 	return
 
+/obj/structure/table/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+	if(environment_smash >= 1)
+		damage = max(damage, 10)
+
+	attack_animation(user)
+	if(damage < 5)
+		visible_message(SPAN_NOTICE("\The [user] smacks \the [src] harmlessly."))
+		playsound(src, 'sound/effects/metalhit.ogg', 40, 1)
+		return
+	visible_message(SPAN_DANGER("\The [user] [attack_verb] \the [src]!"))
+	take_damage(damage)
+
+/obj/structure/table/hitby(atom/movable/AM)
+	..()
+	visible_message(SPAN_DANGER("[src] was hit by [AM]."))
+	var/tforce = 0
+	if(istype(AM, /mob/living)) // All mobs have a multiplier and a size according to mob_defines.dm
+		var/mob/living/I = AM
+		tforce = I.mob_size * 2 * I.throw_multiplier
+		I.apply_damage(5, BRUTE)
+		I.Weaken(2)
+	else if(isobj(AM))
+		var/obj/item/I = AM
+		tforce = I.throwforce
+	take_damage(tforce)
+
+/obj/structure/table/attack_hand(mob/user as mob)//So much flavour
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	if(user.a_intent && user.a_intent == I_HURT)
+		user.visible_message(SPAN_DANGER("\The [user] slams down upon \The [src]!"))
+		playsound(src, 'sound/weapons/smash.ogg', 50, 1)
+
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
 	if (!W) return
 
@@ -95,12 +127,31 @@
 		break_to_parts()
 		return
 
+	if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+		if(!cutter.slice(user)) return
+		var/delay = 10
+		if(material)
+			delay += 10
+		if(reinforced)
+			delay += 10
+		if(!do_after(user, delay, src)) return
+		user.visible_message("<span class='danger'>\The [src] was sliced apart by [user]!</span>")
+		break_to_parts(user.skill_check(SKILL_CONSTRUCTION,SKILL_ADEPT))
+		return
+
 	if(can_plate && !material)
 		to_chat(user, "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>")
 		return
 
+	if(user.a_intent == I_HURT && W.force)
+		if(W.damtype == BRUTE || W.damtype == BURN)
+			user.setClickCooldown(W.attack_cooldown + W.w_class)
+			attack_generic(user, W.force, "hits")
+		return
+
 	// Placing stuff on tables
-	if(user.unEquip(W, src.loc))
+	if(!flipped && user.unEquip(W, src.loc))
 		auto_align(W, click_params)
 		return 1
 

@@ -75,7 +75,7 @@
 			playsound(loc, material.tableslam_noise, 50, 1)
 		else
 			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-		var/list/L = take_damage(rand(1,5))
+		var/list/L = take_damage(rand(1,10))
 		for(var/obj/item/weapon/material/shard/S in L)
 			if(S.sharp && prob(50))
 				G.affecting.visible_message("<span class='danger'>\The [S] slices into [G.affecting]'s face!</span>", "<span class='danger'>\The [S] slices into your face!</span>")

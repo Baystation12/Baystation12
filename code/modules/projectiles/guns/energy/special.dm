@@ -230,7 +230,7 @@
 	return ..()
 
 /obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
-	if(power_supply.checked_use(charge_cost/2)) //consumes half a shot per use
+	if(!safety() && power_supply.checked_use(charge_cost/2)) //consumes half a shot per use
 		if(M)//makes spark and eyecheck for deconstructing things
 			M.welding_eyecheck()
 		spark_system.start()

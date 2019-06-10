@@ -146,6 +146,8 @@ default behaviour is:
 					for(var/obj/structure/window/win in get_step(AM,t))
 						now_pushing = 0
 						return
+				if(!t && AM.atom_flags & ATOM_FLAG_CHECKS_BORDER)//allows you to bump into border stuff
+					t = AM.dir
 				step(AM, t)
 				if (istype(AM, /mob/living))
 					var/mob/living/tmob = AM
