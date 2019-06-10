@@ -72,8 +72,9 @@
 			// to make sure that they work.
 			var/system_moved
 			var/obj/item/temp_system
+			var/obj/item/mech_equipment/ME
 			if(istype(selected_system, /obj/item/mech_equipment))
-				var/obj/item/mech_equipment/ME = selected_system
+				ME = selected_system
 				temp_system = ME.get_effective_obj()
 				if(temp_system in ME)
 					system_moved = 1
@@ -106,7 +107,13 @@
 			if(adj) resolved = A.attackby(temp_system, src)
 			if(!resolved && A && temp_system)
 				temp_system.afterattack(A,src,adj,params)
-			setClickCooldown(arms ? arms.action_delay : 15)
+
+			//Mech equipment subtypes can add further click delays
+			var/extra_delay = 0
+			if(ME != null)
+				ME = selected_system
+				extra_delay = ME.equipment_delay	
+			setClickCooldown(arms ? arms.action_delay + extra_delay : 15 + extra_delay)
 			if(system_moved)
 				temp_system.forceMove(selected_system)
 			return

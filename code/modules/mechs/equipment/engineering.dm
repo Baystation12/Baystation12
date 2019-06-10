@@ -15,3 +15,19 @@
 	if(istype(MS) && MS.owner.body && MS.owner.body && MS.owner.get_cell())
 		return MS.owner.get_cell().charge/MS.owner.get_cell().maxcharge
 	return null
+
+/obj/item/weapon/extinguisher/mech
+	max_water = 4000 //Good is gooder
+	icon_state = "mech_exting"
+
+/obj/item/weapon/extinguisher/mech/get_hardpoint_maptext()
+	return "[reagents.total_volume]/[max_water]"
+
+/obj/item/weapon/extinguisher/mech/get_hardpoint_status_value()
+	return reagents.total_volume/max_water
+
+/obj/item/mech_equipment/mounted_system/extinguisher
+	icon_state = "mech_exting"
+	holding_type = /obj/item/weapon/extinguisher/mech
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_ENGINEERING)

@@ -18,7 +18,7 @@
 
 	..()
 
-	install_system(new /obj/item/mech_equipment/mounted_system/rcd(src), HARDPOINT_LEFT_HAND)
+	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/manipulators/powerloader
@@ -37,9 +37,6 @@
 	gender = PLURAL
 	exosuit_desc_string = "simple collision detection sensors"
 	max_damage = 100
-
-/mob/living/exosuit/premade/powerloader/firefighter
-	name = "firefighter exosuit"
 
 /obj/item/mech_component/sensors/powerloader/prebuild()
 	..()
@@ -79,3 +76,35 @@
 	name = "APLU \"Burning Chrome\""
 	desc = "An ancient but well-liked cargo handling exosuit. This one has cool blue flames."
 	decal = "flames_blue"
+
+
+/mob/living/exosuit/premade/firefighter
+	name = "firefighting exosuit"
+	desc = "A mix and match of industrial parts designed to widthstand fires"
+
+/mob/living/exosuit/premade/firefighter/New()
+	if(!arms) 
+		arms = new /obj/item/mech_component/manipulators/powerloader(src)
+		arms.color = "#385b3c"
+	if(!legs) 
+		legs = new /obj/item/mech_component/propulsion/powerloader(src)
+		legs.color = "#385b3c"
+	if(!head) 
+		head = new /obj/item/mech_component/sensors/powerloader(src)
+		head.color = "#385b3c"
+	if(!body) 
+		body = new /obj/item/mech_component/chassis/heavy(src)
+		body.color = "#385b3c"
+
+	..()
+
+	material = SSmaterials.get_material_by_name("osmium")
+
+	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
+	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
+
+
+/obj/item/mech_component/sensors/firefighter/prebuild()
+	..()
+	software = new(src)
+	software.installed_software = list(MECH_SOFTWARE_UTILITY, MECH_SOFTWARE_ENGINEERING)

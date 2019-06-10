@@ -51,6 +51,7 @@
 		. += new/datum/stack_recipe/knife(src)
 		. += new/datum/stack_recipe/bell(src)
 		. += new/datum/stack_recipe/blade(src)
+		. += new/datum/stack_recipe/drill_head(src)
 
 /material/steel/generate_recipes(var/reinforce_material)
 	. = ..()
