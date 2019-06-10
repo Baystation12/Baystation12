@@ -113,7 +113,7 @@
 /obj/structure/closet/crate/solar/WillContain()
 	return list(
 		/obj/item/solar_assembly = 14,
-		/obj/item/weapon/circuitboard/solar_control,
+		/obj/item/weapon/stock_parts/circuitboard/solar_control,
 		/obj/item/weapon/tracker_electronics,
 		/obj/item/weapon/paper/solar
 	)

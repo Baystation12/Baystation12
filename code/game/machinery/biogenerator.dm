@@ -51,7 +51,7 @@
 	beaker = new /obj/item/weapon/reagent_containers/glass/bottle(src)
 
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/biogenerator(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/biogenerator(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 

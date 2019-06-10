@@ -25,7 +25,7 @@
 	initialize_directions = dir
 
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/unary_atmos/heater(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)

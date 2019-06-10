@@ -409,7 +409,7 @@ var/list/solars_list = list()
 				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 				new /obj/item/weapon/material/shard( src.loc )
-				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
+				var/obj/item/weapon/stock_parts/circuitboard/solar_control/M = new /obj/item/weapon/stock_parts/circuitboard/solar_control( A )
 				for (var/obj/C in src)
 					C.dropInto(loc)
 				A.circuit = M
@@ -420,7 +420,7 @@ var/list/solars_list = list()
 			else
 				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
+				var/obj/item/weapon/stock_parts/circuitboard/solar_control/M = new /obj/item/weapon/stock_parts/circuitboard/solar_control( A )
 				for (var/obj/C in src)
 					C.dropInto(loc)
 				A.circuit = M

@@ -12,7 +12,7 @@
 	component_parts = list(
 		new /obj/item/weapon/stock_parts/matter_bin(src),
 		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/circuitboard/mining_stacker(src)
+		new /obj/item/weapon/stock_parts/circuitboard/mining_stacker(src)
 		)
 
 /obj/machinery/mineral/stacking_machine/Initialize()

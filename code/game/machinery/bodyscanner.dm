@@ -13,7 +13,7 @@
 /obj/machinery/bodyscanner/Initialize()
 	. = ..()
 	component_parts = list(
-		new /obj/item/weapon/circuitboard/bodyscanner(src),
+		new /obj/item/weapon/stock_parts/circuitboard/bodyscanner(src),
 		new /obj/item/weapon/stock_parts/scanning_module(src),
 		new /obj/item/weapon/stock_parts/scanning_module(src),
 		new /obj/item/weapon/stock_parts/manipulator(src),

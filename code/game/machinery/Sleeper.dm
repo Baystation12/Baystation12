@@ -27,7 +27,7 @@
 /obj/machinery/sleeper/Initialize()
 	. = ..()
 	component_parts = list(
-		new /obj/item/weapon/circuitboard/sleeper(src),
+		new /obj/item/weapon/stock_parts/circuitboard/sleeper(src),
 		new /obj/item/weapon/stock_parts/scanning_module(src),
 		new /obj/item/weapon/stock_parts/manipulator(src),
 		new /obj/item/weapon/stock_parts/manipulator(src),

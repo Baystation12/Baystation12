@@ -33,7 +33,7 @@
 
 /obj/machinery/power/smes/batteryrack/proc/add_parts()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/batteryrack
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/batteryrack
 	component_parts += new /obj/item/weapon/stock_parts/capacitor/				// Capacitors: Maximal I/O
 	component_parts += new /obj/item/weapon/stock_parts/capacitor/
 	component_parts += new /obj/item/weapon/stock_parts/capacitor/

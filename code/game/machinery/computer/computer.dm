@@ -84,7 +84,7 @@
 		if(do_after(user, 20, src))
 			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 			A.set_dir(src.dir)
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
+			var/obj/item/weapon/stock_parts/circuitboard/M = new circuit( A )
 			A.circuit = M
 			A.anchored = 1
 			for (var/obj/C in src)

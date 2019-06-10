@@ -302,7 +302,7 @@ Class Procs:
 	if(!component_parts)
 		return 0
 	if(panel_open)
-		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
+		var/obj/item/weapon/stock_parts/circuitboard/CB = locate(/obj/item/weapon/stock_parts/circuitboard) in component_parts
 		var/P
 		for(var/obj/item/weapon/stock_parts/A in component_parts)
 			for(var/T in CB.req_components)

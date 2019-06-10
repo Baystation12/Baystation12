@@ -9,7 +9,7 @@
 	component_parts = list(
 		new /obj/item/weapon/stock_parts/manipulator(src),
 		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/circuitboard/mining_unloader(src)
+		new /obj/item/weapon/stock_parts/circuitboard/mining_unloader(src)
 		)
 
 /obj/machinery/mineral/unloading_machine/Process()

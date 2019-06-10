@@ -27,7 +27,7 @@
 	var/last_temperature
 	var/target_temperature
 	var/obj/item/container
-	var/circuit_type = /obj/item/weapon/circuitboard/reagent_heater
+	var/circuit_type = /obj/item/weapon/stock_parts/circuitboard/reagent_heater
 
 /obj/machinery/reagent_temperature/cooler
 	name = "chemical cooler"
@@ -36,7 +36,7 @@
 	heater_mode =      HEATER_MODE_COOL
 	max_temperature =  30 CELSIUS
 	min_temperature = -80 CELSIUS
-	circuit_type =     /obj/item/weapon/circuitboard/reagent_heater/cooler
+	circuit_type =     /obj/item/weapon/stock_parts/circuitboard/reagent_heater/cooler
 
 /obj/machinery/reagent_temperature/Initialize()
 

@@ -141,7 +141,7 @@
 
 /obj/machinery/organ_printer/robot/New()
 	..()
-	component_parts += new /obj/item/weapon/circuitboard/roboprinter
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/roboprinter
 
 /obj/machinery/organ_printer/robot/print_organ(var/choice)
 	var/obj/item/organ/O = ..()
@@ -195,7 +195,7 @@
 /obj/machinery/organ_printer/flesh/New()
 	..()
 	component_parts += new /obj/item/device/scanner/health
-	component_parts += new /obj/item/weapon/circuitboard/bioprinter
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/bioprinter
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O

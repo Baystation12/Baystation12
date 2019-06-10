@@ -20,7 +20,7 @@
 		/obj/item/frame,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
-		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/stock_parts/circuitboard,
 		/obj/item/weapon/smes_coil,
 		/obj/item/weapon/computer_hardware,
 		/obj/item/weapon/fuel_assembly,
@@ -41,7 +41,7 @@
 	can_hold = list(
 	/obj/item/weapon/cell,
 	/obj/item/weapon/stock_parts,
-	/obj/item/weapon/circuitboard/miningdrill
+	/obj/item/weapon/stock_parts/circuitboard/miningdrill
 	)
 
 /obj/item/weapon/gripper/clerical
@@ -84,7 +84,7 @@
 		/obj/item/organ/internal/brain,
 		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
-		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/stock_parts/circuitboard,
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,

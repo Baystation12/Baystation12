@@ -24,7 +24,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/circuit_imprinter(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/circuit_imprinter(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)

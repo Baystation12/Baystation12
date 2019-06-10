@@ -9,7 +9,7 @@
 	density = 1
 	anchored = 1
 	use_power = POWER_USE_OFF
-	var/obj/item/weapon/circuitboard/circuit = null
+	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
 	var/list/components = null
 	var/list/req_components = null
 	var/list/req_component_names = null
@@ -49,8 +49,8 @@
 						new /obj/item/stack/material/steel(src.loc, 5)
 						qdel(src)
 			if(2)
-				if(istype(P, /obj/item/weapon/circuitboard))
-					var/obj/item/weapon/circuitboard/B = P
+				if(istype(P, /obj/item/weapon/stock_parts/circuitboard))
+					var/obj/item/weapon/stock_parts/circuitboard/B = P
 					if(B.board_type == "machine")
 						if(!user.unEquip(P, src))
 							return

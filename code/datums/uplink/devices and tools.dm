@@ -88,7 +88,7 @@
 /datum/uplink_item/item/tools/teleporter
 	name = "Teleporter Circuit Board"
 	item_cost = 40
-	path = /obj/item/weapon/circuitboard/teleporter
+	path = /obj/item/weapon/stock_parts/circuitboard/teleporter
 
 /datum/uplink_item/item/tools/teleporter/New()
 	..()

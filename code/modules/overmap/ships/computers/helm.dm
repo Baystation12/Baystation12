@@ -5,7 +5,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	icon_keyboard = "teleport_key"
 	icon_screen = "helm"
 	light_color = "#7faaff"
-	circuit = /obj/item/weapon/circuitboard/helm
+	circuit = /obj/item/weapon/stock_parts/circuitboard/helm
 	core_skill = SKILL_PILOT
 	var/autopilot = 0
 	var/manual_control = 0
@@ -235,7 +235,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/navigation
 	name = "navigation console"
-	circuit = /obj/item/weapon/circuitboard/nav
+	circuit = /obj/item/weapon/stock_parts/circuitboard/nav
 	var/viewing = 0
 	icon_keyboard = "generic_key"
 	icon_screen = "helm"

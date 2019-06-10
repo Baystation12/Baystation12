@@ -38,7 +38,7 @@
 /obj/machinery/power/shield_generator/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/shield_generator(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/shield_generator(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)			// Capacitor. Improves shield mitigation when better part is used.
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
 	component_parts += new /obj/item/weapon/smes_coil(src)						// SMES coil. Improves maximal shield energy capacity.

@@ -19,7 +19,7 @@
 /obj/machinery/mineral/processing_unit/New()
 	..()
 	component_parts = list(
-		new /obj/item/weapon/circuitboard/mining_processor(src),
+		new /obj/item/weapon/stock_parts/circuitboard/mining_processor(src),
 		new /obj/item/weapon/stock_parts/manipulator(src),
 		new /obj/item/weapon/stock_parts/micro_laser(src),
 		new /obj/item/weapon/stock_parts/micro_laser(src)

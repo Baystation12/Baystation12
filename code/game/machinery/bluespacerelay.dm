@@ -16,7 +16,7 @@
 /obj/machinery/bluespacerelay/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/bluespacerelay(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/bluespacerelay(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/subspace/filter(src)

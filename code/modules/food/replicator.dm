@@ -24,7 +24,7 @@
 /obj/machinery/food_replicator/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/replicator(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/replicator(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src) //used to hold the biomass
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src) //used to cook the food
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src) //used to deconstruct the stuff

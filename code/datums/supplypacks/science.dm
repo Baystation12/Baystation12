@@ -27,8 +27,8 @@
 
 /decl/hierarchy/supply_pack/science/mecha_odysseus
 	name = "Electronics - Circuit (\"Odysseus\")"
-	contains = list(/obj/item/weapon/circuitboard/mecha/odysseus/peripherals, //TEMPORARY due to lack of circuitboard printer,
-					/obj/item/weapon/circuitboard/mecha/odysseus/main) //TEMPORARY due to lack of circuitboard printer
+	contains = list(/obj/item/weapon/stock_parts/circuitboard/mecha/odysseus/peripherals, //TEMPORARY due to lack of circuitboard printer,
+					/obj/item/weapon/stock_parts/circuitboard/mecha/odysseus/main) //TEMPORARY due to lack of circuitboard printer
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper \"Odysseus\" Circuit crate"

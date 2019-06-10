@@ -117,14 +117,14 @@
 	id_type = /obj/item/weapon/card/id/skrellscoutship
 	l_pocket = /obj/item/clothing/accessory/badge/tags/skrell
 
-/obj/item/weapon/circuitboard/telecomms/allinone/skrellscoutship
+/obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship
 	build_path = /obj/machinery/telecomms/allinone/skrellscoutship
 
 /obj/machinery/telecomms/allinone/skrellscoutship
 	listening_freqs = list(SKRELL_FREQ)
 	channel_color = COMMS_COLOR_SKRELL
 	channel_name = "Recon"
-	circuitboard = /obj/item/weapon/circuitboard/telecomms/allinone/skrellscoutship
+	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship
 	
 /obj/item/device/radio/headset/skrellian
 	name = "recon headset"

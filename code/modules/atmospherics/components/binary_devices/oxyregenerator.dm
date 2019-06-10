@@ -23,7 +23,7 @@
 	..()
 	inner_tank.volume = tank_volume
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/oxyregenerator(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/oxyregenerator(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)//Takes CO2
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)//Breaks bond
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)//Stores carbon

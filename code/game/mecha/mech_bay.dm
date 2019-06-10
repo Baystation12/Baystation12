@@ -19,7 +19,7 @@
 	. = ..()
 	component_parts = list()
 
-	component_parts += new /obj/item/weapon/circuitboard/mech_recharger(src)
+	component_parts += new /obj/item/weapon/stock_parts/circuitboard/mech_recharger(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
