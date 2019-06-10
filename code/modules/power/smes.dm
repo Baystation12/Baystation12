@@ -143,6 +143,7 @@
 	charge -= amount*CELLRATE
 
 /obj/machinery/power/smes/Process()
+	..()
 	if(stat & BROKEN)	return
 	if(failure_timer)	// Disabled by gridcheck.
 		failure_timer--

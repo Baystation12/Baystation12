@@ -145,6 +145,7 @@
 		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/particle_accelerator/control_box/Process()
+	..()
 	if(src.active)
 		//a part is missing!
 		if( length(connected_parts) < 6 )

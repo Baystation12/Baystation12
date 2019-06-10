@@ -40,6 +40,7 @@
 	return cell && cell.percent() > 0
 
 /obj/machinery/recharge_station/Process()
+	..()
 	if(stat & (BROKEN))
 		return
 	if(!cell) // Shouldn't be possible, but sanity check

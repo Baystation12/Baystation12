@@ -32,8 +32,3 @@
 		layer = WIRE_TERMINAL_LAYER
 	else
 		reset_plane_and_layer()
-
-// Needed so terminals are not removed from machines list.
-// Powernet rebuilds need this to work properly.
-/obj/machinery/power/terminal/Process()
-	return 1

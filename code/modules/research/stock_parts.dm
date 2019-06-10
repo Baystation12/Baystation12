@@ -23,6 +23,32 @@
 	randpixel = 5
 	w_class = ITEM_SIZE_SMALL
 	var/rating = 1
+	var/lazy_initialize = TRUE // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
+	var/status = 0             // Flags using PART_STAT defines.
+
+#define PART_STAT_INSTALLED  1
+#define PART_STAT_PROCESSING 2
+
+/obj/item/weapon/stock_parts/proc/on_install(var/obj/machinery/machine)
+	status |= PART_STAT_INSTALLED
+
+/obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
+	status &= ~PART_STAT_INSTALLED
+
+/obj/item/weapon/stock_parts/proc/power_change()
+
+// Use to process on the machine it's installed on.
+
+/obj/item/weapon/stock_parts/proc/start_processing(var/obj/machinery/machine)
+	LAZYDISTINCTADD(machine.processing_parts, src)
+	status |= PART_STAT_PROCESSING
+
+/obj/item/weapon/stock_parts/proc/stop_processing(var/obj/machinery/machine)
+	LAZYREMOVE(machine.processing_parts, src)
+	status |= PART_STAT_PROCESSING
+
+/obj/item/weapon/stock_parts/proc/machine_process(var/obj/machinery/machine)
+	return PROCESS_KILL
 
 //Rank 1
 

@@ -22,6 +22,7 @@
 
 // Checks the sensors for alerts. If change (alerts cleared or detected) occurs, calls for icon update.
 /obj/machinery/computer/power_monitor/Process()
+	..()
 	var/alert = check_warnings()
 	if(alert != alerting)
 		alerting = !alerting

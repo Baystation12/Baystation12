@@ -106,11 +106,13 @@ Class Procs:
 	var/core_skill = SKILL_DEVICES //The skill used for skill checks for this machine (mostly so subtypes can use different skills).
 	var/operator_skill      // Machines often do all operations on Process(). This caches the user's skill while the operations are running.
 
+	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/weapon/stock_parts
+
 /obj/machinery/Initialize(mapload, d=0)
 	. = ..()
 	if(d)
 		set_dir(d)
-	START_PROCESSING(SSmachines, src) // It's safe to remove machines from here.
+	START_PROCESSING(SSmachines, src) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
 	SSmachines.machinery += src // All machines should remain in this list, always.
 
 /obj/machinery/Destroy()
@@ -125,7 +127,13 @@ Class Procs:
 	. = ..()
 
 /obj/machinery/Process()
-	return PROCESS_KILL // Only process if you need to.
+	if(LAZYLEN(processing_parts))
+		for(var/thing in processing_parts)
+			var/obj/item/weapon/stock_parts/part = thing
+			if(part.machine_process(src) == PROCESS_KILL)
+				part.stop_processing()
+	else
+		return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)

@@ -171,6 +171,7 @@
 
 
 /obj/machinery/oxygen_pump/Process()
+	..()
 	if(breather)
 		if(!can_apply_to_target(breather))
 			detach_mask()

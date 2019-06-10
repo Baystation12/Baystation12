@@ -59,5 +59,6 @@
 	onclose(user, "op")
 
 /obj/machinery/computer/operating/Process()
+	..()
 	if(!inoperable())
 		updateDialog()

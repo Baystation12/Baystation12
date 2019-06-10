@@ -30,6 +30,7 @@ var/global/list/rad_collectors = list()
 	. = ..()
 
 /obj/machinery/power/rad_collector/Process()
+	..()
 	if((stat & BROKEN) || melted)
 		return
 	var/turf/T = get_turf(src)

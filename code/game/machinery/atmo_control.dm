@@ -27,6 +27,8 @@
 	icon_state = "gsensor[on]"
 
 /obj/machinery/air_sensor/Process()
+	..()
+
 	if(on)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal

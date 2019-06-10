@@ -55,6 +55,7 @@
 	onclose(user, "artanalyser")
 
 /obj/machinery/artifact_analyser/Process()
+	..()
 	if(scan_in_progress && world.time > scan_completion_time)
 		scan_in_progress = 0
 		updateDialog()

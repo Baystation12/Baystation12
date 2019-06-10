@@ -30,6 +30,7 @@
 		fusion.set_tag(null, initial_id_tag)
 
 /obj/machinery/power/fusion_core/Process()
+	..()
 	if((stat & BROKEN) || !powernet || !owned_field)
 		Shutdown()
 

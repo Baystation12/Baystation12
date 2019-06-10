@@ -102,6 +102,7 @@
 	src.set_dir(turn(src.dir, 90))
 
 /obj/machinery/atmospherics/binary/oxyregenerator/Process(var/delay)
+	..()
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 

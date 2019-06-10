@@ -52,6 +52,7 @@
 
 
 /obj/machinery/sleeper/Process()
+	..()
 	if(stat & (NOPOWER|BROKEN))
 		return
 

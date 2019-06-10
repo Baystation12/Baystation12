@@ -20,6 +20,7 @@
 	. = ..()
 
 /obj/machinery/mineral/stacking_machine/Process()
+	..()
 	if(input_turf)
 		for(var/obj/item/I in input_turf)
 			if(istype(I, /obj/item/stack/material))

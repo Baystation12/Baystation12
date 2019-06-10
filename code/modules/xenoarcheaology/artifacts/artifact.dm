@@ -54,6 +54,7 @@
 	. = ..()
 
 /obj/machinery/artifact/Process()
+	..()
 	var/turf/L = loc
 	if(!istype(L)) 	// We're inside a container or on null turf, either way stop processing effects
 		return
