@@ -59,10 +59,12 @@
 				upper_x = t.x
 			if(t.y > upper_y)
 				upper_y = t.x
+		var/list/co_ords_assign = list(0,0,255,255) //Default list, if anything else fails.
 		if(fore_dir == EAST || WEST)
-			targeting_locations["[located_area.name]"] = list(low_x,map_bounds[2],upper_x,map_bounds[4])
+			co_ords_assign = list(low_x,map_bounds[2],upper_x,map_bounds[4])
 		else
-			targeting_locations["[located_area.name]"] = list(map_bounds[1],upper_y,map_bounds[3],low_y)
+			co_ords_assign = list(map_bounds[1],upper_y,map_bounds[3],low_y)
+		targeting_locations = co_ords_assign
 
 /obj/effect/overmap/ship/get_faction()
 	if(nav_comp)

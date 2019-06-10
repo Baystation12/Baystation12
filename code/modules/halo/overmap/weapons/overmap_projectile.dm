@@ -6,6 +6,7 @@
 	var/obj/effect/overmap/overmap_fired_by
 	var/obj/machinery/overmap_weapon_console/console_fired_by = null
 	var/sound/ship_hit_sound //This sound is played across the entire impacted ship when the overmap projectile spawns the ship_damage_projectile
+	var/list/target_bounds = null
 	accuracy = 100
 
 /obj/item/projectile/overmap/Move(var/newloc,var/dir)
@@ -128,8 +129,6 @@
 	chosen_impact_z = pick(overmap_object.map_z)
 	if(istype(impacted,/obj/effect/overmap/sector))
 		do_sector_hit(overmap_object.map_z[1],impacted) //this is so it only hits the upper z-levels in planets
-		if(istype(src,/obj/item/projectile/overmap/mac))
-			overmap_object.hit++
 
 	else if(istype(impacted,/obj/effect/overmap/ship))
 		do_z_level_proj_spawn(chosen_impact_z,overmap_object)

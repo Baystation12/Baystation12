@@ -15,7 +15,6 @@ var/list/points_of_interest = list()
 	var/list/map_z_data = list()
 	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 	var/weapon_miss_chance = 0
-	var/hit // for icon changes  when damaged
 
 	//This is a list used by overmap projectiles to ensure they actually hit somewhere on the ship. This should be set so projectiles can narrowly miss, but not miss by much.
 	var/list/map_bounds = list(1,255,255,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
@@ -272,12 +271,6 @@ var/list/points_of_interest = list()
 	GLOB.processing_objects += src
 	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		H.get_known_sectors()
-
-/obj/effect/overmap/sector/process()
-	. = ..()
-	if(15<=hit)
-		src.icon_state="bombed"
-
 
 /obj/effect/overmap/proc/adminwarn_attack(var/attacker)
 	if(world.time > last_adminwarn_attack + 1 MINUTE)

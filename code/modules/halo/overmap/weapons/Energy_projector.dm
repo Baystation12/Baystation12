@@ -214,14 +214,14 @@
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
 			if(hit.map_z.Find(z_level) < hit.map_z.len)
-				var/turf/under_loc = locate(F.x,F.y,hit.map_z[hit.map_z.Find(z_level)+1])
+				var/turf/under_loc = GetBelow(F)
 				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated/floor))
-					new /turf/simulated/open (F)
-					new /turf/unsimulated/floor/lava/glassed_turf (under_loc)
+					F.ChangeTurf(/turf/simulated/open)
+					under_loc.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
 				else
-					new /turf/unsimulated/floor/lava/glassed_turf(F)
+					F.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
 			else
-				new /turf/unsimulated/floor/lava/glassed_turf(F)
+				F.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
 
 
 /obj/effect/projectile/projector_laser_proj
