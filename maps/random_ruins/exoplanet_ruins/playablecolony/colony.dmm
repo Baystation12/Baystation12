@@ -81,9 +81,6 @@
 /area/map_template/colony/tcomms)
 "an" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/organ/internal/stack,
-/obj/item/organ/internal/stack,
-/obj/item/organ/internal/stack,
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
