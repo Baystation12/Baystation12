@@ -1,5 +1,5 @@
 /datum/language/binary
-	name = "Robot Talk"
+	name = LANGUAGE_ROBOT_GLOBAL
 	desc = "Most human facilities support free-use communications protocols and routing hubs for synthetic use."
 	colour = "say_quote"
 	speech_verb = "states"
@@ -53,7 +53,7 @@
 		R.cell_use_power(C.active_usage)
 
 /datum/language/binary/drone
-	name = "Drone Talk"
+	name = LANGUAGE_DRONE_GLOBAL
 	desc = "A heavily encoded damage control coordination stream."
 	speech_verb = "transmits"
 	ask_verb = "transmits"
