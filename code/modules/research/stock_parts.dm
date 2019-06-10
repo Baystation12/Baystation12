@@ -254,3 +254,54 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"
 	origin_tech = list(TECH_MATERIAL = 19, TECH_ENGINEERING = 19, TECH_PHORON = 19, TECH_POWER = 19, TECH_BLUESPACE = 19, TECH_BIO = 19, TECH_COMBAT = 19, TECH_MAGNET = 19, TECH_DATA = 19, TECH_ILLEGAL = 19, TECH_ARCANE = 19)
+
+// Shim for non-stock_parts machine components
+/obj/item/weapon/stock_parts/building_material
+	name = "building materials"
+	desc = "Various standard wires, pipes, and other materials."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "coil"
+	lazy_initialize = FALSE
+	var/list/materials
+
+/obj/item/weapon/stock_parts/building_material/Destroy()
+	QDEL_NULL_LIST(materials)
+	. = ..()
+
+/obj/item/weapon/stock_parts/building_material/proc/add_material(var/obj/item/new_material)
+	if(istype(new_material, /obj/item/stack))
+		var/obj/item/stack/stack = new_material
+		for(var/obj/item/stack/old_stack in materials)
+			if(old_stack.stacktype == stack.stacktype)
+				stack.transfer_to(old_stack)
+				if(QDELETED(stack))
+					return
+	LAZYADD(materials, new_material)
+	new_material.forceMove(null)
+
+/obj/item/weapon/stock_parts/building_material/proc/remove_material(material_type, amount)
+	if(ispath(material_type, /obj/item/stack))
+		for(var/obj/item/stack/stack in materials)
+			if(stack.stacktype == material_type)
+				var/stack_amount = stack.get_amount()
+				if(stack_amount <= amount)
+					materials -= stack
+					stack.dropInto(loc)
+					amount -= stack_amount
+				else
+					var/obj/item/stack/new_stack = stack.split(amount)
+					new_stack.dropInto(loc)
+					return
+	for(var/obj/item/item in materials)
+		if(istype(item, material_type))
+			materials -= item
+			item.dropInto(loc)
+			amount--
+			if(amount == 0)
+				return
+
+/obj/item/weapon/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
+	for(var/obj/item/I in materials)
+		I.dropInto(loc)
+	materials = null
+	qdel(src)

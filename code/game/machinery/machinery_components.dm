@@ -19,13 +19,10 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			for(var/type in board.req_components)
 				uncreated_component_parts[type] += (board.req_components[type] || 1)
 	for(var/component_path in uncreated_component_parts)
-		if(ispath(component_path, /obj/item/weapon/stock_parts)) // If not, it's lazy-inited
-			var/obj/item/weapon/stock_parts/component = component_path //fake type
-			if(!initial(component.lazy_initialize))
-				var/number = uncreated_component_parts[component_path]
-				LAZYREMOVE(uncreated_component_parts, component_path)
-				for(var/i in 1 to number)
-					install_component(component_path, refresh_parts = FALSE)
+		var/number = uncreated_component_parts[component_path]
+		LAZYREMOVE(uncreated_component_parts, component_path)
+		for(var/i in 1 to number)
+			install_component(component_path, refresh_parts = FALSE)
 	RefreshParts()
 
 // Returns a list of subtypes of the given component type, with assotiated value = number of that component.
@@ -52,9 +49,6 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		return
 	var/exists = LAZYACCESS(uncreated_component_parts, part_type)
 	if(exists)
-		. = locate(part_type) in src // This may take care of things other than stock parts.
-		if(.)
-			return
 		uncreated_component_parts[part_type]-- //bookkeeping to make sure tally is correct.
 		if(!uncreated_component_parts[part_type])
 			LAZYREMOVE(uncreated_component_parts, part_type)
@@ -65,7 +59,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 // If an instance is given or created, it is returned, otherwise null is returned.
 /obj/machinery/proc/install_component(var/obj/item/weapon/stock_parts/part, force = FALSE, refresh_parts = TRUE)
 	if(ispath(part))
-		if(force || ispath(part, /obj/item/weapon/stock_parts) && !initial(part.lazy_initialize))
+		if(force || !(ispath(part, /obj/item/weapon/stock_parts) && initial(part.lazy_initialize)))
 			part = new part(src) // Forced to make, or we don't lazy-init, so create.
 	else
 		part.forceMove(src) // Were given an instance to begin with.
@@ -74,9 +68,15 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(istype(part))
 		LAZYADD(component_parts, part)
 		part.on_install(src)
-	else
+	else if(ispath(part))
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part.type] += 1
+	else // Wrong type
+		var/obj/item/weapon/stock_parts/building_material/material = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+		if(!material)
+			material = install_component(/obj/item/weapon/stock_parts/building_material)
+		material.add_material(part)
+
 	if(refresh_parts)
 		RefreshParts()
 
@@ -90,23 +90,23 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(istype(part))
 		part.on_uninstall(src)
 		LAZYREMOVE(component_parts, part)
-	else
-		uncreated_component_parts[part.type]--
-		if(!uncreated_component_parts[part.type])
-			LAZYREMOVE(uncreated_component_parts, part.type)
+		if(QDELETED(part)) // unremovable stuff
+			return
 
 	part.dropInto(loc)
 	RefreshParts()
 	return part
 
 /obj/machinery/proc/total_component_rating_of_type(var/part_type)
-	if(!ispath(part_type, /obj/item/weapon/stock_parts))
-		return 0
-	var/list/comps = types_of_component(part_type)
 	. = 0
-	for(var/path in comps)
-		var/obj/item/weapon/stock_parts/comp = path
-		. += initial(comp.rating) * comps[path]
+	for(var/thing in component_parts)
+		if(istype(thing, part_type))
+			var/obj/item/weapon/stock_parts/part = thing
+			. += part.rating
+	for(var/path in uncreated_component_parts)
+		if(ispath(path, part_type))
+			var/obj/item/weapon/stock_parts/comp = path
+			. += initial(comp.rating) * uncreated_component_parts[path]
 
 /obj/machinery/proc/number_of_components(var/part_type)
 	var/list/comps = types_of_component(part_type)
