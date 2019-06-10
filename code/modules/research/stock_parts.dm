@@ -25,6 +25,7 @@
 	var/rating = 1
 	var/lazy_initialize = TRUE // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
 	var/status = 0             // Flags using PART_STAT defines.
+	var/base_type              // Type representing parent of category for replacer usage.
 
 #define PART_STAT_INSTALLED  1
 #define PART_STAT_PROCESSING 2
@@ -34,6 +35,7 @@
 
 /obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
 	status &= ~PART_STAT_INSTALLED
+	stop_processing(machine)
 
 /obj/item/weapon/stock_parts/proc/power_change()
 
@@ -58,6 +60,7 @@
 	icon_state = "screen"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_GLASS = 200)
+	base_type = /obj/item/weapon/stock_parts/console_screen
 
 /obj/item/weapon/stock_parts/scanning_module
 	name = "scanning module"
@@ -65,6 +68,7 @@
 	icon_state = "scan_module"
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 20)
+	base_type = /obj/item/weapon/stock_parts/scanning_module
 
 /obj/item/weapon/stock_parts/manipulator
 	name = "micro-manipulator"
@@ -72,6 +76,7 @@
 	icon_state = "micro_mani"
 	origin_tech = list(TECH_MATERIAL = 1, TECH_DATA = 1)
 	matter = list(MATERIAL_STEEL = 30)
+	base_type = /obj/item/weapon/stock_parts/manipulator
 
 /obj/item/weapon/stock_parts/micro_laser
 	name = "micro-laser"
@@ -79,6 +84,7 @@
 	icon_state = "micro_laser"
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(MATERIAL_STEEL = 10,MATERIAL_GLASS = 20)
+	base_type = /obj/item/weapon/stock_parts/micro_laser
 
 /obj/item/weapon/stock_parts/matter_bin
 	name = "matter bin"
@@ -86,6 +92,7 @@
 	icon_state = "matter_bin"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_STEEL = 80)
+	base_type = /obj/item/weapon/stock_parts/matter_bin
 
 //Rank 2
 
@@ -212,6 +219,7 @@
 	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 50)
 	var/charge = 0
 	var/max_charge = 1000
+	base_type = /obj/item/weapon/stock_parts/capacitor
 
 /obj/item/weapon/stock_parts/capacitor/Initialize()
 	. = ..()

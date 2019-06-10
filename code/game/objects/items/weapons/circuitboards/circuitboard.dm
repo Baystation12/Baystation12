@@ -18,10 +18,10 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 15
+	lazy_initialize = FALSE
 	var/build_path = null
 	var/board_type = "computer"
 	var/list/req_components = null
-	var/contain_parts = 1
 
 //Called when the circuitboard is used to contruct a new machine.
 /obj/item/weapon/stock_parts/circuitboard/proc/construct(var/obj/machinery/M)

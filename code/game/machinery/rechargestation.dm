@@ -20,20 +20,8 @@
 	var/weld_power_use = 2300	// power used per point of brute damage repaired. 2.3 kW ~ about the same power usage of a handheld arc welder
 	var/wire_power_use = 500	// power used per point of burn damage repaired.
 
-/obj/machinery/recharge_station/New()
-	..()
-
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/circuitboard/recharge_station(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/cell/high(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 5)
-
-	RefreshParts()
-
+/obj/machinery/recharge_station/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/machinery/recharge_station/proc/has_cell_power()
@@ -151,15 +139,10 @@
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()
-	var/man_rating = 0
-	var/cap_rating = 0
+	var/man_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	var/cap_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			cap_rating += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			man_rating += P.rating
-	cell = locate(/obj/item/weapon/cell) in component_parts
+	cell = get_component_of_type(/obj/item/weapon/cell)
 
 	charging_power = 40000 + 40000 * cap_rating
 	restore_power_active = 10000 + 15000 * cap_rating

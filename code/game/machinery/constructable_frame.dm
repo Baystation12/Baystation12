@@ -105,27 +105,12 @@
 								break
 						if(component_check)
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc, src.dir)
-
-							if(new_machine.component_parts)
-								new_machine.component_parts.Cut()
-							else
-								new_machine.component_parts = list()
-
+							var/obj/machinery/new_machine = new src.circuit.build_path(loc, dir, FALSE)
 							src.circuit.construct(new_machine)
 
 							for(var/obj/O in src)
-								if(circuit.contain_parts) // things like disposal don't want their parts in them
-									O.forceMove(new_machine)
-								else
-									O.forceMove(null)
-								new_machine.component_parts += O
-
-							if(circuit.contain_parts)
-								circuit.forceMove(new_machine)
-							else
-								circuit.forceMove(null)
-
+								new_machine.install_component(O)
+							new_machine.install_component(circuit)
 							new_machine.RefreshParts()
 							qdel(src)
 					else

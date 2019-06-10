@@ -14,15 +14,6 @@
 	var/delay = 10
 	req_access = list(access_rd) //Only the R&D can change server settings.
 
-/obj/machinery/r_n_d/server/Initialize()
-	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/circuitboard/rdserver(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/stack/cable_coil(src)
-	component_parts += new /obj/item/stack/cable_coil(src)
-	RefreshParts()
-
 /obj/machinery/r_n_d/server/RefreshParts()
 	var/tot_rating = 0
 	for(var/obj/item/weapon/stock_parts/SP in src)

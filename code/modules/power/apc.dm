@@ -166,7 +166,7 @@
 
 	return drained_energy
 
-/obj/machinery/power/apc/Initialize(mapload, var/ndir, var/building=0)
+/obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE, var/building=0)
 
 	wires = new(src)
 
@@ -189,7 +189,7 @@
 		stat |= MAINT
 		src.update_icon()
 
-	. = ..(mapload)
+	. = ..()
 
 	if(operating)
 		src.update()

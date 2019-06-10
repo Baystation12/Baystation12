@@ -16,15 +16,6 @@
 	var/report_all_ores
 	var/active = FALSE
 
-/obj/machinery/mineral/processing_unit/New()
-	..()
-	component_parts = list(
-		new /obj/item/weapon/stock_parts/circuitboard/mining_processor(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/micro_laser(src),
-		new /obj/item/weapon/stock_parts/micro_laser(src)
-		)
-
 /obj/machinery/mineral/processing_unit/Initialize()
 	ores_processing = list()
 	ores_stored = list()

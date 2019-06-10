@@ -42,19 +42,6 @@
 	var/need_update_field = 0
 	var/need_player_check = 0
 
-/obj/machinery/mining/drill/New()
-
-	..()
-
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/circuitboard/miningdrill(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/cell/high(src)
-
-	RefreshParts()
-
 /obj/machinery/mining/drill/Process()
 	..()
 
@@ -168,7 +155,7 @@
 			if(!user.unEquip(O, src))
 				return
 			cell = O
-			component_parts += O
+			install_component(O)
 			to_chat(user, "You install \the [O].")
 		return
 	..()
@@ -178,8 +165,7 @@
 
 	if (panel_open && cell && user.Adjacent(src))
 		to_chat(user, "You take out \the [cell].")
-		cell.dropInto(user.loc)
-		component_parts -= cell
+		uninstall_component(cell)
 		cell = null
 		return
 	else if(need_player_check)
@@ -217,18 +203,12 @@
 
 /obj/machinery/mining/drill/RefreshParts()
 	..()
-	harvest_speed = 0
-	capacity = 0
-	var/charge_multiplier = 0
+	harvest_speed = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
+	capacity = 200 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	var/charge_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
-			harvest_speed = P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
-			capacity = 200 * P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			charge_multiplier += P.rating
-	cell = locate(/obj/item/weapon/cell) in component_parts
+	cell = get_component_of_type(/obj/item/weapon/cell)
+
 	if(charge_multiplier)
 		actual_power_usage = base_power_usage / charge_multiplier
 	else
@@ -304,12 +284,6 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 
 	var/obj/machinery/mining/drill/connected
-
-/obj/machinery/mining/brace/New()
-	..()
-
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/circuitboard/miningdrillbrace(src)
 
 /obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(connected && connected.active)

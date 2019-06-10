@@ -25,23 +25,12 @@
 	var/datum/wires/autolathe/wires = null
 
 
-/obj/machinery/autolathe/New()
-
-	..()
+/obj/machinery/autolathe/Initialize()
+	. = ..()
 	wires = new(src)
-	//Create parts for lathe.
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/circuitboard/autolathe(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	RefreshParts()
 
 /obj/machinery/autolathe/Destroy()
-	qdel(wires)
-	wires = null
+	QDEL_NULL(wires)
 	return ..()
 
 /obj/machinery/autolathe/proc/update_recipe_list()
@@ -283,12 +272,8 @@
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()
 	..()
-	var/mb_rating = 0
-	var/man_rating = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
-		mb_rating += MB.rating
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		man_rating += M.rating
+	var/mb_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	var/man_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
 
 	storage_capacity[MATERIAL_STEEL] = mb_rating  * 25000
 	storage_capacity[MATERIAL_ALUMINIUM] = mb_rating  * 25000

@@ -29,16 +29,6 @@
 	update_icon()
 	initialize_directions = dir
 	atmos_init()
-	component_parts = list(
-		new /obj/item/weapon/stock_parts/circuitboard/cryo_cell(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/console_screen(src),
-		new /obj/item/pipe(src))
-	RefreshParts()
-
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
 	var/turf/T = loc

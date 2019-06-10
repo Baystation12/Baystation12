@@ -26,17 +26,6 @@
 
 /obj/machinery/sleeper/Initialize()
 	. = ..()
-	component_parts = list(
-		new /obj/item/weapon/stock_parts/circuitboard/sleeper(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/console_screen(src),
-		new /obj/item/weapon/reagent_containers/syringe(src),
-		new /obj/item/weapon/reagent_containers/syringe(src),
-		new /obj/item/weapon/reagent_containers/glass/beaker/large(src))
-	RefreshParts()
-
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
@@ -300,19 +289,12 @@
 		to_chat(user, "There's no suitable occupant in \the [src].")
 
 /obj/machinery/sleeper/RefreshParts()
-	var/T = 0
-
-	for (var/obj/item/weapon/stock_parts/scanning_module/S in component_parts) // scanning modules reduce power required and increase speed of dialysis / stomach pump
-		T += S.rating
-
+	var/T = total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
 	T = max(T,1)
 	synth_modifier = 1/T
 	pump_speed = 2 + T
-	T = 0
 
-	for (var/obj/item/weapon/stock_parts/manipulator/M in component_parts) // manipulators unlock new drugs
-		T += M.rating
-
+	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
 	available_chemicals = base_chemicals.Copy()
 	if (T >= 4)
 		available_chemicals |= upgrade_chemicals

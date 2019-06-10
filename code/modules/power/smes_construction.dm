@@ -43,16 +43,16 @@
 // 1M Charge, 150K I/O
 /obj/machinery/power/smes/buildable/outpost_substation/New()
 	..(0)
-	component_parts += new /obj/item/weapon/smes_coil/weak(src)
+	install_component(/obj/item/weapon/smes_coil/weak)
 	recalc_coils()
 
 // This one is pre-installed on engineering shuttle. Allows rapid charging/discharging for easier transport of power to outpost
 // 11M Charge, 2.5M I/O
 /obj/machinery/power/smes/buildable/power_shuttle/New()
 	..(0)
-	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
-	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
-	component_parts += new /obj/item/weapon/smes_coil(src)
+	install_component(/obj/item/weapon/smes_coil/super_io)
+	install_component(/obj/item/weapon/smes_coil/super_io)
+	install_component(/obj/item/weapon/smes_coil)
 	recalc_coils()
 
 
@@ -135,18 +135,16 @@
 // Proc: New()
 // Parameters: None
 // Description: Adds standard components for this SMES, and forces recalculation of properties.
-/obj/machinery/power/smes/buildable/New()
-	component_parts = list()
-	component_parts += new /obj/item/stack/cable_coil(src,30)
-	component_parts += new /obj/item/weapon/stock_parts/circuitboard/smes(src)
-	src.wires = new /datum/wires/smes(src)
+/obj/machinery/power/smes/buildable/Initialize()
+	. = ..()
+	wires = new /datum/wires/smes(src)
 
 	// Allows for mapped-in SMESs with larger capacity/IO
+	recalc_coils() //placeholder; need to make these stock parts first.
 	if(cur_coils)
 		for(var/i = 1, i <= cur_coils, i++)
-			component_parts += new /obj/item/weapon/smes_coil(src)
+			install_component(/obj/item/weapon/smes_coil)
 		recalc_coils()
-	..()
 
 // Proc: attack_hand()
 // Parameters: None

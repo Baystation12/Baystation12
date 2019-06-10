@@ -96,7 +96,8 @@ Class Procs:
 	var/active_power_usage = 0
 	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
 	var/power_init_complete = FALSE // Helps with bookkeeping when initializing atoms. Don't modify.
-	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
+	var/list/component_parts           //List of component instances. Expected type: /obj/item/weapon/stock_parts
+	var/list/uncreated_component_parts //List of component paths which have delayed init. Indeces = number of components.
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
@@ -108,22 +109,21 @@ Class Procs:
 
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/weapon/stock_parts
 
-/obj/machinery/Initialize(mapload, d=0)
+/obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(d)
 		set_dir(d)
 	START_PROCESSING(SSmachines, src) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
 	SSmachines.machinery += src // All machines should remain in this list, always.
 
+	if(populate_parts)
+		populate_parts()
+
 /obj/machinery/Destroy()
 	SSmachines.machinery -= src
 	STOP_PROCESSING(SSmachines, src)
-	if(component_parts)
-		for(var/atom/A in component_parts)
-			if(A.loc == src) // If the components are inside the machine, delete them.
-				qdel(A)
-			else // Otherwise we assume they were dropped to the ground during deconstruction, and were not removed from the component_parts list by deconstruction code.
-				component_parts -= A
+	QDEL_NULL_LIST(component_parts)
+	processing_parts = null
 	. = ..()
 
 /obj/machinery/Process()
@@ -154,17 +154,12 @@ Class Procs:
 	switch(severity)
 		if(1.0)
 			qdel(src)
-			return
 		if(2.0)
 			if (prob(50))
 				qdel(src)
-				return
 		if(3.0)
 			if (prob(25))
 				qdel(src)
-				return
-		else
-	return
 
 /obj/machinery/proc/set_broken(new_state)
 	if(new_state && !(stat & BROKEN))
@@ -299,31 +294,34 @@ Class Procs:
 /obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
 	if(!istype(R))
 		return 0
-	if(!component_parts)
-		return 0
 	if(panel_open)
-		var/obj/item/weapon/stock_parts/circuitboard/CB = locate(/obj/item/weapon/stock_parts/circuitboard) in component_parts
-		var/P
 		for(var/obj/item/weapon/stock_parts/A in component_parts)
-			for(var/T in CB.req_components)
-				if(ispath(A.type, T))
-					P = T
-					break
+			if(!A.base_type)
+				continue
 			for(var/obj/item/weapon/stock_parts/B in R.contents)
-				if(istype(B, P) && istype(A, P))
-					if(B.rating > A.rating)
-						R.remove_from_storage(B, src)
-						R.handle_item_insertion(A, 1)
-						component_parts -= A
-						component_parts += B
-						B.forceMove(null)
-						to_chat(user, "<span class='notice'>[A.name] replaced with [B.name].</span>")
-						break
-			update_icon()
-			RefreshParts()
+				if(istype(B, A.base_type) && B.rating > A.rating)
+					replace_part(user, R, A, B)
+					break
+		for(var/path in uncreated_component_parts)
+			if(ispath(path, /obj/item/weapon/stock_parts))
+				var/obj/item/weapon/stock_parts/A = path
+				var/base_type = initial(A.base_type)
+				if(base_type)
+					for(var/obj/item/weapon/stock_parts/B in R.contents)
+						if(istype(B, base_type) && B.rating > initial(A.rating))
+							replace_part(user, R, A, B)
+							break					
 	else
 		display_parts(user)
 	return 1
+
+/obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
+	old_part = uninstall_component(old_part)
+	if(R)
+		R.remove_from_storage(new_part, src)
+		R.handle_item_insertion(old_part, 1)
+	install_component(new_part)
+	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -331,8 +329,11 @@ Class Procs:
 	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
-	for(var/obj/I in component_parts)
-		I.dropInto(loc)
+	for(var/I in component_parts)
+		uninstall_component(I)
+	while(LAZYLEN(uncreated_component_parts))
+		var/path = uncreated_component_parts[1]
+		uninstall_component(path)
 
 	qdel(src)
 	return 1

@@ -39,16 +39,8 @@
 	circuit_type =     /obj/item/weapon/stock_parts/circuitboard/reagent_heater/cooler
 
 /obj/machinery/reagent_temperature/Initialize()
-
 	target_temperature = min_temperature
-
-	component_parts = list(
-		new circuit_type(src),
-		new /obj/item/weapon/stock_parts/micro_laser(src),
-		new /obj/item/weapon/stock_parts/capacitor(src)
-	)
 	. = ..()
-	RefreshParts()
 
 /obj/machinery/reagent_temperature/Destroy()
 	if(container)
@@ -57,14 +49,11 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power)
+	heating_power = initial(heating_power) & total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 
-	var/obj/item/weapon/stock_parts/comp = locate(/obj/item/weapon/stock_parts/capacitor) in component_parts
+	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	if(comp)
-		heating_power *= comp.rating
-	comp = locate(/obj/item/weapon/stock_parts/micro_laser) in component_parts
-	if(comp)
-		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - (comp.rating * 0.25 KILOWATTS)), POWER_USE_ACTIVE)
+		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - comp), POWER_USE_ACTIVE)
 
 /obj/machinery/reagent_temperature/Process()
 	..()
