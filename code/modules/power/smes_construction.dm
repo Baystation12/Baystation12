@@ -6,32 +6,34 @@
 // It also supports RCON System which allows you to operate it remotely, if properly set.
 
 //MAGNETIC COILS - These things actually store and transmit power within the SMES. Different types have different
-/obj/item/weapon/smes_coil
+/obj/item/weapon/stock_parts/smes_coil
 	name = "superconductive magnetic coil"
 	desc = "Standard superconductive magnetic coil with average capacity and I/O rating."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = ITEM_SIZE_LARGE							// It's LARGE (backpack size)
 	origin_tech = list(TECH_MATERIAL = 7, TECH_POWER = 7, TECH_ENGINEERING = 5)
+	base_type = /obj/item/weapon/stock_parts/smes_coil
+	lazy_initialize = FALSE
 	var/ChargeCapacity = 50 KILOWATTS
 	var/IOCapacity = 250 KILOWATTS
 
 // 20% Charge Capacity, 60% I/O Capacity. Used for substation/outpost SMESs.
-/obj/item/weapon/smes_coil/weak
+/obj/item/weapon/stock_parts/smes_coil/weak
 	name = "basic superconductive magnetic coil"
 	desc = "Cheaper model of standard superconductive magnetic coil. It's capacity and I/O rating are considerably lower."
 	ChargeCapacity = 10 KILOWATTS
 	IOCapacity = 150 KILOWATTS
 
 // 500% Charge Capacity, 40% I/O Capacity. Holds a lot of energy, but charges slowly if not combined with other coils. Ideal for backup storage.
-/obj/item/weapon/smes_coil/super_capacity
+/obj/item/weapon/stock_parts/smes_coil/super_capacity
 	name = "superconductive capacitance coil"
 	desc = "Specialised version of standard superconductive magnetic coil. This one has significantly stronger containment field, allowing for significantly larger power storage. It's IO rating is much lower, however."
 	ChargeCapacity = 250 KILOWATTS
 	IOCapacity = 100 KILOWATTS
 
 // 40% Charge Capacity, 500% I/O Capacity. Technically turns SMES into large super capacitor. Ideal for shields.
-/obj/item/weapon/smes_coil/super_io
+/obj/item/weapon/stock_parts/smes_coil/super_io
 	name = "superconductive transmission coil"
 	desc = "Specialised version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers power, making it useful in systems which require large throughput."
 	ChargeCapacity = 20 KILOWATTS
@@ -43,16 +45,16 @@
 // 1M Charge, 150K I/O
 /obj/machinery/power/smes/buildable/outpost_substation/New()
 	..(0)
-	install_component(/obj/item/weapon/smes_coil/weak)
+	install_component(/obj/item/weapon/stock_parts/smes_coil/weak)
 	recalc_coils()
 
 // This one is pre-installed on engineering shuttle. Allows rapid charging/discharging for easier transport of power to outpost
 // 11M Charge, 2.5M I/O
 /obj/machinery/power/smes/buildable/power_shuttle/New()
 	..(0)
-	install_component(/obj/item/weapon/smes_coil/super_io)
-	install_component(/obj/item/weapon/smes_coil/super_io)
-	install_component(/obj/item/weapon/smes_coil)
+	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
+	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
+	install_component(/obj/item/weapon/stock_parts/smes_coil)
 	recalc_coils()
 
 
@@ -143,7 +145,7 @@
 	recalc_coils() //placeholder; need to make these stock parts first.
 	if(cur_coils)
 		for(var/i = 1, i <= cur_coils, i++)
-			install_component(/obj/item/weapon/smes_coil)
+			install_component(/obj/item/weapon/stock_parts/smes_coil)
 		recalc_coils()
 
 // Proc: attack_hand()
@@ -162,7 +164,7 @@
 	capacity = 0
 	input_level_max = 0
 	output_level_max = 0
-	for(var/obj/item/weapon/smes_coil/C in component_parts)
+	for(var/obj/item/weapon/stock_parts/smes_coil/C in component_parts)
 		cur_coils++
 		capacity += C.ChargeCapacity
 		input_level_max += C.IOCapacity
@@ -382,7 +384,7 @@
 				return
 
 		// Superconducting Magnetic Coil - Upgrade the SMES
-		else if(istype(W, /obj/item/weapon/smes_coil))
+		else if(istype(W, /obj/item/weapon/stock_parts/smes_coil))
 			if (cur_coils < max_coils)
 
 				if (failure_probability && prob(failure_probability))

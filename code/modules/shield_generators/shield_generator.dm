@@ -57,7 +57,7 @@
 
 /obj/machinery/power/shield_generator/RefreshParts()
 	max_energy = 0
-	for(var/obj/item/weapon/smes_coil/S in component_parts)
+	for(var/obj/item/weapon/stock_parts/smes_coil/S in component_parts)
 		max_energy += (S.ChargeCapacity / CELLRATE)
 	current_energy = between(0, current_energy, max_energy)
 

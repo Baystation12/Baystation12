@@ -9,25 +9,25 @@
 
 /decl/hierarchy/supply_pack/engineering/smescoil
 	name = "Parts - Superconductive magnetic coil"
-	contains = list(/obj/item/weapon/smes_coil)
+	contains = list(/obj/item/weapon/stock_parts/smes_coil)
 	cost = 35
 	containername = "superconductive magnetic coil crate"
 
 /decl/hierarchy/supply_pack/engineering/smescoil_weak
 	name = "Parts - Basic superconductive magnetic coil"
-	contains = list(/obj/item/weapon/smes_coil/weak)
+	contains = list(/obj/item/weapon/stock_parts/smes_coil/weak)
 	cost = 25
 	containername = "basic superconductive magnetic coil crate"
 
 /decl/hierarchy/supply_pack/engineering/smescoil_super_capacity
 	name = "Parts - Superconductive capacitance coil"
-	contains = list(/obj/item/weapon/smes_coil/super_capacity)
+	contains = list(/obj/item/weapon/stock_parts/smes_coil/super_capacity)
 	cost = 45
 	containername = "superconductive capacitance coil crate"
 
 /decl/hierarchy/supply_pack/engineering/smescoil_super_io
 	name = "Parts- Superconductive Transmission Coil"
-	contains = list(/obj/item/weapon/smes_coil/super_io)
+	contains = list(/obj/item/weapon/stock_parts/smes_coil/super_io)
 	cost = 45
 	containername = "Superconductive Transmission Coil crate"
 
@@ -167,7 +167,7 @@
 
 /decl/hierarchy/supply_pack/engineering/shield_generator
 	name = "Equipment - Shield generator construction kit"
-	contains = list(/obj/item/weapon/stock_parts/circuitboard/shield_generator, /obj/item/weapon/stock_parts/capacitor, /obj/item/weapon/stock_parts/micro_laser, /obj/item/weapon/smes_coil, /obj/item/weapon/stock_parts/console_screen)
+	contains = list(/obj/item/weapon/stock_parts/circuitboard/shield_generator, /obj/item/weapon/stock_parts/capacitor, /obj/item/weapon/stock_parts/micro_laser, /obj/item/weapon/stock_parts/smes_coil, /obj/item/weapon/stock_parts/console_screen)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "shield generator construction kit crate"

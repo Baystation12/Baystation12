@@ -21,7 +21,7 @@
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/stock_parts/circuitboard,
-		/obj/item/weapon/smes_coil,
+		/obj/item/weapon/stock_parts/smes_coil,
 		/obj/item/weapon/computer_hardware,
 		/obj/item/weapon/fuel_assembly,
 		/obj/item/stack/material/deuterium,
