@@ -147,12 +147,6 @@
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
 
-/obj/effect/blob/proc/attack_mech(var/obj/mecha/mech)
-	if(!mech)
-		return
-	mech.visible_message(SPAN_DANGER("A tendril flies out from \the [src] and slams into \the [mech]!"))
-	mech.take_damage(rand(damage_min, damage_max))
-
 /obj/effect/blob/proc/attempt_attack(var/list/dirs)
 	var/attackDir = pick(dirs)
 	var/turf/T = get_step(src, attackDir)
@@ -160,8 +154,6 @@
 		if(victim.stat == DEAD)
 			continue
 		attack_living(victim)
-	for(var/obj/mecha/mech in T)
-		attack_mech(mech)
 
 /obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)

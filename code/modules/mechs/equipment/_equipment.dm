@@ -10,6 +10,7 @@
 	var/restricted_hardpoints
 	var/mob/living/exosuit/owner
 	var/list/restricted_software
+	var/equipment_delay = 0
 
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	return (owner && loc == owner)

@@ -178,6 +178,8 @@
 					damage_string = "almost destroyed"
 			to_chat(user, "Its [thing.name] [thing.gender == PLURAL ? "are" : "is"] [damage_string].")
 
+		to_chat(user, "It menaces with reinforcements of [material].")
+
 /mob/living/exosuit/return_air()
 	return (body && body.pilot_coverage >= 100 && hatch_closed) ? body.cockpit : loc.return_air()
 

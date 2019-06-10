@@ -71,13 +71,12 @@
 /obj/item/mech_equipment/light
 	name = "floodlight"
 	desc = "An exosuit-mounted light."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "flashlight"
-	item_state = "flashlight"
+	icon_state = "mech_floodlight"
+	item_state = "mech_floodlight"
 	restricted_hardpoints = list(HARDPOINT_HEAD)
 
 	var/on = 0
-	var/l_max_bright = 0.8
+	var/l_max_bright = 0.9
 	var/l_inner_range = 1
 	var/l_outer_range = 6
 
@@ -87,6 +86,7 @@
 		on = !on
 		to_chat(user, "You switch \the [src] [on ? "on" : "off"].")
 		update_icon()
+		owner.update_icon()
 
 /obj/item/mech_equipment/light/on_update_icon()
 	if(on)
@@ -165,3 +165,121 @@
 				//chassis.use_power(energy_drain)
 				//do_after_cooldown()
 		return
+
+
+
+/obj/item/weapon/material/drill_head
+	var/durability = 0
+	name = "drill head"
+	desc = "A replaceable drill head usually used in exosuit drills."
+	icon_state = "drill_head"
+	
+/obj/item/weapon/material/drill_head/New(newloc, material_key)
+	. = ..()
+	durability = 2 * material.integrity
+
+/obj/item/mech_equipment/drill
+	name = "\improper drill"
+	desc = "This is the drill that'll pierce the heavens!"
+	icon_state = "mech_drill"
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
+	equipment_delay = 10
+
+	//Drill can have a head
+	var/obj/item/weapon/material/drill_head/drill_head
+	
+
+
+/obj/item/mech_equipment/drill/Initialize()
+	. = ..()
+	drill_head = new /obj/item/weapon/material/drill_head(src, "steel")//You start with a basic steel head
+
+/obj/item/mech_equipment/drill/attack_self(var/mob/user)
+	. = ..()
+	if(.)
+		if(drill_head)
+			owner.visible_message(SPAN_WARNING("[owner] revs the [drill_head], menancingly."))
+			playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
+
+
+/obj/item/mech_equipment/drill/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
+	. = ..()
+	if(.)
+		if(isobj(target))
+			var/obj/target_obj = target
+			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
+		if(istype(target,/obj/item/weapon/material/drill_head))
+			var/obj/item/weapon/material/drill_head/DH = target
+			if(drill_head)
+				owner.visible_message(SPAN_NOTICE("\The [owner] detaches the [drill_head] mounted the [src]"))
+				drill_head.forceMove(owner.loc)
+			DH.forceMove(src)
+			drill_head = DH
+			owner.visible_message(SPAN_NOTICE("\The [owner] mounts the [drill_head] on the [src]"))
+			return
+
+		if(drill_head == null)
+			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
+			return
+		//chassis.use_power(energy_drain)
+		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		to_chat(user, "<span class='danger'>You start to drill \the [target]</span>")
+
+		var/T = target.loc
+
+		//Better materials = faster drill! 
+		var/delay = max(5, 20 - drill_head.material.brute_armor)
+		owner.setClickCooldown(delay) //Don't spamclick!
+		if(do_after(owner, delay, target))
+			if(src == owner.selected_system)
+				if(drill_head.durability <= 0)
+					drill_head.shatter()
+					drill_head = null
+					return
+				if(istype(target, /turf/simulated/wall))
+					var/turf/simulated/wall/W = target
+					if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
+						to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
+					target.ex_act(2)
+					drill_head.durability -= 1
+				else if(istype(target, /turf/simulated/mineral))
+					for(var/turf/simulated/mineral/M in range(target,1))
+						if(get_dir(owner,M)&owner.dir)
+							M.GetDrilled()
+							drill_head.durability -= 1
+				else if(istype(target, /turf/simulated/floor/asteroid))
+					for(var/turf/simulated/floor/asteroid/M in range(target,1))
+						if(get_dir(owner,M)&owner.dir)
+							M.gets_dug()
+							drill_head.durability -= 1
+				else if(target.loc == T)
+					target.ex_act(2)
+					to_chat(user, "Test drill message")
+					drill_head.durability -= 1
+
+				
+
+	
+				if(owner.hardpoints.len) //if this isn't true the drill should not be working to be fair
+					for(var/hardpoint in owner.hardpoints)
+						var/obj/item/I = owner.hardpoints[hardpoint]
+						if(!istype(I))
+							continue
+						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in I //clamps work, but anythin that contains an ore crate internally is valid
+						if(ore_box)
+							for(var/obj/item/weapon/ore/ore in range(T,1))
+								if(get_dir(owner,ore)&owner.dir)
+									ore.Move(ore_box)
+
+				playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
+		
+		else
+			for(var/mob/living/M in owner.pilots)
+				to_chat(M, "You must stay still while the drill is engaged!")		
+
+				
+		return 1
+		
+
+
