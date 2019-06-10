@@ -239,7 +239,7 @@
 			return TOPIC_HANDLED
 		if(!making.is_stack && multiplier != 1)
 			return TOPIC_HANDLED
-		sanitize_integer(multiplier, 1, 100, 1)
+		multiplier = sanitize_integer(multiplier, 1, 100, 1)
 
 		busy = 1
 		update_use_power(POWER_USE_ACTIVE)
