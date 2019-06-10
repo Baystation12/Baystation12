@@ -701,7 +701,7 @@
 "any" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/clipboard,/obj/item/weapon/pen,/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
 "anz" = (/obj/machinery/light/colored/red{dir = 4},/obj/machinery/porta_turret/stationary{req_access = list(1)},/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
 "anA" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/overmap_weapon_console/mac,/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
-"anB" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/light/colored/red{dir = 1},/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
+"anB" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/light/colored/red{dir = 1},/obj/machinery/overmap_weapon_console/ship_scanning_console,/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
 "anC" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/mac_cannon/ammo_loader{ammo_cap = 1},/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
 "anD" = (/obj/machinery/power/apc/super{dir = 1; name = "north bump"; pixel_y = 24},/obj/structure/cable/orange{tag = "icon-0-1 (NORTH)"; icon_state = "0-1"; dir = 1},/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
 "anE" = (/obj/machinery/porta_turret/stationary{req_access = list(1)},/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)
