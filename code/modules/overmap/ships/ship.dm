@@ -36,12 +36,41 @@
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
 	GLOB.processing_objects.Add(src)
 
+/obj/effect/overmap/ship/generate_targetable_areas()
+	if(isnull(parent_area_type))
+		return
+	var/list/areas_scanthrough = typesof(parent_area_type) - parent_area_type
+	if(areas_scanthrough.len == 0)
+		return
+	for(var/a in areas_scanthrough)
+		var/area/located_area = locate(a)
+		if(isnull(located_area))
+			continue
+		var/low_x = 255
+		var/upper_x = 0
+		var/low_y = 255
+		var/upper_y = 0
+		for(var/turf/t in located_area.contents)
+			if(t.x < low_x)
+				low_x = t.x
+			if(t.y < low_y)
+				low_y = t.y
+			if(t.x > upper_x)
+				upper_x = t.x
+			if(t.y > upper_y)
+				upper_y = t.x
+		var/list/co_ords_assign = list(0,0,255,255) //Default list, if anything else fails.
+		if(fore_dir == EAST || WEST)
+			co_ords_assign = list(low_x,map_bounds[2],upper_x,map_bounds[4])
+		else
+			co_ords_assign = list(map_bounds[1],upper_y,map_bounds[3],low_y)
+		targeting_locations = co_ords_assign
+
 /obj/effect/overmap/ship/get_faction()
 	if(nav_comp)
 		return nav_comp.get_faction()
 	else
 		return null
-
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	accelerate(direction)
