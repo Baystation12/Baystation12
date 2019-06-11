@@ -1,6 +1,0 @@
-author: "Kamiztheman"
-delete-after: True
-changes: 
-  - tweak: "Item descriptions in the traitor uplink menus have been adjusted so that new recruits actually understand what they are buying."
-  - tweak: "EMP ammo boxes purchased from the uplink should now have enough ammo to refill a magazine."
-  - bugfix: "7mm EMP ammo boxes now contain and can store the correct caliber rounds."
