@@ -232,7 +232,8 @@
 
 	else if(hud_data.has_nutrition)
 		mymob.nutrition_icon = new /obj/screen/food()
-		mymob.nutrition_icon.icon = ui_style
+		mymob.nutrition_icon.icon = 'icons/mob/status_hunger.dmi'
+		mymob.nutrition_icon.pixel_w = 8
 		mymob.nutrition_icon.icon_state = "nutrition0"
 		mymob.nutrition_icon.SetName("nutrition")
 		mymob.nutrition_icon.screen_loc = ui_nutrition
