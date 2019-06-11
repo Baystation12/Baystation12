@@ -11,10 +11,6 @@
 			tally -= 2
 		tally -= 1
 
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	if(embedded_flag || (stomach && stomach.contents.len))
-		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
-
 	if(CE_SPEEDBOOST in chem_effects)
 		tally -= chem_effects[CE_SPEEDBOOST]
 
