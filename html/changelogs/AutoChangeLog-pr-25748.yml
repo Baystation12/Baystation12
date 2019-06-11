@@ -1,0 +1,4 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscadd: "Adds urns which can contain, move, and release ashes, and can be constructed from different materials. The Counselor gets a wooden urn in their locker on round start."
