@@ -92,13 +92,13 @@
 
 /area/commando_ship/urfs_avarice/Troopbunks
 	name = "URFS Avarice Troop Bunks"
-
+/*
 /area/commando_ship/urfs_avarice/PortGenerator
 	name = "URFS Avarice Port Generator"
 
 /area/commando_ship/urfs_avarice/StarboardGenerator
 	name = "URFS Avarice Starboard Generator"
-
+*/
 /area/commando_ship/urfs_avarice/powercore
 	name = "URFS Avarice Power Core"
 /*

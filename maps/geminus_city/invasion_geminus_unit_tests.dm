@@ -1,10 +1,8 @@
 
 /datum/map/geminus_city/list/area_usage_test_exempted_areas = list(
 		/area/faction_base/unsc_defense_platform,
-		/area/faction_base/innie_defense_platform,
 		/area/faction_base/cov_defense_platform,
 		/area/faction_base/covenant_shuttle,
-		/area/faction_base/innie_shuttle,
 		/area/faction_base/unsc_shuttle,
 		/area/beach,
 		/area/centcom,
