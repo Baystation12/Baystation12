@@ -164,7 +164,7 @@
 
 	visor.engage()
 
-/obj/item/weapon/rig/verb/alter_voice()
+/obj/item/weapon/rig/proc/alter_voice()
 
 	set name = "Configure Voice Synthesiser"
 	set desc = "Toggles or configures your voice synthesizer."

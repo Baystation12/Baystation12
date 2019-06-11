@@ -267,7 +267,16 @@
 /mob/proc/SetupStat(var/obj/item/weapon/rig/R)
 	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
 		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
-		stat("Suit charge", cell_status)
+		stat("Suit Charge:", cell_status)
+		var/air_tank
+		if(R.air_supply)//makes sure you have tank
+			if(R.air_supply.air_contents)//make sure your tank has air
+				air_tank = "[round(R.air_supply.air_contents.return_pressure())] kPa"
+			else
+				air_tank = "0 kPa"
+		else
+			air_tank = "NOT FOUND"
+		stat("Tank Pressure:", air_tank)
 		for(var/obj/item/rig_module/module in R.installed_modules)
 			for(var/stat_rig_module/SRM in module.stat_modules)
 				if(SRM.CanUse())

@@ -211,7 +211,7 @@ var/list/global/tank_gauge_cache = list()
 	var/data[0]
 	data["tankPressure"] = round(air_contents && air_contents.return_pressure() ? air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(distribute_pressure ? distribute_pressure : 0)
-	data["defaultReleasePressure"] = round(TANK_DEFAULT_RELEASE_PRESSURE)
+	data["defaultReleasePressure"] = round(initial(distribute_pressure)) 
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
 	data["valveOpen"] = using_internal ? 1 : 0
 	data["maskConnected"] = 0
@@ -255,7 +255,7 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/weapon/tank/OnTopic(user, href_list)
 	if (href_list["dist_p"])
 		if (href_list["dist_p"] == "reset")
-			distribute_pressure = TANK_DEFAULT_RELEASE_PRESSURE
+			distribute_pressure = initial(distribute_pressure)
 		else if (href_list["dist_p"] == "max")
 			distribute_pressure = TANK_MAX_RELEASE_PRESSURE
 		else
@@ -269,30 +269,39 @@ var/list/global/tank_gauge_cache = list()
 		return TOPIC_REFRESH
 
 /obj/item/weapon/tank/proc/toggle_valve(var/mob/user)
-	if(istype(loc,/mob/living/carbon))
-		var/mob/living/carbon/location = loc
-		if(location.internal == src)
-			location.internal = null
-			location.internals.icon_state = "internal0"
-			to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
-			if (location.internals)
-				location.internals.icon_state = "internal0"
-		else
-			var/can_open_valve
-			if(location.wear_mask && (location.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
-				can_open_valve = 1
-			else if(istype(location,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = location
-				if(H.head && (H.head.item_flags & ITEM_FLAG_AIRTIGHT))
-					can_open_valve = 1
 
-			if(can_open_valve)
-				location.internal = src
-				to_chat(user, "<span class='notice'>You open \the [src] valve.</span>")
-				if (location.internals)
-					location.internals.icon_state = "internal1"
-			else
-				to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
+	var/mob/living/carbon/location
+	if(istype(loc,/mob/living/carbon))
+		location = loc
+	else if(istype(loc,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = loc
+		if(rig.wearer)
+			location = rig.wearer
+	else
+		return
+
+	if(location.internal == src)
+		location.internal = null
+		location.internals.icon_state = "internal0"
+		to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
+		if (location.internals)
+			location.internals.icon_state = "internal0"
+	else
+		var/can_open_valve
+		if(location.wear_mask && (location.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+			can_open_valve = 1
+		else if(istype(location,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = location
+			if(H.head && (H.head.item_flags & ITEM_FLAG_AIRTIGHT))
+				can_open_valve = 1
+
+		if(can_open_valve)
+			location.internal = src
+			to_chat(user, "<span class='notice'>You open \the [src] valve.</span>")
+			if (location.internals)
+				location.internals.icon_state = "internal1"
+		else
+			to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
 
 /obj/item/weapon/tank/remove_air(amount)
 	. = air_contents.remove(amount)
