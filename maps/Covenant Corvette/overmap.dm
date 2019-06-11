@@ -23,5 +23,8 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turretstarboard/kig_yar_corvette
 	deck_gun_area = /area/covenant_corvette/pulse_lasersstarboard
 
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control/cov_corvette
-	deck_gun_area = /area/covenant_corvette/plastorps
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control/cov_corvette_starboard
+	deck_gun_area = /area/covenant_corvette/plastorpsstarboard
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control/cov_corvette_port
+	deck_gun_area = /area/covenant_corvette/plastorpsport

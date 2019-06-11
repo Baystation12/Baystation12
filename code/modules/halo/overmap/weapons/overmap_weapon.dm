@@ -8,7 +8,7 @@
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap
 	var/sound/fire_sound = null
 	var/requires_ammo = 0
-	var/do_track_fired_proj = 0
+	var/do_track_fired_proj = 1
 	var/currently_tracked_proj = null
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis

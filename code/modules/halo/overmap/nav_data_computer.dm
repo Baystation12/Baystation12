@@ -202,7 +202,7 @@
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "Covenant"
-	known_sectors = list("Vanguard's Mantle","KS7-535")
+	known_sectors = list("Vanguard's Mantle","VT9-042")
 
 /obj/item/nav_data_chip/innie
 	chip_faction = "Insurrection"

@@ -37,7 +37,7 @@
 	overmap_fired_by.targeting_datum.current_target = om_obj
 	var/target_area = input(firer,"Select target area.","Target Area Selection") in overmap_fired_by.targeting_datum.current_target.targeting_locations + list("Cancel")
 	if(target_area == "Cancel")
-		target_area = "target lost"
+		target_area = "no target"
 	to_chat(firer,"<span class = 'notice'>Target area set to [target_area]</span>")
 	overmap_fired_by.targeting_datum.targeted_location = target_area
 	qdel(src)
@@ -57,3 +57,7 @@
 	sleep(1 SECOND)
 	to_chat(firer,"<span class = 'notice'>Superstructure integrity at [superstructure_strength]%.</span>")
 	qdel(src)
+
+/obj/machinery/overmap_weapon_console/ship_scanning_console/cov
+	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon_state = "covie_console"
