@@ -16,34 +16,34 @@
 	name = "Ammunition"
 
 /datum/uplink_category/grenades
-	name = "Grenades and Thrown Objects"
+	name = "Grenades"
 
 /datum/uplink_category/visible_weapons
-	name = "Highly Visible and Dangerous Weapons"
+	name = "Loud & Dangerous Weaponry"
 
 /datum/uplink_category/stealthy_weapons
-	name = "Stealthy and Inconspicuous Weapons"
+	name = "Disguised & Inconspicuous Weaponry"
 
 /datum/uplink_category/stealth_items
-	name = "Stealth and Camouflage Items"
+	name = "Stealth & Camouflage Accessories"
 
 /datum/uplink_category/tools
-	name = "Devices and Tools"
+	name = "Devices & Tools"
 
 /datum/uplink_category/implants
 	name = "Implants"
 
 /datum/uplink_category/medical
-	name = "Medical"
+	name = "Medical & Food"
 
 /datum/uplink_category/hardsuit_modules
 	name = "Hardsuit Modules"
 
 /datum/uplink_category/services
-	name = "Services"
+	name = "Jamming & Announcements"
 
 /datum/uplink_category/badassery
 	name = "Badassery"
 
 /datum/uplink_category/telecrystals
-	name = "Telecrystals"
+	name = "Telecrystal Materialization"
