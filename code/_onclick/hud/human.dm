@@ -234,11 +234,17 @@
 		mymob.nutrition_icon = new /obj/screen/food()
 		mymob.nutrition_icon.icon = 'icons/mob/status_hunger.dmi'
 		mymob.nutrition_icon.pixel_w = 8
-		mymob.nutrition_icon.icon_state = "nutrition0"
+		mymob.nutrition_icon.icon_state = "nutrition1"
 		mymob.nutrition_icon.SetName("nutrition")
-		mymob.nutrition_icon.screen_loc = ui_nutrition
+		mymob.nutrition_icon.screen_loc = ui_nutrition_small
 		hud_elements |= mymob.nutrition_icon
 
+		mymob.hydration_icon = new /obj/screen/drink()
+		mymob.hydration_icon.icon = 'icons/mob/status_hunger.dmi'
+		mymob.hydration_icon.icon_state = "hydration1"
+		mymob.hydration_icon.SetName("hydration")
+		mymob.hydration_icon.screen_loc = ui_nutrition_small
+		hud_elements |= mymob.hydration_icon
 
 	mymob.pain = new /obj/screen/fullscreen/pain( null )
 	hud_elements |= mymob.pain
@@ -308,6 +314,19 @@
 			if("nutrition4")
 				to_chat(usr, SPAN_DANGER("You are starving!"))
 
+/obj/screen/drink/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.hydration_icon == src)
+		switch(icon_state)
+			if("hydration0")
+				to_chat(usr, SPAN_WARNING("You are overhydrated."))
+			if("hydration1")
+				to_chat(usr, SPAN_NOTICE("You are not thirsty."))
+			if("hydration2")
+				to_chat(usr, SPAN_NOTICE("You are a bit thirsty."))
+			if("hydration3")
+				to_chat(usr, SPAN_WARNING("You are quite thirsty."))
+			if("hydration4")
+				to_chat(usr, SPAN_DANGER("You are dying of thirst!"))
 
 /obj/screen/bodytemp/Click(var/location, var/control, var/params)
 	if(istype(usr) && usr.bodytemp == src)

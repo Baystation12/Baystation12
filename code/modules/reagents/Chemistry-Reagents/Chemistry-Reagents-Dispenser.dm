@@ -107,6 +107,7 @@
 	color = "#404030"
 	touch_met = 5
 	var/nutriment_factor = 0
+	var/hydration_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/toxicity = 1
 
@@ -128,7 +129,8 @@
 	return
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition += nutriment_factor * removed
+	M.adjust_nutrition(nutriment_factor * removed)
+	M.adjust_hydration(hydration_factor * removed)
 	var/strength_mod = 1
 	if(alien == IS_SKRELL)
 		strength_mod *= 5
@@ -432,7 +434,7 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	M.nutrition += removed * 3
+	M.adjust_nutrition(removed * 3)
 
 	if(alien == IS_UNATHI)
 		var/datum/species/unathi/S = M.species

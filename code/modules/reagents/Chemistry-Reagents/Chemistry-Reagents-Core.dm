@@ -148,6 +148,9 @@
 		return
 	M.adjustToxLoss(2 * removed)
 
+/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	M.adjust_hydration(removed * 10)
+
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
@@ -221,6 +224,7 @@
 	reagent_state = SOLID
 	color = "#619494"
 	adj_temp = -5
+	hydration = 10
 
 	glass_name = "ice"
 	glass_desc = "Generally, you're supposed to put something else in there too..."

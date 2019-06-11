@@ -64,9 +64,9 @@
 	var/blood_volume = owner.get_blood_volume()
 	if(blood_volume < BLOOD_VOLUME_SAFE || is_bruised())
 		if(owner.nutrition >= 300)
-			owner.nutrition -= 10
+			owner.adjust_nutrition(-10)
 		else if(owner.nutrition >= 200)
-			owner.nutrition -= 3
+			owner.adjust_nutrition(-3)
 
 //We got it covered in Process with more detailed thing
 /obj/item/organ/internal/liver/handle_regeneration()
