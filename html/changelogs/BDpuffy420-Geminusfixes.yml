@@ -40,3 +40,5 @@ changes:
   - maptweak: "Added more life to the city (more NPCS) "
   - maptweak: "Fixes colony MAC to be useable"
   - maptweak: "Re-open the colony mining area and fixed up caves"
+  - bugfix: "Fix M7 & M7S inhand sprites"
+  - bugfix: "Fix Ultra Spawn issue (let the salt flow once again) "
