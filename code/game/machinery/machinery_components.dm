@@ -42,18 +42,17 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(LAZYACCESS(uncreated_component_parts, part.type) && (part in src))
 		return TRUE
 
-// Returns a component instance of the given (exact) type, or null if no such type is present.
+// Returns a component instance of the given type, or null if no such type is present.
 /obj/machinery/proc/get_component_of_type(var/part_type)
 	. = locate(part_type) in component_parts
 	if(.)
 		return
-	var/exists = LAZYACCESS(uncreated_component_parts, part_type)
-	if(exists)
-		uncreated_component_parts[part_type]-- //bookkeeping to make sure tally is correct.
-		if(!uncreated_component_parts[part_type])
-			LAZYREMOVE(uncreated_component_parts, part_type)
-
-		. = install_component(part_type, TRUE)
+	for(var/path in uncreated_component_parts)
+		if(ispath(path, part_type))
+			uncreated_component_parts[path]-- //bookkeeping to make sure tally is correct.
+			if(!uncreated_component_parts[path])
+				LAZYREMOVE(uncreated_component_parts, path)
+			return install_component(path, TRUE)
 
 // Can be given a path or an instance. False will guarantee part creation. 
 // If an instance is given or created, it is returned, otherwise null is returned.

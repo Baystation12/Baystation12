@@ -67,6 +67,7 @@
 	name = "battery backup"
 	desc = "A self-contained battery backup system, using replaceable cells to provide backup power."
 	var/obj/item/weapon/cell/cell
+	var/charge_channel = ENVIRON  // The channel it attempts to charge from.
 	var/charge_rate = 1           // This is in battery units, per tick.
 	var/can_charge = TRUE
 	var/charge_wait_counter = 10  // How many ticks we wait until we start charging after charging becomes an option.
@@ -103,14 +104,14 @@
 
 	// try and recharge
 	var/area/A = get_area(machine)
-	if(!can_charge || !cell || cell.fully_charged() || !A.powered(ENVIRON))
+	if(!can_charge || !cell || cell.fully_charged() || !A.powered(charge_channel))
 		charge_wait_counter = initial(charge_wait_counter)
 		return
 	if(charge_wait_counter > 0)
 		charge_wait_counter--
 		return
 	var/give = cell.give(charge_rate) / CELLRATE
-	A.use_power_oneoff(give, ENVIRON)
+	A.use_power_oneoff(give, charge_channel)
 
 /obj/item/weapon/stock_parts/power/battery/can_provide_power(var/obj/machinery/machine)
 	if(cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
