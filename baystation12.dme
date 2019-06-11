@@ -1038,6 +1038,7 @@
 #include "code\game\objects\items\weapons\material\swords.dm"
 #include "code\game\objects\items\weapons\material\thrown.dm"
 #include "code\game\objects\items\weapons\material\twohanded.dm"
+#include "code\game\objects\items\weapons\material\urn.dm"
 #include "code\game\objects\items\weapons\melee\energy.dm"
 #include "code\game\objects\items\weapons\melee\misc.dm"
 #include "code\game\objects\items\weapons\special_attacks\backstab.dm"
