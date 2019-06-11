@@ -79,7 +79,7 @@
 		if(prob(prob_hit_newbounds))
 			bounds_to_use = new_bounds
 		else
-			return
+			return 0
 
 	if(overmap_object_hit.fore_dir == EAST || WEST)
 		start_co_ords = generate_co_ords_x_start(bounds_to_use)
@@ -106,6 +106,7 @@
 	if(ship_hit_sound)
 		for(var/z_level_om in overmap_object_hit.map_z)
 			playsound(locate(new_proj.x,new_proj.y,z_level_om), ship_hit_sound, 100,1, 255,,1)
+	return 1
 
 /obj/item/projectile/overmap/on_impact(var/atom/impacted)
 	var/obj/effect/overmap/overmap_object = impacted
