@@ -30,9 +30,6 @@
 #include "invasion_geminus_jobdefs.dm"
 #include "invasion_geminus_unit_tests.dm"
 
-#include "../civ_ships/CCV_Comet.dm"
-#include "../civ_ships/CCV_Comet.dmm"
-
 #include "../../code/modules/halo/lobby_music/odst_music.dm"
 #include "../../code/modules/halo/lobby_music/halo_music.dm"
 
