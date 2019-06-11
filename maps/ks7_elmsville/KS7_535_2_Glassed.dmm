@@ -505,7 +505,7 @@
 "jL" = (/turf/simulated/floor/plating{icon_state = "dmg2"},/area/exo_Ice_facility/basement/exterior/cave)
 "jM" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/tiled,/area/exo_Ice_facility/basement/interior/storage)
 "jN" = (/turf/unsimulated/mineral,/area/exo_Ice_facility/basement/interior/hallway)
-"jO" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/ground/interior/hallway)
+"jO" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_Ice_facility/basement/interior/hallway)
 "jP" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/basement/interior/hallway)
 "jQ" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/basement/interior/hallway)
 "jR" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility/basement/interior/hallway)
