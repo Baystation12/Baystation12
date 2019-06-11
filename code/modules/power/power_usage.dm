@@ -56,10 +56,24 @@ This is /obj/machinery level code to properly manage power usage from the area.
 
 // This will have this machine have its area eat this much power next tick, and not afterwards. Do not use for continued power draw.
 /obj/machinery/proc/use_power_oneoff(var/amount, var/chan = POWER_CHAN)
+	if(chan == POWER_CHAN)
+		chan = power_channel
 	. = amount
 	for(var/thing in power_components)
 		var/obj/item/weapon/stock_parts/power/power = thing
 		var/used = power.use_power_oneoff(src, ., chan)
+		. -= used
+		if(. <= 0)
+			return
+
+// Same thing, but dry run; doesn't actually do it.
+/obj/machinery/proc/can_use_power_oneoff(var/amount, var/chan = POWER_CHAN)
+	if(chan == POWER_CHAN)
+		chan = power_channel
+	. = amount
+	for(var/thing in power_components)
+		var/obj/item/weapon/stock_parts/power/power = thing
+		var/used = power.can_use_power_oneoff(src, ., chan)
 		. -= used
 		if(. <= 0)
 			return

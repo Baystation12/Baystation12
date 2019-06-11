@@ -27,36 +27,45 @@
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
 
+/obj/item/weapon/stock_parts/attack_hand(mob/user)
+	if(istype(loc, /obj/machinery))
+		return FALSE // Can potentially add uninstall code here, but not currently supported.
+	return ..()
+
 /obj/item/weapon/stock_parts/proc/set_status(var/obj/machinery/machine, var/flag)
 	var/old_stat = status
 	status |= flag
 	if(old_stat != status)
-		machine.component_stat_change(src, old_stat, status)
+		if(!machine)
+			machine = loc
+		if(istype(machine))
+			machine.component_stat_change(src, old_stat, flag)
 
 /obj/item/weapon/stock_parts/proc/unset_status(var/obj/machinery/machine, var/flag)
 	var/old_stat = status
 	status &= ~flag
 	if(old_stat != status)
-		machine.component_stat_change(src, old_stat, status)
+		if(!machine)
+			machine = loc
+		if(istype(machine))
+			machine.component_stat_change(src, old_stat, flag)
 
 /obj/item/weapon/stock_parts/proc/on_install(var/obj/machinery/machine)
-	set_status(PART_STAT_INSTALLED)
+	set_status(machine, PART_STAT_INSTALLED)
 
 /obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
-	unset_status(PART_STAT_INSTALLED)
+	unset_status(machine, PART_STAT_INSTALLED)
 	stop_processing(machine)
-
-/obj/item/weapon/stock_parts/proc/power_change()
 
 // Use to process on the machine it's installed on.
 
 /obj/item/weapon/stock_parts/proc/start_processing(var/obj/machinery/machine)
 	LAZYDISTINCTADD(machine.processing_parts, src)
-	set_status(PART_STAT_PROCESSING)
+	set_status(machine, PART_STAT_PROCESSING)
 
 /obj/item/weapon/stock_parts/proc/stop_processing(var/obj/machinery/machine)
 	LAZYREMOVE(machine.processing_parts, src)
-	unset_status(PART_STAT_PROCESSING)
+	unset_status(machine, PART_STAT_PROCESSING)
 
 /obj/item/weapon/stock_parts/proc/machine_process(var/obj/machinery/machine)
 	return PROCESS_KILL

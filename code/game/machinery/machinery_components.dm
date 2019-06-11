@@ -61,6 +61,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(ispath(part))
 		if(force || !(ispath(part, /obj/item/weapon/stock_parts) && initial(part.lazy_initialize)))
 			part = new part(src) // Forced to make, or we don't lazy-init, so create.
+			. = part
 	else
 		part.forceMove(src) // Were given an instance to begin with.
 		. = part
@@ -70,12 +71,15 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		part.on_install(src)
 	else if(ispath(part))
 		LAZYINITLIST(uncreated_component_parts)
-		uncreated_component_parts[part.type] += 1
+		uncreated_component_parts[part] += 1
 	else // Wrong type
 		var/obj/item/weapon/stock_parts/building_material/material = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
 		if(!material)
-			material = install_component(/obj/item/weapon/stock_parts/building_material)
+			material = install_component(/obj/item/weapon/stock_parts/building_material, refresh_parts = FALSE)
 		material.add_material(part)
+
+	if(.)
+		GLOB.destroyed_event.register(part, src, .proc/component_destroyed)
 
 	if(refresh_parts)
 		RefreshParts()
@@ -96,6 +100,12 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	part.dropInto(loc)
 	RefreshParts()
 	return part
+
+/obj/machinery/proc/component_destroyed(var/obj/item/component)
+	GLOB.destroyed_event.unregister(component, src)
+	LAZYREMOVE(component_parts, component)
+	LAZYREMOVE(processing_parts, component)
+	power_components -= component
 
 /obj/machinery/proc/total_component_rating_of_type(var/part_type)
 	. = 0
@@ -122,10 +132,9 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/proc/component_stat_change(var/obj/item/weapon/stock_parts/part, old_stat, flag)
 
 /obj/machinery/attackby(obj/item/I, mob/user)
-	if((. = ..()))
-		return
 	for(var/obj/item/weapon/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
 		if((. = part.attackby(I, user)))
 			return
+	return ..()

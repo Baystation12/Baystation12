@@ -73,8 +73,9 @@
 		part.terminal_dir = d
 		var/turf/T = get_step(src, d)
 		for(var/obj/machinery/power/terminal/term in T)
-			if(term && term.dir == turn(d, 180) && !term.master)
-				part.set_terminal(term)
+			if(term.dir == turn(d, 180) && !term.master)
+				part.set_terminal(src, term)
+				term.connect_to_network()
 	update_icon()
 
 /obj/machinery/power/smes/add_avail(var/amount)
@@ -225,11 +226,11 @@
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 
 	if(default_deconstruction_screwdriver(user, W))
-		return
+		return TRUE
 
 	if (!panel_open)
 		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
-		return 0
+		return TRUE
 
 	if((. = ..()))
 		return
@@ -238,14 +239,14 @@
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.isOn())
 			to_chat(user, "Turn on \the [WT] first!")
-			return 0
+			return TRUE
 		if(!damage)
 			to_chat(user, "\The [src] is already fully repaired.")
-			return 0
+			return TRUE
 		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
 			to_chat(user, "You repair all structural damage to \the [src]")
 			damage = 0
-		return 0
+		return TRUE
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 

@@ -328,10 +328,8 @@
 	if (failing)
 		to_chat(user, "<span class='warning'>The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.</span>")
 		return
-	// If parent returned 1:
-	// - Hatch is open, so we can modify the SMES
-	// - No action was taken in parent function (terminal de/construction atm).
-	if (..())
+
+	if (!..())
 
 		// Multitool - change RCON tag
 		if(isMultitool(W))

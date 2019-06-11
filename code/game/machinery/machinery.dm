@@ -123,8 +123,7 @@ Class Procs:
 /obj/machinery/Destroy()
 	SSmachines.machinery -= src
 	STOP_PROCESSING(SSmachines, src)
-	QDEL_NULL_LIST(component_parts)
-	processing_parts = null
+	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
 	. = ..()
 
 /obj/machinery/Process()
