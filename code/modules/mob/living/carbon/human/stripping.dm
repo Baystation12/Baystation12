@@ -35,6 +35,25 @@
 			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				toggle_sensors(user)
 			return
+		if ("lock_sensors")
+			if (!istype(w_uniform, /obj/item/clothing/under))
+				return
+			var/obj/item/clothing/under/subject_uniform = w_uniform
+			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
+			if (do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+				if (subject_uniform != w_uniform)
+					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
+					return
+				if (!subject_uniform.has_sensor)
+					to_chat(user, SPAN_WARNING("\The [subject_uniform] has no sensors to lock."))
+					return
+				var/obj/item/device/multitool/user_multitool = user.get_multitool()
+				if (!istype(user_multitool))
+					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [subject_uniform]'s sensors."))
+					return
+				subject_uniform.has_sensor = subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
+				visible_message(SPAN_NOTICE("\The [user] [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [subject_uniform]'s suit sensor controls."), range = 2)
+			return
 		if("internals")
 			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
 			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
