@@ -1,0 +1,6 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "The brig no longer contains prison camp clothes because it's not one."
+  - tweak: "The brig officer gets a multitool for locking guests' sensors on."
+  - tweak: "You can lock and unlock suit sensors through the stripping menu with a multitool."
