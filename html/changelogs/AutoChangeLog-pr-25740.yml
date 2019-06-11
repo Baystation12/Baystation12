@@ -1,0 +1,6 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Hardsuit interface now has internal tank controls."
+  - tweak: "Hardsuit interface has been updated. Fresh coat of paint to keep it looking good."
+  - bugfix: "Tank \"reset\" button now works properly, resetting tank release pressure to its original value."
