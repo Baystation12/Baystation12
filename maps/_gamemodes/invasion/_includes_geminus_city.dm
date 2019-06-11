@@ -39,6 +39,8 @@
 	#include "overall_outfits.dm"
 	#include "mapdef.dm"
 
+	#include "gamemode_revolution.dm"
+
 	#include "../../../code/modules/halo/lobby_music/odst_music.dm"
 	#include "../../../code/modules/halo/lobby_music/halo_music.dm"
 
