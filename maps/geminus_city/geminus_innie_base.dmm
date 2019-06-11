@@ -230,7 +230,7 @@
 "ev" = (/obj/effect/decal/cleanable/flour,/turf/simulated/floor/reinforced,/area/geminus_underground/innie/echo)
 "ew" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/reinforced,/area/geminus_underground/innie/echo)
 "ex" = (/turf/simulated/floor/asteroid/planet,/area/geminus_underground/innie/charlie)
-"ey" = (/obj/item/weapon/storage/box/m26{step_x = 0; step_y = 0},/obj/structure/table/rack,/obj/item/weapon/storage/box/m26{step_x = 0; step_y = 0},/obj/item/weapon/storage/box/m26{step_x = 0; step_y = 0},/obj/item/weapon/storage/box/m26{step_x = 0; step_y = 0},/obj/item/weapon/storage/box/m26{step_x = 0; step_y = 0},/obj/item/weapon/storage/box/m26{step_x = 0; step_y = 0},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
+"ey" = (/obj/item/weapon/storage/box/m26,/obj/structure/table/rack,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "ez" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/table/rack,/obj/item/clothing/under/tactical,/obj/item/clothing/under/tactical,/obj/item/clothing/under/tactical,/turf/simulated/floor/tiled/dark,/area/geminus_underground/innie/echo)
 "eA" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/geminus_underground/innie/echo)
 "eB" = (/obj/structure/table/woodentable,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/geminus_underground/innie/echo)
