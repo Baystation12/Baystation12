@@ -44,8 +44,11 @@
 /area/covenant_corvette/unggoyquarters
 	name = "SDV Vindicative Infraction Unggoy Quarters"
 
-/area/covenant_corvette/dockingumbilical
-	name = "SDV Vindicative Infraction Docking Umbilicals"
+/area/covenant_corvette/dockingumbilicalport
+	name = "SDV Vindicative Infraction Docking Umbilical Port"
+
+/area/covenant_corvette/dockingumbilicalstarboard
+	name = "SDV Vindicative Infraction Docking Umbilical Port"
 
 /area/covenant_corvette/auxmedical
 	name = "SDV Vindicative Infraction Auxiliary Medical Bay"
@@ -72,4 +75,5 @@
 /area/covenant_corvette/pulse_lasersstarboard
 /area/covenant_corvette/pulse_lasersport
 
-/area/covenant_corvette/plastorps
+/area/covenant_corvette/plastorpsport
+/area/covenant_corvette/plastorpsstarboard
