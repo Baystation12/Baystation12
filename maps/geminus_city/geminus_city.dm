@@ -4,7 +4,14 @@
 
 	#include "areas.dm"
 
-	#include "unit_tests.dm"
+	#include "fakewall.dm"
+	#include "sewer_tunnel_thin.dm"
+	#include "bumpstairs.dm"
+
+	#include "innie_outfits.dm"
+	#include "innie_spawns.dm"
+	#include "innie_jobs.dm"
+
 	#include "geminus_city_spawns.dm"
 	#include "geminus_city_overmap.dm"
 	#include "geminus_city_outfits.dm"
@@ -13,11 +20,12 @@
 
 	//#include "geminus_city_jobdefs.dm"
 	#include "invasion_geminus.dm"
-	#include "invasion_geminus_unit_tests.dm"
 
 	//#include "geminuscity_4.dmm"
 	#include "geminuscity_3.dmm"
 	#include "geminuscity_2.dmm"
+	#include "geminuscity_1.dmm"
+	#include "geminus_innie_base.dmm"
 
 #elif !defined(MAP_OVERRIDE)
 

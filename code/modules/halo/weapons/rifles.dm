@@ -64,6 +64,7 @@
 	name = "\improper MA37 ICWS"
 	desc = "Also formally known as the MA5. Takes 7.62mm ammo."
 	icon_state = "MA37"
+	item_state = "ma37"
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
@@ -91,6 +92,7 @@
 	name = "\improper MA3 Assault Rifle"
 	desc = "An obsolete military assault rifle commonly available on the black market. Takes 7.62mm ammo."
 	icon_state = "MA3"
+	item_state = "ma3"
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA3
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
@@ -158,7 +160,7 @@
 	desc = "The BR55 is an all-round infantry weapon with a 2x magnification scope."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "BR55-Loaded-Base"
-	item_state = "br85"
+	item_state = "br55"
 	magazine_type = /obj/item/ammo_magazine/m95_sap/br55
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	caliber = "9.5mm"

@@ -1,13 +1,14 @@
 
-/datum/job/ship_crew_innie
+/datum/job/geminus_innie
 	title = "Insurrectionist"
 	spawn_faction = "Insurrection"
-	total_positions = 12
-	spawn_positions = 6
+	latejoin_at_spawnpoints = 1
+	total_positions = -1
+	spawn_positions = -1
 	access = list(632)
-	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
+	outfit_type = /decl/hierarchy/outfit/job/colonist
 	selection_color = "#ff0000"
-	spawnpoint_override = "Innie Base Spawns"
+	spawnpoint_override = "Geminus Innie"
 	alt_titles = list(\
 	"Insurrectionist Ship Crew",
 	"Insurrectionist Technician",
@@ -33,13 +34,25 @@
 	"Insurrectionist Saboteur",\
 	"Insurrectionist Infiltrator")
 
-/datum/job/ship_cap_innie
+/datum/job/geminus_innie/officer
+	title = "Insurrectionist Officer"
+	spawn_faction = "Insurrection"
+	latejoin_at_spawnpoints = 1
+	total_positions = 2
+	spawn_positions = 2
+	access = list(632)
+	selection_color = "#ff0000"
+	spawnpoint_override = "Geminus Innie"
+	alt_titles = null
+
+/datum/job/geminus_innie/commander
 	title = "Insurrectionist Commander"
 	spawn_faction = "Insurrection"
+	latejoin_at_spawnpoints = 1
 	total_positions = 1
 	spawn_positions = 1
 	access = list(632,633)
-	outfit_type = /decl/hierarchy/outfit/job/innie_crew_captain
 	selection_color = "#ff0000"
-	spawnpoint_override = "Innie Base Spawns"
+	spawnpoint_override = "Geminus Innie"
 	faction_whitelist = "Insurrection"
+	alt_titles = null

@@ -46,7 +46,7 @@
 	desc = "Fires a short-lived but powerful lance of plasma, repeated quick firing will overheat the weapon and leave it unsuable for a short while."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "beam rifle"
-	item_state = "beam rifle"
+	item_state = "w_beamrifle"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
@@ -97,7 +97,7 @@ obj/item/weapon/gun/projectile/type31needlerifle
 	desc = "A unique combination of the Type-33 and Type-51."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Needle rifle"
-	item_state = "Needle rifle"
+	item_state = "w_needlerifle"
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/cov_needlerifle_fire.ogg'
