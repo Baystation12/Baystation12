@@ -224,6 +224,7 @@
 // Finally.. the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
 	. = MOVEMENT_HANDLED
+
 	if(mob.moving)
 		return
 
@@ -248,6 +249,9 @@
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
 
+	//Moving with objects stuck in you can cause bad times.
+	if(get_turf(mob) != old_turf)
+		mob.handle_embedded_and_stomach_objects()
 	mob.moving = 0
 
 /datum/movement_handler/mob/movement/MayMove(var/mob/mover)
