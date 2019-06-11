@@ -65,9 +65,6 @@
 	else
 		return 0
 
-/obj/machinery/power/proc/disconnect_terminal(var/obj/machinery/power/terminal/term) // machines without a terminal will just return, no harm no fowl.
-	return
-
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()
 	var/turf/T = src.loc
@@ -274,9 +271,10 @@
 		cell = power_source
 	else if(istype(power_source,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/apc = power_source
-		cell = apc.cell
-		if (apc.terminal)
-			PN = apc.terminal.powernet
+		cell = apc.get_cell()
+		var/obj/machinery/power/terminal/term = apc.terminal()
+		if (term)
+			PN = term.powernet
 	else if (!power_source)
 		return 0
 	else

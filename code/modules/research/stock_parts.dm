@@ -27,14 +27,23 @@
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
 
-#define PART_STAT_INSTALLED  1
-#define PART_STAT_PROCESSING 2
+/obj/item/weapon/stock_parts/proc/set_status(var/obj/machinery/machine, var/flag)
+	var/old_stat = status
+	status |= flag
+	if(old_stat != status)
+		machine.component_stat_change(src, old_stat, status)
+
+/obj/item/weapon/stock_parts/proc/unset_status(var/obj/machinery/machine, var/flag)
+	var/old_stat = status
+	status &= ~flag
+	if(old_stat != status)
+		machine.component_stat_change(src, old_stat, status)
 
 /obj/item/weapon/stock_parts/proc/on_install(var/obj/machinery/machine)
-	status |= PART_STAT_INSTALLED
+	set_status(PART_STAT_INSTALLED)
 
 /obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
-	status &= ~PART_STAT_INSTALLED
+	unset_status(PART_STAT_INSTALLED)
 	stop_processing(machine)
 
 /obj/item/weapon/stock_parts/proc/power_change()
@@ -43,11 +52,11 @@
 
 /obj/item/weapon/stock_parts/proc/start_processing(var/obj/machinery/machine)
 	LAZYDISTINCTADD(machine.processing_parts, src)
-	status |= PART_STAT_PROCESSING
+	set_status(PART_STAT_PROCESSING)
 
 /obj/item/weapon/stock_parts/proc/stop_processing(var/obj/machinery/machine)
 	LAZYREMOVE(machine.processing_parts, src)
-	status |= PART_STAT_PROCESSING
+	unset_status(PART_STAT_PROCESSING)
 
 /obj/item/weapon/stock_parts/proc/machine_process(var/obj/machinery/machine)
 	return PROCESS_KILL
@@ -301,6 +310,7 @@
 				return
 
 /obj/item/weapon/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
+	..()
 	for(var/obj/item/I in materials)
 		I.dropInto(loc)
 	materials = null

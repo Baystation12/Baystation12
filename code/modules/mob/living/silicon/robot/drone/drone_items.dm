@@ -232,20 +232,12 @@
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
-		if(A.opened)
-			if(A.cell)
-
-				wrapped = A.cell
-
-				A.cell.add_fingerprint(user)
-				A.cell.update_icon()
-				A.cell.forceMove(src)
-				A.cell = null
-
-				A.charging = 0
-				A.update_icon()
-
-				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+		if(A.components_are_accessible(/obj/item/weapon/stock_parts/power/battery))
+			var/obj/item/weapon/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
+			if(bat.cell)
+				wrapped = bat.cell
+				bat.cell.forceMove(src)
+				bat.remove_cell(src)
 
 	else if(istype(target,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/A = target

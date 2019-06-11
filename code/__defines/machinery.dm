@@ -21,7 +21,8 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define EQUIP   1
 #define LIGHT   2
 #define ENVIRON 3
-#define TOTAL   4 // For total power used only.
+#define LOCAL   4 // Machines running on local power. Not tracked by area.
+#define TOTAL   5 // For total power used only.
 
 // Bitflags for machine stat variable.
 #define BROKEN   0x1
@@ -127,3 +128,8 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking, and is the one responsible for deciding to accept a docking request and signals when docking and undocking is complete. (Think server == station, client == shuttle)
 
 #define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
+
+#define PART_STAT_INSTALLED  1
+#define PART_STAT_PROCESSING 2
+#define PART_STAT_ACTIVE     4
+#define PART_STAT_CONNECTED  8

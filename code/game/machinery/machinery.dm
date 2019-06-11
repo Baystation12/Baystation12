@@ -118,6 +118,7 @@ Class Procs:
 
 	if(populate_parts)
 		populate_parts()
+	install_component(/obj/item/weapon/stock_parts/power/apc) // Everyone gets one for now.
 
 /obj/machinery/Destroy()
 	SSmachines.machinery -= src
@@ -236,6 +237,12 @@ Class Procs:
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
 			return 1
 
+	for(var/obj/item/weapon/stock_parts/part in component_parts)
+		if(!components_are_accessible(part.type))
+			continue
+		if((. = part.attack_hand(user)))
+			return
+
 	return ..()
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
@@ -268,9 +275,10 @@ Class Procs:
 		var/area/temp_area = get_area(src)
 		if(temp_area)
 			var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
+			var/obj/machinery/power/terminal/terminal = temp_apc && temp_apc.terminal()
 
-			if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
-				temp_apc.terminal.powernet.trigger_warning()
+			if(terminal && terminal.powernet)
+				terminal.powernet.trigger_warning()
 		if(user.stunned)
 			return 1
 	return 0
@@ -375,3 +383,8 @@ Class Procs:
 	. = ..()
 	if(. && !CanFluidPass())
 		fluid_update()
+
+/obj/machinery/get_cell()
+	var/obj/item/weapon/stock_parts/power/battery/battery = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
+	if(battery)
+		return battery.get_cell()

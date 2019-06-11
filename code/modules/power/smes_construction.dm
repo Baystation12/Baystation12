@@ -96,12 +96,9 @@
 	input_level = input_level_max
 	output_level = output_level_max
 
+
 /obj/machinery/power/smes/buildable/Destroy()
-	qdel(wires)
-	wires = null
-	for(var/obj/machinery/power/terminal/T in terminals)
-		T.master = null
-	terminals = null
+	QDEL_NULL(wires)
 	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 	return ..()
@@ -303,9 +300,9 @@
 	if (!src.powernet)
 		return
 
-	for(var/obj/machinery/power/terminal/T in src.powernet.nodes)
-		if(istype(T.master, /obj/machinery/power/apc))
-			var/obj/machinery/power/apc/A = T.master
+	for(var/obj/machinery/power/terminal/T in powernet.nodes)
+		var/obj/machinery/power/apc/A = T.master_machine()
+		if(istype(A))
 			if (prob(overload_chance))
 				A.overload_lighting()
 			if (prob(failure_chance))
@@ -361,7 +358,7 @@
 
 		// Crowbar - Disassemble the SMES.
 		if(isCrowbar(W))
-			if (terminals.len)
+			if (!(stat & BROKEN))
 				to_chat(user, "<span class='warning'>You have to disassemble the terminal first!</span>")
 				return
 

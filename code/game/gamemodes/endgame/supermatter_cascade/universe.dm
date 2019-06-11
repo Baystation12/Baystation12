@@ -105,8 +105,9 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 	for (var/obj/machinery/power/apc/APC in SSmachines.machinery)
 		if (!(APC.stat & BROKEN) && !APC.is_critical)
 			APC.chargemode = 0
-			if(APC.cell)
-				APC.cell.charge = 0
+			var/obj/item/weapon/cell/cell = APC.get_cell()
+			if(cell)
+				cell.charge = 0
 			APC.emagged = 1
 			APC.queue_icon_update()
 
