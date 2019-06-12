@@ -6,7 +6,7 @@
 	extended_round_description = "In an outer colony on the edge of human space, a revolution is brewing."
 
 	factions = list(/datum/faction/insurrection)
-	disabled_jobs = list(\
+	disabled_jobs_types = list(\
 		/datum/job/researchdirector,\
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\

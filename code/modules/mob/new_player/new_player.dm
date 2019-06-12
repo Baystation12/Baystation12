@@ -287,6 +287,8 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src, job.title,job.is_whitelisted, job))	return 0
 	if(!job.player_old_enough(src.client))	return 0
+	if(ticker.mode.disabled_jobs.Find(job.title))	return 0
+	if(ticker.mode.disabled_jobs_types.Find(job.type))	return 0
 
 	return 1
 

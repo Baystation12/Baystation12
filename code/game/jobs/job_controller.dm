@@ -304,7 +304,7 @@ var/global/datum/controller/occupations/job_master
 
 				// Loop through all jobs
 				for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-					if(!job || ticker.mode.disabled_jobs.Find(job.title) )
+					if(!job || ticker.mode.disabled_jobs.Find(job.title) || ticker.mode.disabled_jobs_types.Find(job.type))
 						continue
 
 					if(jobban_isbanned(player, job.title,job.is_whitelisted))
