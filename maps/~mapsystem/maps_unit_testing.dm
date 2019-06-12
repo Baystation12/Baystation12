@@ -76,13 +76,19 @@
 		/obj/machinery/alarm = SUBTYPES,
 		/obj/machinery/vending/hydronutrients = SUBTYPES,
 		/obj/machinery/vending/hydroseeds = SUBTYPES,
+		/obj/machinery/atmospherics/pipe/simple/visible = SELF | SUBTYPES, // hidden ones are picked up by building code
+		/obj/machinery/atmospherics/pipe/manifold/visible = SELF | SUBTYPES,
+		/obj/machinery/atmospherics/pipe/manifold4w/visible = SELF | SUBTYPES,
+		/obj/machinery/atmospherics/pipe/cap/visible = SELF | SUBTYPES,
 
 		// Not buildable due to special nature (not machines in classical sense)
 		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF,
+		/obj/machinery/embedded_controller = SELF | SUBTYPES,
 
 		// Not buildable for balance or antag reasons
 		/obj/machinery/teleport = SELF | SUBTYPES,
 		/obj/machinery/vending/assist/antag = SELF,
 		/obj/machinery/vending/magivend = SELF,
-		/obj/machinery/vending/props = SELF
+		/obj/machinery/vending/props = SELF,
+		/obj/machinery/door/airlock = SUBTYPES // Unclear and should be re-examined further
 	)
