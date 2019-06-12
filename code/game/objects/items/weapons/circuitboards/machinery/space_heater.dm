@@ -1,5 +1,5 @@
 /obj/item/weapon/stock_parts/circuitboard/space_heater
-	name = T_BOARD("space_heater")
+	name = T_BOARD("space heater")
 	board_type = "machine"
 	build_path = /obj/machinery/space_heater
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_POWER = 2)

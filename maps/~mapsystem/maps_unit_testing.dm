@@ -66,10 +66,23 @@
 	var/list/area_purity_test_exempt_areas = list()
 
 	var/list/buildable_exempt_machines = list(
+		// Not buildable due to custom building procedure
 		/obj/machinery/power/terminal = SELF,
 		/obj/machinery/power/apc = SELF | SUBTYPES,
-		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF,
+		/obj/machinery/door/firedoor = SELF | SUBTYPES,
+
+		// Not buildable because a base type is buildable
 		/obj/machinery/power/smes = SUBTYPES,
-		/obj/machinery/power/alarm = SUBTYPES,
-		/obj/machinery/door/firedoor = SELF | SUBTYPES
+		/obj/machinery/alarm = SUBTYPES,
+		/obj/machinery/vending/hydronutrients = SUBTYPES,
+		/obj/machinery/vending/hydroseeds = SUBTYPES,
+
+		// Not buildable due to special nature (not machines in classical sense)
+		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF,
+
+		// Not buildable for balance or antag reasons
+		/obj/machinery/teleport = SELF | SUBTYPES,
+		/obj/machinery/vending/assist/antag = SELF,
+		/obj/machinery/vending/magivend = SELF,
+		/obj/machinery/vending/props = SELF
 	)

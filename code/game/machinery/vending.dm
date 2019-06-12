@@ -69,27 +69,20 @@
 	var/obj/item/weapon/material/coin/coin
 	var/datum/wires/vending/wires = null
 
-/obj/machinery/vending/New()
-	..()
+/obj/machinery/vending/Initialize(mapload, dir = 0, populate_parts = TRUE)
+	. = ..()
 	wires = new(src)
-	spawn(4)
-		if(src.product_slogans)
-			src.slogan_list += splittext(src.product_slogans, ";")
+	if(product_slogans)
+		slogan_list += splittext(product_slogans, ";")
 
-			// So not all machines speak at the exact same time.
-			// The first time this machine says something will be at slogantime + this random value,
-			// so if slogantime is 10 minutes, it will say it at somewhere between 10 and 20 minutes after the machine is crated.
-			src.last_slogan = world.time + rand(0, slogan_delay)
+		// So not all machines speak at the exact same time.
+		// The first time this machine says something will be at slogantime + this random value,
+		// so if slogantime is 10 minutes, it will say it at somewhere between 10 and 20 minutes after the machine is crated.
+		last_slogan = world.time + rand(0, slogan_delay)
 
-		if(src.product_ads)
-			src.ads_list += splittext(src.product_ads, ";")
-
-		src.build_inventory()
-		power_change()
-
-		return
-
-	return
+	if(product_ads)
+		ads_list += splittext(product_ads, ";")
+	build_inventory(populate_parts)
 
 /**
  *  Build src.produdct_records from the products lists
@@ -98,7 +91,7 @@
  *  products that the vending machine is to carry without manually populating
  *  src.product_records.
  */
-/obj/machinery/vending/proc/build_inventory()
+/obj/machinery/vending/proc/build_inventory(var/populate_parts)
 	var/list/all_products = list(
 		list(src.products, CAT_NORMAL),
 		list(src.contraband, CAT_HIDDEN),
@@ -111,7 +104,10 @@
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
 
 			product.price = (entry in src.prices) ? src.prices[entry] : 0
-			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			if(populate_parts)
+				product.amount = current_list[1][entry] || 1
+			else
+				product.amount = 0
 			product.category = category
 
 			src.product_records.Add(product)
@@ -1012,7 +1008,7 @@
  *  This needs to be customized to fetch the actual names of the seeds, otherwise
  *  the machine would simply list "packet of seeds" times 20
  */
-/obj/machinery/vending/hydroseeds/build_inventory()
+/obj/machinery/vending/hydroseeds/build_inventory(var/populate_parts)
 	var/list/all_products = list(
 		list(src.products, CAT_NORMAL),
 		list(src.contraband, CAT_HIDDEN),
@@ -1027,7 +1023,7 @@
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry, name)
 
 			product.price = (entry in src.prices) ? src.prices[entry] : 0
-			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			product.amount = populate_parts ? current_list[1][entry] || 1 : 0
 			product.category = category
 
 			src.product_records.Add(product)
