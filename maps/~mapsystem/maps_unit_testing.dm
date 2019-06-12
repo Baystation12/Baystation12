@@ -61,3 +61,9 @@
 	)
 
 	var/list/area_purity_test_exempt_areas = list()
+
+	var/list/buildable_exempt_machines = list(
+		/obj/machinery/atmospherics/pipe,
+		/obj/machinery/power/terminal,
+		/obj/machinery/power/apc
+	)

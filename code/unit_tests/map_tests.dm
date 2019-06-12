@@ -788,5 +788,23 @@ datum/unit_test/ladder_check/start_test()
 
 	return TRUE
 
+/datum/unit_test/all_mapped_machines_shall_be_buildable
+	name = "MAP: mapped machines shall be buildable"
+
+/datum/unit_test/all_mapped_machines_shall_be_buildable/start_test()
+	var/fail = FALSE
+	for(var/obj/machinery/machine in SSmachines.machinery)
+		if(GLOB.machine_path_to_circuit_type[machine.type])
+			continue
+		if(is_type_in_list(machine, GLOB.using_map.buildable_exempt_machines))
+			continue
+		log_bad("Machine [log_info_line(machine)] is not buildable.")
+		fail = TRUE
+	if(fail)
+		fail("There were unbuildable machines mapped.")
+	else
+		pass("All mapped machines were buildable.")
+	return 1
+
 #undef SUCCESS
 #undef FAILURE
