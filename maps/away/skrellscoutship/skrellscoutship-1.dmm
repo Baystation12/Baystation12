@@ -83,6 +83,10 @@
 	icon_state = "tube1";
 	dir = 8
 	},
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12
+	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "ap" = (
