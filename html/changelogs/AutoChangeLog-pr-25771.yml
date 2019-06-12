@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "IPCs cannot be OCIE agents."
