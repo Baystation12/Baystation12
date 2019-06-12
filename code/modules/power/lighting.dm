@@ -131,6 +131,26 @@
 		if(2) icon_state = "bulb-construct-stage2"
 		if(3) icon_state = "bulb-empty"
 
+/obj/machinery/light_construct/small/red
+	fixture_type = /obj/machinery/light/small/red
+
+/obj/machinery/light_construct/small/emergency
+	fixture_type = /obj/machinery/light/small/emergency
+
+/obj/machinery/light_construct/spot
+	name = "spotlight fixture frame"
+	desc = "A spotlight fixture under construction."
+	fixture_type = /obj/machinery/light/spot
+	sheets_refunded = 4
+
+/obj/machinery/light_construct/nav
+	name = "navigation light fixture frame"
+	desc = "A navigation light under construction."
+	icon = 'icons/obj/lighting_nav.dmi'
+	icon_state = "nav10"
+	fixture_type = /obj/machinery/light/navigation
+	sheets_refunded = 4
+
 // the standard tube light fixture
 /obj/machinery/light
 	name = "light fixture"
@@ -167,14 +187,17 @@
 
 /obj/machinery/light/small/emergency
 	light_type = /obj/item/weapon/light/bulb/red
+	construct_type = /obj/machinery/light_construct/small/emergency
 
 /obj/machinery/light/small/red
 	light_type = /obj/item/weapon/light/bulb/red
+	construct_type = /obj/machinery/light_construct/small/red
 
 /obj/machinery/light/spot
 	name = "spotlight"
 	desc = "A more robust socket for light tubes that demand more power."
 	light_type = /obj/item/weapon/light/tube/large
+	construct_type = /obj/machinery/light_construct/spot
 
 // create a new lighting fixture
 /obj/machinery/light/Initialize(mapload, obj/machinery/light_construct/construct = null)
@@ -532,6 +555,7 @@
 	icon_state = "nav10"
 	base_state = "nav1"
 	light_type = /obj/item/weapon/light/tube/large
+	construct_type = /obj/machinery/light_construct/nav
 	on = TRUE
 
 /obj/machinery/light/navigation/delay2

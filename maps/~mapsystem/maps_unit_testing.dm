@@ -80,15 +80,22 @@
 		/obj/machinery/atmospherics/pipe/manifold/visible = SELF | SUBTYPES,
 		/obj/machinery/atmospherics/pipe/manifold4w/visible = SELF | SUBTYPES,
 		/obj/machinery/atmospherics/pipe/cap/visible = SELF | SUBTYPES,
+		/obj/machinery/suit_storage_unit = SUBTYPES,
+		/obj/machinery/light/navigation = SUBTYPES,
 
 		// Not buildable due to special nature (not machines in classical sense)
 		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF,
 		/obj/machinery/embedded_controller = SELF | SUBTYPES,
+		/obj/machinery/crystal_static = SELF | SUBTYPES,
+		/obj/machinery/crystal = SELF | SUBTYPES,
+		/obj/machinery/power/supermatter = SELF | SUBTYPES,
 
 		// Not buildable for balance or antag reasons
 		/obj/machinery/teleport = SELF | SUBTYPES,
 		/obj/machinery/vending/assist/antag = SELF,
 		/obj/machinery/vending/magivend = SELF,
 		/obj/machinery/vending/props = SELF,
-		/obj/machinery/door/airlock = SUBTYPES // Unclear and should be re-examined further
+		/obj/machinery/door/airlock = SUBTYPES, // Unclear and should be re-examined further
+		/obj/machinery/replicator = SELF | SUBTYPES,
+		/obj/machinery/light/small/readylight = SELF
 	)

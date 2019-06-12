@@ -111,6 +111,26 @@
 	result_type = /obj/item/frame/light/small
 	difficulty = 2
 
+/datum/stack_recipe/light_small/red
+	title = "small light fixture frame (red)"
+	result_type = /obj/item/frame/light/small/red
+
+/datum/stack_recipe/light_small/emergency
+	title = "small light fixture frame (emergency)"
+	result_type = /obj/item/frame/light/small/emergency
+
+/datum/stack_recipe/light_spot
+	title = "spotlight fixture frame"
+	result_type = /obj/item/frame/light/spot
+	req_amount = 4
+	difficulty = 3
+
+/datum/stack_recipe/light_nav
+	title = "navigation light fixture frame"
+	result_type = /obj/item/frame/light/nav
+	req_amount = 4
+	difficulty = 3
+
 /datum/stack_recipe/light_switch
 	title = "light switch"
 	result_type = /obj/item/frame/light_switch

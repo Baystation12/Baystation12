@@ -78,3 +78,19 @@
 	icon_state = "bulb-construct-item"
 	refund_amt = 1
 	build_machine_type = /obj/machinery/light_construct/small
+
+/obj/item/frame/light/small/red
+	build_machine_type = /obj/machinery/light_construct/small/red
+
+/obj/item/frame/light/small/emergency
+	build_machine_type = /obj/machinery/light_construct/small/emergency
+
+/obj/item/frame/light/spot
+	name = "spotlight fixture frame"
+	build_machine_type = /obj/machinery/light_construct/spot
+	refund_amt = 4
+
+/obj/item/frame/light/nav
+	name = "navigation light fixture frame"
+	build_machine_type = /obj/machinery/light_construct/nav
+	refund_amt = 4
