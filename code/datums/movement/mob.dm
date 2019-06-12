@@ -251,11 +251,22 @@
 
 	//Moving with objects stuck in you can cause bad times.
 	if(get_turf(mob) != old_turf)
+		if(MOVING_QUICKLY(mob))
+			mob.last_quick_move_time = world.time
+			mob.adjust_stamina(-(mob.get_stamina_used_per_step() * (1+mob.encumbrance())))
 		mob.handle_embedded_and_stomach_objects()
+
 	mob.moving = 0
 
 /datum/movement_handler/mob/movement/MayMove(var/mob/mover)
 	return IS_SELF(mover) &&  mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
+
+/mob/proc/get_stamina_used_per_step()
+	return 1
+
+/mob/living/carbon/human/get_stamina_used_per_step()
+	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
+	return config.minimum_sprint_cost + (config.skill_sprint_cost_range * mod)
 
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)
 	. = 0

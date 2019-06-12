@@ -209,11 +209,6 @@
 				var/mob/living/L = usr
 				L.resist()
 
-		if("mov_intent")
-			var/move_intent_type = next_in_list(usr.move_intent.type, usr.move_intents)
-			usr.move_intent = decls_repository.get_decl(move_intent_type)
-			usr.hud_used.move_intent.icon_state = usr.move_intent.hud_icon_state
-
 		if("Reset Machine")
 			usr.unset_machine()
 		if("internal")

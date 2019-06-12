@@ -127,8 +127,12 @@ var/list/gamemode_cache = list()
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
-	var/run_speed = 2
-	var/walk_speed = 1
+	var/run_delay = 3
+	var/walk_delay = 8
+	var/minimum_sprint_cost = 0.8
+	var/skill_sprint_cost_range = 0.8
+	var/minimum_stamina_recovery = 1
+	var/maximum_stamina_recovery = 3
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
@@ -777,10 +781,18 @@ var/list/gamemode_cache = list()
 				if("limbs_can_break")
 					config.limbs_can_break = value
 
-				if("run_speed")
-					config.run_speed = value
-				if("walk_speed")
-					config.walk_speed = value
+				if("run_delay")
+					config.run_delay = value
+				if("walk_delay")
+					config.walk_delay = value
+				if("minimum_sprint_cost")
+					config.minimum_sprint_cost = value
+				if("skill_sprint_cost_range")
+					config.skill_sprint_cost_range = value
+				if("minimum_stamina_recovery")
+					config.minimum_stamina_recovery = value
+				if("maximum_stamina_recovery")
+					config.maximum_stamina_recovery = value
 
 				if("human_delay")
 					config.human_delay = value

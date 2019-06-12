@@ -1,3 +1,6 @@
+/mob/living/carbon/human
+	move_intents = list(/decl/move_intent/walk)
+
 /mob/living/carbon/human/movement_delay()
 	var/tally = ..()
 
@@ -50,7 +53,8 @@
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			tally += E ? E.movement_delay(4) : 4
 
-	if(shock_stage >= 10) tally += 3
+	if(shock_stage >= 10 || get_stamina() <= 0)
+		tally += 3
 
 	if(is_asystole()) tally += 10  //heart attacks are kinda distracting
 
@@ -158,3 +162,6 @@
 				crutches--
 			else
 				E.add_pain(10)
+
+/mob/living/carbon/human/can_sprint()
+	return (stamina > 0)
