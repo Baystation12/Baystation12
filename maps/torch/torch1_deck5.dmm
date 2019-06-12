@@ -1549,10 +1549,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
-"dq" = (
-/obj/random_multi/single_item/runtime,
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
 "du" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -2090,6 +2086,18 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
+"eo" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/structure/sign/warning/compressed_gas{
+	dir = 4;
+	icon_state = "hikpa";
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/fifthdeck/aftstarboard)
 "eq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
 	dir = 1
@@ -7377,7 +7385,7 @@
 	icon_state = "corner_white";
 	dir = 4
 	},
-/turf/simulated/floor/holofloor/tiled,
+/turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/aft)
 "qw" = (
 /obj/effect/floor_decal/corner/mauve{
@@ -12348,6 +12356,10 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"EN" = (
+/obj/effect/shuttle_landmark/merc/hanger,
+/turf/space,
+/area/space)
 "ER" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -12489,6 +12501,10 @@
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
+"FS" = (
+/obj/effect/shuttle_landmark/skipjack/hanger,
+/turf/space,
+/area/space)
 "FU" = (
 /obj/machinery/camera/network/nanotrasen{
 	c_tag = "Petrov - Hallway Aft";
@@ -12862,18 +12878,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
-"Hp" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 1
-	},
-/obj/machinery/portable_atmospherics/canister/air/airlock,
-/obj/structure/sign/warning/compressed_gas{
-	dir = 4;
-	icon_state = "hikpa";
-	pixel_x = -32
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/fifthdeck/aftstarboard)
 "Hr" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -13224,20 +13228,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
-"Is" = (
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/catwalk,
-/obj/structure/sign/warning/compressed_gas{
-	dir = 8;
-	icon_state = "hikpa";
-	pixel_x = 32
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftstarboard)
 "It" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
@@ -13393,6 +13383,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
+"IW" = (
+/obj/effect/shuttle_landmark/ert/hanger,
+/turf/space,
+/area/space)
 "IY" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/newscaster{
@@ -13801,6 +13795,20 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/custodial)
+"Ku" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/structure/sign/warning/compressed_gas{
+	dir = 8;
+	icon_state = "hikpa";
+	pixel_x = 32
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/fifthdeck/aftstarboard)
 "Kw" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/white,
@@ -13855,10 +13863,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
-"KF" = (
-/obj/effect/shuttle_landmark/merc/hanger,
-/turf/space,
-/area/space)
 "KI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -14365,10 +14369,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/security)
-"Ms" = (
-/obj/effect/shuttle_landmark/ninja/hanger,
-/turf/space,
-/area/space)
 "Mt" = (
 /obj/structure/handrai{
 	icon_state = "handrail";
@@ -14551,10 +14551,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/cockpit)
-"Nc" = (
-/obj/effect/shuttle_landmark/skipjack/hanger,
-/turf/space,
-/area/space)
 "Ne" = (
 /turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
@@ -15108,6 +15104,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/toxins)
+"Pd" = (
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "Pe" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -15179,10 +15179,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/hallwaya)
-"Pu" = (
-/obj/effect/shuttle_landmark/ert/hanger,
-/turf/space,
-/area/space)
 "Pv" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/sign/directions/bridge{
@@ -16918,6 +16914,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
+"Wb" = (
+/obj/effect/shuttle_landmark/ninja/hanger,
+/turf/space,
+/area/space)
 "Wg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -24720,7 +24720,7 @@ aa
 aa
 aa
 aa
-Ms
+Wb
 aa
 aa
 aa
@@ -32606,7 +32606,7 @@ oU
 iT
 hw
 kg
-dq
+Pd
 ki
 kL
 hl
@@ -33774,7 +33774,7 @@ aa
 aa
 aa
 aa
-Nc
+FS
 aa
 aa
 aa
@@ -41069,7 +41069,7 @@ aa
 ZG
 ZG
 TA
-Is
+Ku
 hf
 An
 wk
@@ -42688,7 +42688,7 @@ WF
 HH
 hP
 BS
-Hp
+eo
 ZG
 ZG
 aa
@@ -43342,7 +43342,7 @@ aa
 aa
 aa
 aa
-Pu
+IW
 aa
 aa
 aa
@@ -48725,7 +48725,7 @@ aa
 aa
 aa
 aa
-KF
+EN
 aa
 aa
 aa
