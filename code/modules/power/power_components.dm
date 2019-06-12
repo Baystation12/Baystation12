@@ -94,6 +94,10 @@
 		return
 	cell = new_cell
 	GLOB.destroyed_event.register(cell, src, .proc/remove_cell)
+	if(!machine)
+		machine = loc
+	if(istype(machine))
+		machine.power_change()
 	return cell
 
 /obj/item/weapon/stock_parts/power/battery/proc/remove_cell()
@@ -101,6 +105,9 @@
 		GLOB.destroyed_event.unregister(cell, src)
 		. = cell
 		cell = null
+		var/obj/machinery/machine = loc
+		if(istype(machine))
+			machine.power_change()
 
 /obj/item/weapon/stock_parts/power/battery/proc/extract_cell(mob/user)
 	if(!cell)
