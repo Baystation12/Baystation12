@@ -1,26 +1,3 @@
-//GLOB.all_pipe_datums_by_category and GLOB.all_disposal_pipe_datums_by_category are in _global_vars\misc.dm
-
-/proc/initialize_pipe_datum_category_list()
-	var/list/categories = list(
-		/datum/pipe/pipe_dispenser/simple,
-		/datum/pipe/pipe_dispenser/supply,
-		/datum/pipe/pipe_dispenser/scrubber,
-		/datum/pipe/pipe_dispenser/fuel,
-		/datum/pipe/pipe_dispenser/he,
-		/datum/pipe/pipe_dispenser/device
-		)
-	for(var/category_type in categories)
-		for(var/recipe_type in subtypesof(category_type))
-			LAZYADD(GLOB.all_pipe_datums_by_category[category_type], new recipe_type(src))
-
-	var/disposal_categories = list(
-		/datum/pipe/disposal_dispenser/simple,
-		/datum/pipe/disposal_dispenser/device)
-
-	for(var/category_type in disposal_categories)
-		for(var/recipe_type in subtypesof(category_type))
-			LAZYADD(GLOB.all_disposal_pipe_datums_by_category[category_type], new recipe_type(src))
-
 /obj/machinery/pipedispenser
 	name = "Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'

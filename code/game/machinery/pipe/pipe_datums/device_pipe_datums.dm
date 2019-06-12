@@ -34,6 +34,11 @@
 	constructed_path = /obj/machinery/atmospherics/unary/vent_pump
 	pipe_class = PIPE_CLASS_UNARY
 
+/datum/pipe/pipe_dispenser/device/unaryvent/large
+	name = "high volume unary vent"
+	desc = "a high volume unary vent"
+	constructed_path = /obj/machinery/atmospherics/unary/vent_pump/high_volume
+
 /datum/pipe/pipe_dispenser/device/gaspump
 	name = "gas pump"
 	desc = "a pump. For gasses."
@@ -209,3 +214,14 @@
 	pipe_color = null
 	constructed_path = /obj/structure/drain
 	pipe_class = PIPE_CLASS_OTHER
+
+/datum/pipe/pipe_dispenser/device/tank
+	name = "pressure tank"
+	desc = "A large vessel containing pressurized gas."
+	build_icon = 'icons/atmos/tank.dmi'
+	build_icon_state = "air_map"
+	build_path = /obj/item/pipe/tank
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	pipe_type = PIPE_TANK
+	constructed_path = /obj/machinery/atmospherics/unary/tank
+	pipe_class = PIPE_CLASS_UNARY

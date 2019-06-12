@@ -290,5 +290,5 @@
 	pipe_class = PIPE_CLASS_UNARY
 
 //Cleanup
-#undef PIPE_NORMAL
+#undef PIPE_STRAIGHT
 #undef PIPE_BENT
