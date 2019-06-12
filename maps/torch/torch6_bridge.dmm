@@ -4647,11 +4647,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/aft)
-"lG" = (
-/obj/structure/dispenser/oxygen,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/dark,
-/area/aux_eva)
 "lH" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -8528,7 +8523,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/bridge)
 "ud" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8;
 	start_pressure = 450
 	},
@@ -12220,10 +12215,9 @@
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Fi" = (
-/obj/effect/floor_decal/corner/yellow/full,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/atmos/alt/sol,
-/turf/simulated/floor/tiled/dark,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/aux_eva)
 "Fj" = (
 /obj/machinery/computer/rdservercontrol{
@@ -13476,7 +13470,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
 "Jp" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -14669,7 +14663,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
 	name = "Bridge Conference Room";
-	sortType = "Bridge Conference Room"
+	sort_type = "Bridge Conference Room"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -14761,21 +14755,6 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/airless,
 /area/aquila/passenger)
-"OZ" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/aux_eva)
 "Pb" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Passenger Seating"
@@ -15190,13 +15169,10 @@
 /area/aquila/airlock)
 "QE" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 4
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
@@ -17217,7 +17193,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Bridge Storage";
-	sortType = "Bridge Storage"
+	sort_type = "Bridge Storage"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
@@ -34147,7 +34123,7 @@ on
 Sh
 pQ
 pQ
-Ki
+QE
 Ai
 Ai
 Zy
@@ -34347,12 +34323,12 @@ Sg
 ne
 on
 Th
-OH
+Dq
 Uh
 bk
 zz
 Bi
-Fi
+IW
 CO
 dV
 dV

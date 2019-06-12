@@ -894,9 +894,8 @@
 /obj/machinery/computer/air_control{
 	dir = 8;
 	name = "Atmospheric Sensors";
-	sensor_name = "External Air Sensor";
-	sensor_tag = "calypso_out";
 	sensors = list("calypso_out")
+	sensor_tag = "calypso_out"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
@@ -1288,7 +1287,6 @@
 /obj/item/device/spaceflare,
 /obj/item/device/spaceflare,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/airlock)
 "cT" = (
@@ -1823,7 +1821,7 @@
 /area/hallway/primary/fifthdeck/aft)
 "dT" = (
 /obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide{
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
 	dir = 4;
 	start_pressure = 1013.25
 	},
@@ -1841,7 +1839,7 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+/obj/machinery/atmospherics/pipe/simple/visible/universal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -10660,7 +10658,7 @@
 	icon_state = "camera";
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/tank{
+/obj/machinery/atmospherics/unary/tank{
 	icon_state = "air_map";
 	dir = 8
 	},
@@ -11084,7 +11082,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
 "Ar" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -12898,7 +12896,7 @@
 "Ht" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "phoron_sensor";
+	id_tag = "phoron_sensor"
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
@@ -16998,9 +16996,9 @@
 	input_tag = "phoron_in";
 	name = "Test Chamber Gas Monitor";
 	output_tag = "phoron_out";
-	sensor_name = "Test Chamber";
+	sensors = list("phoron_sensor" = "Test Chamber");
 	sensor_tag = "phoron_sensor";
-	sensors = list("phoron_sensor" = "Test Chamber")
+	sensor_name = "Test Chamber"
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
@@ -17789,9 +17787,9 @@
 	input_tag = "toxins_in";
 	name = "Toxins Gas Monitor";
 	output_tag = "toxins_out";
-	sensor_name = "Toxins Test Chamber";
+	sensors = list("toxins_sensor" = "Toxins Test Chamber");
 	sensor_tag = "toxins_sensor";
-	sensors = list("toxins_sensor" = "Toxins Test Chamber")
+	sensor_name = "Toxins Test Chamber"
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/toxins)

@@ -1043,9 +1043,9 @@
 	input_tag = "d1sh_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1sh_out";
-	sensor_name = "First Deck Starboard Nacelle Hydrogen Tank";
+	sensors = list("d1sh_sensor" = "Tank");
 	sensor_tag = "d1sh_sensor";
-	sensors = list("d1sh_sensor" = "Tank")
+	sensor_name = "Hydrogen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
@@ -1057,9 +1057,9 @@
 	input_tag = "d1so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1so2_out";
-	sensor_name = "First Deck Starboard Nacelle Oxygen Tank";
+	sensors = list("d1so2_sensor" = "Tank");
 	sensor_tag = "d1so2_sensor";
-	sensors = list("d1so2_sensor" = "Tank")
+	sensor_name = "Oxygem Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -13738,9 +13738,9 @@
 	input_tag = "d1ph_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1ph_out";
-	sensor_name = "First Deck Port Nacelle Hydrogen Tank";
+	sensors = list("d1ph_sensor" = "Tank");
 	sensor_tag = "d1ph_sensor";
-	sensors = list("d1ph_sensor" = "Tank")
+	sensor_name = "Hydrogen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
@@ -13752,9 +13752,9 @@
 	input_tag = "d1po2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1po2_out";
-	sensor_name = "First Deck Port Nacelle Oxygen Tank";
+	sensors = list("d1po2_sensor" = "Tank");
 	sensor_tag = "d1po2_sensor";
-	sensors = list("d1po2_sensor" = "Tank")
+	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -27588,8 +27588,8 @@
 	input_tag = "test_in";
 	name = "Test Chamber Gas Monitor";
 	output_tag = "test_out";
-	sensor_name = "Test Chamber";
 	sensor_tag = "testchamber_sensor";
+	sensor_name = "Test Chamber Sensor";
 	sensors = list("testchamber_sensor" = "Test Chamber")
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -28466,9 +28466,9 @@
 /obj/machinery/computer/air_control{
 	frequency = 1441;
 	name = "Xenoflora Gas Monitor";
-	sensor_name = "Xenoflora Environment";
+	sensors = list("xenobot_sensor" = "Xenoflora Environment");
 	sensor_tag = "xenobot_sensor";
-	sensors = list("xenobot_sensor" = "Xenoflora Environment")
+	sensor_name = "Xenoflora Environment"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";

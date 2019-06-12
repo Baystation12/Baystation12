@@ -14,7 +14,7 @@
 
 	var/constructed_path = /obj/machinery/air_sensor
 
-	use_power = 1
+	use_power = POWER_USE_IDLE
 
 /obj/machinery/air_sensor/on_update_icon()
 	if(!powered())
