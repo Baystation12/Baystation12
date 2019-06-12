@@ -1001,6 +1001,7 @@
 #include "code\game\objects\items\weapons\circuitboards\machinery\replicator.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\research.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\shieldgen.dm"
+#include "code\game\objects\items\weapons\circuitboards\machinery\space_heater.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\telecomms.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\unary_atmos.dm"
 #include "code\game\objects\items\weapons\grenades\anti_photon_grenade.dm"

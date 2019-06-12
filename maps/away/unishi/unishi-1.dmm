@@ -130,8 +130,7 @@
 /turf/simulated/wall/titanium,
 /area/unishi/engineering)
 "as" = (
-/obj/machinery/atmospherics/pipe/vent/high_volume{
-	icon_state = "intact";
+/obj/machinery/atmospherics/unary/vent_pump{
 	dir = 8
 	},
 /turf/space,

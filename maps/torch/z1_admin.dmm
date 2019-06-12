@@ -16287,7 +16287,7 @@
 	},
 /area/acting/backstage)
 "aMd" = (
-/obj/machinery/atmospherics/pipe/vent,
+/obj/machinery/atmospherics/unary/vent_pump,
 /turf/unsimulated/floor{
 	icon_state = "bcircuit"
 	},

@@ -73,7 +73,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "ap" = (
-/obj/machinery/atmospherics/pipe/vent/high_volume,
+/obj/machinery/atmospherics/unary/vent_pump,
 /turf/space,
 /area/space)
 "aq" = (
@@ -1662,8 +1662,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "eC" = (
-/obj/machinery/atmospherics/pipe/vent/high_volume{
-	icon_state = "intact";
+/obj/machinery/atmospherics/unary/vent_pump{
 	dir = 8
 	},
 /turf/space,
@@ -1741,8 +1740,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "eN" = (
-/obj/machinery/atmospherics/pipe/vent/high_volume{
-	icon_state = "intact";
+/obj/machinery/atmospherics/unary/vent_pump{
 	dir = 4
 	},
 /turf/space,
@@ -1829,8 +1827,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "fb" = (
-/obj/machinery/atmospherics/pipe/vent/high_volume{
-	icon_state = "intact";
+/obj/machinery/atmospherics/unary/vent_pump{
 	dir = 4
 	},
 /turf/simulated/floor/airless,

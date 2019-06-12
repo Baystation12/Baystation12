@@ -797,18 +797,24 @@ datum/unit_test/ladder_check/start_test()
 
 	// Compile some lists of buildable types
 	var/list/buildable = list()
-	for(var/path in subtypesof(/obj/item/frame))
+	for(var/path in typesof(/obj/item/frame))
 		var/obj/item/frame/frame = path
-		buildable[initial(frame.build_machine_type)] = TRUE
-	for(var/path in subtypesof(/datum/pipe))
+		if(initial(frame.build_machine_type))
+			buildable[initial(frame.build_machine_type)] = TRUE
+	for(var/path in typesof(/datum/pipe))
 		var/datum/pipe/pipe = path
-		buildable[initial(pipe.constructed_path)] = TRUE
-	for(var/path in subtypesof(/obj/structure/door_assembly))
+		if(initial(pipe.constructed_path))
+			buildable[initial(pipe.constructed_path)] = TRUE
+	for(var/path in typesof(/obj/structure/door_assembly))
 		var/obj/structure/door_assembly/door = path
 		if(initial(door.airlock_type))
 			buildable[initial(door.airlock_type)] = TRUE
 		if(initial(door.glass_type))
 			buildable[initial(door.glass_type)] = TRUE
+	for(var/path in typesof(/obj/machinery/light_construct))
+		var/obj/machinery/light_construct/light = path
+		if(initial(light.fixture_type))
+			buildable[initial(light.fixture_type)] = TRUE
 
 	for(var/obj/machinery/machine in SSmachines.machinery)
 		if(checked_types[machine.type])
