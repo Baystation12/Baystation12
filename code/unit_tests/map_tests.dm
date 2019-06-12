@@ -796,9 +796,19 @@ datum/unit_test/ladder_check/start_test()
 	var/list/checked_types = list()
 
 	// Compile some lists of buildable types
-	var/list/frame_buildable = list()
+	var/list/buildable = list()
 	for(var/path in subtypesof(/obj/item/frame))
-		frame_buildable[path] = TRUE
+		var/obj/item/frame/frame = path
+		buildable[initial(frame.build_machine_type)] = TRUE
+	for(var/path in subtypesof(/datum/pipe))
+		var/datum/pipe/pipe = path
+		buildable[initial(pipe.constructed_path)] = TRUE
+	for(var/path in subtypesof(/obj/structure/door_assembly))
+		var/obj/structure/door_assembly/door = path
+		if(initial(door.airlock_type))
+			buildable[initial(door.airlock_type)] = TRUE
+		if(initial(door.glass_type))
+			buildable[initial(door.glass_type)] = TRUE
 
 	for(var/obj/machinery/machine in SSmachines.machinery)
 		if(checked_types[machine.type])
@@ -808,7 +818,7 @@ datum/unit_test/ladder_check/start_test()
 		// Check for valid building method
 		if(GLOB.machine_path_to_circuit_type[machine.type])
 			continue
-		if(frame_buildable[machine.type])
+		if(buildable[machine.type])
 			continue
 
 		// Check exemptions

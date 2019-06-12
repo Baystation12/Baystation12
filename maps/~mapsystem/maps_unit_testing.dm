@@ -66,7 +66,6 @@
 	var/list/area_purity_test_exempt_areas = list()
 
 	var/list/buildable_exempt_machines = list(
-		/obj/machinery/atmospherics/pipe = SELF | SUBTYPES,
 		/obj/machinery/power/terminal = SELF,
 		/obj/machinery/power/apc = SELF | SUBTYPES,
 		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF
