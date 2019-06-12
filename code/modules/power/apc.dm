@@ -76,6 +76,11 @@
 	anchored = 1
 	use_power = POWER_USE_IDLE // Has custom handling here.
 	power_channel = LOCAL      // Do not manipulate this; you don't want to power the APC off itself.
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/terminal,
+		/obj/item/weapon/stock_parts/power/apc,
+		/obj/item/weapon/stock_parts/power/battery
+		)
 	req_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
@@ -162,9 +167,6 @@
 	pixel_y = (src.dir & 3)? (src.dir ==1 ? 22 : -22) : 0
 
 	. = ..()
-
-	install_component(/obj/item/weapon/stock_parts/power/battery)
-	install_component(/obj/item/weapon/stock_parts/power/terminal)
 
 	if (building==0)
 		init_round_start()

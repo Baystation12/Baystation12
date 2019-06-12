@@ -10,12 +10,13 @@
 	name = "mining drill head"
 	desc = "An enormous drill."
 	icon_state = "mining_drill"
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery)
+	power_channel = LOCAL
+	active_power_usage = 10 KILOWATTS
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
-	var/base_power_usage = 10 KILOWATTS // Base power usage when the drill is running.
-	var/actual_power_usage = 10 KILOWATTS // Actual power usage, with upgrades in mind.
-	var/active = 0
+	var/active = FALSE
 	var/list/resource_field = list()
 
 	var/ore_types = list(
@@ -52,7 +53,7 @@
 
 	if(!active) return
 
-	if(!anchored || !use_cell_power())
+	if(!anchored || (stat & NOPOWER))
 		system_error("system configuration or charge error")
 		return
 
@@ -99,7 +100,7 @@
 
 			if(contents.len >= capacity)
 				system_error("insufficient storage space")
-				active = 0
+				set_active(FALSE)
 				need_player_check = 1
 				update_icon()
 				return
@@ -131,9 +132,14 @@
 			harvesting.resources = null
 			resource_field -= harvesting
 	else
-		active = 0
+		set_active(FALSE)
 		need_player_check = 1
 		update_icon()
+
+/obj/machinery/mining/drill/proc/set_active(var/new_active)
+	if(active != new_active)
+		active = new_active
+		update_use_power(active ? POWER_USE_ACTIVE : POWER_USE_OFF)
 
 /obj/machinery/mining/drill/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
@@ -141,32 +147,20 @@
 /obj/machinery/mining/drill/attackby(obj/item/O as obj, mob/user as mob)
 	if(!active)
 		if(default_deconstruction_screwdriver(user, O))
-			return
+			return TRUE
 		if(default_deconstruction_crowbar(user, O))
-			return
+			return TRUE
 		if(default_part_replacement(user, O))
-			return
-	if(!panel_open || active) return ..()
+			return TRUE
+	return ..()
 
-	if(istype(O, /obj/item/weapon/cell))
-		if(cell)
-			to_chat(user, "The drill already has a cell installed.")
-		else
-			if(!user.unEquip(O, src))
-				return
-			cell = O
-			install_component(O)
-			to_chat(user, "You install \the [O].")
-		return
-	..()
+/obj/machinery/mining/drill/components_are_accessible(path)
+	return panel_open && !active	
 
 /obj/machinery/mining/drill/attack_hand(mob/user as mob)
 	check_supports()
 
-	if (panel_open && cell && user.Adjacent(src))
-		to_chat(user, "You take out \the [cell].")
-		uninstall_component(cell)
-		cell = null
+	if ((. = ..()))
 		return
 	else if(need_player_check)
 		to_chat(user, "You hit the manual override and reset the drill's error checking.")
@@ -176,8 +170,8 @@
 		update_icon()
 		return
 	else if(supported && !panel_open)
-		if(use_cell_power())
-			active = !active
+		if(!(stat & NOPOWER))
+			set_active(!active)
 			if(active)
 				visible_message("<span class='notice'>\The [src] lurches downwards, grinding noisily.</span>")
 				need_update_field = 1
@@ -205,23 +199,16 @@
 	..()
 	harvest_speed = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	capacity = 200 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
-	var/charge_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
-
-	cell = get_component_of_type(/obj/item/weapon/cell)
-
-	if(charge_multiplier)
-		actual_power_usage = base_power_usage / charge_multiplier
-	else
-		actual_power_usage = base_power_usage
+	var/charge_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor) || 1
+	change_power_consumption(initial(active_power_usage) / charge_multiplier, POWER_USE_ACTIVE)
 
 /obj/machinery/mining/drill/proc/check_supports()
 
 	supported = 0
 
 	if((!supports || !supports.len) && initial(anchored) == 0)
-		icon_state = "mining_drill"
 		anchored = 0
-		active = 0
+		set_active(FALSE)
 	else
 		anchored = 1
 
@@ -235,7 +222,7 @@
 	if(error)
 		src.visible_message("<span class='notice'>\The [src] flashes a '[error]' warning.</span>")
 	need_player_check = 1
-	active = 0
+	set_active(FALSE)
 	update_icon()
 
 /obj/machinery/mining/drill/proc/get_resource_field()
@@ -257,9 +244,6 @@
 
 	if(!resource_field.len)
 		system_error("resources depleted")
-
-/obj/machinery/mining/drill/proc/use_cell_power()
-	return cell && cell.checked_use(actual_power_usage * CELLRATE)
 
 /obj/machinery/mining/drill/verb/unload()
 	set name = "Unload Drill"

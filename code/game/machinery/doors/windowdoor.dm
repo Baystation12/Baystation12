@@ -10,6 +10,7 @@
 	health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
 	var/obj/item/weapon/airlock_electronics/electronics = null

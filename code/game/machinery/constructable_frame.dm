@@ -9,6 +9,7 @@
 	density = 1
 	anchored = 1
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
 	var/list/components = null
 	var/list/req_components = null
@@ -108,9 +109,9 @@
 							var/obj/machinery/new_machine = new src.circuit.build_path(loc, dir, FALSE)
 							src.circuit.construct(new_machine)
 
+							new_machine.install_component(circuit, refresh_parts = FALSE)
 							for(var/obj/O in src)
-								new_machine.install_component(O)
-							new_machine.install_component(circuit)
+								new_machine.install_component(O, refresh_parts = FALSE)
 							new_machine.RefreshParts()
 							qdel(src)
 					else

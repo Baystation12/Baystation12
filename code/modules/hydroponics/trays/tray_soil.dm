@@ -4,6 +4,7 @@
 	icon_state = "soil"
 	density = 0
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	mechanical = 0
 	tray_light = 0
 

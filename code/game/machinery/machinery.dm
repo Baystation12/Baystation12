@@ -97,7 +97,7 @@ Class Procs:
 	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
 	var/power_init_complete = FALSE // Helps with bookkeeping when initializing atoms. Don't modify.
 	var/list/component_parts           //List of component instances. Expected type: /obj/item/weapon/stock_parts
-	var/list/uncreated_component_parts //List of component paths which have delayed init. Indeces = number of components.
+	var/list/uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc) //List of component paths which have delayed init. Indeces = number of components.
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
@@ -115,10 +115,8 @@ Class Procs:
 		set_dir(d)
 	START_PROCESSING(SSmachines, src) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
 	SSmachines.machinery += src // All machines should remain in this list, always.
-
-	if(populate_parts)
-		populate_parts()
-	install_component(/obj/item/weapon/stock_parts/power/apc) // Everyone gets one for now.
+	populate_parts(populate_parts)
+	RefreshParts()
 
 /obj/machinery/Destroy()
 	SSmachines.machinery -= src
@@ -244,8 +242,10 @@ Class Procs:
 
 	return ..()
 
-/obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
-	return
+/obj/machinery/proc/RefreshParts()
+	for(var/thing in component_parts)
+		var/obj/item/weapon/stock_parts/part = thing
+		part.on_refresh(src)
 
 /obj/machinery/proc/assign_uid()
 	uid = gl_uid

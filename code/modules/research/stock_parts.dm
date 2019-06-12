@@ -73,6 +73,9 @@
 /obj/item/weapon/stock_parts/proc/machine_process(var/obj/machinery/machine)
 	return PROCESS_KILL
 
+// RefreshParts has been called, likely meaning other componenets were added/removed.
+/obj/item/weapon/stock_parts/proc/on_refresh(var/obj/machinery/machine)
+
 //Rank 1
 
 /obj/item/weapon/stock_parts/console_screen

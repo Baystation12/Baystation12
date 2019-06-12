@@ -166,6 +166,15 @@
 		unset_status(machine, PART_STAT_ACTIVE)
 		charge_wait_counter = initial(charge_wait_counter)
 
+// Find a cell from the machine building materials if possible.
+/obj/item/weapon/stock_parts/power/battery/on_refresh(var/obj/machinery/machine)
+	if(machine && !cell)
+		var/obj/item/weapon/stock_parts/building_material/mat = machine.get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+		var/obj/item/weapon/cell/cell = mat && mat.remove_material(/obj/item/weapon/cell, 1)
+		if(cell)
+			add_cell(machine, cell)
+			cell.forceMove(src)
+
 // Cell interaction
 /obj/item/weapon/stock_parts/power/battery/attackby(obj/item/I, mob/user)
 	var/obj/machinery/machine = loc

@@ -68,15 +68,18 @@
 
 /obj/machinery/power/smes/Initialize()
 	. = ..()
+	update_icon()
+
+/obj/machinery/power/smes/populate_parts()
+	..()
 	for(var/d in GLOB.cardinal)
-		var/obj/item/weapon/stock_parts/power/terminal/part = install_component(/obj/item/weapon/stock_parts/power/terminal)
+		var/obj/item/weapon/stock_parts/power/terminal/part = install_component(/obj/item/weapon/stock_parts/power/terminal, refresh_parts = FALSE)
 		part.terminal_dir = d
 		var/turf/T = get_step(src, d)
 		for(var/obj/machinery/power/terminal/term in T)
 			if(term.dir == turn(d, 180) && !term.master)
 				part.set_terminal(src, term)
 				term.connect_to_network()
-	update_icon()
 
 /obj/machinery/power/smes/add_avail(var/amount)
 	if(..(amount))

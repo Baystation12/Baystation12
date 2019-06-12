@@ -10,20 +10,20 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 // Code concerning machinery interaction with components/stock parts.
 
-/obj/machinery/proc/populate_parts()
-	var/board_path = GLOB.machine_path_to_circuit_type[type]
-	if(board_path)
-		var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
-		if(LAZYLEN(board.req_components))
-			LAZYINITLIST(uncreated_component_parts)
-			for(var/type in board.req_components)
-				uncreated_component_parts[type] += (board.req_components[type] || 1)
+/obj/machinery/proc/populate_parts(var/full_populate) // Full populate creates a circuitboard and all needed components automatically.
+	if(full_populate)
+		var/board_path = GLOB.machine_path_to_circuit_type[type]
+		if(board_path)
+			var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
+			if(LAZYLEN(board.req_components))
+				LAZYINITLIST(uncreated_component_parts)
+				for(var/type in board.req_components)
+					uncreated_component_parts[type] += (board.req_components[type] || 1)
 	for(var/component_path in uncreated_component_parts)
-		var/number = uncreated_component_parts[component_path]
+		var/number = uncreated_component_parts[component_path] || 1
 		LAZYREMOVE(uncreated_component_parts, component_path)
 		for(var/i in 1 to number)
 			install_component(component_path, refresh_parts = FALSE)
-	RefreshParts()
 
 // Returns a list of subtypes of the given component type, with assotiated value = number of that component.
 /obj/machinery/proc/types_of_component(var/part_type)

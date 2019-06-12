@@ -6,6 +6,10 @@
 	density = 1
 	anchored = 1
 	idle_power_usage = 50
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/battery,
+		/obj/item/weapon/stock_parts/power/apc
+	)
 	var/mob/living/occupant = null
 	var/charging = 0
 	var/last_overlay_state
@@ -21,15 +25,6 @@
 
 /obj/machinery/recharge_station/Initialize()
 	. = ..()
-	var/obj/item/weapon/stock_parts/power/battery/bat = install_component(/obj/item/weapon/stock_parts/power/battery)
-	var/obj/item/weapon/stock_parts/building_material/mat = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
-	var/obj/item/weapon/cell/cell = mat && mat.remove_material(/obj/item/weapon/cell, 1)
-	if(cell)
-		bat.add_cell(src, cell)
-		cell.forceMove(bat)
-	bat.charge_rate = restore_power_passive
-	bat.charge_channel = power_channel
-	
 	update_icon()
 
 /obj/machinery/recharge_station/Process()
@@ -135,6 +130,11 @@
 		desc += "<br>It is capable of repairing structural damage."
 	if(wire_rate)
 		desc += "<br>It is capable of repairing burn damage."
+
+	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
+	if(bat)
+		bat.charge_rate = restore_power_passive
+		bat.charge_channel = power_channel
 
 /obj/machinery/recharge_station/proc/overlay_state()
 	var/obj/item/weapon/cell/cell = get_cell()
