@@ -51,14 +51,26 @@
 /area/achlys/eight/z1main
 /area/achlys/one/z2main1
 /area/achlys/one/z2main2
+/area/achlys/one/z3upperengineeringbay
+/area/achlys/one/z3prisonupper1
+/area/achlys/one/z3prisonupper2
+/area/achlys/one/z3prisonupper3
+/area/achlys/one/z3prisonupper4
 /area/achlys/three
 	sound_env = HALLWAY
 	name = "long hallways"
 /area/achlys/three/z1sechallway
+/area/achlys/three/z3dormhalls
+/area/achlys/three/z3sciencehalls
+/area/achlys/three/z3engineeringhall1
+/area/achlys/three/z3engineeringhall2
 /area/achlys/four
 	sound_env = SMALL_ENCLOSED
 	name = "cargo bays and hangars"
 /area/achlys/four/z1hangerbay
+/area/achlys/four/z3blockhall1
+/area/achlys/four/z3blockhall2
+/area/achlys/four/z3engineeringmain
 /area/achlys/five
 	sound_env = LARGE_SOFTFLOOR
 	name = "carpeted areas"
@@ -73,6 +85,11 @@
 /area/achlys/five/z1ladder2
 /area/achlys/five/z2freezer
 /area/achlys/five/z2secpoint1
+/area/achlys/five/z3scienceaux
+/area/achlys/five/z3stairway1
+/area/achlys/five/z3stairway2
+/area/achlys/five/z3lounge
+/area/achlys/five/z3secpoint
 /area/achlys/two
 	sound_env = SPACE
 	name = "enclosed rooms"
@@ -89,6 +106,11 @@
 /area/achlys/two/z2maintroom6
 /area/achlys/two/z2maintroom7
 /area/achlys/two/z2barbackroom
+/area/achlys/two/z3escape1
+/area/achlys/two/z3escape2
+/area/achlys/two/z3escape3
+/area/achlys/two/z3escape4
+/area/achlys/two/z3tearoom
 /area/achlys/six
 	sound_env = HANGAR
 	name = "medium sized rooms"
@@ -96,12 +118,17 @@
 /area/achlys/six/z1offices
 /area/achlys/six/z2cafeterias
 /area/achlys/six/z2breakroom
+/area/achlys/six/z3engineeringstorage
+/area/achlys/six/z3armory
+/area/achlys/six/z3sciencecafeteria
+/area/achlys/six/z3sciencemain
 /area/achlys/seven
 	sound_env = STONE_CORRIDOR
 	name = "bridge hallway"
 /area/achlys/seven/z1bridgewalkway
 	requires_power = 0
 /area/achlys/seven/z2mainthalls
+/area/achlys/seven/z3mainthalls
 /area/achlys/eight
 	sound_env = ALLEY
 	name = "spacious hallways"
@@ -116,3 +143,8 @@
 	requires_power = 0
 /area/achlys/nine/z1commandhallway
 /area/achlys/nine/z2bar
+/area/achlys/nine/z3carpetdorms1
+/area/achlys/nine/z3carpetdorms2
+/area/achlys/nine/z3sciencecubicles
+/area/achlys/nine/z3sciencemaint
+/area/achlys/nine/z3guardhall
