@@ -68,5 +68,8 @@
 	var/list/buildable_exempt_machines = list(
 		/obj/machinery/power/terminal = SELF,
 		/obj/machinery/power/apc = SELF | SUBTYPES,
-		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF
+		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF,
+		/obj/machinery/power/smes = SUBTYPES,
+		/obj/machinery/power/alarm = SUBTYPES,
+		/obj/machinery/door/firedoor = SELF | SUBTYPES
 	)

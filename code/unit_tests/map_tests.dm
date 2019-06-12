@@ -797,6 +797,7 @@ datum/unit_test/ladder_check/start_test()
 
 	// Compile some lists of buildable types
 	var/list/buildable = list()
+	var/list/buildable_and_subtypes = list()
 	for(var/path in typesof(/obj/item/frame))
 		var/obj/item/frame/frame = path
 		if(initial(frame.build_machine_type))
@@ -804,7 +805,7 @@ datum/unit_test/ladder_check/start_test()
 	for(var/path in typesof(/datum/pipe))
 		var/datum/pipe/pipe = path
 		if(initial(pipe.constructed_path))
-			buildable[initial(pipe.constructed_path)] = TRUE
+			buildable_and_subtypes[initial(pipe.constructed_path)] = TRUE
 	for(var/path in typesof(/obj/structure/door_assembly))
 		var/obj/structure/door_assembly/door = path
 		if(initial(door.airlock_type))
@@ -815,6 +816,10 @@ datum/unit_test/ladder_check/start_test()
 		var/obj/machinery/light_construct/light = path
 		if(initial(light.fixture_type))
 			buildable[initial(light.fixture_type)] = TRUE
+	for(var/path in typesof(/datum/stack_recipe))
+		var/datum/stack_recipe/recipe = path
+		if(initial(recipe.result_type))
+			buildable_and_subtypes[initial(recipe.result_type)] = TRUE
 
 	for(var/obj/machinery/machine in SSmachines.machinery)
 		if(checked_types[machine.type])
@@ -825,6 +830,8 @@ datum/unit_test/ladder_check/start_test()
 		if(GLOB.machine_path_to_circuit_type[machine.type])
 			continue
 		if(buildable[machine.type])
+			continue
+		if(is_type_in_list(machine, buildable_and_subtypes))
 			continue
 
 		// Check exemptions

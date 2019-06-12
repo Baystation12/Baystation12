@@ -34,6 +34,11 @@
 	constructed_path = /obj/machinery/atmospherics/unary/vent_pump
 	pipe_class = PIPE_CLASS_UNARY
 
+/datum/pipe/pipe_dispenser/device/unaryvent/large
+	name = "high volume unary vent"
+	desc = "a high volume unary vent"
+	constructed_path = /obj/machinery/atmospherics/unary/vent_pump/high_volume
+
 /datum/pipe/pipe_dispenser/device/gaspump
 	name = "gas pump"
 	desc = "a pump. For gasses."
