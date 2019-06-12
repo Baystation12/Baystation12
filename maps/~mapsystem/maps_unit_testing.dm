@@ -3,6 +3,9 @@
 	var/const/NO_VENT = 2
 	var/const/NO_SCRUBBER = 4
 
+	var/const/SELF = 1
+	var/const/SUBTYPES = 2
+
 	// Unit test vars
 	var/list/apc_test_exempt_areas = list(
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -63,7 +66,8 @@
 	var/list/area_purity_test_exempt_areas = list()
 
 	var/list/buildable_exempt_machines = list(
-		/obj/machinery/atmospherics/pipe,
-		/obj/machinery/power/terminal,
-		/obj/machinery/power/apc
+		/obj/machinery/atmospherics/pipe = SELF | SUBTYPES,
+		/obj/machinery/power/terminal = SELF,
+		/obj/machinery/power/apc = SELF | SUBTYPES,
+		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF
 	)

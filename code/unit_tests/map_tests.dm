@@ -793,13 +793,38 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/all_mapped_machines_shall_be_buildable/start_test()
 	var/fail = FALSE
+	var/list/checked_types = list()
+
+	// Compile some lists of buildable types
+	var/list/frame_buildable = list()
+	for(var/path in subtypesof(/obj/item/frame))
+		frame_buildable[path] = TRUE
+
 	for(var/obj/machinery/machine in SSmachines.machinery)
+		if(checked_types[machine.type])
+			continue
+		checked_types[machine.type] = TRUE
+
+		// Check for valid building method
 		if(GLOB.machine_path_to_circuit_type[machine.type])
 			continue
-		if(is_type_in_list(machine, GLOB.using_map.buildable_exempt_machines))
+		if(frame_buildable[machine.type])
 			continue
-		log_bad("Machine [log_info_line(machine)] is not buildable.")
-		fail = TRUE
+
+		// Check exemptions
+		var/found = FALSE
+		for(var/path in GLOB.using_map.buildable_exempt_machines)
+			if(path == machine.type)
+				if(GLOB.using_map.buildable_exempt_machines[path] & GLOB.using_map.SELF)
+					found = TRUE
+					break
+			else if(istype(machine, path))
+				if(GLOB.using_map.buildable_exempt_machines[path] & GLOB.using_map.SUBTYPES)
+					found = TRUE
+					break
+		if(!found)
+			log_bad("Machine [log_info_line(machine)] is not buildable.")
+			fail = TRUE
 	if(fail)
 		fail("There were unbuildable machines mapped.")
 	else
