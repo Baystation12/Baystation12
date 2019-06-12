@@ -1,3 +1,28 @@
+GLOBAL_LIST_EMPTY(all_pipe_datums_by_category)
+GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
+
+/proc/initialize_pipe_datum_category_list()
+	var/list/categories = list(
+		/datum/pipe/pipe_dispenser/simple,
+		/datum/pipe/pipe_dispenser/supply,
+		/datum/pipe/pipe_dispenser/scrubber,
+		/datum/pipe/pipe_dispenser/fuel,
+		/datum/pipe/pipe_dispenser/he,
+		/datum/pipe/pipe_dispenser/device
+		)
+	for(var/category_type in categories)
+		for(var/recipe_type in subtypesof(category_type))
+			LAZYADD(GLOB.all_pipe_datums_by_category[category_type], new recipe_type())
+
+	var/disposal_categories = list(
+		/datum/pipe/disposal_dispenser/simple,
+		/datum/pipe/disposal_dispenser/device)
+
+	for(var/category_type in disposal_categories)
+		for(var/recipe_type in subtypesof(category_type))
+			LAZYADD(GLOB.all_disposal_pipe_datums_by_category[category_type], new recipe_type())
+
+
 /datum/pipe
 	var/name = "pipe"														//item's name
 	var/desc = "a pipe"														//item description

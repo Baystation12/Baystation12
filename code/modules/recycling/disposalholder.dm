@@ -1,3 +1,4 @@
+
 // virtual disposal object
 // travels through pipes in lieu of actual items
 // contents will be items flushed by the disposal
@@ -12,6 +13,7 @@
 	var/destinationTag = "" // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
 	var/hasmob = 0 //If it contains a mob
+	var/speed = 2
 
 	var/partialTag = "" //set by a partial tagger the first time round, then put in destinationTag if it goes through again.
 
@@ -45,7 +47,7 @@
 			var/obj/item/smallDelivery/T = AM
 			src.destinationTag = T.sortTag
 		//Drones can mail themselves through maint.
-		if(istype(AM, /mob/living/silicon/robot/drone))
+		if(is_drone(AM))
 			var/mob/living/silicon/robot/drone/drone = AM
 			src.destinationTag = drone.mail_destination
 
@@ -56,19 +58,22 @@
 	if(!D.trunk)
 		D.expel(src)	// no trunk connected, so expel immediately
 		return
+
 	forceMove(D.trunk)
 	active = 1
 	set_dir(DOWN)
-	spawn(1)
-		move()		// spawn off the movement process
-		return
+	START_PROCESSING(SSdisposals, src)
 
-// movement process, persists while holder is moving through pipes
-/obj/structure/disposalholder/proc/move()
-	var/obj/structure/disposalpipe/last
-	while(active)
-		sleep(1)		// was 1
-		if(!loc) return // check if we got GC'd
+	// movement process, persists while holder is moving through pipes
+/obj/structure/disposalholder/Process()
+	for (var/i in 1 to speed)
+		if(!(count--))
+			active = 0
+		if(!active)
+			return PROCESS_KILL
+		
+		var/obj/structure/disposalpipe/last
+
 		if(hasmob && prob(3))
 			for(var/mob/living/H in src)
 				if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
@@ -78,22 +83,17 @@
 		last = curr
 		curr = curr.transfer(src)
 
-		if(!loc) return //side effects
+		if(QDELETED(src))
+			return PROCESS_KILL
 
 		if(!curr)
 			last.expel(src, loc, dir)
-
-		if(!(count--))
-			active = 0
-	return
-
-
 
 	// find the turf which should contain the next pipe
 /obj/structure/disposalholder/proc/nextloc()
 	return get_step(loc,dir)
 
-	// find a matching pipe on a turf
+// find a matching pipe on a turf
 /obj/structure/disposalholder/proc/findpipe(var/turf/T)
 	if(!T)
 		return null
@@ -126,13 +126,13 @@
 	else
 		partialTag = new_tag
 
-	// called when player tries to move while in a pipe
+// called when player tries to move while in a pipe
 /obj/structure/disposalholder/relaymove(mob/user as mob)
-
 	if(!istype(user,/mob/living))
 		return
 
 	var/mob/living/U = user
+
 	if (U.stat || U.last_special <= world.time)
 		return
 
@@ -144,12 +144,13 @@
 
 	playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
 
-	// called to vent all gas in holder to a location
+// called to vent all gas in holder to a location
 /obj/structure/disposalholder/proc/vent_gas(var/atom/location)
-	location.assume_air(gas)  // vent all gas to turf
-	return
+	if(location)
+		location.assume_air(gas)  // vent all gas to turf
 
 /obj/structure/disposalholder/Destroy()
-	qdel(gas)
+	QDEL_NULL(gas)
 	active = 0
+	STOP_PROCESSING(SSdisposals, src)
 	return ..()

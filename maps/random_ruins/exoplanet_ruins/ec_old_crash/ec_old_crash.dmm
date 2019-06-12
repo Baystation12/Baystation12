@@ -1898,7 +1898,7 @@
 /area/map_template/ecship/engineering)
 "dF" = (
 /obj/effect/floor_decal/corner/yellow/full,
-/obj/machinery/computer/general_air_control{
+/obj/machinery/computer/air_control{
 	name = "Gas Sensors";
 	sensors = list("sev_oxygen","sev_hydogen","sev_engine")
 	},
