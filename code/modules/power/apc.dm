@@ -992,6 +992,7 @@
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
 			autoflag = 0
+			power_change() // We are the ones responsible for triggering listeners once power returns, so we run this to detect possible changes.
 
 	// Set channels depending on how much charge we have left
 	update_channels()
