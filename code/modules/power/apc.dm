@@ -207,7 +207,7 @@
 	has_electronics = 2 //installed and secured
 
 	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
-	bat.cell = new cell_type(bat)
+	bat.add_cell(src, new cell_type(bat))
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
 	term.make_terminal(src)
 

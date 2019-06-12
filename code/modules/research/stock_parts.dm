@@ -26,6 +26,7 @@
 	var/lazy_initialize = TRUE // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
+	var/can_be_uninstalled = TRUE // If false, will qdel on uninstall and should not be exposed to the user for uninstallation.
 
 /obj/item/weapon/stock_parts/attack_hand(mob/user)
 	if(istype(loc, /obj/machinery))
@@ -56,6 +57,8 @@
 /obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
 	unset_status(machine, PART_STAT_INSTALLED)
 	stop_processing(machine)
+	if(!can_be_uninstalled)
+		qdel(src)
 
 // Use to process on the machine it's installed on.
 

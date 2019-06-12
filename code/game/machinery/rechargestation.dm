@@ -25,7 +25,8 @@
 	var/obj/item/weapon/stock_parts/building_material/mat = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
 	var/obj/item/weapon/cell/cell = mat && mat.remove_material(/obj/item/weapon/cell, 1)
 	if(cell)
-		bat.cell = cell
+		bat.add_cell(src, cell)
+		cell.forceMove(bat)
 	bat.charge_rate = restore_power_passive
 	bat.charge_channel = power_channel
 	

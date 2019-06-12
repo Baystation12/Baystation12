@@ -75,16 +75,45 @@
 	var/seek_alternatives = 5     // How many ticks we wait before seeking other power sources, if we can provide the machine with power. Set to 0 to never do this.
 
 /obj/item/weapon/stock_parts/power/battery/Destroy()
-	QDEL_NULL(cell)
+	qdel(cell)
 	. = ..()
 
+	
 /obj/item/weapon/stock_parts/power/battery/on_install(var/obj/machinery/machine)
 	..()
 	start_processing(machine)
 
 /obj/item/weapon/stock_parts/power/battery/on_uninstall(var/obj/machinery/machine)
 	cell.dropInto(loc)
-	cell = null
+	remove_cell()
+	..()
+
+// None of these helpers actually change the cell's loc. They only manage internal references and state.
+/obj/item/weapon/stock_parts/power/battery/proc/add_cell(var/obj/machinery/machine, var/obj/item/weapon/cell/new_cell)
+	if(cell)
+		return
+	cell = new_cell
+	GLOB.destroyed_event.register(cell, src, .proc/remove_cell)
+	return cell
+
+/obj/item/weapon/stock_parts/power/battery/proc/remove_cell()
+	if(cell)
+		GLOB.destroyed_event.unregister(cell, src)
+		. = cell
+		cell = null
+
+/obj/item/weapon/stock_parts/power/battery/proc/extract_cell(mob/user)
+	if(!cell)
+		return
+	cell.add_fingerprint(user)
+	cell.update_icon()
+
+	user.visible_message("<span class='warning'>\The [user] removes the power cell from [src]!</span>",\
+							"<span class='notice'>You remove the power cell.</span>")
+	. = remove_cell()
+	var/obj/machinery/machine = loc
+	if(machine)
+		machine.update_icon()
 
 /obj/item/weapon/stock_parts/power/battery/machine_process(var/obj/machinery/machine)
 	last_cell_charge = cell && cell.charge
@@ -156,7 +185,7 @@
 
 		if(!user.unEquip(I, src))
 			return
-		cell = I
+		add_cell(machine, I)
 		user.visible_message(\
 			"<span class='warning'>\The [user.name] has inserted the power cell to [src.name]!</span>",\
 			"<span class='notice'>You insert the power cell.</span>")
@@ -164,22 +193,10 @@
 			machine.update_icon()
 		return TRUE
 
-/obj/item/weapon/stock_parts/power/battery/proc/remove_cell(mob/user)
-	cell.add_fingerprint(user)
-	cell.update_icon()
-	cell = null
-
-	user.visible_message("<span class='warning'>\The [user] removes the power cell from [src]!</span>",\
-							"<span class='notice'>You remove the power cell.</span>")
-
-	var/obj/machinery/machine = loc
-	if(machine)
-		machine.update_icon()
-
 /obj/item/weapon/stock_parts/power/battery/attack_hand(mob/user)
 	if(cell)
 		user.put_in_hands(cell)
-		remove_cell(user)
+		extract_cell(user)
 		return TRUE
 
 /obj/item/weapon/stock_parts/power/battery/get_cell()
@@ -195,8 +212,12 @@
 	var/terminal_dir = 0
 
 /obj/item/weapon/stock_parts/power/terminal/on_uninstall(var/obj/machinery/machine)
-	..()
 	unset_terminal(loc, terminal)
+	..()
+
+/obj/item/weapon/stock_parts/power/terminal/Destroy()
+	qdel(terminal)
+	. = ..()
 
 /obj/item/weapon/stock_parts/power/terminal/machine_process(var/obj/machinery/machine)
 	if(!terminal)

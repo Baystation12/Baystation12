@@ -234,10 +234,10 @@
 		var/obj/machinery/power/apc/A = target
 		if(A.components_are_accessible(/obj/item/weapon/stock_parts/power/battery))
 			var/obj/item/weapon/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
-			if(bat.cell)
-				wrapped = bat.cell
-				bat.cell.forceMove(src)
-				bat.remove_cell(src)
+			var/obj/item/weapon/cell/cell = bat.extract_cell(src)
+			if(cell)
+				wrapped = cell
+				cell.forceMove(src)
 
 	else if(istype(target,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/A = target
