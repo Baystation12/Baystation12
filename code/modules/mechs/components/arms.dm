@@ -7,6 +7,7 @@
 	var/melee_damage = 15
 	var/action_delay = 15
 	var/obj/item/robot_parts/robot_component/actuator/motivator
+	power_use = 10
 
 /obj/item/mech_component/manipulators/Destroy()
 	QDEL_NULL(motivator)

@@ -29,6 +29,7 @@
 	melee_damage = 25
 	action_delay = 15
 	max_damage = 90
+	power_use = 60
 
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"
@@ -37,6 +38,7 @@
 	icon_state = "heavy_legs"
 	move_delay = 5
 	max_damage = 90
+	power_use = 100
 
 /obj/item/mech_component/sensors/heavy
 	name = "heavy sensors"
@@ -44,6 +46,7 @@
 	desc = "A solitary sensor moves inside a recessed slit in the armour plates."
 	icon_state = "heavy_head"
 	max_damage = 120
+	power_use = 0
 
 /obj/item/mech_component/sensors/heavy/prebuild()
 	..()
@@ -59,6 +62,7 @@
 	icon_state = "heavy_body"
 	max_damage = 150
 	mech_health = 500
+	power_use = 50
 
 /obj/item/mech_component/chassis/heavy/New()
 	..()

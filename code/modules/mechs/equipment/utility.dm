@@ -39,9 +39,10 @@
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target
 			if(user.a_intent == I_HURT)
-				//M.take_overall_damage(dam_force)
-				//setClickCooldown(arms ? arms.action_delay : 15)
+
+				owner.setClickCooldown(owner.arms ? owner.arms.action_delay * 3 : 30) //This is an inefficient use of your powers
 				if(prob(33))
+					owner.visible_message(SPAN_DANGER("[owner] swings its [src] in a wide arc at [target] but misses completely!"))
 					return
 				M.attack_generic(src, (owner.arms ? owner.arms.melee_damage * 1.5 : 0), "slammed") //Honestly you should not be able to do this without hands, but still
 				M.throw_at(get_edge_target_turf(owner ,owner.dir),5, 2)
@@ -104,6 +105,7 @@
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	var/mode = 1
 	var/atom/movable/locked
+	equipment_delay = 30 //Stunlocks are not ideal
 
 /obj/item/mech_equipment/catapult/get_hardpoint_maptext()
 	var/string
@@ -126,9 +128,9 @@
 /obj/item/mech_equipment/catapult/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 	if(.)
+
 		switch(mode)
 			if(1)
-				//if(!action_checks(target) && !locked) return
 				if(!locked)
 					var/atom/movable/AM = target
 					if(!istype(AM) || AM.anchored)
@@ -141,14 +143,14 @@
 					if(locked in view(owner))
 						locked.throw_at(target, 14, 1.5, owner)
 						locked = null
-						//set_ready_state(0)
-						//chassis.use_power(energy_drain)
-						//do_after_cooldown()
+
+						owner.get_cell().use_power(active_power_use)
+
 					else
 						locked = null
 						to_chat(user, SPAN_NOTICE("Lock on [locked] disengaged."))
 			if(2)
-				//if(!action_checks(target)) return
+
 				var/list/atoms = list()
 				if(isturf(target))
 					atoms = range(target,3)
@@ -161,9 +163,10 @@
 						for(var/i=0 to iter)
 							step_away(A,target)
 							sleep(2)
-				//set_ready_state(0)
-				//chassis.use_power(energy_drain)
-				//do_after_cooldown()
+
+				
+				owner.get_cell().use(active_power_use * CELLRATE)
+
 		return
 
 
@@ -222,7 +225,7 @@
 		if(drill_head == null)
 			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
 			return
-		//chassis.use_power(energy_drain)
+		owner.get_cell().use_power(active_power_use)
 		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
 		to_chat(user, "<span class='danger'>You start to drill \the [target]</span>")
 
@@ -255,7 +258,6 @@
 							drill_head.durability -= 1
 				else if(target.loc == T)
 					target.ex_act(2)
-					to_chat(user, "Test drill message")
 					drill_head.durability -= 1
 
 				
@@ -275,11 +277,92 @@
 				playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
 		
 		else
-			for(var/mob/living/M in owner.pilots)
-				to_chat(M, "You must stay still while the drill is engaged!")		
+			to_chat(user, "You must stay still while the drill is engaged!")		
 
 				
 		return 1
 		
 
 
+
+/obj/item/mech_equipment/mounted_system/taser/plasma
+	name = "Mounted plasma cutter"
+	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
+	icon_state = "railauto" //TODO: Make a new sprite
+	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
+
+/obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+	use_external_power = TRUE
+	has_safety = FALSE
+
+/obj/item/mech_equipment/jumpjets
+	name = "\improper exosuit jumpjets"
+	desc = "A testament to the fact that sometimes more is actually more. These oversized ion boosters can briefly lift even an entire exosuit"
+	icon_state = "mech_sleeper"
+	restricted_hardpoints = list(HARDPOINT_BACK)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
+	equipment_delay = 40 //It's quite the setup
+	active_power_use = 100 KILOWATTS //It's expensive, yo
+	var/start_time = 0
+	var/duration = 30
+	var/burst_interval = 2
+	var/next_burst = 0
+	var/using = FALSE
+	var/prev_y = 0
+	var/prev_alpha = 0
+
+
+/obj/item/mech_equipment/jumpjets/proc/setup()
+	prev_y = owner.pixel_y
+	prev_alpha = owner.alpha
+
+
+
+/obj/item/mech_equipment/jumpjets/proc/reset()
+	animate(owner)
+	owner.pixel_y = prev_y
+	owner.alpha = prev_alpha
+
+
+/obj/item/mech_equipment/jumpjets/Process()
+	if (world.time >= next_burst)
+
+		var/obj/effect/effect/E = new /obj/effect/temporary(owner.loc, 10, 'icons/effects/effects.dmi',"jet")
+		//Since the user will have their pixel offset animated by the transition, we must compensate the visuals
+		//We will calculate a pixel offset for the thrust particle based on the progress
+		var/max = 64
+
+		var/progress = ((world.time - start_time) / duration)
+		E.pixel_y = (max * progress) - 12 //-12 makes it offset down from the player a bit
+		E.pixel_x = rand(-4,4) //Slight side to side randomness so it looks chaotic
+		E.alpha = (255 - (255 * progress))*2 //Fade out as the player does, but less so
+		E.layer = owner.layer-0.01 //Match the player's layer so it doesn't render over foreground turfs when moving downwards
+
+		next_burst = world.time + burst_interval
+
+
+
+/obj/item/mech_equipment/jumpjets/attack_self(var/mob/user)
+	if(using)
+		return
+	. = ..()
+	if(.)
+		START_PROCESSING(SSobj, src)
+		start_time = world.time
+		owner.setClickCooldown(duration)
+		setup()
+		animate(owner, alpha = 0, pixel_y = 42, time = duration*0.9, easing = SINE_EASING)
+		owner.visible_message(SPAN_DANGER("Up up and away! [owner] takes off!"))
+		if(do_after(owner, duration, null, 0))
+			owner.get_cell().use(active_power_use * CELLRATE)
+	
+		STOP_PROCESSING(SSobj,src)
+		reset()
+		next_burst = 0
+			
+
+
+/obj/item/mech_equipment/jumpjets/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
+	. = ..()

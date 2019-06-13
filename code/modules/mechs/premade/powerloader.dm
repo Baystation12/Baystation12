@@ -25,18 +25,21 @@
 	name = "exosuit arms"
 	exosuit_desc_string = "heavy-duty industrial lifters"
 	max_damage = 70
+	power_use = 30
 
 /obj/item/mech_component/propulsion/powerloader
 	name = "exosuit legs"
 	exosuit_desc_string = "reinforced hydraulic legs"
 	max_damage = 70
 	move_delay = 4
+	power_use = 60
 
 /obj/item/mech_component/sensors/powerloader
 	name = "exosuit sensors"
 	gender = PLURAL
 	exosuit_desc_string = "simple collision detection sensors"
 	max_damage = 100
+	power_use = 0
 
 /obj/item/mech_component/sensors/powerloader/prebuild()
 	..()
@@ -49,6 +52,7 @@
 	pilot_coverage = 40
 	exosuit_desc_string = "an industrial rollcage"
 	max_damage = 100
+	power_use = 0
 
 /obj/item/mech_component/chassis/powerloader/New()
 	pilot_positions = list(
@@ -98,7 +102,7 @@
 
 	..()
 
-	material = SSmaterials.get_material_by_name("osmium")
+	material = SSmaterials.get_material_by_name(MATERIAL_OSMIUM_CARBIDE_PLASTEEL)
 
 	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)

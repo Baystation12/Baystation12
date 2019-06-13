@@ -11,12 +11,22 @@
 	var/mob/living/exosuit/owner
 	var/list/restricted_software
 	var/equipment_delay = 0
+	var/active_power_use = 1 KILOWATTS // How much does it consume to perform and accomplish usage
+	var/passive_power_use = 0          // For gear that for some reason takes up power even if it's supposedly doing nothing (mech will idly consume power)
 
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
-	return (owner && loc == owner)
+	if (owner && loc == owner && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
+		return 1
+	else 
+		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
+		return 0
 
 /obj/item/mech_equipment/attack_self(var/mob/user)
-	return (owner && (user in owner.pilots))
+	if (owner && loc == owner && (user in owner.pilots) && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
+		return 1
+	else 
+		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to manipulate \the [src]"))
+		return 0
 
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)
 	owner = _owner
