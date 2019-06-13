@@ -36,3 +36,11 @@ VENDOR_BOARD("Good Clean Fun", games)
 VENDOR_BOARD("Lavatory Essentials", lavatory)
 VENDOR_BOARD("Snix", snix)
 VENDOR_BOARD("Hot Foods", hotfood)
+
+/obj/item/weapon/stock_parts/circuitboard/seed_storage
+	name = T_BOARD("seed storage")
+	build_path = /obj/machinery/seed_storage
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_MATERIAL = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2)

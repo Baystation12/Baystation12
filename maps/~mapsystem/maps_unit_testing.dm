@@ -70,6 +70,9 @@
 		/obj/machinery/power/terminal = SELF,
 		/obj/machinery/power/apc = SELF | SUBTYPES,
 		/obj/machinery/door/firedoor = SELF | SUBTYPES,
+		/obj/machinery/camera = SELF | SUBTYPES,
+		/obj/machinery/door/window = SELF | SUBTYPES,
+		/obj/machinery/beehive = SELF,
 
 		// Not buildable because a base type is buildable
 		/obj/machinery/power/smes = SUBTYPES,
@@ -82,6 +85,24 @@
 		/obj/machinery/atmospherics/pipe/cap/visible = SELF | SUBTYPES,
 		/obj/machinery/suit_storage_unit = SUBTYPES,
 		/obj/machinery/light/navigation = SUBTYPES,
+		/obj/machinery/telecomms/bus = SUBTYPES,
+		/obj/machinery/telecomms/server = SUBTYPES,
+		/obj/machinery/telecomms/processor = SUBTYPES,
+		/obj/machinery/telecomms/hub = SUBTYPES,
+		/obj/machinery/telecomms/receiver = SUBTYPES,
+		/obj/machinery/telecomms/relay = SUBTYPES,
+		/obj/machinery/telecomms/broadcaster = SUBTYPES,
+		/obj/machinery/fusion_fuel_injector = SUBTYPES,
+		/obj/machinery/r_n_d/server = SUBTYPES,
+		/obj/machinery/r_n_d/protolathe = SUBTYPES,
+		/obj/machinery/r_n_d/destructive_analyzer = SUBTYPES,
+		/obj/machinery/r_n_d/circuit_imprinter = SUBTYPES,
+		/obj/machinery/seed_storage = SUBTYPES,
+
+		// Not buildable due to transmitting data via signals and/or lack of ability to set up
+		/obj/machinery/power/sensor = SELF | SUBTYPES,
+		/obj/machinery/button = SELF | SUBTYPES,
+		/obj/machinery/access_button = SELF | SUBTYPES,
 
 		// Not buildable due to special nature (not machines in classical sense)
 		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF,
@@ -89,6 +110,7 @@
 		/obj/machinery/crystal_static = SELF | SUBTYPES,
 		/obj/machinery/crystal = SELF | SUBTYPES,
 		/obj/machinery/power/supermatter = SELF | SUBTYPES,
+		/obj/machinery/shield = SELF | SUBTYPES,
 
 		// Not buildable for balance or antag reasons
 		/obj/machinery/teleport = SELF | SUBTYPES,
@@ -97,5 +119,11 @@
 		/obj/machinery/vending/props = SELF,
 		/obj/machinery/door/airlock = SUBTYPES, // Unclear and should be re-examined further
 		/obj/machinery/replicator = SELF | SUBTYPES,
-		/obj/machinery/light/small/readylight = SELF
+		/obj/machinery/light/small/readylight = SELF,
+		/obj/machinery/suit_cycler = SELF | SUBTYPES, // Some are buildable
+		/obj/machinery/hologram/holopad = SELF | SUBTYPES,
+		/obj/machinery/cryopod = SELF | SUBTYPES,
+		/obj/machinery/telecomms/allinone = SELF | SUBTYPES,
+		/obj/machinery/porta_turret/crescent = SELF
+		/obj/machinery/acting = SELF | SUBTYPES
 	)

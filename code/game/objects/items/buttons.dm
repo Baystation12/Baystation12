@@ -6,13 +6,12 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light-p"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	build_machine_type = /obj/machinery/light_switch
 
 /obj/item/frame/light_switch/windowtint
 	name = "window tint switch frame"
 	desc = "Used for building a window tint switch."
-	icon = 'icons/obj/power.dmi'
-	icon_state = "light-p"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	build_machine_type = /obj/machinery/button/windowtint
 
 GLOBAL_LIST_INIT(possible_switch_offsets, list(
 		"North" = list(
@@ -63,20 +62,7 @@ GLOBAL_LIST_INIT(possible_switch_offsets, list(
 		new /obj/item/stack/material/steel( get_turf(src.loc), 1 )
 		qdel(src)
 	else if(istype(tool, /obj/item/weapon/screwdriver) && isturf(user.loc))
-		var/obj/machinery/light_switch/S = new (user.loc)
-		if(position_with_direction(S, user))
-			to_chat(user, "You fasten \the [S] with your [tool].")
-			qdel(src)
-		else
-			qdel(S)
-	else ..()
-
-/obj/item/frame/light_switch/windowtint/attackby(obj/item/tool as obj, mob/user as mob)
-	if(isWrench(tool))
-		new /obj/item/stack/material/steel( get_turf(src.loc), 1 )
-		qdel(src)
-	else if(istype(tool, /obj/item/weapon/screwdriver) && isturf(user.loc))
-		var/obj/machinery/button/windowtint/S = new(user.loc)
+		var/obj/machinery/S = new build_machine_type(user.loc)
 		if(position_with_direction(S, user))
 			to_chat(user, "You fasten \the [S] with your [tool].")
 			qdel(src)
