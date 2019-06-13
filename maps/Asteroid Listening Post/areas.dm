@@ -11,10 +11,12 @@
 /area/asteroid_listening/dark
 	name = "Asteroid Listening Post Exterior"
 	dynamic_lighting = 1
+	icon_state = "shuttle"
 
 /area/asteroid_listening/darkbasement
 	name = "Asteroid Listening Post Lower Exterior"
 	dynamic_lighting = 1
+	icon_state = "start"
 
 /area/asteroid_listening/ground/interior
 	requires_power= 0

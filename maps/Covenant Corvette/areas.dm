@@ -73,7 +73,13 @@
 
 //Weapon areas
 /area/covenant_corvette/pulse_lasersstarboard
+	icon_state = "red"
+
 /area/covenant_corvette/pulse_lasersport
+	icon_state = "bluenew"
 
 /area/covenant_corvette/plastorpsport
+	icon_state = "yellow"
+
 /area/covenant_corvette/plastorpsstarboard
+	icon_state = "green"
