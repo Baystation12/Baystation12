@@ -42,11 +42,14 @@
 		qdel(src) //deletes itself if there are no uses
 
 /obj/structure/floodspawner/Crossed(atom/movable/AM as mob|obj)
-	timer = 1 //starts the countdown
-	uses--
-	if(uses < 0) //return value set so you can't walk over the spawner multiple times
+	if(istype(AM, /mob/observer/ghost/)) //check for ghost
 		return
-	GLOB.processing_objects.Add(src)
+	else if(istype(AM, /mob/living/carbon/human))
+		timer = 1 //starts the countdown
+		uses--
+		if(uses < 0) //return value set so you can't walk over the spawner multiple times
+			return
+		GLOB.processing_objects.Add(src)
 
 /obj/structure/floodspawner/process()
 	if(timer && (time_to_spawn > 0))
