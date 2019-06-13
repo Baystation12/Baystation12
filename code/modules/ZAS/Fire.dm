@@ -394,6 +394,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 /mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 	apply_damage(2.5*mx, BURN)
+	return mx
 
 
 /mob/living/carbon/human/FireBurn(var/firelevel, var/last_temperature, var/pressure)
@@ -435,3 +436,6 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, used_weapon =  "Fire")
 	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, used_weapon =  "Fire")
 	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, used_weapon =  "Fire")
+
+	//return a truthy value of whether burning actually happened
+	return mx * (head_exposure + chest_exposure + groin_exposure + legs_exposure + arms_exposure)
