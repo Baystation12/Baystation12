@@ -124,6 +124,6 @@
 		/obj/machinery/hologram/holopad = SELF | SUBTYPES,
 		/obj/machinery/cryopod = SELF | SUBTYPES,
 		/obj/machinery/telecomms/allinone = SELF | SUBTYPES,
-		/obj/machinery/porta_turret/crescent = SELF
+		/obj/machinery/porta_turret/crescent = SELF,
 		/obj/machinery/acting = SELF | SUBTYPES
 	)
