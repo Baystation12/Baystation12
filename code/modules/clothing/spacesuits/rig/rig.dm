@@ -402,7 +402,8 @@
 			malfunction()
 
 		for(var/obj/item/rig_module/module in installed_modules)
-			cell.use(module.Process() * CELLRATE)
+			if(!cell.checked_use(module.Process() * CELLRATE))
+				module.deactivate()//turns off modules when your cell is dry
 
 //offline should not change outside this proc
 /obj/item/weapon/rig/proc/update_offline()
@@ -620,7 +621,10 @@
 				if("engage")
 					module.engage()
 				if("select")
-					module.select()
+					if(selected_module == module)
+						deselect_module()
+					else
+						module.select()
 				if("select_charge_type")
 					module.charge_selected = href_list["charge_type"]
 		return 1
@@ -764,6 +768,14 @@
 	if(wearer)
 		wearer.wearing_rig = null
 		wearer = null
+
+/obj/item/weapon/rig/proc/deselect_module()
+	if(selected_module.suit_overlay_inactive)
+		selected_module.suit_overlay = selected_module.suit_overlay_inactive
+	else
+		selected_module.suit_overlay = null
+	selected_module = null
+	update_icon()
 
 //Todo
 /obj/item/weapon/rig/proc/malfunction()
