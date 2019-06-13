@@ -121,6 +121,10 @@
 	name = T_BOARD("navigation console")
 	build_path = /obj/machinery/computer/ship/navigation
 
+/obj/item/weapon/stock_parts/circuitboard/sensors
+	name = T_BOARD("ship sensors console")
+	build_path = /obj/machinery/computer/ship/sensors
+	origin_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 3)
 /obj/item/weapon/stock_parts/circuitboard/mining_shuttle
 	name = T_BOARD("mining shuttle console")
 	build_path = /obj/machinery/computer/shuttle_control/mining
@@ -150,27 +154,7 @@
 	name = T_BOARD("accounts uplink terminal")
 	build_path = /obj/machinery/computer/account_database
 
-/obj/item/weapon/stock_parts/circuitboard/area_atmos
+/obj/item/weapon/stock_parts/circuitboard/guest_pass
 	name = T_BOARD("guest pass terminal")
 	build_path = /obj/machinery/computer/guestpass
 	origin_tech = list(TECH_DATA = 2)
-
-/obj/item/weapon/stock_parts/circuitboard/sensors
-	name = T_BOARD("ship sensors console")
-	build_path = /obj/machinery/computer/ship/sensors
-	origin_tech = list(TECH_DATA = 5, TECH_BLUESPACE = 5)
-
-/obj/item/weapon/stock_parts/circuitboard/helm
-	name = T_BOARD("ship helms console")
-	build_path = /obj/machinery/computer/ship/helm
-	origin_tech = list(TECH_DATA = 5, TECH_POWER = 5, TECH_BLUESPACE = 2)
-
-/obj/item/weapon/stock_parts/circuitboard/nav
-	name = T_BOARD("ship navigation console")
-	build_path = /obj/machinery/computer/ship/sensors
-	origin_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 2)
-
-/obj/item/weapon/stock_parts/circuitboard/engines
-	name = T_BOARD("ship engines console")
-	build_path = /obj/machinery/computer/ship/engines
-	origin_tech = list(TECH_DATA = 5, TECH_POWER = 5)

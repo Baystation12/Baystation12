@@ -46,6 +46,7 @@
 	icon_keyboard = null
 	icon_screen = "pass"
 	density = 0
+	circuit = /obj/item/weapon/stock_parts/circuitboard/guest_pass
 
 	var/obj/item/weapon/card/id/giver
 	var/list/accesses = list()
