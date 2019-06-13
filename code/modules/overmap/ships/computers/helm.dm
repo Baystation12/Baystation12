@@ -9,7 +9,7 @@
 	var/list/known_sectors = list()
 	var/dx		//destnation
 	var/dy		//coordinates
-	var/speedlimit = 1/(45 SECONDS) //top speed for autopilot
+	var/speedlimit = 1/(10 SECONDS) //top speed for autopilot
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()

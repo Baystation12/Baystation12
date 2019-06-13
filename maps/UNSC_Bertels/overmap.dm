@@ -11,3 +11,4 @@
 
 	map_bounds = list(4,99,142,52)
 
+	parent_area_type = /area/corvette/unscbertels

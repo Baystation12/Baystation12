@@ -1,7 +1,7 @@
 
 /datum/job/colonist
 	title = "Colonist"
-	total_positions = 20
+	total_positions = -1
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = COLONY
@@ -69,7 +69,7 @@
 
 /datum/job/police
 	title = "GCPD Officer"
-	total_positions = 6
+	total_positions = -1
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	supervisors = " the Colony Mayor"

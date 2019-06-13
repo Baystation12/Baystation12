@@ -153,12 +153,13 @@
 
 //PROJECTILE DEFINES//
 /obj/item/projectile/deck_gun_damage_proj
-	name = "bullet"
+	name = "deck gun round"
 	desc = "oh hello"
 
 	step_delay = 0.1 SECONDS
 	damtype = BRUTE
 	damage = 200
+	penetrating = 1
 
 /obj/item/projectile/deck_gun_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
@@ -166,6 +167,11 @@
 		damage *= 10 //counteract the /10 from wallcode damage processing
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
 	. = ..()
+
+/obj/item/projectile/deck_gun_damage_proj/check_penetrate(var/atom/a)
+	. = ..()
+	if(!istype(a,/obj/effect/shield))
+		explosion(a,-1,-1,2,4, adminlog = 0)
 
 /obj/item/projectile/overmap/deck_gun_proj
 	name = "deck gun round"
