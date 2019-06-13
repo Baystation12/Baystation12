@@ -138,7 +138,15 @@
 /obj/machinery/power/generator/attack_ai(mob/user)
 	attack_hand(user)
 
-/obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/power/generator/attackby(obj/item/weapon/W, mob/user)
+	if(isScrewdriver(W) || isCrowbar(W))
+		if(!anchored)
+			if(default_deconstruction_screwdriver(user, W))
+				return TRUE
+			if(default_deconstruction_crowbar(user, W))
+				return TRUE
+		else
+			to_chat(user, "You must unwrench \the [src] if you wish to deconstruct it.")
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored

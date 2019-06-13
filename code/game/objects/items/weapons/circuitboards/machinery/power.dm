@@ -41,3 +41,34 @@
 		/obj/item/weapon/stock_parts/capacitor = 3,
 		/obj/item/weapon/stock_parts/micro_laser = 1,
 		/obj/item/stack/cable_coil = 20)
+
+/obj/item/weapon/stock_parts/circuitboard/field_gen
+	name = T_BOARD("field generator")
+	build_path = /obj/machinery/field_generator
+	board_type = "machine"
+	origin_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6, TECH_MAGNET = 6)
+	req_components = list(
+		/obj/item/weapon/stock_parts/capacitor = 5,
+		/obj/item/weapon/stock_parts/smes_coil = 1,
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/stack/cable_coil = 20)
+
+/obj/item/weapon/stock_parts/circuitboard/circulator
+	name = T_BOARD("teg circulator")
+	build_path = /obj/machinery/atmospherics/binary/circulator
+	board_type = "machine"
+	origin_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
+	req_components = list(
+		/obj/item/weapon/stock_parts/capacitor = 5,
+		/obj/item/pipe = 3,
+		/obj/item/stack/material/plasteel = 20)
+
+/obj/item/weapon/stock_parts/circuitboard/teg
+	name = T_BOARD("thermoelectric generator")
+	build_path = /obj/machinery/power/generator
+	board_type = "machine"
+	origin_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
+	req_components = list(
+		/obj/item/weapon/stock_parts/capacitor = 5,
+		/obj/item/stack/cable_coil = 10,
+		/obj/item/stack/material/plasteel = 30)

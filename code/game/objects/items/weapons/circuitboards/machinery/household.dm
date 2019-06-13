@@ -54,3 +54,17 @@
 /obj/item/weapon/stock_parts/circuitboard/cooker/grill
 	name = T_BOARD("griddle")
 	build_path = /obj/machinery/cooker/grill
+
+/obj/item/weapon/stock_parts/circuitboard/honey
+	name = T_BOARD("honey extractor")
+	build_path = /obj/machinery/honey_extractor
+	board_type = "machine"
+	origin_tech = list(TECH_BIO = 3, TECH_ENGINEERING = 1)
+	req_components = list(
+		/obj/item/weapon/stock_parts/manipulator = 2,
+		/obj/item/weapon/stock_parts/matter_bin = 2)
+
+/obj/item/weapon/stock_parts/circuitboard/honey/seed
+	name = T_BOARD("seed extractor")
+	build_path = /obj/machinery/seed_extractor
+	board_type = "machine"

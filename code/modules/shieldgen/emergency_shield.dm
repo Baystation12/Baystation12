@@ -128,7 +128,6 @@
 	var/malfunction = 0 //Malfunction causes parts of the shield to slowly dissapate
 	var/list/deployed_shields = list()
 	var/list/regenerating = list()
-	var/is_open = 0 //Whether or not the wires are exposed
 	var/locked = 0
 	var/check_delay = 60	//periodically recheck if we need to rebuild a shield
 	use_power = POWER_USE_OFF
@@ -252,7 +251,7 @@
 	if(locked)
 		to_chat(user, "The machine is locked, you are unable to use it.")
 		return
-	if(is_open)
+	if(panel_open)
 		to_chat(user, "The panel must be closed before operating this machine.")
 		return
 
@@ -280,14 +279,17 @@
 /obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		if(is_open)
+		if(panel_open)
 			to_chat(user, "<span class='notice'>You close the panel.</span>")
-			is_open = 0
+			panel_open = 0
 		else
 			to_chat(user, "<span class='notice'>You open the panel and expose the wiring.</span>")
-			is_open = 1
+			panel_open = 1
 
-	else if(isCoil(W) && malfunction && is_open)
+	if(!active && default_deconstruction_crowbar(user, W))
+		return TRUE
+
+	else if(isCoil(W) && malfunction && panel_open)
 		var/obj/item/stack/cable_coil/coil = W
 		to_chat(user, "<span class='notice'>You begin to replace the wires.</span>")
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage

@@ -105,6 +105,8 @@
 		/obj/machinery/chemical_dispenser = SUBTYPES, // A few others are buildable too, but this is the main one,
 		/obj/machinery/computer/rdconsole = SELF | SUBTYPES,
 		/obj/machinery/power/emitter/anchored = SELF,
+		/obj/machinery/power/fusion_core = SUBTYPES,
+
 
 		// Not buildable due to transmitting data via signals and/or lack of ability to set up,
 		/obj/machinery/power/sensor = SELF | SUBTYPES,
@@ -118,6 +120,7 @@
 		/obj/machinery/power/breakerbox = SELF | SUBTYPES, // Has direction settings that can't be changed manually,
 		/obj/machinery/requests_console = SELF, // Can't set the department,
 		/obj/machinery/sparker = SELF, // Uses id,
+		/obj/machinery/mass_driver = SELF,
 		/obj/machinery/computer/shuttle_control = SELF | SUBTYPES, // Needs way to set the shuttle and make sure correct type is used,
 		/obj/machinery/recharger/wallcharger = SELF, // Uses weird nonstandard pixel shifting,
 		/obj/machinery/oxygen_pump = SELF,
@@ -156,5 +159,7 @@
 		/obj/machinery/ai_slipper = SELF | SUBTYPES,
 		/obj/machinery/icecream_vat = SELF, // Starts stocked and can't be restocked,
 		/obj/machinery/media/jukebox = SELF | SUBTYPES, // Performance/griefing concern,
-		/obj/machinery/message_server = SELF // May be fine; am not sure of what it does. Should be looked into further,
+		/obj/machinery/message_server = SELF, // May be fine; am not sure of what it does. Should be looked into further,
+		/obj/machinery/drone_fabricator = SELF | SUBTYPES,
+		/obj/machinery/keycard_auth = SELF | SUBTYPES
 	)

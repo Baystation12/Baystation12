@@ -21,3 +21,13 @@
 	req_components = list(
 							/obj/item/weapon/stock_parts/capacitor = 1,
 							/obj/item/weapon/stock_parts/micro_laser = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/shield_generator/wall
+	name = T_BOARD("shield wall generator")
+	board_type = "machine"
+	build_path = /obj/machinery/shieldwallgen
+
+/obj/item/weapon/stock_parts/circuitboard/shield_generator/emergency
+	name = T_BOARD("emergency shield generator")
+	board_type = "machine"
+	build_path = /obj/machinery/shieldgen
