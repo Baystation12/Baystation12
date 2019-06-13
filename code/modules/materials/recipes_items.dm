@@ -161,6 +161,12 @@
 	req_amount = 2
 	difficulty = 2
 
+/datum/stack_recipe/newscaster
+	title = "newscaster frame"
+	result_type = /obj/item/frame/newscaster
+	req_amount = 2
+	difficulty = 2
+
 /datum/stack_recipe/computer/console
 	title = "modular console frame"
 	result_type = /obj/item/modular_computer/console

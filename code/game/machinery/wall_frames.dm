@@ -94,3 +94,10 @@
 	name = "navigation light fixture frame"
 	build_machine_type = /obj/machinery/light_construct/nav
 	refund_amt = 4
+
+/obj/item/frame/newscaster
+	name = "newscaster frame"
+	icon = 'icons/obj/terminals.dmi'
+	icon_state = "newscaster_off"
+	desc = "Used for building newscasters."
+	build_machine_type = /obj/machinery/newscaster

@@ -101,6 +101,8 @@
 		/obj/machinery/r_n_d/circuit_imprinter = SUBTYPES,
 		/obj/machinery/seed_storage = SUBTYPES,
 		/obj/machinery/portable_atmospherics/powered/pump = SUBTYPES,
+		/obj/machinery/chemical_dispenser = SUBTYPES, // A few others are buildable too, but this is the main one,
+		/obj/machinery/computer/rdconsole = SELF | SUBTYPES,
 
 		// Not buildable due to transmitting data via signals and/or lack of ability to set up,
 		/obj/machinery/power/sensor = SELF | SUBTYPES,
@@ -114,6 +116,8 @@
 		/obj/machinery/power/breakerbox = SELF | SUBTYPES, // Has direction settings that can't be changed manually,
 		/obj/machinery/requests_console = SELF, // Can't set the department,
 		/obj/machinery/sparker = SELF, // Uses id,
+		/obj/machinery/computer/shuttle_control = SELF | SUBTYPES, // Needs way to set the shuttle and make sure correct type is used,
+		/obj/machinery/recharger/wallcharger = SELF, // Uses weird nonstandard pixel shifting,
 
 		// Not buildable due to special nature (not machines in classical sense),
 		/obj/machinery/portable_atmospherics/hydroponics/soil = SELF | SUBTYPES,

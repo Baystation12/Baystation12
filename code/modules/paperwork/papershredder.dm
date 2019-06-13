@@ -21,6 +21,10 @@
 		)
 
 /obj/machinery/papershredder/attackby(var/obj/item/W, var/mob/user)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 
 	if(istype(W, /obj/item/weapon/storage))
 		empty_bin(user, W)
@@ -48,6 +52,10 @@
 			return
 	..()
 	return
+
+obj/machinery/papershredder/dismantle()
+	. = ..()
+	empty_bin()
 
 /obj/machinery/papershredder/verb/empty_contents()
 	set name = "Empty bin"

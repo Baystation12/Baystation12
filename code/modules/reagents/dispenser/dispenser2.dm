@@ -74,16 +74,24 @@
 /obj/machinery/chemical_dispenser/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/reagent_containers/chem_disp_cartridge))
 		add_cartridge(W, user)
+		return TRUE
 
-	else if(isScrewdriver(W))
-		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
-		if(!label) return
-		var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)
-		if(C)
-			to_chat(user, "<span class='notice'>You remove \the [C] from \the [src].</span>")
-			C.dropInto(loc)
+	if(isScrewdriver(W))
+		if(length(cartridges))
+			var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
+			if(!label) return
+			var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)
+			if(C)
+				to_chat(user, "<span class='notice'>You remove \the [C] from \the [src].</span>")
+				C.dropInto(loc)
+			return TRUE
+		if(default_deconstruction_screwdriver(user, W))
+			return TRUE
 
-	else if(istype(W, /obj/item/weapon/reagent_containers/glass) || istype(W, /obj/item/weapon/reagent_containers/food))
+	if(!length(cartridges) && default_deconstruction_crowbar(user, W))
+		return TRUE
+
+	if(istype(W, /obj/item/weapon/reagent_containers/glass) || istype(W, /obj/item/weapon/reagent_containers/food))
 		if(container)
 			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
 			return
@@ -103,10 +111,8 @@
 		update_icon()
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
 		SSnano.update_uis(src) // update all UIs attached to src
-
 	else
-		..()
-	return
+		return ..()
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui

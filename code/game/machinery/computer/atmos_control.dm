@@ -1,5 +1,6 @@
 /obj/item/weapon/stock_parts/circuitboard/atmoscontrol
 	name = "\improper Central Atmospherics Computer Circuitboard"
+	board_type = "computer"
 	build_path = /obj/machinery/computer/atmoscontrol
 
 /obj/machinery/computer/atmoscontrol
@@ -17,6 +18,10 @@
 
 /obj/machinery/computer/atmoscontrol/New()
 	..()
+
+/obj/item/weapon/stock_parts/circuitboard/atmoscontrol/laptop
+	name = "\improper Central Atmospherics Computer Circuitboard (laptop)"
+	build_path = /obj/machinery/computer/atmoscontrol/laptop
 
 /obj/machinery/computer/atmoscontrol/laptop
 	name = "Atmospherics Laptop"

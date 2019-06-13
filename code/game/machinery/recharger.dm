@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-obj/machinery/recharger
+/obj/machinery/recharger
 	name = "recharger"
 	desc = "An all-purpose recharger for a variety of devices."
 	icon = 'icons/obj/stationobjs.dmi'
@@ -15,9 +15,12 @@ obj/machinery/recharger
 	var/icon_state_idle = "recharger0" //also when unpowered
 	var/portable = 1
 
-obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
-	if(istype(user,/mob/living/silicon))
-		return
+/obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
+	if(portable) // Should be re-examined, but the other one isn't buildable.
+		if(default_deconstruction_screwdriver(user, G))
+			return TRUE
+		if(default_deconstruction_crowbar(user, G))
+			return TRUE
 
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
@@ -52,7 +55,7 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		to_chat(user, "You [anchored ? "attached" : "detached"] the recharger.")
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 
-obj/machinery/recharger/attack_hand(mob/user as mob)
+/obj/machinery/recharger/attack_hand(mob/user as mob)
 	if(istype(user,/mob/living/silicon))
 		return
 
@@ -64,7 +67,7 @@ obj/machinery/recharger/attack_hand(mob/user as mob)
 		charging = null
 		update_icon()
 
-obj/machinery/recharger/Process()
+/obj/machinery/recharger/Process()
 	if(stat & (NOPOWER|BROKEN) || !anchored)
 		update_use_power(POWER_USE_OFF)
 		icon_state = icon_state_idle
@@ -84,7 +87,7 @@ obj/machinery/recharger/Process()
 				icon_state = icon_state_charged
 				update_use_power(POWER_USE_IDLE)
 
-obj/machinery/recharger/emp_act(severity)
+/obj/machinery/recharger/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN) || !anchored)
 		..(severity)
 		return
@@ -94,13 +97,13 @@ obj/machinery/recharger/emp_act(severity)
 			C.emp_act(severity)
 	..(severity)
 
-obj/machinery/recharger/on_update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
+/obj/machinery/recharger/on_update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
 	if(charging)
 		icon_state = icon_state_charging
 	else
 		icon_state = icon_state_idle
 
-obj/machinery/recharger/examine(mob/user)
+/obj/machinery/recharger/examine(mob/user)
 	. = ..()
 	if(!. || isnull(charging))
 		return
@@ -110,7 +113,7 @@ obj/machinery/recharger/examine(mob/user)
 		if(!isnull(C))
 			to_chat(user, "Item's charge at [round(C.percent())]%.")
 
-obj/machinery/recharger/wallcharger
+/obj/machinery/recharger/wallcharger
 	name = "wall recharger"
 	desc = "A heavy duty wall recharger specialized for energy weaponry."
 	icon = 'icons/obj/stationobjs.dmi'

@@ -995,6 +995,7 @@
 #include "code\game\objects\items\weapons\circuitboards\machinery\medical.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\mining.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\mining_drill.dm"
+#include "code\game\objects\items\weapons\circuitboards\machinery\office.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\oxyregenerator.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\pacman.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\pipe_dispenser.dm"

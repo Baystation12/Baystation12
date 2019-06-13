@@ -101,6 +101,10 @@
 		updateUsrDialog()
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
+	if(default_deconstruction_screwdriver(user, O))
+		return TRUE
+	if(default_deconstruction_crowbar(user, O))
+		return TRUE
 	if(istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo) || istype(O, /obj/item/weapon/paper_bundle))
 		if(!copyitem)
 			if(!user.unEquip(O, src))

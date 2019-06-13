@@ -22,3 +22,7 @@
 							/obj/item/stack/cable_coil = 5,
 							/obj/item/weapon/stock_parts/capacitor = 2,
 							/obj/item/weapon/stock_parts/manipulator = 2)
+
+/obj/item/weapon/stock_parts/circuitboard/charger/general
+	name = T_BOARD("item charger")
+	build_path = /obj/machinery/recharger

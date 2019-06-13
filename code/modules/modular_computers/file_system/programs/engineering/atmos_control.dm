@@ -24,7 +24,7 @@
 /datum/nano_module/atmos_control/New(atmos_computer, var/list/req_access, monitored_alarm_ids)
 	..()
 
-	if(istype(req_access))
+	if(islist(req_access))
 		access.req_access = req_access
 	else if(req_access)
 		log_debug("\The [src] was given an unepxected req_access: [req_access]")
