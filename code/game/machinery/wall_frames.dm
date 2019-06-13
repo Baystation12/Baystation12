@@ -101,3 +101,7 @@
 	icon_state = "newscaster_off"
 	desc = "Used for building newscasters."
 	build_machine_type = /obj/machinery/newscaster
+
+/obj/item/frame/newscaster/sec
+	name = "security newscaster frame"
+	build_machine_type = /obj/machinery/newscaster/security_unit

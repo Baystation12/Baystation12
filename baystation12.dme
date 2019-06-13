@@ -1006,6 +1006,7 @@
 #include "code\game\objects\items\weapons\circuitboards\machinery\replicator.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\research.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\shieldgen.dm"
+#include "code\game\objects\items\weapons\circuitboards\machinery\shuttle.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\space_heater.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\status_display.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\suit_cycler.dm"

@@ -139,6 +139,11 @@
 		A.launch( get_step(src.loc, src.dir) )
 
 /obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
+	if(!active)
+		if(default_deconstruction_screwdriver(user, W))
+			return TRUE
+		if(default_deconstruction_crowbar(user, W))
+			return TRUE
 
 	if(isWrench(W))
 		if(active)

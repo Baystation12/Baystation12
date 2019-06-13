@@ -16,3 +16,18 @@
 	board_type = "machine"
 	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 2)
 	req_components = list(/obj/item/weapon/stock_parts/capacitor/ = 3, /obj/item/weapon/stock_parts/matter_bin/ = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/emitter
+	name = T_BOARD("emitter")
+	build_path = /obj/machinery/power/emitter
+	board_type = "machine"
+	origin_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 2)
+	req_components = list(
+		/obj/item/weapon/stock_parts/capacitor = 3,
+		/obj/item/weapon/stock_parts/micro_laser = 2)
+
+/obj/item/weapon/stock_parts/circuitboard/emitter/gyrotron
+	name = T_BOARD("gyrotron")
+	build_path = /obj/machinery/power/emitter/gyrotron
+	board_type = "machine"
+	origin_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6)

@@ -36,3 +36,21 @@
 /obj/item/weapon/stock_parts/circuitboard/chem_dispenser/drink/coffee
 	name = T_BOARD("coffee dispenser")
 	build_path = /obj/machinery/chemical_dispenser/bar_coffee
+
+/obj/item/weapon/stock_parts/circuitboard/grinder
+	name = T_BOARD("all-in-one grinder")
+	build_path = /obj/machinery/reagentgrinder
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_BIO = 2, TECH_MATERIAL = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/material/knife = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/chem_master
+	name = T_BOARD("Chem Master")
+	build_path = /obj/machinery/chem_master
+	origin_tech = list(TECH_ENGINEERING = 5, TECH_BIO = 5, TECH_MATERIAL = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/reagent_containers/glass/beaker = 1)

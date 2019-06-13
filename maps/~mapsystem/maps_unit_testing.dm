@@ -103,6 +103,7 @@
 		/obj/machinery/portable_atmospherics/powered/pump = SUBTYPES,
 		/obj/machinery/chemical_dispenser = SUBTYPES, // A few others are buildable too, but this is the main one,
 		/obj/machinery/computer/rdconsole = SELF | SUBTYPES,
+		/obj/machinery/power/emitter/anchored = SELF,
 
 		// Not buildable due to transmitting data via signals and/or lack of ability to set up,
 		/obj/machinery/power/sensor = SELF | SUBTYPES,
@@ -118,6 +119,7 @@
 		/obj/machinery/sparker = SELF, // Uses id,
 		/obj/machinery/computer/shuttle_control = SELF | SUBTYPES, // Needs way to set the shuttle and make sure correct type is used,
 		/obj/machinery/recharger/wallcharger = SELF, // Uses weird nonstandard pixel shifting,
+		/obj/machinery/oxygen_pump = SELF,
 
 		// Not buildable due to special nature (not machines in classical sense),
 		/obj/machinery/portable_atmospherics/hydroponics/soil = SELF | SUBTYPES,

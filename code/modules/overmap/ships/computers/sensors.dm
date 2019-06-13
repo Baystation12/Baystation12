@@ -180,6 +180,10 @@
 	idle_power_usage = 5000
 
 /obj/machinery/shipsensors/attackby(obj/item/weapon/W, mob/user)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 	var/damage = max_health - health
 	if(damage && isWelder(W))
 

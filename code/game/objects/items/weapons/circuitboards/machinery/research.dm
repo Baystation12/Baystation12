@@ -101,3 +101,26 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/micro_laser = 2,
 							/obj/item/weapon/stock_parts/console_screen = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/suspension_generator
+	name = T_BOARD("suspension generator")
+	build_path = /obj/machinery/artifact_harvester
+	board_type = "machine"
+	origin_tech = list(TECH_DATA = 6, TECH_PHORON = 6, TECH_BLUESPACE = 6)
+	req_components = list(
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 1,
+							/obj/item/weapon/stock_parts/smes_coil = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1,
+							/obj/item/weapon/cell = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/radspec
+	name = T_BOARD("radiocarbon spectrometer")
+	build_path = /obj/machinery/radiocarbon_spectrometer
+	board_type = "machine"
+	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
+	req_components = list(
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 1,
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1)

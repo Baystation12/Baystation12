@@ -67,3 +67,13 @@ FRIDGE_BOARD("Chemical Storage", smartfridge/chemistry)
 FRIDGE_BOARD("Drink Showcase", smartfridge/drinks)
 FRIDGE_BOARD("Hot Foods Display", smartfridge/foods)
 FRIDGE_BOARD("drying rack", smartfridge/drying_rack)
+
+/obj/item/weapon/stock_parts/circuitboard/laptop
+	name = T_BOARD("laptop vendor")
+	build_path = /obj/machinery/lapvend
+	origin_tech = list(TECH_ENGINEERING = 5, TECH_DATA = 4)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 2,
+							/obj/item/weapon/stock_parts/console_screen = 1)

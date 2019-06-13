@@ -40,7 +40,20 @@
 				qdel(src)
 				return
 
-/obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+/obj/machinery/chem_master/Destroy()
+	if(beaker)
+		beaker.dropInto(loc)
+		beaker = null
+	if(loaded_pill_bottle)
+		loaded_pill_bottle.dropInto(loc)
+		loaded_pill_bottle = null
+	. = ..()
+
+/obj/machinery/chem_master/attackby(var/obj/item/weapon/B, var/mob/user)
+	if(default_deconstruction_screwdriver(user, B))
+		return TRUE
+	if(default_deconstruction_crowbar(user, B))
+		return TRUE
 
 	if(istype(B, /obj/item/weapon/reagent_containers/glass))
 
@@ -340,14 +353,20 @@
 		/obj/item/weapon/storage/plants
 	) // These bags will fast-empty into the grinder.
 
-/obj/machinery/reagentgrinder/New()
+/obj/machinery/reagentgrinder/populate_parts(full_populate)
 	..()
-	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+	if(full_populate) // If not, bring your own.
+		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 
 /obj/machinery/reagentgrinder/on_update_icon()
 	icon_state = "juicer"+num2text(!isnull(beaker))
 
-/obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/reagentgrinder/attackby(var/obj/item/O, var/mob/user)
+	if(!in_use)
+		if(default_deconstruction_screwdriver(user, O))
+			return TRUE
+		if(default_deconstruction_crowbar(user, O))
+			return TRUE
 
 	if (istype(O,/obj/item/weapon/reagent_containers/glass) || \
 		istype(O,/obj/item/weapon/reagent_containers/food/drinks/glass2) || \
@@ -424,6 +443,16 @@
 		//Calling attack_hand(user) to make ensure no functionality is missed.
 		//If attack_hand is updated, this segment won't have to be updated as well.
 		return attack_hand(user)
+
+/obj/machinery/reagentgrinder/dismantle()
+	detach()
+	eject()
+	. = ..()
+
+/obj/machinery/reagentgrinder/examine(mob/user)
+	. = ..()
+	if(. && panel_open)
+		to_chat(user, "The panel is open.")
 
 /obj/machinery/reagentgrinder/interact(mob/user as mob) // The microwave Menu
 	if(inoperable())
@@ -510,6 +539,8 @@
 	if (!beaker || (beaker && beaker.reagents.total_volume >= beaker.reagents.maximum_volume))
 		return
 
+	if(panel_open)
+		to_chat(user, SPAN_WARNING("Just as you activate \the [src], you notice that the panel is open. Is this safe?"))
 	hurt_hand(user)
 	playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 	inuse = 1
@@ -559,7 +590,10 @@
 	var/skill_to_check = SKILL_CHEMISTRY
 	if(user.get_skill_value(SKILL_COOKING) > user.get_skill_value(SKILL_CHEMISTRY))
 		skill_to_check = SKILL_COOKING
-	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
+	var/skill_needed = SKILL_BASIC
+	if(panel_open)
+		skill_needed = SKILL_EXPERT
+	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, skill_needed)))
 		return
 	var/hand = pick(BP_L_HAND, BP_R_HAND)
 	var/obj/item/organ/external/hand_organ = user.get_organ(hand)

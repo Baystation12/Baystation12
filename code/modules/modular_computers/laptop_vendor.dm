@@ -269,6 +269,10 @@
 
 
 obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 	var/obj/item/weapon/card/id/I = W.GetIdCard()
 	// Awaiting payment state
 	if(state == 2)

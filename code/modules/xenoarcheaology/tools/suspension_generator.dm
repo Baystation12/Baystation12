@@ -1,29 +1,25 @@
 /obj/machinery/suspension_gen
 	name = "suspension field generator"
-	desc = "It has stubby legs bolted up against it's body for stabilising."
+	desc = "It has stubby legs bolted up against its body for stabilising."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "suspension2"
 	density = 1
 	req_access = list(access_research)
-	var/obj/item/weapon/cell/cell
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/battery,
+		/obj/item/weapon/stock_parts/power/apc
+	)
 	var/obj/item/weapon/card/id/auth_card
 	var/locked = 1
-	var/power_use = 5 KILOWATTS
+	active_power_usage = 5 KILOWATTS
 	var/obj/effect/suspension_field/suspension_field
-
-/obj/machinery/suspension_gen/New()
-	..()
-	src.cell = new /obj/item/weapon/cell/high(src)
 
 /obj/machinery/suspension_gen/Process()
 	..()
 	if(suspension_field)
-		cell.use(power_use * CELLRATE)
-
 		var/turf/T = get_turf(suspension_field)
 		for(var/mob/living/M in T)
 			M.weakened = max(M.weakened, 3)
-			cell.use(power_use * CELLRATE)
 			if(prob(5))
 				to_chat(M, "<span class='warning'>[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")].</span>")
 
@@ -33,11 +29,14 @@
 				suspension_field.overlays += "shield2"
 			I.forceMove(suspension_field)
 
-		if(cell.charge <= 0)
-			deactivate()
+/obj/machinery/suspension_gen/power_change()
+	. = ..()
+	if(. && (stat & NOPOWER))
+		deactivate()
 
 /obj/machinery/suspension_gen/interact(var/mob/user)
 	var/dat = "<b>Multi-phase mobile suspension field generator MK II \"Steadfast\"</b><br>"
+	var/obj/item/weapon/cell/cell = get_cell()
 	if(cell)
 		var/colour = "red"
 		var/percent = cell.percent()
@@ -76,7 +75,7 @@
 /obj/machinery/suspension_gen/OnTopic(var/mob/user, href_list)
 	if(href_list["toggle_field"])
 		if(!suspension_field)
-			if(cell.charge > 0)
+			if(!(stat & NOPOWER))
 				if(anchored)
 					activate()
 				else
@@ -114,21 +113,20 @@
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
+/obj/machinery/suspension_gen/components_are_accessible(path)
+	return panel_open && !locked && !suspension_field
+
 /obj/machinery/suspension_gen/attack_hand(var/mob/user)
-	if(!panel_open)
-		interact(user)
-	else if(cell)
-		cell.forceMove(loc)
-		cell.add_fingerprint(user)
-		cell.update_icon()
-
-		icon_state = "suspension0"
-		cell = null
-		to_chat(user, "<span class='info'>You remove the power cell</span>")
-
-/obj/machinery/suspension_gen/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(!locked && !suspension_field && default_deconstruction_screwdriver(user, W))
+	if((. = ..()))
 		return
+	interact(user)
+
+/obj/machinery/suspension_gen/attackby(obj/item/weapon/W, mob/user)
+	if(!locked && !suspension_field)
+		if(default_deconstruction_screwdriver(user, W))
+			return TRUE
+		if(default_deconstruction_crowbar(user, W))
+			return TRUE
 	else if(isWrench(W))
 		if(!suspension_field)
 			if(anchored)
@@ -142,14 +140,6 @@
 				desc = "It has stubby legs bolted up against it's body for stabilising."
 		else
 			to_chat(user, "<span class='warning'>You are unable to secure [src] while it is active!</span>")
-	else if (istype(W, /obj/item/weapon/cell))
-		if(panel_open)
-			if(cell)
-				to_chat(user, "<span class='warning'>There is a power cell already installed.</span>")
-			else if(user.unEquip(W, src))
-				cell = W
-				to_chat(user, "<span class='info'>You insert the power cell.</span>")
-				icon_state = "suspension1"
 	else if(istype(W, /obj/item/weapon/card))
 		var/obj/item/weapon/card/I = W
 		if(!auth_card)
@@ -159,6 +149,7 @@
 				to_chat(user, "<span class='warning'>You swipe [I], console flashes \'<i>Access denied.</i>\'</span>")
 		else
 			to_chat(user, "<span class='warning'>Remove [auth_card] first.</span>")
+	return ..()
 
 /obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C, var/mob/user)
 	if(!panel_open)
@@ -170,12 +161,13 @@
 			return 1
 
 /obj/machinery/suspension_gen/emag_act(var/remaining_charges, var/mob/user)
-	if(cell.charge > 0 && locked)
+	if(!(stat & NOPOWER) && locked)
 		locked = 0
 		return 1
 
 //checks for whether the machine can be activated or not should already have occurred by this point
 /obj/machinery/suspension_gen/proc/activate()
+	update_use_power(POWER_USE_ACTIVE)
 	var/turf/T = get_turf(get_step(src,dir))
 	var/collected = 0
 
@@ -202,6 +194,7 @@
 			suspension_field.icon_state = "shield2"
 
 /obj/machinery/suspension_gen/proc/deactivate()
+	update_use_power(POWER_USE_IDLE)
 	//drop anything we picked up
 	var/turf/T = get_turf(suspension_field)
 

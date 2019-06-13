@@ -66,6 +66,10 @@
 	if(scanning)
 		to_chat(user, "<span class='warning'>You can't do that while [src] is scanning!</span>")
 	else
+		if(default_deconstruction_screwdriver(user, I))
+			return TRUE
+		if(default_deconstruction_crowbar(user, I))
+			return TRUE
 		if(istype(I, /obj/item/stack/nanopaste))
 			var/choice = alert("What do you want to do with the nanopaste?","Radiometric Scanner","Scan nanopaste","Fix seal integrity")
 			if(choice == "Fix seal integrity")
