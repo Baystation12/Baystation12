@@ -2576,7 +2576,8 @@
 	name = "Mixed Air Supply Control";
 	output_tag = "d_air_out";
 	pressure_setting = 2000;
-	sensors = list("d_air_sensor" = "Tank")
+	sensor_tag = "d_air_sensor";
+	sensor_name = "Air Supply Tank";
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2704,7 +2705,8 @@
 	input_tag = "d_o2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d_o2_out";
-	sensors = list("d_o2_sensor" = "Tank")
+	sensor_tag = "d_o2_sensor";
+	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2805,7 +2807,8 @@
 	input_tag = "d_n2_in";
 	name = "Nitrogen Supply Control";
 	output_tag = "d_n2_out";
-	sensors = list("d_n2_sensor" = "Tank")
+	sensor_tag = "d_n2_sensor";
+	sensor_name = "N2 Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4

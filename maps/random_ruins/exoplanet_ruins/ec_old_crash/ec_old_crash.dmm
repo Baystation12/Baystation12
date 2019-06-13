@@ -1899,8 +1899,7 @@
 "dF" = (
 /obj/effect/floor_decal/corner/yellow/full,
 /obj/machinery/computer/air_control{
-	name = "Gas Sensors";
-	sensors = list("sev_oxygen","sev_hydogen","sev_engine")
+	name = "O2 Sensor"
 	sensor_tag = "sev_oxygen"
 	},
 /turf/simulated/floor,

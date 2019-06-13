@@ -722,7 +722,6 @@
 	input_tag = "d3so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d3so2_out";
-	sensors = list("d3so2_sensor" = "Tank");
 	sensor_tag = "d3so2_sensor";
 	sensor_name = "Oxygen Supply Tank"
 	},
@@ -16172,7 +16171,6 @@
 	input_tag = "d3po2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d3po2_out";
-	sensors = list("d3po2_sensor" = "Tank");
 	sensor_tag = "d3po2_sensor";
 	sensor_name = "Oxygen Supply Tank"
 	},
@@ -16648,7 +16646,6 @@
 	input_tag = "d3sh_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d3sh_out";
-	sensors = list("d3sh_sensor" = "Tank");
 	sensor_tag = "d3sh_sensor";
 	sensor_name = "Hydrogen Supply Tank"
 	},
@@ -20098,7 +20095,6 @@
 	input_tag = "d3ph_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d3ph_out";
-	sensors = list("d3ph_sensor" = "Tank");
 	sensor_tag = "d3ph_sensor";
 	sensor_name = "Hydrogen Supply Tank"
 	},
