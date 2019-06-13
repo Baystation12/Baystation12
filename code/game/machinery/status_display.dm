@@ -17,6 +17,7 @@
 	anchored = 1
 	density = 0
 	idle_power_usage = 10
+	var/frame_type = /obj/item/frame/status_display
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
 					// 2 = Arbitrary message(s)
@@ -71,6 +72,9 @@
 	if(default_deconstruction_crowbar(user, I))
 		return TRUE
 	return ..()
+
+/obj/machinery/status_display/make_frame()
+	new frame_type(loc)
 
 /obj/machinery/status_display/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

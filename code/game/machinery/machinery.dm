@@ -330,12 +330,15 @@ Class Procs:
 	install_component(new_part)
 	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
 
-/obj/machinery/proc/dismantle()
-	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+/obj/machinery/proc/make_frame()
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(get_turf(src))
 	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
+
+/obj/machinery/proc/dismantle()
+	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+	make_frame()
 	for(var/I in component_parts)
 		uninstall_component(I)
 	while(LAZYLEN(uncreated_component_parts))

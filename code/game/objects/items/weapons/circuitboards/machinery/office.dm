@@ -26,3 +26,16 @@
 		/obj/item/weapon/stock_parts/micro_laser = 1,
 		/obj/item/weapon/stock_parts/matter_bin = 1,
 		/obj/item/weapon/stock_parts/subspace/transmitter = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/shredder/binder
+	name = T_BOARD("book binder")
+	build_path = /obj/machinery/bookbinder
+
+/obj/item/weapon/stock_parts/circuitboard/shredder/library
+	name = T_BOARD("library scanner")
+	build_path = /obj/machinery/libraryscanner
+	req_components = list(
+		/obj/item/weapon/stock_parts/manipulator = 1,
+		/obj/item/weapon/stock_parts/micro_laser = 1,
+		/obj/item/weapon/stock_parts/matter_bin = 1,
+		/obj/item/weapon/stock_parts/scanning_module = 1)

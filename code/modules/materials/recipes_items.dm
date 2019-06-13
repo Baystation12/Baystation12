@@ -171,6 +171,20 @@
 	title = "security newscaster frame"
 	result_type = /obj/item/frame/newscaster/sec
 
+/datum/stack_recipe/status_display
+	title = "status display frame"
+	result_type = /obj/item/frame/status_display
+	req_amount = 2
+	difficulty = 2
+
+/datum/stack_recipe/status_display/supply
+	title = "supply status display frame"
+	result_type = /obj/item/frame/status_display/supply
+
+/datum/stack_recipe/status_display/ai
+	title = "ai status display frame"
+	result_type = /obj/item/frame/status_display/ai
+
 /datum/stack_recipe/computer/console
 	title = "modular console frame"
 	result_type = /obj/item/modular_computer/console

@@ -1,5 +1,6 @@
 /obj/machinery/status_display/supply_display
 	ignore_friendc = 1
+	frame_type = /obj/item/frame/status_display/supply
 
 /obj/machinery/status_display/supply_display/update()
 	if(!..() && mode == STATUS_DISPLAY_CUSTOM)

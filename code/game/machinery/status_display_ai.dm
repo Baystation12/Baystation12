@@ -93,3 +93,13 @@ var/list/ai_status_emotions = list(
 	if(overlays.len)
 		overlays.Cut()
 	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
+
+/obj/machinery/ai_status_display/attackby(obj/item/I, mob/user)
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+	return ..()
+
+/obj/machinery/ai_status_display/make_frame()
+	new /obj/item/frame/status_display/ai(loc)

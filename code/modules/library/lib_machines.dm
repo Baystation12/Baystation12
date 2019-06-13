@@ -17,6 +17,10 @@
 	var/obj/item/weapon/book/cache		// Last scanned book
 
 /obj/machinery/libraryscanner/attackby(var/obj/O as obj, var/mob/user as mob)
+	if(default_deconstruction_screwdriver(user, O))
+		return TRUE
+	if(default_deconstruction_crowbar(user, O))
+		return TRUE
 	if(istype(O, /obj/item/weapon/book))
 		if(!user.unEquip(O, src))
 			return
@@ -65,6 +69,10 @@
 	density = 1
 
 /obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
+	if(default_deconstruction_screwdriver(user, O))
+		return TRUE
+	if(default_deconstruction_crowbar(user, O))
+		return TRUE
 	if(istype(O, /obj/item/weapon/paper))
 		if(!user.unEquip(O, src))
 			return

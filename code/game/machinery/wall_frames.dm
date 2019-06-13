@@ -101,7 +101,24 @@
 	icon_state = "newscaster_off"
 	desc = "Used for building newscasters."
 	build_machine_type = /obj/machinery/newscaster
+	refund_type = /obj/item/stack/material/plastic
 
 /obj/item/frame/newscaster/sec
 	name = "security newscaster frame"
 	build_machine_type = /obj/machinery/newscaster/security_unit
+
+/obj/item/frame/status_display
+	name = "status display frame"
+	icon = 'icons/obj/status_display.dmi'
+	icon_state = "frame"
+	desc = "Used for building status displays."
+	build_machine_type = /obj/machinery/status_display
+	refund_type = /obj/item/stack/material/plastic
+
+/obj/item/frame/status_display/supply
+	name = "supply status display frame"
+	build_machine_type = /obj/machinery/status_display/supply_display
+
+/obj/item/frame/status_display/ai
+	name = "AI status display frame"
+	build_machine_type = /obj/machinery/ai_status_display

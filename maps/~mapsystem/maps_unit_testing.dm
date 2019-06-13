@@ -120,6 +120,8 @@
 		/obj/machinery/computer/shuttle_control = SELF | SUBTYPES, // Needs way to set the shuttle and make sure correct type is used,
 		/obj/machinery/recharger/wallcharger = SELF, // Uses weird nonstandard pixel shifting,
 		/obj/machinery/oxygen_pump = SELF,
+		/obj/machinery/pager = SELF | SUBTYPES,
+		/obj/machinery/atm = SELF | SUBTYPES,
 
 		// Not buildable due to special nature (not machines in classical sense),
 		/obj/machinery/portable_atmospherics/hydroponics/soil = SELF | SUBTYPES,
@@ -146,5 +148,6 @@
 		/obj/machinery/the_singularitygen = SELF,
 		/obj/machinery/nuclearbomb = SELF | SUBTYPES,
 		/obj/machinery/artifact = SELF | SUBTYPES,
-		/obj/machinery/smartfridge/chemistry = SUBTYPES
+		/obj/machinery/smartfridge/chemistry = SUBTYPES, // These are apparently no-access variants of other ones,
+		/obj/machinery/bluespace_beacon = SELF | SUBTYPES
 	)

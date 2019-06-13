@@ -86,8 +86,6 @@
 	. += new/datum/stack_recipe/apc(src)
 	. += new/datum/stack_recipe/air_alarm(src)
 	. += new/datum/stack_recipe/fire_alarm(src)
-	. += new/datum/stack_recipe/newscaster(src)
-	. += new/datum/stack_recipe/newscaster/sec(src)
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
 	. += new/datum/stack_recipe/furniture/coffin(src)
 
@@ -116,6 +114,11 @@
 	. += create_recipe_list(/datum/stack_recipe/tile/light)
 	. += new/datum/stack_recipe/hazard_cone(src)
 	. += new/datum/stack_recipe/furniture/flaps(src)
+	. += new/datum/stack_recipe/newscaster(src)
+	. += new/datum/stack_recipe/newscaster/sec(src)
+	. += new/datum/stack_recipe/status_display(src)
+	. += new/datum/stack_recipe/status_display/supply(src)
+	. += new/datum/stack_recipe/status_display/ai(src)
 
 /material/wood/generate_recipes(var/reinforce_material)
 	. = ..()
