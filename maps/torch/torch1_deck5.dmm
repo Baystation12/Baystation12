@@ -894,7 +894,6 @@
 /obj/machinery/computer/air_control{
 	dir = 8;
 	name = "Atmospheric Sensors";
-	sensors = list("calypso_out")
 	sensor_tag = "calypso_out"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -16996,7 +16995,6 @@
 	input_tag = "phoron_in";
 	name = "Test Chamber Gas Monitor";
 	output_tag = "phoron_out";
-	sensors = list("phoron_sensor" = "Test Chamber");
 	sensor_tag = "phoron_sensor";
 	sensor_name = "Test Chamber"
 	},
@@ -17787,7 +17785,6 @@
 	input_tag = "toxins_in";
 	name = "Toxins Gas Monitor";
 	output_tag = "toxins_out";
-	sensors = list("toxins_sensor" = "Toxins Test Chamber");
 	sensor_tag = "toxins_sensor";
 	sensor_name = "Toxins Test Chamber"
 	},

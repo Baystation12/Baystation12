@@ -644,8 +644,7 @@
 	name = "Fuel Supply Control";
 	output_tag = "unishi_fuel_out";
 	sensor_name = "Tank";
-	sensor_tag = "n2_sensor";
-	sensors = list("n2_sensor" = "Tank")
+	sensor_tag = "n2_sensor"
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)

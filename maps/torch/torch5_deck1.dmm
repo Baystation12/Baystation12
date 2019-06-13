@@ -1043,7 +1043,6 @@
 	input_tag = "d1sh_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1sh_out";
-	sensors = list("d1sh_sensor" = "Tank");
 	sensor_tag = "d1sh_sensor";
 	sensor_name = "Hydrogen Supply Tank"
 	},
@@ -1057,7 +1056,6 @@
 	input_tag = "d1so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1so2_out";
-	sensors = list("d1so2_sensor" = "Tank");
 	sensor_tag = "d1so2_sensor";
 	sensor_name = "Oxygem Supply Tank"
 	},
@@ -13738,7 +13736,6 @@
 	input_tag = "d1ph_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1ph_out";
-	sensors = list("d1ph_sensor" = "Tank");
 	sensor_tag = "d1ph_sensor";
 	sensor_name = "Hydrogen Supply Tank"
 	},
@@ -13752,7 +13749,6 @@
 	input_tag = "d1po2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1po2_out";
-	sensors = list("d1po2_sensor" = "Tank");
 	sensor_tag = "d1po2_sensor";
 	sensor_name = "Oxygen Supply Tank"
 	},
@@ -27589,8 +27585,7 @@
 	name = "Test Chamber Gas Monitor";
 	output_tag = "test_out";
 	sensor_tag = "testchamber_sensor";
-	sensor_name = "Test Chamber Sensor";
-	sensors = list("testchamber_sensor" = "Test Chamber")
+	sensor_name = "Test Chamber Sensor"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/white,
@@ -28466,7 +28461,6 @@
 /obj/machinery/computer/air_control{
 	frequency = 1441;
 	name = "Xenoflora Gas Monitor";
-	sensors = list("xenobot_sensor" = "Xenoflora Environment");
 	sensor_tag = "xenobot_sensor";
 	sensor_name = "Xenoflora Environment"
 	},

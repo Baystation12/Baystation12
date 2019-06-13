@@ -2807,8 +2807,7 @@
 	output_tag = "unishi_cooling_out";
 	pressure_setting = 100;
 	sensor_name = "Engine Core";
-	sensor_tag = "engine_sensor";
-	sensors = newlist()
+	sensor_tag = "engine_sensor"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)

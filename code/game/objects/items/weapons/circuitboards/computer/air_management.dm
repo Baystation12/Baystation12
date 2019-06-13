@@ -7,7 +7,8 @@
 	build_path = /obj/machinery/computer/air_control
 	var/console_name
 	var/frequency = 1441
-	var/list/sensors = list()
+	var/sensor_tag
+	var/sensor_name
 	var/list/sensor_information = list()
 
 /obj/item/weapon/circuitboard/air_management/supermatter_core
@@ -40,7 +41,8 @@
 		if(console_name)
 			C.SetName(console_name)
 		C.set_frequency(frequency)
-		C.sensors = sensors.Copy()
+		C.sensor_tag = sensor_tag
+		C.sensor_name = sensor_name
 		C.sensor_info = sensor_information.Copy()
 		return 1
 
@@ -72,7 +74,8 @@
 	if (..(C))
 		console_name = C.name
 		frequency = C.frequency
-		sensors = C.sensors.Copy()
+		sensor_tag = C.sensor_tag
+		sensor_name = C.sensor_name
 		sensor_information = C.sensor_info.Copy()
 		return 1
 

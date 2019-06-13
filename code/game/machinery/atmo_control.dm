@@ -6,8 +6,6 @@
 	name = "Atmospherics Control Console"
 
 	var/frequency = 1441
-	var/list/sensors = list()
-	
 	var/datum/radio_frequency/radio_connection
 	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management
 
@@ -33,12 +31,6 @@
 
 /obj/machinery/computer/air_control/Initialize()
 	. = ..()
-	//Temprary code, should be removed before final commit.
-	if(!sensor_tag &&  sensors.len)
-		log_and_message_admins("[src] lacks a sensor tag ([src.x], [src.y], [src.z]).")
-		sensor_tag = sensors
-		sensor_name = sensors[1]
-	//end temporary code
 	set_frequency(frequency)	
 
 obj/machinery/computer/air_control/Destroy()
