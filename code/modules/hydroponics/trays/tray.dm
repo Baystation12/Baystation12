@@ -401,8 +401,12 @@
 
 	return
 
-/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
-
+/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O, var/mob/user)
+	if(mechanical)
+		if(default_deconstruction_screwdriver(user, O))
+			return TRUE
+		if(default_deconstruction_crowbar(user, O))
+			return TRUE
 	if (O.is_open_container())
 		return 0
 

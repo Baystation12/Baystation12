@@ -70,3 +70,34 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 	origin_tech = list(TECH_DATA = 4)
 	req_components = list(
 							/obj/item/stack/cable_coil = 15)
+
+/obj/item/weapon/stock_parts/circuitboard/artifact_scanner
+	name = T_BOARD("artifact scanner")
+	build_path = /obj/machinery/artifact_scanpad
+	board_type = "machine"
+	origin_tech = list(TECH_DATA = 3, TECH_PHORON = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/scanning_module = 2)
+
+/obj/item/weapon/stock_parts/circuitboard/artifact_analyzer
+	name = T_BOARD("artifact analyzer")
+	build_path = /obj/machinery/artifact_analyser
+	board_type = "machine"
+	origin_tech = list(TECH_DATA = 6, TECH_PHORON = 4, TECH_BLUESPACE = 4)
+	req_components = list(
+							/obj/item/weapon/stock_parts/console_screen = 1,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/scanning_module = 2)
+
+/obj/item/weapon/stock_parts/circuitboard/artifact_harvester
+	name = T_BOARD("artifact harvester")
+	build_path = /obj/machinery/artifact_harvester
+	board_type = "machine"
+	origin_tech = list(TECH_DATA = 6, TECH_PHORON = 4, TECH_BLUESPACE = 4)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 2,
+							/obj/item/weapon/stock_parts/console_screen = 1)

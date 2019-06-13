@@ -12,14 +12,44 @@
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/last_process = 0
 
-/obj/machinery/artifact_harvester/New()
-	..()
+/obj/machinery/artifact_harvester/Initialize()
+	. = ..()
+	connect_scanner()
 	//connect to a nearby scanner pad
-	owned_scanner = locate(/obj/machinery/artifact_scanpad) in get_step(src, dir)
-	if(!owned_scanner)
-		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 
-/obj/machinery/artifact_harvester/attackby(var/obj/I as obj, var/mob/user as mob)
+/obj/machinery/artifact_harvester/proc/connect_scanner()
+	if(!owned_scanner)
+		owned_scanner = locate(/obj/machinery/artifact_scanpad) in get_step(src, dir)
+		if(!owned_scanner)
+			owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
+		if(owned_scanner)
+			GLOB.destroyed_event.register(owned_scanner, src, .proc/disconnect_scanner)
+		return TRUE
+
+/obj/machinery/artifact_harvester/proc/disconnect_scanner()
+	if(owned_scanner)
+		GLOB.destroyed_event.unregister(owned_scanner, src)
+		owned_scanner = null
+		return TRUE
+
+/obj/machinery/artifact_harvester/Destroy()
+	disconnect_scanner()
+	if(inserted_battery)
+		inserted_battery.dropInto(loc)
+		inserted_battery = null
+	if(cur_artifact)
+		cur_artifact.dropInto(loc)
+		cur_artifact = null
+	return ..()
+
+/obj/machinery/artifact_harvester/attackby(var/obj/I, var/mob/user)
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+	if(isMultitool(I) && connect_scanner())
+		user.visible_message(SPAN_NOTICE("\The [user] connects \the [src] to \the [owned_scanner]."), SPAN_NOTICE("You connect \the [src] to \the [owned_scanner]."))
+		return TRUE
 	if(istype(I,/obj/item/weapon/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))

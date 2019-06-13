@@ -44,3 +44,26 @@ VENDOR_BOARD("Hot Foods", hotfood)
 	req_components = list(
 							/obj/item/weapon/stock_parts/matter_bin = 2,
 							/obj/item/weapon/stock_parts/manipulator = 2)
+
+#define FRIDGE_BOARD(name_val, suffix) \
+/obj/item/weapon/stock_parts/circuitboard/##suffix{ \
+	name = T_BOARD(name_val); \
+	board_type = "machine"; \
+	build_path = /obj/machinery/##suffix; \
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 2, TECH_BIO = 2); \
+	req_components = list(\
+							/obj/item/weapon/stock_parts/matter_bin = 2,\
+							/obj/item/weapon/stock_parts/manipulator = 2,\
+							/obj/item/weapon/stock_parts/console_screen = 1)\
+}
+
+FRIDGE_BOARD("basic smartfridge", smartfridge)
+FRIDGE_BOARD("secure smartfridge", smartfridge/secure)
+FRIDGE_BOARD("MegaSeed Servitor", smartfridge/seeds)
+FRIDGE_BOARD("Slime Extract Storage", smartfridge/secure/extract)
+FRIDGE_BOARD("Medicine Storage", smartfridge/secure/medbay)
+FRIDGE_BOARD("Virus Storage", smartfridge/secure/virology)
+FRIDGE_BOARD("Chemical Storage", smartfridge/chemistry)
+FRIDGE_BOARD("Drink Showcase", smartfridge/drinks)
+FRIDGE_BOARD("Hot Foods Display", smartfridge/foods)
+FRIDGE_BOARD("drying rack", smartfridge/drying_rack)

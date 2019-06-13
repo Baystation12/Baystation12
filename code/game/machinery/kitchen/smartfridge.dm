@@ -233,12 +233,14 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(isScrewdriver(O))
-		panel_open = !panel_open
-		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
+	if(default_deconstruction_screwdriver(user, O))
 		update_icon()
 		SSnano.update_uis(src)
-		return
+		return TRUE
+	if(default_deconstruction_crowbar(user, O))
+		update_icon()
+		SSnano.update_uis(src)
+		return TRUE
 
 	if(isMultitool(O) || isWirecutter(O))
 		if(panel_open)

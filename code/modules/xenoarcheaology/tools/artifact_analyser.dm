@@ -7,7 +7,6 @@
 	density = 1
 	var/scan_in_progress = 0
 	var/scan_num = 0
-	var/obj/scanned_obj
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/scan_completion_time = 0
 	var/scan_duration = 50
@@ -23,10 +22,31 @@
 	owned_scanner = locate(/obj/machinery/artifact_scanpad) in get_step(src, dir)
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
+	if(owned_scanner)
+		GLOB.destroyed_event.register(owned_scanner, src, .proc/disconnect_scanner)
+
+/obj/machinery/artifact_analyser/proc/disconnect_scanner()
+	if(owned_scanner)
+		GLOB.destroyed_event.unregister(owned_scanner, src)
+		owned_scanner = null
+
+/obj/machinery/artifact_analyser/Destroy()
+	disconnect_scanner()
+	if(scanned_object)
+		scanned_object.dropInto(loc)
+		scanned_object = null
+	. = ..()
 
 /obj/machinery/artifact_analyser/attack_hand(var/mob/user as mob)
 	src.add_fingerprint(user)
 	interact(user)
+
+/obj/machinery/artifact_analyser/attackby(obj/item/O, mob/user)
+	if(default_deconstruction_screwdriver(user, O))
+		return TRUE
+	if(default_deconstruction_crowbar(user, O))
+		return TRUE
+	return ..()
 
 /obj/machinery/artifact_analyser/interact(mob/user)
 	if(stat & (NOPOWER|BROKEN) || get_dist(src, user) > 1)

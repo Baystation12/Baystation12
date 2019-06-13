@@ -28,3 +28,14 @@
 	name = T_BOARD("large stationary portable scrubber")
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
+
+/obj/item/weapon/stock_parts/circuitboard/tray
+	name = T_BOARD("hydroponics tray")
+	board_type = "machine"
+	build_path = /obj/machinery/portable_atmospherics/hydroponics
+	origin_tech = list(TECH_BIO = 4, TECH_MATERIAL = 2, TECH_DATA = 1)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/reagent_containers/glass/beaker = 1,
+							/obj/item/weedkiller = 1,
+							/obj/item/pipe = 2)

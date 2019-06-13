@@ -65,6 +65,13 @@
 		return
 	update()
 
+/obj/machinery/status_display/attackby(obj/item/I, mob/user)
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+	return ..()
+
 /obj/machinery/status_display/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
 		..(severity)

@@ -1,6 +1,6 @@
 #define SUIT_CYCLER_BOARD(name_val, suffix) \
 /obj/item/weapon/stock_parts/circuitboard/cycler/##suffix{ \
-	name = T_BOARD(name_val + "suit cycler"); \
+	name = T_BOARD(name_val + " suit cycler"); \
 	board_type = "machine"; \
 	build_path = /obj/machinery/suit_cycler/##suffix; \
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_POWER = 2); \

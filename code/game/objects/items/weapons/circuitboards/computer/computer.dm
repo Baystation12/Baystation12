@@ -145,3 +145,8 @@
 /obj/item/weapon/stock_parts/circuitboard/account_database
 	name = T_BOARD("accounts uplink terminal")
 	build_path = /obj/machinery/computer/account_database
+
+/obj/item/weapon/stock_parts/circuitboard/area_atmos
+	name = T_BOARD("guest pass terminal")
+	build_path = /obj/machinery/computer/guestpass
+	origin_tech = list(TECH_DATA = 2)
