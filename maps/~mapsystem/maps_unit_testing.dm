@@ -82,6 +82,8 @@
 		/obj/machinery/alarm = SUBTYPES,
 		/obj/machinery/vending/hydronutrients = SUBTYPES,
 		/obj/machinery/vending/hydroseeds = SUBTYPES,
+		/obj/machinery/vending/tool = SUBTYPES,
+		/obj/machinery/vending/engineering = SUBTYPES,
 		/obj/machinery/atmospherics/pipe/simple/visible = SELF | SUBTYPES, // hidden ones are picked up by building code,
 		/obj/machinery/atmospherics/pipe/manifold/visible = SELF | SUBTYPES,
 		/obj/machinery/atmospherics/pipe/manifold4w/visible = SELF | SUBTYPES,
@@ -104,7 +106,7 @@
 		/obj/machinery/portable_atmospherics/powered/pump = SUBTYPES,
 		/obj/machinery/chemical_dispenser = SUBTYPES, // A few others are buildable too, but this is the main one,
 		/obj/machinery/computer/rdconsole = SELF | SUBTYPES,
-		/obj/machinery/power/emitter/anchored = SELF,
+		/obj/machinery/power/emitter/anchored = SELF | SUBTYPES,
 		/obj/machinery/power/fusion_core = SUBTYPES,
 		/obj/machinery/computer/station_alert = SUBTYPES,
 		/obj/machinery/organ_printer/robot = SUBTYPES,
@@ -136,6 +138,7 @@
 		/obj/machinery/oxygen_pump = SELF,
 		/obj/machinery/pager = SELF | SUBTYPES,
 		/obj/machinery/atm = SELF | SUBTYPES,
+		/obj/machinery/status_light = SELF,
 		/obj/machinery/door/morgue = SELF | SUBTYPES, // Needs sprites,
 
 		// Not buildable due to special nature (not machines in classical sense),
@@ -174,5 +177,10 @@
 		/obj/machinery/drone_fabricator = SELF | SUBTYPES,
 		/obj/machinery/keycard_auth = SELF | SUBTYPES,
 		/obj/machinery/self_destruct = SELF,
-		/obj/machinery/merchant_pad = SELF
+		/obj/machinery/merchant_pad = SELF,
+		/obj/machinery/power/debug_items = SELF | SUBTYPES,
+		/obj/machinery/computer/shuttle = SELF,
+		/obj/machinery/giga_drill = SELF,
+		/obj/machinery/computer/log_printer = SELF | SUBTYPES,
+		/obj/machinery/floorlayer = SELF
 	)

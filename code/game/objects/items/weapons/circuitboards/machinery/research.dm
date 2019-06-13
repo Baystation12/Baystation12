@@ -104,7 +104,7 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 
 /obj/item/weapon/stock_parts/circuitboard/suspension_generator
 	name = T_BOARD("suspension generator")
-	build_path = /obj/machinery/artifact_harvester
+	build_path = /obj/machinery/suspension_gen
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 6, TECH_PHORON = 6, TECH_BLUESPACE = 6)
 	req_components = list(

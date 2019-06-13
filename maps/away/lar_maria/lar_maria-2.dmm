@@ -1623,7 +1623,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "ej" = (
-/obj/machinery/botany,
+/obj/machinery/botany/extractor,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "ek" = (

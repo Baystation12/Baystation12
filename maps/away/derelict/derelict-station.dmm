@@ -3062,7 +3062,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jZ" = (
-/obj/machinery/constructable_frame,
+/obj/machinery/constructable_frame/machine_frame,
 /obj/random/material,
 /turf/simulated/floor/airless,
 /area/constructionsite)

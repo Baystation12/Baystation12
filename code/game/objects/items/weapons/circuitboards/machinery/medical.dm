@@ -76,10 +76,10 @@ obj/item/weapon/stock_parts/circuitboard/virology/incubator
 	name = T_BOARD("pathogenic incubator")
 	build_path = /obj/machinery/disease2/incubator
 
-obj/item/weapon/stock_parts/circuitboard/virology/incubator
+obj/item/weapon/stock_parts/circuitboard/virology/antibody
 	name = T_BOARD("antibody analyser")
 	build_path = /obj/machinery/disease2/antibodyanalyser
 
-obj/item/weapon/stock_parts/circuitboard/virology/incubator
+obj/item/weapon/stock_parts/circuitboard/virology/disease
 	name = T_BOARD("disease analyser")
 	build_path = /obj/machinery/disease2/diseaseanalyser
