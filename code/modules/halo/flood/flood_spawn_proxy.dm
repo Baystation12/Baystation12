@@ -42,7 +42,7 @@
 		qdel(src) //deletes itself if there are no uses
 
 /obj/structure/floodspawner/Crossed(atom/movable/AM as mob|obj)
-	if(istype(AM, /mob/observer/ghost/)) //check for ghost
+	if(istype(AM, /mob/observer/ghost/|/mob/living/simple_animal/hostile/flood)) //check for ghost
 		return
 	else if(istype(AM, /mob/living/carbon/human))
 		timer = 1 //starts the countdown
