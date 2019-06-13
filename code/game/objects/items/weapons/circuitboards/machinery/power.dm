@@ -31,3 +31,13 @@
 	build_path = /obj/machinery/power/emitter/gyrotron
 	board_type = "machine"
 	origin_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6)
+
+/obj/item/weapon/stock_parts/circuitboard/rad_collector
+	name = T_BOARD("radiation collector")
+	build_path = /obj/machinery/power/rad_collector
+	board_type = "machine"
+	origin_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4, TECH_MAGNET = 2)
+	req_components = list(
+		/obj/item/weapon/stock_parts/capacitor = 3,
+		/obj/item/weapon/stock_parts/micro_laser = 1,
+		/obj/item/stack/cable_coil = 20)

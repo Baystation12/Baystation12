@@ -12944,7 +12944,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/range)
 "CB" = (
-/obj/machinery/magnetic_module,
 /obj/effect/decal/cleanable/spiderling_remains,
 /turf/simulated/floor/tiled,
 /area/security/range)

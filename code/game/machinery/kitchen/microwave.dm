@@ -80,6 +80,10 @@
 		else
 			to_chat(user, "<span class='warning'>It's broken!</span>")
 			return 1
+	else if(default_deconstruction_screwdriver(user, O))
+		return TRUE
+	else if(default_deconstruction_crowbar(user, O))
+		return TRUE
 	else if(src.dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner) || istype(O, /obj/item/weapon/reagent_containers/glass/rag)) // If they're trying to clean it then let them
 			user.visible_message( \
@@ -132,7 +136,7 @@
 		var/obj/item/grab/G = O
 		to_chat(user, "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>")
 		return 1
-	else if(isCrowbar(O))
+	else if(isWrench(O))
 		user.visible_message( \
 			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the microwave.</span>"

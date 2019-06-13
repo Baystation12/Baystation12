@@ -75,6 +75,7 @@
 		/obj/machinery/beehive = SELF,
 		/obj/machinery/power/solar = SELF,
 		/obj/machinery/power/tracker = SELF,
+		/obj/machinery/porta_turret = SELF | SUBTYPES, // Only some are buildable, using special system,
 
 		// Not buildable because a base type is buildable,
 		/obj/machinery/power/smes = SUBTYPES,
@@ -143,11 +144,17 @@
 		/obj/machinery/hologram/holopad = SELF | SUBTYPES,
 		/obj/machinery/cryopod = SELF | SUBTYPES,
 		/obj/machinery/telecomms/allinone = SELF | SUBTYPES,
-		/obj/machinery/porta_turret/crescent = SELF,
 		/obj/machinery/acting = SELF | SUBTYPES,
 		/obj/machinery/the_singularitygen = SELF,
 		/obj/machinery/nuclearbomb = SELF | SUBTYPES,
 		/obj/machinery/artifact = SELF | SUBTYPES,
 		/obj/machinery/smartfridge/chemistry = SUBTYPES, // These are apparently no-access variants of other ones,
-		/obj/machinery/bluespace_beacon = SELF | SUBTYPES
+		/obj/machinery/bluespace_beacon = SELF | SUBTYPES,
+		/obj/machinery/deployable = SELF | SUBTYPES, // Appears to be a sec-only thing; not buildable until further discussion,
+		/obj/machinery/turretid = SELF | SUBTYPES, // Unclear and these AI machines may need re-examination,
+		/obj/machinery/flasher = SELF | SUBTYPES,
+		/obj/machinery/ai_slipper = SELF | SUBTYPES,
+		/obj/machinery/icecream_vat = SELF, // Starts stocked and can't be restocked,
+		/obj/machinery/media/jukebox = SELF | SUBTYPES, // Performance/griefing concern,
+		/obj/machinery/message_server = SELF // May be fine; am not sure of what it does. Should be looked into further,
 	)

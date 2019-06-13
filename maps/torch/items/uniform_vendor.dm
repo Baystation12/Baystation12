@@ -17,6 +17,16 @@
 	var/list/selected_outfit = list()
 	var/global/list/issued_items = list()
 
+/obj/item/weapon/stock_parts/circuitboard/uniform
+	name = T_BOARD("uniform vendor")
+	build_path = /obj/machinery/uniform_vendor
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 2,
+							/obj/item/weapon/stock_parts/console_screen = 1)
+
 /obj/machinery/uniform_vendor/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
@@ -98,6 +108,10 @@
 		attack_hand(user)
 
 /obj/machinery/uniform_vendor/attackby(var/obj/item/weapon/W, var/mob/user)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 	if(istype(W, /obj/item/weapon/clothingbag))
 		if(W.contents.len)
 			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")

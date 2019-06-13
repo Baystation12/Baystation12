@@ -212,6 +212,6 @@
 			gibs_ready = 0
 			var/mob/M = locate(/mob/living) in src
 			if(M)
-				M.gib
+				M.gib()
 		return
 	state |= WASHER_STATE_CLOSED

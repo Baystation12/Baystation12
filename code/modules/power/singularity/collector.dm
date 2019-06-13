@@ -73,6 +73,10 @@ var/global/list/rad_collectors = list()
 
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 	if(istype(W, /obj/item/weapon/tank/phoron))
 		if(!src.anchored)
 			to_chat(user, "<span class='warning'>The [src] needs to be secured to the floor first.</span>")
