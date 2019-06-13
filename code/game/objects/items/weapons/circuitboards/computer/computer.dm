@@ -105,6 +105,10 @@
 	name = T_BOARD("disease splicer")
 	build_path = /obj/machinery/computer/diseasesplicer
 
+/obj/item/weapon/stock_parts/circuitboard/centrifuge
+	name = T_BOARD("centrifuge")
+	build_path = /obj/machinery/computer/centrifuge
+
 /obj/item/weapon/stock_parts/circuitboard/helm
 	name = T_BOARD("helm control console")
 	build_path = /obj/machinery/computer/ship/helm

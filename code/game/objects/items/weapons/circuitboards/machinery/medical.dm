@@ -12,7 +12,7 @@
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/capacitor  = 1)
 
-obj/item/weapon/stock_parts/circuitboard/bodyscanner
+/obj/item/weapon/stock_parts/circuitboard/bodyscanner
 	name = T_BOARD("body scanner")
 	build_path = /obj/machinery/bodyscanner
 	board_type = "machine"
@@ -22,7 +22,7 @@ obj/item/weapon/stock_parts/circuitboard/bodyscanner
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
-obj/item/weapon/stock_parts/circuitboard/body_scanconsole
+/obj/item/weapon/stock_parts/circuitboard/body_scanconsole
 	name = T_BOARD("body scanner console")
 	build_path = /obj/machinery/body_scanconsole
 	board_type = "machine"
@@ -30,7 +30,7 @@ obj/item/weapon/stock_parts/circuitboard/body_scanconsole
 	req_components = list(
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
-obj/item/weapon/stock_parts/circuitboard/sleeper
+/obj/item/weapon/stock_parts/circuitboard/sleeper
 	name = T_BOARD("sleeper")
 	build_path = /obj/machinery/sleeper
 	board_type = "machine"
@@ -42,7 +42,7 @@ obj/item/weapon/stock_parts/circuitboard/sleeper
 							/obj/item/weapon/reagent_containers/syringe = 2,
 							/obj/item/weapon/reagent_containers/glass/beaker/large = 1)
 
-obj/item/weapon/stock_parts/circuitboard/cryo_cell
+/obj/item/weapon/stock_parts/circuitboard/cryo_cell
 	name = T_BOARD("cryo cell")
 	build_path = /obj/machinery/atmospherics/unary/cryo_cell
 	board_type = "machine"
@@ -52,3 +52,34 @@ obj/item/weapon/stock_parts/circuitboard/cryo_cell
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/console_screen = 1,
 							/obj/item/pipe = 1)
+
+obj/item/weapon/stock_parts/circuitboard/bodyscan_display
+	name = T_BOARD("body scan display")
+	build_path = /obj/machinery/body_scan_display
+	board_type = "machine"
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_BIO = 2, TECH_DATA = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1)
+
+obj/item/weapon/stock_parts/circuitboard/virology
+	name = T_BOARD("pathogenic isolator")
+	build_path = /obj/machinery/disease2/isolator
+	board_type = "machine"
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 3, TECH_DATA = 3)
+	req_components = list(
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1,
+							/obj/item/weapon/stock_parts/scanning_module = 1)
+
+obj/item/weapon/stock_parts/circuitboard/virology/incubator
+	name = T_BOARD("pathogenic incubator")
+	build_path = /obj/machinery/disease2/incubator
+
+obj/item/weapon/stock_parts/circuitboard/virology/incubator
+	name = T_BOARD("antibody analyser")
+	build_path = /obj/machinery/disease2/antibodyanalyser
+
+obj/item/weapon/stock_parts/circuitboard/virology/incubator
+	name = T_BOARD("disease analyser")
+	build_path = /obj/machinery/disease2/diseaseanalyser

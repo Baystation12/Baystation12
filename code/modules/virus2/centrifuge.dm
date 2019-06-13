@@ -3,6 +3,7 @@
 	desc = "Used to separate things with different weights. Spin 'em round, round, right round."
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
+	circuit = /obj/item/weapon/stock_parts/circuitboard/centrifuge
 	var/curing
 	var/isolating
 

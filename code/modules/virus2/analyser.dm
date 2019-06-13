@@ -10,7 +10,22 @@
 
 	var/obj/item/weapon/virusdish/dish = null
 
+/obj/machinery/disease2/diseaseanalyser/Destroy()
+	QDEL_NULL(dish)
+	. = ..()
+
+/obj/machinery/disease2/diseaseanalyser/dismantle()
+	. = ..()
+	if(dish)
+		dish.dropInto(loc)
+		dish = null
+
 /obj/machinery/disease2/diseaseanalyser/attackby(var/obj/O as obj, var/mob/user as mob)
+	if(!scanning)
+		if(default_deconstruction_screwdriver(user, O))
+			return TRUE
+		if(default_deconstruction_crowbar(user, O))
+			return TRUE
 	if(!istype(O,/obj/item/weapon/virusdish)) return
 
 	if(dish)

@@ -3,7 +3,7 @@
 #define LIST "list"
 #define ENTRY "entry"
 
-/obj/machinery/disease2/isolator/
+/obj/machinery/disease2/isolator
 	name = "pathogenic isolator"
 	density = 1
 	anchored = 1
@@ -27,7 +27,22 @@
 	else
 		icon_state = "isolator"
 
+/obj/machinery/disease2/isolator/Destroy()
+	QDEL_NULL(sample)
+	. = ..()
+
+/obj/machinery/disease2/isolator/dismantle()
+	. = ..()
+	if(sample)
+		sample.dropInto(loc)
+		sample = null
+
 /obj/machinery/disease2/isolator/attackby(var/obj/O as obj, var/mob/user)
+	if(!isolating)
+		if(default_deconstruction_screwdriver(user, O))
+			return TRUE
+		if(default_deconstruction_crowbar(user, O))
+			return TRUE	
 	if(!istype(O,/obj/item/weapon/reagent_containers/syringe)) return
 	if(sample)
 		to_chat(user, "\The [src] is already loaded.")

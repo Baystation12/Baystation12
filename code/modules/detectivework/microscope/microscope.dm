@@ -16,6 +16,10 @@
 	..()
 
 /obj/machinery/microscope/attackby(obj/item/W, mob/user)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 
 	if(sample)
 		to_chat(user, "<span class='warning'>There is already a slide in the microscope.</span>")

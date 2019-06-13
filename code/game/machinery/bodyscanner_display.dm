@@ -34,6 +34,13 @@
 		bodyscans -= list(bodyscans[selection])
 		return TOPIC_REFRESH
 
+/obj/machinery/body_scan_display/attackby(obj/item/I, mob/user)
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+	return ..()
+
 /obj/machinery/body_scan_display/attack_ai(user as mob)
 	return attack_hand(user)
 

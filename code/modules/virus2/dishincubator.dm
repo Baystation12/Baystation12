@@ -1,4 +1,4 @@
-/obj/machinery/disease2/incubator/
+/obj/machinery/disease2/incubator
 	name = "pathogenic incubator"
 	density = 1
 	anchored = 1
@@ -14,7 +14,26 @@
 	var/foodsupply = 0
 	var/toxins = 0
 
+/obj/machinery/disease2/incubator/Destroy()
+	QDEL_NULL(dish)
+	QDEL_NULL(beaker)
+	. = ..()
+
+/obj/machinery/disease2/incubator/dismantle()
+	. = ..()
+	if(dish)
+		dish.dropInto(loc)
+		dish = null
+	if(beaker)
+		beaker.dropInto(loc)
+		beaker = null
+
 /obj/machinery/disease2/incubator/attackby(var/obj/O as obj, var/mob/user as mob)
+	if(!on)
+		if(default_deconstruction_screwdriver(user, O))
+			return TRUE
+		if(default_deconstruction_crowbar(user, O))
+			return TRUE	
 	if(istype(O, /obj/item/weapon/reagent_containers/glass) || istype(O,/obj/item/weapon/reagent_containers/syringe))
 
 		if(beaker)

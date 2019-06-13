@@ -25,6 +25,11 @@
 		to_chat(user, "<span class='warning'>Open the cover before inserting the sample.</span>")
 		return
 
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
+
 	var/obj/item/weapon/forensics/swab/swab = W
 	if(istype(swab) && swab.is_used())
 		if(!user.unEquip(W, src))

@@ -106,7 +106,15 @@
 		/obj/machinery/computer/rdconsole = SELF | SUBTYPES,
 		/obj/machinery/power/emitter/anchored = SELF,
 		/obj/machinery/power/fusion_core = SUBTYPES,
-
+		/obj/machinery/computer/station_alert = SUBTYPES,
+		/obj/machinery/organ_printer/robot = SUBTYPES,
+		/obj/machinery/organ_printer/flesh = SUBTYPES,
+		/obj/machinery/vending/medical = SUBTYPES,
+		/obj/machinery/power/solar_control = SUBTYPES,
+		/obj/machinery/door/unpowered/shuttle = SELF,
+		/obj/machinery/pipedispenser/orderable = SELF,
+		/obj/machinery/pipedispenser/disposal/orderable = SELF,
+		/obj/machinery/computer = SELF,
 
 		// Not buildable due to transmitting data via signals and/or lack of ability to set up,
 		/obj/machinery/power/sensor = SELF | SUBTYPES,
@@ -120,12 +128,15 @@
 		/obj/machinery/power/breakerbox = SELF | SUBTYPES, // Has direction settings that can't be changed manually,
 		/obj/machinery/requests_console = SELF, // Can't set the department,
 		/obj/machinery/sparker = SELF, // Uses id,
+		/obj/machinery/igniter = SELF,
 		/obj/machinery/mass_driver = SELF,
+		/obj/machinery/holosign = SELF | SUBTYPES,
 		/obj/machinery/computer/shuttle_control = SELF | SUBTYPES, // Needs way to set the shuttle and make sure correct type is used,
 		/obj/machinery/recharger/wallcharger = SELF, // Uses weird nonstandard pixel shifting,
 		/obj/machinery/oxygen_pump = SELF,
 		/obj/machinery/pager = SELF | SUBTYPES,
 		/obj/machinery/atm = SELF | SUBTYPES,
+		/obj/machinery/door/morgue = SELF | SUBTYPES, // Needs sprites,
 
 		// Not buildable due to special nature (not machines in classical sense),
 		/obj/machinery/portable_atmospherics/hydroponics/soil = SELF | SUBTYPES,
@@ -161,5 +172,7 @@
 		/obj/machinery/media/jukebox = SELF | SUBTYPES, // Performance/griefing concern,
 		/obj/machinery/message_server = SELF, // May be fine; am not sure of what it does. Should be looked into further,
 		/obj/machinery/drone_fabricator = SELF | SUBTYPES,
-		/obj/machinery/keycard_auth = SELF | SUBTYPES
+		/obj/machinery/keycard_auth = SELF | SUBTYPES,
+		/obj/machinery/self_destruct = SELF,
+		/obj/machinery/merchant_pad = SELF
 	)

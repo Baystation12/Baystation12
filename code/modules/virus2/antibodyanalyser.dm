@@ -18,7 +18,18 @@
 	else
 		icon_state = "analyser"
 
+/obj/machinery/disease2/antibodyanalyser/dismantle()
+	. = ..()
+	if(container)
+		container.dropInto(loc)
+		container = null
+
 /obj/machinery/disease2/antibodyanalyser/attackby(var/obj/I as obj, var/mob/user as mob)
+	if(!scanning)
+		if(default_deconstruction_screwdriver(user, I))
+			return TRUE
+		if(default_deconstruction_crowbar(user, I))
+			return TRUE
 	if(istype(I,/obj/item/weapon/reagent_containers))
 		if(!container && user.unEquip(I))
 			container = I
