@@ -791,7 +791,7 @@
 	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
 		return
 	M.species.set_default_hair(M)
-	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
+	to_chat(M, "<span class='warning'>You feel a chill and your skin feels lighter..</span>")
 	remove_self(volume)
 
 /datum/reagent/toxin/zombie

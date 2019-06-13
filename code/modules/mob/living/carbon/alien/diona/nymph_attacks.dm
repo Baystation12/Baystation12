@@ -116,7 +116,7 @@
 		if(nutrition >= nutrition_cost)
 			visible_message("<span class='notice'><b>\The [src]</b> secretes a trickle of green liquid, refilling [tray].</span>","<span class='notice'>You secrete some nutrients into \the [tray].</span>")
 			tray.nutrilevel = 10
-			nutrition -= (10-tray.nutrilevel) * 5
+			adjust_nutrition(-((10-tray.nutrilevel) * 5))
 		else
 			to_chat(src, "<span class='notice'>You haven't eaten enough to refill \the [tray]'s nutrients.</span>")
 		return

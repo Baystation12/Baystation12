@@ -89,7 +89,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 		var/obj/effect/decal/cleanable/C = locate() in T
 		if(C)
 			if(H.nutrition < 300)
-				H.nutrition += rand(10,20)
+				H.adjust_nutrition(rand(10,20))
 			qdel(C)
 
 	// We need a handle_life() proc for this stuff.
