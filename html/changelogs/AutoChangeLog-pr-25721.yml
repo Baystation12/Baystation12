@@ -1,0 +1,5 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - tweak: "Hardsuit modules can now be deselected by pressing select again."
+  - tweak: "Hardsuit plasma cutter automatically do object interaction if they're adjacent. They will now also always fire on harm intent."
