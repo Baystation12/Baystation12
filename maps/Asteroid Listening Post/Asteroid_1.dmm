@@ -153,10 +153,8 @@
 "cW" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
 "cX" = (/obj/machinery/door/blast/regular,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
 "cY" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cZ" = (/turf/simulated/floor/asteroid/planet{tag = "icon-asteroid_dug"; icon_state = "asteroid_dug"},/area/asteroid_listening)
 "da" = (/obj/docking_umbilical/south{name = "Asteroid Docking Umbilical"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
 "db" = (/turf/simulated/floor/holofloor/space,/area/asteroid_listening/dark)
-"dc" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/ground/interior/docking)
 "dd" = (/obj/effect/overmap/sector/exo_listen,/turf/space,/area/asteroid_listening/dark)
 "de" = (/turf/space,/area/space)
 "df" = (/turf/space,/area/asteroid_listening/dark)
@@ -203,12 +201,12 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccocqcqcqcocobGbGbGbGbGbGbGbGbhbpbpbpbpbpbpbp
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccocpcqcococobGbGbGbGacacacacbhbpbpbpbpbpbpbpbpbpbpbpbpbhacacacac
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadacaccocLcqcWcocoacacacacacacacacbhbpbpbpbpbpbpbpbpbpbpbpbpbhacacacac
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaadadacaccocEcLcFcocoacacacacacacacacbhcXcXcXcXcXcXcXcXcXcXcXcXbhacacacac
-aaaaaaaaaaaaaaaaaaaaaaaaacacacacacaccocqcYcqcocoacacacacacacacacacamcZamamamamamamamamamadacacacacac
-aaaaaaaaaaaaaaaaaaaaaaaaaaacacacacaccocLcqcLcocoacacacacacacacadadamamamamamamamamamcZaaadadadadadad
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaadacacaccocqdacqcocoacacacacacacadadadaaaaaacZaaaaaacZaaaaaaaaaaadadadad
+aaaaaaaaaaaaaaaaaaaaaaaaacacacacacaccocqcYcqcocoacacacacacacacacacadakadadadadadadadadadadacacacacac
+aaaaaaaaaaaaaaaaaaaaaaaaaaacacacacaccocLcqcLcocoacacacacacacacadadadadadadadadadadadakaaadadadadadad
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaadacacaccocqdacqcocoacacacacacacadadadaaaaaaakaaaaaaakaaaaaaaaaaadadadad
 aaaaaaaaaaaaaaaaaaaaaaaaaadbadadacaccocococococoacacacacadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaadbdbaaaaaaaccocococococoacacacadadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaacdcdcdcdcdcdcacadadadaaaaaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaacacacacacacacacadadadaaaaaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 acacdbdbdbdbdbdbdbdbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ddacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
