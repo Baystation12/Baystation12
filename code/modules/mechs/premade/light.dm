@@ -28,6 +28,7 @@
 	melee_damage = 5
 	action_delay = 15
 	max_damage = 40
+	power_use = 10
 
 /obj/item/mech_component/propulsion/light
 	name = "light legs"
@@ -35,6 +36,7 @@
 	icon_state = "light_legs"
 	move_delay = 2
 	max_damage = 40
+	power_use = 5
 
 /obj/item/mech_component/sensors/light
 	name = "light sensors"
@@ -44,6 +46,7 @@
 	max_damage = 30
 	vision_flags = SEE_TURFS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	power_use = 50
 
 /obj/item/mech_component/sensors/light/prebuild()
 	..()
@@ -58,6 +61,7 @@
 	exosuit_desc_string = "an open and light chassis"
 	icon_state = "light_body"
 	max_damage = 50
+	power_use = 5
 
 /obj/item/mech_component/chassis/light/New()
 	pilot_positions = list(

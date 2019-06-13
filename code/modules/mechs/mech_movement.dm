@@ -1,5 +1,6 @@
 /mob/living/exosuit
 	movement_handlers = list(
+		/datum/movement_handler/mob/space/exosuit,
 		/datum/movement_handler/mob/exosuit
 	)
 
@@ -8,8 +9,14 @@
 	if(. && !istype(loc, /turf/space))
 		playsound(src.loc, mech_step_sound, 40, 1)
 
-/mob/living/exosuit/can_ztravel()
-	return TRUE
+//Override this and space move once a way to travel vertically is in 
+///mob/living/exosuit/can_ztravel()
+//	if(Allow_Spacemove()) //Handle here 
+	// 	return 1
+
+	// for(var/turf/simulated/T in trange(1,src))
+	// 	if(T.density)
+	// 		return 1
 
 
 /mob/living/exosuit/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
@@ -40,14 +47,7 @@
 		to_chat(mover, SPAN_WARNING("Maintenance protocols are in effect."))
 		next_move = world.time + 3 // Just to stop them from getting spammed with messages.
 		return MOVEMENT_STOP
-	if(!exosuit.check_solid_ground())
-		var/allowmove = exosuit.Allow_Spacemove(0)
-		if(!allowmove)
-			return MOVEMENT_STOP
-		else if(allowmove == -1 && exosuit.handle_spaceslipping())
-			return MOVEMENT_STOP
-		else
-			exosuit.inertia_dir = 0
+	
 	next_move = world.time + (exosuit.legs ? exosuit.legs.move_delay : 3)
 	return MOVEMENT_PROCEED
 
@@ -73,3 +73,33 @@
 		if(target_loc && exosuit.legs && exosuit.legs.can_move_on(exosuit.loc, target_loc) && exosuit.MayEnterTurf(target_loc))
 			exosuit.Move(target_loc)
 	return MOVEMENT_HANDLED
+
+
+/datum/movement_handler/mob/space/exosuit
+	expected_host_type = /mob/living/exosuit
+
+// Space movement
+/datum/movement_handler/mob/space/exosuit/DoMove(var/direction, var/mob/mover)
+
+	if(!mob.check_solid_ground())
+		mob.anchored = FALSE
+		var/allowmove = mob.Allow_Spacemove(0)
+		if(!allowmove)
+			return MOVEMENT_HANDLED
+		else if(allowmove == -1 && mob.handle_spaceslipping()) //Check to see if we slipped
+			return MOVEMENT_HANDLED
+		else
+			mob.inertia_dir = 0 //If not then we can reset inertia and move
+	else mob.anchored = TRUE
+
+/datum/movement_handler/mob/space/exosuit/MayMove(var/mob/mover, var/is_external)
+	if((mover != host) && is_external)
+		return MOVEMENT_PROCEED
+
+	if(!mob.check_solid_ground())
+		if(!mob.Allow_Spacemove(0))
+			return MOVEMENT_STOP
+	return MOVEMENT_PROCEED
+
+/mob/living/exosuit/lost_in_space()
+	return !pilots.len

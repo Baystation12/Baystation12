@@ -18,7 +18,7 @@
 	body.update_air(hatch_closed)
 
 	if((client || LAZYLEN(pilots)) && get_cell())
-		get_cell().use(calc_power_draw())
+		get_cell().drain_power(0, 0, calc_power_draw())
 
 	updatehealth()
 	if(health <= 0 && stat != DEAD)
@@ -35,10 +35,21 @@
 	return body ? body.cell : null
 
 /mob/living/exosuit/proc/calc_power_draw()
-	// TODO
-	// Count up hardpoints, charge them if necessary.
-	// Count up body components that are pulling power, multiply by ratings.
-	return 1
+	//Passive power stuff here. You can also recharge cells or hardpoints if those make sense
+	var/total_draw = 0
+	for(var/hardpoint in hardpoints)
+		var/obj/item/mech_equipment/I = hardpoints[hardpoint]
+		if(!istype(I))
+			continue
+		total_draw += I.passive_power_use
+
+	if(head && head.active_sensors)
+		total_draw += head.power_use
+
+	if(body)
+		total_draw += body.power_use
+
+	return total_draw
 
 /mob/living/exosuit/handle_environment(var/datum/gas_mixture/environment)
 	if(!environment) return

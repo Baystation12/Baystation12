@@ -15,6 +15,7 @@
 	var/pilot_coverage = 100
 	var/min_pilot_size = MOB_SMALL
 	var/max_pilot_size = MOB_LARGE
+	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 
 /obj/item/mech_component/chassis/New()
 	..()

@@ -45,6 +45,9 @@
 		setClickCooldown(15)
 		return
 
+	if(!get_cell().checked_use(arms.power_use * CELLRATE))
+		to_chat(user, SPAN_WARNING("Error: Power levels insufficient."))
+
 	// User is not necessarily the exosuit, or the same person, so update intent.
 	if(user != src)
 		a_intent = user.a_intent
@@ -70,7 +73,7 @@
 
 			// Mounted non-exosuit systems have some hacky loc juggling
 			// to make sure that they work.
-			var/system_moved
+			var/system_moved = FALSE
 			var/obj/item/temp_system
 			var/obj/item/mech_equipment/ME
 			if(istype(selected_system, /obj/item/mech_equipment))
@@ -106,7 +109,10 @@
 
 			if(adj) resolved = A.attackby(temp_system, src)
 			if(!resolved && A && temp_system)
-				temp_system.afterattack(A,src,adj,params)
+				var/mob/ruser = src
+				if(!system_moved) //It's more useful to pass along clicker pilot when logic is fully mechside
+					ruser = user
+				temp_system.afterattack(A,ruser,adj,params)
 
 			//Mech equipment subtypes can add further click delays
 			var/extra_delay = 0
@@ -236,7 +242,11 @@
 		if(realThing.owner)
 			return
 
-		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & hardpoints)
+		var/free_hardpoints = list()
+		for(var/hardpoint in hardpoints)
+			if(hardpoints[hardpoint] == null)
+				free_hardpoints += hardpoint
+		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & free_hardpoints)
 		if(install_system(thing, to_place, user))
 			return
 		to_chat(user, SPAN_WARNING("\The [src] could not be installed in that hardpoint."))

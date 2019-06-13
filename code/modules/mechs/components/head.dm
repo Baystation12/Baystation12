@@ -10,6 +10,7 @@
 	var/obj/item/mech_component/control_module/software
 	has_hardpoints = list(HARDPOINT_HEAD)
 	var/active_sensors = 0
+	power_use = 15
 
 /obj/item/mech_component/sensors/Destroy()
 	QDEL_NULL(camera)

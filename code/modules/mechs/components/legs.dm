@@ -4,6 +4,7 @@
 	icon_state = "loader_legs"
 	var/move_delay = 5
 	var/obj/item/robot_parts/robot_component/actuator/motivator
+	power_use = 50
 
 /obj/item/mech_component/propulsion/Destroy()
 	QDEL_NULL(motivator)
