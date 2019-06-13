@@ -147,6 +147,10 @@
 		return 1
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 
 	var/obj/item/weapon/card/id/I = W.GetIdCard()
 
@@ -176,12 +180,6 @@
 	if (I || istype(W, /obj/item/weapon/spacecash))
 		attack_hand(user)
 		return
-	else if(istype(W, /obj/item/weapon/screwdriver))
-		src.panel_open = !src.panel_open
-		to_chat(user, "You [src.panel_open ? "open" : "close"] the maintenance panel.")
-		update_icon()
-		SSnano.update_uis(src)  // Speaker switch is on the main UI, not wires UI
-		return
 	else if(isMultitool(W) || isWirecutter(W))
 		if(src.panel_open)
 			attack_hand(user)
@@ -200,8 +198,7 @@
 		return
 	else if(attempt_to_stock(W, user))
 		return
-	..()
-	return
+	return ..()
 
 /obj/machinery/vending/MouseDrop_T(var/obj/item/I as obj, var/mob/user as mob)
 	if(!CanMouseDrop(I, user) || (I.loc != user))

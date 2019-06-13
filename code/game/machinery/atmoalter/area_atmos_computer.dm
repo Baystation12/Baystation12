@@ -110,7 +110,7 @@
 					src.updateUsrDialog()
 				return
 
-			scrubber.on = text2num(href_list["toggle"])
+			scrubber.update_use_power(text2num(href_list["toggle"]) ? POWER_USE_ACTIVE : POWER_USE_IDLE)
 			scrubber.update_icon()
 
 	proc/validscrubber( var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber as obj )

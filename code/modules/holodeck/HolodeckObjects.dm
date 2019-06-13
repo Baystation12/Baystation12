@@ -377,13 +377,6 @@
 	to_chat(user, "The AI is not to interact with these devices!")
 	return
 
-/obj/machinery/readybutton/New()
-	..()
-
-
-/obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
-
 /obj/machinery/readybutton/attack_hand(mob/user as mob)
 
 	if(user.stat || stat & (NOPOWER|BROKEN))

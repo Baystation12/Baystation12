@@ -47,12 +47,23 @@
 		pipe_color = choice
 		updateUsrDialog()
 
-/obj/machinery/pipedispenser/attack_hand(user as mob)
+/obj/machinery/pipedispenser/attack_hand(mob/user)
+	if((. = ..()))
+		return
+	interact(user)
+
+/obj/machinery/pipedispenser/interact(mob/user)
+	if(!CanPhysicallyInteract(user))
+		return
 	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(default_deconstruction_screwdriver(user, W))
+		return TRUE
+	if(default_deconstruction_crowbar(user, W))
+		return TRUE
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
 		if(!user.unEquip(W))
 			return
@@ -110,7 +121,9 @@
 
 	qdel(pipe)
 
-/obj/machinery/pipedispenser/disposal/attack_hand(user as mob)
+/obj/machinery/pipedispenser/disposal/interact(mob/user)
+	if(!CanPhysicallyInteract(user))
+		return
 	var/datum/browser/popup = new (user, "Disposal Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_disposal_pipe_datums_by_category))
 	popup.open()

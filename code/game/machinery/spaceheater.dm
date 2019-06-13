@@ -57,13 +57,13 @@
 	..(severity)
 
 /obj/machinery/space_heater/attackby(obj/item/I, mob/user)
-	if(isScrewdriver(I))
-		panel_open = !panel_open
-		user.visible_message("<span class='notice'>[user] [panel_open ? "opens" : "closes"] the hatch on the [src].</span>", "<span class='notice'>You [panel_open ? "open" : "close"] the hatch on the [src].</span>")
+	if(default_deconstruction_screwdriver(user, I))
 		update_icon(1)
 		if(!panel_open && user.machine == src)
 			show_browser(user, null, "window=spaceheater")
 			user.unset_machine()
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
 		return TRUE
 	return ..()
 

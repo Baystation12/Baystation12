@@ -82,6 +82,11 @@
 		if(shock(user, 100))
 			return
 
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+
 	//Hacking init.
 	if(isMultitool(I) || isWirecutter(I))
 		if(panel_open)
@@ -119,12 +124,6 @@
 			updateUsrDialog()
 
 			return
-	else if(isScrewdriver(I))
-
-		panel_open = !panel_open
-		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
-		updateUsrDialog()
-		return
 
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
@@ -168,7 +167,7 @@
 		updateUsrDialog()
 		return
 
-	..()
+	return ..()
 
 /obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged)

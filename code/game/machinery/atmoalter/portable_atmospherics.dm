@@ -135,48 +135,29 @@
 	else if (istype(W, /obj/item/device/scanner/gas))
 		return
 
-	return
+	return ..()
 
 /obj/machinery/portable_atmospherics/return_air()
 	return air_contents
 
 /obj/machinery/portable_atmospherics/powered
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/battery,
+		/obj/item/weapon/stock_parts/power/apc
+	)
 	var/power_rating
 	var/power_losses
 	var/last_power_draw = 0
-	var/obj/item/weapon/cell/cell
-
-/obj/machinery/portable_atmospherics/powered/powered()
-	if(use_power) //using area power
-		return ..()
-	if(cell && cell.charge)
-		return 1
-	return 0
 
 /obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/cell))
-		if(cell)
-			to_chat(user, "There is already a power cell installed.")
-			return
-		if(!user.unEquip(I, src))
-			return
-		cell = I
-		user.visible_message("<span class='notice'>[user] opens the panel on \the [src] and inserts \the [I].</span>", "<span class='notice'>You open the panel on \the [src] and insert \the [I].</span>")
-		power_change()
-		return
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+	return ..()
 
-	if(isScrewdriver(I))
-		if(!cell)
-			to_chat(user, "<span class='warning'>There is no power cell installed.</span>")
-			return
-
-		user.visible_message("<span class='notice'>[user] opens the panel on \the [src] and removes \the [cell].</span>", "<span class='notice'>You open the panel on \the [src] and remove \the [cell].</span>")
-		cell.add_fingerprint(user)
-		cell.dropInto(loc)
-		cell = null
-		power_change()
-		return
-	..()
+/obj/machinery/portable_atmospherics/powered/components_are_accessible(path)
+	return panel_open
 
 /obj/machinery/portable_atmospherics/proc/log_open()
 	if(air_contents.gas.len == 0)

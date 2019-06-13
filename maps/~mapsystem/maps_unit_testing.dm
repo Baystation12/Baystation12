@@ -73,6 +73,8 @@
 		/obj/machinery/camera = SELF | SUBTYPES,
 		/obj/machinery/door/window = SELF | SUBTYPES,
 		/obj/machinery/beehive = SELF,
+		/obj/machinery/power/solar = SELF,
+		/obj/machinery/power/tracker = SELF,
 
 		// Not buildable because a base type is buildable
 		/obj/machinery/power/smes = SUBTYPES,
@@ -103,6 +105,9 @@
 		/obj/machinery/power/sensor = SELF | SUBTYPES,
 		/obj/machinery/button = SELF | SUBTYPES,
 		/obj/machinery/access_button = SELF | SUBTYPES,
+		/obj/machinery/airlock_sensor = SELF | SUBTYPES,
+		/obj/machinery/door/blast = SELF | SUBTYPES, // Controlled remotely by buttons
+		/obj/machinery/door_timer = SELF | SUBTYPES,
 
 		// Not buildable due to special nature (not machines in classical sense)
 		/obj/machinery/portable_atmospherics/hydroponics/soil/invisible = SELF,
@@ -125,5 +130,7 @@
 		/obj/machinery/cryopod = SELF | SUBTYPES,
 		/obj/machinery/telecomms/allinone = SELF | SUBTYPES,
 		/obj/machinery/porta_turret/crescent = SELF,
-		/obj/machinery/acting = SELF | SUBTYPES
+		/obj/machinery/acting = SELF | SUBTYPES,
+		/obj/machinery/the_singularitygen = SELF,
+		/obj/machinery/nuclearbomb = SELF | SUBTYPES
 	)
