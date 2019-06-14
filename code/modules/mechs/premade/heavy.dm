@@ -42,7 +42,7 @@
 
 /obj/item/mech_component/sensors/heavy
 	name = "heavy sensors"
-	exosuit_desc_string = "reinforced monoeye"
+	exosuit_desc_string = "a reinforced monoeye"
 	desc = "A solitary sensor moves inside a recessed slit in the armour plates."
 	icon_state = "heavy_head"
 	max_damage = 120
@@ -63,10 +63,11 @@
 	max_damage = 150
 	mech_health = 500
 	power_use = 50
+	has_hardpoints = list(HARDPOINT_BACK)
 
 /obj/item/mech_component/chassis/heavy/New()
 	..()
-	armour = new /obj/item/robot_parts/robot_component/armour/exosuit
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
 	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
 
 

@@ -68,6 +68,6 @@
 			"[WEST]"  = list("x" = 12, "y" = 8)
 		)
 	)
-	armour = new /obj/item/robot_parts/robot_component/armour/exosuit
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
 	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
 	..()

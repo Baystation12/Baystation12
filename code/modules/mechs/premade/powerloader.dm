@@ -16,6 +16,9 @@
 		body = new /obj/item/mech_component/chassis/powerloader(src)
 		body.color = "#ffdc37"
 
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
+
 	..()
 
 	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
@@ -26,18 +29,21 @@
 	exosuit_desc_string = "heavy-duty industrial lifters"
 	max_damage = 70
 	power_use = 30
+	desc = "The Xion Industrial Digital Interaction Manifolds allow you poke untold dangers from the relative safety of your cockpit."
 
 /obj/item/mech_component/propulsion/powerloader
 	name = "exosuit legs"
 	exosuit_desc_string = "reinforced hydraulic legs"
+	desc = "wide and stable but not particularly fast."
 	max_damage = 70
 	move_delay = 4
-	power_use = 60
+	power_use = 10
 
 /obj/item/mech_component/sensors/powerloader
 	name = "exosuit sensors"
 	gender = PLURAL
 	exosuit_desc_string = "simple collision detection sensors"
+	desc = "A primitive set of sensors designed to work in tandem with most MKI Eyeball platforms"
 	max_damage = 100
 	power_use = 0
 
@@ -51,6 +57,7 @@
 	hatch_descriptor = "roll cage"
 	pilot_coverage = 40
 	exosuit_desc_string = "an industrial rollcage"
+	desc = "A Xion industrial brand rollcage. Technically OSHA compliant. Technically"
 	max_damage = 100
 	power_use = 0
 
@@ -99,6 +106,9 @@
 	if(!body) 
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
+
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
 
 	..()
 
