@@ -300,3 +300,4 @@
 	anchored = 1
 	mouse_opacity = 0
 	density = 0
+	layer = 2
