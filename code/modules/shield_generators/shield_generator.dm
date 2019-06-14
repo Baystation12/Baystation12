@@ -4,6 +4,7 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
 	density = 1
+	base_type = /obj/machinery/power/shield_generator
 	var/datum/wires/shield_generator/wires
 	var/list/field_segments = list()	// List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()	// List of shield segments that have failed and are currently regenerating.

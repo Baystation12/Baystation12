@@ -12,7 +12,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 /obj/machinery/proc/populate_parts(var/full_populate) // Full populate creates a circuitboard and all needed components automatically.
 	if(full_populate)
-		var/board_path = GLOB.machine_path_to_circuit_type[type]
+		var/path_to_check = base_type || type
+		var/board_path = GLOB.machine_path_to_circuit_type[path_to_check]
 		if(board_path)
 			var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
 			if(LAZYLEN(board.req_components))

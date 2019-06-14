@@ -7,6 +7,7 @@
 	anchored = 1
 	idle_power_usage = 40
 	obj_flags = OBJ_FLAG_ANCHORABLE
+	base_type = /obj/machinery/food_replicator
 	var/biomass = 100
 	var/biomass_max = 100
 	var/biomass_per = 10

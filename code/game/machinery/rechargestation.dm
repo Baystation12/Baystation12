@@ -6,6 +6,7 @@
 	density = 1
 	anchored = 1
 	idle_power_usage = 50
+	base_type = /obj/machinery/recharge_station
 	uncreated_component_parts = list(
 		/obj/item/weapon/stock_parts/power/battery,
 		/obj/item/weapon/stock_parts/power/apc

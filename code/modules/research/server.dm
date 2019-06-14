@@ -2,6 +2,7 @@
 	name = "R&D Server"
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "server"
+	base_type = /obj/machinery/r_n_d/server
 	var/datum/research/files
 	var/health = 100
 	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.

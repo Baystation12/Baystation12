@@ -8,6 +8,7 @@
 	use_power = POWER_USE_OFF
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000
+	base_type = /obj/machinery/atmospherics/binary/oxyregenerator
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null
 	var/power_setting = 1 //power consumption setting, 1 through five

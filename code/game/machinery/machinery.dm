@@ -106,6 +106,7 @@ Class Procs:
 	var/clickvol = 40		// sound played on succesful interface use
 	var/core_skill = SKILL_DEVICES //The skill used for skill checks for this machine (mostly so subtypes can use different skills).
 	var/operator_skill      // Machines often do all operations on Process(). This caches the user's skill while the operations are running.
+	var/base_type           // For mapped buildable types, set this to be the base type actually buildable.
 
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/weapon/stock_parts
 
