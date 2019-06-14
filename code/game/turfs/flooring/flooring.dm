@@ -211,26 +211,31 @@
 	build_type = /obj/item/stack/tile/wood
 	flags = TURF_CAN_BREAK | TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER
 	footstep_type = FOOTSTEP_WOOD
+	color = WOOD_COLOR_GENERIC
 
 /decl/flooring/wood/mahogany
-	icon_base = "mahogany"
+	color = WOOD_COLOR_RICH
 	build_type = /obj/item/stack/tile/mahogany
 
 /decl/flooring/wood/maple
-	icon_base = "maple"
+	color = WOOD_COLOR_PALE
 	build_type = /obj/item/stack/tile/maple
 
 /decl/flooring/wood/ebony
-	icon_base = "ebony"
+	color = WOOD_COLOR_BLACK
 	build_type = /obj/item/stack/tile/ebony
 
 /decl/flooring/wood/walnut
-	icon_base = "walnut"
+	color = WOOD_COLOR_CHOCOLATE
 	build_type = /obj/item/stack/tile/walnut
 
 /decl/flooring/wood/bamboo
-	icon_base = "maple"
+	color = WOOD_COLOR_PALE2
 	build_type = /obj/item/stack/tile/bamboo
+
+/decl/flooring/wood/yew
+	color = WOOD_COLOR_YELLOW
+	build_type = /obj/item/stack/tile/yew
 
 /decl/flooring/reinforced
 	name = "reinforced floor"
