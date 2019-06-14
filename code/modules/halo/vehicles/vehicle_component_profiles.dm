@@ -21,8 +21,6 @@
 /datum/component_profile/New(var/obj/vehicles/creator)
 	. = ..()
 	contained_vehicle = creator
-	if(isnull(contained_vehicle))
-		return
 	for(var/obj/comp in components)
 		contained_vehicle.contents += comp
 	for(var/obj/comp in vital_components)
