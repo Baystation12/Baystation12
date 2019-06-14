@@ -329,5 +329,5 @@ obj/machinery/computer/air_control/Destroy()
 /obj/machinery/computer/air_control/supermatter_core
 	icon = 'icons/obj/computer.dmi'
 	frequency = 1438
-	circuit = /obj/item/weapon/circuitboard/air_management/supermatter_core
+	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core
 	out_pressure_mode = 1
