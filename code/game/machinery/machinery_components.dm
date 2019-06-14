@@ -68,6 +68,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(istype(part))
 		LAZYADD(component_parts, part)
 		part.on_install(src)
+		GLOB.destroyed_event.register(part, src, .proc/component_destroyed)
 	else if(ispath(part))
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part] += 1
@@ -76,9 +77,6 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if(!material)
 			material = install_component(/obj/item/weapon/stock_parts/building_material, refresh_parts = FALSE)
 		material.add_material(part)
-
-	if(.)
-		GLOB.destroyed_event.register(part, src, .proc/component_destroyed)
 
 	if(refresh_parts)
 		RefreshParts()
@@ -97,6 +95,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			return
 
 	part.dropInto(loc)
+	GLOB.destroyed_event.unregister(part, src)
 	RefreshParts()
 	return part
 
