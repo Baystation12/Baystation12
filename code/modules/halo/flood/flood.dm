@@ -333,6 +333,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/obj/item/weapon/gun/our_gun
 
 	var/corpse_pulped = 0 //1 = cannot be revived, -1 = can be revived infinitely.
+	var/obj/item/inventory = null //an item goes in this variable of the instance with the full path "in/quotes". item in var will drop upon death
 
 /mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
 	. = ..()
@@ -402,8 +403,13 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	for(var/mob/living/carbon/human/h in view(7,src))
 		return 1
 
+/mob/living/simple_animal/hostile/flood/combat_form/proc/dump_inventory()
+	new src.inventory(loc)
+	inventory = null
+
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
+	dump_inventory()
 	. = ..()
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
