@@ -9,13 +9,12 @@
 	brightness_on = 4 //halved normal flare light
 
 /obj/item/weapon/storage/belt/utility/marine_engineer
-	can_hold = list(/obj/item/weapon/weldingtool,/obj/item/weapon/crowbar,/obj/item/device/analyzer,/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/chem_grenade/incendiary,/obj/item/weapon/armor_patch)
+	can_hold = list(/obj/item/weapon/weldingtool,/obj/item/weapon/crowbar,/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/chem_grenade/incendiary,/obj/item/weapon/armor_patch)
 
 /obj/item/weapon/storage/belt/utility/marine_engineer/New()
 	..()
-	new /obj/item/weapon/weldingtool(src)
+	new /obj/item/weapon/weldingtool/mini(src)
 	new /obj/item/weapon/crowbar/red(src)
-	new /obj/item/device/analyzer(src)
 	return
 
 /obj/structure/closet/crate/marine/marine_medic
@@ -78,21 +77,21 @@
 
 /obj/structure/closet/crate/marine/engineer/WillContain()
 	return list(
+	/obj/item/clothing/head/helmet/marine/visor = 1,
+	/obj/item/clothing/mask/marine = 1,
+	/obj/item/clothing/glasses/welding = 1,
+	/obj/item/clothing/suit/storage/marine = 1,
+	/obj/item/clothing/gloves/thick/unsc = 1,
+	/obj/item/clothing/shoes/marine = 1,
+	/obj/item/weapon/storage/belt/utility/marine_engineer = 1,
 	/obj/item/weapon/storage/box/MRE/Chicken = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/weapon/armor_patch = 3,
+	/obj/item/weapon/armor_patch = 2,
 	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
 	/obj/item/ammo_magazine/m762_ap/MA5B = 1,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
-	/obj/item/clothing/head/helmet/marine/visor = 1,
-	/obj/item/clothing/mask/marine = 1,
-	/obj/item/clothing/glasses/welding = 1,
-	/obj/item/clothing/glasses/hud/tactical = 1,
-	/obj/item/clothing/suit/storage/marine = 1,
-	/obj/item/clothing/gloves/thick/unsc = 1,
-	/obj/item/clothing/shoes/marine = 1,
-	/obj/item/weapon/storage/belt/utility/marine_engineer = 1)
+	/obj/item/weapon/storage/box/flares = 1)
 
 /obj/structure/closet/crate/marine/rifleman
 	name = "standard rifleman equipment"
