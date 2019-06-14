@@ -11,7 +11,7 @@
 	var/sensor_name
 	var/list/sensor_information = list()
 
-/obj/item/weapon/circuitboard/air_management/supermatter_core
+/obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core
 	name = T_BOARD("core control")
 	build_path = /obj/machinery/computer/air_control/supermatter_core
 	frequency = 1438
@@ -46,7 +46,7 @@
 		C.sensor_info = sensor_information.Copy()
 		return 1
 
-/obj/item/weapon/circuitboard/air_management/supermatter_core/construct(var/obj/machinery/computer/air_control/supermatter_core/SC)
+/obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core/construct(var/obj/machinery/computer/air_control/supermatter_core/SC)
 	if(..(SC))
 		SC.input_tag = input_tag
 		SC.output_tag = output_tag
@@ -79,7 +79,7 @@
 		sensor_information = C.sensor_info.Copy()
 		return 1
 
-/obj/item/weapon/circuitboard/air_management/supermatter_core/deconstruct(var/obj/machinery/computer/air_control/supermatter_core/SC)
+/obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core/deconstruct(var/obj/machinery/computer/air_control/supermatter_core/SC)
 	if(..(SC))
 		input_tag = SC.input_tag
 		output_tag = SC.output_tag
