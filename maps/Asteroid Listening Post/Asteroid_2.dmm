@@ -225,7 +225,6 @@
 "eq" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
 "er" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
 "es" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/cryodorm)
-"et" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/darkbasement)
 "eu" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 1},/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hallways)
 "ev" = (/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hallways)
 "ew" = (/obj/machinery/atmospherics/pipe/tank/empty{dir = 1; icon_state = "air_map"; tag = "icon-air_map (NORTH)"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/Hallways)
@@ -374,7 +373,7 @@ aaaaaaaabrbIbubrbrbrbrdGdGdGdGdGdHdIdGdGdGdGdGdGdGdGdGdJdGdGbrbrbrbububrbrbububr
 aaaaaaaabrbububraaaaaadGdLdMdNdOdIdIdIdPdIdGdGdGdGdGdQdIdRdGdSbububububrbrbNbvbrdldndTdndndndndUdVbr
 aaaaaaaadWbububraaaaaadGdXdIdIdIdIdYdIdIdIdGdGdGdGdGdZdIeadGdSbububuebbrbrbububrecedeedndndndndnefbr
 egegegegegcPbubraaaaaadGdLeheiejdIdIdIekdIdGdGdGdGdGelekemdGbrbrbrbrbrbrbrbububreneoepdndndndndnefbr
-egeqeresegbubudWaaaaaadGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGetetetetetbrbrbububreuevewexeyezeAeBeCbr
+egeqeresegbubudWaaaaaadGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGdGbrbrbrbrbrbrbrbububreuevewexeyezeAeBeCbr
 egeDereregbububraaaaaaeEeEeEeEeEeEeEeEeEeFeGeHeIeJeKeLeMbrbrbrbrbrbrbrbrbrbIbubrbrbrbrbrbrbrbrbrbrbr
 egerereregbububraaaaaaeEeNeOePeQeReSeTeUgwgwgwgwgwgwbubububxbubRbubububxbubvbubububxbububububxbraaaa
 egeDereregbububraaaaaaeEeVeSePeWeXeWeYeEeZeZeZfaeZeZbubufbbububVbubvbububububububububububububVbraaaa
