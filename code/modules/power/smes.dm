@@ -125,7 +125,7 @@
 	// else inputting = 0, as set in process()
 
 	for(var/obj/item/weapon/stock_parts/power/terminal/term in power_components)
-		var/inputted = term.use_power_oneoff(src, to_input)
+		var/inputted = term.use_power_oneoff(src, to_input, power_channel)
 		add_charge(inputted)
 		input_available += inputted
 
@@ -164,14 +164,14 @@
 	//inputting
 	if(input_attempt && (!input_pulsed && !input_cut))
 		target_load = min((capacity-charge)/CELLRATE, input_level)	// Amount we will request from the powernet.
-		var/input_available = FALSE
+		var/is_input_available = FALSE
 		for(var/obj/item/weapon/stock_parts/power/terminal/term in power_components)
 			if(!term.terminal || !term.terminal.powernet)
-				continue
-			input_available = TRUE
-			term.terminal.powernet.smes_demand += target_load
+				continue			
+			is_input_available = TRUE
+			term.terminal.powernet.smes_demand += target_load		
 			term.terminal.powernet.inputting.Add(src)
-		if(!input_available)
+		if(!is_input_available)
 			target_load = 0 // We won't input any power without powernet connection.
 		inputting = 0
 
