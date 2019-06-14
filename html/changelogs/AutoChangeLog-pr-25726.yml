@@ -1,0 +1,6 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - rscadd: "Added yew wood, and its planks to the supply menu."
+  - tweak: "Adjusted mahogany and walnut wood colours."
+  - bugfix: "Corrected mahogany and maple plank loadout info."
