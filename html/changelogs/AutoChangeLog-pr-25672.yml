@@ -1,6 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - tweak: "Hardsuit flash module now flashes on unarmed attacks."
-  - tweak: "Hardsuit flash module now has has a function to activate the flash without targeting anything."
-  - tweak: "Hardsuit flash now has a higher energy cost of 10 Whr per use."

@@ -1,6 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - bugfix: "SMES inverted logic fixed; should now work with terminals properly."
-  - bugfix: "APCs now charge from empty properly again."
-  - bugfix: "Heaters/coolers/protolathe/circuit printer work again."
