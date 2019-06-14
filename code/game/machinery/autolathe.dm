@@ -272,15 +272,15 @@
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()
 	..()
-	var/mb_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
-	var/man_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	var/mb_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0.5, 3.5)
 
 	storage_capacity[MATERIAL_STEEL] = mb_rating  * 25000
 	storage_capacity[MATERIAL_ALUMINIUM] = mb_rating  * 25000
 	storage_capacity[MATERIAL_GLASS] = mb_rating  * 12500
 	storage_capacity[MATERIAL_PLASTIC] = mb_rating  * 12500
 	build_time = 50 / man_rating
-	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.8. Maximum rating of parts is 3
+	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material.
 
 /obj/machinery/autolathe/dismantle()
 
