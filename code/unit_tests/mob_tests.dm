@@ -311,6 +311,7 @@ datum/unit_test/mob_damage/skrell/fire
 datum/unit_test/mob_damage/skrell/tox
 	name = "MOB: Skrell Toxins Damage Check"
 	damagetype = TOX
+	expected_vulnerability = ARMORED
 
 datum/unit_test/mob_damage/skrell/oxy
 	name = "MOB: Skrell Oxygen Damage Check"
