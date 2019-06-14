@@ -177,13 +177,6 @@
 	else
 		src.go_to_side()
 
-/obj/machinery/atmospherics/tvalve/Process()
-	..()
-	. = PROCESS_KILL
-	//machines.Remove(src)
-
-	return
-
 /obj/machinery/atmospherics/tvalve/atmos_init()
 	..()
 	var/node1_dir

@@ -9,7 +9,8 @@
 	density = 1
 	anchored = 1
 	use_power = POWER_USE_OFF
-	var/obj/item/weapon/circuitboard/circuit = null
+	uncreated_component_parts = null
+	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
 	var/list/components = null
 	var/list/req_components = null
 	var/list/req_component_names = null
@@ -49,8 +50,8 @@
 						new /obj/item/stack/material/steel(src.loc, 5)
 						qdel(src)
 			if(2)
-				if(istype(P, /obj/item/weapon/circuitboard))
-					var/obj/item/weapon/circuitboard/B = P
+				if(istype(P, /obj/item/weapon/stock_parts/circuitboard))
+					var/obj/item/weapon/stock_parts/circuitboard/B = P
 					if(B.board_type == "machine")
 						if(!user.unEquip(P, src))
 							return
@@ -105,27 +106,12 @@
 								break
 						if(component_check)
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc, src.dir)
-
-							if(new_machine.component_parts)
-								new_machine.component_parts.Cut()
-							else
-								new_machine.component_parts = list()
-
+							var/obj/machinery/new_machine = new src.circuit.build_path(loc, dir, FALSE)
 							src.circuit.construct(new_machine)
 
+							new_machine.install_component(circuit, refresh_parts = FALSE)
 							for(var/obj/O in src)
-								if(circuit.contain_parts) // things like disposal don't want their parts in them
-									O.forceMove(new_machine)
-								else
-									O.forceMove(null)
-								new_machine.component_parts += O
-
-							if(circuit.contain_parts)
-								circuit.forceMove(new_machine)
-							else
-								circuit.forceMove(null)
-
+								new_machine.install_component(O, refresh_parts = FALSE)
 							new_machine.RefreshParts()
 							qdel(src)
 					else

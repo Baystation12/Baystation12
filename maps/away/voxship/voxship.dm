@@ -89,7 +89,7 @@
 	TLV["nitrogen"] = list(16, 19, 135, 140) // Partial pressure, kpa
 
 /obj/machinery/power/smes/buildable/preset/voxship/ship/configure_and_install_coils()
-	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
+	install_component(/obj/item/weapon/stock_parts/smes_coil/super_capacity)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE

@@ -2093,9 +2093,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/techstorage)
 "eb" = (
-/obj/item/weapon/circuitboard/pacman,
-/obj/item/weapon/circuitboard/recharge_station,
-/obj/item/weapon/circuitboard/shield_generator,
+/obj/item/weapon/stock_parts/circuitboard/pacman,
+/obj/item/weapon/stock_parts/circuitboard/recharge_station,
+/obj/item/weapon/stock_parts/circuitboard/shield_generator,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -2105,8 +2105,8 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "ec" = (
-/obj/item/weapon/circuitboard/helm,
-/obj/item/weapon/circuitboard/unary_atmos/cooler,
+/obj/item/weapon/stock_parts/circuitboard/helm,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -2120,8 +2120,8 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "ed" = (
-/obj/item/weapon/circuitboard/autolathe,
-/obj/item/weapon/circuitboard/unary_atmos/heater,
+/obj/item/weapon/stock_parts/circuitboard/autolathe,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -2520,12 +2520,12 @@
 /area/ship/scrap/maintenance/techstorage)
 "eG" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/pacman/super/potato,
+/obj/item/weapon/stock_parts/circuitboard/pacman/super/potato,
 /obj/item/stack/material/glass/phoronrglass/ten,
 /obj/item/stack/material/ocp/ten,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "eH" = (

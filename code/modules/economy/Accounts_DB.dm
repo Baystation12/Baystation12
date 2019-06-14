@@ -10,7 +10,7 @@
 	var/creating_new_account = 0
 	var/const/fund_cap = 1000000
 
-	circuit = /obj/item/weapon/circuitboard/account_database
+	circuit = /obj/item/weapon/stock_parts/circuitboard/account_database
 
 	proc/get_access_level()
 		if (!held_card)

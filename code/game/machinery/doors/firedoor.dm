@@ -272,7 +272,7 @@
 
 /obj/machinery/door/firedoor/deconstruct(mob/user, var/moved = FALSE)
 	if (stat & BROKEN)
-		new /obj/item/weapon/circuitboard/broken(src.loc)
+		new /obj/item/weapon/stock_parts/circuitboard/broken(src.loc)
 	else
 		new/obj/item/weapon/airalarm_electronics(src.loc)
 

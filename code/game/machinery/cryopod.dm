@@ -14,7 +14,7 @@
 	desc = "An interface between crew and the cryogenic storage oversight systems."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cellconsole"
-	circuit = /obj/item/weapon/circuitboard/cryopodcontrol
+	circuit = /obj/item/weapon/stock_parts/circuitboard/cryopodcontrol
 	density = 0
 	interact_offline = 1
 	var/mode = null
@@ -33,7 +33,7 @@
 	desc = "An interface between crew and the robotic storage systems."
 	icon = 'icons/obj/robot_storage.dmi'
 	icon_state = "console"
-	circuit = /obj/item/weapon/circuitboard/robotstoragecontrol
+	circuit = /obj/item/weapon/stock_parts/circuitboard/robotstoragecontrol
 
 	storage_type = "cyborgs"
 	storage_name = "Robotic Storage Control"
@@ -119,12 +119,12 @@
 
 	attack_hand(user)
 
-/obj/item/weapon/circuitboard/cryopodcontrol
+/obj/item/weapon/stock_parts/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
 	origin_tech = list(TECH_DATA = 3)
 
-/obj/item/weapon/circuitboard/robotstoragecontrol
+/obj/item/weapon/stock_parts/circuitboard/robotstoragecontrol
 	name = "Circuit board (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = list(TECH_DATA = 3)
@@ -301,6 +301,7 @@
 
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
 /obj/machinery/cryopod/Process()
+	..()
 	if(occupant)
 		if(applies_stasis && iscarbon(occupant) && (world.time > time_entered + 20 SECONDS))
 			var/mob/living/carbon/C = occupant

@@ -2,7 +2,7 @@
 #error T_BOARD macro is not defined but we need it!
 #endif
 
-/obj/item/weapon/circuitboard/reagent_heater
+/obj/item/weapon/stock_parts/circuitboard/reagent_heater
 	name = T_BOARD("chemical heater")
 	build_path = /obj/machinery/reagent_temperature
 	board_type = "machine"
@@ -12,6 +12,6 @@
 		/obj/item/weapon/stock_parts/capacitor = 1
 	)
 
-/obj/item/weapon/circuitboard/reagent_heater/cooler
+/obj/item/weapon/stock_parts/circuitboard/reagent_heater/cooler
 	name = T_BOARD("chemical cooler")
 	build_path = /obj/machinery/reagent_temperature/cooler

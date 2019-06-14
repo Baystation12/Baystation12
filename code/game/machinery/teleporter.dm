@@ -3,7 +3,7 @@
 	desc = "Used to control a linked teleportation hub and station."
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
-	circuit = /obj/item/weapon/circuitboard/teleporter
+	circuit = /obj/item/weapon/stock_parts/circuitboard/teleporter
 	var/obj/machinery/teleport/station/station = null
 	var/obj/machinery/teleport/hub/hub = null
 	var/obj/item/locked = null

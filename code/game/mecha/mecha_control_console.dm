@@ -5,7 +5,7 @@
 	icon_screen = "mecha"
 	light_color = "#a97faa"
 	req_access = list(access_robotics)
-	circuit = /obj/item/weapon/circuitboard/mecha_control
+	circuit = /obj/item/weapon/stock_parts/circuitboard/mecha_control
 	var/list/located = list()
 	var/screen = 0
 	var/stored_data

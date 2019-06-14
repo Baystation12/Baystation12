@@ -116,6 +116,7 @@
 	return ..()
 
 /obj/machinery/camera/Process()
+	..()
 	if((stat & EMPED) && world.time >= affected_by_emp_until)
 		stat &= ~EMPED
 		cancelCameraAlarm()

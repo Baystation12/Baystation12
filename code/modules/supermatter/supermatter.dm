@@ -309,6 +309,7 @@
 
 
 /obj/machinery/power/supermatter/Process()
+	..()
 
 	var/turf/L = loc
 

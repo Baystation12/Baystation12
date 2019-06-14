@@ -13,10 +13,6 @@
 
 /obj/machinery/body_scanconsole/Initialize()
 	. = ..()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/body_scanconsole(src),
-		new /obj/item/weapon/stock_parts/console_screen(src))
-	RefreshParts()
 	FindScanner()
 
 /obj/machinery/body_scanconsole/on_update_icon()

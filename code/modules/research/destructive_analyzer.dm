@@ -16,15 +16,6 @@ Note: Must be placed within 3 tiles of the R&D Console
 	idle_power_usage = 30
 	active_power_usage = 2500
 
-/obj/machinery/r_n_d/destructive_analyzer/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/destructive_analyzer(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	RefreshParts()
-
 /obj/machinery/r_n_d/destructive_analyzer/RefreshParts()
 	var/T = 0
 	for(var/obj/item/weapon/stock_parts/S in src)

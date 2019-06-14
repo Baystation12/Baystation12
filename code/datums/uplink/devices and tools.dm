@@ -114,7 +114,7 @@
 	desc = "A circuit board that can be used to create a teleporter console, able to lock onto detected \
 	teleportation beacons. Requires a projector and teleporter hub nearby to work."
 	item_cost = 40
-	path = /obj/item/weapon/circuitboard/teleporter
+	path = /obj/item/weapon/stock_parts/circuitboard/teleporter
 
 /datum/uplink_item/item/tools/teleporter/New()
 	..()

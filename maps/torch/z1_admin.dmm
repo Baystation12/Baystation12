@@ -724,8 +724,8 @@
 /area/rescue_base/base)
 "abX" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/borgupload,
-/obj/item/weapon/circuitboard/aiupload{
+/obj/item/weapon/stock_parts/circuitboard/borgupload,
+/obj/item/weapon/stock_parts/circuitboard/aiupload{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -4631,14 +4631,14 @@
 /area/rescue_base/base)
 "akI" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/circuitboard/smes,
-/obj/item/weapon/circuitboard/smes,
-/obj/item/weapon/smes_coil,
-/obj/item/weapon/smes_coil,
-/obj/item/weapon/smes_coil/super_capacity,
-/obj/item/weapon/smes_coil/super_capacity,
-/obj/item/weapon/smes_coil/super_io,
-/obj/item/weapon/smes_coil/super_io,
+/obj/item/weapon/stock_parts/circuitboard/smes,
+/obj/item/weapon/stock_parts/circuitboard/smes,
+/obj/item/weapon/stock_parts/smes_coil,
+/obj/item/weapon/stock_parts/smes_coil,
+/obj/item/weapon/stock_parts/smes_coil/super_capacity,
+/obj/item/weapon/stock_parts/smes_coil/super_capacity,
+/obj/item/weapon/stock_parts/smes_coil/super_io,
+/obj/item/weapon/stock_parts/smes_coil/super_io,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -9330,8 +9330,8 @@
 /area/centcom/specops)
 "awM" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/borgupload,
-/obj/item/weapon/circuitboard/aiupload{
+/obj/item/weapon/stock_parts/circuitboard/borgupload,
+/obj/item/weapon/stock_parts/circuitboard/aiupload{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -9704,8 +9704,8 @@
 /area/centcom/specops)
 "axG" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/circuitboard/smes,
-/obj/item/weapon/circuitboard/smes,
+/obj/item/weapon/stock_parts/circuitboard/smes,
+/obj/item/weapon/stock_parts/circuitboard/smes,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 8

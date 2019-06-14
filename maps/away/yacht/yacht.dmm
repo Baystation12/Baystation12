@@ -738,7 +738,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/circuitboard/broken,
+/obj/item/weapon/stock_parts/circuitboard/broken,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "ch" = (
@@ -858,7 +858,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/weapon/circuitboard/broken,
+/obj/item/weapon/stock_parts/circuitboard/broken,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},

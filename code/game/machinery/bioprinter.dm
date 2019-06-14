@@ -37,27 +37,17 @@
 	if(printing)
 		overlays += "[icon_state]_working"
 
-/obj/machinery/organ_printer/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	RefreshParts()
-
 /obj/machinery/organ_printer/examine(var/mob/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>It is loaded with [stored_matter]/[max_stored_matter] matter units.</span>")
 
 /obj/machinery/organ_printer/RefreshParts()
 	print_delay = initial(print_delay)
-	max_stored_matter = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/bin in component_parts)
-		max_stored_matter += bin.rating * 50
-	for(var/obj/item/weapon/stock_parts/manipulator/manip in component_parts)
-		print_delay -= (manip.rating-1)*10
-	print_delay = max(0,print_delay)
+	print_delay -= 10 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	print_delay += 10 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+	print_delay = max(0, print_delay)
+
+	max_stored_matter = 50 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
 	. = ..()
 
 /obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
@@ -139,10 +129,6 @@
 		new /obj/item/stack/material/steel(get_turf(src), Floor(stored_matter/matter_amount_per_sheet))
 	return ..()
 
-/obj/machinery/organ_printer/robot/New()
-	..()
-	component_parts += new /obj/item/weapon/circuitboard/roboprinter
-
 /obj/machinery/organ_printer/robot/print_organ(var/choice)
 	var/obj/item/organ/O = ..()
 	O.robotize()
@@ -191,11 +177,6 @@
 			stored_matter -= amount_list[/obj/item/weapon/reagent_containers/food/snacks/meat]
 			new /obj/item/weapon/reagent_containers/food/snacks/meat(T)
 	return ..()
-
-/obj/machinery/organ_printer/flesh/New()
-	..()
-	component_parts += new /obj/item/device/scanner/health
-	component_parts += new /obj/item/weapon/circuitboard/bioprinter
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O

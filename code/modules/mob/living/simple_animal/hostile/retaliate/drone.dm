@@ -208,7 +208,7 @@
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//also drop dummy circuit boards deconstructable for research (loot)
-		var/obj/item/weapon/circuitboard/C
+		var/obj/item/weapon/stock_parts/circuitboard/C
 
 		//spawn 1-4 boards of a random type
 		var/spawnees = 0

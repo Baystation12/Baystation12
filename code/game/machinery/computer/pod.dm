@@ -5,7 +5,7 @@
 	desc = "A control console for launching pods. Some people prefer firing Mechas."
 	icon_screen = "mass_driver"
 	light_color = "#00b000"
-	circuit = /obj/item/weapon/circuitboard/pod
+	circuit = /obj/item/weapon/stock_parts/circuitboard/pod
 	var/id = 1.0
 	var/obj/machinery/mass_driver/connected = null
 	var/timing = 0.0
@@ -61,15 +61,15 @@
 				new /obj/item/weapon/material/shard( loc )
 
 				//generate appropriate circuitboard. Accounts for /pod/old computer types
-				var/obj/item/weapon/circuitboard/pod/M = null
+				var/obj/item/weapon/stock_parts/circuitboard/pod/M = null
 				if(istype(src, /obj/machinery/computer/pod/old))
-					M = new /obj/item/weapon/circuitboard/olddoor( A )
+					M = new /obj/item/weapon/stock_parts/circuitboard/olddoor( A )
 					if(istype(src, /obj/machinery/computer/pod/old/syndicate))
-						M = new /obj/item/weapon/circuitboard/syndicatedoor( A )
+						M = new /obj/item/weapon/stock_parts/circuitboard/syndicatedoor( A )
 					if(istype(src, /obj/machinery/computer/pod/old/swf))
-						M = new /obj/item/weapon/circuitboard/swfdoor( A )
+						M = new /obj/item/weapon/stock_parts/circuitboard/swfdoor( A )
 				else //it's not an old computer. Generate standard pod circuitboard.
-					M = new /obj/item/weapon/circuitboard/pod( A )
+					M = new /obj/item/weapon/stock_parts/circuitboard/pod( A )
 
 				for (var/obj/C in src)
 					C.dropInto(loc)
@@ -84,15 +84,15 @@
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
 
 				//generate appropriate circuitboard. Accounts for /pod/old computer types
-				var/obj/item/weapon/circuitboard/pod/M = null
+				var/obj/item/weapon/stock_parts/circuitboard/pod/M = null
 				if(istype(src, /obj/machinery/computer/pod/old))
-					M = new /obj/item/weapon/circuitboard/olddoor( A )
+					M = new /obj/item/weapon/stock_parts/circuitboard/olddoor( A )
 					if(istype(src, /obj/machinery/computer/pod/old/syndicate))
-						M = new /obj/item/weapon/circuitboard/syndicatedoor( A )
+						M = new /obj/item/weapon/stock_parts/circuitboard/syndicatedoor( A )
 					if(istype(src, /obj/machinery/computer/pod/old/swf))
-						M = new /obj/item/weapon/circuitboard/swfdoor( A )
+						M = new /obj/item/weapon/stock_parts/circuitboard/swfdoor( A )
 				else //it's not an old computer. Generate standard pod circuitboard.
-					M = new /obj/item/weapon/circuitboard/pod( A )
+					M = new /obj/item/weapon/stock_parts/circuitboard/pod( A )
 
 				for (var/obj/C in src)
 					C.dropInto(loc)
@@ -143,6 +143,7 @@
 
 
 /obj/machinery/computer/pod/Process()
+	..()
 	if(inoperable())
 		return
 	if(timing)

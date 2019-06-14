@@ -35,6 +35,7 @@
 	ignite()
 
 /obj/machinery/igniter/Process()
+	..()
 	if(powered())
 		var/turf/location = src.loc
 		if (isturf(location))

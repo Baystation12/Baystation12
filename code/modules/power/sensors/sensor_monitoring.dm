@@ -14,7 +14,7 @@
 	//computer stuff
 	density = 1
 	anchored = 1.0
-	circuit = /obj/item/weapon/circuitboard/powermonitor
+	circuit = /obj/item/weapon/stock_parts/circuitboard/powermonitor
 	var/alerting = 0
 	idle_power_usage = 300
 	active_power_usage = 300
@@ -22,6 +22,7 @@
 
 // Checks the sensors for alerts. If change (alerts cleared or detected) occurs, calls for icon update.
 /obj/machinery/computer/power_monitor/Process()
+	..()
 	var/alert = check_warnings()
 	if(alert != alerting)
 		alerting = !alerting

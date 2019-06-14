@@ -6,7 +6,7 @@
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
 	var/hack_icon = "error"
-	circuit = /obj/item/weapon/circuitboard/message_monitor
+	circuit = /obj/item/weapon/stock_parts/circuitboard/message_monitor
 	//Server linked to.
 	var/obj/machinery/message_server/linkedServer = null
 	//Sparks effect - For emag

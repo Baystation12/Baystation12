@@ -150,6 +150,8 @@
 	update_icon()
 
 /obj/machinery/alarm/Process()
+	..()
+
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return
 
@@ -1024,6 +1026,8 @@ FIRE ALARM
 	return
 
 /obj/machinery/firealarm/Process()//Note: this processing was mostly phased out due to other code, and only runs when needed
+	..()
+
 	if(stat & (NOPOWER|BROKEN))
 		return
 

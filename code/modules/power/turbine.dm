@@ -31,7 +31,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "tech_key"
 	icon_screen = "turbinecomp"
-	circuit = /obj/item/weapon/circuitboard/turbine_control
+	circuit = /obj/item/weapon/stock_parts/circuitboard/turbine_control
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
@@ -63,6 +63,7 @@
 #define COMPSTARTERLOAD 2800
 
 /obj/machinery/compressor/Process()
+	..()
 	if(!starter)
 		return
 	overlays.Cut()
@@ -120,6 +121,7 @@
 #define TURBGENG 0.8
 
 /obj/machinery/power/turbine/Process()
+	..()
 	if(!compressor.starter)
 		return
 	overlays.Cut()
@@ -260,7 +262,3 @@
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
-
-/obj/machinery/computer/turbine_computer/Process()
-	src.updateDialog()
-	return

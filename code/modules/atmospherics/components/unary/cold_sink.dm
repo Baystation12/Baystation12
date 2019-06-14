@@ -20,18 +20,6 @@
 	var/set_temperature = T20C		// Thermostat
 	var/cooling = 0
 
-/obj/machinery/atmospherics/unary/freezer/New()
-	..()
-	initialize_directions = dir
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/unary_atmos/cooler(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 2)
-	RefreshParts()
-
 /obj/machinery/atmospherics/unary/freezer/atmos_init()
 	..()
 	if(node)
@@ -151,17 +139,9 @@
 //upgrading parts
 /obj/machinery/atmospherics/unary/freezer/RefreshParts()
 	..()
-	var/cap_rating = 0
-	var/manip_rating = 0
-	var/bin_rating = 0
-
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			cap_rating += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			manip_rating += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
-			bin_rating += P.rating
+	var/cap_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/manip_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	var/bin_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
 
 	power_rating = initial(power_rating) * cap_rating / 2			//more powerful
 	heatsink_temperature = initial(heatsink_temperature) / ((manip_rating + bin_rating) / 2)	//more efficient

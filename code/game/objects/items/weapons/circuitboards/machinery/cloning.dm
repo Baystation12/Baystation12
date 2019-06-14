@@ -2,7 +2,7 @@
 #error T_BOARD macro is not defined but we need it!
 #endif
 
-/obj/item/weapon/circuitboard/bioprinter
+/obj/item/weapon/stock_parts/circuitboard/bioprinter
 	name = T_BOARD("bioprinter")
 	build_path = /obj/machinery/organ_printer/flesh
 	board_type = "machine"
@@ -13,7 +13,7 @@
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							)
 
-/obj/item/weapon/circuitboard/roboprinter
+/obj/item/weapon/stock_parts/circuitboard/roboprinter
 	name = T_BOARD("prosthetic organ fabricator")
 	build_path = /obj/machinery/organ_printer/robot
 	board_type = "machine"

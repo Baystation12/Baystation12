@@ -437,6 +437,7 @@ var/list/turret_icons
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
 
 /obj/machinery/porta_turret/Process()
+	..()
 	//the main machinery process
 
 	if(stat & (NOPOWER|BROKEN))

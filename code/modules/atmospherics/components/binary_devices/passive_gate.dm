@@ -11,6 +11,7 @@
 	desc = "A one-way air valve that can be used to regulate input or output pressure, and flow rate. Does not require power."
 
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	interact_offline = 1
 	var/unlocked = 0	//If 0, then the valve is locked closed, otherwise it is open(-able, it's a one-way valve so it closes if gas would flow backwards).
 	var/target_pressure = ONE_ATMOSPHERE

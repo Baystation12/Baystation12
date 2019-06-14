@@ -33,11 +33,13 @@ This is /obj/machinery level code to properly manage power usage from the area.
 // This is NOT for when the machine's own status changes; update_use_power for that.
 /obj/machinery/proc/power_change()
 	var/oldstat = stat
-
-	if(powered(power_channel))
-		stat &= ~NOPOWER
-	else
-		stat |= NOPOWER
+	stat |= NOPOWER
+	for(var/thing in power_components)
+		var/obj/item/weapon/stock_parts/power/power = thing
+		if((stat & NOPOWER) && power.can_provide_power(src))
+			stat &= ~NOPOWER
+		else
+			power.not_needed(src)
 
 	. = (stat != oldstat)
 	if(.)
@@ -54,12 +56,27 @@ This is /obj/machinery level code to properly manage power usage from the area.
 
 // This will have this machine have its area eat this much power next tick, and not afterwards. Do not use for continued power draw.
 /obj/machinery/proc/use_power_oneoff(var/amount, var/chan = POWER_CHAN)
-	var/area/A = get_area(src)		// make sure it's in an area
-	if(!A)
-		return
 	if(chan == POWER_CHAN)
 		chan = power_channel
-	A.use_power_oneoff(amount, chan)
+	. = amount
+	for(var/thing in power_components)
+		var/obj/item/weapon/stock_parts/power/power = thing
+		var/used = power.use_power_oneoff(src, ., chan)
+		. -= used
+		if(. <= 0)
+			return
+
+// Same thing, but dry run; doesn't actually do it.
+/obj/machinery/proc/can_use_power_oneoff(var/amount, var/chan = POWER_CHAN)
+	if(chan == POWER_CHAN)
+		chan = power_channel
+	. = amount
+	for(var/thing in power_components)
+		var/obj/item/weapon/stock_parts/power/power = thing
+		var/used = power.can_use_power_oneoff(src, ., chan)
+		. -= used
+		if(. <= 0)
+			return
 
 // Do not do power stuff in New/Initialize until after ..()
 /obj/machinery/Initialize()

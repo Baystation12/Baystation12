@@ -95,10 +95,6 @@
 /obj/machinery/ntnet_relay/New()
 	uid = gl_uid
 	gl_uid++
-	component_parts = list()
-	component_parts += new /obj/item/stack/cable_coil(src,15)
-	component_parts += new /obj/item/weapon/circuitboard/ntnet_relay(src)
-
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global
@@ -125,12 +121,6 @@
 		if(!panel_open)
 			to_chat(user, "Open the maintenance panel first.")
 			return
-		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		to_chat(user, "You disassemble \the [src]!")
-
-		for(var/atom/movable/A in component_parts)
-			A.forceMove(src.loc)
-		new/obj/machinery/constructable_frame/machine_frame(src.loc)
-		qdel(src)
+		dismantle()
 		return
 	..()
