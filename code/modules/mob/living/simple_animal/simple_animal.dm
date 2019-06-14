@@ -296,7 +296,7 @@
 	timeofdeath = world.time
 	icon_state = icon_dead
 	density = 0
-	adjustBruteLoss(maxHealth) //Make sure dey dead.
+	//adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
 	if(death_sounds.len > 0)
 		playsound(loc, pick(death_sounds),75,0,7)
@@ -392,3 +392,9 @@
 	return
 /mob/living/simple_animal/ExtinguishMob()
 	return
+
+/mob/living/simple_animal/updatehealth()
+	. = ..()
+	if(health <= 0)
+		death()
+		return
