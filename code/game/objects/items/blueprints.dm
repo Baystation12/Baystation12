@@ -155,7 +155,8 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 
 
 /obj/item/blueprints/proc/move_turfs_to_area(var/list/turf/turfs, var/area/A)
-	A.contents.Add(turfs)
+	for(var/T in turfs)
+		ChangeArea(T, A)
 
 /obj/item/blueprints/proc/edit_area()
 	var/area/A = get_area()

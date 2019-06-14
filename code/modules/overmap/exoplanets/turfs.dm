@@ -24,8 +24,7 @@
 			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
 			set_light(E.lightlevel, 0.1, 2)
 			if(E.planetary_area && istype(loc, world.area))
-				E.planetary_area.contents.Add(src)
-				E.planetary_area.Entered(src)
+				ChangeArea(src, E.planetary_area)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
@@ -137,7 +136,7 @@
 	if(!istype(E))
 		return
 	if(E.planetary_area && istype(loc, world.area))
-		E.planetary_area.contents.Add(src)
+		ChangeArea(src, E.planetary_area)
 	var/new_x = A.x
 	var/new_y = A.y
 	if(x <= TRANSITIONEDGE)
