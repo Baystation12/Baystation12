@@ -52,14 +52,14 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/RefreshParts()
 	var/T = 0
-	var/list/glasses = get_component_of_type(/obj/item/weapon/reagent_containers/glass)
-	for(var/path in glasses)
-		var/obj/item/weapon/reagent_containers/glass/G = path
-		T += initial(G.volume) * glasses[path]
-	if(!reagents)
-		create_reagents(T)
-	else
-		reagents.maximum_volume = T
+	var/obj/item/weapon/stock_parts/building_material/mat = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+	if(mat)
+		for(var/obj/item/weapon/reagent_containers/glass/G in mat.materials)
+			T += G.volume
+		if(!reagents)
+			create_reagents(T)
+		else
+			reagents.maximum_volume = T
 
 	max_material_storage = 75000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
 
