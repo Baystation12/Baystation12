@@ -142,7 +142,7 @@
 			num_terminals--
 		else
 			num_terminals++
-		set_broken(!!num_terminals)		
+		set_broken(!num_terminals)
 
 /obj/machinery/power/smes/Process()
 	..()

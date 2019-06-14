@@ -49,7 +49,7 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power) & total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	heating_power = initial(heating_power) * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 
 	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	if(comp)
