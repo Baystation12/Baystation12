@@ -166,7 +166,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/infest_airlocks_nearby()
 	for(var/obj/machinery/door/airlock/door in view(2,src))
-		if(door.stat & BROKEN)
+		if(door.welded == 1)
+			return
+		else if(door.stat & BROKEN)
 			continue
 		visible_message("<span class = 'danger'>[name] leaps at [door], burrowing into the access control mechanisms...</span>")
 		adjustBruteLoss(1)
