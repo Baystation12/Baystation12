@@ -181,6 +181,5 @@
 		/obj/machinery/power/debug_items = SELF | SUBTYPES,
 		/obj/machinery/computer/shuttle = SELF,
 		/obj/machinery/giga_drill = SELF,
-		/obj/machinery/computer/log_printer = SELF | SUBTYPES,
 		/obj/machinery/floorlayer = SELF
 	)

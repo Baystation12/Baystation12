@@ -93,6 +93,10 @@
 		/area/template_noop
 	)
 
+/datum/map/torch/New()
+	..()
+	buildable_exempt_machines[/obj/machinery/computer/log_printer] = SELF | SUBTYPES
+
 /datum/unit_test/zas_area_test/ai_chamber
 	name = "ZAS: AI Chamber"
 	area_path = /area/turret_protected/ai

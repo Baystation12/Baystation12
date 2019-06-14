@@ -10,7 +10,7 @@
 		/obj/item/pipe = 1)
 
 /obj/item/weapon/stock_parts/circuitboard/microwave
-	name = T_BOARD("washing machine")
+	name = T_BOARD("microwave")
 	build_path = /obj/machinery/microwave
 	board_type = "machine"
 	origin_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 2)
