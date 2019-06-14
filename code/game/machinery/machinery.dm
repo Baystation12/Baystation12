@@ -125,13 +125,17 @@ Class Procs:
 	. = ..()
 
 /obj/machinery/Process()
-	if(LAZYLEN(processing_parts))
+	if((. = process_parts()))
+		return
+	return PROCESS_KILL // Only process if you need to.
+
+/obj/machinery/proc/process_parts()
+	. = processing_parts
+	if(.)
 		for(var/thing in processing_parts)
 			var/obj/item/weapon/stock_parts/part = thing
 			if(part.machine_process(src) == PROCESS_KILL)
 				part.stop_processing()
-	else
-		return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)
