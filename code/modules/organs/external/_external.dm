@@ -845,7 +845,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/use_flesh_colour = species.get_flesh_colour(owner)
 	var/use_blood_colour = species.get_blood_colour(owner)
 
-	removed(null, ignore_children)
 	add_pain(60)
 	if(!clean)
 		victim.shock_stage += min_broken_damage
@@ -873,6 +872,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		victim.UpdateDamageIcon()
 		victim.regenerate_icons()
 		dir = 2
+
+	removed(null, ignore_children)
+	if(QDELETED(src))
+		return
 
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
@@ -911,7 +914,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.removed()
-				if(istype(loc,/turf))
+				if(!QDELETED(I) && isturf(loc))
 					I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/I in src)
@@ -1216,7 +1219,7 @@ obj/item/organ/external/proc/remove_clamps()
 	if(!ignore_children)
 		for(var/obj/item/organ/external/O in children)
 			O.removed()
-			if(O)
+			if(!QDELETED(O))
 				O.forceMove(src)
 
 				// if we didn't lose the organ we still want it as a child
@@ -1226,7 +1229,8 @@ obj/item/organ/external/proc/remove_clamps()
 	// Grab all the internal giblets too.
 	for(var/obj/item/organ/organ in internal_organs)
 		organ.removed(user, 0, 0)  // Organ stays inside and connected
-		organ.forceMove(src)
+		if(!QDELETED(organ))
+			organ.forceMove(src)
 
 	// Remove parent references
 	if(parent)
