@@ -355,7 +355,7 @@
 /var/const/access_psychiatrist = "ACCESS_PSYCHIATRIST" // Psychiatrist's office 64
 /datum/access/psychiatrist
 	id = access_psychiatrist
-	desc = "Psychiatrist's Office"
+	desc = "Counselor's Office"
 	region = ACCESS_REGION_MEDBAY
 
 /var/const/access_xenoarch = "ACCESS_XENOARCH" //65

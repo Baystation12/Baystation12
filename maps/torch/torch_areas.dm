@@ -1075,10 +1075,6 @@
 	name = "\improper First Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
-/area/security/oldopscheck
-	name = "\improper Decommissioned First Deck Security Checkpoint"
-	icon_state = "checkpoint"
-
 /area/security/habcheck
 	name = "\improper Third Deck Security Checkpoint"
 	icon_state = "checkpoint"
@@ -1129,7 +1125,13 @@
 	icon_state = "patients"
 
 /area/medical/mentalhealth
-	name = "\improper Mental Health"
+	name = "\improper Chaplain's Office"
+	icon_state = "medbay3"
+	ambience = list('sound/ambience/signal.ogg')
+	req_access = list(access_chapel_office)
+
+/area/medical/counselor
+	name = "\improper Counselor's Office"
 	icon_state = "medbay3"
 	ambience = list('sound/ambience/signal.ogg')
 	req_access = list(access_psychiatrist)
