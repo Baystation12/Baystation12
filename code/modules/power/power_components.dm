@@ -98,6 +98,7 @@
 		machine = loc
 	if(istype(machine))
 		machine.power_change()
+	set_status(machine, PART_STAT_CONNECTED)
 	return cell
 
 /obj/item/weapon/stock_parts/power/battery/proc/remove_cell()
@@ -108,6 +109,7 @@
 		var/obj/machinery/machine = loc
 		if(istype(machine))
 			machine.power_change()
+		unset_status(machine, PART_STAT_CONNECTED)
 
 /obj/item/weapon/stock_parts/power/battery/proc/extract_cell(mob/user)
 	if(!cell)
