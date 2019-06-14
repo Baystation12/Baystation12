@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Species toxins modifiers are used again, and modify internal organ damage taken from toxins and organ failure."
+  - bugfix: "Lava no longer deletes human and human derived mobs early when braindead."
