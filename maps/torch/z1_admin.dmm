@@ -21048,7 +21048,6 @@
 /area/merchant_station)
 "aXK" = (
 /obj/machinery/atmospherics/unary/tank/air{
-	icon_state = "air_map";
 	dir = 1;
 	start_pressure = 740.5
 	},
@@ -21057,7 +21056,6 @@
 /area/merchant_station)
 "aXL" = (
 /obj/machinery/atmospherics/unary/tank/air{
-	icon_state = "air_map";
 	dir = 1;
 	start_pressure = 740.5
 	},

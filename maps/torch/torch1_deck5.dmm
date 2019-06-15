@@ -10658,7 +10658,6 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/tank{
-	icon_state = "air_map";
 	dir = 8
 	},
 /obj/machinery/alarm{

@@ -1245,7 +1245,6 @@
 /area/voxship/ship)
 "dz" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
-	icon_state = "h2_map";
 	dir = 1
 	},
 /obj/effect/floor_decal/borderfloor/full,
@@ -1712,7 +1711,6 @@
 /area/voxship/ship)
 "eJ" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen{
-	icon_state = "n2_map";
 	dir = 8
 	},
 /obj/effect/floor_decal/borderfloor/full,
@@ -1883,7 +1881,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/tank/nitrogen{
-	icon_state = "n2_map";
 	dir = 8
 	},
 /obj/effect/floor_decal/borderfloor/full,

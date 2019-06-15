@@ -13,9 +13,9 @@
 	pipe_class = PIPE_CLASS_UNARY
 
 /obj/machinery/atmospherics/unary/New()
-	initialize_directions = dir
 	air_contents = new
 	..()
+	initialize_directions = dir
 	air_contents.volume = 200
 
 // Housekeeping and pipe network stuff below

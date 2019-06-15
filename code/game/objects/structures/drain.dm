@@ -35,6 +35,7 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>")
 		qdel(src)
+		return
 	return ..()
 
 /obj/structure/drain/on_update_icon()
@@ -68,4 +69,5 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='warning'>[user] wrenches the [src] down.</span>")
 		qdel(src)
+		return
 	return ..()

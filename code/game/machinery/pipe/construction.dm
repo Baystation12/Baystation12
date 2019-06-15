@@ -21,8 +21,8 @@ Buildable meters
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
 
-/obj/item/pipe/New(var/loc, var/obj/machinery/atmospherics/P)
-	..()
+/obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P)
+	. = ..()
 	if(!P)
 		return
 	if(!P.dir)

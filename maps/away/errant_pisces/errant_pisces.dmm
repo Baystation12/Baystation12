@@ -713,7 +713,6 @@
 /area/errant_pisces/storage_starboard)
 "bU" = (
 /obj/machinery/atmospherics/unary/tank/air{
-	icon_state = "air_map";
 	dir = 1;
 	start_pressure = 740.5
 	},
