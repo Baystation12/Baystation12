@@ -5,7 +5,7 @@
 
 /obj/item/weapon/stock_parts/power
 	lazy_initialize = FALSE
-	icon = 'icons/obj/modular_components.dmi'
+	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "teslalink"
 	var/priority = 0            // Higher priority is used first
 	var/cached_channel
@@ -66,6 +66,7 @@
 /obj/item/weapon/stock_parts/power/battery
 	name = "battery backup"
 	desc = "A self-contained battery backup system, using replaceable cells to provide backup power."
+	icon_state = "battery0"
 	var/obj/item/weapon/cell/cell
 	var/charge_channel = ENVIRON  // The channel it attempts to charge from.
 	var/charge_rate = 1           // This is in battery units, per tick.
@@ -99,6 +100,7 @@
 	if(istype(machine))
 		machine.power_change()
 	set_status(machine, PART_STAT_CONNECTED)
+	update_icon()
 	return cell
 
 /obj/item/weapon/stock_parts/power/battery/proc/remove_cell()
@@ -109,6 +111,7 @@
 		var/obj/machinery/machine = loc
 		if(istype(machine))
 			machine.power_change()
+		update_icon()
 		unset_status(machine, PART_STAT_CONNECTED)
 
 /obj/item/weapon/stock_parts/power/battery/proc/extract_cell(mob/user)
@@ -184,6 +187,9 @@
 			add_cell(machine, cell)
 			cell.forceMove(src)
 
+/obj/item/weapon/stock_parts/power/battery/on_update_icon()
+	icon_state = "battery[!!cell]"
+
 // Cell interaction
 /obj/item/weapon/stock_parts/power/battery/attackby(obj/item/I, mob/user)
 	var/obj/machinery/machine = loc
@@ -225,6 +231,7 @@
 /obj/item/weapon/stock_parts/power/terminal
 	name = "wired connection"
 	desc = "A power connection directly to the grid, via power cables."
+	icon_state = "terminal"
 	priority = 2
 	var/obj/machinery/power/terminal/terminal
 	var/terminal_dir = 0
