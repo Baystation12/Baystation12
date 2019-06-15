@@ -405,7 +405,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/proc/dump_inventory()
 	new src.inventory(loc)
-	inventory = null
 
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
