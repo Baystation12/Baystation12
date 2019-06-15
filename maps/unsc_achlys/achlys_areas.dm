@@ -43,7 +43,7 @@
 /area/achlys
 	name = "Achlys Test Area"
 	ambience = list('sound/ambience/ambiatm1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen10.ogg',\
-					'sound/ambience/shipclunk.ogg','sound/ambience/shipcreak2.ogg','sound/ambience/shipclunk2.ogg','sound/ambience/ventclunk.ogg')
+					'sound/ambience/shipclunk.ogg','sound/ambience/shipcreak2.ogg','sound/ambience/shipclunk2.ogg','sound/ambience/ventclunk.ogg','sound/ambience/shipcreak.ogg')
 	sound_env = STANDARD_STATION
 
 /area/achlys/one
