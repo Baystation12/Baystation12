@@ -7,6 +7,7 @@
 	anchored = 1
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
+	base_type = /obj/machinery/sleeper
 	var/mob/living/carbon/human/occupant = null
 	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
 	var/list/available_chemicals = list()

@@ -9,6 +9,7 @@
 	anchored = 1
 	idle_power_usage = 200	// Some electronics, passive drain.
 	active_power_usage = 60 KILOWATTS // When charging
+	base_type = /obj/machinery/mech_recharger
 
 	var/obj/mecha/charging = null
 	var/base_charge_rate = 60 KILOWATTS

@@ -8,6 +8,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 	req_access = list(access_robotics)
+	base_type = /obj/machinery/mecha_part_fabricator
 
 	var/speed = 1
 	var/mat_efficiency = 1

@@ -62,7 +62,6 @@
 /obj/item/weapon/card/id/torch/contractor/medical/counselor
 	job_access_type = /datum/job/psychiatrist
 
-
 /obj/item/weapon/card/id/torch/silver/security
 	job_access_type = /datum/job/hos
 	detail_color = "#e00000"
@@ -121,6 +120,9 @@
 
 /obj/item/weapon/card/id/torch/crew/service/chef
 	job_access_type = /datum/job/chef
+
+/obj/item/weapon/card/id/torch/crew/service/chaplain
+	job_access_type = /datum/job/chaplain
 
 /obj/item/weapon/card/id/torch/contractor/service //unused
 	job_access_type = /datum/job/assistant

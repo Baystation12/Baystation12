@@ -99,6 +99,7 @@
 	name = "prosthetic organ fabricator"
 	desc = "It's a machine that prints prosthetic organs."
 	icon_state = "roboprinter"
+	base_type = /obj/machinery/organ_printer/robot
 
 	products = list(
 		BP_HEART    = list(/obj/item/organ/internal/heart,      25),
@@ -159,6 +160,7 @@
 	name = "bioprinter"
 	desc = "It's a machine that prints replacement organs."
 	icon_state = "bioprinter"
+	base_type = /obj/machinery/organ_printer/flesh
 	var/list/amount_list = list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat = 50,
 		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet = 15

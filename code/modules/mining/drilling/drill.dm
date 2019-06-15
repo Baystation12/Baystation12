@@ -13,6 +13,7 @@
 	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery)
 	power_channel = LOCAL
 	active_power_usage = 10 KILOWATTS
+	base_type = /obj/machinery/mining/drill
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
