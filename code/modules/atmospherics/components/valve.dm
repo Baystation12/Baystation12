@@ -135,6 +135,10 @@
 	else
 		src.open()
 
+/obj/machinery/atmospherics/valve/Process()
+	..()
+	return PROCESS_KILL
+
 /obj/machinery/atmospherics/valve/atmos_init()
 	..()
 	normalize_dir()

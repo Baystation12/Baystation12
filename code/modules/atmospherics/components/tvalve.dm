@@ -177,6 +177,10 @@
 	else
 		src.go_to_side()
 
+/obj/machinery/atmospherics/tvalve/Process()
+	..()
+	return PROCESS_KILL
+
 /obj/machinery/atmospherics/tvalve/atmos_init()
 	..()
 	var/node1_dir
