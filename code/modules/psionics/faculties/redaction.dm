@@ -42,7 +42,7 @@
 	cost =            7
 	cooldown =        50
 	use_melee =       TRUE
-	min_rank =        PSI_RANK_MASTER
+	min_rank =        PSI_RANK_OPERANT
 	use_description = "Target a patient while on help intent at melee range to mend a variety of maladies, such as bleeding or broken bones. Higher ranks in this faculty allow you to mend a wider range of problems."
 
 /decl/psionic_power/redaction/mend/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
@@ -97,6 +97,7 @@
 			if(W.bleeding() && W.wound_damage() <= W.bleed_threshold)
 				to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
 				W.bleed_timer = 0
+				W.clamped = TRUE
 				E.status &= ~ORGAN_BLEEDING
 				return TRUE
 

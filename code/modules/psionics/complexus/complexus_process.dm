@@ -157,12 +157,13 @@
 			// Heal organ damage.
 			for(var/obj/item/organ/I in H.internal_organs)
 
-				if(BP_IS_ROBOTIC(I))
+				if(BP_IS_ROBOTIC(I) || BP_IS_CRYSTAL(I))
 					continue
 
 				if(I.damage > 0 && spend_power(heal_rate))
 					I.damage = max(I.damage - heal_rate, 0)
-					to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))
+					if(prob(10))
+						to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))
 					return
 
 			// Heal broken bones.
@@ -193,8 +194,9 @@
 						for(var/datum/wound/W in E.wounds)
 
 							if(W.bleeding() && spend_power(heal_rate))
-								to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from your [E.name]."))
+								to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [W.desc] on your [E.name]."))
 								W.bleed_timer = 0
+								W.clamped = TRUE
 								E.status &= ~ORGAN_BLEEDING
 								return
 
@@ -202,12 +204,14 @@
 	if(heal_poison)
 
 		if(owner.radiation && spend_power(heal_rate))
-			to_chat(owner, SPAN_NOTICE("Your autoredactive faculty repairs some of the radiation damage to your body."))
+			if(prob(10))
+				to_chat(owner, SPAN_NOTICE("Your autoredactive faculty repairs some of the radiation damage to your body."))
 			owner.radiation = max(0, owner.radiation - heal_rate)
 			return
 
 		if(owner.getCloneLoss() && spend_power(heal_rate))
-			to_chat(owner, SPAN_NOTICE("Your autoredactive faculty stitches together some of your mangled DNA."))
+			if(prob(10))
+				to_chat(owner, SPAN_NOTICE("Your autoredactive faculty stitches together some of your mangled DNA."))
 			owner.adjustCloneLoss(-heal_rate)
 			return
 
@@ -216,4 +220,5 @@
 		owner.adjustBruteLoss(-(heal_rate))
 		owner.adjustFireLoss(-(heal_rate))
 		owner.adjustOxyLoss(-(heal_rate))
-		to_chat(owner, SPAN_NOTICE("Your skin crawls as your autoredactive faculty heals your body."))
+		if(prob(10))
+			to_chat(owner, SPAN_NOTICE("Your skin crawls as your autoredactive faculty heals your body."))
