@@ -182,7 +182,6 @@
 			return
 
 /obj/machinery/smartfridge/Process()
-	..()
 	if(stat & (BROKEN|NOPOWER))
 		return
 	if(src.seconds_electrified > 0)

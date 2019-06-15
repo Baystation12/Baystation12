@@ -39,7 +39,6 @@ var/bomb_set
 	return ..()
 
 /obj/machinery/nuclearbomb/Process(var/wait)
-	..()
 	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
 		playsound(loc, 'sound/items/timer.ogg', 50)

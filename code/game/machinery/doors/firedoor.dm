@@ -287,8 +287,6 @@
 
 // CHECK PRESSURE
 /obj/machinery/door/firedoor/Process()
-	..()
-
 	if(density && next_process_time <= world.time)
 		next_process_time = world.time + 100		// 10 second delays between process updates
 		var/changed = 0

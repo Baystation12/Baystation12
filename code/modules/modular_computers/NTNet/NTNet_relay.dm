@@ -54,7 +54,6 @@
 		dos_failure = 0
 		update_icon()
 		ntnet_global.add_log("Quantum relay switched from overload recovery mode to normal operation mode.")
-	..()
 
 /obj/machinery/ntnet_relay/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()

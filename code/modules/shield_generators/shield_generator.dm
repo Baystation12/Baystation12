@@ -117,7 +117,6 @@
 
 
 /obj/machinery/power/shield_generator/Process()
-	..()
 	upkeep_power_usage = 0
 	power_usage = 0
 

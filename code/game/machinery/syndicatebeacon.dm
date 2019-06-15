@@ -91,11 +91,6 @@
 	var/active = 0
 	var/icontype = "beacon"
 
-/obj/machinery/power/singularity_beacon/Destroy()
-	if(active)
-		STOP_PROCESSING(SSmachines, src)
-	. = ..()
-
 /obj/machinery/power/singularity_beacon/proc/Activate(mob/user = null)
 	if(surplus() < 1500)
 		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
@@ -106,7 +101,7 @@
 	icon_state = "[icontype]1"
 	active = 1
 
-	START_PROCESSING(SSmachines, src)
+	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 
@@ -162,10 +157,8 @@
 
 //stealth direct power usage
 /obj/machinery/power/singularity_beacon/Process()
-	. = ..()
 	if(!active)
-		return
-	. = 0
+		return PROCESS_KILL
 	if(draw_power(1500) < 1500)
 		Deactivate()
 

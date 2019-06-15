@@ -37,7 +37,7 @@
 
 /obj/machinery/atmospherics/pipe/proc/set_leaking(var/new_leaking)
 	if(new_leaking && !leaking)
-		START_PROCESSING(SSmachines, src)
+		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		leaking = TRUE
 		if(parent)
 			parent.leaks |= src
@@ -45,7 +45,7 @@
 				parent.network.leaks |= src
 	else if (!new_leaking && leaking)
 		update_sound(0)
-		STOP_PROCESSING(SSmachines, src)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		leaking = FALSE
 		if(parent)
 			parent.leaks -= src

@@ -63,10 +63,13 @@
 
 /obj/item/weapon/stock_parts/proc/start_processing(var/obj/machinery/machine)
 	LAZYDISTINCTADD(machine.processing_parts, src)
+	START_PROCESSING_MACHINE(machine, MACHINERY_PROCESS_COMPONENTS)
 	set_status(machine, PART_STAT_PROCESSING)
 
 /obj/item/weapon/stock_parts/proc/stop_processing(var/obj/machinery/machine)
 	LAZYREMOVE(machine.processing_parts, src)
+	if(!LAZYLEN(machine.processing_parts))
+		STOP_PROCESSING_MACHINE(machine, MACHINERY_PROCESS_COMPONENTS)
 	unset_status(machine, PART_STAT_PROCESSING)
 
 /obj/item/weapon/stock_parts/proc/machine_process(var/obj/machinery/machine)

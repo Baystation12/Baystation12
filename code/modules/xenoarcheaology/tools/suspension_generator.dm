@@ -16,7 +16,6 @@
 	src.cell = new /obj/item/weapon/cell/high(src)
 
 /obj/machinery/suspension_gen/Process()
-	..()
 	if(suspension_field)
 		cell.use(power_use * CELLRATE)
 

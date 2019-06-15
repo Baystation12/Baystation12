@@ -32,7 +32,6 @@
 	. = ..()
 
 /obj/machinery/mecha_part_fabricator/Process()
-	..()
 	if(stat)
 		return
 	if(busy)

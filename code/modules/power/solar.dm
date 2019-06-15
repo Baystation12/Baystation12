@@ -117,7 +117,6 @@ var/list/solars_list = list()
 	//isn't the power recieved from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
 /obj/machinery/power/solar/Process()
-	..()
 	if(stat & BROKEN)
 		return
 	if(!GLOB.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
@@ -433,7 +432,6 @@ var/list/solars_list = list()
 	return
 
 /obj/machinery/power/solar_control/Process()
-	..()
 	lastgen = gen
 	gen = 0
 

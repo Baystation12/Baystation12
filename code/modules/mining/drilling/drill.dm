@@ -45,8 +45,6 @@
 	var/need_player_check = 0
 
 /obj/machinery/mining/drill/Process()
-	..()
-
 	if(need_player_check)
 		return
 

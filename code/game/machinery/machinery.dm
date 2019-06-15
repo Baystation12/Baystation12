@@ -109,34 +109,35 @@ Class Procs:
 	var/base_type           // For mapped buildable types, set this to be the base type actually buildable.
 
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/weapon/stock_parts
+	var/processing_flags         // What is being processed
 
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(d)
 		set_dir(d)
-	START_PROCESSING(SSmachines, src) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
+	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
 	SSmachines.machinery += src // All machines should remain in this list, always.
 	populate_parts(populate_parts)
 	RefreshParts()
 
 /obj/machinery/Destroy()
 	SSmachines.machinery -= src
-	STOP_PROCESSING(SSmachines, src)
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	. = ..()
 
-/obj/machinery/Process()
-	if((. = process_parts()))
-		return
-	return PROCESS_KILL // Only process if you need to.
-
-/obj/machinery/proc/process_parts()
-	. = processing_parts
-	if(.)
+/obj/machinery/proc/ProcessAll(var/wait)
+	if(processing_flags & MACHINERY_PROCESS_COMPONENTS)
 		for(var/thing in processing_parts)
 			var/obj/item/weapon/stock_parts/part = thing
 			if(part.machine_process(src) == PROCESS_KILL)
 				part.stop_processing()
+
+	if((processing_flags & MACHINERY_PROCESS_SELF) && Process(wait) == PROCESS_KILL)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+
+/obj/machinery/Process()
+	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)

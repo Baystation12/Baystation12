@@ -70,8 +70,6 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/kinetic_harvester/Process()
-	..()
-
 	if(harvest_from && get_dist(src, harvest_from) > 10)
 		harvest_from = null
 

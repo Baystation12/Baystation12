@@ -8,7 +8,6 @@
 	anchored = 1
 
 /obj/machinery/artillerycontrol/Process()
-	..()
 	if(src.reload<180)
 		src.reload++
 

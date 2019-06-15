@@ -238,7 +238,6 @@
 	queue_icon_update()
 
 /obj/machinery/shipsensors/Process()
-	..()
 	if(use_power) //can't run in non-vacuum
 		if(!in_vacuum())
 			toggle()

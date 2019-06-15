@@ -94,7 +94,6 @@
 	return 1
 
 /obj/machinery/power/emitter/Process()
-	..()
 	if(stat & (BROKEN))
 		return
 	if(src.state != 2 || (!powernet && active_power_usage))

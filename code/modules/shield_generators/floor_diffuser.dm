@@ -13,7 +13,6 @@
 	var/enabled = 1
 
 /obj/machinery/shield_diffuser/Process()
-	..()
 	if(alarm)
 		alarm--
 		if(!alarm)

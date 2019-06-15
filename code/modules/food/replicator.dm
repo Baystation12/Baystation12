@@ -139,7 +139,6 @@
 			if(queued_dishes && queued_dishes.len) //more to come
 				queued_dishes -= queued_dishes[1]
 				start_making = 1
-	..()
 
 /obj/machinery/food_replicator/examine(mob/user)
 	. = ..(user)

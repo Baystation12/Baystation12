@@ -158,7 +158,7 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(!QDELETED(M) && (M.Process(wait) == PROCESS_KILL))
+		if(!QDELETED(M) && (M.ProcessAll(wait) == PROCESS_KILL))
 			processing.Remove(M)
 			M.is_processing = null
 		if(MC_TICK_CHECK)

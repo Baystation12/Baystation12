@@ -153,7 +153,7 @@
 	if(mechanical)
 		connect()
 	update_icon()
-	STOP_PROCESSING(SSmachines, src)
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	START_PROCESSING(SSplants, src)
 	return INITIALIZE_HINT_LATELOAD
 

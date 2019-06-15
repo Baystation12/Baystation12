@@ -45,7 +45,6 @@
 		change_power_consumption(base_charge_rate, POWER_USE_ACTIVE)
 
 /obj/machinery/mech_recharger/Process()
-	..()
 	if(!charging)
 		update_use_power(POWER_USE_IDLE)
 		return

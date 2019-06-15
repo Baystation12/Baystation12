@@ -172,7 +172,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	update_use_power(on)
 
 /obj/machinery/telecomms/Process()
-	..()
 	update_power()
 
 	if(overloaded_for)

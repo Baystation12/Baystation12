@@ -29,8 +29,6 @@
 	update_icon()
 
 /obj/machinery/recharge_station/Process()
-	..()
-
 	if(stat & (BROKEN | NOPOWER))
 		return
 

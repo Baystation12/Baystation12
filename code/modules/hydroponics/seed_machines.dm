@@ -41,8 +41,6 @@
 	var/disk_needs_genes = 0
 
 /obj/machinery/botany/Process()
-
-	..()
 	if(!active) return
 
 	if(world.time > last_action + action_time)
