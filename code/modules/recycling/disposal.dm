@@ -363,7 +363,7 @@
 
 	flush_count++
 	if( flush_count >= flush_every_ticks )
-		if( contents.len )
+		if( contents.len > LAZYLEN(component_parts))
 			if(mode == 2)
 				spawn(0)
 					SSstatistics.add_field("disposal_auto_flush",1)
@@ -408,17 +408,18 @@
 	var/wrapcheck = 0
 	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 												// travels through the pipes.
+	var/list/stuff = contents - component_parts
 	//Hacky test to get drones to mail themselves through disposals.
-	for(var/mob/living/silicon/robot/drone/D in src)
+	for(var/mob/living/silicon/robot/drone/D in stuff)
 		wrapcheck = 1
 
-	for(var/obj/item/smallDelivery/O in src)
+	for(var/obj/item/smallDelivery/O in stuff)
 		wrapcheck = 1
 
 	if(wrapcheck == 1)
 		H.tomail = 1
 
-	for(var/mob/living/L in src)
+	for(var/mob/living/L in stuff)
 		if (L.ckey)
 			log_and_message_admins("has been flushed down [src].", L)
 
