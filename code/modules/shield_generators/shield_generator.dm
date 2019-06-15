@@ -4,6 +4,7 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
 	density = 1
+	base_type = /obj/machinery/power/shield_generator
 	var/datum/wires/shield_generator/wires
 	var/list/field_segments = list()	// List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()	// List of shield segments that have failed and are currently regenerating.
@@ -37,13 +38,6 @@
 
 /obj/machinery/power/shield_generator/New()
 	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/shield_generator(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)			// Capacitor. Improves shield mitigation when better part is used.
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/smes_coil(src)						// SMES coil. Improves maximal shield energy capacity.
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	RefreshParts()
 	connect_to_network()
 	wires = new(src)
 
@@ -64,13 +58,11 @@
 
 /obj/machinery/power/shield_generator/RefreshParts()
 	max_energy = 0
-	for(var/obj/item/weapon/smes_coil/S in component_parts)
+	for(var/obj/item/weapon/stock_parts/smes_coil/S in component_parts)
 		max_energy += (S.ChargeCapacity / CELLRATE)
 	current_energy = between(0, current_energy, max_energy)
 
-	mitigation_max = MAX_MITIGATION_BASE
-	for(var/obj/item/weapon/stock_parts/capacitor/C in component_parts)
-		mitigation_max += MAX_MITIGATION_RESEARCH * C.rating
+	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 	mitigation_em = between(0, mitigation_em, mitigation_max)
 	mitigation_physical = between(0, mitigation_physical, mitigation_max)
 	mitigation_heat = between(0, mitigation_heat, mitigation_max)
@@ -125,6 +117,7 @@
 
 
 /obj/machinery/power/shield_generator/Process()
+	..()
 	upkeep_power_usage = 0
 	power_usage = 0
 

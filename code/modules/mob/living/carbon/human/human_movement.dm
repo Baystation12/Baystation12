@@ -11,10 +11,6 @@
 			tally -= 2
 		tally -= 1
 
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	if(embedded_flag || (stomach && stomach.contents.len))
-		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
-
 	if(CE_SPEEDBOOST in chem_effects)
 		tally -= chem_effects[CE_SPEEDBOOST]
 
@@ -44,9 +40,9 @@
 				if(item_slowdown >= 0)
 					var/size_mod = size_strength_mod()
 					if(size_mod + 1 > 0)
-						item_slowdown = item_slowdown / (species.strength + size_mod + 1)
+						item_slowdown = item_slowdown / (size_mod + 1)
 					else
-						item_slowdown = item_slowdown - species.strength - size_mod
+						item_slowdown = item_slowdown - size_mod
 				total_item_slowdown += max(item_slowdown, 0)
 		tally += total_item_slowdown
 
@@ -141,6 +137,7 @@
 	var/lac_chance =  10 * encumbrance()
 	if(lac_chance && prob(skill_fail_chance(SKILL_HAULING, lac_chance)))
 		make_reagent(1, /datum/reagent/lactate)
+		adjust_hydration(-DEFAULT_THIRST_FACTOR)
 		switch(rand(1,20))
 			if(1)
 				visible_message("<span class='notice'>\The [src] is sweating heavily!</span>", "<span class='notice'>You are sweating heavily!</span>")

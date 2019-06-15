@@ -315,6 +315,7 @@
 	updateUsrDialog()
 
 /obj/machinery/suit_cycler/Process()
+	..()
 
 	if(electrified > 0)
 		electrified--

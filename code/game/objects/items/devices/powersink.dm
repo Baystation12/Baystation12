@@ -99,13 +99,9 @@
 			// Enough power drained this tick, no need to torture more APCs
 			if(drained >= drain_rate)
 				break
-			if(istype(T.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/A = T.master
-				if(A.operating && A.cell)
-					var/cur_charge = A.cell.charge / CELLRATE
-					var/drain_val = min(apc_drain_rate, cur_charge)
-					A.cell.use(drain_val * CELLRATE)
-					drained += drain_val
+			var/obj/machinery/power/apc/A = T.master_machine()
+			if(istype(A))
+				drained += A.drain_power(amount = drain_rate)
 	power_drained += drained
 	return 1
 

@@ -195,11 +195,12 @@
 	economic_power = 5
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
-	alt_titles = list(
-		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist,
-		"Chaplain" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain,
-	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
+	alt_titles = list(
+		"Psychologist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychologist,
+		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist
+	)
+
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec,
@@ -209,13 +210,16 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/ec/o1)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_MEDICAL     = SKILL_BASIC)
-
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX)
-
-	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew, access_medical_equip)
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC,
+		SKILL_MEDICAL     = SKILL_BASIC
+	)
+	max_skill = list(
+		SKILL_MEDICAL     = SKILL_MAX
+	)
+	access = list(access_medical, access_psychiatrist, access_solgov_crew, access_medical_equip)
 	minimal_access = list()
-
-	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
-							 /datum/computer_file/program/camera_monitor)
+	software_on_spawn = list(
+		/datum/computer_file/program/suit_sensors,
+		/datum/computer_file/program/camera_monitor
+	)

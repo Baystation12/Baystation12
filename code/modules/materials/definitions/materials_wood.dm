@@ -90,3 +90,15 @@
 	icon_colour = WOOD_COLOR_PALE2
 	weight = 16
 	hardness = 40
+
+/material/wood/yew
+	name = MATERIAL_YEW
+	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
+				tree can live for nearly a thousand years thanks to its natural disease resistance."
+	adjective_name = MATERIAL_YEW
+	icon_colour = WOOD_COLOR_YELLOW
+	chem_products = list(
+				/datum/reagent/carbon = 10,
+				/datum/reagent/water = 5,
+				/datum/reagent/toxin/taxine = 0.05
+				)

@@ -21,7 +21,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	machinetype = 5
 	produces_heat = 0
 	delay = 7
-	circuitboard = /obj/item/weapon/circuitboard/telecomms/broadcaster
+	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/broadcaster
 	outage_probability = 10
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
@@ -121,7 +121,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	idle_power_usage = 0
 	machinetype = 6
 	produces_heat = 0
-	circuitboard = /obj/item/weapon/circuitboard/telecomms/allinone
+	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone
 	var/listening_freqs
 	var/channel_color
 	var/channel_name

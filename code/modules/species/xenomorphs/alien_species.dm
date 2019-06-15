@@ -252,6 +252,8 @@
 	slowdown = -3
 	total_health = 300
 	base_color = "#001a33"
+	standing_jump_range = 3
+	ranged_grab_distance =   2
 
 	icobase = 'icons/mob/human_races/species/xenos/body_hunter.dmi'
 	deform =  'icons/mob/human_races/species/xenos/body_hunter.dmi'
@@ -271,8 +273,6 @@
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/pry_open,
-		/mob/living/carbon/human/proc/tackle,
-		/mob/living/carbon/human/proc/leap,
 		/mob/living/carbon/human/proc/psychic_whisper
 		)
 
@@ -291,6 +291,8 @@
 	total_health = 250
 	icobase = 'icons/mob/human_races/species/xenos/body_sentinel.dmi'
 	deform =  'icons/mob/human_races/species/xenos/body_sentinel.dmi'
+	standing_jump_range = 3
+	ranged_grab_distance =   2
 
 	has_organ = list(
 		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
@@ -304,7 +306,6 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/corrosive_acid,
 		/mob/living/carbon/human/proc/neurotoxin

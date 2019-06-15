@@ -98,7 +98,9 @@
 	queue_icon_update()
 
 /obj/machinery/cell_charger/Process()
+	. = ..()
 	if(!charging)
-		return PROCESS_KILL
+		return
+	. = 0
 	charging.give(active_power_usage*CELLRATE)
 	update_icon()

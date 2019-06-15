@@ -23,6 +23,58 @@
 	randpixel = 5
 	w_class = ITEM_SIZE_SMALL
 	var/rating = 1
+	var/lazy_initialize = TRUE // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
+	var/status = 0             // Flags using PART_STAT defines.
+	var/base_type              // Type representing parent of category for replacer usage.
+	var/can_be_uninstalled = TRUE // If false, will qdel on uninstall and should not be exposed to the user for uninstallation.
+
+/obj/item/weapon/stock_parts/attack_hand(mob/user)
+	if(istype(loc, /obj/machinery))
+		return FALSE // Can potentially add uninstall code here, but not currently supported.
+	return ..()
+
+/obj/item/weapon/stock_parts/proc/set_status(var/obj/machinery/machine, var/flag)
+	var/old_stat = status
+	status |= flag
+	if(old_stat != status)
+		if(!machine)
+			machine = loc
+		if(istype(machine))
+			machine.component_stat_change(src, old_stat, flag)
+
+/obj/item/weapon/stock_parts/proc/unset_status(var/obj/machinery/machine, var/flag)
+	var/old_stat = status
+	status &= ~flag
+	if(old_stat != status)
+		if(!machine)
+			machine = loc
+		if(istype(machine))
+			machine.component_stat_change(src, old_stat, flag)
+
+/obj/item/weapon/stock_parts/proc/on_install(var/obj/machinery/machine)
+	set_status(machine, PART_STAT_INSTALLED)
+
+/obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
+	unset_status(machine, PART_STAT_INSTALLED)
+	stop_processing(machine)
+	if(!can_be_uninstalled)
+		qdel(src)
+
+// Use to process on the machine it's installed on.
+
+/obj/item/weapon/stock_parts/proc/start_processing(var/obj/machinery/machine)
+	LAZYDISTINCTADD(machine.processing_parts, src)
+	set_status(machine, PART_STAT_PROCESSING)
+
+/obj/item/weapon/stock_parts/proc/stop_processing(var/obj/machinery/machine)
+	LAZYREMOVE(machine.processing_parts, src)
+	unset_status(machine, PART_STAT_PROCESSING)
+
+/obj/item/weapon/stock_parts/proc/machine_process(var/obj/machinery/machine)
+	return PROCESS_KILL
+
+// RefreshParts has been called, likely meaning other componenets were added/removed.
+/obj/item/weapon/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
 //Rank 1
 
@@ -32,6 +84,7 @@
 	icon_state = "screen"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_GLASS = 200)
+	base_type = /obj/item/weapon/stock_parts/console_screen
 
 /obj/item/weapon/stock_parts/scanning_module
 	name = "scanning module"
@@ -39,6 +92,7 @@
 	icon_state = "scan_module"
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 20)
+	base_type = /obj/item/weapon/stock_parts/scanning_module
 
 /obj/item/weapon/stock_parts/manipulator
 	name = "micro-manipulator"
@@ -46,6 +100,7 @@
 	icon_state = "micro_mani"
 	origin_tech = list(TECH_MATERIAL = 1, TECH_DATA = 1)
 	matter = list(MATERIAL_STEEL = 30)
+	base_type = /obj/item/weapon/stock_parts/manipulator
 
 /obj/item/weapon/stock_parts/micro_laser
 	name = "micro-laser"
@@ -53,6 +108,7 @@
 	icon_state = "micro_laser"
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(MATERIAL_STEEL = 10,MATERIAL_GLASS = 20)
+	base_type = /obj/item/weapon/stock_parts/micro_laser
 
 /obj/item/weapon/stock_parts/matter_bin
 	name = "matter bin"
@@ -60,6 +116,7 @@
 	icon_state = "matter_bin"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_STEEL = 80)
+	base_type = /obj/item/weapon/stock_parts/matter_bin
 
 //Rank 2
 
@@ -186,6 +243,7 @@
 	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 50)
 	var/charge = 0
 	var/max_charge = 1000
+	base_type = /obj/item/weapon/stock_parts/capacitor
 
 /obj/item/weapon/stock_parts/capacitor/Initialize()
 	. = ..()
@@ -220,3 +278,54 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"
 	origin_tech = list(TECH_MATERIAL = 19, TECH_ENGINEERING = 19, TECH_PHORON = 19, TECH_POWER = 19, TECH_BLUESPACE = 19, TECH_BIO = 19, TECH_COMBAT = 19, TECH_MAGNET = 19, TECH_DATA = 19, TECH_ILLEGAL = 19, TECH_ARCANE = 19)
+
+// Shim for non-stock_parts machine components
+/obj/item/weapon/stock_parts/building_material
+	name = "building materials"
+	desc = "Various standard wires, pipes, and other materials."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "coil"
+	lazy_initialize = FALSE
+	var/list/materials
+
+/obj/item/weapon/stock_parts/building_material/Destroy()
+	QDEL_NULL_LIST(materials)
+	. = ..()
+
+/obj/item/weapon/stock_parts/building_material/proc/add_material(var/obj/item/new_material)
+	if(istype(new_material, /obj/item/stack))
+		var/obj/item/stack/stack = new_material
+		for(var/obj/item/stack/old_stack in materials)
+			if(old_stack.stacktype == stack.stacktype)
+				stack.transfer_to(old_stack, stack.amount)
+				if(QDELETED(stack))
+					return
+	LAZYADD(materials, new_material)
+	new_material.forceMove(null)
+
+// amount will cap the amount given in a stack, but may return less than amount specified.
+/obj/item/weapon/stock_parts/building_material/proc/remove_material(material_type, amount)
+	if(ispath(material_type, /obj/item/stack))
+		for(var/obj/item/stack/stack in materials)
+			if(stack.stacktype == material_type)
+				var/stack_amount = stack.get_amount()
+				if(stack_amount <= amount)
+					materials -= stack
+					stack.dropInto(loc)
+					amount -= stack_amount
+					return stack
+				var/obj/item/stack/new_stack = stack.split(amount)
+				new_stack.dropInto(loc)
+				return new_stack
+	for(var/obj/item/item in materials)
+		if(istype(item, material_type))
+			materials -= item
+			item.dropInto(loc)
+			return item
+
+/obj/item/weapon/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
+	..()
+	for(var/obj/item/I in materials)
+		I.dropInto(loc)
+	materials = null
+	qdel(src)

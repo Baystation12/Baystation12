@@ -20,8 +20,8 @@
 		/obj/item/frame,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
-		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/smes_coil,
+		/obj/item/weapon/stock_parts/circuitboard,
+		/obj/item/weapon/stock_parts/smes_coil,
 		/obj/item/weapon/computer_hardware,
 		/obj/item/weapon/fuel_assembly,
 		/obj/item/stack/material/deuterium,
@@ -41,7 +41,7 @@
 	can_hold = list(
 	/obj/item/weapon/cell,
 	/obj/item/weapon/stock_parts,
-	/obj/item/weapon/circuitboard/miningdrill
+	/obj/item/weapon/stock_parts/circuitboard/miningdrill
 	)
 
 /obj/item/weapon/gripper/clerical
@@ -84,7 +84,7 @@
 		/obj/item/organ/internal/brain,
 		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
-		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/stock_parts/circuitboard,
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
@@ -232,20 +232,12 @@
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
-		if(A.opened)
-			if(A.cell)
-
-				wrapped = A.cell
-
-				A.cell.add_fingerprint(user)
-				A.cell.update_icon()
-				A.cell.forceMove(src)
-				A.cell = null
-
-				A.charging = 0
-				A.update_icon()
-
-				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+		if(A.components_are_accessible(/obj/item/weapon/stock_parts/power/battery))
+			var/obj/item/weapon/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
+			var/obj/item/weapon/cell/cell = bat.extract_cell(src)
+			if(cell)
+				wrapped = cell
+				cell.forceMove(src)
 
 	else if(istype(target,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/A = target

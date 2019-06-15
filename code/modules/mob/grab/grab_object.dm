@@ -1,6 +1,7 @@
 
 /obj/item/grab
 	name = "grab"
+	canremove = 0
 
 	var/mob/living/carbon/human/affecting = null
 	var/mob/living/carbon/human/assailant = null
@@ -85,6 +86,10 @@
 	..()
 	if(!QDELETED(src))
 		qdel(src)
+
+/obj/item/grab/can_be_dropped_by_client(mob/M)
+	if(M == assailant)
+		return TRUE
 
 /obj/item/grab/Destroy()
 	if(affecting)

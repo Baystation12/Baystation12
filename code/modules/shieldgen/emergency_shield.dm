@@ -18,6 +18,7 @@
 	health = max_health/2 // Half health, it's not suposed to resist much.
 
 /obj/machinery/shield/malfai/Process()
+	..()
 	health -= 0.5 // Slowly lose integrity over time
 	check_failure()
 

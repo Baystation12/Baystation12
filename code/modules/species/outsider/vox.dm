@@ -66,10 +66,8 @@
 	flesh_color = "#808d11"
 
 	reagent_tag = IS_VOX
-
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/leap
-		)
+	ranged_grab_distance = 3
+	standing_jump_range = 3
 
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox

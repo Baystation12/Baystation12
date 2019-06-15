@@ -35,6 +35,7 @@
 		return program.receive_user_command(href_list["command"]) // Any further sanitization should be done in here.
 
 /obj/machinery/embedded_controller/Process()
+	..()
 	if(program)
 		program.process()
 

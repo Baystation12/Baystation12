@@ -61,7 +61,10 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/Process()
 	..()
+	process_scrubber()
 
+//Placeholder; will change once batteries are made generic.
+/obj/machinery/portable_atmospherics/powered/scrubber/proc/process_scrubber()
 	var/power_draw = -1
 
 	if(on && ( powered() || (cell && cell.charge) ) )
@@ -186,7 +189,7 @@
 	else
 		icon_state = "scrubber:0"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/Process()
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/process_scrubber()
 	if(!on || (stat & (NOPOWER|BROKEN)))
 		update_use_power(POWER_USE_OFF)
 		last_flow_rate = 0

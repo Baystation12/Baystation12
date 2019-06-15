@@ -46,6 +46,14 @@
 		/datum/species/vox        = list(/datum/mil_branch/alien)
 	)
 
+	species_to_rank_blacklist = list(
+		/datum/species/machine = list(
+			/datum/mil_branch/solgov = list(
+				/datum/mil_rank/sol/agent
+			)
+		)
+	)
+
 	species_to_rank_whitelist = list(
 		/datum/species/machine = list(
 			/datum/mil_branch/expeditionary_corps = list(
@@ -63,9 +71,6 @@
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
-			),
-			/datum/mil_branch/solgov = list(
-				/datum/mil_rank/sol/agent
 			)
 		),
 		/datum/species/skrell = list(

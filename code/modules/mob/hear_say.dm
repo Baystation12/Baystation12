@@ -202,25 +202,28 @@
 		track = "([ghost_follow_link(speaker, src)]) [speaker_name]"
 
 	var/formatted
-	if(language)
-		if(!say_understands(speaker,language)) //Check if we understand the message. If so, add the language name after the verb. Don't do this for Galactic Common.
-			formatted = language.format_message_radio(message, verb)
-		else
-			var/nverb = null
-			switch(src.get_preference_value(/datum/client_preference/language_display))
-				if(GLOB.PREF_FULL) // Full language name
-					nverb = "[verb] in [language.name]"
-				if(GLOB.PREF_SHORTHAND) //Shorthand codes
-					nverb = "[verb] ([language.shorthand])"
-				if(GLOB.PREF_OFF)//Regular output
-					nverb = verb
-			formatted = language.format_message_radio(message, nverb)
+	if (language)
+		var/nverb = verb
+		if (say_understands(speaker, language))
+			var/skip = FALSE
+			if (isliving(src))
+				var/mob/living/L = src
+				skip = L.default_language == language
+			if (!skip)
+				switch(src.get_preference_value(/datum/client_preference/language_display))
+					if (GLOB.PREF_FULL)
+						nverb = "[verb] in [language.name]"
+					if(GLOB.PREF_SHORTHAND)
+						nverb = "[verb] ([language.shorthand])"
+					if(GLOB.PREF_OFF)
+						nverb = verb
+		formatted = language.format_message_radio(message, nverb)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
 	if(sdisabilities & DEAF || ear_deaf)
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
-			to_chat(src, "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>")
+			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
 	else
 		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 

@@ -6,6 +6,7 @@
 
 	idle_power_usage = 30
 	active_power_usage = 5000
+	base_type = /obj/machinery/r_n_d/protolathe
 
 	var/max_material_storage = 250000
 
@@ -18,15 +19,6 @@
 /obj/machinery/r_n_d/protolathe/New()
 	materials = default_material_composition.Copy()
 	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/protolathe(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	RefreshParts()
 
 /obj/machinery/r_n_d/protolathe/Process()
 	..()
@@ -56,15 +48,18 @@
 
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0
-	for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
-		T += G.reagents.maximum_volume
-	create_reagents(T)
-	max_material_storage = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
-		max_material_storage += M.rating * 75000
-	T = 0
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		T += M.rating
+	var/obj/item/weapon/stock_parts/building_material/mat = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+	if(mat)
+		for(var/obj/item/weapon/reagent_containers/glass/G in mat.materials)
+			T += G.volume
+		if(!reagents)
+			create_reagents(T)
+		else
+			reagents.maximum_volume = T
+
+	max_material_storage = 75000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+
+	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
 	mat_efficiency = 1 - (T - 2) / 8
 	speed = T / 2
 

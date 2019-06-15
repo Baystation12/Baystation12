@@ -8,6 +8,7 @@
 	active_power_usage = 2000
 	clicksound = "keyboard"
 	clickvol = 30
+	base_type = /obj/machinery/autolathe
 
 	var/list/machine_recipes
 	var/list/stored_material =  list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_GLASS = 0, MATERIAL_PLASTIC = 0)
@@ -25,23 +26,12 @@
 	var/datum/wires/autolathe/wires = null
 
 
-/obj/machinery/autolathe/New()
-
-	..()
+/obj/machinery/autolathe/Initialize()
+	. = ..()
 	wires = new(src)
-	//Create parts for lathe.
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/autolathe(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	RefreshParts()
 
 /obj/machinery/autolathe/Destroy()
-	qdel(wires)
-	wires = null
+	QDEL_NULL(wires)
 	return ..()
 
 /obj/machinery/autolathe/proc/update_recipe_list()
@@ -235,10 +225,11 @@
 		if(index > 0 && index <= machine_recipes.len)
 			making = machine_recipes[index]
 
-		//Exploit detection, not sure if necessary after rewrite.
-		if(!making || multiplier < 0 || multiplier > 100)
-			log_and_message_admins("tried to exploit an autolathe to duplicate an item!", user)
+		if(!making)
 			return TOPIC_HANDLED
+		if(!making.is_stack && multiplier != 1)
+			return TOPIC_HANDLED
+		multiplier = sanitize_integer(multiplier, 1, 100, 1)
 
 		busy = 1
 		update_use_power(POWER_USE_ACTIVE)
@@ -282,19 +273,15 @@
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()
 	..()
-	var/mb_rating = 0
-	var/man_rating = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
-		mb_rating += MB.rating
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		man_rating += M.rating
+	var/mb_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0.5, 3.5)
 
 	storage_capacity[MATERIAL_STEEL] = mb_rating  * 25000
 	storage_capacity[MATERIAL_ALUMINIUM] = mb_rating  * 25000
 	storage_capacity[MATERIAL_GLASS] = mb_rating  * 12500
 	storage_capacity[MATERIAL_PLASTIC] = mb_rating  * 12500
 	build_time = 50 / man_rating
-	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.8. Maximum rating of parts is 3
+	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material.
 
 /obj/machinery/autolathe/dismantle()
 

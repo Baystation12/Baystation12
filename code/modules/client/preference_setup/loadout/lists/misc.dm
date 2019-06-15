@@ -58,7 +58,7 @@
 
 /datum/gear/coffeecup
 	display_name = "coffee cup"
-	path = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
+	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/knife

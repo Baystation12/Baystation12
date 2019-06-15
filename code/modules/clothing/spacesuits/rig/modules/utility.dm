@@ -121,8 +121,7 @@
 		device.attack_self(holder.wearer)
 		return 1
 
-	var/turf/T = get_turf(target)
-	if(istype(T) && !target.Adjacent(holder.wearer))
+	if(!target.Adjacent(holder.wearer))
 		return 0
 
 	var/resolved = target.attackby(device,holder.wearer)
@@ -302,6 +301,12 @@
 /obj/item/rig_module/voice/installed()
 	..()
 	holder.speech = src
+	holder.verbs |= /obj/item/weapon/rig/proc/alter_voice
+
+/obj/item/rig_module/voice/removed()
+	..()
+	holder.speech = null
+	holder.verbs -= /obj/item/weapon/rig/proc/alter_voice
 
 /obj/item/rig_module/voice/engage()
 
@@ -339,7 +344,7 @@
 	toggleable = 1
 	selectable = 0
 	disruptive = 0
-	active_power_cost = 50
+	active_power_cost = 200
 
 	suit_overlay_active = "maneuvering_active"
 	suit_overlay_inactive = null //"maneuvering_inactive"

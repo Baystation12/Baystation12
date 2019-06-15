@@ -724,8 +724,8 @@
 /area/rescue_base/base)
 "abX" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/borgupload,
-/obj/item/weapon/circuitboard/aiupload{
+/obj/item/weapon/stock_parts/circuitboard/borgupload,
+/obj/item/weapon/stock_parts/circuitboard/aiupload{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -4631,14 +4631,14 @@
 /area/rescue_base/base)
 "akI" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/circuitboard/smes,
-/obj/item/weapon/circuitboard/smes,
-/obj/item/weapon/smes_coil,
-/obj/item/weapon/smes_coil,
-/obj/item/weapon/smes_coil/super_capacity,
-/obj/item/weapon/smes_coil/super_capacity,
-/obj/item/weapon/smes_coil/super_io,
-/obj/item/weapon/smes_coil/super_io,
+/obj/item/weapon/stock_parts/circuitboard/smes,
+/obj/item/weapon/stock_parts/circuitboard/smes,
+/obj/item/weapon/stock_parts/smes_coil,
+/obj/item/weapon/stock_parts/smes_coil,
+/obj/item/weapon/stock_parts/smes_coil/super_capacity,
+/obj/item/weapon/stock_parts/smes_coil/super_capacity,
+/obj/item/weapon/stock_parts/smes_coil/super_io,
+/obj/item/weapon/stock_parts/smes_coil/super_io,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -8606,9 +8606,6 @@
 	},
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
-"auS" = (
-/turf/simulated/floor/shuttle/white,
-/area/shuttle/administration/centcom)
 "auT" = (
 /obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = -6
@@ -9333,8 +9330,8 @@
 /area/centcom/specops)
 "awM" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/borgupload,
-/obj/item/weapon/circuitboard/aiupload{
+/obj/item/weapon/stock_parts/circuitboard/borgupload,
+/obj/item/weapon/stock_parts/circuitboard/aiupload{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -9707,8 +9704,8 @@
 /area/centcom/specops)
 "axG" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/circuitboard/smes,
-/obj/item/weapon/circuitboard/smes,
+/obj/item/weapon/stock_parts/circuitboard/smes,
+/obj/item/weapon/stock_parts/circuitboard/smes,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 8
@@ -9748,11 +9745,6 @@
 	icon_state = "steel"
 	},
 /area/centcom/control)
-"axM" = (
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/centcom/test)
 "axN" = (
 /obj/structure/bed/chair{
 	dir = 1
@@ -21422,6 +21414,9 @@
 /obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
+"bfD" = (
+/turf/simulated/floor/wood/bamboo,
+/area/rescue_base/base)
 "bfZ" = (
 /obj/structure/aliumizer,
 /turf/unsimulated/floor{
@@ -21931,7 +21926,7 @@
 /area/holodeck/source_temple)
 "dTZ" = (
 /obj/structure/table/holo_woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup{
 	holographic = 1
 	},
 /turf/simulated/floor/holofloor/wood,
@@ -23071,6 +23066,9 @@
 /obj/effect/floor_decal/spline/plain,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"xZF" = (
+/turf/simulated/floor/wood/yew,
+/area/rescue_base/base)
 
 (1,1,1) = {"
 aaa
@@ -23281,8 +23279,8 @@ sKf
 nMz
 cHT
 tMx
-aad
-aad
+bfD
+xZF
 aad
 aad
 aad
@@ -29208,7 +29206,7 @@ atd
 auh
 izl
 auD
-auS
+auD
 auZ
 avj
 avp
@@ -29410,10 +29408,10 @@ atd
 aui
 izl
 auE
-auS
-auS
-auS
-auS
+auD
+auD
+auD
+auD
 avF
 izl
 asR
@@ -29612,10 +29610,10 @@ atd
 auj
 izl
 auD
-auS
-auS
-auS
-auS
+auD
+auD
+auD
+auD
 avG
 izl
 asR
@@ -29814,8 +29812,8 @@ atd
 auk
 izl
 auF
-auS
-auS
+auD
+auD
 avk
 avq
 avH
@@ -36694,8 +36692,8 @@ aab
 aab
 awU
 axA
-axM
-axM
+axA
+axA
 ays
 awU
 aab
@@ -36897,7 +36895,7 @@ aab
 awU
 axB
 axN
-axM
+axA
 ayt
 awU
 aab
@@ -37098,8 +37096,8 @@ aab
 aab
 awU
 axA
-axM
-axM
+axA
+axA
 ayu
 awU
 aab
@@ -37301,7 +37299,7 @@ aab
 awU
 axA
 axN
-axM
+axA
 ayv
 awU
 aab
@@ -37502,9 +37500,9 @@ aab
 aab
 awU
 axC
-axM
-axM
-axM
+axA
+axA
+axA
 awU
 aab
 aab

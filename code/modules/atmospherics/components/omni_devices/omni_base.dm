@@ -61,6 +61,7 @@
 	return
 
 /obj/machinery/atmospherics/omni/Process()
+	process_parts()
 	last_power_draw = 0
 	last_flow_rate = 0
 

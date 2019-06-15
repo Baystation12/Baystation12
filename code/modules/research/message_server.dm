@@ -63,6 +63,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	return ..()
 
 /obj/machinery/message_server/Process()
+	..()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
@@ -117,7 +118,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 /obj/machinery/message_server/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
 	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(O,/obj/item/weapon/circuitboard/message_monitor))
+		istype(O,/obj/item/weapon/stock_parts/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
 		qdel(O)
 		to_chat(user, "You install additional memory and processors into message server. Its filtering capabilities been enhanced.")

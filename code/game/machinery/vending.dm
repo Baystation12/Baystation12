@@ -498,6 +498,7 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/vending/Process()
+	..()
 	if(stat & (BROKEN|NOPOWER))
 		return
 
@@ -601,7 +602,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/pint = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/mug = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/wine = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/coffeecup/metal = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal = 8,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/gin = 5,
@@ -1059,8 +1060,8 @@
 	/obj/item/weapon/material/knife/kitchen = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/pitcher = 2,
-	/obj/item/weapon/reagent_containers/food/drinks/coffeecup = 8,
-	/obj/item/weapon/reagent_containers/food/drinks/coffeecup/teacup = 8,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup = 8,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/teacup = 8,
 	/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 8,
 	/obj/item/clothing/suit/chef/classic = 2,

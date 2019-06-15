@@ -105,6 +105,7 @@ var/obj/screen/robot_inventory
 
 //Temp
 	mymob.bodytemp = new /obj/screen()
+	mymob.bodytemp.icon = 'icons/mob/status_indicators.dmi'
 	mymob.bodytemp.icon_state = "temp0"
 	mymob.bodytemp.SetName("body temperature")
 	mymob.bodytemp.screen_loc = ui_temp
@@ -116,17 +117,17 @@ var/obj/screen/robot_inventory
 	mymob.oxygen.SetName("oxygen")
 	mymob.oxygen.screen_loc = ui_oxygen
 
-	mymob.fire = new /obj/screen()
-	mymob.fire.icon = 'icons/mob/screen1_robot.dmi'
-	mymob.fire.icon_state = "fire0"
-	mymob.fire.SetName("fire")
-	mymob.fire.screen_loc = ui_fire
-
 	mymob.pullin = new /obj/screen()
 	mymob.pullin.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.pullin.icon_state = "pull0"
 	mymob.pullin.SetName("pull")
 	mymob.pullin.screen_loc = ui_borg_pull
+	
+	mymob.fire = new /obj/screen()
+	mymob.fire.icon = 'icons/mob/screen1_robot.dmi'
+	mymob.fire.icon_state = "fire0"
+	mymob.fire.SetName("fire")
+	mymob.fire.screen_loc = ui_fire
 
 	mymob.zone_sel = new /obj/screen/zone_sel()
 	mymob.zone_sel.icon = 'icons/mob/screen1_robot.dmi'

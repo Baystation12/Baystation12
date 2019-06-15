@@ -8,6 +8,7 @@
 	use_power = POWER_USE_OFF
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000
+	base_type = /obj/machinery/atmospherics/binary/oxyregenerator
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null
 	var/power_setting = 1 //power consumption setting, 1 through five
@@ -19,25 +20,19 @@
 	var/datum/gas_mixture/inner_tank = new
 	var/tank_volume = 400//Litres
 
-/obj/machinery/atmospherics/binary/oxyregenerator/New()
-	..()
-	inner_tank.volume = tank_volume
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/oxyregenerator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)//Takes CO2
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)//Breaks bond
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)//Stores carbon
-	RefreshParts()
-
 /obj/machinery/atmospherics/binary/oxyregenerator/RefreshParts()
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
-			carbon_efficiency += 0.25 * (P.rating-1) //plus 25% per stock item rank
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			intake_power_efficiency -= 0.1 * (P.rating-1) //10% better intake power efficiency per stock item rank
-		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
-			power_rating -= power_rating * 0.05 * (P.rating-1) //5% better power efficiency per stock item rank
+	carbon_efficiency = initial(carbon_efficiency)
+	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	carbon_efficiency -= 0.25 * number_of_components(/obj/item/weapon/stock_parts/matter_bin)
 
+	intake_power_efficiency = initial(carbon_efficiency)
+	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	intake_power_efficiency += 0.25 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+
+	power_rating = initial(carbon_efficiency)
+	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
+	power_rating += 0.05 * number_of_components(/obj/item/weapon/stock_parts/micro_laser)
+	..()
 /obj/machinery/atmospherics/binary/oxyregenerator/examine(user)
 	..()
 	to_chat(user,"Its outlet port is to the [dir2text(dir)]")
@@ -102,6 +97,7 @@
 	src.set_dir(turn(src.dir, 90))
 
 /obj/machinery/atmospherics/binary/oxyregenerator/Process(var/delay)
+	..()
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 

@@ -47,6 +47,7 @@
 
 
 /obj/machinery/power/port_gen/Process()
+	..()
 	if(active && HasFuel() && !IsBroken() && anchored && powernet)
 		add_avail(power_gen * power_output)
 		UseFuel()
@@ -112,7 +113,7 @@
 
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
-	var/board_path = /obj/item/weapon/circuitboard/pacman
+	var/board_path = /obj/item/weapon/stock_parts/circuitboard/pacman
 
 	/*
 		These values were chosen so that the generator can run safely up to 80 kW
@@ -140,28 +141,15 @@
 	if(anchored)
 		connect_to_network()
 
-/obj/machinery/power/port_gen/pacman/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/stack/cable_coil(src)
-	component_parts += new /obj/item/stack/cable_coil(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new board_path(src)
-	RefreshParts()
-
 /obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
 	return ..()
 
 /obj/machinery/power/port_gen/pacman/RefreshParts()
-	var/temp_rating = 0
-	for(var/obj/item/weapon/stock_parts/SP in component_parts)
-		if(istype(SP, /obj/item/weapon/stock_parts/matter_bin))
-			max_sheets = SP.rating * SP.rating * 50
-		else if(istype(SP, /obj/item/weapon/stock_parts/micro_laser) || istype(SP, /obj/item/weapon/stock_parts/capacitor))
-			temp_rating += SP.rating
+	var/temp_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
+	temp_rating += total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+
+	max_sheets = 50 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin) ** 2
 
 	power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
@@ -317,15 +305,9 @@
 			else
 				to_chat(user, "<span class='notice'>You close the access panel.</span>")
 		else if(isCrowbar(O) && open)
-			var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
-			for(var/obj/item/I in component_parts)
-				I.dropInto(loc)
 			while ( sheets > 0 )
 				DropFuel()
-
-			new_frame.state = 2
-			new_frame.icon_state = "box_1"
-			qdel(src)
+			dismantle()
 
 /obj/machinery/power/port_gen/pacman/attack_hand(mob/user as mob)
 	..()
@@ -433,7 +415,7 @@
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
-	board_path = /obj/item/weapon/circuitboard/pacman/super
+	board_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super
 	var/rad_power = 2
 
 //nuclear energy is green energy!
@@ -481,7 +463,7 @@
 	time_per_sheet = 400
 	rad_power = 6
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	board_path = /obj/item/weapon/circuitboard/pacman/super/potato
+	board_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super/potato
 	anchored = 1
 
 /obj/machinery/power/port_gen/pacman/super/potato/New()
@@ -538,7 +520,7 @@
 	time_per_sheet = 576
 	max_temperature = 800
 	temperature_gain = 90
-	board_path = /obj/item/weapon/circuitboard/pacman/mrs
+	board_path = /obj/item/weapon/stock_parts/circuitboard/pacman/mrs
 
 /obj/machinery/power/port_gen/pacman/mrs/explode()
 	//no special effects, but the explosion is pretty big (same as a supermatter shard).

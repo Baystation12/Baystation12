@@ -147,7 +147,7 @@ var/list/ai_verbs_default = list(
 		add_ai_verbs(src)
 
 	//Languages
-	add_language("Robot Talk", 1)
+	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
 	add_language(LANGUAGE_EAL, 1)
 	add_language(LANGUAGE_HUMAN_EURO, 1)
 	add_language(LANGUAGE_HUMAN_ARABIC, 1)

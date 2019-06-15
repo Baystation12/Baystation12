@@ -51,8 +51,8 @@
 		"Anomalist",
 		"Researcher",
 		"Xenobiologist",
-		"Xenobotanist",
-		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych)
+		"Xenobotanist"
+	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_DEVICES     = SKILL_BASIC,

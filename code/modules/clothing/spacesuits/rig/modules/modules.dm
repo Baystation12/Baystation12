@@ -17,6 +17,7 @@
 
 	var/damage = 0
 	var/obj/item/weapon/rig/holder
+	var/list/banned_modules = list()
 
 	var/module_cooldown = 10
 	var/next_use = 0
@@ -223,13 +224,11 @@
 	if(!check())
 		return 0
 
-	for (var/obj/item/rig_module/M in holder.installed_modules)
-		if(M.selectable)
-			if(M.suit_overlay_inactive)
-				M.suit_overlay = M.suit_overlay_inactive
-			else
-				M.suit_overlay = null
-			holder.update_icon()
+	if(holder.selected_module)
+		if(holder.selected_module.suit_overlay_inactive)
+			holder.selected_module.suit_overlay = holder.selected_module.suit_overlay_inactive
+		else
+			holder.selected_module.suit_overlay = null
 
 	holder.selected_module = src
 	if(suit_overlay_active)
@@ -267,7 +266,16 @@
 /mob/proc/SetupStat(var/obj/item/weapon/rig/R)
 	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
 		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
-		stat("Suit charge", cell_status)
+		stat("Suit Charge:", cell_status)
+		var/air_tank
+		if(R.air_supply)//makes sure you have tank
+			if(R.air_supply.air_contents)//make sure your tank has air
+				air_tank = "[round(R.air_supply.air_contents.return_pressure())] kPa"
+			else
+				air_tank = "0 kPa"
+		else
+			air_tank = "NOT FOUND"
+		stat("Tank Pressure:", air_tank)
 		for(var/obj/item/rig_module/module in R.installed_modules)
 			for(var/stat_rig_module/SRM in module.stat_modules)
 				if(SRM.CanUse())

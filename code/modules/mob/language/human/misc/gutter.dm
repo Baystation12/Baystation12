@@ -1,5 +1,5 @@
 /datum/language/gutter
-	name = "Gutter"
+	name = LANGUAGE_GUTTER
 	desc = "This crude pidgin tongue developed on Pluto during its busier days. Nowadays it serves as a trade language for criminal elements and those who wish they were ones."
 	speech_verb = "growls"
 	colour = "rough"

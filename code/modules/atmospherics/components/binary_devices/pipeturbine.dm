@@ -273,6 +273,7 @@
 		src.set_dir(turn(src.dir, 90))
 
 /obj/machinery/power/turbinemotor/Process()
+	process_parts()
 	updateConnection()
 	if(!turbine || !anchored || stat & (BROKEN))
 		return

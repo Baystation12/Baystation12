@@ -7,6 +7,7 @@ var/bomb_set
 	icon_state = "idle"
 	density = 1
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	unacidable = 1
 
 	var/deployable = 0
@@ -38,6 +39,7 @@ var/bomb_set
 	return ..()
 
 /obj/machinery/nuclearbomb/Process(var/wait)
+	..()
 	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
 		playsound(loc, 'sound/items/timer.ogg', 50)

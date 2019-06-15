@@ -962,6 +962,10 @@ BLIND     // can't see anything
 	sensor_mode = pick(0,1,2,3)
 	..()
 
+/obj/item/clothing/under/AltClick(var/mob/user)
+	if(CanPhysicallyInteract(user))
+		set_sensors(user)
+
 ///////////////////////////////////////////////////////////////////////
 //Rings
 

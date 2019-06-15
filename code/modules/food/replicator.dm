@@ -7,6 +7,7 @@
 	anchored = 1
 	idle_power_usage = 40
 	obj_flags = OBJ_FLAG_ANCHORABLE
+	base_type = /obj/machinery/food_replicator
 	var/biomass = 100
 	var/biomass_max = 100
 	var/biomass_per = 10
@@ -20,16 +21,6 @@
 					 "nutrition fries" = /obj/item/weapon/reagent_containers/food/snacks/fries,
 					 "liquid nutrition" = /obj/item/weapon/reagent_containers/food/snacks/soydope,
 					 "pudding substitute" = /obj/item/weapon/reagent_containers/food/snacks/ricepudding)
-
-/obj/machinery/food_replicator/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/replicator(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src) //used to hold the biomass
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src) //used to cook the food
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src) //used to deconstruct the stuff
-
-	RefreshParts()
 
 /obj/machinery/food_replicator/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks))
@@ -119,16 +110,10 @@
 	return 1
 
 /obj/machinery/food_replicator/RefreshParts()
-	deconstruct_eff = 0
-	biomass_max = 0
-	biomass_per = 20
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
-			biomass_max += 100 * P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			biomass_per = max(1, biomass_per - 5 * P.rating)
-		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
-			deconstruct_eff += 0.5 * P.rating
+	deconstruct_eff = 0.5 * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
+	biomass_max = 100 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	biomass_per = max(1, 20 - 5 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator))
+
 	biomass = min(biomass,biomass_max)
 
 /obj/machinery/food_replicator/proc/queue_dish(var/text)

@@ -159,8 +159,10 @@
 */
 /mob/living/silicon/robot/UnarmedAttack(atom/A)
 	A.attack_robot(src)
+
 /mob/living/silicon/robot/RangedAttack(atom/A)
 	A.attack_robot(src)
+	return TRUE
 
 /atom/proc/attack_robot(mob/user as mob)
 	attack_ai(user)

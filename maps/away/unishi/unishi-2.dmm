@@ -251,29 +251,29 @@
 /area/unishi/common)
 "aH" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/solar_control,
-/obj/item/weapon/circuitboard/roboprinter,
+/obj/item/weapon/stock_parts/circuitboard/solar_control,
+/obj/item/weapon/stock_parts/circuitboard/roboprinter,
 /obj/item/device/bot_kit,
 /turf/simulated/floor,
 /area/unishi/common)
 "aI" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/mecha/gygax/main,
+/obj/item/weapon/stock_parts/circuitboard/mecha/gygax/main,
 /obj/item/integrated_circuit/converter/text2num,
 /turf/simulated/floor,
 /area/unishi/common)
 "aJ" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/roboprinter,
-/obj/item/weapon/circuitboard/rdserver,
-/obj/item/weapon/circuitboard/helm,
+/obj/item/weapon/stock_parts/circuitboard/roboprinter,
+/obj/item/weapon/stock_parts/circuitboard/rdserver,
+/obj/item/weapon/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
 "aK" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/robotics,
-/obj/item/weapon/circuitboard/protolathe,
-/obj/item/weapon/circuitboard/helm,
+/obj/item/weapon/stock_parts/circuitboard/robotics,
+/obj/item/weapon/stock_parts/circuitboard/protolathe,
+/obj/item/weapon/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
 "aL" = (
@@ -1594,7 +1594,7 @@
 /area/unishi/hydro)
 "dX" = (
 /obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/weapon/circuitboard/mecha/gygax/peripherals,
+/obj/item/weapon/stock_parts/circuitboard/mecha/gygax/peripherals,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dY" = (
@@ -2207,7 +2207,7 @@
 /area/unishi/common)
 "fy" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/circuitboard/mecha/gygax/targeting,
+/obj/item/weapon/stock_parts/circuitboard/mecha/gygax/targeting,
 /obj/random/snack,
 /obj/item/device/flashlight/lamp,
 /turf/simulated/floor/tiled/dark,

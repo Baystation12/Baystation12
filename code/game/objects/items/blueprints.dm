@@ -110,7 +110,8 @@
 	A.power_light = 0
 	A.power_environ = 0
 	A.always_unpowered = 0
-	A.contents.Add(turfs)
+	for(var/T in turfs)
+		ChangeArea(T, A)
 	A.always_unpowered = 0
 	interact()
 

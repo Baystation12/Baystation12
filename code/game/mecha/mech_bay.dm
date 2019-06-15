@@ -9,24 +9,12 @@
 	anchored = 1
 	idle_power_usage = 200	// Some electronics, passive drain.
 	active_power_usage = 60 KILOWATTS // When charging
+	base_type = /obj/machinery/mech_recharger
 
 	var/obj/mecha/charging = null
 	var/base_charge_rate = 60 KILOWATTS
 	var/repair_power_usage = 10 KILOWATTS		// Per 1 HP of health.
 	var/repair = 0
-
-/obj/machinery/mech_recharger/Initialize()
-	. = ..()
-	component_parts = list()
-
-	component_parts += new /obj/item/weapon/circuitboard/mech_recharger(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-
-	RefreshParts()
 
 /obj/machinery/mech_recharger/Crossed(var/obj/mecha/M)
 	. = ..()
@@ -41,19 +29,16 @@
 /obj/machinery/mech_recharger/RefreshParts()
 	..()
 	// Calculates an average rating of components that affect charging rate.
-	var/chargerate_multiplier = 0
-	var/chargerate_divisor = 0
+	var/chargerate_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	chargerate_multiplier += total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
+
+	var/chargerate_divisor = number_of_components(/obj/item/weapon/stock_parts/capacitor)
+	chargerate_divisor += number_of_components(/obj/item/weapon/stock_parts/scanning_module)
+
 	repair = -5
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			chargerate_multiplier += P.rating
-			chargerate_divisor++
-		if(istype(P, /obj/item/weapon/stock_parts/scanning_module))
-			chargerate_multiplier += P.rating
-			chargerate_divisor++
-			repair += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			repair += P.rating * 2
+	repair += 2 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	repair += total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
+
 	if(chargerate_multiplier)
 		change_power_consumption(base_charge_rate * (chargerate_multiplier / chargerate_divisor), POWER_USE_ACTIVE)
 	else

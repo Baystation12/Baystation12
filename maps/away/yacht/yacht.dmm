@@ -61,7 +61,7 @@
 /obj/item/weapon/folder/blue,
 /obj/item/weapon/form_printer,
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup,
 /obj/item/weapon/newspaper,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
@@ -738,7 +738,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/circuitboard/broken,
+/obj/item/weapon/stock_parts/circuitboard/broken,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "ch" = (
@@ -858,7 +858,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/weapon/circuitboard/broken,
+/obj/item/weapon/stock_parts/circuitboard/broken,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},

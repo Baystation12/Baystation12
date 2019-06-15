@@ -27,7 +27,7 @@
 	var/last_temperature
 	var/target_temperature
 	var/obj/item/container
-	var/circuit_type = /obj/item/weapon/circuitboard/reagent_heater
+	var/circuit_type = /obj/item/weapon/stock_parts/circuitboard/reagent_heater
 
 /obj/machinery/reagent_temperature/cooler
 	name = "chemical cooler"
@@ -36,19 +36,11 @@
 	heater_mode =      HEATER_MODE_COOL
 	max_temperature =  30 CELSIUS
 	min_temperature = -80 CELSIUS
-	circuit_type =     /obj/item/weapon/circuitboard/reagent_heater/cooler
+	circuit_type =     /obj/item/weapon/stock_parts/circuitboard/reagent_heater/cooler
 
 /obj/machinery/reagent_temperature/Initialize()
-
 	target_temperature = min_temperature
-
-	component_parts = list(
-		new circuit_type(src),
-		new /obj/item/weapon/stock_parts/micro_laser(src),
-		new /obj/item/weapon/stock_parts/capacitor(src)
-	)
 	. = ..()
-	RefreshParts()
 
 /obj/machinery/reagent_temperature/Destroy()
 	if(container)
@@ -57,23 +49,19 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power)
+	heating_power = initial(heating_power) * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 
-	var/obj/item/weapon/stock_parts/comp = locate(/obj/item/weapon/stock_parts/capacitor) in component_parts
+	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	if(comp)
-		heating_power *= comp.rating
-	comp = locate(/obj/item/weapon/stock_parts/micro_laser) in component_parts
-	if(comp)
-		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - (comp.rating * 0.25 KILOWATTS)), POWER_USE_ACTIVE)
+		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - comp), POWER_USE_ACTIVE)
 
 /obj/machinery/reagent_temperature/Process()
-	. = ..()
-	if(. != PROCESS_KILL)
-		if(temperature != last_temperature)
-			queue_icon_update()
-		if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
-			update_use_power(POWER_USE_IDLE)
-			queue_icon_update()
+	..()
+	if(temperature != last_temperature)
+		queue_icon_update()
+	if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
+		update_use_power(POWER_USE_IDLE)
+		queue_icon_update()
 
 /obj/machinery/reagent_temperature/attack_hand(var/mob/user)
 	interact(user)
@@ -107,7 +95,7 @@
 		return
 
 	if(isWrench(thing))
-		if(use_power)
+		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 		else
 			anchored = !anchored

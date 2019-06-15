@@ -44,10 +44,10 @@
 
 //3 Modules can be activated at any one time.
 	var/obj/item/weapon/robot_module/module = null
-	var/module_active = null
-	var/module_state_1 = null
-	var/module_state_2 = null
-	var/module_state_3 = null
+	var/obj/item/module_active
+	var/obj/item/module_state_1
+	var/obj/item/module_state_2
+	var/obj/item/module_state_3
 
 	silicon_camera = /obj/item/device/camera/siliconcam/robot_camera
 	silicon_radio = /obj/item/device/radio/borg
@@ -107,7 +107,7 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	add_language("Robot Talk", 1)
+	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
 	add_language(LANGUAGE_EAL, 1)
 
 	wires = new(src)
@@ -830,19 +830,19 @@
 		if(!module_state_1)
 			module_state_1 = O
 			O.hud_layerise()
-			contents += O
+			O.forceMove(src)
 			if(istype(module_state_1,/obj/item/borg/sight))
 				sight_mode |= module_state_1:sight_mode
 		else if(!module_state_2)
 			module_state_2 = O
 			O.hud_layerise()
-			contents += O
+			O.forceMove(src)
 			if(istype(module_state_2,/obj/item/borg/sight))
 				sight_mode |= module_state_2:sight_mode
 		else if(!module_state_3)
 			module_state_3 = O
 			O.hud_layerise()
-			contents += O
+			O.forceMove(src)
 			if(istype(module_state_3,/obj/item/borg/sight))
 				sight_mode |= module_state_3:sight_mode
 		else
@@ -855,13 +855,13 @@
 		if(activated(O))
 			if(module_state_1 == O)
 				module_state_1 = null
-				contents -= O
+				O.forceMove(null)
 			else if(module_state_2 == O)
 				module_state_2 = null
-				contents -= O
+				O.forceMove(null)
 			else if(module_state_3 == O)
 				module_state_3 = null
-				contents -= O
+				O.forceMove(null)
 			else
 				to_chat(src, "Module isn't activated.")
 		else

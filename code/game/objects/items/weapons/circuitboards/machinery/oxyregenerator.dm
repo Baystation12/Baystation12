@@ -2,7 +2,7 @@
 #error T_BOARD macro is not defined but we need it!
 #endif
 
-/obj/item/weapon/circuitboard/oxyregenerator
+/obj/item/weapon/stock_parts/circuitboard/oxyregenerator
 	name = T_BOARD("oxygen regenerator")
 	build_path = /obj/machinery/atmospherics/binary/oxyregenerator
 	board_type = "machine"

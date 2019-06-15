@@ -117,6 +117,7 @@
 	return 1
 
 /obj/machinery/shieldwallgen/Process()
+	..()
 	power = 0
 	if(!(stat & BROKEN))
 		power()
@@ -301,6 +302,7 @@
 	playsound(loc, 'sound/weapons/smash.ogg', 75, 1)
 
 /obj/machinery/shieldwall/Process()
+	..()
 	if(needs_power)
 		if(isnull(gen_primary)||isnull(gen_secondary))
 			qdel(src)

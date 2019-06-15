@@ -107,11 +107,12 @@
 #define	COMMS_COLOR_SKRELL     "#7331c4"
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
-#define WOOD_COLOR_RICH        "#994715"
+#define WOOD_COLOR_RICH        "#792f27"
 #define WOOD_COLOR_PALE        "#d2bc9d"
 #define WOOD_COLOR_PALE2       "#e6d2ba"
 #define WOOD_COLOR_BLACK       "#332521"
-#define WOOD_COLOR_CHOCOLATE   "#78523b"
+#define WOOD_COLOR_CHOCOLATE   "#543c30"
+#define WOOD_COLOR_YELLOW      "#e3994e"
 
 #define GLASS_COLOR            "#74c1ee"
 #define GLASS_COLOR_PHORON     "#7c3a9a"
@@ -151,5 +152,11 @@
 
 // Used to easily change research colour in case of ???
 #define COLOR_RESEARCH COLOR_PURPLE_GRAY
+
+//Blob colors
+#define BLOB_COLOR_CORE      "#c96e28"
+#define BLOB_COLOR_SHIELD    "#9ed659"
+#define BLOB_COLOR_RAV       "#d65f42"
+#define BLOB_COLOR_PULS      "#b5ff5b"
 
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

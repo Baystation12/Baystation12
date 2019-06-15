@@ -6,32 +6,34 @@
 // It also supports RCON System which allows you to operate it remotely, if properly set.
 
 //MAGNETIC COILS - These things actually store and transmit power within the SMES. Different types have different
-/obj/item/weapon/smes_coil
+/obj/item/weapon/stock_parts/smes_coil
 	name = "superconductive magnetic coil"
 	desc = "Standard superconductive magnetic coil with average capacity and I/O rating."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = ITEM_SIZE_LARGE							// It's LARGE (backpack size)
 	origin_tech = list(TECH_MATERIAL = 7, TECH_POWER = 7, TECH_ENGINEERING = 5)
+	base_type = /obj/item/weapon/stock_parts/smes_coil
+	lazy_initialize = FALSE
 	var/ChargeCapacity = 50 KILOWATTS
 	var/IOCapacity = 250 KILOWATTS
 
 // 20% Charge Capacity, 60% I/O Capacity. Used for substation/outpost SMESs.
-/obj/item/weapon/smes_coil/weak
+/obj/item/weapon/stock_parts/smes_coil/weak
 	name = "basic superconductive magnetic coil"
 	desc = "Cheaper model of standard superconductive magnetic coil. It's capacity and I/O rating are considerably lower."
 	ChargeCapacity = 10 KILOWATTS
 	IOCapacity = 150 KILOWATTS
 
 // 500% Charge Capacity, 40% I/O Capacity. Holds a lot of energy, but charges slowly if not combined with other coils. Ideal for backup storage.
-/obj/item/weapon/smes_coil/super_capacity
+/obj/item/weapon/stock_parts/smes_coil/super_capacity
 	name = "superconductive capacitance coil"
 	desc = "Specialised version of standard superconductive magnetic coil. This one has significantly stronger containment field, allowing for significantly larger power storage. It's IO rating is much lower, however."
 	ChargeCapacity = 250 KILOWATTS
 	IOCapacity = 100 KILOWATTS
 
 // 40% Charge Capacity, 500% I/O Capacity. Technically turns SMES into large super capacitor. Ideal for shields.
-/obj/item/weapon/smes_coil/super_io
+/obj/item/weapon/stock_parts/smes_coil/super_io
 	name = "superconductive transmission coil"
 	desc = "Specialised version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers power, making it useful in systems which require large throughput."
 	ChargeCapacity = 20 KILOWATTS
@@ -43,16 +45,16 @@
 // 1M Charge, 150K I/O
 /obj/machinery/power/smes/buildable/outpost_substation/New()
 	..(0)
-	component_parts += new /obj/item/weapon/smes_coil/weak(src)
+	install_component(/obj/item/weapon/stock_parts/smes_coil/weak)
 	recalc_coils()
 
 // This one is pre-installed on engineering shuttle. Allows rapid charging/discharging for easier transport of power to outpost
 // 11M Charge, 2.5M I/O
 /obj/machinery/power/smes/buildable/power_shuttle/New()
 	..(0)
-	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
-	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
-	component_parts += new /obj/item/weapon/smes_coil(src)
+	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
+	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
+	install_component(/obj/item/weapon/stock_parts/smes_coil)
 	recalc_coils()
 
 
@@ -76,6 +78,7 @@
 
 	charge = 0
 	should_be_mapped = 1
+	base_type = /obj/machinery/power/smes/buildable
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()
@@ -94,12 +97,9 @@
 	input_level = input_level_max
 	output_level = output_level_max
 
+
 /obj/machinery/power/smes/buildable/Destroy()
-	qdel(wires)
-	wires = null
-	for(var/obj/machinery/power/terminal/T in terminals)
-		T.master = null
-	terminals = null
+	QDEL_NULL(wires)
 	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 	return ..()
@@ -135,18 +135,16 @@
 // Proc: New()
 // Parameters: None
 // Description: Adds standard components for this SMES, and forces recalculation of properties.
-/obj/machinery/power/smes/buildable/New()
-	component_parts = list()
-	component_parts += new /obj/item/stack/cable_coil(src,30)
-	component_parts += new /obj/item/weapon/circuitboard/smes(src)
-	src.wires = new /datum/wires/smes(src)
+/obj/machinery/power/smes/buildable/Initialize()
+	. = ..()
+	wires = new /datum/wires/smes(src)
 
 	// Allows for mapped-in SMESs with larger capacity/IO
+	recalc_coils() //placeholder; need to make these stock parts first.
 	if(cur_coils)
 		for(var/i = 1, i <= cur_coils, i++)
-			component_parts += new /obj/item/weapon/smes_coil(src)
+			install_component(/obj/item/weapon/stock_parts/smes_coil)
 		recalc_coils()
-	..()
 
 // Proc: attack_hand()
 // Parameters: None
@@ -164,7 +162,7 @@
 	capacity = 0
 	input_level_max = 0
 	output_level_max = 0
-	for(var/obj/item/weapon/smes_coil/C in component_parts)
+	for(var/obj/item/weapon/stock_parts/smes_coil/C in component_parts)
 		cur_coils++
 		capacity += C.ChargeCapacity
 		input_level_max += C.IOCapacity
@@ -303,9 +301,9 @@
 	if (!src.powernet)
 		return
 
-	for(var/obj/machinery/power/terminal/T in src.powernet.nodes)
-		if(istype(T.master, /obj/machinery/power/apc))
-			var/obj/machinery/power/apc/A = T.master
+	for(var/obj/machinery/power/terminal/T in powernet.nodes)
+		var/obj/machinery/power/apc/A = T.master_machine()
+		if(istype(A))
 			if (prob(overload_chance))
 				A.overload_lighting()
 			if (prob(failure_chance))
@@ -331,10 +329,8 @@
 	if (failing)
 		to_chat(user, "<span class='warning'>The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.</span>")
 		return
-	// If parent returned 1:
-	// - Hatch is open, so we can modify the SMES
-	// - No action was taken in parent function (terminal de/construction atm).
-	if (..())
+
+	if (!..())
 
 		// Multitool - change RCON tag
 		if(isMultitool(W))
@@ -361,7 +357,7 @@
 
 		// Crowbar - Disassemble the SMES.
 		if(isCrowbar(W))
-			if (terminals.len)
+			if (!(stat & BROKEN))
 				to_chat(user, "<span class='warning'>You have to disassemble the terminal first!</span>")
 				return
 
@@ -384,7 +380,7 @@
 				return
 
 		// Superconducting Magnetic Coil - Upgrade the SMES
-		else if(istype(W, /obj/item/weapon/smes_coil))
+		else if(istype(W, /obj/item/weapon/stock_parts/smes_coil))
 			if (cur_coils < max_coils)
 
 				if (failure_probability && prob(failure_probability))

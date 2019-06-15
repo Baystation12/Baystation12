@@ -10,18 +10,6 @@
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 
-/obj/machinery/bodyscanner/Initialize()
-	. = ..()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/bodyscanner(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/console_screen(src))
-	RefreshParts()
-
-
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
 	if (. && occupant && user.Adjacent(src))

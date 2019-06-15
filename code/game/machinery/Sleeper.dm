@@ -7,6 +7,7 @@
 	anchored = 1
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
+	base_type = /obj/machinery/sleeper
 	var/mob/living/carbon/human/occupant = null
 	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
 	var/list/available_chemicals = list()
@@ -26,17 +27,6 @@
 
 /obj/machinery/sleeper/Initialize()
 	. = ..()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/sleeper(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/console_screen(src),
-		new /obj/item/weapon/reagent_containers/syringe(src),
-		new /obj/item/weapon/reagent_containers/syringe(src),
-		new /obj/item/weapon/reagent_containers/glass/beaker/large(src))
-	RefreshParts()
-
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
@@ -52,6 +42,7 @@
 
 
 /obj/machinery/sleeper/Process()
+	..()
 	if(stat & (NOPOWER|BROKEN))
 		return
 
@@ -299,19 +290,12 @@
 		to_chat(user, "There's no suitable occupant in \the [src].")
 
 /obj/machinery/sleeper/RefreshParts()
-	var/T = 0
-
-	for (var/obj/item/weapon/stock_parts/scanning_module/S in component_parts) // scanning modules reduce power required and increase speed of dialysis / stomach pump
-		T += S.rating
-
+	var/T = total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
 	T = max(T,1)
 	synth_modifier = 1/T
 	pump_speed = 2 + T
-	T = 0
 
-	for (var/obj/item/weapon/stock_parts/manipulator/M in component_parts) // manipulators unlock new drugs
-		T += M.rating
-
+	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
 	available_chemicals = base_chemicals.Copy()
 	if (T >= 4)
 		available_chemicals |= upgrade_chemicals

@@ -100,7 +100,7 @@
 			for(var/datum/reagent/R in ingested.reagent_list)
 				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[R.type]
 				if(inedible_nutriment_amount > 0)
-					owner.nutrition += inedible_nutriment_amount
+					owner.adjust_nutrition(inedible_nutriment_amount)
 
 		// Do we have any objects to digest?
 		var/list/check_materials
@@ -121,7 +121,7 @@
 
 				// Process it.
 				if(can_digest_matter[mat])
-					owner.nutrition += max(1, Floor(digested/100))
+					owner.adjust_nutrition(max(1, Floor(digested/100)))
 					updated_stacks = TRUE
 				else if(can_process_matter[mat])
 					LAZYDISTINCTADD(check_materials, mat)

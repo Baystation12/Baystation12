@@ -3129,6 +3129,19 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
+"kM" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 9
+	},
+/obj/structure/ladder,
+/obj/effect/catwalk_plated,
+/obj/structure/sign/deck/fourth{
+	dir = 4;
+	icon_state = "deck-4";
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/fourthdeck/aft)
 "kN" = (
 /turf/simulated/wall/r_wall,
 /area/hallway/primary/fourthdeck/aft)
@@ -3174,10 +3187,6 @@
 /area/hallway/primary/fourthdeck/fore)
 "kX" = (
 /obj/structure/ladder/up,
-/obj/structure/sign/deck/fourth{
-	dir = 8;
-	pixel_x = 32
-	},
 /obj/effect/floor_decal/corner/green{
 	dir = 6
 	},
@@ -7683,6 +7692,10 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 6
 	},
+/obj/structure/sign/deck/fourth{
+	dir = 8;
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/aft)
 "yG" = (
@@ -11522,16 +11535,16 @@
 /area/maintenance/fourthdeck/aft)
 "MN" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = -5;
 	pixel_y = 9
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = 7;
 	pixel_y = 5;
 	pixel_z = 0
 	},
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG{
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG{
 	pixel_x = -1;
 	pixel_y = 1
 	},
@@ -37805,7 +37818,7 @@ UZ
 VL
 Wn
 Ym
-VA
+kM
 VA
 RD
 wa

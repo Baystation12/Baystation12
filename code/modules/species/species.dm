@@ -58,6 +58,7 @@
 	var/light_sensitive                       // Ditto, but requires sunglasses to fix
 	var/blood_volume = SPECIES_BLOOD_DEFAULT  // Initial blood volume.
 	var/hunger_factor = DEFAULT_HUNGER_FACTOR // Multiplier for hunger.
+	var/thirst_factor = DEFAULT_THIRST_FACTOR // Multiplier for thirst.
 	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 	var/silent_steps
 
@@ -224,6 +225,9 @@
 		/datum/mob_descriptor/height = 0,
 		/datum/mob_descriptor/build = 0
 	)
+
+	var/standing_jump_range = 1
+	var/ranged_grab_distance =   0
 
 	var/list/available_cultural_info = list(
 		TAG_CULTURE =   list(CULTURE_OTHER),

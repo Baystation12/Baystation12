@@ -171,13 +171,12 @@ GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
 
 	to_chat(src, "<span class = 'danger'>You settle into the empty brainpan and begin to expand, fusing inextricably with the dead flesh of [H].</span>")
 
-	H.add_language("Cortical Link")
+	H.add_language(LANGUAGE_BORER_GLOBAL)
 
 	if(host.stat == 2)
 		H.verbs |= /mob/living/carbon/human/proc/jumpstart
 
 	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
-	H.verbs |= /mob/living/carbon/human/proc/tackle
 	H.verbs |= /mob/living/carbon/proc/spawn_larvae
 
 	if(H.client)
@@ -302,7 +301,7 @@ GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
 
 			to_chat(src, "<span class='danger'>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</span>")
 			to_chat(host, "<span class='danger'>You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours.</span>")
-			host.add_language("Cortical Link")
+			host.add_language(LANGUAGE_BORER_GLOBAL)
 
 			// host -> brain
 			var/h2b_id = host.computer_id

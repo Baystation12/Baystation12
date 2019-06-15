@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "Borg chargers once again spawn with the cell installed."
+  - bugfix: "Vents starting as off are fixed."

@@ -161,6 +161,30 @@
 	..()
 	M.sleeping += 1
 
+/datum/reagent/toxin/taxine
+	name = "Taxine"
+	description = "A potent cardiotoxin found in nearly every part of the common yew."
+	taste_description = "intense bitterness"
+	color = "#6b833b"
+	strength = 16
+	overdose = REAGENTS_OVERDOSE / 3
+	metabolism = REM * 2
+	target_organ = BP_HEART
+	heating_point = null
+	heating_products = null
+
+/datum/reagent/toxin/taxine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.confused += 1.5
+
+/datum/reagent/toxin/taxine/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.stat != UNCONSCIOUS)
+			H.Weaken(8)
+		M.add_chemical_effect(CE_NOPULSE, 1)
+
 /datum/reagent/toxin/potassium_chloride
 	name = "Potassium Chloride"
 	description = "A delicious salt that stops the heart when injected into cardiac muscle."
@@ -199,7 +223,7 @@
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.stat != 1)
+		if(H.stat != UNCONSCIOUS)
 			if(H.losebreath >= 10)
 				H.losebreath = max(10, M.losebreath-10)
 			H.adjustOxyLoss(2)
@@ -791,7 +815,7 @@
 	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
 		return
 	M.species.set_default_hair(M)
-	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
+	to_chat(M, "<span class='warning'>You feel a chill and your skin feels lighter..</span>")
 	remove_self(volume)
 
 /datum/reagent/toxin/zombie

@@ -16,15 +16,6 @@
 	var/report_all_ores
 	var/active = FALSE
 
-/obj/machinery/mineral/processing_unit/New()
-	..()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/mining_processor(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/micro_laser(src),
-		new /obj/item/weapon/stock_parts/micro_laser(src)
-		)
-
 /obj/machinery/mineral/processing_unit/Initialize()
 	ores_processing = list()
 	ores_stored = list()
@@ -34,7 +25,7 @@
 	. = ..()
 
 /obj/machinery/mineral/processing_unit/Process()
-
+	..()
 	//Grab some more ore to process this tick.
 	if(input_turf)
 		for(var/obj/item/I in recursive_content_check(input_turf, sight_check = FALSE, include_mobs = FALSE))

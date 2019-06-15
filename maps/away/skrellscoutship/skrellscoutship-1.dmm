@@ -83,6 +83,10 @@
 	icon_state = "tube1";
 	dir = 8
 	},
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12
+	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "ap" = (
@@ -2372,8 +2376,8 @@
 	dir = 1
 	},
 /obj/structure/closet/crate,
-/obj/item/weapon/circuitboard/solar_control,
-/obj/item/weapon/circuitboard/solar_control,
+/obj/item/weapon/stock_parts/circuitboard/solar_control,
+/obj/item/weapon/stock_parts/circuitboard/solar_control,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "nc" = (
@@ -2889,10 +2893,10 @@
 /area/ship/skrellscoutship/command/armory)
 "UT" = (
 /obj/structure/closet/crate,
-/obj/item/weapon/smes_coil/super_capacity,
-/obj/item/weapon/circuitboard/smes,
-/obj/item/weapon/smes_coil/super_io,
-/obj/item/weapon/circuitboard/smes,
+/obj/item/weapon/stock_parts/smes_coil/super_capacity,
+/obj/item/weapon/stock_parts/circuitboard/smes,
+/obj/item/weapon/stock_parts/smes_coil/super_io,
+/obj/item/weapon/stock_parts/circuitboard/smes,
 /obj/item/stack/cable_coil,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)

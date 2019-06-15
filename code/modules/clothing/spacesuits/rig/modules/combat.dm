@@ -17,8 +17,21 @@
 	name = "mounted flash"
 	desc = "You are the law."
 	icon_state = "flash"
+	
+	selectable = 0
+	toggleable = 1
+	activates_on_touch = 1
+	module_cooldown = 0
+	usable = 1
+	active_power_cost = 100
+	use_power_cost = 18000 //10 Whr
+
+	engage_string = "Flash"
+	activate_string = "Activate Flash Module"
+	deactivate_string = "Deactivate Flash Module"
+
 	interface_name = "mounted flash"
-	interface_desc = "Disorientates your target by blinding them with a bright light."
+	interface_desc = "Disorientates your target by blinding them with this intense palm-mounted light."
 	device = /obj/item/device/flash
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 
@@ -26,6 +39,46 @@
 	name = "advanced mounted flash"
 	device = /obj/item/device/flash/advanced
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
+
+/obj/item/rig_module/device/flash/installed()
+	. = ..()
+	if(!holder.glove_type)//gives select option for gloveless suits, why even use rig at this point
+		selectable = 1
+		activates_on_touch = 0
+		toggleable = 0
+	else
+		selectable = 0
+		activates_on_touch = 1
+		toggleable = 1
+
+/obj/item/rig_module/device/flash/engage(atom/target)
+	if(!check() || !device)
+		return 0
+
+	if(!holder.cell.check_charge(use_power_cost * CELLRATE))
+		to_chat(holder.wearer,"<span class='warning'>Not enough stored power.</span>")
+		return 0
+
+	if(!target)
+		if(device.attack_self(holder.wearer))
+			holder.cell.use(use_power_cost * CELLRATE)
+		return 1
+
+	if(!target.Adjacent(holder.wearer) || !ismob(target))
+		return 0
+
+	var/resolved = target.attackby(device,holder.wearer)
+	if(resolved)
+		holder.cell.use(use_power_cost * CELLRATE)
+	return resolved
+
+/obj/item/rig_module/device/flash/activate()
+	if(active || !check())
+		return
+
+	to_chat(holder.wearer, SPAN_NOTICE("Your hardsuit gauntlets heat up and lock into place, ready to be used."))
+	playsound(src.loc, 'sound/items/goggles_charge.ogg', 20, 1)
+	active = 1
 
 /obj/item/rig_module/grenade_launcher
 	name = "mounted grenade launcher"
@@ -219,6 +272,7 @@
 	name = "mounted plasma cutter"
 	desc = "A forearm-mounted plasma cutter."
 	icon_state = "plasmacutter"
+	usable = 0
 
 	suit_overlay_active = "plasmacutter"
 
@@ -233,24 +287,10 @@
 	if(!check() || !gun)
 		return 0
 
-	if(!target)
-		playsound(src.loc, 'sound/weapons/guns/selector.ogg', 50, 1)
-		if(!active)
-			active=1
-			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to close range mode.</span>")
-		else
-			active=0
-			to_chat(holder.wearer, "<span class='notice'>\The [src] is now set to firing mode.</span>")
-		return
-
-	if(!active)
+	if(holder.wearer.a_intent == I_HURT || !target.Adjacent(holder.wearer))
 		gun.Fire(target,holder.wearer)
 		return 1
 	else
-		var/turf/T = get_turf(target)
-		if(istype(T) && !target.Adjacent(holder.wearer))
-			return 0
-
 		var/resolved = target.attackby(gun,holder.wearer)
 		if(!resolved && gun && target)
 			gun.afterattack(target,holder.wearer,1)

@@ -133,10 +133,9 @@
 		var/turf/target = translation[source]
 
 		if(target)
-			//update area first so that area/Entered() will be called with the correct area when atoms are moved
 			if(base_area)
-				source.loc.contents.Add(target)
-				base_area.contents.Add(source)
+				ChangeArea(target, get_area(source))
+				ChangeArea(source, base_area)
 			transport_turf_contents(source, target)
 
 	//change the old turfs

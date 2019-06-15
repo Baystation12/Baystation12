@@ -32,24 +32,12 @@
 		<br>A sign on it reads: <i>STAY CLEAR! DO NOT BLOCK!</i>"
 	icon_state = "front"
 
-/obj/machinery/bsa/front/Initialize()
-	. = ..()
-	component_parts = list(new /obj/item/weapon/circuitboard/bsafront(src))
-	for(var/i = 1 to 5)
-		component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(src)
-
 /obj/machinery/bsa/middle
 	name = "bluespace fusor mark VI."
 	desc = "A complex machine which transmits immense amount of data \
 		from the material deconstructor to the particle beam generator.\
 		<br>A sign on it reads: <i>EXPLOSIVE! DO NOT OVERHEAT!</i>"
 	icon_state = "middle"
-
-/obj/machinery/bsa/middle/Initialize()
-	. = ..()
-	component_parts = list(new /obj/item/weapon/circuitboard/bsamiddle(src))
-	for(var/i = 1 to 10)
-		component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
 
 /obj/machinery/bsa/back
 	name = "bluespace material deconstructor mark VI."
@@ -58,9 +46,3 @@
 	icon_state = "back"
 	density = FALSE
 	layer = BELOW_DOOR_LAYER //So the charges go above us.
-
-/obj/machinery/bsa/back/Initialize()
-	. = ..()
-	component_parts = list(new /obj/item/weapon/circuitboard/bsaback(src))
-	for(var/i = 1 to 5)
-		component_parts += new /obj/item/weapon/stock_parts/capacitor/super(src)

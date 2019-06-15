@@ -311,10 +311,12 @@
 	return 0
 
 /mob/living/carbon/slime/proc/gain_nutrition(var/amount)
-	nutrition += amount
+	adjust_nutrition(amount)
 	if(prob(amount * 2)) // Gain around one level per 50 nutrition
 		powerlevel++
 		if(powerlevel > 10)
 			powerlevel = 10
 			adjustToxLoss(-10)
-	nutrition = min(nutrition, get_max_nutrition())
+
+/mob/living/carbon/slime/adjust_nutrition(var/amt)
+	nutrition = Clamp(nutrition + amt, 0, get_max_nutrition())

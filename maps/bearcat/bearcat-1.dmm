@@ -2085,12 +2085,12 @@
 /area/ship/scrap/maintenance/techstorage)
 "eL" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/pacman/super/potato,
+/obj/item/weapon/stock_parts/circuitboard/pacman/super/potato,
 /obj/item/stack/material/glass/phoronrglass/ten,
 /obj/item/stack/material/ocp/ten,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/techstorage)
 "eN" = (
@@ -3014,9 +3014,9 @@
 /turf/simulated/wall,
 /area/ship/scrap/broken1)
 "Xb" = (
-/obj/item/weapon/circuitboard/pacman,
-/obj/item/weapon/circuitboard/recharge_station,
-/obj/item/weapon/circuitboard/shield_generator,
+/obj/item/weapon/stock_parts/circuitboard/pacman,
+/obj/item/weapon/stock_parts/circuitboard/recharge_station,
+/obj/item/weapon/stock_parts/circuitboard/shield_generator,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -3042,15 +3042,15 @@
 /turf/space,
 /area/space)
 "Yb" = (
-/obj/item/weapon/circuitboard/helm,
-/obj/item/weapon/circuitboard/unary_atmos/cooler,
+/obj/item/weapon/stock_parts/circuitboard/helm,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/weapon/circuitboard/unary_atmos/heater,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/maintenance/techstorage)
 "Zb" = (

@@ -15,19 +15,11 @@
 
 /obj/machinery/optable/Initialize()
 	. = ..()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/optable(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/capacitor(src))
-	RefreshParts()
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
 		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
 		if (computer)
 			computer.table = src
 			break
-
 
 /obj/machinery/optable/examine(var/mob/user)
 	. = ..()
@@ -126,6 +118,7 @@
 	return 0
 
 /obj/machinery/optable/Process()
+	..()
 	check_victim()
 
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)

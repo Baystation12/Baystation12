@@ -115,7 +115,6 @@
 	does_spin = FALSE
 
 	var/leap_range = 5
-	var/last_leapt
 	var/leap_cooldown = 3 MINUTES
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
@@ -418,41 +417,41 @@ Nurse caste procs
 Hunter caste procs
 *****************/
 /mob/living/simple_animal/hostile/giant_spider/hunter/MoveToTarget()
-	if(!can_act())
+	if(!can_act() || try_ranged_maneuver(target_mob))
 		return
-	var/mob/living/target = target_mob
-	if(can_leap(target))
-		prepare_leap(target)
-		last_leapt = world.time + leap_cooldown
 	..()
 
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/can_leap(mob/living/target)
-	if(!can_act() || last_leapt > world.time || !isliving(target) || (get_dist(src, target) <= 3))
+/mob/living/simple_animal/hostile/giant_spider/hunter/announce_jump_channel(var/atom/target)
+	visible_message(SPAN_WARNING("\The [src] reels back and prepares to launch itself at \the [target]!"))
+
+/mob/living/simple_animal/hostile/giant_spider/hunter/can_jump()
+	. = ..() && can_act()
+
+/mob/living/simple_animal/hostile/giant_spider/hunter/get_jump_distance()
+	return leap_range
+
+/mob/living/simple_animal/hostile/giant_spider/hunter/try_ranged_maneuver(atom/target)
+
+	if(!isliving(target) || get_dist(src, target) <= 3)
 		return FALSE
-	if(get_dist(src, target) <= leap_range)
-		return TRUE
 
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/prepare_leap(mob/living/target)
-	face_atom(target)
 	walk(src,0)
-	stop_automation = TRUE
-	visible_message("<span class='warning'>\The [src] reels back and prepares to launch itself at \the [target]!</span>")
-	addtimer(CALLBACK(src, .proc/leap, target), 2 SECONDS)
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/leap(mob/living/target)
-	visible_message("<span class='danger'>\The [src] springs forward towards \the [target]!</span>")
-	throw_at(get_step(get_turf(target),get_turf(src)), leap_range, 1, src)
-	addtimer(CALLBACK(src, .proc/resolve_leap, target), 5)
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/resolve_leap(mob/living/target)
-	if(Adjacent(target))
-		visible_message("<span class='danger'>\The [src] slams into \the [target], knocking them over!</span>")
+	var/first_stop_automation
+	if(stop_automation)
+		first_stop_automation = stop_automation
+		stop_automation = TRUE
+	. = ..()
+	if(!isnull(first_stop_automation))
+		stop_automation = first_stop_automation
+	
+/mob/living/simple_animal/hostile/giant_spider/hunter/collide_with_mob(var/mob/target)
+	stop_automation = FALSE
+	if(istype(target) && Adjacent(target))
+		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
 		target.Weaken(1)
-		stop_automation = FALSE
 		MoveToTarget()
 	else
-		visible_message("<span class='warning'>\The [src] misses its quarry and gets staggered!</span>")
-		stop_automation = FALSE
+		visible_message(SPAN_DANGER("\The [src] misses its quarry and gets staggered!"))
 		Stun(3) //we missed!
 
 /******************

@@ -5,21 +5,10 @@
 	input_turf =  EAST
 	output_turf = WEST
 	var/stack_amt = 50
-	var/list/stacks
-
-/obj/machinery/mineral/stacking_machine/New()
-	..()
-	component_parts = list(
-		new /obj/item/weapon/stock_parts/matter_bin(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/circuitboard/mining_stacker(src)
-		)
-
-/obj/machinery/mineral/stacking_machine/Initialize()
-	stacks = list()
-	. = ..()
+	var/list/stacks = list()
 
 /obj/machinery/mineral/stacking_machine/Process()
+	..()
 	if(input_turf)
 		for(var/obj/item/I in input_turf)
 			if(istype(I, /obj/item/stack/material))

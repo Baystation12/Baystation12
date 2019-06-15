@@ -164,11 +164,10 @@
 				if(tx >= ux && tx <= ex && ty >= uy && ty <= ey)
 					floor_turfs += checking
 
-		// Do this area stuff before placing machinery or anything else. Otherwise it will potentially change areas without properly updating listeners.
 		var/area_path = areas_to_use[az]
-		for(var/thing in floor_turfs)
-			new area_path(thing)
-		var/area/A = locate(area_path)
+		var/area/A = locate(area_path) || new area_path()
+		for(var/T in floor_turfs)
+			ChangeArea(T, A)
 		cfloor.set_area_ref("\ref[A]")
 
 		// Place exterior doors.

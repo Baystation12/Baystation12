@@ -452,13 +452,13 @@
 						R.module_active = null
 					if(R.module_state_1 == R.module.emag)
 						R.module_state_1 = null
-						R.contents -= R.module.emag
+						R.module.emag.forceMove(null)
 					else if(R.module_state_2 == R.module.emag)
 						R.module_state_2 = null
-						R.contents -= R.module.emag
+						R.module.emag.forceMove(null)
 					else if(R.module_state_3 == R.module.emag)
 						R.module_state_3 = null
-						R.contents -= R.module.emag
+						R.module.emag.forceMove(null)
 					log_admin("[key_name_admin(usr)] has unemag'ed [R].")
 
 			if("unemagcyborgs")
@@ -471,13 +471,13 @@
 								R.module_active = null
 							if(R.module_state_1 == R.module.emag)
 								R.module_state_1 = null
-								R.contents -= R.module.emag
+								R.module.emag.forceMove(null)
 							else if(R.module_state_2 == R.module.emag)
 								R.module_state_2 = null
-								R.contents -= R.module.emag
+								R.module.emag.forceMove(null)
 							else if(R.module_state_3 == R.module.emag)
 								R.module_state_3 = null
-								R.contents -= R.module.emag
+								R.module.emag.forceMove(null)
 					log_admin("[key_name_admin(usr)] has unemag'ed [ai]'s Cyborgs.")
 
 	else if (href_list["common"])

@@ -87,6 +87,7 @@
 		ui.open()
 
 /obj/machinery/disease2/incubator/Process()
+	..()
 	if(dish && on && dish.virus2)
 		use_power_oneoff(50,EQUIP)
 		if(!powered(EQUIP))

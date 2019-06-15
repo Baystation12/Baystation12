@@ -965,7 +965,7 @@
 "cH" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/cell/crap,
-/obj/item/weapon/circuitboard/gyrotron_control,
+/obj/item/weapon/stock_parts/circuitboard/gyrotron_control,
 /obj/item/weapon/paper_bin,
 /obj/machinery/light/small{
 	dir = 8

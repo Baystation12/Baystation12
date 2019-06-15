@@ -139,16 +139,15 @@
 
 /mob/living/carbon/slime/proc/handle_nutrition()
 
-	nutrition -= 0.1 + 0.05 * is_adult
+	adjust_nutrition(-(0.1 + 0.05 * is_adult))
 
 	if(nutrition <= 0)
-		nutrition = 0
 		adjustToxLoss(2)
 		if (client && prob(5))
 			to_chat(src, "<span class='danger'>You are starving!</span>")
 
 	else if (nutrition >= get_grow_nutrition() && amount_grown < SLIME_EVOLUTION_THRESHOLD)
-		nutrition -= 20
+		adjust_nutrition(-20)
 		amount_grown++
 
 /mob/living/carbon/slime/proc/get_max_nutrition() // Can't go above it

@@ -146,6 +146,7 @@
 		return
 
 /obj/machinery/beehive/Process()
+	..()
 	if(closed && !smoked && bee_count)
 		pollinate_flowers()
 		update_icon()

@@ -16,6 +16,7 @@
 
 	var/on = 0
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	level = 1
 
 

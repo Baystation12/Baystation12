@@ -402,7 +402,8 @@
 			malfunction()
 
 		for(var/obj/item/rig_module/module in installed_modules)
-			cell.use(module.Process() * CELLRATE)
+			if(!cell.checked_use(module.Process() * CELLRATE))
+				module.deactivate()//turns off modules when your cell is dry
 
 //offline should not change outside this proc
 /obj/item/weapon/rig/proc/update_offline()
@@ -476,6 +477,22 @@
 	data["securitycheck"] = security_check_enabled
 	data["malf"] =          malfunction_delay
 
+	if(wearer) //Internals below!!!
+		data["valveOpen"] = (wearer.internal == air_supply)
+
+		if(!wearer.internal || wearer.internal == air_supply)	// if they have no active internals or if tank is current internal
+			if(wearer.wear_mask && (wearer.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))// mask
+				data["maskConnected"] = 1
+			else if(wearer.head && (wearer.head.item_flags & ITEM_FLAG_AIRTIGHT)) // Make sure they have a helmet and its airtight
+				data["maskConnected"] = 1
+			else
+				data["maskConnected"] = 0
+
+	data["tankPressure"] = round(air_supply && air_supply.air_contents && air_supply.air_contents.return_pressure() ? air_supply.air_contents.return_pressure() : 0)
+	data["releasePressure"] = round(air_supply && air_supply.distribute_pressure ? air_supply.distribute_pressure : 0)
+	data["defaultReleasePressure"] = air_supply ? round(initial(air_supply.distribute_pressure)) : 0
+	data["maxReleasePressure"] = air_supply ? round(TANK_MAX_RELEASE_PRESSURE) : 0
+	data["tank"] = air_supply ? 1 : 0
 
 	var/list/module_list = list()
 	var/i = 1
@@ -500,8 +517,7 @@
 		if(module.charges && module.charges.len)
 
 			module_data["charges"] = list()
-			var/datum/rig_charge/selected = module.charges[module.charge_selected]
-			module_data["chargetype"] = selected ? "[selected.display_name]" : "none"
+			module_data["chargetype"] = module.charge_selected
 
 			for(var/chargetype in module.charges)
 				var/datum/rig_charge/charge = module.charges[chargetype]
@@ -605,7 +621,10 @@
 				if("engage")
 					module.engage()
 				if("select")
-					module.select()
+					if(selected_module == module)
+						deselect_module()
+					else
+						module.select()
 				if("select_charge_type")
 					module.charge_selected = href_list["charge_type"]
 		return 1
@@ -615,6 +634,9 @@
 		return 1
 	if(href_list["toggle_suit_lock"])
 		locked = !locked
+		return 1
+	if(href_list["air_supply"])
+		air_supply.OnTopic(wearer,href_list)
 		return 1
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
@@ -746,6 +768,14 @@
 	if(wearer)
 		wearer.wearing_rig = null
 		wearer = null
+
+/obj/item/weapon/rig/proc/deselect_module()
+	if(selected_module.suit_overlay_inactive)
+		selected_module.suit_overlay = selected_module.suit_overlay_inactive
+	else
+		selected_module.suit_overlay = null
+	selected_module = null
+	update_icon()
 
 //Todo
 /obj/item/weapon/rig/proc/malfunction()

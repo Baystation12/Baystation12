@@ -41,10 +41,9 @@
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
 /turf/space/LateInitialize()
-	// We alter area type before the turf to ensure the turf-change-event-propagation is handled as expected.
 	if(GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
-		new_area.contents.Add(src)
+		ChangeArea(src, new_area)
 	ChangeTurf(GLOB.using_map.base_floor_type)
 
 // override for space turfs, since they should never hide anything

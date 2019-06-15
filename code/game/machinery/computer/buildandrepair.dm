@@ -10,7 +10,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 
 	var/state = 0
-	var/obj/item/weapon/circuitboard/circuit = null
+	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
 
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)
 	switch(state)
@@ -39,8 +39,8 @@
 					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 					src.anchored = 0
 					src.state = 0
-			if(istype(P, /obj/item/weapon/circuitboard) && !circuit)
-				var/obj/item/weapon/circuitboard/B = P
+			if(istype(P, /obj/item/weapon/stock_parts/circuitboard) && !circuit)
+				var/obj/item/weapon/stock_parts/circuitboard/B = P
 				if(B.board_type == "computer")
 					if(!user.unEquip(P, src))
 						return

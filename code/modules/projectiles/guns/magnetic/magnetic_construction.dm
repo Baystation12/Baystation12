@@ -57,7 +57,7 @@
 		increment_construction_stage()
 		return
 
-	if(istype(thing, /obj/item/weapon/smes_coil) && construction_stage >= 6 && construction_stage <= 8)
+	if(istype(thing, /obj/item/weapon/stock_parts/smes_coil) && construction_stage >= 6 && construction_stage <= 8)
 		user.visible_message("<span class='notice'>\The [user] installs \a [thing] into \the [src].</span>")
 		qdel(thing)
 		increment_construction_stage()

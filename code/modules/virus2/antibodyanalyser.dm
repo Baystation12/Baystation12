@@ -27,6 +27,7 @@
 		return
 
 /obj/machinery/disease2/antibodyanalyser/Process()
+	..()
 	if(stat & (NOPOWER|BROKEN))
 		return
 

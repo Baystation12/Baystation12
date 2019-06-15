@@ -136,7 +136,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_x = 27
 	},
-/obj/item/weapon/circuitboard/solar_control,
+/obj/item/weapon/stock_parts/circuitboard/solar_control,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "aq" = (
@@ -281,9 +281,9 @@
 /obj/structure/closet/crate,
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/item/device/scanner/gas,
-/obj/item/weapon/circuitboard/unary_atmos/cooler,
-/obj/item/weapon/circuitboard/unary_atmos/heater,
-/obj/item/weapon/circuitboard/oxyregenerator,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
+/obj/item/weapon/stock_parts/circuitboard/oxyregenerator,
 /obj/item/weapon/tank/oxygen/red,
 /obj/structure/cable,
 /obj/item/stack/material/uranium/ten,
@@ -302,7 +302,7 @@
 /obj/item/trash/candy/proteinbar,
 /obj/item/trash/liquidfood,
 /obj/item/weapon/stock_parts/matter_bin/super,
-/obj/item/weapon/circuitboard/biogenerator,
+/obj/item/weapon/stock_parts/circuitboard/biogenerator,
 /obj/item/weapon/bedsheet/orange,
 /obj/item/weapon/bedsheet/orange,
 /obj/item/weapon/stock_parts/matter_bin/adv,
@@ -562,7 +562,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/metal,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
 "bk" = (
