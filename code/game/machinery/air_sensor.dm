@@ -76,16 +76,19 @@ obj/machinery/air_sensor/Destroy()
 
 /obj/machinery/air_sensor/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if((. = ..()))
-		return TOPIC_HANDLED
+		return
 	if(href_list["settag"])	
 		var/t = sanitizeSafe(input(user, "Enter the ID tag for [src.name]", src.name, id_tag), MAX_NAME_LEN)
-		if(t)
+		if(t && CanInteract(user, state))
 			id_tag = t
-		return TOPIC_REFRESH
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
 	if(href_list["setfreq"])
 		var/freq = input(user, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
-		set_frequency(freq)
-		return TOPIC_REFRESH
+		if(CanInteract(user, state))
+			set_frequency(freq)
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
 
 /obj/machinery/air_sensor/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(isMultitool(O))
@@ -100,11 +103,9 @@ obj/machinery/air_sensor/Destroy()
 		qdel(src)
 	else if(isScrewdriver(O))
 		var/F = input("What frequency would you like to set this to?", "Adjust Frequency", frequency) as num|null
-		if(user.incapacitated() && !user.Adjacent(src))
+		if(CanPhysicallyInteract(user))
 			return
 		if(user.get_active_hand() != O)
-			return
-		if(!in_range(src, user) && src.loc != user)
 			return
 		if(F)
 			frequency = F

@@ -7,9 +7,6 @@
 	var/unwrenched = 0
 	var/pipe_color = "white"
 
-/obj/machinery/pipedispenser/Initialize()
-	. = ..()	
-
 /obj/machinery/pipedispenser/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
 	. = list()
 	. += "<table>"

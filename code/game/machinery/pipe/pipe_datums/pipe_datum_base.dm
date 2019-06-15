@@ -73,7 +73,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 			new_item.color = D.pipe_color
 		new_item.SetName(D.name)
 		new_item.desc = D.desc
-		new_item.dir = D.dir
+		new_item.set_dir(D.dir)
 		new_item.icon = D.build_icon
 		new_item.icon_state = D.build_icon_state
 		new_item.constructed_path = D.constructed_path
@@ -85,7 +85,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 			new_item.ptype = D.pipe_type
 		new_item.SetName(D.name)
 		new_item.desc = D.desc
-		new_item.dir = D.dir
+		new_item.set_dir(D.dir)
 		new_item.icon = D.build_icon
 		new_item.icon_state = D.build_icon_state
 		new_item.set_density(1)

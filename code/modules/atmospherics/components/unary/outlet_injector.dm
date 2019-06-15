@@ -81,23 +81,26 @@
 
 /obj/machinery/atmospherics/unary/outlet_injector/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if((. = ..()))
-		return TOPIC_HANDLED
+		return
 	if(href_list["toggle_power"])
-		use_power = !use_power		
+		use_power = update_use_power(!use_power)
 		queue_icon_update()
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
 		return TOPIC_REFRESH
 	if(href_list["settag"])
 		var/t = sanitizeSafe(input(user, "Enter the ID tag for [src.name]", src.name, id), MAX_NAME_LEN)
-		if(t)
+		if(t && CanInteract(user, state))
 			id = t
-		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
-		return TOPIC_REFRESH
+			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
 	if(href_list["setfreq"])
 		var/freq = input(user, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
-		set_frequency(freq)
-		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
-		return TOPIC_REFRESH
+		if(CanInteract(user, state))
+			set_frequency(freq)
+			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
 
 /obj/machinery/atmospherics/unary/outlet_injector/Process()
 	..()
@@ -210,4 +213,5 @@
 	if(isWrench(O))
 		new /obj/item/pipe(loc, src)
 		qdel(src)
+		return
 	return ..()

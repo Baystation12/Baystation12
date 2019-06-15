@@ -219,7 +219,7 @@
 	name = "pressure tank"
 	desc = "A large vessel containing pressurized gas."
 	build_icon = 'icons/atmos/tank.dmi'
-	build_icon_state = "air_map"
+	build_icon_state = "air"
 	build_path = /obj/item/pipe/tank
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	pipe_type = PIPE_TANK

@@ -233,6 +233,10 @@
 	pipe_type = PIPE_DVALVE
 	build_icon_state = "dvalve"
 
+/obj/machinery/atmospherics/valve/digital/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
+
 /obj/machinery/atmospherics/valve/digital/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 

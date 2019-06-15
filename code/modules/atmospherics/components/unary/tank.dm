@@ -1,12 +1,13 @@
 /obj/machinery/atmospherics/unary/tank
 	icon = 'icons/atmos/tank.dmi'
-	icon_state = "air_map"
+	icon_state = "air"
 
 	name = "Pressure Tank"
 	desc = "A large vessel containing pressurized gas."
 
 	var/volume = 10000 //in liters, 1 meters by 1 meters by 2 meters ~tweaked it a little to simulate a pressure tank without needing to recode them yet
 	var/start_pressure = 25*ONE_ATMOSPHERE
+	var/filling // list of gas ratios to use.
 
 	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
@@ -20,14 +21,26 @@
 	pipe_type = PIPE_TANK
 
 	build_icon = 'icons/atmos/tank.dmi'
-	build_icon_state = "air_map"
+	build_icon_state = "air"
 
-/obj/machinery/atmospherics/unary/tank/New()	
+/obj/machinery/atmospherics/unary/tank/New()
+	if(filling)
+		air_temporary = new
+		air_temporary.volume = volume
+		air_temporary.temperature = T20C
+
+		var/list/gases = list()
+		for(var/gas in filling)
+			gases += gas
+			gases += start_pressure * filling[gas] * (air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+		air_temporary.adjust_multi(arglist(gases))
+		update_icon()
+
 	initialize_directions = dir
 	set_dir(dir)
-	. = ..()
+	..()
 	
-/obj/machinery/atmospherics/unary/tank/Initialize()		
+/obj/machinery/atmospherics/unary/tank/Initialize()
 	atmos_init()
 	build_network()
 	if(node)
@@ -104,107 +117,42 @@
 
 /obj/machinery/atmospherics/unary/tank/air
 	name = "Pressure Tank (Air)"
-	icon_state = "air_map"
-
-/obj/machinery/atmospherics/unary/tank/air/New()
-	air_temporary = new
-	air_temporary.volume = volume
-	air_temporary.temperature = T20C
-
-	air_temporary.adjust_multi("oxygen",  (start_pressure*O2STANDARD)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature), \
-	                           "nitrogen",(start_pressure*N2STANDARD)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
-
-
-	..()
 	icon_state = "air"
+	filling = list("oxygen" = O2STANDARD, "nitrogen" = N2STANDARD)
 
 /obj/machinery/atmospherics/unary/tank/oxygen
 	name = "Pressure Tank (Oxygen)"
-	icon_state = "o2_map"
-
-/obj/machinery/atmospherics/unary/tank/oxygen/New()
-	air_temporary = new
-	air_temporary.volume = volume
-	air_temporary.temperature = T20C
-
-	air_temporary.adjust_gas("oxygen", (start_pressure)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
-
-	..()
 	icon_state = "o2"
+	filling = list("oxygen" = 1)
 
 /obj/machinery/atmospherics/unary/tank/nitrogen
 	name = "Pressure Tank (Nitrogen)"
-	icon_state = "n2_map"
-
-/obj/machinery/atmospherics/unary/tank/nitrogen/New()
-	air_temporary = new
-	air_temporary.volume = volume
-	air_temporary.temperature = T20C
-
-	air_temporary.adjust_gas("nitrogen", (start_pressure)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
-
-	..()
 	icon_state = "n2"
+	filling = list("nitrogen" = 1)
 
 /obj/machinery/atmospherics/unary/tank/carbon_dioxide
 	name = "Pressure Tank (Carbon Dioxide)"
-	icon_state = "co2_map"
-
-/obj/machinery/atmospherics/unary/tank/carbon_dioxide/New()
-	air_temporary = new
-	air_temporary.volume = volume
-	air_temporary.temperature = T20C
-
-	air_temporary.adjust_gas("carbon_dioxide", (start_pressure)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
-
-	..()
 	icon_state = "co2"
+	filling = list("carbon_dioxide" = 1)
 
 /obj/machinery/atmospherics/unary/tank/phoron
 	name = "Pressure Tank (Phoron)"
-	icon_state = "phoron_map"
-
-/obj/machinery/atmospherics/unary/tank/phoron/New()
-	air_temporary = new
-	air_temporary.volume = volume
-	air_temporary.temperature = T20C
-
-	air_temporary.adjust_gas("phoron", (start_pressure)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
-
-	..()
 	icon_state = "phoron"
+	filling = list("phoron" = 1)
 
 /obj/machinery/atmospherics/unary/tank/nitrous_oxide
 	name = "Pressure Tank (Nitrous Oxide)"
-	icon_state = "n2o_map"
-
-/obj/machinery/atmospherics/unary/tank/nitrous_oxide/New()
-	air_temporary = new
-	air_temporary.volume = volume
-	air_temporary.temperature = T0C
-
-	air_temporary.adjust_gas("sleeping_agent", (start_pressure)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
-
-	..()
 	icon_state = "n2o"
+	filling = list("sleeping_agent" = 1)
 
 /obj/machinery/atmospherics/unary/tank/hydrogen
 	name = "Pressure Tank (Hydrogen)"
-	icon_state = "h2_map"
-
-/obj/machinery/atmospherics/unary/tank/hydrogen/New()
-	air_temporary = new
-	air_temporary.volume = volume
-	air_temporary.temperature = T20C
-
-	air_temporary.adjust_gas("hydrogen", (start_pressure)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
-
-	..()
 	icon_state = "h2"
+	filling = list("hydrogen" = 1)
 
 /obj/item/pipe/tank
 	icon = 'icons/atmos/tank.dmi'
-	icon_state = "air_map"
+	icon_state = "air"
 	name =  "Pressure Tank"
 	desc = "A large vessel containing pressurized gas."
 	color =  PIPE_COLOR_WHITE
@@ -215,12 +163,3 @@
 	dir = SOUTH
 	constructed_path = /obj/machinery/atmospherics/unary/tank
 	pipe_class = PIPE_CLASS_UNARY
-
-/obj/item/pipe/tank/New(loc, obj/machinery/atmospherics/P = null)
-	if(!P)
-		P = new /obj/machinery/atmospherics/unary/tank(src)
-		P.loc = null
-		. = ..(loc, P)
-		qdel(P)
-	else
-		. = ..(loc, P)

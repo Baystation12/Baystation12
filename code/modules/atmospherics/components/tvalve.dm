@@ -10,6 +10,7 @@
 	initialize_directions = SOUTH|NORTH|WEST
 
 	var/state = 0 // 0 = go straight, 1 = go to side
+	var/frequency
 
 	// like a trinary component, node1 is input, node2 is side output, node3 is straight output
 	var/obj/machinery/atmospherics/node3
@@ -117,7 +118,7 @@
 	node1 = null
 	node2 = null
 	node3 = null
-
+	unregister_radio(src, frequency)
 	return ..()
 
 /obj/machinery/atmospherics/tvalve/proc/go_to_side()
@@ -187,7 +188,6 @@
 
 /obj/machinery/atmospherics/tvalve/atmos_init()
 	..()
-	initialize_directions()
 
 	var/node1_dir
 	var/node2_dir
@@ -343,7 +343,7 @@
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalve0"
 
-	var/frequency = 1441
+	frequency = 1441
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 	
@@ -407,7 +407,7 @@
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalvem0"
 
-	var/frequency = 1441
+	frequency = 1441
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
