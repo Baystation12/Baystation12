@@ -137,7 +137,7 @@
 
 	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
 	if(bat)
-		bat.charge_rate = restore_power_passive
+		bat.charge_rate = restore_power_passive * CELLRATE
 		bat.charge_channel = power_channel
 
 /obj/machinery/recharge_station/proc/overlay_state()
@@ -191,7 +191,7 @@
 	occupant = M
 	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
 	if(bat)
-		bat.charge_rate = restore_power_active
+		bat.charge_rate = restore_power_active * CELLRATE
 	update_icon()
 	return 1
 
@@ -215,7 +215,7 @@
 	occupant = null
 	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
 	if(bat)
-		bat.charge_rate = restore_power_passive
+		bat.charge_rate = restore_power_passive * CELLRATE
 	update_icon()
 
 /obj/machinery/recharge_station/verb/move_eject()

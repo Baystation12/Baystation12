@@ -95,7 +95,7 @@
 		return
 
 	if(isWrench(thing))
-		if(use_power)
+		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 		else
 			anchored = !anchored
