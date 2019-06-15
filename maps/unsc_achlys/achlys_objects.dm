@@ -205,7 +205,7 @@
 
 /obj/item/weapon/card/id/the_silver
 	name = "Silver Keycard"
-	desc = "This silver keycard seems to belong to someone important. How it got here and who it belongs to is a mystery."
+	desc = "This silver keycard seems to belong to someone important. What door it opens is a mystery."
 	access = list(666)
 	icon_state = "silver"
 	item_state = "silver_id"
@@ -218,7 +218,7 @@
 	machine_recipes = newlist(/datum/autolathe/recipe/m118_ma5b,/datum/autolathe/recipe/m255_sap_hp,/datum/autolathe/recipe/m443_fmj)
 
 /obj/item/weapon/paper/crumpled/orders
-	info = "Office of Naval Intelligence Section 3<BR><BR>Any person that steps foot on the Achlys cannot leave the ship alive. Exterminate with extreme prejudice.<BR><BR>Do not allow your identity to be compromised by any means.<BR><BR>You know what must be done."
+	info = "Office of Naval Intelligence Section 3<BR><BR>Any person that steps foot on the Achlys cannot leave the ship alive. Exterminate with extreme prejudice.<BR><BR>Do not allow your identity to be compromised by any means. Failure to obey these orders will result in subject termination.<BR><BR>Operatives that expose themselves or their orders must be terminated. <BR><BR>You know what must be done."
 
 /obj/random/achlock //Large objects to block things off in maintenance
 	name = "airlock randomization"
