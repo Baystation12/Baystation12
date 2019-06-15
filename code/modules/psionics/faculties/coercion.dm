@@ -53,6 +53,41 @@
 			M.confused = rand(3,8)
 		return TRUE
 
+/decl/psionic_power/coercion/mindread
+	name =            "Mindread"
+	cost =            6
+	cooldown =        80
+	use_melee =       TRUE
+	min_rank =        PSI_RANK_OPERANT
+	associated_intent = I_HELP
+	use_description = "Target the head and click on a living subject while on help intent to attempt to read their mind."
+
+/decl/psionic_power/coercion/mindread/invoke(var/mob/living/user, var/mob/living/target)
+	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
+		return FALSE
+	. = ..()
+	if(.)
+		if(target.stat == DEAD || (target.status_flags & FAKEDEATH))
+			to_chat(user, SPAN_WARNING("\The [target]'s soul has departed."))
+			return TRUE
+			
+		var/question =  input("Say something?","Mindread") as null|text
+		if(do_after(user, 20))
+			var/started_mindread = world.time
+			user.visible_message(SPAN_NOTICE("<i>\The [user] places their hand over \the [target]'s temple...</i>"))
+			if(question)
+				to_chat(target, SPAN_NOTICE("You hear echoes in your mind, <i>[question]</i>"))
+			var/question_header = (question) ? question : "What thoughts fly through your head?"
+			var/answer =  input(target, question_header,"Mindread") as null|text
+			if(world.time > started_mindread + 10 SECONDS)
+				to_chat(user, SPAN_NOTICE("You hear nothing.."))
+			else if(answer)
+				to_chat(user, SPAN_NOTICE("You hear the depths of \the [target]'s mind, <i>[answer]</i>"))
+				return TRUE									
+			if(answer)
+				to_chat(target, SPAN_NOTICE("Your thoughts return to you. It seems you were too slow."))
+		return TRUE
+
 /decl/psionic_power/coercion/agony
 	name =          "Agony"
 	cost =          8
