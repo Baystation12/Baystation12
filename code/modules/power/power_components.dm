@@ -78,14 +78,14 @@
 	qdel(cell)
 	. = ..()
 
-	
 /obj/item/weapon/stock_parts/power/battery/on_install(var/obj/machinery/machine)
 	..()
 	start_processing(machine)
 
 /obj/item/weapon/stock_parts/power/battery/on_uninstall(var/obj/machinery/machine)
-	cell.dropInto(loc)
-	remove_cell()
+	if(cell)
+		cell.dropInto(loc)
+		remove_cell()
 	..()
 
 // None of these helpers actually change the cell's loc. They only manage internal references and state.

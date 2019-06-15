@@ -105,7 +105,7 @@
 	if(!check_icon_cache())
 		return
 	if (!node)
-		update_use_power(POWER_USE_OFF)
+		return
 
 	overlays.Cut()
 
