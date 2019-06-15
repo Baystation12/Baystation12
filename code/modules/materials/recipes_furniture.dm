@@ -140,6 +140,16 @@ ARMCHAIR(yellow)
 	result_type = /obj/structure/bed
 	req_amount = 2
 
+/datum/stack_recipe/furniture/pew
+	title = "pew, right"
+	result_type = /obj/structure/bed/pew
+	req_amount = 4
+
+/datum/stack_recipe/furniture/pew_left
+	title = "pew, left"
+	result_type = /obj/structure/bed/pew/left
+	req_amount = 4
+
 /datum/stack_recipe/furniture/table_frame
 	title = "table frame"
 	result_type = /obj/structure/table

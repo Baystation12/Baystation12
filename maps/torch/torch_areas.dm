@@ -1023,11 +1023,6 @@
 	name = "\improper First Deck Cryogenic Storage"
 	icon_state = "Sleep"
 
-/area/crew_quarters/diplomat
-	name = "\improper Diplomatic Quarters"
-	icon_state = "Sleep"
-	sound_env = SMALL_SOFTFLOOR
-
 /area/crew_quarters/adherent
 	name = "\improper Adherent Maintenence"
 	icon_state = "robotics"
@@ -1140,7 +1135,6 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list()
 
-// Chapel
 /area/chapel/crematorium
 	name = "\improper Crematorium"
 	icon_state = "chapel"
@@ -1708,6 +1702,12 @@
 	icon_state = "chapel"
 	ambience = list('sound/ambience/ambicha1.ogg','sound/ambience/ambicha2.ogg','sound/ambience/ambicha3.ogg','sound/ambience/ambicha4.ogg','sound/music/traitor.ogg')
 	sound_env = LARGE_ENCLOSED
+
+/area/chapel/office
+	name = "\improper Chaplain's Office"
+	req_access = list(access_chapel_office)
+	color = COLOR_GRAY80
+	sound_env = SMALL_SOFTFLOOR
 
 // Merchant
 

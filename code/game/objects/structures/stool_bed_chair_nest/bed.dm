@@ -180,6 +180,29 @@
 /obj/structure/bed/padded/New(var/newloc)
 	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_COTTON)
 
+/obj/structure/bed/pew
+	name = "pew"
+	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
+	icon_state = "pew"
+	base_icon = "pew"
+	color = WOOD_COLOR_GENERIC
+	var/material/pew_material = MATERIAL_WOOD
+
+/obj/structure/bed/pew/left
+	icon_state = "pew_left"
+	base_icon = "pew_left"
+
+/obj/structure/bed/pew/New(var/newloc)
+	..(newloc, pew_material)
+
+/obj/structure/bed/pew/mahogany
+	color = WOOD_COLOR_RICH
+	pew_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/pew/left/mahogany
+	color = WOOD_COLOR_RICH
+	pew_material = MATERIAL_MAHOGANY
+
 /obj/structure/bed/alien
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
@@ -252,11 +275,11 @@
 		if(iv_attached)
 			detach_iv(M, usr)
 		queue_icon_update()
-		
+
 /obj/structure/bed/roller/Process()
 	if(!iv_attached || !buckled_mob || !beaker)
 		return PROCESS_KILL
-	
+
 	//SSObj fires twice as fast as SSMobs, so gotta slow down to not OD our victims.
 	if(SSobj.times_fired % 2)
 		return
@@ -264,7 +287,7 @@
 	if(beaker.volume > 0)
 		beaker.reagents.trans_to_mob(buckled_mob, beaker.amount_per_transfer_from_this, CHEM_BLOOD)
 		queue_icon_update()
-		
+
 /obj/structure/bed/roller/proc/remove_beaker(mob/user)
 	to_chat(user, "You detach \the [beaker] to \the [src].")
 	iv_attached = FALSE
@@ -300,7 +323,7 @@
 		if(user_buckle_mob(over_object, usr))
 			attach_iv(buckled_mob, usr)
 			return
-	if(beaker) 
+	if(beaker)
 		remove_beaker(usr)
 		return
 	if(buckled_mob)	return
