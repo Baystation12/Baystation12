@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - tweak: "Split the Chaplain and the Counselor into two separate roles. Chaplain was moved to Service and lost Medical access."
-  - rscadd: "Replaced the defunct Sec checkpoint near the Chapel with the Counselor's Office, it's where t'Counselor lives."
-  - tweak: "Moved the Psychiatrist and Psychologist alt titles to the Counselor."
