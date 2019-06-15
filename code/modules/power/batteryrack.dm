@@ -15,6 +15,7 @@
 	capacity = 0
 	charge = 0
 	should_be_mapped = 1
+	base_type = /obj/machinery/power/smes/batteryrack
 
 	var/max_transfer_rate = 0							// Maximal input/output rate. Determined by used capacitors when building the device.
 	var/mode = PSU_OFFLINE								// Current inputting/outputting mode

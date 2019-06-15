@@ -78,6 +78,7 @@
 
 	charge = 0
 	should_be_mapped = 1
+	base_type = /obj/machinery/power/smes/buildable
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()

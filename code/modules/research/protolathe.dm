@@ -6,6 +6,7 @@
 
 	idle_power_usage = 30
 	active_power_usage = 5000
+	base_type = /obj/machinery/r_n_d/protolathe
 
 	var/max_material_storage = 250000
 

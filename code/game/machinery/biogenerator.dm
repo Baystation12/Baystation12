@@ -12,6 +12,7 @@
 	density = 1
 	anchored = 1
 	idle_power_usage = 40
+	base_type = /obj/machinery/biogenerator
 	var/processing = 0
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0

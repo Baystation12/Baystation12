@@ -8,6 +8,7 @@
 	active_power_usage = 2000
 	clicksound = "keyboard"
 	clickvol = 30
+	base_type = /obj/machinery/autolathe
 
 	var/list/machine_recipes
 	var/list/stored_material =  list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_GLASS = 0, MATERIAL_PLASTIC = 0)
