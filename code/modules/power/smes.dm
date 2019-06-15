@@ -259,7 +259,7 @@
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["nameTag"] = name_tag
-	data["storedCapacity"] = round(100.0*charge/capacity, 0.1)
+	data["storedCapacity"] = Percentage()
 	data["storedCapacityAbs"] = round(charge/1000, 0.1)
 	data["storedCapacityMax"] = round(capacity/1000, 0.1)
 	data["charging"] = inputting

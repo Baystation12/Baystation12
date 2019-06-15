@@ -297,12 +297,13 @@
 		var/obj/item/stack/stack = new_material
 		for(var/obj/item/stack/old_stack in materials)
 			if(old_stack.stacktype == stack.stacktype)
-				stack.transfer_to(old_stack)
+				stack.transfer_to(old_stack, stack.amount)
 				if(QDELETED(stack))
 					return
 	LAZYADD(materials, new_material)
 	new_material.forceMove(null)
 
+// amount will cap the amount given in a stack, but may return less than amount specified.
 /obj/item/weapon/stock_parts/building_material/proc/remove_material(material_type, amount)
 	if(ispath(material_type, /obj/item/stack))
 		for(var/obj/item/stack/stack in materials)
@@ -312,17 +313,15 @@
 					materials -= stack
 					stack.dropInto(loc)
 					amount -= stack_amount
-				else
-					var/obj/item/stack/new_stack = stack.split(amount)
-					new_stack.dropInto(loc)
-					return
+					return stack
+				var/obj/item/stack/new_stack = stack.split(amount)
+				new_stack.dropInto(loc)
+				return new_stack
 	for(var/obj/item/item in materials)
 		if(istype(item, material_type))
 			materials -= item
 			item.dropInto(loc)
-			amount--
-			if(amount == 0)
-				return
+			return item
 
 /obj/item/weapon/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
 	..()
