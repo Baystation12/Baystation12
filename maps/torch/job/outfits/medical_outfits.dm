@@ -78,14 +78,6 @@
 	shoes = /obj/item/clothing/shoes/white
 	id_type = /obj/item/weapon/card/id/torch/contractor/medical/counselor
 
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist
-	name = OUTFIT_JOB_NAME("Psychiatrist - Torch")
-	uniform = /obj/item/clothing/under/rank/psych
-
-/decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain
-	name = OUTFIT_JOB_NAME("Chaplain - Torch")
-	uniform = /obj/item/clothing/under/rank/chaplain
-
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec
 	name = OUTFIT_JOB_NAME("Counselor - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
@@ -95,3 +87,14 @@
 	name = OUTFIT_JOB_NAME("Counselor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychologist
+	name = OUTFIT_JOB_NAME("Counselor - Psychologist")
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	shoes = /obj/item/clothing/shoes/laceup
+
+/decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist
+	name = OUTFIT_JOB_NAME("Counselor - Psychiatrist")
+	uniform = /obj/item/clothing/under/rank/psych
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	shoes = /obj/item/clothing/shoes/laceup

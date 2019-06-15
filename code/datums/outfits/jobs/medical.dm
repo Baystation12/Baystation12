@@ -93,10 +93,6 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/medical/psychiatrist
 
-/decl/hierarchy/outfit/job/medical/psychiatrist/psychologist
-	name = OUTFIT_JOB_NAME("Psychologist")
-	uniform = /obj/item/clothing/under/rank/psych/turtleneck
-
 /decl/hierarchy/outfit/job/medical/paramedic
 	name = OUTFIT_JOB_NAME("Paramedic")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
