@@ -162,7 +162,7 @@
 
 				if(I.damage > 0 && spend_power(heal_rate))
 					I.damage = max(I.damage - heal_rate, 0)
-					if(prob(10))
+					if(prob(25))
 						to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))
 					return
 
@@ -204,13 +204,13 @@
 	if(heal_poison)
 
 		if(owner.radiation && spend_power(heal_rate))
-			if(prob(10))
+			if(prob(25))
 				to_chat(owner, SPAN_NOTICE("Your autoredactive faculty repairs some of the radiation damage to your body."))
 			owner.radiation = max(0, owner.radiation - heal_rate)
 			return
 
 		if(owner.getCloneLoss() && spend_power(heal_rate))
-			if(prob(10))
+			if(prob(25))
 				to_chat(owner, SPAN_NOTICE("Your autoredactive faculty stitches together some of your mangled DNA."))
 			owner.adjustCloneLoss(-heal_rate)
 			return
@@ -220,5 +220,5 @@
 		owner.adjustBruteLoss(-(heal_rate))
 		owner.adjustFireLoss(-(heal_rate))
 		owner.adjustOxyLoss(-(heal_rate))
-		if(prob(10))
+		if(prob(25))
 			to_chat(owner, SPAN_NOTICE("Your skin crawls as your autoredactive faculty heals your body."))
