@@ -22,6 +22,10 @@
 	name = RELIGION_CHRISTIANITY
 	description = "An Abrahamic monotheistic religion based on the life and teachings of Jesus of Nazareth. Someone who practices Christianity is called a Christian."
 
+/decl/cultural_info/religion/bahai
+	name = RELIGION_BAHAI_FAITH
+	description = "An Abrahamic monotheistic religion that follows the teachings of Baha'u'llah and believes in universal peace and unity. Someone who practices the Baha'i Faith is called a Baha'i."
+
 /decl/cultural_info/religion/agnostic
 	name = RELIGION_AGNOSTICISM
 	description = "A belief that nothing is known or can be known of the existence or nature of God. Someone who holds to agnosticism is called an agnostic."
