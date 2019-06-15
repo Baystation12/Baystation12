@@ -308,6 +308,7 @@
 	damage_max = 45
 	attack_freq = 2
 	light_color = BLOB_COLOR_RAV
+	color = "#ffd400" //Temporary, for until they get a new sprite.
 
 //produce
 /obj/item/weapon/blob_tendril
