@@ -32,35 +32,6 @@
 	new /obj/item/clothing/mask/gas/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/void/merc(src)
 
-
-/obj/structure/closet/syndicate/nuclear
-	desc = "It's a storage unit for nuclear-operative gear."
-
-/obj/structure/closet/syndicate/nuclear/New()
-	..()
-
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/weapon/storage/box/handcuffs(src)
-	new /obj/item/weapon/storage/box/flashbangs(src)
-	new /obj/item/weapon/gun/energy/gun(src)
-	new /obj/item/weapon/gun/energy/gun(src)
-	new /obj/item/weapon/gun/energy/gun(src)
-	new /obj/item/weapon/gun/energy/gun(src)
-	new /obj/item/weapon/gun/energy/gun(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/modular_computer/pda/syndicate(src)
-	var/obj/item/device/radio/uplink/U = new(src)
-	U.hidden_uplink.uses = 40
-	return
-
 /obj/structure/closet/syndicate/resources/
 	desc = "An old, dusty locker."
 

@@ -549,24 +549,6 @@
 	icon_state = "shuttle3"
 	base_turf = /turf/simulated/open
 
-// Ninja areas
-/area/ninja_dojo
-	name = "\improper Ninja Base"
-	icon_state = "green"
-	requires_power = 0
-	dynamic_lighting = 1
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_syndicate)
-
-/area/ninja_dojo/dojo
-	name = "\improper Clan Dojo"
-	dynamic_lighting = 0
-
-/area/ninja_dojo/start
-	name = "\improper Clan Dojo"
-	icon_state = "shuttlered"
-	base_turf = /turf/simulated/floor/plating
-
 //Merchant
 
 /area/shuttle/merchant/home
@@ -575,28 +557,13 @@
 	req_access = list(access_merchant)
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
-//Merc
+//Other
 
 /area/syndicate_mothership
-	name = "\improper Mercenary Base"
+	name = "mercenary base"
 	icon_state = "syndie-ship"
 	requires_power = 0
-	dynamic_lighting = 0
-	req_access = list(access_syndicate)
-
-/area/syndicate_station/start
-	name = "\improper Mercenary Forward Operating Base"
-	icon_state = "yellow"
-	requires_power = 0
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_syndicate)
-
-//Skipjack
-
-/area/skipjack_station
-	name = "Raider Outpost"
-	icon_state = "yellow"
-	requires_power = 0
+	dynamic_lighting = 1
 	req_access = list(access_syndicate)
 
 //NT rescue shuttle
@@ -1723,12 +1690,6 @@
 	name = "\improper Merchant Station"
 	icon_state = "LP"
 	req_access = list(access_merchant)
-
-// Syndicate
-
-/area/syndicate_mothership/raider_base
-	name = "\improper Raider Base"
-	req_access = list(access_syndicate)
 
 // ACTORS GUILD
 /area/acting

@@ -236,6 +236,9 @@
 /obj/machinery/door/unpowered/simple/walnut/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_WALNUT, complexity)
 
+/obj/machinery/door/unpowered/simple/bamboo/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_BAMBOO, complexity)
+
 /obj/machinery/door/unpowered/simple/wood/saloon
 	icon_base = "saloon"
 	autoclose = 1

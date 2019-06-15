@@ -108,34 +108,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			id.registered_name = player.real_name
 			W.SetName("[initial(W.name)] ([id.name])")
 
-/datum/antagonist/raider/create_global_objectives()
-
-	if(!..())
-		return 0
-
-	var/i = 1
-	var/max_objectives = pick(2,2,2,2,3,3,3,4)
-	global_objectives = list()
-	while(i<= max_objectives)
-		var/list/goals = list("kidnap","loot","salvage")
-		var/goal = pick(goals)
-		var/datum/objective/heist/O
-
-		if(goal == "kidnap")
-			goals -= "kidnap"
-			O = new /datum/objective/heist/kidnap()
-		else if(goal == "loot")
-			O = new /datum/objective/heist/loot()
-		else
-			O = new /datum/objective/heist/salvage()
-		O.choose_target()
-		global_objectives |= O
-
-		i++
-
-	global_objectives |= new /datum/objective/heist/preserve_crew
-	return 1
-
 /datum/antagonist/raider/check_victory()
 	// Totally overrides the base proc.
 	var/win_type = "Major"
@@ -165,11 +137,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		win_type = "Major"
 		win_group = "Crew"
 		win_msg += "<B>The Raiders have been wiped out!</B>"
-	else if(is_raider_crew_safe())
-		if(win_group == "Crew" && win_type == "Minor")
-			win_type = "Major"
-		win_group = "Crew"
-		win_msg += "<B>The Raiders have left someone behind!</B>"
 	else
 		if(win_group == "Raider")
 			if(win_type == "Minor")
@@ -181,16 +148,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	to_world("<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span>")
 	to_world("[win_msg]")
 	SSstatistics.set_field_details("round_end_result","heist - [win_type] [win_group]")
-
-/datum/antagonist/raider/proc/is_raider_crew_safe()
-
-	if(!current_antagonists || current_antagonists.len == 0)
-		return 0
-
-	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || get_area(player.current) != locate(/area/skipjack_station/start))
-			return 0
-	return 1
 
 /datum/antagonist/raider/equip(var/mob/living/carbon/human/player)
 

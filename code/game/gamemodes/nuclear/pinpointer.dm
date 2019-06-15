@@ -112,31 +112,6 @@
 		pointer.color = COLOR_YELLOW
 	overlays += pointer
 
-//Nuke ops locator
-/obj/item/weapon/pinpointer/nukeop
-	var/locate_shuttle = 0
-
-/obj/item/weapon/pinpointer/nukeop/Process()
-	var/new_mode
-	if(!locate_shuttle && bomb_set)
-		locate_shuttle = 1
-		new_mode = "Shuttle Locator"
-	else if (locate_shuttle && !bomb_set)
-		locate_shuttle = 0
-		new_mode = "Authentication Disk Locator"
-	if(new_mode)
-		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
-		visible_message("<span class='notice'>[new_mode] active.</span>")
-		target = acquire_target()
-	..()
-
-/obj/item/weapon/pinpointer/nukeop/acquire_target()
-	if(locate_shuttle)
-		var/obj/machinery/computer/shuttle_control/multi/syndicate/home = locate()
-		return weakref(home)
-	else
-		return ..()
-
 //Deathsquad locator
 
 /obj/item/weapon/pinpointer/advpinpointer/verb/toggle_mode()

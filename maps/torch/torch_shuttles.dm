@@ -202,69 +202,6 @@
 	name = "Space near the ship"
 	landmark_tag = "nav_petrov_out"
 
-//Ninja Shuttle.
-/datum/shuttle/autodock/multi/antag/ninja
-	name = "Ninja"
-	warmup_time = 0
-	destination_tags = list(
-		"nav_ninja_deck1",
-		"nav_ninja_deck2",
-		"nav_ninja_deck3",
-		"nav_ninja_deck4",
-		"nav_ninja_deck5",
-		"nav_ninja_hanger",
-		"nav_away_6",
-		"nav_derelict_5",
-		"nav_cluster_6",
-		"nav_ninja_start",
-		"nav_lost_supply_base_antag",
-		"nav_marooned_antag",
-		"nav_smugglers_antag",
-		"nav_magshield_antag",
-		"nav_casino_antag",
-		"nav_yacht_antag",
-		"nav_slavers_base_antag",
-		)
-	shuttle_area = /area/ninja_dojo/start
-	current_location = "nav_ninja_start"
-	landmark_transition = "nav_ninja_transition"
-	announcer = "SEV Torch Sensor Array"
-	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
-	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
-
-
-/obj/effect/shuttle_landmark/ninja/start
-	name = "Clan Dojo"
-	landmark_tag = "nav_ninja_start"
-
-/obj/effect/shuttle_landmark/ninja/internim
-	name = "In transit"
-	landmark_tag = "nav_ninja_transition"
-
-/obj/effect/shuttle_landmark/ninja/hanger
-	name = "West of Hanger Deck"
-	landmark_tag = "nav_ninja_hanger"
-
-/obj/effect/shuttle_landmark/ninja/deck1
-	name = "South of First Deck"
-	landmark_tag = "nav_ninja_deck1"
-
-/obj/effect/shuttle_landmark/ninja/deck2
-	name = "Northeast of Second Deck"
-	landmark_tag = "nav_ninja_deck2"
-
-/obj/effect/shuttle_landmark/ninja/deck3
-	name = "East of Third Deck"
-	landmark_tag = "nav_ninja_deck3"
-
-/obj/effect/shuttle_landmark/ninja/deck4
-	name = "West of Fourth Deck"
-	landmark_tag = "nav_ninja_deck4"
-
-/obj/effect/shuttle_landmark/ninja/deck5
-	name = "Southeast of Bridge"
-	landmark_tag = "nav_ninja_deck5"
-
 //Merchant
 
 /datum/shuttle/autodock/ferry/merchant
@@ -330,47 +267,6 @@
 
 //Merc
 
-/datum/shuttle/autodock/multi/antag/mercenary
-	name = "Mercenary"
-	warmup_time = 0
-	destination_tags = list(
-		"nav_merc_deck1",
-		"nav_merc_deck2",
-		"nav_merc_deck3",
-		"nav_merc_deck4",
-		"nav_merc_deck5",
-		"nav_merc_hanger",
-		"nav_away_5",
-		"nav_derelict_6",
-		"nav_cluster_5",
-		"nav_merc_dock",
-		"nav_merc_start",
-		"nav_lost_supply_base_antag",
-		"nav_marooned_antag",
-		"nav_smugglers_antag",
-		"nav_magshield_antag",
-		"nav_casino_antag",
-		"nav_yacht_antag",
-		"nav_slavers_base_antag",
-		)
-	shuttle_area = /area/syndicate_station/start
-	dock_target = "merc_shuttle"
-	current_location = "nav_merc_start"
-	landmark_transition = "nav_merc_transition"
-	announcer = "SEV Torch Sensor Array"
-	home_waypoint = "nav_merc_start"
-	arrival_message = "Attention, vessel detected entering vessel proximity."
-	departure_message = "Attention, vessel detected leaving vessel proximity."
-
-/obj/effect/shuttle_landmark/merc/start
-	name = "Mercenary Base"
-	landmark_tag = "nav_merc_start"
-	docking_controller = "merc_base"
-
-/obj/effect/shuttle_landmark/merc/internim
-	name = "In transit"
-	landmark_tag = "nav_merc_transition"
-
 /obj/effect/shuttle_landmark/merc/dock
 	name = "Docking Port"
 	landmark_tag = "nav_merc_dock"
@@ -400,48 +296,33 @@
 	name = "East of Bridge"
 	landmark_tag = "nav_merc_deck5"
 
+//Ninja
+
+/obj/effect/shuttle_landmark/ninja/deck1
+	name = "South of First Deck"
+	landmark_tag = "nav_ninja_deck1"
+
+/obj/effect/shuttle_landmark/ninja/deck2
+	name = "Northeast of Second Deck"
+	landmark_tag = "nav_ninja_deck2"
+
+/obj/effect/shuttle_landmark/ninja/deck3
+	name = "East of Third Deck"
+	landmark_tag = "nav_ninja_deck3"
+
+/obj/effect/shuttle_landmark/ninja/deck4
+	name = "West of Fourth Deck"
+	landmark_tag = "nav_ninja_deck4"
+
+/obj/effect/shuttle_landmark/ninja/deck5
+	name = "Southeast of Bridge"
+	landmark_tag = "nav_ninja_deck5"
+
+/obj/effect/shuttle_landmark/ninja/hanger
+	name = "West of Hangar"
+	landmark_tag = "nav_ninja_deck6"
+
 //Skipjack
-
-/datum/shuttle/autodock/multi/antag/skipjack
-	name = "Skipjack"
-	warmup_time = 0
-	destination_tags = list(
-		"nav_skipjack_deck1",
-		"nav_skipjack_deck2",
-		"nav_skipjack_deck3",
-		"nav_skipjack_deck4",
-		"nav_skipjack_deck5",
-		"nav_skipjack_hanger",
-		"nav_away_7",
-		"nav_derelict_7",
-		"nav_cluster_7",
-		"nav_skipjack_dock",
-		"nav_skipjack_start",
-		"nav_lost_supply_base_antag",
-		"nav_marooned_antag",
-		"nav_smugglers_antag",
-		"nav_magshield_antag",
-		"nav_casino_antag",
-		"nav_yacht_antag",
-		"nav_slavers_base_antag",
-		)
-	shuttle_area =  /area/skipjack_station/start
-	dock_target = "skipjack_shuttle"
-	current_location = "nav_skipjack_start"
-	landmark_transition = "nav_skipjack_transition"
-	announcer = "SEV Torch Sensor Array"
-	home_waypoint = "nav_skipjack_start"
-	arrival_message = "Attention, vessel detected entering vessel proximity."
-	departure_message = "Attention, vessel detected leaving vessel proximity."
-
-/obj/effect/shuttle_landmark/skipjack/start
-	name = "Raider Outpost"
-	landmark_tag = "nav_skipjack_start"
-	docking_controller = "skipjack_base"
-
-/obj/effect/shuttle_landmark/skipjack/internim
-	name = "In transit"
-	landmark_tag = "nav_skipjack_transition"
 
 /obj/effect/shuttle_landmark/skipjack/dock
 	name = "Docking Port"

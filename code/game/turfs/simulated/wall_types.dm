@@ -120,6 +120,9 @@
 /turf/simulated/wall/walnut/New(var/newloc)
 	..(newloc,MATERIAL_WALNUT)
 
+/turf/simulated/wall/bamboo/New(var/newloc)
+	..(newloc,MATERIAL_BAMBOO)
+
 /turf/simulated/wall/ironphoron/New(var/newloc)
 	..(newloc,MATERIAL_IRON,MATERIAL_PHORON)
 

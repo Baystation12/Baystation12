@@ -38,6 +38,8 @@ var/global/list/additional_antag_types = list()
 	var/waittime_l = 60 SECONDS				 // Lower bound on time before start of shift report
 	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
 
+	var/datum/map_template/ruin/gamemode_site                     // Antagonist spawn areas for overmap. Default to none.
+
 	//Format: list(start_animation = duration, hit_animation, miss_animation). null means animation is skipped.
 	var/cinematic_icon_states = list(
 		"intro_nuke" = 35,
@@ -202,6 +204,10 @@ var/global/list/additional_antag_types = list()
 			EMajor.delay_modifier = event_delay_mod_major
 
 /datum/game_mode/proc/pre_setup()
+	if(istype(gamemode_site)) //spawn relevant overmap template if defined
+		var/datum/map_template/ruin/R = new gamemode_site
+		R.load_new_z()
+		report_progress("Loaded gamemode away site [R.name]!")
 	for(var/datum/antagonist/antag in antag_templates)
 		antag.update_current_antag_max(src)
 		antag.build_candidate_list(src) //compile a list of all eligible candidates

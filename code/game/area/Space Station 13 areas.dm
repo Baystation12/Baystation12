@@ -183,12 +183,6 @@ area/space/atmosalert()
 	icon_state = "shuttlered2"
 	req_access = list(access_syndicate)
 
-/area/skipjack_station/start
-	name = "\improper Skipjack"
-	icon_state = "yellow"
-	req_access = list(access_syndicate)
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-
 /area/supply
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
@@ -213,12 +207,6 @@ area/space/atmosalert()
 /*
 * Special Areas
 */
-/area/wizard_station
-	name = "\improper Wizard's Den"
-	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 0
-	req_access = list(access_syndicate)
 
 /area/beach
 	name = "Keelin's private beach"

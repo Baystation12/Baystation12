@@ -37,8 +37,6 @@
 		/area/security,
 		/area/security/prison,
 		/area/security/brig,
-		/area/skipjack_station,
-		/area/skipjack_station/start,
 		/area/shuttle,
 		/area/shuttle/escape,
 		/area/shuttle/escape/centcom,
@@ -51,7 +49,6 @@
 		/area/supply,
 		/area/syndicate_mothership,
 		/area/syndicate_mothership/elite_squad,
-		/area/wizard_station,
 		/area/template_noop
 	)
 
