@@ -27,10 +27,10 @@
 	use_ranged =     TRUE
 	use_melee =      TRUE
 	min_rank =       PSI_RANK_OPERANT
-	use_description = "Target the head, eyes or mouth on disarm intent and click anywhere to use a radial attack that blinds, deafens and disorients everyone near you."
+	use_description = "Target the eyes or mouth on disarm intent and click anywhere to use a radial attack that blinds, deafens and disorients everyone near you."
 
 /decl/psionic_power/coercion/blindstrike/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.zone_sel.selecting != BP_HEAD && user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES)
+	if(user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
@@ -54,39 +54,39 @@
 		return TRUE
 
 /decl/psionic_power/coercion/mindread
-	name =            "Mindread"
+	name =            "Read Mind"
 	cost =            6
 	cooldown =        80
 	use_melee =       TRUE
 	min_rank =        PSI_RANK_OPERANT
-	associated_intent = I_HELP
-	use_description = "Target the head and click on a living subject while on help intent to attempt to read their mind."
+	use_description = "Target the head on disarm intent at melee range to attempt to read a victim's surface thoughts."
 
 /decl/psionic_power/coercion/mindread/invoke(var/mob/living/user, var/mob/living/target)
 	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
 		return FALSE
 	. = ..()
-	if(.)
-		if(target.stat == DEAD || (target.status_flags & FAKEDEATH))
-			to_chat(user, SPAN_WARNING("\The [target]'s soul has departed."))
-			return TRUE
-			
-		var/question =  input("Say something?","Mindread") as null|text
-		if(do_after(user, 20))
-			var/started_mindread = world.time
-			user.visible_message(SPAN_NOTICE("<i>\The [user] places their hand over \the [target]'s temple...</i>"))
-			if(question)
-				to_chat(target, SPAN_NOTICE("You hear echoes in your mind, <i>[question]</i>"))
-			var/question_header = (question) ? question : "What thoughts fly through your head?"
-			var/answer =  input(target, question_header,"Mindread") as null|text
-			if(world.time > started_mindread + 10 SECONDS)
-				to_chat(user, SPAN_NOTICE("You hear nothing.."))
-			else if(answer)
-				to_chat(user, SPAN_NOTICE("You hear the depths of \the [target]'s mind, <i>[answer]</i>"))
-				return TRUE									
-			if(answer)
-				to_chat(target, SPAN_NOTICE("Your thoughts return to you. It seems you were too slow."))
+	if(!.)
+		return
+
+	if(target.stat == DEAD || (target.status_flags & FAKEDEATH) || !target.client)
+		to_chat(user, SPAN_WARNING("\The [target] is in no state for a mind-ream."))
 		return TRUE
+			
+	user.visible_message(SPAN_WARNING("\The [user] touches \the [target]'s temple..."))
+	var/question =  input(user, "Say something?", "Read Mind", "Penny for your thoughts?") as null|text
+	if(!question || user.incapacitated() || !do_after(user, 20))
+		return TRUE
+
+	var/started_mindread = world.time
+	to_chat(user, SPAN_NOTICE("<b>You dip your mentality into the surface layer of \the [target]'s mind, seeking an answer: <i>[question]</i></b>"))
+	to_chat(target, SPAN_NOTICE("<b>Your mind is compelled to answer: <i>[question]</i></b>"))
+
+	var/answer =  input(target, question, "Read Mind") as null|text
+	if(!answer || world.time > started_mindread + 25 SECONDS || user.stat != CONSCIOUS || target.stat == DEAD)
+		to_chat(user, SPAN_NOTICE("<b>You receive nothing useful from \the [target].</b>"))
+	else
+		to_chat(user, SPAN_NOTICE("<b>You skim thoughts from the surface of \the [target]'s mind: <i>[answer]</i></b>"))
+	return TRUE
 
 /decl/psionic_power/coercion/agony
 	name =          "Agony"
@@ -143,10 +143,10 @@
 	cooldown =      200
 	use_grab =      TRUE
 	min_rank =      PSI_RANK_PARAMOUNT
-	use_description = "Grab a victim, target the head, then use the grab on them while on disarm intent, in order to convert them into a loyal mind-slave. The process takes some time, and failure is punished harshly."
+	use_description = "Grab a victim, target the eyes, then use the grab on them while on disarm intent, in order to convert them into a loyal mind-slave. The process takes some time, and failure is punished harshly."
 
 /decl/psionic_power/coercion/mindslave/invoke(var/mob/living/user, var/mob/living/target)
-	if(!istype(target) || user.zone_sel.selecting != BP_HEAD)
+	if(!istype(target) || user.zone_sel.selecting != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
@@ -176,10 +176,10 @@
 	cooldown =        100
 	use_grab =        TRUE
 	min_rank =        PSI_RANK_GRANDMASTER
-	use_description = "Grab a victim, target the eyes, then use the grab on them while on disarm intent, in order to perform a deep coercive-redactive probe of their innermost secrets."
+	use_description = "Grab a victim, target the head, then use the grab on them while on disarm intent, in order to perform a deep coercive-redactive probe of their innermost secrets."
 
 /decl/psionic_power/coercion/probe/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.zone_sel.selecting != BP_EYES)
+	if(user.zone_sel.selecting != BP_HEAD)
 		return FALSE
 	. = ..()
 	if(.)
