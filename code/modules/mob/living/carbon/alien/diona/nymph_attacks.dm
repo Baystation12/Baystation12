@@ -80,6 +80,8 @@
 		unEquip(holding_item)
 		if(temp)
 			temp.throw_at(A, 10, rand(3,5), src)
+		return TRUE
+	. = ..()
 
 /mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
 

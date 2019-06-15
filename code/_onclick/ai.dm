@@ -80,8 +80,10 @@
 */
 /mob/living/silicon/ai/UnarmedAttack(atom/A)
 	A.attack_ai(src)
+
 /mob/living/silicon/ai/RangedAttack(atom/A)
 	A.attack_ai(src)
+	return TRUE
 
 /atom/proc/attack_ai(mob/user as mob)
 	return

@@ -226,6 +226,9 @@
 		/datum/mob_descriptor/build = 0
 	)
 
+	var/standing_jump_range = 1
+	var/ranged_grab_distance =   0
+
 	var/list/available_cultural_info = list(
 		TAG_CULTURE =   list(CULTURE_OTHER),
 		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),

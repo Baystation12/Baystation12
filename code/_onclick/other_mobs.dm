@@ -40,7 +40,7 @@
 
 			var/area/location = get_area(loc)
 			if(location.has_gravity && !can_overcome_gravity())
-				return
+				return FALSE
 
 			visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
 			shadow.visible_message("<span class='notice'>[shadow] starts climbing onto \the [A]!</span>")
@@ -51,14 +51,14 @@
 			else
 				visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
 				shadow.visible_message("<span class='warning'>[shadow] gives up on trying to climb onto \the [A]!</span>")
-			return
+			return TRUE
 
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
 		if(istype(G) && G.Touch(A,0)) // for magic gloves
-			return
+			return TRUE
 
-	. = ..()
+	. = ..() || ((a_intent == I_GRAB || a_intent == I_DISARM) && try_ranged_maneuver(A))
 
 /mob/living/RestrainedClickOn(var/atom/A)
 	return
