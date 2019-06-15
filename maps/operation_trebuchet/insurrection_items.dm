@@ -34,12 +34,12 @@
 	density = 1
 
 /turf/simulated/hangar_door
-	icon = 'maps/insurrection/hangar_door.dmi'
+	icon = 'maps/operation_trebuchet/hangar_door.dmi'
 	icon_state = "pdoor1"
 
 /obj/structure/hangar_door
 	invisibility = 101
-	icon = 'maps/insurrection/hangar_door.dmi'
+	icon = 'maps/operation_trebuchet/hangar_door.dmi'
 	icon_state = "pdoor0"
 	density = 0
 	anchored = 1

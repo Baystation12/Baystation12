@@ -79,8 +79,9 @@
 		desc = explodedesc + " [(explode_at - world.time)/10] seconds remain."
 	if(exploding && world.time >= explode_at)
 		GLOB.processing_objects -= src
-		new explodetype(src)
+		var/explode_datum = new explodetype(src)
 		loc = null
+		qdel(explode_datum)
 		qdel(src)
 		return
 
@@ -148,7 +149,6 @@
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
-		qdel(src)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
 	radiation_repository.radiate(b.loc,1000,10000)

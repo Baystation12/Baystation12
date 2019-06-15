@@ -218,3 +218,48 @@
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
+
+//UNDERGROUND//
+/area/geminus_underground
+	name = "\improper Geminus Underground Northeast"
+	icon_state = "yellow"
+
+/area/geminus_underground/northwest
+	name = "\improper Geminus Underground Northwest"
+	icon_state = "blueold"
+
+/area/geminus_underground/north
+	name = "\improper Geminus Underground North"
+	icon_state = "dark"
+
+/area/geminus_underground/southwest
+	name = "\improper Geminus Underground South"
+	icon_state = "purple"
+
+/area/geminus_underground/south
+	name = "\improper Geminus Underground South"
+	icon_state = "red"
+
+/area/geminus_underground/southeast
+	name = "\improper Geminus Underground South"
+	icon_state = "green"
+
+/area/geminus_underground/innie
+	name = "\improper Geminus Insurrection Base Alpha Sector"
+	icon_state = "red"
+
+/area/geminus_underground/innie/bravo
+	name = "\improper Geminus Insurrection Base Bravo Sector"
+	icon_state = "purple"
+
+/area/geminus_underground/innie/charlie
+	name = "\improper Geminus Insurrection Base Charlie Sector"
+	icon_state = "green"
+
+/area/geminus_underground/innie/delta
+	name = "\improper Geminus Insurrection Base Delta Sector"
+	icon_state = "yellow"
+
+/area/geminus_underground/innie/echo
+	name = "\improper Geminus Insurrection Base Echo Sector"
+	icon_state = "blueold"

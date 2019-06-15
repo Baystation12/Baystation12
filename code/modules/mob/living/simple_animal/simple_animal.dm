@@ -25,6 +25,7 @@
 	universal_speak = 0		//No, just no.
 	var/meat_amount = 0
 	var/meat_type
+	var/list/harvest_products = list()
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = 1	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
@@ -64,6 +65,15 @@
 	var/list/pain_scream_sounds = list()
 	var/list/death_sounds = list()
 
+	var/respawning = 0
+	var/respawn_time = 5 MINUTES
+	var/turf/spawn_turf
+
+/mob/living/simple_animal/New()
+	. = ..()
+	if(respawning)
+		spawn_turf = get_turf(src)
+
 /mob/living/simple_animal/Life()
 	..()
 
@@ -74,6 +84,10 @@
 			switch_from_dead_to_living_mob_list()
 			set_stat(CONSCIOUS)
 			set_density(1)
+		else if(respawning)
+			if(world.time > timeofdeath + respawn_time)
+				health = maxHealth
+				src.forceMove(spawn_turf)
 		return 0
 
 
@@ -235,7 +249,7 @@
 		else
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
 		return
-	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
+	if((meat_type || harvest_products.len) && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
 	else
@@ -278,10 +292,11 @@
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
-/mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
+/mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message = 1)
+	timeofdeath = world.time
 	icon_state = icon_dead
 	density = 0
-	adjustBruteLoss(maxHealth) //Make sure dey dead.
+	//adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
 	if(death_sounds.len > 0)
 		playsound(loc, pick(death_sounds),75,0,7)
@@ -351,6 +366,10 @@
 
 // Harvest an animal's delicious byproducts
 /mob/living/simple_animal/proc/harvest(var/mob/user)
+
+	for(var/harvest_type in harvest_products)
+		new harvest_type(get_turf(src))
+
 	var/actual_meat_amount = max(1,(meat_amount/2))
 	if(meat_type && actual_meat_amount>0 && (stat == DEAD))
 		for(var/i=0;i<actual_meat_amount;i++)
@@ -373,3 +392,9 @@
 	return
 /mob/living/simple_animal/ExtinguishMob()
 	return
+
+/mob/living/simple_animal/updatehealth()
+	. = ..()
+	if(health <= 0)
+		death()
+		return

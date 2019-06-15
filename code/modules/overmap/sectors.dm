@@ -3,6 +3,8 @@
 //===================================================================================
 GLOBAL_LIST_EMPTY(overmap_tiles_uncontrolled) //This is any overmap sectors that are uncontrolled by any faction
 
+GLOBAL_LIST_EMPTY(overmap_spawn_near)
+
 var/list/points_of_interest = list()
 
 /obj/effect/overmap
@@ -13,7 +15,6 @@ var/list/points_of_interest = list()
 	var/list/map_z_data = list()
 	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 	var/weapon_miss_chance = 0
-	var hit // for icon changes  when damaged
 
 	//This is a list used by overmap projectiles to ensure they actually hit somewhere on the ship. This should be set so projectiles can narrowly miss, but not miss by much.
 	var/list/map_bounds = list(1,255,255,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
@@ -47,6 +48,8 @@ var/list/points_of_interest = list()
 	//this is used for when we need to iterate over an entire sector's areas
 	var/parent_area_type
 
+	var/list/overmap_spawn_near_me = list()	//type path of other overmap objects to spawn near this object
+
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
 	if(name == "map object")
@@ -62,8 +65,49 @@ var/list/points_of_interest = list()
 	. = ..()
 
 /obj/effect/overmap/Initialize()
-	. = ..()
+	..()
+
+	for(var/entry in overmap_spawn_near_me)
+		GLOB.overmap_spawn_near[entry] = src
+
 	setup_object()
+	generate_targetable_areas()
+
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/overmap/LateInitialize()
+	var/obj/effect/overmap/summoning_me = GLOB.overmap_spawn_near[src.type]
+	if(summoning_me)
+		var/list/spawn_locs = list()
+		for(var/turf/t in orange(1,summoning_me))
+			spawn_locs += t
+		src.forceMove(pick(spawn_locs))
+		GLOB.overmap_spawn_near -= src.type
+
+/obj/effect/overmap/proc/generate_targetable_areas()
+	if(isnull(parent_area_type))
+		return
+	var/list/areas_scanthrough = typesof(parent_area_type) - parent_area_type
+	if(areas_scanthrough.len == 0)
+		return
+	for(var/a in areas_scanthrough)
+		var/area/located_area = locate(a)
+		if(isnull(located_area))
+			continue
+		var/low_x = 255
+		var/upper_x = 0
+		var/low_y = 255
+		var/upper_y = 0
+		for(var/turf/t in located_area.contents)
+			if(t.x < low_x)
+				low_x = t.x
+			if(t.y < low_y)
+				low_y = t.y
+			if(t.x > upper_x)
+				upper_x = t.x
+			if(t.y > upper_y)
+				upper_y = t.x
+		targeting_locations["[located_area.name]"] = list(low_x,upper_y,upper_x,low_y)
 
 /obj/effect/overmap/proc/get_superstructure_strength() //Returns a decimal percentage calculated from currstrength/maxstrength
 	var/list/hull_strengths = list(0,0)
@@ -227,12 +271,6 @@ var/list/points_of_interest = list()
 	GLOB.processing_objects += src
 	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		H.get_known_sectors()
-
-/obj/effect/overmap/sector/process()
-	. = ..()
-	if(15<=hit)
-		src.icon_state="bombed"
-
 
 /obj/effect/overmap/proc/adminwarn_attack(var/attacker)
 	if(world.time > last_adminwarn_attack + 1 MINUTE)
