@@ -20,8 +20,8 @@
 	var/polarized = 0
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
-	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
-	noblend_objects = list(/obj/machinery/door/window)
+	blend_atoms = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
+	noblend_atoms = list(/obj/machinery/door/window)
 
 	atmos_canpass = CANPASS_PROC
 
@@ -410,20 +410,20 @@
 
 	var/image/I
 	icon_state = ""
-	if(is_on_frame())
-		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
-				I = image(icon, "[basestate]_other_onframe[connections[i]]", dir = 1<<(i-1))
-			else
-				I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
-			overlays += I
-	else
-		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
-				I = image(icon, "[basestate]_other[connections[i]]", dir = 1<<(i-1))
-			else
-				I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
-			overlays += I
+	for(var/i = 1 to 4)
+		if(is_on_frame())
+			I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
+		else
+			I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
+		overlays += I
+	for(var/i in edge_connections)
+		if(is_on_frame())
+			I = image(icon, "[basestate]_onframe_edge", dir = i)
+		else
+			I = image(icon, "[basestate]_edge", dir = i)
+		I.pixel_z = 32
+		//I.plane = ABOVE_HUMAN_PLANE
+		overlays += I
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	var/melting_point = material.melting_point

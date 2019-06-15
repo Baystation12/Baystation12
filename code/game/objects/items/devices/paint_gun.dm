@@ -81,7 +81,22 @@
 
 	var/turf/simulated/wall/W = A
 	if(istype(W))
-		W.paint_color = paint_colour
+		if(!W.paintable)
+			to_chat(user, "<span class='warning'>You can't paint this wall type.</span>")
+			return
+		var/choice
+		if(W.paintable == PAINT_PAINTABLE)
+			choice = "Paint"
+		else if(W.paintable == PAINT_STRIPABLE)
+			choice = "Stripe"
+		else if(W.paintable == PAINT_PAINTABLE|PAINT_STRIPABLE)
+			choice = input(user, "What do you wish to paint?") as null|anything in list("Paint","Stripe")
+		if(user.incapacitated())
+			return
+		if(choice == "Paint")
+			W.paint_color = paint_colour
+		else if(choice == "Stripe")
+			W.stripe_color = paint_colour
 		W.update_icon()
 		return
 
@@ -97,11 +112,11 @@
 		if(!D.paintable)
 			to_chat(user, "<span class='warning'>You can't paint this airlock type.</span>")
 			return
-		if(D.paintable == AIRLOCK_PAINTABLE)
+		if(D.paintable == PAINT_PAINTABLE)
 			choice = "Paint"
-		else if(D.paintable == AIRLOCK_STRIPABLE)
+		else if(D.paintable == PAINT_STRIPABLE)
 			choice = "Stripe"
-		else if(D.paintable == AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE)
+		else if(D.paintable == PAINT_PAINTABLE|PAINT_STRIPABLE)
 			choice = input(user, "What do you wish to paint?") as null|anything in list("Paint","Stripe")
 		if(user.incapacitated())
 			return

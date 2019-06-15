@@ -7,8 +7,9 @@
 	var/parts
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/other_connections = list("0", "0", "0", "0")
-	var/list/blend_objects = newlist() // Objects which to blend with
-	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
+	var/list/edge_connections = list()
+	var/list/blend_atoms = newlist() // Objects which to blend with
+	var/list/noblend_atoms = newlist() //Objects to avoid blending with (such as children of listed blend objects.
 	var/material/material = null
 	var/footstep_type
 
@@ -130,7 +131,7 @@
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
-		for(var/b_type in blend_objects)
+		for(var/b_type in blend_atoms)
 			if(istype(T, b_type))
 				success = 1
 				if(propagate)
@@ -144,13 +145,13 @@
 				break
 		if(!success)
 			for(var/obj/O in T)
-				for(var/b_type in blend_objects)
+				for(var/b_type in blend_atoms)
 					if(istype(O, b_type))
 						success = 1
 						for(var/obj/structure/S in T)
 							if(istype(S, src))
 								success = 0
-						for(var/nb_type in noblend_objects)
+						for(var/nb_type in noblend_atoms)
 							if(istype(O, nb_type))
 								success = 0
 
@@ -165,3 +166,4 @@
 
 	connections = dirs_to_corner_states(dirs)
 	other_connections = dirs_to_corner_states(other_dirs)
+	edge_connections = other_dirs

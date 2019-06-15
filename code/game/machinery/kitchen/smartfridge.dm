@@ -224,7 +224,7 @@
 	// Fridge top
 	I = image(icon, "[icon_base]-top")
 	I.pixel_z = 32
-	I.layer = ABOVE_WINDOW_LAYER
+	I.plane = ABOVE_HUMAN_PLANE
 	overlays += I
 
 /*******************

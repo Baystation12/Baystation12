@@ -143,3 +143,6 @@ Weapons
 
 /obj/effect/paint/expeditionary
 	color = "#68099e"
+
+/obj/effect/paint/torch
+	color = COLOR_WALL_GUNMETAL

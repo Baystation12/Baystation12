@@ -9,10 +9,6 @@
 #define AIRLOCK_DENY	5
 #define AIRLOCK_EMAG	6
 
-#define AIRLOCK_PAINTABLE 1
-#define AIRLOCK_STRIPABLE 2
-#define AIRLOCK_DETAILABLE 4
-
 var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock
@@ -70,10 +66,9 @@ var/list/airlock_overlays = list()
 	//The variables below determine what color the airlock and decorative stripes will be -Cakey
 	var/airlock_type = "Standard"
 	var/global/list/airlock_icon_cache = list()
-	var/paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE //0 = Not paintable, 1 = Paintable, 3 = Paintable and Stripable, 7 for Paintable, Stripable and Detailable.
+	var/paintable = PAINT_PAINTABLE|PAINT_STRIPABLE //0 = Not paintable, 1 = Paintable, 3 = Paintable and Stripable
 	var/door_color = null
 	var/stripe_color = null
-	var/symbol_color = null
 
 	var/fill_file = 'icons/obj/doors/station/fill_steel.dmi'
 	var/color_file = 'icons/obj/doors/station/color.dmi'
@@ -237,7 +232,7 @@ var/list/airlock_overlays = list()
 	emag_file = 'icons/obj/doors/external/emag.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 	door_color = COLOR_NT_RED
-	paintable = AIRLOCK_PAINTABLE
+	paintable = PAINT_PAINTABLE
 
 /obj/machinery/door/airlock/external/inherit_access_from_area()
 	..()
@@ -336,7 +331,7 @@ var/list/airlock_overlays = list()
 	name = "\improper Airlock"
 	icon = 'icons/obj/doors/centcomm/door.dmi'
 	fill_file = 'icons/obj/doors/centcomm/fill_steel.dmi'
-	paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE
+	paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
 
 /obj/machinery/door/airlock/highsecurity
 	airlock_type = "secure"
@@ -367,7 +362,7 @@ var/list/airlock_overlays = list()
 	explosion_resistance = 20
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_hatch
-	paintable = AIRLOCK_STRIPABLE
+	paintable = PAINT_STRIPABLE
 
 /obj/machinery/door/airlock/hatch/maintenance
 	name = "Maintenance Hatch"
@@ -385,7 +380,7 @@ var/list/airlock_overlays = list()
 	opacity = 1
 	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
-	paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE
+	paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
 
 /obj/machinery/door/airlock/vault/bolted
 	locked = 1
@@ -1176,7 +1171,6 @@ About the new airlock wires panel:
 	da.paintable = paintable
 	da.door_color = door_color
 	da.stripe_color = stripe_color
-	da.symbol_color = symbol_color
 
 	if(moved)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -1349,7 +1343,6 @@ About the new airlock wires panel:
 			paintable = assembly.paintable
 			door_color = assembly.door_color
 			stripe_color = assembly.stripe_color
-			symbol_color = assembly.symbol_color
 		queue_icon_update()
 
 	//wires

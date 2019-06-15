@@ -1,9 +1,10 @@
 //Commonly used
 /turf/simulated/wall/prepainted
-	paint_color = COLOR_GUNMETAL
-
+	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_GUNMETAL
 /turf/simulated/wall/r_wall/prepainted
-	paint_color = COLOR_GUNMETAL
+	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_GUNMETAL
 
 /turf/simulated/wall/r_wall
 	icon_state = "r_generic"
@@ -14,11 +15,7 @@
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
 	color = COLOR_HULL
-
-/turf/simulated/wall/prepainted
-	paint_color = COLOR_WALL_GUNMETAL
-/turf/simulated/wall/r_wall/prepainted
-	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_HULL
 
 /turf/simulated/wall/r_wall/hull/Initialize()
 	. = ..()
@@ -39,18 +36,23 @@
 
 /turf/simulated/wall/titanium
 	icon_state = "titanium"
+	paintable = PAINT_PAINTABLE
 
 /turf/simulated/wall/titanium/New(var/newloc)
 	..(newloc,MATERIAL_TITANIUM)
 
 /turf/simulated/wall/r_titanium
 	icon_state = "r_titanium"
+	paintable = 0
 
 /turf/simulated/wall/r_titanium/New(var/newloc)
 	..(newloc, MATERIAL_TITANIUM,MATERIAL_TITANIUM)
 
 /turf/simulated/wall/ocp_wall
 	icon_state = "r_ocp"
+	paintable = 0
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony, /turf/simulated/wall)
+
 
 /turf/simulated/wall/ocp_wall/New(var/newloc)
 	..(newloc, MATERIAL_OSMIUM_CARBIDE_PLASTEEL, MATERIAL_OSMIUM_CARBIDE_PLASTEEL)
@@ -145,7 +147,8 @@
 /turf/simulated/wall/alium
 	icon_state = "jaggy"
 	floor_type = /turf/simulated/floor/fixed/alium
-	list/blend_objects = newlist()
+	list/blend_atoms = newlist()
+	paintable = 0
 
 /turf/simulated/wall/alium/New(var/newloc)
 	..(newloc,MATERIAL_ALIENALLOY)
@@ -159,6 +162,7 @@
 /turf/simulated/wall/cult
 	icon_state = "cult"
 	blend_turfs = list(/turf/simulated/wall)
+	paintable = 0
 
 /turf/simulated/wall/cult/New(var/newloc, var/reinforce = 0)
 	..(newloc, MATERIAL_CULT, reinforce ? MATERIAL_REINFORCED_CULT : null)

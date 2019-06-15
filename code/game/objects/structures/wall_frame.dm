@@ -15,10 +15,9 @@
 
 	var/health = 100
 	var/paint_color
-	var/stripe_color
 
-	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
-	noblend_objects = list(/obj/machinery/door/window)
+	blend_atoms = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
+	noblend_atoms = list(/obj/machinery/door/window)
 	material = DEFAULT_WALL_MATERIAL
 
 /obj/structure/wall_frame/New(var/new_loc, var/materialtype)
@@ -39,17 +38,17 @@
 		return
 
 	if(health == material.integrity)
-		to_chat(user, "<span class='notice'>It seems to be in fine condition.</span>")
+		to_chat(user, SPAN_NOTICE("It seems to be in fine condition."))
 	else
 		var/dam = health / material.integrity
 		if(dam <= 0.3)
-			to_chat(user, "<span class='notice'>It's got a few dents and scratches.</span>")
+			to_chat(user, SPAN_NOTICE("It's got a few dents and scratches."))
 		else if(dam <= 0.7)
-			to_chat(user, "<span class='warning'>A few pieces of panelling have fallen off.</span>")
+			to_chat(user, SPAN_WARNING("A few pieces of panelling have fallen off."))
 		else
-			to_chat(user, "<span class='danger'>It's nearly falling to pieces.</span>")
+			to_chat(user, SPAN_DANGER("It's nearly falling to pieces."))
 	if(paint_color)
-		to_chat(user, "<span class='notice'>It has a smooth coat of paint applied.</span>")
+		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
 /obj/structure/wall_frame/attackby(var/obj/item/weapon/W, var/mob/user)
 	src.add_fingerprint(user)
@@ -58,7 +57,7 @@
 	if(istype(W, /obj/item/stack/material/rods))
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == get_dir(src, user))
-				to_chat(user, "<span class='notice'>There is a window in the way.</span>")
+				to_chat(user, SPAN_NOTICE("There is a window in the way."))
 				return
 		place_grille(user, loc, W)
 		return
@@ -73,24 +72,24 @@
 	if(isWrench(W))
 		for(var/obj/structure/S in loc)
 			if(istype(S, /obj/structure/window))
-				to_chat(user, "<span class='notice'>There is still a window on the low wall!</span>")
+				to_chat(user, SPAN_NOTICE("There is still a window on the low wall!"))
 				return
 			else if(istype(S, /obj/structure/grille))
-				to_chat(user, "<span class='notice'>There is still a grille on the low wall!</span>")
+				to_chat(user, SPAN_NOTICE("There is still a grille on the low wall!"))
 				return
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now disassembling the low wall...</span>")
+		to_chat(user, SPAN_NOTICE("Now disassembling the low wall..."))
 		if(do_after(user, 40,src))
-			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
+			to_chat(user, SPAN_NOTICE("You dissasembled the low wall!"))
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
 		cutter.slice(user)
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now slicing through the low wall...</span>")
+		to_chat(user, SPAN_NOTICE("Now slicing through the low wall..."))
 		if(do_after(user, 20,src))
-			to_chat(user, "<span class='warning'>You have sliced through the low wall!</span>")
+			to_chat(user, SPAN_WARNING("You have sliced through the low wall!"))
 			dismantle()
 	return ..()
 
@@ -106,25 +105,28 @@
 /obj/structure/wall_frame/on_update_icon()
 	overlays.Cut()
 	var/image/I
-
 	var/new_color = (paint_color ? paint_color : material.icon_colour)
-	color = new_color
 
 	for(var/i = 1 to 4)
-		if(other_connections[i] != "0")
-			I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = 1<<(i-1))
-		else
-			I = image('icons/obj/wall_frame.dmi', "frame[connections[i]]", dir = 1<<(i-1))
+		//if(other_connections[i] != "0")
+		//	I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = 1<<(i-1))
+		//else
+		I = image('icons/obj/wall_frame.dmi', "frame[connections[i]]", dir = 1<<(i-1))
+		I.color = new_color
+		overlays += I
+	for(var/i in edge_connections)
+		// outer edge
+		I = image('icons/obj/wall_frame.dmi', "frame_edge", dir = i)
+		I.pixel_z = 32
+		//I.plane = ABOVE_HUMAN_PLANE
+		I.color = new_color
 		overlays += I
 
-	if(stripe_color)
-		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
-				I = image('icons/obj/wall_frame.dmi', "stripe_other[connections[i]]", dir = 1<<(i-1))
-			else
-				I = image('icons/obj/wall_frame.dmi', "stripe[connections[i]]", dir = 1<<(i-1))
-			I.color = stripe_color
-			overlays += I
+		// inner edge
+		I = image('icons/obj/wall_frame.dmi', "frame_inner", dir = i)
+		I.layer = ABOVE_WINDOW_LAYER
+		I.color = new_color
+		overlays += I
 
 /obj/structure/wall_frame/hull/Initialize()
 	. = ..()
@@ -168,7 +170,7 @@
 
 //Subtypes
 /obj/structure/wall_frame/standard
-	paint_color = COLOR_WALL_GUNMETAL
+	paint_color = COLOR_GUNMETAL
 
 /obj/structure/wall_frame/titanium
 	material = MATERIAL_TITANIUM

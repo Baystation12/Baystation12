@@ -84,3 +84,7 @@
 #define USE_MATERIAL_COLOR 				0x1
 #define USE_MATERIAL_SINGULAR_NAME    	0x2
 #define USE_MATERIAL_PLURAL_NAME    	0x4
+
+//Paint flags
+#define PAINT_PAINTABLE 1
+#define PAINT_STRIPABLE 2

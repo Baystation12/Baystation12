@@ -68,7 +68,7 @@
 			success = 1
 		else
 			for(var/obj/O in T)
-				for(var/b_type in blend_objects)
+				for(var/b_type in blend_atoms)
 					if( istype(O, b_type))
 						success = 1
 

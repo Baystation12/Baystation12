@@ -46,7 +46,7 @@
 	overlays.Cut()
 
 	var/image/I
-	var/base_color = paint_color ? paint_color : material.icon_colour
+	var/base_color = material.icon_colour
 	if(!density)
 		I = image('icons/turf/wall_masks.dmi', "[material.icon_base]fwall_open")
 		I.color = base_color
@@ -57,9 +57,16 @@
 		I = image('icons/turf/wall_masks.dmi', "[material.icon_base][wall_connections[i]]", dir = 1<<(i-1))
 		I.color = base_color
 		overlays += I
-		if(other_connections[i] != "0")
-			I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
-			I.color = base_color
+		if(paint_color)
+			if("[material.icon_base]_paint0" in icon_states('icons/turf/wall_masks.dmi'))
+				I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_paint[wall_connections[i]]", dir = 1<<(i-1))
+			else
+				I = image('icons/turf/wall_masks.dmi', "[material.icon_base][wall_connections[i]]", dir = 1<<(i-1))
+			I.color = paint_color
+			overlays += I
+		if(stripe_color && "[material.icon_base]_stripe0" in icon_states('icons/turf/wall_masks.dmi'))
+			I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_stripe[wall_connections[i]]", dir = 1<<(i-1))
+			I.color = stripe_color
 			overlays += I
 
 	if(reinf_material)
@@ -80,14 +87,34 @@
 				I.color = reinf_color
 				overlays += I
 
-	if(stripe_color)
-		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
-				I = image('icons/turf/wall_masks.dmi', "stripe_other[wall_connections[i]]", dir = 1<<(i-1))
-			else
-				I = image('icons/turf/wall_masks.dmi', "stripe[wall_connections[i]]", dir = 1<<(i-1))
+	for(var/i in edge_connections)
+		I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_edge", dir = i)
+		I.pixel_z = 32
+		I.plane = ABOVE_HUMAN_PLANE
+		I.color = base_color
+		overlays += I
+		if(paint_color)
+			I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_edge", dir = i)
+			I.pixel_z = 32
+			I.plane = ABOVE_HUMAN_PLANE
+			I.color = paint_color
+			overlays += I
+		if(stripe_color)
+			I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_edge_stripe", dir = i)
+			I.pixel_z = 32
+			I.plane = ABOVE_HUMAN_PLANE
 			I.color = stripe_color
 			overlays += I
+		if(reinf_material)
+			I = image('icons/turf/wall_masks.dmi', "[reinf_material.icon_reinf]_edge", dir = i)
+			I.pixel_z = 32
+			I.plane = ABOVE_HUMAN_PLANE
+			I.color = paint_color ? paint_color : reinf_material.icon_colour
+			overlays += I
+
+		I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_inner", dir = i)
+		I.color = paint_color ? paint_color : base_color
+		overlays += I
 
 	if(damage != 0)
 		var/integrity = material.integrity
@@ -121,11 +148,8 @@
 		switch(can_join_with(W))
 			if(0)
 				continue
-			if(1)
+			if(1 to 2)
 				wall_dirs += get_dir(src, W)
-			if(2)
-				wall_dirs += get_dir(src, W)
-				other_dirs += get_dir(src, W)
 		if(propagate)
 			W.update_connections()
 			W.update_icon()
@@ -133,10 +157,10 @@
 	for(var/turf/T in orange(src, 1))
 		var/success = 0
 		for(var/obj/O in T)
-			for(var/b_type in blend_objects)
+			for(var/b_type in blend_atoms)
 				if(istype(O, b_type))
 					success = 1
-				for(var/nb_type in noblend_objects)
+				for(var/nb_type in noblend_atoms)
 					if(istype(O, nb_type))
 						success = 0
 				if(success)
@@ -151,6 +175,7 @@
 
 	wall_connections = dirs_to_corner_states(wall_dirs)
 	other_connections = dirs_to_corner_states(other_dirs)
+	edge_connections = other_dirs
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
 	if(material && W.material && material.icon_base == W.material.icon_base)
