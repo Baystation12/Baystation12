@@ -1078,6 +1078,10 @@
 	name = "\improper Fourth Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
+/area/security/oldopscheck
+	name = "\improper Deactivated Security Checkpoint"
+	icon_state = "checkpoint"
+
 // AI
 /area/turret_protected/ai_foyer
 	name = "\improper AI Chamber Foyer"
@@ -1102,7 +1106,11 @@
 /area/medical/infirmary
 	name = "\improper Infirmary Hallway"
 	icon_state = "medbay"
-	req_access = list(list(access_medical, access_morgue))
+	req_access = list(access_medical)
+
+/area/medical/infirmary/annex
+	name = "\improper Infirmary Annex"
+	color = COLOR_ALUMINIUM
 
 /area/medical/infirmreception
 	name = "\improper Infirmary Reception"
@@ -1119,17 +1127,12 @@
 	name = "\improper Sub-Acute Ward"
 	icon_state = "patients"
 
-/area/medical/mentalhealth
-	name = "\improper Chaplain's Office"
-	icon_state = "medbay3"
-	ambience = list('sound/ambience/signal.ogg')
-	req_access = list(access_chapel_office)
-
 /area/medical/counselor
 	name = "\improper Counselor's Office"
 	icon_state = "medbay3"
 	ambience = list('sound/ambience/signal.ogg')
 	req_access = list(access_psychiatrist)
+	sound_env = SMALL_SOFTFLOOR
 
 /area/medical/washroom
 	name = "\improper Infirmary Washroom"
@@ -1513,6 +1516,10 @@
 	ambience = list('sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg','sound/music/main.ogg')
 	req_access = list(access_morgue)
 
+/area/medical/morgue/autopsy
+	name = "\improper Autopsy"
+	icon_state = "autopsy"
+
 /area/medical/sleeper
 	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
@@ -1526,11 +1533,6 @@
 	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
 	req_access = list(list(access_surgery, access_robotics_engineering))
-
-/area/medical/autopsy
-	name = "\improper Autopsy"
-	icon_state = "autopsy"
-	req_access = list(access_morgue)
 
 // Research
 /area/assembly

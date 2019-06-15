@@ -9844,6 +9844,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"vm" = (
+/obj/machinery/door/airlock/chaplain{
+	name = "Chapel"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/chapel/main)
 "vn" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10309,6 +10316,9 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/chapel/main)
 "wu" = (
@@ -10328,14 +10338,17 @@
 /area/crew_quarters/galley)
 "wz" = (
 /obj/item/modular_computer/console/preset/civilian/professional,
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "wA" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/structure/flora/pottedplant/flower,
-/turf/simulated/floor/carpet,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "wB" = (
 /obj/machinery/firealarm{
@@ -10771,7 +10784,7 @@
 /turf/simulated/floor/plating,
 /area/chapel/office)
 "xy" = (
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "xz" = (
 /obj/effect/floor_decal/corner/yellow/half{
@@ -11261,13 +11274,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "yC" = (
 /obj/structure/table/woodentable/maple,
 /obj/item/weapon/paper_bin,
 /obj/item/weapon/pen,
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "yD" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -12453,7 +12466,7 @@
 	pixel_y = 0
 	},
 /obj/structure/bed/chair/wood/maple,
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "BV" = (
 /turf/simulated/wall/r_wall/hull,
@@ -12734,6 +12747,18 @@
 /obj/effect/floor_decal/spline/fancy/black,
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
+"CL" = (
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Chapel";
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 0
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/chapel/main)
 "CM" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
@@ -12752,7 +12777,7 @@
 	pixel_y = 0
 	},
 /obj/structure/table/woodentable/maple,
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "CO" = (
 /obj/machinery/door/firedoor/border_only,
@@ -13746,7 +13771,7 @@
 	icon_state = "wooden_chair_preview";
 	dir = 1
 	},
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/main)
 "Fm" = (
 /obj/machinery/power/port_gen/pacman,
@@ -15635,6 +15660,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
+	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/chapel/office)
 "JS" = (
@@ -16963,7 +16993,7 @@
 /area/maintenance/thirddeck/port)
 "Nm" = (
 /obj/structure/table/woodentable/maple,
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "Nn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -17052,7 +17082,7 @@
 	dir = 4
 	},
 /obj/structure/table/woodentable/maple,
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/main)
 "NA" = (
 /obj/effect/floor_decal/industrial/warning/fulltile,
@@ -17378,7 +17408,7 @@
 	pixel_x = 6;
 	pixel_y = 24
 	},
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "OH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -17411,7 +17441,7 @@
 	icon_state = "officechair_preview";
 	dir = 1
 	},
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "OM" = (
 /obj/structure/cable/green{
@@ -17553,8 +17583,7 @@
 /area/maintenance/thirddeck/starboard)
 "Pg" = (
 /obj/structure/closet/secure_closet/counselor,
-/obj/item/device/taperecorder,
-/turf/simulated/floor/carpet,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "Ph" = (
 /obj/machinery/light{
@@ -19032,6 +19061,10 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Chapel - Chaplain's Office";
+	dir = 4
+	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/chapel/office)
 "TZ" = (
@@ -20492,7 +20525,10 @@
 	pixel_x = 6;
 	pixel_y = -24
 	},
-/turf/simulated/floor/carpet,
+/obj/structure/table/woodentable/maple,
+/obj/item/sticky_pad,
+/obj/item/device/taperecorder,
+/turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "XX" = (
 /obj/structure/cable/green{
@@ -44911,7 +44947,7 @@ wt
 xs
 yv
 zr
-Ag
+CL
 AV
 BO
 CI
@@ -45925,7 +45961,7 @@ lQ
 Ag
 Ag
 Ag
-RG
+vm
 FZ
 Bc
 Bc
