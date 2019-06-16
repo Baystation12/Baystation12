@@ -221,7 +221,7 @@
 
 /obj/item/weapon/gun/energy/plasmacutter/Initialize()
 	. = ..()
-	src.spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
@@ -229,7 +229,11 @@
 	QDEL_NULL(spark_system)
 	return ..()
 
-/obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)//makes spark and eyecheck for deconstructing things
-	src.spark_system.start()
-	if(M)
-		M.welding_eyecheck()
+/obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
+	if(power_supply.checked_use(charge_cost/2)) //consumes half a shot per use
+		if(M)//makes spark and eyecheck for deconstructing things
+			M.welding_eyecheck()
+		spark_system.start()
+		return 1
+	handle_click_empty(M)
+	return 0

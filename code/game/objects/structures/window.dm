@@ -273,10 +273,11 @@
 		return
 	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) && anchored)
 		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
-		cutter.slice(user)
+		if(!cutter.slice(user))
+			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
 		visible_message("<span class='notice'>[user] has started slicing through the window's frame!</span>")
-		if(do_after(user,30,src))
+		if(do_after(user,20,src))
 			visible_message("<span class='warning'>[user] has sliced through the window's frame!</span>")
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0

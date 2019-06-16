@@ -86,7 +86,8 @@
 
 	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
-		cutter.slice(user)
+		if(!cutter.slice(user))
+			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing through the low wall...</span>")
 		if(do_after(user, 20,src))
