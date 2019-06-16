@@ -395,6 +395,6 @@
 
 /mob/living/simple_animal/updatehealth()
 	. = ..()
-	if(health <= 0)
+	if(health <= 0 && stat != DEAD)
 		death()
 		return
