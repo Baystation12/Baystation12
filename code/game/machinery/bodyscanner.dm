@@ -66,6 +66,7 @@
 			return
 		if(default_part_replacement(user, G))
 			return
+		return
 	var/mob/M = G.affecting
 	if(!user_can_move_target_inside(M, user))
 		return
