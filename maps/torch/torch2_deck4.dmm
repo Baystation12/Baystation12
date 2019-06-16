@@ -1378,10 +1378,6 @@
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 4
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Mess Hall - Officer's Mess";
-	dir = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
 "eB" = (
@@ -1479,10 +1475,6 @@
 /area/maintenance/fourthdeck/starboard)
 "eX" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck - Starboard Escape Pods";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/green/half{
@@ -2975,10 +2967,6 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck - Pathfinder's Office";
-	dir = 1
-	},
 /turf/simulated/floor/tiled,
 /area/command/pathfinder)
 "ki" = (
@@ -3192,6 +3180,10 @@
 	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck Hallway - Ladders";
+	dir = 2
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/aft)
@@ -4033,10 +4025,6 @@
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
-	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck Hallway - Fore Starboard";
-	dir = 1
 	},
 /obj/effect/floor_decal/corner/red,
 /obj/effect/floor_decal/corner/white{
@@ -5390,10 +5378,6 @@
 	dir = 4;
 	pixel_x = 26
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck Hallway - Primary Docking Port";
-	dir = 8
-	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/fore)
@@ -6156,10 +6140,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck Hallway - Tool Storage";
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/storage/primary)
 "tZ" = (
@@ -6452,10 +6432,6 @@
 	pixel_x = 24
 	},
 /obj/structure/cable/green,
-/obj/machinery/camera/network/supply{
-	c_tag = "Flight Control Tower";
-	dir = 8
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/flightcontrol)
 "uH" = (
@@ -7173,9 +7149,6 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/obj/machinery/camera/network/security{
-	c_tag = "Fourth Deck - Security Checkpoint"
-	},
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
 	dir = 1
@@ -7484,10 +7457,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
-	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck Hallway - Fore Port";
-	dir = 2
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -8085,10 +8054,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck Hallway - Port";
-	dir = 4
-	},
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -8262,10 +8227,6 @@
 /obj/random_multi/single_item/boombox,
 /obj/effect/floor_decal/corner/red/mono,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/camera/network/security{
-	c_tag = "Checkpoint - Deck Four";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "AO" = (
@@ -9128,16 +9089,6 @@
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
-"EW" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck - Lounge Aft";
-	name = "security camera"
-	},
-/turf/simulated/floor/carpet,
-/area/crew_quarters/lounge)
 "EY" = (
 /obj/item/weapon/paper_bin,
 /obj/structure/table/woodentable,
@@ -9810,10 +9761,6 @@
 "Hn" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
-	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck Hallway - Ladders";
-	dir = 2
 	},
 /obj/machinery/newscaster{
 	pixel_y = 32
@@ -12405,10 +12352,6 @@
 /obj/item/weapon/storage/box/detergent{
 	pixel_x = -3
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Laundry Room";
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 22;
@@ -13536,10 +13479,6 @@
 /obj/machinery/photocopier/faxmachine{
 	department = "Quartermaster's Office"
 	},
-/obj/machinery/camera/network/supply{
-	c_tag = "Supply Office - Deck Officer";
-	dir = 8
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckchief)
 "Si" = (
@@ -13960,12 +13899,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
-"SY" = (
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck - Adherent Maintenance"
-	},
-/turf/simulated/floor/crystal,
-/area/crew_quarters/adherent)
 "Ta" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14569,10 +14502,6 @@
 	pixel_y = 7
 	},
 /obj/item/weapon/pen,
-/obj/machinery/camera/network/supply{
-	c_tag = "Supply Office - Desk";
-	dir = 8
-	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "UJ" = (
@@ -15546,16 +15475,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
-"Xt" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck - Lounge Fore";
-	name = "security camera"
-	},
-/turf/simulated/floor/carpet,
-/area/crew_quarters/lounge)
 "Xv" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -16043,10 +15962,6 @@
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/light,
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck - Ladders";
-	dir = 1
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "YC" = (
@@ -33582,7 +33497,7 @@ Tp
 mB
 WI
 Sd
-Xt
+ET
 PK
 Zq
 Mu
@@ -35198,7 +35113,7 @@ aY
 Wf
 WI
 Sd
-EW
+ET
 PK
 Pe
 Qt
@@ -39424,7 +39339,7 @@ XT
 XT
 kz
 kz
-SY
+lz
 mP
 nZ
 lz
