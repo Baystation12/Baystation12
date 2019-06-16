@@ -13,6 +13,7 @@
 	clicksound = "switch"
 	power_channel = LOCAL // Draws power from direct connections to powernets.
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -223,21 +224,18 @@
 	ui_interact(user)
 
 /obj/machinery/power/smes/attack_hand(mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 	add_fingerprint(user)
 	ui_interact(user)
 
-
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-
-	if(default_deconstruction_screwdriver(user, W))
-		return TRUE
-
 	if (!panel_open)
 		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
 		return TRUE
 
-	if((. = ..()))
-		return
+	if(component_attackby(W, user))
+		return TRUE
 
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/WT = W

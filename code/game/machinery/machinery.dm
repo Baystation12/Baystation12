@@ -239,13 +239,8 @@ Class Procs:
 		else if(prob(H.getBrainLoss()))
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
 			return 1
-
-	for(var/obj/item/weapon/stock_parts/part in component_parts)
-		if(!components_are_accessible(part.type))
-			continue
-		if((. = part.attack_hand(user)))
-			return
-
+	if((. = component_attack_hand(user)))
+		return
 	return ..()
 
 /obj/machinery/proc/RefreshParts()
@@ -287,46 +282,6 @@ Class Procs:
 		if(user.stunned)
 			return 1
 	return 0
-
-/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
-	if(!istype(C))
-		return 0
-	if(!panel_open)
-		return 0
-	. = dismantle()
-
-/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
-	if(!istype(S))
-		return 0
-	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	panel_open = !panel_open
-	to_chat(user, "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of \the [src].</span>")
-	update_icon()
-	return 1
-
-/obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
-	if(!istype(R))
-		return 0
-	if(panel_open)
-		for(var/obj/item/weapon/stock_parts/A in component_parts)
-			if(!A.base_type)
-				continue
-			for(var/obj/item/weapon/stock_parts/B in R.contents)
-				if(istype(B, A.base_type) && B.rating > A.rating)
-					replace_part(user, R, A, B)
-					break
-		for(var/path in uncreated_component_parts)
-			if(ispath(path, /obj/item/weapon/stock_parts))
-				var/obj/item/weapon/stock_parts/A = path
-				var/base_type = initial(A.base_type)
-				if(base_type)
-					for(var/obj/item/weapon/stock_parts/B in R.contents)
-						if(istype(B, base_type) && B.rating > initial(A.rating))
-							replace_part(user, R, A, B)
-							break					
-	else
-		display_parts(user)
-	return 1
 
 /obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
 	old_part = uninstall_component(old_part)

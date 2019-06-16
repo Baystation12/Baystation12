@@ -11,6 +11,7 @@
 		/obj/item/weapon/stock_parts/power/battery,
 		/obj/item/weapon/stock_parts/power/apc
 	)
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/mob/living/occupant = null
 	var/charging = 0
 	var/last_overlay_state
@@ -104,16 +105,12 @@
 		cell.emp_act(severity)
 	..(severity)
 
-/obj/machinery/recharge_station/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(!occupant)
-		if(default_deconstruction_screwdriver(user, O))
-			return
-		if(default_deconstruction_crowbar(user, O))
-			return
-		if(default_part_replacement(user, O))
-			return
+/obj/machinery/recharge_station/components_are_accessible(path)
+	return !occupant && ..()
 
-	return ..()
+/obj/machinery/recharge_station/cannot_transition_to(state_path)
+	if(occupant)
+		return SPAN_NOTICE("You cannot do this while \the [src] is occupied!.")
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()

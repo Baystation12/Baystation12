@@ -134,9 +134,22 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/proc/component_stat_change(var/obj/item/weapon/stock_parts/part, old_stat, flag)
 
 /obj/machinery/attackby(obj/item/I, mob/user)
+	if(component_attackby(I, user))
+		return TRUE
+	return ..()
+
+/obj/machinery/proc/component_attackby(obj/item/I, mob/user)
 	for(var/obj/item/weapon/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
 		if((. = part.attackby(I, user)))
 			return
-	return ..()
+	return construct_state && construct_state.attackby(I, user, src)
+
+/obj/machinery/proc/component_attack_hand(mob/user)
+	for(var/obj/item/weapon/stock_parts/part in component_parts)
+		if(!components_are_accessible(part.type))
+			continue
+		if((. = part.attack_hand(user)))
+			return
+	return construct_state && construct_state.attack_hand(user, src)

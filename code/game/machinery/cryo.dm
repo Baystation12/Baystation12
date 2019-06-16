@@ -10,6 +10,7 @@
 	interact_offline = 1
 	layer = ABOVE_HUMAN_LAYER
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/on = 0
 	idle_power_usage = 20
@@ -90,6 +91,8 @@
 		go_out()
 
 /obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 	ui_interact(user)
 
  /**
@@ -187,15 +190,14 @@
 		go_out()
 		return TOPIC_REFRESH
 
+/obj/machinery/atmospherics/unary/cryo_cell/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, G))
-		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, G))
-		return
-	if(default_part_replacement(user, G))
-		return
+	if(component_attackby(G, user))
+		return TRUE
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")

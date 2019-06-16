@@ -8,6 +8,8 @@
 	idle_power_usage = 40
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	base_type = /obj/machinery/food_replicator
+	construct_state = /decl/machine_construction/default/panel_closed
+
 	var/biomass = 100
 	var/biomass_max = 100
 	var/biomass_per = 10
@@ -40,16 +42,7 @@
 		if(success)
 			S.finish_bulk_removal()
 			to_chat(user, "You empty \the [O] into \the [src]")
-
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	else if(default_deconstruction_crowbar(user, O))
-		return
-	else if(default_part_replacement(user, O))
-		return
-	else
-		..()
-	return
+	return ..()
 
 /obj/machinery/food_replicator/on_update_icon()
 	if(stat & BROKEN)

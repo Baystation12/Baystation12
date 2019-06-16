@@ -14,6 +14,7 @@
 	anchored =   TRUE
 	idle_power_usage = 0
 	active_power_usage = 1.2 KILOWATTS
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/image/glow_icon
 	var/image/beaker_icon
@@ -27,7 +28,6 @@
 	var/last_temperature
 	var/target_temperature
 	var/obj/item/container
-	var/circuit_type = /obj/item/weapon/stock_parts/circuitboard/reagent_heater
 
 /obj/machinery/reagent_temperature/cooler
 	name = "chemical cooler"
@@ -36,7 +36,6 @@
 	heater_mode =      HEATER_MODE_COOL
 	max_temperature =  30 CELSIUS
 	min_temperature = -80 CELSIUS
-	circuit_type =     /obj/item/weapon/stock_parts/circuitboard/reagent_heater/cooler
 
 /obj/machinery/reagent_temperature/Initialize()
 	target_temperature = min_temperature
@@ -64,6 +63,8 @@
 		queue_icon_update()
 
 /obj/machinery/reagent_temperature/attack_hand(var/mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 	interact(user)
 
 /obj/machinery/reagent_temperature/attack_ai(var/mob/user)
@@ -84,16 +85,6 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/attackby(var/obj/item/thing, var/mob/user)
-
-	if(default_deconstruction_screwdriver(user, thing))
-		return
-
-	if(default_deconstruction_crowbar(user, thing))
-		return
-
-	if(default_part_replacement(user, thing))
-		return
-
 	if(isWrench(thing))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
@@ -115,7 +106,6 @@
 					update_icon()
 				return
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept \the [thing]."))
-	..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
 
