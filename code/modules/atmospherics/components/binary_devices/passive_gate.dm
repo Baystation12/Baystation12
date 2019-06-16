@@ -178,9 +178,6 @@
 	return
 
 /obj/machinery/atmospherics/binary/passive_gate/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(stat & (BROKEN|NOPOWER))
-		return
-
 	// this is the data which will be sent to the ui
 	var/data[0]
 

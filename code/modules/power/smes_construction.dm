@@ -71,6 +71,7 @@
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/buildable
 	uncreated_component_parts = null
+	interact_offline = TRUE
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()
