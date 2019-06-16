@@ -158,7 +158,7 @@
 //FALLING STUFF
 
 //Holds fall checks that should not be overriden by children
-/atom/movable/proc/fall()
+/atom/movable/proc/fall(var/lastloc)
 	if(!isturf(loc))
 		return
 
@@ -179,10 +179,13 @@
 		return
 
 	if(can_fall())
-		// We timer(0) here to let the current move operation complete before we start falling. fall() is normally called from
-		// Entered() which is part of Move(), by spawn()ing we let that complete.  But we want to preserve if we were in client movement
-		// or normal movement so other move behavior can continue.
-		addtimer(CALLBACK(src, /atom/movable/proc/fall_callback, below), 0)
+		begin_falling(lastloc, below)
+
+// We timer(0) here to let the current move operation complete before we start falling. fall() is normally called from
+// Entered() which is part of Move(), by spawn()ing we let that complete.  But we want to preserve if we were in client movement
+// or normal movement so other move behavior can continue.
+/atom/movable/proc/begin_falling(var/lastloc, var/below)
+	addtimer(CALLBACK(src, /atom/movable/proc/fall_callback, below), 0)
 
 /atom/movable/proc/fall_callback(var/turf/below)
 	var/mob/M = src
@@ -246,9 +249,9 @@
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	if(istype(landing, /turf/simulated/open))
-		visible_message("\The [src] falls from the deck above through \the [landing]!", "You hear a whoosh of displaced air.")
+		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
-		visible_message("\The [src] falls from the deck above and slams into \the [landing]!", "You hear something slam into the deck.")
+		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
 		if(fall_damage())
 			for(var/mob/living/M in landing.contents)
 				visible_message("\The [src] hits \the [M.name]!")

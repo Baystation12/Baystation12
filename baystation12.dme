@@ -2023,6 +2023,8 @@
 #include "code\modules\mob\living\deity\phenomena\phenomena.dm"
 #include "code\modules\mob\living\deity\phenomena\starlight.dm"
 #include "code\modules\mob\living\deity\phenomena\transmutation.dm"
+#include "code\modules\mob\living\maneuvers\_maneuver.dm"
+#include "code\modules\mob\living\maneuvers\maneuver_leap.dm"
 #include "code\modules\mob\living\silicon\death.dm"
 #include "code\modules\mob\living\silicon\laws.dm"
 #include "code\modules\mob\living\silicon\login.dm"
