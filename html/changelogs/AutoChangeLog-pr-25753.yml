@@ -1,0 +1,5 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - tweak: "Plasma cutter now uses up half a charge per deconstruction."
+  - bugfix: "Deconstruction of walls and girders now gives the appropriate materials."
