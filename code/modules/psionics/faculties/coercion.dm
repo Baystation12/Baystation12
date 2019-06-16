@@ -26,7 +26,7 @@
 	cooldown =       120
 	use_ranged =     TRUE
 	use_melee =      TRUE
-	min_rank =       PSI_RANK_OPERANT
+	min_rank =       PSI_RANK_GRANDMASTER
 	use_description = "Target the eyes or mouth on disarm intent and click anywhere to use a radial attack that blinds, deafens and disorients everyone near you."
 
 /decl/psionic_power/coercion/blindstrike/invoke(var/mob/living/user, var/mob/living/target)
@@ -34,7 +34,8 @@
 		return FALSE
 	. = ..()
 	if(.)
-		to_chat(user, SPAN_DANGER("You open the gate and release a deafening psionic scream, striking at everyone near you with a blast of mental white noise!"))
+		user.visible_message(SPAN_DANGER("\The [user] suddenly throws back their head, as though screaming silently!"))
+		to_chat(user, SPAN_DANGER("You strike at all around you with a deafening psionic scream!"))
 		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
 			if(M == user)
 				continue
@@ -46,7 +47,7 @@
 				var/mob/living/carbon/C = M
 				if(C.can_feel_pain())
 					M.emote("scream")
-			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a burst of mental static!"))
+			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a psionic scream!"))
 			M.flash_eyes()
 			M.eye_blind = max(M.eye_blind,3)
 			M.ear_deaf = max(M.ear_deaf,6)
@@ -114,7 +115,7 @@
 	cooldown =       100
 	use_melee =      TRUE
 	use_ranged =     TRUE
-	min_rank =       PSI_RANK_GRANDMASTER
+	min_rank =       PSI_RANK_OPERANT
 	use_description = "Target the arms or hands on disarm intent to use a ranged attack that may rip the weapons away from the target."
 
 /decl/psionic_power/coercion/spasm/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
