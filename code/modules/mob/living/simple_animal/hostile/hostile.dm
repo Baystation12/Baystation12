@@ -170,6 +170,7 @@
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
+	stop_automated_movement = 0
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/Life()
