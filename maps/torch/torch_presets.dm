@@ -156,16 +156,14 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 //
 
 // Substation SMES
-/obj/machinery/power/smes/buildable/preset/torch/substation/configure_and_install_coils()
-	install_component(/obj/item/weapon/stock_parts/smes_coil)
-	install_component(/obj/item/weapon/stock_parts/smes_coil)
+/obj/machinery/power/smes/buildable/preset/torch/substation
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1) // Note that it gets one more from construction
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 
 // Substation SMES (charged and with full I/O setting)
-/obj/machinery/power/smes/buildable/preset/torch/substation_full/configure_and_install_coils()
-	install_component(/obj/item/weapon/stock_parts/smes_coil)
-	install_component(/obj/item/weapon/stock_parts/smes_coil)
+/obj/machinery/power/smes/buildable/preset/torch/substation_full
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -173,11 +171,10 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_fully_charged = TRUE
 
 // Main Engine output SMES
-/obj/machinery/power/smes/buildable/preset/torch/engine_main/configure_and_install_coils()
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_capacity)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_capacity)
+/obj/machinery/power/smes/buildable/preset/torch/engine_main
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
+		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -185,9 +182,10 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_fully_charged = TRUE
 
 // Shuttle SMES
-/obj/machinery/power/smes/buildable/preset/torch/shuttle/configure_and_install_coils()	
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_capacity)
+/obj/machinery/power/smes/buildable/preset/torch/shuttle
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 1,
+		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -195,9 +193,9 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_fully_charged = TRUE
 
 // Hangar SMES. Charges the shuttles so needs a pretty big throughput.
-/obj/machinery/power/smes/buildable/preset/torch/hangar/configure_and_install_coils()
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
+/obj/machinery/power/smes/buildable/preset/torch/hangar
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 2)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
