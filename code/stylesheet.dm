@@ -85,7 +85,8 @@ h1.alert, h2.alert		{color: #000000;}
 .subtle					{color: #000099; font-size: 75%; font-style: italic;}
 .alium					{color: #00ff00;}
 .cult					{color: #800080; font-weight: bold; font-style: italic;}
-.fountain				{color: #800080; font-style: italic; font-size: 175%;}
+.cultannounce			{color: #800080; font-style: italic; font-size: 175%;}
+.mfauna					{color: #884422; font-weight: bold; font-size: 125%;}
 
 .reflex_shoot			{color: #000099; font-style: italic;}
 

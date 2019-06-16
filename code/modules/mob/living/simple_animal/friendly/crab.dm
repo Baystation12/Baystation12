@@ -12,17 +12,17 @@
 	speak_chance = 1
 	turns_per_move = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
-	response_help  = "pets"
+	response_help = "pets"
 	response_disarm = "gently pushes aside"
-	response_harm   = "stomps"
+	response_harm = "stomps"
 	stop_automated_movement = 1
 	friendly = "pinches"
-	mob_size = 5
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
 	possession_candidate = 1
 	can_escape = 1 //snip snip
 	pass_flags = PASS_FLAG_TABLE
+	natural_armor = list(melee = 10, bullet = 5)
 
 /mob/living/simple_animal/crab/Life()
 	. = ..()
@@ -42,6 +42,3 @@
 	name = "Coffee"
 	real_name = "Coffee"
 	desc = "It's Coffee, the other pet!"
-	response_help  = "pets"
-	response_disarm = "gently pushes aside"
-	response_harm   = "stomps"

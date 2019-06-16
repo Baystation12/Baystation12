@@ -10403,9 +10403,6 @@
 /area/shuttle/petrov/analysis)
 "xY" = (
 /obj/structure/closet/toolcloset/excavation,
-/obj/item/stack/flag/red,
-/obj/item/stack/flag/red,
-/obj/item/stack/flag/red,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/eva)
@@ -12006,6 +12003,10 @@
 	layer = 2.4;
 	level = 2
 	},
+/obj/structure/table/rack,
+/obj/item/stack/flag/red,
+/obj/item/stack/flag/red,
+/obj/item/stack/flag/red,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/eva)
 "DF" = (
