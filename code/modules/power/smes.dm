@@ -73,7 +73,6 @@
 	update_icon()
 
 /obj/machinery/power/smes/populate_parts()
-	..()
 	for(var/d in GLOB.cardinal)
 		var/obj/item/weapon/stock_parts/power/terminal/part = install_component(/obj/item/weapon/stock_parts/power/terminal, refresh_parts = FALSE)
 		part.terminal_dir = d
@@ -82,7 +81,7 @@
 			if(term.dir == turn(d, 180) && !term.master)
 				part.set_terminal(src, term)
 				term.connect_to_network()
-		
+	..()
 
 /obj/machinery/power/smes/add_avail(var/amount)
 	if(..(amount))
@@ -230,11 +229,11 @@
 	ui_interact(user)
 
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!panel_open)
-		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
+	if(component_attackby(W, user))
 		return TRUE
 
-	if(component_attackby(W, user))
+	if (!panel_open)
+		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
 		return TRUE
 
 	if(isWelder(W))

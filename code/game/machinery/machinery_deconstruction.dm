@@ -11,7 +11,7 @@
 	construct_state = new_state
 
 // Return true or a fail message to block transition.
-/obj/machinery/proc/cannot_transition_to(var/state_path)
+/obj/machinery/proc/cannot_transition_to(var/state_path, var/mob/user)
 
 // There are many machines, so this is designed to catch errors.  This proc must either return TRUE or set the machine's construct_state to a valid one (or null).
 /decl/machine_construction/proc/validate_state(obj/machinery/machine)
@@ -25,8 +25,8 @@
 
 /decl/machine_construction/proc/try_change_state(obj/machinery/machine, path, user)
 	var/decl/machine_construction/state = decls_repository.get_decl(path)
-	if(state && state.state_is_valid(machine))
-		var/fail = machine.cannot_transition_to(/decl/machine_construction/default/panel_open)
+	if(state)
+		var/fail = machine.cannot_transition_to(path, user)
 		if(fail)
 			if(istext(fail))
 				to_chat(user, fail)

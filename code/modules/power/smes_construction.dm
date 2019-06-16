@@ -276,7 +276,17 @@
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
 					qdel(src)
 
+/obj/machinery/power/smes/buildable/proc/check_total_system_failure(user)
+	// Probability of failure if safety circuit is disabled (in %)
+	var/failure_probability = round((charge / capacity) * 100)
 
+	// If failure probability is below 5% it's usually safe to do modifications
+	if (failure_probability < 5)
+		failure_probability = 0
+
+	if (failure_probability && prob(failure_probability))
+		total_system_failure(failure_probability, user)
+		return TRUE
 
 // Proc: apcs_overload()
 // Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
@@ -305,6 +315,33 @@
 	else
 		..()
 
+/obj/machinery/power/smes/buildable/components_are_accessible(path)
+	if(failing)
+		return FALSE
+	if(charge > (capacity/100) && safeties_enabled)
+		return FALSE
+	if(output_attempt || input_attempt)
+		return FALSE
+	return ..()
+
+/obj/machinery/power/smes/buildable/cannot_transition_to(state_path, mob/user)
+	if(failing)
+		return SPAN_WARNING("The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
+	if(charge > (capacity/100) && safeties_enabled)
+		return SPAN_WARNING("The [src]'s safety circuit is preventing modifications while it's charged!")
+	if(output_attempt || input_attempt)
+		return SPAN_WARNING("Turn the [src] off first!")
+
+	if(state_path == /decl/machine_construction/default/deconstructed)
+		if(!(stat & BROKEN))
+			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
+		if(user)
+			if(!do_after(user, 5 SECONDS * cur_coils, src) && isCrowbar(user.get_active_hand()))
+				return TRUE
+			if(check_total_system_failure(user))
+				return TRUE
+	return ..()
+
 // Proc: attackby()
 // Parameters: 2 (W - object that was used on this machine, user - person which used the object)
 // Description: Handles tool interaction. Allows deconstruction/upgrading/fixing.
@@ -323,6 +360,9 @@
 				RCon_tag = newtag
 				to_chat(user, "<span class='notice'>You changed the RCON tag to: [newtag]</span>")
 			return
+
+// Stuff below is placeholder for component install/uninstall code.
+
 		// Charged above 1% and safeties are enabled.
 		if((charge > (capacity/100)) && safeties_enabled)
 			to_chat(user, "<span class='warning'>Safety circuit of [src] is preventing modifications while it's charged!</span>")
@@ -338,23 +378,6 @@
 		// If failure probability is below 5% it's usually safe to do modifications
 		if (failure_probability < 5)
 			failure_probability = 0
-
-		// Crowbar - Disassemble the SMES.
-		if(isCrowbar(W))
-			if (!(stat & BROKEN))
-				to_chat(user, "<span class='warning'>You have to disassemble the terminal first!</span>")
-				return
-
-			to_chat(user, "<span class='warning'>You begin to disassemble the [src]!</span>")
-			if (do_after(usr, 50 * cur_coils, src)) // More coils = takes longer to disassemble. It's complex so largest one with 6 coils will take 30s
-
-				if (failure_probability && prob(failure_probability))
-					total_system_failure(failure_probability, user)
-					return
-
-				to_chat(usr, "<span class='warning'>You have disassembled the SMES cell!</span>")
-				dismantle()
-				return
 
 		// Superconducting Magnetic Coil - Upgrade the SMES
 		else if(istype(W, /obj/item/weapon/stock_parts/smes_coil))
