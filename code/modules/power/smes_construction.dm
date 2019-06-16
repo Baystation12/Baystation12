@@ -43,24 +43,15 @@
 // DEPRECATED
 // These are used on individual outposts as backup should power line be cut, or engineering outpost lost power.
 // 1M Charge, 150K I/O
-/obj/machinery/power/smes/buildable/outpost_substation/New()
-	..(0)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/weak)
-	recalc_coils()
+/obj/machinery/power/smes/buildable/outpost_substation
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/weak = 1)
 
 // This one is pre-installed on engineering shuttle. Allows rapid charging/discharging for easier transport of power to outpost
 // 11M Charge, 2.5M I/O
-/obj/machinery/power/smes/buildable/power_shuttle/New()
-	..(0)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
-	install_component(/obj/item/weapon/stock_parts/smes_coil/super_io)
-	install_component(/obj/item/weapon/stock_parts/smes_coil)
-	recalc_coils()
-
-
-
-
-
+/obj/machinery/power/smes/buildable/power_shuttle
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
+		/obj/item/weapon/stock_parts/smes_coil = 1)
 
 // END SMES SUBTYPES
 
@@ -79,12 +70,14 @@
 	charge = 0
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/buildable
+	uncreated_component_parts = null
+	interact_offline = TRUE
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()
 	malf_upgraded = 1
 	emp_proof = 1
-	recalc_coils()
+	RefreshParts()
 	to_chat(user, "\The [src] has been upgraded. It's transfer rate and capacity has increased, and it is now resistant against EM pulses.")
 	return 1
 
@@ -132,19 +125,9 @@
 	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && panel_open)
 		wires.Interact(usr)
 
-// Proc: New()
-// Parameters: None
-// Description: Adds standard components for this SMES, and forces recalculation of properties.
 /obj/machinery/power/smes/buildable/Initialize()
 	. = ..()
 	wires = new /datum/wires/smes(src)
-
-	// Allows for mapped-in SMESs with larger capacity/IO
-	recalc_coils() //placeholder; need to make these stock parts first.
-	if(cur_coils)
-		for(var/i = 1, i <= cur_coils, i++)
-			install_component(/obj/item/weapon/stock_parts/smes_coil)
-		recalc_coils()
 
 // Proc: attack_hand()
 // Parameters: None
@@ -157,7 +140,8 @@
 // Proc: recalc_coils()
 // Parameters: None
 // Description: Updates properties (IO, capacity, etc.) of this SMES by checking internal components.
-/obj/machinery/power/smes/buildable/proc/recalc_coils()
+/obj/machinery/power/smes/buildable/RefreshParts()
+	..()
 	cur_coils = 0
 	capacity = 0
 	input_level_max = 0
@@ -361,7 +345,6 @@
 				to_chat(user, "<span class='warning'>You have to disassemble the terminal first!</span>")
 				return
 
-			playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 			to_chat(user, "<span class='warning'>You begin to disassemble the [src]!</span>")
 			if (do_after(usr, 50 * cur_coils, src)) // More coils = takes longer to disassemble. It's complex so largest one with 6 coils will take 30s
 
@@ -370,13 +353,7 @@
 					return
 
 				to_chat(usr, "<span class='warning'>You have disassembled the SMES cell!</span>")
-				var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
-				M.state = 2
-				M.icon_state = "box_1"
-				for(var/obj/I in component_parts)
-					I.forceMove(src.loc)
-					component_parts -= I
-				qdel(src)
+				dismantle()
 				return
 
 		// Superconducting Magnetic Coil - Upgrade the SMES
@@ -389,8 +366,7 @@
 				if(!user.unEquip(W, src))
 					return
 				to_chat(usr, "You install the coil into the SMES unit!")
-				component_parts += W
-				recalc_coils()
+				install_component(W)
 			else
 				to_chat(usr, "<span class='warning'>You can't insert more coils to this SMES unit!</span>")
 
