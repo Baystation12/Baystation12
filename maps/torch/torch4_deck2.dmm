@@ -653,9 +653,6 @@
 	icon_state = "warning";
 	dir = 4
 	},
-/obj/machinery/camera/network/engine{
-	c_tag = "Engine - Prototype SMES"
-	},
 /obj/machinery/light_switch{
 	pixel_x = 6;
 	pixel_y = 24
@@ -4182,9 +4179,6 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck - Custodial Closet"
-	},
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -4671,9 +4665,6 @@
 	name = "north bump";
 	pixel_x = 0;
 	pixel_y = 24
-	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Waste Tank"
 	},
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/techfloor,
@@ -5495,10 +5486,6 @@
 /area/engineering/engine_room)
 "lQ" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/camera/network/engine{
-	c_tag = "Engine - Access";
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
@@ -6555,9 +6542,6 @@
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
-	},
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck Hallway - Central West"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
@@ -10209,9 +10193,6 @@
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Robotics - Lower"
-	},
 /obj/machinery/cell_charger,
 /obj/item/organ/internal/posibrain,
 /obj/item/organ/internal/posibrain,
@@ -11577,9 +11558,6 @@
 	},
 /obj/machinery/alarm{
 	pixel_y = 24
-	},
-/obj/machinery/camera/network/engine{
-	c_tag = "Tech Storage - Main - Center"
 	},
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
@@ -13505,10 +13483,6 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Engineering - Fuel Bay";
-	dir = 4
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/fuelbay)
 "Fs" = (
@@ -14041,9 +14015,6 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Engineering - Monitoring Room"
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24;
@@ -14530,15 +14501,14 @@
 /obj/machinery/porta_turret{
 	dir = 8
 	},
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Synthetic Station";
-	dir = 8
-	},
 /obj/machinery/computer/cryopod/robot{
 	pixel_x = 32
 	},
 /obj/machinery/light/small{
 	dir = 1
+	},
+/obj/machinery/camera/network/command{
+	c_tag = "AI Core - Synthetic Station"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/turret_protected/ai_cyborg_station)
@@ -14736,10 +14706,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "Js" = (
-/obj/machinery/camera/network/engineering{
-	c_tag = "Atmospherics - Entry";
-	dir = 4
-	},
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 8
@@ -15229,16 +15195,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
-"LD" = (
-/obj/effect/floor_decal/corner/yellow{
-	icon_state = "corner_white";
-	dir = 5
-	},
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck Hallway - Central East"
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/seconddeck)
 "LF" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	icon_state = "intact";
@@ -37453,7 +37409,7 @@ xF
 MH
 KY
 gg
-LD
+oq
 Wi
 Ms
 VE
