@@ -1,5 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - bugfix: "SMES sizes and starting charge should now be back to normal."
-  - bugfix: "Pressure regulators should once again be interactable."
