@@ -388,10 +388,11 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bf" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 2;
-	layer = 2.4;
-	level = 2
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -404,6 +405,12 @@
 /obj/random/plushie,
 /obj/random/action_figure,
 /obj/random/action_figure,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bh" = (
@@ -563,14 +570,20 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "bw" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/zpipe/up/supply{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "bx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -580,6 +593,9 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -2294,11 +2310,11 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/floodlight,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "hc" = (
@@ -2685,6 +2701,14 @@
 	},
 /turf/simulated/floor/lino,
 /area/ship/scrap/crew/dorms1)
+"Dh" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	layer = 2.4;
+	level = 2
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "Dl" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -6236,7 +6260,7 @@ av
 aH
 aT
 aU
-aU
+Dh
 bv
 bL
 bV
