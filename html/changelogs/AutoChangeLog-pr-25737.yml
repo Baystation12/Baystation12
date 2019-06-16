@@ -1,0 +1,5 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - rscadd: "Added a system to rarely spawn larger, more dangerous fauna on exoplanets."
+  - rscadd: "A giant crab, peaceful until provoked, can now spawn on desert exoplanets."
