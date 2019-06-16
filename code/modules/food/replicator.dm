@@ -103,11 +103,12 @@
 	return 1
 
 /obj/machinery/food_replicator/RefreshParts()
-	deconstruct_eff = 0.5 * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	biomass_max = 100 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	deconstruct_eff = 0.5 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser), 0, 10)
+	biomass_max = 100 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
 	biomass_per = max(1, 20 - 5 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator))
 
 	biomass = min(biomass,biomass_max)
+	..()
 
 /obj/machinery/food_replicator/proc/queue_dish(var/text)
 	if(!(text in menu))

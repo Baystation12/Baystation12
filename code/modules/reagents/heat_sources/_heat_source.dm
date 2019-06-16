@@ -48,11 +48,12 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power) * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 
 	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	if(comp)
 		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - comp), POWER_USE_ACTIVE)
+	..()
 
 /obj/machinery/reagent_temperature/Process()
 	..()

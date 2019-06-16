@@ -64,11 +64,12 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		else
 			reagents.maximum_volume = T
 
-	max_material_storage = 75000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
 
-	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 3)
 	mat_efficiency = 1 - (T - 1) / 4
 	speed = T
+	..()
 
 /obj/machinery/r_n_d/circuit_imprinter/on_update_icon()
 	if(panel_open)

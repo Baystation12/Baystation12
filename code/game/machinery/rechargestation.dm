@@ -115,8 +115,8 @@
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()
-	var/man_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	var/cap_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 10)
+	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 
 	charging_power = 40000 + 40000 * cap_rating
 	restore_power_active = 10000 + 15000 * cap_rating

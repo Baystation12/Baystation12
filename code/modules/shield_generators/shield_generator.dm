@@ -66,6 +66,7 @@
 	mitigation_em = between(0, mitigation_em, mitigation_max)
 	mitigation_physical = between(0, mitigation_physical, mitigation_max)
 	mitigation_heat = between(0, mitigation_heat, mitigation_max)
+	..()
 
 
 // Shuts down the shield, removing all shield segments and unlocking generator settings.

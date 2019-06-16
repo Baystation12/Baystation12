@@ -21,7 +21,8 @@ Note: Must be placed within 3 tiles of the R&D Console
 	var/T = 0
 	for(var/obj/item/weapon/stock_parts/S in src)
 		T += S.rating
-	decon_mod = T * 0.1
+	decon_mod = min(T * 0.1, 3)
+	..()
 
 /obj/machinery/r_n_d/destructive_analyzer/on_update_icon()
 	if(panel_open)

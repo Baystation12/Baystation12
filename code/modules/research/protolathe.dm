@@ -58,11 +58,12 @@
 		else
 			reagents.maximum_volume = T
 
-	max_material_storage = 75000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
 
-	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 6)
 	mat_efficiency = 1 - (T - 2) / 8
 	speed = T / 2
+	..()
 
 
 /obj/machinery/r_n_d/protolathe/on_update_icon()

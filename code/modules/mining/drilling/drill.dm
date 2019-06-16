@@ -191,9 +191,9 @@
 
 /obj/machinery/mining/drill/RefreshParts()
 	..()
-	harvest_speed = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	capacity = 200 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
-	var/charge_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor) || 1
+	harvest_speed = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser), 0, 10)
+	capacity = 200 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+	var/charge_multiplier = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0.1, 10)
 	change_power_consumption(initial(active_power_usage) / charge_multiplier, POWER_USE_ACTIVE)
 
 /obj/machinery/mining/drill/proc/check_supports()

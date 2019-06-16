@@ -27,13 +27,14 @@
 	var/ui_tick = 0
 
 /obj/machinery/power/smes/batteryrack/RefreshParts()
-	var/capacitor_efficiency = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/capacitor_efficiency = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 	var/maxcells = 3 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
 
 	max_transfer_rate = 10000 * capacitor_efficiency // 30kw - 90kw depending on used capacitors.
 	max_cells = min(PSU_MAXCELLS, maxcells)
 	input_level = max_transfer_rate
 	output_level = max_transfer_rate
+	..()
 
 /obj/machinery/power/smes/batteryrack/Destroy()
 	for(var/obj/item/weapon/cell/C in internal_cells)
