@@ -64,3 +64,6 @@
 //how do i shoot gun
 /mob/living/simple_animal/hostile/sentinel/IsAdvancedToolUser()
 	return 1
+
+/mob/living/simple_animal/hostile/sentinel/get_equivalent_body_part(var/def_zone)
+	return "chassis"
