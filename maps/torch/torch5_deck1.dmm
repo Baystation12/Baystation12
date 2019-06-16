@@ -9031,11 +9031,11 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 2;
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/window/southright{
 	dir = 1;
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
@@ -9997,8 +9997,8 @@
 	},
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
-	name = "Brig Officer";
-	sortType = "Brig Officer"
+	name = "Brig Chief";
+	sortType = "Brig Chief"
 	},
 /turf/simulated/floor/plating,
 /area/security/wing)
@@ -10342,7 +10342,7 @@
 /area/security/wing)
 "aJo" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/closet/secure_closet/brigofficer,
+/obj/structure/closet/secure_closet/brigchief,
 /obj/item/device/radio,
 /obj/item/weapon/crowbar,
 /obj/item/clothing/mask/gas/half,
@@ -25658,10 +25658,10 @@
 "nFh" = (
 /obj/structure/table/steel,
 /obj/machinery/photocopier/faxmachine{
-	department = "Warden's Office"
+	department = "Brig Chief's Office"
 	},
 /obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Brig Officer";
+	c_tag = "Security Wing - Brig Chief";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -30302,10 +30302,10 @@
 	},
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 1;
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/window/southright{
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
@@ -30380,7 +30380,7 @@
 /area/rnd/xenobiology)
 "tgs" = (
 /obj/machinery/door/airlock/security{
-	name = "Brig Officer"
+	name = "Brig Chief"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{

@@ -1,15 +1,15 @@
 /datum/job/warden
-	title = "Brig Officer"
+	title = "Brig Chief"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
 	economic_power = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/brig_chief
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_chief/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
