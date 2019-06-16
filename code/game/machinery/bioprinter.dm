@@ -52,6 +52,7 @@
 /obj/machinery/organ_printer/cannot_transition_to(path)
 	if(printing)
 		return SPAN_NOTICE("You must wait for \the [src] to finish printing first!")
+	return ..()
 
 /obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
 	if(component_attack_hand(user))

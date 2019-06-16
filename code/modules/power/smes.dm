@@ -14,6 +14,7 @@
 	power_channel = LOCAL // Draws power from direct connections to powernets.
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
 	construct_state = /decl/machine_construction/default/panel_closed
+	stat = BROKEN         // Should be removed if the terminals initialize fully.
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -233,7 +234,7 @@
 		return TRUE
 
 	if (!panel_open)
-		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
+		to_chat(user, "<span class='warning'>You need to open the access hatch on \the [src] first!</span>")
 		return TRUE
 
 	if(isWelder(W))

@@ -137,6 +137,7 @@
 		return SPAN_NOTICE("Unlock \the [src] first.")
 	if(suspension_field)
 		return SPAN_NOTICE("Turn \the [src] off first.")
+	return ..()
 
 /obj/machinery/suspension_gen/attackby(obj/item/weapon/W, mob/user)
 	if(component_attackby(W, user))

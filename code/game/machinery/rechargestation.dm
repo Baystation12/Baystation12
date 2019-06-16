@@ -111,6 +111,7 @@
 /obj/machinery/recharge_station/cannot_transition_to(state_path)
 	if(occupant)
 		return SPAN_NOTICE("You cannot do this while \the [src] is occupied!.")
+	return ..()
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()

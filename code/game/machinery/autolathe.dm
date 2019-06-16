@@ -126,6 +126,7 @@
 /obj/machinery/autolathe/cannot_transition_to(state_path)
 	if(busy)
 		return SPAN_NOTICE("You must wait for \the [src] to finish first.")
+	return ..()
 
 /obj/machinery/autolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)

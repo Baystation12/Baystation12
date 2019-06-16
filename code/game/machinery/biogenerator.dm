@@ -70,6 +70,7 @@
 /obj/machinery/biogenerator/cannot_transition_to(state_path)
 	if(processing)
 		return SPAN_NOTICE("You must turn \the [src] off first.")
+	return ..()
 
 /obj/machinery/biogenerator/attackby(var/obj/item/O, var/mob/user)
 	if((. = component_attackby(O, user)))

@@ -85,6 +85,7 @@
 /obj/machinery/r_n_d/protolathe/cannot_transition_to(state_path)
 	if(busy)
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
+	return ..()
 
 /obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)

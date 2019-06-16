@@ -139,6 +139,7 @@
 /obj/machinery/mecha_part_fabricator/cannot_transition_to(state_path)
 	if(busy)
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
+	return ..()
 
 /obj/machinery/mecha_part_fabricator/attackby(var/obj/item/I, var/mob/user)
 	if(busy)

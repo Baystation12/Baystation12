@@ -1,3 +1,9 @@
+// use inside attack_hand/attackby
+#define TRANSFER_STATE(path)\
+	. = try_change_state(machine, path, user);\
+	if(. != MCS_CHANGE) return (. == MCS_BLOCK);\
+	. = TRUE
+
 /obj/machinery
 	var/decl/machine_construction/construct_state
 
@@ -10,8 +16,9 @@
 /obj/machinery/proc/state_transition(var/decl/machine_construction/new_state)
 	construct_state = new_state
 
-// Return true or a fail message to block transition.
+// Return a change state define or a fail message to block transition.
 /obj/machinery/proc/cannot_transition_to(var/state_path, var/mob/user)
+	return MCS_CHANGE
 
 // There are many machines, so this is designed to catch errors.  This proc must either return TRUE or set the machine's construct_state to a valid one (or null).
 /decl/machine_construction/proc/validate_state(obj/machinery/machine)
@@ -27,13 +34,14 @@
 	var/decl/machine_construction/state = decls_repository.get_decl(path)
 	if(state)
 		var/fail = machine.cannot_transition_to(path, user)
-		if(fail)
-			if(istext(fail))
-				to_chat(user, fail)
-			return FALSE
-		machine.state_transition(state)
-		return TRUE
-	return FALSE
+		if(fail == MCS_CHANGE)
+			machine.state_transition(state)
+			return MCS_CHANGE
+		if(istext(fail))
+			to_chat(user, fail)
+			return MCS_BLOCK
+		return fail
+	return MCS_CONTINUE
 
 /decl/machine_construction/proc/attack_hand(mob/user, obj/machinery/machine)
 	if(!validate_state(machine))
@@ -61,12 +69,13 @@
 /decl/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
-	if(isScrewdriver(I) && try_change_state(machine, /decl/machine_construction/default/panel_open, user))
+	if(isScrewdriver(I))
+		TRANSFER_STATE(/decl/machine_construction/default/panel_open)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = TRUE
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
 		machine.update_icon()
-		return TRUE
+		return
 	if(istype(I, /obj/item/weapon/storage/part_replacer))
 		machine.display_parts(user)
 		return TRUE
@@ -82,14 +91,17 @@
 /decl/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
-	if(isCrowbar(I) && try_change_state(machine, /decl/machine_construction/default/deconstructed, user))
-		return machine.dismantle()
-	if(isScrewdriver(I) && try_change_state(machine, /decl/machine_construction/default/panel_closed, user))
+	if(isCrowbar(I))
+		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
+		machine.dismantle()
+		return
+	if(isScrewdriver(I))
+		TRANSFER_STATE(/decl/machine_construction/default/panel_closed)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
 		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
 		machine.update_icon()
-		return TRUE
+		return
 	if(istype(I, /obj/item/weapon/storage/part_replacer))
 		var/obj/item/weapon/storage/part_replacer/R = I
 		for(var/obj/item/weapon/stock_parts/A in machine.component_parts)

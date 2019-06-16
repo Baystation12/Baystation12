@@ -146,6 +146,7 @@
 /obj/machinery/mining/drill/cannot_transition_to(state_path)
 	if(active)
 		return SPAN_NOTICE("You must turn \the [src] off first.")
+	return ..()
 
 /obj/machinery/mining/drill/components_are_accessible(path)
 	return !active && ..()
@@ -265,6 +266,7 @@
 /obj/machinery/mining/brace/cannot_transition_to(state_path)
 	if(connected && connected.active)
 		return SPAN_NOTICE("You can't work with the brace of a running drill!")
+	return ..()
 
 /obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(connected && connected.active)

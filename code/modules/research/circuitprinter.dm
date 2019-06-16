@@ -90,6 +90,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 /obj/machinery/r_n_d/circuit_imprinter/cannot_transition_to(state_path)
 	if(busy)
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
+	return ..()
 
 /obj/machinery/r_n_d/circuit_imprinter/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)

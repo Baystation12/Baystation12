@@ -278,7 +278,7 @@
 
 /obj/machinery/power/smes/buildable/proc/check_total_system_failure(user)
 	// Probability of failure if safety circuit is disabled (in %)
-	var/failure_probability = round((charge / capacity) * 100)
+	var/failure_probability = capacity ? round((charge / capacity) * 100) : 0
 
 	// If failure probability is below 5% it's usually safe to do modifications
 	if (failure_probability < 5)
@@ -326,20 +326,20 @@
 
 /obj/machinery/power/smes/buildable/cannot_transition_to(state_path, mob/user)
 	if(failing)
-		return SPAN_WARNING("The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
+		return SPAN_WARNING("\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
 	if(charge > (capacity/100) && safeties_enabled)
-		return SPAN_WARNING("The [src]'s safety circuit is preventing modifications while it's charged!")
+		return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
 	if(output_attempt || input_attempt)
-		return SPAN_WARNING("Turn the [src] off first!")
+		return SPAN_WARNING("Turn \the [src] off first!")
 
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		if(!(stat & BROKEN))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
 			if(!do_after(user, 5 SECONDS * cur_coils, src) && isCrowbar(user.get_active_hand()))
-				return TRUE
+				return MCS_BLOCK
 			if(check_total_system_failure(user))
-				return TRUE
+				return MCS_BLOCK
 	return ..()
 
 // Proc: attackby()
@@ -348,7 +348,7 @@
 /obj/machinery/power/smes/buildable/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	// No more disassembling of overloaded SMESs. You broke it, now enjoy the consequences.
 	if (failing)
-		to_chat(user, "<span class='warning'>The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.</span>")
+		to_chat(user, "<span class='warning'>\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.</span>")
 		return
 
 	if (!..())
@@ -369,22 +369,13 @@
 			return
 
 		if (output_attempt || input_attempt)
-			to_chat(user, "<span class='warning'>Turn off the [src] first!</span>")
+			to_chat(user, "<span class='warning'>Turn off \the [src] first!</span>")
 			return
-
-		// Probability of failure if safety circuit is disabled (in %)
-		var/failure_probability = round((charge / capacity) * 100)
-
-		// If failure probability is below 5% it's usually safe to do modifications
-		if (failure_probability < 5)
-			failure_probability = 0
 
 		// Superconducting Magnetic Coil - Upgrade the SMES
 		else if(istype(W, /obj/item/weapon/stock_parts/smes_coil))
-			if (cur_coils < max_coils)
-
-				if (failure_probability && prob(failure_probability))
-					total_system_failure(failure_probability, user)
+			if(cur_coils < max_coils)
+				if(check_total_system_failure(user))
 					return
 				if(!user.unEquip(W, src))
 					return

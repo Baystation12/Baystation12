@@ -45,6 +45,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	if(loaded_item)
 		return SPAN_NOTICE("There is something already loaded into \the [src]. You must remove it first.")
+	return ..()
 
 /obj/machinery/r_n_d/destructive_analyzer/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)

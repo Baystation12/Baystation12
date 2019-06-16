@@ -143,3 +143,7 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define MACHINERY_PROCESS_SELF       1
 #define MACHINERY_PROCESS_COMPONENTS 2
 #define MACHINERY_PROCESS_ALL        (MACHINERY_PROCESS_SELF | MACHINERY_PROCESS_COMPONENTS)
+
+#define MCS_CHANGE   0 // Success
+#define MCS_CONTINUE 1 // Failed to change, silently
+#define MCS_BLOCK    2 // Failed to change, but action was performed
