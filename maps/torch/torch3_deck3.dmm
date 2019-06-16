@@ -484,9 +484,6 @@
 "bx" = (
 /obj/machinery/seed_storage/garden,
 /obj/effect/floor_decal/corner/green/mono,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Hydro Storage"
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
 "by" = (
@@ -1592,10 +1589,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Hydroponics - Fore";
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/green/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics)
@@ -1646,10 +1639,6 @@
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 1
-	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Engineering - EVA";
-	dir = 8
 	},
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -2090,9 +2079,6 @@
 	pixel_x = -32
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/camera/network/third_deck{
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
 "eM" = (
@@ -5918,10 +5904,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/machinery/camera/network/command{
-	c_tag = "EVA - Storage";
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
@@ -6272,10 +6254,6 @@
 /area/ai_monitored/storage/eva)
 "nK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/camera/network/command{
-	c_tag = "EVA - Suit Cyclers";
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -7606,10 +7584,6 @@
 /obj/item/stack/material/glass{
 	amount = 50
 	},
-/obj/machinery/camera/network/command{
-	c_tag = "EVA- Center";
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24;
@@ -7633,10 +7607,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - EVA";
-	dir = 8
-	},
 /obj/effect/catwalk_plated,
 /obj/machinery/alarm{
 	dir = 8;
@@ -7920,9 +7890,6 @@
 /area/hallway/primary/thirddeck/aft)
 "rv" = (
 /obj/machinery/hologram/holopad,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Holodeck - Center"
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	dir = 4;
@@ -10144,10 +10111,6 @@
 	name = "east bump";
 	pixel_x = 24
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Firing Range";
-	dir = 8
-	},
 /turf/simulated/floor/tiled,
 /area/security/range)
 "wf" = (
@@ -10361,10 +10324,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/machinery/camera/network/command{
-	c_tag = "EVA - Miscellaneous Suit Storage";
-	dir = 8
-	},
 /turf/simulated/floor/tiled/dark,
 /area/ai_monitored/storage/eva)
 "wH" = (
@@ -10476,9 +10435,6 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
-	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Teleporter"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -11360,11 +11316,6 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Diplomatic Quarter";
-	dir = 4;
-	name = "Diplomatic Quarters"
-	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/diplomat)
 "yz" = (
@@ -11716,10 +11667,6 @@
 /turf/simulated/floor/tiled,
 /area/security/range)
 "zn" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Vacant Offices";
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
@@ -12034,10 +11981,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Offices";
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -12082,10 +12025,6 @@
 "An" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 6
-	},
-/obj/machinery/camera/network/command{
-	c_tag = "EVA - Suit Storage";
-	dir = 1
 	},
 /obj/item/device/radio/intercom{
 	dir = 1;
@@ -12313,9 +12252,6 @@
 "AM" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Auxillary Storage"
-	},
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
@@ -13455,14 +13391,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/port)
-"DU" = (
-/obj/machinery/camera/network/command{
-	c_tag = "Bluespace Artillery - Storage";
-	dir = 4;
-	network = list("Command")
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/bsa)
 "DV" = (
 /obj/effect/floor_decal/corner/lime{
 	dir = 8
@@ -20508,10 +20436,6 @@
 /obj/item/weapon/grenade/chem_grenade/metalfoam,
 /obj/item/weapon/grenade/chem_grenade/metalfoam,
 /obj/item/weapon/grenade/chem_grenade/metalfoam,
-/obj/machinery/camera/network/engineering{
-	c_tag = "Engineering - Hard Storage";
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/yellow/half{
 	icon_state = "bordercolorhalf";
 	dir = 8
@@ -20556,10 +20480,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "XJ" = (
-/obj/machinery/camera/network/security{
-	c_tag = "Checkpoint - Deck Three";
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
@@ -43053,7 +42973,7 @@ aa
 Qq
 HX
 DM
-DU
+Pp
 IK
 rG
 Pp
