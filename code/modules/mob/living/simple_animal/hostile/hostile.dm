@@ -209,20 +209,26 @@
 	. = ..()
 	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
-		MoveToTarget()
+		//MoveToTarget()
+		stance = HOSTILE_STANCE_ATTACK
+		Life()
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = M
-		MoveToTarget()
+		//MoveToTarget()
+		stance = HOSTILE_STANCE_ATTACK
+		Life()
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
 	if(!target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
-		MoveToTarget()
+		//MoveToTarget()
+		stance = HOSTILE_STANCE_ATTACK
+		Life()
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	RangedAttack(target_mob)
