@@ -98,6 +98,7 @@ Class Procs:
 	var/power_init_complete = FALSE // Helps with bookkeeping when initializing atoms. Don't modify.
 	var/list/component_parts           //List of component instances. Expected type: /obj/item/weapon/stock_parts
 	var/list/uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc) //List of component paths which have delayed init. Indeces = number of components.
+	var/list/maximum_component_parts   //null - no max. list(type part = number max).
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
@@ -282,14 +283,6 @@ Class Procs:
 		if(user.stunned)
 			return 1
 	return 0
-
-/obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
-	old_part = uninstall_component(old_part)
-	if(R)
-		R.remove_from_storage(new_part, src)
-		R.handle_item_insertion(old_part, 1)
-	install_component(new_part)
-	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)

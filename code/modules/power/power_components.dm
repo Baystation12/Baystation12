@@ -7,7 +7,6 @@
 	part_flags = PART_FLAG_QDEL // For integrated components, which are built from uncreated_component_parts. Use subtypes with this off for buildable ones.
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "teslalink"
-	can_be_uninstalled = FALSE  // For integrated components, which are built from uncreated_component_parts. Use subtypes with this off for buildable ones.
 	var/priority = 0            // Higher priority is used first
 	var/cached_channel
 

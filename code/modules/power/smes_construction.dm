@@ -57,8 +57,6 @@
 
 // SMES itself
 /obj/machinery/power/smes/buildable
-	var/max_coils = 6 			// 250 kWh capacity, 1.5MW input/output when fully upgraded /w default coils
-	var/cur_coils = 1 			// Current amount of installed coils
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
 	var/datum/wires/smes/wires
@@ -71,6 +69,7 @@
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/buildable
 	uncreated_component_parts = null
+	maximum_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 6)
 	interact_offline = TRUE
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
@@ -142,12 +141,10 @@
 // Description: Updates properties (IO, capacity, etc.) of this SMES by checking internal components.
 /obj/machinery/power/smes/buildable/RefreshParts()
 	..()
-	cur_coils = 0
 	capacity = 0
 	input_level_max = 0
 	output_level_max = 0
 	for(var/obj/item/weapon/stock_parts/smes_coil/C in component_parts)
-		cur_coils++
 		capacity += C.ChargeCapacity
 		input_level_max += C.IOCapacity
 		output_level_max += C.IOCapacity
@@ -336,11 +333,18 @@
 		if(!(stat & BROKEN))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
-			if(!do_after(user, 5 SECONDS * cur_coils, src) && isCrowbar(user.get_active_hand()))
+			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/weapon/stock_parts/smes_coil), src) && isCrowbar(user.get_active_hand()))
 				return MCS_BLOCK
 			if(check_total_system_failure(user))
 				return MCS_BLOCK
 	return ..()
+
+/obj/machinery/power/smes/buildable/can_add_component(obj/item/weapon/stock_parts/component, mob/user)
+	. = ..()
+	if(!.)
+		return
+	if(check_total_system_failure(user))
+		return FALSE
 
 // Proc: attackby()
 // Parameters: 2 (W - object that was used on this machine, user - person which used the object)
@@ -359,30 +363,6 @@
 			if(newtag)
 				RCon_tag = newtag
 				to_chat(user, "<span class='notice'>You changed the RCON tag to: [newtag]</span>")
-			return
-
-// Stuff below is placeholder for component install/uninstall code.
-
-		// Charged above 1% and safeties are enabled.
-		if((charge > (capacity/100)) && safeties_enabled)
-			to_chat(user, "<span class='warning'>Safety circuit of [src] is preventing modifications while it's charged!</span>")
-			return
-
-		if (output_attempt || input_attempt)
-			to_chat(user, "<span class='warning'>Turn off \the [src] first!</span>")
-			return
-
-		// Superconducting Magnetic Coil - Upgrade the SMES
-		else if(istype(W, /obj/item/weapon/stock_parts/smes_coil))
-			if(cur_coils < max_coils)
-				if(check_total_system_failure(user))
-					return
-				if(!user.unEquip(W, src))
-					return
-				to_chat(usr, "You install the coil into the SMES unit!")
-				install_component(W)
-			else
-				to_chat(usr, "<span class='warning'>You can't insert more coils to this SMES unit!</span>")
 
 // Proc: toggle_input()
 // Parameters: None

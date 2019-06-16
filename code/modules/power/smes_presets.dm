@@ -4,7 +4,6 @@
 	var/_input_on = FALSE
 	var/_output_maxed = FALSE
 	var/_output_on = FALSE
-	cur_coils = 0
 
 /obj/machinery/power/smes/buildable/preset/Initialize()
 	. = ..()
