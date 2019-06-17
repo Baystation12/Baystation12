@@ -36,6 +36,11 @@
 			diggable = 0
 		else
 			to_chat(user,"<span class='notice'>You stop shoveling.</span>")
+	else if(istype(C, /obj/item/stack/tile))
+		var/obj/item/stack/tile/T = C
+		if(T.use(1))
+			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
+			ChangeTurf(/turf/simulated/floor, FALSE, FALSE, TRUE)
 	else
 		..()
 
