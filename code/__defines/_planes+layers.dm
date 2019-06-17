@@ -117,6 +117,8 @@ What is the naming convention for planes or layers?
 
 	#define HIDING_MOB_LAYER    0
 	#define SHALLOW_FLUID_LAYER 1
+	#define MOB_SHADOW_LAYER    2
+
 #define OBJ_PLANE                     -15 // For objects which appear below humans.
 	#define BELOW_DOOR_LAYER        0.25
 	#define OPEN_DOOR_LAYER         0.5

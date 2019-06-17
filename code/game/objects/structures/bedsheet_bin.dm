@@ -11,6 +11,7 @@ LINEN BINS
 	icon_state = "sheet"
 	item_state = "bedsheet"
 	randpixel = 0
+	pixel_z = MOB_PIXEL_Z
 	slot_flags = SLOT_BACK
 	plane = ABOVE_OBJ_PLANE
 	layer = BASE_ABOVE_OBJ_LAYER
