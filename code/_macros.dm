@@ -63,6 +63,8 @@
 
 #define isslime(A) istype(A, /mob/living/carbon/slime)
 
+#define isbst(A) istype(A, /mob/living/carbon/human/bst)
+
 #define isunderwear(A) istype(A, /obj/item/underwear)
 
 #define isvirtualmob(A) istype(A, /mob/observer/virtual)
@@ -176,3 +178,7 @@
 #define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
 
 #define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
+
+
+//Makes span tags easier
+#define span(class, text) ("<span class='[class]'>[text]</span>")

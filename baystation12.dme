@@ -1099,6 +1099,7 @@
 #include "code\modules\admin\admin_secrets.dm"
 #include "code\modules\admin\admin_verbs.dm"
 #include "code\modules\admin\banjob.dm"
+#include "code\modules\admin\bluespacetech.dm"
 #include "code\modules\admin\create_mob.dm"
 #include "code\modules\admin\create_object.dm"
 #include "code\modules\admin\create_turf.dm"
