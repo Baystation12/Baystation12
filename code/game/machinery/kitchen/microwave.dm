@@ -132,7 +132,12 @@
 		var/obj/item/grab/G = O
 		to_chat(user, "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>")
 		return 1
-	else if(isCrowbar(O))
+	else if(default_deconstruction_screwdriver(user, O))
+		updateUsrDialog()
+		return TRUE
+	else if(default_deconstruction_crowbar(user, O))
+		return TRUE
+	else if(isWrench(O))
 		user.visible_message( \
 			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
@@ -146,10 +151,11 @@
 		else
 			to_chat(user, "<span class='notice'>You decide not to do that.</span>")
 	else
-
 		to_chat(user, "<span class='warning'>You have no idea what you can cook with this [O].</span>")
-	..()
 	src.updateUsrDialog()
+
+/obj/machinery/microwave/components_are_accessible(path)
+	return (broken == 0) && ..()
 
 /obj/machinery/microwave/attack_ai(mob/user as mob)
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))

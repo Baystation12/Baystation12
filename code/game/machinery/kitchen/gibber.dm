@@ -56,7 +56,15 @@
 	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] \the [src]'s safety guard.</span>")
 	return 1
 
+/obj/machinery/gibber/components_are_accessible(path)
+	return !operating && ..()	
+
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
+	if(!operating)
+		if(default_deconstruction_screwdriver(user, W))
+			return TRUE
+		if(default_deconstruction_crowbar(user, W))
+			return TRUE
 	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W
 		if(!G.force_danger())

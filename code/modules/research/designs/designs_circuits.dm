@@ -576,6 +576,42 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/replicator
 	sort_string = "WAAAR"
 
+/datum/design/circuit/microwave
+	name = "microwave"
+	id = "microwave"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/microwave
+	sort_string = "WAAAT"
+
+/datum/design/circuit/gibber
+	name = "meat gibber"
+	id = "gibber"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/gibber
+	sort_string = "WAAAU"
+
+/datum/design/circuit/cooker
+	name = "kitchen appliance (assorted)"
+	desc = "Allows for the construction of an interchangable cooking appliance circuit board. Use a multitool to select appliance."
+	id = "cooker"
+	req_tech = list(TECH_BIO = 1, TECH_MATERIAL = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/cooker
+	sort_string = "WAAAV"
+
+/datum/design/circuit/honey_extractor
+	name = "honey extractor"
+	id = "honey_extractor"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/honey
+	sort_string = "WAAAW"
+
+/datum/design/circuit/seed_extractor
+	name = "seed extractor"
+	id = "seed_extractor"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/honey/seed
+	sort_string = "WAAAX"
+
 /datum/design/circuit/aicore
 	name = "AI core"
 	id = "aicore"

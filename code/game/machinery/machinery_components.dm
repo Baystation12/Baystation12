@@ -6,6 +6,11 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	. = list()
 	for(var/board_path in subtypesof(/obj/item/weapon/stock_parts/circuitboard))
 		var/obj/item/weapon/stock_parts/circuitboard/board = board_path //fake type
+		if(initial(board.buildtype_select))
+			board = new board_path()
+			for(var/path in board.get_buildable_types())
+				.[path] = board_path
+			continue
 		.[initial(board.build_path)] = board_path
 
 // Code concerning machinery interaction with components/stock parts.
