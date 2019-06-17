@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - tweak: "Dionaea can stand in water to recover thirst, and lose hydration slower than others."
+  - tweak: "Going prone on water turfs will now drown you."
