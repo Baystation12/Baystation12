@@ -64,12 +64,11 @@
 /datum/transaction/singular/proc/is_deposit()
 	return (amount > 0)
 
-// Deposits require the target account to be valid. Withdrawals require the source account to be valid
 /datum/transaction/singular/valid()
-	return (!source.suspended)
+	return !source.suspended && source_can_afford()
 
 /datum/transaction/singular/source_can_afford()
-	return (is_deposit() ? TRUE : ..())
+	return source.money + amount >= 0
 
 // For deposits: returns the name of the account the money was deposited to. For withdrawals: returns the machine ID of the machine the withdrawal was made at
 /datum/transaction/singular/get_target_name()
