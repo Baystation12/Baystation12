@@ -55,4 +55,6 @@
 		return ITEM_SIZE_HUGE
 	if(nymphs.len > 4)
 		return ITEM_SIZE_LARGE
-	return ITEM_SIZE_NORMAL
+	if(nymphs.len > 2)
+		return ITEM_SIZE_NORMAL
+	return ITEM_SIZE_SMALL
