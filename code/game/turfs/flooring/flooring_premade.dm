@@ -374,6 +374,9 @@
 	icon_state = "water"
 	turf_flags = TURF_IS_WET
 
+/turf/simulated/floor/beach/water/is_flooded(lying_mob, absolute)
+	. = absolute ? ..() : lying_mob
+
 /turf/simulated/floor/beach/water/update_dirt()
 	return	// Water doesn't become dirty
 

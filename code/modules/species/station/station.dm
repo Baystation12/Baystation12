@@ -228,6 +228,7 @@
 	spawns_with_stack = 0
 	health_hud_intensity = 2
 	hunger_factor = 3
+	thirst_factor = 0.01
 
 	min_age = 1
 	max_age = 300
@@ -380,5 +381,20 @@
 	return "sap"
 
 /datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
-	if(!H.InStasis() && H.stat != DEAD && H.nutrition < 10)
+	if(H.InStasis() || H.stat == DEAD)
+		return
+
+	if(H.nutrition < 10)
 		H.take_overall_damage(2,0)
+
+	if(H.hydration < 550 && H.loc)
+		var/is_in_water = FALSE
+		if(H.loc.is_flooded(lying_mob = TRUE))
+			is_in_water = TRUE
+		else
+			for(var/obj/structure/hygiene/shower/shower in H.loc)
+				if(shower.on)
+					is_in_water = TRUE
+					break
+		if(is_in_water)
+			H.adjust_hydration(100)

@@ -52,6 +52,9 @@
 			if(prob(40))
 				ChangeTurf(get_base_turf_by_area(src))
 
+/turf/simulated/floor/exoplanet/water/is_flooded(lying_mob, absolute)
+	. = absolute ? ..() : lying_mob
+
 /turf/simulated/floor/exoplanet/water/shallow
 	name = "shallow water"
 	icon = 'icons/misc/beach.dmi'
