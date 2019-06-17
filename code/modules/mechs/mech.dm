@@ -51,11 +51,15 @@
 	var/hatch_closed = FALSE
 	var/hatch_locked = FALSE
 
+	//Air!
+	var/use_air      = FALSE
+
 	// Interface stuff.
 	var/list/hud_elements = list()
 	var/list/hardpoint_hud_elements = list()
 	var/obj/screen/movable/exosuit/health/hud_health
 	var/obj/screen/movable/exosuit/toggle/hatch_open/hud_open
+	var/obj/screen/movable/exosuit/power/hud_power
 
 /mob/living/exosuit/is_flooded()
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
@@ -190,3 +194,22 @@
 	. = ..()
 	if(.)
 		update_pilots()
+
+		
+//The radio subtype. It allows pilots to interact and consumes exosuit power
+
+/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
+	. = ..()
+
+
+/obj/item/device/radio/exosuit/nano_host()
+	var/mob/living/exosuit/E = loc
+	if(istype(E))
+		return E
+	return null
+
+/obj/item/device/radio/exosuit/get_cell()
+	var/mob/living/exosuit/E = loc
+	if(istype(E))
+		return E.get_cell()
+

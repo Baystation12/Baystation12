@@ -28,7 +28,8 @@
 			/obj/screen/movable/exosuit/toggle/hatch_open,
 			/obj/screen/movable/exosuit/radio,
 			/obj/screen/movable/exosuit/rename,
-			/obj/screen/movable/exosuit/toggle/camera
+			/obj/screen/movable/exosuit/toggle/camera,
+			/obj/screen/movable/exosuit/toggle/air
 			)
 		i = 0
 		var/pos = 7
@@ -45,6 +46,9 @@
 		hud_health.screen_loc = "EAST-1:28,CENTER-3:11"
 		hud_elements |= hud_health
 		hud_open = locate(/obj/screen/movable/exosuit/toggle/hatch_open) in hud_elements
+		hud_power = new /obj/screen/movable/exosuit/power(src)
+		hud_power.screen_loc = "EAST-1:0,CENTER-4:25"
+		hud_elements |= hud_power
 
 	refresh_hud()
 
@@ -53,6 +57,7 @@
 		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H) H.update_system_info()
 	handle_hud_icons_health()
+	hud_power.maptext = "[get_cell().charge]/[get_cell().maxcharge]"
 	refresh_hud()
 
 /mob/living/exosuit/handle_hud_icons_health()

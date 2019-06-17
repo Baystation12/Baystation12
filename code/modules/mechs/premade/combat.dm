@@ -16,6 +16,9 @@
 		body = new /obj/item/mech_component/chassis/combat(src)
 		body.color = COLOR_DARK_GUNMETAL
 
+	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
+
 	..()
 
 	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
@@ -68,6 +71,5 @@
 			"[WEST]"  = list("x" = 12, "y" = 8)
 		)
 	)
-	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
+	
 	..()

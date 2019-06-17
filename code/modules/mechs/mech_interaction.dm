@@ -11,6 +11,12 @@
 					return
 	return ..()
 
+/mob/living/exosuit/MouseDrop_T(atom/dropping, mob/user)
+	var/obj/machinery/portable_atmospherics/canister/C = dropping
+	if(istype(C))
+		body.MouseDrop_T(dropping, user)
+	else . = ..()
+
 
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 

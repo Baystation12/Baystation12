@@ -1,4 +1,4 @@
-/obj/machinery/mecha_part_fabricator
+/obj/machinery/robotics_fabricator
 	name = "Exosuit Fabricator"
 	desc = "A machine used for construction of robotics and mechs."
 	icon = 'icons/obj/robotics.dmi'
@@ -8,10 +8,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 	req_access = list(access_robotics)
-	base_type = /obj/machinery/mecha_part_fabricator
-	construct_state = /decl/machine_construction/default/panel_closed
-	uncreated_component_parts = null
-	stat_immune = 0
+	base_type = /obj/machinery/robotics_fabricator
 
 	var/speed = 1
 	var/mat_efficiency = 1
@@ -28,13 +25,14 @@
 	var/manufacturer = null
 	var/sync_message = ""
 
-/obj/machinery/mecha_part_fabricator/Initialize()
+/obj/machinery/robotics_fabricator/Initialize()
 	files = new /datum/research(src) //Setup the research data holder.
 	manufacturer = basic_robolimb.company
 	update_categories()
 	. = ..()
 
-/obj/machinery/mecha_part_fabricator/Process()
+/obj/machinery/robotics_fabricator/Process()
+	..()
 	if(stat)
 		return
 	if(busy)
@@ -45,7 +43,7 @@
 		update_use_power(POWER_USE_IDLE)
 	update_icon()
 
-/obj/machinery/mecha_part_fabricator/on_update_icon()
+/obj/machinery/robotics_fabricator/on_update_icon()
 	overlays.Cut()
 	if(panel_open)
 		icon_state = "fab-o"
@@ -54,12 +52,12 @@
 	if(busy)
 		overlays += "fab-active"
 
-/obj/machinery/mecha_part_fabricator/dismantle()
+/obj/machinery/robotics_fabricator/dismantle()
 	for(var/f in materials)
 		eject_materials(f, -1)
 	..()
 
-/obj/machinery/mecha_part_fabricator/RefreshParts()
+/obj/machinery/robotics_fabricator/RefreshParts()
 	res_max_amount = 100000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
 
 	var/T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 4)
@@ -68,11 +66,14 @@
 	T += total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
 	speed = T / 2 // 1 -> 3
 
-/obj/machinery/mecha_part_fabricator/interface_interact(var/mob/user)
+/obj/machinery/robotics_fabricator/attack_hand(var/mob/user)
+	if(..())
+		return
+	if(!allowed(user))
+		return
 	ui_interact(user)
-	return TRUE
 
-/obj/machinery/mecha_part_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/robotics_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
 	var/datum/design/current = queue.len ? queue[1] : null
@@ -104,7 +105,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/mecha_part_fabricator/Topic(href, href_list)
+/obj/machinery/robotics_fabricator/Topic(href, href_list)
 	if(..())
 		return
 
@@ -132,18 +133,17 @@
 
 	return 1
 
-/obj/machinery/mecha_part_fabricator/components_are_accessible(path)
-	return !busy && ..()
-
-/obj/machinery/mecha_part_fabricator/cannot_transition_to(state_path)
-	if(busy)
-		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
-	return ..()
-
-/obj/machinery/mecha_part_fabricator/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/robotics_fabricator/attackby(var/obj/item/I, var/mob/user)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
+	if(default_deconstruction_screwdriver(user, I))
+		return
+	if(default_deconstruction_crowbar(user, I))
+		return
+	if(default_part_replacement(user, I))
+		return
+
 	if(!istype(I, /obj/item/stack/material))
 		return ..()
 
@@ -177,7 +177,7 @@
 		to_chat(user, "The fabricator cannot hold more [stack_plural].")// use the plural form even if the given sheet is singular
 
 
-/obj/machinery/mecha_part_fabricator/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/robotics_fabricator/emag_act(var/remaining_charges, var/mob/user)
 	switch(emagged)
 		if(0)
 			emagged = 0.5
@@ -196,7 +196,7 @@
 		if(1)
 			visible_message("\icon[src] <b>[src]</b> beeps: \"No records in User DB\"")
 
-/obj/machinery/mecha_part_fabricator/proc/update_busy()
+/obj/machinery/robotics_fabricator/proc/update_busy()
 	if(queue.len)
 		if(can_build(queue[1]))
 			busy = 1
@@ -205,24 +205,24 @@
 	else
 		busy = 0
 
-/obj/machinery/mecha_part_fabricator/proc/add_to_queue(var/index)
+/obj/machinery/robotics_fabricator/proc/add_to_queue(var/index)
 	var/datum/design/D = files.known_designs[index]
 	queue += D
 	update_busy()
 
-/obj/machinery/mecha_part_fabricator/proc/remove_from_queue(var/index)
+/obj/machinery/robotics_fabricator/proc/remove_from_queue(var/index)
 	if(index == 1)
 		progress = 0
 	queue.Cut(index, index + 1)
 	update_busy()
 
-/obj/machinery/mecha_part_fabricator/proc/can_build(var/datum/design/D)
+/obj/machinery/robotics_fabricator/proc/can_build(var/datum/design/D)
 	for(var/M in D.materials)
 		if(materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	return 1
 
-/obj/machinery/mecha_part_fabricator/proc/check_build()
+/obj/machinery/robotics_fabricator/proc/check_build()
 	if(!queue.len)
 		progress = 0
 		return
@@ -243,13 +243,13 @@
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)
 
-/obj/machinery/mecha_part_fabricator/proc/get_queue_names()
+/obj/machinery/robotics_fabricator/proc/get_queue_names()
 	. = list()
 	for(var/i = 2 to queue.len)
 		var/datum/design/D = queue[i]
 		. += D.name
 
-/obj/machinery/mecha_part_fabricator/proc/get_build_options()
+/obj/machinery/robotics_fabricator/proc/get_build_options()
 	. = list()
 	for(var/i = 1 to files.known_designs.len)
 		var/datum/design/D = files.known_designs[i]
@@ -257,16 +257,16 @@
 			continue
 		. += list(list("name" = D.name, "id" = i, "category" = D.category, "resourses" = get_design_resourses(D), "time" = get_design_time(D)))
 
-/obj/machinery/mecha_part_fabricator/proc/get_design_resourses(var/datum/design/D)
+/obj/machinery/robotics_fabricator/proc/get_design_resourses(var/datum/design/D)
 	var/list/F = list()
 	for(var/T in D.materials)
 		F += "[capitalize(T)]: [D.materials[T] * mat_efficiency]"
 	return english_list(F, and_text = ", ")
 
-/obj/machinery/mecha_part_fabricator/proc/get_design_time(var/datum/design/D)
+/obj/machinery/robotics_fabricator/proc/get_design_time(var/datum/design/D)
 	return time2text(round(10 * D.time / speed), "mm:ss")
 
-/obj/machinery/mecha_part_fabricator/proc/update_categories()
+/obj/machinery/robotics_fabricator/proc/update_categories()
 	categories = list()
 	for(var/datum/design/D in files.known_designs)
 		if(!D.build_path || !(D.build_type & MECHFAB))
@@ -275,12 +275,12 @@
 	if(!category || !(category in categories))
 		category = categories[1]
 
-/obj/machinery/mecha_part_fabricator/proc/get_materials()
+/obj/machinery/robotics_fabricator/proc/get_materials()
 	. = list()
 	for(var/T in materials)
 		. += list(list("mat" = capitalize(T), "amt" = materials[T]))
 
-/obj/machinery/mecha_part_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
+/obj/machinery/robotics_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
 	var/recursive = amount == -1 ? 1 : 0
 	material = lowertext(material)
 	var/mattype
@@ -318,7 +318,7 @@
 		eject_materials(material, -1)
 	update_busy()
 
-/obj/machinery/mecha_part_fabricator/proc/sync()
+/obj/machinery/robotics_fabricator/proc/sync()
 	sync_message = "Error: no console found."
 	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
 		if(!RDC.sync)

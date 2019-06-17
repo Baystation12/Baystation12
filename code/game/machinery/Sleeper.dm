@@ -24,6 +24,7 @@
 	var/stasis = 1
 	var/synth_modifier = 1
 	var/pump_speed
+	var/stasis_power = 5 KILOWATTS
 
 	idle_power_usage = 15
 	active_power_usage = 1 KILOWATTS //builtin health analyzer, dialysis machine, injectors.
@@ -151,7 +152,7 @@
 		var/nstasis = text2num(href_list["stasis"])
 		if(stasis != nstasis && nstasis in stasis_settings)
 			stasis = text2num(href_list["stasis"])
-			change_power_consumption(initial(active_power_usage) + 5 KILOWATTS * (stasis-1), POWER_USE_ACTIVE)
+			change_power_consumption(initial(active_power_usage) + stasis_power * (stasis-1), POWER_USE_ACTIVE)
 			return TOPIC_REFRESH
 
 /obj/machinery/sleeper/state_transition(var/decl/machine_construction/default/new_state)

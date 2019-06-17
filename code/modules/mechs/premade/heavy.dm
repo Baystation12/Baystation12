@@ -16,6 +16,9 @@
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = COLOR_TITANIUM
 
+	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
+
 	..()
 
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_LEFT_HAND)
@@ -65,9 +68,5 @@
 	power_use = 50
 	has_hardpoints = list(HARDPOINT_BACK)
 
-/obj/item/mech_component/chassis/heavy/New()
-	..()
-	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
 
 
