@@ -122,6 +122,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	machinetype = 6
 	produces_heat = 0
 	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone
+	maximum_component_parts = list(/obj/item/weapon/stock_parts = 12)
 	var/listening_freqs
 	var/channel_color
 	var/channel_name

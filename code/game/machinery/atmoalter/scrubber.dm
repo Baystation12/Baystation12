@@ -152,6 +152,7 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
 
 	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc)
+	maximum_component_parts = list(/obj/item/weapon/stock_parts = 12)
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	power_rating = 100000 //100 kW ~ 135 HP
 
