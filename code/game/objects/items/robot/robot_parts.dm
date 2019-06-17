@@ -96,7 +96,7 @@
 	var/success = TRUE;
 	if(!(flash1 && flash2))
 		to_chat(user, "<span class='warning'>You need to attach a flash to it first!</span>")
-		success = FALSE:
+		success = FALSE
 	return success && ..();
 
 /obj/item/robot_parts/robot_suit
