@@ -14,7 +14,7 @@
 	w_class = ITEM_SIZE_LARGE							// It's LARGE (backpack size)
 	origin_tech = list(TECH_MATERIAL = 7, TECH_POWER = 7, TECH_ENGINEERING = 5)
 	base_type = /obj/item/weapon/stock_parts/smes_coil
-	lazy_initialize = FALSE
+	part_flags = PART_FLAG_HAND_REMOVE
 	var/ChargeCapacity = 50 KILOWATTS
 	var/IOCapacity = 250 KILOWATTS
 

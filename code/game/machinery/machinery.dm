@@ -342,10 +342,10 @@ Class Procs:
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/I in component_parts)
-		uninstall_component(I)
+		uninstall_component(I, refresh_parts = FALSE)
 	while(LAZYLEN(uncreated_component_parts))
 		var/path = uncreated_component_parts[1]
-		uninstall_component(path)
+		uninstall_component(path, refresh_parts = FALSE)
 
 	qdel(src)
 	return 1
