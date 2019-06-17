@@ -576,6 +576,13 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/replicator
 	sort_string = "WAAAR"
 
+/datum/design/circuit/washer
+	name = "washing machine"
+	id = "washer"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/washer
+	sort_string = "WAAAS"
+
 /datum/design/circuit/microwave
 	name = "microwave"
 	id = "microwave"
