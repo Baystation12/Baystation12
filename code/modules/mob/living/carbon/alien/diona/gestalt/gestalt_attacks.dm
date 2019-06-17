@@ -3,7 +3,7 @@
 		return
 
 	if(istype(user, /mob/living/carbon/alien/diona) && user.a_intent != I_HURT)
-		take_nymph(user)
+		can_roll_up_atom(user)
 		return
 
 	visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
