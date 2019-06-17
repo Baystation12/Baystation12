@@ -11,6 +11,7 @@ var/global/list/stool_cache = list() //haha stool
 	force = 10
 	throwforce = 10
 	w_class = ITEM_SIZE_HUGE
+	pixel_z = MOB_PIXEL_Z
 	var/base_icon = "stool"
 	var/material/material
 	var/material/padding_material

@@ -4,10 +4,10 @@
 	icon_state = "chair_preview"
 	color = "#666666"
 	base_icon = "chair"
+	buckle_pixel_shift = "x=0;y=0;z=7"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	obj_flags = OBJ_FLAG_ROTATABLE
-	
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)

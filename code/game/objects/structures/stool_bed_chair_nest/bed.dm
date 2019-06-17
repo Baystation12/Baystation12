@@ -17,6 +17,8 @@
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
+	pixel_z = MOB_PIXEL_Z
+	buckle_pixel_shift = "x=0;y=0;z=7"
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/material_alteration = MATERIAL_ALTERATION_ALL
@@ -211,7 +213,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
-	buckle_pixel_shift = "x=0;y=6"
+	buckle_pixel_shift = "x=0;y=0;z=13"
 	var/item_form_type = /obj/item/roller	//The folded-up object path.
 	var/obj/item/weapon/reagent_containers/beaker
 	var/iv_attached = 0

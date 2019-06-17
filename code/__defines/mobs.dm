@@ -339,6 +339,8 @@
 
 #define MOB_FACTION_NEUTRAL "neutral"
 
+#define MOB_PIXEL_Z 7
+
 #define ROBOT_MODULE_TYPE_GROUNDED "grounded"
 #define ROBOT_MODULE_TYPE_FLYING   "flying"
 

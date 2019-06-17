@@ -50,7 +50,7 @@
 	virus_immune = 1
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
-	pixel_offset_y = -4
+	pixel_offset_z = -4
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(

@@ -1,6 +1,7 @@
 /mob
 	density = 1
 	plane = MOB_PLANE
+	pixel_z = MOB_PIXEL_Z
 
 	appearance_flags = PIXEL_SCALE
 	animate_movement = 2
@@ -106,6 +107,7 @@
 	var/bodytemperature = 310.055	//98.7 F
 	var/default_pixel_x = 0
 	var/default_pixel_y = 0
+	var/default_pixel_z = MOB_PIXEL_Z
 
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living

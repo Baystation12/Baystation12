@@ -223,3 +223,6 @@
 /turf/simulated/open/Destroy()
 	src.clean_up()
 	. = ..()
+
+/turf/simulated/open/is_open()
+	return TRUE
