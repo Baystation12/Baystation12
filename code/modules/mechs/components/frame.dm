@@ -236,7 +236,7 @@
 
 		var/last_reinforced_state = is_reinforced
 		visible_message("\The [user] begins adjusting the metal reinforcement inside \the [src].")
-		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
+		if(!do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
 			return
 
 		visible_message("\The [user] [(is_reinforced == 2) ? "unsecures" : "secures"] the metal reinforcement inside \the [src].")
@@ -258,7 +258,7 @@
 
 			var/last_reinforced_state = is_reinforced
 			visible_message("\The [user] begins welding the metal reinforcement inside \the [src].")
-			if(!do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
+			if(!do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
 				return
 
 			visible_message("\The [user] [(is_reinforced == 3) ? "unwelds the reinforcement from" : "welds the reinforcement into"] \the [src].")
@@ -304,7 +304,7 @@
 		return 0
 	if(user)
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))
-		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)) || user.get_active_hand() != thing)
+		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_hand() != thing)
 			return
 		user.drop_from_inventory(thing)
 	thing.forceMove(src)

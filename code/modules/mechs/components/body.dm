@@ -58,6 +58,7 @@
 	cockpit = new(20)
 	if(loc)
 		cockpit.equalize(loc.return_air())
+	air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
 
 /obj/item/mech_component/chassis/proc/update_air(var/take_from_supply)
 
@@ -86,7 +87,6 @@
 	diagnostics = new(src)
 	cell = new /obj/item/weapon/cell/exosuit(src)
 	cell.charge = cell.maxcharge
-	air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
 
 /obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/diagnosis_unit))
@@ -108,3 +108,16 @@
 			set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
 	else
 		return ..()
+
+/obj/item/mech_component/chassis/MouseDrop_T(atom/dropping, mob/user)
+	var/obj/machinery/portable_atmospherics/canister/C = dropping
+	if(istype(C) && do_after(user, 5, src))
+		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
+		if(air_supply)
+			air_supply.forceMove(get_turf(src))
+			air_supply = null
+		C.forceMove(src)
+		update_components()
+	else . = ..()
+
+

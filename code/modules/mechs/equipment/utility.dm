@@ -5,6 +5,7 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	var/obj/carrying
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 
 /obj/item/mech_equipment/clamp/attack()
 	return 0
@@ -75,11 +76,13 @@
 	icon_state = "mech_floodlight"
 	item_state = "mech_floodlight"
 	restricted_hardpoints = list(HARDPOINT_HEAD)
+	layer_offset = -0.02
 
 	var/on = 0
 	var/l_max_bright = 0.9
 	var/l_inner_range = 1
 	var/l_outer_range = 6
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 
 /obj/item/mech_equipment/light/attack_self(var/mob/user)
 	. = ..()
@@ -106,6 +109,7 @@
 	var/mode = 1
 	var/atom/movable/locked
 	equipment_delay = 30 //Stunlocks are not ideal
+	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
 
 /obj/item/mech_equipment/catapult/get_hardpoint_maptext()
 	var/string
@@ -144,7 +148,7 @@
 						locked.throw_at(target, 14, 1.5, owner)
 						locked = null
 
-						owner.get_cell().use_power(active_power_use)
+						owner.get_cell().use(active_power_use * CELLRATE)
 
 					else
 						locked = null
@@ -191,6 +195,7 @@
 
 	//Drill can have a head
 	var/obj/item/weapon/material/drill_head/drill_head
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 	
 
 
@@ -225,7 +230,7 @@
 		if(drill_head == null)
 			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
 			return
-		owner.get_cell().use_power(active_power_use)
+		owner.get_cell().use(active_power_use * CELLRATE)
 		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
 		to_chat(user, "<span class='danger'>You start to drill \the [target]</span>")
 
@@ -288,14 +293,16 @@
 /obj/item/mech_equipment/mounted_system/taser/plasma
 	name = "Mounted plasma cutter"
 	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
-	icon_state = "railauto" //TODO: Make a new sprite
+	icon_state = "railauto" //TODO: Make a new sprite that doesn't get sec called on you.
 	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
 
 /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
+	
 
 /obj/item/mech_equipment/jumpjets
 	name = "\improper exosuit jumpjets"
@@ -312,6 +319,7 @@
 	var/using = FALSE
 	var/prev_y = 0
 	var/prev_alpha = 0
+	origin_tech = list(TECH_ENGINEERING = 6, TECH_MAGNET = 4, TECH_MATERIAL = 5)
 
 
 /obj/item/mech_equipment/jumpjets/proc/setup()

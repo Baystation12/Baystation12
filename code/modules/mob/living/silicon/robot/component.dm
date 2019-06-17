@@ -235,7 +235,7 @@
 	burn += burn_amt
 	total_dam = brute+burn
 	if(total_dam >= max_dam)
-		var/obj/item/weapon/circuitboard/broken/broken_device = new (get_turf(src))
+		var/obj/item/weapon/stock_parts/circuitboard/broken/broken_device = new (get_turf(src))
 		if(icon_state_broken != "broken")
 			broken_device.icon = src.icon
 			broken_device.icon_state = icon_state_broken

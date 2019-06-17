@@ -15,7 +15,7 @@
 	if(radio)
 		radio.on = (head && head.radio && head.radio.is_functional())
 
-	body.update_air(hatch_closed)
+	body.update_air(hatch_closed && use_air)
 
 	if((client || LAZYLEN(pilots)) && get_cell())
 		get_cell().drain_power(0, 0, calc_power_draw())

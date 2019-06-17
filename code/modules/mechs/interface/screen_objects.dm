@@ -153,6 +153,12 @@
 	name = "rename"
 	icon_state = "rename"
 
+/obj/screen/movable/exosuit/power
+	name = "power"
+	icon_state = null
+
+	maptext_width = 64
+
 /obj/screen/movable/exosuit/rename/Click()
 	if(..())
 		owner.rename(usr)
@@ -168,6 +174,14 @@
 	toggled = !toggled
 	icon_state = "[initial(icon_state)][toggled ? "_enabled" : ""]"
 	return toggled
+
+/obj/screen/movable/exosuit/toggle/air
+	name = "air"
+	icon_state = "air"
+
+/obj/screen/movable/exosuit/toggle/air/toggled()
+	owner.use_air = ..()
+	to_chat(usr, SPAN_NOTICE("Auxiliary atmospheric system [owner.use_air ? "enabled" : "disabled"]."))
 
 /obj/screen/movable/exosuit/toggle/maint
 	name = "toggle maintenance protocol"

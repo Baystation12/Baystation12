@@ -16,8 +16,8 @@
 		body = new /obj/item/mech_component/chassis/powerloader(src)
 		body.color = "#ffdc37"
 
-	armour = new /obj/item/robot_parts/robot_component/armour/exosuit
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
+	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
 
 	..()
 
@@ -107,8 +107,8 @@
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
 
-	armour = new /obj/item/robot_parts/robot_component/armour/exosuit
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
+	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
 
 	..()
 
@@ -116,6 +116,8 @@
 
 	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
+
+	
 
 
 /obj/item/mech_component/sensors/firefighter/prebuild()

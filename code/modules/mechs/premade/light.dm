@@ -16,9 +16,6 @@
 		body = new /obj/item/mech_component/chassis/light(src)
 		body.color = COLOR_OFF_WHITE
 
-	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
-
 	..()
 
 	install_system(new /obj/item/mech_equipment/catapult(src), HARDPOINT_LEFT_HAND)
@@ -81,4 +78,8 @@
 			"[WEST]"  = list("x" = 9,  "y" = -2)
 		)
 	)
+
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof
+	set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
+
 	..()

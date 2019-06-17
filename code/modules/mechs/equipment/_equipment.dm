@@ -13,16 +13,23 @@
 	var/equipment_delay = 0
 	var/active_power_use = 1 KILOWATTS // How much does it consume to perform and accomplish usage
 	var/passive_power_use = 0          // For gear that for some reason takes up power even if it's supposedly doing nothing (mech will idly consume power)
+	var/layer_offset = 0               // Special cases where you need your object to render further in front of things or behind them
+
+/obj/item/mech_equipment/attack() //Generally it's not desired to be able to attack with items
+	return 0
 
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
-	if (owner && loc == owner && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
+	
+	if (owner && loc == owner && ((user in owner.pilots) || user == owner) && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
+		if(target in owner.contents)
+			return
 		return 1
 	else 
 		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
 		return 0
 
 /obj/item/mech_equipment/attack_self(var/mob/user)
-	if (owner && loc == owner && (user in owner.pilots) && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
+	if (owner && loc == owner && ((user in owner.pilots) || user == owner) && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
 		return 1
 	else 
 		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to manipulate \the [src]"))
