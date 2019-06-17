@@ -7,3 +7,4 @@
 	key = ""
 	syllables = list("ook", "eek", "hiss", "gronk")
 	shorthand = "Ook"
+	hidden_from_codex = 1

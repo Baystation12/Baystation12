@@ -10,6 +10,7 @@
 	syllables = list("sss","sSs","SSS")
 	machine_understands = 0
 	shorthand = "Xeno"
+	hidden_from_codex = TRUE
 
 /datum/language/xenos
 	name = LANGUAGE_XENOPHAGE_GLOBAL
@@ -21,6 +22,7 @@
 	key = "a"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
+	hidden_from_codex = TRUE
 
 /datum/language/xenos/check_special_condition(var/mob/other)
 
@@ -40,6 +42,7 @@
 	key = "g"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
+	hidden_from_codex = TRUE
 
 /datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -58,6 +61,7 @@
 	key = "z"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
+	hidden_from_codex = TRUE
 
 /datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -119,6 +123,7 @@
 		"d'rekkathnor", "khari'd", "gual'te", "nikka", "nikt'o", "barada", "kla'atu", "barhah", "hra" ,"zar'garis")
 	machine_understands = 0
 	shorthand = "CT"
+	hidden_from_codex = TRUE
 
 /datum/language/cult
 	name = LANGUAGE_CULT_GLOBAL
@@ -130,6 +135,7 @@
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
+	hidden_from_codex = TRUE
 
 /datum/language/alium
 	name = LANGUAGE_ALIUM
@@ -142,6 +148,7 @@
 	"eg","bog","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
 	machine_understands = 0
 	shorthand = "AL"
+	hidden_from_codex = TRUE
 
 /datum/language/alium/New()
 	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
