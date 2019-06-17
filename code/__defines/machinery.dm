@@ -129,7 +129,13 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 
 #define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
 
+// obj/item/weapon/stock_parts status flags
 #define PART_STAT_INSTALLED  1
 #define PART_STAT_PROCESSING 2
 #define PART_STAT_ACTIVE     4
 #define PART_STAT_CONNECTED  8
+
+// part_flags
+#define PART_FLAG_LAZY_INIT   1 // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
+#define PART_FLAG_QDEL        2 // Will delete on uninstall
+#define PART_FLAG_HAND_REMOVE 4 // Can be removed by hand

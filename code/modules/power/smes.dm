@@ -12,6 +12,7 @@
 	anchored = 1
 	clicksound = "switch"
 	power_channel = LOCAL // Draws power from direct connections to powernets.
+	stat = BROKEN         // Should be removed if the terminals initialize fully.
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -80,6 +81,7 @@
 			if(term.dir == turn(d, 180) && !term.master)
 				part.set_terminal(src, term)
 				term.connect_to_network()
+		
 
 /obj/machinery/power/smes/add_avail(var/amount)
 	if(..(amount))

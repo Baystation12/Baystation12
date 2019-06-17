@@ -18,7 +18,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 15
-	lazy_initialize = FALSE
+	part_flags = 0
 	var/build_path = null
 	var/board_type = "computer"
 	var/list/req_components = null
