@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Airlock control boards now have 'Autoset Access' enabled by default."
