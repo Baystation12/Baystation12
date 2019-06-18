@@ -11,56 +11,56 @@
 	bulk = GUN_BULK_RIFLE
 	combustion = 1
 
-	var/obj/item/weapon/cell/cell                              // Currently installed powercell.
-	var/obj/item/weapon/stock_parts/capacitor/capacitor        // Installed capacitor. Higher rating == faster charge between shots.
-	var/removable_components = TRUE                            // Whether or not the gun can be dismantled.
-	var/gun_unreliable = 15                                    // Percentage chance of detonating in your hands.
+	var/obj/item/weapon/cell/p_cell									// Currently installed powercell.
+	var/obj/item/weapon/stock_parts/capacitor/p_capacitor			// Installed capacitor. Higher rating == faster charge between shots.
+	var/removable_components = TRUE									// Whether or not the gun can be dismantled.
+	var/gun_unreliable = 15											// Percentage chance of detonating in your hands.
 
-	var/obj/item/loaded                                        // Currently loaded object, for retrieval/unloading.
-	var/load_type = /obj/item/stack/material/rods                       // Type of stack to load with.
-	var/load_sheet_max = 1									   // Maximum number of "sheets" you can load from a stack.
-	var/projectile_type = /obj/item/projectile/bullet/magnetic // Actual fire type, since this isn't throw_at rod launcher.
+	var/obj/item/loaded												// Currently loaded object, for retrieval/unloading.
+	var/load_type = /obj/item/stack/material/rods					// Type of stack to load with.
+	var/load_sheet_max = 1											// Maximum number of "sheets" you can load from a stack.
+	var/projectile_type = /obj/item/projectile/bullet/magnetic		// Actual fire type, since this isn't throw_at rod launcher.
 
-	var/power_cost = 950                                       // Cost per fire, should consume almost an entire basic cell.
-	var/power_per_tick                                         // Capacitor charge per process(). Updated based on capacitor rating.
+	var/power_cost = 950											// Cost per fire, should consume almost an entire basic cell.
+	var/power_per_tick												// Capacitor charge per process(). Updated based on capacitor rating.
 
 /obj/item/weapon/gun/magnetic/Initialize()
 	START_PROCESSING(SSobj, src)
-	if(capacitor)
-		power_per_tick = (power_cost*0.15) * capacitor.rating
+	if(p_capacitor)
+		power_per_tick = (power_cost*0.15) * p_capacitor.rating
 	update_icon()
 	. = ..()
 
 /obj/item/weapon/gun/magnetic/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	QDEL_NULL(cell)
+	QDEL_NULL(p_cell)
 	QDEL_NULL(loaded)
-	QDEL_NULL(capacitor)
+	QDEL_NULL(p_capacitor)
 	. = ..()
 
 /obj/item/weapon/gun/magnetic/get_cell()
-	return cell
+	return p_cell
 
 /obj/item/weapon/gun/magnetic/Process()
-	if(capacitor)
-		if(cell)
-			if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
-				capacitor.charge(power_per_tick)
+	if(p_capacitor)
+		if(p_cell)
+			if(p_capacitor.charge < p_capacitor.max_charge && p_cell.checked_use(power_per_tick))
+				p_capacitor.charge(power_per_tick)
 		else
-			capacitor.use(capacitor.charge * 0.05)
+			p_capacitor.use(p_capacitor.charge * 0.05)
 	update_icon()
 
 /obj/item/weapon/gun/magnetic/on_update_icon()
 	. = ..()
 	var/list/overlays_to_add = list()
 	if(removable_components)
-		if(cell)
+		if(p_cell)
 			overlays_to_add += image(icon, "[icon_state]_cell")
-		if(capacitor)
+		if(p_capacitor)
 			overlays_to_add += image(icon, "[icon_state]_capacitor")
-	if(!cell || !capacitor)
+	if(!p_cell || !p_capacitor)
 		overlays_to_add += image(icon, "[icon_state]_red")
-	else if(capacitor.charge < power_cost)
+	else if(p_capacitor.charge < power_cost)
 		overlays_to_add += image(icon, "[icon_state]_amber")
 	else
 		overlays_to_add += image(icon, "[icon_state]_green")
@@ -70,7 +70,7 @@
 		if(istype(mag))
 			if(mag.remaining)
 				overlays_to_add += image(icon, "[icon_state]_ammo")
-				
+
 	overlays += overlays_to_add
 
 /obj/item/weapon/gun/magnetic/proc/show_ammo(var/mob/user)
@@ -78,60 +78,58 @@
 		to_chat(user, "<span class='notice'>It has \a [loaded] loaded.</span>")
 
 /obj/item/weapon/gun/magnetic/examine(var/mob/user)
-	. = ..(user, 2)
-	if(.)
-		show_ammo(user)
-
-		if(cell)
-			to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
-		if(capacitor)
-			to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
-
-		if(!cell || !capacitor)
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+	. = ..(user)
+	if(p_cell)
+		to_chat(user, "<span class='notice'>The installed [p_cell.name] has a charge level of [round((p_cell.charge/p_cell.maxcharge)*100)]%.</span>")
+	if(p_capacitor)
+		to_chat(user, "<span class='notice'>The installed [p_capacitor.name] has a charge level of [round((p_capacitor.charge/p_capacitor.max_charge)*100)]%.</span>")
+	if(!p_cell || !p_capacitor)
+		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+	else
+		if(p_capacitor.charge < power_cost)
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
 		else
-			if(capacitor.charge < power_cost)
-				to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
-			else
-				to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
-		return TRUE
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
+	return
 
 /obj/item/weapon/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
 
 	if(removable_components)
 		if(istype(thing, /obj/item/weapon/cell))
-			if(cell)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
+			var/obj/item/weapon/cell/PC = thing
+			if(p_cell)
+				to_chat(user, "<span class='warning'>\The [src] already has \a [p_cell] installed.</span>")
 				return
-			if(!user.unEquip(cell, src))
+			if(!user.unEquip(PC, src))
 				return
-			cell = thing
+			p_cell = PC
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] slots \the [PC] into \the [src].</span>")
 			update_icon()
 			return
 
 		if(isScrewdriver(thing))
-			if(!capacitor)
+			if(!p_capacitor)
 				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
 				return
-			user.put_in_hands(capacitor)
-			user.visible_message("<span class='notice'>\The [user] unscrews \the [capacitor] from \the [src].</span>")
+			user.put_in_hands(p_capacitor)
+			user.visible_message("<span class='notice'>\The [user] unscrews \the [p_capacitor] from \the [src].</span>")
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			capacitor = null
+			p_capacitor = null
 			update_icon()
 			return
 
 		if(istype(thing, /obj/item/weapon/stock_parts/capacitor))
-			if(capacitor)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
+			var/obj/item/weapon/stock_parts/capacitor/CV = thing
+			if(p_capacitor)
+				to_chat(user, "<span class='warning'>\The [src] already has \a [p_capacitor] installed.</span>")
 				return
-			if(!user.unEquip(capacitor, src))
+			if(!user.unEquip(CV, src))
 				return
-			capacitor = thing
+			p_capacitor = CV
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			power_per_tick = (power_cost*0.15) * capacitor.rating
-			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [src].</span>")
+			power_per_tick = (power_cost*0.15) * p_capacitor.rating
+			user.visible_message("<span class='notice'>\The [user] slots \the [CV] into \the [src].</span>")
 			update_icon()
 			return
 
@@ -152,7 +150,7 @@
 				projectile_type = mag.projectile_type
 			if(!user.unEquip(thing, src))
 				return
-				
+
 			loaded = thing
 		else if(load_sheet_max > 1)
 			var ammo_count = 0
@@ -188,9 +186,9 @@
 		if(loaded)
 			removing = loaded
 			loaded = null
-		else if(cell && removable_components)
-			removing = cell
-			cell = null
+		else if(p_cell && removable_components)
+			removing = p_cell
+			p_cell = null
 
 		if(removing)
 			user.put_in_hands(removing)
@@ -209,11 +207,11 @@
 
 /obj/item/weapon/gun/magnetic/consume_next_projectile()
 
-	if(!check_ammo() || !capacitor || capacitor.charge < power_cost)
+	if(!check_ammo() || !p_capacitor || p_capacitor.charge < power_cost)
 		return
 
 	use_ammo()
-	capacitor.use(power_cost)
+	p_capacitor.use(power_cost)
 	update_icon()
 
 	if(gun_unreliable && prob(gun_unreliable))

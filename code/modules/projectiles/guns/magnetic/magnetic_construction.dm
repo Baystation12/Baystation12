@@ -91,7 +91,7 @@
 			if(2) to_chat(user, "<span class='notice'>It has a metal frame loosely shaped around the stock.</span>")
 			if(3) to_chat(user, "<span class='notice'>It has a metal frame duct-taped to the stock.</span>")
 			if(4) to_chat(user, "<span class='notice'>It has a length of pipe attached to the body.</span>")
-			if(4) to_chat(user, "<span class='notice'>It has a length of pipe welded to the body.</span>")
+			if(5) to_chat(user, "<span class='notice'>It has a length of pipe welded to the body.</span>")
 			if(6) to_chat(user, "<span class='notice'>It has a cable mount and capacitor jack wired to the frame.</span>")
 			if(7) to_chat(user, "<span class='notice'>It has a single superconducting coil threaded onto the barrel.</span>")
 			if(8) to_chat(user, "<span class='notice'>It has a pair of superconducting coils threaded onto the barrel.</span>")

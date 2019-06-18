@@ -24,10 +24,10 @@
 
 /obj/item/weapon/gun/magnetic/railgun/Initialize()
 
-	capacitor = new initial_capacitor_type(src)
-	capacitor.charge = capacitor.max_charge
+	p_capacitor = new initial_capacitor_type(src)
+	p_capacitor.charge = p_capacitor.max_charge
 
-	cell = new initial_cell_type(src)
+	p_cell = new initial_cell_type(src)
 	if (ispath(loaded))
 		loaded = new loaded (src, load_sheet_max)
 	slowdown_per_slot[slot_l_hand] =  slowdown_held
@@ -169,7 +169,7 @@
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/out_of_ammo()
 	visible_message("<span class='warning'>\The [src] beeps to indicate the magazine is empty.</span>")
-	
+
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/skrell
 	name = "skrellian rifle"
