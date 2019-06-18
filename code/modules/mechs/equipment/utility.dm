@@ -138,10 +138,10 @@
 				if(!locked)
 					var/atom/movable/AM = target
 					if(!istype(AM) || AM.anchored)
-						to_chat(user, SPAN_NOTICE("Unable to lock on [target]"))
+						to_chat(user, SPAN_NOTICE("Unable to lock on [target]."))
 						return
 					locked = AM
-					to_chat(user, SPAN_NOTICE("Locked on [AM]"))
+					to_chat(user, SPAN_NOTICE("Locked on [AM]."))
 					return
 				else if(target != locked)
 					if(locked in view(owner))
@@ -220,11 +220,11 @@
 		if(istype(target,/obj/item/weapon/material/drill_head))
 			var/obj/item/weapon/material/drill_head/DH = target
 			if(drill_head)
-				owner.visible_message(SPAN_NOTICE("\The [owner] detaches the [drill_head] mounted the [src]"))
+				owner.visible_message(SPAN_NOTICE("\The [owner] detaches the [drill_head] mounted the [src]."))
 				drill_head.forceMove(owner.loc)
 			DH.forceMove(src)
 			drill_head = DH
-			owner.visible_message(SPAN_NOTICE("\The [owner] mounts the [drill_head] on the [src]"))
+			owner.visible_message(SPAN_NOTICE("\The [owner] mounts the [drill_head] on the [src]."))
 			return
 
 		if(drill_head == null)
@@ -306,7 +306,7 @@
 
 /obj/item/mech_equipment/jumpjets
 	name = "\improper exosuit jumpjets"
-	desc = "A testament to the fact that sometimes more is actually more. These oversized ion boosters can briefly lift even an entire exosuit"
+	desc = "A testament to the fact that sometimes more is actually more. These oversized ion boosters can briefly lift even an entire exosuit!"
 	icon_state = "mech_sleeper"
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)

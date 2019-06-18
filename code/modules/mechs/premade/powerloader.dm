@@ -1,6 +1,6 @@
 /mob/living/exosuit/premade/powerloader
 	name = "power loader"
-	desc = "An ancient but well-liked cargo handling exosuit."
+	desc = "An ancient, but well-liked cargo handling exosuit."
 
 /mob/living/exosuit/premade/powerloader/New()
 	if(!arms) 
@@ -34,7 +34,7 @@
 /obj/item/mech_component/propulsion/powerloader
 	name = "exosuit legs"
 	exosuit_desc_string = "reinforced hydraulic legs"
-	desc = "wide and stable but not particularly fast."
+	desc = "Wide and stable but not particularly fast."
 	max_damage = 70
 	move_delay = 4
 	power_use = 10
@@ -43,7 +43,7 @@
 	name = "exosuit sensors"
 	gender = PLURAL
 	exosuit_desc_string = "simple collision detection sensors"
-	desc = "A primitive set of sensors designed to work in tandem with most MKI Eyeball platforms"
+	desc = "A primitive set of sensors designed to work in tandem with most MKI Eyeball platforms."
 	max_damage = 100
 	power_use = 0
 
@@ -57,7 +57,7 @@
 	hatch_descriptor = "roll cage"
 	pilot_coverage = 40
 	exosuit_desc_string = "an industrial rollcage"
-	desc = "A Xion industrial brand rollcage. Technically OSHA compliant. Technically"
+	desc = "A Xion industrial brand roll cage. Technically OSHA compliant. Technically."
 	max_damage = 100
 	power_use = 0
 
@@ -80,18 +80,18 @@
 
 /mob/living/exosuit/premade/powerloader/flames_red
 	name = "APLU \"Firestarter\""
-	desc = "An ancient but well-liked cargo handling exosuit. This one has cool red flames."
+	desc = "An ancient, but well-liked cargo handling exosuit. This one has cool red flames."
 	decal = "flames_red"
 
 /mob/living/exosuit/premade/powerloader/flames_blue
 	name = "APLU \"Burning Chrome\""
-	desc = "An ancient but well-liked cargo handling exosuit. This one has cool blue flames."
+	desc = "An ancient, but well-liked cargo handling exosuit. This one has cool blue flames."
 	decal = "flames_blue"
 
 
 /mob/living/exosuit/premade/firefighter
 	name = "firefighting exosuit"
-	desc = "A mix and match of industrial parts designed to widthstand fires"
+	desc = "A mix and match of industrial parts designed to withstand fires."
 
 /mob/living/exosuit/premade/firefighter/New()
 	if(!arms) 

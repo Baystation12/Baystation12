@@ -2,7 +2,7 @@
 	icon_state = "modkit"
 	icon = 'icons/obj/device.dmi'
 	var/new_name = "exosuit"    //What is the variant called?
-	var/new_desc = "A exosuit." //How is the new exosuit described?
+	var/new_desc = "An exosuit." //How is the new exosuit described?
 	var/new_icon = "ripley"  //What base icon will the new exosuit use?
 	var/new_icon_file
 	var/uses = 1        // Uses before the kit deletes itself.
