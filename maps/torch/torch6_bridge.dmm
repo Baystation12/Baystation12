@@ -17007,6 +17007,10 @@
 "Xz" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/guncabinet/PPE,
+/obj/machinery/camera/network/command{
+	c_tag = "Bridge - Storage";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "XB" = (

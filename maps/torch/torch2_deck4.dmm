@@ -1303,7 +1303,7 @@
 	},
 /obj/structure/plasticflaps/airtight,
 /turf/simulated/floor/plating,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "ep" = (
 /obj/structure/railing/mapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3177,7 +3177,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/trunk,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "kW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -5316,6 +5316,9 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
+"sh" = (
+/turf/simulated/wall/prepainted,
+/area/quartermaster/sorting)
 "sj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/industrial/warning{
@@ -7706,7 +7709,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/junk,
 /turf/simulated/floor/plating,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "yH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled,
@@ -7785,7 +7788,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "zm" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -9384,7 +9387,7 @@
 "FK" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "FL" = (
 /obj/effect/floor_decal/corner/brown/half{
 	icon_state = "bordercolorhalf";
@@ -10297,7 +10300,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "IY" = (
 /obj/machinery/disposal,
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -10768,7 +10771,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "KF" = (
 /obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
@@ -10869,7 +10872,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "KR" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -11161,7 +11164,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "LO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12071,7 +12074,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Or" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -12108,7 +12111,7 @@
 /obj/structure/plasticflaps/airtight,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Oy" = (
 /obj/structure/closet/crate,
 /obj/random/maintenance/solgov,
@@ -12348,7 +12351,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Pi" = (
 /obj/structure/closet/crate/plastic,
 /obj/random/maintenance/solgov,
@@ -12570,8 +12573,12 @@
 	pixel_y = 32
 	},
 /obj/structure/ladder/up,
+/obj/machinery/camera/network/supply{
+	c_tag = "Supply Office - Sorting";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "PH" = (
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/plating,
@@ -14024,7 +14031,7 @@
 	dir = 4
 	},
 /turf/simulated/wall/prepainted,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Th" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -14603,7 +14610,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "UM" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -14854,7 +14861,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Vw" = (
 /obj/effect/floor_decal/corner/brown/half{
 	icon_state = "bordercolorhalf";
@@ -15097,7 +15104,7 @@
 "Wi" = (
 /obj/structure/sign/warning/moving_parts,
 /turf/simulated/wall/prepainted,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Wj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/simulated/floor/tiled/monotile,
@@ -15288,7 +15295,7 @@
 /obj/random/junk,
 /obj/machinery/light/spot,
 /turf/simulated/floor/plating,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "WK" = (
 /obj/effect/floor_decal/corner/blue{
 	icon_state = "corner_white";
@@ -15841,7 +15848,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "XZ" = (
 /obj/item/device/flashlight/lamp/green,
 /obj/structure/table/woodentable,
@@ -16033,7 +16040,7 @@
 	},
 /obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/dark,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "YB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -16356,7 +16363,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Zm" = (
 /obj/effect/floor_decal/corner/brown/half,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -16437,8 +16444,18 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Zv" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -16457,8 +16474,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/quartermaster/office)
+/area/quartermaster/sorting)
 "Zw" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -36616,11 +36638,11 @@ vQ
 vQ
 vQ
 vQ
-vQ
-vQ
+sh
+sh
 UL
 Tg
-vQ
+sh
 RS
 GT
 GT
@@ -36818,11 +36840,11 @@ Tr
 FL
 Lq
 At
-vQ
+sh
 PG
 XY
 IX
-vQ
+sh
 RS
 GT
 GT
@@ -37024,7 +37046,7 @@ FK
 LN
 Ph
 Ox
-vQ
+sh
 RS
 GT
 GT
@@ -37226,7 +37248,7 @@ FK
 kS
 KQ
 WJ
-vQ
+sh
 JL
 rG
 GT
@@ -37424,11 +37446,11 @@ UI
 mo
 yy
 mz
-vQ
+sh
 Zu
 Zv
 zl
-vQ
+sh
 JL
 LC
 GT
@@ -37630,7 +37652,7 @@ KE
 Yz
 On
 yG
-vQ
+sh
 JL
 rn
 GT
@@ -37832,7 +37854,7 @@ Wi
 Zl
 Vv
 en
-vQ
+sh
 JL
 WY
 GT
@@ -38030,11 +38052,11 @@ gG
 Yf
 QI
 Yf
-vQ
+sh
 FK
-vQ
-vQ
-vQ
+sh
+sh
+sh
 JM
 GW
 GT
