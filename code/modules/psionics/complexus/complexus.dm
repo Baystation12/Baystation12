@@ -45,9 +45,6 @@
 	aura_image.pixel_y = -64
 	aura_image.mouse_opacity = 0
 	aura_image.appearance_flags = 0
-	var/matrix/M = matrix()
-	M.Scale(-5)
-	aura_image.transform = M
 
 	START_PROCESSING(SSpsi, src)
 
