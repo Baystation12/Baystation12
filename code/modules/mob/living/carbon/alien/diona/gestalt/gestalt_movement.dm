@@ -4,12 +4,11 @@
 // Naaaa na na na na naa naa https://www.youtube.com/watch?v=iMH49ieL4es
 /obj/structure/diona_gestalt/Bump(var/atom/movable/AM, var/yes) // what a useful argname, thanks oldcoders
 	. = ..()
-	if(AM && AM.Adjacent(src))
-		if(AM && can_roll_up_atom(AM) && AM.Adjacent(src))
-			var/turf/stepping = AM.loc
-			roll_up_atom(AM)
-			if(stepping)
-				step_towards(src, stepping)
+	if(AM && can_roll_up_atom(AM) && AM.Adjacent(src))
+		var/turf/stepping = AM.loc
+		roll_up_atom(AM)
+		if(stepping)
+			step_towards(src, stepping)
 
 		
 	else if(istype(AM, /obj/structure/diona_gestalt) && AM != src) // Combine!?
