@@ -42,11 +42,11 @@
 	return cell
 
 /obj/item/weapon/gun/magnetic/Process()
-	if(capacitor)
-		if(cell)
-			if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
-				capacitor.charge(power_per_tick)
-		else
+	if(capacitor && cell)
+		if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
+			capacitor.charge(power_per_tick)
+	else
+		if(capacitor)
 			capacitor.use(capacitor.charge * 0.05)
 	update_icon()
 
@@ -70,7 +70,7 @@
 		if(istype(mag))
 			if(mag.remaining)
 				overlays_to_add += image(icon, "[icon_state]_ammo")
-				
+
 	overlays += overlays_to_add
 
 /obj/item/weapon/gun/magnetic/proc/show_ammo(var/mob/user)
@@ -78,36 +78,32 @@
 		to_chat(user, "<span class='notice'>It has \a [loaded] loaded.</span>")
 
 /obj/item/weapon/gun/magnetic/examine(var/mob/user)
-	. = ..(user, 2)
-	if(.)
-		show_ammo(user)
-
-		if(cell)
-			to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
-		if(capacitor)
-			to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
-
-		if(!cell || !capacitor)
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+	. = ..(user)
+	if(cell)
+		to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
+	if(capacitor)
+		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
+	if(!cell || !capacitor)
+		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+	else
+		if(capacitor.charge < power_cost)
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
 		else
-			if(capacitor.charge < power_cost)
-				to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
-			else
-				to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
-		return TRUE
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
 
 /obj/item/weapon/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
 
 	if(removable_components)
 		if(istype(thing, /obj/item/weapon/cell))
+			var/obj/item/weapon/cell/PC = thing
 			if(cell)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
 				return
-			if(!user.unEquip(cell, src))
+			if(!user.unEquip(PC, src))
 				return
-			cell = thing
+			cell = PC
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] slots \the [PC] into \the [src].</span>")
 			update_icon()
 			return
 
@@ -123,15 +119,16 @@
 			return
 
 		if(istype(thing, /obj/item/weapon/stock_parts/capacitor))
+			var/obj/item/weapon/stock_parts/capacitor/CV = thing
 			if(capacitor)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
 				return
-			if(!user.unEquip(capacitor, src))
+			if(!user.unEquip(CV, src))
 				return
-			capacitor = thing
+			capacitor = CV
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			power_per_tick = (power_cost*0.15) * capacitor.rating
-			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] slots \the [CV] into \the [src].</span>")
 			update_icon()
 			return
 
@@ -152,7 +149,7 @@
 				projectile_type = mag.projectile_type
 			if(!user.unEquip(thing, src))
 				return
-				
+
 			loaded = thing
 		else if(load_sheet_max > 1)
 			var ammo_count = 0
