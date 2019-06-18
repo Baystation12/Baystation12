@@ -14,13 +14,14 @@
 	dat += "<h2>Summary</h2>"
 	dat += "<hr>"
 
-	if(psi && !(istype(machine) && psi.suppressed))
+	if(psi)
 
 		// Hi Warhammer 40k rating system, how are you?
 		// I hope you get along with the Galactic Milieu metapsychics.
 		var/use_rating
 		var/effective_rating = psi.rating
-		if(psi.suppressed) effective_rating = max(0, psi.rating-2)
+		if(effective_rating > 1 && psi.suppressed)
+			effective_rating = max(0, psi.rating-2)
 		var/rating_descriptor
 		if(mind && !psi.suppressed)
 			if(GLOB.paramounts.is_antagonist(mind))
@@ -51,7 +52,7 @@
 					rating_descriptor = "This indicates the presence of major psi capabilities of the Paramount Grandmaster rank or higher."
 				else
 					use_rating = "[effective_rating]-Lambda"
-					rating_descriptor = "This indicates the presence of low, sub-latent psi capabilities, or a lack thereof."
+					rating_descriptor = "This indicates the presence of trace latent psi capabilities."
 
 		dat += "[use_He_has] an overall psi rating of [use_rating].<br><i>[rating_descriptor]</i><hr>"
 
