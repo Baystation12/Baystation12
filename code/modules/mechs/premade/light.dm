@@ -30,7 +30,7 @@
 	action_delay = 15
 	max_damage = 40
 	power_use = 10
-	desc = "As flexible as they are fragile, these Vey-Med manipulators can follow a pilot's movements in close to real time"
+	desc = "As flexible as they are fragile, these Vey-Med manipulators can follow a pilot's movements in close to real time."
 
 /obj/item/mech_component/propulsion/light
 	name = "light legs"
@@ -67,7 +67,7 @@
 	max_damage = 50
 	power_use = 5
 	has_hardpoints = list(HARDPOINT_BACK)
-	desc = "The Veymed Odyssey series cockpits combine ultralight materials clear aluminum laminates to provide an optimized cockpit experience."
+	desc = "The Veymed Odysseus series cockpits combine ultralight materials clear aluminum laminates to provide an optimized cockpit experience."
 
 /obj/item/mech_component/chassis/light/New()
 	pilot_positions = list(

@@ -1,6 +1,6 @@
 /obj/item/mech_equipment/mounted_system/taser
 	name = "Mounted taser carbine"
-	desc = "A dual fire mode taser system connected to the exosuit's targetting system"
+	desc = "A dual fire mode taser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
 	holding_type = /obj/item/weapon/gun/energy/taser/carbine/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
@@ -8,13 +8,13 @@
 
 /obj/item/mech_equipment/mounted_system/taser/ion
 	name = "Mounted ion rifle"
-	desc = "A exosuit mounted ion rifle. Handle with care"
+	desc = "An exosuit-mounted ion rifle. Handle with care."
 	icon_state = "mech_ionrifle"
 	holding_type = /obj/item/weapon/gun/energy/ionrifle/mounted/mech
 
 /obj/item/mech_equipment/mounted_system/taser/laser
 	name = "\improper CH-PS \"Immolator\" laser"
-	desc = "A exosuit mounted ion rifle. Handle with care"
+	desc = "An exosuit-mounted laser rifle. Handle with care."
 	icon_state = "mech_lasercarbine"
 	holding_type = /obj/item/weapon/gun/energy/laser/mounted/mech
 
