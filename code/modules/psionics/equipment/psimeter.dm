@@ -1,6 +1,6 @@
 /obj/machinery/psi_meter
 	name = "psi-meter"
-	desc = "A bulky, rather outdated psi-meter for conducting assays of psi-operants. The rear casing is stamped with a large Cuchulain Foundation logo."
+	desc = "A bulky psi-meter for conducting assays of psi-operants."
 	icon = 'icons/obj/machines/psimeter.dmi'
 	icon_state = "meter_on"
 	use_power = 2
@@ -31,7 +31,7 @@
 	if(LAZYLEN(last_assay))
 		dat = last_assay
 	else
-		dat += "<h2>Cuchulain Foundation Mark I Psi-Meter</h2><hr><table border = 1 width = 100%><tr><td colspan = 2><b>Candidates</b></td></tr>"
+		dat += "<h2>TELESTO Mark I Psi-Meter</h2><hr><table border = 1 width = 100%><tr><td colspan = 2><b>Candidates</b></td></tr>"
 		var/found
 		for(var/mob/living/H in range(1, src))
 			found = TRUE
