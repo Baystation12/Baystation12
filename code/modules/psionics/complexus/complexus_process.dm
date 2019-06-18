@@ -4,6 +4,7 @@
 
 	var/last_rating = rating
 	var/highest_faculty
+	var/highest_rank = 0
 	var/combined_rank = 0
 	for(var/faculty in ranks)
 		var/check_rank = get_rank(faculty)
@@ -14,14 +15,19 @@
 				ranks -= faculty
 			LAZYREMOVE(latencies, faculty)
 		combined_rank += check_rank
-		if(!highest_faculty || get_rank(highest_faculty) < check_rank)
+		if(!highest_faculty || highest_rank < check_rank)
 			highest_faculty = faculty
+			highest_rank = check_rank
 
 	UNSETEMPTY(latencies)
 
 	if(force || last_rating != ceil(combined_rank/ranks.len))
-		rebuild_power_cache = TRUE
-		if(combined_rank > 0)
+		if(highest_rank <= 1)
+			if(highest_rank == 0)
+				qdel(src)
+			return
+		else
+			rebuild_power_cache = TRUE
 			sound_to(owner, 'sound/effects/psi/power_unlock.ogg')
 			rating = ceil(combined_rank/ranks.len)
 			cost_modifier = 1
@@ -52,12 +58,11 @@
 					aura_color = "#33cc33"
 				else if(highest_faculty == PSI_ENERGISTICS)
 					aura_color = "#cccc33"
-		else
-			qdel(src)
 
 	if(!announced && owner && owner.client && !QDELETED(src))
 		announced = TRUE
-		owner.announce_psionics()
+		to_chat(owner, SPAN_NOTICE("<font size = 3>You are <b>psionic</b>, touched by powers beyond understanding.</font>"))
+		to_chat(owner, SPAN_NOTICE("<b>Shift-left-click your Psi icon</b> on the bottom right to <b>view a summary of how to use them</b>, or <b>left click</b> it to <b>suppress or unsuppress</b> your psionics. Beware: overusing your gifts can have <b>deadly consequences</b>."))
 
 /datum/psi_complexus/Process()
 
