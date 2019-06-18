@@ -231,25 +231,28 @@
 	fire_sound='sound/weapons/confuseray.ogg'
 	damage = 2
 	agony = 7
-	eyeblur = 5
 	sharp = FALSE
 	distance_falloff = 5
 	damage_flags = 0
 	damage_type = STUN
 	life_span = 3
 	penetration_modifier = 0
-	var/confuse_min = 4
-	var/confuse_max = 6
+	var/potency_min = 4
+	var/potency_max = 6
 
 	muzzle_type = /obj/effect/projectile/confuseray/muzzle
 	tracer_type = /obj/effect/projectile/confuseray/tracer
 	impact_type = /obj/effect/projectile/confuseray/impact
 
 /obj/item/projectile/beam/confuseray/on_hit(var/atom/target, var/blocked = 0)
-	world << "blocked = [blocked]"
 	if(istype(target, /mob/living))
 		var/mob/living/L = target
-		var/potency = rand(confuse_min, confuse_max)
+		var/potency = rand(potency_min, potency_max)
 		L.confused += potency
-		L.Stun(potency / 8)
+		L.eye_blurry += potency
+		if(L.confused >= 10)
+			L.Stun(1)
+			L.drop_l_hand()
+			L.drop_r_hand()
+		
 	return 1
