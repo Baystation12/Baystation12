@@ -220,7 +220,7 @@
 		if(istype(target,/obj/item/weapon/material/drill_head))
 			var/obj/item/weapon/material/drill_head/DH = target
 			if(drill_head)
-				owner.visible_message(SPAN_NOTICE("\The [owner] detaches the [drill_head] mounted the [src]."))
+				owner.visible_message(SPAN_NOTICE("\The [owner] detaches the [drill_head] mounted on the [src]."))
 				drill_head.forceMove(owner.loc)
 			DH.forceMove(src)
 			drill_head = DH
