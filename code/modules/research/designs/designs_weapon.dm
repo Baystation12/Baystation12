@@ -74,6 +74,13 @@
 	build_path = /obj/item/weapon/gun/energy/stunrevolver/rifle
 	sort_string = "TADAC"
 
+/datum/design/item/weapon/confuseray
+	id = "confuseray"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 3)
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000)
+	build_path = /obj/item/weapon/gun/energy/confuseray
+	sort_string = "TADAD"
+
 /datum/design/item/weapon/nuclear_gun
 	id = "nuclear_gun"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)

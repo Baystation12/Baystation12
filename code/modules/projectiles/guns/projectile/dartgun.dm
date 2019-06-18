@@ -5,7 +5,7 @@
 	sharp = 1
 	embed = 1 //the dart is shot fast enough to pierce space suits, so I guess splintering inside the target can be a thing. Should be rare due to low damage.
 	var/reagent_amount = 15
-	kill_count = 15 //shorter range
+	life_span = 15 //shorter range
 	unacidable = 1
 
 	muzzle_type = null
