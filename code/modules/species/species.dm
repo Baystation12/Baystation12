@@ -515,7 +515,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if(!H.druggy)
 		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight_range + H.equipment_darkness_modifier, 8))
 		if(H.equipment_see_invis)
-			H.set_see_invisible(min(min(H.see_invisible, H.equipment_see_invis), vision[2]))
+			H.set_see_invisible(max(min(H.see_invisible, H.equipment_see_invis), vision[2]))
 
 	if(H.equipment_tint_total >= TINT_BLIND)
 		H.eye_blind = max(H.eye_blind, 1)
