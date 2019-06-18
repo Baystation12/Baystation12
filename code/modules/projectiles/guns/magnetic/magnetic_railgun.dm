@@ -24,10 +24,10 @@
 
 /obj/item/weapon/gun/magnetic/railgun/Initialize()
 
-	p_capacitor = new initial_capacitor_type(src)
-	p_capacitor.charge = p_capacitor.max_charge
+	capacitor = new initial_capacitor_type(src)
+	capacitor.charge = capacitor.max_charge
 
-	p_cell = new initial_cell_type(src)
+	cell = new initial_cell_type(src)
 	if (ispath(loaded))
 		loaded = new loaded (src, load_sheet_max)
 	slowdown_per_slot[slot_l_hand] =  slowdown_held

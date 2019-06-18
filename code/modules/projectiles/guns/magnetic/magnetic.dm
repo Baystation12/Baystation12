@@ -11,8 +11,8 @@
 	bulk = GUN_BULK_RIFLE
 	combustion = 1
 
-	var/obj/item/weapon/cell/p_cell									// Currently installed powercell.
-	var/obj/item/weapon/stock_parts/capacitor/p_capacitor			// Installed capacitor. Higher rating == faster charge between shots.
+	var/obj/item/weapon/cell/cell									// Currently installed powercell.
+	var/obj/item/weapon/stock_parts/capacitor/capacitor			// Installed capacitor. Higher rating == faster charge between shots.
 	var/removable_components = TRUE									// Whether or not the gun can be dismantled.
 	var/gun_unreliable = 15											// Percentage chance of detonating in your hands.
 
@@ -26,41 +26,41 @@
 
 /obj/item/weapon/gun/magnetic/Initialize()
 	START_PROCESSING(SSobj, src)
-	if(p_capacitor)
-		power_per_tick = (power_cost*0.15) * p_capacitor.rating
+	if(capacitor)
+		power_per_tick = (power_cost*0.15) * capacitor.rating
 	update_icon()
 	. = ..()
 
 /obj/item/weapon/gun/magnetic/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	QDEL_NULL(p_cell)
+	QDEL_NULL(cell)
 	QDEL_NULL(loaded)
-	QDEL_NULL(p_capacitor)
+	QDEL_NULL(capacitor)
 	. = ..()
 
 /obj/item/weapon/gun/magnetic/get_cell()
-	return p_cell
+	return cell
 
 /obj/item/weapon/gun/magnetic/Process()
-	if(p_capacitor)
-		if(p_cell)
-			if(p_capacitor.charge < p_capacitor.max_charge && p_cell.checked_use(power_per_tick))
-				p_capacitor.charge(power_per_tick)
-		else
-			p_capacitor.use(p_capacitor.charge * 0.05)
+	if(capacitor && cell)
+		if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
+			capacitor.charge(power_per_tick)
+	else
+		if(capacitor)
+			capacitor.use(capacitor.charge * 0.05)
 	update_icon()
 
 /obj/item/weapon/gun/magnetic/on_update_icon()
 	. = ..()
 	var/list/overlays_to_add = list()
 	if(removable_components)
-		if(p_cell)
+		if(cell)
 			overlays_to_add += image(icon, "[icon_state]_cell")
-		if(p_capacitor)
+		if(capacitor)
 			overlays_to_add += image(icon, "[icon_state]_capacitor")
-	if(!p_cell || !p_capacitor)
+	if(!cell || !capacitor)
 		overlays_to_add += image(icon, "[icon_state]_red")
-	else if(p_capacitor.charge < power_cost)
+	else if(capacitor.charge < power_cost)
 		overlays_to_add += image(icon, "[icon_state]_amber")
 	else
 		overlays_to_add += image(icon, "[icon_state]_green")
@@ -79,14 +79,14 @@
 
 /obj/item/weapon/gun/magnetic/examine(var/mob/user)
 	. = ..(user)
-	if(p_cell)
-		to_chat(user, "<span class='notice'>The installed [p_cell.name] has a charge level of [round((p_cell.charge/p_cell.maxcharge)*100)]%.</span>")
-	if(p_capacitor)
-		to_chat(user, "<span class='notice'>The installed [p_capacitor.name] has a charge level of [round((p_capacitor.charge/p_capacitor.max_charge)*100)]%.</span>")
-	if(!p_cell || !p_capacitor)
+	if(cell)
+		to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
+	if(capacitor)
+		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
+	if(!cell || !capacitor)
 		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
 	else
-		if(p_capacitor.charge < power_cost)
+		if(capacitor.charge < power_cost)
 			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
 		else
 			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
@@ -96,38 +96,38 @@
 	if(removable_components)
 		if(istype(thing, /obj/item/weapon/cell))
 			var/obj/item/weapon/cell/PC = thing
-			if(p_cell)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [p_cell] installed.</span>")
+			if(cell)
+				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
 				return
 			if(!user.unEquip(PC, src))
 				return
-			p_cell = PC
+			cell = PC
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			user.visible_message("<span class='notice'>\The [user] slots \the [PC] into \the [src].</span>")
 			update_icon()
 			return
 
 		if(isScrewdriver(thing))
-			if(!p_capacitor)
+			if(!capacitor)
 				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
 				return
-			user.put_in_hands(p_capacitor)
-			user.visible_message("<span class='notice'>\The [user] unscrews \the [p_capacitor] from \the [src].</span>")
+			user.put_in_hands(capacitor)
+			user.visible_message("<span class='notice'>\The [user] unscrews \the [capacitor] from \the [src].</span>")
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			p_capacitor = null
+			capacitor = null
 			update_icon()
 			return
 
 		if(istype(thing, /obj/item/weapon/stock_parts/capacitor))
 			var/obj/item/weapon/stock_parts/capacitor/CV = thing
-			if(p_capacitor)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [p_capacitor] installed.</span>")
+			if(capacitor)
+				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
 				return
 			if(!user.unEquip(CV, src))
 				return
-			p_capacitor = CV
+			capacitor = CV
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			power_per_tick = (power_cost*0.15) * p_capacitor.rating
+			power_per_tick = (power_cost*0.15) * capacitor.rating
 			user.visible_message("<span class='notice'>\The [user] slots \the [CV] into \the [src].</span>")
 			update_icon()
 			return
@@ -185,9 +185,9 @@
 		if(loaded)
 			removing = loaded
 			loaded = null
-		else if(p_cell && removable_components)
-			removing = p_cell
-			p_cell = null
+		else if(cell && removable_components)
+			removing = cell
+			cell = null
 
 		if(removing)
 			user.put_in_hands(removing)
@@ -206,11 +206,11 @@
 
 /obj/item/weapon/gun/magnetic/consume_next_projectile()
 
-	if(!check_ammo() || !p_capacitor || p_capacitor.charge < power_cost)
+	if(!check_ammo() || !capacitor || capacitor.charge < power_cost)
 		return
 
 	use_ammo()
-	p_capacitor.use(power_cost)
+	capacitor.use(power_cost)
 	update_icon()
 
 	if(gun_unreliable && prob(gun_unreliable))
