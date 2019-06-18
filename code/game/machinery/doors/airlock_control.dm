@@ -2,7 +2,6 @@
 
 // This code allows for airlocks to be controlled externally by setting an id_tag and comm frequency (disables ID access)
 /obj/machinery/door/airlock
-	var/id_tag
 	var/frequency
 	var/shockedby = list()
 	var/datum/radio_frequency/radio_connection
@@ -163,7 +162,6 @@
 	anchored = 1
 	power_channel = ENVIRON
 
-	var/id_tag
 	var/master_tag
 	var/frequency = 1379
 	var/command = "cycle"

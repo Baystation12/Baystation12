@@ -22,7 +22,6 @@
 	var/area/initial_loc
 	level = 1
 	var/area_uid
-	var/id_tag = null
 
 	var/hibernate = 0 //Do we even process?
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing

@@ -4,7 +4,6 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doortimer-p"
 	var/frequency = 1441
-	var/id_tag
 	var/alert_temperature = 10000
 	var/alert = 1
 	var/datum/radio_frequency/radio_connection

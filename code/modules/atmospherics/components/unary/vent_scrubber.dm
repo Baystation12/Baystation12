@@ -13,7 +13,6 @@
 	level = 1
 
 	var/area/initial_loc
-	var/id_tag = null
 	var/frequency = 1439
 	var/datum/radio_frequency/radio_connection
 

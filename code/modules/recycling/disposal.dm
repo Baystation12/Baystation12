@@ -486,7 +486,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	layer = ABOVE_OBJ_LAYER
 	var/on = 0
 	var/list/junctions = list()
-	var/id_tag
 
 /obj/machinery/disposal_switch/Initialize(mapload, var/newid)
 	. = ..(mapload)

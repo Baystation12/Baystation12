@@ -228,6 +228,20 @@ var/const/RADIO_SECBOT = "radio_secbot"
 var/const/RADIO_MULEBOT = "radio_mulebot"
 var/const/RADIO_MAGNETS = "radio_magnet"
 
+// These are exposed to players, by name.
+GLOBAL_LIST_INIT(all_selectable_radio_filters, list(
+	RADIO_DEFAULT,
+	RADIO_TO_AIRALARM,
+	RADIO_FROM_AIRALARM,
+	RADIO_CHAT,
+	RADIO_ATMOSIA,
+	RADIO_NAVBEACONS,
+	RADIO_AIRLOCK,
+	RADIO_SECBOT,
+	RADIO_MULEBOT,
+	RADIO_MAGNETS
+))
+
 var/global/datum/controller/radio/radio_controller
 
 /hook/startup/proc/createRadioController()
