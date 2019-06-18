@@ -90,7 +90,6 @@
 			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
 		else
 			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
-	return
 
 /obj/item/weapon/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
 
