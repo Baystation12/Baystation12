@@ -17178,6 +17178,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/seconddeck)
 "Sb" = (
@@ -18389,6 +18390,9 @@
 "Wv" = (
 /obj/machinery/vending/engineering,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/camera/network/engineering{
+	c_tag = "Engineering - Locker Room"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
 "Wx" = (

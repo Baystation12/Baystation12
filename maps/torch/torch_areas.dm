@@ -889,6 +889,10 @@
 	icon_state = "quartstorage"
 	sound_env = LARGE_ENCLOSED
 
+/area/quartermaster/sorting
+	name ="\improper Supply Sorting"
+	icon_state = "quartstorage"
+
 /area/quartermaster/storage/upper
 	name = "\improper Supply Upper Warehouse"
 

@@ -8407,6 +8407,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/camera/network/command{
+	c_tag = "Bridge - Emergency Armory - Access";
+	dir = 1;
+	icon_state = "camera"
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/command/armoury/access)
 "aAZ" = (
