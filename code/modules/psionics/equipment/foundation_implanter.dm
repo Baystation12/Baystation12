@@ -1,6 +1,6 @@
 /obj/item/weapon/implanter/psi
-	name = "\improper Foundation implanter"
-	desc = "An implant gun customized to interact with psi dampeners. Property of the Cuchulain Foundation."
+	name = "psi-null implanter"
+	desc = "An implant gun customized to interact with psi dampeners."
 	var/implanter_mode = PSI_IMPLANT_AUTOMATIC
 
 /obj/item/weapon/implanter/psi/attack_self(var/mob/user)
