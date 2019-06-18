@@ -171,26 +171,26 @@
 		GLOB.thralls.add_antagonist(target.mind, new_controller = user)
 		return TRUE
 
-/decl/psionic_power/coercion/probe
-	name =            "Probe"
+/decl/psionic_power/coercion/assay
+	name =            "Assay"
 	cost =            15
 	cooldown =        100
 	use_grab =        TRUE
-	min_rank =        PSI_RANK_GRANDMASTER
-	use_description = "Grab a victim, target the head, then use the grab on them while on disarm intent, in order to perform a deep coercive-redactive probe of their innermost secrets."
+	min_rank =        PSI_RANK_OPERANT
+	use_description = "Grab a patient, target the head, then use the grab on them while on disarm intent, in order to perform a deep coercive-redactive probe of their psionic potential."
 
-/decl/psionic_power/coercion/probe/invoke(var/mob/living/user, var/mob/living/target)
+/decl/psionic_power/coercion/assay/invoke(var/mob/living/user, var/mob/living/target)
 	if(user.zone_sel.selecting != BP_HEAD)
 		return FALSE
 	. = ..()
 	if(.)
-		user.visible_message("<span class='danger'><i>\The [user] grips the head of \the [target] in both hands...</i></span>")
-		to_chat(user, "<span class='warning'>You plunge your mentality into that of \the [target]...</span>")
-		to_chat(target, "<span class='danger'>Your persona is scrutinized by the psychic lens of \the [user]. They are trying to read your mind!</span>")
-		if(!do_after(user, target.stat == CONSCIOUS ? 50 : 25, target, 0, 1))
+		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
+		to_chat(user, SPAN_NOTICE("You insinuate your mentality into that of \the [target]..."))
+		to_chat(target, SPAN_WARNING("Your persona is being probed by the psychic lens of \the [user]."))
+		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
 			user.psi.backblast(rand(5,10))
 			return TRUE
-		to_chat(user, "<span class='notice'>You retreat from \the [target], holding your new knowledge close.</span>")
-		to_chat(target, "<span class='danger'>Your mental complexus is laid bare to judgement of \the [user].</span>")
+		to_chat(user, SPAN_NOTICE("You retreat from \the [target], holding your new knowledge close."))
+		to_chat(target, SPAN_DANGER("Your mental complexus is laid bare to judgement of \the [user]."))
 		target.show_psi_assay(user)
 		return TRUE
