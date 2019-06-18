@@ -3,7 +3,6 @@
 	anchored = 1
 	idle_power_usage = 10
 	var/datum/computer/file/embedded_program/program	//the currently executing program
-	var/id_tag
 	var/on = 1
 
 /obj/machinery/embedded_controller/Initialize()

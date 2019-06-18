@@ -146,7 +146,7 @@
 	name = "Radio Interceptor"
 	item_cost = 30
 	path = /obj/item/device/radio/intercept
-	desc = "A reciever-like device that can intercept secure radio channels. This item is too big to fit into your pockets."
+	desc = "A receiver-like device that can intercept secure radio channels. This item is too big to fit into your pockets."
 
 /datum/uplink_item/item/tools/ttv
 	name = "Binary Gas Bomb"

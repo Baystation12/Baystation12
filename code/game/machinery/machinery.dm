@@ -108,6 +108,7 @@ Class Procs:
 	var/core_skill = SKILL_DEVICES //The skill used for skill checks for this machine (mostly so subtypes can use different skills).
 	var/operator_skill      // Machines often do all operations on Process(). This caches the user's skill while the operations are running.
 	var/base_type           // For mapped buildable types, set this to be the base type actually buildable.
+	var/id_tag              // This generic variable is to be used by mappers to give related machines a string key. In principle used by radio stock parts.
 
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/weapon/stock_parts
 	var/processing_flags         // What is being processed

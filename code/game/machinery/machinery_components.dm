@@ -25,11 +25,35 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				LAZYINITLIST(uncreated_component_parts)
 				for(var/type in board.req_components)
 					uncreated_component_parts[type] += (board.req_components[type] || 1)
+
+	// Create the parts we are supposed to have. If not full_populate, this is only hard-baked parts, and more will be added later.
 	for(var/component_path in uncreated_component_parts)
 		var/number = uncreated_component_parts[component_path] || 1
 		LAZYREMOVE(uncreated_component_parts, component_path)
 		for(var/i in 1 to number)
 			install_component(component_path, refresh_parts = FALSE)
+
+	// Apply presets. If not full_populate, this is done later.
+	if(full_populate)
+		apply_component_presets()
+
+/obj/machinery/proc/apply_component_presets()
+	if(!stock_part_presets)
+		return
+
+	var/list/processed_parts = list()
+	for(var/path in stock_part_presets)
+		var/decl/stock_part_preset/preset = decls_repository.get_decl(path)
+		var/number = stock_part_presets[path] || 1
+		for(var/obj/item/weapon/stock_parts/part in component_parts)
+			if(processed_parts[part])
+				continue // only apply one preset per part
+			if(istype(part, preset.expected_part_type))
+				preset.apply(src, part)
+				processed_parts += part
+				number--
+				if(number == 0)
+					break
 
 // Returns a list of subtypes of the given component type, with assotiated value = number of that component.
 /obj/machinery/proc/types_of_component(var/part_type)

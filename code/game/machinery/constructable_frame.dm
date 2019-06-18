@@ -107,11 +107,12 @@
 						if(component_check)
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 							var/obj/machinery/new_machine = new src.circuit.build_path(loc, dir, FALSE)
-							src.circuit.construct(new_machine)
+							circuit.construct(new_machine)
 
 							new_machine.install_component(circuit, refresh_parts = FALSE)
 							for(var/obj/O in src)
 								new_machine.install_component(O, refresh_parts = FALSE)
+							new_machine.apply_component_presets()
 							new_machine.RefreshParts()
 							qdel(src)
 					else

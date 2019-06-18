@@ -5,8 +5,6 @@
 
 	anchored = 1
 	var/state = 0
-
-	var/id_tag
 	var/frequency = 1441
 
 	var/datum/radio_frequency/radio_connection

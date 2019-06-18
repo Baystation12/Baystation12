@@ -9,7 +9,6 @@
 	layer = ABOVE_WINDOW_LAYER
 	power_channel = EQUIP
 	var/on = 0
-	var/id_tag = null
 
 	var/frequency = 1379
 	var/datum/radio_frequency/radio_connection
