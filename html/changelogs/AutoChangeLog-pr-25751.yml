@@ -1,0 +1,6 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Improvised cuffs break if resisted out of a few times."
+  - tweak: "Cuffs and improvised cuffs can now be attached to most shoes, hobbling them. Improvised cuffs break if the wearer moves enough."
+  - tweak: "Knives can be stored in more kinds of shoe."
