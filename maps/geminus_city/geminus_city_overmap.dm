@@ -7,7 +7,7 @@
 	map_bounds = list(1,160,175,1)
 	targeting_locations = list("MAC Cannon" = list(154,106,174,89))
 
-	faction = "Human Civilian"
+	faction = "Human Colony"
 	base = 1
 	block_slipspace = 1
 
