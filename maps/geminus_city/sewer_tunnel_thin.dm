@@ -86,7 +86,7 @@
 		//hostile giant rat
 		if(prob(rat_chance))
 			var/mob/living/simple_animal/hostile/giant_rat/rat = new(cur_turf)
-			rat.respawning = 1
+			rat.SetRespawn()
 
 		//side tunnel
 		if(cur_length - last_side_tunnel > side_tunnel_interval)

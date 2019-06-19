@@ -382,3 +382,8 @@
 		client.screen += hud_used.hide_actions_toggle
 
 	return 1
+
+//for targetting nonhuman species
+/mob/living/proc/get_equivalent_body_part(var/def_zone)
+	//by default just return the values for humans
+	return def_zone
