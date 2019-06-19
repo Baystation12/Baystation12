@@ -414,7 +414,10 @@
 	else if(adjusted_pressure >= species.hazard_low_pressure)
 		pressure_alert = -1
 	else
-		if(getBruteLoss() < species.total_health) 	take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+		var/list/obj/item/organ/external/parts = get_damageable_organs()
+		for(var/obj/item/organ/external/O in parts)
+			if(O.damage + (LOW_PRESSURE_DAMAGE / 11) < O.min_broken_damage) //vacuum does not break bones
+				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE / 11, used_weapon = "Low Pressure")
 		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
