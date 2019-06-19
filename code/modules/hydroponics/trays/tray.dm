@@ -507,7 +507,13 @@
 		if(!dead)
 			health -= O.force
 			check_health()
-	return
+
+	if(mechanical)
+		if(default_deconstruction_screwdriver(user, O))
+			return
+		if(default_deconstruction_crowbar(user, O))
+			return
+		return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(var/mob/user, var/obj/item/seeds/S)
 
@@ -553,6 +559,8 @@
 		harvest(user)
 	else if(dead)
 		remove_dead(user)
+	else
+		return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
 	. = ..(user)
