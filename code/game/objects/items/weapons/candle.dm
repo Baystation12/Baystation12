@@ -8,6 +8,7 @@
 	light_color = "#e09d37"
 	var/available_colours = list(COLOR_WHITE, COLOR_DARK_GRAY, COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_BLUE, COLOR_INDIGO, COLOR_VIOLET)
 	var/wax
+	var/last_lit
 
 /obj/item/weapon/flame/candle/Initialize()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
@@ -15,17 +16,19 @@
 	. = ..()
 
 /obj/item/weapon/flame/candle/on_update_icon()
-	var/i
-	if(wax > 1500)
-		i = 1
-	else if(wax > 800)
-		i = 2
-	else i = 3
-	icon_state = "candle[i]"
-	if(lit)
-		overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
-	else
+	switch(wax)
+		if(1500 to INFINITY)
+			icon_state = "candle1"
+		if(800 to 1500)
+			icon_state = "candle2"
+		else
+			icon_state = "candle3"
+
+	if(lit != last_lit)
+		last_lit = lit
 		overlays.Cut()
+		if(lit)
+			overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
 
 /obj/item/weapon/flame/candle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
