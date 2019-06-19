@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - tweak: "You now use grab intent only to perform a tackle/leap."
-  - tweak: "Running off a ledge with a leap prepared (using Prepare To Maneuver) will automatically try to jump to the next closest non-open turf."
-  - tweak: "Mobs will now behave more like objects when thrown - they will pass tables/rails and collide with obstacles."
