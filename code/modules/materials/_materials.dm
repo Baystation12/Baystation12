@@ -41,6 +41,7 @@
 	var/display_name                      // Prettier name for display.
 	var/adjective_name
 	var/use_name
+	var/wall_name = "wall"                // Name given to walls of this material
 	var/flags = 0                         // Various status modifiers.
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"

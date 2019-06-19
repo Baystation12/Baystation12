@@ -47,53 +47,15 @@
 
 /material/cloth //todo
 	name = MATERIAL_CLOTH
+	display_name ="cotton"
+	use_name = "cotton"
+	icon_colour = "#ffffff"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	door_icon_base = "wood"
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	flags = MATERIAL_PADDING
 	brute_armor = 1
-	conductive = 0
-	stack_type = null
-	hidden_from_codex = TRUE
-	construction_difficulty = MATERIAL_NORMAL_DIY
-
-//TODO PLACEHOLDERS:
-/material/leather
-	name = MATERIAL_LEATHER
-	icon_colour = "#5c4831"
-	stack_origin_tech = list(TECH_MATERIAL = 2)
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+300
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
-	hidden_from_codex = TRUE
-	construction_difficulty = MATERIAL_NORMAL_DIY
-	value = 3
-
-/material/carpet
-	name = MATERIAL_CARPET
-	display_name = "red"
-	use_name = "red upholstery"
-	icon_colour = "#9d2300"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
-	sheet_singular_name = "tile"
-	sheet_plural_name = "tiles"
-	conductive = 0
-	stack_type = null
-	construction_difficulty = MATERIAL_NORMAL_DIY
-
-/material/cloth
-	name = MATERIAL_COTTON
-	display_name ="grey"
-	use_name = "grey cloth"
-	icon_colour = "#ffffff"
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+232
-	melting_point = T0C+300
 	conductive = 0
 	stack_type = null
 	hidden_from_codex = TRUE
@@ -154,3 +116,30 @@
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
+
+/material/leather
+	name = MATERIAL_LEATHER
+	icon_colour = "#5c4831"
+	stack_origin_tech = list(TECH_MATERIAL = 2)
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+300
+	melting_point = T0C+300
+	conductive = 0
+	stack_type = null
+	hidden_from_codex = TRUE
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	value = 3
+
+/material/carpet
+	name = MATERIAL_CARPET
+	display_name = "red"
+	use_name = "red upholstery"
+	icon_colour = "#9d2300"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
+	sheet_singular_name = "tile"
+	sheet_plural_name = "tiles"
+	conductive = 0
+	stack_type = null
+	construction_difficulty = MATERIAL_NORMAL_DIY

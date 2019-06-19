@@ -2,6 +2,7 @@
 	name = MATERIAL_URANIUM
 	lore_text = "A highly radioactive metal. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
 	icon_base = "stone"
@@ -21,6 +22,7 @@
 /material/gold
 	name = MATERIAL_GOLD
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = "#ffcc33"
 	weight = 25
@@ -59,6 +61,7 @@
 
 /material/copper
 	name = MATERIAL_COPPER
+	wall_name = "bulkhead"
 	icon_colour = "#b87333"
 	weight = 15
 	hardness = 30
@@ -81,6 +84,7 @@
 /material/silver
 	name = MATERIAL_SILVER
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#d1e6e3"
 	weight = 22
@@ -104,6 +108,7 @@
 /material/steel
 	name = MATERIAL_STEEL
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/steel
 	integrity = 150
 	brute_armor = 5
@@ -137,6 +142,7 @@
 /material/aluminium
 	name = MATERIAL_ALUMINIUM
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
 	chem_products = list(
 				/datum/reagent/aluminium = 20
@@ -163,6 +169,7 @@
 /material/plasteel
 	name = MATERIAL_PLASTEEL
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
@@ -221,6 +228,7 @@
 /material/osmium
 	name = MATERIAL_OSMIUM
 	lore_text = "An extremely hard form of platinum."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999ff"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -235,6 +243,7 @@
 	name = MATERIAL_TRITIUM
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -248,6 +257,7 @@
 	name = MATERIAL_DEUTERIUM
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/deuterium
 	icon_colour = "#999999"
 	stack_origin_tech = list(TECH_MATERIAL = 3)
@@ -260,6 +270,7 @@
 	name = MATERIAL_HYDROGEN
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
 	display_name = "metallic hydrogen"
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#e6c5de"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
@@ -279,6 +290,7 @@
 /material/platinum
 	name = MATERIAL_PLATINUM
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#deddff"
 	weight = 27
@@ -299,6 +311,7 @@
 /material/iron
 	name = MATERIAL_IRON
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
+	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5c5454"
 	weight = 22
@@ -316,6 +329,7 @@
 /material/voxalloy
 	name = MATERIAL_VOX
 	display_name = "durable alloy"
+	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#6c7364"
 	integrity = 1200
@@ -331,6 +345,7 @@
 /material/voxalloy/elevatorium
 	name = MATERIAL_ELEVATORIUM
 	display_name = "elevator panelling"
+	wall_name = "bulkhead"
 	icon_colour = "#666666"
 	construction_difficulty = 2
 	hidden_from_codex = TRUE
@@ -338,6 +353,7 @@
 /material/aliumium
 	name = MATERIAL_ALIENALLOY
 	display_name = "alien alloy"
+	wall_name = "bulkhead"
 	stack_type = null
 	icon_base = "jaggy"
 	door_icon_base = "metal"
@@ -365,6 +381,7 @@
 
 /material/hematite
 	name = MATERIAL_HEMATITE
+	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#aa6666"
 	ore_smelts_to = MATERIAL_IRON
@@ -377,6 +394,7 @@
 
 /material/rutile
 	name = MATERIAL_RUTILE
+	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#d8ad97"
 	ore_smelts_to = MATERIAL_TITANIUM
