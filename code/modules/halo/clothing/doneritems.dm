@@ -59,18 +59,33 @@
 
 //Spartan
 
-/*
-/////This is commented out until he fixes his sprites. They're not in-code because they currently do not work (32x42 vs 32x36 max)
 /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
-	name = "Burned FOTUS Helmet"
-	icon_state = "burned-fotus-helm"
-	item_state = "burned-fotus-helm_worn"
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Burnt"
+	icon_state = "burned-spartanhelm_obj"
+	item_state = "burned-spartanhelm_worn"
+	icon_override = 'code/modules/halo/clothing/spartan_armour_large.dmi'
 
 /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
-	name = "Burned FOTUS Armour"
-	icon_state = "burned-fotus-suit"
-	item_state = "burned-fotus-suit_worn"
-*/
+	name = "MJOLNIR Powered Assault Armor Mark IV Burnt"
+	icon_state = "burned-spartanarmour_obj"
+	item_state = "burned-spartanarmour_worn"
+	icon_override = 'code/modules/halo/clothing/spartan_armour_large.dmi'
+
+/decl/hierarchy/outfit/burnedsweetpotato_spartan
+	name = "BurnedSweetPotato - Spartan II"
+	uniform = /obj/item/clothing/under/spartan_internal
+	suit = /obj/item/clothing/suit/armor/special/spartan/praetor
+	gloves = /obj/item/clothing/gloves/spartan
+	shoes = /obj/item/clothing/shoes/magboots/spartan
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	head = /obj/item/clothing/head/helmet/spartan/praetor
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
+	l_pocket = /obj/item/ammo_magazine/m762_ap
+	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
+	belt = /obj/item/weapon/gun/projectile/m6d_magnum
+	back = /obj/item/weapon/gun/projectile/ma5b_ar
+
 ////////Boltersam\\\\\\\\
 
 //JIRALHANAE
