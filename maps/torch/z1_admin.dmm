@@ -691,6 +691,13 @@
 	dir = 2
 	},
 /area/rescue_base/base)
+"abT" = (
+/obj/structure/table/standard,
+/obj/item/device/paicard,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/syndicate_mothership/raider_base)
 "abU" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Showers";
@@ -2586,6 +2593,59 @@
 /obj/structure/window/reinforced/holowindow,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_boxingcourt)
+"agf" = (
+/obj/structure/table/rack,
+/obj/item/weapon/material/knife/folding/combat/balisong,
+/obj/random/suit,
+/obj/random/contraband,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
+"agg" = (
+/obj/structure/table/rack,
+/obj/random/energy,
+/obj/random/toolbox,
+/obj/item/weapon/plastique,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
+"agh" = (
+/obj/structure/table/rack,
+/obj/random/contraband,
+/obj/random/voidsuit,
+/obj/random/voidhelmet,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
+"agi" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/holster/general,
+/obj/random/toolbox,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
+"agj" = (
+/obj/structure/table/rack,
+/obj/item/weapon/material/knife/folding/combat/switchblade,
+/obj/random/suit,
+/obj/random/contraband,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
+"agk" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/utility,
+/obj/random/toolbox,
+/obj/item/device/multitool/hacktool,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
 "agl" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/glass{
@@ -2992,6 +3052,33 @@
 	icon_state = "dark"
 	},
 /area/rescue_base/base)
+"ahh" = (
+/obj/structure/table/woodentable,
+/obj/item/modular_computer/pda/syndicate,
+/turf/unsimulated/floor{
+	icon_state = "wood"
+	},
+/area/syndicate_mothership/raider_base)
+"ahi" = (
+/obj/structure/closet/crate,
+/obj/item/weapon/tank/nitrogen,
+/obj/item/weapon/tank/nitrogen,
+/obj/item/weapon/tank/nitrogen,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/mask/gas/swat/vox,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
+"ahj" = (
+/obj/item/modular_computer/console/preset/mercenary,
+/turf/simulated/floor/shuttle/red,
+/area/skipjack_station/start)
+"ahk" = (
+/obj/machinery/vending/hydroseeds/generic,
+/turf/simulated/floor/plating,
+/area/skipjack_station/start)
 "ahl" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/energy/gun,
@@ -3156,6 +3243,21 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_boxingcourt)
+"ahG" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/clothing/shoes/magboots,
+/obj/random/maintenance,
+/obj/item/weapon/tank/oxygen,
+/obj/random/voidsuit,
+/obj/random/voidhelmet,
+/obj/random/maintenance,
+/obj/item/device/suit_cooling_unit,
+/turf/simulated/floor/plating,
+/area/skipjack_station/start)
 "ahH" = (
 /obj/structure/table/reinforced,
 /obj/item/device/megaphone,
@@ -3346,6 +3448,13 @@
 	icon_state = "floor4"
 	},
 /area/centcom/evac)
+"ahW" = (
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/syndicate_mothership)
 "ahX" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 9
@@ -3406,6 +3515,12 @@
 	icon_state = "asteroid"
 	},
 /area/rescue_base/base)
+"aii" = (
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
 "aik" = (
 /obj/structure/table/reinforced,
 /obj/item/device/paicard,
@@ -16273,12 +16388,6 @@
 	icon_state = "white"
 	},
 /area/syndicate_mothership/raider_base)
-"aMa" = (
-/obj/structure/table/standard,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/syndicate_mothership/raider_base)
 "aMb" = (
 /obj/machinery/vending/robotics,
 /turf/unsimulated/floor{
@@ -18014,12 +18123,6 @@
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
-"aQq" = (
-/obj/item/clothing/head/xenos,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
 "aQr" = (
 /obj/random/trash,
 /turf/unsimulated/floor{
@@ -18247,45 +18350,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
-"aQQ" = (
-/obj/item/clothing/mask/gas/swat{
-	desc = "A close-fitting mask clearly not made for a human face.";
-	name = "\improper alien mask"
-	},
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
-"aQR" = (
-/obj/item/xenos_claw,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
-"aQS" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/carapace,
-/obj/item/clothing/head/helmet/space/vox/carapace,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/weapon/gun/launcher/alien/spikethrower,
-/obj/item/clothing/under/vox/vox_casual,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
-"aQT" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/carapace,
-/obj/item/clothing/head/helmet/space/vox/carapace,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/weapon/gun/launcher/alien/spikethrower,
-/obj/item/clothing/under/vox/vox_robes,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
 "aQU" = (
 /obj/effect/decal/cleanable/cobweb2{
 	icon_state = "spiderling";
@@ -18540,18 +18604,6 @@
 	icon_state = "asteroid"
 	},
 /area/syndicate_mothership/raider_base)
-"aRx" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/medic,
-/obj/item/clothing/head/helmet/space/vox/medic,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/clothing/under/vox/vox_robes,
-/obj/item/weapon/gun/projectile/dartgun/vox/raider,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
 "aRy" = (
 /obj/item/weapon/stool/padded,
 /turf/unsimulated/floor{
@@ -18657,42 +18709,10 @@
 /obj/random/clipboard,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
-"aRJ" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/pressure,
-/obj/item/clothing/head/helmet/space/vox/pressure,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/weapon/gun/projectile/dartgun/vox/raider,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
-"aRK" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/stealth,
-/obj/item/clothing/head/helmet/space/vox/stealth,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/clothing/glasses/thermal/plain/monocle,
-/obj/item/clothing/under/vox/vox_robes,
-/obj/item/weapon/gun/projectile/dartgun/vox/medical,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
 "aRL" = (
 /obj/machinery/acting/changer,
 /turf/unsimulated/floor{
 	icon_state = "dark"
-	},
-/area/syndicate_mothership/raider_base)
-"aRM" = (
-/obj/structure/table/woodentable,
-/obj/item/pizzabox/meat,
-/turf/unsimulated/floor{
-	icon_state = "wood"
 	},
 /area/syndicate_mothership/raider_base)
 "aRN" = (
@@ -19092,24 +19112,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
-"aSV" = (
-/obj/structure/closet/crate,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
 "aSW" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/unsimulated/floor{
@@ -20354,10 +20356,6 @@
 /obj/structure/table/steel,
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
-"aVX" = (
-/obj/machinery/vending/hydroseeds,
-/turf/simulated/floor/plating,
-/area/skipjack_station/start)
 "aVY" = (
 /obj/structure/table/rack,
 /obj/item/weapon/melee/energy/sword/pirate,
@@ -20388,20 +20386,6 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
-"aWa" = (
-/obj/structure/table/rack,
-/obj/item/weapon/storage/belt/utility/full,
-/obj/item/weapon/storage/belt/utility/full,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/clothing/shoes/magboots,
-/obj/random/maintenance,
-/obj/item/weapon/tank/oxygen,
-/obj/random/voidsuit,
-/obj/random/voidhelmet,
-/obj/random/maintenance,
-/turf/simulated/floor/plating,
 /area/skipjack_station/start)
 "aWb" = (
 /obj/machinery/washing_machine,
@@ -21417,12 +21401,6 @@
 "bfD" = (
 /turf/simulated/floor/wood/bamboo,
 /area/rescue_base/base)
-"bfZ" = (
-/obj/structure/aliumizer,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/syndicate_mothership/raider_base)
 "bgb" = (
 /obj/structure/closet{
 	name = "Clothing Storage"
@@ -22675,13 +22653,6 @@
 	icon_state = "wall3"
 	},
 /area/syndicate_station/start)
-"pMd" = (
-/obj/structure/aliumizer,
-/turf/unsimulated/floor{
-	dir = 2;
-	icon_state = "dark"
-	},
-/area/syndicate_mothership)
 "pUt" = (
 /obj/effect/floor_decal/stoneborder,
 /turf/simulated/floor/holofloor/beach/water,
@@ -55337,8 +55308,8 @@ aLM
 aLM
 aLM
 aLM
-aQq
-aQQ
+aML
+aML
 aRw
 aLM
 aLM
@@ -55540,7 +55511,7 @@ aLM
 aLM
 aOO
 aML
-aQR
+aML
 aML
 aML
 aSa
@@ -55742,9 +55713,9 @@ aLM
 aLM
 aML
 aML
-aQS
-aRx
-aRJ
+agf
+agh
+agj
 aML
 aML
 aML
@@ -55939,7 +55910,7 @@ aLM
 aLM
 aLM
 aLM
-bfZ
+aii
 aML
 aOO
 aML
@@ -55949,7 +55920,7 @@ aML
 aML
 aML
 aOO
-aSV
+ahi
 aLM
 aLM
 aLM
@@ -56146,9 +56117,9 @@ aML
 aML
 aML
 aML
-aQT
-aQS
-aRK
+agg
+agi
+agk
 aML
 aML
 aSW
@@ -59323,7 +59294,7 @@ ayB
 azK
 aAf
 aAB
-pMd
+aAS
 aAS
 aAS
 aBS
@@ -59529,7 +59500,7 @@ avX
 aBp
 avX
 avX
-aAS
+ahW
 aAS
 aAS
 avX
@@ -59593,7 +59564,7 @@ aab
 aab
 aab
 aUq
-aVX
+ahk
 aWs
 aWr
 aWr
@@ -60390,7 +60361,7 @@ aMv
 aLN
 aRc
 aRy
-aRM
+ahh
 aRy
 aRb
 aQx
@@ -60802,7 +60773,7 @@ aab
 aab
 aab
 bcb
-aUJ
+ahj
 aVf
 aVA
 aVA
@@ -60984,7 +60955,7 @@ aIP
 ajF
 aLH
 aLN
-aMa
+abT
 aMl
 aMy
 aMx
@@ -61613,7 +61584,7 @@ aab
 aab
 aab
 aUq
-aWa
+ahG
 aWv
 aWr
 aWr
