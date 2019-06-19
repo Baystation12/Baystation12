@@ -193,6 +193,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(candidate)
 		return candidate
 	else
-		to_chat(C,"<span class = 'warning'>SPAWN WARNING: map \'[src]\' is not returning a working spawn for [C] as [job_datum.type].")
+		to_chat(C,"<span class = 'warning'>SPAWN WARNING: map \'[src]\' is not returning a working spawn for [C] as [job_datum.type].</span>")
 		log_debug("SPAWN WARNING: map \'[src]\' is not returning a working spawn for [C] as [job_datum.type].")
 		message_admins("SPAWN WARNING: map \'[src]\' is not returning a working spawn for [C] as [job_datum.type].")
