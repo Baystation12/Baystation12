@@ -46,6 +46,9 @@
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
 
+/mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
+	. = ..() && can_act()
+
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
@@ -113,6 +116,7 @@
 	pry_time = 5 SECONDS
 	flash_vulnerability = 2 //sensitive eyes for stalking prey
 	does_spin = FALSE
+	available_maneuvers = list(/decl/maneuver/leap/spider)
 
 	var/leap_range = 5
 	var/leap_cooldown = 3 MINUTES
@@ -417,24 +421,16 @@ Nurse caste procs
 Hunter caste procs
 *****************/
 /mob/living/simple_animal/hostile/giant_spider/hunter/MoveToTarget()
-	if(!can_act() || try_ranged_maneuver(target_mob))
+	if(!can_act() || perform_maneuver(/decl/maneuver/leap/spider, target_mob))
 		return
 	..()
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/announce_jump_channel(var/atom/target)
-	visible_message(SPAN_WARNING("\The [src] reels back and prepares to launch itself at \the [target]!"))
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/can_jump()
-	. = ..() && can_act()
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/get_jump_distance()
 	return leap_range
 
-/mob/living/simple_animal/hostile/giant_spider/hunter/try_ranged_maneuver(atom/target)
-
+/mob/living/simple_animal/hostile/giant_spider/hunter/perform_maneuver(var/maneuver, var/atom/target)
 	if(!isliving(target) || get_dist(src, target) <= 3)
 		return FALSE
-
 	walk(src,0)
 	var/first_stop_automation
 	if(stop_automation)
@@ -444,15 +440,14 @@ Hunter caste procs
 	if(!isnull(first_stop_automation))
 		stop_automation = first_stop_automation
 	
-/mob/living/simple_animal/hostile/giant_spider/hunter/collide_with_mob(var/mob/target)
-	stop_automation = FALSE
-	if(istype(target) && Adjacent(target))
+/mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom, var/speed)
+	if(isliving(hit_atom))
+		var/mob/living/target = hit_atom
+		stop_automation = FALSE
 		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
 		target.Weaken(1)
 		MoveToTarget()
-	else
-		visible_message(SPAN_DANGER("\The [src] misses its quarry and gets staggered!"))
-		Stun(3) //we missed!
+	. = ..()
 
 /******************
 Spitter caste procs

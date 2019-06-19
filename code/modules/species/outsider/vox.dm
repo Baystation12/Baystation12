@@ -66,8 +66,8 @@
 	flesh_color = "#808d11"
 
 	reagent_tag = IS_VOX
-	ranged_grab_distance = 3
-	standing_jump_range = 3
+	maneuvers = list(/decl/maneuver/leap/grab)
+	standing_jump_range = 5
 
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox

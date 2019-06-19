@@ -58,6 +58,16 @@ default behaviour is:
 	return ..()
 
 /mob/living/Bump(atom/movable/AM, yes)
+
+	// This is boilerplate from /atom/movable/Bump() but in all honest
+	// I have no clue what is going on in the logic below this and I'm 
+	// afraid to touch it in case it explodes and kills me.
+	if(throwing)
+		throw_impact(AM)
+		throwing = FALSE
+		return
+	// End boilerplate.
+
 	spawn(0)
 		if ((!( yes ) || now_pushing) || !loc)
 			return
@@ -76,13 +86,6 @@ default behaviour is:
 						to_chat(src, "<span class='warning'>[tmob] is restraining [M], you cannot push past</span>")
 					now_pushing = 0
 					return
-
-			//Leaping mobs just land on the tile, no pushing, no anything.
-			if(status_flags & LEAPING)
-				status_flags &= ~LEAPING
-				forceMove(tmob.loc)
-				now_pushing = 0
-				return
 
 			if(can_swap_with(tmob)) // mutual brohugs all around!
 				var/turf/oldloc = loc

@@ -31,6 +31,11 @@
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	return
 
+/mob/living/RangedAttack(var/atom/A, var/proximity)
+	. = ..()
+	if(!. && a_intent == I_GRAB && length(available_maneuvers))
+		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
+
 /mob/living/carbon/human/RangedAttack(var/atom/A)
 	//Climbing up open spaces
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
@@ -57,8 +62,8 @@
 		var/obj/item/clothing/gloves/G = gloves
 		if(istype(G) && G.Touch(A,0)) // for magic gloves
 			return TRUE
-
-	. = ..() || ((a_intent == I_GRAB || a_intent == I_DISARM) && try_ranged_maneuver(A))
+	
+	. = ..()
 
 /mob/living/RestrainedClickOn(var/atom/A)
 	return
