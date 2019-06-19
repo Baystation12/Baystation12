@@ -2,7 +2,6 @@
 /datum/job/URF_commando
 	title = "URF Commando"
 	spawn_faction = "Insurrection"
-	spawnpoint_override = "URF Commando"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/URF_commando
 	alt_titles = list("Recruit",\
@@ -22,7 +21,6 @@
 /datum/job/URF_commando_officer
 	title = "URF Commando Officer"
 	spawn_faction = "Insurrection"
-	spawnpoint_override = "URF Commando Officer"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/URF_commando_officer
 	alt_titles = list("Optio",\
