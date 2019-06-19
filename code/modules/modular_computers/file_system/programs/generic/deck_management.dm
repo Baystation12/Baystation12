@@ -11,6 +11,7 @@
 	size = 18
 	available_on_ntnet = 1
 	requires_ntnet = 1
+	required_access = access_deck_management
 
 /datum/nano_module/deck_management
 	name = "Deck Management Program"
