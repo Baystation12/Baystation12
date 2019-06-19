@@ -7,7 +7,6 @@
 #define MATERIAL_DIAMOND                 "diamond"
 #define MATERIAL_PHORON                  "phoron"
 #define MATERIAL_URANIUM                 "uranium"
-#define MATERIAL_COTTON                  "cotton"
 #define MATERIAL_CRYSTAL                 "crystal"
 #define MATERIAL_SANDSTONE               "sandstone"
 #define MATERIAL_LEATHER                 "leather"
