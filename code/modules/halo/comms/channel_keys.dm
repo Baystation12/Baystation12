@@ -155,7 +155,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 			return "supradio"
 
 		//Covenant Battlenet channels
-		if("Battlenet")
+		if("BattleNet")
 			return "sciradio"
 
 		//brute clan
