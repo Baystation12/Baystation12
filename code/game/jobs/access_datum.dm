@@ -117,6 +117,12 @@
 	id = access_bridge
 	desc = "Bridge"
 	region = ACCESS_REGION_COMMAND
+	
+/var/const/access_bridge = "ACCESS_DECK_MANAGEMENT"
+/datum/access/deck_management
+	id = access_deck_management
+	desc = "Deck Management"
+	region = ACCESS_REGION_COMMAND
 
 /var/const/access_captain = "ACCESS_CAPTAIN" //20
 /datum/access/captain
