@@ -124,7 +124,6 @@
 	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
 	var/heat_reduction = 1.5 // mitigates this much heat per tick
-	var/heat = 0
 	var/range = 1
 	idle_power_usage = 5000
 

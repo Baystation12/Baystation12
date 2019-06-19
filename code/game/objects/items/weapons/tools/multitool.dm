@@ -8,7 +8,7 @@
 	name = "multitool"
 	desc = "Used for pulsing wires to test which to cut. You can use this on airlocks or APCs to try to hack them."
 	icon_state = "multitool"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = WEAPON_FORCE_HARMLESS
 	w_class = ITEM_SIZE_SMALL
 	throwforce = WEAPON_FORCE_HARMLESS
@@ -62,7 +62,7 @@
 		return ..(A, user)
 
 	var/obj/O = A
-	var/datum/extension/multitool/MT = get_extension(O, /datum/extension/multitool)
+	var/datum/extension/interactive/multitool/MT = get_extension(O, /datum/extension/interactive/multitool)
 	if(!MT)
 		return ..(A, user)
 

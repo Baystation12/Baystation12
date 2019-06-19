@@ -2,7 +2,7 @@
 	name = "welding tool"
 	icon_state = "welder"
 	item_state = "welder"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = WEAPON_FORCE_WEAK
 	switched_on_force = WEAPON_FORCE_PAINFULL
 	throwforce = WEAPON_FORCE_WEAK

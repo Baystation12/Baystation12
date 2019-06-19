@@ -3,11 +3,11 @@
 	desc = "Used to remove floors and to pry open doors."
 	icon_state = "crowbar"
 	item_state = "crowbar"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = WEAPON_FORCE_PAINFULL
 	worksound = WORKSOUND_EASY_CROWBAR
 	w_class = ITEM_SIZE_NORMAL
-	storage_cost = ITEM_SIZE_NORMAL //It's long and thin so it doesn't grow exponentially
+	//storage_cost = ITEM_SIZE_NORMAL //Unimplemented mechanic to override automatic storage cost generation
 	origin_tech = list(TECH_ENGINEERING = 1)
 	matter = list(MATERIAL_STEEL = 4)
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
@@ -31,4 +31,4 @@
 	degradation = 0.07
 	use_power_cost = 0.8
 	max_upgrades = 4
-	suitable_cell = /obj/item/weapon/cell/medium
+	suitable_cell = /obj/item/weapon/cell

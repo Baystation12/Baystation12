@@ -2,7 +2,7 @@
 	name = "wrench"
 	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon_state = "wrench"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = WEAPON_FORCE_NORMAL
 	worksound = WORKSOUND_WRENCHING
 	throwforce = WEAPON_FORCE_NORMAL

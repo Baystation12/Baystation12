@@ -2,7 +2,7 @@
 	name = "scalpel"
 	desc = "Cut, cut, and once more cut."
 	icon_state = "scalpel_t3"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = WEAPON_FORCE_PAINFULL
 	sharp = TRUE
 	edge = TRUE
@@ -35,7 +35,7 @@
 	tool_qualities = list(QUALITY_CUTTING = 50, QUALITY_WIRE_CUTTING = 20, QUALITY_LASER_CUTTING = 40)
 	degradation = 0.11
 	use_power_cost = 0.12
-	suitable_cell = /obj/item/weapon/cell/small
+	suitable_cell = /obj/item/weapon/cell
 	max_upgrades = 4
 
 

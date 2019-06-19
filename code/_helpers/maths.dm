@@ -80,6 +80,9 @@
 /proc/Interpolate(a, b, weight = 0.5)
 	return a + (b - a) * weight // Equivalent to: a*(1 - weight) + b*weight
 
+/proc/rand_between(var/lower, var/upper)
+	return (rand() * (upper - lower)) + lower
+
 /proc/Mean(...)
 	var/sum = 0
 	for(var/val in args)

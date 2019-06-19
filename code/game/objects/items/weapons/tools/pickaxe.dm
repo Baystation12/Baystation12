@@ -1,7 +1,7 @@
 /obj/item/weapon/tool/pickaxe
 	name = "pickaxe"
 	desc = "The most basic of mining tools, for short excavations and small mineral extractions."
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	force = WEAPON_FORCE_DANGEROUS
 	throwforce = WEAPON_FORCE_NORMAL
@@ -13,9 +13,9 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	sharp = 1
-	structure_damage_factor = 3 //Drills and picks are made for getting through hard materials
+	//structure_damage_factor = 3 //Drills and picks are made for getting through hard materials
 	//They are the best anti-structure melee weapons
-	embed_mult = 1.2 //Digs deep
+	//embed_mult = 1.2 //Digs deep
 
 /obj/item/weapon/tool/pickaxe/jackhammer
 	name = "jackhammer"
@@ -27,7 +27,7 @@
 	desc = "Cracks rocks with blasts, perfect for killing cave lizards."
 	degradation = 0.07
 	use_power_cost = 0.6
-	suitable_cell = /obj/item/weapon/cell/medium
+	suitable_cell = /obj/item/weapon/cell
 
 /obj/item/weapon/tool/pickaxe/drill
 	name = "mining drill" // Can dig sand as well!

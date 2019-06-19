@@ -10,7 +10,7 @@
 	use_stock_cost = 0.15
 	max_stock = 100
 	degradation = 0 //its consumable anyway
-	flags = NOBLUDGEON //Its not a weapon
+	item_flags = NOBLUDGEON //Its not a weapon
 	max_upgrades = 0 //These are consumable, so no wasting upgrades on them
 
 /obj/item/weapon/tool/tape_roll/web
@@ -33,7 +33,7 @@
 
 /obj/item/weapon/tool/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(istype(H))
-		if(user.targeted_organ == BP_EYES)
+		if(user.zone_sel.selecting == BP_EYES)
 
 			if(!H.organs_by_name[BP_HEAD])
 				user << SPAN_WARNING("\The [H] doesn't have a head.")
@@ -59,7 +59,7 @@
 			user.visible_message(SPAN_DANGER("\The [user] has taped up \the [H]'s eyes!"))
 			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/blindfold/tape(H), slot_glasses)
 
-		else if(user.targeted_organ == BP_MOUTH || user.targeted_organ == BP_HEAD)
+		else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
 			if(!H.organs_by_name[BP_HEAD])
 				user << SPAN_WARNING("\The [H] doesn't have a head.")
 				return
@@ -84,7 +84,7 @@
 			user.visible_message(SPAN_DANGER("\The [user] has taped up \the [H]'s mouth!"))
 			H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), slot_wear_mask)
 
-		else if(user.targeted_organ == BP_R_ARM || user.targeted_organ == BP_L_ARM)
+		else if(user.zone_sel.selecting == BP_R_ARM || user.zone_sel.selecting == BP_L_ARM)
 			if(use_tool(user, H, 90, QUALITY_ADHESIVE))
 				var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
 				if(!T.place_handcuffs(H, user))
@@ -124,7 +124,7 @@
 
 /obj/item/weapon/ducttape/New()
 	..()
-	flags |= NOBLUDGEON
+	item_flags |= NOBLUDGEON
 
 /obj/item/weapon/ducttape/update_plane()
 	..()
@@ -181,7 +181,7 @@
 	var/dir_offset = 0
 	if(target_turf != source_turf)
 		dir_offset = get_dir(source_turf, target_turf)
-		if(!(dir_offset in cardinal))
+		if(!(dir_offset in GLOB.cardinal))
 			user << "You cannot reach that from here."		// can only place stuck papers in cardinal directions, to
 			return											// reduce papers around corners issue.
 

@@ -15,7 +15,7 @@
 	icon = 'icons/obj/tool_upgrades.dmi'
 	force = WEAPON_FORCE_HARMLESS
 	w_class = ITEM_SIZE_SMALL
-	price_tag = 200
+	//price_tag = 200
 
 	var/prefix = "upgraded" //Added to the tool's name
 
@@ -147,7 +147,7 @@
 
 	if (user)
 		user.visible_message(SPAN_NOTICE("[user] starts applying the [src] to [T]"), SPAN_NOTICE("You start applying the [src] to [T]"))
-		if (!use_tool(user = user, target =  T, base_time = WORKTIME_NORMAL, required_quality = null, fail_chance = FAILCHANCE_EASY+T.unreliability, required_stat = STAT_MEC, forced_sound = WORKSOUND_WRENCHING))
+		if (!use_tool(user = user, target =  T, base_time = WORKTIME_NORMAL, required_quality = null, fail_chance = FAILCHANCE_EASY+T.unreliability, required_stat = "construction", forced_sound = WORKSOUND_WRENCHING))
 			return
 		user << SPAN_NOTICE("You have successfully installed [src] in [T]")
 		user.drop_from_inventory(src)

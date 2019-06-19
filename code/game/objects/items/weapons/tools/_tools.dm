@@ -104,7 +104,7 @@
 
 //Cell reload
 /obj/item/weapon/tool/MouseDrop(over_object)
-	if((src.loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, usr))
+	if((src.loc == usr) && istype(over_object, /obj/screen) && eject_item(cell, usr)) ///Formerly checked for /obj/screeninventory/hand. Not sure how that fits with bay's UI system
 		cell = null
 		update_icon()
 	else
@@ -126,7 +126,7 @@
 		if (toremove == "Cancel")
 			return
 
-		if (C.use_tool(user = user, target =  src, base_time = WORKTIME_SLOW, required_quality = QUALITY_SCREW_DRIVING, fail_chance = FAILCHANCE_CHALLENGING, required_stat = STAT_MEC))
+		if (C.use_tool(user = user, target =  src, base_time = WORKTIME_SLOW, required_quality = QUALITY_SCREW_DRIVING, fail_chance = FAILCHANCE_CHALLENGING, required_stat = "construction"))
 			//If you pass the check, then you manage to remove the upgrade intact
 			user << SPAN_NOTICE("You successfully remove [toremove] while leaving it intact.")
 			upgrades -= toremove
@@ -245,7 +245,7 @@
 	//Precalculate worktime here
 	var/time_to_finish = 0
 	if (base_time)
-		time_to_finish = base_time - get_tool_quality(required_quality) - user.stats.getStat(required_stat)
+		time_to_finish = base_time - get_tool_quality(required_quality) - 30//TODO: Factor in bay skills here user.stats.getStat(required_stat)
 
 		//Workspeed var, can be improved by upgrades
 		if (T && T.workspeed > 0)
@@ -317,7 +317,7 @@
 
 	var/stat_modifer = 0
 	if(required_stat)
-		stat_modifer = user.stats.getStat(required_stat)
+		stat_modifer = 30//TODO: Factor in bay skills here //user.stats.getStat(required_stat)
 	fail_chance = fail_chance - get_tool_quality(required_quality) - stat_modifer
 
 	//Unreliability increases failure rates, and precision reduces it
@@ -352,7 +352,7 @@
 		if (T.degradation)
 			T.unreliability += 15*T.degradation //Failing incurs 30 uses worth of damage
 	if(required_stat)
-		crit_fail_chance = crit_fail_chance - user.stats.getStat(required_stat)
+		crit_fail_chance = crit_fail_chance - 30// TODO: Bay stats here: user.stats.getStat(required_stat)
 
 
 
@@ -407,8 +407,8 @@
 					user << SPAN_DANGER("You drop [src] on the floor.")
 					user.drop_from_inventory(src)
 				else if(istype(loc, /obj/machinery/door/airlock))
-					var/obj/machinery/door/airlock/AD = loc
-					AD.take_out_wedged_item()
+					//var/obj/machinery/door/airlock/AD = loc
+					//AD.take_out_wedged_item() //Airlock tool wedging system, not ported yet
 				else
 					forceMove(get_turf(src))
 				return
@@ -446,8 +446,8 @@
 					throw_at(throw_target, src.throw_range, src.throw_speed, H)
 					return
 				if(istype(loc, /obj/machinery/door/airlock))
-					var/obj/machinery/door/airlock/AD = loc
-					AD.take_out_wedged_item()
+					//var/obj/machinery/door/airlock/AD = loc
+					//AD.take_out_wedged_item() //Airlock tool wedging system, not ported yet
 				else
 					forceMove(get_turf(src))
 				var/throw_target = pick(trange(6, src))
@@ -475,9 +475,10 @@
 						A.forceMove(get_turf(src))
 						A.holder = null
 
-				if(istype(loc, /obj/machinery/door/airlock))
-					var/obj/machinery/door/airlock/AD = loc
-					AD.take_out_wedged_item()
+				//Airlock tool wedging system, not ported yet
+				//if(istype(loc, /obj/machinery/door/airlock))
+					//var/obj/machinery/door/airlock/AD = loc
+					//AD.take_out_wedged_item()
 
 				qdel(src)
 				return
@@ -543,9 +544,11 @@
 
 	var/return_quality
 	if(L.len > 1)
-		for(var/i in L)
-			L[i] = image(icon = 'icons/mob/radial/tools.dmi', icon_state = i)
-		return_quality = show_radial_menu(user, use_on ? use_on : user, L, tooltips = TRUE, require_near = TRUE, custom_check = CB)
+		return_quality = input(user,"What quality you using?", "Tool options", ABORT_CHECK) in L
+		//for(var/i in L)
+		//Radial menu not ported
+		//L[i] = image(icon = 'icons/mob/radial/tools.dmi', icon_state = i)
+		//return_quality = show_radial_menu(user, use_on ? use_on : user, L, tooltips = TRUE, require_near = TRUE, custom_check = CB)
 	else
 		return_quality = L[1]
 
@@ -569,7 +572,7 @@
 	if(glow_color)
 		set_light(l_range = 1.7, l_power = 1.3, l_color = glow_color)
 	update_icon()
-	update_wear_icon()
+	//update_wear_icon() //Too tied into eris' inventory system, need to find a better path to do this
 
 /obj/item/weapon/tool/proc/turn_off(mob/user)
 	switched_on = FALSE
@@ -579,7 +582,7 @@
 	if(glow_color)
 		set_light(l_range = 0, l_power = 0, l_color = glow_color)
 	update_icon()
-	update_wear_icon()
+	//update_wear_icon() //Too tied into eris' inventory system, need to find a better path to do this
 
 
 
@@ -780,7 +783,7 @@
 			if (T.unreliability)
 				user.visible_message(SPAN_NOTICE("[user] begins repairing \the [O] with the [src]!"))
 				//Toolception!
-				if(use_tool(user, T, 60 + (T.unreliability*10), QUALITY_ADHESIVE, T.unreliability, STAT_MEC))
+				if(use_tool(user, T, 60 + (T.unreliability*10), QUALITY_ADHESIVE, T.unreliability, "construction"))
 					//Repairs are imperfect, it'll never go back to being intact
 					T.unreliability *= 0.1
 					repair_frequency++
@@ -790,7 +793,7 @@
 		if (stick(O, user))
 			return
 	//Triggers degradation and resource use upon attacks
-	if (!(flags & NOBLUDGEON) && (world.time - last_tooluse) > 2)
+	if (!(item_flags & ITEM_FLAG_NO_BLUDGEON) && (world.time - last_tooluse) > 2)
 		consume_resources(5,user)
 		if (prob(unreliability))
 			handle_failure(user, O)
@@ -803,7 +806,7 @@
 	//If the parent return value is true, then there won't be an attackby
 	//If there will be an attackby, we'll handle it there
 	//Checking the last tooluse time prevents consuming twice for a tool action
-	if (. && loc == user && (!(flags & NOBLUDGEON)) && (world.time - last_tooluse) > 2)
+	if (. && loc == user && (!(item_flags & ITEM_FLAG_NO_BLUDGEON)) && (world.time - last_tooluse) > 2)
 		consume_resources(5,user)
 		if (prob(unreliability))
 			handle_failure(user, A)
@@ -849,19 +852,20 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
-
+/* TODO: Figure out bay prosthetic repair then uncomment this
 /obj/item/weapon/tool/attack(mob/living/M, mob/living/user, var/target_zone)
 	if ((user.a_intent == I_HELP) && ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.organs_by_name[user.targeted_organ]
+		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
-		if (!istype(S) || S.robotic < ORGAN_ROBOT)
+		if (!istype(S) || !BP_IS_ROBOTIC(S))
 			return ..()
 
+		//TODO: Bay probably has its own code for this. Point to that instead
 		if (get_tool_type(user, list(QUALITY_WELDING), H)) //Prosthetic repair
 			if (S.brute_dam)
 				if (S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
-					if (use_tool(user, H, WORKTIME_FAST, QUALITY_WELDING, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
+					if (use_tool(user, H, WORKTIME_FAST, QUALITY_WELDING, FAILCHANCE_NORMAL, required_stat = "construction"))
 						S.heal_damage(15,0,0,1)
 						user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 						user.visible_message(SPAN_NOTICE("\The [user] patches some dents on \the [H]'s [S.name] with \the [src]."))
@@ -874,6 +878,7 @@
 				return 1
 
 	return ..()
+*/
 
 /obj/item/weapon/tool/update_icon()
 	overlays.Cut()
@@ -927,3 +932,10 @@
 							QUALITY_DIGGING = 100,
 							QUALITY_EXCAVATION = 100,
 							QUALITY_CUTTING = 100)
+
+
+
+//Returns the list of matter in this object
+//You can override it to customise exactly what is returned.
+/obj/proc/get_matter()
+	return matter

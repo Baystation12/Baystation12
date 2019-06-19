@@ -5,7 +5,7 @@
 	force = WEAPON_FORCE_NORMAL
 	throwforce = WEAPON_FORCE_NORMAL
 	worksound = WORKSOUND_SIMPLE_SAW
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
@@ -14,7 +14,7 @@
 	sharp = TRUE
 	edge = TRUE
 	tool_qualities = list(QUALITY_SAWING = 30, QUALITY_CUTTING = 20, QUALITY_WIRE_CUTTING = 20)
-	embed_mult = 1 //Serrated blades catch on bone more easily
+	//embed_mult = 1 //Serrated blades catch on bone more easily
 
 /obj/item/weapon/tool/saw/improvised
 	name = "choppa"
@@ -35,7 +35,7 @@
 	tool_qualities = list(QUALITY_SAWING = 40, QUALITY_CUTTING = 30, QUALITY_WIRE_CUTTING = 30)
 
 	use_power_cost = 0.15
-	suitable_cell = /obj/item/weapon/cell/small
+	suitable_cell = /obj/item/weapon/cell
 
 /obj/item/weapon/tool/saw/advanced_circular
 	name = "advanced circular saw"
@@ -48,7 +48,7 @@
 	tool_qualities = list(QUALITY_SAWING = 50, QUALITY_CUTTING = 40, QUALITY_WIRE_CUTTING = 40)
 	degradation = 0.07
 	use_power_cost = 0.22
-	suitable_cell = /obj/item/weapon/cell/small
+	suitable_cell = /obj/item/weapon/cell
 	max_upgrades = 4
 
 /obj/item/weapon/tool/saw/chain

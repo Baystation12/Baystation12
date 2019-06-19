@@ -424,4 +424,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(handcuffed) . += handcuffed
 		if(s_store)    . += s_store
 
+/mob/living/carbon/human/proc/get_holding_hand(var/obj/item/W)
+	switch(get_inventory_slot(W))
+		if(slot_l_hand)
+			return BP_L_ARM
+		if(slot_r_hand)
+			return BP_R_ARM
+
 #undef REMOVE_INTERNALS

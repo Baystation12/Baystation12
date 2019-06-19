@@ -2,7 +2,7 @@
 	name = "wirecutters"
 	desc = "Cuts wires and other objects with it."
 	icon_state = "cutters"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = WEAPON_FORCE_WEAK
 	worksound = WORKSOUND_WIRECUTTING
 	throw_speed = 2

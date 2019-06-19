@@ -2,7 +2,7 @@
 	name = "shovel"
 	desc = "A large tool for digging and moving dirt and rock."
 	icon_state = "shovel"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	force = WEAPON_FORCE_PAINFULL
 	throwforce = WEAPON_FORCE_WEAK

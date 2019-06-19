@@ -5,7 +5,7 @@
 	hitsound = WORKSOUND_DRIVER_TOOL
 	worksound = WORKSOUND_DRIVER_TOOL
 	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLASTIC = 2)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = WEAPON_FORCE_DANGEROUS
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
@@ -13,7 +13,7 @@
 	tool_qualities = list(QUALITY_DRILLING = 30)
 
 	use_power_cost = 0.24
-	suitable_cell = /obj/item/weapon/cell/small
+	suitable_cell = /obj/item/weapon/cell
 
 
 /obj/item/weapon/tool/shiv
