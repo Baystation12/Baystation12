@@ -373,12 +373,47 @@
 	build_path = /obj/item/weapon/airlock_electronics/secure
 	sort_string = "JDAAA"
 
+/datum/design/circuit/portable_scrubber
+	name = "portable scrubber"
+	id = "portascrubber"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber
+	sort_string = "JEAAA"
+
+/datum/design/circuit/portable_pump
+	name = "portable pump"
+	id = "portapump"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/pump
+	sort_string = "JEAAB"
+
+/datum/design/circuit/portable_scrubber_huge
+	name = "large portable scrubber"
+	id = "portascrubberhuge"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 5, TECH_MATERIAL = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/huge
+	sort_string = "JEAAC"
+
+/datum/design/circuit/portable_scrubber_stat
+	name = "large stationary portable scrubber"
+	id = "portascrubberstat"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 5, TECH_MATERIAL = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/huge/stationary
+	sort_string = "JEAAD"
+
 /datum/design/circuit/biogenerator
 	name = "biogenerator"
 	id = "biogenerator"
 	req_tech = list(TECH_DATA = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/biogenerator
 	sort_string = "KBAAA"
+
+/datum/design/circuit/hydro_tray
+	name = "hydroponics tray"
+	id = "hydrotray"
+	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 2, TECH_DATA = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/tray
+	sort_string = "KBAAB"
 
 /datum/design/circuit/miningdrill
 	name = "mining drill head"
