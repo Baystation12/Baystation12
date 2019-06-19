@@ -1,0 +1,5 @@
+author: "Heptagon49"
+delete-after: True
+changes: 
+  - bugfix: "Fixed variables so powercells aren't duped when inserted into the coilgun."
+  - bugfix: "Fixed coilgun examination so that it works now."
