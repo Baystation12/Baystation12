@@ -58,7 +58,8 @@ var/list/global/tank_gauge_cache = list()
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
 		TTV.remove_tank(src)
-		qdel(TTV)
+		if(!QDELETED(TTV)) // It will delete tanks inside it on qdel.
+			qdel(TTV)
 
 	. = ..()
 
