@@ -435,33 +435,33 @@
 	device = /obj/item/weapon/pen/multi
 
 /obj/item/rig_module/device/stamp
-	name = "mounted internal affairs stamp"
+	name = "mounted stamp"
 	desc = "DENIED."
 	icon_state = "stamp"
 	interface_name = "mounted stamp"
 	interface_desc = "Leave your mark."
 	engage_string = "Toggle stamp type"
 	usable = 1
-	var/iastamp
+	var/stamp
 	var/deniedstamp
 
 /obj/item/rig_module/device/stamp/Initialize()
 	. = ..()
-	iastamp = new /obj/item/weapon/stamp/internalaffairs(src)
+	stamp = new /obj/item/weapon/stamp(src)
 	deniedstamp = new /obj/item/weapon/stamp/denied(src)
-	device = iastamp
+	device = stamp
 
 /obj/item/rig_module/device/stamp/engage(atom/target)
 	if(!..() || !device)
 		return 0
 
 	if(!target)
-		if(device == iastamp)
+		if(device == stamp)
 			device = deniedstamp
 			to_chat(holder.wearer, "<span class='notice'>Switched to denied stamp.</span>")
 		else if(device == deniedstamp)
-			device = iastamp
-			to_chat(holder.wearer, "<span class='notice'>Switched to internal affairs stamp.</span>")
+			device = stamp
+			to_chat(holder.wearer, "<span class='notice'>Switched to rubber stamp.</span>")
 		return 1
 
 /obj/item/rig_module/device/decompiler

@@ -10337,7 +10337,6 @@
 /obj/structure/table/reinforced,
 /obj/item/weapon/aicard,
 /obj/item/weapon/pinpointer/advpinpointer,
-/obj/item/weapon/stamp/centcomm,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -11657,7 +11656,6 @@
 /area/centcom/specops)
 "aBy" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/stamp/centcomm,
 /obj/item/weapon/pen,
 /obj/item/weapon/paper_bin{
 	pixel_x = 1;
