@@ -296,6 +296,6 @@
 	if(!S.gen.check_flag(MODEFLAG_HYPERKINETIC))
 		return
 	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, src)
-	visible_message("<span class='danger'>\The [src] breaks into dust!</span>")
+	meteor_effect()
 	make_debris()
 	qdel(src)

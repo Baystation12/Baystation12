@@ -147,7 +147,7 @@
 	var/move_count = 0
 
 /obj/effect/meteor/proc/get_shield_damage()
-	return max(((max(hits, 2)) * (heavy + 1) * rand(30, 60)) / hitpwr , 0)
+	return max(((max(hits, 2)) * (heavy + 1) * rand(60, 120)) / hitpwr , 0)
 
 /obj/effect/meteor/New()
 	..()
@@ -310,7 +310,7 @@
 	empulse(src, rand(2, 4), rand(4, 10))
 
 /obj/effect/meteor/emp/get_shield_damage()
-	return ..() * rand(2,4)
+	return ..() * rand(20,40)
 
 //Station buster Tunguska
 /obj/effect/meteor/tunguska
@@ -326,12 +326,16 @@
 	..()
 	explosion(src.loc, 3, 6, 9, 20, 0)
 
+/obj/effect/meteor/tunguska/get_shield_damage()
+	return ..() * rand(50,70)
+
 // This is the final solution against shields - a single impact can bring down most shield generators.
 /obj/effect/meteor/supermatter
 	name = "supermatter shard"
 	desc = "Oh god, what will be next..?"
 	icon = 'icons/obj/engine.dmi'
 	icon_state = "darkmatter"
+	heavy = 1
 
 /obj/effect/meteor/supermatter/meteor_effect()
 	..()
