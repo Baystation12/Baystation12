@@ -212,7 +212,7 @@
 	return ..()
 
 /mob/living/carbon/human/can_speak(datum/language/speaking)
-	if(species && (speaking.name in species.assisted_langs))
+	if(species && speaking && (speaking.name in species.assisted_langs))
 		for(var/obj/item/organ/internal/voicebox/I in src.internal_organs)
 			if(I.is_usable() && I.assists_languages[speaking])
 				return TRUE
