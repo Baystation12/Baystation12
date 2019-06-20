@@ -3,7 +3,7 @@
 	desc = "A bulky, rather outdated psi-meter for conducting assays of psi-operants. The rear casing is stamped with a large Cuchulain Foundation logo."
 	icon = 'icons/obj/machines/psimeter.dmi'
 	icon_state = "meter_on"
-	use_power = 2
+	use_power = POWER_USE_ACTIVE
 	anchored = TRUE
 	density = TRUE
 	opacity = FALSE

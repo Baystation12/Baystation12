@@ -2570,13 +2570,14 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "iy" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 1443;
 	input_tag = "d_air_in";
 	name = "Mixed Air Supply Control";
 	output_tag = "d_air_out";
 	pressure_setting = 2000;
-	sensors = list("d_air_sensor" = "Tank")
+	sensor_tag = "d_air_sensor";
+	sensor_name = "Air Supply Tank";
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2624,8 +2625,7 @@
 	},
 /obj/machinery/air_sensor{
 	frequency = 1443;
-	id_tag = "d_air_sensor";
-	output = 7
+	id_tag = "d_air_sensor"
 	},
 /turf/simulated/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
@@ -2700,12 +2700,13 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "iO" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 1441;
 	input_tag = "d_o2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d_o2_out";
-	sensors = list("d_o2_sensor" = "Tank")
+	sensor_tag = "d_o2_sensor";
+	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2801,12 +2802,13 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "jc" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 1441;
 	input_tag = "d_n2_in";
 	name = "Nitrogen Supply Control";
 	output_tag = "d_n2_out";
-	sensors = list("d_n2_sensor" = "Tank")
+	sensor_tag = "d_n2_sensor";
+	sensor_name = "N2 Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4

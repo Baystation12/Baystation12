@@ -1897,12 +1897,13 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 7664;
 	input_tag = "cn2n";
 	name = "Nitrogen Supply Control";
 	output_tag = "cn2o";
-	sensors = list("c1" = "Tank")
+	sensor_name = "Nitrogen Tank";
+	sensor_tag = "c1"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
@@ -2723,12 +2724,13 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 7663;
 	input_tag = "co2n";
 	name = "Oxygen Supply Control";
 	output_tag = "co2o";
-	sensors = list("c2" = "Tank")
+	sensor_name = "Oxygen Tank";
+	sensor_tag = "c2"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
@@ -2816,12 +2818,13 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 7662;
 	input_tag = "cco2n";
 	name = "Carbon Dioxide Tank Control";
 	output_tag = "cco2o";
-	sensors = list("c3" = "Tank")
+	sensor_name = "Carbon Dioxide Tank";
+	sensor_tag = "c3"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
@@ -3701,7 +3704,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
 "gG" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)

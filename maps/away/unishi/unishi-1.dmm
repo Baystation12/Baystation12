@@ -276,7 +276,7 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aO" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen{
+/obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 2;
 	volume = 3200
 	},
@@ -284,7 +284,7 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "aP" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen,
+/obj/machinery/atmospherics/unary/tank/hydrogen,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -637,13 +637,14 @@
 /turf/simulated/wall/r_wall,
 /area/unishi/engineroom)
 "bG" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 4;
 	frequency = 2001;
 	input_tag = "unishi_fuel_in";
 	name = "Fuel Supply Control";
 	output_tag = "unishi_fuel_out";
-	sensors = list("n2_sensor" = "Tank")
+	sensor_name = "Tank";
+	sensor_tag = "n2_sensor"
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)

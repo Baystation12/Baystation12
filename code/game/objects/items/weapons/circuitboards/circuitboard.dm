@@ -1,9 +1,3 @@
-//Define a macro that we can use to assemble all the circuit board names
-#ifdef T_BOARD
-#error T_BOARD already defined elsewhere, we can't use it.
-#endif
-#define T_BOARD(name)	"circuit board (" + (name) + ")"
-
 /obj/item/weapon/stock_parts/circuitboard
 	name = "circuit board"
 	icon = 'icons/obj/module.dmi'
@@ -18,10 +12,11 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 15
-	lazy_initialize = FALSE
+	part_flags = 0
 	var/build_path = null
 	var/board_type = "computer"
 	var/list/req_components = null
+	var/buildtype_select = FALSE
 
 //Called when the circuitboard is used to contruct a new machine.
 /obj/item/weapon/stock_parts/circuitboard/proc/construct(var/obj/machinery/M)
@@ -35,3 +30,19 @@
 	if (istype(M, build_path))
 		return 1
 	return 0
+
+// Used with the build type selection multitool extension. Return a list of possible build types to allow multitool toggle.
+/obj/item/weapon/stock_parts/circuitboard/proc/get_buildable_types()
+
+/obj/item/weapon/stock_parts/circuitboard/Initialize()
+	. = ..()
+	if(buildtype_select)
+		if(get_extension(src, /datum/extension/interactive/multitool))
+			CRASH("A circuitboard of type [type] has conflicting multitool extensions")
+		set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/circuitboards/buildtype_select)
+
+/obj/item/weapon/stock_parts/circuitboard/on_uninstall(obj/machinery/machine)
+	. = ..()
+	if(buildtype_select && machine)
+		build_path = machine.base_type || machine.type
+		SetName(T_BOARD(machine.name))

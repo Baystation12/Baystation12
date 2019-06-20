@@ -373,12 +373,47 @@
 	build_path = /obj/item/weapon/airlock_electronics/secure
 	sort_string = "JDAAA"
 
+/datum/design/circuit/portable_scrubber
+	name = "portable scrubber"
+	id = "portascrubber"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber
+	sort_string = "JEAAA"
+
+/datum/design/circuit/portable_pump
+	name = "portable pump"
+	id = "portapump"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/pump
+	sort_string = "JEAAB"
+
+/datum/design/circuit/portable_scrubber_huge
+	name = "large portable scrubber"
+	id = "portascrubberhuge"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 5, TECH_MATERIAL = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/huge
+	sort_string = "JEAAC"
+
+/datum/design/circuit/portable_scrubber_stat
+	name = "large stationary portable scrubber"
+	id = "portascrubberstat"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 5, TECH_MATERIAL = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/huge/stationary
+	sort_string = "JEAAD"
+
 /datum/design/circuit/biogenerator
 	name = "biogenerator"
 	id = "biogenerator"
 	req_tech = list(TECH_DATA = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/biogenerator
 	sort_string = "KBAAA"
+
+/datum/design/circuit/hydro_tray
+	name = "hydroponics tray"
+	id = "hydrotray"
+	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 2, TECH_DATA = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/tray
+	sort_string = "KBAAB"
 
 /datum/design/circuit/miningdrill
 	name = "mining drill head"
@@ -575,6 +610,49 @@
 	req_tech = list(TECH_BIO = 3, TECH_DATA = 3)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/replicator
 	sort_string = "WAAAR"
+
+/datum/design/circuit/washer
+	name = "washing machine"
+	id = "washer"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/washer
+	sort_string = "WAAAS"
+
+/datum/design/circuit/microwave
+	name = "microwave"
+	id = "microwave"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/microwave
+	sort_string = "WAAAT"
+
+/datum/design/circuit/gibber
+	name = "meat gibber"
+	id = "gibber"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/gibber
+	sort_string = "WAAAU"
+
+/datum/design/circuit/cooker
+	name = "kitchen appliance (assorted)"
+	desc = "Allows for the construction of an interchangable cooking appliance circuit board. Use a multitool to select appliance."
+	id = "cooker"
+	req_tech = list(TECH_BIO = 1, TECH_MATERIAL = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/cooker
+	sort_string = "WAAAV"
+
+/datum/design/circuit/honey_extractor
+	name = "honey extractor"
+	id = "honey_extractor"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/honey
+	sort_string = "WAAAW"
+
+/datum/design/circuit/seed_extractor
+	name = "seed extractor"
+	id = "seed_extractor"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/honey/seed
+	sort_string = "WAAAX"
 
 /datum/design/circuit/aicore
 	name = "AI core"

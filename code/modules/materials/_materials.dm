@@ -41,6 +41,7 @@
 	var/display_name                      // Prettier name for display.
 	var/adjective_name
 	var/use_name
+	var/wall_name = "wall"                // Name given to walls of this material
 	var/flags = 0                         // Various status modifiers.
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
@@ -216,7 +217,7 @@
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
 /material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
-	place_sheet(target, is_devastated ? 2 : 3)
+	place_sheet(target, is_devastated ? 1 : 2)
 
 // Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target, var/amount = 1)

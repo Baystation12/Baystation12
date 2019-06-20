@@ -124,7 +124,8 @@
 					return
 		else if(istype(C, /obj/item/weapon/gun/energy/plasmacutter) && (is_plating()) && !broken && !burnt)
 			var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
-			cutter.slice(user)
+			if(!cutter.slice(user))
+				return ..()
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			visible_message("<span class='notice'>[user] has started slicing through the plating's reinforcements!</span>")
 			if(do_after(user, 3 SECONDS) && welder_melt())

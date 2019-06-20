@@ -352,6 +352,7 @@
 	var/list/items = src.contents.Copy()
 	items -= occupant // Don't delete the occupant
 	items -= announce // or the autosay radio.
+	items -= component_parts
 
 	for(var/obj/item/W in items)
 

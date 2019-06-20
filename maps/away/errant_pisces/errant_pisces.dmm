@@ -250,7 +250,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_starboard)
 "aH" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen{
+/obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -259,7 +259,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_starboard)
 "aI" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen{
+/obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -303,7 +303,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_port)
 "aO" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen{
+/obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -313,7 +313,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_port)
 "aP" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen{
+/obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -438,7 +438,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "bg" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "bh" = (
@@ -712,8 +712,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_starboard)
 "bU" = (
-/obj/machinery/atmospherics/pipe/tank/air{
-	icon_state = "air_map";
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 1;
 	start_pressure = 740.5
 	},
@@ -731,8 +730,11 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "bX" = (
-/obj/machinery/atmospherics/trinary/filter{
-	dir = 1
+/obj/machinery/atmospherics/omni/filter{
+	tag_east = 4;
+	tag_north = 2;
+	tag_south = 1;
+	tag_west = 0
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -778,7 +780,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_port)
 "cf" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen{
+/obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -816,8 +818,11 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cl" = (
-/obj/machinery/atmospherics/trinary/filter/m_filter{
-	dir = 1
+/obj/machinery/atmospherics/omni/filter{
+	tag_east = 0;
+	tag_north = 2;
+	tag_south = 1;
+	tag_west = 3
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -880,7 +885,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cw" = (
-/obj/machinery/atmospherics/trinary/mixer/m_mixer{
+/obj/machinery/atmospherics/omni/mixer{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -907,9 +912,11 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cA" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 5
+/obj/machinery/atmospherics/omni/filter{
+	tag_east = 0;
+	tag_north = 2;
+	tag_south = 1;
+	tag_west = 5
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -963,7 +970,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_starboard)
 "cK" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen{
+/obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -1069,11 +1076,11 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_starboard)
 "cX" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
-/obj/machinery/atmospherics/pipe/tank/oxygen{
+/obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 4
 	},
 /turf/simulated/floor/plating,

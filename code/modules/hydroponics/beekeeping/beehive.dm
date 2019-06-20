@@ -175,11 +175,18 @@
 	var/processing = 0
 	var/honey = 0
 
+/obj/machinery/honey_extractor/components_are_accessible(path)
+	return !processing && ..()
+
 /obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently spinning, wait until it's finished.</span>")
 		return
-	else if(istype(I, /obj/item/honey_frame))
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+	if(istype(I, /obj/item/honey_frame))
 		var/obj/item/honey_frame/H = I
 		if(!H.honey)
 			to_chat(user, "<span class='notice'>\The [H] is empty, put it into a beehive.</span>")

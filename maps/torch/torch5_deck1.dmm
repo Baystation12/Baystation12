@@ -1037,25 +1037,27 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/aftstarboard)
 "abV" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_tag = "d1sh_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1sh_out";
-	sensors = list("d1sh_sensor" = "Tank")
+	sensor_tag = "d1sh_sensor";
+	sensor_name = "Hydrogen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "abW" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_tag = "d1so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1so2_out";
-	sensors = list("d1so2_sensor" = "Tank")
+	sensor_tag = "d1so2_sensor";
+	sensor_name = "Oxygem Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -4601,6 +4603,9 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary/annex)
 "alO" = (
@@ -7293,7 +7298,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Forensics Office";
-	sortType = "Forensics Office"
+	sort_type = "Forensics Office"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
@@ -7605,7 +7610,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Xenobotany";
-	sortType = "Xenobotany"
+	sort_type = "Xenobotany"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -7623,7 +7628,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Research Development";
-	sortType = "Research and Development"
+	sort_type = "Research and Development"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -7644,7 +7649,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Miscellaneous Research";
-	sortType = "Miscellaneous Research"
+	sort_type = "Miscellaneous Research"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -7664,7 +7669,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Chemistry";
-	sortType = "Chemistry"
+	sort_type = "Chemistry"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
@@ -7716,7 +7721,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Counselor";
-	sortType = "Counselor"
+	sort_type = "Counselor"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -8334,6 +8339,11 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/camera/network/command{
+	c_tag = "Bridge - Emergency Armory - Access";
+	dir = 1;
+	icon_state = "camera"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/command/armoury/access)
@@ -8972,11 +8982,11 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 2;
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/window/southright{
 	dir = 1;
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
@@ -9931,8 +9941,8 @@
 	},
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
-	name = "Brig Officer";
-	sortType = "Brig Officer"
+	name = "Brig Chief";
+	sort_type = "Brig Chief"
 	},
 /turf/simulated/floor/plating,
 /area/security/wing)
@@ -10276,7 +10286,7 @@
 /area/security/wing)
 "aJo" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/closet/secure_closet/brigofficer,
+/obj/structure/closet/secure_closet/brigchief,
 /obj/item/device/radio,
 /obj/item/weapon/crowbar,
 /obj/item/clothing/mask/gas/half,
@@ -10910,7 +10920,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aLT" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -11200,7 +11210,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aNa" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -13657,25 +13667,27 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/entry)
 "aUu" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d1ph_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d1ph_out";
-	sensors = list("d1ph_sensor" = "Tank")
+	sensor_tag = "d1ph_sensor";
+	sensor_name = "Hydrogen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUv" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d1po2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1po2_out";
-	sensors = list("d1po2_sensor" = "Tank")
+	sensor_tag = "d1po2_sensor";
+	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -14450,8 +14462,7 @@
 "bdz" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1po2_sensor";
-	output = 127
+	id_tag = "d1po2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
@@ -15900,8 +15911,7 @@
 "cHm" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1sh_sensor";
-	output = 127
+	id_tag = "d1sh_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1starboard)
@@ -16492,6 +16502,7 @@
 	icon_state = "armchair_preview";
 	dir = 4
 	},
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/carpet,
 /area/medical/counselor)
 "dob" = (
@@ -18500,6 +18511,17 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
+"fyf" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/infirmary)
 "fzb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -18508,6 +18530,7 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fBb" = (
@@ -19867,7 +19890,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Virology";
-	sortType = "Virology"
+	sort_type = "Virology"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -19927,7 +19950,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Research Equipment";
-	sortType = "Research Equipment"
+	sort_type = "Research Equipment"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
@@ -19969,7 +19992,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Medical Equipment";
-	sortType = "Medical Equipment"
+	sort_type = "Medical Equipment"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -20039,8 +20062,7 @@
 "hml" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1so2_sensor";
-	output = 127
+	id_tag = "d1so2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
@@ -23504,7 +23526,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Robotics";
-	sortType = "Robotics"
+	sort_type = "Robotics"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -23584,8 +23606,7 @@
 "lom" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d1ph_sensor";
-	output = 127
+	id_tag = "d1ph_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1port)
@@ -25532,7 +25553,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Brig Storage";
-	sortType = "Brig Storage"
+	sort_type = "Brig Storage"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
@@ -25552,10 +25573,10 @@
 "nFh" = (
 /obj/structure/table/steel,
 /obj/machinery/photocopier/faxmachine{
-	department = "Warden's Office"
+	department = "Brig Chief's Office"
 	},
 /obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Brig Officer";
+	c_tag = "Security Wing - Brig Chief";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -26227,8 +26248,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber1s";
-	output = 127
+	id_tag = "cChamber1s"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
@@ -26519,6 +26539,7 @@
 "oLb" = (
 /obj/structure/bed/psych,
 /obj/item/weapon/bedsheet/brown,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/carpet,
 /area/medical/counselor)
 "oLz" = (
@@ -27236,8 +27257,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber1p";
-	output = 127
+	id_tag = "cChamber1p"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -27485,11 +27505,12 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "pSb" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	input_tag = "test_in";
 	name = "Test Chamber Gas Monitor";
 	output_tag = "test_out";
-	sensors = list("testchamber_sensor" = "Test Chamber")
+	sensor_tag = "testchamber_sensor";
+	sensor_name = "Test Chamber Sensor"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/white,
@@ -27629,8 +27650,7 @@
 "qbb" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "xenobot_sensor";
-	output = 63
+	id_tag = "xenobot_sensor"
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
@@ -28374,10 +28394,11 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
 "rab" = (
-/obj/machinery/computer/general_air_control{
+/obj/machinery/computer/air_control{
 	frequency = 1441;
 	name = "Xenoflora Gas Monitor";
-	sensors = list("xenobot_sensor" = "Xenoflora Environment")
+	sensor_tag = "xenobot_sensor";
+	sensor_name = "Xenoflora Environment"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -29550,8 +29571,7 @@
 "sqb" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "testchamber_sensor";
-	output = 63
+	id_tag = "testchamber_sensor"
 	},
 /obj/effect/landmark{
 	name = "bluespacerift"
@@ -30186,10 +30206,10 @@
 	},
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 1;
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/window/southright{
-	name = "Brig Officer Desk"
+	name = "Brig Chief Desk"
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
@@ -30264,7 +30284,7 @@
 /area/rnd/xenobiology)
 "tgs" = (
 /obj/machinery/door/airlock/security{
-	name = "Brig Officer"
+	name = "Brig Chief"
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{
@@ -55339,7 +55359,7 @@ jCM
 jCM
 jCM
 jCM
-hYb
+fyf
 apJ
 aqQ
 aqQ

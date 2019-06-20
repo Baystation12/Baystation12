@@ -140,9 +140,9 @@
 //upgrading parts
 /obj/machinery/atmospherics/unary/freezer/RefreshParts()
 	..()
-	var/cap_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
-	var/manip_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	var/bin_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	var/cap_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor) || 1
+	var/manip_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator) || 1
+	var/bin_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin) || 1
 
 	power_rating = initial(power_rating) * cap_rating / 2			//more powerful
 	heatsink_temperature = initial(heatsink_temperature) / ((manip_rating + bin_rating) / 2)	//more efficient

@@ -22,11 +22,10 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	randpixel = 5
 	w_class = ITEM_SIZE_SMALL
+	var/part_flags = PART_FLAG_LAZY_INIT | PART_FLAG_HAND_REMOVE
 	var/rating = 1
-	var/lazy_initialize = TRUE // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
-	var/can_be_uninstalled = TRUE // If false, will qdel on uninstall and should not be exposed to the user for uninstallation.
 
 /obj/item/weapon/stock_parts/attack_hand(mob/user)
 	if(istype(loc, /obj/machinery))
@@ -57,7 +56,7 @@
 /obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
 	unset_status(machine, PART_STAT_INSTALLED)
 	stop_processing(machine)
-	if(!can_be_uninstalled)
+	if(part_flags & PART_FLAG_QDEL)
 		qdel(src)
 
 // Use to process on the machine it's installed on.
@@ -285,7 +284,7 @@
 	desc = "Various standard wires, pipes, and other materials."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
-	lazy_initialize = FALSE
+	part_flags = PART_FLAG_QDEL
 	var/list/materials
 
 /obj/item/weapon/stock_parts/building_material/Destroy()
@@ -296,13 +295,12 @@
 	if(istype(new_material, /obj/item/stack))
 		var/obj/item/stack/stack = new_material
 		for(var/obj/item/stack/old_stack in materials)
-			if(old_stack.stacktype == stack.stacktype)
-				stack.transfer_to(old_stack)
-				if(QDELETED(stack))
-					return
+			if(stack.transfer_to(old_stack) && QDELETED(stack))
+				return
 	LAZYADD(materials, new_material)
 	new_material.forceMove(null)
 
+// amount will cap the amount given in a stack, but may return less than amount specified.
 /obj/item/weapon/stock_parts/building_material/proc/remove_material(material_type, amount)
 	if(ispath(material_type, /obj/item/stack))
 		for(var/obj/item/stack/stack in materials)
@@ -312,21 +310,18 @@
 					materials -= stack
 					stack.dropInto(loc)
 					amount -= stack_amount
-				else
-					var/obj/item/stack/new_stack = stack.split(amount)
-					new_stack.dropInto(loc)
-					return
+					return stack
+				var/obj/item/stack/new_stack = stack.split(amount)
+				new_stack.dropInto(loc)
+				return new_stack
 	for(var/obj/item/item in materials)
 		if(istype(item, material_type))
 			materials -= item
 			item.dropInto(loc)
-			amount--
-			if(amount == 0)
-				return
+			return item
 
 /obj/item/weapon/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
-	..()
 	for(var/obj/item/I in materials)
 		I.dropInto(loc)
 	materials = null
-	qdel(src)
+	..()

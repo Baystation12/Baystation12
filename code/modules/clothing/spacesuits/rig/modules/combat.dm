@@ -294,7 +294,6 @@
 		var/resolved = target.attackby(gun,holder.wearer)
 		if(!resolved && gun && target)
 			gun.afterattack(target,holder.wearer,1)
-			holder.check_power_cost(usr, 18000, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) )//Uses 10 wh per use
 			return 1
 
 /obj/item/rig_module/mounted/energy_blade

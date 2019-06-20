@@ -34,20 +34,31 @@
 		cooking_obj = null
 	return ..()
 
-/obj/machinery/cooker/examine()
+/obj/machinery/cooker/examine(mob/user)
 	. = ..()
-	if(cooking_obj && Adjacent(usr))
-		to_chat(usr, "You can see \a [cooking_obj] inside.")
+	if(.)
+		if(cooking_obj)
+			to_chat(user, "You can see \a [cooking_obj] inside.")
+		if(panel_open)
+			to_chat(user, "The panel is open")
+
+/obj/machinery/cooker/components_are_accessible(path)
+	return !cooking && ..()
 
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
 	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
-	if(!cook_type || (stat & (NOPOWER|BROKEN)))
-		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
-		return
-
 	if(cooking)
 		to_chat(user, "<span class='warning'>\The [src] is running!</span>")
+		return
+
+	if(default_deconstruction_screwdriver(user, I))
+		return TRUE
+	if(default_deconstruction_crowbar(user, I))
+		return TRUE
+
+	if(!cook_type || (stat & (NOPOWER|BROKEN)))
+		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
 		return
 
 	// We are trying to cook a grabbed mob.

@@ -1095,6 +1095,8 @@
 	if(!(species.appearance_flags & HAS_UNDERWEAR))
 		QDEL_NULL_LIST(worn_underwear)
 
+	available_maneuvers = species.maneuvers.Copy()
+
 	spawn(0)
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)

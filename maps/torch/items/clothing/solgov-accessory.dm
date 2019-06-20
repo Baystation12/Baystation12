@@ -200,7 +200,7 @@ specialty pins
 
 /obj/item/clothing/accessory/solgov/specialty/brig
 	name = "brig blazes"
-	desc = "Red blazes denoting a brig officer."
+	desc = "Red blazes denoting a brig chief."
 	icon_state = "fleetspec_brig"
 
 /obj/item/clothing/accessory/solgov/specialty/forensic

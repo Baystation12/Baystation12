@@ -891,10 +891,10 @@
 	icon_state = "camera";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control{
+/obj/machinery/computer/air_control{
 	dir = 8;
 	name = "Atmospheric Sensors";
-	sensors = list("calypso_out")
+	sensor_tag = "calypso_out"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
@@ -1820,7 +1820,7 @@
 /area/hallway/primary/fifthdeck/aft)
 "dT" = (
 /obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide{
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
 	dir = 4;
 	start_pressure = 1013.25
 	},
@@ -1838,7 +1838,7 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+/obj/machinery/atmospherics/pipe/simple/visible/universal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -6308,7 +6308,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "ok" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "ol" = (
@@ -8235,7 +8235,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 2;
 	name = "Pilot's Lounge";
-	sortType = "Pilot's Lounge"
+	sort_type = "Pilot's Lounge"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fifthdeck/fore)
@@ -8406,7 +8406,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Expedition Prep";
-	sortType = "Expedition Prep"
+	sort_type = "Expedition Prep"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -9300,7 +9300,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Mining";
-	sortType = "Mining"
+	sort_type = "Mining"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
@@ -10403,9 +10403,6 @@
 /area/shuttle/petrov/analysis)
 "xY" = (
 /obj/structure/closet/toolcloset/excavation,
-/obj/item/stack/flag/red,
-/obj/item/stack/flag/red,
-/obj/item/stack/flag/red,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/eva)
@@ -10660,8 +10657,7 @@
 	icon_state = "camera";
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/tank{
-	icon_state = "air_map";
+/obj/machinery/atmospherics/unary/tank{
 	dir = 8
 	},
 /obj/machinery/alarm{
@@ -11084,7 +11080,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
 "Ar" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -12006,6 +12002,10 @@
 	layer = 2.4;
 	level = 2
 	},
+/obj/structure/table/rack,
+/obj/item/stack/flag/red,
+/obj/item/stack/flag/red,
+/obj/item/stack/flag/red,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/eva)
 "DF" = (
@@ -12894,8 +12894,7 @@
 "Ht" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "phoron_sensor";
-	output = 63
+	id_tag = "phoron_sensor"
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
@@ -16990,12 +16989,13 @@
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "Wz" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	input_tag = "phoron_in";
 	name = "Test Chamber Gas Monitor";
 	output_tag = "phoron_out";
-	sensors = list("phoron_sensor" = "Test Chamber")
+	sensor_tag = "phoron_sensor";
+	sensor_name = "Test Chamber"
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
@@ -17779,12 +17779,13 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 8;
 	input_tag = "toxins_in";
 	name = "Toxins Gas Monitor";
 	output_tag = "toxins_out";
-	sensors = list("toxins_sensor" = "Toxins Test Chamber")
+	sensor_tag = "toxins_sensor";
+	sensor_name = "Toxins Test Chamber"
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/toxins)

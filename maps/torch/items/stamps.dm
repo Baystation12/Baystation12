@@ -15,7 +15,7 @@
 	icon_state = "stamp-hos"
 
 /obj/item/weapon/stamp/brig
-	name = "brig officer's rubber stamp"
+	name = "brig chief's rubber stamp"
 	icon_state = "stamp-ward"
 
 /obj/item/weapon/stamp/solgov

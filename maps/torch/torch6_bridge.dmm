@@ -875,7 +875,7 @@
 	dir = 1;
 	icon_state = "pipe-j1s";
 	name = "Chief of Security";
-	sortType = "Chief of Security"
+	sort_type = "Chief of Security"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
@@ -4603,7 +4603,7 @@
 	dir = 4;
 	icon_state = "pipe-j1s";
 	name = "Chief Medical Officer";
-	sortType = "Chief Medical Officer"
+	sort_type = "Chief Medical Officer"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
@@ -7456,7 +7456,7 @@
 /turf/simulated/floor/tiled,
 /area/aquila/storage)
 "rx" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -8523,7 +8523,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/bridge)
 "ud" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8;
 	start_pressure = 450
 	},
@@ -10636,7 +10636,7 @@
 	dir = 4;
 	icon_state = "pipe-j2s";
 	name = "Chief Science Officer";
-	sortType = "Chief Science Officer"
+	sort_type = "Chief Science Officer"
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
@@ -12366,7 +12366,7 @@
 	dir = 4;
 	icon_state = "pipe-j1s";
 	name = "Chief Engineer";
-	sortType = "Chief Engineer"
+	sort_type = "Chief Engineer"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
@@ -13470,7 +13470,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
 "Jp" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -14663,7 +14663,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
 	name = "Bridge Conference Room";
-	sortType = "Bridge Conference Room"
+	sort_type = "Bridge Conference Room"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -17007,6 +17007,10 @@
 "Xz" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/guncabinet/PPE,
+/obj/machinery/camera/network/command{
+	c_tag = "Bridge - Storage";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "XB" = (
@@ -17189,7 +17193,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Bridge Storage";
-	sortType = "Bridge Storage"
+	sort_type = "Bridge Storage"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4

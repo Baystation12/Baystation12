@@ -1,0 +1,11 @@
+author: "Textor"
+delete-after: True
+changes: 
+  - rscadd: "Adds gas sensor, air injectors, digital 3-way valves, and gutters to pipe dispenser"
+  - rscdel: "Removes non-omni versions of filters and mixers from the game."
+  - rscadd: "Pipe dispensers UI is updated. Pipe dispensers can now dispense normal pipes with paint already applied to them and dispense 1, 5, or 10 pipes at a time."
+  - rscadd: "Atmospheric control console UI updated. You may now directly input values instead of using plus and minus buttons."
+  - rscadd: "Pressure tanks can now be built with steel sheets, and deconstructed."
+  - rscadd: "Vent pumps and injectors can now have their configuration changed using a multitool."
+  - tweak: "Due to fuel pipes having different tolerances, they are no longer compatible with normal pipes and need a universal adapter to connect two networks together."
+  - maptweak: "Removes all non-omni filters and mixers from all maps and replaces them with omni versions."

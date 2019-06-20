@@ -76,6 +76,7 @@
 	anchored = 1
 	use_power = POWER_USE_IDLE // Has custom handling here.
 	power_channel = LOCAL      // Do not manipulate this; you don't want to power the APC off itself.
+	interact_offline = TRUE    // Can use UI even if unpowered
 	uncreated_component_parts = list(
 		/obj/item/weapon/stock_parts/power/terminal,
 		/obj/item/weapon/stock_parts/power/apc,

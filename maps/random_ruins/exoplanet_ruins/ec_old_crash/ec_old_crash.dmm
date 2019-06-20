@@ -1898,9 +1898,9 @@
 /area/map_template/ecship/engineering)
 "dF" = (
 /obj/effect/floor_decal/corner/yellow/full,
-/obj/machinery/computer/general_air_control{
-	name = "Gas Sensors";
-	sensors = list("sev_oxygen","sev_hydogen","sev_engine")
+/obj/machinery/computer/air_control{
+	name = "O2 Sensor"
+	sensor_tag = "sev_oxygen"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)

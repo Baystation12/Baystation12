@@ -12,6 +12,7 @@
 	anchored = 1
 	clicksound = "switch"
 	power_channel = LOCAL // Draws power from direct connections to powernets.
+	stat = BROKEN         // Should be removed if the terminals initialize fully.
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -80,6 +81,7 @@
 			if(term.dir == turn(d, 180) && !term.master)
 				part.set_terminal(src, term)
 				term.connect_to_network()
+		
 
 /obj/machinery/power/smes/add_avail(var/amount)
 	if(..(amount))
@@ -252,14 +254,10 @@
 		return TRUE
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-
-	if(stat & BROKEN)
-		return
-
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["nameTag"] = name_tag
-	data["storedCapacity"] = round(100.0*charge/capacity, 0.1)
+	data["storedCapacity"] = Percentage()
 	data["storedCapacityAbs"] = round(charge/1000, 0.1)
 	data["storedCapacityMax"] = round(capacity/1000, 0.1)
 	data["charging"] = inputting

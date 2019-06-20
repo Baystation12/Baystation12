@@ -7,6 +7,9 @@ SUBSYSTEM_DEF(misc)
 	if(config.generate_map)
 		GLOB.using_map.perform_map_generation()
 
+	//creates pipe categories for pipe dispensers
+	initialize_pipe_datum_category_list()
+
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
 	setupgenetics()

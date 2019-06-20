@@ -7,6 +7,7 @@
 	..()
 	name = "Warrant Officer Punitelli"
 	real_name = name
+	gender = MALE
 	var/obj/item/clothing/C
 	C = new /obj/item/clothing/under/solgov/utility/expeditionary/monkey(src)
 	equip_to_appropriate_slot(C)

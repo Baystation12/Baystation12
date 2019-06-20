@@ -204,7 +204,8 @@
 				return FALSE
 		if(istype(tool, /obj/item/weapon/gun/energy/plasmacutter))
 			var/obj/item/weapon/gun/energy/plasmacutter/cutter = tool
-			cutter.slice(user)
+			if(!cutter.slice(user))
+				return FALSE
 		return TRUE
 	return FALSE
 

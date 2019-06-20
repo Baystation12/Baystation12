@@ -716,13 +716,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
 "bO" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_tag = "d3so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d3so2_out";
-	sensors = list("d3so2_sensor" = "Tank")
+	sensor_tag = "d3so2_sensor";
+	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -1939,7 +1940,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "er" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos/aux)
@@ -7004,7 +7005,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Bar";
-	sortType = "Bar"
+	sort_type = "Bar"
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
@@ -8447,8 +8448,7 @@
 "si" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3sh_sensor";
-	output = 127
+	id_tag = "d3sh_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d3starboard)
@@ -8573,7 +8573,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Cryogenic Storage";
-	sortType = "Cryogenic Storage"
+	sort_type = "Cryogenic Storage"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -10252,8 +10252,7 @@
 "wm" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3ph_sensor";
-	output = 127
+	id_tag = "d3ph_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d3port)
@@ -12056,8 +12055,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber3s";
-	output = 2
+	id_tag = "cChamber3s"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3starboard)
@@ -15164,7 +15162,7 @@
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	name = "Auxiliary Tool Storage";
-	sortType = "Auxiliary Tool Storage"
+	sort_type = "Auxiliary Tool Storage"
 	},
 /obj/structure/cable/green{
 	d1 = 2;
@@ -15996,13 +15994,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "KA" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d3po2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d3po2_out";
-	sensors = list("d3po2_sensor" = "Tank")
+	sensor_tag = "d3po2_sensor";
+	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
@@ -16458,14 +16457,15 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "LE" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 2;
 	frequency = 1441;
 	input_info = null;
 	input_tag = "d3sh_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d3sh_out";
-	sensors = list("d3sh_sensor" = "Tank")
+	sensor_tag = "d3sh_sensor";
+	sensor_name = "Hydrogen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
@@ -16492,6 +16492,15 @@
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3starboard)
+"LI" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/chapel/office)
 "LK" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/modular_computer/console/preset/civilian{
@@ -16862,8 +16871,7 @@
 "MR" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3po2_sensor";
-	output = 127
+	id_tag = "d3po2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
@@ -17582,7 +17590,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "Pg" = (
-/obj/structure/closet/secure_closet/counselor,
+/obj/structure/closet/secure_closet/chaplain,
 /turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "Ph" = (
@@ -18704,8 +18712,7 @@
 "SJ" = (
 /obj/machinery/air_sensor{
 	frequency = 1441;
-	id_tag = "d3so2_sensor";
-	output = 127
+	id_tag = "d3so2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3starboard)
@@ -18748,7 +18755,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 1;
 	name = "Galley";
-	sortType = "Galley"
+	sort_type = "Galley"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -19805,7 +19812,7 @@
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 4;
 	name = "Hydroponics";
-	sortType = "Hydroponics"
+	sort_type = "Hydroponics"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -19952,13 +19959,14 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 1;
 	frequency = 1441;
 	input_tag = "d3ph_in";
 	name = "Hydrogen Supply Control";
 	output_tag = "d3ph_out";
-	sensors = list("d3ph_sensor" = "Tank")
+	sensor_tag = "d3ph_sensor";
+	sensor_name = "Hydrogen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
@@ -19968,8 +19976,7 @@
 	dir = 4
 	},
 /obj/machinery/air_sensor{
-	id_tag = "cChamber3p";
-	output = 2
+	id_tag = "cChamber3p"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3port)
@@ -46765,7 +46772,7 @@ TE
 OG
 Nm
 Xa
-Re
+LI
 TE
 TE
 TE

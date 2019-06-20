@@ -6,6 +6,11 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	. = list()
 	for(var/board_path in subtypesof(/obj/item/weapon/stock_parts/circuitboard))
 		var/obj/item/weapon/stock_parts/circuitboard/board = board_path //fake type
+		if(initial(board.buildtype_select))
+			board = new board_path()
+			for(var/path in board.get_buildable_types())
+				.[path] = board_path
+			continue
 		.[initial(board.build_path)] = board_path
 
 // Code concerning machinery interaction with components/stock parts.
@@ -36,13 +41,6 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if(ispath(path, part_type))
 			.[path] += uncreated_component_parts[path]
 
-/obj/machinery/proc/component_is_installed(var/obj/item/part)
-	. = FALSE
-	if(part in component_parts)
-		return TRUE
-	if(LAZYACCESS(uncreated_component_parts, part.type) && (part in src))
-		return TRUE
-
 // Returns a component instance of the given type, or null if no such type is present.
 /obj/machinery/proc/get_component_of_type(var/part_type)
 	. = locate(part_type) in component_parts
@@ -59,8 +57,13 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 // If an instance is given or created, it is returned, otherwise null is returned.
 /obj/machinery/proc/install_component(var/obj/item/weapon/stock_parts/part, force = FALSE, refresh_parts = TRUE)
 	if(ispath(part))
-		if(force || !(ispath(part, /obj/item/weapon/stock_parts) && initial(part.lazy_initialize)))
+		if(force || !(ispath(part, /obj/item/weapon/stock_parts) && initial(part.part_flags) & PART_FLAG_LAZY_INIT))
 			part = new part(src) // Forced to make, or we don't lazy-init, so create.
+
+			if(istype(part, /obj/item/stack)) // Compatibility with legacy construction code
+				var/obj/item/stack/stack = part
+				stack.amount = 1
+
 			. = part
 	else
 		part.forceMove(src) // Were given an instance to begin with.
@@ -83,22 +86,22 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		RefreshParts()
 
 // This will force-init components.
-/obj/machinery/proc/uninstall_component(var/obj/item/weapon/stock_parts/part)
+/obj/machinery/proc/uninstall_component(var/obj/item/weapon/stock_parts/part, refresh_parts = TRUE)
 	if(ispath(part))
 		part = get_component_of_type(part)
-	else if(!component_is_installed(part))
+	else if(!(part in component_parts))
 		return
 
 	if(istype(part))
 		part.on_uninstall(src)
 		LAZYREMOVE(component_parts, part)
+		if(refresh_parts)
+			RefreshParts()
 		if(QDELETED(part)) // unremovable stuff
 			return
-
-	part.dropInto(loc)
-	GLOB.destroyed_event.unregister(part, src)
-	RefreshParts()
-	return part
+		part.dropInto(loc)
+		GLOB.destroyed_event.unregister(part, src)
+		return part
 
 /obj/machinery/proc/component_destroyed(var/obj/item/component)
 	GLOB.destroyed_event.unregister(component, src)
@@ -125,7 +128,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 // Use to block interactivity if panel is not open, etc.
 /obj/machinery/proc/components_are_accessible(var/path)
-	return TRUE
+	return panel_open
 
 // Hook to get updates.
 /obj/machinery/proc/component_stat_change(var/obj/item/weapon/stock_parts/part, old_stat, flag)

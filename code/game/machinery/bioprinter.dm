@@ -165,7 +165,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/meat = 50,
 		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet = 15
 		)
-	var/loaded_dna //Blood sample for DNA hashing.
+	var/datum/dna/loaded_dna_datum
 	var/datum/species/loaded_species //For quick refrencing
 
 /obj/machinery/organ_printer/flesh/mapped/Initialize()
@@ -182,15 +182,13 @@
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O
-	var/weakref/R = loaded_dna["donor"]
-	var/mob/living/carbon/human/H = R.resolve()
 	var/new_organ
 	if(loaded_species.has_organ[choice])
 		new_organ = loaded_species.has_organ[choice]
 	else if(loaded_species.has_limbs[choice])
 		new_organ = loaded_species.has_limbs[choice]["path"]
 	if(new_organ)
-		O = new new_organ(get_turf(src), H.dna)
+		O = new new_organ(get_turf(src), loaded_dna_datum)
 		O.status |= ORGAN_CUT_AWAY
 	else
 		O = ..()
@@ -202,7 +200,7 @@
 	return O
 
 /obj/machinery/organ_printer/flesh/attack_hand(mob/user)
-	if(!loaded_dna || !loaded_dna["donor"] || !loaded_species)
+	if(!loaded_dna_datum || !loaded_species)
 		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
 		return
 
@@ -230,15 +228,17 @@
 	if(istype(W,/obj/item/weapon/reagent_containers/syringe))
 		var/obj/item/weapon/reagent_containers/syringe/S = W
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
-		if(injected && injected.data)
-			loaded_dna = injected.data
-			to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
-		var/weakref/R = loaded_dna["donor"]
-		var/mob/living/carbon/human/H = R.resolve()
-		if(H && istype(H) && H.species)
-			loaded_species = H.species
-			products = get_possible_products()
-		return
+		if(injected && LAZYLEN(injected.data))
+			var/loaded_dna = injected.data
+			var/weakref/R = loaded_dna["donor"]
+			var/mob/living/carbon/human/H = R.resolve()
+			if(H && istype(H) && H.species && H.dna)
+				loaded_species = H.species
+				loaded_dna_datum = H.dna && H.dna.Clone()
+				products = get_possible_products()
+				to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
+				return TRUE
+		to_chat(user, SPAN_NOTICE("\The [src] displays an error: no viable blood sample could be obtained from \the [W]."))
 	return ..()
 
 /obj/machinery/organ_printer/flesh/proc/get_possible_products()

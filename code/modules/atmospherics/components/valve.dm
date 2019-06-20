@@ -16,6 +16,10 @@
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	pipe_type = PIPE_MVALVE
+	build_icon_state = "mvalve"
+
 /obj/machinery/atmospherics/valve/open
 	open = 1
 	icon_state = "map_valve1"
@@ -226,6 +230,12 @@
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
+	pipe_type = PIPE_DVALVE
+	build_icon_state = "dvalve"
+
+/obj/machinery/atmospherics/valve/digital/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
 
 /obj/machinery/atmospherics/valve/digital/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -294,7 +304,7 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
 /obj/machinery/atmospherics/valve/examine(mob/user)

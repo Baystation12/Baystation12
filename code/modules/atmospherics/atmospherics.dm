@@ -32,6 +32,11 @@ Pipelines + Other Objects -> Pipe network
 	var/obj/machinery/atmospherics/node2
 
 	var/atmos_initalized = FALSE
+	var/pipe_type = PIPE_SIMPLE_STRAIGHT
+	var/build_icon = 'icons/obj/pipe-item.dmi'
+	var/build_icon_state = "buildpipe"
+
+	var/pipe_class = PIPE_CLASS_OTHER //If somehow something isn't set properly, handle it as something with zero connections. This will prevent runtimes.
 
 /obj/machinery/atmospherics/New()
 	if(!icon_manager)
@@ -64,14 +69,11 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type)
 	if(node)
-		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
-			//underlays += icon_manager.get_atmos_icon("underlay_down", direction, color_cache_name(node))
+		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))			
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
-			//underlays += icon_manager.get_atmos_icon("underlay_intact", direction, color_cache_name(node))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
 	else
-		//underlays += icon_manager.get_atmos_icon("underlay_exposed", direction, pipe_color)
 		underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "exposed" + icon_connect_type)
 
 /obj/machinery/atmospherics/proc/update_underlays()

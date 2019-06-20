@@ -172,6 +172,13 @@ ARMCHAIR(yellow)
 	time = 10
 	send_material_data = 0
 
+/datum/stack_recipe/furniture/tank
+	title = "Pressure Tank"
+	result_type = /obj/item/pipe/tank
+	req_amount = 30
+	time = 20
+	send_material_data = 0
+
 /datum/stack_recipe/furniture/computerframe
 	title = "computer frame"
 	result_type = /obj/structure/computerframe

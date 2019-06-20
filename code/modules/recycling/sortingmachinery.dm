@@ -393,6 +393,7 @@
 	icon_state = "intake"
 
 	var/c_mode = 0
+	ptype = DISPOSAL_INLET
 
 /obj/machinery/disposal/deliveryChute/New()
 	..()

@@ -178,7 +178,7 @@
 	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER)
 
 /obj/structure/bed/padded/New(var/newloc)
-	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_COTTON)
+	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
 
 /obj/structure/bed/pew
 	name = "pew"

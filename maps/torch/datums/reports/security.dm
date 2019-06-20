@@ -62,7 +62,7 @@
 	add_field(/datum/report_field/people/from_manifest, "Confiscated from")
 	add_field(/datum/report_field/pencode_text, "List of items in custody/evidence lockup")
 	set_access(access_edit = access_security)
-	temp_field = add_field(/datum/report_field/signature, "Brig Officer's signature")
+	temp_field = add_field(/datum/report_field/signature, "Brig Chief's signature")
 	temp_field.set_access(access_edit = list(access_security, access_armory))
 	temp_field = add_field(/datum/report_field/signature, "Forensic Technician's signature")
 	temp_field.set_access(access_edit = list(access_security, access_forensics_lockers))

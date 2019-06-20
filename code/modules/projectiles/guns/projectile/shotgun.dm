@@ -99,7 +99,8 @@
 	if(w_class > 3 && (istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/gun/energy/plasmacutter)))
 		if(istype(A, /obj/item/weapon/gun/energy/plasmacutter))
 			var/obj/item/weapon/gun/energy/plasmacutter/cutter = A
-			cutter.slice(user)
+			if(!cutter.slice(user))
+				return ..()
 		to_chat(user, "<span class='notice'>You begin to shorten the barrel of \the [src].</span>")
 		if(loaded.len)
 			for(var/i in 1 to max_shells)

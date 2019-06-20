@@ -4,8 +4,8 @@
 	var/list/power_components = list() // this is an optimization, as power code is expensive.
 
 /obj/item/weapon/stock_parts/power
-	lazy_initialize = FALSE
-	icon = 'icons/obj/modular_components.dmi'
+	part_flags = PART_FLAG_QDEL // For integrated components, which are built from uncreated_component_parts. Use subtypes with this off for buildable ones.
+	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "teslalink"
 	var/priority = 0            // Higher priority is used first
 	var/cached_channel
@@ -16,7 +16,7 @@
 	machine.power_change() // Makes the machine recompute its power status.
 
 /obj/item/weapon/stock_parts/power/on_uninstall(var/obj/machinery/machine)
-	LAZYREMOVE(machine.power_components, src)
+	machine.power_components -= src
 	..()
 	machine.power_change()
 
@@ -66,6 +66,7 @@
 /obj/item/weapon/stock_parts/power/battery
 	name = "battery backup"
 	desc = "A self-contained battery backup system, using replaceable cells to provide backup power."
+	icon_state = "battery0"
 	var/obj/item/weapon/cell/cell
 	var/charge_channel = ENVIRON  // The channel it attempts to charge from.
 	var/charge_rate = 1           // This is in battery units, per tick.
@@ -78,14 +79,14 @@
 	qdel(cell)
 	. = ..()
 
-	
 /obj/item/weapon/stock_parts/power/battery/on_install(var/obj/machinery/machine)
 	..()
 	start_processing(machine)
 
 /obj/item/weapon/stock_parts/power/battery/on_uninstall(var/obj/machinery/machine)
-	cell.dropInto(loc)
-	remove_cell()
+	if(cell)
+		cell.dropInto(loc)
+		remove_cell()
 	..()
 
 // None of these helpers actually change the cell's loc. They only manage internal references and state.
@@ -98,7 +99,9 @@
 		machine = loc
 	if(istype(machine))
 		machine.power_change()
+		machine.queue_icon_update()
 	set_status(machine, PART_STAT_CONNECTED)
+	update_icon()
 	return cell
 
 /obj/item/weapon/stock_parts/power/battery/proc/remove_cell()
@@ -109,6 +112,8 @@
 		var/obj/machinery/machine = loc
 		if(istype(machine))
 			machine.power_change()
+			machine.queue_icon_update()
+		update_icon()
 		unset_status(machine, PART_STAT_CONNECTED)
 
 /obj/item/weapon/stock_parts/power/battery/proc/extract_cell(mob/user)
@@ -184,38 +189,43 @@
 			add_cell(machine, cell)
 			cell.forceMove(src)
 
+/obj/item/weapon/stock_parts/power/battery/on_update_icon()
+	icon_state = "battery[!!cell]"
+
 // Cell interaction
 /obj/item/weapon/stock_parts/power/battery/attackby(obj/item/I, mob/user)
 	var/obj/machinery/machine = loc
-	if(!istype(machine))
-		return ..()
 
+	// Interactions with/without machine
 	if(istype(I, /obj/item/weapon/cell))
 		if(cell)
 			to_chat(user, "There is a power cell already installed.")
-			return
-		if(machine && (machine.stat & MAINT))
+			return TRUE
+		if(istype(machine) && (machine.stat & MAINT))
 			to_chat(user, "<span class='warning'>There is no connector for your power cell.</span>")
-			return
+			return TRUE
 		if(I.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [I] is too [I.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
-			return
+			return TRUE
 
 		if(!user.unEquip(I, src))
 			return
 		add_cell(machine, I)
 		user.visible_message(\
-			"<span class='warning'>\The [user.name] has inserted the power cell to [src.name]!</span>",\
-			"<span class='notice'>You insert the power cell.</span>")
-		if(machine)
-			machine.update_icon()
+			SPAN_WARNING("\The [user] has inserted the power cell to \the [src]!"),\
+			SPAN_NOTICE("You insert the power cell."))
 		return TRUE
+
+	// Interactions without machine
+	if(!istype(machine))
+		return ..()
 
 /obj/item/weapon/stock_parts/power/battery/attack_hand(mob/user)
 	if(cell)
 		user.put_in_hands(cell)
 		extract_cell(user)
 		return TRUE
+	return ..()
 
 /obj/item/weapon/stock_parts/power/battery/get_cell()
 	return cell
@@ -225,6 +235,7 @@
 /obj/item/weapon/stock_parts/power/terminal
 	name = "wired connection"
 	desc = "A power connection directly to the grid, via power cables."
+	icon_state = "terminal"
 	priority = 2
 	var/obj/machinery/power/terminal/terminal
 	var/terminal_dir = 0
@@ -313,6 +324,7 @@
 	if(!istype(machine))
 		return ..()
 
+	// Interactions inside machine only
 	if (istype(I, /obj/item/stack/cable_coil) && !terminal)
 		var/turf/T = get_step(machine, terminal_dir)
 		if(terminal_dir && user.loc != T)

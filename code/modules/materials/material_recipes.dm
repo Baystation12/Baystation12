@@ -68,6 +68,7 @@
 	. += new/datum/stack_recipe/furniture/rack(src)
 	. += new/datum/stack_recipe/furniture/closet(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
+	. += new/datum/stack_recipe/furniture/tank(src)
 	. += new/datum/stack_recipe/cannon(src)
 	. += create_recipe_list(/datum/stack_recipe/tile/metal)
 	. += new/datum/stack_recipe/furniture/computerframe(src)

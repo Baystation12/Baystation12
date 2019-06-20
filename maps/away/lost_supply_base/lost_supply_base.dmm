@@ -1415,7 +1415,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dK" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen,
+/obj/machinery/atmospherics/unary/tank/oxygen,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 8
@@ -1424,11 +1424,11 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dL" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen,
+/obj/machinery/atmospherics/unary/tank/oxygen,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dM" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dN" = (
@@ -1670,7 +1670,7 @@
 	},
 /area/space)
 "eC" = (
-/obj/machinery/atmospherics/pipe/tank/phoron{
+/obj/machinery/atmospherics/unary/tank/phoron{
 	dir = 2;
 	volume = 3200
 	},
@@ -1682,7 +1682,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "eD" = (
-/obj/machinery/atmospherics/pipe/tank/phoron{
+/obj/machinery/atmospherics/unary/tank/phoron{
 	dir = 2;
 	volume = 3200
 	},

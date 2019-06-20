@@ -643,7 +643,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bR" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -1494,7 +1494,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "rb" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 1
 	},
 /turf/simulated/floor/plating,

@@ -46,6 +46,9 @@
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
 
+/mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
+	. = ..() && can_act()
+
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
@@ -113,9 +116,9 @@
 	pry_time = 5 SECONDS
 	flash_vulnerability = 2 //sensitive eyes for stalking prey
 	does_spin = FALSE
+	available_maneuvers = list(/decl/maneuver/leap/spider)
 
 	var/leap_range = 5
-	var/last_leapt
 	var/leap_cooldown = 3 MINUTES
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
@@ -418,42 +421,33 @@ Nurse caste procs
 Hunter caste procs
 *****************/
 /mob/living/simple_animal/hostile/giant_spider/hunter/MoveToTarget()
-	if(!can_act())
+	if(!can_act() || perform_maneuver(/decl/maneuver/leap/spider, target_mob))
 		return
-	var/mob/living/target = target_mob
-	if(can_leap(target))
-		prepare_leap(target)
-		last_leapt = world.time + leap_cooldown
 	..()
 
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/can_leap(mob/living/target)
-	if(!can_act() || last_leapt > world.time || !isliving(target) || (get_dist(src, target) <= 3))
+/mob/living/simple_animal/hostile/giant_spider/hunter/get_jump_distance()
+	return leap_range
+
+/mob/living/simple_animal/hostile/giant_spider/hunter/perform_maneuver(var/maneuver, var/atom/target)
+	if(!isliving(target) || get_dist(src, target) <= 3)
 		return FALSE
-	if(get_dist(src, target) <= leap_range)
-		return TRUE
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/prepare_leap(mob/living/target)
-	face_atom(target)
 	walk(src,0)
-	stop_automation = TRUE
-	visible_message("<span class='warning'>\The [src] reels back and prepares to launch itself at \the [target]!</span>")
-	addtimer(CALLBACK(src, .proc/leap, target), 2 SECONDS)
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/leap(mob/living/target)
-	visible_message("<span class='danger'>\The [src] springs forward towards \the [target]!</span>")
-	throw_at(get_step(get_turf(target),get_turf(src)), leap_range, 1, src)
-	addtimer(CALLBACK(src, .proc/resolve_leap, target), 5)
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/resolve_leap(mob/living/target)
-	if(Adjacent(target))
-		visible_message("<span class='danger'>\The [src] slams into \the [target], knocking them over!</span>")
+	var/first_stop_automation
+	if(stop_automation)
+		first_stop_automation = stop_automation
+		stop_automation = TRUE
+	. = ..()
+	if(!isnull(first_stop_automation))
+		stop_automation = first_stop_automation
+	
+/mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom, var/speed)
+	if(isliving(hit_atom))
+		var/mob/living/target = hit_atom
+		stop_automation = FALSE
+		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
 		target.Weaken(1)
-		stop_automation = FALSE
 		MoveToTarget()
-	else
-		visible_message("<span class='warning'>\The [src] misses its quarry and gets staggered!</span>")
-		stop_automation = FALSE
-		Stun(3) //we missed!
+	. = ..()
 
 /******************
 Spitter caste procs

@@ -25,6 +25,10 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	pipe_type = PIPE_PASSIVE_GATE
+	build_icon_state = "passivegate"
+
 /obj/machinery/atmospherics/binary/passive_gate/on
 	unlocked = 1
 	icon_state = "map_on"
@@ -133,6 +137,10 @@
 	if(frequency)
 		set_frequency(frequency)
 
+/obj/machinery/atmospherics/binary/passive_gate/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
+
 /obj/machinery/atmospherics/binary/passive_gate/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
@@ -178,9 +186,6 @@
 	return
 
 /obj/machinery/atmospherics/binary/passive_gate/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(stat & (BROKEN|NOPOWER))
-		return
-
 	// this is the data which will be sent to the ui
 	var/data[0]
 
@@ -260,7 +265,7 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
 #undef REGULATE_NONE

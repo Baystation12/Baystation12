@@ -14,10 +14,12 @@
 	var/intended_y = 150
 	var/large_flora_prob = 60
 	var/flora_prob = 60
-	var/fauna_prob = 2
 	var/flora_diversity = 4
+	var/fauna_prob = 2
+	var/megafauna_spawn_prob = 0.5 //chance that a given fauna mob will instead be a megafauna
 
 	var/list/fauna_types = list()
+	var/list/megafauna_types = list()
 	var/list/small_flora_types = list()
 	var/list/big_flora_types = list()
 	var/list/plantcolors = list("RANDOM")
@@ -73,6 +75,11 @@
 				spawn_flora(T, 1)
 
 /datum/random_map/noise/exoplanet/proc/spawn_fauna(var/turf/T)
+	if(prob(megafauna_spawn_prob) && LAZYLEN(megafauna_types))
+		var/beastie = pick(megafauna_types)
+		new beastie(T)
+		return
+
 	if(LAZYLEN(fauna_types))
 		var/beastie = pick(fauna_types)
 		new beastie(T)
