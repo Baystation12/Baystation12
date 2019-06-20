@@ -67,6 +67,7 @@
 
 	//SMG
 	firemodes = list(
+		FULL_AUTO_400,
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=2, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=3, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=4, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
@@ -291,3 +292,77 @@
 		to_chat(user, "<span class='warning'>You need to open the cover to unload [src].</span>")
 		return
 	..()
+
+
+
+
+//Automatic firing
+//Todo: Way more checks and safety here
+/datum/firemode/automatic
+	settings = list(burst = 1, suppress_delay_warning = TRUE, dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2))
+	//The full auto clickhandler we have
+	var/datum/click_handler/fullauto/CH = null
+
+/datum/firemode/automatic/update(var/force_state = null)
+	var/mob/living/L
+	if (gun && gun.is_held())
+		L = gun.loc
+
+	var/enable = FALSE
+	//Force state is used for forcing it to be disabled in circumstances where it'd normally be valid
+	if (!isnull(force_state))
+		enable = force_state
+	else if (L && L.client)
+
+		//First of all, lets determine whether we're enabling or disabling the click handler
+
+
+		//We enable it if the gun is held in the user's active hand and the safety is off
+		if (L.get_active_hand() == gun)
+			//Lets also make sure it can fire
+			var/can_fire = TRUE
+
+			//Safety stops it
+			//if (gun.safety)
+				//can_fire = FALSE
+
+			//Projectile weapons need to have enough ammo to fire
+			if(istype(gun, /obj/item/weapon/gun/projectile))
+				var/obj/item/weapon/gun/projectile/P = gun
+				if (!P.getAmmo())
+					can_fire = FALSE
+
+			//TODO: Centralise all this into some can_fire proc
+			if (can_fire)
+				enable = TRUE
+		else
+			enable = FALSE
+
+	world << "updating firemode. Enable: [enable]"
+	//Ok now lets set the desired state
+	if (!enable)
+		if (!CH)
+			//If we're turning it off, but the click handler doesn't exist, then we have nothing to do
+			world << "Turning off, handler doesnt exist, do nothing"
+			return
+
+		//Todo: make client click handlers into a list
+		if (CH.user) //Remove our handler from the client
+			world << "Turning off, handler exists, removing it"
+			CH.user.RemoveClickHandler(CH)
+			CH = null
+		return
+
+	else
+		//We're trying to turn things on
+		if (CH)
+			world << "Turning on, handler exists, do nothing"
+			return //The click handler exists, we dont need to do anything
+
+
+		//Create and assign the click handler
+		//A click handler intercepts mouseup/drag/down events which allow fullauto firing
+		world << "Turning on, handler doesnt exist, creating it"
+		CH = L.PushClickHandler(/datum/click_handler/fullauto)
+		CH.reciever = gun //Reciever is the gun that gets the fire events
+		CH.user = L //And tell it where it is

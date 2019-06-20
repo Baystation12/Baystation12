@@ -142,6 +142,13 @@
 	return
 
 /mob/living/carbon/swap_hand()
+
+
+	//We cache the held items before and after swapping using get active hand.
+	//This approach is future proof and will support people who possibly have >2 hands
+	var/obj/item/prev_held = get_active_hand()
+
+	//Now we do the hand swapping
 	src.hand = !( src.hand )
 	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
 		if(hand)	//This being 1 means the left hand is in use
@@ -150,7 +157,19 @@
 		else
 			hud_used.l_hand_hud_object.icon_state = "l_hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
-	return
+
+	var/obj/item/new_held = get_active_hand()
+
+	//Tell the old and new held items that they've been swapped
+
+	if (prev_held != new_held)
+		if (istype(prev_held))
+			prev_held.swapped_from(src)
+		if (istype(new_held))
+			new_held.swapped_to(src)
+
+	return TRUE
+
 
 /mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
 

@@ -8,10 +8,13 @@
 /datum/firemode
 	var/name = "default"
 	var/list/settings = list()
+	var/obj/item/weapon/gun/gun = null
 
-/datum/firemode/New(obj/item/weapon/gun/gun, list/properties = null)
+/datum/firemode/New(obj/item/weapon/gun/_gun, list/properties = null)
 	..()
 	if(!properties) return
+
+	gun = _gun //Cache the weapon
 
 	for(var/propname in properties)
 		var/propvalue = properties[propname]
@@ -23,9 +26,17 @@
 		else
 			settings[propname] = propvalue
 
-/datum/firemode/proc/apply_to(obj/item/weapon/gun/gun)
+/datum/firemode/proc/apply_to(obj/item/weapon/gun/_gun)
+	gun = _gun
 	for(var/propname in settings)
-		gun.vars[propname] = settings[propname]
+		if (propname in gun.vars)
+			gun.vars[propname] = settings[propname]
+
+
+//Called whenever the firemode is switched to, or the gun is picked up while its active
+/datum/firemode/proc/update()
+	return
+
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/weapon/gun
@@ -82,13 +93,26 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 	var/tmp/last_safety_check = -INFINITY
+	var/suppress_delay_warning = FALSE
 	var/safety_state = 0
 	var/has_safety = TRUE
 
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
-		firemodes[i] = new /datum/firemode(src, firemodes[i])
+		var/list/L = firemodes[i]
+
+		//If this var is set, it means spawn a specific subclass of firemode
+		if (L["mode_type"])
+			var/newtype = L["mode_type"]
+			firemodes[i] = new newtype(src, firemodes[i])
+		else
+			firemodes[i] = new /datum/firemode(src, firemodes[i])
+
+	//Properly initialize the default firing mode
+	if (firemodes.len)
+		var/datum/firemode/F = firemodes[sel_mode]
+		F.apply_to(src)
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
@@ -181,6 +205,12 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
+
+	if(world.time < next_fire_time)
+		if (!suppress_delay_warning && world.time % 3) //to prevent spam
+			user << SPAN_WARNING("[src] is not ready to fire again!")
+		return
+
 	if(target.z != user.z) return
 
 	add_fingerprint(user)
@@ -192,10 +222,6 @@
 		handle_click_empty(user)
 		return
 
-	if(world.time < next_fire_time)
-		if (world.time % 3) //to prevent spam
-			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
-		return
 
 	last_safety_check = world.time
 	var/shoot_time = (burst - 1)* burst_delay
@@ -253,6 +279,7 @@
 	else
 		src.visible_message("*click click*")
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+	update_firemode() //Stops automatic weapons spamming this endlessly
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
@@ -478,10 +505,11 @@
 	var/next_mode = get_next_firemode()
 	if(!next_mode || next_mode == sel_mode)
 		return null
-
+	update_firemode(FALSE) //Disable the old firing mode before we switch away from it
 	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
+	new_mode.update()
 	playsound(loc, selector_sound, 50, 1)
 	return new_mode
 
@@ -506,6 +534,7 @@
 		to_chat(user, "<span class='notice'>You switch the safety [safety_state ? "on" : "off"] on [src].</span>")
 		last_safety_check = world.time
 		playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
+		update_firemode()
 
 /obj/item/weapon/gun/verb/toggle_safety_verb()
 	set src in usr
@@ -526,3 +555,33 @@
 /obj/item/weapon/gun/attack_hand()
 	..()
 	update_icon()
+
+
+//Finds the current firemode and calls update on it. This is called from a few places:
+//When firemode is changed
+//When safety is toggled
+//When gun is picked up
+//When gun is readied/swapped to
+/obj/item/weapon/gun/proc/update_firemode(var/force_state = null)
+	if (sel_mode && firemodes && firemodes.len)
+		var/datum/firemode/new_mode = firemodes[sel_mode]
+		new_mode.update(force_state)
+
+
+
+//Updating firing modes at appropriate times
+/obj/item/weapon/gun/equipped(var/mob/user, var/slot)
+	.=..()
+	update_firemode()
+
+/obj/item/weapon/gun/dropped(mob/user)
+	.=..()
+	update_firemode(FALSE)
+
+/obj/item/weapon/gun/swapped_from()
+	.=..()
+	update_firemode(FALSE)
+
+/obj/item/weapon/gun/swapped_to()
+	.=..()
+	update_firemode()
