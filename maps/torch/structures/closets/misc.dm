@@ -43,7 +43,9 @@
 		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50),
-		/obj/item/weapon/storage/fakebook
+		/obj/item/weapon/storage/fakebook,
+		/obj/item/device/radio/headset/heads/torchntcommand,
+		/obj/item/device/radio/headset/heads/torchntcommand/alt
 	)
 
 /decl/closet_appearance/secure_closet/torch/corporate/bodyguard
@@ -71,7 +73,9 @@
 		/obj/item/clothing/head/helmet/nt/guard,
 		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
 		/obj/item/clothing/glasses/sunglasses/big,
-		/obj/item/clothing/accessory/badge/nanotrasen
+		/obj/item/clothing/accessory/badge/nanotrasen,
+		/obj/item/device/radio/headset/heads/torchcorp,
+		/obj/item/device/radio/headset/heads/torchcorp/alt
 	)
 
 /obj/structure/closet/secure_closet/representative
