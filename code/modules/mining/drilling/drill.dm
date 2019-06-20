@@ -38,7 +38,6 @@
 	//Upgrades
 	var/harvest_speed
 	var/capacity
-	var/obj/item/weapon/cell/cell = null
 
 	//Flags
 	var/need_update_field = 0
@@ -92,7 +91,8 @@
 			if(resource_field.len)
 				harvesting = pick(resource_field)
 
-		if(!harvesting) return
+		if(!harvesting || !harvesting.resources)
+			return
 
 		var/total_harvest = harvest_speed //Ore harvest-per-tick.
 		var/found_resource = 0 //If this doesn't get set, the area is depleted and the drill errors out.
