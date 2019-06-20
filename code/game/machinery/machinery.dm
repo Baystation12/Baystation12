@@ -217,8 +217,10 @@ Class Procs:
 		return src.attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
-	if(inoperable(MAINT))
-		return 1
+	if(stat & (BROKEN|MAINT))
+		return TRUE
+	if(!interact_offline && (stat & NOPOWER))
+		return TRUE
 	if(user.lying || user.stat)
 		return 1
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
