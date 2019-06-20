@@ -1,0 +1,10 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - tweak: "Borers now use Dominate via ranged disarm attack and Infest via melee grab attack."
+  - tweak: "Language on borer messages is now more neutral."
+  - tweak: "Borer powers now largely have UI buttons."
+  - tweak: "Psionics can see auras around borers when they aren't inside hosts."
+  - tweak: "Borer Dominate is now properly psionic, and respects psi-null atoms and psi armour (ie. Coercion ranks)."
+  - rscadd: "Added neutered borers. Adminspawn only, basically defanged peaceborers."
+  - tweak: "Significant backend refactor for borers, please report borer bugs."

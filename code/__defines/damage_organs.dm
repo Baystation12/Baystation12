@@ -7,6 +7,7 @@
 #define CLONE       "clone"
 #define PAIN        "pain"
 #define ELECTROCUTE "electrocute"
+#define PSIONIC     "psi"
 
 #define CUT       "cut"
 #define BRUISE    "bruise"

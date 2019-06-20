@@ -92,6 +92,6 @@
 				key = "bio" // Otherwise just not blocked by default.
 		if(IRRADIATE)
 			key = "rad"
-		if("psi")
-			key = "psi"
+		if(PSIONIC)
+			key = PSIONIC
 	return key
