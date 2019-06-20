@@ -2,7 +2,7 @@
 	id = PSI_COERCION
 	name = "Coercion"
 	associated_intent = I_DISARM
-	armour_types = list("psi")
+	armour_types = list(PSIONIC)
 	
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
@@ -13,12 +13,8 @@
 		return FALSE
 	
 	. = ..()
-	if(.)
-		var/blocked = 100 * target.get_blocked_ratio(null, "psi")
-		if(prob(blocked))
-			to_chat(user, SPAN_WARNING("Your mental attack is deflected by \the [target]'s defenses!"))
-			to_chat(user, SPAN_DANGER("\The [user] strikes out with a mental attack, but you deflect it!"))
-			return FALSE
+	if(. && target.deflect_psionic_attack(user))
+		return FALSE
 
 /decl/psionic_power/coercion/blindstrike
 	name =           "Blindstrike"
@@ -39,7 +35,7 @@
 		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
 			if(M == user)
 				continue
-			var/blocked = 100 * M.get_blocked_ratio(null, "psi")
+			var/blocked = 100 * M.get_blocked_ratio(null, PSIONIC)
 			if(prob(blocked))
 				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
 				continue

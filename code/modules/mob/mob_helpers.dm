@@ -599,7 +599,8 @@ proc/is_blind(A)
 		client.images -= image
 
 /mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	return
+	for(var/mob/M in contents)
+		M.flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)
 
 /mob/proc/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
 	if(!new_name || new_name == real_name)	return 0
