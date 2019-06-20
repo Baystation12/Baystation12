@@ -13,7 +13,7 @@
 	//auto_init = FALSE 			// We do not need to be initialize()d
 	var/mob/owner = null		// What we are a shadow of.
 
-/mob/zshadow/can_fall()
+/mob/zshadow/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return FALSE
 
 /mob/zshadow/New(var/mob/L)

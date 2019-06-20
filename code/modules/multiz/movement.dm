@@ -195,7 +195,7 @@
 	if(is_client_moving) M.moving = 0
 
 //For children to override
-/atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
+/atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	if(!simulated)
 		return FALSE
 
@@ -215,16 +215,16 @@
 
 	return TRUE
 
-/obj/can_fall()
+/obj/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return ..(anchor_fall)
 
-/obj/effect/can_fall()
+/obj/effect/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return FALSE
 
-/obj/effect/decal/cleanable/can_fall()
+/obj/effect/decal/cleanable/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return TRUE
 
-/obj/item/pipe/can_fall()
+/obj/item/pipe/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	var/turf/simulated/open/below = loc
 	below = below.below
 
@@ -236,7 +236,7 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
-/mob/living/carbon/human/can_fall()
+/mob/living/carbon/human/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	if(..())
 		return species.can_fall(src)
 
