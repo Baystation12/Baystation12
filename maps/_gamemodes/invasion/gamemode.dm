@@ -10,7 +10,7 @@
 
 	//uncomment this later
 	//required_players = 10
-	factions = list(/datum/faction/unsc, /datum/faction/insurrection, /datum/faction/covenant)
+	factions = list(/datum/faction/unsc, /datum/faction/insurrection, /datum/faction/covenant, /datum/faction/human_civ)
 
 	var/faction_safe_time = 10 MINUTES
 	var/faction_safe_duration = 10 MINUTES
@@ -125,7 +125,7 @@
 		unsc_base_areas.Add(cur_area)
 
 /datum/game_mode/invasion/proc/find_human_colony()
-	var/datum/faction/human_civ/H = factions_by_name["Civilian"]
+	var/datum/faction/human_civ/H = factions_by_name["Human Colony"]
 	human_colony = H.get_base()
 
 /datum/game_mode/invasion/proc/setup_faction_objectives(var/datum/faction/faction, var/list/objective_types)

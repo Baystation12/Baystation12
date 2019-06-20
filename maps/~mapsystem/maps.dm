@@ -157,7 +157,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
 
-/datum/map/proc/get_default_spawn(var/client/C, var/datum/job/job_datum)
+/datum/map/proc/get_working_spawn(var/client/C, var/datum/job/job_datum)
 
 	//i've rewritten this proc to get the first working spawnpoint using all the checks from the job controller and new player spawning
 	//this should be safety proof
@@ -175,8 +175,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			candidate = spawntypes()[display_name]
 
 		if(!candidate)
-			log_debug("MAP ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
-			message_admins("MAP ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
+			to_chat(C,"<span class = 'warning'>SPAWN ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!</span>")
+			log_debug("SPAWN ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
+			message_admins("SPAWN ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
 
 		else if(candidate.check_job_spawning(job_datum.title))
 			//check if its viable to spawn in with this job
@@ -190,7 +191,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	while(spawn_candidates.len > 0)
 
 	if(candidate)
-		return candidate.display_name
+		return candidate
 	else
-		log_debug("MAP WARNING: map \'[src]\' is not returning a global default spawn.")
-		message_admins("MAP WARNING: map \'[src]\' is not returning a global default spawn.")
+		to_chat(C,"<span class = 'warning'>SPAWN WARNING: map \'[src]\' is not returning a working spawn for [C] as [job_datum.type].</span>")
+		log_debug("SPAWN WARNING: map \'[src]\' is not returning a working spawn for [C] as [job_datum.type].")
+		message_admins("SPAWN WARNING: map \'[src]\' is not returning a working spawn for [C] as [job_datum.type].")
