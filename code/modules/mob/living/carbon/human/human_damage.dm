@@ -323,6 +323,11 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/brute_avg = brute / parts.len
 	var/burn_avg = burn / parts.len
 	for(var/obj/item/organ/external/E in parts)
+		if(QDELETED(E))
+			continue
+		if(E.owner != src)
+			continue // The code below may affect the children of an organ.
+
 		if(brute_avg)
 			apply_damage(damage = brute_avg, damagetype = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
 		if(burn_avg)
