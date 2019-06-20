@@ -24,9 +24,12 @@
 	var/escalation_probability = 90
 	var/maximal_severity = 80
 	var/send_admin_broadcasts = FALSE	// Enables debugging/information mode, sending admin messages when waves occur and when severity escalates.
-
-	event_delay_mod_moderate = 0.5		// As a bonus, more frequent events.
-	event_delay_mod_major = 0.3
+	
+	// Traitors for meteor, less required at roundstart
+	required_enemies = 2
+	antag_tags = list(MODE_TRAITOR)
+	antag_scaling_coeff = 5
+	latejoin_antag_tags = list(MODE_TRAITOR)
 
 /datum/game_mode/meteor/post_setup()
 	..()
