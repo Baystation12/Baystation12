@@ -260,4 +260,4 @@
 	id_card.access |= accesses
 
 /datum/computer_file/program/card_mod/proc/authorized(var/obj/item/weapon/card/id/id_card)
-	return (access_change_ids in id_card.access)
+	return id_card && (access_change_ids in id_card.access)
