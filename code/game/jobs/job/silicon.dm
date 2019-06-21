@@ -23,6 +23,9 @@
 /datum/job/ai/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
+/datum/job/ai/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+	return H
+
 /datum/job/cyborg
 	title = "Robot"
 	department_flag = MSC
@@ -38,6 +41,9 @@
 	hud_icon = "hudblank"
 	skill_points = 0
 	no_skill_buffs = TRUE
+
+/datum/job/cyborg/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+	return H && H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
 /datum/job/cyborg/equip(var/mob/living/carbon/human/H)
 	return !!H

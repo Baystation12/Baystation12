@@ -444,7 +444,7 @@
 
 	return spawnpos
 
-/datum/job/proc/post_equip_rank(var/mob/person)
+/datum/job/proc/post_equip_rank(var/mob/person, var/alt_title)
 	return
 
 /datum/job/proc/get_alt_title_for(var/client/C)
@@ -455,3 +455,6 @@
 		current_positions -= 1
 		return TRUE
 	return FALSE
+
+/datum/job/proc/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+	return
