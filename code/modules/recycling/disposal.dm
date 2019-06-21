@@ -30,7 +30,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
 	atom_flags = ATOM_FLAG_CLIMBABLE
-	var/ptype = DISPOSAL_BIN
 	var/turn = DISPOSAL_FLIP_NONE
 
 // create a new disposal
@@ -62,7 +61,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	add_fingerprint(user, 0, I)
 	if(mode<=0) // It's off
 		if(isScrewdriver(I))
-			if(contents.len > 0)
+			if(contents.len > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
 				return
 			if(mode==0) // It's off but still not unscrewed
@@ -76,7 +75,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				to_chat(user, "You attach the screws around the power connection.")
 				return
 		else if(isWelder(I) && mode==-1)
-			if(contents.len > 0)
+			if(contents.len > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
 				return
 			var/obj/item/weapon/weldingtool/W = I
@@ -87,11 +86,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				if(do_after(user,20,src))
 					if(!src || !W.isOn()) return
 					to_chat(user, "You sliced the floorweld off the disposal unit.")
-					var/obj/structure/disposalconstruct/C = new (src.loc)
+					var/obj/structure/disposalconstruct/machine/C = new (loc, src)
 					src.transfer_fingerprints_to(C)
-					C.ptype = DISPOSAL_BIN
-					C.anchored = 1
-					C.set_density(1)
 					C.update()
 					qdel(src)
 				return
@@ -327,7 +323,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
-	for(var/atom/movable/AM in src)
+	for(var/atom/movable/AM in (contents - component_parts))
 		AM.forceMove(src.loc)
 		AM.pipe_eject(0)
 	update_icon()
@@ -570,7 +566,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
-	var/ptype = DISPOSAL_OUTLET
 
 /obj/structure/disposaloutlet/Initialize()
 	. = ..()
@@ -623,7 +618,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			if(do_after(user,20, src))
 				if(!src || !W.isOn()) return
 				to_chat(user, "You sliced the floorweld off the disposal outlet.")
-				var/obj/structure/disposalconstruct/C = new (src.loc, src)
+				var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)
 				src.transfer_fingerprints_to(C)								
 				C.anchored = 1
 				C.set_density(1)
