@@ -8,7 +8,7 @@ SUBSYSTEM_DEF(atoms)
 	init_order = SS_INIT_ATOMS
 	flags = SS_NO_FIRE
 
-	var/init_state
+	var/init_state = INITIALIZATION_INSSATOMS
 	var/old_init_state
 
 	var/list/late_loaders
