@@ -26,10 +26,6 @@
 	build_icon = 'icons/atmos/tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 
-/obj/machinery/atmospherics/tvalve/New()
-	initialize_directions()
-	..()
-
 /obj/machinery/atmospherics/tvalve/on_update_icon(animation)
 	if(animation)
 		flick("tvalve[src.state][!src.state]",src)
@@ -53,17 +49,6 @@
 
 /obj/machinery/atmospherics/tvalve/hide(var/i)
 	update_underlays()
-
-/obj/machinery/atmospherics/tvalve/proc/initialize_directions()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = SOUTH|NORTH|EAST
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH|WEST
-		if(EAST)
-			initialize_directions = WEST|EAST|SOUTH
-		if(WEST)
-			initialize_directions = EAST|WEST|NORTH	
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -338,10 +323,6 @@
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 
-/obj/machinery/atmospherics/tvalve/digital/New()
-	..()
-	initialize_directions()
-
 /obj/machinery/atmospherics/tvalve/digital/Initialize()
 	. = ..()
 	if(frequency)
@@ -401,10 +382,6 @@
 
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalvem0"
-
-/obj/machinery/atmospherics/tvalve/mirrored/digital/New()
-	..()
-	initialize_directions()
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/Initialize()
 	. = ..()

@@ -28,7 +28,6 @@
 	. = ..()
 	icon = 'icons/obj/cryogenics_split.dmi'
 	update_icon()
-	initialize_directions = dir
 	atmos_init()
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()

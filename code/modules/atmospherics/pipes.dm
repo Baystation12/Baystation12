@@ -26,10 +26,10 @@
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 
-/obj/machinery/atmospherics/pipe/New()
+/obj/machinery/atmospherics/pipe/Initialize()
+	. = ..()
 	if(istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
 		level = 1
-	..()
 
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level != 2
@@ -181,9 +181,8 @@
 	rotate_class = PIPE_ROTATE_TWODIR
 	connect_dir_type = SOUTH | NORTH // Overridden if dir is not a cardinal for bent pipes. For straight pipes this is correct.
 
-/obj/machinery/atmospherics/pipe/simple/New()
-	..()
-
+/obj/machinery/atmospherics/pipe/simple/Initialize()
+	. = ..()
 	// Pipe colors and icon states are handled by an image cache - so color and icon should
 	//  be null. For mapping purposes color is defined in the object definitions.
 	icon = null
@@ -439,20 +438,10 @@
 	pipe_class = PIPE_CLASS_TRINARY
 	connect_dir_type = NORTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold/New()
-	..()
+/obj/machinery/atmospherics/pipe/manifold/Initialize()
+	. = ..()
 	alpha = 255
 	icon = null
-
-	switch(dir)
-		if(NORTH)
-			initialize_directions = EAST|SOUTH|WEST
-		if(SOUTH)
-			initialize_directions = WEST|NORTH|EAST
-		if(EAST)
-			initialize_directions = SOUTH|WEST|NORTH
-		if(WEST)
-			initialize_directions = NORTH|EAST|SOUTH
 
 /obj/machinery/atmospherics/pipe/manifold/hide(var/i)
 	if(istype(loc, /turf/simulated))
@@ -707,8 +696,8 @@
 	rotate_class = PIPE_ROTATE_ONEDIR
 	connect_dir_type = NORTH | SOUTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold4w/New()
-	..()
+/obj/machinery/atmospherics/pipe/manifold4w/Initialize()
+	. = ..()
 	alpha = 255
 	icon = null
 
@@ -972,10 +961,6 @@
 
 	var/obj/machinery/atmospherics/node
 
-/obj/machinery/atmospherics/pipe/cap/New()
-	..()
-	initialize_directions = dir
-
 /obj/machinery/atmospherics/pipe/cap/hide(var/i)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(i ? 101 : 0)
@@ -1101,11 +1086,6 @@
 
 	var/build_killswitch = 1
 	build_icon_state = "uvent"
-
-
-/obj/machinery/atmospherics/pipe/vent/New()
-	initialize_directions = dir
-	..()
 
 /obj/machinery/atmospherics/pipe/vent/high_volume
 	name = "Larger vent"

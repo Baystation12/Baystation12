@@ -11,13 +11,13 @@
 	pipe_class = PIPE_CLASS_BINARY
 	connect_dir_type = SOUTH | NORTH
 
-/obj/machinery/atmospherics/binary/New()
-	..()
+/obj/machinery/atmospherics/binary/Initialize()
 	air1 = new
 	air2 = new
 
 	air1.volume = 200
 	air2.volume = 200
+	. = ..()
 
 // Housekeeping and pipe network stuff below
 /obj/machinery/atmospherics/binary/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)

@@ -21,8 +21,8 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	can_buckle = 1
 	buckle_lying = 1
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/New()
-	..()
+obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
+	. = ..()
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)

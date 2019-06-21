@@ -24,10 +24,6 @@
 
 	pipe_class = PIPE_CLASS_UNARY
 
-/obj/machinery/atmospherics/portables_connector/Initialize()
-	initialize_directions = dir
-	. = ..()
-
 /obj/machinery/atmospherics/portables_connector/on_update_icon()
 	icon_state = "connector"
 
