@@ -41,7 +41,7 @@
 	name = "gas pump"
 	desc = "a pump. For gasses."
 	build_path = /obj/item/pipe
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "pump"
 	constructed_path = /obj/machinery/atmospherics/binary/pump
 	pipe_class = PIPE_CLASS_BINARY
@@ -50,7 +50,7 @@
 	name = "pressure regulator"
 	desc = "a device that regulates pressure."
 	build_path = /obj/item/pipe
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "passivegate"
 	constructed_path = /obj/machinery/atmospherics/binary/passive_gate
 	pipe_class = PIPE_CLASS_BINARY
@@ -59,7 +59,7 @@
 	name = "high powered gas pump"
 	desc = "a high powered pump. For gasses."
 	build_path = /obj/item/pipe
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "volumepump"
 	constructed_path = /obj/machinery/atmospherics/binary/pump/high_power
 	pipe_class = PIPE_CLASS_BINARY
