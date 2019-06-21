@@ -187,3 +187,8 @@
 /mob/living/simple_animal/borer/proc/request_player()
 	var/datum/ghosttrap/G = get_ghost_trap("cortical borer")
 	G.request_player(src, "A cortical borer needs a player.")
+
+/mob/living/simple_animal/borer/symbiote
+	name = "symbiote"
+	real_name = "symbiote"
+	//neutered = TRUE
