@@ -16,8 +16,7 @@
 	pipe_class = PIPE_CLASS_TRINARY
 	connect_dir_type = SOUTH | NORTH | WEST
 
-/obj/machinery/atmospherics/trinary/New()
-	..()
+/obj/machinery/atmospherics/trinary/Initialize()
 	air1 = new
 	air2 = new
 	air3 = new
@@ -25,6 +24,7 @@
 	air1.volume = 200
 	air2.volume = 200
 	air3.volume = 200
+	. = ..()
 
 // Housekeeping and pipe network stuff below
 /obj/machinery/atmospherics/trinary/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)

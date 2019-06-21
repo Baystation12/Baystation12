@@ -16,10 +16,10 @@
 	..()
 	to_chat(user, "The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"].")
 
-/obj/machinery/atmospherics/valve/shutoff/New()
+/obj/machinery/atmospherics/valve/shutoff/Initialize()
+	. = ..()
 	open()
 	hide(1)
-	..()
 
 /obj/machinery/atmospherics/valve/shutoff/attack_hand(var/mob/user as mob)
 	close_on_leaks = !close_on_leaks

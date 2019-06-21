@@ -27,8 +27,8 @@
 	pipe_class = PIPE_CLASS_OMNI
 	connect_dir_type = SOUTH | NORTH | EAST | WEST
 
-/obj/machinery/atmospherics/omni/New()
-	..()
+/obj/machinery/atmospherics/omni/Initialize()
+	. = ..()
 	icon_state = "base"
 
 	ports = new()

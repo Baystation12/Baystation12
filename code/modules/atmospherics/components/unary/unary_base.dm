@@ -12,11 +12,10 @@
 
 	pipe_class = PIPE_CLASS_UNARY
 
-/obj/machinery/atmospherics/unary/New()
+/obj/machinery/atmospherics/unary/Initialize()
 	air_contents = new
-	..()
-	initialize_directions = dir
 	air_contents.volume = 200
+	. = ..()
 
 // Housekeeping and pipe network stuff below
 /obj/machinery/atmospherics/unary/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)

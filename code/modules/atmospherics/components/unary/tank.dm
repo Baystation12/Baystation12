@@ -22,7 +22,8 @@
 	build_icon = 'icons/atmos/tank.dmi'
 	build_icon_state = "air"
 
-/obj/machinery/atmospherics/unary/tank/New()
+/obj/machinery/atmospherics/unary/tank/Initialize()
+	. = ..()
 	if(filling)
 		air_temporary = new
 		air_temporary.volume = volume
@@ -34,19 +35,17 @@
 			gases += start_pressure * filling[gas] * (air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
 		air_temporary.adjust_multi(arglist(gases))
 		update_icon()
-	..()
 
 /obj/machinery/atmospherics/unary/tank/set_initial_level()
 	level = 1 // Always on top, apparently.
 
 /obj/machinery/atmospherics/unary/tank/Initialize()
+	. = ..()
 	atmos_init()
 	build_network()
 	if(node)
 		node.atmos_init()
 		node.build_network()
-
-	. = ..()
 
 /obj/machinery/atmospherics/unary/tank/Process()
 	if(!parent)

@@ -39,7 +39,7 @@ Pipelines + Other Objects -> Pipe network
 	var/pipe_class = PIPE_CLASS_OTHER //If somehow something isn't set properly, handle it as something with zero connections. This will prevent runtimes.
 	var/rotate_class = PIPE_ROTATE_STANDARD
 
-/obj/machinery/atmospherics/New()
+/obj/machinery/atmospherics/Initialize()
 	if(!icon_manager)
 		icon_manager = new()
 
@@ -51,7 +51,7 @@ Pipelines + Other Objects -> Pipe network
 		pipe_color = null
 
 	set_dir(dir) // Does full dir init.
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/proc/atmos_init()
 	atmos_initalized = TRUE
