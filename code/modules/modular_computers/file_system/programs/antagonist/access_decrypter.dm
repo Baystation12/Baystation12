@@ -127,7 +127,7 @@
 	else if(program.computer.card_slot && program.computer.card_slot.stored_card)
 		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
 		var/list/regions = list()
-		for(var/i = 1; i <= 7; i++)
+		for(var/i = ACCESS_REGION_MIN; i <= ACCESS_REGION_MAX; i++)
 			var/list/accesses = list()
 			for(var/access in get_region_accesses(i))
 				if (get_access_desc(access))
