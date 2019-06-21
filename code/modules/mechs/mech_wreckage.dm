@@ -18,8 +18,9 @@
 			for(var/hardpoint in exosuit.hardpoints)
 				if(exosuit.hardpoints[hardpoint] && prob(40))
 					var/obj/item/thing = exosuit.hardpoints[hardpoint]
-					thing.forceMove(src)
-					exosuit.hardpoints[hardpoint] = null
+					if(exosuit.remove_system(hardpoint))
+						thing.forceMove(src)
+
 	..()
 
 /obj/structure/mech_wreckage/powerloader/New(var/newloc)

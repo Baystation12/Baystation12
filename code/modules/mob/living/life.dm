@@ -189,7 +189,6 @@
 		reset_view(null)
 
 /mob/living/proc/update_sight()
-	//TODO: Test if doing this breaks anything
 	set_sight(0)
 	set_see_in_dark(0)
 	if(stat == DEAD || eyeobj)

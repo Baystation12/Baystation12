@@ -189,10 +189,7 @@
 		var/obj/item/rig_module/module = loc
 		if(module.holder && module.holder.cell)
 			cell = module.holder.cell
-	else if(istype(user, /mob/living/exosuit))
-		var/mob/living/exosuit/exosuit = user
-		if(exosuit.body && exosuit.body)
-			cell = exosuit.get_cell()
+	else if(loc) cell = loc.get_cell()
 	if(cell && cell.charge >= cost)
 		cell.use(cost)
 		return 1

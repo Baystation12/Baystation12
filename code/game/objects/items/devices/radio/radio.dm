@@ -819,6 +819,9 @@
 	intercept = 1
 	w_class = ITEM_SIZE_NORMAL
 
+
+//The exosuit  radio subtype. It allows pilots to interact and consumes exosuit power
+
 /obj/item/device/radio/exosuit
 	name = "exosuit radio"
 	cell = null
@@ -826,9 +829,15 @@
 /obj/item/device/radio/exosuit/get_cell()
 	. = ..()
 	if(!.)
-		var/mob/living/exosuit/exosuit = loc
-		if(istype(exosuit) && exosuit.body)
-			. = exosuit.get_cell()
+		var/mob/living/exosuit/E = loc
+		if(istype(E))
+			return E.get_cell()
+
+/obj/item/device/radio/exosuit/nano_host()
+	var/mob/living/exosuit/E = loc
+	if(istype(E))
+		return E
+	return null
 
 /obj/item/device/radio/exosuit/attack_self(var/mob/user)
 	var/mob/living/exosuit/exosuit = loc
@@ -838,10 +847,15 @@
 	else
 		to_chat(user, SPAN_WARNING("The radio is too damaged to function."))
 
-/obj/item/device/radio/exosuit/Topic(href, href_list)
-	if(href_list["freq"] || href_list["spec_freq"] || href_list["talk"] || href_list["listen"])
+/obj/item/device/radio/exosuit/CanUseTopic()
+	. = ..()
+	if(.)
 		var/mob/living/exosuit/exosuit = loc
 		if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
 			return ..()
-		return TRUE
+
+/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
 	. = ..()
+
+
+

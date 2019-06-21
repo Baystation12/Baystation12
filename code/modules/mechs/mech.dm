@@ -196,20 +196,5 @@
 		update_pilots()
 
 		
-//The radio subtype. It allows pilots to interact and consumes exosuit power
 
-/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
-	. = ..()
-
-
-/obj/item/device/radio/exosuit/nano_host()
-	var/mob/living/exosuit/E = loc
-	if(istype(E))
-		return E
-	return null
-
-/obj/item/device/radio/exosuit/get_cell()
-	var/mob/living/exosuit/E = loc
-	if(istype(E))
-		return E.get_cell()
 

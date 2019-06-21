@@ -40,15 +40,15 @@
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target
 			if(user.a_intent == I_HURT)
-
+				admin_attack_log(user, M, "attempted to clamp [M] with [src] ", "Was subject to a clamping attempt.", ", using \a [src], attempted to clamp")
 				owner.setClickCooldown(owner.arms ? owner.arms.action_delay * 3 : 30) //This is an inefficient use of your powers
 				if(prob(33))
 					owner.visible_message(SPAN_DANGER("[owner] swings its [src] in a wide arc at [target] but misses completely!"))
 					return
-				M.attack_generic(src, (owner.arms ? owner.arms.melee_damage * 1.5 : 0), "slammed") //Honestly you should not be able to do this without hands, but still
+				M.attack_generic(owner, (owner.arms ? owner.arms.melee_damage * 1.5 : 0), "slammed") //Honestly you should not be able to do this without hands, but still
 				M.throw_at(get_edge_target_turf(owner ,owner.dir),5, 2)
-				//to_chat(user, "<span class='warning'>You slam [target] with [src.name].</span>")
-				//owner.visible_message("<span class='warning'>[owner] slams [target] with the hydraulic clamp.</span>")
+				to_chat(user, "<span class='warning'>You slam [target] with [src.name].</span>")
+				owner.visible_message(SPAN_DANGER("[owner] slams [target] with the hydraulic clamp."))
 			else
 				step_away(M, owner)
 				to_chat(user, "You push [target] out of the way.")
@@ -146,8 +146,8 @@
 				else if(target != locked)
 					if(locked in view(owner))
 						locked.throw_at(target, 14, 1.5, owner)
+						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null
-
 						owner.get_cell().use(active_power_use * CELLRATE)
 
 					else
@@ -168,8 +168,8 @@
 							step_away(A,target)
 							sleep(2)
 
-				
-				owner.get_cell().use(active_power_use * CELLRATE)
+				log_and_message_admins("used [src]'s area throw on [target].", user, owner.loc)
+				owner.get_cell().use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
 
 		return
 
@@ -251,6 +251,7 @@
 						to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
 					target.ex_act(2)
 					drill_head.durability -= 1
+					log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(target,1))
 						if(get_dir(owner,M)&owner.dir)
@@ -264,6 +265,7 @@
 				else if(target.loc == T)
 					target.ex_act(2)
 					drill_head.durability -= 1
+					log_and_message_admins("[src] used to drill [target].", user, owner.loc)
 
 				
 
