@@ -8195,7 +8195,7 @@
 	dir = 10
 	},
 /obj/structure/sign/warning/nosmoking_burned{
-	dir = 3;
+	dir = 1;
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/techfloor/grid,

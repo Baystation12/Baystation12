@@ -14,18 +14,10 @@
 	var/datum/pipe_network/network3
 
 	pipe_class = PIPE_CLASS_TRINARY
+	connect_dir_type = SOUTH | NORTH | WEST
 
 /obj/machinery/atmospherics/trinary/New()
 	..()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = EAST|NORTH|SOUTH
-		if(SOUTH)
-			initialize_directions = SOUTH|WEST|NORTH
-		if(EAST)
-			initialize_directions = EAST|WEST|SOUTH
-		if(WEST)
-			initialize_directions = WEST|NORTH|EAST
 	air1 = new
 	air2 = new
 	air3 = new

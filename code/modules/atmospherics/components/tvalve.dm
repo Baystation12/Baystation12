@@ -20,8 +20,7 @@
 	var/datum/pipe_network/network_node3
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
-	
-	pipe_type = PIPE_MTVALVE
+	connect_dir_type = SOUTH | WEST | NORTH
 	pipe_class = PIPE_CLASS_TRINARY
 
 	build_icon = 'icons/atmos/tvalve.dmi'
@@ -303,12 +302,11 @@
 /obj/machinery/atmospherics/tvalve/mirrored
 	icon_state = "map_tvalvem0"
 	
-	pipe_type =  PIPE_MTVALVEM
+	connect_dir_type = SOUTH | EAST | NORTH
 	build_icon_state = "map_tvalvem0"
 
 /obj/machinery/atmospherics/tvalve/mirrored/atmos_init()
 	..()
-	initialize_directions()
 
 	var/node1_dir
 	var/node2_dir
@@ -320,16 +318,6 @@
 
 	init_nodes(node1_dir, node2_dir, node3_dir)
 
-/obj/machinery/atmospherics/tvalve/mirrored/initialize_directions()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = SOUTH|NORTH|WEST
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH|EAST
-		if(EAST)
-			initialize_directions = WEST|EAST|NORTH
-		if(WEST)
-			initialize_directions = EAST|WEST|SOUTH
 
 /obj/machinery/atmospherics/tvalve/mirrored/on_update_icon(animation)
 	if(animation)
@@ -347,7 +335,6 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 	
-	pipe_type =  PIPE_DTVALVE
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 
@@ -411,7 +398,6 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-	pipe_type =  PIPE_DTVALVEM
 
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalvem0"

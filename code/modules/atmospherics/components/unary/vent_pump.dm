@@ -49,7 +49,6 @@
 	var/radio_filter_in
 
 	var/controlled = TRUE  //if we should register with an air alarm on spawn
-	pipe_type = PIPE_UVENT
 	build_icon_state = "uvent"
 
 /obj/machinery/atmospherics/unary/vent_pump/on

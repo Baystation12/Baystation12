@@ -21,7 +21,6 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-	pipe_type = PIPE_INJECTOR
 
 	level = 1
 

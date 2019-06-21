@@ -28,7 +28,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 	var/desc = "a pipe"														//item description
 	var/build_path = /obj/item/pipe											//path of the object that's being created
 	var/category = "general"												//Allows for easy sorting in the menu.
-	var/pipe_type = PIPE_SIMPLE_STRAIGHT									//What sort of pipe this is
+	var/pipe_type                       									//What sort of pipe this is. Used by disposals currently.
 	var/connect_types = CONNECT_TYPE_REGULAR								//what sort of connection this has
 	var/pipe_color = PIPE_COLOR_WHITE										//what color the pipe should be by default
 	var/build_icon_state = "simple"											//Which icon state to use when creating a new pipe item.
@@ -37,6 +37,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 	var/colorable = TRUE													//Can this pipe be colored?
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden	//What's the final form of this item?
 	var/pipe_class = PIPE_CLASS_BINARY										//The node classification for this item.
+	var/rotate_class = PIPE_ROTATE_STANDARD                                 //How it behaves when rotated
 
 //==========
 //Procedures
@@ -63,14 +64,13 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 /datum/pipe/proc/Build(var/datum/pipe/D, var/loc, var/pipe_color = PIPE_COLOR_GREY)
 	if(D.build_path)
 		var/obj/item/pipe/new_item = new build_path(loc)
-		if(D.pipe_type != null)
-			new_item.pipe_type = D.pipe_type
 		if(D.connect_types != null)
 			new_item.connect_types = D.connect_types
 		if(D.colorable)
 			new_item.color = pipe_color
 		else if (D.pipe_color != null)
 			new_item.color = D.pipe_color
+		new_item.rotate_class = D.rotate_class
 		new_item.SetName(D.name)
 		new_item.desc = D.desc
 		new_item.set_dir(D.dir)

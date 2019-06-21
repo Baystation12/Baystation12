@@ -17,7 +17,6 @@
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
-	pipe_type = PIPE_OMNI_FILTER
 	build_icon_state = "omni_filter"
 /obj/machinery/atmospherics/omni/filter/New()
 	..()

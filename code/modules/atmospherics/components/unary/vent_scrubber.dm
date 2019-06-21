@@ -29,7 +29,6 @@
 
 	var/welded = 0
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
-	pipe_type = PIPE_SCRUBBER
 	build_icon_state = "scrubber"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on

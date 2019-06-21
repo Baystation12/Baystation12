@@ -9,18 +9,10 @@
 	var/datum/pipe_network/network2
 
 	pipe_class = PIPE_CLASS_BINARY
+	connect_dir_type = SOUTH | NORTH
 
 /obj/machinery/atmospherics/binary/New()
 	..()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = NORTH|SOUTH
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH
-		if(EAST)
-			initialize_directions = EAST|WEST
-		if(WEST)
-			initialize_directions = EAST|WEST
 	air1 = new
 	air2 = new
 

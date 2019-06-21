@@ -34,7 +34,6 @@ Thus, the two variables affect pump operation are set in New():
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
-	pipe_type = PIPE_PUMP
 	build_icon_state = "pump"
 
 /obj/machinery/atmospherics/binary/pump/New()
