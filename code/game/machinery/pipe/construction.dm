@@ -219,12 +219,11 @@ Buildable meters
 	var/pipefailtext = "<span class='warning'>There's nothing to connect this pipe section to!</span>" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 
 	//TODO: Move all of this stuff into the various pipe constructors.
-	var/obj/machinery/atmospherics/P = new constructed_path(src)
+	var/obj/machinery/atmospherics/P = new constructed_path(get_turf(src))
 
 	P.pipe_color = color
 	P.set_dir(dir)
 	P.initialize_directions = pipe_dir
-	P.loc = loc //fixes issue with location not being set correctly.
 
 	if(P.pipe_type == PIPE_TANK)
 		P.level = 1//Tanks are always on top.

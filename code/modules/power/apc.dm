@@ -826,7 +826,7 @@
 		return 0
 	if(!user.client)
 		return 0
-	if(inoperable())
+	if(stat & (BROKEN|MAINT))
 		return 0
 	if(!user.IsAdvancedToolUser())
 		return 0
@@ -1039,7 +1039,7 @@
 			power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(percent <= AUTO_THRESHOLD_EQUIPMENT)        // <25%, turn off lighting & equipment
-		if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
+		if(autoflag != 1)
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
