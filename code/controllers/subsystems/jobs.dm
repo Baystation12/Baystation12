@@ -515,14 +515,10 @@ SUBSYSTEM_DEF(jobs)
 		H.mind.assigned_role = rank
 		alt_title = H.mind.role_alt_title
 
-		switch(rank)
-			if("Robot")
-				return H.Robotize(SSrobots.get_mob_type_by_title(alt_title ? alt_title : job.title))
-			if("AI")
-				return H
-			if("Captain")
-				var/sound/announce_sound = (GAME_STATE <= RUNLEVEL_SETUP)? null : sound('sound/misc/boatswain.ogg', volume=20)
-				captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
+	var/mob/other_mob = job.handle_variant_join(H, alt_title)
+	if(other_mob)
+		job.post_equip_rank(other_mob, alt_title || rank)
+		return other_mob
 
 	if(spawn_in_storage)
 		for(var/datum/gear/G in spawn_in_storage)
@@ -560,7 +556,7 @@ SUBSYSTEM_DEF(jobs)
 	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 	
-	job.post_equip_rank(H)
+	job.post_equip_rank(H, alt_title || rank)
 
 	return H
 
