@@ -119,17 +119,14 @@
 	if(!use_metal(0.25))
 		return reset()
 	var/fdirn = turn(M_Dir,180)
-	var/p_type
 	var/p_dir
 
 	if (fdirn!=old_dir)
-		p_type=1+P_type
 		p_dir=old_dir+M_Dir
 	else
-		p_type=0+P_type
 		p_dir=M_Dir
 
-	var/obj/item/pipe/P = new (w_turf, pipe_type=p_type, dir=p_dir)
+	var/obj/item/pipe/P = new (w_turf, dir=p_dir)
 	P.attackby(W , src)
 
 	return 1

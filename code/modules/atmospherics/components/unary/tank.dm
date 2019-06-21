@@ -18,7 +18,6 @@
 	density = 1
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	pipe_class = PIPE_CLASS_UNARY
-	pipe_type = PIPE_TANK
 
 	build_icon = 'icons/atmos/tank.dmi'
 	build_icon_state = "air"
@@ -35,11 +34,11 @@
 			gases += start_pressure * filling[gas] * (air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
 		air_temporary.adjust_multi(arglist(gases))
 		update_icon()
-
-	initialize_directions = dir
-	set_dir(dir)
 	..()
-	
+
+/obj/machinery/atmospherics/unary/tank/set_initial_level()
+	level = 1 // Always on top, apparently.
+
 /obj/machinery/atmospherics/unary/tank/Initialize()
 	atmos_init()
 	build_network()
@@ -156,7 +155,6 @@
 	name =  "Pressure Tank"
 	desc = "A large vessel containing pressurized gas."
 	color =  PIPE_COLOR_WHITE
-	pipe_type = PIPE_TANK
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL	
 	w_class = ITEM_SIZE_HUGE
 	level = 1

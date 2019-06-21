@@ -17,7 +17,8 @@
 	var/datum/pipe_network/network_node2
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
-	pipe_type = PIPE_MVALVE
+	connect_dir_type = SOUTH | NORTH
+	rotate_class = PIPE_ROTATE_TWODIR
 	build_icon_state = "mvalve"
 
 /obj/machinery/atmospherics/valve/open
@@ -41,14 +42,6 @@
 
 /obj/machinery/atmospherics/valve/hide(var/i)
 	update_underlays()
-
-/obj/machinery/atmospherics/valve/Initialize()
-	switch(dir)
-		if(NORTH, SOUTH)
-			initialize_directions = NORTH|SOUTH
-		if(EAST, WEST)
-			initialize_directions = EAST|WEST
-	. = ..()
 
 /obj/machinery/atmospherics/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -121,12 +114,6 @@
 
 	return 1
 
-/obj/machinery/atmospherics/valve/proc/normalize_dir()
-	if(dir==3)
-		set_dir(1)
-	else if(dir==12)
-		set_dir(4)
-
 /obj/machinery/atmospherics/valve/attack_ai(mob/user as mob)
 	return
 
@@ -145,8 +132,6 @@
 
 /obj/machinery/atmospherics/valve/atmos_init()
 	..()
-	normalize_dir()
-
 	var/node1_dir
 	var/node2_dir
 
@@ -230,7 +215,6 @@
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
-	pipe_type = PIPE_DVALVE
 	build_icon_state = "dvalve"
 
 /obj/machinery/atmospherics/valve/digital/Destroy()
