@@ -266,4 +266,30 @@
 
 	return 1
 
+/datum/unit_test/pipes_shall_belong_to_unique_pipelines
+	name = "ATMOS MACHINERY: all pipes shall belong to a unique pipeline"
+
+/datum/unit_test/pipes_shall_belong_to_unique_pipelines/start_test()
+	var/list/checked_pipes = list()
+	var/list/bad_pipelines = list()
+	for(var/datum/pipeline/P)
+		for(var/thing in P.members)
+			var/obj/machinery/atmospherics/pipe/pipe = thing
+			if(!checked_pipes[thing])
+				checked_pipes[thing] = P
+				continue
+			LAZYDISTINCTADD(bad_pipelines[P], pipe)
+			LAZYDISTINCTADD(bad_pipelines[checked_pipes[thing]], pipe) // Missed it the first time; thought it was good.
+
+	if(length(bad_pipelines))
+		for(var/datum/pipeline/badboy in bad_pipelines)
+			var/info = list()
+			for(var/bad_pipe in bad_pipelines[badboy])
+				info += log_info_line(bad_pipe)
+			log_bad("A pipeline with overlapping members contained the following overlapping pipes: [english_list(info)]")
+		fail("Some pipes were in multiple pipelines at once.")
+	else
+		pass("All pipes belonged to a unique pipeline.")
+	return 1
+
 #undef ALL_GASIDS
