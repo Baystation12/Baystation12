@@ -831,10 +831,6 @@
 	name = "\improper Permanent Brig"
 	icon_state = "brig"
 
-/area/vacant/office
-	name = "\improper Unused Office"
-	icon_state = "conference"
-
 /area/vacant/bar
 	name = "\improper Hidden Bar"
 	icon_state = "bar"
@@ -1030,6 +1026,10 @@
 /area/crew_quarters/adherent
 	name = "\improper Adherent Maintenence"
 	icon_state = "robotics"
+
+/area/crew_quarters/office
+	name = "\improper Computer Lab"
+	icon_state = "conference"
 
 /area/holocontrol
 	name = "\improper Holodeck Control"

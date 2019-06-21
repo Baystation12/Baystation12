@@ -63,7 +63,6 @@
 		/area/vacant/cargo = NO_SCRUBBER|NO_VENT,
 		/area/vacant/infirmary = NO_SCRUBBER|NO_VENT,
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
-		/area/vacant/office = 0,
 		/area/vacant/mess = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC
 	)
