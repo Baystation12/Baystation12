@@ -52,7 +52,7 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 	if(update_overlays && LAZYLEN(pilot_overlays))
 		overlays -= pilot_overlays
 	pilot_overlays = null
-	if(!body || body.pilot_coverage < 100 || body.transparent_cabin)
+	if(!body || ((body.pilot_coverage < 100 || body.transparent_cabin) && !body.hide_pilot))
 		for(var/i = 1 to LAZYLEN(pilots))
 			var/mob/pilot = pilots[i]
 			var/image/draw_pilot = new

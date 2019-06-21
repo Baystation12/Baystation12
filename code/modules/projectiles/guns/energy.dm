@@ -76,7 +76,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	return new projectile_type(src)
 
 /obj/item/weapon/gun/energy/proc/get_external_power_supply()
-	if(isrobot(loc) || istype(loc, /obj/item/rig_module))
+	if(isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /mob/living/exosuit))
 		return loc.get_cell()
 
 /obj/item/weapon/gun/energy/examine(mob/user)

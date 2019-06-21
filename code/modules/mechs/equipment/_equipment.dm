@@ -37,8 +37,11 @@
 
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)
 	owner = _owner
+	//generally attached. Nothing should be able to grab it
+	canremove = FALSE
 
 /obj/item/mech_equipment/proc/uninstalled()
+	canremove = TRUE
 	owner = null
 
 /obj/item/mech_equipment/proc/get_effective_obj()
@@ -77,4 +80,9 @@
 	return null
 
 /obj/item/proc/get_hardpoint_maptext()
+	return null
+
+/obj/item/mech_equipment/mounted_system/get_cell()
+	if(owner && loc == owner)
+		return owner.get_cell()
 	return null

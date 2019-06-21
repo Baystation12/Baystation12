@@ -59,7 +59,7 @@
 
 	if(environment.temperature > material.melting_point * 1.25 ) //A bit higher because I like to assume there's a difference between a mech and a wall
 		apply_damage(damage = (environment.temperature - (material.melting_point))/5 , damagetype = BURN)
-	// 	if (fire) fire.icon_state = "fire2"  //TODO: UI for overheating
+	//A possibility is to hook up interface icons here. But this works pretty well in my experience
 		if(prob(5))
 			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))
 			

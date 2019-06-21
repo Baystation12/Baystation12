@@ -6,13 +6,13 @@
 
 /obj/item/weapon/rcd/mounted/get_hardpoint_maptext()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner.body && MS.owner.body && MS.owner.get_cell())
+	if(istype(MS) && MS.owner && MS.owner.get_cell())
 		return "[MS.owner.get_cell().charge]/[MS.owner.get_cell().maxcharge]"
 	return null
 
 /obj/item/weapon/rcd/mounted/get_hardpoint_status_value()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner.body && MS.owner.body && MS.owner.get_cell())
+	if(istype(MS) && MS.owner && MS.owner.body && MS.owner.get_cell())
 		return MS.owner.get_cell().charge/MS.owner.get_cell().maxcharge
 	return null
 

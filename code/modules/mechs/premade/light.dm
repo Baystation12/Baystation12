@@ -61,7 +61,8 @@
 	name = "light exosuit chassis"
 	hatch_descriptor = "canopy"
 	pilot_coverage = 100
-	transparent_cabin =  FALSE
+	transparent_cabin =  TRUE
+	hide_pilot = TRUE //Sprite too small, legs clip through, so for now hide pilot
 	exosuit_desc_string = "an open and light chassis"
 	icon_state = "light_body"
 	max_damage = 50
