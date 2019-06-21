@@ -1,7 +1,0 @@
-author: "babydoll"
-delete-after: True
-changes: 
-  - maptweak: "Moved the chapel down to deck 3, south of the holodeck."
-  - maptweak: "Remapped the mental health section of the infirmary."
-  - rscadd: "Added pews for the chapel."
-  - rscadd: "Added pews to the material construction menu. They can only face south!"
