@@ -167,18 +167,24 @@
 	pixel_x = (src.dir & 3)? 0 : (src.dir == 4 ? 22 : -22)
 	pixel_y = (src.dir & 3)? (src.dir ==1 ? 22 : -22) : 0
 
+	if(areastring)
+		area = get_area_name(areastring)
+	else
+		var/area/A = get_area(src)
+		//if area isn't specified use current
+		area = A
+	SetName("\improper [area.name] APC")
+	area.apc = src
+
 	. = ..()
 
 	if (building==0)
 		init_round_start()
 	else
-		area = get_area(src)
-		area.apc = src
 		opened = 1
 		operating = 0
-		SetName("\improper [area.name] APC")
 		stat |= MAINT
-		src.update_icon()
+		update_icon()
 
 	if(operating)
 		src.update()
@@ -214,16 +220,6 @@
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
 	term.make_terminal(src)
 
-	var/area/A = src.loc.loc
-
-	//if area isn't specified use current
-	if(isarea(A) && src.areastring == null)
-		src.area = A
-		SetName("\improper [area.name] APC")
-	else
-		src.area = get_area_name(areastring)
-		SetName("\improper [area.name] APC")
-	area.apc = src
 	update_icon()
 
 /obj/machinery/power/apc/proc/terminal()
@@ -836,7 +832,6 @@
 	if(user.lying)
 		to_chat(user, "<span class='warning'>You must stand to use [src]!</span>")
 		return 0
-	autoflag = 5
 	if (istype(user, /mob/living/silicon))
 		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user
@@ -927,7 +922,15 @@
 	update_icon()
 
 /obj/machinery/power/apc/get_power_usage()
-	return lastused_total
+	if(autoflag)
+		return lastused_total // If not, we need to do something more sophisticated: compute how much power we would need in order to come back online.
+	. = 0
+	if(autoset(lighting, 2) >= POWERCHAN_ON)
+		. += area.usage(LIGHT)
+	if(autoset(equipment, 2) >= POWERCHAN_ON)
+		. += area.usage(EQUIP)
+	if(autoset(environ, 1) >= POWERCHAN_ON)
+		. += area.usage(EQUIP)
 
 /obj/machinery/power/apc/Process()
 	if(!area.requires_power)
@@ -943,9 +946,9 @@
 		force_update = 1
 		return
 
-	lastused_light = area.usage(LIGHT)
-	lastused_equip = area.usage(EQUIP)
-	lastused_environ = area.usage(ENVIRON)
+	lastused_light = (lighting >= POWERCHAN_ON) ? area.usage(LIGHT) : 0
+	lastused_equip = (equipment >= POWERCHAN_ON) ? area.usage(EQUIP) : 0
+	lastused_environ = (environ >= POWERCHAN_ON) ? area.usage(ENVIRON) : 0
 	area.clear_usage()
 
 	lastused_total = lastused_light + lastused_equip + lastused_environ
@@ -970,12 +973,6 @@
 	var/obj/item/weapon/cell/cell = get_cell()
 	if(!cell || shorted) // We aren't going to be doing any power processing in this case.
 		charging = 0
-		equipment = autoset(equipment, 0)
-		lighting = autoset(lighting, 0)
-		environ = autoset(environ, 0)
-		power_alarm.triggerAlarm(loc, src)
-		autoflag = 0
-
 	else
 		..() // Actual processing happens in here.
 
@@ -990,11 +987,6 @@
 			charging = 2
 
 		if(stat & NOPOWER)
-			// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
-			equipment = autoset(equipment, 0)
-			lighting = autoset(lighting, 0)
-			environ = autoset(environ, 0)
-			autoflag = 0
 			power_change() // We are the ones responsible for triggering listeners once power returns, so we run this to detect possible changes.
 
 	// Set channels depending on how much charge we have left
@@ -1017,14 +1009,14 @@
 	var/obj/item/weapon/cell/cell = get_cell()
 	var/percent = cell && cell.percent()
 
-	if(!cell || (stat & NOPOWER))
+	if(!cell || shorted || (stat & NOPOWER))
 		if(autoflag != 0)
 			equipment = autoset(equipment, 0)
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
 			power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
-	if((percent > AUTO_THRESHOLD_LIGHTING) || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
+	else if((percent > AUTO_THRESHOLD_LIGHTING) || longtermpower >= 0)              // Put most likely at the top so we don't check it last, effeciency 101
 		if(autoflag != 3)
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 1)
