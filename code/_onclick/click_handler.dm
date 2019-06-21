@@ -119,6 +119,13 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 
 
 
+
+
+
+
+
+
+
 /****************************
 	Full auto gunfire
 *****************************/
@@ -167,5 +174,63 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 	return TRUE
 
 /datum/click_handler/fullauto/Destroy()
+	stop_firing()//Without this it keeps firing in an infinite loop when deleted
+	.=..()
+
+
+
+
+/****************************
+	Sustained Fire
+*****************************/
+/datum/click_handler/sustained
+//Useful for ripper and maybe tracking lasers. Works similar to full auto, but:
+	//Constant firing events are not generated
+	//Firing events are generated on every mousedrag
+	var/atom/target = null
+	var/firing = FALSE
+	var/obj/item/weapon/gun/reciever //The thing we send firing signals to.
+	var/last_params
+	//Todo: Make this work with callbacks
+
+
+/datum/click_handler/sustained/proc/start_firing()
+	firing = TRUE
+	do_fire()
+
+//Next loop will notice these vars and stop shooting
+/datum/click_handler/sustained/proc/stop_firing()
+	firing = FALSE
+	target = null
+
+/datum/click_handler/sustained/proc/do_fire()
+	reciever.afterattack(target, user, FALSE, last_params)
+
+/datum/click_handler/sustained/MouseDown(object,location,control,params)
+	last_params = params
+	object = resolve_world_target(object)
+	if (object)
+		target = object
+		user.face_atom(target)
+		spawn()
+			start_firing()
+		return FALSE
+	return TRUE
+
+/datum/click_handler/sustained/MouseDrag(over_object,src_location,over_location,src_control,over_control,params)
+	last_params = params
+	src_location = resolve_world_target(src_location)
+	if (src_location && firing)
+		target = src_location //This var contains the thing the user is hovering over, oddly
+		user.face_atom(target)
+		do_fire()
+		return FALSE
+	return TRUE
+
+/datum/click_handler/sustained/MouseUp(object,location,control,params)
+	stop_firing()
+	return TRUE
+
+/datum/click_handler/sustained/Destroy()
 	stop_firing()//Without this it keeps firing in an infinite loop when deleted
 	.=..()

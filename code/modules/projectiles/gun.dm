@@ -179,6 +179,10 @@
 	if(!user.aiming)
 		user.aiming = new(user)
 
+	//Check that the gun is able to fire
+	if (!can_fire(A, user, params))
+		return
+
 	if(user && user.client && user.aiming && user.aiming.active && user.aiming.aiming_at != A)
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 		return
@@ -186,16 +190,17 @@
 	Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
-	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
+
+	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot && can_fire(A, user))
 		handle_suicide(user)
-	else if(user.a_intent == I_HURT) //point blank shooting
+	else if(user.a_intent == I_HURT && can_fire(A, user)) //point blank shooting
 		Fire(A, user, pointblank=1)
 	else
 		return ..() //Pistolwhippin'
 
 /obj/item/weapon/gun/dropped(var/mob/living/user)
 	if(istype(user))
-		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && special_check(user))
+		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && can_fire(null, user, TRUE))
 			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
 			var/list/targets = list(user)
 			targets += trange(2, src)
@@ -203,24 +208,36 @@
 	update_icon()
 	return ..()
 
+
+//Return true if firing is okay
+/obj/item/weapon/gun/proc/can_fire(atom/target, mob/living/user, clickparams, var/silent = FALSE)
+	if(world.time < next_fire_time)
+		if (!silent && !suppress_delay_warning && world.time % 3) //to prevent spam
+			user << SPAN_WARNING("[src] is not ready to fire again!")
+			return FALSE
+
+	if(target && user && (target.z != user.z))
+		return FALSE
+
+	if(safety())
+		if (!silent)
+			handle_click_empty(user)
+		return FALSE
+
+	if (!special_check(user))
+		return FALSE
+
+	return TRUE
+
+
+//Safety checks are done by the time fire is called
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
 
-	if(world.time < next_fire_time)
-		if (!suppress_delay_warning && world.time % 3) //to prevent spam
-			user << SPAN_WARNING("[src] is not ready to fire again!")
-		return
-
-	if(target.z != user.z) return
 
 	add_fingerprint(user)
 
-	if(!special_check(user))
-		return
 
-	if(safety())
-		handle_click_empty(user)
-		return
 
 
 	last_safety_check = world.time
