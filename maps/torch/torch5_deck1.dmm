@@ -5304,6 +5304,7 @@
 	dir = 8;
 	pixel_x = 21
 	},
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/foundation,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary/annex)
 "apT" = (
@@ -5738,8 +5739,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/table/standard,
-/obj/item/modular_computer/laptop/preset/records,
+/obj/machinery/psi_meter,
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "ask" = (
@@ -5944,6 +5944,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
+/obj/item/modular_computer/laptop/preset/records,
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "atm" = (
@@ -14998,13 +14999,6 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/escape_pod13/station)
-"bIS" = (
-/obj/machinery/door/airlock/medical{
-	name = "Crematorium"
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/tiled/steel_ridged,
-/area/chapel/crematorium)
 "bJb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod14,
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -16985,6 +16979,8 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
+/obj/item/weapon/storage/medical_lolli_jar,
+/obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "dTb" = (
@@ -19253,6 +19249,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/paleblue,
+/obj/machinery/psi_monitor,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary/annex)
 "gvb" = (
@@ -25680,6 +25677,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/bed/chair/office/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "nNb" = (
@@ -26538,7 +26538,6 @@
 /area/assembly/robotics)
 "oLb" = (
 /obj/structure/bed/psych,
-/obj/item/weapon/bedsheet/brown,
 /obj/random_multi/single_item/runtime,
 /turf/simulated/floor/carpet,
 /area/medical/counselor)
@@ -29878,9 +29877,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "sIg" = (
-/obj/structure/bed/chair/office/light{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
@@ -56971,7 +56967,7 @@ agr
 ahw
 flb
 ajC
-bIS
+ahw
 alO
 alO
 lEb

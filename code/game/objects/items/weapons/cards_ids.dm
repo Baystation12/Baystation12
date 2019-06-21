@@ -405,6 +405,14 @@ var/const/NO_EMAG_ACT = -50
 	..()
 	access |= get_all_station_access()
 
+/obj/item/weapon/card/id/foundation_civilian
+	name = "operant registration card"
+	desc = "A registration card in a faux-leather case. It marks the named individual as a registered, law-abiding psionic."
+	icon_state = "warrantcard_civ"
+
+/obj/item/weapon/card/id/foundation_civilian/on_update_icon()
+	return
+
 /obj/item/weapon/card/id/foundation
 	name = "\improper Foundation warrant card"
 	desc = "A warrant card in a handsome leather case."
