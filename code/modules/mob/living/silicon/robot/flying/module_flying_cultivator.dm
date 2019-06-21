@@ -20,3 +20,4 @@
 		/obj/item/device/scanner/plant,
 		/obj/item/weapon/robot_harvester
 	)
+	emag = /obj/item/weapon/melee/energy/machete
