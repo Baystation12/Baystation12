@@ -154,6 +154,9 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/civilian
 	stripe_color = COLOR_CIVIE_GREEN
 
+/obj/machinery/door/airlock/chaplain
+	stripe_color = COLOR_GRAY20
+
 /obj/machinery/door/airlock/freezer
 	name = "Freezer Airlock"
 	door_color = COLOR_WHITE
@@ -223,6 +226,9 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/glass/civilian
 	stripe_color = COLOR_CIVIE_GREEN
 
+/obj/machinery/door/airlock/glass/chaplain
+	stripe_color = COLOR_GRAY20
+
 /obj/machinery/door/airlock/external
 	airlock_type = "External"
 	name = "External Airlock"
@@ -249,7 +255,7 @@ var/list/airlock_overlays = list()
 	frequency =  1380
 	locked = 1
 
-/obj/machinery/door/airlock/external/escapepod/attackby(obj/item/C, mob/user)	
+/obj/machinery/door/airlock/external/escapepod/attackby(obj/item/C, mob/user)
 	if(p_open && !arePowerSystemsOn())
 		if(isWrench(C))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -1192,7 +1198,7 @@ About the new airlock wires panel:
 		new /obj/item/weapon/stock_parts/circuitboard/broken(src.loc)
 		operating = 0
 	else
-		if (!electronics) 
+		if (!electronics)
 			create_electronics()
 
 		electronics.dropInto(loc)
