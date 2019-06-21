@@ -33,6 +33,7 @@ Civilian
 		"Historian",
 		"Botanist",
 		"Investor" = /decl/hierarchy/outfit/job/torch/passenger/passenger/investor,
+		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/psychologist,
 		"Naturalist",
 		"Ecologist",
 		"Entertainer",

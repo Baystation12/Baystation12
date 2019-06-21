@@ -78,6 +78,13 @@
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 20, rad = 0)
 	species_restricted = list(SPECIES_IPC)
 
+/obj/item/clothing/suit/storage/toggle/labcoat/foundation
+	name = "\improper Foundation labcoat"
+	desc = "A medical labcoat with a Cuchulain Foundation crest stencilled on the back."
+	icon_state = "labcoat_foundation"
+	icon_open = "labcoat_foundation_open"
+	icon_closed = "labcoat_foundation"
+
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "\improper EXO labcoat"
 	desc = "A coat that protects against minor chemical spills. It has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organisation labcoat."

@@ -197,8 +197,7 @@
 	supervisors = "the Chief Medical Officer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	alt_titles = list(
-		"Psychologist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychologist,
-		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist
+		"Mentalist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist
 	)
 
 	allowed_branches = list(
@@ -223,3 +222,11 @@
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/camera_monitor
 	)
+	//give_psionic_implant_on_join = FALSE
+
+/datum/job/psychiatrist/New()
+	psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
+	..()
+
+/datum/job/psychiatrist/get_description_blurb()
+	return "You are the Counselor. You are psionically awakened, part of a tiny minority, and you are the first and only exposure most of the crew will have to the mentally gifted. Your main responsibility is the mental health and wellbeing of the crew. You are subordinate to the Chief Medical Officer."
