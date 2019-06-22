@@ -13,8 +13,8 @@
 /mob/living/CtrlClickOn(atom/A)
 	if(get_preference_value(/datum/client_preference/hardsuit_activation) == GLOB.PREF_CTRL_CLICK)
 		if(HardsuitClickOn(A))
-			return
-	..()
+			return FALSE
+	. = ..()
 
 /mob/living/CtrlShiftClickOn(atom/A)
 	if(get_preference_value(/datum/client_preference/hardsuit_activation) == GLOB.PREF_CTRL_SHIFT_CLICK)

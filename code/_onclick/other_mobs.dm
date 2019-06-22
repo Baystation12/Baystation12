@@ -31,12 +31,12 @@
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	return
 
-/mob/living/RangedAttack(var/atom/A, var/proximity)
+/mob/living/CtrlClickOn(var/atom/A)
 	. = ..()
 	if(!. && a_intent == I_GRAB && length(available_maneuvers))
 		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
 
-/mob/living/carbon/human/RangedAttack(var/atom/A)
+/mob/living/carbon/human/RangedAttack(var/atom/A, var/params)
 	//Climbing up open spaces
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
 		var/turf/T = get_turf(A)

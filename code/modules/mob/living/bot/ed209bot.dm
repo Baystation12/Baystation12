@@ -52,7 +52,7 @@
 /mob/living/bot/secbot/ed209/handleRangedTarget()
 	RangedAttack(target)
 
-/mob/living/bot/secbot/ed209/RangedAttack(var/atom/A)
+/mob/living/bot/secbot/ed209/RangedAttack(var/atom/A, var/params)
 	if(last_shot + shot_delay > world.time)
 		to_chat(src, "You are not ready to fire yet!")
 		return TRUE
