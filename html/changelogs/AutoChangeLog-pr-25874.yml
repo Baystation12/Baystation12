@@ -1,5 +1,0 @@
-author: "MikoMyazaki"
-delete-after: True
-changes: 
-  - rscadd: "Traitor robots always get their emag items."
-  - rscadd: "Cultivator drone now has an emag item, an energy machete."

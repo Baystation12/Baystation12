@@ -1,7 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - tweak: "The config options RUN_SPEED and WALK_SPEED are now more accurately named RUN_DELAY and WALK_DELAY. Default values have been adjusted to match the previous behavior."
-  - rscadd: "Stamina now exists. You will recover stamina fastest while well fed and lying down, but will recover it slowly so long as you aren't actively sprinting. Stamina recovery can be tweaked in config."
-  - tweak:  "Running will now consume stamina. Costs can be tweaked in the config. If you run out of stamina, you will not be able to run again until it refills."
-  - rscadd: "You can now hold shift to sprint, and release it to walk. You can set default walk/sprint options with Set Default Walk and Set Default Run."
