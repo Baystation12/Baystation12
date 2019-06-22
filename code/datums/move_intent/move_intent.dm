@@ -9,6 +9,11 @@
 	var/move_delay = 1
 	var/hud_icon_state
 
+/decl/move_intent/proc/can_be_used_by(var/mob/user)
+	if(flags & MOVE_INTENT_QUICK)
+		return user.can_sprint()
+	return TRUE
+
 /decl/move_intent/walk
 	name = "Walk"
 	flags = MOVE_INTENT_DELIBERATE
@@ -16,8 +21,7 @@
 
 /decl/move_intent/walk/Initialize()
 	. = ..()
-	move_delay = config.walk_speed + 7
-
+	move_delay = config.walk_delay
 
 /decl/move_intent/run
 	name = "Run"
@@ -26,4 +30,4 @@
 
 /decl/move_intent/run/Initialize()
 	. = ..()
-	move_delay = config.run_speed + 1
+	move_delay = config.run_delay

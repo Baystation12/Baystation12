@@ -48,6 +48,7 @@
 #define CE_SQUEAKY		 "squeaky"      // Helium voice. Squeak squeak.
 #define CE_THIRDEYE      "thirdeye"     // Gives xray vision.
 #define CE_SEDATE        "sedate"       // Applies sedation effects, i.e. paralysis, inability to use items, etc.
+#define CE_ENERGETIC     "energetic"    // Speeds up stamina recovery.
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

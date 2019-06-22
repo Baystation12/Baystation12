@@ -54,6 +54,7 @@
 		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
 	set_stat(DEAD)
+	adjust_stamina(-100)
 	reset_plane_and_layer()
 	UpdateLyingBuckledAndVerbStatus()
 

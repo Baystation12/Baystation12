@@ -8,8 +8,8 @@
 
 	var/obj/screen/using
 
-	using = new /obj/screen()
-	using.SetName("mov_intent")
+	using = new /obj/screen/movement()
+	using.SetName("movement method")
 	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = mymob.move_intent.hud_icon_state

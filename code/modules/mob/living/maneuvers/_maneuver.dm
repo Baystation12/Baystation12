@@ -16,7 +16,7 @@
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You cannot maneuver in zero gravity!"))
 		return FALSE
-	if(user.incapacitated() || user.lying || !istype(user.loc, /turf))
+	if(user.incapacitated(INCAPACITATION_DISABLED|INCAPACITATION_DISRUPTED) || user.lying || !istype(user.loc, /turf))
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You are not in position for maneuvering."))
 		return FALSE

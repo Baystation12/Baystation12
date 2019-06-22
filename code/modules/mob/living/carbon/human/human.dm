@@ -1122,6 +1122,12 @@
 			update_lang = TRUE
 			set_cultural_value(token, species.default_cultural_info[token], defer_language_update = TRUE)
 
+	default_walk_intent = null
+	default_run_intent = null
+	move_intent = null
+	move_intents = species.move_intents.Copy()
+	set_next_usable_move_intent()
+
 	if(update_lang)
 		languages.Cut()
 		default_language = null

@@ -38,6 +38,7 @@
 	var/pressure_alert = 0
 	var/temperature_alert = 0
 	var/heartbeat = 0
+	var/stamina = 100
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -76,6 +77,8 @@
 
 		handle_pain()
 
+		handle_stamina()
+
 		handle_medical_side_effects()
 
 		if(!client && !mind)
@@ -87,6 +90,27 @@
 
 	//Update our name based on whether our face is obscured/disfigured
 	SetName(get_visible_name())
+
+/mob/living/carbon/human/get_stamina()
+	return stamina
+
+/mob/living/carbon/human/adjust_stamina(var/amt)
+	var/last_stamina = stamina
+	if(stat == DEAD)
+		stamina = 0
+	else
+		stamina = Clamp(stamina + amt, 0, 100)
+		if(stamina <= 0)
+			to_chat(src, SPAN_WARNING("You are exhausted!"))
+			if(MOVING_QUICKLY(src))
+				set_moving_slowly()
+	if(last_stamina != stamina && hud_used)
+		hud_used.update_stamina()
+
+/mob/living/carbon/human/proc/handle_stamina()
+	if((world.time - last_quick_move_time) > 5 SECONDS)
+		var/mod = (lying + (nutrition / initial(nutrition))) / 2
+		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+chem_effects[CE_ENERGETIC]))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	var/old_stat = stat

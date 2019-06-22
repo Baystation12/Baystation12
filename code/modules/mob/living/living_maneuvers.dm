@@ -2,12 +2,6 @@
 	var/decl/maneuver/prepared_maneuver
 	var/list/available_maneuvers = list()
 
-/mob/living/proc/get_stamina()
-	return 100
-
-/mob/living/proc/adjust_stamina()
-	return
-
 /mob/living/begin_falling(var/lastloc, var/below)
 	if(throwing)
 		return
