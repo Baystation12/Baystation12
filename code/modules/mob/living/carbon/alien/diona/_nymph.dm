@@ -12,6 +12,7 @@
 	death_msg = "expires with a pitiful chirrup..."
 	health = 60
 	maxHealth = 60
+	available_maneuvers = list(/decl/maneuver/leap)
 
 	language = LANGUAGE_ROOTLOCAL
 	species_language = LANGUAGE_ROOTLOCAL
@@ -38,6 +39,9 @@
 	var/tmp/image/flower
 	var/tmp/image/eyes
 	var/tmp/last_glow
+
+/mob/living/carbon/alien/diona/get_jump_distance()
+	return 3
 
 /mob/living/carbon/alien/diona/Login()
 	. = ..()
