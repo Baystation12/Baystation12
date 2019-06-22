@@ -71,8 +71,7 @@
 /area/vacant/brig)
 "am" = (
 /obj/machinery/shieldwallgen{
-	anchored = 1;
-	req_access = list("ACCESS_RESEARCH")
+	anchored = 1
 	},
 /turf/simulated/floor/plating,
 /area/vacant/brig)
