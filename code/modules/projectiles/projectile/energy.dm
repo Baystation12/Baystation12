@@ -13,7 +13,7 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	damage = 5
 	agony = 20
-	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
+	life_span = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 	var/flash_range = 1
 	var/brightness = 7
@@ -84,14 +84,12 @@
 	damage_type = CLONE
 	irradiate = 40
 
-
 /obj/item/projectile/energy/dart
 	name = "dart"
 	icon_state = "toxin"
 	damage = 5
 	damage_type = TOX
 	weaken = 5
-
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
@@ -102,12 +100,10 @@
 	agony = 40
 	stutter = 10
 
-
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
 	damage = 20
 	agony = 60
-
 
 /obj/item/projectile/energy/neurotoxin
 	name = "neuro"
@@ -129,14 +125,13 @@
 	icon_state = "plasma_stun"
 	fire_sound = 'sound/weapons/blaster.ogg'
 	armor_penetration = 10
-	kill_count = 4
+	life_span = 4
 	damage = 5
 	agony = 70
 	damage_type = BURN
 	vacuum_traversal = 0
 
 /obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
-
 	to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
 	var/ear_safety = 0
 	var/mob/living/carbon/human/H = M

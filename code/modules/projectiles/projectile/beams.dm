@@ -211,7 +211,7 @@
 	sharp = 1
 	edge = 1
 	damage_type = BURN
-	kill_count = 5
+	life_span = 5
 	pass_flags = PASS_FLAG_TABLE
 	distance_falloff = 4
 
@@ -224,3 +224,35 @@
 		var/turf/simulated/mineral/M = A
 		M.GetDrilled(1)
 	. = ..()
+
+/obj/item/projectile/beam/confuseray
+	name = "disorientator ray"
+	icon_state = "beam_grass"
+	fire_sound='sound/weapons/confuseray.ogg'
+	damage = 2
+	agony = 7
+	sharp = FALSE
+	distance_falloff = 5
+	damage_flags = 0
+	damage_type = STUN
+	life_span = 3
+	penetration_modifier = 0
+	var/potency_min = 4
+	var/potency_max = 6
+
+	muzzle_type = /obj/effect/projectile/confuseray/muzzle
+	tracer_type = /obj/effect/projectile/confuseray/tracer
+	impact_type = /obj/effect/projectile/confuseray/impact
+
+/obj/item/projectile/beam/confuseray/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living))
+		var/mob/living/L = target
+		var/potency = rand(potency_min, potency_max)
+		L.confused += potency
+		L.eye_blurry += potency
+		if(L.confused >= 10)
+			L.Stun(1)
+			L.drop_l_hand()
+			L.drop_r_hand()
+		
+	return 1

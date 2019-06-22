@@ -36,7 +36,7 @@
 	var/damage_flags = DAM_BULLET
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
-	var/kill_count = 50 //This will de-increment every process(). When 0, it will delete the projectile.
+	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
 		//Effects
 	var/stun = 0
 	var/weaken = 0
@@ -311,7 +311,7 @@
 	var/first_step = 1
 
 	spawn while(src && src.loc)
-		if(kill_count-- < 1)
+		if(life_span-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
 			return
@@ -344,7 +344,7 @@
 		if(first_step)
 			muzzle_effect(effect_transform)
 			first_step = 0
-		else if(!bumped && kill_count > 0)
+		else if(!bumped && life_span > 0)
 			tracer_effect(effect_transform)
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
