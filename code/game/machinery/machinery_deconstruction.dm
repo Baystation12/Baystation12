@@ -20,6 +20,23 @@
 /obj/machinery/proc/cannot_transition_to(var/state_path, var/mob/user)
 	return MCS_CHANGE
 
+/decl/machine_construction
+	var/needs_board // Type of circuitboard expected, if any. Used in unit testing.
+
+// Run on unit testing. Should return a fail message or null.
+/decl/machine_construction/proc/fail_unit_test(obj/machinery/machine)
+	if(!state_is_valid(machine))
+		return "[log_info_line(machine)] had an invalid construction state of type [type]."
+	if(needs_board)
+		var/obj/item/weapon/stock_parts/circuitboard/C = machine.get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
+		if(!C)
+			return "Machine [log_info_line(machine)] lacked a circuitboard."
+		if(C.board_type != needs_board)
+			return "Machine [log_info_line(machine)] had a circuitboard of an unexpected type: was [C.board_type], should be [needs_board]."
+		var/design = GLOB.build_path_to_design_datum_path[C.type]
+		if(!design)
+			return "Machine [log_info_line(machine)] had a circuitboard which could not be printed."
+
 // There are many machines, so this is designed to catch errors.  This proc must either return TRUE or set the machine's construct_state to a valid one (or null).
 /decl/machine_construction/proc/validate_state(obj/machinery/machine)
 	if(!state_is_valid(machine))
@@ -57,6 +74,9 @@
 
 
 // Used to be called default_deconstruction_screwdriver -> default_deconstruction_crowbar and default_part_replacement
+
+/decl/machine_construction/default
+	needs_board = "machine"
 
 /decl/machine_construction/default/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open
@@ -120,6 +140,9 @@
 
 // Computers have only one built state.
 
+/decl/machine_construction/computer
+	needs_board = "computer"
+
 /decl/machine_construction/computer/built/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
@@ -138,6 +161,9 @@
 		return machine.part_removal(user)
 
 // Telecomms have lots of states.
+
+/decl/machine_construction/tcomms
+	needs_board = "machine"
 
 /decl/machine_construction/tcomms/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open
