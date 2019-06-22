@@ -88,6 +88,12 @@
 /obj/item/weapon/stock_parts/circuitboard/splicer
 	name = T_BOARD("disease splicer")
 	build_path = /obj/machinery/computer/diseasesplicer
+	origin_tech = list(TECH_DATA = 5, TECH_BIO = 5)
+
+/obj/item/weapon/stock_parts/circuitboard/centrifuge
+	name = T_BOARD("isolation centrifuge")
+	build_path = /obj/machinery/computer/centrifuge
+	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 
 /obj/item/weapon/stock_parts/circuitboard/helm
 	name = T_BOARD("helm control console")
@@ -100,6 +106,10 @@
 /obj/item/weapon/stock_parts/circuitboard/nav
 	name = T_BOARD("navigation console")
 	build_path = /obj/machinery/computer/ship/navigation
+
+/obj/item/weapon/stock_parts/circuitboard/sensors
+	name = T_BOARD("sensors console")
+	build_path = /obj/machinery/computer/ship/sensors
 
 /obj/item/weapon/stock_parts/circuitboard/mining_shuttle
 	name = T_BOARD("mining shuttle console")
@@ -129,3 +139,7 @@
 /obj/item/weapon/stock_parts/circuitboard/account_database
 	name = T_BOARD("accounts uplink terminal")
 	build_path = /obj/machinery/computer/account_database
+
+/obj/item/weapon/stock_parts/circuitboard/guestpass
+	name = T_BOARD("guest pass terminal")
+	build_path = /obj/machinery/computer/guestpass

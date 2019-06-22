@@ -10,7 +10,6 @@
 	icon_keyboard = "power_key"
 	icon_screen = "ai-fixer"
 	light_color = "#a97faa"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/rcon_console
 	req_access = list(access_engine)
 	var/current_tag = null
 	var/datum/nano_module/rcon/rcon

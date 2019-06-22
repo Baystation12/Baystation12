@@ -25,7 +25,6 @@
 /obj/machinery/computer/upload/ai
 	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
-	circuit = /obj/item/weapon/stock_parts/circuitboard/aiupload
 
 /obj/machinery/computer/upload/ai/attack_hand(mob/user)
 	if(..())
@@ -41,7 +40,6 @@
 /obj/machinery/computer/upload/robot
 	name = "cyborg upload console"
 	desc = "Used to upload laws to Cyborgs."
-	circuit = /obj/item/weapon/stock_parts/circuitboard/borgupload
 
 /obj/machinery/computer/upload/robot/attack_hand(mob/user)
 	if(..())

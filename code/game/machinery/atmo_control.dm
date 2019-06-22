@@ -7,7 +7,6 @@
 
 	var/frequency = 1441
 	var/datum/radio_frequency/radio_connection
-	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management
 
 	var/pressure_setting = ONE_ATMOSPHERE * 45
 	var/input_flow_setting = 200
@@ -270,7 +269,6 @@ obj/machinery/computer/air_control/Destroy()
 
 	var/cutoff_temperature = 2000
 	var/on_temperature = 1200
-	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management/injector_control
 
 /obj/machinery/computer/air_control/fuel_injection/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption) return
@@ -329,5 +327,4 @@ obj/machinery/computer/air_control/Destroy()
 /obj/machinery/computer/air_control/supermatter_core
 	icon = 'icons/obj/computer.dmi'
 	frequency = 1438
-	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core
 	out_pressure_mode = 1
