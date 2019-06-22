@@ -5,6 +5,7 @@
 	icon_state = "generator0"
 	density = 1
 	base_type = /obj/machinery/power/shield_generator
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/datum/wires/shield_generator/wires
 	var/list/field_segments = list()	// List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()	// List of shield segments that have failed and are currently regenerating.
@@ -176,7 +177,7 @@
 	return ..()
 
 /obj/machinery/power/shield_generator/attackby(obj/item/O as obj, mob/user as mob)
-	if(panel_open && isMultitool(O) || isWirecutter(O))
+	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		attack_hand(user)
 		return TRUE
 	return component_attackby(O, user)
