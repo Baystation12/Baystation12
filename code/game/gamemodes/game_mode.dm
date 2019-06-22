@@ -204,9 +204,10 @@ var/global/list/additional_antag_types = list()
 			EMajor.delay_modifier = event_delay_mod_major
 
 /datum/game_mode/proc/pre_setup()
-	if(overmap_template) //spawn relevant overmap template if defined
-		overmap_template.load_new_z()
-		report_progress("Loaded gamemode away site [overmap_template.name]!")
+	if(istype(overmap_template)) //spawn relevant overmap template if defined
+		var/datum/map_template/ruin/R = new overmap_template
+		R.load_new_z()
+		report_progress("Loaded gamemode away site [R.name]!")
 	for(var/datum/antagonist/antag in antag_templates)
 		antag.update_current_antag_max(src)
 		antag.build_candidate_list(src) //compile a list of all eligible candidates
