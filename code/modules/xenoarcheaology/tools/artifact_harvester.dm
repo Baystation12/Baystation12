@@ -69,7 +69,6 @@
 	onclose(user, "artharvester")
 
 /obj/machinery/artifact_harvester/Process()
-	..()
 	if(stat & (NOPOWER|BROKEN))
 		return
 

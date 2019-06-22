@@ -35,8 +35,7 @@
 	ignite()
 
 /obj/machinery/igniter/Process()
-	..()
-	if(powered())
+	if(!(stat & NOPOWER))
 		var/turf/location = src.loc
 		if (isturf(location))
 			location.hotspot_expose(1000,500,1)
@@ -46,9 +45,9 @@
 	use_power_oneoff(50)
 	on = !on
 	if(on)
-		START_PROCESSING(SSmachines, src)
+		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	else
-		STOP_PROCESSING(SSmachines, src)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	update_icon()
 
 // Wall mounted remote-control igniter.

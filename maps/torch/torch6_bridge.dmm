@@ -14782,7 +14782,6 @@
 /obj/machinery/power/smes/buildable{
 	capacity = 1e+007;
 	charge = 0;
-	cur_coils = 4;
 	RCon_tag = "Solar - Bridge"
 	},
 /obj/item/device/radio/intercom{

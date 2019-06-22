@@ -8,12 +8,11 @@
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 10
 	active_power_usage = 2000
+	construct_state = /decl/machine_construction/default/panel_closed
 
 obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
-	if(default_deconstruction_screwdriver(user, O))
-		return TRUE
-	if(default_deconstruction_crowbar(user, O))
-		return TRUE
+	if((. = component_attackby(O, user)))
+		return
 	// Fruits and vegetables.
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown) || istype(O, /obj/item/weapon/grown))
 		if(!user.unEquip(O))

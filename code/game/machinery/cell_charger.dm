@@ -46,7 +46,7 @@
 				return
 			charging = W
 			set_power()
-			START_PROCESSING(SSmachines, src)
+			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
 			chargelevel = -1
 		queue_icon_update()
@@ -70,7 +70,7 @@
 		user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
 		chargelevel = -1
 		set_power()
-		STOP_PROCESSING(SSmachines, src)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 /obj/machinery/cell_charger/attack_robot(mob/user)
 	if(Adjacent(user)) // Borgs can remove the cell if they are near enough

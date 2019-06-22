@@ -309,8 +309,6 @@
 
 
 /obj/machinery/power/supermatter/Process()
-	..()
-
 	var/turf/L = loc
 
 	if(isnull(L))		// We have a null turf...something is wrong, stop processing this entity.

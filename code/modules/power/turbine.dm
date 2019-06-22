@@ -63,7 +63,6 @@
 #define COMPSTARTERLOAD 2800
 
 /obj/machinery/compressor/Process()
-	..()
 	if(!starter)
 		return
 	overlays.Cut()
@@ -121,7 +120,6 @@
 #define TURBGENG 0.8
 
 /obj/machinery/power/turbine/Process()
-	..()
 	if(!compressor.starter)
 		return
 	overlays.Cut()

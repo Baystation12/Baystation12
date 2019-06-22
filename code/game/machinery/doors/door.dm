@@ -100,7 +100,6 @@
 	. = ..()
 
 /obj/machinery/door/Process()
-	..()
 	if(close_door_at && world.time >= close_door_at)
 		if(autoclose)
 			close_door_at = next_close_time()

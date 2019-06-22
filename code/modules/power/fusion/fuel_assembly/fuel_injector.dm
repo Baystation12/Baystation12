@@ -30,7 +30,6 @@
 	anchored = 1
 
 /obj/machinery/fusion_fuel_injector/Process()
-	..()
 	if(injecting)
 		if(stat & (BROKEN|NOPOWER))
 			StopInjecting()

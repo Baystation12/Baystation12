@@ -16,6 +16,7 @@
 	charge = 0
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/batteryrack
+	maximum_component_parts = list(/obj/item/weapon/stock_parts = 12)
 
 	var/max_transfer_rate = 0							// Maximal input/output rate. Determined by used capacitors when building the device.
 	var/mode = PSU_OFFLINE								// Current inputting/outputting mode
@@ -27,13 +28,14 @@
 	var/ui_tick = 0
 
 /obj/machinery/power/smes/batteryrack/RefreshParts()
-	var/capacitor_efficiency = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/capacitor_efficiency = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 	var/maxcells = 3 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
 
 	max_transfer_rate = 10000 * capacitor_efficiency // 30kw - 90kw depending on used capacitors.
 	max_cells = min(PSU_MAXCELLS, maxcells)
 	input_level = max_transfer_rate
 	output_level = max_transfer_rate
+	..()
 
 /obj/machinery/power/smes/batteryrack/Destroy()
 	for(var/obj/item/weapon/cell/C in internal_cells)
@@ -228,12 +230,8 @@
 	return ..()
 
 /obj/machinery/power/smes/batteryrack/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!..())
-		return 0
-	if(default_deconstruction_crowbar(user, W))
-		return
-	if(default_part_replacement(user, W))
-		return
+	if(..())
+		return TRUE
 	if(istype(W, /obj/item/weapon/cell)) // ID Card, try to insert it.
 		if(insert_cell(W, user))
 			to_chat(user, "You insert \the [W] into \the [src].")

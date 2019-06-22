@@ -2,6 +2,7 @@
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	density =  TRUE
 	anchored = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/turf/input_turf
 	var/turf/output_turf
@@ -22,15 +23,10 @@
 	find_console()
 	. = ..()
 
-/obj/machinery/mineral/attackby(var/obj/item/O, var/mob/user)
-	if(default_deconstruction_screwdriver(user, O))
-		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+/obj/machinery/mineral/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
 
 /obj/machinery/mineral/proc/set_input(var/_dir)
 	input_turf = _dir ? get_step(loc, _dir) : null

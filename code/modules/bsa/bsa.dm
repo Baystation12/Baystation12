@@ -5,6 +5,7 @@
 	icon = 'icons/obj/bsa.dmi'
 	density = TRUE
 	anchored = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/bsa/examine(mob/user)
 	. = ..()
@@ -12,10 +13,6 @@
 		to_chat(user, "The maintenance panel is open.")
 
 /obj/machinery/bsa/attackby(obj/item/I, mob/user)
-	if(default_deconstruction_screwdriver(user, I))
-		return
-	if(default_deconstruction_crowbar(user, I))
-		return
 	if(isWrench(I))
 		if(panel_open)
 			user.visible_message("<span class='notice'>\The [user] rotates \the [src] with \the [I].</span>", "<span class='notice'>You rotate \the [src] with \the [I].</span>")
@@ -24,7 +21,7 @@
 		else
 			to_chat(user,"<span class='notice'>The maintenance panel must be screwed open for this!</span>")
 	else
-		..()
+		return ..()
 
 /obj/machinery/bsa/front
 	name = "bluespace particle beam generator mark VI."
@@ -38,6 +35,7 @@
 		from the material deconstructor to the particle beam generator.\
 		<br>A sign on it reads: <i>EXPLOSIVE! DO NOT OVERHEAT!</i>"
 	icon_state = "middle"
+	maximum_component_parts = list(/obj/item/weapon/stock_parts = 12)
 
 /obj/machinery/bsa/back
 	name = "bluespace material deconstructor mark VI."

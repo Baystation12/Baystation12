@@ -7,6 +7,7 @@
 	anchored = 1
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -145,6 +146,8 @@
 		harvest()
 
 /obj/machinery/portable_atmospherics/hydroponics/Initialize()
+	if(!mechanical)
+		construct_state = null
 	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
@@ -153,7 +156,7 @@
 	if(mechanical)
 		connect()
 	update_icon()
-	STOP_PROCESSING(SSmachines, src)
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	START_PROCESSING(SSplants, src)
 	return INITIALIZE_HINT_LATELOAD
 
@@ -507,13 +510,8 @@
 		if(!dead)
 			health -= O.force
 			check_health()
-
-	if(mechanical)
-		if(default_deconstruction_screwdriver(user, O))
-			return
-		if(default_deconstruction_crowbar(user, O))
-			return
-		return ..()
+	else if(mechanical)
+		return component_attackby(O, user)
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(var/mob/user, var/obj/item/seeds/S)
 

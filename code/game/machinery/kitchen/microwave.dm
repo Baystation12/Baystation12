@@ -9,6 +9,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/operating = 0 // Is it on?
 	var/dirty = 0 // = {0..100} Does it need cleaning?
 	var/broken = 0 // ={0,1,2} How broken is it???
@@ -80,6 +81,8 @@
 		else
 			to_chat(user, "<span class='warning'>It's broken!</span>")
 			return 1
+	else if((. = component_attackby(O, user)))
+		return
 	else if(src.dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner) || istype(O, /obj/item/weapon/reagent_containers/glass/rag)) // If they're trying to clean it then let them
 			user.visible_message( \
@@ -132,11 +135,6 @@
 		var/obj/item/grab/G = O
 		to_chat(user, "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>")
 		return 1
-	else if(default_deconstruction_screwdriver(user, O))
-		updateUsrDialog()
-		return TRUE
-	else if(default_deconstruction_crowbar(user, O))
-		return TRUE
 	else if(isWrench(O))
 		user.visible_message( \
 			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
@@ -157,11 +155,22 @@
 /obj/machinery/microwave/components_are_accessible(path)
 	return (broken == 0) && ..()
 
+/obj/machinery/microwave/cannot_transition_to(state_path, mob/user)
+	if(broken)
+		return SPAN_NOTICE("\The [src] is too broken to do this!")
+	. = ..()
+
+/obj/machinery/microwave/state_transition(decl/machine_construction/new_state)
+	..()
+	updateUsrDialog()
+
 /obj/machinery/microwave/attack_ai(mob/user as mob)
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
 		attack_hand(user)
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
+	if((. = ..()))
+		return
 	user.set_machine(src)
 	interact(user)
 
@@ -367,12 +376,12 @@
 	var/amount = 0
 
 	// Kill + delete mobs in mob holders
-	for (var/obj/item/weapon/holder/H in contents)
+	for (var/obj/item/weapon/holder/H in (contents - component_parts))
 		for (var/mob/living/M in H.contents)
 			M.death()
 			qdel(M)
 
-	for (var/obj/O in contents)
+	for (var/obj/O in (contents - component_parts))
 		amount++
 		if (O.reagents)
 			var/reagent_type = O.reagents.get_master_reagent_type()

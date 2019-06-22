@@ -11,6 +11,7 @@
 	density = 1
 	anchored = 1
 	idle_power_usage = 5
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/on_icon						// Icon state used when cooking.
 	var/off_icon					// Icon state used when not cooking.
@@ -45,6 +46,11 @@
 /obj/machinery/cooker/components_are_accessible(path)
 	return !cooking && ..()
 
+/obj/machinery/cooker/cannot_transition_to(state_path, mob/user)
+	if(cooking)
+		return SPAN_NOTICE("Wait for \the [src] to finish first!")
+	return ..()
+
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
 	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
@@ -52,10 +58,8 @@
 		to_chat(user, "<span class='warning'>\The [src] is running!</span>")
 		return
 
-	if(default_deconstruction_screwdriver(user, I))
-		return TRUE
-	if(default_deconstruction_crowbar(user, I))
-		return TRUE
+	if((. = component_attackby(I, user)))
+		return
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
 		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
@@ -214,7 +218,7 @@
 			selected_option = choice
 			to_chat(user, "<span class='notice'>You prepare \the [src] to make \a [selected_option].</span>")
 
-	..()
+	return ..()
 
 /obj/machinery/cooker/proc/cook_mob(var/mob/living/victim, var/mob/user)
 	return

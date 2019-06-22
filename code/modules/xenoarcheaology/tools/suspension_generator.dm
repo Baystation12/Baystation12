@@ -5,6 +5,8 @@
 	icon_state = "suspension2"
 	density = 1
 	req_access = list(access_research)
+	construct_state = /decl/machine_construction/default/panel_closed
+
 	var/obj/item/weapon/cell/cell
 	var/obj/item/weapon/card/id/auth_card
 	var/locked = 1
@@ -16,7 +18,6 @@
 	src.cell = new /obj/item/weapon/cell/high(src)
 
 /obj/machinery/suspension_gen/Process()
-	..()
 	if(suspension_field)
 		cell.use(power_use * CELLRATE)
 
@@ -115,6 +116,8 @@
 		interact(user)
 
 /obj/machinery/suspension_gen/attack_hand(var/mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 	if(!panel_open)
 		interact(user)
 	else if(cell)
@@ -126,9 +129,19 @@
 		cell = null
 		to_chat(user, "<span class='info'>You remove the power cell</span>")
 
-/obj/machinery/suspension_gen/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(!locked && !suspension_field && default_deconstruction_screwdriver(user, W))
-		return
+/obj/machinery/suspension_gen/components_are_accessible(path)
+	return !locked && !suspension_field && ..()
+
+/obj/machinery/suspension_gen/cannot_transition_to(state_path)
+	if(locked)
+		return SPAN_NOTICE("Unlock \the [src] first.")
+	if(suspension_field)
+		return SPAN_NOTICE("Turn \the [src] off first.")
+	return ..()
+
+/obj/machinery/suspension_gen/attackby(obj/item/weapon/W, mob/user)
+	if(component_attackby(W, user))
+		return TRUE
 	else if(isWrench(W))
 		if(!suspension_field)
 			if(anchored)

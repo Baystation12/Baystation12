@@ -9,6 +9,8 @@
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000
 	base_type = /obj/machinery/atmospherics/binary/oxyregenerator
+	construct_state = /decl/machine_construction/default/panel_closed
+
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null
 	var/power_setting = 1 //power consumption setting, 1 through five
@@ -24,26 +26,27 @@
 	carbon_efficiency = initial(carbon_efficiency)
 	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
 	carbon_efficiency -= 0.25 * number_of_components(/obj/item/weapon/stock_parts/matter_bin)
+	carbon_efficiency = Clamp(carbon_efficiency, initial(carbon_efficiency), 5)
 
-	intake_power_efficiency = initial(carbon_efficiency)
+	intake_power_efficiency = initial(intake_power_efficiency)
 	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	intake_power_efficiency += 0.25 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+	intake_power_efficiency += 0.1 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+	intake_power_efficiency = Clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
 
-	power_rating = initial(carbon_efficiency)
+	power_rating = 1
 	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	power_rating += 0.05 * number_of_components(/obj/item/weapon/stock_parts/micro_laser)
+	power_rating = Clamp(power_rating, 0.1, 1)
+	power_rating *= initial(power_rating)
 	..()
+
 /obj/machinery/atmospherics/binary/oxyregenerator/examine(user)
 	..()
 	to_chat(user,"Its outlet port is to the [dir2text(dir)]")
 
 /obj/machinery/atmospherics/binary/oxyregenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+	if(component_attackby(O, user))
+		return TRUE
 	if(isWrench(O))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
@@ -154,7 +157,7 @@
 			phase = "filling"
 
 /obj/machinery/atmospherics/binary/oxyregenerator/on_update_icon()
-	if(!powered())
+	if(stat & NOPOWER)
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
@@ -163,6 +166,8 @@
 	ui_interact(user)
 
 /obj/machinery/atmospherics/binary/oxyregenerator/attack_hand(mob/user as mob)
+	if(..())
+		return TRUE
 	ui_interact(user)
 
 /obj/machinery/atmospherics/binary/oxyregenerator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)

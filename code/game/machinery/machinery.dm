@@ -98,6 +98,7 @@ Class Procs:
 	var/power_init_complete = FALSE // Helps with bookkeeping when initializing atoms. Don't modify.
 	var/list/component_parts           //List of component instances. Expected type: /obj/item/weapon/stock_parts
 	var/list/uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc) //List of component paths which have delayed init. Indeces = number of components.
+	var/list/maximum_component_parts = list(/obj/item/weapon/stock_parts = 8)         //null - no max. list(type part = number max).
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
@@ -109,34 +110,35 @@ Class Procs:
 	var/base_type           // For mapped buildable types, set this to be the base type actually buildable.
 
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/weapon/stock_parts
+	var/processing_flags         // What is being processed
 
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(d)
 		set_dir(d)
-	START_PROCESSING(SSmachines, src) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
+	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
 	SSmachines.machinery += src // All machines should remain in this list, always.
 	populate_parts(populate_parts)
 	RefreshParts()
 
 /obj/machinery/Destroy()
 	SSmachines.machinery -= src
-	STOP_PROCESSING(SSmachines, src)
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	. = ..()
 
-/obj/machinery/Process()
-	if((. = process_parts()))
-		return
-	return PROCESS_KILL // Only process if you need to.
-
-/obj/machinery/proc/process_parts()
-	. = processing_parts
-	if(.)
+/obj/machinery/proc/ProcessAll(var/wait)
+	if(processing_flags & MACHINERY_PROCESS_COMPONENTS)
 		for(var/thing in processing_parts)
 			var/obj/item/weapon/stock_parts/part = thing
 			if(part.machine_process(src) == PROCESS_KILL)
 				part.stop_processing()
+
+	if((processing_flags & MACHINERY_PROCESS_SELF) && Process(wait) == PROCESS_KILL)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+
+/obj/machinery/Process()
+	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)
@@ -240,13 +242,8 @@ Class Procs:
 		else if(prob(H.getBrainLoss()))
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
 			return 1
-
-	for(var/obj/item/weapon/stock_parts/part in component_parts)
-		if(!components_are_accessible(part.type))
-			continue
-		if((. = part.attack_hand(user)))
-			return
-
+	if((. = component_attack_hand(user)))
+		return
 	return ..()
 
 /obj/machinery/proc/RefreshParts()
@@ -288,54 +285,6 @@ Class Procs:
 		if(user.stunned)
 			return 1
 	return 0
-
-/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
-	if(!istype(C))
-		return 0
-	if(!panel_open)
-		return 0
-	. = dismantle()
-
-/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
-	if(!istype(S))
-		return 0
-	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	panel_open = !panel_open
-	to_chat(user, "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of \the [src].</span>")
-	update_icon()
-	return 1
-
-/obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
-	if(!istype(R))
-		return 0
-	if(panel_open)
-		for(var/obj/item/weapon/stock_parts/A in component_parts)
-			if(!A.base_type)
-				continue
-			for(var/obj/item/weapon/stock_parts/B in R.contents)
-				if(istype(B, A.base_type) && B.rating > A.rating)
-					replace_part(user, R, A, B)
-					break
-		for(var/path in uncreated_component_parts)
-			if(ispath(path, /obj/item/weapon/stock_parts))
-				var/obj/item/weapon/stock_parts/A = path
-				var/base_type = initial(A.base_type)
-				if(base_type)
-					for(var/obj/item/weapon/stock_parts/B in R.contents)
-						if(istype(B, base_type) && B.rating > initial(A.rating))
-							replace_part(user, R, A, B)
-							break					
-	else
-		display_parts(user)
-	return 1
-
-/obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
-	old_part = uninstall_component(old_part)
-	if(R)
-		R.remove_from_storage(new_part, src)
-		R.handle_item_insertion(old_part, 1)
-	install_component(new_part)
-	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)

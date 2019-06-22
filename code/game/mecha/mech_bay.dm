@@ -10,6 +10,7 @@
 	idle_power_usage = 200	// Some electronics, passive drain.
 	active_power_usage = 60 KILOWATTS // When charging
 	base_type = /obj/machinery/mech_recharger
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/obj/mecha/charging = null
 	var/base_charge_rate = 60 KILOWATTS
@@ -45,7 +46,6 @@
 		change_power_consumption(base_charge_rate, POWER_USE_ACTIVE)
 
 /obj/machinery/mech_recharger/Process()
-	..()
 	if(!charging)
 		update_use_power(POWER_USE_IDLE)
 		return
@@ -82,14 +82,6 @@
 // An ugly proc, but apparently mechs don't have maxhealth var of any kind.
 /obj/machinery/mech_recharger/proc/fully_repaired()
 	return charging && (charging.health == initial(charging.health))
-
-/obj/machinery/mech_recharger/attackby(var/obj/item/I, var/mob/user)
-	if(default_deconstruction_screwdriver(user, I))
-		return
-	if(default_deconstruction_crowbar(user, I))
-		return
-	if(default_part_replacement(user, I))
-		return
 
 /obj/machinery/mech_recharger/proc/start_charging(var/obj/mecha/M)
 	if(stat & (NOPOWER | BROKEN))

@@ -40,6 +40,16 @@ if(Datum.is_processing) {\
 	}\
 }
 
+// For SSmachines, use these instead
+
+#define START_PROCESSING_MACHINE(machine, flag)\
+	machine.processing_flags |= flag;\
+	START_PROCESSING(SSmachines, machine)
+
+#define STOP_PROCESSING_MACHINE(machine, flag)\
+	machine.processing_flags &= ~flag;\
+	if(machine.processing_flags == 0) STOP_PROCESSING(SSmachines, machine)
+
 //SubSystem flags (Please design any new flags so that the default is off, to make adding flags to subsystems easier)
 
 //subsystem does not initialize.

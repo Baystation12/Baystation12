@@ -1,6 +1,8 @@
 /obj/machinery/portable_atmospherics
 	name = "atmoalter"
 	use_power = POWER_USE_OFF
+	construct_state = /decl/machine_construction/default/panel_closed
+
 	var/datum/gas_mixture/air_contents = new
 
 	var/obj/machinery/atmospherics/portables_connector/connected_port
@@ -37,7 +39,6 @@
 		update_icon()
 
 /obj/machinery/portable_atmospherics/Process()
-	..()
 	if(!connected_port) //only react when pipe_network will ont it do it for you
 		//Allow for reactions
 		air_contents.react()
@@ -149,13 +150,6 @@
 	var/power_rating
 	var/power_losses
 	var/last_power_draw = 0
-
-/obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
-	if(default_deconstruction_screwdriver(user, I))
-		return TRUE
-	if(default_deconstruction_crowbar(user, I))
-		return TRUE
-	return ..()
 
 /obj/machinery/portable_atmospherics/powered/power_change()
 	. = ..()

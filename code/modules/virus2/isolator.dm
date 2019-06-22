@@ -105,7 +105,6 @@
 		ui.open()
 
 /obj/machinery/disease2/isolator/Process()
-	..()
 	if (isolating > 0)
 		isolating -= 1
 		if(virus2)

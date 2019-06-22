@@ -7,6 +7,7 @@
 	anchored = 1.0
 	idle_power_usage = 1
 	active_power_usage = 5
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/suppressing = FALSE
 	var/mob/living/carbon/human/victim = null
@@ -42,13 +43,6 @@
 				src.set_density(0)
 
 /obj/machinery/optable/attackby(var/obj/item/O, var/mob/user)
-	if(default_deconstruction_screwdriver(user, O))
-		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
 	if (istype(O, /obj/item/grab))
 		var/obj/item/grab/G = O
 		if(iscarbon(G.affecting) && check_table(G.affecting))
@@ -60,7 +54,14 @@
 /obj/machinery/optable/attack_ai(var/mob/user)
 	attack_hand(user)
 
+/obj/machinery/optable/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
+
 /obj/machinery/optable/attack_hand(var/mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 
 	if(MUTATION_HULK in user.mutations)
 		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
@@ -118,7 +119,6 @@
 	return 0
 
 /obj/machinery/optable/Process()
-	..()
 	check_victim()
 
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)

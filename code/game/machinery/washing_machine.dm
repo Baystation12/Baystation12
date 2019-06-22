@@ -14,6 +14,7 @@
 	density = 1
 	anchored = 1
 	interact_offline = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/state = 0
 	var/gibs_ready = 0
 	var/obj/crayon
@@ -200,11 +201,6 @@
 		to_chat(user, SPAN_WARNING("\The [src] is currently running."))
 		return TRUE
 
-	if(default_deconstruction_screwdriver(user, W))
-		update_icon()
-		return TRUE
-	if(default_deconstruction_crowbar(user, W))
-		return TRUE
 	return ..()
 
 /obj/machinery/washing_machine/attack_hand(mob/user)

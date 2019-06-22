@@ -9,6 +9,7 @@
 	clicksound = "keyboard"
 	clickvol = 30
 	base_type = /obj/machinery/autolathe
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/list/machine_recipes
 	var/list/stored_material =  list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_GLASS = 0, MATERIAL_PLASTIC = 0)
@@ -114,20 +115,25 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/autolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/autolathe/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
 
+/obj/machinery/autolathe/components_are_accessible(path)
+	return !busy && ..()
+
+/obj/machinery/autolathe/cannot_transition_to(state_path)
+	if(busy)
+		return SPAN_NOTICE("You must wait for \the [src] to finish first.")
+	return ..()
+
+/obj/machinery/autolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return
-
-	if(default_deconstruction_screwdriver(user, O))
-		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
-
+	if(component_attackby(O, user))
+		return TRUE
 	if(stat)
 		return
 
@@ -197,7 +203,9 @@
 
 	updateUsrDialog()
 
-/obj/machinery/autolathe/attack_hand(mob/user as mob)
+/obj/machinery/autolathe/attack_hand(mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 	user.set_machine(src)
 	interact(user)
 

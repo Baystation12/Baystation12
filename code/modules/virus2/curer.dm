@@ -66,8 +66,6 @@
 	return
 
 /obj/machinery/computer/curer/Process()
-	..()
-
 	if(stat & (NOPOWER|BROKEN))
 		return
 

@@ -9,6 +9,7 @@
 	anchored = 1
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
@@ -57,20 +58,19 @@
 	update_icon()
 	SetName(initial(name))
 
+/obj/machinery/bodyscanner/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
+
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
-	if(!istype(G))
-		if(default_deconstruction_screwdriver(user, G))
-			updateUsrDialog()
+	if(istype(G))
+		var/mob/M = G.affecting
+		if(!user_can_move_target_inside(M, user))
 			return
-		if(default_deconstruction_crowbar(user, G))
-			return
-		if(default_part_replacement(user, G))
-			return
-		return
-	var/mob/M = G.affecting
-	if(!user_can_move_target_inside(M, user))
-		return
-	qdel(G)
+		qdel(G)
+		return TRUE
+	return ..()
 
 /obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
 	if(!istype(user) || !istype(target))

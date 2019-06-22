@@ -3,6 +3,7 @@
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "server"
 	base_type = /obj/machinery/r_n_d/server
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/datum/research/files
 	var/health = 100
 	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.
@@ -81,14 +82,6 @@
 				removed.add_thermal_energy(heat_produced)
 
 			env.merge(removed)
-
-/obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
 
 /obj/machinery/r_n_d/server/centcom
 	name = "Central R&D Database"
@@ -204,7 +197,9 @@
 	if(. == TOPIC_REFRESH)
 		attack_hand(user)
 
-/obj/machinery/computer/rdservercontrol/attack_hand(mob/user as mob)
+/obj/machinery/computer/rdservercontrol/attack_hand(mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 	if(stat & (BROKEN|NOPOWER))
 		return
 	user.set_machine(src)

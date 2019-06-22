@@ -62,7 +62,6 @@
 	// machine process
 	// move items to the target location
 /obj/machinery/conveyor/Process()
-	..()
 	if(stat & (BROKEN | NOPOWER))
 		return
 	if(!operating)
@@ -183,7 +182,6 @@
 // if the switch changed, update the linked conveyors
 
 /obj/machinery/conveyor_switch/Process()
-	..()
 	if(!operated)
 		return
 	operated = 0

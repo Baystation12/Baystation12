@@ -49,19 +49,20 @@
 		return
 	. = ..()
 
-/obj/machinery/portable_atmospherics/cracker/Process()
-
+/obj/machinery/portable_atmospherics/cracker/power_change()
 	. = ..()
-
-	if(. == PROCESS_KILL)
-		return
-
-	if(stat & (BROKEN|NOPOWER))
-		if(use_power == POWER_USE_ACTIVE)
-			update_use_power(POWER_USE_IDLE)
+	if(. && (stat & NOPOWER))
+		update_use_power(POWER_USE_IDLE)
 		update_icon()
-		return
 
+/obj/machinery/portable_atmospherics/cracker/set_broken(new_state)
+	. = ..()
+	if(. && (stat & BROKEN))
+		update_use_power(POWER_USE_IDLE)
+		update_icon()
+
+/obj/machinery/portable_atmospherics/cracker/Process()
+	..()
 	if(use_power == POWER_USE_IDLE)
 		return
 

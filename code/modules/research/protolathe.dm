@@ -7,6 +7,7 @@
 	idle_power_usage = 30
 	active_power_usage = 5000
 	base_type = /obj/machinery/r_n_d/protolathe
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/max_material_storage = 250000
 
@@ -57,11 +58,12 @@
 		else
 			reagents.maximum_volume = T
 
-	max_material_storage = 75000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
 
-	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 6)
 	mat_efficiency = 1 - (T - 2) / 8
 	speed = T / 2
+	..()
 
 
 /obj/machinery/r_n_d/protolathe/on_update_icon()
@@ -72,19 +74,26 @@
 	else
 		icon_state = "protolathe"
 
+/obj/machinery/r_n_d/protolathe/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state) && linked_console)
+		linked_console.linked_lathe = null
+		linked_console = null
+
+/obj/machinery/r_n_d/protolathe/components_are_accessible(path)
+	return !busy && ..()
+
+/obj/machinery/r_n_d/protolathe/cannot_transition_to(state_path)
+	if(busy)
+		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
+	return ..()
+
 /obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
-	if(default_deconstruction_screwdriver(user, O))
-		if(linked_console)
-			linked_console.linked_lathe = null
-			linked_console = null
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+	if(component_attackby(O, user))
+		return TRUE
 	if(O.is_open_container())
 		return 1
 	if(panel_open)

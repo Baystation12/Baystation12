@@ -5,6 +5,7 @@
 	density = 1
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER //So it draws over mobs in the tile north of it.
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/mining/drill
 	name = "mining drill head"
@@ -38,15 +39,12 @@
 	//Upgrades
 	var/harvest_speed
 	var/capacity
-	var/obj/item/weapon/cell/cell = null
 
 	//Flags
 	var/need_update_field = 0
 	var/need_player_check = 0
 
 /obj/machinery/mining/drill/Process()
-	..()
-
 	if(need_player_check)
 		return
 
@@ -145,18 +143,13 @@
 /obj/machinery/mining/drill/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/mining/drill/attackby(obj/item/O as obj, mob/user as mob)
-	if(!active)
-		if(default_deconstruction_screwdriver(user, O))
-			return TRUE
-		if(default_deconstruction_crowbar(user, O))
-			return TRUE
-		if(default_part_replacement(user, O))
-			return TRUE
+/obj/machinery/mining/drill/cannot_transition_to(state_path)
+	if(active)
+		return SPAN_NOTICE("You must turn \the [src] off first.")
 	return ..()
 
 /obj/machinery/mining/drill/components_are_accessible(path)
-	return panel_open && !active	
+	return !active && ..()
 
 /obj/machinery/mining/drill/attack_hand(mob/user as mob)
 	check_supports()
@@ -198,9 +191,9 @@
 
 /obj/machinery/mining/drill/RefreshParts()
 	..()
-	harvest_speed = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	capacity = 200 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
-	var/charge_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor) || 1
+	harvest_speed = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser), 0, 10)
+	capacity = 200 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+	var/charge_multiplier = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0.1, 10)
 	change_power_consumption(initial(active_power_usage) / charge_multiplier, POWER_USE_ACTIVE)
 
 /obj/machinery/mining/drill/proc/check_supports()
@@ -270,16 +263,17 @@
 
 	var/obj/machinery/mining/drill/connected
 
+/obj/machinery/mining/brace/cannot_transition_to(state_path)
+	if(connected && connected.active)
+		return SPAN_NOTICE("You can't work with the brace of a running drill!")
+	return ..()
+
 /obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(connected && connected.active)
 		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
-		return
-
-	if(default_deconstruction_screwdriver(user, W))
-		return
-	if(default_deconstruction_crowbar(user, W))
-		return
-
+		return TRUE
+	if(component_attackby(W, user))
+		return TRUE
 	if(isWrench(W))
 
 		if(istype(get_turf(src), /turf/space))
@@ -327,7 +321,7 @@
 	connected.check_supports()
 	connected = null
 
-/obj/machinery/mining/brace/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
+/obj/machinery/mining/brace/dismantle()
 	if(connected)
 		disconnect()
 	..()

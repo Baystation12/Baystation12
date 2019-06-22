@@ -11,6 +11,7 @@
 		/obj/item/weapon/stock_parts/power/battery,
 		/obj/item/weapon/stock_parts/power/apc
 	)
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/mob/living/occupant = null
 	var/charging = 0
 	var/last_overlay_state
@@ -29,8 +30,6 @@
 	update_icon()
 
 /obj/machinery/recharge_station/Process()
-	..()
-
 	if(stat & (BROKEN | NOPOWER))
 		return
 
@@ -106,21 +105,18 @@
 		cell.emp_act(severity)
 	..(severity)
 
-/obj/machinery/recharge_station/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(!occupant)
-		if(default_deconstruction_screwdriver(user, O))
-			return
-		if(default_deconstruction_crowbar(user, O))
-			return
-		if(default_part_replacement(user, O))
-			return
+/obj/machinery/recharge_station/components_are_accessible(path)
+	return !occupant && ..()
 
+/obj/machinery/recharge_station/cannot_transition_to(state_path)
+	if(occupant)
+		return SPAN_NOTICE("You cannot do this while \the [src] is occupied!.")
 	return ..()
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()
-	var/man_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	var/cap_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 10)
+	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 
 	charging_power = 40000 + 40000 * cap_rating
 	restore_power_active = 10000 + 15000 * cap_rating

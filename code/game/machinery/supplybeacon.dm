@@ -100,10 +100,8 @@
 	..()
 
 /obj/machinery/power/supply_beacon/Process()
-	. = ..()
 	if(expended)
-		return
-	. = 0
+		return PROCESS_KILL
 	if(!use_power)
 		return
 	if(draw_power(500) < 500)

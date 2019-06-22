@@ -103,6 +103,14 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		GLOB.destroyed_event.unregister(part, src)
 		return part
 
+/obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
+	old_part = uninstall_component(old_part)
+	if(R)
+		R.remove_from_storage(new_part, src)
+		R.handle_item_insertion(old_part, 1)
+	install_component(new_part)
+	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
+
 /obj/machinery/proc/component_destroyed(var/obj/item/component)
 	GLOB.destroyed_event.unregister(component, src)
 	LAZYREMOVE(component_parts, component)
@@ -130,13 +138,37 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/proc/components_are_accessible(var/path)
 	return panel_open
 
+// Installation
+/obj/machinery/proc/can_add_component(var/obj/item/weapon/stock_parts/component, var/mob/user)
+	if(!components_are_accessible(component.type))
+		to_chat(user, SPAN_WARNING("The insertion point for \the [component] is inaccessible!"))
+		return FALSE
+	for(var/path in maximum_component_parts)
+		if(istype(component, path) && (number_of_components(path) == maximum_component_parts[path]))
+			to_chat(user, SPAN_WARNING("There are too many parts of this type installed in \the [src] already!"))
+			return FALSE
+	return TRUE
+
 // Hook to get updates.
 /obj/machinery/proc/component_stat_change(var/obj/item/weapon/stock_parts/part, old_stat, flag)
 
 /obj/machinery/attackby(obj/item/I, mob/user)
+	if(component_attackby(I, user))
+		return TRUE
+	return ..()
+
+/obj/machinery/proc/component_attackby(obj/item/I, mob/user)
 	for(var/obj/item/weapon/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
 		if((. = part.attackby(I, user)))
 			return
-	return ..()
+	return construct_state && construct_state.attackby(I, user, src)
+
+/obj/machinery/proc/component_attack_hand(mob/user)
+	for(var/obj/item/weapon/stock_parts/part in component_parts)
+		if(!components_are_accessible(part.type))
+			continue
+		if((. = part.attack_hand(user)))
+			return
+	return construct_state && construct_state.attack_hand(user, src)

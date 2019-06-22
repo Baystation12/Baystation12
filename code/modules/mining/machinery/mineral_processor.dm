@@ -25,7 +25,6 @@
 	. = ..()
 
 /obj/machinery/mineral/processing_unit/Process()
-	..()
 	//Grab some more ore to process this tick.
 	if(input_turf)
 		for(var/obj/item/I in recursive_content_check(input_turf, sight_check = FALSE, include_mobs = FALSE))

@@ -13,6 +13,8 @@
 	clicksound = "switch"
 	power_channel = LOCAL // Draws power from direct connections to powernets.
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
+	construct_state = /decl/machine_construction/default/panel_closed
+	stat = BROKEN         // Should be removed if the terminals initialize fully.
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -72,7 +74,6 @@
 	update_icon()
 
 /obj/machinery/power/smes/populate_parts()
-	..()
 	for(var/d in GLOB.cardinal)
 		var/obj/item/weapon/stock_parts/power/terminal/part = install_component(/obj/item/weapon/stock_parts/power/terminal, refresh_parts = FALSE)
 		part.terminal_dir = d
@@ -81,7 +82,7 @@
 			if(term.dir == turn(d, 180) && !term.master)
 				part.set_terminal(src, term)
 				term.connect_to_network()
-		
+	..()
 
 /obj/machinery/power/smes/add_avail(var/amount)
 	if(..(amount))
@@ -147,7 +148,6 @@
 		set_broken(!num_terminals)
 
 /obj/machinery/power/smes/Process()
-	..()
 	if(stat & BROKEN)	return
 	if(failure_timer)	// Disabled by gridcheck.
 		failure_timer--
@@ -224,21 +224,18 @@
 	ui_interact(user)
 
 /obj/machinery/power/smes/attack_hand(mob/user)
+	if(component_attack_hand(user))
+		return TRUE
 	add_fingerprint(user)
 	ui_interact(user)
 
-
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-
-	if(default_deconstruction_screwdriver(user, W))
+	if(component_attackby(W, user))
 		return TRUE
 
 	if (!panel_open)
-		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
+		to_chat(user, "<span class='warning'>You need to open the access hatch on \the [src] first!</span>")
 		return TRUE
-
-	if((. = ..()))
-		return
 
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/WT = W

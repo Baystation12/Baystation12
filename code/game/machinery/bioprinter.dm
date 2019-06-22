@@ -11,6 +11,7 @@
 	density = 1
 	idle_power_usage = 40
 	active_power_usage = 300
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/stored_matter = 0
 	var/max_stored_matter = 0
@@ -20,15 +21,10 @@
 	// These should be subtypes of /obj/item/organ
 	var/list/products = list()
 
-/obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
-	if(default_deconstruction_screwdriver(user, O))
+/obj/machinery/organ_printer/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
 		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
-	return ..()
 
 /obj/machinery/organ_printer/on_update_icon()
 	overlays.Cut()
@@ -47,11 +43,20 @@
 	print_delay += 10 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
 	print_delay = max(0, print_delay)
 
-	max_stored_matter = 50 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	max_stored_matter = 50 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 20)
 	. = ..()
 
-/obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
+/obj/machinery/organ_printer/components_are_accessible(path)
+	return !printing && ..()
 
+/obj/machinery/organ_printer/cannot_transition_to(path)
+	if(printing)
+		return SPAN_NOTICE("You must wait for \the [src] to finish printing first!")
+	return ..()
+
+/obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
+	if(component_attack_hand(user))
+		return TRUE
 	if(printing || (stat & (BROKEN|NOPOWER)))
 		return
 

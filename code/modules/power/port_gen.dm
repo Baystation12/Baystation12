@@ -149,9 +149,10 @@
 	var/temp_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	temp_rating += total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 
-	max_sheets = 50 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin) ** 2
+	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 5) ** 2
 
-	power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
+	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
+	..()
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
 	. = ..(user)

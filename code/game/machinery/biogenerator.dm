@@ -13,6 +13,7 @@
 	anchored = 1
 	idle_power_usage = 40
 	base_type = /obj/machinery/biogenerator
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/processing = 0
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0
@@ -63,23 +64,30 @@
 		icon_state = "biogen-work"
 	return
 
-/obj/machinery/biogenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
+/obj/machinery/biogenerator/components_are_accessible(path)
+	return !processing && ..()
+
+/obj/machinery/biogenerator/cannot_transition_to(state_path)
+	if(processing)
+		return SPAN_NOTICE("You must turn \the [src] off first.")
+	return ..()
+
+/obj/machinery/biogenerator/attackby(var/obj/item/O, var/mob/user)
+	if((. = component_attackby(O, user)))
 		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+	if(processing)
+		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
+			return TRUE
 		else if(user.unEquip(O, src))
 			beaker = O
 			state = BG_READY
 			updateUsrDialog()
-	else if(processing)
-		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
-	else if(ingredients >= capacity)
+			return TRUE
+
+	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
 	else if(istype(O, /obj/item/weapon/storage/plants))
 		var/obj/item/weapon/storage/plants/P = O
@@ -170,6 +178,8 @@
 	return TOPIC_REFRESH
 
 /obj/machinery/biogenerator/attack_hand(mob/user as mob)
+	if((. = component_attack_hand(user)))
+		return
 	if(stat & (BROKEN|NOPOWER))
 		return
 	ui_interact(user)
@@ -218,5 +228,5 @@
 
 /obj/machinery/biogenerator/RefreshParts()
 	..()
-	build_eff = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	eat_eff = total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	build_eff = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 1, 10)
+	eat_eff = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 1, 10)

@@ -139,3 +139,13 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define PART_FLAG_LAZY_INIT   1 // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
 #define PART_FLAG_QDEL        2 // Will delete on uninstall
 #define PART_FLAG_HAND_REMOVE 4 // Can be removed by hand
+
+// Machinery process flags, for use with START_PROCESSING_MACHINE
+#define MACHINERY_PROCESS_SELF       1
+#define MACHINERY_PROCESS_COMPONENTS 2
+#define MACHINERY_PROCESS_ALL        (MACHINERY_PROCESS_SELF | MACHINERY_PROCESS_COMPONENTS)
+
+// Machine construction state return values, for use with cannot_transition_to
+#define MCS_CHANGE   0 // Success
+#define MCS_CONTINUE 1 // Failed to change, silently
+#define MCS_BLOCK    2 // Failed to change, but action was performed
