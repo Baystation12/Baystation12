@@ -12,6 +12,11 @@
 	mouse_opacity = 1
 	pass_flags = PASS_FLAG_TABLE
 
+	var/mob/user
+
+	//Maximum distance, in pixels, that the blade is allowed to be from the gun/user.
+	var/max_range = 100
+
 	//The sawblade has three states
 	//STATE_STABLE: The blade is exactly on the user's cursor and is remaining still
 	//STATE_MOVING: The blade isnt on the cursor and is moving towards it
@@ -77,11 +82,20 @@
 		return
 	set_global_pixel_loc()
 
-	//Ok now we're going to decide how much we can move.
+
+	//Now first of all, we need to check if the targeted point is within range of user
+	var/vector2/user_loc = user.get_global_pixel_loc()
+	var/vector2/userdiff = pixel_click - user_loc
+	//If its farther than the max distance from the user
+	if (userdiff.Magnitude() > max_range)
+		userdiff = userdiff.ToMagnitude(max_range)//We rescale the magnitude of the diff
+		pixel_click = user_loc + userdiff //And change pixel click to the rescaled
+
+	//Ok now we're going to decide how much we can move towards the target point
 	var/vector2/diff = pixel_click - global_pixel_loc //Get a vec2 that represents the difference between our current location and the target
-	var/pixeldist = diff.Magnitude() //Lets see how far it is
+
 	//If its farther than we can go in one tick...
-	if (pixeldist > tracking_per_tick)
+	if (diff.Magnitude() > tracking_per_tick)
 		diff = diff.ToMagnitude(tracking_per_tick)//We rescale the magnitude of the diff
 
 	animate(src, pixel_x = (pixel_x + diff.x), pixel_y = (pixel_y + diff.y))

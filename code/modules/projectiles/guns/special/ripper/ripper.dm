@@ -73,6 +73,7 @@
 			projectile.forceMove(get_turf(user))
 		if (blade)
 			world << "Starting blade tick"
+			blade.user = user
 			blade.tick()
 		return TRUE
 

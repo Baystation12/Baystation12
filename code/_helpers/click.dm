@@ -28,3 +28,7 @@
 	world_loc = get_screen_pixel_click_location(params)
 	world_loc = client.ViewportToWorldPoint(world_loc)
 	return world_loc
+
+
+/atom/proc/get_global_pixel_loc()
+	return new /vector2((x*world.icon_size) + pixel_x + 16, (y*world.icon_size) + pixel_y + 16)
