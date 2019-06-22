@@ -4,7 +4,6 @@
 	name = "engine control console"
 	icon_keyboard = "tech_key"
 	icon_screen = "engines"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/engine
 	var/display_state = "status"
 
 /obj/machinery/computer/ship/engines/attack_hand(var/mob/user as mob)

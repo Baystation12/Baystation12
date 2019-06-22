@@ -8,8 +8,6 @@
 
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
 
-	circuit = /obj/item/weapon/stock_parts/circuitboard/holodeckcontrol
-
 	var/item_power_usage = 500
 
 	var/area/linkedholodeck = null

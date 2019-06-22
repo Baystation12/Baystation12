@@ -14,7 +14,6 @@
 	//computer stuff
 	density = 1
 	anchored = 1.0
-	circuit = /obj/item/weapon/stock_parts/circuitboard/powermonitor
 	var/alerting = 0
 	idle_power_usage = 300
 	active_power_usage = 300

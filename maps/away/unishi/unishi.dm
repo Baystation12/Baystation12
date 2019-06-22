@@ -97,8 +97,10 @@ obj/item/weapon/paper/prof2
 
 
 
-/obj/machinery/computer/log_printer/
+/obj/machinery/computer/log_printer
 	name = "Computer"
+	construct_state = null
+	base_type = /obj/machinery/computer/log_printer
 	var/logtype
 	var/used = 0
 

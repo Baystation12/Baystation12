@@ -1,9 +1,10 @@
-/obj/machinery/computer/arcade/
+/obj/machinery/computer/arcade
 	name = "random arcade"
 	desc = "A random arcade machine."
 	icon_state = "arcade"
 	icon_keyboard = null
 	icon_screen = "invaders"
+	var/random = TRUE
 	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops										= 2,
 							/obj/item/toy/blink															= 2,
 							/obj/item/clothing/under/syndicate/tacticool								= 2,
@@ -34,10 +35,10 @@
 	. = ..()
 	// If it's a generic arcade machine, pick a random arcade
 	// circuit board for it and make the new machine
-	if(!circuit)
-		var/choice = pick(typesof(/obj/item/weapon/stock_parts/circuitboard/arcade) - /obj/item/weapon/stock_parts/circuitboard/arcade)
-		var/obj/item/weapon/stock_parts/circuitboard/CB = new choice()
-		new CB.build_path(loc, CB)
+	if(random)
+		var/obj/item/weapon/stock_parts/circuitboard/arcade/A = pick(subtypesof(/obj/item/weapon/stock_parts/circuitboard/arcade))
+		var/path = initial(A.build_path)
+		new path(loc)
 		return INITIALIZE_HINT_QDEL
 
 /obj/machinery/computer/arcade/proc/prizevend()
@@ -81,7 +82,7 @@
 	name = "arcade machine"
 	desc = "Does not support Pinball."
 	icon_state = "arcade"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/arcade/battle
+	random = FALSE
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners don't use space drugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points
