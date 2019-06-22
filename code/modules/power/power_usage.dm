@@ -92,17 +92,20 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	. = ..()
 
 /obj/machinery/proc/update_power_on_move(atom/movable/mover, atom/old_loc, atom/new_loc)
+	area_changed(get_area(old_loc), get_area(new_loc))
+
+/obj/machinery/proc/area_changed(area/old_area, area/new_area)
+	if(old_area == new_area)
+		return
 	var/power = get_power_usage()
 	if(!power)
 		return // This is the most likely case anyway.
-	var/area/old_area = get_area(old_loc)
-	var/area/new_area = get_area(new_loc)
-	if(old_area != new_area)
-		if(old_area)
-			old_area.power_use_change(power, 0, power_channel)
-		if(new_area)
-			new_area.power_use_change(0, power, power_channel)
-		power_change() // Force check in case the old area was powered and the new one isn't or vice versa.
+
+	if(old_area)
+		old_area.power_use_change(power, 0, power_channel)
+	if(new_area)
+		new_area.power_use_change(0, power, power_channel)
+	power_change() // Force check in case the old area was powered and the new one isn't or vice versa.
 
 // The three procs below are the only allowed ways of modifying the corresponding variables.
 /obj/machinery/proc/update_use_power(new_use_power)
