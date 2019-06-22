@@ -395,8 +395,8 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_shadow(var/update_icons=1)
 	overlays_standing[SHADOW_LAYER] = null
 
-	var/turf/T = get_turf(loc)
-	if(lying || T.is_open()) // dont display shadows if we're laying down or in space
+	var/turf/T = get_turf(src)
+	if(lying || (T && T.is_open())) // dont display shadows if we're laying down or in space
 		return
 
 	var/image/shadow = overlay_image('icons/effects/effects.dmi', icon_state="mob_shadow")
