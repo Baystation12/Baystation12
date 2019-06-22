@@ -96,7 +96,7 @@
 
 /datum/psi_complexus/proc/reset()
 	aura_color = initial(aura_color)
-	ranks = base_ranks.Copy()
+	ranks = base_ranks ? base_ranks.Copy() : null
 	max_stamina = initial(max_stamina)
 	stamina = min(stamina, max_stamina)
 	cancel()
