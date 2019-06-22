@@ -1,0 +1,4 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Restores Petrov access to the Access Decrypter antagonist program."
