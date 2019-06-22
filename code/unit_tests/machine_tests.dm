@@ -44,3 +44,25 @@
 	else
 		pass("All machines with circuits had construction states.")
 	return  1
+
+/datum/unit_test/machine_construct_states_shall_be_valid
+	name = "MACHINE: All mapped machines with construct states shall meet state requirements."
+
+/datum/unit_test/machine_construct_states_shall_be_valid/start_test()
+	var/failed = list()
+	for(var/thing in SSmachines.machinery)
+		var/obj/machinery/machine = thing
+		if(failed[machine.type])
+			continue
+		if(!machine.construct_state)
+			continue
+		var/fail = machine.construct_state.fail_unit_test(machine)
+		if(fail)
+			failed[machine.type] = TRUE
+			log_bad(fail)
+
+	if(length(failed))
+		fail("One or more machines had an invalid construction state.")
+	else
+		pass("All machines had valid construction states.")
+	return  1
