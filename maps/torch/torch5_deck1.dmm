@@ -16981,6 +16981,7 @@
 	},
 /obj/item/weapon/storage/medical_lolli_jar,
 /obj/structure/table/standard,
+/obj/item/weapon/book/manual/psionics,
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "dTb" = (
@@ -19249,7 +19250,6 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/paleblue,
-/obj/machinery/psi_monitor,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary/annex)
 "gvb" = (
