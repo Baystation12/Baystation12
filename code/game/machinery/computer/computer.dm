@@ -6,7 +6,7 @@
 	anchored = 1.0
 	idle_power_usage = 300
 	active_power_usage = 300
-	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
+	construct_state = /decl/machine_construction/computer/built
 	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
@@ -24,7 +24,6 @@
 
 /obj/machinery/computer/Initialize()
 	. = ..()
-	power_change()
 	update_icon()
 
 /obj/machinery/computer/emp_act(severity)
@@ -78,30 +77,37 @@
 	text = replacetext(text, "\n", "<BR>")
 	return text
 
-/obj/machinery/computer/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I) && circuit)
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20, src))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			A.set_dir(src.dir)
-			var/obj/item/weapon/stock_parts/circuitboard/M = new circuit( A )
-			A.circuit = M
-			A.anchored = 1
-			for (var/obj/C in src)
-				C.dropInto(loc)
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				new /obj/item/weapon/material/shard( src.loc )
-				A.state = 3
-				A.icon_state = "3"
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				A.state = 4
-				A.icon_state = "4"
-			M.deconstruct(src)
-			qdel(src)
+/obj/machinery/computer/dismantle(mob/user)
+	playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+	var/obj/structure/computerframe/A = new /obj/structure/computerframe(loc)
+	A.set_dir(dir)
+	A.anchored = 1
+
+	var/obj/item/weapon/stock_parts/circuitboard/M = get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
+	if(M)
+		uninstall_component(M, refresh_parts = FALSE)
+		M.deconstruct(src)
+		M.forceMove(A)
+		A.circuit = M
+
+	for(var/I in component_parts)
+		uninstall_component(I, refresh_parts = FALSE)
+	while(LAZYLEN(uncreated_component_parts))
+		var/path = uncreated_component_parts[1]
+		uninstall_component(path, refresh_parts = FALSE)
+	for(var/obj/C in src)
+		C.dropInto(loc)
+
+	if(stat & BROKEN)
+		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
+		new /obj/item/weapon/material/shard(loc)
+		A.set_state(3)
 	else
-		..()
+		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
+		A.set_state(4)
+	qdel(src)
+
+	return TRUE
 
 /obj/machinery/computer/attack_ghost(var/mob/ghost)
 	attack_hand(ghost)
