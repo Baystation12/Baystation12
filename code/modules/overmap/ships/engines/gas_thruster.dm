@@ -49,6 +49,7 @@
 	density = 1
 	atmos_canpass = CANPASS_NEVER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/on = 1
 	var/datum/ship_engine/gas_thruster/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
@@ -137,7 +138,7 @@
 /obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine
 	name = T_BOARD("gas thruster")
 	icon_state = "mcontroller"
-	build_path = /obj/machinery/atmospherics/unary/engine/
+	build_path = /obj/machinery/atmospherics/unary/engine
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 2)
 	req_components = list(
 							/obj/item/stack/cable_coil = 2,

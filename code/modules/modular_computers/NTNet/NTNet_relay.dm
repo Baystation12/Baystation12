@@ -8,6 +8,7 @@
 	icon_state = "bus"
 	anchored = 1
 	density = 1
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/datum/ntnet/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
 	var/enabled = 1				// Set to 0 if the relay was turned off
 	var/dos_failure = 0			// Set to 1 if the relay failed due to (D)DoS attack
@@ -70,6 +71,8 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/ntnet_relay/attack_hand(var/mob/living/user)
+	if((. = component_attack_hand(user)))
+		return
 	ui_interact(user)
 
 /obj/machinery/ntnet_relay/Topic(href, href_list)
@@ -108,18 +111,4 @@
 	for(var/datum/computer_file/program/ntnet_dos/D in dos_sources)
 		D.target = null
 		D.error = "Connection to quantum relay severed"
-	..()
-
-/obj/machinery/ntnet_relay/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(isScrewdriver(W))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		panel_open = !panel_open
-		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance hatch")
-		return
-	if(isCrowbar(W))
-		if(!panel_open)
-			to_chat(user, "Open the maintenance panel first.")
-			return
-		dismantle()
-		return
 	..()

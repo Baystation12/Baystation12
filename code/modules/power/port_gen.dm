@@ -9,7 +9,6 @@
 
 	var/active = 0
 	var/power_gen = 5000
-	var/open = 0
 	var/recent_fault = 0
 	var/power_output = 1
 	atom_flags = ATOM_FLAG_CLIMBABLE
@@ -113,7 +112,6 @@
 
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
-	var/board_path = /obj/item/weapon/stock_parts/circuitboard/pacman
 
 	/*
 		These values were chosen so that the generator can run safely up to 80 kW
@@ -123,6 +121,7 @@
 	*/
 	power_gen = 20000			//Watts output per power_output level
 	working_sound = 'sound/machines/engine.ogg'
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/max_power_output = 5	//The maximum power setting without emagging.
 	var/max_safe_output = 4		// For UI use, maximal output that won't cause overheat.
 	var/time_per_sheet = 96		//fuel efficiency - how long 1 sheet lasts at power level 1
@@ -273,6 +272,14 @@
 		emagged = 1
 		return 1
 
+/obj/machinery/power/port_gen/pacman/components_are_accessible(path)
+	return !active && ..()
+
+/obj/machinery/power/port_gen/pacman/cannot_transition_to(state_path, mob/user)
+	if(active)
+		return SPAN_WARNING("You cannot do this while \the [src] is running!")
+	return ..()
+
 /obj/machinery/power/port_gen/pacman/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, sheet_path))
 		var/obj/item/stack/addstack = O
@@ -285,30 +292,22 @@
 		addstack.use(amount)
 		updateUsrDialog()
 		return
-	else if(!active)
-		if(isWrench(O))
+	if(isWrench(O) && !active)
+		if(!anchored)
+			connect_to_network()
+			to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
+		else
+			disconnect_from_network()
+			to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
 
-			if(!anchored)
-				connect_to_network()
-				to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
-			else
-				disconnect_from_network()
-				to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		anchored = !anchored
+	return component_attackby(O, user)
 
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-			anchored = !anchored
-
-		else if(isScrewdriver(O))
-			open = !open
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(open)
-				to_chat(user, "<span class='notice'>You open the access panel.</span>")
-			else
-				to_chat(user, "<span class='notice'>You close the access panel.</span>")
-		else if(isCrowbar(O) && open)
-			while ( sheets > 0 )
-				DropFuel()
-			dismantle()
+/obj/machinery/power/port_gen/pacman/dismantle()
+	while (sheets > 0)
+		DropFuel()
+	. = ..()
 
 /obj/machinery/power/port_gen/pacman/attack_hand(mob/user as mob)
 	..()
@@ -416,7 +415,6 @@
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
-	board_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super
 	var/rad_power = 2
 
 //nuclear energy is green energy!
@@ -464,7 +462,6 @@
 	time_per_sheet = 400
 	rad_power = 6
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	board_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super/potato
 	anchored = 1
 
 /obj/machinery/power/port_gen/pacman/super/potato/New()
@@ -521,7 +518,6 @@
 	time_per_sheet = 576
 	max_temperature = 800
 	temperature_gain = 90
-	board_path = /obj/item/weapon/stock_parts/circuitboard/pacman/mrs
 
 /obj/machinery/power/port_gen/pacman/mrs/explode()
 	//no special effects, but the explosion is pretty big (same as a supermatter shard).
