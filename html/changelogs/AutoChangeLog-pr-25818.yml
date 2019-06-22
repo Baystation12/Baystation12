@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Machine interaction has been reworked further. Be ready for some issues."
+  - tweak: "You may now install and remove machine components by hand on (some) machines you can build from circuits. To do this, first open the panel with the screwdriver (you may need to make sure the machine is off or other conditions are met). Then either insert a component by clicking on the machine with it, or use a wrench on the machine to remove the component."
