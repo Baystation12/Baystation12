@@ -12,8 +12,7 @@
 
 /obj/machinery/telecomms
 	var/temp = "" // output message
-	var/construct_op = 0
-
+	construct_state = /decl/machine_construction/tcomms/panel_closed
 
 /obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 
@@ -33,79 +32,32 @@
 			to_chat(usr, "This machine is already in perfect condition.")
 		return
 
+	return component_attackby(P, user)
 
-	switch(construct_op)
-		if(0)
-			if(isScrewdriver(P))
-				to_chat(user, "You unfasten the bolts.")
-				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				construct_op ++
-		if(1)
-			if(isScrewdriver(P))
-				to_chat(user, "You fasten the bolts.")
-				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				construct_op --
-			if(isWrench(P))
-				to_chat(user, "You dislodge the external plating.")
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				construct_op ++
-		if(2)
-			if(isWrench(P))
-				to_chat(user, "You secure the external plating.")
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				construct_op --
-			if(isWirecutter(P))
-				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-				to_chat(user, "You remove the cables.")
-				construct_op ++
-				var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
-				A.amount = 5
-				set_broken(TRUE, TRUE) // the machine's been borked!
-		if(3)
-			if(isCoil(P))
-				var/obj/item/stack/cable_coil/A = P
-				if (A.use(5))
-					to_chat(user, "<span class='notice'>You insert the cables.</span>")
-					construct_op--
-					set_broken(FALSE, TRUE) // the machine's not borked anymore!
-				else
-					to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")
-			if(isCrowbar(P))
-				to_chat(user, "You begin prying out the circuit board other components...")
-				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				if(do_after(user,60, src))
-					to_chat(user, "You finish prying out the components.")
+/obj/machinery/telecomms/cannot_transition_to(state_path, mob/user)
+	. = ..()
+	if(. != MCS_CHANGE)
+		return
 
-					// Drop all the component stuff
-					if(contents.len > 0)
-						for(var/obj/x in src)
-							x.dropInto(loc)
-					else
+	if(state_path == /decl/machine_construction/default/deconstructed)
+		to_chat(user, "You begin prying out the circuit board other components...")
+		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+		if(do_after(user,60, src))
+			to_chat(user, "You finish prying out the components.")
+			return
+		return MCS_BLOCK
 
-						// If the machine wasn't made during runtime, probably doesn't have components:
-						// manually find the components and drop them!
-						var/obj/item/weapon/stock_parts/circuitboard/C = new circuitboard
-						for(var/I in C.req_components)
-							for(var/i = 1, i <= C.req_components[I], i++)
-								var/obj/item/s = new I
-								s.dropInto(user.loc)
-								if(istype(s, /obj/item/stack/cable_coil))
-									var/obj/item/stack/cable_coil/A = s
-									A.amount = 1
-
-						// Drop a circuit board too
-						C.dropInto(user.loc)
-
-					// Create a machine frame and delete the current machine
-					var/obj/machinery/constructable_frame/machine_frame/F = new
-					F.dropInto(loc)
-					qdel(src)
-
+/obj/machinery/telecomms/dismantle()
+	for(var/obj/x in (contents - component_parts))
+		x.dropInto(loc)
+	. = ..()	
 
 /obj/machinery/telecomms/attack_ai(var/mob/user as mob)
 	attack_hand(user)
 
 /obj/machinery/telecomms/attack_hand(var/mob/user as mob)
+	if((. = component_attack_hand(user)))
+		return
 
 	// You need a multitool to use this, or be silicon
 	if(!issilicon(user))
