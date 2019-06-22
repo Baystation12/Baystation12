@@ -14,6 +14,15 @@
 		return user.can_sprint()
 	return TRUE
 
+/decl/move_intent/creep
+	name = "Creep"
+	flags = MOVE_INTENT_DELIBERATE
+	hud_icon_state = "creeping"
+
+/decl/move_intent/creep/Initialize()
+	. = ..()
+	move_delay = config.creep_delay
+
 /decl/move_intent/walk
 	name = "Walk"
 	flags = MOVE_INTENT_DELIBERATE
