@@ -172,6 +172,7 @@
 	icon_state = "centrifuge"
 	anchored = 1
 	density = 1
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/processing = 0
 	var/honey = 0
