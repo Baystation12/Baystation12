@@ -1,7 +1,7 @@
-datum/unit_test/machines_shall_obey_part_maximum
+/datum/unit_test/machines_shall_obey_part_maximum
 	name = "MACHINE: All mapped machines shall respect their own maximum component limit."
 
-datum/unit_test/machines_shall_obey_part_maximum/start_test()
+/datum/unit_test/machines_shall_obey_part_maximum/start_test()
 	var/failed = list()
 	var/passed = list()
 	for(var/thing in SSmachines.machinery)
@@ -16,7 +16,31 @@ datum/unit_test/machines_shall_obey_part_maximum/start_test()
 			passed[machine.type] = TRUE
 
 	if(length(failed))
-		fail("One or more machine had too many components.")
+		fail("One or more machines had too many components.")
 	else
 		pass("All machines respected component limits.")
+	return  1
+
+/datum/unit_test/machines_with_circuits_shall_have_construct_states
+	name = "MACHINE: All mapped machines with corresponding circuits shall use construct states."
+
+/datum/unit_test/machines_with_circuits_shall_have_construct_states/start_test()
+	var/failed = list()
+	var/passed = list()
+	for(var/thing in SSmachines.machinery)
+		var/obj/machinery/machine = thing
+		if(passed[machine.type] || failed[machine.type])
+			continue
+		var/path = machine.base_type || machine.type
+		var/circuit_type = GLOB.machine_path_to_circuit_type[path]
+		if(circuit_type && !machine.construct_state)
+			failed[machine.type] = TRUE
+			log_bad("[log_info_line(machine)] had an assotiated circuit of type [circuit_type] but no construction state.")
+		else
+			passed[machine.type] = TRUE
+
+	if(length(failed))
+		fail("One or more machines lacked a construction state despite having a circuit.")
+	else
+		pass("All machines with circuits had construction states.")
 	return  1
