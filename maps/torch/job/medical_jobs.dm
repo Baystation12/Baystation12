@@ -222,7 +222,7 @@
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/camera_monitor
 	)
-	//give_psionic_implant_on_join = FALSE
+	give_psionic_implant_on_join = FALSE
 
 /datum/job/psychiatrist/New()
 	psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
