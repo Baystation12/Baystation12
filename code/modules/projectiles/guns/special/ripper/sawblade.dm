@@ -14,8 +14,7 @@
 
 	var/mob/user
 
-	//Maximum distance, in pixels, that the blade is allowed to be from the gun/user.
-	var/max_range = 100
+
 
 	//The sawblade has three states
 	//STATE_STABLE: The blade is exactly on the user's cursor and is remaining still
@@ -57,11 +56,6 @@
 	damage = dps * tick_interval
 	tracking_per_tick = tracking_speed * tick_interval
 
-//Caches our global pixel location. Used just before we move
-/obj/item/projectile/sawblade/proc/set_global_pixel_loc()
-	//The extra -16 offset here accounts for the graphics being in the centre of the sprite when at 0 pixel offsets
-	global_pixel_loc.x	=	(x*world.icon_size) + pixel_x + 16
-	global_pixel_loc.y	=	(y*world.icon_size) + pixel_y + 16
 
 
 /obj/item/projectile/sawblade/proc/tick()
@@ -80,16 +74,10 @@
 /obj/item/projectile/sawblade/proc/track_cursor()
 	if (status != STATE_MOVING)
 		return
-	set_global_pixel_loc()
+	global_pixel_loc = get_global_pixel_loc()
 
 
-	//Now first of all, we need to check if the targeted point is within range of user
-	var/vector2/user_loc = user.get_global_pixel_loc()
-	var/vector2/userdiff = pixel_click - user_loc
-	//If its farther than the max distance from the user
-	if (userdiff.Magnitude() > max_range)
-		userdiff = userdiff.ToMagnitude(max_range)//We rescale the magnitude of the diff
-		pixel_click = user_loc + userdiff //And change pixel click to the rescaled
+
 
 	//Ok now we're going to decide how much we can move towards the target point
 	var/vector2/diff = pixel_click - global_pixel_loc //Get a vec2 that represents the difference between our current location and the target

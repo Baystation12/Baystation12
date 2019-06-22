@@ -16,20 +16,42 @@
 		)
 
 
+	//Maximum distance, in pixels, that the blade is allowed to be from the gun/user.
+	var/max_range = 100
+
 	//Holds a reference to the currently projected sawblade we have out, if any.
 	var/obj/item/projectile/sawblade/blade = null
 
+	//The gravity tether, a visual laser which connects gun and blade
+	var/obj/effect/projectile/sustained/tether = null
 
 //Sawblade statuses
 #define STATE_STABLE	0
 #define STATE_MOVING	1
 #define STATE_GRINDING	2
 
+/client/proc/spawn_ripper()
+	set category = "Debug"
+	set name = "Spawn Ripper"
+
+	new /obj/item/weapon/gun/projectile/ripper(mob.loc)
 
 //Whenever afterattack is called on the ripper...
 /obj/item/weapon/gun/projectile/ripper/afterattack(atom/A, mob/living/user, adjacent, params, var/vector2/global_clickpoint)
+
+
 	world << "Afterattack called [global_clickpoint.x] [global_clickpoint.y]"
 	if (blade && global_clickpoint)
+		//Now first of all, we need to check if the targeted point is within range of user
+		var/vector2/user_loc = user.get_global_pixel_loc()
+		var/vector2/userdiff = global_clickpoint - user_loc
+		//If its farther than the max distance from the user
+		if (userdiff.Magnitude() > max_range)
+			userdiff = userdiff.ToMagnitude(max_range)//We rescale the magnitude of the diff
+			global_clickpoint = user_loc + userdiff //And change clickpoint to the rescaled
+
+		tether.set_ends(user_loc, global_clickpoint) //The tether points to the cursor, the blade catches up with it
+
 		//If we already have a blade out then we'll update its location
 		blade.pixel_click = global_clickpoint
 		blade.status = STATE_MOVING //And set it to moving state so that it attempts to go towards the new destination
@@ -71,10 +93,15 @@
 		else
 			//If you're standing up against a wall, you saw yourself, ya dumb idiot
 			projectile.forceMove(get_turf(user))
-		if (blade)
-			world << "Starting blade tick"
-			blade.user = user
-			blade.tick()
+
+		//At this point we also spawn the gravity tether beam
+		tether = new(get_turf(user))
+		tether.set_ends(user.get_global_pixel_loc(), blade.get_global_pixel_loc())
+
+		//And start the blade ticking
+		world << "Starting blade tick"
+		blade.user = user
+		blade.tick()
 		return TRUE
 
 	//If we're not in remote mode, we return parent, which will launch the projectile as normal
