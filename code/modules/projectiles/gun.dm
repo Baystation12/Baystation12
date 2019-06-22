@@ -117,6 +117,11 @@
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
+//Called when the user moves while holding this gun.
+//Must be manually registered to the moved event if your gun needs it
+/obj/item/weapon/gun/proc/user_moved()
+	return
+
 /obj/item/weapon/gun/update_twohanding()
 	if(one_hand_penalty)
 		update_icon() // In case item_state is set somewhere else.
@@ -530,6 +535,9 @@
 	playsound(loc, selector_sound, 50, 1)
 	return new_mode
 
+/obj/item/weapon/gun/proc/get_firemode()
+	return firemodes[sel_mode]
+
 /obj/item/weapon/gun/proc/get_next_firemode()
 	if(firemodes.len <= 1)
 		return null
@@ -601,4 +609,9 @@
 
 /obj/item/weapon/gun/swapped_to()
 	.=..()
+	update_firemode()
+
+
+//Used by sustained weapons. Call to make the gun stop doing its thing
+/obj/item/weapon/gun/proc/stop_firing()
 	update_firemode()

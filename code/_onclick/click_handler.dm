@@ -201,12 +201,18 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 
 /datum/click_handler/sustained/proc/start_firing()
 	firing = TRUE
+	if (reciever && istype(reciever.loc, /mob))
+		GLOB.moved_event.register(reciever.loc, reciever, /obj/item/weapon/gun/proc/user_moved)
 	do_fire()
 
 //Next loop will notice these vars and stop shooting
 /datum/click_handler/sustained/proc/stop_firing()
-	firing = FALSE
-	target = null
+	if (firing)
+		if (reciever && istype(reciever.loc, /mob))
+			GLOB.moved_event.unregister(reciever.loc, reciever, /obj/item/weapon/gun/proc/user_moved)
+		firing = FALSE
+		target = null
+		reciever.stop_firing()
 
 /datum/click_handler/sustained/proc/do_fire()
 	reciever.afterattack(target, user, FALSE, last_params, get_global_pixel_click_location(last_params, user ? user.client : new /vector2(0,0)))

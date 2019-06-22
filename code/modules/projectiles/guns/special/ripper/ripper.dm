@@ -25,12 +25,14 @@
 	//The gravity tether, a visual laser which connects gun and blade
 	var/obj/effect/projectile/sustained/tether = null
 
+	var/vector2/last_clickpoint
+
 //Sawblade statuses
 #define STATE_STABLE	0
 #define STATE_MOVING	1
 #define STATE_GRINDING	2
 
-/client/proc/spawn_ripper()
+/client/verb/spawn_ripper()
 	set category = "Debug"
 	set name = "Spawn Ripper"
 
@@ -40,25 +42,50 @@
 /obj/item/weapon/gun/projectile/ripper/afterattack(atom/A, mob/living/user, adjacent, params, var/vector2/global_clickpoint)
 
 
-	world << "Afterattack called [global_clickpoint.x] [global_clickpoint.y]"
 	if (blade && global_clickpoint)
+		last_clickpoint = global_clickpoint
 		//Now first of all, we need to check if the targeted point is within range of user
 		var/vector2/user_loc = user.get_global_pixel_loc()
-		var/vector2/userdiff = global_clickpoint - user_loc
+		var/vector2/userdiff = last_clickpoint - user_loc
 		//If its farther than the max distance from the user
 		if (userdiff.Magnitude() > max_range)
 			userdiff = userdiff.ToMagnitude(max_range)//We rescale the magnitude of the diff
-			global_clickpoint = user_loc + userdiff //And change clickpoint to the rescaled
+			last_clickpoint = user_loc + userdiff //And change clickpoint to the rescaled
 
-		tether.set_ends(user_loc, global_clickpoint) //The tether points to the cursor, the blade catches up with it
+		tether.set_ends(user_loc, last_clickpoint) //The tether points to the cursor, the blade catches up with it
 
 		//If we already have a blade out then we'll update its location
-		blade.pixel_click = global_clickpoint
+		blade.pixel_click = last_clickpoint
 		blade.status = STATE_MOVING //And set it to moving state so that it attempts to go towards the new destination
 		return
 
 	//If there's no blade out, then call parent which will launch a new blade
 	return ..()
+
+/obj/item/weapon/gun/projectile/ripper/user_moved()
+	update_tether()
+
+/obj/item/weapon/gun/projectile/ripper/proc/update_tether()
+	if (blade && tether)
+		var/mob/living/user = loc
+		if (istype(user))
+			var/vector2/user_loc = user.get_global_pixel_loc()
+			tether.set_ends(user_loc, last_clickpoint) //The tether points to the cursor, the blade catches up with it
+
+
+
+//Called either when the sawblade breaks, or the user releases the fire button
+/obj/item/weapon/gun/projectile/ripper/stop_firing()
+	if (blade && !QDELETED(blade))
+		blade.drop() 	//The sawblade will drop on the ground where it hovers, possibly in a reuseable state, possibly not
+		blade = null	//Lose our reference to it anyways, its no longer our concern
+	QDEL_NULL(tether) //The tether belongs to us, clean it up
+	var/datum/firemode/remote/R = get_firemode()
+	if (R && R.CH)
+		R.CH.firing = FALSE
+	..()
+
+
 
 //Don't fire another blade if there's one out
 /obj/item/weapon/gun/projectile/ripper/can_fire(atom/target, mob/living/user, clickparams, var/silent = FALSE)
@@ -68,15 +95,6 @@
 	return ..()
 
 
-//When we fire a blade,grab a reference to it and start controlling it
-/obj/item/weapon/gun/projectile/ripper/consume_next_projectile(user)
-	.=..()
-
-	//Only if we're in remote control mode. We don't care about blades if we're launching them
-	var/datum/firemode/current_mode = firemodes[sel_mode]
-	if (istype(current_mode, /datum/firemode/remote))
-		if (.)
-			blade = .
 
 
 //This is the proc where the projectile is launched from the gun. We override it here because we don't want the blade to necessarily go flying
@@ -86,22 +104,24 @@
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	if (istype(current_mode, /datum/firemode/remote))
 		var/turf/T = get_step(user, user.dir)
-
+		blade = projectile
 		//If theres a clear space infront of you, it goes there
 		if (turf_clear(T))
-			projectile.forceMove(T)
+			blade.forceMove(T)
 		else
 			//If you're standing up against a wall, you saw yourself, ya dumb idiot
-			projectile.forceMove(get_turf(user))
+			blade.forceMove(get_turf(user))
+
+		blade.user = user
+		//Tell the blade that it was launched in the special remote control mode
+		blade.control_launched(src)
 
 		//At this point we also spawn the gravity tether beam
 		tether = new(get_turf(user))
 		tether.set_ends(user.get_global_pixel_loc(), blade.get_global_pixel_loc())
 
 		//And start the blade ticking
-		world << "Starting blade tick"
-		blade.user = user
-		blade.tick()
+
 		return TRUE
 
 	//If we're not in remote mode, we return parent, which will launch the projectile as normal
@@ -146,7 +166,6 @@
 		else
 			enable = FALSE
 
-	world << "updating firemode. Enable: [enable]"
 	//Ok now lets set the desired state
 	if (!enable)
 		if (!CH)

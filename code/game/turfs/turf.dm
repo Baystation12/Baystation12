@@ -77,6 +77,43 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	return ..()
 
 
+/turf/proc/can_enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
+
+	..()
+
+	if (!mover || !isturf(mover.loc) || isobserver(mover))
+		return FALSE
+
+	//First, check objects to block exit that are not on the border
+	for(var/obj/obstacle in mover.loc)
+		if(!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != obstacle) && (forget != obstacle))
+			if(!obstacle.CheckExit(mover, src))
+				return obstacle
+
+	//Now, check objects to block exit that are on the border
+	for(var/obj/border_obstacle in mover.loc)
+		if((border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != border_obstacle) && (forget != border_obstacle))
+			if(!border_obstacle.CheckExit(mover, src))
+				return border_obstacle
+
+	//Next, check objects to block entry that are on the border
+	for(var/obj/border_obstacle in src)
+		if(border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER)
+			if(!border_obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != border_obstacle))
+				return border_obstacle
+
+	//Then, check the turf itself
+	if (!src.CanPass(mover, src))
+		return src
+
+	//Finally, check objects/mobs to block entry that are not on the border
+	for(var/atom/movable/obstacle in src)
+		if(!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
+				return obstacle
+	return FALSE //Nothing found to block so return success!
+
+
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 
 	..()

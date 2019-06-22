@@ -176,23 +176,23 @@
 //There is some special code here
 /obj/effect/projectile/sustained
 	light_outer_range = 5
-	light_max_bright = 2
+	light_max_bright = 1
 	light_color = COLOR_DEEP_SKY_BLUE
 	icon_state = "gravity_tether"
-	glide_size = INFINITY //We dont want this to do any gliding
 
 	//Start and endpoints are in world pixel coordinates
 	var/vector2/start
 	var/vector2/end
 	var/vector2/offset = new /vector2(16,16)
+	animate_movement = 0
 
 //Takes start and endpoint as vector2s of global pixel coords
 /obj/effect/projectile/sustained/proc/set_ends(var/vector2/_start = null, var/vector2/_end = null)
 	if (_start != start)
-		start = _start + offset
+		start = _start// + offset
 
 	if (_end != end)
-		end = _end + offset
+		end = _end// + offset
 
 
 
