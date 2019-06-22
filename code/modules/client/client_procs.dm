@@ -257,7 +257,7 @@
 			if (ban["scope"] == scope)
 				return TRUE
 
-/client/proc/is_rank_banned(var/datum/mil_rank/rank, var/datum/mil_branch/branch, var/client/client)
+/client/proc/is_rank_banned(var/datum/mil_rank/rank, var/datum/mil_branch/branch)
 	. = FALSE
 	var/grade = rank.grade()
 	if (!grade)
