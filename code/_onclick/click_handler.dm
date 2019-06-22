@@ -26,6 +26,8 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 /datum/click_handler/proc/Exit()
 	return
 
+
+
 /datum/click_handler/proc/OnMobLogout()
 	user.RemoveClickHandler(src)
 
@@ -38,10 +40,13 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 /datum/click_handler/proc/MouseDown(object,location,control,params)
 	return TRUE
 
-/datum/click_handler/proc/MouseDrag(over_object,src_location,over_location,src_control,over_control,params)
+/datum/click_handler/proc/MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params)
 	return TRUE
 
 /datum/click_handler/proc/MouseUp(object,location,control,params)
+	return TRUE
+
+/datum/click_handler/proc/MouseMove(src_object,over_object,src_location,over_location,src_control,over_control,params)
 	return TRUE
 
 
@@ -161,7 +166,7 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 		return FALSE
 	return TRUE
 
-/datum/click_handler/fullauto/MouseDrag(over_object,src_location,over_location,src_control,over_control,params)
+/datum/click_handler/fullauto/MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params)
 	src_location = resolve_world_target(src_location)
 	if (src_location && firing)
 		target = src_location //This var contains the thing the user is hovering over, oddly
@@ -204,9 +209,10 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 	target = null
 
 /datum/click_handler/sustained/proc/do_fire()
-	reciever.afterattack(target, user, FALSE, last_params)
+	reciever.afterattack(target, user, FALSE, last_params, get_global_pixel_click_location(last_params, user ? user.client : new /vector2(0,0)))
 
 /datum/click_handler/sustained/MouseDown(object,location,control,params)
+	world << "Sustained MouseDown [params]"
 	last_params = params
 	object = resolve_world_target(object)
 	if (object)
@@ -217,7 +223,7 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 		return FALSE
 	return TRUE
 
-/datum/click_handler/sustained/MouseDrag(over_object,src_location,over_location,src_control,over_control,params)
+/datum/click_handler/sustained/MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params)
 	last_params = params
 	src_location = resolve_world_target(src_location)
 	if (src_location && firing)
@@ -227,7 +233,19 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 		return FALSE
 	return TRUE
 
+/datum/click_handler/sustained/MouseMove(src_object,over_object,src_location,over_location,src_control,over_control,params)
+	last_params = params
+	src_location = resolve_world_target(src_location)
+	if (src_location && firing)
+		target = src_location //This var contains the thing the user is hovering over, oddly
+		user.face_atom(target)
+		do_fire()
+		return FALSE
+	return TRUE
+
+
 /datum/click_handler/sustained/MouseUp(object,location,control,params)
+	world << "Sustained MouseUp [params]"
 	stop_firing()
 	return TRUE
 

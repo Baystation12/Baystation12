@@ -27,15 +27,27 @@
 			return
 	.=..()
 
-/client/MouseDrag(over_object,src_location,over_location,src_control,over_control,params)
+/client/MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params)
 	var/datum/click_handler/CH
 	if (mob)
 		CH = mob.GetClickHandler()
 
 	if (CH)
-		if (!CH.MouseDrag(over_object,src_location,over_location,src_control,over_control,params))
+		if (!CH.MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params) )
 			return
 	.=..()
+
+/client/MouseMove(src_object,over_object,src_location,over_location,src_control,over_control,params)
+	var/datum/click_handler/CH
+	if (mob)
+		CH = mob.GetClickHandler()
+
+	if (CH)
+		if (!CH.MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params) )
+			return
+	.=..()
+
+
 
 
 

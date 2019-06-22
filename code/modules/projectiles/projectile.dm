@@ -140,10 +140,6 @@
 		pixel_click.y = between(0, pixel_click.y + rand(-radius, radius), world.icon_size)
 
 
-/obj/item/projectile/proc/set_global_clickpoint(var/params)
-	var/list/location = get_world_pixel_click_location(params)
-	pixel_click.x = location[1]
-	pixel_click.y = location[2]
 
 //called to launch a projectile
 /obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)

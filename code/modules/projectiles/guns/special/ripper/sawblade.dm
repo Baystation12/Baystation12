@@ -54,12 +54,15 @@
 
 //Caches our global pixel location. Used just before we move
 /obj/item/projectile/sawblade/proc/set_global_pixel_loc()
-	global_pixel_loc.x	=	x*world.icon_size + pixel_x
-	global_pixel_loc.y	=	y*world.icon_size + pixel_y
+	//The extra -16 offset here accounts for the graphics being in the centre of the sprite when at 0 pixel offsets
+	global_pixel_loc.x	=	(x*world.icon_size) + pixel_x + 16
+	global_pixel_loc.y	=	(y*world.icon_size) + pixel_y + 16
 
 
 /obj/item/projectile/sawblade/proc/tick()
 	timer_handle = null //This has been successfully called, that handle is no use now
+	if (!loc || QDELETED(src))
+		return
 
 	track_cursor()
 	damage_turf()
@@ -72,12 +75,11 @@
 /obj/item/projectile/sawblade/proc/track_cursor()
 	if (status != STATE_MOVING)
 		return
-
 	set_global_pixel_loc()
+
 	//Ok now we're going to decide how much we can move.
 	var/vector2/diff = pixel_click - global_pixel_loc //Get a vec2 that represents the difference between our current location and the target
 	var/pixeldist = diff.Magnitude() //Lets see how far it is
-
 	//If its farther than we can go in one tick...
 	if (pixeldist > tracking_per_tick)
 		diff = diff.ToMagnitude(tracking_per_tick)//We rescale the magnitude of the diff
@@ -95,6 +97,7 @@
 
 /obj/item/projectile/sawblade/proc/updatehealth()
 	if (health <= 0)
+		world << "Sawblade ran out of health, deleting"
 		qdel(src)
 
 //Override this so it doesn't delete itself when touching anything

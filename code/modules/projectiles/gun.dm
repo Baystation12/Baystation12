@@ -173,7 +173,7 @@
 	for(var/obj/O in contents)
 		O.emp_act(severity)
 
-/obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
+/obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params, var/vector2/world_pixel_click)
 	if(adjacent) return //A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)

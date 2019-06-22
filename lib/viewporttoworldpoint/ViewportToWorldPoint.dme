@@ -1,0 +1,24 @@
+// DM Environment file for ViewportToWorldPoint.dme.
+// All manual changes should be made outside the BEGIN_ and END_ blocks.
+// New source code should be placed in .dm files: choose File/New --> Code File.
+
+// BEGIN_INTERNALS
+/*
+FILE: 
+AUTO_FILE_DIR: ON
+*/
+// END_INTERNALS
+
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+
+// BEGIN_PREFERENCES
+#define DEBUG
+// END_PREFERENCES
+
+// BEGIN_INCLUDE
+#include <kaiochao\vector2\Vector2.dme>
+#include "ViewportToWorldPoint.dm"
+// END_INCLUDE
+

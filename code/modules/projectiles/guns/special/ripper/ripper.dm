@@ -27,11 +27,11 @@
 
 
 //Whenever afterattack is called on the ripper...
-/obj/item/weapon/gun/projectile/ripper/afterattack(atom/A, mob/living/user, adjacent, params)
-	world << "Afterattack called"
-	if (blade)
+/obj/item/weapon/gun/projectile/ripper/afterattack(atom/A, mob/living/user, adjacent, params, var/vector2/global_clickpoint)
+	world << "Afterattack called [global_clickpoint.x] [global_clickpoint.y]"
+	if (blade && global_clickpoint)
 		//If we already have a blade out then we'll update its location
-		blade.set_global_clickpoint(params)
+		blade.pixel_click = global_clickpoint
 		blade.status = STATE_MOVING //And set it to moving state so that it attempts to go towards the new destination
 		return
 
@@ -78,6 +78,9 @@
 
 	//If we're not in remote mode, we return parent, which will launch the projectile as normal
 	return ..()
+
+
+
 
 
 
