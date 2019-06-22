@@ -56,7 +56,7 @@
 	#include "items/clothing/terran-head.dm"
 	#include "items/clothing/terran-suit.dm"
 	#include "items/clothing/terran-under.dm"
-	
+
 	#include "items/weapon/storage/wallets.dm"
 
 	#include "job/torch_access.dm"
@@ -142,6 +142,11 @@
 	#include "../away/unishi/unishi.dm"
 	#include "../away/voxship/voxship.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
+
+	#include "../gamemode/heist/heist_base.dm"
+	#include "../gamemode/ninja/ninja_base.dm"
+	#include "../gamemode/nuclear/nuclear_base.dm"
+	#include "../gamemode/wizard/wizard_base.dm"
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 

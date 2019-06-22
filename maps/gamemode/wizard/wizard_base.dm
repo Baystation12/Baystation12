@@ -22,7 +22,7 @@
 /obj/effect/shuttle_landmark/wizard/nav2
 	name = "Ion Cloud Navpoint #2"
 	landmark_tag = "nav_wiz_2"
-	
+
 /obj/item/weapon/spellbook/OnTopic(var/mob/living/carbon/human/user, href_list)
 	if(href_list["reset"] && !(spellbook.book_flags & NOREVERT))
 		var/area/wizard_station/A = get_area(user)

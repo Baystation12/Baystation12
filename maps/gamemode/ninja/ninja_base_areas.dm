@@ -1,5 +1,5 @@
 /area/ninja_dojo
-	name = "\improper Ninja Base"
+	name = "ninja base"
 	icon_state = "green"
 	requires_power = 0
 	dynamic_lighting = 0
@@ -7,11 +7,11 @@
 	req_access = list(access_syndicate)
 
 /area/ninja_dojo/dojo
-	name = "\improper Clan Dojo"
+	name = "clan dojo"
 	dynamic_lighting = 1
 
 /area/ninja_dojo/start
-	name = "\improper Clan Dojo"
+	name = "ninja shtutle"
 	icon_state = "shuttlered"
 	dynamic_lighting = 1
 	base_turf = /turf/simulated/floor/plating

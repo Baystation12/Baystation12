@@ -14,6 +14,7 @@
 	id = "awaysite_nuclear_hideout"
 	description = "Just another large asteroid."
 	suffixes = list("nuclear/nuclear_base.dmm")
+	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/mercenary)
 
 /obj/effect/shuttle_landmark/merc/nav1
 	name = "Asteroid Base Navpoint #1"
@@ -94,6 +95,7 @@
 	range = 1
 	fuel_consumption = 0
 	logging_home_tag = "nav_merc_start"
+	defer_initialisation = TRUE
 
 /obj/effect/overmap/ship/landable/mercenary
 	name = "redship"

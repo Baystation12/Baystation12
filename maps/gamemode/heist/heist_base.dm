@@ -14,6 +14,7 @@
 	id = "awaysite_heist_hideout"
 	description = "Just another large asteroid."
 	suffixes = list("heist/heist_base.dmm")
+	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/heist)
 
 /obj/effect/shuttle_landmark/heist/nav1
 	name = "Asteroid Base Navpoint #1"
@@ -40,6 +41,7 @@
 	range = 1
 	fuel_consumption = 0
 	logging_home_tag = "nav_skipjack_start"
+	defer_initialisation = TRUE
 
 /obj/effect/overmap/ship/landable/heist
 	name = "skipjack"

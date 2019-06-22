@@ -14,6 +14,7 @@
 	id = "awaysite_ninja_hideout"
 	description = "A large electrical storm causing unusual sensor readings."
 	suffixes = list("ninja/ninja_base.dmm")
+	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/ninja)
 
 /obj/effect/shuttle_landmark/ninja/nav1
 	name = "Electrical Storm Navpoint #1"
@@ -39,6 +40,7 @@
 	range = 1
 	fuel_consumption = 0
 	logging_home_tag = "nav_skipjack_start"
+	defer_initialisation = TRUE
 
 /obj/effect/overmap/ship/landable/ninja
 	name = "stealth shuttle"
