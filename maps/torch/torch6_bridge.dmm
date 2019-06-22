@@ -2188,7 +2188,12 @@
 "gb" = (
 /obj/structure/flora/pottedplant/large,
 /obj/item/device/radio/intercom{
-	pixel_y = 23
+	dir = 4;
+	pixel_x = -21
+	},
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 0;
+	pixel_y = 20
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
