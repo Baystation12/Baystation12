@@ -3745,7 +3745,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "iX" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -7076,7 +7076,7 @@
 /area/quartermaster/expedition)
 "pQ" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/effect/landmark/start{
@@ -9429,7 +9429,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/fifthdeck/fore)
 "uz" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/fifthdeck/fore)
@@ -15914,7 +15914,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/toxins)
 "Sv" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)

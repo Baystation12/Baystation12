@@ -283,7 +283,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/hydroponics)
 "aX" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
@@ -438,7 +438,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/tcommsat/storage)
 "bp" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/forestarboard)
@@ -1862,7 +1862,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
 "eg" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/item/weapon/storage/box/lights/mixed,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
@@ -12470,7 +12470,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/thirddeck/foreport)
 "BW" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
@@ -13479,7 +13479,7 @@
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "Es" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
 "Et" = (
@@ -14629,7 +14629,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
 "HE" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
@@ -20517,7 +20517,7 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
 "XS" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/effect/landmark/start{
 	name = "Stowaway"
 	},
@@ -20929,7 +20929,7 @@
 /area/maintenance/thirddeck/foreport)
 "Zg" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/random/closet,
+/obj/random/torchcloset,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
 "Zh" = (

@@ -793,7 +793,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "bC" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
 "bD" = (
@@ -2168,7 +2168,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
 "ex" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "ey" = (
@@ -3034,7 +3034,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/aftstarboard)
 "gy" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /obj/random/junk,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -10325,7 +10325,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod10/station)
 "ya" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
@@ -12141,7 +12141,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/vacant/cargo)
 "Cw" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -12548,7 +12548,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
 "Ds" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)

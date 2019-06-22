@@ -11565,7 +11565,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/coin,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -13260,7 +13260,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftport)
 "aTF" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/item/weapon/storage/box/lights/mixed,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -13311,7 +13311,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftport)
 "aTN" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftport)
@@ -15604,7 +15604,7 @@
 /turf/simulated/floor/carpet/orange,
 /area/crew_quarters/safe_room/firstdeck)
 "ctb" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralstarboard)
@@ -29008,7 +29008,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "rKD" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
@@ -30561,7 +30561,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
 "tzg" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -31365,7 +31365,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "vKf" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "vMm" = (

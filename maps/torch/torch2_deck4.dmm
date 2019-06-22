@@ -7314,7 +7314,7 @@
 	icon_state = "2-8"
 	},
 /obj/structure/catwalk,
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
@@ -8698,7 +8698,7 @@
 	icon_state = "intact";
 	dir = 5
 	},
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/effect/landmark/start{
 	name = "Stowaway"
 	},
@@ -11216,7 +11216,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "LV" = (
-/obj/random/closet,
+/obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /obj/effect/floor_decal/industrial/outline/grey,
