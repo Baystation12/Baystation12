@@ -196,3 +196,58 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if((. = part.attack_hand(user)))
 			return
 	return construct_state && construct_state.attack_hand(user, src)
+
+/*
+Standard helpers for users interacting with machinery parts.
+*/
+
+/obj/machinery/proc/part_replacement(mob/user, obj/item/weapon/storage/part_replacer/R)
+	for(var/obj/item/weapon/stock_parts/A in component_parts)
+		if(!A.base_type)
+			continue
+		if(!(A.part_flags & PART_FLAG_HAND_REMOVE))
+			continue
+		for(var/obj/item/weapon/stock_parts/B in R.contents)
+			if(istype(B, A.base_type) && B.rating > A.rating)
+				replace_part(user, R, A, B)
+				return TRUE
+	for(var/path in uncreated_component_parts)
+		var/obj/item/weapon/stock_parts/A = path
+		if(!(initial(A.part_flags) & PART_FLAG_HAND_REMOVE))
+			continue
+		var/base_type = initial(A.base_type)
+		if(base_type)
+			for(var/obj/item/weapon/stock_parts/B in R.contents)
+				if(istype(B, base_type) && B.rating > initial(A.rating))
+					replace_part(user, R, A, B)
+					return TRUE
+
+/obj/machinery/proc/part_insertion(mob/user, obj/item/weapon/stock_parts/part)
+	if(!user.canUnEquip(part))
+		return FALSE
+	if(can_add_component(part, user))
+		user.unEquip(part, src)
+		install_component(part)
+		user.visible_message(SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"), SPAN_NOTICE("You install \the [part] in \the [src]!"))
+	return TRUE
+
+/obj/machinery/proc/part_removal(mob/user)
+	var/list/removable_parts = list()
+	for(var/path in types_of_component(/obj/item/weapon/stock_parts))
+		var/obj/item/weapon/stock_parts/part = path
+		if(!(initial(part.part_flags) & PART_FLAG_HAND_REMOVE))
+			continue
+		if(components_are_accessible(path))
+			removable_parts[initial(part.name)] = path
+	if(length(removable_parts))
+		var/input = input(user, "Which part would you like to uninstall from \the [src]?", "Part Removal") as null|anything in removable_parts
+		if(!input || QDELETED(src) || !Adjacent(user) || user.incapacitated())
+			return TRUE
+		var/path = removable_parts[input]
+		if(!path || !components_are_accessible(path))
+			return TRUE
+		var/obj/item/weapon/stock_parts/part = uninstall_component(path)
+		if(part)
+			user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
+			user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
+		return TRUE

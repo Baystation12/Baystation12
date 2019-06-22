@@ -105,56 +105,33 @@
 
 	// Part modifications. First: part replacer
 	if(istype(I, /obj/item/weapon/storage/part_replacer))
-		var/obj/item/weapon/storage/part_replacer/R = I
-		for(var/obj/item/weapon/stock_parts/A in machine.component_parts)
-			if(!A.base_type)
-				continue
-			if(!(A.part_flags & PART_FLAG_HAND_REMOVE))
-				continue
-			for(var/obj/item/weapon/stock_parts/B in R.contents)
-				if(istype(B, A.base_type) && B.rating > A.rating)
-					machine.replace_part(user, R, A, B)
-					return TRUE
-		for(var/path in machine.uncreated_component_parts)
-			var/obj/item/weapon/stock_parts/A = path
-			if(!(initial(A.part_flags) & PART_FLAG_HAND_REMOVE))
-				continue
-			var/base_type = initial(A.base_type)
-			if(base_type)
-				for(var/obj/item/weapon/stock_parts/B in R.contents)
-					if(istype(B, base_type) && B.rating > initial(A.rating))
-						machine.replace_part(user, R, A, B)
-						return TRUE
+		return machine.part_replacement(I, user)
 
 	// Second: Part insertion
-	if(istype(I, /obj/item/weapon/stock_parts) && user.canUnEquip(I))
-		if(machine.can_add_component(I, user))
-			user.unEquip(I, machine)
-			machine.install_component(I)
-			user.visible_message(SPAN_NOTICE("\The [user] installs \the [I] in \the [machine]!"), SPAN_NOTICE("You install \the [I] in \the [machine]!"))
-		return TRUE
+	if(istype(I, /obj/item/weapon/stock_parts))
+		return machine.part_insertion(user, I)
 
 	// Finally: Part removal with wrench
 	if(isWrench(I))
-		var/list/removable_parts = list()
-		for(var/path in machine.types_of_component(/obj/item/weapon/stock_parts))
-			var/obj/item/weapon/stock_parts/part = path
-			if(!(initial(part.part_flags) & PART_FLAG_HAND_REMOVE))
-				continue
-			if(machine.components_are_accessible(path))
-				removable_parts[initial(part.name)] = path
-		if(length(removable_parts))
-			var/input = input(user, "Which part would you like to uninstall from \the [machine]?", "Part Removal") as null|anything in removable_parts
-			if(!input || QDELETED(machine) || !machine.Adjacent(user) || !isWrench(user.get_active_hand()) || user.incapacitated())
-				return TRUE
-			var/path = removable_parts[input]
-			if(!path || !machine.components_are_accessible(path))
-				return TRUE
-			var/obj/item/weapon/stock_parts/part = machine.uninstall_component(path)
-			if(part)
-				user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
-				user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [machine]."), SPAN_NOTICE("You remove \the [part] from \the [machine]."))
-			return TRUE
+		return machine.part_removal(user)
 
 // Not implemented fully as the machine will qdel on transition to this. Path needed for checks.
 /decl/machine_construction/default/deconstructed
+
+// Computers have only one built state.
+
+/decl/machine_construction/computer/built/attackby(obj/item/I, mob/user, obj/machinery/machine)
+	if((. = ..()))
+		return
+	if(isScrewdriver(I))
+		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
+		machine.dismantle()
+
+	if(istype(I, /obj/item/weapon/storage/part_replacer))
+		return machine.part_replacement(I, user)
+
+	if(istype(I, /obj/item/weapon/stock_parts))
+		return machine.part_insertion(user, I)
+
+	if(isWrench(I))
+		return machine.part_removal(user)
