@@ -8,6 +8,7 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/static/list/dust_cache
+	permit_ao = FALSE
 
 /turf/space/proc/build_dust_cache()
 	LAZYINITLIST(dust_cache)

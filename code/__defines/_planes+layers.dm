@@ -96,6 +96,7 @@ What is the naming convention for planes or layers?
 
 	#define BASE_TURF_LAYER -999
 	#define TURF_DETAIL_LAYER 1
+	#define TURF_SHADOW_LAYER 2
 
 #define ABOVE_TURF_PLANE              -18 // For items which should appear above turfs but below other objects and hiding mobs, eg: wires & pipes
 
@@ -110,6 +111,7 @@ What is the naming convention for planes or layers?
 	#define BLOOD_LAYER                 9
 	#define MOUSETRAP_LAYER             10
 	#define PLANT_LAYER                 11
+	#define AO_LAYER                    12
 
 #define HIDING_MOB_PLANE              -16 // for hiding mobs like MoMMIs or spiders or whatever, under most objects but over pipes & such.
 

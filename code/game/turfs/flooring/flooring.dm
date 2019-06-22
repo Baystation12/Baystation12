@@ -108,7 +108,7 @@
 
 /decl/flooring/tiling
 	name = "floor"
-	desc = "Scuffed from the passage of countless greyshirts."
+	desc = "A solid, heavy set of flooring plates."
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "tiled"
 	color = COLOR_DARK_GUNMETAL
