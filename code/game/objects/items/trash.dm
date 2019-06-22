@@ -110,5 +110,9 @@
 	name = "bread tube"
 	icon_state = "tastybread"
 
+/obj/item/trash/cubewrapper
+	name = "discarded wrapper"
+	icon_state = "monkeywrap"
+
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return
