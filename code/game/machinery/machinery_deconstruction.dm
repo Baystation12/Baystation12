@@ -21,7 +21,8 @@
 	return MCS_CHANGE
 
 /decl/machine_construction
-	var/needs_board // Type of circuitboard expected, if any. Used in unit testing.
+	var/needs_board  // Type of circuitboard expected, if any. Used in unit testing.
+	var/cannot_print // If false, unit testing will attempt to guarantee that the machine is buildable in-round. This inverts that behavior.
 
 // Run on unit testing. Should return a fail message or null.
 /decl/machine_construction/proc/fail_unit_test(obj/machinery/machine)
@@ -34,8 +35,10 @@
 		if(C.board_type != needs_board)
 			return "Machine [log_info_line(machine)] had a circuitboard of an unexpected type: was [C.board_type], should be [needs_board]."
 		var/design = GLOB.build_path_to_design_datum_path[C.type]
-		if(!design)
+		if(!design && !cannot_print)
 			return "Machine [log_info_line(machine)] had a circuitboard which could not be printed."
+		else if(design && cannot_print)
+			return "Machine [log_info_line(machine)] had a circuitboard which could be printed, but it wasn't supposed to."
 
 // There are many machines, so this is designed to catch errors.  This proc must either return TRUE or set the machine's construct_state to a valid one (or null).
 /decl/machine_construction/proc/validate_state(obj/machinery/machine)
@@ -181,6 +184,9 @@
 		machine.panel_open = TRUE
 		to_chat(user, "You unfasten the bolts.")
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+
+/decl/machine_construction/tcomms/panel_closed/cannot_print
+	cannot_print = TRUE
 
 /decl/machine_construction/tcomms/panel_open/state_is_valid(obj/machinery/machine)
 	return machine.panel_open

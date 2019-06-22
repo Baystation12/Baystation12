@@ -6,6 +6,7 @@
 	var/health = 100.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
+	construct_state = null
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE

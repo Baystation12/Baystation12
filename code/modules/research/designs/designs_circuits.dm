@@ -171,6 +171,19 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/guestpass
 	sort_string = "HAACE"
 
+/datum/design/circuit/accounts
+	name = "account database terminal"
+	id = "accounts"
+	build_path = /obj/item/weapon/stock_parts/circuitboard/account_database
+	sort_string = "HAACF"
+
+/datum/design/circuit/holo
+	name = "holodeck control console"
+	id = "holo"
+	build_path = /obj/item/weapon/stock_parts/circuitboard/holodeckcontrol
+	req_tech = list(TECH_DATA = 2, TECH_BLUESPACE = 2)
+	sort_string = "HAACG"
+
 /datum/design/circuit/aiupload
 	name = "AI upload console"
 	id = "aiupload"
@@ -184,6 +197,20 @@
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/borgupload
 	sort_string = "HAABB"
+
+/datum/design/circuit/cryopodcontrol
+	name = "cryogenic oversight console"
+	id = "cryo_console"
+	req_tech = list(TECH_DATA = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/cryopodcontrol
+	sort_string = "HAABC"
+
+/datum/design/circuit/robot_storage
+	name = "robotic storage control"
+	id = "cryo_console_borg"
+	req_tech = list(TECH_DATA = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/robotstoragecontrol
+	sort_string = "HAABD"
 
 /datum/design/circuit/destructive_analyzer
 	name = "destructive analyzer"
@@ -240,6 +267,13 @@
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/mining_stacker
 	sort_string = "HABAH"
+
+/datum/design/circuit/suspension_gen
+	name = "suspension generator"
+	id = "suspension_gen"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_MAGNET = 4)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/suspension_gen
+	sort_string = "HABAI"
 
 /datum/design/circuit/rdservercontrol
 	name = "R&D server control console"
@@ -314,6 +348,18 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/solar_control
 	sort_string = "JAAAF"
 
+/datum/design/circuit/supermatter_control
+	name = "core monitoring console"
+	id = "supermatter_control"
+	build_path = /obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core
+	sort_string = "JAAAG"
+
+/datum/design/circuit/injector
+	name = "injector control console"
+	id = "injector"
+	build_path = /obj/item/weapon/stock_parts/circuitboard/air_management/injector_control
+	sort_string = "JAAAH"
+
 /datum/design/circuit/pacman
 	name = "PACMAN-type generator"
 	id = "pacman"
@@ -335,6 +381,13 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/pacman/mrs
 	sort_string = "JBAAC"
 
+/datum/design/circuit/pacmanpotato
+	name = "PTTO-3 nuclear generator"
+	id = "pacmanpotato"
+	req_tech = list(TECH_DATA = 3, TECH_POWER = 5, TECH_ENGINEERING = 4, TECH_ILLEGAL = 4)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super/potato
+	sort_string = "JBAAD"
+
 /datum/design/circuit/batteryrack
 	name = "cell rack PSU"
 	id = "batteryrack"
@@ -349,6 +402,12 @@
 	req_tech = list(TECH_POWER = 7, TECH_ENGINEERING = 5)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/smes
 	sort_string = "JBABB"
+
+/datum/design/circuit/alerts
+	name = "alerts console"
+	id = "alerts"
+	build_path = /obj/item/weapon/stock_parts/circuitboard/stationalert
+	sort_string = "JBACA"
 
 /datum/design/circuit/gas_heater
 	name = "gas heating system"
@@ -385,6 +444,13 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/reagent_heater/cooler
 	sort_string = "JCAAE"
 
+/datum/design/circuit/atmos_control
+	name = "atmospherics control console"
+	id = "atmos_control"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/atmoscontrol
+	sort_string = "JCAAF"
+
 /datum/design/circuit/secure_airlock
 	name = "secure airlock electronics"
 	desc =  "Allows for the construction of a tamper-resistant airlock electronics."
@@ -420,6 +486,41 @@
 	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 5, TECH_MATERIAL = 5)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/huge/stationary
 	sort_string = "JEAAD"
+
+/datum/design/circuit/thruster
+	name = "gas thruster"
+	id = "thruster"
+	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine
+	sort_string = "JFAAA"
+
+/datum/design/circuit/helms
+	name = "helm control console"
+	id = "helms"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/helm
+	sort_string = "JFAAB"
+
+/datum/design/circuit/nav
+	name = "navigation control console"
+	id = "nav"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/nav
+	sort_string = "JFAAC"
+
+/datum/design/circuit/sensors
+	name = "ship sensor control console"
+	id = "sensors"
+	req_tech = list(TECH_DATA = 4)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/sensors
+	sort_string = "JFAAD"
+
+/datum/design/circuit/engine
+	name = "ship engine control console"
+	id = "shipengine"
+	req_tech = list(TECH_DATA = 2, TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/engine
+	sort_string = "JFAAE"
 
 /datum/design/circuit/biogenerator
 	name = "biogenerator"
@@ -469,6 +570,13 @@
 	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/bsaback
 	sort_string = "KCAAE"
+
+/datum/design/circuit/bsa_console
+	name = "bluespace artillery control console"
+	id = "bsa_console"
+	req_tech = list(TECH_DATA = 2, TECH_COMBAT = 5, TECH_BLUESPACE = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/bsa
+	sort_string = "KCAAF"
 
 /datum/design/circuit/mecha
 	req_tech = list(TECH_DATA = 3)
@@ -600,6 +708,13 @@
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/telecomms/receiver
 	sort_string = "PAAAG"
+
+/datum/design/circuit/bluespace_relay
+	name = "bluespace relay"
+	id = "bluespacerelay"
+	req_tech = list(TECH_DATA = 5, TECH_BLUESPACE = 5, TECH_PHORON = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/bluespacerelay
+	sort_string = "PAAAH"
 
 /datum/design/circuit/shield_generator
 	name = "Shield Generator"

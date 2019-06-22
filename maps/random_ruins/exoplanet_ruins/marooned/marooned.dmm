@@ -42,7 +42,7 @@
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
-/obj/machinery/computer,
+/obj/machinery/computer/dummy,
 /obj/effect/floor_decal/corner/red/full,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)

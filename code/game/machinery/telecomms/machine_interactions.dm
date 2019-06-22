@@ -13,6 +13,7 @@
 /obj/machinery/telecomms
 	var/temp = "" // output message
 	construct_state = /decl/machine_construction/tcomms/panel_closed
+	maximum_component_parts = list(/obj/item/weapon/stock_parts = 12)
 
 /obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 
