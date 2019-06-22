@@ -203,6 +203,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 					ai_text = speaking.scramble(text)
 				else
 					ai_text = stars(text)
+			if(isanimal(M) && !M.universal_speak)
+				var/mob/living/simple_animal/SA = M
+				ai_text = pick(SA.speak)
 			var/name_used = M.GetVoice()
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
 			var/short_links = master.get_preference_value(/datum/client_preference/ghost_follow_link_length) == GLOB.PREF_SHORT
@@ -210,7 +213,12 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			var/prefix = "<a href='byond://?src=\ref[master];trackname=[html_encode(name_used)];track=\ref[M]'>[follow]</a>"
 			master.show_message(get_hear_message(name_used, ai_text, verb, speaking, prefix), 2)
 	var/name_used = M.GetVoice()
-	var/message = get_hear_message(name_used, text, verb, speaking)
+	var/message
+	if(isanimal(M) && !M.universal_speak)
+		var/mob/living/simple_animal/SA = M
+		message = get_hear_message(name_used, pick(SA.speak), verb, speaking)
+	else
+		message = get_hear_message(name_used, text, verb, speaking)
 	if(targetpad && !targetpad.incoming_connection) //If this is the pad you're making the call from and the call is accepted
 		targetpad.audible_message(message)
 		targetpad.last_message = message
