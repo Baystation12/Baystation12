@@ -1,0 +1,4 @@
+author: Mistakenot4892
+delete-after: True
+changes: 
+  - rscadd: "Added a slower version of walk, Creep intent."
