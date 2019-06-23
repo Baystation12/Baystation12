@@ -4,13 +4,10 @@
 	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando
-	alt_titles = list("Recruit",\
-	"Velites",\
-	"Hastari",\
-	"Principes",\
-	"Triarii",\
-	"Decanus",\
-	"Tessearius")
+	alt_titles = list("Initiate",\
+	"Trooper",\
+	"Corporal",\
+	"Surgeon")
 
 	total_positions = 8
 	spawn_positions = 8
@@ -23,11 +20,9 @@
 	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando_officer
-	alt_titles = list("Optio",\
-	"Centurion",\
-	"Tribune",\
-	"Legio",\
-	"Legate")
+	alt_titles = list("Sergeant",\
+	"Adjutant",\
+	"Lieutenant")
 
 	total_positions = 2
 	spawn_positions = 1
@@ -40,11 +35,7 @@
 	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando_officer
-	alt_titles = list("Optio",\
-	"Centurion",\
-	"Tribune",\
-	"Legio",\
-	"Legate")
+	alt_titles = list("Commander")
 
 	total_positions = 1
 	spawn_positions = 1
