@@ -2,15 +2,18 @@
 
 
 //Totals for damaging objects.An ex_act call at the appropriate strength will be triggered every time the blade deals this much total damage to a dense object
-#define EX3_TOTAL 35
-#define EX2_TOTAL 70
-#define EX1_TOTAL 140
+#define EX3_TOTAL 45
+#define EX2_TOTAL 90
+#define EX1_TOTAL 170
 
 /obj/item/projectile/sawblade
 	name = "sawblade"
-	damage = 0
 	damage_type = BRUTE
-	nodamage = 1
+	//The compile time damage var is only used for blade launch mode. It will be replaced with a calculated value in remote control mode
+	damage = 20
+
+	//How much Damage Per Second is dealt to targets the blade hits in remote control mode. This is broken up into many small hits based on tick interval
+	var/dps	=	25
 	check_armour = "melee" //Its a cutting blade, melee armor helps most
 	dispersion = 0
 	icon = 'icons/effects/projectiles.dmi'
@@ -18,6 +21,8 @@
 	mouse_opacity = 1
 	pass_flags = PASS_FLAG_TABLE
 	density = 0 //It passes through mobs
+	sharp = 1
+	edge = 1
 
 	var/mob/user
 
@@ -30,7 +35,7 @@
 	var/status = STATE_MOVING
 
 	//When the sawblade runs out of health, it breaks
-	health = 250
+	health = 350
 
 	//The turf we are currently attacking. This may be the same one we're in, or an adjacent one.
 	//The sawblade will only damage things in the damage tile
@@ -40,11 +45,7 @@
 	var/tracking_speed	=	64
 	var/tracking_per_tick
 
-	//The compile time damage var is only used for blade launch mode. It will be replaced with a calculated value in remote control mode
-	damage = 20
 
-	//How much Damage Per Second is dealt to targets the blade hits in remote control mode. This is broken up into many small hits based on tick interval
-	var/dps	=	25
 
 	//Time in seconds between ticks of damage and movement. The lower this is, the smoother and more granular things are
 	var/tick_interval	=	0.2
@@ -119,7 +120,6 @@
 
 		//There's no tile there? We must be at the edge of the map, abort!
 		if (!newtile)
-			world << "Failed to find tile at pixel offset [newpix.x] [newpix.y]"
 			return
 
 		damage_tile = newtile //Even if we don't get in, the tile we're about to enter becomes the new place we damage
@@ -135,11 +135,9 @@
 			status = STATE_GRINDING
 
 			add_grind_atom(blocker)//We will start grinding against it
-			world << "Blocked by [blocker] [blocker.type]"
 
 			//We can still animate a little towards it, up to 8 pixels into its tile
 			if (is_far_outside_cell(newpix))
-				world << "Too far into a solid object, can't move"
 				//If we get here, we would intrude too far into that tile, so we cutoff this tracking and don't move towards it anymore
 				return
 
@@ -148,7 +146,6 @@
 			//If nothing blocks us, then we're clear to just swooce right into that tile.
 			//We want the animation to finish first though so lets spawn it
 			spawn(tick_interval SECONDS)
-				world << "Setting pixel loc"
 				set_global_pixel_loc(get_global_pixel_loc()) //This will move us into the tile while maintaining our global pixel coords
 
 	animate(src, pixel_x = newpix.x, pixel_y = newpix.y)
@@ -166,7 +163,14 @@
 				continue
 
 			//The atom must be in the damage tile
-			if (A.loc == damage_tile)
+			//Or BE the damage tile
+			if (A.loc == damage_tile || A == damage_tile)
+
+				//A destroyed wall turns into a floor with no density, but its still the same memory address.
+				//We want to detect that and stop cutting into a floor
+				if (A == damage_tile && !A.density)
+					grind_atoms.Remove(l)
+					continue
 
 				//Sometimes bullet_act modifies a projectile's damage. To workaround that, we'll cache it here and restore it afterwards
 				var/cache_damage = damage
@@ -176,7 +180,6 @@
 				damage = cache_damage
 
 				health -= damage
-				world << "Dealing damage to [A] [A.name]. Health: [health]/[initial(health)]"
 
 				A.pixel_x += rand(-1,1)
 				A.pixel_y += rand(-1,1)
@@ -222,7 +225,6 @@
 
 /obj/item/projectile/sawblade/proc/updatehealth()
 	if (health <= 0)
-		world << "Sawblade ran out of health, deleting"
 		if (launcher && launcher.blade == src)
 			launcher.stop_firing()
 
