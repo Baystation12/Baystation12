@@ -31122,6 +31122,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/item/weapon/storage/mirror{
+	pixel_x = -32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
 "vhs" = (

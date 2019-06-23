@@ -47,19 +47,24 @@
 	power_rating = 7500			//7500 W ~ 10 HP
 	opacity = 1
 	density = 1
-	atmos_canpass = CANPASS_DENSITY
+	atmos_canpass = CANPASS_NEVER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	var/on = 1
 	var/datum/ship_engine/gas_thruster/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/volume_per_burn = 20 //litres
 
+/obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return 0
+
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()
 	controller = new(src)
+	update_nearby_tiles(need_rebuild=1)
 
 /obj/machinery/atmospherics/unary/engine/Destroy()
 	QDEL_NULL(controller)
+	update_nearby_tiles()
 	. = ..()
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()

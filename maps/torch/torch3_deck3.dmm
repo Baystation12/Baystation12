@@ -1462,7 +1462,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
 "do" = (
-/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
@@ -7463,6 +7463,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/crew_quarters/mess)
 "pZ" = (
@@ -9723,6 +9724,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/crew_quarters/sleep/cryo)
 "uS" = (
@@ -11507,13 +11509,10 @@
 /obj/machinery/door/airlock/civilian{
 	name = "Head"
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/sleep/cryo)
 "zc" = (
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -12053,10 +12052,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
-	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
@@ -16251,6 +16246,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/firealarm{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "Lg" = (
@@ -17077,6 +17075,11 @@
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
+"Nw" = (
+/obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/plating,
+/area/crew_quarters/mess)
 "Nx" = (
 /obj/machinery/light{
 	dir = 1
@@ -19352,7 +19355,7 @@
 /turf/simulated/floor/plating,
 /area/vacant/brig)
 "UE" = (
-/obj/structure/closet/emcloset,
+/obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small{
 	dir = 1
@@ -20836,6 +20839,11 @@
 "YN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -21;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "YP" = (
@@ -38909,7 +38917,7 @@ XO
 jn
 RN
 jj
-qb
+Nw
 qQ
 sk
 tI
@@ -39111,7 +39119,7 @@ jd
 nj
 Lx
 fu
-qb
+Nw
 Xn
 sj
 tJ

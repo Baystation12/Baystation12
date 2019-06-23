@@ -81,6 +81,13 @@
 "an" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fifthdeck/fore)
+"ao" = (
+/obj/effect/paint/red,
+/obj/structure/sign/warning/hot_exhaust{
+	dir = 1
+	},
+/turf/simulated/wall/titanium,
+/area/guppy_hangar/start)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -596,13 +603,6 @@
 	dir = 4;
 	id = "guppy_hatch";
 	name = "Rear Hatch"
-	},
-/obj/machinery/button/remote/blast_door{
-	id = "guppy_hatch";
-	name = "Rear Hatch Control";
-	pixel_x = 0;
-	pixel_y = -32;
-	req_access = list("ACCESS_TORCH_GUP")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1820,9 +1820,9 @@
 /area/hallway/primary/fifthdeck/aft)
 "dT" = (
 /obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
-/obj/machinery/atmospherics/portables_connector{
-	dir = 4
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 4;
+	start_pressure = 1013.25
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
@@ -1837,9 +1837,10 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/binary/pump{
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "dV" = (
@@ -1907,11 +1908,12 @@
 	icon_state = "intact";
 	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -1963,13 +1965,13 @@
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "eg" = (
+/obj/effect/floor_decal/industrial/outline/orange,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
 /obj/machinery/light/small{
 	dir = 8
-	},
-/obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
-	dir = 4;
-	start_pressure = 1013.25
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
@@ -1979,10 +1981,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+/obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1993,9 +1992,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -2099,9 +2100,6 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "eq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
-	dir = 1
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -4230,7 +4228,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass/mining{
 	id_tag = null;
-	name = "Shuttle Fuel Bay Interior"
+	name = "Shuttle Fuel Bay Interior";
+	normalspeed = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4251,7 +4250,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass/mining{
 	id_tag = null;
-	name = "Shuttle Fuel Bay Interior"
+	name = "Shuttle Fuel Bay Interior";
+	normalspeed = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -11080,7 +11080,8 @@
 /area/shuttle/petrov/equipment)
 "Ar" = (
 /obj/machinery/atmospherics/unary/tank/air{
-	dir = 4
+	dir = 4;
+	start_pressure = 4559.63
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/plating,
@@ -11805,6 +11806,17 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/shuttlefuel)
+"Dc" = (
+/obj/effect/paint/hull,
+/obj/machinery/button/remote/blast_door{
+	id = "guppy_hatch";
+	name = "Rear Hatch Control";
+	pixel_x = 0;
+	pixel_y = 0;
+	req_access = list("ACCESS_TORCH_GUP")
+	},
+/turf/simulated/wall/titanium,
+/area/guppy_hangar/start)
 "Dd" = (
 /obj/machinery/power/port_gen/pacman,
 /obj/structure/cable/yellow{
@@ -12603,7 +12615,7 @@
 	icon_state = "nosmoking";
 	pixel_y = -32
 	},
-/obj/machinery/atmospherics/binary/pump{
+/obj/machinery/atmospherics/binary/pump/high_power{
 	dir = 1;
 	name = "CO2 to Hangar"
 	},
@@ -15212,6 +15224,9 @@
 /obj/machinery/pipedispenser,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -37438,7 +37453,7 @@ Ea
 aJ
 aX
 ee
-aY
+ao
 aY
 bH
 cf
@@ -38249,7 +38264,7 @@ ee
 ba
 aY
 bL
-cj
+Dc
 cj
 cj
 cj

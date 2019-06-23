@@ -25,7 +25,7 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "passivegate"
 
 /obj/machinery/atmospherics/binary/passive_gate/on
