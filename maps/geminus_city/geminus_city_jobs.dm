@@ -4,7 +4,7 @@
 	total_positions = -1
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
-	faction_flag = COLONY
+	spawn_faction = "Human Colony"
 	supervisors = " the Colony Mayor"
 
 	create_record = 0
@@ -46,11 +46,12 @@
 
 /datum/job/colonist_mayor
 	title = "Mayor"
+	department_flag = COM
 	total_positions = 1
 	head_position = 1
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
-	faction_flag = COLONY
+	spawn_faction = "Human Colony"
 	supervisors = " your citizens"
 
 	create_record = 0
@@ -74,7 +75,7 @@
 	selection_color = "#000000"
 	supervisors = " the Colony Mayor"
 	create_record = 0
-	faction_flag = COLONY
+	spawn_faction = "Human Colony"
 	account_allowed = 1
 	announced = TRUE
 	generate_email = 0
@@ -88,10 +89,11 @@
 
 /datum/job/police_chief
 	title = "Chief of Police"
+	department_flag = COM
 	department = "Security"
 	department_flag = SEC|COM
 	total_positions = 1
-	faction_flag = COLONY
+	spawn_faction = "Human Colony"
 	head_position = 1
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
@@ -113,6 +115,7 @@
 /datum/job/colony_ai
 	title = "UEG Colonial AI"
 	department_flag = SHIPAI
+	spawn_faction = "Human Colony"
 	spawn_positions = 1
 	is_whitelisted = 1
 	outfit_type = /decl/hierarchy/outfit/job/colony_AI

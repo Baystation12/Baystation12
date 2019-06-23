@@ -52,6 +52,7 @@ GLOBAL_VAR(spawntypes)
 			for(var/turf/T in turfs)
 				if(IsTurfAtmosUnsafe(T))
 					newly_dangerous_turfs += T
+			turfs -= newly_dangerous_turfs
 
 			for(var/turf/T in unsafe_turfs)
 				if(IsTurfAtmosSafe(T))
@@ -60,12 +61,16 @@ GLOBAL_VAR(spawntypes)
 
 			unsafe_turfs.Add(newly_dangerous_turfs)
 			if(newly_dangerous_turfs.len)
-				message_admins("NOTICE: spawnpoint \'[src.type]\' has new atmos unsafe turfs.")
+				message_admins("NOTICE: spawnpoint \'[src.type]\' has new atmos unsafe turfs, disabling spawns for those turfs.")
 
 	if(!turfs.len)
 		return 0
 
 	return 1
+
+/datum/spawnpoint/proc/get_spawn_turf(var/rank)
+	if(turfs && turfs.len)
+		return pick(turfs)
 
 #ifdef UNIT_TEST
 /datum/spawnpoint/Del()
@@ -119,3 +124,21 @@ GLOBAL_VAR(spawntypes)
 /datum/spawnpoint/default/New()
 	..()
 	turfs = GLOB.latejoin
+
+/datum/spawnpoint/default/get_spawn_turf(var/rank)
+	var/obj/S = get_job_landmark(rank)
+	if(S)
+		return S.loc
+	else
+		return ..()
+
+/datum/spawnpoint/default/proc/get_job_landmark(var/rank)
+	var/list/loc_list = list()
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != rank)	continue
+		if(locate(/mob/living) in sloc.loc)	continue
+		loc_list += sloc
+	if(loc_list.len)
+		return pick(loc_list)
+	else
+		return locate("start*[rank]") // use old stype

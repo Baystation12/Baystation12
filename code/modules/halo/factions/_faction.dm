@@ -59,4 +59,4 @@ GLOBAL_LIST_EMPTY(factions_by_name)
 	enemy_factions = list("UNSC","Covenant")
 
 /datum/faction/human_civ
-	name = "Human Civilian"
+	name = "Human Colony"
