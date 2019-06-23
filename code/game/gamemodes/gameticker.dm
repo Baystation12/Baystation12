@@ -138,7 +138,6 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
-	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 	create_characters() //Create player characters and transfer them
@@ -147,8 +146,6 @@ var/global/datum/controller/gameticker/ticker
 	GLOB.data_core.manifest()
 
 	callHook("roundstart")
-
-	shuttle_controller.initialize_shuttles()
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
