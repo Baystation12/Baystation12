@@ -1,0 +1,4 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Prevents putting polytool augment tools in your pocket, behind your ear, etc."
