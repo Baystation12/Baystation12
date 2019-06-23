@@ -58,6 +58,8 @@
 					aura_color = "#33cc33"
 				else if(highest_faculty == PSI_ENERGISTICS)
 					aura_color = "#cccc33"
+			aura_image.pixel_x = -64 - owner.default_pixel_x
+			aura_image.pixel_y = -64 - owner.default_pixel_y
 
 	if(!announced && owner && owner.client && !QDELETED(src))
 		announced = TRUE
