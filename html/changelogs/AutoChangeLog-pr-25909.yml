@@ -1,0 +1,8 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - bugfix: "Shuttle thruster now block air and fire; shuttles are more fireproof and less gas contamination should occur."
+  - tweak: "Shuttle engine heater, are now climbable."
+  - maptweak: "Medical bathroom now has a mirror, for all your post radiation treatment needs."
+  - maptweak: "Charon atmospheric compartment has been returned to its previous state."
+  - maptweak: "Hanger fuel bay now has a high power pump, to reduce prep time."
