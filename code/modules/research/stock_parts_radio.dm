@@ -61,7 +61,7 @@
 	signal.transmission_method = TRANSMISSION_RADIO
 	signal.encryption = encryption
 	signal.data = buffer
-	signal.data["id_tag"] = id_tag
+	signal.data["tag"] = id_tag
 	radio.post_signal(src, signal, filter, range)
 	buffer = null
 
@@ -167,7 +167,7 @@
 		return
 	if(signal.encryption && signal.encryption != encryption)
 		return
-	if(id_tag && signal.data["id_tag"] != id_tag)
+	if(id_tag && signal.data["tag"] != id_tag)
 		return
 
 	var/obj/machinery/machine = loc
@@ -176,7 +176,7 @@
 	for(var/thing in receive_and_write)
 		if(!isnull(signal.data[thing]))
 			var/decl/public_access/public_variable/variable = receive_and_write[thing]
-			variable.write_var(machine, signal.data[thing])
+			variable.write_var_protected(machine, signal.data[thing])
 	for(var/thing in receive_and_call)
 		if(!isnull(signal.data[thing]))
 			var/decl/public_access/public_method/method = receive_and_call[thing]
