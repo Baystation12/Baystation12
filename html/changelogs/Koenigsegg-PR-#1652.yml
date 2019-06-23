@@ -1,0 +1,41 @@
+################################
+# Example Changelog File
+#
+# Note: This file, and files beginning with ".", and files that don't end in ".yml" will not be read. If you change this file, you will look really dumb.
+#
+# Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
+# When it is, any changes listed below will disappear.
+#
+# Valid Prefixes: 
+#   bugfix
+#   wip (For works in progress)
+#   tweak
+#   soundadd
+#   sounddel
+#   rscadd (general adding of nice things)
+#   rscdel (general deleting of nice things)
+#   imageadd
+#   imagedel
+#   maptweak
+#   spellcheck (typo fixes)
+#   experiment
+#################################
+
+# Your name.  
+author: Koenigsegg
+
+# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+delete-after: True
+
+# Any changes you've made.  See valid prefix list above.
+# INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
+# SCREW THIS UP AND IT WON'T WORK.
+# Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
+# Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
+changes: 
+  - rscadd: "Biogenerators can now print advanced trauma/burn kits for 100 units of bio matter. Plants have joined the war effort."
+  - rscadd: "Add the SOE Osprey ship, for the SOE commandos. It's big. It's bad. But most importantly... it flies."
+  - rscadd: "Add an SOE Commando Captain role, which is the only one that can enter the captains quarters on the ship. Likely to hide their crippling depression."
+  - rscadd: "Add spawnpoints for the commandos, on the SOE Osprey instead of the listening outpost. Just in case."
+  - rscdel: "Delete the old URFC Avarice and the unused 2nd deck map file. Clearly, another victim of Thanos."
+  - tweak: "Change the URFC Commandos for SOE Commandos in various files. URFC is officialy gone."
