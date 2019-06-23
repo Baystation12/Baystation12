@@ -153,6 +153,7 @@
 		icon_state = "[initial(icon_state)]2"
 
 /decl/stock_part_preset/radio/basic_transmitter/button/door
+	frequency = AIRLOCK_FREQ
 	transmit_on_change = list("toggle_door" = /decl/public_access/public_variable/button_active)
 
 /obj/machinery/button/alternate/door/bolts
