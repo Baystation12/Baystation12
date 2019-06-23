@@ -25,6 +25,7 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 	initial_spawn_target = 2
 	min_player_age = 14
 	faction = "foundation"
+	id_type = /obj/item/weapon/card/id/foundation
 
 /datum/antagonist/foundation/equip(var/mob/living/carbon/human/player)
 
@@ -39,3 +40,5 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 
 	var/decl/hierarchy/outfit/foundation = outfit_by_type(/decl/hierarchy/outfit/foundation)
 	foundation.equip(player)
+
+	create_id("Foundation Agent", player)
