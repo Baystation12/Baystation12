@@ -662,6 +662,7 @@
 #include "code\game\machinery\machinery_components.dm"
 #include "code\game\machinery\machinery_deconstruction.dm"
 #include "code\game\machinery\machinery_public_vars.dm"
+#include "code\game\machinery\machinery_public_vars_common.dm"
 #include "code\game\machinery\magnet.dm"
 #include "code\game\machinery\mass_driver.dm"
 #include "code\game\machinery\navbeacon.dm"

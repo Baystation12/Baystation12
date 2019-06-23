@@ -21,14 +21,18 @@ Must be implemented by subtypes.
 // Subtypes shall call parent, and perform the actual write if the return value is true.
 // If the var has_updates, you must never modify the var except through this proc.
 /decl/public_access/public_variable/proc/write_var(datum/owner, new_value)
-	if(!can_write)
-		return FALSE
 	var/old_value = access_var(owner)
 	if(old_value == new_value)
 		return FALSE
 	if(has_updates)
 		var_changed(owner, old_value, new_value)
 	return TRUE
+
+// Any sanitization should be done in here.
+/decl/public_access/public_variable/proc/write_var_protected(datum/owner, new_value)
+	if(!can_write)
+		return FALSE
+	write_var(new_value)
 
 /*
 Listener registration. You must unregister yourself if you are destroyed; the owner being destroyed will be handled automatically.
