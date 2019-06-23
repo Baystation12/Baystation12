@@ -1,5 +1,5 @@
 /obj/item/weapon/stock_parts/radio
-	part_flags = 0
+	part_flags = PART_FLAG_QDEL
 	var/datum/radio_frequency/radio
 	var/frequency
 	var/id_tag

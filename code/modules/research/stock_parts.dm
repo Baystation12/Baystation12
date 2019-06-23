@@ -53,10 +53,10 @@
 /obj/item/weapon/stock_parts/proc/on_install(var/obj/machinery/machine)
 	set_status(machine, PART_STAT_INSTALLED)
 
-/obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine)
+/obj/item/weapon/stock_parts/proc/on_uninstall(var/obj/machinery/machine, var/temporary = FALSE)
 	unset_status(machine, PART_STAT_INSTALLED)
 	stop_processing(machine)
-	if(part_flags & PART_FLAG_QDEL)
+	if(!temporary && (part_flags & PART_FLAG_QDEL))
 		qdel(src)
 
 // Use to process on the machine it's installed on.
