@@ -581,8 +581,6 @@
 			return global.init;
 		if("initialization_stage")
 			return global.initialization_stage;
-		if("insurrection_objectives")
-			return global.insurrection_objectives;
 		if("integrated_circuit_blacklist")
 			return global.integrated_circuit_blacklist;
 		if("intents")
@@ -1812,8 +1810,6 @@
 			global.init=newval;
 		if("initialization_stage")
 			global.initialization_stage=newval;
-		if("insurrection_objectives")
-			global.insurrection_objectives=newval;
 		if("integrated_circuit_blacklist")
 			global.integrated_circuit_blacklist=newval;
 		if("intents")
@@ -2752,7 +2748,6 @@
 	"inactive_keys",
 	"init",
 	"initialization_stage",
-	"insurrection_objectives",
 	"integrated_circuit_blacklist",
 	"intents",
 	"intercom_range_display_status",
