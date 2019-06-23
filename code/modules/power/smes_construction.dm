@@ -324,12 +324,12 @@
 /obj/machinery/power/smes/buildable/cannot_transition_to(state_path, mob/user)
 	if(failing)
 		return SPAN_WARNING("\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
-	if(charge > (capacity/100) && safeties_enabled)
-		return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
-	if(output_attempt || input_attempt)
-		return SPAN_WARNING("Turn \the [src] off first!")
 
 	if(state_path == /decl/machine_construction/default/deconstructed)
+		if(charge > (capacity/100) && safeties_enabled)
+			return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
+		if(output_attempt || input_attempt)
+			return SPAN_WARNING("Turn \the [src] off first!")
 		if(!(stat & BROKEN))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
@@ -340,6 +340,12 @@
 	return ..()
 
 /obj/machinery/power/smes/buildable/can_add_component(obj/item/weapon/stock_parts/component, mob/user)
+	if(charge > (capacity/100) && safeties_enabled)
+		to_chat(user,  SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!"))
+		return FALSE
+	if(output_attempt || input_attempt)
+		to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
+		return FALSE
 	. = ..()
 	if(!.)
 		return
