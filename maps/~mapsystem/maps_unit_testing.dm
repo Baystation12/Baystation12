@@ -49,7 +49,11 @@
 		/area/supply,
 		/area/syndicate_mothership,
 		/area/syndicate_mothership/elite_squad,
-		/area/template_noop
+		/area/template_noop,
+		/area/syndicate_mothership/raider_base,
+		/area/skipjack_station/start,
+		/area/ninja_dojo,
+		/area/nuclear_base
 	)
 
 	var/list/area_usage_test_exempted_root_areas = list(
