@@ -1,0 +1,7 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - rscdel: "Removes some stamps that shouldn't exist. (Warden, HoP, HoS, etc.)"
+  - imagedel: "Removes some now unused stamp icons."
+  - tweak: "RIG stamp module now does the normal stamp instead of the Internal Affairs stamp."
+  - tweak: "Centcomm stamp (used on admin faxes) now uses the map specific boss name for the stamp."
