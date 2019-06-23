@@ -1,0 +1,5 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Spells granted by The Tower deity no longer require robes to cast."
+  - tweak: "Adds an exit button to the Deity punishment menu incase you open it accidentally."
