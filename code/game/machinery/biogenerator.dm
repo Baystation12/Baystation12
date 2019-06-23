@@ -129,6 +129,9 @@
 					dat += "<A href='?src=\ref[src];action=create;item=leatherjacket;cost=500'>Leather Jacket</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=bomberjacket;cost=500'>Bomber Jacket</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=wintercoat;cost=500'>Winter Coat</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=advtrauma;cost=100'>Advanced Trauma Kit</A> <FONT COLOR=blue>([round(100/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=advtrauma5;cost=500'>x5</A><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=advburn;cost=100'>Advanced Burn Kit</A> <FONT COLOR=blue>([round(100/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=advburn5;cost=500'>x5</A><BR>"
+
 					//dat += "Other<BR>"
 					//dat += "<A href='?src=\ref[src];action=create;item=monkey;cost=500'>Monkey</A> <FONT COLOR=blue>(500)</FONT><BR>"
 				else
@@ -242,6 +245,22 @@
 			new/obj/item/clothing/suit/storage/toggle/bomber(loc)
 		if("wintercoat")
 			new/obj/item/clothing/suit/storage/hooded/wintercoat(loc)
+		if("advtrauma")
+			new/obj/item/stack/medical/advanced/bruise_pack(loc)
+		if("advtrauma5")
+			new/obj/item/stack/medical/advanced/bruise_pack(loc)
+			new/obj/item/stack/medical/advanced/bruise_pack(loc)
+			new/obj/item/stack/medical/advanced/bruise_pack(loc)
+			new/obj/item/stack/medical/advanced/bruise_pack(loc)
+			new/obj/item/stack/medical/advanced/bruise_pack(loc)
+		if("advburn")
+			new/obj/item/stack/medical/advanced/ointment(loc)
+		if("advburn5")
+			new/obj/item/stack/medical/advanced/ointment(loc)
+			new/obj/item/stack/medical/advanced/ointment(loc)
+			new/obj/item/stack/medical/advanced/ointment(loc)
+			new/obj/item/stack/medical/advanced/ointment(loc)
+			new/obj/item/stack/medical/advanced/ointment(loc)
 	processing = 0
 	menustat = "complete"
 	update_icon()
