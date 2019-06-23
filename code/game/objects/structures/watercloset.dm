@@ -2,26 +2,28 @@
 /obj/structure/hygiene
 	var/next_gurgle = 0
 	var/clogged = 0 // -1 = never clog
+	var/can_drain = 0
+	var/drainage = 0.5
+	var/last_gurgle = 0
 
 /obj/structure/hygiene/New()
 	..()
 	SSfluids.hygiene_props += src
+	START_PROCESSING(SSobj, src)
 
 /obj/structure/hygiene/Destroy()
-	STOP_PROCESSING(SSprocessing, src)
 	SSfluids.hygiene_props -= src
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/structure/hygiene/proc/clog(var/severity)
 	if(clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
 		return FALSE
 	clogged = severity
-	START_PROCESSING(SSprocessing, src)
 	return TRUE
 
 /obj/structure/hygiene/proc/unclog()
 	clogged = 0
-	STOP_PROCESSING(SSprocessing, src)
 
 /obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
 	if(clogged > 0 && isPlunger(thing))
@@ -52,7 +54,7 @@
 
 /obj/structure/hygiene/Process()
 	if(clogged <= 0)
-		return
+		drain()
 	var/flood_amt
 	switch(clogged)
 		if(1)
@@ -72,6 +74,20 @@
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
 			SET_FLUID_DEPTH(F, min(F.fluid_amount + (rand(30,50)*clogged), flood_amt))
+
+/obj/structure/hygiene/proc/drain()
+	if(!can_drain) return
+	var/turf/T = get_turf(src)
+	if(!istype(T)) return
+	var/fluid_here = T.get_fluid_depth()
+	if(fluid_here <= 0)
+		return
+
+	T.remove_fluid(ceil(fluid_here*drainage))
+	T.show_bubbles()
+	if(world.time > last_gurgle + 80)
+		last_gurgle = world.time
+		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
 /obj/structure/hygiene/toilet
 	name = "toilet"
@@ -188,6 +204,8 @@
 	density = 0
 	anchored = 1
 	clogged = -1
+	can_drain = 1
+	drainage = 0.2 			//showers are tiny, drain a little slower
 
 	var/on = 0
 	var/obj/effect/mist/mymist = null
@@ -199,7 +217,6 @@
 /obj/structure/hygiene/shower/New()
 	..()
 	create_reagents(50)
-	START_PROCESSING(SSprocessing, src)
 
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -276,6 +293,7 @@
 		reagents.splash(washing, 10)
 
 /obj/structure/hygiene/shower/Process()
+	..()
 	if(!on) return
 
 	for(var/thing in loc)

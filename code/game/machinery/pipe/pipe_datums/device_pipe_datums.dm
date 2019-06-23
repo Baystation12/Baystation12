@@ -212,7 +212,7 @@
 	colorable = FALSE
 	pipe_type = null
 	pipe_color = null
-	constructed_path = /obj/structure/drain
+	constructed_path = /obj/structure/hygiene/drain
 	pipe_class = PIPE_CLASS_OTHER
 
 /datum/pipe/pipe_dispenser/device/tank

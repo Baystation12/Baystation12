@@ -3486,7 +3486,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
 "jc" = (
-/obj/structure/drain,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/heads/cobed)
 "je" = (
