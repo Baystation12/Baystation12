@@ -28,8 +28,8 @@
 		/obj/item/weapon/stock_parts/power/apc
 	)
 	public_variables = list(
-		/decl/public_access/public_variable/emmitter_active,
-		/decl/public_access/public_variable/emmitter_locked
+		/decl/public_access/public_variable/emitter_active,
+		/decl/public_access/public_variable/emitter_locked
 	)
 	public_methods = list(
 		/decl/public_access/public_method/toggle_emitter
@@ -239,24 +239,24 @@
 	desc = "Toggles whether or not the emitter is active. It must be unlocked to work."
 	call_proc = /obj/machinery/power/emitter/proc/activate
 
-/decl/public_access/public_variable/emmitter_active
+/decl/public_access/public_variable/emitter_active
 	expected_type = /obj/machinery/power/emitter
 	name = "emitter active"
 	desc = "Whether or not the emitter is firing."
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/emmitter_active/access_var(obj/machinery/power/emitter/emitter)
+/decl/public_access/public_variable/emitter_active/access_var(obj/machinery/power/emitter/emitter)
 	return emitter.active
 
-/decl/public_access/public_variable/emmitter_locked
+/decl/public_access/public_variable/emitter_locked
 	expected_type = /obj/machinery/power/emitter
 	name = "emitter locked"
 	desc = "Whether or not the emitter is locked. Being locked prevents one from changing the active state."
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/emmitter_locked/access_var(obj/machinery/power/emitter/emitter)
+/decl/public_access/public_variable/emitter_locked/access_var(obj/machinery/power/emitter/emitter)
 	return emitter.locked
 
 /decl/stock_part_preset/radio/receiver/emitter

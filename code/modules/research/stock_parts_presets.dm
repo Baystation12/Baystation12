@@ -11,7 +11,7 @@ Do not work with lazy-initialized parts.
 	var/expected_part_type
 
 /decl/stock_part_preset/proc/apply(obj/machinery/machine, obj/item/weapon/stock_parts/part)
-	part.on_uninstall(machine)
+	part.on_uninstall(machine, TRUE) // don't delete
 	do_apply(machine, part)
 	part.on_install(machine)
 
