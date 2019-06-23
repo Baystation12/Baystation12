@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - maptweak: "Filters in atmospherics no longer connect to the wrong pipes."

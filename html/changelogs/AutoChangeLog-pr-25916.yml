@@ -1,4 +1,0 @@
-author: "MikoMyazaki"
-delete-after: True
-changes: 
-  - tweak: "RIGs will now warn you if you make them malfunction while offline, requiring nanopaste to repair."

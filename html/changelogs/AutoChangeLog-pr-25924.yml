@@ -1,7 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "You can rotate disposals pipes now."
-  - tweak: "Flipping disposals pipes moves them to the mirrored state (unlike rotating twice)."
-  - tweak: "Dragging disposals pipes no longer rotates them."
-  - bugfix: "various issues with disposals construction have been addressed."
