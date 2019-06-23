@@ -116,12 +116,12 @@
 /area/map_template/colony/medbay)
 "av" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "colsecarm";
+/obj/machinery/button/blast_door{
+	id_tag = "colsecarm";
 	name = "Armory Secure Access"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "colarm";
+/obj/machinery/button/blast_door{
+	id_tag = "colarm";
 	name = "Armory Blast Door Control";
 	pixel_y = 8
 	},
@@ -2353,7 +2353,7 @@
 /area/map_template/colony/surgery)
 "eG" = (
 /obj/machinery/door/blast/shutters{
-	id = "colsen";
+	id_tag = "colsen";
 	name = "Hard Storage Shutter";
 	tag = ""
 	},
@@ -4427,7 +4427,7 @@
 	},
 /obj/machinery/door/airlock/highsecurity,
 /obj/machinery/door/blast/regular{
-	id = "colarm"
+	id_tag = "colarm"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/map_template/colony/armory)
@@ -4705,7 +4705,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/highsecurity,
 /obj/machinery/door/blast/regular{
-	id = "colsecarm"
+	id_tag = "colsecarm"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/map_template/colony/armory)
@@ -6170,11 +6170,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "colj";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "colj";
 	name = "Jail Bolt Control";
-	pixel_x = 28;
-	specialfunctions = 4
+	pixel_x = 28
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
@@ -6385,13 +6384,13 @@
 "lb" = (
 /obj/machinery/door/window/eastright,
 /obj/structure/table/steel_reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "colmainexit";
+/obj/machinery/button/blast_door{
+	id_tag = "colmainexit";
 	name = "Exit Blast Doors";
 	pixel_y = 0
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "colmainblast";
+/obj/machinery/button/blast_door{
+	id_tag = "colmainblast";
 	name = "Entry Blast Doors";
 	pixel_y = 8
 	},
@@ -7075,7 +7074,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainblast";
+	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7146,7 +7145,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainexit"
+	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -7268,15 +7267,15 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainblast";
+	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "mC" = (
 /obj/structure/catwalk,
-/obj/machinery/button/remote/blast_door{
-	id = "colsen";
+/obj/machinery/button/blast_door{
+	id_tag = "colsen";
 	name = "Hard Equipment Storage";
 	pixel_y = 28;
 	tag = ""
@@ -8089,7 +8088,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainexit"
+	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)

@@ -6,6 +6,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	var/input_toggle = FALSE
 
 /decl/public_access/public_variable/input_toggle
+	expected_type = /obj/machinery
 	name = "input toggle"
 	desc = "The input toggle variable does not do anything by itself. This makes it useful for having receivers trigger transmitters. Can be toggled by a public method."
 	can_write = FALSE

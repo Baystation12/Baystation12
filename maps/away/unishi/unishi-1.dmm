@@ -680,7 +680,7 @@
 /area/unishi/engineroom)
 "bL" = (
 /obj/machinery/sparker{
-	id = "unishi";
+	id_tag = "unishi";
 	pixel_x = -20
 	},
 /turf/simulated/floor,
@@ -746,7 +746,7 @@
 	dir = 8
 	},
 /obj/machinery/button/ignition{
-	id = "unishi";
+	id_tag = "unishi";
 	pixel_x = -28
 	},
 /turf/simulated/floor,

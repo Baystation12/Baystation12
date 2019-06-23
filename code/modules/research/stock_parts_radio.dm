@@ -1,4 +1,5 @@
 /obj/item/weapon/stock_parts/radio
+	part_flags = 0
 	var/datum/radio_frequency/radio
 	var/frequency
 	var/id_tag
@@ -30,11 +31,11 @@
 
 /obj/item/weapon/stock_parts/radio/proc/sanitize_events(obj/machinery/machine, list/events)
 	for(var/thing in events)
-		if(!is_valid_event(events[thing]))
+		if(!is_valid_event(machine, events[thing]))
 			LAZYREMOVE(events, thing)
 
 /obj/item/weapon/stock_parts/radio/proc/is_valid_event(obj/machinery/machine, decl/public_access/variable)
-	return istype(variable) && LAZYACCESS(machine.public_variables, variable)
+	return istype(variable) && LAZYACCESS(machine.public_variables, variable.type)
 
 /obj/item/weapon/stock_parts/radio/transmitter
 	name = "radio transmitter"
@@ -80,8 +81,8 @@
 
 /obj/item/weapon/stock_parts/radio/transmitter/basic/on_install(obj/machinery/machine)
 	..()
-	transmit_on_change = sanitize_events(machine, transmit_on_change)
-	transmit_on_tick = sanitize_events(machine, transmit_on_tick)
+	sanitize_events(machine, transmit_on_change)
+	sanitize_events(machine, transmit_on_tick)
 	if(LAZYLEN(transmit_on_tick))
 		start_processing(machine)
 	for(var/thing in transmit_on_change)
@@ -117,7 +118,7 @@
 
 /obj/item/weapon/stock_parts/radio/transmitter/on_event/on_install(obj/machinery/machine)
 	..()
-	transmit_on_event = sanitize_events(machine, transmit_on_event)
+	sanitize_events(machine, transmit_on_event)
 	if(!is_valid_event(machine, event))
 		event = null
 	if(event)
@@ -152,8 +153,8 @@
 
 /obj/item/weapon/stock_parts/radio/receiver/on_install(obj/machinery/machine)
 	. = ..()
-	receive_and_write = sanitize_events(machine, receive_and_write)
-	receive_and_call = sanitize_events(machine, receive_and_call)
+	sanitize_events(machine, receive_and_write)
+	sanitize_events(machine, receive_and_call)
 
 /obj/item/weapon/stock_parts/radio/receiver/is_valid_event(obj/machinery/machine, decl/public_access/variable)
 	if(istype(variable, /decl/public_access/public_method))
@@ -163,11 +164,13 @@
 		return thing.can_write
 
 /obj/item/weapon/stock_parts/radio/receiver/receive_signal(datum/signal/signal, receive_method, receive_param)
+	if(!id_tag)
+		return
 	if(!(status & PART_STAT_INSTALLED))
 		return
-	if(signal.encryption && signal.encryption != encryption)
+	if(signal.encryption && (signal.encryption != encryption))
 		return
-	if(id_tag && signal.data["tag"] != id_tag)
+	if(signal.data["tag"] != id_tag)
 		return
 
 	var/obj/machinery/machine = loc

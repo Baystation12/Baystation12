@@ -1999,7 +1999,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -2261,7 +2261,7 @@
 	},
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "d1starboardnacelle"
+	id_tag = "d1starboardnacelle"
 	},
 /obj/structure/window/phoronreinforced{
 	icon_state = "phoronrwindow";
@@ -2374,7 +2374,7 @@
 /obj/structure/grille,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "d1starboardnacelle"
+	id_tag = "d1starboardnacelle"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
@@ -2422,7 +2422,7 @@
 /obj/structure/grille,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "d1starboardnacelle"
+	id_tag = "d1starboardnacelle"
 	},
 /turf/simulated/floor/reinforced,
 /area/icarus/vessel)

@@ -2177,7 +2177,7 @@
 	dir = 4
 	},
 /obj/machinery/button/ignition{
-	id = "voxship";
+	id_tag = "voxship";
 	pixel_x = -28
 	},
 /turf/simulated/floor/plating/vox,
@@ -2197,7 +2197,7 @@
 	use_power = 1
 	},
 /obj/machinery/sparker{
-	id = "voxship";
+	id_tag = "voxship";
 	pixel_x = -20
 	},
 /turf/simulated/floor/airless,

@@ -41,7 +41,7 @@
 			targets += M
 
 	for(var/obj/machinery/flasher/F in SSmachines.machinery)
-		if(F.id == src.id)
+		if(F.id_tag == src.id)
 			targets += F
 
 	for(var/obj/structure/closet/secure_closet/brig/C in world)

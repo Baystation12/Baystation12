@@ -37,7 +37,6 @@
 #define SS_PRIORITY_TURF          30    // Radioactive walls/blob.
 #define SS_PRIORITY_EVAC          30    // Processes the evac controller.
 #define SS_PRIORITY_CIRCUIT       30	// Processing Circuit's ticks and all that.
-#define SS_PRIORITY_WIRELESS      30	// Wireless connection setup.
 #define SS_PRIORITY_CHAR_SETUP    25    // Writes player preferences to savefiles.
 #define SS_PRIORITY_GARBAGE       20	// Garbage collection.
 

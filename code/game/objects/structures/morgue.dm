@@ -188,22 +188,11 @@
 	var/cremating = FALSE
 	var/id = 1
 	var/locked = FALSE
-	var/_wifi_id
-	var/datum/wifi/receiver/button/crematorium/wifi_receiver
-
-
-/obj/structure/crematorium/Initialize()
-	. = ..()
-	if(_wifi_id)
-		wifi_receiver = new(_wifi_id, src)
 
 /obj/structure/crematorium/Destroy()
 	if(connected)
 		qdel(connected)
 		connected = null
-	if(wifi_receiver)
-		qdel(wifi_receiver)
-		wifi_receiver = null
 	return ..()
 
 /obj/structure/crematorium/proc/update()
@@ -432,7 +421,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "crema_switch"
 	req_access = list(access_crematorium)
-	id = 1
+	id_tag = 1
 
 /obj/machinery/button/crematorium/on_update_icon()
 	return
@@ -441,8 +430,8 @@
 	if(..())
 		return
 	if(src.allowed(user))
-		for (var/obj/structure/crematorium/C in world)
-			if (C.id == id)
+		for (var/obj/structure/crematorium/C in range())
+			if (C.id == id_tag)
 				if (!C.cremating)
 					C.cremate(user)
 	else

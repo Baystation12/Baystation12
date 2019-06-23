@@ -61,9 +61,6 @@ var/list/airlock_overlays = list()
 	var/bolts_dropping = 'sound/machines/bolts_down.ogg'
 
 	var/door_crush_damage = DOOR_CRUSH_DAMAGE
-
-	var/_wifi_id
-	var/datum/wifi/receiver/button/door/wifi_receiver
 	var/obj/item/weapon/airlock_brace/brace = null
 
 	//Airlock 2.0 Aesthetics Properties
@@ -89,6 +86,17 @@ var/list/airlock_overlays = list()
 	var/sparks_broken_file = 'icons/obj/doors/station/sparks_broken.dmi'
 	var/welded_file = 'icons/obj/doors/station/welded.dmi'
 	var/emag_file = 'icons/obj/doors/station/emag.dmi'
+
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	// To be fleshed out and moved to parent door, but staying minimal for now.
+	public_methods = list(
+		/decl/public_access/public_method/toggle_door,
+		/decl/public_access/public_method/airlock_toggle_bolts
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/airlock = 1)
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
@@ -1317,6 +1325,9 @@ About the new airlock wires panel:
 	update_icon()
 	return 1
 
+/obj/machinery/door/airlock/proc/toggle_lock(var/forced = 0)
+	return locked ? unlock() : lock()
+
 /obj/machinery/door/airlock/allowed(mob/M)
 	if(locked)
 		return 0
@@ -1388,8 +1399,6 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)
 	wires = null
-	qdel(wifi_receiver)
-	wifi_receiver = null
 	if(brace)
 		qdel(brace)
 	return ..()
@@ -1455,3 +1464,17 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/stripe_airlock(var/paint_color)
 	stripe_color = paint_color
 	update_icon()
+
+// Public access
+
+/decl/public_access/public_method/airlock_toggle_bolts
+	name = "toggle bolts"
+	desc = "Toggles whether the airlock is bolted or not, if possible."
+	call_proc = /obj/machinery/door/airlock/proc/toggle_lock
+
+/decl/stock_part_preset/radio/receiver/airlock
+	frequency = BUTTON_FREQ
+	receive_and_call = list(
+		"toggle_door" = /decl/public_access/public_method/toggle_door,
+		"toggle_bolts" = /decl/public_access/public_method/airlock_toggle_bolts
+	)

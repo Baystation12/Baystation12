@@ -980,9 +980,9 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "virologyquar";
+	id_tag = "virologyquar";
 	name = "Virology Emergency Quarantine Control";
 	pixel_x = 8;
 	pixel_y = -24
@@ -1772,8 +1772,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adH" = (
-/obj/machinery/button/remote/blast_door{
-	id = "d1starboardnacelle";
+/obj/machinery/button/blast_door{
+	id_tag = "d1starboardnacelle";
 	name = "combustion chamber blast door controll";
 	pixel_x = 0;
 	pixel_y = -24
@@ -2136,11 +2136,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "selfddoor";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "selfddoor";
 	name = "Self Destruct Airlock Bolt Control";
-	pixel_y = -32;
-	specialfunctions = 4
+	pixel_y = -32
 	},
 /obj/item/weapon/airlock_brace{
 	req_access = list("ACCESS_VAULT")
@@ -2891,7 +2890,7 @@
 /area/maintenance/firstdeck/aftstarboard)
 "agw" = (
 /obj/machinery/sparker{
-	id = "engines";
+	id_tag = "engines";
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
@@ -4001,12 +4000,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "opssafedoor";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "opssafedoor";
 	name = "safe room door-control";
 	pixel_x = 32;
-	pixel_y = 32;
-	specialfunctions = 4
+	pixel_y = 32
 	},
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
@@ -5525,7 +5523,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Prison Gate";
+	id_tag = "Prison Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
@@ -5679,7 +5677,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
@@ -5841,7 +5839,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "Secure Gate";
+	id_tag = "Secure Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
@@ -6547,8 +6545,8 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/virologyaccess)
 "avk" = (
-/obj/machinery/button/remote/blast_door{
-	id = "medgarage";
+/obj/machinery/button/blast_door{
+	id_tag = "medgarage";
 	name = "Charging Port Shutter Control";
 	pixel_x = -24;
 	pixel_y = -6
@@ -6853,7 +6851,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryentrylock";
+	id_tag = "infirmaryentrylock";
 	name = "Infirmary Entry Lockdown Shutters";
 	opacity = 0
 	},
@@ -6864,7 +6862,7 @@
 	density = 1;
 	dir = 2;
 	icon_state = "shutter1";
-	id = "medgarage";
+	id_tag = "medgarage";
 	name = "Charging Port Shutters";
 	opacity = 1
 	},
@@ -6880,7 +6878,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
@@ -6897,7 +6895,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "chemwindow";
+	id_tag = "chemwindow";
 	name = "Chemistry Window Shutters";
 	opacity = 0
 	},
@@ -6914,7 +6912,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "chemwindow";
+	id_tag = "chemwindow";
 	name = "Chemistry Window Shutters";
 	opacity = 0
 	},
@@ -6940,7 +6938,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "chemcounter";
+	id_tag = "chemcounter";
 	name = "Chemistry Counter Shutters";
 	opacity = 0
 	},
@@ -7007,8 +7005,8 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/aft)
 "awL" = (
-/obj/machinery/button/remote/blast_door{
-	id = "armory_lock";
+/obj/machinery/button/blast_door{
+	id_tag = "armory_lock";
 	name = "Armory Lockdown Shutter Control";
 	pixel_x = -24;
 	pixel_y = -6
@@ -7324,7 +7322,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Prison Gate";
+	id_tag = "Prison Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
@@ -7768,7 +7766,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "operation_hallway_shutters";
+	id_tag = "operation_hallway_shutters";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -7818,7 +7816,7 @@
 	density = 1;
 	dir = 4;
 	icon_state = "pdoor1";
-	id = "armory_lock";
+	id_tag = "armory_lock";
 	name = "Armory Lockdown Shutters";
 	opacity = 1
 	},
@@ -8160,7 +8158,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -8183,7 +8181,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -8210,7 +8208,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -8225,7 +8223,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -8386,7 +8384,7 @@
 	density = 1;
 	dir = 4;
 	icon_state = "pdoor1";
-	id = "armory_entrylock";
+	id_tag = "armory_entrylock";
 	name = "Armory Lockdown Shutters";
 	opacity = 1
 	},
@@ -8425,7 +8423,7 @@
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	id = "bo_pshutters";
+	id_tag = "bo_pshutters";
 	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -9006,7 +9004,7 @@
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	id = "bo_pshutters";
+	id_tag = "bo_pshutters";
 	name = "Privacy Shutters"
 	},
 /obj/item/weapon/material/bell,
@@ -9347,7 +9345,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -10018,29 +10016,29 @@
 	icon_state = "computer";
 	dir = 8
 	},
-/obj/machinery/button/remote/airlock{
-	id = "prisonexit";
+/obj/machinery/button/alternate/door{
+	id_tag = "prisonexit";
 	name = "Exit Doors";
 	pixel_x = 6;
 	pixel_y = 24;
 	req_access = list("ACCESS_BRIG")
 	},
-/obj/machinery/button/remote/airlock{
-	id = "prisonentry";
+/obj/machinery/button/alternate/door{
+	id_tag = "prisonentry";
 	name = "Entry Doors";
 	pixel_x = -6;
 	pixel_y = 24;
 	req_access = list("ACCESS_BRIG")
 	},
 /obj/machinery/button/flasher{
-	id = "permflash";
+	id_tag = "permflash";
 	name = "Brig Flash Control";
 	pixel_x = -6;
 	pixel_y = 40;
 	req_access = list("ACCESS_BRIG")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "Secure Gate";
+/obj/machinery/button/blast_door{
+	id_tag = "Secure Gate";
 	name = "Brig Lockdown Control";
 	pixel_x = 6;
 	pixel_y = 40
@@ -10372,7 +10370,7 @@
 /area/security/brig)
 "aJz" = (
 /obj/machinery/flasher{
-	id = "permflash";
+	id_tag = "permflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -10517,7 +10515,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "virologyquar";
+	id_tag = "virologyquar";
 	name = "Virology Emergency Quarantine Blast Doors";
 	opacity = 0
 	},
@@ -11087,7 +11085,7 @@
 /area/security/wing)
 "aMK" = (
 /obj/machinery/button/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "entry flash";
 	pixel_x = 22;
 	pixel_y = 24;
@@ -11108,7 +11106,7 @@
 /area/security/wing)
 "aML" = (
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -11355,7 +11353,7 @@
 	dir = 4
 	},
 /obj/machinery/flasher{
-	id = "permflash";
+	id_tag = "permflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -11481,7 +11479,7 @@
 /area/maintenance/firstdeck/centralport)
 "aOz" = (
 /obj/machinery/sparker{
-	id = "Xenobio";
+	id_tag = "Xenobio";
 	pixel_x = -18
 	},
 /turf/simulated/floor/reinforced,
@@ -11648,7 +11646,7 @@
 	dir = 10
 	},
 /obj/machinery/flasher{
-	id = "Cell 1";
+	id_tag = "Cell 1";
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -12297,7 +12295,7 @@
 /area/maintenance/firstdeck/aftport)
 "aRg" = (
 /obj/machinery/sparker{
-	id = "engines";
+	id_tag = "engines";
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
@@ -13171,8 +13169,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTn" = (
-/obj/machinery/button/remote/blast_door{
-	id = "d1portnacelle";
+/obj/machinery/button/blast_door{
+	id_tag = "d1portnacelle";
 	name = "combustion chamber blast door control";
 	pixel_x = 0;
 	pixel_y = 24
@@ -13235,7 +13233,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -13251,7 +13249,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -13934,8 +13932,8 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio1_vent";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio1_vent";
 	name = "Cell 1 Vent";
 	pixel_x = -6;
 	pixel_y = 24
@@ -13947,8 +13945,8 @@
 /obj/machinery/camera/network/research{
 	c_tag = "Xenobiology - Fore"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio1";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio1";
 	name = "Containment Blast Doors";
 	pixel_x = 6;
 	pixel_y = 24
@@ -13985,8 +13983,8 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio4";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio4";
 	name = "Containment Blast Doors";
 	pixel_x = -6;
 	pixel_y = 24
@@ -13998,8 +13996,8 @@
 /obj/machinery/camera/network/research{
 	c_tag = "Xenobiology - Aft"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio4_vent";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio4_vent";
 	name = "Cell 4 Vent";
 	pixel_x = 6;
 	pixel_y = 24
@@ -14033,7 +14031,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio1";
+	id_tag = "xenobio1";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14081,7 +14079,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio4";
+	id_tag = "xenobio4";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14108,7 +14106,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio1";
+	id_tag = "xenobio1";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14135,7 +14133,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio4";
+	id_tag = "xenobio4";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14163,7 +14161,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio1";
+	id_tag = "xenobio1";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14177,7 +14175,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio2";
+	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14200,7 +14198,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio2";
+	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14278,7 +14276,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio3";
+	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14296,7 +14294,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio4";
+	id_tag = "xenobio4";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14335,7 +14333,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio2";
+	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14348,7 +14346,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio3";
+	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -14393,7 +14391,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "virologyquar";
+	id_tag = "virologyquar";
 	name = "Virology Emergency Quarantine Blast Doors";
 	opacity = 0
 	},
@@ -14471,7 +14469,7 @@
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "d1starboardnacelle"
+	id_tag = "d1starboardnacelle"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
@@ -14489,7 +14487,7 @@
 "bhb" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "cChamber1sV";
+	id_tag = "cChamber1sV";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
@@ -14711,11 +14709,11 @@
 	},
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "selfdestruct";
+	id_tag = "selfdestruct";
 	name = "Self Destruct Access Blast Door"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "selfdestruct";
+/obj/machinery/button/blast_door{
+	id_tag = "selfdestruct";
 	name = "Self Destruct Access Blast Door Control";
 	pixel_y = 32
 	},
@@ -14752,7 +14750,7 @@
 	density = 1;
 	dir = 4;
 	icon_state = "pdoor1";
-	id = "armory_lock";
+	id_tag = "armory_lock";
 	name = "Armory Lockdown Shutters";
 	opacity = 1
 	},
@@ -14769,7 +14767,7 @@
 "btb" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "cChamber1pV";
+	id_tag = "cChamber1pV";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
@@ -14857,7 +14855,7 @@
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "d1portnacelle"
+	id_tag = "d1portnacelle"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -14894,7 +14892,7 @@
 "bCb" = (
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "xenobio1_vent";
+	id_tag = "xenobio1_vent";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
@@ -14915,7 +14913,7 @@
 "bDb" = (
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "xenobio4_vent";
+	id_tag = "xenobio4_vent";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
@@ -14926,7 +14924,7 @@
 "bEb" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "xenobio2_vent";
+	id_tag = "xenobio2_vent";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
@@ -14952,7 +14950,7 @@
 "bFb" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "xenobio3_vent";
+	id_tag = "xenobio3_vent";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
@@ -15053,14 +15051,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "bLJ" = (
-/obj/machinery/button/remote/blast_door{
-	id = "chemcounter";
+/obj/machinery/button/blast_door{
+	id_tag = "chemcounter";
 	name = "Chemistry Counter Lockdown Control";
 	pixel_x = -6;
 	pixel_y = -21
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "chemwindow";
+/obj/machinery/button/blast_door{
+	id_tag = "chemwindow";
 	name = "Chemistry Window Shutters Control";
 	pixel_x = 6;
 	pixel_y = -21
@@ -15222,7 +15220,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "Secure Gate";
+	id_tag = "Secure Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
@@ -15361,21 +15359,21 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod17/station)
 "bYj" = (
-/obj/machinery/button/remote/blast_door{
-	id = "armory_entrylock";
+/obj/machinery/button/blast_door{
+	id_tag = "armory_entrylock";
 	name = "Armory Entry Lockdown Shutter Control";
 	pixel_x = 24;
 	pixel_y = 6
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "armory_lock";
+/obj/machinery/button/blast_door{
+	id_tag = "armory_lock";
 	name = "Armory Lockdown Shutter Control";
 	pixel_x = 24;
 	pixel_y = -6
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/button/remote/blast_door{
-	id = "operation_hallway_shutters";
+/obj/machinery/button/blast_door{
+	id_tag = "operation_hallway_shutters";
 	name = "Hallway Checkpoint Shutters";
 	pixel_x = 35;
 	pixel_y = 6
@@ -15684,21 +15682,21 @@
 	icon_state = "console";
 	dir = 4
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control switch for the brig foyer.";
-	id = "BrigFoyer";
+	id_tag = "BrigFoyer";
 	name = "Security Wing Entry Control";
 	pixel_x = 0;
 	pixel_y = 34
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "Prison Gate";
+/obj/machinery/button/blast_door{
+	id_tag = "Prison Gate";
 	name = "Security Wing Entry Lockdown Control";
 	pixel_x = 6;
 	pixel_y = 24
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "bo_pshutters";
+/obj/machinery/button/blast_door{
+	id_tag = "bo_pshutters";
 	name = "Privacy Shutters";
 	pixel_x = -6;
 	pixel_y = 24
@@ -15872,7 +15870,7 @@
 /obj/effect/floor_decal/industrial/loading,
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	id = "bo_pshutters";
+	id_tag = "bo_pshutters";
 	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -16243,7 +16241,7 @@
 /obj/machinery/holosign/surgery{
 	dir = 8;
 	icon_state = "sign_off";
-	id = "operating1"
+	id_tag = "operating1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -16708,7 +16706,7 @@
 /area/command/conference)
 "dAb" = (
 /obj/machinery/button/holosign{
-	id = "operating1";
+	id_tag = "operating1";
 	pixel_x = 6;
 	pixel_y = -24
 	},
@@ -16904,16 +16902,16 @@
 /area/hallway/primary/firstdeck/aft)
 "dNb" = (
 /obj/structure/bed/roller,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "virologyquar";
+	id_tag = "virologyquar";
 	name = "Virology Emergency Quarantine Control";
 	pixel_x = 36;
 	pixel_y = 6
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Control";
 	pixel_x = 36;
 	pixel_y = -6
@@ -16935,7 +16933,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/holosign/surgery{
-	id = "operating1"
+	id_tag = "operating1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
@@ -17837,7 +17835,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Prison Gate";
+	id_tag = "Prison Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
@@ -17886,7 +17884,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/button/holosign{
-	id = "operating2";
+	id_tag = "operating2";
 	pixel_x = 6;
 	pixel_y = 24
 	},
@@ -17955,9 +17953,9 @@
 	},
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control switch for the medbay foyer.";
-	id = "MedbayER";
+	id_tag = "MedbayER";
 	name = "Treatment Center Door Control";
 	pixel_x = 23;
 	pixel_y = -25
@@ -18065,9 +18063,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control switch.";
-	id = "MedbaySA";
+	id_tag = "MedbaySA";
 	name = "Sub-acute Door Control";
 	pixel_x = 0;
 	pixel_y = -25
@@ -18340,9 +18338,9 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 8
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control switch for the medbay foyer.";
-	id = "MedbayFoyer";
+	id_tag = "MedbayFoyer";
 	name = "Infirmary Entrance Control";
 	pixel_x = -24;
 	pixel_y = -23
@@ -18605,7 +18603,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
@@ -18641,7 +18639,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
@@ -19088,7 +19086,7 @@
 /obj/machinery/holosign/surgery{
 	dir = 8;
 	icon_state = "sign_off";
-	id = "operating2"
+	id_tag = "operating2"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
@@ -19139,7 +19137,7 @@
 /obj/machinery/holosign/surgery{
 	dir = 4;
 	icon_state = "sign_off";
-	id = "operating2"
+	id_tag = "operating2"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery2)
@@ -19198,16 +19196,16 @@
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "grb" = (
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control switch for the medbay foyer.";
-	id = "MedbayFoyer";
+	id_tag = "MedbayFoyer";
 	name = "Infirmary Entrance Control";
 	pixel_x = -24;
 	pixel_y = 6;
 	req_access = list("ACCESS_MEDICAL")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "infirmaryentrylock";
+/obj/machinery/button/blast_door{
+	id_tag = "infirmaryentrylock";
 	name = "Infirmary Entrance Lockdown Control";
 	pixel_x = -24;
 	pixel_y = -6
@@ -19681,7 +19679,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
@@ -19696,7 +19694,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryentrylock";
+	id_tag = "infirmaryentrylock";
 	name = "Infirmary Entry Lockdown Shutters";
 	opacity = 0
 	},
@@ -19734,7 +19732,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
@@ -19766,7 +19764,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "infirmaryquar";
+	id_tag = "infirmaryquar";
 	name = "Infirmary Emergency Quarantine Shutters";
 	opacity = 0
 	},
@@ -20059,8 +20057,7 @@
 "hmQ" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced/oxygen,
@@ -20089,7 +20086,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "outercheckwindow";
+	id_tag = "outercheckwindow";
 	name = "Outer Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20116,7 +20113,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "outercheckwindow";
+	id_tag = "outercheckwindow";
 	name = "Outer Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20161,7 +20158,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "d1ladderwindow";
+	id_tag = "d1ladderwindow";
 	name = "Ladderwell Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20200,7 +20197,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "d1ladderwindow";
+	id_tag = "d1ladderwindow";
 	name = "Ladderwell Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20225,7 +20222,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "d1ladderwindow";
+	id_tag = "d1ladderwindow";
 	name = "Ladderwell Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20267,7 +20264,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -20289,7 +20286,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -20387,7 +20384,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "concheckwindow";
+	id_tag = "concheckwindow";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20671,7 +20668,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "concheckwindow";
+	id_tag = "concheckwindow";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -20702,8 +20699,7 @@
 "hUE" = (
 /obj/machinery/atmospherics/tvalve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -20778,7 +20774,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -20933,8 +20929,7 @@
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/tvalve/mirrored/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
@@ -20946,7 +20941,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "concheckwindow";
+	id_tag = "concheckwindow";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -21332,7 +21327,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -21400,7 +21395,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -21453,7 +21448,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -21871,7 +21866,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "operation_hallway_shutters";
+	id_tag = "operation_hallway_shutters";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -22680,7 +22675,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio2";
+	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -23014,7 +23009,7 @@
 	pixel_y = 24
 	},
 /obj/machinery/button/holosign{
-	id = "robosurg";
+	id_tag = "robosurg";
 	pixel_x = 6;
 	pixel_y = 24
 	},
@@ -23157,7 +23152,7 @@
 /obj/machinery/holosign/surgery{
 	dir = 4;
 	icon_state = "sign_off";
-	id = "robosurg"
+	id_tag = "robosurg"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/robotics/surgery)
@@ -23267,9 +23262,9 @@
 "kTb" = (
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	dir = 2;
-	id = "Skynet_launch";
+	id_tag = "Skynet_launch";
 	name = "Charging Bay Door Control";
 	pixel_x = 24;
 	pixel_y = 6
@@ -23444,7 +23439,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "Skynet_launch";
+	id_tag = "Skynet_launch";
 	name = "Mech Bay";
 	opacity = 0
 	},
@@ -23729,20 +23724,20 @@
 /area/maintenance/firstdeck/forestarboard)
 "lwb" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
-	id = "concheckwindow";
+/obj/machinery/button/blast_door{
+	id_tag = "concheckwindow";
 	name = "Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = 6
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "outercheckwindow";
+/obj/machinery/button/blast_door{
+	id_tag = "outercheckwindow";
 	name = "Outer Checkpoint Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "d1ladderwindow";
+/obj/machinery/button/blast_door{
+	id_tag = "d1ladderwindow";
 	name = "Ladderwell Shutter Control";
 	pixel_x = -5;
 	pixel_y = 6
@@ -23824,15 +23819,15 @@
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
 "lAb" = (
-/obj/machinery/button/remote/blast_door{
-	id = "Biohazard";
+/obj/machinery/button/blast_door{
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -6;
 	pixel_y = -21
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the cargo doors.";
-	id = "researchdoor_interior";
+	id_tag = "researchdoor_interior";
 	name = "Research Door Control";
 	pixel_x = 6;
 	pixel_y = -20
@@ -24455,8 +24450,8 @@
 /obj/structure/bed/chair/office/light{
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "mhealthshutters";
+/obj/machinery/button/blast_door{
+	id_tag = "mhealthshutters";
 	name = "Office Shutters";
 	pixel_x = -6;
 	pixel_y = 24
@@ -24532,7 +24527,7 @@
 	dir = 10
 	},
 /obj/machinery/flasher{
-	id = "Cell 2";
+	id_tag = "Cell 2";
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -25082,7 +25077,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "mhealthshutters";
+	id_tag = "mhealthshutters";
 	name = "Counselor's Office Shutters";
 	opacity = 0
 	},
@@ -25897,8 +25892,8 @@
 /area/hallway/primary/firstdeck/fore)
 "nZB" = (
 /obj/machinery/teleport/station,
-/obj/machinery/button/remote/blast_door{
-	id = "teleport1";
+/obj/machinery/button/blast_door{
+	id_tag = "teleport1";
 	name = "First Deck Teleporter Access Shutter Control";
 	pixel_x = 24;
 	pixel_y = 6
@@ -26187,8 +26182,7 @@
 "opg" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -26380,7 +26374,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio3";
+	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -27449,20 +27443,18 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "pQr" = (
-/obj/machinery/button/remote/airlock{
-	id = "medtoilet";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "medtoilet";
 	name = "Door Bolt Control";
 	pixel_x = 25;
-	pixel_y = 5;
-	specialfunctions = 4
+	pixel_y = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/button/remote/airlock{
-	id = "medtoiletmaint";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "medtoiletmaint";
 	name = "Maintenance Bolt Control";
 	pixel_x = 25;
-	pixel_y = -5;
-	specialfunctions = 4
+	pixel_y = -5
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
@@ -27787,7 +27779,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "operation_checkpoint_shutters";
+	id_tag = "operation_checkpoint_shutters";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -27866,7 +27858,7 @@
 /area/maintenance/firstdeck/foreport)
 "qxQ" = (
 /obj/machinery/flasher{
-	id = "permflash";
+	id_tag = "permflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -28508,7 +28500,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "misclab";
+	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
 	opacity = 0
 	},
@@ -28653,18 +28645,18 @@
 /area/rnd/misc_lab)
 "rub" = (
 /obj/machinery/button/ignition{
-	id = "Xenobio";
+	id_tag = "Xenobio";
 	pixel_x = 6;
 	pixel_y = -28
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "misclab";
+/obj/machinery/button/blast_door{
+	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
 	pixel_x = 6;
 	pixel_y = -20
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "misclabdoor";
+/obj/machinery/button/blast_door{
+	id_tag = "misclabdoor";
 	name = "Test Chamber Entrance";
 	pixel_x = -6;
 	pixel_y = -20
@@ -28984,7 +28976,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "misclab";
+	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
 	opacity = 0
 	},
@@ -29022,7 +29014,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "misclab";
+	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
 	opacity = 0
 	},
@@ -29813,8 +29805,7 @@
 "sCx" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced/oxygen,
@@ -30199,7 +30190,7 @@
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	id = "bo_pshutters";
+	id_tag = "bo_pshutters";
 	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -30236,8 +30227,8 @@
 /area/rnd/xenobiology)
 "teb" = (
 /obj/structure/table/standard,
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio2";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
 	pixel_x = 6;
 	pixel_y = 0
@@ -30245,8 +30236,8 @@
 /obj/item/weapon/extinguisher,
 /obj/item/weapon/storage/box/monkeycubes,
 /obj/item/weapon/storage/box/monkeycubes,
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio2_vent";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio2_vent";
 	name = "Cell 2 Vent";
 	pixel_x = -6;
 	pixel_y = 0
@@ -30319,8 +30310,8 @@
 /area/maintenance/firstdeck/foreport)
 "tib" = (
 /obj/structure/table/standard,
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio3";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
 	pixel_x = -6;
 	pixel_y = 0
@@ -30328,8 +30319,8 @@
 /obj/item/weapon/extinguisher,
 /obj/item/weapon/storage/box/monkeycubes,
 /obj/item/weapon/storage/box/monkeycubes,
-/obj/machinery/button/remote/blast_door{
-	id = "xenobio3_vent";
+/obj/machinery/button/blast_door{
+	id_tag = "xenobio3_vent";
 	name = "Cell 3 Vent";
 	pixel_x = 6;
 	pixel_y = 0
@@ -30427,7 +30418,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio2";
+	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -30442,7 +30433,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "xenobio3";
+	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
 	opacity = 0
 	},
@@ -30974,7 +30965,7 @@
 /area/assembly/robotics/surgery)
 "uUC" = (
 /obj/machinery/flasher{
-	id = "permflash";
+	id_tag = "permflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -30984,8 +30975,7 @@
 "uVf" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/outline/red,
@@ -31009,7 +30999,7 @@
 "uXr" = (
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "teleport1";
+	id_tag = "teleport1";
 	name = "First Deck Teleporter Access Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -31595,7 +31585,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Prison Gate";
+	id_tag = "Prison Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
@@ -31770,7 +31760,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "operation_checkpoint_shutters";
+	id_tag = "operation_checkpoint_shutters";
 	name = "Operation Checkpoint Shutters";
 	opacity = 0
 	},
@@ -31817,7 +31807,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "Secure Gate";
+	id_tag = "Secure Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
@@ -31920,7 +31910,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Prison Gate";
+	id_tag = "Prison Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},

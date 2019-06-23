@@ -1563,7 +1563,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "kitchen";
+	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
 /obj/effect/wallframe_spawn/no_grille,
@@ -1993,7 +1993,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "kitchen";
+	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
 /obj/effect/wallframe_spawn/no_grille,
@@ -3912,8 +3912,8 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics)
 "io" = (
-/obj/machinery/button/remote/blast_door{
-	id = "kitchen";
+/obj/machinery/button/blast_door{
+	id_tag = "kitchen";
 	name = "Kitchen Shutters";
 	pixel_x = 0;
 	pixel_y = -21
@@ -4040,7 +4040,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bsa-window";
+	id_tag = "bsa-window";
 	name = "Observation Blast Door"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
@@ -4665,11 +4665,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/button/remote/airlock{
-	id = "civsafedoor";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "civsafedoor";
 	name = "safe room door-control";
-	pixel_x = 32;
-	specialfunctions = 4
+	pixel_x = 32
 	},
 /obj/machinery/light_switch{
 	pixel_x = 24;
@@ -5766,8 +5765,8 @@
 /area/hallway/primary/thirddeck/fore)
 "ml" = (
 /obj/structure/table/standard,
-/obj/machinery/button/remote/blast_door{
-	id = "bar";
+/obj/machinery/button/blast_door{
+	id_tag = "bar";
 	name = "Bar Shutters";
 	pixel_x = -24;
 	pixel_y = 0
@@ -6269,8 +6268,7 @@
 "nE" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced/oxygen,
@@ -7120,7 +7118,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_hallway_shutters";
+	id_tag = "hab_hallway_shutters";
 	name = "Habitation Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -7432,7 +7430,7 @@
 "pV" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "bar";
+	id_tag = "bar";
 	name = "Bar Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced,
@@ -7804,8 +7802,7 @@
 "qW" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -8508,7 +8505,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_hallway_shutters";
+	id_tag = "hab_hallway_shutters";
 	name = "Habitation Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -9027,7 +9024,7 @@
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "d3starboardnacelle";
+	id_tag = "d3starboardnacelle";
 	implicit_material = null
 	},
 /turf/simulated/floor/reinforced,
@@ -9503,7 +9500,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_checkpoint_shutters";
+	id_tag = "hab_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -10049,7 +10046,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_checkpoint_shutters";
+	id_tag = "hab_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -10650,7 +10647,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "hab_checkpoint_shutters";
+	id_tag = "hab_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -11034,7 +11031,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_checkpoint_shutters";
+	id_tag = "hab_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -11345,7 +11342,7 @@
 "yO" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "teleport3";
+	id_tag = "teleport3";
 	name = "Third Deck Teleporter Access Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -11722,8 +11719,8 @@
 /area/teleporter/thirddeck)
 "zI" = (
 /obj/machinery/teleport/station,
-/obj/machinery/button/remote/blast_door{
-	id = "teleport3";
+/obj/machinery/button/blast_door{
+	id_tag = "teleport3";
 	name = "Third Deck Teleporter Access Shutter Control";
 	pixel_x = -6;
 	pixel_y = 24
@@ -11930,7 +11927,7 @@
 /obj/structure/table/marble,
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "kitchen";
+	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
 /obj/effect/floor_decal/corner/grey/diagonal{
@@ -12178,8 +12175,7 @@
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/tvalve/mirrored/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
@@ -12789,7 +12785,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "kitchen";
+	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -13261,8 +13257,7 @@
 "DX" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced/oxygen,
@@ -14658,7 +14653,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bsa-window";
+	id_tag = "bsa-window";
 	name = "Observation Blast Door"
 	},
 /turf/simulated/floor/plating,
@@ -14804,7 +14799,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bsa-window";
+	id_tag = "bsa-window";
 	name = "Observation Blast Door"
 	},
 /turf/simulated/floor/plating,
@@ -14876,7 +14871,7 @@
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "bsa-core";
+	id_tag = "bsa-core";
 	name = "BSA Blast Door"
 	},
 /turf/simulated/floor/airless,
@@ -15275,8 +15270,7 @@
 "Jm" = (
 /obj/machinery/atmospherics/tvalve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -16118,8 +16112,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "KO" = (
-/obj/machinery/button/remote/blast_door{
-	id = "d3starboardnacelle";
+/obj/machinery/button/blast_door{
+	id_tag = "d3starboardnacelle";
 	name = "combustion chamber blast door controll";
 	pixel_x = 0;
 	pixel_y = -24
@@ -16135,16 +16129,16 @@
 /area/thruster/d3starboard)
 "KS" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "hab_checkpoint_shutters";
+	id_tag = "hab_checkpoint_shutters";
 	name = "Checkpoint Window Shutters";
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "hab_hallway_shutters";
+	id_tag = "hab_hallway_shutters";
 	name = "Hallway Checkpoint Shutters";
 	pixel_x = -3;
 	pixel_y = -3
@@ -16204,7 +16198,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "kitchen";
+	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
 /obj/effect/wallframe_spawn/no_grille,
@@ -16261,7 +16255,7 @@
 "Li" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "cChamber3pV";
+	id_tag = "cChamber3pV";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -16308,8 +16302,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Lo" = (
-/obj/machinery/button/remote/blast_door{
-	id = "d3portnacelle";
+/obj/machinery/button/blast_door{
+	id_tag = "d3portnacelle";
 	name = "combustion chamber blast door controll";
 	pixel_x = 0;
 	pixel_y = 24
@@ -16545,7 +16539,7 @@
 /area/space)
 "LO" = (
 /obj/machinery/sparker{
-	id = "engines";
+	id_tag = "engines";
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
@@ -16585,7 +16579,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "hab_checkpoint_shutters";
+	id_tag = "hab_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -18022,7 +18016,7 @@
 /obj/machinery/smartfridge/foods,
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "kitchen";
+	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
 /turf/simulated/floor/tiled/white,
@@ -18393,8 +18387,7 @@
 "RM" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/outline/red,
@@ -18498,7 +18491,7 @@
 "Sg" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "cChamber3sV";
+	id_tag = "cChamber3sV";
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -18524,7 +18517,7 @@
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "d3portnacelle"
+	id_tag = "d3portnacelle"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
@@ -19005,7 +18998,7 @@
 /obj/structure/table/marble,
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "kitchen";
+	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
 /obj/effect/floor_decal/corner/grey/diagonal{
@@ -19173,7 +19166,7 @@
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "bar";
+	id_tag = "bar";
 	name = "Bar Shutters"
 	},
 /turf/simulated/floor/lino,
@@ -19318,7 +19311,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "hab_checkpoint_shutters";
+	id_tag = "hab_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -19407,12 +19400,11 @@
 	icon_state = "techfloor_edges";
 	dir = 6
 	},
-/obj/machinery/button/remote/airlock{
-	id = "civsafedoorport";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "civsafedoorport";
 	name = "safe room door-control";
 	pixel_x = -32;
-	pixel_y = -32;
-	specialfunctions = 4
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
@@ -19441,7 +19433,7 @@
 /area/hallway/primary/thirddeck/center)
 "UR" = (
 /obj/machinery/sparker{
-	id = "engines";
+	id_tag = "engines";
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
@@ -19560,7 +19552,7 @@
 /obj/structure/table/marble,
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "bar";
+	id_tag = "bar";
 	name = "Bar Shutters"
 	},
 /turf/simulated/floor/lino,
@@ -19627,7 +19619,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bsa-window";
+	id_tag = "bsa-window";
 	name = "Observation Blast Door"
 	},
 /turf/simulated/floor/plating,
@@ -19794,16 +19786,16 @@
 /obj/structure/bed/chair/comfy/black{
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the Bluespace Artillery's core.";
-	id = "bsa-core";
+	id_tag = "bsa-core";
 	name = "Artillery Core Blast Doors";
 	pixel_x = -5;
 	pixel_y = 28
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the Bluespace Artillery observation windows.";
-	id = "bsa-window";
+	id_tag = "bsa-window";
 	name = "Observation Blast Doors";
 	pixel_x = 5;
 	pixel_y = 28
@@ -20033,7 +20025,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_hallway_shutters";
+	id_tag = "hab_hallway_shutters";
 	name = "Habitation Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -20572,7 +20564,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_hallway_shutters";
+	id_tag = "hab_hallway_shutters";
 	name = "Habitation Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -20848,7 +20840,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hab_hallway_shutters";
+	id_tag = "hab_hallway_shutters";
 	name = "Habitation Deck Hallway Shutters";
 	opacity = 0
 	},

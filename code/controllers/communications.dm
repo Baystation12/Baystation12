@@ -126,6 +126,10 @@ var/const/EXP_FREQ = 1361
 var/const/MED_I_FREQ = 1485
 var/const/SEC_I_FREQ = 1475
 
+// Device signal frequencies
+var/const/FUEL_FREQ    = 1447 // Used by fuel atmos stuff, and currently default for digital valves
+var/const/BUTTON_FREQ  = 1301 // Used by generic buttons controlling stuff
+
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
 	"Science"		= SCI_FREQ,
@@ -313,18 +317,20 @@ var/global/datum/controller/radio/radio_controller
 
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
 /datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/radio_filter, var/turf/start_point = null, var/range = null)
-	if (range && !start_point)
-		return
+	var/list/z_levels
+	if(start_point)
+		z_levels = GetConnectedZlevels(start_point.z)
 
 	for(var/obj/device in devices[radio_filter])
 		if(device == source)
 			continue
-		if(range)
-			var/turf/end_point = get_turf(device)
-			if(!end_point)
-				continue
-			if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
-				continue
+		var/turf/end_point = get_turf(device)
+		if(!end_point)
+			continue
+		if(z_levels && !(end_point.z in z_levels))
+			continue
+		if(range && get_dist(start_point, end_point) > range)
+			continue
 
 		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
