@@ -8,8 +8,6 @@
 	anchored = 0
 	density = 1
 	req_access = list(access_engine_equip)
-	var/id = null
-
 	active_power_usage = 100 KILOWATTS
 
 	var/efficiency = 0.3	// Energy efficiency. 30% at this time, so 100kW load means 30kW laser pulses.
@@ -23,10 +21,20 @@
 	var/shot_number = 0
 	var/state = 0
 	var/locked = 0
-
-	var/_wifi_id
-	var/datum/wifi/receiver/button/emitter/wifi_receiver
 	core_skill = SKILL_ENGINES
+
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/emmitter_active,
+		/decl/public_access/public_variable/emmitter_locked
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_emitter
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/emitter = 1)
 
 /obj/machinery/power/emitter/anchored
 	anchored = 1
@@ -36,14 +44,10 @@
 	. = ..()
 	if(state == 2 && anchored)
 		connect_to_network()
-		if(_wifi_id)
-			wifi_receiver = new(_wifi_id, src)
 
 /obj/machinery/power/emitter/Destroy()
 	log_and_message_admins("deleted \the [src]")
 	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
-	qdel(wifi_receiver)
-	wifi_receiver = null
 	return ..()
 
 /obj/machinery/power/emitter/on_update_icon()
@@ -229,3 +233,32 @@
 
 /obj/machinery/power/emitter/proc/get_emitter_beam()
 	return new /obj/item/projectile/beam/emitter(get_turf(src))
+
+/decl/public_access/public_method/toggle_emitter
+	name = "toggle emitter"
+	desc = "Toggles whether or not the emitter is active. It must be unlocked to work."
+	call_proc = /obj/machinery/power/emitter/proc/activate
+
+/decl/public_access/public_variable/emmitter_active
+	expected_type = /obj/machinery/power/emitter
+	name = "emitter active"
+	desc = "Whether or not the emitter is firing."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/emmitter_active/access_var(obj/machinery/power/emitter/emitter)
+	return emitter.active
+
+/decl/public_access/public_variable/emmitter_locked
+	expected_type = /obj/machinery/power/emitter
+	name = "emitter locked"
+	desc = "Whether or not the emitter is locked. Being locked prevents one from changing the active state."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/emmitter_locked/access_var(obj/machinery/power/emitter/emitter)
+	return emitter.locked
+
+/decl/stock_part_preset/radio/receiver/emitter
+	frequency = BUTTON_FREQ
+	receive_and_call = list("button_active" = /decl/public_access/public_method/toggle_emitter)

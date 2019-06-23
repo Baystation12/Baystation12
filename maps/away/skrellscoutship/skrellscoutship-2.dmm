@@ -105,7 +105,7 @@
 "ap" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock";
+	id_tag = "xil_airlock";
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
@@ -663,7 +663,7 @@
 "bH" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock";
+	id_tag = "xil_airlock";
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
@@ -672,8 +672,8 @@
 	locked = 1
 	},
 /obj/effect/shuttle_landmark/skrellscoutship/start,
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	pixel_x = 32;
 	req_access = list("ACCESS_SKRELLSCOUT")
@@ -747,8 +747,8 @@
 /area/ship/skrellscoutship/crew/hallway/d1)
 "bO" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	req_access = list("ACCESS_SKRELLSCOUT")
 	},
@@ -1204,15 +1204,15 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock"
+	id_tag = "xil_airlock"
 	},
 /obj/machinery/door/airlock/external/glass{
 	frequency = 1291;
 	id_tag = "xil_solar_outer";
 	locked = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	pixel_y = 32;
 	req_access = list("ACCESS_SKRELLSCOUT")
@@ -1532,7 +1532,7 @@
 "dm" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock";
+	id_tag = "xil_airlock";
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
@@ -1540,8 +1540,8 @@
 	id_tag = "xil_air_outer";
 	locked = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	pixel_x = 32;
 	req_access = list("ACCESS_SKRELLSCOUT")
@@ -1776,8 +1776,8 @@
 /area/ship/skrellscoutship/crew/rec)
 "wS" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
-	id = "xil_bridge";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_bridge";
 	name = "Mess Hall Blast Doors"
 	},
 /turf/simulated/floor/tiled/skrell/red,

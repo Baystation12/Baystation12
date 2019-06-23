@@ -489,6 +489,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
 	desc = "A remote control switch for electrochromic windows."
+	var/id
 	var/range = 7
 
 /obj/machinery/button/windowtint/attack_hand(mob/user as mob)

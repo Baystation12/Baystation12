@@ -5,7 +5,6 @@
 	desc = "A wall-mounted flashbulb device."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "mflash1"
-	var/id = null
 	var/range = 2 //this is roughly the size of brig cell
 	var/disable = 0
 	var/last_flash = 0 //Don't want it getting spammed like regular flashes
@@ -14,8 +13,15 @@
 	anchored = 1
 	idle_power_usage = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
-	var/_wifi_id
-	var/datum/wifi/receiver/button/flasher/wifi_receiver
+
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	public_methods = list(
+		/decl/public_access/public_method/flasher_flash
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/flasher = 1)
 
 /obj/machinery/flasher/portable //Portable version of the flasher. Only flashes when anchored
 	name = "portable flasher"
@@ -25,16 +31,6 @@
 	anchored = 0
 	base_state = "pflash"
 	density = 1
-
-/obj/machinery/flasher/Initialize()
-	. = ..()
-	if(_wifi_id)
-		wifi_receiver = new(_wifi_id, src)
-
-/obj/machinery/flasher/Destroy()
-	qdel(wifi_receiver)
-	wifi_receiver = null
-	return ..()
 
 /obj/machinery/flasher/on_update_icon()
 	if ( !(stat & (BROKEN|NOPOWER)) )
@@ -141,25 +137,13 @@
 /obj/machinery/button/flasher
 	name = "flasher button"
 	desc = "A remote control switch for a mounted flasher."
+	cooldown = 5 SECONDS
 
-/obj/machinery/button/flasher/attack_hand(mob/user as mob)
+/decl/public_access/public_method/flasher_flash
+	name = "flash"
+	desc = "Performs a flash, if possible."
+	call_proc = /obj/machinery/flasher/proc/flash
 
-	if(..())
-		return
-
-	use_power_oneoff(5)
-
-	active = 1
-	icon_state = "launcheract"
-
-	for(var/obj/machinery/flasher/M in SSmachines.machinery)
-		if(M.id == src.id)
-			spawn()
-				M.flash()
-
-	sleep(50)
-
-	icon_state = "launcherbtt"
-	active = 0
-
-	return
+/decl/stock_part_preset/radio/receiver/flasher
+	frequency = BUTTON_FREQ
+	receive_and_call = list("button_active" = /decl/public_access/public_method/flasher_flash)

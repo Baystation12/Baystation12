@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				continue // only apply one preset per part
 			if(istype(part, preset.expected_part_type))
 				preset.apply(src, part)
-				processed_parts += part
+				processed_parts[part] = TRUE
 				number--
 				if(number == 0)
 					break

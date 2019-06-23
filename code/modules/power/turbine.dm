@@ -36,7 +36,6 @@
 	density = 1
 	var/obj/machinery/compressor/compressor
 	var/list/obj/machinery/door/blast/doors
-	var/id = 0
 	var/door_status = 0
 
 // the inlet stage of the gas turbine electricity generator
@@ -200,11 +199,11 @@
 /obj/machinery/computer/turbine_computer/Initialize()
 	. = ..()
 	for(var/obj/machinery/compressor/C in SSmachines.machinery)
-		if(id == C.comp_id)
+		if(id_tag == C.comp_id)
 			compressor = C
 	doors = new /list()
 	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
-		if(P.id == id)
+		if(P.id_tag == id_tag)
 			doors += P
 
 /obj/machinery/computer/turbine_computer/Destroy()

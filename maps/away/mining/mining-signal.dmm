@@ -555,14 +555,14 @@
 "bW" = (
 /obj/machinery/door/airlock/security,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "bX" = (
 /obj/machinery/door/airlock/science,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
@@ -734,7 +734,7 @@
 "ct" = (
 /obj/machinery/door/airlock/centcom,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -942,7 +942,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -988,7 +988,7 @@
 "dm" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -1407,7 +1407,7 @@
 /area/outpost/abandoned)
 "eE" = (
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
@@ -2014,7 +2014,7 @@
 "go" = (
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -2631,8 +2631,8 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "mars_blast"
+/obj/machinery/button/blast_door{
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)

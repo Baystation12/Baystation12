@@ -111,7 +111,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "pdoor0";
-	id = "casino_bridge";
+	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
 	opacity = 0
 	},
@@ -143,7 +143,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "casino_bridge";
+	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
 	opacity = 0
 	},
@@ -312,8 +312,8 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "casino_weaponry";
+/obj/machinery/button/blast_door{
+	id_tag = "casino_weaponry";
 	name = "Weaponry Blast Door contol";
 	pixel_y = -25
 	},
@@ -326,8 +326,8 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aW" = (
-/obj/machinery/button/remote/blast_door{
-	id = "casino_bridge";
+/obj/machinery/button/blast_door{
+	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Door contol";
 	pixel_y = -25
 	},
@@ -435,7 +435,7 @@
 /area/casino/casino_maintenance)
 "bk" = (
 /obj/machinery/door/blast/regular{
-	id = "casino_weaponry"
+	id_tag = "casino_weaponry"
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
@@ -732,14 +732,14 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "bP" = (
-/obj/machinery/button/remote/blast_door{
-	id = "casino_shuttle_control";
+/obj/machinery/button/blast_door{
+	id_tag = "casino_shuttle_control";
 	name = "Shuttle control blast door-control";
 	pixel_x = 10;
 	pixel_y = 25
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "casino_hangar";
+/obj/machinery/button/blast_door{
+	id_tag = "casino_hangar";
 	name = "Hangar gates";
 	pixel_x = -5;
 	pixel_y = 25
@@ -1001,7 +1001,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	icon_state = "pdoor0";
-	id = "casino_shuttle_control"
+	id_tag = "casino_shuttle_control"
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled,
@@ -1134,7 +1134,7 @@
 "cX" = (
 /obj/machinery/door/blast/regular{
 	dir = 8;
-	id = "casino_hangar";
+	id_tag = "casino_hangar";
 	name = "Hangar gate"
 	},
 /turf/simulated/floor/plating,
@@ -1975,7 +1975,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "casino_checkpoint";
+	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
 	opacity = 0
 	},
@@ -2077,7 +2077,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "casino_checkpoint";
+	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
 	opacity = 0
 	},
@@ -2121,7 +2121,7 @@
 	density = 0;
 	dir = 8;
 	icon_state = "pdoor0";
-	id = "casino_main"
+	id_tag = "casino_main"
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/space,
@@ -2333,7 +2333,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "casino_checkpoint";
+	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
 	opacity = 0
 	},
@@ -2439,8 +2439,8 @@
 "gs" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/table/marble,
-/obj/machinery/button/remote/blast_door{
-	id = "casino_main";
+/obj/machinery/button/blast_door{
+	id_tag = "casino_main";
 	name = "Main floor Blast Doors"
 	},
 /turf/simulated/floor/tiled,
@@ -4987,7 +4987,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	icon_state = "pdoor0";
-	id = "Starboard wide window BD"
+	id_tag = "Starboard wide window BD"
 	},
 /turf/space,
 /area/casino/casino_bow)
@@ -5521,8 +5521,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "casino_checkpoint";
+/obj/machinery/button/blast_door{
+	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Door contol";
 	pixel_y = -25
 	},

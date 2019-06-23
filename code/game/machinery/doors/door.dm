@@ -459,6 +459,12 @@
 		qdel(fire)
 	return
 
+/obj/machinery/door/proc/toggle(forced = 0)
+	if(density)
+		open(forced)
+	else
+		close(forced)
+
 /obj/machinery/door/proc/requiresID()
 	return 1
 
@@ -568,3 +574,15 @@
 		req_access = req_access_union(fore, aft)
 	else
 		req_access = req_access_diff(fore, aft)
+
+// Public access
+
+/decl/public_access/public_method/open_door
+	name = "open door"
+	desc = "Opens the door if possible."
+	call_proc = /obj/machinery/door/proc/open
+
+/decl/public_access/public_method/toggle_door
+	name = "toggle door"
+	desc = "Toggles whether the door is open or not, if possible."
+	call_proc = /obj/machinery/door/proc/toggle

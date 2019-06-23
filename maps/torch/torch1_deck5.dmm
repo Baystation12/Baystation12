@@ -306,7 +306,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "calypso_shutters";
+	id_tag = "calypso_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -330,7 +330,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "calypso_shutters";
+	id_tag = "calypso_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -426,7 +426,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "calypso_shutters";
+	id_tag = "calypso_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -601,7 +601,7 @@
 "bL" = (
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "guppy_hatch";
+	id_tag = "guppy_hatch";
 	name = "Rear Hatch"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -660,8 +660,8 @@
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bT" = (
-/obj/machinery/button/remote/blast_door{
-	id = "calypso_shutters";
+/obj/machinery/button/blast_door{
+	id_tag = "calypso_shutters";
 	name = "Protective Shutters Control";
 	pixel_x = -32
 	},
@@ -773,7 +773,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "calypso_shutters";
+	id_tag = "calypso_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -1146,7 +1146,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "calypso_shutters";
+	id_tag = "calypso_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -1745,8 +1745,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "guppy_hatch";
+/obj/machinery/button/blast_door{
+	id_tag = "guppy_hatch";
 	name = "Rear Hatch Control";
 	pixel_x = 0;
 	pixel_y = 0;
@@ -2531,7 +2531,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "calypso_shutters";
+	id_tag = "calypso_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -3240,7 +3240,7 @@
 "hE" = (
 /obj/machinery/door/blast/shutters{
 	dir = 8;
-	id = "qm_warehouse";
+	id_tag = "qm_warehouse";
 	name = "Warehouse Shutters"
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -3548,8 +3548,8 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "mine_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "mine_warehouse";
 	name = "Storage Door Control";
 	pixel_x = 24;
 	pixel_y = -6
@@ -3799,8 +3799,8 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "qm_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "qm_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
 	pixel_y = 6;
@@ -3959,7 +3959,7 @@
 "js" = (
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "mine_warehouse";
+	id_tag = "mine_warehouse";
 	name = "Storage Shutters"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -4478,9 +4478,9 @@
 /area/quartermaster/exploration)
 "kx" = (
 /obj/effect/catwalk_plated,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for airlocks.";
-	id = "hangarexit";
+	id_tag = "hangarexit";
 	name = "Hangar Exit Door Control";
 	pixel_x = -24;
 	pixel_y = 0;
@@ -5123,8 +5123,8 @@
 	icon_state = "warningcorner";
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "mine_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "mine_warehouse";
 	name = "Storage Door Control";
 	pixel_x = -24;
 	pixel_y = -6
@@ -6539,8 +6539,8 @@
 	icon_state = "warningcorner";
 	dir = 4
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "qm_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "qm_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = 24;
 	pixel_y = 6;
@@ -6702,9 +6702,9 @@
 /area/hallway/primary/fifthdeck/fore)
 "pb" = (
 /obj/effect/catwalk_plated,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for airlocks.";
-	id = "hangarexit2";
+	id_tag = "hangarexit2";
 	name = "Hangar Exit Door Control";
 	pixel_x = 24;
 	pixel_y = 0;
@@ -10131,7 +10131,7 @@
 	dir = 8;
 	opacity = 1;
 	density = 1;
-	id = "toxin_exhaust"
+	id_tag = "toxin_exhaust"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/toxins)
@@ -10202,7 +10202,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -10808,14 +10808,14 @@
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/random/tool,
-/obj/machinery/button/remote/blast_door{
-	id = "petrovcell1";
+/obj/machinery/button/blast_door{
+	id_tag = "petrovcell1";
 	name = "Test Chamber Vent";
 	pixel_x = -26;
 	pixel_y = -26
 	},
 /obj/machinery/button/ignition{
-	id = "Isocell1";
+	id_tag = "Isocell1";
 	pixel_x = -36;
 	pixel_y = -25
 	},
@@ -10831,8 +10831,8 @@
 /area/maintenance/fifthdeck/aftport)
 "zo" = (
 /obj/structure/table/reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovShield";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
@@ -11104,7 +11104,7 @@
 /area/shuttle/petrov/hallwaya)
 "At" = (
 /obj/machinery/sparker{
-	id = "Isocell2";
+	id_tag = "Isocell2";
 	pixel_x = -18
 	},
 /obj/structure/cable/cyan{
@@ -11193,7 +11193,7 @@
 /area/shuttle/petrov/rd)
 "AP" = (
 /obj/machinery/sparker{
-	id = "Isocell3";
+	id_tag = "Isocell3";
 	pixel_x = -18
 	},
 /turf/simulated/floor/reinforced,
@@ -11301,7 +11301,7 @@
 	density = 1;
 	dir = 1;
 	icon_state = "pdoor1";
-	id = "petrovcell3";
+	id_tag = "petrovcell3";
 	name = "Test Chamber Blast Doors";
 	opacity = 1
 	},
@@ -11803,8 +11803,8 @@
 /area/quartermaster/shuttlefuel)
 "Dc" = (
 /obj/effect/paint/hull,
-/obj/machinery/button/remote/blast_door{
-	id = "guppy_hatch";
+/obj/machinery/button/blast_door{
+	id_tag = "guppy_hatch";
 	name = "Rear Hatch Control";
 	pixel_x = 0;
 	pixel_y = 0;
@@ -11857,8 +11857,8 @@
 "Dl" = (
 /obj/structure/table/steel,
 /obj/machinery/chemical_dispenser/bar_alc/full,
-/obj/machinery/button/remote/blast_door{
-	id = "auxbar";
+/obj/machinery/button/blast_door{
+	id_tag = "auxbar";
 	name = "Blast Shutter Control";
 	pixel_x = 26;
 	pixel_y = 0
@@ -12034,7 +12034,7 @@
 	dir = 4
 	},
 /obj/machinery/button/ignition{
-	id = "Isocell3";
+	id_tag = "Isocell3";
 	pixel_x = -6;
 	pixel_y = -25
 	},
@@ -12042,8 +12042,8 @@
 /area/shuttle/petrov/isolation)
 "DK" = (
 /obj/effect/paint/silver,
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovBiohazard";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
@@ -12079,7 +12079,7 @@
 	},
 /obj/machinery/light,
 /obj/machinery/button/ignition{
-	id = "Isocell2";
+	id_tag = "Isocell2";
 	pixel_x = -6;
 	pixel_y = -25
 	},
@@ -12156,8 +12156,7 @@
 /obj/machinery/atmospherics/tvalve/digital{
 	icon_state = "map_tvalve0";
 	dir = 1;
-	frequency = 1447;
-	id = "fuelmode"
+	id_tag = "fuelmode"
 	},
 /obj/machinery/light{
 	dir = 8
@@ -12531,14 +12530,14 @@
 /area/shuttle/petrov/rnd)
 "FX" = (
 /obj/structure/table/reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovShield";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovBiohazard";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
@@ -12597,7 +12596,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -12726,7 +12725,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -13595,8 +13594,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/button/remote/blast_door{
-	id = "petrovcell3";
+/obj/machinery/button/blast_door{
+	id_tag = "petrovcell3";
 	name = "Test Chamber Vent";
 	pixel_x = -26;
 	pixel_y = -26
@@ -13707,7 +13706,7 @@
 /area/maintenance/fifthdeck/aftport)
 "Kb" = (
 /obj/machinery/sparker{
-	id = "Isocell1";
+	id_tag = "Isocell1";
 	pixel_x = -18
 	},
 /turf/simulated/floor/reinforced,
@@ -13717,7 +13716,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -14435,7 +14434,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "PetrovBiohazard";
+	id_tag = "PetrovBiohazard";
 	name = "Petrov Biohazard Shutters";
 	opacity = 0
 	},
@@ -14546,7 +14545,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -14598,7 +14597,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "concheckwindow2";
+	id_tag = "concheckwindow2";
 	name = "Research Checkpoint Shutters";
 	opacity = 0
 	},
@@ -14707,7 +14706,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -14762,7 +14761,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -14914,7 +14913,7 @@
 	density = 1;
 	dir = 1;
 	icon_state = "pdoor1";
-	id = "petrovcell1";
+	id_tag = "petrovcell1";
 	name = "Test Chamber Blast Doors";
 	opacity = 1
 	},
@@ -15287,14 +15286,14 @@
 	pixel_x = 1;
 	pixel_y = 9
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovShield";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovBiohazard";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
@@ -15363,22 +15362,22 @@
 /area/quartermaster/expedition/eva)
 "Qo" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovShield";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for airlocks.";
-	id = "PetrovAccess";
+	id_tag = "PetrovAccess";
 	name = "Petrov Interior Door Control";
 	pixel_x = -5;
 	pixel_y = 6;
 	req_access = list("ACCESS_TORCH_PETROV_SEC")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "PetrovBiohazard";
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
@@ -15390,8 +15389,8 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "concheckwindow2";
+/obj/machinery/button/blast_door{
+	id_tag = "concheckwindow2";
 	name = "Office Shutter Control";
 	pixel_x = 5;
 	pixel_y = 6
@@ -15422,7 +15421,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -15533,7 +15532,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular{
 	dir = 1;
-	id = "auxbar";
+	id_tag = "auxbar";
 	name = "Blast Shutters"
 	},
 /turf/simulated/floor/plating,
@@ -15830,7 +15829,7 @@
 	density = 1;
 	dir = 1;
 	icon_state = "pdoor1";
-	id = "petrovcell2";
+	id_tag = "petrovcell2";
 	name = "Test Chamber Blast Doors";
 	opacity = 1
 	},
@@ -16133,7 +16132,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},
@@ -16729,7 +16728,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "PetrovBiohazard";
+	id_tag = "PetrovBiohazard";
 	name = "Petrov Biohazard Shutters";
 	opacity = 0
 	},
@@ -16765,8 +16764,8 @@
 	icon_state = "intact";
 	dir = 9
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "petrovcell2";
+/obj/machinery/button/blast_door{
+	id_tag = "petrovcell2";
 	name = "Test Chamber Vent";
 	pixel_x = -26;
 	pixel_y = -26
@@ -17541,7 +17540,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "concheckwindow2";
+	id_tag = "concheckwindow2";
 	name = "Research Checkpoint Shutters";
 	opacity = 0
 	},
@@ -17885,7 +17884,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "PetrovShield";
+	id_tag = "PetrovShield";
 	name = "Petrov Blast Shutters";
 	opacity = 0
 	},

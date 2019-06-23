@@ -26,10 +26,6 @@
 	name = T_BOARD("atmospheric alert console")
 	build_path = /obj/machinery/computer/atmos_alert
 
-/obj/item/weapon/stock_parts/circuitboard/pod
-	name = T_BOARD("massdriver control")
-	build_path = /obj/machinery/computer/pod
-
 /obj/item/weapon/stock_parts/circuitboard/robotics
 	name = T_BOARD("robotics control console")
 	build_path = /obj/machinery/computer/robotics
@@ -62,18 +58,6 @@
 /obj/item/weapon/stock_parts/circuitboard/powermonitor
 	name = T_BOARD("power monitoring console")
 	build_path = /obj/machinery/computer/power_monitor
-
-/obj/item/weapon/stock_parts/circuitboard/olddoor
-	name = T_BOARD("DoorMex")
-	build_path = /obj/machinery/computer/pod/old
-
-/obj/item/weapon/stock_parts/circuitboard/syndicatedoor
-	name = T_BOARD("ProComp Executive")
-	build_path = /obj/machinery/computer/pod/old/syndicate
-
-/obj/item/weapon/stock_parts/circuitboard/swfdoor
-	name = T_BOARD("Magix")
-	build_path = /obj/machinery/computer/pod/old/swf
 
 /obj/item/weapon/stock_parts/circuitboard/prisoner
 	name = T_BOARD("prisoner management console")

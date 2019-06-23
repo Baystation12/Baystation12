@@ -554,11 +554,11 @@
 "bf" = (
 /obj/structure/closet/secure_closet/bridgeofficer,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	name = "Bridge Sensor Shroud Control";
 	pixel_x = -28;
 	req_access = list("ACCESS_BRIDGE");
-	id = "bridge sensors"
+	id_tag = "bridge sensors"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
@@ -993,7 +993,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge entry star";
+	id_tag = "bridge entry star";
 	name = "Bridge Starboard Lockdown Window Shutters";
 	opacity = 0
 	},
@@ -1063,7 +1063,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "heads_meeting";
+	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
 	opacity = 0
 	},
@@ -1971,15 +1971,15 @@
 /obj/machinery/photocopier/faxmachine{
 	department = "Bridge"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "meetindstarboard";
+/obj/machinery/button/alternate/door{
+	id_tag = "meetindstarboard";
 	name = "Bridge Meeting Starboard Door Control";
 	pixel_x = 34;
 	pixel_y = -6;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/airlock{
-	id = "meetingport";
+/obj/machinery/button/alternate/door{
+	id_tag = "meetingport";
 	name = "Bridge Meeting Port Door Control";
 	pixel_x = 34;
 	pixel_y = 6;
@@ -2334,13 +2334,13 @@
 	dir = 1;
 	network = list("Command","Engineering")
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "CE's Office Door Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = 0;
 	pixel_y = -27;
 	req_access = list("ACCESS_CHIEF_ENGINEER");
-	id = "cedoor"
+	id_tag = "cedoor"
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
@@ -2416,11 +2416,11 @@
 "dU" = (
 /obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	name = "Bridge Window Lockdown Control";
 	pixel_x = -30;
 	pixel_y = 0;
-	id = "bridge blast"
+	id_tag = "bridge blast"
 	},
 /obj/machinery/light/spot{
 	dir = 8
@@ -2663,7 +2663,7 @@
 	density = 1;
 	dir = 4;
 	icon_state = "shutter1";
-	id = "hop_office_desk";
+	id_tag = "hop_office_desk";
 	name = "XO Queue Privacy Shutters";
 	opacity = 1
 	},
@@ -2970,7 +2970,7 @@
 	density = 1;
 	dir = 4;
 	icon_state = "shutter1";
-	id = "hop_office_desk";
+	id_tag = "hop_office_desk";
 	name = "XO Queue Privacy Shutters";
 	opacity = 1
 	},
@@ -3219,8 +3219,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
 "fn" = (
-/obj/machinery/button/remote/blast_door{
-	id = "aquila_shutters";
+/obj/machinery/button/blast_door{
+	id_tag = "aquila_shutters";
 	name = "Protective Shutters Control";
 	pixel_x = -32
 	},
@@ -3896,9 +3896,9 @@
 	dir = 8
 	},
 /obj/item/modular_computer/tablet/lease/preset/command,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";
-	id = "repdoor";
+	id_tag = "repdoor";
 	name = "SCGR's Office Door Control";
 	pixel_x = 27;
 	pixel_y = 5;
@@ -4210,7 +4210,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_hallway_shutters";
+	id_tag = "bridge_hallway_shutters";
 	name = "Bridge Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -4384,7 +4384,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "heads_meeting";
+	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
 	opacity = 0
 	},
@@ -4601,7 +4601,7 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "aquila_shutters";
+	id_tag = "aquila_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -4953,19 +4953,19 @@
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 1
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "Bridge Access Starboard Door Control";
 	pixel_x = 38;
 	pixel_y = 24;
 	req_access = list("ACCESS_BRIDGE");
-	id = "starboardbridgeaccess"
+	id_tag = "starboardbridgeaccess"
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "Bridge Starboard Door Control";
 	pixel_x = 26;
 	pixel_y = 24;
 	req_access = list("ACCESS_BRIDGE");
-	id = "starboardbridgedoor"
+	id_tag = "starboardbridgedoor"
 	},
 /obj/machinery/button/windowtint{
 	pixel_x = 24;
@@ -4985,7 +4985,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridgehallway";
+	id_tag = "bridgehallway";
 	name = "Bridge Interior Hallway Shutters";
 	opacity = 0
 	},
@@ -5036,7 +5036,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "heads_meeting";
+	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
 	opacity = 0
 	},
@@ -5380,7 +5380,7 @@
 	density = 1;
 	dir = 4;
 	icon_state = "shutter1";
-	id = "hop_office";
+	id_tag = "hop_office";
 	name = "XO Office Privacy Shutters";
 	opacity = 1
 	},
@@ -5516,7 +5516,7 @@
 	density = 1;
 	dir = 4;
 	icon_state = "shutter1";
-	id = "hop_office";
+	id_tag = "hop_office";
 	name = "XO Office Privacy Shutters";
 	opacity = 1
 	},
@@ -6128,7 +6128,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "bridge blast";
+	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
 	},
 /turf/simulated/floor/plating,
@@ -6235,9 +6235,9 @@
 	pixel_x = 32;
 	pixel_y = -32
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the AI core maintenance door.";
-	id = "AICore";
+	id_tag = "AICore";
 	name = "AI Core Shutter Control";
 	pixel_x = 24;
 	pixel_y = 24
@@ -6401,9 +6401,9 @@
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/item/weapon/stamp/sea,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";
-	id = "seaforedoor";
+	id_tag = "seaforedoor";
 	name = "SEA's Office Door Control";
 	pixel_x = -6;
 	pixel_y = -25;
@@ -6430,7 +6430,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_checkpoint_shutters";
+	id_tag = "bridge_checkpoint_shutters";
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -6476,13 +6476,13 @@
 	c_tag = "Head of Security - Office";
 	network = list("Command","Security")
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "COS's Office Door Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = 0;
 	pixel_y = 27;
 	req_access = list("ACCESS_HEAD_OF_SECURITY");
-	id = "cosdoor"
+	id_tag = "cosdoor"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
@@ -6513,7 +6513,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_checkpoint_shutters";
+	id_tag = "bridge_checkpoint_shutters";
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -7035,19 +7035,19 @@
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 4
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "Bridge Access Port Door Control";
 	pixel_x = 38;
 	pixel_y = -26;
 	req_access = list("ACCESS_BRIDGE");
-	id = "portbridgeaccess"
+	id_tag = "portbridgeaccess"
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "Bridge Port Door Control";
 	pixel_x = 26;
 	pixel_y = -26;
 	req_access = list("ACCESS_BRIDGE");
-	id = "portbridgedoor"
+	id_tag = "portbridgedoor"
 	},
 /obj/machinery/button/windowtint{
 	pixel_x = 24;
@@ -7064,12 +7064,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/button/remote/airlock{
-	id = "bridgesafe_back";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "bridgesafe_back";
 	name = "Emergency Exit door-control";
 	pixel_x = 25;
-	pixel_y = -25;
-	specialfunctions = 4
+	pixel_y = -25
 	},
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor,
@@ -7122,19 +7121,19 @@
 /obj/item/device/binoculars,
 /obj/item/weapon/crowbar/prybar,
 /obj/random/maintenance/solgov/clean,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	name = "Checkpoint Window Shutters";
 	desc = "A remote control-switch for shutters.";
 	pixel_x = 26;
 	pixel_y = 25;
-	id = "bridge_checkpoint_shutters"
+	id_tag = "bridge_checkpoint_shutters"
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	name = "Hallway Checkpoint Shutters";
 	desc = "A remote control-switch for shutters.";
 	pixel_x = 26;
 	pixel_y = 37;
-	id = "bridge_hallway_shutters"
+	id_tag = "bridge_hallway_shutters"
 	},
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
@@ -7349,7 +7348,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "heads_meeting";
+	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
 	opacity = 0
 	},
@@ -7372,7 +7371,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "bridge_checkpoint_shutters";
+	id_tag = "bridge_checkpoint_shutters";
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -8253,7 +8252,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bridge entry port";
+	id_tag = "bridge entry port";
 	name = "Port Bridge Blast Doors";
 	opacity = 0
 	},
@@ -9462,12 +9461,11 @@
 	start_pressure = 450
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door/bolts{
 	name = "safe room door-control";
 	pixel_x = 25;
 	pixel_y = 0;
-	id = "bridgesafe_front";
-	specialfunctions = 4
+	id_tag = "bridgesafe_front"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/bridge)
@@ -10694,7 +10692,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "bridge blast";
+	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
 	},
 /turf/simulated/floor/plating,
@@ -11336,13 +11334,13 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "CMO's Office Door Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = -5;
 	pixel_y = -35;
 	req_access = list("ACCESS_CHIEF_MEDICAL_OFFICER");
-	id = "cmodoor"
+	id_tag = "cmodoor"
 	},
 /obj/machinery/button/windowtint{
 	pixel_x = 7;
@@ -11587,7 +11585,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "bridge_checkpoint_shutters";
+	id_tag = "bridge_checkpoint_shutters";
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -11661,7 +11659,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_checkpoint_shutters";
+	id_tag = "bridge_checkpoint_shutters";
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -11681,7 +11679,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_hallway_shutters";
+	id_tag = "bridge_hallway_shutters";
 	name = "Bridge Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -11736,7 +11734,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "aquila_shutters";
+	id_tag = "aquila_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -11885,7 +11883,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "bridge blast";
+	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
 	},
 /turf/simulated/floor/plating,
@@ -11915,7 +11913,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_checkpoint_shutters";
+	id_tag = "bridge_checkpoint_shutters";
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -11932,7 +11930,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bridge entry port";
+	id_tag = "bridge entry port";
 	name = "Port Bridge Blast Doors";
 	opacity = 0
 	},
@@ -12048,14 +12046,13 @@
 /area/hallway/primary/bridge/fore)
 "BB" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door/bolts{
 	name = "CL's Backroom Door Bolt Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = -26;
 	pixel_y = -7;
 	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id = "liaisondoor3";
-	specialfunctions = 4
+	id_tag = "liaisondoor3"
 	},
 /obj/machinery/light_switch{
 	pixel_x = -24;
@@ -12066,11 +12063,11 @@
 "BE" = (
 /obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	name = "Bridge Window Lockdown Control";
 	pixel_x = -30;
 	pixel_y = 0;
-	id = "bridge blast"
+	id_tag = "bridge blast"
 	},
 /obj/item/weapon/storage/box/donut,
 /obj/machinery/light/spot{
@@ -12110,7 +12107,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "cap_window";
+	id_tag = "cap_window";
 	name = "CO's Quarters Shutters"
 	},
 /turf/simulated/floor/plating,
@@ -12371,7 +12368,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "aquila_shutters";
+	id_tag = "aquila_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -12465,7 +12462,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridgehallway";
+	id_tag = "bridgehallway";
 	name = "Bridge Interior Hallway Shutters";
 	opacity = 0
 	},
@@ -13321,7 +13318,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge entry star";
+	id_tag = "bridge entry star";
 	name = "Bridge Starboard Lockdown Window Shutters";
 	opacity = 0
 	},
@@ -13339,7 +13336,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bridge entry star";
+	id_tag = "bridge entry star";
 	name = "Starboard Bridge Blast Doors";
 	opacity = 0
 	},
@@ -13411,7 +13408,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "bridge blast";
+	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
 	},
 /turf/simulated/floor/plating,
@@ -13562,7 +13559,7 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "aquila_shutters";
+	id_tag = "aquila_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -13626,12 +13623,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "Ik" = (
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door/bolts{
 	name = "safe room door-control";
 	pixel_x = -25;
 	pixel_y = 0;
-	id = "bridge_safe_exterior";
-	specialfunctions = 4
+	id_tag = "bridge_safe_exterior"
 	},
 /obj/machinery/access_button/airlock_exterior{
 	name = "Exterior access button";
@@ -13871,9 +13867,9 @@
 	},
 /obj/item/weapon/folder/envelope/blanks,
 /obj/item/sticky_pad/random,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";
-	id = "csodoor";
+	id_tag = "csodoor";
 	name = "CSO's Office Door Control";
 	pixel_x = 28;
 	pixel_y = 28;
@@ -14092,7 +14088,7 @@
 	},
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "AICore";
+	id_tag = "AICore";
 	name = "AI Core Security Shutters"
 	},
 /obj/structure/cable/cyan{
@@ -14216,7 +14212,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "bridge blast";
+	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
 	},
 /turf/simulated/floor/plating,
@@ -14419,29 +14415,29 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "Lw" = (
-/obj/machinery/button/remote/blast_door{
-	id = "bridge entry port";
+/obj/machinery/button/blast_door{
+	id_tag = "bridge entry port";
 	name = "Port Bridge Entrance Lockdown Control";
 	pixel_x = 32;
 	pixel_y = -42;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "bridge entry star";
+/obj/machinery/button/blast_door{
+	id_tag = "bridge entry star";
 	name = "Starboard Bridge Entrance Lockdown Control";
 	pixel_x = 32;
 	pixel_y = -24;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "bridgehallway";
+/obj/machinery/button/blast_door{
+	id_tag = "bridgehallway";
 	name = "Bridge Internal Hallway Lockdown Control";
 	pixel_x = 25;
 	pixel_y = -33;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "heads_meeting";
+/obj/machinery/button/blast_door{
+	id_tag = "heads_meeting";
 	name = "Bridge Meeting Room Shutters Control";
 	pixel_x = 39;
 	pixel_y = -33;
@@ -14712,16 +14708,16 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "Ng" = (
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";
-	id = "captaindoor";
+	id_tag = "captaindoor";
 	name = "Aft Office Door Control";
 	pixel_x = 6;
 	pixel_y = 24
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";
-	id = "captaindoorfore";
+	id_tag = "captaindoorfore";
 	name = "Fore Office Door Control";
 	pixel_x = -6;
 	pixel_y = 24
@@ -14734,11 +14730,11 @@
 	pixel_x = 6;
 	pixel_y = 33
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	name = "CO's Office Window Blast Door Control";
 	pixel_x = -6;
 	pixel_y = 33;
-	id = "cap_window"
+	id_tag = "cap_window"
 	},
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
 /turf/simulated/floor/carpet/blue,
@@ -14966,7 +14962,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_hallway_shutters";
+	id_tag = "bridge_hallway_shutters";
 	name = "Bridge Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -15313,17 +15309,17 @@
 /obj/item/weapon/folder/nt,
 /obj/item/weapon/folder/yellow,
 /obj/item/weapon/folder/white,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "hop_office_desk";
+	id_tag = "hop_office_desk";
 	name = "Queue Desk Privacy Shutter";
 	pixel_x = 24;
 	pixel_y = -6;
 	req_access = list("ACCESS_HEAD_OF_PERSONNEL")
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "hop_office";
+	id_tag = "hop_office";
 	name = "XO Desk Privacy Shutter";
 	pixel_x = 24;
 	pixel_y = 6;
@@ -15509,13 +15505,12 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/button/remote/airlock{
-	id = "bridgestorage_exit";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "bridgestorage_exit";
 	name = "Emergency Exit door-control";
 	pixel_x = 25;
 	pixel_y = 0;
-	req_access = list("ACCESS_BRIDGE");
-	specialfunctions = 4
+	req_access = list("ACCESS_BRIDGE")
 	},
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -15552,9 +15547,9 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";
-	id = "hopdoor";
+	id_tag = "hopdoor";
 	name = "XO's Office Door Control";
 	pixel_x = -5;
 	pixel_y = 38;
@@ -15862,7 +15857,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "cap_window";
+	id_tag = "cap_window";
 	name = "CO's Quarters Shutters"
 	},
 /turf/simulated/floor/plating,
@@ -15987,7 +15982,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "aquila_shutters";
+	id_tag = "aquila_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -16013,7 +16008,7 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "bridge blast";
+	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
 	},
 /turf/simulated/floor/plating,
@@ -16264,7 +16259,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "bridge_hallway_shutters";
+	id_tag = "bridge_hallway_shutters";
 	name = "Bridge Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -16373,22 +16368,21 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door/bolts{
 	name = "CL's Rear Office Door Bolt Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = 6;
 	pixel_y = 26;
 	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id = "liaisondoor2";
-	specialfunctions = 4
+	id_tag = "liaisondoor2"
 	},
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "CL's Rear Office Door Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = -5;
 	pixel_y = 26;
 	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id = "liaisondoor2"
+	id_tag = "liaisondoor2"
 	},
 /obj/machinery/light_switch{
 	pixel_x = 1;
@@ -16472,7 +16466,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "bridge entry star";
+	id_tag = "bridge entry star";
 	name = "Starboard Bridge Blast Doors";
 	opacity = 0
 	},
@@ -16708,7 +16702,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "heads_meeting";
+	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
 	opacity = 0
 	},
@@ -16737,29 +16731,29 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "heads_meeting";
+/obj/machinery/button/blast_door{
+	id_tag = "heads_meeting";
 	name = "Bridge Meeting Room Shutters Control";
 	pixel_x = 39;
 	pixel_y = 31;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "bridgehallway";
+/obj/machinery/button/blast_door{
+	id_tag = "bridgehallway";
 	name = "Bridge Internal Hallway Lockdown Control";
 	pixel_x = 25;
 	pixel_y = 31;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "bridge entry star";
+/obj/machinery/button/blast_door{
+	id_tag = "bridge entry star";
 	name = "Starboard Bridge Entrance Lockdown Control";
 	pixel_x = 32;
 	pixel_y = 40;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "bridge entry port";
+/obj/machinery/button/blast_door{
+	id_tag = "bridge entry port";
 	name = "Port Bridge Entrance Lockdown Control";
 	pixel_x = 32;
 	pixel_y = 22;
@@ -16818,12 +16812,11 @@
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/cobed)
 "VY" = (
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door/bolts{
 	name = "safe room door-control";
 	pixel_x = 25;
 	pixel_y = -1;
-	id = "bridgesafe_front";
-	specialfunctions = 4
+	id_tag = "bridgesafe_front"
 	},
 /obj/machinery/light_switch{
 	pixel_x = 24;
@@ -16884,13 +16877,13 @@
 	dir = 8
 	},
 /obj/item/modular_computer/tablet/lease/preset/command,
-/obj/machinery/button/remote/airlock{
+/obj/machinery/button/alternate/door{
 	name = "CL's Front Office Door Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = 27;
 	pixel_y = -7;
 	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id = "liaisondoor"
+	id_tag = "liaisondoor"
 	},
 /obj/machinery/button/windowtint{
 	pixel_x = 25;
@@ -17239,7 +17232,7 @@
 "XQ" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "bridge sensors";
+	id_tag = "bridge sensors";
 	name = "Sensor Shroud"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -17306,15 +17299,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
 "Ye" = (
-/obj/machinery/button/remote/blast_door{
-	id = "bridgehallway";
+/obj/machinery/button/blast_door{
+	id_tag = "bridgehallway";
 	name = "Bridge Internal Hallway Lockdown Control";
 	pixel_x = -38;
 	pixel_y = 7;
 	req_access = list("ACCESS_BRIDGE")
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "heads_meeting";
+/obj/machinery/button/blast_door{
+	id_tag = "heads_meeting";
 	name = "Bridge Meeting Room Shutters Control";
 	pixel_x = -26;
 	pixel_y = 7;

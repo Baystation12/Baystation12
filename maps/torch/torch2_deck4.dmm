@@ -1693,7 +1693,7 @@
 "fA" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "qm_warehouse2";
+	id_tag = "qm_warehouse2";
 	name = "Warehouse Shutters"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -2048,8 +2048,8 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "starboardaux_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "starboardaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = 24;
 	pixel_y = 6
@@ -2069,8 +2069,8 @@
 	icon_state = "warningcorner";
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "starboardaux_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "starboardaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
 	pixel_y = 6;
@@ -2297,7 +2297,7 @@
 	density = 0;
 	dir = 8;
 	icon_state = "shutter0";
-	id = "hangar_hallway_shutters";
+	id_tag = "hangar_hallway_shutters";
 	name = "Hangar Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -2409,7 +2409,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "starboardaux_warehouse";
+	id_tag = "starboardaux_warehouse";
 	name = "Warehouse Shutters"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -2898,8 +2898,8 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "sup_office";
+/obj/machinery/button/blast_door{
+	id_tag = "sup_office";
 	name = "Desk Shutter Control";
 	pixel_x = 26;
 	pixel_y = 28
@@ -4080,7 +4080,7 @@
 	density = 0;
 	dir = 8;
 	icon_state = "shutter0";
-	id = "hangar_hallway_shutters";
+	id_tag = "hangar_hallway_shutters";
 	name = "Hangar Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -4466,7 +4466,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "sup_office";
+	id_tag = "sup_office";
 	name = "Supply Desk Shutters"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -4611,7 +4611,7 @@
 "pL" = (
 /obj/machinery/door/blast/shutters{
 	dir = 8;
-	id = "teleport4";
+	id_tag = "teleport4";
 	name = "Fourth Deck Teleporter Access Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -4628,8 +4628,8 @@
 /area/teleporter/fourthdeck)
 "pN" = (
 /obj/machinery/bluespace_beacon,
-/obj/machinery/button/remote/blast_door{
-	id = "teleport4";
+/obj/machinery/button/blast_door{
+	id_tag = "teleport4";
 	name = "Fourth Deck Teleporter Access Shutter Control";
 	pixel_x = -6;
 	pixel_y = 24
@@ -6324,7 +6324,7 @@
 "uq" = (
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "sup_office";
+	id_tag = "sup_office";
 	name = "Supply Desk Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/no_grille,
@@ -6471,8 +6471,8 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "uI" = (
-/obj/machinery/button/remote/blast_door{
-	id = "qm_warehouse2";
+/obj/machinery/button/blast_door{
+	id_tag = "qm_warehouse2";
 	name = "Warehouse Door Control";
 	pixel_x = -6;
 	pixel_y = 24;
@@ -6607,8 +6607,8 @@
 /area/maintenance/waterstore)
 "vi" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/button/remote/blast_door{
-	id = "qm_warehouse2";
+/obj/machinery/button/blast_door{
+	id_tag = "qm_warehouse2";
 	name = "Warehouse Door Control";
 	pixel_x = 26;
 	pixel_y = -25;
@@ -6816,7 +6816,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "hangar_hallway_shutters";
+	id_tag = "hangar_hallway_shutters";
 	name = "Hangar Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -6834,7 +6834,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "hangar_hallway_shutters";
+	id_tag = "hangar_hallway_shutters";
 	name = "Hangar Deck Hallway Shutters";
 	opacity = 0
 	},
@@ -7131,16 +7131,16 @@
 	pixel_y = 24
 	},
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Checkpoint Window Shutters";
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/machinery/button/remote/blast_door{
+/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for shutters.";
-	id = "hangar_hallway_shutters";
+	id_tag = "hangar_hallway_shutters";
 	name = "Hallway Checkpoint Shutters";
 	pixel_x = -3;
 	pixel_y = -3
@@ -8429,8 +8429,8 @@
 /area/storage/auxillary/port)
 "BQ" = (
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/button/remote/blast_door{
-	id = "portaux_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "portaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = 24;
 	pixel_y = -6
@@ -8446,8 +8446,8 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/storage/auxillary/port)
 "BR" = (
-/obj/machinery/button/remote/blast_door{
-	id = "portaux_warehouse";
+/obj/machinery/button/blast_door{
+	id_tag = "portaux_warehouse";
 	name = "Warehouse Door Control";
 	pixel_x = -24;
 	pixel_y = -6;
@@ -8560,7 +8560,7 @@
 "Cr" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "sup_office";
+	id_tag = "sup_office";
 	name = "Supply Office Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/no_grille,
@@ -8670,7 +8670,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "portaux_warehouse";
+	id_tag = "portaux_warehouse";
 	name = "Warehouse Shutters"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -10792,7 +10792,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -11699,7 +11699,7 @@
 	density = 0;
 	dir = 8;
 	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -11880,7 +11880,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -12017,7 +12017,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -12205,8 +12205,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "shop_shutters";
+/obj/machinery/button/blast_door{
+	id_tag = "shop_shutters";
 	name = "Counter Shutters";
 	pixel_x = 0;
 	pixel_y = 24;
@@ -12278,7 +12278,7 @@
 "Pa" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "do_office";
+	id_tag = "do_office";
 	name = "DO Office Shutters"
 	},
 /obj/effect/wallframe_spawn/no_grille,
@@ -12707,7 +12707,7 @@
 "PX" = (
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "sup_office";
+	id_tag = "sup_office";
 	name = "Supply Desk Shutters"
 	},
 /obj/effect/wallframe_spawn/no_grille,
@@ -12798,7 +12798,7 @@
 "Qk" = (
 /obj/machinery/door/blast/shutters{
 	dir = 4;
-	id = "sup_office";
+	id_tag = "sup_office";
 	name = "Supply Desk Shutters"
 	},
 /obj/effect/wallframe_spawn/no_grille,
@@ -13160,7 +13160,7 @@
 	density = 0;
 	dir = 8;
 	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -13479,7 +13479,7 @@
 "RZ" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "shop_shutters";
+	id_tag = "shop_shutters";
 	name = "Commissary Shutters"
 	},
 /obj/structure/table/marble,
@@ -13734,7 +13734,7 @@
 "SC" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "shop_shutters";
+	id_tag = "shop_shutters";
 	name = "Commissary Shutters"
 	},
 /obj/structure/table/marble,
@@ -13748,7 +13748,7 @@
 	density = 0;
 	dir = 2;
 	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -13905,8 +13905,8 @@
 	pixel_x = 2;
 	pixel_y = 6
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "do_office";
+/obj/machinery/button/blast_door{
+	id_tag = "do_office";
 	name = "DO Shutter Control";
 	pixel_x = 6;
 	pixel_y = 24
@@ -14883,11 +14883,10 @@
 	icon_state = "techfloor_edges";
 	dir = 6
 	},
-/obj/machinery/button/remote/airlock{
-	id = "supsafedoor";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "supsafedoor";
 	name = "safe room door-control";
-	pixel_x = 32;
-	specialfunctions = 4
+	pixel_x = 32
 	},
 /obj/structure/bed/chair{
 	dir = 1
@@ -15755,7 +15754,7 @@
 	density = 0;
 	dir = 8;
 	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
+	id_tag = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
@@ -16392,7 +16391,7 @@
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
-	id = "do_office";
+	id_tag = "do_office";
 	name = "DO Office Shutters"
 	},
 /turf/simulated/floor/tiled,

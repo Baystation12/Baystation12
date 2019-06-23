@@ -144,7 +144,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/regular{
-	id = "Tech_access_BD"
+	id_tag = "Tech_access_BD"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
@@ -384,7 +384,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -414,7 +414,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -433,7 +433,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -565,7 +565,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -587,7 +587,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -760,7 +760,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -1155,7 +1155,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -1199,7 +1199,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -1221,7 +1221,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "CellsBD"
+	id_tag = "CellsBD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
@@ -1242,7 +1242,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "CellsBD"
+	id_tag = "CellsBD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
@@ -1403,7 +1403,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "CellsBD"
+	id_tag = "CellsBD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
@@ -1421,7 +1421,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "CellsBD"
+	id_tag = "CellsBD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
@@ -1540,7 +1540,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
-	id = "CellsBD"
+	id_tag = "CellsBD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
@@ -1712,26 +1712,26 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "Cells_ld_BD";
+/obj/machinery/button/blast_door{
+	id_tag = "Cells_ld_BD";
 	name = "Cells Lockdown";
 	pixel_x = 4;
 	pixel_y = -4
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "Cells_acc_BD";
+/obj/machinery/button/blast_door{
+	id_tag = "Cells_acc_BD";
 	name = "Cells Direct Access";
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "VirAccessBD";
+/obj/machinery/button/blast_door{
+	id_tag = "VirAccessBD";
 	name = "Virology Access Lockdown";
 	pixel_x = -5;
 	pixel_y = -4
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "CellsBD";
+/obj/machinery/button/blast_door{
+	id_tag = "CellsBD";
 	name = "Cells Access Lockdown";
 	pixel_x = -5;
 	pixel_y = 6
@@ -2050,8 +2050,8 @@
 /area/lar_maria/sec_wing)
 "fl" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "Tech_access_BD";
+/obj/machinery/button/blast_door{
+	id_tag = "Tech_access_BD";
 	name = "Communications Access";
 	pixel_x = 0;
 	pixel_y = 0
@@ -2312,7 +2312,7 @@
 /area/lar_maria/cells)
 "fL" = (
 /obj/machinery/door/blast/regular{
-	id = "Cells_acc_BD"
+	id_tag = "Cells_acc_BD"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2325,7 +2325,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -2548,7 +2548,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
-	id = "CellsBD"
+	id_tag = "CellsBD"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -2591,7 +2591,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
-	id = "CellsBD"
+	id_tag = "CellsBD"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -2661,8 +2661,8 @@
 "gh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/button/remote/blast_door{
-	id = "Cells_acc_BD";
+/obj/machinery/button/blast_door{
+	id_tag = "Cells_acc_BD";
 	name = "Cells Direct Access";
 	pixel_x = -25;
 	pixel_y = 0
@@ -2770,7 +2770,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "VirAccessBD"
+	id_tag = "VirAccessBD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -2922,7 +2922,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "VirAccessBD"
+	id_tag = "VirAccessBD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3108,12 +3108,12 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_ld_BD"
+	id_tag = "Cells_ld_BD"
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_dock_BD"
+	id_tag = "Cells_dock_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -3166,7 +3166,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_dock_BD"
+	id_tag = "Cells_dock_BD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -3214,7 +3214,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "VirAccessBD"
+	id_tag = "VirAccessBD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3338,7 +3338,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "VirAccessBD"
+	id_tag = "VirAccessBD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3455,7 +3455,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "VirAccessBD"
+	id_tag = "VirAccessBD"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -3636,7 +3636,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
-	id = "VirAccessBD"
+	id_tag = "VirAccessBD"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -3683,8 +3683,8 @@
 	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPCells_inner"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "Cells_dock_BD";
+/obj/machinery/button/blast_door{
+	id_tag = "Cells_dock_BD";
 	name = "Cells Dock Lockdown";
 	pixel_x = 0;
 	pixel_y = 7
@@ -3693,8 +3693,8 @@
 /area/lar_maria/sec_wing)
 "iC" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "VirAccessBD";
+/obj/machinery/button/blast_door{
+	id_tag = "VirAccessBD";
 	name = "Virology Access Lockdown";
 	pixel_x = 0;
 	pixel_y = 0
@@ -3784,7 +3784,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Cells_dock_BD"
+	id_tag = "Cells_dock_BD"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)

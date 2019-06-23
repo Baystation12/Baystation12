@@ -89,6 +89,7 @@ Public methods machines can expose. Pretty bare-bones; just wraps a proc and giv
 	var/call_proc
 
 /decl/public_access/public_method/proc/perform(datum/owner)
+	world.log << "calling"
 	call(owner, call_proc)()
 
 /*

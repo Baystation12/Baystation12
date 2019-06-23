@@ -1031,7 +1031,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1134,7 +1134,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor,
 /area/unishi/toxins)
@@ -1268,7 +1268,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/door/airlock/glass/research{
 	icon_state = "closed";
@@ -1331,7 +1331,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor,
@@ -2281,7 +2281,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -2444,7 +2444,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -2565,7 +2565,7 @@
 	dir = 9
 	},
 /obj/machinery/button/mass_driver{
-	id = "unishi_sm_eject";
+	id_tag = "unishi_sm_eject";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2579,7 +2579,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -2699,8 +2699,8 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "unishi_eject";
+/obj/machinery/button/blast_door{
+	id_tag = "unishi_eject";
 	pixel_x = 22
 	},
 /obj/effect/floor_decal/industrial/warning,
@@ -2984,7 +2984,7 @@
 	color = ""
 	},
 /obj/machinery/mass_driver{
-	id = "unishi_sm_eject"
+	id_tag = "unishi_sm_eject"
 	},
 /turf/simulated/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
@@ -2993,7 +2993,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -3047,7 +3047,7 @@
 /area/unishi/smresearch)
 "hy" = (
 /obj/machinery/door/blast/regular{
-	id = "unishi_eject"
+	id_tag = "unishi_eject"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/unishi/smresearch)
