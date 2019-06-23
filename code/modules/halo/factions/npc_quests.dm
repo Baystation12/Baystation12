@@ -22,9 +22,6 @@
 		new_quest.credit_reward = new_quest.difficulty * 100 * rand(1,10)
 
 	new_quest.quest_type = pick(1,2,3,4)
-	switch(new_quest.quest_type)
-		if(1)
-			world << ""
 
 	//kill simple mobs
 

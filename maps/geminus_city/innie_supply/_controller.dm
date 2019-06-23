@@ -15,19 +15,12 @@
 
 /datum/controller/process/innie_factions/proc/send_shuttle(var/mob/living/user)
 	if(geminus_supply_shuttle.at_station())
-		world << "shuttle leaving station"
 		geminus_supply_shuttle.launch(user)
-	else
-		world << "shuttle not at station"
 
 /datum/controller/process/innie_factions/proc/bring_shuttle(var/mob/living/user)
 	if(!geminus_supply_shuttle.at_station())
-		world << "shuttle coming to station"
 		for(var/datum/supply_order/O in requestlist)
-			world << "	supply_order:[O]"
 		geminus_supply_shuttle.launch(user)
-	else
-		world << "shuttle already at station"
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/process/innie_factions/proc/forbidden_atoms_check(atom/A)
@@ -46,7 +39,6 @@
 			return 1
 
 /datum/controller/process/innie_factions/proc/shuttle_sell(var/mob/living/carbon/human/H)
-	world << "/datum/controller/process/innie_factions/proc/shuttle_sell([H])"
 	var/list/new_exports = list()
 	var/sale_credits = 0
 	for(var/area/subarea in geminus_supply_shuttle.shuttle_area)
@@ -55,11 +47,9 @@
 			qdel(W)
 
 		for(var/obj/AM in subarea)
-			world << "	found [AM] | [AM.type]"
 			if(istype(AM, /obj/structure/closet/crate))
 				var/obj/structure/closet/crate/C = AM
 				for(var/obj/O in C)
-					world << world << "	inside found [O] | [O.type]"
 					if(O.type in GLOB.trade_controller.trade_items_by_type)
 						var/datum/trade_item/T = GLOB.trade_controller.trade_items_by_type[O.type]
 						var/datum/supply_export/E = new_exports[T]
@@ -73,7 +63,6 @@
 							E.unit_price = T.value
 						E.quantity += 1
 						sale_credits += E.unit_price
-						world << "		sold"
 					else if(istype(O,/obj/item/weapon/paper/manifest))
 						var/obj/item/weapon/paper/manifest/slip = O
 						if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
@@ -88,7 +77,6 @@
 								E.unit_price = manifest_value
 							E.quantity += 1
 							sale_credits += E.unit_price
-							world << "		sold manifest"
 				qdel(AM)
 
 	for(var/datum/trade_item/T in new_exports)
@@ -137,8 +125,9 @@
 
 		var/obj/item/weapon/paper/manifest/slip
 		slip = new /obj/item/weapon/paper/manifest(A)
+		slip.name = "Shipping Manifest Order #[SO.ordernum]"
 		slip.is_copy = 0
-		slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
+		slip.info = "<h3>Black Market Shipping Manifest</h3><hr><br>"
 		slip.info +="Order #[SO.ordernum]<br>"
 		slip.info +="Destination: [GLOB.using_map.station_name]<br>"
 		slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
