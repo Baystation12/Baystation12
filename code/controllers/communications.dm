@@ -127,8 +127,10 @@ var/const/MED_I_FREQ = 1485
 var/const/SEC_I_FREQ = 1475
 
 // Device signal frequencies
-var/const/FUEL_FREQ    = 1447 // Used by fuel atmos stuff, and currently default for digital valves
-var/const/BUTTON_FREQ  = 1301 // Used by generic buttons controlling stuff
+var/const/FUEL_FREQ         = 1447 // Used by fuel atmos stuff, and currently default for digital valves
+var/const/BUTTON_FREQ       = 1301 // Used by generic buttons controlling stuff
+var/const/BLAST_DOORS_FREQ  = 1303 // Used by blast doors, buttons controlling them, and mass drivers.
+var/const/AIRLOCK_FREQ      = 1305 // Used by airlocks and buttons controlling them.
 
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,

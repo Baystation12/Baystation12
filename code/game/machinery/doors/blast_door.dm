@@ -221,7 +221,7 @@
 	call_proc = /obj/machinery/door/blast/proc/delayed_close
 
 /decl/stock_part_preset/radio/receiver/blast_door
-	frequency = BUTTON_FREQ
+	frequency = BLAST_DOORS_FREQ
 	receive_and_call = list(
 		"open_door" = /decl/public_access/public_method/open_door,
 		"close_door_delayed" = /decl/public_access/public_method/close_door_delayed,
@@ -238,7 +238,7 @@
 	transmit_on_change = list(
 		"toggle_door" = /decl/public_access/public_variable/button_active,
 	)
-	frequency = BUTTON_FREQ
+	frequency = BLAST_DOORS_FREQ
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.

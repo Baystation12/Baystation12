@@ -65,7 +65,7 @@
 	call_proc = /obj/machinery/mass_driver/proc/delayed_drive
 
 /decl/stock_part_preset/radio/receiver/driver
-	frequency = BUTTON_FREQ
+	frequency = BLAST_DOORS_FREQ
 	receive_and_call = list("button_active" = /decl/public_access/public_method/driver_drive_delayed)
 
 /obj/machinery/button/mass_driver
@@ -78,4 +78,4 @@
 		"button_active" = /decl/public_access/public_variable/button_active,
 		"close_door_delayed" = /decl/public_access/public_variable/button_active
 	)
-	frequency = BUTTON_FREQ
+	frequency = BLAST_DOORS_FREQ

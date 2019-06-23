@@ -1473,7 +1473,7 @@ About the new airlock wires panel:
 	call_proc = /obj/machinery/door/airlock/proc/toggle_lock
 
 /decl/stock_part_preset/radio/receiver/airlock
-	frequency = BUTTON_FREQ
+	frequency = AIRLOCK_FREQ
 	receive_and_call = list(
 		"toggle_door" = /decl/public_access/public_method/toggle_door,
 		"toggle_bolts" = /decl/public_access/public_method/airlock_toggle_bolts
