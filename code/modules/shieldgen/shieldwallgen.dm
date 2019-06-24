@@ -191,7 +191,7 @@
 		var/field_dir = get_dir(T2,get_step(T2, NSEW))
 		T = get_step(T2, NSEW)
 		T2 = T
-		var/obj/machinery/shieldwall/CF = new(T, G) //(ref to this gen, ref to connected gen)
+		var/obj/machinery/shieldwall/CF = new(T, src, G) //(ref to this gen, ref to connected gen)
 		CF.set_dir(field_dir)
 
 
@@ -272,11 +272,11 @@
 	var/power_usage = 800	//how much power it takes to sustain the shield
 	var/generate_power_usage = 5000	//how much power it takes to start up the shield
 
-/obj/machinery/shieldwall/New(var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
-	..()
+/obj/machinery/shieldwall/Initialize(mapload, obj/machinery/shieldwallgen/A, obj/machinery/shieldwallgen/B)
+	. = ..()
 	update_nearby_tiles()
-	src.gen_primary = A
-	src.gen_secondary = B
+	gen_primary = A
+	gen_secondary = B
 	if(A && B && A.active && B.active)
 		needs_power = 1
 		if(prob(50))
@@ -284,7 +284,7 @@
 		else
 			B.storedpower -= generate_power_usage
 	else
-		qdel(src) //need at least two generator posts
+		return INITIALIZE_HINT_QDEL
 
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()

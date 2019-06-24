@@ -64,19 +64,20 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 /datum/pipe/proc/Build(var/datum/pipe/D, var/loc, var/pipe_color = PIPE_COLOR_GREY)
 	if(D.build_path)
 		var/obj/item/pipe/new_item = new build_path(loc)
-		if(D.connect_types != null)
-			new_item.connect_types = D.connect_types
+		if(istype(new_item))
+			if(D.connect_types != null)
+				new_item.connect_types = D.connect_types
+			new_item.rotate_class = D.rotate_class
+			new_item.constructed_path = D.constructed_path
 		if(D.colorable)
 			new_item.color = pipe_color
 		else if (D.pipe_color != null)
 			new_item.color = D.pipe_color
-		new_item.rotate_class = D.rotate_class
 		new_item.SetName(D.name)
 		new_item.desc = D.desc
 		new_item.set_dir(D.dir)
 		new_item.icon = D.build_icon
 		new_item.icon_state = D.build_icon_state
-		new_item.constructed_path = D.constructed_path
 
 /datum/pipe/disposal_dispenser/Build(var/datum/pipe/disposal_dispenser/D, var/loc, var/pipe_color = PIPE_COLOR_GREY)
 	if(D.build_path)
