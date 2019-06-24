@@ -1371,9 +1371,11 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(var/mob/user)
 	icon_state = "monkeycube"
 	desc = "Just add water!"
-	to_chat(user, "You unwrap the cube.")
+	to_chat(user, SPAN_NOTICE("You unwrap \the [src]."))
 	wrapped = 0
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	var/trash = new /obj/item/trash/cubewrapper(get_turf(user))
+	user.put_in_hands(trash)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
 	if(ishuman(M))
