@@ -38,6 +38,13 @@
 	charge_state = "prsmall"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_DENYPOCKET | SLOT_HOLSTER
+	projectile_type = /obj/item/projectile/beam/particle/small
+	firemodes = list(
+		list(mode_name="stun",   projectile_type = /obj/item/projectile/beam/stun),
+		list(mode_name="shock",  projectile_type = /obj/item/projectile/beam/stun/shock),
+		list(mode_name="lethal", projectile_type = /obj/item/projectile/beam/particle/small)
+		)
+
 
 /obj/item/weapon/gun/energy/particle/on_update_icon()
 	. = ..()
