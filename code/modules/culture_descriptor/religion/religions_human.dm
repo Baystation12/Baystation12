@@ -22,6 +22,10 @@
 	name = RELIGION_CHRISTIANITY
 	description = "An Abrahamic monotheistic religion based on the life and teachings of Jesus of Nazareth. Someone who practices Christianity is called a Christian."
 
+/decl/cultural_info/religion/bahai
+	name = RELIGION_BAHAI_FAITH
+	description = "An Abrahamic monotheistic religion that follows the teachings of Baha'u'llah and believes in universal peace and unity. Someone who practices the Baha'i Faith is called a Baha'i."
+
 /decl/cultural_info/religion/agnostic
 	name = RELIGION_AGNOSTICISM
 	description = "A belief that nothing is known or can be known of the existence or nature of God. Someone who holds to agnosticism is called an agnostic."
@@ -40,4 +44,5 @@
 
 /decl/cultural_info/religion/spiritualism
 	name = RELIGION_SPIRITUALISM
-	description = "A belief based on communication with the spirits of the dead, especially through mediums. Someone who practices spiritualism is called a spiritualist."
+	description = "A newly developed religion originating from Yuklid V. It is an ethnoreligion, with a mixture of the hippocratic oath and early christian healers. \
+	They advocate non-violence and the use of power and wealth to help others.  The head of the religion is the Arweinydd, who resides in Llanbryde on Yuklid."

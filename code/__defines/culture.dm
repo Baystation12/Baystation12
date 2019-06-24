@@ -2,22 +2,26 @@
 #define TAG_HOMEWORLD "home_system"
 #define TAG_FACTION   "faction"
 #define TAG_RELIGION  "religion"
+
 #define ALL_CULTURAL_TAGS list( \
-	TAG_CULTURE = "Culture", \
-	TAG_HOMEWORLD = "Homeworld", \
-	TAG_FACTION = "Faction", \
-	TAG_RELIGION = "Beliefs" \
+	TAG_CULTURE =   "Culture", \
+	TAG_HOMEWORLD = "Residence", \
+	TAG_FACTION =   "Faction", \
+	TAG_RELIGION =  "Beliefs" \
 	)
 
 // Cultural IDs.
 #define FACTION_SOL_CENTRAL    "Sol Central Government"
-#define FACTION_TERRAN_CONFED  "Terran Colonial Confederation"
+#define FACTION_INDIE_CONFED  "Gilgamesh Colonial Confederation"
 #define FACTION_NANOTRASEN     "NanoTrasen"
 #define FACTION_FREETRADE      "Free Trade Union"
+#define FACTION_HEPHAESTUS     "Hephaestus Industries"
 #define FACTION_XYNERGY        "Xynergy"
 #define FACTION_FLEET          "SCG Fleet"
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
+#define FACTION_CORPORATE       "Expeditionary Corps Organisation"
+#define FACTION_DAIS           "Deimos Advanced Information Systems"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"
 
@@ -28,6 +32,16 @@
 #define HOME_SYSTEM_CERES      "Ceres"
 #define HOME_SYSTEM_PLUTO      "Pluto"
 #define HOME_SYSTEM_TAU_CETI   "Ceti Epsilon"
+#define HOME_SYSTEM_HELIOS	   "Eos"
+#define HOME_SYSTEM_TERRA 	   "Terra"
+#define HOME_SYSTEM_TERSTEN    "Tersten"
+#define HOME_SYSTEM_LORRIMAN   "Lorriman"
+#define HOME_SYSTEM_CINU       "Cinu"
+#define HOME_SYSTEM_YUKLID     "Yuklid V"
+#define HOME_SYSTEM_LORDANIA   "Lordania"
+#define HOME_SYSTEM_KINGSTON   "Kingston"
+#define HOME_SYSTEM_GAIA       "Gaia"
+#define HOME_SYSTEM_MAGNITKA   "Magnitka"
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"
 #define HOME_SYSTEM_DEEP_SPACE "Deep Space"
@@ -35,6 +49,36 @@
 #define CULTURE_OTHER          "Other Culture"
 #define CULTURE_HUMAN          "Humankind"
 #define CULTURE_HUMAN_VATGROWN "Nonborn"
+#define CULTURE_HUMAN_MARTIAN  "Martian, Surfacer"
+#define CULTURE_HUMAN_MARSTUN  "Martian, Tunneller"
+#define CULTURE_HUMAN_LUNAPOOR "Luna, Lower Class"
+#define CULTURE_HUMAN_LUNARICH "Luna, Upper Class"
+#define CULTURE_HUMAN_VENUSIAN "Venusian, Zoner"
+#define CULTURE_HUMAN_VENUSLOW "Venusian, Surfacer"
+#define CULTURE_HUMAN_BELTER   "Belter, Ceres"
+#define CULTURE_HUMAN_PLUTO    "Plutonian"
+#define CULTURE_HUMAN_EARTH    "Earther"
+#define CULTURE_HUMAN_CETI     "Cetite"
+#define CULTURE_HUMAN_SPACER   "Spacer, Core Systems"
+#define CULTURE_HUMAN_SPAFRO   "Spacer, Frontier Systems"
+#define CULTURE_HUMAN_FRARAB   "Franco-Arabic"
+#define CULTURE_HUMAN_TERSNEV  "Terstener, Nevokie"
+#define CULTURE_HUMAN_TERSPIN  "Terstener, Pinasc"
+#define CULTURE_HUMAN_TERSOTH  "Terstener, Other"
+#define CULTURE_HUMAN_LORRCLA  "Lorrimanian, Classical"
+#define CULTURE_HUMAN_LORROTH  "Lorrimanian, Other"
+#define CULTURE_HUMAN_LORDARES "Lordanian, New Aresian"
+#define CULTURE_HUMAN_LORDWEST "Lordanian, Western"
+#define CULTURE_HUMAN_LORDEAST "Lordanian, Eastern"
+#define CULTURE_HUMAN_YUKSPI   "Yuklidian, Spiritualist"
+#define CULTURE_HUMAN_YUKCOS   "Yuklidian, Cosmopolitan"
+#define CULTURE_HUMAN_CINUDES  "Cinuan, Kassalan"
+#define CULTURE_HUMAN_CINUCIT  "Cinuan, Urban"
+#define CULTURE_HUMAN_KINGISL  "Kingstonian, Islander"
+#define CULTURE_HUMAN_KINGTRI  "Kingstonian, Tritonian"
+#define CULTURE_HUMAN_CONFED   "Terran, Traditional"
+#define CULTURE_HUMAN_CONFINT  "Terran, Integrated"
+#define CULTURE_HUMAN_OTHER    "Other, Humanity"
 #define CULTURE_STARLIGHT      "Starlit Realms"
 #define CULTURE_MONKEY         "Monkey Business"
 #define CULTURE_FARWA          "Farwa Business"
@@ -48,6 +92,7 @@
 #define RELIGION_BUDDHISM      "Buddhism"
 #define RELIGION_ISLAM         "Islam"
 #define RELIGION_CHRISTIANITY  "Christianity"
+#define RELIGION_BAHAI_FAITH   "Baha'i Faith"
 #define RELIGION_AGNOSTICISM   "Agnosticism"
 #define RELIGION_DEISM         "Deism"
 #define RELIGION_ATHEISM       "Atheism"
@@ -62,6 +107,16 @@
 #define CULTURE_SKRELL_RASKINTA "Raskinta-Katish"
 
 #define HOME_SYSTEM_QERRBALAK  "Qerrbalak"
+#define HOME_SYSTEM_TALAMIRA "Talamira"
+#define HOME_SYSTEM_ROASORA "Roa'sora"
+#define HOME_SYSTEM_MITORQI "Mi'tor'qi"
+#define HOME_SYSTEM_SKRELLSPACE "Skrell Space"
+
+#define FACTION_SKRELL_QERRVOAL "Qerr'voal"
+#define FACTION_SKRELL_QALAOA "Qala'oa"
+#define FACTION_SKRELL_YIITALANA "Yii'talana"
+#define FACTION_SKRELL_KRIGLI "Kri'gli"
+#define FACTION_SKRELL_QONPRRI "Qon'prri"
 
 // Adherent cultures.
 #define CULTURE_ADHERENT             "The Vigil"
@@ -115,6 +170,7 @@
 #define FACTION_UNATHI_SAVANNAH     "Savannah Clans"
 #define FACTION_UNATHI_DIAMOND_PEAK "Diamond Peak Clans"
 #define FACTION_UNATHI_SALT_SWAMP   "Salt Swamp Clans"
+#define FACTION_UNATHI_YEOSA		"Yeosa Clans"
 
 #define RELIGION_UNATHI_STRATAGEM    "Grand Stratagem"
 #define RELIGION_UNATHI_PRECURSOR    "Precursor"
@@ -127,3 +183,14 @@
 #define CULTURE_XENOPHAGE_S    "Xenophage Sentinel"
 #define CULTURE_XENOPHAGE_Q    "Xenophage Queen"
 #define FACTION_XENOPHAGE      "Xenophage Hive"
+
+// Nabber grades.
+#define CULTURE_NABBER_CMINUS "Grade C-"
+#define CULTURE_NABBER_C      "Grade C"
+#define CULTURE_NABBER_CPLUS  "Grade C+"
+#define CULTURE_NABBER_BMINUS "Grade B-"
+#define CULTURE_NABBER_B      "Grade B"
+#define CULTURE_NABBER_BPLUS  "Grade B+"
+#define CULTURE_NABBER_AMINUS "Grade A-"
+#define CULTURE_NABBER_A      "Grade A"
+#define CULTURE_NABBER_APLUS  "Grade A+"

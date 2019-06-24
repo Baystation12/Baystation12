@@ -34,7 +34,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
 	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
-	var/list/usable_email_tlds = list("freemail.nt")
+	var/list/usable_email_tlds = list("freemail.net")
 	var/base_floor_type = /turf/simulated/floor/airless // The turf type used when generating floors between Z-levels at startup.
 	var/base_floor_area                                 // Replacement area, if a base_floor_type is generated. Leave blank to skip.
 
@@ -113,26 +113,70 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_EARTH,
-			HOME_SYSTEM_LUNA,
 			HOME_SYSTEM_MARS,
+			HOME_SYSTEM_LUNA,
+			HOME_SYSTEM_EARTH,
 			HOME_SYSTEM_VENUS,
 			HOME_SYSTEM_CERES,
 			HOME_SYSTEM_PLUTO,
 			HOME_SYSTEM_TAU_CETI,
+			HOME_SYSTEM_HELIOS,
+			HOME_SYSTEM_TERRA,
+			HOME_SYSTEM_TERSTEN,
+			HOME_SYSTEM_LORRIMAN,
+			HOME_SYSTEM_CINU,
+			HOME_SYSTEM_YUKLID,
+			HOME_SYSTEM_LORDANIA,
+			HOME_SYSTEM_KINGSTON,
+			HOME_SYSTEM_GAIA,
+			HOME_SYSTEM_MAGNITKA,
 			HOME_SYSTEM_OTHER
 		),
 		TAG_FACTION = list(
 			FACTION_SOL_CENTRAL,
-			FACTION_TERRAN_CONFED,
+			FACTION_INDIE_CONFED,
+			FACTION_CORPORATE,
 			FACTION_NANOTRASEN,
 			FACTION_FREETRADE,
 			FACTION_XYNERGY,
+			FACTION_HEPHAESTUS,
+			FACTION_DAIS,
 			FACTION_EXPEDITIONARY,
+			FACTION_FLEET,
+			FACTION_PCRC,
 			FACTION_OTHER
 		),
 		TAG_CULTURE = list(
-			CULTURE_HUMAN,
+			CULTURE_HUMAN_MARTIAN,
+			CULTURE_HUMAN_MARSTUN,
+			CULTURE_HUMAN_LUNAPOOR,
+			CULTURE_HUMAN_LUNARICH,
+			CULTURE_HUMAN_VENUSIAN,
+			CULTURE_HUMAN_VENUSLOW,
+			CULTURE_HUMAN_BELTER,
+			CULTURE_HUMAN_PLUTO,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_CETI,
+			CULTURE_HUMAN_SPACER,
+			CULTURE_HUMAN_SPAFRO,
+			CULTURE_HUMAN_TERSNEV,
+			CULTURE_HUMAN_TERSPIN,
+			CULTURE_HUMAN_TERSOTH,
+			CULTURE_HUMAN_LORRCLA,
+			CULTURE_HUMAN_LORROTH,
+			CULTURE_HUMAN_LORDARES,
+			CULTURE_HUMAN_LORDWEST,
+			CULTURE_HUMAN_LORDEAST,
+			CULTURE_HUMAN_YUKSPI,
+			CULTURE_HUMAN_YUKCOS,
+			CULTURE_HUMAN_CINUDES,
+			CULTURE_HUMAN_CINUCIT,
+			CULTURE_HUMAN_KINGISL,
+			CULTURE_HUMAN_KINGTRI,
+			CULTURE_HUMAN_CONFINT,
+			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_FRARAB,
+			CULTURE_HUMAN_OTHER,
 			CULTURE_OTHER
 		),
 		TAG_RELIGION = list(
@@ -142,6 +186,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			RELIGION_BUDDHISM,
 			RELIGION_ISLAM,
 			RELIGION_CHRISTIANITY,
+			RELIGION_BAHAI_FAITH,
 			RELIGION_AGNOSTICISM,
 			RELIGION_DEISM,
 			RELIGION_ATHEISM,
@@ -153,27 +198,49 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/default_cultural_info = list(
 		TAG_HOMEWORLD = HOME_SYSTEM_MARS,
 		TAG_FACTION =   FACTION_SOL_CENTRAL,
-		TAG_CULTURE =   CULTURE_HUMAN,
+		TAG_CULTURE =   CULTURE_HUMAN_MARTIAN,
 		TAG_RELIGION =  RELIGION_AGNOSTICISM
 	)
+
+	var/access_modify_region = list(
+		ACCESS_REGION_SECURITY = list(access_hos, access_change_ids),
+		ACCESS_REGION_MEDBAY = list(access_cmo, access_change_ids),
+		ACCESS_REGION_RESEARCH = list(access_rd, access_change_ids),
+		ACCESS_REGION_ENGINEERING = list(access_ce, access_change_ids),
+		ACCESS_REGION_COMMAND = list(access_change_ids),
+		ACCESS_REGION_GENERAL = list(access_change_ids),
+		ACCESS_REGION_SUPPLY = list(access_change_ids)
+	)
+
+	// List of /datum/department types to instantiate at roundstart.
+	var/list/departments
 
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
-		allowed_jobs = subtypesof(/datum/job)
-	if(!planet_size)
+		allowed_jobs = list()
+		for(var/jtype in subtypesof(/datum/job))
+			var/datum/job/job = jtype
+			if(initial(job.available_by_default))
+				allowed_jobs += jtype
+	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 
-/datum/map/proc/setup_map()
+/datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(lobby_tracks.len)
-		lobby_track_type = pick(lobby_tracks)
+		lobby_track_type = pick(lobby_tracks - exclude)
 	else
-		lobby_track_type = pick(subtypesof(/music_track))
+		lobby_track_type = pick(subtypesof(/music_track) - exclude)
+	return decls_repository.get_decl(lobby_track_type)
 
-	lobby_track = decls_repository.get_decl(lobby_track_type)
+/datum/map/proc/setup_map()
+	lobby_track = get_lobby_track()
 	world.update_status()
+
+/datum/map/proc/setup_job_lists()
+	return
 
 /datum/map/proc/send_welcome()
 	return
@@ -262,20 +329,26 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		weighted_mundaneevent_locations[D] = D.viable_mundane_events.len
 
 	if(!station_account)
-		station_account = create_account("[station_name()] Primary Account", starting_money)
+		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	for(var/job in allowed_jobs)
-		var/datum/job/J = decls_repository.get_decl(job)
-		if(J.department)
-			station_departments |= J.department
-	for(var/department in station_departments)
-		department_accounts[department] = create_account("[department] Account", department_money)
+		var/datum/job/J = job
+		var/dept = initial(J.department)
+		if(dept)
+			station_departments |= dept
 
-	department_accounts["Vendor"] = create_account("Vendor Account", 0)
+	for(var/department in station_departments)
+		department_accounts[department] = create_account("[department] Account", "[department]", department_money, ACCOUNT_TYPE_DEPARTMENT)
+
+	department_accounts["Vendor"] = create_account("Vendor Account", "Vendor", 0, ACCOUNT_TYPE_DEPARTMENT)
 	vendor_account = department_accounts["Vendor"]
 
 /datum/map/proc/map_info(var/client/victim)
-	return
+	to_chat(victim, "<h2>Current map information</h2>")
+	to_chat(victim, get_map_info())
+
+/datum/map/proc/get_map_info()
+	return "No map information available"
 
 /datum/map/proc/bolt_saferooms()
 	return // overriden by torch
