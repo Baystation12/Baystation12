@@ -12767,7 +12767,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge/hallway/starboard)
 "Ht" = (
-/obj/item/weapon/soap/deluxe,
+/obj/item/weapon/soap,
 /obj/item/weapon/bikehorn/rubberducky,
 /obj/structure/hygiene/shower{
 	icon_state = "shower";

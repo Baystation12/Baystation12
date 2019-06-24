@@ -11,7 +11,7 @@
 	)
 	equipment = list(
 		/obj/item/device/flash,
-		/obj/item/weapon/soap/nanotrasen,
+		/obj/item/weapon/soap,
 		/obj/item/weapon/storage/bag/trash,
 		/obj/item/weapon/mop/advanced,
 		/obj/item/holosign_creator,

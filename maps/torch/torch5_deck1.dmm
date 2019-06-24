@@ -1925,7 +1925,7 @@
 	icon_state = "shower";
 	dir = 4
 	},
-/obj/item/weapon/soap/nanotrasen,
+/obj/item/weapon/soap,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -10113,7 +10113,7 @@
 	pixel_x = 0;
 	pixel_y = 0
 	},
-/obj/item/weapon/soap/syndie,
+/obj/item/weapon/soap,
 /turf/simulated/floor/tiled/freezer,
 /area/security/brig)
 "aIn" = (
@@ -20028,7 +20028,7 @@
 	pixel_x = 0;
 	pixel_y = 0
 	},
-/obj/item/weapon/soap/deluxe,
+/obj/item/weapon/soap,
 /obj/structure/curtain/open/shower,
 /obj/machinery/firealarm{
 	dir = 8;

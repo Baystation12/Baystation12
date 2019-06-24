@@ -2218,8 +2218,8 @@
 /obj/item/weapon/extinguisher,
 /obj/item/weapon/extinguisher,
 /obj/item/weapon/extinguisher,
-/obj/item/weapon/soap/gold,
-/obj/item/weapon/soap/gold,
+/obj/item/weapon/soap,
+/obj/item/weapon/soap,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "fB" = (

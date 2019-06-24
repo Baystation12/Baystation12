@@ -1252,21 +1252,14 @@
 	icon_state = "lavatory"
 	icon_deny = "lavatory-deny"
 	icon_vend = "lavatory-vend"
-	products = list(/obj/item/weapon/soap = 4,
-					/obj/item/weapon/soap/nanotrasen = 4,
-					/obj/item/weapon/soap/deluxe = 4,
+	products = list(/obj/item/weapon/soap = 12,
 					/obj/item/weapon/mirror = 8,
 					/obj/item/weapon/haircomb/random = 8,
 					/obj/item/weapon/haircomb/brush = 4,
 					/obj/item/weapon/towel/random = 6
 					)
-	premium = list(/obj/item/weapon/soap/gold = 1)
-	contraband = list(/obj/item/weapon/soap/syndie = 4,
-					  /obj/item/weapon/inflatable_duck = 1)
+	contraband = list(/obj/item/weapon/inflatable_duck = 1)
 	prices = list(/obj/item/weapon/soap = 20,
-				  /obj/item/weapon/soap/nanotrasen = 30,
-				  /obj/item/weapon/soap/deluxe = 60,
-				  /obj/item/weapon/soap/syndie = 10,
 				  /obj/item/weapon/mirror = 40,
 				  /obj/item/weapon/haircomb/random = 40,
 				  /obj/item/weapon/haircomb/brush = 80,

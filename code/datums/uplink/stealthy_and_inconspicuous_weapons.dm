@@ -7,7 +7,7 @@
 /datum/uplink_item/item/stealthy_weapons/soap
 	name = "Subversive Soap"
 	item_cost = 1
-	path = /obj/item/weapon/soap/syndie
+	path = /obj/item/weapon/soap
 
 /datum/uplink_item/item/stealthy_weapons/cigarette_kit
 	name = "Box of Tricky Cigarettes"
