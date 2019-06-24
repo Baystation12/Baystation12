@@ -8,7 +8,7 @@
 	icon_state = "oldlaser"
 	max_shells = 8
 	caliber = "saw"
-	ammo_type = /obj/item/ammo_casing/sawblade
+
 
 	firemodes = list(
 		list(mode_name="remote control", mode_type = /datum/firemode/remote),
@@ -26,6 +26,13 @@
 	var/obj/effect/projectile/sustained/tether = null
 
 	var/vector2/last_clickpoint
+
+
+/obj/item/weapon/gun/projectile/ripper/loaded
+	ammo_type = /obj/item/ammo_casing/sawblade
+
+/obj/item/weapon/gun/projectile/ripper/loaded/diamond
+	ammo_type = /obj/item/ammo_casing/sawblade/diamond
 
 //Sawblade statuses
 #define STATE_STABLE	0
@@ -95,7 +102,15 @@
 	return ..()
 
 
-
+//Set the health of the projectile to the health of the ammo version
+/obj/item/weapon/gun/projectile/ripper/consume_next_projectile()
+	.=..()
+	if (.)
+		var/obj/item/projectile/P = .
+		var/obj/item/ammo_casing/sawblade/ammo = chambered
+		if (istype(ammo))
+			P.health = ammo.health
+			world << "Setting [P] to ammo health [ammo.health]"
 
 //This is the proc where the projectile is launched from the gun. We override it here because we don't want the blade to necessarily go flying
 /obj/item/weapon/gun/projectile/ripper/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)

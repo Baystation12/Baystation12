@@ -9,18 +9,27 @@
 #define SOUND_GRIND	'sound/weapons/sawblade_grind.ogg'
 #define SOUND_NORMAL 'sound/weapons/sawblade_normal.ogg'
 
+//These are defined here to prevent duplication
+#define SAWBLADE_HEALTH 350
+#define DIAMONDBLADE_HEALTH 1000
+
+
+//When dropped unbroken the blade takes a bit of damage from the fall
+#define DROP_DAMAGE 25
+
 /obj/item/projectile/sawblade
 	name = "sawblade"
+	desc = "Oh god, run, RUN!"
 	damage_type = BRUTE
 	//The compile time damage var is only used for blade launch mode. It will be replaced with a calculated value in remote control mode
 	damage = 20
 
 	//How much Damage Per Second is dealt to targets the blade hits in remote control mode. This is broken up into many small hits based on tick interval
-	var/dps	=	25
+	var/dps	=	30
 	check_armour = "melee" //Its a cutting blade, melee armor helps most
 	dispersion = 0
 	icon = 'icons/effects/projectiles.dmi'
-	icon_state = "ripper_projectile"
+	icon_state = "sawblade_projectile"
 	mouse_opacity = 1
 	pass_flags = PASS_FLAG_TABLE
 	density = 0 //It passes through mobs
@@ -29,6 +38,7 @@
 
 	var/mob/user
 
+	//The gun that launched us. Why the heck don't other projectiles track this?
 	var/obj/item/weapon/gun/projectile/ripper/launcher
 
 	//The sawblade has three states
@@ -38,7 +48,7 @@
 	var/status = STATE_MOVING
 
 	//When the sawblade runs out of health, it breaks
-	health = 350
+	health = SAWBLADE_HEALTH
 
 	//The turf we are currently attacking. This may be the same one we're in, or an adjacent one.
 	//The sawblade will only damage things in the damage tile
@@ -46,7 +56,7 @@
 
 	//How quickly the blade moves towards the user's cursor. This is measured in pixels per second.
 	var/tracking_speed	=	64
-	var/tracking_per_tick
+	var/tracking_per_tick //Calculated at runtime
 
 
 
@@ -69,14 +79,43 @@
 	var/datum/sound_token/saw_sound
 	var/current_loop //Which looped sound is currently playing
 
+	//The ammo item to drop when we are released but not quite broken
+	var/ammo_type = /obj/item/ammo_casing/sawblade
 
+//The advanced version. A bit more damage, a LOT more durability
+/obj/item/projectile/sawblade/diamond
+	damage = 30
+	dps = 40
+	health = DIAMONDBLADE_HEALTH
+	name = "diamond blade"
+	desc = "glittering death approaches"
+	icon_state = "diamond_projectile"
+	ammo_type = /obj/item/ammo_casing/sawblade/diamond
+
+
+//Ammo version for picking up and loading
+/obj/item/ammo_casing/sawblade
+	name = "sawblade"
+	desc = "a steel toothed blade with hardened plasteel tips, designed as ammunition for the RC-DS Remote Control Disc Ripper"
+	icon_state = "sawblade"
+	caliber = "saw"
+	projectile_type = /obj/item/projectile/sawblade
+	health = SAWBLADE_HEALTH //The ammo versions have a health value which is carried over from the projectile if an unbroken blade is dropped
+
+/obj/item/ammo_casing/sawblade/diamond
+	name = "sawblade"
+	desc = "a glittering blade with a diamond-coated plasteel edge. Extremely durable and designed for grinding through the toughest materials."
+	icon_state = "diamondblade"
+	projectile_type = /obj/item/projectile/sawblade/diamond
+	health = DIAMONDBLADE_HEALTH
+
+
+//We don't need to stop the looping audio here, it will do that itself
 /obj/item/projectile/sawblade/Destroy()
 	.=..()
 	if (launcher && launcher.blade == src)
 		launcher.stop_firing()
 
-	//Stop the looping audio
-	set_sound(null)
 
 /obj/item/projectile/sawblade/Initialize()
 	.=..()
@@ -253,12 +292,25 @@
 	if (QDELETED(src))
 		return
 
-	//If health remains, the sawblade drops on the floor
-	if (health > 0)
-		playsound(get_turf(src),'sound/effects/weightdrop.ogg', 70, 1, 1)
+
+	playsound(get_turf(src),'sound/effects/weightdrop.ogg', 70, 1, 1) //Clunk!
+	if (health < DROP_DAMAGE)
+		playsound(src, "shatter", 70, 1)
+		//Todo: Spawn broken blade here
+
+	else
+		//If health remains, the sawblade drops on the floor
+		health -= DROP_DAMAGE //Take some damage from the dropping
+		var/obj/item/ammo_casing/sawblade/ammo = new ammo_type(loc)
+		ammo.set_global_pixel_loc(get_global_pixel_loc())//Make sure it appears exactly below this disk
+		ammo.health = health //Set its health to ours
+
+		//And lets give it a random rotation to make it look like it just fell there
+		var/matrix/M = matrix()
+		M.Turn(rand(0,360))
+		ammo.transform = M
+
 	qdel(src)
-
-
 
 /obj/item/projectile/sawblade/proc/set_sound(var/soundin)
 
@@ -289,13 +341,9 @@
 	saw_sound = GLOB.sound_player.PlayLoopingSound(src, /obj/item/projectile/sawblade, soundin, volume, range)
 	current_loop = soundin
 
-//Ammo version for picking up and loading
-/obj/item/ammo_casing/sawblade
-	desc = "sawblade"
-	caliber = "saw"
-	projectile_type = /obj/item/projectile/sawblade
 
 
+#undef DROP_DAMAGE
 
 #undef EX3_TOTAL
 #undef EX2_TOTAL
