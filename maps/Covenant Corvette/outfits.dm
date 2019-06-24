@@ -6,7 +6,6 @@
 	suit = /obj/item/clothing/suit/armor/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
-	l_hand = /obj/item/language_learner/kigyar_to_common
 
 	flags = 0
 
@@ -49,13 +48,9 @@ Transmission-For the purpose of resource acquisition and organisation infiltrati
 	belt = /obj/item/ammo_magazine/type51mag
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
-	l_hand = /obj/item/language_learner/kigyar_to_common
 	r_hand = /obj/item/weapon/melee/energy/sword/pirate
 
 	flags = 0
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
-
-/decl/hierarchy/outfit/unggoy
-	l_hand = /obj/item/language_learner/unggoy_to_common

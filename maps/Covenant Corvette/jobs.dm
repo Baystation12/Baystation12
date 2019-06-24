@@ -3,7 +3,7 @@
 	loadout_allowed = FALSE
 	faction_flag = COVENANT
 	spawn_faction = "Covenant"
-	spawnpoint_override = "Covenant Base Spawns"
+	//spawnpoint_override = "Covenant Base Spawns"
 	announced = TRUE
 	create_record = 0
 	latejoin_at_spawnpoints = 1

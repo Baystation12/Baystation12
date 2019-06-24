@@ -6,7 +6,6 @@
 	suit = /obj/item/clothing/suit/armor/special/skirmisher
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
-	l_hand = /obj/item/language_learner/kigyar_to_common
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher
 	shoes = /obj/item/clothing/shoes/skirmisher
 	back = /obj/item/weapon/gun/projectile/type51carbine
@@ -21,7 +20,6 @@
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/major
 	shoes = /obj/item/clothing/shoes/skirmisher/major
 	back = /obj/item/weapon/gun/projectile/type51carbine
-	l_hand = /obj/item/language_learner/kigyar_to_common
 
 /decl/hierarchy/outfit/skirmisher_murmillo
 	name = "T'Voan Skirmisher Murmillo"
@@ -33,7 +31,6 @@
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/murmillo
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets
 	shoes = /obj/item/clothing/shoes/skirmisher/murmillo
-	l_hand = /obj/item/language_learner/kigyar_to_common
 
 /decl/hierarchy/outfit/skirmisher_commando
 	name = "T'Voan Skirmisher Commando"
@@ -45,7 +42,6 @@
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/commando
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando
 	shoes = /obj/item/clothing/shoes/skirmisher/commando
-	l_hand = /obj/item/language_learner/kigyar_to_common
 
 /decl/hierarchy/outfit/skirmisher_champion
 	name = "T'Voan Skirmisher Champion"
@@ -57,4 +53,3 @@
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/champion
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets/champion
 	shoes = /obj/item/clothing/shoes/skirmisher/champion
-	l_hand = /obj/item/language_learner/kigyar_to_common
