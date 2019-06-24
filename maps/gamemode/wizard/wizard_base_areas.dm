@@ -1,4 +1,4 @@
-/area/wizard_station
+/area/map_template/wizard_station
 	name = "wizard's den"
 	icon_state = "yellow"
 	requires_power = 0
