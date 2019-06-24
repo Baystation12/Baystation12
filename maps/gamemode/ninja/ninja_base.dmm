@@ -1,40 +1,40 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
 /turf/unsimulated/mineral,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ab" = (
 /turf/simulated/mineral,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ac" = (
 /turf/simulated/floor/snow,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ad" = (
 /obj/effect/floor_decal/asteroid,
 /turf/simulated/floor/snow,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ae" = (
 /obj/structure/flora/tree/dead,
 /turf/simulated/floor/snow,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "af" = (
 /obj/structure/flora/tree/pine,
 /turf/simulated/floor/snow,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ag" = (
 /turf/simulated/wall/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ah" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ai" = (
 /obj/machinery/optable,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aj" = (
 /obj/structure/closet/medical_wall{
 	pixel_y = 32
@@ -51,7 +51,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 /obj/item/weapon/reagent_containers/syringe,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ak" = (
 /obj/structure/table/glass,
 /obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
@@ -60,11 +60,11 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "al" = (
 /obj/machinery/atmospherics/unary/cryo_cell,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "am" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
@@ -72,7 +72,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "an" = (
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{
 	pixel_x = 0;
@@ -80,16 +80,16 @@
 	},
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ao" = (
 /obj/structure/table/glass,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/item/weapon/reagent_containers/spray/cleaner,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ap" = (
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aq" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/firstaid/o2{
@@ -103,55 +103,55 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5;
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "as" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "at" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/box/beakers,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "au" = (
 /obj/machinery/computer/teleporter,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "av" = (
 /obj/machinery/teleport/station,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aw" = (
 /obj/machinery/teleport/hub,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ax" = (
 /obj/effect/wingrille_spawn/reinforced/crescent,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
 	},
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ay" = (
 /obj/structure/table/glass,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "az" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/firstaid/toxin{
@@ -165,18 +165,18 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aA" = (
 /obj/machinery/chemical_dispenser/ert,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aB" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aC" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -186,15 +186,15 @@
 	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aD" = (
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aE" = (
 /obj/structure/iv_drip,
 /obj/structure/window/reinforced/crescent,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aF" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/firstaid/regular,
@@ -204,190 +204,190 @@
 	},
 /obj/structure/window/reinforced/crescent,
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aG" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner,
 /turf/simulated/floor/tiled/white/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aH" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/tiled/white/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aI" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/machinery/chemical_dispenser/full,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/white/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aJ" = (
 /obj/machinery/door/morgue{
 	dir = 2;
 	name = "Teleporter"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aK" = (
 /obj/structure/window/basic/full,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
 	},
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aL" = (
 /obj/effect/landmark{
 	name = "ninjastart"
 	},
 /turf/simulated/floor/carpet/blue2,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aM" = (
 /turf/simulated/floor/carpet/blue2,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aN" = (
 /obj/machinery/bodyscanner{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aO" = (
 /obj/machinery/body_scanconsole{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aP" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aQ" = (
 /obj/structure/flora/pottedplant/bamboo,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aR" = (
 /obj/structure/flora/pottedplant/orientaltree,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aS" = (
 /obj/effect/floor_decal/chapel{
 	icon_state = "chapel";
 	dir = 1
 	},
 /turf/simulated/floor/carpet/blue2,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aT" = (
 /obj/effect/floor_decal/chapel{
 	icon_state = "chapel";
 	dir = 4
 	},
 /turf/simulated/floor/carpet/blue2,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aU" = (
 /obj/effect/floor_decal/chapel{
 	icon_state = "chapel";
 	dir = 8
 	},
 /turf/simulated/floor/carpet/blue2,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aV" = (
 /obj/effect/floor_decal/chapel,
 /turf/simulated/floor/carpet/blue2,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aW" = (
 /obj/machinery/door/morgue{
 	dir = 2;
 	name = "Medical"
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aX" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aY" = (
 /obj/machinery/door/morgue{
 	dir = 2;
 	name = "Dojo"
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "aZ" = (
 /obj/machinery/door/unpowered/simple/bamboo,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ba" = (
 /turf/simulated/floor/carpet/red,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bb" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/machinery/sleeper{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bc" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bd" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "be" = (
 /obj/machinery/light,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bf" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/white_vest,
 /obj/machinery/light,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bg" = (
 /obj/structure/table/rack,
 /obj/item/weapon/defibrillator/compact/combat/loaded,
 /obj/machinery/light,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bh" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/medical,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bi" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bj" = (
 /turf/simulated/floor/snow{
 	icon_state = "snowplating";
 	name = "floor"
 	},
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bk" = (
 /obj/effect/floor_decal/snow,
 /turf/simulated/floor/snow{
 	icon_state = "snowplating";
 	name = "floor"
 	},
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bl" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bm" = (
 /obj/structure/table/rack,
 /obj/item/toy/katana{
@@ -395,29 +395,29 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bn" = (
 /obj/structure/bookcase,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bo" = (
 /obj/structure/table/rack,
 /obj/item/toy/katana{
 	name = "practice katana"
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bp" = (
 /obj/effect/wingrille_spawn/reinforced/crescent,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bq" = (
 /obj/structure/flora/ausbushes/palebush,
 /turf/simulated/floor/snow,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "br" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/sinpockets,
@@ -425,70 +425,70 @@
 	dir = 1
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bs" = (
 /obj/structure/flora/pottedplant/flower,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bt" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_soft/full,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bu" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/glasses,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bv" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bw" = (
 /obj/structure/table/woodentable,
 /obj/machinery/microwave,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bx" = (
 /obj/structure/bookcase{
 	name = "bookcase (Tactics)"
 	},
 /obj/machinery/light,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "by" = (
 /obj/structure/bookcase{
 	name = "bookcase (Religious)"
 	},
 /obj/machinery/light,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bz" = (
 /obj/structure/undies_wardrobe,
 /obj/machinery/light,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bA" = (
 /turf/simulated/floor/tiled/freezer,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bB" = (
 /obj/effect/floor_decal/snow,
 /turf/simulated/floor/tiled/freezer,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bC" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bD" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bE" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/steel{
@@ -508,7 +508,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bF" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/device/multitool/hacktool,
@@ -517,70 +517,70 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bG" = (
 /obj/effect/floor_decal/snow,
 /turf/simulated/floor/ice,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bH" = (
 /obj/machinery/door/morgue{
 	dir = 2;
 	name = "Sleeping Chamber"
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bI" = (
 /obj/structure/table/woodentable,
 /obj/item/device/flashlight/lamp,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bJ" = (
 /obj/effect/floor_decal/snow,
 /obj/structure/aliumizer,
 /turf/simulated/floor/ice,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bK" = (
 /obj/effect/landmark{
 	name = "ninjastart"
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bL" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/brown,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bM" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bN" = (
 /obj/effect/shuttle_landmark/ninja/nav2,
 /turf/simulated/floor/snow,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bO" = (
 /obj/effect/shuttle_landmark/ninja/nav1,
 /turf/simulated/floor/snow,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bP" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/reagent_containers/food/snacks/soylentgreen,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bQ" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "bR" = (
 /obj/structure/flora/pottedplant/shoot,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bS" = (
 /obj/effect/paint/black,
 /obj/structure/shuttle/engine/heater{
@@ -592,7 +592,7 @@
 	dir = 5
 	},
 /turf/simulated/wall/r_titanium,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "bT" = (
 /obj/structure/table/woodentable,
 /obj/item/toy/figure/wizard,
@@ -601,13 +601,13 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bU" = (
 /obj/structure/table/woodentable,
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/mask/balaclava,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bV" = (
 /obj/effect/paint/black,
 /obj/structure/shuttle/engine/heater{
@@ -616,19 +616,19 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
 /turf/simulated/wall/r_titanium,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "bW" = (
 /obj/machinery/door/morgue{
 	dir = 2;
 	name = "Bath"
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bX" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/flame/candle,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bY" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner,
 /obj/item/device/radio/intercom/syndicate{
@@ -636,7 +636,7 @@
 	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "bZ" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
@@ -644,21 +644,21 @@
 	dir = 1
 	},
 /turf/simulated/wall/r_titanium,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "ca" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/structure/hygiene/toilet{
 	pixel_y = 8
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cb" = (
 /obj/machinery/door/morgue{
 	dir = 2;
 	name = "Shrine"
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cc" = (
 /obj/effect/landmark{
 	name = "ninjastart"
@@ -676,7 +676,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cd" = (
 /obj/structure/table/rack{
 	desc = "A simple wooden altar covered in cloth.";
@@ -686,16 +686,16 @@
 	},
 /obj/item/weapon/material/sword/katana,
 /turf/simulated/floor/wood/bamboo,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ce" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cf" = (
 /turf/simulated/floor/beach/water/ocean,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cg" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -710,18 +710,18 @@
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ch" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "ci" = (
 /obj/machinery/door/morgue{
 	dir = 2;
 	name = "Equipment"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cj" = (
 /obj/machinery/autolathe{
 	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
@@ -730,36 +730,36 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ck" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
 /turf/simulated/wall/r_titanium,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cl" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/storage/secure/briefcase/money,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cm" = (
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cn" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/brown_vest,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "co" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/utility/full,
 /obj/item/device/multitool,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cp" = (
 /obj/effect/paint/black,
 /obj/structure/shuttle/engine/heater{
@@ -771,49 +771,49 @@
 	dir = 9
 	},
 /turf/simulated/wall/r_titanium,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cq" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/device/radio/uplink,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cr" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Equipment"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cs" = (
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "ct" = (
 /obj/machinery/acting/changer,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cu" = (
 /obj/structure/table/rack,
 /obj/item/stack/nanopaste,
 /obj/item/stack/nanopaste,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cv" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cw" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/clothing/accessory/storage/bandolier,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cx" = (
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cy" = (
 /obj/structure/table/rack,
 /obj/item/weapon/material/star/ninja,
@@ -824,7 +824,7 @@
 /obj/item/weapon/material/star/ninja,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cz" = (
 /obj/structure/table/rack,
 /obj/item/weapon/material/star,
@@ -835,19 +835,19 @@
 /obj/item/weapon/material/star,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cA" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/black_vest,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cB" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/holster/security/tactical,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cC" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/plastique,
@@ -858,13 +858,13 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cD" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/storage/box/anti_photons,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/dojo)
+/area/map_template/ninja_dojo/dojo)
 "cE" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -878,7 +878,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cF" = (
 /obj/machinery/computer/teleporter{
 	icon_state = "computer";
@@ -888,14 +888,14 @@
 	icon_state = "plating";
 	name = "plating"
 	},
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cG" = (
 /obj/machinery/teleport/station,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
 	},
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cH" = (
 /obj/machinery/teleport/hub,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -903,7 +903,7 @@
 	icon_state = "plating";
 	name = "plating"
 	},
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cI" = (
 /obj/machinery/light{
 	dir = 1
@@ -916,7 +916,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cJ" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -927,30 +927,30 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cK" = (
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cL" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cM" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cN" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cO" = (
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1331;
@@ -964,7 +964,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cP" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
@@ -980,18 +980,18 @@
 	opacity = 0
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cQ" = (
 /obj/machinery/sleeper{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cR" = (
 /obj/effect/shuttle_landmark/ninja/start,
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5;
@@ -1007,7 +1007,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -1018,7 +1018,7 @@
 	name = "Ship External Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cU" = (
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
@@ -1037,7 +1037,7 @@
 	pixel_x = 25
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cV" = (
 /obj/structure/closet,
 /obj/machinery/light{
@@ -1046,7 +1046,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cW" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/modular_computer/console/preset/security{
@@ -1054,7 +1054,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cX" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light{
@@ -1069,11 +1069,11 @@
 /obj/item/weapon/screwdriver,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cY" = (
 /obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "cZ" = (
 /obj/machinery/button/remote/blast_door{
 	id = "ninjawindow";
@@ -1087,7 +1087,7 @@
 	pixel_y = -25
 	},
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "da" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
@@ -1098,18 +1098,18 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "db" = (
 /obj/machinery/shipsensors/weak,
 /turf/simulated/floor/airless,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "dc" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/computer/ship/helm{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "dd" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/computer/shuttle_control/explore/ninja{
@@ -1117,7 +1117,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "de" = (
 /obj/machinery/door/blast/regular{
 	density = 1;
@@ -1131,18 +1131,18 @@
 	},
 /obj/effect/paint/black,
 /turf/simulated/floor/plating,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "df" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/computer/ship/engines{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 "dg" = (
 /obj/effect/overmap/ship/landable/ninja,
 /turf/simulated/floor/tiled/dark,
-/area/ninja_dojo/start)
+/area/map_template/ninja_dojo/start)
 
 (1,1,1) = {"
 aa
