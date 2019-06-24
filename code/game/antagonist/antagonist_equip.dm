@@ -20,3 +20,20 @@
 	if(!istype(player))
 		return 0
 	return 1
+
+/datum/antagonist/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
+	set waitfor = 0
+	if(istype(player) && ispath(rig_type))
+		var/obj/item/weapon/rig/rig = new rig_type(player)
+		rig.seal_delay = 0
+		player.put_in_hands(rig)
+		player.equip_to_slot_or_del(rig,slot_back)
+		if(rig)
+			rig.visible_name = player.real_name
+			rig.toggle_seals(src,1)
+			rig.seal_delay = initial(rig.seal_delay)
+			if(rig.air_supply)
+				player.internal = rig.air_supply
+				if(player.internals)
+					player.internals.icon_state = "internal1"
+		return rig 
