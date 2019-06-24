@@ -10,24 +10,16 @@
 
 		// Uncomment post-merge.
 		//obj/item/weapon/gun/energy/particle/small,
-		//obj/item/clustertool,
 		/obj/item/device/multitool, //mantid,
-
-		// Placeholders.
+		/obj/item/clustertool,
+		/obj/item/weapon/weldingtool/electric,
 		/obj/item/weapon/extinguisher,
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/wirecutters,
 		/obj/item/device/t_scanner,
 		/obj/item/device/scanner/gas,
 		/obj/item/device/geiger,
 		/obj/item/weapon/gripper,
 		/obj/item/weapon/gripper/no_use/loader,
 		/obj/item/inducer/borg,
-		/obj/item/weapon/weldingtool/electric,
-		// End placeholders.
-
 		/obj/item/stack/medical/resin,
 		/obj/item/weapon/surgicaldrill,
 		/obj/item/weapon/hemostat,
