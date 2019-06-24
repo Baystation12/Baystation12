@@ -44,4 +44,4 @@
 	name = "Insurrection"
 
 /datum/faction/human_civ
-	name = "Human Civilian"
+	name = "Human Colony"

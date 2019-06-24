@@ -25,6 +25,7 @@
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
+	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
@@ -36,6 +37,7 @@
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
+	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
 	total_positions = 1

@@ -47,6 +47,7 @@
 
 /datum/job/geminus_innie/commander
 	title = "Insurrectionist Commander"
+	department_flag = COM
 	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	total_positions = 1

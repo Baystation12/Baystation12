@@ -31,6 +31,7 @@
 		DEFAULT_SPAWNPOINT_ID,\
 		"Geminus Innie",\
 		"Listening Post Spawn",\
+		"Colony Arrival Shuttle",\
 		"UNSC Base Spawns",\
 		"Covenant Base Spawns",\
 		"Research Facility Spawn",\

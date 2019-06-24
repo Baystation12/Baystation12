@@ -285,7 +285,10 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
-					if(player.create_character(job_master.get_roundstart_spawnpoint(player.mind.assigned_role)))
+					var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(player.client, job_master.occupations_by_title[player.mind.assigned_role])
+					var/turf/spawn_turf = spawnpoint.get_spawn_turf(player.mind.assigned_role)
+
+					if(player.create_character(spawn_turf))
 						qdel(player)
 
 
