@@ -84,14 +84,8 @@
 	var/charge_per_shot = 10
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/ascent/get_cell()
-	if(istype(src.loc, /obj/item/rig_module))
-		var/obj/item/rig_module/module = src.loc
-		if(module.holder && module.holder.wearer)
-			var/mob/living/carbon/human/H = module.holder.wearer
-			if(istype(H) && H.back)
-				var/obj/item/weapon/rig/suit = H.back
-				if(istype(suit) && suit.cell)
-					return suit.cell
+	if(isrobot(loc) || istype(loc, /obj/item/rig_module))
+		return loc.get_cell()
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/ascent/show_ammo(var/mob/user)
 	var/obj/item/weapon/cell/cell = get_cell()

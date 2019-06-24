@@ -14,6 +14,7 @@
 		new_index = 1
 	tool_mode = tool_modes[new_index]
 	name = "[initial(name)] ([tool_mode])"
+	playsound(user, 'sound/machines/bolts_down.ogg', 10)
 	to_chat(user, SPAN_NOTICE("You select the [tool_mode] attachment."))
 	update_icon()
 

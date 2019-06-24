@@ -24,7 +24,6 @@
 	equipment = list(
 		/obj/item/device/flash,
 		/obj/item/borg/sight/meson,
-		/obj/item/device/flash,
 		/obj/item/weapon/extinguisher,
 		/obj/item/weapon/weldingtool/largetank,
 		/obj/item/weapon/screwdriver,

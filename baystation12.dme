@@ -1642,6 +1642,7 @@
 #include "code\modules\emotes\definitions\_mob.dm"
 #include "code\modules\emotes\definitions\_species.dm"
 #include "code\modules\emotes\definitions\adherent.dm"
+#include "code\modules\emotes\definitions\ascent.dm"
 #include "code\modules\emotes\definitions\audible.dm"
 #include "code\modules\emotes\definitions\human.dm"
 #include "code\modules\emotes\definitions\slime.dm"

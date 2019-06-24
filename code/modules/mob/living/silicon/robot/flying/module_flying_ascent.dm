@@ -25,11 +25,11 @@
 		/obj/item/weapon/circular_saw
 	)
 	languages = list(
-		LANGUAGE_MANTID_VOCAL          = TRUE,
-		LANGUAGE_MANTID_NONVOCAL       = TRUE,
-		LANGUAGE_MANTID_BROADCASTVOCAL = TRUE,
-		LANGUAGE_SKRELLIAN             = TRUE,
-		LANGUAGE_NABBER                = TRUE
+		LANGUAGE_MANTID_VOCAL     = TRUE,
+		LANGUAGE_MANTID_NONVOCAL  = TRUE,
+		LANGUAGE_MANTID_BROADCAST = TRUE,
+		LANGUAGE_SKRELLIAN        = TRUE,
+		LANGUAGE_NABBER           = TRUE
 	)
 
 /obj/item/weapon/robot_module/flying/ascent/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)

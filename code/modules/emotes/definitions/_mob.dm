@@ -190,6 +190,13 @@
 		/decl/emote/audible/synth/security/halt
 		)
 
+/mob/living/silicon/robot/flying/ascent
+	default_emotes = list(
+		/decl/emote/audible/synth/ascent_purr,
+		/decl/emote/audible/synth/ascent_hiss,
+		/decl/emote/audible/synth/ascent_snarl
+	)
+
 /mob/living/carbon/slime
 	default_emotes = list(
 		/decl/emote/audible/moan,

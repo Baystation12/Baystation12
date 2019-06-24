@@ -35,6 +35,7 @@
 	scrambledcodes = 1
 	speed = -3
 	icon_state = "drone-ascent"
+	spawn_sound = 'sound/voice/ascent1.ogg'
 	cell =   /obj/item/weapon/cell/mantid
 	laws =   /datum/ai_laws/ascent
 	idcard = /obj/item/weapon/card/id/ascent
@@ -48,6 +49,7 @@
 	remove_language(LANGUAGE_HUMAN_EURO)
 	remove_language(LANGUAGE_EAL)
 	remove_language(LANGUAGE_ROBOT_GLOBAL)
+	default_language = all_languages[LANGUAGE_MANTID_NONVOCAL]
 
 /mob/living/silicon/robot/flying/ascent/examine(var/user)
 	. = ..()
