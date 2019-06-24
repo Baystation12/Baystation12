@@ -42,7 +42,6 @@ Class Variables:
 	  Possible bit flags:
 		 BROKEN:1 -- Machine is broken
 		 NOPOWER:2 -- No power is being supplied to machine.
-		 POWEROFF:4 -- tbd
 		 MAINT:8 -- machine is currently under going maintenance.
 		 EMPED:16 -- temporary broken by EMP pulse
 
@@ -168,14 +167,20 @@ Class Procs:
 				qdel(src)
 
 /obj/machinery/proc/set_broken(new_state)
-	if(new_state && !(stat & BROKEN))
-		stat |= BROKEN
-		. = TRUE
-	else if(!new_state && (stat & BROKEN))
-		stat &= ~BROKEN
-		. = TRUE
-	if(.)
+	if(!new_state != !(stat & BROKEN)) // new state is different from old
+		stat ^= BROKEN                // so flip it
 		queue_icon_update()
+		return TRUE
+
+/obj/machinery/proc/set_noscreen(new_state)
+	if(!new_state != !(stat & NOSCREEN))
+		stat ^= NOSCREEN
+		return TRUE
+
+/obj/machinery/proc/set_noinput(new_state)
+	if(!new_state != !(stat & NOINPUT))
+		stat ^= NOINPUT
+		return TRUE
 
 /proc/is_operable(var/obj/machinery/M, var/mob/user)
 	return istype(M) && M.operable()
@@ -199,7 +204,19 @@ Class Procs:
 	if(!interact_offline && (stat & NOPOWER))
 		return STATUS_CLOSE
 
-	return ..()
+	if(issilicon(user))
+		return ..()
+
+	if(stat & NOSCREEN)
+		return STATUS_CLOSE
+
+	if(stat & NOINPUT)
+		return min(..(), STATUS_UPDATE)
+
+/obj/machinery/CanUseTopicPhysical(var/mob/user)
+	if(stat & BROKEN)
+		return STATUS_CLOSE
+	return GLOB.physical_state.can_use_topic(nano_host(), user)
 
 /obj/machinery/CouldUseTopic(var/mob/user)
 	..()
@@ -210,32 +227,27 @@ Class Procs:
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-/obj/machinery/attack_ai(mob/user as mob)
-	if(isrobot(user))
-		// For some reason attack_robot doesn't work
-		// This is to stop robots from using cameras to remotely control machines.
-		if(user.client && user.client.eye == user)
-			return src.attack_hand(user)
-	else
-		return src.attack_hand(user)
+/obj/machinery/attack_ai(mob/user)
+	if(CanInteract(user, GLOB.default_state))
+		return interface_interact(user)
 
-/obj/machinery/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|MAINT))
+/obj/machinery/attack_robot(mob/user)
+	if((. = attack_hand(user))) // This will make a physical proximity check, and allow them to deal with components and such.
+		return
+	if(CanInteract(user, GLOB.default_state))
+		return interface_interact(user) // This may still work even if the physical checks fail.
+
+// If you don't call parent in this proc, you must make all appropriate checks yourself. 
+// If you do, you must respect the return value.
+/obj/machinery/attack_hand(mob/user)
+	if((. = ..())) // Buckling, climbers; unlikely to return true.
+		return
+	if(!CanPhysicallyInteract(user))
+		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
+	if(!user.IsAdvancedToolUser())
+		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return TRUE
-	if(!interact_offline && (stat & NOPOWER))
-		return TRUE
-	if(user.lying || user.stat)
-		return 1
-	if ( ! (istype(usr, /mob/living/carbon/human) || \
-			istype(usr, /mob/living/silicon)))
-		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
-		return 1
-/*
-	//distance checks are made by atom/proc/DblClick
-	if ((get_dist(src, user) > 1 || !istype(src.loc, /turf)) && !istype(user, /mob/living/silicon))
-		return 1
-*/
-	if (ishuman(user))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 55)
 			visible_message("<span class='warning'>[H] stares cluelessly at \the [src].</span>")
@@ -245,7 +257,13 @@ Class Procs:
 			return 1
 	if((. = component_attack_hand(user)))
 		return
-	return ..()
+	if(CanInteract(user, GLOB.default_state))
+		return interface_interact(user)
+
+// If you want to have interface interactions handled for you conveniently, use this.
+// Return TRUE for handled.
+/obj/machinery/proc/interface_interact(user)
+	return FALSE
 
 /obj/machinery/proc/RefreshParts()
 	for(var/thing in component_parts)
