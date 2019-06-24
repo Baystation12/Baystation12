@@ -11,8 +11,8 @@
 	assisted_langs = list(LANGUAGE_NABBER)
 	min_age = 17
 	max_age = 100
-
-	gluttonous = GLUT_TINY
+	hidden_from_codex = FALSE
+	bandages_icon = 'icons/mob/bandage.dmi'
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
@@ -23,8 +23,36 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_HUMAN,
-			CULTURE_HUMAN_VATGROWN
+			CULTURE_HUMAN_MARTIAN,
+			CULTURE_HUMAN_MARSTUN,
+			CULTURE_HUMAN_LUNAPOOR,
+			CULTURE_HUMAN_LUNARICH,
+			CULTURE_HUMAN_VENUSIAN,
+			CULTURE_HUMAN_VENUSLOW,
+			CULTURE_HUMAN_BELTER,
+			CULTURE_HUMAN_PLUTO,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_CETI,
+			CULTURE_HUMAN_SPACER,
+			CULTURE_HUMAN_SPAFRO,
+			CULTURE_HUMAN_TERSNEV,
+			CULTURE_HUMAN_TERSPIN,
+			CULTURE_HUMAN_TERSOTH,
+			CULTURE_HUMAN_LORRCLA,
+			CULTURE_HUMAN_LORROTH,
+			CULTURE_HUMAN_LORDARES,
+			CULTURE_HUMAN_LORDWEST,
+			CULTURE_HUMAN_LORDEAST,
+			CULTURE_HUMAN_YUKSPI,
+			CULTURE_HUMAN_YUKCOS,
+			CULTURE_HUMAN_CINUDES,
+			CULTURE_HUMAN_CINUCIT,
+			CULTURE_HUMAN_KINGISL,
+			CULTURE_HUMAN_KINGTRI,
+			CULTURE_HUMAN_FRARAB,
+			CULTURE_HUMAN_CONFINT,
+			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_OTHER
 		)
 	)
 
@@ -86,8 +114,9 @@
 	icobase = 'icons/mob/human_races/species/skrell/body.dmi'
 	deform = 'icons/mob/human_races/species/skrell/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/skrell/preview.dmi'
+	bandages_icon = 'icons/mob/bandage.dmi'
 	primitive_form = "Neaera"
-	unarmed_types = list(/datum/unarmed_attack/punch)
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	description = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
 	of the Qerr'Katish, a caste within their society which keeps the empire of the Skrell running smoothly. Skrell are \
@@ -97,6 +126,7 @@
 	health_hud_intensity = 1.75
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/octopus
 	genders = list(PLURAL)
+	hidden_from_codex = FALSE
 
 	min_age = 19
 	max_age = 90
@@ -110,6 +140,7 @@
 	hazard_low_pressure = HAZARD_LOW_PRESSURE * 2
 	warning_high_pressure = WARNING_HIGH_PRESSURE / 0.8125
 	hazard_high_pressure = HAZARD_HIGH_PRESSURE / 0.84615
+	water_soothe_amount = 5
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
@@ -134,16 +165,14 @@
 
 	reagent_tag = IS_SKRELL
 
-	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/skrell)
-
 	descriptors = list(
-		/datum/mob_descriptor/height = 1.2,
+		/datum/mob_descriptor/height = 1,
 		/datum/mob_descriptor/build = 0,
 		/datum/mob_descriptor/headtail_length = 0
 	)
 
 	available_cultural_info = list(
-		TAG_CULTURE =   list(
+		TAG_CULTURE = list(
 			CULTURE_SKRELL_QERR,
 			CULTURE_SKRELL_MALISH,
 			CULTURE_SKRELL_KANIN,
@@ -151,14 +180,27 @@
 			CULTURE_SKRELL_RASKINTA
 		),
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_QERRBALAK
+			HOME_SYSTEM_QERRBALAK,
+			HOME_SYSTEM_TALAMIRA,
+			HOME_SYSTEM_ROASORA,
+			HOME_SYSTEM_MITORQI,
+			HOME_SYSTEM_SKRELLSPACE
 		),
 		TAG_FACTION = list(
-			FACTION_OTHER,
 			FACTION_EXPEDITIONARY,
-			FACTION_NANOTRASEN
+			FACTION_CORPORATE,
+			FACTION_NANOTRASEN,
+			FACTION_PCRC,
+			FACTION_HEPHAESTUS,
+			FACTION_DAIS,
+			FACTION_SKRELL_QERRVOAL,
+			FACTION_SKRELL_QALAOA,
+			FACTION_SKRELL_YIITALANA,
+			FACTION_SKRELL_KRIGLI,
+			FACTION_SKRELL_QONPRRI,
+			FACTION_OTHER
 		),
-		TAG_RELIGION =  list(
+		TAG_RELIGION = list(
 			RELIGION_OTHER,
 			RELIGION_ATHEISM,
 			RELIGION_DEISM,
@@ -166,16 +208,33 @@
 		)
 	)
 
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs/gills,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes/skrell
+		)
+
+/datum/species/skrell/get_sex(var/mob/living/carbon/H)
+	return descriptors["headtail length"] == 1 ? MALE : FEMALE
+
+/datum/species/skrell/check_background()
+	return TRUE
+
 /datum/species/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/species/diona/body.dmi'
 	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
-
+	hidden_from_codex = FALSE
+	move_intents = list(/decl/move_intent/walk, /decl/move_intent/creep)
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
-	slowdown = 7
+	slowdown = 5
 	rarity_value = 3
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
@@ -185,6 +244,7 @@
 	spawns_with_stack = 0
 	health_hud_intensity = 2
 	hunger_factor = 3
+	thirst_factor = 0.01
 
 	min_age = 1
 	max_age = 300
@@ -243,7 +303,7 @@
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_IS_PLANT | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SLIP
 	appearance_flags = 0
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	blood_color = "#004400"
 	flesh_color = "#907e4a"
@@ -263,7 +323,7 @@
 		return 0
 
 	//This is a terrible hack and I should be ashamed.
-	var/datum/seed/diona = plant_controller.seeds["diona"]
+	var/datum/seed/diona = SSplants.seeds["diona"]
 	if(!diona)
 		return 0
 
@@ -337,5 +397,20 @@
 	return "sap"
 
 /datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
-	if(!H.InStasis() && H.stat != DEAD && H.nutrition < 10)
+	if(H.InStasis() || H.stat == DEAD)
+		return
+
+	if(H.nutrition < 10)
 		H.take_overall_damage(2,0)
+
+	if(H.hydration < 550 && H.loc)
+		var/is_in_water = FALSE
+		if(H.loc.is_flooded(lying_mob = TRUE))
+			is_in_water = TRUE
+		else
+			for(var/obj/structure/hygiene/shower/shower in H.loc)
+				if(shower.on)
+					is_in_water = TRUE
+					break
+		if(is_in_water)
+			H.adjust_hydration(100)
