@@ -12,7 +12,7 @@
 /area/space)
 "ad" = (
 /turf/simulated/mineral,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ae" = (
 /obj/structure/lattice,
 /turf/space,
@@ -29,7 +29,7 @@
 /area/space)
 "ah" = (
 /turf/simulated/wall/r_wall,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ai" = (
 /obj/structure/table/standard,
 /obj/item/device/flashlight/lamp{
@@ -37,14 +37,14 @@
 	pixel_y = 8
 	},
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aj" = (
 /obj/structure/table/standard,
 /obj/effect/landmark{
 	name = "Nuclear-Code"
 	},
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ak" = (
 /obj/structure/table/standard,
 /obj/item/weapon/paper_bin{
@@ -55,51 +55,51 @@
 	pixel_y = 4
 	},
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "al" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/unsimulated/wall/fakeglass{
 	dir = 1;
 	icon_state = "fakewindows"
 	},
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "am" = (
 /obj/item/weapon/bedsheet/hos,
 /obj/structure/bed/padded,
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "an" = (
 /obj/effect/landmark{
 	name = "Syndicate-Spawn"
 	},
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ao" = (
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ap" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/unsimulated/wall/fakeglass{
 	icon_state = "fakewindows2";
 	dir = 1
 	},
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aq" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/unsimulated/wall/fakeglass,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ar" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/hos,
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "as" = (
 /obj/machinery/acting/changer,
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "at" = (
 /obj/item/modular_computer/pda/syndicate,
 /obj/structure/table/standard,
@@ -107,30 +107,30 @@
 	dir = 4
 	},
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "au" = (
 /obj/structure/undies_wardrobe,
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "av" = (
 /obj/structure/table/standard,
 /turf/simulated/floor/lino,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aw" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ax" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Barracks";
 	opacity = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ay" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "az" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -142,35 +142,35 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/black,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aA" = (
 /obj/structure/sign/double/map/left{
 	pixel_y = 32
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aB" = (
 /obj/structure/sign/double/map/right{
 	pixel_y = 32
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aC" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aD" = (
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aE" = (
 /obj/machinery/vending/snack{
 	name = "hacked Getmore Chocolate Corp";
 	prices = list()
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aF" = (
 /obj/structure/table/standard,
 /obj/machinery/chemical_dispenser/bar_soft/full{
@@ -181,22 +181,22 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aG" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/box/glasses,
 /turf/simulated/floor/tiled/white,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aH" = (
 /obj/structure/hygiene/sink/kitchen{
 	pixel_y = 28
 	},
 /turf/simulated/floor/tiled/white,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aI" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aJ" = (
 /obj/structure/table/rack,
 /obj/item/ammo_magazine/pistol/small,
@@ -212,36 +212,36 @@
 /obj/item/weapon/gun/projectile/pistol/holdout,
 /obj/item/weapon/gun/projectile/pistol/holdout,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aK" = (
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aL" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aM" = (
 /obj/machinery/atmospherics/unary/engine,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aN" = (
 /obj/machinery/recharger,
 /obj/structure/table/reinforced,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aO" = (
 /obj/machinery/computer/ship/helm,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aP" = (
 /obj/machinery/computer/shuttle_control/explore/syndicate,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aQ" = (
 /obj/machinery/computer/ship/helm,
 /obj/machinery/computer/ship/helm,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aR" = (
 /obj/machinery/button/remote/blast_door{
 	id = "syndieshutters";
@@ -249,7 +249,7 @@
 	},
 /obj/structure/table/reinforced,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "aS" = (
 /obj/structure/table/rack,
 /obj/item/weapon/shield/energy,
@@ -259,21 +259,21 @@
 /obj/item/weapon/shield/energy,
 /obj/item/weapon/shield/energy,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aT" = (
 /obj/structure/bed/chair/comfy/black,
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aU" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Kitchen";
 	opacity = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aV" = (
 /turf/simulated/floor/tiled/white,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aW" = (
 /obj/structure/table/reinforced,
 /obj/machinery/microwave{
@@ -281,7 +281,7 @@
 	pixel_y = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aX" = (
 /obj/item/weapon/storage/box/smokes,
 /obj/item/weapon/storage/box/teargas,
@@ -295,7 +295,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aY" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/holster/thigh,
@@ -305,7 +305,7 @@
 /obj/item/clothing/accessory/storage/holster/thigh,
 /obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "aZ" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -314,10 +314,10 @@
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ba" = (
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bb" = (
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (NORTH)";
@@ -325,31 +325,31 @@
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bc" = (
 /obj/vehicle/bike/electric,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bd" = (
 /obj/vehicle/bike/electric,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "be" = (
 /obj/structure/bed/chair/comfy/black{
 	dir = 4
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bf" = (
 /obj/item/weapon/folder{
 	pixel_y = 2
 	},
 /obj/structure/table/glass,
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bg" = (
 /obj/item/weapon/paper_bin{
 	pixel_x = -3;
@@ -360,19 +360,19 @@
 	},
 /obj/structure/table/glass,
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bh" = (
 /obj/structure/bed/chair/comfy/black{
 	dir = 8
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bi" = (
 /obj/machinery/vending/coffee{
 	prices = list()
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bj" = (
 /obj/structure/table/reinforced,
 /obj/item/weapon/storage/box/donkpockets{
@@ -380,7 +380,7 @@
 	pixel_y = 3
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bk" = (
 /obj/machinery/light{
 	dir = 8;
@@ -393,13 +393,13 @@
 	pixel_y = 2
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bl" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bm" = (
 /obj/machinery/light{
 	dir = 4
@@ -416,12 +416,12 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bn" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/launcher/grenade,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bo" = (
 /obj/structure/table/rack,
 /obj/machinery/recharger/wallcharger{
@@ -430,13 +430,13 @@
 	},
 /obj/item/weapon/gun/energy/plasmastun,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bp" = (
 /obj/structure/bed/chair/comfy/black{
 	dir = 1
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bq" = (
 /obj/machinery/vending/cola{
 	name = "hacked Robust Softdrinks";
@@ -446,28 +446,28 @@
 	dir = 4
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "br" = (
 /obj/structure/closet/secure_closet/freezer/kitchen{
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bs" = (
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bt" = (
 /obj/structure/table/reinforced,
 /obj/item/weapon/tray{
 	pixel_y = 5
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bu" = (
 /obj/structure/table/reinforced,
 /obj/item/weapon/storage/box/sinpockets,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bv" = (
 /obj/machinery/light,
 /obj/item/device/radio/intercom/syndicate{
@@ -475,7 +475,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bw" = (
 /obj/item/weapon/paper_bin{
 	pixel_x = -3;
@@ -487,7 +487,7 @@
 /obj/structure/table/reinforced,
 /obj/item/clothing/ears/earmuffs/headphones,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bx" = (
 /obj/structure/table/reinforced,
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka{
@@ -502,7 +502,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "by" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/ammo/shotgunammo,
@@ -516,27 +516,27 @@
 /obj/item/weapon/gun/projectile/shotgun/pump,
 /obj/item/weapon/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bz" = (
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bA" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bB" = (
 /obj/machinery/door/window/northright{
 	name = "Flight Deck"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bC" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Garage";
 	opacity = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bD" = (
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
@@ -544,7 +544,7 @@
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/simulated/floor/cult,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bE" = (
 /obj/structure/table/rack,
 /obj/item/device/radio/intercom/syndicate{
@@ -558,7 +558,7 @@
 /obj/item/weapon/gun/projectile/automatic/assault_rifle,
 /obj/item/weapon/gun/projectile/automatic/assault_rifle,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bF" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/energy/ionrifle,
@@ -568,11 +568,11 @@
 	pixel_y = 5
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bG" = (
 /obj/structure/aliumizer,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bH" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 32
@@ -581,18 +581,18 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bI" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bJ" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bK" = (
 /obj/machinery/atmospherics/unary/engine{
 	icon_state = "nozzle";
@@ -601,17 +601,17 @@
 /turf/simulated/shuttle/wall{
 	icon_state = "wall3"
 	},
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bL" = (
 /obj/machinery/porta_turret_construct,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bM" = (
 /obj/structure/bed/chair{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bN" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -620,18 +620,18 @@
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bO" = (
 /obj/structure/closet/hydrant{
 	pixel_y = 32
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bP" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/holster/security,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bQ" = (
 /obj/machinery/porta_turret/crescent{
 	check_synth = 1;
@@ -640,7 +640,7 @@
 	name = "Incomplete turret"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bR" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -657,7 +657,7 @@
 /turf/simulated/shuttle/wall{
 	icon_state = "wall3"
 	},
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bS" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -672,7 +672,7 @@
 	dir = 8
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bT" = (
 /obj/structure/hygiene/shower{
 	pixel_y = 32
@@ -681,14 +681,14 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bU" = (
 /obj/structure/hygiene/shower{
 	pixel_y = 32
 	},
 /obj/item/weapon/soap/syndie,
 /turf/simulated/floor/tiled/freezer,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bV" = (
 /obj/structure/table/rack,
 /obj/item/ammo_magazine/smg,
@@ -704,13 +704,13 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "bW" = (
 /obj/machinery/recharger/wallcharger{
 	pixel_x = -25
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bX" = (
 /obj/structure/bed/chair{
 	dir = 8
@@ -719,7 +719,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bY" = (
 /obj/structure/closet,
 /obj/item/device/flash,
@@ -729,7 +729,7 @@
 /obj/item/device/flash,
 /obj/item/device/flash,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "bZ" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/energy/gun,
@@ -740,12 +740,12 @@
 	pixel_y = 5
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ca" = (
 /obj/vehicle/bike/electric,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cb" = (
 /obj/machinery/recharger/wallcharger{
 	pixel_x = -25
@@ -756,7 +756,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cc" = (
 /obj/structure/closet,
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
@@ -767,23 +767,23 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cd" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Bathroom";
 	opacity = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ce" = (
 /turf/simulated/floor/tiled/freezer,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cf" = (
 /obj/structure/hygiene/shower{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cg" = (
 /obj/structure/table/rack,
 /obj/item/ammo_magazine/smg,
@@ -796,7 +796,7 @@
 /obj/item/weapon/gun/projectile/automatic/merc_smg,
 /obj/item/weapon/gun/projectile/automatic/merc_smg,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ch" = (
 /obj/item/weapon/storage/mirror{
 	dir = 4;
@@ -810,39 +810,39 @@
 	pixel_y = 2
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ci" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Armory";
 	opacity = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cj" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ck" = (
 /turf/simulated/floor/shuttle/black,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cl" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/black,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cm" = (
 /obj/item/device/radio/electropack,
 /turf/simulated/floor/shuttle/black,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cn" = (
 /obj/structure/sign/poster/bay_50{
 	pixel_x = -32
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "co" = (
 /obj/structure/closet,
 /obj/item/weapon/reagent_containers/food/snacks/tastybread,
@@ -850,7 +850,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/tastybread,
 /obj/item/weapon/reagent_containers/food/snacks/tastybread,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cp" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
@@ -864,7 +864,7 @@
 	pixel_y = 25
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cq" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -880,7 +880,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cr" = (
 /obj/machinery/button/remote/blast_door{
 	id = "smindicate";
@@ -893,18 +893,18 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cs" = (
 /obj/structure/window/reinforced/crescent,
 /turf/space,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ct" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cu" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/utility/full,
@@ -914,7 +914,7 @@
 /obj/item/weapon/storage/belt/utility/full,
 /obj/item/weapon/storage/belt/utility/full,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cv" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/medical,
@@ -927,7 +927,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cw" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/holster/security/tactical,
@@ -937,7 +937,7 @@
 /obj/item/weapon/storage/belt/holster/security/tactical,
 /obj/item/weapon/storage/belt/holster/security/tactical,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cx" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -949,7 +949,7 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/black,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cy" = (
 /obj/machinery/flasher{
 	id = "syndieflash";
@@ -957,7 +957,7 @@
 	pixel_x = 0
 	},
 /turf/simulated/floor/shuttle/black,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cz" = (
 /obj/structure/closet/secure_closet/medical_wall{
 	pixel_x = -32;
@@ -973,20 +973,20 @@
 /obj/item/weapon/storage/belt/medical,
 /obj/item/weapon/storage/belt/medical,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cA" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cB" = (
 /obj/structure/closet/walllocker/emerglocker{
 	pixel_x = 28
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cC" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
@@ -994,14 +994,14 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cD" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cE" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
@@ -1009,13 +1009,13 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cF" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cG" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/brown_vest,
@@ -1025,7 +1025,7 @@
 /obj/item/clothing/accessory/storage/brown_vest,
 /obj/item/clothing/accessory/storage/brown_vest,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cH" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/white_vest,
@@ -1038,7 +1038,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cI" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/black_vest,
@@ -1048,7 +1048,7 @@
 /obj/item/clothing/accessory/storage/black_vest,
 /obj/item/clothing/accessory/storage/black_vest,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cJ" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	frequency = 1331;
@@ -1057,7 +1057,7 @@
 	pixel_y = -5
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cK" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/handcuffs{
@@ -1069,24 +1069,24 @@
 	pixel_y = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cL" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/black,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cM" = (
 /obj/item/trash/cigbutt,
 /turf/simulated/floor/shuttle/black,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cN" = (
 /obj/machinery/door/window{
 	dir = 2;
 	name = "Seating"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cO" = (
 /obj/structure/table/standard,
 /obj/machinery/computer/pod/old/syndicate{
@@ -1097,11 +1097,11 @@
 	name = "Blast Door Control"
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cP" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cQ" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1109,13 +1109,13 @@
 	dir = 6
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cR" = (
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
 /turf/space,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cS" = (
 /obj/item/weapon/pinpointer/nukeop,
 /obj/item/weapon/pinpointer/nukeop,
@@ -1125,7 +1125,7 @@
 /obj/item/weapon/pinpointer/nukeop,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cT" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/steel{
@@ -1141,14 +1141,14 @@
 	amount = 50
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cU" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1331;
 	id_tag = "merc_base_hatch"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "cV" = (
 /obj/machinery/door/window{
 	dir = 1;
@@ -1159,7 +1159,7 @@
 	pixel_x = 22
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cW" = (
 /obj/machinery/light{
 	dir = 8;
@@ -1175,19 +1175,19 @@
 	maxcharge = 15000
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cX" = (
 /obj/machinery/vending/assist/antag,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cY" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/black,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "cZ" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1331;
@@ -1196,26 +1196,26 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "da" = (
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
 /obj/structure/window/reinforced/crescent,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "db" = (
 /obj/machinery/door/airlock/vault{
 	name = "Equipment"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dc" = (
 /obj/effect/landmark{
 	name = "Syndicate-Uplink"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dd" = (
 /obj/machinery/autolathe{
 	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
@@ -1223,18 +1223,18 @@
 	name = "Unlocked Autolathe"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "de" = (
 /obj/structure/flora/pottedplant/flower,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "df" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dg" = (
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
@@ -1242,7 +1242,7 @@
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dh" = (
 /obj/structure/bed/chair{
 	dir = 8
@@ -1260,21 +1260,21 @@
 	pixel_y = -5
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "di" = (
 /obj/machinery/atmospherics/pipe/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dj" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
 /obj/machinery/meter,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dk" = (
 /obj/machinery/access_button{
 	command = "cycle_interior";
@@ -1290,13 +1290,13 @@
 	dir = 9
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dl" = (
 /obj/machinery/suit_cycler/syndicate{
 	locked = 0
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dm" = (
 /obj/structure/table/rack,
 /obj/item/clothing/suit/armor/pcarrier/merc,
@@ -1307,7 +1307,7 @@
 /obj/item/clothing/head/helmet/merc,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dn" = (
 /obj/structure/table/rack,
 /obj/item/clothing/suit/armor/pcarrier/merc,
@@ -1317,7 +1317,7 @@
 /obj/item/clothing/head/helmet/merc,
 /obj/item/clothing/head/helmet/merc,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "do" = (
 /obj/item/weapon/reagent_containers/syringe/drugs{
 	pixel_x = 3;
@@ -1340,14 +1340,14 @@
 /obj/item/weapon/material/knife/combat,
 /obj/item/weapon/melee/telebaton,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dp" = (
 /obj/machinery/door/window{
 	dir = 4;
 	name = "Brig"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dq" = (
 /obj/machinery/door/window{
 	base_state = "right";
@@ -1356,7 +1356,7 @@
 	name = "Preparation"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dr" = (
 /obj/structure/closet/syndicate/suit{
 	name = "suit closet"
@@ -1365,18 +1365,18 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ds" = (
 /obj/machinery/suit_cycler/syndicate{
 	locked = 0
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dt" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "du" = (
 /obj/structure/table/rack,
 /obj/item/weapon/tank/jetpack/carbondioxide,
@@ -1386,7 +1386,7 @@
 /obj/item/weapon/tank/jetpack/carbondioxide,
 /obj/item/weapon/tank/jetpack/carbondioxide,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dv" = (
 /obj/structure/closet{
 	name = "custodial"
@@ -1395,7 +1395,7 @@
 /obj/item/weapon/mop,
 /obj/item/weapon/reagent_containers/spray/cleaner,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dw" = (
 /obj/machinery/door/window{
 	base_state = "right";
@@ -1404,7 +1404,7 @@
 	name = "Brig"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dx" = (
 /obj/machinery/door/window{
 	base_state = "left";
@@ -1413,13 +1413,13 @@
 	name = "Preparation"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dy" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/backpack/dufflebag/syndie,
 /obj/item/weapon/storage/backpack/dufflebag/syndie,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dz" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/toolbox/syndicate{
@@ -1427,7 +1427,7 @@
 	pixel_y = 3
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dA" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/item/device/radio/intercom/syndicate{
@@ -1435,7 +1435,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dB" = (
 /obj/structure/table/rack,
 /obj/item/weapon/tank/jetpack/oxygen,
@@ -1445,7 +1445,7 @@
 /obj/item/weapon/tank/jetpack/oxygen,
 /obj/item/weapon/tank/jetpack/oxygen,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dC" = (
 /obj/structure/table/rack,
 /obj/item/clothing/accessory/storage/bandolier,
@@ -1454,12 +1454,12 @@
 /obj/item/clothing/accessory/storage/bandolier,
 /obj/item/clothing/accessory/storage/bandolier,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dD" = (
 /obj/structure/table/rack,
 /obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dE" = (
 /obj/machinery/sleeper{
 	dir = 4
@@ -1470,16 +1470,16 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dF" = (
 /obj/machinery/atmospherics/unary/cryo_cell,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dG" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dH" = (
 /obj/structure/table/standard,
 /obj/item/roller{
@@ -1496,7 +1496,7 @@
 /obj/item/clothing/glasses/hud/health,
 /obj/item/device/healthanalyzer,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dI" = (
 /obj/structure/table/standard,
 /obj/structure/closet/secure_closet/medical_wall{
@@ -1520,7 +1520,7 @@
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dJ" = (
 /obj/machinery/light{
 	dir = 8;
@@ -1532,13 +1532,13 @@
 	pixel_x = -22
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dK" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dL" = (
 /obj/item/clothing/gloves/insulated,
 /obj/item/device/assembly/signaler{
@@ -1553,7 +1553,7 @@
 /obj/structure/table/steel,
 /obj/random/tech_supply,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dM" = (
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
@@ -1564,7 +1564,7 @@
 /obj/item/clothing/glasses/night,
 /obj/random/tech_supply,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dN" = (
 /obj/item/clothing/gloves/insulated,
 /obj/item/device/assembly/signaler{
@@ -1574,7 +1574,7 @@
 /obj/structure/table/steel,
 /obj/random/tech_supply,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dO" = (
 /obj/item/clothing/gloves/insulated,
 /obj/item/device/assembly/prox_sensor{
@@ -1585,7 +1585,7 @@
 /obj/structure/table/steel,
 /obj/random/tech_supply,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dP" = (
 /obj/item/clothing/gloves/insulated,
 /obj/item/device/assembly/prox_sensor{
@@ -1599,14 +1599,14 @@
 /obj/structure/table/steel,
 /obj/random/tech_supply,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dQ" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Softsuit Storage";
 	opacity = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "dR" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1614,37 +1614,37 @@
 	dir = 9
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dS" = (
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5;
 	icon_state = "intact"
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dV" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/box/bodybags,
 /obj/item/weapon/storage/box/gloves,
 /obj/item/weapon/storage/box/masks,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dW" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dX" = (
 /obj/item/weapon/screwdriver,
 /obj/structure/table/steel,
@@ -1652,7 +1652,7 @@
 /obj/effect/spawner/newbomb/timer/syndicate,
 /obj/random/loot,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dY" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1660,42 +1660,42 @@
 	dir = 5
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "dZ" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Suit Storage";
 	opacity = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ea" = (
 /obj/machinery/door/window{
 	dir = 4;
 	name = "Infirmary"
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eb" = (
 /obj/machinery/door/window/westright{
 	name = "Tool Storage"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ec" = (
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ed" = (
 /obj/structure/table/steel,
 /obj/item/weapon/pickaxe/diamonddrill,
 /obj/random/tech_supply,
 /obj/effect/spawner/newbomb/timer/syndicate,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ee" = (
 /obj/structure/bed/roller,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ef" = (
 /obj/machinery/door/window{
 	base_state = "right";
@@ -1704,21 +1704,21 @@
 	name = "Infirmary"
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eg" = (
 /obj/machinery/door/window{
 	dir = 8;
 	name = "Tool Storage"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eh" = (
 /obj/item/weapon/aicard,
 /obj/structure/table/steel,
 /obj/random/tech_supply,
 /obj/effect/spawner/newbomb/timer/syndicate,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ei" = (
 /obj/machinery/button/remote/blast_door{
 	id = "syndieshutters_infirmary";
@@ -1729,11 +1729,11 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ej" = (
 /obj/machinery/body_scanconsole,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ek" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/combat,
@@ -1743,7 +1743,7 @@
 /obj/item/weapon/storage/box/freezer,
 /obj/item/weapon/storage/box/freezer,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "el" = (
 /obj/machinery/light{
 	dir = 4
@@ -1768,19 +1768,19 @@
 	pixel_x = 1
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "em" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/effect/paint/black,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "en" = (
 /obj/machinery/door/window{
 	dir = 1;
 	name = "Secure Storage"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eo" = (
 /obj/structure/table/rack,
 /obj/machinery/light{
@@ -1790,7 +1790,7 @@
 	},
 /obj/item/weapon/storage/backpack/dufflebag/syndie/ammo,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ep" = (
 /obj/structure/table/rack,
 /obj/item/device/multitool,
@@ -1798,7 +1798,7 @@
 /obj/item/weapon/tape_roll,
 /obj/item/weapon/tape_roll,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eq" = (
 /obj/machinery/button/remote/blast_door{
 	id = "syndieshutters_telebay";
@@ -1807,12 +1807,12 @@
 	pixel_y = -25
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "er" = (
 /obj/structure/mopbucket,
 /obj/item/weapon/mop,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "es" = (
 /obj/machinery/button/remote/blast_door{
 	id = "syndieshutters_workshop";
@@ -1826,7 +1826,7 @@
 /obj/item/weapon/plastique,
 /obj/item/device/multitool/hacktool,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "et" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced/crescent{
@@ -1834,21 +1834,21 @@
 	},
 /obj/item/weapon/defibrillator/loaded,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eu" = (
 /obj/machinery/door/window{
 	dir = 1;
 	name = "Surgery"
 	},
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ev" = (
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
 /obj/structure/iv_drip,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ew" = (
 /obj/item/weapon/weldingtool,
 /obj/machinery/light{
@@ -1857,7 +1857,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ex" = (
 /obj/structure/sign/warning/caution{
 	pixel_x = 32
@@ -1866,7 +1866,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ey" = (
 /obj/machinery/telecomms/allinone{
 	intercept = 1
@@ -1875,14 +1875,14 @@
 	name = "Telecoms Mainframe"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ez" = (
 /obj/machinery/door/blast/regular{
 	id = "syndieshutters_telebay";
 	name = "Outer Airlock"
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eA" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1890,7 +1890,7 @@
 	dir = 10
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eB" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -1903,7 +1903,7 @@
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eC" = (
 /obj/structure/table/standard,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
@@ -1913,7 +1913,7 @@
 /obj/item/weapon/reagent_containers/spray/cleaner,
 /obj/item/device/healthanalyzer,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eD" = (
 /obj/structure/closet/secure_closet/medical_wall{
 	pixel_x = 32;
@@ -1935,28 +1935,28 @@
 /obj/item/weapon/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eE" = (
 /obj/effect/landmark{
 	name = "Nuclear-Bomb"
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eF" = (
 /obj/item/weapon/crowbar,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eG" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eH" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eI" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
@@ -1975,7 +1975,7 @@
 /obj/effect/shuttle_landmark/merc/start,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eJ" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -1988,18 +1988,18 @@
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eK" = (
 /obj/structure/table/standard,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eL" = (
 /obj/machinery/optable,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eM" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 8;
@@ -2008,25 +2008,25 @@
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/shuttle/white,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eN" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "eO" = (
 /obj/structure/computerframe,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eP" = (
 /obj/machinery/teleport/station,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eQ" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/teleport/hub,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eR" = (
 /obj/machinery/light{
 	dir = 4
@@ -2034,26 +2034,26 @@
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "eS" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion_l"
 	},
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eT" = (
 /obj/structure/shuttle/engine/propulsion,
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eU" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion_r"
 	},
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eV" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -2066,7 +2066,7 @@
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eW" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -2079,13 +2079,13 @@
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/plating,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "eX" = (
 /turf/simulated/wall,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "eY" = (
 /turf/space,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "eZ" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2093,7 +2093,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/head/helmet/space/syndicate/black/med,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fa" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2101,7 +2101,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/head/helmet/space/syndicate/black/blue,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fb" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2109,7 +2109,7 @@
 /obj/item/clothing/mask/gas/syndicate,
 /obj/item/clothing/head/helmet/space/void/merc,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fc" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2117,7 +2117,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/head/helmet/space/syndicate/black/engie,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fd" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2125,7 +2125,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/head/helmet/space/syndicate/black/orange,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fe" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2136,7 +2136,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "ff" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2147,7 +2147,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fg" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2158,7 +2158,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fh" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2169,7 +2169,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fi" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2177,7 +2177,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/head/helmet/space/syndicate/black,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fj" = (
 /obj/structure/table/rack,
 /obj/item/clothing/shoes/magboots,
@@ -2185,7 +2185,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/head/helmet/space/syndicate/black/green,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fk" = (
 /obj/structure/table/rack,
 /obj/item/weapon/rig/merc/empty,
@@ -2194,7 +2194,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fl" = (
 /obj/structure/table/rack,
 /obj/item/weapon/rig/merc/empty,
@@ -2203,17 +2203,17 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fm" = (
 /obj/machinery/porta_turret,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fn" = (
 /turf/simulated/floor/asteroid,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fo" = (
 /turf/simulated/floor/airless,
-/area/syndicate_mothership)
+/area/map_template/syndicate_station)
 "fp" = (
 /obj/effect/shuttle_landmark/merc/nav2,
 /turf/space,
@@ -2228,7 +2228,7 @@
 	dir = 4
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fs" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -2243,13 +2243,13 @@
 	dir = 4
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "ft" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fu" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -2264,12 +2264,12 @@
 	dir = 8
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fv" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fw" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -2277,14 +2277,14 @@
 	dir = 6
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fx" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fy" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced/crescent{
@@ -2296,7 +2296,7 @@
 	dir = 1
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fz" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced/crescent{
@@ -2305,7 +2305,7 @@
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel,
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fA" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -2313,7 +2313,7 @@
 	dir = 10
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fB" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -2321,7 +2321,7 @@
 	dir = 5
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fC" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced/crescent{
@@ -2335,7 +2335,7 @@
 /turf/simulated/shuttle/wall{
 	icon_state = "wall3"
 	},
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fD" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -2343,13 +2343,13 @@
 	dir = 9
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fE" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
 /turf/simulated/wall/r_titanium,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fF" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
@@ -2357,7 +2357,7 @@
 /turf/simulated/shuttle/wall{
 	icon_state = "wall3"
 	},
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fG" = (
 /obj/item/device/radio/intercom/syndicate{
 	dir = 8;
@@ -2368,15 +2368,15 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fH" = (
 /obj/machinery/shipsensors/weak,
 /turf/simulated/floor/airless,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 "fI" = (
 /obj/effect/overmap/ship/landable/mercenary,
 /turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
+/area/map_template/syndicate_station/start)
 
 (1,1,1) = {"
 aa
