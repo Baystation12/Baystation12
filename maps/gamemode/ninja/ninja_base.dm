@@ -34,7 +34,7 @@
 /datum/shuttle/autodock/overmap/ninja
 	name = "stealth shuttle"
 	move_time = 60
-	shuttle_area = /area/ninja_dojo/start
+	shuttle_area = /area/map_template/ninja_dojo/start
 	current_location = "nav_ninja_start"
 	landmark_transition = "nav_ninja_transition"
 	range = 1
