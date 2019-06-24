@@ -578,11 +578,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 // expel the contents of the holder object, then delete it
 // called when the holder exits the outlet
 /obj/structure/disposaloutlet/proc/expel(var/obj/structure/disposalholder/H)
-	flick("outlet-open", src)
-	playsound(src, 'sound/machines/warning-buzzer.ogg', 50, 0, 0)
-	sleep(20)	//wait until correct animation frame
-	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
-
+	animate_expel()
 	if(H)
 		for(var/atom/movable/AM in H)
 			AM.forceMove(src.loc)
@@ -593,7 +589,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		H.vent_gas(src.loc)
 		qdel(H)
 
-	return
+/obj/structure/disposaloutlet/proc/animate_expel()
+	set waitfor = FALSE
+	flick("outlet-open", src)
+	playsound(src, 'sound/machines/warning-buzzer.ogg', 50, 0, 0)
+	sleep(20)	//wait until correct animation frame
+	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 
 /obj/structure/disposaloutlet/attackby(var/obj/item/I, var/mob/user)
 	if(!I || !user)
