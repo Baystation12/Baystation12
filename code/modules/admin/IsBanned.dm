@@ -14,7 +14,7 @@ world/IsBanned(key,address,computer_id)
 		if(ban["expires"])
 			expires = " The ban expires on [ban["expires"]] (server time)."
 
-		var/desc = "\nReason: You, or another user of this computer or connection ([key]) is banned from playing here. The ban reason is:\n[ban["reason"]]\nThis ban was applied by [ban["reason"]].[expires]"
+		var/desc = "\nReason: You, or another user of this computer or connection ([key]) is banned from playing here. The ban reason is:\n[ban["reason"]]\nThis ban was applied by [ban["admin"]].[expires]"
 
 		return list("reason"="banned", "desc"=desc)
 
