@@ -9,6 +9,10 @@
 			//Or someone snoring.  So we make it where they won't hear it.
 		return
 
+	if(language && (language.flags & (NONVERBAL|SIGNLANG)))
+		sound_vol = 0
+		speech_sound = null
+
 	//make sure the air can transmit speech - hearer's side
 	var/turf/T = get_turf(src)
 	if ((T) && (!(isghost(src)))) //Ghosts can hear even in vacuum.
