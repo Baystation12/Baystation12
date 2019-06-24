@@ -88,7 +88,7 @@
 /datum/shuttle/autodock/overmap/mercenary
 	name = "redship"
 	move_time = 60
-	shuttle_area = /area/syndicate_station/start
+	shuttle_area = /area/map_template/syndicate_station/start
 	dock_target = "merc_shuttle"
 	current_location = "nav_merc_start"
 	landmark_transition = "nav_merc_transition"
