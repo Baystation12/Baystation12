@@ -1,6 +1,6 @@
 /datum/language/mantid
 	name = LANGUAGE_MANTID_VOCAL
-	desc = "A curt, sharp language developed for use over comms."
+	desc = "A curt, sharp language developed by the insectoid Ascent for use over comms."
 	speech_verb = "clicks"
 	ask_verb = "chirps"
 	exclaim_verb = "rasps"
@@ -17,7 +17,7 @@
 /datum/language/mantid/nonvocal
 	key = "]"
 	name = LANGUAGE_MANTID_NONVOCAL
-	desc = "A complex visual language of bright bio-luminescent flashes."
+	desc = "A complex visual language of bright bio-luminescent flashes, 'spoken' natively by the Kharmaani of the Ascent."
 	colour = "alien"
 	speech_verb = "flashes"
 	ask_verb = "gleams"
