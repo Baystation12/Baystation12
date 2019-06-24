@@ -416,10 +416,10 @@
 	else
 		var/list/obj/item/organ/external/parts = get_damageable_organs()
 		for(var/obj/item/organ/external/O in parts)
-			if(!O)
+			if(QDELETED(O) || !(O.owner == src))
 				continue
-			if(O.damage + (LOW_PRESSURE_DAMAGE / 11) < O.min_broken_damage) //vacuum does not break bones
-				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE / 11, used_weapon = "Low Pressure")
+			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
+				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
