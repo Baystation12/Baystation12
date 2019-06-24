@@ -7,6 +7,7 @@ GLOBAL_LIST_EMPTY(factions_by_name)
 			var/datum/faction/F = new faction_type()
 			GLOB.all_factions.Add(F)
 			GLOB.factions_by_name[F.name] = F
+	return 1
 
 /datum/faction
 	var/name = "Unknown faction"
