@@ -3,7 +3,7 @@
 	name = "Coercion"
 	associated_intent = I_DISARM
 	armour_types = list(PSIONIC)
-	
+
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
 
@@ -11,7 +11,7 @@
 	if (!istype(target))
 		to_chat(user, SPAN_WARNING("You cannot mentally attack \the [target]."))
 		return FALSE
-	
+
 	. = ..()
 	if(. && target.deflect_psionic_attack(user))
 		return FALSE
@@ -68,7 +68,7 @@
 	if(target.stat == DEAD || (target.status_flags & FAKEDEATH) || !target.client)
 		to_chat(user, SPAN_WARNING("\The [target] is in no state for a mind-ream."))
 		return TRUE
-			
+
 	user.visible_message(SPAN_WARNING("\The [user] touches \the [target]'s temple..."))
 	var/question =  input(user, "Say something?", "Read Mind", "Penny for your thoughts?") as null|text
 	if(!question || user.incapacitated() || !do_after(user, 20))
@@ -111,7 +111,7 @@
 	cooldown =       100
 	use_melee =      TRUE
 	use_ranged =     TRUE
-	min_rank =       PSI_RANK_OPERANT
+	min_rank =       PSI_RANK_MASTER
 	use_description = "Target the arms or hands on disarm intent to use a ranged attack that may rip the weapons away from the target."
 
 /decl/psionic_power/coercion/spasm/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
@@ -189,4 +189,35 @@
 		to_chat(user, SPAN_NOTICE("You retreat from \the [target], holding your new knowledge close."))
 		to_chat(target, SPAN_DANGER("Your mental complexus is laid bare to judgement of \the [user]."))
 		target.show_psi_assay(user)
+		return TRUE
+
+/decl/psionic_power/coercion/focus
+	name =          "Focus"
+	cost =          10
+	cooldown =      80
+	use_grab =     TRUE
+	min_rank =      PSI_RANK_OPERANT
+	use_description = "Grab a patient, target the mouth, then use the grab on them while on disarm intent, in order to cure ailments of the mind."
+
+/decl/psionic_power/coercion/focus/invoke(var/mob/living/user, var/mob/living/target)
+	if(user.zone_sel.selecting != BP_MOUTH)
+		return FALSE
+	. = ..()
+	if(.)
+		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
+		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments.."))
+		to_chat(target, SPAN_WARNING("Your mind is being cleansed of ailments by \the [user]."))
+		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
+			user.psi.backblast(rand(5,10))
+			return TRUE
+		to_chat(user, SPAN_WARNING("You clear \the [target]'s mind of ailments."))
+		to_chat(target, SPAN_WARNING("Your mind is cleared of ailments."))
+
+		var/coercion_rank = user.psi.get_rank(PSI_COERCION)
+		if(coercion_rank >= PSI_RANK_GRANDMASTER)
+			target.AdjustParalysis(-1)
+		target.drowsyness = 0
+		if(istype(target, /mob/living/carbon))
+			var/mob/living/carbon/M = target
+			M.adjust_hallucination(-30)
 		return TRUE
