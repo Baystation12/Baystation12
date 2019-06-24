@@ -1,11 +1,11 @@
-/area/nuclear_base
+/area/map_template/nuclear_base
 	name = "mercenary base"
 	icon_state = "syndie-ship"
 	requires_power = 0
 	dynamic_lighting = 1
 	req_access = list(access_syndicate)
 
-/area/syndicate_station/start
+/area/map_template/syndicate_station/start
 	name = "mercenary forward operating base"
 	icon_state = "yellow"
 	requires_power = 0
