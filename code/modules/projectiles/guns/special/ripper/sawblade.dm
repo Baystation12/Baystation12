@@ -6,6 +6,9 @@
 #define EX2_TOTAL 90
 #define EX1_TOTAL 170
 
+#define SOUND_GRIND	'sound/weapons/sawblade_grind.ogg'
+#define SOUND_NORMAL 'sound/weapons/sawblade_normal.ogg'
+
 /obj/item/projectile/sawblade
 	name = "sawblade"
 	damage_type = BRUTE
@@ -62,11 +65,18 @@
 	//list(atom, ex3counter, ex2counter, ex1counter)
 	var/list/grind_atoms = list()
 
+	//Used to handle the looping sawblade audio
+	var/datum/sound_token/saw_sound
+	var/current_loop //Which looped sound is currently playing
+
 
 /obj/item/projectile/sawblade/Destroy()
 	.=..()
 	if (launcher && launcher.blade == src)
 		launcher.stop_firing()
+
+	//Stop the looping audio
+	set_sound(null)
 
 /obj/item/projectile/sawblade/Initialize()
 	.=..()
@@ -82,6 +92,7 @@
 	damage = dps * tick_interval
 	animate_movement = 0
 	damage_tile = get_turf(src) //Damage tile starts off as wherever we are
+	set_sound(SOUND_NORMAL)
 	tick()
 
 /obj/item/projectile/sawblade/proc/tick()
@@ -205,9 +216,13 @@
 					A.ex_act(1)
 
 				updatehealth()
+				set_sound(SOUND_GRIND)//We're grinding, play the grind sound
 				return //After dealing damage to a single hard target, we return. It prevents us from damaging anything else this tick.
 				//Mobs hiding behind something sturdy are safe, temporarily at least
 
+
+	//If we manage to get here, we aren't grinding on anything, play the normal non-grind sound
+	set_sound(SOUND_NORMAL)
 
 	//Deals damage to mobs in the damage tile
 	for (var/mob/living/L in damage_tile)
@@ -237,12 +252,54 @@
 /obj/item/projectile/sawblade/proc/drop()
 	if (QDELETED(src))
 		return
+
+	//If health remains, the sawblade drops on the floor
+	if (health > 0)
+		playsound(get_turf(src),'sound/effects/weightdrop.ogg', 70, 1, 1)
 	qdel(src)
 
 
+
+/obj/item/projectile/sawblade/proc/set_sound(var/soundin)
+
+	//Null is passed in when the sawblade is deleted. This will stop the sound
+	if (!soundin)
+		QDEL_NULL(saw_sound)
+		return
+
+	if (soundin == current_loop)
+		return //Dont restart the sound we're already playing
+
+	//If a sound is already playing, we'll stop it to start the new one, but not immediately
+	if (saw_sound)
+		qdel(saw_sound)
+		//var/datum/sound_token/copied = saw_sound
+		//spawn(3)//Let it overlap with the new one for just a little bit, to prevent having any silence
+			//qdel(copied)
+
+	var/volume = 15
+	var/range = 9
+	//The sound is lounder when grinding against objects
+	if (soundin == SOUND_GRIND)
+		volume = 50
+		range = 15
+
+	//And start the new sound
+	//This random field is an ID, i assume it has to be unique
+	saw_sound = GLOB.sound_player.PlayLoopingSound(src, /obj/item/projectile/sawblade, soundin, volume, range)
+	current_loop = soundin
 
 //Ammo version for picking up and loading
 /obj/item/ammo_casing/sawblade
 	desc = "sawblade"
 	caliber = "saw"
 	projectile_type = /obj/item/projectile/sawblade
+
+
+
+#undef EX3_TOTAL
+#undef EX2_TOTAL
+#undef EX1_TOTAL
+
+#undef SOUND_GRIND
+#undef SOUND_NORMAL
