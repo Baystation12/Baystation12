@@ -31,7 +31,7 @@
 	scrambledcodes = 1
 	speed = -2
 	icon_state = "drone-ascent"
-	cell =   /obj/item/weapon/cell/high //mantid
+	cell =   /obj/item/weapon/cell/mantid
 	laws =   /datum/ai_laws/ascent
 	idcard = /obj/item/weapon/card/id/ascent
 	module = /obj/item/weapon/robot_module/flying/ascent

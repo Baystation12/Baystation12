@@ -243,3 +243,25 @@
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 200
 	matter = null
+
+// Self-charging power cell.
+/obj/item/weapon/cell/mantid
+	name = "mantid microfusion plant"
+	desc = "An impossibly tiny fusion reactor of mantid design."
+	icon = 'icons/obj/ascent.dmi'
+	icon_state = "plant"
+	maxcharge = 1500
+	w_class = ITEM_SIZE_LARGE
+	var/recharge_amount = 12
+
+/obj/item/weapon/cell/mantid/Initialize()
+	START_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/weapon/cell/mantid/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/weapon/cell/mantid/Process()
+	if(charge < maxcharge)
+		give(recharge_amount)

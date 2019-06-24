@@ -3,7 +3,8 @@
 	desc = "A bewilderingly complex knot of tool heads."
 	icon = 'icons/obj/ascent.dmi'
 	icon_state = "clustertool"
-	icon_state = "crowbar"
+	w_class = ITEM_SIZE_SMALL
+
 	var/tool_mode
 	var/list/tool_modes = list("wrench", "wirecutters", "crowbar", "screwdriver")
 
