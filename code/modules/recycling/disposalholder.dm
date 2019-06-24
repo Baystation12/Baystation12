@@ -69,7 +69,7 @@
 	for (var/i in 1 to speed)
 		if(!(count--))
 			active = 0
-		if(!active)
+		if(!active || QDELETED(src))
 			return PROCESS_KILL
 		
 		var/obj/structure/disposalpipe/last
@@ -80,6 +80,10 @@
 					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
 
 		var/obj/structure/disposalpipe/curr = loc
+		if(!istype(curr))
+			qdel(src)
+			return PROCESS_KILL
+
 		last = curr
 		curr = curr.transfer(src)
 
