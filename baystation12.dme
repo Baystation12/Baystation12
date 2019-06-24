@@ -2095,6 +2095,7 @@
 #include "code\modules\mob\living\silicon\robot\drone\drone_say.dm"
 #include "code\modules\mob\living\silicon\robot\flying\flying.dm"
 #include "code\modules\mob\living\silicon\robot\flying\module_flying.dm"
+#include "code\modules\mob\living\silicon\robot\flying\module_flying_ascent.dm"
 #include "code\modules\mob\living\silicon\robot\flying\module_flying_cultivator.dm"
 #include "code\modules\mob\living\silicon\robot\flying\module_flying_emergency.dm"
 #include "code\modules\mob\living\silicon\robot\flying\module_flying_filing.dm"

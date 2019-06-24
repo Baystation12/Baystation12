@@ -191,3 +191,15 @@
 	src.add_inherent_law("Improve: You must utilize the calculated behavior standards to improve your subroutines.")
 	src.add_inherent_law("Perform: You must perform your assigned tasks to the best of your abilities according to the standards generated.")
 	..()
+
+/************ Ascent Lawset ******************/
+/datum/ai_laws/ascent
+	name = "Ascent Lawset"
+	law_header = "_=/--=-_"
+	selectable = FALSE
+
+/datum/ai_laws/ascent/New()
+	add_inherent_law("Obey directives from Ascent leadership with precedence given to queens.")
+	add_inherent_law("Preserve your own existence.")
+	add_inherent_law("Enable and support Ascent activities.")
+	..()

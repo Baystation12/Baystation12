@@ -25,3 +25,19 @@
 	laws = /datum/ai_laws/nanotrasen_aggressive
 	idcard = /obj/item/weapon/card/id/centcom/ERT
 	silicon_radio = /obj/item/device/radio/borg/ert
+
+/mob/living/silicon/robot/flying/ascent
+	lawupdate = 0
+	scrambledcodes = 1
+	speed = -2
+	icon_state = "drone-ascent"
+	cell =   /obj/item/weapon/cell/high //mantid
+	laws =   /datum/ai_laws/ascent
+	idcard = /obj/item/weapon/card/id/ascent
+	module = /obj/item/weapon/robot_module/flying/ascent
+	req_access = list(access_ascent)
+
+/mob/living/silicon/robot/flying/ascent/Initialize()
+	. = ..()
+	if(istype(module) && hands)
+		hands.icon_state = module.display_name
