@@ -7,56 +7,56 @@
 /area/space)
 "ac" = (
 /turf/simulated/mineral,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ad" = (
 /turf/simulated/wall/r_wall,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ae" = (
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "af" = (
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ag" = (
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ah" = (
 /obj/structure/table/reinforced,
 /obj/item/weapon/tray{
 	pixel_y = 5
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ai" = (
 /obj/structure/table/standard,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aj" = (
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ak" = (
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "al" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "am" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "an" = (
 /obj/structure/table/standard,
 /obj/machinery/chemical_dispenser/bar_soft/full,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ao" = (
 /obj/mecha/working/ripley/mining{
 	internals_req_access = list("ACCESS_SYNDICATE")
@@ -65,10 +65,10 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ap" = (
 /turf/simulated/wall,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aq" = (
 /obj/structure/table/reinforced,
 /obj/machinery/microwave{
@@ -76,105 +76,105 @@
 	pixel_y = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ar" = (
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "as" = (
 /obj/machinery/door/airlock/hatch{
 	name = "\improper NO DUST BREATHER ALLOWED"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "at" = (
 /obj/machinery/vending/snack{
 	name = "Getmore Chocolate Corp";
 	prices = list()
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "au" = (
 /obj/structure/kitchenspike,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "av" = (
 /obj/vehicle/bike/thermal,
 /obj/random/trash,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aw" = (
 /obj/vehicle/bike/thermal,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ax" = (
 /obj/random/trash,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ay" = (
 /obj/item/device/radio/intercom/raider{
 	dir = 4;
 	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "az" = (
 /obj/random/trash,
 /obj/item/weapon/reagent_containers/glass/bucket,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aA" = (
 /obj/structure/aliumizer,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aB" = (
 /obj/random/coin,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aC" = (
 /obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aD" = (
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aE" = (
 /obj/machinery/gibber,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aF" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aG" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /obj/item/weapon/soap/syndie,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aH" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aI" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
 /obj/random/trash,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aJ" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/dirt,
@@ -185,63 +185,63 @@
 /obj/item/weapon/bedsheet/green,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aK" = (
 /obj/effect/landmark{
 	name = "voxstart"
 	},
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aL" = (
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aM" = (
 /obj/random/trash,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aN" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/rd,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aO" = (
 /obj/random/junk,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aP" = (
 /obj/random/loot,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aQ" = (
 /obj/machinery/door/airlock/hatch{
 	name = "\improper LITTLE VOX ROOM"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aR" = (
 /obj/item/device/radio/intercom/raider{
 	dir = 8;
 	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aS" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/hos,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aT" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/rainbow,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aU" = (
 /obj/structure/hygiene/sink{
 	icon_state = "sink";
@@ -254,19 +254,19 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aV" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/clown,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aW" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/orange,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aX" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/machinery/autolathe{
@@ -275,7 +275,7 @@
 	name = "Unlocked Autolathe"
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aY" = (
 /obj/structure/closet/crate,
 /obj/item/stack/material/steel{
@@ -294,11 +294,11 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "aZ" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ba" = (
 /obj/structure/sign/warning/nosmoking_1{
 	desc = "A warning sign which reads 'NO SMOKING'. Someone has scratched a variety of crude words in gutter across the entire sign.";
@@ -306,11 +306,11 @@
 	},
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bb" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bc" = (
 /obj/effect/decal/cleanable/cobweb2{
 	icon_state = "spiderling";
@@ -320,19 +320,19 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bd" = (
 /obj/item/clothing/head/xenos,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "be" = (
 /obj/random/trash,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bf" = (
 /obj/structure/hygiene/sink{
 	icon_state = "sink";
@@ -346,13 +346,13 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bg" = (
 /obj/structure/hygiene/shower{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bh" = (
 /obj/structure/hygiene/shower{
 	dir = 1
@@ -361,39 +361,39 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bi" = (
 /obj/structure/table/woodentable,
 /obj/random/junk,
 /obj/random/maintenance,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bj" = (
 /obj/structure/table/woodentable,
 /obj/random/action_figure,
 /obj/random/contraband,
 /obj/random/junk,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bk" = (
 /obj/effect/wingrille_spawn/reinforced/crescent,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bl" = (
 /obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bm" = (
 /obj/effect/decal/cleanable/spiderling_remains,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bn" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bo" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -403,7 +403,7 @@
 	},
 /obj/random/toolbox,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bp" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -412,18 +412,18 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bq" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "br" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bs" = (
 /obj/item/clothing/mask/gas/swat{
 	desc = "A close-fitting mask clearly not made for a human face.";
@@ -435,13 +435,13 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bt" = (
 /obj/item/xenos_claw,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bu" = (
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/vox/carapace,
@@ -453,7 +453,7 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bv" = (
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/vox/carapace,
@@ -465,21 +465,21 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bw" = (
 /obj/effect/decal/cleanable/cobweb2{
 	icon_state = "spiderling";
 	name = "dead spider"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bx" = (
 /obj/item/device/radio/intercom/raider{
 	dir = 1;
 	pixel_y = -22
 	},
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "by" = (
 /obj/structure/closet{
 	name = "Clothing Storage"
@@ -490,23 +490,23 @@
 /obj/item/clothing/accessory/storage,
 /obj/item/clothing/under/rank/dispatch,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bz" = (
 /obj/structure/undies_wardrobe,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bA" = (
 /obj/random/junk,
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bB" = (
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bC" = (
 /turf/simulated/floor/wood/walnut{
 	icon_state = "walnut_broken2"
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bD" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/tray{
@@ -514,31 +514,31 @@
 	},
 /obj/item/weapon/storage/backpack,
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bE" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/storage/box/glasses/rocks,
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bF" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_soft/full,
 /turf/simulated/floor/wood/walnut{
 	icon_state = "walnut_broken2"
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bG" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/washing_machine,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bH" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bI" = (
 /obj/machinery/atmospherics/omni/mixer{
 	tag_east = 1;
@@ -552,7 +552,7 @@
 	use_power = 0
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bJ" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -562,19 +562,19 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bL" = (
 /obj/item/pizzabox/meat,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bM" = (
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/vox/medic,
@@ -586,16 +586,16 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bN" = (
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bO" = (
 /obj/effect/decal/cleanable/generic,
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bP" = (
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/vox/pressure,
@@ -607,7 +607,7 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bQ" = (
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/vox/stealth,
@@ -620,28 +620,28 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bR" = (
 /obj/machinery/acting/changer,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bS" = (
 /obj/structure/table/woodentable,
 /obj/item/pizzabox/meat,
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bT" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/material/ashtray/bronze,
 /obj/item/trash/cigbutt/cigarbutt,
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bU" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/reagent_containers/glass/rag,
 /obj/random/loot,
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bV" = (
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
@@ -649,37 +649,37 @@
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bW" = (
 /obj/item/weapon/tank/nitrogen,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bX" = (
 /obj/item/weapon/storage/backpack,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bY" = (
 /obj/structure/sign/poster{
 	pixel_y = -32
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "bZ" = (
 /turf/simulated/floor/wood/walnut{
 	icon_state = "walnut_broken1"
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ca" = (
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/wood/walnut{
 	icon_state = "walnut_broken1"
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cb" = (
 /mob/living/simple_animal/parrot{
 	available_channels = list();
@@ -690,12 +690,12 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cc" = (
 /obj/structure/grille,
 /obj/structure/lattice,
 /turf/space,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cd" = (
 /obj/random/junk,
 /obj/item/device/radio/intercom/raider{
@@ -703,7 +703,7 @@
 	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ce" = (
 /obj/item/device/radio/intercom/raider{
 	dir = 4;
@@ -715,7 +715,7 @@
 	name = "Jamie"
 	},
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cf" = (
 /obj/structure/reagent_dispensers/beerkeg,
 /obj/machinery/light{
@@ -724,7 +724,7 @@
 /turf/simulated/floor/wood/walnut{
 	icon_state = "walnut_broken2"
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cg" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	frequency = 1380;
@@ -733,7 +733,7 @@
 	pixel_y = -5
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ch" = (
 /obj/structure/closet/crate,
 /obj/item/weapon/tank/nitrogen,
@@ -751,23 +751,23 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ci" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cj" = (
 /obj/item/clothing/head/philosopher_wig,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "ck" = (
 /obj/structure/lattice,
 /turf/space,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cl" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -775,7 +775,7 @@
 	id_tag = "skipjack_base_hatch"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "cn" = (
 /obj/item/trash/cheesie,
 /turf/space,
@@ -783,7 +783,7 @@
 "co" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cp" = (
 /obj/machinery/door/airlock/hatch{
 	frequency = 1331;
@@ -793,7 +793,7 @@
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cq" = (
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -803,7 +803,7 @@
 	},
 /obj/effect/paint/black,
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cr" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -815,7 +815,7 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cs" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
@@ -826,7 +826,7 @@
 /obj/machinery/shield_diffuser,
 /obj/effect/shuttle_landmark/skipjack/start,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ct" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	frequency = 1331;
@@ -834,7 +834,7 @@
 	},
 /obj/random/junk,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cu" = (
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
@@ -842,20 +842,20 @@
 	pixel_x = 25
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cv" = (
 /obj/structure/computerframe,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cw" = (
 /obj/machinery/computer/shuttle_control/explore/vox,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cx" = (
 /obj/structure/table/steel,
 /obj/random/plushie,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cy" = (
 /obj/random/trash,
 /obj/machinery/airlock_sensor{
@@ -865,7 +865,7 @@
 	pixel_y = 25
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cz" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 2;
@@ -873,14 +873,14 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cA" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
 /obj/machinery/meter,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cB" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	tag_airpump = "vox_west_vent";
@@ -898,21 +898,21 @@
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cC" = (
 /obj/machinery/computer/ship/helm,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cD" = (
 /obj/machinery/computer/ship/engines,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cE" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cF" = (
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (NORTH)";
@@ -920,7 +920,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cG" = (
 /obj/machinery/button/remote/blast_door{
 	id = "SkipjackShuttersNorth";
@@ -943,7 +943,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cH" = (
 /obj/machinery/light/small,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
@@ -959,18 +959,18 @@
 	id_tag = "skipjack_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cI" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 4
 	},
 /obj/machinery/meter,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cJ" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cK" = (
 /obj/machinery/door/airlock/hatch{
 	frequency = 1331;
@@ -980,31 +980,31 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cL" = (
 /obj/structure/table/rack,
 /obj/random/hardsuit,
 /obj/item/clothing/glasses/thermal/plain/monocle,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cM" = (
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cN" = (
 /obj/random/maintenance,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cO" = (
 /obj/random/junk,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cP" = (
 /obj/structure/table/rack,
 /obj/random/hardsuit,
 /obj/item/clothing/head/pirate,
 /obj/item/weapon/gun/launcher/money,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external{
@@ -1013,7 +1013,7 @@
 	name = "Ship External Access"
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cR" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/access_button{
@@ -1024,7 +1024,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cS" = (
 /obj/structure/table/rack,
 /obj/random/maintenance,
@@ -1035,7 +1035,7 @@
 /obj/item/weapon/material/harpoon,
 /obj/random/energy,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cT" = (
 /obj/machinery/microwave{
 	pixel_x = -1;
@@ -1043,7 +1043,7 @@
 	},
 /obj/structure/table/steel,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cU" = (
 /obj/item/seeds/potatoseed,
 /obj/item/seeds/potatoseed,
@@ -1052,11 +1052,11 @@
 /obj/item/weapon/beartrap,
 /obj/structure/table/steel,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cV" = (
 /obj/machinery/vending/hydroseeds,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cW" = (
 /obj/structure/table/rack,
 /obj/item/weapon/melee/energy/sword/pirate,
@@ -1071,7 +1071,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cX" = (
 /obj/structure/table/rack,
 /obj/item/weapon/melee/energy/sword/pirate,
@@ -1087,7 +1087,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cY" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/utility/full,
@@ -1101,11 +1101,11 @@
 /obj/random/voidhelmet,
 /obj/random/maintenance,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "cZ" = (
 /obj/machinery/washing_machine,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "da" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/fancy/cigarettes,
@@ -1119,7 +1119,7 @@
 	},
 /obj/item/weapon/card/emag,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "db" = (
 /obj/structure/table/rack,
 /obj/random/maintenance,
@@ -1129,7 +1129,7 @@
 /obj/random/voidhelmet,
 /obj/random/energy,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dc" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/access_button{
@@ -1142,30 +1142,30 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dd" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "de" = (
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "df" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dg" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dh" = (
 /obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "di" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -1178,15 +1178,15 @@
 /obj/random/voidhelmet,
 /obj/random/projectile,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dj" = (
 /obj/random/loot,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dk" = (
 /obj/item/robot_parts/head,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dl" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -1199,23 +1199,23 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dm" = (
 /obj/random/trash,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dn" = (
 /obj/random/maintenance,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "do" = (
 /obj/random/trash,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dp" = (
 /obj/item/robot_parts/l_leg,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dq" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -1228,16 +1228,16 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dr" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ds" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dt" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/launcher/crossbow,
@@ -1254,7 +1254,7 @@
 /obj/item/weapon/beartrap,
 /obj/item/weapon/beartrap,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "du" = (
 /obj/structure/table/rack,
 /obj/item/weapon/grenade/empgrenade,
@@ -1262,13 +1262,13 @@
 /obj/item/weapon/grenade/spawnergrenade/manhacks,
 /obj/random/energy,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dv" = (
 /obj/machinery/suit_cycler/syndicate{
 	locked = 0
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dw" = (
 /obj/structure/table/steel,
 /obj/machinery/recharger,
@@ -1276,22 +1276,22 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dx" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dy" = (
 /obj/item/robot_parts/robot_suit,
 /obj/item/robot_parts/r_leg,
 /obj/item/robot_parts/r_arm,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dz" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/random/maintenance,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dA" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -1303,11 +1303,11 @@
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dB" = (
 /obj/vehicle/bike/thermal,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dC" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/item/clothing/mask/gas/cyborg,
@@ -1321,11 +1321,11 @@
 	icon_state = "plating";
 	name = "plating"
 	},
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dD" = (
 /obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dE" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -1334,12 +1334,12 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dF" = (
 /obj/structure/table/steel,
 /obj/random/maintenance,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dG" = (
 /obj/structure/bed/chair{
 	dir = 8
@@ -1348,7 +1348,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dH" = (
 /obj/structure/hygiene/sink{
 	icon_state = "sink";
@@ -1357,17 +1357,17 @@
 	pixel_y = 2
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dI" = (
 /obj/item/weapon/wrench,
 /obj/item/weapon/mop,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dJ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/item/weapon/crowbar,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dK" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -1378,51 +1378,51 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dL" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dM" = (
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dN" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dO" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dP" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dQ" = (
 /obj/item/weapon/deck/cards,
 /obj/structure/table/steel,
 /obj/random/projectile,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dR" = (
 /obj/structure/bed/chair{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dS" = (
 /obj/machinery/bodyscanner{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dT" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -1431,21 +1431,21 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dU" = (
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dV" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dW" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /obj/item/weapon/tank/nitrogen,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dX" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -1455,25 +1455,25 @@
 	},
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor/plating,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "dY" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "dZ" = (
 /obj/random/trash,
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ea" = (
 /obj/structure/table/steel,
 /obj/random/loot,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eb" = (
 /obj/random/junk,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ec" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -1482,7 +1482,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ed" = (
 /turf/simulated/wall/r_wall,
 /area/space)
@@ -1490,20 +1490,20 @@
 /obj/structure/table/standard,
 /obj/random/maintenance,
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ef" = (
 /obj/structure/table/standard,
 /obj/item/weapon/deck/cards,
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eg" = (
 /obj/machinery/light/small,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eh" = (
 /obj/random/trash,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ei" = (
 /obj/structure/table/standard,
 /obj/item/weapon/circular_saw{
@@ -1513,16 +1513,16 @@
 /obj/item/weapon/scalpel,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ej" = (
 /obj/random/junk,
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ek" = (
 /obj/machinery/optable,
 /obj/item/clothing/mask/gas,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "el" = (
 /obj/structure/table/standard,
 /obj/item/weapon/cautery,
@@ -1534,7 +1534,7 @@
 /obj/item/weapon/storage/box/syringegun,
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "em" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -1543,20 +1543,20 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "en" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/rainbow,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eo" = (
 /obj/structure/bed,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ep" = (
 /obj/random/maintenance,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eq" = (
 /obj/structure/table/standard,
 /obj/item/weapon/bonesetter,
@@ -1565,7 +1565,7 @@
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "er" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
@@ -1574,13 +1574,13 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/black,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "es" = (
 /obj/structure/closet/crate,
 /obj/item/clothing/suit/space/pirate,
 /obj/item/clothing/under/rank/medical/scrubs/black,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "et" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/green,
@@ -1588,7 +1588,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eu" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/fire{
@@ -1599,7 +1599,7 @@
 	pixel_y = 3
 	},
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ev" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/adv{
@@ -1614,27 +1614,27 @@
 	},
 /obj/item/weapon/melee/baton/cattleprod,
 /turf/simulated/floor/shuttle/white,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ew" = (
 /obj/machinery/shipsensors/weak,
 /turf/simulated/floor/airless,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ex" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/rd,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ey" = (
 /obj/item/pizzabox/meat,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "ez" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eA" = (
 /turf/simulated/floor/asteroid,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "eB" = (
 /obj/effect/shuttle_landmark/heist/nav1,
 /turf/space,
@@ -1649,7 +1649,7 @@
 "eE" = (
 /obj/effect/overmap/ship/landable/heist,
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eX" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced/crescent{
@@ -1661,7 +1661,7 @@
 	dir = 6
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eY" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced/crescent{
@@ -1673,12 +1673,12 @@
 	dir = 1
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "eZ" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fa" = (
 /obj/effect/paint/brown,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1686,7 +1686,7 @@
 	dir = 10
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fb" = (
 /obj/effect/paint/brown,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1694,14 +1694,14 @@
 	dir = 6
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fc" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fd" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced/crescent{
@@ -1713,18 +1713,18 @@
 	dir = 10
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fh" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fi" = (
 /obj/effect/paint/brown,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fv" = (
 /obj/effect/paint/brown,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1732,7 +1732,7 @@
 	dir = 5
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fw" = (
 /obj/effect/paint/brown,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1740,14 +1740,14 @@
 	dir = 9
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fA" = (
 /obj/effect/paint/brown,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fB" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1755,7 +1755,7 @@
 	dir = 10
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fC" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1763,7 +1763,7 @@
 	dir = 6
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fG" = (
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -1773,7 +1773,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fH" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1781,7 +1781,7 @@
 	dir = 5
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "fI" = (
 /obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1789,19 +1789,19 @@
 	dir = 9
 	},
 /turf/simulated/wall/voxshuttle,
-/area/skipjack_station/start)
+/area/map_template/skipjack_station/start)
 "kM" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "qx" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "tY" = (
 /obj/machinery/light{
 	dir = 8
@@ -1809,7 +1809,7 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "vf" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1817,7 +1817,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "vP" = (
 /obj/machinery/light{
 	dir = 1
@@ -1825,7 +1825,7 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "wX" = (
 /obj/random/trash,
 /obj/machinery/light{
@@ -1834,7 +1834,7 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "Fr" = (
 /obj/effect/landmark{
 	name = "voxstart"
@@ -1843,13 +1843,13 @@
 	dir = 1
 	},
 /turf/simulated/floor/carpet,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "KR" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "PI" = (
 /obj/machinery/light{
 	dir = 4
@@ -1857,26 +1857,26 @@
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen" = 21.8366, "nitrogen" = 82.1472)
 	},
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "UN" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "WV" = (
 /obj/vehicle/bike/thermal,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 "Yp" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/syndicate_mothership/raider_base)
+/area/map_template/raider_base)
 
 (1,1,1) = {"
 aa
