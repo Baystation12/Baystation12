@@ -10,7 +10,7 @@
 
 		// Uncomment post-merge.
 		//obj/item/weapon/gun/energy/particle/small,
-		/obj/item/device/multitool, //mantid,
+		/obj/item/device/multitool/mantid,
 		/obj/item/clustertool,
 		/obj/item/weapon/weldingtool/electric,
 		/obj/item/weapon/extinguisher,
