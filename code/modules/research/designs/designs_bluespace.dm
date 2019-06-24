@@ -45,3 +45,12 @@
 	materials = list(MATERIAL_GOLD = 3000, MATERIAL_DIAMOND = 1500, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 250)
 	build_path = /obj/item/weapon/storage/backpack/holding
 	sort_string = "VAFAA"
+
+/datum/design/item/dufflebag_holding
+	name = "Dufflebag of Holding"
+	desc = "A minaturized prototype of the popular Bag of Holding, the Dufflebag of Holding is, functionally, identical to the bag of holding, but comes in a more stylish and compact form."
+	id = "dufflebag_holding"
+	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
+	materials = list(MATERIAL_GOLD = 3000, MATERIAL_DIAMOND = 1500, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 250)
+	build_path = /obj/item/weapon/storage/backpack/holding/duffle
+	sort_string = "VAFAB"
