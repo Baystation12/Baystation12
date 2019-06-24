@@ -58,5 +58,8 @@
 		/area/exoplanet,
 		/area/exoplanet/desert,
 		/area/exoplanet/grass,
-		/area/exoplanet/snow
+		/area/exoplanet/snow,
+		/area/shuttle/innie_supplypad,
+		/area/shuttle/innie_shuttle,
+		/area/shuttle/innie_offsite
 	)
