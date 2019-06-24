@@ -92,6 +92,9 @@
 
 	var/banned_modules = list()
 
+/obj/item/weapon/rig/get_cell()
+	return cell
+
 /obj/item/weapon/rig/examine()
 	. = ..()
 	if(wearer)
