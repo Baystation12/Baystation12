@@ -1,14 +1,14 @@
 /datum/pipe/pipe_dispenser/device
 	category = "Devices"
-	colorable = TRUE
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL|CONNECT_TYPE_SCRUBBER
-	pipe_color = PIPE_COLOR_GREY
+	colorable = FALSE
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	pipe_color = PIPE_COLOR_WHITE
 
 /datum/pipe/pipe_dispenser/device/universaladapter
 	name = "universal pipe adapter"
 	desc = "an adapter designed to fit any type of pipe."
 	build_path = /obj/item/pipe
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_HE
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	build_icon_state = "universal"
 	constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden/universal
 	pipe_class = PIPE_CLASS_BINARY
@@ -18,7 +18,7 @@
 	name = "connector"
 	desc = "a connector for canisters."
 	build_path = /obj/item/pipe
-	connect_types = CONNECT_TYPE_REGULAR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "connector"
 	constructed_path = /obj/machinery/atmospherics/portables_connector
 	pipe_class = PIPE_CLASS_UNARY

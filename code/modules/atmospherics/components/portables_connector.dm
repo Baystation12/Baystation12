@@ -19,7 +19,7 @@
 	uncreated_component_parts = null
 	level = 1
 
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "connector"
 
 	pipe_class = PIPE_CLASS_UNARY

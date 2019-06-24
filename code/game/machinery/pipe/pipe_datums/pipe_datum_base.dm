@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 	if(!desc)								//Try to make up a nice description if we don't have one
 		desc = "\A [name]."
 
-/datum/pipe/proc/Build(var/datum/pipe/D, var/loc, var/pipe_color = PIPE_COLOR_GREY)
+/datum/pipe/proc/Build(var/datum/pipe/D, var/loc, var/pipe_color = PIPE_COLOR_WHITE)
 	if(D.build_path)
 		var/obj/item/pipe/new_item = new build_path(loc)
 		if(D.connect_types != null)

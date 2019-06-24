@@ -23,14 +23,14 @@
 
 /obj/machinery/pipedispenser/proc/build_quantity(var/datum/pipe/P, var/quantity)
 	for(var/I = quantity;I > 0;I -= 1)
-		P.Build(P, loc, pipe_color)
+		P.Build(P, loc, pipe_colors[pipe_color])
 
 /obj/machinery/pipedispenser/Topic(href, href_list)
 	if((. = ..()))
 		return
 	if(href_list["build"])
 		var/datum/pipe/P = locate(href_list["build"])
-		P.Build(P, loc, pipe_color)
+		P.Build(P, loc, pipe_colors[pipe_color])
 	if(href_list["buildfive"])
 		var/datum/pipe/P = locate(href_list["buildfive"])
 		build_quantity(P, 5)
