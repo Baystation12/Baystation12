@@ -16,6 +16,12 @@
 #include "innie_spawns.dm"
 #include "innie_jobs.dm"
 
+#include "innie_supply/_controller.dm"
+#include "innie_supply/computer.dm"
+#include "innie_supply/export.dm"
+#include "innie_supply/program.dm"
+#include "innie_supply/shuttle.dm"
+
 //#include "geminuscity_4.dmm"
 #include "geminuscity_3.dmm"
 #include "geminuscity_2.dmm"
