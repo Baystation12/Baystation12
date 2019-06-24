@@ -216,6 +216,8 @@ Class Procs:
 /obj/machinery/CanUseTopicPhysical(var/mob/user)
 	if(stat & BROKEN)
 		return STATUS_CLOSE
+	if(!(user.CanUseObjTopic(src)))
+		return STATUS_CLOSE
 	return GLOB.physical_state.can_use_topic(nano_host(), user)
 
 /obj/machinery/CouldUseTopic(var/mob/user)
@@ -228,13 +230,13 @@ Class Procs:
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user)
-	if(CanInteract(user, GLOB.default_state))
+	if(CanUseTopic(user, GLOB.default_state) > STATUS_CLOSE)
 		return interface_interact(user)
 
 /obj/machinery/attack_robot(mob/user)
 	if((. = attack_hand(user))) // This will make a physical proximity check, and allow them to deal with components and such.
 		return
-	if(CanInteract(user, GLOB.default_state))
+	if(CanUseTopic(user, GLOB.default_state) > STATUS_CLOSE)
 		return interface_interact(user) // This may still work even if the physical checks fail.
 
 // If you don't call parent in this proc, you must make all appropriate checks yourself. 
@@ -257,7 +259,7 @@ Class Procs:
 			return 1
 	if((. = component_attack_hand(user)))
 		return
-	if(CanInteract(user, GLOB.default_state))
+	if(CanUseTopic(user, GLOB.default_state) > STATUS_CLOSE)
 		return interface_interact(user)
 
 // If you want to have interface interactions handled for you conveniently, use this.

@@ -19,8 +19,8 @@
 		return ..()
 	return STATUS_CLOSE
 
-/mob/living/silicon/CanUseObjTopic(var/obj/O)
-	var/id = src.GetIdCard()
+/mob/living/CanUseObjTopic(var/obj/O)
+	var/id = GetIdCard()
 	if(id && O.check_access(id))
 		return TRUE
 	to_chat(src, "<span class='danger'>\icon[src] Access Denied!</span>")
