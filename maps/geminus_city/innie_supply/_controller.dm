@@ -10,9 +10,6 @@
 	var/export_credits = 0
 	var/manifest_value = 5
 
-/datum/controller/process/innie_factions/proc/initialize_supply()
-	geminus_supply_shuttle = locate() in shuttle_controller.shuttles
-
 /datum/controller/process/innie_factions/proc/send_shuttle(var/mob/living/user)
 	if(geminus_supply_shuttle.at_station())
 		geminus_supply_shuttle.launch(user)

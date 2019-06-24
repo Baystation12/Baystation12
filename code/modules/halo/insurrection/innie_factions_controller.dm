@@ -22,8 +22,6 @@ GLOBAL_DATUM(innie_factions_controller, /datum/controller/process/innie_factions
 		npc_factions_by_name[faction_name] = F
 		npc_factions.Add(F)
 
-	initialize_supply()
-
 /datum/controller/process/innie_factions/doWork()
 	//check if we need to generate a new quest
 	if(active_quests.len < max_quests && world.time > time_next_quest)
