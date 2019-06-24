@@ -256,3 +256,13 @@
 			L.drop_r_hand()
 		
 	return 1
+
+/obj/item/projectile/beam/particle
+	name = "particle beam"
+	icon_state = "particle"
+	damage = 45
+	armor_penetration = 6
+
+	muzzle_type = /obj/effect/projectile/laser_particle/muzzle
+	tracer_type = /obj/effect/projectile/laser_particle/tracer
+	impact_type = /obj/effect/projectile/laser_particle/impact

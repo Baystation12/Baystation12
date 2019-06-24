@@ -7,9 +7,7 @@
 	)
 	equipment = list(
 		/obj/item/device/flash,
-
-		// Uncomment post-merge.
-		//obj/item/weapon/gun/energy/particle/small,
+		/obj/item/weapon/gun/energy/particle/small,
 		/obj/item/device/multitool/mantid,
 		/obj/item/clustertool,
 		/obj/item/weapon/weldingtool/electric,

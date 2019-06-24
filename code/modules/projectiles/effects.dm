@@ -199,3 +199,18 @@
 
 /obj/effect/projectile/confuseray/impact
 	icon_state = "impact_grass"
+
+//----------------------------
+// Particle beam
+//----------------------------
+/obj/effect/projectile/laser_particle
+	light_color = COLOR_CYAN
+
+/obj/effect/projectile/laser_particle/tracer
+	icon_state = "beam_particle"
+
+/obj/effect/projectile/laser_particle/muzzle
+	icon_state = "muzzle_particle"
+
+/obj/effect/projectile/laser_particle/impact
+	icon_state = "impact_particle" 
