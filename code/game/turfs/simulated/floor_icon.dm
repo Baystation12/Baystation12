@@ -57,7 +57,8 @@ var/list/flooring_cache = list()
 		if (has_border && flooring.flags & TURF_HAS_CORNERS)
 			for(var/direction in GLOB.cornerdirs)
 				if((has_border & direction) == direction)
-					overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
+					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
+						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
 
 		//Now lets handle those fancy floors which have many centre icons
 		if(flooring.has_base_range)
