@@ -10,7 +10,7 @@
 		/obj/item/weapon/gun/energy/particle/small,
 		/obj/item/device/multitool/mantid,
 		/obj/item/clustertool,
-		/obj/item/weapon/weldingtool/electric,
+		/obj/item/weapon/weldingtool/electric/mantid,
 		/obj/item/weapon/extinguisher,
 		/obj/item/device/t_scanner,
 		/obj/item/device/scanner/gas,
