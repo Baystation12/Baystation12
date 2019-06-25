@@ -12,7 +12,7 @@
 	total_positions = 8
 	spawn_positions = 8
 	selection_color = "#ff0000"
-	access = list(252,632)
+	access = list(access_innie_prowler,access_innie_asteroid)
 	is_whitelisted = 1
 
 /datum/job/soe_commando_officer
@@ -27,7 +27,7 @@
 	total_positions = 2
 	spawn_positions = 1
 	selection_color = "#ff0000"
-	access = list(252,632)
+	access = list(access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
 	is_whitelisted = 1
 
 /datum/job/soe_commando_captain

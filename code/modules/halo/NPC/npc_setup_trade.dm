@@ -3,7 +3,7 @@
 
 	//setup the accepted trade categories
 	for(var/category in trade_categories_by_name)
-		var/datum/trade_category/C = trade_controller.get_trade_category(category)
+		var/datum/trade_category/C = GLOB.trade_controller.get_trade_category(category)
 		if(C)
 			trade_categories_by_name[category] = C
 			trade_items += C.trade_items
@@ -29,7 +29,7 @@
 
 				//some trade items automatically enable other trade items for sale... mostly ammo type items
 				for(var/trade_type in I.bonus_items)
-					var/datum/trade_item/bonus_item = trade_controller.trade_items_by_type[trade_type]
+					var/datum/trade_item/bonus_item = GLOB.trade_controller.trade_items_by_type[trade_type]
 					spawn_trade_item(bonus_item)
 
 				success = 1
