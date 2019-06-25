@@ -48,7 +48,7 @@
 		return total_value
 
 	//try and find it via the global controller
-	T = trade_controller.trade_items_by_type[O.type]
+	T = GLOB.trade_controller.trade_items_by_type[O.type]
 	if(T)
 		return T.value
 

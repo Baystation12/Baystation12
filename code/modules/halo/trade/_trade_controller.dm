@@ -1,4 +1,4 @@
-var/global/datum/controller/process/trade_controller/trade_controller
+GLOBAL_DATUM(trade_controller, /datum/controller/process/trade_controller)
 
 /datum/controller/process/trade_controller
 	var/list/trade_items = list()
@@ -7,11 +7,11 @@ var/global/datum/controller/process/trade_controller/trade_controller
 	var/list/trade_categories_by_name = list()
 
 /datum/controller/process/trade_controller/New()
-	..()
-	if(!trade_controller)
-		trade_controller = src
+	. = ..()
+	GLOB.trade_controller = src
 
 /datum/controller/process/trade_controller/setup()
+	. = ..()
 
 	for(var/category_type in typesof(/datum/trade_category) - /datum/trade_category)
 		var/datum/trade_category/C = new category_type()
