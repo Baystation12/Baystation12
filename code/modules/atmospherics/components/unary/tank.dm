@@ -9,9 +9,6 @@
 	var/start_pressure = 25*ONE_ATMOSPHERE
 	var/filling // list of gas ratios to use.
 
-	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
-	var/datum/pipeline/parent
-
 	level = 1
 	dir = 2
 	initialize_directions = 2
@@ -25,39 +22,18 @@
 /obj/machinery/atmospherics/unary/tank/Initialize()
 	. = ..()
 	if(filling)
-		air_temporary = new
-		air_temporary.volume = volume
-		air_temporary.temperature = T20C
+		air_contents.volume = volume
+		air_contents.temperature = T20C
 
 		var/list/gases = list()
 		for(var/gas in filling)
 			gases += gas
-			gases += start_pressure * filling[gas] * (air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
-		air_temporary.adjust_multi(arglist(gases))
+			gases += start_pressure * filling[gas] * (air_contents.volume)/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+		air_contents.adjust_multi(arglist(gases))
 		update_icon()
 
 /obj/machinery/atmospherics/unary/tank/set_initial_level()
 	level = 1 // Always on top, apparently.
-
-/obj/machinery/atmospherics/unary/tank/Initialize()
-	. = ..()
-	atmos_init()
-	build_network()
-	if(node)
-		node.atmos_init()
-		node.build_network()
-
-/obj/machinery/atmospherics/unary/tank/Process()
-	if(!parent)
-		..()
-	else
-		. = PROCESS_KILL
-
-/obj/machinery/atmospherics/unary/tank/Destroy()
-	if(node)
-		node.disconnect(src)
-
-	. = ..()
 
 /obj/machinery/atmospherics/unary/tank/update_underlays()
 	if(..())
@@ -69,28 +45,6 @@
 
 /obj/machinery/atmospherics/unary/tank/hide()
 	update_underlays()
-
-/obj/machinery/atmospherics/unary/tank/atmos_init()
-	..()
-	var/connect_direction = dir
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node = target
-				break
-
-	update_underlays()
-
-/obj/machinery/atmospherics/unary/tank/disconnect(obj/machinery/atmospherics/reference)
-	if(reference == node)
-		if(istype(node, /obj/machinery/atmospherics/pipe))
-			qdel(parent)
-		node = null
-
-	update_underlays()
-
-	return null
 
 /obj/machinery/atmospherics/unary/tank/return_air()
 	return air_contents
