@@ -1,5 +1,15 @@
 
+#include "faction_base.dm"
+
 /* COVENANT BASE */
+
+/obj/effect/overmap/ship/faction_base/cov
+	name = "Vanguard's Mantle"
+	icon_state = "base_cov"
+	faction = "Covenant"
+	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/covenant_corvette)
+	base = 1
 
 GLOBAL_LIST_EMPTY(covenant_base_spawns)
 
@@ -30,3 +40,12 @@ GLOBAL_LIST_EMPTY(covenant_base_spawns)
 /obj/effect/landmark/start/cov_base/New()
 	..()
 	GLOB.covenant_base_spawns += loc
+
+/area/faction_base/cov
+	name = "Covenant Faction Base"
+
+/area/faction_base/cov_defense_platform
+	name = "Covenant Defense Platform"
+
+/area/faction_base/covenant_shuttle
+	name = "Covenant Shuttle"

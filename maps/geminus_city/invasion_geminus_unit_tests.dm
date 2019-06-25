@@ -1,27 +1,10 @@
-/datum/map
-	var/const/NO_APC = 1
-	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 4
 
-	// Unit test vars
-	var/list/apc_test_exempt_areas = list(
-        /area/exoplanet          = NO_SCRUBBER|NO_VENT|NO_APC,
-        /area/exoplanet/desert   = NO_SCRUBBER|NO_VENT|NO_APC,
-        /area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
-        /area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC
-	)
-
-	var/list/area_coherency_test_exempt_areas = list(
-		/area/space,
-		/area/exoplanet,
-		/area/exoplanet/desert,
-		/area/exoplanet/grass,
-		/area/exoplanet/snow
-	)
-	var/list/area_coherency_test_subarea_count = list()
-
-	// These areas are used specifically by code and need to be broken out somehow
-	var/list/area_usage_test_exempted_areas = list(
+/datum/map/geminus_city/area_usage_test_exempted_areas = list(
+		/area/faction_base/unsc_defense_platform,
+		/area/faction_base/unsc_shuttle,
+		/area/shuttle/innie_supplypad,
+		/area/shuttle/innie_offsite,
+		/area/shuttle/innie_shuttle,
 		/area/beach,
 		/area/centcom,
 		/area/centcom/holding,

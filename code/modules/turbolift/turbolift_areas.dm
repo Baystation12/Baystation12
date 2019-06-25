@@ -1,6 +1,7 @@
 // Used for creating the exchange areas.
 /area/turbolift
 	name = "Turbolift"
+	icon_state = "turbolift"
 	base_turf = /turf/simulated/open
 	requires_power = 0
 	sound_env = SMALL_ENCLOSED
