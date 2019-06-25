@@ -6,8 +6,9 @@
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
-		/datum/job/URF_commando,\
-		/datum/job/URF_commando_officer,\
+		/datum/job/soe_commando,\
+		/datum/job/soe_commando_officer,\
+		/datum/job/soe_commando_captain,\
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_xo,\
 		/datum/job/bertelsunsc_ship_marine,\
