@@ -241,11 +241,29 @@
 
 /obj/item/stack/tile/carpetblue2
 	name = "pale blue carpet"
-	desc = "A piece of blue and silver carpet."
+	desc = "A piece of blue and pale blue carpet."
 	singular_name = "pale blue carpet"
 	icon_state = "tile_carpetblue2"
 
 /obj/item/stack/tile/carpetblue2/fifty
+	amount = 50
+
+/obj/item/stack/tile/carpetblue3
+	name = "sea blue carpet"
+	desc = "A piece of blue and green carpet."
+	singular_name = "sea blue carpet"
+	icon_state = "tile_carpetblue3"
+
+/obj/item/stack/tile/carpetblue3/fifty
+	amount = 50
+
+/obj/item/stack/tile/carpetmagenta
+	name = "magenta carpet"
+	desc = "A piece of magenta carpet."
+	singular_name = "magenta carpet"
+	icon_state = "tile_carpetmagenta"
+
+/obj/item/stack/tile/carpetmagenta/fifty
 	amount = 50
 
 /obj/item/stack/tile/carpetpurple

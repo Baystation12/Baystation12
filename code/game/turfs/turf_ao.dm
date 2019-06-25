@@ -18,7 +18,7 @@
 		regenerate_ao()
 
 /turf/proc/regenerate_ao()
-	for(var/turf/T in RANGE_TURFS(1, src))
+	for(var/turf/T in RANGE_TURFS(src, 1))
 		if (T.permit_ao)
 			T.queue_ao(TRUE)
 
@@ -92,7 +92,7 @@
 		if(ao_overlays)
 			overlays |= ao_overlays
 
-#undef PROCESS_AO_CORNER 
+#undef PROCESS_AO_CORNER
 
 /turf/ChangeTurf()
 	var/old_density = density

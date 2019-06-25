@@ -95,6 +95,9 @@
 			else
 				lighting_clear_overlay()
 
+	for(var/turf/T in RANGE_TURFS(src, 1))
+		T.update_icon()
+
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))
 		return 0

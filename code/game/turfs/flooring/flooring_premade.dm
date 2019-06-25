@@ -91,6 +91,16 @@
 	icon_state = "blue2"
 	initial_flooring = /decl/flooring/carpet/blue2
 
+/turf/simulated/floor/carpet/blue3
+	name = "sea blue carpet"
+	icon_state = "blue3"
+	initial_flooring = /decl/flooring/carpet/blue3
+
+/turf/simulated/floor/carpet/magenta
+	name = "magenta carpet"
+	icon_state = "magenta"
+	initial_flooring = /decl/flooring/carpet/magenta
+
 /turf/simulated/floor/carpet/purple
 	name = "purple carpet"
 	icon_state = "purple"

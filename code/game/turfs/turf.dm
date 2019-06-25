@@ -310,3 +310,12 @@ var/const/enterloopsanity = 100
 		to_chat(vandal, "<span class='notice'>You feel much safer.</span>")
 
 	return TRUE
+
+/turf/proc/is_wall()
+	return FALSE
+
+/turf/proc/is_open()
+	return FALSE
+
+/turf/proc/is_floor()
+	return FALSE

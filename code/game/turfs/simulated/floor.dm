@@ -95,3 +95,6 @@
 
 /turf/simulated/floor/shuttle_ceiling/air
 	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+
+/turf/simulated/floor/is_floor()
+	return TRUE

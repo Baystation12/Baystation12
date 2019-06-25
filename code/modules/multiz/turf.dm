@@ -84,7 +84,8 @@
 			depth += 1
 		to_chat(user, "It is about [depth] level\s deep.")
 
-
+/turf/simulated/open/is_open()
+	return TRUE
 
 /**
 * Update icon and overlays of open space to be that of the turf below, plus any visible objects on that turf.
