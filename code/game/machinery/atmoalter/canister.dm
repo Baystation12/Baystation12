@@ -276,11 +276,9 @@ update_flag
 
 	SSnano.update_uis(src) // Update all NanoUIs attached to src
 
-/obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
+/obj/machinery/portable_atmospherics/canister/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/portable_atmospherics/canister/attack_hand(var/mob/user as mob)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui

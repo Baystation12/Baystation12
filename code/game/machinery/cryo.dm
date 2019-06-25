@@ -89,10 +89,9 @@
 	if(src.occupant == user && !user.stat)
 		go_out()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user)
-	if(component_attack_hand(user))
-		return TRUE
+/obj/machinery/atmospherics/unary/cryo_cell/interface_interact(user)
 	ui_interact(user)
+	return TRUE
 
  /**
   * The ui_interact proc is used to open and update Nano UIs

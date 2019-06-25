@@ -25,24 +25,14 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/button/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/button/attackby(obj/item/weapon/W, mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/button/attack_hand(mob/living/user)
-	if((. = ..()))
-		return
-
-	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access Denied</span>")
-		flick("[initial(icon_state)]-denied",src)
-		return TRUE
-
+/obj/machinery/button/interface_interact(user)
 	if(istype(user, /mob/living/carbon))
 		playsound(src, "button", 60)
 	activate(user)
+	return TRUE
 
 /obj/machinery/button/proc/activate(mob/living/user)
 	if(operating)

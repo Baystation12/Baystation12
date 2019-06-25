@@ -23,13 +23,9 @@
 	icon_screen = "atmoslaptop"
 	density = 0
 
-/obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)
+/obj/machinery/computer/atmoscontrol/interface_interact(user)
 	ui_interact(user)
-
-/obj/machinery/computer/atmoscontrol/attack_hand(mob/user)
-	if(..())
-		return 1
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/atmoscontrol/emag_act(var/remaining_carges, var/mob/user)
 	if(!emagged)

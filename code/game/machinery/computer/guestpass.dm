@@ -71,13 +71,11 @@
 		return
 	..()
 
-/obj/machinery/computer/guestpass/attack_ai(var/mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/computer/guestpass/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/guestpass/attack_hand(var/mob/user as mob)
-	if(..())
-		return
-
+/obj/machinery/computer/guestpass/interact(var/mob/user)
 	user.set_machine(src)
 	var/dat
 
@@ -187,5 +185,3 @@
 					to_chat(user, "<span class='warning'>Cannot issue pass without issuing ID.</span>")
 				else if(!accesses.len)
 					to_chat(user, "<span class='warning'>Cannot issue pass without at least one granted access permission.</span>")
-	if(.)
-		attack_hand(user)

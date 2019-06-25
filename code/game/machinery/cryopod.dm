@@ -37,14 +37,11 @@
 	storage_name = "Robotic Storage Control"
 	allow_items = 0
 
-/obj/machinery/computer/cryopod/attack_ai()
-	src.attack_hand()
+/obj/machinery/computer/cryopod/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
-	if(stat & (NOPOWER|BROKEN))
-		return
-	..()
-
+/obj/machinery/computer/cryopod/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat
@@ -114,8 +111,6 @@
 			I.dropInto(loc)
 			frozen_items -= I
 		. = TOPIC_REFRESH
-
-	attack_hand(user)
 
 /obj/item/weapon/stock_parts/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
