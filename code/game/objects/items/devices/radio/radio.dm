@@ -18,6 +18,7 @@
 	var/subspace_transmission = 0
 	var/syndie = 0//Holder to see if it's a syndicate encrypted radio
 	var/intercept = 0 //can intercept other channels
+	var/bluespace_radio = FALSE //can work across all Z levels
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throw_speed = 2
@@ -69,7 +70,7 @@
 
 /obj/item/device/radio/interact(mob/user)
 	if(!user)
-		return 0
+		return FALSE
 
 	if(b_stat)
 		wires.Interact(user)
@@ -127,10 +128,10 @@
 
 /obj/item/device/radio/proc/has_channel_access(var/mob/user, var/freq)
 	if(!user)
-		return 0
+		return FALSE
 
 	if(!(freq in internal_channels))
-		return 0
+		return FALSE
 
 	return user.has_internal_radio_channel_access(internal_channels[freq])
 
@@ -164,7 +165,7 @@
 
 /obj/item/device/radio/Topic(href, href_list)
 	if(..())
-		return 1
+		return TRUE
 
 	usr.set_machine(src)
 	if (href_list["track"])
@@ -202,15 +203,15 @@
 			set_frequency(text2num(freq))
 		. = 1
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
-		return 1
+		return TRUE
 
 	if(href_list["remove_cell"])
 		if(cell)
 			var/mob/user = usr
 			user.put_in_hands(cell)
-			to_chat(user, "<span class='notice'>You remove [cell] from \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You remove [cell] from \the [src]."))
 			cell = null
-		return 1
+		return TRUE
 
 	if(.)
 		SSnano.update_uis(src)
@@ -249,29 +250,29 @@
 	return null
 
 /obj/item/device/radio/talk_into(mob/living/M, message, channel, var/verb = "says", var/datum/language/speaking = null)
-	if(!on) return 0 // the device has to be on
+	if(!on) return FALSE // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!M || !message) return 0
+	if(!M || !message) return FALSE
 
-	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
+	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return FALSE
 
 	if (!broadcasting)
 		// Sedation chemical effect should prevent radio use (Chloral and Soporific)
 		var/mob/living/carbon/C = M
 		if ((istype(C)) && (C.chem_effects[CE_SEDATE] || C.incapacitated(INCAPACITATION_DISRUPTED)))
 			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
-			return 0
+			return FALSE
 		
 		if((istype(C)) && C.radio_interrupt_cooldown > world.time)
 			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
-			return 0
+			return FALSE
 
 		if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
 	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
-		return 0
+		return FALSE
 
 	if(!radio_connection)
 		set_frequency(frequency)
@@ -279,9 +280,9 @@
 
 	if(power_usage)
 		if(!cell)
-			return 0
+			return FALSE
 		if(!cell.checked_use(power_usage * CELLRATE))
-			return 0
+			return FALSE
 
 	if(loc == M)
 		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
@@ -301,7 +302,7 @@
 	//#### Grab the connection datum ####//
 	var/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
 	if (!istype(connection))
-		return 0
+		return FALSE
 
 	var/turf/position = get_turf(src)
 
@@ -466,16 +467,18 @@
 
 	if(signal.data["done"] && position.z in signal.data["level"])
 		// we're done here.
-		return 1
+		return TRUE
 
 	// Oh my god; the comms are down or something because the signal hasn't been broadcasted yet in our level.
 	// Send a mundane broadcast with limited targets:
 
 	//THIS IS TEMPORARY. YEAH RIGHT
-	if(!connection)	return 0	//~Carn
+	if(!connection)	return FALSE	//~Carn
+
+	var/target_levels = bluespace_radio ? GetConnectedZlevels(position.z) : list(0)
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
-					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency, verb, speaking,
+					  filter_type, signal.data["compression"], target_levels, connection.frequency, verb, speaking,
 					  "[connection.frequency]", channel_color_presets["Menacing Maroon"])
 
 
@@ -490,7 +493,7 @@
 /obj/item/device/radio/proc/accept_rad(obj/item/device/radio/R as obj, message)
 
 	if ((R.frequency == frequency && message))
-		return 1
+		return TRUE
 	else if
 
 	else
@@ -510,7 +513,7 @@
 		return -1
 	if(!(0 in level))
 		var/turf/position = get_turf(src)
-		if(!position || !(position.z in level))
+		if((!position || !(position.z in level)) && !bluespace_radio)
 			return -1
 	if(freq in ANTAG_FREQS)
 		if(!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys
@@ -561,7 +564,7 @@
 			updateDialog()
 			return
 	if(!cell && power_usage && istype(W, /obj/item/weapon/cell/device) && user.unEquip(W, target = src))
-		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put [W] in \the [src]."))
 		cell = W
 		return
 
@@ -689,15 +692,15 @@
 
 /obj/item/device/radio/borg/Topic(href, href_list)
 	if(..())
-		return 1
+		return TRUE
 	if (href_list["mode"])
 		var/enable_subspace_transmission = text2num(href_list["mode"])
 		if(enable_subspace_transmission != subspace_transmission)
 			subspace_transmission = !subspace_transmission
 			if(subspace_transmission)
-				to_chat(usr, "<span class='notice'>Subspace Transmission is enabled</span>")
+				to_chat(usr, SPAN_NOTICE("Subspace Transmission is enabled"))
 			else
-				to_chat(usr, "<span class='notice'>Subspace Transmission is disabled</span>")
+				to_chat(usr, SPAN_NOTICE("Subspace Transmission is disabled"))
 
 			if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 				channels = list()
@@ -710,10 +713,10 @@
 			shut_up = !shut_up
 			if(shut_up)
 				canhear_range = 0
-				to_chat(usr, "<span class='notice'>Loadspeaker disabled.</span>")
+				to_chat(usr, SPAN_NOTICE("Loadspeaker disabled."))
 			else
 				canhear_range = 3
-				to_chat(usr, "<span class='notice'>Loadspeaker enabled.</span>")
+				to_chat(usr, SPAN_NOTICE("Loadspeaker enabled."))
 		. = 1
 
 	if(.)
@@ -778,7 +781,7 @@
 
 /obj/item/device/radio/announcer/Destroy()
 	crash_with("attempt to delete a [src.type] detected, and prevented.")
-	return 1
+	return TRUE
 
 /obj/item/device/radio/announcer/Initialize()
 	. = ..()
@@ -813,3 +816,131 @@
 	icon_state = "radio"
 	intercept = 1
 	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/device/subspaceradio
+	name = "subspace radio"
+	desc = "This long range communications device has the ability to send and recieve transmissions from anywhere."
+	icon = 'icons/obj/radiopack.dmi'
+	icon_override = 'icons/mob/onmob/onmob_back.dmi'
+	icon_state = "radiopack"
+	item_state = "radiopack"
+	slot_flags = SLOT_BACK
+	force = 5
+	throwforce = 6
+	w_class = ITEM_SIZE_LARGE
+	action_button_name = "Remove/Replace Handset"
+
+	var/obj/item/device/radio/subspacehandset/linked/handset
+
+/obj/item/device/subspaceradio/Initialize()
+	. = ..()
+	if(ispath(handset))
+		handset = new handset(src, src)
+	else
+		handset = new(src, src)
+
+/obj/item/device/subspaceradio/Destroy()
+	. = ..()
+	QDEL_NULL(handset)
+
+/obj/item/device/subspaceradio/ui_action_click()
+	toggle_handset()
+
+/obj/item/device/subspaceradio/attack_hand(mob/user)
+	if(loc == user)
+		toggle_handset()
+	else
+		..()
+
+/obj/item/device/subspaceradio/MouseDrop()
+	if(ismob(loc))
+		if(!CanMouseDrop(src))
+			return
+		var/mob/M = loc
+		if(!M.unEquip(src))
+			return
+		src.add_fingerprint(usr)
+		M.put_in_any_hand_if_possible(src)
+
+/obj/item/device/subspaceradio/attackby(obj/item/weapon/W, mob/user, params)
+	if(W == handset)
+		reattach_handset(user)
+	else
+		return ..()
+
+/obj/item/device/subspaceradio/verb/toggle_handset()
+	set name = "Toggle Handset"
+	set category = "Object"
+
+	var/mob/living/carbon/human/user = usr
+	if(!handset)
+		to_chat(user, SPAN_WARNING("The handset is missing!"))
+		return
+
+	if(handset.loc != src)
+		reattach_handset(user) //Remove from their hands and back onto the defib unit
+		return
+
+	if(!slot_check())
+		to_chat(user, SPAN_WARNING("You need to equip [src] before taking out [handset]."))
+	else
+		if(!usr.put_in_hands(handset)) //Detach the handset into the user's hands
+			to_chat(user, SPAN_WARNING("You need a free hand to hold the handset!"))
+		update_icon() //success
+
+//checks that the base unit is in the correct slot to be used
+/obj/item/device/subspaceradio/proc/slot_check()
+	var/mob/M = loc
+	if(!istype(M))
+		return FALSE //not equipped
+
+	if((slot_flags & SLOT_BACK) && M.get_equipped_item(slot_back) == src)
+		return TRUE
+	if((slot_flags & SLOT_BELT) && M.get_equipped_item(slot_belt) == src)
+		return TRUE
+
+	return FALSE
+
+/obj/item/device/subspaceradio/dropped(mob/user)
+	..()
+	reattach_handset(user) //handset attached to a base unit should never exist outside of their base unit or the mob equipping the base unit
+
+/obj/item/device/subspaceradio/proc/reattach_handset(mob/user)
+	if(!handset) return
+
+	if(ismob(handset.loc))
+		var/mob/M = handset.loc
+		if(M.drop_from_inventory(handset, src))
+			to_chat(user, SPAN_NOTICE("\The [handset] snaps back into the main unit."))
+	else
+		handset.forceMove(src)
+
+//Subspace Radio Handset
+/obj/item/device/radio/subspacehandset
+	name = "subspace radio handset"
+	desc = "A large walkie talkie attached to the subspace radio by a retractable cord. It sits comfortably on a slot in the radio when not in use."
+	icon_state = "signaller"
+	slot_flags = 0
+	w_class = ITEM_SIZE_LARGE
+	power_usage = 0
+	bluespace_radio = TRUE
+
+/obj/item/device/radio/subspacehandset/linked
+	var/obj/item/device/subspaceradio/base_unit
+
+/obj/item/device/radio/subspacehandset/linked/New(newloc, obj/item/device/subspaceradio/radio)
+	base_unit = radio
+	..(newloc)
+
+/obj/item/device/radio/subspacehandset/linked/Destroy()
+	if(base_unit)
+		//ensure the base unit's icon updates
+		if(base_unit.handset == src)
+			base_unit.handset = null
+		base_unit = null
+	return ..()
+
+/obj/item/device/radio/subspacehandset/linked/dropped(mob/user)
+	..() //update twohanding
+	if(base_unit)
+		base_unit.reattach_handset(user) //handset attached to a base unit should never exist outside of their base unit or the mob equipping the base unit
