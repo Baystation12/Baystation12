@@ -58,7 +58,10 @@
 	name = "\improper Machining Room"
 
 /area/ishimura/upper/engineering/material_storage
-	name = "\improper Material Storage"
+	name = "\improper Main Material Storage"
+
+/area/ishimura/upper/engineering/material_storage/fore
+	name = "\improper Upper Deck Fore Material Storage"
 
 /area/ishimura/upper/engineering/monitoring_room
 	name = "\improper Engine Monitoring Room"
@@ -80,8 +83,14 @@
 /area/ishimura/upper/maintenance/aft_starboard
 	name = "\improper Upper Deck Aft-Starboard Maintenance"
 
+/area/ishimura/upper/maintenance/central
+	name = "\improper Upper Deck Central Maintenance"
+
 /area/ishimura/upper/maintenance/fore
 	name = "\improper Upper Deck Fore Maintenance"
+
+/area/ishimura/upper/maintenance/fore_starboard
+	name = "\improper Upper Deck Fore-Starboard Maintenance"
 
 //------------------Medical & Research------------------//
 /area/ishimura/upper/medical
@@ -153,6 +162,12 @@
 	name = "\improper Misc"
 	icon_state = "miscbase"
 
+/area/ishimura/upper/misc/bathroom
+	name = "\improper Upper Deck Bathroom"
+
+/area/ishimura/upper/misc/breakroom
+	name = "\improper Upper Deck Break Room"
+
 /area/ishimura/upper/misc/escape
 	name = "\improper Escape Wing"
 
@@ -167,6 +182,9 @@
 
 /area/ishimura/upper/misc/hallway/central
 	name = "\improper Upper Deck Central Hallway"
+
+/area/ishimura/upper/misc/hallway/escape
+	name = "\improper Upper Deck Escape Hallway"
 
 /area/ishimura/upper/misc/hallway/fore
 	name = "\improper Upper Deck Fore Hallway"
@@ -185,6 +203,9 @@
 
 /area/ishimura/upper/misc/janitorcloset/aft
 	name = "\improper Aft Janitorial Closet"
+
+/area/ishimura/upper/misc/janitorcloset/fore
+	name = "\improper Fore Janitorial Closet"
 
 //------------------Security - Upper------------------//
 /area/ishimura/upper/security
@@ -439,13 +460,13 @@
 	name = "\improper Bathroom"
 
 /area/ishimura/lower/misc/bathroom/aft
-	name = "\improper Unisex Bathroom"
+	name = "\improper Lower Deck Unisex Bathroom"
 
 /area/ishimura/lower/misc/bathroom/fore/male
-	name = "\improper Men's Bathroom"
+	name = "\improper Crew Quarters - Men's Bathroom"
 
 /area/ishimura/lower/misc/bathroom/fore/female
-	name = "\improper Women's Bathroom"
+	name = "\improper Crew Quarters - Women's Bathroom"
 
 /area/ishimura/lower/misc/hallway
 	name = "\improper Hallway"
