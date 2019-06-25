@@ -8,43 +8,60 @@
 
 
 /client/MouseDown(object,location,control,params)
-	var/datum/click_handler/CH
-	if (mob)
-		CH = mob.GetClickHandler()
+	var/datum/stack/click_handlers
 
-	if (CH)
-		if (!CH.MouseDown(object,location,control,params))
-			return
+	if (mob)
+		click_handlers = mob.GetClickHandlers()
+
+
+	while (click_handlers.Num())
+		var/datum/click_handler/CH = click_handlers.Pop()
+		if (CH)
+			if (!CH.MouseDown(object,location,control,params))
+				return
 	.=..()
 
 /client/MouseUp(object,location,control,params)
-	var/datum/click_handler/CH
-	if (mob)
-		CH = mob.GetClickHandler()
+	var/datum/stack/click_handlers
 
-	if (CH)
-		if (!CH.MouseUp(object,location,control,params))
-			return
+	if (mob)
+		click_handlers = mob.GetClickHandlers()
+
+
+	while (click_handlers.Num())
+		var/datum/click_handler/CH = click_handlers.Pop()
+		if (CH)
+			if (!CH.MouseUp(object,location,control,params))
+				return
 	.=..()
 
-/client/MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params)
-	var/datum/click_handler/CH
-	if (mob)
-		CH = mob.GetClickHandler()
 
-	if (CH)
-		if (!CH.MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params) )
-			return
+/client/MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params)
+	var/datum/stack/click_handlers
+
+	if (mob)
+		click_handlers = mob.GetClickHandlers()
+
+
+	while (click_handlers.Num())
+		var/datum/click_handler/CH = click_handlers.Pop()
+		if (CH)
+			if (!CH.MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params) )
+				return
 	.=..()
 
 /client/MouseMove(src_object,over_object,src_location,over_location,src_control,over_control,params)
-	var/datum/click_handler/CH
-	if (mob)
-		CH = mob.GetClickHandler()
+	var/datum/stack/click_handlers
 
-	if (CH)
-		if (!CH.MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params) )
-			return
+	if (mob)
+		click_handlers = mob.GetClickHandlers()
+
+
+	while (click_handlers.Num())
+		var/datum/click_handler/CH = click_handlers.Pop()
+		if (CH)
+			if (!CH.MouseDrag(src_object,over_object,src_location,over_location,src_control,over_control,params) )
+				return
 	.=..()
 
 
@@ -62,13 +79,28 @@
 */
 
 /atom/Click(var/location, var/control, var/params) // This is their reaction to being clicked on (standard proc)
-	var/datum/click_handler/click_handler = usr.GetClickHandler()
-	click_handler.OnClick(src, params)
+	var/datum/stack/click_handlers
+
+	if (usr)
+		click_handlers = usr.GetClickHandlers()
+
+
+		while (click_handlers.Num())
+			var/datum/click_handler/CH = click_handlers.Pop()
+			if (!CH.OnClick(src, params))
+				return
 
 /atom/DblClick(var/location, var/control, var/params)
-	var/datum/click_handler/click_handler = usr.GetClickHandler()
-	click_handler.OnDblClick(src, params)
+	var/datum/stack/click_handlers
 
+	if (usr)
+		click_handlers = usr.GetClickHandlers()
+
+
+		while (click_handlers.Num())
+			var/datum/click_handler/CH = click_handlers.Pop()
+			if (!CH.OnDblClick(src, params))
+				return
 /*
 	Standard mob ClickOn()
 	Handles exceptions: middle click, modified clicks, mech actions

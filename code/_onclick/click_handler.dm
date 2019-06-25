@@ -52,10 +52,11 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 
 /datum/click_handler/default/OnClick(var/atom/A, var/params)
 	user.ClickOn(A, params)
+	return TRUE
 
 /datum/click_handler/default/OnDblClick(var/atom/A, var/params)
 	user.DblClickOn(A, params)
-
+	return TRUE
 
 //Tests whether the target thing is valid, and returns it if so.
 //If its not valid, null will be returned
@@ -82,6 +83,13 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 	if(click_handlers.is_empty())
 		PushClickHandler(/datum/click_handler/default)
 	return click_handlers.Top()
+
+/mob/proc/GetClickHandlers()
+	if(!click_handlers)
+		click_handlers = new()
+	if(click_handlers.is_empty())
+		PushClickHandler(/datum/click_handler/default)
+	return click_handlers.Copy()
 
 /mob/proc/RemoveClickHandler(var/datum/click_handler/click_handler)
 	if(!click_handlers)
@@ -200,10 +208,11 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 
 
 /datum/click_handler/sustained/proc/start_firing()
-	firing = TRUE
+
 	if (reciever && istype(reciever.loc, /mob))
 		GLOB.moved_event.register(reciever.loc, reciever, /obj/item/weapon/gun/proc/user_moved)
 	do_fire()
+	firing = reciever.firing
 
 //Next loop will notice these vars and stop shooting
 /datum/click_handler/sustained/proc/stop_firing()
@@ -218,7 +227,6 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 	reciever.afterattack(target, user, FALSE, last_params, get_global_pixel_click_location(last_params, user ? user.client : new /vector2(0,0)))
 
 /datum/click_handler/sustained/MouseDown(object,location,control,params)
-	world << "Sustained MouseDown [params]"
 	last_params = params
 	object = resolve_world_target(object)
 	if (object)
@@ -251,7 +259,6 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 
 
 /datum/click_handler/sustained/MouseUp(object,location,control,params)
-	world << "Sustained MouseUp [params]"
 	stop_firing()
 	return TRUE
 

@@ -82,6 +82,9 @@
 	//The ammo item to drop when we are released but not quite broken
 	var/ammo_type = /obj/item/ammo_casing/sawblade
 
+	//The broken sawblade item to drop when we run out of health
+	var/trash_type = /obj/item/trash/broken_sawblade
+
 //The advanced version. A bit more damage, a LOT more durability
 /obj/item/projectile/sawblade/diamond
 	damage = 30
@@ -91,7 +94,7 @@
 	desc = "glittering death approaches"
 	icon_state = "diamond_projectile"
 	ammo_type = /obj/item/ammo_casing/sawblade/diamond
-
+	trash_type = /obj/item/trash/broken_sawblade/diamond
 
 //Ammo version for picking up and loading
 /obj/item/ammo_casing/sawblade
@@ -101,6 +104,32 @@
 	caliber = "saw"
 	projectile_type = /obj/item/projectile/sawblade
 	health = SAWBLADE_HEALTH //The ammo versions have a health value which is carried over from the projectile if an unbroken blade is dropped
+	matter = list(DEFAULT_WALL_MATERIAL = 1000, "plasteel" = 125)
+
+/obj/item/ammo_casing/sawblade/examine(var/mob/user)
+	.=..()
+	//Show damage on inspection
+	if (health < initial(health))
+		var/hp = health / initial(health)
+		switch (hp)
+			if (0.8 to 1.0)
+				user << "It has a few minor scuffs and scratches"
+			if (0.5 to 0.8)
+				user << SPAN_WARNING("It is worn and shows significant stress fractures")
+			if (0.3 to 0.5)
+				user << SPAN_WARNING("It is blunted and chipped, has clearly seen heavy use")
+			else
+				user << SPAN_DANGER("It is cracked and bent, likely to shatter if used again")
+
+//Damaged blades are worth less to recyle. Every 1% health lost reduces matter by 0.5%
+/obj/item/ammo_casing/sawblade/get_matter()
+	var/hp = health / initial(health)
+	var/matmult = (0.5 * hp) + 0.5 //This will give a value in the range 0.5..1.0
+	var/list/returnmat = list()
+	for (var/m in matter)
+		returnmat[m] = matter[m] * matmult
+
+	return returnmat
 
 /obj/item/ammo_casing/sawblade/diamond
 	name = "sawblade"
@@ -108,13 +137,32 @@
 	icon_state = "diamondblade"
 	projectile_type = /obj/item/projectile/sawblade/diamond
 	health = DIAMONDBLADE_HEALTH
+	matter = list(DEFAULT_WALL_MATERIAL = 1000, "plasteel" = 250, "diamond" = 125)
 
+
+//Dropped when a blade breaks. These are trash subtype for easy categorising and pickup
+/obj/item/trash/broken_sawblade
+	name = "fragmented sawblade"
+	layer = BELOW_TABLE_LAYER //Trash falls under objects
+	//icon = 'icons/obj/trash.dmi' //Just putting this here for reference, no need to duplicate it
+	icon_state = "sawblade"
+	desc = "This was once a precisely machined cutting tool. Now it is just scrap metal for recycling"
+	matter = list(DEFAULT_WALL_MATERIAL = 300, "plasteel" = 40) //The broken versions contain roughly a third of the original matter when recycled
+
+
+/obj/item/trash/broken_sawblade/diamond
+	name = "shattered diamond blade"
+	icon_state = "diamondblade"
+	desc = "This glittering blade was once a durable cutting edge, it must have seen heavy use to end up like this. May still contain some valueable materials to recycle"
+	matter = list(DEFAULT_WALL_MATERIAL = 300, "plasteel" = 80, "diamond" = 40) //The broken versions contain roughly a third of the original matter when recycled
 
 //We don't need to stop the looping audio here, it will do that itself
 /obj/item/projectile/sawblade/Destroy()
 	.=..()
-	if (launcher && launcher.blade == src)
-		launcher.stop_firing()
+	//If the blade is suddenly deleted for any reason, we want the launcher to stop controlling it
+	if (launcher && launcher.blade == src) //Make sure its actually controlling us, dont mess with other blades
+		launcher.blade = null //Unset ourself first to prevent recursion. It's assumed we've already handled dropping by now
+		launcher.stop_firing() //And tell it to stop. This will remove the tether beam and allow the launcher to fire again
 
 
 /obj/item/projectile/sawblade/Initialize()
@@ -296,7 +344,14 @@
 	playsound(get_turf(src),'sound/effects/weightdrop.ogg', 70, 1, 1) //Clunk!
 	if (health < DROP_DAMAGE)
 		playsound(src, "shatter", 70, 1)
-		//Todo: Spawn broken blade here
+
+		var/obj/item/broken = new trash_type(loc)
+		broken.set_global_pixel_loc(get_global_pixel_loc())//Make sure it appears exactly below this disk
+
+		//And lets give it a random rotation to make it look like it just fell there
+		var/matrix/M = matrix()
+		M.Turn(rand(0,360))
+		broken.transform = M
 
 	else
 		//If health remains, the sawblade drops on the floor
@@ -310,7 +365,10 @@
 		M.Turn(rand(0,360))
 		ammo.transform = M
 
-	qdel(src)
+	//Once we've placed either a blade or a broken remnant, delete this projectile
+	//We spawn it off to prevent recursion issues, make sure the launcher does its cleanup first
+	spawn()
+		qdel(src)
 
 /obj/item/projectile/sawblade/proc/set_sound(var/soundin)
 
@@ -351,3 +409,7 @@
 
 #undef SOUND_GRIND
 #undef SOUND_NORMAL
+
+#undef STATE_STABLE
+#undef STATE_GRIND
+#undef STATE_MOVING

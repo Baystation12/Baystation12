@@ -8,12 +8,13 @@
 	icon_state = "oldlaser"
 	max_shells = 8
 	caliber = "saw"
-
+	handle_casings = CLEAR_CASINGS
 
 	firemodes = list(
 		list(mode_name="remote control", mode_type = /datum/firemode/remote),
 		list(mode_name="saw launcher",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null)
 		)
+
 
 
 	//Maximum distance, in pixels, that the blade is allowed to be from the gun/user.
@@ -39,11 +40,6 @@
 #define STATE_MOVING	1
 #define STATE_GRINDING	2
 
-/client/verb/spawn_ripper()
-	set category = "Debug"
-	set name = "Spawn Ripper"
-
-	new /obj/item/weapon/gun/projectile/ripper(mob.loc)
 
 //Whenever afterattack is called on the ripper...
 /obj/item/weapon/gun/projectile/ripper/afterattack(atom/A, mob/living/user, adjacent, params, var/vector2/global_clickpoint)
@@ -83,6 +79,9 @@
 
 //Called either when the sawblade breaks, or the user releases the fire button
 /obj/item/weapon/gun/projectile/ripper/stop_firing()
+	if (!firing)
+		return
+	firing = FALSE //Prevents recursion
 	if (blade && !QDELETED(blade))
 		blade.drop() 	//The sawblade will drop on the ground where it hovers, possibly in a reuseable state, possibly not
 		blade = null	//Lose our reference to it anyways, its no longer our concern
@@ -110,7 +109,6 @@
 		var/obj/item/ammo_casing/sawblade/ammo = chambered
 		if (istype(ammo))
 			P.health = ammo.health
-			world << "Setting [P] to ammo health [ammo.health]"
 
 //This is the proc where the projectile is launched from the gun. We override it here because we don't want the blade to necessarily go flying
 /obj/item/weapon/gun/projectile/ripper/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
@@ -118,6 +116,7 @@
 	//If we're in remote control mode, we place the projectile in the world manually
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	if (istype(current_mode, /datum/firemode/remote))
+		firing = TRUE
 		var/turf/T = get_step(user, user.dir)
 		blade = projectile
 		//If theres a clear space infront of you, it goes there
@@ -185,12 +184,10 @@
 	if (!enable)
 		if (!CH)
 			//If we're turning it off, but the click handler doesn't exist, then we have nothing to do
-			world << "Turning off, handler doesnt exist, do nothing"
 			return
 
 		//Todo: make client click handlers into a list
 		if (CH.user) //Remove our handler from the client
-			world << "Turning off, handler exists, removing it"
 			CH.user.RemoveClickHandler(CH)
 			CH = null
 		return
@@ -198,13 +195,11 @@
 	else
 		//We're trying to turn things on
 		if (CH)
-			world << "Turning on, handler exists, do nothing"
 			return //The click handler exists, we dont need to do anything
 
 
 		//Create and assign the click handler
 		//A click handler intercepts mouseup/drag/down events which allow fullauto firing
-		world << "Turning on, handler doesnt exist, creating it"
 		CH = L.PushClickHandler(/datum/click_handler/sustained)
 		CH.reciever = gun //Reciever is the gun that gets the fire events
 		CH.user = L //And tell it where it is

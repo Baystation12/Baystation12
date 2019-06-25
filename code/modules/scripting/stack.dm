@@ -21,3 +21,4 @@
 
 		Clear()
 			contents.Cut()
+

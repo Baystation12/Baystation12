@@ -161,3 +161,6 @@
 
 /obj/proc/get_cell()
 	return
+
+/obj/proc/get_matter()
+	return matter

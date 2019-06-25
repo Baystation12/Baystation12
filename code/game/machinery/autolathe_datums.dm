@@ -587,6 +587,20 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/sawblade
+	name = "sawblade"
+	path = /obj/item/ammo_casing/sawblade
+	hidden = FALSE
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/sawblade/diamond
+	name = "diamond blade"
+	path = /obj/item/ammo_casing/sawblade/diamond
+	hidden = FALSE
+	category = "Arms and Ammunition"
+
+
+
 /datum/autolathe/recipe/rcd
 	name = "rapid construction device"
 	path = /obj/item/weapon/rcd

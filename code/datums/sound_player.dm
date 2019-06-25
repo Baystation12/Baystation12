@@ -75,7 +75,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 */
 /datum/sound_token
 	var/atom/source    // Where the sound originates from
-	var/list/listeners // Assoc: Atoms hearing this sound, and their sound datum
+	var/list/listeners = list()// Assoc: Atoms hearing this sound, and their sound datum
 	var/range          // How many turfs away the sound will stop playing completely
 	var/prefer_mute    // If sound should be muted instead of stopped when mob moves out of range. In the general case this should be avoided because listeners will remain tracked.
 	var/sound/sound    // Sound datum, holds most sound relevant data
@@ -153,7 +153,7 @@ datum/sound_token/proc/Mute()
 	var/sound/null_sound = new(channel = sound.channel)
 	for(var/listener in listeners)
 		PrivRemoveListener(listener, null_sound)
-	listeners = null
+	listeners = list()
 	listener_status = null
 
 	GLOB.destroyed_event.unregister(source, src, /datum/sound_token/proc/Stop)
