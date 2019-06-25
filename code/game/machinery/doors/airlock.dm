@@ -890,18 +890,15 @@ About the new airlock wires panel:
 				s.start()
 	return ..()
 
-/obj/machinery/door/airlock/attack_hand(mob/user as mob)
+/obj/machinery/door/airlock/physical_attack_hand(mob/user)
 	if(!istype(usr, /mob/living/silicon))
 		if(src.isElectrified())
 			if(src.shock(user, 100))
-				return
-
+				return TRUE
 	if(src.p_open)
 		user.set_machine(src)
 		wires.Interact(user)
-	else
-		..(user)
-	return
+		return TRUE
 
 /obj/machinery/door/airlock/CanUseTopic(var/mob/user)
 	if(operating < 0) //emagged

@@ -39,13 +39,9 @@
 
 	update_icon()
 
-/obj/machinery/embedded_controller/attack_ai(mob/user as mob)
+/obj/machinery/embedded_controller/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/embedded_controller/attack_hand(mob/user as mob)
-	if(!user.IsAdvancedToolUser())
-		return 0
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/embedded_controller/radio
 	icon = 'icons/obj/airlock_machines.dmi'

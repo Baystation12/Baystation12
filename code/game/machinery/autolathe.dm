@@ -39,16 +39,9 @@
 	if(!machine_recipes)
 		machine_recipes = autolathe_recipes
 
-/obj/machinery/autolathe/interact(mob/user as mob)
-
+/obj/machinery/autolathe/interact(mob/user)
+	user.set_machine(src)
 	update_recipe_list()
-
-	if(..() || (disabled && !panel_open))
-		to_chat(user, "<span class='danger'>\The [src] is disabled!</span>")
-		return
-
-	if(shocked)
-		shock(user, 50)
 
 	var/dat = "<center><h1>Autolathe Control Panel</h1><hr/>"
 
@@ -203,11 +196,17 @@
 
 	updateUsrDialog()
 
-/obj/machinery/autolathe/attack_hand(mob/user)
-	if(component_attack_hand(user))
+/obj/machinery/autolathe/physical_attack_hand(mob/user)
+	if(shocked)
+		shock(user, 50)
 		return TRUE
-	user.set_machine(src)
+
+/obj/machinery/autolathe/interface_interact(mob/user)
+	if(disabled && !panel_open)
+		to_chat(user, "<span class='danger'>\The [src] is disabled!</span>")
+		return TRUE
 	interact(user)
+	return TRUE
 
 /obj/machinery/autolathe/CanUseTopic(user, href_list)
 	if(busy)

@@ -156,18 +156,14 @@
 		shatter()
 		return
 
-/obj/machinery/door/window/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/door/window/attack_hand(mob/user as mob)
-
+/obj/machinery/door/window/interface_interact(mob/user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message("<span class='danger'>[user] smashes against the [src.name].</span>", 1)
 			take_damage(25)
-			return
+			return TRUE
 	return src.attackby(user, user)
 
 /obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)

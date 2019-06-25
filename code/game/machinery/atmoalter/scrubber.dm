@@ -87,17 +87,9 @@
 	//src.update_icon()
 	src.updateDialog()
 
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_ai(var/mob/user)
-	src.add_hiddenprint(user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_ghost(var/mob/user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_hand(var/mob/user)
-	if((. = ..()))
-		return
+/obj/machinery/portable_atmospherics/powered/scrubber/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/scrubber/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data[0]
@@ -167,8 +159,11 @@
 
 	name = "[name] (ID [id])"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(var/mob/user as mob)
-		to_chat(usr, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(mob/user)
+	if((. = ..()))
+		return
+	to_chat(user, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
+	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
 	overlays.Cut()

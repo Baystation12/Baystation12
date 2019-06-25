@@ -37,10 +37,9 @@ obj/machinery/computer/air_control/Destroy()
 		radio_controller.remove_object(src, frequency)
 	..()
 
-/obj/machinery/computer/air_control/attack_hand(mob/user)
-	if(..(user))
-		return
+/obj/machinery/computer/air_control/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/air_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)		

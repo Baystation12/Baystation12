@@ -54,20 +54,18 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish printing first!")
 	return ..()
 
-/obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
-	if(component_attack_hand(user))
-		return TRUE
-	if(printing || (stat & (BROKEN|NOPOWER)))
+/obj/machinery/organ_printer/physical_attack_hand(mob/user, var/choice = null)
+	if(printing)
 		return
 
 	if(!choice)
 		choice = input("What would you like to print?") as null|anything in products
 
-	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
-		return
+	if(!choice || printing || !CanPhysicallyInteract(user))
+		return TRUE
 
 	if(!can_print(choice))
-		return
+		return TRUE
 
 	stored_matter -= products[choice][2]
 
@@ -82,7 +80,7 @@
 	update_icon()
 
 	if(!choice || !src || (stat & (BROKEN|NOPOWER)))
-		return
+		return TRUE
 
 	print_organ(choice)
 
@@ -204,7 +202,7 @@
 	visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
 	return O
 
-/obj/machinery/organ_printer/flesh/attack_hand(mob/user)
+/obj/machinery/organ_printer/flesh/physical_attack_hand(mob/user)
 	if(!loaded_dna_datum || !loaded_species)
 		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
 		return

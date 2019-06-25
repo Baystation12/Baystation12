@@ -177,12 +177,9 @@
 			state = BG_READY
 	return TOPIC_REFRESH
 
-/obj/machinery/biogenerator/attack_hand(mob/user as mob)
-	if((. = component_attack_hand(user)))
-		return
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/biogenerator/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/biogenerator/proc/activate()
 	if (usr.stat)

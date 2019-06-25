@@ -84,9 +84,7 @@
 	port = 0
 	view = ORION_VIEW_MAIN
 
-/obj/machinery/computer/arcade/orion_trail/attack_hand(mob/user)
-	if(..())
-		return
+/obj/machinery/computer/arcade/orion_trail/interact(mob/user)
 	var/dat = ""
 	if(event == null)
 		newgame()
@@ -183,7 +181,6 @@
 				event = ORION_TRAIL_SPACEPORT
 			if(event == ORION_TRAIL_GAMEOVER)
 				event = null
-				attack_hand(user)
 				return TOPIC_REFRESH
 			if(!settlers.len)
 				event_desc = "You and your crew were killed on the way to Orion, your ship left abandoned for scavengers to find."
@@ -277,9 +274,6 @@
 					remove_settler(null, "died while you were escaping!")
 		event = ORION_TRAIL_SPACEPORT_RAIDED
 		return TOPIC_REFRESH
-
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
 
 /obj/machinery/computer/arcade/orion_trail/proc/change_resource(var/specific = null, var/add = 1)
 	if(!specific)

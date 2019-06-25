@@ -34,15 +34,9 @@
 		bodyscans -= list(bodyscans[selection])
 		return TOPIC_REFRESH
 
-/obj/machinery/body_scan_display/attack_ai(user as mob)
-	return attack_hand(user)
-
-/obj/machinery/body_scan_display/attack_hand(mob/user)
-	if(..())
-		return
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/body_scan_display/interface_interact(user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/body_scan_display/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
 	var/list/data = list()

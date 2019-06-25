@@ -484,18 +484,10 @@
 
 	frequency.post_signal(src, alert_signal)
 
-/obj/machinery/alarm/attack_ai(mob/user)
-	ui_interact(user)
-
-/obj/machinery/alarm/attack_hand(mob/user)
-	. = ..()
-	if (.)
-		return
-	return interact(user)
-
-/obj/machinery/alarm/interact(mob/user)
+/obj/machinery/alarm/interface_interact(mob/user)
 	ui_interact(user)
 	wires.Interact(user)
+	return TRUE
 
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
@@ -954,9 +946,6 @@ FIRE ALARM
 			src.alarm()			// added check of detector status here
 	return
 
-/obj/machinery/firealarm/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/firealarm/bullet_act()
 	return src.alarm()
 
@@ -1041,13 +1030,11 @@ FIRE ALARM
 	if(locate(/obj/fire) in loc)
 		alarm()
 
-/obj/machinery/firealarm/attack_hand(mob/user as mob)
-	if(user.stat || stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/firealarm/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-	if (buildstage != 2)
-		return
-
+/obj/machinery/firealarm/interact(mob/user)
 	user.set_machine(src)
 	var/area/A = src.loc
 	var/d1
@@ -1111,7 +1098,7 @@ FIRE ALARM
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+		interact(user)
 
 /obj/machinery/firealarm/proc/reset()
 	if (!( src.working ))
@@ -1179,10 +1166,11 @@ Just a object used in constructing fire alarms
 	idle_power_usage = 2
 	active_power_usage = 6
 
-/obj/machinery/partyalarm/attack_hand(mob/user as mob)
-	if(user.stat || stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/partyalarm/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
+/obj/machinery/partyalarm/interact(mob/user)
 	user.machine = src
 	var/area/A = get_area(src)
 	ASSERT(isarea(A))
@@ -1252,4 +1240,4 @@ Just a object used in constructing fire alarms
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+		interact(user)

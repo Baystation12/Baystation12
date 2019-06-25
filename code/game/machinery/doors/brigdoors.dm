@@ -147,12 +147,9 @@
 
 	return
 
-//Allows AIs to use door_timer, see human attack_hand function below
-/obj/machinery/door_timer/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/door_timer/attack_hand(var/mob/user as mob)
+/obj/machinery/door_timer/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/door_timer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()

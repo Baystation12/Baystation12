@@ -41,6 +41,10 @@
 		new path(loc)
 		return INITIALIZE_HINT_QDEL
 
+/obj/machinery/computer/arcade/interface_interact(user)
+	interact(user)
+	return TRUE
+
 /obj/machinery/computer/arcade/proc/prizevend()
 	if(!contents.len)
 		var/prizeselect = pickweight(prizes)
@@ -52,10 +56,6 @@
 	else
 		var/atom/movable/prize = pick(contents)
 		prize.forceMove(src.loc)
-
-/obj/machinery/computer/arcade/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
 
 /obj/machinery/computer/arcade/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN))
@@ -111,9 +111,7 @@
 	src.SetName((name_action + name_part1 + name_part2))
 
 
-/obj/machinery/computer/arcade/battle/attack_hand(mob/user as mob)
-	if(..())
-		return
+/obj/machinery/computer/arcade/battle/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<a href='byond://?src=\ref[src];close=1'>Close</a>"
 	dat += "<center><h4>[src.enemy_name]</h4></center>"
@@ -199,9 +197,6 @@
 			SetupGame()
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
-
 /obj/machinery/computer/arcade/battle/proc/arcade_action(var/user)
 	if ((src.enemy_mp <= 0) || (src.enemy_hp <= 0))
 		if(!gameover)
@@ -228,7 +223,7 @@
 		var/stealamt = rand(2,3)
 		src.temp = "[src.enemy_name] steals [stealamt] of your power!"
 		src.player_mp -= stealamt
-		attack_hand(user)
+		interface_interact(user)
 
 		if (src.player_mp <= 0)
 			src.gameover = 1

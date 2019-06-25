@@ -177,7 +177,7 @@
 	else
 		icon_state = "airlock_sensor_off"
 
-/obj/machinery/airlock_sensor/attack_hand(mob/user)
+/obj/machinery/airlock_sensor/interface_interact(mob/user)
 	var/datum/signal/signal = new
 	signal.transmission_method = 1 //radio signal
 	signal.data["tag"] = master_tag
@@ -185,6 +185,7 @@
 
 	radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, radio_filter = RADIO_AIRLOCK)
 	flick("airlock_sensor_cycle", src)
+	return TRUE
 
 /obj/machinery/airlock_sensor/Process()
 	if(on)
@@ -261,12 +262,8 @@
 		return
 	..()
 
-/obj/machinery/access_button/attack_hand(mob/user)
-	..()
-	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access Denied</span>")
-
-	else if(radio_connection)
+/obj/machinery/access_button/interface_interact(mob/user)
+	if(radio_connection)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal
 		signal.data["tag"] = master_tag
@@ -274,7 +271,7 @@
 
 		radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, radio_filter = RADIO_AIRLOCK)
 	flick("access_button_cycle", src)
-
+	return TRUE
 
 /obj/machinery/access_button/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
