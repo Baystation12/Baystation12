@@ -1,3 +1,17 @@
+
+//----------------------------
+// Gold laser beam
+//----------------------------
+/obj/effect/projectile/laser_gold/tracer
+	icon_state = "beam_gold"
+
+/obj/effect/projectile/laser_gold/muzzle
+	icon_state = "muzzle_gold"
+
+/obj/effect/projectile/laser_gold/impact
+	icon_state = "impact_gold"
+
+
 //sentinel laser beam
 
 /obj/item/projectile/beam/sentinel
@@ -9,9 +23,9 @@
 	check_armour = "laser"
 	armor_penetration = 10
 
-	muzzle_type = /obj/effect/projectile/laser_blue/muzzle
-	tracer_type = /obj/effect/projectile/laser_blue/tracer
-	impact_type = /obj/effect/projectile/laser_blue/impact
+	muzzle_type = /obj/effect/projectile/laser_gold/muzzle
+	tracer_type = /obj/effect/projectile/laser_gold/tracer
+	impact_type = /obj/effect/projectile/laser_gold/impact
 
 /obj/item/weapon/gun/energy/laser/sentinel_beam
 	name = "Sentinel Beam"
