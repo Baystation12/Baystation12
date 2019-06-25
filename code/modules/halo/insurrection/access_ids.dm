@@ -50,5 +50,5 @@
 /var/const/access_soe_captain = 858
 /datum/access/soe_captain
 	id = access_soe_captain
-	access_typee = ACCESS_TYPE_SYNDICATE
-	desc = "Sons of Eridanus Command
+	access_type = ACCESS_TYPE_SYNDICATE
+	desc = "Sons of Eridanus Command"
