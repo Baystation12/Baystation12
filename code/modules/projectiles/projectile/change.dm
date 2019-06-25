@@ -32,9 +32,6 @@
 		var/options = list("robot", "slime")
 		for(var/t in all_species)
 			options += t
-		options -= "Xenophage Queen"
-		options -= "Xenophage Drone"
-		options -= "Xenophage"
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.species)

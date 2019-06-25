@@ -1,39 +1,3 @@
-/datum/language/xenocommon
-	name = LANGUAGE_XENOPHAGE
-	colour = "alien"
-	desc = "The common tongue of the xenophages."
-	speech_verb = "hisses"
-	ask_verb = "hisses"
-	exclaim_verb = "hisses"
-	key = "l"
-	flags = RESTRICTED
-	syllables = list("sss","sSs","SSS")
-	machine_understands = 0
-	shorthand = "Xeno"
-	hidden_from_codex = TRUE
-
-/datum/language/xenos
-	name = LANGUAGE_XENOPHAGE_GLOBAL
-	desc = "Xenophages have the strange ability to commune over a psychic hivemind."
-	speech_verb = "hisses"
-	ask_verb = "hisses"
-	exclaim_verb = "hisses"
-	colour = "alien"
-	key = "a"
-	flags = RESTRICTED | HIVEMIND
-	shorthand = "N/A"
-	hidden_from_codex = TRUE
-
-/datum/language/xenos/check_special_condition(var/mob/other)
-
-	var/mob/living/carbon/M = other
-	if(!istype(M))
-		return 1
-	if(locate(/obj/item/organ/internal/xeno/hivenode) in M.internal_organs)
-		return 1
-
-	return 0
-
 /datum/language/ling
 	name = LANGUAGE_CHANGELING_GLOBAL
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."

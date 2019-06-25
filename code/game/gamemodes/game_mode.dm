@@ -284,7 +284,7 @@ var/global/list/additional_antag_types = list()
 		"artifacts of eldritch horror",
 		"a brain slug infestation",
 		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenomorph specimens",
+		"a deserted transport carrying xenofauna specimens",
 		"an emissary for the gestalt requesting a security detail",
 		"radical Skrellian transevolutionaries",
 		"classified security operations",

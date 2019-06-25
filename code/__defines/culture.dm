@@ -161,13 +161,6 @@
 #define RELIGION_UNATHI_VINE         "Hand of the Vine"
 #define RELIGION_UNATHI_LIGHTS       "The Fruitful Lights"
 
-// Xenophage cultures.
-#define CULTURE_XENOPHAGE_D    "Xenophage Drone"
-#define CULTURE_XENOPHAGE_H    "Xenophage Hunter"
-#define CULTURE_XENOPHAGE_S    "Xenophage Sentinel"
-#define CULTURE_XENOPHAGE_Q    "Xenophage Queen"
-#define FACTION_XENOPHAGE      "Xenophage Hive"
-
 // Nabber grades.
 #define CULTURE_NABBER_CMINUS "Grade C-"
 #define CULTURE_NABBER_C      "Grade C"
