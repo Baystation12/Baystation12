@@ -230,13 +230,13 @@ Class Procs:
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user)
-	if(CanUseTopic(user, GLOB.default_state) > STATUS_CLOSE)
+	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user)
 
 /obj/machinery/attack_robot(mob/user)
 	if((. = attack_hand(user))) // This will make a physical proximity check, and allow them to deal with components and such.
 		return
-	if(CanUseTopic(user, GLOB.default_state) > STATUS_CLOSE)
+	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user) // This may still work even if the physical checks fail.
 
 // If you don't call parent in this proc, you must make all appropriate checks yourself. 
@@ -259,12 +259,19 @@ Class Procs:
 			return 1
 	if((. = component_attack_hand(user)))
 		return
-	if(CanUseTopic(user, GLOB.default_state) > STATUS_CLOSE)
+	if((. = physical_attack_hand(user)))
+		return
+	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user)
 
 // If you want to have interface interactions handled for you conveniently, use this.
 // Return TRUE for handled.
 /obj/machinery/proc/interface_interact(user)
+	return FALSE
+
+// If you want a physical interaction which happens after all relevant checks but preempts the UI interactions, do it here.
+// Return TRUE for handled.
+/obj/machinery/proc/physical_attack_hand(user)
 	return FALSE
 
 /obj/machinery/proc/RefreshParts()
