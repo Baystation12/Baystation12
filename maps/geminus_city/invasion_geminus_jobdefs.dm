@@ -34,7 +34,6 @@
 		"Listening Post Spawn",\
 		"Colony Arrival Shuttle",\
 		"UNSC Base Spawns",\
-		"Covenant Base Spawns",\
 		"Research Facility Spawn",\
 		"Research Facility Director Spawn",\
 		"Research Facility Security Spawn")
