@@ -113,9 +113,6 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ay" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/effect/submap_landmark/spawnpoint/unishi_crew,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -123,16 +120,17 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "az" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/effect/submap_landmark/spawnpoint/unishi_crew,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aA" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -185,18 +183,19 @@
 /turf/simulated/floor,
 /area/unishi/bridge)
 "aM" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/structure/cable{
 	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /turf/simulated/floor,
@@ -278,16 +277,19 @@
 /area/unishi/living)
 "aZ" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ba" = (
 /obj/structure/closet/crate/freezer/rations,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "bb" = (
@@ -685,11 +687,6 @@
 	operating = 1;
 	pixel_y = -28;
 	req_access = newlist()
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	layer = 2.4;
-	level = 2
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -1860,11 +1857,6 @@
 /area/unishi/living)
 "eP" = (
 /obj/structure/coatrack,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	layer = 2.4;
-	level = 2
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -2017,6 +2009,19 @@
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
+"gj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	layer = 2.4;
+	level = 2
+	},
+/turf/simulated/floor/tiled,
+/area/unishi/living)
 "nC" = (
 /obj/effect/landmark{
 	name = "carpspawn"
@@ -2070,6 +2075,13 @@
 /obj/random/clothing,
 /obj/random/hat,
 /turf/simulated/floor/wood,
+/area/unishi/living)
+"AK" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/turf/simulated/floor/tiled,
 /area/unishi/living)
 "Um" = (
 /obj/machinery/light/small{
@@ -7039,7 +7051,7 @@ dY
 ev
 dY
 em
-pd
+gj
 eO
 dQ
 eT
@@ -7141,7 +7153,7 @@ bf
 bf
 ez
 eE
-eh
+AK
 eP
 bf
 bf

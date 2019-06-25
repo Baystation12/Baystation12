@@ -283,7 +283,6 @@
 "aZ" = (
 /obj/structure/table/steel,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -388,8 +387,8 @@
 /area/bluespaceriver/ship)
 "bl" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
@@ -468,8 +467,10 @@
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "by" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bz" = (
@@ -518,7 +519,6 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bF" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light{
 	dir = 4;
@@ -569,10 +569,6 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bN" = (
-/obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
-	dir = 5
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/power/apc{
 	dir = 8;
@@ -846,6 +842,21 @@
 	temperature = 233
 	},
 /area/bluespaceriver/ground)
+"hN" = (
+/obj/machinery/door/airlock/science,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/bluespaceriver/ship)
+"Co" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/wall/titanium,
+/area/bluespaceriver/ship)
+"Lk" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled,
+/area/bluespaceriver/ship)
 
 (1,1,1) = {"
 aa
@@ -3643,8 +3654,8 @@ an
 an
 aL
 aR
-au
-bk
+Lk
+bi
 bx
 ay
 ay
@@ -3849,8 +3860,8 @@ an
 an
 ay
 bm
-aG
-ay
+hN
+Co
 bO
 bU
 ay

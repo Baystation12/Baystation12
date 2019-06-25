@@ -1076,10 +1076,6 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_starboard)
 "cX" = (
-/obj/machinery/atmospherics/unary/tank/air{
-	dir = 4;
-	start_pressure = 740.5
-	},
 /obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 4
 	},

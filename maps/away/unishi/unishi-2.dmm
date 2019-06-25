@@ -642,9 +642,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "bI" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
@@ -705,17 +702,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
-"bN" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/unishi/common)
 "bO" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/tiled/dark,
@@ -2123,9 +2109,6 @@
 "fm" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 2;
@@ -2561,10 +2544,16 @@
 "gs" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
 /obj/item/remains,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 2;
+	layer = 2.4;
+	level = 2
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gt" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gu" = (
@@ -2646,9 +2635,6 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/vomit,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2658,16 +2644,14 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/machinery/light/small,
@@ -2677,6 +2661,9 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gE" = (
@@ -2685,12 +2672,6 @@
 	},
 /obj/machinery/atmospherics/binary/pump/high_power/on{
 	target_pressure = 15000
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
 	},
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -2705,9 +2686,6 @@
 /obj/machinery/power/emitter/anchored/on,
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
 	},
 /obj/structure/cable/yellow{
 	d2 = 8;
@@ -2776,18 +2754,21 @@
 /area/unishi/smresearch)
 "gN" = (
 /obj/item/clothing/suit/storage/toggle/labcoat/chemist,
-/turf/simulated/floor/tiled/techfloor,
-/area/unishi/smresearch)
-"gO" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
+	dir = 4;
 	layer = 2.4;
 	level = 2
 	},
+/turf/simulated/floor/tiled/techfloor,
+/area/unishi/smresearch)
+"gO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 /obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gP" = (
@@ -2871,18 +2852,16 @@
 /area/unishi/smresearch)
 "gZ" = (
 /obj/item/device/geiger,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "ha" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	layer = 2.4;
-	level = 2
-	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hb" = (
@@ -8149,7 +8128,7 @@ bf
 bf
 by
 bH
-bN
+bf
 bV
 bf
 cd
