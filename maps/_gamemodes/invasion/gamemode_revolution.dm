@@ -11,8 +11,9 @@
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
-		/datum/job/URF_commando,\
-		/datum/job/URF_commando_officer,\
+		/datum/job/soe_commando,\
+		/datum/job/soe_commando_officer,\
+		/datum/job/soe_commando_captain,\
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_xo,\
 		/datum/job/unsc_ship_iwo,\

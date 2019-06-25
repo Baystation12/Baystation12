@@ -254,6 +254,11 @@ obj/structure/closet/crate
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
 
+/obj/structure/closet/crate/large/secure
+	icon_state = "largesecure"
+	icon_opened = "largesecireopen"
+	icon_closed = "largesecure"
+
 /obj/structure/closet/crate/large/hydroponics
 	icon_state = "hydro_crate_large"
 	icon_opened = "hydro_crate_large_open"

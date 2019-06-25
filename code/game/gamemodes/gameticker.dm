@@ -138,7 +138,6 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
-	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 	create_characters() //Create player characters and transfer them
@@ -147,8 +146,6 @@ var/global/datum/controller/gameticker/ticker
 	GLOB.data_core.manifest()
 
 	callHook("roundstart")
-
-	shuttle_controller.initialize_shuttles()
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
@@ -285,7 +282,10 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
-					if(player.create_character(job_master.get_roundstart_spawnpoint(player.mind.assigned_role)))
+					var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(player.client, job_master.occupations_by_title[player.mind.assigned_role])
+					var/turf/spawn_turf = spawnpoint.get_spawn_turf(player.mind.assigned_role)
+
+					if(player.create_character(spawn_turf))
 						qdel(player)
 
 

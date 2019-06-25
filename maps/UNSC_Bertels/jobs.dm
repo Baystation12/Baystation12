@@ -25,6 +25,7 @@
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
+	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
@@ -36,6 +37,7 @@
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
+	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
 	total_positions = 1
@@ -78,7 +80,7 @@
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
-	access = list(142,144,145,192)
+	access = list(142,144,145,192,308)
 	spawnpoint_override = "UNSC Base Spawns"
 
 //UNSC BERTELS ODST Jobs
@@ -116,6 +118,6 @@
 	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/bertelsODSTltcolonel,
 	"Colonel" = /decl/hierarchy/outfit/job/bertelsODSTcolonel)
 	selection_color = "#0A0A95"
-	access = list(142,144,145,110,192,300,306,309,310,311)
+	access = list(142,144,145,110,192,300,306,308,309,310,311)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1

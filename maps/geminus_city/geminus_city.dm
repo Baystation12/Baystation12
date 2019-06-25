@@ -18,6 +18,18 @@
 	#include "geminus_city_map.dm"
 	#include "geminus_city_jobs.dm"
 
+#include "innie_supply/_controller.dm"
+	#include "innie_supply/computer.dm"
+	#include "innie_supply/export.dm"
+	#include "innie_supply/program.dm"
+	#include "innie_supply/shuttle.dm"
+
+	//#include "geminuscity_4.dmm"
+	#include "geminuscity_3.dmm"
+	#include "geminuscity_2.dmm"
+	#include "geminuscity_1.dmm"
+	#include "geminus_innie_base.dmm"
+
 	//#include "geminus_city_jobdefs.dm"
 	#include "invasion_geminus.dm"
 
