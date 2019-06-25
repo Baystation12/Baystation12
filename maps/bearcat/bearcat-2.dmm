@@ -861,7 +861,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/item/weapon/stool/padded,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1877,7 +1876,6 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
@@ -2391,9 +2389,6 @@
 /obj/machinery/light_switch{
 	pixel_y = 25
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/random/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
@@ -2401,6 +2396,9 @@
 	},
 /obj/item/modular_computer/console/preset/library,
 /obj/structure/table/standard,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/unused)
 "gg" = (
@@ -2566,6 +2564,11 @@
 	},
 /obj/structure/cable{
 	icon_state = "2-9"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	layer = 2.4;
+	level = 2
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/unused)
@@ -6183,11 +6186,6 @@
 /area/ship/scrap/comms)
 "Oc" = (
 /obj/effect/decal/cleanable/cobweb2,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8;
-	layer = 2.4;
-	level = 2
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
 	dir = 10

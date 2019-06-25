@@ -17706,12 +17706,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
@@ -17733,8 +17727,6 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -20937,9 +20929,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "ila" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/tvalve/mirrored/digital{
 	dir = 4;
@@ -29081,7 +29070,7 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "rOb" = (
-/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/machinery/atmospherics/valve,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "rOE" = (
@@ -29115,7 +29104,6 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "rTb" = (
-/obj/machinery/atmospherics/valve,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
@@ -29131,6 +29119,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
+/obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "rUb" = (
@@ -29441,10 +29430,6 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "slb" = (
-/obj/machinery/atmospherics/valve{
-	icon_state = "map_valve0";
-	dir = 8
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -29459,6 +29444,10 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
