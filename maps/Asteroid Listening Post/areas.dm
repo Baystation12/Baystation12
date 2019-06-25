@@ -90,7 +90,8 @@
 /area/asteroid_listening/ground/interior/commanderroom
 	name = "Listening Post Commanding Officer Quarters"
 	icon_state = "captain"
-
+/*
 /area/asteroid_listening/ground/interior/commsequipment
 	name = "Listening Post Communications Array"
 	icon_state = "tcomsatcham"
+*/
