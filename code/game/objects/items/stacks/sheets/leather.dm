@@ -39,19 +39,19 @@
 	name = "alien chitin"
 	desc = "A piece of the hide of a terrible creature."
 	singular_name = "alien hide piece"
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "chitin"
 
 /obj/item/xenos_claw
 	name = "alien claw"
 	desc = "The claw of a terrible creature."
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "claw"
 
 /obj/item/weed_extract
 	name = "weed extract"
 	desc = "A piece of slimy, purplish weed."
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "weed_extract"
 
 /obj/item/stack/hairlesshide

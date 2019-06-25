@@ -34,7 +34,6 @@
 
 // Mode/antag template macros.
 #define MODE_BORER "borer"
-#define MODE_XENOMORPH "xeno"
 #define MODE_LOYALIST "loyalist"
 #define MODE_COMMANDO "commando"
 #define MODE_DEATHSQUAD "deathsquad"

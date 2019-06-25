@@ -617,7 +617,6 @@ var/list/worths = list(
 					/obj/structure/dispenser = 500,
 					/obj/structure/transit_tube = 80,
 					/obj/structure/transit_tube_pod = 100,
-					/obj/structure/alien = 300,
 					/obj/structure/closet = 15,
 					/obj/structure/bed = 7,
 					/obj/structure/holostool = 0,

@@ -22,9 +22,8 @@
 #define IS_VOX     2
 #define IS_SKRELL  3
 #define IS_UNATHI  4
-#define IS_XENOS   5
-#define IS_SLIME   6
-#define IS_NABBER  7
+#define IS_SLIME   5
+#define IS_NABBER  6
 
 #define CE_STABLE        "stable"       // Inaprovaline
 #define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin

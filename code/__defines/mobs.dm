@@ -12,7 +12,6 @@
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
-#define XENO_HOST   0x8000  // Tracks whether we're gonna be a baby alien's mummy.
 
 // Grab Types
 #define GRAB_NORMAL			"normal"
@@ -291,7 +290,6 @@
 #define SPECIES_SKRELL      "Skrell"
 #define SPECIES_NABBER      "giant armoured serpentid"
 #define SPECIES_PROMETHEAN  "Promethean"
-#define SPECIES_XENO        "Xenophage"
 #define SPECIES_ALIEN       "Humanoid"
 #define SPECIES_ADHERENT    "Adherent"
 #define SPECIES_GOLEM       "Golem"
@@ -302,7 +300,7 @@
 #define SPECIES_GRAVWORLDER "Grav-Adapted Human"
 
 #define STATION_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER)
-#define RESTRICTED_SPECIES list(SPECIES_VOX, SPECIES_XENO, SPECIES_ALIEN, SPECIES_GOLEM)
+#define RESTRICTED_SPECIES list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM)
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
