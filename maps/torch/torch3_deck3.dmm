@@ -12175,9 +12175,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
 "Bb" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/tvalve/mirrored/digital{
 	dir = 4;

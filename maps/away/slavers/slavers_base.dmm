@@ -2502,7 +2502,6 @@
 /turf/simulated/wall,
 /area/slavers_base/dorms)
 "gj" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock{
 	name = "Mess"
 	},

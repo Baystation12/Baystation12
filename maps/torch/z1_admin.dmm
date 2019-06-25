@@ -12290,13 +12290,6 @@
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
-"aCH" = (
-/obj/machinery/atmospherics/pipe/manifold/visible{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold4w/visible,
-/turf/simulated/floor/shuttle/darkred,
-/area/syndicate_station/start)
 "aCJ" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
@@ -57708,7 +57701,7 @@ mVh
 ayw
 ayw
 jwM
-aCH
+aDd
 aDd
 aDr
 aDM
