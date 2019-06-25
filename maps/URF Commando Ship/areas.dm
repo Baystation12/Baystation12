@@ -8,6 +8,7 @@
 
 /area/soe_ship/soe_osprey/Bridge
 	name = "SOE Osprey Bridge"
+	icon_state = "bridge"
 /*
 /area/soe_ship/soe_osprey/Porthallway
 	name = "SOE Osprey Deck 1 Port Hallway"
@@ -17,6 +18,7 @@
 */
 /area/soe_ship/soe_osprey/Centralhallway
 	name = "SOE Osprey Deck 1 Central Hallway"
+	icon_state = "hallC1"
 /*
 /area/soe_ship/soe_osprey/Centralhallway2
 	name = "SOE Osprey Deck 2 Central Hallway"
@@ -41,6 +43,7 @@
 */
 /area/soe_ship/soe_osprey/medicalbay
 	name = "SOE Osprey Medical Bay"
+	icon_state = "medbay"
 /*
 /area/soe_ship/soe_osprey/oxystorage
 	name = "SOE Osprey Oxygen Storage"
@@ -64,7 +67,25 @@
 	name = "SOE Osprey Janitorial Closet"
 
 /area/soe_ship/soe_osprey/storageroom
-	name = "SOE Osprey Deck 1 Storage Room"
+	name = "SOE Osprey Deck 1 Storage Room 1"
+	icon_state = "yellow"
+
+/area/soe_ship/soe_osprey/storageroom2
+	name = "SOE Osprey Deck 1 Storage Room 2"
+	icon_state = "yellow"
+
+/area/soe_ship/soe_osprey/storageroom3
+	name = "SOE Osprey Deck 1 Storage Room 3"
+	icon_state = "yellow"
+
+/area/soe_ship/soe_osprey/storageroom4
+	name = "SOE Osprey Deck 1 Storage Room 4"
+	icon_state = "yellow"
+
+/area/soe_ship/soe_osprey/storageroom5
+	name = "SOE Osprey Deck 1 Storage Room 5"
+	icon_state = "yellow"
+
 /*
 /area/soe_ship/soe_osprey/storageroom2
 	name = "SOE Osprey Deck 2 Storage Room"
@@ -86,12 +107,15 @@
 
 /area/soe_ship/soe_osprey/captainroom
 	name = "SOE Osprey Captains Quarters"
+	icon_state = "blue-red"
 
 /area/soe_ship/soe_osprey/Armory
 	name = "SOE Osprey Armory"
+	icon_state = "red"
 
 /area/soe_ship/soe_osprey/Troopbunks
 	name = "SOE Osprey Troop Bunks"
+	icon_state = "armory"
 
 /area/soe_ship/soe_osprey/PortGenerator
 	name = "SOE Osprey Port Generator"
@@ -101,6 +125,7 @@
 
 /area/soe_ship/soe_osprey/powercore
 	name = "SOE Osprey Power Core"
+	icon_state = "engine"
 
 /*
 /area/soe_ship/soe_osprey/powercoreaux

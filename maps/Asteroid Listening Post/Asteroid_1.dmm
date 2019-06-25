@@ -3,21 +3,21 @@
 "ac" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/dark)
 "ad" = (/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
 "ae" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
-"af" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/ground/interior/commsequipment)
+"af" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/dark)
 "ag" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid3"; icon_state = "asteroid3"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
-"ah" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
-"ai" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
-"aj" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
+"ah" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
+"ai" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
+"aj" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
 "ak" = (/turf/simulated/floor/asteroid/planet{tag = "icon-asteroid_dug"; icon_state = "asteroid_dug"},/area/asteroid_listening/dark)
 "al" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid9"; icon_state = "asteroid9"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
-"am" = (/turf/simulated/floor/asteroid/planet,/area/asteroid_listening)
-"an" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
-"ao" = (/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
-"ap" = (/obj/machinery/door/airlock/halo{name = "Communications Equipment"},/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
+"am" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/asteroid_listening/dark)
+"an" = (/turf/simulated/floor/plating,/area/asteroid_listening/dark)
+"ao" = (/obj/machinery/door/airlock/halo{name = "Communications Equipment"},/turf/simulated/floor/plating,/area/asteroid_listening/dark)
+"ap" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
 "aq" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
-"ar" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
-"as" = (/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
-"at" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/asteroid_listening/ground/interior/commsequipment)
+"ar" = (/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
+"as" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
+"at" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/space)
 "au" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid7"; icon_state = "asteroid7"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
 "av" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
 "aw" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid1"; icon_state = "asteroid1"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
@@ -153,15 +153,12 @@
 "cW" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
 "cX" = (/obj/machinery/door/blast/regular,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
 "cY" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
-"cZ" = (/turf/simulated/floor/asteroid/planet{tag = "icon-asteroid_dug"; icon_state = "asteroid_dug"},/area/asteroid_listening)
+"cZ" = (/obj/effect/overmap/sector/exo_listen,/turf/space,/area/space)
 "da" = (/obj/docking_umbilical/south{name = "Asteroid Docking Umbilical"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/ground/interior/docking)
 "db" = (/turf/simulated/floor/holofloor/space,/area/asteroid_listening/dark)
-"dc" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/ground/interior/docking)
-"dd" = (/obj/effect/overmap/sector/exo_listen,/turf/space,/area/asteroid_listening/dark)
+"dc" = (/obj/effect/landmark/map_data{name = "Asteroid"},/turf/space,/area/space)
 "de" = (/turf/space,/area/space)
-"df" = (/turf/space,/area/asteroid_listening/dark)
 "dh" = (/obj/effect/landmark/ghost_spawn,/turf/simulated/floor,/area/asteroid_listening/ground/interior/Hangar)
-"RZ" = (/obj/effect/landmark/map_data{name = "Asteroid"},/turf/space,/area/asteroid_listening/dark)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -172,15 +169,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaadadadaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaaaaaaaaaa
 aaaaaaaaaaadadadaeadaaaaaaaaaaaaaaaaaaaaaaacafafafafafacaaadadaaaaaaaaaaaaaaadadagadadaeadaaaaaaaaaa
 aaaaaaaaadadadadadadaaaaadadadaaaaaaaaaaaaacafahaiajafacaaakadadaaaaaaaaaaadadadadadakadadalaaaaaaaa
-aaaaadadadadadadadadadaaadadaaaaaaaaamadacacafanaoaoapadaaadaaaaaaaaaaaaaaadadadadaeadadadadaaaaaaaa
-aaaaakacacacaeadadadadadaqadadadadadadadacacafarasatafadadadadadaaaaaaaaaaadadadadaladadadadaaaaaaaa
+aaaaadadadadadadadadadaaadadaaaaaaaaadadacacafamananaoadaaaddbaaaaaaaaaaaaadadadadaeadadadadaaaaaaaa
+aaaaakacacacaeadadadadadaqadadadadadadadacacafaparasafadadadadadaaaaaaaaaaadadadadaladadadadaaaaaaaa
 aaaaadacacacacacadacadadaeadadadakadadacacacafafafafafadauadadadaaaaaaadadaeadadadadadaeadadadaaaaaa
 aaadadacacacacacacacacacacacacadadadadacacacacacacacacadadavadadaaaaadadadadadadadadadadadaaadaaaaaa
 aaadaeacacacacacacacacacacacacadadaealadadadadacacacadadaeakadadadadadacacacacadadadadaaaaaaaaaaaaaa
 aaauadacacacacacacacacacacacacadadadadacacacauadadadadadadawadadaqadadacacacacacacaeadadakaaaaaaaaaa
 aaaaadacacacacacacacacacadaeadadadadacacacacacacadaladacacacacadacacacacacacacacacacacadadadaaaaaaaa
 aaaaadacacacacacacacacacadadauaqadaxacacayayayayayazayacacacacacacacacacacacacacacacacacacadaaaaaaaa
-aaaaaaaaaaaaamacacadadadadadacacayaAayayayaBaCaDayaEayacacacacacacacacacacacacacacacacacacadadacacac
+aaaaaaaaaaaaadacacadadadadadacacayaAayayayaBaCaDayaEayacacacacacacacacacacacacacacacacacacadadacacac
 aaaaaaaaaaaaaaadacadadaeadacacacayaFaGaGaHaGaIaJaKaLayacacacacacacacacacadadaeadacacacacadadacacacac
 aaaaaaaaaaaaaaadadadadadadacacacayayayayayaDaDaDayaMayayayayayacacacacacadadadadadadadadadacacacacac
 aaaaaaaaaaaaaaadaeacacacacacacacacacacacayaNaOaDaPaQaRaSaTaUayacacacadaeacacadadacacacacacacacacacac
@@ -203,15 +200,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccocqcqcqcocobGbGbGbGbGbGbGbGbhbpbpbpbpbpbpbp
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccocpcqcococobGbGbGbGacacacacbhbpbpbpbpbpbpbpbpbpbpbpbpbhacacacac
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadacaccocLcqcWcocoacacacacacacacacbhbpbpbpbpbpbpbpbpbpbpbpbpbhacacacac
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaadadacaccocEcLcFcocoacacacacacacacacbhcXcXcXcXcXcXcXcXcXcXcXcXbhacacacac
-aaaaaaaaaaaaaaaaaaaaaaaaacacacacacaccocqcYcqcocoacacacacacacacacacamcZamamamamamamamamamadacacacacac
-aaaaaaaaaaaaaaaaaaaaaaaaaaacacacacaccocLcqcLcocoacacacacacacacadadamamamamamamamamamcZaaadadadadadad
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaadacacaccocqdacqcocoacacacacacacadadadaaaaaacZaaaaaacZaaaaaaaaaaadadadad
-aaaaaaaaaaaaaaaaaaaaaaaaaadbadadacaccocococococoacacacacadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaadbdbaaaaaaaccocococococoacacacadadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaacdcdcdcdcdcdcacadadadaaaaaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaadbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-acacdbdbdbdbdbdbdbdbdbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-ddacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-dfacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-RZacdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaacacacacacaccocqcYcqcocoacacacacacacacacacadakadadadadadadadadadadacacacacac
+aaaaaaaaaaaaaaaaaaaaaaaaaaacacacacaccocLcqcLcocoacacacacacacacadadadadadadadadadadadakaaadadadadadad
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaadacacaccocqdacqcocoacacacacacacadadadaaaaaaakaaaaaaakaaaaaaaaaaadadadad
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaadadacaccocococococoacacacacadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaccocococococoacacacadadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacadadadaaaaaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+atataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cZatdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+deatdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+dcatdedeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
