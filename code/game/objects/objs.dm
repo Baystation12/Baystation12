@@ -48,7 +48,7 @@
 			if ((M.client && M.machine == src))
 				if(CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
-					interface_interact(M)
+					interact(M)
 				else
 					M.unset_machine()
 		in_use = is_in_use
@@ -62,7 +62,7 @@
 			if ((M.client && M.machine == src))
 				if(CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
-					src.interface_interact(M)
+					interact(M)
 				else
 					M.unset_machine()
 		var/ai_in_use = AutoUpdateAI(src)

@@ -216,8 +216,7 @@ Class Procs:
 /obj/machinery/CanUseTopicPhysical(var/mob/user)
 	if(stat & BROKEN)
 		return STATUS_CLOSE
-	if(!(user.CanUseObjTopic(src)))
-		return STATUS_CLOSE
+
 	return GLOB.physical_state.can_use_topic(nano_host(), user)
 
 /obj/machinery/CouldUseTopic(var/mob/user)
@@ -226,6 +225,11 @@ Class Procs:
 
 /obj/machinery/CouldNotUseTopic(var/mob/user)
 	user.unset_machine()
+
+/obj/machinery/Topic(href, href_list, datum/topic_state/state)
+	. = ..()
+	if(. == TOPIC_REFRESH)
+		updateUsrDialog(user) // Update legacy UIs to the extent possible.
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
