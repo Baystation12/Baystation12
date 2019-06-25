@@ -292,4 +292,25 @@
 		pass("All pipes belonged to a unique pipeline.")
 	return 1
 
+/datum/unit_test/atmos_machinery_shall_not_have_conflicting_connections
+	name = "ATMOS MACHINERY: all mapped atmos machinery shall not have more than one connection of each type per dir."
+
+/datum/unit_test/atmos_machinery_shall_not_have_conflicting_connections/start_test()
+	var/fail = FALSE
+	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
+		for(var/obj/machinery/atmospherics/M in machine.loc)
+			if(M == machine)
+				continue
+			if(!machine.check_connect_types(M, machine))
+				continue
+			if(M.initialize_directions & machine.initialize_directions)
+				log_bad("[log_info_line(machine)] has conflicting connections.")
+				fail = TRUE
+
+	if(fail)
+		fail("Some pipes had conflicting connections.")
+	else
+		pass("All pipes were mapped properly.")
+	return 1
+
 #undef ALL_GASIDS
