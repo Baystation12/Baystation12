@@ -18,3 +18,14 @@
 	req_access = list(access_syndicate)
 	shuttle_tag = "Ninja"
 
+/obj/machinery/computer/shuttle_control/multi/deliverance
+	name = "divine shuttle control console"
+	shuttle_tag = "Deliverance"
+
+/obj/machinery/computer/shuttle_control/multi/kellion
+	name = "repair shuttle control console"
+	shuttle_tag = "Kellion"
+
+/obj/machinery/computer/shuttle_control/multi/valor
+	name = "military shuttle control console"
+	shuttle_tag = "valor"
