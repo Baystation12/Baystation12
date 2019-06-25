@@ -1,0 +1,5 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - tweak: "Grass, carpets, and dirt have new icons."
+  - rscadd: "A new system has been put in place for floor detailing, allowing for pre-made edges."
