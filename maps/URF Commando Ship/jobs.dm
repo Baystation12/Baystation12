@@ -40,5 +40,5 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#ff0000"
-	access = list(252,632,858)
+	access = list(access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
 	is_whitelisted = 1

@@ -1,5 +1,15 @@
 
+#include "faction_base.dm"
+
 /* INNIE BASE */
+
+/obj/effect/overmap/ship/faction_base/innie
+	name = "Camp New Hope"
+	icon_state = "base_innie"
+	faction = "Insurrection"
+	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/innie
+	base = 1
+
 
 GLOBAL_LIST_EMPTY(innie_base_spawns)
 
@@ -21,3 +31,12 @@ GLOBAL_LIST_EMPTY(innie_base_spawns)
 /obj/effect/landmark/start/innie_base/New()
 	..()
 	GLOB.innie_base_spawns += loc
+
+/area/faction_base/innie
+	name = "Insurrectionist Faction Base"
+
+/area/faction_base/innie_defense_platform
+	name = "Insurrectionist Defense Platform"
+
+/area/faction_base/innie_shuttle
+	name = "Insurrectionist Shuttle"

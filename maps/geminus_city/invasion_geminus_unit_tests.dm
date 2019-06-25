@@ -1,8 +1,6 @@
 
 /datum/map/geminus_city/area_usage_test_exempted_areas = list(
 		/area/faction_base/unsc_defense_platform,
-		/area/faction_base/cov_defense_platform,
-		/area/faction_base/covenant_shuttle,
 		/area/faction_base/unsc_shuttle,
 		/area/beach,
 		/area/centcom,
@@ -42,6 +40,3 @@
 		/area/exoplanet/grass,
 		/area/exoplanet/snow
 	)
-
-/datum/unit_test/cargo_crates_containment_test //No cargo crates are present for this map, so I doubt this'll be needed.
-	disabled = 1

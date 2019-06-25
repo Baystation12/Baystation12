@@ -1,18 +1,11 @@
 
-#include "../faction_bases/base_areas.dm"
-
-#include "../faction_bases/faction_base.dm"
-#include "../faction_bases/faction_spawns.dm"
-
-#include "../faction_bases/Covenant_Station.dmm"
+#include "../faction_bases/faction_base_unsc.dm"
 
 #include "../faction_bases/Human_Station_1.dmm"
 
 #include "../faction_bases/Human_Station_2.dmm"
 
 #include "../Exoplanet Research/includes.dm"
-
-#include "../ks7_elmsville/ks7_elmsville.dm"
 
 #include "../Admin Planet/includes.dm"
 
