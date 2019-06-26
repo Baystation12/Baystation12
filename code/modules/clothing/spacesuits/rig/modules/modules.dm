@@ -244,6 +244,9 @@
 	holder = null
 	return
 
+/obj/item/rig_module/get_cell()
+	return holder && holder.get_cell()
+
 // Called by the hardsuit each rig process tick.
 /obj/item/rig_module/Process()
 	if(active)

@@ -5,7 +5,6 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
-	key = "]"
 	flags = WHITELISTED
 	shorthand = "???"
 	space_chance = 40

@@ -85,3 +85,8 @@
 	var/obj/item/weapon/cell/cell = get_cell()
 	if(cell)
 		cell.use(amount * CELLRATE)
+
+/obj/item/weapon/weldingtool/electric/mantid
+	name = "mantid welding tool"
+	desc = "An oddly shaped alien welding tool."
+	icon = 'icons/obj/ascent.dmi'
