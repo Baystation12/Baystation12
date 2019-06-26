@@ -15,3 +15,9 @@
 		/obj/item/device/scanner/health
 	)
 	emag = /obj/item/weapon/melee/energy/sword
+	skills = list(
+		SKILL_COMBAT       = SKILL_ADEPT,
+		SKILL_MEDICAL      = SKILL_ADEPT,
+		SKILL_CONSTRUCTION = SKILL_ADEPT,
+		SKILL_BUREAUCRACY  = SKILL_ADEPT
+	)

@@ -29,6 +29,14 @@
 	)
 	synths = list(/datum/matter_synth/medicine = 15000)
 	emag = /obj/item/weapon/reagent_containers/spray
+	skills = list(
+		SKILL_ANATOMY      = SKILL_BASIC,
+		SKILL_MEDICAL      = SKILL_PROF,
+		SKILL_EVA          = SKILL_EXPERT,
+		SKILL_MECH         = HAS_PERK,
+		SKILL_CONSTRUCTION = SKILL_EXPERT,
+		SKILL_ELECTRICAL   = SKILL_EXPERT
+	)
 
 /obj/item/weapon/robot_module/flying/emergency/finalize_emag()
 	. = ..()

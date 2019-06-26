@@ -61,6 +61,13 @@
 		/datum/matter_synth/wire
 	)
 	emag = /obj/item/weapon/melee/baton/robot/electrified_arm
+	skills = list(
+		SKILL_ATMOS        = SKILL_PROF,
+		SKILL_ENGINES      = SKILL_PROF,
+		SKILL_CONSTRUCTION = SKILL_PROF,
+		SKILL_ELECTRICAL   = SKILL_PROF,
+		SKILL_COMPUTER     = SKILL_EXPERT
+	)
 
 /obj/item/weapon/robot_module/engineering/finalize_synths()
 
