@@ -35,6 +35,10 @@
 /datum/gear/cardemon_pack
 	display_name = "Cardemon booster pack"
 	path = /obj/item/weapon/pack/cardemon
+	
+/datum/gear/cardemon_pack_circus
+	display_name = "Cardemon Circus Expansion booster pack"
+	path = /obj/item/weapon/pack/cardemoncircus
 
 /datum/gear/spaceball_pack
 	display_name = "Spaceball booster pack"
