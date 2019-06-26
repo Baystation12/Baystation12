@@ -1,0 +1,12 @@
+<h3>MAC Automated Fire Control</h3>
+This program redirects fire control for the onboard Magnetic Accelerator Cannon to the ship's AI subroutines.
+<br>
+<div class="item">
+	<div class="itemLabel">
+		AI fire control: 
+	</div>
+	<div class="itemContent">
+		{{:data.automatic ? 'Active' : 'Disabled'}}
+	</div>
+		{{:helper.link(data.automatic ? 'Disable AI Control' : 'Enable AI Control', 'person', {'toggle_automatic' : 1}, null)}}
+</div>

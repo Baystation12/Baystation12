@@ -1606,6 +1606,8 @@
 #include "code\modules\halo\overmap\player_shuttles.dm"
 #include "code\modules\halo\overmap\slipspace_gen.dm"
 #include "code\modules\halo\overmap\umbilicals.dm"
+#include "code\modules\halo\overmap\weapons\auto_mac_console.dm"
+#include "code\modules\halo\overmap\weapons\auto_mac_program.dm"
 #include "code\modules\halo\overmap\weapons\covie_pulse_turret.dm"
 #include "code\modules\halo\overmap\weapons\Energy_projector.dm"
 #include "code\modules\halo\overmap\weapons\laser_designator.dm"
