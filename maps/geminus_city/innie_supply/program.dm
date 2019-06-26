@@ -8,12 +8,6 @@
 	available_on_ntnet = 1
 	requires_ntnet = 1
 
-/datum/computer_file/program/innie_supply/process_tick()
-	..()
-	var/datum/nano_module/innie_supply/SNM = NM
-	if(istype(SNM))
-		SNM.emagged = computer_emagged
-
 /datum/nano_module/innie_supply
 	name = "Rabbit Hole Base Supply Management program"
 	var/screen = 1		// 0: Ordering menu, 1: Statistics 2: Shuttle control, 3: Orders menu
