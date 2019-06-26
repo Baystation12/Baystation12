@@ -224,7 +224,7 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 		reciever.stop_firing()
 
 /datum/click_handler/sustained/proc/do_fire()
-	reciever.afterattack(target, user, FALSE, last_params, get_global_pixel_click_location(last_params, user ? user.client : new /vector2(0,0)))
+	reciever.afterattack(target, user, FALSE, last_params, get_global_pixel_click_location(last_params, user ? user.client : null))
 
 /datum/click_handler/sustained/MouseDown(object,location,control,params)
 	last_params = params
@@ -232,8 +232,7 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 	if (object)
 		target = object
 		user.face_atom(target)
-		spawn()
-			start_firing()
+		start_firing()
 		return FALSE
 	return TRUE
 

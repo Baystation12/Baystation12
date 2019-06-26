@@ -9,10 +9,13 @@
 	max_shells = 8
 	caliber = "saw"
 	handle_casings = CLEAR_CASINGS
+	fire_delay = 10
+	fire_sound = 'sound/weapons/tablehit1.ogg'
+	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
 	firemodes = list(
 		list(mode_name="remote control", mode_type = /datum/firemode/remote),
-		list(mode_name="saw launcher",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null)
+		list(mode_name="saw launcher",       burst=1, fire_delay=10,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null)
 		)
 
 
@@ -26,7 +29,8 @@
 	//The gravity tether, a visual laser which connects gun and blade
 	var/obj/effect/projectile/sustained/tether = null
 
-	var/vector2/last_clickpoint
+	//World pixel coords of where a user last clicked to fire this gun
+	var/vector2/last_clickpoint = new /vector2(0,0)
 
 
 /obj/item/weapon/gun/projectile/ripper/loaded
@@ -44,9 +48,10 @@
 //Whenever afterattack is called on the ripper...
 /obj/item/weapon/gun/projectile/ripper/afterattack(atom/A, mob/living/user, adjacent, params, var/vector2/global_clickpoint)
 
-
-	if (blade && global_clickpoint)
+	if (global_clickpoint)
 		last_clickpoint = global_clickpoint
+	if (blade)
+
 		//Now first of all, we need to check if the targeted point is within range of user
 		var/vector2/user_loc = user.get_global_pixel_loc()
 		var/vector2/userdiff = last_clickpoint - user_loc
@@ -89,6 +94,7 @@
 	var/datum/firemode/remote/R = get_firemode()
 	if (R && R.CH)
 		R.CH.firing = FALSE
+	next_fire_time = world.time + fire_delay
 	..()
 
 

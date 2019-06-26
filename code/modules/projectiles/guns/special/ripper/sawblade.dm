@@ -10,19 +10,22 @@
 #define SOUND_NORMAL 'sound/weapons/sawblade_normal.ogg'
 
 //These are defined here to prevent duplication
-#define SAWBLADE_HEALTH 350
-#define DIAMONDBLADE_HEALTH 1000
+#define SAWBLADE_HEALTH 400
+#define DIAMONDBLADE_HEALTH 1200
 
 
 //When dropped unbroken the blade takes a bit of damage from the fall
 #define DROP_DAMAGE 25
+
+//Applied when a non-remotecontrolled blade hits a wall or other solid object
+#define IMPACT_DAMAGE 60
 
 /obj/item/projectile/sawblade
 	name = "sawblade"
 	desc = "Oh god, run, RUN!"
 	damage_type = BRUTE
 	//The compile time damage var is only used for blade launch mode. It will be replaced with a calculated value in remote control mode
-	damage = 20
+	damage = 30
 
 	//How much Damage Per Second is dealt to targets the blade hits in remote control mode. This is broken up into many small hits based on tick interval
 	var/dps	=	30
@@ -32,14 +35,23 @@
 	icon_state = "sawblade_projectile"
 	mouse_opacity = 1
 	pass_flags = PASS_FLAG_TABLE
-	density = 0 //It passes through mobs
 	sharp = 1
 	edge = 1
+	step_delay = 2.5 //Lower air velocity than bullets
+	penetrating = 1 //Allows check_penetrate to be called on this projectle when it fails to pass through something.
+	//We will override that to make sure it always passes through mobs
 
 	var/mob/user
 
+	//If true we have dropped a remnant
+	var/dropped = FALSE
+
 	//The gun that launched us. Why the heck don't other projectiles track this?
 	var/obj/item/weapon/gun/projectile/ripper/launcher
+
+	//If true, we are being controlled by gravity tether
+	//If false, it was launched as a normal projectile
+	var/remote_controlled = FALSE
 
 	//The sawblade has three states
 	//STATE_STABLE: The blade is exactly on the user's cursor and is remaining still
@@ -85,9 +97,12 @@
 	//The broken sawblade item to drop when we run out of health
 	var/trash_type = /obj/item/trash/broken_sawblade
 
+	//This bizarrely named variable is actually projectile lifetime
+	kill_count = 1000
+
 //The advanced version. A bit more damage, a LOT more durability
 /obj/item/projectile/sawblade/diamond
-	damage = 30
+	damage = 40
 	dps = 40
 	health = DIAMONDBLADE_HEALTH
 	name = "diamond blade"
@@ -105,6 +120,13 @@
 	projectile_type = /obj/item/projectile/sawblade
 	health = SAWBLADE_HEALTH //The ammo versions have a health value which is carried over from the projectile if an unbroken blade is dropped
 	matter = list(DEFAULT_WALL_MATERIAL = 1000, "plasteel" = 125)
+
+	//An uninserted sawblade is also a modestly good weapon to swing around
+	w_class = ITEM_SIZE_NORMAL
+	force = 12
+	throwforce = 15
+	sharp = TRUE
+	edge = TRUE
 
 /obj/item/ammo_casing/sawblade/examine(var/mob/user)
 	.=..()
@@ -164,6 +186,9 @@
 		launcher.blade = null //Unset ourself first to prevent recursion. It's assumed we've already handled dropping by now
 		launcher.stop_firing() //And tell it to stop. This will remove the tether beam and allow the launcher to fire again
 
+	if (!dropped)
+		drop()
+
 
 /obj/item/projectile/sawblade/Initialize()
 	.=..()
@@ -175,12 +200,16 @@
 
 //Called when a sawblade is launched in remote control mode
 /obj/item/projectile/sawblade/proc/control_launched(var/obj/item/weapon/gun/projectile/ripper/gun)
-	launcher = gun
-	damage = dps * tick_interval
-	animate_movement = 0
+	launcher = gun //Register the ripper
+	if (launcher)
+		pixel_click = launcher.last_clickpoint //Grab an initial clickpoint so that we don't fly towards world zero
+	remote_controlled = TRUE //Set this flag
+	damage = dps * tick_interval //Overwrite the compiletime damage with the calculated value
+	animate_movement = 0 //Disable this to prevent byond's built in sliding, we do our own animate calls
+	density = FALSE //Prevent it from colliding with things, we simulate our own colliusions
 	damage_tile = get_turf(src) //Damage tile starts off as wherever we are
-	set_sound(SOUND_NORMAL)
-	tick()
+	set_sound(SOUND_NORMAL) //Set up the quiet whirring noise of a sawblade in empty air
+	tick() //And do the first tick, this will start daisy chaining tick calls
 
 /obj/item/projectile/sawblade/proc/tick()
 	timer_handle = null //This has been successfully called, that handle is no use now
@@ -332,21 +361,25 @@
 
 //Override this so it doesn't delete itself when touching anything
 /obj/item/projectile/sawblade/Bump(atom/A as mob|obj|turf|area, forced=0)
-	return 0
+	if (remote_controlled)
+		return 0
+	return ..()
 
 //If the blade has health left, this will drop a reuseable sawblade casing on the floor and delete ourself
 //Otherwise, it will drop either a broken sawblade or shrapnel, which has no purpose except to recycle for metal
 /obj/item/projectile/sawblade/proc/drop()
-	if (QDELETED(src))
+	if (dropped)
 		return
 
+
+	dropped = TRUE
 
 	playsound(get_turf(src),'sound/effects/weightdrop.ogg', 70, 1, 1) //Clunk!
 	if (health < DROP_DAMAGE)
 		playsound(src, "shatter", 70, 1)
 
 		var/obj/item/broken = new trash_type(loc)
-		broken.set_global_pixel_loc(get_global_pixel_loc())//Make sure it appears exactly below this disk
+		broken.set_global_pixel_loc(QDELETED(src) ? global_pixel_loc : get_global_pixel_loc())//Make sure it appears exactly below this disk
 
 		//And lets give it a random rotation to make it look like it just fell there
 		var/matrix/M = matrix()
@@ -357,9 +390,8 @@
 		//If health remains, the sawblade drops on the floor
 		health -= DROP_DAMAGE //Take some damage from the dropping
 		var/obj/item/ammo_casing/sawblade/ammo = new ammo_type(loc)
-		ammo.set_global_pixel_loc(get_global_pixel_loc())//Make sure it appears exactly below this disk
+		ammo.set_global_pixel_loc(QDELETED(src) ? global_pixel_loc : get_global_pixel_loc())//Make sure it appears exactly below this disk
 		ammo.health = health //Set its health to ours
-
 		//And lets give it a random rotation to make it look like it just fell there
 		var/matrix/M = matrix()
 		M.Turn(rand(0,360))
@@ -367,8 +399,10 @@
 
 	//Once we've placed either a blade or a broken remnant, delete this projectile
 	//We spawn it off to prevent recursion issues, make sure the launcher does its cleanup first
+
 	spawn()
-		qdel(src)
+		if (!QDELETED(src))
+			qdel(src)
 
 /obj/item/projectile/sawblade/proc/set_sound(var/soundin)
 
@@ -400,8 +434,47 @@
 	current_loop = soundin
 
 
+//Will only be called in saw launcher mode. Just overridden here so we can hook in the audio
+/obj/item/projectile/sawblade/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
+	set_sound(SOUND_NORMAL)
+	.=..()
+
+
+//Only called for blades in saw launcher mode, and only if they fail to penetrate through an object under normal rules.
+//This proc basically asks if we want to override a failed result.
+/obj/item/projectile/sawblade/check_penetrate(var/atom/A)
+	//Blades will always slice through mobs
+	//Possible TODO: Check that the mob is organic
+	if (istype(A, /mob/living))
+		return TRUE
+	else
+		//We don't pass through walls and hard objects
+		return FALSE
+
+
+//Handle some effects on hitting mobs
+/obj/item/projectile/sawblade/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
+	.=..()
+	health -= damage
+	playsound(target_mob, 'sound/weapons/bladeslice.ogg', 60, 1, 1)
+	if (!remote_controlled)
+
+		global_pixel_loc = get_global_pixel_loc() //Cache this so we know where to drop a remnant, for non remote blades
+
+	spawn()
+		updatehealth()
+
+
+/obj/item/projectile/sawblade/on_impact(var/atom/A)
+	if (!remote_controlled)
+		global_pixel_loc = get_global_pixel_loc() //Cache this so we know where to drop a remnant, for non remote blades
+		A.ex_act(3) //Some hefty damage is dealt, though its still less effective than remote control mode
+		health -= IMPACT_DAMAGE //Don't bother updating, it will drop momentarily anyway
+
+		drop()
 
 #undef DROP_DAMAGE
+#undef IMPACT_DAMAGE
 
 #undef EX3_TOTAL
 #undef EX2_TOTAL
