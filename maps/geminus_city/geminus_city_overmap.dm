@@ -12,3 +12,4 @@
 	block_slipspace = 1
 
 	parent_area_type = /area/planets/Geminus
+	overmap_spawn_near_me = list(/obj/effect/overmap/unsc_cassius)
