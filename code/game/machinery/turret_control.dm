@@ -176,8 +176,7 @@
 			check_anomalies = value
 
 		if(!isnull(log_action))
-			log_admin("[key_name(usr)] has [log_action]")
-			message_admins("[key_name_admin(usr)] has [log_action]", 1)
+			log_and_message_admins("has [log_action]", 1)
 
 		updateTurrets()
 		return 1
