@@ -36,8 +36,8 @@
 		sample = W
 		update_icon()
 
-/obj/machinery/microscope/attack_hand(mob/user)
-
+/obj/machinery/microscope/physical_attack_hand(mob/user)
+	. = TRUE
 	if(!sample)
 		to_chat(user, "<span class='warning'>The microscope has no sample to examine.</span>")
 		return

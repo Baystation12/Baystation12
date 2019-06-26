@@ -152,12 +152,9 @@
 	update_icon()
 	SSnano.update_uis(src)
 
-/obj/machinery/suit_storage_unit/attack_ai(var/mob/user)
-	return attack_hand(user)
-
-/obj/machinery/suit_storage_unit/attack_hand(var/mob/user)
-	..()
+/obj/machinery/suit_storage_unit/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/suit_storage_unit/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()

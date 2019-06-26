@@ -70,10 +70,9 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/ntnet_relay/attack_hand(var/mob/living/user)
-	if((. = component_attack_hand(user)))
-		return
+/obj/machinery/ntnet_relay/interface_interact(var/mob/living/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/ntnet_relay/Topic(href, href_list)
 	if(..())

@@ -13,9 +13,6 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 
 	var/list/materials = list()
 
-/obj/machinery/r_n_d/attack_hand(mob/user as mob)
-	return
-
 /obj/machinery/r_n_d/dismantle()
 	for(var/obj/I in src)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))

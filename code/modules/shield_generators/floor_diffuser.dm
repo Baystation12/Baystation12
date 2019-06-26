@@ -37,18 +37,19 @@
 	else
 		icon_state = "fdiffuser_on"
 
-/obj/machinery/shield_diffuser/attack_hand(mob/user)
-	if(component_attack_hand(user))
-		return TRUE
+/obj/machinery/shield_diffuser/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(alarm)
 		to_chat(user, "You press an override button on \the [src], re-enabling it.")
 		alarm = 0
 		update_icon()
-		return
+		return TRUE
 	enabled = !enabled
 	update_use_power(enabled + 1)
 	update_icon()
 	to_chat(user, "You turn \the [src] [enabled ? "on" : "off"].")
+	return TRUE
 
 /obj/machinery/shield_diffuser/proc/meteor_alarm(var/duration)
 	if(!duration)

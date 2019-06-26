@@ -146,16 +146,12 @@ var/bomb_set
 				return
 	..()
 
-/obj/machinery/nuclearbomb/attack_ghost(mob/user as mob)
-	attack_hand(user)
-
-/obj/machinery/nuclearbomb/attack_hand(mob/user as mob)
-	if(extended)
-		if(panel_open)
-			wires.Interact(user)
-		else
-			ui_interact(user)
-	else if(deployable)
+/obj/machinery/nuclearbomb/physical_attack_hand(mob/user)
+	if(extended && panel_open)
+		wires.Interact(user)
+		return TRUE
+	if(!extended && deployable)
+		. = TRUE
 		if(removal_stage < 5)
 			src.anchored = 1
 			visible_message("<span class='warning'>With a steely snap, bolts slide out of [src] and anchor it to the flooring!</span>")
@@ -164,8 +160,12 @@ var/bomb_set
 		extended = 1
 		if(!src.lighthack)
 			flick("lock", src)
-			update_icon()
-	return
+			update_icon()	
+
+/obj/machinery/nuclearbomb/interface_interact(mob/user as mob)
+	if(extended && !panel_open)
+		ui_interact(user)
+		return TRUE
 
 /obj/machinery/nuclearbomb/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]

@@ -33,11 +33,15 @@
 	wires = null
 	return ..()
 
-/obj/machinery/particle_accelerator/control_box/attack_hand(mob/user as mob)
+/obj/machinery/particle_accelerator/control_box/physical_attack_hand(mob/user)
+	if(construction_state == 2) // Wires exposed
+		wires.Interact(user)
+		return TRUE
+
+/obj/machinery/particle_accelerator/control_box/interface_interact(mob/user)
 	if(construction_state >= 3)
 		interact(user)
-	else if(construction_state == 2) // Wires exposed
-		wires.Interact(user)
+		return TRUE
 
 /obj/machinery/particle_accelerator/control_box/update_state()
 	if(construction_state < 3)

@@ -16,18 +16,15 @@
 		var/area/A = get_area(src)
 		location = A.name
 
-/obj/machinery/pager/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/pager/attackby(obj/item/weapon/W, mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/pager/attack_hand(mob/living/user)
-	if(..()) return 1
+/obj/machinery/pager/interface_interact(mob/living/user)
 	if(istype(user, /mob/living/carbon))
 		playsound(src, "button", 60)
 	flick("doorbellpressed",src)
 	activate(user)
+	return TRUE
 
 /obj/machinery/pager/proc/activate(mob/living/user)
 	if(!powered())

@@ -20,12 +20,9 @@
 	queue_icon_update()
 	. = ..()
 
-/obj/machinery/kinetic_harvester/attack_ai(mob/user)
+/obj/machinery/kinetic_harvester/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/kinetic_harvester/attack_hand(mob/user)
-	add_fingerprint(user)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/kinetic_harvester/attackby(var/obj/item/thing, var/mob/user)
 	if(isMultitool(thing))

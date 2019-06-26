@@ -162,13 +162,9 @@
 	else
 		icon_state = "[use_power ? "on" : "off"]"
 
-/obj/machinery/atmospherics/binary/oxyregenerator/attack_ai(mob/user as mob)
+/obj/machinery/atmospherics/binary/oxyregenerator/interface_interact(user)
 	ui_interact(user)
-
-/obj/machinery/atmospherics/binary/oxyregenerator/attack_hand(mob/user as mob)
-	if(..())
-		return TRUE
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/atmospherics/binary/oxyregenerator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]

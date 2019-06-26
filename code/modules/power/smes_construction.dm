@@ -114,27 +114,20 @@
 // Proc: attack_ai()
 // Parameters: None
 // Description: AI requires the RCON wire to be intact to operate the SMES.
-/obj/machinery/power/smes/buildable/attack_ai()
+/obj/machinery/power/smes/buildable/attack_ai(mob/user)
 	if(RCon)
 		..()
 	else // RCON wire cut
-		to_chat(usr, "<span class='warning'>Connection error: Destination Unreachable.</span>")
-
-	// Cyborgs standing next to the SMES can play with the wiring.
-	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && panel_open)
-		wires.Interact(usr)
+		to_chat(user, "<span class='warning'>Connection error: Destination Unreachable.</span>")
 
 /obj/machinery/power/smes/buildable/Initialize()
 	. = ..()
 	wires = new /datum/wires/smes(src)
 
-// Proc: attack_hand()
-// Parameters: None
-// Description: Opens the UI as usual, and if cover is removed opens the wiring panel.
-/obj/machinery/power/smes/buildable/attack_hand()
-	..()
+/obj/machinery/power/smes/buildable/physical_attack_hand(mob/user)
 	if(panel_open)
-		wires.Interact(usr)
+		wires.Interact(user)
+		// Apparently are not supposed to override further actions, so will give UI as well.
 
 // Proc: recalc_coils()
 // Parameters: None

@@ -229,7 +229,7 @@ Class Procs:
 /obj/machinery/Topic(href, href_list, datum/topic_state/state)
 	. = ..()
 	if(. == TOPIC_REFRESH)
-		updateUsrDialog(user) // Update legacy UIs to the extent possible.
+		updateUsrDialog() // Update legacy UIs to the extent possible.
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -270,6 +270,8 @@ Class Procs:
 
 // If you want to have interface interactions handled for you conveniently, use this.
 // Return TRUE for handled.
+// If you perform direct interactions in here, you are responsible for ensuring that full interactivity checks have been made (i.e CanInteract).
+// The checks leading in to here only guarantee that the user should be able to view a UI.
 /obj/machinery/proc/interface_interact(user)
 	return FALSE
 

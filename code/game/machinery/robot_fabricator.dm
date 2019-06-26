@@ -30,10 +30,12 @@
 		else
 			to_chat(user, "The robot part maker is full. Please remove metal from the robot part maker in order to insert more.")
 
-/obj/machinery/robotic_fabricator/attack_hand(user as mob)
+/obj/machinery/robotic_fabricator/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/robotic_fabricator/interact(mob/user)
 	var/dat
-	if (..())
-		return
 
 	if (src.operating)
 		dat = {"

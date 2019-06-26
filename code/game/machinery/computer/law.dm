@@ -16,6 +16,8 @@
 	desc = "Used to upload laws to the AI."
 
 /obj/machinery/computer/upload/ai/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	current = select_active_ai(user, (get_turf(src))?.z)
 	if (!current)
 		to_chat(user, "No active AIs detected.")
@@ -28,6 +30,8 @@
 	desc = "Used to upload laws to Cyborgs."
 
 /obj/machinery/computer/upload/robot/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	current = freeborg((get_turf(src))?.z)
 	if (!current)
 		to_chat(user, "No free cyborgs detected.")

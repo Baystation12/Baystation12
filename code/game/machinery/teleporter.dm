@@ -92,18 +92,15 @@
 
 	return
 
-/obj/machinery/teleport/station/attack_ai(var/mob/user)
-	attack_hand(user)
-
-/obj/machinery/computer/teleporter/attack_hand(var/mob/user)
-	if(..()) return
-
-	/* Ghosts can't use this one because it's a direct selection */
-	if(isobserver(user)) return
+/obj/machinery/computer/teleporter/interface_interact(var/mob/user)
+	/* Run full check because it's a direct selection */
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 
 	var/list/L = list()
 	var/list/areaindex = list()
 
+	. = TRUE
 	for(var/obj/item/device/radio/beacon/R in world)
 		if(!R.functioning)
 			continue
@@ -142,8 +139,8 @@
 	var/desc = input("Please select a location to lock in.", "Locking Computer") in L|null
 	if(!desc)
 		return
-	if(get_dist(src, usr) > 1 && !issilicon(usr))
-		return
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	set_target(L[desc])
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='notice'>Locked In</span>", 2)
@@ -248,15 +245,14 @@
 /obj/machinery/teleport/station/attackby(var/obj/item/weapon/W, var/mob/user)
 	attack_hand(user)
 
-/obj/machinery/teleport/station/attack_ai(var/mob/user)
-	attack_hand(user)
-
-/obj/machinery/teleport/station/attack_hand(var/mob/user)
-	. = ..()
+/obj/machinery/teleport/station/interface_interact(var/mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(engaged)
-		src.disengage()
+		disengage()
 	else
-		src.engage()
+		engage()
+	return TRUE
 
 /obj/machinery/teleport/station/proc/engage()
 	if(stat & (BROKEN|NOPOWER))

@@ -384,22 +384,15 @@
 /obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
-/obj/machinery/readybutton/attack_hand(mob/user as mob)
-
-	if(user.stat || stat & (NOPOWER|BROKEN))
-		to_chat(user, "This device is not powered.")
-		return
-
-	if(!user.IsAdvancedToolUser())
-		return 0
-
-	currentarea = get_area(src.loc)
+/obj/machinery/readybutton/physical_attack_hand(mob/user)
+	currentarea = get_area(src)
 	if(!currentarea)
 		qdel(src)
+		return TRUE
 
 	if(eventstarted)
-		to_chat(usr, "The event has already begun!")
-		return
+		to_chat(user, "The event has already begun!")
+		return TRUE
 
 	ready = !ready
 
@@ -414,6 +407,7 @@
 
 	if(numbuttons == numready)
 		begin_event()
+	return TRUE
 
 /obj/machinery/readybutton/on_update_icon()
 	if(ready)

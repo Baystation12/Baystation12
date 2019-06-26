@@ -44,7 +44,11 @@
 		pipe_color = choice
 		updateUsrDialog()
 
-/obj/machinery/pipedispenser/attack_hand(user as mob)
+/obj/machinery/pipedispenser/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/pipedispenser/interact(mob/user)
 	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
@@ -107,7 +111,7 @@
 
 	qdel(pipe)
 
-/obj/machinery/pipedispenser/disposal/attack_hand(user as mob)
+/obj/machinery/pipedispenser/disposal/interact(mob/user)
 	var/datum/browser/popup = new (user, "Disposal Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_disposal_pipe_datums_by_category))
 	popup.open()

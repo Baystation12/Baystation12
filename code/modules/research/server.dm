@@ -193,14 +193,11 @@
 		temp_server.files.RefreshResearch()
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+/obj/machinery/computer/rdservercontrol/interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/rdservercontrol/attack_hand(mob/user)
-	if(component_attack_hand(user))
-		return TRUE
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/rdservercontrol/interact(mob/user)
 	user.set_machine(src)
 	var/dat = ""
 

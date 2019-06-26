@@ -84,11 +84,11 @@
 		..()
 	return
 
-/obj/machinery/space_heater/attack_hand(mob/user as mob)
-	..()
+/obj/machinery/space_heater/interface_interact(mob/user)
 	interact(user)
+	return TRUE
 
-/obj/machinery/space_heater/interact(mob/user as mob)
+/obj/machinery/space_heater/interact(mob/user)
 
 	if(panel_open)
 

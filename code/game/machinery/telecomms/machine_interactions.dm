@@ -19,8 +19,8 @@
 
 	// Using a multitool lets you access the receiver's interface
 	if(isMultitool(P))
-		attack_hand(user)
-
+		interface_interact(user)
+		return TRUE
 
 	// REPAIRING: Use Nanopaste to repair 10-20 integrity points.
 	if(istype(P, /obj/item/stack/nanopaste))
@@ -53,22 +53,20 @@
 		x.dropInto(loc)
 	. = ..()	
 
-/obj/machinery/telecomms/attack_ai(var/mob/user as mob)
-	attack_hand(user)
-
-/obj/machinery/telecomms/attack_hand(var/mob/user as mob)
-	if((. = component_attack_hand(user)))
-		return
-
+// This should all be a multitool extension, but outside the scope of current rework.
+/obj/machinery/telecomms/CanUseTopic(mob/user)
 	// You need a multitool to use this, or be silicon
 	if(!issilicon(user))
 		// istype returns false if the value is null
 		if(!istype(user.get_active_hand(), /obj/item/device/multitool))
-			return
+			return STATUS_CLOSE
+	return ..()
 
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/telecomms/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
 
+/obj/machinery/telecomms/interact(var/mob/user)
 	var/obj/item/device/multitool/P = get_multitool(user)
 
 	user.set_machine(src)

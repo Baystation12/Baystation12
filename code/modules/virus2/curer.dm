@@ -34,12 +34,11 @@
 	..()
 	return
 
-/obj/machinery/computer/curer/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/computer/curer/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/curer/attack_hand(var/mob/user as mob)
-	if(..())
-		return
+/obj/machinery/computer/curer/interact(var/mob/user)
 	user.machine = src
 	var/dat
 	if(curing)

@@ -210,7 +210,11 @@
 	compressor = null
 	return ..()
 
-/obj/machinery/computer/turbine_computer/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/turbine_computer/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/computer/turbine_computer/interact(var/mob/user)
 	user.machine = src
 	var/dat
 	if(src.compressor)

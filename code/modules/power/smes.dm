@@ -219,15 +219,9 @@
 /obj/machinery/power/smes/draw_power(var/amount)
 	return amount - use_power_oneoff(amount)
 
-/obj/machinery/power/smes/attack_ai(mob/user)
-	add_hiddenprint(user)
+/obj/machinery/power/smes/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/power/smes/attack_hand(mob/user)
-	if(component_attack_hand(user))
-		return TRUE
-	add_fingerprint(user)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(component_attackby(W, user))

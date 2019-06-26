@@ -97,13 +97,9 @@
 		new /obj/item/pipe(loc, src)
 		qdel(src)
 
-/obj/machinery/atmospherics/omni/attack_hand(user as mob)
-	if(..())
-		return
-
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/omni/interface_interact(mob/user)
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/machinery/atmospherics/omni/proc/build_icons()
 	if(!check_icon_cache())

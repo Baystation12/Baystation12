@@ -238,8 +238,9 @@
 		else
 			to_chat(user, "\The [src] has no empty slot for \the [W]")
 
-/obj/machinery/power/smes/batteryrack/attack_hand(var/mob/user)
+/obj/machinery/power/smes/batteryrack/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/smes/batteryrack/inputting()
 	return

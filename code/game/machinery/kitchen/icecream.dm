@@ -70,11 +70,12 @@
 	reagents.add_reagent(/datum/reagent/sugar, 5)
 	reagents.add_reagent(/datum/reagent/drink/ice, 5)
 
-/obj/machinery/icecream_vat/attack_hand(mob/user as mob)
-	user.set_machine(src)
+/obj/machinery/icecream_vat/interface_interact(mob/user)
 	interact(user)
+	return TRUE
 
 /obj/machinery/icecream_vat/interact(mob/user as mob)
+	user.set_machine(src)
 	var/dat
 	dat += "<b>ICECREAM</b><br><div class='statusDisplay'>"
 	dat += "<b>Dispensing: [flavour_name] icecream </b> <br><br>"
@@ -175,8 +176,8 @@
 			reagents.del_reagent(R.type)
 		. = TOPIC_REFRESH
 
-	if(href_list["refresh"] || . == TOPIC_REFRESH)
-		interact(user)
+	if(href_list["refresh"])
+		. = TOPIC_REFRESH
 
 /obj/item/weapon/reagent_containers/food/snacks/icecream
 	name = "ice cream cone"

@@ -173,14 +173,7 @@
 	update_icon()
 	return
 
-/obj/machinery/atmospherics/binary/passive_gate/attack_hand(user as mob)
-	if(..())
-		return
-	src.add_fingerprint(usr)
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	usr.set_machine(src)
+/obj/machinery/atmospherics/binary/passive_gate/interface_interact(mob/user)
 	ui_interact(user)
 	return
 

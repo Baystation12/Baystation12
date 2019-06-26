@@ -46,16 +46,14 @@
 	if(stat &NOPOWER)
 		icon_state = "auth_off"
 
-/obj/machinery/keycard_auth/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		to_chat(user, "This device is not powered.")
-		return
-	if(!user.IsAdvancedToolUser())
-		return 0
+/obj/machinery/keycard_auth/interface_interact(mob/user)
 	if(busy)
 		to_chat(user, "This device is busy.")
-		return
+		return TRUE
+	interact(user)
+	return TRUE
 
+/obj/machinery/keycard_auth/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "<h1>Keycard Authentication Device</h1>"

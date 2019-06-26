@@ -168,15 +168,13 @@
 	..()
 	updateUsrDialog()
 
-/obj/machinery/microwave/attack_ai(mob/user as mob)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
-		attack_hand(user)
+// need physical proximity for our interface.
+/obj/machinery/microwave/DefaultTopicState()
+	return GLOB.physical_state
 
-/obj/machinery/microwave/attack_hand(mob/user as mob)
-	if((. = ..()))
-		return
-	user.set_machine(src)
+/obj/machinery/microwave/interface_interact(mob/user)
 	interact(user)
+	return TRUE
 
 /*******************
 *   Microwave Menu
@@ -186,6 +184,7 @@
 	return ingredients
 
 /obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
+	user.set_machine(src)
 	var/dat = list()
 	if(src.broken > 0)
 		dat += "<TT>Bzzzzttttt</TT>"

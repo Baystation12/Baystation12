@@ -56,9 +56,11 @@
 	else
 		icon_state = "emitter"
 
-/obj/machinery/power/emitter/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
+/obj/machinery/power/emitter/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	activate(user)
+	return TRUE
 
 /obj/machinery/power/emitter/proc/activate(mob/user as mob)
 	if(state == 2)

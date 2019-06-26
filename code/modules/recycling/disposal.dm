@@ -225,36 +225,30 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	update_icon()
 	return
 
-// ai as human but can't flush
-/obj/machinery/disposal/attack_ai(mob/user as mob)
-	interact(user, 1)
+/obj/machinery/disposal/DefaultTopicState()
+	return GLOB.outside_state	
 
 // human interact with machine
-/obj/machinery/disposal/attack_hand(mob/user as mob)
-
-	if(stat & BROKEN)
-		return
-
-	if(user && user.loc == src)
-		to_chat(usr, "<span class='warning'>You cannot reach the controls from inside.</span>")
-		return
-
+/obj/machinery/disposal/physical_attack_hand(mob/user)
 	// Clumsy folks can only flush it.
-	if(user.IsAdvancedToolUser(1))
-		interact(user, 0)
-	else
+	if(!user.IsAdvancedToolUser(1))
 		flush = !flush
 		update_icon()
-	return
+		return TRUE
+
+/obj/machinery/disposal/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
 // user interaction
-/obj/machinery/disposal/interact(mob/user, var/ai=0)
+/obj/machinery/disposal/interact(mob/user)
 
 	src.add_fingerprint(user)
 	if(stat & BROKEN)
 		user.unset_machine()
 		return
 
+	var/ai = isAI(user)
 	var/dat = "<head><title>Waste Disposal Unit</title></head><body><TT><B>Waste Disposal Unit</B><HR>"
 
 	if(!ai)  // AI can't pull flush handle
@@ -509,10 +503,10 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	else
 		. = ..()
 
-/obj/machinery/disposal_switch/attack_hand(mob/user)
-	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
+/obj/machinery/disposal_switch/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	. = TRUE
 	on = !on
 	for(var/obj/structure/disposalpipe/diversion_junction/D in junctions)
 		if(D.id_tag == src.id_tag)

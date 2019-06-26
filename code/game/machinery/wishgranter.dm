@@ -6,12 +6,14 @@
 
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
+	interact_offline = TRUE
 	anchored = 1
 	density = 1
 
 	var/charges = 1
 	var/insisting = 0
 
+// Just override; we're special.
 /obj/machinery/wish_granter/attack_hand(var/mob/user as mob)
 	usr.set_machine(src)
 

@@ -308,19 +308,15 @@
 /obj/machinery/vending/proc/credit_purchase(var/target as text)
 	vendor_account.deposit(currently_vending.price, "Purchase of [currently_vending.item_name]", target)
 
-/obj/machinery/vending/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/vending/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
-		return
-
+/obj/machinery/vending/physical_attack_hand(mob/user)
 	if(src.seconds_electrified != 0)
 		if(src.shock(user, 100))
-			return
+			return TRUE
 
+/obj/machinery/vending/interface_interact(mob/user)
 	wires.Interact(user)
 	ui_interact(user)
+	return TRUE
 
 /**
  *  Display the NanoUI window for the vending machine.

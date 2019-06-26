@@ -84,6 +84,8 @@
 		return TRUE
 
 /obj/machinery/floodlight/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(on)
 		turn_off(1)
 	else

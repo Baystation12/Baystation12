@@ -73,11 +73,12 @@
 /obj/machinery/sleeper/on_update_icon()
 	icon_state = "sleeper_[occupant ? "1" : "0"]"
 
-/obj/machinery/sleeper/attack_hand(var/mob/user)
-	if(..())
-		return 1
+/obj/machinery/sleeper/DefaultTopicState()
+	return GLOB.outside_state
 
+/obj/machinery/sleeper/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.outside_state)
 	var/data[0]
@@ -149,9 +150,6 @@
 			stasis = text2num(href_list["stasis"])
 			change_power_consumption(initial(active_power_usage) + 5 KILOWATTS * (stasis-1), POWER_USE_ACTIVE)
 			return TOPIC_REFRESH
-
-/obj/machinery/sleeper/attack_ai(var/mob/user)
-	return attack_hand(user)
 
 /obj/machinery/sleeper/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()

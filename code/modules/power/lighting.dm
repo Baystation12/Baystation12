@@ -405,20 +405,17 @@
 
 // attack with hand - remove tube/bulb
 // if hands aren't protected and the light is on, burn the player
-/obj/machinery/light/attack_hand(mob/user)
-
-	add_fingerprint(user)
-
+/obj/machinery/light/physical_attack_hand(mob/user)
 	if(!lightbulb)
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
-		return
+		return TRUE
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass")
 			broken()
-			return
+			return TRUE
 
 	// make it burn hands if not wearing fire-insulated gloves
 	if(on)
@@ -442,12 +439,13 @@
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 		else
 			to_chat(user, "You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
-			return				// if burned, don't remove the light
+			return TRUE				// if burned, don't remove the light
 	else
 		to_chat(user, "You remove the [get_fitting_name()].")
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
+	return TRUE
 
 
 /obj/machinery/light/attack_tk(mob/user)

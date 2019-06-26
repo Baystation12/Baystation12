@@ -29,10 +29,10 @@
 
 	old_turf = new_turf
 
-/obj/machinery/floorlayer/attack_hand(mob/user as mob)
+/obj/machinery/floorlayer/physical_attack_hand(mob/user)
 	on=!on
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
-	return
+	return TRUE
 
 /obj/machinery/floorlayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 

@@ -134,9 +134,6 @@
 		update_icon()
 	add_avail(effective_gen)
 
-/obj/machinery/power/generator/attack_ai(mob/user)
-	attack_hand(user)
-
 /obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -153,12 +150,16 @@
 	else
 		..()
 
-/obj/machinery/power/generator/attack_hand(mob/user)
-	add_fingerprint(user)
-	if(stat & (BROKEN|NOPOWER) || !anchored) return
+/obj/machinery/power/generator/CanUseTopic(mob/user)
+	if(!anchored)
+		return STATUS_CLOSE
+	return ..()
+
+/obj/machinery/power/generator/interface_interact(mob/user)
 	if(!circ1 || !circ2) //Just incase the middle part of the TEG was not wrenched last.
 		reconnect()
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui

@@ -115,12 +115,8 @@
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
-/obj/machinery/suspension_gen/attack_hand(var/mob/user)
-	if(component_attack_hand(user))
-		return TRUE
-	if(!panel_open)
-		interact(user)
-	else if(cell)
+/obj/machinery/suspension_gen/physical_attack_hand(var/mob/user)
+	if(panel_open && cell)
 		cell.forceMove(loc)
 		cell.add_fingerprint(user)
 		cell.update_icon()
@@ -128,6 +124,11 @@
 		icon_state = "suspension0"
 		cell = null
 		to_chat(user, "<span class='info'>You remove the power cell</span>")
+		return TRUE
+
+/obj/machinery/suspension_gen/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
 
 /obj/machinery/suspension_gen/components_are_accessible(path)
 	return !locked && !suspension_field && ..()

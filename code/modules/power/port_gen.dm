@@ -64,12 +64,11 @@
 	else
 		icon_state = "[initial(icon_state)]on"
 
-/obj/machinery/power/port_gen/attack_hand(mob/user as mob)
-	if(..())
-		return
+/obj/machinery/power/port_gen/CanUseTopic(mob/user)
 	if(!anchored)
-		to_chat(usr, "<span class='warning'>The generator needs to be secured first.</span>")
-		return
+		to_chat(user, "<span class='warning'>The generator needs to be secured first.</span>")
+		return STATUS_CLOSE
+	return ..()
 
 /obj/machinery/power/port_gen/examine(mob/user)
 	if(!..(user,1 ))
@@ -309,14 +308,9 @@
 		DropFuel()
 	. = ..()
 
-/obj/machinery/power/port_gen/pacman/attack_hand(mob/user as mob)
-	..()
-	if (!anchored)
-		return
+/obj/machinery/power/port_gen/pacman/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/power/port_gen/pacman/attack_ai(mob/user as mob)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/port_gen/pacman/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(IsBroken())
