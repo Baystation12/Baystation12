@@ -102,7 +102,7 @@
 	return 0
 
 /obj/structure/inflatable/CtrlClick()
-	hand_deflate()
+	return hand_deflate()
 
 /obj/structure/inflatable/proc/deflate(var/violent=0)
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
@@ -126,10 +126,11 @@
 	set src in oview(1)
 
 	if(isobserver(usr) || usr.restrained() || !usr.Adjacent(src))
-		return
+		return FALSE
 
 	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
+	return TRUE
 
 /obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	health -= damage

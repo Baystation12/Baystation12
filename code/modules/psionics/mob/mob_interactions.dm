@@ -20,7 +20,7 @@
 	if(. && psi)
 		INVOKE_PSI_POWERS(src, psi.get_melee_powers(SSpsi.faculties_by_intent[a_intent]), A, FALSE)
 
-/mob/living/RangedAttack(var/atom/A, var/proximity)
+/mob/living/RangedAttack(var/atom/A, var/params)
 	if(psi)
 		INVOKE_PSI_POWERS(src, psi.get_ranged_powers(SSpsi.faculties_by_intent[a_intent]), A, TRUE)
 	. = ..()

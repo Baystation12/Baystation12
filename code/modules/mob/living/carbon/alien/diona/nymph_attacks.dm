@@ -72,7 +72,7 @@
 
 	. = ..()
 
-/mob/living/carbon/alien/diona/RangedAttack(atom/A)
+/mob/living/carbon/alien/diona/RangedAttack(atom/A, var/params)
 	if((a_intent == I_HURT || a_intent == I_GRAB) && holding_item)
 		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] spits \a [holding_item] at \the [A]!</span>")

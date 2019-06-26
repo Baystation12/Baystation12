@@ -535,8 +535,8 @@
 /obj/item/weapon/gun/CtrlClick(var/mob/user)
 	if(loc == user)
 		toggle_safety(user)
-	else
-		..()
+		return TRUE
+	. = ..()
 
 /obj/item/weapon/gun/proc/safety()
 	return has_safety && safety_state

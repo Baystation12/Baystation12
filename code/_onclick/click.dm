@@ -251,14 +251,16 @@
 	For most objects, pull
 */
 /mob/proc/CtrlClickOn(var/atom/A)
-	A.CtrlClick(src)
-	return
+	return A.CtrlClick(src)
+	
 /atom/proc/CtrlClick(var/mob/user)
-	return
+	return FALSE
 
 /atom/movable/CtrlClick(var/mob/user)
 	if(Adjacent(user))
 		user.start_pulling(src)
+		return TRUE
+	. = ..()
 
 /*
 	Alt click
