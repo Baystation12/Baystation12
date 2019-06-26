@@ -679,8 +679,7 @@
 
 		if(S.reagents.has_reagent(/datum/reagent/toxin/phoron, 5))
 
-			log_admin("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
-			message_admins("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
+			log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
 
 			rigged = 1
 
@@ -714,8 +713,7 @@
 /obj/item/weapon/light/proc/switch_on()
 	switchcount++
 	if(rigged)
-		log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
-		message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+		log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 		var/turf/T = get_turf(src.loc)
 		spawn(0)
 			sleep(2)

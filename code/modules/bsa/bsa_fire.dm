@@ -83,7 +83,7 @@
 		return TRUE
 
 	var/obj/effect/overmap/finaltarget = pick(candidates)
-	message_admins("A type [chargetype] artillery strike was launched at [finaltarget]; overmap coordinates [finaltarget.x],[finaltarget.y],[finaltarget.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[finaltarget.x];Y=[finaltarget.y];Z=[finaltarget.z]'>JMP</a>).")
+	log_and_message_admins("A type [chargetype] artillery strike was launched at [finaltarget]; overmap coordinates [finaltarget.x],[finaltarget.y],[finaltarget.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[finaltarget.x];Y=[finaltarget.y];Z=[finaltarget.z]'>JMP</a>).")
 
 	//Deletion of the overmap effect and the actual event trigger. Bye bye pesky meteors.
 	if(istype(finaltarget, /obj/effect/overmap_event))
@@ -106,7 +106,7 @@
 	var/area/finalarea = pick(targetareas)
 	var/turf/targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
 
-	message_admins("Aforementioned artillery strike hit sector at [get_area(targetturf)]: [targetturf.x],[targetturf.y],[targetturf.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[targetturf.x];Y=[targetturf.y];Z=[targetturf.z]'>JMP</a>).")
+	log_and_message_admins("Aforementioned artillery strike hit sector at [get_area(targetturf)]: [targetturf.x],[targetturf.y],[targetturf.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[targetturf.x];Y=[targetturf.y];Z=[targetturf.z]'>JMP</a>).")
 	if(chargetype == BSA_DROPPOD)
 		if(targetturf.density)
 			targetturf.ex_act(1)

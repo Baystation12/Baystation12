@@ -470,8 +470,7 @@
 	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
 	if(emagged)
 		new /obj/item/weapon/orion_ship(src.loc)
-		message_admins("[key_name_admin(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
-		log_game("[key_name(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
+		log_and_message_admins("made it to Orion on an emagged machine and got an explosive toy ship.")
 	else
 		prizevend()
 	event = null
@@ -495,8 +494,7 @@
 /obj/item/weapon/orion_ship/attack_self(mob/user)
 	if(active)
 		return
-	message_admins("[key_name_admin(usr)] primed an explosive Orion ship for detonation.")
-	log_game("[key_name(usr)] primed an explosive Orion ship for detonation.")
+	log_and_message_admins("primed an explosive Orion ship for detonation.", user)
 	to_chat(user, "<span class='warning'>You flip the switch on the underside of [src].</span>")
 	active = 1
 	src.visible_message("<span class='notice'>[src] softly beeps and whirs to life!</span>")
