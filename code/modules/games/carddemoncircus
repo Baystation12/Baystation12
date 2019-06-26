@@ -22,7 +22,7 @@
 				rarity = "Silver"
 
 		var/nam = pick("Funny","Short","Smelly","Ugly","Two-headed","Fat","Fire-tossing ","Water-slipping","Killer","Holy", "Comedic", "Ordinary","Demon","Unfunny", "Stupid", "Mad", "Insane", "Annoying", "Loud", "Unbearable")
-		var/nam2 = pick("Lion", "Clown", "Mime", "Jester", "Juggler", "Bear", "Monkey", "Joker", "Comedian", "Magician", "Freak", "Dancer", "Tightrope Walker", "Rock")
+		var/nam2 = pick("Lion", "Clown", "Mime", "Jester", "Juggler", "Bear", "Monkey", "Joker", "Comedian", "Magician", "Freak", "Dancer", "Tightrope Walker", "Flea")
 
 		P = new()
 		P.name = "[nam] [nam2] [stats["HP"]]/[stats["DP"]]/[stats["SP"]]"
