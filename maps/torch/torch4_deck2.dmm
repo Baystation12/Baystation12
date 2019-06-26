@@ -274,6 +274,21 @@
 "ax" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/aftstarboard)
+"ay" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup{
+	name = "\improper Fusion Fuel Canister: \[Hydrogen]";
+	start_pressure = 14999
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/prototype/engine)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/forestarboard)
@@ -363,6 +378,9 @@
 /obj/item/weapon/stock_parts/circuitboard/aiupload,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
+"aK" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/vacant/armory)
 "aL" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1379;
@@ -715,6 +733,15 @@
 "bs" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
+"bt" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/highsecurity{
+	icon_state = "closed";
+	locked = 1;
+	name = "Auxiliary Armory"
+	},
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "bu" = (
 /obj/machinery/disposal/deliveryChute,
 /obj/structure/disposalpipe/trunk{
@@ -836,6 +863,9 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
+"bH" = (
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "bI" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/seconddeck/forestarboard)
@@ -1047,6 +1077,10 @@
 /obj/item/weapon/stock_parts/circuitboard/stationalert,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
+"cb" = (
+/obj/item/frame/fire_alarm,
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "cc" = (
 /obj/machinery/shieldgen,
 /turf/simulated/floor/tiled/techfloor,
@@ -1149,6 +1183,14 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/central)
+"cl" = (
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "cm" = (
 /obj/item/weapon/stool,
 /obj/machinery/alarm{
@@ -1226,6 +1268,17 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
+"cu" = (
+/obj/machinery/door/window/brigdoor/northleft{
+	name = "Weapons locker"
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced,
+/obj/random/ammo,
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "cv" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Disposal Belt Access"
@@ -1288,6 +1341,16 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"cF" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/machinery/door/window/brigdoor/northleft{
+	name = "Weapons locker"
+	},
+/obj/structure/window/reinforced,
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "cG" = (
 /obj/structure/table/marble,
 /turf/simulated/floor/plating,
@@ -1324,6 +1387,17 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
+"cK" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/structure/window/reinforced,
+/obj/random/maintenance/solgov,
+/obj/machinery/door/window/brigdoor/northleft{
+	name = "Weapons locker"
+	},
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "cL" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -1338,6 +1412,20 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
+"cM" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/machinery/door/window/brigdoor/northleft{
+	name = "Weapons locker"
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/random/ammo,
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "cN" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -9526,9 +9614,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/shuttle/escape_pod10/station)
-"vy" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/vacant/armory)
 "vz" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -10087,34 +10172,6 @@
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
-"xj" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/highsecurity{
-	icon_state = "closed";
-	locked = 1;
-	name = "Auxiliary Armory"
-	},
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xk" = (
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xl" = (
-/obj/item/ammo_magazine/pistol/small/empty,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xm" = (
-/obj/item/frame/fire_alarm,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xn" = (
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
-/turf/simulated/floor/plating,
-/area/vacant/armory)
 "xp" = (
 /obj/random/junk,
 /obj/structure/cable{
@@ -10319,52 +10376,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
-"yb" = (
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/random/ammo,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"yc" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/obj/structure/window/reinforced,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"yd" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/random/maintenance/solgov,
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"ye" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced,
-/obj/random/ammo,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
 "yf" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/incinerator)
@@ -13756,7 +13767,10 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
-/obj/machinery/portable_atmospherics/canister/phoron/engine_setup,
+/obj/machinery/portable_atmospherics/canister/helium{
+	name = "\improper Fusion Fuel Canister \[He]";
+	start_pressure = 14999
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/vacant/prototype/engine)
 "Gk" = (
@@ -16695,6 +16709,9 @@
 	c_tag = "Engine - Prototype Chamber Two";
 	dir = 1
 	},
+/obj/machinery/portable_atmospherics/canister/phoron/engine_setup{
+	name = "\improper Fusion Fuel Canister \[Phoron]"
+	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
 "Qj" = (
@@ -17266,6 +17283,10 @@
 	dir = 1;
 	pixel_y = -28
 	},
+/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup{
+	name = "\improper Fusion Fuel Canister: \[Hydrogen]";
+	start_pressure = 14999
+	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
 "Sj" = (
@@ -17510,17 +17531,6 @@
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
-/area/vacant/prototype/engine)
-"Ti" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor,
 /area/vacant/prototype/engine)
 "Tj" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -18062,7 +18072,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup,
+/obj/machinery/portable_atmospherics/canister/helium{
+	name = "\improper Fusion Fuel Canister \[He]";
+	start_pressure = 14999
+	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
 "Vj" = (
@@ -19280,6 +19293,10 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
+"Zp" = (
+/obj/item/ammo_magazine/pistol/small/empty,
+/turf/simulated/floor/plating,
+/area/vacant/armory)
 "Zq" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -29979,7 +29996,7 @@ Ng
 Vi
 Gj
 Nj
-Ti
+ay
 mb
 ub
 Wp
@@ -31802,10 +31819,10 @@ kP
 ZV
 ZV
 dX
-vy
-xj
-vy
-vy
+aK
+bt
+aK
+aK
 pi
 pi
 Wp
@@ -32004,10 +32021,10 @@ wE
 wE
 wE
 dX
-vy
-xk
-yb
-vy
+aK
+bH
+cu
+aK
 zA
 pi
 Be
@@ -32206,10 +32223,10 @@ iW
 jB
 wE
 dX
-vy
-xl
-yc
-vy
+aK
+Zp
+cF
+aK
 nc
 pi
 Bf
@@ -32408,10 +32425,10 @@ KN
 jC
 wE
 dX
-vy
-xm
-yd
-vy
+aK
+cb
+cK
+aK
 zB
 pi
 pi
@@ -32610,10 +32627,10 @@ Fu
 jD
 dd
 dX
-vy
-xn
-ye
-vy
+aK
+cl
+cM
+aK
 zC
 Bg
 pi
@@ -32812,8 +32829,8 @@ ju
 jE
 wE
 dX
-vy
-vy
+aK
+aK
 yf
 yf
 yg
