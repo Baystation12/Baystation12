@@ -11,9 +11,9 @@
 /decl/closet_appearance/secure_closet/torch/science/cso
 	extra_decals = list(
 		"stripe_vertical_left_full" =  COLOR_PURPLE_GRAY,
-		"stripe_vertical_mid_full" =   COLOR_GOLD,
+		"stripe_vertical_mid_full" =   COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_PURPLE_GRAY,
-		"research" = COLOR_GOLD
+		"research" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/RD_torch

@@ -25,9 +25,9 @@
 /decl/closet_appearance/secure_closet/torch/engineering/ce
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_WARM_YELLOW,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_WARM_YELLOW,
-		"exped" = COLOR_GOLD
+		"exped" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/engineering_chief_torch

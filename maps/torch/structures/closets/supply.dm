@@ -16,10 +16,10 @@
 
 /decl/closet_appearance/secure_closet/torch/cargo/deck_officer
 	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_left_full" = COLOR_BEASTY_BROWN,
 		"stripe_vertical_right_full" = COLOR_BEASTY_BROWN,
-		"cargo_upper" = COLOR_GOLD
+		"cargo_upper" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/decktech

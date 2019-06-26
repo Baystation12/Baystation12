@@ -172,7 +172,6 @@ var/list/worths = list(
 					/obj/item/weapon/magic_rock = 1500,
 					/obj/item/weapon/virusdish = 65,
 					/obj/item/weapon/diseasedisk = 100,
-					/obj/item/weapon/soap/deluxe = 15,
 					/obj/item/weapon/cane/concealed = 150,
 					/obj/item/weapon/cane = 40,
 					/obj/item/weapon/caution = 15,

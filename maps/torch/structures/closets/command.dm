@@ -3,27 +3,27 @@
  */
 /decl/closet_appearance/secure_closet/torch/command
 	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_GOLD
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/torch/command/bo
 	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_GOLD,
-		"stripe_vertical_right_full" = COLOR_GOLD
+		"stripe_vertical_left_full" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_right_full" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/torch/command/xo
 	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_GOLD,
-		"stripe_vertical_right_full" = COLOR_GOLD,
-		"command" = COLOR_GOLD
+		"stripe_vertical_left_full" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_right_full" = COLOR_CLOSET_GOLD,
+		"command" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/torch/command/co
 	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_GOLD,
+		"stripe_vertical_left_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_mid_full" = COLOR_OFF_WHITE,
-		"stripe_vertical_right_full" = COLOR_GOLD,
+		"stripe_vertical_right_full" = COLOR_CLOSET_GOLD,
 		"command" = COLOR_OFF_WHITE
 	)
 

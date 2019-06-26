@@ -6105,7 +6105,7 @@
 /turf/unsimulated/wall/fakeglass,
 /area/wizard_station)
 "aoj" = (
-/obj/item/weapon/soap/deluxe,
+/obj/item/weapon/soap,
 /turf/unsimulated/floor{
 	dir = 2;
 	icon = 'icons/misc/beach.dmi';
@@ -11373,7 +11373,7 @@
 /obj/structure/hygiene/shower{
 	pixel_y = 32
 	},
-/obj/item/weapon/soap/syndie,
+/obj/item/weapon/soap,
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
 	dir = 2
@@ -17065,7 +17065,7 @@
 /obj/structure/hygiene/urinal{
 	pixel_y = 32
 	},
-/obj/item/weapon/soap/syndie,
+/obj/item/weapon/soap,
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
 	dir = 2

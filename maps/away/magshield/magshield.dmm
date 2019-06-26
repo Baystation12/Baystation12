@@ -3815,7 +3815,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/soap/deluxe,
+/obj/item/weapon/soap,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jZ" = (
