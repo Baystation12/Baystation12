@@ -10,6 +10,7 @@
 	key = "|"
 	flags = RESTRICTED
 	shorthand = "KV"
+	machine_understands = FALSE
 
 /datum/language/mantid/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	. = ..(speaker, message, speaker.real_name)
