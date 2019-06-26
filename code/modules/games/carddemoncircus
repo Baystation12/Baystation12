@@ -16,8 +16,8 @@
 					rarity = "Plasteel"
 				else
 					rarity = "Platinum"
-        else if(prob(25))
-          rarity = "Bananium"
+        		else if(prob(25))
+          			rarity = "Bananium"
 			else
 				rarity = "Silver"
 
