@@ -73,10 +73,9 @@
 /datum/robot_component/cell/ascent
 	max_damage = 100
 
-//TODO replace this with a proper namegen when supporting Ascent code is merged.
 /mob/living/silicon/robot/flying/ascent/Initialize()
 	. = ..()
-	name = "alien drone ([++ascent_drone_count])"
+	name = "[uppertext(pick(GLOB.gyne_geoforms))]-[++ascent_drone_count]"
 
 // Sorry, you're going to have to actually deal with these guys.
 /mob/living/silicon/robot/flying/ascent/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
