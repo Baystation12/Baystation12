@@ -1564,6 +1564,7 @@
 #include "code\modules\codex\categories\category_reagents.dm"
 #include "code\modules\codex\categories\category_species.dm"
 #include "code\modules\codex\entries\_codex_entry.dm"
+#include "code\modules\codex\entries\ascent.dm"
 #include "code\modules\codex\entries\atmospherics.dm"
 #include "code\modules\codex\entries\clothing.dm"
 #include "code\modules\codex\entries\engineering.dm"
