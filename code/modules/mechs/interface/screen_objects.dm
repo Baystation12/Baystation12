@@ -16,7 +16,8 @@
 		else
 			to_chat(usr, SPAN_WARNING("There is no radio installed."))
 
-/obj/screen/movable/exosuit/New(var/mob/living/exosuit/newowner)
+/obj/screen/movable/exosuit/Initialize(var/mob/living/exosuit/newowner)
+	. = ..()
 	if(!istype(newowner))
 		return qdel(src)
 	owner = newowner

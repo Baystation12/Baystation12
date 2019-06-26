@@ -36,12 +36,16 @@
 
 /obj/item/weapon/gun/energy/get_hardpoint_maptext()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner.body && MS.owner.body && MS.owner.get_cell())
-		return "[MS.owner.get_cell().charge]/[MS.owner.get_cell().maxcharge]"
+	if(istype(MS) && MS.owner)
+		var/obj/item/weapon/cell/C = MS.owner.get_cell()
+		if(istype(C))
+			return "[C.charge]/[C.maxcharge]"
 	return null
 
 /obj/item/weapon/gun/energy/get_hardpoint_status_value()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner.body && MS.owner.body && MS.owner.get_cell())
-		return MS.owner.get_cell().charge/MS.owner.get_cell().maxcharge
+	if(istype(MS) && MS.owner)
+		var/obj/item/weapon/cell/C = MS.owner.get_cell()
+		if(istype(C))
+			return C.charge/C.maxcharge
 	return null

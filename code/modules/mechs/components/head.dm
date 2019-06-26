@@ -106,9 +106,12 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] can only hold [max_installed_software] software modules."))
 		return
+	if(!user.unEquip(software))
+		return
+
 	if(user)
 		to_chat(user, SPAN_NOTICE("You load \the [software] into \the [src]'s memory."))
-		user.unEquip(software)
+		
 	software.forceMove(src)
 	update_software()
 

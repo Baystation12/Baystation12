@@ -10,10 +10,15 @@
 	passive_power_use = 1.5 KILOWATTS
 	var/obj/machinery/sleeper/mounted/sleeper = null
 
-/obj/item/mech_equipment/sleeper/New()
+/obj/item/mech_equipment/sleeper/Initialize()
 	. = ..()
 	sleeper = new /obj/machinery/sleeper/mounted(src)
 	sleeper.forceMove(src)
+
+/obj/item/mech_equipment/sleeper/Destroy()
+	sleeper.go_out() //If for any reason you weren't outside already.
+	QDEL_NULL(sleeper)
+	. = ..()
 
 /obj/item/mech_equipment/sleeper/uninstalled()
 	. = ..()
@@ -28,7 +33,7 @@
 /obj/item/mech_equipment/sleeper/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 	if(.)
-		if(ishuman(target))
+		if(ishuman(target) && !sleeper.occupant)
 			owner.visible_message(SPAN_NOTICE("\The [src] is lowered down to load [target]"))
 			sleeper.go_in(target, user)
 		else to_chat(user, SPAN_WARNING("You cannot load that in!"))
@@ -48,6 +53,7 @@
 	active_power_usage = 0 //It'd be hard to handle, so for now all power is consumed by mech sleeper object
 	synth_modifier = 0
 	stasis_power = 0
+	interact_offline = TRUE
 
 /obj/machinery/sleeper/mounted/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
 	. = ..()
@@ -55,7 +61,7 @@
 /obj/machinery/sleeper/mounted/nano_host()
 	var/obj/item/mech_equipment/sleeper/S = loc
 	if(istype(S))
-		return S.owner ? S.owner : null
+		return S.owner
 	return null
 
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
@@ -72,19 +78,3 @@
 
 		return
 
-
-//Small variations, to ensure that occupant is left in a valid positon
-/obj/machinery/sleeper/mounted/go_out()
-	if(!occupant)
-		return
-	if(occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
-	occupant.dropInto(get_turf(loc))
-	set_occupant(null)
-
-	for(var/obj/O in (contents - component_parts)) // In case an object was dropped inside or something. Excludes the beaker and component parts.
-		if(O == beaker)
-			continue
-		O.dropInto(get_turf(loc))
-	toggle_filter()

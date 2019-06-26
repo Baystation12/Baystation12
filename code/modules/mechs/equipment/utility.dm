@@ -100,13 +100,16 @@
 		icon_state = "[initial(icon_state)]"
 		set_light(0, 0)
 
+#define CATAPULT_SINGLE 1
+#define CATAPULT_AREA   2
+
 /obj/item/mech_equipment/catapult
 	name = "\improper gravitational catapult"
 	desc = "An exosuit-mounted gravitational catapult."
 	icon_state = "mech_clamp"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	var/mode = 1
+	var/mode = CATAPULT_SINGLE
 	var/atom/movable/locked
 	equipment_delay = 30 //Stunlocks are not ideal
 	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
@@ -124,8 +127,8 @@
 /obj/item/mech_equipment/catapult/attack_self(var/mob/user)
 	. = ..()
 	if(.)
-		mode = mode == 1 ? 2 : 1
-		to_chat(user, SPAN_NOTICE("You set \the [src] to [mode == 1 ? "single" : "multi"]-target mode."))
+		mode = mode == CATAPULT_SINGLE ? CATAPULT_AREA : CATAPULT_SINGLE
+		to_chat(user, SPAN_NOTICE("You set \the [src] to [mode == CATAPULT_SINGLE ? "single" : "multi"]-target mode."))
 		update_icon()
 
 
@@ -134,10 +137,10 @@
 	if(.)
 
 		switch(mode)
-			if(1)
+			if(CATAPULT_SINGLE)
 				if(!locked)
 					var/atom/movable/AM = target
-					if(!istype(AM) || AM.anchored)
+					if(!istype(AM) || AM.anchored || !AM.simulated)
 						to_chat(user, SPAN_NOTICE("Unable to lock on [target]."))
 						return
 					locked = AM
@@ -148,12 +151,13 @@
 						locked.throw_at(target, 14, 1.5, owner)
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null
+
 						owner.get_cell().use(active_power_use * CELLRATE)
 
 					else
 						locked = null
 						to_chat(user, SPAN_NOTICE("Lock on [locked] disengaged."))
-			if(2)
+			if(CATAPULT_AREA)
 
 				var/list/atoms = list()
 				if(isturf(target))
@@ -161,7 +165,7 @@
 				else
 					atoms = orange(target,3)
 				for(var/atom/movable/A in atoms)
-					if(A.anchored) continue
+					if(A.anchored || !A.simulated) continue
 					spawn(0)
 						var/iter = 5-get_dist(A,target)
 						for(var/i=0 to iter)
@@ -171,8 +175,10 @@
 				log_and_message_admins("used [src]'s area throw on [target].", user, owner.loc)
 				owner.get_cell().use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
 
-		return
 
+
+#undef CATAPULT_SINGLE
+#undef CATAPULT_AREA
 
 
 /obj/item/weapon/material/drill_head
@@ -239,7 +245,7 @@
 		//Better materials = faster drill! 
 		var/delay = max(5, 20 - drill_head.material.brute_armor)
 		owner.setClickCooldown(delay) //Don't spamclick!
-		if(do_after(owner, delay, target))
+		if(do_after(owner, delay, target) && drill_head)
 			if(src == owner.selected_system)
 				if(drill_head.durability <= 0)
 					drill_head.shatter()
@@ -306,73 +312,3 @@
 	has_safety = FALSE
 	
 
-/obj/item/mech_equipment/jumpjets
-	name = "\improper exosuit jumpjets"
-	desc = "A testament to the fact that sometimes more is actually more. These oversized ion boosters can briefly lift even an entire exosuit!"
-	icon_state = "mech_sleeper"
-	restricted_hardpoints = list(HARDPOINT_BACK)
-	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	equipment_delay = 40 //It's quite the setup
-	active_power_use = 100 KILOWATTS //It's expensive, yo
-	var/start_time = 0
-	var/duration = 30
-	var/burst_interval = 2
-	var/next_burst = 0
-	var/using = FALSE
-	var/prev_y = 0
-	var/prev_alpha = 0
-	origin_tech = list(TECH_ENGINEERING = 6, TECH_MAGNET = 4, TECH_MATERIAL = 5)
-
-
-/obj/item/mech_equipment/jumpjets/proc/setup()
-	prev_y = owner.pixel_y
-	prev_alpha = owner.alpha
-
-
-
-/obj/item/mech_equipment/jumpjets/proc/reset()
-	animate(owner)
-	owner.pixel_y = prev_y
-	owner.alpha = prev_alpha
-
-
-/obj/item/mech_equipment/jumpjets/Process()
-	if (world.time >= next_burst)
-
-		var/obj/effect/effect/E = new /obj/effect/temporary(owner.loc, 10, 'icons/effects/effects.dmi',"jet")
-		//Since the user will have their pixel offset animated by the transition, we must compensate the visuals
-		//We will calculate a pixel offset for the thrust particle based on the progress
-		var/max = 64
-
-		var/progress = ((world.time - start_time) / duration)
-		E.pixel_y = (max * progress) - 12 //-12 makes it offset down from the player a bit
-		E.pixel_x = rand(-4,4) //Slight side to side randomness so it looks chaotic
-		E.alpha = (255 - (255 * progress))*2 //Fade out as the player does, but less so
-		E.layer = owner.layer-0.01 //Match the player's layer so it doesn't render over foreground turfs when moving downwards
-
-		next_burst = world.time + burst_interval
-
-
-
-/obj/item/mech_equipment/jumpjets/attack_self(var/mob/user)
-	if(using)
-		return
-	. = ..()
-	if(.)
-		START_PROCESSING(SSobj, src)
-		start_time = world.time
-		owner.setClickCooldown(duration)
-		setup()
-		animate(owner, alpha = 0, pixel_y = 42, time = duration*0.9, easing = SINE_EASING)
-		owner.visible_message(SPAN_DANGER("Up up and away! [owner] takes off!"))
-		if(do_after(owner, duration, null, 0))
-			owner.get_cell().use(active_power_use * CELLRATE)
-	
-		STOP_PROCESSING(SSobj,src)
-		reset()
-		next_burst = 0
-			
-
-
-/obj/item/mech_equipment/jumpjets/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
-	. = ..()

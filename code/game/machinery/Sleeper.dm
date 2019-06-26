@@ -47,7 +47,10 @@
 
 
 /obj/machinery/sleeper/Process()
-	if(stat & (NOPOWER|BROKEN))
+	if((stat & NOPOWER) && !interact_offline)
+		return
+
+	if(stat & BROKEN)
 		return
 
 	if(filtering > 0)
@@ -87,7 +90,7 @@
 /obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.outside_state)
 	var/data[0]
 
-	data["power"] = stat & (NOPOWER|BROKEN) ? 0 : 1
+	data["power"] = stat & (NOPOWER|BROKEN) ?  (stat & BROKEN ? 0 : interact_offline) : 1
 
 	var/list/reagents = list()
 	for(var/T in available_chemicals)
@@ -220,7 +223,10 @@
 	if(!M)
 		return
 
-	if(stat & (BROKEN|NOPOWER))
+	if((stat & NOPOWER) && !interact_offline)
+		return
+
+	if(stat & BROKEN)
 		return
 
 	if(!ishuman(M) || user.anchored)
@@ -279,7 +285,10 @@
 		toggle_pump()
 
 /obj/machinery/sleeper/proc/inject_chemical(var/mob/living/user, var/chemical_name, var/amount)
-	if(stat & (BROKEN|NOPOWER))
+	if((stat & NOPOWER) && !interact_offline)
+		return
+
+	if(stat & BROKEN)
 		return
 
 	var/chemical_type = available_chemicals[chemical_name]

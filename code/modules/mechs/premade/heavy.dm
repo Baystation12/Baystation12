@@ -16,9 +16,6 @@
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = COLOR_TITANIUM
 
-	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
-
 	..()
 
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_LEFT_HAND)
@@ -37,7 +34,7 @@
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"
 	exosuit_desc_string = "heavy hydraulic legs"
-	desc = "Oversized acutators struggle to move these armoured legs. "
+	desc = "Oversized actuators struggle to move these armoured legs. "
 	icon_state = "heavy_legs"
 	move_delay = 5
 	max_damage = 90
@@ -59,7 +56,7 @@
 /obj/item/mech_component/chassis/heavy
 	name = "reinforced exosuit chassis"
 	hatch_descriptor = "hatch"
-	desc = "The HI-Koloss chassis is a veritable juggernaut, capable of protecting a pilot even in the most hostile of environments. It handles like a battlecruiser, however"
+	desc = "The HI-Koloss chassis is a veritable juggernaut, capable of protecting a pilot even in the most hostile of environments. It handles like a battlecruiser, however."
 	pilot_coverage = 100
 	exosuit_desc_string = "a heavily armoured chassis"
 	icon_state = "heavy_body"
@@ -67,6 +64,10 @@
 	mech_health = 500
 	power_use = 50
 	has_hardpoints = list(HARDPOINT_BACK)
+
+/obj/item/mech_component/chassis/heavy/prebuild()
+	. = ..()
+	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
 
 
 

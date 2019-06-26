@@ -20,19 +20,24 @@
 
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	
-	if (owner && loc == owner && ((user in owner.pilots) || user == owner) && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
+	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
 		if(target in owner.contents)
-			return
+			return 0
+
+		if(!(owner.get_cell() && owner.get_cell().check_charge(active_power_use * CELLRATE)))
+			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
+			return 0	
 		return 1
 	else 
-		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
 		return 0
 
 /obj/item/mech_equipment/attack_self(var/mob/user)
-	if (owner && loc == owner && ((user in owner.pilots) || user == owner) && owner.get_cell().check_charge(active_power_use * CELLRATE)) //Mantain CELLRATE as multiplier to keep old mech balance
+	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
+		if(!(owner.get_cell() && owner.get_cell().check_charge(active_power_use * CELLRATE)))
+			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
+			return 0	
 		return 1
 	else 
-		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to manipulate \the [src]"))
 		return 0
 
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)
@@ -56,16 +61,22 @@
 	if(. && holding)
 		return holding.attack_self(user)
 
-/obj/item/mech_equipment/mounted_system/New()
-	..()
+/obj/item/mech_equipment/mounted_system/Initialize()
+	. = ..()
 	if(holding_type)
 		holding = new holding_type(src)
 	if(holding)
 		if(!icon_state)
 			icon = holding.icon
 			icon_state = holding.icon_state
-		name = holding.name
+		SetName(holding.name)
 		desc = "[holding.desc] This one is suitable for installation on an exosuit."
+		
+
+/obj/item/mech_equipment/mounted_system/Destroy()
+	QDEL_NULL(holding)
+	. = ..()
+	
 
 /obj/item/mech_equipment/mounted_system/get_effective_obj()
 	return (holding ? holding : src)

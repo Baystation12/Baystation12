@@ -26,3 +26,9 @@ GLOBAL_LIST_INIT(mech_weapon_overlays, icon_states('icons/mecha/mech_weapon_over
 #define EMP_GUI_DISRUPT 5     // 1 ion rifle shot == 8.
 #define EMP_MOVE_DISRUPT 10   // 2 shots.
 #define EMP_ATTACK_DISRUPT 20 // 3 shots.
+
+//About components
+#define MECH_COMPONENT_DAMAGE_UNDAMAGED 1
+#define MECH_COMPONENT_DAMAGE_DAMAGED 2
+#define MECH_COMPONENT_DAMAGE_DAMAGED_BAD 3
+#define MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL 4

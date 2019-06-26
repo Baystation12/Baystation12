@@ -10,6 +10,7 @@
 	idle_power_usage = 200	// Some electronics, passive drain.
 	active_power_usage = 60 KILOWATTS // When charging
 	base_type = /obj/machinery/mech_recharger
+	construct_state = /decl/machine_construction/default/panel_closed
 	use_power = 1
 
 	var/mob/living/exosuit/charging
@@ -67,8 +68,12 @@
 	var/remaining_energy = active_power_usage
 
 	if(repair && !fully_repaired())
-		charging.health = min(charging.health + repair, initial(charging.health))
-		remaining_energy -= repair * repair_power_usage
+		for(var/obj/item/mech_component/MC in charging)
+			if(MC)
+				MC.repair_brute_damage(repair)
+				MC.repair_burn_damage(repair)
+				remaining_energy -= repair * repair_power_usage
+		charging.updatehealth()
 		if(fully_repaired())
 			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
 
@@ -83,15 +88,7 @@
 
 // An ugly proc, but apparently mechs don't have maxhealth var of any kind.
 /obj/machinery/mech_recharger/proc/fully_repaired()
-	return charging && (charging.health == initial(charging.health))
-
-/obj/machinery/mech_recharger/attackby(var/obj/item/I, var/mob/user)
-	if(default_deconstruction_screwdriver(user, I))
-		return
-	if(default_deconstruction_crowbar(user, I))
-		return
-	if(default_part_replacement(user, I))
-		return
+	return charging && (charging.health == charging.maxHealth)
 
 /obj/machinery/mech_recharger/proc/start_charging(var/mob/living/exosuit/M)
 	if(stat & (NOPOWER | BROKEN))
