@@ -33,6 +33,7 @@
 /decl/hierarchy/supply_pack/nonessent/card_packs
 	num_contained = 5
 	contains = list(/obj/item/weapon/pack/cardemon,
+					/obj/item/weapon/pack/cardemoncircus,
 					/obj/item/weapon/pack/spaceball,
 					/obj/item/weapon/deck/holder)
 	name = "Rec - Trading Cards"
