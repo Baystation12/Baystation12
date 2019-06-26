@@ -1,5 +1,0 @@
-author: "babydoll"
-delete-after: True
-changes: 
-  - rscadd: "Soap now comes in a few different shapes, sizes and colours."
-  - rscadd: "Cleaning someone with soap will now attempt to transfer some of the soap's reagents to that person."
