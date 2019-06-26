@@ -823,6 +823,10 @@
 	name = "\improper Prototype Fusion Reactor Chamber"
 	icon_state = "firingrange"
 
+/area/vacant/prototype/canisters
+	name = "\improper Prototype Fusion Reactor Canisters Storage"
+	icon_state = "engine_monitoring"
+
 /area/vacant/cargo
 	name = "\improper Requisitions Office"
 	icon_state = "quart"
@@ -1770,3 +1774,4 @@
 /area/tdome/tdomeobserve
 	name = "\improper Thunderdome (Observer.)"
 	icon_state = "purple"
+

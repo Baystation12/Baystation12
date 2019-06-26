@@ -275,6 +275,17 @@
 "ax" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/aftstarboard)
+"ay" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/prototype/engine)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/seconddeck/forestarboard)
@@ -364,6 +375,9 @@
 /obj/item/weapon/stock_parts/circuitboard/aiupload,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
+"aK" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/vacant/prototype/canisters)
 "aL" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1379;
@@ -716,6 +730,19 @@
 "bs" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
+"bt" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Fusion Testing Canisters' storage";
+	secured_wires = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/prototype/canisters)
 "bu" = (
 /obj/machinery/disposal/deliveryChute,
 /obj/structure/disposalpipe/trunk{
@@ -837,6 +864,18 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
+"bH" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 9
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/prototype/canisters)
 "bI" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/seconddeck/forestarboard)
@@ -1048,6 +1087,19 @@
 /obj/item/weapon/stock_parts/circuitboard/stationalert,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
+"cb" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/firealarm,
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/prototype/canisters)
 "cc" = (
 /obj/machinery/shieldgen,
 /turf/simulated/floor/tiled/techfloor,
@@ -1150,6 +1202,28 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/central)
+"cl" = (
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "Prototype Fusion Reactor Chamber APC";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 5
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/prototype/canisters)
 "cm" = (
 /obj/item/weapon/stool,
 /obj/machinery/alarm{
@@ -1227,6 +1301,25 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
+"cu" = (
+/obj/machinery/portable_atmospherics/canister/helium{
+	name = "\improper Fusion Fuel Canister \[He]";
+	start_pressure = 14999
+	},
+/obj/machinery/door/window/northright,
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "cv" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Disposal Belt Access"
@@ -1289,6 +1382,21 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"cF" = (
+/obj/machinery/portable_atmospherics/canister/hydrogen{
+	name = "\improper Fusion Fuel Canister: \[Hydrogen]";
+	start_pressure = 14999
+	},
+/obj/machinery/door/window/northright,
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "cG" = (
 /obj/structure/table/marble,
 /turf/simulated/floor/plating,
@@ -1325,6 +1433,21 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
+"cK" = (
+/obj/machinery/portable_atmospherics/canister/oxygen{
+	name = "\improper Fusion Fuel Canister: \[O2]";
+	start_pressure = 14999
+	},
+/obj/machinery/door/window/northleft,
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "cL" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -1339,6 +1462,29 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
+"cM" = (
+/obj/machinery/portable_atmospherics/canister/phoron{
+	name = "\improper Fusion Fuel Canister \[Phoron]";
+	start_pressure = 14999
+	},
+/obj/machinery/door/window/northleft,
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 4
+	},
+/obj/machinery/camera/network/engine{
+	c_tag = "Engine - Prototype Canisters' Storage";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "cN" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -5670,6 +5816,25 @@
 /obj/structure/railing/mapped,
 /turf/simulated/open,
 /area/hallway/primary/seconddeck/center)
+"ml" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 10
+	},
+/obj/machinery/portable_atmospherics/canister/helium{
+	name = "\improper Fusion Fuel Canister \[He]";
+	start_pressure = 14999
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "mm" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/brown,
@@ -8132,6 +8297,21 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
+"rz" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/prototype/canisters)
 "rA" = (
 /obj/machinery/drone_fabricator/torch,
 /turf/simulated/floor/tiled/techfloor,
@@ -9533,9 +9713,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/shuttle/escape_pod10/station)
-"vy" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/vacant/armory)
 "vz" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -10091,37 +10268,32 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
 "xi" = (
-/obj/random/tool,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
 "xj" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/highsecurity{
-	icon_state = "closed";
-	locked = 1;
-	name = "Auxiliary Armory"
-	},
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xk" = (
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xl" = (
-/obj/item/ammo_magazine/pistol/small/empty,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xm" = (
-/obj/item/frame/fire_alarm,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"xn" = (
-/obj/machinery/alarm{
+/obj/structure/window/reinforced{
 	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
+	health = 1e+006
 	},
-/turf/simulated/floor/plating,
-/area/vacant/armory)
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 6
+	},
+/obj/machinery/portable_atmospherics/canister/phoron{
+	name = "\improper Fusion Fuel Canister \[Phoron]";
+	start_pressure = 14999
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "xp" = (
 /obj/random/junk,
 /obj/structure/cable{
@@ -10326,52 +10498,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
-"yb" = (
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/random/ammo,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"yc" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/obj/structure/window/reinforced,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"yd" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/random/maintenance/solgov,
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/turf/simulated/floor/plating,
-/area/vacant/armory)
-"ye" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Weapons locker"
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced,
-/obj/random/ammo,
-/turf/simulated/floor/plating,
-/area/vacant/armory)
 "yf" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/incinerator)
@@ -11113,6 +11239,22 @@
 "zV" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
+"zY" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/portable_atmospherics/canister/oxygen{
+	name = "\improper Fusion Fuel Canister: \[O2]";
+	start_pressure = 14999
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "zZ" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/porta_turret{
@@ -11806,6 +11948,20 @@
 /obj/machinery/portable_atmospherics/canister/air,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"BF" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/foreport)
 "BG" = (
 /obj/structure/table/rack,
 /obj/random/tech_supply,
@@ -17519,17 +17675,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
-"Ti" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/prototype/engine)
 "Tj" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -18438,6 +18583,22 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
+"WD" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/portable_atmospherics/canister/hydrogen{
+	name = "\improper Fusion Fuel Canister: \[Hydrogen]";
+	start_pressure = 14999
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/vacant/prototype/canisters)
 "WF" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -29997,7 +30158,7 @@ Ng
 Vi
 Gj
 Nj
-Ti
+ay
 mb
 ub
 Wp
@@ -31221,7 +31382,7 @@ Wp
 Wp
 Wp
 Wp
-aa
+Wp
 aa
 aa
 aa
@@ -31424,7 +31585,7 @@ Wp
 Wp
 Wp
 Wp
-aa
+Wp
 aa
 aa
 aa
@@ -31617,8 +31778,8 @@ sv
 sv
 sv
 sv
-uN
-uf
+BF
+Bj
 xi
 pi
 pi
@@ -31627,7 +31788,7 @@ Wp
 Wp
 Wp
 Wp
-aa
+Wp
 aa
 aa
 aa
@@ -31820,17 +31981,17 @@ kP
 ZV
 ZV
 dX
-vy
-xj
-vy
-vy
+aK
+bt
+aK
+aK
+aK
 pi
 pi
 Wp
 Wp
 Wp
 Wp
-aa
 aa
 aa
 aa
@@ -32022,17 +32183,17 @@ wE
 wE
 wE
 dX
-vy
-xk
-yb
-vy
+aK
+bH
+cu
+ml
+aK
 zA
 pi
 Be
 Wp
 Wp
 Wp
-aa
 aa
 aa
 aa
@@ -32224,17 +32385,17 @@ iW
 jB
 wE
 dX
-vy
-xl
-yc
-vy
+aK
+rz
+cF
+WD
+aK
 nc
 pi
 Bf
 Wp
 Wp
 Wp
-aa
 aa
 aa
 aa
@@ -32426,10 +32587,11 @@ KN
 jC
 wE
 dX
-vy
-xm
-yd
-vy
+aK
+cb
+cK
+zY
+aK
 zB
 pi
 pi
@@ -32437,7 +32599,6 @@ Wp
 Wp
 Wp
 Wp
-aa
 aa
 aa
 aa
@@ -32628,15 +32789,15 @@ Fu
 jD
 dd
 dX
-vy
-xn
-ye
-vy
+aK
+cl
+cM
+xj
+aK
 zC
 Bg
 pi
 pi
-Wp
 Wp
 Wp
 Wp
@@ -32830,8 +32991,8 @@ ju
 jE
 wE
 dX
-vy
-vy
+aK
+aK
 yf
 yf
 yg
