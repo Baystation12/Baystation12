@@ -92,23 +92,23 @@
 	user.unequip_item(get_turf(src))
 
 // attack with hand, move pulled object onto conveyor
-/obj/machinery/conveyor/attack_hand(mob/user as mob)
-	if ((user.incapacitated() || !( user.pulling )))
+/obj/machinery/conveyor/physical_attack_hand(mob/user)
+	if(!user.pulling)
 		return
-	if (user.pulling.anchored)
+	if(user.pulling.anchored)
 		return
-	if ((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
+	if((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
 		return
-	if (ismob(user.pulling))
+	if(ismob(user.pulling))
 		var/mob/M = user.pulling
 		M.stop_pulling()
 		step(user.pulling, get_dir(user.pulling.loc, src))
 		user.stop_pulling()
+		return TRUE
 	else
 		step(user.pulling, get_dir(user.pulling.loc, src))
 		user.stop_pulling()
-	return
-
+		return TRUE
 
 // make the conveyor broken
 // also propagate inoperability to any connected conveyor with the same ID
@@ -191,11 +191,21 @@
 		C.setmove()
 
 // attack with hand, switch position
-/obj/machinery/conveyor_switch/attack_hand(mob/user)
-	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
+/obj/machinery/conveyor_switch/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	do_switch()
+	operated = 1
+	update_icon()
 
+	// find any switches with same id as this one, and set their positions to match us
+	for(var/obj/machinery/conveyor_switch/S in world)
+		if(S.id == src.id)
+			S.position = position
+			S.update_icon()
+	return TRUE
+
+/obj/machinery/conveyor_switch/proc/do_switch(mob/user)
 	if(position == 0)
 		if(last_pos < 0)
 			position = 1
@@ -206,16 +216,6 @@
 	else
 		last_pos = position
 		position = 0
-
-	operated = 1
-	update_icon()
-
-	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
-		if(S.id == src.id)
-			S.position = position
-			S.update_icon()
-
 
 /obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
 	if(isCrowbar(I))
@@ -229,23 +229,11 @@
 	var/convdir = 1 //Set to 1 or -1 depending on which way you want the convayor to go. (In other words keep at 1 and set the proper dir on the belts.)
 	desc = "A conveyor control switch. It appears to only go in one direction."
 
-// attack with hand, switch position
-/obj/machinery/conveyor_switch/oneway/attack_hand(mob/user)
+/obj/machinery/conveyor_switch/oneway/do_switch(mob/user)
 	if(position == 0)
 		position = convdir
 	else
 		position = 0
-
-	operated = 1
-	update_icon()
-
-	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
-		if(S.id == src.id)
-			S.position = position
-			S.update_icon()
-
-
 
 //
 // CONVEYOR CONSTRUCTION STARTS HERE

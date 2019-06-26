@@ -1,15 +1,4 @@
-/obj/machinery/keycard_auth/torch
-
-/obj/machinery/keycard_auth/torch/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		to_chat(user, "This device is not powered.")
-		return
-	if(!user.IsAdvancedToolUser())
-		return 0
-	if(busy)
-		to_chat(user, "This device is busy.")
-		return
-
+/obj/machinery/keycard_auth/torch/interact(mob/user)
 	user.set_machine(src)
 
 	var/list/dat = list()

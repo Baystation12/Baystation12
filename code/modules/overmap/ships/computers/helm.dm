@@ -77,15 +77,15 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		return -1
 	return 0
 
-/obj/machinery/computer/ship/helm/attack_hand(var/mob/user as mob)
-	if(..())
-		manual_control = 0
-		return
+/obj/machinery/computer/ship/helm/CouldNotUseTopic(mob/user)
+	. = ..()
+	manual_control = 0 // This seems like it should be broken; should be revisited.
 
-	if(!isAI(user))
-		operator_skill = user.get_skill_value(core_skill)
-		if(linked)
-			user.reset_view(linked)
+/obj/machinery/computer/ship/helm/CouldUseTopic(mob/user)
+	operator_skill = user.get_skill_value(core_skill)
+	if(linked)
+		user.reset_view(linked)
+	return ..()
 
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -278,13 +278,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		return -1
 	return 0
 
-/obj/machinery/computer/ship/navigation/attack_hand(var/mob/user as mob)
-	if(..())
-		viewing = 0
-		return
+/obj/machinery/computer/ship/navigation/CouldNotUseTopic(mob/user)
+	. = ..()
+	viewing = 0
 
-	if(viewing && linked &&!isAI(user))
-		user.reset_view(linked)
+/obj/machinery/computer/ship/navigation/CouldUseTopic(mob/user)
+	. = ..()
+	if(viewing && linked)
+		user.reset_view(linked)	
 
 /obj/machinery/computer/ship/navigation/OnTopic(var/mob/user, var/list/href_list)
 	if(..())

@@ -57,25 +57,21 @@
 			src.add_fingerprint(usr)
 
 
-/obj/machinery/oxygen_pump/attack_hand(mob/user as mob)
+/obj/machinery/oxygen_pump/physical_attack_hand(mob/user)
 	if((stat & MAINT) && tank)
 		user.visible_message("<span class='notice'>\The [user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
 		user.put_in_hands(tank)
 		src.add_fingerprint(user)
 		tank.add_fingerprint(user)
 		tank = null
-		return
-	if (!tank)
-		to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
-		return
+		return TRUE
 	if(breather)
 		detach_mask(user)
-	else
-		ui_interact(usr)
+		return TRUE
 
-
-/obj/machinery/oxygen_pump/attack_ai(mob/user as mob)
+/obj/machinery/oxygen_pump/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))

@@ -236,8 +236,9 @@
 		return 1
 	return 0
 
-/obj/machinery/lapvend/attack_hand(var/mob/user)
+/obj/machinery/lapvend/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/lapvend/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(stat & (BROKEN | NOPOWER | MAINT))

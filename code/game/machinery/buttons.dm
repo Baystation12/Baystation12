@@ -29,6 +29,8 @@
 	return attack_hand(user)
 
 /obj/machinery/button/interface_interact(user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(istype(user, /mob/living/carbon))
 		playsound(src, "button", 60)
 	activate(user)

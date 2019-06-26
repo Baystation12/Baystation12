@@ -73,9 +73,6 @@
 	QDEL_NULL(wires)
 	return ..()
 
-/obj/machinery/suit_cycler/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/suit_cycler/attackby(obj/item/I as obj, mob/user as mob)
 
 	if(electrified != 0)
@@ -187,17 +184,16 @@
 	updateUsrDialog()
 	return 1
 
-/obj/machinery/suit_cycler/attack_hand(mob/user as mob)
-	if(..() || stat & (BROKEN|NOPOWER))
-		return
-
-	if(!user.IsAdvancedToolUser())
-		return 0
-
+/obj/machinery/suit_cycler/physical_attack_hand(mob/user)
 	if(electrified != 0)
 		if(shock(user, 100))
-			return
+			return TRUE
 
+/obj/machinery/suit_cycler/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/suit_cycler/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = list()

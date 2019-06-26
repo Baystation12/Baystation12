@@ -21,7 +21,11 @@
 		if(!user.unEquip(O, src))
 			return
 
-/obj/machinery/libraryscanner/attack_hand(var/mob/user as mob)
+/obj/machinery/libraryscanner/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/libraryscanner/interact(var/mob/user)
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Scanner Control Interface</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	if(cache)

@@ -157,17 +157,14 @@
 /obj/machinery/atmospherics/tvalve/proc/toggle()
 	return state ? go_straight() : go_to_side()
 
-/obj/machinery/atmospherics/tvalve/attack_ai(mob/user as mob)
-	return
+/obj/machinery/atmospherics/tvalve/physical_attack_hand(mob/user)
+	user_toggle()
+	return TRUE
 
-/obj/machinery/atmospherics/tvalve/attack_hand(mob/user as mob)
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/tvalve/proc/user_toggle()
 	update_icon(1)
 	sleep(10)
-	if (src.state)
-		src.go_straight()
-	else
-		src.go_to_side()
+	toggle()
 
 /obj/machinery/atmospherics/tvalve/Process()
 	..()
@@ -372,17 +369,15 @@
 	..()
 	if(!powered())
 		icon_state = "tvalvenopower"
-		
-/obj/machinery/atmospherics/tvalve/digital/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-	
-/obj/machinery/atmospherics/tvalve/digital/attack_hand(mob/user as mob)
-	if(!powered())
-		return
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	..()
+
+/obj/machinery/atmospherics/tvalve/digital/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	user_toggle()
+	return TRUE
+
+/obj/machinery/atmospherics/tvalve/digital/physical_attack_hand(mob/user)
+	return FALSE
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital		// can be controlled by AI
 	name = "digital switching valve"
@@ -410,16 +405,14 @@
 	if(!powered())
 		icon_state = "tvalvemnopower"
 
-/obj/machinery/atmospherics/tvalve/mirrored/digital/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/atmospherics/tvalve/mirrored/digital/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	user_toggle()
+	return TRUE
 
-/obj/machinery/atmospherics/tvalve/mirrored/digital/attack_hand(mob/user as mob)
-	if(!powered())
-		return
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	..()
+/obj/machinery/atmospherics/tvalve/mirrored/digital/physical_attack_hand(mob/user)
+	return FALSE
 
 //Bypass editions
 /obj/machinery/atmospherics/tvalve/digital/bypass

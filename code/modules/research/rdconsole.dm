@@ -303,7 +303,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						if(!istype(S, /obj/machinery/r_n_d/server/centcom) && server_processed)
 							S.produce_heat()
 					screen = 1.6
-					attack_hand(user)
+					interact(user)
 
 	else if(href_list["togglesync"]) //Prevents the console from being synced by other consoles. Can still send data.
 		sync = !sync
@@ -385,7 +385,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		spawn(10)
 			SyncRDevices()
 			screen = 1.7
-			attack_hand(user)
+			interact(user)
 
 	else if(href_list["disconnect"]) //The R&D console disconnects with a specific device.
 		. = TOPIC_REFRESH
@@ -412,7 +412,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			files = new /datum/research(src)
 			spawn(20)
 				screen = 1.6
-				attack_hand(user)
+				interact(user)
 
 	else if (href_list["print"]) //Print research information
 		screen = 0.5
@@ -432,10 +432,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			PR.dropInto(loc)
 			spawn(10)
 				screen = ((text2num(href_list["print"]) == 2) ? 5.0 : 1.1)
-				attack_hand(user)
-
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+				interact(user)
 
 /obj/machinery/computer/rdconsole/proc/finish_deconstruct(weakref/W)
 	CHECK_DESTROY
@@ -471,8 +468,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	use_power_oneoff(linked_destroy.active_power_usage)
 	screen = 1.0
-	if(user)
-		attack_hand(user)
+	if(CanInteract(user, DefaultTopicState()))
+		interact(user)
 
 /obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
 	var/dat
@@ -497,10 +494,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	dat += "</UL>"
 	return dat
 
-/obj/machinery/computer/rdconsole/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/rdconsole/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
+/obj/machinery/computer/rdconsole/interact(mob/user)
 	user.set_machine(src)
 	var/dat = list()
 	files.RefreshResearch()

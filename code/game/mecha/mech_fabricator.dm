@@ -66,12 +66,9 @@
 	T += total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
 	speed = T / 2 // 1 -> 3
 
-/obj/machinery/mecha_part_fabricator/attack_hand(var/mob/user)
-	if(..())
-		return
-	if(!allowed(user))
-		return
+/obj/machinery/mecha_part_fabricator/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/mecha_part_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]

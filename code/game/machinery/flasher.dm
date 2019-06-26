@@ -95,11 +95,11 @@
 			do_flash(O, flash_time)
 
 /obj/machinery/flasher/proc/do_flash(var/mob/living/victim, var/flash_time)
-			victim.flash_eyes()
-			victim.eye_blurry += flash_time
-			victim.confused += (flash_time + 2)
-			victim.Stun(flash_time / 2)
-			victim.Weaken(3)
+	victim.flash_eyes()
+	victim.eye_blurry += flash_time
+	victim.confused += (flash_time + 2)
+	victim.Stun(flash_time / 2)
+	victim.Weaken(3)
 
 /obj/machinery/flasher/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

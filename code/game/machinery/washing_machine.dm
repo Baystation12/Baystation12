@@ -203,7 +203,7 @@
 
 	return ..()
 
-/obj/machinery/washing_machine/attack_hand(mob/user)
+/obj/machinery/washing_machine/physical_attack_hand(mob/user)
 	if(state & WASHER_STATE_RUNNING)
 		to_chat(user, SPAN_WARNING("\The [src] is busy."))
 		return TRUE

@@ -368,9 +368,9 @@ var/list/solars_list = list()
 		overlays += image('icons/obj/computer.dmi', "solcon-o", FLY_LAYER, angle2dir(cdir))
 	return
 
-/obj/machinery/power/solar_control/attack_hand(mob/user)
-	if(!..())
-		interact(user)
+/obj/machinery/power/solar_control/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
 /obj/machinery/power/solar_control/interact(mob/user)
 

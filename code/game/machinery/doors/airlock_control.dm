@@ -178,6 +178,8 @@
 		icon_state = "airlock_sensor_off"
 
 /obj/machinery/airlock_sensor/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	var/datum/signal/signal = new
 	signal.transmission_method = 1 //radio signal
 	signal.data["tag"] = master_tag
@@ -263,6 +265,8 @@
 	..()
 
 /obj/machinery/access_button/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(radio_connection)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal

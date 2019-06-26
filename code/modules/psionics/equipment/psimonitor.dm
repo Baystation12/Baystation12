@@ -65,11 +65,9 @@
 		if(. && usr)
 			interact(usr)
 
-/obj/machinery/psi_monitor/attack_hand(var/mob/user)
+/obj/machinery/psi_monitor/interface_interact(var/mob/user)
 	interact(user)
-
-/obj/machinery/psi_monitor/attack_ai(var/mob/user)
-	interact(user)
+	return TRUE
 
 /obj/machinery/psi_monitor/interact(var/mob/user)
 

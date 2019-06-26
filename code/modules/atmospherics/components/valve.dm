@@ -117,17 +117,14 @@
 /obj/machinery/atmospherics/valve/proc/toggle()
 	return open ? close() : open()
 
-/obj/machinery/atmospherics/valve/attack_ai(mob/user as mob)
-	return
+/obj/machinery/atmospherics/valve/physical_attack_hand(mob/user)
+	user_toggle()
+	return TRUE
 
-/obj/machinery/atmospherics/valve/attack_hand(mob/user as mob)
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/valve/proc/user_toggle()
 	update_icon(1)
 	sleep(10)
-	if (src.open)
-		src.close()
-	else
-		src.open()
+	toggle()
 
 /obj/machinery/atmospherics/valve/Process()
 	..()
@@ -276,16 +273,14 @@
 
 	build_icon_state = "dvalve"
 
-/obj/machinery/atmospherics/valve/digital/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/atmospherics/valve/digital/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	user_toggle()
+	return TRUE
 
-/obj/machinery/atmospherics/valve/digital/attack_hand(mob/user as mob)
-	if(!powered())
-		return
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	..()
+/obj/machinery/atmospherics/valve/digital/physical_attack_hand(mob/user)
+	return FALSE
 
 /obj/machinery/atmospherics/valve/digital/open
 	open = 1

@@ -104,11 +104,12 @@ obj/item/weapon/paper/prof2
 	var/logtype
 	var/used = 0
 
-/obj/machinery/computer/log_printer/attack_hand(mob/living/user as mob)
-	if(!used && !isghost(usr))
-		to_chat(usr, "Default Boot Device File Integrity Damaged. Startup aborted. Error log printing.")
+/obj/machinery/computer/log_printer/interface_interact(mob/living/user)
+	if(CanInteract(user, DefaultTopicState()))
+		to_chat(user, "Default Boot Device File Integrity Damaged. Startup aborted. Error log printing.")
 		new logtype(loc)
 		used = 1
+		return TRUE
 
 /obj/machinery/computer/log_printer/prof1
 	name = "Professor's Computer"

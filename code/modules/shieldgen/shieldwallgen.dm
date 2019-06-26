@@ -79,19 +79,21 @@
 			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
-/obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
-	if(anchored != 1)
+/obj/machinery/shieldwallgen/CanUseTopic(mob/user)
+	if(!anchored)
 		to_chat(user, "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>")
-		return 1
+		return STATUS_CLOSE
 	if(src.locked && !istype(user, /mob/living/silicon))
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
-		return 1
+		return STATUS_CLOSE
 	if(power != 1)
 		to_chat(user, "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>")
-		return 1
+		return STATUS_CLOSE
+	return ..()
 
-	src.ui_interact(user)
-	src.add_fingerprint(user)
+/obj/machinery/shieldwallgen/interface_interact(mob/user)
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/shieldwallgen/proc/power()
 	if(!anchored)
@@ -289,9 +291,6 @@
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()
 	..()
-
-/obj/machinery/shieldwall/attack_hand(mob/user as mob)
-	return
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary

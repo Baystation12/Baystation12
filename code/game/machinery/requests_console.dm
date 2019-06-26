@@ -94,10 +94,9 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			req_console_information -= department
 	. = ..()
 
-/obj/machinery/requests_console/attack_hand(user as mob)
-	if(..(user))
-		return
+/obj/machinery/requests_console/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/requests_console/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]

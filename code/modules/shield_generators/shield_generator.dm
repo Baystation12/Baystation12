@@ -223,13 +223,11 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/shield_generator/attack_hand(var/mob/user)
-	if(component_attackby(user))
-		return TRUE
+/obj/machinery/power/shield_generator/interface_interact(var/mob/user)
 	ui_interact(user)
 	if(panel_open)
 		wires.Interact(user)
-
+	return TRUE
 
 /obj/machinery/power/shield_generator/CanUseTopic(var/mob/user)
 	if(issilicon(user) && !Adjacent(user) && ai_control_disabled)

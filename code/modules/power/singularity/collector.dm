@@ -56,20 +56,24 @@ var/global/list/rad_collectors = list()
 		else
 			P.air_adjust_gas("phoron", -0.001*drainratio)
 
-/obj/machinery/power/rad_collector/attack_hand(mob/user as mob)
-	if(anchored)
-		if((stat & BROKEN) || melted)
-			to_chat(user, "<span class='warning'>The [src] is completely destroyed!</span>")
-		if(!src.locked)
-			toggle_power()
-			user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
-			"You turn the [src.name] [active? "on":"off"].")
-			investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.gas["phoron"]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
-			return
-		else
-			to_chat(user, "<span class='warning'>The controls are locked!</span>")
-			return
+/obj/machinery/power/rad_collector/CanUseTopic(mob/user)
+	if(!anchored)
+		return STATUS_CLOSE
+	return ..()
 
+/obj/machinery/power/rad_collector/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	. = TRUE
+	if((stat & BROKEN) || melted)
+		to_chat(user, "<span class='warning'>The [src] is completely destroyed!</span>")
+	if(!src.locked)
+		toggle_power()
+		user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
+		"You turn the [src.name] [active? "on":"off"].")
+		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.gas["phoron"]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
+	else
+		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/weapon/tank/phoron))

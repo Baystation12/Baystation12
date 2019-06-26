@@ -83,15 +83,16 @@
 	else
 		return 0
 
-/obj/machinery/computer/ship/sensors/attack_hand(var/mob/user as mob)
-	if(..())
-		viewing = 0
-		unlook(user)
-		return
+/obj/machinery/computer/ship/sensors/CouldNotUseTopic(mob/user)
+	. = ..()
+	viewing = 0
+	unlook(user)
 
-	if(!isAI(user))
-		if(viewing)
-			look(user)
+/obj/machinery/computer/ship/sensors/CouldUseTopic(mob/user)
+	. = ..()
+	if(viewing && linked)
+		user.reset_view(linked)
+		look(user)
 
 /obj/machinery/computer/ship/sensors/proc/look(var/mob/user)
 	if(linked)

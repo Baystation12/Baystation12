@@ -63,13 +63,9 @@
 		update_use_power(POWER_USE_IDLE)
 		queue_icon_update()
 
-/obj/machinery/reagent_temperature/attack_hand(var/mob/user)
-	if(component_attack_hand(user))
-		return TRUE
+/obj/machinery/reagent_temperature/interface_interact(var/mob/user)
 	interact(user)
-
-/obj/machinery/reagent_temperature/attack_ai(var/mob/user)
-	interact(user)
+	return TRUE
 
 /obj/machinery/reagent_temperature/ProcessAtomTemperature()
 	if(use_power >= POWER_USE_ACTIVE)

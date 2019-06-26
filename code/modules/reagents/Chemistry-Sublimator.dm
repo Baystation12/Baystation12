@@ -89,16 +89,11 @@
 	else
 		to_chat(user, "<span class='warning'>\The [src] has no reagent container loaded.</span>")
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/attack_ai(var/mob/user)
-	attack_hand(user)
-
-/obj/machinery/portable_atmospherics/reagent_sublimator/attack_hand(var/mob/user)
-	if(stat & (BROKEN|NOPOWER))
-		to_chat(user, "<span class='warning'>\The [src] is not currently functional.</span>")
-		return
+/obj/machinery/portable_atmospherics/reagent_sublimator/physical_attack_hand(var/mob/user)
 	update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 	user.visible_message("<span class='notice'>\The [user] switches \the [src] [use_power == 2 ? "on" : "off"].</span>")
 	update_icon()
+	return TRUE
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/attackby(var/obj/item/weapon/thing, var/mob/user)
 	if(istype(thing, /obj/item/weapon/tank))

@@ -294,14 +294,10 @@
 	I.add_product(O)
 	SSnano.update_uis(src)
 
-/obj/machinery/smartfridge/attack_ai(mob/user as mob)
-	attack_hand(user)
-
-/obj/machinery/smartfridge/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/smartfridge/interface_interact(mob/user)
 	wires.Interact(user)
 	ui_interact(user)
+	return TRUE
 
 /*******************
 *   SmartFridge Menu

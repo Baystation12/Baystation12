@@ -28,13 +28,12 @@
 	..()
 	icon_state = "igniter[on]"
 
-/obj/machinery/igniter/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/igniter/attack_hand(mob/user as mob)
-	if(..())
-		return
+/obj/machinery/igniter/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	ignite()
+	visible_message(SPAN_NOTICE("\The [user] toggles \the [src]."))
+	return TRUE
 
 /obj/machinery/igniter/Process()
 	if(!(stat & NOPOWER))

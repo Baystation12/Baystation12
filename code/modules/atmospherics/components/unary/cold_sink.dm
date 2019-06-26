@@ -53,13 +53,9 @@
 		icon_state = "freezer_0"
 	return
 
-/obj/machinery/atmospherics/unary/freezer/attack_ai(mob/user)
+/obj/machinery/atmospherics/unary/freezer/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/atmospherics/unary/freezer/attack_hand(mob/user)
-	if(component_attack_hand(user))
-		return TRUE
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/atmospherics/unary/freezer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui

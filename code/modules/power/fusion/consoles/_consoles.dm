@@ -26,15 +26,9 @@
 	else
 		return ..()
 
-/obj/machinery/computer/fusion/attack_ghost(var/mob/user)
+/obj/machinery/computer/fusion/interface_interact(var/mob/user)
 	ui_interact(user)
-
-/obj/machinery/computer/fusion/attack_ai(var/mob/user)
-	ui_interact(user)
-
-/obj/machinery/computer/fusion/attack_hand(var/mob/user)
-	add_fingerprint(user)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/fusion/proc/build_ui_data()
 	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)

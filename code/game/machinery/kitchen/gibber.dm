@@ -45,16 +45,12 @@
 	src.go_out()
 	return
 
-/obj/machinery/gibber/attack_hand(mob/user as mob)
-	if((. = ..()))
-		return
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/gibber/physical_attack_hand(mob/user)
 	if(operating)
 		to_chat(user, "<span class='danger'>\The [src] is locked and running, wait for it to finish.</span>")
-		return
-	else
-		src.startgibbing(user)
+		return TRUE
+	src.startgibbing(user)
+	return TRUE
 
 /obj/machinery/gibber/examine()
 	. = ..()

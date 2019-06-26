@@ -61,25 +61,26 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	..()
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[loc.loc]'"
 
-/obj/machinery/hologram/holopad/attack_hand(var/mob/living/carbon/human/user) //Carn: Hologram requests.
-	if(!istype(user))
-		return
+/obj/machinery/hologram/holopad/interface_interact(var/mob/living/carbon/human/user) //Carn: Hologram requests.
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(incoming_connection && caller_id)
 		if(QDELETED(sourcepad)) // If the sourcepad was deleted, most likely.
 			incoming_connection = 0
 			clear_holo()
-			return
+			return TRUE
 		visible_message("The pad hums quietly as it establishes a connection.")
 		if(caller_id.loc!=sourcepad.loc)
 			visible_message("The pad flashes an error message. The caller has left their holopad.")
-			return
+			return TRUE
 		take_call(user)
-		return
+		return TRUE
 	else if(caller_id && !incoming_connection)
 		audible_message("Severing connection to distant holopad.")
 		end_call(user)
-		return
+		return TRUE
 
+	. = TRUE
 	var/handle_type = "Holocomms"
 	if(allow_ai)
 		handle_type = alert(user,"Would you like to request an AI's presence or establish communications with another pad?", "Holopad","AI","Holocomms","Cancel")
