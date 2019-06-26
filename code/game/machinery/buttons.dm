@@ -36,6 +36,10 @@
 	activate(user)
 	return TRUE
 
+/obj/machinery/button/emag_act()
+	if(req_access)
+		req_access.Cut()
+
 /obj/machinery/button/proc/activate(mob/living/user)
 	if(operating)
 		return

@@ -277,9 +277,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // handle machine interaction
 
-/obj/machinery/disposal/CanUseTopic(user, state, href_list)
-	if(usr.loc == src)
-		to_chat(usr, "<span class='warning'>You cannot reach the controls from inside.</span>")
+/obj/machinery/disposal/CanUseTopic(mob/user, state, href_list)
+	if(user.loc == src)
+		to_chat(user, "<span class='warning'>You cannot reach the controls from inside.</span>")
 		return STATUS_CLOSE
 	if(isAI(user) && (href_list["handle"] || href_list["eject"]))
 		return min(STATUS_UPDATE, ..())

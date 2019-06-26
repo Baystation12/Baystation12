@@ -212,6 +212,7 @@ Class Procs:
 
 	if(stat & NOINPUT)
 		return min(..(), STATUS_UPDATE)
+	return ..()
 
 /obj/machinery/CanUseTopicPhysical(var/mob/user)
 	if(stat & BROKEN)
