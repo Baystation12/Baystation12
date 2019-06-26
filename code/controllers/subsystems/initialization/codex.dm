@@ -78,13 +78,13 @@ SUBSYSTEM_DEF(codex)
 	if(entry && istype(presenting_to) && presenting_to.client)
 		var/list/dat = list()
 		if(entry.lore_text)
-			dat += "<font color='#abdb9b'>[parse_links(entry.lore_text, presenting_to)]</font>"
+			dat += "<font color = '[CODEX_COLOR_LORE]'>[parse_links(entry.lore_text, presenting_to)]</font>"
 		if(entry.mechanics_text)
 			dat += "<h3>OOC Information</h3>"
-			dat += "<font color='#9ebcd8'>[parse_links(entry.mechanics_text, presenting_to)]</font>"
+			dat += "<font color = '[CODEX_COLOR_MECHANICS]'>[parse_links(entry.mechanics_text, presenting_to)]</font>"
 		if(entry.antag_text && presenting_to.mind && player_is_antag(presenting_to.mind))
 			dat += "<h3>Antagonist Information</h3>"
-			dat += "<font color='#e5a2a2'>[parse_links(entry.antag_text, presenting_to)]</font>"
+			dat += "<font color='[CODEX_COLOR_ANTAG]'>[parse_links(entry.antag_text, presenting_to)]</font>"
 		var/datum/browser/popup = new(presenting_to, "codex", "Codex - [entry.display_name]")
 		popup.set_content(jointext(dat, null))
 		popup.open()
