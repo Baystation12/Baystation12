@@ -81,7 +81,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state) && linked_console.linked_imprinter)
+	if(istype(new_state) && linked_console)
 		linked_console.linked_imprinter = null
 		linked_console = null
 

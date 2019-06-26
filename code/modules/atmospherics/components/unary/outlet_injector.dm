@@ -46,7 +46,7 @@
 	if (!node)
 		update_use_power(POWER_USE_OFF)
 
-	if(!powered())
+	if(stat & NOPOWER)
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
