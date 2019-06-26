@@ -33,6 +33,8 @@
 	motivator = new(src)
 
 /obj/item/mech_component/propulsion/proc/can_move_on(var/turf/location, var/turf/target_loc)
+	if(!location) //Unsure on how that'd even work
+		return 0
 	if(!istype(location))
 		return 1 // Inside something, assume you can get out.
 	if(!istype(target_loc))

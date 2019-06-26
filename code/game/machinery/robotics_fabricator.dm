@@ -9,6 +9,7 @@
 	active_power_usage = 5000
 	req_access = list(access_robotics)
 	base_type = /obj/machinery/robotics_fabricator
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/speed = 1
 	var/mat_efficiency = 1
@@ -137,12 +138,6 @@
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
-	if(default_deconstruction_screwdriver(user, I))
-		return
-	if(default_deconstruction_crowbar(user, I))
-		return
-	if(default_part_replacement(user, I))
-		return
 
 	if(!istype(I, /obj/item/stack/material))
 		return ..()

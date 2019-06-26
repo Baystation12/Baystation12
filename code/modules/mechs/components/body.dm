@@ -43,9 +43,6 @@
 	armour =      locate() in src
 	air_supply =  locate() in src
 
-	if(armour)
-		set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
-
 /obj/item/mech_component/chassis/show_missing_parts(var/mob/user)
 	if(!cell)
 		to_chat(user, SPAN_WARNING("It is missing a power cell."))

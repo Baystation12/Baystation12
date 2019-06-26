@@ -1,6 +1,3 @@
-#ifdef T_BOARD_MECH
-#error T_BOARD_MECH already defined elsewhere, we can't use it.
-#endif
 #define T_BOARD_MECH(name)	"exosuit software (" + (name) + ")"
 
 /obj/item/weapon/circuitboard/exosystem
@@ -28,15 +25,15 @@
 	origin_tech = list(TECH_DATA = 3,TECH_BIO = 2)
 
 /obj/item/weapon/circuitboard/exosystem/weapons
-	name = T_BOARD_MECH("ballistic weapon systems")
+	name = T_BOARD_MECH("basic weapon systems")
 	contains_software = list(MECH_SOFTWARE_WEAPONS)
 	icon_state = "mainboard"
-	origin_tech = list(TECH_DATA = 4)
+	origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 3)
 
 /obj/item/weapon/circuitboard/exosystem/advweapons
 	name = T_BOARD_MECH("advanced weapon systems")
 	contains_software = list(MECH_SOFTWARE_ADVWEAPONS)
 	icon_state = "mainboard"
-	origin_tech = list(TECH_DATA = 4)
+	origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 5)
 
 #undef T_BOARD_MECH

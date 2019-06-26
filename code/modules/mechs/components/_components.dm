@@ -1,6 +1,6 @@
 /obj/item/mech_component
 	icon = 'icons/mecha/mech_parts_held.dmi'
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	gender = PLURAL
 	color = COLOR_GUNMETAL
 
@@ -15,6 +15,7 @@
 	var/decal
 	var/power_use = 0
 	matter = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 1000, MATERIAL_OSMIUM = 500)
+	dir = SOUTH
 
 /obj/item/mech_component/proc/set_colour(new_colour)
 	var/last_colour = color
@@ -26,10 +27,6 @@
 	for(var/obj/item/thing in contents)
 		thing.emp_act(severity)
 
-/obj/item/mech_component/New()
-	..()
-	set_dir(SOUTH)
-
 /obj/item/mech_component/examine()
 	. = ..()
 	if(.)
@@ -38,6 +35,7 @@
 		else
 			show_missing_parts(usr)
 
+//These icons have multiple directions but before they're attached we only want south.
 /obj/item/mech_component/set_dir()
 	..(SOUTH)
 
@@ -48,32 +46,35 @@
 	return
 
 /obj/item/mech_component/proc/install_component(var/obj/item/thing, var/mob/user)
-	user.drop_from_inventory(thing)
-	thing.forceMove(src)
-	user.visible_message(SPAN_NOTICE("\The [user] installs \the [thing] in \the [src]."))
-	return 1
+	if(user.unEquip(thing, src))
+		user.visible_message(SPAN_NOTICE("\The [user] installs \the [thing] in \the [src]."))
+		return 1
 
 /obj/item/mech_component/proc/update_health()
 	total_damage = brute_damage + burn_damage
 	if(total_damage > max_damage) total_damage = max_damage
-	damage_state = min(max(round((total_damage/max_damage)*4),1),4)
+	damage_state = Clamp(round((total_damage/max_damage) * 4), MECH_COMPONENT_DAMAGE_UNDAMAGED, MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
 
 /obj/item/mech_component/proc/ready_to_install()
 	return 1
 
+/obj/item/mech_component/proc/repair_brute_damage(var/amt)
+	take_brute_damage(-amt)
+
+/obj/item/mech_component/proc/repair_burn_damage(var/amt)
+	take_burn_damage(-amt)
+
 /obj/item/mech_component/proc/take_brute_damage(var/amt)
 	brute_damage += amt
 	update_health()
-	if(total_damage > max_damage)
-		take_component_damage(total_damage-max_damage,0)
-		total_damage = max_damage
+	if(total_damage == max_damage)
+		take_component_damage(amt,0)
 
 /obj/item/mech_component/proc/take_burn_damage(var/amt)
 	burn_damage += amt
 	update_health()
-	if(total_damage > max_damage)
-		take_component_damage(0,total_damage-max_damage)
-		total_damage = max_damage
+	if(total_damage == max_damage)
+		take_component_damage(0,amt)
 
 /obj/item/mech_component/proc/take_component_damage(var/brute, var/burn)
 	var/list/damageable_components = list()

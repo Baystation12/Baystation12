@@ -1,3 +1,5 @@
+
+
 // Big stompy robots.
 /mob/living/exosuit
 	name = "exosuit"
@@ -64,9 +66,8 @@
 /mob/living/exosuit/is_flooded()
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
 
-/mob/living/exosuit/New(var/newloc, var/obj/structure/heavy_vehicle_frame/source_frame)
-
-	..(newloc)
+/mob/living/exosuit/Initialize(var/newloc, var/obj/structure/heavy_vehicle_frame/source_frame)
+	. = ..(newloc)
 
 	if(!access_card) access_card = new (src)
 
@@ -172,13 +173,13 @@
 				continue
 			var/damage_string = "destroyed"
 			switch(thing.damage_state)
-				if(1)
+				if(MECH_COMPONENT_DAMAGE_UNDAMAGED)
 					damage_string = "undamaged"
-				if(2)
+				if(MECH_COMPONENT_DAMAGE_DAMAGED)
 					damage_string = "damaged"
-				if(3)
+				if(MECH_COMPONENT_DAMAGE_DAMAGED_BAD)
 					damage_string = "badly damaged"
-				if(4)
+				if(MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
 					damage_string = "almost destroyed"
 			to_chat(user, "Its [thing.name] [thing.gender == PLURAL ? "are" : "is"] [damage_string].")
 

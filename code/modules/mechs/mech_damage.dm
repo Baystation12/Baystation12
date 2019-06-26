@@ -1,12 +1,12 @@
 /mob/living/exosuit/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
-	if(!effect || (blocked >= 2))
+	if(!effect || (blocked >= 100))
 		return 0
 	if(LAZYLEN(pilots) && !prob(body.pilot_coverage))
 		if(effect > 0 && effecttype == IRRADIATE)
 			effect = max((1-(get_armors_by_zone(null, IRRADIATE)/100))*effect/(blocked+1),0)
 		var/mob/living/pilot = pick(pilots)
 		return pilot.apply_effect(effect, effecttype, blocked)
-	if(!(effecttype in list(PAIN, STUTTER, EYE_BLUR, DROWSY)))
+	if(!(effecttype in list(PAIN, STUTTER, EYE_BLUR, DROWSY, STUN, WEAKEN)))
 		. = ..()
 
 /mob/living/exosuit/resolve_item_attack(var/obj/item/I, var/mob/living/user, var/def_zone)
@@ -18,23 +18,11 @@
 		var/mob/living/pilot = pick(pilots)
 		return pilot.resolve_item_attack(I, user, def_zone)
 
-	user.visible_message(SPAN_DANGER("\The [src] has been [I.attack_verb.len ? pick(I.attack_verb) : "attacked"] with \the [I] by [user]!"))
-	if(I.hitsound) playsound(user.loc, I.hitsound, 50, 1, -1)
-
-	var/weapon_sharp = is_sharp(I)
-	var/weapon_edge = has_edge(I)
-	if((weapon_sharp || weapon_edge) && prob(get_armors_by_zone(def_zone, "melee")))
-		weapon_sharp = 0
-		weapon_edge = 0
-	var/damflags = (weapon_sharp ? DAM_SHARP : 0) |(weapon_edge ? DAM_EDGE : 0)
-
-	apply_damage(damage = I.force, damagetype= I.damtype, def_zone = def_zone, damage_flags = damflags)
-
-	return // Return null so that we don't apply item effects like stun.
+	return def_zone //Careful with effects, mechs shouldn't be stunned
 
 /mob/living/exosuit/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
-	var/body_armor = get_extension(body, /datum/extension/armor)
+	var/body_armor = get_extension(body.armor, /datum/extension/armor)
 	if(body_armor)
 		. += body_armor
 
@@ -64,11 +52,11 @@
 			return body
 
 
-/mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/armor_pen, var/silent = FALSE)
+/mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
 	if(!damage)
 		return 0
 
-	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, silent)
+	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, TRUE)
 	damage = after_armor[1]
 	damagetype = after_armor[2]
 

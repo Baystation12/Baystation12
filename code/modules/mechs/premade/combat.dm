@@ -16,9 +16,6 @@
 		body = new /obj/item/mech_component/chassis/combat(src)
 		body.color = COLOR_DARK_GUNMETAL
 
-	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
-
 	..()
 
 	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
@@ -62,7 +59,11 @@
 	icon_state = "combat_body"
 	power_use = 40
 
-/obj/item/mech_component/chassis/combat/New()
+/obj/item/mech_component/chassis/combat/prebuild()
+	. = ..()
+	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+
+/obj/item/mech_component/chassis/combat/Initialize()
 	pilot_positions = list(
 		list(
 			"[NORTH]" = list("x" = 8,  "y" = 8),
@@ -72,4 +73,4 @@
 		)
 	)
 	
-	..()
+	. = ..()

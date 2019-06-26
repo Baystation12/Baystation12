@@ -16,8 +16,7 @@
 		body = new /obj/item/mech_component/chassis/powerloader(src)
 		body.color = "#ffdc37"
 
-	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
+	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit(src)
 
 	..()
 
@@ -61,7 +60,11 @@
 	max_damage = 100
 	power_use = 0
 
-/obj/item/mech_component/chassis/powerloader/New()
+/obj/item/mech_component/chassis/powerloader/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit(src)
+
+/obj/item/mech_component/chassis/powerloader/Initialize()
 	pilot_positions = list(
 		list(
 			"[NORTH]" = list("x" = 8,  "y" = 8),
@@ -76,7 +79,7 @@
 			"[WEST]"  = list("x" = 16, "y" = 16)
 		)
 	)
-	..()
+	. = ..()
 
 /mob/living/exosuit/premade/powerloader/flames_red
 	name = "APLU \"Firestarter\""
@@ -106,9 +109,6 @@
 	if(!body) 
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
-
-	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, body.armour.armor)
 
 	..()
 
