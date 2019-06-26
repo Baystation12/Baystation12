@@ -38,7 +38,7 @@
 	sort_string = "VAEAA"
 
 /datum/design/item/bluespace/bag_holding
-	name = "Bag of Holding"
+	name = "bag of holding"
 	desc = "Using localized pockets of bluespace this bag prototype offers incredible storage capacity with the contents weighting nothing. It's a shame the bag itself is pretty heavy."
 	id = "bag_holding"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
@@ -47,7 +47,7 @@
 	sort_string = "VAFAA"
 
 /datum/design/item/dufflebag_holding
-	name = "Dufflebag of Holding"
+	name = "dufflebag of holding"
 	desc = "A miniaturized prototype of the popular Bag of Holding, the Dufflebag of Holding is, functionally, identical to the bag of holding, but comes in a more stylish and compact form."
 	id = "dufflebag_holding"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
