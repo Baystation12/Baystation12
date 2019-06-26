@@ -22,7 +22,8 @@
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/process/innie_factions/proc/forbidden_atoms_check(atom/A)
 	if(istype(A,/mob/living))
-		return 1
+		if(!istype(A,/mob/living/simple_animal))
+			return 1
 	if(istype(A,/obj/item/weapon/disk/nuclear))
 		return 1
 	if(istype(A,/obj/machinery/nuclearbomb))
@@ -40,7 +41,7 @@
 	var/sale_credits = 0
 	for(var/area/subarea in geminus_supply_shuttle.shuttle_area)
 		//remove any old traders
-		for(var/mob/living/simple_animal/npc/colonist/weapon_smuggler/W in subarea)
+		for(var/mob/living/simple_animal/W in subarea)
 			qdel(W)
 
 		for(var/obj/AM in subarea)
@@ -104,7 +105,7 @@
 		var/turf/pickedloc = clear_turfs[i]
 		clear_turfs.Cut(i,i+1)
 		var/mob/living/simple_animal/npc/colonist/weapon_smuggler/W = new(pickedloc)
-		W.anchored = 1
+		W.name = "[W.real_name] (Weapons Trader)"
 
 	for(var/S in shoppinglist)
 		if(!clear_turfs.len)	break
