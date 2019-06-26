@@ -10,8 +10,8 @@
 	mob_size = MOB_LARGE
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 
-	health = 75
-	maxHealth = 75
+	health = 100
+	maxHealth = 100
 
 	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
