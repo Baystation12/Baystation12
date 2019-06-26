@@ -1228,8 +1228,8 @@
 	icon_state = "games"
 	icon_deny = "games-deny"
 	icon_vend = "games-vend"
-	products = list(/obj/item/toy/blink = 5, /obj/item/toy/eightball = 8, /obj/item/weapon/deck/cards = 5, /obj/item/weapon/deck/tarot = 5, /obj/item/weapon/pack/cardemon = 6, /obj/item/weapon/pack/spaceball = 6, /obj/item/weapon/storage/pill_bottle/dice_nerd = 5, /obj/item/weapon/storage/pill_bottle/dice = 5, /obj/item/weapon/storage/box/checkers = 2, /obj/item/weapon/storage/box/checkers/chess/red = 2, /obj/item/weapon/storage/box/checkers/chess = 2)
-	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/eightball = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10)
+	products = list(/obj/item/toy/blink = 5, /obj/item/toy/eightball = 8, /obj/item/weapon/deck/cards = 5, /obj/item/weapon/deck/tarot = 5, /obj/item/weapon/pack/cardemon = 6, /obj/item/weapon/pack/spaceball = 6, /obj/item/weapon/storage/pill_bottle/dice_nerd = 5, /obj/item/weapon/storage/pill_bottle/dice = 5, /obj/item/weapon/storage/box/checkers = 2, /obj/item/weapon/storage/box/checkers/chess/red = 2, /obj/item/weapon/storage/box/checkers/chess = 2, /obj/item/weapon/board = 2)
+	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/eightball = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10, /obj/item/weapon/board = 2)
 	premium = list(/obj/item/weapon/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
 	contraband = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
 
@@ -1248,17 +1248,19 @@
 					/obj/item/weapon/mirror = 8,
 					/obj/item/weapon/haircomb/random = 8,
 					/obj/item/weapon/haircomb/brush = 4,
-					/obj/item/weapon/towel/random = 6
+					/obj/item/weapon/towel/random = 6,
+					/obj/item/weapon/reagent_containers/spray/cleaner/deodorant = 5
 					)
 	contraband = list(/obj/item/weapon/inflatable_duck = 1)
 	prices = list(/obj/item/weapon/soap = 20,
 				  /obj/item/weapon/mirror = 40,
 				  /obj/item/weapon/haircomb/random = 40,
 				  /obj/item/weapon/haircomb/brush = 80,
-				  /obj/item/weapon/towel/random = 50
+				  /obj/item/weapon/towel/random = 50,
+				  /obj/item/weapon/reagent_containers/spray/cleaner/deodorant = 30
 					)
 
-//a food variant of the boda machine, only has one item currently.
+//a food variant of the boda machine - It carries slavic themed foods.. Mostly beer snacks
 /obj/machinery/vending/snix
 	name = "Snix"
 	desc = "An old snack vending machine, how did it get here? And are the snacks still good?"
@@ -1268,15 +1270,77 @@
 	icon_state = "snix"
 	icon_vend = "snix-vend"
 	icon_deny = "snix-deny"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/caviar = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/squid = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/croutons = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/salo = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 4
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/squid = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/croutons = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 7,
 					)
 
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
+
 /obj/machinery/vending/snix/on_update_icon()
+	..()
+	if(!(stat & NOPOWER))
+		overlays += image(icon, "[initial(icon_state)]-fan")
+
+/obj/machinery/vending/sol
+	name = "Mars-Mart"
+	desc = "A SolCentric vending machine dispensing treats from home."
+	vend_delay = 30
+	product_slogans = "A taste of home!"
+	icon_state = "solsnack"
+	icon_vend = "solsnack-vend"
+	icon_deny = "solsnack-deny"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/lunacake = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/lunacake/mochicake = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/lunacake/mooncake = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pluto = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/triton = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/saturn = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/mars = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/venus = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 8
+					)
+
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/lunacake = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/lunacake/mochicake = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/lunacake/mooncake = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/pluto = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/triton = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/saturn = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/mars = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/venus = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 12
+	)
+
+/obj/machinery/vending/weeb
+	name = "Nippon-tan!"
+	desc = "A distressingly ethnic vending machine loaded with high sucrose low calorie for lack of better words snacks."
+	vend_delay = 30
+	product_slogans = "Konnichiwa gaijin senpai! ;Notice me senpai!; Kawaii-desu!"
+	icon_state = "weeb"
+	icon_vend = "weeb-vend"
+	icon_deny = "weeb-deny"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/dango = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pokey = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 8
+					)
+
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/dango = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/pokey = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 80
+	)
+
+/obj/machinery/vending/sol/on_update_icon()
 	..()
 	if(!(stat & NOPOWER))
 		overlays += image(icon, "[initial(icon_state)]-fan")

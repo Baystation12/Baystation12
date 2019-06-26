@@ -1122,10 +1122,10 @@
 "df" = (
 /obj/item/stack/material/rods,
 /obj/item/weapon/reagent_containers/food/snacks/bearmeat,
-/obj/item/weapon/reagent_containers/food/snacks/caviar,
-/obj/item/weapon/reagent_containers/food/snacks/caviar,
-/obj/item/weapon/reagent_containers/food/snacks/caviar,
-/obj/item/weapon/reagent_containers/food/snacks/caviar,
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar,
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar,
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar,
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar,
 /turf/simulated/floor/plating/vox{
 	icon_state = "dmg4"
 	},
