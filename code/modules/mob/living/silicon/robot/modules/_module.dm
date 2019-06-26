@@ -176,6 +176,7 @@
 	for(var/original_language in original_languages)
 		R.add_language(original_language, original_languages[original_language])
 	original_languages.Cut()
+	R.add_language(R.default_language)
 
 /obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
 	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
