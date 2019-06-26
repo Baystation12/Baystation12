@@ -25,6 +25,7 @@
 	track_players = 1
 	selection_color = "#667700"
 	spawn_faction = "UNSC"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/stranded_unsc_tech
 	title = "UNSC technician survivor"
@@ -38,6 +39,7 @@
 	track_players = 1
 	selection_color = "#ff8800"
 	spawn_faction = "UNSC"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/stranded_unsc_medic
 	title = "UNSC corpsman survivor"
@@ -51,6 +53,7 @@
 	track_players = 1
 	selection_color = "#3300ff"
 	spawn_faction = "UNSC"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/stranded_unsc_crew
 	title = "UNSC crewman survivor"
@@ -64,6 +67,7 @@
 	track_players = 1
 	selection_color = "#996600"
 	spawn_faction = "UNSC"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/stranded_unsc_civ
 	title = "UEG colonist survivor"
@@ -77,3 +81,4 @@
 	track_players = 1
 	selection_color = "#00aa00"
 	spawn_faction = "UNSC"
+	whitelisted_species = list(/datum/species/human)

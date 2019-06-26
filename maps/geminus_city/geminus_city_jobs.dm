@@ -13,6 +13,7 @@
 
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/colonist
+	whitelisted_species = list(/datum/species/human)
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_janitor, access_maint_tunnels, access_research)
 	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
@@ -30,6 +31,7 @@
 	generate_email = 0
 	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
+	whitelisted_species = list(/datum/species/human)
 
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_janitor, access_maint_tunnels, access_research)
@@ -39,6 +41,7 @@
 	total_positions = 1
 	head_position = 1
 	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
+	whitelisted_species = list(/datum/species/human)
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = INNIE
@@ -58,6 +61,7 @@
 	account_allowed = 1
 	generate_email = 0
 	outfit_type = /decl/hierarchy/outfit/job/mayor
+	whitelisted_species = list(/datum/species/human)
 
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
@@ -81,6 +85,7 @@
 	generate_email = 0
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/police
+	whitelisted_species = list(/datum/species/human)
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
@@ -105,6 +110,7 @@
 
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/cop
+	whitelisted_species = list(/datum/species/human)
 
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory,

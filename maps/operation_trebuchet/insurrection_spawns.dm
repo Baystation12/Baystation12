@@ -1,6 +1,6 @@
 
 /datum/map/innie_base
-	allowed_jobs = list(/datum/job/Insurrectionist,/datum/job/Insurrectionist_leader,/datum/job/UNSC_assault,/datum/job/UNSC_Squad_Lead,/datum/job/UNSC_Team_Lead)
+	allowed_jobs = list(/datum/job/Insurrectionist,/datum/job/Insurrectionist_leader,/datum/job/UNSC_assault,/datum/job/UNSC_assault/squad_leader,/datum/job/UNSC_assault/commander)
 
 	allowed_spawns = list("Insurrectionist","Insurrectionist Leader","ODST Assault Squad Member","ODST Assault Squad Lead","ODST Assault Team Lead")
 
