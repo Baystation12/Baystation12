@@ -1,0 +1,4 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Can no longer drag people off of something they are buckled into (e.g. roller bed) onto an op table without unbuckling."
