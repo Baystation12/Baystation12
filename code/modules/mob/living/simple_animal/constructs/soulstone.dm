@@ -101,7 +101,7 @@
 
 	if(!shade.key) // No key = hasn't been used
 		to_chat(user, "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>")
-		user.pay_for_rune(1)
+		user.remove_blood_simple(1)
 		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
 		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
 	else if(!shade.client) // Has a key but no client - shade logged out
