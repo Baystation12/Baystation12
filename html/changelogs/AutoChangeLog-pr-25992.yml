@@ -1,5 +1,0 @@
-author: "Novacat"
-delete-after: True
-changes: 
-  - rscadd: "Adds the dufflebag of holding, a cosmetic reskin of the Bag of Holding."
-  - tweak: "Fixes some onhand sprites for dufflebags."
