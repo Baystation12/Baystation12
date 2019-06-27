@@ -103,6 +103,7 @@
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
+		new /obj/item/weapon/book/manual/chemistry_recipes(src)
 		update_icon()
 
 
