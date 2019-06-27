@@ -11,7 +11,10 @@
 	var/bumpstairs_room_type
 	var/do_pathing = 1
 	var/roomlocs_interval = 20
-	var/rat_chance = 0.5
+	var/animal_chance = 0.5
+	var/list/hostile_animal_types = list(\
+		/mob/living/simple_animal/hostile/giant_rat,\
+		/mob/living/simple_animal/hostile/alligator)
 	var/closed_end = 0
 	var/light_intervals = 6
 	var/list/roomlocs = list()
@@ -83,10 +86,13 @@
 		else
 			break
 
-		//hostile giant rat
-		if(prob(rat_chance))
-			var/mob/living/simple_animal/hostile/giant_rat/rat = new(cur_turf)
-			rat.SetRespawn()
+		//hostile NPC animal
+		if(prob(animal_chance))
+			var/animal_type = pick(hostile_animal_types)
+
+			var/mob/living/simple_animal/hostile/animal = new animal_type(cur_turf)
+			animal.faction = "Insurrection"
+			animal.respawning = 1
 
 		//side tunnel
 		if(cur_length - last_side_tunnel > side_tunnel_interval)
@@ -96,7 +102,7 @@
 				side_tunnel.max_length = max_length_sidetunnels
 				side_tunnel.roomlocs_interval = 2
 				side_tunnel.side_chance = 0
-				side_tunnel.rat_chance = 10
+				side_tunnel.animal_chance = 10
 				roomlocs += side_tunnel.do_path()
 				last_side_tunnel = cur_length
 
