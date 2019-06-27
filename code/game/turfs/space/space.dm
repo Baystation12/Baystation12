@@ -222,6 +222,3 @@
 /turf/space/bluespace
 	name = "bluespace"
 	icon_state = "bluespace"
-
-/turf/space/is_open()
-	return TRUE
