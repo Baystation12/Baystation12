@@ -2,7 +2,6 @@
 /datum/job/Insurrectionist
 	title = "Insurrectionist"
 	total_positions = -1
-	spawnpoint_override = "Insurrectionist"
 	selection_color = "#000000"
 	faction_flag = INNIE
 	supervisors = " the Insurrectionist Leader"
@@ -21,7 +20,6 @@
 /datum/job/Insurrectionist_leader
 	title = "Insurrectionist Leader"
 	total_positions = 1
-	spawnpoint_override = "Insurrectionist Leader"
 	selection_color = "#000000"
 	faction_flag = INNIE
 	supervisors = " the Insurrection"

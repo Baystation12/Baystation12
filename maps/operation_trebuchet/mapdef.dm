@@ -24,8 +24,13 @@
 
 
 /datum/map/Insurrection
-	allowed_jobs = list(/datum/job/UNSC_assault,/datum/job/UNSC_assault/squad_leader,/datum/job/UNSC_assault/commander,/datum/job/Insurrectionist,/datum/job/Insurrectionist_leader,)
-	allowed_spawns = list("Insurrectionist","Insurrectionist Leader","ODST Assault Squad Lead","ODST Assault Squad Member","ODST Assault Team Lead",)
+	allowed_jobs = list(\
+		/datum/job/UNSC_assault,\
+		/datum/job/UNSC_assault/squad_leader,\
+		/datum/job/UNSC_assault/commander,\
+		/datum/job/Insurrectionist,\
+		/datum/job/Insurrectionist_leader,)
+	allowed_spawns = list(DEFAULT_SPAWNPOINT_ID)
 
 /datum/map/Insurrection
 	apc_test_exempt_areas = list(
