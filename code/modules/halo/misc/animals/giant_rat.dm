@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/giant_rat
 	name = "giant rat"
 	desc = "Living off refuse with no natural predators deep underground has let it grow huge."
-	icon = 'code/modules/halo/misc/giant_rat.dmi'
+	icon = 'code/modules/halo/misc/animals/giant_rat.dmi'
 	icon_state = "idle"
 	icon_living = "idle"
 	icon_dead = "dead"
@@ -29,4 +29,4 @@
 	desc = "The by-product of rat farming."
 	singular_name = "rat hide piece"
 	icon_state = "sheet-rat"
-	icon = 'code/modules/halo/misc/giant_rat.dmi'
+	icon = 'code/modules/halo/misc/animals/giant_rat.dmi'
