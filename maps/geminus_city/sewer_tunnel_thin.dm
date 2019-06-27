@@ -14,10 +14,7 @@
 	var/animal_chance = 0.5
 	var/list/hostile_animal_types = list(\
 		/mob/living/simple_animal/hostile/giant_rat,\
-		/mob/living/simple_animal/hostile/creature,\
-		/mob/living/simple_animal/hostile/scarybat,\
-		/mob/living/simple_animal/hostile/giant_spider,\
-		/mob/living/simple_animal/hostile/giant_spider/hunter)
+		/mob/living/simple_animal/hostile/alligator)
 	var/closed_end = 0
 	var/light_intervals = 6
 	var/list/roomlocs = list()
