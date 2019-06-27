@@ -3,7 +3,7 @@
 	#include "jobs.dm"
 	#include "outfits.dm"
 	#include "turfs_areas.dm"
-	//#include "desert_outpost_spawns.dm"
+	#include "desert_outpost_spawns.dm"
 	#include "desert_outpost_map.dm"
 	#include "desert_outpost.dmm"
 
