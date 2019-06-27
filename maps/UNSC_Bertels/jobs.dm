@@ -12,6 +12,7 @@
 	selection_color = "#0A0A95"
 	access = list(142)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_medical_crew
 	title = "UNSC Bertels Hospital Corpsman"
@@ -22,6 +23,7 @@
 	selection_color = "#0A0A95"
 	access = list(142)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
@@ -34,6 +36,7 @@
 	access = list(142,144,145,192,308)
 	spawnpoint_override = "UNSC Base Spawns"
 	faction_whitelist = "UNSC"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
@@ -45,6 +48,7 @@
 	selection_color = "#0A0A95"
 	access = list(142,144,145,192,308)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unsc_ship_iwo
 	title = "UNSC Bertels Infantry Weapons Officer"
@@ -55,6 +59,7 @@
 	selection_color = "#0A0A95"
 	access = list(142,144,145,192,308)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 
 
@@ -72,6 +77,7 @@
 	"EVA Combat Marine","Marine Combat Technician")
 	access = list(142,144,192)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -82,6 +88,7 @@
 	selection_color = "#0A0A95"
 	access = list(142,144,145,192,308)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 //UNSC BERTELS ODST Jobs
 
@@ -104,6 +111,7 @@
 	access = list(142,144,110,192,309,310)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
@@ -121,3 +129,4 @@
 	access = list(142,144,145,110,192,300,306,308,309,310,311)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)

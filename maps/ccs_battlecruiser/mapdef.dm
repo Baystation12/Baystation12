@@ -38,11 +38,6 @@
 		/datum/job/opredflag_spartan/commander\
 	)
 
-	allowed_spawns = list("Arrivals Shuttle")
-	default_spawn = null
-
-
-
 /datum/map/covenant_cruiser/New()
 	. = ..()
 	name = "Damaged CCS [pick(GLOB.covenant_ship_names)]"

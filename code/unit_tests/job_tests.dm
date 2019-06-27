@@ -57,3 +57,38 @@
 	else
 		pass("All jobs have a HUD icon.")
 	return 1
+
+/datum/unit_test/jobs_shall_have_a_valid_spawn
+	name = "JOB: Shall have a valid spawn"
+
+/datum/unit_test/jobs_shall_have_a_valid_spawn/start_test()
+	var/failed_jobs = 0
+
+	for(var/datum/job/occupation in job_master.occupations)
+		var/spawnpoint_id = DEFAULT_SPAWNPOINT_ID
+		if(occupation.spawnpoint_override)
+			spawnpoint_id = occupation.spawnpoint_override
+
+		//grab the spawn
+		var/datum/spawnpoint/candidate = spawntypes()[spawnpoint_id]
+
+		if(candidate)
+			var/retval = candidate.check_job_spawning(occupation)
+			if(retval)
+				log_bad("[occupation.title] - [occupation.type]: Found spawn \"[spawnpoint_id]\" but spawning was blocked: [retval]")
+				failed_jobs++
+			else
+				retval = candidate.check_job_spawning(occupation, 1)
+				if(retval)
+					log_bad("[occupation.title] - [occupation.type]: Found spawn \"[spawnpoint_id]\" but latejoin spawning was blocked: [retval]")
+					failed_jobs++
+		else
+			log_bad("[occupation.title] - [occupation.type]: Searched for \"[spawnpoint_id]\" but couldn't find it.")
+			failed_jobs++
+
+
+	if(failed_jobs)
+		fail("[failed_jobs] job\s with invalid spawn.")
+	else
+		pass("All jobs had valid spawns.")
+	return 1

@@ -88,6 +88,7 @@
 /obj/effect/landmark/start/New()
 	..()
 	tag = "start*[name]"
+	GLOB.start_turfs += src.loc
 	return 1
 
 /obj/effect/landmark/start/joinlate

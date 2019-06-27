@@ -76,8 +76,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/list/allowed_spawns = list("Test Spawn")
-	var/default_spawn = "Test Spawn"
+	var/list/allowed_spawns = list(DEFAULT_SPAWNPOINT_ID)
+	var/default_spawn = DEFAULT_SPAWNPOINT_ID
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
 	var/use_overmap = 0		//If overmap should be used (including overmap space travel override)
@@ -179,7 +179,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			log_debug("SPAWN ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
 			message_admins("SPAWN ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
 
-		else if(candidate.check_job_spawning(job_datum.title))
+		else if(!candidate.check_job_spawning(job_datum.title))
 			//check if its viable to spawn in with this job
 			break
 

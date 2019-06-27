@@ -625,7 +625,6 @@ var/global/datum/controller/occupations/job_master
  */
 /datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/datum/job/job_datum, var/joined_late = 0)
 
-	var/rank = job_datum.title
 	var/datum/spawnpoint/candidate
 	var/spawnpoint_id = DEFAULT_SPAWNPOINT_ID
 
@@ -638,12 +637,13 @@ var/global/datum/controller/occupations/job_master
 	candidate = spawntypes()[spawnpoint_id]
 
 	if(candidate)
-		if(candidate.check_job_spawning(rank))
+		var/retval = candidate.check_job_spawning(job_datum, joined_late)
+		if(!retval)
 			return candidate
 		else
-			to_chat(C,"<span class = 'warning'>SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is currently not allowed! (client: [C])</span>")
-			log_debug("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is currently not allowed! (client: [C])")
-			message_admins("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is currently not allowed! (client: [C])")
+			to_chat(C,"<span class = 'warning'>SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is blocked! Reason: [retval] (client: [C])</span>")
+			log_debug("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is blocked! (client: [C]) Reason: [retval]")
+			message_admins("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is blocked! (client: [C]) Reason: [retval]")
 	else
 		to_chat(C,"<span class = 'warning'>SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist!</span> (client: [C])")
 		log_debug("SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist! (client: [C], job:[job_datum.type])")

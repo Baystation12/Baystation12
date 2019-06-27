@@ -12,3 +12,11 @@
 
 	id_hud_icons = 'stranded_hud_icons.dmi'
 
+	allowed_spawns = list("Crash Site")
+
+	allowed_jobs = list(\
+		/datum/job/stranded/unsc_marine,\
+		/datum/job/stranded/unsc_tech,\
+		/datum/job/stranded/unsc_medic,\
+		/datum/job/stranded/unsc_crew,\
+		/datum/job/stranded/unsc_civ)
