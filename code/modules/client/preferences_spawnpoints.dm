@@ -25,24 +25,24 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/proc/check_job_spawning(job)
 	if(restrict_job && !(job in restrict_job))
-		return 0
+		return "restricted job"
 
 	if(disallow_job && (job in disallow_job))
-		return 0
+		return "disallowed job"
 
 	//this is a bit hacky but its a convenience job
 	var/datum/job/cur_job = job_master.GetJob(job)
 	if(restrict_job_type && !(cur_job.type in restrict_job_type))
-		return 0
+		return "restricted job type"
 
 	if(disallow_job_type && (cur_job.type in disallow_job_type))
-		return 0
+		return "disallowed job type"
 
 	if(restrict_spawn_faction && cur_job.spawn_faction != restrict_spawn_faction)
-		return 0
+		return "restricted spawn faction"
 
 	if(!turfs)
-		return 0
+		return "no turfs generated"
 
 	if(disable_atmos_unsafe)
 		var/list/newly_dangerous_turfs = list()
@@ -63,10 +63,14 @@ GLOBAL_VAR(spawntypes)
 			if(newly_dangerous_turfs.len)
 				message_admins("NOTICE: spawnpoint \'[src.type]\' has new atmos unsafe turfs, disabling spawns for those turfs.")
 
+	//check if there are any valid turfs for this spawnpoint
 	if(!turfs.len)
-		return 0
+		//see if there is special handling for this job and spawn combo
+		var/turf/spawnturf = get_spawn_turf(job)
+		if(!spawnturf)
+			return "no valid turfs detected"
 
-	return 1
+	return 0
 
 /datum/spawnpoint/proc/get_spawn_turf(var/rank)
 	if(turfs && turfs.len)

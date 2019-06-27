@@ -179,7 +179,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			log_debug("SPAWN ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
 			message_admins("SPAWN ERROR: spawntype \'[display_name]\' is enabled for the map \'[src]\' but does not exist!")
 
-		else if(candidate.check_job_spawning(job_datum.title))
+		else if(!candidate.check_job_spawning(job_datum.title))
 			//check if its viable to spawn in with this job
 			break
 

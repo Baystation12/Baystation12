@@ -638,12 +638,13 @@ var/global/datum/controller/occupations/job_master
 	candidate = spawntypes()[spawnpoint_id]
 
 	if(candidate)
-		if(candidate.check_job_spawning(rank))
+		var/retval = candidate.check_job_spawning(rank)
+		if(!retval)
 			return candidate
 		else
-			to_chat(C,"<span class = 'warning'>SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is currently not allowed! (client: [C])</span>")
-			log_debug("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is currently not allowed! (client: [C])")
-			message_admins("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is currently not allowed! (client: [C])")
+			to_chat(C,"<span class = 'warning'>SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is not allowed! Reason: [retval] (client: [C])</span>")
+			log_debug("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is not allowed! (client: [C]) Reason: [retval]")
+			message_admins("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is not allowed! (client: [C]) Reason: [retval]")
 	else
 		to_chat(C,"<span class = 'warning'>SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist!</span> (client: [C])")
 		log_debug("SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist! (client: [C], job:[job_datum.type])")
