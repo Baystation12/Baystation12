@@ -6,11 +6,8 @@
 	selection_color = "#000000"
 	spawn_faction = "Human Colony"
 	supervisors = " the Colony Mayor"
-
-	create_record = 0
 	account_allowed = 1
-	generate_email = 0
-
+	generate_email = 1
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/colonist
 	whitelisted_species = list(/datum/species/human)
@@ -23,13 +20,11 @@
 	total_positions = 5
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
-	faction_flag = INNIE
+	spawn_faction = "Insurrection"
 	supervisors = " the Colony Mayor and your local insurrection contact"
-
-	create_record = 0
 	account_allowed = 1
-	generate_email = 0
-	announced = FALSE
+	generate_email = 1
+	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
 	whitelisted_species = list(/datum/species/human)
 
@@ -42,9 +37,12 @@
 	head_position = 1
 	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
 	whitelisted_species = list(/datum/species/human)
+	account_allowed = 1
+	generate_email = 1
+	loadout_allowed = TRUE
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
-	faction_flag = INNIE
+	spawn_faction = "Insurrection"
 	supervisors = " the Insurrection"
 
 /datum/job/colonist_mayor
@@ -56,10 +54,10 @@
 	selection_color = "#000000"
 	spawn_faction = "Human Colony"
 	supervisors = " your citizens"
-
-	create_record = 0
 	account_allowed = 1
-	generate_email = 0
+	generate_email = 1
+	economic_modifier = 3
+	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/mayor
 	whitelisted_species = list(/datum/species/human)
 
@@ -82,7 +80,8 @@
 	spawn_faction = "Human Colony"
 	account_allowed = 1
 	announced = TRUE
-	generate_email = 0
+	generate_email = 1
+	economic_modifier = 1.5
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/police
 	whitelisted_species = list(/datum/species/human)
@@ -100,14 +99,15 @@
 	total_positions = 1
 	spawn_faction = "Human Colony"
 	head_position = 1
+	account_allowed = 1
+	generate_email = 1
+	loadout_allowed = TRUE
 	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	supervisors = "the Colony Mayor"
-
-	create_record = 0
 	account_allowed = 1
-	generate_email = 0
-
+	generate_email = 1
+	economic_modifier = 2
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/cop
 	whitelisted_species = list(/datum/species/human)

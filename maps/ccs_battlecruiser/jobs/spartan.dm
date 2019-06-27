@@ -10,7 +10,7 @@
 	announced = FALSE                  //If their arrival is announced on radio
 	generate_email = 0
 	whitelisted_species = list(/datum/species/spartan)
-	spawn_positions = 99
+	spawn_positions = -1
 	total_positions = 0
 	track_players = 1
 
