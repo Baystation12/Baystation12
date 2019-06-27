@@ -258,6 +258,14 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
 
+/obj/item/weapon/reagent_containers/glass/bucket/wood
+	name = "bucket"
+	desc = "It's a wooden bucket. How rustic."
+	icon_state = "wbucket"
+	item_state = "wbucket"
+	matter = list(MATERIAL_WOOD = 280)
+	volume = 200
+
 /obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob)
 
 	if(isprox(D))

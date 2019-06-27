@@ -983,6 +983,10 @@
 /area/crew_quarters/head/aux
 	name = "\improper First Deck Head"
 
+/area/crew_quarters/head/sauna
+	name = "\improper Sauna"
+	icon_state = "sauna"
+
 /area/crew_quarters/gym
 	name = "\improper Gym"
 	icon_state = "fitness"
@@ -1644,11 +1648,6 @@
 	icon_state = "nuke_storage"
 	area_flags = AREA_FLAG_IS_NOT_PERSISTENT
 	req_access = list(access_heads_vault)
-
-/area/security/range
-	name = "\improper Decommissioned Firing Range"
-	icon_state = "firingrange"
-	req_access = list(access_solgov_crew)
 
 // Crew
 
