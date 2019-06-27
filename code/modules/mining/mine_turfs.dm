@@ -445,6 +445,9 @@ var/global/list/mining_floors = list()
 /turf/simulated/mineral/random/high_chance/planet
 	mined_turf = /turf/simulated/floor/asteroid/planet
 
+/turf/simulated/mineral/planet
+	mined_turf = /turf/simulated/floor/asteroid/planet
+
 /**********************Asteroid**************************/
 
 // Setting icon/icon_state initially will use these values when the turf is built on/replaced.
