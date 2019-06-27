@@ -1,0 +1,4 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - rscadd: "Adds a chemistry recipes book to the chemist's locker that lists the medication recipes."
