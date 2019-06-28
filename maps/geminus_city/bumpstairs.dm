@@ -31,7 +31,7 @@
 /obj/effect/landmark/bumpstairs_room
 	name = "bumpstairs_room_one"
 	icon_state = "x2"
-	invisibility = 0
+	invisibility = 101
 	var/bumpstairs_type = /obj/structure/bumpstairs/sewers_one
 
 /obj/effect/landmark/bumpstairs_room/one

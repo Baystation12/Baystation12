@@ -95,6 +95,9 @@
 	name = "JoinLate"
 
 //Costume spawner landmarks
+/obj/effect/landmark/costume
+	invisibility = 0
+
 /obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
 
 	var/list/options = typesof(/obj/effect/landmark/costume)

@@ -6,6 +6,7 @@
 
 /obj/effect/landmark/corpse
 	name = "Unknown"
+	invisibility = 0
 	var/mobname// = "Unknown"  //Unused now but it'd fuck up maps to remove it now
 	var/corpseuniform = null //Set this to an object path to have the slot filled with said object on the corpse.
 	var/corpsesuit = null
