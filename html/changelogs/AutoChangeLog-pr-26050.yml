@@ -1,0 +1,4 @@
+author: ".verarch"
+delete-after: True
+changes: 
+  - tweak: "lizard horns should no longer obscure eyes."
