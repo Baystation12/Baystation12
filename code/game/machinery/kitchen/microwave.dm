@@ -17,6 +17,7 @@
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
+	var/list/ingredients = list()
 
 
 // see code/modules/food/recipes_microwave.dm for recipes
@@ -82,6 +83,7 @@
 			to_chat(user, "<span class='warning'>It's broken!</span>")
 			return 1
 	else if((. = component_attackby(O, user)))
+		dispose()
 		return
 	else if(src.dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner) || istype(O, /obj/item/weapon/reagent_containers/glass/rag)) // If they're trying to clean it then let them
@@ -102,13 +104,14 @@
 			to_chat(user, "<span class='warning'>It's dirty!</span>")
 			return 1
 	else if(is_type_in_list(O,acceptable_items))
-		if (contents.len >= max_n_of_items)
+		if (LAZYLEN(ingredients) >= max_n_of_items)
 			to_chat(user, "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>")
 			return 1
 		if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
 			if(S.use(1))
-				new O.type (src)
+				var/stack_item = new O.type (src)
+				LAZYADD(ingredients, stack_item)
 				user.visible_message( \
 					"<span class='notice'>\The [user] has added one of [O] to \the [src].</span>", \
 					"<span class='notice'>You add one of [O] to \the [src].</span>")
@@ -116,6 +119,7 @@
 		else
 			if (!user.unEquip(O, src))
 				return
+			LAZYADD(ingredients, O)
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
@@ -177,6 +181,9 @@
 /*******************
 *   Microwave Menu
 ********************/
+
+/obj/machinery/microwave/InsertedContents()
+	return ingredients
 
 /obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
 	var/dat = list()
@@ -332,8 +339,11 @@
 	src.update_icon()
 
 /obj/machinery/microwave/proc/dispose()
-	for (var/obj/O in src)
+	if (!LAZYLEN(ingredients) || !reagents.total_volume)
+		return
+	for (var/obj/O in ingredients)
 		O.dropInto(loc)
+	LAZYCLEARLIST(ingredients)
 	if (src.reagents.total_volume)
 		src.dirty++
 	src.reagents.clear_reagents()
@@ -376,18 +386,19 @@
 	var/amount = 0
 
 	// Kill + delete mobs in mob holders
-	for (var/obj/item/weapon/holder/H in (contents - component_parts))
+	for (var/obj/item/weapon/holder/H in ingredients)
 		for (var/mob/living/M in H.contents)
 			M.death()
 			qdel(M)
 
-	for (var/obj/O in (contents - component_parts))
+	for (var/obj/O in ingredients)
 		amount++
 		if (O.reagents)
 			var/reagent_type = O.reagents.get_master_reagent_type()
 			if (reagent_type)
 				amount+=O.reagents.get_reagent_amount(reagent_type)
 		qdel(O)
+	LAZYCLEARLIST(ingredients)
 	src.reagents.clear_reagents()
 	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
 	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
