@@ -61,10 +61,9 @@
 		cell = new suitable_cell(src)
 
 	if(use_fuel_cost)
-		var/datum/reagents/R = new/datum/reagents(max_fuel)
+		var/datum/reagents/R = new/datum/reagents(max_fuel, src)
 		reagents = R
-		R.my_atom = src
-		R.add_reagent("fuel", max_fuel)
+		R.add_reagent(/datum/reagent/fuel, max_fuel)
 
 	if (use_stock_cost)
 		stock = max_stock
@@ -190,7 +189,7 @@
 
 //Simple form ideal for basic use. That proc will return TRUE only when everything was done right, and FALSE if something went wrong, ot user was unlucky.
 //Editionaly, handle_failure proc will be called for a critical failure roll.
-/obj/item/proc/use_tool(var/mob/living/user, var/atom/target, var/base_time, var/required_quality, var/fail_chance, var/required_stat, var/instant_finish_tier = 110, forced_sound = null, var/sound_repeat = 2.5)
+/obj/proc/use_tool(var/mob/living/user, var/atom/target, var/base_time, var/required_quality, var/fail_chance, var/required_stat, var/instant_finish_tier = 110, forced_sound = null, var/sound_repeat = 2.5)
 	var/obj/item/weapon/tool/T
 	if (istool(src))
 		T = src
@@ -211,7 +210,7 @@
 			return TRUE
 
 //Use this proc if you want to handle all types of failure yourself. It used in surgery, for example, to deal damage to patient.
-/obj/item/proc/use_tool_extended(var/mob/living/user, var/atom/target, base_time, required_quality, fail_chance, required_stat = null, instant_finish_tier = 110, forced_sound = null, var/sound_repeat = 2.5 SECONDS)
+/obj/proc/use_tool_extended(var/mob/living/user, var/atom/target, base_time, required_quality, fail_chance, required_stat = null, instant_finish_tier = 110, forced_sound = null, var/sound_repeat = 2.5 SECONDS)
 
 	var/obj/item/weapon/tool/T
 	if(istool(src))
@@ -341,10 +340,13 @@
 *******************************/
 
 //Critical failure rolls. If you use use_tool_extended, you might want to call that proc as well.
-/obj/item/proc/handle_failure(var/mob/living/user, var/atom/target, var/required_stat, required_quality)
+/obj/proc/handle_failure(var/mob/living/user, var/atom/target, var/required_stat, required_quality)
+	var/obj/item/I = src
 	var/obj/item/weapon/tool/T
-	if(istype(src, /obj/item/weapon/tool))
-		T = src
+	if (istype(src, /obj/item))
+		I = src
+		if(istype(src, /obj/item/weapon/tool))
+			T = src
 
 	var/crit_fail_chance = 25
 	if (T)
@@ -367,7 +369,10 @@
 		//Robots can do this one too
 		failtypes["burn"] = 0.5
 
-	if(canremove)
+
+
+
+	if(I.canremove)
 		failtypes["throw"] = 1
 
 		if(T && T.degradation)
@@ -381,9 +386,9 @@
 		failtypes["slip"] = 2
 		failtypes["swing"] = 1
 		if(ishuman(user))
-			if(canremove)
+			if(I.canremove)
 				failtypes["drop"] = 2
-			if (sharp)
+			if (I.sharp)
 				failtypes["stab"] = 1
 
 			//This one is limited to humans only since robots often can't remove/replace their device cells
@@ -417,7 +422,7 @@
 			if("slip")
 				var/mob/living/carbon/human/H = user
 				user << SPAN_DANGER("Your hand slips while working with [src]!")
-				attack(H, H, H.get_holding_hand(src))
+				I.attack(H, H, H.get_holding_hand(src))
 				return
 
 			//Hit a random atom around you
@@ -519,7 +524,7 @@
 /******************************
 	/* Data and Checking */
 *******************************/
-/obj/item/proc/has_quality(quality_id)
+/obj/proc/has_quality(quality_id)
 	return quality_id in tool_qualities
 
 //A special version of the above that also checks the switched on list
@@ -530,13 +535,13 @@
 		if (quality_id in switched_on_qualities)
 			return TRUE
 
-/obj/item/proc/get_tool_quality(quality_id)
+/obj/proc/get_tool_quality(quality_id)
 	if (tool_qualities && tool_qualities.len)
 		return tool_qualities[quality_id]
 	return null
 
 //We are cheking if our item got required qualities. If we require several qualities, and item posses more than one of those, we ask user to choose how that item should be used
-/obj/item/proc/get_tool_type(var/mob/living/user, var/list/required_qualities, var/atom/use_on, var/datum/callback/CB)
+/obj/proc/get_tool_type(var/mob/living/user, var/list/required_qualities, var/atom/use_on, var/datum/callback/CB)
 	var/list/L = required_qualities & tool_qualities
 
 	if(!L.len)
@@ -570,7 +575,7 @@
 	if (!isnull(switched_on_force))
 		force = switched_on_force
 	if(glow_color)
-		set_light(l_range = 1.7, l_power = 1.3, l_color = glow_color)
+		set_light(1, 1, 3)
 	update_icon()
 	//update_wear_icon() //Too tied into eris' inventory system, need to find a better path to do this
 
@@ -594,7 +599,7 @@
 /*********************
 	Resource Consumption
 **********************/
-/obj/item/proc/consume_resources(var/timespent, var/user)
+/obj/proc/consume_resources(var/timespent, var/user)
 	return
 
 /obj/item/weapon/tool/consume_resources(var/timespent, var/user)
@@ -653,7 +658,7 @@
 
 //Returns the amount of fuel in tool
 /obj/item/weapon/tool/proc/get_fuel()
-	return reagents.get_reagent_amount("fuel")
+	return reagents.get_reagent_amount(/datum/reagent/fuel)
 
 /obj/item/weapon/tool/proc/consume_fuel(var/volume)
 	if (get_fuel() >= volume)
@@ -852,7 +857,7 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
-/* TODO: Figure out bay prosthetic repair then uncomment this
+// TODO: Figure out bay prosthetic repair then uncomment this
 /obj/item/weapon/tool/attack(mob/living/M, mob/living/user, var/target_zone)
 	if ((user.a_intent == I_HELP) && ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -863,22 +868,27 @@
 
 		//TODO: Bay probably has its own code for this. Point to that instead
 		if (get_tool_type(user, list(QUALITY_WELDING), H)) //Prosthetic repair
-			if (S.brute_dam)
-				if (S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
-					if (use_tool(user, H, WORKTIME_FAST, QUALITY_WELDING, FAILCHANCE_NORMAL, required_stat = "construction"))
-						S.heal_damage(15,0,0,1)
+			if (S.brute_dam || S.burn_dam)
+				if (use_tool(user, H, WORKTIME_FAST, QUALITY_WELDING, FAILCHANCE_NORMAL, required_stat = "construction"))
+					if(S.robo_repair(15, BRUTE, "some dents", src, user))
+						//S.heal_damage(15,0,0,1)
 						user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 						user.visible_message(SPAN_NOTICE("\The [user] patches some dents on \the [H]'s [S.name] with \the [src]."))
 						return 1
+			/*
 				else if (S.open != 2)
 					user << SPAN_DANGER("The damage is far too severe to patch over externally.")
 					return 1
 			else if (S.open != 2) // For surgery.
 				user << SPAN_NOTICE("Nothing to fix!")
 				return 1
+				*/
+			else
+				user << SPAN_NOTICE("Nothing to fix!")
+				return 1
 
 	return ..()
-*/
+
 
 /obj/item/weapon/tool/update_icon()
 	overlays.Cut()

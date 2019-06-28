@@ -18,6 +18,7 @@
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 	var/list/tool_qualities = null// List of item qualities for tools system. See tools_and_qualities.dm.
 	var/heat = 0 //Temperature of this object, mostly used to see if it can set other things on fire
+	var/worksound = null	//Sound played when this object is used as a tool in tool operations
 
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)

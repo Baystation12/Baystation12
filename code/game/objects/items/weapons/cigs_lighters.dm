@@ -16,18 +16,20 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame
 	var/lit = 0
 
-/proc/isflamesource(A)
-	if(isWelder(A))
-		var/obj/item/weapon/weldingtool/WT = A
-		return (WT.isOn())
-	else if(istype(A, /obj/item/weapon/flame))
-		var/obj/item/weapon/flame/F = A
-		return (F.lit)
-	else if(istype(A, /obj/item/clothing/mask/smokable) && !istype(A, /obj/item/clothing/mask/smokable/pipe))
-		var/obj/item/clothing/mask/smokable/S = A
-		return (S.lit)
-	else if(istype(A, /obj/item/device/assembly/igniter))
-		return 1
+/proc/isflamesource(var/obj/A)
+
+	if (istype(A))
+		if(isWelder(A))
+			var/obj/item/weapon/weldingtool/WT = A
+			return (WT.isOn())
+		else if(istype(A, /obj/item/weapon/flame))
+			var/obj/item/weapon/flame/F = A
+			return (F.lit)
+		else if(istype(A, /obj/item/clothing/mask/smokable) && !istype(A, /obj/item/clothing/mask/smokable/pipe))
+			var/obj/item/clothing/mask/smokable/S = A
+			return (S.lit)
+		else if(istype(A, /obj/item/device/assembly/igniter))
+			return 1
 	return 0
 
 ///////////

@@ -933,11 +933,12 @@ About the new airlock wires panel:
 	return 1
 
 //returns 1 on success, 0 on failure
-/obj/machinery/door/airlock/proc/cut_bolts(item, var/mob/user)
+/obj/machinery/door/airlock/proc/cut_bolts(var/obj/item, var/mob/user)
 	var/cut_delay = (15 SECONDS)
 	var/cut_verb
 	var/cut_sound
 
+	//Todo: Cutting quality check here
 	if(isWelder(item))
 		var/obj/item/weapon/weldingtool/WT = item
 		if(!WT.isOn())
