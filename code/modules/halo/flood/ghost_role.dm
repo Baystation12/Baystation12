@@ -1,4 +1,7 @@
 
+/obj/effect/landmark/flood_spawn
+	name = "flood spawn landmark"
+
 /datum/ghost_role/flood_combat_form
 
 	mob_to_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
