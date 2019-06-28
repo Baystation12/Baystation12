@@ -1,5 +1,0 @@
-author: "Cakey"
-delete-after: True
-changes: 
-  - rscadd: "Adds pixel offsets to all mobs to give the game more feel for depth."
-  - rscadd: "Gives all mobs a drop shadow."
