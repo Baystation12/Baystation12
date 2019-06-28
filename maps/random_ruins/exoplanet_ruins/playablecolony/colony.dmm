@@ -5939,13 +5939,6 @@
 	tag_west = 2
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8;
-	frequency = 2222;
-	id_tag = "playablecolonymain_pump_out_internal";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "ko" = (
@@ -8541,9 +8534,6 @@
 	},
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
