@@ -23,10 +23,6 @@
 		for(var/obj/effect/landmark/flood_spawn/F in world)
 			flood_spawn_turfs.Add(get_turf(F))
 
-	spawn(-1)
-		for(var/obj/effect/landmark/flood_assault_target/F in world)
-			flood_assault_turfs.Add(get_turf(F))
-
 	//planet_area = locate() in world
 
 /datum/game_mode/stranded/announce()
