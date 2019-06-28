@@ -77,6 +77,7 @@
 	maxHealth = 9999999999
 	resistance = 1000
 	feral = 1
+	var/npc_use_stunbeam = 1
 	var/list/speak_friendly = list("Let's see now!","Hmm, ah!","Oh, that's a good idea!","Hah I am a genius!","I am a genius hahahaha!","Ah!")
 	var/list/speak_angry = list(\
 		"You have endangered my installation!",\
@@ -120,6 +121,17 @@
 		speak = speak_friendly
 		emote_see = emote_see_friendly
 		emote_hear = emote_hear_friendly
+
+/mob/living/simple_animal/hostile/monitor/Life()
+	//for admins to force a switch between deathbeam and stunbeam
+	if(npc_use_stunbeam)
+		if(selected_gun == monitorbeam)
+			enable_stunbeam()
+
+	else if(selected_gun == monitorbeamstun)
+		enable_deathbeam()
+
+	. = ..()
 
 /mob/living/simple_animal/hostile/monitor/proc/enable_deathbeam()
 	set category = "IC"
@@ -179,7 +191,6 @@
 	. = ..(gibbed, deathmessage, show_dead_message)
 	explosion(T, 2, 4, 6, 8, adminlog = 0)
 	new /obj/effect/gibspawner/robot(T)
-
 
 // random monitor name
 
