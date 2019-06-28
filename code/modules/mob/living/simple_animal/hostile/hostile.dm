@@ -23,8 +23,6 @@
 	var/damtype = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
 
-	var/turf/assault_target
-	var/target_margin = 0
 	var/feral = 0
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
@@ -186,6 +184,9 @@
 			switch(stance)
 				if(HOSTILE_STANCE_IDLE)
 					target_mob = FindTarget()
+
+					if(!target_mob)
+						handle_assault_pathing()
 
 				if(HOSTILE_STANCE_ATTACK)
 					if(destroy_surroundings)
