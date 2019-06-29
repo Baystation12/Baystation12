@@ -25,7 +25,7 @@
 
 	var/launch_arm_time = 5 SECONDS
 
-	var/pod_range = 3 //Range of pod in overmap tiles
+	var/pod_range = 8 //Range of pod in overmap tiles
 
 /obj/vehicles/drop_pod/on_death()
 	return
