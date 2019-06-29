@@ -341,6 +341,10 @@
 
 #define MOB_PIXEL_Z 7
 
+//Used in mob emote classifications
+#define EMOTE_ALL_SPECIES "All"
+#define EMOTE_ALL_GENDERS "All"
+
 #define ROBOT_MODULE_TYPE_GROUNDED "grounded"
 #define ROBOT_MODULE_TYPE_FLYING   "flying"
 

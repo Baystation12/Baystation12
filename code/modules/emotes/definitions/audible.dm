@@ -2,11 +2,6 @@
 	key = "burp"
 	emote_message_3p = "USER burps."
 	message_type = AUDIBLE_MESSAGE
-	var/emote_sound
-
-/decl/emote/audible/do_extra(var/atom/user)
-	if(emote_sound)
-		playsound(user.loc, emote_sound, 50, 0)
 
 /decl/emote/audible/deathgasp_alien
 	key = "deathgasp"
@@ -37,7 +32,11 @@
 /decl/emote/audible/chirp
 	key ="chirp"
 	emote_message_3p = "USER chirps!"
-	emote_sound = 'sound/misc/nymphchirp.ogg'
+	emote_sound = list(
+		SPECIES_DIONA = list(
+			EMOTE_ALL_GENDERS = list('sound/misc/nymphchirp.ogg'),
+		)
+	)
 
 /decl/emote/audible/alarm
 	key = "alarm"
@@ -153,14 +152,26 @@
 	key ="hiss"
 	emote_message_3p_target = "USER hisses at TARGET."
 	emote_message_3p = "USER hisses."
-	emote_sound = 'sound/voice/BugHiss.ogg'
+	emote_sound = list(
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/voice/BugHiss.ogg'),
+		)
+	)
 
 /decl/emote/audible/bug_buzz
 	key ="buzz"
 	emote_message_3p = "USER buzzes its wings."
-	emote_sound = 'sound/voice/BugBuzz.ogg'
+	emote_sound = list(
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/voice/BugBuzz.ogg'),
+		)
+	)
 
 /decl/emote/audible/bug_chitter
 	key ="chitter"
 	emote_message_3p = "USER chitters."
-	emote_sound = 'sound/voice/Bug.ogg'
+	emote_sound = list(
+		EMOTE_ALL_SPECIES = list(
+			EMOTE_ALL_GENDERS = list('sound/voice/Bug.ogg'),
+		)
+	)
