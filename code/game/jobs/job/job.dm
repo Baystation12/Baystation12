@@ -22,7 +22,7 @@
 	var/minimum_character_age = 0
 	var/ideal_character_age = 30
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
-
+	var/is_semi_antagonist = FALSE        // Whether or not this job is given semi-antagonist status.
 	var/account_allowed = 1               // Does this job type come with a station account?
 	var/economic_power = 2             // With how much does this job modify the initial account amount?
 
@@ -353,6 +353,8 @@
 	var/list/reasons = list()
 	if(jobban_isbanned(caller, title))
 		reasons["You are jobbanned."] = TRUE
+	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+		reasons["You are semi-antagonist banned."] = TRUE
 	if(!player_old_enough(caller))
 		reasons["Your player age is too low."] = TRUE
 	if(!is_position_available())
@@ -378,6 +380,8 @@
 	if(!is_position_available())
 		return FALSE
 	if(jobban_isbanned(caller, title))
+		return FALSE
+	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
 		return FALSE
 	if(!player_old_enough(caller))
 		return FALSE
@@ -445,7 +449,8 @@
 	return spawnpos
 
 /datum/job/proc/post_equip_rank(var/mob/person, var/alt_title)
-	return
+	if(is_semi_antagonist && person.mind)
+		GLOB.provocateurs.add_antagonist(person.mind)
 
 /datum/job/proc/get_alt_title_for(var/client/C)
 	return C.prefs.GetPlayerAltTitle(src)

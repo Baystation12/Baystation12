@@ -35,6 +35,7 @@
 		if(M.client && M.mind)
 			if(M.mind.assigned_role == "Loss Prevention Associate")
 				to_chat(M, SPAN_NOTICE("<b>One of your employers, [my_title] named [person.real_name], is present on [GLOB.using_map.full_name].</b>"))
+	..()
 
 /datum/job/bodyguard
 	title = "Loss Prevention Associate"
@@ -86,3 +87,4 @@
 		if(M.client && M.mind)
 			if(M.mind.assigned_role == "Workplace Liaison")
 				to_chat(M, SPAN_NOTICE("<b>Your bodyguard, [my_title] named [person.real_name], is present on [GLOB.using_map.full_name].</b>"))
+	..()
