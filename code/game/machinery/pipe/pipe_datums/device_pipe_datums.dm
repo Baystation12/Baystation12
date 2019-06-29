@@ -208,3 +208,4 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	constructed_path = /obj/machinery/atmospherics/unary/tank
 	pipe_class = PIPE_CLASS_UNARY
+	colorable = TRUE
