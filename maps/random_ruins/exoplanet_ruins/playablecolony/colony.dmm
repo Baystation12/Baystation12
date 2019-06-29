@@ -6241,7 +6241,7 @@
 /area/map_template/colony/mineralprocessing)
 "kN" = (
 /obj/machinery/button/crematorium{
-	id = 8;
+	id_tag = 8;
 	pixel_y = 25;
 	req_access = list()
 	},

@@ -160,6 +160,8 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 		current_run.len--
 
 		if(!istype(M)) // Below is a debugging and recovery effort. This should never happen, but has been observed recently.
+			if(!M)
+				continue // Hard delete; unlikely but possible. Soft deletes are handled below and expected.
 			if(M in processing)
 				processing.Remove(M)
 				M.is_processing = null

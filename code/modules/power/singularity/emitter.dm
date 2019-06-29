@@ -61,6 +61,9 @@
 	activate(user)
 
 /obj/machinery/power/emitter/proc/activate(mob/user as mob)
+	if(!istype(user))
+		user = null // safety, as the proc is publicly available.
+
 	if(state == 2)
 		if(!powernet)
 			to_chat(user, "\The [src] isn't connected to a wire.")
@@ -70,10 +73,11 @@
 				src.active = 0
 				to_chat(user, "You turn off \the [src].")
 				log_and_message_admins("turned off \the [src]")
-				investigate_log("turned <font color='red'>off</font> by [user.key]","singulo")
+				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)]","singulo")
 			else
 				src.active = 1
-				operator_skill = user.get_skill_value(core_skill)
+				if(user)
+					operator_skill = user.get_skill_value(core_skill)
 				update_efficiency()
 				to_chat(user, "You turn on \the [src].")
 				src.shot_number = 0
