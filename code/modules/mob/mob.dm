@@ -186,7 +186,7 @@
 		var/turf/T = loc
 		. += T.movement_delay
 
-	if ((drowsyness > 0) && !MOVING_DELIBERATELY(src))
+	if (drowsyness > 0)
 		. += 6
 	if(lying) //Crawling, it's slower
 		. += (8 + ((weakened * 3) + (confused * 2)))
