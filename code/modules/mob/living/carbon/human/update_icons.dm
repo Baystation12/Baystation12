@@ -392,7 +392,7 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-/mob/living/carbon/human/proc/update_shadow(var/update_icons=1)
+/mob/living/carbon/human/update_shadow(var/update_icons=1)
 	overlays_standing[SHADOW_LAYER] = null
 
 	var/turf/T = get_turf(src)
@@ -406,7 +406,7 @@ var/global/list/damage_icon_parts = list()
 	var/species_offset = 0
 	if(species)
 		species_offset = -species.pixel_offset_z
-	shadow.pixel_z = -2 + species_offset// putting it lower than our mob
+	shadow.pixel_z = shadow_offset + species_offset// putting it lower than our mob
 
 	overlays_standing[SHADOW_LAYER] = shadow
 

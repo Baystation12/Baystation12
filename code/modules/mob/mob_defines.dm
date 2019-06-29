@@ -1,7 +1,6 @@
 /mob
 	density = 1
 	plane = MOB_PLANE
-	pixel_z = MOB_PIXEL_Z
 
 	appearance_flags = PIXEL_SCALE
 	animate_movement = 2

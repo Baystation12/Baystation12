@@ -14,6 +14,8 @@
 	emote_see = list("jiggles", "bounces in place")
 	var/colour = "grey"
 	pass_flags = PASS_FLAG_TABLE
+	mob_flags = MOB_FLAG_NO_SHADOW
+	shadow_offset = 4
 
 /mob/living/simple_animal/slime/can_force_feed(var/feeder, var/food, var/feedback)
 	if(feedback)
@@ -34,6 +36,7 @@
 	response_harm   = "stomps on"
 	emote_see = list("jiggles", "bounces in place")
 	var/colour = "grey"
+	shadow_offset = 3
 
 /mob/living/simple_animal/adultslime/New()
 	..()

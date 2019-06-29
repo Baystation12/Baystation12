@@ -60,7 +60,7 @@ default behaviour is:
 /mob/living/Bump(atom/movable/AM, yes)
 
 	// This is boilerplate from /atom/movable/Bump() but in all honest
-	// I have no clue what is going on in the logic below this and I'm 
+	// I have no clue what is going on in the logic below this and I'm
 	// afraid to touch it in case it explodes and kills me.
 	if(throwing)
 		throw_impact(AM)
@@ -801,6 +801,7 @@ default behaviour is:
 /mob/living/update_icons()
 	if(auras)
 		overlays |= auras
+	update_shadow()
 
 /mob/living/proc/add_aura(var/obj/aura/aura)
 	LAZYDISTINCTADD(auras,aura)
@@ -885,3 +886,22 @@ default behaviour is:
 
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE
+
+/mob/living/regenerate_icons()
+	..()
+	overlays.Cut()
+	update_shadow(0)
+
+/mob/living/proc/update_shadow(var/update_icons=1)
+	if(mob_flags & MOB_FLAG_NO_SHADOW)
+		return
+
+	var/turf/T = get_turf(src)
+	if(lying || (T && T.is_open())) // dont display shadows if we're laying down or in space
+		return
+
+	var/image/shadow = overlay_image('icons/effects/effects.dmi', icon_state="mob_shadow")
+	shadow.plane = HIDING_MOB_PLANE
+	shadow.layer = MOB_SHADOW_LAYER
+	shadow.pixel_z = shadow_offset // putting it lower than our mob
+	overlays += shadow

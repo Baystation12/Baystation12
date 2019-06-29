@@ -126,6 +126,8 @@
 		var/icon/back_icon = image('icons/mob/corgi_back.dmi',back_icon_state)
 		if(back_icon)
 			overlays += back_icon
+
+	update_shadow()
 	return
 
 

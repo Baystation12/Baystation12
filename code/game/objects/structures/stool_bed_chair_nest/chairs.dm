@@ -4,7 +4,7 @@
 	icon_state = "chair_preview"
 	color = "#666666"
 	base_icon = "chair"
-	buckle_pixel_shift = "x=0;y=0;z=7"
+	buckle_pixel_shift = "x=0;y=0;z=0"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	obj_flags = OBJ_FLAG_ROTATABLE
@@ -90,7 +90,7 @@
 		return
 
 	set_dir(turn(dir, 90))
-	update_icon() 
+	update_icon()
 
 /obj/structure/bed/chair/set_dir()
 	..()

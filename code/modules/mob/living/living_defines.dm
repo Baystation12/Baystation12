@@ -2,6 +2,9 @@
 	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
 	waterproof = FALSE
+	pixel_z = MOB_PIXEL_Z
+
+	var/shadow_offset = -2
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.

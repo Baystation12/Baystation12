@@ -345,3 +345,6 @@
 #define ROBOT_MODULE_TYPE_FLYING   "flying"
 
 #define RADIO_INTERRUPT_DEFAULT 30
+
+#define MOB_FLAG_HOLY_BAD                0x001  // If this mob is allergic to holiness
+#define MOB_FLAG_NO_SHADOW               0x002  // If this mob is has no shadow (vampire?)
