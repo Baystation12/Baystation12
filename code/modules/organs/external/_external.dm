@@ -840,7 +840,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"<span class='danger'>[organ_msgs[3]]</span>")
 
 	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
-	var/obj/item/organ/external/parent_organ = parent
+	var/obj/item/organ/external/original_parent = parent
 
 	var/use_flesh_colour = species.get_flesh_colour(owner)
 	var/use_blood_colour = species.get_blood_colour(owner)
@@ -849,33 +849,28 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!clean)
 		victim.shock_stage += min_broken_damage
 
-	if(parent_organ)
+	removed(null, ignore_children)
+	if(QDELETED(src))
+		return
+
+	if(original_parent)
 		var/datum/wound/lost_limb/W = new (src, disintegrate, clean)
-		if(clean)
-			W.parent_organ = parent_organ
-			LAZYADD(parent_organ.wounds, W)
-			parent_organ.update_damages()
-		else
+		var/obj/item/organ/external/damaged_organ = original_parent
+		if(!clean)
 			var/obj/item/organ/external/stump/stump = new (victim, 0, src)
-			stump.SetName("stump of \a [name]")
-			stump.artery_name = "mangled [artery_name]"
-			stump.arterial_bleed_severity = arterial_bleed_severity
 			stump.add_pain(max_damage)
-			W.parent_organ = stump
-			LAZYADD(stump.wounds, W)
-			victim.organs |= stump
+			damaged_organ = stump
 			if(disintegrate != DROPLIMB_BURN)
 				stump.sever_artery()
-			stump.update_damages()
+		W.parent_organ = damaged_organ
+		LAZYADD(damaged_organ.wounds, W)
+		damaged_organ.update_damages()
+
 	spawn(1)
 		victim.updatehealth()
 		victim.UpdateDamageIcon()
 		victim.regenerate_icons()
 		dir = 2
-
-	removed(null, ignore_children)
-	if(QDELETED(src))
-		return
 
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
@@ -1243,6 +1238,7 @@ obj/item/organ/external/proc/remove_clamps()
 	release_restraints(victim)
 	victim.organs -= src
 	victim.organs_by_name[organ_tag] = null // Remove from owner's vars.
+	victim.organs_by_name -= organ_tag
 
 	//Robotic limbs explode if sabotaged.
 	if(is_robotic && (status & ORGAN_SABOTAGED))
