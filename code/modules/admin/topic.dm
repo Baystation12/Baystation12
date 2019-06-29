@@ -592,7 +592,9 @@
 		jobs += "<tr bgcolor='ffeeaa'><th colspan='10'><a href='?src=\ref[src];jobban3=Syndicate;jobban4=\ref[M]'>Antagonist Positions</a></th></tr><tr align='center'>"
 
 		// Antagonists.
+		#define ANTAG_COLUMNS 5
 		var/list/all_antag_types = GLOB.all_antag_types_
+		var/i = 1
 		for(var/antag_type in all_antag_types)
 			var/datum/antagonist/antag = all_antag_types[antag_type]
 			if(!antag || !antag.id)
@@ -601,8 +603,11 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.id];jobban4=\ref[M]'><font color=red>[replacetext("[antag.role_text]", " ", "&nbsp")]</font></a></td>"
 			else
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.id];jobban4=\ref[M]'>[replacetext("[antag.role_text]", " ", "&nbsp")]</a></td>"
-
+			if(i % ANTAG_COLUMNS == 0 && i < length(all_antag_types))
+				jobs += "</tr><tr align='center'>"
+			i++
 		jobs += "</tr></table>"
+		#undef ANTAG_COLUMNS
 
 		var/list/misc_roles = list("Dionaea", "Graffiti")
 		//Other roles  (BLUE, because I have no idea what other color to make this)

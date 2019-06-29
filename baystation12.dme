@@ -511,6 +511,7 @@
 #include "code\game\antagonist\station\cult_god.dm"
 #include "code\game\antagonist\station\cultist.dm"
 #include "code\game\antagonist\station\loyalist.dm"
+#include "code\game\antagonist\station\provocateur.dm"
 #include "code\game\antagonist\station\renegade.dm"
 #include "code\game\antagonist\station\revolutionary.dm"
 #include "code\game\antagonist\station\rogue_ai.dm"

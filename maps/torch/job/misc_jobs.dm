@@ -101,3 +101,11 @@ Civilian
 	latejoin_at_spawnpoints = 1
 	announced = FALSE
 	required_language = null
+	is_semi_antagonist = TRUE
+	var/list/soft_antag_species = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+
+/datum/job/stowaway/post_equip_rank(mob/person, alt_title)
+	var/mob/living/carbon/human/H = person
+	is_semi_antagonist = (istype(H) && (H.species.name in soft_antag_species))
+	..()
+	is_semi_antagonist = initial(is_semi_antagonist)
