@@ -24,6 +24,7 @@
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/has_mob_product
 	var/force_layer
+	var/const/REQ_CO2_MOLES    = 6.0// Moles of CO2 required for photosynthesis.
 
 /datum/seed/New()
 
@@ -164,6 +165,23 @@
 				target.reagents.add_reagent(rid,injecting)
 		else
 			to_chat(target, "<span class='danger'>Sharp spines scrape against your armour!</span>")
+
+/datum/seed/proc/do_photosynthesis(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied)
+	// Photosynthesis - *very* simplified process.
+	// For now, only light-dependent reactions are available (no Calvin cycle).
+	// It's active only for those plants which doesn't consume nor exude gasses.
+	if(!(environment) || !(environment.gas))
+		return;
+	if(exude_gasses   && exude_gasses.len   > 0)
+		return;
+	if(consume_gasses && consume_gasses.len > 0)
+		return;
+	if(!(light_supplied) || !(get_trait(TRAIT_REQUIRES_WATER)))
+		return;
+	// 6CO2 + 6H2O -> C6H12O6 (glucose) + 6O2
+	if(environment.get_gas("carbon_dioxide") >= REQ_CO2_MOLES)
+		environment.adjust_gas("carbon_dioxide", -REQ_CO2_MOLES, 1)
+		environment.adjust_gas("oxygen", REQ_CO2_MOLES, 1)
 
 //Splatter a turf.
 /datum/seed/proc/splatter(var/turf/T,var/obj/item/thrown)
@@ -313,6 +331,12 @@
 	if(light_supplied)
 		if(abs(light_supplied - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+
+	// Pressure and temperature are needed as much as water and light.
+	// If any of the previous environment checks has failed
+	// the photosynthesis cannot be triggered.
+	if(health_change == 0)
+		do_photosynthesis(current_turf, environment, light_supplied)
 
 	return health_change
 
