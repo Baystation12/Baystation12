@@ -92,7 +92,6 @@
 
 /obj/item/weapon/gun/projectile/proc/process_chambered()
 	if (!chambered) return
-
 	switch(handle_casings)
 		if(EJECT_CASINGS) //eject casing onto ground.
 			chambered.forceMove(get_turf(src))
@@ -130,6 +129,7 @@
 				ammo_magazine = AM
 				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
 				playsound(loc, mag_insert_sound, 50, 1)
+				update_firemode()
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
 					to_chat(user, "<span class='warning'>[src] is full!</span>")
@@ -146,6 +146,7 @@
 				if(count)
 					user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src].</span>")
 					playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
+					update_firemode()
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = A
@@ -159,6 +160,7 @@
 		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
 		playsound(loc, load_sound, 50, 1)
+		update_firemode()
 
 	update_icon()
 

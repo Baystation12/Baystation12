@@ -64,3 +64,7 @@
 	for(var/entry in stack)
 		qdel(entry)
 	stack.Cut()
+
+
+/datum/stack/proc/Num()
+	return stack.len

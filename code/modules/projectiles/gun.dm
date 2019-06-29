@@ -8,10 +8,13 @@
 /datum/firemode
 	var/name = "default"
 	var/list/settings = list()
+	var/obj/item/weapon/gun/gun = null
 
-/datum/firemode/New(obj/item/weapon/gun/gun, list/properties = null)
+/datum/firemode/New(obj/item/weapon/gun/_gun, list/properties = null)
 	..()
 	if(!properties) return
+
+	gun = _gun //Cache the weapon
 
 	for(var/propname in properties)
 		var/propvalue = properties[propname]
@@ -23,9 +26,17 @@
 		else
 			settings[propname] = propvalue
 
-/datum/firemode/proc/apply_to(obj/item/weapon/gun/gun)
+/datum/firemode/proc/apply_to(obj/item/weapon/gun/_gun)
+	gun = _gun
 	for(var/propname in settings)
-		gun.vars[propname] = settings[propname]
+		if (propname in gun.vars)
+			gun.vars[propname] = settings[propname]
+
+
+//Called whenever the firemode is switched to, or the gun is picked up while its active
+/datum/firemode/proc/update()
+	return
+
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/weapon/gun
@@ -72,6 +83,7 @@
 	var/sel_mode = 1 //index of the currently selected mode
 	var/list/firemodes = list()
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
+	var/firing = FALSE //True if currently firing, limited implementation, mostly for sustained/automatic weapons
 
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
@@ -82,16 +94,34 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 	var/tmp/last_safety_check = -INFINITY
+	var/suppress_delay_warning = FALSE
 	var/safety_state = 0
 	var/has_safety = TRUE
 
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
-		firemodes[i] = new /datum/firemode(src, firemodes[i])
+		var/list/L = firemodes[i]
+
+		//If this var is set, it means spawn a specific subclass of firemode
+		if (L["mode_type"])
+			var/newtype = L["mode_type"]
+			firemodes[i] = new newtype(src, firemodes[i])
+		else
+			firemodes[i] = new /datum/firemode(src, firemodes[i])
+
+	//Properly initialize the default firing mode
+	if (firemodes.len)
+		var/datum/firemode/F = firemodes[sel_mode]
+		F.apply_to(src)
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
+
+//Called when the user moves while holding this gun.
+//Must be manually registered to the moved event if your gun needs it
+/obj/item/weapon/gun/proc/user_moved()
+	return
 
 /obj/item/weapon/gun/update_twohanding()
 	if(one_hand_penalty)
@@ -149,11 +179,15 @@
 	for(var/obj/O in contents)
 		O.emp_act(severity)
 
-/obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
+/obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params, var/vector2/world_pixel_click)
 	if(adjacent) return //A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)
 		user.aiming = new(user)
+
+	//Check that the gun is able to fire
+	if (!can_fire(A, user, params))
+		return
 
 	if(user && user.client && user.aiming && user.aiming.active && user.aiming.aiming_at != A)
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
@@ -162,16 +196,17 @@
 	Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
-	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
+
+	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot && can_fire(A, user))
 		handle_suicide(user)
-	else if(user.a_intent == I_HURT) //point blank shooting
+	else if(user.a_intent == I_HURT && can_fire(A, user)) //point blank shooting
 		Fire(A, user, pointblank=1)
 	else
 		return ..() //Pistolwhippin'
 
 /obj/item/weapon/gun/dropped(var/mob/living/user)
 	if(istype(user))
-		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && special_check(user))
+		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && can_fire(null, user, TRUE))
 			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
 			var/list/targets = list(user)
 			targets += trange(2, src)
@@ -179,23 +214,37 @@
 	update_icon()
 	return ..()
 
+
+//Return true if firing is okay
+/obj/item/weapon/gun/proc/can_fire(atom/target, mob/living/user, clickparams, var/silent = FALSE)
+	if(world.time < next_fire_time)
+		if (!silent && !suppress_delay_warning && world.time % 3) //to prevent spam
+			user << SPAN_WARNING("[src] is not ready to fire again!")
+			return FALSE
+
+	if(target && user && (target.z != user.z))
+		return FALSE
+
+	if(safety())
+		if (!silent)
+			handle_click_empty(user)
+		return FALSE
+
+	if (!special_check(user))
+		return FALSE
+
+	return TRUE
+
+
+//Safety checks are done by the time fire is called
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
-	if(target.z != user.z) return
+
 
 	add_fingerprint(user)
 
-	if(!special_check(user))
-		return
 
-	if(safety())
-		handle_click_empty(user)
-		return
 
-	if(world.time < next_fire_time)
-		if (world.time % 3) //to prevent spam
-			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
-		return
 
 	last_safety_check = world.time
 	var/shoot_time = (burst - 1)* burst_delay
@@ -253,6 +302,7 @@
 	else
 		src.visible_message("*click click*")
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+	update_firemode() //Stops automatic weapons spamming this endlessly
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
@@ -478,12 +528,16 @@
 	var/next_mode = get_next_firemode()
 	if(!next_mode || next_mode == sel_mode)
 		return null
-
+	update_firemode(FALSE) //Disable the old firing mode before we switch away from it
 	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
+	new_mode.update()
 	playsound(loc, selector_sound, 50, 1)
 	return new_mode
+
+/obj/item/weapon/gun/proc/get_firemode()
+	return firemodes[sel_mode]
 
 /obj/item/weapon/gun/proc/get_next_firemode()
 	if(firemodes.len <= 1)
@@ -506,6 +560,7 @@
 		to_chat(user, "<span class='notice'>You switch the safety [safety_state ? "on" : "off"] on [src].</span>")
 		last_safety_check = world.time
 		playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
+		update_firemode()
 
 /obj/item/weapon/gun/verb/toggle_safety_verb()
 	set src in usr
@@ -526,3 +581,38 @@
 /obj/item/weapon/gun/attack_hand()
 	..()
 	update_icon()
+
+
+//Finds the current firemode and calls update on it. This is called from a few places:
+//When firemode is changed
+//When safety is toggled
+//When gun is picked up
+//When gun is readied/swapped to
+/obj/item/weapon/gun/proc/update_firemode(var/force_state = null)
+	if (sel_mode && firemodes && firemodes.len)
+		var/datum/firemode/new_mode = firemodes[sel_mode]
+		new_mode.update(force_state)
+
+
+
+//Updating firing modes at appropriate times
+/obj/item/weapon/gun/equipped(var/mob/user, var/slot)
+	.=..()
+	update_firemode()
+
+/obj/item/weapon/gun/dropped(mob/user)
+	.=..()
+	update_firemode(FALSE)
+
+/obj/item/weapon/gun/swapped_from()
+	.=..()
+	update_firemode(FALSE)
+
+/obj/item/weapon/gun/swapped_to()
+	.=..()
+	update_firemode()
+
+
+//Used by sustained weapons. Call to make the gun stop doing its thing
+/obj/item/weapon/gun/proc/stop_firing()
+	update_firemode()

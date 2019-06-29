@@ -168,3 +168,50 @@
 	light_outer_range = 5
 	light_max_bright = 1
 	light_color = COLOR_MUZZLE_FLASH
+
+
+//----------------------------
+// Sustained tracer beams
+//----------------------------
+//There is some special code here
+/obj/effect/projectile/sustained
+	light_outer_range = 5
+	light_max_bright = 1
+	light_color = COLOR_DEEP_SKY_BLUE
+	icon_state = "gravity_tether"
+
+	//Start and endpoints are in world pixel coordinates
+	var/vector2/start
+	var/vector2/end
+	var/vector2/offset = new /vector2(16,16)
+	animate_movement = 0
+
+//Takes start and endpoint as vector2s of global pixel coords
+/obj/effect/projectile/sustained/proc/set_ends(var/vector2/_start = null, var/vector2/_end = null)
+	if (_start != start)
+		start = _start// + offset
+
+	if (_end != end)
+		end = _end// + offset
+
+
+
+	var/matrix/M = matrix()
+
+	//Get the vector between them first
+	var/vector2/delta = end - start
+
+	//Figuring out scale
+	var/length = delta.Magnitude()
+	var/scale = length / world.icon_size //The length of the beam
+	M.Scale(scale, 1)
+
+	//Now rotation
+	var/rot = Atan2(delta.y, delta.x)
+	M.Turn(rot-90)
+
+	//Apply the transform to ourselves
+	transform = M
+
+	//And finally, place our location halfway along the delta line
+	set_global_pixel_loc(start + (delta*0.5))

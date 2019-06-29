@@ -179,6 +179,7 @@
 
 #define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
 
+#define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
 
 //Makes span tags easier
 #define span(class, text) ("<span class='[class]'>[text]</span>")

@@ -23,8 +23,9 @@
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
 	var/list/segments = list() //For hitscan projectiles with tracers.
 
-	var/p_x = 16
-	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
+	//var/p_x = 16
+	//var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
+	var/vector2/pixel_click = new /vector2(16, 16)
 
 	var/accuracy = 0
 	var/dispersion = 0.0
@@ -128,15 +129,17 @@
 /obj/item/projectile/proc/set_clickpoint(var/params)
 	var/list/mouse_control = params2list(params)
 	if(mouse_control["icon-x"])
-		p_x = text2num(mouse_control["icon-x"])
+		pixel_click.x = text2num(mouse_control["icon-x"])
 	if(mouse_control["icon-y"])
-		p_y = text2num(mouse_control["icon-y"])
+		pixel_click.y = text2num(mouse_control["icon-y"])
 
 	//randomize clickpoint a bit based on dispersion
 	if(dispersion)
 		var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
-		p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
-		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
+		pixel_click.x = between(0, pixel_click.x + rand(-radius, radius), world.icon_size)
+		pixel_click.y = between(0, pixel_click.y + rand(-radius, radius), world.icon_size)
+
+
 
 //called to launch a projectile
 /obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)

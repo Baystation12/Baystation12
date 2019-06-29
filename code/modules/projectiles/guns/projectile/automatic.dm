@@ -18,7 +18,7 @@
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+		FULL_AUTO_400
 		)
 
 /obj/item/weapon/gun/projectile/automatic/machine_pistol
@@ -38,8 +38,7 @@
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
-		)
+		FULL_AUTO_400)
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi/update_icon()
 	..()
@@ -67,10 +66,10 @@
 
 	//SMG
 	firemodes = list(
+		FULL_AUTO_400,
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=2, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=3, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=4, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
-		)
+		FULL_AUTO_600)
 
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
@@ -102,8 +101,7 @@
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=4, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    one_hand_penalty=5, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=6, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
-		)
+		FULL_AUTO_400)
 
 /obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
 	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
@@ -128,8 +126,7 @@
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
-		)
+		FULL_AUTO_400)
 
 /obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
 	..()
@@ -164,6 +161,7 @@
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1,    fire_delay=0,    move_delay=null, use_launcher=null, one_hand_penalty=5, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=6, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
+		FULL_AUTO_600,
 		list(mode_name="fire grenades",  burst=null, fire_delay=null, move_delay=null, use_launcher=1,    one_hand_penalty=5, burst_accuracy=null, dispersion=null)
 		)
 
@@ -235,10 +233,7 @@
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
 	//No single-shot or 3-round-burst modes since using this weapon should come at a cost to flexibility.
-	firemodes = list(
-		list(mode_name="short bursts",	burst=5, move_delay=12, one_hand_penalty=8, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
-		list(mode_name="long bursts",	burst=8, move_delay=15, one_hand_penalty=9, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
-		)
+	firemodes = list(FULL_AUTO_600)
 
 	var/cover_open = 0
 
@@ -291,3 +286,72 @@
 		to_chat(user, "<span class='warning'>You need to open the cover to unload [src].</span>")
 		return
 	..()
+
+
+
+
+//Automatic firing
+//Todo: Way more checks and safety here
+/datum/firemode/automatic
+	settings = list(burst = 1, suppress_delay_warning = TRUE, dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2))
+	//The full auto clickhandler we have
+	var/datum/click_handler/fullauto/CH = null
+
+/datum/firemode/automatic/update(var/force_state = null)
+	var/mob/living/L
+	if (gun && gun.is_held())
+		L = gun.loc
+
+	var/enable = FALSE
+	//Force state is used for forcing it to be disabled in circumstances where it'd normally be valid
+	if (!isnull(force_state))
+		enable = force_state
+	else if (L && L.client)
+
+		//First of all, lets determine whether we're enabling or disabling the click handler
+
+
+		//We enable it if the gun is held in the user's active hand and the safety is off
+		if (L.get_active_hand() == gun)
+			//Lets also make sure it can fire
+			var/can_fire = TRUE
+
+			//Safety stops it
+			//if (gun.safety)
+				//can_fire = FALSE
+
+			//Projectile weapons need to have enough ammo to fire
+			if(istype(gun, /obj/item/weapon/gun/projectile))
+				var/obj/item/weapon/gun/projectile/P = gun
+				if (!P.getAmmo())
+					can_fire = FALSE
+
+			//TODO: Centralise all this into some can_fire proc
+			if (can_fire)
+				enable = TRUE
+		else
+			enable = FALSE
+
+	//Ok now lets set the desired state
+	if (!enable)
+		if (!CH)
+			//If we're turning it off, but the click handler doesn't exist, then we have nothing to do
+			return
+
+		//Todo: make client click handlers into a list
+		if (CH.user) //Remove our handler from the client
+			CH.user.RemoveClickHandler(CH)
+			CH = null
+		return
+
+	else
+		//We're trying to turn things on
+		if (CH)
+			return //The click handler exists, we dont need to do anything
+
+
+		//Create and assign the click handler
+		//A click handler intercepts mouseup/drag/down events which allow fullauto firing
+		CH = L.PushClickHandler(/datum/click_handler/fullauto)
+		CH.reciever = gun //Reciever is the gun that gets the fire events
+		CH.user = L //And tell it where it is

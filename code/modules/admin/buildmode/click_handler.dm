@@ -42,6 +42,7 @@
 
 /datum/click_handler/build_mode/OnDblClick(var/atom/A, var/params)
 	OnClick(A, params) // We treat double-clicks as normal clicks
+	return TRUE
 
 /datum/click_handler/build_mode/OnClick(var/atom/A, var/params)
 	params = params2list(params)
@@ -50,3 +51,4 @@
 		build_button.OnClick(params)
 	else
 		current_build_mode.OnClick(A, params)
+	return FALSE //Build mode intercepts normal clicks so don't let it through

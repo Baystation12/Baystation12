@@ -213,3 +213,5 @@ var/global/list/paramslist_cache = list()
 	for(var/i in 1 to L.len)
 		L[i] = text2num(L[i])
 	return L
+
+var/global/list/unworn_slots = list(slot_l_hand,slot_r_hand, slot_l_store, slot_r_store,slot_robot_equip_1,slot_robot_equip_2,slot_robot_equip_3)

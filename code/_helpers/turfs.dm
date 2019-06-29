@@ -13,8 +13,10 @@
 	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 
 /proc/turf_clear(turf/T)
+	if (T.density)
+		return 0
 	for(var/atom/A in T)
-		if(A.simulated)
+		if(A.density)
 			return 0
 	return 1
 

@@ -12,6 +12,8 @@
 	var/burning = null
 	var/hitsound = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
+	var/equip_slot = slot_none	//What slot this item was last equipped into
+
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASS_FLAG_TABLE
 //	causeerrorheresoifixthis
@@ -300,6 +302,7 @@
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
 	hud_layerise()
+	equip_slot = slot
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
 
@@ -795,3 +798,42 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/lava_act()
 	. = (!throwing) ? ..() : FALSE
+
+
+//Called when a human swaps hands to a hand which is holding this item
+/obj/item/proc/swapped_to(var/mob/user)
+	return
+
+//Called when a human swaps hands away from a hand which is holding this item
+/obj/item/proc/swapped_from(var/mob/user)
+	return
+
+
+/obj/item/proc/is_equipped()
+	if (ismob(loc))
+		return (equip_slot != slot_none)
+
+
+/obj/item/proc/is_worn()
+	//If equip_slot is zero then it has never been equipped
+	if (equip_slot == slot_none)
+		return FALSE
+
+	if (ismob(loc))
+		return !(equip_slot in unworn_slots)
+
+
+/obj/item/proc/is_held()
+	//If equip_slot is zero then it has never been equipped
+	if (equip_slot == slot_none)
+		return FALSE
+
+	if (ismob(loc))
+		return equip_slot in list(slot_l_hand, slot_r_hand,slot_robot_equip_1,slot_robot_equip_2,slot_robot_equip_3)
+
+
+/obj/item/proc/get_equip_slot()
+	if (ismob(loc))
+		return equip_slot
+	else
+		return slot_none

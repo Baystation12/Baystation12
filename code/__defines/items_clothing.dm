@@ -52,6 +52,7 @@
 #define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
 
 // Slots.
+#define slot_none		 0
 #define slot_first       1
 #define slot_back        1
 #define slot_wear_mask   2
@@ -75,7 +76,16 @@
 #define slot_r_ear       20
 #define slot_legs        21
 #define slot_tie         22
-#define slot_last        22
+
+
+//These are used by robots for the equipment they have activated
+//Although we could reuse some of the slots above, this is more future proof
+//These are not bitmasks anyway so there's no upper limit
+#define slot_robot_equip_1	23
+#define slot_robot_equip_2	24
+#define slot_robot_equip_3	25
+
+#define slot_last        25
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
