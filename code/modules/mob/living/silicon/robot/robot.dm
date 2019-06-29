@@ -313,7 +313,6 @@
 	else
 		braintype = "Cyborg"
 
-
 	var/changed_name = ""
 	if(custom_name)
 		changed_name = custom_name

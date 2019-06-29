@@ -31,9 +31,9 @@
 	speak_statement = "clicks"
 	speak_exclamation = "rasps"
 	speak_query = "chirps"
-	lawupdate = 0
-	scrambledcodes = 1
-	speed = -3
+	lawupdate =      FALSE
+	scrambledcodes = TRUE
+	speed = -2
 	icon_state = "drone-ascent"
 	spawn_sound = 'sound/voice/ascent1.ogg'
 	cell =   /obj/item/weapon/cell/mantid
@@ -82,6 +82,4 @@
 	emp_act(2)
 
 /mob/living/silicon/robot/flying/ascent/emp_act(severity)
-	if(severity == 1)
-		Stun(rand(2,5))
-	confused = min(confused + 2, (severity == 1 ? 40 : 30))
+	confused = min(confused + rand(3, 5), (severity == 1 ? 40 : 30))
