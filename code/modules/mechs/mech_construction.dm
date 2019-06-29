@@ -31,10 +31,37 @@
 
 	qdel(src)
 
+/mob/living/exosuit/proc/forget_module(var/module_to_forget)
+	//Realistically a module disappearing without being uninstalled is wrong and a bug or adminbus
+	var/target = null
+	for(var/hardpoint in hardpoints)
+		if(hardpoints[hardpoint]== module_to_forget)
+			target = hardpoint
+			break
+
+	hardpoints[target] = null
+
+	if(target == selected_hardpoint)
+		clear_selected_hardpoint()
+
+	GLOB.destroyed_event.unregister(module_to_forget, src, .proc/forget_module)
+
+	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[target]
+	H.holding = null
+
+	hud_elements -= module_to_forget
+	refresh_hud()
+	queue_icon_update()
+
+	for(var/thing in pilots)
+		var/mob/pilot = thing
+		if(pilot && pilot.client)
+			pilot.client.screen -= module_to_forget
+
 /mob/living/exosuit/proc/install_system(var/obj/item/system, var/system_hardpoint, var/mob/user)
 
 	if(hardpoints_locked || hardpoints[system_hardpoint])
-		return 0
+		return FALSE
 
 	if(user)
 		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
@@ -43,26 +70,29 @@
 			if(!do_after(user, delay, src) || user.get_active_hand() != system)
 				return FALSE
 
+			if(user.unEquip(system))
+				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
+				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+			else return FALSE
+
 	var/obj/item/mech_equipment/ME = system
 	if(istype(ME))
 		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
-			return 0
+			return FALSE
 		if(ME.restricted_software)
 			if(!head || !head.software)
-				return 0
+				return FALSE
 			var/found
 			for(var/software in ME.restricted_software)
 				if(software in head.software.installed_software)
-					found = 1
+					found = TRUE
 					break
 			if(!found)
-				return 0
+				return FALSE
 		ME.installed(src)
+		GLOB.destroyed_event.register(system, src, .proc/forget_module)
 
-	if(user)
-		user.unEquip(system)
-		to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
-		playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+	
 
 	system.forceMove(src)
 	hardpoints[system_hardpoint] = system
@@ -103,6 +133,7 @@
 	system.forceMove(get_turf(src))
 	system.screen_loc = null
 	system.layer = initial(system.layer)
+	GLOB.destroyed_event.unregister(system, src, .proc/forget_module)
 
 	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
 	H.holding = null

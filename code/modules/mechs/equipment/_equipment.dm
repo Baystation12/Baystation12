@@ -46,8 +46,12 @@
 	canremove = FALSE
 
 /obj/item/mech_equipment/proc/uninstalled()
-	canremove = TRUE
 	owner = null
+	canremove = TRUE
+
+/obj/item/mech_equipment/Destroy()
+	owner = null
+	. = ..()
 
 /obj/item/mech_equipment/proc/get_effective_obj()
 	return src
@@ -61,10 +65,17 @@
 	if(. && holding)
 		return holding.attack_self(user)
 
+/obj/item/mech_equipment/mounted_system/proc/forget_holding()
+	if(holding) //It'd be strange for this to be called with this var unset
+		GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
+		holding = null
+		qdel(src)
+
 /obj/item/mech_equipment/mounted_system/Initialize()
 	. = ..()
 	if(holding_type)
 		holding = new holding_type(src)
+		GLOB.destroyed_event.register(holding, src, .proc/forget_holding)
 	if(holding)
 		if(!icon_state)
 			icon = holding.icon
@@ -74,7 +85,8 @@
 		
 
 /obj/item/mech_equipment/mounted_system/Destroy()
-	QDEL_NULL(holding)
+	if(holding)
+		QDEL_NULL(holding)
 	. = ..()
 	
 
