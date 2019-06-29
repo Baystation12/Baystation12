@@ -14,6 +14,7 @@
 	selection_color = "#ff0000"
 	access = list(access_innie_prowler,access_innie_asteroid)
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/soe_commando_officer
 	title = "SOE Commando Officer"
@@ -29,6 +30,7 @@
 	selection_color = "#ff0000"
 	access = list(access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/soe_commando_captain
 	title = "SOE Commando Captain"
@@ -42,3 +44,4 @@
 	selection_color = "#ff0000"
 	access = list(access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)

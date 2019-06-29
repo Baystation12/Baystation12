@@ -42,6 +42,14 @@
 	if(user)
 		to_chat(user,"<span class='info'>[src] is temporarily out of charge, please wait a moment.</span>")
 
+
+// AI pathing landmark
+
+/obj/effect/landmark/assault_target/sentinel
+	name = "sentinel assault target marker"
+
+// Mob
+
 /mob/living/simple_animal/hostile/sentinel
 	name = "Sentinel"
 	desc = "An automated defence drone made of advanced alien technology."
@@ -63,6 +71,7 @@
 	emote_see = list("extends and retracts its manipulator arms","scans its body for damage","scans the environment")
 	emote_hear = list("buzzes")
 	var/obj/item/weapon/gun/energy/laser/sentinel_beam/sentinel_beam
+	assault_target_type = /obj/effect/landmark/assault_target/sentinel
 
 /mob/living/simple_animal/hostile/sentinel/New()
 	. = ..()

@@ -218,6 +218,7 @@
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
+	icon_state = "firingrange"
 
 //UNDERGROUND//
 /area/geminus_underground

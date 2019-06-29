@@ -12,6 +12,7 @@
 	selection_color = "#0A0A95"
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_medical_crew
 	title = "UNSC Bertels Hospital Corpsman"
@@ -22,6 +23,7 @@
 	selection_color = "#0A0A95"
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
@@ -34,6 +36,7 @@
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	faction_whitelist = "UNSC"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
@@ -45,6 +48,7 @@
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unsc_ship_iwo
 	title = "UNSC Bertels Infantry Weapons Officer"
@@ -55,6 +59,7 @@
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_armoury, access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 
 
@@ -73,6 +78,7 @@
 	access = list(access_unsc,144,192)
 	spawnpoint_override = "UNSC Base Spawns"
 	open_slot_on_death = 1
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -84,6 +90,7 @@
 	access = list(access_unsc,144,145,192,access_unsc_armoury,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	open_slot_on_death = 1
+	whitelisted_species = list(/datum/species/human)
 
 //UNSC BERTELS ODST Jobs
 
@@ -106,6 +113,7 @@
 	access = list(access_unsc,144,110,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
@@ -123,3 +131,4 @@
 	access = list(access_unsc,144,145,110,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)

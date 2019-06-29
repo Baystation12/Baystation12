@@ -66,16 +66,11 @@
 	var/list/death_sounds = list()
 
 	var/respawning = 0
-	var/respawn_timer = 5 MINUTES
+	var/respawn_timer = 3 MINUTES
 	var/turf/spawn_turf
 
 /mob/living/simple_animal/New()
 	. = ..()
-	if(respawning)
-		spawn_turf = get_turf(src)
-
-/mob/living/simple_animal/proc/SetRespawn()
-	respawning = 1
 	spawn_turf = get_turf(src)
 
 /mob/living/simple_animal/Life()

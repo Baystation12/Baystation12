@@ -33,6 +33,7 @@
 	"Insurrectionist Recruiter",\
 	"Insurrectionist Saboteur",\
 	"Insurrectionist Infiltrator")
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/geminus_innie/officer
 	title = "Insurrectionist Officer"
