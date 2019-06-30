@@ -1,5 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Microwaves don't eject their components."
-  - tweak: "dismantling a microwave empties it first."
