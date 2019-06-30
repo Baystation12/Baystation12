@@ -4,7 +4,7 @@
 	icon_state = "kexosuit"
 	item_state = null
 	suit_type = "support exosuit"
-	armor = list(melee = 80, bullet = 80, laser = 75, energy = 50, bomb = 90, bio = 100, rad = 100)
+	armor = list(melee = 65, bullet = 65, laser = 65, energy = 55, bomb = 75, bio = 100, rad = 100)
 	online_slowdown = 0
 	offline_slowdown = 1
 	equipment_overlay_icon = null
@@ -155,6 +155,7 @@
 
 // Rig definitions.
 /obj/item/weapon/rig/mantid/gyne
+	armor = list(melee = 80, bullet = 80, laser = 70, energy = 45, bomb = 75, bio = 100, rad = 100)
 	icon_override = 'icons/mob/species/mantid/onmob_back_gyne.dmi'
 	mantid_caste = SPECIES_MANTID_GYNE
 	initial_modules = list(

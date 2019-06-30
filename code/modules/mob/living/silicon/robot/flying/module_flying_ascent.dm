@@ -38,9 +38,10 @@
 	)
 
 /obj/item/weapon/robot_module/flying/ascent/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/stack/medical/resin/resin = locate() in equipment
+	var/obj/item/stack/medical/resin/drone/resin = locate() in equipment
 	if(!resin)
-		resin = new(src)
+		resin = new(src, amount = 1)
+		equipment += resin
 	if(resin.get_amount() < resin.get_max_amount())
 		resin.add(1)
 	..()

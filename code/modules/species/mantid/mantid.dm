@@ -144,7 +144,8 @@
 	swap_flags =              ALLMOBS
 
 	override_limb_types = list(
-		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid
+		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid,
+		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne
 	)
 
 	descriptors = list(
