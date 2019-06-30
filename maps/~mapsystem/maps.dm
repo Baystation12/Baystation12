@@ -5,7 +5,7 @@ var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
 var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
-	for(var/type in typesof(/datum/map) - /datum/map)
+	for(var/type in subtypesof(/datum/map))
 		var/datum/map/M
 		if(type == GLOB.using_map.type)
 			M = GLOB.using_map
@@ -13,7 +13,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		else
 			M = new type
 		if(!M.path)
-			log_error("Map '[M]' does not have a defined path, not adding to map list!")
+			log_error("Map '[M]' ([type]) does not have a defined path, not adding to map list!")
 		else
 			GLOB.all_maps[M.path] = M
 	return 1

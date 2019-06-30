@@ -7,6 +7,7 @@
 	#include "torch_holodecks.dm"
 	#include "torch_lobby.dm"
 	#include "torch_machinery.dm"
+	#include "torch_map_templates.dm"
 	#include "torch_npcs.dm"
 	#include "torch_overmap.dm"
 	#include "torch_presets.dm"
@@ -127,6 +128,7 @@
 	#include "torch6_bridge.dmm"
 	#include "z1_admin.dmm"
 	#include "z2_transit.dmm"
+
 	#include "../away/empty.dmm"
 	#include "../away/ascent/ascent.dm"
 	#include "../away/mining/mining.dm"

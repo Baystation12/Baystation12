@@ -97,7 +97,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
 
-datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
+/datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	set background=1
 
 	report_progress("Initializing atmos machinery")
