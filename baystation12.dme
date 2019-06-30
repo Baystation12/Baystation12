@@ -502,6 +502,7 @@
 #include "code\game\antagonist\outsider\deity.dm"
 #include "code\game\antagonist\outsider\ert.dm"
 #include "code\game\antagonist\outsider\foundation.dm"
+#include "code\game\antagonist\outsider\hunter.dm"
 #include "code\game\antagonist\outsider\mercenary.dm"
 #include "code\game\antagonist\outsider\ninja.dm"
 #include "code\game\antagonist\outsider\paramount.dm"
