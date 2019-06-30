@@ -40,12 +40,24 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 
 /area/faction_base/unsc/upperlevel
 	name = "UNSC Faction Base (Upper)"
+	icon_state = "green"
 
 /area/faction_base/unsc/lowerlevel
 	name = "UNSC Faction Base (Lower)"
+	icon_state = "yellow"
+
+/area/faction_base/unsc/mac
+	name = "UNSC MAC"
+	icon_state = "firingrange"
+
+/area/faction_base/unsc/engineering
+	name = "UNSC Shuttle"
+	icon_state = "engine"
 
 /area/faction_base/unsc_defense_platform
 	name = "UNSC Defense Platform"
+	icon_state = "firingrange"
 
 /area/faction_base/unsc_shuttle
 	name = "UNSC Shuttle"
+	icon_state = "shuttle"

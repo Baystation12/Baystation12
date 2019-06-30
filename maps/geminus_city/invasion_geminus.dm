@@ -1,9 +1,5 @@
 
-#include "../faction_bases/faction_base_unsc.dm"
-
-#include "../faction_bases/Human_Station_1.dmm"
-
-#include "../faction_bases/Human_Station_2.dmm"
+#include "../faction_bases/Cassius_Station/Cassius_Station.dm"
 
 #include "../Exoplanet Research/includes.dm"
 
