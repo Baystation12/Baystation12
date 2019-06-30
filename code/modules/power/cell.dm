@@ -119,7 +119,7 @@
 
 // Smaller variant, used by energy guns and similar small devices.
 /obj/item/weapon/cell/device
-	name = "device power cell"
+	name = "device power cell master"
 	desc = "A small power cell designed to power handheld devices."
 	icon_state = "device"
 	w_class = ITEM_SIZE_SMALL
@@ -127,22 +127,29 @@
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100
-	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 5)
+	matter = list(MATERIAL_ALUMINIUM = 70, MATERIAL_GOLD = 5)
 
 /obj/item/weapon/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
 	return ..(mapload)
 
 /obj/item/weapon/cell/device/standard
-	name = "standard device power cell"
+	name = "AAA-Battery"
+	icon_state = "AAAcell"
 	maxcharge = 25
 
+/obj/item/weapon/cell/device/intermediate
+	name = "AA-Battery"
+	icon_state = "AAcell"
+	desc = "A small power cell designed to power energy-demanding devices. This is a intermediary power storage cell."
+	maxcharge = 60
+
 /obj/item/weapon/cell/device/high
-	name = "advanced device power cell"
-	desc = "A small power cell designed to power more energy-demanding devices."
-	icon_state = "hdevice"
-	maxcharge = 100
-	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 6)
+	name = "A-Battery"
+	desc = "A small power cell designed to power more energy-demanding devices. This is the peak of human made small power storage solutions."
+	icon_state = "Acell"
+
+//normal power cells commonly used for APCs or vehicles.. Or vehicle subsystems such as APCs
 
 /obj/item/weapon/cell/crap
 	name = "old power cell"
