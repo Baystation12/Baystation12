@@ -29,9 +29,7 @@
 
 /obj/machinery/oxygen_pump/Destroy()
 	if(breather)
-		breather.internal = null
-		if(breather.internals)
-			breather.internals.icon_state = "internal0"
+		breather.set_internals(null)
 	if(tank)
 		qdel(tank)
 	if(breather)
@@ -88,9 +86,7 @@
 /obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
 	if(C && istype(C))
 		if(!C.internal && tank)
-			C.internal = tank
-			if(C.internals)
-				C.internals.icon_state = "internal1"
+			breather.set_internals(tank)
 		update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/oxygen_pump/proc/detach_mask(mob/user)

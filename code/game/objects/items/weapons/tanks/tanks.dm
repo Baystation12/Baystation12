@@ -282,11 +282,8 @@ var/list/global/tank_gauge_cache = list()
 		return
 
 	if(location.internal == src)
-		location.internal = null
-		location.internals.icon_state = "internal0"
 		to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
-		if (location.internals)
-			location.internals.icon_state = "internal0"
+		location.set_internals(null)
 	else
 		var/can_open_valve
 		if(location.wear_mask && (location.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
@@ -297,10 +294,8 @@ var/list/global/tank_gauge_cache = list()
 				can_open_valve = 1
 
 		if(can_open_valve)
-			location.internal = src
 			to_chat(user, "<span class='notice'>You open \the [src] valve.</span>")
-			if (location.internals)
-				location.internals.icon_state = "internal1"
+			location.set_internals(src)
 		else
 			to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
 
