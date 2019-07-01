@@ -38,20 +38,20 @@
 		if(DISCONNECTED)
 			attached = null
 			if(mode == OPERATING)
-				STOP_PROCESSING(SSobj, src)
+				STOP_PROCESSING_POWER_OBJECT(src)
 			anchored = FALSE
 
 		if(CLAMPED_OFF)
 			if(!attached)
 				return
 			if(mode == OPERATING)
-				STOP_PROCESSING(SSobj, src)
+				STOP_PROCESSING_POWER_OBJECT(src)
 			anchored = TRUE
 
 		if(OPERATING)
 			if(!attached)
 				return
-			START_PROCESSING(SSobj, src)
+			START_PROCESSING_POWER_OBJECT(src)
 			anchored = TRUE
 
 	mode = value
@@ -115,7 +115,7 @@
 				"<span class='italics'>You hear a click.</span>")
 			set_mode(CLAMPED_OFF)
 
-/obj/item/device/powersink/Process()
+/obj/item/device/powersink/pwr_drain()
 	if(!attached)
 		set_mode(DISCONNECTED)
 		return
@@ -142,6 +142,6 @@
 	if(power_drained > max_power * 0.95)
 		playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
 	if(power_drained >= max_power)
-		STOP_PROCESSING(SSobj, src)
+		STOP_PROCESSING_POWER_OBJECT(src)
 		explosion(src.loc, 3,6,9,12)
 		qdel(src)
