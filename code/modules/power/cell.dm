@@ -134,20 +134,38 @@
 	return ..(mapload)
 
 /obj/item/weapon/cell/device/standard
-	name = "AAA-Battery"
+	name = "\improper AAA-Battery"
 	icon_state = "AAAcell"
 	maxcharge = 25
 
 /obj/item/weapon/cell/device/intermediate
-	name = "AA-Battery"
+	name = "\improper AA-Battery"
 	icon_state = "AAcell"
 	desc = "A small power cell designed to power energy-demanding devices. This is a intermediary power storage cell."
 	maxcharge = 60
 
 /obj/item/weapon/cell/device/high
-	name = "A-Battery"
+	name = "\improper A-Battery"
 	desc = "A small power cell designed to power more energy-demanding devices. This is the peak of human made small power storage solutions."
 	icon_state = "Acell"
+
+/obj/item/weapon/cell/device/higher
+	name = "\improper B-Battery"
+	icon_state = "Bcell"
+	desc = "A small power cell designed to power energy-demanding devices. This model is unavailable to the general public.."
+	maxcharge = 125
+
+/obj/item/weapon/cell/device/highest
+	name = "\improper C-Battery"
+	icon_state = "Ccell"
+	desc = "A small power cell designed to power energy-demanding devices. This high capacity model is generally only found in prototype devices."
+	maxcharge = 160
+
+/obj/item/weapon/cell/device/beyond
+	name = "\improper D-Battery"
+	icon_state = "Dcell"
+	desc = "A small power cell designed to power energy-demanding devices. This model has not been invented yet."
+	maxcharge = 200
 
 //normal power cells commonly used for APCs or vehicles.. Or vehicle subsystems such as APCs
 
