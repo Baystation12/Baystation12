@@ -11,7 +11,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
 	/obj/item/stack/cable_coil = 75,	\
-	/obj/item/weapon/tape_roll = 50
+	/obj/item/weapon/tool/tape_roll = 50
 	)
 	can_infect = 1
 	blood_level = 1
@@ -55,7 +55,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
 	/obj/item/stack/cable_coil = 75,	\
-	/obj/item/weapon/tape_roll = 50
+	/obj/item/weapon/tool/tape_roll = 50
 	)
 	can_infect = 1
 	blood_level = 1

@@ -114,7 +114,7 @@
 	if(prob(70))
 		new /obj/item/weapon/screwdriver(src)
 	if(prob(70))
-		new /obj/item/weapon/wrench(src)
+		new /obj/item/weapon/tool/wrench(src)
 	if(prob(70))
 		new /obj/item/weapon/weldingtool(src)
 	if(prob(70))

@@ -206,7 +206,7 @@
 /datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/conduct_test()
 	var/turf/T = get_safe_turf()
 	var/obj/mecha/mech = get_named_instance(/obj/mecha, T, "Mech")
-	var/obj/item/weapon/wrench/held_item = get_named_instance(/obj/item/weapon/wrench, T, "Wrench")
+	var/obj/item/weapon/tool/wrench/held_item = get_named_instance(/obj/item/weapon/tool/wrench, T, "Wrench")
 	var/mob/living/carbon/human/dummy/held_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Held Mob")
 	var/mob/living/carbon/human/dummy/holding_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Holding Mob")
 

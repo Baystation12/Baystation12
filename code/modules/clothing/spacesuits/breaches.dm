@@ -169,7 +169,7 @@
 			SetName("damaged [initial(name)]")
 	else if(all_patched)
 		SetName("patched [initial(name)]")
-	else 
+	else
 		SetName(initial(name))
 
 	return damage
@@ -220,7 +220,7 @@
 		repair_breaches(BRUTE, 3, user)
 		return
 
-	else if(istype(W, /obj/item/weapon/tape_roll))
+	else if(istype(W, /obj/item/weapon/tool/tape_roll))
 		var/datum/breach/target_breach		//Target the largest unpatched breach.
 		for(var/datum/breach/B in breaches)
 			if(B.patched)

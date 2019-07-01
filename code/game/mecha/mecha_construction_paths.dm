@@ -107,10 +107,10 @@
 	steps = list(
 					//1
 					list("key"=/obj/item/weapon/weldingtool,
-							"backkey"=/obj/item/weapon/wrench,
+							"backkey"=/obj/item/weapon/tool/wrench,
 							"desc"="External armor is wrenched."),
 					//2
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
@@ -119,10 +119,10 @@
 					 		"desc"="Internal armor is welded."),
 					 //4
 					 list("key"=/obj/item/weapon/weldingtool,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="Internal armor is wrenched"),
 					 //5
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
@@ -155,10 +155,10 @@
 					 		"desc"="The hydraulic systems are active."),
 					 //13
 					 list("key"=/obj/item/weapon/screwdriver,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are connected."),
 					 //14
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are disconnected.")
 					)
 
@@ -317,10 +317,10 @@
 	steps = list(
 					//1
 					list("key"=/obj/item/weapon/weldingtool,
-							"backkey"=/obj/item/weapon/wrench,
+							"backkey"=/obj/item/weapon/tool/wrench,
 							"desc"="External armor is wrenched."),
 					 //2
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
@@ -329,10 +329,10 @@
 					 		"desc"="Internal armor is welded."),
 					 //4
 					 list("key"=/obj/item/weapon/weldingtool,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="Internal armor is wrenched"),
 					 //5
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
@@ -389,10 +389,10 @@
 					 		"desc"="The hydraulic systems are active."),
 					 //19
 					 list("key"=/obj/item/weapon/screwdriver,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are connected."),
 					 //20
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are disconnected.")
 					)
 
@@ -597,10 +597,10 @@
 	steps = list(
 					//1
 					list("key"=/obj/item/weapon/weldingtool,
-							"backkey"=/obj/item/weapon/wrench,
+							"backkey"=/obj/item/weapon/tool/wrench,
 							"desc"="External armor is wrenched."),
 					//2
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
@@ -613,10 +613,10 @@
 					 		"desc"="Internal armor is welded."),
 					 //5
 					 list("key"=/obj/item/weapon/weldingtool,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="Internal armor is wrenched"),
 					 //6
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="Internal armor is installed"),
 
@@ -650,10 +650,10 @@
 					 		"desc"="The hydraulic systems are active."),
 					 //14
 					 list("key"=/obj/item/weapon/screwdriver,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are connected."),
 					 //15
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are disconnected.")
 					)
 
@@ -819,10 +819,10 @@
 	steps = list(
 					//1
 					list("key"=/obj/item/weapon/weldingtool,
-							"backkey"=/obj/item/weapon/wrench,
+							"backkey"=/obj/item/weapon/tool/wrench,
 							"desc"="External armor is wrenched."),
 					 //2
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
@@ -831,10 +831,10 @@
 					 		"desc"="Internal armor is welded."),
 					 //4
 					 list("key"=/obj/item/weapon/weldingtool,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="Internal armor is wrenched"),
 					 //5
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
@@ -891,10 +891,10 @@
 					 		"desc"="The hydraulic systems are active."),
 					 //19
 					 list("key"=/obj/item/weapon/screwdriver,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are connected."),
 					 //20
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are disconnected.")
 					)
 
@@ -1123,10 +1123,10 @@
 	steps = list(
 					//1
 					list("key"=/obj/item/weapon/weldingtool,
-							"backkey"=/obj/item/weapon/wrench,
+							"backkey"=/obj/item/weapon/tool/wrench,
 							"desc"="External armor is wrenched."),
 					//2
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
@@ -1135,10 +1135,10 @@
 					 		"desc"="Internal armor is welded."),
 					 //4
 					 list("key"=/obj/item/weapon/weldingtool,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="Internal armor is wrenched"),
 					 //5
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"backkey"=/obj/item/weapon/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
@@ -1171,10 +1171,10 @@
 					 		"desc"="The hydraulic systems are active."),
 					 //13
 					 list("key"=/obj/item/weapon/screwdriver,
-					 		"backkey"=/obj/item/weapon/wrench,
+					 		"backkey"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are connected."),
 					 //14
-					 list("key"=/obj/item/weapon/wrench,
+					 list("key"=/obj/item/weapon/tool/wrench,
 					 		"desc"="The hydraulic systems are disconnected.")
 					)
 

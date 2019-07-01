@@ -60,7 +60,7 @@
 	/obj/item/weapon/shovel,
 	/obj/item/weapon/weldingtool,
 	/obj/item/weapon/wirecutters,
-	/obj/item/weapon/wrench,
+	/obj/item/weapon/tool/wrench,
 	/obj/item/weapon/screwdriver,
 	/obj/item/weapon/grenade/chem_grenade/cleaner,
 	/obj/item/weapon/grenade/chem_grenade/metalfoam)

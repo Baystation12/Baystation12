@@ -10,7 +10,7 @@
 	use_stock_cost = 0.15
 	max_stock = 100
 	degradation = 0 //its consumable anyway
-	item_flags = NOBLUDGEON //Its not a weapon
+	item_flags = ITEM_FLAG_NO_BLUDGEON //Its not a weapon
 	max_upgrades = 0 //These are consumable, so no wasting upgrades on them
 
 /obj/item/weapon/tool/tape_roll/web
@@ -124,12 +124,13 @@
 
 /obj/item/weapon/ducttape/New()
 	..()
-	item_flags |= NOBLUDGEON
+	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
+/*
 /obj/item/weapon/ducttape/update_plane()
 	..()
 	update_icon()
-
+*/
 
 /obj/item/weapon/ducttape/examine(mob/user)
 	return stuck.examine(user)
