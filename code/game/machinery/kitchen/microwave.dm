@@ -301,6 +301,7 @@
 			cooked.dropInto(loc)
 			return
 		cooked = recipe.make_food(src)
+		LAZYCLEARLIST(ingredients)
 		stop()
 		if(cooked)
 			cooked.dropInto(loc)
@@ -338,7 +339,7 @@
 	src.update_icon()
 
 /obj/machinery/microwave/proc/dispose()
-	if (!LAZYLEN(ingredients) || !reagents.total_volume)
+	if (!LAZYLEN(ingredients) && !reagents.total_volume)
 		return
 	for (var/obj/O in ingredients)
 		O.dropInto(loc)
