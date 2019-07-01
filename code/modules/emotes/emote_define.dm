@@ -97,17 +97,22 @@
 
 /decl/emote/proc/do_sound(var/atom/user)
 	var/mob/living/carbon/human/H = user
-	if(istype(H) && islist(emote_sound))
-		if(islist(emote_sound[EMOTE_ALL_SPECIES]))
-			if(islist(emote_sound[EMOTE_ALL_SPECIES][EMOTE_ALL_GENDERS]))
-				playsound(user.loc, pick(emote_sound[EMOTE_ALL_SPECIES][EMOTE_ALL_GENDERS]), 50, 0)
-			else if(islist(emote_sound[EMOTE_ALL_SPECIES][H.gender]))
-				playsound(user.loc, pick(emote_sound[EMOTE_ALL_SPECIES][H.gender]), 50, 0)
-		else if (islist(emote_sound[H.species.name]))
-			if(islist(emote_sound[H.species.name][EMOTE_ALL_GENDERS]))
-				playsound(user.loc, pick(emote_sound[H.species.name][EMOTE_ALL_GENDERS]), 50, 0)
-			else if(islist(emote_sound[H.species.name][H.gender]))
-				playsound(user.loc, pick(emote_sound[H.species.name][H.gender]), 50, 0)
+	if(istype(H) && emote_sound)
+		if(islist(emote_sound))
+			if(islist(emote_sound[EMOTE_ALL_SPECIES]))
+				if(islist(emote_sound[EMOTE_ALL_SPECIES][EMOTE_ALL_GENDERS]))
+					playsound(user.loc, pick(emote_sound[EMOTE_ALL_SPECIES][EMOTE_ALL_GENDERS]), 50, 0)
+				else if(islist(emote_sound[EMOTE_ALL_SPECIES][H.gender]))
+					playsound(user.loc, pick(emote_sound[EMOTE_ALL_SPECIES][H.gender]), 50, 0)
+			else if (islist(emote_sound[H.species.name]))
+				if(islist(emote_sound[H.species.name][EMOTE_ALL_GENDERS]))
+					playsound(user.loc, pick(emote_sound[H.species.name][EMOTE_ALL_GENDERS]), 50, 0)
+				else if(islist(emote_sound[H.species.name][H.gender]))
+					playsound(user.loc, pick(emote_sound[H.species.name][H.gender]), 50, 0)
+			else
+				playsound(user.loc, pick(emote_sound), 50, 0)
+		else
+			playsound(user.loc, emote_sound, 50, 0)
 
 /decl/emote/proc/check_user(var/atom/user)
 	return TRUE
