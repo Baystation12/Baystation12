@@ -24,7 +24,7 @@
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/has_mob_product
 	var/force_layer
-	var/const/REQ_CO2_MOLES    = 6.0// Moles of CO2 required for photosynthesis.
+	var/const/REQ_CO2_MOLES    = 1.0// Moles of CO2 required for photosynthesis.
 
 /datum/seed/New()
 
@@ -171,14 +171,11 @@
 	// For now, only light-dependent reactions are available (no Calvin cycle).
 	// It's active only for those plants which doesn't consume nor exude gasses.
 	if(!(environment) || !(environment.gas))
-		return;
-	if(exude_gasses   && exude_gasses.len   > 0)
-		return;
-	if(consume_gasses && consume_gasses.len > 0)
-		return;
+		return
+	if(LAZYLEN(exude_gasses) || LAZYLEN(consume_gasses ))
+		return
 	if(!(light_supplied) || !(get_trait(TRAIT_REQUIRES_WATER)))
-		return;
-	// 6CO2 + 6H2O -> C6H12O6 (glucose) + 6O2
+		return
 	if(environment.get_gas("carbon_dioxide") >= REQ_CO2_MOLES)
 		environment.adjust_gas("carbon_dioxide", -REQ_CO2_MOLES, 1)
 		environment.adjust_gas("oxygen", REQ_CO2_MOLES, 1)
