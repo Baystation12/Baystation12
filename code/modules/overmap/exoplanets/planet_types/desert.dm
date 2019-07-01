@@ -156,11 +156,11 @@
 		..()
 
 /obj/structure/quicksand/Crossed(var/atom/movable/AM)
-    if(isliving(AM))
-        var/mob/living/L = AM
-        if(L.throwing || L.can_overcome_gravity())
-            return
-        buckle_mob(L)
-        if(!exposed)
-            expose()
-        to_chat(L, SPAN_DANGER("You fall into \the [src]!"))
+	if(isliving(AM))
+		var/mob/living/L = AM
+		if(L.throwing || L.can_overcome_gravity())
+			return
+		buckle_mob(L)
+		if(!exposed)
+			expose()
+		to_chat(L, SPAN_DANGER("You fall into \the [src]!"))
