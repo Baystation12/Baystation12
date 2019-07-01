@@ -1,7 +1,7 @@
 #define FLASHLIGHT_ALWAYS_ON 1
 #define FLASHLIGHT_SINGLE_USE 2
 
-
+/obj/item/device/flashlight
 	name = "flashlight"
 	desc = "A hand-held emergency light."
 	icon = 'icons/obj/lighting.dmi'
@@ -20,9 +20,6 @@
 	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
 	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
 	var/flashlight_flags = 0 // FLASHLIGHT_ bitflags
-
-	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device
-	var/power_usage = 2800
 
 /obj/item/device/flashlight/Initialize()
 	. = ..()
@@ -59,16 +56,6 @@
 	update_icon()
 	user.update_action_buttons()
 	return 1
-
-
-
-	if(href_list["remove_cell"])
-		if(cell)
-			var/mob/user = usr
-			user.put_in_hands(cell)
-			to_chat(user, "<span class='notice'>You remove [cell] from \the [src].</span>")
-			cell = null
-		return 1
 
 /obj/item/device/flashlight/proc/set_flashlight()
 	if (on)
