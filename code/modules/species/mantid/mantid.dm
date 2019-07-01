@@ -193,9 +193,7 @@
 /datum/species/nabber/monarch
 	name = SPECIES_MONARCH_WORKER
 	name_plural = "Monarch Serpentid Workers"
-	hud_type = /datum/hud_data/mantid //todo
 	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
-
 	has_organ = list(
 		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/nabber,
 		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/nabber,
@@ -203,21 +201,8 @@
 		BP_HEART =             /obj/item/organ/internal/heart/open,
 		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/nabber,
 		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
-		BP_PHORON =            /obj/item/organ/internal/phoron,
-		BP_ACETONE =           /obj/item/organ/internal/acetone,
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
-		)
-
-	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_ASCENT,
-		TAG_HOMEWORLD = HOME_SYSTEM_KHARMAANI,
-		TAG_FACTION =   FACTION_ASCENT_SERPENTID,
-		TAG_RELIGION =  RELIGION_KHARMAANI
 	)
-
-/datum/species/nabber/monarch/queen
-	name = SPECIES_MONARCH_QUEEN
-	name_plural = "Monarch Serpentid Queens"
 
 	force_cultural_info = list(
 		TAG_CULTURE =   CULTURE_ASCENT,
@@ -228,3 +213,7 @@
 
 /datum/species/nabber/monarch/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_NABBER
+
+/datum/species/nabber/monarch/queen
+	name = SPECIES_MONARCH_QUEEN
+	name_plural = "Monarch Serpentid Queens"

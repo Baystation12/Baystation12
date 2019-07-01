@@ -14,6 +14,7 @@
 	helm_type =  /obj/item/clothing/head/helmet/space/rig/mantid
 	boot_type =  /obj/item/clothing/shoes/magboots/rig/mantid
 	glove_type = /obj/item/clothing/gloves/rig/mantid
+	update_visible_name = TRUE
 	icon_override = 'icons/mob/species/mantid/onmob_back_alate.dmi'
 	sprite_sheets = list(
 		SPECIES_MANTID_GYNE =  'icons/mob/species/mantid/onmob_back_gyne.dmi',
@@ -180,6 +181,12 @@
 	icon_override = 'icons/mob/species/nabber/onmob_back_gas.dmi'
 	mantid_caste = SPECIES_NABBER
 	air_type =   /obj/item/weapon/tank/mantid/oxygen
+	chest_type = /obj/item/clothing/suit/space/rig/mantid/serpentid
+	helm_type =  null
+	boot_type =  null
+
+/obj/item/clothing/suit/space/rig/mantid/serpentid
+	body_parts_covered = HEAD|UPPER_TORSO|LOWER_TORSO|LEGS|FEET
 
 /obj/item/weapon/rig/mantid/nabber/queen
 	name = "small support exosuit"
