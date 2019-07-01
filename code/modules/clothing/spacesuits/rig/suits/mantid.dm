@@ -1,5 +1,5 @@
 /obj/item/weapon/rig/mantid
-	name = "mantid support rig"
+	name = "alate support exosuit"
 	desc = "A powerful support exosuit with integrated power supply, weapon and atmosphere. It's closer to a mech than a rig."
 	icon_state = "kexosuit"
 	item_state = null
@@ -155,6 +155,7 @@
 
 // Rig definitions.
 /obj/item/weapon/rig/mantid/gyne
+	name = "gyne support exosuit"
 	armor = list(melee = 80, bullet = 80, laser = 70, energy = 45, bomb = 75, bio = 100, rad = 100)
 	icon_override = 'icons/mob/species/mantid/onmob_back_gyne.dmi'
 	mantid_caste = SPECIES_MANTID_GYNE
@@ -175,11 +176,14 @@
 	)
 
 /obj/item/weapon/rig/mantid/nabber
+	name = "serpentid support exosuit"
 	icon_override = 'icons/mob/species/nabber/onmob_back_gas.dmi'
 	mantid_caste = SPECIES_NABBER
 	air_type =   /obj/item/weapon/tank/mantid/oxygen
 
 /obj/item/weapon/rig/mantid/nabber/queen
+	name = "small support exosuit"
+	mantid_caste = SPECIES_MONARCH_QUEEN
 	initial_modules = list(
 		/obj/item/rig_module/vision/thermal,
 		/obj/item/rig_module/ai_container,
