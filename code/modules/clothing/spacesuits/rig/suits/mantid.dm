@@ -131,7 +131,9 @@
 	. = ..()
 
 /obj/item/weapon/tank/mantid/oxygen
+	name = "serpentid gas reactor"
 	refill_gas_type = "oxygen"
+	distribute_pressure = 31
 
 /obj/item/weapon/tank/mantid/Process()
 	..()
@@ -182,11 +184,10 @@
 	mantid_caste = SPECIES_NABBER
 	air_type =   /obj/item/weapon/tank/mantid/oxygen
 	chest_type = /obj/item/clothing/suit/space/rig/mantid/serpentid
-	helm_type =  null
 	boot_type =  null
 
 /obj/item/clothing/suit/space/rig/mantid/serpentid
-	body_parts_covered = HEAD|UPPER_TORSO|LOWER_TORSO|LEGS|FEET
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET
 
 /obj/item/weapon/rig/mantid/nabber/queen
 	name = "small support exosuit"
@@ -236,11 +237,10 @@
 
 /obj/item/clothing/shoes/magboots/rig/mantid
 	desc = "It's like a highly advanced forklift."
-	species_restricted = list(SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_NABBER)
+	species_restricted = list(SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE)
 	sprite_sheets = list(
 		SPECIES_MANTID_GYNE =  'icons/mob/species/mantid/onmob_shoes_gyne.dmi',
-		SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_shoes_alate.dmi',
-		SPECIES_NABBER =       'icons/mob/species/nabber/onmob_shoes_gas.dmi'
+		SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_shoes_alate.dmi'
 		)
 
 /obj/item/clothing/gloves/rig/mantid
