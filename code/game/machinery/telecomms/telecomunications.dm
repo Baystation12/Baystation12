@@ -161,6 +161,16 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	else
 		icon_state = "[initial(icon_state)]_off"
 
+/obj/machinery/telecomms/Move()
+	. = ..()
+	listening_levels = GetConnectedZlevels(z)
+	update_power()
+
+/obj/machinery/telecomms/forceMove(var/newloc)
+	. = ..(newloc)
+	listening_levels = GetConnectedZlevels(z)
+	update_power()
+
 /obj/machinery/telecomms/proc/update_power()
 	if(toggled)
 		if(stat & (BROKEN|NOPOWER|EMPED) || integrity <= 0) // if powered, on. if not powered, off. if too damaged, off
@@ -356,11 +366,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	long_range_link = 1
 	var/broadcasting = 1
 	var/receiving = 1
-
-/obj/machinery/telecomms/relay/forceMove(var/newloc)
-	. = ..(newloc)
-	listening_levels = GetConnectedZlevels(z)
-	update_power()
 
 // Relays on ship's Z levels use less power as they don't have to transmit over such large distances.
 /obj/machinery/telecomms/relay/update_power()
