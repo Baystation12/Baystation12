@@ -21,6 +21,67 @@
 	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
 	var/flashlight_flags = 0 // FLASHLIGHT_ bitflags
 
+	var/obj/item/weapon/cell/bcell
+
+	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device
+	var/power_usage = 2800
+
+	var/status = 0
+
+/obj/item/device/flashlight/loaded
+	bcell = /obj/item/weapon/cell/device
+
+/obj/item/device/flashlight/New()
+	if(ispath(bcell))
+		bcell = new bcell(src)
+		update_icon()
+	..()
+
+/obj/item/device/flashlight/Destroy()
+	if(bcell && !ispath(bcell))
+		qdel(bcell)
+		bcell = null
+	return ..()
+
+/obj/item/device/flashlight/get_cell()
+	return bcell
+
+/obj/item/device/flashlight/proc/deductcharge(var/chrgdeductamt)
+	if(bcell)
+		if(bcell.checked_use(chrgdeductamt))
+			return 1
+		else
+			status = 0
+			update_icon()
+			return 0
+	return null
+
+	if(power_usage)
+		if(!cell)
+			return 0
+		if(!cell.checked_use(power_usage * CELLRATE))
+			return 0
+
+/obj/item/device/flashlight/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, /obj/item/weapon/cell/device))
+		if(!bcell && user.unEquip(W))
+			W.forceMove(src)
+			bcell = W
+			to_chat(user, "<span class='notice'>You install a cell into the [src].</span>")
+			update_icon()
+		else
+			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
+	else if(isScrewdriver(W))
+		if(bcell)
+			bcell.update_icon()
+			bcell.dropInto(loc)
+			bcell = null
+			to_chat(user, "<span class='notice'>You remove the cell from the [src].</span>")
+			status = 0
+			update_icon()
+	else
+		..()
+
 /obj/item/device/flashlight/Initialize()
 	. = ..()
 
