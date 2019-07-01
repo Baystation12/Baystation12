@@ -1266,10 +1266,6 @@
 				  /obj/item/weapon/towel/random = 50
 					)
 
-/obj/machinery/vending/lavatory/on_update_icon()
-	..()
-	if(!(stat & NOPOWER))
-		overlays += image(icon, "[initial(icon_state)]-overlay")
 
 //a food variant of the boda machine, only has one item currently.
 /obj/machinery/vending/snix
