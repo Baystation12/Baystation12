@@ -1,5 +1,0 @@
-author: "Cajoes"
-delete-after: True
-changes: 
-  - tweak: "modified adherent tool vendor to look modified"
-  - tweak: "changed adherent tool vendors vend animation from \"tool_vend\" to \"tool-vend\""
