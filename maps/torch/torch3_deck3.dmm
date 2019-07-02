@@ -28,26 +28,37 @@
 /area/space)
 "ad" = (
 /turf/simulated/wall/r_wall/hull,
-/area/vacant/brig)
+/area/command/missilepod)
 "ae" = (
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
-"af" = (
-/obj/machinery/computer/arcade,
-/turf/simulated/floor/tiled/monotile,
-/area/vacant/brig)
-"ag" = (
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "missilesA"
+	},
 /turf/simulated/floor/plating,
-/area/vacant/brig)
-"ah" = (
-/obj/structure/table/standard,
-/obj/random/junk,
-/turf/simulated/floor/tiled/monotile,
-/area/vacant/brig)
+/area/command/missilepod)
+"af" = (
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "missilesB"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
+"ag" = (
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/effect/floor_decal/sign/b,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "ai" = (
-/obj/structure/table/standard,
-/turf/simulated/floor/tiled/monotile,
-/area/vacant/brig)
+/obj/machinery/conveyor{
+	dir = 9;
+	icon_state = "conveyor0";
+	id = "missilesB"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "aj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/light{
@@ -62,19 +73,17 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
 "ak" = (
-/obj/random/junk,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
-"al" = (
-/obj/random/trash,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
-"am" = (
-/obj/machinery/shieldwallgen{
-	anchored = 1
+/obj/machinery/mass_driver{
+	dir = 8;
+	icon_state = "mass_driver";
+	id_tag = "missile_launcher"
 	},
+/turf/simulated/floor/airless,
+/area/command/missilepod)
+"am" = (
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/vacant/brig)
+/area/command/missilepod)
 "an" = (
 /obj/random/junk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -92,113 +101,142 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "ao" = (
-/obj/structure/grille/broken,
+/turf/simulated/wall/prepainted,
+/area/command/missilepod)
+"ar" = (
+/obj/structure/plasticflaps,
+/obj/machinery/conveyor{
+	id = "missilesB"
+	},
 /turf/simulated/floor/plating,
-/area/vacant/brig)
-"ap" = (
-/obj/structure/bed/chair/comfy/black{
+/area/command/missilepod)
+"at" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
+"au" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "missiles_launch"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
+"av" = (
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
+"aw" = (
+/obj/structure/catwalk,
+/turf/space,
+/area/command/missilepod)
+"ax" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
-"aq" = (
-/obj/effect/landmark{
-	name = "xeno_spawn";
-	pixel_x = -1
+/obj/machinery/conveyor_switch/oneway{
+	id = "missiles_launch";
+	name = "launch conveyor switch"
 	},
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
-"ar" = (
-/obj/effect/decal/cleanable/vomit,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
-"as" = (
-/obj/structure/hygiene/toilet{
+/obj/effect/floor_decal/corner/blue{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
-/area/vacant/brig)
-"at" = (
-/obj/random/junk,
-/turf/simulated/floor/plating,
-/area/vacant/brig)
-"au" = (
-/obj/structure/wall_frame,
-/obj/structure/grille,
-/turf/simulated/floor/plating,
-/area/vacant/brig)
-"av" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/vacant/brig)
-"aw" = (
-/obj/structure/bed,
-/turf/simulated/floor/plating,
-/area/vacant/brig)
-"ax" = (
-/obj/effect/floor_decal/corner/red{
-	icon_state = "corner_white";
-	dir = 1
-	},
-/obj/structure/computerframe,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
-"ay" = (
-/obj/effect/floor_decal/corner/red{
-	icon_state = "corner_white";
-	dir = 1
-	},
-/obj/structure/table/steel_reinforced,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "az" = (
-/obj/structure/door_assembly,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/structure/table/steel,
+/obj/machinery/button/blast_door{
+	id_tag = "missile_chute";
+	name = "missile chute control";
+	pixel_y = 5
+	},
+/obj/machinery/button/mass_driver{
+	id_tag = "missile_launcher";
+	name = "missile launch";
+	pixel_y = -3
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 5
+	},
+/obj/structure/sign/warning/nosmoking_1{
+	desc = "A warning sign which reads 'NO SMOKING'. Someone has scratched a variety of crude words in gutter across the entire sign.";
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/missilepod)
 "aA" = (
-/obj/structure/table/steel_reinforced,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "aB" = (
-/obj/structure/closet{
-	name = "Prisoner's Locker"
+/obj/structure/table/steel,
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 10
 	},
-/turf/simulated/floor/plating,
-/area/vacant/brig)
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/missilepod)
 "aC" = (
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_y = -32
+/obj/machinery/camera/network/command{
+	c_tag = "Missile Pod";
+	dir = 1
 	},
-/turf/simulated/floor/tiled/monotile,
-/area/vacant/brig)
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "aD" = (
-/obj/machinery/portable_atmospherics/hydroponics,
-/turf/simulated/floor/tiled/monotile,
-/area/vacant/brig)
-"aE" = (
-/obj/machinery/door/airlock/security{
-	name = "Old Brig"
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/conveyor_switch/oneway{
+	id = "missilesB";
+	name = "conveyor B switch"
 	},
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
+"aE" = (
+/obj/machinery/door/airlock/highsecurity{
+	icon_state = "closed";
+	locked = 0;
+	name = "Missile Pod"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
-/area/vacant/brig)
-"aF" = (
-/obj/random/obstruction,
-/turf/simulated/floor/plating,
-/area/vacant/brig)
+/area/command/missilepod)
 "aG" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
-/obj/structure/closet/secure_closet/brig,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "aH" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
-/obj/machinery/portable_atmospherics/canister/sleeping_agent,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "aI" = (
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -206,16 +244,22 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
 	},
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/obj/machinery/camera/network/command{
+	c_tag = "Missile Pod - Airlock";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "aK" = (
+/obj/structure/catwalk,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "aL" = (
 /obj/machinery/power/apc{
 	dir = 4;
@@ -226,8 +270,12 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 6
+	},
 /turf/simulated/floor/plating,
-/area/vacant/brig)
+/area/command/missilepod)
 "aM" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/tcommsat/chamber)
@@ -257,16 +305,20 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
 "aS" = (
+/obj/machinery/door/airlock/highsecurity{
+	icon_state = "closed";
+	locked = 0;
+	name = "Missile Pod"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/airlock/security{
-	name = "Old Brig"
-	},
 /turf/simulated/floor/tiled,
-/area/vacant/brig)
+/area/command/missilepod)
 "aT" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/thirddeck/aftstarboard)
@@ -284,7 +336,7 @@
 "aX" = (
 /obj/random/torchcloset,
 /obj/random/maintenance/solgov,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
 "aY" = (
 /turf/simulated/floor/plating,
@@ -295,12 +347,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "ba" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
-/turf/simulated/floor/plating,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
 "bb" = (
 /obj/structure/lattice,
@@ -351,6 +408,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "bi" = (
@@ -566,6 +624,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "bG" = (
@@ -579,28 +638,16 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
-"bH" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
 	},
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "bI" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
@@ -616,6 +663,12 @@
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "bJ" = (
@@ -2000,9 +2053,10 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/galley)
 "eA" = (
-/obj/random/trash,
-/turf/simulated/floor/tiled/monotile,
-/area/vacant/brig)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "eC" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -2704,6 +2758,13 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled,
 /area/maintenance/thirddeck/starboard)
+"fW" = (
+/obj/structure/plasticflaps,
+/obj/machinery/conveyor{
+	id = "missilesA"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "fX" = (
 /obj/structure/cable{
 	d1 = 16;
@@ -4277,6 +4338,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
+"iZ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/crew_quarters/office)
 "ja" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -4918,6 +4985,14 @@
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
+"km" = (
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 25;
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "kn" = (
 /obj/machinery/vending/hydronutrients/generic,
 /turf/simulated/floor/tiled/monotile,
@@ -5831,6 +5906,20 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"mv" = (
+/obj/structure/bed/chair/comfy/blue{
+	icon_state = "comfychair_preview";
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/missilepod)
+"mw" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "missile_chute"
+	},
+/turf/simulated/floor/airless,
+/area/command/missilepod)
 "mx" = (
 /obj/machinery/light{
 	dir = 8
@@ -6068,13 +6157,6 @@
 /obj/effect/floor_decal/corner/green/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
-"nb" = (
-/obj/item/weapon/storage/mirror{
-	icon_state = "mirror_broke";
-	pixel_y = 32
-	},
-/turf/simulated/floor/plating,
-/area/vacant/brig)
 "nc" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7933,6 +8015,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"rs" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "rt" = (
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Third Deck Hallway - Aft"
@@ -8876,16 +8969,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
-"sH" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
 "sI" = (
 /obj/machinery/door/airlock/glass/civilian{
 	name = "Gym"
@@ -8923,6 +9006,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
+"sN" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/random/trash,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "sP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -9227,6 +9319,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"tB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "tC" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/green{
@@ -9566,6 +9663,21 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"uy" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "uz" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -9742,6 +9854,13 @@
 "uU" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/head)
+"uX" = (
+/obj/structure/catwalk,
+/obj/machinery/camera/network/command{
+	c_tag = "Missile Pod - Launchway"
+	},
+/turf/space,
+/area/command/missilepod)
 "uZ" = (
 /turf/simulated/wall/prepainted,
 /area/security/range)
@@ -9899,6 +10018,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"vv" = (
+/obj/machinery/computer/ship/sensors,
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/missilepod)
 "vx" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/suit_storage_unit/standard_unit,
@@ -10337,6 +10464,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
+"wv" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/conveyor_switch/oneway{
+	id = "missilesA";
+	name = "conveyor A switch"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "ww" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -10588,6 +10723,10 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
+"wU" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "wV" = (
 /obj/structure/sign/deck/third{
 	dir = 1;
@@ -11264,6 +11403,13 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
+"yu" = (
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/missilepod)
 "yv" = (
 /obj/effect/floor_decal/chapel{
 	icon_state = "chapel";
@@ -11827,6 +11973,17 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/port)
+"Aa" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "missiles_launch"
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Ab" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -12052,6 +12209,10 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
+"AH" = (
+/obj/random/trash,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "AI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -12197,6 +12358,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/command/bsa)
+"Bf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Bg" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -12443,6 +12611,11 @@
 /obj/structure/table/woodentable_reinforced/mahogany,
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
+"BQ" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "BR" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -12638,6 +12811,15 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
+"Cu" = (
+/obj/effect/floor_decal/sign/a,
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Cv" = (
 /obj/structure/table/steel,
 /obj/random/tech_supply,
@@ -12749,6 +12931,11 @@
 /obj/effect/floor_decal/spline/fancy/black,
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
+"CK" = (
+/obj/random/torchcloset,
+/obj/random/maintenance/solgov,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "CL" = (
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Chapel";
@@ -13022,6 +13209,19 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
+"Du" = (
+/obj/structure/table/steel,
+/obj/item/weapon/paper_bin,
+/obj/item/weapon/pen,
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/missilepod)
 "Dv" = (
 /obj/structure/table/steel,
 /obj/item/weapon/paper_bin{
@@ -13036,6 +13236,10 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
+"DA" = (
+/obj/structure/sign/warning/secure_area,
+/turf/simulated/wall/r_wall/hull,
+/area/command/missilepod)
 "DB" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -14463,6 +14667,12 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"He" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/device/multitool,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Hf" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/thirddeck/port)
@@ -14540,6 +14750,10 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/cryolocker)
+"Hq" = (
+/obj/structure/sign/warning/vacuum,
+/turf/simulated/wall/prepainted,
+/area/command/missilepod)
 "Hr" = (
 /obj/structure/sign/warning/hot_exhaust{
 	icon_state = "fire";
@@ -14968,11 +15182,20 @@
 /turf/simulated/floor/plating,
 /area/command/bsa)
 "ID" = (
-/obj/random_multi/single_item/punitelly,
-/turf/simulated/floor/tiled,
-/area/vacant/brig)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "IE" = (
 /obj/random_multi/single_item/punitelly,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
+"IF" = (
+/obj/random_multi/single_item/punitelly,
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "IH" = (
@@ -16780,6 +17003,16 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
+"Mx" = (
+/obj/machinery/door/airlock/highsecurity{
+	icon_state = "closed";
+	locked = 0;
+	name = "Missile Pod"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled,
+/area/command/missilepod)
 "My" = (
 /obj/structure/table/rack,
 /obj/item/weapon/aiModule/reset,
@@ -16846,12 +17079,20 @@
 "MG" = (
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
+"MH" = (
+/obj/machinery/door/airlock/command{
+	name = "Missile Storage";
+	secured_wires = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/missilepod)
 "MI" = (
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "MJ" = (
@@ -16867,6 +17108,17 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
+"ML" = (
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "missilesA"
+	},
+/obj/structure/missile/probe{
+	icon_state = "base";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "MM" = (
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/thirddeck/aft)
@@ -17066,11 +17318,6 @@
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
-"Nw" = (
-/obj/effect/wallframe_spawn/no_grille,
-/obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/plating,
-/area/crew_quarters/mess)
 "Nx" = (
 /obj/machinery/light{
 	dir = 1
@@ -17522,6 +17769,11 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/hardstorage)
+"OU" = (
+/obj/structure/table/rack,
+/obj/random/maintenance/solgov,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "OW" = (
 /obj/structure/sign/directions/engineering{
 	dir = 1;
@@ -17836,6 +18088,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "PQ" = (
@@ -18076,8 +18332,16 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
 "QC" = (
-/turf/simulated/floor/tiled/monotile,
-/area/vacant/brig)
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "missilesB"
+	},
+/obj/structure/missile/cargo/planet{
+	icon_state = "base";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "QE" = (
 /obj/structure/table/rack,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -18604,6 +18868,12 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/hydroponics)
+"Sr" = (
+/obj/machinery/conveyor{
+	id = "missilesB"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Ss" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -18870,6 +19140,15 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ai_monitored/storage/eva)
+"Tj" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/missilepod)
 "Tk" = (
 /obj/structure/railing/mapped{
 	dir = 4;
@@ -18930,11 +19209,18 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
 "Tv" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "missiles_launch"
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/obj/machinery/door/blast/regular/open{
+	dir = 1;
+	icon_state = "pdoor0";
+	id_tag = "missile_chute"
+	},
+/obj/structure/plasticflaps/airtight,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Tw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -19083,6 +19369,16 @@
 /obj/machinery/cooker/cereal,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
+"TX" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/lino,
+/area/crew_quarters/office)
 "TY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -19339,11 +19635,6 @@
 	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/gym)
-"UD" = (
-/obj/structure/grille,
-/obj/structure/wall_frame,
-/turf/simulated/floor/plating,
-/area/vacant/brig)
 "UE" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -19635,6 +19926,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
+"Vt" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "missiles_launch"
+	},
+/turf/simulated/floor/airless,
+/area/command/missilepod)
 "Vv" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -19879,6 +20177,14 @@
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/thirddeck/center)
+"VX" = (
+/obj/machinery/conveyor{
+	dir = 9;
+	icon_state = "conveyor0";
+	id = "missilesA"
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "VY" = (
 /obj/structure/closet/crate/solar,
 /obj/effect/floor_decal/corner/yellow/half{
@@ -19905,6 +20211,11 @@
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
+"We" = (
+/obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/plating,
+/area/crew_quarters/mess)
 "Wh" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -20540,6 +20851,12 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
+"XT" = (
+/obj/structure/sign/warning/secure_area{
+	name = "\improper WARNING! MISSILE LAUNCHWAY!"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/command/missilepod)
 "XU" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -20646,6 +20963,10 @@
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ai_monitored/storage/eva)
+"Yi" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Yj" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -20835,6 +21156,11 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
+"YO" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "YP" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -21040,6 +21366,13 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
+"Zs" = (
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "Zv" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -21082,11 +21415,7 @@
 /obj/structure/closet/crate/internals,
 /obj/random/tank,
 /obj/random/tank,
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
-	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "Zz" = (
@@ -21220,6 +21549,11 @@
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
+"ZT" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/plating,
+/area/command/missilepod)
 "ZV" = (
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -38906,7 +39240,7 @@ XO
 jn
 RN
 jj
-Nw
+We
 qQ
 sk
 tI
@@ -39108,7 +39442,7 @@ jd
 nj
 Lx
 fu
-Nw
+We
 Xn
 sj
 tJ
@@ -40494,9 +40828,9 @@ aa
 aa
 aa
 ad
-ad
-ad
-ad
+XT
+aa
+XT
 ad
 aa
 aa
@@ -40696,8 +41030,8 @@ aa
 aa
 aa
 ad
-ag
-at
+uX
+aa
 aw
 ad
 aa
@@ -40898,9 +41232,9 @@ aa
 aa
 ad
 ad
-nb
-ag
-ag
+ad
+mw
+ad
 ad
 ad
 aa
@@ -41099,11 +41433,11 @@ aa
 aa
 ad
 ad
-ag
+ML
 ao
 ak
-av
-ag
+ad
+ad
 ad
 ad
 aa
@@ -41302,10 +41636,10 @@ aa
 ad
 QC
 ae
-ae
-ag
-ae
-ae
+Hq
+Vt
+Yi
+Du
 aB
 ad
 aa
@@ -41503,12 +41837,12 @@ aa
 aa
 ad
 af
-ag
-ag
-ae
-ae
-ag
-QC
+ML
+ao
+Vt
+Yi
+vv
+mv
 ad
 aa
 aI
@@ -41706,11 +42040,11 @@ aa
 ad
 QC
 ae
-ae
-ag
-av
+ao
+Tv
+ao
 az
-av
+yu
 ad
 ad
 ad
@@ -41906,19 +42240,19 @@ aa
 aa
 aa
 ad
-ag
-ak
-ap
+af
+ML
+ao
 au
 ax
-ag
+Tj
 aC
-ad
+DA
 aG
 aJ
-ad
+DA
 aX
-aY
+dD
 bF
 cl
 aY
@@ -42108,19 +42442,19 @@ aa
 aa
 aa
 ad
-ag
+QC
 ae
-aq
 ao
-ae
+au
+rs
 ID
-ag
-az
-ag
-ag
-aE
-IE
-aY
+tB
+Mx
+YO
+YO
+Mx
+IF
+BQ
 PP
 cl
 dd
@@ -42310,15 +42644,15 @@ aa
 aa
 aa
 ad
-QC
-ae
-ag
-av
-ag
-ag
+af
+ML
+ao
+au
+rs
+Bf
 eA
 aE
-ae
+ZT
 aK
 aS
 aZ
@@ -42513,21 +42847,21 @@ aa
 aa
 ad
 QC
-al
 ae
-av
-ay
+ao
+au
+rs
 aA
-ag
-aF
+wU
+DA
 aH
 aL
-ad
+DA
 ba
-aY
-PP
+dD
+uy
 cl
-aX
+CK
 dS
 cl
 da
@@ -42714,20 +43048,20 @@ aa
 aa
 aa
 ad
-ah
-ag
-ae
-ag
-ag
+af
+VX
+fW
+au
+rs
 av
-av
+wv
 ad
 ad
 ad
 ad
 aQ
 Zy
-bH
+uy
 cl
 cl
 cl
@@ -42917,11 +43251,11 @@ aa
 aa
 ad
 ai
-ae
+Sr
 ar
-ae
-ag
-ae
+Aa
+rs
+km
 aD
 ad
 aa
@@ -43119,12 +43453,12 @@ aa
 aa
 ad
 ag
-ae
-ag
-ag
-ak
-ag
-aD
+Cu
+ao
+ao
+MH
+ao
+ao
 ad
 aa
 aI
@@ -43322,10 +43656,10 @@ aa
 ad
 ad
 am
-ag
-ae
-UD
 am
+Zs
+am
+He
 ad
 ad
 aa
@@ -43524,9 +43858,9 @@ aa
 aa
 ad
 ad
-ag
+sN
 at
-ag
+at
 ad
 ad
 aa
@@ -43726,9 +44060,9 @@ aa
 aa
 aa
 ad
-as
-ag
-ag
+ad
+OU
+AH
 ad
 aa
 aa
@@ -44164,7 +44498,7 @@ Zv
 Ik
 py
 xO
-sH
+TX
 TL
 vs
 SK
@@ -44365,7 +44699,7 @@ rr
 sG
 je
 vg
-Tv
+iZ
 wp
 yt
 wp
