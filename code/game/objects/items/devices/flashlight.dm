@@ -23,7 +23,7 @@
 
 /obj/item/device/flashlight/Initialize()
 	. = ..()
-	
+
 	set_flashlight()
 	update_icon()
 
@@ -44,7 +44,7 @@
 	if(!isturf(user.loc))
 		to_chat(user, "You cannot turn the [name] on while in this [user.loc].")//To prevent some lighting anomalities.
 		return 0
-	
+
 	if (flashlight_flags & FLASHLIGHT_SINGLE_USE && on)
 		to_chat(user, "The [name] is already lit.")
 		return 0
@@ -432,45 +432,43 @@
 	on = 0
 	action_button_name = "Toggle lamp"
 	flashlight_outer_range = 3 //range of light when on
+	matter = list(MATERIAL_ALUMINIUM = 250, MATERIAL_GLASS = 200)
+
+/obj/item/device/flashlight/lamp/lava/on_update_icon()
+	overlays.Cut()
+	var/image/I = image(icon = icon, icon_state = "lavalamp-[on ? "on" : "off"]")
+	I.color = light_color
+	overlays += I
 
 /obj/item/device/flashlight/lamp/lava/red
 	desc = "A kitchy red decorative light."
-	icon_state = "redlamp"
 	light_color = COLOR_RED
 
 /obj/item/device/flashlight/lamp/lava/blue
 	desc = "A kitchy blue decorative light"
-	icon_state = "bluelamp"
 	light_color = COLOR_BLUE
 
 /obj/item/device/flashlight/lamp/lava/cyan
 	desc = "A kitchy cyan decorative light"
-	icon_state = "cyanlamp"
 	light_color = COLOR_CYAN
 
 /obj/item/device/flashlight/lamp/lava/green
 	desc = "A kitchy green decorative light"
-	icon_state = "greenlamp"
 	light_color = COLOR_GREEN
 
 /obj/item/device/flashlight/lamp/lava/orange
 	desc = "A kitchy orange decorative light"
-	icon_state = "orangelamp"
 	light_color = COLOR_ORANGE
 
 /obj/item/device/flashlight/lamp/lava/purple
 	desc = "A kitchy purple decorative light"
-	icon_state = "purplelamp"
 	light_color = COLOR_PURPLE
-
 /obj/item/device/flashlight/lamp/lava/pink
 	desc = "A kitchy pink decorative light"
-	icon_state = "pinklamp"
 	light_color = COLOR_PINK
 
 /obj/item/device/flashlight/lamp/lava/yellow
 	desc = "A kitchy yellow decorative light"
-	icon_state = "yellowlamp"
 	light_color = COLOR_YELLOW
 
 #undef FLASHLIGHT_ALWAYS_ON
