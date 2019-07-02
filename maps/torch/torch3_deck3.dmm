@@ -959,6 +959,39 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
+"cs" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/door/airlock/civilian{
+	name = "Galley"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/crew_quarters/galley)
+"ct" = (
+/obj/machinery/door/airlock/command{
+	autoset_access = 0;
+	name = "Officer's Mess";
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "cu" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
@@ -7604,27 +7637,6 @@
 "qx" = (
 /turf/simulated/wall/r_wall/hull,
 /area/ai_monitored/storage/eva)
-"qy" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/machinery/door/airlock/civilian{
-	name = "Galley"
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/crew_quarters/galley)
 "qz" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -19094,18 +19106,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/office)
-"TZ" = (
-/obj/machinery/door/airlock/command{
-	autoset_access = 0;
-	name = "Officer's Mess";
-	req_access = list(list("ACCESS_BRIDGE","ACCESS_KITCHEN","ACCESS_TORCH_SENIOR_MED","ACCESS_PSYCHIATRIST"))
-	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/tiled/white,
-/area/crew_quarters/mess)
 "Ub" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -38492,7 +38492,7 @@ Kn
 ev
 Lb
 CO
-qy
+cs
 ev
 ev
 jX
@@ -39708,7 +39708,7 @@ hy
 fB
 fB
 nD
-TZ
+ct
 nD
 fB
 fB
