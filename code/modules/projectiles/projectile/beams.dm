@@ -260,15 +260,15 @@
 /obj/item/projectile/beam/particle
 	name = "particle lance"
 	icon_state = "particle"
-	damage = 45
-	armor_penetration = 60
+	damage = 35
+	armor_penetration = 50
 	muzzle_type = /obj/effect/projectile/laser_particle/muzzle
 	tracer_type = /obj/effect/projectile/laser_particle/tracer
 	impact_type = /obj/effect/projectile/laser_particle/impact
-	penetration_modifier = 0.7
+	penetration_modifier = 0.5
 
 /obj/item/projectile/beam/particle/small
 	name = "particle beam"
-	damage = 30
-	armor_penetration = 30
-	penetration_modifier = 0.5
+	damage = 20
+	armor_penetration = 20
+	penetration_modifier = 0.3

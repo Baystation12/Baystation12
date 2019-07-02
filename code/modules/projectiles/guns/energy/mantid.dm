@@ -7,7 +7,7 @@
 	slot_flags = SLOT_BACK
 	force = 25 // Heavy as Hell.
 	projectile_type = /obj/item/projectile/beam/particle
-	max_shots = 30
+	max_shots = 18
 	self_recharge = 1
 	w_class = ITEM_SIZE_HUGE
 	one_hand_penalty = 6
@@ -31,7 +31,7 @@
 	desc = "A smaller variant on the Ascent particle lance, usually carried by drones and alates."
 	icon_state = "particle_rifle_small"
 	force = 12
-	max_shots = 12
+	max_shots = 9
 	burst = 1
 	move_delay = 2
 	one_hand_penalty = 0

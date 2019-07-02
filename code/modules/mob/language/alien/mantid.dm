@@ -11,6 +11,38 @@
 	flags = RESTRICTED
 	shorthand = "KV"
 	machine_understands = FALSE
+	var/list/correct_mouthbits = list(
+		SPECIES_NABBER,
+		SPECIES_MANTID_ALATE,
+		SPECIES_MANTID_GYNE,
+		SPECIES_MONARCH_QUEEN,
+		SPECIES_MONARCH_WORKER
+	)
+
+/datum/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
+	var/mob/living/S = speaker
+	if(!istype(S))
+		return FALSE
+	if(S.isSynthetic())
+		return TRUE
+	if(ishuman(speaker))
+		var/mob/living/carbon/human/H = speaker
+		if(H.species.name in correct_mouthbits)
+			return TRUE
+	return FALSE
+
+/datum/language/mantid/muddle(var/message)
+	message = replacetext(message, "...",  ".")
+	message = replacetext(message, "!?",   ".")
+	message = replacetext(message, "?!",   ".")
+	message = replacetext(message, "!",    ".")
+	message = replacetext(message, "?",    ".")
+	message = replacetext(message, ",",    "")
+	message = replacetext(message, ";",    "")
+	message = replacetext(message, ":",    "")
+	message = replacetext(message, ".",    "...")
+	message = replacetext(message, "&#39", "'")
+	return message
 
 /datum/language/mantid/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	. = ..(speaker, message, speaker.real_name)
@@ -44,6 +76,14 @@
 	return scrambled_text
 #undef MANTID_SCRAMBLE_CACHE_LEN
 
+/datum/language/mantid/nonvocal/can_speak_special(var/mob/living/speaker)
+	if(istype(speaker) && speaker.isSynthetic())
+		return TRUE
+	else if(ishuman(speaker))
+		var/mob/living/carbon/human/H = speaker
+		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
+	return FALSE
+
 /datum/language/mantid/worldnet
 	key = "\["
 	name = LANGUAGE_MANTID_BROADCAST
@@ -55,18 +95,9 @@
 	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND 
 	shorthand = "KB"
 
-// TODO: these will be entirely replaced when the Ascent species are added.
-/datum/language/mantid/can_speak_special(var/mob/living/speaker)
-	if(istype(speaker) && speaker.isSynthetic())
-		return TRUE
-	else if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
-		return H.species.name == SPECIES_NABBER
-	return FALSE
-
-/datum/language/mantid/nonvocal/can_speak_special(var/mob/living/speaker)
-	return istype(speaker) && speaker.isSynthetic()
-
 /datum/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
-	return istype(other, /mob/living/silicon/robot/flying/ascent) //istype(other) && (locate(/obj/item/organ/internal/controller) in other.internal_organs)
-// End TODO.
+	if(istype(other, /mob/living/silicon/robot/flying/ascent))
+		return TRUE
+	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.internal_organs))
+		return TRUE
+	return FALSE
