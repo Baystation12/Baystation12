@@ -366,6 +366,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/stock_parts/console_screen
 	category = "Devices and Components"
 
+/datum/autolathe/recipe/keyboard
+	name = "keyboard"
+	path = /obj/item/weapon/stock_parts/keyboard
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/igniter
 	name = "igniter"
 	path = /obj/item/device/assembly/igniter

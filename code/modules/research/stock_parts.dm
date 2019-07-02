@@ -80,14 +80,6 @@
 
 //Rank 1
 
-/obj/item/weapon/stock_parts/console_screen
-	name = "console screen"
-	desc = "Used in the construction of computers and other devices with a interactive console."
-	icon_state = "screen"
-	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(MATERIAL_GLASS = 200)
-	base_type = /obj/item/weapon/stock_parts/console_screen
-
 /obj/item/weapon/stock_parts/scanning_module
 	name = "scanning module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."

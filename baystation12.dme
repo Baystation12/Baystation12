@@ -2677,6 +2677,7 @@
 #include "code\modules\research\research.dm"
 #include "code\modules\research\server.dm"
 #include "code\modules\research\stock_parts.dm"
+#include "code\modules\research\stock_parts_interface.dm"
 #include "code\modules\research\stock_parts_presets.dm"
 #include "code\modules\research\stock_parts_radio.dm"
 #include "code\modules\research\designs\_designs.dm"
