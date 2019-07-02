@@ -244,6 +244,10 @@ Class Procs:
 	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user) // This may still work even if the physical checks fail.
 
+// After a recent rework this should mostly be safe.
+/obj/machinery/attack_ghost(mob/user)
+	interface_interact(user)
+
 // If you don't call parent in this proc, you must make all appropriate checks yourself. 
 // If you do, you must respect the return value.
 /obj/machinery/attack_hand(mob/user)

@@ -22,8 +22,8 @@
 /atom/movable/proc/GetIdCard()
 	return null
 
-/atom/movable/proc/check_access(obj/item/I)
-	return check_access_list(I ? I.GetAccess() : list())
+/atom/movable/proc/check_access(atom/movable/A)
+	return check_access_list(A ? A.GetAccess() : list())
 
 /atom/movable/proc/check_access_list(list/L)
 	var/list/R = get_req_access()

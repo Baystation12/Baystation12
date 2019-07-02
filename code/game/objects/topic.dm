@@ -20,8 +20,7 @@
 	return STATUS_CLOSE
 
 /mob/living/CanUseObjTopic(var/obj/O)
-	var/id = GetIdCard()
-	if(id && O.check_access(id))
+	if(O.check_access(src))
 		return TRUE
 	to_chat(src, "<span class='danger'>\icon[src] Access Denied!</span>")
 	return FALSE
