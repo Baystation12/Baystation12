@@ -6,7 +6,7 @@ var/list/cached_space = list()
 /obj/effect/overmap/sector/temporary
 	name = "Deep Space"
 	invisibility = 101
-	known = 0
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 /obj/effect/overmap/sector/temporary/New(var/nx, var/ny, var/nz)
 	loc = locate(nx, ny, GLOB.using_map.overmap_z)
@@ -88,7 +88,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/turf/map = locate(M.x,M.y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/TM
 	for(var/obj/effect/overmap/O in map)
-		if(O != M && O.in_space && prob(50))
+		if(O != M && (O.sector_flags & OVERMAP_SECTOR_IN_SPACE) && prob(50))
 			TM = O
 			break
 	if(!TM)

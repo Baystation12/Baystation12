@@ -1,7 +1,7 @@
 /obj/effect/overmap/sector/exoplanet
 	name = "exoplanet"
 	icon_state = "globe"
-	in_space = 0
+	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_UNTARGETABLE
 	var/area/planetary_area
 	var/list/seeds = list()
 	var/list/animals = list()

@@ -17,9 +17,7 @@
 	var/start_x			//coordinates on the
 	var/start_y			//overmap zlevel
 
-	var/base = 0		//starting sector, counts as station_levels
-	var/known = 1		//shows up on nav computers automatically
-	var/in_space = 1	//can be accessed via lucky EVA
+	var/sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE
 
 	var/has_distress_beacon
 
@@ -61,9 +59,9 @@
 		map_sectors["[zlevel]"] = src
 
 	GLOB.using_map.player_levels |= map_z
-	if(!in_space)
+	if(!(sector_flags & OVERMAP_SECTOR_IN_SPACE))
 		GLOB.using_map.sealed_levels |= map_z
-	if(base)
+	if(sector_flags & OVERMAP_SECTOR_BASE)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
 		GLOB.using_map.map_levels |= map_z
@@ -107,7 +105,7 @@
 
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
-	if(known)
+	if(sector_flags & OVERMAP_SECTOR_KNOWN)
 		layer = ABOVE_LIGHTING_LAYER
 		plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)

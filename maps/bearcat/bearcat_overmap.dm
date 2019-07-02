@@ -3,7 +3,7 @@
 	color = "#00ffff"
 	start_x = 4
 	start_y = 4
-	base = 1
+	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE|OVERMAP_SECTOR_BASE
 	vessel_mass = 5000
 	max_speed = 1/(2 SECONDS)
 	burn_delay = 2 SECONDS

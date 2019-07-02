@@ -5,7 +5,7 @@
 	name = "large asteroid"
 	desc = "Sensor array is reading an artificial structure inside the asteroid."
 	icon_state = "object"
-	known = 0
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 	initial_generic_waypoints = list(
 		"nav_slavers_base_1",

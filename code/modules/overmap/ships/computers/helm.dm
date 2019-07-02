@@ -27,7 +27,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
-		if (S.known)
+		if (S.sector_flags & OVERMAP_SECTOR_KNOWN)
 			var/datum/computer_file/data/waypoint/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x

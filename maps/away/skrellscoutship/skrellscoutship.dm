@@ -12,7 +12,6 @@
 /obj/effect/overmap/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
-	in_space = 1
 	icon_state = "event"
 
 /obj/effect/submap_landmark/joinable_submap/skrellscoutship

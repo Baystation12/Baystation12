@@ -4,7 +4,7 @@
 	name = "Lar Maria space station"
 	desc = "Sensors detect an orbital station with low energy profile and sporadic life signs."
 	icon_state = "object"
-	known = 0
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 /datum/map_template/ruin/away_site/lar_maria
 	name = "Lar Maria"

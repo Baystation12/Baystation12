@@ -698,6 +698,11 @@
 	icon_state = "firingrange"
 	req_access = list(access_bridge)
 
+/area/command/missilepod
+	name = "\improper Missile Pod"
+	icon_state = "firingrange"
+	req_access = list(access_bridge)
+
 /area/crew_quarters/heads
 	icon_state = "heads"
 	req_access = list(access_heads)

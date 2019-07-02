@@ -72,6 +72,11 @@ default behaviour is:
 		if ((!( yes ) || now_pushing) || !loc)
 			return
 		now_pushing = 1
+
+		if(istype(AM) && (AM.movable_flags & MOVABLE_FLAG_NO_PUSH))
+			now_pushing = 0
+			return
+		
 		if (istype(AM, /mob/living))
 			var/mob/living/tmob = AM
 

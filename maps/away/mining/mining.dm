@@ -14,7 +14,7 @@
 		"nav_cluster_6",
 		"nav_cluster_7"
 	)
-	known = 0
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 	start_x = 4
 	start_y = 5
 
@@ -79,7 +79,7 @@
 		"nav_away_6",
 		"nav_away_7"
 	)
-	known = 0
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 /datum/map_template/ruin/away_site/mining_signal
 	name = "Mining - Planetoid"
@@ -140,7 +140,7 @@
 		"nav_orb_6",
 		"nav_orb_7"
 	)
-	known = 0
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 /datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"

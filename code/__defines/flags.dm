@@ -23,6 +23,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define MOVABLE_FLAG_Z_INTERACT          0x0002 // Should attackby and attack_hand be relayed through ladders and open spaces?
 #define MOVABLE_FLAG_EFFECTMOVE          0x0003 // Is this an effect that should move?
 #define MOVABLE_FLAG_DEL_SHUTTLE         0x0004 // Shuttle transistion will delete this.
+#define MOVABLE_FLAG_NO_PUSH             0x0008 // Cannot be pushed by living mobs
 
 #define OBJ_FLAG_ANCHORABLE              0x0001 // This object can be stuck in place with a tool
 #define OBJ_FLAG_CONDUCTIBLE             0x0002 // Conducts electricity. (metal etc.)
@@ -47,3 +48,9 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define PASS_FLAG_TABLE  0x1
 #define PASS_FLAG_GLASS  0x2
 #define PASS_FLAG_GRILLE 0x4
+
+// Flags for overmap objects
+#define OVERMAP_SECTOR_BASE              0x0001 // Whether or not this sector is a starting sector. Z levels contained in this sector are added to station_levels
+#define OVERMAP_SECTOR_KNOWN             0x0002 // Makes the sector show up on nav computers
+#define OVERMAP_SECTOR_IN_SPACE          0x0004 // If the sector can be accessed by drifting off the map edge
+#define OVERMAP_SECTOR_UNTARGETABLE      0x0008 // If the sector is untargetable by missiles
