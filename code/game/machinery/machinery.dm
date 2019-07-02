@@ -85,6 +85,7 @@ Class Procs:
 	w_class = ITEM_SIZE_NO_CONTAINER
 
 	var/stat = 0
+	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
 	var/emagged = 0
 	var/malf_upgraded = 0
 	var/datum/wires/wires //wire datum, if any. If you place a type path, it will be autoinitialized.
@@ -172,17 +173,23 @@ Class Procs:
 				qdel(src)
 
 /obj/machinery/proc/set_broken(new_state)
+	if(stat_immune & BROKEN)
+		return FALSE
 	if(!new_state != !(stat & BROKEN)) // new state is different from old
 		stat ^= BROKEN                // so flip it
 		queue_icon_update()
 		return TRUE
 
 /obj/machinery/proc/set_noscreen(new_state)
+	if(stat_immune & NOSCREEN)
+		return FALSE
 	if(!new_state != !(stat & NOSCREEN))
 		stat ^= NOSCREEN
 		return TRUE
 
 /obj/machinery/proc/set_noinput(new_state)
+	if(stat_immune & NOINPUT)
+		return FALSE
 	if(!new_state != !(stat & NOINPUT))
 		stat ^= NOINPUT
 		return TRUE
@@ -293,6 +300,8 @@ Class Procs:
 	return FALSE
 
 /obj/machinery/proc/RefreshParts()
+	set_noinput(TRUE)
+	set_noscreen(TRUE)
 	for(var/thing in component_parts)
 		var/obj/item/weapon/stock_parts/part = thing
 		part.on_refresh(src)
@@ -371,8 +380,13 @@ Class Procs:
 
 /obj/machinery/examine(mob/user)
 	. = ..(user)
-	if(component_parts && hasHUD(user, HUD_SCIENCE))
-		display_parts(user)
+	if(.)
+		if(component_parts && hasHUD(user, HUD_SCIENCE))
+			display_parts(user)
+		if(stat & NOSCREEN)
+			to_chat(user, "It is missing a screen, making it hard to interact with.")
+		else if(stat & NOINPUT)
+			to_chat(user, "It is missing any input device.")
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(var/depth)
