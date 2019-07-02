@@ -944,8 +944,3 @@
 							QUALITY_CUTTING = 100)
 
 
-
-//Returns the list of matter in this object
-//You can override it to customise exactly what is returned.
-/obj/proc/get_matter()
-	return matter
