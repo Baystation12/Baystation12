@@ -63,6 +63,9 @@
 		A.use_power_oneoff(amount, channel)
 		return amount
 
+/obj/item/weapon/stock_parts/power/apc/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+
 /obj/item/weapon/stock_parts/power/battery
 	name = "battery backup"
 	desc = "A self-contained battery backup system, using replaceable cells to provide backup power."
@@ -230,6 +233,51 @@
 /obj/item/weapon/stock_parts/power/battery/get_cell()
 	return cell
 
+/obj/item/weapon/stock_parts/power/battery/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+	matter = list(MATERIAL_STEEL = 400)
+
+/obj/item/weapon/stock_parts/power/battery/buildable/crap
+	name = "battery backup (NanoTrasen BAT84)"
+	desc = "The BAT84 is an all-in-one battery backup system sold at an affordable price."
+	matter = list(MATERIAL_STEEL = 100)
+	charge_rate = 0.25
+	charge_wait_counter = 15
+
+/obj/item/weapon/stock_parts/power/battery/buildable/crap/get_lore_info()
+	return "The NanoTrasen BAT84's debut on the battery backup market was greeted by universally negative reviews, \
+	highlighting its slow recharge rate and exceptional lack of responsiveness to power changes.\
+	Nevertheless, it has been steadily gaining market share due to rock-bottom prices and a predatory marketing campaign."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/stock
+	name = "battery backup (Hephaestus 3006915)"
+	desc = "The model 15, as this part is colloquially known, is the workhorse battery backup solution of populated space."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/crap/get_lore_info()
+	return "After several failed attempts, Hephaestus hit a best-selling component in the model 15. \
+	Combining tolerable recharge rate and high durability into a conveniently shaped package, it has dominated the market for over three decades."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/turbo
+	name = "battery backup (Ward-Takahashi Xcharge)"
+	desc = "This state-of-the-art battery backup claims to charge over ten times as fast as its competitors."
+	charge_rate = 5
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_ALUMINIUM = 400, MATERIAL_PLASTIC = 400)
+
+/obj/item/weapon/stock_parts/power/battery/buildable/turbo/get_lore_info()
+	return "Ward-Takahashi GMB's latest battery charging technology deploys advanced composites and semiorganic interfaces to attain previously unheard-of charge rates. \
+	Their marketing division, on the other hand, has been engaged in seeminly endless lawsuits over false advertising, having allegedly overstated said rates."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/responsive
+	name = "battery backup (Focal Point FOXUS)"
+	desc = "A battery backup device marketed for its fast startup time."
+	charge_wait_counter = 2
+	charge_rate = 0.8
+	matter = list(MATERIAL_STEEL = 400, MATERIAL_ALUMINIUM = 400, MATERIAL_PLASTIC = 400)
+
+/obj/item/weapon/stock_parts/power/battery/buildable/turbo/get_lore_info()
+	return "Unable to compete on price with the larger conglomerates, Focal Point's FOXUS instead sacrifices a bit of charge rate for drastically better responsiveness. \
+	While an instant cult classic in the high-performance market, the FOXUS's bewildering name, lackluster marketing effort, and steep price have kept it from becoming a household name."
+
 // Direct powernet connection via terminal machinery.
 // Note that this isn't for the terminal itself, which is an auxiliary entity; it's for whatever is connected to it.
 /obj/item/weapon/stock_parts/power/terminal
@@ -380,3 +428,6 @@
 				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 				qdel(terminal)
 		return TRUE
+
+/obj/item/weapon/stock_parts/power/terminal/buildable
+	part_flags = PART_FLAG_HAND_REMOVE

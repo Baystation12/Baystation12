@@ -371,6 +371,36 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/stock_parts/keyboard
 	category = "Devices and Components"
 
+/datum/autolathe/recipe/tesla_component
+	name = "tesla link"
+	path = /obj/item/weapon/stock_parts/power/apc/buildable
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/battery_backup_crap
+	name = "battery backup (NanoTrasen BAT84)"
+	path = /obj/item/weapon/stock_parts/power/battery/buildable/crap
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/battery_backup_stock
+	name = "battery backup (Hephaestus 3006915)"
+	path = /obj/item/weapon/stock_parts/power/battery/buildable/stock
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/battery_backup_turbo
+	name = "battery backup (Ward-Takahashi Xcharge)"
+	path = /obj/item/weapon/stock_parts/power/battery/buildable/turbo
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/battery_backup_responsive
+	name = "battery backup (Focal Point FOXUS)"
+	path = /obj/item/weapon/stock_parts/power/battery/buildable/responsive
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/terminal
+	name = "terminal power connector"
+	path = /obj/item/weapon/stock_parts/power/terminal/buildable
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/igniter
 	name = "igniter"
 	path = /obj/item/device/assembly/igniter

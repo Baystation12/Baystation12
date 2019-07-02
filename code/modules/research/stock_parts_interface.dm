@@ -5,6 +5,7 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_GLASS = 200)
 	base_type = /obj/item/weapon/stock_parts/console_screen
+	part_flags = PART_FLAG_HAND_REMOVE
 
 /obj/item/weapon/stock_parts/console_screen/on_refresh(obj/machinery/machine)
 	..()
@@ -17,6 +18,7 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_PLASTIC = 200)
 	base_type = /obj/item/weapon/stock_parts/keyboard
+	part_flags = PART_FLAG_HAND_REMOVE
 
 /obj/item/weapon/stock_parts/keyboard/on_refresh(obj/machinery/machine)
 	..()
