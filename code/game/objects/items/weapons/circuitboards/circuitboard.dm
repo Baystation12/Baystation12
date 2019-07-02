@@ -15,7 +15,8 @@
 	part_flags = 0
 	var/build_path = null
 	var/board_type = "computer"
-	var/list/req_components = null
+	var/list/req_components   // Components needed to build the machine.
+	var/list/spawn_components // If set, will be used as a replacement for req_components when setting components at round start.
 	var/buildtype_select = FALSE
 
 //Called when the circuitboard is used to contruct a new machine.

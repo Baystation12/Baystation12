@@ -21,10 +21,11 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		var/board_path = GLOB.machine_path_to_circuit_type[path_to_check]
 		if(board_path)
 			var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
-			if(LAZYLEN(board.req_components))
+			var/req_components = board.spawn_components || board.req_components
+			if(LAZYLEN(req_components))
 				LAZYINITLIST(uncreated_component_parts)
-				for(var/type in board.req_components)
-					uncreated_component_parts[type] += (board.req_components[type] || 1)
+				for(var/type in req_components)
+					uncreated_component_parts[type] += (req_components[type] || 1)
 
 	// Create the parts we are supposed to have. If not full_populate, this is only hard-baked parts, and more will be added later.
 	for(var/component_path in uncreated_component_parts)
