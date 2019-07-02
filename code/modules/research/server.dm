@@ -193,7 +193,7 @@
 		temp_server.files.RefreshResearch()
 		. = TOPIC_REFRESH
 
-/obj/machinery/computer/rdservercontrol/interact(mob/user)
+/obj/machinery/computer/rdservercontrol/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
