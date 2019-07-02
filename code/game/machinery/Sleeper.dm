@@ -9,6 +9,8 @@
 	clickvol = 30
 	base_type = /obj/machinery/sleeper
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/mob/living/carbon/human/occupant = null
 	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
 	var/list/available_chemicals = list()

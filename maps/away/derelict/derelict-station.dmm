@@ -141,9 +141,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "au" = (
-/obj/machinery/constructable_frame/computerframe{
-	anchored = 1
-	},
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "av" = (

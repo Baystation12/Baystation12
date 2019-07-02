@@ -8,6 +8,8 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"

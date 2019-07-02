@@ -281,7 +281,7 @@
 			to_chat(user, "The welding tool must be on to complete this task.")
 			return TRUE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, src))
+		if(do_after(user, 20, machine))
 			if(!WT.isOn())
 				return TRUE
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
@@ -349,14 +349,13 @@
 			for(var/A in machine.req_components)
 				var/obj/ct = A
 				machine.req_component_names[A] = initial(ct.name)
-			machine.update_desc()
-			to_chat(user, machine.desc)
+			machine.examine(user)
 			return
 		else
 			to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
 			return TRUE
 	if(isWirecutter(I))
-		TRANSFER_STATE(/decl/machine_construction/frame/unwrenched)
+		TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
 		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You remove the cables.</span>")
 		new /obj/item/stack/cable_coil(machine.loc, 5)
@@ -384,7 +383,6 @@
 			to_chat(user, "<span class='notice'>You remove the circuit board and other components.</span>")
 			for(var/obj/item/weapon/W in machine.components)
 				W.dropInto(machine.loc)
-		machine.update_desc()
 		machine.req_components = null
 		machine.components = null
 		return
@@ -405,7 +403,7 @@
 			new_machine.install_component(O, refresh_parts = FALSE)
 		new_machine.apply_component_presets()
 		new_machine.RefreshParts()
-		qdel(src)
+		qdel(machine)
 		return TRUE
 	if(istype(I))
 		var/success
@@ -428,8 +426,7 @@
 				break
 		if(success)
 			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-			machine.update_desc()
-			to_chat(user, machine.desc)
+			machine.examine(user)
 			machine.update_icon()
 		else
 			to_chat(user, "<span class='warning'>You cannot add that component to the machine!</span>")

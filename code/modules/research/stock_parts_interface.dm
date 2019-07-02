@@ -12,7 +12,7 @@
 	machine.set_noscreen(FALSE)
 
 /obj/item/weapon/stock_parts/keyboard
-	name = "keyboard"
+	name = "input controller"
 	desc = "A standard part required by many machines to recieve user input."
 	icon_state = "keyboard"
 	origin_tech = list(TECH_MATERIAL = 1)

@@ -367,7 +367,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "Devices and Components"
 
 /datum/autolathe/recipe/keyboard
-	name = "keyboard"
+	name = "input controller"
 	path = /obj/item/weapon/stock_parts/keyboard
 	category = "Devices and Components"
 
@@ -377,22 +377,22 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "Devices and Components"
 
 /datum/autolathe/recipe/battery_backup_crap
-	name = "battery backup (NanoTrasen BAT84)"
+	name = "battery backup (weak)"
 	path = /obj/item/weapon/stock_parts/power/battery/buildable/crap
 	category = "Devices and Components"
 
 /datum/autolathe/recipe/battery_backup_stock
-	name = "battery backup (Hephaestus 3006915)"
+	name = "battery backup (standard)"
 	path = /obj/item/weapon/stock_parts/power/battery/buildable/stock
 	category = "Devices and Components"
 
 /datum/autolathe/recipe/battery_backup_turbo
-	name = "battery backup (Ward-Takahashi Xcharge)"
+	name = "battery backup (rapid)"
 	path = /obj/item/weapon/stock_parts/power/battery/buildable/turbo
 	category = "Devices and Components"
 
 /datum/autolathe/recipe/battery_backup_responsive
-	name = "battery backup (Focal Point FOXUS)"
+	name = "battery backup (responsive)"
 	path = /obj/item/weapon/stock_parts/power/battery/buildable/responsive
 	category = "Devices and Components"
 

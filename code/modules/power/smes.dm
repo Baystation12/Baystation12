@@ -14,6 +14,8 @@
 	power_channel = LOCAL // Draws power from direct connections to powernets.
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
 
 	var/capacity = 5e6 // maximum charge

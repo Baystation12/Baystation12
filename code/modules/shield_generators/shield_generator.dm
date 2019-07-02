@@ -7,6 +7,8 @@
 	base_type = /obj/machinery/power/shield_generator
 	construct_state = /decl/machine_construction/default/panel_closed
 	wires = /datum/wires/shield_generator
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/list/field_segments = list()	// List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()	// List of shield segments that have failed and are currently regenerating.
 	var/shield_modes = 0				// Enabled shield mode flags

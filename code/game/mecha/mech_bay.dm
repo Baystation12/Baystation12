@@ -11,6 +11,8 @@
 	active_power_usage = 60 KILOWATTS // When charging
 	base_type = /obj/machinery/mech_recharger
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/obj/mecha/charging = null
 	var/base_charge_rate = 60 KILOWATTS

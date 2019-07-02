@@ -102,6 +102,13 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/crew
 	sort_string = "FAGAI"
 
+/datum/design/circuit/body_scan_display
+	name = "body scanner display"
+	id = "bodyscannerdisplay"
+	req_tech = list(TECH_BIO = 2, TECH_DATA = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/body_scanconsole/display
+	sort_string = "FACAJ"
+
 /datum/design/circuit/bioprinter
 	name = "bioprinter"
 	id = "bioprinter"

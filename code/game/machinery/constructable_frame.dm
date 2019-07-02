@@ -18,15 +18,14 @@
 	var/expected_machine_type
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
-/obj/machinery/constructable_frame/proc/update_desc()
-	var/D
-	if(req_components)
-		var/list/component_list = new
+/obj/machinery/constructable_frame/examine(mob/user)
+	. = ..()
+	if(. && req_components)
+		var/list/component_list = list()
 		for(var/I in req_components)
 			if(req_components[I] > 0)
 				component_list += "[num2text(req_components[I])] [req_component_names[I]]"
-		D = "Requires [english_list(component_list)]."
-	desc = D
+		to_chat(user, "Requires [english_list(component_list)].")
 
 /obj/machinery/constructable_frame/state_transition(decl/machine_construction/new_state)
 	. = ..()

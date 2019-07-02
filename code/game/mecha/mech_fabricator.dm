@@ -10,6 +10,8 @@
 	req_access = list(access_robotics)
 	base_type = /obj/machinery/mecha_part_fabricator
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/speed = 1
 	var/mat_efficiency = 1

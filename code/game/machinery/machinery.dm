@@ -99,7 +99,7 @@ Class Procs:
 	var/power_init_complete = FALSE // Helps with bookkeeping when initializing atoms. Don't modify.
 	var/list/component_parts           //List of component instances. Expected type: /obj/item/weapon/stock_parts
 	var/list/uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc) //List of component paths which have delayed init. Indeces = number of components.
-	var/list/maximum_component_parts = list(/obj/item/weapon/stock_parts = 8)         //null - no max. list(type part = number max).
+	var/list/maximum_component_parts = list(/obj/item/weapon/stock_parts = 10)         //null - no max. list(type part = number max).
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1

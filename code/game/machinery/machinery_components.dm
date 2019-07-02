@@ -21,7 +21,10 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		var/board_path = GLOB.machine_path_to_circuit_type[path_to_check]
 		if(board_path)
 			var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
-			var/req_components = board.spawn_components || board.req_components
+			var/list/req_components = board.spawn_components || board.req_components
+			req_components = req_components.Copy()
+			if(board.additional_spawn_components)
+				req_components += board.additional_spawn_components
 			if(LAZYLEN(req_components))
 				LAZYINITLIST(uncreated_component_parts)
 				for(var/type in req_components)

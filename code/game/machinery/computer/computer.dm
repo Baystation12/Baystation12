@@ -7,6 +7,8 @@
 	idle_power_usage = 300
 	active_power_usage = 300
 	construct_state = /decl/machine_construction/computer/built
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
@@ -79,14 +81,7 @@
 
 /obj/machinery/computer/dismantle(mob/user)
 	playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	var/obj/machinery/constructable_frame/computerframe/A = new /obj/machinery/constructable_frame/computerframe/deconstruct(loc, dir)
-	var/obj/item/weapon/stock_parts/circuitboard/M = get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
-	if(M)
-		uninstall_component(M, refresh_parts = FALSE)
-		M.deconstruct(src)
-		M.forceMove(A)
-		A.circuit = M
-		A.construct_state.try_change_state(A, /decl/machine_construction/frame/awaiting_parts, user)
+	new /obj/machinery/constructable_frame/computerframe/deconstruct(loc, dir)
 
 	if(stat & BROKEN)
 		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")

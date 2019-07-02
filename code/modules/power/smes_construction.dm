@@ -68,8 +68,7 @@
 	charge = 0
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/buildable
-	uncreated_component_parts = null
-	maximum_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 6, /obj/item/weapon/stock_parts = 12)
+	maximum_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 6, /obj/item/weapon/stock_parts = 15)
 	interact_offline = TRUE
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)

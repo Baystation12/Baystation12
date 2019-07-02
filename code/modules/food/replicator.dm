@@ -9,6 +9,8 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	base_type = /obj/machinery/food_replicator
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/biomass = 100
 	var/biomass_max = 100

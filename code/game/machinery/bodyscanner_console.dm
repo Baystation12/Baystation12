@@ -7,6 +7,8 @@
 	density = 0
 	anchored = 1
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/list/display_tags = list()
 	var/list/connected_displays = list()
 	var/list/data = list()
