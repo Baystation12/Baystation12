@@ -79,16 +79,22 @@
 
 /obj/machinery/computer/dismantle(mob/user)
 	playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	var/obj/structure/computerframe/A = new /obj/structure/computerframe(loc)
-	A.set_dir(dir)
-	A.anchored = 1
-
+	var/obj/machinery/constructable_frame/computerframe/A = new /obj/machinery/constructable_frame/computerframe/deconstruct(loc, dir)
 	var/obj/item/weapon/stock_parts/circuitboard/M = get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
 	if(M)
 		uninstall_component(M, refresh_parts = FALSE)
 		M.deconstruct(src)
 		M.forceMove(A)
 		A.circuit = M
+		A.construct_state.try_change_state(A, /decl/machine_construction/frame/awaiting_parts, user)
+
+	if(stat & BROKEN)
+		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
+		for(var/obj/item/weapon/stock_parts/console_screen/screen in component_parts)
+			qdel(screen)
+			new /obj/item/weapon/material/shard(loc)
+	else
+		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 
 	for(var/I in component_parts)
 		uninstall_component(I, refresh_parts = FALSE)
@@ -98,13 +104,5 @@
 	for(var/obj/C in src)
 		C.dropInto(loc)
 
-	if(stat & BROKEN)
-		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-		new /obj/item/weapon/material/shard(loc)
-		A.set_state(3)
-	else
-		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-		A.set_state(4)
 	qdel(src)
-
 	return TRUE

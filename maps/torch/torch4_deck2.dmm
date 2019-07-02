@@ -12527,7 +12527,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/incinerator)
 "Dq" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
 "Dr" = (

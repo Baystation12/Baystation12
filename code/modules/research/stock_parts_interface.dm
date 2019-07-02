@@ -14,7 +14,7 @@
 /obj/item/weapon/stock_parts/keyboard
 	name = "keyboard"
 	desc = "A standard part required by many machines to recieve user input."
-	icon_state = "med_key_off"
+	icon_state = "keyboard"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_PLASTIC = 200)
 	base_type = /obj/item/weapon/stock_parts/keyboard

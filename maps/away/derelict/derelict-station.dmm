@@ -141,7 +141,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "au" = (
-/obj/structure/computerframe{
+/obj/machinery/constructable_frame/computerframe{
 	anchored = 1
 	},
 /turf/simulated/floor/tiled,
@@ -1868,7 +1868,7 @@
 	icon_state = "warning";
 	dir = 9
 	},
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fI" = (
@@ -3474,7 +3474,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lC" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /obj/structure/cable{
 	icon_state = "0-2";
 	d2 = 2
