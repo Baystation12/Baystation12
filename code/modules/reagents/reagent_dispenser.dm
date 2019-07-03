@@ -273,6 +273,11 @@
 	initial_capacity = 500
 	initial_reagent_types = list(/datum/reagent/water = 1)
 
+/obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
+	user.visible_message("\The [user] grabs a paper cup from \the [src].", "You grab a paper cup from \the [src]'s cup compartment.")
+	var/obj/item/weapon/reagent_containers/food/drinks/sillycup/C =  new(loc)
+	user.put_in_active_hand(C)
+
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W,/obj/item/weapon/wrench))
 		src.add_fingerprint(user)
