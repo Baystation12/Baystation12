@@ -364,7 +364,7 @@
 /area/mine/unexplored)
 "SY" = (
 /obj/structure/fountain,
-/mob/living/simple_animal/parrot/space,
+/mob/living/simple_animal/hostile/retaliate/parrot/space,
 /turf/simulated/floor/airless/stone,
 /area/mine/explored)
 "TP" = (

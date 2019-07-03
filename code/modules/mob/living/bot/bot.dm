@@ -3,7 +3,7 @@
 	health = 20
 	maxHealth = 20
 	icon = 'icons/mob/bot/placeholder.dmi'
-	universal_speak = 1
+	universal_speak = TRUE
 	density = 0
 	var/obj/item/weapon/card/id/botcard = null
 	var/list/botcard_access = list()

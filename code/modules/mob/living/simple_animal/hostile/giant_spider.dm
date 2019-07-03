@@ -7,7 +7,7 @@
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
 	desc = "A monstrously huge green spider with shimmering eyes."
-	icon = 'icons/mob/spider.dmi'
+	icon = 'icons/mob/simple_animal/spider.dmi'
 	icon_state = "green"
 	icon_living = "green"
 	icon_dead = "green_dead"

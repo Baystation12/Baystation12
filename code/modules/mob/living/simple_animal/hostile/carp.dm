@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/carp
 	name = "space carp"
 	desc = "A ferocious, fang-bearing creature that resembles a fish."
-	icon = 'icons/mob/carp.dmi'
+	icon = 'icons/mob/simple_animal/carp.dmi'
 	icon_state = "carp" //for mapping purposes
 	icon_gib = "carp_gib"
 	speak_chance = 0

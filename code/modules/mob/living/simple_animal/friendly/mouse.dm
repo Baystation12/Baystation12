@@ -24,12 +24,12 @@
 	var/body_color //brown, gray and white, leave blank for random
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
-	universal_speak = 0
-	universal_understand = 1
+	universal_speak = FALSE
+	universal_understand = TRUE
 	holder_type = /obj/item/weapon/holder/mouse
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
-	can_escape = 1
+	can_escape = TRUE
 	shadow_offset = 1
 
 	can_pull_size = ITEM_SIZE_TINY

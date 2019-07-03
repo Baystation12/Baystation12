@@ -128,7 +128,7 @@
 	name = "Polymorph"
 	desc = "This spell transforms the wizard into the common parrot."
 	feedback = "AV"
-	possible_transformations = list(/mob/living/simple_animal/parrot)
+	possible_transformations = list(/mob/living/simple_animal/hostile/retaliate/parrot)
 
 	drop_items = 0
 	share_damage = 0

@@ -5,7 +5,7 @@
  *		Attack responces
  *		AI
  *		Procs / Verbs (usable by players)
- *		Sub-types
+ *		Poly
  */
 
 /*
@@ -25,10 +25,10 @@
 #define PARROT_FLEE 64		//Flying away from its attacker
 
 
-/mob/living/simple_animal/parrot
+/mob/living/simple_animal/hostile/retaliate/parrot
 	name = "parrot"
 	desc = "A large, colourful tropical bird native to Earth, known for its strong beak and ability to mimic speech."
-	icon = 'icons/mob/animal.dmi'
+	icon = 'icons/mob/simple_animal/parrot.dmi'
 	icon_state = "parrot_fly"
 	icon_living = "parrot_fly"
 	icon_dead = "parrot_dead"
@@ -50,7 +50,7 @@
 	response_disarm = "gently moves aside"
 	response_harm   = "swats"
 	stop_automated_movement = 1
-	universal_speak = 1
+	universal_speak = TRUE
 
 	var/parrot_state = PARROT_WANDER //Hunt for a perch when created
 	var/parrot_sleep_max = 25 //The time the parrot sits while perched before looking around. Mosly a way to avoid the parrot's AI in life() being run every single tick.
@@ -84,8 +84,14 @@
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
 
+	var/simple_parrot = FALSE //simple parrots ignore all the cool stuff that occupies bulk of this file
+	var/relax_chance = 75 //we're only little and we know it
+	var/parrot_isize = ITEM_SIZE_SMALL
+	var/impatience = 5 //we lose this much from relax_chance each time we calm down
+	var/icon_set = "parrot"
 
-/mob/living/simple_animal/parrot/New()
+
+/mob/living/simple_animal/hostile/retaliate/parrot/New()
 	..()
 	if(!ears)
 		var/headset = pick(/obj/item/device/radio/headset/headset_sec, \
@@ -97,27 +103,33 @@
 
 	parrot_sleep_dur = parrot_sleep_max //In case someone decides to change the max without changing the duration var
 
-	verbs.Add(/mob/living/simple_animal/parrot/proc/steal_from_ground, \
-			  /mob/living/simple_animal/parrot/proc/steal_from_mob, \
-			  /mob/living/simple_animal/parrot/verb/drop_held_item_player, \
-			  /mob/living/simple_animal/parrot/proc/perch_player)
+	verbs.Add(/mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_ground, \
+			  /mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_mob, \
+			  /mob/living/simple_animal/hostile/retaliate/parrot/verb/drop_held_item_player, \
+			  /mob/living/simple_animal/hostile/retaliate/parrot/proc/perch_player)
 
+	update_icon()
 
-/mob/living/simple_animal/parrot/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed, deathmessage, show_dead_message)
 	if(held_item)
 		held_item.dropInto(loc)
 		held_item = null
 	walk(src,0)
 	..(gibbed, deathmessage, show_dead_message)
 
-/mob/living/simple_animal/parrot/Stat()
+/mob/living/simple_animal/hostile/retaliate/parrot/Stat()
 	. = ..()
 	stat("Held Item", held_item)
+
+/mob/living/simple_animal/hostile/retaliate/parrot/on_update_icon()
+	icon_state = "[icon_set]_fly"
+	icon_living = "[icon_set]_fly"
+	icon_dead = "[icon_set]_dead"
 
 /*
  * Inventory
  */
-/mob/living/simple_animal/parrot/show_inv(mob/user as mob)
+/mob/living/simple_animal/hostile/retaliate/parrot/show_inv(mob/user as mob)
 	user.set_machine(src)
 	if(user.stat) return
 
@@ -131,7 +143,7 @@
 	onclose(user, "mob[real_name]")
 	return
 
-/mob/living/simple_animal/parrot/Topic(href, href_list, state = GLOB.physical_state)
+/mob/living/simple_animal/hostile/retaliate/parrot/Topic(href, href_list, state = GLOB.physical_state)
 	if((. = ..()))
 		return
 
@@ -208,12 +220,16 @@
  * Attack responces
  */
 //Humans, monkeys, aliens
-/mob/living/simple_animal/parrot/attack_hand(mob/living/carbon/M as mob)
+/mob/living/simple_animal/hostile/retaliate/parrot/attack_hand(mob/living/carbon/M as mob)
 	..()
-	if(client) return
-	if(!stat && M.a_intent == I_HURT)
+	if(client)
+		return
 
-		icon_state = "parrot_fly" //It is going to be flying regardless of whether it flees or attacks
+	if(simple_parrot) //all the real stuff gets handled in /hostile/retaliate
+		return
+
+	if(!stat && M.a_intent == I_HURT)
+		icon_state = "[icon_set]_fly" //It is going to be flying regardless of whether it flees or attacks
 
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
@@ -229,7 +245,7 @@
 	return
 
 //Mobs with objects
-/mob/living/simple_animal/parrot/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_animal/hostile/retaliate/parrot/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	..()
 	if(!stat && !client && !istype(O, /obj/item/stack/medical))
 		if(O.force)
@@ -238,12 +254,12 @@
 
 			parrot_interest = user
 			parrot_state = PARROT_SWOOP | PARROT_FLEE
-			icon_state = "parrot_fly"
+			icon_state = "[icon_set]_fly"
 			drop_held_item(0)
 	return
 
 //Bullets
-/mob/living/simple_animal/parrot/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/hostile/retaliate/parrot/bullet_act(var/obj/item/projectile/Proj)
 	..()
 	if(!stat && !client)
 		if(parrot_state == PARROT_PERCH)
@@ -252,7 +268,7 @@
 		parrot_interest = null
 		parrot_state = PARROT_WANDER //OWFUCK, Been shot! RUN LIKE HELL!
 		parrot_been_shot += 5
-		icon_state = "parrot_fly"
+		icon_state = "[icon_set]_fly"
 		drop_held_item(0)
 	return
 
@@ -260,14 +276,20 @@
 /*
  * AI - Not really intelligent, but I'm calling it AI anyway.
  */
-/mob/living/simple_animal/parrot/Life()
+/mob/living/simple_animal/hostile/retaliate/parrot/Life()
 	. = ..()
 	if(!.)
 		return FALSE
 
+	if(enemies.len && prob(relax_chance))
+		give_up()
+
+	if(simple_parrot)
+		return FALSE
+
 	//Sprite and AI update for when a parrot gets pulled
 	if(pulledby && stat == CONSCIOUS)
-		icon_state = "parrot_fly"
+		icon_state = "[icon_set]_fly"
 		if(!client)
 			parrot_state = PARROT_WANDER
 		return
@@ -297,11 +319,11 @@
 		if(parrot_perch && parrot_perch.loc != src.loc) //Make sure someone hasnt moved our perch on us
 			if(parrot_perch in view(src))
 				parrot_state = PARROT_SWOOP | PARROT_RETURN
-				icon_state = "parrot_fly"
+				icon_state = "[icon_set]_fly"
 				return
 			else
 				parrot_state = PARROT_WANDER
-				icon_state = "parrot_fly"
+				icon_state = "[icon_set]_fly"
 				return
 
 		if(--parrot_sleep_dur) //Zzz
@@ -342,7 +364,7 @@
 			if(parrot_interest)
 				visible_emote("looks in [parrot_interest]'s direction and takes flight")
 				parrot_state = PARROT_SWOOP | PARROT_STEAL
-				icon_state = "parrot_fly"
+				icon_state = "[icon_set]_fly"
 			return
 
 //-----WANDERING - This is basically a 'I dont know what to do yet' state
@@ -425,7 +447,7 @@
 			forceMove(parrot_perch.loc)
 			drop_held_item()
 			parrot_state = PARROT_PERCH
-			icon_state = "parrot_sit"
+			icon_state = "[icon_set]_sit"
 			return
 
 		walk_to(src, parrot_perch, 1, parrot_speed)
@@ -434,6 +456,7 @@
 //-----FLEEING
 	else if(parrot_state == (PARROT_SWOOP | PARROT_FLEE))
 		walk(src,0)
+		give_up()
 		if(!parrot_interest || !isliving(parrot_interest)) //Sanity
 			parrot_state = PARROT_WANDER
 
@@ -487,6 +510,7 @@
 		else
 			walk_to(src, parrot_interest, 1, parrot_speed)
 		return
+
 //-----STATE MISHAP
 	else //This should not happen. If it does lets reset everything and try again
 		walk(src,0)
@@ -500,12 +524,12 @@
  * Procs
  */
 
-/mob/living/simple_animal/parrot/movement_delay()
+/mob/living/simple_animal/hostile/retaliate/parrot/movement_delay()
 	if(client && stat == CONSCIOUS && parrot_state != "parrot_fly")
-		icon_state = "parrot_fly"
+		icon_state = "[icon_set]_fly"
 	..()
 
-/mob/living/simple_animal/parrot/proc/search_for_item()
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_item()
 	for(var/atom/movable/AM in view(src))
 		//Skip items we already stole or are wearing or are too big
 		if(parrot_perch && AM.loc == parrot_perch.loc || AM.loc == src)
@@ -520,7 +544,7 @@
 				return C
 	return null
 
-/mob/living/simple_animal/parrot/proc/search_for_perch()
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch()
 	for(var/obj/O in view(src))
 		for(var/path in desired_perches)
 			if(istype(O, path))
@@ -528,7 +552,7 @@
 	return null
 
 //This proc was made to save on doing two 'in view' loops seperatly
-/mob/living/simple_animal/parrot/proc/search_for_perch_and_item()
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch_and_item()
 	for(var/atom/movable/AM in view(src))
 		for(var/perch_path in desired_perches)
 			if(istype(AM, perch_path))
@@ -547,11 +571,16 @@
 				return C
 	return null
 
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/give_up()
+	enemies = list()
+	LoseTarget()
+	visible_message("<span class='notice'>\The [src] seems to calm down.</span>")
+	relax_chance -= impatience
 
 /*
  * Verbs - These are actually procs, but can be used as verbs by player-controlled parrots.
  */
-/mob/living/simple_animal/parrot/proc/steal_from_ground()
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_ground()
 	set name = "Steal from ground"
 	set category = "Parrot"
 	set desc = "Grabs a nearby item."
@@ -579,7 +608,7 @@
 	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")
 	return 0
 
-/mob/living/simple_animal/parrot/proc/steal_from_mob()
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_mob()
 	set name = "Steal from mob"
 	set category = "Parrot"
 	set desc = "Steals an item right out of a person's hand!"
@@ -608,7 +637,7 @@
 	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")
 	return 0
 
-/mob/living/simple_animal/parrot/verb/drop_held_item_player()
+/mob/living/simple_animal/hostile/retaliate/parrot/verb/drop_held_item_player()
 	set name = "Drop held item"
 	set category = "Parrot"
 	set desc = "Drop the item you're holding."
@@ -620,7 +649,7 @@
 
 	return
 
-/mob/living/simple_animal/parrot/proc/drop_held_item(var/drop_gently = 1)
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/drop_held_item(var/drop_gently = 1)
 	set name = "Drop held item"
 	set category = "Parrot"
 	set desc = "Drop the item you're holding."
@@ -647,7 +676,7 @@
 	held_item = null
 	return 1
 
-/mob/living/simple_animal/parrot/proc/perch_player()
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/perch_player()
 	set name = "Sit"
 	set category = "Parrot"
 	set desc = "Sit on a nice comfy perch."
@@ -655,12 +684,12 @@
 	if(stat || !client)
 		return
 
-	if(icon_state == "parrot_fly")
+	if(icon_state == "[icon_set]_fly")
 		for(var/atom/movable/AM in view(src,1))
 			for(var/perch_path in desired_perches)
 				if(istype(AM, perch_path))
 					forceMove(AM.loc)
-					icon_state = "parrot_sit"
+					icon_state = "[icon_set]_sit"
 					return
 	to_chat(src, "<span class='warning'>There is no perch nearby to sit on.</span>")
 	return
@@ -668,17 +697,17 @@
 /*
  * Sub-types
  */
-/mob/living/simple_animal/parrot/Poly
+/mob/living/simple_animal/hostile/retaliate/parrot/Poly
 	name = "Poly"
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
 	speak = list("Poly wanna cracker!", ":e Check the singlo, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS FREE CALL THE SHUTTLE")
 
-/mob/living/simple_animal/parrot/Poly/New()
+/mob/living/simple_animal/hostile/retaliate/parrot/Poly/New()
 	ears = new /obj/item/device/radio/headset/headset_eng(src)
 	available_channels = list(":e")
 	..()
 
-/mob/living/simple_animal/parrot/say(var/message)
+/mob/living/simple_animal/hostile/retaliate/parrot/say(var/message)
 
 	if(stat)
 		return
@@ -712,25 +741,25 @@
 	..(message)
 
 
-/mob/living/simple_animal/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+/mob/living/simple_animal/hostile/retaliate/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	if(prob(50))
 		parrot_hear(message)
 	..()
 
 
 
-/mob/living/simple_animal/parrot/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/living/simple_animal/hostile/retaliate/parrot/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
 	if(prob(50) && available_channels.len)
 		parrot_hear("[pick(available_channels)] [message]")
 	..()
 
 
-/mob/living/simple_animal/parrot/proc/parrot_hear(var/message="")
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/parrot_hear(var/message="")
 	if(!message || stat)
 		return
 	speech_buffer.Add(message)
 
-/mob/living/simple_animal/parrot/attack_generic(var/mob/user, var/damage, var/attack_message)
+/mob/living/simple_animal/hostile/retaliate/parrot/attack_generic(var/mob/user, var/damage, var/attack_message)
 
 	var/success = ..()
 
@@ -745,48 +774,9 @@
 
 	parrot_interest = user
 	parrot_state = PARROT_SWOOP | PARROT_ATTACK //Attack other animals regardless
-	icon_state = "parrot_fly"
+	icon_state = "[icon_set]_fly"
 	return success
 
-/mob/living/simple_animal/parrot/proc/can_pick_up(obj/item/I)
-	if(I.w_class <= ITEM_SIZE_SMALL && !I.anchored)
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/can_pick_up(obj/item/I)
+	if(I.w_class <= parrot_isize && !I.anchored)
 		return TRUE
-
-/mob/living/simple_animal/parrot/space
-	name = "space parrot"
-	desc = "It could be some all-knowing being that, for reasons we could never hope to understand, is assuming the shape and general mannerisms of a parrot - or just a rather large bird."
-	icon = 'icons/mob/parrot_grey.dmi'
-	gender = FEMALE
-	health = 750 //how sweet it is to be a god!
-	maxHealth = 750
-	mob_size = MOB_LARGE
-	speak_emote = list("professes","speaks unto you","elaborates","proclaims")
-	emote_hear = list("sings a song to herself", "preens herself")
-	melee_damage_lower = 20
-	melee_damage_upper = 40
-	attacktext = "pecked"
-	min_gas = null
-	max_gas = null
-	minbodytemp = 0
-	universal_understand = 1
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	see_in_dark = 7
-	can_escape = 1
-	var/list/possible_names = list("Simurgh", "Ziz", "Phoenix", "Fenghuang", "Roc of Ages")
-
-/mob/living/simple_animal/parrot/space/Initialize()
-	. = ..()
-	if(LAZYLEN(possible_names))
-		name = pick(possible_names)
-	var/matrix/M = new
-	M.Scale(2)
-	transform = M
-	color = get_random_colour(lower = 190)
-
-/mob/living/simple_animal/parrot/space/lesser
-	name = "Avatar of the Howling Dark"
-	possible_names = null
-	melee_damage_lower = 15
-	melee_damage_upper = 20
-	health = 300
-	maxHealth = 300

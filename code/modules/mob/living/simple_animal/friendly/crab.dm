@@ -20,7 +20,7 @@
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
 	possession_candidate = 1
-	can_escape = 1 //snip snip
+	can_escape = TRUE //snip snip
 	pass_flags = PASS_FLAG_TABLE
 	natural_armor = list(melee = 10, bullet = 5)
 

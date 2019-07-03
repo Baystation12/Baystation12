@@ -14,7 +14,7 @@
 	response_disarm = "gently nudges"
 	response_harm   = "strikes"
 	meat_amount = 12
-	can_escape = 1 //snip snip
+	can_escape = TRUE //snip snip
 	break_stuff_probability = 15
 	attacktext = "crushed"
 	faction = "crabs"

@@ -19,10 +19,10 @@
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASS_FLAG_TABLE
-	universal_understand = 1
+	universal_understand = TRUE
 	holder_type = /obj/item/weapon/holder/borer
 	mob_size = MOB_SMALL
-	can_escape = 1
+	can_escape = TRUE
 
 	bleed_colour = "#816e12"
 

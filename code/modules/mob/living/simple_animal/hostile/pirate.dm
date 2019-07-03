@@ -13,7 +13,7 @@
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 100
 	health = 100
-	can_escape = 1
+	can_escape = TRUE
 
 	harm_intent_damage = 5
 	melee_damage_lower = 30

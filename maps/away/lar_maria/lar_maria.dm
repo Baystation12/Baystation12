@@ -96,7 +96,7 @@
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = 8
-	can_escape = 1
+	can_escape = TRUE
 	stop_automated_movement_when_pulled = 0
 	attacktext = "punched"
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null

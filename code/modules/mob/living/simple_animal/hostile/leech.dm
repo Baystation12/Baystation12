@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/leech
 	name = "megaleech"
 	desc = "A green leech the size of a common snake."
-	icon = 'icons/mob/megaleech.dmi'
+	icon = 'icons/mob/simple_animal/megaleech.dmi'
 	icon_state = "leech"
 	icon_living = "leech"
 	icon_dead = "leech_dead"
@@ -46,7 +46,7 @@
 /obj/structure/leech_spawner
 	name = "reeds"
 	desc = "Some reeds with a few funnel-like structures growing alongside."
-	icon = 'icons/mob/megaleech.dmi'
+	icon = 'icons/mob/simple_animal/megaleech.dmi'
 	icon_state = "reeds"
 	anchored = TRUE
 	var/number_to_spawn = 12
