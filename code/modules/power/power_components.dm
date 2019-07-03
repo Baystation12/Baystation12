@@ -87,7 +87,7 @@
 	start_processing(machine)
 
 /obj/item/weapon/stock_parts/power/battery/on_uninstall(var/obj/machinery/machine)
-	if(cell)
+	if(cell && (part_flags & PART_FLAG_QDEL))
 		cell.dropInto(loc)
 		remove_cell()
 	..()
@@ -223,8 +223,15 @@
 	if(!istype(machine))
 		return ..()
 
-/obj/item/weapon/stock_parts/power/battery/attack_hand(mob/user)
+/obj/item/weapon/stock_parts/power/battery/attack_self(mob/user)
 	if(cell)
+		user.put_in_hands(cell)
+		extract_cell(user)
+		return TRUE
+	return ..()
+
+/obj/item/weapon/stock_parts/power/battery/attack_hand(mob/user)
+	if(cell && istype(loc, /obj/machinery))
 		user.put_in_hands(cell)
 		extract_cell(user)
 		return TRUE
@@ -253,7 +260,7 @@
 	name = "battery backup (standard)"
 	desc = "The Hephaestus 3006915, or, as this part is colloquially known, model 15, is the workhorse battery backup solution of populated space."
 
-/obj/item/weapon/stock_parts/power/battery/buildable/crap/get_lore_info()
+/obj/item/weapon/stock_parts/power/battery/buildable/stock/get_lore_info()
 	return "After several failed attempts, Hephaestus hit a best-selling component in the model 15. \
 	Combining tolerable recharge rate and high durability into a conveniently shaped package, it has dominated the market for over three decades."
 
