@@ -23,17 +23,14 @@ var/bomb_set
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	var/lastentered
 	var/previous_level = ""
-	var/datum/wires/nuclearbomb/wires = null
+	wires = /datum/wires/nuclearbomb
 	var/decl/security_level/original_level
 
 /obj/machinery/nuclearbomb/New()
 	..()
 	r_code = "[rand(10000, 99999.0)]"//Creates a random code upon object spawn.
-	wires = new/datum/wires/nuclearbomb(src)
 
 /obj/machinery/nuclearbomb/Destroy()
-	qdel(wires)
-	wires = null
 	qdel(auth)
 	auth = null
 	return ..()
@@ -147,9 +144,6 @@ var/bomb_set
 	..()
 
 /obj/machinery/nuclearbomb/physical_attack_hand(mob/user)
-	if(extended && panel_open)
-		wires.Interact(user)
-		return TRUE
 	if(!extended && deployable)
 		. = TRUE
 		if(removal_stage < 5)

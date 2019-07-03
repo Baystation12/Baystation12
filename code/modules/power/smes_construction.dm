@@ -59,7 +59,7 @@
 /obj/machinery/power/smes/buildable
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
-	var/datum/wires/smes/wires
+	wires = /datum/wires/smes
 	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
 	var/RCon = 1				// Cut to disable AI and remote control.
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
@@ -91,7 +91,6 @@
 
 
 /obj/machinery/power/smes/buildable/Destroy()
-	QDEL_NULL(wires)
 	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 	return ..()
@@ -119,15 +118,6 @@
 		..()
 	else // RCON wire cut
 		to_chat(user, "<span class='warning'>Connection error: Destination Unreachable.</span>")
-
-/obj/machinery/power/smes/buildable/Initialize()
-	. = ..()
-	wires = new /datum/wires/smes(src)
-
-/obj/machinery/power/smes/buildable/physical_attack_hand(mob/user)
-	if(panel_open)
-		wires.Interact(user)
-		// Apparently are not supposed to override further actions, so will give UI as well.
 
 // Proc: recalc_coils()
 // Parameters: None

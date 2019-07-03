@@ -87,6 +87,7 @@ Class Procs:
 	var/stat = 0
 	var/emagged = 0
 	var/malf_upgraded = 0
+	var/datum/wires/wires //wire datum, if any. If you place a type path, it will be autoinitialized.
 	var/use_power = POWER_USE_IDLE
 		//0 = dont run the auto
 		//1 = run auto, use idle
@@ -118,10 +119,14 @@ Class Procs:
 		set_dir(d)
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
 	SSmachines.machinery += src // All machines should remain in this list, always.
+	if(ispath(wires))
+		wires = new wires(src)
 	populate_parts(populate_parts)
 	RefreshParts()
 
 /obj/machinery/Destroy()
+	if(istype(wires))
+		QDEL_NULL(wires)
 	SSmachines.machinery -= src
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
@@ -267,6 +272,8 @@ Class Procs:
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
 			return 1
 	if((. = component_attack_hand(user)))
+		return
+	if(wires && (. = wires.Interact(user)))
 		return
 	if((. = physical_attack_hand(user)))
 		return

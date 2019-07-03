@@ -76,7 +76,7 @@
 	var/aidisabled = 0
 	var/shorted = 0
 
-	var/datum/wires/alarm/wires
+	wires = /datum/wires/alarm
 
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
@@ -119,8 +119,6 @@
 
 /obj/machinery/alarm/Destroy()
 	unregister_radio(src, frequency)
-	qdel(wires)
-	wires = null
 	if(alarm_area && alarm_area.master_air_alarm == src)
 		alarm_area.master_air_alarm = null
 		elect_master(exclude_self = TRUE)
@@ -146,9 +144,6 @@
 	area_uid = alarm_area.uid
 	if (name == "alarm")
 		SetName("[alarm_area.name] Air Alarm")
-
-	if(!wires)
-		wires = new(src)
 
 	// breathable air according to human/Life()
 	TLV["oxygen"] =			list(16, 19, 135, 140) // Partial pressure, kpa
@@ -505,7 +500,6 @@
 
 /obj/machinery/alarm/interface_interact(mob/user)
 	ui_interact(user)
-	wires.Interact(user)
 	return TRUE
 
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)

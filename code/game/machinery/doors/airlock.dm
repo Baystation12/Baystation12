@@ -48,7 +48,6 @@ var/list/airlock_overlays = list()
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
 	var/secured_wires = 0
-	var/datum/wires/airlock/wires = null
 
 	var/open_sound_powered = 'sound/machines/airlock_open.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlock_open_force.ogg'
@@ -899,10 +898,6 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(src.shock(user, 100))
 				return TRUE
-	if(src.p_open)
-		user.set_machine(src)
-		wires.Interact(user)
-		return TRUE
 
 /obj/machinery/door/airlock/CanUseTopic(var/mob/user)
 	if(operating < 0) //emagged
@@ -1398,8 +1393,6 @@ About the new airlock wires panel:
 	. = ..()
 
 /obj/machinery/door/airlock/Destroy()
-	qdel(wires)
-	wires = null
 	if(brace)
 		qdel(brace)
 	return ..()
