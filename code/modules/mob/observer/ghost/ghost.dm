@@ -9,7 +9,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	appearance_flags = KEEP_TOGETHER
 	blinded = 0
 	anchored = 1	//  don't get pushed around
-	universal_speak = 1
+	universal_speak = TRUE
 
 	mob_flags = MOB_FLAG_HOLY_BAD
 	movement_handlers = list(/datum/movement_handler/mob/incorporeal)
@@ -392,7 +392,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='warning'>Unable to find any unwelded vents to spawn mice at.</span>")
 	if(host)
 		if(config.uneducated_mice)
-			host.universal_understand = 0
+			host.universal_understand = FALSE
 		announce_ghost_joinleave(src, 0, "They are now a mouse.")
 		host.ckey = src.ckey
 		host.status_flags |= NO_ANTAG

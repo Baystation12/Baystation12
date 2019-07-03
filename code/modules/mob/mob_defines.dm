@@ -164,8 +164,8 @@
 	var/obj/control_object //Used by admins to possess objects. All mobs should have this var
 
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
-	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
-	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
+	var/universal_speak = FALSE // Set to TRUE to enable the mob to speak to everyone -- TLE
+	var/universal_understand = FALSE // Set to TRUE to enable the mob to understand everyone, not necessarily speak
 
 	//If set, indicates that the client "belonging" to this (clientless) mob is currently controlling some other mob
 	//so don't treat them as being SSD even though their client var is null.

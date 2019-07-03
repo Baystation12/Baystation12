@@ -782,8 +782,8 @@ default behaviour is:
 		to_chat(src, "<span class='notice'>You reach out with tendrils of ectoplasm and invade the mind of \the [src]...</span>")
 		to_chat(src, "<b>You have assumed direct control of \the [src].</b>")
 		to_chat(src, "<span class='notice'>Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly.</span>")
-		src.universal_speak = 1
-		src.universal_understand = 1
+		src.universal_speak = TRUE
+		src.universal_understand = TRUE
 		//src.cultify() // Maybe another time.
 		return
 

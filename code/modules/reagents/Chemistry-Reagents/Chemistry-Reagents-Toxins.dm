@@ -774,7 +774,7 @@
 		M.drop_from_inventory(W)
 	var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
 	new_mob.a_intent = "hurt"
-	new_mob.universal_speak = 1
+	new_mob.universal_speak = TRUE
 	if(M.mind)
 		M.mind.transfer_to(new_mob)
 	else

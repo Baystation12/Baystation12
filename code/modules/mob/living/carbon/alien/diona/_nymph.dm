@@ -19,8 +19,8 @@
 	only_species_language = 1
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
-	universal_understand = 0
-	universal_speak = 0
+	universal_understand = FALSE
+	universal_speak = FALSE
 
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER

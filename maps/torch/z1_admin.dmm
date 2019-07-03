@@ -8507,11 +8507,6 @@
 "auB" = (
 /turf/simulated/mineral,
 /area/syndicate_mothership)
-"auC" = (
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/alien)
 "auD" = (
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
@@ -18845,7 +18840,7 @@
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aSs" = (
-/mob/living/simple_animal/parrot{
+/mob/living/simple_animal/hostile/retaliate/parrot{
 	available_channels = list();
 	ears = list();
 	name = "\proper Meatbag";
@@ -60502,9 +60497,9 @@ ati
 ati
 ati
 ati
-auC
-auC
-auC
+ati
+ati
+ati
 ata
 auB
 auB

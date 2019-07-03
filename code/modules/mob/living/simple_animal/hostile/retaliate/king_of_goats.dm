@@ -7,7 +7,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king
 	name = "king of goats"
 	desc = "The oldest and wisest of goats; king of his race, peerless in dignity and power. His golden fleece radiates nobility."
-	icon = 'icons/mob/king_of_goats.dmi'
+	icon = 'icons/mob/simple_animal/king_of_goats.dmi'
 	icon_state = "king_goat"
 	icon_living = "king_goat"
 	icon_dead = "goat_dead"
@@ -24,7 +24,7 @@
 	melee_damage_upper = 55
 	mob_size = MOB_LARGE
 	mob_bump_flag = HEAVY
-	can_escape = 1
+	can_escape = TRUE
 	move_to_delay = 3
 	min_gas = null
 	max_gas = null
@@ -61,7 +61,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/guard
 	name = "honour guard"
 	desc = "A very handsome and noble beast."
-	icon = 'icons/mob/king_of_goats.dmi'
+	icon = 'icons/mob/simple_animal/king_of_goats.dmi'
 	icon_state = "goat_guard"
 	icon_living = "goat_guard"
 	icon_dead = "goat_guard_dead"

@@ -53,7 +53,7 @@
 				Robot.mmi.transfer_identity(M)	//Does not transfer key/client.
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
-				new_mob.universal_speak = 1
+				new_mob.universal_speak = TRUE
 			else
 				var/mob/living/carbon/human/H
 				if(ishuman(M))
@@ -76,7 +76,7 @@
 				H.real_name = H.name
 
 				H.set_species(randomize)
-				H.universal_speak = 1
+				H.universal_speak = TRUE
 				var/datum/preferences/A = new() //Randomize appearance for the human
 				A.randomize_appearance_and_body_for(H)
 

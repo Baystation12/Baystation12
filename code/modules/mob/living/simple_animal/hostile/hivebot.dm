@@ -5,7 +5,7 @@
 /mob/living/simple_animal/hostile/hivebot
 	name = "Hivebot"
 	desc = "A small robot"
-	icon = 'icons/mob/hivebot.dmi'
+	icon = 'icons/mob/simple_animal/hivebot.dmi'
 	icon_state = "basic"
 	icon_living = "basic"
 	icon_dead = "basic"
@@ -40,7 +40,7 @@
 	desc = "A robot, this one is armed and looks tough!"
 	health = 80
 	ranged = 1
-	can_escape = 1
+	can_escape = TRUE
 	natural_armor = list(melee = 30)
 
 /mob/living/simple_animal/hostile/hivebot/death()
@@ -55,7 +55,7 @@
 /mob/living/simple_animal/hostile/hivebot/tele
 	name = "Beacon"
 	desc = "Some odd beacon thing"
-	icon = 'icons/mob/hivebot.dmi'
+	icon = 'icons/mob/simple_animal/hivebot.dmi'
 	icon_state = "def_radar-off"
 	icon_living = "def_radar-off"
 	health = 200

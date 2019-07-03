@@ -1,5 +1,5 @@
 /mob/living/simple_animal/aquatic
-	icon = 'icons/mob/aquatic.dmi'
+	icon = 'icons/mob/simple_animal/aquatic.dmi'
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish
 	turns_per_move = 5
 	attacktext = "bitten"

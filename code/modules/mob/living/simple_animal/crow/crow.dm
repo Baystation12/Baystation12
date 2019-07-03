@@ -1,7 +1,7 @@
 /obj/item/weapon/storage/messenger
 	name = "messenger bag"
 	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
-	icon = 'icons/mob/crow.dmi'
+	icon = 'icons/mob/simple_animal/crow.dmi'
 	icon_state = "messenger_bag"
 	storage_slots = 7
 	w_class = ITEM_SIZE_SMALL
@@ -10,7 +10,7 @@
 /mob/living/simple_animal/crow
 	name = "crow"
 	desc = "A large crow. Caw caw."
-	icon = 'icons/mob/crow.dmi'
+	icon = 'icons/mob/simple_animal/crow.dmi'
 	icon_state = "crow"
 	icon_living = "crow"
 	icon_dead = "crow_dead"

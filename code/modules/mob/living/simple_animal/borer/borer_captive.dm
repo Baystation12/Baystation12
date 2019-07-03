@@ -1,7 +1,7 @@
 /mob/living/captive_brain
 	name = "host brain"
 	real_name = "host brain"
-	universal_understand = 1
+	universal_understand = TRUE
 
 /mob/living/captive_brain/say(var/message)
 

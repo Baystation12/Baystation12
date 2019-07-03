@@ -18,7 +18,7 @@
 /mob/living/simple_animal/hostile/aquatic/shark/huge
 	name = "gigacretoxyrhina"
 	desc = "That is a lot of shark."
-	icon = 'icons/mob/spaceshark.dmi'
+	icon = 'icons/mob/simple_animal/spaceshark.dmi'
 	icon_state = "shark"
 	icon_living = "shark"
 	icon_dead = "shark_dead"
