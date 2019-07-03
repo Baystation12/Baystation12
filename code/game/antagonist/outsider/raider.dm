@@ -295,9 +295,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
 
-	player.internal = locate(/obj/item/weapon/tank) in player.contents
-	if(istype(player.internal,/obj/item/weapon/tank) && player.internals)
-		player.internals.icon_state = "internal1"
-
+	player.set_internals(locate(/obj/item/weapon/tank) in player.contents)
 	return 1
 

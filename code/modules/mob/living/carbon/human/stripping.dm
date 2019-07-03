@@ -171,26 +171,27 @@
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
 	if(internal)
+		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")
 		internal.add_fingerprint(user)
-		internal = null
-		if(internals)
-			internals.icon_state = "internal0"
+		set_internals(null)
+		return
 	else
 		// Check for airtight mask/helmet.
-		if(!(istype(wear_mask, /obj/item/clothing/mask) || istype(head, /obj/item/clothing/head/helmet/space)))
-			return
+		if(!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
+				to_chat(user, "<span class='warning'>\The [src] does not have a suitable mask or helmet.</span>")
+				return
+
 		// Find an internal source.
 		if(istype(back, /obj/item/weapon/tank))
-			internal = back
+			set_internals(back)
 		else if(istype(s_store, /obj/item/weapon/tank))
-			internal = s_store
+			set_internals(s_store)
 		else if(istype(belt, /obj/item/weapon/tank))
-			internal = belt
+			set_internals(belt)
+		else
+			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")
+			return
 
-	if(internal)
 		visible_message("<span class='warning'>\The [src] is now running on internals!</span>")
 		internal.add_fingerprint(user)
-		if (internals)
-			internals.icon_state = "internal1"
-	else
-		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")

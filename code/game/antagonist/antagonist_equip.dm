@@ -33,7 +33,5 @@
 			rig.toggle_seals(src,1)
 			rig.seal_delay = initial(rig.seal_delay)
 			if(rig.air_supply)
-				player.internal = rig.air_supply
-				if(player.internals)
-					player.internals.icon_state = "internal1"
+				player.set_internals(rig.air_supply)
 		return rig 
