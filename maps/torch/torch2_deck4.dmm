@@ -20,6 +20,9 @@
 /obj/effect/shuttle_landmark/merc/deck4,
 /turf/space,
 /area/space)
+"af" = (
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/galley)
 "ag" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 9
@@ -57,12 +60,30 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/maintenance/fourthdeck/forestarboard)
+"ao" = (
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/galley)
+"ap" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/civilian{
+	name = "Galley";
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/command/captainmess)
 "aq" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/starboard)
 "ar" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod6/station)
+"as" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/crew_quarters/galley)
+"at" = (
+/obj/structure/stairs/south,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/galley)
 "av" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
@@ -11722,10 +11743,6 @@
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
-"No" = (
-/obj/structure/stairs/south,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/command/captainmess)
 "Np" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -15356,13 +15373,6 @@
 "WU" = (
 /obj/structure/table/marble,
 /obj/item/weapon/storage/box/glasses/wine,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/command/captainmess)
-"WV" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/civilian{
-	name = "Galley"
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "WW" = (
@@ -33576,11 +33586,11 @@ ak
 Rs
 Mt
 XG
-Mp
-Mp
-MX
-MX
-MX
+af
+af
+as
+as
+as
 UC
 Xh
 Pf
@@ -33778,11 +33788,11 @@ ak
 Os
 ep
 XG
-Mp
-QA
-QA
-No
-MX
+af
+ao
+ao
+at
+as
 AD
 pW
 bo
@@ -33981,7 +33991,7 @@ Os
 bu
 XG
 Mp
-WV
+ap
 MX
 MX
 MX
