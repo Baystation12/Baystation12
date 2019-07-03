@@ -110,7 +110,7 @@
 	can_hold = list(
 		///obj/item/weapon/combitool,
 		/obj/item/weapon/crowbar,
-		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/tool/screwdriver,
 		/obj/item/weapon/weldingtool,
 		/obj/item/weapon/wirecutters,
 		/obj/item/weapon/tool/wrench,
@@ -133,7 +133,7 @@
 
 /obj/item/weapon/storage/belt/utility/full/New()
 	..()
-	new /obj/item/weapon/screwdriver(src)
+	new /obj/item/weapon/tool/screwdriver(src)
 	new /obj/item/weapon/tool/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
@@ -144,7 +144,7 @@
 
 /obj/item/weapon/storage/belt/utility/atmostech/New()
 	..()
-	new /obj/item/weapon/screwdriver(src)
+	new /obj/item/weapon/tool/screwdriver(src)
 	new /obj/item/weapon/tool/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)

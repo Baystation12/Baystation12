@@ -112,7 +112,7 @@
 	if(prob(70))
 		new /obj/item/device/flashlight(src)
 	if(prob(70))
-		new /obj/item/weapon/screwdriver(src)
+		new /obj/item/weapon/tool/screwdriver(src)
 	if(prob(70))
 		new /obj/item/weapon/tool/wrench(src)
 	if(prob(70))

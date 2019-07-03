@@ -97,7 +97,7 @@
 				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
-	if(reinforced && istype(W, /obj/item/weapon/screwdriver))
+	if(reinforced && istype(W, /obj/item/weapon/tool/screwdriver))
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()

@@ -130,7 +130,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/screwdriver
 	name = "screwdriver"
-	path = /obj/item/weapon/screwdriver
+	path = /obj/item/weapon/tool/screwdriver
 	category = "Tools"
 
 /datum/autolathe/recipe/wirecutters

@@ -2707,7 +2707,6 @@
 #include "maps\away\casino\casino_areas.dm"
 #include "maps\away\derelict\derelict.dm"
 #include "maps\away\derelict\derelict_areas.dm"
-#include "maps\away\derelict\derelict-station.dmm"
 #include "maps\away\errant_pisces\errant_pisces.dm"
 #include "maps\away\errant_pisces\errant_pisces_areas.dm"
 #include "maps\away\icarus\icarus.dm"

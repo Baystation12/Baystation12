@@ -243,7 +243,7 @@
 	new /obj/item/device/integrated_electronics/wirer(src)
 	new /obj/item/device/integrated_electronics/debugger(src)
 	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/screwdriver(src)
+	new /obj/item/weapon/tool/screwdriver(src)
 	make_exact_fit()
 
 /obj/item/weapon/storage/bag/circuits/debug/Initialize()
@@ -262,5 +262,5 @@
 	new /obj/item/device/integrated_electronics/debugger(src)
 	new /obj/item/device/integrated_electronics/analyzer(src)
 	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/screwdriver(src)
+	new /obj/item/weapon/tool/screwdriver(src)
 	make_exact_fit()

@@ -14,6 +14,7 @@
 /*
  * Wrench
  */
+ /*
 /obj/item/weapon/tool/wrench
 	name = "wrench"
 	desc = "A good, durable combination wrench, with self-adjusting, universal open- and ring-end mechanisms to match a wide variety of nuts and bolts."
@@ -40,7 +41,7 @@
 /*
  * Screwdriver
  */
-/obj/item/weapon/screwdriver
+/obj/item/weapon/tool/screwdriver
 	name = "screwdriver"
 	desc = "Your archetypal flathead screwdriver, with a nice, heavy polymer handle."
 	description_info = "This tool is used to expose or safely hide away cabling. It can open and shut the maintenance panels on vending machines, airlocks, and much more. You can also use it, in combination with a crowbar, to install or remove windows."
@@ -60,7 +61,7 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 
-/obj/item/weapon/screwdriver/Initialize()
+/obj/item/weapon/tool/screwdriver/Initialize()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
 		if ("red")
 			icon_state = "screwdriver2"
@@ -88,7 +89,7 @@
 		src.pixel_y = rand(0, 16)
 	. = ..()
 
-/obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/weapon/tool/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M) || user.a_intent == "help")
 		return ..()
 	if(user.zone_sel.selecting != BP_EYES && user.zone_sel.selecting != BP_HEAD)
@@ -96,6 +97,8 @@
 	if((CLUMSY in user.mutations) && prob(50))
 		M = user
 	return eyestab(M,user)
+
+*/
 
 /*
  * Wirecutters
@@ -630,7 +633,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 	var/list/spawn_tools = list(
-		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/tool/screwdriver,
 		/obj/item/weapon/tool/wrench,
 		/obj/item/weapon/wirecutters,
 		/obj/item/weapon/material/kitchen/utensil/knife,

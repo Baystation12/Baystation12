@@ -270,7 +270,7 @@
 		. = IC_TOPIC_REFRESH
 
 	else if(href_list["remove"] && is_in_open_assembly())
-		if(istype(held_item, /obj/item/weapon/screwdriver))
+		if(istype(held_item, /obj/item/weapon/tool/screwdriver))
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)

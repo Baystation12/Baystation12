@@ -36,14 +36,14 @@
 	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "blue"
 	item_state = "toolbox_blue"
-	startswith = list(/obj/item/weapon/screwdriver, /obj/item/weapon/tool/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/device/analyzer, /obj/item/weapon/wirecutters)
+	startswith = list(/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/device/analyzer, /obj/item/weapon/wirecutters)
 
 /obj/item/weapon/storage/toolbox/electrical
 	name = "electrical toolbox"
 	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "yellow"
 	item_state = "toolbox_yellow"
-	startswith = list(/obj/item/weapon/screwdriver, /obj/item/weapon/wirecutters, /obj/item/device/t_scanner, /obj/item/weapon/crowbar)
+	startswith = list(/obj/item/weapon/tool/screwdriver, /obj/item/weapon/wirecutters, /obj/item/device/t_scanner, /obj/item/weapon/crowbar)
 
 /obj/item/weapon/storage/toolbox/electrical/Initialize()
 	. = ..()
@@ -61,4 +61,4 @@
 	item_state = "toolbox_syndi"
 	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
 	attack_cooldown = 10
-	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/weapon/screwdriver, /obj/item/weapon/tool/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/weapon/wirecutters, /obj/item/device/multitool)
+	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/weapon/wirecutters, /obj/item/device/multitool)

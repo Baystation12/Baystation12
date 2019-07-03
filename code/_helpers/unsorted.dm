@@ -870,7 +870,7 @@ var/global/list/common_tools = list(
 /obj/item/stack/cable_coil,
 /obj/item/weapon/tool/wrench,
 /obj/item/weapon/weldingtool,
-/obj/item/weapon/screwdriver,
+/obj/item/weapon/tool/screwdriver,
 /obj/item/weapon/wirecutters,
 /obj/item/device/multitool,
 /obj/item/weapon/crowbar)
@@ -931,7 +931,7 @@ var/global/list/common_tools = list(
 /obj/item/proc/can_puncture()
 	return src.sharp
 
-/obj/item/weapon/screwdriver/can_puncture()
+/obj/item/weapon/tool/screwdriver/can_puncture()
 	return 1
 
 /obj/item/weapon/pen/can_puncture()
@@ -940,7 +940,7 @@ var/global/list/common_tools = list(
 /obj/item/weapon/weldingtool/can_puncture()
 	return 1
 
-/obj/item/weapon/screwdriver/can_puncture()
+/obj/item/weapon/tool/screwdriver/can_puncture()
 	return 1
 
 /obj/item/weapon/shovel/can_puncture() //includes spades

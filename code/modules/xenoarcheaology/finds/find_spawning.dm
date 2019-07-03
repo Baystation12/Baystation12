@@ -266,7 +266,7 @@
 	else if(prob(25))
 		new_item = new /obj/item/weapon/crowbar(loc)
 	else
-		new_item = new /obj/item/weapon/screwdriver(loc)
+		new_item = new /obj/item/weapon/tool/screwdriver(loc)
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_item.icon_state = "unknown[rand(1,4)]"
 	additional_desc = "[pick("It doesn't look safe.",\

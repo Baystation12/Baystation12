@@ -202,7 +202,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				icon_state="req_comp_open"
 			else if(hackState == 1)
 				icon_state="req_comp_rewired"
-	if (istype(O, /obj/item/weapon/screwdriver))
+	if (istype(O, /obj/item/weapon/tool/screwdriver))
 		if(open)
 			if(hackState == 0)
 				hackState = 1

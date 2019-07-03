@@ -42,7 +42,7 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/unscrew_hatch
 	allowed_tools = list(
-		/obj/item/weapon/screwdriver = 100,
+		/obj/item/weapon/tool/screwdriver = 100,
 		/obj/item/weapon/coin = 50,
 		/obj/item/weapon/material/kitchen/utensil/knife = 50
 	)
@@ -77,7 +77,7 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/screw_hatch
 	allowed_tools = list(
-		/obj/item/weapon/screwdriver = 100,
+		/obj/item/weapon/tool/screwdriver = 100,
 		/obj/item/weapon/coin = 50,
 		/obj/item/weapon/material/kitchen/utensil/knife = 50
 	)
@@ -339,7 +339,7 @@
 	allowed_tools = list(
 	/obj/item/stack/nanopaste = 100,		\
 	/obj/item/weapon/bonegel = 30, 		\
-	/obj/item/weapon/screwdriver = 70,	\
+	/obj/item/weapon/tool/screwdriver = 70,	\
 	)
 
 	min_duration = 70
@@ -458,7 +458,7 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/attach_organ_robotic
 	allowed_tools = list(
-		/obj/item/weapon/screwdriver = 100,
+		/obj/item/weapon/tool/screwdriver = 100,
 	)
 
 	min_duration = 100

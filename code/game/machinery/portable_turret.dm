@@ -801,7 +801,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='warning'>You need two sheets of metal to continue construction.</span>")
 				return
 
-			else if(istype(I, /obj/item/weapon/screwdriver))
+			else if(istype(I, /obj/item/weapon/tool/screwdriver))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				build_step = 5
 				to_chat(user, "<span class='notice'>You open the internal access hatch.</span>")
