@@ -72,3 +72,22 @@
 
 /obj/structure/sign/double/solgovflag/right
 	icon_state = "solgovflag-right"
+
+/obj/structure/sign/floorplaque
+	name = "\improper commemorative plaque"
+	desc = "A list of dead explorers who gave their lives in search of the next great discovery. Hope you don't join them. Add the dog tags of the fallen to the plaque to memorialize them."
+	icon_state = "floorplaque"
+	var/list/fallen = list()
+
+/obj/structure/sign/floorplaque/attackby(var/obj/D, var/mob/user)
+	if(istype(D, /obj/item/clothing/accessory/badge/solgov/tags))
+		var/obj/item/clothing/accessory/badge/solgov/tags/T = D
+		if(T.owner_branch == "Expeditionary Corps")
+			to_chat(user, "<span class='warning'>You add \the [T.owner_name]'s \the [T] to \the [src].</span>")
+			fallen += "[T.owner_rank] [T.owner_name]"
+			qdel(T)
+
+/obj/structure/sign/floorplaque/examine(mob/user)
+	. = ..(user, 2)
+	if (. && fallen.len)
+		to_chat(user, "<b>The fallen:</b> [jointext(fallen, "<br>")]")
