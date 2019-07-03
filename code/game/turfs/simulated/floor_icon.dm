@@ -60,6 +60,7 @@ var/list/flooring_cache = list()
 					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
 						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
 
+		/*
 		//Now lets handle those fancy floors which have many centre icons
 		if(flooring.has_base_range)
 			if (!has_border || (flooring.flags & TURF_HAS_RANDOM_BORDER))
@@ -68,6 +69,7 @@ var/list/flooring_cache = list()
 				flooring_override = icon_state
 			else
 				icon_state = flooring.icon_base+"0"
+		*/
 
 	if(decals && decals.len)
 		for(var/image/I in decals)
