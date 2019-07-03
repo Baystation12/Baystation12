@@ -2675,6 +2675,7 @@
 #include "maps\_map_include.dm"
 #include "maps\away\away_sites.dm"
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
+#include "maps\DeadSpace\Aegis_areas.dm"
 #include "maps\DeadSpace\deadspace_shuttles.dm"
 #include "maps\DeadSpace\Ishimura_areas.dm"
 #include "maps\DeadSpace\Space_areas.dm"
