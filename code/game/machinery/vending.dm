@@ -67,11 +67,10 @@
 
 	var/scan_id = 1
 	var/obj/item/weapon/material/coin/coin
-	var/datum/wires/vending/wires = null
+	wires = /datum/wires/vending
 
 /obj/machinery/vending/New()
 	..()
-	wires = new(src)
 	spawn(4)
 		if(src.product_slogans)
 			src.slogan_list += splittext(src.product_slogans, ";")
@@ -117,8 +116,6 @@
 			src.product_records.Add(product)
 
 /obj/machinery/vending/Destroy()
-	qdel(wires)
-	wires = null
 	qdel(coin)
 	coin = null
 	for(var/datum/stored_items/vending_products/R in product_records)
@@ -314,7 +311,6 @@
 			return TRUE
 
 /obj/machinery/vending/interface_interact(mob/user)
-	wires.Interact(user)
 	ui_interact(user)
 	return TRUE
 

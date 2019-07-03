@@ -24,16 +24,7 @@
 	var/mat_efficiency = 1
 	var/build_time = 50
 
-	var/datum/wires/autolathe/wires = null
-
-
-/obj/machinery/autolathe/Initialize()
-	. = ..()
-	wires = new(src)
-
-/obj/machinery/autolathe/Destroy()
-	QDEL_NULL(wires)
-	return ..()
+	wires = /datum/wires/autolathe
 
 /obj/machinery/autolathe/proc/update_recipe_list()
 	if(!machine_recipes)
@@ -97,12 +88,6 @@
 			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
 
 		dat += "</table><hr>"
-	//Hacking.
-	if(panel_open)
-		dat += "<h2>Maintenance Panel</h2>"
-		dat += wires.GetInteractWindow(user)
-
-		dat += "<hr>"
 
 	var/datum/browser/popup = new(user, "autolathenew", "Autholathe", 450, 600)
 	popup.set_content(dat)

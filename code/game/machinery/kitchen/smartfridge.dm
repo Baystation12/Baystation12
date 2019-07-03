@@ -21,7 +21,6 @@
 	var/locked = 0
 	var/scan_id = 1
 	var/is_secure = 0
-	var/datum/wires/smartfridge/wires = null
 
 /obj/machinery/smartfridge/secure
 	is_secure = 1
@@ -35,8 +34,6 @@
 	update_icon()
 
 /obj/machinery/smartfridge/Destroy()
-	qdel(wires)
-	wires = null
 	for(var/datum/stored_items/S in item_records)
 		qdel(S)
 	item_records = null
@@ -295,7 +292,6 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/smartfridge/interface_interact(mob/user)
-	wires.Interact(user)
 	ui_interact(user)
 	return TRUE
 

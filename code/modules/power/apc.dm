@@ -114,7 +114,7 @@
 	var/has_electronics = 0 // 0 - none, 1 - plugged in, 2 - secured by screwdriver
 	var/beenhit = 0 // used for counting how many times it has been hit, used for Aliens at the moment
 	var/longtermpower = 10  // Counter to smooth out power state changes; do not modify.
-	var/datum/wires/apc/wires = null
+	wires = /datum/wires/apc
 	var/update_state = -1
 	var/update_overlay = -1
 	var/list/update_overlay_chan		// Used to determine if there is a change in channels
@@ -156,9 +156,6 @@
 	return amount - use_power_oneoff(amount, LOCAL)
 
 /obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE, var/building=0)
-
-	wires = new(src)
-
 	// offset 22 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
 	if (building)
@@ -197,8 +194,6 @@
 	area.power_equip = 0
 	area.power_environ = 0
 	area.power_change()
-	qdel(wires)
-	wires = null
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
@@ -630,7 +625,7 @@
 		if (istype(user, /mob/living/silicon))
 			return attack_robot(user)
 		if (!opened && wiresexposed && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/device/assembly/signaler)))
-			return interact(user)
+			return wires.Interact(user)
 
 		user.visible_message("<span class='danger'>The [src.name] has been hit with the [W.name] by [user.name]!</span>", \
 			"<span class='danger'>You hit the [src.name] with your [W.name]!</span>", \
@@ -697,18 +692,8 @@
 			return TRUE
 
 /obj/machinery/power/apc/interface_interact(mob/user)
-	interact(user)
+	ui_interact(user)
 	return TRUE
-
-/obj/machinery/power/apc/interact(mob/user)
-	if(!user)
-		return
-
-	if(wiresexposed && !istype(user, /mob/living/silicon/ai))
-		wires.Interact(user)
-
-	return ui_interact(user)
-
 
 /obj/machinery/power/apc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!user)
