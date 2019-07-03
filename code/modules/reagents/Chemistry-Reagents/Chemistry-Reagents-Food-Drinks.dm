@@ -496,7 +496,7 @@
 	else
 		M.apply_effect(6, PAIN, 0)
 		if(prob(5))
-			M.visible_message("<span class='danger'>You feel like your insides are burning!</span>")
+			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
 			M.Stun(2)
 	if(istype(M, /mob/living/carbon/slime))
