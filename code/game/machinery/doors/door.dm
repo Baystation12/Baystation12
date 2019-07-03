@@ -212,7 +212,8 @@
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/interface_interact(user)
-	return attackby(user, user)
+	if(CanInteract(user, DefaultTopicState()))
+		return attackby(user, user)
 
 /obj/machinery/door/attack_tk(mob/user as mob)
 	if(requiresID() && !allowed(null))
