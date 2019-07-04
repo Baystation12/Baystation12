@@ -66,8 +66,8 @@
 
 /datum/psi_complexus/proc/show_auras()
 	if(owner.client)
-		for(var/thing in SSpsi.all_aura_images)
-			owner.client.images |= thing
+		for(var/image/I in SSpsi.all_aura_images)
+			owner.client.images |= I
 
 /datum/psi_complexus/proc/backblast(var/value)
 
