@@ -125,6 +125,7 @@ Class Procs:
 		wires = new wires(src)
 	populate_parts(populate_parts)
 	RefreshParts()
+	power_change()
 
 /obj/machinery/Destroy()
 	if(istype(wires))
@@ -217,7 +218,7 @@ Class Procs:
 	if(!interact_offline && (stat & NOPOWER))
 		return STATUS_CLOSE
 
-	if(issilicon(user))
+	if(user.direct_machine_interface(src))
 		return ..()
 
 	if(stat & NOSCREEN)
@@ -226,6 +227,15 @@ Class Procs:
 	if(stat & NOINPUT)
 		return min(..(), STATUS_UPDATE)
 	return ..()
+
+/mob/proc/direct_machine_interface(obj/machinery/machine)
+	return FALSE
+
+/mob/living/silicon/direct_machine_interface(obj/machinery/machine)
+	return TRUE
+
+/mob/observer/ghost/direct_machine_interface(obj/machinery/machine)
+	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(var/mob/user)
 	if(stat & BROKEN)
