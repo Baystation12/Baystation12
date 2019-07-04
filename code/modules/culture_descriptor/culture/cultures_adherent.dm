@@ -12,6 +12,9 @@
 		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
+	hidden_langs = list(
+		LANGUAGE_EAL
+	)
 
 /decl/cultural_info/culture/adherent/get_random_name(var/gender)
 	return "[uppertext("[pick(GLOB.full_alphabet)][pick(GLOB.full_alphabet)]-[pick(GLOB.full_alphabet)] [rand(1000,9999)]")]"

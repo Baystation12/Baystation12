@@ -8,6 +8,7 @@
 	var/default_language
 	var/list/additional_langs
 	var/list/secondary_langs
+	var/list/hidden_langs
 	var/category
 	var/subversive_potential = 0
 	var/hidden
@@ -36,6 +37,12 @@
 		if(LAZYLEN(additional_langs))
 			secondary_langs -= additional_langs
 		UNSETEMPTY(secondary_langs)
+
+	if(LAZYLEN(hidden_langs))
+		hidden_langs -= language
+		hidden_langs -= name_language
+		hidden_langs -= default_language
+		UNSETEMPTY(hidden_langs)
 
 	..()
 

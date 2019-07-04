@@ -74,6 +74,9 @@
 			if(LAZYLEN(culture.secondary_langs))
 				for(var/checklang in culture.secondary_langs)
 					allowed_languages[checklang] = TRUE
+			if(pref.organ_data[BP_CHEST] == "cyborg" || pref.species == SPECIES_ADHERENT)
+				for(var/checklang in culture.hidden_langs)
+					allowed_languages[checklang] = TRUE
 
 	for(var/thing in all_languages)
 		var/datum/language/lang = all_languages[thing]

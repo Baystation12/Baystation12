@@ -16,6 +16,9 @@
 		LANGUAGE_GUTTER,
 		LANGUAGE_SIGN
 	)
+	hidden_langs = list(
+		LANGUAGE_EAL
+	)
 
 /decl/cultural_info/culture/human/martian_surfacer
 	name = CULTURE_HUMAN_MARTIAN
