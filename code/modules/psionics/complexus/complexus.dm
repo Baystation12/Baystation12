@@ -42,6 +42,7 @@
 		_aura_image = null
 	if(!_aura_image)
 		_aura_image = create_aura_image(owner)
+	return _aura_image
 
 /proc/create_aura_image(var/newloc)
 	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
