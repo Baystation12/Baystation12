@@ -59,6 +59,7 @@
 	var/resistance		  = 0	// Damage reduction
 	var/damtype = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
+	var/armor_type = /datum/extension/armor
 	var/list/natural_armor //what armor animal has
 	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
 
@@ -76,7 +77,7 @@
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	if(LAZYLEN(natural_armor))
-		set_extension(src, /datum/extension/armor, /datum/extension/armor, natural_armor)
+		set_extension(src, /datum/extension/armor, armor_type, natural_armor)
 
 /mob/living/simple_animal/Life()
 	. = ..()

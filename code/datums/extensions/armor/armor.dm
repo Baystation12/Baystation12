@@ -95,3 +95,12 @@
 		if(PSIONIC)
 			key = PSIONIC
 	return key
+
+/datum/extension/armor/toggle
+	var/active = TRUE
+
+/datum/extension/armor/toggle/proc/toggle(new_state)
+	active = new_state
+
+/datum/extension/armor/toggle/get_value(key)
+	return active ? ..() : 0
