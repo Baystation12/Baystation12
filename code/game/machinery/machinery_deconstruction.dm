@@ -77,11 +77,18 @@
 		machine.attackby(I, user)
 		return TRUE
 
+// Used to transfer state as needed post-construction.
+/decl/machine_construction/proc/post_construct(obj/machinery/machine)
 
 // Used to be called default_deconstruction_screwdriver -> default_deconstruction_crowbar and default_part_replacement
 
 /decl/machine_construction/default
 	needs_board = "machine"
+	var/up_state
+	var/down_state
+
+/decl/machine_construction/default/panel_closed
+	down_state = /decl/machine_construction/default/panel_open
 
 /decl/machine_construction/default/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open
@@ -89,13 +96,13 @@
 /decl/machine_construction/default/panel_closed/validate_state(obj/machinery/machine)
 	. = ..()
 	if(!.)
-		try_change_state(machine, /decl/machine_construction/default/panel_open)
+		try_change_state(machine, down_state)
 
 /decl/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isScrewdriver(I))
-		TRANSFER_STATE(/decl/machine_construction/default/panel_open)
+		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = TRUE
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
@@ -105,23 +112,32 @@
 		machine.display_parts(user)
 		return TRUE
 
+/decl/machine_construction/default/panel_closed/post_construct(obj/machinery/machine)
+	try_change_state(machine, down_state)
+	machine.panel_open = TRUE
+	machine.queue_icon_update()
+
+/decl/machine_construction/default/panel_open
+	up_state = /decl/machine_construction/default/panel_closed
+	down_state = /decl/machine_construction/default/deconstructed
+
 /decl/machine_construction/default/panel_open/state_is_valid(obj/machinery/machine)
 	return machine.panel_open
 
 /decl/machine_construction/default/panel_open/validate_state(obj/machinery/machine)
 	. = ..()
 	if(!.)
-		try_change_state(machine, /decl/machine_construction/default/panel_closed)
+		try_change_state(machine, up_state)
 
 /decl/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isCrowbar(I))
-		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
+		TRANSFER_STATE(down_state)
 		machine.dismantle()
 		return
 	if(isScrewdriver(I))
-		TRANSFER_STATE(/decl/machine_construction/default/panel_closed)
+		TRANSFER_STATE(up_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
 		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
@@ -143,27 +159,15 @@
 // Not implemented fully as the machine will qdel on transition to this. Path needed for checks.
 /decl/machine_construction/default/deconstructed
 
-// Computers have only one built state.
+// Computers follow similar steps, but have different circuit types (which is enforced here)
 
-/decl/machine_construction/computer
+/decl/machine_construction/default/panel_closed/computer
+	down_state = /decl/machine_construction/default/panel_open/computer
 	needs_board = "computer"
 
-/decl/machine_construction/computer/built/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
-		return
-	if(isScrewdriver(I))
-		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-		machine.dismantle()
-		return
-
-	if(istype(I, /obj/item/weapon/storage/part_replacer))
-		return machine.part_replacement(I, user)
-
-	if(istype(I, /obj/item/weapon/stock_parts))
-		return machine.part_insertion(user, I)
-
-	if(isWrench(I))
-		return machine.part_removal(user)
+/decl/machine_construction/default/panel_open/computer
+	up_state = /decl/machine_construction/default/panel_closed/computer
+	needs_board = "computer"
 
 // Telecomms have lots of states.
 
@@ -186,6 +190,11 @@
 		machine.panel_open = TRUE
 		to_chat(user, "You unfasten the bolts.")
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+
+/decl/machine_construction/tcomms/panel_closed/post_construct(obj/machinery/machine)
+	try_change_state(machine, /decl/machine_construction/tcomms/panel_open/no_cable)
+	machine.panel_open = TRUE
+	machine.queue_icon_update()
 
 /decl/machine_construction/tcomms/panel_closed/cannot_print
 	cannot_print = TRUE
@@ -403,6 +412,7 @@
 			new_machine.install_component(O, refresh_parts = FALSE)
 		new_machine.apply_component_presets()
 		new_machine.RefreshParts()
+		new_machine.construct_state.post_construct(new_machine)
 		qdel(machine)
 		return TRUE
 	if(istype(I))

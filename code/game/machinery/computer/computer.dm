@@ -6,7 +6,7 @@
 	anchored = 1.0
 	idle_power_usage = 300
 	active_power_usage = 300
-	construct_state = /decl/machine_construction/computer/built
+	construct_state = /decl/machine_construction/default/panel_closed/computer
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/processing = 0
