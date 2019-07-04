@@ -243,14 +243,7 @@
 
 // Places the item on the target mob.
 /proc/place_custom_item(mob/living/carbon/human/M, var/datum/custom_item/citem)
-
-	if(!citem) return
-	var/obj/item/newitem = citem.spawn_item(M.loc)
-
-	if(M.equip_to_appropriate_slot(newitem))
-		return newitem
-
-	if(M.equip_to_storage(newitem))
-		return newitem
-
-	return newitem
+	. = M && citem && citem.spawn_item(get_turf(M))
+	if(. && !M.equip_to_appropriate_slot(.) && !M.equip_to_storage(.))
+		to_chat(M, SPAN_WARNING("Your custom item, \the [.], could not be placed on your character."))
+		QDEL_NULL(.)
