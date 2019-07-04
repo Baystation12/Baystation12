@@ -32,7 +32,16 @@
 
 	var/obj/screen/psi/hub/ui	      // Reference to the master psi UI object.
 	var/mob/living/owner              // Reference to our owner.
-	var/image/aura_image              // Client image
+	var/image/_aura_image             // Client image
+
+/datum/psi_complexus/proc/get_aura_image()
+	if(_aura_image && !istype(_aura_image))
+		var/atom/A = _aura_image
+		debug_print("Non-image found in psi complexus: \ref[A] - \the [A] - [istype(A) ? A.type : "non-atom"]")
+		destroy_aura_image(_aura_image)
+		_aura_image = null
+	if(!_aura_image)
+		_aura_image = create_aura_image(owner)
 
 /proc/create_aura_image(var/newloc)
 	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
@@ -60,12 +69,11 @@
 
 /datum/psi_complexus/New(var/mob/_owner)
 	owner = _owner
-	aura_image = create_aura_image(owner)
 	START_PROCESSING(SSpsi, src)
 	set_extension(src, /datum/extension/armor, /datum/extension/armor/psionic)
 
 /datum/psi_complexus/Destroy()
-	destroy_aura_image(aura_image)
+	destroy_aura_image(_aura_image)
 	STOP_PROCESSING(SSpsi, src)
 	if(owner)
 		cancel()
