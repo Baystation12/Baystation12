@@ -1,0 +1,6 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - tweak: "Bog-standard parrots will now retaliate briefly when attacked."
+  - tweak: "The space parrot occupying its temple in the asteroid will now retaliate with force when attacked. Beware!"
+  - rscadd: "A giant parrot can now spawn as the grass planet's megafauna."
