@@ -77,6 +77,8 @@
 		machine.attackby(I, user)
 		return TRUE
 
+/decl/machine_construction/proc/mechanics_info()
+
 // Used to transfer state as needed post-construction.
 /decl/machine_construction/proc/post_construct(obj/machinery/machine)
 
@@ -117,6 +119,11 @@
 	machine.panel_open = TRUE
 	machine.queue_icon_update()
 
+/decl/machine_construction/default/panel_closed/mechanics_info()
+	. = list()
+	. += "Use a screwdriver to open the panel."
+	. += "Use a parts replacer to view installed parts."
+
 /decl/machine_construction/default/panel_open
 	up_state = /decl/machine_construction/default/panel_closed
 	down_state = /decl/machine_construction/default/deconstructed
@@ -155,6 +162,14 @@
 	// Finally: Part removal with wrench
 	if(isWrench(I))
 		return machine.part_removal(user)
+
+/decl/machine_construction/default/panel_open/mechanics_info()
+	. = list()
+	. += "Use a screwdriver to close the panel."
+	. += "Use a parts replacer to upgrade some parts."
+	. += "Use a crowbar to remove the circuit and deconstruct the machine"
+	. += "Insert a new part to install it."
+	. += "Remove installed parts with a wrench."
 
 // Not implemented fully as the machine will qdel on transition to this. Path needed for checks.
 /decl/machine_construction/default/deconstructed
@@ -196,6 +211,10 @@
 	machine.panel_open = TRUE
 	machine.queue_icon_update()
 
+/decl/machine_construction/tcomms/panel_closed/mechanics_info()
+	. = list()
+	. += "Use a screwdriver to open the panel."
+
 /decl/machine_construction/tcomms/panel_closed/cannot_print
 	cannot_print = TRUE
 
@@ -224,6 +243,11 @@
 		to_chat(user, "You dislodge the external plating.")
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
 
+/decl/machine_construction/tcomms/panel_open/mechanics_info()
+	. = list()
+	. += "Use a screwdriver to close the panel."
+	. += "Use a wrench to remove the external plating."
+
 /decl/machine_construction/tcomms/panel_open/unwrenched/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
@@ -237,6 +261,11 @@
 		var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
 		A.amount = 5
 		machine.set_broken(TRUE, TRUE) // the machine's been borked!
+
+/decl/machine_construction/tcomms/panel_open/unwrenched/mechanics_info()
+	. = list()
+	. += "Use a wrench to secure the external plating."
+	. += "Use wirecutters to remove the cabling."
 
 /decl/machine_construction/tcomms/panel_open/no_cable/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
 	if(isCoil(I))
@@ -263,6 +292,14 @@
 
 	if(isWrench(I))
 		return machine.part_removal(user)
+
+/decl/machine_construction/tcomms/panel_open/no_cable/mechanics_info()
+	. = list()
+	. += "Attach cables to make the machine functional."
+	. += "Use a parts replacer to upgrade some parts."
+	. += "Use a crowbar to remove the circuit and deconstruct the machine"
+	. += "Insert a new part to install it."
+	. += "Remove installed parts with a wrench."
 
 // Construction frames
 
@@ -297,6 +334,12 @@
 			to_chat(user, "<span class='notice'>You deconstruct \the [machine].</span>")
 			machine.dismantle()
 
+
+/decl/machine_construction/frame/unwrenched/mechanics_info()
+	. = list()
+	. += "Use a welder to break apart the frame."
+	. += "Use a wrench to secure the frame in place."
+
 /decl/machine_construction/frame/wrenched/state_is_valid(obj/machinery/constructable_frame/machine)
 	return machine.anchored && !machine.circuit
 
@@ -327,6 +370,12 @@
 			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_circuit)
 			to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
 		return TRUE
+
+
+/decl/machine_construction/frame/unwrenched/mechanics_info()
+	. = list()
+	. += "Use a wrench to unfasten the frame from the floor and prepare it for deconstruction."
+	. += "Add cables to make it ready for a circuit."
 
 /decl/machine_construction/frame/awaiting_circuit/state_is_valid(obj/machinery/constructable_frame/machine)
 	return machine.anchored && !machine.circuit
@@ -368,6 +417,11 @@
 		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You remove the cables.</span>")
 		new /obj/item/stack/cable_coil(machine.loc, 5)
+
+/decl/machine_construction/frame/awaiting_circuit/mechanics_info()
+	. = list()
+	. += "Insert a circuit board to progress with constructing the machine."
+	. += "Use a wirecutter to remove the cables."
 
 /decl/machine_construction/frame/awaiting_parts/state_is_valid(obj/machinery/constructable_frame/machine)
 	return machine.anchored && machine.circuit
@@ -441,3 +495,10 @@
 		else
 			to_chat(user, "<span class='warning'>You cannot add that component to the machine!</span>")
 		return TRUE
+
+/decl/machine_construction/frame/awaiting_parts/mechanics_info()
+	. = list()
+	. += "Use a crowbar to remove the circuitboard and any parts installed."
+	. += "Insert a new part to install it."
+	. += "Examine the machine to see which parts are still needed."
+	. += "Once all needed parts are added, use a screwdriver to build the machine."

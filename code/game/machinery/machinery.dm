@@ -83,6 +83,7 @@ Class Procs:
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
+	layer = STRUCTURE_LAYER // Layer under items
 
 	var/stat = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
@@ -240,6 +241,12 @@ Class Procs:
 	user.unset_machine()
 
 /obj/machinery/Topic(href, href_list, datum/topic_state/state)
+	if(href_list["mechanics_text"] && construct_state) // This is an OOC examine thing handled via Topic; specifically bypass all checks, but do nothing other than message to chat.
+		var/list/info = construct_state.mechanics_info()
+		if(info)
+			to_chat(usr, jointext(info, "<br>"))
+			return TOPIC_HANDLED
+
 	. = ..()
 	if(. == TOPIC_REFRESH)
 		updateUsrDialog() // Update legacy UIs to the extent possible.
@@ -384,6 +391,8 @@ Class Procs:
 			to_chat(user, "It is missing a screen, making it hard to interact with.")
 		else if(stat & NOINPUT)
 			to_chat(user, "It is missing any input device.")
+		if(construct_state && construct_state.mechanics_info())
+			to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(var/depth)
