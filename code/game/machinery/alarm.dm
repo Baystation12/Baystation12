@@ -1,3 +1,20 @@
+/decl/environment_data
+	var/list/important_gasses = list(
+		"oxygen" =         TRUE,
+		"nitrogen" =       TRUE,
+		"carbon_dioxide" = TRUE
+	)
+	var/list/dangerous_gasses = list(
+		"carbon_dioxide" = TRUE
+	)
+	var/list/filter_gasses = list(
+		"oxygen" =         list("command" = "o2_scrub",  "value" = "filter_o2"),
+		"nitrogen" =       list("command" = "n2_scrub",	 "value" = "filter_n2"),
+		"carbon_dioxide" = list("command" = "co2_scrub", "value" = "filter_co2"),
+		"sleeping_agent" = list("command" = "n2o_scrub", "value" = "filter_n2o"),
+		"phoron" =         list("command" = "tox_scrub", "value" = "filter_phoron")
+	)
+
 ////////////////////////////////////////
 //CONTAINS: Air Alarms and Fire Alarms//
 ////////////////////////////////////////
@@ -81,7 +98,7 @@
 	var/co2_dangerlevel = 0
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
-
+	var/environment_type = /decl/environment_data
 	var/report_danger_level = 1
 
 /obj/machinery/alarm/cold
@@ -140,8 +157,10 @@
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
+
+	var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 	for(var/g in gas_data.gases)
-		if(!(g in list("oxygen","nitrogen","carbon_dioxide")))
+		if(!env_info.important_gasses[g])
 			trace_gas += g
 
 	set_frequency(frequency)
@@ -526,10 +545,14 @@
 	if(total)
 		var/pressure = environment.return_pressure()
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Nitrogen", "value" = environment.gas["nitrogen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = co2_dangerlevel)
-
+		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+		for(var/gas_id in env_info.important_gasses)
+			environment_data[++environment_data.len] = list(
+				"name" =  gas_data.name[gas_id],
+				"value" = environment.gas[gas_id] / total * 100,
+				"unit" = "%",
+				"danger_level" = env_info.dangerous_gasses[gas_id] ? co2_dangerlevel : oxygen_dangerlevel
+			)
 		var/other_moles = 0
 		for(var/g in trace_gas)
 			other_moles += environment.gas[g]
@@ -577,11 +600,17 @@
 						"panic"		= info["panic"],
 						"filters"	= list()
 					)
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Oxygen",			"command" = "o2_scrub",	"val" = info["filter_o2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrogen",		"command" = "n2_scrub",	"val" = info["filter_n2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Carbon Dioxide", "command" = "co2_scrub","val" = info["filter_co2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Toxin"	, 		"command" = "tox_scrub","val" = info["filter_phoron"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrous Oxide",	"command" = "n2o_scrub","val" = info["filter_n2o"]))
+				var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+				for(var/gas_id in env_info.filter_gasses)
+					var/list/filter_data = env_info.filter_gasses[gas_id]
+					scrubbers[scrubbers.len]["filters"] += list(
+						list(
+							"name" =    gas_data.name[gas_id],
+							"command" = filter_data["command"],
+							"val" =     info[filter_data["value"]]
+						)
+					)
+
 			data["scrubbers"] = scrubbers
 		if(AALARM_SCREEN_MODE)
 			var/modes[0]
