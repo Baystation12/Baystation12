@@ -252,7 +252,7 @@ var/list/worths = list(
 					/obj/item/integrated_circuit/manipulation/bluespace_rift = 7600,
 					/obj/item/weapon/tool/wrench = 30,
 					/obj/item/weapon/tool/screwdriver = 15,
-					/obj/item/weapon/wirecutters = 25,
+					/obj/item/weapon/tool/wirecutters = 25,
 //WELDINGTOOLS,
 					/obj/item/weapon/weldingtool/largetank = 150,
 					/obj/item/weapon/weldingtool/hugetank = 300,

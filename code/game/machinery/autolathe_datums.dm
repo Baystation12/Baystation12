@@ -135,7 +135,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/wirecutters
 	name = "wirecutters"
-	path = /obj/item/weapon/wirecutters
+	path = /obj/item/weapon/tool/wirecutters
 	category = "Tools"
 
 /datum/autolathe/recipe/wrench

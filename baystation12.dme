@@ -2761,7 +2761,6 @@
 #include "maps\torch\torch_procs.dm"
 #include "maps\torch\torch_ranks.dm"
 #include "maps\torch\torch_security_state.dm"
-#include "maps\torch\torch_shuttles.dm"
 #include "maps\torch\datums\reports.dm"
 #include "maps\torch\datums\shackle_law_sets.dm"
 #include "maps\torch\datums\uniforms.dm"

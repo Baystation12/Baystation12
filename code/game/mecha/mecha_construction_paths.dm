@@ -146,7 +146,7 @@
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is adjusted"),
 					 //11
-					 list("key"=/obj/item/weapon/wirecutters,
+					 list("key"=/obj/item/weapon/tool/wirecutters,
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //12
@@ -380,7 +380,7 @@
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is adjusted"),
 					 //17
-					 list("key"=/obj/item/weapon/wirecutters,
+					 list("key"=/obj/item/weapon/tool/wirecutters,
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //18
@@ -641,7 +641,7 @@
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is adjusted"),
 					 //12
-					 list("key"=/obj/item/weapon/wirecutters,
+					 list("key"=/obj/item/weapon/tool/wirecutters,
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //13
@@ -882,7 +882,7 @@
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is adjusted"),
 					 //17
-					 list("key"=/obj/item/weapon/wirecutters,
+					 list("key"=/obj/item/weapon/tool/wirecutters,
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //18
@@ -1162,7 +1162,7 @@
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is adjusted"),
 					 //11
-					 list("key"=/obj/item/weapon/wirecutters,
+					 list("key"=/obj/item/weapon/tool/wirecutters,
 					 		"backkey"=/obj/item/weapon/tool/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //12
