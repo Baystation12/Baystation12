@@ -2,7 +2,6 @@
 	name = "ore processing console"
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "console"
-	req_access = list(access_cargo)
 	var/obj/machinery/mineral/connected
 
 /obj/machinery/computer/mining/interface_interact(var/mob/user)
