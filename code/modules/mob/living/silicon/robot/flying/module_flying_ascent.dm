@@ -37,6 +37,11 @@
 		LANGUAGE_NABBER           = TRUE
 	)
 
+/obj/item/weapon/robot_module/flying/ascent/Initialize()
+	for(var/decl/hierarchy/skill/skill in GLOB.skills)
+		skills[skill.type] = SKILL_EXPERT
+	. = ..()
+
 /obj/item/weapon/robot_module/flying/ascent/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/stack/medical/resin/drone/resin = locate() in equipment
 	if(!resin)

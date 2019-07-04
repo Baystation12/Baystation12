@@ -34,6 +34,13 @@
 	)
 	emag = /obj/item/weapon/stamp/chameleon
 	synths = list(/datum/matter_synth/package_wrap)
+	skills = list(
+		SKILL_BUREAUCRACY         = SKILL_PROF,
+		SKILL_FINANCE             = SKILL_PROF,
+		SKILL_COMPUTER            = SKILL_EXPERT,
+		SKILL_SCIENCE             = SKILL_EXPERT,
+		SKILL_DEVICES             = SKILL_EXPERT
+	)
 
 /obj/item/weapon/robot_module/flying/filing/finalize_synths()
 	. = ..()

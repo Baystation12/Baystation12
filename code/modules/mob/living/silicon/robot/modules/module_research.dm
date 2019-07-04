@@ -33,7 +33,17 @@
 		/datum/matter_synth/nanite = 10000
 	)
 	emag = /obj/prefab/hand_teleporter
-
+	skills = list(
+		SKILL_BUREAUCRACY         = SKILL_EXPERT,
+		SKILL_FINANCE             = SKILL_EXPERT,
+		SKILL_COMPUTER            = SKILL_PROF,
+		SKILL_SCIENCE             = SKILL_PROF,
+		SKILL_DEVICES             = SKILL_PROF,
+		SKILL_ANATOMY             = SKILL_ADEPT,
+		SKILL_CHEMISTRY           = SKILL_ADEPT,
+		SKILL_BOTANY              = SKILL_EXPERT,
+		SKILL_ELECTRICAL          = SKILL_EXPERT
+	)
 /obj/item/weapon/robot_module/research/finalize_equipment()
 	. = ..()
 	var/obj/item/stack/nanopaste/N = locate() in equipment
