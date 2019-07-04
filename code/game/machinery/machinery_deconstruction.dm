@@ -128,7 +128,7 @@
 
 	// Part modifications. First: part replacer
 	if(istype(I, /obj/item/weapon/storage/part_replacer))
-		return machine.part_replacement(I, user)
+		return machine.part_replacement(user, I)
 
 	// Second: Part insertion
 	if(istype(I, /obj/item/weapon/stock_parts))
