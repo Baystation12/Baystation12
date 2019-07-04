@@ -12,3 +12,4 @@ GLOBAL_DATUM_INIT(provocateurs, /datum/antagonist/provocateur, new)
 	normally placed on the crew, within reason. Think of it as a license to harass rather than \
 	a license to kill."
 	blacklisted_jobs = list()
+	skill_setter = null

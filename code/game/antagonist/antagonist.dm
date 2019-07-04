@@ -84,7 +84,8 @@
 	GLOB.all_antag_types_[id] = src
 	GLOB.all_antag_spawnpoints_[landmark_id] = list()
 	GLOB.antag_names_to_ids_[role_text] = id
-	skill_setter = new skill_setter
+	if(ispath(skill_setter))
+		skill_setter = new skill_setter
 	..()
 
 /datum/antagonist/proc/Initialize()
