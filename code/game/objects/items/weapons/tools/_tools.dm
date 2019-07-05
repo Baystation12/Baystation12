@@ -585,7 +585,7 @@
 	tool_qualities = switched_off_qualities
 	force = initial(force)
 	if(glow_color)
-		set_light(l_range = 0, l_power = 0, l_color = glow_color)
+		set_light(0,0, 0)
 	update_icon()
 	//update_wear_icon() //Too tied into eris' inventory system, need to find a better path to do this
 
