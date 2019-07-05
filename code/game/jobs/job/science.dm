@@ -10,7 +10,8 @@
 	req_admin_notify = 1
 	ideal_character_age = 50
 
-	access = list(access_heads, access_research, access_medical, access_morgue, access_surgery)
+	access = list(access_heads, access_research, access_medical, access_morgue, 
+					access_surgery)
 	outfit_type = /decl/hierarchy/outfit/job/science/ds13chiefsciencenerd
 
 /datum/job/ds13juniorsciencenerd
