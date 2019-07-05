@@ -1,0 +1,4 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - tweak: "Antagonist implants are now not visible to the bodyscanner, you can find them by opening the implanted bodypart and examining."
