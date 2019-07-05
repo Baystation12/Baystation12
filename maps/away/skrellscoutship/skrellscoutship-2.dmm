@@ -1039,7 +1039,7 @@
 /area/ship/skrellscoutship/crew/hallway/d1)
 "cu" = (
 /obj/structure/cable,
-/obj/machinery/power/smes/buildable/preset/torch/engine_main{
+/obj/machinery/power/smes/buildable/preset/skrell{
 	charge = 5e+006;
 	input_attempt = 1;
 	input_level = 200000;
@@ -1273,17 +1273,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
-	},
-/obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
-	},
-/obj/machinery/power/apc/critical{
-	req_access = list("ACCESS_SKRELLSCOUT");
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
 	},
 /obj/structure/cable{
 	d2 = 8;
@@ -1594,7 +1583,6 @@
 /area/ship/skrellscoutship/maintenance/power)
 "dq" = (
 /obj/structure/ladder,
-/turf/space,
 /turf/simulated/open,
 /area/ship/skrellscoutship/solars)
 "dr" = (
@@ -6713,7 +6701,7 @@ aa
 aa
 aa
 Mg
-Bz
+Mg
 Mg
 Mg
 Mg

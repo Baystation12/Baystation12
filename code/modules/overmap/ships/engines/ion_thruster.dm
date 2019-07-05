@@ -76,6 +76,7 @@
 	
 /obj/item/weapon/stock_parts/circuitboard/engine/ion
 	name = T_BOARD("ion propulsion device")
+	board_type = "machine"
 	icon_state = "mcontroller"
 	build_path = /obj/machinery/ion_engine
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 2)

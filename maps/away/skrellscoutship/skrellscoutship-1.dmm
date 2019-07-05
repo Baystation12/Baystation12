@@ -312,11 +312,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/vending/medical/torch{
+/obj/machinery/vending/medical/skrell{
 	dir = 1;
 	density = 0;
-	pixel_y = -32;
-	req_access = list("ACCESS_SKRELLSCOUT")
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
@@ -865,8 +864,7 @@
 /area/ship/skrellscoutship/crew/hallway/d2)
 "cj" = (
 /obj/machinery/power/terminal,
-/obj/machinery/power/apc/shuttle{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/power/apc/skrell{
 	pixel_y = -22
 	},
 /obj/structure/cable/cyan{
