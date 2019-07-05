@@ -1,3 +1,22 @@
+// FOR THE PURPOSES OF THE DEAD SPACE 13 ACCESS STUFF, THESE ARE CURRENTLY USED ACCESS VARIABLES AND WHERE THEY SHOULD BE USED:
+// (access_heads) allows access to the bridge.
+// (access_security) allows access to the security offices. when combined with access_mining_station, allows access to PSEC HQ on the colony.
+// (access_maint_tunnels) allows access to all maintenance vents both on the ishimura and the colony.
+// (access_bar) allows access to the bar.
+// (access_kitchen) allows access to the kitchen.
+// (access_cargo) allows access to the supply offices.
+// (access_mining) allows access to the shuttle used to transport between ship and colony.
+// (access_mining_station) allows access to doors around the colony. when combined with access_security, allows access to PSEC HQ on the colony.
+// (access_engine) allows access to the engine room and basic tools, such as rock saws, rivet guns and general maintenance tools.
+// (access_emergency_storage) allows access to advanced tools such as plasma cutters, plasma torches (blowtorch), that sort of thing.
+// (access_external_airlocks) allows access to EVA storage rooms and the external airlocks.
+// (access_medical) allows access to the medical wing.
+// (access_morgue) allows access to the most dangerous room on the ship.
+// (access_surgery) allows access to the surgery room.
+// (access_research) allows access to the research wing.
+// (access_armory) allows access to the armory and the chief security officer's private quarters.
+
+
 #define ACCESS_REGION_NONE -1
 #define ACCESS_REGION_ALL 0
 #define ACCESS_REGION_SECURITY 1
