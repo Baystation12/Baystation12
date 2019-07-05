@@ -594,16 +594,10 @@
 		to_chat(user, "<span class='warning'>You cannot put the board inside, the frame is damaged.</span>")
 		return
 	else if(isWelder(W) && opened && has_electronics==0 && !terminal)
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.get_fuel() < 3)
-			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-			return
 		user.visible_message("<span class='warning'>[user.name] welds [src].</span>", \
 							"You start welding the APC frame...", \
 							"You hear welding.")
-		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 50, src))
-			if(!src || !WT.remove_fuel(3, user)) return
+		if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			if (emagged || (stat & BROKEN) || opened==2)
 				new /obj/item/stack/material/steel(loc)
 				user.visible_message(\
@@ -617,7 +611,7 @@
 					"<span class='notice'>You cut the APC frame from the wall.</span>",\
 					"You hear welding.")
 			qdel(src)
-			return
+		return
 	else if (istype(W, /obj/item/frame/apc) && opened && emagged)
 		emagged = 0
 		if (opened==2)

@@ -730,16 +730,7 @@ var/list/turret_icons
 				return
 
 			else if(isWelder(I))
-				var/obj/item/weapon/weldingtool/WT = I
-				if(!WT.isOn())
-					return
-				if(WT.get_fuel() < 5) //uses up 5 fuel.
-					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
-					return
-
-				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
-				if(do_after(user, 20, src))
-					if(!src || !WT.remove_fuel(5, user)) return
+				if(I.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 					build_step = 1
 					to_chat(user, "You remove the turret's interior metal armor.")
 					new /obj/item/stack/material/steel( loc, 2)
@@ -809,15 +800,7 @@ var/list/turret_icons
 
 		if(7)
 			if(isWelder(I))
-				var/obj/item/weapon/weldingtool/WT = I
-				if(!WT.isOn()) return
-				if(WT.get_fuel() < 5)
-					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
-
-				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
-				if(do_after(user, 30, src))
-					if(!src || !WT.remove_fuel(5, user))
-						return
+				if(I.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 					build_step = 8
 					to_chat(user, "<span class='notice'>You weld the turret's armor down.</span>")
 

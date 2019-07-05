@@ -174,12 +174,24 @@
 
 	return damage
 
-//Handles repairs (and also upgrades).
+/obj/item/clothing/suit/space/attackby(obj/item/I, mob/user)
 
-/obj/item/clothing/suit/space/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack/material))
+	//Using duct tape, you can repair both types of breaches while still wearing the suit!
+	if(I.has_quality(QUALITY_SEALING))
+		if(!damage && !burn_damage)
+			user << "There is no surface damage on \the [src] to repair."
+			return
+
+		user.visible_message("[user] starts repairing breaches on their [src] with the [I]", "You start repairing breaches on the [src] with the [I]")
+		if (I.use_tool(user, src, 60 + (damage*10), QUALITY_SEALING, 0))
+			user << "There we go, that should hold nicely!"
+			repair_breaches(BURN, burn_damage, user)
+			repair_breaches(BRUTE, damage, user)
+		return
+
+	if(istype(I,/obj/item/stack/material))
 		var/repair_power = 0
-		switch(W.get_material_name())
+		switch(I.get_material_name())
 			if(DEFAULT_WALL_MATERIAL)
 				repair_power = 2
 			if("plastic")
@@ -188,53 +200,35 @@
 		if(!repair_power)
 			return
 
-		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
+		if(isliving(loc))
+			user << SPAN_WARNING("How do you intend to patch a hardsuit while someone is wearing it?")
 			return
 
-		if(burn_damage <= 0)
-			to_chat(user, "There is no surface damage on \the [src] to repair.")
+		if(!brute_damage && !burn_damage)
+			user << "There is no surface damage on \the [src] to repair."
 			return
 
-		var/obj/item/stack/P = W
+		var/obj/item/stack/P = I
 		var/use_amt = min(P.get_amount(), 3)
 		if(use_amt && P.use(use_amt))
 			repair_breaches(BURN, use_amt * repair_power, user)
 		return
 
-	else if(isWelder(W))
+	else if(QUALITY_WELDING in I.tool_qualities)
 
-		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
+		if(isliving(loc))
+			user << SPAN_WARNING("How do you intend to patch a hardsuit while someone is wearing it?")
 			return
 
-		if (brute_damage <= 0)
-			to_chat(user, "There is no structural damage on \the [src] to repair.")
+		if (!damage && ! brute_damage)
+			user << SPAN_WARNING("There is no structural damage on \the [src] to repair.")
 			return
 
-		var/obj/item/weapon/weldingtool/WT = W
-		if(!WT.remove_fuel(5))
-			to_chat(user, "<span class='warning'>You need more welding fuel to repair this suit.</span>")
+		if(I.use_tool(user, src, WORKTIME_FAST, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			repair_breaches(BRUTE, 3, user)
+			user << SPAN_NOTICE("You repair the damage on the [src].")
 			return
 
-		repair_breaches(BRUTE, 3, user)
-		return
-
-	else if(istype(W, /obj/item/weapon/tool/tape_roll))
-		var/datum/breach/target_breach		//Target the largest unpatched breach.
-		for(var/datum/breach/B in breaches)
-			if(B.patched)
-				continue
-			if(!target_breach || (B.class > target_breach.class))
-				target_breach = B
-
-		if(!target_breach)
-			to_chat(user, "There are no open breaches to seal with \the [W].")
-		else if(user != loc || do_after(user, 30, src))		//Doing this in your own inventory is awkward.
-			user.visible_message("<b>[user]</b> uses \the [W] to seal \the [target_breach] on \the [src].")
-			target_breach.patched = TRUE
-			target_breach.update_descriptor()
-			calc_breach_damage()
 		return
 
 	..()

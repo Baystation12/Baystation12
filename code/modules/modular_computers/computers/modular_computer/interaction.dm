@@ -237,17 +237,13 @@
 		qdel(src)
 		return
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "\The [W] is off.")
-			return
-
 		if(!damage)
 			to_chat(user, "\The [src] does not require repairs.")
 			return
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
+		if(W.use_tool(user, src, WORKTIME_NORMAL+damage, QUALITY_WELDING, FAILCHANCE_NORMAL))
+
 			damage = 0
 			to_chat(user, "You repair \the [src].")
 		return
@@ -285,7 +281,7 @@
 
 	if(enabled && .)
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
-		
+
 	if(card_slot && card_slot.stored_card)
 		to_chat(user, "The [card_slot.stored_card] is inserted into it.")
 

@@ -246,16 +246,13 @@
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return
 
-		var/obj/item/weapon/weldingtool/welder = I
-		if(welder.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
-				update_icon()
-				qdel(repairing)
-				repairing = null
+		to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
+		if(I.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
+			health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+			update_icon()
+			qdel(repairing)
+			repairing = null
 		return
 
 	if(repairing && isCrowbar(I))

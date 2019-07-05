@@ -183,7 +183,7 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/repair_brute
 	allowed_tools = list(
-		/obj/item/weapon/weldingtool = 100,
+		/obj/item/weapon/tool/weldingtool = 100,
 		/obj/item/weapon/gun/energy/plasmacutter = 50
 	)
 
@@ -199,8 +199,8 @@
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(isWelder(tool))
-			var/obj/item/weapon/weldingtool/welder = tool
-			if(!welder.isOn() || !welder.remove_fuel(1,user))
+			var/obj/item/weapon/tool/weldingtool/welder = tool
+			if(!welder.consume_fuel(1))
 				return SURGERY_FAILURE
 
 		if(!affected)

@@ -281,8 +281,7 @@
 /obj/item/weapon/secbot_assembly/attackby(var/obj/item/O, var/mob/user)
 	..()
 	if(isWelder(O) && !build_step)
-		var/obj/item/weapon/weldingtool/WT = O
-		if(WT.remove_fuel(0, user))
+		if(O.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			build_step = 1
 			overlays += image('icons/mob/bot/secbot.dmi', "hs_hole")
 			to_chat(user, "You weld a hole in \the [src].")

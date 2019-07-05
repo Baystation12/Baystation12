@@ -97,8 +97,7 @@
 		return 1
 
 	if(isWelder(O))
-		var/obj/item/weapon/weldingtool/WT = O
-		if (WT.remove_fuel(0))
+		if (O.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			if(health < maxHealth)
 				health += pick(1,1,1,2,2,3)
 				if(health > maxHealth)

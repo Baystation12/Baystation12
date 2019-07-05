@@ -538,7 +538,7 @@
 /obj/proc/get_tool_quality(quality_id)
 	if (tool_qualities && tool_qualities.len)
 		return tool_qualities[quality_id]
-	return null
+	return 0
 
 //We are cheking if our item got required qualities. If we require several qualities, and item posses more than one of those, we ask user to choose how that item should be used
 /obj/proc/get_tool_type(var/mob/living/user, var/list/required_qualities, var/atom/use_on, var/datum/callback/CB)
@@ -761,12 +761,12 @@
 /obj/item/weapon/tool/afterattack(obj/O, mob/user, proximity)
 	if(use_fuel_cost)
 		if(!proximity) return
-		if ((istype(O, /obj/structure/reagent_dispensers/fueltank) || istype(O, /obj/item/weapon/weldpack)) && get_dist(src,O) <= 1 && !switched_on)
+		if ((istype(O, /obj/structure/reagent_dispensers/fueltank)) && get_dist(src,O) <= 1 && !switched_on)
 			O.reagents.trans_to_obj(src, max_fuel)
 			user << SPAN_NOTICE("[src] refueled")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
-		else if ((istype(O, /obj/structure/reagent_dispensers/fueltank) || istype(O, /obj/item/weapon/weldpack)) && get_dist(src,O) <= 1 && switched_on)
+		else if ((istype(O, /obj/structure/reagent_dispensers/fueltank)) && get_dist(src,O) <= 1 && switched_on)
 			message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool.")
 			log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
 			user << SPAN_DANGER("You begin welding on the [O] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.")

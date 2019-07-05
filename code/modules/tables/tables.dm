@@ -139,12 +139,8 @@
 		return 1
 
 	if(health < maxhealth && isWelder(W))
-		var/obj/item/weapon/weldingtool/F = W
-		if(F.welding)
-			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
-			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(!do_after(user, 20, src) || !F.remove_fuel(1, user))
-				return
+		to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
+		if (W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
 			                              "<span class='notice'>You repair some damage to \the [src].</span>")
 			health = max(health+(maxhealth/5), maxhealth) // 20% repair per application

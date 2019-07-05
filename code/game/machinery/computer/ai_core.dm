@@ -31,43 +31,33 @@
 					anchored = 1
 					state = 1
 			if(isWelder(P))
-				var/obj/item/weapon/weldingtool/WT = P
-				if(!WT.isOn())
-					to_chat(user, "The welder must be on for this task.")
-					return
-				playsound(loc, 'sound/items/Welder.ogg', 50, 1)
-				if(do_after(user, 20, src))
-					if(!src || !WT.remove_fuel(0, user)) return
+				if(P.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 					new /obj/item/stack/material/plasteel( loc, 4)
 					qdel(src)
 					return
 		if(1)
-			if(isWrench(P))
-				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 20, src))
-					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
-					anchored = 0
-					state = 0
+			if(isWrench(P) && P.use_tool(user, src, WORKTIME_NORMAL, QUALITY_BOLT_TURNING, FAILCHANCE_NORMAL))
+				to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
+				anchored = 0
+				state = 0
 			if(istype(P, /obj/item/weapon/circuitboard/aicore) && !circuit && user.unEquip(P, src))
 				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You place the circuit board inside the frame.</span>")
 				icon_state = "1"
 				circuit = P
-			if(isScrewdriver(P) && circuit)
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			if(isScrewdriver(P) && circuit && P.use_tool(user, src, WORKTIME_FAST, QUALITY_SCREW_DRIVING, FAILCHANCE_NORMAL))
 				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
 				state = 2
 				icon_state = "2"
-			if(isCrowbar(P) && circuit)
-				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+			if(isCrowbar(P) && circuit && P.use_tool(user, src, WORKTIME_FAST, QUALITY_PRYING, FAILCHANCE_NORMAL))
 				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
 				state = 1
 				icon_state = "0"
 				circuit.loc = loc
 				circuit = null
 		if(2)
-			if(isScrewdriver(P) && circuit)
+			if(isScrewdriver(P) && circuit && P.use_tool(user, src, WORKTIME_FAST, QUALITY_SCREW_DRIVING, FAILCHANCE_NORMAL))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You unfasten the circuit board.</span>")
 				state = 1
@@ -167,9 +157,7 @@
 				icon_state = "3"
 
 		if(4)
-			if(isCrowbar(P))
-				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
+			if(isCrowbar(P) && P.use_tool(user, src, WORKTIME_FAST, QUALITY_PRYING, FAILCHANCE_NORMAL))
 				state = 3
 				if (brain)
 					icon_state = "3b"
@@ -178,12 +166,10 @@
 				new /obj/item/stack/material/glass/reinforced( loc, 2 )
 				return
 
-			if(isScrewdriver(P))
+			if(isScrewdriver(P) && P.use_tool(user, src, WORKTIME_FAST, QUALITY_SCREW_DRIVING, FAILCHANCE_NORMAL))
 				if(!authorized)
 					to_chat(user, "<span class='warning'>Core fails to connect to the systems of [GLOB.using_map.full_name]!</span>")
 					return
-
-				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
 				if(!brain)
 					var/open_for_latejoin = alert(user, "Would you like this core to be open for latejoining AIs?", "Latejoin", "Yes", "Yes", "No") == "Yes"

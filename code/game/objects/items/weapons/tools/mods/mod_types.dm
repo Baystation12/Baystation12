@@ -252,11 +252,10 @@
 	req_fuel = TRUE
 	prefix = "expanded"
 	bulk_mod = 1
-	degradation_mult = 1.15
 
 /obj/item/weapon/tool_upgrade/augment/fuel_tank/apply_values()
 	if (..())
-		holder.max_fuel += 30
+		holder.max_fuel += 60
 
 
 //Penalises the tool, but unlocks several more augment slots.

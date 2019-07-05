@@ -30,7 +30,7 @@
 #define WORKTIME_FAST					60
 #define WORKTIME_NORMAL					90
 #define WORKTIME_SLOW					120
-#define WORKTIME_LONG					170
+#define WORKTIME_VERY_SLOW					170
 #define WORKTIME_EXTREMELY_LONG			250
 
 //Fail chance for tool system calculated in that way: basic chance - tool level - stat check.

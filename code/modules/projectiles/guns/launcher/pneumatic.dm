@@ -182,26 +182,17 @@
 			return
 	else if(isWelder(W))
 		if(buildstate == 1)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
+			if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 				to_chat(user, "<span class='notice'>You weld the pipe into place.</span>")
 				buildstate++
 				update_icon()
 		if(buildstate == 3)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
+			if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 				to_chat(user, "<span class='notice'>You weld the metal chassis together.</span>")
 				buildstate++
 				update_icon()
 		if(buildstate == 5)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
+			if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 				to_chat(user, "<span class='notice'>You weld the valve into place.</span>")
 				new /obj/item/weapon/gun/launcher/pneumatic(get_turf(src))
 				qdel(src)

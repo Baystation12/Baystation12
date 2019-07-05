@@ -118,8 +118,7 @@
 
 		if(3)
 			if(isWelder(W))
-				var/obj/item/weapon/weldingtool/WT = W
-				if(WT.remove_fuel(0, user))
+				if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 					build_step++
 					SetName("shielded frame assembly")
 					to_chat(user, "<span class='notice'>You welded the vest to [src].</span>")

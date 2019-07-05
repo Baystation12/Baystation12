@@ -21,13 +21,7 @@
 					src.anchored = 1
 					src.state = 1
 			if(isWelder(P))
-				var/obj/item/weapon/weldingtool/WT = P
-				if(!WT.remove_fuel(0, user))
-					to_chat(user, "The welding tool must be on to complete this task.")
-					return
-				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-				if(do_after(user, 20, src))
-					if(!src || !WT.isOn()) return
+				if(P.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 					new /obj/item/stack/material/steel( src.loc, 5 )
 					qdel(src)

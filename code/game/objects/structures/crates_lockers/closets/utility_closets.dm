@@ -116,7 +116,7 @@
 	if(prob(70))
 		new /obj/item/weapon/tool/wrench(src)
 	if(prob(70))
-		new /obj/item/weapon/weldingtool(src)
+		new /obj/item/weapon/tool/weldingtool(src)
 	if(prob(70))
 		new /obj/item/weapon/crowbar(src)
 	if(prob(70))

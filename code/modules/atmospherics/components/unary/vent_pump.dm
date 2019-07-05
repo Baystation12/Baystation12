@@ -333,36 +333,13 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
-
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
-			return 1
-
-		if(!WT.remove_fuel(0,user))
-			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-			return 1
-
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
-		playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-
-		if(!do_after(user, 20, src))
-			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
-			return 1
-
-		if(!src)
-			return 1
-
-		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
-			return 1
-
-		welded = !welded
-		update_icon()
-		user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
-			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
-			"You hear welding.")
+		if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			welded = !welded
+			update_icon()
+			user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
+				"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
+				"You hear welding.")
 		return 1
 
 	else

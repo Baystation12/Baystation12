@@ -69,28 +69,19 @@ obj/structure/windoor_assembly/Destroy()
 	switch(state)
 		if("01")
 			if(isWelder(W) && !anchored )
-				var/obj/item/weapon/weldingtool/WT = W
-				if (WT.remove_fuel(0,user))
-					user.visible_message("[user] dissassembles the windoor assembly.", "You start to dissassemble the windoor assembly.")
-					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-
-					if(do_after(user, 40,src))
-						if(!src || !WT.isOn()) return
-						to_chat(user, "<span class='notice'>You dissasembled the windoor assembly!</span>")
-						new /obj/item/stack/material/glass/reinforced(get_turf(src), 5)
-						if(secure)
-							new /obj/item/stack/rods(get_turf(src), 4)
-						qdel(src)
-				else
-					to_chat(user, "<span class='notice'>You need more welding fuel to dissassemble the windoor assembly.</span>")
-					return
+				if (W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
+					to_chat(user, "<span class='notice'>You dissasembled the windoor assembly!</span>")
+					new /obj/item/stack/material/glass/reinforced(get_turf(src), 5)
+					if(secure)
+						new /obj/item/stack/rods(get_turf(src), 4)
+					qdel(src)
+				return
 
 			//Wrenching an unsecure assembly anchors it in place. Step 4 complete
 			if(isWrench(W) && !anchored)
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 				user.visible_message("[user] secures the windoor assembly to the floor.", "You start to secure the windoor assembly to the floor.")
 
-				if(do_after(user, 40,src))
+				if (W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_BOLT_TURNING, FAILCHANCE_NORMAL))
 					if(!src) return
 					to_chat(user, "<span class='notice'>You've secured the windoor assembly!</span>")
 					src.anchored = 1
@@ -101,10 +92,9 @@ obj/structure/windoor_assembly/Destroy()
 
 			//Unwrenching an unsecure assembly un-anchors it. Step 4 undone
 			else if(isWrench(W) && anchored)
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 				user.visible_message("[user] unsecures the windoor assembly to the floor.", "You start to unsecure the windoor assembly to the floor.")
 
-				if(do_after(user, 40,src))
+				if (W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_BOLT_TURNING, FAILCHANCE_NORMAL))
 					if(!src) return
 					to_chat(user, "<span class='notice'>You've unsecured the windoor assembly!</span>")
 					src.anchored = 0

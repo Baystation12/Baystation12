@@ -869,7 +869,7 @@ proc/get_mob_with_client_list()
 var/global/list/common_tools = list(
 /obj/item/stack/cable_coil,
 /obj/item/weapon/tool/wrench,
-/obj/item/weapon/weldingtool,
+/obj/item/weapon/tool/weldingtool,
 /obj/item/weapon/tool/screwdriver,
 /obj/item/weapon/tool/wirecutters,
 /obj/item/device/multitool,
@@ -880,14 +880,9 @@ var/global/list/common_tools = list(
 		return 1
 	return 0
 
+//Deprecated. Use obj/is_hot instead where
 /proc/is_hot(obj/item/W as obj)
 	switch(W.type)
-		if(/obj/item/weapon/weldingtool)
-			var/obj/item/weapon/weldingtool/WT = W
-			if(WT.isOn())
-				return 3800
-			else
-				return 0
 		if(/obj/item/weapon/flame/lighter)
 			if(W:lit)
 				return 1500
@@ -908,9 +903,9 @@ var/global/list/common_tools = list(
 		if(/obj/item/weapon/melee/energy)
 			return 3500
 		else
-			return 0
+			return W.is_hot()
 
-	return 0
+	return W.is_hot()
 
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O as obj)
@@ -937,7 +932,7 @@ var/global/list/common_tools = list(
 /obj/item/weapon/pen/can_puncture()
 	return 1
 
-/obj/item/weapon/weldingtool/can_puncture()
+/obj/item/weapon/tool/weldingtool/can_puncture()
 	return 1
 
 /obj/item/weapon/tool/screwdriver/can_puncture()

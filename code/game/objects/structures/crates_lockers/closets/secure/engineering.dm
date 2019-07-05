@@ -58,10 +58,10 @@
 /obj/structure/closet/secure_closet/engineering_welding/WillContain()
 	return list(
 		/obj/item/clothing/head/welding = 3,
-		/obj/item/weapon/weldingtool/largetank = 3,
-		/obj/item/weapon/weldpack = 3,
+		/obj/item/weapon/tool/weldingtool/advanced = 3,
+		///obj/item/weapon/weldpack = 3,
 		/obj/item/clothing/glasses/welding = 3,
-		/obj/item/weapon/welder_tank = 6
+		/obj/item/weapon/tool_upgrade/augment/fuel_tank = 6
 	)
 
 /obj/structure/closet/secure_closet/engineering_personal

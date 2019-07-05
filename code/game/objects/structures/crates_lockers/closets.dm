@@ -266,10 +266,7 @@
 		if(istype(W,/obj/item/tk_grab))
 			return 0
 		if(isWelder(W))
-			var/obj/item/weapon/weldingtool/WT = W
-			if(WT.isOn())
-				slice_into_parts(WT, user)
-				return
+			slice_into_parts(W, user)
 		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
 			var/obj/item/weapon/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
@@ -297,30 +294,22 @@
 	else if(istype(W, /obj/item/stack/package_wrap))
 		return
 	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(!WT.remove_fuel(0,user))
-			if(!WT.isOn())
-				return
-			else
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-				return
-		src.welded = !src.welded
-		src.update_icon()
-		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
+		if (W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			src.welded = !src.welded
+			src.update_icon()
+			user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
 	else if(setup & CLOSET_HAS_LOCK)
 		src.togglelock(user, W)
 	else
 		src.attack_hand(user)
 
-/obj/structure/closet/proc/slice_into_parts(obj/item/weapon/weldingtool/WT, mob/user)
-	if(!WT.remove_fuel(0,user))
-		to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-		return
-	new /obj/item/stack/material/steel(src.loc)
-	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", \
-						 "<span class='notice'>You have cut \the [src] apart with \the [WT].</span>", \
-						 "You hear welding.")
-	qdel(src)
+/obj/structure/closet/proc/slice_into_parts(var/obj/WT, mob/user)
+	if (WT.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
+		new /obj/item/stack/material/steel(src.loc)
+		user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", \
+							 "<span class='notice'>You have cut \the [src] apart with \the [WT].</span>", \
+							 "You hear welding.")
+		qdel(src)
 
 /obj/structure/closet/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
 	if(istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete

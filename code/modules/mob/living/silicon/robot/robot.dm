@@ -509,8 +509,8 @@
 		if (!getBruteLoss())
 			to_chat(user, "Nothing to fix here!")
 			return
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.remove_fuel(0))
+
+		if (W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustBruteLoss(-30)
 			updatehealth()

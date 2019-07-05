@@ -100,12 +100,10 @@
 		return
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/C = W
 		if(cur_health == max_health)
 			to_chat(user, "\The [src] does not require repairs.")
 			return
-		if(C.remove_fuel(0,user))
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
+		if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			cur_health = min(cur_health + rand(80,120), max_health)
 			if(cur_health == max_health)
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")

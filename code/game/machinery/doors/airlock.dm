@@ -937,15 +937,10 @@ About the new airlock wires panel:
 	var/cut_delay = (15 SECONDS)
 	var/cut_verb
 	var/cut_sound
+	var/quality = QUALITY_WELDING
 
 	//Todo: Cutting quality check here
 	if(isWelder(item))
-		var/obj/item/weapon/weldingtool/WT = item
-		if(!WT.isOn())
-			return 0
-		if(!WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 	else if(istype(item,/obj/item/weapon/gun/energy/plasmacutter)) //They could probably just shoot them out, but who cares!
@@ -959,6 +954,7 @@ About the new airlock wires panel:
 	else if(istype(item,/obj/item/weapon/circular_saw))
 		cut_verb = "sawing"
 		cut_sound = 'sound/weapons/circsawhit.ogg'
+		quality = QUALITY_SAWING
 		cut_delay *= 1.5
 
 	else if(istype(item,/obj/item/weapon/material/twohanded/fireaxe))
@@ -987,7 +983,7 @@ About the new airlock wires panel:
 			)
 
 		playsound(src, cut_sound, 100, 1)
-		if (do_after(user, cut_delay, src))
+		if (item.use_tool(user, src, WORKTIME_NORMAL+cut_delay, quality, FAILCHANCE_NORMAL))
 			user.visible_message(
 				"<span class='notice'>\The [user] removes the bolt cover from [src]</span>",
 				"<span class='notice'>You remove the cover and expose the door bolts.</span>"
@@ -1001,7 +997,7 @@ About the new airlock wires panel:
 			"<span class='notice'>You begin [cut_verb] through the door bolts.</span>"
 			)
 		playsound(src, cut_sound, 100, 1)
-		if (do_after(user, cut_delay, src))
+		if (item.use_tool(user, src, WORKTIME_NORMAL+cut_delay, quality, FAILCHANCE_NORMAL))
 			user.visible_message(
 				"<span class='notice'>\The [user] severs the door bolts, unlocking [src].</span>",
 				"<span class='notice'>You sever the door bolts, unlocking the door.</span>"
@@ -1044,17 +1040,15 @@ About the new airlock wires panel:
 		return
 
 	if(!repairing && isWelder(C) && !( src.operating > 0 ) && src.density)
-		var/obj/item/weapon/weldingtool/W = C
-		if(W.remove_fuel(0,user))
+		user.visible_message("You start [welded?"unwelding":"welding"] the [src]")
+		if(C.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			if(!src.welded)
 				src.welded = 1
 			else
 				src.welded = null
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			src.update_icon()
-			return
-		else
-			return
+		return
 	else if(isScrewdriver(C))
 		if (src.p_open)
 			if (stat & BROKEN)

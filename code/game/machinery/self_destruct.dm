@@ -13,13 +13,9 @@
 	if(isWelder(W))
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
-			if(do_after(usr, 100, src))
-				var/obj/item/weapon/weldingtool/w
-				if(w.burn_fuel(10))
-					damaged = 0
-					user.visible_message("[user] repairs [src].", "You repair [src].")
-				else
-					to_chat(user, "<span class='warning'>There is not enough fuel to repair [src].</span>")
+			if(W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
+				damaged = 0
+				user.visible_message("[user] repairs [src].", "You repair [src].")
 				return
 	if(istype(W, /obj/item/weapon/nuclear_cylinder))
 		if(damaged)

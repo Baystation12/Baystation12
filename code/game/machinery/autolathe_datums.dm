@@ -125,7 +125,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/weldertool
 	name = "welding tool"
-	path = /obj/item/weapon/weldingtool
+	path = /obj/item/weapon/tool/weldingtool
 	category = "Tools"
 
 /datum/autolathe/recipe/screwdriver
@@ -618,12 +618,6 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/beartrap
 	hidden = 1
 	category = "Devices and Components"
-
-/datum/autolathe/recipe/welder_industrial
-	name = "industrial welding tool"
-	path = /obj/item/weapon/weldingtool/largetank
-	hidden = 1
-	category = "Tools"
 
 /datum/autolathe/recipe/handcuffs
 	name = "handcuffs"

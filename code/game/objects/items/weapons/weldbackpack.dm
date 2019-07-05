@@ -1,3 +1,5 @@
+//Temporarily disabled, needs work to fit with new tool system
+/*
 /obj/item/weapon/weldpack
 	name = "welding kit"
 	desc = "An unwieldy, heavy backpack with two massive fuel tanks. Includes a connector for most models of portable welding tools."
@@ -9,7 +11,7 @@
 	icon_state = "welderpack"
 	w_class = ITEM_SIZE_HUGE
 	var/max_fuel = 350
-	var/obj/item/weapon/weldingtool/welder
+	var/obj/item/weapon/tool/weldingtool/welder
 
 /obj/item/weapon/weldpack/Initialize()
 	create_reagents(max_fuel)
@@ -24,7 +26,7 @@
 
 /obj/item/weapon/weldpack/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/T = W
+		var/obj/item/weapon/tool/weldingtool/T = W
 		if(T.welding & prob(50))
 			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
 			log_game("[key_name(user)] triggered a fueltank explosion.")
@@ -42,8 +44,8 @@
 			to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
-	else if(istype(W, /obj/item/weapon/welder_tank))
-		var/obj/item/weapon/welder_tank/tank = W
+	else if(istype(W, /obj/item/weapon/tool_upgrade/augment/fuel_tank))
+		var/obj/item/weapon/tool_upgrade/augment/fuel_tank/tank = W
 		src.reagents.trans_to_obj(tank, tank.max_fuel)
 		to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
@@ -88,3 +90,4 @@
 
 	if(welder)
 		to_chat(user, "\The [welder] is attached.")
+*/

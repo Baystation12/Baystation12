@@ -36,13 +36,11 @@
 
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(get_amount() < 2)
-			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
+		if(get_amount() < 3)
+			to_chat(user, "<span class='warning'>You need at least three rods to do this.</span>")
 			return
 
-		if(WT.remove_fuel(0,user))
+		if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			var/obj/item/stack/material/steel/new_item = new(usr.loc)
 			new_item.add_to_stacks(usr)
 			for (var/mob/M in viewers(src))

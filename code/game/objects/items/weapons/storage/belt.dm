@@ -111,7 +111,7 @@
 		///obj/item/weapon/combitool,
 		/obj/item/weapon/crowbar,
 		/obj/item/weapon/tool/screwdriver,
-		/obj/item/weapon/weldingtool,
+		/obj/item/weapon/tool/weldingtool,
 		/obj/item/weapon/tool/wirecutters,
 		/obj/item/weapon/tool/wrench,
 		/obj/item/device/multitool,
@@ -135,7 +135,7 @@
 	..()
 	new /obj/item/weapon/tool/screwdriver(src)
 	new /obj/item/weapon/tool/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
+	new /obj/item/weapon/tool/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/tool/wirecutters(src)
 	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
@@ -146,7 +146,7 @@
 	..()
 	new /obj/item/weapon/tool/screwdriver(src)
 	new /obj/item/weapon/tool/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
+	new /obj/item/weapon/tool/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/tool/wirecutters(src)
 	new /obj/item/device/t_scanner(src)

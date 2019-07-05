@@ -33,20 +33,11 @@
 		return
 
 	if(isWelder(thing) && construction_stage == 4)
-		var/obj/item/weapon/weldingtool/welder = thing
-
-		if(!welder.isOn())
-			to_chat(user, "<span class='warning'>Turn it on first!</span>")
+		if(thing.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			user.visible_message("<span class='notice'>\The [user] welds the barrel of \the [src] into place.</span>")
+			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
+			increment_construction_stage()
 			return
-
-		if(!welder.remove_fuel(0,user))
-			to_chat(user, "<span class='warning'>You need more fuel!</span>")
-			return
-
-		user.visible_message("<span class='notice'>\The [user] welds the barrel of \the [src] into place.</span>")
-		playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-		increment_construction_stage()
-		return
 
 	if(isCoil(thing) && construction_stage == 5)
 		var/obj/item/stack/cable_coil/cable = thing

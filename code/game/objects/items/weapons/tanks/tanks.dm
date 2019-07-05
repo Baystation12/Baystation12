@@ -175,25 +175,21 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, "<span class='notice'>You need to wire the device up first.</span>")
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(WT.remove_fuel(1,user))
-			if(!valve_welded)
-				to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
-				if(do_after(user, 40,src))
-					to_chat(user, "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>")
-					valve_welded = 1
-					leaking = 0
-				else
-					GLOB.bombers += "[key_name(user)] attempted to weld a [src]. [air_contents.temperature-T0C]"
-					message_admins("[key_name_admin(user)] attempted to weld a [src]. [air_contents.temperature-T0C]")
-					if(WT.welding)
-						to_chat(user, "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>")
-						maxintegrity -= rand(2,6)
-						integrity = min(integrity,maxintegrity)
-						air_contents.add_thermal_energy(rand(2000,50000))
-				WT.eyecheck(user)
+		if(!valve_welded)
+			to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
+			if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+				to_chat(user, "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>")
+				valve_welded = 1
+				leaking = 0
 			else
-				to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
+				GLOB.bombers += "[key_name(user)] attempted to weld a [src]. [air_contents.temperature-T0C]"
+				message_admins("[key_name_admin(user)] attempted to weld a [src]. [air_contents.temperature-T0C]")
+				to_chat(user, "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>")
+				maxintegrity -= rand(2,6)
+				integrity = min(integrity,maxintegrity)
+				air_contents.add_thermal_energy(rand(2000,50000))
+		else
+			to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
 		add_fingerprint(user)
 
 

@@ -172,39 +172,26 @@
 		return
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(active)
-			to_chat(user, "Turn off [src] first.")
-			return
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
 			if(1)
-				if (WT.remove_fuel(0,user))
-					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-					user.visible_message("[user.name] starts to weld [src] to the floor.", \
-						"You start to weld [src] to the floor.", \
-						"You hear welding")
-					if (do_after(user,20,src))
-						if(!src || !WT.isOn()) return
-						state = 2
-						to_chat(user, "You weld [src] to the floor.")
-						connect_to_network()
-				else
-					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+
+				user.visible_message("[user.name] starts to weld [src] to the floor.", \
+					"You start to weld [src] to the floor.", \
+					"You hear welding")
+				if (W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
+					state = 2
+					to_chat(user, "You weld [src] to the floor.")
+					connect_to_network()
 			if(2)
-				if (WT.remove_fuel(0,user))
-					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
-						"You start to cut [src] free from the floor.", \
-						"You hear welding")
-					if (do_after(user,20,src))
-						if(!src || !WT.isOn()) return
-						state = 1
-						to_chat(user, "You cut [src] free from the floor.")
-						disconnect_from_network()
-				else
-					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+				user.visible_message("[user.name] starts to cut [src] free from the floor.", \
+					"You start to cut [src] free from the floor.", \
+					"You hear welding")
+				if (W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+					state = 1
+					to_chat(user, "You cut [src] free from the floor.")
+					disconnect_from_network()
 		return
 
 	if(istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/modular_computer))

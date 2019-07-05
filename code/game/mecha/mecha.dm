@@ -801,8 +801,7 @@
 		return
 
 	else if(isWelder(W) && user.a_intent != I_HURT)
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.remove_fuel(0,user))
+		if (W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			if (hasInternalDamage(MECHA_INT_TANK_BREACH))
 				clearInternalDamage(MECHA_INT_TANK_BREACH)
 				to_chat(user, "<span class='notice'>You repair the damaged gas tank.</span>")
