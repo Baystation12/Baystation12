@@ -15,6 +15,10 @@
 // (access_surgery) allows access to the surgery room.
 // (access_research) allows access to the research wing.
 // (access_armory) allows access to the armory and the chief security officer's private quarters.
+				///////////////////ERT ACCESS BELOW///////////////////
+// (access_ai_upload) allows access to the USM valor and its various rooms, components, computers, etc. a universal EDF access rank.
+// (access_tcomsat) allows access to the Deliverance and the various unitologist cult related access requiring areas.
+// (access_teleporter) allows access to the Kellion and the various components within.
 
 
 #define ACCESS_REGION_NONE -1
