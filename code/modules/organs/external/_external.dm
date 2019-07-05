@@ -1387,6 +1387,8 @@ obj/item/organ/external/proc/remove_clamps()
 			var/list/bits = list()
 			for(var/obj/item/organ/internal/organ in internal_organs)
 				bits += organ.get_visible_state()
+			for(var/obj/item/weapon/implant in implants)
+				bits += implant.name
 			if(bits.len)
 				wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
@@ -1421,10 +1423,11 @@ obj/item/organ/external/proc/remove_clamps()
 		var/unknown_body = 0
 		for(var/I in implants)
 			var/obj/item/weapon/implant/imp = I
-			if(istype(imp) && imp.known)
-				. += "[capitalize(imp.name)] implanted"
-			else
-				unknown_body++
+			if (!imp.hidden)
+				if(istype(imp) && imp.known)
+					. += "[capitalize(imp.name)] implanted"
+				else
+					unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
 	for(var/obj/item/organ/internal/augment/aug in internal_organs)
