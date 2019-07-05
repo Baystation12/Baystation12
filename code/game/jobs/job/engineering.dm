@@ -11,8 +11,8 @@
 	ideal_character_age = 45
 	minimal_player_age = 14
 
-	access = list(access_heads, access_engine, access_tech_storage, access_maint_tunnels, 
-					access_emergency_storage, access_external_airlocks)
+	access = list(access_heads, access_engine, access_maint_tunnels, access_emergency_storage, 
+					access_external_airlocks)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/ds13chiefofengines
 
 /datum/job/ds13expendableengineer
@@ -26,8 +26,7 @@
 	ideal_character_age = 30
 	minimal_player_age = 7
 
-	access = list(access_engine, access_tech_storage, access_maint_tunnels, 
-				  access_emergency_storage, access_external_airlocks)
+	access = list(access_engine, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/ds13expendableengineer
 
 
