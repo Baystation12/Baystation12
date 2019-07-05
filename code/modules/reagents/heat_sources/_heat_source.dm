@@ -159,7 +159,7 @@
 	popup.open()
 
 /obj/machinery/reagent_temperature/CanUseTopic(var/mob/user, var/state, var/href_list)
-	if(href_list["remove_container"])
+	if(href_list && href_list["remove_container"])
 		. = ..(user, GLOB.physical_state, href_list)
 		if(. == STATUS_CLOSE)
 			to_chat(user, SPAN_WARNING("You are too far away."))
