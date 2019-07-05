@@ -73,7 +73,7 @@
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/quarters)
 "an" = (
-/obj/machinery/engine/ion{
+/obj/machinery/ion_engine{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -718,7 +718,7 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d2)
 "bS" = (
-/obj/machinery/engine/ion{
+/obj/machinery/ion_engine{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -2657,7 +2657,7 @@
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "Fe" = (
-/obj/machinery/engine/ion{
+/obj/machinery/ion_engine{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
