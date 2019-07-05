@@ -85,7 +85,7 @@
 				src.shot_number = 0
 				src.fire_delay = get_initial_fire_delay()
 				log_and_message_admins("turned on \the [src]")
-				investigate_log("turned <font color='green'>on</font> by [user.key]","singulo")
+				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user || usr)]","singulo")
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>The controls are locked!</span>")
