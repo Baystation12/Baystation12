@@ -9332,7 +9332,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
 "tN" = (
-/obj/structure/bed/pew/left/mahogany,
+/obj/structure/bed/chair/pew/left/mahogany,
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 4
@@ -10782,7 +10782,7 @@
 	icon_state = "chapel";
 	dir = 1
 	},
-/obj/structure/bed/pew/mahogany,
+/obj/structure/bed/chair/pew/mahogany,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "xt" = (
@@ -10790,7 +10790,7 @@
 	icon_state = "chapel";
 	dir = 4
 	},
-/obj/structure/bed/pew/left/mahogany,
+/obj/structure/bed/chair/pew/left/mahogany,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "xu" = (
@@ -11281,12 +11281,12 @@
 	icon_state = "chapel";
 	dir = 8
 	},
-/obj/structure/bed/pew/mahogany,
+/obj/structure/bed/chair/pew/mahogany,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "yw" = (
 /obj/effect/floor_decal/chapel,
-/obj/structure/bed/pew/left/mahogany,
+/obj/structure/bed/chair/pew/left/mahogany,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "yz" = (
@@ -11648,15 +11648,15 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
-/obj/structure/bed/pew/mahogany,
+/obj/structure/bed/chair/pew/mahogany,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "zs" = (
-/obj/structure/bed/pew/left/mahogany,
+/obj/structure/bed/chair/pew/left/mahogany,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "zu" = (
-/obj/structure/bed/pew/mahogany,
+/obj/structure/bed/chair/pew/mahogany,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "zx" = (

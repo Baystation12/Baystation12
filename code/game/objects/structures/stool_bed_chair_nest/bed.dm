@@ -182,29 +182,6 @@
 /obj/structure/bed/padded/New(var/newloc)
 	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
 
-/obj/structure/bed/pew
-	name = "pew"
-	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
-	icon_state = "pew"
-	base_icon = "pew"
-	color = WOOD_COLOR_GENERIC
-	var/material/pew_material = MATERIAL_WOOD
-
-/obj/structure/bed/pew/left
-	icon_state = "pew_left"
-	base_icon = "pew_left"
-
-/obj/structure/bed/pew/New(var/newloc)
-	..(newloc, pew_material)
-
-/obj/structure/bed/pew/mahogany
-	color = WOOD_COLOR_RICH
-	pew_material = MATERIAL_MAHOGANY
-
-/obj/structure/bed/pew/left/mahogany
-	color = WOOD_COLOR_RICH
-	pew_material = MATERIAL_MAHOGANY
-
 /*
  * Roller beds
  */
