@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "If a machine is hackable, you'll now only get shown the wires panel; to see the usual interface close the hacking hatch with a screwdriver again."
