@@ -104,6 +104,7 @@
 	if(!emagged)
 		to_chat(user, "<span class='danger'>You short out the turret controls' access analysis module.</span>")
 		emagged = 1
+		req_access.Cut()
 		locked = 0
 		ailock = 0
 		return 1

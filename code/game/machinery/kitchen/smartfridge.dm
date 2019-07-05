@@ -274,6 +274,7 @@
 	if(!emagged)
 		emagged = 1
 		locked = -1
+		req_access.Cut()
 		to_chat(user, "You short out the product lock on [src].")
 		return 1
 
@@ -377,10 +378,8 @@
 *   Secure SmartFridges
 *************************/
 
-/obj/machinery/smartfridge/secure/Topic(href, href_list)
-	if(stat & (NOPOWER|BROKEN)) return 0
-	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
-		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"] && scan_id)
-			to_chat(usr, "<span class='warning'>Access denied.</span>")
-			return 0
+/obj/machinery/smartfridge/secure/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	if(!allowed(user) && !emagged && locked != -1 && href_list && href_list["vend"] && scan_id)
+		to_chat(user, "<span class='warning'>Access denied.</span>")
+		return STATUS_CLOSE
 	return ..()

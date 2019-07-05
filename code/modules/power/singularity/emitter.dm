@@ -225,6 +225,7 @@
 	if(!emagged)
 		locked = 0
 		emagged = 1
+		req_access.Cut()
 		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
 		return 1
 
