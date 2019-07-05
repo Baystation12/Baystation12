@@ -1,5 +1,6 @@
 // FOR THE PURPOSES OF THE DEAD SPACE 13 ACCESS STUFF, THESE ARE CURRENTLY USED ACCESS VARIABLES AND WHERE THEY SHOULD BE USED:
 // (access_heads) allows access to the bridge.
+// (access_armory) allows access to the armory and the chief security officer's private quarters.
 // (access_security) allows access to the security offices. when combined with access_mining_station, allows access to PSEC HQ on the colony.
 // (access_maint_tunnels) allows access to all maintenance vents both on the ishimura and the colony.
 // (access_bar) allows access to the bar.
@@ -14,7 +15,6 @@
 // (access_morgue) allows access to the most dangerous room on the ship.
 // (access_surgery) allows access to the surgery room.
 // (access_research) allows access to the research wing.
-// (access_armory) allows access to the armory and the chief security officer's private quarters.
 				///////////////////ERT ACCESS BELOW///////////////////
 // (access_ai_upload) allows access to the USM valor and its various rooms, components, computers, etc. a universal EDF access rank.
 // (access_tcomsat) allows access to the Deliverance and the various unitologist cult related access requiring areas.
