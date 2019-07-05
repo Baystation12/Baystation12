@@ -5,6 +5,7 @@
 	desc = "Use this to escape from those evil Red Shirts."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 2)
 	implant_color = "r"
+	hidden = 1
 	var/activation_emote
 	var/uses
 

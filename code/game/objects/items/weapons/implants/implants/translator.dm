@@ -4,6 +4,7 @@
 	desc = "A small implant with a microphone on it."
 	icon_state = "implant_evil"
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
+	hidden = 1
 	var/list/languages = list()
 	var/learning_threshold = 20 //need to hear language spoken this many times to learn it
 	var/max_languages = 5
