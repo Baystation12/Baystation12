@@ -90,12 +90,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/crowbar
 	name = "crowbar"
-	path = /obj/item/weapon/crowbar
+	path = /obj/item/weapon/tool/crowbar
 	category = "Tools"
 
 /datum/autolathe/recipe/prybar
 	name = "pry bar"
-	path = /obj/item/weapon/crowbar/prybar
+	path = /obj/item/weapon/tool/crowbar/prybar
 	category = "Tools"
 
 /datum/autolathe/recipe/int_wirer

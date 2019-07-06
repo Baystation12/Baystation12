@@ -202,7 +202,7 @@
 /datum/surgery_step/generic/retract_skin
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
-	/obj/item/weapon/crowbar = 75,
+	/obj/item/weapon/tool/crowbar = 75,
 	/obj/item/weapon/material/knife = 50,	\
 	/obj/item/weapon/material/kitchen/utensil/fork = 50
 	)

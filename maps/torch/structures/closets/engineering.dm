@@ -28,7 +28,7 @@
 		/obj/item/device/flash,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/crowbar/brace_jack,
+		/obj/item/weapon/tool/crowbar/brace_jack,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,

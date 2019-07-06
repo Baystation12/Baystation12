@@ -16,7 +16,7 @@
 	new /obj/item/clothing/under/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/void/merc(src)
 	new /obj/item/clothing/suit/space/void/merc(src)
-	new /obj/item/weapon/crowbar/red(src)
+	new /obj/item/weapon/tool/crowbar/red(src)
 	new /obj/item/weapon/cell/high(src)
 	new /obj/item/weapon/card/id/syndicate(src)
 	new /obj/item/device/multitool(src)

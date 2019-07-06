@@ -264,7 +264,7 @@
 	if(prob(25))
 		new_item = new /obj/item/weapon/tool/wrench(loc)
 	else if(prob(25))
-		new_item = new /obj/item/weapon/crowbar(loc)
+		new_item = new /obj/item/weapon/tool/crowbar(loc)
 	else
 		new_item = new /obj/item/weapon/tool/screwdriver(loc)
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'

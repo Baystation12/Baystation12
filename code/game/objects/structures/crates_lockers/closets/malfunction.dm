@@ -10,6 +10,6 @@
 		/obj/item/clothing/mask/breath,
 		/obj/item/clothing/head/helmet/space/void,
 		/obj/item/clothing/suit/space/void,
-		/obj/item/weapon/crowbar,
+		/obj/item/weapon/tool/crowbar,
 		/obj/item/weapon/cell,
 		/obj/item/device/multitool)

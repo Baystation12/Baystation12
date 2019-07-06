@@ -40,6 +40,8 @@
 	var/powercost_mult = 1
 	var/fuelcost_mult = 1
 	var/bulk_mod = 0
+	var/removeable = TRUE //Can this mod be uninstalled when removed. Set false to make it permanant
+	var/recoverable = TRUE //If removed, do you get this mod back? Set false to make it delete when removed
 
 /obj/item/weapon/tool_upgrade/examine(var/mob/user)
 	.=..()
@@ -66,9 +68,15 @@
 	if (bulk_mod)
 		user << SPAN_WARNING("Increases tool size by [bulk_mod]")
 
+	if (!removeable)
+		user << SPAN_DANGER("This modification is permanant, it can never be removed once applied!")
+	else if (!recoverable)
+		user << SPAN_WARNING("This modification cannot be recovered or re-used. It will be destroyed if you remove it from a tool")
+
 	if (required_qualities.len)
 		user << SPAN_WARNING("Requires a tool with one of the following qualities:")
 		user << english_list(required_qualities, and_text = " or ")
+
 
 
 

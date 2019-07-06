@@ -17,7 +17,7 @@
 	eye_hazard = TRUE
 
 	use_fuel_cost = 0.1
-	max_fuel = 25
+	max_fuel = 50
 
 	toggleable = TRUE
 	create_hot_spot = TRUE
@@ -32,7 +32,7 @@
 	icon_state = "welder"
 	item_state = "welder"
 	switched_on_force = WEAPON_FORCE_PAINFULL * 0.8
-	max_fuel = 15
+	max_fuel = 25
 	switched_on_qualities = list(QUALITY_WELDING = 15, QUALITY_CAUTERIZING = 10, QUALITY_WIRE_CUTTING = 10)
 	degradation = 1.5
 
@@ -73,11 +73,12 @@
 	item_state = "adv_welder"
 	glow_color = COLOR_BLUE_LIGHT
 	switched_on_qualities = list(QUALITY_WELDING = 40, QUALITY_CAUTERIZING = 15, QUALITY_WIRE_CUTTING = 15)
-	max_fuel = 40
+	max_fuel = 70
 	switched_on_force = WEAPON_FORCE_PAINFULL*1.15 //Slightly more powerful, not much more so
 	heat = 3773
 	degradation = 0.07
 	max_upgrades = 4
+	use_fuel_cost = 0.09 //Slightly lower fuel costs
 
 /obj/item/weapon/tool/weldingtool/is_hot()
 	if (damtype == BURN)

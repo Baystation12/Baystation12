@@ -25,8 +25,13 @@
 		/obj/item/device/multitool,
 		/obj/item/device/flash,
 		/obj/item/taperoll/engineering,
-		/obj/item/weapon/crowbar/brace_jack
+		/obj/item/weapon/tool/crowbar/brace_jack,
+		/obj/random/tool = 3
 	)
+
+/obj/structure/closet/secure_closet/engineering_chief/Initialize()
+	.=..()
+	new /obj/item/stack/power_node(loc, rand(1, 6))//Chief engineer always gets a few nodes
 
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies"
@@ -43,7 +48,8 @@
 		/obj/item/clothing/gloves/insulated = 3,
 		/obj/item/weapon/storage/toolbox/electrical = 3,
 		/obj/item/weapon/module/power_control = 3,
-		/obj/item/device/multitool = 3
+		/obj/item/device/multitool = 3,
+		/obj/random/tool = 1
 	)
 
 /obj/structure/closet/secure_closet/engineering_welding
@@ -58,10 +64,11 @@
 /obj/structure/closet/secure_closet/engineering_welding/WillContain()
 	return list(
 		/obj/item/clothing/head/welding = 3,
-		/obj/item/weapon/tool/weldingtool/advanced = 3,
+		/obj/item/weapon/tool/weldingtool = 3,
 		///obj/item/weapon/weldpack = 3,
 		/obj/item/clothing/glasses/welding = 3,
-		/obj/item/weapon/tool_upgrade/augment/fuel_tank = 6
+		/obj/item/weapon/tool_upgrade/augment/fuel_tank = 1,
+		/obj/random/tool = 1
 	)
 
 /obj/structure/closet/secure_closet/engineering_personal
@@ -83,7 +90,8 @@
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,
-		/obj/item/taperoll/engineering
+		/obj/item/taperoll/engineering,
+		/obj/random/tool
 	)
 
 /obj/structure/closet/secure_closet/atmos_personal
@@ -106,5 +114,6 @@
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/atmos
+		/obj/item/taperoll/atmos,
+		/obj/random/tool
 	)

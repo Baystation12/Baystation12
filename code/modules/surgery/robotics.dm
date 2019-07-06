@@ -113,7 +113,7 @@
 /datum/surgery_step/robotics/open_hatch
 	allowed_tools = list(
 		/obj/item/weapon/retractor = 100,
-		/obj/item/weapon/crowbar = 100,
+		/obj/item/weapon/tool/crowbar = 100,
 		/obj/item/weapon/material/kitchen/utensil = 50
 	)
 
@@ -148,7 +148,7 @@
 /datum/surgery_step/robotics/close_hatch
 	allowed_tools = list(
 		/obj/item/weapon/retractor = 100,
-		/obj/item/weapon/crowbar = 100,
+		/obj/item/weapon/tool/crowbar = 100,
 		/obj/item/weapon/material/kitchen/utensil = 50
 	)
 

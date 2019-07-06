@@ -23,7 +23,7 @@
 
 /obj/structure/closet/emcloset/New()
 	..()
-
+	new /obj/random/tool(src)
 	switch (pickweight(list("small" = 50, "aid" = 25, "tank" = 10, "large" = 5, "both" = 10)))
 		if ("small")
 			new /obj/item/weapon/tank/emergency/oxygen(src)
@@ -32,6 +32,8 @@
 			new /obj/item/clothing/mask/breath(src)
 			new /obj/item/clothing/suit/space/emergency(src)
 			new /obj/item/clothing/head/helmet/space/emergency(src)
+			if (prob(70))
+				new /obj/item/weapon/tool/tape_roll(src)
 		if ("aid")
 			new /obj/item/weapon/tank/emergency/oxygen(src)
 			new /obj/item/weapon/storage/toolbox/emergency(src)
@@ -39,12 +41,14 @@
 			new /obj/item/weapon/storage/firstaid/o2(src)
 			new /obj/item/clothing/suit/space/emergency(src)
 			new /obj/item/clothing/head/helmet/space/emergency(src)
+			if (prob(70))
+				new /obj/item/weapon/tool/tape_roll(src)
 		if ("tank")
 			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
 			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
 			new /obj/item/clothing/mask/gas/half(src)
 			new /obj/item/clothing/mask/gas/half(src)
-
+			new /obj/random/tool_upgrade(src)
 		if ("large")
 			new /obj/item/weapon/tank/emergency/oxygen/double(src)
 			new /obj/item/weapon/tank/emergency/oxygen/double(src)
@@ -64,6 +68,11 @@
 			new /obj/item/clothing/head/helmet/space/emergency(src)
 			new /obj/item/clothing/head/helmet/space/emergency(src)
 			new /obj/item/device/oxycandle(src)
+			new /obj/random/tool_upgrade(src)
+			if (prob(50))
+				new /obj/item/weapon/tool/tape_roll(src)
+			if (prob(50))
+				new /obj/item/weapon/tool/tape_roll(src)
 
 /obj/structure/closet/emcloset/legacy/New()
 	new /obj/item/weapon/tank/oxygen(src)
@@ -87,7 +96,8 @@
 		/obj/item/device/flashlight,
 		/obj/item/weapon/tank/oxygen/red,
 		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/red,
+		/obj/random/tool)
 
 /obj/structure/closet/firecloset/update_icon()
 	if(!opened)
@@ -107,21 +117,30 @@
 
 /obj/structure/closet/toolcloset/New()
 	..()
+	new /obj/random/tool(src)
+	new /obj/random/tool(src)
+	new /obj/random/tool(src)
+	new /obj/random/tool_upgrade(src) //Guaranteeed toolmod
+	if(prob(50))
+		new /obj/random/tool_upgrade(src)//Good chance for another
+	if(prob(10))
+		new /obj/random/tool_upgrade(src)//Small chance for a thirdf
+
 	if(prob(40))
 		new /obj/item/clothing/suit/storage/hazardvest(src)
-	if(prob(70))
+	if(prob(50))
 		new /obj/item/device/flashlight(src)
-	if(prob(70))
+	if(prob(50))
 		new /obj/item/weapon/tool/screwdriver(src)
-	if(prob(70))
+	if(prob(50))
 		new /obj/item/weapon/tool/wrench(src)
-	if(prob(70))
+	if(prob(50))
 		new /obj/item/weapon/tool/weldingtool(src)
-	if(prob(70))
-		new /obj/item/weapon/crowbar(src)
-	if(prob(70))
+	if(prob(50))
+		new /obj/item/weapon/tool/crowbar(src)
+	if(prob(50))
 		new /obj/item/weapon/tool/wirecutters(src)
-	if(prob(70))
+	if(prob(50))
 		new /obj/item/device/t_scanner(src)
 	if(prob(20))
 		new /obj/item/weapon/storage/belt/utility(src)
@@ -156,7 +175,8 @@
 		/obj/item/clothing/head/radiation,
 		/obj/item/clothing/suit/radiation,
 		/obj/item/clothing/head/radiation,
-		/obj/item/device/geiger = 2)
+		/obj/item/device/geiger = 2,
+		/obj/random/tool)
 
 /*
  * Bombsuit closet
@@ -214,7 +234,8 @@
 		/obj/item/device/flashlight,
 		/obj/item/weapon/tank/oxygen/red,
 		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/red,
+		/obj/random/tool = 2)
 
 /*
  * First Aid

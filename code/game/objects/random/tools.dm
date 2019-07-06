@@ -15,6 +15,7 @@
 				/obj/item/weapon/tool/weldingtool/advanced = 2,
 				/obj/item/weapon/tool/omnitool = 0.5,
 				/obj/item/weapon/tool/crowbar = 12,
+				/obj/item/weapon/tool/crowbar/prybar  = 3,//Pretty uncommon
 				/obj/item/weapon/tool/crowbar/pneumatic = 2,
 				/obj/item/weapon/tool/wrench = 8,
 				/obj/item/weapon/tool/wrench/big_wrench = 2,
@@ -64,6 +65,7 @@
 				/obj/random/tool_upgrade = 25,
 				///obj/random/rig_module = 5,
 				///obj/random/mecha_equipment = 5
+				/obj/item/stack/power_node = 5
 				))
 
 
@@ -95,7 +97,8 @@
 				/obj/item/weapon/tool/saw/advanced_circular = 2,
 				/obj/item/weapon/tool/saw/chain = 1,
 				/obj/item/weapon/tool/pickaxe/diamonddrill = 2,
-				/obj/item/weapon/tool/tape_roll/fiber = 2))
+				/obj/item/weapon/tool/tape_roll/fiber = 2,
+				/obj/item/stack/power_node = 2))
 
 /obj/random/toolbox
 	name = "random toolbox"
@@ -133,11 +136,12 @@
 	/obj/item/weapon/tool_upgrade/refinement/stabilized_grip = 1,
 	/obj/item/weapon/tool_upgrade/refinement/magbit = 0.75,
 	/obj/item/weapon/tool_upgrade/refinement/ported_barrel = 0.5,
-	/obj/item/weapon/tool_upgrade/augment/cell_mount = 0.75,
+	///obj/item/weapon/tool_upgrade/augment/cell_mount = 0.75,//Removed because this codebase only has one cell size
 	/obj/item/weapon/tool_upgrade/augment/fuel_tank = 1,
 	/obj/item/weapon/tool_upgrade/augment/expansion = 0.25,
 	/obj/item/weapon/tool_upgrade/augment/spikes = 1,
-	/obj/item/weapon/tool_upgrade/augment/dampener = 0.5))
+	/obj/item/weapon/tool_upgrade/augment/dampener = 0.5,
+	/obj/item/stack/power_node = 1))
 
 
 //A fancier subset of the most desireable upgrades
@@ -151,4 +155,5 @@
 	/obj/item/weapon/tool_upgrade/refinement/laserguide = 1,
 	/obj/item/weapon/tool_upgrade/refinement/stabilized_grip = 1,
 	/obj/item/weapon/tool_upgrade/augment/expansion = 1,
-	/obj/item/weapon/tool_upgrade/augment/dampener = 0.5))
+	/obj/item/weapon/tool_upgrade/augment/dampener = 0.5,
+	/obj/item/stack/power_node = 1))

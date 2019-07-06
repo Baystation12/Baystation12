@@ -45,7 +45,7 @@
 	/obj/item/weapon/material/knife/butch,
 	/obj/item/weapon/caution,
 	/obj/item/weapon/caution/cone,
-	/obj/item/weapon/crowbar,
+	/obj/item/weapon/tool/crowbar,
 	/obj/item/weapon/clipboard,
 	/obj/item/weapon/cell,
 	/obj/item/weapon/circular_saw,

@@ -578,9 +578,8 @@
  */
 /*
  * Crowbar
- */
 
-/obj/item/weapon/crowbar
+owbar
 	name = "crowbar"
 	desc = "A heavy crowbar of solid steel, good and solid in your hand."
 	description_info = "Crowbars have countless uses: click on floor tiles to pry them loose. Use alongside a screwdriver to install or remove windows. Force open emergency shutters, or depowered airlocks. Open the panel of an unlocked APC. Pry a computer's circuit board free. And much more!"
@@ -600,11 +599,11 @@
 	center_of_mass = "x=16;y=20"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
-/obj/item/weapon/crowbar/red
+/obj/item/weapon/tool/crowbar/red
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
 
-/obj/item/weapon/crowbar/prybar
+/obj/item/weapon/tool/crowbar/prybar
 	name = "pry bar"
 	desc = "A steel bar with a wedge. It comes in a variety of configurations - collect them all."
 	icon_state = "prybar"
@@ -615,10 +614,10 @@
 	w_class = ITEM_SIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
-/obj/item/weapon/crowbar/prybar/Initialize()
+/obj/item/weapon/tool/crowbar/prybar/Initialize()
 	icon_state = "prybar[pick("","_red","_green","_aubergine","_blue")]"
 	. = ..()
-
+*/
 /*
  * Combitool
  */

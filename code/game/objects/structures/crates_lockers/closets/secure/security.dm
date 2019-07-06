@@ -26,6 +26,7 @@
 		/obj/item/clothing/under/dress/dress_cap,
 		/obj/item/clothing/head/caphat/formal,
 		/obj/item/clothing/under/captainformal,
+		/obj/random/tool = 3
 	)
 
 /obj/structure/closet/secure_closet/hop
@@ -141,7 +142,8 @@
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/weapon/storage/box/holobadge,
 		/obj/item/clothing/head/beret/sec/corporate/warden,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		/obj/random/tool
 	)
 
 /obj/structure/closet/secure_closet/security
@@ -173,6 +175,7 @@
 		/obj/item/clothing/under/rank/security/corp,
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/device/holowarrant,
+		/obj/random/tool
 	)
 
 /obj/structure/closet/secure_closet/security/cargo/WillContain()
@@ -228,7 +231,8 @@
 		/obj/item/clothing/accessory/storage/holster/armpit,
 		/obj/item/weapon/reagent_containers/food/drinks/flask/detflask,
 		/obj/item/weapon/storage/briefcase/crimekit,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		/obj/random/tool
 	)
 
 /obj/structure/closet/secure_closet/injection

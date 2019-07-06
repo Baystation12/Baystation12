@@ -109,7 +109,7 @@
 							"desc"="External armor is wrenched."),
 					//2
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
 					 list("key"=/obj/item/stack/material/plasteel,
@@ -121,7 +121,7 @@
 					 		"desc"="Internal armor is wrenched"),
 					 //5
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
 					 list("key"=/obj/item/stack/material/steel,
@@ -129,7 +129,7 @@
 					 		"desc"="Peripherals control module is secured"),
 					 //7
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Peripherals control module is installed"),
 					 //8
 					 list("key"=/obj/item/weapon/circuitboard/mecha/ripley/peripherals,
@@ -137,7 +137,7 @@
 					 		"desc"="Central control module is secured"),
 					 //9
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Central control module is installed"),
 					 //10
 					 list("key"=/obj/item/weapon/circuitboard/mecha/ripley/main,
@@ -319,7 +319,7 @@
 							"desc"="External armor is wrenched."),
 					 //2
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
 					 list("key"=/obj/item/mecha_parts/part/gygax_armour,
@@ -331,7 +331,7 @@
 					 		"desc"="Internal armor is wrenched"),
 					 //5
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
 					 list("key"=/obj/item/stack/material/steel,
@@ -339,7 +339,7 @@
 					 		"desc"="Advanced capacitor is secured"),
 					 //7
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Advanced capacitor is installed"),
 					 //8
 					 list("key"=/obj/item/weapon/stock_parts/capacitor/adv,
@@ -347,7 +347,7 @@
 					 		"desc"="Advanced scanner module is secured"),
 					 //9
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Advanced scanner module is installed"),
 					 //10
 					 list("key"=/obj/item/weapon/stock_parts/scanning_module/adv,
@@ -355,7 +355,7 @@
 					 		"desc"="Targeting module is secured"),
 					 //11
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Targeting module is installed"),
 					 //12
 					 list("key"=/obj/item/weapon/circuitboard/mecha/gygax/targeting,
@@ -363,7 +363,7 @@
 					 		"desc"="Peripherals control module is secured"),
 					 //13
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Peripherals control module is installed"),
 					 //14
 					 list("key"=/obj/item/weapon/circuitboard/mecha/gygax/peripherals,
@@ -371,7 +371,7 @@
 					 		"desc"="Central control module is secured"),
 					 //15
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Central control module is installed"),
 					 //16
 					 list("key"=/obj/item/weapon/circuitboard/mecha/gygax/main,
@@ -599,11 +599,11 @@
 							"desc"="External armor is wrenched."),
 					//2
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
 					 list("key"=/obj/item/stack/material/plasteel,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="External armor is being installed."),
 					 //4
 					 list("key"=/obj/item/stack/material/plasteel,
@@ -615,7 +615,7 @@
 					 		"desc"="Internal armor is wrenched"),
 					 //6
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Internal armor is installed"),
 
 					 //7
@@ -624,7 +624,7 @@
 					 		"desc"="Peripherals control module is secured"),
 					 //8
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Peripherals control module is installed"),
 					 //9
 					 list("key"=/obj/item/weapon/circuitboard/mecha/ripley/peripherals,
@@ -632,7 +632,7 @@
 					 		"desc"="Central control module is secured"),
 					 //10
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Central control module is installed"),
 					 //11
 					 list("key"=/obj/item/weapon/circuitboard/mecha/ripley/main,
@@ -821,7 +821,7 @@
 							"desc"="External armor is wrenched."),
 					 //2
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
 					 list("key"=/obj/item/mecha_parts/part/durand_armour,
@@ -833,7 +833,7 @@
 					 		"desc"="Internal armor is wrenched"),
 					 //5
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
 					 list("key"=/obj/item/stack/material/steel,
@@ -841,7 +841,7 @@
 					 		"desc"="Advanced capacitor is secured"),
 					 //7
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Advanced capacitor is installed"),
 					 //8
 					 list("key"=/obj/item/weapon/stock_parts/capacitor/adv,
@@ -849,7 +849,7 @@
 					 		"desc"="Advanced scanner module is secured"),
 					 //9
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Advanced scanner module is installed"),
 					 //10
 					 list("key"=/obj/item/weapon/stock_parts/scanning_module/adv,
@@ -857,7 +857,7 @@
 					 		"desc"="Targeting module is secured"),
 					 //11
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Targeting module is installed"),
 					 //12
 					 list("key"=/obj/item/weapon/circuitboard/mecha/durand/targeting,
@@ -865,7 +865,7 @@
 					 		"desc"="Peripherals control module is secured"),
 					 //13
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Peripherals control module is installed"),
 					 //14
 					 list("key"=/obj/item/weapon/circuitboard/mecha/durand/peripherals,
@@ -873,7 +873,7 @@
 					 		"desc"="Central control module is secured"),
 					 //15
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Central control module is installed"),
 					 //16
 					 list("key"=/obj/item/weapon/circuitboard/mecha/durand/main,
@@ -1125,7 +1125,7 @@
 							"desc"="External armor is wrenched."),
 					//2
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="External armor is installed."),
 					 //3
 					 list("key"=/obj/item/stack/material/plasteel,
@@ -1137,7 +1137,7 @@
 					 		"desc"="Internal armor is wrenched"),
 					 //5
 					 list("key"=/obj/item/weapon/tool/wrench,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Internal armor is installed"),
 					 //6
 					 list("key"=/obj/item/stack/material/steel,
@@ -1145,7 +1145,7 @@
 					 		"desc"="Peripherals control module is secured"),
 					 //7
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Peripherals control module is installed"),
 					 //8
 					 list("key"=/obj/item/weapon/circuitboard/mecha/odysseus/peripherals,
@@ -1153,7 +1153,7 @@
 					 		"desc"="Central control module is secured"),
 					 //9
 					 list("key"=/obj/item/weapon/tool/screwdriver,
-					 		"backkey"=/obj/item/weapon/crowbar,
+					 		"backkey"=/obj/item/weapon/tool/crowbar,
 					 		"desc"="Central control module is installed"),
 					 //10
 					 list("key"=/obj/item/weapon/circuitboard/mecha/odysseus/main,

@@ -82,6 +82,7 @@
 	prefix = "red"
 	workspeed = 0.20
 	precision = -10
+	recoverable = FALSE //What are you gonna do, scrape it off and glue the paint flakes onto something else?
 
 /obj/item/weapon/tool_upgrade/productivity/red_paint/apply_values()
 	if (..())
@@ -96,6 +97,8 @@
 	workspeed = 0.15
 	precision = 5
 	force_mult = 1.15
+	recoverable = FALSE
+	removeable = FALSE
 
 
 /obj/item/weapon/tool_upgrade/productivity/diamond_blade
@@ -209,7 +212,9 @@
 // 		AUGMENTS: MISCELLANEOUS AND UTILITY
 //------------------------------------------------
 
+//DISABLED BECAUSE DS13 DOES NOT SUPPORT VARYING CELL SIZES
 //Allows the tool to use a cell one size category larger than it currently uses. Small to medium, medium to large, etc
+/*
 /obj/item/weapon/tool_upgrade/augment/cell_mount
 	name = "heavy cell mount"
 	icon_state = "cell_mount"
@@ -240,7 +245,7 @@
 		holder.suitable_cell = /obj/item/weapon/cell
 		prefix = "medium-cell"
 	..()
-
+*/
 
 
 

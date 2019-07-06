@@ -51,6 +51,9 @@
 	var/silenced = FALSE //If true the tool makes far less noise when used
 	var/list/prefixes = list()
 
+	//Mods that come already applied on a tool
+	var/list/preinstalled_mods = list()
+
 /******************************
 	/* Core Procs */
 *******************************/
@@ -70,6 +73,13 @@
 
 	update_icon()
 	return
+
+/obj/item/weapon/tool/Initialize()
+	..()
+	for(var/modtype in preinstalled_mods)
+		var/obj/item/weapon/tool_upgrade/TU = new modtype(src)
+		TU.apply(src)
+		TU.removeable = FALSE //Preinstalled mods are permanant
 
 //Fuel and cell spawn
 /obj/item/weapon/tool/Created()
@@ -120,6 +130,9 @@
 	//Using a laser guided stabilised screwdriver is recommended. Precision mods will make this easier
 	if (upgrades.len && C.has_quality(QUALITY_SCREW_DRIVING))
 		var/list/possibles = upgrades.Copy()
+		for (var/obj/item/weapon/tool_upgrade/TU in possibles)
+			if (!TU.removeable)
+				possibles.Remove(TU) //Some mods cannot be removed
 		possibles += "Cancel"
 		var/obj/item/weapon/tool_upgrade/toremove = input("Which upgrade would you like to try to remove? The upgrade will probably be destroyed in the process","Removing Upgrades") in possibles
 		if (toremove == "Cancel")
@@ -131,6 +144,8 @@
 			upgrades -= toremove
 			toremove.forceMove(get_turf(src))
 			toremove.holder = null
+			if (!toremove.recoverable)
+				qdel(toremove) //Some upgrades are always lost upon removal
 			refresh_upgrades()
 			return 1
 		else

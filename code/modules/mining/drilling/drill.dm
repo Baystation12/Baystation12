@@ -377,7 +377,7 @@
 	src.set_dir(turn(src.dir, 90))
 	return 1
 
-/obj/machinery/mining/brace/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
+/obj/machinery/mining/brace/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/tool/crowbar/C)
 	if(connected)
 		disconnect()
 	..()

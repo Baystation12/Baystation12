@@ -1,6 +1,6 @@
 /obj/item/weapon/tool/tape_roll
 	name = "duct tape"
-	desc = "The technomancer's eternal friend. Fixes just about anything, for a while at least."
+	desc = "The astronaut's eternal friend. Fixes just about anything, for a while at least."
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
@@ -8,7 +8,7 @@
 	matter = list(MATERIAL_PLASTIC = 3)
 	worksound = WORKSOUND_TAPE
 	use_stock_cost = 0.15
-	max_stock = 100
+	max_stock = 80
 	degradation = 0 //its consumable anyway
 	item_flags = ITEM_FLAG_NO_BLUDGEON //Its not a weapon
 	max_upgrades = 0 //These are consumable, so no wasting upgrades on them
