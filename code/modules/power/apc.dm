@@ -187,6 +187,9 @@
 		src.update()
 	power_change()
 
+	if(!locked)
+		req_access.Cut()
+
 /obj/machinery/power/apc/Destroy()
 	src.update()
 	area.apc = null
