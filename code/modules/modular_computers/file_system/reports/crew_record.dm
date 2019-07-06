@@ -196,6 +196,7 @@ FIELD_LIST_EDIT("Status", status, GLOB.physical_statuses, null, access_medical)
 FIELD_SHORT("Species",species, null, access_change_ids)
 FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
 FIELD_LIST("Rank", rank, record_ranks(), null, access_change_ids)
+FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
 
 FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
@@ -203,7 +204,6 @@ FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
 FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
 FIELD_LONG("Known Implants", implants, access_medical, access_medical)
-FIELD_SHORT("Religion", religion, access_medical, access_medical)
 
 // SECURITY RECORDS
 FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security, access_security)
