@@ -4,7 +4,7 @@ GLOBAL_DATUM_INIT(hunters, /datum/antagonist/hunter, new)
 	id = MODE_HUNTER
 	role_text = "Hunter"
 	role_text_plural = "Hunters"
-	flags = ANTAG_HAS_LEADER | ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT
+	flags = ANTAG_HAS_LEADER | ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT
 	leader_welcome_text = "You are a gyne of the Ascent, and command a brood of alates. Your task is to \
 	take control of this sector so that you may found a new fortress-nest. Identify and capture local resources, \
 	and remove anything that might threaten your progeny."

@@ -7,7 +7,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	antag_indicator = "hudraider"
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	antaghud_indicator = "hudraider"
 
 	hard_cap = 6

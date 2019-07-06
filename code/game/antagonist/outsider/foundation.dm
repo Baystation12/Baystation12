@@ -16,7 +16,7 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to Foundation Agents.</b>"
 
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_SET_APPEARANCE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudfoundation"
 	landmark_id = "Response Team"
 	hard_cap = 3
