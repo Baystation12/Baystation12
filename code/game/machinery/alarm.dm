@@ -163,6 +163,9 @@
 		elect_master()
 	update_icon()
 
+	if(!locked)
+		req_access.Cut()
+
 /obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return
