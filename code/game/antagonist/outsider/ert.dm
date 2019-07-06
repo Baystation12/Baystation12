@@ -15,7 +15,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	landmark_id = "Response Team"
 	id_type = /obj/item/weapon/card/id/centcom/ERT
 
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 	antaghud_indicator = "hudloyalist"
 
 	hard_cap = 5
