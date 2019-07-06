@@ -8,7 +8,13 @@
 	suffixes = list("skrellscoutship/skrellscoutship-1.dmm", "skrellscoutship/skrellscoutship-2.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/skrellscoutship, /datum/shuttle/autodock/overmap/skrellscoutshuttle)
-	
+	apc_test_exempt_areas = list(
+		/area/ship/skrellscoutshuttle =                NO_SCRUBBER,
+		/area/ship/skrellscoutship/crew/toilets =      NO_SCRUBBER|NO_VENT,
+		/area/ship/skrellscoutship/maintenance/power = NO_SCRUBBER,
+		/area/ship/skrellscoutship/solars =            NO_SCRUBBER|NO_VENT|NO_APC
+	)
+
 /obj/effect/overmap/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
@@ -166,3 +172,18 @@
 /datum/mil_rank/skrell_fleet
 	name = "NULL"
 	
+/obj/machinery/power/apc/skrell
+	req_access = list(access_skrellscoutship)
+
+/obj/machinery/power/smes/buildable/preset/skrell
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
+		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2)
+	_input_maxed = TRUE
+	_output_maxed = TRUE
+	_input_on = TRUE
+	_output_on = TRUE
+	_fully_charged = TRUE
+
+/obj/machinery/vending/medical/skrell
+	req_access = list(access_skrellscoutship)

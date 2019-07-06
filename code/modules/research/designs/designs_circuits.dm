@@ -795,3 +795,11 @@
 	req_tech = list(TECH_DATA = 4, TECH_BIO = 3)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/aicore
 	sort_string = "XAAAA"
+
+/datum/design/circuit/ionengine
+	name = "ion propulsion system"
+	id = "ionengine"
+	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
+	materials = list(MATERIAL_GOLD = 250, MATERIAL_DIAMOND = 250, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 1000, MATERIAL_ALUMINIUM = 1000)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/engine/ion
+	sort_string = "XAAAB"
