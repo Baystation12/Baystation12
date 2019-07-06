@@ -55,6 +55,8 @@
 		use(1)
 
 	M.updatehealth()
+
+
 /obj/item/stack/medical/bruise_pack
 	name = "roll of gauze"
 	singular_name = "gauze length"
@@ -64,6 +66,15 @@
 	animal_heal = 5
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	amount = 10
+
+
+/obj/item/stack/medical/bruise_pack/handmade
+	name = "makeshift bandage"
+	singular_name = "non sterile bandage"
+	desc = "Parts of clothes that can be wrapped around bloody stumps."
+	icon_state = "hm_brutepack"
+	amount = 3
+	animal_heal = 2
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())

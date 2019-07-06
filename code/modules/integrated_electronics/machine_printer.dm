@@ -35,7 +35,7 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 /obj/machinery/integrated_circuit_printer/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
-		if(stack.material.name == DEFAULT_WALL_MATERIAL)
+		if(stack.material.name == MATERIAL_STEEL)
 			var/num = min(maxMetal - metal, stack.amount)
 			if(do_after(usr, 16, src))
 				if(stack.use(num))

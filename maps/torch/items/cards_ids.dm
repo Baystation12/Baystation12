@@ -9,20 +9,20 @@
 
 /obj/item/weapon/card/id/torch/silver
 	desc = "A silver identification card belonging to heads of staff."
-	icon_state = "silver"
+	icon_state = MATERIAL_SILVER
 	item_state = "silver_id"
 	job_access_type = /datum/job/hop
 
 /obj/item/weapon/card/id/torch/gold
 	desc = "A golden identification card belonging to the Commanding Officer."
-	icon_state = "gold"
+	icon_state = MATERIAL_GOLD
 	item_state = "gold_id"
 	job_access_type = /datum/job/captain
 
 /obj/item/weapon/card/id/torch/captains_spare
 	name = "commanding officer's spare ID"
 	desc = "The skipper's spare ID."
-	icon_state = "gold"
+	icon_state = MATERIAL_GOLD
 	item_state = "gold_id"
 	registered_name = "Commanding Officer"
 	assignment = "Commanding Officer"

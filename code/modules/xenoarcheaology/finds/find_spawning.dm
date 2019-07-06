@@ -28,20 +28,20 @@
 		M.set_material("aliumium")
 		source_material = "alien alloy"
 	else
-		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
+		source_material = pick("cordite","quadrinium",MATERIAL_STEEL,MATERIAL_TITANIUM,"aluminium","ferritic-alloy",MATERIAL_PLASTEEL,"duranium")
 
 	var/decorations = ""
 	if(apply_material_decorations)
-		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
+		source_material = pick("cordite","quadrinium",MATERIAL_STEEL,MATERIAL_TITANIUM,"aluminium","ferritic-alloy",MATERIAL_PLASTEEL,"duranium")
 		desc = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of [source_material], all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality."
 
 		var/list/descriptors = list()
 		if(prob(30))
 			descriptors.Add("is encrusted with [pick("","synthetic ","multi-faceted ","uncut ","sparkling ") + pick("rubies","emeralds","diamonds","opals","lapiz lazuli")]")
 		if(prob(30))
-			descriptors.Add("is studded with [pick("gold","silver","aluminium","titanium")]")
+			descriptors.Add("is studded with [pick(MATERIAL_GOLD,MATERIAL_SILVER,"aluminium",MATERIAL_TITANIUM)]")
 		if(prob(30))
-			descriptors.Add("is encircled with bands of [pick("quadrinium","cordite","ferritic-alloy","plasteel","duranium")]")
+			descriptors.Add("is encircled with bands of [pick("quadrinium","cordite","ferritic-alloy",MATERIAL_PLASTEEL,"duranium")]")
 		if(prob(30))
 			descriptors.Add("menaces with spikes of [pick("solid phoron","uranium","white pearl","black steel")]")
 		if(descriptors.len > 0)
@@ -290,7 +290,7 @@
 	return new_item
 
 /obj/item/weapon/archaeological_find/crystal
-	item_type = "crystal"
+	item_type = MATERIAL_CRYSTAL
 	icon_state = "Green lump"
 	find_type = ARCHAEO_CRYSTAL
 	apply_prefix = 0

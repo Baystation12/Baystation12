@@ -286,7 +286,7 @@
 	activators = list("open rift")
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
-	matter = list(DEFAULT_WALL_MATERIAL = 10000)
+	matter = list(MATERIAL_STEEL = 10000)
 
 	dist_check = /decl/dist_check/omni
 

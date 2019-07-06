@@ -4,7 +4,7 @@
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "setup_small"
-	matter = list(DEFAULT_WALL_MATERIAL = 200)
+	matter = list(MATERIAL_STEEL = 200)
 	var/max_components = 10
 	var/max_complexity = 40
 	var/opened = 0
@@ -14,7 +14,7 @@
 	name = "electronic mechanism"
 	desc = "It's a medium sized case, for building electronics with."
 	icon_state = "setup_medium"
-	matter = list(DEFAULT_WALL_MATERIAL = 400)
+	matter = list(MATERIAL_STEEL = 400)
 	w_class = ITEM_SIZE_NORMAL
 	max_components = 20
 	max_complexity = 80
@@ -23,7 +23,7 @@
 	name = "electronic machine"
 	desc = "A large case, for building electronics with."
 	icon_state = "setup_large"
-	matter = list(DEFAULT_WALL_MATERIAL = 600)
+	matter = list(MATERIAL_STEEL = 600)
 	w_class = ITEM_SIZE_LARGE
 	max_components = 30
 	max_complexity = 120
@@ -32,7 +32,7 @@
 	name = "electronic drone"
 	desc = "A little drone fit to be controlled via electronics."
 	icon_state = "setup_drone"
-	matter = list(DEFAULT_WALL_MATERIAL = 600)
+	matter = list(MATERIAL_STEEL = 600)
 	w_class = ITEM_SIZE_NORMAL
 	max_components = 25
 	max_complexity = 100

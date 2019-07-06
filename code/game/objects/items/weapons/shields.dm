@@ -61,10 +61,10 @@
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_MATERIAL = 2)
-	matter = list("glass" = 7500, DEFAULT_WALL_MATERIAL = 1000)
+	matter = list(MATERIAL_GLASS = 7500, MATERIAL_STEEL = 1000)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
-	var/max_block = 10
+	var/max_block = 20
 	var/can_block_lasers = FALSE
 
 /obj/item/weapon/shield/riot/handle_shield(mob/user)
@@ -99,7 +99,7 @@
 	throwforce = 7.0
 	throw_range = 3
 	w_class = ITEM_SIZE_HUGE
-	matter = list("plasteel" = 8500)
+	matter = list(MATERIAL_PLASTEEL = 8500)
 	max_block = 35
 	can_block_lasers = TRUE
 	slowdown_general = 1.5
@@ -117,7 +117,7 @@
 	throw_range = 20
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 1000, "Wood" = 1000)
+	matter = list(MATERIAL_STEEL = 1000, "Wood" = 1000)
 	attack_verb = list("shoved", "bashed")
 
 /obj/item/weapon/shield/buckler/handle_shield(mob/user)
@@ -127,6 +127,44 @@
 /obj/item/weapon/shield/buckler/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
 	if(istype(damage_source, /obj/item/projectile/bullet))
 		return 0 //No blocking bullets, I'm afraid.
+	return base_block_chance
+
+
+
+/*
+ * Handmade shield
+ */
+
+/obj/item/weapon/shield/riot/handmade
+	name = "round handmade shield"
+	desc = "A handmade stout shield, but with a small size."
+	icon_state = "buckler"
+	throw_speed = 2
+	throw_range = 6
+	matter = list(MATERIAL_STEEL = 6)
+	base_block_chance = 35
+
+
+/obj/item/weapon/shield/riot/handmade/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
+	return base_block_chance
+
+
+
+/obj/item/weapon/shield/riot/handmade/tray
+	name = "tray shield"
+	desc = "This one is thin, but compensate it with a good size."
+	icon_state = "tray_shield"
+	throw_speed = 2
+	throw_range = 4
+	matter = list(MATERIAL_STEEL = 4)
+	base_block_chance = 35
+
+
+/obj/item/weapon/shield/riot/handmade/tray/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
+	if(istype(damage_source, /obj/item))
+		var/obj/item/I = damage_source
+		if((is_sharp(I) && damage > 10) || istype(damage_source, /obj/item/projectile/beam))
+			return 20
 	return base_block_chance
 
 /*

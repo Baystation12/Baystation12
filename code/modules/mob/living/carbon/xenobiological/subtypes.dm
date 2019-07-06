@@ -5,11 +5,11 @@
 		if("purple")
 			return list("dark purple", "dark blue", "green", "green")
 		if("metal")
-			return list("silver", "yellow", "gold", "gold")
+			return list(MATERIAL_SILVER, "yellow", MATERIAL_GOLD, MATERIAL_GOLD)
 		if("orange")
 			return list("dark purple", "yellow", "red", "red")
 		if("blue")
-			return list("dark blue", "silver", "pink", "pink")
+			return list("dark blue", MATERIAL_SILVER, "pink", "pink")
 		//Tier 3
 		if("dark blue")
 			return list("purple", "cerulean", "blue", "blue")
@@ -17,15 +17,15 @@
 			return list("purple", "sepia", "orange", "orange")
 		if("yellow")
 			return list("bluespace", "metal", "orange", "orange")
-		if("silver")
+		if(MATERIAL_SILVER)
 			return list("metal", "pyrite", "blue", "blue")
 		//Tier 4
 		if("pink")
 			return list("pink", "pink", "light pink", "light pink")
 		if("red")
 			return list("red", "red", "oil", "oil")
-		if("gold")
-			return list("gold", "gold", "adamantine", "adamantine")
+		if(MATERIAL_GOLD)
+			return list(MATERIAL_GOLD, MATERIAL_GOLD, "adamantine", "adamantine")
 		if("green")
 			return list("green", "green", "black", "black")
 		// Tier 5
@@ -53,14 +53,14 @@
 			return /obj/item/slime_extract/darkpurple
 		if("yellow")
 			return /obj/item/slime_extract/yellow
-		if("silver")
+		if(MATERIAL_SILVER)
 			return /obj/item/slime_extract/silver
 		// Tier 4
 		if("pink")
 			return /obj/item/slime_extract/pink
 		if("red")
 			return /obj/item/slime_extract/red
-		if("gold")
+		if(MATERIAL_GOLD)
 			return /obj/item/slime_extract/gold
 		if("green")
 			return /obj/item/slime_extract/green

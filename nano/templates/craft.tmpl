@@ -1,0 +1,33 @@
+<div class="item">
+	{{for data.categories}}
+		{{:helper.link(value, null, {'category' : value}, value == data.cur_category ? 'selected' : null)}}
+	{{empty}}
+		There are no known designs
+	{{/for}}
+</div>
+<br>
+<div class='itemLabel'>
+	{{for data.items}}
+		<div class='item'>
+			{{if data.cur_item}}
+				{{:helper.link(value.name, null, {'item' : value.ref}, value.name == data.cur_item.name ? 'selected' : null)}}
+			{{else}}
+				{{:helper.link(value.name, null, {'item' : value.ref}, null)}}
+			{{/if}}
+		</div>
+	{{/for}}
+</div>
+<div class='itemContent'>
+	{{if data.cur_item}}
+		<div class="itemLabelHeader">{{:data.cur_item.name}}</div>
+		{{:data.cur_item.desc}}
+		</br>
+		{{:helper.link("Build", null, {'build' : data.cur_item.ref})}}
+		{{if data.is_admin}}
+			{{:helper.link("View variables", null, {'view_vars' : data.cur_item.ref})}}
+		{{/if}}
+		<br>
+	{{else}}
+		<h2>Nothing selected</h2>
+	{{/if}}
+</div>

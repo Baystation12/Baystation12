@@ -46,7 +46,7 @@
 				if(output&4)
 					signal.data["oxygen"] = round(100*air_sample.gas["oxygen"]/total_moles,0.1)
 				if(output&8)
-					signal.data["phoron"] = round(100*air_sample.gas["phoron"]/total_moles,0.1)
+					signal.data[MATERIAL_PHORON] = round(100*air_sample.gas[MATERIAL_PHORON]/total_moles,0.1)
 				if(output&16)
 					signal.data["nitrogen"] = round(100*air_sample.gas["nitrogen"]/total_moles,0.1)
 				if(output&32)
@@ -55,7 +55,7 @@
 					signal.data["hydrogen"] = round(100*air_sample.gas["hydrogen"]/total_moles,0.1)
 			else
 				signal.data["oxygen"] = 0
-				signal.data["phoron"] = 0
+				signal.data[MATERIAL_PHORON] = 0
 				signal.data["nitrogen"] = 0
 				signal.data["carbon_dioxide"] = 0
 				signal.data["hydrogen"] = 0
@@ -128,7 +128,7 @@ obj/machinery/computer/general_air_control/Destroy()
 					sensor_part += "   <B>Pressure:</B> [data["pressure"]] kPa<BR>"
 				if(data["temperature"])
 					sensor_part += "   <B>Temperature:</B> [data["temperature"]] K<BR>"
-				if(data["oxygen"]||data["phoron"]||data["nitrogen"]||data["carbon_dioxide"]||data["hydrogen"])
+				if(data["oxygen"]||data[MATERIAL_PHORON]||data["nitrogen"]||data["carbon_dioxide"]||data["hydrogen"])
 					sensor_part += "   <B>Gas Composition :</B>"
 					if(data["oxygen"])
 						sensor_part += "[data["oxygen"]]% O2; "
@@ -138,8 +138,8 @@ obj/machinery/computer/general_air_control/Destroy()
 						sensor_part += "[data["carbon_dioxide"]]% CO2; "
 					if(data["hydrogen"])
 						sensor_part += "[data["hydrogen"]]% H2; "
-					if(data["phoron"])
-						sensor_part += "[data["phoron"]]% PH; "
+					if(data[MATERIAL_PHORON])
+						sensor_part += "[data[MATERIAL_PHORON]]% PH; "
 				sensor_part += "<HR>"
 
 			else

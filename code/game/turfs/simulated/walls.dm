@@ -33,7 +33,7 @@
 	..(newloc)
 	icon_state = "blank"
 	if(!materialtype)
-		materialtype = DEFAULT_WALL_MATERIAL
+		materialtype = MATERIAL_STEEL
 	material = get_material_by_name(materialtype)
 	if(!isnull(rmaterialtype))
 		reinf_material = get_material_by_name(rmaterialtype)

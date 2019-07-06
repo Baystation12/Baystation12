@@ -134,14 +134,14 @@
 	M.jitteriness = 0
 
 /datum/reagent/gold
-	name = "Gold"
+	name = MATERIAL_GOLD
 	description = "Gold is a dense, soft, shiny metal and the most malleable and ductile metal known."
 	taste_description = "expensive metal"
 	reagent_state = SOLID
 	color = "#f7c430"
 
 /datum/reagent/silver
-	name = "Silver"
+	name = MATERIAL_SILVER
 	description = "A soft, white, lustrous transition metal, it has the highest electrical conductivity of any element and the highest thermal conductivity of any metal."
 	taste_description = "expensive yet reasonable metal"
 	reagent_state = SOLID

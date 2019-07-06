@@ -144,7 +144,7 @@ var/global/photo_count = 0
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	matter = list(MATERIAL_STEEL = 2000)
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1

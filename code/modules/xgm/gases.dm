@@ -27,8 +27,8 @@
 	breathed_product = /datum/reagent/toxin/methyl_bromide
 
 /decl/xgm_gas/phoron
-	id = "phoron"
-	name = "Phoron"
+	id = MATERIAL_PHORON
+	name = MATERIAL_PHORON
 
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
@@ -39,7 +39,7 @@
 	//and following a N/Z ratio of 1.5, the molar mass of a monatomic gas is:
 	molar_mass = 0.405	// kg/mol
 
-	tile_overlay = "phoron"
+	tile_overlay = MATERIAL_PHORON
 	overlay_limit = 0.7
 	flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
 	breathed_product = /datum/reagent/toxin/phoron

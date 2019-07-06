@@ -97,7 +97,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 /decl/fusion_reaction/iron_iron
 	p_react = "iron"
 	s_react = "iron"
-	products = list("silver" = 1, "gold" = 1, "platinum" = 1) // Not realistic but w/e
+	products = list(MATERIAL_SILVER = 1, MATERIAL_GOLD = 1, "platinum" = 1) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
 	instability = 2
@@ -105,7 +105,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 
 /decl/fusion_reaction/phoron_hydrogen
 	p_react = "hydrogen"
-	s_react = "phoron"
+	s_react = MATERIAL_PHORON
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
@@ -115,7 +115,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 // VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/phoron_supermatter
 	p_react = "supermatter"
-	s_react = "phoron"
+	s_react = MATERIAL_PHORON
 	energy_consumption = 0
 	energy_production = 5
 	radiation = 20

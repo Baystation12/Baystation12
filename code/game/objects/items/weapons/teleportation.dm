@@ -22,7 +22,7 @@
 	throw_speed = 4
 	throw_range = 20
 	origin_tech = list(TECH_MAGNET = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 400)
+	matter = list(MATERIAL_STEEL = 400)
 
 /obj/item/weapon/locator/attack_self(mob/user as mob)
 	user.set_machine(src)
@@ -117,3 +117,6 @@ Frequency:
 				if (M.client)
 					src.attack_self(M)
 	return
+
+
+

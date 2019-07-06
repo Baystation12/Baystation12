@@ -114,7 +114,7 @@
 
 	var/obj/effect/spawner/newbomb/proto = /obj/effect/spawner/newbomb/radio/custom
 
-	var/p = input("Enter phoron amount (mol):","Phoron", initial(proto.phoron_amt)) as num|null
+	var/p = input("Enter phoron amount (mol):",MATERIAL_PHORON, initial(proto.phoron_amt)) as num|null
 	if(p == null) return
 
 	var/o = input("Enter oxygen amount (mol):","Oxygen", initial(proto.oxygen_amt)) as num|null
@@ -170,7 +170,7 @@
 	OT.master = V
 
 	PT.valve_welded = 1
-	PT.air_contents.gas["phoron"] = phoron_amt
+	PT.air_contents.gas[MATERIAL_PHORON] = phoron_amt
 	PT.air_contents.gas["carbon_dioxide"] = carbon_amt
 	PT.air_contents.total_moles = phoron_amt + carbon_amt
 	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1

@@ -20,7 +20,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	cold_protection = UPPER_TORSO|LOWER_TORSO
 	heat_protection = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 40, laser = 50, energy = 20, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/old/security
 	name = "security armor"
@@ -33,10 +33,17 @@
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "warden_jacket"
 	//item_state = "armor"
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 40, laser = 50, energy = 20, bomb = 25, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/suit/armor/vest/handmade
+	name = "handmade armor vest"
+	desc = "An armored vest of uncertain quality. Provides a good protection against physical damage, for piece of crap."
+	icon_state = "hm_armorvest"
+	item_state = "hm_armorvest"
+	armor = list(melee = 40, bullet = 35, laser = 30, energy = 15, bomb = 15, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/swat/officer
 	name = "officer jacket"
@@ -57,7 +64,7 @@
 	//item_state = "armor"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 40, laser = 50, energy = 20, bomb = 25, bio = 0, rad = 0)
 
 
 //Reactive armor

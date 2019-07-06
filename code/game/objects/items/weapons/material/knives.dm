@@ -68,7 +68,7 @@
 	sharp = 1
 	edge = 1
 	force_divisor = 0.15 // 9 when wielded with hardness 60 (steel)
-	matter = list(DEFAULT_WALL_MATERIAL = 12000)
+	matter = list(MATERIAL_STEEL = 12000)
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unbreakable = 1

@@ -119,7 +119,7 @@
 	caliber = "saw"
 	projectile_type = /obj/item/projectile/sawblade
 	health = SAWBLADE_HEALTH //The ammo versions have a health value which is carried over from the projectile if an unbroken blade is dropped
-	matter = list(DEFAULT_WALL_MATERIAL = 1000, "plasteel" = 125)
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_PLASTEEL = 125)
 
 	//An uninserted sawblade is also a modestly good weapon to swing around
 	w_class = ITEM_SIZE_NORMAL
@@ -159,7 +159,7 @@
 	icon_state = "diamondblade"
 	projectile_type = /obj/item/projectile/sawblade/diamond
 	health = DIAMONDBLADE_HEALTH
-	matter = list(DEFAULT_WALL_MATERIAL = 1000, "plasteel" = 250, "diamond" = 125)
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_PLASTEEL = 250, MATERIAL_DIAMOND = 125)
 
 
 //Dropped when a blade breaks. These are trash subtype for easy categorising and pickup
@@ -169,14 +169,14 @@
 	//icon = 'icons/obj/trash.dmi' //Just putting this here for reference, no need to duplicate it
 	icon_state = "sawblade"
 	desc = "This was once a precisely machined cutting tool. Now it is just scrap metal for recycling"
-	matter = list(DEFAULT_WALL_MATERIAL = 300, "plasteel" = 40) //The broken versions contain roughly a third of the original matter when recycled
+	matter = list(MATERIAL_STEEL = 300, MATERIAL_PLASTEEL = 40) //The broken versions contain roughly a third of the original matter when recycled
 
 
 /obj/item/trash/broken_sawblade/diamond
 	name = "shattered diamond blade"
 	icon_state = "diamondblade"
 	desc = "This glittering blade was once a durable cutting edge, it must have seen heavy use to end up like this. May still contain some valueable materials to recycle"
-	matter = list(DEFAULT_WALL_MATERIAL = 300, "plasteel" = 80, "diamond" = 40) //The broken versions contain roughly a third of the original matter when recycled
+	matter = list(MATERIAL_STEEL = 300, MATERIAL_PLASTEEL = 80, MATERIAL_DIAMOND = 40) //The broken versions contain roughly a third of the original matter when recycled
 
 //We don't need to stop the looping audio here, it will do that itself
 /obj/item/projectile/sawblade/Destroy()

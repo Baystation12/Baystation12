@@ -18,10 +18,14 @@
 			ExtinguishMob()
 		return TRUE
 
-	if(istype(buckled, /obj/effect/vine))
-		var/obj/effect/vine/V = buckled
-		spawn() V.manual_unbuckle(src)
-		return TRUE
+	//unbuckling yourself
+	if(buckled)
+		if (buckled.resist_buckle(src))
+			spawn()
+				escape_buckle()
+			return TRUE
+		else
+			return FALSE
 
 	if(..())
 		return TRUE
@@ -100,6 +104,35 @@
 	if(species.can_shred(src,1))
 		return 1
 	return ..()
+
+//Returning anything but true will make the mob unable to resist out of this buckle
+/atom/proc/resist_buckle(var/mob/living/user)
+	return TRUE
+
+/mob/living/proc/escape_buckle()
+	if(buckled)
+		buckled.user_unbuckle_mob(src)
+
+/mob/living/carbon/escape_buckle()
+	setClickCooldown(100)
+	if(!buckled) return
+
+	if(!restrained())
+		..()
+	else
+		visible_message(
+			SPAN_DANGER("[usr] attempts to unbuckle themself!"),
+			SPAN_WARNING("You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)")
+			)
+
+
+		if(do_after(usr, 2 MINUTES, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
+			if(!buckled)
+				return
+			visible_message(SPAN_DANGER("\The [usr] manages to unbuckle themself!"),
+							SPAN_NOTICE("You successfully unbuckle yourself."))
+			buckled.user_unbuckle_mob(src)
+
 
 /mob/living/carbon/escape_buckle()
 	if(src.handcuffed && istype(src.buckled, /obj/effect/energy_net))
