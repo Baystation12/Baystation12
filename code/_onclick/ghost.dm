@@ -39,8 +39,11 @@
 		var/target_turf = get_turf(A)
 		if(target_turf)
 			AltClickOn(target_turf)
-	else
-		A.attack_ghost(src)
+		return
+	if(modifiers["shift"])
+		examinate(A)
+		return
+	A.attack_ghost(src)
 
 // Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
 /atom/proc/attack_ghost(mob/observer/ghost/user as mob)
