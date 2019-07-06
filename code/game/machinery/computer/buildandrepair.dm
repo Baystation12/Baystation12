@@ -14,14 +14,7 @@
 			icon_state = "wired"
 		if(/decl/machine_construction/frame/awaiting_parts)
 			icon_state = "wired"
-			var/screen = locate(/obj/item/weapon/stock_parts/console_screen) in components
-			var/keyboard = locate(/obj/item/weapon/stock_parts/keyboard) in components
-			if(screen)
-				overlays += "comp_screen"
-			if(keyboard)
-				overlays += "keyboard"
-			else
-				overlays += "circuit"
+			overlays += "circuit"
 		else
 			icon_state = "unwired"
 

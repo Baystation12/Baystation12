@@ -40,6 +40,13 @@
 		else if(design && cannot_print)
 			return "Machine [log_info_line(machine)] had a circuitboard which could be printed, but it wasn't supposed to."
 
+// Fetches the components the machine is supposed to have to function fully. Not related to state validity.
+/decl/machine_construction/proc/get_requirements(obj/machinery/machine)
+	if(needs_board)
+		var/obj/item/weapon/stock_parts/circuitboard/board = machine.get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
+		if(board)
+			return board.req_components
+
 // There are many machines, so this is designed to catch errors.  This proc must either return TRUE or set the machine's construct_state to a valid one (or null).
 /decl/machine_construction/proc/validate_state(obj/machinery/machine)
 	if(!state_is_valid(machine))
@@ -151,17 +158,14 @@
 		machine.update_icon()
 		return
 
-	// Part modifications. First: part replacer
 	if(istype(I, /obj/item/weapon/storage/part_replacer))
 		return machine.part_replacement(user, I)
 
-	// Second: Part insertion
-	if(istype(I, /obj/item/weapon/stock_parts))
-		return machine.part_insertion(user, I)
-
-	// Finally: Part removal with wrench
 	if(isWrench(I))
 		return machine.part_removal(user)
+
+	if(istype(I))
+		return machine.part_insertion(user, I)
 
 /decl/machine_construction/default/panel_open/mechanics_info()
 	. = list()
@@ -287,11 +291,11 @@
 	if(istype(I, /obj/item/weapon/storage/part_replacer))
 		return machine.part_replacement(I, user)
 
-	if(istype(I, /obj/item/weapon/stock_parts))
-		return machine.part_insertion(user, I)
-
 	if(isWrench(I))
 		return machine.part_removal(user)
+
+	if(istype(I))
+		return machine.part_insertion(user, I)
 
 /decl/machine_construction/tcomms/panel_open/no_cable/mechanics_info()
 	. = list()
@@ -399,15 +403,6 @@
 			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You add the circuit board to \the [machine].</span>")
 			machine.circuit = I
-			machine.components = list()
-			machine.req_components = circuit.req_components.Copy()
-			for(var/A in circuit.req_components)
-				machine.req_components[A] = circuit.req_components[A]
-			machine.req_component_names = circuit.req_components.Copy()
-			for(var/A in machine.req_components)
-				var/obj/ct = A
-				machine.req_component_names[A] = initial(ct.name)
-			machine.examine(user)
 			return
 		else
 			to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
@@ -440,65 +435,20 @@
 		playsound(machine.loc, 'sound/items/Crowbar.ogg', 50, 1)
 		machine.circuit.dropInto(machine.loc)
 		machine.circuit = null
-		if(!LAZYLEN(machine.components))
-			to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
-		else
-			to_chat(user, "<span class='notice'>You remove the circuit board and other components.</span>")
-			for(var/obj/item/weapon/W in machine.components)
-				W.dropInto(machine.loc)
-		machine.req_components = null
-		machine.components = null
+		to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
 		return
 	if(isScrewdriver(I))
-		var/component_check = 1
-		for(var/R in machine.req_components)
-			if(machine.req_components[R] > 0)
-				component_check = 0
-				break
-		if(!component_check)
-			return FALSE
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/machinery/new_machine = new machine.circuit.build_path(machine.loc, machine.dir, FALSE)
 		machine.circuit.construct(new_machine)
-
 		new_machine.install_component(machine.circuit, refresh_parts = FALSE)
-		for(var/obj/O in machine.components)
-			new_machine.install_component(O, refresh_parts = FALSE)
 		new_machine.apply_component_presets()
 		new_machine.RefreshParts()
 		new_machine.construct_state.post_construct(new_machine)
 		qdel(machine)
 		return TRUE
-	if(istype(I))
-		var/success
-		for(var/thing in machine.req_components)
-			if(istype(I, thing) && (machine.req_components[thing] > 0))
-				if(isCoil(I))
-					var/obj/item/stack/cable_coil/CP = I
-					if(CP.get_amount() > 1)
-						var/camt = min(CP.amount, machine.req_components[thing]) // amount of cable to take, idealy amount required, but limited by amount provided
-						var/obj/item/stack/cable_coil/CC = CP.split(camt)
-						machine.components += CC
-						machine.req_components[thing] -= camt
-						success = TRUE
-						break
-				if(!user.unEquip(I, machine))
-					return FALSE
-				machine.components += I
-				machine.req_components[thing]--
-				success = TRUE
-				break
-		if(success)
-			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-			machine.examine(user)
-			machine.update_icon()
-		else
-			to_chat(user, "<span class='warning'>You cannot add that component to the machine!</span>")
-		return TRUE
 
 /decl/machine_construction/frame/awaiting_parts/mechanics_info()
 	. = list()
 	. += "Use a crowbar to remove the circuitboard and any parts installed."
-	. += "Insert a new part to install it."
-	. += "Examine the machine to see which parts are still needed."
-	. += "Once all needed parts are added, use a screwdriver to build the machine."
+	. += "Use a screwdriver to build the machine."

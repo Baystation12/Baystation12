@@ -86,6 +86,7 @@ Class Procs:
 	layer = STRUCTURE_LAYER // Layer under items
 
 	var/stat = 0
+	var/reason_broken = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
 	var/emagged = 0
 	var/malf_upgraded = 0
@@ -174,19 +175,23 @@ Class Procs:
 			if (prob(25))
 				qdel(src)
 
-/obj/machinery/proc/set_broken(new_state)
+/obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
 	if(stat_immune & BROKEN)
 		return FALSE
-	if(!new_state != !(stat & BROKEN)) // new state is different from old
-		stat ^= BROKEN                // so flip it
+	if(!new_state == !(reason_broken & cause))
+		return FALSE
+	reason_broken ^= cause
+
+	if(!reason_broken != !(stat & BROKEN))
+		stat ^= BROKEN
 		queue_icon_update()
 		return TRUE
 
 /obj/machinery/proc/set_noscreen(new_state)
 	if(stat_immune & NOSCREEN)
 		return FALSE
-	if(!new_state != !(stat & NOSCREEN))
-		stat ^= NOSCREEN
+	if(!new_state != !(stat & NOSCREEN))// new state is different from old
+		stat ^= NOSCREEN                // so flip it
 		return TRUE
 
 /obj/machinery/proc/set_noinput(new_state)
@@ -322,6 +327,8 @@ Class Procs:
 	for(var/thing in component_parts)
 		var/obj/item/weapon/stock_parts/part = thing
 		part.on_refresh(src)
+	var/list/missing = missing_parts()
+	set_broken(!!missing, MACHINE_BROKEN_NO_PARTS)
 
 /obj/machinery/proc/assign_uid()
 	uid = gl_uid
@@ -403,6 +410,13 @@ Class Procs:
 			to_chat(user, "It is missing any input device.")
 		if(construct_state && construct_state.mechanics_info())
 			to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
+		var/list/missing = missing_parts()
+		if(missing)
+			var/list/parts = list()
+			for(var/type in missing)
+				var/obj/item/fake_thing = type
+				parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
+			to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(var/depth)

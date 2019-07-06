@@ -286,6 +286,16 @@
 	QDEL_NULL_LIST(materials)
 	. = ..()
 
+/obj/item/weapon/stock_parts/building_material/proc/number_of_type(var/type)
+	. = 0
+	for(var/obj/item/thing in materials)
+		if(istype(thing, type))
+			if(isstack(thing))
+				var/obj/item/stack/stack = thing
+				. += stack.amount
+			else
+				.++
+
 /obj/item/weapon/stock_parts/building_material/proc/add_material(var/obj/item/new_material)
 	if(istype(new_material, /obj/item/stack))
 		var/obj/item/stack/stack = new_material

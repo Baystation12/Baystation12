@@ -12,20 +12,8 @@
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/frame/unwrenched
 	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
-	var/list/components = null
-	var/list/req_components = null
-	var/list/req_component_names = null
 	var/expected_machine_type
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
-
-/obj/machinery/constructable_frame/examine(mob/user)
-	. = ..()
-	if(. && req_components)
-		var/list/component_list = list()
-		for(var/I in req_components)
-			if(req_components[I] > 0)
-				component_list += "[num2text(req_components[I])] [req_component_names[I]]"
-		to_chat(user, "Requires [english_list(component_list)].")
 
 /obj/machinery/constructable_frame/state_transition(decl/machine_construction/new_state)
 	. = ..()

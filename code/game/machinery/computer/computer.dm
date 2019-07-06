@@ -58,6 +58,21 @@
 
 /obj/machinery/computer/on_update_icon()
 	overlays.Cut()
+	icon = initial(icon)
+	icon_state = initial(icon_state)
+
+	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
+		set_light(0)
+		icon = 'icons/obj/computer.dmi'
+		icon_state = "wired"
+		var/screen = get_component_of_type(/obj/item/weapon/stock_parts/console_screen)
+		var/keyboard = get_component_of_type(/obj/item/weapon/stock_parts/keyboard)
+		if(screen)
+			overlays += "comp_screen"
+		if(keyboard)
+			overlays += icon_keyboard ? "[icon_keyboard]_off" : "keyboard"
+		return
+
 	if(stat & NOPOWER)
 		set_light(0)
 		if(icon_keyboard)
