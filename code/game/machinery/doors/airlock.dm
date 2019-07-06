@@ -1041,7 +1041,7 @@ About the new airlock wires panel:
 
 	if(!repairing && isWelder(C) && !( src.operating > 0 ) && src.density)
 		user.visible_message("You start [welded?"unwelding":"welding"] the [src]")
-		if(C.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
+		if(C.use_tool(user, src, WORKTIME_VERY_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			if(!src.welded)
 				src.welded = 1
 			else

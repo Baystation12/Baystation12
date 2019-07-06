@@ -575,7 +575,7 @@
 	if (!isnull(switched_on_force))
 		force = switched_on_force
 	if(glow_color)
-		set_light(1, 1, 3)
+		set_light(1, 1, 3, l_color = glow_color)
 	update_icon()
 	//update_wear_icon() //Too tied into eris' inventory system, need to find a better path to do this
 
@@ -623,7 +623,7 @@
 			scost = round(scost, 1)
 		consume_stock(scost)
 
-	//Makeshift tools get worse with each use
+	//Gradual degradation
 	if (degradation)
 		unreliability += rand_between(0, degradation)
 
@@ -662,7 +662,7 @@
 
 /obj/item/weapon/tool/proc/consume_fuel(var/volume)
 	if (get_fuel() >= volume)
-		reagents.remove_reagent("fuel", volume)
+		reagents.remove_reagent(/datum/reagent/fuel, volume)
 		return TRUE
 	return FALSE
 
