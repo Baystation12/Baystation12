@@ -1061,6 +1061,10 @@
 	name = "\improper Security Processing"
 	icon_state = "security"
 
+/area/security/questioning
+	name = "\improper Security Interview Room"
+	icon_state = "security"
+
 /area/security/wing
 	name = "\improper Security Wing"
 	icon_state = "security"
