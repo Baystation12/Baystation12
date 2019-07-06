@@ -106,7 +106,7 @@
 	specific_heat = 100	// J/(mol*K)
 	molar_mass = 0.002	// kg/mol
 	flags = XGM_GAS_FUEL|XGM_GAS_FUSION_FUEL
-	burn_product = "watervapor"
+	burn_product = "water"
 	symbol_html = "H<sub>2</sub>"
 	symbol = "H2"
 
@@ -199,9 +199,10 @@
 	symbol = "Cl"
 
 /decl/xgm_gas/vapor
-	id = "watervapor"
-	name = "Water Vapor"
-
+	id = "water"
+	name = "Steam"
+	tile_overlay = "generic"
+	overlay_limit = 0.5
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.020	// kg/mol
 	breathed_product =     /datum/reagent/water
