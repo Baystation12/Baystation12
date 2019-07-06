@@ -1124,7 +1124,9 @@
 	default_run_intent = null
 	move_intent = null
 	move_intents = species.move_intents.Copy()
-	set_next_usable_move_intent()
+	set_move_intent(decls_repository.get_decl(move_intents[1]))
+	if(!istype(move_intent))
+		set_next_usable_move_intent()
 
 	if(update_lang)
 		languages.Cut()
