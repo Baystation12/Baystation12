@@ -3,7 +3,7 @@
 	desc = "A computer used to control a nearby holodeck."
 	icon_keyboard = "tech_key"
 	icon_screen = "holocontrol"
-	req_access = list(access_bridge)
+	var/lock_access = list(access_bridge)
 	var/islocked = 0
 
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
@@ -352,4 +352,4 @@
 		return 1
 
 /obj/machinery/computer/HolodeckControl/proc/cantogglelock(var/mob/user)
-	return allowed(user)
+	return has_access(lock_access, user.GetAccess())
