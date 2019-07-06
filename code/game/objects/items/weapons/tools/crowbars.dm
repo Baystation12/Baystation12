@@ -23,6 +23,11 @@
 	preinstalled_mods = list(/obj/item/weapon/tool_upgrade/productivity/red_paint)
 	max_upgrades = 4 //It gets an extra mod slot for the preinstalled red paint
 
+//This has red color baked into its sprite, so don't tint it
+/obj/item/weapon/tool/crowbar/red/refresh_upgrades()
+	.=..()
+	color = "#ffffff"
+
 /obj/item/weapon/tool/crowbar/improvised
 	name = "rebar"
 	desc = "A pair of metal rods laboriously twisted into a useful shape"

@@ -16,6 +16,7 @@
 				/obj/item/weapon/tool/omnitool = 0.5,
 				/obj/item/weapon/tool/crowbar = 12,
 				/obj/item/weapon/tool/crowbar/prybar  = 3,//Pretty uncommon
+				/obj/item/weapon/tool/crowbar/red = 1,
 				/obj/item/weapon/tool/crowbar/pneumatic = 2,
 				/obj/item/weapon/tool/wrench = 8,
 				/obj/item/weapon/tool/wrench/big_wrench = 2,
