@@ -41,6 +41,7 @@
 		req_access.Cut()
 
 /obj/machinery/button/proc/activate(mob/living/user)
+	set waitfor = FALSE
 	if(operating)
 		return
 
