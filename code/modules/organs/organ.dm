@@ -242,7 +242,8 @@ var/list/organ_cache = list()
 	CRASH("Not Implemented")
 
 /obj/item/organ/proc/heal_damage(amount)
-	damage = between(0, damage - round(amount, 0.1), max_damage)
+	if (can_recover())
+		damage = between(0, damage - round(amount, 0.1), max_damage)
 
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
