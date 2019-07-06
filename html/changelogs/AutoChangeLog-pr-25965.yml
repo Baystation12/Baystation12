@@ -1,6 +1,0 @@
-author: "Devildabeast"
-delete-after: True
-changes: 
-  - tweak: "Counselor now gets different psionic faculties by alternate title: Redaction for Counselor and Coercion for Mentalist."
-  - rscadd: "Focus has been added as an Operant Coercive ability; grab a target while target the mouth, then use the grab on them on disarm intent to cure the target of various mental ailments. Power scales by rank."
-  - tweak: "Spasm is now a Master ability rather than Operant."
