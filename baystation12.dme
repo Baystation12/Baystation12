@@ -1660,7 +1660,6 @@
 #include "code\modules\events\communications_blackout.dm"
 #include "code\modules\events\computer_damage.dm"
 #include "code\modules\events\computer_update.dm"
-#include "code\modules\events\disposals_explosion.dm"
 #include "code\modules\events\dust.dm"
 #include "code\modules\events\electrical_storm.dm"
 #include "code\modules\events\event.dm"
