@@ -292,4 +292,5 @@
 	if(!istype(loc))
 		return
 	vehicle_contain.movement_destroyed = 0
+	vehicle_contain.guns_disabled = 0
 	vehicle_contain.icon_state = initial(vehicle_contain.icon_state)
