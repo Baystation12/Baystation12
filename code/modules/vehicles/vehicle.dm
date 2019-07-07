@@ -88,19 +88,15 @@
 	else if(istype(W, /obj/item/weapon/cell) && !cell && open)
 		insert_cell(W, user)
 	else if(isWelder(W))
-		var/obj/item/weapon/weldingtool/T = W
-		if(T.welding)
-			if(health < maxhealth)
-				if(open)
-					health = min(maxhealth, health+10)
-					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-					user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
-				else
-					to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
+		if(health < maxhealth && W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			if(open)
+				health = min(maxhealth, health+10)
+				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+				user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
 			else
-				to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
+				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 		else
-			to_chat(user, "<span class='notice'>Unable to repair while [src] is off.</span>")
+			to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)

@@ -242,6 +242,9 @@
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2
 
+//Temperature at which a mob ignites, if its covered in a flammable chemical
+#define HEAT_MOBIGNITE_THRESHOLD 530
+
 //used for getting species temp values
 #define COLD_LEVEL_1 -1
 #define COLD_LEVEL_2 -2

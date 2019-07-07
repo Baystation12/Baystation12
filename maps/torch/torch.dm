@@ -96,7 +96,6 @@
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 
-	#define using_map_DATUM /datum/map/torch
 
 #elif !defined(MAP_OVERRIDE)
 

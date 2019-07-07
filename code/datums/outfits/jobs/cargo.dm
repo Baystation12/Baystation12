@@ -22,7 +22,7 @@
 	uniform = /obj/item/clothing/under/rank/miner
 	id_type = /obj/item/weapon/card/id/cargo/mining
 	pda_type = /obj/item/modular_computer/pda/science
-	backpack_contents = list(/obj/item/weapon/crowbar = 1, /obj/item/weapon/storage/ore = 1)
+	backpack_contents = list(/obj/item/weapon/tool/crowbar = 1, /obj/item/weapon/storage/ore = 1)
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/cargo/mining/New()

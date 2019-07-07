@@ -11,7 +11,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
 	/obj/item/stack/cable_coil = 75,	\
-	/obj/item/weapon/tape_roll = 50
+	/obj/item/weapon/tool/tape_roll = 50
 	)
 	can_infect = 1
 	blood_level = 1
@@ -55,7 +55,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
 	/obj/item/stack/cable_coil = 75,	\
-	/obj/item/weapon/tape_roll = 50
+	/obj/item/weapon/tool/tape_roll = 50
 	)
 	can_infect = 1
 	blood_level = 1
@@ -98,7 +98,7 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/hardsuit
 	allowed_tools = list(
-		/obj/item/weapon/weldingtool = 80,
+		/obj/item/weapon/tool/weldingtool = 80,
 		/obj/item/weapon/circular_saw = 60,
 		/obj/item/weapon/gun/energy/plasmacutter = 30
 		)
@@ -115,8 +115,8 @@
 	if(!istype(target))
 		return 0
 	if(isWelder(tool))
-		var/obj/item/weapon/weldingtool/welder = tool
-		if(!welder.isOn() || !welder.remove_fuel(1,user))
+		var/obj/item/weapon/tool/weldingtool/welder = tool
+		if(!welder.consume_fuel(1))
 			return 0
 	return (target_zone == BP_CHEST) && istype(target.back, /obj/item/weapon/rig) && !(target.back.canremove)
 

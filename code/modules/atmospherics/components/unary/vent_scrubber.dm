@@ -164,7 +164,7 @@
 	else if(scrubbing == SCRUBBER_EXCHANGE) // after sleep check so it only does an exchange if there are bad gasses that have been scrubbed
 		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)
 		power_draw += pump_gas(src, environment, air_contents, transfer_moles / 4, power_rating)
-		
+
 	if (power_draw >= 0)
 		last_power_draw = power_draw
 		use_power(power_draw)
@@ -279,37 +279,14 @@
 			qdel(src)
 		return 1
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
-			return 1
-
-		if(!WT.remove_fuel(0,user))
-			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-			return 1
-
+	if(isWelder(W))
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
-		playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-
-		if(!do_after(user, 20, src))
-			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
-			return 1
-
-		if(!src)
-			return 1
-
-		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
-			return 1
-
-		welded = !welded
-		update_icon()
-		user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
-			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
-			"You hear welding.")
+		if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			welded = !welded
+			update_icon()
+			user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
+				"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
+				"You hear welding.")
 		return 1
 
 	return ..()

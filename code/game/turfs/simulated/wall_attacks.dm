@@ -145,10 +145,9 @@
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(isWelder(W))
-			var/obj/item/weapon/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
-				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
-				playsound(src, 'sound/items/Welder.ogg', 10, 1)
+			if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+				to_chat(user, "<span class='notice'>You burn away the fungi with \the [W].</span>")
+
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return
@@ -160,8 +159,7 @@
 	//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
 	if(thermite)
 		if(isWelder(W))
-			var/obj/item/weapon/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
+			if( W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 				thermitemelt(user)
 				return
 
@@ -182,22 +180,11 @@
 
 	var/turf/T = user.loc	//get user's location for delay checks
 
-	if(damage && istype(W, /obj/item/weapon/weldingtool))
+	if(damage && isWelder(W))
 
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(!WT.isOn())
-			return
-
-		if(WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
-				take_damage(-damage)
-		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-			return
+		to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
+		if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			take_damage(-damage)
 		return
 
 	// Basic dismantling.
@@ -206,22 +193,16 @@
 		var/cut_delay = 60 - material.cut_delay
 		var/dismantle_verb
 		var/dismantle_sound
+		var/req_quality = QUALITY_WELDING
 
-		if(istype(W,/obj/item/weapon/weldingtool))
-			var/obj/item/weapon/weldingtool/WT = W
-			if(!WT.isOn())
-				return
-			if(!WT.remove_fuel(0,user))
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-				return
-			dismantle_verb = "cutting"
-			dismantle_sound = 'sound/items/Welder.ogg'
+		if(isWelder(W))
 			cut_delay *= 0.7
 		else if(istype(W,/obj/item/weapon/melee/energy/blade))
 			dismantle_sound = "sparks"
 			dismantle_verb = "slicing"
 			cut_delay *= 0.5
 		else if(istype(W,/obj/item/weapon/pickaxe))
+			req_quality = QUALITY_DIGGING
 			var/obj/item/weapon/pickaxe/P = W
 			dismantle_verb = P.drill_verb
 			dismantle_sound = P.drill_sound
@@ -236,7 +217,7 @@
 			if(cut_delay<0)
 				cut_delay = 0
 
-			if(!do_after(user,cut_delay,src))
+			if(!W.use_tool(user, src, WORKTIME_NORMAL+cut_delay, req_quality, FAILCHANCE_NORMAL))
 				return
 
 			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
@@ -248,7 +229,8 @@
 	else
 		switch(construction_stage)
 			if(6)
-				if(isWirecutter(W))
+				to_chat(user, "<span class='notice'>You begin cutting the outer grille.</span>")
+				if(isWirecutter(W) && W.use_tool(user, src, WORKTIME_VERY_SLOW, QUALITY_WIRE_CUTTING, FAILCHANCE_NORMAL))
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
 					new /obj/item/stack/rods( src )
@@ -256,10 +238,9 @@
 					update_icon()
 					return
 			if(5)
-				if(isScrewdriver(W))
+				if(isScrewdriver(W) )
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
-					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
+					if(!W.use_tool(user, src, WORKTIME_FAST, QUALITY_SCREW_DRIVING, FAILCHANCE_NORMAL) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
 					update_icon()
@@ -274,22 +255,9 @@
 						to_chat(user, "<span class='notice'>You replace the outer grille.</span>")
 						return
 			if(4)
-				var/cut_cover
-				if(istype(W,/obj/item/weapon/weldingtool))
-					var/obj/item/weapon/weldingtool/WT = W
-					if(!WT.isOn())
-						return
-					if(WT.remove_fuel(0,user))
-						cut_cover=1
-					else
-						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-						return
-				else if (istype(W, /obj/item/weapon/gun/energy/plasmacutter))
-					cut_cover = 1
-				if(cut_cover)
+				if(isWelder(W))
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
-					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 60, src) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
+					if(!W.use_tool(user, src, WORKTIME_FAST, QUALITY_WELDING, FAILCHANCE_NORMAL) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
 					update_icon()
@@ -299,7 +267,7 @@
 				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
+					if(!W.use_tool(user, src, WORKTIME_FAST, QUALITY_PRYING, FAILCHANCE_NORMAL) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
 					update_icon()
@@ -309,27 +277,16 @@
 				if(isWrench(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
-					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
+					if(!W.use_tool(user, src, WORKTIME_FAST, QUALITY_BOLT_TURNING, FAILCHANCE_NORMAL) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the bolts anchoring the support rods.</span>")
 					return
 			if(1)
-				var/cut_cover
-				if(istype(W, /obj/item/weapon/weldingtool))
-					var/obj/item/weapon/weldingtool/WT = W
-					if( WT.remove_fuel(0,user) )
-						cut_cover=1
-					else
-						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-						return
-				else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
-					cut_cover = 1
-				if(cut_cover)
+				if(isWelder(W))
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
-					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user,70,src) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
+					if(!W.use_tool(user, src, WORKTIME_FAST, QUALITY_WELDING, FAILCHANCE_NORMAL) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
 					update_icon()

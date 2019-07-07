@@ -119,6 +119,34 @@
 		else
 			return 0
 
+//The numbers on this will probably need adjusting depending on the cell charge values here
+/obj/item/weapon/cell/proc/explode()
+	var/turf/T = get_turf(src.loc)
+	/*
+	 * 1000-cell	explosion(T, -1, 0, 1, 1)
+	 * 2500-cell	explosion(T, -1, 0, 1, 1)
+	 * 10000-cell	explosion(T, -1, 1, 3, 3)
+	 * 15000-cell	explosion(T, -1, 2, 4, 4)
+	 * */
+	if (charge==0)
+		return
+	var/devastation_range = -1 //round(charge/11000)
+	var/heavy_impact_range = round(sqrt(charge)/60)
+	var/light_impact_range = round(sqrt(charge)/30)
+	var/flash_range = light_impact_range
+	if (light_impact_range==0)
+		//rigged = 0
+		//corrupt()
+		return
+	//explosion(T, 0, 1, 2, 2)
+
+	log_admin("LOG: Rigged power cell explosion, last touched by [fingerprintslast]")
+	message_admins("LOG: Rigged power cell explosion, last touched by [fingerprintslast]")
+
+	explosion(T, devastation_range, heavy_impact_range, light_impact_range, flash_range)
+
+	qdel(src)
+
 /obj/item/weapon/cell/get_cell()
 	return src //no shit Sherlock
 

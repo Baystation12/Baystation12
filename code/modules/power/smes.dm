@@ -301,17 +301,13 @@
 		return 0
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "Turn on \the [WT] first!")
-			return 0
 		if(!damage)
 			to_chat(user, "\The [src] is already fully repaired.")
-			return 0
-		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
+			return
+		if(W.use_tool(user, src, WORKTIME_NORMAL+damage, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			to_chat(user, "You repair all structural damage to \the [src]")
 			damage = 0
-		return 0
+		return
 	else if(isWirecutter(W) && !building_terminal)
 		building_terminal = 1
 		var/obj/machinery/power/terminal/term

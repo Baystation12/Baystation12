@@ -295,4 +295,4 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	new /obj/item/honey_frame(src)
 	new /obj/item/honey_frame(src)
 	new /obj/item/bee_pack(src)
-	new /obj/item/weapon/crowbar(src)
+	new /obj/item/weapon/tool/crowbar(src)

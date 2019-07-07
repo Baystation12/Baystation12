@@ -130,7 +130,7 @@
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_type = /obj/item/modular_computer/pda/heads/ce
-	l_hand = /obj/item/weapon/wrench
+	l_hand = /obj/item/weapon/tool/wrench
 	belt = /obj/item/weapon/storage/belt/utility/full
 	id_type = /obj/item/weapon/card/id/engineering/head
 	r_pocket = /obj/item/device/radio

@@ -90,12 +90,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/crowbar
 	name = "crowbar"
-	path = /obj/item/weapon/crowbar
+	path = /obj/item/weapon/tool/crowbar
 	category = "Tools"
 
 /datum/autolathe/recipe/prybar
 	name = "pry bar"
-	path = /obj/item/weapon/crowbar/prybar
+	path = /obj/item/weapon/tool/crowbar/prybar
 	category = "Tools"
 
 /datum/autolathe/recipe/int_wirer
@@ -125,22 +125,22 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/weldertool
 	name = "welding tool"
-	path = /obj/item/weapon/weldingtool
+	path = /obj/item/weapon/tool/weldingtool
 	category = "Tools"
 
 /datum/autolathe/recipe/screwdriver
 	name = "screwdriver"
-	path = /obj/item/weapon/screwdriver
+	path = /obj/item/weapon/tool/screwdriver
 	category = "Tools"
 
 /datum/autolathe/recipe/wirecutters
 	name = "wirecutters"
-	path = /obj/item/weapon/wirecutters
+	path = /obj/item/weapon/tool/wirecutters
 	category = "Tools"
 
 /datum/autolathe/recipe/wrench
 	name = "wrench"
-	path = /obj/item/weapon/wrench
+	path = /obj/item/weapon/tool/wrench
 	category = "Tools"
 
 /datum/autolathe/recipe/hatchet
@@ -618,12 +618,6 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/beartrap
 	hidden = 1
 	category = "Devices and Components"
-
-/datum/autolathe/recipe/welder_industrial
-	name = "industrial welding tool"
-	path = /obj/item/weapon/weldingtool/largetank
-	hidden = 1
-	category = "Tools"
 
 /datum/autolathe/recipe/handcuffs
 	name = "handcuffs"

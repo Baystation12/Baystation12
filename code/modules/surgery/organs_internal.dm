@@ -29,7 +29,7 @@
 	allowed_tools = list(
 	/obj/item/stack/medical/advanced/bruise_pack= 100,		\
 	/obj/item/stack/medical/bruise_pack = 40,	\
-	/obj/item/weapon/tape_roll = 20
+	/obj/item/weapon/tool/tape_roll = 20
 	)
 
 	min_duration = 70
@@ -187,7 +187,7 @@
 	priority = 2
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
-	/obj/item/weapon/wirecutters = 75,
+	/obj/item/weapon/tool/wirecutters = 75,
 	/obj/item/weapon/material/knife = 75,	\
 	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
@@ -349,7 +349,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
 	/obj/item/stack/cable_coil = 75,	\
-	/obj/item/weapon/tape_roll = 50
+	/obj/item/weapon/tool/tape_roll = 50
 	)
 
 	min_duration = 100

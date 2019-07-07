@@ -16,6 +16,9 @@
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
+	var/list/tool_qualities = null// List of item qualities for tools system. See tools_and_qualities.dm.
+	var/heat = 0 //Temperature of this object, mostly used to see if it can set other things on fire
+	var/worksound = null	//Sound played when this object is used as a tool in tool operations
 
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -164,3 +167,27 @@
 
 /obj/proc/get_matter()
 	return matter
+
+/obj/proc/eject_item(var/obj/item/I, var/mob/living/M)
+	if(!I || !M.IsAdvancedToolUser())
+		return FALSE
+	M.put_in_hands(I)
+	playsound(src.loc, 'sound/weapons/guns/interact/pistol_magin.ogg', 75, 1)
+	M.visible_message(
+		"[M] remove [I] from [src].",
+		SPAN_NOTICE("You remove [I] from [src].")
+	)
+	return TRUE
+
+/obj/proc/insert_item(var/obj/item/I, var/mob/living/M)
+	if(!I || !M.unEquip(I))
+		return FALSE
+	I.forceMove(src)
+	playsound(src.loc, 'sound/weapons/guns/interact/pistol_magout.ogg', 75, 1)
+	M << SPAN_NOTICE("You insert [I] into [src].")
+	return TRUE
+
+
+//Object specific version of the generic proc, for overriding
+/obj/proc/is_hot()
+	return heat

@@ -54,7 +54,7 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/anodevice,
 		/obj/item/clothing/glasses,
-		/obj/item/weapon/wrench,
+		/obj/item/weapon/tool/wrench,
 		/obj/item/weapon/storage/excavation,
 		/obj/item/weapon/anobattery,
 		/obj/item/device/ano_scanner,

@@ -109,11 +109,11 @@
 	overlay_flags = BELT_OVERLAY_ITEMS
 	can_hold = list(
 		///obj/item/weapon/combitool,
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/weldingtool,
-		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/wrench,
+		/obj/item/weapon/tool/crowbar,
+		/obj/item/weapon/tool/screwdriver,
+		/obj/item/weapon/tool/weldingtool,
+		/obj/item/weapon/tool/wirecutters,
+		/obj/item/weapon/tool/wrench,
 		/obj/item/device/multitool,
 		/obj/item/device/flashlight,
 		/obj/item/stack/cable_coil,
@@ -133,22 +133,22 @@
 
 /obj/item/weapon/storage/belt/utility/full/New()
 	..()
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/wirecutters(src)
+	new /obj/item/weapon/tool/screwdriver(src)
+	new /obj/item/weapon/tool/wrench(src)
+	new /obj/item/weapon/tool/weldingtool(src)
+	new /obj/item/weapon/tool/crowbar(src)
+	new /obj/item/weapon/tool/wirecutters(src)
 	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
 	update_icon()
 
 
 /obj/item/weapon/storage/belt/utility/atmostech/New()
 	..()
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/wirecutters(src)
+	new /obj/item/weapon/tool/screwdriver(src)
+	new /obj/item/weapon/tool/wrench(src)
+	new /obj/item/weapon/tool/weldingtool(src)
+	new /obj/item/weapon/tool/crowbar(src)
+	new /obj/item/weapon/tool/wirecutters(src)
 	new /obj/item/device/t_scanner(src)
 	update_icon()
 
@@ -176,7 +176,7 @@
 		/obj/item/clothing/gloves/latex,
 		/obj/item/weapon/reagent_containers/hypospray,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/crowbar,
+		/obj/item/weapon/tool/crowbar,
 		/obj/item/device/flashlight,
 		/obj/item/taperoll,
 		/obj/item/weapon/extinguisher/mini,
@@ -198,7 +198,7 @@
 	storage_slots = 8
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
 	can_hold = list(
-		/obj/item/weapon/crowbar,
+		/obj/item/weapon/tool/crowbar,
 		/obj/item/weapon/grenade,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/handcuffs,

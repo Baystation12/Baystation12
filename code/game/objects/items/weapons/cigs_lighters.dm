@@ -16,18 +16,24 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame
 	var/lit = 0
 
-/proc/isflamesource(A)
-	if(isWelder(A))
-		var/obj/item/weapon/weldingtool/WT = A
-		return (WT.isOn())
-	else if(istype(A, /obj/item/weapon/flame))
-		var/obj/item/weapon/flame/F = A
-		return (F.lit)
-	else if(istype(A, /obj/item/clothing/mask/smokable) && !istype(A, /obj/item/clothing/mask/smokable/pipe))
-		var/obj/item/clothing/mask/smokable/S = A
-		return (S.lit)
-	else if(istype(A, /obj/item/device/assembly/igniter))
-		return 1
+/obj/item/weapon/flame/is_hot()
+	if (lit)
+		..()
+	else return T20C
+
+/proc/isflamesource(var/obj/A)
+
+	if (istype(A))
+		if(isWelder(A))
+			return TRUE
+		else if(istype(A, /obj/item/weapon/flame))
+			var/obj/item/weapon/flame/F = A
+			return (F.lit)
+		else if(istype(A, /obj/item/clothing/mask/smokable) && !istype(A, /obj/item/clothing/mask/smokable/pipe))
+			var/obj/item/clothing/mask/smokable/S = A
+			return (S.lit)
+		else if(istype(A, /obj/item/device/assembly/igniter))
+			return 1
 	return 0
 
 ///////////
@@ -44,6 +50,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	origin_tech = list(TECH_MATERIAL = 1)
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
+	heat = 1000
 
 /obj/item/weapon/flame/match/Process()
 	if(isliving(loc))
@@ -55,7 +62,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		burn_out()
 		return
 	if(location)
-		location.hotspot_expose(700, 5)
+		location.hotspot_expose(heat, 5)
 		return
 
 /obj/item/weapon/flame/match/dropped(mob/user as mob)
@@ -65,7 +72,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		spawn(0)
 			var/turf/location = src.loc
 			if(istype(location))
-				location.hotspot_expose(700, 5)
+				location.hotspot_expose(heat, 5)
 			burn_out()
 	return ..()
 

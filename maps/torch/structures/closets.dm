@@ -48,8 +48,8 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "syndicate1"
 
-/obj/random/torchcloset/spawn_choices()
-	return list(/obj/structure/closet,
+/obj/random/torchcloset/item_to_spawn()
+	return pickweight(list(/obj/structure/closet,
 				/obj/structure/closet/firecloset,
 				/obj/structure/closet/emcloset,
 				/obj/structure/closet/jcloset_torch,
@@ -72,4 +72,4 @@
 				/obj/structure/closet/wardrobe/xenos,
 				/obj/structure/closet/wardrobe/mixed,
 				/obj/structure/closet/wardrobe/suit,
-				/obj/structure/closet/wardrobe/orange)
+				/obj/structure/closet/wardrobe/orange))

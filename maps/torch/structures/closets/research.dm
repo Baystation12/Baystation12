@@ -132,7 +132,7 @@
 		/obj/item/device/flashlight/lantern,
 		/obj/item/weapon/shovel,
 		/obj/item/weapon/pickaxe,
-		/obj/item/weapon/crowbar,
+		/obj/item/weapon/tool/crowbar,
 		/obj/item/clothing/glasses/material,
 		/obj/item/clothing/glasses/meson,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),

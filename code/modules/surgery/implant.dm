@@ -68,7 +68,7 @@
 	/obj/item/weapon/cautery = 100,			\
 	/obj/item/clothing/mask/smokable/cigarette = 75,	\
 	/obj/item/weapon/flame/lighter = 50,			\
-	/obj/item/weapon/weldingtool = 25
+	/obj/item/weapon/tool/weldingtool = 25
 	)
 
 	min_duration = 60
@@ -151,7 +151,7 @@
 /datum/surgery_step/cavity/implant_removal
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
-	/obj/item/weapon/wirecutters = 75,	\
+	/obj/item/weapon/tool/wirecutters = 75,	\
 	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 

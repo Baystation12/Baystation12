@@ -17,8 +17,7 @@
 
 /obj/item/target/attackby(var/obj/item/W, var/mob/user)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(WT.remove_fuel(0, user))
+		if(W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			overlays.Cut()
 			bulletholes.Cut()
 			hp = initial(hp)

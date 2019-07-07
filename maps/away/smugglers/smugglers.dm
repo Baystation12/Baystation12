@@ -77,13 +77,13 @@
 	icon = 'icons/obj/clothing/ties.dmi'
 	icon_state = "horribletie"
 
-/obj/random/ore_smug/spawn_choices()
-	return list(
+/obj/random/ore_smug/item_to_spawn()
+	return pickweight(list(
 		/obj/item/weapon/ore/uranium,
 		/obj/item/weapon/ore/gold,
 		/obj/item/weapon/ore/silver,
 		/obj/item/weapon/ore/slag,
-		/obj/item/weapon/ore/phoron)
+		/obj/item/weapon/ore/phoron))
 
 /obj/random/ammo_magazine_smug
 	name = "Random Ammo Magazine"
@@ -91,13 +91,13 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "45-10"
 
-/obj/random/ammo_magazine_smug/spawn_choices()
-	return list(
+/obj/random/ammo_magazine_smug/item_to_spawn()
+	return pickweight(list(
 		/obj/item/ammo_magazine/a10mm,
 		/obj/item/ammo_magazine/a357,
 		/obj/item/ammo_magazine/c45m,
 		/obj/item/ammo_magazine/c556,
-		/obj/item/ammo_magazine/a762)
+		/obj/item/ammo_magazine/a762))
 
 /obj/structure/closet/crate/plastic_smug_ammo
 	name = "dirty plastic crate"

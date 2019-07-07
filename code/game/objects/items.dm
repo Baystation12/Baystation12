@@ -11,6 +11,7 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
+
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/equip_slot = slot_none	//What slot this item was last equipped into
 

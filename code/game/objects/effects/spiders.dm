@@ -30,12 +30,6 @@
 
 	var/damage = W.force / 4.0
 
-	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(WT.remove_fuel(0, user))
-			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 
 	health -= damage
 	healthcheck()

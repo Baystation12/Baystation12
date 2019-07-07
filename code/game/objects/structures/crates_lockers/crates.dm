@@ -304,7 +304,7 @@ obj/structure/closet/crate
 		/obj/item/weapon/material/minihoe = 2,
 		/obj/item/weapon/storage/plants = 2,
 		/obj/item/weapon/material/hatchet = 2,
-		/obj/item/weapon/wirecutters/clippers = 2,
+		/obj/item/weapon/tool/wirecutters/clippers = 2,
 		/obj/item/device/analyzer/plant_analyzer = 2
 	)
 
@@ -317,7 +317,7 @@ obj/structure/closet/crate
 	open_sound = 'sound/items/Deconstruct.ogg'
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
-	
+
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
 

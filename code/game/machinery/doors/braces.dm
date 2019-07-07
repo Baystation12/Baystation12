@@ -1,5 +1,5 @@
 // MAINTENANCE JACK - Allows removing of braces with certain delay.
-/obj/item/weapon/crowbar/brace_jack
+/obj/item/weapon/tool/crowbar/brace_jack
 	name = "maintenance jack"
 	desc = "A special crowbar that can be used to safely remove airlock braces from airlocks."
 	w_class = ITEM_SIZE_NORMAL
@@ -89,10 +89,10 @@
 				to_chat(user, "You swipe \the [C] through \the [src], but it does not react.")
 		return
 
-	if (istype(W, /obj/item/weapon/crowbar/brace_jack))
+	if (istype(W, /obj/item/weapon/tool/crowbar/brace_jack))
 		if(!airlock)
 			return
-		var/obj/item/weapon/crowbar/brace_jack/C = W
+		var/obj/item/weapon/tool/crowbar/brace_jack/C = W
 		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
 		if(do_after(user, rand(150,300), airlock))
 			to_chat(user, "You finish removing \the [src].")
@@ -100,12 +100,10 @@
 		return
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/C = W
 		if(cur_health == max_health)
 			to_chat(user, "\The [src] does not require repairs.")
 			return
-		if(C.remove_fuel(0,user))
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
+		if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 			cur_health = min(cur_health + rand(80,120), max_health)
 			if(cur_health == max_health)
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")

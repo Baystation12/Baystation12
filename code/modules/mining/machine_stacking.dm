@@ -125,7 +125,7 @@
 			var/obj/item/stack/material/S = new stacktype (get_turf(output))
 			S.amount = stack_amt
 			stack_storage[sheet] -= stack_amt
-
-	console.updateUsrDialog()
+	if (console)
+		console.updateUsrDialog()
 	return
 

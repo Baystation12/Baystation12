@@ -868,26 +868,21 @@ proc/get_mob_with_client_list()
 //Quick type checks for some tools
 var/global/list/common_tools = list(
 /obj/item/stack/cable_coil,
-/obj/item/weapon/wrench,
-/obj/item/weapon/weldingtool,
-/obj/item/weapon/screwdriver,
-/obj/item/weapon/wirecutters,
+/obj/item/weapon/tool/wrench,
+/obj/item/weapon/tool/weldingtool,
+/obj/item/weapon/tool/screwdriver,
+/obj/item/weapon/tool/wirecutters,
 /obj/item/device/multitool,
-/obj/item/weapon/crowbar)
+/obj/item/weapon/tool/crowbar)
 
 /proc/istool(O)
 	if(O && is_type_in_list(O, common_tools))
 		return 1
 	return 0
 
+//Deprecated. Use obj/is_hot instead where
 /proc/is_hot(obj/item/W as obj)
 	switch(W.type)
-		if(/obj/item/weapon/weldingtool)
-			var/obj/item/weapon/weldingtool/WT = W
-			if(WT.isOn())
-				return 3800
-			else
-				return 0
 		if(/obj/item/weapon/flame/lighter)
 			if(W:lit)
 				return 1500
@@ -908,9 +903,9 @@ var/global/list/common_tools = list(
 		if(/obj/item/weapon/melee/energy)
 			return 3500
 		else
-			return 0
+			return W.is_hot()
 
-	return 0
+	return W.is_hot()
 
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O as obj)
@@ -931,16 +926,16 @@ var/global/list/common_tools = list(
 /obj/item/proc/can_puncture()
 	return src.sharp
 
-/obj/item/weapon/screwdriver/can_puncture()
+/obj/item/weapon/tool/screwdriver/can_puncture()
 	return 1
 
 /obj/item/weapon/pen/can_puncture()
 	return 1
 
-/obj/item/weapon/weldingtool/can_puncture()
+/obj/item/weapon/tool/weldingtool/can_puncture()
 	return 1
 
-/obj/item/weapon/screwdriver/can_puncture()
+/obj/item/weapon/tool/screwdriver/can_puncture()
 	return 1
 
 /obj/item/weapon/shovel/can_puncture() //includes spades
@@ -1112,3 +1107,5 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
+
+

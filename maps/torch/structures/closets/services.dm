@@ -34,7 +34,7 @@
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
-		/obj/item/weapon/wirecutters/clippers,
+		/obj/item/weapon/tool/wirecutters/clippers,
 		/obj/item/weapon/reagent_containers/spray/plantbgone,
 		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/apron, /obj/item/clothing/suit/apron/overalls)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/hydroponics, /obj/item/weapon/storage/backpack/satchel_hyd)),

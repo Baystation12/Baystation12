@@ -17,7 +17,7 @@
 	var/lit = 0	//on or off
 	var/operating = 0//cooldown
 	var/turf/previousturf = null
-	var/obj/item/weapon/weldingtool/weldtool = null
+	var/obj/item/weapon/tool/weldingtool/weldtool = null
 	var/obj/item/device/assembly/igniter/igniter = null
 	var/obj/item/weapon/tank/hydrogen/ptank = null
 
@@ -67,37 +67,6 @@
 			flame_turf(turflist)
 
 /obj/item/weapon/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
-	if(user.stat || user.restrained() || user.lying)	return
-	if(isWrench(W) && !status)//Taking this apart
-		var/turf/T = get_turf(src)
-		if(weldtool)
-			weldtool.loc = T
-			weldtool = null
-		if(igniter)
-			igniter.loc = T
-			igniter = null
-		if(ptank)
-			ptank.loc = T
-			ptank = null
-		new /obj/item/stack/rods(T)
-		qdel(src)
-		return
-
-	if(isScrewdriver(W) && igniter && !lit)
-		status = !status
-		to_chat(user, "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>")
-		update_icon()
-		return
-
-	if(isigniter(W))
-		var/obj/item/device/assembly/igniter/I = W
-		if(I.secured)	return
-		if(igniter)		return
-		if(!user.unEquip(I, src))
-			return
-		igniter = I
-		update_icon()
-		return
 
 	if(istype(W,/obj/item/weapon/tank/hydrogen))
 		if(ptank)
@@ -201,8 +170,6 @@
 
 /obj/item/weapon/flamethrower/full/New(var/loc)
 	..()
-	weldtool = new /obj/item/weapon/weldingtool(src)
-	weldtool.status = 0
 	igniter = new /obj/item/device/assembly/igniter(src)
 	igniter.secured = 0
 	status = 1

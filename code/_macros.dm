@@ -77,19 +77,19 @@
 
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
-#define isWrench(A) istype(A, /obj/item/weapon/wrench)
+#define isWrench(A) A.has_quality(QUALITY_BOLT_TURNING)
 
-#define isWelder(A) istype(A, /obj/item/weapon/weldingtool)
+#define isWelder(A) A.has_quality(QUALITY_WELDING)
 
 #define isCoil(A) istype(A, /obj/item/stack/cable_coil)
 
-#define isWirecutter(A) istype(A, /obj/item/weapon/wirecutters)
+#define isWirecutter(A) A.has_quality(QUALITY_WIRE_CUTTING)
 
-#define isScrewdriver(A) istype(A, /obj/item/weapon/screwdriver)
+#define isScrewdriver(A) A.has_quality(QUALITY_SCREW_DRIVING)
 
-#define isMultitool(A) istype(A, /obj/item/device/multitool)
+#define isMultitool(A) A.has_quality(QUALITY_PULSING)
 
-#define isCrowbar(A) istype(A, /obj/item/weapon/crowbar)
+#define isCrowbar(A) A.has_quality(QUALITY_PRYING)
 
 #define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
 

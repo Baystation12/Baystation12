@@ -262,11 +262,11 @@
 /obj/item/weapon/archaeological_find/tool/spawn_item()
 	var/obj/item/weapon/new_item
 	if(prob(25))
-		new_item = new /obj/item/weapon/wrench(loc)
+		new_item = new /obj/item/weapon/tool/wrench(loc)
 	else if(prob(25))
-		new_item = new /obj/item/weapon/crowbar(loc)
+		new_item = new /obj/item/weapon/tool/crowbar(loc)
 	else
-		new_item = new /obj/item/weapon/screwdriver(loc)
+		new_item = new /obj/item/weapon/tool/screwdriver(loc)
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_item.icon_state = "unknown[rand(1,4)]"
 	additional_desc = "[pick("It doesn't look safe.",\

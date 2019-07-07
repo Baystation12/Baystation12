@@ -8,8 +8,8 @@ Random item spawning
 	icon = 'icons/obj/clothing/hats.dmi'
 	icon_state = "helmet_sol"
 
-/obj/random/solgov/spawn_choices()
-	return list(/obj/item/clothing/head/solgov/utility/fleet = 4,
+/obj/random/solgov/item_to_spawn()
+	return pickweight(list(/obj/item/clothing/head/solgov/utility/fleet = 4,
 				/obj/item/clothing/head/soft/solgov/expedition = 2,
 				/obj/item/clothing/head/soft/solgov/fleet = 4,
 				/obj/item/clothing/head/helmet/solgov = 1,
@@ -18,7 +18,7 @@ Random item spawning
 				/obj/item/clothing/under/solgov/utility/fleet = 3,
 				/obj/item/clothing/under/solgov/pt/expeditionary = 4,
 				/obj/item/clothing/under/solgov/pt/fleet = 4
-				)
+				))
 
 /obj/random/maintenance/solgov
 	name = "random maintenance item"
@@ -26,10 +26,10 @@ Random item spawning
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift1"
 
-/obj/random/maintenance/solgov/spawn_choices()
-	return list(/obj/random/junk = 4,
+/obj/random/maintenance/solgov/item_to_spawn()
+	return pickweight(list(/obj/random/junk = 4,
 				/obj/random/trash = 4,
-				/obj/random/maintenance/solgov/clean = 5)
+				/obj/random/maintenance/solgov/clean = 5))
 
 /obj/random/maintenance/solgov/clean
 	name = "random maintenance item"
@@ -37,9 +37,9 @@ Random item spawning
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift2"
 
-/obj/random/maintenance/solgov/clean/spawn_choices()
-	return list(/obj/random/solgov = 3,
-				/obj/random/maintenance/clean = 800)
+/obj/random/maintenance/solgov/clean/item_to_spawn()
+	return pickweight(list(/obj/random/solgov = 3,
+				/obj/random/maintenance/clean = 800))
 
 /*******************
 Torch specific items
@@ -106,8 +106,7 @@ Unique items
 	startswith = list(
 			/obj/item/weapon/gun/projectile/pistol/liaison,
 			/obj/item/weapon/reagent_containers/pill/tox,
-			/obj/item/weapon/paper/liason_note
-	)
+			/obj/item/weapon/paper/liason_note)
 
 /******
 Weapons
@@ -135,6 +134,6 @@ Weapons
 
 /obj/effect/paint/hull
 	color = COLOR_HULL
-	
+
 /obj/effect/paint/expeditionary
 	color = "#68099e"

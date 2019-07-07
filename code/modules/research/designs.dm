@@ -958,7 +958,7 @@ other types of metals and chemistry for reagents).
 	id = "bracejack"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 120)
-	build_path = /obj/item/weapon/crowbar/brace_jack
+	build_path = /obj/item/weapon/tool/crowbar/brace_jack
 	sort_string = "VAGAD"
 
 /datum/design/item/tool/clamp
@@ -979,13 +979,13 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/device/price_scanner
 	sort_string = "VAGAF"
 
-/datum/design/item/tool/experimental_welder
-	name = "experimental welding tool"
-	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
+/datum/design/item/tool/advanced_welder
+	name = "advanced welding tool"
+	desc = "This welding tool feels heavier in your possession than is normal."
 	id = "experimental_welder"
 	req_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 120, "glass" = 50)
-	build_path = /obj/item/weapon/weldingtool/experimental
+	build_path = /obj/item/weapon/tool/weldingtool/advanced
 	sort_string = "VAGAG"
 
 /datum/design/item/tool/shield_diffuser

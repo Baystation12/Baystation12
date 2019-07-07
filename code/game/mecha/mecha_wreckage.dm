@@ -31,12 +31,11 @@
 
 /obj/effect/decal/mecha_wreckage/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
 		if(salvage_num <= 0)
 			to_chat(user, "You don't see anything that can be cut with [W].")
 			return
-		if (!isemptylist(welder_salvage) && WT.remove_fuel(0,user))
-			var/type = prob(70)?pick(welder_salvage):null
+		if (!isemptylist(welder_salvage) && W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_HARD))
+			var/type = pick(welder_salvage)
 			if(type)
 				var/N = new type(get_turf(user))
 				user.visible_message("[user] cuts [N] from [src]", "You cut [N] from [src]", "You hear a sound of welder nearby")

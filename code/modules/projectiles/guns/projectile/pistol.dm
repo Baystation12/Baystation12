@@ -265,7 +265,7 @@
 		buildstate++
 		update_icon()
 		return
-	else if(istype(thing,/obj/item/weapon/tape_roll) && buildstate == 1)
+	else if(istype(thing,/obj/item/weapon/tool/tape_roll) && buildstate == 1)
 		user.visible_message("<span class='notice'>\The [user] secures the assembly with \the [thing].</span>")
 		add_fingerprint(user)
 		buildstate++

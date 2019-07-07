@@ -232,13 +232,10 @@
 			return
 	else if(isWelder(W))
 		if(buildstate == 1)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
+			if(W.use_tool(user, src, WORKTIME_NORMAL, QUALITY_WELDING, FAILCHANCE_NORMAL))
 				to_chat(user, "<span class='notice'>You weld the rods into place.</span>")
-			buildstate++
-			update_icon()
+				buildstate++
+				update_icon()
 		return
 	else if(isCoil(W))
 		var/obj/item/stack/cable_coil/C = W

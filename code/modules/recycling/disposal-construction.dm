@@ -284,57 +284,51 @@
 		update()
 		update_verbs()
 
-	else if(istype(I, /obj/item/weapon/weldingtool))
+	else if(isWelder(I))
 		if(anchored)
-			var/obj/item/weapon/weldingtool/W = I
-			if(W.remove_fuel(0,user))
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				to_chat(user, "Welding the [nicetype] in place.")
-				if(do_after(user, 20, src))
-					if(!src || !W.isOn()) return
-					to_chat(user, "The [nicetype] has been welded in place!")
-					update() // TODO: Make this neat
-					if(ispipe) // Pipe
+			to_chat(user, "Welding the [nicetype] in place.")
+			if(I.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
 
-						var/pipetype = dpipetype()
-						var/obj/structure/disposalpipe/P = new pipetype(src.loc)
-						src.transfer_fingerprints_to(P)
-						P.base_icon_state = base_state
-						P.set_dir(dir)
-						P.dpdir = dpdir
-						P.update_icon()
+				to_chat(user, "The [nicetype] has been welded in place!")
+				update() // TODO: Make this neat
+				if(ispipe) // Pipe
 
-						//Needs some special treatment ;)
-						if(ptype==9 || ptype==10)
-							var/obj/structure/disposalpipe/sortjunction/SortP = P
-							SortP.sortType = sortType
-							SortP.updatedir()
-							SortP.updatedesc()
-							SortP.updatename()
+					var/pipetype = dpipetype()
+					var/obj/structure/disposalpipe/P = new pipetype(src.loc)
+					src.transfer_fingerprints_to(P)
+					P.base_icon_state = base_state
+					P.set_dir(dir)
+					P.dpdir = dpdir
+					P.update_icon()
 
-					else if(ptype==6) // Disposal bin
-						var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
-						src.transfer_fingerprints_to(P)
-						P.mode = 0 // start with pump off
+					//Needs some special treatment ;)
+					if(ptype==9 || ptype==10)
+						var/obj/structure/disposalpipe/sortjunction/SortP = P
+						SortP.sortType = sortType
+						SortP.updatedir()
+						SortP.updatedesc()
+						SortP.updatename()
 
-					else if(ptype==7) // Disposal outlet
+				else if(ptype==6) // Disposal bin
+					var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
+					src.transfer_fingerprints_to(P)
+					P.mode = 0 // start with pump off
 
-						var/obj/structure/disposaloutlet/P = new /obj/structure/disposaloutlet(src.loc)
-						src.transfer_fingerprints_to(P)
-						P.set_dir(dir)
-						var/obj/structure/disposalpipe/trunk/Trunk = CP
-						Trunk.linked = P
+				else if(ptype==7) // Disposal outlet
 
-					else if(ptype==8) // Disposal outlet
+					var/obj/structure/disposaloutlet/P = new /obj/structure/disposaloutlet(src.loc)
+					src.transfer_fingerprints_to(P)
+					P.set_dir(dir)
+					var/obj/structure/disposalpipe/trunk/Trunk = CP
+					Trunk.linked = P
 
-						var/obj/machinery/disposal/deliveryChute/P = new /obj/machinery/disposal/deliveryChute(src.loc)
-						src.transfer_fingerprints_to(P)
-						P.set_dir(dir)
+				else if(ptype==8) // Disposal outlet
 
-					qdel(src)
-					return
-			else
-				to_chat(user, "You need more welding fuel to complete this task.")
+					var/obj/machinery/disposal/deliveryChute/P = new /obj/machinery/disposal/deliveryChute(src.loc)
+					src.transfer_fingerprints_to(P)
+					P.set_dir(dir)
+
+				qdel(src)
 				return
 		else
 			to_chat(user, "You need to attach it to the plating first!")

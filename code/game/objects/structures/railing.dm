@@ -252,16 +252,13 @@
 
 	// Repair
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/F = W
-		if(F.isOn())
-			if(health >= maxhealth)
-				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
-				return
-			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(do_after(user, 20, src))
-				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				health = min(health+(maxhealth/5), maxhealth)
+		if(health >= maxhealth)
+			to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
 			return
+		if(W.use_tool(user, src, WORKTIME_SLOW, QUALITY_WELDING, FAILCHANCE_NORMAL))
+			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
+			health = min(health+(maxhealth/5), maxhealth)
+
 
 	// Install
 	if(isScrewdriver(W))

@@ -141,7 +141,7 @@
 		/obj/item/weapon/syringe_cartridge,
 		/obj/item/weapon/plastique,
 		/obj/item/clothing/mask/smokable,
-		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/tool/screwdriver,
 		/obj/item/device/multitool,
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/ammo_magazine,
