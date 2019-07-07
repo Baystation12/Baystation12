@@ -15,15 +15,17 @@
 	density = 0
 	var/weakref/target_ref
 	var/start_time = 0
-	var/power_drain = 15
+	var/power_drain = 7
 	var/looking_for
 	var/static/list/possible_forms = list(
 								"Starborn" = list(
 												"description" = "A species of hardy fire-wreathed soldiers.",
+												"message" = "As a Starborn, you are immune to laser-fire you are a hardy soldier, able to take on the greatest of foes.",
 												"species" = "Starborn"
 											),
 								"Blueforged" = list(
 												"description" = "Trans-dimensional beings with a multitude of miraculous abilities.",
+												"message" = "As a Blueforged, you are immune to all physical damage... except for heat. Not even your god can protect you.",
 												"species" = "Blueforged",
 												"spells" = list(
 													/spell/targeted/ethereal_jaunt,
@@ -36,6 +38,7 @@
 											),
 								"Shadowling" = list(
 												"description" = "Beings that come from a place of no light. They sneak from place to place, disabling everyone they touch..",
+												"message" = "As a Shadow you take damage from the light itself but have the ability to vanish from sight itself.",
 												"species" = "Shadow",
 												"spells" = list(
 															/spell/veil_of_shadows,
@@ -79,7 +82,7 @@
 				ss.ckey = target.ckey
 			ss.set_deity(linked_god)
 			target.dust()
-			if(power_drain > 5)
+			if(power_drain >= 3)
 				linked_god.power_per_regen += 3
 				power_drain -= 3
 	else
@@ -126,9 +129,9 @@
 		for(var/s in possible_forms[looking_for]["spells"])
 			var/spell/S = new s
 			H.add_spell(S)
-			S.set_connected_god(linked_god)
-		GLOB.godcult.add_antagonist_mind(H.mind, 1, "[looking_for] of [linked_god]", "You are a powerful entity in the service to \the [linked_god]. You are here to make its will known and exert your reality onto theirs.", specific_god = linked_god)
+		GLOB.godcult.add_antagonist_mind(H.mind, 1, "[looking_for] of [linked_god]", "You are a powerful entity in the service to \the [linked_god]. [possible_forms[looking_for]["species"]]", specific_god = linked_god)
 		stop_looking_for(TRUE)
+
 		return TOPIC_HANDLED
 	if(href_list["spawn_type"] && user == linked_god)
 		if(looking_for)
