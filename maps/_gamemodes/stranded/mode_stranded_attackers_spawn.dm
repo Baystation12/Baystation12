@@ -28,11 +28,6 @@
 		for(var/i = 0, i < amount, i++)
 			var/turf/spawn_turf = pick(flood_spawn_turfs)
 			var/mob/living/simple_animal/hostile/flood/F = new spawntype(spawn_turf)
-			if(flood_assault_turfs.len)
-				var/turf/assault_turf = pick(flood_assault_turfs)
-				assault_turf = pick(range(7, assault_turf))
-				F.set_assault_target(assault_turf)
-			else
-				log_admin("Error: gamemode unable to find any /obj/effect/landmark/flood_assault_target/")
+			F.health *= 1.5
 	else
 		log_admin("Error: gamemode unable to find any /obj/effect/landmark/flood_spawn/")

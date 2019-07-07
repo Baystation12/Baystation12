@@ -66,13 +66,12 @@
 	var/list/death_sounds = list()
 
 	var/respawning = 0
-	var/respawn_time = 5 MINUTES
+	var/respawn_timer = 3 MINUTES
 	var/turf/spawn_turf
 
 /mob/living/simple_animal/New()
 	. = ..()
-	if(respawning)
-		spawn_turf = get_turf(src)
+	spawn_turf = get_turf(src)
 
 /mob/living/simple_animal/Life()
 	..()
@@ -85,7 +84,7 @@
 			set_stat(CONSCIOUS)
 			set_density(1)
 		else if(respawning)
-			if(world.time > timeofdeath + respawn_time)
+			if(world.time > timeofdeath + respawn_timer)
 				health = maxHealth
 				src.forceMove(spawn_turf)
 		return 0
@@ -296,7 +295,7 @@
 	timeofdeath = world.time
 	icon_state = icon_dead
 	density = 0
-	adjustBruteLoss(maxHealth) //Make sure dey dead.
+	//adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
 	if(death_sounds.len > 0)
 		playsound(loc, pick(death_sounds),75,0,7)
@@ -392,3 +391,9 @@
 	return
 /mob/living/simple_animal/ExtinguishMob()
 	return
+
+/mob/living/simple_animal/updatehealth()
+	. = ..()
+	if(health <= 0 && stat != DEAD)
+		death()
+		return

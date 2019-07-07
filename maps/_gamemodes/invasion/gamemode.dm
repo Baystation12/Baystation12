@@ -10,7 +10,7 @@
 
 	//uncomment this later
 	//required_players = 10
-	factions = list(/datum/faction/unsc, /datum/faction/insurrection, /datum/faction/covenant)
+	factions_by_name = list("UNSC", "Covenant","Insurrection","Human Civilian")
 
 	var/faction_safe_time = 10 MINUTES
 	var/faction_safe_duration = 10 MINUTES
@@ -28,16 +28,14 @@
 
 	var/covenant_ship_slipspaced = 0
 
-/datum/game_mode/invasion/New()
+/datum/game_mode/invasion/pre_setup()
 	. = ..()
 
 	//setup factions
-	for(var/faction_type in factions)
-		if(ispath(faction_type))
-			factions -= faction_type
-			var/datum/faction/new_faction = new faction_type()
-			factions.Add(new_faction)
-			factions_by_name[new_faction.name] = new_faction
+	for(var/faction_name in factions_by_name)
+		var/datum/faction/F = GLOB.factions_by_name[faction_name]
+		factions_by_name[faction_name] = F
+		factions.Add(F)
 
 	//setup covenant objectives
 	var/datum/faction/covenant/C = locate() in factions
@@ -80,8 +78,6 @@
 			///datum/objective/takeover_colony)
 		setup_faction_objectives(I, objective_types)
 
-/datum/game_mode/invasion/pre_setup()
-	. = ..()
 	//**** hard code some values which we will locate dynamically later ****//
 	find_cov_ship()
 	find_cov_ship_areas()
@@ -125,7 +121,7 @@
 		unsc_base_areas.Add(cur_area)
 
 /datum/game_mode/invasion/proc/find_human_colony()
-	var/datum/faction/human_civ/H = factions_by_name["Civilian"]
+	var/datum/faction/human_civ/H = factions_by_name["Human Civilian"]
 	human_colony = H.get_base()
 
 /datum/game_mode/invasion/proc/setup_faction_objectives(var/datum/faction/faction, var/list/objective_types)

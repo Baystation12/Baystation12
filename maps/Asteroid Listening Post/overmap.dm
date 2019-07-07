@@ -5,4 +5,4 @@
 	known = 0
 
 	map_bounds = list(1,50,50,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/urfcommando_prowler)
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/soe_osprey)

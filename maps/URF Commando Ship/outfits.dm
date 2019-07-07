@@ -1,6 +1,6 @@
 
-/decl/hierarchy/outfit/job/URF_commando
-	name = "URF Commando"
+/decl/hierarchy/outfit/job/soe_commando
+	name = "SOE Commando"
 
 	//Actual Commando gear is spawned on their ship.
 	//head = /obj/item/clothing/head/helmet/urfc
@@ -13,8 +13,8 @@
 
 	flags = 0
 
-/decl/hierarchy/outfit/job/URF_commando_officer
-	name = "URF Commando Officer"
+/decl/hierarchy/outfit/job/soe_commando_officer
+	name = "SOE Commando Officer"
 
 	head = /obj/item/clothing/head/helmet/urfc/squadleader
 	suit = /obj/item/clothing/suit/armor/special/urfc/squadleader

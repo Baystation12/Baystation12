@@ -17,7 +17,7 @@
 	var/field_radius = 1				// Current field radius.
 	var/running = SHIELD_OFF			// Whether the generator is enabled or not.
 	var/input_cap = 1 MEGAWATTS			// Currently set input limit. Set to 0 to disable limits altogether. The shield will try to input this value per tick at most
-	var/input_charge_cap = 50 KILOWATTS //A hardcoded cap to the amount of energy the input_cap can be set to.
+	var/input_charge_cap = 75 KILOWATTS //A hardcoded cap to the amount of energy the input_cap can be set to.
 	var/upkeep_power_usage = 0			// Upkeep power usage last tick.
 	var/upkeep_multiplier = 1			// Multiplier of upkeep values.
 	var/power_usage = 0					// Total power usage last tick.

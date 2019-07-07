@@ -23,6 +23,7 @@
 		/datum/job/opredflag_cov/elite/zealot,\
 		/datum/job/opredflag_cov/elite/ranger,\
 		/datum/job/opredflag_cov/elite/specops,\
+		/datum/job/opredflag_cov/elite/honourguard,\
 		/datum/job/opredflag_cov/grunt,\
 		/datum/job/opredflag_cov/grunt/major,\
 		/datum/job/opredflag_cov/grunt/ultra,\
@@ -36,11 +37,6 @@
 		/datum/job/opredflag_spartan,\
 		/datum/job/opredflag_spartan/commander\
 	)
-
-	allowed_spawns = list("Arrivals Shuttle")
-	default_spawn = null
-
-
 
 /datum/map/covenant_cruiser/New()
 	. = ..()

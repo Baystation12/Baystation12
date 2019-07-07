@@ -109,6 +109,7 @@
 	fired_projectile = /obj/item/projectile/overmap/mac
 	requires_ammo = 1
 	var/accelerator_overlay_icon_state = "mac_accelerator_effect"
+	var/automated = 0
 
 /obj/machinery/overmap_weapon_console/mac/proc/clear_linked_devices()
 	for(var/obj/machinery/mac_cannon/ammo_loader/loader in linked_devices)
@@ -166,6 +167,10 @@
 	if(!do_power_check(user))
 		return
 
+	if(automated)
+		to_chat(user, "<span class='warning'>Manual fire control disabled due to automated fire control!</span>")
+		return
+
 	. = ..()
 
 	if(.)
@@ -175,7 +180,7 @@
 			play_fire_sound(target)
 
 /obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = src.loc)
-	if(isnull(src.fire_sound) || istype(overmap_object))
+	if(isnull(src.fire_sound) || !istype(overmap_object))
 		return
 	if(overmap_object.map_z.len ==0)
 		return
@@ -245,7 +250,7 @@
 		var/turf/target_turf = target.loc
 
 		play_fire_sound()
-		var/obj/effect/overmap/targ_overmap = map_sectors["target.z"]
+		var/obj/effect/overmap/targ_overmap = map_sectors["[target.z]"]
 		play_fire_sound(targ_overmap,target_turf)
 		explosion(target_turf,4,5,6,20, adminlog = 0)
 		targ_overmap.adminwarn_attack()

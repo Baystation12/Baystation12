@@ -268,7 +268,8 @@ proc/get_radio_key_from_channel(var/channel)
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
-			log_say("[name]/[key] : SIGN: [message]")
+			if(src.client || !config.ignore_npc_chatter)
+				log_say("[name]/[key] : SIGN: [message]")
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
 	if(T)

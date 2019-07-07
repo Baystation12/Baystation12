@@ -2,9 +2,10 @@
 
 	#include "../../faction_bases/base_areas.dm"
 	#include "../../faction_bases/faction_base.dm"
-	#include "../../faction_bases/faction_spawns.dm"
+	#include "../../faction_bases/faction_spawns_unsc.dm"
+	//#include "../../faction_bases/faction_spawns_cov.dm"
 
-	#include "../../faction_bases/Covenant_Station.dmm"
+	//#include "../../faction_bases/Covenant_Station.dmm"
 
 	#include "../../faction_bases/Human_Station_1.dmm"
 
@@ -15,7 +16,6 @@
 	#include "../../Exoplanet Research/includes.dm"
 
 	#include "../../geminus_city/geminus_city.dm"
-	#include "jobdefs_geminus.dm"
 
 	//#include "../../ks7_elmsville/ks7_elmsville.dm"
 
@@ -33,11 +33,10 @@
 
 	#include "odst_crew_jobs.dm"
 
-	#include "../../civ_ships/CCV_Comet.dm"
-	#include "../../civ_ships/CCV_Comet.dmm"
-
 	#include "overall_outfits.dm"
 	#include "mapdef.dm"
+
+	#include "gamemode_revolution.dm"
 
 	#include "../../../code/modules/halo/lobby_music/odst_music.dm"
 	#include "../../../code/modules/halo/lobby_music/halo_music.dm"

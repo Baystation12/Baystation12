@@ -114,6 +114,7 @@
 /obj/vehicles/proc/on_death()
 	explosion(loc,-1,-1,2,5)
 	movement_destroyed = 1
+	guns_disabled = 1
 	icon_state = "[initial(icon_state)]_destroyed"
 
 /obj/vehicles/proc/kick_occupants()

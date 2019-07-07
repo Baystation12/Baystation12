@@ -10,8 +10,9 @@
 	total_positions = 8
 	spawn_positions = 8
 	selection_color = "#0A0A95"
-	access = list(142)
+	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_medical_crew
 	title = "UNSC Bertels Hospital Corpsman"
@@ -20,29 +21,34 @@
 	total_positions = 4
 	spawn_positions = 4
 	selection_color = "#0A0A95"
-	access = list(142)
+	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
+	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#0A0A95"
-	access = list(142,144,145,192,308)
+	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	faction_whitelist = "UNSC"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
+	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#0A0A95"
-	access = list(142,144,145,192,308)
+	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unsc_ship_iwo
 	title = "UNSC Bertels Infantry Weapons Officer"
@@ -51,8 +57,9 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
-	access = list(142,144,145,192,308)
+	access = list(access_unsc,144,145,192,access_unsc_armoury, access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
+	whitelisted_species = list(/datum/species/human)
 
 
 
@@ -68,8 +75,10 @@
 	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
 	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
 	"EVA Combat Marine","Marine Combat Technician")
-	access = list(142,144,192)
+	access = list(access_unsc,144,192)
 	spawnpoint_override = "UNSC Base Spawns"
+	open_slot_on_death = 1
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -78,8 +87,10 @@
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
-	access = list(142,144,145,192)
+	access = list(access_unsc,144,145,192,access_unsc_armoury,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
+	open_slot_on_death = 1
+	whitelisted_species = list(/datum/species/human)
 
 //UNSC BERTELS ODST Jobs
 
@@ -99,9 +110,10 @@
 	"Master Sergeant" = /decl/hierarchy/outfit/job/bertelsODSTFireteamLead)
 
 	selection_color = "#0A0A95"
-	access = list(142,144,110,192,309,310)
+	access = list(access_unsc,144,110,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
@@ -116,6 +128,7 @@
 	"Lieutenant Colonel" = /decl/hierarchy/outfit/job/bertelsODSTltcolonel,
 	"Colonel" = /decl/hierarchy/outfit/job/bertelsODSTcolonel)
 	selection_color = "#0A0A95"
-	access = list(142,144,145,110,192,300,306,309,310,311)
+	access = list(access_unsc,144,145,110,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
+	whitelisted_species = list(/datum/species/human)

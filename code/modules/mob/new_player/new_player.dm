@@ -287,6 +287,9 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src, job.title,job.is_whitelisted, job))	return 0
 	if(!job.player_old_enough(src.client))	return 0
+	if(ticker.mode.disabled_jobs.Find(job.title))	return 0
+	if(ticker.mode.disabled_jobs_types.Find(job.type))	return 0
+	if(!job_master.get_spawnpoint_for(src.client, job, 1))	return 0
 
 	return 1
 
@@ -314,26 +317,9 @@
 	if(job.is_restricted(client.prefs, src))
 		return
 
-	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job)
-	var/turf/spawn_turf = pick(spawnpoint.turfs)
-	if(job.latejoin_at_spawnpoints)
-		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
-		spawn_turf = get_turf(S)
-	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
-	if(airstatus)
-		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \
-		You may die shortly after spawning. It is possible to select different spawn point via character preferences. \
-		Spawn anyway? More information: [airstatus]", "Atmosphere warning", "Abort", "Spawn anyway")
-		if(reply == "Abort")
-			return 0
-		else
-			// Let the staff know, in case the person complains about dying due to this later. They've been warned.
-			log_and_message_admins("User [src] spawned at spawn point with dangerous atmosphere.")
+	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job, 1)
+	var/turf/spawn_turf = spawnpoint.get_spawn_turf(job.title)
 
-		// Just in case someone stole our position while we were waiting for input from alert() proc
-		if(!IsJobAvailable(job))
-			to_chat(src, alert("[job.title] is not available. Please try another."))
-			return 0
 
 	job_master.AssignRole(src, job.title, 1)
 
@@ -439,10 +425,6 @@
 	var/datum/species/chosen_species
 	if(client.prefs.species)
 		chosen_species = all_species[client.prefs.species]
-
-	if(!spawn_turf)
-		var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job_datum)//get_rank_pref())
-		spawn_turf = pick(spawnpoint.turfs)
 
 	if(chosen_species)
 		if(!check_species_allowed(chosen_species))
