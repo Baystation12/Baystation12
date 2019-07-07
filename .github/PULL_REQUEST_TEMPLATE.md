@@ -14,7 +14,7 @@ You find a README and example file in .\html\changelogs\ for further instruction
 -->
 
 <!-- If you need a change log update the below. Other wise you should remove it-->
-:cl: YourName  
-rscadd: Added a changelog editing system that should cause fewer conflicts and more accurate timestamps.  
-rscdel: Killed innocent kittens.  
+:cl: YourName
+rscadd: Added a changelog editing system that should cause fewer conflicts and more accurate timestamps.
+rscdel: Killed innocent kittens.
 /:cl:
