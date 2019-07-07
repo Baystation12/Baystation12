@@ -933,6 +933,22 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
+"abJ" = (
+/obj/effect/floor_decal/corner/yellow{
+	dir = 1
+	},
+/obj/effect/floor_decal/floordetail/edgedrain{
+	icon_state = "edge";
+	dir = 6
+	},
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/surgery2)
 "abK" = (
 /obj/structure/closet/wardrobe/virology_white,
 /obj/effect/floor_decal/industrial/warning{
@@ -17789,15 +17805,18 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue/autopsy)
 "eMg" = (
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	layer = 2.4;
 	level = 2
+	},
+/obj/structure/closet/walllocker{
+	name = "Washroom Equipment";
+	pixel_x = 28
+	},
+/obj/item/weapon/soap,
+/obj/item/weapon/storage/box/detergent{
+	pixel_x = -3
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
@@ -17857,18 +17876,6 @@
 	pixel_y = 24;
 	tag = "rob_or_display1"
 	},
-/turf/simulated/floor/tiled/dark,
-/area/medical/surgery2)
-"ePb" = (
-/obj/machinery/organ_printer/flesh/mapped,
-/obj/effect/floor_decal/corner/yellow{
-	dir = 1
-	},
-/obj/effect/floor_decal/floordetail/edgedrain{
-	icon_state = "edge";
-	dir = 6
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eQb" = (
@@ -20019,11 +20026,15 @@
 	pixel_x = 0;
 	pixel_y = 0
 	},
-/obj/item/weapon/soap,
 /obj/structure/curtain/open/shower,
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
@@ -51299,7 +51310,7 @@ tCw
 eQb
 fDb
 gkb
-ePb
+abJ
 iGb
 kCb
 kLb
