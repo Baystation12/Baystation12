@@ -67,7 +67,7 @@
 				"bribe_accept"      = "Why not! Glad to be here for a few more minutes.",
 				)
 
-	possible_trading_items = list(/obj/item/weapon/computer_hardware/battery_module      = TRADER_SUBTYPES_ONLY,
+	possible_trading_items = list(/obj/item/weapon/stock_parts/computer/battery_module      = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/stock_parts/circuitboard                            = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/stock_parts/circuitboard/telecomms                  = TRADER_BLACKLIST,
 								/obj/item/weapon/stock_parts/circuitboard/unary_atmos                = TRADER_BLACKLIST,

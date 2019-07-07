@@ -34,7 +34,7 @@
 
 /decl/hierarchy/supply_pack/supply/scanner_module
 	name = "Electronics - Paper scanner modules"
-	contains = list(/obj/item/weapon/computer_hardware/scanner/paper = 4)
+	contains = list(/obj/item/weapon/stock_parts/computer/scanner/paper = 4)
 	cost = 20
 	containername = "paper scanner module crate"
 

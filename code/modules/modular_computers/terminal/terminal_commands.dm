@@ -94,13 +94,13 @@ Subtypes
 /datum/terminal_command/hwinfo/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(text == "hwinfo")
 		. = list("Hardware Detected:")
-		for(var/obj/item/weapon/computer_hardware/ch in  terminal.computer.get_all_components())
+		for(var/obj/item/weapon/stock_parts/computer/ch in  terminal.computer.get_all_components())
 			. += ch.name
 		return
 	if(length(text) < 8)
 		return "hwinfo: Improper syntax. Use hwinfo \[name\]."
 	text = copytext(text, 8)
-	var/obj/item/weapon/computer_hardware/ch = terminal.computer.find_hardware_by_name(text)
+	var/obj/item/weapon/stock_parts/computer/ch = terminal.computer.find_hardware_by_name(text)
 	if(!ch)
 		return "hwinfo: No such hardware found."
 	ch.diagnostics(user)

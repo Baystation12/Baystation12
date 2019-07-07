@@ -114,7 +114,7 @@
 
 /decl/hierarchy/supply_pack/atmospherics/scanner_module
 	name = "Electronics - Atmospherics scanner modules"
-	contains = list(/obj/item/weapon/computer_hardware/scanner/atmos = 4)
+	contains = list(/obj/item/weapon/stock_parts/computer/scanner/atmos = 4)
 	cost = 20
 	containername = "atmospherics scanner module crate"
 	containertype = /obj/structure/closet/crate/secure

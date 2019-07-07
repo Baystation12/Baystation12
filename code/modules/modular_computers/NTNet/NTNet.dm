@@ -42,12 +42,12 @@ var/global/datum/ntnet/ntnet_global = new()
 	build_reports_list()
 	add_log("NTNet logging system activated.")
 
-/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
 	if(intrusion_detection_enabled)
 		add_log(log_string, source)
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
-/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
 	var/log_text = "[stationtime2text()] - "
 	if(source)
 		log_text += "[source.get_network_tag()] - "
