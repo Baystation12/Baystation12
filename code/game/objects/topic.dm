@@ -15,11 +15,11 @@
 	return TOPIC_NOACTION
 
 /obj/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	return min(..(), user.CanUseObjTopic(src))
+	return min(..(), user.CanUseObjTopic(src, state))
 
-/mob/living/CanUseObjTopic(var/obj/O)
+/mob/living/CanUseObjTopic(var/obj/O, var/datum/topic_state/state)
 	. = ..()
-	if(!O.check_access(src))
+	if(state.check_access && !O.check_access(src))
 		. = min(., STATUS_UPDATE)
 
 /mob/proc/CanUseObjTopic()
