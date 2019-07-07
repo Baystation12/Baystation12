@@ -36,7 +36,7 @@
 
 	if(T0.x == x || T0.y == y)
 		// Check for border blockages
-		return T0.ClickCross(get_dir(T0,src), border_only = 1) && src.ClickCross(get_dir(src,T0), border_only = 1, target_atom = target)
+		return T0.ClickCross(get_dir(T0,src), border_only = 1, target_atom = neighbor) && src.ClickCross(get_dir(src,T0), border_only = 1, target_atom = target)
 
 	// Not orthagonal
 	var/in_dir = get_dir(neighbor,src) // eg. northwest (1+8)
@@ -44,7 +44,7 @@
 	var/d2 = in_dir - d1			// eg north		(1+8) - 8 = 1
 
 	for(var/d in list(d1,d2))
-		if(!T0.ClickCross(d, border_only = 1))
+		if(!T0.ClickCross(d, border_only = 1, target_atom = neighbor))
 			continue // could not leave T0 in that direction
 
 		var/turf/T1 = get_step(T0,d)
