@@ -663,6 +663,7 @@
 			if (do_after(user,6,src))
 				if(prob(50))
 					emagged = 1
+					req_access.Cut()
 					locked = 0
 					to_chat(user, "<span class='notice'>You emag the APC interface.</span>")
 					update_icon()

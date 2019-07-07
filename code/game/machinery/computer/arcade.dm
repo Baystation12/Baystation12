@@ -134,7 +134,7 @@
 	return
 
 /obj/machinery/computer/arcade/battle/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if((blocked || gameover) && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
+	if((blocked || gameover) && href_list && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 

@@ -143,7 +143,8 @@
 
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
-		src.emagged = 1
+		emagged = 1
+		req_access.Cut()
 		to_chat(user, "You short out the product lock on \the [src]")
 		return 1
 
@@ -364,63 +365,57 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/vending/Topic(href, href_list)
-	if(stat & (BROKEN|NOPOWER))
-		return
-	if(..())
-		return
-
+/obj/machinery/vending/OnTopic(mob/user, href, href_list)
 	if(href_list["remove_coin"] && !istype(usr,/mob/living/silicon))
 		if(!coin)
-			to_chat(usr, "There is no coin in this machine.")
-			return
+			to_chat(user, "There is no coin in this machine.")
+			return TOPIC_HANDLED
 
-		coin.forceMove(src.loc)
-		if(!usr.get_active_hand())
-			usr.put_in_hands(coin)
-		to_chat(usr, "<span class='notice'>You remove \the [coin] from \the [src]</span>")
+		coin.forceMove(loc)
+		if(!user.get_active_hand())
+			user.put_in_hands(coin)
+		to_chat(user, "<span class='notice'>You remove \the [coin] from \the [src]</span>")
 		coin = null
 		categories &= ~CAT_COIN
+		return TOPIC_HANDLED
 
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
-		if ((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
-			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
-				to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
-				flick(icon_deny,src)
-				return
+	if (href_list["vend"] && vend_ready && !currently_vending)
+		var/key = text2num(href_list["vend"])
+		if(!is_valid_index(key, product_records))
+			return TOPIC_REFRESH
+		var/datum/stored_items/vending_products/R = product_records[key]
+		if(!istype(R))
+			return TOPIC_REFRESH
 
-			var/key = text2num(href_list["vend"])
-			var/datum/stored_items/vending_products/R = product_records[key]
+		// This should not happen unless the request from NanoUI was bad
+		if(!(R.category & categories))
+			return TOPIC_REFRESH
 
-			// This should not happen unless the request from NanoUI was bad
-			if(!(R.category & src.categories))
-				return
-
-			if(R.price <= 0)
-				src.vend(R, usr)
-			else if(istype(usr,/mob/living/silicon)) //If the item is not free, provide feedback if a synth is trying to buy something.
-				to_chat(usr, "<span class='danger'>Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled.</span>")
-				return
+		if(R.price <= 0)
+			vend(R, user)
+		else if(istype(user,/mob/living/silicon)) //If the item is not free, provide feedback if a synth is trying to buy something.
+			to_chat(user, "<span class='danger'>Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled.</span>")
+		else
+			currently_vending = R
+			if(!vendor_account || vendor_account.suspended)
+				status_message = "This machine is currently unable to process payments due to problems with the associated account."
+				status_error = 1
 			else
-				src.currently_vending = R
-				if(!vendor_account || vendor_account.suspended)
-					src.status_message = "This machine is currently unable to process payments due to problems with the associated account."
-					src.status_error = 1
-				else
-					src.status_message = "Please swipe a card or insert cash to pay for the item."
-					src.status_error = 0
+				status_message = "Please swipe a card or insert cash to pay for the item."
+				status_error = 0
+		return TOPIC_REFRESH
 
-		else if (href_list["cancelpurchase"])
-			src.currently_vending = null
+	if(href_list["cancelpurchase"])
+		currently_vending = null
+		return TOPIC_REFRESH
 
-		else if ((href_list["togglevoice"]) && (src.panel_open))
-			src.shut_up = !src.shut_up
-
-		SSnano.update_uis(src)
+	if(href_list["togglevoice"] && panel_open)
+		shut_up = !shut_up
+		return TOPIC_HANDLED
 
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
-	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
-		to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
+	if((!allowed(user)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+		to_chat(user, "<span class='warning'>Access denied.</span>")//Unless emagged of course
 		flick(src.icon_deny,src)
 		return
 	src.vend_ready = 0 //One thing at a time!!

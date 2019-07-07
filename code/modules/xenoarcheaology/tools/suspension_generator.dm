@@ -186,6 +186,7 @@
 /obj/machinery/suspension_gen/emag_act(var/remaining_charges, var/mob/user)
 	if(cell.charge > 0 && locked)
 		locked = 0
+		req_access.Cut()
 		return 1
 
 //checks for whether the machine can be activated or not should already have occurred by this point
