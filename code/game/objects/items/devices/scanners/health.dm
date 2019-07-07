@@ -28,10 +28,8 @@
 
 	var/mob/living/carbon/human/scan_subject = null
 	if (istype(target, /mob/living/carbon/human))
-		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over \the [target].</span>")
 		scan_subject = target
 	else if (istype(target, /obj/structure/closet/body_bag))
-		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over \the [target].</span>")
 		var/obj/structure/closet/body_bag/B = target
 		if(!B.opened)
 			var/list/scan_content = list()
