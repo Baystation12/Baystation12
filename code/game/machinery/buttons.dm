@@ -104,7 +104,7 @@
 	if(active)
 		icon_state = "launcheract"
 	else
-		icon_state = "launcherbtt"	
+		icon_state = "launcherbtt"
 
 //alternate button with the same toggle functionality, except has a lightswitch sprite instead
 /obj/machinery/button/toggle/switch
@@ -119,11 +119,11 @@
 //alternate button with the same toggle functionality, except has a door control sprite instead
 /obj/machinery/button/toggle/alternate
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "doorctrl0"
+	icon_state = "doorctrl"
 
 /obj/machinery/button/toggle/alternate/on_update_icon()
 	if(active)
-		icon_state = "doorctrl0"
+		icon_state = "doorctrl"
 	else
 		icon_state = "doorctrl2"
 
@@ -144,10 +144,10 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button/door)
 
 /obj/machinery/button/alternate/door/on_update_icon()
-	if(active)
-		icon_state = "[initial(icon_state)]"
+	if(operating)
+		icon_state = "[initial(icon_state)]1"
 	else
-		icon_state = "[initial(icon_state)]2"
+		icon_state = "[initial(icon_state)]"
 
 /decl/stock_part_preset/radio/basic_transmitter/button/door
 	frequency = AIRLOCK_FREQ
