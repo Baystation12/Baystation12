@@ -33,6 +33,7 @@
 	caliber = "spnkr"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
