@@ -32,7 +32,7 @@
 
 	if((. = ..()) != null)
 		return
-
+		
 	if(href_list["pick"])
 		var/list/possible_d = shuttle.get_possible_destinations()
 		var/D

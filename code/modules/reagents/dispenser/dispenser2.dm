@@ -20,7 +20,7 @@
 	density = 1
 	anchored = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	core_skill = SKILL_CHEMISTRY
+	core_skill = SKILL_MEDICAL
 	var/can_contaminate = TRUE
 
 /obj/machinery/chemical_dispenser/New()

@@ -8,7 +8,7 @@
 
 	var/obj/item/weapon/reagent_containers/glass/beaker/vial/sample = null
 	var/datum/disease2/disease/virus2 = null
-	core_skill = SKILL_VIROLOGY
+	core_skill = SKILL_MEDICAL
 
 /obj/machinery/computer/centrifuge/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(isScrewdriver(O))

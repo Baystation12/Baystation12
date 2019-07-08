@@ -209,19 +209,19 @@
 				last_comms = T.compliment()
 			if(href_list["PRG_offer_item"])
 				. = 1
-				offer_item(T,text2num(href_list["PRG_offer_item"]) + 1, user.get_skill_value(SKILL_FINANCE))
+				offer_item(T,text2num(href_list["PRG_offer_item"]) + 1, user.get_skill_value(SKILL_COMPUTER))
 			if(href_list["PRG_how_much_do_you_want"])
 				. = 1
-				last_comms = T.how_much_do_you_want(text2num(href_list["PRG_how_much_do_you_want"]) + 1, user.get_skill_value(SKILL_FINANCE))
+				last_comms = T.how_much_do_you_want(text2num(href_list["PRG_how_much_do_you_want"]) + 1, user.get_skill_value(SKILL_COMPUTER))
 			if(href_list["PRG_offer_money_for_item"])
 				. = 1
-				offer_money(T, text2num(href_list["PRG_offer_money_for_item"])+1, user.get_skill_value(SKILL_FINANCE))
+				offer_money(T, text2num(href_list["PRG_offer_money_for_item"])+1, user.get_skill_value(SKILL_COMPUTER))
 			if(href_list["PRG_what_do_you_want"])
 				. = 1
 				last_comms = T.what_do_you_want()
 			if(href_list["PRG_sell_items"])
 				. = 1
-				sell_items(T, user.get_skill_value(SKILL_FINANCE))
+				sell_items(T, user.get_skill_value(SKILL_COMPUTER))
 			if(href_list["PRG_bribe"])
 				. = 1
 				bribe(T, text2num(href_list["PRG_bribe"]))

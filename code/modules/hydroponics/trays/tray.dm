@@ -455,7 +455,7 @@
 			weedlevel = 0
 			if(seed)
 				var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
-				if(!user.skill_check(SKILL_BOTANY, needed_skill))
+				if(!user.skill_check(SKILL_ANATOMY, needed_skill))
 					health -= rand(40,60)
 					check_health(1)
 		else
@@ -523,7 +523,7 @@
 	lastcycle = world.time
 
 	var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
-	if(prob(user.skill_fail_chance(SKILL_BOTANY, 40, needed_skill)))
+	if(prob(user.skill_fail_chance(SKILL_ANATOMY, 40, needed_skill)))
 		dead = 1
 		health = 0
 
@@ -562,7 +562,7 @@
 	to_chat(usr, "Water: [round(waterlevel,0.1)]/100")
 	to_chat(usr, "Nutrient: [round(nutrilevel,0.1)]/10")
 
-	if(usr.skill_check(SKILL_BOTANY, SKILL_BASIC))
+	if(usr.skill_check(SKILL_ANATOMY, SKILL_BASIC))
 		if(weedlevel >= 5)
 			to_chat(usr, "\The [src] is <span class='danger'>infested with weeds</span>!")
 		if(pestlevel >= 5)
