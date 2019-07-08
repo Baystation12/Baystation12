@@ -52,8 +52,12 @@
 
 	if(!active) return
 
-	if(!anchored || (stat & NOPOWER))
-		system_error("system configuration or charge error")
+	if(!anchored)
+		system_error("system configuration error")
+		return
+
+	if(stat & NOPOWER)
+		system_error("insufficient charge")
 		return
 
 	if(need_update_field)
@@ -152,10 +156,12 @@
 /obj/machinery/mining/drill/physical_attack_hand(mob/user as mob)
 	check_supports()
 	if(need_player_check)
+		if(can_use_power_oneoff(10 KILOWATTS))
+			system_error("insufficient charge")
+		else if(anchored)
+			get_resource_field()
 		to_chat(user, "You hit the manual override and reset the drill's error checking.")
 		need_player_check = 0
-		if(anchored)
-			get_resource_field()
 		update_icon()
 		return TRUE
 	if(supported && !panel_open)
@@ -178,7 +184,8 @@
 	if(need_player_check)
 		icon_state = "mining_drill_error"
 	else if(active)
-		icon_state = "mining_drill_active"
+		var/status = Clamp(round( (contents.len / capacity) * 4 ), 0, 3)
+		icon_state = "mining_drill_active[status]"
 	else if(supported)
 		icon_state = "mining_drill_braced"
 	else
