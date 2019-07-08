@@ -82,13 +82,13 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 
 /datum/antagonist/godcultist/proc/add_cultist(var/datum/mind/player, var/mob/living/deity/deity)
 	deity.add_follower(player.current)
-	player.current.add_language(LANGUAGE_CULT)
+	player.current.add_language(LANGUAGE_GUTTER)
 
 /datum/antagonist/godcultist/proc/remove_cultist(var/datum/mind/player)
 	var/mob/living/deity/god = get_deity(player)
 	if(god)
 		god.remove_follower(player.current)
-	player.current.remove_language(LANGUAGE_CULT)
+	player.current.remove_language(LANGUAGE_GUTTER)
 
 /datum/antagonist/godcultist/proc/get_deity(var/datum/mind/player)
 	for(var/m in GLOB.deity.current_antagonists)

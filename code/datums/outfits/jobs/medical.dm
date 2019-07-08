@@ -1,3 +1,44 @@
+/decl/hierarchy/outfit/job/medical/ds13seniormedofficer
+	name = OUTFIT_JOB_NAME("Senior Medical Officer")
+	l_ear  =/obj/item/device/radio/headset/heads/cmo
+	uniform = /obj/item/clothing/under/rank/chief_medical_officer
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
+	shoes = /obj/item/clothing/shoes/brown
+	l_hand = /obj/item/weapon/storage/firstaid/adv
+	r_pocket = /obj/item/device/flashlight/pen
+	id_type = /obj/item/weapon/card/id/medical/head
+	pda_type = /obj/item/modular_computer/pda/heads/cmo
+
+/decl/hierarchy/outfit/job/medical/ds13meddoctor
+	name = OUTFIT_JOB_NAME("Medical Doctor")
+	uniform = /obj/item/clothing/under/rank/medical
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	l_hand = /obj/item/weapon/storage/firstaid/adv
+	r_pocket = /obj/item/device/flashlight/pen
+	id_type = /obj/item/weapon/card/id/medical
+	pda_type = /obj/item/modular_computer/pda/medical
+	pda_slot = slot_l_store
+
+/decl/hierarchy/outfit/job/medical/ds13medsurgeon
+	name = OUTFIT_JOB_NAME("Surgeon")
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/blue
+	head = /obj/item/clothing/head/surgery/blue
+	uniform = /obj/item/clothing/under/rank/medical
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	l_hand = /obj/item/weapon/storage/firstaid/adv
+	r_pocket = /obj/item/device/flashlight/pen
+	pda_type = /obj/item/modular_computer/pda/medical
+	pda_slot = slot_l_store
+	id_type = /obj/item/weapon/card/id/medical
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////			DEFAULT OUTFITS BELOW HERE.									////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
 /decl/hierarchy/outfit/job/medical
 	hierarchy_type = /decl/hierarchy/outfit/job/medical
 	l_ear = /obj/item/device/radio/headset/headset_med

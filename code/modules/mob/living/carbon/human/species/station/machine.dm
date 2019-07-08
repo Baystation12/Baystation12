@@ -11,12 +11,12 @@
 
 	preview_icon = 'icons/mob/human_races/species/ipc/preview.dmi'
 
-	language = LANGUAGE_EAL
+	language = LANGUAGE_GUTTER
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 	num_alternate_languages = 2
 	strength = STR_HIGH
-	name_language = LANGUAGE_EAL
+	name_language = LANGUAGE_GUTTER
 
 	min_age = 1
 	max_age = 90
@@ -39,7 +39,7 @@
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_LACE
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_UNDERWEAR //IPCs can wear undies too :(
 
 	blood_color = "#1f181f"

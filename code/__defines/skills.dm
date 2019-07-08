@@ -23,4 +23,3 @@
 #define SKILL_ELECTRICAL    /decl/hierarchy/skill/engineering/electrical
 #define SKILL_MEDICAL       /decl/hierarchy/skill/medical/medical
 #define SKILL_ANATOMY       /decl/hierarchy/skill/medical/anatomy
-#define SKILL_DEVICES       /decl/hierarchy/skill/research/devices

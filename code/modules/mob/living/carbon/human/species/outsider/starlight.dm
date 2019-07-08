@@ -68,9 +68,10 @@
 
 	total_health = 250
 	body_temperature = T0C + 500 //We are being of fire and light.
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE | SPECIES_FLAG_NO_PAIN
 
-	secondary_langs = list(LANGUAGE_CULT,LANGUAGE_OCCULT)
+	secondary_langs = list(LANGUAGE_GUTTER)
 
 	base_auras = list(
 		/obj/aura/starborn
@@ -104,7 +105,7 @@
 	radiation_mod = 0
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 
-	secondary_langs = list(LANGUAGE_CULT,LANGUAGE_OCCULT)
+	secondary_langs = list(LANGUAGE_GUTTER)
 
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unbreakable/blueforged)
 

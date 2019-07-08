@@ -18,7 +18,8 @@
 	death_message = "dissolves into ash..."
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED
-	secondary_langs = list(LANGUAGE_CULT,LANGUAGE_OCCULT)
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
+	secondary_langs = list(LANGUAGE_GUTTER)
 
 /datum/species/starlight/shadow/handle_environment_special(var/mob/living/carbon/human/H)
 	if(H.InStasis() || H.stat == DEAD || H.isSynthetic())

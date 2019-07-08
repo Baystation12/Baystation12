@@ -1,3 +1,38 @@
+/decl/hierarchy/outfit/job/ds13captain
+	name = OUTFIT_JOB_NAME("Captain")
+	head = /obj/item/clothing/head/caphat
+	uniform = /obj/item/clothing/under/rank/captain
+	l_ear = /obj/item/device/radio/headset/heads/captain
+	shoes = /obj/item/clothing/shoes/brown
+	id_type = /obj/item/weapon/card/id/gold
+	pda_type = /obj/item/modular_computer/pda/captain
+
+
+/decl/hierarchy/outfit/job/ds13flieutenant
+	name = OUTFIT_JOB_NAME("First Lieutenant")
+	uniform = /obj/item/clothing/under/rank/head_of_personnel
+	l_ear = /obj/item/device/radio/headset/heads/hop
+	shoes = /obj/item/clothing/shoes/brown
+	id_type = /obj/item/weapon/card/id/silver
+	pda_type = /obj/item/modular_computer/pda/heads/hop
+
+
+/decl/hierarchy/outfit/job/ds13bensign
+	name = OUTFIT_JOB_NAME("Bridge Ensign")
+	uniform = /obj/item/clothing/under/rank/head_of_personnel
+	l_ear = /obj/item/device/radio/headset/heads/hop
+	shoes = /obj/item/clothing/shoes/brown
+	id_type = /obj/item/weapon/card/id/silver
+	pda_type = /obj/item/modular_computer/pda/heads/hop
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////			DEFAULT OUTFITS BELOW HERE.									////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
 /decl/hierarchy/outfit/job/captain
 	name = OUTFIT_JOB_NAME("Captain")
 	head = /obj/item/clothing/head/caphat

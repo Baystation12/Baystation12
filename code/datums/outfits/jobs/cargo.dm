@@ -1,3 +1,53 @@
+/decl/hierarchy/outfit/job/cargo/ds13dom
+	name = OUTFIT_JOB_NAME("Director of Mining")
+	uniform = /obj/item/clothing/under/rank/cargo
+	shoes = /obj/item/clothing/shoes/brown
+	glasses = /obj/item/clothing/glasses/sunglasses
+	l_hand = /obj/item/weapon/clipboard
+	id_type = /obj/item/weapon/card/id/cargo/head
+	pda_type = /obj/item/modular_computer/pda/cargo
+
+/decl/hierarchy/outfit/job/cargo/ds13supplyofficer
+	name = OUTFIT_JOB_NAME("Supply Officer")
+	uniform = /obj/item/clothing/under/rank/cargo
+	shoes = /obj/item/clothing/shoes/brown
+	glasses = /obj/item/clothing/glasses/sunglasses
+	l_hand = /obj/item/weapon/clipboard
+	id_type = /obj/item/weapon/card/id/cargo/head
+	pda_type = /obj/item/modular_computer/pda/cargo
+
+/decl/hierarchy/outfit/job/cargo/ds13cargojockey
+	name = OUTFIT_JOB_NAME("Cargo Transport Specialist")
+	uniform = /obj/item/clothing/under/rank/cargotech
+	id_type = /obj/item/weapon/card/id/cargo
+	pda_type = /obj/item/modular_computer/pda/cargo
+
+/decl/hierarchy/outfit/job/cargo/ds13gravityman
+	name = OUTFIT_JOB_NAME("Gravitational Tether Operator")
+	uniform = /obj/item/clothing/under/rank/miner
+	id_type = /obj/item/weapon/card/id/cargo/mining
+	pda_type = /obj/item/modular_computer/pda/science
+
+/decl/hierarchy/outfit/job/cargo/ds13miningforeman
+	name = OUTFIT_JOB_NAME("Mining Foreman")
+	uniform = /obj/item/clothing/under/rank/miner
+	id_type = /obj/item/weapon/card/id/cargo/mining
+	pda_type = /obj/item/modular_computer/pda/science
+
+/decl/hierarchy/outfit/job/cargo/ds13necromorphbait
+	name = OUTFIT_JOB_NAME("Aegis VII Colonist")
+	uniform = /obj/item/clothing/under/rank/miner
+	id_type = /obj/item/weapon/card/id/cargo/mining
+	pda_type = /obj/item/modular_computer/pda/science
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////			DEFAULT OUTFITS BELOW HERE.									////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
 /decl/hierarchy/outfit/job/cargo
 	l_ear = /obj/item/device/radio/headset/headset_cargo
 	hierarchy_type = /decl/hierarchy/outfit/job/cargo

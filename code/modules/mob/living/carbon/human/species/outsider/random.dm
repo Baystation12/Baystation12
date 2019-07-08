@@ -5,16 +5,16 @@
 	rarity_value = 5
 
 	species_flags = SPECIES_FLAG_NO_SCAN
-	spawn_flags = SPECIES_IS_RESTRICTED
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 
 	icobase = 'icons/mob/human_races/species/humanoid/body.dmi'
 	deform = 'icons/mob/human_races/species/humanoid/body.dmi'
 	appearance_flags = HAS_SKIN_COLOR
 	limb_blend = ICON_MULTIPLY
 
-	default_language = LANGUAGE_ALIUM
-	language = LANGUAGE_ALIUM
-	name_language = LANGUAGE_ALIUM
+	default_language = LANGUAGE_GUTTER
+	language = LANGUAGE_GUTTER
+	name_language = LANGUAGE_GUTTER
 
 #define RANDOM_COEF(VAR,LO,HI) ##VAR =  round((##VAR*rand(##LO*100, ##HI*100))/100, 0.1)
 /datum/species/alium/New()

@@ -1,24 +1,7 @@
 // Languages.
-#define LANGUAGE_GALCOM "Galactic Common"
-#define LANGUAGE_EAL "Encoded Audio Language"
-#define LANGUAGE_SOL_COMMON "Sol Common"
-#define LANGUAGE_UNATHI "Sinta'unathi"
-#define LANGUAGE_SIIK_MAAS "Siik'maas"
-#define LANGUAGE_SIIK_TAJR "Siik'tajr"
-#define LANGUAGE_SKRELLIAN "Skrellian"
-#define LANGUAGE_ROOTLOCAL "Local Rootspeak"
-#define LANGUAGE_ROOTGLOBAL "Global Rootspeak"
-#define LANGUAGE_LUNAR "Selenian"
+#define LANGUAGE_GALCOM "English, Galactic Common"
 #define LANGUAGE_GUTTER "Gutter"
-#define LANGUAGE_CULT "Cult"
 #define LANGUAGE_SIGN "Sign Language"
-#define LANGUAGE_INDEPENDENT "Independent"
-#define LANGUAGE_NABBER "Serpentid"
-#define LANGUAGE_SPACER "Spacer"
-#define LANGUAGE_ALIUM "Alium"
-#define LANGUAGE_OCCULT "Occult"
-#define LANGUAGE_ADHERENT "Protocol"
-
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
 #define RESTRICTED   2   // Language can only be acquired by spawning or an admin.

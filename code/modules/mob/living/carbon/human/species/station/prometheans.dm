@@ -21,7 +21,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	species_flags =    SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS
-	spawn_flags =      SPECIES_IS_RESTRICTED
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 
 	breath_type = null
 	poison_types = null
