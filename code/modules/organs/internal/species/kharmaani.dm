@@ -15,6 +15,15 @@
 	if(owner)
 		owner.set_id_info(id_card)
 
+/obj/item/organ/internal/controller/GetIdCard()
+	//Not using is_broken() because it should be able to function when CUT_AWAY is set
+	if(damage < min_broken_damage)
+		return id_card
+
+/obj/item/organ/internal/controller/GetAccess()
+	if(id_card && damage < min_broken_damage)
+		return id_card.GetAccess()
+
 /obj/item/weapon/card/id/ascent
 	access = list(access_ascent)
 
