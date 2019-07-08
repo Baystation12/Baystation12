@@ -11,6 +11,8 @@
 	var/deity_name = "Christ"
 	var/renamed = 0
 	var/icon_changed = 0
+	var/blessing = "<span class='notice'>You feel calm and relaxed, at one with the universe.</span>"
+	var/blessing_cooldown
 
 /obj/item/weapon/storage/bible/booze
 	name = "bible"
@@ -22,6 +24,22 @@
 		/obj/item/weapon/spacecash/bundle/c50,
 		/obj/item/weapon/spacecash/bundle/c50,
 		)
+
+/obj/item/weapon/storage/bible/attack(mob/M, mob/living/user)
+	if(!istype(M, /mob/living/carbon/human) || user == M)
+		return
+	if(world.time < 60 SECONDS + blessing_cooldown)
+		return
+	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain) && user.a_intent == I_HELP)
+		blessing_cooldown = world.time
+		var/mob/living/carbon/human/H = M
+		user.visible_message("\The [user] places \the [src] on \the [M]'s forehead...", "You place \the [src] on \the [M]'s forehead...")
+		if(H.get_cultural_value(TAG_RELIGION) != RELIGION_ATHEISM || RELIGION_AGNOSTICISM)
+			to_chat(H, blessing)
+			H.add_chemical_effect(CE_MIND, 2)
+		else
+			to_chat(H, "Nothing happened.")
+		..()
 
 /obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
@@ -36,6 +54,17 @@
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	return ..()
+
+/obj/item/weapon/storage/bible/attack_self(mob/living/user)
+	if(world.time < 60 SECONDS + blessing_cooldown)
+		return
+	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+		user.visible_message("\The [user] reads a passage from \the [src].", "You read a passage from \the [src].")
+		blessing_cooldown = world.time
+		for(var/mob/living/carbon/human/H in view(user))
+			if(H.get_cultural_value(TAG_RELIGION) != RELIGION_ATHEISM || RELIGION_AGNOSTICISM)
+				to_chat(H, blessing)
+				H.add_chemical_effect(CE_MIND, 2)
 
 /obj/item/weapon/storage/bible/verb/rename_bible()
 	set name = "Rename Bible"
