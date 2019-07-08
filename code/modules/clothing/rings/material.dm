@@ -26,7 +26,7 @@
 				return
 			desc = "A ring made from [material.display_name]."
 			to_chat(user, "<span class='warning'>You carve \"[inscription]\" into \the [src].</span>")
-				desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
+			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
 
 /obj/item/clothing/ring/material/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["examine"])

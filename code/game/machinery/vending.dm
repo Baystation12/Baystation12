@@ -365,7 +365,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/vending/OnTopic(mob/user, href, href_list)
+/obj/machinery/vending/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["remove_coin"] && !istype(usr,/mob/living/silicon))
 		if(!coin)
 			to_chat(user, "There is no coin in this machine.")
