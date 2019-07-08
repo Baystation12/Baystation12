@@ -327,10 +327,10 @@
 		dropInto(loc)
 
 	// Move us into the card and move the card to the ground.
-	forceMove(card)
 	card.dropInto(card.loc)
 	resting = 0
 	icon_state = "[chassis]"
+	forceMove(card)
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
