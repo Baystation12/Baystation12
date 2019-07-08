@@ -1,3 +1,29 @@
+/decl/hierarchy/outfit/job/science/ds13chiefsciencenerd
+	name = OUTFIT_JOB_NAME("Chief Science Officer")
+	l_ear = /obj/item/device/radio/headset/heads/rd
+	uniform = /obj/item/clothing/under/rank/research_director
+	shoes = /obj/item/clothing/shoes/brown
+	l_hand = /obj/item/weapon/clipboard
+	id_type = /obj/item/weapon/card/id/science/head
+	pda_type = /obj/item/modular_computer/pda/heads/rd
+	
+/decl/hierarchy/outfit/job/science/ds13juniorsciencenerd
+	name = OUTFIT_JOB_NAME("Research Assistant")
+	uniform = /obj/item/clothing/under/rank/scientist
+	id_type = /obj/item/weapon/card/id/science
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
+	l_ear = /obj/item/device/radio/headset/headset_sci
+	shoes = /obj/item/clothing/shoes/white
+	pda_type = /obj/item/modular_computer/pda/science
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////			DEFAULT OUTFITS BELOW HERE.									////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
 /decl/hierarchy/outfit/job/science
 	hierarchy_type = /decl/hierarchy/outfit/job/science
 	l_ear = /obj/item/device/radio/headset/headset_sci
