@@ -39,6 +39,11 @@
 	item_records = null
 	return ..()
 
+/obj/machinery/smartfridge/get_req_access()
+	if(!scan_id)
+		return list()
+	return ..()
+
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
 		return 1

@@ -85,6 +85,11 @@
 	else if(occupant)
 		overlays += ("human")
 
+/obj/machinery/suit_storage_unit/get_req_access()
+	if(!islocked)
+		return list()
+	return ..()
+
 /obj/machinery/suit_storage_unit/ex_act(severity)
 	switch(severity)
 		if(1)

@@ -187,9 +187,6 @@
 		src.update()
 	power_change()
 
-	if(!locked)
-		req_access.Cut()
-
 /obj/machinery/power/apc/Destroy()
 	src.update()
 	area.apc = null
@@ -202,6 +199,11 @@
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
 		hacker.hacked_apcs -= src
 
+	return ..()
+
+/obj/machinery/power/apc/get_req_access()
+	if(!locked)
+		return list()
 	return ..()
 
 /obj/machinery/power/apc/proc/energy_fail(var/duration)
@@ -509,7 +511,7 @@
 		else if(hacker && !hacker.hacked_apcs_hidden)
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		else
-			if(allowed(user) && !isWireCut(APC_WIRE_IDSCAN))
+			if(has_access(req_access, user.GetAccess()) && !isWireCut(APC_WIRE_IDSCAN))
 				locked = !locked
 				to_chat(user, "You [ locked ? "lock" : "unlock"] the APC interface.")
 				update_icon()
