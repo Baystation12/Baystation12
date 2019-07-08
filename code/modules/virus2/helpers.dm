@@ -1,5 +1,5 @@
 /obj/machinery/disease2
-	core_skill = SKILL_VIROLOGY
+	core_skill = SKILL_MEDICAL
 
 /obj/machinery/proc/infect_nearby(datum/disease2/disease/disease, base_chance = 10, skill_threshold = SKILL_BASIC, dist = 2)
 	if(operator_skill <= skill_threshold)
