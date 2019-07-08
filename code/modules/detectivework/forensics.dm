@@ -1,3 +1,6 @@
+//mostly stripped stuff from here, detective really isn't a role that lends itself well to dead space, security officers can investigate but extensive processes to ID a perp don't really mesh with the existential horror of dead space
+
+
 /obj/item/weapon/forensics
 	icon = 'icons/obj/forensics.dmi'
 	w_class = ITEM_SIZE_TINY
@@ -64,13 +67,7 @@ atom/var/var/fingerprintslast = null
 			else if(prob(75))
 				return 0
 			H.gloves.add_fingerprint(M)
-	var/additional_chance = 0
-	if(!M.skill_check(SKILL_FORENSICS, SKILL_BASIC))
-		additional_chance = 10
-	// Add the fingerprints
-	add_partial_print(full_print, additional_chance)
-	return 1
-
+			
 /atom/proc/add_partial_print(full_print, bonus)
 	if(!fingerprints[full_print])
 		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
@@ -174,19 +171,5 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 /mob/examinate(atom/A as mob|obj|turf in view())
 	if(..())
 		return 1 //I'll admit I am just imitating examine.dm
-
-
-	//Detective is on the case
-	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
-		if(A.suit_fibers && A.suit_fibers.len > 0)
-			to_chat(src, "<span class='notice'>You notice some fibers embedded in \the [A]</span>")
-		if(A.fingerprints && A.fingerprints.len > 0)
-			to_chat(src, "<span class='notice'>You notice a partial print on \the [A]</span>")
-		var/obj/item/clothing/O = A
-		if(istype(O) && O.gunshot_residue)
-			to_chat(src, "<span class='notice'>You notice a faint acrid smell coming from \the [A]</span>")
-		//Noticing wiped blood is a bit harder
-		if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && A.blood_DNA)
-			to_chat(src, "<span class='warning'>You notice faint blood traces on \The [A]</span>")
 
 
