@@ -2160,7 +2160,9 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fU" = (
-/obj/machinery/vending/engivend,
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fV" = (

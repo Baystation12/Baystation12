@@ -424,7 +424,9 @@
 /turf/simulated/wall/wood,
 /area/yacht/living)
 "bj" = (
-/obj/machinery/vending/boozeomat,
+/obj/machinery/vending/boozeomat{
+	req_access = list()
+	},
 /turf/simulated/wall/wood,
 /area/yacht/living)
 "bk" = (

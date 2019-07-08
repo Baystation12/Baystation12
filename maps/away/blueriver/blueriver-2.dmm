@@ -155,7 +155,9 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aC" = (
-/obj/machinery/vending/boozeomat,
+/obj/machinery/vending/boozeomat{
+	req_access = list()
+	},
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "aD" = (

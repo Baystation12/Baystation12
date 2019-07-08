@@ -1577,11 +1577,15 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "eq" = (
-/obj/machinery/vending/engivend,
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "er" = (
-/obj/machinery/vending/engineering,
+/obj/machinery/vending/engineering{
+	req_access = list()
+	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "es" = (
