@@ -27,7 +27,7 @@
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	core_skill = SKILL_CHEMISTRY
+	core_skill = SKILL_MEDICAL
 	var/sloppy = 1 //Whether reagents will not be fully purified (sloppy = 1) or there will be reagent loss (sloppy = 0) on reagent add.
 
 /obj/machinery/chem_master/New()
@@ -519,7 +519,7 @@
 		inuse = 0
 		interact(user)
 
-	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(SKILL_CHEMISTRY) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
+	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(SKILL_MEDICAL) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
 	// Process.
 	for (var/obj/item/O in holdingitems)
 
@@ -556,8 +556,8 @@
 				break
 
 /obj/machinery/reagentgrinder/proc/hurt_hand(mob/living/carbon/human/user)
-	var/skill_to_check = SKILL_CHEMISTRY
-	if(user.get_skill_value(SKILL_COOKING) > user.get_skill_value(SKILL_CHEMISTRY))
+	var/skill_to_check = SKILL_MEDICAL
+	if(user.get_skill_value(SKILL_COOKING) > user.get_skill_value(SKILL_MEDICAL))
 		skill_to_check = SKILL_COOKING
 	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
 		return
