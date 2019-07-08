@@ -229,6 +229,7 @@
 	)
 
 /obj/machinery/button/blast_door
+	icon = 'icons/obj/stationobjs.dmi'
 	name = "remote blast door-control"
 	desc = "It controls blast doors, remotely."
 	icon_state = "blastctrl"
@@ -239,6 +240,12 @@
 		"toggle_door" = /decl/public_access/public_variable/button_active,
 	)
 	frequency = BLAST_DOORS_FREQ
+
+/obj/machinery/button/blast_door/on_update_icon()
+	if(operating)
+		icon_state = "blastctrl1"
+	else
+		icon_state = "blastctrl"
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
