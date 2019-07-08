@@ -1,3 +1,26 @@
+/decl/hierarchy/outfit/job/ds13bartender
+	name = OUTFIT_JOB_NAME("Bartender")
+	uniform = /obj/item/clothing/under/rank/bartender
+	id_type = /obj/item/weapon/card/id/civilian/bartender
+	pda_type = /obj/item/modular_computer/pda
+
+/decl/hierarchy/outfit/job/ds13linecook
+	name = OUTFIT_JOB_NAME("Line Cook")
+	uniform = /obj/item/clothing/under/rank/chef
+	suit = /obj/item/clothing/suit/chef
+	head = /obj/item/clothing/head/chefhat
+	id_type = /obj/item/weapon/card/id/civilian/chef
+	pda_type = /obj/item/modular_computer/pda
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////			DEFAULT OUTFITS BELOW HERE.									////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 /decl/hierarchy/outfit/job/assistant
 	name = OUTFIT_JOB_NAME("Assistant")
 
