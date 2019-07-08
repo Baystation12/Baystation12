@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/
 	can_infect = 0
-	core_skill = SKILL_DEVICES
+	core_skill = SKILL_COMPUTER
 
 /datum/surgery_step/robotics/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!istype(target))
@@ -28,13 +28,13 @@
 	//Compensating for anatomy skill req in base proc
 	. += 10
 
-	if(!user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
 		. -= 20
 
 	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 		. += 10
 
-	if(user.skill_check(SKILL_DEVICES, SKILL_PROF))
+	if(user.skill_check(SKILL_COMPUTER, SKILL_PROF))
 		. += 20
 
 //////////////////////////////////////////////////////////////////
