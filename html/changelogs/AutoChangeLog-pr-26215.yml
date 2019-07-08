@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - tweak: "RUST manual now links to the wiki guide (and doesn't teach you to blow up the RUST)"
