@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(codex)
 	name = "Codex"
 	flags = SS_NO_FIRE
-	init_order = SS_INIT_MISC_LATE
+	init_order = SS_INIT_MISC_CODEX
 	var/regex/linkRegex
 
 	var/list/entries_by_path =   list()
