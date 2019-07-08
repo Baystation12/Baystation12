@@ -163,8 +163,10 @@
 		elect_master()
 	update_icon()
 
+/obj/machinery/alarm/get_req_access()
 	if(!locked)
-		req_access.Cut()
+		return list()
+	return ..()
 
 /obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)

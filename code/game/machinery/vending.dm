@@ -413,6 +413,11 @@
 		shut_up = !shut_up
 		return TOPIC_HANDLED
 
+/obj/machinery/vending/get_req_access()
+	if(!scan_id)
+		return list()
+	return ..()
+
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
 	if((!allowed(user)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		to_chat(user, "<span class='warning'>Access denied.</span>")//Unless emagged of course

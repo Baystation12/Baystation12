@@ -580,6 +580,11 @@
 				ret.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")
 	return ret
 
+/obj/item/weapon/rig/get_req_access()
+	if(!security_check_enabled)
+		return list()
+	return ..()
+
 /obj/item/weapon/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
 
 	if(!security_check_enabled)
