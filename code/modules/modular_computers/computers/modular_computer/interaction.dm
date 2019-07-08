@@ -227,8 +227,8 @@
 	if(!modifiable)
 		return ..()
 
-	if(istype(W, /obj/item/weapon/computer_hardware))
-		var/obj/item/weapon/computer_hardware/C = W
+	if(istype(W, /obj/item/weapon/stock_parts/computer))
+		var/obj/item/weapon/stock_parts/computer/C = W
 		if(C.hardware_size <= max_hardware_size)
 			try_install_component(user, C)
 		else
@@ -264,7 +264,7 @@
 			to_chat(user, "This device doesn't have any components installed.")
 			return
 		var/list/component_names = list()
-		for(var/obj/item/weapon/computer_hardware/H in all_components)
+		for(var/obj/item/weapon/stock_parts/computer/H in all_components)
 			component_names.Add(H.name)
 
 		var/choice = input(usr, "Which component do you want to uninstall?", "Computer maintenance", null) as null|anything in component_names
@@ -275,7 +275,7 @@
 		if(!Adjacent(usr))
 			return
 
-		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(choice)
+		var/obj/item/weapon/stock_parts/computer/H = find_hardware_by_name(choice)
 
 		if(!H)
 			return

@@ -1,4 +1,4 @@
-/obj/item/weapon/computer_hardware/card_slot
+/obj/item/weapon/stock_parts/computer/card_slot
 	name = "RFID card slot"
 	desc = "Slot that allows this computer to write data on RFID cards. Necessary for some programs to run properly."
 	power_usage = 10 //W
@@ -12,7 +12,7 @@
 
 	var/obj/item/weapon/card/id/stored_card = null
 
-/obj/item/weapon/computer_hardware/card_slot/diagnostics(var/mob/user)
+/obj/item/weapon/stock_parts/computer/card_slot/diagnostics(var/mob/user)
 	..()
 	var/to_send = list()
 	to_send += "[name] status: [stored_card ? "Card Inserted" : "Card Not Present"]\n"
@@ -50,7 +50,7 @@
 	to_chat(user, JOINTEXT(to_send))
 		
 
-/obj/item/weapon/computer_hardware/card_slot/broadcaster // read only
+/obj/item/weapon/stock_parts/computer/card_slot/broadcaster // read only
 	name = "RFID card broadcaster"
 	desc = "Reads and broadcasts the RFID signal of an inserted card."
 	can_write = FALSE
@@ -58,7 +58,7 @@
 
 	usage_flags = PROGRAM_PDA
 
-/obj/item/weapon/computer_hardware/card_slot/Destroy()
+/obj/item/weapon/stock_parts/computer/card_slot/Destroy()
 	if(holder2 && (holder2.card_slot == src))
 		holder2.card_slot = null
 	if(stored_card)

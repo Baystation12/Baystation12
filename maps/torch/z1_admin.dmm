@@ -19823,7 +19823,7 @@
 	icon_state = "0-2"
 	},
 /obj/random/powercell,
-/obj/item/weapon/computer_hardware/hard_drive/portable/merchant,
+/obj/item/weapon/stock_parts/computer/hard_drive/portable/merchant,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";

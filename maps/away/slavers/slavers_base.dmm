@@ -3010,7 +3010,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hA" = (
-/obj/item/weapon/computer_hardware/card_slot,
+/obj/item/weapon/stock_parts/computer/card_slot,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hB" = (

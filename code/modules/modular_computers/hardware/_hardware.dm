@@ -1,4 +1,4 @@
-/obj/item/weapon/computer_hardware/
+/obj/item/weapon/stock_parts/computer/
 	name = "Hardware"
 	desc = "Unknown Hardware."
 	icon = 'icons/obj/modular_components.dmi'
@@ -14,7 +14,7 @@
 	var/malfunction_probability = 10// Chance of malfunction when the component is damaged
 	var/usage_flags = PROGRAM_ALL
 
-/obj/item/weapon/computer_hardware/attackby(var/obj/item/W as obj, var/mob/living/user as mob)
+/obj/item/weapon/stock_parts/computer/attackby(var/obj/item/W as obj, var/mob/living/user as mob)
 	// Multitool. Runs diagnostics
 	if(isMultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
@@ -44,21 +44,21 @@
 
 
 // Called on multitool click, prints diagnostic information to the user.
-/obj/item/weapon/computer_hardware/proc/diagnostics(var/mob/user)
+/obj/item/weapon/stock_parts/computer/proc/diagnostics(var/mob/user)
 	to_chat(user, "Hardware Integrity Test... (Corruption: [damage]/[max_damage]) [damage > damage_failure ? "FAIL" : damage > damage_malfunction ? "WARN" : "PASS"]")
 
-/obj/item/weapon/computer_hardware/Initialize()
+/obj/item/weapon/stock_parts/computer/Initialize()
 	. = ..()
 	w_class = hardware_size
 	if(istype(loc, /obj/item/modular_computer))
 		holder2 = loc
 
-/obj/item/weapon/computer_hardware/Destroy()
+/obj/item/weapon/stock_parts/computer/Destroy()
 	holder2 = null
 	return ..()
 
 // Handles damage checks
-/obj/item/weapon/computer_hardware/proc/check_functionality()
+/obj/item/weapon/stock_parts/computer/proc/check_functionality()
 	// Turned off
 	if(!enabled)
 		return 0
@@ -72,7 +72,7 @@
 	// Good to go.
 	return 1
 
-/obj/item/weapon/computer_hardware/examine(var/mob/user)
+/obj/item/weapon/stock_parts/computer/examine(var/mob/user)
 	. = ..()
 	if(damage > damage_failure)
 		to_chat(user, "<span class='danger'>It seems to be severely damaged!</span>")
@@ -82,7 +82,7 @@
 		to_chat(user, "It seems to be slightly damaged.")
 
 // Damages the component. Contains necessary checks. Negative damage "heals" the component.
-/obj/item/weapon/computer_hardware/proc/take_damage(var/amount)
+/obj/item/weapon/stock_parts/computer/proc/take_damage(var/amount)
 	damage += round(amount) 					// We want nice rounded numbers here.
 	damage = between(0, damage, max_damage)		// Clamp the value.
 
