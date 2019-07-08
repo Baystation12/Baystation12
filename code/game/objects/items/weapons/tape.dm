@@ -68,9 +68,7 @@
 
 		else if(user.zone_sel.selecting == BP_CHEST)
 			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
-				if(H == user || do_mob(user, H, 10))	//Skip the time-check if patching your own suit, that's handled in attackby()
-					playsound(src, 'sound/effects/tape.ogg',25)
-					H.wear_suit.attackby(src, user)
+				H.wear_suit.attackby(src, user)//everything is handled by attackby
 			else
 				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
 

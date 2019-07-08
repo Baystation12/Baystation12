@@ -16,7 +16,7 @@
 	var/radiation_level = 2 // 1 is removing germs, 2 is removing blood, 3 is removing phoron.
 	var/model_text = ""     // Some flavour text for the topic box.
 	var/locked = 1          // If locked, nothing can be taken from or added to the cycler.
-	var/can_repair          // If set, the cycler can repair voidsuits.
+	var/can_repair = 1         // If set, the cycler can repair voidsuits.
 	var/electrified = 0
 
 	// Possible modifications to pick between

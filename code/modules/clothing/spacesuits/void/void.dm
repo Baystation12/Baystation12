@@ -202,11 +202,12 @@ else if(##equipment_var) {\
 
 	if(!istype(H)) return
 	if(H.incapacitated()) return
-	if(H.wear_suit != src) return
+	var/slot = H.get_inventory_slot(src)
+	if(slot != slot_wear_suit && slot != slot_l_hand && slot != slot_r_hand) return// let them eject those tanks when they're in hand or stuff for ease of use
 
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
 	tank.canremove = 1
-	H.drop_from_inventory(tank)
+	H.put_in_hands(tank)
 	src.tank = null
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
@@ -216,31 +217,34 @@ else if(##equipment_var) {\
 	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/weapon/hand_labeler))
 		return ..()
 
-	if(user.get_inventory_slot(src) == slot_wear_suit)
-		to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-		return
-
 	if(istype(W,/obj/item/weapon/screwdriver))
+		if(user.get_inventory_slot(src) == slot_wear_suit)//maybe I should make this into a proc?
+			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			return
+
 		if(helmet || boots || tank)
 			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
 			if(!choice) return
 
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
-				tank.dropInto(loc)
+				user.put_in_hands(tank)
 				src.tank = null
 			else if(choice == helmet)
 				to_chat(user, "You detatch \the [helmet] from \the [src]'s helmet mount.")
-				helmet.dropInto(loc)
+				user.put_in_hands(helmet)
 				src.helmet = null
 			else if(choice == boots)
 				to_chat(user, "You detatch \the [boots] from \the [src]'s boot mounts.")
-				boots.dropInto(loc)
+				user.put_in_hands(boots)
 				src.boots = null
 		else
 			to_chat(user, "\The [src] does not have anything installed.")
 		return
 	else if(istype(W,/obj/item/clothing/head/helmet/space))
+		if(user.get_inventory_slot(src) == slot_wear_suit)
+			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			return
 		if(helmet)
 			to_chat(user, "\The [src] already has a helmet installed.")
 		else
@@ -250,6 +254,9 @@ else if(##equipment_var) {\
 			src.helmet = W
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
+		if(user.get_inventory_slot(src) == slot_wear_suit)
+			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			return
 		if(boots)
 			to_chat(user, "\The [src] already has magboots installed.")
 		else
@@ -259,10 +266,11 @@ else if(##equipment_var) {\
 			boots = W
 		return
 	else if(istype(W,/obj/item/weapon/tank))
+		if(user.get_inventory_slot(src) == slot_wear_suit)
+			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			return
 		if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")
-		else if(istype(W,/obj/item/weapon/tank/phoron))
-			to_chat(user, "\The [W] cannot be inserted into \the [src]'s storage compartment.")
 		else
 			if(!user.unEquip(W, src))
 				return
