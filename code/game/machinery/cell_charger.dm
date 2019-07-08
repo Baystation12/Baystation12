@@ -80,11 +80,8 @@
 		charging.emp_act(severity)
 	..(severity)
 
-/obj/machinery/cell_charger/power_change()
-	if(..())
-		set_power()
-
 /obj/machinery/cell_charger/proc/set_power()
+	queue_icon_update()
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
 		update_use_power(POWER_USE_OFF)
 		return
@@ -92,7 +89,6 @@
 		update_use_power(POWER_USE_ACTIVE)
 	else
 		update_use_power(POWER_USE_IDLE)
-	queue_icon_update()
 
 /obj/machinery/cell_charger/Process()
 	. = ..()
@@ -100,4 +96,4 @@
 		return
 	. = 0
 	charging.give(active_power_usage*CELLRATE)
-	update_icon()
+	set_power()
