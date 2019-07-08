@@ -186,7 +186,7 @@
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
 			return
-		else	
+		else
 			if(!pruned)
 				to_chat(user, SPAN_NOTICE("You collect a sample from \the [src]."))
 				new product(user.loc)
@@ -213,8 +213,7 @@
 	desc = "A huge glowing nucleus surrounded by thick tendrils."
 	icon_state = "blob_core"
 	maxHealth = 200
-	brute_resist = 1
-	fire_resist = 4
+	fire_resist = 2
 	regen_rate = 2
 	damage_min = 30
 	damage_max = 40
@@ -277,6 +276,7 @@
 	damage_min = 16
 	damage_max = 28
 	attack_freq = 5
+	regen_rate = 4
 	expandType = /obj/effect/blob/ravaging
 	light_color = BLOB_COLOR_SHIELD
 
