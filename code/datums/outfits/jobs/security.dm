@@ -28,7 +28,7 @@
 
 
 /decl/hierarchy/outfit/job/security/ds13PSECboss
-	name = OUTFIT_JOB_NAME("Chief Security Officer")
+	name = OUTFIT_JOB_NAME("PSEC Security Chief")
 	l_ear = /obj/item/device/radio/headset/heads/hos
 	uniform = /obj/item/clothing/under/rank/head_of_security
 	id_type = /obj/item/weapon/card/id/security/head
@@ -36,7 +36,7 @@
 
 
 /decl/hierarchy/outfit/job/security/ds13PSECofficer
-	name = OUTFIT_JOB_NAME("Security Officer")
+	name = OUTFIT_JOB_NAME("PSEC Security Officer")
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/device/radio/headset/headset_sec
 	gloves = /obj/item/clothing/gloves/thick
