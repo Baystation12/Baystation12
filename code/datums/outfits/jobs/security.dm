@@ -14,7 +14,7 @@
 	pda_type = /obj/item/modular_computer/pda/security
 
 
-/decl/hierarchy/outfit/job/security/ds13securityofficer	
+/decl/hierarchy/outfit/job/security/ds13securityofficer
 	name = OUTFIT_JOB_NAME("Security Officer")
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/device/radio/headset/headset_sec
