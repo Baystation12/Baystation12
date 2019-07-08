@@ -55,7 +55,7 @@
 
 	user.visible_message("[user] puts [I] into [src]", "You put [I] inside [src].",\
 	"You hear a rustle as someone puts something into a plastic bag.")
-	if(!user.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
 		I.add_fingerprint(user)
 	I.forceMove(src)
 	stored_item = I
