@@ -607,9 +607,7 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
-/obj/machinery/vending/boozeomat{
-	req_access = list(list("ACCESS_BRIDGE","ACCESS_BAR","ACCESS_KITCHEN"))
-	},
+/obj/structure/table/marble,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "cr" = (
