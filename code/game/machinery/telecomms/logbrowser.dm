@@ -114,7 +114,7 @@
 	return
 
 
-/obj/machinery/computer/telecomms/server/OnTopic(mob/user, href, href_list)
+/obj/machinery/computer/telecomms/server/OnTopic(mob/user, list/href_list, datum/topic_state/state)
 	if(href_list["viewserver"])
 		screen = 1
 		for(var/obj/machinery/telecomms/T in servers)
