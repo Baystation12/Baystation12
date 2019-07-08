@@ -3006,7 +3006,9 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "hz" = (
-/obj/machinery/vending/engineering,
+/obj/machinery/vending/engineering{
+	req_access = list()
+	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hA" = (

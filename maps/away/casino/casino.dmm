@@ -1214,7 +1214,9 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_bunk)
 "dj" = (
-/obj/machinery/vending/security,
+/obj/machinery/vending/security{
+	req_access = list()
+	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dm" = (
@@ -1777,7 +1779,9 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "eM" = (
-/obj/machinery/vending/engineering,
+/obj/machinery/vending/engineering{
+	req_access = list()
+	},
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "eN" = (
@@ -3578,7 +3582,9 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "jt" = (
-/obj/machinery/vending/boozeomat,
+/obj/machinery/vending/boozeomat{
+	req_access = list()
+	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "ju" = (
