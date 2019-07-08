@@ -66,7 +66,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 /decl/hierarchy/skill/general/EVA
 	ID = "EVA"
-	name = "Rig-suit Gravity Manipulation"
+	name = "Rig Zero Gravity Manipulation"
 	desc = "This skill describes your skill and knowledge of rig-suits and their operation in the void of space."
 	levels = list( "Unskilled"			= "You have basic safety training common to people who work in space: You know how to put on and seal your internals, and you can probably struggle into a spaceworthy rig suit if you really need to, though you'll be clumsy at it. You're still prone to mistakes that may leave you trying to breathe vacuum.",
 						"Basic"				= "You have had thorough basic training in EVA operations, and are unlikely to make novice mistakes. However, you have little experience working in vacuum.",
