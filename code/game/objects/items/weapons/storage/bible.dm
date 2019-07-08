@@ -23,6 +23,19 @@
 		/obj/item/weapon/spacecash/bundle/c50,
 		)
 
+/obj/item/weapon/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
+	if(user == M || !ishuman(user) || !ishuman(M))
+		return
+	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
+		if(do_after(user, 5 SECONDS) && user.Adjacent(M))
+			user.visible_message("\The [user] finishes reciting \his prayer, removing \the [src] from \the [M]'s forehead.", "You finish reciting your prayer, removing \the [src] from \the [M]'s forehead.")
+			if(user.get_cultural_value(TAG_RELIGION) == M.get_cultural_value(TAG_RELIGION))
+				to_chat(M, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
+			else
+				to_chat(M, "Nothing happened.")
+		..()
+
 /obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
 	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
@@ -36,6 +49,17 @@
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	return ..()
+
+/obj/item/weapon/storage/bible/attack_self(mob/living/carbon/human/user)
+	if(!ishuman(user))
+		return
+	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+		user.visible_message("\The [user] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
+		if(do_after(user, 5 SECONDS))
+			user.visible_message("\The [user] reads a passage from \the [src].", "You read a passage from \the [src].")
+			for(var/mob/living/carbon/human/H in view(user))
+				if(user.get_cultural_value(TAG_RELIGION) == H.get_cultural_value(TAG_RELIGION))
+					to_chat(H, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 
 /obj/item/weapon/storage/bible/verb/rename_bible()
 	set name = "Rename Bible"
