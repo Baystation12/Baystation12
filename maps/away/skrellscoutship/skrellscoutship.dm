@@ -1,3 +1,5 @@
+#define WEBHOOK_SUBMAP_LOADED_SKRELL "webhook_submap_skrell"
+
 #include "skrellscoutship_areas.dm"
 #include "skrellscoutship_shuttles.dm"
 
@@ -32,6 +34,9 @@
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship/leader
 	name = "Qrri-Vuxix"
 
+/decl/webhook/submap_loaded/skrell
+	id = WEBHOOK_SUBMAP_LOADED_SKRELL
+
 /decl/submap_archetype/skrellscoutship
 	descriptor = "Skrellian Scout Ship"
 	map = "Xilvuxix"
@@ -39,7 +44,8 @@
 		/datum/job/submap/skrellscoutship_crew,
 		/datum/job/submap/skrellscoutship_crew/leader
 	)
-	
+	call_webhook = WEBHOOK_SUBMAP_LOADED_SKRELL
+
 //Access + Loadout	
 
 /var/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
@@ -187,3 +193,5 @@
 
 /obj/machinery/vending/medical/skrell
 	req_access = list(access_skrellscoutship)
+
+#undef WEBHOOK_SUBMAP_LOADED_SKRELL
