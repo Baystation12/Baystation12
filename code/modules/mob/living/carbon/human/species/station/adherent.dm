@@ -7,9 +7,9 @@
 	whose home system and burgeoning stellar empire was scoured to bedrock by a solar flare. \
 	Physically, they are large, floating squidlike machines made of a crystalline composite."
 
-	language =                LANGUAGE_ADHERENT
-	default_language =        LANGUAGE_ADHERENT
-	additional_langs =        list(LANGUAGE_GALCOM)
+	language =                LANGUAGE_GUTTER
+	default_language =        LANGUAGE_GUTTER
+	additional_langs =        list(LANGUAGE_GUTTER)
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
 
@@ -38,7 +38,7 @@
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
-	spawn_flags =   SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_LACE
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 
 	appearance_flags = HAS_EYE_COLOR
 	blood_color = "#2de00d"

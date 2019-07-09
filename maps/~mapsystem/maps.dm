@@ -48,14 +48,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
 	                               //This is probably a lot longer explanation than it needs to be.
 
-	var/station_name  = "BAD Station"
-	var/station_short = "Baddy"
-	var/dock_name     = "THE PirateBay"
-	var/boss_name     = "Captain Roger"
-	var/boss_short    = "Cap'"
-	var/company_name  = "BadMan"
-	var/company_short = "BM"
-	var/system_name = "Uncharted System"
+	var/station_name  = "USG Ishimura"
+	var/station_short = "Ishimura"
+	var/dock_name     = "Aegis VII"
+	var/boss_name     = "Concordance Extraction Corporation"
+	var/boss_short    = "CEC"
+	var/company_name  = "EarthGov"
+	var/company_short = "EarthGov"
+	var/system_name = "Cygnus System"
 
 	var/map_admin_faxes = list()
 
@@ -114,47 +114,27 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	//Factions prefs stuff
 	var/list/citizenship_choices = list(
 		"Earth",
+		"Luna",
 		"Mars",
-		"Terra",
-		"Gaia",
-		"Moghes",
-		"Ahdomai",
-		"Qerrbalak"
+		"Titan",
+		"Venus"
 	)
 
 	var/list/home_system_choices = list(
-		"Sol",
-		"Nyx",
-		"Tau Ceti",
-		"Epsilon Ursae Minoris",
-		"Zamsiin-lr",
-		"Gilgamesh"
+		"Sol"
 		)
 
 	var/list/faction_choices = list(
-		"Sol Central Government",
-		"Terran Colonial Confederation",
-		"Vey Med",
-		"Einstein Engines",
-		"Free Trade Union",
-		"NanoTrasen",
-		"Ward-Takahashi GMB",
-		"Gilthari Exports",
-		"Grayson Manufactories Ltd.",
-		"Aether Atmospherics",
-		"Zeng-Hu Pharmaceuticals",
-		"Hephaestus Industries",
-		"Commonwealth of Ahdomai"
+		"C.E.C Employee",
+		"EarthGov Contractor",
+		"Church of Unitology Missionary",
+		"Unaffiliated Employee"
 		)
 
 	var/list/religion_choices = list(
-		"Unitarianism",
-		"Hinduism",
-		"Buddhist",
-		"Islamic",
-		"Christian",
+		"Unitologist",
 		"Agnostic",
-		"Deist"
+		"Atheist"
 		)
 
 /datum/map/New()

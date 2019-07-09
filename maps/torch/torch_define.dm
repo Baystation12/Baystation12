@@ -17,13 +17,14 @@
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
 
-	station_name  = "SEV Torch"
-	station_short = "Torch"
-	dock_name     = "TBD"
-	boss_name     = "Expeditionary Command"
-	boss_short    = "Command"
-	company_name  = "Sol Central Government"
-	company_short = "SolGov"
+	station_name  = "USG Ishimura"
+	station_short = "Ishimura"
+	dock_name     = "Aegis VII"
+	boss_name     = "Concordance Extraction Corporation"
+	boss_short    = "CEC"
+	company_name  = "EarthGov"
+	company_short = "EarthGov"
+	system_name = "Cygnus System"
 
 	map_admin_faxes = list("NanoTrasen Central Office")
 
@@ -46,71 +47,25 @@
 		"Earth",
 		"Luna",
 		"Mars",
-		"Pluto",
-		"Ceti Epsilon",
-		"Eos",
-		"Tiamat",
-		"Terra",
-		"Novaya Zemlya",
-		"Gaia",
-		"Moghes",
-		"Ahdomai",
-		"Qerrbalak",
-		"Tau-Wilo",
-		"Avalon",
-		"Tersten",
-		"Magnitka",
-		"Yuklid V",
-		"Cinu"
+		"Titan",
+		"Venus"
 		)
 
 	home_system_choices = list(
-		"Sol",
-		"Tau Ceti",
-		"Helios",
-		"Alpha Centuri",
-		"Gilgamesh",
-		"Galilei",
-		"Uuoea-Esa",
-		"Zamsiin-lr",
-		"Qerr'Valis",
-		"XX-168",
-		"Klaudof",
-		"Gavil",
-		"Ursa",
-		"Yuklid",
-		"Lucinaer"
+		"Sol"
 		)
 
 	faction_choices = list(
-		"Sol Central Government",
-		"Terran Colonial Confederation",
-		"NanoTrasen",
-		"Xynergy",
-		"Vey Med",
-		"Einstein Engines",
-		"Ward-Takahashi GMB",
-		"Gilthari Exports",
-		"Grayson Manufactories Ltd.",
-		"Aether Atmospherics",
-		"Zeng-Hu Pharmaceuticals",
-		"Hephaestus Industries",
-		"Free Trade Union",
-		"Commonwealth of Ahdomai",
-		"Positronic Union"
+		"C.E.C Employee",
+		"EarthGov Contractor",
+		"Church of Unitology Missionary",
+		"Unaffiliated Contractor"
 		)
 
 	religion_choices = list(
-		"Jewish",
-		"Hinduism",
-		"Buddhist",
-		"Islamic",
-		"Christian",
+		"Unitologist",
 		"Agnostic",
-		"Deist",
-		"Athiest",
-		"Thelema",
-		"Spiritualist"
+		"Atheist"
 		)
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'

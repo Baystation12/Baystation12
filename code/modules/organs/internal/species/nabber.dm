@@ -4,7 +4,7 @@
 	icon_state = "voicebox"
 	parent_organ = BP_CHEST
 	organ_tag = BP_VOICE
-	will_assist_languages = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
+	will_assist_languages = list(LANGUAGE_GUTTER)
 
 /obj/item/organ/internal/voicebox/nabber/New()
 	for(var/L in will_assist_languages)

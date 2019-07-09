@@ -87,7 +87,7 @@
 
 //Makes the speech a proc so all verbal components can be easily manipulated as a whole, or individually easily
 /obj/effect/rune/proc/speak_incantation(var/mob/living/user, var/incantation)
-	var/datum/language/L = all_languages[LANGUAGE_CULT]
+	var/datum/language/L = all_languages[LANGUAGE_GUTTER]
 	if(incantation && (L in user.languages))
 		user.say(incantation, L)
 
@@ -376,10 +376,10 @@
 		user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
 	O = user.get_equipped_item(slot_wear_suit)
 	if(O && !istype(O, /obj/item/clothing/suit/cultrobes) && user.unEquip(O))
-		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)	
+		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)
 	O = user.get_equipped_item(slot_shoes)
 	if(O && !istype(O, /obj/item/clothing/shoes/cult) && user.unEquip(O))
-		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)	
+		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
 
 	O = user.get_equipped_item(slot_back)
 	if(istype(O, /obj/item/weapon/storage) && !istype(O, /obj/item/weapon/storage/backpack/cultpack) && user.unEquip(O)) // We don't want to make the vox drop their nitrogen tank, though

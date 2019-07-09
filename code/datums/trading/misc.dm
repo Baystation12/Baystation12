@@ -1,6 +1,6 @@
 /datum/trader/ship/pet_shop
 	name = "Pet Shop Owner"
-	name_language = LANGUAGE_SKRELLIAN
+	name_language = LANGUAGE_GUTTER
 	origin = "Pet Shop"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
 	possible_origins = list("Paws-Out", "Pets-R-Smart", "Tentacle Companions", "Xeno-Pets and Assorted Goods", "Barks and Drools")
@@ -68,7 +68,7 @@
 
 /datum/trader/ship/prank_shop
 	name = "Prank Shop Owner"
-	name_language = LANGUAGE_ROOTLOCAL
+	name_language = LANGUAGE_GUTTER
 	origin = "Prank Shop"
 	compliment_increase = 0
 	insult_drop = 0

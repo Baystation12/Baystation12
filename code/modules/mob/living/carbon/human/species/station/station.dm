@@ -3,20 +3,17 @@
 	name_plural = "Humans"
 	primitive_form = "Monkey"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
-	blurb = "Humanity originated in the Sol system, and over the last five centuries has spread \
-	colonies across a wide swathe of space. They hold a wide range of forms and creeds.<br/><br/> \
-	While the central Sol government maintains control of its far-flung people, powerful corporate \
-	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
-	worlds tumultous at best."
-	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SOL_COMMON)
-	assisted_langs = list(LANGUAGE_NABBER)
-	name_language = null // Use the first-name last-name generator rather than a language scrambler
-	min_age = 17
-	max_age = 100
+	blurb = "Humanity in the 26th century is facing an energy and resource crisis on an unprecedented scale. Brutal wars have been fought for control of Earth and her colonies. \
+	Out of the darkness, came a light however when in the early 25th century the Concordance Extraction Corporation unveiled plans to mine large swathes of planets using huge ships fitted with gravitational tethers to literally pull planets apart piece by piece, process their mineral contents, and dump the waste.<br/><br/> \
+	This discovery proved vital for the survival of mankind and the CEC grew rapidly, becoming one of the largest mining corporations in history and quickly dwarfing the competition. Several dozen planet cracking ships were created and crewed with over a thousand people each, sent to the far reaches of the galaxy to harvest resources to bring back to Earth to ensure their way of life could continue. <br/><br/> \
+	However, in the early 26th century the CEC discovered a world teeming with untapped potential, rich in every resource known to man with survey probes returning with incredible results from mere surface scratchings. There was only one setback, this planet - Aegis VII - was within the restricted Cygnus system, a system kept under military quarantine for over 200 years, and thus this warning was largely ignored by the CEC, who set up an illegal mining colony on Aegis VII in 2506. <br/><br/> \
+	Aegis VII represents mankind's last, best hope in a desperate bid to hold off the coming darkness, as resources burn up and people starve back home, humanity remains on the clock to survive even just a few more years and so you take your part in this operation. As one of the many CEC employees sent to the Cygnus system or Aegis VII itself, your actions may very well shape the future of mankind. Either leading to the temporary salvation of all humanity, or extinction."
+	name_language = LANGUAGE_GALCOM
+	min_age = 16
+	max_age = 65
 	gluttonous = GLUT_TINY
 
-	spawn_flags = SPECIES_CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_LACE
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	sexybits_location = BP_GROIN
@@ -94,11 +91,11 @@
 	flash_mod = 1.4
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 1
-	language = LANGUAGE_SIIK_MAAS
-	additional_langs = list(LANGUAGE_SIIK_TAJR)
-	assisted_langs = list(LANGUAGE_NABBER)
+	language = LANGUAGE_GUTTER
+	additional_langs = list(LANGUAGE_GUTTER)
+	assisted_langs = list(LANGUAGE_GUTTER)
 	//secondary_langs =
-	name_language = LANGUAGE_SIIK_MAAS
+	name_language = LANGUAGE_GUTTER
 	health_hud_intensity = 1.75
 
 	min_age = 19
@@ -121,7 +118,7 @@
 
 	primitive_form = "Farwa"
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#afa59e"
@@ -161,8 +158,8 @@
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SKRELLIAN)
-	assisted_langs = list(LANGUAGE_NABBER)
+	secondary_langs = list(LANGUAGE_GUTTER)
+	assisted_langs = list(LANGUAGE_GUTTER)
 	name_language = null
 	health_hud_intensity = 1.75
 
@@ -184,7 +181,7 @@
 	darksight_range = 4
 	darksight_tint = DARKTINT_MODERATE
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8cd7a3"
@@ -211,7 +208,7 @@
 	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
 
-	language = LANGUAGE_ROOTLOCAL
+	language = LANGUAGE_GUTTER
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
 	slowdown = 7
@@ -221,9 +218,9 @@
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 2
 	strength = STR_VHIGH
-	secondary_langs = list(LANGUAGE_ROOTGLOBAL)
-	assisted_langs = list(LANGUAGE_NABBER)
-	name_language = LANGUAGE_ROOTLOCAL
+	secondary_langs = list(LANGUAGE_GUTTER)
+	assisted_langs = list(LANGUAGE_GUTTER)
+	name_language = LANGUAGE_GUTTER
 	spawns_with_stack = 0
 	health_hud_intensity = 2
 	hunger_factor = 3
@@ -285,7 +282,7 @@
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_IS_PLANT | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SLIP
 	appearance_flags = 0
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 
 	blood_color = "#004400"
 	flesh_color = "#907e4a"

@@ -91,7 +91,7 @@
 	return ..(FEMALE,1,6)
 
 /datum/language/cultcommon
-	name = LANGUAGE_CULT
+	name = LANGUAGE_GUTTER
 	desc = "The chants of the occult, the incomprehensible."
 	speech_verb = "intones"
 	ask_verb = "intones"
@@ -111,7 +111,7 @@
 	shorthand = "CT"
 
 /datum/language/cult
-	name = LANGUAGE_OCCULT
+	name = LANGUAGE_GUTTER
 	desc = "The initiated can share their thoughts by means defying all reason."
 	speech_verb = "intones"
 	ask_verb = "intones"
@@ -122,7 +122,7 @@
 	shorthand = "N/A"
 
 /datum/language/alium
-	name = LANGUAGE_ALIUM
+	name = LANGUAGE_GUTTER
 	colour = "cult"
 	speech_verb = "hisses"
 	key = "c"

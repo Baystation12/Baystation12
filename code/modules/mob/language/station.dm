@@ -1,5 +1,5 @@
 /datum/language/diona
-	name = LANGUAGE_ROOTLOCAL
+	name = LANGUAGE_GUTTER
 	desc = "A complex language known instinctively by Dionaea, 'spoken' by emitting modulated radio waves. This version uses high frequency waves for quick communication at short ranges."
 	speech_verb = "creaks and rustles"
 	ask_verb = "creaks"
@@ -16,14 +16,14 @@
 	return new_name
 
 /datum/language/diona/global
-	name = LANGUAGE_ROOTGLOBAL
+	name = LANGUAGE_GUTTER
 	desc = "A complex language known instinctively by Dionaea, 'spoken' by emitting modulated radio waves. This version uses low frequency waves for slow communication at long ranges."
 	key = "w"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
 
 /datum/language/unathi
-	name = LANGUAGE_UNATHI
+	name = LANGUAGE_GUTTER
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
@@ -44,7 +44,7 @@
 	shorthand = "UT"
 
 /datum/language/tajaran
-	name = LANGUAGE_SIIK_MAAS
+	name = LANGUAGE_GUTTER
 	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
 	ask_verb = "mrowls"
@@ -68,7 +68,7 @@
 	return new_name
 
 /datum/language/skrell
-	name = LANGUAGE_SKRELLIAN
+	name = LANGUAGE_GUTTER
 	desc = "A melodic and complex language spoken by the Skrell of Qerrbalak. Some of the notes are inaudible to humans."
 	speech_verb = "warbles"
 	ask_verb = "warbles"
@@ -80,7 +80,7 @@
 	shorthand = "SK"
 
 /datum/language/human
-	name = LANGUAGE_SOL_COMMON
+	name = LANGUAGE_GUTTER
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
 	speech_verb = "says"
 	whisper_verb = "whispers"
@@ -109,7 +109,7 @@
 		return ..()
 
 /datum/language/machine
-	name = LANGUAGE_EAL
+	name = LANGUAGE_GUTTER
 	desc = "An efficient language of encoded tones developed by synthetics and cyborgs."
 	speech_verb = "whistles"
 	ask_verb = "chirps"
@@ -191,7 +191,7 @@
 "his", "ing", "ion", "ith", "not", "ome", "oul", "our", "sho", "ted", "ter", "tha", "the", "thi")
 
 /datum/language/tajsign
-	name = LANGUAGE_SIIK_TAJR
+	name = LANGUAGE_GUTTER
 	desc = "A type of sign language mostly based on tail movements that was used during the Tajaran rebellion."
 	signlang_verb = list("uses their tail to convey", "gestures with their tail", "gestures with their tail elaborately")
 	colour = "tajaran"
@@ -200,7 +200,7 @@
 	shorthand = "TS"
 
 /datum/language/confederate
-	name = LANGUAGE_INDEPENDENT
+	name = LANGUAGE_GUTTER
 	desc = "The official language of the Terran Colonial Confederation, evolved from a pidgin of Eastern European languages and English."
 	speech_verb = "speaks"
 	colour = "terran"
@@ -211,7 +211,7 @@
 	shorthand = "IN"
 
 /datum/language/nabber
-	name = LANGUAGE_NABBER
+	name = LANGUAGE_GUTTER
 	desc = "A strange language that can be understood both by the sounds made and by the movement needed to create those sounds."
 	signlang_verb = list("chitters", "grinds its mouthparts", "chitters and grinds its mouthparts")
 	key = "n"
@@ -226,7 +226,7 @@
 		return capitalize(pick(GLOB.first_names_male))
 
 /datum/language/spacer
-	name = LANGUAGE_SPACER
+	name = LANGUAGE_GUTTER
 	desc = "A pidgin language spoken by haulers, merchants, traders, travellers, and cocky fly-boys across the galaxy."
 	colour = "spacer"
 	key = "v"

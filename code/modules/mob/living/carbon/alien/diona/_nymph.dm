@@ -13,8 +13,8 @@
 	health = 60
 	maxHealth = 60
 
-	language = LANGUAGE_ROOTLOCAL
-	species_language = LANGUAGE_ROOTLOCAL
+	language = LANGUAGE_GUTTER
+	species_language = LANGUAGE_GUTTER
 	only_species_language = 1
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
@@ -60,7 +60,7 @@
 /mob/living/carbon/alien/diona/Initialize(var/mapload, var/flower_chance = 15)
 
 	species = all_species[SPECIES_DIONA]
-	add_language(LANGUAGE_ROOTGLOBAL)
+	add_language(LANGUAGE_GUTTER)
 	add_language(LANGUAGE_GALCOM)
 
 	eyes = image(icon = icon, icon_state = "eyes_[icon_state]")

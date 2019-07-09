@@ -15,7 +15,7 @@
 	radiation_mod = 0.5
 	brute_mod =     0.85
 	slowdown =      1
-
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_GRAV | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/spacer
@@ -35,7 +35,7 @@
 	darksight_range = 6
 	darksight_tint = DARKTINT_MODERATE
 
-
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/vatgrown
@@ -46,7 +46,7 @@
 	baseline, with no appendix and fewer inherited genetic disabilities, but a weakened metabolism."
 	icobase =     'icons/mob/human_races/species/human/subspecies/vatgrown_body.dmi'
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/vatgrown_preview.dmi'
-
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	toxins_mod =   1.1
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart,
