@@ -15,6 +15,8 @@
 	idle_power_usage = 0
 	active_power_usage = 1.2 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/image/glow_icon
 	var/image/beaker_icon

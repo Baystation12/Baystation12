@@ -83,8 +83,11 @@ Class Procs:
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
+	layer = STRUCTURE_LAYER // Layer under items
 
 	var/stat = 0
+	var/reason_broken = 0
+	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
 	var/emagged = 0
 	var/malf_upgraded = 0
 	var/datum/wires/wires //wire datum, if any. If you place a type path, it will be autoinitialized.
@@ -98,7 +101,7 @@ Class Procs:
 	var/power_init_complete = FALSE // Helps with bookkeeping when initializing atoms. Don't modify.
 	var/list/component_parts           //List of component instances. Expected type: /obj/item/weapon/stock_parts
 	var/list/uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc) //List of component paths which have delayed init. Indeces = number of components.
-	var/list/maximum_component_parts = list(/obj/item/weapon/stock_parts = 8)         //null - no max. list(type part = number max).
+	var/list/maximum_component_parts = list(/obj/item/weapon/stock_parts = 10)         //null - no max. list(type part = number max).
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
@@ -123,6 +126,7 @@ Class Procs:
 		wires = new wires(src)
 	populate_parts(populate_parts)
 	RefreshParts()
+	power_change()
 
 /obj/machinery/Destroy()
 	if(istype(wires))
@@ -171,18 +175,28 @@ Class Procs:
 			if (prob(25))
 				qdel(src)
 
-/obj/machinery/proc/set_broken(new_state)
-	if(!new_state != !(stat & BROKEN)) // new state is different from old
-		stat ^= BROKEN                // so flip it
+/obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
+	if(stat_immune & BROKEN)
+		return FALSE
+	if(!new_state == !(reason_broken & cause))
+		return FALSE
+	reason_broken ^= cause
+
+	if(!reason_broken != !(stat & BROKEN))
+		stat ^= BROKEN
 		queue_icon_update()
 		return TRUE
 
 /obj/machinery/proc/set_noscreen(new_state)
-	if(!new_state != !(stat & NOSCREEN))
-		stat ^= NOSCREEN
+	if(stat_immune & NOSCREEN)
+		return FALSE
+	if(!new_state != !(stat & NOSCREEN))// new state is different from old
+		stat ^= NOSCREEN                // so flip it
 		return TRUE
 
 /obj/machinery/proc/set_noinput(new_state)
+	if(stat_immune & NOINPUT)
+		return FALSE
 	if(!new_state != !(stat & NOINPUT))
 		stat ^= NOINPUT
 		return TRUE
@@ -209,7 +223,7 @@ Class Procs:
 	if(!interact_offline && (stat & NOPOWER))
 		return STATUS_CLOSE
 
-	if(issilicon(user))
+	if(user.direct_machine_interface(src))
 		return ..()
 
 	if(stat & NOSCREEN)
@@ -218,6 +232,15 @@ Class Procs:
 	if(stat & NOINPUT)
 		return min(..(), STATUS_UPDATE)
 	return ..()
+
+/mob/proc/direct_machine_interface(obj/machinery/machine)
+	return FALSE
+
+/mob/living/silicon/direct_machine_interface(obj/machinery/machine)
+	return TRUE
+
+/mob/observer/ghost/direct_machine_interface(obj/machinery/machine)
+	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(var/mob/user)
 	if(stat & BROKEN)
@@ -233,6 +256,12 @@ Class Procs:
 	user.unset_machine()
 
 /obj/machinery/Topic(href, href_list, datum/topic_state/state)
+	if(href_list["mechanics_text"] && construct_state) // This is an OOC examine thing handled via Topic; specifically bypass all checks, but do nothing other than message to chat.
+		var/list/info = construct_state.mechanics_info()
+		if(info)
+			to_chat(usr, jointext(info, "<br>"))
+			return TOPIC_HANDLED
+
 	. = ..()
 	if(. == TOPIC_REFRESH)
 		updateUsrDialog() // Update legacy UIs to the extent possible.
@@ -293,9 +322,13 @@ Class Procs:
 	return FALSE
 
 /obj/machinery/proc/RefreshParts()
+	set_noinput(TRUE)
+	set_noscreen(TRUE)
 	for(var/thing in component_parts)
 		var/obj/item/weapon/stock_parts/part = thing
 		part.on_refresh(src)
+	var/list/missing = missing_parts()
+	set_broken(!!missing, MACHINE_BROKEN_NO_PARTS)
 
 /obj/machinery/proc/assign_uid()
 	uid = gl_uid
@@ -334,10 +367,7 @@ Class Procs:
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(get_turf(src))
-	M.set_dir(src.dir)
-	M.state = 2
-	M.icon_state = "box_1"
+	new /obj/machinery/constructable_frame/machine_frame/deconstruct(get_turf(src), dir)
 	for(var/I in component_parts)
 		uninstall_component(I, refresh_parts = FALSE)
 	while(LAZYLEN(uncreated_component_parts))
@@ -371,8 +401,22 @@ Class Procs:
 
 /obj/machinery/examine(mob/user)
 	. = ..(user)
-	if(component_parts && hasHUD(user, HUD_SCIENCE))
-		display_parts(user)
+	if(.)
+		if(component_parts && hasHUD(user, HUD_SCIENCE))
+			display_parts(user)
+		if(stat & NOSCREEN)
+			to_chat(user, "It is missing a screen, making it hard to interact with.")
+		else if(stat & NOINPUT)
+			to_chat(user, "It is missing any input device.")
+		if(construct_state && construct_state.mechanics_info())
+			to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
+		var/list/missing = missing_parts()
+		if(missing)
+			var/list/parts = list()
+			for(var/type in missing)
+				var/obj/item/fake_thing = type
+				parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
+			to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(var/depth)

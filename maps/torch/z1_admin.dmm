@@ -10472,7 +10472,7 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "aze" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "azf" = (
@@ -14037,7 +14037,7 @@
 /turf/simulated/wall/r_titanium,
 /area/syndicate_station/start)
 "aGL" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
 "aGM" = (
@@ -17454,7 +17454,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aPc" = (
@@ -19759,7 +19759,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aUJ" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aUK" = (
@@ -19973,7 +19973,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aVg" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 4

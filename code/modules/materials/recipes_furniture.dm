@@ -181,7 +181,7 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/computerframe
 	title = "computer frame"
-	result_type = /obj/structure/computerframe
+	result_type = /obj/machinery/constructable_frame/computerframe
 	req_amount = 5
 	time = 25
 

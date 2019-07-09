@@ -74,7 +74,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "ar" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/airless,
 /area/outpost/abandoned)
 "as" = (
@@ -223,7 +223,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "aV" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "aW" = (

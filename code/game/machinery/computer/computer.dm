@@ -6,7 +6,9 @@
 	anchored = 1.0
 	idle_power_usage = 300
 	active_power_usage = 300
-	construct_state = /decl/machine_construction/computer/built
+	construct_state = /decl/machine_construction/default/panel_closed/computer
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
@@ -56,6 +58,21 @@
 
 /obj/machinery/computer/on_update_icon()
 	overlays.Cut()
+	icon = initial(icon)
+	icon_state = initial(icon_state)
+
+	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
+		set_light(0)
+		icon = 'icons/obj/computer.dmi'
+		icon_state = "wired"
+		var/screen = get_component_of_type(/obj/item/weapon/stock_parts/console_screen)
+		var/keyboard = get_component_of_type(/obj/item/weapon/stock_parts/keyboard)
+		if(screen)
+			overlays += "comp_screen"
+		if(keyboard)
+			overlays += icon_keyboard ? "[icon_keyboard]_off" : "keyboard"
+		return
+
 	if(stat & NOPOWER)
 		set_light(0)
 		if(icon_keyboard)
@@ -79,16 +96,15 @@
 
 /obj/machinery/computer/dismantle(mob/user)
 	playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	var/obj/structure/computerframe/A = new /obj/structure/computerframe(loc)
-	A.set_dir(dir)
-	A.anchored = 1
+	new /obj/machinery/constructable_frame/computerframe/deconstruct(loc, dir)
 
-	var/obj/item/weapon/stock_parts/circuitboard/M = get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
-	if(M)
-		uninstall_component(M, refresh_parts = FALSE)
-		M.deconstruct(src)
-		M.forceMove(A)
-		A.circuit = M
+	if(stat & BROKEN)
+		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
+		for(var/obj/item/weapon/stock_parts/console_screen/screen in component_parts)
+			qdel(screen)
+			new /obj/item/weapon/material/shard(loc)
+	else
+		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 
 	for(var/I in component_parts)
 		uninstall_component(I, refresh_parts = FALSE)
@@ -98,13 +114,5 @@
 	for(var/obj/C in src)
 		C.dropInto(loc)
 
-	if(stat & BROKEN)
-		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-		new /obj/item/weapon/material/shard(loc)
-		A.set_state(3)
-	else
-		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-		A.set_state(4)
 	qdel(src)
-
 	return TRUE

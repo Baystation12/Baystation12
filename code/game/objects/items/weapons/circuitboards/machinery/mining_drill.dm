@@ -8,10 +8,13 @@
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	req_components = list(
-							/obj/item/weapon/stock_parts/capacitor = 1,
-							/obj/item/weapon/cell = 1,
-							/obj/item/weapon/stock_parts/matter_bin = 1,
-							/obj/item/weapon/stock_parts/micro_laser = 1)
+		/obj/item/weapon/stock_parts/capacitor = 1,
+		/obj/item/weapon/stock_parts/matter_bin = 1,
+		/obj/item/weapon/stock_parts/micro_laser = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/power/battery/buildable/stock,
+		/obj/item/weapon/cell = 1
+	)	
 
 /obj/item/weapon/stock_parts/circuitboard/miningdrillbrace
 	name = T_BOARD("mining drill brace")

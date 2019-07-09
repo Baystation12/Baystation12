@@ -1328,7 +1328,7 @@
 	pixel_y = 0
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1420;
 	master_tag = "yacht_airlock";

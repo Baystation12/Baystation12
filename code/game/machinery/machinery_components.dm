@@ -21,10 +21,14 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		var/board_path = GLOB.machine_path_to_circuit_type[path_to_check]
 		if(board_path)
 			var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
-			if(LAZYLEN(board.req_components))
+			var/list/req_components = board.spawn_components || board.req_components
+			req_components = req_components.Copy()
+			if(board.additional_spawn_components)
+				req_components += board.additional_spawn_components
+			if(LAZYLEN(req_components))
 				LAZYINITLIST(uncreated_component_parts)
-				for(var/type in board.req_components)
-					uncreated_component_parts[type] += (board.req_components[type] || 1)
+				for(var/type in req_components)
+					uncreated_component_parts[type] += (req_components[type] || 1)
 
 	// Create the parts we are supposed to have. If not full_populate, this is only hard-baked parts, and more will be added later.
 	for(var/component_path in uncreated_component_parts)
@@ -153,6 +157,9 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			. += initial(comp.rating) * uncreated_component_parts[path]
 
 /obj/machinery/proc/number_of_components(var/part_type)
+	if(!ispath(part_type, /obj/item/weapon/stock_parts))
+		var/obj/item/weapon/stock_parts/building_material/material = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+		return material && material.number_of_type(part_type)
 	var/list/comps = types_of_component(part_type)
 	. = 0
 	for(var/path in comps)
@@ -162,16 +169,23 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/proc/components_are_accessible(var/path)
 	return panel_open
 
-// Installation
+// Installation. Returns number of such components which can be inserted, or 0.
 /obj/machinery/proc/can_add_component(var/obj/item/weapon/stock_parts/component, var/mob/user)
+	if(!istype(component)) // Random items. Only insert if actually needed.
+		var/list/missing = missing_parts()
+		for(var/path in missing)
+			if(istype(component, path))
+				return missing[path]		
+	if(!(component.part_flags & PART_FLAG_HAND_REMOVE))
+		return 0
 	if(!components_are_accessible(component.type))
 		to_chat(user, SPAN_WARNING("The insertion point for \the [component] is inaccessible!"))
-		return FALSE
+		return 0
 	for(var/path in maximum_component_parts)
 		if(istype(component, path) && (number_of_components(path) == maximum_component_parts[path]))
 			to_chat(user, SPAN_WARNING("There are too many parts of this type installed in \the [src] already!"))
-			return FALSE
-	return TRUE
+			return 0
+	return 1
 
 // Hook to get updates.
 /obj/machinery/proc/component_stat_change(var/obj/item/weapon/stock_parts/part, old_stat, flag)
@@ -222,13 +236,19 @@ Standard helpers for users interacting with machinery parts.
 					replace_part(user, R, A, B)
 					return TRUE
 
-/obj/machinery/proc/part_insertion(mob/user, obj/item/weapon/stock_parts/part)
+/obj/machinery/proc/part_insertion(mob/user, obj/item/weapon/stock_parts/part) // Second argument may actually be an arbitrary item.
 	if(!user.canUnEquip(part))
 		return FALSE
-	if(can_add_component(part, user))
+	var/number = can_add_component(part, user)
+	if(!number)
+		return istype(part) // If it's not a stock part, we don't block further interactions; presumably the user meant to do something else.
+	if(isstack(part))
+		var/obj/item/stack/stack = part
+		install_component(stack.split(number))
+	else
 		user.unEquip(part, src)
 		install_component(part)
-		user.visible_message(SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"), SPAN_NOTICE("You install \the [part] in \the [src]!"))
+	user.visible_message(SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"), SPAN_NOTICE("You install \the [part] in \the [src]!"))
 	return TRUE
 
 /obj/machinery/proc/part_removal(mob/user)
@@ -251,3 +271,14 @@ Standard helpers for users interacting with machinery parts.
 			user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
 		return TRUE
+
+/obj/machinery/proc/missing_parts()
+	if(!construct_state)
+		return
+	var/list/requirements = construct_state.get_requirements(src)
+	if(LAZYLEN(requirements))
+		for(var/required_type in requirements)
+			var/needed = requirements[required_type]
+			var/present = number_of_components(required_type)
+			if(present < needed)
+				LAZYSET(., required_type, needed - present)

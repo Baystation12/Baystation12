@@ -4,6 +4,11 @@
 
 /obj/item/weapon/stock_parts/circuitboard/unary_atmos
 	board_type = "machine"
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/unary_atmos/construct(var/obj/machinery/atmospherics/unary/U)
 	//TODO: Move this stuff into the relevant constructor when pipe/construction.dm is cleaned up.

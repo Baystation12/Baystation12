@@ -10,6 +10,8 @@
 	power_rating = 10000
 	base_type = /obj/machinery/atmospherics/binary/oxyregenerator
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null

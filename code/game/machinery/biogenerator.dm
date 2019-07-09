@@ -14,6 +14,8 @@
 	idle_power_usage = 40
 	base_type = /obj/machinery/biogenerator
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/processing = 0
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0

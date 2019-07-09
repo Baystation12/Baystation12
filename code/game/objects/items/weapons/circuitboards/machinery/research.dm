@@ -10,6 +10,9 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 	req_components = list(
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/weapon/stock_parts/scanning_module = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/destructive_analyzer
 	name = T_BOARD("destructive analyzer")
@@ -20,6 +23,9 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 							/obj/item/weapon/stock_parts/scanning_module = 1,
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/stock_parts/micro_laser = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/autolathe
 	name = T_BOARD("autolathe")
@@ -30,6 +36,11 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 							/obj/item/weapon/stock_parts/matter_bin = 3,
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/protolathe
 	name = T_BOARD("protolathe")
@@ -40,7 +51,9 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 							/obj/item/weapon/stock_parts/matter_bin = 2,
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/reagent_containers/glass/beaker = 2)
-
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/circuit_imprinter
 	name = T_BOARD("circuit imprinter")
@@ -51,6 +64,9 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 							/obj/item/weapon/stock_parts/matter_bin = 1,
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/reagent_containers/glass/beaker = 2)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/mechfab
 	name = "Circuit board (Exosuit Fabricator)"
@@ -58,18 +74,27 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
 	req_components = list(
-							/obj/item/weapon/stock_parts/matter_bin = 2,
-							/obj/item/weapon/stock_parts/manipulator = 1,
-							/obj/item/weapon/stock_parts/micro_laser = 1,
-							/obj/item/weapon/stock_parts/console_screen = 1)
+		/obj/item/weapon/stock_parts/matter_bin = 2,
+		/obj/item/weapon/stock_parts/manipulator = 1,
+		/obj/item/weapon/stock_parts/micro_laser = 1,
+		/obj/item/weapon/stock_parts/console_screen = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/ntnet_relay
 	name = "Circuit board (NTNet Quantum Relay)"
 	build_path = /obj/machinery/ntnet_relay
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 4)
-	req_components = list(
-							/obj/item/stack/cable_coil = 15)
+	req_components = list(/obj/item/stack/cable_coil = 15)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/suspension_gen
 	name = T_BOARD("suspension generator")
@@ -77,7 +102,12 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_MAGNET = 4)
 	req_components = list(
-							/obj/item/weapon/stock_parts/matter_bin = 2,
-							/obj/item/weapon/stock_parts/manipulator = 1,
-							/obj/item/weapon/stock_parts/micro_laser = 1,
-							/obj/item/weapon/stock_parts/console_screen = 1)
+		/obj/item/weapon/stock_parts/matter_bin = 2,
+		/obj/item/weapon/stock_parts/manipulator = 1,
+		/obj/item/weapon/stock_parts/micro_laser = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/weapon/cell/high = 1
+	)

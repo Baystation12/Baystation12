@@ -31842,7 +31842,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
 "xxB" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "xzj" = (

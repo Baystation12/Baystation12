@@ -6,12 +6,13 @@
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER //So it draws over mobs in the tile north of it.
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 /obj/machinery/mining/drill
 	name = "mining drill head"
 	desc = "An enormous drill."
 	icon_state = "mining_drill"
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery)
 	power_channel = LOCAL
 	active_power_usage = 10 KILOWATTS
 	base_type = /obj/machinery/mining/drill

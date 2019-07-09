@@ -31,6 +31,9 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NOSCREEN 0x20 // No UI shown via direct interaction
 #define NOINPUT  0x40 // No input taken from direct interaction
 
+#define MACHINE_BROKEN_GENERIC  0x1 // Standard legacy brokenness, used on a case-by-case basis
+#define MACHINE_BROKEN_NO_PARTS 0x2 // Missing required parts
+
 // Used by firelocks
 #define FIREDOOR_OPEN 1
 #define FIREDOOR_CLOSED 2

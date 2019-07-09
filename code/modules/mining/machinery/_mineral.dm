@@ -3,6 +3,8 @@
 	density =  TRUE
 	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/turf/input_turf
 	var/turf/output_turf

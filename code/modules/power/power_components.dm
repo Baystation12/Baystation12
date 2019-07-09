@@ -63,6 +63,9 @@
 		A.use_power_oneoff(amount, channel)
 		return amount
 
+/obj/item/weapon/stock_parts/power/apc/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+
 /obj/item/weapon/stock_parts/power/battery
 	name = "battery backup"
 	desc = "A self-contained battery backup system, using replaceable cells to provide backup power."
@@ -84,7 +87,7 @@
 	start_processing(machine)
 
 /obj/item/weapon/stock_parts/power/battery/on_uninstall(var/obj/machinery/machine)
-	if(cell)
+	if(cell && (part_flags & PART_FLAG_QDEL))
 		cell.dropInto(loc)
 		remove_cell()
 	..()
@@ -220,8 +223,15 @@
 	if(!istype(machine))
 		return ..()
 
-/obj/item/weapon/stock_parts/power/battery/attack_hand(mob/user)
+/obj/item/weapon/stock_parts/power/battery/attack_self(mob/user)
 	if(cell)
+		user.put_in_hands(cell)
+		extract_cell(user)
+		return TRUE
+	return ..()
+
+/obj/item/weapon/stock_parts/power/battery/attack_hand(mob/user)
+	if(cell && istype(loc, /obj/machinery))
 		user.put_in_hands(cell)
 		extract_cell(user)
 		return TRUE
@@ -229,6 +239,51 @@
 
 /obj/item/weapon/stock_parts/power/battery/get_cell()
 	return cell
+
+/obj/item/weapon/stock_parts/power/battery/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+	matter = list(MATERIAL_STEEL = 400)
+
+/obj/item/weapon/stock_parts/power/battery/buildable/crap
+	name = "battery backup (weak)"
+	desc = "The NanoTrasen BAT84 is an all-in-one battery backup system sold at an affordable price."
+	matter = list(MATERIAL_STEEL = 100)
+	charge_rate = 0.25
+	charge_wait_counter = 15
+
+/obj/item/weapon/stock_parts/power/battery/buildable/crap/get_lore_info()
+	return "The NanoTrasen BAT84's debut on the battery backup market was greeted by universally negative reviews, \
+	highlighting its slow recharge rate and exceptional lack of responsiveness to power changes.\
+	Nevertheless, it has been steadily gaining market share due to rock-bottom prices and a predatory marketing campaign."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/stock
+	name = "battery backup (standard)"
+	desc = "The Hephaestus 3006915, or, as this part is colloquially known, model 15, is the workhorse battery backup solution of populated space."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/stock/get_lore_info()
+	return "After several failed attempts, Hephaestus hit a best-selling component in the model 15. \
+	Combining tolerable recharge rate and high durability into a conveniently shaped package, it has dominated the market for over three decades."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/turbo
+	name = "battery backup (rapid)"
+	desc = "The Ward-Takahashi Xcharge state-of-the-art battery backup claims to charge over ten times as fast as its competitors."
+	charge_rate = 5
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_ALUMINIUM = 400, MATERIAL_PLASTIC = 400)
+
+/obj/item/weapon/stock_parts/power/battery/buildable/turbo/get_lore_info()
+	return "Ward-Takahashi GMB's latest battery charging technology deploys advanced composites and semiorganic interfaces to attain previously unheard-of charge rates. \
+	Their marketing division, on the other hand, has been engaged in seeminly endless lawsuits over false advertising, having allegedly overstated said rates."
+
+/obj/item/weapon/stock_parts/power/battery/buildable/responsive
+	name = "battery backup (responsive)"
+	desc = "The Focal Point FOXUS is a battery backup device marketed for its fast startup time."
+	charge_wait_counter = 2
+	charge_rate = 0.8
+	matter = list(MATERIAL_STEEL = 400, MATERIAL_ALUMINIUM = 400, MATERIAL_PLASTIC = 400)
+
+/obj/item/weapon/stock_parts/power/battery/buildable/responsive/get_lore_info()
+	return "Unable to compete on price with the larger conglomerates, Focal Point's FOXUS instead sacrifices a bit of charge rate for drastically better responsiveness. \
+	While an instant cult classic in the high-performance market, the FOXUS's bewildering name, lackluster marketing effort, and steep price have kept it from becoming a household name."
 
 // Direct powernet connection via terminal machinery.
 // Note that this isn't for the terminal itself, which is an auxiliary entity; it's for whatever is connected to it.
@@ -380,3 +435,6 @@
 				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 				qdel(terminal)
 		return TRUE
+
+/obj/item/weapon/stock_parts/power/terminal/buildable
+	part_flags = PART_FLAG_HAND_REMOVE

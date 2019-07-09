@@ -8,6 +8,8 @@
 	anchored = 1
 	req_access = list(access_kitchen,access_morgue)
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/operating = 0        //Is it on?
 	var/dirty = 0            // Does it need cleaning?
