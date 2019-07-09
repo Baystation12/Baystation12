@@ -16,8 +16,6 @@
 	var/obj/item/weapon/card/id/id = GetIdCard()
 	if(id)
 		. += id.GetAccess()
-	if(maint_all_access)
-		. |= access_maint_tunnels
 
 /atom/movable/proc/GetIdCard()
 	return null
@@ -32,6 +30,11 @@
 		R = list()
 	if(!istype(L, /list))
 		return FALSE
+
+	if(maint_all_access)
+		L = L.Copy()
+		L |= access_maint_tunnels
+
 	return has_access(R, L)
 
 /proc/has_access(list/req_access, list/accesses)
