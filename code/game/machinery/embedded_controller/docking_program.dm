@@ -65,7 +65,13 @@
 /datum/computer/file/embedded_program/docking/New(var/obj/machinery/embedded_controller/M)
 	..()
 	if(id_tag)
-		tag = id_tag //set tags for initialization
+		if(SSshuttle.docking_registry[id_tag])
+			crash_with("Docking controller tag [id_tag] had multiple associated programs.")
+		SSshuttle.docking_registry[id_tag] = src
+
+/datum/computer/file/embedded_program/docking/Destroy()
+	SSshuttle.docking_registry -= id_tag
+	return ..()
 
 /datum/computer/file/embedded_program/docking/receive_user_command(command)
 	if(command == "dock" || command == "undock")
