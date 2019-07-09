@@ -234,9 +234,6 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/glass/civilian
 	stripe_color = COLOR_CIVIE_GREEN
 
-/obj/machinery/door/airlock/glass/chaplain
-	stripe_color = COLOR_GRAY20
-
 /obj/machinery/door/airlock/external
 	airlock_type = "External"
 	name = "External Airlock"
