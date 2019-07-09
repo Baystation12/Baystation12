@@ -13533,7 +13533,6 @@
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
 "aUI" = (
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /obj/structure/cable/green{
 	d1 = 2;
@@ -14775,7 +14774,6 @@
 	pixel_x = 6;
 	pixel_y = -21
 	},
-/obj/structure/table/standard,
 /obj/effect/floor_decal/corner/beige/three_quarters{
 	dir = 4
 	},
@@ -22691,7 +22689,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "kpb" = (
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
@@ -27881,7 +27878,6 @@
 /area/rnd/research)
 "qGb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,

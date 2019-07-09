@@ -2982,7 +2982,7 @@
 /area/casino/casino_kitchen)
 "hX" = (
 /obj/structure/table/marble,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "hY" = (
