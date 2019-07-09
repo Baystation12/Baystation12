@@ -1558,6 +1558,7 @@
 #include "code\modules\halo\misc\language_teacher.dm"
 #include "code\modules\halo\misc\loot_distributor.dm"
 #include "code\modules\halo\misc\memorial_statue.dm"
+#include "code\modules\halo\misc\oni_cryopod.dm"
 #include "code\modules\halo\misc\Orion Project.dm"
 #include "code\modules\halo\misc\payload.dm"
 #include "code\modules\halo\misc\scrap.dm"
