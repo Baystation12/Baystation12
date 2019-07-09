@@ -14,7 +14,7 @@
 /obj/proc/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	return TOPIC_NOACTION
 
-/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
 	return min(..(), user.CanUseObjTopic(src, state))
 
 /mob/living/CanUseObjTopic(var/obj/O, var/datum/topic_state/state)
