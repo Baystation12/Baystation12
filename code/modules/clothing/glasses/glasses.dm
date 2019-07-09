@@ -421,7 +421,7 @@
 	action_button_name = null
 
 /obj/item/clothing/glasses/thermal/plain/monocle
-	name = "thermoncle"
+	name = "thermonocle"
 	desc = "A monocle thermal."
 	icon_state = "thermoncle"
 	body_parts_covered = 0 //doesn't protect eyes because it's a monocle, duh
