@@ -70,6 +70,7 @@ If you wish to use Discord webhooks, which are a way of passing information from
 - webhook_roundstart: The master controller has finished initializing and the round will begin soon.
 - webhook_submap_loaded: A submap has been loaded and placed, and is available for people to join. Includes the name of the submap.
 - webhook_submap_vox: The vox submap specifically has been loaded and placed. This is distinct for the purposes of tagging vox players with a @mention.
+- webhook_submap_skrell: The Skrell submap specifically has been loaded and placed. This is distinct for the purposes of tagging Skrell players with a @mention.
 - webhook_custom_event: The custom event text for the round has been set or changed.
 
 Each definition can optionally include an array of roles to mention when the webhook is called. Roles must be provided using the role ID (ex. `<@&555231866735689749>`), which can be obtained by writing `\@somerole` into the chat, in order for pinging to work correctly.
