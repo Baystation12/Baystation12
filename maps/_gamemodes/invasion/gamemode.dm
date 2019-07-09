@@ -20,6 +20,8 @@
 
 	setup_factions()
 
+	GLOB.innie_factions_controller.begin_processing()
+
 	//hide some faction sectors from factions not playing
 	for(var/obj/effect/overmap/S in world)
 		var/hide = 0
