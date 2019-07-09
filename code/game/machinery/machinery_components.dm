@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				if(number == 0)
 					break
 
-// Returns a list of subtypes of the given component type, with assotiated value = number of that component.
+// Returns a list of subtypes of the given component type, with associated value = number of that component.
 /obj/machinery/proc/types_of_component(var/part_type)
 	. = list()
 	for(var/obj/component in component_parts)

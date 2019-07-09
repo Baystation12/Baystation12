@@ -3,7 +3,7 @@
 // Multiz shuttles currently not supported. Non-autodock shuttles currently not supported.
 
 /obj/effect/overmap/ship/landable
-	var/shuttle                                         // Name of assotiated shuttle. Must be autodock.
+	var/shuttle                                         // Name of associated shuttle. Must be autodock.
 	var/obj/effect/shuttle_landmark/ship/landmark       // Record our open space landmark for easy reference.
 	var/multiz = 0										// Index of multi-z levels, starts at 0
 	var/status = SHIP_STATUS_LANDED
