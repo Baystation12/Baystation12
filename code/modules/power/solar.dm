@@ -284,6 +284,7 @@ var/list/solars_list = list()
 	idle_power_usage = 250
 	construct_state = /decl/machine_construction/default/panel_closed/computer
 	base_type = /obj/machinery/power/solar_control
+	frame_type = /obj/machinery/constructable_frame/computerframe
 	var/id = 0
 	var/cdir = 0
 	var/targetdir = 0		// target angle in manual tracking (since it updates every game minute)
