@@ -2480,7 +2480,7 @@
 /area/crew_quarters/galley)
 "fw" = (
 /obj/structure/table/marble,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /obj/item/weapon/reagent_containers/glass/beaker{
 	pixel_x = 5
 	},
@@ -3568,7 +3568,7 @@
 "hD" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table/marble,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
 "hE" = (
@@ -20675,7 +20675,7 @@
 /area/crew_quarters/bar)
 "Ym" = (
 /obj/structure/table/standard,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /obj/item/weapon/reagent_containers/glass/beaker{
 	pixel_x = 5
 	},
@@ -20726,7 +20726,7 @@
 /area/engineering/engine_eva)
 "Yx" = (
 /obj/structure/table/standard,
-/obj/machinery/reagentgrinder{
+/obj/machinery/reagentgrinder/juicer{
 	pixel_y = 8
 	},
 /turf/simulated/floor/tiled/dark,

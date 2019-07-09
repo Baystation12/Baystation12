@@ -1477,7 +1477,7 @@
 /area/ship/skrellscoutship/crew/kitchen)
 "dF" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/kitchen)
@@ -2508,7 +2508,6 @@
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/command/armory)
 "vt" = (
-/obj/structure/table/glass,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/item/weapon/reagent_containers/glass/beaker/large,

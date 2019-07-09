@@ -1521,7 +1521,7 @@
 	icon_state = "tube1";
 	dir = 1
 	},
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /obj/structure/table/glass/pglass,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)

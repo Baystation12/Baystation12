@@ -3934,7 +3934,7 @@
 /area/errant_pisces/dorms)
 "ju" = (
 /obj/structure/table/marble,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "jv" = (
@@ -4780,7 +4780,6 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)

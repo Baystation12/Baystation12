@@ -8660,7 +8660,6 @@
 /turf/simulated/floor/tiled/white,
 /area/vacant/infirmary)
 "sR" = (
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
@@ -10145,7 +10144,6 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/fifthdeck/aftstarboard)
 "wY" = (
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -11550,7 +11548,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /obj/item/stack/material/phoron,
 /turf/simulated/floor/tiled/dark/monotile,

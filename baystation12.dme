@@ -2604,6 +2604,7 @@
 #include "code\modules\random_map\noise\ore.dm"
 #include "code\modules\random_map\noise\tundra.dm"
 #include "code\modules\reagents\Chemistry-Colours.dm"
+#include "code\modules\reagents\Chemistry-Grinder.dm"
 #include "code\modules\reagents\Chemistry-Holder.dm"
 #include "code\modules\reagents\Chemistry-Logging.dm"
 #include "code\modules\reagents\Chemistry-Machinery.dm"

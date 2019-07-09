@@ -945,7 +945,7 @@
 /area/icarus/vessel)
 "cZ" = (
 /obj/structure/table/standard,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "da" = (
