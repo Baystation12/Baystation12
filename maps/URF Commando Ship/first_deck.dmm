@@ -394,6 +394,7 @@
 "hD" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/plasteel/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/soe_ship/storageroom3)
 "hE" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/steel/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
 "hF" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/item/device/assembly/igniter,/obj/item/device/assembly/igniter,/obj/item/stack/cable_coil,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
+"hG" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/obj/item/weapon/material/kitchen/rollingpin,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,/obj/item/weapon/material/kitchen/utensil/knife,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
 "hH" = (/obj/machinery/door/blast/regular,/turf/simulated/wall/r_wall,/area/soe_ship/boardingpods)
 "hI" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
 "hJ" = (/obj/machinery/vending/hydronutrients,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
