@@ -48,14 +48,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
 	                               //This is probably a lot longer explanation than it needs to be.
 
-	var/station_name  = "BAD Station"
-	var/station_short = "Baddy"
-	var/dock_name     = "THE PirateBay"
-	var/boss_name     = "Captain Roger"
-	var/boss_short    = "Cap'"
-	var/company_name  = "BadMan"
-	var/company_short = "BM"
-	var/system_name = "Uncharted System"
+	var/station_name  = "USG Ishimura"
+	var/station_short = "Ishimura"
+	var/dock_name     = "Aegis VII"
+	var/boss_name     = "Concordance Extraction Corporation"
+	var/boss_short    = "CEC"
+	var/company_name  = "EarthGov"
+	var/company_short = "EarthGov"
+	var/system_name = "Cygnus System"
 
 	var/map_admin_faxes = list()
 
@@ -117,18 +117,18 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		"Luna",
 		"Mars",
 		"Titan",
-		"Other - Minor Colony"
-		)
+		"Venus"
+	)
 
 	var/list/home_system_choices = list(
 		"Sol"
 		)
 
 	var/list/faction_choices = list(
-		"Concordance Extraction Corporation",
-		"EarthGov",
-		"Church of Unitology",
-		"Unaffiliated"
+		"C.E.C Employee",
+		"EarthGov Contractor",
+		"Church of Unitology Missionary",
+		"Unaffiliated Employee"
 		)
 
 	var/list/religion_choices = list(
