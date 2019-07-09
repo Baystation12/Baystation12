@@ -6,7 +6,7 @@
 	l_hand = /obj/item/weapon/clipboard
 	id_type = /obj/item/weapon/card/id/science/head
 	pda_type = /obj/item/modular_computer/pda/heads/rd
-
+	
 /decl/hierarchy/outfit/job/science/ds13juniorsciencenerd
 	name = OUTFIT_JOB_NAME("Research Assistant")
 	uniform = /obj/item/clothing/under/rank/scientist
