@@ -1,7 +1,7 @@
 /obj/item/weapon/stock_parts/console_screen
 	name = "console screen"
 	desc = "Used in the construction of computers and other devices with an interactive screen."
-	icon_state = "screen"
+	icon_state = "output"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_GLASS = 200)
 	base_type = /obj/item/weapon/stock_parts/console_screen
@@ -14,7 +14,7 @@
 /obj/item/weapon/stock_parts/keyboard
 	name = "input controller"
 	desc = "A standard part required by many machines to recieve user input."
-	icon_state = "keyboard"
+	icon_state = "input"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_PLASTIC = 200)
 	base_type = /obj/item/weapon/stock_parts/keyboard
