@@ -4,8 +4,12 @@ var/jobban_runonce			// Updates legacy bans with new info
 var/jobban_keylist[0]		//to store the keys & ranks
 
 /proc/jobban_fullban(mob/M, rank, reason)
-	if (!M || !M.key) return
-	jobban_keylist.Add(text("[M.ckey] - [rank] ## [reason]"))
+	if(!M)
+		return
+	var/last_ckey = LAST_CKEY(M)
+	if(!last_ckey)
+		return
+	jobban_keylist.Add(text("[last_ckey] - [rank] ## [reason]"))
 	jobban_savebanfile()
 
 /proc/jobban_client_fullban(ckey, rank)

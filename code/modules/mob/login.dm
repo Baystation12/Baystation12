@@ -3,6 +3,7 @@
 	//Multikey checks and logging
 	lastKnownIP	= client.address
 	computer_id	= client.computer_id
+	last_ckey = ckey
 	log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 	if(config.log_access)
 		var/is_multikeying = 0

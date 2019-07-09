@@ -46,9 +46,12 @@ var/global/floorIsLava = 0
 
 	var/body = "<html><head><title>Options for [M.key]</title></head>"
 	body += "<body>Options panel for <b>[M]</b>"
+	var/last_ckey = LAST_CKEY(M)
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
+	else if(last_ckey)
+		body += " (last occupied by ckey <b>[last_ckey]</b>)"
 
 	if(istype(M, /mob/new_player))
 		body += " <B>Hasn't Entered Game</B> "
@@ -65,8 +68,8 @@ var/global/floorIsLava = 0
 		<b>Mob type:</b> [M.type]<br>
 		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
-		<A href='?_src_=holder;warn=[M.ckey]'>Warn</A> |
-		<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> |
+		<A href='?_src_=holder;warn=[last_ckey]'>Warn</A> |
+		<A href='?src=\ref[src];newban=\ref[M];last_key=[last_ckey]'>Ban</A> |
 		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
 		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
 	"}
