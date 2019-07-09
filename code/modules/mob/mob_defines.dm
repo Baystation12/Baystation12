@@ -30,6 +30,7 @@
 
 	var/lastKnownIP = null
 	var/computer_id = null
+	var/last_ckey
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
