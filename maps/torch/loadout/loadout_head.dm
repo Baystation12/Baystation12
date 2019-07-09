@@ -51,6 +51,9 @@
 /datum/gear/head/bandana
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/head/beanie
+	allowed_branches = CIVILIAN_BRANCHES
+
 /datum/gear/head/bow
 	allowed_branches = CIVILIAN_BRANCHES
 
