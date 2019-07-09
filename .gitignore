@@ -42,6 +42,6 @@ Session.vim
 tags
 baystation12.code-workspace
 
-# ignore webhooks libs
-byhttp.dll
-libbyhttp.so
+# ignore built libs
+lib/*.dll
+lib/*.so
