@@ -7,13 +7,13 @@
 	color = COLOR_PALE_GREEN_GRAY
 	detail_color = COLOR_GREEN
 
-	var/temp_access = list() //to prevent agent cards stealing access as permanent
+	var/list/temp_access = list() //to prevent agent cards stealing access as permanent
 	var/expiration_time = 0
 	var/reason = "NOT SPECIFIED"
 
 /obj/item/weapon/card/id/guest/GetAccess()
 	if (world.time > expiration_time)
-		return access
+		return ..()
 	else
 		return temp_access
 
