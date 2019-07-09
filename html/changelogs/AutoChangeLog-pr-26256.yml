@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Shuttle consoles are now buildable. Use a multitool on the circuit while on a shuttle to set the shuttle first! Shuttles are still not buildable; you must do this on an existing shuttle."
