@@ -3425,6 +3425,9 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/newscaster{
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/office)
 "hr" = (
@@ -12398,6 +12401,10 @@
 /area/security/range)
 "BF" = (
 /obj/effect/floor_decal/spline/fancy/black,
+/obj/item/device/radio/intercom/entertainment{
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
 "BG" = (
@@ -17442,6 +17449,11 @@
 	id = "chapoff_windows";
 	pixel_x = 6;
 	pixel_y = 24
+	},
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 22;
+	pixel_y = 4
 	},
 /turf/simulated/floor/carpet/purple,
 /area/chapel/office)
