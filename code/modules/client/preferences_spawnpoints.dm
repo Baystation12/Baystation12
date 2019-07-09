@@ -53,9 +53,12 @@ GLOBAL_VAR(spawntypes)
 		if(!unsafe_turfs)
 			unsafe_turfs = list()
 		if(turfs)
+			var/list/unsafe_reasons = list()
 			for(var/turf/T in turfs)
-				if(IsTurfAtmosUnsafe(T))
+				var/list/new_reasons = IsTurfAtmosUnsafe(T, 1)
+				if(new_reasons.len)
 					newly_dangerous_turfs += T
+				unsafe_reasons |= new_reasons
 			turfs -= newly_dangerous_turfs
 
 			for(var/turf/T in unsafe_turfs)
@@ -65,7 +68,7 @@ GLOBAL_VAR(spawntypes)
 
 			unsafe_turfs.Add(newly_dangerous_turfs)
 			if(newly_dangerous_turfs.len)
-				message_admins("NOTICE: spawnpoint \'[src.type]\' has new atmos unsafe turfs, disabling spawns for those turfs.")
+				message_admins("NOTICE: spawnpoint \'[src.type]\' has new atmos unsafe turfs, disabling spawns for those turfs ([english_list(unsafe_reasons)]).")
 
 	//check if there are any valid turfs for this spawnpoint
 	if(!turfs.len)
