@@ -23,7 +23,7 @@
 
 /obj/machinery/r_n_d/protolathe/Process()
 	..()
-	if(stat)
+	if(stat & (BROKEN | NOPOWER))
 		update_icon()
 		return
 	if(queue.len == 0)
