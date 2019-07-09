@@ -1,13 +1,13 @@
 //The following is a list of defs to be used for the Torch loadout.
 
 //For jobs that allow for decorative or ceremonial clothing
-#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/stowaway, /datum/job/detective)
+#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/stowaway, /datum/job/detective, /datum/job/chaplain)
 
 //For civilian jobs that may have a uniform, but not a strict one
-#define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/stowaway, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective)
+#define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/stowaway, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/chaplain)
 
 //For civilian jobs that may have a strict uniform.
-#define SEMIANDFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative,/datum/job/stowaway, /datum/job/detective)
+#define SEMIANDFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative,/datum/job/stowaway, /datum/job/detective, /datum/job/chaplain)
 
 //For roles with no uniform or formal clothing requirements
 #define RESTRICTED_ROLES list(/datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/stowaway)
@@ -31,7 +31,7 @@
 #define SUPPLY_ROLES list(/datum/job/qm, /datum/job/cargo_tech)
 
 //For members of the service department
-#define SERVICE_ROLES list(/datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/bartender)
+#define SERVICE_ROLES list(/datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/bartender, /datum/job/chaplain)
 
 //For members of the research department and jobs that are scientific
 #define RESEARCH_ROLES list(/datum/job/rd, /datum/job/scientist, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/nt_pilot, /datum/job/senior_scientist, /datum/job/roboticist, /datum/job/biomech)
