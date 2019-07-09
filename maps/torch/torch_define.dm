@@ -46,71 +46,25 @@
 		"Earth",
 		"Luna",
 		"Mars",
-		"Pluto",
-		"Ceti Epsilon",
-		"Eos",
-		"Tiamat",
-		"Terra",
-		"Novaya Zemlya",
-		"Gaia",
-		"Moghes",
-		"Ahdomai",
-		"Qerrbalak",
-		"Tau-Wilo",
-		"Avalon",
-		"Tersten",
-		"Magnitka",
-		"Yuklid V",
-		"Cinu"
+		"Titan",
+		"Other - Minor Colony"
 		)
 
 	home_system_choices = list(
-		"Sol",
-		"Tau Ceti",
-		"Helios",
-		"Alpha Centuri",
-		"Gilgamesh",
-		"Galilei",
-		"Uuoea-Esa",
-		"Zamsiin-lr",
-		"Qerr'Valis",
-		"XX-168",
-		"Klaudof",
-		"Gavil",
-		"Ursa",
-		"Yuklid",
-		"Lucinaer"
+		"Sol"
 		)
 
 	faction_choices = list(
-		"Sol Central Government",
-		"Terran Colonial Confederation",
-		"NanoTrasen",
-		"Xynergy",
-		"Vey Med",
-		"Einstein Engines",
-		"Ward-Takahashi GMB",
-		"Gilthari Exports",
-		"Grayson Manufactories Ltd.",
-		"Aether Atmospherics",
-		"Zeng-Hu Pharmaceuticals",
-		"Hephaestus Industries",
-		"Free Trade Union",
-		"Commonwealth of Ahdomai",
-		"Positronic Union"
+		"Concordance Extraction Corporation",
+		"EarthGov",
+		"Church of Unitology",
+		"Unaffiliated"
 		)
 
 	religion_choices = list(
-		"Jewish",
-		"Hinduism",
-		"Buddhist",
-		"Islamic",
-		"Christian",
+		"Unitologist",
 		"Agnostic",
-		"Deist",
-		"Athiest",
-		"Thelema",
-		"Spiritualist"
+		"Atheist"
 		)
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
