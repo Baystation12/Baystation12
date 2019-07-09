@@ -17,13 +17,14 @@
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
 
-	station_name  = "SEV Torch"
-	station_short = "Torch"
-	dock_name     = "TBD"
-	boss_name     = "Expeditionary Command"
-	boss_short    = "Command"
-	company_name  = "Sol Central Government"
-	company_short = "SolGov"
+	station_name  = "USG Ishimura"
+	station_short = "Ishimura"
+	dock_name     = "Aegis VII"
+	boss_name     = "Concordance Extraction Corporation"
+	boss_short    = "CEC"
+	company_name  = "EarthGov"
+	company_short = "EarthGov"
+	system_name = "Cygnus System"
 
 	map_admin_faxes = list("NanoTrasen Central Office")
 
@@ -47,7 +48,7 @@
 		"Luna",
 		"Mars",
 		"Titan",
-		"Other - Minor Colony"
+		"Venus"
 		)
 
 	home_system_choices = list(
@@ -55,10 +56,10 @@
 		)
 
 	faction_choices = list(
-		"Concordance Extraction Corporation",
-		"EarthGov",
-		"Church of Unitology",
-		"Unaffiliated"
+		"C.E.C Employee",
+		"EarthGov Contractor",
+		"Church of Unitology Missionary",
+		"Unaffiliated Contractor"
 		)
 
 	religion_choices = list(
