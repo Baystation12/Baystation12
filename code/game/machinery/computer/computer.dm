@@ -9,6 +9,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed/computer
 	uncreated_component_parts = null
 	stat_immune = 0
+	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct
 	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
@@ -95,9 +96,6 @@
 	return text
 
 /obj/machinery/computer/dismantle(mob/user)
-	playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	new /obj/machinery/constructable_frame/computerframe/deconstruct(loc, dir)
-
 	if(stat & BROKEN)
 		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 		for(var/obj/item/weapon/stock_parts/console_screen/screen in component_parts)
@@ -105,14 +103,4 @@
 			new /obj/item/weapon/material/shard(loc)
 	else
 		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-
-	for(var/I in component_parts)
-		uninstall_component(I, refresh_parts = FALSE)
-	while(LAZYLEN(uncreated_component_parts))
-		var/path = uncreated_component_parts[1]
-		uninstall_component(path, refresh_parts = FALSE)
-	for(var/obj/C in src)
-		C.dropInto(loc)
-
-	qdel(src)
-	return TRUE
+	return ..()

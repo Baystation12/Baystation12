@@ -529,6 +529,20 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/engine
 	sort_string = "JFAAE"
 
+/datum/design/circuit/shuttle
+	name = "basic shuttle console"
+	id = "shuttle"
+	req_tech = list(TECH_DATA = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/shuttle_console
+	sort_string = "JFAAF"
+
+/datum/design/circuit/shuttle_long
+	name = "long range shuttle console"
+	id = "shuttle_long"
+	req_tech = list(TECH_DATA = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/shuttle_console/explore
+	sort_string = "JFAAG"
+
 /datum/design/circuit/biogenerator
 	name = "biogenerator"
 	id = "biogenerator"
