@@ -413,10 +413,8 @@ This function restores all organs.
 	damageoverlaytemp = 20
 	switch(damagetype)
 		if(BRUTE)
-			damage = damage*species.brute_mod
 			created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
 		if(BURN)
-			damage = damage*species.burn_mod
 			created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon)
 		if(PAIN)
 			organ.add_pain(damage)
