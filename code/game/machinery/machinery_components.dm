@@ -175,7 +175,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		var/list/missing = missing_parts()
 		for(var/path in missing)
 			if(istype(component, path))
-				return missing[path]		
+				return missing[path]
+		return 0
 	if(!(component.part_flags & PART_FLAG_HAND_REMOVE))
 		return 0
 	if(!components_are_accessible(component.type))
