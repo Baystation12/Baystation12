@@ -16995,6 +16995,10 @@
 /obj/item/weapon/storage/medical_lolli_jar,
 /obj/structure/table/standard,
 /obj/item/weapon/book/manual/psionics,
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "dTb" = (
