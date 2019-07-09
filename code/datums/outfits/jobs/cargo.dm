@@ -27,13 +27,13 @@
 	uniform = /obj/item/clothing/under/rank/miner
 	id_type = /obj/item/weapon/card/id/cargo/mining
 	pda_type = /obj/item/modular_computer/pda/science
-
+	
 /decl/hierarchy/outfit/job/cargo/ds13miningforeman
 	name = OUTFIT_JOB_NAME("Mining Foreman")
 	uniform = /obj/item/clothing/under/rank/miner
 	id_type = /obj/item/weapon/card/id/cargo/mining
 	pda_type = /obj/item/modular_computer/pda/science
-
+	
 /decl/hierarchy/outfit/job/cargo/ds13necromorphbait
 	name = OUTFIT_JOB_NAME("Aegis VII Colonist")
 	uniform = /obj/item/clothing/under/rank/miner
