@@ -14,8 +14,9 @@
 /datum/money_account/New(var/account_type)
 	account_type = account_type ? account_type : ACCOUNT_TYPE_PERSONAL
 
-/datum/money_account/proc/add_transaction(var/datum/transaction/T)
-	money = max(0, money + T.amount)
+// is_source inverts the amount.
+/datum/money_account/proc/add_transaction(var/datum/transaction/T, is_source = FALSE)
+	money = max(is_source ? money - T.amount : money + T.amount, 0)
 	transaction_log += T
 
 /datum/money_account/proc/get_balance()

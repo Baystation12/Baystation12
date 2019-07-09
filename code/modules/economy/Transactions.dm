@@ -51,7 +51,7 @@
 		return FALSE
 
 	target.add_transaction(src)
-	source.add_transaction(src)
+	source.add_transaction(src, TRUE)
 
 	return TRUE
 
