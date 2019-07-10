@@ -408,9 +408,9 @@
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(impact_type))
-		var/obj/effect/projectile/P = new impact_type(location.loc)
+		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
 
-		if(istype(P))
+		if(istype(P) && location)
 			P.set_transform(M)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
