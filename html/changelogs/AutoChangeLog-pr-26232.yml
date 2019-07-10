@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "pAIs no longer have to fold up twice to become a card."
+  - bugfix: "pAIs with the Universal Translator module can now speak and understand Spacer and Gutter."
