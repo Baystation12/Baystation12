@@ -6,6 +6,7 @@
 	icon_state = "portgen0"
 	density = 1
 	anchored = 0
+	interact_offline = TRUE
 
 	var/active = 0
 	var/power_gen = 5000
