@@ -3,6 +3,7 @@
 
 /datum/unit_test/observation
 	name = "OBSERVATION template"
+	template = /datum/unit_test/observation
 	async = 0
 	var/list/received_moves
 

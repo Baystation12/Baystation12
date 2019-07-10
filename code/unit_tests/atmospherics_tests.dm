@@ -4,6 +4,7 @@
 #define ALL_GASIDS gas_data.gases
 
 /datum/unit_test/atmos_machinery
+	template = /datum/unit_test/atmos_machinery
 	var/list/test_cases = list()
 
 /datum/unit_test/atmos_machinery/proc/create_gas_mixes(gas_mix_data)
@@ -61,6 +62,7 @@
 		pass("[case_name]: conserved moles of each gas ID.")
 
 /datum/unit_test/atmos_machinery/conserve_moles
+	template = /datum/unit_test/atmos_machinery/conserve_moles
 	test_cases = list(
 		uphill = list(
 			source = list(
