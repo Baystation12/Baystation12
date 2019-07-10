@@ -3,7 +3,7 @@
 	result = /obj/structure/girder
 	time = WORKTIME_NORMAL
 	steps = list(
-		list(CRAFT_MATERIAL, 5, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 5)
 	)
 	flags = CRAFT_ON_FLOOR|CRAFT_ONE_PER_TURF
 
@@ -14,8 +14,8 @@
 	result = /obj/structure/kitchenspike
 	time = WORKTIME_NORMAL
 	steps = list(
-		list(/obj/item/stack/rods, 3),
-		list(QUALITY_WELDING, 20, 50)
+		list(CRAFT_STACK, /obj/item/stack/rods, 3),
+		list(CRAFT_TOOL, QUALITY_WELDING, 10, "time" = 120)
 	)
 	flags = CRAFT_ON_FLOOR|CRAFT_ONE_PER_TURF
 
@@ -24,14 +24,14 @@
 	result = /obj/item/stack/rods
 	time = 0
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL)
 	)
 
 /datum/craft_recipe/box
 	name = "box"
 	result = /obj/item/weapon/storage/box
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_CARDBOARD)
+		list(CRAFT_MATERIAL, MATERIAL_CARDBOARD)
 	)
 
 
@@ -39,7 +39,7 @@
 	name = "plastic bag"
 	result = /obj/item/weapon/storage/bag/plasticbag
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_PLASTIC)
+		list(CRAFT_MATERIAL, MATERIAL_PLASTIC)
 	)
 
 
@@ -48,21 +48,21 @@
 	name = "ashtray"
 	result = /obj/item/weapon/material/ashtray
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL)
 	)
 
 /datum/craft_recipe/beehive_assembly
 	name = "beehive assembly"
 	result = /obj/item/beehive_assembly
 	steps = list(
-		list(CRAFT_MATERIAL, 10, MATERIAL_WOOD)
+		list(CRAFT_MATERIAL, MATERIAL_WOOD, 10)
 	)
 
 /datum/craft_recipe/beehive_frame
 	name = "beehive frame"
 	result = /obj/item/honey_frame
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_WOOD)
+		list(CRAFT_MATERIAL, MATERIAL_WOOD, 4)
 	)
 
 /datum/craft_recipe/canister
@@ -70,7 +70,7 @@
 	result = /obj/machinery/portable_atmospherics/canister/empty
 	flags = CRAFT_ON_FLOOR|CRAFT_ONE_PER_TURF
 	steps = list(
-		list(CRAFT_MATERIAL, 10, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 10)
 	)
 
 /datum/craft_recipe/cannon_frame
@@ -78,7 +78,7 @@
 	result = /obj/item/weapon/cannonframe
 	flags = CRAFT_ON_FLOOR|CRAFT_ONE_PER_TURF
 	steps = list(
-		list(CRAFT_MATERIAL, 10, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 10)
 	)
 
 
@@ -87,7 +87,7 @@
 	name = "grey folder"
 	result = /obj/item/weapon/folder
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_CARDBOARD)
+		list(CRAFT_MATERIAL, MATERIAL_CARDBOARD)
 	)
 
 /datum/craft_recipe/folder/blue
@@ -112,7 +112,7 @@
 	name = "bandages"
 	result = /obj/item/stack/medical/bruise_pack/handmade
 	steps = list(
-		list(/obj/item/clothing, 1, time = 30)
+		list(CRAFT_OBJECT, /obj/item/clothing, time = 100)
 	)
 
 
@@ -120,8 +120,8 @@
 	name = "dinner tray"
 	result = /obj/item/weapon/tray
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_STEEL, "time" = 40),
-		list(QUALITY_WIRE_CUTTING, 10, 120)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL),
+		list(CRAFT_TOOL, QUALITY_WIRE_CUTTING, 10, "time" = 120)
 	)
 
 
@@ -131,12 +131,12 @@
 	result = /obj/structure/janitorialcart
 	flags = CRAFT_ON_FLOOR|CRAFT_ONE_PER_TURF
 	steps = list(
-		list(/obj/item/stack/rods, 20),
-		list(QUALITY_SCREW_DRIVING, 10, 60),
-		list(CRAFT_MATERIAL, 10, MATERIAL_STEEL, "time" = 40),
-		list(QUALITY_BOLT_TURNING, 10, 60),
-		list(CRAFT_MATERIAL, 10, MATERIAL_PLASTIC, "time" = 40),
-		list(QUALITY_BOLT_TURNING, 10, 60)
+		list(CRAFT_STACK, /obj/item/stack/rods, 10),
+		list(CRAFT_TOOL, QUALITY_SCREW_DRIVING, 10, 60),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 10, "time" = 40),
+		list(CRAFT_TOOL, QUALITY_BOLT_TURNING, 10, 60),
+		list(CRAFT_MATERIAL, MATERIAL_PLASTIC, 10, "time" = 40),
+		list(CRAFT_TOOL, QUALITY_BOLT_TURNING, 10, 60)
 	)
 
 
@@ -147,9 +147,9 @@
 	result = /obj/structure/mopbucket
 	flags = CRAFT_ON_FLOOR|CRAFT_ONE_PER_TURF
 	steps = list(
-		list(CRAFT_MATERIAL, 15, MATERIAL_PLASTIC, "time" = 40),
-		list(QUALITY_SEALING, 10, 60),
-		list(QUALITY_WELDING, 10, 60)
+		list(CRAFT_MATERIAL, MATERIAL_PLASTIC, 15, "time" = 40),
+		list(CRAFT_TOOL, QUALITY_SEALING, 10, 60),
+		list(CRAFT_TOOL, QUALITY_WELDING, 10, 60)
 	)
 
 
@@ -158,28 +158,9 @@
 	name = "mop"
 	result = /obj/item/weapon/mop
 	steps = list(
-		list(/obj/item/clothing, 1, time = 30),
-		list(QUALITY_CUTTING, 10, 120),
-		list(/obj/item/stack/rods, 2),
-		list(QUALITY_BOLT_TURNING, 10, 60)
+		list(CRAFT_OBJECT, /obj/item/clothing),
+		list(CRAFT_TOOL, QUALITY_CUTTING, 10, 120),
+		list(CRAFT_STACK, /obj/item/stack/rods, 2),
+		list(CRAFT_TOOL, QUALITY_BOLT_TURNING, 10, 60)
 	)
 
-
-/*
-
-/datum/craft_recipe/wall_girders/low
-	name = "low girders"
-	result = /obj/structure/girder/low
-	time = WORKTIME_FAST
-	steps = list(
-		list(CRAFT_MATERIAL, 3, MATERIAL_STEEL)
-	)
-
-/datum/craft_recipe/blood_pack
-	name = "blood pack"
-	result = /obj/item/weapon/reagent_containers/blood/empty
-	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_PLASTIC)
-	)
-
-*/

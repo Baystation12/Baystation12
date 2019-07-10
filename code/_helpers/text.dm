@@ -22,6 +22,14 @@
  * Text sanitization
  */
 
+
+/proc/sanitizeFileName(var/input)
+	input = replace_characters(input, list(" "="_", "\\" = "_", "\""="'", "/" = "_", ":" = "_", "*" = "_", "?" = "_", "|" = "_", "<" = "_", ">" = "_"))
+	if(findtext(input,"_") == 1)
+		input = copytext(input, 2)
+	return input
+
+
 //Used for preprocessing entered text
 //Added in an additional check to alert players if input is too long
 /proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)

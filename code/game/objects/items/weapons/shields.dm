@@ -32,6 +32,8 @@
 /obj/item/weapon/shield
 	name = "shield"
 	var/base_block_chance = 50
+	var/max_block = 10
+	var/impact_sound = 'sound/effects/shieldbash.ogg'
 
 /obj/item/weapon/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(user.incapacitated())
@@ -41,9 +43,30 @@
 	var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
 	if(check_shield_arc(user, bad_arc, damage_source, attacker))
 		if(prob(get_block_chance(user, damage, damage_source, attacker)))
-			user.visible_message("<span class='danger'>\The [user] blocks [attack_text] with \the [src]!</span>")
-			return 1
+			return handle_block(user, damage, damage_source, attacker, def_zone, attack_text)
 	return 0
+
+
+
+//Called when the shield successfully blocks a hit
+/obj/item/weapon/shield/proc/handle_block(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(istype(damage_source, /obj/item/projectile))
+		//Shield reduces the damage of a projectile
+		var/obj/item/projectile/P = damage_source
+		P.damage -= max_block
+
+		if (P.damage <= 0)
+			P.damage = 0
+			playsound(user.loc,impact_sound, 50, 1)
+			user.visible_message("<span class='danger'>\The [user] blocks [attack_text] with \the [src]!</span>")
+			return 1 //Returning 1 prevents the attack from continuing
+		else
+			playsound(user.loc,impact_sound, 5, 1)
+			return 0
+	return 1
+
+
+
 
 /obj/item/weapon/shield/proc/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
 	return base_block_chance
@@ -64,22 +87,10 @@
 	matter = list(MATERIAL_GLASS = 7500, MATERIAL_STEEL = 1000)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
-	var/max_block = 20
-	var/can_block_lasers = FALSE
+	max_block = 20
+	base_block_chance = 70
+	impact_sound = 'sound/weapons/Genhit.ogg'
 
-/obj/item/weapon/shield/riot/handle_shield(mob/user)
-	. = ..()
-	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-
-/obj/item/weapon/shield/riot/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile))
-		var/obj/item/projectile/P = damage_source
-		//plastic shields do not stop bullets or lasers, even in space. Will block beanbags, rubber bullets, and stunshots just fine though.
-		if(is_sharp(P) && damage >= max_block)
-			return 0
-		if(istype(P, /obj/item/projectile/beam) && (!can_block_lasers || (P.armor_penetration >= max_block)))
-			return 0
-	return base_block_chance
 
 /obj/item/weapon/shield/riot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/melee/baton))
@@ -101,41 +112,16 @@
 	w_class = ITEM_SIZE_HUGE
 	matter = list(MATERIAL_PLASTEEL = 8500)
 	max_block = 35
-	can_block_lasers = TRUE
+	base_block_chance = 70
 	slowdown_general = 1.5
 
-/obj/item/weapon/shield/buckler
-	name = "buckler"
-	desc = "A wooden buckler used to block sharp things from entering your body back in the day.."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "buckler"
-	slot_flags = SLOT_BACK
-	force = 8
-	throwforce = 8
-	base_block_chance = 60
-	throw_speed = 10
-	throw_range = 20
-	w_class = ITEM_SIZE_HUGE
-	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(MATERIAL_STEEL = 1000, "Wood" = 1000)
-	attack_verb = list("shoved", "bashed")
-
-/obj/item/weapon/shield/buckler/handle_shield(mob/user)
-	. = ..()
-	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-
-/obj/item/weapon/shield/buckler/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile/bullet))
-		return 0 //No blocking bullets, I'm afraid.
-	return base_block_chance
-
-
+/o
 
 /*
  * Handmade shield
  */
 
-/obj/item/weapon/shield/riot/handmade
+/obj/item/weapon/shield/buckler
 	name = "round handmade shield"
 	desc = "A handmade stout shield, but with a small size."
 	icon_state = "buckler"
@@ -143,29 +129,21 @@
 	throw_range = 6
 	matter = list(MATERIAL_STEEL = 6)
 	base_block_chance = 35
-
-
-/obj/item/weapon/shield/riot/handmade/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	return base_block_chance
+	max_block = 15
 
 
 
-/obj/item/weapon/shield/riot/handmade/tray
+/obj/item/weapon/shield/tray
 	name = "tray shield"
 	desc = "This one is thin, but compensate it with a good size."
 	icon_state = "tray_shield"
 	throw_speed = 2
 	throw_range = 4
 	matter = list(MATERIAL_STEEL = 4)
-	base_block_chance = 35
+	base_block_chance = 60
+	max_block = 8
 
 
-/obj/item/weapon/shield/riot/handmade/tray/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item))
-		var/obj/item/I = damage_source
-		if((is_sharp(I) && damage > 10) || istype(damage_source, /obj/item/projectile/beam))
-			return 20
-	return base_block_chance
 
 /*
  * Energy Shield
@@ -184,6 +162,8 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	attack_verb = list("shoved", "bashed")
+	base_block_chance = 60
+	max_block = 45
 	var/active = 0
 
 /obj/item/weapon/shield/energy/handle_shield(mob/user)
@@ -196,13 +176,6 @@
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
-
-/obj/item/weapon/shield/energy/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile))
-		var/obj/item/projectile/P = damage_source
-		if((is_sharp(P) && damage > 10) || istype(P, /obj/item/projectile/beam))
-			return (base_block_chance - round(damage / 3)) //block bullets and beams using the old block chance
-	return base_block_chance
 
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))

@@ -1,82 +1,33 @@
 /datum/craft_step
-	var/reqed_type
-	var/reqed_quality
-	var/reqed_quality_level = 0//For tools, minimum threshold of a quality
-
-	var/reqed_material
-	var/req_amount = 0
-
-
-
-	var/time = 15
+	var/time = -1
 
 	var/desc = ""
 	var/start_msg = ""
 	var/end_msg = ""
+	var/datum/craft_recipe/parent
+	var/icon_type //Typepath of an object we will use for visual icon of this craft step
+
+	var/apply_range = 1
+	//Maximum distance allowed between ingredient and craft operation when adding something. 1 requires adjacency
+	//Some things, notably passives, may set it higher
 
 
-/datum/craft_step/New(var/list/params, var/datum/craft_recipe/parent)
-	var/max_params = 2
-	if(ispath(params))
-		reqed_type = params
-	else if(istext(params))
-		reqed_quality = params
-		reqed_quality_level = 1 //A minimum value, will be set higher in a second
-	else if(islist(params))
-		var/validator = params[1]
-		if(ispath(validator))
-			reqed_type = validator
-			req_amount = 1
-		else if(istext(validator))
-			if (validator == CRAFT_MATERIAL)
-				reqed_material = params[3]
-				max_params = 3
-			else
-				reqed_quality = validator
+/datum/craft_step/New(var/list/params, var/datum/craft_recipe/_parent)
+	parent = _parent
+	if (parent)
+		time = parent.time
+	load_params(params)
 
-		if(isnum(params[2])) //amount
-			if (reqed_quality)
-				reqed_quality_level = params[2]
-			else
-				req_amount = params[2]
+//Does nothing in base form, this should be overridden
+/datum/craft_step/proc/load_params(var/list/params)
+	return
 
-		if("time" in params)
-			time = params["time"]
-		else if(params.len > max_params)
-			time = params[max_params+1]
-		else if (parent)
-			time = parent.time
 
-	var/tool_name
-
-	if(reqed_type)
-		var/obj/item/I = reqed_type
-		tool_name = initial(I.name)
-		if (!ispath(reqed_type,/obj/item/stack/))
-			req_amount = 1
-
-	else if(reqed_quality)
-		tool_name = "tool with [reqed_quality] quality of [reqed_quality_level]"
-
-	else if (reqed_material)
-		var/material/M = get_material_by_name("[reqed_material]")
-		tool_name = "units of [M.display_name]"
-
-	switch(req_amount)
-		if(0)
-			desc = "Apply [tool_name]"
-			start_msg = "%USER% starts use %ITEM% on %TARGET%"
-			end_msg = "%USER% applied %ITEM% to %TARGET%"
-		if(1)
-			desc = "Attach [tool_name]"
-			if (reqed_material)
-				desc = "Attach [req_amount] [tool_name]"
-			start_msg = "%USER% starts attaching %ITEM% to %TARGET%"
-			end_msg = "%USER% attached %ITEM% to %TARGET%"
-		else
-			desc = "Attach [req_amount] [tool_name]"
-			start_msg = "%USER% starts attaching %ITEM% to %TARGET%"
-			end_msg = "%USER% attached %ITEM% to %TARGET%"
+/datum/craft_step/proc/load_time(var/input, var/params)
+	if (isnum(input))
+		time = input
+	else if (input == "time")
+		time = params["time"]
 
 
 /datum/craft_step/proc/announce_action(var/msg, mob/living/user, obj/item/tool, atom/target)
@@ -87,128 +38,64 @@
 		msg
 	)
 
-/datum/craft_step/proc/apply(obj/item/I, mob/living/user, atom/target = null, var/datum/craft_recipe/recipe)
-	if(req_amount && istype(I, /obj/item/stack))
-		var/obj/item/stack/S = I
-		if(!S.can_use(req_amount))
-			user << "Not enough items in [I]"
-			return
-
-	if(reqed_type)
-		if(!istype(I, reqed_type))
-			user << "Wrong item!"
-			return
-		if (!is_valid_to_consume(I, user))
-			user << "That item can't be used for crafting!"
-			return
-
-		if(req_amount && istype(I, /obj/item/stack))
-			var/obj/item/stack/S = I
-			if(S.get_amount() < req_amount)
-				user << "Not enough items in [I]"
-				return
-
-
-		if(target)
-			announce_action(start_msg, user, I, target)
-		if(!do_after(user, time, target || user))
-			return
-
-	else if(reqed_quality)
-		var/q = I.get_tool_quality(reqed_quality)
-		if(!q)
-			user << SPAN_WARNING("Wrong type of tool. You need a tool with [reqed_quality] quality")
-			return
-		if(target)
-			announce_action(start_msg, user, I, target)
-		if(!I.use_tool(user, target || user, time, reqed_quality, FAILCHANCE_NORMAL)) //list(STAT_SUM, STAT_MEC, STAT_COG)))
-			user << SPAN_WARNING("Work aborted")
-			return
-
-		if(q < reqed_quality_level)
-			user << SPAN_WARNING("That tool is too crude for the task. You need a tool with [reqed_quality_level] [reqed_quality] quality. This tool only has [q] [reqed_quality]")
-			return
-	else
-		if(!do_after(user, time, target || user))
-			return
-
-	if (target)
-		if(!recipe.can_build(user, get_turf(target)))
-			return
-	else
-		if(!recipe.can_build(user, get_turf(user)))
-			return
-
-	if(req_amount)
-		if(istype(I, /obj/item/stack))
-			var/obj/item/stack/S = I
-			if(!S.use(req_amount))
-				user << SPAN_WARNING("Not enough items in [S]. It has [S.get_amount()] units and we need [req_amount]")
+/datum/craft_step/proc/apply(obj/item/I, mob/living/user, atom/target = null)
+	if (can_apply(I, user, target))
+		//Before doing the step, we check passive requirements
+		for (var/datum/craft_step/CS in parent.passive_steps)
+			if (!CS.can_apply(I, user, target))
 				return FALSE
-		else if (reqed_type) //No deleting tools
-			qdel(I)
 
-	if(target)
-		announce_action(end_msg, user, I, target)
+		//Now do the main step
+		if (do_apply(I, user, target))
+			//And if it succeeded, call post_apply
+			post_apply(I, user, target)
+			for (var/datum/craft_step/CS in parent.passive_steps)
+				CS.post_apply(I, user, target)
+			return TRUE
+
+	return FALSE
+
+//Checks whether this item can be applied to this recipe at this time
+/datum/craft_step/proc/can_apply(obj/item/I, mob/living/user, atom/target = null)
+	//User can't craft things if they're restrained
+	//However, we ignore this check if there is no user. Crafting could be done automatically by a script
+	if (user && user.incapacitated())
+		return FALSE
+
+	//The item needs to be close to the target object
+	if (target && (get_dist(I, target) > apply_range))
+		return FALSE
+
+
+
+	//The user has to be adjacent to at least one of the two things
+	if (user && !user.Adjacent(I) && !user.Adjacent(target))
+		return FALSE
 
 	return TRUE
 
-/datum/craft_step/proc/find_item(mob/living/user)
-	var/list/items = new
-	for(var/slot in list(slot_l_hand, slot_r_hand))
-		items += user.get_equipped_item(slot)
 
-	var/obj/item/weapon/storage/belt = user.get_equipped_item(slot_belt)
-	if(istype(belt))
-		items += belt.contents
+//Should be overridden, but is fallback behaviour for non tool things
+/datum/craft_step/proc/do_apply(obj/item/I, mob/living/user, atom/target = null)
+	//If the craft is instant, then just return success now
+	if (!time || time <= 0)
+		return TRUE
 
-	//Robots can use their module items as tools or materials
-	//We will do a check later to prevent them from dropping their tools as consumed components
-	if (isrobot(user))
-		var/mob/living/silicon/robot/R = user
-		if (R.module_state_1)
-			items += R.module_state_1
-		if (R.module_state_2)
-			items += R.module_state_2
-		if (R.module_state_3)
-			items += R.module_state_3
+	if (!user)
+		return TRUE //Automated crafting by code
 
-	//We will allow all items in a 3x3 area, centred on the tile infront, to be used as components or mats
-	//Tools must be held though
-	if (!reqed_quality)
-		var/turf/T = get_step(user, user.dir)
-		//Use atom/movable to account for the possiblity of recipes requiring live or dead mobs as ingredients
-		for (var/atom/movable/A in range(1, T))
-			if (!A.anchored)
-				items += A
+	//A doafter for the work time
+	if (do_after(user, time, target))
+		return TRUE
 
-	if(reqed_type)
-		//Special handling for items that will be consumed
-		for(var/atom/movable/I in items)
-			//First we find the item
-			if (!istype(I, reqed_type))
-				//not the right type
-				continue
-			//Okay, so we found something that matches
-			if (is_valid_to_consume(I, user))
-				return I
+	return FALSE
 
 
+//In post apply, we consume resources, delete ingredients, etc
+/datum/craft_step/proc/post_apply(obj/item/I, mob/living/user, atom/target = null)
+	if (I && !QDELETED(I))
+		I.consume_resources(time)
 
-	else if(reqed_quality)
-		var/best_value = 0
-		for(var/obj/item/I in items)
-			var/value = I.get_tool_quality(reqed_quality)
-			if(value > best_value)
-				value = best_value
-				. = I
-
-	else if (reqed_material)
-		for(var/obj/item/I in items)
-			if (istype(I, /obj/item/stack/material))
-				var/obj/item/stack/material/MA = I
-				if (MA.material && (MA.material.name == reqed_material))
-					return I
 
 /datum/craft_step/proc/is_valid_to_consume(var/obj/item/I, var/mob/living/user)
 	var/holder = I.get_holding_mob()
@@ -239,5 +126,31 @@
 
 
 	//If we get here, then we found the item but it wasn't valid to use, sorry!
-
 	return FALSE
+
+
+
+//Used when searching for components. Returns a list of stuff which can be searched through
+/datum/craft_step/proc/get_search_list(var/mob/living/user, var/atom/craft)
+	var/list/items = list()
+	var/turf/centrepoint = null
+	//If there is a user, we add everything that user is wearing and holding
+	if (istype(user))
+		items.Add(user.get_equipped_items(TRUE))
+		centrepoint = get_step(user, user.dir)
+
+	else if (craft)
+		centrepoint = get_turf(craft)
+
+	if (centrepoint)
+		items.Add(range(centrepoint, apply_range))
+
+	return items
+
+//Override in child classes
+//Find item is used in the following situations:
+	//1. When starting a new craft, to locate the ingredient for the initial step
+	//2. For passive craft steps, to find the thing they need nearby and ensure it's there
+	//Possible future TODO: Automated crafting, searching for and applying suitable ingredients
+/datum/craft_step/proc/find_item(user, craft)
+	return null

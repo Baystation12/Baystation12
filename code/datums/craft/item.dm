@@ -23,7 +23,7 @@
 
 	if(recipe.try_step(step+1, I, user, src)) //First step is
 		++step
-		if(recipe.is_compelete(step+1))
+		if(recipe.is_complete(step+1))
 			recipe.spawn_result(src, user)
 		else
 			update()

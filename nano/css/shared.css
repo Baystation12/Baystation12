@@ -278,6 +278,17 @@ div.notice {
     width: 30%;
 }
 
+.itemLabelHeader {
+    width: 100%;
+	float: left;
+    color: #e9c183;
+	font-size: 18px;
+	margin: 0;
+    padding: 12px 0 6px 0;
+    clear: both;
+	font-weight: bold;
+}
+
 .itemLabelWide {
     width: 45%;
 }

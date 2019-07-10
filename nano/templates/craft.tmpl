@@ -19,7 +19,7 @@
 </div>
 <div class='itemContent'>
 	{{if data.cur_item}}
-		<div class="itemLabelHeader">{{:data.cur_item.name}}</div>
+		<div class="itemLabelHeader">{{:data.cur_item.name}}</div><div style ='float: left; margin-top:-8px; margin-right:4px; max-height:48px; max-width:48px; height:48px; width:48px; margin-left:0px'><img src= {{:data.cur_item.icon}} height=48 width=48></div>
 		{{:data.cur_item.desc}}
 		</br>
 		{{:helper.link("Build", null, {'build' : data.cur_item.ref})}}

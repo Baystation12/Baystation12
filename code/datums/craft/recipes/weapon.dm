@@ -2,39 +2,41 @@
 	category = "Weapon"
 	time = 60
 
+	icon_state = "gun"
+
 /datum/craft_recipe/weapon/baseballbat
 	name = "baseball bat"
 	result = /obj/item/weapon/material/twohanded/baseballbat
 	steps = list(
-		list(CRAFT_MATERIAL, 6, MATERIAL_WOOD)
+		list(CRAFT_MATERIAL, MATERIAL_WOOD, 6)
 	)
 
 /datum/craft_recipe/weapon/grenade_casing
 	name = "grenade casing"
 	result = /obj/item/weapon/grenade/chem_grenade
 	steps = list(
-		list(CRAFT_MATERIAL, 2, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 2)
 	)
 
 /datum/craft_recipe/weapon/fork
 	name = "fork"
 	result = /obj/item/weapon/material/kitchen/utensil/fork
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 2)
 	)
 
 /datum/craft_recipe/weapon/knife
 	name = "steel knife"
 	result = /obj/item/weapon/material/knife
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 1)
 	)
 
 /datum/craft_recipe/weapon/spoon
 	name = "spoon"
 	result = /obj/item/weapon/material/kitchen/utensil/spoon
 	steps = list(
-		list(CRAFT_MATERIAL, 1, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 1)
 	)
 
 
@@ -42,40 +44,41 @@
 	name = "knife blade"
 	result = /obj/item/weapon/material/butterflyblade
 	steps = list(
-		list(CRAFT_MATERIAL, 6, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 6)
 	)
 
 /datum/craft_recipe/weapon/knife_grip
 	name = "knife grip"
 	result = /obj/item/weapon/material/butterflyhandle
 	steps = list(
-		list(CRAFT_MATERIAL, 4, MATERIAL_PLASTEEL)
+		list(CRAFT_MATERIAL, MATERIAL_PLASTEEL, 4)
 	)
 
 /datum/craft_recipe/weapon/crossbow_frame
 	name = "crossbow frame"
 	result = /obj/item/weapon/crossbowframe
 	steps = list(
-		list(CRAFT_MATERIAL, 5, MATERIAL_WOOD)
+		list(CRAFT_MATERIAL, MATERIAL_WOOD, 5)
 	)
 
 
 
 /datum/craft_recipe/weapon/handmade_shield
 	name = "handmade shield"
-	result = /obj/item/weapon/shield/riot/handmade
+	result = /obj/item/weapon/shield/buckler
 	steps = list(
-		list(CRAFT_MATERIAL, 12, MATERIAL_WOOD),
-		list(/obj/item/stack/rods, 4, "time" = 10),
-		list(CRAFT_MATERIAL, 2, MATERIAL_STEEL)
+		list(CRAFT_MATERIAL, MATERIAL_WOOD, 12),
+		list(CRAFT_STACK, /obj/item/stack/rods, 4),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 2)
 	)
 
 /datum/craft_recipe/weapon/tray_shield
 	name = "handmade tray shield"
-	result = /obj/item/weapon/shield/riot/handmade/tray
+	result = /obj/item/weapon/shield/tray
 	steps = list(
-		list(/obj/item/weapon/tray, 1),
-		list(/obj/item/weapon/storage/belt, 2, "time" = 10)
+		list(CRAFT_OBJECT, /obj/item/weapon/tray),
+		list(CRAFT_OBJECT, /obj/item/weapon/storage/belt),
+		list(CRAFT_OBJECT, /obj/item/weapon/storage/belt)
 	)
 
 
@@ -83,9 +86,9 @@
 	name = "flamethrower"
 	result = /obj/item/weapon/flamethrower
 	steps = list(
-		list(/obj/item/weapon/tool/weldingtool, 1, "time" = 60),
+		list(CRAFT_OBJECT, /obj/item/weapon/tool/weldingtool, "time" = 60),
 		list(QUALITY_SCREW_DRIVING, 10, 70),
-		list(/obj/item/device/assembly/igniter, 1),
+		list(CRAFT_OBJECT, /obj/item/device/assembly/igniter,),
 	)
 
 
@@ -93,9 +96,9 @@
 	name = "makeshift mechanical trap"
 	result = /obj/item/weapon/beartrap/makeshift
 	steps = list(
-		list(/obj/item/weapon/tool/saw, 1, "time" = 120),
+		list(CRAFT_OBJECT, /obj/item/weapon/tool/saw, "time" = 120),
 		list(QUALITY_SCREW_DRIVING, 10, 70),
-		list(CRAFT_MATERIAL, 20, MATERIAL_STEEL),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 20),
 		list(QUALITY_BOLT_TURNING, 10, 70),
-		list(/obj/item/stack/cable_coil, 2, "time" = 10)
+		list(CRAFT_STACK, /obj/item/stack/cable_coil, 2, "time" = 10)
 	)

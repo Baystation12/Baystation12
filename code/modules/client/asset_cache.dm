@@ -138,10 +138,36 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 /proc/register_asset(var/asset_name, var/asset)
 	asset_cache.cache[asset_name] = asset
 
+
+// will return filename for cached atom icon or null if not cached
+// can accept atom objects or types
+/proc/getAtomCacheFilename(var/atom/A)
+	if(!A || (!istype(A) && !ispath(A)))
+		return
+	var/filename = "[ispath(A) ? A : A.type].png"
+	filename = sanitizeFileName(filename)
+	if(asset_cache.cache[filename])
+		return filename
+
+
+
+
+
+
+
+
+
+
+
 //These datums are used to populate the asset cache, the proc "register()" does this.
 
 //all of our asset datums, used for referring to these later
 /var/global/list/asset_datums = list()
+
+/datum/asset
+	// If asset is trivial it's download will be transfered to end of queue
+	var/isTrivial = TRUE
+
 
 //get a assetdatum or make a new one
 /proc/get_asset_datum(var/type)
@@ -173,12 +199,14 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
 
 /datum/asset/simple/tgui
+	isTrivial = FALSE
 	assets = list(
 		"tgui.css"	= 'tgui/assets/tgui.css',
 		"tgui.js"	= 'tgui/assets/tgui.js'
 	)
 
 /datum/asset/nanoui
+	isTrivial = FALSE
 	var/list/common = list()
 
 	var/list/common_dirs = list(
@@ -240,6 +268,9 @@ var/decl/asset_cache/asset_cache = new()
 	..()
 	cache = new
 
+
+
+/*
 /hook/roundstart/proc/send_assets()
 	for(var/type in typesof(/datum/asset) - list(/datum/asset, /datum/asset/simple))
 		var/datum/asset/A = new type()
@@ -251,3 +282,22 @@ var/decl/asset_cache/asset_cache = new()
 			getFilesSlow(C, asset_cache.cache, FALSE)
 
 	return TRUE
+*/
+
+//DEFINITIONS FOR ASSET DATUMS START HERE.
+/datum/asset/simple/craft/register()
+	for(var/name in SScraft.categories)
+		for(var/datum/craft_recipe/CR in SScraft.categories[name])
+			if(CR.result)
+				var/filename = sanitizeFileName("[CR.result].png")
+				var/icon/I = getFlatTypeIcon(CR.result)
+				register_asset(filename, I)
+				assets[filename] = I
+
+			for(var/datum/craft_step/CS in CR.steps)
+				if(CS.icon_type)
+					world << "Making icon [CS.icon_type] for [CS] in [CR]"
+					var/filename = sanitizeFileName("[CS.icon_type].png")
+					var/icon/I = getFlatTypeIcon(CS.icon_type)
+					register_asset(filename, I)
+					assets[filename] = I

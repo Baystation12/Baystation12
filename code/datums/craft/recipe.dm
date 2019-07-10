@@ -1,3 +1,20 @@
+//Creates a crafting step of the appropriate subtype, depending on a flag
+/datum/craft_recipe/proc/create_step_from_params(var/list/params)
+	var/steptype = params[1]
+	switch (steptype)
+		if (CRAFT_OBJECT)
+			return new /datum/craft_step/object(params, src)
+		if (CRAFT_MATERIAL)
+			return new /datum/craft_step/material(params, src)
+		if (CRAFT_STACK)
+			return new /datum/craft_step/stack(params, src)
+		if (CRAFT_TOOL)
+			return new /datum/craft_step/tool(params, src)
+		if (CRAFT_PASSIVE)
+			return new /datum/craft_step/passive(params, src)
+		else
+			return null
+
 /datum/craft_recipe
 	var/name
 	var/category = "Misc"
@@ -5,17 +22,25 @@
 	var/result
 
 	var/list/steps
+	var/list/passive_steps
 	var/flags
-	var/time = 30 //Used when no specific time is set
+	var/time = 30 //Used when no specific time is se
+	var/difficulty = 0 //Difficulty of each step
 
 /datum/craft_recipe/New()
-	var/step_definations = steps
+	var/list/step_definitions = steps
 	steps = new
-	for(var/i in step_definations)
-		steps += new /datum/craft_step(i, src)
+
+	for(var/i in step_definitions)
+		steps += create_step_from_params(i)
+
+	var/list/passive_step_definitions = passive_steps
+	passive_steps = new
+	for (var/i in passive_step_definitions)
+		passive_steps += create_step_from_params(i)
 
 
-/datum/craft_recipe/proc/is_compelete(step)
+/datum/craft_recipe/proc/is_complete(step)
 	return steps.len < step
 
 
@@ -74,7 +99,7 @@
 		return
 
 	var/datum/craft_step/CS = steps[1]
-	var/obj/item/I = CS.find_item(user)
+	var/obj/item/I = CS.find_item(user, null)
 
 	if(!I)
 		user << SPAN_WARNING("You can't find required item!")

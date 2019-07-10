@@ -7,22 +7,15 @@
 	name = "machine frame"
 	result = /obj/machinery/constructable_frame/machine_frame
 	steps = list(
-		list(CRAFT_MATERIAL, 8, MATERIAL_STEEL),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 8),
 	)
-/*
-/datum/craft_recipe/machinery/vertical_machine_frame
-	name = "vertical machine frame"
-	result = /obj/machinery/constructable_frame/machine_frame/vertical
-	steps = list(
-		list(CRAFT_MATERIAL, 8, MATERIAL_STEEL),
-	)
-	*/
+
 
 /datum/craft_recipe/machinery/computer_frame
 	name = "computer frame"
 	result = /obj/structure/computerframe
 	steps = list(
-		list(CRAFT_MATERIAL, 5, MATERIAL_STEEL),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 8),
 	)
 
 /datum/craft_recipe/machinery/modularconsole
@@ -31,8 +24,8 @@
 	time = 200
 	flags = CRAFT_ON_FLOOR|CRAFT_ONE_PER_TURF
 	steps = list(
-		list(CRAFT_MATERIAL, 10, MATERIAL_STEEL),
-		list(CRAFT_MATERIAL, 4, MATERIAL_GLASS),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 10),
+		list(CRAFT_MATERIAL, MATERIAL_GLASS, 4),
 	)
 
 /datum/craft_recipe/machinery/modularlaptop
@@ -40,8 +33,8 @@
 	result = /obj/item/modular_computer/laptop
 	time = 200
 	steps = list(
-		list(CRAFT_MATERIAL, 8, MATERIAL_STEEL),
-		list(CRAFT_MATERIAL, 4, MATERIAL_GLASS),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 4),
+		list(CRAFT_MATERIAL, MATERIAL_GLASS, 4),
 	)
 
 /datum/craft_recipe/machinery/modulartablet
@@ -49,8 +42,8 @@
 	result = /obj/item/modular_computer/tablet
 	time = 200
 	steps = list(
-		list(CRAFT_MATERIAL, 5, MATERIAL_STEEL),
-		list(CRAFT_MATERIAL, 2, MATERIAL_GLASS),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 5),
+		list(CRAFT_MATERIAL, MATERIAL_GLASS, 2),
 	)
 
 /datum/craft_recipe/machinery/modularpda
@@ -58,8 +51,8 @@
 	result = /obj/item/modular_computer/pda
 	time = 200
 	steps = list(
-		list(CRAFT_MATERIAL, 3, MATERIAL_STEEL),
-		list(CRAFT_MATERIAL, 1, MATERIAL_GLASS),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 3),
+		list(CRAFT_MATERIAL, MATERIAL_GLASS, 1),
 	)
 
 /datum/craft_recipe/machinery/modulartelescreen
@@ -67,15 +60,15 @@
 	result = /obj/item/modular_computer/telescreen
 	time = 200
 	steps = list(
-		list(CRAFT_MATERIAL, 8, MATERIAL_STEEL),
-		list(CRAFT_MATERIAL, 6, MATERIAL_GLASS),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 8),
+		list(CRAFT_MATERIAL, MATERIAL_GLASS, 6),
 	)
 
 /datum/craft_recipe/machinery/turret_frame
 	name = "turret frame"
 	result = /obj/machinery/porta_turret_construct
 	steps = list(
-		list(CRAFT_MATERIAL, 10, MATERIAL_STEEL),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 10)
 	)
 
 
@@ -83,7 +76,7 @@
 //wall or small you know them req only 2 list
 /datum/craft_recipe/machinery/wall
 	steps = list(
-		list(CRAFT_MATERIAL, 2, MATERIAL_STEEL),
+		list(CRAFT_MATERIAL, MATERIAL_STEEL, 2),
 	)
 	flags = null
 
@@ -111,5 +104,5 @@
 	name = "AI core"
 	result = /obj/structure/AIcore
 	steps = list(
-		list(CRAFT_MATERIAL, 10, MATERIAL_PLASTEEL),
+		list(CRAFT_MATERIAL, MATERIAL_PLASTEEL, 10),
 	)

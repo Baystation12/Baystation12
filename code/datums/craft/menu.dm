@@ -37,7 +37,7 @@
 /datum/nano_module/craft/proc/set_item(item_ref, mob/mob)
 	SScraft.current_item[mob.ckey] = locate(item_ref)
 
-/datum/nano_module/craft/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/craft/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = TRUE, var/datum/topic_state/state = GLOB.default_state)
 	if(usr.incapacitated())
 		return
 
@@ -53,10 +53,10 @@
 	if(CR)
 		data["cur_item"] = list(
 			"name" = CR.name,
+			"icon" = getAtomCacheFilename(CR.result),
 			"ref"  = "\ref[CR]",
 			"desc" = CR.get_description(),
 		)
-
 	var/list/items = list()
 	for(var/datum/craft_recipe/recipe in SScraft.categories[curr_category])
 		items += list(list(
