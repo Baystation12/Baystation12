@@ -810,6 +810,13 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/honey/seed
 	sort_string = "WAAAX"
 
+/datum/design/circuit/vending
+	name = "vending machine"
+	id = "vending"
+	req_tech = list(TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/vending
+	sort_string = "WAABA"
+
 /datum/design/circuit/aicore
 	name = "AI core"
 	id = "aicore"
