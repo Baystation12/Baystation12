@@ -933,6 +933,18 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
+"abJ" = (
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rnd/development)
 "abK" = (
 /obj/structure/closet/wardrobe/virology_white,
 /obj/effect/floor_decal/industrial/warning{
@@ -1077,6 +1089,19 @@
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
+"abX" = (
+/obj/machinery/r_n_d/destructive_analyzer,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/camera/network/research{
+	c_tag = "Research - Development Laboratory";
+	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rnd/development)
 "abZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
@@ -23510,22 +23535,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/development)
-"lrb" = (
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 39
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rnd/development)
 "lsb" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/powered/scrubber,
@@ -23563,15 +23572,6 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
-"lub" = (
-/obj/machinery/r_n_d/destructive_analyzer,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/camera/network/research{
-	c_tag = "Research - Development Laboratory";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/rnd/development)
 "lvb" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -55168,8 +55168,8 @@ jAM
 jab
 aAK
 lnb
-lrb
-lub
+abJ
+abX
 oPb
 aCf
 mmP
