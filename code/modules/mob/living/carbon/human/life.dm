@@ -618,7 +618,7 @@
 						AdjustSleeping(-1)
 				species.handle_sleeping(src)
 			if(prob(2) && is_asystole() && isSynthetic())
-				visible_message(src, "<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
+				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
 		//CONSCIOUS
 		else
 			set_stat(CONSCIOUS)
