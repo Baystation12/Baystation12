@@ -9,7 +9,7 @@ var/global/file_uid = 0
 	var/undeletable = 0										// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
 	var/uid													// UID of this file
 	var/list/metadata											// Any metadata the file uses.
-	var/papertype = /obj/item/paper
+	var/papertype = /obj/item/weapon/paper
 
 /datum/computer_file/New(var/list/md = null)
 	..()
