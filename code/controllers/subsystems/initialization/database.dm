@@ -84,6 +84,21 @@ SUBSYSTEM_DEF(database)
 
 	ban_scope_categories["Department"] = department_scopes
 
+	var/list/branch_scopes = list()
+
+	for (var/branchname in mil_branches.branches)
+		var/datum/mil_branch/branch = mil_branches.branches[branchname]
+		branch_scopes |= branch.name_short
+		var/list/branch_ranks = list()
+		for (var/rankname in branch.ranks)
+			var/datum/mil_rank/rank = branch.ranks[rankname]
+			if (rank.grade())
+				branch_ranks |= "[branch.name_short]_[rank.grade()]" // must match check in is_rank_banned
+			else
+				branch_ranks |= "[branch.name_short]_[rank.name]"
+		ban_scope_categories[branchname] = branch_ranks
+	ban_scope_categories["Branch"] = branch_scopes
+
 	var/list/antag_scopes = list()
 
 	var/list/all_antag_types = GLOB.all_antag_types_
