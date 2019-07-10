@@ -26,7 +26,7 @@
 /obj/effect/overmap/ship/landable/skrellscoutship/New()
 	name = "SSV [pick("Xilvuxix", "Zuuvixix", "Quizuu", "Vulzxixvuu","Quumzoox","Quuvuzxuu")]"
 	..()
-	
+
 /obj/effect/overmap/ship/landable/skrellscoutshuttle
 	name = "SSV-S"
 	shuttle = "Skrellian Shuttle"
@@ -44,22 +44,22 @@
 	current_dock_target = "xil_dock"
 	shuttle_area = list(
 		/area/ship/skrellscoutship/solars, /area/ship/skrellscoutship/crew/quarters, /area/ship/skrellscoutship/crew/hallway/d1,
-		/area/ship/skrellscoutship/crew/hallway/d2, /area/ship/skrellscoutship/crew/kitchen, /area/ship/skrellscoutship/crew/toilets, 
-		/area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/dock/alt, 
-		/area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/robotics, /area/ship/skrellscoutship/maintenance/atmos, 
-		/area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/command/bridge, /area/ship/skrellscoutship/crew/fit, 
+		/area/ship/skrellscoutship/crew/hallway/d2, /area/ship/skrellscoutship/crew/kitchen, /area/ship/skrellscoutship/crew/toilets,
+		/area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/dock/alt,
+		/area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/robotics, /area/ship/skrellscoutship/maintenance/atmos,
+		/area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/command/bridge, /area/ship/skrellscoutship/crew/fit,
 		/area/ship/skrellscoutship/command/armory, /area/ship/skrellscoutship/crew/rec
 		)
 	defer_initialisation = TRUE
 	knockdown = FALSE
 	flags = SHUTTLE_FLAGS_PROCESS
 	skill_needed = SKILL_NONE
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
-	
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling/skrell
+
 /obj/effect/shuttle_landmark/skrellscoutship/start
 	name = "Uncharted Space"
 	landmark_tag = "nav_skrellscout_start"
-	
+
 /datum/shuttle/autodock/overmap/skrellscoutshuttle
 	name = "Skrellian Shuttle"
 	warmup_time = 5
@@ -70,9 +70,9 @@
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS
 	skill_needed = SKILL_NONE
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling/skrell
 	mothershuttle = "Skrellian Scout"
-	
+
 /obj/effect/shuttle_landmark/skrellscoutshuttle/start
 	name = "Dock"
 	landmark_tag = "nav_skrellscoutsh_dock"
@@ -80,7 +80,14 @@
 	base_turf = /turf/simulated/floor/tiled/skrell
 	docking_controller = "xil_shuttle_dock"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
-	
+
 /obj/effect/shuttle_landmark/skrellscoutshuttle/altdock
 	name = "Docking Port"
 	landmark_tag = "nav_skrellscoutsh_altdock"
+
+
+/turf/simulated/floor/shuttle_ceiling/skrell
+	color = COLOR_HULL
+
+/turf/simulated/floor/shuttle_ceiling/skrell/air
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
