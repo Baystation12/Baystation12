@@ -55,8 +55,9 @@ var/ascii_reset = "[ascii_esc]\[0m"
 
 datum/unit_test
 	var/name = "template - should not be ran."
-	var/disabled = 0        // If we want to keep a unit test in the codebase but not run it for some reason.
-	var/async = 0           // If the check can be left to do it's own thing, you must define a check_result() proc if you use this.
+	var/template        // Treat the unit test as a template if its type is the same as the value of this var
+	var/disabled = 0    // If we want to keep a unit test in the codebase but not run it for some reason.
+	var/async = 0       // If the check can be left to do it's own thing, you must define a check_result() proc if you use this.
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
@@ -85,10 +86,10 @@ datum/unit_test/proc/skip(var/message)
 	log_unit_test("[ascii_yellow]--- SKIPPED --- \[[name]\]: [message][ascii_reset]")
 
 datum/unit_test/proc/start_test()
-	fail("No test proc.")
+	fail("No test proc - [type]")
 
 datum/unit_test/proc/check_result()
-	fail("No check results proc")
+	fail("No check results proc - [type]")
 	return 1
 
 datum/unit_test/proc/get_safe_turf()
@@ -117,9 +118,9 @@ proc/load_unit_test_changes()
 
 /proc/get_test_datums()
 	var/list/tests = list()
-	for(var/test in typesof(/datum/unit_test))
+	for(var/test in subtypesof(/datum/unit_test))
 		var/datum/unit_test/d = test
-		if(findtext(initial(d.name), "template"))
+		if(test == initial(d.template))
 			continue
 		tests += d
 	return tests
@@ -221,8 +222,12 @@ SUBSYSTEM_DEF(unit_tests)
 		return
 
 	stage++
-	log_unit_test("Round has been started.  Waiting 10 seconds to start tests.")
-	postpone(5)
+	log_unit_test("Game start has been requested.")
+
+/datum/controller/subsystem/unit_tests/proc/await_game_running()
+	if(GAME_STATE == RUNLEVEL_GAME)
+		log_unit_test("The game is now in progress.")
+		stage++
 
 /datum/controller/subsystem/unit_tests/proc/handle_tests()
 	var/list/curr = queue
@@ -258,17 +263,20 @@ SUBSYSTEM_DEF(unit_tests)
 			start_game()
 
 		if (2)	// wait a moment
+			await_game_running()
+
+		if (3)
 			stage++
 			log_unit_test("Testing Started.")
 			end_unit_tests = world.time + MAX_UNIT_TEST_RUN_TIME
 
-		if (3)	// do normal tests
+		if (4)	// do normal tests
 			handle_tests()
 
-		if (4)
+		if (5)
 			handle_async(resumed)
 
-		if (5)	// Finalization.
+		if (6)	// Finalization.
 			unit_test_final_message()
 			log_unit_test("Caught [GLOB.total_runtimes] Runtime\s.")
 			del world

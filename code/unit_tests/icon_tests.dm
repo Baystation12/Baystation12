@@ -1,5 +1,6 @@
 /datum/unit_test/icon_test
 	name = "ICON STATE template"
+	template = /datum/unit_test/icon_test
 
 /datum/unit_test/icon_test/robots_shall_have_eyes_for_each_state
 	name = "ICON STATE - Robot shall have eyes for each icon state"
