@@ -619,11 +619,11 @@ proc/is_blind(A)
 	return //Only for living/carbon/human/
 
 /mob/living/carbon/human/jittery_damage()
-	var/mob/living/carbon/human/H = src
-	var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
-	if(L && istype(L))
-		if(BP_IS_ROBOTIC(L))
-			return 0//Robotic hearts don't get jittery.
+	var/obj/item/organ/internal/heart/L = internal_organs_by_name[BP_HEART]
+	if(!istype(L))
+		return 0
+	if(BP_IS_ROBOTIC(L))
+		return 0//Robotic hearts don't get jittery.
 	if(src.jitteriness >= 400 && prob(5)) //Kills people if they have high jitters.
 		if(prob(1))
 			L.take_internal_damage(L.max_damage / 2, 0)
