@@ -664,7 +664,7 @@
 	src.syndie = 0
 
 	var/mob/living/silicon/robot/D = src.loc
-	if(D.module)
+	if(istype(D.module))
 		for(var/ch_name in D.module.channels)
 			if(ch_name in src.channels)
 				continue
