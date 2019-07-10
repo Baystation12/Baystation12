@@ -32,7 +32,8 @@
 		reinf_material = get_material_by_name(rmaterialtype)
 	update_material()
 	hitsound = material.hitsound
-	processing_turfs |= src
+	if(get_radiation())
+		processing_turfs |= src
 
 /turf/simulated/wall/Destroy()
 	processing_turfs -= src
@@ -246,8 +247,12 @@
 //	F.sd_LumReset()		//TODO: ~Carn
 	return
 
-/turf/simulated/wall/proc/radiate()
+/turf/simulated/wall/proc/get_radiation()
 	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)
+	return total_radiation
+
+/turf/simulated/wall/proc/radiate()
+	var/total_radiation = get_radiation()
 	if(!total_radiation)
 		return
 
