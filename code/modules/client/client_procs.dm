@@ -261,7 +261,7 @@
 	. = FALSE
 	var/grade = rank.grade()
 	if (!grade)
-		return FALSE
+		return is_banned("[branch.name_short]_[rank.name]")
 	var/list/check_slugs = list()
 	var/min_sort = 0
 	if (rank.sort_order > 10)
