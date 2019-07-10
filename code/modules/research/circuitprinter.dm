@@ -112,7 +112,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	if(!istype(O, /obj/item/stack/material))
 		to_chat(user, "<span class='notice'>You cannot insert this item into \the [src]!</span>")
 		return 0
-	if(stat)
+	if(stat & (BROKEN | NOPOWER))
 		return 1
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
