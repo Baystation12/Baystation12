@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - maptweak: "Adds an Interview Room to the Brig. Adjusts nearby rooms to fit."
