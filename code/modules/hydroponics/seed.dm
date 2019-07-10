@@ -148,7 +148,7 @@
 	if(!get_trait(TRAIT_STINGS))
 		return
 
-	if(chems && chems.len && target.reagents)
+	if(chems && chems.len && target.reagents && length(target.organs))
 
 		var/obj/item/organ/external/affecting = pick(target.organs)
 
