@@ -78,7 +78,7 @@
 "bz" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled,/area/soe_ship/storageroom)
 "bA" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/reagent_dispensers/beerkeg,/turf/simulated/floor/tiled,/area/soe_ship/storageroom)
 "bB" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/mining/brace,/turf/simulated/floor/tiled,/area/soe_ship/storageroom)
-"bC" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
+"bC" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
 "bD" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/soe_ship/storageroom)
 "bE" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
 "bF" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
@@ -123,7 +123,7 @@
 "cs" = (/turf/simulated/floor/tiled,/area/soe_ship/janitorial)
 "ct" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
 "cu" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
-"cv" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/glass/beaker,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
+"cv" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
 "cw" = (/obj/effect/floor_decal/corner/red{icon_state = "corner_white"; dir = 6},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/soe_ship/Centralhallway)
 "cx" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/soe_ship/storageroom)
 "cy" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/soe_ship/janitorial)
@@ -304,11 +304,11 @@
 "fR" = (/obj/machinery/power/terminal{tag = "icon-term (WEST)"; icon_state = "term"; dir = 8},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/soe_ship/powercore)
 "fS" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_ship/powercore)
 "fT" = (/obj/effect/landmark/map_data{name = "SOE Osprey"},/turf/space,/area/space)
-"fU" = (/obj/structure/table/standard,/obj/item/clothing/gloves/boxing,/turf/simulated/floor/tiled/dark,/area/soe_ship/Armory)
+"fU" = (/obj/structure/table/standard,/obj/item/device/assembly/mousetrap,/obj/item/device/assembly/infra,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
 "fV" = (/obj/structure/fitness/weightlifter,/turf/simulated/floor/carpet,/area/soe_ship/Armory)
 "fW" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_ship/Centralhallway)
 "fX" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_ship/powercore)
-"fY" = (/obj/structure/table/standard,/obj/item/clothing/gloves/boxing/blue,/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/dark,/area/soe_ship/Armory)
+"fY" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/item/device/assembly/prox_sensor,/obj/item/weapon/module/power_control,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
 "fZ" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled/dark,/area/soe_ship/Armory)
 "ga" = (/obj/machinery/vending/fitness,/turf/simulated/floor/tiled/dark,/area/soe_ship/Armory)
 "gb" = (/obj/structure/fitness/punchingbag,/turf/simulated/floor/carpet,/area/soe_ship/Armory)
@@ -349,8 +349,8 @@
 "gK" = (/obj/vehicles/drop_pod/escape_pod/bumblebee,/obj/structure/drop_pod_launchbay,/turf/simulated/floor,/area/soe_ship/boardingpods)
 "gL" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/machinery/light,/turf/simulated/floor,/area/soe_ship/boardingpods)
 "gM" = (/obj/vehicles/drop_pod/overmap/boarding_pod,/obj/structure/drop_pod_launchbay,/turf/simulated/floor,/area/soe_ship/boardingpods)
-"gN" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/table/standard,/obj/item/weapon/material/kitchen/utensil/knife,/obj/item/weapon/material/kitchen/rollingpin,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
-"gO" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate/medical,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"gN" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"gO" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
 "gP" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/tech,/area/soe_ship/Bridge)
 "gQ" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{dir = 8},/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/tech,/area/soe_ship/Bridge)
 "gR" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/tech,/area/soe_ship/Bridge)
@@ -370,7 +370,7 @@
 "hf" = (/obj/item/weapon/storage/firstaid/toxin,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
 "hg" = (/turf/space,/area/soe_ship/starboardbattery)
 "hh" = (/turf/space,/area/soe_ship/portrockets)
-"hi" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate/hydroponics,/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hi" = (/obj/structure/table/standard,/obj/item/device/assembly/voice,/obj/item/weapon/screwdriver,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
 "hj" = (/obj/structure/table/standard,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/item/device/radio,/turf/simulated/floor/tech,/area/soe_ship/Bridge)
 "hk" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
 "hl" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/structure/table/standard,/turf/simulated/floor/tech,/area/soe_ship/Bridge)
@@ -393,22 +393,22 @@
 "hC" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/plasteel/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_ship/storageroom3)
 "hD" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/plasteel/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/soe_ship/storageroom3)
 "hE" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/steel/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
-"hF" = (/obj/structure/table/standard,/obj/item/device/assembly/mousetrap,/obj/item/device/assembly/infra,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
-"hG" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/item/device/assembly/prox_sensor,/obj/item/weapon/module/power_control,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
+"hF" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/item/device/assembly/igniter,/obj/item/device/assembly/igniter,/obj/item/stack/cable_coil,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
+"hG" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/obj/item/weapon/material/kitchen/rollingpin,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,/obj/item/weapon/material/kitchen/utensil/knife,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
 "hH" = (/obj/machinery/door/blast/regular,/turf/simulated/wall/r_wall,/area/soe_ship/boardingpods)
-"hI" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
-"hJ" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hI" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hJ" = (/obj/machinery/vending/hydronutrients,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
 "hK" = (/obj/structure/table/standard,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
-"hL" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/secure_closet/freezer/meat,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
-"hM" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/vending/hydronutrients,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
-"hN" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/smartfridge/seeds,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
-"hO" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
-"hP" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/decal/cleanable/greenglow,/obj/structure/closet/secure_closet/hydroponics,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hL" = (/obj/machinery/vending/hydroseeds,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hM" = (/obj/structure/closet/crate/hydroponics,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hN" = (/obj/structure/closet/secure_closet/hydroponics,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hO" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/tiled,/area/soe_ship/Messhall)
+"hP" = (/obj/structure/table/standard,/obj/item/clothing/gloves/boxing,/obj/item/clothing/under/shorts/red,/turf/simulated/floor/tiled/dark,/area/soe_ship/Armory)
 "hQ" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/steel/fifty,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled,/area/soe_ship/storageroom3)
 "hR" = (/obj/effect/decal/cleanable/dirt,/obj/structure/repair_bench,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
 "hS" = (/obj/machinery/autolathe,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
-"hT" = (/obj/structure/table/standard,/obj/item/device/assembly/voice,/obj/item/weapon/screwdriver,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
-"hU" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/item/device/assembly/igniter,/obj/item/device/assembly/igniter,/obj/item/stack/cable_coil,/turf/simulated/floor/tiled,/area/soe_ship/storageroom4)
+"hT" = (/turf/space,/area/soe_ship/Bridge)
+"hU" = (/obj/structure/table/standard,/obj/item/clothing/gloves/boxing/blue,/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue,/obj/item/clothing/under/shorts/blue,/turf/simulated/floor/tiled/dark,/area/soe_ship/Armory)
 "hV" = (/obj/effect/floor_decal/corner/red{icon_state = "corner_white"; dir = 9},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/soe_ship/Centralhallway)
 "hW" = (/obj/effect/floor_decal/corner/red{icon_state = "corner_white"; dir = 6},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/soe_ship/Centralhallway)
 "hX" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_ship/medicalbay)
@@ -510,7 +510,7 @@ dududududududududududududududududududududududududududududududududududududualalag
 dudududududududududududududududududududududududududududududududududualalalalalagagagagagagagagagagagacahacavawaxayayayayayayayayayayaxazawaxayayayayayayayayayayaxazawaxayayayayayayayayayayaxazaAabaBaBaBaBababababababababbVhnaBaBabataudududududududududududududududududududududududududududududududududu
 dudududududududududududududududududududududududududududududududuaCalalalalalalaDaEaDagaFaFagaDaEaDagacahacavaGaTaTaTaTaTaTaTaTaTaTaTaTaHaGaYaYaYaYaYaYaYaYaYaYaYaYaHaGaUaUaUaUaUaUaUaUaUaUaUaUaHaAabaIaJaKaNabaLaMgtaOaPaQabbVhoaBaBabataudududududududududududududududududududududududududududududududududu
 dududududududududududududududududududududududuaCaCaCaCaCaCaCaCaCaCalalalalalalaRaRaRagaSaFagaRaRaRagacahacavaAaTaVaVaWaXaXbababiaVaXaTavaAaYaZbbbcbdbebfbhbCbEbFaYavaAaUbjbkblbmbnblbkbobybkaUavaAabaBaBaBaBabbpaBaBaBaBaBabbVhoaBaBbqataudududududududududududududududududududududududududududududududududu
-dudududududududududududududududududududududuaCaCaCaCaCaCaCaCaCaCaCbrbsdlbsbualagbvagagbxaFagagbvagagacbwacavaAaTbzaVaXaWbAbabBaVaXbDaTavaAaYctbcbcbcbcbccucvbccdaYavaAaUbGbmboblbkbybjbybycraUavaAabababbtababaBaBaBaBaBaBaraBhpaBaBabataudududududududududududududududududududududududududududududududududu
+dudududududududududududududududududududududuaCaCaCaCaCaCaCaCaCaCaCbrbsdlbsbualagbvagagbxaFagagbvagagacbwacavaAaTbzaVaXaWbAbabBaVaXbDaTavaAaYctbcbcbcbcbccubcbccdaYavaAaUbGbmboblbkbybjbybycraUavaAabababbtababaBaBaBaBaBaBaraBhpaBaBabataudududududududududududududududududududududududududududududududududu
 dudududududududududududududududududududuaCaCaCaCaCbHdjbJbKdjeZaCaCbLbMalfPbNalbOaFaFaFaFaFaFaFaFbPagacahacavcwdJdJdJdJdJdJfJdJdJdJfLdJhVhWhXhXhXhXhXhXhXhXhXhXhYhXhVhWhZhZhZhZhZhZhZhZhZhZiacsavaAabbQbRaBaBbSbTbTbTbUaBaBabaBhqhrhsabataudududududududududududududududududududududududududududududududududu
 dudududududududududududududududududududuaCaCaCbWgSbYbZbYbYbZbYaCaCcacbaldlalalagbvagagccaFagagbvagagacahacavibcxcqcqcqcqcqcqcqcqcqcqcxavaAcSbcbcbcbcbcbccTcUbcbccSavaAcycscscscscscscscscscscyavaAabbQcebTdscfcgchcibRaBcjabaBhthrhuabataudududududududududududududududududududududududududududududududududu
 dudududududududududududududududududududuaCaCckclbYbYbYbYbYbYcmaCaCcncnbrbscoalaRaRaRagcpaFagaRaRaRagacahacavibaTczaWaVaXbacAbBbabacBaTavaAaYcVbcbccWcXbcbcbcbccYaYavaAaUdbbnbyededblbyeeeneoaUavaAabcCcDcEddcFcGcHcIcJaBcKabgDaBcLabababaudududududududududududududududududududududududududududududududududu
@@ -522,12 +522,12 @@ dududududududududududududududududududuaCaCaCfabYbYbYhAbIgQbYbYecaCexeyezeyexefef
 dududududududududududududududududududuaCaCaCcMclbYbYbXeSgRbYbYcNaCigeDeDeDeEefepepepeqerehgUgGehesefacetacdoaAeAeFeLeMeNeOeOeNeOePeQeAavaAeBeUfoeUfpfofpfpeUfpfoeBavaAeCfwfwfxfyfzfAfzfBfCfDeCavaAabcCeGcFddeHeHchcidfdgdhababdiabababababdududududududududududududududududududududududududududududududududu
 dudududududududududududududududududududuaCaCckclbYbYbYbYbYbYcmaCaCeDeDeDeDeDefepepepeIereheJeJeheKefacetacdoaAeAfFfIeOeNeOeOeNeOfIiheAavaAeBfKeUfofpfpfofpfofpiieBavaAeCfMfwfNfOgmgqfOfNfCijeCavaAabcCeHcEeHcEcicHcIeRaBcKabgJaBcLabababaudududududududududududududududududududududududududududududududududu
 dudududududududududududududududududududuaCaCaChlgSbYeTbYbYeTbYaCaCgAgAeDgAgAefepepepeIereheVeWeheXefacetacikhWililililililililililimilhVhWininininininininininioinhVhWipipiqipipiqipipipiqirgqavaAabbQdvdqekdreYdecGdfaBcjabaBhvhrhuabataudududududududududududududududududududududududududududududududududu
-dudududududududududududududududududududuaCaCaCaCaCfbhjgXbKdjeZaCaCgAgAeDgAgAeffcfdfdfeereheJeJehfhefacetacavaAgEgBgBgBgBgBgBgBgBgBgBgEavaAgHgCgCgCgCgCgCgCgCgCgCgHavaAgIgqgqfNfBfNfNgqgqgqgqgIavaAabbQbRfifjfkflflflfmfjfnabaBhwhrhsabataudududududududududududududududududududududududududududududududududu
-dudududududududududududududududududududududuaCaCaCaCaCaCaCaCaCaCaCgKgAgLgMgAeffqfrfsfsftehehehehfuefacetacfvaAeAgNgBgBgBgOgOgThigThkeAavaAeBhCeUeUfofpfpfofpfohDeBavaAeChEfwfNhFgqgmhGfNfCgyeCavaAabababfEababaBaBaBaBaBaBaraBhpaBaBabataudududududududududududududududududududududududududududududududududu
-dududududududududududududududududududududududuaCaCaCaCaCaCaCaCaCaChHhHexhHhHeffGerehehehehehehehfHefacetacavaAeAhIhJhKeFhLhMhNgThOhPeAavaAeBeUfoeUeUfohQfpeUfoeUeBavaAeCfwfwhRhShThUhShRfDfDeCavaAabfQfRfSaBabaBaBaBaBaBaBabbVhoaBaBbqataudududududududududududududududududududududududududududududududududu
-dudududududududududududududududududududududududududududududududuaCdududududueffUerehehepepepepepfVefacfWacavaGeAeAeAeAeAeAeAeAeAeAeAeAaHaGeBeBeBeBeBeBeBeBeBeBeBeBaHaGeCeCeCeCeCeCeCeCeCeCeCeCaHaAabdQfifXaNabaLaMguaOaPaQabbVhoaBaBabataudududududududududududududududududududududududududududududududududu
-dudududududududududududududududududududududududududududududududududududududuefeffYfZgaepgbepgbepepefacetacavdKdLaoaoaoaoaoaoaoaoaoaodLdMdKdLaoaoaoaoaoaoaoaoaoaodLdMdKdLaoaoaoaoaoaoaoaoaoaodLdMaAabgcgdgefQababababababababbVhxaBaBabataudududududududududududududududududududududududududududududududududu
-dudududududududududududududududududududududududududududududududududududududuefefefefefepepepepepfVefacetacdUaygfayayayayayayayayayaygfayaygfayayayayayayayayayaygfayaygfayayayayayayayayayaygfayggabghgigjgkabababababababababasasasabataudududududududududududududududududududududududududududududududududu
+dudududududududududududududududududududuaCaCaCaCaCfbhjgXbKdjeZaCaCgAgAeDgAgAeffcfdfdfeerehehehehfhefacetacavaAgEgBgBgBgBgBgBgBgBgBgBgEavaAgHgCgCgCgCgCgCgCgCgCgCgHavaAgIgqgqfNfBfNfNgqgqgqgqgIavaAabbQbRfifjfkflflflfmfjfnabaBhwhrhsabataudududududududududududududududududududududududududududududududududu
+dudududududududududududududududududududududuaCaCaCaCaCaCaCaCaCaCaCgKgAgLgMgAeffqfrfsfsfteheVeWehfuefacetacfvaAeAgNgBgBgBcvcvcvgOcvhkeAavaAeBhCeUeUfofpfpfofpfohDeBavaAeChEfwfNfUgqgmfYfNfCgyeCavaAabababfEababaBaBaBaBaBaBaraBhpaBaBabataudududududududududududududududududududududududududududududududududu
+dududududududududududududududududududududududuaCaCaCaCaCaCaCaCaCaChHhHexhHhHeffGereheheheheJeJehfHefacetacavaAeAhGhKhIeFhJhLhMgThNhOeAavaAeBeUfoeUeUfohQfpeUfoeUeBavaAeCfwfwhRhShihFhShRfDfDeCavaAabfQfRfSaBabaBaBaBaBaBaBabbVhoaBaBbqataudududududududududududududududududududududududududududududududududu
+dudududududududududududududududududududududududududududududududuaCdududududuefhPerehehepepepepepfVefacfWacavaGeAeAeAeAeAeAeAeAeAeAeAeAaHaGeBeBeBeBeBeBeBeBeBeBeBeBaHaGeCeCeCeCeCeCeCeCeCeCeCeCaHaAabdQfifXaNabaLaMguaOaPaQabbVhoaBaBabataudududududududududududududududududududududududududududududududududu
+dudududududududududududududududududududududududududududududududuhTdududududuefefhUfZgaepgbepgbepepefacetacavdKdLaoaoaoaoaoaoaoaoaoaodLdMdKdLaoaoaoaoaoaoaoaoaoaodLdMdKdLaoaoaoaoaoaoaoaoaoaodLdMaAabgcgdgefQababababababababbVhxaBaBabataudududududududududududududududududududududududududududududududududu
+dudududududududududududududududududududududududududududududududuhTdududududuefefefefefepepepepepfVefacetacdUaygfayayayayayayayayayaygfayaygfayayayayayayayayayaygfayaygfayayayayayayayayayaygfayggabghgigjgkabababababababababasasasabataudududududududududududududududududududududududududududududududududu
 dudududududududududududududududududududududududududududududududududududududuefefefefefefefefefefefefacetacacajacacacacacglacacacacacacacacacacacacacajacajacacacacacacacacacacacacglacacacacacacajabababfEabababababababababababababababababdudududududududududududududududududududududududududududududududu
 dududududududududududududududududududududududududududududududududududududududududuefefefefefefefefefacetacacahacacacacacacacacacacacacacacacacacacacahacahacacacacacacacacacacacacacacacacacacacahacacacetacabababdududuabababababababababababababdududududududududududududududududududududududududududududu
 dudududududududududududududududududududududududududududududududududududududududududududududududuefefacgngogogogogogogogogpgogogogogogogogpgWgpgogogogogogogogogpgWgpgogogogogogogogpgogogogogpgogogogogogracababdududududuababababababdududududududududududududududududududududududududududududududududududu
