@@ -52,4 +52,5 @@
 	. = ..()
 	if(buildtype_select && machine)
 		build_path = machine.base_type || machine.type
-		SetName(T_BOARD(machine.name))
+		var/obj/machinery/thing = build_path
+		SetName(T_BOARD(initial(thing.name)))
