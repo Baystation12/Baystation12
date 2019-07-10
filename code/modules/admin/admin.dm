@@ -65,8 +65,7 @@ var/global/floorIsLava = 0
 		<b>Mob type:</b> [M.type]<br>
 		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
-		<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> |
-		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
+		<A href='?src=\ref[src];ban=\ref[M]'>Ban</A> |
 		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
 	"}
 
@@ -1503,3 +1502,33 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 		qdel(P)
 		faxreply = null
 	return
+
+/client/proc/admin_ranks()
+	set category = "Host"
+	set desc = "Edit admin ranks"
+	set name = "Admin Ranks"
+
+	if (!check_rights(R_PERMISSIONS))
+		return
+
+	usr.client.holder.ShowUI(/datum/admin_ui/permissions/ranks)
+
+/client/proc/admin_users()
+	set category = "Host"
+	set desc = "Edit admin users"
+	set name = "Admin Users"
+
+	if (!check_rights(R_PERMISSIONS))
+		return
+
+	usr.client.holder.ShowUI(/datum/admin_ui/permissions/users)
+
+/client/proc/admin_bans()
+	set category = "Admin"
+	set desc = "Add and manage bans"
+	set name = "Ban Panel"
+
+	if (!check_rights(R_BAN))
+		return
+
+	usr.client.holder.ShowUI(/datum/admin_ui/bans/banpanel)

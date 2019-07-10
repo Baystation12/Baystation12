@@ -1156,6 +1156,17 @@
 				show_player_panel(M)
 			if("No")
 				return
+	if(href_list["ban"])
+		var/mob/M = locate(href_list["ban"])
+		if(!ismob(M)) return
+
+		var/datum/admin_ui/bans/addban/panel = usr.client.holder.GetUI(/datum/admin_ui/bans/addban)
+		panel.primed = TRUE
+		panel.ckey = M.ckey
+		if (M.client)
+			panel.cid = M.client.computer_id
+			panel.ip = M.client.address
+		usr.client.holder.ShowUI(/datum/admin_ui/bans/addban)
 
 
 mob/living/proc/can_centcom_reply()

@@ -99,6 +99,7 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/sendFax,
 )
 var/list/admin_verbs_ban = list(
+	/client/proc/admin_bans
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
@@ -214,6 +215,8 @@ var/list/admin_verbs_possess = list(
 	/proc/release
 	)
 var/list/admin_verbs_permissions = list(
+	/client/proc/admin_ranks,
+	/client/proc/admin_users,
 	)
 var/list/admin_verbs_rejuv = list(
 	/client/proc/respawn_character
