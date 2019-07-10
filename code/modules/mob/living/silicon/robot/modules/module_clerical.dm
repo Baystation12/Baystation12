@@ -56,7 +56,9 @@
 		SKILL_BUREAUCRACY         = SKILL_PROF,
 		SKILL_COMPUTER            = SKILL_EXPERT,
 		SKILL_COOKING             = SKILL_PROF,
-		SKILL_BOTANY              = SKILL_PROF
+		SKILL_BOTANY              = SKILL_PROF,
+		SKILL_MEDICAL             = SKILL_BASIC,
+		SKILL_CHEMISTRY           = SKILL_ADEPT
 	)
 
 /obj/item/weapon/robot_module/clerical/butler/finalize_equipment()
