@@ -156,9 +156,13 @@
 	if (rights & R_STEALTH)     . += "[seperator]+STEALTH"
 	if (rights & R_REJUVINATE)  . += "[seperator]+REJUVINATE"
 	if (rights & R_VAREDIT)     . += "[seperator]+VAREDIT"
-	if (rights & R_SOUNDS)      . += "[seperator]+SOUND"
+	if (rights & R_SOUNDS)      . += "[seperator]+SOUNDS"
 	if (rights & R_SPAWN)       . += "[seperator]+SPAWN"
-	if (rights & R_MOD)         . += "[seperator]+MODERATOR"
+	if (rights & R_MOD)         . += "[seperator]+MOD"
+	return .
+
+/proc/adminflags2text(var/flags, var/separator)
+	if (flags & AF_NEEDSGRANT)  . += "[separator]+NEEDSGRANT"
 	return .
 
 // heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/

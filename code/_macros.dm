@@ -179,6 +179,8 @@
 
 #define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
 
+#define SPAN_LOGMESSAGE(X) "<span class='log_message'>[X]</span>"
+
 #define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
 
 #define SPAN_MFAUNA(X) "<span class='mfauna'>[X]</span>"
