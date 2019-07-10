@@ -331,6 +331,9 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			else
 				M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
 			sleep(1)
+			if(!M.client)
+				return
+
 		M.client.eye=oldeye
 		M.shakecamera = 0
 
