@@ -96,6 +96,9 @@
 	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
 	GLOB.INSURRECTION.base_desc = "secret underground base"
 
+	GLOB.HUMAN_CIV.name = "Geminus City"
+	GLOB.HUMAN_CIV.base_desc = "human colony"
+
 /datum/game_mode/outer_colonies/handle_latejoin(var/mob/living/carbon/human/character)
 	for(var/datum/objective/objective in objectives_specific_target)
 		if(objective.check_target(character.mind))
