@@ -45,7 +45,8 @@
 			else
 				to_chat(user, "\The [scanner] does not detect anyone inside \the [target].")
 				return
-	else
+
+	if(!scan_subject)
 		return
 
 	if (scan_subject.isSynthetic())
