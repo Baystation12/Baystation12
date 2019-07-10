@@ -20,6 +20,8 @@ GLOBAL_PROTECT(granted_admins)
 	var/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel
 	var/admincaster_signature	//What you'll sign the newsfeeds as
 
+	var/list/adminuis
+
 /datum/admins/proc/marked_datum()
 	if(marked_datum_weak)
 		return marked_datum_weak.resolve()
@@ -32,6 +34,7 @@ GLOBAL_PROTECT(granted_admins)
 	src.rank = rank
 	src.rights = rights
 	src.flags = flags
+	src.adminuis = list()
 
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)
