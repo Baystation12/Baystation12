@@ -17,7 +17,7 @@
 	var/turf/T = get_turf(H)
 	holder.visible_message("<span class='notice'>A gateway opens up underneath \the [H]!</span>")
 	var/g
-	if(H.mind && H.mind in GLOB.godcult.current_antagonists)
+	if(H.mind && (H.mind in GLOB.godcult.current_antagonists))
 		g = GLOB.godcult.get_deity(H.mind)
 	return list(new /obj/structure/deity/gateway(T,g))
 
