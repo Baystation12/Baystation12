@@ -55,11 +55,10 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 				linked.decelerate()
 			// Heading does not match direction
 			else if (heading & ~direction)
-				linked.accelerate(turn(heading & ~direction, 180))
+				linked.accelerate(turn(heading & ~direction, 180), accellimit)
 			// All other cases, move toward direction
 			else if (speed + acceleration <= speedlimit)
-				linked.accelerate(direction)
-
+				linked.accelerate(direction, accellimit)
 		return
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
