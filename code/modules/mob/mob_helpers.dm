@@ -658,6 +658,7 @@ proc/is_blind(A)
 	var/attempt = null
 	var/success = 0
 	var/turf/end
+	var/candidates = L.Copy()
 	while(L.len)
 		attempt = pick(L)
 		success = Move(attempt)
@@ -668,7 +669,7 @@ proc/is_blind(A)
 			break
 
 	if(!success)
-		end = pick(L)
+		end = pick(candidates)
 		forceMove(end)
 
 	return end
