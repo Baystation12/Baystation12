@@ -21,11 +21,20 @@
 /datum/database/proc/UpdateAdminRank(var/oldname, var/name, var/permissions, var/flags)
 	return 0
 
+/datum/database/proc/RemoveAdminRank(var/name)
+	return 0
+
+/datum/database/proc/GetAdmins()
+	return list()
+
 /datum/database/proc/GetAdmin(var/ckey)
 	return null
 
 /datum/database/proc/SetAdminRank(var/ckey, var/rank)
 	return null
+
+/datum/database/proc/RemoveAdmin(var/ckey)
+	return 0
 
 /datum/database/proc/RecordRoundStart(var/roundid)
 	return 0
@@ -68,6 +77,9 @@
 
 /datum/database/proc/BannedForScope(var/scope, var/ckey, var/ip, var/cid)
 	return 0
+
+/datum/database/proc/GetBan(var/id)
+	return null
 
 /datum/database/proc/GetBans(var/ckey, var/ip, var/cid)
 	return list()

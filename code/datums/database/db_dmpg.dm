@@ -43,6 +43,21 @@
 	. = db.Execute("UPDATE bs12_rank SET name=$1, permissions=$2, flags=$3 WHERE name=$4", name, permissions, flags, oldname)
 	RETURN_ERR(.)
 
+/datum/database/dmpg/RemoveAdminRank(var/name)
+	. = db.Execute("DELETE FROM bs12_rank WHERE name=$1", name)
+	RETURN_ERR(.)
+
+/datum/database/dmpg/GetAdmins()
+	var/list/res = db.Execute("SELECT ckey, name FROM bs12_player INNER JOIN bs12_rank ON bs12_player.rank = bs12_rank.id")
+	CHECK_ERR(res)
+	var/list/admins = new
+	for (var/admin in res)
+		admins += list(list(
+			"ckey" = res[1],
+			"name" = res[2]
+		))
+	return admins
+
 /datum/database/dmpg/GetAdmin(var/ckey)
 	var/list/res = db.Query("SELECT name, permissions, flags FROM bs12_player INNER JOIN bs12_rank ON bs12_player.rank = bs12_rank.id WHERE ckey = $1", ckey)
 	CHECK_ERR(res)
@@ -52,6 +67,10 @@
 
 /datum/database/dmpg/SetAdminRank(var/ckey, var/rank)
 	. = db.Execute("UPDATE bs12_player SET rank = (SELECT id FROM bs12_rank WHERE name = $2) WHERE ckey = $1", ckey, rank)
+	RETURN_ERR(.)
+
+/datum/database/dmpg/RemoveAdmin(var/ckey)
+	. = db.Execute("UPDATE bs12_player SET rank = NULL WHERE ckey = $1", ckey)
 	RETURN_ERR(.)
 
 /datum/database/dmpg/RecordRoundStart(var/roundid)
@@ -199,7 +218,7 @@
 	CHECK_ERR(.)
 	. = db.Execute("INSERT INTO bs12_ban_scope (ban, admin, scope) VALUES ($1, $2, $3)", ban, admin_id, scopes)
 	CHECK_ERR(.)
-	. = db.Execute("INSERT INTO bs12_ban_expiry (ban, admin, expiry) VALUES ($1, $2, CURRENT_TIMESTAMP + $3)", ban, admin_id, reason)
+	. = db.Execute("INSERT INTO bs12_ban_expiry (ban, admin, expiry) VALUES ($1, $2, CURRENT_TIMESTAMP + $3)", ban, admin_id, expiry)
 	if (istext(.))
 		db.Execute("DELETE FROM bs12_ban WHERE id = $1", ban)
 		return

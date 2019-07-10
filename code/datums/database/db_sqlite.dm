@@ -27,7 +27,7 @@
 	CREATE TABLE bs12_admin(
 		id INTEGER NOT NULL PRIMARY KEY,
 		ckey TEXT NOT NULL UNIQUE,
-		rank INTEGER NOT NULL REFERENCES bs12_rank(id)
+		rank INTEGER NOT NULL REFERENCES bs12_rank(id) ON DELETE CASCADE
 	)
 	"})
 	CHECK_EXEC(q)
@@ -75,12 +75,6 @@
 	q.Add("INSERT INTO schema_version(version) VALUES(?)", SCHEMA_VERSION)
 	CHECK_EXEC(q)
 
-/datum/database/sqlite/proc/nq()
-	del(q)
-
-/datum/database/sqlite/proc/ndb()
-	del(db)
-
 /datum/database/sqlite/Init()
 	db = new("data/bs12.db")
 	var/ver = null
@@ -102,8 +96,9 @@
 	q.Add("SELECT name, permissions, flags FROM bs12_rank")
 	CHECK_EXEC(q)
 	var/list/ranks = new
-	while(q.NextRow())
+	while (q.NextRow())
 		ranks += list(q.GetRowData())
+	return ranks
 
 /datum/database/sqlite/RecordAdminRank(var/name, var/permissions, var/flags)
 	q.Add("INSERT INTO bs12_rank(name, permissions, flags) VALUES (?, ?, ?)", name, permissions, flags)
@@ -115,23 +110,41 @@
 	RETURN_EXEC(q)
 	. = 1
 
+/datum/database/sqlite/RemoveAdminRank(var/name)
+	q.Add("DELETE FROM bs12_rank WHERE name=?", name)
+	RETURN_EXEC(q)
+	. = 1
+
+/datum/database/sqlite/GetAdmins()
+	q.Add("SELECT ckey, name FROM bs12_admin INNER JOIN bs12_rank ON bs12_admin.rank = bs12_rank.id")
+	CHECK_EXEC(q)
+	var/list/admins = new
+	while (q.NextRow())
+		admins += list(q.GetRowData())
+	return admins
+
 /datum/database/sqlite/GetAdmin(var/ckey)
-	q.Add("SELECT name, permissions, flags FROM bs12_admin INNER JOIN bs12_rank ON bs12_admin.rank = bs12_rank.id")
+	q.Add("SELECT name, permissions, flags FROM bs12_admin INNER JOIN bs12_rank ON bs12_admin.rank = bs12_rank.id WHERE ckey = ?", ckey)
 	CHECK_EXEC(q)
 	. = null
-	if(q.NextRow())
+	if (q.NextRow())
 		var/list/data = q.GetRowData()
 		return list(data["name"], data["permissions"], data["flags"])
 
 /datum/database/sqlite/SetAdminRank(var/ckey, var/rank)
-	q.Add("INSERT INTO bs12_admin(ckey, rank) VALUES(?, (SELECT id FROM bs12_rank WHERE name = ?)) ON CONFLICT(ckey) DO UPDATE SET rank=(SELECT id FROM bs12_rank WHERE name = ?)", ckey, rank, rank)
+	q.Add("INSERT OR REPLACE INTO bs12_admin(ckey, rank) VALUES(?, (SELECT id FROM bs12_rank WHERE name = ?))", ckey, rank, rank)
+	RETURN_EXEC(q)
+	. = 1
+
+/datum/database/sqlite/RemoveAdmin(var/ckey)
+	q.Add("DELETE FROM bs12_admin WHERE ckey = ?", ckey)
 	RETURN_EXEC(q)
 
 /datum/database/sqlite/GetAllLibraryBooks()
 	var/list/books = new
 	q.Add("SELECT id, author, category, title, content FROM bs12_library")
 	CHECK_EXEC(q)
-	while(q.NextRow())
+	while (q.NextRow())
 		var/list/data = q.GetRowData()
 		books += list(data)
 	log_and_message_admins("there are [books.len] books!")
@@ -139,21 +152,21 @@
 
 /datum/database/sqlite/GetLibraryBook(var/id)
 	q.Add("SELECT id, author, category, title, content FROM bs12_library WHERE id = ?", id)
-	if(!q.Execute())
+	if (!q.Execute())
 		return null
-	if(q.NextRow())
+	if (q.NextRow())
 		return q.GetRowData()
 
 /datum/database/sqlite/CreateLibraryBook(var/ckey, var/category, var/author, var/title, var/content)
 	q.Add("INSERT INTO bs12_library(ckey, author, category, title, content) VALUES (?, ?, ?, ?, ?)", ckey, author, category, title, content)
 	RETURN_EXEC(q)
-	return 1
+	. = 1
 
 /datum/database/sqlite/GetWhitelists(var/ckey)
 	var/list/scopes = new
 	q.Add("SELECT scope FROM bs12_whitelist WHERE ckey = ?", ckey)
 	CHECK_EXEC(q)
-	while(q.NextRow())
+	while (q.NextRow())
 		scopes += list(q.GetRowData()["scope"])
 	return scopes
 
@@ -174,9 +187,17 @@
 		return q.GetRowData()
 	return list()
 
+/datum/database/sqlite/GetBan(var/id)
+	q.Add("SELECT id, ckey, ip, computerid, admin, reason, expiry, scope, expiry <= DATETIME('now') AS expired FROM bs12_ban WHERE id = ?", id)
+	if (!q.Execute())
+		return null
+	if (q.NextRow())
+		return q.GetRowData()
+
+
 /datum/database/sqlite/GetBans(var/ckey, var/ip, var/cid)
 	var/list/bans = new
-	q.Add("SELECT id, admin, reason, expiry, scope FROM bs12_ban WHERE ckey = ? OR ip = ? OR computerid = ?", ckey, ip, cid)
+	q.Add("SELECT id, ckey, ip, computerid, admin, reason, expiry, scope, expiry <= DATETIME('now') AS expired FROM bs12_ban WHERE ckey = ? OR ip = ? OR computerid = ?", ckey, ip, cid)
 	CHECK_EXEC(q)
 	while (q.NextRow())
 		bans += list(q.GetRowData())
@@ -184,12 +205,12 @@
 
 /datum/database/sqlite/RecordBan(var/scopes, var/setter_key, var/reason, var/expiry, var/ckey, var/ip, var/cid)
 	for (var/scope in scopes)
-		q.Add("INSERT INTO bs12_ban(ckey, ip, computerid, scope, admin, reason, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)", ckey, ip, cid, scope, setter_key, reason, expiry)
+		q.Add("INSERT INTO bs12_ban(ckey, ip, computerid, scope, admin, reason, expiry) VALUES (?, ?, ?, ?, ?, ?, DATETIME('now', ? || ' minutes'))", ckey, ip, cid, scope, setter_key, reason, expiry)
 		CHECK_EXEC(q)
 	. = 1
 
 /datum/database/sqlite/RemoveBan(var/id, var/remover_ckey)
-	q.Add("DELETE FROM bs12_ban WHERE id = ?", id)
+	q.Add("UPDATE bs12_ban SET expiry = DATETIME('now'), reason = reason || ' - Removed by ' || ? WHERE id = ?", remover_ckey, id)
 	RETURN_EXEC(q)
 	. = 1
 
