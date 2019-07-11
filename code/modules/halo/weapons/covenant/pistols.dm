@@ -35,11 +35,6 @@
 			update_icon()
 			return 1
 
-/obj/item/weapon/gun/energy/plasmapistol/consume_next_projectile()
-	.  = ..()
-	if(overcharge)
-		set_overcharge(0)
-
 /obj/item/weapon/gun/energy/plasmapistol/proc/set_overcharge(var/new_overcharge = 1, var/mob/user = null)
 	if(new_overcharge != overcharge)
 		if(new_overcharge)
