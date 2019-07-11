@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(webhooks)
 			to_world_log("Setting up webhook [wid].")
 			if(wid && wurl && all_webhooks_by_id[wid])
 				var/decl/webhook/webhook = all_webhooks_by_id[wid]
-				webhook.url = wurl
+				webhook.urls = islist(wurl) ? wurl : list(wurl)
 				if(wmention)
 					webhook.mentions = jointext(wmention, ", ")
 				webhook_decls[wid] = webhook
