@@ -21,7 +21,10 @@
 	display_name = "holster selection"
 	path = /obj/item/clothing/accessory/storage/holster
 	cost = 3
-	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/tactical/sheath
+	display_name = "machete sheath"
+	path = /obj/item/clothing/accessory/storage/holster/machete
 
 /datum/gear/tactical/tacticool
 	display_name = "tacticool turtleneck"
