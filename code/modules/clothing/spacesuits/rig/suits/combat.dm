@@ -422,7 +422,6 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
-		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/voice
 		)
 
