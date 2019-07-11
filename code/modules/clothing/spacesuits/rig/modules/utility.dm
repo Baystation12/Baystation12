@@ -449,9 +449,9 @@
 	toggleable = 1
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 5)
 	interface_name = "mounted cooling unit"
-	interface_desc = "A heat sink with a liquid cooled radiator."
+	interface_desc = "A heat sink with a liquid cooled radiator. Integrated in RIG suits, using kinetic motion to store energy to power the RIG for long term use. Activate to generate power."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
-	var/charge_consumption = 0.5 KILOWATTS
+	var/charge_consumption = -80 KILOWATTS //rig suits in dead space don't use power, putting this here so all rig suits with cooling module are considered to have limitless power. hacky way to approach it but much less conflict than stripping out all the hardsuit code relating to power.
 	var/max_cooling = 12
 	var/thermostat = T20C
 
