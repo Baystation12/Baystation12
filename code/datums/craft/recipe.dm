@@ -54,14 +54,11 @@
 		user.put_in_hands(M)
 
 
-/datum/craft_recipe/proc/get_description(pass_steps)
+/datum/craft_recipe/proc/get_description()
 	. = list()
 	var/atom/A = result
 	.+="[initial(A.desc)]<br>"
 	for(var/item in steps)
-		if(pass_steps > 0)
-			--pass_steps
-			continue
 		var/datum/craft_step/CS = item
 		. += CS.desc
 	return jointext(., "<br>")

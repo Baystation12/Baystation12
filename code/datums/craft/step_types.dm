@@ -64,8 +64,11 @@
 	if (noconsume)
 		.=..()
 	else if (I && target)
-		I.forceMove(target) //The item will be deleted along with the craft object later, when all steps are complete
-		//In the meantime, it can be recovered if crafting is cancelled
+		if (user)
+			user.unEquip(I, target)
+		if (I.loc != target)
+			I.forceMove(target) //The item will be deleted along with the craft object later, when all steps are complete
+			//In the meantime, it can be recovered if crafting is cancelled
 
 	//We don't call parent and thus don't consume resources
 
@@ -112,7 +115,7 @@
 
 	var/material/M = get_material_by_name("[required_material]")
 	icon_type = M.stack_type
-	if (required_quantity > 1)
+	if (required_quantity <= 1)
 		desc = "Apply [M.display_name]"
 	else
 		desc = "Apply [required_quantity] units of [M.display_name]"
@@ -190,8 +193,8 @@
 
 
 	//Now setting the name and desc
-	var/var/obj/I = required_type
-	var/name = initial(I.name)
+	var/var/obj/item/stack/I = required_type
+	var/name = (required_quantity > 1?initial(I.name):initial(I.singular_name))
 
 	if (required_quantity > 1)
 		desc = "Apply [name]"
@@ -338,7 +341,7 @@
 	if (params.len >= 3)
 		required_level = params[3]
 		if (params.len >= 4 && isnum(params[4]))
-			required_level = params[4]
+			apply_range = params[4]
 
 	desc = "Requires a nearby [required_quality]."
 

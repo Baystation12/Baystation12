@@ -87,7 +87,7 @@
 	result = /obj/item/weapon/flamethrower
 	steps = list(
 		list(CRAFT_OBJECT, /obj/item/weapon/tool/weldingtool, "time" = 60),
-		list(QUALITY_SCREW_DRIVING, 10, 70),
+		list(CRAFT_TOOL, QUALITY_SCREW_DRIVING, 10, 70),
 		list(CRAFT_OBJECT, /obj/item/device/assembly/igniter,),
 	)
 
@@ -97,8 +97,21 @@
 	result = /obj/item/weapon/beartrap/makeshift
 	steps = list(
 		list(CRAFT_OBJECT, /obj/item/weapon/tool/saw, "time" = 120),
-		list(QUALITY_SCREW_DRIVING, 10, 70),
+		list(CRAFT_TOOL, QUALITY_SCREW_DRIVING, 10, 70),
 		list(CRAFT_MATERIAL, MATERIAL_STEEL, 20),
-		list(QUALITY_BOLT_TURNING, 10, 70),
+		list(CRAFT_TOOL, QUALITY_BOLT_TURNING, 10, 70),
 		list(CRAFT_STACK, /obj/item/stack/cable_coil, 2, "time" = 10)
+	)
+
+
+/datum/craft_recipe/weapon/ripper
+	name = "RC-DS Remote Control Disc Ripper"
+	result = /obj/item/weapon/gun/projectile/ripper
+	passive_steps = list(CRAFT_PASSIVE, QUALITY_WORKBENCH, 1, 0)
+	time = 100
+	steps = list(
+	list(CRAFT_OBJECT, /obj/item/weapon/tool/wrench),
+	list(CRAFT_OBJECT, /obj/item/weapon/stock_parts/matter_bin),
+	list(CRAFT_STACK, /obj/item/stack/cable_coil, 5),
+	list(CRAFT_STACK, /obj/item/stack/power_node, 1)
 	)

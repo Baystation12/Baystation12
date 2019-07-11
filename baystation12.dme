@@ -1010,6 +1010,7 @@
 #include "code\game\objects\items\weapons\tools\tape.dm"
 #include "code\game\objects\items\weapons\tools\weldingtools.dm"
 #include "code\game\objects\items\weapons\tools\wirecutters.dm"
+#include "code\game\objects\items\weapons\tools\workbench.dm"
 #include "code\game\objects\items\weapons\tools\wrenches.dm"
 #include "code\game\objects\items\weapons\tools\mods\_upgrades.dm"
 #include "code\game\objects\items\weapons\tools\mods\mod_types.dm"

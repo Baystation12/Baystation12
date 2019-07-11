@@ -296,7 +296,6 @@ var/decl/asset_cache/asset_cache = new()
 
 			for(var/datum/craft_step/CS in CR.steps)
 				if(CS.icon_type)
-					world << "Making icon [CS.icon_type] for [CS] in [CR]"
 					var/filename = sanitizeFileName("[CS.icon_type].png")
 					var/icon/I = getFlatTypeIcon(CS.icon_type)
 					register_asset(filename, I)
