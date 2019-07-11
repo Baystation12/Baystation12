@@ -96,7 +96,7 @@
 		reagents += list(reagent)
 	data["reagents"] = reagents.Copy()
 
-	if(occupant)
+	if(istype(occupant))
 		var/scan = user.skill_check(SKILL_MEDICAL, SKILL_ADEPT) ? medical_scan_results(occupant) : "<span class='white'><b>Contains: \the [occupant]</b></span>"
 		scan = replacetext(scan,"'scan_notice'","'white'")
 		scan = replacetext(scan,"'scan_warning'","'average'")

@@ -45,7 +45,8 @@
 			else
 				to_chat(user, "\The [scanner] does not detect anyone inside \the [target].")
 				return
-	else
+
+	if(!scan_subject)
 		return
 
 	if (scan_subject.isSynthetic())
@@ -87,7 +88,7 @@
 			else
 				if(skill_level < SKILL_BASIC)
 					brain_result = "there's movement on the graph"
-				else
+				else if(istype(brain))
 					switch(brain.get_current_damage_threshold())
 						if(0)
 							brain_result = "normal"
@@ -101,6 +102,8 @@
 							brain_result = "<span class='scan_danger'>fading</span>"
 						else
 							brain_result = "<span class='scan_danger'>ERROR - Hardware fault</span>"
+				else
+					brain_result = "<span class='scan_danger'>ERROR - Organ not recognized</span>"
 	else
 		brain_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
 	dat += "Brain activity: [brain_result]."
