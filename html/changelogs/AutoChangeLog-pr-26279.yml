@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Printing from the file manager program now prints visible paper."
