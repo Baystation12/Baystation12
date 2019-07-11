@@ -38,3 +38,25 @@
 
 	max_ammo = 250
 	multiple_sprites = 1
+
+//PLASTURRET AMMO DEFINES//
+/obj/item/ammo_magazine/plasturret_boxmag
+	name = "cell container (Type-52 Directed Energy Support Weapon)"
+	desc = "A container for cells, designed for use with the Type-52 Directed Energy Support Weapon"
+
+	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
+	icon_state = "hmgturretbox"
+
+	ammo_type = /obj/item/ammo_casing/plasturret
+	caliber = "plas_turret_cells"
+	mag_type = MAGAZINE
+
+
+	max_ammo = 100
+	multiple_sprites = 1
+
+/obj/item/ammo_casing/plasturret
+	name = "Type-52 Directed Energy Support Weapon Power Cell"
+	desc = "A self-contained power cell for the Type-52 Directed Energy Support Weapon"
+	caliber = "plas_turret_cells"
+	projectile_type = /obj/item/projectile/covenant/plasmarifle

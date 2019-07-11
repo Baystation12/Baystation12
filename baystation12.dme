@@ -1761,6 +1761,7 @@
 #include "code\modules\halo\weapons\turrets\chaingun.dm"
 #include "code\modules\halo\weapons\turrets\deploy_kits.dm"
 #include "code\modules\halo\weapons\turrets\HMG.dm"
+#include "code\modules\halo\weapons\turrets\plas_turret.dm"
 #include "code\modules\halo\weapons\turrets\turret.dm"
 #include "code\modules\halo\weapons\~undef\~undef.dm"
 #include "code\modules\holodeck\HolodeckControl.dm"
