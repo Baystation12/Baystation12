@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - tweak: "Adds basic medical and trained chemistry skills to the Service Module. Gives the Service Module the full selection of booze and soft drink dispenser drinks. Significantly reduces power requirement of the drink dispenser tool."
