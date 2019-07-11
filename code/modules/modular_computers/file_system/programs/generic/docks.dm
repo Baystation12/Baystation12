@@ -46,7 +46,7 @@
 	var/list/data = host.initial_data()
 	var/list/docks = list()
 	for(var/docktag in docking_controllers)
-		var/datum/computer/file/embedded_program/docking/P = locate(docktag)
+		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[docktag]
 		if(P)
 			var/docking_attempt = P.tag_target && !P.dock_state
 			var/docked = P.tag_target && (P.dock_state == STATE_DOCKED)
@@ -69,8 +69,8 @@
 /datum/nano_module/docking/Topic(href, href_list, state)
 	if(..())
 		return 1
-	if(href_list["edit_code"])
-		var/datum/computer/file/embedded_program/docking/P = locate(href_list["edit_code"])
+	if(istext(href_list["edit_code"]))
+		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[href_list["edit_code"]]
 		if(P)
 			var/newcode = input("Input new docking codes", "Docking codes", P.docking_codes) as text|null
 			if(!CanInteract(usr,state))
@@ -78,13 +78,13 @@
 			if (newcode)
 				P.docking_codes = uppertext(newcode)
 		return 1
-	if(href_list["dock"])
-		var/datum/computer/file/embedded_program/docking/P = locate(href_list["dock"])
+	if(istext(href_list["dock"]))
+		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[href_list["dock"]]
 		if(P)
 			P.receive_user_command("dock")
 		return 1
-	if(href_list["undock"])
-		var/datum/computer/file/embedded_program/docking/P = locate(href_list["undock"])
+	if(istext(href_list["undock"]))
+		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[href_list["undock"]]
 		if(P)
 			P.receive_user_command("undock")
 		return 1
