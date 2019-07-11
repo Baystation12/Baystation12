@@ -138,6 +138,19 @@
 /datum/gear/tactical/holster
 	allowed_roles = ARMED_ROLES
 
+/datum/gear/tactical/holster/New()
+	..()
+	var/holsters = list()
+	holsters["shoulder holster"] = /obj/item/clothing/accessory/storage/holster
+	holsters["armpit holster"] = /obj/item/clothing/accessory/storage/holster/armpit
+	holsters["waist holster"] = /obj/item/clothing/accessory/storage/holster/waist
+	holsters["hip holster"] = /obj/item/clothing/accessory/storage/holster/hip
+	holsters["thigh holster"] = /obj/item/clothing/accessory/storage/holster/thigh
+	gear_tweaks += new/datum/gear_tweak/path(holsters)
+
+/datum/gear/tactical/sheath
+	allowed_roles = list(/datum/job/pathfinder, /datum/job/explorer)
+
 /datum/gear/tactical/armor_deco
 	allowed_roles = ARMORED_ROLES
 
