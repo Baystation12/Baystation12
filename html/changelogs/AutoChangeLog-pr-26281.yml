@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "The psiblade can now hit robots instead of trying to cut their wires like a wirecutter."
