@@ -13,9 +13,6 @@
 
 #include "../Covenant Corvette/includes.dm"
 
-#include "../_gamemodes/invasion/odst_crew_jobs.dm"
-#include "../_gamemodes/invasion/overall_outfits.dm"
-
 #include "invasion_geminus_jobdefs.dm"
 #include "invasion_geminus_unit_tests.dm"
 

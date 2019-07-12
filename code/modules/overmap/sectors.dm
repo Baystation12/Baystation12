@@ -84,6 +84,14 @@ var/list/points_of_interest = list()
 		src.forceMove(pick(spawn_locs))
 		GLOB.overmap_spawn_near -= src.type
 
+	if(flagship && faction)
+		var/datum/faction/F = GLOB.factions_by_name[faction]
+		F.flagship = src
+
+	if(base && faction)
+		var/datum/faction/F = GLOB.factions_by_name[faction]
+		F.base = src
+
 /obj/effect/overmap/proc/generate_targetable_areas()
 	if(isnull(parent_area_type))
 		return
