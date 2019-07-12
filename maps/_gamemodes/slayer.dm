@@ -7,6 +7,7 @@
 	extended_round_description = "No-one has scored a point yet."
 	config_tag = "FFA Slayer"
 	votable = 1
+	probability = 1
 	var/list/mode_teams = list("Spartan Slayer")		//jobs are used to represent "teams"
 	var/list/team_scores_unsorted = list()
 	var/list/scores_with_names = list()

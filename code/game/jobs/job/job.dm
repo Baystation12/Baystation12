@@ -65,7 +65,7 @@
 	if(spawn_faction)
 		H.faction = spawn_faction
 		if(ticker.mode)
-			var/datum/faction/F = ticker.mode.factions_by_name[spawn_faction]
+			var/datum/faction/F = GLOB.factions_by_name[spawn_faction]
 			if(F && H.mind)
 				F.assigned_minds.Add(H.mind)
 				F.living_minds.Add(H.mind)
