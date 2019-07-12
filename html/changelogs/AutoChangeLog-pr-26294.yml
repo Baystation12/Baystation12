@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Machines will now have a hint if you have forgotten to install a tesla link."
