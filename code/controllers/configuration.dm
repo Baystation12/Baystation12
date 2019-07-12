@@ -222,6 +222,7 @@ var/list/gamemode_cache = list()
 
 	var/allow_map_switching = 0 // Whether map switching is allowed
 	var/auto_map_vote = 0 // Automatically call a map vote at end of round and switch to the selected map
+	var/allow_extended_vote = 1
 	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
 	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
@@ -312,6 +313,9 @@ var/list/gamemode_cache = list()
 
 				if ("sql_enabled")
 					config.sql_enabled = text2num(value)
+
+				if ("allow_extended_vote")
+					config.allow_extended_vote = text2num(value)
 
 				if ("log_say")
 					config.log_say = 1

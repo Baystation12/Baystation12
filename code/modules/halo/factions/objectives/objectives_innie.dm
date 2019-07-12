@@ -18,11 +18,25 @@
 	explanation_text = "We need to augment our forces with advanced new weaponry to combat the UNSC."
 	win_points = 50
 
+/datum/objective/kill_mayor
+	short_text = "Kill the colony Mayor"
+	explanation_text = "The Mayor is a UEG stooge. Kill him to open the way for colonial independance."
+	win_points = 100
+
+/datum/objective/kill_policechief
+	short_text = "Kill the colony Police Chief"
+	explanation_text = "The Police Chief is an oppressive tyrant. Kill him to free our people."
+	win_points = 100
+
 /* done */
 
-/datum/objective/destroy_unsc_ship/innie
+/datum/objective/destroy_ship/innie
 	short_text = "Destroy the UNSC warship"
 	explanation_text = "UNSC warships are deadly, carrying special weapons and soldiers to crush many revolts before they can begin. Don't allow this one to escape."
+
+/datum/objective/destroy_ship/innie/find_target()
+	target_ship = GLOB.UNSC.get_flagship()
+	return target_ship
 
 /datum/objective/assassinate/kill_unsc_leader
 	short_text = "Kill UNSC commander"
@@ -30,23 +44,11 @@
 	win_points = 50
 	find_specific_target = 1
 
-/datum/objective/assassinate/kill_unsc_leader/find_target_specific(var/datum/mind/check_mind)
-	if(check_mind)
-		if(!target)
-			if(check_mind.assigned_role == "UNSC Heavens Above Commanding Officer")
-				target = check_mind
-			else if(check_mind.assigned_role == "UNSC Bertels Commanding Officer")
-				target = check_mind
-			if(target)
-				. = 1
-	else
-		find_target_by_role("UNSC Heavens Above Commanding Officer")
-		if(!target)
-			find_target_by_role("UNSC Bertels Commanding Officer")
-		if(target)
-			. = 1
-	if(explanation_text == "Free Objective")
-		explanation_text  = "Kill the UNSC commander."
+/datum/objective/assassinate/kill_unsc_leader/find_target()
+	target = GLOB.UNSC.get_commander()
+	if(target)
+		explanation_text = "Kill [target.current.real_name], the [target.assigned_role]."
+	return target
 
 /datum/objective/assassinate/kill_unsc_leader/check_completion()
 	if(target && target.current)
@@ -62,26 +64,17 @@
 	short_text = "Destroy the Covenant warship"
 	explanation_text = "Soon to be nothing but high tech scrap."
 
-/datum/objective/protect/protect_innie_leader
+/datum/objective/protect/innie_leader
 	short_text = "Protect the Insurrectionist commander"
-	explanation_text = "Without their inspirational lead, the Insurrection will fall apart. Protect the Insurrectionist Commander."
+	explanation_text = "Protect the Insurrectionist Commander. Without their inspirational lead, the Insurrection will fall apart."
 	lose_points = 50
 	find_specific_target = 1
 
-/datum/objective/protect/protect_innie_leader/find_target_specific(var/datum/mind/check_mind)
-	if(check_mind)
-		if(!target)
-			if(check_mind.assigned_role == "Insurrectionist Commander")
-				target = check_mind
-			if(target)
-				. = 1
-	else
-		find_target_by_role("Insurrectionist Commander")
-		if(target)
-			. = 1
-
-	if(explanation_text == "Free Objective")
-		explanation_text  = "Protect the Insurrectionist Commander."
+/datum/objective/protect/innie_leader/find_target()
+	target = GLOB.INSURRECTION.get_commander()
+	if(target)
+		explanation_text = "Protect [target.current.real_name], the [target.assigned_role]."
+	return target
 
 /datum/objective/colony_capture/innie
 	short_text = "Colonial revolt"

@@ -36,12 +36,12 @@
 	#include "overall_outfits.dm"
 	#include "mapdef.dm"
 
+	#include "gamemode.dm"
 	#include "gamemode_revolution.dm"
+	#include "gamemode_reclamation.dm"
 
 	#include "../../../code/modules/halo/lobby_music/odst_music.dm"
 	#include "../../../code/modules/halo/lobby_music/halo_music.dm"
-
-	#include "gamemode.dm"
 
 	#define using_map_DATUM /datum/map/geminus_city
 
