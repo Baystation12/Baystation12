@@ -672,6 +672,21 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/reagent_containers/ecig_cartridge/blank
 	category = "Devices and Components"
 
+/datum/autolathe/recipe/conveyor_construct
+	name = "conveyor belt assembly"
+	path = /obj/item/conveyor_construct
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/conveyor_switch_construct
+	name = "conveyor belt switch"
+	path = /obj/item/conveyor_switch_construct
+	category = "Devices and Components"
+
+/datum/autolathe/recipe/conveyor_switch_oneway_construct
+	name = "one-way conveyor belt switch"
+	path = /obj/item/conveyor_switch_construct/oneway
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/plunger
 	name = "plunger"
 	path = /obj/item/clothing/mask/plunger
