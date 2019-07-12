@@ -1340,7 +1340,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 80
 	)
 
-/obj/machinery/vending/sol/on_update_icon()
+/obj/machinery/vending/weeb/on_update_icon()
 	..()
 	if(!(stat & NOPOWER))
 		overlays += image(icon, "[initial(icon_state)]-fan")
