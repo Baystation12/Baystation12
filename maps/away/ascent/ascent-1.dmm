@@ -1,0 +1,19178 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/space,
+/area/space)
+"ab" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ac" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"ad" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ae" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"af" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/material/knife/kitchen/cleaver/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"ag" = (
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/wing_starboard)
+"ah" = (
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"ai" = (
+/obj/machinery/recharge_station/ascent,
+/obj/effect/submap_landmark/spawnpoint/ascent_cutter/drone,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"aj" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/wing_starboard)
+"ak" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"al" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"am" = (
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/shuttle_starboard)
+"an" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"ao" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/empty,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ap" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/plating,
+/area/ship/ascent/fore_starboard_prow)
+"aq" = (
+/obj/machinery/portable_atmospherics/hydroponics/ascent,
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"ar" = (
+/obj/machinery/ion_engine{
+	dir = 8
+	},
+/turf/simulated/wall/r_wall/prepainted,
+/area/ship/ascent/hydroponics_port)
+"as" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"at" = (
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"au" = (
+/obj/machinery/portable_atmospherics/canister/methyl_bromide,
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"av" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"aw" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ax" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"ay" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"az" = (
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/bridge)
+"aA" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"aB" = (
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"aC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"aD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"aE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"aF" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"aG" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_internal"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"aH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"aI" = (
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/hyper/ascent/east,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"aJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"aK" = (
+/obj/structure/table/rack/dark,
+/obj/item/device/scanner/gas,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"aL" = (
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"aM" = (
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1333;
+	pixel_x = -24;
+	pixel_y = -4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"aN" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"aO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"aP" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"aQ" = (
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/habitation)
+"aR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"aS" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/fore_port_prow)
+"aT" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"aU" = (
+/obj/machinery/computer/ship/helm/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"aV" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/fore_hallway)
+"aW" = (
+/obj/structure/cable/cyan{
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/hyper/ascent/north,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"aX" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"aY" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"aZ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"ba" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"bb" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"bc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"bd" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
+"be" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"bf" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"bg" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"bh" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"bi" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"bj" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
+/area/ship/ascent/shuttle_starboard)
+"bk" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/obj/effect/overmap/ship/ascent_cutter,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"bl" = (
+/obj/effect/submap_landmark/spawnpoint/ascent_cutter/alate,
+/obj/structure/ascent_spawn,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"bm" = (
+/obj/machinery/computer/ship/engines/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"bn" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/engineering)
+"bo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"bp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"bq" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"br" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"bs" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"bt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"bu" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"bv" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"bw" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"bx" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/alarm/ascent{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"by" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	airflow_dest = "ascent_cutter_fore_external";
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_external"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"bz" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/habitation)
+"bA" = (
+/obj/effect/submap_landmark/joinable_submap/ascent_cutter,
+/turf/simulated/wall/ascent,
+/area/ship/ascent/habitation)
+"bB" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"bC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"bD" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"bE" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"bF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"bG" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"bH" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"bI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"bJ" = (
+/obj/structure/table/rack/dark,
+/obj/item/device/lightreplacer,
+/obj/item/device/lightreplacer,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"bK" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"bL" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"bM" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"bN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"bO" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"bP" = (
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/wing_port)
+"bQ" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"bR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"bS" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 4
+	},
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"bT" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc/hyper/ascent/west,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"bU" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"bV" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"bW" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/wing_port)
+"bX" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
+/area/ship/ascent/fore_starboard_prow)
+"bY" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/obj/structure/cable/cyan,
+/obj/machinery/power/apc/hyper/ascent/south,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"bZ" = (
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"ca" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 1;
+	frequency = 1331
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"cb" = (
+/obj/machinery/computer/shuttle_control/explore/ascent/two,
+/obj/effect/overmap/ship/landable/ascent/two,
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"cc" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"cd" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"ce" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_internal"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"cf" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"cg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"ch" = (
+/obj/structure/ascent_spawn,
+/obj/effect/submap_landmark/spawnpoint/ascent_cutter,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"ci" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"cj" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"ck" = (
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"cl" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"cm" = (
+/obj/structure/ascent_spawn,
+/obj/effect/submap_landmark/spawnpoint/ascent_cutter/adjunct,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"cn" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1331;
+	master_tag = "ascent_cutter_fore_dock_controller";
+	pixel_x = -4;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
+"co" = (
+/obj/structure/cable/cyan,
+/obj/machinery/power/smes/buildable/power_shuttle{
+	charge = 5e+006
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"cp" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"cq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"cr" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"cs" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/alarm/ascent{
+	pixel_y = 24
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"ct" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
+"cu" = (
+/obj/machinery/power/apc/hyper/ascent/south,
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"cv" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"cw" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"cx" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"cy" = (
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/fore_port_prow)
+"cz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"cA" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/hydroponics_port)
+"cB" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_spike)
+"cC" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"cD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"cE" = (
+/obj/machinery/door/airlock/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"cF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"cG" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"cH" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"cI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"cJ" = (
+/obj/structure/cable/cyan{
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/hyper/ascent/north,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"cK" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"cL" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"cM" = (
+/obj/machinery/atmospherics/unary/engine{
+	dir = 8
+	},
+/turf/simulated/wall/r_wall/prepainted,
+/area/ship/ascent/hydroponics_port)
+"cN" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/shuttle_port)
+"cO" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"cP" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"cQ" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"cR" = (
+/obj/structure/reagent_dispensers/water_cooler/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"cS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"cT" = (
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"cU" = (
+/obj/effect/wallframe_spawn/phoron,
+/turf/simulated/floor/plating,
+/area/ship/ascent/bridge)
+"cV" = (
+/obj/effect/wallframe_spawn/phoron,
+/turf/simulated/floor/plating,
+/area/ship/ascent/engineering)
+"cW" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"cX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"cY" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"cZ" = (
+/obj/effect/wallframe_spawn/phoron,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"da" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"db" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"dd" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"de" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"df" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dg" = (
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/light/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"di" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
+"dj" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"dk" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"dl" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"dm" = (
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dn" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"do" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"dp" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_port)
+"dq" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"dr" = (
+/obj/structure/table/rack/dark,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/glass/fifty,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"ds" = (
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dt" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"du" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dv" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"dw" = (
+/obj/machinery/autolathe/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"dx" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"dy" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dz" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"dA" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"dB" = (
+/obj/structure/ascent_spawn,
+/obj/effect/submap_landmark/spawnpoint/ascent_cutter/queen,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"dC" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"dD" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_external"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"dE" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
+"dF" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"dG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/alarm/ascent{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"dH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"dI" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"dJ" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"dK" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"dL" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"dM" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"dN" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
+/area/ship/ascent/fore_port_prow)
+"dO" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"dP" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/access_button/airlock_interior,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"dQ" = (
+/obj/effect/wallframe_spawn/phoron,
+/turf/simulated/floor/plating,
+/area/ship/ascent/wing_port)
+"dR" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/light/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"dS" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"dT" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"dU" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"dV" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"dW" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1332;
+	id_tag = "ascent_port_dock";
+	pixel_x = 4;
+	pixel_y = 24;
+	tag_airpump = "ascent_shuttle_port_vent_inner";
+	tag_chamber_sensor = "ascent_shuttle_port_interior_sensor";
+	tag_exterior_door = "ascent_shuttle_port_exterior";
+	tag_interior_door = "ascent_shuttle_port_interior"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1332;
+	id_tag = "ascent_port";
+	pixel_x = -8;
+	pixel_y = 24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"dX" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_internal"
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"dY" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/canister/empty,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"dZ" = (
+/obj/structure/cable/cyan{
+	icon_state = "0-8"
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ea" = (
+/obj/machinery/light/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1333;
+	pixel_x = 4;
+	pixel_y = -24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eb" = (
+/obj/structure/cable/cyan{
+	icon_state = "0-8"
+	},
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/obj/machinery/power/apc/hyper/ascent/east,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"ec" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"ed" = (
+/obj/structure/cable/cyan{
+	icon_state = "0-8"
+	},
+/obj/machinery/power/ascent_reactor,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"ee" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"ef" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/alarm/ascent{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"eg" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"eh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"ei" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"ej" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ek" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"el" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"em" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_pumps"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	airflow_dest = "ascent_cutter_fore_dock_controller";
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_dock_controller";
+	pixel_y = 24;
+	tag_airpump = "ascent_cutter_fore_pumps";
+	tag_exterior_door = "ascent_cutter_fore_external";
+	tag_interior_door = "ascent_cutter_fore_internal"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"en" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"eo" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_vent_outer"
+	},
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ep" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eq" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"er" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_internal"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"es" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"et" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"eu" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"ev" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	icon_state = "0-2"
+	},
+/obj/machinery/power/smes/buildable/power_shuttle{
+	charge = 5e+006
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"ew" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_pumps"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_dock_sensor";
+	pixel_y = 24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"ex" = (
+/obj/machinery/light/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ey" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_external"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/shuttle_landmark/ascent_cutter/start,
+/obj/machinery/access_button/airlock_interior{
+	command = "cycle_exterior";
+	master_tag = "ascent_port_dock";
+	pixel_x = -24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"ez" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"eA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/alarm/ascent{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"eB" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/alarm/ascent{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eD" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"eE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"eF" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_external"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"eG" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eH" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"eI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eK" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eL" = (
+/obj/machinery/door/airlock/ascent{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eM" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 8
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eO" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	airlock_type = "Internal";
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_internal"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eP" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	airlock_type = "Internal";
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_internal"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eQ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eR" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eS" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 1;
+	frequency = 1331
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eT" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"eU" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"eV" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"eZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 8
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"fa" = (
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1333;
+	id_tag = "ascent_starboard_shuttle_dock";
+	pixel_x = -24;
+	tag_airpump = "ascent_shuttle_starboard_vent_outer";
+	tag_chamber_sensor = "ascent_shuttle_starboard_shuttle_sensor";
+	tag_exterior_door = "ascent_shuttle_starboard_external";
+	tag_interior_door = "ascent_shuttle_starboard_internal"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_shuttle_sensor";
+	pixel_x = -24;
+	pixel_y = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"fb" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"fc" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_vent_outer"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"fd" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"fe" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_external"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ff" = (
+/obj/structure/window/phoronreinforced{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"fg" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_vent_inner"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"fh" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_vent_inner"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"fi" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_vent_inner"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"fj" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fk" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"fl" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fm" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"fn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1332;
+	id_tag = "ascent_port_shuttle_dock";
+	pixel_x = 24;
+	tag_airpump = "ascent_shuttle_port_vent_outer";
+	tag_chamber_sensor = "ascent_shuttle_port_shuttle_sensor";
+	tag_exterior_door = "ascent_shuttle_port_external";
+	tag_interior_door = "ascent_shuttle_port_internal"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_shuttle_sensor";
+	pixel_x = 24;
+	pixel_y = -12
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fs" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ft" = (
+/obj/machinery/door/airlock/ascent{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fu" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"fv" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_vent_inner"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"fw" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"fx" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"fy" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_vent_outer"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fz" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"fA" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"fB" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fC" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc/hyper/ascent/north,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"fD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"fF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fG" = (
+/obj/machinery/hologram/holopad/longrange/ascent,
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fH" = (
+/obj/machinery/computer/ship/sensors/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fI" = (
+/obj/machinery/computer/ship/engines/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fJ" = (
+/obj/structure/bed/chair/padded/purple/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"fK" = (
+/obj/structure/bed/chair/padded/purple/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"fL" = (
+/obj/machinery/computer/ship/navigation/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fM" = (
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fN" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"fO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"fP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"fQ" = (
+/turf/simulated/wall/ascent,
+/area/ship/ascent/fore_port_spike)
+"fR" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_spike)
+"fS" = (
+/obj/structure/window/phoronreinforced,
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"fT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"fU" = (
+/obj/machinery/computer/ship/sensors/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"fV" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/gun/energy/particle/small,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"fW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"fX" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/visible/universal{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"fY" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"fZ" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"ga" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/visible/universal{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gb" = (
+/obj/machinery/atmospherics/binary/pump/high_power{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"gc" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"gd" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ge" = (
+/obj/machinery/light/ascent,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gf" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"gh" = (
+/obj/structure/window/phoronreinforced,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gi" = (
+/obj/machinery/atmospherics/omni/mixer,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"gj" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"gk" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gl" = (
+/obj/machinery/atmospherics/binary/pump/high_power{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gm" = (
+/obj/machinery/atmospherics/omni/mixer,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gn" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"go" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gp" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"gq" = (
+/obj/machinery/access_button/airlock_interior,
+/turf/simulated/wall/ascent,
+/area/ship/ascent/shuttle_starboard)
+"gr" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1331;
+	id_tag = "ascent_cutter_fore_pumps"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"gs" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_internal"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"gt" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"gu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"gv" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_vent_outer"
+	},
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"gw" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"gx" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"gy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/power/shield_generator,
+/obj/structure/cable/cyan{
+	icon_state = "0-8"
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"gA" = (
+/obj/machinery/computer/ship/sensors/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"gB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_hallway)
+"gC" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"gD" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"gE" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"gF" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"gG" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"gH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"gI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"gJ" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"gK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"gL" = (
+/obj/machinery/portable_atmospherics/canister/empty,
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gM" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	icon_state = "0-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/power/smes/buildable/power_shuttle{
+	charge = 5e+006
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gN" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan,
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gO" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan,
+/obj/machinery/power/smes/buildable/power_shuttle{
+	charge = 5e+006
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gP" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"gQ" = (
+/obj/effect/wallframe_spawn/phoron,
+/turf/simulated/floor/plating,
+/area/ship/ascent/wing_starboard)
+"gR" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/obj/structure/bed/chair/padded/purple/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"gS" = (
+/obj/machinery/ion_engine{
+	dir = 1
+	},
+/turf/simulated/wall/r_wall/prepainted,
+/area/ship/ascent/shuttle_starboard)
+"gT" = (
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"gU" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gV" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gW" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+/obj/item/weapon/reagent_containers/food/snacks/meat/beef,
+/obj/item/weapon/reagent_containers/food/snacks/meat/beef,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"gX" = (
+/obj/machinery/portable_atmospherics/canister/empty,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"gY" = (
+/obj/effect/wallframe_spawn/phoron,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/ship/ascent/hydroponics_starboard)
+"gZ" = (
+/obj/machinery/portable_atmospherics/hydroponics/ascent,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"ha" = (
+/obj/machinery/ion_engine{
+	dir = 8
+	},
+/turf/simulated/wall/r_wall/prepainted,
+/area/ship/ascent/hydroponics_starboard)
+"hb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"hc" = (
+/obj/structure/bed/chair/padded/purple/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"hd" = (
+/obj/machinery/ion_engine{
+	dir = 8
+	},
+/turf/simulated/wall/r_wall/prepainted,
+/area/ship/ascent/engineering)
+"he" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"hf" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"hg" = (
+/obj/effect/wallframe_spawn/phoron,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/ship/ascent/hydroponics_port)
+"hh" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"hi" = (
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"hj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"hk" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/rig/mantid/nabber/queen,
+/obj/item/weapon/rig/mantid/nabber/queen,
+/obj/item/weapon/gun/energy/particle/small,
+/obj/item/weapon/gun/energy/particle/small,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"hl" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
+/area/ship/ascent/engineering)
+"hm" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/rig/mantid/nabber,
+/obj/item/weapon/rig/mantid/nabber,
+/obj/item/weapon/rig/mantid/nabber,
+/obj/item/weapon/gun/energy/particle,
+/obj/item/weapon/gun/energy/particle,
+/obj/item/weapon/gun/energy/particle,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"hn" = (
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/obj/structure/kitchenspike,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"ho" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/gun/energy/particle/small,
+/obj/item/weapon/rig/mantid/gyne,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"hp" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"hq" = (
+/obj/effect/wallframe_spawn/phoron,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"hr" = (
+/obj/machinery/power/apc/hyper/ascent/north,
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_spike)
+"hs" = (
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_spike)
+"ht" = (
+/obj/structure/bed/chair/padded/purple/ascent/gyne,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"hu" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/fore_port_prow)
+"hv" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/structure/table/rack/dark,
+/obj/item/stack/medical/resin,
+/obj/item/stack/medical/resin,
+/obj/item/stack/medical/resin,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"hw" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/machinery/optable/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"hx" = (
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"hy" = (
+/obj/machinery/light/ascent,
+/obj/machinery/optable/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"hz" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/phoronrglass/ten,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"hA" = (
+/obj/structure/table/rack/dark,
+/obj/item/clustertool,
+/obj/item/clustertool,
+/obj/item/clustertool,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"hB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_spike)
+"hC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_spike)
+"hD" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_spike)
+"hE" = (
+/obj/structure/kitchenspike,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"hF" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/structure/table/rack/dark,
+/obj/item/weapon/gun/energy/particle/small,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"hG" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"hH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"hI" = (
+/obj/machinery/access_button/airlock_interior,
+/turf/simulated/wall/r_wall/ascent,
+/area/ship/ascent/wing_starboard)
+"hJ" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"hK" = (
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"hL" = (
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"hM" = (
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"hN" = (
+/obj/structure/table/rack/dark,
+/obj/item/device/multitool/mantid,
+/obj/item/device/multitool/mantid,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"hO" = (
+/obj/structure/table/rack/dark,
+/obj/item/device/multitool/mantid,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"hP" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/stack/material/glass/reinforced/fifty,
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"hQ" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/aluminium/fifty,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"hR" = (
+/obj/structure/table/rack/dark,
+/obj/item/stack/medical/resin,
+/obj/item/stack/medical/resin,
+/obj/item/stack/medical/resin,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"hS" = (
+/obj/structure/table/rack/dark,
+/obj/item/stack/medical/bruise_pack,
+/obj/item/stack/medical/bruise_pack,
+/obj/item/stack/medical/ointment,
+/obj/item/stack/medical/ointment,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"hT" = (
+/obj/structure/table/rack/dark,
+/obj/item/stack/medical/splint,
+/obj/item/stack/medical/splint,
+/obj/item/stack/medical/splint,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"hU" = (
+/obj/structure/window/phoronreinforced{
+	dir = 4
+	},
+/obj/structure/window/phoronreinforced,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"hV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"hW" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"hX" = (
+/obj/machinery/light/ascent,
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_spike)
+"hY" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"hZ" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/reagent_containers/food/snacks/meat/beef,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"ia" = (
+/obj/machinery/door/airlock/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"ib" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_spike)
+"ic" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"id" = (
+/obj/machinery/computer/ship/navigation/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ie" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_external"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"if" = (
+/obj/machinery/computer/ship/engines/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ig" = (
+/obj/machinery/computer/ship/sensors/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"ih" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc/hyper/ascent/west,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_prow)
+"ii" = (
+/obj/machinery/computer/ship/helm/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port{
+	dir = 1
+	})
+"ij" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ik" = (
+/obj/machinery/ion_engine,
+/turf/simulated/wall/r_wall/prepainted,
+/area/ship/ascent/shuttle_port)
+"il" = (
+/obj/machinery/light/ascent,
+/obj/structure/table/rack/dark,
+/obj/item/weapon/gun/energy/particle/small,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
+"im" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"in" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"io" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ip" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/alarm/ascent{
+	dir = 4;
+	pixel_x = -24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iq" = (
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ir" = (
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"is" = (
+/obj/structure/cable/cyan,
+/obj/machinery/power/apc/hyper/ascent/west,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"it" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_external"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"iu" = (
+/obj/machinery/computer/ship/engines/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"iv" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1332;
+	master_tag = "ascent_port_shuttle_dock";
+	pixel_x = 4;
+	pixel_y = 24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ix" = (
+/obj/structure/bed/chair/padded/purple/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"iy" = (
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1333;
+	pixel_x = 24;
+	pixel_y = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"iz" = (
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1332;
+	master_tag = "ascent_port_dock";
+	pixel_x = 24;
+	pixel_y = -4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"iA" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iB" = (
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1332;
+	master_tag = "ascent_port_dock";
+	pixel_x = -24;
+	pixel_y = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"iC" = (
+/obj/machinery/computer/shuttle_control/explore/ascent{
+	dir = 1
+	},
+/obj/effect/overmap/ship/landable/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"iD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iE" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_external"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/shuttle_landmark/ascent_cutter/start/two,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"iF" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/rig/mantid,
+/obj/item/weapon/rig/mantid,
+/obj/item/weapon/gun/energy/particle/small,
+/obj/item/weapon/gun/energy/particle/small,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"iG" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_external"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"iH" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/empty,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iI" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 1;
+	frequency = 1331
+	},
+/obj/machinery/alarm/ascent{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"iJ" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"iK" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/machinery/light/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"iL" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 1;
+	frequency = 1331
+	},
+/obj/machinery/alarm/ascent{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"iM" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/obj/machinery/alarm/ascent{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"iN" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iO" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iP" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/obj/machinery/alarm/ascent{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"iQ" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	airlock_type = "Internal";
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_internal"
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"iR" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 1
+	},
+/obj/machinery/alarm/ascent{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/habitation)
+"iS" = (
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"iT" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/storage/box/glasses,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"iU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/alarm/ascent{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"iV" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"iW" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/empty,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"iX" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
+/area/ship/ascent/shuttle_port)
+"iY" = (
+/obj/structure/table/rack/dark,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"iZ" = (
+/obj/machinery/light/ascent,
+/obj/structure/table/rack/dark,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"ja" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/structure/table/rack/dark,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"jb" = (
+/obj/structure/table/rack/dark,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"jc" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"jd" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/alarm/ascent{
+	pixel_y = 24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"je" = (
+/obj/machinery/alarm/ascent{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"jf" = (
+/obj/machinery/alarm/ascent{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"jg" = (
+/obj/machinery/sleeper/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"jh" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/alarm/ascent{
+	pixel_y = 24
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"ji" = (
+/obj/machinery/alarm/ascent{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/engineering)
+"jj" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"jk" = (
+/obj/machinery/alarm/ascent{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
+"jl" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"jm" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"jn" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"jo" = (
+/obj/structure/cable/cyan{
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc/hyper/ascent/south,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"jp" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/methyl_bromide,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"jq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/machinery/light/ascent,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"jr" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1333;
+	id_tag = "ascent_starboard_dock";
+	pixel_x = 4;
+	pixel_y = -24;
+	tag_airpump = "ascent_shuttle_starboard_vent_inner";
+	tag_chamber_sensor = "ascent_shuttle_starboard_interior_sensor";
+	tag_exterior_door = "ascent_shuttle_starboard_external";
+	tag_interior_door = "ascent_shuttle_starboard_internal"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/machinery/airlock_sensor{
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_interior_sensor";
+	pixel_x = -8;
+	pixel_y = -24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"js" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	airlock_type = "Internal";
+	frequency = 1333;
+	id_tag = "ascent_shuttle_starboard_internal"
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_starboard)
+"jt" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"ju" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"jv" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"jw" = (
+/obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/hyper/ascent/north,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"jx" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 4
+	},
+/obj/structure/table/steel_reinforced,
+/obj/item/device/scanner/health,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"jy" = (
+/obj/machinery/light/ascent,
+/obj/structure/table/steel_reinforced,
+/obj/item/device/robotanalyzer,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"jz" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light/ascent,
+/obj/item/weapon/weldingtool/electric/mantid,
+/obj/item/weapon/weldingtool/electric/mantid,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/engineering)
+"jA" = (
+/obj/machinery/light/ascent,
+/obj/structure/table/rack/dark,
+/obj/item/clustertool,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_starboard)
+"jB" = (
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/alarm/ascent{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"jC" = (
+/obj/machinery/computer/ship/helm/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"jD" = (
+/obj/machinery/computer/ship/navigation/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"jE" = (
+/obj/structure/bed/chair/padded/purple/ascent/gyne,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_prow)
+"jF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"jG" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"jH" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
+	dir = 1;
+	frequency = 1331
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"jI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"jJ" = (
+/obj/machinery/light/ascent,
+/obj/machinery/body_scanconsole/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"jK" = (
+/obj/machinery/bodyscanner/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
+"jL" = (
+/obj/structure/cable/cyan,
+/obj/machinery/power/apc/hyper/ascent/south,
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/wing_port)
+"jM" = (
+/obj/machinery/door/airlock/external/bolted/ascent{
+	frequency = 1332;
+	id_tag = "ascent_shuttle_port_external"
+	},
+/obj/machinery/access_button/airlock_interior{
+	command = "cycle_exterior";
+	master_tag = "ascent_port_shuttle_dock";
+	pixel_x = 24
+	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"jN" = (
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/smes/buildable/power_shuttle{
+	charge = 5e+006
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"jO" = (
+/obj/structure/cable/cyan{
+	icon_state = "0-4"
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
+"jP" = (
+/obj/machinery/computer/ship/navigation/ascent{
+	dir = 1
+	},
+/obj/machinery/light/ascent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"jQ" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"jR" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/light/ascent{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"jS" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"jT" = (
+/obj/machinery/access_button/airlock_interior{
+	command = "cycle_exterior";
+	frequency = 1331;
+	master_tag = "ascent_cutter_fore_dock_controller";
+	pixel_x = -8;
+	pixel_y = -4
+	},
+/turf/simulated/wall/ascent,
+/area/ship/ascent/fore_hallway)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(3,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(5,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(6,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(8,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(9,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(10,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(11,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(12,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(14,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(15,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(16,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(17,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(18,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(19,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(20,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(21,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(23,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(24,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+al
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+fQ
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(26,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aL
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hs
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(27,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aL
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hs
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(28,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aL
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hs
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(29,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+al
+aL
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hs
+fQ
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(30,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aL
+aL
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hs
+hs
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(31,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aP
+aA
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+fR
+hD
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(32,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aL
+aA
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+fR
+hs
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(33,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aL
+aA
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+fR
+hs
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(34,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aL
+aA
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+fR
+hs
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(35,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aA
+aA
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+fR
+fR
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(36,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+aA
+cu
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hr
+fR
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(37,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+bh
+cw
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hB
+hX
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(38,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+al
+cp
+cB
+al
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+fQ
+hC
+ib
+fQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(39,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+ac
+ac
+cE
+ac
+ac
+aa
+jT
+by
+dD
+dD
+aV
+aa
+aS
+aS
+hG
+aS
+aS
+aS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(40,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+ac
+as
+aF
+dC
+dL
+ac
+bX
+aV
+em
+el
+gr
+aV
+dN
+aS
+fO
+hb
+hn
+hE
+aS
+aS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(41,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ap
+as
+as
+as
+as
+dM
+ac
+cH
+ac
+bD
+gB
+cx
+aS
+ee
+aS
+fP
+cv
+cv
+cv
+af
+dT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(42,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ap
+as
+as
+as
+as
+dC
+dL
+dR
+ac
+ew
+eq
+gr
+aS
+fN
+fO
+hb
+hi
+jv
+cv
+af
+dT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(43,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ap
+as
+as
+as
+as
+as
+hH
+jQ
+ac
+aG
+er
+aG
+aS
+hJ
+hb
+jE
+hi
+cv
+cv
+hi
+dT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(44,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ap
+as
+as
+as
+as
+as
+as
+hV
+ac
+cn
+es
+ct
+aS
+eh
+cv
+cv
+hi
+jv
+cv
+hi
+dT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(45,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+ac
+bB
+as
+as
+as
+as
+hW
+ah
+cJ
+et
+jk
+cy
+ei
+cv
+cv
+cv
+cv
+hK
+aS
+aS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(46,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+as
+as
+as
+as
+as
+dG
+ia
+bp
+ez
+bp
+aY
+eA
+cv
+cv
+cv
+cv
+cv
+aS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(47,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ah
+as
+as
+as
+aX
+ah
+ah
+ac
+di
+gg
+dE
+aS
+cy
+cy
+gF
+cv
+cv
+cv
+dT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(48,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+aa
+ah
+as
+as
+as
+cO
+bT
+ah
+bd
+bd
+gg
+bd
+bd
+cy
+ih
+hp
+cv
+hc
+hY
+hu
+aa
+cN
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(49,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ae
+gS
+aa
+cL
+as
+as
+as
+bi
+hj
+ia
+bp
+bp
+cf
+bp
+bp
+aY
+cS
+fT
+cv
+hc
+hZ
+dT
+aa
+ik
+cQ
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(50,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ae
+ae
+gS
+aa
+cL
+as
+as
+as
+bV
+as
+ah
+bd
+bd
+gg
+bd
+bd
+cy
+iT
+dk
+cv
+hc
+ic
+hu
+aa
+ik
+cQ
+cQ
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(51,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ae
+ae
+iY
+ab
+aa
+ah
+bB
+as
+as
+as
+as
+ah
+aQ
+aQ
+dP
+aQ
+aQ
+cy
+cR
+cv
+cv
+hK
+cy
+cy
+aa
+cN
+cQ
+cQ
+cQ
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(52,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+fw
+ae
+ae
+iY
+ab
+aa
+ah
+as
+as
+as
+ah
+ah
+ah
+cW
+bb
+br
+bb
+dF
+cy
+cy
+cy
+cv
+hc
+ic
+dT
+aa
+cN
+je
+cQ
+cQ
+fx
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(53,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ao
+ba
+jS
+aR
+iZ
+ab
+aa
+ah
+as
+as
+as
+ah
+hk
+bb
+bt
+bN
+bU
+bN
+cz
+bb
+iF
+cy
+cv
+hc
+hY
+hu
+aa
+cN
+dJ
+cQ
+cQ
+gT
+cQ
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(54,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+at
+dl
+jS
+eI
+eR
+gS
+aa
+ah
+as
+as
+as
+cZ
+hm
+bb
+br
+bb
+eb
+bb
+br
+bb
+iF
+hq
+cv
+hc
+hZ
+dT
+aa
+ik
+eT
+fq
+cQ
+gT
+cQ
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(55,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+au
+eK
+ae
+bC
+ae
+gS
+aa
+ah
+bB
+as
+as
+ah
+aQ
+fJ
+br
+bu
+bz
+fJ
+br
+bu
+aQ
+cy
+cv
+hK
+cy
+cy
+aa
+ik
+cQ
+fr
+cQ
+gT
+cQ
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(56,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aw
+jR
+ae
+bG
+iI
+gS
+aa
+ah
+as
+as
+as
+ah
+bl
+bb
+bE
+bK
+bA
+gR
+fA
+bb
+cm
+cy
+cv
+hc
+gW
+hu
+aa
+ik
+iM
+fs
+gT
+iS
+cQ
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(57,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+eL
+ab
+ab
+ab
+ah
+as
+as
+as
+ah
+ch
+bb
+br
+iR
+bz
+fJ
+br
+bb
+dB
+cy
+cv
+hc
+ic
+cy
+cN
+cN
+cN
+ft
+cN
+cN
+cN
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(58,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+cT
+cT
+bH
+cT
+eM
+eY
+eS
+ab
+ah
+as
+as
+as
+ah
+bl
+bb
+br
+bb
+cc
+bb
+br
+bb
+cm
+cy
+cv
+hc
+hY
+cy
+cN
+jN
+fj
+fz
+eH
+io
+ip
+is
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(59,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+gA
+ae
+ae
+ae
+dH
+eN
+eZ
+fd
+ab
+ah
+as
+as
+iy
+ah
+aQ
+fJ
+bF
+cz
+bb
+bt
+cF
+bu
+aQ
+cy
+iz
+cv
+cv
+cy
+cN
+jO
+iH
+gd
+ij
+cQ
+cQ
+cQ
+cN
+iX
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(60,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+id
+in
+ae
+ae
+ea
+am
+am
+am
+gq
+ah
+ah
+iQ
+ah
+ah
+cW
+bb
+bb
+br
+bb
+br
+bb
+bb
+dF
+cy
+cy
+ce
+cy
+cy
+cN
+ej
+iO
+cN
+iv
+cQ
+cQ
+ig
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(61,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aU
+ae
+ae
+ae
+ep
+eO
+fa
+eo
+ie
+iE
+fv
+jq
+ag
+bb
+bb
+az
+az
+bO
+az
+bO
+az
+az
+bb
+bb
+bP
+do
+fh
+ey
+fe
+fy
+fl
+gs
+iw
+cQ
+cQ
+bs
+jP
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(62,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+cb
+im
+ae
+ae
+ep
+eP
+fb
+fc
+it
+iG
+fg
+jr
+ag
+az
+az
+az
+be
+bR
+az
+bR
+be
+az
+az
+az
+bW
+dW
+fi
+eF
+jM
+gv
+fn
+gs
+iw
+cQ
+cQ
+cQ
+ii
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(63,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+if
+ae
+ae
+ex
+am
+iJ
+ad
+ab
+hI
+ag
+js
+ag
+az
+ck
+fL
+be
+iU
+az
+bR
+be
+fL
+ck
+az
+bW
+dX
+bP
+bP
+cN
+cN
+cN
+cN
+iA
+cQ
+cQ
+ix
+iC
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(64,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+bj
+ab
+ae
+ae
+ae
+eC
+eQ
+dY
+dZ
+am
+ag
+aM
+bq
+az
+az
+bm
+cY
+be
+bR
+fG
+bR
+be
+fK
+fI
+az
+az
+gE
+iB
+bP
+cN
+fm
+fo
+gt
+iD
+cQ
+cQ
+cQ
+iu
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(65,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+aI
+eB
+eG
+fu
+eV
+fu
+co
+ab
+ag
+cG
+bx
+az
+fV
+ck
+fH
+be
+cg
+fB
+fF
+be
+fH
+ck
+fV
+az
+jd
+dA
+bP
+cN
+eU
+fp
+gu
+gT
+iS
+gT
+gT
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(66,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+eL
+ab
+ab
+ab
+ag
+an
+fW
+az
+dq
+be
+be
+be
+be
+bR
+be
+be
+be
+be
+dx
+az
+jF
+cl
+bP
+cN
+cN
+cN
+ft
+cN
+cN
+cN
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(67,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aB
+bH
+cT
+eW
+iL
+gS
+aa
+cP
+ak
+gG
+aN
+bc
+bc
+bc
+bc
+bc
+bk
+bc
+bc
+bc
+bc
+fD
+aN
+jG
+bQ
+dU
+aa
+ik
+iP
+gu
+gT
+jc
+jl
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(68,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aB
+cT
+ae
+eJ
+ae
+gS
+aa
+cP
+bg
+gH
+az
+be
+be
+be
+be
+bv
+bo
+bL
+be
+be
+be
+jo
+az
+jI
+jH
+dU
+aa
+ik
+cQ
+iw
+gT
+jj
+jp
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(69,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aB
+cT
+ae
+eX
+eR
+gS
+aa
+cP
+ak
+bI
+az
+hF
+ck
+fL
+be
+jC
+fM
+jD
+be
+fL
+ck
+il
+az
+gI
+bQ
+dU
+aa
+ik
+eT
+gw
+iN
+jt
+iV
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(70,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aB
+cT
+ae
+ae
+dI
+ab
+aa
+ag
+ag
+cj
+az
+az
+bm
+cY
+be
+bm
+ht
+fU
+be
+fK
+fI
+az
+az
+gJ
+bP
+bP
+aa
+cN
+ja
+gD
+iN
+ju
+iW
+dV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(71,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+iq
+ae
+ae
+ae
+ab
+aa
+ag
+ai
+bI
+aK
+az
+ck
+fH
+be
+be
+be
+be
+be
+fH
+ck
+az
+hS
+gI
+bQ
+bP
+aa
+cN
+jb
+cQ
+cQ
+ir
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(72,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ae
+ae
+ae
+ab
+aa
+ag
+ag
+aC
+bJ
+az
+az
+az
+dq
+be
+ho
+be
+dx
+az
+az
+az
+hT
+gI
+jJ
+bP
+aa
+cN
+jb
+cQ
+cQ
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(73,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ae
+ae
+gS
+aa
+ag
+ai
+bI
+bS
+hO
+jA
+az
+az
+cU
+cU
+cU
+az
+az
+hv
+hR
+jx
+gI
+jK
+dU
+aa
+ik
+cQ
+cQ
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(74,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ae
+gS
+aa
+ag
+ag
+aC
+aO
+aZ
+ak
+jf
+ag
+bf
+ci
+ca
+bP
+jg
+bQ
+cd
+da
+gI
+bQ
+dU
+aa
+ik
+cQ
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(75,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+aa
+ag
+aW
+cq
+cr
+cI
+cI
+cI
+cK
+du
+ek
+du
+gx
+gz
+gz
+gz
+gC
+gK
+jL
+bP
+aa
+cN
+cN
+cN
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(76,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ag
+dw
+ak
+ax
+ak
+ak
+ak
+aj
+dt
+en
+dv
+bW
+jB
+bQ
+bQ
+dc
+bQ
+hx
+bP
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(77,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aj
+aj
+dr
+ax
+ak
+jy
+aj
+aj
+dO
+en
+ji
+bW
+hw
+bQ
+bQ
+dc
+bQ
+hy
+bW
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(78,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aj
+aj
+gQ
+ay
+ag
+aj
+bn
+bn
+bn
+eu
+bn
+bn
+bW
+bW
+bP
+dd
+dQ
+bW
+bW
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(79,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+aq
+aJ
+aD
+bY
+bn
+gL
+db
+eg
+eE
+eg
+gU
+gX
+bn
+jw
+cD
+he
+gZ
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(80,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+aq
+dS
+aE
+ef
+bn
+gL
+df
+ds
+fE
+ds
+gV
+gX
+bn
+jh
+cX
+hf
+gZ
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(81,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+av
+gY
+aH
+fX
+cV
+gL
+dn
+bw
+gy
+bM
+jn
+gX
+cV
+ga
+dh
+hg
+cA
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(82,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+aq
+dS
+aT
+fY
+cV
+hz
+dy
+ev
+gM
+gO
+ds
+hQ
+cV
+gk
+dp
+hf
+gZ
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(83,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+aq
+dS
+hL
+gb
+cV
+hA
+dy
+dK
+eD
+gN
+ds
+hN
+cV
+gl
+hM
+hf
+gZ
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(84,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+av
+gY
+de
+fY
+cV
+hA
+dy
+bZ
+ec
+fS
+ds
+hN
+cV
+gk
+ge
+hg
+cA
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(85,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+aq
+dS
+cC
+gi
+bn
+hP
+dy
+dg
+ed
+gh
+ds
+jz
+bn
+gm
+go
+hf
+gZ
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(86,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+aq
+gP
+dj
+gj
+bn
+bn
+cs
+dm
+ff
+hU
+ds
+ds
+bn
+gn
+gp
+hh
+gZ
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(87,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+av
+av
+dz
+gc
+av
+bn
+fC
+ds
+ds
+ds
+ds
+ds
+cA
+jm
+gf
+cA
+cA
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(88,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+dz
+gc
+av
+hd
+bn
+ds
+fk
+ds
+bn
+hd
+cA
+jm
+gf
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(89,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+fZ
+gc
+av
+aa
+hd
+bn
+bn
+bn
+hd
+aa
+cA
+jm
+iK
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(90,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+hL
+hL
+av
+aa
+aa
+hd
+hl
+hd
+aa
+aa
+cA
+hM
+hM
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(91,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+av
+hL
+hL
+av
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cA
+hM
+hM
+cA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(92,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ha
+av
+hL
+av
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cA
+hM
+cA
+ar
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(93,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ha
+av
+av
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cA
+cA
+ar
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(94,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ha
+av
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cA
+cM
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(95,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ha
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ar
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(96,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(97,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(98,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(99,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(100,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(101,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(102,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(103,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(104,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(105,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(106,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(107,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(108,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(109,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(110,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(111,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(112,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(113,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(114,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(115,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(116,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(117,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(118,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(119,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(120,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
