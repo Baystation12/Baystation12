@@ -451,7 +451,7 @@
 	interface_name = "mounted cooling unit"
 	interface_desc = "A heat sink with a liquid cooled radiator and an integrated kinetic battery. Uses kinetic motion to store energy to power the RIG for long term use. Activate to generate power and maintain a cool core temperature."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
-	var/charge_consumption = -1 MEGAWATTS //rig suits in dead space don't reallz use power, they are vulnerable to EMPs but my guess is they somehow generate power through a user's body as they will last pretty much forever so long as the user is alive, putting this here so all rig suits with cooling module are considered to have limitless power. hacky way to approach it but much less conflict than stripping out all the hardsuit code relating to power.
+	var/charge_consumption = -1 MEGAWATTS //rig suits in dead space don't really use power, they are vulnerable to EMPs but my guess is they somehow generate power through a user's body as they will last pretty much forever so long as the user is alive, putting this here so all rig suits with cooling module are considered to have limitless power. hacky way to approach it but much less conflict than stripping out all the hardsuit code relating to power.
 	var/max_cooling = 12
 	var/thermostat = T20C
 
