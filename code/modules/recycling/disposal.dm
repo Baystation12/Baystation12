@@ -339,7 +339,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return
 
 	// 	check for items in disposal - occupied light
-	if(contents.len > 0)
+	if(contents.len > LAZYLEN(component_parts))
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
 
 	// charging and ready light
