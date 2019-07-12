@@ -1510,6 +1510,7 @@
 #include "code\modules\halo\floorsigns\floorsigns.dm"
 #include "code\modules\halo\Forerunner\monitor.dm"
 #include "code\modules\halo\Forerunner\sentinel.dm"
+#include "code\modules\halo\Forerunner\sentinel_spawner.dm"
 #include "code\modules\halo\insurrection\access_ids.dm"
 #include "code\modules\halo\insurrection\innie_factions_comms.dm"
 #include "code\modules\halo\insurrection\innie_factions_controller.dm"

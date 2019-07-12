@@ -192,6 +192,18 @@
 	explosion(T, 2, 4, 6, 8, adminlog = 0)
 	new /obj/effect/gibspawner/robot(T)
 
+/mob/living/simple_animal/hostile/monitor/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	if(istype(P, /obj/item/projectile/beam/sentinel))
+		return PROJECTILE_FORCE_MISS
+
+	if(istype(P, /obj/item/projectile/beam/monitor))
+		return PROJECTILE_FORCE_MISS
+
+	if(istype(P, /obj/item/projectile/beam/monitor_stun))
+		return PROJECTILE_FORCE_MISS
+
+	return ..()
+
 // random monitor name
 
 /proc/monitor_name()

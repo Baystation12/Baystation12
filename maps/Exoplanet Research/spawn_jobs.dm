@@ -153,6 +153,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	selection_color = "#008000"
 	access = list(310,311)
 	spawnpoint_override = "Research Facility Spawn"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/researchdirector
 	title = "Research Director"
@@ -162,6 +163,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	selection_color = "#008000"
 	access = list(310,311)
 	spawnpoint_override = "Research Facility Director Spawn"
+	whitelisted_species = list(/datum/species/human)
 
 
 /datum/job/ONIGUARD
@@ -172,6 +174,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	selection_color = "#008000"
 	access = list(311)
 	spawnpoint_override = "Research Facility Security Spawn"
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/ONIGUARDS
 	title = "ONI Security Squad Leader"
@@ -181,3 +184,4 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	selection_color = "#008000"
 	access = list(311)
 	spawnpoint_override = "Research Facility Security Spawn"
+	whitelisted_species = list(/datum/species/human)
