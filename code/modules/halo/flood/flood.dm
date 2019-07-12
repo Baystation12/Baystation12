@@ -109,7 +109,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "anim"
 	icon_dead = "dead"
 	pass_flags = PASSTABLE
-	//
+	mob_size = MOB_MINISCULE
 	move_to_delay = 15
 	health = 1
 	maxHealth = 1
@@ -145,9 +145,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/infest_airlocks_nearby()
 	for(var/obj/machinery/door/airlock/door in view(2,src))
-		if(door.welded == 1)
-			return
-		else if(door.stat & BROKEN)
+		if(door.stat & BROKEN || door.welded == 1)
 			continue
 		visible_message("<span class = 'danger'>[name] leaps at [door], burrowing into the access control mechanisms...</span>")
 		adjustBruteLoss(1)
@@ -340,6 +338,23 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 	spawn_infestor()
 
+/mob/living/simple_animal/hostile/flood/combat_form/verb/smash_airlocks_nearby()
+	set name = "Destroy Weld"
+	set category = "Abilities"
+
+	if(stat == DEAD)
+		to_chat(usr,"<span class = 'notice'>You can't do that, you're dead!</span>")
+		return
+	smash_airlock()
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/smash_airlock()
+	for(var/obj/machinery/door/airlock/door in view(1,src))
+		if(door.welded == 1)
+			visible_message("<span class = 'danger'>[name] swipes at [door], swiftly slicing the crude welding apart!</span>")
+			door.welded = 0
+			door.update_icon()
+			playsound(src.loc, 'sound/effects/grillehit.ogg', 80)
+
 /mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
 	if(our_gun) //Only class us as an advanced tool user if we need it to use our gun.
 		return 1
@@ -398,6 +413,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return
 	if(human_in_sight() && isnull(our_infestor))
 		spawn_infestor()
+	if(locate(/obj/machinery/door/airlock) in view(1,src))
+		smash_airlock()
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)
@@ -413,6 +430,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
+	resistance = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 35
 	attacktext = "bashed"
@@ -427,6 +445,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 200 //Combat forms need to be hardier.
 	maxHealth = 200
+	resistance = 5
 	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
@@ -446,6 +465,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 150 //Combat forms need to be hardier.
 	maxHealth = 150
+	resistance = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 30
 	attacktext = "bashed"
@@ -460,6 +480,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 200 //Combat forms need to be hardier.
 	maxHealth = 200
+	resistance = 5
 	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
@@ -563,7 +584,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "abomination_dead"
 	move_to_delay = 2 //fast enough to give a sense of danger and muscle
 	resistance = 5
-	health = 200
+	health = 250
 	maxHealth = 250 //these will be specifically put in certain locations and not RNG based
 	melee_damage_lower = 30
 	melee_damage_upper = 40

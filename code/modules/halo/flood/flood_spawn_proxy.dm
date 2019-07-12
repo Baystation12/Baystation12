@@ -63,14 +63,8 @@
 	var/dest = locate(spawn_spot_x, spawn_spot_y, z)			//picks the location based on x and y. automatically chooses the z the trigger is on.
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 80, 1, 0) //sound played at step trigger
 	src.loc.visible_message("<span class='danger'>A swarm of monsters bursts from a nearby air vent!</span>")
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)	//todo: figure out better way of spawning without this spam
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)
-	new /mob/living/simple_animal/hostile/flood/infestor(dest)
+	for(var/i = 0 to 8)
+		new /mob/living/simple_animal/hostile/flood/infestor(dest)
 	GLOB.processing_objects.Remove(src)							//removes from global list
 	uses--
 	if(uses <= 0)												//redundant < in case of a use failure or bug
