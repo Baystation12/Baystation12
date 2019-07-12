@@ -23,6 +23,10 @@
 
 	light_color = "#E1FDFF"
 
+/obj/vehicles/warthog/on_death()
+	. = ..()
+	guns_disabled = 0
+
 /obj/item/vehicle_component/health_manager/warthog
 	integrity = 500
 	resistances = list("brute"=40,"burn"=35,"emp"=25,"bomb"=25)

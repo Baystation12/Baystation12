@@ -30,6 +30,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	min_gas = list()
 	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
+<<<<<<< HEAD
 	death_sounds = list('sound/flood/death.death10.ogg','sound/flood/death.death15.ogg',\
 						'sound/flood/death.death2.ogg','sound/flood/death.death20.ogg',\
 						'sound/flood/death.death3.ogg','sound/flood/death.death4.ogg',\
@@ -37,6 +38,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	pain_scream_sounds = list('sound/flood/pain.pain1.ogg','sound/flood/pain.pain15.ogg',\
 							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
 							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
+=======
+	assault_target_type = /obj/effect/landmark/assault_target
+>>>>>>> 294dc2374d0d03bcf890a32ad309a9ced5c82a52
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()
@@ -44,11 +48,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(flood_spawner)
 		flood_spawner.flood_die(src)
 		flood_spawner = null
-
-/mob/living/simple_animal/hostile/proc/set_assault_target(var/turf/T)
-	assault_target = T
-	if(assault_target)
-		target_margin = rand(12,2)
 
 /mob/living/simple_animal/hostile/flood/New()
 	..()
@@ -61,23 +60,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	..()
 	if(client || ckey)
 		target_mob = null
-	if(assault_target && stance == HOSTILE_STANCE_IDLE)
-		//spawn(rand(-1,20))
-		wander = 0
-		stop_automated_movement = 1
-		dir = get_dir(src, assault_target)
-		var/turf/target_turf = get_step_towards(src,assault_target)
-		Move(target_turf)
-			/*else
-				var/moving_to = pick(GLOB.cardinal)
-				set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
-				Move(get_step(src,moving_to))*/
-
-	if(get_dist(assault_target, src) < target_margin)
-		set_assault_target(0)
-		if(prob(50))
-			wander = 1
-			stop_automated_movement = 0
 
 
 /mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)

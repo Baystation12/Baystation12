@@ -15,8 +15,7 @@
 	icon_template = 'code/modules/halo/icons/species/jiralhanae_template.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
-	secondary_langs = list("Doisacci")
-	num_alternate_languages = 1
+	additional_langs = list("Doisacci")
 	flags = NO_MINOR_CUT
 	total_health = 300 //Higher base health than spartans and sangheili
 	radiation_mod = 0.6

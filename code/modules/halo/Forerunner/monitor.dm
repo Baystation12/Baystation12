@@ -38,6 +38,7 @@
 	sharp = 0 //not a laser
 	taser_effect = 1
 	agony = 40
+	weaken = 2
 	damage_type = STUN
 	accuracy = 2
 
@@ -58,92 +59,6 @@
 	if(user)
 		to_chat(user,"<span class='info'>[src] is temporarily out of charge, please wait a moment.</span>")
 
-
-//frenly monitor
-
-/mob/living/simple_animal/monitor
-	name = "monitor"
-	desc = "An incredibly advanced AI made from ancient alien technology."
-	faction = "Forerunner"
-	icon = 'code/modules/halo/Forerunner/Monitor.dmi'
-	icon_state = "monitor"
-	icon_living = "monitor"
-	icon_dead = "monitor_dead"
-	universal_speak = 1
-	universal_understand = 1
-	speak_chance = 7
-	health = 9999999999
-	maxHealth = 9999999999
-	resistance = 1000
-	speak = list("Let's see now...","Hmm, ah!","Oh dear","Oh, that's a good idea","Hah I am a genius","I am a genius hahahaha","Ah!")
-	emote_see = list("bobs gently.","glows brightly for a moment.","pulses.","shines its eyebeam around it.")
-	emote_hear = list("chuckles","hums a tuneless song")
-	var/list/attack_response = list("Oh dear.","Oh well.","Are you really sure that's good idea?","Foolish.","Come now, we're wasting time.","Primitive.")
-	var/last_pain_scream = 0
-	var/obj/item/weapon/gun/energy/laser/monitor_beam/monitorbeam
-	var/obj/item/weapon/gun/energy/laser/monitor_beam_stun/monitorbeamstun
-	var/obj/item/weapon/gun/selected_gun
-
-/mob/living/simple_animal/monitor/New()
-	. = ..()
-	monitorbeam = new()
-	monitorbeamstun = new()
-	selected_gun = monitorbeamstun
-	name = monitor_name()
-
-	src.verbs += /mob/living/simple_animal/monitor/proc/enable_stunbeam
-	src.verbs += /mob/living/simple_animal/monitor/proc/deactivate_weapon
-
-/mob/living/simple_animal/monitor/proc/enable_deathbeam()
-	set category = "IC"
-	set name = "Switch to Death Beam"
-
-	selected_gun = monitorbeam
-	to_chat(src, "<span class='info'>You switch to Death Beam.</span>")
-
-	src.verbs -= /mob/living/simple_animal/monitor/proc/enable_deathbeam
-	src.verbs += /mob/living/simple_animal/monitor/proc/enable_stunbeam
-	src.verbs |= /mob/living/simple_animal/monitor/proc/deactivate_weapon
-
-/mob/living/simple_animal/monitor/proc/deactivate_weapon()
-	set category = "IC"
-	set name = "Power down weapons"
-
-	selected_gun = null
-	to_chat(src, "<span class='info'>You power down your weapons.</span>")
-	src.verbs -= /mob/living/simple_animal/monitor/proc/deactivate_weapon
-
-/mob/living/simple_animal/monitor/proc/enable_stunbeam()
-	set category = "IC"
-	set name = "Switch to Stun Beam"
-
-	selected_gun = monitorbeamstun
-	to_chat(src, "<span class='info'>You switch to Stun Beam.</span>")
-
-	src.verbs += /mob/living/simple_animal/monitor/proc/enable_deathbeam
-	src.verbs -= /mob/living/simple_animal/monitor/proc/enable_stunbeam
-	src.verbs |= /mob/living/simple_animal/monitor/proc/deactivate_weapon
-
-/mob/living/simple_animal/monitor/IsAdvancedToolUser()
-	return 1
-
-/mob/living/simple_animal/monitor/RangedAttack(var/atom/attacked)
-	if(monitorbeam)
-		monitorbeam.Fire(attacked, src)
-
-/mob/living/simple_animal/monitor/bullet_act(var/obj/item/projectile/Proj)
-	. = ..()
-	if(last_pain_scream + 3 SECONDS < world.time)
-		src.say(pick(attack_response))
-		last_pain_scream = world.time
-
-/mob/living/simple_animal/monitor/death(gibbed, deathmessage = "explodes!", show_dead_message = 1)
-	var/turf/T = get_turf(src)
-	. = ..(gibbed, deathmessage, show_dead_message)
-	explosion(T, 2, 4, 6, 8, adminlog = 0)
-	new /obj/effect/gibspawner/robot(T)
-
-
 //angery monitor
 
 /mob/living/simple_animal/hostile/monitor
@@ -161,7 +76,10 @@
 	health = 9999999999
 	maxHealth = 9999999999
 	resistance = 1000
-	speak = list("Let's see now!","Hmm, ah!","Oh, that's a good idea!","Hah I am a genius!","I am a genius hahahaha!","Ah!",\
+	feral = 1
+	var/npc_use_stunbeam = 1
+	var/list/speak_friendly = list("Let's see now!","Hmm, ah!","Oh, that's a good idea!","Hah I am a genius!","I am a genius hahahaha!","Ah!")
+	var/list/speak_angry = list(\
 		"You have endangered my installation!",\
 		"Your recklessness threatens us all!",\
 		"I cannot believe my makers let you live!",\
@@ -169,14 +87,21 @@
 		"The installation... it is mine!",\
 		"You do not belong here!",\
 		"We must enact containment protocols at once! No more delay!")
-	emote_see = list("bobs gently","glows brightly for a moment","pulses","emits a shower of sparks","twitches and vibrates","shines its eyebeam around it")
-	emote_hear = list("chuckles","screams in rage","hums a tuneless song","screams in frustration")
-	var/list/attack_response = list("Oh dear!","Oh well!","Are you really sure that's good idea?","Foolish!","Primitive!",\
-		"I will save your head!","I will dispose of you!","Impertinence!")
+	var/list/emote_see_friendly = list("bobs gently","glows brightly for a moment","pulses","shines its eyebeam around it")
+	var/list/emote_see_angry = list("emits a shower of sparks","twitches and vibrates",)
+	var/list/emote_hear_friendly = list("chuckles","hums a tuneless song",)
+	var/list/emote_hear_angry = list("screams in rage","screams in frustration")
+
+	var/list/attack_response_friendly = list("Oh dear!","Oh well!","Are you really sure that's good idea?","Foolish.","How primitive.")
+	var/list/attack_response_angry = list("I will save your head!","I will dispose of you!","Impertinence!")
+
 	var/last_pain_scream = 0
 	var/obj/item/weapon/gun/energy/laser/monitor_beam/monitorbeam
 	var/obj/item/weapon/gun/energy/laser/monitor_beam_stun/monitorbeamstun
 	var/obj/item/weapon/gun/selected_gun
+
+/mob/living/simple_animal/hostile/monitor/friendly
+	feral = 0
 
 /mob/living/simple_animal/hostile/monitor/New()
 	. = ..()
@@ -187,6 +112,26 @@
 
 	src.verbs += /mob/living/simple_animal/hostile/monitor/proc/enable_stunbeam
 	src.verbs += /mob/living/simple_animal/hostile/monitor/proc/deactivate_weapon
+
+	if(feral)
+		speak = speak_friendly + speak_angry
+		emote_see = emote_see_friendly + emote_see_angry
+		emote_hear = emote_hear_friendly + emote_hear_angry
+	else
+		speak = speak_friendly
+		emote_see = emote_see_friendly
+		emote_hear = emote_hear_friendly
+
+/mob/living/simple_animal/hostile/monitor/Life()
+	//for admins to force a switch between deathbeam and stunbeam
+	if(npc_use_stunbeam)
+		if(selected_gun == monitorbeam)
+			enable_stunbeam()
+
+	else if(selected_gun == monitorbeamstun)
+		enable_deathbeam()
+
+	. = ..()
 
 /mob/living/simple_animal/hostile/monitor/proc/enable_deathbeam()
 	set category = "IC"
@@ -216,7 +161,7 @@
 
 	src.verbs += /mob/living/simple_animal/hostile/monitor/proc/enable_deathbeam
 	src.verbs -= /mob/living/simple_animal/hostile/monitor/proc/enable_stunbeam
-	src.verbs |= /mob/living/simple_animal/monitor/proc/deactivate_weapon
+	src.verbs |= /mob/living/simple_animal/hostile/monitor/proc/deactivate_weapon
 
 /mob/living/simple_animal/hostile/monitor/IsAdvancedToolUser()
 	return 1
@@ -224,18 +169,28 @@
 /mob/living/simple_animal/hostile/monitor/RangedAttack(var/atom/attacked)
 	selected_gun.Fire(attacked, src)
 
-/mob/living/simple_animal/monitor/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/hostile/monitor/bullet_act(var/obj/item/projectile/Proj)
 	. = ..()
-	if(last_pain_scream + 3 SECONDS < world.time)
-		src.say(pick(attack_response))
+	if(last_pain_scream + 6 SECONDS < world.time && !src.client)
+		if(feral)
+			src.say(pick(attack_response_angry + attack_response_friendly))
+		else
+			src.say(pick(attack_response_friendly))
 		last_pain_scream = world.time
+
+/mob/living/simple_animal/hostile/monitor/FindTarget()
+	if(!feral)
+		return null
+	return ..()
+
+/mob/living/simple_animal/hostile/monitor/get_equivalent_body_part(var/def_zone)
+	return "chassis"
 
 /mob/living/simple_animal/hostile/monitor/death(gibbed, deathmessage = "explodes!", show_dead_message = 1)
 	var/turf/T = get_turf(src)
 	. = ..(gibbed, deathmessage, show_dead_message)
 	explosion(T, 2, 4, 6, 8, adminlog = 0)
 	new /obj/effect/gibspawner/robot(T)
-
 
 // random monitor name
 
@@ -263,7 +218,7 @@
 		"Loyal",\
 		"Constant",\
 		"Exuberant",\
-		"True",\
+		"Truthful",\
 		"Abject",\
 		"Despondent",\
 		"Grieving",\
@@ -353,10 +308,16 @@
 	if(prob(33))
 		number = 7 ** rand(1,5)
 	else
-		number = rand(1,9999)
-	if(number < 10)
-		number = "00[number]"
-	else if(number < 100)
-		number = "0[number]"
+		switch(pick(1,2,3,4))
+			if(1)
+				number = rand(1,9)
+				number = "00[number]"
+			if(2)
+				number = rand(10,99)
+				number = "0[number]"
+			if(3)
+				number = rand(100,999)
+			if(4)
+				number = rand(1000,9999)
 
 	return "[number]-[pick(values)] [pick(nouns)]"

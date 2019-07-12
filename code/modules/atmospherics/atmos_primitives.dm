@@ -501,7 +501,9 @@
         status.Add("CO2 concentration high.")
 
 
-    if(returntext)
+    if(returntext == 1)
         return jointext(status, " ")
+    else if(returntext == 2)
+        return status
     else
         return status.len

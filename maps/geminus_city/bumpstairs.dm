@@ -31,7 +31,7 @@
 /obj/effect/landmark/bumpstairs_room
 	name = "bumpstairs_room_one"
 	icon_state = "x2"
-	invisibility = 0
+	invisibility = 101
 	var/bumpstairs_type = /obj/structure/bumpstairs/sewers_one
 
 /obj/effect/landmark/bumpstairs_room/one
@@ -53,6 +53,7 @@
 	var/rightdir = turn(roomdir, 90)
 
 	cur_turf.ChangeTurf(/turf/simulated/wall/tech/fake)
+	cur_turf.dir = roomdir
 	nextturf = get_step(cur_turf,leftdir)
 	nextturf.ChangeTurf(/turf/simulated/wall/tech)
 	nextturf = get_step(cur_turf,rightdir)
@@ -62,19 +63,20 @@
 
 	cur_turf.ChangeTurf(/turf/simulated/floor/plating)
 	nextturf = get_step(cur_turf,leftdir)
-	nextturf.ChangeTurf(/turf/simulated/wall/tech)
+	nextturf.ChangeTurf(/turf/simulated/mineral/planet)
 	nextturf = get_step(cur_turf,rightdir)
-	nextturf.ChangeTurf(/turf/simulated/wall/tech)
+	nextturf.ChangeTurf(/turf/simulated/mineral/planet)
 	//
 	var/obj/structure/bumpstairs/mystairs = new bumpstairs_type(cur_turf)
 	mystairs.dir = turn(roomdir, 180)
 	//
 	var/obj/machinery/light/small/S = new(cur_turf)
 	S.dir = roomdir
+	S.seton(0)
 
 	cur_turf = get_step(cur_turf, roomdir)
 
-	cur_turf.ChangeTurf(/turf/simulated/wall/tech/fake)
+	cur_turf.ChangeTurf(/turf/simulated/mineral/planet)
 	nextturf = get_step(cur_turf,leftdir)
 	nextturf.ChangeTurf(/turf/simulated/wall/tech)
 	nextturf = get_step(cur_turf,rightdir)

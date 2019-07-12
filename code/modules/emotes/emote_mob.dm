@@ -76,7 +76,7 @@
 	else
 		return
 
-	if (message)
+	if (message && (src.client || !config.ignore_npc_chatter))
 		log_emote("[name]/[key] : [message]")
 	//do not show NPC animal emotes to ghosts, it turns into hellscape
 	var/check_ghosts = client ? /datum/client_preference/ghost_sight : null

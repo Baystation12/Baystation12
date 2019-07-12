@@ -2,7 +2,11 @@
 /turf/simulated/wall/tech/fake/attack_hand(mob/user)
 	if(isliving(user))
 		src.visible_message("<span class='info'>[src] slides back to reveal a hidden area!</span>")
+		for(var/obj/machinery/light/S in get_step(src,dir))
+			S.seton(1)
+		var/olddir = src.dir
 		src.ChangeTurf(/turf/simulated/floor/plating/fakewall)
+		src.dir = olddir
 	else
 		. = ..()
 
@@ -18,4 +22,8 @@
 /turf/simulated/floor/plating/fakewall/process()
 	if(world.time >= revert_time)
 		src.visible_message("<span class='info'>[src] slides forward to hide its contents.</span>")
+		for(var/obj/machinery/light/S in get_step(src,dir))
+			S.seton(0)
+		var/olddir = src.dir
 		src.ChangeTurf(/turf/simulated/wall/tech/fake)
+		src.dir = olddir

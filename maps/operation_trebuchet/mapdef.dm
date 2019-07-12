@@ -7,7 +7,7 @@
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
-	id_hud_icons = 'maps/UNSC_Heaven_Above/frigate_hud_icons.dmi'
+	id_hud_icons = 'maps/operation_trebuchet/insurrection_hud_icons.dmi'
 	station_networks = list("Exodus")
 	station_name  = ""
 	station_short = ""
@@ -24,8 +24,13 @@
 
 
 /datum/map/Insurrection
-	allowed_jobs = list(/datum/job/UNSC_assault,/datum/job/UNSC_Squad_Lead,/datum/job/UNSC_Team_Lead,/datum/job/Insurrectionist,/datum/job/Insurrectionist_leader,)
-	allowed_spawns = list("Insurrectionist","Insurrectionist Leader","ODST Assault Squad Lead","ODST Assault Squad Member","ODST Assault Team Lead",)
+	allowed_jobs = list(\
+		/datum/job/UNSC_assault,\
+		/datum/job/UNSC_assault/squad_leader,\
+		/datum/job/UNSC_assault/commander,\
+		/datum/job/Insurrectionist,\
+		/datum/job/Insurrectionist_leader,)
+	allowed_spawns = list(DEFAULT_SPAWNPOINT_ID)
 
 /datum/map/Insurrection
 	apc_test_exempt_areas = list(

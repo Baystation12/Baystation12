@@ -106,7 +106,7 @@
 		return ..()
 
 	//directional blocking
-	if(get_dir(O.loc, target) == dir)
+	if(get_dir(O.loc, target) == dir && shield_health > 0)
 		to_chat(O,"<span class='warning'>[src] blocks your way.</span>")
 		return 0
 	return ..()

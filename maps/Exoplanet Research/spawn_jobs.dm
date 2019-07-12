@@ -151,7 +151,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	alt_titles = list("Doctor","Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")
 	selection_color = "#008000"
-	access = list(311)
+	access = list(310,311)
 	spawnpoint_override = "Research Facility Spawn"
 
 /datum/job/researchdirector

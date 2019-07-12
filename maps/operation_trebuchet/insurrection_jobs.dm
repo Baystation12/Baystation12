@@ -1,8 +1,8 @@
 
 /datum/job/Insurrectionist
 	title = "Insurrectionist"
-	total_positions = 46
-	spawnpoint_override = "Insurrectionist"
+	total_positions = -1
+	spawn_positions = -1
 	selection_color = "#000000"
 	faction_flag = INNIE
 	supervisors = " the Insurrectionist Leader"
@@ -13,6 +13,7 @@
 
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist
+	whitelisted_species = list(/datum/species/human)
 
 	latejoin_at_spawnpoints = TRUE
 	alt_titles = list("Insurrectionist Pilot","Insurrectionist Machine Gunner","Insurrectionist Engineer","Insurrectionist Sharpshooter")
@@ -20,7 +21,7 @@
 /datum/job/Insurrectionist_leader
 	title = "Insurrectionist Leader"
 	total_positions = 1
-	spawnpoint_override = "Insurrectionist Leader"
+	spawn_positions = 1
 	selection_color = "#000000"
 	faction_flag = INNIE
 	supervisors = " the Insurrection"
@@ -31,5 +32,6 @@
 
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist_leader
+	whitelisted_species = list(/datum/species/human)
 
 	latejoin_at_spawnpoints = TRUE

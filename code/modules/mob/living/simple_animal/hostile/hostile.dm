@@ -23,8 +23,6 @@
 	var/damtype = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
 
-	var/turf/assault_target
-	var/target_margin = 0
 	var/feral = 0
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
@@ -170,6 +168,7 @@
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
+	stop_automated_movement = 0
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/Life()
@@ -185,6 +184,9 @@
 			switch(stance)
 				if(HOSTILE_STANCE_IDLE)
 					target_mob = FindTarget()
+
+					if(!target_mob)
+						handle_assault_pathing()
 
 				if(HOSTILE_STANCE_ATTACK)
 					if(destroy_surroundings)
@@ -209,20 +211,26 @@
 	. = ..()
 	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
-		MoveToTarget()
+		//MoveToTarget()
+		stance = HOSTILE_STANCE_ATTACK
+		Life()
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = M
-		MoveToTarget()
+		//MoveToTarget()
+		stance = HOSTILE_STANCE_ATTACK
+		Life()
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
 	if(!target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
-		MoveToTarget()
+		//MoveToTarget()
+		stance = HOSTILE_STANCE_ATTACK
+		Life()
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	RangedAttack(target_mob)

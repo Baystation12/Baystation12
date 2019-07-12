@@ -1,3 +1,17 @@
+
+//----------------------------
+// Gold laser beam
+//----------------------------
+/obj/effect/projectile/laser_gold/tracer
+	icon_state = "beam_gold"
+
+/obj/effect/projectile/laser_gold/muzzle
+	icon_state = "muzzle_gold"
+
+/obj/effect/projectile/laser_gold/impact
+	icon_state = "impact_gold"
+
+
 //sentinel laser beam
 
 /obj/item/projectile/beam/sentinel
@@ -9,9 +23,9 @@
 	check_armour = "laser"
 	armor_penetration = 10
 
-	muzzle_type = /obj/effect/projectile/laser_blue/muzzle
-	tracer_type = /obj/effect/projectile/laser_blue/tracer
-	impact_type = /obj/effect/projectile/laser_blue/impact
+	muzzle_type = /obj/effect/projectile/laser_gold/muzzle
+	tracer_type = /obj/effect/projectile/laser_gold/tracer
+	impact_type = /obj/effect/projectile/laser_gold/impact
 
 /obj/item/weapon/gun/energy/laser/sentinel_beam
 	name = "Sentinel Beam"
@@ -27,6 +41,14 @@
 /obj/item/weapon/gun/energy/laser/sentinel_beam/handle_click_empty(mob/user)
 	if(user)
 		to_chat(user,"<span class='info'>[src] is temporarily out of charge, please wait a moment.</span>")
+
+
+// AI pathing landmark
+
+/obj/effect/landmark/assault_target/sentinel
+	name = "sentinel assault target marker"
+
+// Mob
 
 /mob/living/simple_animal/hostile/sentinel
 	name = "Sentinel"
@@ -49,6 +71,7 @@
 	emote_see = list("extends and retracts its manipulator arms","scans its body for damage","scans the environment")
 	emote_hear = list("buzzes")
 	var/obj/item/weapon/gun/energy/laser/sentinel_beam/sentinel_beam
+	assault_target_type = /obj/effect/landmark/assault_target/sentinel
 
 /mob/living/simple_animal/hostile/sentinel/New()
 	. = ..()
@@ -64,3 +87,6 @@
 //how do i shoot gun
 /mob/living/simple_animal/hostile/sentinel/IsAdvancedToolUser()
 	return 1
+
+/mob/living/simple_animal/hostile/sentinel/get_equivalent_body_part(var/def_zone)
+	return "chassis"

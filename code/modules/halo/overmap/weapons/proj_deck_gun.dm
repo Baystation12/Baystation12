@@ -159,7 +159,7 @@
 	step_delay = 0.1 SECONDS
 	damtype = BRUTE
 	damage = 200
-	penetrating = 1
+	penetrating = 0
 
 /obj/item/projectile/deck_gun_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
@@ -168,7 +168,7 @@
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
 	. = ..()
 
-/obj/item/projectile/deck_gun_damage_proj/check_penetrate(var/atom/a)
+/obj/item/projectile/deck_gun_damage_proj/on_impact(var/atom/a)
 	. = ..()
 	if(!istype(a,/obj/effect/shield))
 		explosion(a,-1,-1,2,4, adminlog = 0)

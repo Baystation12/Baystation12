@@ -1,4 +1,12 @@
 
+/area/faction_base
+	name = "Faction Base"
+	has_gravity = 1
+	power_environ = 1
+	power_light = 1
+	poweralm = 1
+	requires_power = 0
+
 /obj/effect/overmap/ship/faction_base //It's a /ship to ensure that it is attacked by overmap weapons like a ship would.
 	vessel_mass = 999
 	desc = "The base of a faction."
@@ -20,26 +28,3 @@
 		spawn_locs -= loc_spawnat
 		var/obj/effect/overmap/spawned = new defense_type (loc_spawnat)
 		spawned.faction = faction
-
-/obj/effect/overmap/ship/faction_base/cov
-	name = "Vanguard's Mantle"
-	icon_state = "base_cov"
-	faction = "Covenant"
-	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/cov
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/covenant_corvette)
-	base = 1
-
-/obj/effect/overmap/ship/faction_base/unsc
-	name = "Deviance Station"
-	icon_state = "base_unsc"
-	faction = "UNSC"
-	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/odst_corvette)
-	base = 1
-
-/obj/effect/overmap/ship/faction_base/innie
-	name = "Camp New Hope"
-	icon_state = "base_innie"
-	faction = "Insurrection"
-	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/innie
-	base = 1

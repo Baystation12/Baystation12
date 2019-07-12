@@ -167,6 +167,11 @@
 	log_debug(msg)
 	message_admins(msg)
 
+#ifdef UNIT_TEST
+	to_world_log("## PROCESS HANG ##: [msg]")
+	log_debug("## PROCESS HANG ##: [msg]")
+#endif
+
 	main.restartProcess(src.name)
 
 /datum/controller/process/proc/kill()
