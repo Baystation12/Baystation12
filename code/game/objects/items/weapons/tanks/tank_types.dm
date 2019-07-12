@@ -60,6 +60,15 @@
 	slot_flags = null	//they have no straps!
 	starting_pressure = list("phoron" = 3*ONE_ATMOSPHERE)
 
+/obj/item/weapon/tank/phoron/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if (istype(W, /obj/item/weapon/flamethrower))
+		var/obj/item/weapon/flamethrower/F = W
+		if (!F.status || F.tank || user.unEquip(src, F))
+			return
+		master = F
+		F.tank = src
+
 /*
  * Hydrogen
  */
@@ -76,10 +85,10 @@
 	..()
 	if (istype(W, /obj/item/weapon/flamethrower))
 		var/obj/item/weapon/flamethrower/F = W
-		if (!F.status || F.ptank || user.unEquip(src, F))
+		if (!F.status || F.tank || user.unEquip(src, F))
 			return
 		master = F
-		F.ptank = src
+		F.tank = src
 /*
  * Emergency Oxygen
  */
