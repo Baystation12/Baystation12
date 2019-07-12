@@ -1497,6 +1497,7 @@
 #include "code\modules\halo\covenant\spirit.dm"
 #include "code\modules\halo\covenant\tank.dm"
 #include "code\modules\halo\covenant\tools.dm"
+#include "code\modules\halo\covenant\wall_locker.dm"
 #include "code\modules\halo\covenant\weapon_rack.dm"
 #include "code\modules\halo\doors\halo_doors.dm"
 #include "code\modules\halo\factions\_faction.dm"
