@@ -140,7 +140,7 @@
 "cJ" = (/obj/structure/stairs/west,/turf/simulated/floor/asteroid/planet,/area/geminus_underground)
 "cK" = (/turf/simulated/floor/pavement/empty,/area/geminus_underground)
 "cL" = (/obj/machinery/power/apc/infinite{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/plating,/area/geminus_underground)
-"cM" = (/obj/effect/landmark/sewer_tunnel_thin{bumpstairs_room_type = ""; dir = 4; max_length = 60; max_length_sidetunnels = 18; min_length = 30},/turf/simulated/floor/pavement/empty,/area/geminus_underground/northwest)
+"cM" = (/obj/effect/landmark/sewer_tunnel_thin{bumpstairs_room_type = ""; dir = 1; max_length = 60; max_length_sidetunnels = 18; min_length = 30},/turf/simulated/floor/pavement/empty,/area/geminus_underground/northwest)
 
 (1,1,1) = {"
 cococococococococococococococococococococococococococococococococococococococococococococococococococococococococococococococococococicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicicfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcf
