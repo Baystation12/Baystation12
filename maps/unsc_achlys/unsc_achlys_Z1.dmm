@@ -280,7 +280,7 @@
 "ft" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "fu" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "fv" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic{icon_state = "ashtray_broken"},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"fw" = (/obj/structure/mirror{icon_state = "mirror_broke"; pixel_x = -32; step_x = 0; tag = "icon-mirror_broke"},/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/effect/decal/cleanable/dirt,/obj/item/weapon/paper{info = "the boss makes a nickel, i make a dime. thats why i shit on company time<BR><BR>came to shit, could only fart, poems i make, works of art"},/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom2)
+"fw" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/effect/decal/cleanable/dirt,/obj/item/weapon/paper{info = "the boss makes a nickel, i make a dime. thats why i shit on company time<BR><BR>came to shit, could only fart, poems i make, works of art"},/obj/structure/mirror{icon_state = "mirror_broke"; pixel_x = -32; tag = "icon-mirror_broke"},/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom2)
 "fx" = (/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom2)
 "fy" = (/turf/simulated/floor/plating,/area/achlys/five/z1ladder2)
 "fz" = (/turf/simulated/open,/area/achlys/one/z1hangerhallway)
