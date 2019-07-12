@@ -22,7 +22,7 @@
 
 /obj/item/weapon/gun/energy/plasmapistol/New()
 	. = ..()
-	overcharge_cost = initial(charge_cost)*(max_shots/2)
+	overcharge_cost = initial(charge_cost)*2
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(power_supply.charge >= overcharge_cost)
@@ -34,11 +34,6 @@
 			power_supply.give(charge_cost/3)
 			update_icon()
 			return 1
-
-/obj/item/weapon/gun/energy/plasmapistol/consume_next_projectile()
-	.  = ..()
-	if(overcharge)
-		set_overcharge(0)
 
 /obj/item/weapon/gun/energy/plasmapistol/proc/set_overcharge(var/new_overcharge = 1, var/mob/user = null)
 	if(new_overcharge != overcharge)

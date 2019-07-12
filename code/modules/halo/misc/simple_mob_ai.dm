@@ -11,7 +11,7 @@ GLOBAL_LIST_EMPTY(assault_targets)
 /obj/effect/landmark/assault_target
 	name = "flood assault target marker"
 	icon_state = "x3"
-	invisibility = 100
+	invisibility = INVISIBILITY_SYSTEM
 
 /obj/effect/landmark/assault_target/New()
 	. = ..()

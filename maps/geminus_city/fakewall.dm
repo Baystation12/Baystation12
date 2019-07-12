@@ -1,6 +1,9 @@
 
+/turf/simulated/wall/tech/fake
+	var/faction_locked
+
 /turf/simulated/wall/tech/fake/attack_hand(mob/user)
-	if(isliving(user))
+	if(isliving(user) && (faction_locked && user.faction == src.faction_locked))
 		src.visible_message("<span class='info'>[src] slides back to reveal a hidden area!</span>")
 		for(var/obj/machinery/light/S in get_step(src,dir))
 			S.seton(1)

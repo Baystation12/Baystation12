@@ -90,3 +90,15 @@
 
 /mob/living/simple_animal/hostile/sentinel/get_equivalent_body_part(var/def_zone)
 	return "chassis"
+
+/mob/living/simple_animal/hostile/sentinel/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	if(istype(P, /obj/item/projectile/beam/sentinel))
+		return PROJECTILE_FORCE_MISS
+
+	if(istype(P, /obj/item/projectile/beam/monitor))
+		return PROJECTILE_FORCE_MISS
+
+	if(istype(P, /obj/item/projectile/beam/monitor_stun))
+		return PROJECTILE_FORCE_MISS
+
+	return ..()

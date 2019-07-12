@@ -98,3 +98,58 @@
 	desc = "An advanced hydrogen derivative fuel packet for Covenant technology."
 	icon = 'tools.dmi'
 	icon_state = "hfuel"
+
+/obj/item/device/flashlight/covenant
+	name = "luminator"
+	icon = 'code/modules/halo/covenant/tools.dmi'
+	icon_state = "vest"
+
+
+
+/* TOOLBOXES */
+
+/obj/item/weapon/storage/toolbox/covenant_emg
+	name = "emergency toolbox"
+	icon_state = "red"
+	item_state = "toolbox_red"
+
+/obj/item/weapon/storage/toolbox/covenant_emg/New()
+	..()
+	new /obj/item/weapon/crowbar/covenant(src)
+	var/item = pick(list(/obj/item/device/flashlight/covenant, /obj/item/device/flashlight/glowstick/blue))
+	new item(src)
+	new /obj/item/device/radio/headset/covenant(src)
+
+/obj/item/weapon/storage/toolbox/covenant_mech
+	name = "mechanical toolbox"
+	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
+	icon_state = "blue"
+	item_state = "toolbox_blue"
+
+/obj/item/weapon/storage/toolbox/covenant_mech/New()
+	..()
+	new /obj/item/weapon/screwdriver/covenant(src)
+	new /obj/item/weapon/wrench/covenant(src)
+	new /obj/item/weapon/weldingtool/covenant(src)
+	new /obj/item/weapon/crowbar/covenant(src)
+	new /obj/item/device/analyzer(src)
+	new /obj/item/weapon/wirecutters/covenant(src)
+
+/obj/item/weapon/storage/toolbox/covenant_elec
+	name = "electrical toolbox"
+	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
+	icon_state = "yellow"
+	item_state = "toolbox_yellow"
+
+/obj/item/weapon/storage/toolbox/covenant_elec/New()
+	..()
+	new /obj/item/weapon/screwdriver/covenant(src)
+	new /obj/item/weapon/wirecutters/covenant(src)
+	new /obj/item/device/t_scanner(src)
+	new /obj/item/weapon/crowbar/covenant(src)
+	new /obj/item/stack/cable_coil/random(src,30)
+	new /obj/item/stack/cable_coil/random(src,30)
+	if(prob(5))
+		new /obj/item/clothing/gloves/insulated(src)
+	else
+		new /obj/item/stack/cable_coil/random(src,30)
