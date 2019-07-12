@@ -3094,6 +3094,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/canned/proc/unseal()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	sealed = FALSE
+	update_icon()
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/attack_self(var/mob/user)
 	if(sealed)
@@ -3102,7 +3103,8 @@
 		unseal()
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/on_update_icon()
-	icon_state = sealed ? initial(icon_state) : "[initial(icon_state)]-open"
+	if(!sealed)
+		icon_state = "[initial(icon_state)]-open"
 
 //Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts
 
