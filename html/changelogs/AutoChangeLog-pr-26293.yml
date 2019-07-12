@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - rscadd: "Robco vendor will now vend tesla links and keyboards for building machinery."
