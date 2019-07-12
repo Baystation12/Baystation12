@@ -3,7 +3,7 @@
 	full_name = "Sector 0442: New Antarctica"
 	path = "Insurrection"
 	station_levels = list()
-	admin_levels = list()
+	admin_levels = list(1,2,3)
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
