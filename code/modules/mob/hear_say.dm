@@ -105,7 +105,7 @@
 	if(!client)
 		return
 
-	if(last_radio_sound + 0.5 SECOND > world.time)
+	if((last_radio_sound + 0.5 SECOND) < world.time && src != speaker)
 		playsound(loc, 'sound/effects/radio_chatter.ogg', 10, 0, -1, falloff = -3)
 		last_radio_sound = world.time
 
