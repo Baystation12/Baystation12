@@ -52,8 +52,8 @@
 /datum/objective/retrieve/steal_ai
 	short_text = "Capture human construct"
 	explanation_text = "These humans store tactical and navigational data in their intelligent constructs. What a prize!"
-	points_per_item = 200
-	win_points = 200
+	points_per_item = 150
+	win_points = 150
 	slipspace_affected = 1
 
 /datum/objective/retrieve/steal_ai/find_target()
