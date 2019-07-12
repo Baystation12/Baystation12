@@ -93,21 +93,11 @@
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
 	can_hold_knife = 1
-	var/footsound = 1
+	stepsound = 'sound/effects/jackboot.ogg'
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
-
-/obj/item/clothing/shoes/marine/handle_movement(var/turf/walking, var/running)
-	if(running)
-		if(footsound >= 2)
-			footsound = 0
-			playsound(src, "sound/effects/jackboot.ogg", 50, 1)
-		else
-			footsound++
-	else
-		playsound(src, "sound/effects/jackboot.ogg", 20, 1)
 
 /obj/item/weapon/storage/belt/marine_ammo
 	name = "Ammunition Storage Belt"
