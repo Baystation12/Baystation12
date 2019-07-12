@@ -243,9 +243,10 @@
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "conveyor0"
 	name = "conveyor belt assembly"
-	desc = "A conveyor belt assembly."
+	desc = "A conveyor belt assembly. Must be linked to a conveyor control switch assembly before placement."
 	w_class = ITEM_SIZE_HUGE
 	var/id = "" //inherited by the belt
+	matter = list(MATERIAL_STEEL = 400, MATERIAL_PLASTIC = 200)
 
 /obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
 	..()
@@ -277,6 +278,8 @@
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_HUGE
 	var/id = "" //inherited by the switch
+	matter = list(MATERIAL_STEEL = 200)
+
 
 /obj/item/conveyor_switch_construct/New()
 	..()
@@ -293,6 +296,25 @@
 	if(!found)
 		to_chat(user, "\icon[src]<span class=notice>The conveyor switch did not detect any linked conveyor belts in range.</span>")
 		return
-	var/obj/machinery/conveyor_switch/NC = new/obj/machinery/conveyor_switch(A, id)
+	var/obj/machinery/conveyor_switch/NC = new /obj/machinery/conveyor_switch(A, id)
+	transfer_fingerprints_to(NC)
+	qdel(src)
+
+/obj/item/conveyor_switch_construct/oneway
+	name = "one-way conveyor switch assembly"
+	desc = "An one-way conveyor control switch assembly."
+
+/obj/item/conveyor_switch_construct/oneway/afterattack(atom/A, mob/user, proximity)
+	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
+		return
+	var/found = 0
+	for(var/obj/machinery/conveyor/C in view())
+		if(C.id == src.id)
+			found = 1
+			break
+	if(!found)
+		to_chat(user, "\icon[src]<span class=notice>The conveyor switch did not detect any linked conveyor belts in range.</span>")
+		return
+	var/obj/machinery/conveyor_switch/oneway/NC = new /obj/machinery/conveyor_switch/oneway(A, id)
 	transfer_fingerprints_to(NC)
 	qdel(src)
