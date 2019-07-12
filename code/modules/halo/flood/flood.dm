@@ -30,7 +30,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	min_gas = list()
 	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
-<<<<<<< HEAD
 	death_sounds = list('sound/flood/death.death10.ogg','sound/flood/death.death15.ogg',\
 						'sound/flood/death.death2.ogg','sound/flood/death.death20.ogg',\
 						'sound/flood/death.death3.ogg','sound/flood/death.death4.ogg',\
@@ -38,9 +37,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	pain_scream_sounds = list('sound/flood/pain.pain1.ogg','sound/flood/pain.pain15.ogg',\
 							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
 							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
-=======
 	assault_target_type = /obj/effect/landmark/assault_target
->>>>>>> 294dc2374d0d03bcf890a32ad309a9ced5c82a52
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()

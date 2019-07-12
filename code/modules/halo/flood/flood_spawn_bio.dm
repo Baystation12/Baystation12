@@ -49,7 +49,6 @@
 	bound_width = 128
 	bound_height = 128
 
-<<<<<<< HEAD
 /obj/item/flood_spore
 	icon = 'flood_bio.dmi'
 	icon_state = "spore1"
@@ -75,7 +74,7 @@
 	icon_state = "pulsating"
 	max_flood = 3
 	respawn_delay = 300
-=======
+
 /obj/structure/biomass/proc/take_damage(var/amount, var/damage_type)
 	health -= amount
 
@@ -107,4 +106,3 @@
 		take_damage(100, BURN)
 	else
 		take_damage(50, BURN)
->>>>>>> 294dc2374d0d03bcf890a32ad309a9ced5c82a52
