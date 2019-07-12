@@ -28,7 +28,7 @@
 /area/ship/ascent/fore_starboard_prow)
 "ai" = (
 /obj/machinery/recharge_station/ascent,
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/drone,
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/drone,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "aj" = (
@@ -182,7 +182,7 @@
 "aG" = (
 /obj/machinery/door/airlock/external/bolted/ascent{
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_internal"
+	id_tag = "ascent_seedship_fore_internal"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_hallway)
@@ -388,11 +388,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
 	},
-/obj/effect/overmap/ship/ascent_cutter,
+/obj/effect/overmap/ship/ascent_seedship,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
 "bl" = (
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/alate,
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/alate,
 /obj/structure/ascent_spawn,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
@@ -510,9 +510,9 @@
 /area/ship/ascent/wing_starboard)
 "by" = (
 /obj/machinery/door/airlock/external/bolted/ascent{
-	airflow_dest = "ascent_cutter_fore_external";
+	airflow_dest = "ascent_seedship_fore_external";
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_external"
+	id_tag = "ascent_seedship_fore_external"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_hallway)
@@ -520,7 +520,7 @@
 /turf/simulated/wall/ascent,
 /area/ship/ascent/habitation)
 "bA" = (
-/obj/effect/submap_landmark/joinable_submap/ascent_cutter,
+/obj/effect/submap_landmark/joinable_submap/ascent_seedship,
 /turf/simulated/wall/ascent,
 /area/ship/ascent/habitation)
 "bB" = (
@@ -857,7 +857,7 @@
 /area/ship/ascent/bridge)
 "ch" = (
 /obj/structure/ascent_spawn,
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter,
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "ci" = (
@@ -902,14 +902,14 @@
 /area/ship/ascent/wing_port)
 "cm" = (
 /obj/structure/ascent_spawn,
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/adjunct,
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/adjunct,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "cn" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1331;
-	master_tag = "ascent_cutter_fore_dock_controller";
+	master_tag = "ascent_seedship_fore_dock_controller";
 	pixel_x = -4;
 	pixel_y = 24
 	},
@@ -1454,7 +1454,7 @@
 /area/ship/ascent/wing_port)
 "dB" = (
 /obj/structure/ascent_spawn,
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/queen,
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/queen,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "dC" = (
@@ -1475,7 +1475,7 @@
 "dD" = (
 /obj/machinery/door/airlock/external/bolted/ascent{
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_external"
+	id_tag = "ascent_seedship_fore_external"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_hallway)
@@ -1830,16 +1830,16 @@
 "em" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_pumps"
+	id_tag = "ascent_seedship_fore_pumps"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	airflow_dest = "ascent_cutter_fore_dock_controller";
+	airflow_dest = "ascent_seedship_fore_dock_controller";
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_dock_controller";
+	id_tag = "ascent_seedship_fore_dock_controller";
 	pixel_y = 24;
-	tag_airpump = "ascent_cutter_fore_pumps";
-	tag_exterior_door = "ascent_cutter_fore_external";
-	tag_interior_door = "ascent_cutter_fore_internal"
+	tag_airpump = "ascent_seedship_fore_pumps";
+	tag_exterior_door = "ascent_seedship_fore_external";
+	tag_interior_door = "ascent_seedship_fore_internal"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_hallway)
@@ -1889,7 +1889,7 @@
 "er" = (
 /obj/machinery/door/airlock/external/bolted/ascent{
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_internal"
+	id_tag = "ascent_seedship_fore_internal"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -1960,11 +1960,11 @@
 "ew" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_pumps"
+	id_tag = "ascent_seedship_fore_pumps"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_dock_sensor";
+	id_tag = "ascent_seedship_fore_dock_sensor";
 	pixel_y = 24
 	},
 /turf/simulated/floor/ascent,
@@ -1990,7 +1990,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/shuttle_landmark/ascent_cutter/start,
+/obj/effect/shuttle_landmark/ascent_seedship/start,
 /obj/machinery/access_button/airlock_interior{
 	command = "cycle_exterior";
 	master_tag = "ascent_port_dock";
@@ -2929,7 +2929,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
 	frequency = 1331;
-	id_tag = "ascent_cutter_fore_pumps"
+	id_tag = "ascent_seedship_fore_pumps"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_hallway)
@@ -3949,7 +3949,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/shuttle_landmark/ascent_cutter/start/two,
+/obj/effect/shuttle_landmark/ascent_seedship/start/two,
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_starboard)
@@ -4529,7 +4529,7 @@
 /obj/machinery/access_button/airlock_interior{
 	command = "cycle_exterior";
 	frequency = 1331;
-	master_tag = "ascent_cutter_fore_dock_controller";
+	master_tag = "ascent_seedship_fore_dock_controller";
 	pixel_x = -8;
 	pixel_y = -4
 	},

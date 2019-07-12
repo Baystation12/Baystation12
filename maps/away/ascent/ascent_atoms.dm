@@ -66,7 +66,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	color = COLOR_PURPLE
 	closed_system = TRUE
 	construct_state = null
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 // No maintenance needed.
 /obj/machinery/portable_atmospherics/hydroponics/ascent/Process()
@@ -101,7 +101,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 /obj/machinery/recharge_station/ascent
 	construct_state = null
 	base_type = /obj/machinery/recharge_station/ascent
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/machinery/body_scanconsole/ascent
 	name = "mantid scanner console"
@@ -109,14 +109,14 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	req_access = list(access_ascent)
 	icon = 'icons/obj/ascent_sleepers.dmi'
 	construct_state = null
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/machinery/bodyscanner/ascent
 	name = "mantid body scanner"
 	desc = "Some kind of strange alien body scanning technology."
 	icon = 'icons/obj/ascent_sleepers.dmi'
 	construct_state = null
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/machinery/sleeper/ascent
 	name = "mantid sleeper"
@@ -124,7 +124,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	icon = 'icons/obj/ascent_sleepers.dmi'
 	construct_state = null
 	base_type = /obj/machinery/sleeper/ascent
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/structure/bed/chair/padded/purple/ascent
 	icon_state = "nest_chair"
@@ -143,7 +143,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	req_access = list(access_ascent)
 	construct_state = null
 	base_type = /obj/machinery/autolathe/ascent
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/machinery/power/apc/hyper/ascent
 	req_access = list(access_ascent)
@@ -244,7 +244,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	icon_screen = "ascent_screen"
 	req_access = list(access_ascent)
 	construct_state = null
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/machinery/computer/ship/engines/ascent
 	icon_state = "ascent"
@@ -252,7 +252,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	icon_screen = "ascent_screen"
 	req_access = list(access_ascent)
 	construct_state = null
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/machinery/computer/ship/navigation/ascent
 	icon_state = "ascent"
@@ -260,7 +260,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	icon_screen = "ascent_screen"
 	req_access = list(access_ascent)
 	construct_state = null
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 /obj/machinery/computer/ship/sensors/ascent
 	icon_state = "ascent"
@@ -268,7 +268,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	icon_screen = "ascent_screen"
 	req_access = list(access_ascent)
 	construct_state = null
-	stat_immune = EMPED | NOSCREEN | NOINPUT
+	stat_immune = EMPED | NOSCREEN | NOINPUT | NOPOWER
 
 // This is an absolutely stupid machine. Basically the same as the debug one with some alterations.
 // It is a placeholder for a proper reactor setup (probably a RUST descendant)
