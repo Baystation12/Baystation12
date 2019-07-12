@@ -27,8 +27,17 @@
 	explanation_text = "The human weapons are crude but occasionally effective. Eliminate the warship in the area."
 	slipspace_affected = 1
 
-/datum/objective/protect_ship/covenant/find_target()
+/datum/objective/destroy_ship/covenant/find_target()
 	target_ship = GLOB.UNSC.get_flagship()
+	return target_ship
+
+/datum/objective/destroy_ship/covenant_odp
+	short_text = "Destroy the human defence platform"
+	explanation_text = "We require safe access to the human worlds. Take out the defence platform!"
+	slipspace_affected = 1
+
+/datum/objective/destroy_ship/covenant_odp/find_target()
+	target_ship = GLOB.UNSC.get_base()
 	return target_ship
 
 /datum/objective/protect_ship/covenant

@@ -65,7 +65,8 @@
 		/datum/objective/glass_colony,\
 		/datum/objective/retrieve/steal_ai,\
 		/datum/objective/retrieve/nav_data,\
-		///datum/objective/destroy_unsc_ship,
+		/datum/objective/destroy_ship/covenant,
+		/datum/objective/destroy_ship/covenant_odp,
 		/datum/objective/retrieve_artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
 	GLOB.COVENANT.has_flagship = 1
@@ -78,7 +79,7 @@
 		/datum/objective/capture_innies,\
 		/datum/objective/retrieve/steal_ai/cole_protocol,\
 		/datum/objective/retrieve/nav_data/cole_protocol,\
-		/datum/objective/destroy_cov_ship,\
+		/datum/objective/destroy_ship/unsc,\
 		/datum/objective/protect_colony)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
