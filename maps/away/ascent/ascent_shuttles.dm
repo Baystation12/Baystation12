@@ -29,14 +29,14 @@
 	name = "shuttle control console"
 	shuttle_tag = "Lepidoptera"
 
-/obj/effect/shuttle_landmark/ascent_cutter/start
+/obj/effect/shuttle_landmark/ascent_seedship/start
 	name = "Trichoptera Docked"
 	landmark_tag = "nav_hangar_ascent_one"
 	docking_controller = "ascent_port_dock"
 	base_area = /area/ship/ascent/wing_port
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/shuttle_landmark/ascent_cutter/start/two
+/obj/effect/shuttle_landmark/ascent_seedship/start/two
 	name = "Lepidoptera Docked"
 	landmark_tag = "nav_hangar_ascent_two"
 	docking_controller = "ascent_starboard_dock"

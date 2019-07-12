@@ -18,9 +18,9 @@
 /decl/webhook/submap_loaded/ascent
 	id = WEBHOOK_SUBMAP_LOADED_ASCENT
 
-/decl/submap_archetype/ascent_cutter
-	descriptor = "Ascent Cutter"
-	map = "Ascent Cutter"
+/decl/submap_archetype/ascent_seedship
+	descriptor = ASCENT_COLONY_SHIP_NAME
+	map = ASCENT_COLONY_SHIP_NAME
 	crew_jobs = list(
 		/datum/job/submap/ascent,
 		/datum/job/submap/ascent/alate,
@@ -165,20 +165,20 @@
 */
 
 // Spawn points.
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship
 	name = "Ascent Gyne"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/alate
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/alate
 	name = "Ascent Alate"
 
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/drone
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/drone
 	name = "Ascent Drone"
 
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/adjunct
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/adjunct
 	name = "Serpentid Adjunct"
 
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/queen
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/queen
 	name = "Serpentid Queen"
 
 /*
@@ -189,7 +189,7 @@
 	info = "You are a Machine Intelligence of an independent Ascent vessel. The Gyne you assist, and her children, have wandered into this sector full of primitive bioforms. Try to keep them alive, and assist where you can."
 	set_species_on_join = /mob/living/silicon/ai/ascent
 
-/obj/effect/submap_landmark/spawnpoint/ascent_cutter/control
+/obj/effect/submap_landmark/spawnpoint/ascent_seedship/control
 	name = "Ascent Control Mind"
 
 /mob/living/silicon/ai/ascent
