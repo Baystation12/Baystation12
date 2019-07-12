@@ -64,7 +64,17 @@
 	terminal = new_terminal
 	terminal.master = src
 	GLOB.destroyed_event.register(terminal, src, .proc/unset_terminal)
+	GLOB.moved_event.register(machine, src, .proc/machine_moved)
 	set_status(machine, PART_STAT_CONNECTED)
+
+/obj/item/weapon/stock_parts/power/terminal/proc/machine_moved(var/obj/machinery/machine, var/turf/old_loc, var/turf/new_loc)
+	if(!terminal)
+		GLOB.moved_event.unregister(machine, src, .proc/machine_moved)
+		return
+	if(istype(new_loc) && (terminal.loc == get_step(new_loc, terminal_dir)))
+		return     // This location is fine
+	machine.visible_message(SPAN_WARNING("The terminal is ripped out of \the [machine]!"))
+	qdel(terminal) // will handle everything via the destroyed event
 
 /obj/item/weapon/stock_parts/power/terminal/proc/make_terminal(var/obj/machinery/machine)
 	if(!machine)
@@ -76,8 +86,12 @@
 
 /obj/item/weapon/stock_parts/power/terminal/proc/unset_terminal(var/obj/machinery/power/old_terminal, var/obj/machinery/machine)
 	GLOB.destroyed_event.unregister(old_terminal, src)
+	if(!machine && istype(loc, /obj/machinery))
+		machine = loc
+	if(machine)
+		GLOB.moved_event.unregister(machine, src, .proc/machine_moved)
+		unset_status(machine, PART_STAT_CONNECTED)
 	terminal = null
-	unset_status(machine, PART_STAT_CONNECTED)
 
 /obj/item/weapon/stock_parts/power/terminal/proc/blocking_terminal_at_loc(var/obj/machinery/machine, var/turf/T, var/mob/user)
 	. = FALSE
@@ -151,3 +165,4 @@
 
 /obj/item/weapon/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
+	matter = list(MATERIAL_STEEL = 400)
