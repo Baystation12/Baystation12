@@ -63,7 +63,7 @@ obj/machinery/embedded_controller/radio/Destroy()
 	..()
 
 /obj/machinery/embedded_controller/radio/on_update_icon()
-	if(!on || !program)
+	if(!on || !istype(program))
 		icon_state = "airlock_control_off"
 	else if(program.memory["processing"])
 		icon_state = "airlock_control_process"
