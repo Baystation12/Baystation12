@@ -1,3 +1,180 @@
+///////////////////
+////EDF OUTFITS////
+///////////////////
+
+/decl/hierarchy/outfit/ds_edf_commander
+	name = "DS Spec Ops - EDF CO"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/ert
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/swat
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/edfcommander/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/edfcommholobadge
+	id_desc = "A holographic ID beloning to an EDF marine assigned to the USM Valor."
+
+/decl/hierarchy/outfit/ds_edf_medic
+	name = "DS Spec Ops - EDF Medic"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/ert
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/swat
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/edfmedic/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/edfmedholobadge
+	id_desc = "A holographic ID beloning to an EDF marine assigned to the USM Valor."
+
+/decl/hierarchy/outfit/ds_edf_engie
+	name = "DS Spec Ops - EDF Engineer"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/ert
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/swat
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/edfengineer/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/edfengieholobadge
+	id_desc = "A holographic ID beloning to an EDF marine assigned to the USM Valor."
+	
+/decl/hierarchy/outfit/ds_edf_grunt
+	name = "DS Spec Ops - EDF Marine"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/ert
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/swat
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/edfsoldier/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/edfgruntholobadge
+	id_desc = "A holographic ID beloning to an EDF marine assigned to the USM Valor."
+
+///////////////////
+////UNI OUTFITS////
+///////////////////
+
+/decl/hierarchy/outfit/ds_uni_soldier
+	name = "DS Spec Ops - UNI Soldier"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/syndicate/alt
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/syndicate
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/unisoldier/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/unisoldierbadge
+	id_desc = "A holographic ID beloning to an unregistered civillian vessel. It bears unitologist iconography."
+
+/decl/hierarchy/outfit/ds_uni_medic
+	name = "DS Spec Ops - UNI Medic"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/syndicate/alt
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/syndicate
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/unimedic/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/unimedicbadge
+	id_desc = "A holographic ID beloning to an unregistered civillian vessel. It bears unitologist iconography."
+
+/decl/hierarchy/outfit/ds_uni_engie
+	name = "DS Spec Ops - UNI Engineer"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/syndicate/alt
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/syndicate
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/uniengie/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/uniengiebadge
+	id_desc = "A holographic ID beloning to an unregistered civillian vessel. It bears unitologist iconography."
+
+/decl/hierarchy/outfit/ds_uni_zerker
+	name = "DS Spec Ops - UNI Berserker"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/syndicate/alt
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/syndicate
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/unizerker/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/unizerkerbadge
+	id_desc = "A holographic ID beloning to an unregistered civillian vessel. It bears unitologist iconography."
+
+/decl/hierarchy/outfit/ds_uni_faithfulleader
+	name = "DS Spec Ops - UNI Zealot"
+	uniform = /obj/item/clothing/under/rigunder
+	suit = null		//used by rig hardsuit on back.
+	l_ear = /obj/item/device/radio/headset/syndicate/alt
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	mask = /obj/item/clothing/mask/gas/syndicate
+	head = null		//used by rig hardsuit on back.
+	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	back = /obj/item/weapon/rig/deadspace/unifaithful/equipped
+	shoes = null	//used by rig hardsuit on back.
+	gloves = null	//used by rig hardsuit on back.
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/unifaithfulbadge
+	id_desc = "A holographic ID beloning to an unregistered civillian vessel. It bears unitologist iconography."
+
+/////////////////////
+///KELLION OUTFITS///
+/////////////////////
+
+//PLACEHOLDER WAITING FOR KELLION OUTFIT SPRITES, ENGINEERING SUITS AND SUCH
+
+
+///////////////////////////////////////////////////
+///////////////DEFAULT OUTFITS BELOW///////////////
+///////////////////////////////////////////////////
+
+
+
+
+
+
 /decl/hierarchy/outfit/spec_op_officer
 	name = "Spec Ops - Officer"
 	uniform = /obj/item/clothing/under/syndicate/combat
