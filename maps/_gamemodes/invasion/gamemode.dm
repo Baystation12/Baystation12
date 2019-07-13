@@ -24,18 +24,7 @@
 
 	//hide some faction sectors from factions not playing
 	for(var/obj/effect/overmap/S in world)
-		var/hide = 0
 		if(S.type in overmap_hide)
-			hide = 1
-		else if(!S.faction)
-			continue
-		else
-			hide = 1
-			for(var/datum/faction/F in factions)
-				if(F.name == S.faction)
-					hide = 0
-					break
-		if(hide)
 			if(S && S.map_z_data.len)
 				var/obj/effect/landmark/map_data/check_data = S.map_z_data[1]
 				S.loc = check_data.loc
@@ -67,14 +56,14 @@
 		/datum/objective/retrieve/nav_data,\
 		/datum/objective/destroy_ship/covenant,
 		/datum/objective/destroy_ship/covenant_odp,
-		/datum/objective/retrieve_artifact)
+		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
 	GLOB.COVENANT.has_flagship = 1
 
 	//setup unsc objectives
 	objective_types = list(\
 		/datum/objective/protect_ship/unsc,\
-		/datum/objective/retrieve_artifact/unsc,\
+		/datum/objective/retrieve/artifact/unsc,\
 		/datum/objective/protect/unsc_leader,\
 		/datum/objective/capture_innies,\
 		/datum/objective/retrieve/steal_ai/cole_protocol,\

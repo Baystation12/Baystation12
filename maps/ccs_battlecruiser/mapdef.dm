@@ -40,8 +40,8 @@
 
 /datum/map/covenant_cruiser/New()
 	. = ..()
-	name = "Damaged CCS [pick(GLOB.covenant_ship_names)]"
-	full_name = "Damaged CCS Battlecruiser \"[name]\""
+	name = "CCS [pick(GLOB.covenant_ship_names)]"
+	full_name = "Damaged \"[name]\""
 
 /datum/spawnpoint/default
 	disable_atmos_unsafe = 0	//so unggoy methane den spawns arent disabled

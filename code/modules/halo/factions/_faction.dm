@@ -84,11 +84,11 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	enemy_factions = list("UNSC","Insurrection")
 
 /datum/faction/covenant/get_commander(var/datum/mind/check_mind)
-	. = ..()
 
-	if(!. && check_mind.assigned_role == "Sangheili - Shipmaster")
+	if(!. && check_mind && check_mind.assigned_role == "Sangheili - Shipmaster")
 		return check_mind
 
+	. = ..()
 
 
 /* UNSC */
@@ -98,11 +98,11 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	enemy_factions = list("Covenant","Insurrection")
 
 /datum/faction/unsc/get_commander(var/datum/mind/check_mind)
-	. = ..()
 
-	if(!. && check_mind.assigned_role == "UNSC Bertels Commanding Officer")
+	if(!. && check_mind && check_mind.assigned_role == "UNSC Bertels Commanding Officer")
 		return check_mind
 
+	. = ..()
 
 
 /* Insurrection */
@@ -112,10 +112,11 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	enemy_factions = list("UNSC","Covenant")
 
 /datum/faction/insurrection/get_commander(var/datum/mind/check_mind)
-	. = ..()
 
-	if(!. && check_mind.assigned_role == "Insurrectionist Commander")
+	if(!. && check_mind && check_mind.assigned_role == "Insurrectionist Commander")
 		return check_mind
+
+	. = ..()
 
 /datum/faction/human_civ
 	name = "Human Colony"

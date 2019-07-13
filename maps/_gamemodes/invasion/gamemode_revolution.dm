@@ -6,6 +6,7 @@
 	extended_round_description = "In an outer colony on the edge of human space, a revolution is brewing."
 	required_players = 0
 	factions = list(/datum/faction/unsc, /datum/faction/insurrection, /datum/faction/human_civ)
+	overmap_hide = list(/obj/effect/overmap/sector/exo_research, /obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/soe_osprey)
 	disabled_jobs_types = list(\
 		/datum/job/researchdirector,\
 		/datum/job/researcher,\
