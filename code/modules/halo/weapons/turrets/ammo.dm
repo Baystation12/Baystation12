@@ -45,7 +45,7 @@
 	desc = "A container for cells, designed for use with the Type-52 Directed Energy Support Weapon"
 
 	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
-	icon_state = "hmgturretbox"
+	icon_state = "plasmacellbox"
 
 	ammo_type = /obj/item/ammo_casing/plasturret
 	caliber = "plas_turret_cells"
@@ -58,5 +58,6 @@
 /obj/item/ammo_casing/plasturret
 	name = "Type-52 Directed Energy Support Weapon Power Cell"
 	desc = "A self-contained power cell for the Type-52 Directed Energy Support Weapon"
+	icon = 'code/modules/halo/weapons/turrets/turret_cov_casing.dmi'
 	caliber = "plas_turret_cells"
 	projectile_type = /obj/item/projectile/covenant/plasmarifle
