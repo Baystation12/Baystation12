@@ -437,3 +437,247 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A card issued to Merchants, indicating their right to sell and buy goods."
 	icon_state = "trader"
 	access = list(access_merchant)
+
+
+
+
+//////////////////////////////////////////////////
+///////DEAD SPACE GENERAL SHIP/COLONY IDS/////////
+//////////////////////////////////////////////////
+
+/obj/item/weapon/card/id/holoidcap
+	name = "captain's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13captain
+
+/obj/item/weapon/card/id/holoidflieutenant
+	name = "first lieutenant's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13flieutenant
+
+/obj/item/weapon/card/id/holoidbensign
+	name = "bridge ensign's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13bensign
+
+/obj/item/weapon/card/id/holoidbartender
+	name = "bartender's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13bartender
+
+/obj/item/weapon/card/id/holoidlinecook
+	name = "line cook's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13linecook
+
+/obj/item/weapon/card/id/holoiddirectorofmining
+	name = "director of mining's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13dom
+
+/obj/item/weapon/card/id/holoidsupplyofficer
+	name = "supply officer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13supplyofficer
+	
+/obj/item/weapon/card/id/holoidcargotransportspecs
+	name = "cargo transport specialist's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13cargojockey
+
+/obj/item/weapon/card/id/holoidgravityman
+	name = "gravity tether operator's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13gravityman
+
+/obj/item/weapon/card/id/holoidminingforeman
+	name = "mining foreman's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13miningforeman
+
+/obj/item/weapon/card/id/holoidaegiscolonist
+	name = "colonist's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13necromorphbait
+
+/obj/item/weapon/card/id/holoidchiefengineman
+	name = "chief engineer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13chiefofengines
+
+/obj/item/weapon/card/id/holoidengineermeatshield
+	name = "technical engineer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13expendableengineer
+	
+/obj/item/weapon/card/id/holoidseniormed
+	name = "senior medical officer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13seniormedofficer
+
+/obj/item/weapon/card/id/holoidmedicaldoc
+	name = "medical doctor's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13meddoctor
+	
+/obj/item/weapon/card/id/holoidthefirsttogoinsane
+	name = "surgeon's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13medsurgeon
+	
+/obj/item/weapon/card/id/holoidaltmanbepraised
+	name = "chief science officer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13chiefsciencenerd
+	
+/obj/item/weapon/card/id/holoidwhosaltman
+	name = "research assistant's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13juniorsciencenerd
+
+/obj/item/weapon/card/id/holoidlawfulgood
+	name = "chief security officer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13chiefsecurityofficer
+
+/obj/item/weapon/card/id/holoidchaoticgood
+	name = "senior security officer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13seniorsecurityofficer
+
+/obj/item/weapon/card/id/holoidneutralgood
+	name = "security officer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13securityofficer
+	
+/obj/item/weapon/card/id/holoiddeadchief
+	name = "psec security chief's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13psecsecuritychief
+	
+/obj/item/weapon/card/id/holoiddeadofficer
+	name = "psec security officer's holographic id"
+	desc = "A holographic identification badge used in conjunction with RIG clothing."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	job_access_type = /datum/job/ds13psecsecurityofficer
+
+//////////////////////////////////////////////////
+///////DEAD SPACE EDF/UNI/KELLION IDS BELOW///////
+//////////////////////////////////////////////////
+
+
+//edf// 
+
+/obj/item/weapon/card/id/edfcommholobadge
+	name = "EDF lieutenant's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_ai_upload, access_external_airlocks)
+
+/obj/item/weapon/card/id/edfmedholobadge
+	name = "EDF medic's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_ai_upload, access_external_airlocks)
+
+/obj/item/weapon/card/id/edfengieholobadge
+	name = "EDF engineer's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_ai_upload, access_external_airlocks)
+
+/obj/item/weapon/card/id/edfgruntholobadge
+	name = "EDF serviceman's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_ai_upload, access_external_airlocks)
+
+//uni//
+
+/obj/item/weapon/card/id/unisoldierbadge
+	name = "unitologist follower's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_tcomsat, access_external_airlocks)
+
+/obj/item/weapon/card/id/unizerkerbadge
+	name = "unitologist berserker's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_tcomsat, access_external_airlocks)
+
+/obj/item/weapon/card/id/uniengiebadge
+	name = "unitologist medic's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_tcomsat, access_external_airlocks)
+
+/obj/item/weapon/card/id/unimedicbadge
+	name = "unitologist engineer's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_tcomsat, access_external_airlocks)
+
+/obj/item/weapon/card/id/unifaithfulbadge
+	name = "unitologist leader's holographic id"
+	desc = "A holographic identification badge used in conjunction with a RIG identification system. This particular ones denotes the bearer as a Lieutenant in the Earth Defense Force's Uxor Battalion."
+	icon_state = "holowarrant_filled"
+	item_state = "holowarrant_filled"
+	access = list(access_tcomsat, access_external_airlocks)
+
+//kellion//
+
+//placeholder for kellion stuff
