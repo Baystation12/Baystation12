@@ -1,29 +1,25 @@
 /decl/hierarchy/outfit/job/ds13captain
 	name = OUTFIT_JOB_NAME("Captain")
-	head = /obj/item/clothing/head/caphat
-	uniform = /obj/item/clothing/under/rank/captain
+	uniform = /obj/item/clothing/under/captain/deadspace
 	l_ear = /obj/item/device/radio/headset/heads/captain
-	shoes = /obj/item/clothing/shoes/brown
-	id_type = /obj/item/weapon/card/id/gold
-	pda_type = /obj/item/modular_computer/pda/captain
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/holoidcap
 	
 	
 /decl/hierarchy/outfit/job/ds13flieutenant
 	name = OUTFIT_JOB_NAME("First Lieutenant")
-	uniform = /obj/item/clothing/under/rank/head_of_personnel
+	uniform = /obj/item/clothing/under/first_officer
 	l_ear = /obj/item/device/radio/headset/heads/hop
-	shoes = /obj/item/clothing/shoes/brown
-	id_type = /obj/item/weapon/card/id/silver
-	pda_type = /obj/item/modular_computer/pda/heads/hop
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/holoidflieutenant
 	
 	
 /decl/hierarchy/outfit/job/ds13bensign
 	name = OUTFIT_JOB_NAME("Bridge Ensign")
-	uniform = /obj/item/clothing/under/rank/head_of_personnel
+	uniform = /obj/item/clothing/under/bridge_officer
 	l_ear = /obj/item/device/radio/headset/heads/hop
-	shoes = /obj/item/clothing/shoes/brown
-	id_type = /obj/item/weapon/card/id/silver
-	pda_type = /obj/item/modular_computer/pda/heads/hop
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/holoidbensign
 	
 	
 	
