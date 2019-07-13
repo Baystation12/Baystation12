@@ -1,0 +1,4 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - tweak: "Makes the machete sheath its own selection under loadout; removes it from the list of holster selections."
