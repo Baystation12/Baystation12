@@ -9,12 +9,13 @@
 	anchored = 1
 	var/health = 500
 	var/datum/flood_spawner/flood_spawner
+	var/list/spawn_pool = list()
 	var/max_flood = 10
 	var/respawn_delay = 600
 
 /obj/structure/biomass/New()
 	..()
-	flood_spawner = new(src, max_flood, respawn_delay)
+	flood_spawner = new(src, max_flood, respawn_delay,spawn_pool)
 	icon_state = pick(icon_states(icon))
 
 //not necessary if they all spawn in the bottom left corner
@@ -32,6 +33,38 @@
 		to_chat(examiner,"<span class = 'notice'>[src] looks damaged.</span>")
 	else
 		to_chat(examiner,"<span class = 'warning'>[src] is heavily damaged!</span>")
+
+/obj/structure/biomass/proc/take_damage(var/amount, var/damage_type)
+	health -= amount
+
+	//double damage from fire
+	if(damage_type == BURN)
+		health -= amount
+
+	if(health <= 0)
+		if(damage_type == BURN)
+			src.visible_message("<span class='danger'>[src] is roasted to cinders and disintegrates into ash!</span>")
+		else
+			src.visible_message("<span class='danger'>[src] is torn apart and disintegrates into shreds!</span>")
+		qdel(flood_spawner)
+		qdel(src)
+
+/obj/structure/biomass/attackby(var/obj/item/I, var/mob/living/user)
+	. = ..()
+	take_damage(I.force, damtype)
+
+/obj/structure/biomass/bullet_act(var/obj/item/projectile/Proj)
+	. = ..()
+	take_damage(Proj.damage, Proj.damage_type)
+
+/obj/structure/biomass/ex_act(var/severity)
+
+	if(severity == 1)
+		take_damage(250, BURN)
+	else if(severity == 2)
+		take_damage(100, BURN)
+	else
+		take_damage(50, BURN)
 
 /obj/structure/biomass/medium
 	icon = 'flood_bio_med.dmi'
@@ -73,36 +106,9 @@
 	icon = 'flood_bio.dmi'
 	icon_state = "pulsating"
 	max_flood = 3
+	spawn_pool = list(\
+	/mob/living/simple_animal/hostile/flood/combat_form/prisoner, \
+	/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard, \
+	/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew \
+	)
 	respawn_delay = 300
-
-/obj/structure/biomass/proc/take_damage(var/amount, var/damage_type)
-	health -= amount
-
-	//double damage from fire
-	if(damage_type == BURN)
-		health -= amount
-
-	if(health <= 0)
-		if(damage_type == BURN)
-			src.visible_message("<span class='danger'>[src] is roasted to cinders and disintegrates into ash!</span>")
-		else
-			src.visible_message("<span class='danger'>[src] is torn apart and disintegrates into shreds!</span>")
-		qdel(flood_spawner)
-		qdel(src)
-
-/obj/structure/biomass/attackby(var/obj/item/I, var/mob/living/user)
-	. = ..()
-	take_damage(I.force, damtype)
-
-/obj/structure/biomass/bullet_act(var/obj/item/projectile/Proj)
-	. = ..()
-	take_damage(Proj.damage, Proj.damage_type)
-
-/obj/structure/biomass/ex_act(var/severity)
-
-	if(severity == 1)
-		take_damage(250, BURN)
-	else if(severity == 2)
-		take_damage(100, BURN)
-	else
-		take_damage(50, BURN)
