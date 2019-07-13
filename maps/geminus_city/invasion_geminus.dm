@@ -20,3 +20,5 @@
 #include "../../code/modules/halo/lobby_music/halo_music.dm"
 
 #include "../_gamemodes/invasion/gamemode.dm"
+#include "../_gamemodes/invasion/gamemode_revolution.dm"
+#include "../_gamemodes/invasion/gamemode_reclamation.dm"

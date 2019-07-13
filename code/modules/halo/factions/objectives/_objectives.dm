@@ -88,8 +88,8 @@
 	return 0
 
 /datum/objective/retrieve
-	var/points_per_item = 100
-	win_points = 100
+	var/points_per_item = 75
+	win_points = 75
 	var/items_retrieved = 0
 	var/list/delivery_areas
 	find_specific_target = 1

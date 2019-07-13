@@ -14,6 +14,7 @@
 	var/list/objectives_specific_target = list()
 	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
+	var/end_conditions_required = 2
 
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
@@ -24,18 +25,7 @@
 
 	//hide some faction sectors from factions not playing
 	for(var/obj/effect/overmap/S in world)
-		var/hide = 0
 		if(S.type in overmap_hide)
-			hide = 1
-		else if(!S.faction)
-			continue
-		else
-			hide = 1
-			for(var/datum/faction/F in factions)
-				if(F.name == S.faction)
-					hide = 0
-					break
-		if(hide)
 			if(S && S.map_z_data.len)
 				var/obj/effect/landmark/map_data/check_data = S.map_z_data[1]
 				S.loc = check_data.loc
@@ -63,22 +53,23 @@
 		/datum/objective/protect_ship/covenant,\
 		/datum/objective/protect/covenant_leader,\
 		/datum/objective/glass_colony,\
-		/datum/objective/retrieve/steal_ai,\
+		///datum/objective/retrieve/steal_ai,
 		/datum/objective/retrieve/nav_data,\
-		///datum/objective/destroy_unsc_ship,
-		/datum/objective/retrieve_artifact)
+		/datum/objective/destroy_ship/covenant,
+		/datum/objective/destroy_ship/covenant_odp,
+		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
 	GLOB.COVENANT.has_flagship = 1
 
 	//setup unsc objectives
 	objective_types = list(\
 		/datum/objective/protect_ship/unsc,\
-		/datum/objective/retrieve_artifact/unsc,\
+		/datum/objective/retrieve/artifact/unsc,\
 		/datum/objective/protect/unsc_leader,\
 		/datum/objective/capture_innies,\
 		/datum/objective/retrieve/steal_ai/cole_protocol,\
 		/datum/objective/retrieve/nav_data/cole_protocol,\
-		/datum/objective/destroy_cov_ship,\
+		/datum/objective/destroy_ship/unsc,\
 		/datum/objective/protect_colony)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
@@ -163,7 +154,7 @@
 		*/
 
 	//if 2 or more end conditions are met, end the game
-	return (round_end_reasons.len >= 2)
+	return (round_end_reasons.len >= end_conditions_required)
 
 /datum/game_mode/outer_colonies/declare_completion()
 
@@ -244,18 +235,20 @@
 		text += "<h2>Stalemate! All factions failed in their objectives.</h2>"
 	else
 		//check if only the winning faction scored, then treat them slightly differently
+		//this rates the victory based on how many objectives are completed... disabling it means victories are only rated compared to other factions
 		if(all_points == winning_faction.points)
 			all_points = winning_faction.max_points
 
 		var/win_type = "Pyrrhic"
-		if(winning_faction.points/all_points <= 0.34)
+		var/win_ratio = winning_faction.points/all_points
+		if(win_ratio <= 0.34)
 			//this should never or rarely happen
 			win_type = "Pyrrhic"
-		else if(winning_faction.points/all_points < 0.66)
+		else if(win_ratio < 0.66)
 			win_type = "Minor"
-		else if(winning_faction.points/all_points < 0.9)
+		else if(win_ratio < 0.9)
 			win_type = "Moderate"
-		else if(winning_faction.points/all_points != 1)
+		else if(win_ratio != 1)
 			win_type = "Major"
 		else
 			win_type = "Supreme"
@@ -283,7 +276,7 @@
 /datum/game_mode/outer_colonies/handle_mob_death(var/mob/M, var/unsc_capture = 0)
 	. = ..()
 
-	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander") || M.mind.faction == "Insurrectionist")
+	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander","Insurrectionist Officer") || M.mind.faction == "Insurrectionist")
 		var/datum/faction/unsc/unsc = locate() in factions
 		if(unsc)
 			var/datum/objective/capture_innies/capture_innies = locate() in unsc.all_objectives
