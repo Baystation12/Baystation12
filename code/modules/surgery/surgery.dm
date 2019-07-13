@@ -62,6 +62,10 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	if(istype(target) && target_zone)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(affected)
+			// Check if clothing is blocking access
+			var/obj/item/I = target.get_covering_equipped_item_by_zone(target_zone)
+			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
+				return FALSE
 			// Check various conditional flags.
 			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_ROBOTIC(affected)) || \
 			 ((surgery_candidate_flags & SURGERY_NO_CRYSTAL) && BP_IS_CRYSTAL(affected))   || \
