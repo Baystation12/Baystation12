@@ -166,3 +166,8 @@
 	name = "beret"
 	desc = "A simple, solid color beret. This one has no emblems or insignia on it."
 	icon_state = "beret_white"
+	
+/obj/item/clothing/head/beret/ishimurasecuritychiefberet
+	name = "chief security officer beret"
+	desc = "A brown beret worn by the Chief Security Officer."
+	icon_state = "ishimurasecberet"
