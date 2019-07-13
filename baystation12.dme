@@ -258,6 +258,7 @@
 #include "code\datums\communication\~defines.dm"
 #include "code\datums\extensions\_defines.dm"
 #include "code\datums\extensions\deity_be_near.dm"
+#include "code\datums\extensions\event_registration.dm"
 #include "code\datums\extensions\extensions.dm"
 #include "code\datums\extensions\fake_data.dm"
 #include "code\datums\extensions\fusion_plant.dm"
