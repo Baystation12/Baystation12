@@ -1,7 +1,3 @@
-#define MECH_BASE_LAYER    src.layer
-#define MECH_PILOT_LAYER   MECH_BASE_LAYER+0.01
-#define MECH_COCKPIT_LAYER MECH_PILOT_LAYER+0.01
-
 proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, var/overlay_layer = FLOAT_LAYER)
 	var/use_key = "[cache_key]-[cache_icon]-[decal ? decal : "none"]-[image_colour ? image_colour : "none"]"
 	if(!GLOB.mech_image_cache[use_key])
@@ -45,7 +41,7 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 		if(hardpoint_object)
 			var/use_icon_state = "[hardpoint_object.icon_state]_[hardpoint]"
 			if(use_icon_state in GLOB.mech_weapon_overlays)
-				new_overlays += get_mech_image(null, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', null, MECH_COCKPIT_LAYER + hardpoint_object.layer_offset )
+				new_overlays += get_mech_image(null, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', null, hardpoint_object.mech_layer )
 	overlays = new_overlays
 
 /mob/living/exosuit/proc/update_pilots(var/update_overlays = TRUE)
@@ -64,11 +60,11 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 				var/list/directional_offset_values = offset_values["[dir]"]
 				draw_pilot.pixel_x = pilot.default_pixel_x + directional_offset_values["x"]
 				draw_pilot.pixel_y = pilot.default_pixel_y + directional_offset_values["y"]
+				draw_pilot.pixel_z = 0
 				draw_pilot.transform = null
 			LAZYADD(pilot_overlays, draw_pilot)
 		if(update_overlays && LAZYLEN(pilot_overlays))
 			overlays += pilot_overlays
 
-#undef MECH_PILOT_LAYER
-#undef MECH_COCKPIT_LAYER
-#undef MECH_BASE_LAYER
+/mob/living/exosuit/regenerate_icons()
+	return

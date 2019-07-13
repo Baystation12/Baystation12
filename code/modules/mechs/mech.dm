@@ -66,8 +66,8 @@
 /mob/living/exosuit/is_flooded()
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
 
-/mob/living/exosuit/Initialize(var/newloc, var/obj/structure/heavy_vehicle_frame/source_frame)
-	. = ..(newloc)
+/mob/living/exosuit/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame)
+	. = ..()
 
 	if(!access_card) access_card = new (src)
 

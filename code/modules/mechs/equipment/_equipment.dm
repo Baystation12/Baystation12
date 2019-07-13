@@ -13,7 +13,7 @@
 	var/equipment_delay = 0
 	var/active_power_use = 1 KILOWATTS // How much does it consume to perform and accomplish usage
 	var/passive_power_use = 0          // For gear that for some reason takes up power even if it's supposedly doing nothing (mech will idly consume power)
-	var/layer_offset = 0               // Special cases where you need your object to render further in front of things or behind them
+	var/mech_layer = MECH_COCKPIT_LAYER //For the part where it's rendered as mech gear
 
 /obj/item/mech_equipment/attack() //Generally it's not desired to be able to attack with items
 	return 0

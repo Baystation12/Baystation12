@@ -76,7 +76,7 @@
 	icon_state = "mech_floodlight"
 	item_state = "mech_floodlight"
 	restricted_hardpoints = list(HARDPOINT_HEAD)
-	layer_offset = -0.02
+	mech_layer = MECH_UNDER_LAYER
 
 	var/on = 0
 	var/l_max_bright = 0.9

@@ -16,8 +16,9 @@
 		else
 			to_chat(usr, SPAN_WARNING("There is no radio installed."))
 
-/obj/screen/movable/exosuit/Initialize(var/mob/living/exosuit/newowner)
+/obj/screen/movable/exosuit/Initialize()
 	. = ..()
+	var/mob/living/exosuit/newowner = loc
 	if(!istype(newowner))
 		return qdel(src)
 	owner = newowner
@@ -114,8 +115,8 @@
 			new_overlays += GLOB.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
-/obj/screen/movable/exosuit/hardpoint/New(var/newloc, var/newtag)
-	..(newloc)
+/obj/screen/movable/exosuit/hardpoint/Initialize(mapload, var/newtag)
+	. = ..()
 	hardpoint_tag = newtag
 	name = "hardpoint ([hardpoint_tag])"
 
