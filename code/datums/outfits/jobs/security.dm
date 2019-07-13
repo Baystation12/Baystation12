@@ -1,52 +1,52 @@
 /decl/hierarchy/outfit/job/security/ds13chiefsecurityofficer
 	name = OUTFIT_JOB_NAME("Chief Security Officer")
+	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/heads/hos
-	uniform = /obj/item/clothing/under/rank/head_of_security
-	id_type = /obj/item/weapon/card/id/security/head
-	pda_type = /obj/item/modular_computer/pda/heads/hos
-
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	gloves = /obj/item/clothing/gloves/thick
+	shoes = /obj/item/clothing/shoes/dutyboots
+	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
+	id_type = /obj/item/weapon/card/id/holoidlawfulgood
 
 /decl/hierarchy/outfit/job/security/ds13seniorsecurityofficer
 	name = OUTFIT_JOB_NAME("Senior Security Officer")
-	uniform = /obj/item/clothing/under/rank/warden
-	l_pocket = /obj/item/device/flash
-	id_type = /obj/item/weapon/card/id/security/warden
-	pda_type = /obj/item/modular_computer/pda/security
-
+	uniform = /obj/item/clothing/under/security/deadspace
+	l_ear = /obj/item/device/radio/headset/headset_sec
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	gloves = /obj/item/clothing/gloves/thick
+	shoes = /obj/item/clothing/shoes/dutyboots
+	suit = /obj/item/clothing/suit/armor/ishimurasecurity
+	id_type = /obj/item/weapon/card/id/holoidchaoticgood
 
 /decl/hierarchy/outfit/job/security/ds13securityofficer
 	name = OUTFIT_JOB_NAME("Security Officer")
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/headset_sec
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	gloves = /obj/item/clothing/gloves/thick
-	shoes = /obj/item/clothing/shoes/jackboots
-	uniform = /obj/item/clothing/under/rank/security
-	l_pocket = /obj/item/device/flash
-	r_pocket = /obj/item/weapon/handcuffs
-	id_type = /obj/item/weapon/card/id/security
-	pda_type = /obj/item/modular_computer/pda/security
-
+	shoes = /obj/item/clothing/shoes/dutyboots
+	suit = /obj/item/clothing/suit/armor/ishimurasecurity
+	id_type = /obj/item/weapon/card/id/holoidneutralgood
 
 /decl/hierarchy/outfit/job/security/ds13PSECboss
 	name = OUTFIT_JOB_NAME("PSEC Security Chief")
+	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/heads/hos
-	uniform = /obj/item/clothing/under/rank/head_of_security
-	id_type = /obj/item/weapon/card/id/security/head
-	pda_type = /obj/item/modular_computer/pda/heads/hos
-
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	gloves = /obj/item/clothing/gloves/thick
+	shoes = /obj/item/clothing/shoes/dutyboots
+	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
+	id_type = /obj/item/weapon/card/id/holoiddeadchief
 
 /decl/hierarchy/outfit/job/security/ds13PSECofficer
 	name = OUTFIT_JOB_NAME("PSEC Security Officer")
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/headset_sec
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	gloves = /obj/item/clothing/gloves/thick
-	shoes = /obj/item/clothing/shoes/jackboots
-	uniform = /obj/item/clothing/under/rank/security
-	l_pocket = /obj/item/device/flash
-	r_pocket = /obj/item/weapon/handcuffs
-	id_type = /obj/item/weapon/card/id/security
-	pda_type = /obj/item/modular_computer/pda/security
-
+	shoes = /obj/item/clothing/shoes/dutyboots
+	suit = /obj/item/clothing/suit/armor/ishimurasecurity
+	id_type = /obj/item/weapon/card/id/holoiddeadofficer
 
 ////////////////////////////////////////////////////////////////////////////////
 ////			DEFAULT OUTFITS BELOW HERE.									////
