@@ -546,7 +546,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "prisoner_infected2"
 	move_to_delay = 4
 	health = 50 //intentionally squishy to give melee combat a chance
-	maxHealth = 75
+	maxHealth = 50
 	melee_damage_lower = 15
 	melee_damage_upper = 25 //damage is scaled on the basis that there will be a lot of these and players will need to live after encounters
 	attacktext = "stabs at"
@@ -558,7 +558,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "prisoner_infected1"
 	icon_dead = "prisoner_infected1_dead"
 	move_to_delay = 6 //slower than common counterpart to give sense of weight to it
-	health = 60 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
+	health = 85 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
 	maxHealth = 85
 	melee_damage_lower = 20 //as above so below
 	melee_damage_upper = 30
