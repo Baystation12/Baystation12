@@ -57,7 +57,7 @@
 		current_dock_target = location.special_dock_targets[name]
 	else
 		current_dock_target = dock_target
-	shuttle_docking_controller = locate(current_dock_target)
+	shuttle_docking_controller = SSshuttle.docking_registry[current_dock_target]
 /*
 	Docking stuff
 */
