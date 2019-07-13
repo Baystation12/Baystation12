@@ -435,3 +435,18 @@
 	desc = "A heavy armored vest in a light grey urban camo. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
 	icon_state = "m_vest"
 	item_state = "m_vest"
+
+
+
+/obj/item/clothing/suit/armor/secjacket
+	name = "security jacket"
+	desc = "A sturdy, stab proof black jacket with reinforced fabric.It bears a Gold Tag with 'POLICE' written on it."
+	icon_state = "secjacket"
+	item_state = "secjacket"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	armor = list(melee = 40, bullet = 15, laser = 15, energy = 5, bomb = 15, bio = 0, rad = 0)
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+
+
+
