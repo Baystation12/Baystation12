@@ -1471,6 +1471,7 @@
 #include "code\modules\halo\covenant\energybarricade.dm"
 #include "code\modules\halo\covenant\energybarricade_vacuum.dm"
 #include "code\modules\halo\covenant\engineer.dm"
+#include "code\modules\halo\covenant\first_aid.dm"
 #include "code\modules\halo\covenant\food_nipple.dm"
 #include "code\modules\halo\covenant\gas_packet.dm"
 #include "code\modules\halo\covenant\gas_processor.dm"
@@ -1770,6 +1771,7 @@
 #include "code\modules\halo\weapons\turrets\chaingun.dm"
 #include "code\modules\halo\weapons\turrets\deploy_kits.dm"
 #include "code\modules\halo\weapons\turrets\HMG.dm"
+#include "code\modules\halo\weapons\turrets\plas_turret.dm"
 #include "code\modules\halo\weapons\turrets\turret.dm"
 #include "code\modules\halo\weapons\~undef\~undef.dm"
 #include "code\modules\holodeck\HolodeckControl.dm"
@@ -2833,4 +2835,3 @@
 #include "maps\~mapsystem\switch_maps.dm"
 #include "maps\~unit_tests\unit_testing.dm"
 #include "~code\global_init.dm"
-// END_INCLUDE

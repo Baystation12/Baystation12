@@ -2,6 +2,7 @@
 	name = "VT9-042"
 	icon = 'exo_research_sector.dmi'
 	icon_state = "research"
+	desc = "A dusty backwater planet. There is evidence of human habitation."
 	known = 0
 	block_slipspace = 1
 

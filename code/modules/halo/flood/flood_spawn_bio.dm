@@ -49,6 +49,32 @@
 	bound_width = 128
 	bound_height = 128
 
+/obj/item/flood_spore
+	icon = 'flood_bio.dmi'
+	icon_state = "spore1"
+	mouse_opacity = 0
+	randpixel = 4
+
+/obj/item/flood_spore/New()
+	..()
+	icon_state = "spore[rand(1,8)]"
+
+/obj/item/flood_spore_growing
+	icon = 'flood_bio.dmi'
+	icon_state = "animated"
+	mouse_opacity = 0
+	randpixel = 4
+
+/obj/item/flood_spore_growing/New()
+	..()
+	icon_state = "animated[rand(1,6)]"
+
+/obj/structure/biomass/tiny
+	icon = 'flood_bio.dmi'
+	icon_state = "pulsating"
+	max_flood = 3
+	respawn_delay = 300
+
 /obj/structure/biomass/proc/take_damage(var/amount, var/damage_type)
 	health -= amount
 

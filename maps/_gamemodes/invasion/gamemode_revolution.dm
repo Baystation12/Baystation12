@@ -5,7 +5,9 @@
 	round_description = "In an outer colony on the edge of human space, a revolution is brewing."
 	extended_round_description = "In an outer colony on the edge of human space, a revolution is brewing."
 	required_players = 0
+	end_conditions_required = 1
 	factions = list(/datum/faction/unsc, /datum/faction/insurrection, /datum/faction/human_civ)
+	overmap_hide = list(/obj/effect/overmap/sector/exo_research, /obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/soe_osprey, /obj/effect/overmap/ship/covenant_corvette)
 	disabled_jobs_types = list(\
 		/datum/job/researchdirector,\
 		/datum/job/researcher,\
@@ -20,6 +22,7 @@
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_honour_guard,\
 		/datum/job/covenant/sangheili_shipmaster,\
+		/datum/job/covenant/sangheili_ultra,\
 		/datum/job/covenant/lesser_prophet,\
 		/datum/job/covenant/kigyarminor,\
 		/datum/job/covenant/kigyarmajor,\
@@ -27,4 +30,5 @@
 		/datum/job/covenant/unggoy_major,\
 		/datum/job/covenant/skirmminor,\
 		/datum/job/covenant/skirmmajor,\
+		/datum/job/covenant/skirmcommando,\
 		/datum/job/covenant/skirmmurmillo)
