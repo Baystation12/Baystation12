@@ -438,7 +438,7 @@
 	
 
 /obj/item/clothing/suit/armor/ishimurasecurity
-	name = "p.c.s.i security armour"
+	name = "cec security armour"
 	desc = "An armoured platecarrier designed to stop ballistic and bladed impacts."
 	icon_state = "ds_securityarmor"
 	item_state = "ds_securityarmor"
@@ -446,7 +446,7 @@
 	armor = list(melee = 60, bullet = 60, laser = 0, energy = 15, bomb = 35, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/ishimurasecuritychief
-	name = "p.c.s.i security armoured jacket"
+	name = "cec security armoured jacket"
 	desc = "An armoured jacket often worn by the Chief Security Officer, designed to stop ballistic and bladed impacts."
 	icon_state = "ds_securityjacket"
 	item_state = "ds_securityjacket"
