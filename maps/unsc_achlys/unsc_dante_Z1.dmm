@@ -30,7 +30,7 @@
 "aD" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/dante/deck2)
 "aE" = (/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/turf/simulated/wall/strong,/area/dante/deck2)
 "aF" = (/obj/machinery/computer/med_data{icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_keyboard = "comm"; icon_screen = "comm"; icon_state = "comm"; tag = "icon-comm"},/turf/simulated/wall/strong,/area/dante/deck2)
-"aG" = (/obj/machinery/computer/helm{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 2; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/turf/simulated/wall/strong,/area/dante/deck2)
+"aG" = (/obj/machinery/overmap_weapon_console/deck_gun_control/missile_control{tag = "icon-gun (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 2},/turf/simulated/wall/strong,/area/dante/deck2)
 "aH" = (/obj/structure/closet,/obj/item/weapon/reference,/turf/simulated/floor/tiled,/area/dante/deck2)
 "aI" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/dante/deck2)
 "aJ" = (/obj/structure/closet/medical_wall/filled{pixel_y = 32},/turf/simulated/floor/tiled,/area/dante/deck2)
