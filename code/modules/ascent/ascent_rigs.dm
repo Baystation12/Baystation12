@@ -1,3 +1,4 @@
+// Rigs and gear themselves.
 /obj/item/weapon/rig/mantid
 	name = "alate support exosuit"
 	desc = "A powerful support exosuit with integrated power supply, weapon and atmosphere. It's closer to a mech than a rig."
@@ -34,7 +35,6 @@
 		/obj/item/rig_module/maneuvering_jets
 		)
 	req_access = list(access_ascent)
-
 	var/mantid_caste = SPECIES_MANTID_ALATE
 
 // Renamed blade.
@@ -234,6 +234,14 @@
 		SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_suit_alate.dmi',
 		SPECIES_NABBER =       'icons/mob/species/nabber/onmob_suit_gas.dmi'
 		)
+	allowed = list(
+		/obj/item/clustertool,
+		/obj/item/weapon/gun/energy/particle/small,
+		/obj/item/weapon/weldingtool/electric/mantid,
+		/obj/item/device/multitool/mantid,
+		/obj/item/stack/medical/resin,
+		/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent
+	)
 
 /obj/item/clothing/shoes/magboots/rig/mantid
 	desc = "It's like a highly advanced forklift."

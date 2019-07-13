@@ -586,16 +586,3 @@ var/const/NO_EMAG_ACT = -50
 	access = list(access_merchant)
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_BEIGE
-
-/obj/item/weapon/card/id/ascent
-	name = "alien chip"
-	icon = 'icons/obj/ascent.dmi'
-	icon_state = "access_card"
-	desc = "A slender, complex chip of alien circuitry."
-	access = list(access_ascent)
-
-/obj/item/weapon/card/id/ascent/on_update_icon()
-	return
-
-/obj/item/weapon/card/id/ascent/prevent_tracking()
-	return TRUE 

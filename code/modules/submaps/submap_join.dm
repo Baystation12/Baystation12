@@ -63,6 +63,10 @@
 	var/mob/living/character = joining.create_character(spawn_turf)
 	if(istype(character))
 
+		var/mob/living/other_mob = job.handle_variant_join(character, job.title)
+		if(istype(other_mob))
+			character = other_mob
+
 		var/mob/living/carbon/human/user_human
 		if(ishuman(character))
 			user_human = character
@@ -92,13 +96,6 @@
 		var/datum/job/submap/ojob = job
 		if(istype(ojob) && ojob.info)
 			to_chat(character, ojob.info)
-
-		var/mob/living/other_mob = job.handle_variant_join(character, job.title)
-		if(istype(other_mob))
-			character = other_mob
-			user_human = character
-			if(!istype(user_human))
-				user_human = null
 
 		if(user_human && user_human.disabilities & NEARSIGHTED)
 			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(user_human), slot_glasses)

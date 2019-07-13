@@ -917,7 +917,7 @@
 /area/ship/ascent/fore_hallway)
 "co" = (
 /obj/structure/cable/cyan,
-/obj/machinery/power/smes/buildable/power_shuttle{
+/obj/machinery/power/smes/buildable/power_shuttle/ascent{
 	charge = 5e+006
 	},
 /turf/simulated/floor/ascent,
@@ -1952,7 +1952,7 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/smes/buildable/power_shuttle{
+/obj/machinery/power/smes/buildable/power_shuttle/ascent{
 	charge = 5e+006
 	},
 /turf/simulated/floor/ascent,
@@ -3196,7 +3196,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/power/smes/buildable/power_shuttle{
+/obj/machinery/power/smes/buildable/power_shuttle/ascent{
 	charge = 5e+006
 	},
 /turf/simulated/floor/ascent,
@@ -3212,7 +3212,7 @@
 "gO" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/cable/cyan,
-/obj/machinery/power/smes/buildable/power_shuttle{
+/obj/machinery/power/smes/buildable/power_shuttle/ascent{
 	charge = 5e+006
 	},
 /turf/simulated/floor/ascent,
@@ -4474,7 +4474,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/power/smes/buildable/power_shuttle{
+/obj/machinery/power/smes/buildable/power_shuttle/ascent{
 	charge = 5e+006
 	},
 /turf/simulated/floor/ascent,
