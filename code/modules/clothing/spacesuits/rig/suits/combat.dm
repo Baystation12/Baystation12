@@ -304,7 +304,7 @@
 	name = "unitologist combat rig control module"
 	suit_type = "unitologist combat rig"
 	icon = 'icons/obj/rig_modules.dmi'
-	icon_state = "unideac_rig"
+	icon_state = "unifaith_rig"
 	desc = "An old combat RIG used by SCAF over two hundred years ago. The armour has seen some wear but still functions as it should, it has been repainted in black and crimson colours. There are unitologist markings across the suit."
 	armor = list(melee = 60, bullet = 60, laser = 30, energy = 20, bomb = 30, bio = 40, rad = 40)
 	online_slowdown = 0.8
@@ -388,7 +388,7 @@
 	name = "unitologist zealot combat rig control module"
 	suit_type = "unitologist zealot combat rig"
 	icon = 'icons/obj/rig_modules.dmi'
-	icon_state = "unifaith_rig"
+	icon_state = "unideac_rig"
 	desc = "An old combat RIG used by SCAF over two hundred years ago. The armour has seen some wear but still functions as it should, it has been repainted in black and crimson colours. There are unitologist markings across the suit, this one in particular features marker script engraved across the suit, the armour of a zealot."
 	armor = list(melee = 60, bullet = 60, laser = 30, energy = 20, bomb = 30, bio = 40, rad = 40)
 	online_slowdown = 0.8

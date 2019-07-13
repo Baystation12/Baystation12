@@ -155,6 +155,15 @@
 	item_state = "bl_suit"
 	worn_state = "psysuit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	
+/obj/item/clothing/under/rigunder
+	name = "rig undersuit"
+	desc = "A tight bodysuit designed to be worn under a RIG suit in order to protect the less armoured areas of the body from heat and exposure to the elements."
+	icon_state = "ds_rigunder"
+	worn_state = "ds_rigunder"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	permeability_coefficient = 0.75
+	armor = list(melee = 15, bullet = 15, laser = 5,energy = 10, bomb = 15, bio = 20, rad = 30)
 
 /obj/item/clothing/under/gentlesuit
 	name = "gentlemans suit"
