@@ -134,6 +134,17 @@
 		update_icon()
 
 
+//Broken scrubber Used in hanger atmoshperic storage
+/obj/machinery/portable_atmospherics/powered/scrubber/broken
+	construct_state = /decl/machine_construction/default/panel_open
+	panel_open = 1
+
+/obj/machinery/portable_atmospherics/powered/scrubber/broken/Initialize()
+	. = ..()
+	var/part = uninstall_component(/obj/item/weapon/stock_parts/power/battery/buildable/stock)
+	if(part)
+		qdel(part)
+
 //Huge scrubber
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "Huge Air Scrubber"
