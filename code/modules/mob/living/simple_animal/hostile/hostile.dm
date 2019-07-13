@@ -25,6 +25,13 @@
 
 	var/feral = 0
 
+	var/datum/npc_overmind/our_overmind
+
+/mob/living/simple_animal/New()
+	. = ..()
+	if(our_overmind)
+		our_overmind.unsorted_troops += src
+
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
@@ -58,6 +65,9 @@
 				stance = HOSTILE_STANCE_ATTACK
 				T = M
 				break
+
+	if(our_overmind)
+		our_overmind.reports += new /datum/npc_report (1,src,null,ListTargets(10).len)
 	return T
 
 
