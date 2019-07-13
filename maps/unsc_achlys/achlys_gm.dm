@@ -1,6 +1,8 @@
 
 #define COMMS_CUTIN_EVENT_CHANCE 10
 #define COMMS_CUTIN_EVENT_DURATION 1 MINUTES
+#define FLOOD_EVENT_MINOR_START 25 MINUTES
+#define FLOOD_EVENT_MAJOR_START 30 MINUTES
 
 /datum/game_mode/achlys
 	name = "ONI Investigation: Achlys"
@@ -11,10 +13,12 @@
 	probability = 0
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
-	var/list/items_to_destroy = list(/obj/structure/navconsole)
+	var/list/items_to_destroy = list()
 	var/item_retrieve_tag = "retrievethis" //Map-set tags for items that need to be retrieved.
-	var/list/items_to_retrieve = list(/obj/item/weapon/research/sekrits)
-	var/list/rank_retrieve_names = list("Commanding Officer")//The name of the job that needs to be holding the items-to-retrieve
+	var/list/items_to_retrieve = list()
+	var/list/item_success_tag = "retrieveto"//the tag of an object that when the documents are in the contents of, counts as success
+	var/flood_spawn_event_minor
+	var/flood_spawn_event_major
 
 /datum/game_mode/achlys/proc/populate_items_destroy()
 	for(var/atom/destroy in world)
@@ -28,6 +32,8 @@
 
 /datum/game_mode/achlys/pre_setup()
 	..()
+	flood_spawn_event_minor = world.time + FLOOD_EVENT_MINOR_START
+	flood_spawn_event_major = world.time + FLOOD_EVENT_MAJOR_START
 	populate_items_destroy()
 	populate_items_retrieve()
 	if(prob(COMMS_CUTIN_EVENT_CHANCE))
@@ -47,11 +53,10 @@
 
 /datum/game_mode/achlys/proc/check_item_retrieve_status()
 	. = 1
-	for(var/atom/item in items_to_retrieve)
-		if(istype(item.loc,/mob/living/carbon/human))
-			var/mob/living/carbon/human/holder = item.loc
-			if(!(holder.mind) || !(holder.mind.assigned_role in rank_retrieve_names))
-				. = 0
+	var/atom/retrieval_loc = locate(item_success_tag)
+	for(var/item in items_to_retrieve)
+		if(!(item in retrieval_loc.contents))
+			. = 0
 
 /datum/game_mode/achlys/proc/do_special_event_handling() //Currently handles the "Comms cut-in event"
 	special_event_starttime = 0
@@ -71,10 +76,27 @@
 			qdel(spawned_tcomms_machine)
 			qdel(spawned_jammer)
 
+/*
+25 minutes in: flood spore and spore growing appear across the Achlys area
+
+35 minutes in: more spores and growing spores + tiny biomass spawn across the Achlys area with tiny biomass spawning only on floors
+
+Repeat 35 minute mark every 15 minutes after 35 minutes is up.
+
+All 3 of these cannot spawn on open space
+
+30 spores, 10 spore growing. 8 tiny biomass per z
+
+
+*/
+
 /datum/game_mode/achlys/process()
 	..()
 	if(special_event_starttime != 0 && world.time > special_event_starttime)
 		do_special_event_handling()
+	if(flood_spawn_event_minor != 0 && world.time > flood_spawn_event_minor)
+
+	if(flood_spawn_event_major != 0 && world.time > flood_spawn_event_major)
 
 /datum/game_mode/achlys/declare_completion()
 	..()
