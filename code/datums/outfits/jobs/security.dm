@@ -2,7 +2,7 @@
 	name = OUTFIT_JOB_NAME("Chief Security Officer")
 	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/heads/hos
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/dutyboots
 	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
@@ -12,7 +12,7 @@
 	name = OUTFIT_JOB_NAME("Senior Security Officer")
 	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/headset_sec
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/dutyboots
 	suit = /obj/item/clothing/suit/armor/ishimurasecurity
@@ -22,7 +22,7 @@
 	name = OUTFIT_JOB_NAME("Security Officer")
 	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/headset_sec
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/dutyboots
 	suit = /obj/item/clothing/suit/armor/ishimurasecurity
@@ -32,7 +32,7 @@
 	name = OUTFIT_JOB_NAME("PSEC Security Chief")
 	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/heads/hos
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/dutyboots
 	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
@@ -42,7 +42,7 @@
 	name = OUTFIT_JOB_NAME("PSEC Security Officer")
 	uniform = /obj/item/clothing/under/security/deadspace
 	l_ear = /obj/item/device/radio/headset/headset_sec
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/dutyboots
 	suit = /obj/item/clothing/suit/armor/ishimurasecurity
