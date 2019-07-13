@@ -1312,6 +1312,7 @@
 #include "code\modules\awaymissions\zlevel.dm"
 #include "code\modules\blob\blob.dm"
 #include "code\modules\client\asset_cache.dm"
+#include "code\modules\client\chat_icons.dm"
 #include "code\modules\client\client_defines.dm"
 #include "code\modules\client\client_helpers.dm"
 #include "code\modules\client\client_procs.dm"

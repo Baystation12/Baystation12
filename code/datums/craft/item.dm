@@ -14,7 +14,15 @@
 
 
 /obj/item/craft/proc/update()
-	desc = recipe.get_description(step)
+	desc = ""
+	var/offset = step + recipe.passive_steps.len
+	var/list/allsteps = recipe.passive_steps + recipe.steps
+	for (var/datum/craft_step/CS in allsteps)
+		if (offset > 0)
+			offset--
+			continue
+		desc += "\n  \icon[CS.icon_type] [CS.desc]"
+		//desc += "\n <img src= [a["icon"]] height=16 width=16>[a["desc"]]"
 
 
 /obj/item/craft/proc/continue_crafting(obj/item/I, mob/living/user)

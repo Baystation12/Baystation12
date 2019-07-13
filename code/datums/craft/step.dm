@@ -63,16 +63,17 @@
 		return FALSE
 
 	//The item needs to be close to the target object
-	if (target && (get_dist(I, target) > apply_range))
-		world << "dist failed"
+	//A bunch of extra safety checks for target, it might be nonexistent or in nullspace
+	if (target && isturf(target.loc) && (get_dist(I, target) > apply_range))
 		return FALSE
 
 
 
 	//The user has to be adjacent to at least one of the two things
-	if (user && !user.Adjacent(I) && (isTurf(target.loc) &&!user.Adjacent(target))
-		world << "Adjacency Failed"
-		return FALSE
+	if (user && !user.Adjacent(I))
+		//A bunch of extra safety checks for target, it might be nonexistent or in nullspace
+		if (target && isturf(target.loc) && !user.Adjacent(target))
+			return FALSE
 
 	return TRUE
 
@@ -87,7 +88,7 @@
 		return TRUE //Automated crafting by code
 
 	//A doafter for the work time
-	if (do_after(user, time, target))
+	if (do_after(user, time, ( (target && isturf(target.loc)) ? target : user) ) ) //We use the target as the target if it exists, and isn't in nullspace
 		return TRUE
 
 	return FALSE

@@ -17,7 +17,6 @@
 		L.open_craft_menu()
 
 /obj/structure/table/workbench/consume_resources(var/timespent, var/user)
-	world << "Workbench consume resources [timespent]"
 	var/time_in_seconds = timespent * 0.1 //This line is solely to make things more readable
 	use_power(time_in_seconds * active_power_usage)
 
