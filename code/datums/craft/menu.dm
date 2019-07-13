@@ -58,7 +58,6 @@
 			"desc" = CR.get_description(),
 			"steps" = CR.get_step_descriptions()
 		)
-		var/list/temp = data["cur_item"]
 	var/list/items = list()
 	for(var/datum/craft_recipe/recipe in SScraft.categories[curr_category])
 		items += list(list(
