@@ -63,7 +63,7 @@
 		/datum/objective/protect_ship/covenant,\
 		/datum/objective/protect/covenant_leader,\
 		/datum/objective/glass_colony,\
-		//datum/objective/retrieve/steal_ai
+		///datum/objective/retrieve/steal_ai,
 		/datum/objective/retrieve/nav_data,\
 		/datum/objective/destroy_ship/covenant,
 		/datum/objective/destroy_ship/covenant_odp,
