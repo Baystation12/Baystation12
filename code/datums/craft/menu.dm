@@ -56,6 +56,7 @@
 			"icon" = getAtomCacheFilename(CR.result),
 			"ref"  = "\ref[CR]",
 			"desc" = CR.get_description(),
+			"steps" = CR.get_step_descriptions()
 		)
 		var/list/temp = data["cur_item"]
 		world << "[temp["icon"]]"

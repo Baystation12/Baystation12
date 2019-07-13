@@ -20,6 +20,7 @@
 	var/category = "Misc"
 	var/icon_state = "device"
 	var/result
+	var/desc = null //If set, overrides the automatically retrieved description
 
 	var/list/steps
 	var/list/passive_steps
@@ -56,12 +57,17 @@
 
 /datum/craft_recipe/proc/get_description()
 	. = list()
-	var/atom/A = result
-	.+="[initial(A.desc)]<br>"
-	for(var/item in steps)
-		var/datum/craft_step/CS = item
-		. += CS.desc
-	return jointext(., "<br>")
+	if (desc)
+		.+=desc
+	else
+		var/atom/A = result
+		.+="[initial(A.desc)]"
+
+/datum/craft_recipe/proc/get_step_descriptions()
+	var/list/data = list()
+	for(var/datum/craft_step/CS in steps)
+		data += list(list("icon" = getAtomCacheFilename(CS.icon_type), "desc" = CS.desc))
+	return data
 
 
 /datum/craft_recipe/proc/can_build(mob/living/user, var/turf/T)

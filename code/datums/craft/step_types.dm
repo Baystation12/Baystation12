@@ -367,9 +367,10 @@
 		return TRUE
 
 
-/datum/craft_step/tool/find_item(mob/living/user, var/atom/craft = null)
+/datum/craft_step/passive/find_item(mob/living/user, var/atom/craft = null)
 	var/list/items = get_search_list(user, craft)
 	for (var/obj/I in items)
+		world << "[I] [I.type] Workbench:[I.get_tool_quality(required_quality)]/[required_level]"
 		if (I.get_tool_quality(required_quality) >= required_level)
 			return I
 

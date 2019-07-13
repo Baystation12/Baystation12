@@ -145,6 +145,7 @@
 	if (centrepoint)
 		items.Add(range(centrepoint, apply_range))
 
+	world << "Searchlist: [english_list(items)]"
 	return items
 
 //Override in child classes
