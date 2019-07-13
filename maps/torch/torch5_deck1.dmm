@@ -1102,6 +1102,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/development)
+"abY" = (
+/obj/machinery/door/airlock/atmos{
+	name = "Safe Room Atmospherics"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 4;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/crew_quarters/safe_room/firstdeck)
 "abZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
@@ -1271,6 +1281,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
+"aco" = (
+/obj/machinery/door/airlock/civilian{
+	name = "Equipment Storage"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/crew_quarters/safe_room/firstdeck)
 "acp" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 4;
@@ -2549,16 +2565,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
-"afB" = (
-/obj/machinery/door/airlock/atmos{
-	name = "Safe Room Atmospherics"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	dir = 4;
-	icon_state = "intact"
-	},
-/turf/space,
-/area/crew_quarters/safe_room/firstdeck)
 "afC" = (
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
@@ -30860,12 +30866,6 @@
 	},
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
-"uIH" = (
-/obj/machinery/door/airlock/civilian{
-	name = "Equipment Storage"
-	},
-/turf/space,
-/area/crew_quarters/safe_room/firstdeck)
 "uJd" = (
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
@@ -40224,9 +40224,9 @@ hBr
 hBr
 adK
 adK
-afB
+abY
 adK
-uIH
+aco
 adK
 vMw
 akO
