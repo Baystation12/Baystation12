@@ -11,8 +11,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
-		'sound/effects/attackblob.ogg',\
-		'sound/effects/blobattack.ogg'\
+		'sound/flood/melee.melee1.ogg','sound/flood/melee.melee10.ogg',\
+		'sound/flood/melee.melee11.ogg','sound/flood/melee.melee15.ogg',\
+		'sound/flood/melee.melee2.ogg','sound/flood/melee.melee20.ogg',\
+		'sound/flood/melee.melee5.ogg','sound/flood/melee.melee6.ogg',\
+		'sound/flood/melee.melee7.ogg','sound/flood/melee.melee8.ogg',\
 		)
 	/*
 	mob_bump_flag = SIMPLE_ANIMAL
@@ -27,11 +30,21 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	min_gas = list()
 	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
+	death_sounds = list('sound/flood/death.death10.ogg','sound/flood/death.death15.ogg',\
+						'sound/flood/death.death2.ogg','sound/flood/death.death20.ogg',\
+						'sound/flood/death.death3.ogg','sound/flood/death.death4.ogg',\
+						'sound/flood/death.death5.ogg','sound/flood/death.ogg')
+	pain_scream_sounds = list('sound/flood/pain.pain1.ogg','sound/flood/pain.pain15.ogg',\
+							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
+							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
 	assault_target_type = /obj/effect/landmark/assault_target
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()
 	GLOB.live_flood_simplemobs -= src
+	if(flood_spawner)
+		flood_spawner.flood_die(src)
+		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/New()
 	..()
@@ -45,11 +58,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(client || ckey)
 		target_mob = null
 
-/mob/living/simple_animal/hostile/flood/death()
-	. = ..()
-	if(flood_spawner)
-		flood_spawner.flood_die(src)
-		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
@@ -58,12 +66,27 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	h.Stun(999)
 	h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 	new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew
 	if(istype(h.species,/datum/species/sangheili))
-		if(prob(50))
-			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
-		else
-			mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
+	var/obj/item/clothing/suit/armor/special/combatharness/minor/MI = locate() in h.contents
+	if(istype(MI))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
+	var/obj/item/clothing/suit/armor/special/combatharness/major/MA = locate() in h.contents
+	if(istype(MA))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
+	var/obj/item/clothing/under/unsc/odst_jumpsuit/OD = locate() in h.contents
+	if(istype(OD))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/ODST
+	var/obj/item/clothing/under/unsc/marine_fatigues/MAR = locate() in h.contents
+	if(istype(MAR))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	var/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform/ONI = locate() in h.contents
+	if(istype(ONI))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/oni
+	var/obj/item/clothing/under/color/orange/PR = locate() in h.contents
+	if(istype(PR))
+		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner
 
 	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
 	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
@@ -72,7 +95,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	new_combat_form.ckey = h.ckey
 	new_combat_form.name = h.real_name
 	if(prob(50))
-		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,100)
+		playsound(new_combat_form.loc,PLAYER_TRANSFORM_SFX,70)
 	if(new_combat_form.ckey)
 		new_combat_form.stop_automated_movement = 1
 	for(var/obj/i in h.contents)
@@ -86,7 +109,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "anim"
 	icon_dead = "dead"
 	pass_flags = PASSTABLE
-	//
+	mob_size = MOB_MINISCULE
 	move_to_delay = 15
 	health = 1
 	maxHealth = 1
@@ -122,7 +145,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/infest_airlocks_nearby()
 	for(var/obj/machinery/door/airlock/door in view(2,src))
-		if(door.stat & BROKEN)
+		if(door.stat & BROKEN || door.welded == 1)
 			continue
 		visible_message("<span class = 'danger'>[name] leaps at [door], burrowing into the access control mechanisms...</span>")
 		adjustBruteLoss(1)
@@ -287,6 +310,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/obj/item/weapon/gun/our_gun
 
 	var/corpse_pulped = 0 //1 = cannot be revived, -1 = can be revived infinitely.
+	var/obj/item/inventory = null //an item goes in this variable of the instance with the full path "in/quotes". item in var will drop upon death
 
 /mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
 	. = ..()
@@ -313,6 +337,23 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return
 
 	spawn_infestor()
+
+/mob/living/simple_animal/hostile/flood/combat_form/verb/smash_airlocks_nearby()
+	set name = "Destroy Weld"
+	set category = "Abilities"
+
+	if(stat == DEAD)
+		to_chat(usr,"<span class = 'notice'>You can't do that, you're dead!</span>")
+		return
+	smash_airlock()
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/smash_airlock()
+	for(var/obj/machinery/door/airlock/door in view(1,src))
+		if(door.welded == 1)
+			visible_message("<span class = 'danger'>[name] swipes at [door], swiftly slicing the crude welding apart!</span>")
+			door.welded = 0
+			door.update_icon()
+			playsound(src.loc, 'sound/effects/grillehit.ogg', 80)
 
 /mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
 	if(our_gun) //Only class us as an advanced tool user if we need it to use our gun.
@@ -356,8 +397,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	for(var/mob/living/carbon/human/h in view(7,src))
 		return 1
 
+/mob/living/simple_animal/hostile/flood/combat_form/proc/dump_inventory()
+	new src.inventory(loc)
+
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
+	dump_inventory()
 	. = ..()
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
@@ -368,6 +413,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return
 	if(human_in_sight() && isnull(our_infestor))
 		spawn_infestor()
+	if(locate(/obj/machinery/door/airlock) in view(1,src))
+		smash_airlock()
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)
@@ -383,6 +430,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
+	resistance = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 35
 	attacktext = "bashed"
@@ -397,6 +445,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 200 //Combat forms need to be hardier.
 	maxHealth = 200
+	resistance = 5
 	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
@@ -416,6 +465,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 150 //Combat forms need to be hardier.
 	maxHealth = 150
+	resistance = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 30
 	attacktext = "bashed"
@@ -430,6 +480,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 2
 	health = 200 //Combat forms need to be hardier.
 	maxHealth = 200
+	resistance = 5
 	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
@@ -474,3 +525,74 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	melee_damage_lower = 40
 	melee_damage_upper = 55
 	attacktext = "Whips"
+	mob_size = MOB_LARGE
+	resistance = 20
+	bound_width = 96
+	bound_height = 96
+
+//below are prison related flood
+//these flood are gamemode specific and shouldn't be used elsewhere as they're crafted
+//specifically for the achlys gamemode. you've been warned.
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/spawn_infestor()
+	our_infestor = 1
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner
+	name = "infected prisoner"
+	desc = "Some sort of creature that clearly used to be human, wearing an orange jumpsuit."
+	icon = 'code/modules/halo/flood/flood_combat_human.dmi'
+	icon_state = "prisoner_infected2"
+	icon_dead = "prisoner_infected2_dead"
+	icon_living = "prisoner_infected2"
+	move_to_delay = 4
+	health = 50 //intentionally squishy to give melee combat a chance
+	maxHealth = 75
+	melee_damage_lower = 15
+	melee_damage_upper = 25 //damage is scaled on the basis that there will be a lot of these and players will need to live after encounters
+	attacktext = "stabs at"
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated
+	name = "lumpy creature"
+	desc = "Some kind of monster with tatters of an orange jumpsuit clinging to it's bulbous body."
+	icon_state = "prisoner_infected1"
+	icon_living = "prisoner_infected1"
+	icon_dead = "prisoner_infected1_dead"
+	move_to_delay = 6 //slower than common counterpart to give sense of weight to it
+	health = 60 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
+	maxHealth = 85
+	melee_damage_lower = 20 //as above so below
+	melee_damage_upper = 30
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard
+	name = "infected guard"
+	desc = "Some sort of creature that used to be human, donning a gray prison guard jumpsuit."
+	icon_state = "guard_infected1"
+	icon_living = "guard_infected1"
+	icon_dead = "guard_infected1_dead"
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard
+	desc = "Some kind of monster with shredded remains of a gray jumpsuit stuck to it's mishappen body."
+	icon_state = "guard_infected2"
+	icon_living = "guard_infected2"
+	icon_dead = "guard_infected2_dead"
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
+	name = "abomination"
+	desc = "A huge, bizarre monster that propels itself on two torso sized arms, leaving it's legs to dangle uselessly below it."
+	icon_state = "abomination"
+	icon_living = "abomination"
+	icon_dead = "abomination_dead"
+	move_to_delay = 2 //fast enough to give a sense of danger and muscle
+	resistance = 5
+	health = 250
+	maxHealth = 250 //these will be specifically put in certain locations and not RNG based
+	melee_damage_lower = 30
+	melee_damage_upper = 40
+	attacktext = "smashes"
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew
+	name = "sickly creature"
+	desc = "This used to be a human male, and it's body has changed somehow."
+	icon_state = "nudist"
+	icon_living = "nudist"
+	icon_dead = "nudist_dead"
