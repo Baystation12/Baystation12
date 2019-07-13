@@ -294,7 +294,9 @@ var/decl/asset_cache/asset_cache = new()
 				register_asset(filename, I)
 				assets[filename] = I
 
-			for(var/datum/craft_step/CS in CR.steps)
+			var/list/steplist = CR.steps + CR.passive_steps
+
+			for(var/datum/craft_step/CS in steplist)
 				if(CS.icon_type)
 					var/filename = sanitizeFileName("[CS.icon_type].png")
 					var/icon/I = getFlatTypeIcon(CS.icon_type)

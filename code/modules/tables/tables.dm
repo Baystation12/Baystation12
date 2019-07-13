@@ -190,10 +190,11 @@
 		update_material()
 
 /obj/structure/table/proc/update_desc()
-	if(material)
-		name = "[material.display_name] table"
-	else
-		name = "table frame"
+	if (can_plate)
+		if(material)
+			name = "[material.display_name] table"
+		else
+			name = "table frame"
 
 	if(reinforced)
 		name = "reinforced [name]"

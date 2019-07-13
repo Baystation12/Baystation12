@@ -537,3 +537,15 @@ proc/TextPreview(var/string,var/len=40)
 	var/regex/R = regex("(\[^[char]\]*)$")
 	R.Find(text)
 	return R.group[1]
+
+
+//Generates a clickable link which will jump the camera/ghost to the target atom
+//Useful for admin procs
+/proc/jumplink(var/atom/target)
+	if (QDELETED(target))
+		return ""
+	var/turf/T = get_turf(target)
+	var/area/A = get_area(target)
+	var/where = "[A? A.name : "Unknown Location"] | [T.x], [T.y], [T.z]"
+	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>[where]</a>"
+	return whereLink

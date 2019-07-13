@@ -107,6 +107,7 @@
 /datum/craft_recipe/weapon/ripper
 	name = "RC-DS Remote Control Disc Ripper"
 	result = /obj/item/weapon/gun/projectile/ripper
+	flags = CRAFT_ON_SURFACE
 	passive_steps = list(
 	list(CRAFT_PASSIVE, QUALITY_WORKBENCH, 1, 0)
 	)

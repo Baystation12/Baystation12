@@ -67,6 +67,7 @@
 		if (user)
 			user.unEquip(I, target)
 		if (I.loc != target)
+			user.unEquip(I, target)
 			I.forceMove(target) //The item will be deleted along with the craft object later, when all steps are complete
 			//In the meantime, it can be recovered if crafting is cancelled
 
@@ -343,7 +344,7 @@
 		if (params.len >= 4 && isnum(params[4]))
 			apply_range = params[4]
 
-	desc = "Requires a nearby [required_quality]."
+	desc = SPAN_NOTICE("Requires a [required_quality].")
 
 	start_msg = "%USER% starts applying %ITEM% to %TARGET%"
 	end_msg = "%USER% applied %ITEM% to %TARGET%"
@@ -360,11 +361,9 @@
 
 
 //Passives are never directly applied, they have no do_apply
-/datum/craft_step/passive/do_apply(var/obj/I, mob/living/user, atom/target = null)
-	var/obj/O = find_item(user, target)
-	if (O)
-		O.consume_resources(time)
-		return TRUE
+/datum/craft_step/passive/post_apply(var/obj/I, mob/living/user, atom/target = null)
+	I = find_item(user, target)
+	.=..(I, user, target)
 
 
 /datum/craft_step/passive/find_item(mob/living/user, var/atom/craft = null)

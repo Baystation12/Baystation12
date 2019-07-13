@@ -44,4 +44,4 @@ QUALITY_CUTTING = /obj/item/weapon/material/knife,
 QUALITY_LASER_CUTTING = /obj/item/weapon/tool/scalpel/laser,//laser scalpels and e-swords - bloodless cutting
 QUALITY_ADHESIVE = /obj/item/weapon/tool/tape_roll,
 QUALITY_SEALING = /obj/item/weapon/tool/tape_roll,
-QUALITY_WORKBENCH = /obj/item/weapon/tool/tape_roll))
+QUALITY_WORKBENCH = /obj/structure/table/workbench))

@@ -65,6 +65,8 @@
 
 /datum/craft_recipe/proc/get_step_descriptions()
 	var/list/data = list()
+	for(var/datum/craft_step/CS in passive_steps)
+		data += list(list("icon" = getAtomCacheFilename(CS.icon_type), "desc" = CS.desc))
 	for(var/datum/craft_step/CS in steps)
 		data += list(list("icon" = getAtomCacheFilename(CS.icon_type), "desc" = CS.desc))
 	return data
@@ -73,6 +75,20 @@
 /datum/craft_recipe/proc/can_build(mob/living/user, var/turf/T)
 	if (!T)
 		return FALSE
+
+	//CRAFT_ON_SURFACE flag requires you to work on a table or bench. It must be on the tile directly infront of the user
+	//This check is skipped if there is no user
+	if (user && (flags & CRAFT_ON_SURFACE))
+		var/list/stuff = range(get_step(user, user.dir), 0)
+		var/surfacefound = FALSE
+		for (var/obj/A in stuff)
+			if (A.is_surface())
+				surfacefound = TRUE
+				break
+
+		if (!surfacefound)
+			user << SPAN_WARNING("You need a flat surface to work on for this recipe. Stand at a table or workbench.")
+			return FALSE
 
 	if(flags & (CRAFT_ONE_PER_TURF|CRAFT_ON_FLOOR))
 		if((locate(result) in T))
@@ -108,20 +124,29 @@
 		user << SPAN_WARNING("You can't find required item!")
 		return
 
-	//Robots can craft things on the floor
+	/*//Robots can craft things on the floor
 	if(ishuman(user) && !I.is_held())
 		user << SPAN_WARNING("You should hold [I] in hands for doing that!")
-		return
+		return*/
 
-	if(!CS.apply(I, user, null, src))
-		return
-
+	//We will create the craft object in nullspace first
 	var/obj/item/CR
 	if(steps.len <= 1)
 		CR = new result(null)
 	else
 		CR = new /obj/item/craft (null, src)
+
+
+	if(!CS.apply(I, user, CR, src))
+		qdel(CR)//Delete the craft object if the initial apply step failed
+		return
+
+
 	if(flags & CRAFT_ON_FLOOR)
 		CR.forceMove(get_turf(user))
+	else if(flags & CRAFT_ON_SURFACE)
+		var/turf/T = get_step(user, user.dir)
+		world << "moving object to [jumplink(T)]"
+		CR.forceMove(T)
 	else
 		user.put_in_hands(CR)

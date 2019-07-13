@@ -64,12 +64,14 @@
 
 	//The item needs to be close to the target object
 	if (target && (get_dist(I, target) > apply_range))
+		world << "dist failed"
 		return FALSE
 
 
 
 	//The user has to be adjacent to at least one of the two things
-	if (user && !user.Adjacent(I) && !user.Adjacent(target))
+	if (user && !user.Adjacent(I) && (isTurf(target.loc) &&!user.Adjacent(target))
+		world << "Adjacency Failed"
 		return FALSE
 
 	return TRUE
@@ -145,7 +147,6 @@
 	if (centrepoint)
 		items.Add(range(centrepoint, apply_range))
 
-	world << "Searchlist: [english_list(items)]"
 	return items
 
 //Override in child classes
