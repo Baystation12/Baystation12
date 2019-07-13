@@ -14,6 +14,7 @@
 	var/list/objectives_specific_target = list()
 	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
+	var/end_conditions_required = 2
 
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
@@ -153,7 +154,7 @@
 		*/
 
 	//if 2 or more end conditions are met, end the game
-	return (round_end_reasons.len >= 2)
+	return (round_end_reasons.len >= end_conditions_required)
 
 /datum/game_mode/outer_colonies/declare_completion()
 

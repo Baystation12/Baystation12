@@ -55,6 +55,8 @@
 		var/datum/game_mode/M = gamemode_cache[F]
 		if(!M)
 			continue
+		if(M.name == "extended" && !config.allow_extended_vote)
+			continue
 		gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
 		additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 		choices.Add(F)
