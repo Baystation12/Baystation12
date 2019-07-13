@@ -1599,6 +1599,7 @@
 #include "code\modules\halo\NPC\npc_interact.dm"
 #include "code\modules\halo\NPC\npc_listen.dm"
 #include "code\modules\halo\NPC\npc_new.dm"
+#include "code\modules\halo\NPC\npc_overmind.dm"
 #include "code\modules\halo\NPC\npc_setup_trade.dm"
 #include "code\modules\halo\NPC\npc_trade.dm"
 #include "code\modules\halo\NPC\speech_response.dm"
