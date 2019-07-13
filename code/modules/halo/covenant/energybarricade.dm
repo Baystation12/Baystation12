@@ -41,6 +41,7 @@
 	var/blocks_air = 0
 	var/blocks_mobs = 1
 	var/item_type = /obj/item/energybarricade
+	var/list/climbing = list()
 
 /obj/structure/energybarricade/New(var/newdir)
 	dir = newdir
@@ -86,7 +87,7 @@
 		return ..()
 
 	//block movement from some directions if we are active
-	if(A && T && shield_health > 0)
+	if(A && T && shield_health > 0 && !(A in climbing))
 		var/turf/front_turf = get_step(src, dir)
 
 		//movement in front of the shield
@@ -106,7 +107,7 @@
 		return ..()
 
 	//directional blocking
-	if(get_dir(O.loc, target) == dir && shield_health > 0)
+	if(get_dir(O.loc, target) == dir && shield_health > 0 && !(O in climbing))
 		to_chat(O,"<span class='warning'>[src] blocks your way.</span>")
 		return 0
 	return ..()
@@ -172,3 +173,19 @@
 	if(blocks_air && src.loc)
 		update_nearby_tiles()
 	. = ..()
+
+/obj/structure/energybarricade/verb/move_past()
+	set name = "Slip Past"
+	set category = "IC"
+	set src in view(1)
+	var/mob/living/user = usr
+	if(istype(user))
+		if(user.loc != src.loc)
+			user.dir = get_dir(user, src)
+		var/olddir = user.dir
+		user.visible_message("\icon[user] <span class='warning'>[user] begins to slip past [src].</span>")
+		if(do_after(user, 3 SECONDS, src, same_direction = 1))
+			user.visible_message("\icon[user] <span class='info'>[user] slips past [src].</span>")
+			climbing.Add(user)
+			user.Move(get_step(user,olddir))
+			climbing.Remove(user)
