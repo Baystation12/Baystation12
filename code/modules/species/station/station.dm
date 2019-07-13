@@ -147,6 +147,9 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
+	cold_discomfort_level = 292 //Higher than perhaps it should be, to avoid big speed reduction at normal room temp
+	heat_discomfort_level = 368
+
 	reagent_tag = IS_SKRELL
 
 	descriptors = list(

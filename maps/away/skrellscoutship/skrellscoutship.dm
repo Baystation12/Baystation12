@@ -181,6 +181,15 @@
 /obj/machinery/power/apc/skrell
 	req_access = list(access_skrellscoutship)
 
+/obj/machinery/alarm/skrell
+	req_access = list(access_skrellscoutship)
+	target_temperature = T0C+65
+
+/obj/machinery/alarm/skrell/Initialize()
+	. = ..()
+	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.40) /* kpa */
+	TLV["temperature"] =	list(T0C-26, T0C, T0C+80, T0C+90) // K
+
 /obj/machinery/power/smes/buildable/preset/skrell
 	uncreated_component_parts = list(
 		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
