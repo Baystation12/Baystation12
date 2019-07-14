@@ -66,7 +66,7 @@
 				T = M
 				break
 
-	if(our_overmind)
+	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(10)
 		our_overmind.reports += new /datum/npc_report (1,src,null,targlist.len)
 	return T
