@@ -2835,3 +2835,4 @@
 #include "maps\~mapsystem\switch_maps.dm"
 #include "maps\~unit_tests\unit_testing.dm"
 #include "~code\global_init.dm"
+// END_INCLUDE

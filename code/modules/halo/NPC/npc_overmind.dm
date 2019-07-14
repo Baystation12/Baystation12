@@ -10,6 +10,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 #define SQUADFORM_SEARCHRANGE 14
 #define TASKPOINT_TIMEOUT_DELAY 2 MINUTES
+#define SINGLESQUAD_MAXTARGET_HANDLE 3 //How many people should we assume our squad can handle before starting to apply squadsize increases.
 
 #define COMBAT_TROOPS_REQUIRED list(0,5,3,1)
 #define CONSTRUCTOR_TROOPS_REQUIRED list(3,2,2,0)
@@ -78,6 +79,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			required_troops = CONSTRUCTOR_TROOPS_REQUIRED
 		if("deconstruct")
 			required_troops = DECONSTRUCTOR_TROOPS_REQUIRED
+
 	var/list/inrange_squadmembers = list()
 	var/list/chosen_squadmembers = list(leader)
 	for(var/mob/m in range(search_range,leader))
@@ -124,7 +126,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 				else if(!mob_squad && report.reporter_mob.target_mob)
 					world << "HASTARGET AND NO-SQUAD"
 					var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
-					create_taskpoint_assign(report.reporter_mob,taskpoint,"combat")
+					create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
 				reports -= report
 				world << "REPORT PROCESSED."
 				qdel(report)
