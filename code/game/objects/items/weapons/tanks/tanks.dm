@@ -186,7 +186,7 @@ var/list/global/tank_gauge_cache = list()
 
 	if(istype(W, /obj/item/weapon/flamethrower))
 		var/obj/item/weapon/flamethrower/F = W
-		if(!F.status || F.tank || user.unEquip(src, F))
+		if(!F.status || F.tank || !user.unEquip(src, F))
 			return
 		master = F
 		F.tank = src
