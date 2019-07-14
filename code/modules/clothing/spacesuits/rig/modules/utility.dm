@@ -7,6 +7,7 @@
  * /obj/item/rig_module/device/anomaly_scanner
  * /obj/item/rig_module/maneuvering_jets
  * /obj/item/rig_module/chem_dispenser
+ * /obj/item/rig_module/chem_dispenser/combat
  * /obj/item/rig_module/chem_dispenser/injector
  * /obj/item/rig_module/voice
  * /obj/item/rig_module/device/paperdispenser
@@ -231,10 +232,10 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,       30),
+		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,       120),
 		list("hyperzine",   "hyperzine",   /datum/reagent/hyperzine,         30),
-		list("oxycodone",   "oxycodone",   /datum/reagent/tramadol/oxycodone,         30),
-		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80),
+		list("oxycodone",   "oxycodone",   /datum/reagent/tramadol/oxycodone,         120),
+		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 200),
 		)
 
 	interface_name = "combat chem dispenser"
