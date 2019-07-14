@@ -30,6 +30,12 @@
 	icon_state = "gold"
 	item_state = "gold"
 
+/obj/item/clothing/accessory/medal/ds_securitymedal
+	name = "CEC security medal"
+	desc = "A golden medal issued to active officers in the CEC's security teams, this one denotes an officer serving in operations around Aegis VII."
+	icon_state = "gold"
+	item_state = "gold"
+
 //NT medals
 
 /obj/item/clothing/accessory/medal/gold/nanotrasen

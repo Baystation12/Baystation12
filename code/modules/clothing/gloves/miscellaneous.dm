@@ -143,3 +143,15 @@
 	permeability_coefficient = 0.03
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 
+/obj/item/clothing/gloves/ds_securityglove
+	desc = "Thick work gloves designed to resist liquid, helps keep the blood out."
+	name = "gloves"
+	icon_state = "ds_securitygloves"
+	item_state = "ds_securitygloves"
+	siemens_coefficient = 0.50
+	permeability_coefficient = 0.05
+	item_flags = ITEM_FLAG_THICKMATERIAL
+	cold_protection = HANDS
+	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = HANDS
+	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE

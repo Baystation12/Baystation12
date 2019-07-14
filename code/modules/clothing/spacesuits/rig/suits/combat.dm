@@ -130,6 +130,10 @@
 	online_slowdown = 0.6
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/edfsoldier
 	helm_type = /obj/item/clothing/head/helmet/space/rig/edfsoldier
@@ -159,6 +163,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
 
@@ -173,6 +178,10 @@
 	online_slowdown = 0.6
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/edfengie
 	helm_type = /obj/item/clothing/head/helmet/space/rig/edfengie
@@ -202,6 +211,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
@@ -217,6 +227,10 @@
 	online_slowdown = 0.6
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/edfmedic
 	helm_type = /obj/item/clothing/head/helmet/space/rig/edfmedic
@@ -246,6 +260,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
@@ -261,6 +276,10 @@
 	online_slowdown = 0.4
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/edfcommander
 	helm_type = /obj/item/clothing/head/helmet/space/rig/edfcommander
@@ -290,6 +309,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
 		
@@ -310,6 +330,10 @@
 	online_slowdown = 0.8
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/unisoldier
 	helm_type = /obj/item/clothing/head/helmet/space/rig/unisoldier
@@ -338,6 +362,7 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/voice
 		)
 		
@@ -351,6 +376,10 @@
 	online_slowdown = 0.8
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/uniengie
 	helm_type = /obj/item/clothing/head/helmet/space/rig/uniengie
@@ -379,6 +408,7 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/voice,
 		/obj/item/rig_module/device/rcd
 		)
@@ -394,6 +424,10 @@
 	online_slowdown = 0.8
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/unifaithful
 	helm_type = /obj/item/clothing/head/helmet/space/rig/unifaithful
@@ -435,6 +469,10 @@
 	online_slowdown = 0.8
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/unimedic
 	helm_type = /obj/item/clothing/head/helmet/space/rig/unifaithful
@@ -463,6 +501,7 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/voice
 		)
@@ -478,6 +517,10 @@
 	online_slowdown = 3 //higher slowdown since this suit is supposedly more protective.
 	offline_slowdown = 5
 	emp_protection = 10
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/tool/crowbar, \
+	/obj/item/weapon/tool/screwdriver, /obj/item/weapon/tool/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/unizerk
 	helm_type = /obj/item/clothing/head/helmet/space/rig/unizerk
@@ -506,5 +549,6 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/voice
 		)
