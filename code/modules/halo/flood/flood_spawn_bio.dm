@@ -3,7 +3,7 @@
 	name = "Flood biomass"
 	desc = "A pulsating mass of flesh."
 	icon = 'flood_bio.dmi'
-	icon_state = "biomass1"
+	icon_state = "spore1"
 	density = 0
 	opacity = 1
 	anchored = 1
@@ -14,9 +14,9 @@
 	var/respawn_delay = 600
 
 /obj/structure/biomass/New()
-	..()
+	. = ..()
 	flood_spawner = new(src, max_flood, respawn_delay,spawn_pool)
-	icon_state = pick(icon_states(icon))
+	//icon_state = pick(icon_states(icon)) //Let's not randomise this unless our biomass-subtype wants us to.
 
 //not necessary if they all spawn in the bottom left corner
 /*/obj/structure/biomass/Bump(var/atom/movable/AM)
@@ -74,6 +74,10 @@
 	bound_width = 64
 	bound_height = 64
 
+/obj/structure/biomass/medium/New()
+	. = ..()
+	icon_state = pick(icon_states(icon))
+
 /obj/structure/biomass/large
 	icon = 'flood_bio_large.dmi'
 	health = 2000
@@ -81,6 +85,9 @@
 	respawn_delay = 400
 	bound_width = 128
 	bound_height = 128
+/obj/structure/biomass/large/New()
+	. = ..()
+	icon_state = pick(icon_states(icon))
 
 /obj/item/flood_spore
 	icon = 'flood_bio.dmi'
