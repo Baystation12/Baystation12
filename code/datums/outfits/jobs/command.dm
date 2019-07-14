@@ -1,7 +1,6 @@
 /decl/hierarchy/outfit/job/ds13captain
 	name = OUTFIT_JOB_NAME("Captain")
 	uniform = /obj/item/clothing/under/captain/deadspace
-	l_ear = /obj/item/device/radio/headset/heads/captain
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/holoidcap
 	
@@ -9,7 +8,6 @@
 /decl/hierarchy/outfit/job/ds13flieutenant
 	name = OUTFIT_JOB_NAME("First Lieutenant")
 	uniform = /obj/item/clothing/under/first_officer
-	l_ear = /obj/item/device/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/holoidflieutenant
 	
@@ -17,7 +15,6 @@
 /decl/hierarchy/outfit/job/ds13bensign
 	name = OUTFIT_JOB_NAME("Bridge Ensign")
 	uniform = /obj/item/clothing/under/bridge_officer
-	l_ear = /obj/item/device/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/holoidbensign
 	
