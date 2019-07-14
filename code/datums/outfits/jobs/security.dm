@@ -7,7 +7,6 @@
 	belt = /obj/item/weapon/storage/belt/holster/security
 	shoes = /obj/item/clothing/shoes/ds_securityboots
 	l_pocket = /obj/item/clothing/accessory/medal/ds_securitymedal
-	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
 	id_type = /obj/item/weapon/card/id/holoidlawfulgood
 
 /decl/hierarchy/outfit/job/security/ds13seniorsecurityofficer
@@ -18,7 +17,6 @@
 	belt = /obj/item/weapon/storage/belt/holster/security
 	shoes = /obj/item/clothing/shoes/ds_securityboots
 	l_pocket = /obj/item/clothing/accessory/medal/ds_securitymedal
-	suit = /obj/item/clothing/suit/armor/ishimurasecurity
 	id_type = /obj/item/weapon/card/id/holoidchaoticgood
 
 /decl/hierarchy/outfit/job/security/ds13securityofficer
@@ -29,7 +27,6 @@
 	belt = /obj/item/weapon/storage/belt/holster/security
 	shoes = /obj/item/clothing/shoes/ds_securityboots
 	l_pocket = /obj/item/clothing/accessory/medal/ds_securitymedal
-	suit = /obj/item/clothing/suit/armor/ishimurasecurity
 	id_type = /obj/item/weapon/card/id/holoidneutralgood
 
 /decl/hierarchy/outfit/job/security/ds13PSECboss
@@ -41,7 +38,6 @@
 	belt = /obj/item/weapon/storage/belt/holster/security
 	shoes = /obj/item/clothing/shoes/ds_securityboots
 	l_pocket = /obj/item/clothing/accessory/medal/ds_securitymedal
-	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
 	id_type = /obj/item/weapon/card/id/holoiddeadchief
 
 /decl/hierarchy/outfit/job/security/ds13PSECofficer
@@ -52,7 +48,6 @@
 	belt = /obj/item/weapon/storage/belt/holster/security
 	shoes = /obj/item/clothing/shoes/ds_securityboots
 	l_pocket = /obj/item/clothing/accessory/medal/ds_securitymedal
-	suit = /obj/item/clothing/suit/armor/ishimurasecurity
 	id_type = /obj/item/weapon/card/id/holoiddeadofficer
 
 ////////////////////////////////////////////////////////////////////////////////
