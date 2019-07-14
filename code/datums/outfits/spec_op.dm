@@ -10,7 +10,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/swat
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical //empty belt, so should have equipment on the USM valor for them to equip and organise their own loadouts
 	back = /obj/item/weapon/rig/deadspace/edfcommander/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -27,7 +27,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/swat
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/edfmedic/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -44,7 +44,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/swat
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/edfengineer/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -61,7 +61,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/swat
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/edfsoldier/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -82,7 +82,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/unisoldier/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -99,7 +99,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/unimedic/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -116,7 +116,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/uniengie/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -133,7 +133,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/unizerker/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
@@ -150,7 +150,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = null		//used by rig hardsuit on back.
-	belt = null		//leave null for now, when we decide on what gear ERTs will have we can setup a belt.
+	belt = /obj/item/weapon/storage/belt/holster/security/tactical
 	back = /obj/item/weapon/rig/deadspace/unifaithful/equipped
 	shoes = null	//used by rig hardsuit on back.
 	gloves = null	//used by rig hardsuit on back.
