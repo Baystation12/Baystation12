@@ -152,13 +152,15 @@
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null
 
-						owner.get_cell().use(active_power_use * CELLRATE)
+						var/obj/item/weapon/cell/C = owner.get_cell()
+						if(istype(C))
+							C.use(active_power_use * CELLRATE)
 
 					else
 						locked = null
 						to_chat(user, SPAN_NOTICE("Lock on [locked] disengaged."))
 			if(CATAPULT_AREA)
-
+				
 				var/list/atoms = list()
 				if(isturf(target))
 					atoms = range(target,3)
@@ -166,14 +168,14 @@
 					atoms = orange(target,3)
 				for(var/atom/movable/A in atoms)
 					if(A.anchored || !A.simulated) continue
-					spawn(0)
-						var/iter = 5-get_dist(A,target)
-						for(var/i=0 to iter)
-							step_away(A,target)
-							sleep(2)
+					var/dist = 5-get_dist(A,target)
+					A.throw_at(get_edge_target_turf(A,get_dir(target, A)),dist,0.7)
+
 
 				log_and_message_admins("used [src]'s area throw on [target].", user, owner.loc)
-				owner.get_cell().use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
+				var/obj/item/weapon/cell/C = owner.get_cell()
+				if(istype(C))
+					C.use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
 
 
 
@@ -236,7 +238,10 @@
 		if(drill_head == null)
 			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
 			return
-		owner.get_cell().use(active_power_use * CELLRATE)
+		
+		var/obj/item/weapon/cell/C = owner.get_cell()
+		if(istype(C))
+			C.use(active_power_use * CELLRATE)
 		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
 		to_chat(user, "<span class='danger'>You start to drill \the [target]</span>")
 
