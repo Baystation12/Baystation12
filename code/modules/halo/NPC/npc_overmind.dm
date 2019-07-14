@@ -9,10 +9,9 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 #define REPORT_SUPPORT_TEAM_REQ 6
 
 #define SQUADFORM_SEARCHRANGE 14
-#define TASKPOINT_TIMEOUT_DELAY 5 MINUTES
-#define SQUAD_FORMUP_TIMEOUT 5 SECONDS
+#define TASKPOINT_TIMEOUT_DELAY 2 MINUTES
 
-#define COMBAT_TROOPS_REQUIRED list(0,5,3,1))
+#define COMBAT_TROOPS_REQUIRED list(0,5,3,1)
 #define CONSTRUCTOR_TROOPS_REQUIRED list(3,2,2,0)
 #define DECONSTRUCTOR_TROOPS_REQUIRED list(2,2,3,0)
 
@@ -51,6 +50,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	var/list/assigned_taskpoints = list() //Overmind should sort this as linkedTaskpoint = ListOfMobs.
 	var/list/taskpoints = list() //List of taskpoints available (currently aka Assault markers) format: taskpoint = timecreated
 
+	var/form_squad_searchrange = SQUADFORM_SEARCHRANGE
+
 /datum/npc_overmind/proc/get_taskpoint_assigned(var/mob/m)
 	for(var/taskpoint in assigned_taskpoints)
 		if(m in assigned_taskpoints[taskpoint])
@@ -68,7 +69,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			return 1
 	return 0
 
-/datum/npc_overmind/proc/create_taskpoint_assign(var/mob/leader,var/obj/taskpoint,var/task_type,var/search_range = SQUADFORM_SEARCHRANGE)
+/datum/npc_overmind/proc/create_taskpoint_assign(var/mob/leader,var/obj/taskpoint,var/task_type,var/search_range = form_squad_searchrange)
 	var/required_troops = list(0,0,0,0) //constructor,combat,support,other
 	switch (task_type)
 		if("combat")
