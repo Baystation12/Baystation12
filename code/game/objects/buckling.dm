@@ -3,7 +3,7 @@
 	var/buckle_movable = 0
 	var/buckle_dir = 0
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
-	var/buckle_pixel_shift = "x=0;y=0;z=-7" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
+	var/buckle_pixel_shift = "x=0;y=0;z=0" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 //require people to be handcuffed before being able to buckle. eg: pipes
 	var/mob/living/buckled_mob = null
 

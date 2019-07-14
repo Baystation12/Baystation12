@@ -22,8 +22,6 @@
 	death_message = "lets out a faint chimper as it collapses and stops moving..."
 	tail = "chimptail"
 
-	pixel_offset_z = -7
-
 	unarmed_types = list(/datum/unarmed_attack/bite, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch)
 	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	hud_type = /datum/hud_data/monkey

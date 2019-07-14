@@ -170,7 +170,6 @@
 	var/amount_grown = 0
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_MINISCULE
-	shadow_offset = 0
 
 /mob/living/simple_animal/chick/New()
 	..()
@@ -212,7 +211,6 @@ var/global/chicken_count = 0
 	var/body_color
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
-	shadow_offset = 0
 
 /mob/living/simple_animal/chicken/New()
 	..()

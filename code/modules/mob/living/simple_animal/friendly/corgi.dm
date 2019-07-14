@@ -127,10 +127,6 @@
 		if(back_icon)
 			overlays += back_icon
 
-	update_shadow()
-	return
-
-
 /mob/living/simple_animal/corgi/puppy
 	name = "\improper corgi puppy"
 	real_name = "corgi"
