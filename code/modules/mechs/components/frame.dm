@@ -183,7 +183,7 @@
 		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)))
 			return
 
-		if(!CC || !user || !src || CC.get_amount() < 5 || is_wired)
+		if(!CC || !user || !src || CC.get_amount() < 10 || is_wired)
 			return
 
 		CC.use(10)
@@ -309,6 +309,7 @@
 			body = thing
 	else
 		return ..()
+	update_icon()
 
 /obj/structure/heavy_vehicle_frame/proc/install_component(var/obj/item/thing, var/mob/user)
 	var/obj/item/mech_component/MC = thing
