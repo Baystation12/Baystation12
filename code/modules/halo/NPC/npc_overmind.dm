@@ -132,18 +132,15 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 	assign_taskpoint(taskpoint,chosen_squadmembers)
 
-/datum/npc_overmind/proc/taskpoint_exists_for_loc(var/obj/taskpoint)
+/datum/npc_overmind/proc/taskpoint_exists_for_loc(var/turf/loc_checked)
 	for(var/obj/t in taskpoints)
-		if(t == taskpoint)
-			continue
-		if(t.loc == taskpoint.loc)
+		if(t.loc == loc_checked)
 			return 1
 	return 0
 
 /datum/npc_overmind/proc/process_contact_report(var/datum/npc_report/report)
 	if(isnull(report.reporter_mob) || isnull(report.reporter_mob.target_mob))
 		return
-	var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
 	var/mob_squad = get_taskpoint_assigned(report.reporter_mob)
 	if(mob_squad && report.reporter_mob.target_mob) //Only bother trying to retask if our mob has a target.
 		for(var/mob/living/simple_animal/hostile/m in mob_squad)
@@ -151,9 +148,10 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 				m.target_mob = report.reporter_mob.target_mob
 				update_taskpoint_timeout(mob_squad)
 	else if(!mob_squad && report.reporter_mob.target_mob)
-		if(taskpoint_exists_for_loc(taskpoint))
+		if(taskpoint_exists_for_loc(report.teporter_mob.target_mob.loc))
 			return
 		else
+			var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
 			create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
 
 /datum/npc_overmind/proc/process_casualty_report(var/datum/npc_report/report)
