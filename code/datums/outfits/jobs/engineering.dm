@@ -17,7 +17,6 @@
 	glasses = /obj/item/clothing/glasses/meson
 	mask = /obj/item/clothing/mask/gas/budget
 	uniform = /obj/item/clothing/under/rigunder
-	l_ear = /obj/item/device/radio/headset/headset_eng
 	gloves = null //used by engineering rig
 	belt = /obj/item/weapon/storage/belt/utility/full
 	shoes = null //used by engineering rig
