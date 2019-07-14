@@ -30,7 +30,6 @@
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 	can_escape = TRUE
-	shadow_offset = 1
 
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
