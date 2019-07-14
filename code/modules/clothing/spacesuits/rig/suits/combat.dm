@@ -163,6 +163,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
 
@@ -210,6 +211,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
@@ -258,6 +260,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
@@ -306,6 +309,7 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
 		/obj/item/rig_module/voice,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/mounted/taser	//adding taser here to reflect the stun mode EDF marines had in Dead Space: Aftermath
 		)
 		
@@ -358,6 +362,7 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/voice
 		)
 		
@@ -403,6 +408,7 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/voice,
 		/obj/item/rig_module/device/rcd
 		)
@@ -495,6 +501,7 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/voice
 		)
@@ -542,5 +549,6 @@
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/voice
 		)
