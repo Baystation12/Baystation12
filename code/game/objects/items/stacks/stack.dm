@@ -43,12 +43,15 @@
 		else
 			to_chat(user, "There is enough charge for [get_amount()].")
 
-/obj/item/stack/attack_self(mob/user as mob)
-	list_recipes(user)
+/obj/item/stack/attack_self(var/mob/living/user as mob)
+	if (recipes)
+		user.open_craft_menu()
+	//list_recipes(user)
 
-/obj/item/stack/proc/list_recipes(mob/user as mob, recipes_sublist)
+/obj/item/stack/proc/list_recipes(var/mob/living/user as mob, recipes_sublist)
 	if (!recipes)
 		return
+
 	if (!src || get_amount() <= 0)
 		user << browse(null, "window=stack")
 	user.set_machine(src) //for correct work of onclose
