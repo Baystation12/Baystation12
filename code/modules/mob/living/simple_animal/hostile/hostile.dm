@@ -68,8 +68,8 @@
 
 	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(10)
-		our_overmind.reports += new /datum/npc_report (1,src,null,targlist.len)
-	return T
+		our_overmind.create_report(1,src,null,targlist.len,assault_point)
+return T
 
 
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
@@ -178,6 +178,9 @@
 	return L
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
+	if(our_overmind)
+		var/list/targlist = ListTargets(10)
+		our_overmind.create_report(5,src,null,targlist.len,assault_target)
 	..(gibbed, deathmessage, show_dead_message)
 	stop_automated_movement = 0
 	walk(src, 0)
