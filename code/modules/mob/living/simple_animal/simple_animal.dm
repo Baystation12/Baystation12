@@ -202,8 +202,8 @@
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
-	if(proj.damtype == BURN)
-		adjustBurnLoss(Proj.damage)
+	if(Proj.damtype == BURN)
+		adjustFireLoss(Proj.damage)
 	else
 		adjustBruteLoss(Proj.damage)
 	do_pain_scream()
