@@ -91,15 +91,15 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	inrange_squadmembers &= (constructor_troops + combat_troops + support_troops + other_troops)
 	for(var/mob/living/simple_animal/hostile/m in inrange_squadmembers)
 		var/is_chosen = 0
-		if(required_troops[1] > 0 && is_type_list(m,constructor_types))
+		if(required_troops[1] > 0 && m in constructor_troops)
 			is_chosen = 1
 			required_troops[1]--
 			world << "CONSTRUCTOR ADDED"
-		if(required_troops[2] > 0 && is_type_list(m,combat_types))
+		if(required_troops[2] > 0 && m in combat_troops)
 			is_chosen = 1
 			required_troops[2]--
 			world << "COMBAT TYPE ADDED"
-		if(required_troops[3] > 0 && is_type_list(m,support_types))
+		if(required_troops[3] > 0 && m in support_troops)
 			is_chosen = 1
 			required_troops[3]--
 			world << "SUPPORT TYPE ADDED"
@@ -115,6 +115,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 /datum/npc_overmind/proc/taskpoint_exists_for_loc(var/obj/taskpoint)
 	for(var/obj/t in taskpoints)
+		if(t == taskpoint)
+			continue
 		if(t.loc == taskpoint.loc)
 			return 1
 	return 0
@@ -156,13 +158,17 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 /datum/npc_overmind/proc/sort_troops()
 	for(var/mob/m in unsorted_troops)
-		if(m.type in is_type_list(m,constructor_types))
+		var/sorted = 0
+		if(is_type_list(m,constructor_types))
 			constructor_troops += m
-		if(m.type in is_type_list(m,combat_types))
+			sorted = 1
+		if(is_type_list(m,combat_types))
 			combat_troops += m
-		if(m.type in is_type_list(m,support_types))
+			sorted = 1
+		if(is_type_list(m,support_types))
 			support_troops += m
-		else
+			sorted = 1
+		if(!sorted)
 			other_troops += m
 		unsorted_troops -= m
 
