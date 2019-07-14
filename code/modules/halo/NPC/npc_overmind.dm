@@ -220,7 +220,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	for(var/mob/living/simple_animal/hostile/m in squad_assigned)
 		m.last_assault_target = m.assault_target
 		m.assault_target = null
-		m.target_margin = initial(target_margin)
+		m.target_margin = initial(m.target_margin)
 	return squad_assigned
 
 /datum/npc_overmind/proc/assign_taskpoint(var/taskpoint,var/list/squad)
