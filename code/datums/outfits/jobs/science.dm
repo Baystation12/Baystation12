@@ -8,7 +8,6 @@
 /decl/hierarchy/outfit/job/science/ds13juniorsciencenerd
 	name = OUTFIT_JOB_NAME("Research Assistant")
 	uniform = /obj/item/clothing/under/research_assistant
-	l_ear = /obj/item/device/radio/headset/headset_sci
 	shoes = /obj/item/clothing/shoes/hightops/black
 	id_type = /obj/item/weapon/card/id/holoidwhosaltman
 
