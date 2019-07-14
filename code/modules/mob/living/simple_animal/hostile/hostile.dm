@@ -27,7 +27,7 @@
 
 	var/datum/npc_overmind/our_overmind
 
-/mob/living/simple_animal/New()
+/mob/living/simple_animal/hostile/New()
 	. = ..()
 	if(our_overmind)
 		our_overmind.unsorted_troops += src
@@ -67,7 +67,8 @@
 				break
 
 	if(our_overmind)
-		our_overmind.reports += new /datum/npc_report (1,src,null,ListTargets(10).len)
+		var/list/targlist = ListTargets(10)
+		our_overmind.reports += new /datum/npc_report (1,src,null,targlist.len)
 	return T
 
 
