@@ -1,6 +1,7 @@
 /decl/hierarchy/outfit/job/ds13captain
 	name = OUTFIT_JOB_NAME("Captain")
 	uniform = /obj/item/clothing/under/captain/deadspace
+	l_ear = /obj/item/device/radio/headset/heads/captain
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/holoidcap
 	
