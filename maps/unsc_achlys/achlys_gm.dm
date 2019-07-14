@@ -1,6 +1,9 @@
 
 #define COMMS_CUTIN_EVENT_CHANCE 10
 #define COMMS_CUTIN_EVENT_DURATION 1 MINUTES
+#define FLOOD_EVENT_MINOR_START 25 MINUTES
+#define FLOOD_EVENT_MAJOR_START 30 MINUTES
+#define FLOOD_EVENT_REPEAT_TIME 15 MINUTES
 
 /datum/game_mode/achlys
 	name = "ONI Investigation: Achlys"
@@ -11,10 +14,12 @@
 	probability = 0
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
-	var/list/items_to_destroy = list(/obj/structure/navconsole)
+	var/list/items_to_destroy = list()
 	var/item_retrieve_tag = "retrievethis" //Map-set tags for items that need to be retrieved.
-	var/list/items_to_retrieve = list(/obj/item/weapon/research/sekrits)
-	var/list/rank_retrieve_names = list("Commanding Officer")//The name of the job that needs to be holding the items-to-retrieve
+	var/list/items_to_retrieve = list()
+	var/list/item_success_tag = "retrieveto"//the tag of an object that when the documents are in the contents of, counts as success
+	var/flood_spawn_event_minor
+	var/flood_spawn_event_major
 
 /datum/game_mode/achlys/proc/populate_items_destroy()
 	for(var/atom/destroy in world)
@@ -28,30 +33,37 @@
 
 /datum/game_mode/achlys/pre_setup()
 	..()
+	flood_spawn_event_minor = world.time + FLOOD_EVENT_MINOR_START
+	flood_spawn_event_major = world.time + FLOOD_EVENT_MAJOR_START
 	populate_items_destroy()
 	populate_items_retrieve()
 	if(prob(COMMS_CUTIN_EVENT_CHANCE))
 		special_event_starttime = world.time + 5 MINUTES //TODO: MAKE THIS RANDOMISED.
 
 /datum/game_mode/achlys/check_finished()
-	. = check_item_destroy_status()
-	. = check_item_retrieve_status()
+	. = 0
+	. = ((check_item_destroy_status() && check_item_retrieve_status()) == 1)
 
 /datum/game_mode/achlys/proc/check_item_destroy_status()
-	. = 1 //This ensures that if the list is emptied due to the objects being deleted, it will still allow the gamemode to end.
+	if(items_to_destroy.len == 0)
+		. = 1
+		return
 	for(var/atom/item in items_to_destroy)
+		. = 0
+		if(item.loc == null)
+			. = 1
+			return
 		if(istype(item,/obj/machinery))
 			var/obj/machinery/item_machine = item
-			if(!(item_machine.stat & BROKEN))
-				. = 0
+			if(item_machine.stat & BROKEN)
+				. = 1
 
 /datum/game_mode/achlys/proc/check_item_retrieve_status()
 	. = 1
-	for(var/atom/item in items_to_retrieve)
-		if(istype(item.loc,/mob/living/carbon/human))
-			var/mob/living/carbon/human/holder = item.loc
-			if(!(holder.mind) || !(holder.mind.assigned_role in rank_retrieve_names))
-				. = 0
+	var/atom/retrieval_loc = locate(item_success_tag)
+	for(var/atom/movable/item in items_to_retrieve)
+		if(!(item.loc == retrieval_loc))
+			. = 0
 
 /datum/game_mode/achlys/proc/do_special_event_handling() //Currently handles the "Comms cut-in event"
 	special_event_starttime = 0
@@ -71,10 +83,53 @@
 			qdel(spawned_tcomms_machine)
 			qdel(spawned_jammer)
 
+/*
+25 minutes in: flood spore and spore growing appear across the Achlys area
+
+35 minutes in: more spores and growing spores + tiny biomass spawn across the Achlys area with tiny biomass spawning only on floors
+
+Repeat 35 minute mark every 15 minutes after 35 minutes is up.
+
+All 3 of these cannot spawn on open space
+
+30 spores, 10 spore growing. 8 tiny biomass per z
+
+
+*/
+
 /datum/game_mode/achlys/process()
 	..()
 	if(special_event_starttime != 0 && world.time > special_event_starttime)
 		do_special_event_handling()
+	if(flood_spawn_event_major != 0 && world.time > flood_spawn_event_major)
+		flood_spawn_event_minor = world.time //Trigger minor-event ASAP.
+		flood_spawn_event_major = world.time + FLOOD_EVENT_REPEAT_TIME
+		for(var/i = 3 to 5)
+			var/list/valid_spawns = list()
+			for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
+				if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/wall) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
+					continue
+				valid_spawns += t
+			if(valid_spawns.len == 0)
+				continue
+			for(var/iter = 0 to 8)
+				new /obj/structure/biomass/tiny (pick(valid_spawns))
+
+	if(flood_spawn_event_minor != 0 && world.time > flood_spawn_event_minor)
+		flood_spawn_event_minor = 0
+		for(var/i = 3 to 5)
+			var/list/valid_spawns = list()
+			for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
+				if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
+					continue
+				valid_spawns += t
+			if(valid_spawns.len == 0)
+				continue
+			for(var/iter = 0 to 40)
+				var/typepath_to_spawn = /obj/item/flood_spore
+				if(iter > 30)
+					typepath_to_spawn = /obj/item/flood_spore_growing
+				new typepath_to_spawn (pick(valid_spawns))
 
 /datum/game_mode/achlys/declare_completion()
 	..()

@@ -428,8 +428,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "marine_dead"
 	//
 	move_to_delay = 2
-	health = 125 //Combat forms need to be hardier.
-	maxHealth = 125
+	health = 100
+	maxHealth = 100
 	resistance = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 35
@@ -443,8 +443,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "odst_dead"
 	//
 	move_to_delay = 2
-	health = 200 //Combat forms need to be hardier.
-	maxHealth = 200
+	health = 125 //Combat forms need to be hardier.
+	maxHealth = 125
 	resistance = 5
 	melee_damage_lower = 30
 	melee_damage_upper = 35
@@ -463,8 +463,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "guard_dead"
 	//
 	move_to_delay = 2
-	health = 150 //Combat forms need to be hardier.
-	maxHealth = 150
+	health = 100 //Combat forms need to be hardier.
+	maxHealth = 100
 	resistance = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 30
@@ -478,8 +478,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "oni_dead"
 	//
 	move_to_delay = 2
-	health = 200 //Combat forms need to be hardier.
-	maxHealth = 200
+	health = 100 //Combat forms need to be hardier.
+	maxHealth = 100
 	resistance = 5
 	melee_damage_lower = 30
 	melee_damage_upper = 35
@@ -493,8 +493,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "dead"
 	//
 	move_to_delay = 1
-	health = 250 //Combat forms need to be hardier.
-	maxHealth = 300
+	health = 125 //Combat forms need to be hardier.
+	maxHealth = 125
+	resistance = 10
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
@@ -507,8 +508,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "dead"
 	//
 	move_to_delay = 1
-	health = 250 //Combat forms need to be hardier.
-	maxHealth = 300
+	health = 125 //Combat forms need to be hardier.
+	maxHealth = 125
+	resistance = 15
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
@@ -520,8 +522,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "movement state"
 	icon_dead = "death state"
 	move_to_delay = 1
-	health = 1200 //Combat forms need to be hardier.
-	maxHealth = 1200
+	health = 1000 //Combat forms need to be hardier.
+	maxHealth = 1000
 	melee_damage_lower = 40
 	melee_damage_upper = 55
 	attacktext = "Whips"
@@ -546,7 +548,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "prisoner_infected2"
 	move_to_delay = 4
 	health = 50 //intentionally squishy to give melee combat a chance
-	maxHealth = 75
+	maxHealth = 50
 	melee_damage_lower = 15
 	melee_damage_upper = 25 //damage is scaled on the basis that there will be a lot of these and players will need to live after encounters
 	attacktext = "stabs at"
@@ -558,7 +560,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "prisoner_infected1"
 	icon_dead = "prisoner_infected1_dead"
 	move_to_delay = 6 //slower than common counterpart to give sense of weight to it
-	health = 60 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
+	health = 85 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
 	maxHealth = 85
 	melee_damage_lower = 20 //as above so below
 	melee_damage_upper = 30
