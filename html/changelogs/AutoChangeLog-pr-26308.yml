@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - rscadd: "Conveyor Belt and Switch assemblies can be created from the autolathe. Use the switch on the conveyor belt to link before placing, crowbar to remove both."

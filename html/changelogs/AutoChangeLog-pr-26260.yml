@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - admin: "You can now ban, jobban, and view notes on logged out mobs. This will act on the last ckey to have possessed the mob."
