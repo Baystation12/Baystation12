@@ -113,12 +113,24 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 	assign_taskpoint(taskpoint,chosen_squadmembers)
 
+/datum/npc_overmind/proc/taskpoint_exists_for_loc(var/obj/taskpoint)
+	for(var/obj/t in taskpoints)
+		if(t.loc == taskpoint.loc)
+			return 1
+	return 0
+
 /datum/npc_overmind/proc/process_reports()
 	for(var/datum/npc_report/report in reports)
 		world << "REPORT RECIEVED"
 		switch(report.report_type)
 			if(REPORT_CONTACT)
 				world << "REPORT TYPE: CONTACT"
+				var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
+				if(taskpoint_exists_for_loc(taskpoint))
+					world << "LOCATION HAS TASKPOINT ALREADY. DISCARDING."
+					reports -= report
+					qdel(report)
+					continue
 				var/mob_squad = get_taskpoint_assigned(report.reporter_mob)
 				if(mob_squad && report.reporter_mob.target_mob) //Only bother trying to retask if our mob has a target.
 					world << "HASTARGET AND HAS-SQUAD"
@@ -127,7 +139,6 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 							m.target_mob = report.reporter_mob.target_mob
 				else if(!mob_squad && report.reporter_mob.target_mob)
 					world << "HASTARGET AND NO-SQUAD"
-					var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
 					create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
 				reports -= report
 				world << "REPORT PROCESSED."
