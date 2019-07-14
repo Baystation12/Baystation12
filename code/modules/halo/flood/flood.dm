@@ -166,7 +166,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	return 1
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
-	for(var/mob/living/carbon/human/h in view(2,src))
+	for(var/mob/living/carbon/human/h in view(1,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
 		if((mob_healthdam > h.maxHealth/4) || h.stat != CONSCIOUS) //Less than quarter health or unconscious/dead? Jump 'em.
 			if(infect_mob(h))
