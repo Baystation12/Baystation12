@@ -68,8 +68,8 @@
 
 	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(10)
-		our_overmind.create_report(1,src,null,targlist.len,assault_point)
-return T
+		our_overmind.create_report(1,src,null,targlist.len,assault_target)
+	return T
 
 
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)

@@ -72,7 +72,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	taskpoints[assault_target] = world.time
 	return assault_target
 
-/datum/npc_overming/proc/update_taskpoint_timeout(var/obj/taskpoint,var/timeout =  TASKPOINT_TIMEOUT_UPDATE_DELAY)
+/datum/npc_overmind/proc/update_taskpoint_timeout(var/obj/taskpoint,var/timeout =  TASKPOINT_TIMEOUT_UPDATE_DELAY)
 	if(taskpoint in taskpoints)
 		taskpoints[taskpoint] = world.time + timeout
 
@@ -81,6 +81,12 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 		if(istype(checked_atom,type))
 			return 1
 	return 0
+
+/datum/npc_overmind/proc/get_tasked_troops()
+	. = list()
+	for(var/taskpoint in assigned_taskpoints)
+		var/list/task_troops = assigned_taskpoints[taskpoint]
+		. += task_troops
 
 /datum/npc_overmind/proc/create_taskpoint_assign(var/mob/leader,var/obj/taskpoint,var/task_type,var/severity = 1,var/search_range = form_squad_searchrange)
 	var/required_troops = list(0,0,0,0) //constructor,combat,support,other
@@ -92,7 +98,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 		if("deconstruct")
 			required_troops = DECONSTRUCTOR_TROOPS_REQUIRED
 		if("reinforcement")
-			requred_troops = REINFORCEMENT_TROOPS_REQUIRED
+			required_troops = REINFORCEMENT_TROOPS_REQUIRED
 	if(severity > 1)
 		for(var/num in required_troops)
 			num *= severity
@@ -103,24 +109,23 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			continue
 		inrange_squadmembers += m
 	inrange_squadmembers &= (constructor_troops + combat_troops + support_troops + other_troops)
+	inrange_squadmembers -= get_tasked_troops()
+	if(inrange_squadmembers.len == 0)
+		return
 	for(var/mob/living/simple_animal/hostile/m in inrange_squadmembers)
 		var/is_chosen = 0
 		if(required_troops[1] > 0 && m in constructor_troops)
 			is_chosen = 1
 			required_troops[1]--
-			world << "CONSTRUCTOR ADDED"
 		if(required_troops[2] > 0 && m in combat_troops)
 			is_chosen = 1
 			required_troops[2]--
-			world << "COMBAT TYPE ADDED"
 		if(required_troops[3] > 0 && m in support_troops)
 			is_chosen = 1
 			required_troops[3]--
-			world << "SUPPORT TYPE ADDED"
 		if(required_troops[4] > 0)
 			is_chosen = 1
 			required_troops[4]--
-			world << "OTHER TYPE ADDED"
 		if(is_chosen)
 			chosen_squadmembers += m
 			m.target_margin = 1
@@ -136,19 +141,17 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	return 0
 
 /datum/npc_overmind/proc/process_contact_report(var/datum/npc_report/report)
-	world << "REPORT TYPE: CONTACT"
+	if(isnull(report.reporter_mob) || isnull(report.reporter_mob.target_mob))
+		return
 	var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
 	var/mob_squad = get_taskpoint_assigned(report.reporter_mob)
 	if(mob_squad && report.reporter_mob.target_mob) //Only bother trying to retask if our mob has a target.
-		world << "HASTARGET AND HAS-SQUAD"
 		for(var/mob/living/simple_animal/hostile/m in mob_squad)
 			if(!m.target_mob)
 				m.target_mob = report.reporter_mob.target_mob
 				update_taskpoint_timeout(mob_squad)
 	else if(!mob_squad && report.reporter_mob.target_mob)
-		world << "HASTARGET AND NO-SQUAD"
 		if(taskpoint_exists_for_loc(taskpoint))
-			world << "LOCATION HAS TASKPOINT ALREADY. SKIPPING SQUAD CREATION AND DISCARDING."
 			return
 		else
 			create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
@@ -159,16 +162,22 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	if(isnull(squad_assigned))
 		world << "CASUALTY REPORT HAS NO SQUAD. SKIPPING."
 		return
+	var/list/valid_squadmembers = squad_assigned.Copy()
+	valid_squadmembers &= (constructor_troops + combat_troops + support_troops + other_troops)
+	if(isnull(valid_squadmembers) || valid_squadmembers.len == 0)
+		squad_assigned.Cut()
+		world << "CASUALTY REPORT HAS NO VALID LIVING SQUAD MEMBERS TO CALL REINFORCEMENTS"
+		return
 	world << "ASSIGNING REINFORCEMENT SQUAD TO TASKPOINT"
-	create_taskpoint_assign(report.reporter_mob,report.reporter_assault_point,"reinforcement",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE),form_squad_searchrange*3)
-	update_taskpoint_timeout(mob_squad)
+	create_taskpoint_assign(pick(valid_squadmembers),report.reporter_assault_point,"reinforcement",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE),form_squad_searchrange*3)
+	update_taskpoint_timeout(report.reporter_assault_point)
 
 /datum/npc_overmind/proc/process_reports()
 	for(var/datum/npc_report/report in reports)
 		world << "REPORT RECIEVED"
 		switch(report.report_type)
 			if(REPORT_CONTACT)
-				process_report_contact(report)
+				process_contact_report(report)
 			if(REPORT_CASUALTY)
 				process_casualty_report(report)
 				//TODO: CASUALTY REPORTING AND SQUAD REINFORCEMENT
@@ -184,7 +193,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 		world << "REPORT PROCESSED."
 		qdel(report)
 
-/datum/mpc_overmind/proc/prune_trooplists()
+/datum/npc_overmind/proc/prune_trooplists()
 	var/list/lists_prune = list(constructor_troops,combat_troops,support_troops,other_troops)
 	for(var/list/list_prune in lists_prune)
 		for(var/entry in list_prune)
