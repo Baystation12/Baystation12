@@ -70,11 +70,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()	//so our overlays update.
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 //*****************
 //**Chameleon Hat**
@@ -99,11 +100,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()	//so our overlays update.
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 //******************
 //**Chameleon Suit**
@@ -128,11 +130,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()	//so our overlays update.
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 //*******************
 //**Chameleon Shoes**
@@ -156,11 +159,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()	//so our overlays update.
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 //**********************
 //**Chameleon Backpack**
@@ -184,10 +188,11 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
+		disguise(clothing_choices[picked], usr)
 
 	//so our overlays update.
 	if (ismob(src.loc))
@@ -216,11 +221,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()	//so our overlays update.
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 //******************
 //**Chameleon Mask**
@@ -244,11 +250,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()	//so our overlays update.
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 //*********************
 //**Chameleon Glasses**
@@ -272,11 +279,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()	//so our overlays update.
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 //*********************
 //**Chameleon Headset**
@@ -300,13 +308,14 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_ears()
+		disguise(clothing_choices[picked], usr)
+		if (ismob(src.loc))
+			var/mob/M = src.loc
+			M.update_inv_ears()
 
 //***********************
 //**Chameleon Accessory**
@@ -330,11 +339,12 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(clothing_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(clothing_choices[picked]))
+			return
 
-	disguise(clothing_choices[picked], usr)
-	update_clothing_icon()
+		disguise(clothing_choices[picked], usr)
+		update_clothing_icon()	//so our overlays update.
 
 /obj/item/clothing/accessory/chameleon/disguise(var/newtype, var/mob/user)
 	var/obj/item/clothing/accessory/copy = ..()
@@ -416,10 +426,11 @@
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(gun_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(gun_choices[picked]))
+			return
 
-	disguise(gun_choices[picked], usr)
+		disguise(gun_choices[picked], usr)
 
 	//so our overlays update.
 	if (ismob(src.loc))
