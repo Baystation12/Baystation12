@@ -9,8 +9,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 #define REPORT_SUPPORT_TEAM_REQ 6
 
 #define SQUADFORM_SEARCHRANGE 7
-#define TASKPOINT_TIMEOUT_DELAY 30 SECONDS
-#define TASKPOINT_TIMEOUT_UPDATE_DELAY 60 SECONDS //The default delay to assign to a taskpoint when the timeout is updated.
+#define TASKPOINT_TIMEOUT_DELAY 1 MINUTE
+#define TASKPOINT_TIMEOUT_UPDATE_DELAY 2 MINUTES //The default delay to assign to a taskpoint when the timeout is updated.
 #define SINGLESQUAD_MAXTARGET_HANDLE 3 //How many people should we assume our squad can handle before starting to apply squadsize increases.
 
 #define COMBAT_TROOPS_REQUIRED list(0,2,2,1)
