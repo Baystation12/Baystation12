@@ -184,6 +184,13 @@ var/list/global/tank_gauge_cache = list()
 				to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
 		add_fingerprint(user)
 
+	if(istype(W, /obj/item/weapon/flamethrower))
+		var/obj/item/weapon/flamethrower/F = W
+		if(!F.status || F.tank || user.unEquip(src, F))
+			return
+		master = F
+		F.tank = src
+
 /obj/item/weapon/tank/attack_self(mob/user as mob)
 	add_fingerprint(user)
 	if (!air_contents)
@@ -212,7 +219,7 @@ var/list/global/tank_gauge_cache = list()
 	var/data[0]
 	data["tankPressure"] = round(air_contents && air_contents.return_pressure() ? air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(distribute_pressure ? distribute_pressure : 0)
-	data["defaultReleasePressure"] = round(initial(distribute_pressure)) 
+	data["defaultReleasePressure"] = round(initial(distribute_pressure))
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
 	data["valveOpen"] = using_internal ? 1 : 0
 	data["maskConnected"] = 0
