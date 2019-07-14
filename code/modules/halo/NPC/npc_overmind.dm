@@ -63,13 +63,13 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	taskpoints[assault_target] = world.time
 	return assault_target
 
-/datum/npc_overmind/proc/is_type_list(var/our_type,var/list/our_list)
+/datum/npc_overmind/proc/is_type_list(var/checked_atom,var/list/our_list)
 	for(var/type in our_list)
-		if(istype(our_type,type))
+		if(istype(checked_atom,type))
 			return 1
 	return 0
 
-/datum/npc_overmind/proc/create_taskpoint_assign(var/mob/leader,var/obj/taskpoint,var/task_type,var/search_range = form_squad_searchrange)
+/datum/npc_overmind/proc/create_taskpoint_assign(var/mob/leader,var/obj/taskpoint,var/task_type,var/severity = 1,var/search_range = form_squad_searchrange)
 	var/required_troops = list(0,0,0,0) //constructor,combat,support,other
 	switch (task_type)
 		if("combat")
@@ -87,15 +87,15 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	inrange_squadmembers &= (constructor_troops + combat_troops + support_troops + other_troops)
 	for(var/mob/living/simple_animal/hostile/m in inrange_squadmembers)
 		var/is_chosen = 0
-		if(required_troops[1] > 0 && is_type_list(m.type,constructor_types))
+		if(required_troops[1] > 0 && is_type_list(m,constructor_types))
 			is_chosen = 1
 			required_troops[1]--
 			world << "CONSTRUCTOR ADDED"
-		if(required_troops[2] > 0 && is_type_list(m.type,combat_types))
+		if(required_troops[2] > 0 && is_type_list(m,combat_types))
 			is_chosen = 1
 			required_troops[2]--
 			world << "COMBAT TYPE ADDED"
-		if(required_troops[3] > 0 && is_type_list(m.type,support_types))
+		if(required_troops[3] > 0 && is_type_list(m,support_types))
 			is_chosen = 1
 			required_troops[3]--
 			world << "SUPPORT TYPE ADDED"
@@ -141,14 +141,15 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 /datum/npc_overmind/proc/sort_troops()
 	for(var/mob/m in unsorted_troops)
-		if(m.type in constructor_types)
+		if(m.type in is_type_list(m,constructor_types))
 			constructor_troops += m
-		if(m.type in combat_types)
+		if(m.type in is_type_list(m,combat_types))
 			combat_troops += m
-		if(m.type in support_types)
+		if(m.type in is_type_list(m,support_types))
 			support_troops += m
 		else
 			other_troops += m
+		unsorted_troops -= m
 
 /datum/npc_overmind/proc/unassign_taskpoint(var/obj/taskpoint)
 	var/squad_assigned = assigned_taskpoints[taskpoint]
