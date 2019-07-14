@@ -67,7 +67,7 @@ also using astar would have a performance impact due to eg hordes
 			for(var/i = 0 to world.view) //Let's move as far as we can see.
 				target_turf = get_step_towards(target_turf,assault_target)
 				if(target_turf)
-				walk_to(src,target_turf,0,move_to_delay)
+					walk_to(src,target_turf,0,move_to_delay)
 
 			//what about if the movement fails?
 			if(src.loc == oldloc)
@@ -78,11 +78,11 @@ also using astar would have a performance impact due to eg hordes
 					if(target_turf)
 						walk_to(src,target_turf,0,move_to_delay)
 						sleep(move_to_delay)
-				else
+				/*else
 					//failure: the destination is likely too far away (more than twice world.view ... should be 14 steps)
 					//timeout for a longer time
 					stop_pathing(1 MINUTE)
-					return
+					return*/
 
 			if(target_turf)
 				dir = get_dir(oldloc, target_turf)
