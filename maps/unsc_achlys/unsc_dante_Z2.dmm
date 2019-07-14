@@ -49,7 +49,7 @@
 "aW" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/dante)
 "aX" = (/obj/structure/window/reinforced/treated{dir = 4},/obj/machinery/mac_cannon/ammo_loader,/turf/simulated/floor/tiled/dark,/area/dante)
 "aY" = (/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (EAST)"; icon_state = "mac_capacitor"; dir = 4},/turf/space,/area/dante)
-"aZ" = (/obj/structure/closet/crate/bin{anchored = 1; desc = "Important documents go here."; name = "Important Document Safe-Storage Strongbox"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/tiled,/area/dante)
+"aZ" = (/obj/structure/closet/crate/bin{anchored = 1; desc = "Important documents go here."; name = "Important Document Safe-Storage Strongbox"; tag = "retrieveto"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/tiled,/area/dante)
 "ba" = (/obj/machinery/vending/armory/attachment/achlys,/turf/simulated/floor/tiled,/area/dante)
 "bb" = (/obj/structure/window/reinforced/treated{dir = 4},/obj/machinery/overmap_weapon_console/mac,/turf/simulated/floor/tiled/dark,/area/dante)
 "bc" = (/obj/machinery/mac_cannon/accelerator{tag = "icon-mac_accelerator (EAST)"; icon_state = "mac_accelerator"; dir = 4},/turf/space,/area/dante)
