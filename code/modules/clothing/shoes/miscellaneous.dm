@@ -185,3 +185,13 @@
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints/reversed
 	item_flags = ITEM_FLAG_SILENT
 	description_fluff =  "Originally designed to confuse Terran troops on the swamp moon of Nabier XI, where they were proven somewhat effective. Not bad on a space vessel, either."
+
+/obj/item/clothing/shoes/ds_securityboots
+	name = "security jackboots"
+	desc = "Stomping on secession since the Mars Riots."
+	icon_state = "ds_securityjackboots"
+	force = 3
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
+	item_flags = ITEM_FLAG_NOSLIP
+	siemens_coefficient = 0.6
+	can_hold_knife = 1
