@@ -148,7 +148,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 				m.target_mob = report.reporter_mob.target_mob
 				update_taskpoint_timeout(mob_squad)
 	else if(!mob_squad && report.reporter_mob.target_mob)
-		if(taskpoint_exists_for_loc(report.teporter_mob.target_mob.loc))
+		if(taskpoint_exists_for_loc(report.reporter_mob.target_mob.loc))
 			return
 		else
 			var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
