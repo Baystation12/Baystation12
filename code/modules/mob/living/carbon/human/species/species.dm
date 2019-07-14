@@ -109,7 +109,7 @@
 	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
 	var/breath_type = "oxygen"                                  // Non-oxygen gas breathed, if any.
-	var/poison_types = list("phoron" = TRUE, "chlorine" = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/poison_types = list(MATERIAL_PHORON = TRUE, "chlorine" = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
 	var/exhale_type = "carbon_dioxide"                          // Exhaled gas type.
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
 	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees

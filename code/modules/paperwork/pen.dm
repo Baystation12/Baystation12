@@ -22,7 +22,7 @@
 	w_class = ITEM_SIZE_TINY
 	throw_speed = 7
 	throw_range = 15
-	matter = list(DEFAULT_WALL_MATERIAL = 10)
+	matter = list(MATERIAL_STEEL = 10)
 	var/colour = "black"	//what colour the ink is!
 	var/color_description = "black ink"
 
@@ -218,4 +218,4 @@
 	icon_state = "fancy"
 	throwforce = 1 //pointy
 	colour = "#1c1713" //dark ashy brownish
-	matter = list(DEFAULT_WALL_MATERIAL = 15)
+	matter = list(MATERIAL_STEEL = 15)

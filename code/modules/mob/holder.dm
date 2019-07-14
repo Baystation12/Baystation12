@@ -213,3 +213,23 @@ var/list/holder_mob_icon_cache = list()
 
 	// Handle the rest of sync().
 	..(M)
+
+/atom/proc/get_holding_mob()
+	//This function will return the mob which is holding this holder, or null if it's not held
+	//It recurses up the hierarchy out of containers until it reaches a mob, or a turf, or hits the limit
+	var/x = 0//As a safety, we'll crawl up a maximum of five layers
+	var/atom/a = src
+	while (x < 5)
+		x++
+		if (isnull(a))
+			return null
+
+		a = a.loc
+		if (istype(a, /turf))
+			return null//We must be on a table or a floor, or maybe in a wall. Either way we're not held.
+
+		if (istype(a, /mob))
+			return a
+		//If none of the above are true, we must be inside a box or backpack or something. Keep recursing up.
+
+	return null//If we get here, the holder must be buried many layers deep in nested containers. Shouldn't happen

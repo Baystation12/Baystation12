@@ -252,11 +252,11 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/weapon/card/id/id = H.GetIdCard()
 		if(id)
-			id.icon_state = "gold"
+			id.icon_state = MATERIAL_GOLD
 			id.access = get_all_accesses()
 		else
 			id = new/obj/item/weapon/card/id(M);
-			id.icon_state = "gold"
+			id.icon_state = MATERIAL_GOLD
 			id.access = get_all_accesses()
 			id.registered_name = H.real_name
 			id.assignment = "Captain"
@@ -448,7 +448,7 @@
 		if(Rad.anchored)
 			if(!Rad.P)
 				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
-				Phoron.air_contents.gas["phoron"] = 70
+				Phoron.air_contents.gas[MATERIAL_PHORON] = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron
 				Phoron.loc = Rad

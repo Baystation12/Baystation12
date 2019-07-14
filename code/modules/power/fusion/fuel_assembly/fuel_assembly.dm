@@ -61,7 +61,7 @@
 	..(newloc, "tritium")
 
 /obj/item/weapon/fuel_assembly/phoron/New(var/newloc)
-	..(newloc, "phoron")
+	..(newloc, MATERIAL_PHORON)
 
 /obj/item/weapon/fuel_assembly/supermatter/New(var/newloc)
 	..(newloc, "supermatter")

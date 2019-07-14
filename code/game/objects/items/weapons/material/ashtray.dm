@@ -66,7 +66,7 @@
 	..(newloc, "plastic")
 
 /obj/item/weapon/material/ashtray/bronze/New(var/newloc)
-	..(newloc, "bronze")
+	..(newloc, MATERIAL_BRONZE)
 
 /obj/item/weapon/material/ashtray/glass/New(var/newloc)
-	..(newloc, "glass")
+	..(newloc, MATERIAL_GLASS)

@@ -17,7 +17,7 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
-	matter = list(DEFAULT_WALL_MATERIAL = 10)
+	matter = list(MATERIAL_STEEL = 10)
 	var/extended_desc = null
 	var/list/inputs = list()
 	var/list/outputs = list()

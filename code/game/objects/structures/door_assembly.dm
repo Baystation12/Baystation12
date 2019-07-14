@@ -181,7 +181,7 @@
 							glass = 1
 				else if(material_name)
 					// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z
-					if(!(material_name in list("gold", "silver", "diamond", "uranium", "phoron", "sandstone")))
+					if(!(material_name in list(MATERIAL_GOLD, MATERIAL_SILVER, MATERIAL_DIAMOND, "uranium", MATERIAL_PHORON, MATERIAL_SANDSTONE)))
 						to_chat(user, "You cannot make an airlock out of that material.")
 						return
 					if(S.get_amount() >= 2)

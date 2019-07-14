@@ -59,7 +59,7 @@
 		"pale orange" =   	COLOR_PALE_ORANGE,
 		"red" = 			COLOR_RED,
 		"sky blue" =   		COLOR_DEEP_SKY_BLUE,
-		"titanium" =     	COLOR_TITANIUM,
+		MATERIAL_TITANIUM =     	COLOR_TITANIUM,
 		"violet" = 			COLOR_VIOLET,
 		"white" =        	COLOR_WHITE,
 		"yellow" =       	COLOR_AMBER,

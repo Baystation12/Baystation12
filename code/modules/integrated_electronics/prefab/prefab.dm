@@ -2,7 +2,7 @@
 	var/decl/prefab/ic_assembly/new_prefab = new() //We are making a prefabricated assembly. This is actually not too hard, just tedious.
 	new_prefab.assembly_name = assembly.name //Set easy stuff like name, type, shell, etc.
 	new_prefab.assembly_type = assembly.type
-	new_prefab.metal_amount = assembly.matter[DEFAULT_WALL_MATERIAL] //We base the metal amount off the matter used in the thing.
+	new_prefab.metal_amount = assembly.matter[MATERIAL_STEEL] //We base the metal amount off the matter used in the thing.
 	new_prefab.shell_type = assembly.applied_shell
 	new_prefab.integrated_circuits = list() //setup lists
 	new_prefab.value_presets = list()
@@ -10,7 +10,7 @@
 	for(var/circuit_count = 1, circuit_count <= assembly.contents.len, circuit_count++) //We parse each individual circuit.
 		var/obj/item/integrated_circuit/ic = assembly.contents[circuit_count]
 		var/datum/ic_assembly_integrated_circuits/circuit = new()
-		new_prefab.metal_amount += ic.matter[DEFAULT_WALL_MATERIAL] //Increase metal amount
+		new_prefab.metal_amount += ic.matter[MATERIAL_STEEL] //Increase metal amount
 		circuit.circuit_type = ic.type //Setup type 'n name
 		circuit.circuit_name = ic.name
 		new_prefab.integrated_circuits += circuit //add to our list

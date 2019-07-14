@@ -82,16 +82,16 @@ var/global/list/ores_by_type = list()
 /ore/glass
 	name = "sand"
 	display_name = "sand"
-	icon_tag = "glass"
-	smelts_to = "glass"
+	icon_tag = MATERIAL_GLASS
+	smelts_to = MATERIAL_GLASS
 	alloy = 1
-	compresses_to = "sandstone"
+	compresses_to = MATERIAL_SANDSTONE
 	ore = /obj/item/weapon/ore/glass //Technically not needed since there's no glass ore vein, but consistency is nice
 
 /ore/phoron
-	name = "phoron"
+	name = MATERIAL_PHORON
 	display_name = "phoron crystals"
-	compresses_to = "phoron"
+	compresses_to = MATERIAL_PHORON
 	//smelts_to = something that explodes violently on the conveyor, huhuhuhu
 	result_amount = 5
 	spread_chance = 25
@@ -103,13 +103,13 @@ var/global/list/ores_by_type = list()
 		"billion" = 13,
 		"billion_lower" = 10
 		)
-	xarch_source_mineral = "phoron"
+	xarch_source_mineral = MATERIAL_PHORON
 	origin_tech = list(TECH_MATERIAL = 2)
 
 /ore/silver
-	name = "silver"
+	name = MATERIAL_SILVER
 	display_name = "native silver"
-	smelts_to = "silver"
+	smelts_to = MATERIAL_SILVER
 	result_amount = 5
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/silver
@@ -117,8 +117,8 @@ var/global/list/ores_by_type = list()
 	origin_tech = list(TECH_MATERIAL = 3)
 
 /ore/gold
-	smelts_to = "gold"
-	name = "gold"
+	smelts_to = MATERIAL_GOLD
+	name = MATERIAL_GOLD
 	display_name = "native gold"
 	result_amount = 5
 	spread_chance = 10
@@ -133,9 +133,9 @@ var/global/list/ores_by_type = list()
 	origin_tech = list(TECH_MATERIAL = 4)
 
 /ore/diamond
-	name = "diamond"
-	display_name = "diamond"
-	compresses_to = "diamond"
+	name = MATERIAL_DIAMOND
+	display_name = MATERIAL_DIAMOND
+	compresses_to = MATERIAL_DIAMOND
 	result_amount = 5
 	spread_chance = 10
 	ore = /obj/item/weapon/ore/diamond

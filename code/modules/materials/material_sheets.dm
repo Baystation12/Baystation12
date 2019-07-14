@@ -9,7 +9,7 @@
 	center_of_mass = null
 	randpixel = 3
 
-	var/default_type = DEFAULT_WALL_MATERIAL
+	var/default_type = MATERIAL_STEEL
 	var/material/material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
@@ -17,7 +17,7 @@
 /obj/item/stack/material/Initialize()
 	. = ..()
 	if(!default_type)
-		default_type = DEFAULT_WALL_MATERIAL
+		default_type = MATERIAL_STEEL
 	material = get_material_by_name("[default_type]")
 	if(!material)
 		return INITIALIZE_HINT_QDEL
@@ -90,12 +90,12 @@
 /obj/item/stack/material/sandstone
 	name = "sandstone brick"
 	icon_state = "sheet-sandstone"
-	default_type = "sandstone"
+	default_type = MATERIAL_SANDSTONE
 
 /obj/item/stack/material/marble
 	name = "marble brick"
 	icon_state = "sheet-marble"
-	default_type = "marble"
+	default_type = MATERIAL_MARBLE
 
 /obj/item/stack/material/marble/ten
 	amount = 10
@@ -104,9 +104,9 @@
 	amount = 50
 
 /obj/item/stack/material/diamond
-	name = "diamond"
+	name = MATERIAL_DIAMOND
 	icon_state = "sheet-diamond"
-	default_type = "diamond"
+	default_type = MATERIAL_DIAMOND
 
 /obj/item/stack/material/diamond/ten
 	amount = 10
@@ -122,7 +122,7 @@
 /obj/item/stack/material/phoron
 	name = "solid phoron"
 	icon_state = "sheet-phoron"
-	default_type = "phoron"
+	default_type = MATERIAL_PHORON
 
 /obj/item/stack/material/phoron/ten
 	amount = 10
@@ -142,17 +142,17 @@
 	amount = 50
 
 /obj/item/stack/material/gold
-	name = "gold"
+	name = MATERIAL_GOLD
 	icon_state = "sheet-gold"
-	default_type = "gold"
+	default_type = MATERIAL_GOLD
 
 /obj/item/stack/material/gold/ten
 	amount = 10
 
 /obj/item/stack/material/silver
-	name = "silver"
+	name = MATERIAL_SILVER
 	icon_state = "sheet-silver"
-	default_type = "silver"
+	default_type = MATERIAL_SILVER
 
 /obj/item/stack/material/silver/ten
 	amount = 10
@@ -198,10 +198,10 @@
 	amount = 10
 
 /obj/item/stack/material/ocp
-	name = "osmium-carbide plasteel"
+	name = MATERIAL_OCP
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
-	default_type = "osmium-carbide plasteel"
+	default_type = MATERIAL_OCP
 	apply_colour = 1
 
 /obj/item/stack/material/ocp/ten
@@ -221,9 +221,9 @@
 	amount = 50
 
 /obj/item/stack/material/steel
-	name = DEFAULT_WALL_MATERIAL
+	name = MATERIAL_STEEL
 	icon_state = "sheet-metal"
-	default_type = DEFAULT_WALL_MATERIAL
+	default_type = MATERIAL_STEEL
 
 /obj/item/stack/material/steel/ten
 	amount = 10
@@ -232,10 +232,10 @@
 	amount = 50
 
 /obj/item/stack/material/plasteel
-	name = "plasteel"
+	name = MATERIAL_PLASTEEL
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
-	default_type = "plasteel"
+	default_type = MATERIAL_PLASTEEL
 
 /obj/item/stack/material/plasteel/ten
 	amount = 10
@@ -277,9 +277,9 @@
 	default_type = "leather"
 
 /obj/item/stack/material/glass
-	name = "glass"
+	name = MATERIAL_GLASS
 	icon_state = "sheet-glass"
-	default_type = "glass"
+	default_type = MATERIAL_GLASS
 
 /obj/item/stack/material/glass/ten
 	amount = 10
@@ -314,7 +314,7 @@
 
 /obj/item/stack/material/glass/phoronrglass/ten
 	amount = 10
-	
+
 /obj/item/stack/material/aliumium
 	name = "aliumium chunks"
 	icon_state = "sheet-torn"

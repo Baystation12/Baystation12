@@ -191,3 +191,8 @@
 //Object specific version of the generic proc, for overriding
 /obj/proc/is_hot()
 	return heat
+
+
+//Return true if this is a flat surface which people could work on
+/obj/proc/is_surface()
+	return FALSE

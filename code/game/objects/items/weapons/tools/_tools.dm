@@ -542,9 +542,13 @@
 /obj/proc/has_quality(quality_id)
 	return quality_id in tool_qualities
 
+
+/obj/proc/ever_has_quality(quality_id)
+	return has_quality(quality_id)
+
 //A special version of the above that also checks the switched on list
 //As a result, it checks what qualities the tool is ever capable of having, not just those it has right now
-/obj/item/weapon/tool/proc/ever_has_quality(quality_id)
+/obj/item/weapon/tool/ever_has_quality(quality_id)
 	.=has_quality(quality_id)
 	if (!.)
 		if (quality_id in switched_on_qualities)

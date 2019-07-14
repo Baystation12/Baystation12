@@ -59,6 +59,8 @@
 #define SS_INIT_XENOARCH       -50
 #define SS_INIT_OPEN_SPACE    -150
 #define SS_INIT_BAY_LEGACY    -200
+#define SS_INIT_CRAFT		  -201
+#define SS_INIT_ASSET		  -240	//This should always be near the end, other systems should do their stuff first
 #define SS_INIT_UNIT_TESTS    -250
 
 // SS runlevels

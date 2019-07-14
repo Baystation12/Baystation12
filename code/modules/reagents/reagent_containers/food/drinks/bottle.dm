@@ -386,7 +386,7 @@
 	..()
 	reagents.add_reagent(/datum/reagent/ethanol/vodka/premium, 100)
 	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Terran","STS-35")
-	var/typepick = pick("Absolut","Gold","Quadruple Distilled","Platinum","Standard")
+	var/typepick = pick("Absolut",MATERIAL_GOLD,"Quadruple Distilled","Platinum","Standard")
 	name = "[namepick] [typepick]"
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine

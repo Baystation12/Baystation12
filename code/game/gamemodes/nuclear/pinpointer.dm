@@ -6,7 +6,7 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	matter = list(MATERIAL_STEEL = 500)
 	var/weakref/target
 	var/active = 0
 	var/beeping = 2
@@ -49,7 +49,7 @@
 /obj/item/weapon/pinpointer/Process()
 	update_icon()
 	if(!target)
-		return 
+		return
 	if(!target.resolve())
 		target = null
 		return
@@ -134,7 +134,7 @@
 	if(locate_shuttle)
 		var/obj/machinery/computer/shuttle_control/multi/syndicate/home = locate()
 		return weakref(home)
-	else 
+	else
 		return ..()
 
 //Deathsquad locator
