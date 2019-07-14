@@ -198,7 +198,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 				continue
 
 /datum/npc_overmind/proc/sort_troops()
-	for(var/mob/m in unsorted_troops)
+	for(var/mob/living/simple_animal/hostile/m in unsorted_troops)
 		var/sorted = 0
 		if(is_type_list(m,constructor_types))
 			constructor_troops += m
@@ -211,6 +211,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			sorted = 1
 		if(!sorted)
 			other_troops += m
+		m.assault_target_type = null //Sorted troops are now soley under our command.
 		unsorted_troops -= m
 
 /datum/npc_overmind/proc/unassign_taskpoint(var/obj/taskpoint)
@@ -219,6 +220,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	for(var/mob/living/simple_animal/hostile/m in squad_assigned)
 		m.last_assault_target = m.assault_target
 		m.assault_target = null
+		m.target_margin = initial(target_margin)
 	return squad_assigned
 
 /datum/npc_overmind/proc/assign_taskpoint(var/taskpoint,var/list/squad)
@@ -229,6 +231,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 		assigned_taskpoints[taskpoint] = squad
 	for(var/mob/living/simple_animal/hostile/m in squad)
 		m.assault_target = taskpoint
+		m.target_margin = 2
 
 /datum/npc_overmind/proc/prune_taskpoints()
 	for(var/taskpoint in taskpoints)
