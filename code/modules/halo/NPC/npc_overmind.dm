@@ -79,7 +79,9 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			required_troops = CONSTRUCTOR_TROOPS_REQUIRED
 		if("deconstruct")
 			required_troops = DECONSTRUCTOR_TROOPS_REQUIRED
-
+	if(severity > 1)
+		for(var/num in required_troops)
+			num *= severity
 	var/list/inrange_squadmembers = list()
 	var/list/chosen_squadmembers = list(leader)
 	for(var/mob/m in range(search_range,leader))
