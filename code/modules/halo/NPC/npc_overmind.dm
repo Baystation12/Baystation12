@@ -157,24 +157,19 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
 
 /datum/npc_overmind/proc/process_casualty_report(var/datum/npc_report/report)
-	world << "REPORT TYPE: CASUALTY"
 	var/list/squad_assigned = assigned_taskpoints[report.reporter_assault_point]
 	if(isnull(squad_assigned))
-		world << "CASUALTY REPORT HAS NO SQUAD. SKIPPING."
 		return
 	var/list/valid_squadmembers = squad_assigned.Copy()
 	valid_squadmembers &= (constructor_troops + combat_troops + support_troops + other_troops)
 	if(isnull(valid_squadmembers) || valid_squadmembers.len == 0)
 		squad_assigned.Cut()
-		world << "CASUALTY REPORT HAS NO VALID LIVING SQUAD MEMBERS TO CALL REINFORCEMENTS"
 		return
-	world << "ASSIGNING REINFORCEMENT SQUAD TO TASKPOINT"
 	create_taskpoint_assign(pick(valid_squadmembers),report.reporter_assault_point,"reinforcement",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE),form_squad_searchrange*3)
 	update_taskpoint_timeout(report.reporter_assault_point)
 
 /datum/npc_overmind/proc/process_reports()
 	for(var/datum/npc_report/report in reports)
-		world << "REPORT RECIEVED"
 		switch(report.report_type)
 			if(REPORT_CONTACT)
 				process_contact_report(report)
@@ -190,7 +185,6 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			//if(REPORT_SUPPORT_TEAM_REQ)
 				//TODO: REQUESTING SUPPORT TEAMS.
 		reports -= report
-		world << "REPORT PROCESSED."
 		qdel(report)
 
 /datum/npc_overmind/proc/prune_trooplists()
