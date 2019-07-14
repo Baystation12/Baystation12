@@ -37,7 +37,7 @@
 		return null
 	var/atom/T = null
 	//stop_automated_movement = 0
-	for(var/atom/A in ListTargets(10))
+	for(var/atom/A in ListTargets(7))
 
 		if(A == src)
 			continue
@@ -67,7 +67,7 @@
 				break
 
 	if(our_overmind && !isnull(T))
-		var/list/targlist = ListTargets(10)
+		var/list/targlist = ListTargets(7)
 		our_overmind.create_report(1,src,null,targlist.len,assault_target)
 	return T
 
@@ -79,7 +79,7 @@
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
-	if(target_mob in ListTargets(10))
+	if(target_mob in ListTargets(7))
 		if(ranged)
 			if(get_dist(src, target_mob) <= 6)
 				walk(src, 0)
@@ -97,7 +97,7 @@
 	if(!target_mob || SA_attackable(target_mob))
 		LoseTarget()
 		return 0
-	if(!(target_mob in ListTargets(10)))
+	if(!(target_mob in ListTargets(7)))
 		LostTarget()
 		return 0
 	if(next_move >= world.time)
@@ -179,7 +179,7 @@
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	if(our_overmind)
-		var/list/targlist = ListTargets(10)
+		var/list/targlist = ListTargets(7)
 		our_overmind.create_report(5,src,null,targlist.len,assault_target)
 	..(gibbed, deathmessage, show_dead_message)
 	stop_automated_movement = 0
