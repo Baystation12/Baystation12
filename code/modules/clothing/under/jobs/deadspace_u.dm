@@ -94,7 +94,7 @@
 /*
  * Security
  */
-/obj/item/clothing/under/security/deadspace
+/obj/item/clothing/under/security/ds_securityundersuit
 	name = "security jumpsuit"
 	item_state = "ds_securityjumpsuit"
 	worn_state = "ds_securityjumpsuit"
