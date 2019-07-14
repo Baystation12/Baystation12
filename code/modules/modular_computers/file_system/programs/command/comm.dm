@@ -371,7 +371,7 @@ var/last_message_id = 0
 	if (!evacuation_controller)
 		return
 
-	. = evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
+	. = evacuation_controller.attempt_autotransfer()
 	if(.)
 		//delay events in case of an autotransfer
 		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)

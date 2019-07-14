@@ -55,6 +55,9 @@ var/datum/evacuation_controller/evacuation_controller
 		CRASH("[esp] has already been added as an evacuation predicate")
 	evacuation_predicates += esp
 
+/datum/evacuation_controller/proc/attempt_autotransfer()
+	return call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
+
 /datum/evacuation_controller/proc/call_evacuation(var/mob/user, var/_emergency_evac, var/forced, var/skip_announce, var/autotransfer)
 
 	if(state != EVAC_IDLE)

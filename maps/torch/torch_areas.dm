@@ -198,12 +198,12 @@
 /area/crew_quarters/safe_room/seconddeck
 	name = "\improper Second Deck Safe Room"
 
-/area/maintenance/bluespace
+//First Deck (Z-4)
+/area/engineering/bluespace_drive
 	name = "Bluespace Drive"
 	icon_state = "engineering"
 	req_access = list(list(access_engine_equip, access_heads), access_engine, access_maint_tunnels)
 
-//First Deck (Z-4)
 /area/maintenance/firstdeck
 	name = "First Deck Maintenance"
 	icon_state = "maintcentral"

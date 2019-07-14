@@ -23,6 +23,25 @@
 		EVAC_OPT_CANCEL_BLUESPACE_JUMP = new /datum/evacuation_option/cancel_bluespace_jump()
 	)
 
+/datum/evacuation_controller/starship/attempt_autotransfer()
+	var/bsd_failure = 0
+	if(GLOB.bluespace_drive_collapsing)
+		bsd_failure = 2
+	else
+		var/obj/machinery/drive_core/drive = get_best_bluespace_drive(GLOB.using_map.station_levels[1])
+		if(!drive)
+			bsd_failure = 1
+		else if(drive.is_sabotaged())
+			bsd_failure = 2
+	switch(bsd_failure)
+		if(1)
+			priority_announcement.Announce("Unable to locate a functional bluespace drive system on this vessel. Automated systems cannot initiate superluminal jump.", "Drive Monitor")
+		if(2)
+			priority_announcement.Announce("Bluespace drive power readings are fluctuating beyond safety thresholds. Automated systems cannot initiate superluminal jump.", "Drive Monitor")
+		else
+			return call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
+	return FALSE
+
 /datum/evacuation_controller/starship/finish_preparing_evac()
 	. = ..()
 	// Arm the escape pods.
@@ -95,16 +114,26 @@
 	silicon_allowed = TRUE
 
 /datum/evacuation_option/bluespace_jump/execute(mob/user)
+
+	if(GLOB.bluespace_drive_collapsing)
+		to_chat(user, SPAN_WARNING("Drive core connection timed out. Check connection and try again."))
+		return
+	var/obj/machinery/drive_core/drive = get_best_bluespace_drive(GLOB.using_map.station_levels[1])
+	if(!drive)
+		to_chat(user, SPAN_WARNING("Drive core connection timed out. Check physical drive assembly."))
+		return
+	if(!drive.finish_spooling(forced = TRUE))
+		return // finish_spooling() handles disasters resulting from attempting to spool up a sabotaged BSD.
 	if (!evacuation_controller)
 		return
 	if (evacuation_controller.deny)
-		to_chat(user, "Unable to initiate jump preparation.")
+		to_chat(user, SPAN_WARNING("Unable to initiate jump preparation."))
 		return
 	if (evacuation_controller.is_on_cooldown())
-		to_chat(user, evacuation_controller.get_cooldown_message())
+		to_chat(user, SPAN_WARNING(evacuation_controller.get_cooldown_message()))
 		return
 	if (evacuation_controller.is_evacuating())
-		to_chat(user, "Jump preparation already in progress.")
+		to_chat(user, SPAN_WARNING("Jump preparation already in progress."))
 		return
 	if (evacuation_controller.call_evacuation(user, 0))
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has initiated bluespace jump preparation.")

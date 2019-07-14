@@ -38,3 +38,10 @@
 
 	away_site_budget = 3
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
+/datum/map/torch/check_admin_evacuation(var/is_emergency)
+	if(!is_emergency)
+		var/obj/machinery/drive_core/drive = get_best_bluespace_drive(station_levels[1])
+		if(!drive || drive.is_sabotaged())
+			to_chat(usr, SPAN_WARNING("There is no functioning, non-sabotaged bluespace drive on the ship currently. Call an emergency evac instead."))
+			return FALSE
+	. = ..()

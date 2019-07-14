@@ -366,3 +366,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		num2text(SUP_FREQ)   = list(access_cargo),
 		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
 	)
+
+/datum/map/proc/check_admin_evacuation(var/is_emergency)
+	return TRUE
