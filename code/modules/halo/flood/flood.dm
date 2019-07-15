@@ -2,12 +2,19 @@ GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define PLAYER_FLOOD_HEALTH_MOD 1.5
+
 #define AIRLOCK_INFEST_TIME 15 SECONDS
+
 #define COMBAT_FORM_INFESTOR_SPAWN_DELAY 30SECONDS
+
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
+
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
+
 #define ODST_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6c_magnum_s,\
 /obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg/silenced)
+
+#define FLOOD_BURNDAM_MULTIPLIER 2
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -47,6 +54,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/New()
+	our_overmind = flood_overmind
 	..()
 	GLOB.live_flood_simplemobs.Add(src)
 	/*if(prob(50))
@@ -57,6 +65,10 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	..()
 	if(client || ckey)
 		target_mob = null
+
+/mob/living/simple_animal/hostile/flood/adjustFireLoss(damage)
+	damage *= FLOOD_BURNDAM_MULTIPLIER
+	. = ..()
 
 
 /mob/living/simple_animal/hostile/flood/proc/do_infect(var/mob/living/carbon/human/h)
@@ -165,7 +177,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	return 1
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
-	for(var/mob/living/carbon/human/h in view(2,src))
+	for(var/mob/living/carbon/human/h in view(1,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
 		if((mob_healthdam > h.maxHealth/4) || h.stat != CONSCIOUS) //Less than quarter health or unconscious/dead? Jump 'em.
 			if(infect_mob(h))
@@ -398,7 +410,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return 1
 
 /mob/living/simple_animal/hostile/flood/combat_form/proc/dump_inventory()
-	new src.inventory(loc)
+	if(inventory)
+		new src.inventory(loc)
 
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
