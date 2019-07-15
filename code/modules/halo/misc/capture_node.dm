@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(capture_nodes)
+
 /obj/machinery/computer/capture_node
 	name = "Sovereignty Console"
 	icon_keyboard = "tech_key"
@@ -14,6 +16,23 @@
 
 	var/area/A = get_area(src)
 	name = "[A] Sovereignty Console"
+
+	GLOB.capture_nodes.Add(src)
+
+/obj/machinery/computer/capture_node/Destroy()
+	GLOB.capture_nodes.Remove(src)
+	. = ..()
+
+/obj/machinery/computer/capture_node/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
+	. = ..()
+
+	var/chat_text = "<span class='info'>Current score: "
+	for(var/datum/faction/F in GLOB.all_factions)
+		for(var/datum/objective/colony_capture/O in F.all_objectives)
+			chat_text += "<span class='em'>[F.name]</span> ([O.capture_score] | [round(100 * (O.controlled_nodes.len / GLOB.capture_nodes.len))]% control) "
+			break
+	chat_text += "</span>"
+	to_chat(user, chat_text)
 
 /obj/machinery/computer/capture_node/attack_hand(var/mob/living/user)
 	set_owner(user)
