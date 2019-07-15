@@ -10,8 +10,8 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	take_external_damage(amount)
 
 /obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon = null)
-	brute = round(brute * get_brute_mod(), 0.1)
-	burn = round(burn * get_burn_mod(), 0.1)
+	brute = round(brute * get_brute_mod(), 0.35)
+	burn = round(burn * get_burn_mod(), 0.35)
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
