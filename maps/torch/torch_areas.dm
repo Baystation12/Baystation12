@@ -1062,11 +1062,7 @@
 	icon_state = "security"
 
 /area/security/questioning
-	name = "\improper Security Interview Room One"
-	icon_state = "security"
-
-/area/security/questioning2
-	name = "\improper Security Interview Room Two"
+	name = "\improper Security Interview Room"
 	icon_state = "security"
 
 /area/security/wing
