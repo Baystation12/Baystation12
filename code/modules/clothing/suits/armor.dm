@@ -1,4 +1,3 @@
-
 /obj/item/clothing/suit/armor
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -442,26 +441,3 @@
 	desc = "A heavy armored vest in a light grey urban camo. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
 	icon_state = "m_vest"
 	item_state = "m_vest"
-	
-
-
-//Both of the suits below here need new sprites, ideally. CEC body armour references can be found online, not really anything that fits which currently exists.
-
-
-/obj/item/clothing/suit/armor/ishimurasecurity
-	name = "armoured vest"
-	desc = "An armored vest with padding and advanced ballistic protection equipment to provide protection for a variety of threats which an officer may face on operations with the CEC."
-	icon = 'icons/obj/clothing/modular_armor.dmi'
-	icon_state = "riot"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 5, energy = 5, bomb = 15, bio = 0, rad = 0)
-	siemens_coefficient = 0.1
-
-/obj/item/clothing/suit/armor/ishimurasecuritychief
-	name = "cec security armoured jacket"
-	desc = "An armoured jacket often worn by the Chief Security Officer, designed to stop ballistic and bladed impacts."
-	icon_state = "detective"
-	item_state = "det_suit"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 60, bullet = 60, laser = 0, energy = 15, bomb = 35, bio = 0, rad = 0)
-	siemens_coefficient = 0.1
