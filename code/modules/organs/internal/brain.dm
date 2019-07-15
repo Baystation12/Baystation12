@@ -131,7 +131,6 @@
 				to_chat(owner, "<span class = 'notice' font size='10'><B>What's going on...?</B></span>")
 				sleep(10 SECONDS)
 				to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
-				alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 			healed_threshold = 0
 
 		if(damage < (max_damage / 4))
