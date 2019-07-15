@@ -1065,10 +1065,6 @@
 	name = "\improper Security Interview Room One"
 	icon_state = "security"
 
-/area/security/questioning2
-	name = "\improper Security Interview Room Two"
-	icon_state = "security"
-
 /area/security/wing
 	name = "\improper Security Wing"
 	icon_state = "security"
@@ -1628,7 +1624,7 @@
 	req_access = list(access_armory)
 
 /area/security/detectives_office
-	name = "\improper Security - Forensic Office"
+	name = "\improper Security - Investigations Office"
 	icon_state = "detective"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_forensics_lockers)
