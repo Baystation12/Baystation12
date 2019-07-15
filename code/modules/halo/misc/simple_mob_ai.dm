@@ -44,8 +44,8 @@ also using astar would have a performance impact due to eg hordes
 */
 
 /mob/living/simple_animal/hostile/proc/set_assault_target(var/obj/effect/landmark/assault_target/new_assault_target)
-	assault_target = new_assault_target
 	last_assault_target = assault_target
+	assault_target = new_assault_target
 	if(assault_target)
 		target_margin = rand(7,0)
 
@@ -62,23 +62,27 @@ also using astar would have a performance impact due to eg hordes
 			stop_automated_movement = 1
 
 			//just path in their direction
-			var/turf/target_turf = get_step_towards(src,assault_target)
+			var/turf/target_turf = loc
 			var/oldloc = src.loc
-			Move(target_turf)
+			for(var/i = 0 to world.view) //Let's move as far as we can see.
+				target_turf = get_step_towards(target_turf,assault_target)
+				if(target_turf)
+					walk_to(src,target_turf,0,move_to_delay)
 
 			//what about if the movement fails?
 			if(src.loc == oldloc)
 				//attempt to use basic ss13 pathfinding
-				target_turf = get_step_to(src,assault_target)
-
-				//success
-				if(target_turf)
-					Move(target_turf)
-				else
+				target_turf = loc
+				for(var/i = 0 to world.view)
+					target_turf = get_step_to(target_turf,assault_target)
+					if(target_turf)
+						walk_to(src,target_turf,0,move_to_delay)
+						sleep(move_to_delay)
+				/*else
 					//failure: the destination is likely too far away (more than twice world.view ... should be 14 steps)
 					//timeout for a longer time
 					stop_pathing(1 MINUTE)
-					return
+					return*/
 
 			if(target_turf)
 				dir = get_dir(oldloc, target_turf)

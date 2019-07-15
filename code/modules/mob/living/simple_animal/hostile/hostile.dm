@@ -25,12 +25,33 @@
 
 	var/feral = 0
 
+	var/datum/npc_overmind/our_overmind
+
+/mob/living/simple_animal/hostile/New()
+	. = ..()
+	if(our_overmind)
+		if(our_overmind.overmind_active)
+			assault_target_type = null //Sorted troops are now soley under overmind command, if the overmind is currently active.
+		var/sorted = 0
+		if(our_overmind.is_type_list(src,our_overmind.constructor_types))
+			our_overmind.constructor_troops += src
+			sorted = 1
+		if(our_overmind.is_type_list(src,our_overmind.combat_types))
+			our_overmind.combat_troops += src
+			sorted = 1
+		if(our_overmind.is_type_list(src,our_overmind.support_types))
+			our_overmind.support_troops += src
+			sorted = 1
+		if(!sorted)
+			our_overmind.other_troops += src
+
+
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
 	var/atom/T = null
 	//stop_automated_movement = 0
-	for(var/atom/A in ListTargets(10))
+	for(var/atom/A in ListTargets(7))
 
 		if(A == src)
 			continue
@@ -58,6 +79,10 @@
 				stance = HOSTILE_STANCE_ATTACK
 				T = M
 				break
+
+	if(our_overmind && !isnull(T))
+		var/list/targlist = ListTargets(7)
+		our_overmind.create_report(1,src,null,targlist.len,assault_target)
 	return T
 
 
@@ -68,7 +93,7 @@
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
-	if(target_mob in ListTargets(10))
+	if(target_mob in ListTargets(7))
 		if(ranged)
 			if(get_dist(src, target_mob) <= 6)
 				walk(src, 0)
@@ -86,7 +111,7 @@
 	if(!target_mob || SA_attackable(target_mob))
 		LoseTarget()
 		return 0
-	if(!(target_mob in ListTargets(10)))
+	if(!(target_mob in ListTargets(7)))
 		LostTarget()
 		return 0
 	if(next_move >= world.time)
@@ -167,6 +192,9 @@
 	return L
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
+	if(our_overmind)
+		var/list/targlist = ListTargets(7)
+		our_overmind.create_report(5,src,null,targlist.len,assault_target)
 	..(gibbed, deathmessage, show_dead_message)
 	stop_automated_movement = 0
 	walk(src, 0)
