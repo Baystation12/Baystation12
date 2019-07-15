@@ -22,6 +22,8 @@
 		skipface = head.flags_inv & HIDEFACE
 
 	if(wear_mask)
+		skipeyes |= wear_mask.flags_inv & HIDEEYES
+		skipears |= wear_mask.flags_inv & HIDEEARS
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
 	//no accuately spotting headsets from across the room.
