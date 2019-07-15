@@ -47,10 +47,7 @@
 
 
 /obj/machinery/sleeper/Process()
-	if((stat & NOPOWER) && !interact_offline)
-		return
-
-	if(stat & BROKEN)
+	if(stat & (NOPOWER|BROKEN))
 		return
 
 	if(filtering > 0)
@@ -90,7 +87,7 @@
 /obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.outside_state)
 	var/data[0]
 
-	data["power"] = stat & (NOPOWER|BROKEN) ?  (stat & BROKEN ? 0 : interact_offline) : 1
+	data["power"] = stat & (NOPOWER|BROKEN) ? 0 : 1
 
 	var/list/reagents = list()
 	for(var/T in available_chemicals)
@@ -222,16 +219,8 @@
 /obj/machinery/sleeper/proc/go_in(var/mob/M, var/mob/user)
 	if(!M)
 		return
-
-	if((stat & NOPOWER) && !interact_offline)
+	if(stat & (BROKEN|NOPOWER))
 		return
-
-	if(stat & BROKEN)
-		return
-
-	if(!ishuman(M) || user.anchored)
-		return
-
 	if(occupant)
 		to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
 		return
@@ -285,12 +274,9 @@
 		toggle_pump()
 
 /obj/machinery/sleeper/proc/inject_chemical(var/mob/living/user, var/chemical_name, var/amount)
-	if((stat & NOPOWER) && !interact_offline)
+	if(stat & (BROKEN|NOPOWER))
 		return
-
-	if(stat & BROKEN)
-		return
-
+		
 	var/chemical_type = available_chemicals[chemical_name]
 	if(occupant && occupant.reagents)
 		if(occupant.reagents.get_reagent_amount(chemical_type) + amount <= 20)

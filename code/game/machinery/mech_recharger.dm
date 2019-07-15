@@ -11,7 +11,8 @@
 	active_power_usage = 60 KILOWATTS // When charging
 	base_type = /obj/machinery/mech_recharger
 	construct_state = /decl/machine_construction/default/panel_closed
-	use_power = 1
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/mob/living/exosuit/charging
 	var/base_charge_rate = 60 KILOWATTS
@@ -47,7 +48,6 @@
 		change_power_consumption(base_charge_rate, POWER_USE_ACTIVE)
 
 /obj/machinery/mech_recharger/Process()
-	..()
 	if(!charging)
 		update_use_power(POWER_USE_IDLE)
 		return
