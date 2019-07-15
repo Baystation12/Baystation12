@@ -18,7 +18,7 @@
 		/datum/job/police,\
 		/datum/job/police_chief)
 
-/datum/game_mode/outer_colonies/revolution/setup_objectives()
+/datum/game_mode/outer_colonies/reclamation/setup_objectives()
 	. = ..()
 
 	var/datum/objective/capture_innies/obj = locate() in GLOB.UNSC.all_objectives
