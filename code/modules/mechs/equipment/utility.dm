@@ -224,7 +224,8 @@
 	if(.)
 		if(isobj(target))
 			var/obj/target_obj = target
-			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
+			if(target_obj.unacidable)
+				return
 		if(istype(target,/obj/item/weapon/material/drill_head))
 			var/obj/item/weapon/material/drill_head/DH = target
 			if(drill_head)
