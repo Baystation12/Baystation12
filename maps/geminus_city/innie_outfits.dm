@@ -48,4 +48,5 @@
 		W.update_name()
 
 /decl/hierarchy/outfit/job/colonist/geminus_innie
+	name = "Geminus Insurrectionist"
 	l_ear = /obj/item/device/radio/headset/insurrection
