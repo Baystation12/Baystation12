@@ -1,4 +1,3 @@
-
 /obj/item/organ/internal/eyes
 	name = "eyeballs"
 	icon_state = "eyes"
@@ -10,7 +9,7 @@
 	var/phoron_guard = 0
 	var/list/eye_colour = list(0,0,0)
 	var/innate_flash_protection = FLASH_PROTECTION_NONE
-	max_damage = 45
+	max_damage = 60
 
 /obj/item/organ/internal/eyes/optics
 	status = ORGAN_ROBOTIC
