@@ -2,7 +2,7 @@
 	name = "light exosuit"
 	desc = "A light and agile exosuit."
 
-/mob/living/exosuit/premade/light/New()
+/mob/living/exosuit/premade/light/Initialize()
 	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/light(src)
 		arms.color = COLOR_OFF_WHITE
@@ -16,7 +16,7 @@
 		body = new /obj/item/mech_component/chassis/light(src)
 		body.color = COLOR_OFF_WHITE
 
-	..()
+	. = ..()
 
 	install_system(new /obj/item/mech_equipment/catapult(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/sleeper(src), HARDPOINT_BACK)

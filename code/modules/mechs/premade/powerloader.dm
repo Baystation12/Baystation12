@@ -2,7 +2,7 @@
 	name = "power loader"
 	desc = "An ancient, but well-liked cargo handling exosuit."
 
-/mob/living/exosuit/premade/powerloader/New()
+/mob/living/exosuit/premade/powerloader/Initialize()
 	if(!arms) 
 		arms = new /obj/item/mech_component/manipulators/powerloader(src)
 		arms.color = "#ffbc37"
@@ -18,7 +18,7 @@
 
 	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit(src)
 
-	..()
+	. = ..()
 
 	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
