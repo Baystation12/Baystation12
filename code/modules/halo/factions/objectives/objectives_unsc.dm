@@ -68,7 +68,7 @@
 	explanation_text = "ONI reports a high value unidentified alien artifact in the sector. It must be secured by the UNSC to prevent falling into the wrong hands."
 
 /datum/objective/protect_colony
-	short_text = "Protect the UEG colony"
+	short_text = "Protect the UEG colony from destruction"
 	explanation_text = "There are a million innocent civilians on that colony. Prevent its destruction by any means necessary."
 	lose_points = 100
 
@@ -80,7 +80,7 @@
 
 /datum/objective/destroy_ship/unsc
 	short_text = "Destroy the Covenant warship"
-	explanation_text = "We cannot allow the Covenant warship to escape to threaten Earth. Take it out before it retreats from the system."
+	explanation_text = "We cannot allow any Covenant warship to escape to threaten Earth. Take them out before they can retreat from the system."
 	slipspace_affected = 1
 
 /datum/objective/destroy_ship/unsc/find_target()
@@ -88,5 +88,8 @@
 	return target_ship
 
 /datum/objective/colony_capture/unsc
-	short_text = "Hold the colony"
+	short_text = "Hold the UEG colony"
 	explanation_text = "We draw the line here. Do not allow rebels or aliens to capture our world."
+	objective_faction = "UNSC"
+	radio_frequency = "SHIPCOM"
+	radio_name = "UNSC Overwatch"

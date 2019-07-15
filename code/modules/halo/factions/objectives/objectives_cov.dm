@@ -24,7 +24,7 @@
 
 /datum/objective/destroy_ship/covenant
 	short_text = "Destroy the human warship"
-	explanation_text = "The human weapons are crude but occasionally effective. Eliminate the warship in the area."
+	explanation_text = "The human weapons are crude but occasionally effective. Eliminate any warships in the area."
 	slipspace_affected = 1
 
 /datum/objective/destroy_ship/covenant/find_target()
@@ -33,7 +33,7 @@
 
 /datum/objective/destroy_ship/covenant_odp
 	short_text = "Destroy the human defence platform"
-	explanation_text = "We require safe access to the human worlds. Take out the defence platform!"
+	explanation_text = "We require safe access to the human worlds. Take out their defence platforms!"
 	slipspace_affected = 1
 
 /datum/objective/destroy_ship/covenant_odp/find_target()
@@ -127,5 +127,9 @@
 /datum/objective/colony_capture/cov
 	short_text = "Capture the human colony"
 	explanation_text = "Holding the human colony will give us time to search it for artifacts."
+	objective_faction = "Covenant"
+	radio_frequency = "BattleNet"
+	radio_language = "Sangheili"
+	radio_name = "Ministry of Fervent Intercession"
 
 #undef COLONY_GLASSED_AMOUNT_REQUIRED
