@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/security/ds13chiefsecurityofficer
 	name = OUTFIT_JOB_NAME("Chief Security Officer")
 	uniform = /obj/item/clothing/under/security/ds_securityundersuit
-	suit = /obj/item/clothing/suit/storage/vest/tactical
+	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
 	l_ear = /obj/item/device/radio/headset/heads/hos
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/ds_securityglove
@@ -13,7 +13,7 @@
 /decl/hierarchy/outfit/job/security/ds13seniorsecurityofficer
 	name = OUTFIT_JOB_NAME("Senior Security Officer")
 	uniform = /obj/item/clothing/under/security/ds_securityundersuit
-	suit = /obj/item/clothing/suit/storage/vest/tactical
+	suit = /obj/item/clothing/suit/armor/ishimurasecurity
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/ds_securityglove
 	belt = /obj/item/weapon/storage/belt/holster/security
@@ -24,7 +24,7 @@
 /decl/hierarchy/outfit/job/security/ds13securityofficer
 	name = OUTFIT_JOB_NAME("Security Officer")
 	uniform = /obj/item/clothing/under/security/ds_securityundersuit
-	suit = /obj/item/clothing/suit/storage/vest/tactical
+	suit = /obj/item/clothing/suit/armor/ishimurasecurity
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/ds_securityglove
 	belt = /obj/item/weapon/storage/belt/holster/security
@@ -35,7 +35,7 @@
 /decl/hierarchy/outfit/job/security/ds13PSECboss
 	name = OUTFIT_JOB_NAME("PSEC Security Chief")
 	uniform = /obj/item/clothing/under/security/ds_securityundersuit
-	suit = /obj/item/clothing/suit/storage/vest/tactical
+	suit = /obj/item/clothing/suit/armor/ishimurasecuritychief
 	l_ear = /obj/item/device/radio/headset/heads/hos
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/ds_securityglove
@@ -47,7 +47,7 @@
 /decl/hierarchy/outfit/job/security/ds13PSECofficer
 	name = OUTFIT_JOB_NAME("PSEC Security Officer")
 	uniform = /obj/item/clothing/under/security/ds_securityundersuit
-	suit = /obj/item/clothing/suit/storage/vest/tactical
+	suit = /obj/item/clothing/suit/armor/ishimurasecurity
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	gloves = /obj/item/clothing/gloves/ds_securityglove
 	belt = /obj/item/weapon/storage/belt/holster/security
