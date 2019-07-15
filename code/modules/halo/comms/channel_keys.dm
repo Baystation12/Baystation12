@@ -154,6 +154,16 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		if(ODST_NAME)
 			return "supradio"
 
+		if(SQUADCOM_NAME)
+			return "supradio"
+
+		if(TEAMCOM_NAME)
+			return "supradio"
+
+		// ODST channel
+		if(ODST_NAME)
+			return "supradio"
+
 		//Covenant Battlenet channels
 		if("BattleNet")
 			return "sciradio"
@@ -164,6 +174,10 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 		//brute clan
 		if("RamNet")
+			return "comradio"
+
+		//ONI private comms
+		if(ONI_NAME)
 			return "comradio"
 
 		//unsc officers chat
