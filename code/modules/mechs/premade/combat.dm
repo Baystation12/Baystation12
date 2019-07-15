@@ -2,7 +2,7 @@
 	name = "combat exosuit"
 	desc = "A sleek, modern combat exosuit."
 
-/mob/living/exosuit/premade/combat/New()
+/mob/living/exosuit/premade/combat/Initialize()
 	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/combat(src)
 		arms.color = COLOR_DARK_GUNMETAL
@@ -16,7 +16,7 @@
 		body = new /obj/item/mech_component/chassis/combat(src)
 		body.color = COLOR_DARK_GUNMETAL
 
-	..()
+	. = ..()
 
 	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)

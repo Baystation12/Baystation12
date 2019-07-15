@@ -5,7 +5,7 @@
 	desc = "It seems to be saying 'please let me die'."
 	var/decal
 
-/mob/living/exosuit/premade/New()
+/mob/living/exosuit/premade/Initialize()
 	if(arms)
 		arms.decal = decal
 		arms.prebuild()
@@ -20,15 +20,14 @@
 		body.prebuild()
 	if(!material)
 		material = SSmaterials.get_material_by_name("steel")
-	..()
+	. = ..()
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 
 /mob/living/exosuit/premade/random
 	name = "mismatched exosuit"
 	desc = "It seems to have been roughly thrown together and then spraypainted a single colour."
 
-/mob/living/exosuit/premade/random/New(var/newloc, var/obj/structure/heavy_vehicle_frame/source_frame, var/super_random = FALSE, var/using_boring_colours = FALSE)
-
+/mob/living/exosuit/premade/random/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame, var/super_random = FALSE, var/using_boring_colours = FALSE)
 	//if(!prob(100/(LAZYLEN(GLOB.mech_decals)+1)))
 	//	decal = pick(GLOB.mech_decals)
 
@@ -141,7 +140,7 @@
 		var/bodytype = pick(typesof(/obj/item/mech_component/chassis)-/obj/item/mech_component/chassis)
 		body = new bodytype(src)
 		body.color = mech_colour ? mech_colour : pick(use_colours)
-	..(newloc, source_frame)
+	. = ..()
 
 // Used for spawning/debugging.
 /mob/living/exosuit/premade/random/normal
