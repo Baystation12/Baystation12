@@ -1,6 +1,6 @@
 /obj/item/weapon/reagent_containers/food/drinks/glass2/square
 	name = "half-pint glass"
-	base_name = "glass"
+	base_name = MATERIAL_GLASS
 	base_icon = "square"
 	desc = "Your standard drinking glass."
 	filling_states = "20;40;60;80;100"
@@ -10,7 +10,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/rocks
 	name = "rocks glass"
-	base_name = "glass"
+	base_name = MATERIAL_GLASS
 	base_icon = "rocks"
 	filling_states = "25;50;75;100"
 	volume = 20
@@ -19,7 +19,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/shake
 	name = "tall cocktail glass"
-	base_name = "glass"
+	base_name = MATERIAL_GLASS
 	base_icon = "shake"
 	filling_states = "25;50;75;100"
 	volume = 30
@@ -28,7 +28,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail
 	name = "cocktail glass"
-	base_name = "glass"
+	base_name = MATERIAL_GLASS
 	base_icon = "cocktail"
 	filling_states = "33;66;100"
 	volume = 15
@@ -41,7 +41,7 @@
 	base_icon = "shot"
 	filling_states = "33;66;100"
 	volume = 5
-	matter = list("glass" = 15)
+	matter = list(MATERIAL_GLASS = 15)
 	possible_transfer_amounts = "1;2;5"
 	rim_pos = "y=17;x_left=13;x_right=21"
 
@@ -65,7 +65,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/wine
 	name = "wine glass"
-	base_name = "glass"
+	base_name = MATERIAL_GLASS
 	base_icon = "wine"
 	filling_states = "20;40;60;80;100"
 	volume = 25
@@ -78,7 +78,7 @@
 	base_icon = "carafe"
 	filling_states = "10;20;30;40;50;60;70;80;90;100"
 	volume = 120
-	matter = list("glass" = 250)
+	matter = list(MATERIAL_GLASS = 250)
 	possible_transfer_amounts = "5;10;15;30;60;120"
 	rim_pos = "y=26;x_left=12;x_right=21"
 	center_of_mass = "x=16;y=7"

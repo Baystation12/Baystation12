@@ -19,6 +19,15 @@
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
 
+/obj/item/clothing/head/helmet/handmade
+	name = "handmade combat helmet"
+	desc = "It looks like it was made from a bucket and some steel. Uncomfortable and heavy but better than nothing."
+	icon_state = "hm_helmet"
+	armor = list(melee = 35, bullet = 30, laser = 30,energy = 30, bomb = 0, bio = 0, rad = 0)
+	flags_inv = HIDEEARS
+	cold_protection = HEAD
+	siemens_coefficient = 0.5
+
 /obj/item/clothing/head/helmet/nt
 	name = "\improper corporate security helmet"
 	desc = "A helmet with 'CORPORATE SECURITY' printed on the back in red lettering."

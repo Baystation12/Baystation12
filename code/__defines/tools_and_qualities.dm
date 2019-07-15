@@ -22,6 +22,7 @@
 #define QUALITY_LASER_CUTTING			"laser cutting"	//laser scalpels and e-swords - bloodless cutting
 #define QUALITY_ADHESIVE				"adhesive"
 #define QUALITY_SEALING					"sealing"
+#define QUALITY_WORKBENCH				"workbench"
 
 //Time for a work for tool system calculated in that way: basic time - tool level - stat check..
 //It means that basic tools will give -30 on time, and people on right job should have -20 at least, or even more.

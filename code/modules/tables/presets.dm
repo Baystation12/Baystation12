@@ -6,24 +6,24 @@
 /obj/structure/table/steel
 	icon_state = "plain_preview"
 	color = COLOR_GRAY40
-	material = DEFAULT_WALL_MATERIAL
+	material = MATERIAL_STEEL
 
 /obj/structure/table/marble
 	icon_state = "stone_preview"
 	color = COLOR_GRAY80
-	material = "marble"
+	material = MATERIAL_MARBLE
 
 /obj/structure/table/reinforced
 	icon_state = "reinf_preview"
 	color = COLOR_OFF_WHITE
 	material = DEFAULT_TABLE_MATERIAL
-	reinforced = DEFAULT_WALL_MATERIAL
+	reinforced = MATERIAL_STEEL
 
 /obj/structure/table/steel_reinforced
 	icon_state = "reinf_preview"
 	color = COLOR_GRAY40
-	material = DEFAULT_WALL_MATERIAL
-	reinforced = DEFAULT_WALL_MATERIAL
+	material = MATERIAL_STEEL
+	reinforced = MATERIAL_STEEL
 
 /obj/structure/table/woodentable
 	icon_state = "solid_preview"
@@ -45,7 +45,7 @@
 	icon_state = "plain_preview"
 	color = COLOR_DEEP_SKY_BLUE
 	alpha = 77 // 0.3 * 255
-	material = "glass"
+	material = MATERIAL_GLASS
 
 /obj/structure/table/glass/pglass
 	color = "#8f29a3"

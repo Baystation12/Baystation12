@@ -22,7 +22,7 @@
 
 /obj/item/stack/material/cyborg/plasteel
 	icon_state = "sheet-plasteel"
-	default_type = "plasteel"
+	default_type = MATERIAL_PLASTEEL
 
 /obj/item/stack/material/cyborg/wood
 	icon_state = "sheet-wood"
@@ -30,7 +30,7 @@
 
 /obj/item/stack/material/cyborg/glass
 	icon_state = "sheet-glass"
-	default_type = "glass"
+	default_type = MATERIAL_GLASS
 
 /obj/item/stack/material/cyborg/glass/reinforced
 	icon_state = "sheet-rglass"

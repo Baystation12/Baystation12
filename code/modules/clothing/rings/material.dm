@@ -8,7 +8,7 @@
 /obj/item/clothing/ring/material/New(var/newloc, var/new_material)
 	..(newloc)
 	if(!new_material)
-		new_material = DEFAULT_WALL_MATERIAL
+		new_material = MATERIAL_STEEL
 	material = get_material_by_name(new_material)
 	if(!istype(material))
 		qdel(src)
@@ -30,16 +30,16 @@
 	..(newloc, "steel")
 
 /obj/item/clothing/ring/material/silver/New(var/newloc)
-	..(newloc, "silver")
+	..(newloc, MATERIAL_SILVER)
 
 /obj/item/clothing/ring/material/gold/New(var/newloc)
-	..(newloc, "gold")
+	..(newloc, MATERIAL_GOLD)
 
 /obj/item/clothing/ring/material/platinum/New(var/newloc)
 	..(newloc, "platinum")
 
 /obj/item/clothing/ring/material/bronze/New(var/newloc)
-	..(newloc, "bronze")
+	..(newloc, MATERIAL_BRONZE)
 
 /obj/item/clothing/ring/material/glass/New(var/newloc)
-	..(newloc, "glass")
+	..(newloc, MATERIAL_GLASS)

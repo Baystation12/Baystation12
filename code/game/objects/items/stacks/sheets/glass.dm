@@ -11,13 +11,13 @@
  * Glass sheets
  */
 /obj/item/stack/material/glass
-	name = "glass"
+	name = MATERIAL_GLASS
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
 	var/created_window = /obj/structure/window/basic
 	var/is_reinforced = 0
 	var/list/construction_options = list("One Direction", "Full Window")
-	default_type = "glass"
+	default_type = MATERIAL_GLASS
 
 /obj/item/stack/material/glass/attack_self(mob/user as mob)
 	construct_window(user)

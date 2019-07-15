@@ -276,14 +276,14 @@
 												contents.Add(0)
 
 										if ("oxygen")
-											if(t.air_contents.gas["oxygen"] && !t.air_contents.gas["phoron"])
+											if(t.air_contents.gas["oxygen"] && !t.air_contents.gas[MATERIAL_PHORON])
 												contents.Add(t.air_contents.gas["oxygen"])
 											else
 												contents.Add(0)
 
 										// No races breath this, but never know about downstream servers.
 										if ("carbon dioxide")
-											if(t.air_contents.gas["carbon_dioxide"] && !t.air_contents.gas["phoron"])
+											if(t.air_contents.gas["carbon_dioxide"] && !t.air_contents.gas[MATERIAL_PHORON])
 												contents.Add(t.air_contents.gas["carbon_dioxide"])
 											else
 												contents.Add(0)

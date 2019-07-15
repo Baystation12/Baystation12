@@ -235,14 +235,14 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/silver
 	name = "identification card"
 	desc = "A silver card which shows honour and dedication."
-	icon_state = "silver"
+	icon_state = MATERIAL_SILVER
 	item_state = "silver_id"
 	job_access_type = /datum/job/hop
 
 /obj/item/weapon/card/id/gold
 	name = "identification card"
 	desc = "A golden card which shows power and might."
-	icon_state = "gold"
+	icon_state = MATERIAL_GOLD
 	item_state = "gold_id"
 	job_access_type = /datum/job/captain
 
@@ -256,7 +256,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/captains_spare
 	name = "captain's spare ID"
 	desc = "The spare ID of the High Lord himself."
-	icon_state = "gold"
+	icon_state = MATERIAL_GOLD
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"

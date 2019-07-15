@@ -100,7 +100,7 @@
 				to_chat(usr, "<span class='notice'>You take [O] out of [src].</span>")
 				oxygentanks--
 				update_icon()
-		if(href_list["phoron"])
+		if(href_list[MATERIAL_PHORON])
 			if(phorontanks > 0)
 				var/obj/item/weapon/tank/phoron/P
 				if(platanks.len == phorontanks)

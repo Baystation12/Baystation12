@@ -13,13 +13,13 @@
 		if(prob(10))
 			if(prob(5))
 				if(prob(5))
-					rarity = "Plasteel"
+					rarity = MATERIAL_PLASTEEL
 				else
 					rarity = "Platinum"
 			else
-				rarity = "Silver"
+				rarity = MATERIAL_SILVER
 
-		var/nam = pick("Death","Life","Plant","Leaf","Air","Earth","Fire","Water","Killer","Holy", "God", "Ordinary","Demon","Angel", "Phoron", "Mad", "Insane", "Metal", "Steel", "Secret")
+		var/nam = pick("Death","Life","Plant","Leaf","Air","Earth","Fire","Water","Killer","Holy", "God", "Ordinary","Demon","Angel", MATERIAL_PHORON, "Mad", "Insane", "Metal", "Steel", "Secret")
 		var/nam2 = pick("Carp", "Corgi", "Cat", "Mouse", "Octopus", "Lizard", "Monkey", "Plant", "Duck", "Demon", "Spider", "Bird", "Shark", "Rock")
 
 		P = new()

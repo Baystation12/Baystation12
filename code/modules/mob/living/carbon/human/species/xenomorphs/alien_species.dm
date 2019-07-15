@@ -144,7 +144,7 @@
 	if(!environment) return
 
 	var/obj/effect/vine/plant = locate() in T
-	if((environment.gas["phoron"] > 0 || (plant && plant.seed && plant.seed.name == "xenomorph")))
+	if((environment.gas[MATERIAL_PHORON] > 0 || (plant && plant.seed && plant.seed.name == "xenomorph")))
 		if(!regenerate(H))
 			var/obj/item/organ/internal/xeno/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
 			P.stored_plasma += weeds_plasma_rate

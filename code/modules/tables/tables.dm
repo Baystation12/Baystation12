@@ -20,6 +20,9 @@
 	var/material/material = null
 	var/material/reinforced = null
 
+	//If true, ignores connecting and dynamic icon behaviour. Useful for things that you want to be table-like surfaces but without wierdness
+	var/standalone = FALSE
+
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.
 	// Convert if/when you can easily get stacks of these.
 	var/carpeted = 0
@@ -187,10 +190,11 @@
 		update_material()
 
 /obj/structure/table/proc/update_desc()
-	if(material)
-		name = "[material.display_name] table"
-	else
-		name = "table frame"
+	if (can_plate)
+		if(material)
+			name = "[material.display_name] table"
+		else
+			name = "table frame"
 
 	if(reinforced)
 		name = "reinforced [name]"
@@ -285,13 +289,18 @@
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
-		var/material/M = get_material_by_name(DEFAULT_WALL_MATERIAL)
+		var/material/M = get_material_by_name(MATERIAL_STEEL)
 		S = M.place_shard(loc)
 		if(S) shards += S
 	qdel(src)
 	return shards
 
 /obj/structure/table/update_icon()
+	//No fancy icon behaviour
+	if (standalone)
+		overlays.Cut()
+		return
+
 	if(flipped != 1)
 		icon_state = "blank"
 		overlays.Cut()
@@ -364,6 +373,11 @@
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/update_connections(propagate=0)
+	//No connections to anything
+	if (standalone)
+		connections = list("0", "0", "0", "0")
+		return
+
 	if(!material)
 		connections = list("0", "0", "0", "0")
 

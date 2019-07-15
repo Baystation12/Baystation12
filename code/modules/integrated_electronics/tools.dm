@@ -11,7 +11,7 @@
 	used for power or data transmission."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "wirer-wire"
-	matter = list("metal" = 147, "glass" = 64)
+	matter = list("metal" = 147, MATERIAL_GLASS = 64)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	var/datum/integrated_io/selected_io = null
@@ -95,7 +95,7 @@
 	settings to specific circuits, or for debugging purposes.  It can also pulse activation pins."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "debugger"
-	matter = list("metal" = 151, "glass" = 82)
+	matter = list("metal" = 151, MATERIAL_GLASS = 82)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
@@ -159,7 +159,7 @@
 	desc = "This tool allows one to analyze custom assemblies and their components from a distance."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "analyzer"
-	matter = list("metal" = 156, "glass" = 67)
+	matter = list("metal" = 156, MATERIAL_GLASS = 67)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = 2
 	var/last_scan = ""

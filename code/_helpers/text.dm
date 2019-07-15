@@ -22,6 +22,14 @@
  * Text sanitization
  */
 
+
+/proc/sanitizeFileName(var/input)
+	input = replace_characters(input, list(" "="_", "\\" = "_", "\""="'", "/" = "_", ":" = "_", "*" = "_", "?" = "_", "|" = "_", "<" = "_", ">" = "_"))
+	if(findtext(input,"_") == 1)
+		input = copytext(input, 2)
+	return input
+
+
 //Used for preprocessing entered text
 //Added in an additional check to alert players if input is too long
 /proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
@@ -456,7 +464,7 @@ proc/TextPreview(var/string,var/len=40)
 	//Feel free to move to Helpers.
 	var/newKey
 	newKey += pick("the", "if", "of", "as", "in", "a", "you", "from", "to", "an", "too", "little", "snow", "dead", "drunk", "rosebud", "duck", "al", "le")
-	newKey += pick("diamond", "beer", "mushroom", "assistant", "clown", "captain", "twinkie", "security", "nuke", "small", "big", "escape", "yellow", "gloves", "monkey", "engine", "nuclear", "ai")
+	newKey += pick(MATERIAL_DIAMOND, "beer", "mushroom", "assistant", "clown", "captain", "twinkie", "security", "nuke", "small", "big", "escape", "yellow", "gloves", "monkey", "engine", "nuclear", "ai")
 	newKey += pick("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
 	return newKey
 
@@ -529,3 +537,15 @@ proc/TextPreview(var/string,var/len=40)
 	var/regex/R = regex("(\[^[char]\]*)$")
 	R.Find(text)
 	return R.group[1]
+
+
+//Generates a clickable link which will jump the camera/ghost to the target atom
+//Useful for admin procs
+/proc/jumplink(var/atom/target)
+	if (QDELETED(target))
+		return ""
+	var/turf/T = get_turf(target)
+	var/area/A = get_area(target)
+	var/where = "[A? A.name : "Unknown Location"] | [T.x], [T.y], [T.z]"
+	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>[where]</a>"
+	return whereLink

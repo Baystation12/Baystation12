@@ -7,7 +7,7 @@
 
 var/list/same_wires = list()
 // 14 colours, if you're adding more than 14 wires then add more colours here
-var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
+var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", MATERIAL_GOLD, "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
 
 /datum/wires
 

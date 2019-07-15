@@ -260,7 +260,7 @@ var/list/name_to_material
 	construction_difficulty = 2
 
 /material/diamond
-	name = "diamond"
+	name = MATERIAL_DIAMOND
 	stack_type = /obj/item/stack/material/diamond
 	flags = MATERIAL_UNMELTABLE
 	cut_delay = 60
@@ -276,12 +276,12 @@ var/list/name_to_material
 	construction_difficulty = 2
 
 /material/diamond/crystal
-	name = "crystal"
+	name = MATERIAL_CRYSTAL
 	hardness = 80
 	stack_type = null
 
 /material/gold
-	name = "gold"
+	name = MATERIAL_GOLD
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = "#edd12f"
 	weight = 25
@@ -296,12 +296,12 @@ var/list/name_to_material
 	construction_difficulty = 1
 
 /material/gold/bronze //placeholder for ashtrays
-	name = "bronze"
+	name = MATERIAL_BRONZE
 	icon_colour = "#edd12f"
 	construction_difficulty = 1
 
 /material/silver
-	name = "silver"
+	name = MATERIAL_SILVER
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#d1e6e3"
 	weight = 22
@@ -315,7 +315,7 @@ var/list/name_to_material
 	construction_difficulty = 1
 
 /material/phoron
-	name = "phoron"
+	name = MATERIAL_PHORON
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
@@ -325,7 +325,7 @@ var/list/name_to_material
 	hardness = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
-	sheet_singular_name = "crystal"
+	sheet_singular_name = MATERIAL_CRYSTAL
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
 	chem_products = list(
@@ -351,14 +351,14 @@ var/list/name_to_material
 	for(var/turf/simulated/floor/target_tile in range(2,T))
 		var/phoronToDeduce = (temperature/30) * effect_multiplier
 		totalPhoron += phoronToDeduce
-		target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
+		target_tile.assume_gas(MATERIAL_PHORON, phoronToDeduce, 200+T0C)
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
 
 
 /material/stone
-	name = "sandstone"
+	name = MATERIAL_SANDSTONE
 	stack_type = /obj/item/stack/material/sandstone
 	icon_base = "stone"
 	table_icon_base = "stone"
@@ -375,7 +375,7 @@ var/list/name_to_material
 	construction_difficulty = 1
 
 /material/stone/marble
-	name = "marble"
+	name = MATERIAL_MARBLE
 	icon_colour = "#aaaaaa"
 	weight = 26
 	hardness = 60
@@ -384,7 +384,7 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/marble
 
 /material/steel
-	name = DEFAULT_WALL_MATERIAL
+	name = MATERIAL_STEEL
 	stack_type = /obj/item/stack/material/steel
 	integrity = 150
 	brute_armor = 5
@@ -398,14 +398,14 @@ var/list/name_to_material
 				)
 
 /material/steel/holographic
-	name = "holo" + DEFAULT_WALL_MATERIAL
-	display_name = DEFAULT_WALL_MATERIAL
+	name = "holo" + MATERIAL_STEEL
+	display_name = MATERIAL_STEEL
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
 
 /material/plasteel
-	name = "plasteel"
+	name = MATERIAL_PLASTEEL
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
@@ -418,12 +418,12 @@ var/list/name_to_material
 	hardness = 80
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
-	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
+	composite_material = list(MATERIAL_STEEL = 3750, "platinum" = 3750) //todo
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = 1
 
 /material/plasteel/titanium
-	name = "titanium"
+	name = MATERIAL_TITANIUM
 	brute_armor = 10
 	burn_armor = 8
 	integrity = 200
@@ -437,7 +437,7 @@ var/list/name_to_material
 	construction_difficulty = 1
 
 /material/plasteel/ocp
-	name = "osmium-carbide plasteel"
+	name = MATERIAL_OCP
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
 	melting_point = 12000
@@ -448,11 +448,11 @@ var/list/name_to_material
 	burn_armor = 20
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 3)
-	composite_material = list("plasteel" = 7500, "osmium" = 3750)
+	composite_material = list(MATERIAL_PLASTEEL = 7500, "osmium" = 3750)
 	construction_difficulty = 2
 
 /material/glass
-	name = "glass"
+	name = MATERIAL_GLASS
 	stack_type = /obj/item/stack/material/glass
 	flags = MATERIAL_BRITTLE
 	icon_colour = "#00e1ff"
@@ -563,7 +563,7 @@ var/list/name_to_material
 	brute_armor = 2
 	burn_armor = 3
 	stack_origin_tech = list(TECH_MATERIAL = 2)
-	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
+	composite_material = list(MATERIAL_STEEL = 1875,MATERIAL_GLASS = 3750)
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
