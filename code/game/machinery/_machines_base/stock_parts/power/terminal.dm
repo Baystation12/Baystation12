@@ -64,7 +64,8 @@
 	terminal = new_terminal
 	terminal.master = src
 	GLOB.destroyed_event.register(terminal, src, .proc/unset_terminal)
-	GLOB.moved_event.register(machine, src, .proc/machine_moved)
+
+	set_extension(src, /datum/extension/event_registration/shuttle_stationary, /datum/extension/event_registration/shuttle_stationary, GLOB.moved_event, machine, .proc/machine_moved, get_area(src))
 	set_status(machine, PART_STAT_CONNECTED)
 
 /obj/item/weapon/stock_parts/power/terminal/proc/machine_moved(var/obj/machinery/machine, var/turf/old_loc, var/turf/new_loc)
@@ -85,11 +86,11 @@
 	set_terminal(machine, new_terminal)
 
 /obj/item/weapon/stock_parts/power/terminal/proc/unset_terminal(var/obj/machinery/power/old_terminal, var/obj/machinery/machine)
+	remove_extension(src, /datum/extension/event_registration/shuttle_stationary)
 	GLOB.destroyed_event.unregister(old_terminal, src)
 	if(!machine && istype(loc, /obj/machinery))
 		machine = loc
 	if(machine)
-		GLOB.moved_event.unregister(machine, src, .proc/machine_moved)
 		unset_status(machine, PART_STAT_CONNECTED)
 	terminal = null
 
