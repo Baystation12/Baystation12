@@ -195,7 +195,7 @@
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
 	item_state = "security"
-	storage_slots = 8
+	storage_slots = 14
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
 	can_hold = list(
 		/obj/item/weapon/tool/crowbar,
@@ -383,7 +383,7 @@
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
 	icon_state = "swatbelt"
 	item_state = "swatbelt"
-	storage_slots = 9
+	storage_slots = 21
 
 /obj/item/weapon/storage/belt/waistpack
 	name = "waist pack"
