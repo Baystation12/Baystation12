@@ -333,6 +333,12 @@
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/acid/hydrochloric = 3, /datum/reagent/water = 1)
 	result_amount = 1
 
+/datum/chemical_reaction/vecuronium_bromide
+	name = "Vecuronium Bromide"
+	result = /datum/reagent/vecuronium_bromide
+	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/mercury = 2, /datum/reagent/hydrazine = 2)
+	result_amount = 1
+
 /datum/chemical_reaction/potassium_chloride
 	name = "Potassium Chloride"
 	result = /datum/reagent/toxin/potassium_chloride
