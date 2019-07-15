@@ -14,6 +14,10 @@
 	name = RELIGION_BUDDHISM
 	description = "An Indian religion encompassing a variety of traditions, beliefs and spiritual practices based on the teachings of the Buddha. Someone who practices Buddhism is called a Buddhist."
 
+/decl/cultural_info/religion/sikh
+	name = RELIGION_SIKHISM
+	description = "An Indian monotheistic religion based on the spiritual teachings of Guru Nanak and the nine Sikh gurus that succeeded him. Someone who practicies Sikhism is called a Sikh."
+
 /decl/cultural_info/religion/muslim
 	name = RELIGION_ISLAM
 	description = "An Abrahamic monotheistic religion teaching that there is only one God and that Muhammad is His prophet. Someone who practices Islam is called a Muslim."

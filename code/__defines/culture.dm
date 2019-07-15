@@ -74,6 +74,7 @@
 #define RELIGION_JUDAISM       "Judaism"
 #define RELIGION_HINDUISM      "Hinduism"
 #define RELIGION_BUDDHISM      "Buddhism"
+#define RELIGION_SIKHISM       "Sikhism"
 #define RELIGION_ISLAM         "Islam"
 #define RELIGION_CHRISTIANITY  "Christianity"
 #define RELIGION_BAHAI_FAITH   "Baha'i Faith"
