@@ -31,7 +31,7 @@
 
 //unsc marine headset
 /obj/item/device/radio/headset/unsc/marine
-	name = "UNSC pilot radio headset"
+	name = "UNSC marine radio headset"
 	icon_state = "cent_headset"
 	ks1type = /obj/item/device/encryptionkey/teamcom
 

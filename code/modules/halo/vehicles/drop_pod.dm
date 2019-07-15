@@ -17,6 +17,8 @@
 
 	comp_prof =/datum/component_profile/drop_pod
 
+	exposed_positions = list()
+
 	var/list/species_offsets = list("Human" = "0,7")
 
 	var/launched = 0
