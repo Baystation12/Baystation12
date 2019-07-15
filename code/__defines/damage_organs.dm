@@ -77,16 +77,16 @@
 #define ROBOLIMB_SELF_REPAIR_CAP 30
 
 //Germs and infections.
-#define GERM_LEVEL_AMBIENT  275 // Maximum germ level you can reach by standing still.
-#define GERM_LEVEL_MOVE_CAP 300 // Maximum germ level you can reach by running around.
+#define GERM_LEVEL_AMBIENT  0 // germs are now pretty much disabled
+#define GERM_LEVEL_MOVE_CAP 0
 
-#define INFECTION_LEVEL_ONE   250
-#define INFECTION_LEVEL_TWO   500  // infections grow from ambient to two in ~5 minutes
-#define INFECTION_LEVEL_THREE 1000 // infections grow from two to three in ~10 minutes
+#define INFECTION_LEVEL_ONE   2500000
+#define INFECTION_LEVEL_TWO   5000000 // infections are now pretty much disabled
+#define INFECTION_LEVEL_THREE 10000000 
 
 //Blood levels. These are percentages based on the species blood_volume far.
-#define BLOOD_VOLUME_SAFE    85
-#define BLOOD_VOLUME_OKAY    70
-#define BLOOD_VOLUME_BAD     60
+#define BLOOD_VOLUME_SAFE    50
+#define BLOOD_VOLUME_OKAY    40
+#define BLOOD_VOLUME_BAD     35
 #define BLOOD_VOLUME_SURVIVE 30
 
