@@ -101,4 +101,4 @@
 	icon_state = "ds_securityjumpsuit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	permeability_coefficient = 0.25
-	armor = list(melee = 35, bullet = 35, laser = 0, energy = 0, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 65, laser = 20, energy = 20, bomb = 45, bio = 0, rad = 0)
