@@ -38,9 +38,9 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 /obj/machinery/computer/capture_node/attack_hand(var/mob/living/user)
 	if(interacting)
 		if(interacting == user)
-			to_chat(user,"<span class='warning'>You are already interacting with [src].</span.")
+			to_chat(user,"<span class='warning'>You are already interacting with [src].</span>")
 		else
-			to_chat(user,"<span class='warning'>[interacting] is already interacting with [src].</span.")
+			to_chat(user,"<span class='warning'>[interacting] is already interacting with [src].</span>")
 	else
 		interacting = user
 		if(control_faction)
