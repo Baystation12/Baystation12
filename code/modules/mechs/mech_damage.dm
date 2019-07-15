@@ -22,9 +22,10 @@
 
 /mob/living/exosuit/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
-	var/body_armor = get_extension(body.armor, /datum/extension/armor)
-	if(body_armor)
-		. += body_armor
+	if(body && body.armor)
+		var/body_armor = get_extension(body.armor, /datum/extension/armor)
+		if(body_armor)
+			. += body_armor
 
 /mob/living/exosuit/updatehealth()
 	maxHealth = body.mech_health

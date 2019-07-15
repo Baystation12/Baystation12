@@ -118,7 +118,7 @@
 	if(head)
 		sight = head.get_sight()
 		see_invisible = head.get_invisible()
-	if(body.pilot_coverage < 100 || body.transparent_cabin)
+	if(body && (body.pilot_coverage < 100 || body.transparent_cabin))
 		sight &= ~BLIND
 
 /mob/living/exosuit/additional_sight_flags()

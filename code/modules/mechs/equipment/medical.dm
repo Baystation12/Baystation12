@@ -29,7 +29,6 @@
 	if(.)
 		sleeper.ui_interact(user)
 
-
 /obj/item/mech_equipment/sleeper/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 	if(.)
@@ -37,9 +36,6 @@
 			owner.visible_message(SPAN_NOTICE("\The [src] is lowered down to load [target]"))
 			sleeper.go_in(target, user)
 		else to_chat(user, SPAN_WARNING("You cannot load that in!"))
-
-		return
-
 
 /obj/item/mech_equipment/sleeper/get_hardpoint_maptext()
 	if(sleeper && sleeper.occupant)
@@ -75,6 +71,4 @@
 			user.visible_message("<span class='notice'>\The [user] removes \the [beaker] from \the [src].</span>", "<span class='notice'>You remove \the [beaker] from \the [src].</span>")
 		beaker = I
 		user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
-
-		return
 
