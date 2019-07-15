@@ -204,7 +204,8 @@
 	for(var/datum/faction/F in GLOB.all_factions)
 		for(var/datum/objective/colony_capture/O in F.all_objectives)
 			if(!capture_objective)
-				capture_objective = O
+				if(O.capture_score > 0)
+					capture_objective = O
 			else if(O.capture_score > capture_objective.capture_score)
 				capture_objective = O
 	capture_objective.is_winner = 1
