@@ -1,0 +1,6 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - imageadd: "New MMI icons with damage states by Joeynosegay."
+  - tweak: "FBPs no longer get brute/burn mod bonuses from their human subspecies."
+  - rscadd: "Prosthetic organ fabricator can now print replacement FBP power cell organs."
