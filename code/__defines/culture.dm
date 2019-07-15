@@ -82,6 +82,7 @@
 #define RELIGION_ATHEISM       "Atheism"
 #define RELIGION_THELEMA       "Thelema"
 #define RELIGION_SPIRITUALISM  "Spiritualism"
+#define RELIGION_SHINTO        "Shinto"
 
 // Skrellian cultures.
 #define CULTURE_SKRELL_QERR     "Qerr-Katish"

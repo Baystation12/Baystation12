@@ -23,6 +23,40 @@
 		/obj/item/weapon/spacecash/bundle/c50,
 		)
 
+/obj/item/weapon/storage/bible/bible
+	name = "\improper Bible"
+	desc = "The central religious text of Christianity."
+	renamed = 1
+	icon_changed = 1
+
+/obj/item/weapon/storage/bible/tanakh
+	name = "\improper Tanakh"
+	desc = "The central religious text of Judaism."
+	icon_state = "torah"
+	renamed = 1
+	icon_changed = 1
+
+/obj/item/weapon/storage/bible/quran
+	name = "\improper Quran"
+	desc = "The central religious text of Islam."
+	icon_state = "koran"
+	renamed = 1
+	icon_changed = 1
+
+/obj/item/weapon/storage/bible/kojiki
+	name = "\improper Kojiki"
+	desc = "A collection of myths from ancient Japan."
+	icon_state = "kojiki"
+	renamed = 1
+	icon_changed = 1
+
+/obj/item/weapon/storage/bible/aqdas
+	name = "\improper Kitab-i-Aqdas"
+	desc = "The central religious text of the Baha'i Faith."
+	icon_state = "ninestar"
+	renamed = 1
+	icon_changed = 1
+
 /obj/item/weapon/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	if(user == M || !ishuman(user) || !ishuman(M))
 		return
