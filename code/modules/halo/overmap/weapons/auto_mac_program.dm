@@ -146,9 +146,10 @@ datum/computer_file/program/auto_mac
 	//intentionally blank
 
 /datum/nano_module/auto_mac/proc/stop_targetting()
-	prox_trigger.unregister_turfs()
-	qdel(prox_trigger)
-	prox_trigger = null
+	if(prox_trigger)
+		prox_trigger.unregister_turfs()
+		qdel(prox_trigger)
+		prox_trigger = null
 	target_ships = list()
 	targetted_ship = null
 	GLOB.processing_objects.Remove(src)
