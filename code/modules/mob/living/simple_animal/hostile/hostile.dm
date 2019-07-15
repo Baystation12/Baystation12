@@ -30,7 +30,21 @@
 /mob/living/simple_animal/hostile/New()
 	. = ..()
 	if(our_overmind)
-		our_overmind.unsorted_troops += src
+		if(our_overmind.overmind_active)
+			assault_target_type = null //Sorted troops are now soley under overmind command, if the overmind is currently active.
+		var/sorted = 0
+		if(our_overmind.is_type_list(src,our_overmind.constructor_types))
+			our_overmind.constructor_troops += src
+			sorted = 1
+		if(our_overmind.is_type_list(src,our_overmind.combat_types))
+			our_overmind.combat_troops += src
+			sorted = 1
+		if(our_overmind.is_type_list(src,our_overmind.support_types))
+			our_overmind.support_troops += src
+			sorted = 1
+		if(!sorted)
+			our_overmind.other_troops += src
+
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.

@@ -47,7 +47,6 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 	var/list/reports = list()
 
-	var/list/unsorted_troops = list()
 	var/list/constructor_troops = list()
 	var/list/combat_troops = list()
 	var/list/support_troops = list()
@@ -128,7 +127,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			required_troops[4]--
 		if(is_chosen)
 			chosen_squadmembers += m
-			m.target_margin = 1
+			m.target_margin = 2
+			m.assault_target_type = null //Assume control over tasked members, just in case they were spawned before the overmind activated.
 
 	assign_taskpoint(taskpoint,chosen_squadmembers)
 
@@ -197,23 +197,6 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 				list_prune -= entry
 				continue
 
-/datum/npc_overmind/proc/sort_troops()
-	for(var/mob/living/simple_animal/hostile/m in unsorted_troops)
-		var/sorted = 0
-		if(is_type_list(m,constructor_types))
-			constructor_troops += m
-			sorted = 1
-		if(is_type_list(m,combat_types))
-			combat_troops += m
-			sorted = 1
-		if(is_type_list(m,support_types))
-			support_troops += m
-			sorted = 1
-		if(!sorted)
-			other_troops += m
-		m.assault_target_type = null //Sorted troops are now soley under our command.
-		unsorted_troops -= m
-
 /datum/npc_overmind/proc/unassign_taskpoint(var/obj/taskpoint)
 	var/squad_assigned = assigned_taskpoints[taskpoint]
 	assigned_taskpoints -= taskpoint
@@ -242,7 +225,6 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			qdel(taskpoint)
 
 /datum/npc_overmind/proc/process()
-	sort_troops()
 	prune_taskpoints()
 	prune_trooplists()
 	process_reports()
