@@ -10,6 +10,7 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	var/list/faction_frequencies = list()
 	var/list/faction_languages = list()
 	var/capture_time = 8 SECONDS
+	var/mob/living/interacting
 
 /obj/machinery/computer/capture_node/New()
 	. = ..()
@@ -35,29 +36,34 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	to_chat(user, chat_text)
 
 /obj/machinery/computer/capture_node/attack_hand(var/mob/living/user)
-	set_owner(user)
-
-/obj/machinery/computer/capture_node/proc/set_owner(var/mob/living/user)
-	if(control_faction)
-		src.visible_message("\icon[user] <span class='warning'>[user] begins resetting [src] to neutral!</span>")
-		contest_markers(user.faction)
-		if(do_after(user, capture_time, src, same_direction = 1))
-			src.visible_message("\icon[user] <span class='info'>[user] has reset [src] to neutral.</span>")
-			control_markers(null, user.faction)
+	if(interacting)
+		if(interacting == user)
+			to_chat(user,"<span class='warning'>You are already interacting with [src].</span.")
 		else
-			reset_markers()
+			to_chat(user,"<span class='warning'>[interacting] is already interacting with [src].</span.")
 	else
-		if(user.faction in capturing_factions)
-			src.visible_message("\icon[user] <span class='warning'>[user] begins taking control of [src]!</span>")
+		interacting = user
+		if(control_faction)
+			src.visible_message("\icon[user] <span class='warning'>[user] begins resetting [src] to neutral!</span>")
 			contest_markers(user.faction)
 			if(do_after(user, capture_time, src, same_direction = 1))
-				src.visible_message("\icon[user] <span class='info'>[user] has taken control of [src] for the [user.faction].</span>")
-				control_faction = user.faction
-				control_markers(control_faction, user.faction)
+				src.visible_message("\icon[user] <span class='info'>[user] has reset [src] to neutral.</span>")
+				control_markers(null, user.faction)
 			else
 				reset_markers()
 		else
-			to_chat(user,"\icon[src] <span class='warning'>Your faction has no interest in controlling [src].</span>")
+			if(user.faction in capturing_factions)
+				src.visible_message("\icon[user] <span class='warning'>[user] begins taking control of [src]!</span>")
+				contest_markers(user.faction)
+				if(do_after(user, capture_time, src, same_direction = 1))
+					src.visible_message("\icon[user] <span class='info'>[user] has taken control of [src] for the [user.faction].</span>")
+					control_faction = user.faction
+					control_markers(control_faction, user.faction)
+				else
+					reset_markers()
+			else
+				to_chat(user,"\icon[src] <span class='warning'>Your faction has no interest in controlling [src].</span>")
+		interacting = null
 
 /obj/machinery/computer/capture_node/proc/contest_markers(var/trigger_faction)
 	var/area/A = get_area(src)
