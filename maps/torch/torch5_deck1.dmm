@@ -18792,7 +18792,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/security/wing)
+/area/security/processing)
 "fWb" = (
 /obj/machinery/door/airlock/medical{
 	name = "Examination Room"
@@ -24621,7 +24621,7 @@
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
-/area/security/wing)
+/area/security/processing)
 "mEV" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/thruster/d1starboard)
@@ -24813,7 +24813,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/security/wing)
+/area/security/processing)
 "mQb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -26382,9 +26382,6 @@
 /obj/item/sticky_pad/random,
 /turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
-"oDg" = (
-/turf/simulated/wall/prepainted,
-/area/security/questioning)
 "oFb" = (
 /obj/structure/table/glass,
 /obj/item/weapon/pen,
@@ -30704,6 +30701,9 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/foreport)
+"tOV" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/security/processing)
 "tRX" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -32022,13 +32022,13 @@
 /area/thruster/d1port)
 "xRh" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/structure/cable/green,
 /obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
+	d2 = 4;
+	icon_state = "0-4"
 	},
+/obj/structure/cable/green,
 /turf/simulated/floor/plating,
-/area/security/wing)
+/area/security/processing)
 "xRu" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -39467,7 +39467,7 @@ hBr
 hBr
 hBr
 hBr
-hBr
+mrO
 aaa
 aaa
 aaa
@@ -39673,7 +39673,7 @@ mrO
 mrO
 mrO
 mrO
-wEn
+mrO
 wEn
 wEn
 wEn
@@ -39875,7 +39875,7 @@ mrO
 mrO
 mrO
 mrO
-wEn
+mrO
 wEn
 wEn
 wEn
@@ -40077,7 +40077,7 @@ mrO
 mrO
 mrO
 mrO
-wEn
+mrO
 wEn
 wEn
 wEn
@@ -40279,7 +40279,7 @@ jfn
 mtF
 kgu
 dmz
-oDg
+fPh
 ilh
 jBk
 kVi
@@ -40481,7 +40481,7 @@ jwd
 pwl
 iVM
 uZY
-oDg
+fPh
 mig
 nbl
 cWR
@@ -40683,7 +40683,7 @@ crA
 gxi
 pzH
 jAr
-oDg
+fPh
 rUO
 mBb
 iDb
@@ -40873,8 +40873,8 @@ hBr
 adK
 lAC
 afE
-aXh
 agA
+aXh
 aiM
 vMw
 akO
@@ -40885,7 +40885,7 @@ amc
 eyY
 pzH
 mKb
-oDg
+fPh
 syI
 btE
 sxT
@@ -41087,7 +41087,7 @@ mcI
 mub
 are
 fPh
-oDg
+fPh
 bpA
 uDu
 sTK
@@ -41697,7 +41697,7 @@ att
 wyb
 mEb
 xRh
-tkr
+tOV
 nbb
 nmb
 tkr
