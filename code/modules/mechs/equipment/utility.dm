@@ -189,7 +189,7 @@
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon_state = "drill_head"
 	
-/obj/item/weapon/material/drill_head/New(newloc, material_key)
+/obj/item/weapon/material/drill_head/Initialize()
 	. = ..()
 	durability = 2 * material.integrity
 
