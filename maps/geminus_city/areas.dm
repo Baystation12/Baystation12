@@ -214,6 +214,7 @@
 
 /area/planets/Geminus/outdoor/space_elevator
 	name = "\improper Space Elevator"
+	icon_state = "observatory"
 
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC

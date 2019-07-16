@@ -6,7 +6,7 @@
 	total_positions = -1
 	spawn_positions = -1
 	access = list(access_innie)
-	outfit_type = /decl/hierarchy/outfit/job/colonist
+	outfit_type = /decl/hierarchy/outfit/job/colonist/geminus_innie
 	selection_color = "#ff0000"
 	spawnpoint_override = "Geminus Innie"
 	alt_titles = list(\

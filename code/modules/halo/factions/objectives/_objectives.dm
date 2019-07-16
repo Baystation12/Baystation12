@@ -7,6 +7,7 @@
 	var/slipspace_affected = 0		//flag to lock in the result when a ship goes to slipspace
 	var/locked = 0
 	var/override = 0
+	var/fake = 0		//if fake, ignore this for end round scoring purposes
 
 /datum/objective/proc/get_win_points()
 	return win_points
@@ -25,37 +26,67 @@
 /* generic objectives */
 
 /datum/objective/colony_capture
-	var/points_per_second = 1
-	var/time_controlled = 0
-	var/time_last_controlled = 0
+	win_points = 100
+	var/score_per_tick = 1
+	var/capture_score = 0
 	find_specific_target = 1
+	var/is_winner
+	var/objective_faction
+	var/list/controlled_nodes = list()
+	var/radio_frequency = "System"
+	var/radio_language = LANGUAGE_GALCOM
+	var/radio_name = "Sovereignty Announcer"
 
-/datum/objective/colony_capture/proc/begin_captured()
-	time_last_controlled = world.time
+/datum/objective/colony_capture/New()
+	. = ..()
+	//GLOB.processing_objects |= src
 
-/datum/objective/colony_capture/proc/capture_tick()
-	time_controlled += world.time - time_last_controlled
-	time_last_controlled = world.time
+/datum/objective/colony_capture/proc/node_contested(var/obj/machinery/computer/capture_node/C, var/old_faction, var/trigger_faction)
+	if(old_faction == objective_faction)
+		GLOB.global_headset.autosay("We are losing control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+
+/datum/objective/colony_capture/proc/node_captured(var/obj/machinery/computer/capture_node/C, var/old_faction, var/trigger_faction)
+
+	if(C.control_faction == objective_faction)
+		controlled_nodes |= C
+		GLOB.processing_objects |= src
+		GLOB.global_headset.autosay("We have captured [C][old_faction ? " from the [old_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+
+	else if(old_faction == objective_faction)
+		GLOB.global_headset.autosay("We have lost control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+
+/datum/objective/colony_capture/proc/node_reset(var/obj/machinery/computer/capture_node/C, var/old_faction, var/trigger_faction)
+
+	if(old_faction == objective_faction)
+		controlled_nodes -= C
+		if(!controlled_nodes.len)
+			GLOB.processing_objects -= src
+		GLOB.global_headset.autosay("We have lost control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+
+/datum/objective/colony_capture/proc/process()
+	capture_score += score_per_tick * controlled_nodes.len
+	//GLOB.global_headset.autosay("Test message", radio_name, radio_frequency, radio_language)
 
 /datum/objective/colony_capture/get_win_points()
-	win_points = points_per_second * time_controlled / 10
+	short_text = "[initial(short_text)] (capture score: [capture_score])"
 
-	short_text = "[initial(short_text)] ([time_controlled/10] seconds)"
+	if(is_winner)
+		return win_points
 
-	. = ..()
+	if(capture_score > 0)
+		return win_points / 2
+
+	return 0
 
 /datum/objective/colony_capture/check_completion()
-
-	//objectiev success if you are most recent controller
-	if(world.time - time_last_controlled < 10 SECONDS)
+	//handle completion checking elsewhere
+	if(is_winner)
 		return 1
 
-	//less than 5 minutes controlled is a failure
-	if(time_controlled < 5 MINUTES)
-		return 0
+	if(capture_score > 0)
+		return 2
 
-	//2 means partial completion
-	return 2
+	return 0
 
 /datum/objective/protect_ship
 	var/obj/effect/overmap/target_ship

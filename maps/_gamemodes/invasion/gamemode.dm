@@ -57,6 +57,7 @@
 		/datum/objective/retrieve/nav_data,\
 		/datum/objective/destroy_ship/covenant,
 		/datum/objective/destroy_ship/covenant_odp,
+		//datum/objective/colony_capture/cov,
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
 	GLOB.COVENANT.has_flagship = 1
@@ -70,6 +71,7 @@
 		/datum/objective/retrieve/steal_ai/cole_protocol,\
 		/datum/objective/retrieve/nav_data/cole_protocol,\
 		/datum/objective/destroy_ship/unsc,\
+		/datum/objective/colony_capture/unsc,\
 		/datum/objective/protect_colony)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
@@ -82,8 +84,8 @@
 		/datum/objective/assassinate/kill_unsc_leader,\
 		///datum/objective/recruit_pirates,
 		///datum/objective/recruit_scientists,
+		/datum/objective/colony_capture/innie,\
 		/datum/objective/protect_colony/innie)
-		///datum/objective/takeover_colony)
 	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
 	GLOB.INSURRECTION.base_desc = "secret underground base"
 
@@ -197,6 +199,17 @@
 
 	text += "<br><br>"
 
+	//calculate victory for colony capture objectives... needs to be done here
+	var/datum/objective/colony_capture/capture_objective
+	for(var/datum/faction/F in GLOB.all_factions)
+		for(var/datum/objective/colony_capture/O in F.all_objectives)
+			if(!capture_objective)
+				if(O.capture_score > 0)
+					capture_objective = O
+			else if(O.capture_score > capture_objective.capture_score)
+				capture_objective = O
+	capture_objective.is_winner = 1
+
 	//work out faction points
 	var/datum/faction/winning_faction
 	var/datum/faction/second_faction
@@ -208,6 +221,8 @@
 		else if(!second_faction && winning_faction != faction)
 			second_faction = faction
 		for(var/datum/objective/objective in faction.all_objectives)
+			if(objective.fake)
+				continue
 			var/result = objective.check_completion()
 			if(result == 1)
 				text += "<span class='good'>Completed (+[objective.get_win_points()]): [objective.short_text]</span><br>"

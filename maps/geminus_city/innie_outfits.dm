@@ -38,7 +38,6 @@
 
 	flags = 0
 
-
 /decl/hierarchy/outfit/job/geminus_innie_leader/equip_id(mob/living/carbon/human/H, rank, assignment)
 	. = ..()
 
@@ -47,3 +46,7 @@
 		W.rank = "Colonist"
 		W.assignment = "Colonist"
 		W.update_name()
+
+/decl/hierarchy/outfit/job/colonist/geminus_innie
+	name = "Geminus Insurrectionist"
+	l_ear = /obj/item/device/radio/headset/insurrection

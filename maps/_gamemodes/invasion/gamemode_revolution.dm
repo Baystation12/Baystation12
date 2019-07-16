@@ -32,3 +32,18 @@
 		/datum/job/covenant/skirmmajor,\
 		/datum/job/covenant/skirmcommando,\
 		/datum/job/covenant/skirmmurmillo)
+
+/datum/game_mode/outer_colonies/revolution/setup_objectives()
+	. = ..()
+
+	var/datum/objective/retrieve/steal_ai/cole_protocol/obj = locate() in GLOB.UNSC.all_objectives
+	obj.fake = 1
+
+	var/datum/objective/retrieve/nav_data/cole_protocol/obj2 = locate() in GLOB.UNSC.all_objectives
+	obj2.fake = 1
+
+	var/datum/objective/destroy_ship/unsc/obj3 = locate() in GLOB.UNSC.all_objectives
+	obj3.fake = 1
+
+	var/datum/objective/retrieve/artifact/unsc/obj4 = locate() in GLOB.UNSC.all_objectives
+	obj4.fake = 1
