@@ -24,8 +24,9 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	var/targets_reported //Used for REPORT_CONTACT to determine severity
 	var/report_target //Used for REPORT_RECLAIM_EQUIP types
 	var/obj/reporter_assault_point // Used for REPORT_CASUALTY
+	var/reporter_loc //Used for REPORT_CASUALTY
 
-/datum/npc_report/New(var/type,var/reporter,var/report_obj_target,var/num_targets,var/reporter_assault)
+/datum/npc_report/New(var/type,var/reporter,var/report_obj_target,var/num_targets,var/reporter_assault,var/reporter_location)
 	report_type = type
 	reporter_mob = reporter
 	if(report_obj_target)
@@ -34,6 +35,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 		targets_reported = num_targets
 	if(reporter_assault)
 		reporter_assault_point = reporter_assault
+	if(reporter_location)
+		reporter_loc = reporter_location
 
 /datum/npc_overmind
 
@@ -57,7 +60,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 	var/form_squad_searchrange = SQUADFORM_SEARCHRANGE
 
-/datum/npc_overmind/proc/create_report(var/report_type,var/mob/reporter,var/target_num = null,var/report_targ = null,var/reporter_assault_point = null)
+/datum/npc_overmind/proc/create_report(var/report_type,var/mob/reporter,var/target_num = null,var/report_targ = null,var/reporter_assault_point = null,var/reporter_loc)
 	reports += new /datum/npc_report (report_type,reporter,report_targ,target_num,reporter_assault_point)
 
 /datum/npc_overmind/proc/get_taskpoint_assigned(var/mob/m)
@@ -163,8 +166,10 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	if(isnull(valid_squadmembers) || valid_squadmembers.len == 0)
 		squad_assigned.Cut()
 		return
-	create_taskpoint_assign(pick(valid_squadmembers),report.reporter_assault_point,"reinforcement",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE),form_squad_searchrange*3)
+	var/reporter_taskpoint = create_taskpoint(report.reporter_loc)
+	create_taskpoint_assign(pick(valid_squadmembers),reporter_taskpoint,"reinforcement",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE),form_squad_searchrange*3)
 	update_taskpoint_timeout(report.reporter_assault_point)
+	update_taskpoint_timeout(reporter_taskpoint)
 
 /datum/npc_overmind/proc/process_reports()
 	for(var/datum/npc_report/report in reports)
