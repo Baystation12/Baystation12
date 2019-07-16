@@ -531,7 +531,6 @@ BLIND     // can't see anything
 	var/can_hold_knife
 	var/obj/item/holding
 	var/stepsound = null
-	var/footstep = 1
 
 	permeability_coefficient = 0.50
 	force = 2
@@ -597,14 +596,7 @@ BLIND     // can't see anything
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	if(isnull(stepsound))
 		return
-	if(running)
-		if(footstep >= 2)
-			footstep = 0
-			playsound(src,stepsound, 80, 1) // this will get annoying very fast.
-		else
-			footstep++
-	else
-		playsound(src,stepsound, 30, 1)
+	playsound(src,stepsound, 25, 1)
 
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))
