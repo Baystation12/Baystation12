@@ -6957,17 +6957,13 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "axx" = (
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/paleblue/half{
 	icon_state = "bordercolorhalf";
 	dir = 1
 	},
-/obj/structure/closet/hydrant{
-	pixel_y = 32
-	},
-/turf/simulated/floor/tiled/monotile,
+/obj/machinery/door/airlock/glass/civilian,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/firstdeck/aft)
 "axy" = (
 /obj/structure/disposalpipe/segment{
@@ -6990,18 +6986,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
-"axA" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/hallway/primary/firstdeck/aft)
 "axB" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/paleblue/half{
 	icon_state = "bordercolorhalf";
 	dir = 1
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "axD" = (
 /obj/structure/cable/green{
@@ -7016,9 +7007,6 @@
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
-	},
-/obj/machinery/light{
-	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
@@ -7251,7 +7239,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/center)
 "ayh" = (
-/obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -7266,7 +7253,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
 "ayi" = (
@@ -7343,7 +7329,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/center)
 "ayv" = (
@@ -7404,7 +7390,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/aft)
 "ayz" = (
-/obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -7421,7 +7406,6 @@
 	name = "Miscellaneous Research";
 	sort_type = "Miscellaneous Research"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "ayA" = (
@@ -7744,7 +7728,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/effect/floor_decal/corner/research/half,
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "azU" = (
 /obj/machinery/firealarm{
@@ -14577,10 +14561,8 @@
 /turf/space,
 /area/space)
 "bBm" = (
-/obj/effect/floor_decal/industrial/warning/fulltile,
-/obj/machinery/light{
-	dir = 1
-	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/firstdeck/aft)
 "bBt" = (
@@ -15665,14 +15647,6 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/locker)
-"cGd" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass/civilian,
-/obj/effect/floor_decal/corner/green{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/hallway/primary/firstdeck/center)
 "cHb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -16645,10 +16619,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
-"dJp" = (
-/obj/effect/floor_decal/industrial/warning/fulltile,
-/turf/simulated/floor/tiled/steel_grid,
-/area/hallway/primary/firstdeck/aft)
 "dJv" = (
 /obj/effect/floor_decal/techfloor/corner,
 /obj/effect/floor_decal/techfloor{
@@ -17288,12 +17258,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue/autopsy)
 "equ" = (
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck - Ladders";
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/research/half,
-/turf/simulated/floor/tiled/monotile,
+/obj/machinery/door/airlock/glass/civilian,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/firstdeck/aft)
 "erb" = (
 /obj/structure/window/reinforced{
@@ -17778,6 +17746,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"eTV" = (
+/obj/effect/floor_decal/corner/paleblue/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "eUb" = (
 /obj/structure/disposalpipe/trunk{
 	dir = 8
@@ -19732,6 +19707,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
 "heb" = (
@@ -20108,10 +20086,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
 "hwb" = (
-/obj/structure/sign/science_1{
-	icon_state = "science";
-	dir = 1
-	},
 /obj/structure/sign/directions/security{
 	icon_state = "direction_sec";
 	dir = 8;
@@ -21423,7 +21397,7 @@
 	},
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/research/half,
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "jbb" = (
 /obj/structure/disposalpipe/segment,
@@ -21552,13 +21526,11 @@
 /turf/simulated/floor/carpet/green,
 /area/rnd/breakroom)
 "jhb" = (
-/obj/machinery/door/firedoor/border_only,
 /obj/structure/disposalpipe/segment{
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "jhf" = (
 /obj/structure/table/steel,
@@ -24532,6 +24504,24 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
+"mxi" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/hallway/primary/firstdeck/aft)
 "myb" = (
 /obj/structure/bed/chair/office/light{
 	icon_state = "officechair_white_preview";
@@ -28558,7 +28548,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/firstdeck/aft)
 "ruS" = (
@@ -30847,6 +30838,9 @@
 "uFk" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
@@ -48114,9 +48108,9 @@ uSl
 lYA
 lYA
 lYA
-axe
+umI
 ayh
-axe
+umI
 aAr
 aAr
 aAr
@@ -52154,9 +52148,9 @@ gfb
 gtb
 gIb
 arK
-axa
+ycz
 ayp
-cGd
+fnu
 awX
 awX
 awX
@@ -54175,7 +54169,7 @@ gDb
 arT
 arT
 axx
-jAM
+mxi
 equ
 hwb
 hIb
@@ -55184,7 +55178,7 @@ omb
 aub
 avo
 awt
-awM
+eTV
 jAM
 jab
 aAK
@@ -55386,7 +55380,7 @@ aqQ
 auc
 aqT
 awz
-axA
+aGx
 ayz
 jhb
 aAK
@@ -57812,8 +57806,8 @@ oLb
 scr
 bBm
 ruz
-dJp
-qmw
+bBm
+efR
 kym
 aDz
 aEA
