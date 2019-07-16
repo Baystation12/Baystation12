@@ -35,17 +35,10 @@
 	self_recharge = TRUE
 
 /obj/item/weapon/gun/energy/get_hardpoint_maptext()
-	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner)
-		var/obj/item/weapon/cell/C = MS.owner.get_cell()
-		if(istype(C))
-			return "[C.charge]/[C.maxcharge]"
-	return null
+	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
 
 /obj/item/weapon/gun/energy/get_hardpoint_status_value()
-	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner)
-		var/obj/item/weapon/cell/C = MS.owner.get_cell()
-		if(istype(C))
-			return C.charge/C.maxcharge
+	var/obj/item/weapon/cell/C = get_cell()
+	if(istype(C))
+		return C.charge/C.maxcharge
 	return null

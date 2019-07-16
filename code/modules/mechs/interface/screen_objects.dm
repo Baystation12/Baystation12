@@ -71,6 +71,7 @@
 
 	if(ui_damage)
 		value = -1
+		maptext = "ERROR"
 	else
 		if((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage*2))
 			if(prob(10))
