@@ -164,3 +164,21 @@
 	playsound(user.loc, scream_sound,50,0,7)
 	h.next_scream_at = world.time + SCREAM_COOLDOWN
 	return
+
+/decl/emote/audible/wort
+	key = "wort"
+	emote_message_3p = "USER worts, three times.!"
+
+/decl/emote/audible/wort/do_extra(var/atom/user, var/atom/target)
+	var/mob/living/carbon/human/h = user
+	if(!istype(h))
+		return
+	if(h.stat != CONSCIOUS)
+		return
+	if(world.time < h.next_scream_at)
+		return
+	if(h.species.type != /datum/species/sangheili)
+		to_chat(h,"<span class = 'notice'>You can't quite form the sounds required for this emote.</span>")
+	else
+		playsound(user.loc,'code/modules/halo/sounds/worting.ogg',50,0,7)
+	h.next_scream_at = world.time + SCREAM_COOLDOWN
