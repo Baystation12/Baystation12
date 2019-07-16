@@ -47,8 +47,10 @@
 		to_chat(mover, SPAN_WARNING("Maintenance protocols are in effect."))
 		next_move = world.time + 3 // Just to stop them from getting spammed with messages.
 		return MOVEMENT_STOP
-	if(!exosuit.get_cell().check_charge(exosuit.legs.power_use * CELLRATE))
+	if(!exosuit.get_cell() || !exosuit.get_cell().check_charge(exosuit.legs.power_use * CELLRATE))
 		to_chat(mover, SPAN_WARNING("The power indicator flashes briefly."))
+		next_move = world.time + 3 //On fast exosuits this got annoying fast
+		return MOVEMENT_STOP
 	
 	next_move = world.time + (exosuit.legs ? exosuit.legs.move_delay : 3)
 	return MOVEMENT_PROCEED

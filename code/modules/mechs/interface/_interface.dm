@@ -47,7 +47,7 @@
 		hud_elements |= hud_health
 		hud_open = locate(/obj/screen/movable/exosuit/toggle/hatch_open) in hud_elements
 		hud_power = new /obj/screen/movable/exosuit/power(src)
-		hud_power.screen_loc = "EAST-1:0,CENTER-4:25"
+		hud_power.screen_loc = "EAST-1:12,CENTER-4:25"
 		hud_elements |= hud_power
 
 	refresh_hud()
@@ -57,7 +57,10 @@
 		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H) H.update_system_info()
 	handle_hud_icons_health()
-	hud_power.maptext = "[get_cell().charge]/[get_cell().maxcharge]"
+	var/obj/item/weapon/cell/C = get_cell()
+	if(istype(C))
+		hud_power.maptext = "[round(get_cell().charge)]/[round(get_cell().maxcharge)]"
+	else hud_power.maptext = "CHECK POWER"
 	refresh_hud()
 
 /mob/living/exosuit/handle_hud_icons_health()

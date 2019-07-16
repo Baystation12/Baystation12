@@ -9,7 +9,7 @@
 	if(istype(MS) && MS.owner)
 		var/obj/item/weapon/cell/C = MS.owner.get_cell()
 		if(istype(C))
-			return "[C.charge]/[C.maxcharge]"
+			return "[round(C.charge)]/[round(C.maxcharge)]"
 	return null
 
 /obj/item/weapon/rcd/mounted/get_hardpoint_status_value()

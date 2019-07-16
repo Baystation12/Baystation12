@@ -29,6 +29,11 @@
 	if(.)
 		sleeper.ui_interact(user)
 
+/obj/item/mech_equipment/sleeper/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+		sleeper.attackby(I, user)
+	else return ..()
+
 /obj/item/mech_equipment/sleeper/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 	if(.)
