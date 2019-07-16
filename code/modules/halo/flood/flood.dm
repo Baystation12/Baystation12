@@ -156,8 +156,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	return 0
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/infest_airlocks_nearby()
-	for(var/obj/machinery/door/airlock/door in view(2,src))
-		if(door.stat & BROKEN || door.welded == 1)
+	for(var/obj/machinery/door/door in view(2,src))
+		var/obj/machinery/door/airlock/door_airlock = door
+		if(door.stat & BROKEN || (istype(door_airlock) && door_airlock.welded == 1))
 			continue
 		visible_message("<span class = 'danger'>[name] leaps at [door], burrowing into the access control mechanisms...</span>")
 		adjustBruteLoss(1)
@@ -165,7 +166,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		spawn(AIRLOCK_INFEST_TIME)
 			door.visible_message("<spanc class = 'danger>[door] sprouts tendrils of biomass from its control console, fully opening and then bolting.</span>")
 			door.open(1,1)
-		return 1//Only one airlock per loop.
+		return 1//Only one door per loop.
 	return 0
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/infect_mob(var/mob/living/carbon/human/h)

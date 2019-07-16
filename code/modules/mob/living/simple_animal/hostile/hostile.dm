@@ -82,7 +82,7 @@
 
 	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(7)
-		our_overmind.create_report(1,src,null,targlist.len,assault_target)
+		our_overmind.create_report(1,src,null,targlist.len,assault_target,loc)
 	return T
 
 
@@ -194,7 +194,7 @@
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	if(our_overmind)
 		var/list/targlist = ListTargets(7)
-		our_overmind.create_report(5,src,null,targlist.len,assault_target)
+		our_overmind.create_report(5,src,null,targlist.len,assault_target,loc)
 	..(gibbed, deathmessage, show_dead_message)
 	stop_automated_movement = 0
 	walk(src, 0)
@@ -280,7 +280,11 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 	/obj/structure/closet,\
 	/obj/structure/table,\
 	/obj/structure/grille,\
-	/obj/structure/barricade
+	/obj/structure/girder,\
+	/obj/structure/tanktrap,\
+	/obj/structure/barricade,\
+	/obj/structure/barricadeunsc,\
+	/obj/structure/sandbag
 ))
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
