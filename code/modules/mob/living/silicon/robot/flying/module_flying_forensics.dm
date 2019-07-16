@@ -23,7 +23,8 @@
 		/obj/item/weapon/autopsy_scanner,
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/device/uv_light,
-		/obj/item/weapon/crowbar
+		/obj/item/weapon/crowbar,
+		/obj/item/device/camera/mounted
 	)
 	emag = /obj/item/weapon/gun/energy/laser/mounted
 	skills = list(
