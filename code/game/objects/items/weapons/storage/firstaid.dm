@@ -377,7 +377,7 @@
 
 /obj/item/weapon/storage/firstaid/ds_healkitemergency //this one should be found in a few areas, as it is only minor treatments. It can be used to seal wounds of both kinds (burn/brute) but offers minimal restorative properties, so you will not be able to last with these - only endure a little longer while you try to find proper meds.
 	name = "emergency first-aid kit"
-	desc = "Contains pills and tools to deal with minor injuries long enough to reach an area where they can be properly treated."
+	desc = "Contains pills and tools to deal with injuries long enough to reach an area where they can be properly treated."
 	icon_state = "firstaid"
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
