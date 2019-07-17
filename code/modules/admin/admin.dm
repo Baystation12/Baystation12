@@ -58,6 +58,13 @@ var/global/floorIsLava = 0
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
 
+	var/mob/living/exosuit/E = M
+	if(istype(E) && E.pilots)
+		body += "<br><b>Exosuit pilots:</b><br>"
+		for(var/mob/living/pilot in E.pilots)
+			body += "[pilot] "
+			body += " \[<A href='?src=\ref[src];pilot=\ref[pilot]'>link</a>\]<br>"
+
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -

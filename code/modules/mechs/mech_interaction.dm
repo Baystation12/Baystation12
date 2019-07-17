@@ -120,7 +120,7 @@
 					ruser = user
 				temp_system.afterattack(A,ruser,adj,params)
 			if(system_moved) //We are using a proxy system that may not have logging like mech equipment does
-				log_and_message_admins("used [src] targetting [A]", user, src.loc)
+				log_and_message_admins("used [temp_system] targetting [A]", user, src.loc)
 			//Mech equipment subtypes can add further click delays
 			var/extra_delay = 0
 			if(ME != null)

@@ -28,9 +28,10 @@
 			/obj/screen/movable/exosuit/toggle/hatch_open,
 			/obj/screen/movable/exosuit/radio,
 			/obj/screen/movable/exosuit/rename,
-			/obj/screen/movable/exosuit/toggle/camera,
-			/obj/screen/movable/exosuit/toggle/air
+			/obj/screen/movable/exosuit/toggle/camera
 			)
+		if(body && body.pilot_coverage >= 100)
+			additional_hud_elements += /obj/screen/movable/exosuit/toggle/air
 		i = 0
 		var/pos = 7
 		for(var/additional_hud in additional_hud_elements)
