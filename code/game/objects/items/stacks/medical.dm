@@ -2,8 +2,8 @@
 	name = "medical pack"
 	singular_name = "medical pack"
 	icon = 'icons/obj/items.dmi'
-	amount = 5
-	max_amount = 5
+	amount = 10
+	max_amount = 10
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 20
@@ -157,15 +157,15 @@
 			affecting.disinfect()
 
 /obj/item/stack/medical/advanced/bruise_pack
-	name = "advanced trauma kit"
-	singular_name = "advanced trauma kit"
-	desc = "An advanced trauma kit for severe injuries."
-	icon_state = "traumakit"
-	heal_brute = 0
+	name = "trauma kit"
+	singular_name = "trauma kit"
+	desc = "A roll of 20 trauma kits capable of rapidly sealing bleeding wounds."
+	icon_state = "hm_brutepack"
 	origin_tech = list(TECH_BIO = 1)
+	heal_brute = 4
 	animal_heal = 12
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg','sound/effects/tape.ogg')
-	amount = 10
+	amount = 20
 
 /obj/item/stack/medical/advanced/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
@@ -212,11 +212,11 @@
 			use(used)
 
 /obj/item/stack/medical/advanced/ointment
-	name = "advanced burn kit"
-	singular_name = "advanced burn kit"
-	desc = "An advanced treatment kit for severe burns."
+	name = "regenerative membrane kit"
+	singular_name = "regenerative membrane kit"
+	desc = "A roll of 10 membrane kits designed to be smeared over burned flesh to rapidly aid in the repair of burned tissue."
 	icon_state = "burnkit"
-	heal_burn = 5
+	heal_burn = 25
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 7
 	apply_sounds = list('sound/effects/ointment.ogg')
