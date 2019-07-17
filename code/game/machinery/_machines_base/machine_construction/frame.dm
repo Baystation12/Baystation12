@@ -137,7 +137,10 @@
 		new_machine.install_component(machine.circuit, refresh_parts = FALSE)
 		new_machine.apply_component_presets()
 		new_machine.RefreshParts()
-		new_machine.construct_state.post_construct(new_machine)
+		if(new_machine.construct_state)
+			new_machine.construct_state.post_construct(new_machine)
+		else
+			crash_with("Machine of type [new_machine.type] was built from a circuit and frame, but had no construct state set.")
 		qdel(machine)
 		return TRUE
 
