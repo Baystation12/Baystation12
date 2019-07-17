@@ -486,3 +486,20 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/oiljug/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/lube/oil, 100)
+	
+	
+	
+	
+/obj/item/weapon/reagent_containers/food/drinks/bottle/ds_medigel
+	name = "medical pack"
+	desc = "A standard medi-gel container to treat life threatening injuries."
+	icon = 'icons/obj/drinks.dmi'
+	icon_state = "ds_medipack"
+	amount_per_transfer_from_this = 20
+	volume = 20
+
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/ds_medigel/New()
+	..()
+	reagents.add_reagent(/datum/reagent/ds_medicalgelreagent, 20)
+	update_icon()
