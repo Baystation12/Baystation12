@@ -4,7 +4,7 @@
 #include "Cassius_Station_1.dmm"
 #include "Cassius_Station_2.dmm"
 
-/obj/effect/overmap/unsc_cassius
+/obj/effect/overmap/ship/unsc_cassius
 	name = "Cassius Station"
 	desc = "Located in geosynchronous above the planet, its MAC gun can put a round clean through a Covenant capital ship."
 	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
@@ -13,6 +13,7 @@
 	overmap_spawn_near_me = list(/obj/effect/overmap/ship/odst_corvette)
 	base = 1
 	block_slipspace = 1
+	fore_dir = WEST
 
 	parent_area_type = /area/faction_base/unsc
 
