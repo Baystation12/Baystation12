@@ -127,6 +127,8 @@
 		if(cell)
 			add_cell(machine, cell)
 			cell.forceMove(src)
+	charge_rate = initial(charge_rate)
+	charge_rate *= 1 + 0.5 * machine.total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 
 /obj/item/weapon/stock_parts/power/battery/on_update_icon()
 	icon_state = "battery[!!cell]"
