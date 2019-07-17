@@ -53,8 +53,7 @@
 	req_components = list (
 		/obj/item/weapon/stock_parts/scanning_module = 1,
 		/obj/item/weapon/stock_parts/manipulator = 2,
-		/obj/item/weapon/reagent_containers/syringe = 2,
-		/obj/item/weapon/reagent_containers/glass/beaker/large = 1)
+		/obj/item/weapon/reagent_containers/syringe = 2)
 	additional_spawn_components = list(
 		/obj/item/weapon/stock_parts/console_screen = 1,
 		/obj/item/weapon/stock_parts/keyboard = 1,
