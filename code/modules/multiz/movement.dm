@@ -254,6 +254,8 @@
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
 		if(fall_damage())
 			for(var/mob/living/M in landing.contents)
+				if(M == src)
+					continue
 				visible_message("\The [src] hits \the [M.name]!")
 				M.take_overall_damage(fall_damage())
 

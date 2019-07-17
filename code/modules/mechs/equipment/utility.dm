@@ -244,7 +244,6 @@
 		if(istype(C))
 			C.use(active_power_use * CELLRATE)
 		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
-		to_chat(user, "<span class='danger'>You start to drill \the [target]</span>")
 
 		var/T = target.loc
 

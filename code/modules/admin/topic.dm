@@ -2018,6 +2018,12 @@
 			if("No")
 				return
 
+	if(href_list["pilot"])
+		var/mob/M = locate(href_list["pilot"])
+		if(!ismob(M)) return
+
+		show_player_panel(M)
+
 
 mob/living/proc/can_centcom_reply()
 	return 0
