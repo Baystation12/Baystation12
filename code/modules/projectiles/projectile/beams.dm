@@ -190,23 +190,53 @@
 	damage = 20
 	agony  = 10
 
-/obj/item/projectile/beam/plasmacutter
+/obj/item/projectile/beam/deadspaceminingcutter
 	name = "plasma arc"
 	icon_state = "omnilaser"
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	damage = 15
+	armor_penetration = 65 //mining plasma is dense enough to pierce heavy rock - it will go through most armour like paper
 	sharp = 1
 	edge = 1
-	damage_type = BURN
+	damage_type = BRUTE //plasma is a physical object with mass, rather than purely burning. this also means you can decapitate/sever limbs, not just ash them.
 	check_armour = "laser"
-	kill_count = 5
+	kill_count = 2 //mining tools are not exactly known for their ability to replace firearms, they're good against necros, not so much against anything else.
 	pass_flags = PASS_FLAG_TABLE
 
 	muzzle_type = /obj/effect/projectile/trilaser/muzzle
 	tracer_type = /obj/effect/projectile/trilaser/tracer
 	impact_type = /obj/effect/projectile/trilaser/impact
 
-/obj/item/projectile/beam/plasmacutter/on_impact(var/atom/A)
+/obj/item/projectile/beam/miningcutter/on_impact(var/atom/A)
+	if(istype(A, /turf/simulated/mineral))
+		var/turf/simulated/mineral/M = A
+		if(prob(33))
+			M.GetDrilled(1)
+			return
+		else
+			M.emitter_blasts_taken += 2
+	. = ..()
+	
+	
+
+/obj/item/projectile/beam/deadspaceplasmacutter
+	name = "plasma arc"
+	icon_state = "omnilaser"
+	fire_sound = 'sound/weapons/plasma_cutter.ogg'
+	damage = 25
+	armor_penetration = 100 //plasma cutter is shown to pierce even EDF armor in dead space aftermath so
+	sharp = 1
+	edge = 1
+	damage_type = BRUTE //physical object with mass, etc.
+	check_armour = "laser"
+	kill_count = 3 //an upgrade over the mining cutter, used for engineering work, but still not a proper firearm
+	pass_flags = PASS_FLAG_TABLE
+
+	muzzle_type = /obj/effect/projectile/trilaser/muzzle
+	tracer_type = /obj/effect/projectile/trilaser/tracer
+	impact_type = /obj/effect/projectile/trilaser/impact
+
+/obj/item/projectile/beam/deadspaceplasmacutter/on_impact(var/atom/A)
 	if(istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
 		if(prob(33))
