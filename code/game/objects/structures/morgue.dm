@@ -426,13 +426,11 @@
 /obj/machinery/button/crematorium/on_update_icon()
 	return
 
-/obj/machinery/button/crematorium/attack_hand(mob/user as mob)
-	if(..())
+/obj/machinery/button/crematorium/activate(mob/user)
+	if(operating)
 		return
-	if(src.allowed(user))
-		for (var/obj/structure/crematorium/C in range())
-			if (C.id == id_tag)
-				if (!C.cremating)
-					C.cremate(user)
-	else
-		to_chat(usr, "<span class='warning'>Access denied.</span>")
+	for(var/obj/structure/crematorium/C in range())
+		if (C.id == id_tag)
+			if (!C.cremating)
+				C.cremate(user)
+	..() // sets operating for click cooldown.
