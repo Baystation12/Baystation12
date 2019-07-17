@@ -404,6 +404,9 @@ Class Procs:
 	to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
 	for(var/var/obj/item/C in component_parts)
 		to_chat(user, "<span class='notice'>	[C.name]</span>")
+	for(var/path in uncreated_component_parts)
+		var/obj/item/thing = path
+		to_chat(user, "<span class='notice'>	[initial(thing.name)] ([uncreated_component_parts[path] || 1])</span>")
 
 /obj/machinery/examine(mob/user)
 	. = ..(user)
