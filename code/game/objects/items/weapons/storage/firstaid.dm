@@ -230,7 +230,7 @@
 	name = "pill bottle (Dexalin Plus)"
 	desc = "Contains pills used to treat extreme cases of oxygen deprivation."
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/dexalin_plus = 14)
+	startswith = list(/obj/item/weapon/reagent_containers/pill/dexalin_plus = 21)
 	wrapper_color = COLOR_CYAN_BLUE
 
 /obj/item/weapon/storage/pill_bottle/dexalin
@@ -244,7 +244,7 @@
 	name = "pill bottle (Dermaline)"
 	desc = "Contains pills used to treat burn wounds."
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/dermaline = 14)
+	startswith = list(/obj/item/weapon/reagent_containers/pill/dermaline = 21)
 	wrapper_color = "#e8d131"
 
 /obj/item/weapon/storage/pill_bottle/dylovene
@@ -256,7 +256,7 @@
 
 /obj/item/weapon/storage/pill_bottle/inaprovaline
 	name = "pill bottle (Inaprovaline)"
-	desc = "Contains pills used to stabilize patients."
+	desc = "Contains pills used to stabilize patients. Will normalise heart rates, minimize brain damage from oxygen loss and otherwise secure a patient for a short time."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/inaprovaline = 21)
 	wrapper_color = COLOR_PALE_BLUE_GRAY
@@ -272,14 +272,14 @@
 	name = "pill bottle (Spaceacillin)"
 	desc = "A theta-lactam antibiotic. Effective against many diseases likely to be encountered in space."
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/spaceacillin = 14)
+	startswith = list(/obj/item/weapon/reagent_containers/pill/spaceacillin = 21)
 	wrapper_color = COLOR_PALE_GREEN_GRAY
 
 /obj/item/weapon/storage/pill_bottle/tramadol
 	name = "pill bottle (Tramadol)"
 	desc = "Contains pills used to relieve pain."
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/tramadol = 14)
+	startswith = list(/obj/item/weapon/reagent_containers/pill/tramadol = 21)
 	wrapper_color = COLOR_PURPLE_GRAY
 
 //Baycode specific Psychiatry pills.
@@ -301,7 +301,7 @@
 	name = "pill bottle (Paroxetine)"
 	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 14)
+	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 21)
 	wrapper_color = COLOR_GRAY
 
 /obj/item/weapon/storage/pill_bottle/antidexafen
@@ -330,4 +330,78 @@
 			/obj/item/weapon/reagent_containers/pill/dexalin = 2,
 			/obj/item/weapon/reagent_containers/pill/kelotane = 2,
 			/obj/item/weapon/reagent_containers/pill/hyronalin
+		)
+		
+/obj/item/weapon/storage/pill_bottle/nanoblood
+	name = "pill bottle (Nanoblood)"
+	desc = "A pillbottle containing nanoblood pills, capable of rapidly restoring lost blood."
+
+	startswith = list(
+			/obj/item/weapon/reagent_containers/pill/nanoblood = 21,
+		)
+
+
+/obj/item/weapon/storage/pill_bottle/tricordrazine
+	name = "pill bottle (Tricordrazine)"
+	desc = "A pillbottle containing tricordrazine pills. Capable of stimulating regrowth of damaged external tissue."
+
+	startswith = list(
+			/obj/item/weapon/reagent_containers/pill/tricordrazine = 21,
+		)
+
+
+
+
+
+
+
+/obj/item/weapon/storage/firstaid/ds_healkitmedical //this one should be available in medical, or spawn on medical doctors.
+	name = "doctor's first-aid kit"
+	desc = "Contains a variety of standard and advanced medical treatments."
+	icon_state = "purplefirstaid"
+	item_state = "firstaid-advanced"
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
+
+	startswith = list(
+		/obj/item/weapon/reagent_containers/food/drinks/bottle/ds_medigel = 2, //medigel should be rare, there should be some on the map, maybe some available in stores but generally speaking should be rare, this is a heal-all solution, it can be applied and will pretty much guarantee survival. the only thing you might need to combine with it is nanoblood, as it does not regenerate blood on its own.
+		/obj/item/weapon/storage/pill_bottle/dexalin_plus,
+		/obj/item/weapon/storage/pill_bottle/dylovene,
+		/obj/item/weapon/storage/pill_bottle/tramadol,
+		/obj/item/weapon/storage/pill_bottle/inaprovaline,
+		/obj/item/weapon/storage/pill_bottle/nanoblood,
+		/obj/item/weapon/storage/pill_bottle/tricordrazine,
+		/obj/item/stack/medical/advanced/bruise_pack = 3,
+		/obj/item/stack/medical/advanced/ointment = 1,
+		/obj/item/device/healthanalyzer
+		)
+
+/obj/item/weapon/storage/firstaid/ds_healkitemergency //this one should be found in a few areas, as it is only minor treatments. It can be used to seal wounds of both kinds (burn/brute) but offers minimal restorative properties, so you will not be able to last with these - only endure a little longer while you try to find proper meds.
+	name = "emergency first-aid kit"
+	desc = "Contains pills and tools to deal with minor injuries long enough to reach an area where they can be properly treated."
+	icon_state = "firstaid"
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
+
+	startswith = list(
+		/obj/item/weapon/storage/pill_bottle/inaprovaline,
+		/obj/item/weapon/storage/pill_bottle/tramadol,
+		/obj/item/weapon/storage/pill_bottle/dexalin_plus,
+		/obj/item/stack/medical/advanced/bruise_pack
+		)
+
+/obj/item/weapon/storage/firstaid/ds_healkitcombat //this one is for ERTs, since they will need to deal with casualties on the move rather than take the time to chug pills or diagnose an issue.
+	name = "combat first-aid kit"
+	desc = "Contains a variety of treatments designed for rapid application in a combat environment."
+	icon_state = "bezerk"
+	item_state = "firstaid-advanced"
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
+
+	startswith = list(
+		/obj/item/weapon/reagent_containers/food/drinks/bottle/ds_medigel = 6, //no need for other chems as this and inaproavline covers all damage types. also no health analyzer as ert medics spawn with one.
+		/obj/item/weapon/storage/pill_bottle/inaprovaline, //stabilizes vitals, restores brain damage slightly.
+		/obj/item/weapon/storage/pill_bottle/tramadol, // deals with pain
+		/obj/item/weapon/storage/pill_bottle/nanoblood, //recovers blood
+		/obj/item/weapon/storage/pill_bottle/tricordrazine, //for when the medigel runs out
+		/obj/item/weapon/storage/pill_bottle/dexalin_plus, //to ensure oxygenation in the event of injury and such
+		/obj/item/stack/medical/advanced/bruise_pack = 3, //stops bleeding, heals 5 brute per wound closed
+		/obj/item/stack/medical/advanced/ointment = 1 //heals burns, 25 burn damage per wound closed.
 		)
