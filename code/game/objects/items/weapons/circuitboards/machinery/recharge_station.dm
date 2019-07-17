@@ -14,5 +14,6 @@
 	additional_spawn_components = list(
 		/obj/item/weapon/stock_parts/power/apc/buildable = 1,
 		/obj/item/weapon/stock_parts/power/battery/buildable/turbo = 1,
-		/obj/item/weapon/cell/high = 1
+		/obj/item/weapon/cell/high = 1,
+		/obj/item/weapon/stock_parts/capacitor = 2
 	)
