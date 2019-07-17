@@ -137,6 +137,20 @@ var/list/tape_roll_applications = list()
 	detail_overlay = "stripes"
 	detail_color = COLOR_PALE_BLUE_GRAY
 
+/obj/item/taperoll/bureaucracy
+	name = "red tape"
+	desc = "A roll of bureaucratic red tape used to block any meaningful work from being done."
+	tape_type = /obj/item/tape/bureaucracy
+	color = COLOR_RED
+
+/obj/item/tape/bureaucracy
+	name = "red tape"
+	desc = "A length of bureaucratic red tape. Safely ignored, but darn obstructive sometimes."
+	icon_base = "stripetape"
+	color = COLOR_RED
+	detail_overlay = "stripes"
+	detail_color = COLOR_RED
+
 /obj/item/taperoll/on_update_icon()
 	overlays.Cut()
 	var/image/overlay = image(icon = src.icon)
