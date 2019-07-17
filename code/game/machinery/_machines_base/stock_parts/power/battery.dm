@@ -80,6 +80,10 @@
 				machine.power_change()
 		return // We don't recharge if discharging
 
+	if((machine.stat & NOPOWER) && cell && cell.fully_charged())
+		machine.power_change()
+		return // This suggests that we should be powering the machine instead, so let's try that
+
 	// try and recharge
 	var/area/A = get_area(machine)
 	if(!can_charge || !cell || cell.fully_charged() || !A.powered(charge_channel))
