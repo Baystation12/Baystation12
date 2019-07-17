@@ -38,6 +38,28 @@
 			{{:data.total_credits}} Cr.
 		</div>
 	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Withdraw credits from account:
+		</div>
+			{{if data.is_admin}}
+				<div class="itemContent">
+					{{:helper.link('Make withdrawal', 'mail-open', {'withdraw_credits' : 1}, null)}}
+				</div>
+			{{else}}
+				<div class="itemContent" id='uiLoadingNotice'>
+					Access restricted.
+				</div>
+			{{/if}}
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Deposit credits into account:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Make deposit', 'mail-closed', {'deposit_credits' : 1}, null)}}
+		</div>
+	</div>
 	<table style="width:100%">
 		<tr><th style="width:20%">Shipment time<th style="width:20%">Unit Name<th style="width:20%">Unit Price<th style="width:20%">Quantity<th style="width:20%">Authorised
 		{{for data.exports}}

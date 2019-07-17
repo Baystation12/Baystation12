@@ -57,7 +57,6 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 				contest_markers(user.faction)
 				if(do_after(user, capture_time, src, same_direction = 1))
 					src.visible_message("\icon[user] <span class='info'>[user] has taken control of [src] for the [user.faction].</span>")
-					control_faction = user.faction
 					control_markers(control_faction, user.faction)
 				else
 					reset_markers()
@@ -93,6 +92,9 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 		for(var/datum/faction/F in GLOB.all_factions)
 			for(var/datum/objective/colony_capture/O in F.all_objectives)
 				O.node_reset(src, old_faction, trigger_faction)
+
+	if(control_faction)
+		minor_announcement.Announce("[control_faction] has captured the [src]!","Geminus Sovereignty Update")
 
 /obj/machinery/computer/capture_node/proc/reset_markers()
 	var/area/A = get_area(src)
