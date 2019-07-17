@@ -343,17 +343,17 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	
 	
 /obj/item/weapon/reagent_containers/pill/nanoblood
-	name = "nanoblood (10u)"
-	desc = "Used to rapidly restore blood vessels."
+	name = "Nanoblood (20u)"
+	desc = "Used to rapidly restore lost blood."
 	icon_state = "pill1"
 /obj/item/weapon/reagent_containers/pill/nanoblood/New()
 	..()
-	reagents.add_reagent(/datum/reagent/nanoblood, 10)
+	reagents.add_reagent(/datum/reagent/nanoblood, 20)
 
 /obj/item/weapon/reagent_containers/pill/tricordrazine
-	name = "tricordrazine (10u)"
+	name = "Tricordrazine (20u)"
 	desc = "Used to treat a wide range of tissue damage."
 	icon_state = "pill4"
 /obj/item/weapon/reagent_containers/pill/tricordrazine/New()
 	..()
-	reagents.add_reagent(/datum/reagent/tricordrazine, 10)
+	reagents.add_reagent(/datum/reagent/tricordrazine, 20)
