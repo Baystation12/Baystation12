@@ -2,13 +2,13 @@
 	filename = "base_supply"
 	filedesc = "Rabbit Hole Base Supply Management"
 	program_icon_state = "supply"
-	nanomodule_path = /datum/nano_module/innie_supply
+	nanomodule_path = /datum/nano_module/program/innie_supply
 	extended_desc = "A management tool that allows for ordering of various supplies through the base's cargo system. Some features may require additional access."
 	size = 21
 	available_on_ntnet = 1
 	requires_ntnet = 1
 
-/datum/nano_module/innie_supply
+/datum/nano_module/program/innie_supply
 	name = "Rabbit Hole Base Supply Management program"
 	var/screen = 1		// 0: Ordering menu, 1: Statistics 2: Shuttle control, 3: Orders menu
 	var/selected_category
@@ -16,7 +16,7 @@
 	var/list/category_contents
 	var/emagged = FALSE	// TODO: Implement synchronisation with modular computer framework.
 
-/datum/nano_module/innie_supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+/datum/nano_module/program/innie_supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/is_admin = check_access(user, access_innie_boss)
 	if(!category_names || !category_contents)
@@ -76,7 +76,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/innie_supply/Topic(href, href_list)
+/datum/nano_module/program/innie_supply/Topic(href, href_list)
 	var/mob/user = usr
 	if(..())
 		return 1
@@ -127,10 +127,6 @@
 			return
 		print_summary(user)
 
-	// Items requiring cargo access go below this entry. Other items go above.
-	if(!check_access(access_cargo))
-		return 1
-
 	if(href_list["launch_shuttle"])
 		var/datum/shuttle/autodock/ferry/geminus_innie/shuttle = GLOB.innie_factions_controller.geminus_supply_shuttle
 		if(!shuttle)
@@ -180,6 +176,30 @@
 				break
 		return 1
 
+	if(href_list["withdraw_credits"])
+		if(program && program.computer)
+			var/amount = input("How much do you want to withdraw?","Make withdrawal",0) as num
+			if(amount > 0)
+				amount = min(amount, GLOB.innie_factions_controller.innie_credits)
+				GLOB.innie_factions_controller.innie_credits -= amount
+				spawn_money(amount, program.computer.loc, user)
+				playsound(program.computer, 'sound/machines/chime.ogg', 50, 1)
+				program.computer.visible_message("\icon[program.computer] [user] withdraws a [amount >= 10000 ? "thick " : ""]wad of cash from [program.computer].")
+		else
+			to_chat(user,"<span class='warning'>You cannot do that right now.</span>")
+
+	if(href_list["deposit_credits"])
+		if(program && program.computer)
+			var/obj/item/weapon/spacecash/S = user.get_active_hand()
+			if(istype(S))
+				user.drop_item(S)
+				S.loc = program.computer
+				GLOB.innie_factions_controller.innie_credits += S.worth
+				program.computer.visible_message("\icon[program.computer] [user] deposits a [S.worth >= 10000 ? "thick " : ""]wad of cash into [program.computer].")
+				qdel(S)
+		else
+			to_chat(user,"<span class='warning'>You cannot do that right now.</span>")
+
 	if(href_list["cancel_order"])
 		var/id = text2num(href_list["cancel_order"])
 		for(var/datum/supply_order/SO in GLOB.innie_factions_controller.shoppinglist)
@@ -189,7 +209,7 @@
 				break
 		return 1
 
-/datum/nano_module/innie_supply/proc/generate_categories()
+/datum/nano_module/program/innie_supply/proc/generate_categories()
 	category_names = list()
 	category_contents = list()
 	for(var/decl/hierarchy/supply_pack/sp in cargo_supply_pack_root.children)
@@ -206,7 +226,7 @@
 				)))
 			category_contents[sp.name] = category
 
-/datum/nano_module/innie_supply/proc/get_shuttle_status()
+/datum/nano_module/program/innie_supply/proc/get_shuttle_status()
 	var/datum/shuttle/autodock/ferry/geminus_innie/shuttle = GLOB.innie_factions_controller.geminus_supply_shuttle
 	if(!istype(shuttle))
 		return "No Connection"
@@ -219,13 +239,13 @@
 	return "Docking/Undocking"
 
 
-/datum/nano_module/innie_supply/proc/can_print()
+/datum/nano_module/program/innie_supply/proc/can_print()
 	var/obj/item/modular_computer/MC = nano_host()
 	if(!istype(MC) || !istype(MC.nano_printer))
 		return 0
 	return 1
 
-/datum/nano_module/innie_supply/proc/print_order(var/datum/supply_order/O, var/mob/user)
+/datum/nano_module/program/innie_supply/proc/print_order(var/datum/supply_order/O, var/mob/user)
 	if(!O)
 		return
 
@@ -242,14 +262,14 @@
 	t += "<hr>"
 	print_text(t, user)
 
-/datum/nano_module/innie_supply/proc/print_summary(var/mob/user)
+/datum/nano_module/program/innie_supply/proc/print_summary(var/mob/user)
 	var/t = ""
 	t += "<center><BR><b><large>[GLOB.using_map.station_name]</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
 	for(var/source in point_source_descriptions)
 		t += "[point_source_descriptions[source]]: [supply_controller.point_sources[source] || 0]<br>"
 	print_text(t, user)
 
-/datum/nano_module/innie_supply/proc/print_text(var/text, var/mob/user)
+/datum/nano_module/program/innie_supply/proc/print_text(var/text, var/mob/user)
 	var/obj/item/modular_computer/MC = nano_host()
 	if(istype(MC))
 		if(!MC.nano_printer)
