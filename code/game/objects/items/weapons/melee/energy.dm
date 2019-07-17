@@ -223,3 +223,37 @@
 			host.embedded -= src
 			host.drop_from_inventory(src)
 		QDEL_IN(src, 0)
+		
+	
+/*
+ * Dead Space Rock Saw
+ */
+/obj/item/weapon/melee/energy/ds_rocksaw
+	name = "rock saw"
+	desc = "An energised mining tool for surveying and retrieval of objects embedded in otherwise dense material. Very dangerous, will cut through flesh and bone with ease."
+	icon_state = "ds_rocksaw0"
+	active_force = 45
+	active_throwforce = 10
+	armor_penetration = 80 //mining tools can pierce dense rock with ease, it's going to cut through armour no problem
+	force = 5
+	throwforce = 2
+	throw_speed = 1
+	throw_range = 6
+	w_class = ITEM_SIZE_NORMAL
+	atom_flags = ATOM_FLAG_NO_BLOOD
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)
+	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	sharp = 1
+	edge = 1
+	melee_accuracy_bonus = 20
+
+/obj/item/weapon/melee/energy/ds_rocksaw/activate(mob/living/user)
+	..()
+	icon_state = "ds_rocksaw1"
+	to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
+
+/obj/item/weapon/melee/energy/ds_rocksaw/deactivate(mob/living/user)
+	..()
+	icon_state = initial(icon_state)
+	to_chat(user, "<span class='notice'>\The [src] is de-energised.</span>")
