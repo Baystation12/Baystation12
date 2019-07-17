@@ -5864,6 +5864,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"ms" = (
+/obj/structure/chaplainflag,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/aft)
 "mx" = (
 /obj/machinery/light{
 	dir = 8
@@ -44969,7 +44973,7 @@ hA
 gE
 wB
 sJ
-sW
+ms
 RG
 wt
 xs
