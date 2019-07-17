@@ -80,6 +80,7 @@
 	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
+	unbreakable = 1
 
 /obj/item/weapon/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -104,6 +105,7 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	applies_material_colour = 0
+	unbreakable = 1
 
 	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	force_divisor = 0.33
