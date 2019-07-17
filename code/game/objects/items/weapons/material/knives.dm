@@ -14,6 +14,7 @@
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	attack_cooldown_modifier = -1
 	tool_qualities = list(QUALITY_CUTTING, 20)
+	unbreakable = 1
 
 /obj/item/weapon/material/butterfly/update_force()
 	if(active)
@@ -74,12 +75,14 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unbreakable = 1
 	tool_qualities = list(QUALITY_CUTTING, 30)
+	unbreakable = 1
 
 /obj/item/weapon/material/knife/hook
 	name = "meat hook"
 	desc = "A sharp, metal hook what sticks into things."
 	icon_state = "hook_knife"
 	item_state = "hook_knife"
+	unbreakable = 1
 
 /obj/item/weapon/material/knife/ritual
 	name = "ritual knife"
@@ -87,6 +90,7 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "render"
 	applies_material_colour = 0
+	unbreakable = 1
 
 /obj/item/weapon/material/knife/butch
 	name = "butcher's cleaver"
@@ -96,3 +100,4 @@
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	tool_qualities = list(QUALITY_CUTTING, 40)
+	unbreakable = 1

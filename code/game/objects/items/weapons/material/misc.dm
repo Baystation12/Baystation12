@@ -7,6 +7,7 @@
 	item_state = "harpoon"
 	force_divisor = 0.3 // 18 with hardness 60 (steel)
 	attack_verb = list("jabbed","stabbed","ripped")
+	unbreakable = 1
 
 /obj/item/weapon/material/hatchet
 	name = "hatchet"
@@ -22,6 +23,7 @@
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
 	hitsound = "chop"
+	unbreakable = 1
 
 /obj/item/weapon/material/hatchet/tacknife
 	name = "tactical knife"
@@ -31,6 +33,7 @@
 	item_state = "knife"
 	attack_verb = list("stabbed", "chopped", "cut")
 	applies_material_colour = 1
+	unbreakable = 1
 
 /obj/item/weapon/material/hatchet/machete
 	name = "machete"
@@ -41,6 +44,7 @@
 	default_material = MATERIAL_TITANIUM
 	base_parry_chance = 50
 	attack_cooldown_modifier = 1
+	unbreakable = 1
 
 /obj/item/weapon/material/hatchet/machete/Initialize()
 	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"
@@ -64,6 +68,7 @@
 	thrown_force_divisor = 0.25 // as above
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
+	unbreakable = 1
 
 /obj/item/weapon/material/scythe
 	icon_state = "scythe0"
@@ -79,5 +84,6 @@
 	slot_flags = SLOT_BACK
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
+	unbreakable = 1
 
 

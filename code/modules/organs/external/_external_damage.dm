@@ -10,8 +10,8 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	take_external_damage(amount)
 
 /obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon = null)
-	brute = round(brute * get_brute_mod(), 0.1)
-	burn = round(burn * get_burn_mod(), 0.1)
+	brute = round(brute * get_brute_mod(), 0.35)
+	burn = round(burn * get_burn_mod(), 0.35)
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
@@ -42,35 +42,6 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			if(total_damage > threshold)
 				if(attempt_dismemberment(pure_brute, burn, edge, used_weapon, spillover, total_damage > threshold*3))
 					return
-
-	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs && internal_organs.len)
-		var/damage_amt = brute
-		var/cur_damage = brute_dam
-		if(laser)
-			damage_amt += burn
-			cur_damage += burn_dam
-		var/organ_damage_threshold = 10
-		if(sharp)
-			organ_damage_threshold *= 0.5
-		var/organ_damage_prob = 5 * damage_amt/organ_damage_threshold //more damage, higher chance to damage
-		if(encased && !(status & ORGAN_BROKEN)) //ribs protect
-			organ_damage_prob *= 0.5
-		if ((cur_damage + damage_amt >= max_damage || damage_amt >= organ_damage_threshold) && prob(organ_damage_prob))
-			// Damage an internal organ
-			var/list/victims = list()
-			for(var/obj/item/organ/internal/I in internal_organs)
-				if(I.damage < I.max_damage && prob(I.relative_size))
-					victims += I
-			if(!victims.len)
-				victims += pick(internal_organs)
-			for(var/v in victims)
-				var/obj/item/organ/internal/victim = v
-				brute /= 2
-				if(laser)
-					burn /= 2
-				damage_amt /= 2
-				victim.take_internal_damage(damage_amt)
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
@@ -255,10 +226,10 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 /obj/item/organ/external/proc/get_agony_multiplier()
 	return has_genitals() ? 2 : 1
 
-/obj/item/organ/external/proc/sever_artery()
+/obj/item/organ/external/proc/sever_artery() //disabling this proc by checking for tendon cuts, which are also disabled.
 	if(species && species.has_organ[BP_HEART])
 		var/obj/item/organ/internal/heart/O = species.has_organ[BP_HEART]
-		if(!BP_IS_ROBOTIC(src) && !(status & ORGAN_ARTERY_CUT) && !initial(O.open))
+		if(!BP_IS_ROBOTIC(src) && !(status & ORGAN_TENDON_CUT) && !initial(O.open))
 			status |= ORGAN_ARTERY_CUT
 			return TRUE
 	return FALSE

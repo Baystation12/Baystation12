@@ -35,6 +35,9 @@
 	desc = "A medical HUD integrated with a wide visor."
 	icon_state = "medhud_visor"
 	item_state = "medhud_visor"
+	vision_flags = (SEE_TURFS|SEE_OBJS|SEE_MOBS)
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	flash_protection = FLASH_PROTECTION_MAJOR
 
 /obj/item/clothing/glasses/hud/security
 	name = "security HUD"

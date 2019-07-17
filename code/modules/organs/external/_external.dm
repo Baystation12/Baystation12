@@ -48,7 +48,7 @@
 	var/list/children                  // Sub-limbs.
 	var/list/internal_organs = list()  // Internal organs of this body part
 	var/list/implants = list()         // Currently implanted objects.
-	var/base_miss_chance = 20          // Chance of missing.
+	var/base_miss_chance = 10          // Chance of missing.
 	var/genetic_degradation = 0
 
 	//Forensics stuff

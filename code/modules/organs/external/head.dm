@@ -3,7 +3,7 @@
 	icon_name = "head"
 	name = "head"
 	slot_flags = SLOT_BELT
-	max_damage = 75
+	max_damage = 65 //after 65 damage it goes SPLAT. noticably squishy when unarmored, a lot more durable when armored.
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_NORMAL
 	body_part = HEAD
@@ -14,7 +14,7 @@
 	artery_name = "cartoid artery"
 	cavity_name = "cranial"
 
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL
 
 	var/glowing_eyes = FALSE
 	var/can_intake_reagents = 1
@@ -109,10 +109,10 @@
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon = null)
 	. = ..()
 	if (!(status & ORGAN_DISFIGURED))
-		if (brute_dam > 40)
+		if (brute_dam > 30)
 			if (prob(50))
 				disfigure("brute")
-		if (burn_dam > 40)
+		if (burn_dam > 30)
 			disfigure("burn")
 
 /obj/item/organ/external/head/update_icon()

@@ -340,3 +340,20 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 /obj/item/weapon/reagent_containers/pill/detergent/New()
 	..()
 	reagents.add_reagent(/datum/reagent/ammonia, 30)
+	
+	
+/obj/item/weapon/reagent_containers/pill/nanoblood
+	name = "Nanoblood (20u)"
+	desc = "Used to rapidly restore lost blood."
+	icon_state = "pill1"
+/obj/item/weapon/reagent_containers/pill/nanoblood/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nanoblood, 20)
+
+/obj/item/weapon/reagent_containers/pill/tricordrazine
+	name = "Tricordrazine (20u)"
+	desc = "Used to treat a wide range of tissue damage."
+	icon_state = "pill4"
+/obj/item/weapon/reagent_containers/pill/tricordrazine/New()
+	..()
+	reagents.add_reagent(/datum/reagent/tricordrazine, 20)

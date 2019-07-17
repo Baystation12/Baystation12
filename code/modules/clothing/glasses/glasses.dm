@@ -357,6 +357,7 @@
 	toggleable = TRUE
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	flash_protection = FLASH_PROTECTION_MAJOR
 	electric = TRUE
 
 /obj/item/clothing/glasses/thermal/Initialize()

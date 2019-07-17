@@ -1,4 +1,3 @@
-
 /obj/item/clothing/suit/armor
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -442,20 +441,3 @@
 	desc = "A heavy armored vest in a light grey urban camo. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
 	icon_state = "m_vest"
 	item_state = "m_vest"
-	
-
-/obj/item/clothing/suit/armor/ishimurasecurity
-	name = "cec security armour"
-	desc = "An armoured platecarrier designed to stop ballistic and bladed impacts."
-	icon_state = "ds_securityarmor"
-	item_state = "ds_securityarmor"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 60, bullet = 60, laser = 0, energy = 15, bomb = 35, bio = 0, rad = 0)
-
-/obj/item/clothing/suit/armor/ishimurasecuritychief
-	name = "cec security armoured jacket"
-	desc = "An armoured jacket often worn by the Chief Security Officer, designed to stop ballistic and bladed impacts."
-	icon_state = "ds_securityjacket"
-	item_state = "ds_securityjacket"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 60, bullet = 60, laser = 0, energy = 15, bomb = 35, bio = 0, rad = 0)

@@ -195,33 +195,9 @@
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
 	item_state = "security"
-	storage_slots = 8
+	storage_slots = 10
+	can_hold = list()
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
-	can_hold = list(
-		/obj/item/weapon/tool/crowbar,
-		/obj/item/weapon/grenade,
-		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/handcuffs,
-		/obj/item/device/flash,
-		/obj/item/clothing/glasses,
-		/obj/item/ammo_casing/shotgun,
-		/obj/item/ammo_magazine,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/,
-		/obj/item/weapon/melee/baton,
-		/obj/item/weapon/melee/telebaton,
-		/obj/item/weapon/flame/lighter,
-		/obj/item/clothing/glasses/hud/security,
-		/obj/item/device/flashlight,
-		/obj/item/modular_computer/pda,
-		/obj/item/device/radio/headset,
-		/obj/item/device/hailer,
-		/obj/item/device/megaphone,
-		/obj/item/weapon/melee,
-		/obj/item/taperoll,
-		/obj/item/device/holowarrant,
-		/obj/item/weapon/magnetic_ammo,
-		/obj/item/device/binoculars
-		)
 
 /obj/item/weapon/storage/belt/general
 	name = "equipment belt"
@@ -383,7 +359,8 @@
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
 	icon_state = "swatbelt"
 	item_state = "swatbelt"
-	storage_slots = 9
+	storage_slots = 18
+	can_hold = list()
 
 /obj/item/weapon/storage/belt/waistpack
 	name = "waist pack"

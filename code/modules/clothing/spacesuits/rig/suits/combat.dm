@@ -465,7 +465,7 @@
 	icon = 'icons/obj/rig_modules.dmi'
 	icon_state = "unimedic_rig"
 	desc = "An old combat RIG used by SCAF over two hundred years ago. The armour has seen some wear but still functions as it should, it has been repainted in black and crimson colours. There are unitologist markings across the suit, this one in particular also features a red cross, indicating a medic."
-	armor = list(melee = 50, bullet = 50, laser = 30, energy = 20, bomb = 30, bio = 90, rad = 40)
+	armor = list(melee = 60, bullet = 60, laser = 30, energy = 20, bomb = 30, bio = 90, rad = 40)
 	online_slowdown = 0.8
 	offline_slowdown = 5
 	emp_protection = 10

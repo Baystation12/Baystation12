@@ -86,13 +86,13 @@
 
 /obj/screen/fullscreen/blind
 	icon_state = "blackimageoverlay"
-	layer = BLIND_LAYER
+	layer = DAMAGE_LAYER
 
 /obj/screen/fullscreen/blackout
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "black"
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	layer = BLIND_LAYER
+	layer = DAMAGE_LAYER
 
 /obj/screen/fullscreen/impaired
 	icon_state = "impairedoverlay"

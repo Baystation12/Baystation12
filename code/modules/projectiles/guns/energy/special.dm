@@ -183,9 +183,9 @@
 	item_state = "focus"
 	projectile_type = /obj/item/projectile/forcebolt
 
-/obj/item/weapon/gun/energy/plasmacutter
-	name = "plasma cutter"
-	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+/obj/item/weapon/gun/energy/ds_miningcutter
+	name = "mining cutter"
+	desc = "A high power mining tool capable of splitting dense material with only a few directed blasts. Also a rather hazardous improvised weapon, capable of severing limbs in a few shots."
 	charge_meter = 0
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "plasmacutter"
@@ -196,8 +196,25 @@
 	force = 8
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
 	matter = list(MATERIAL_STEEL = 4000)
-	projectile_type = /obj/item/projectile/beam/plasmacutter
-	max_shots = 10
+	projectile_type = /obj/item/projectile/beam/deadspaceminingcutter
+	max_shots = 5
+	self_recharge = 1
+	
+/obj/item/weapon/gun/energy/ds_plasmacutter
+	name = "industrial plasma cutter"
+	desc = "A high power plasma cutter designed to cut through tungsten reinforced bulkheads during engineering works. Unsurprisingly, it is also an extremely deadly tool and should be handled with the utmost care."
+	charge_meter = 0
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "plasmacutter"
+	item_state = "plasmacutter"
+	fire_sound = 'sound/weapons/plasma_cutter.ogg'
+	slot_flags = SLOT_BELT|SLOT_BACK
+	w_class = ITEM_SIZE_NORMAL
+	force = 8
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
+	matter = list(MATERIAL_STEEL = 4000)
+	projectile_type = /obj/item/projectile/beam/deadspaceplasmacutter
+	max_shots = 12
 	self_recharge = 1
 
 /obj/item/weapon/gun/energy/plasmacutter/mounted

@@ -7,7 +7,7 @@
 	uniform = /obj/item/clothing/under/rigunder
 	suit = null		//used by rig hardsuit on back.
 	l_ear = /obj/item/device/radio/headset/ert
-	glasses = /obj/item/clothing/glasses/sunglasses/big
+	glasses = /obj/item/clothing/glasses/thermal
 	mask = /obj/item/clothing/mask/gas/swat
 	head = null		//used by rig hardsuit on back.
 	belt = /obj/item/weapon/storage/belt/holster/security/tactical //empty belt, so should have equipment on the USM valor for them to equip and organise their own loadouts
@@ -24,7 +24,8 @@
 	uniform = /obj/item/clothing/under/rigunder
 	suit = null		//used by rig hardsuit on back.
 	l_ear = /obj/item/device/radio/headset/ert
-	glasses = /obj/item/clothing/glasses/sunglasses/big
+	l_hand = /obj/item/weapon/storage/firstaid/ds_healkitcombat
+	glasses = /obj/item/clothing/glasses/hud/health/visor
 	mask = /obj/item/clothing/mask/gas/swat
 	head = null		//used by rig hardsuit on back.
 	belt = /obj/item/weapon/storage/belt/holster/security/tactical
@@ -96,7 +97,8 @@
 	uniform = /obj/item/clothing/under/rigunder
 	suit = null		//used by rig hardsuit on back.
 	l_ear = /obj/item/device/radio/headset/syndicate/alt
-	glasses = /obj/item/clothing/glasses/sunglasses/big
+	l_hand = /obj/item/weapon/storage/firstaid/ds_healkitcombat
+	glasses = /obj/item/clothing/glasses/hud/health/visor
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = null		//used by rig hardsuit on back.
 	belt = /obj/item/weapon/storage/belt/holster/security/tactical
@@ -147,7 +149,7 @@
 	uniform = /obj/item/clothing/under/rigunder
 	suit = null		//used by rig hardsuit on back.
 	l_ear = /obj/item/device/radio/headset/syndicate/alt
-	glasses = /obj/item/clothing/glasses/sunglasses/big
+	glasses = /obj/item/clothing/glasses/thermal
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = null		//used by rig hardsuit on back.
 	belt = /obj/item/weapon/storage/belt/holster/security/tactical
