@@ -620,8 +620,10 @@ var/global/list/all_objectives = list()
 /datum/objective/heist/proc/choose_target()
 	return
 
+/datum/objective/heist/kidnap
+	var/list/roles = list(/datum/job/chief_engineer, /datum/job/rd, /datum/job/roboticist, /datum/job/chemist, /datum/job/engineer)
+
 /datum/objective/heist/kidnap/choose_target()
-	var/list/roles = list(/datum/job/chief_engineer, /datum/job/rd, /datum/job/roboticist, /datum/job/chemist, /datum/job/senior_engineer, /datum/job/engineer)
 	var/list/possible_targets = list()
 	var/list/priority_targets = list()
 
