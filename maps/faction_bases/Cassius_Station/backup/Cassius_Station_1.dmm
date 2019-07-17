@@ -168,7 +168,7 @@
 "dm" = (/obj/machinery/deck_gun,/turf/simulated/floor/airless,/area/faction_base/unsc/upperlevel)
 "dn" = (/obj/machinery/deck_gun/chaingun,/turf/simulated/floor/airless,/area/faction_base/unsc/upperlevel)
 "do" = (/obj/effect/landmark/map_data{name = "Cassius Station"},/turf/space,/area/space)
-"dp" = (/obj/effect/overmap/ship/unsc_cassius,/turf/space,/area/space)
+"dp" = (/obj/effect/overmap/unsc_cassius,/turf/space,/area/space)
 "dq" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/turf/simulated/floor/plating,/area/faction_base/unsc/engineering)
 "dr" = (/obj/machinery/photocopier/faxmachine{department = "Deviance Station"},/obj/structure/table/steel_reinforced,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/pen/blue,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/upperlevel)
 
