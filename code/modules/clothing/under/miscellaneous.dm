@@ -152,6 +152,7 @@
 	name = "cloud"
 	icon_state = "cloud"
 	worn_state = "cloud"
+	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/psysuit
 	name = "dark undersuit"
@@ -167,6 +168,9 @@
 	icon_state = "gentlesuit"
 	item_state = "gy_suit"
 	worn_state = "gentlesuit"
+
+/obj/item/clothing/under/gimmick
+	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
