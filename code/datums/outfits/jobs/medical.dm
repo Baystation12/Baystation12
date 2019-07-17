@@ -1,6 +1,7 @@
 /decl/hierarchy/outfit/job/medical/ds13seniormedofficer
 	name = OUTFIT_JOB_NAME("Senior Medical Officer")
 	uniform = /obj/item/clothing/under/chief_medical_officer/deadspace
+	glasses = /obj/item/clothing/glasses/hud/health/visor
 	l_ear = /obj/item/device/radio/headset/heads/cmo
 	shoes = /obj/item/clothing/shoes/hightops/black
 	id_type = /obj/item/weapon/card/id/holoidseniormed
@@ -8,12 +9,14 @@
 /decl/hierarchy/outfit/job/medical/ds13meddoctor
 	name = OUTFIT_JOB_NAME("Medical Doctor")
 	uniform = /obj/item/clothing/under/medical_doctor
+	glasses = /obj/item/clothing/glasses/hud/health/visor
 	shoes = /obj/item/clothing/shoes/hightops/black
 	id_type = /obj/item/weapon/card/id/holoidmedicaldoc
 	
 /decl/hierarchy/outfit/job/medical/ds13medsurgeon
 	name = OUTFIT_JOB_NAME("Surgeon")
 	head = /obj/item/clothing/head/surgery/blue
+	glasses = /obj/item/clothing/glasses/hud/health/visor
 	uniform = /obj/item/clothing/under/surgeon
 	shoes = /obj/item/clothing/shoes/hightops/black
 	id_type = /obj/item/weapon/card/id/holoidthefirsttogoinsane
