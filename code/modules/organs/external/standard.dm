@@ -8,8 +8,8 @@
 	name = "upper body"
 	organ_tag = BP_CHEST
 	icon_name = "torso"
-	max_damage = 100
-	min_broken_damage = 35
+	max_damage = 90 //these damage values don't really do anything as organs can't be damaged through the bodypart nor can they be broken. maybe something cna be done here in future to make baycode function more like TG where once an organ takes this much damage, it spills what is inside - so torso drops internal organs or something.
+	min_broken_damage = 25
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	body_part = UPPER_TORSO
 	vital = 1
@@ -20,7 +20,7 @@
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
-	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL
 
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
@@ -42,8 +42,8 @@
 	name = "lower body"
 	organ_tag = BP_GROIN
 	icon_name = "groin"
-	max_damage = 100
-	min_broken_damage = 35
+	max_damage = 45
+	min_broken_damage = 25
 	w_class = ITEM_SIZE_LARGE
 	body_part = LOWER_TORSO
 	parent_organ = BP_CHEST
@@ -52,14 +52,14 @@
 	dislocated = -1
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
 	name = "left arm"
 	icon_name = "l_arm"
-	max_damage = 50
-	min_broken_damage = 30
+	max_damage = 45
+	min_broken_damage = 25
 	w_class = ITEM_SIZE_NORMAL
 	body_part = ARM_LEFT
 	parent_organ = BP_CHEST
@@ -68,7 +68,7 @@
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -82,8 +82,8 @@
 	organ_tag = BP_L_LEG
 	name = "left leg"
 	icon_name = "l_leg"
-	max_damage = 50
-	min_broken_damage = 30
+	max_damage = 45
+	min_broken_damage = 25
 	w_class = ITEM_SIZE_NORMAL
 	body_part = LEG_LEFT
 	icon_position = LEFT
@@ -93,7 +93,7 @@
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -108,8 +108,8 @@
 	organ_tag = BP_L_FOOT
 	name = "left foot"
 	icon_name = "l_foot"
-	max_damage = 30
-	min_broken_damage = 15
+	max_damage = 45
+	min_broken_damage = 25
 	w_class = ITEM_SIZE_SMALL
 	body_part = FOOT_LEFT
 	icon_position = LEFT
@@ -118,7 +118,7 @@
 	amputation_point = "left ankle"
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND
 
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
@@ -134,7 +134,7 @@
 	organ_tag = BP_L_HAND
 	name = "left hand"
 	icon_name = "l_hand"
-	max_damage = 30
+	max_damage = 45
 	min_broken_damage = 15
 	w_class = ITEM_SIZE_SMALL
 	body_part = HAND_LEFT
@@ -143,7 +143,7 @@
 	amputation_point = "left wrist"
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT
 
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND
