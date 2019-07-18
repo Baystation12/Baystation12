@@ -160,10 +160,7 @@
 				busy = 1
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
-					if(T.harvest)
-						T.harvest(src)
-					else if(T.dead)
-						T.remove_dead(src)
+					T.physical_attack_hand(src)
 			if(FARMBOT_WATER)
 				action = "water"
 				update_icons()
