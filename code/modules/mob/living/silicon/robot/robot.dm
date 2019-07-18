@@ -170,7 +170,7 @@
 	if(ispath(module))
 		new module(src)
 	if(lawupdate)
-		var/new_ai = select_active_ai_with_fewest_borgs((get_turf(src))?.z)
+		var/new_ai = select_active_ai_with_fewest_borgs(get_z(src))
 		if(new_ai)
 			lawupdate = 1
 			connect_to_ai(new_ai)
