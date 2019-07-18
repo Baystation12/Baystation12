@@ -296,4 +296,4 @@
 		return
 	visible_message(SPAN_NOTICE("\The [src] whirrs violently and spills its contents all over \the [user]!"))
 	if(beaker && beaker.reagents)
-		beaker.reagents.splash(user, reagents.total_volume)
+		beaker.reagents.splash(user, beaker.reagents.total_volume)
