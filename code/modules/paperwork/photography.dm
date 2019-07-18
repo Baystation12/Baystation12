@@ -90,8 +90,9 @@ var/global/photo_count = 0
 
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, MAX_NAME_LEN)
 	//loc.loc check is for making possible renaming photos in clipboards
-	if(( (loc == usr || (loc.loc && loc.loc == usr)) && usr.stat == 0))
-		SetName("[(n_name ? text("[n_name]") : "photo")]")
+	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
+		return
+	SetName("[(n_name ? text("[n_name]") : "photo")]")
 	add_fingerprint(usr)
 	return
 
