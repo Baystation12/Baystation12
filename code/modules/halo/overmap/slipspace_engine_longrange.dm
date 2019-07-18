@@ -10,4 +10,6 @@
 	if(do_after(src, 5 SECONDS, user))
 		var/obj/effect/overmap/om_obj = map_sectors["[z]"]
 		om_obj.slipspace_status = 2
+		if(ticker.mode)
+			ticker.mode.handle_slipspace_jump(om_obj)
 		. = ..(user)

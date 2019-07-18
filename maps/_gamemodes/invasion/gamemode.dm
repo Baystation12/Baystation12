@@ -322,3 +322,6 @@
 			//a 0 means it fails so we set -1 to lock in a 0 result
 			if(!objective.override)
 				objective.override = -1
+
+		check_finished()
+
