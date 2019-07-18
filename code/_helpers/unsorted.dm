@@ -323,7 +323,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/select = null
 	var/list/borgs = list()
 	for (var/mob/living/silicon/robot/A in GLOB.player_list)
-		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone) || !((get_turf(A))?.z in zs))
+		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone) || !(get_z(A) in zs))
 			continue
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
 		borgs[name] = A
@@ -338,7 +338,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	. = list()
 	for(var/mob/living/silicon/ai/A in GLOB.living_mob_list_)
-		if(A.stat == DEAD || A.control_disabled || !((get_turf(A))?.z in zs))
+		if(A.stat == DEAD || A.control_disabled || !(get_z(A) in zs))
 			continue
 		. += A
 	return .
@@ -915,7 +915,7 @@ var/global/list/common_tools = list(
 			return 3800
 		if(/obj/item/weapon/melee/energy)
 			return 3500
-		if(/obj/item/weapon/blob_tendril) 
+		if(/obj/item/weapon/blob_tendril)
 			if(W.damtype == BURN)
 				return 1000
 			else

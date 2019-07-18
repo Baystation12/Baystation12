@@ -18,7 +18,7 @@
 /obj/machinery/computer/upload/ai/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	current = select_active_ai(user, (get_turf(src))?.z)
+	current = select_active_ai(user, get_z(src))
 	if (!current)
 		to_chat(user, "No active AIs detected.")
 	else
@@ -32,7 +32,7 @@
 /obj/machinery/computer/upload/robot/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	current = freeborg((get_turf(src))?.z)
+	current = freeborg(get_z(src))
 	if (!current)
 		to_chat(user, "No free cyborgs detected.")
 	else
