@@ -57,7 +57,7 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 				contest_markers(user.faction)
 				if(do_after(user, capture_time, src, same_direction = 1))
 					src.visible_message("\icon[user] <span class='info'>[user] has taken control of [src] for the [user.faction].</span>")
-					control_markers(control_faction, user.faction)
+					control_markers(user.faction, user.faction)
 				else
 					reset_markers()
 			else
