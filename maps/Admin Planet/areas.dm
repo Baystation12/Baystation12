@@ -21,8 +21,7 @@
 	requires_power= 0
 	has_gravity = 1
 	luminosity = 0
-
+*/
 /area/admin/forest
 	name = "Admin Area Forest"
 	icon_state = "green"
-*/
