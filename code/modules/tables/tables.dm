@@ -25,6 +25,14 @@
 
 	connections = list("nw0", "ne0", "sw0", "se0")
 
+/obj/structure/table/Crossed(mob/living/M as mob)
+	if(!flipped && istype(M))
+		M.on_table_offset(0)
+
+/obj/structure/table/Uncrossed(mob/living/M as mob)
+	if(istype(M))
+		M.on_table_offset(1)
+
 /obj/structure/table/New()
 	if(istext(material))
 		material = SSmaterials.get_material_by_name(material)
