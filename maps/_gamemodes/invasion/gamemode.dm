@@ -116,11 +116,11 @@
 		if(F.has_flagship)
 			var/obj/effect/overmap/flagship = F.get_flagship()
 			if(!flagship || !flagship.loc)
-				if(F.flagship_slipspaced)
+				if(F.flagship_slipspaced || flagship.slipspace_status == 2)
 					round_end_reasons += "the [F.name] ship has gone to slipspace and left the system"
 					/*var/datum/faction/covenant/C = locate() in factions
 					C.ignore_players_dead = 1*/
-				else
+				else if(!flagship.slipspace_status)
 					round_end_reasons += "the [F.name] ship has been destroyed"
 
 		if(F.has_base)

@@ -125,9 +125,13 @@
 
 /obj/machinery/slipspace_engine/proc/slipspace_to_location(var/turf/location)
 	do_slipspace_exit_effects(location)
+	var/obj/effect/overmap/ship = map_sectors["[src.z]"]
+	ship.slipspace_status = 0
 
 /obj/machinery/slipspace_engine/proc/slipspace_to_nullspace()
 	do_slipspace_enter_effects()
+	var/obj/effect/overmap/ship = map_sectors["[src.z]"]
+	ship.slipspace_status = 1
 
 /obj/machinery/slipspace_engine/proc/user_slipspace_to_maploc(var/mob/user)
 	var/targ_x = text2num(input(user,"Enter the target location's X value.(0 or null to cancel.)"))
