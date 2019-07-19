@@ -5,6 +5,9 @@
 	var/up_state
 	var/down_state
 
+/decl/machine_construction/default/no_deconstruct/attackby(obj/item/I, mob/user, obj/machinery/machine)
+	. = FALSE
+
 /decl/machine_construction/default/panel_closed
 	down_state = /decl/machine_construction/default/panel_open
 

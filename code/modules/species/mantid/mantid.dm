@@ -115,6 +115,9 @@
 /datum/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= ORGAN_CRYSTAL
 
+/datum/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
+	return
+
 /datum/species/mantid/gyne
 
 	name =                    SPECIES_MANTID_GYNE

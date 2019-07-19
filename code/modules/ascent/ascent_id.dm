@@ -1,3 +1,25 @@
+// ID 'card'
+/obj/item/weapon/card/id/ascent
+	name = "alien chip"
+	icon = 'icons/obj/ascent.dmi'
+	icon_state = "access_card"
+	desc = "A slender, complex chip of alien circuitry."
+	access = list(access_ascent)
+
+/obj/item/weapon/card/id/ascent/GetAccess()
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && !(H.species.name in ALL_ASCENT_SPECIES))
+		. = list()
+	else
+		. = ..()
+
+/obj/item/weapon/card/id/ascent/on_update_icon()
+	return
+
+/obj/item/weapon/card/id/ascent/prevent_tracking()
+	return TRUE
+
+// ID implant/organ/interface device.
 /obj/item/organ/internal/controller
 	name = "system controller"
 	desc = "A fist-sized lump of complex circuitry."
@@ -23,9 +45,3 @@
 /obj/item/organ/internal/controller/GetAccess()
 	if(id_card && damage < min_broken_damage)
 		return id_card.GetAccess()
-
-/obj/item/weapon/card/id/ascent
-	access = list(access_ascent)
-
-/obj/item/weapon/card/id/ascent/prevent_tracking()
-	return TRUE

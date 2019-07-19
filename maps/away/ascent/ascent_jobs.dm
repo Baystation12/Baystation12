@@ -1,25 +1,11 @@
 #define WEBHOOK_SUBMAP_LOADED_ASCENT "webhook_submap_ascent"
 
 // Submap datum and archetype.
-/decl/hierarchy/outfit/job/ascent_placeholder
-	name = "Ascent placeholder"
-	uniform =  null
-	l_ear =    null
-	shoes =    null
-	id_type =  null
-	pda_type = null
-	id_slot =  0
-	pda_slot = 0
-	flags =    0
-	
-/decl/hierarchy/outfit/job/ascent_placeholder/equip_id(mob/living/carbon/human/H)
-	return
-
 /decl/webhook/submap_loaded/ascent
 	id = WEBHOOK_SUBMAP_LOADED_ASCENT
 
 /decl/submap_archetype/ascent_seedship
-	descriptor = ASCENT_COLONY_SHIP_NAME
+	descriptor = "Ascent colony ship"
 	map = ASCENT_COLONY_SHIP_NAME
 	crew_jobs = list(
 		/datum/job/submap/ascent,
@@ -33,6 +19,9 @@
 
 /datum/submap/ascent
 	var/gyne_name
+
+/datum/submap/ascent/sync_cell(obj/effect/overmap/cell)
+	return
 
 /datum/submap/ascent/check_general_join_blockers(var/mob/new_player/joining, var/datum/job/submap/job)
 	. = ..()
@@ -92,8 +81,8 @@
 	title = "Ascent Gyne"
 	total_positions = 1
 	supervisors = "nobody but yourself"
-	info = "You are the Gyne of an independent Ascent vessel. Your hunting has brought you to this remote sector full of crawling primitives. Impose your will and bring prosperity to your nest-lineage."
-	outfit_type = /decl/hierarchy/outfit/job/ascent_placeholder
+	info = "You are the Gyne of an independent Ascent vessel. Your hunting has brought you to this remote sector full of crawling primitives. Impose your will, found a new nest, and bring prosperity to your lineage."
+	outfit_type = /decl/hierarchy/outfit/job/ascent
 	var/set_species_on_join = SPECIES_MANTID_GYNE
 
 /datum/job/submap/ascent/is_available(client/caller)
@@ -140,6 +129,7 @@
 	supervisors = "the Gyne"
 	info = "You are an Alate of an independent Ascent vessel. Your Gyne has directed you to this remote sector full of crawling primitives. Follow her instructions and bring prosperity to your nest-lineage."
 	set_species_on_join = SPECIES_MANTID_ALATE
+	outfit_type = /decl/hierarchy/outfit/job/ascent/tech
 
 /datum/job/submap/ascent/drone
 	title = "Ascent Drone"
@@ -155,6 +145,7 @@
 	total_positions = 3
 	info = "You are a Monarch Serpentid Worker serving as an attendant to your Queen on this vessel. Serve her however she requires."
 	set_species_on_join = SPECIES_MONARCH_WORKER
+	outfit_type = /decl/hierarchy/outfit/job/ascent/soldier
 
 /datum/job/submap/ascent/msq
 	title = "Serpentid Queen"
