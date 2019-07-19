@@ -207,8 +207,9 @@
 					break
 		holder.drop_from_inventory(card)
 
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = src
+	if(client)
+		client.perspective = EYE_PERSPECTIVE
+		client.eye = src
 	dropInto(card.loc)
 
 	card.forceMove(src)
@@ -320,7 +321,7 @@
 		var/mob/living/M = H.loc
 		if(istype(M))
 			M.drop_from_inventory(H, get_turf(src))
-		H.dropInto(loc)
+		H.dropInto(get_turf(M))
 
 	// Move us into the card and move the card to the ground.
 	card.dropInto(get_turf(card))
