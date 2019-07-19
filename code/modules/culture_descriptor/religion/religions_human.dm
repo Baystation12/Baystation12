@@ -45,3 +45,7 @@
 /decl/cultural_info/religion/spiritualism
 	name = RELIGION_SPIRITUALISM
 	description = "A belief based on communication with the spirits of the dead, especially through mediums. Someone who practices spiritualism is called a spiritualist."
+
+/decl/cultural_info/religion/shinto
+	name = RELIGION_SHINTO
+	description = "A traditional Japanese religion based on rituals to create a connection between the past and modern day. Someone who practices Shinto is called a Shintoist."

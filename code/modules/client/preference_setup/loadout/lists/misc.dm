@@ -210,9 +210,20 @@
 	cost = 2
 
 /datum/gear/bible
-	display_name = "bible"
+	display_name = "holy book"
 	path = /obj/item/weapon/storage/bible
 	cost = 2
+
+/datum/gear/bible/New()
+	..()
+	var/books = list()
+	books["bible"] = /obj/item/weapon/storage/bible
+	books["Bible"] = /obj/item/weapon/storage/bible/bible
+	books["Tanakh"] = /obj/item/weapon/storage/bible/tanakh
+	books["Quran"] = /obj/item/weapon/storage/bible/quran
+	books["Kitab-i-Aqdas"] = /obj/item/weapon/storage/bible/aqdas
+	books["Kojiki"] = /obj/item/weapon/storage/bible/kojiki
+	gear_tweaks += new/datum/gear_tweak/path(books)
 
 /datum/gear/swiss
 	display_name = "multi-tool"
