@@ -80,7 +80,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 /datum/antagonist/wizard/check_victory()
 	var/survivor
 	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || player.current.stat)
+		if(!player.current || player.current.stat == DEAD)
 			continue
 		survivor = 1
 		break
