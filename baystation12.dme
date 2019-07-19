@@ -1540,6 +1540,8 @@
 #include "code\modules\halo\machinery\autosurgeon\autosurgeon_interact_item.dm"
 #include "code\modules\halo\machinery\autosurgeon\autosurgeon_interact_ui.dm"
 #include "code\modules\halo\machinery\autosurgeon\autosurgeon_process.dm"
+#include "code\modules\halo\machinery\autosurgeon\autosurgeon_surgery_external.dm"
+#include "code\modules\halo\machinery\autosurgeon\autosurgeon_surgery_internal.dm"
 #include "code\modules\halo\machinery\autosurgeon\autosurgeon_topic.dm"
 #include "code\modules\halo\machinery\autosurgeon\covenant.dm"
 #include "code\modules\halo\machinery\autosurgeon\~autosurgeon.dm"

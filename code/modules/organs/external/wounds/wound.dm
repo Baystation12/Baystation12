@@ -97,7 +97,7 @@
 
 // checks if wound is considered open for external infections
 // untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if wound is bigger
-/datum/wound/proc/infection_check()
+/datum/wound/proc/infection_check(var/dirtiness = 0)
 	if (damage < 10)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
 		return 0
 	if (is_treated() && damage < 25)	//anything less than a flesh wound (or equivalent) isn't infectable if treated properly
@@ -112,11 +112,11 @@
 	var/dam_coef = round(damage/10)
 	switch (damage_type)
 		if (BRUISE)
-			return prob(dam_coef*5)
+			return prob(dam_coef*5 + dirtiness)
 		if (BURN)
-			return prob(dam_coef*10)
+			return prob(dam_coef*10 + dirtiness)
 		if (CUT)
-			return prob(dam_coef*20)
+			return prob(dam_coef*20 + dirtiness)
 
 	return 0
 

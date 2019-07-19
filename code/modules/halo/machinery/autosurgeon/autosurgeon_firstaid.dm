@@ -1,92 +1,55 @@
 
-//these are just copy paste of the bruise pack and ointment code
-/obj/machinery/autosurgeon/proc/first_aid_bruise()
-	//return 1 if we have done some successful first aiding
+/obj/machinery/autosurgeon/proc/first_aid()
+	//return 1 if we have done some successful medicing
 	. = 0
-	if(buckled_mob)
-		if(internal_bruise_pack && internal_bruise_pack.amount > 0)
-			for(var/obj/item/organ/external/affecting in buckled_mob)
+	if(buckled_mob && ishuman(buckled_mob))
+		for(var/obj/item/organ/external/affecting in buckled_mob:bad_external_organs)
 
-				if(affecting.is_bandaged())
+			for (var/datum/wound/W in affecting.wounds)
+				if(W.is_treated())
 					continue
 
-				var/used = 0
-				for (var/datum/wound/W in affecting.wounds)
-					if(W.bandaged)
-						continue
-					if(used == internal_bruise_pack.amount)
-						break
+				var/action_desc
+				var/procname
+				var/obj/item/stack/medical/used_medical
 
-					if (W.current_stage <= W.max_bleeding_stage)
-						src.visible_message("<span class='info'>[src] bandages \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
-					else if (W.damage_type == BRUISE)
-						src.visible_message("<span class='info'>[src] places a bruise patch over \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
-					else
-						src.visible_message("<span class='info'>[src] places a bandaid over \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
-					W.bandage()
-					W.disinfect()
-					used++
+				if (W.damage_type == BRUISE)
+					action_desc = "places a bruise patch"
+					used_medical = internal_bruise_pack
+					procname = "bandage"
+				else if (W.damage_type == CUT)
+					action_desc = "places a bandage"
+					used_medical = internal_bruise_pack
+					procname = "bandage"
+				else if (W.damage_type == PIERCE)
+					action_desc = "places a pad"
+					used_medical = internal_bruise_pack
+					procname = "bandage"
+				else if (W.damage_type == BURN)
+					action_desc = "salves"
+					used_medical = internal_ointment
+					procname = "salve"
+
+				//only repair 1 wound per tick
+				if(action_desc)
 					. = 1
-
-					//only repair 1 piece of damage per tick
+					if(do_after(buckled_mob, W.damage, src))
+						if(used_medical && used_medical.amount > 0)
+							src.visible_message("<span class='info'>[src] [action_desc] over \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
+							call(W, procname)()	//this is extra cheeky, dont do this
+							used_medical.use(1)
+						else
+							src.visible_message("<span class='warning'>\The [src] has used up its [procname].</span>")
 					break
 
-				affecting.update_damages()
-				if(used == internal_bruise_pack.amount)
-					if(affecting.is_bandaged())
-						src.visible_message("<span class='warning'>\The [src] has used up its [internal_bruise_pack].</span>")
-					else
-						src.visible_message("<span class='warning'>\The [src] has used up its [internal_bruise_pack], but there are more wounds to treat on [buckled_mob]'s [affecting.name].</span>")
-				internal_bruise_pack.use(used)
+			affecting.update_damages()
 
-				//only repair 1 piece of damage per tick
-				if(.)
-					break
-
-/obj/machinery/autosurgeon/proc/first_aid_burn()
-	//return 1 if we have done some successful first aiding
-	. = 0
-	if(buckled_mob)
-		if(internal_ointment && internal_ointment.amount > 0)
-			for(var/obj/item/organ/external/affecting in buckled_mob)
-
-				if(affecting.is_bandaged())
-					continue
-
-				var/used = 0
-				for (var/datum/wound/W in affecting.wounds)
-					if(W.bandaged)
-						continue
-					if(used == internal_ointment.amount)
-						break
-					if(!do_mob(buckled_mob, src, W.damage/5))
-						break
-
-					if (W.current_stage <= W.max_bleeding_stage)
-						src.visible_message("<span class='info'>[src] bandages \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
-					else if (W.damage_type == BRUISE)
-						src.visible_message("<span class='info'>[src] places a bruise patch over \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
-					else
-						src.visible_message("<span class='info'>[src] places a bandaid over \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
-					W.bandage()
-					W.disinfect()
-					used++
-					. = 1
-					break
-
-				affecting.update_damages()
-				if(used == internal_ointment.amount)
-					if(affecting.is_bandaged())
-						src.visible_message("<span class='warning'>\The [src] has used up its [internal_ointment].</span>")
-					else
-						src.visible_message("<span class='warning'>\The [src] has used up its [internal_ointment], but there are more wounds to treat on [buckled_mob]'s [affecting.name].</span>")
-				internal_ointment.use(used)
-
-				if(.)
-					break
+			//only repair 1 piece of damage per tick
+			if(.)
+				break
 
 /obj/machinery/autosurgeon/proc/first_aid_splint()
-	//return 1 if we have done some successful first aiding
+	//return 1 if we have done some successful medicing
 	. = 0
 	if(buckled_mob)
 		if(internal_splint && internal_splint.amount > 0)

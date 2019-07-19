@@ -1,6 +1,6 @@
 
 /obj/machinery/autosurgeon
-	name = "autodoctor"
+	name = "autosurgeon"
 	desc = "An advanced piece of machinery for automatically patching up external physical ailments."
 	icon = 'autosurgeon.dmi'
 	icon_state = "autosurgeon0"
@@ -26,6 +26,11 @@
 	var/autosurgeon_timeout = 0
 	var/start_delay = 60
 	var/do_start_delay = 0
+
+	var/dirtiness = 0
+
+	var/obj/item/organ/external/surgery_target_ext
+	var/obj/item/organ/internal/surgery_target_int
 
 	var/list/allowed_species = list(/datum/species/human)
 
@@ -64,3 +69,16 @@
 			unbuckle_mob()
 		else
 			src.visible_message("<span class='notice'>\The [src] fades into stillness.</span>")
+
+/obj/machinery/autosurgeon/examine(var/mob/user)
+	. = ..()
+	if(dirtiness > 30)
+		to_chat(user,"<span class='danger'>It is covered in filth!</span>")
+	else if(dirtiness > 20)
+		to_chat(user,"<span class='warning'>It is very grimy!</span>")
+	else if(dirtiness > 10)
+		to_chat(user,"<span class='notice'>It is grimy!</span>")
+	else if(dirtiness > 0)
+		to_chat(user,"<span class='info'>It has been used recently.</span>")
+	else
+		to_chat(user,"<span class='info'>It is sparkling clean.</span>")
