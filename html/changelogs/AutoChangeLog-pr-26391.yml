@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - maptweak: "Toxins lab now has a button for its blast doors, labels for its pumps, chamber now has a gas sensor, and more lighting."
