@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - maptweak: "Hanger Atmospheric Storage room has been added to the hanger. This replaces the unused refinery slot near the fore of the charon."
