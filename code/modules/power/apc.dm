@@ -181,10 +181,10 @@
 		opened = 1
 		operating = 0
 		stat |= MAINT
-		update_icon()
+		queue_icon_update()
 
 	if(operating)
-		src.update()
+		force_update_channels()
 	power_change()
 
 /obj/machinery/power/apc/Destroy()
@@ -220,7 +220,7 @@
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
 	term.make_terminal(src)
 
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/power/apc/proc/terminal()
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
@@ -854,20 +854,17 @@
 	else if (href_list["eqp"])
 		var/val = text2num(href_list["eqp"])
 		equipment = setsubsystem(val)
-		update_icon()
-		update()
+		force_update_channels()
 
 	else if (href_list["lgt"])
 		var/val = text2num(href_list["lgt"])
 		lighting = setsubsystem(val)
-		update_icon()
-		update()
+		force_update_channels()
 
 	else if (href_list["env"])
 		var/val = text2num(href_list["env"])
 		environ = setsubsystem(val)
-		update_icon()
-		update()
+		force_update_channels()
 
 	else if (href_list["overload"])
 		if(istype(usr, /mob/living/silicon))
@@ -882,6 +879,12 @@
 				update_icon()
 
 	return 0
+
+/obj/machinery/power/apc/proc/force_update_channels()
+	autoflag = -1 // This clears state, forcing a full recalculation
+	update_channels()
+	update()
+	queue_icon_update()
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
@@ -1097,8 +1100,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	equipment = POWERCHAN_ON_AUTO
 	environ = POWERCHAN_ON_AUTO
 
-	update_icon()
-	update()
+	force_update_channels()
 
 /obj/machinery/power/apc/proc/set_chargemode(new_mode)
 	chargemode = new_mode
@@ -1121,19 +1123,13 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 				sleep(1)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)
-	var/obj/item/weapon/cell/cell = get_cell()
-	if(cell && cell.charge > 0)
-		switch(val)
-			if(2) return POWERCHAN_ON_AUTO
-			if(1) return POWERCHAN_ON
-			else return POWERCHAN_OFF
-	else
-		switch(val)
-			if(2) return POWERCHAN_OFF_AUTO
-			if(1) return POWERCHAN_OFF_TEMP
-			else return POWERCHAN_OFF
-
-
+	switch(val)
+		if(2)
+			return POWERCHAN_OFF_AUTO
+		if(1) 
+			return POWERCHAN_OFF_TEMP
+		else 
+			return POWERCHAN_OFF
 
 // Malfunction: Transfers APC under AI's control
 /obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)
