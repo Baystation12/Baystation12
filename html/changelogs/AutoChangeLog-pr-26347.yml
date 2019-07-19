@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Masks can now properly hide ear and eye slot items if configured to do so."
