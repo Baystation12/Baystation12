@@ -34,7 +34,7 @@
 					/obj/item/weapon/gun/projectile/sec = 2,
 					/obj/item/weapon/storage/box/flashbangs,
 					/obj/item/weapon/storage/box/teargas)
-	cost = 40
+	cost = 100
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Weapons crate"
 	access = access_security

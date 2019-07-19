@@ -221,7 +221,7 @@
 					continue
 				category.Add(list(list(
 					"name" = spc.name,
-					"cost" = spc.cost,
+					"cost" = spc.cost * 10,
 					"ref" = "\ref[spc]"
 				)))
 			category_contents[sp.name] = category
