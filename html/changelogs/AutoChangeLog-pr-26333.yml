@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Can no longer adjust your Chameleon Item's appearance while restrained or disabled."
