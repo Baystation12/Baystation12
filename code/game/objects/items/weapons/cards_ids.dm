@@ -146,10 +146,11 @@ var/const/NO_EMAG_ACT = -50
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(card_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(card_choices[picked]))
+			return
 
-	disguise(card_choices[picked], usr)
+		disguise(card_choices[picked], usr)
 
 /obj/item/weapon/card/emag/examine(mob/user)
 	. = ..()
