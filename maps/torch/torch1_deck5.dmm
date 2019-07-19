@@ -13,6 +13,37 @@
 /obj/item/weapon/pen/fancy,
 /turf/simulated/floor/lino,
 /area/command/pilot)
+"ad" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/shuttle/petrov/toxins)
+"ae" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4;
+	name = "Heat Exchanger Input"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/paint/silver,
+/turf/simulated/wall/titanium,
+/area/shuttle/petrov/toxins)
+"af" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4;
+	name = "Exterior Vent"
+	},
+/obj/effect/paint/silver,
+/turf/simulated/wall/titanium,
+/area/shuttle/petrov/toxins)
 "ag" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
@@ -56,6 +87,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
+"aj" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 8;
+	name = "Heat Exchanger Output"
+	},
+/obj/effect/paint/silver,
+/turf/simulated/wall/ocp_wall,
+/area/shuttle/petrov/toxins)
 "ak" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
 	icon_state = "map";
@@ -88,6 +127,27 @@
 	},
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
+"ap" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/binary/pump{
+	dir = 8;
+	name = "Chamber Output"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
+/turf/simulated/floor/tiled/white,
+/area/shuttle/petrov/toxins)
+"aq" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/shuttle/petrov/toxins)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -155,6 +215,38 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
+"ax" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4;
+	name = "Chamber Input"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "toxin_exhaust";
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/shuttle/petrov/toxins)
+"ay" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/structure/table/standard,
+/obj/random/tool,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/item/weapon/storage/toolbox/mechanical,
+/turf/simulated/floor/tiled/white/monotile,
+/area/shuttle/petrov/toxins)
+"az" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging,
+/obj/machinery/air_sensor{
+	frequency = 1441;
+	id_tag = "toxins_sensor"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/shuttle/petrov/toxins)
 "aC" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
@@ -9788,15 +9880,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/shuttle/petrov/maint)
-"vs" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 32;
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
 "vt" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -11160,13 +11243,6 @@
 /obj/machinery/firealarm,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
-"AG" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 8
-	},
-/obj/effect/paint/silver,
-/turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/toxins)
 "AK" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/artifact_analyser,
@@ -11212,19 +11288,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
-"AV" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
-/obj/machinery/atmospherics/binary/pump{
-	dir = 8
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
 "AY" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13303,16 +13366,6 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
-"II" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/paint/silver,
-/turf/simulated/wall/titanium,
-/area/shuttle/petrov/toxins)
 "IN" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14901,10 +14954,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
-"On" = (
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
-/turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
 "Oq" = (
 /obj/machinery/door/blast/regular{
 	density = 1;
@@ -15966,12 +16015,6 @@
 /obj/machinery/reagent_temperature,
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
-"SG" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
 "SH" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/structure/cable/cyan{
@@ -16846,18 +16889,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/isolation)
-"VQ" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
-	dir = 4
-	},
-/obj/structure/table/standard,
-/obj/random/tool,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
 "VT" = (
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
@@ -17950,13 +17981,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/analysis)
-"ZW" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
-	},
-/obj/effect/paint/silver,
-/turf/simulated/wall/titanium,
-/area/shuttle/petrov/toxins)
 "ZY" = (
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/analysis)
@@ -48158,7 +48182,7 @@ Yp
 yO
 XB
 Xq
-SG
+ax
 Wl
 NX
 NG
@@ -48354,11 +48378,11 @@ CS
 Of
 CS
 CS
-vs
+ad
 Su
 Kj
 KY
-AV
+ap
 Zp
 HX
 Wl
@@ -48557,9 +48581,9 @@ Kk
 QR
 CS
 NW
-VQ
+ay
 XS
-AG
+aj
 Qw
 Cj
 Qw
@@ -48759,11 +48783,11 @@ JK
 JA
 CS
 NW
-II
-ZW
+ae
+af
 LG
 Uq
-yf
+az
 AC
 Rt
 Wl
@@ -48964,7 +48988,7 @@ DQ
 NZ
 Jj
 Qi
-On
+aq
 yf
 LU
 Rt
