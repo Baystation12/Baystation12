@@ -16,9 +16,11 @@
 		/obj/item/clustertool, 
 		/obj/item/clustertool,
 		/obj/item/weapon/weldingtool/electric/mantid,
+		/obj/item/stack/cable_coil/fabricator,
 		/obj/item/weapon/extinguisher,
 		/obj/item/device/t_scanner,
 		/obj/item/device/scanner/gas,
+		/obj/item/device/scanner/health,
 		/obj/item/device/geiger,
 		/obj/item/weapon/gripper,
 		/obj/item/weapon/gripper/no_use/loader,
@@ -27,8 +29,23 @@
 		/obj/item/weapon/surgicaldrill,
 		/obj/item/weapon/hemostat,
 		/obj/item/weapon/bonesetter,
-		/obj/item/weapon/circular_saw
+		/obj/item/weapon/circular_saw,
+		/obj/item/stack/material/cyborg/steel,
+		/obj/item/stack/material/cyborg/aluminium,
+		/obj/item/stack/material/rods/cyborg,
+		/obj/item/stack/tile/floor/cyborg,
+		/obj/item/stack/material/cyborg/glass,
+		/obj/item/stack/material/cyborg/glass/reinforced,
+		/obj/item/stack/cable_coil/cyborg,
+		/obj/item/stack/material/cyborg/plasteel,
+		/obj/item/device/plunger/robot
 	)
+	synths = list(
+		/datum/matter_synth/metal = 	30000,
+		/datum/matter_synth/glass = 	20000,
+		/datum/matter_synth/plasteel = 	10000
+	)
+
 	languages = list(
 		LANGUAGE_MANTID_VOCAL     = TRUE,
 		LANGUAGE_MANTID_NONVOCAL  = TRUE,

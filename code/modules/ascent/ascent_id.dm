@@ -19,6 +19,12 @@
 /obj/item/weapon/card/id/ascent/prevent_tracking()
 	return TRUE
 
+/obj/item/weapon/card/id/ascent/attack_self(mob/user)
+	return
+
+/obj/item/weapon/card/id/ascent/show()
+	return
+
 // ID implant/organ/interface device.
 /obj/item/organ/internal/controller
 	name = "system controller"
