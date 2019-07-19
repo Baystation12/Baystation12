@@ -38,8 +38,7 @@
 
 /datum/uplink_item/item/tools/encryptionkey_radio
 	name = "Encrypted Radio Channel Key"
-	desc = "This headset encryption key will allow you to eavesdrop on all available department channels, \
-	as well as speak on a hidden, encrypted radio channel. Use a screwdriver on your headset to exchange keys."
+	desc = "This headset encryption key will allow you to speak on a hidden, encrypted radio channel. Use a screwdriver on your headset to exchange keys."
 	item_cost = 1
 	path = /obj/item/device/encryptionkey/syndicate
 
