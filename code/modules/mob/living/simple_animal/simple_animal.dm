@@ -356,7 +356,7 @@
 
 	message = sanitize(message)
 
-	..(message, null, verb)
+	..(message, species_language, verb)
 
 /mob/living/simple_animal/get_speech_ending(verb, var/ending)
 	return verb
