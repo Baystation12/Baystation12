@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Can no longer do surgery through thick clothing, suits, RIGs, etc. You will need to remove the clothing before you can make incisions."
