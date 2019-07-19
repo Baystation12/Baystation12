@@ -48,7 +48,9 @@
 			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <span class='linkOn'>Never</span></br>"
 
 		. += "</td></tr>"
-
+	. += "</table>"
+	. += "<b>Ghost Role Availability:</b>"
+	. += "<table>"
 	var/list/ghost_traps = get_ghost_traps()
 	for(var/ghost_trap_key in ghost_traps)
 		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
