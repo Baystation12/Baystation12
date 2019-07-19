@@ -10,6 +10,7 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
+	holder_type = /obj/item/weapon/holder
 	idcard = /obj/item/weapon/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
