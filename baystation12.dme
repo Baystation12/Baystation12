@@ -1705,6 +1705,7 @@
 #include "code\modules\halo\trade\trade_items\crops.dm"
 #include "code\modules\halo\trade\trade_items\innie.dm"
 #include "code\modules\halo\trade\trade_items\ore.dm"
+#include "code\modules\halo\trade\trade_items\organs.dm"
 #include "code\modules\halo\trade\trade_items\weapon.dm"
 #include "code\modules\halo\trade\trade_items\weapon_cov.dm"
 #include "code\modules\halo\trade\trade_items\weapon_unsc.dm"
