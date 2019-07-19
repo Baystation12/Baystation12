@@ -118,12 +118,7 @@
 	return 0
 
 /mob/living/silicon/pai/restrained()
-	if(istype(src.loc,/obj/item/device/paicard))
-		return 0
-	..()
-
-/mob/living/silicon/pai/MouseDrop(atom/over_object)
-	return
+	return !istype(loc, /obj/item/device/paicard) && ..()
 
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
@@ -305,15 +300,16 @@
 
 	last_special = world.time + 100
 
-	if(src.loc == card)
+	if(loc == card)
 		return
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
-	src.stop_pulling()
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = card
+	stop_pulling()
+	if(client)
+		client.perspective = EYE_PERSPECTIVE
+		client.eye = card
 
 	//stop resting
 	resting = 0
@@ -324,10 +320,10 @@
 		var/mob/living/M = H.loc
 		if(istype(M))
 			M.drop_from_inventory(H, get_turf(src))
-		dropInto(loc)
+		H.dropInto(loc)
 
 	// Move us into the card and move the card to the ground.
-	card.dropInto(card.loc)
+	card.dropInto(get_turf(card))
 	resting = 0
 	icon_state = "[chassis]"
 	forceMove(card)
@@ -338,13 +334,13 @@
 
 // Handle being picked up.
 /mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
-	var/obj/item/weapon/holder/H = ..(grabber, self_drop)
-	if(!istype(H))
-		return
-	H.icon_state = "pai-[icon_state]"
-	grabber.update_inv_l_hand()
-	grabber.update_inv_r_hand()
-	return H
+	. = ..()
+	if(.)
+		var/obj/item/weapon/holder/H = .
+		if(istype(H))
+			H.icon_state = "pai-[icon_state]"
+			grabber.update_inv_l_hand()
+			grabber.update_inv_r_hand()
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"
