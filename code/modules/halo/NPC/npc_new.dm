@@ -15,6 +15,8 @@
 	else
 		name = "[real_name] (NPC)"
 
+	species_language = all_languages[my_species.language]
+
 	var/image/res = image('icons/mob/human_face.dmi',"bald_s")
 	h_style(res)
 	f_style(res)
@@ -56,6 +58,21 @@
 		var/newtype = pick(suits)
 		var/new_item = new newtype(src)
 		sprite_equip(new_item,slot_wear_suit_str)
+
+	if(masks.len && prob(mask_chance))
+		var/newtype = pick(masks)
+		var/new_item = new newtype(src)
+		sprite_equip(new_item,slot_wear_mask_str)
+
+	if(glasses.len && prob(glasses_chance))
+		var/newtype = pick(glasses)
+		var/new_item = new newtype(src)
+		sprite_equip(new_item,slot_glasses_str)
+
+	if(hats.len && prob(hat_chance))
+		var/newtype = pick(hats)
+		var/new_item = new newtype(src)
+		sprite_equip(new_item,slot_head_str)
 
 //repository/images/proc/overlay_image(var/icon, var/icon_state, var/alpha, var/appearance_flags, var/color, var/dir, var/plane = FLOAT_PLANE, var/layer = FLOAT_LAYER)
 /mob/living/simple_animal/npc/var/list/overlay_images = list()
