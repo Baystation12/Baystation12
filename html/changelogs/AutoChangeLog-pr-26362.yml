@@ -1,0 +1,4 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Adjusted fire locks on deck one and three for better mobility and logic."
