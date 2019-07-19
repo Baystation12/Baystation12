@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Adding capacitors to a machine buffs the battery backup's charge rate."
+  - tweak: "Borg chargers recharge faster now."
