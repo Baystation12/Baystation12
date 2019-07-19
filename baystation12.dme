@@ -1610,6 +1610,7 @@
 #include "code\modules\halo\NPC\NPC_types\colonist.dm"
 #include "code\modules\halo\NPC\NPC_types\crop_trader.dm"
 #include "code\modules\halo\NPC\NPC_types\kig_yar.dm"
+#include "code\modules\halo\NPC\NPC_types\medical.dm"
 #include "code\modules\halo\NPC\NPC_types\mineral_trader.dm"
 #include "code\modules\halo\NPC\NPC_types\weapon_smuggler.dm"
 #include "code\modules\halo\overmap\automated_defense.dm"
