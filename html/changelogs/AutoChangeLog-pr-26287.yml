@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscadd: "Adds several preset religious books to the loadout."
+  - rscadd: "Adds Shinto to the list of human religions."
