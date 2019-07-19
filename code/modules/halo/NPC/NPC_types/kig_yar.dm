@@ -20,13 +20,16 @@
 	hat_chance = 100
 	wander = 0
 	trade_categories_by_name =  list("weapon_cov")
+	interact_screen = 2
 
 /mob/living/simple_animal/npc/kig_yar/ore
 	npc_job_title = "NPC Kig'Yar ore trader"
 	wander = 0
 	trade_categories_by_name =  list("ore")
+	interact_screen = 2
 
 /mob/living/simple_animal/npc/kig_yar/crops
 	npc_job_title = "NPC Kig'Yar crops trader"
 	wander = 0
 	trade_categories_by_name =  list("crops")
+	interact_screen = 2

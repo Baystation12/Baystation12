@@ -167,6 +167,9 @@
 		var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 		if(!cube.wrapped)
 			cube.Expand()
+	else if(istype(O, /obj/machinery/autosurgeon))
+		var/obj/machinery/autosurgeon/A = O
+		A.dirtiness = 0
 
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))

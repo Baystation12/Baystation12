@@ -1,60 +1,76 @@
-<h3>Interacting with <b>{{:data.npc_name}}</b></h3>
-<h2>You are currently holding:</h2>
-<div class='block'>
-	<div class="itemLabel" style="width:20%;">-</div>
-	<div class="itemLabel" style="width:50%;">Name</div>
-	<div class="itemLabel" style="width:20%;">Trader Offer</div>
-	<div class='item'>
-		<div class="itemLabel" style="width:20%;">Left hand:</div>
-		<div class="itemContentNarrow" style="width:50%;">{{:data.l_hand}}</div>
-		{{if data.l_sellable > 0}}
-			{{if data.l_is_bag}}
-				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}} (contents)</div>
-			{{else}}
-				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}}</div>
-			{{/if}}
-			<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_l' : data.l_hand, 'user' : data.user, 'worth' : data.l_hand_worth})}}</div>
-		{{else data.l_sellable < 0}}
-			{{if data.l_is_bag}}
-				<div class="itemContentNarrow" style="width:30%;">Trader does not want some of the contents!</div>
-			{{else}}
-				<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
-			{{/if}}
-		{{/if}}
-	</div>
-	<div class='item'>
-		<div class="itemLabel" style="width:20%;">Right hand:</div>
-		<div class="itemContentNarrow" style="width:50%;">{{:data.r_hand}}</div>
-		{{if data.r_sellable > 0}}
-			{{if data.r_is_bag}}
-				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}} (contents)</div>
-			{{else}}
-				<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}}</div>
-			{{/if}}
-			<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_r' : data.r_hand, 'user' : data.user, 'worth' : data.r_hand_worth})}}</div>
-		{{else data.r_sellable < 0}}
-			{{if data.r_is_bag}}
-				<div class="itemContentNarrow" style="width:30%;">Trader does not want some of the contents!</div>
-			{{else}}
-				<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
-			{{/if}}
-		{{/if}}
-	</div>
-</div>
+{{:helper.link('Talk', 'comment', {'switch_screen' : 1, 'user' : data.user}, data.interact_screen == 1 ? 'selected' : null)}}
+{{if data.can_trade}}
+	{{:helper.link('Trade Items', 'cart', {'switch_screen' : 2, 'user' : data.user}, data.interact_screen == 2 ? 'selected' : null)}}
+{{/if}}
+{{if data.can_service}}
+	{{:helper.link(data.other_services ? data.other_services : 'Other Services', data.other_services_icon ? data.other_services_icon : 'document', {'switch_screen' : 3, 'user' : data.user}, data.interact_screen == 3 ? 'selected' : null)}}
+{{/if}}
 
-<h2>NPC items for sale:</h2>
-<div class='block'>
-	<div class="itemLabel" style="width:50%;">Name</div>
-	<div class="itemLabel" style="width:20%;">Stock</div>
-	<div class="itemLabel" style="width:20%;">Price</div>
-	{{for data.interact_inventory}}
-		<div class="item">
-			<div class="itemContentNarrow" style="width:50%;">{{:value.name}}</div>
-			<div class="itemContentNarrow" style="width:20%;">{{:value.quantity}} units</div>
-			<div class="itemContentNarrow" style="width:20%;">cR-{{:value.value}}</div>
-			<div class="itemContentNarrow" style="width:10%;float:right">{{:helper.link('Buy', 'bookmark', {'buy_item' : value.name, 'user' : data.user})}}</div>
+{{if data.interact_screen == 1}}
+	<h2>{{:data.npc_name}} says:</h2>
+	<div class='block'>
+	"{{:data.greeting}}"
+	</div>
+	{{:helper.link('Ask about...', 'bookmark', {'ask_question' : 1, 'user' : data.user})}}
+	
+{{else data.interact_screen == 2}}
+	<h2>You are currently holding:</h2>
+	<div class='block'>
+		<div class="itemLabel" style="width:20%;">...</div>
+		<div class="itemLabel" style="width:50%;">Name</div>
+		<div class="itemLabel" style="width:20%;">Trader Offer</div>
+		<div class='item'>
+			<div class="itemLabel" style="width:20%;">Left hand:</div>
+			<div class="itemContentNarrow" style="width:50%;">{{:data.l_hand}}</div>
+			{{if data.l_sellable > 0}}
+				{{if data.l_is_bag}}
+					<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}} (contents)</div>
+				{{else}}
+					<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}}</div>
+				{{/if}}
+				<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_l' : data.l_hand, 'user' : data.user, 'worth' : data.l_hand_worth})}}</div>
+			{{else data.l_sellable < 0}}
+				{{if data.l_is_bag}}
+					<div class="itemContentNarrow" style="width:30%;">Trader does not want some of the contents!</div>
+				{{else}}
+					<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+				{{/if}}
+			{{/if}}
 		</div>
-	{{empty}}
-		<div class="notice">This NPC has no items for sale.</div>
-	{{/for}}
-</div> 
+		<div class='item'>
+			<div class="itemLabel" style="width:20%;">Right hand:</div>
+			<div class="itemContentNarrow" style="width:50%;">{{:data.r_hand}}</div>
+			{{if data.r_sellable > 0}}
+				{{if data.r_is_bag}}
+					<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}} (contents)</div>
+				{{else}}
+					<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}}</div>
+				{{/if}}
+				<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_r' : data.r_hand, 'user' : data.user, 'worth' : data.r_hand_worth})}}</div>
+			{{else data.r_sellable < 0}}
+				{{if data.r_is_bag}}
+					<div class="itemContentNarrow" style="width:30%;">Trader does not want some of the contents!</div>
+				{{else}}
+					<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+				{{/if}}
+			{{/if}}
+		</div>
+	</div>
+
+	<h2>NPC items for sale:</h2>
+	<div class='block'>
+		<div class="itemLabel" style="width:50%;">Name</div>
+		<div class="itemLabel" style="width:20%;">Stock</div>
+		<div class="itemLabel" style="width:20%;">Price</div>
+		{{for data.interact_inventory}}
+			<div class="item">
+				<div class="itemContentNarrow" style="width:50%;">{{:value.name}}</div>
+				<div class="itemContentNarrow" style="width:20%;">{{:value.quantity}} units</div>
+				<div class="itemContentNarrow" style="width:20%;">cR-{{:value.value}}</div>
+				<div class="itemContentNarrow" style="width:10%;float:right">{{:helper.link('Buy', 'bookmark', {'buy_item' : value.name, 'user' : data.user})}}</div>
+			</div>
+		{{empty}}
+			<div class="notice">This NPC has no items for sale.</div>
+		{{/for}}
+	</div>
+{{/if}}
