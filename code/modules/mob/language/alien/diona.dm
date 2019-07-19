@@ -9,6 +9,7 @@
 	flags = RESTRICTED
 	syllables = list("hs","zt","kr","st","sh")
 	shorthand = "RT"
+	machine_understands = FALSE
 
 /datum/language/diona/get_random_name()
 	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
