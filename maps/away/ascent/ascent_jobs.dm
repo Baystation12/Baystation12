@@ -7,6 +7,8 @@
 /decl/submap_archetype/ascent_seedship
 	descriptor = "Ascent colony ship"
 	map = ASCENT_COLONY_SHIP_NAME
+	blacklisted_species = null
+	whitelisted_species = null
 	crew_jobs = list(
 		/datum/job/submap/ascent,
 		/datum/job/submap/ascent/alate,
@@ -83,6 +85,9 @@
 	supervisors = "nobody but yourself"
 	info = "You are the Gyne of an independent Ascent vessel. Your hunting has brought you to this remote sector full of crawling primitives. Impose your will, found a new nest, and bring prosperity to your lineage."
 	outfit_type = /decl/hierarchy/outfit/job/ascent
+	blacklisted_species = null
+	whitelisted_species = null
+	loadout_allowed = FALSE
 	var/set_species_on_join = SPECIES_MANTID_GYNE
 
 /datum/job/submap/ascent/is_available(client/caller)
