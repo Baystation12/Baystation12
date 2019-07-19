@@ -24,7 +24,6 @@
 	hat_chance = 0
 
 /mob/living/simple_animal/npc/colonist/surgeon/equip_gear()
-	. = ..()
 
 	//override this so our suit and hat match
 
@@ -43,6 +42,10 @@
 	newtype = jumpsuits[index]
 	new_item = new newtype(src)
 	sprite_equip(new_item,slot_w_uniform_str)
+
+	jumpsuits = list()
+
+	. = ..()
 
 /mob/living/simple_animal/npc/colonist/doctor
 	name = "NPC Doctor"
