@@ -1,4 +1,0 @@
-author: "YodaDoge"
-delete-after: True
-changes: 
-  - bugfix: "Farmbot can now harvest plants and remove dead plants, again."

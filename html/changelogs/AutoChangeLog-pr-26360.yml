@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Female characters will now be able to use the roll down and roll sleeves verbs without their jumpsuits disappearing."
