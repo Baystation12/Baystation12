@@ -55,8 +55,9 @@
 		return
 
 	log_debug("Player: [joining] is now offsite rank: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
-	joining.mind.assigned_job = job
-	joining.mind.assigned_role = job.title
+	if(joining.mind)
+		joining.mind.assigned_job = job
+		joining.mind.assigned_role = job.title
 	joining.faction = name
 	job.current_positions++
 
