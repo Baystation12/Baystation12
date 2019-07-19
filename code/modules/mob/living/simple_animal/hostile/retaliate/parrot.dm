@@ -778,5 +778,4 @@
 	return success
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/can_pick_up(obj/item/I)
-	if(I.w_class <= parrot_isize && !I.anchored)
-		return TRUE
+	. = (Adjacent(I) && I.w_class <= parrot_isize && !I.anchored)
