@@ -43,6 +43,11 @@
 		/decl/emote/audible/adherent_ding
 	)
 
+/datum/species/vox
+	default_emotes = list(
+		/decl/emote/audible/vox_shriek
+	)
+
 /mob/living/carbon/human/set_species(var/new_species, var/default_colour = 1)
 	. = ..()
 	update_emotes()
