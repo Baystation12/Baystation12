@@ -10,6 +10,8 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	construct_state = /decl/machine_construction/default/panel_closed
+
+	var/overlay_icon = 'icons/obj/objects.dmi'
 	var/mob/living/occupant = null
 	var/charging = 0
 	var/last_overlay_state
@@ -156,7 +158,7 @@
 		icon_state = "borgcharger0"
 
 	last_overlay_state = overlay_state()
-	overlays = list(image('icons/obj/objects.dmi', overlay_state()))
+	overlays = list(image(overlay_icon, overlay_state()))
 
 /obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
 	go_in(R)
