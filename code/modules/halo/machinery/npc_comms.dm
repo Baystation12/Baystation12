@@ -1,4 +1,3 @@
-#define COMMS_REQUESTS list("halt")
 
 /obj/machinery/overmap_weapon_console/npc_comms_console
 	name = "Local Comms Console"

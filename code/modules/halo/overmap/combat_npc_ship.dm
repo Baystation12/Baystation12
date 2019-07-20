@@ -8,13 +8,13 @@
 #define ON_DEATH_MESSAGES list(\
 "FUCK! REACTOR'S CRITICAL, REPEAT: REAC-","WE'RE LOSING ATMOSPHERIC INTEGRITY, NEED IMMEDIATE ASSIS-","CRITICAL HULL INTEGRITY! WE'RE LOSing air fast ..."\
 )
-#define TARGET_LOSE_INTEREST_DELAY 2 MINUTES
+#define TARGET_LOSE_INTEREST_DELAY 5 MINUTES
 
 /obj/effect/overmap/ship/npc_ship/combat
 	name = "Combat Ship"
 	desc=  "A ship specialised for combat."
 
-	hull = 500 //Hardier than a civvie ship.
+	hull = 3000 //Hardier than a civvie ship.
 	var/atom/target
 
 	var/target_range_from = 3 //Amount of tiles away from target ship will circle.
@@ -23,7 +23,7 @@
 	messages_on_death = ON_DEATH_MESSAGES
 
 	var/next_fireat = 0
-	var/list/projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.05 SECONDS,/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/deck_gun_proj = 0.35 SECONDS) //Associated list: [projectile type]=[fire_delay]
+	var/list/projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.05 SECONDS) //Associated list: [projectile type]=[fire_delay]
 	var/target_disengage_at = 0
 
 	available_ship_requests = newlist(/datum/npc_ship_request/halt,/datum/npc_ship_request/fire_on_target)
@@ -38,15 +38,20 @@
 	if(target_disengage_at == 0)
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
-		radio_message("<span class = 'radio'>\[System\] [name]: \"I think their ship's disabled. Disengaging.\"</span>")
+		radio_message(null,"They must be disabled now! Disengaging.")
 		target = null
+		target_disengage_at = 0
 		return
 
-	var/obj/item/projectile/to_fire = pick(projectiles_to_fire)
-	var/fire_delay = projectiles_to_fire[to_fire]
-	to_fire = new to_fire(loc)
-	to_fire.launch(target)
-	next_fireat = world.time + fire_delay
+	var/cumulative_delay = 0
+	for(var/proj_type in projectiles_to_fire)
+		var/fire_delay = projectiles_to_fire[proj_type]
+		var/obj/item/projectile/proj_fired = new proj_type(loc)
+		proj_fired.launch(target)
+		cumulative_delay += fire_delay
+		sleep(fire_delay)
+
+	next_fireat = world.time + cumulative_delay
 
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
@@ -69,62 +74,81 @@
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
 	target = proj.overmap_fired_by
 	target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
+	for(var/obj/effect/overmap/ship/npc_ship/combat/ship in range(7,src))
+		if(ship.faction == faction && !(ship.target))
+			ship.target = target
+			ship.target_disengage_at = target_disengage_at
 	. = ..()
 
+/obj/item/projectile/overmap/mac/npc
+	damage = 250 //1/4 the damage of the bertels' MAC
+
+/obj/item/projectile/overmap/beam/npc
+	damage = 500
+
+//UNSC//
 /obj/effect/overmap/ship/npc_ship/combat/unsc
-	faction = "unsc"
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/prowler.dmi','code/modules/halo/icons/overmap/corvette.dmi')
+	faction = "UNSC"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc)
 
+/obj/effect/overmap/ship/npc_ship/combat/unsc/generate_ship_name()
+	. = ..()
+	name = "UNSC [name]"
 
+/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed
+	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2.5 SECONDS)
+
+/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed
+	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2 SECONDS, /obj/item/projectile/overmap/mac/npc = 15 SECONDS)
+
+//INNIE//
 /obj/effect/overmap/ship/npc_ship/combat/innie
-	faction = "innie"
+	icon = 'code/modules/halo/icons/overmap/innie_prowler.dmi'
+	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie)
 
-/datum/npc_ship_request/halt_fake
-	request_name = "Halt"
-	request_auth_levels = list(AUTHORITY_LEVEL_UNSC,AUTHORITY_LEVEL_ONI)
-
-/datum/npc_ship_request/halt_fake/do_request(var/obj/effect/overmap/ship/npc_ship/combat/ship_source,var/mob/requester)
-	ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"Slowing dow- DIE UNSC SCUM! FOR THE URF!\"</span>")
-	for(var/obj/effect/overmap/ship/npc_ship/combat/innie/ship in view(7,src))
-		ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"FOR THE URF!</span>\"")
-		ship.target = map_sectors["[requester.z]"]
-	ship_source.target = map_sectors["[requester.z]"]
+/obj/effect/overmap/ship/npc_ship/combat/innie/generate_ship_name()
 	. = ..()
+	if(prob(50))
+		name = "URF [name]"
 
-/datum/npc_ship_request/halt/innie
-	request_auth_levels = list(AUTHORITY_LEVEL_INNIE)
+/obj/effect/overmap/ship/npc_ship/combat/innie/pick_ship_icon()
+	if(!findtextEx(name,"URF"))
+		. = ..()
 
-/datum/npc_ship_request/halt/unsc
-	request_auth_levels = list(AUTHORITY_LEVEL_UNSC,AUTHORITY_LEVEL_ONI)
+/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed
+	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 1 SECONDS)
 
-/datum/npc_ship_request/fire_on_target
-	request_name = "Fire On Target"
-	request_auth_levels = list()
+/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed
+	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 0.5 SECONDS, /obj/item/projectile/overmap/mac/npc = 20 SECONDS)
 
-/datum/npc_ship_request/fire_on_target/do_request(var/obj/effect/overmap/ship/npc_ship/combat/ship_source,var/mob/requester)
-	var/user_input = input(requester,"Input target name","Target Selection")
-	if(isnull(user_input))
-		return
-	for(var/obj/object in view(7,src) + view(7,map_sectors["[requester.z]"]))
-		if(object.name == "[user_input]")
-			ship_source.target = object
-			return
+//COVENANT//
+/obj/effect/overmap/ship/npc_ship/combat/covenant
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
+	faction = "Covenant"
+	message_language = "Sangheili"
+	ship_datums = list(/datum/npc_ship/cov_patrol)
+	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov)
 
-	ship_source.radio_message(requester,"<span class = 'radio'>\[Direct Comms\] [ship_source.name]: \"We can't find any nearby object with that name. Ensure name accuracy.\"</span>")
-	if(ship_source.target)
-		ship_source.radio_message(requester,"<span class = 'radio'>\[Direct Comms\] [ship_source.name]: \"Disengaging from current target.\"</span>")
-		ship_source.target = null
+/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed
+	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.3 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)
 
-/datum/npc_ship_request/fire_on_target/unsc
-	request_name = "Fire On Target"
-	request_auth_levels = list(AUTHORITY_LEVEL_UNSC, AUTHORITY_LEVEL_ONI)
+/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed
+	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 25 SECONDS)
 
-/datum/npc_ship_request/fire_on_target/innie
-	request_name = "Fire On Target"
-	request_auth_levels = list(AUTHORITY_LEVEL_INNIE)
+/obj/effect/overmap/ship/npc_ship/combat/flood
+	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
+	messages_on_death = list("... / --- / ...")
+	faction = "Flood"
+	message_language = "Flood"
+	ship_datums = list(/datum/npc_ship/unsc_patrol)
+	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake_flood)
+
+/obj/effect/overmap/ship/npc_ship/combat/flood/load_mapfile()
+	return
 
 #undef ON_PROJECTILE_HIT_MESSAGES
 #undef ON_DEATH_MESSAGES
