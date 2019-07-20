@@ -1,6 +1,8 @@
 
 /datum/map/geminus_city
 	allowed_jobs = list(\
+		/datum/job/researchdirector,\
+		/datum/job/ONIGUARDS,\
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/geminus_innie,\
