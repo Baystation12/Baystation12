@@ -20,7 +20,7 @@
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
-
+	var/overlay_icon = 'icons/obj/power.dmi'
 	var/input_attempt = 0 			// 1 = attempting to charge, 0 = not attempting to charge
 	var/inputting = 0 				// 1 = actually inputting, 0 = not inputting
 	var/input_level = 50000 		// amount of power the SMES attempts to charge by
@@ -96,25 +96,25 @@
 	overlays.Cut()
 	if(stat & BROKEN)	return
 
-	overlays += image('icons/obj/power.dmi', "smes-op[outputting]")
+	overlays += image(overlay_icon, "smes-op[outputting]")
 
 	if(inputting == 2)
-		overlays += image('icons/obj/power.dmi', "smes-oc2")
+		overlays += image(overlay_icon, "smes-oc2")
 	else if (inputting == 1)
-		overlays += image('icons/obj/power.dmi', "smes-oc1")
+		overlays += image(overlay_icon, "smes-oc1")
 	else if (input_attempt)
-		overlays += image('icons/obj/power.dmi', "smes-oc0")
+		overlays += image(overlay_icon, "smes-oc0")
 
 	var/clevel = chargedisplay()
 	if(clevel)
-		overlays += image('icons/obj/power.dmi', "smes-og[clevel]")
+		overlays += image(overlay_icon, "smes-og[clevel]")
 
 	if(outputting == 2)
-		overlays += image('icons/obj/power.dmi', "smes-op2")
+		overlays += image(overlay_icon, "smes-op2")
 	else if (outputting == 1)
-		overlays += image('icons/obj/power.dmi', "smes-op1")
+		overlays += image(overlay_icon, "smes-op1")
 	else
-		overlays += image('icons/obj/power.dmi', "smes-op0")
+		overlays += image(overlay_icon, "smes-op0")
 
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))

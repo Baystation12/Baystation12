@@ -226,5 +226,6 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 /obj/machinery/power/smes/buildable/power_shuttle/ascent
 	name = "mantid battery"
 	desc = "Some kind of strange alien SMES technology."
-	icon = 'icons/obj/machines/power/mantid_smes.dmi'
+	icon = 'icons/obj/machines/power/mantid_smes.dmi'	
+	overlay_icon = 'icons/obj/machines/power/mantid_smes.dmi'
 	construct_state = /decl/machine_construction/default/no_deconstruct
