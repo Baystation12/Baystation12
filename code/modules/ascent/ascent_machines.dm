@@ -3,7 +3,6 @@ MANTIDIFY(/obj/machinery/atmospherics/unary/vent_pump/on, "mantid atmosphere out
 MANTIDIFY(/obj/machinery/atmospherics/unary/vent_scrubber/on, "mantid atmosphere intake", "scrubber")
 MANTIDIFY(/obj/machinery/hologram/holopad/longrange, "mantid holopad", "holopad")
 MANTIDIFY(/obj/machinery/optable, "mantid operating table", "operating table")
-MANTIDIFY(/obj/machinery/recharge_station, "mantid recharging station", "recharging station")
 MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 /obj/machinery/optable/ascent
@@ -40,6 +39,10 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	scrubbing_gas -= "methyl_bromide"
 
 /obj/machinery/recharge_station/ascent
+	name = "mantid recharging dock"
+	desc = "An oddly organic aperture stuffed with power connectors."
+	icon = 'icons/obj/machines/mantid_charger.dmi'
+	overlay_icon = 'icons/obj/machines/mantid_charger.dmi'
 	construct_state = /decl/machine_construction/default/no_deconstruct
 	base_type = /obj/machinery/recharge_station
 
