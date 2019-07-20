@@ -452,7 +452,7 @@ This function completely restores a damaged organ to perfect condition.
 	if(damage <= 0)
 		return
 
-	if(BP_IS_CRYSTAL(src))
+	if(BP_IS_CRYSTAL(src) && (damage >= 15 || prob(1)))
 		type = SHATTER
 		playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
 
