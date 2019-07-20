@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Blob resistance values have been tweaked. Cores are now weak to fire and laser, and strong to brute, like green blob."
+  - tweak: "Blob shielding mass regeneration rate has been very slightly reduced."
