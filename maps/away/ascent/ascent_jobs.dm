@@ -88,7 +88,19 @@
 	blacklisted_species = null
 	whitelisted_species = null
 	loadout_allowed = FALSE
+	var/requires_supervisor = FALSE
 	var/set_species_on_join = SPECIES_MANTID_GYNE
+
+/datum/job/submap/ascent/is_position_available()
+	. = ..()
+	if(. && requires_supervisor)
+		for(var/mob/M in GLOB.player_list)
+			if(!M.client || !M.mind || !M.mind.assigned_job || M.mind.assigned_job.title != requires_supervisor)
+				continue
+			var/datum/job/submap/ascent/ascent_job = M.mind.assigned_job
+			if(istype(ascent_job) && ascent_job.owner == owner)
+				return TRUE
+		return FALSE
 
 /datum/job/submap/ascent/is_available(client/caller)
 	. = ..()
@@ -135,6 +147,7 @@
 	info = "You are an Alate of an independent Ascent vessel. Your Gyne has directed you to this remote sector full of crawling primitives. Follow her instructions and bring prosperity to your nest-lineage."
 	set_species_on_join = SPECIES_MANTID_ALATE
 	outfit_type = /decl/hierarchy/outfit/job/ascent/tech
+	requires_supervisor = "Ascent Gyne"
 
 /datum/job/submap/ascent/drone
 	title = "Ascent Drone"
@@ -142,6 +155,7 @@
 	total_positions = 2
 	info = "You are a Machine Intelligence of an independent Ascent vessel. The Gyne you assist, and her children, have wandered into this sector full of primitive bioforms. Try to keep them alive, and assist where you can."
 	set_species_on_join = /mob/living/silicon/robot/flying/ascent
+	requires_supervisor = "Ascent Gyne"
 
 /*
 /datum/job/submap/ascent/msw
