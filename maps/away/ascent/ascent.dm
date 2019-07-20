@@ -21,6 +21,7 @@
 	name = ASCENT_COLONY_SHIP_NAME
 	desc = "Wake signature indicates a small to medium sized vessel of unknown design."
 	vessel_mass = 6500
+	fore_dir = WEST
 	max_speed = 1/(1 SECOND)
 	initial_restricted_waypoints = list(
 		"Trichoptera" = list("nav_hangar_ascent_one"),
