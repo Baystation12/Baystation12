@@ -29,10 +29,10 @@
 	. = ..()
 	if(. && istype(job, /datum/job/submap/ascent))
 		var/datum/job/submap/ascent/ascent_job = job
-		if(ascent_job.set_species_on_join == SPECIES_MANTID_GYNE && !is_alien_whitelisted(joining, SPECIES_MANTID_GYNE))
+		if(ascent_job.set_species_on_join == SPECIES_MANTID_GYNE && !is_species_whitelisted(joining, SPECIES_MANTID_GYNE))
 			to_chat(joining, SPAN_WARNING("You are not whitelisted to play a [SPECIES_MANTID_GYNE]."))
 			return FALSE
-		if(ascent_job.set_species_on_join == SPECIES_MONARCH_QUEEN && !is_alien_whitelisted(joining, SPECIES_NABBER))
+		if(ascent_job.set_species_on_join == SPECIES_MONARCH_QUEEN && !is_species_whitelisted(joining, SPECIES_NABBER))
 			to_chat(joining, SPAN_WARNING("You must be whitelisted to play a [SPECIES_NABBER] to join as a [SPECIES_MONARCH_QUEEN]."))
 			return FALSE
 
@@ -95,9 +95,9 @@
 	if(.)
 		switch(set_species_on_join)
 			if(SPECIES_MANTID_GYNE)
-				return is_alien_whitelisted(caller.mob, SPECIES_MANTID_GYNE)
+				. = is_species_whitelisted(caller.mob, SPECIES_MANTID_GYNE)
 			if(SPECIES_MONARCH_QUEEN)
-				return is_alien_whitelisted(caller.mob, SPECIES_NABBER)
+				. = is_species_whitelisted(caller.mob, SPECIES_NABBER)
 
 /datum/job/submap/ascent/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 
