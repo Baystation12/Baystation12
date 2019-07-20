@@ -911,6 +911,11 @@
 	icon_state = "mining"
 	req_access = list(list(access_mining, access_explorer, access_xenoarch))
 
+/area/quartermaster/expedition/atmos
+	name = "\improper Hangar Atmospheric Storage"
+	icon_state = "mining"
+	req_access = list(list(access_mining, access_explorer, access_xenoarch))
+
 /area/quartermaster/exploration
 	name = "\improper Exploration Equipment"
 	icon_state = "exploration"
