@@ -9885,6 +9885,9 @@
 /obj/machinery/door/airlock/chaplain{
 	name = "Chapel"
 	},
+/obj/machinery/holosign/chapel{
+	id_tag = "chapel"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/chapel/main)
 "vs" = (
@@ -20135,6 +20138,11 @@
 /obj/machinery/light_switch{
 	pixel_x = 24;
 	pixel_y = 18
+	},
+/obj/machinery/button/holosign{
+	id_tag = "chapel";
+	pixel_x = -10;
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)

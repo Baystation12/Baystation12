@@ -62,6 +62,11 @@
 	desc = "Small wall-mounted holographic projector. This one reads SURGERY."
 	on_icon = "surgery"
 
+/obj/machinery/holosign/chapel
+	name = "chapel holosign"
+	desc = "Small wall-mounted holographic projector. This one reads SERVICE."
+	on_icon = "service"
+
 ////////////////////SWITCH///////////////////////////////////////
 /obj/machinery/button/holosign
 	name = "holosign switch"
