@@ -102,7 +102,7 @@
 /obj/item/device/flashlight/covenant
 	name = "luminator"
 	icon = 'code/modules/halo/covenant/tools.dmi'
-	icon_state = "vest"
+	icon_state = "luminator"
 
 
 

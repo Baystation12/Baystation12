@@ -19,6 +19,7 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	var/name = "Unknown faction"
 	var/points = 0
 	var/list/all_objectives = list()
+	var/list/objectives_without_targets = list()
 	var/list/assigned_minds = list()
 	var/list/living_minds = list()
 	var/max_points = 0
@@ -29,6 +30,7 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	var/list/active_quests = list()
 	var/list/complete_quests = list()
 	var/datum/job/commander_job		//this needs to be set in the gamemode code
+	var/commander_titles = list()	//checks in order of priority for objective purposes
 	var/has_flagship = 0
 	var/flagship_slipspaced = 0
 	var/has_base = 0
@@ -67,12 +69,28 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 			break*/
 
 /datum/faction/proc/get_commander(var/datum/mind/check_mind)
+	if(!commander_job)
+		for(var/title in commander_titles)
+			commander_job = job_master.occupations_by_title[title]
+			if(commander_job)
+				break
+
 	if(commander_job)
 		for(var/mind in commander_job.assigned_players)
 			return mind
 
 /datum/faction/proc/get_objective_delivery_areas()
-	return list()
+	var/list/found_areas = list()
+	var/obj/effect/overmap/delivery_target = get_base()
+	if(!delivery_target)
+		delivery_target = get_flagship()
+
+	if(delivery_target)
+		for(var/cur_area in typesof(delivery_target.parent_area_type) - delivery_target.parent_area_type)
+			var/area/A = locate(cur_area)
+			found_areas.Add(A)
+
+	return found_areas
 
 
 
@@ -82,6 +100,7 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	name = "Covenant"
 	var/list/objective_types = list()
 	enemy_factions = list("UNSC","Insurrection")
+	commander_titles = list("Sangheili Shipmaster")
 
 /datum/faction/covenant/get_commander(var/datum/mind/check_mind)
 
@@ -91,11 +110,13 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	. = ..()
 
 
+
 /* UNSC */
 
 /datum/faction/unsc
 	name = "UNSC"
 	enemy_factions = list("Covenant","Insurrection")
+	commander_titles = list("UNSC Bertels Commanding Officer")
 
 /datum/faction/unsc/get_commander(var/datum/mind/check_mind)
 
@@ -105,11 +126,13 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	. = ..()
 
 
+
 /* Insurrection */
 
 /datum/faction/insurrection
 	name = "Insurrection"
 	enemy_factions = list("UNSC","Covenant")
+	commander_titles = list("Insurrectionist Commander")
 
 /datum/faction/insurrection/get_commander(var/datum/mind/check_mind)
 

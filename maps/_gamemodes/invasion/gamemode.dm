@@ -9,9 +9,8 @@
 	var/faction_safe_time = 10 MINUTES
 	var/faction_safe_duration = 10 MINUTES
 	var/safe_expire_warning = 0
-	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection, /datum/faction/human_civ)
+	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection)
 	var/list/overmap_hide = list()
-	var/list/objectives_specific_target = list()
 	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
 	var/end_conditions_required = 2
@@ -34,16 +33,11 @@
 
 	setup_objectives()
 
-	//setup a couple of other objectives
-	for(var/datum/faction/F in factions)
-		for(var/datum/objective/objective in F.all_objectives)
-			if(objective.find_specific_target && !objective.target)
-				objectives_specific_target += objective
-
 /datum/game_mode/outer_colonies/proc/setup_factions()
 	//setup factions
 	for(var/faction_type in factions)
 		var/datum/faction/F = GLOB.factions_by_type[faction_type]
+		factions -= faction_type
 		factions.Add(F)
 
 /datum/game_mode/outer_colonies/proc/setup_objectives()
@@ -51,12 +45,12 @@
 	//setup covenant objectives
 	var/list/objective_types = list(\
 		/datum/objective/protect_ship/covenant,\
-		/datum/objective/protect/covenant_leader,\
+		/datum/objective/protect/leader,\
 		/datum/objective/glass_colony,\
 		///datum/objective/retrieve/steal_ai,
 		/datum/objective/retrieve/nav_data,\
-		/datum/objective/destroy_ship/covenant,
-		/datum/objective/destroy_ship/covenant_odp,
+		/datum/objective/destroy_ship/covenant_unsc,
+		/datum/objective/destroy_ship/base/covenant_odp,
 		//datum/objective/colony_capture/cov,
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
@@ -66,11 +60,11 @@
 	objective_types = list(\
 		/datum/objective/protect_ship/unsc,\
 		/datum/objective/retrieve/artifact/unsc,\
-		/datum/objective/protect/unsc_leader,\
+		/datum/objective/protect/leader,\
 		/datum/objective/capture_innies,\
 		/datum/objective/retrieve/steal_ai/cole_protocol,\
 		/datum/objective/retrieve/nav_data/cole_protocol,\
-		/datum/objective/destroy_ship/unsc,\
+		/datum/objective/destroy_ship/unsc_cov,\
 		/datum/objective/colony_capture/unsc,\
 		/datum/objective/protect_colony)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
@@ -79,9 +73,9 @@
 
 	//setup innie objectives
 	objective_types = list(\
-		/datum/objective/protect/innie_leader,\
-		/datum/objective/destroy_ship/innie,\
-		/datum/objective/assassinate/kill_unsc_leader,\
+		/datum/objective/protect/leader,\
+		/datum/objective/destroy_ship/innie_unsc,\
+		/datum/objective/assassinate/leader/innies_unsc,\
 		///datum/objective/recruit_pirates,
 		///datum/objective/recruit_scientists,
 		/datum/objective/colony_capture/innie,\
@@ -93,14 +87,20 @@
 	GLOB.HUMAN_CIV.base_desc = "human colony"
 
 /datum/game_mode/outer_colonies/handle_latejoin(var/mob/living/carbon/human/character)
-	for(var/datum/objective/objective in objectives_specific_target)
-		if(objective.check_target(character.mind))
-			objectives_specific_target -= objective
+	for(var/datum/faction/F in factions)
+		for(var/datum/objective/objective in F.objectives_without_targets)
+			if(objective.find_target())
+				F.objectives_without_targets -= objective
+
 	return 1
 
 /datum/game_mode/outer_colonies/post_setup(var/announce = 0)
 	. = ..()
 	faction_safe_time = world.time + faction_safe_duration
+	for(var/datum/faction/F in factions)
+		for(var/datum/objective/objective in F.objectives_without_targets)
+			if(objective.find_target())
+				F.objectives_without_targets -= objective
 
 /datum/game_mode/outer_colonies/check_finished()
 
@@ -112,8 +112,8 @@
 
 	for(var/datum/faction/F in factions)
 
-		//check if flagship destroyed
 		if(F.has_flagship)
+			//currently only the covenant have has_flagship = 1, but this can be tweaked as needed
 			var/obj/effect/overmap/flagship = F.get_flagship()
 			if(!flagship || !flagship.loc)
 				if(F.flagship_slipspaced || flagship.slipspace_status == 2)
@@ -124,8 +124,11 @@
 					round_end_reasons += "the [F.name] ship has been destroyed"
 
 		if(F.has_base)
+			//currently no factions have has_base = 1, but this can be tweaked as needed (see: UNSC cassius station, innie rabbit hole base)
 			var/obj/effect/overmap/base = F.get_base()
-			if(base)
+			if(!base || !base.loc)
+				round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been destroyed"
+			else if(base)
 				if(base.nuked)
 					round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been nuked"
 				if(base.glassed)
@@ -208,7 +211,8 @@
 					capture_objective = O
 			else if(O.capture_score > capture_objective.capture_score)
 				capture_objective = O
-	capture_objective.is_winner = 1
+	if(capture_objective)
+		capture_objective.is_winner = 1
 
 	//work out faction points
 	var/datum/faction/winning_faction
@@ -244,6 +248,7 @@
 		text += "<h4>Total [faction.name] Score: [faction.points] points</h4><br>"
 
 	//these victory tiers will need balancing depending on objectives and points
+	var/win_ratio
 	if(second_faction.points == winning_faction.points)
 		text += "<h2>Tie! [winning_faction.name] and [second_faction.name] ([winning_faction.points] points)</h2>"
 	else if(all_points <= 0)
@@ -255,7 +260,7 @@
 			all_points = winning_faction.max_points
 
 		var/win_type = "Pyrrhic"
-		var/win_ratio = winning_faction.points/all_points
+		win_ratio = winning_faction.points/all_points
 		if(win_ratio <= 0.34)
 			//this should never or rarely happen
 			win_type = "Pyrrhic"
@@ -268,7 +273,7 @@
 		else
 			win_type = "Supreme"
 
-		text += "<h2>[win_type] [winning_faction.name] Victory!</h2>"
+		text += "<h2>[win_type] [winning_faction.name] Victory! ([round(100*win_ratio)]% of possible score)</h2>"
 	to_world(text)
 
 	if(clients > 0)
@@ -308,8 +313,13 @@
 				break
 
 /datum/game_mode/outer_colonies/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
+
+	var/obj/effect/overmap/flagship
 	var/datum/faction/F = GLOB.factions_by_name[ship.faction]
-	if((F && F == F.get_flagship()) || (!F && F.has_flagship))
+	if(F)
+		flagship = F.get_flagship()
+
+	if(flagship == ship)
 		//record a round end condition
 		F.flagship_slipspaced = 1
 

@@ -32,6 +32,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
 	spawn_positions = 1
+	track_players = 1
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
