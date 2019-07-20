@@ -190,7 +190,7 @@
 	desc = "An incredibly hot beam of pure light"
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
 	icon_state = "pulse_mega_proj"
-	damage = 1500
+	damage = 2000
 	ship_damage_projectile = /obj/item/projectile/projector_laser_damage_proj
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/projector_laser_proj
