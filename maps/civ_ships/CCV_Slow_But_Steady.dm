@@ -13,6 +13,3 @@
 
 	map_bounds = list(7,49,73,27)
 
-/area/om_ships/caelum
-	name = "CCV Slow But Steady"
-	has_gravity = 0
