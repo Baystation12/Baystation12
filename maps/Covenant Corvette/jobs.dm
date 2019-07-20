@@ -30,6 +30,7 @@
 	department_flag = COM
 	total_positions = 1
 	spawn_positions = 1
+	track_players = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
 	access = list(240,250)

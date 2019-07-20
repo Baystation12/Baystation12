@@ -1,25 +1,9 @@
 
 /* UNSC */
 
-/datum/objective/protect/unsc_leader
-	short_text = "Protect the UNSC commander"
-	explanation_text = "Protect the UNSC commander. Without a strong chain of command, everything is lost."
-	lose_points = 50
-	find_specific_target = 1
-
-/datum/objective/protect/unsc_leader/find_target()
-	target = GLOB.UNSC.get_commander()
-	if(target)
-		explanation_text = "Protect [target.current.real_name], the [target.assigned_role]."
-	return target
-
 /datum/objective/protect_ship/unsc
 	short_text = "Protect the UNSC warship"
 	explanation_text = "Although cheaper than a MJOLNIR suit, even Spartans need a way to leave atmosphere. Protect the UNSC ship."
-
-/datum/objective/protect_ship/unsc/find_target()
-	target_ship = GLOB.UNSC.get_flagship()
-	return target_ship
 
 //see objectives_cov.dm
 /datum/objective/retrieve/nav_data/cole_protocol
@@ -78,14 +62,11 @@
 		return 0
 	return 1
 
-/datum/objective/destroy_ship/unsc
+/datum/objective/destroy_ship/unsc_cov
 	short_text = "Destroy the Covenant warship"
 	explanation_text = "We cannot allow any Covenant warship to escape to threaten Earth. Take them out before they can retreat from the system."
 	slipspace_affected = 1
-
-/datum/objective/destroy_ship/unsc/find_target()
-	target_ship = GLOB.COVENANT.get_flagship()
-	return target_ship
+	target_faction_name = "Covenant"
 
 /datum/objective/colony_capture/unsc
 	short_text = "Hold the UEG colony"

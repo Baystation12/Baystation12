@@ -3,51 +3,20 @@
 
 /* COVENANT */
 
-/datum/objective/protect/covenant_leader
-	short_text = "Protect Covenant leader"
-	explanation_text = "Protect the Covenant Commander. Their loss is a terrible setback to the Great Journey."
-	lose_points = 50
-	slipspace_affected = 1
-
-/datum/objective/protect/covenant_leader/find_target()
-	target = GLOB.COVENANT.get_commander()
-	if(target)
-		explanation_text = "Protect [target.current.real_name], the [target.assigned_role]."
-	return target
-
-/datum/objective/protect/protect_cov_leader/check_completion()
-	if(override > 0)
-		return 1
-	else if(override < 0)
-		return 0
-	return ..()
-
-/datum/objective/destroy_ship/covenant
+/datum/objective/destroy_ship/covenant_unsc
 	short_text = "Destroy the human warship"
 	explanation_text = "The human weapons are crude but occasionally effective. Eliminate any warships in the area."
-	slipspace_affected = 1
+	target_faction_name = "UNSC"
 
-/datum/objective/destroy_ship/covenant/find_target()
-	target_ship = GLOB.UNSC.get_flagship()
-	return target_ship
-
-/datum/objective/destroy_ship/covenant_odp
+/datum/objective/destroy_ship/base/covenant_odp
 	short_text = "Destroy the human defence platform"
 	explanation_text = "We require safe access to the human worlds. Take out their defence platforms!"
-	slipspace_affected = 1
-
-/datum/objective/destroy_ship/covenant_odp/find_target()
-	target_ship = GLOB.UNSC.get_base()
-	return target_ship
+	target_faction_name = "UNSC"
 
 /datum/objective/protect_ship/covenant
 	short_text = "Protect Covenant ship"
 	explanation_text = "Your ship is your only route back to Covenant space. Do not allow it to be destroyed."
 	slipspace_affected = 1
-
-/datum/objective/protect_ship/covenant/find_target()
-	target_ship = GLOB.COVENANT.get_flagship()
-	return target_ship
 
 /datum/objective/retrieve/steal_ai
 	short_text = "Capture human construct"
@@ -55,10 +24,6 @@
 	points_per_item = 150
 	win_points = 150
 	slipspace_affected = 1
-
-/datum/objective/retrieve/steal_ai/find_target()
-	delivery_areas = GLOB.COVENANT.get_objective_delivery_areas()
-	return delivery_areas.len
 
 /datum/objective/retrieve/steal_ai/update_points()
 	items_retrieved = 0
@@ -72,10 +37,6 @@
 	short_text = "Retrieve the Forerunner artifact"
 	explanation_text = "The humans are hiding a Forerunner artifact somewhere in this system. Locate it and bring it to High Charity."
 	slipspace_affected = 1
-
-/datum/objective/retrieve/artifact/find_target()
-	delivery_areas = GLOB.COVENANT.get_objective_delivery_areas()
-	return delivery_areas.len
 
 /datum/objective/retrieve/artifact/update_points()
 	items_retrieved = 0

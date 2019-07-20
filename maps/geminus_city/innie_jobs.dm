@@ -51,6 +51,7 @@
 	department_flag = COM
 	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
+	track_players = 1
 	total_positions = 1
 	spawn_positions = 1
 	access = list(access_innie, access_innie_boss)
