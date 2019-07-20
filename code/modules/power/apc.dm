@@ -882,14 +882,13 @@
 
 /obj/machinery/power/apc/proc/force_update_channels()
 	autoflag = -1 // This clears state, forcing a full recalculation
-	update_channels()
+	update_channels(TRUE)
 	update()
 	queue_icon_update()
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
-	src.update()
-	update_icon()
+	force_update_channels()
 
 /obj/machinery/power/apc/get_power_usage()
 	if(autoflag)
@@ -970,7 +969,7 @@
 	else if (last_ch != charging)
 		queue_icon_update()
 
-/obj/machinery/power/apc/proc/update_channels()
+/obj/machinery/power/apc/proc/update_channels(suppress_alarms = FALSE)
 	// Allow the APC to operate as normal if the cell can charge
 	if(charging && longtermpower < 10)
 		longtermpower += 1
@@ -979,12 +978,13 @@
 	var/obj/item/weapon/cell/cell = get_cell()
 	var/percent = cell && cell.percent()
 
-	if(!cell || shorted || (stat & NOPOWER))
+	if(!cell || shorted || (stat & NOPOWER) || !operating)
 		if(autoflag != 0)
 			equipment = autoset(equipment, 0)
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
-			power_alarm.triggerAlarm(loc, src)
+			if(!suppress_alarms)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
 	else if((percent > AUTO_THRESHOLD_LIGHTING) || longtermpower >= 0)              // Put most likely at the top so we don't check it last, effeciency 101
 		if(autoflag != 3)
@@ -998,14 +998,16 @@
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
-			power_alarm.triggerAlarm(loc, src)
+			if(!suppress_alarms)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(percent <= AUTO_THRESHOLD_EQUIPMENT)        // <25%, turn off lighting & equipment
 		if(autoflag != 1)
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
-			power_alarm.triggerAlarm(loc, src)
+			if(!suppress_alarms)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 1
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
