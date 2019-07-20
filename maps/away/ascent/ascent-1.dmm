@@ -1156,12 +1156,6 @@
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
-"cM" = (
-/obj/machinery/atmospherics/unary/engine{
-	dir = 8
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/ship/ascent/hydroponics_port)
 "cN" = (
 /turf/simulated/wall/ascent,
 /area/ship/ascent/shuttle_port)
@@ -4535,14 +4529,14 @@
 	},
 /turf/simulated/wall/ascent,
 /area/ship/ascent/fore_hallway)
-"lK" = (
-/obj/machinery/hologram/holopad/longrange/ascent,
-/turf/simulated/floor/tiled/ascent,
-/area/ship/ascent/shuttle_port)
-"AM" = (
+"OP" = (
 /obj/machinery/hologram/holopad/longrange/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
+"TJ" = (
+/obj/machinery/hologram/holopad/longrange/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
 
 (1,1,1) = {"
 aa
@@ -11212,7 +11206,7 @@ aa
 ik
 cQ
 fr
-lK
+TJ
 gT
 cQ
 dV
@@ -12770,7 +12764,7 @@ aa
 ad
 aB
 cT
-AM
+OP
 eJ
 ae
 gS
@@ -15961,7 +15955,7 @@ aa
 aa
 aa
 cA
-cM
+ar
 aa
 aa
 aa
