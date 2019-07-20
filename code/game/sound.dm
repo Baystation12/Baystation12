@@ -92,6 +92,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0
+	
+	S.volume *= get_sound_volume_multiplier()
 
 	if(isturf(turf_source))
 		// 3D sounds, the technology is here!

@@ -133,7 +133,7 @@
 			b_loss = 60
 			f_loss = 60
 
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			if (get_sound_volume_multiplier() >= 0.2)
 				ear_damage += 30
 				ear_deaf += 120
 			if (prob(70))
@@ -141,7 +141,7 @@
 
 		if(3.0)
 			b_loss = 30
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			if (get_sound_volume_multiplier() >= 0.2)
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50))
@@ -1703,3 +1703,8 @@
 
 /mob/living/carbon/human/get_footstep(var/footstep_type)
 	. = species.get_footstep(src, footstep_type) || ..()
+
+/mob/living/carbon/human/get_sound_volume_multiplier()
+	. = ..()
+	for(var/obj/item/clothing/ears/C in list(l_ear, r_ear))
+		. = min(., C.volume_multiplier)
