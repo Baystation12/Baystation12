@@ -54,6 +54,38 @@
 		LANGUAGE_NABBER           = TRUE
 	)
 
+// Copypasted from repair bot - todo generalize this step.
+/obj/item/weapon/robot_module/flying/ascent/finalize_synths()
+	. = ..()
+	var/datum/matter_synth/metal/metal =       locate() in synths
+	var/datum/matter_synth/glass/glass =       locate() in synths
+	var/datum/matter_synth/plasteel/plasteel = locate() in synths
+	var/datum/matter_synth/wire/wire =         locate() in synths
+
+	for(var/thing in list(
+		 /obj/item/stack/material/cyborg/steel,
+		 /obj/item/stack/material/cyborg/aluminium,
+		 /obj/item/stack/material/rods/cyborg,
+		 /obj/item/stack/tile/floor/cyborg,
+		 /obj/item/stack/material/cyborg/glass/reinforced
+		))
+		var/obj/item/stack/stack = locate(thing) in equipment
+		LAZYDISTINCTADD(stack.synths, metal)
+
+	for(var/thing in list(
+		 /obj/item/stack/material/cyborg/glass/reinforced,
+		 /obj/item/stack/material/cyborg/glass
+		))
+		var/obj/item/stack/stack = locate(thing) in equipment
+		LAZYDISTINCTADD(stack.synths, glass)
+
+	var/obj/item/stack/cable_coil/cyborg/C = locate() in equipment
+	C.synths = list(wire)
+
+	var/obj/item/stack/material/cyborg/plasteel/PL = locate() in equipment
+	PL.synths = list(plasteel)
+	. = ..()
+
 /obj/item/weapon/robot_module/flying/ascent/Initialize()
 	for(var/decl/hierarchy/skill/skill in GLOB.skills)
 		skills[skill.type] = SKILL_EXPERT
