@@ -23,6 +23,10 @@
 	take_damage(damage)
 	return 1
 
+/obj/structure/proc/mob_breakout(var/mob/living/escapee)
+	set waitfor = FALSE
+	return FALSE
+
 /obj/structure/proc/take_damage(var/damage)
 	return
 
