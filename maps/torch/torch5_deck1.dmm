@@ -14670,6 +14670,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod12/station)
+"bNL" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/fore)
 "bOb" = (
 /obj/machinery/status_display{
 	pixel_x = 32;
@@ -16215,6 +16221,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
+/obj/structure/flora/pottedplant/minitree,
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "dnb" = (
@@ -24407,6 +24414,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "mDb" = (
@@ -24532,7 +24542,6 @@
 	pixel_x = 6;
 	pixel_y = -24
 	},
-/obj/structure/flora/pottedplant/minitree,
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
@@ -31265,6 +31274,9 @@
 /area/security/detectives_office)
 "vJO" = (
 /obj/structure/bed/chair/padded/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "vMm" = (
@@ -31821,6 +31833,9 @@
 /obj/machinery/camera/network/security{
 	c_tag = "Security Wing - Lobby";
 	dir = 2
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
@@ -42799,7 +42814,7 @@ atE
 atE
 atE
 aqi
-pIA
+bNL
 ybv
 cGB
 wcQ
