@@ -65,7 +65,9 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
 /area/ship/ascent/hydroponics_port)
 "as" = (
 /turf/simulated/floor/tiled/ascent,
@@ -1514,12 +1516,6 @@
 /obj/machinery/light/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
-"dJ" = (
-/obj/machinery/light/ascent{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/ascent,
-/area/ship/ascent/shuttle_port)
 "dK" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/cable/cyan{
@@ -2233,6 +2229,7 @@
 	dir = 1;
 	level = 2
 	},
+/obj/structure/window/phoronreinforced,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
 "eS" = (
@@ -2244,6 +2241,9 @@
 /area/ship/ascent/shuttle_starboard)
 "eT" = (
 /obj/machinery/atmospherics/unary/vent_pump/on/ascent,
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "eU" = (
@@ -3231,7 +3231,12 @@
 /obj/machinery/ion_engine{
 	dir = 1
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
 /area/ship/ascent/shuttle_starboard)
 "gT" = (
 /obj/effect/catwalk_plated/ascent,
@@ -3297,7 +3302,9 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
 /area/ship/ascent/hydroponics_starboard)
 "hb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3322,7 +3329,9 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
 /area/ship/ascent/engineering)
 "he" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -3762,7 +3771,10 @@
 /area/ship/ascent/shuttle_port)
 "ik" = (
 /obj/machinery/ion_engine,
-/turf/simulated/wall/r_wall/prepainted,
+/obj/structure/window/phoronreinforced,
+/turf/simulated/floor/ascent{
+	initial_gas = newlist()
+	},
 /area/ship/ascent/shuttle_port)
 "il" = (
 /obj/machinery/light/ascent,
@@ -3984,6 +3996,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/structure/window/phoronreinforced,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
 "iJ" = (
@@ -4010,6 +4023,7 @@
 	dir = 4;
 	pixel_x = -24
 	},
+/obj/structure/window/phoronreinforced,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
 "iM" = (
@@ -4017,6 +4031,9 @@
 /obj/machinery/alarm/ascent{
 	dir = 8;
 	pixel_x = 24
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
@@ -4037,6 +4054,9 @@
 /obj/machinery/alarm/ascent{
 	dir = 4;
 	pixel_x = -24
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
@@ -4114,22 +4134,21 @@
 /area/ship/ascent/shuttle_port)
 "iY" = (
 /obj/structure/table/rack/dark,
-/turf/simulated/floor/tiled/ascent,
-/area/ship/ascent/shuttle_starboard)
-"iZ" = (
-/obj/machinery/light/ascent,
-/obj/structure/table/rack/dark,
+/obj/structure/window/phoronreinforced,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
 "ja" = (
-/obj/machinery/light/ascent{
+/obj/structure/table/rack/dark,
+/obj/structure/window/phoronreinforced{
 	dir = 1
 	},
-/obj/structure/table/rack/dark,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "jb" = (
 /obj/structure/table/rack/dark,
+/obj/machinery/light/ascent{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "jc" = (
@@ -4160,6 +4179,9 @@
 "je" = (
 /obj/machinery/alarm/ascent{
 	pixel_y = 24
+	},
+/obj/machinery/light/ascent{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
@@ -4529,12 +4551,27 @@
 	},
 /turf/simulated/wall/ascent,
 /area/ship/ascent/fore_hallway)
-"OP" = (
+"Ex" = (
+/obj/structure/table/rack/dark,
+/obj/machinery/light/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"Jx" = (
+/obj/machinery/hologram/holopad/longrange/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"QJ" = (
+/obj/structure/window/phoronreinforced,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
+"RI" = (
 /obj/machinery/hologram/holopad/longrange/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
-"TJ" = (
-/obj/machinery/hologram/holopad/longrange/ascent,
+"WI" = (
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 
@@ -10448,7 +10485,7 @@ aa
 aa
 ab
 ab
-ae
+QJ
 gS
 aa
 cL
@@ -10472,7 +10509,7 @@ hZ
 dT
 aa
 ik
-cQ
+WI
 cN
 cN
 aa
@@ -10570,7 +10607,7 @@ aa
 ab
 ab
 ae
-ae
+QJ
 gS
 aa
 cL
@@ -10594,7 +10631,7 @@ ic
 hu
 aa
 ik
-cQ
+WI
 cQ
 cN
 cN
@@ -10716,7 +10753,7 @@ cy
 cy
 aa
 cN
-cQ
+WI
 cQ
 cQ
 cN
@@ -10814,7 +10851,7 @@ ab
 fw
 ae
 ae
-iY
+Ex
 ab
 aa
 ah
@@ -10936,7 +10973,7 @@ ao
 ba
 jS
 aR
-iZ
+iY
 ab
 aa
 ah
@@ -10960,7 +10997,7 @@ hY
 hu
 aa
 cN
-dJ
+WI
 cQ
 cQ
 gT
@@ -11180,7 +11217,7 @@ au
 eK
 ae
 bC
-ae
+QJ
 gS
 aa
 ah
@@ -11204,9 +11241,9 @@ cy
 cy
 aa
 ik
-cQ
+WI
 fr
-TJ
+Jx
 gT
 cQ
 dV
@@ -12764,9 +12801,9 @@ aa
 ad
 aB
 cT
-OP
+RI
 eJ
-ae
+QJ
 gS
 aa
 cP
@@ -12790,7 +12827,7 @@ jH
 dU
 aa
 ik
-cQ
+WI
 iw
 gT
 jj
@@ -13010,7 +13047,7 @@ aB
 cT
 ae
 ae
-dI
+QJ
 ab
 aa
 ag
@@ -13132,7 +13169,7 @@ ab
 iq
 ae
 ae
-ae
+dI
 ab
 aa
 ag
@@ -13254,7 +13291,7 @@ ab
 ab
 ae
 ae
-ae
+QJ
 ab
 aa
 ag
@@ -13278,7 +13315,7 @@ jJ
 bP
 aa
 cN
-jb
+ja
 cQ
 cQ
 cN
@@ -13376,7 +13413,7 @@ aa
 ab
 ab
 ae
-ae
+QJ
 gS
 aa
 ag
@@ -13400,7 +13437,7 @@ jK
 dU
 aa
 ik
-cQ
+WI
 cQ
 cN
 cN
@@ -13498,7 +13535,7 @@ aa
 aa
 ab
 ab
-ae
+QJ
 gS
 aa
 ag
@@ -13522,7 +13559,7 @@ bQ
 dU
 aa
 ik
-cQ
+WI
 cN
 cN
 aa
@@ -14977,7 +15014,7 @@ dm
 ff
 hU
 ds
-ds
+bn
 bn
 gn
 gp
@@ -15099,7 +15136,7 @@ ds
 ds
 ds
 ds
-ds
+bn
 cA
 jm
 gf
