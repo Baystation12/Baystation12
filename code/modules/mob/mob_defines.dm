@@ -187,5 +187,3 @@
 	var/flavor_text = ""
 
 	var/datum/skillset/skillset = /datum/skillset
-
-	var/last_radio_sound = -INFINITY
