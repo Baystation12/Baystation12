@@ -28,6 +28,8 @@
 	var/drive_inaccuracy = SLIPSPACE_ENGINE_INACCURACY //If precise_jump is set to 1, this is ignored.
 	var/jump_sound = 'code/modules/halo/sounds/slipspace_jump.ogg'
 
+	var/slipspace_target_status = 1		//1 = nullspace and back to realspace, 2 = nullspace permanently to despawn the ship ("leave the system")
+
 /obj/machinery/slipspace_engine/Initialize()
 	. = ..()
 	om_obj = map_sectors["[z]"]
@@ -131,7 +133,7 @@
 /obj/machinery/slipspace_engine/proc/slipspace_to_nullspace()
 	do_slipspace_enter_effects()
 	var/obj/effect/overmap/ship = map_sectors["[src.z]"]
-	ship.slipspace_status = 1
+	ship.slipspace_status = slipspace_target_status
 
 /obj/machinery/slipspace_engine/proc/user_slipspace_to_maploc(var/mob/user)
 	var/targ_x = text2num(input(user,"Enter the target location's X value.(0 or null to cancel.)"))
