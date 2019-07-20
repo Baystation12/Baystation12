@@ -46,7 +46,9 @@
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		qdel(src)
 		return 0
-
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
+		return 0
 	if(istype(M, /mob/living/carbon))
 		//TODO: replace with standard_feed_mob() call.
 		var/mob/living/carbon/C = M
@@ -121,7 +123,9 @@
 	if(istype(W,/obj/item/weapon/storage))
 		..()// -> item/attackby()
 		return
-
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
+		return 0
 	// Eating with forks
 	if(istype(W,/obj/item/weapon/material/kitchen/utensil))
 		var/obj/item/weapon/material/kitchen/utensil/U = W
