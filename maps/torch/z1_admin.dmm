@@ -11173,7 +11173,7 @@
 	pixel_y = 4
 	},
 /obj/structure/table/reinforced,
-/obj/item/clothing/ears/earmuffs/headphones,
+/obj/item/clothing/ears/headphones,
 /obj/item/device/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
