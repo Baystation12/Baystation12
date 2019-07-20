@@ -4535,6 +4535,14 @@
 	},
 /turf/simulated/wall/ascent,
 /area/ship/ascent/fore_hallway)
+"lK" = (
+/obj/machinery/hologram/holopad/longrange/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"AM" = (
+/obj/machinery/hologram/holopad/longrange/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
 
 (1,1,1) = {"
 aa
@@ -11204,7 +11212,7 @@ aa
 ik
 cQ
 fr
-cQ
+lK
 gT
 cQ
 dV
@@ -12762,7 +12770,7 @@ aa
 ad
 aB
 cT
-ae
+AM
 eJ
 ae
 gS
