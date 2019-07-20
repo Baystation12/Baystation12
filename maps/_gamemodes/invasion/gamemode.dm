@@ -313,7 +313,6 @@
 				break
 
 /datum/game_mode/outer_colonies/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
-	world << "/datum/game_mode/outer_colonies/handle_slipspace_jump([ship] | [ship.type])"
 
 	var/obj/effect/overmap/flagship
 	var/datum/faction/F = GLOB.factions_by_name[ship.faction]
@@ -321,13 +320,11 @@
 		flagship = F.get_flagship()
 
 	if(flagship == ship)
-		world << "	check1"
 		//record a round end condition
 		F.flagship_slipspaced = 1
 
 		//lock in any covenant objectives now so they arent failed by the ship despawning
 		for(var/datum/objective/objective in objectives_slipspace_affected)
-			world << "	[objective] | [objective.type]"
 
 			//a 1 here means the objective was successful
 			objective.override = objective.check_completion()
