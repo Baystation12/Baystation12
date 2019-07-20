@@ -18,7 +18,7 @@
 	if(istype(loc, /obj/structure/diona_gestalt)) // Handle nymph katamari.
 		var/obj/structure/diona_gestalt/gestalt = loc
 		gestalt.visible_message("<span class='notice'>\The [src] wriggles out of \the [gestalt] and plops to the ground.</span>")
-		gestalt.shed_nymph(src, TRUE, FALSE)
+		gestalt.shed_atom(src, TRUE, FALSE)
 		return
 
 	if(ishuman(loc)) // Handle larger gestalts. If they are being held inhand, their loc will be a holder item, not the mob.

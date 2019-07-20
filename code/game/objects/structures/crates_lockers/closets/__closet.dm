@@ -419,12 +419,14 @@
 		return 1 // Closed and locked
 	return (!welded) //closed but not welded...
 
-/obj/structure/closet/proc/mob_breakout(var/mob/living/escapee)
+/obj/structure/closet/mob_breakout(var/mob/living/escapee)
+
+	. = ..()
 	var/breakout_time = 2 //2 minutes by default
-
 	if(breakout || !req_breakout())
-		return
+		return FALSE
 
+	. = TRUE
 	escapee.setClickCooldown(100)
 
 	//okay, so the closet is either welded or locked... resist!!!
@@ -436,11 +438,11 @@
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		if(!do_after(escapee, 50, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
 			breakout = 0
-			return
+			return FALSE
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
 		if(!req_breakout())
 			breakout = 0
-			return
+			return FALSE
 
 		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 		shake_animation()

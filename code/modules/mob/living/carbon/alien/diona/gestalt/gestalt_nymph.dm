@@ -19,15 +19,27 @@
 		queue_icon_update()
 	chirp.forceMove(src)
 
-/obj/structure/diona_gestalt/proc/shed_nymph(var/mob/living/carbon/alien/diona/nymph, var/silent, var/forcefully)
-	if(!nymph && LAZYLEN(nymphs))
-		nymph = pick(nymphs)
-	if(nymph)
-		nymphs -= nymph // unsure if pick_n_take() works on assoc lists.
-		nymph.dropInto(loc)
-		if(!silent)    visible_message("<span class='danger'>\The [nymph] splits away from \the [src]!</span>")
-		if(forcefully) nymph.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),rand(3,5))
-	check_nymphs()
+/obj/structure/diona_gestalt/proc/shed_atom(var/atom/movable/shedding, var/silent, var/forcefully)
+
+	if(!shedding)
+		var/list/options = contents - nymphs
+		if(length(options))
+			shedding = pick(options)
+		else if(length(nymphs))
+			shedding = pick(nymphs)
+
+	if(shedding)
+		var/update_nymphs = FALSE
+		if(nymphs[shedding])
+			nymphs -= shedding
+			update_nymphs = TRUE
+		shedding.dropInto(loc)
+		if(!silent)
+			visible_message(SPAN_DANGER("\The [shedding] splits away from \the [src]!"))
+		if(forcefully) 
+			shedding.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),rand(3,5))
+		if(update_nymphs)
+			check_nymphs()
 
 // If there are less than two nymphs (or if none of the nymphs have players), it isn't a viable gestalt.
 /obj/structure/diona_gestalt/proc/check_nymphs()
