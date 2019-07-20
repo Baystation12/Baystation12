@@ -16,7 +16,6 @@
 		/obj/item/clustertool, 
 		/obj/item/clustertool,
 		/obj/item/weapon/weldingtool/electric/mantid,
-		/obj/item/stack/cable_coil/fabricator,
 		/obj/item/weapon/extinguisher,
 		/obj/item/device/t_scanner,
 		/obj/item/device/scanner/gas,
