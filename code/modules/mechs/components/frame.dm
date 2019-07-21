@@ -1,11 +1,3 @@
-#define FRAME_REINFORCED 1
-#define FRAME_REINFORCED_SECURE 2
-#define FRAME_REINFORCED_WELDED 3
-
-#define FRAME_WIRED 1
-#define FRAME_WIRED_ADJUSTED 2
-
-
 /obj/item/frame_holder
 	matter = list(MATERIAL_STEEL = 175000, MATERIAL_PLASTIC = 50000, MATERIAL_OSMIUM = 30000)
 
@@ -97,29 +89,23 @@
 			material = null
 			is_reinforced = 0
 			return
-		var/obj/item/component
-		if(arms)
-			component = arms
-			arms = null
-		else if(body)
-			component = body
-			body = null
-		else if(legs)
-			component = legs
-			legs = null
-		else if(head)
-			component = head
-			head = null
-		else
+
+		var/to_remove = input("Which component would you like to remove") as null|anything in list(arms, body, legs, head)
+
+		if(!to_remove)
 			to_chat(user, SPAN_WARNING("There are no components to remove."))
 			return
 
-		if(!do_after(user, 40 * user.skill_delay_mult(SKILL_DEVICES)) || component.loc != src)
-			return
-		user.visible_message(SPAN_NOTICE("\The [user] crowbars \the [component] off \the [src]."))
-		component.forceMove(get_turf(src))
-		user.put_in_hands(component)
-		playsound(user.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		if(uninstall_component(to_remove, user))
+			if(to_remove == arms)
+				arms = null
+			else if(to_remove == body)
+				body = null
+			else if(to_remove == legs)
+				legs = null
+			else if(to_remove == head)
+				head = null
+
 		update_icon()
 		return
 
@@ -132,8 +118,8 @@
 			return
 
 		// Check for wiring.
-		if(is_wired < 2)
-			if(is_wired == 1)
+		if(is_wired < FRAME_WIRED_ADJUSTED)
+			if(is_wired == FRAME_WIRED)
 				to_chat(user, SPAN_WARNING("\The [src]'s wiring has not been adjusted!"))
 			else
 				to_chat(user, SPAN_WARNING("\The [src] is not wired!"))
@@ -327,10 +313,13 @@
 	playsound(user.loc, 'sound/machines/click.ogg', 50, 1)
 	return 1
 
-
-#undef FRAME_REINFORCED
-#undef FRAME_REINFORCED_SECURE
-#undef FRAME_REINFORCED_WELDED
-
-#undef FRAME_WIRED
-#undef FRAME_WIRED_ADJUSTED
+/obj/structure/heavy_vehicle_frame/proc/uninstall_component(var/obj/item/component, var/mob/user)
+	if(!istype(component) || (component.loc != src) || !istype(user))
+		return FALSE
+	if(!do_after(user, 40 * user.skill_delay_mult(SKILL_DEVICES)) || component.loc != src)
+		return FALSE
+	user.visible_message(SPAN_NOTICE("\The [user] crowbars \the [component] off \the [src]."))
+	component.forceMove(get_turf(src))
+	user.put_in_hands(component)
+	playsound(user.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+	return TRUE

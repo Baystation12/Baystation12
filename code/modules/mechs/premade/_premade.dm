@@ -19,7 +19,7 @@
 		body.decal = decal
 		body.prebuild()
 	if(!material)
-		material = SSmaterials.get_material_by_name("steel")
+		material = SSmaterials.get_material_by_name(MATERIAL_STEEL)
 	. = ..()
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 

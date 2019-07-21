@@ -76,7 +76,7 @@
 	icon_state = "mech_floodlight"
 	item_state = "mech_floodlight"
 	restricted_hardpoints = list(HARDPOINT_HEAD)
-	mech_layer = MECH_UNDER_LAYER
+	mech_layer = MECH_INTERMEDIATE_LAYER
 
 	var/on = 0
 	var/l_max_bright = 0.9
@@ -104,7 +104,7 @@
 #define CATAPULT_AREA   2
 
 /obj/item/mech_equipment/catapult
-	name = "\improper gravitational catapult"
+	name = "gravitational catapult"
 	desc = "An exosuit-mounted gravitational catapult."
 	icon_state = "mech_clamp"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
@@ -194,7 +194,7 @@
 	durability = 2 * material.integrity
 
 /obj/item/mech_equipment/drill
-	name = "\improper drill"
+	name = "drill"
 	desc = "This is the drill that'll pierce the heavens!"
 	icon_state = "mech_drill"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
@@ -304,7 +304,7 @@
 
 
 /obj/item/mech_equipment/mounted_system/taser/plasma
-	name = "Mounted plasma cutter"
+	name = "mounted plasma cutter"
 	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
 	icon_state = "railauto" //TODO: Make a new sprite that doesn't get sec called on you.
 	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech

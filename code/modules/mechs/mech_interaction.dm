@@ -57,8 +57,7 @@
 	// User is not necessarily the exosuit, or the same person, so update intent.
 	if(user != src)
 		a_intent = user.a_intent
-		zone_sel = user.zone_sel
-
+		zone_sel.set_selected_zone(user.zone_sel.selecting)
 	// You may attack the target with your exosuit FIST if you're malfunctioning.
 	var/atom/movable/AM = A
 	var/fail_prob = (user != src && istype(AM) && AM.loc != src) ? (user.skill_check(SKILL_MECH, HAS_PERK) ? 0: 15 ) : 0
@@ -161,40 +160,36 @@
 		selected_system = null
 	selected_hardpoint = null
 
-/mob/living/exosuit/proc/enter(var/mob/user)
+/mob/living/exosuit/proc/check_enter(var/mob/user)
 	if(!user || user.incapacitated())
-		return
+		return FALSE
 	if(!user.Adjacent(src))
-		return
+		return FALSE
 	if(hatch_locked)
 		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
-		return
+		return FALSE
 	if(hatch_closed)
 		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
-		return
+		return FALSE
 	if(LAZYLEN(pilots) >= LAZYLEN(body.pilot_positions))
 		to_chat(user, SPAN_WARNING("\The [src] is occupied to capacity."))
+		return FALSE
+	return TRUE
+
+/mob/living/exosuit/proc/enter(var/mob/user)
+	if(!check_enter(user))
 		return
 	to_chat(user, SPAN_NOTICE("You start climbing into \the [src]..."))
 	if(!do_after(user, 25))
 		return
-	if(!user || user.incapacitated())
-		return
-	if(hatch_locked)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
-		return
-	if(hatch_closed)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
-		return
-	if(LAZYLEN(pilots) >= LAZYLEN(body.pilot_positions))
-		to_chat(user, SPAN_WARNING("\The [src] is occupied to capacity."))
+	if(!check_enter(user))
 		return
 	to_chat(user, SPAN_NOTICE("You climb into \the [src]."))
 	user.forceMove(src)
 	LAZYDISTINCTADD(pilots, user)
 	sync_access()
 	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
-	to_chat(user, sound('sound/mecha/nominal.ogg',volume=50))
+	user.playsound_local(null, 'sound/mecha/nominal.ogg', 50)
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()
@@ -203,11 +198,8 @@
 /mob/living/exosuit/proc/sync_access()
 	access_card.access = saved_access.Copy()
 	if(sync_access)
-		for(var/thing in pilots)
-			var/mob/pilot = thing
-			var/obj/item/weapon/card/id/pilot_id = pilot.GetIdCard()
-			if(pilot_id && pilot_id.access)
-				access_card.access |= pilot_id.access
+		for(var/mob/pilot in pilots)
+			access_card.access |= pilot.GetAccess()
 			to_chat(pilot, SPAN_NOTICE("Security access permissions synchronized."))
 
 /mob/living/exosuit/proc/eject(var/mob/user, var/silent)
@@ -231,7 +223,6 @@
 		user.client.screen -= hud_elements
 		user.client.eye = user
 	if(user in pilots)
-		zone_sel = null
 		a_intent = I_HURT
 		LAZYREMOVE(pilots, user)
 		UNSETEMPTY(pilots)

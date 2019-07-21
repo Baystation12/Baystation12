@@ -116,7 +116,7 @@
 	. = ..()
 	if(!surpress_send) send_status()
 
-obj/machinery/door/airlock/proc/set_frequency(new_frequency)
+/obj/machinery/door/airlock/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	if(new_frequency)
 		frequency = new_frequency
