@@ -44,3 +44,6 @@
 
 /obj/machinery/overmap_weapon_console/npc_comms_console/innie
 	authority_level = AUTHORITY_LEVEL_INNIE
+
+/obj/machinery/overmap_weapon_console/npc_comms_console/cov
+	authority_level = AUTHORITY_LEVEL_COV
