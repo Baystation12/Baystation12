@@ -37,6 +37,8 @@
 	short_text = "Retrieve the Forerunner artifact"
 	explanation_text = "The humans are hiding a Forerunner artifact somewhere in this system. Locate it and bring it to High Charity."
 	slipspace_affected = 1
+	points_per_item = 150
+	win_points = 150
 
 /datum/objective/retrieve/artifact/update_points()
 	items_retrieved = 0
@@ -49,8 +51,8 @@
 /datum/objective/retrieve/nav_data
 	short_text = "Steal navigation datachips from the humans"
 	explanation_text = "We must locate the hideout of these humans! Retrieve as many nav data chips you can for examination."
-	points_per_item = 30
-	win_points = 120
+	points_per_item = 100
+	win_points = 100
 	slipspace_affected = 1
 
 /datum/objective/retrieve/nav_data/update_points()
@@ -76,7 +78,7 @@
 /datum/objective/glass_colony
 	short_text = "Glass the human colony"
 	explanation_text = "These humans cannot be allowed to live. The surface of their worlds must burn until they are glass!"
-	win_points = 100
+	win_points = 50
 	slipspace_affected = 1
 
 /datum/objective/glass_colony/check_completion()

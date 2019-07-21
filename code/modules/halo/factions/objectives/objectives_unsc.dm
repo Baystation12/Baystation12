@@ -9,8 +9,8 @@
 /datum/objective/retrieve/nav_data/cole_protocol
 	short_text = "Do not allow Covenant capture of human nav data"
 	explanation_text = "We lose more colonies every year. Soon Earth will be all we have left. Do not allow navchips to be captured by the Covenant."
-	points_per_item = 60
-	lose_points = 240
+	points_per_item = 150
+	lose_points = 150
 	slipspace_affected = 1
 
 /datum/objective/retrieve/nav_data/cole_protocol/check_completion()
@@ -20,7 +20,7 @@
 	return !.
 
 /datum/objective/retrieve/steal_ai/cole_protocol
-	points_per_item = 400
+	points_per_item = 150
 	short_text = "Do not allow Covenant capture of UNSC AI"
 	explanation_text = "Destruction or capture of shipboard AI is absolutely unacceptable. They'll learn everything: weapons research, force deployments, Earth."
 	slipspace_affected = 1
@@ -36,8 +36,8 @@
 /datum/objective/capture_innies
 	short_text = "Capture Insurrectionists for ONI interrogation"
 	explanation_text = "The Insurrection worsens every year. Put some on ice in ONI cryopods for later black site interrogation. Kill the rest"
-	var/points_per_capture = 25
-	var/points_per_kill = 10
+	var/points_per_capture = 50
+	var/points_per_kill = 25
 	var/list/minds_captured = list()
 	var/list/minds_killed = list()
 
