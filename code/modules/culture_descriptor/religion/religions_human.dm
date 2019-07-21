@@ -14,6 +14,10 @@
 	name = RELIGION_BUDDHISM
 	description = "An Indian religion encompassing a variety of traditions, beliefs and spiritual practices based on the teachings of the Buddha. Someone who practices Buddhism is called a Buddhist."
 
+/decl/cultural_info/religion/jain
+	name = RELIGION_JAINISM
+	description = "An Indian religion that teaches salvation through successive lives and nonviolence. Someone who practices Jainism is called a Jain."
+
 /decl/cultural_info/religion/sikh
 	name = RELIGION_SIKHISM
 	description = "An Indian monotheistic religion based on the spiritual teachings of Guru Nanak and the nine Sikh gurus that succeeded him. Someone who practicies Sikhism is called a Sikh."
@@ -53,3 +57,7 @@
 /decl/cultural_info/religion/shinto
 	name = RELIGION_SHINTO
 	description = "A traditional Japanese religion based on rituals to create a connection between the past and modern day. Someone who practices Shinto is called a Shintoist."
+
+/decl/cultural_info/religion/taoist
+	name = RELIGION_TAOISM
+	description = "A traditional Chinese religion that emphasizes living in harmony with the Tao. Someone who practices Taoism is called a Taoist."

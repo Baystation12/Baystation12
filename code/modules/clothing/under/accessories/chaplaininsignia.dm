@@ -35,3 +35,13 @@
 	name = "chaplain insignia (baha'i faith)"
 	desc = "An insignia worn by chaplains. The nine-pointed star represents the Baha'i Faith."
 	icon_state = "bahaiinsignia"
+
+/obj/item/clothing/accessory/chaplaininsignia/jainism
+	name = "chaplain insignia (jainism)"
+	desc = "An insignia worn by chaplains. The symbol of Ahimsa represents Jainism."
+	icon_state = "jaininsignia"
+
+/obj/item/clothing/accessory/chaplaininsignia/taoism
+	name = "chaplain insignia (taoism)"
+	desc = "An insignia worn by chaplains. The yin yang represents Taoism."
+	icon_state = "taoinsignia"
