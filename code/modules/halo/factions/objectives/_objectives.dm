@@ -3,9 +3,8 @@
 	var/short_text
 	var/win_points = 0
 	var/lose_points = 0
-	var/find_specific_target = 0	//flag to do extra processing in gamemode/pre_setup
 	var/slipspace_affected = 0		//flag to lock in the result when a ship goes to slipspace
-	var/locked = 0
+	//var/locked = 0
 	var/override = 0
 	var/fake = 0		//if fake, ignore this for end round scoring purposes
 	var/datum/faction/my_faction
@@ -29,7 +28,7 @@
 /* colony capture */
 
 /datum/objective/colony_capture
-	win_points = 100
+	win_points = 50
 	var/score_per_tick = 1
 	var/capture_score = 0
 	var/is_winner
@@ -70,8 +69,10 @@
 	if(is_winner)
 		return win_points
 
+	/*
 	if(capture_score > 0)
 		return win_points / 2
+		*/
 
 	return 0
 
@@ -80,8 +81,11 @@
 	if(is_winner)
 		return 1
 
+
+	/*
 	if(capture_score > 0)
 		return 2
+		*/
 
 	return 0
 
@@ -91,7 +95,7 @@
 
 /datum/objective/protect_ship
 	var/obj/effect/overmap/target_ship
-	lose_points = 100
+	lose_points = 50
 
 /datum/objective/protect_ship/find_target()
 	target_ship = my_faction.get_flagship()
@@ -117,7 +121,7 @@
 /datum/objective/destroy_ship
 	var/obj/effect/overmap/target_ship
 	var/datum/faction/target_faction
-	win_points = 100
+	win_points = 50
 	var/target_faction_name
 
 /datum/objective/destroy_ship/New()
@@ -153,7 +157,7 @@
 /* retrieve */
 
 /datum/objective/retrieve
-	var/points_per_item = 75
+	var/points_per_item = 50
 	win_points = 0
 	var/items_retrieved = 0
 	var/list/delivery_areas
@@ -188,7 +192,7 @@
 /* protect leader */
 
 /datum/objective/protect/leader
-	lose_points = 100
+	lose_points = 50
 
 /datum/objective/protect/leader/update_score_desc()
 	if(target)
@@ -237,6 +241,18 @@
 	target = target_faction.get_commander()
 	update_score_desc()
 	return target
+
+/datum/objective/assassinate/leader/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
+	if(target)
+		if(!target.current || target.current.stat == DEAD || isbrain(target.current))
+			return 1
+
+	return 0
 
 #include "objectives_cov.dm"
 #include "objectives_innie.dm"

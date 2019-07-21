@@ -50,6 +50,7 @@
 	explanation_text = "Raise the colony in revolt! We must remove the UNSC from our world."
 	objective_faction = "Insurrection"
 	radio_name = "Insurrection Overwatch"
+	win_points = 150
 
 /datum/objective/colony_capture/innie/New()
 	. = ..()
