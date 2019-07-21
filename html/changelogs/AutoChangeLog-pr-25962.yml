@@ -1,0 +1,4 @@
+author: "MikoMyazaki"
+delete-after: True
+changes: 
+  - rscadd: "Adds Vecuronium Bromide, a paralytic drug."
