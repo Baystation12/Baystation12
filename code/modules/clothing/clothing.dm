@@ -868,7 +868,7 @@ BLIND     // can't see anything
 		worn_state = icon_state
 	//autodetect rollability
 	if(rolled_down < 0)
-		if((worn_state + get_gender_suffix("_d_s")) in icon_states(default_onmob_icons[slot_w_uniform_str]))
+		if(("[worn_state]_d_s") in icon_states(default_onmob_icons[slot_w_uniform_str]))
 			rolled_down = 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()
@@ -887,7 +887,7 @@ BLIND     // can't see anything
 		under_icon = default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
-	if((worn_state + get_gender_suffix("_d_s")) in icon_states(under_icon))
+	if(("[worn_state]_d_s") in icon_states(under_icon))
 		if(rolled_down != 1)
 			rolled_down = 0
 	else
@@ -910,7 +910,7 @@ BLIND     // can't see anything
 		under_icon = default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
-	if((worn_state + get_gender_suffix("_r_s")) in icon_states(under_icon))
+	if(("[worn_state]_r_s") in icon_states(under_icon))
 		if(rolled_sleeves != 1)
 			rolled_sleeves = 0
 	else
