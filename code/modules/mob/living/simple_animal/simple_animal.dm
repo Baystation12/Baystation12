@@ -43,8 +43,8 @@
 	var/fire_alert = 0
 
 	//Atmos effect - Yes, you can make creatures that require phoron or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
-	var/list/min_gas = list("oxygen" = 5)
-	var/list/max_gas = list("phoron" = 1, "carbon_dioxide" = 5)
+	var/list/min_gas = list(GAS_OXYGEN = 5)
+	var/list/max_gas = list(GAS_PHORON = 1, GAS_CO2 = 5)
 
 	var/unsuitable_atmos_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster

@@ -505,8 +505,8 @@ var/list/global/tank_gauge_cache = list()
 	var/phoron_amt = 4 + rand(4)
 	var/oxygen_amt = 6 + rand(8)
 
-	air_contents.gas["phoron"] = phoron_amt
-	air_contents.gas["oxygen"] = oxygen_amt
+	air_contents.gas[GAS_PHORON] = phoron_amt
+	air_contents.gas[GAS_OXYGEN] = oxygen_amt
 	air_contents.update_values()
 	valve_welded = 1
 	air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1

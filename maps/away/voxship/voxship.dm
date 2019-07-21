@@ -78,21 +78,21 @@
 	call_webhook = WEBHOOK_SUBMAP_LOADED_VOX
 
 /turf/simulated/floor/plating/vox
-	initial_gas = list("nitrogen" = MOLES_N2STANDARD*1.25)
+	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD*1.25)
 
 /turf/simulated/floor/reinforced/vox
-	initial_gas = list("nitrogen" = MOLES_N2STANDARD*1.25)
+	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD*1.25)
 
 /turf/simulated/floor/tiled/techmaint/vox
-	initial_gas = list("nitrogen" = MOLES_N2STANDARD*1.25)
+	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD*1.25)
 
 /obj/machinery/alarm/vox
 	req_access = newlist()
 
 /obj/machinery/alarm/vox/Initialize()
 	.=..()
-	TLV["oxygen"] =	list(-1, -1, 0.1, 0.1) // Partial pressure, kpa
-	TLV["nitrogen"] = list(16, 19, 135, 140) // Partial pressure, kpa
+	TLV[GAS_OXYGEN] =	list(-1, -1, 0.1, 0.1) // Partial pressure, kpa
+	TLV[GAS_NITROGEN] = list(16, 19, 135, 140) // Partial pressure, kpa
 
 /obj/machinery/power/smes/buildable/preset/voxship/ship
 	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)

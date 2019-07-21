@@ -43,9 +43,9 @@
 	siemens_coefficient =     0
 	body_temperature =        null
 
-	breath_type =             "methyl_bromide"
-	exhale_type =             "methane"
-	poison_types =            list("phoron")
+	breath_type =             GAS_METHYL_BROMIDE
+	exhale_type =             GAS_METHANE
+	poison_types =            list(GAS_PHORON)
 
 	reagent_tag =             IS_MANTID
 	genders =                 list(MALE)

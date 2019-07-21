@@ -1219,7 +1219,7 @@
 		/datum/reagent/toxin/bromide = list(3,8)
 	)
 	kitchen_tag = "algae"
-	exude_gasses = list("methyl_bromide" = 3)
+	exude_gasses = list(GAS_METHYL_BROMIDE = 3)
 
 /datum/seed/algae/New()
 	..()

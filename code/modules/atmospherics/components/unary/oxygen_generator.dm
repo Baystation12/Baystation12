@@ -41,7 +41,7 @@ obj/machinery/atmospherics/unary/oxygen_generator
 			var/added_oxygen = oxygen_content - total_moles
 
 			air_contents.temperature = (current_heat_capacity*air_contents.temperature + 20*added_oxygen*T0C)/(current_heat_capacity+20*added_oxygen)
-			air_contents.adjust_gas("oxygen", added_oxygen)
+			air_contents.adjust_gas(GAS_OXYGEN, added_oxygen)
 
 			if(network)
 				network.update = 1

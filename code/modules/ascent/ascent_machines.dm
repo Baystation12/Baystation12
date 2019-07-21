@@ -36,7 +36,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/Initialize()
 	. = ..()
-	scrubbing_gas -= "methyl_bromide"
+	scrubbing_gas -= GAS_METHYL_BROMIDE
 
 /obj/machinery/recharge_station/ascent
 	name = "mantid recharging dock"
