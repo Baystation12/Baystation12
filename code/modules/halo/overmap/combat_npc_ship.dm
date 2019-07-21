@@ -24,9 +24,15 @@
 
 	var/next_fireat = 0
 	var/list/projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.05 SECONDS) //Associated list: [projectile type]=[fire_delay]
+	var/list/projectiles_nextfire_at = list()
 	var/target_disengage_at = 0
 
 	available_ship_requests = newlist(/datum/npc_ship_request/halt,/datum/npc_ship_request/fire_on_target)
+
+/obj/effect/overmap/ship/npc_ship/combat/Initialize()
+	. = ..()
+	for(var/proj_type in projectiles_to_fire)
+		projectiles_nextfire_at[proj_type] = 0
 
 /obj/effect/overmap/ship/npc_ship/combat/ship_targetedby_defenses()
 	target_disengage_at = 1
@@ -43,21 +49,33 @@
 		target_disengage_at = 0
 		return
 
-	var/cumulative_delay = 0
+	var/lowest_delay = 0
 	for(var/proj_type in projectiles_to_fire)
+		if(world.time < projectiles_nextfire_at[proj_type])
+			continue
 		var/fire_delay = projectiles_to_fire[proj_type]
 		var/obj/item/projectile/proj_fired = new proj_type(loc)
 		proj_fired.launch(target)
-		cumulative_delay += fire_delay
-		sleep(fire_delay)
+		if(fire_delay < lowest_delay)
+			lowest_delay = fire_delay
+		projectiles_nextfire_at[proj_type] = world.time + fire_delay
 
-	next_fireat = world.time + cumulative_delay
+	next_fireat = world.time + lowest_delay
 
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
 		return
 	if(is_player_controlled())
 		return ..()
+	if(!target)
+		var/list/ships_fireon = list()
+		for(var/obj/effect/overmap/ship/ship in range(7))
+			if(!((ship.faction == "civilian" || ship.displaying_faction == 0) && ignore_target_civs == 1) && ship.faction != faction )
+				ships_fireon += ship
+		if(ships_fireon.len != 0)
+			target = pick(ships_fireon)
+			radio_message(null,"Hostile Located, firing on target [target] at [target.x],[target.y]. ")
+
 	if(target && (target in view(7,src)))
 		if(world.time > next_fireat)
 			var/obj/effect/overmap/ship/npc_ship/targ_ship = target
@@ -105,6 +123,7 @@
 
 //INNIE//
 /obj/effect/overmap/ship/npc_ship/combat/innie
+	displaying_faction = 0
 	icon = 'code/modules/halo/icons/overmap/innie_prowler.dmi'
 	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
@@ -114,6 +133,7 @@
 	. = ..()
 	if(prob(50))
 		name = "URF [name]"
+		displaying_faction = 1
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/pick_ship_icon()
 	if(!findtextEx(name,"URF"))
@@ -127,6 +147,7 @@
 
 //COVENANT//
 /obj/effect/overmap/ship/npc_ship/combat/covenant
+	ignore_target_civs = 0
 	ship_name_list = list(\
 	"Woe of the Treacherous",
 	"Faithful Vanguard",
@@ -150,6 +171,7 @@
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 25 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood
+	displaying_faction = 0
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
 	messages_on_death = list("... / --- / ...")
 	faction = "Flood"
