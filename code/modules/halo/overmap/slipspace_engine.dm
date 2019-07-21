@@ -256,9 +256,10 @@
 //CORE PAYLOADS//
 /obj/payload/slipspace_core
 	name = "Slipspace Core"
-	desc = "The core of a slipspace device, detached and armed. Slipspace cores are unstable and cannot be disarmed."
+	desc = "The core of a slipspace device, detached and armed."
 	explodetype = /datum/explosion/slipspace_core
-	seconds_to_explode = 300 //5 minutes
+	seconds_to_explode = 300 //5 minutes to explode.
+	seconds_to_disarm = 120 // 2 minutes to disarm.
 
 /obj/payload/slipspace_core/Initialize()
 	. = ..()
@@ -266,13 +267,19 @@
 	exploding = 1
 	GLOB.processing_objects += src
 
-/obj/payload/slipspace_core/attack_hand(var/attacker)
-	to_chat(attacker,"<span class = 'danger'>[src] is armed and beeping. </span>")
+/obj/payload/slipspace_core/attack_hand(var/mob/living/carbon/human/user)
+	. = ..()
+	if(exploding && !disarming)
+		for(var/mob/player in GLOB.mobs_in_sectors[map_sectors["[z]"]])
+			to_chat(player,"<span class = 'danger'>UNSTABLE SLIPSPACE SIGNATURE DETECTED AT [x],[y],[z]. STABALISE SIGNATURE OR SUPERSTRUCTURE FAILURE WILL BE IMMINENT.</span>")
 
 /datum/explosion/slipspace_core/New(var/obj/payload/b)
 	if(config.oni_discord)
 		message2discord(config.oni_discord, "Alert: slipspace core detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
-	explosion(100, -1, -1, -1, 0)
+	var/obj/effect/overmap/om = map_sectors["[b.z]"]
+	if(isnull(om))
+		return
+	om.pre_superstructure_failing()
 
 /obj/payload/slipspace_core/cov
 	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
