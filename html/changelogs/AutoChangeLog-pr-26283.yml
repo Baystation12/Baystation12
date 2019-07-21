@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Vending machines are now constructable using circuits, and also can be deconstructed. Drag the container they drop to another vendor of the same type to restock it."
+  - tweak: "To add things back to vending machines, you now must be on help intent (useful for tool machines)."
