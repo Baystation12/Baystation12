@@ -11,6 +11,3 @@
 	vessel_mass = 5
 
 	map_bounds = list(9,52,70,25)
-
-/area/om_ships/deliverance
-	name = "CCV Deliverance"

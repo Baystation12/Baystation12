@@ -313,6 +313,7 @@ var/list/points_of_interest = list()
 
 	report_progress("Overmap build complete.")
 	shipmap_handler.max_z_cached = world.maxz
+	shipmap_handler.spawn_roundstart_ships()
 	return 1
 
 

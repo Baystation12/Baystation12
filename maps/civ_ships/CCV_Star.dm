@@ -13,5 +13,4 @@
 
 	map_bounds = list(102,160,154,117) //Aah standardised designs.
 
-/area/om_ships/star
-	name = "CCV Star"
+
