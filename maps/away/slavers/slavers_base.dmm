@@ -1902,13 +1902,13 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eQ" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	name = "Cameras console"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eR" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	name = "Riot control console"
 	},
 /obj/machinery/power/apc{

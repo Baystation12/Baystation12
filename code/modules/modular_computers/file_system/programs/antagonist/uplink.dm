@@ -20,19 +20,20 @@
 
 /datum/nano_module/program/uplink/ui_interact(var/mob/user, var/ui_key = "main", datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/datum/computer_file/program/uplink/prog = program
-	var/obj/item/holder = program.computer.get_physical_host()
-	if(istype(holder) && holder.hidden_uplink && prog.password)
-		if(prog.authenticated)
-			if(!CanInteract(user, state))
+	var/obj/item/modular_computer/computer = host
+	if(istype(computer) && istype(prog))
+		if(computer.hidden_uplink && prog.password)
+			if(prog.authenticated)
+				if(!CanInteract(user, state))
+					return
+				if(alert(user, "Resume or close and secure?", name, "Resume", "Close") == "Resume")
+					computer.hidden_uplink.trigger(user)
+					return
+			else if(computer.hidden_uplink.check_trigger(user, input(user, "Please enter your unique tax ID:", "Authentication"), prog.password))
+				prog.authenticated = 1
 				return
-			if(alert(user, "Resume or close and secure?", name, "Resume", "Close") == "Resume")
-				holder.hidden_uplink.trigger(user)
-				return
-		else if(holder.hidden_uplink.check_trigger(user, input(user, "Please enter your unique tax ID:", "Authentication"), prog.password))
-			prog.authenticated = 1
-			return
-	else
-		program.computer.show_error(user, "ID not found")
+		else
+			to_chat(user, "<span class='warning'>[computer] displays an \"ID not found\" error.</span>")
 
 	prog.authenticated = 0
-	program.computer.kill_program()
+	computer.kill_program()

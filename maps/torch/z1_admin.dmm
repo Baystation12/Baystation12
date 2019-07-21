@@ -3051,7 +3051,7 @@
 	},
 /area/centcom/evac)
 "ahs" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -4332,7 +4332,7 @@
 	},
 /area/ninja_dojo/dojo)
 "aks" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -5332,7 +5332,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amE" = (
-/obj/machinery/computer/modular/preset/cardslot/command,
+/obj/item/modular_computer/console/preset/command,
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amF" = (
@@ -5614,7 +5614,7 @@
 	},
 /area/ninja_dojo/dojo)
 "ank" = (
-/obj/machinery/computer/modular/preset/medical{
+/obj/item/modular_computer/console/preset/medical{
 	icon_state = "console";
 	dir = 4
 	},
@@ -5624,7 +5624,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "anm" = (
-/obj/machinery/computer/modular/preset/engineering{
+/obj/item/modular_computer/console/preset/engineering{
 	icon_state = "console";
 	dir = 8
 	},
@@ -5832,7 +5832,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "anK" = (
-/obj/machinery/computer/modular/preset/security{
+/obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -7882,7 +7882,7 @@
 /area/ninja_dojo/start)
 "asL" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/computer/modular/preset/security{
+/obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 1
 	},
@@ -8330,7 +8330,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "aul" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -8377,7 +8377,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "auu" = (
-/obj/machinery/computer/modular/preset/security{
+/obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -8705,7 +8705,7 @@
 	},
 /area/centcom/living)
 "avy" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -9458,7 +9458,7 @@
 	},
 /area/centcom/specops)
 "axq" = (
-/obj/machinery/computer/modular/preset/cardslot/command,
+/obj/item/modular_computer/console/preset/command,
 /obj/item/weapon/card/id/centcom,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -10321,7 +10321,7 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "azc" = (
-/obj/machinery/computer/modular/preset/full/merc,
+/obj/item/modular_computer/console/preset/mercenary,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "azd" = (
@@ -10768,7 +10768,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/computer/modular/preset/full/merc,
+/obj/item/modular_computer/console/preset/mercenary,
 /obj/item/device/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
@@ -10957,7 +10957,7 @@
 	},
 /area/centcom/control)
 "aAv" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 1
 	},
@@ -11301,7 +11301,7 @@
 	},
 /area/centcom/control)
 "aBj" = (
-/obj/machinery/computer/modular/preset/security{
+/obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 1
 	},
@@ -12665,7 +12665,7 @@
 	},
 /area/centcom/holding)
 "aDV" = (
-/obj/machinery/computer/modular/preset/security{
+/obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -12755,7 +12755,7 @@
 	},
 /area/syndicate_mothership)
 "aEd" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -17723,7 +17723,7 @@
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQk" = (
-/obj/machinery/computer/modular/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aQl" = (
@@ -18506,7 +18506,7 @@
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRZ" = (
-/obj/machinery/computer/modular/preset/merchant{
+/obj/item/modular_computer/console/preset/merchant{
 	icon_state = "console";
 	dir = 8
 	},
@@ -21107,7 +21107,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aZb" = (
-/obj/machinery/computer/modular/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian{
 	icon_state = "console";
 	dir = 4
 	},
@@ -21300,7 +21300,7 @@
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_plaza)
 "bub" = (
-/obj/machinery/computer/modular/preset/security{
+/obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -21310,7 +21310,7 @@
 	},
 /area/centcom/evac)
 "bvb" = (
-/obj/machinery/computer/modular/preset/medical{
+/obj/item/modular_computer/console/preset/medical{
 	icon_state = "console";
 	dir = 8
 	},
@@ -21319,7 +21319,7 @@
 	},
 /area/centcom/control)
 "bwb" = (
-/obj/machinery/computer/modular/preset/security,
+/obj/item/modular_computer/console/preset/security,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
@@ -21332,7 +21332,7 @@
 	c_tag = "Crescent Arrivals North";
 	dir = 8
 	},
-/obj/machinery/computer/modular/preset/security{
+/obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -21346,7 +21346,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced/crescent,
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 1
 	},
@@ -21369,7 +21369,7 @@
 /area/syndicate_mothership)
 "bAb" = (
 /obj/structure/table/woodentable,
-/obj/machinery/computer/modular/preset/library,
+/obj/item/modular_computer/console/preset/library,
 /obj/item/device/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22
@@ -21380,7 +21380,7 @@
 	},
 /area/wizard_station)
 "bBb" = (
-/obj/machinery/computer/modular/preset/library{
+/obj/item/modular_computer/console/preset/library{
 	icon_state = "console";
 	dir = 8
 	},
@@ -21401,7 +21401,7 @@
 	},
 /area/acting/backstage)
 "bEb" = (
-/obj/machinery/computer/modular/preset/library,
+/obj/item/modular_computer/console/preset/library,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"

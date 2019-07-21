@@ -41,7 +41,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/bridge)
 "ag" = (
-/obj/machinery/computer/modular/preset/cardslot/command,
+/obj/item/modular_computer/console/preset/command,
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/command/bridge)
 "ah" = (
@@ -167,7 +167,7 @@
 /obj/item/device/radio/intercom{
 	pixel_x = -32
 	},
-/obj/machinery/computer/modular/preset/engineering{
+/obj/item/modular_computer/console/preset/engineering{
 	icon_state = "console";
 	dir = 1
 	},
@@ -183,7 +183,7 @@
 /area/ship/scrap/command/bridge)
 "aA" = (
 /obj/machinery/light,
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 1
 	},
@@ -3247,7 +3247,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/computer/modular/preset/library,
+/obj/item/modular_computer/console/preset/library,
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -4757,7 +4757,7 @@
 	name = "CORE SCRAM";
 	pixel_y = -26
 	},
-/obj/machinery/computer/modular/preset/engineering{
+/obj/item/modular_computer/console/preset/engineering{
 	icon_state = "console";
 	dir = 1
 	},

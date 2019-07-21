@@ -17,7 +17,7 @@
 	name = "Docking Control program"
 	var/list/docking_controllers = list() //list of tags
 
-/datum/computer_file/program/docking/on_startup()
+/datum/computer_file/program/docking/run_program()
 	. = ..()
 	if(NM)
 		var/datum/nano_module/docking/NMD = NM

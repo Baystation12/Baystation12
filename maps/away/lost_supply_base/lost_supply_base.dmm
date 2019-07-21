@@ -437,7 +437,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "aU" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1545,7 +1545,7 @@
 	},
 /area/space)
 "ej" = (
-/obj/machinery/computer/modular,
+/obj/item/modular_computer/console,
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "ek" = (
@@ -2309,7 +2309,7 @@
 	},
 /area/lost_supply_base/supply)
 "Jd" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/blue,

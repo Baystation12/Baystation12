@@ -1620,7 +1620,7 @@
 /area/exploration_shuttle/airlock)
 "dm" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/computer/modular/preset/medical{
+/obj/item/modular_computer/console/preset/medical{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -2831,7 +2831,7 @@
 	icon_state = "bordercolorhalf";
 	dir = 4
 	},
-/obj/machinery/computer/modular/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
 	dir = 8
 	},
@@ -2977,7 +2977,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/fifthdeck/aftport)
 "gt" = (
-/obj/machinery/computer/modular/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
 	dir = 4
 	},
@@ -5034,7 +5034,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/storage)
 "lt" = (
-/obj/machinery/computer/modular/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian/professional,
 /obj/machinery/computer/guestpass{
 	pixel_y = 32
 	},
@@ -9531,7 +9531,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/fifthdeck/fore)
 "uB" = (
-/obj/machinery/computer/modular/preset/engineering{
+/obj/item/modular_computer/console/preset/engineering{
 	icon_state = "console";
 	dir = 4
 	},
@@ -11309,7 +11309,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/rnd)
 "AM" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/item/modular_computer/console/preset/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -15915,7 +15915,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/isolation)
 "Rs" = (
-/obj/machinery/computer/modular/preset/civilian{
+/obj/item/modular_computer/console/preset/civilian/professional{
 	icon_state = "console";
 	dir = 8
 	},
@@ -17969,7 +17969,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/computer/modular/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian/professional,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/security)
 "Zg" = (

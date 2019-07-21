@@ -27,7 +27,7 @@
 /turf/simulated/floor,
 /area/map_template/ecship/cockpit)
 "af" = (
-/obj/machinery/computer/modular/preset/cardslot/command,
+/obj/item/modular_computer/console/preset/command,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cockpit)
 "ag" = (
@@ -1419,7 +1419,7 @@
 	icon_state = "handrail";
 	dir = 8
 	},
-/obj/machinery/computer/modular/preset/engineering,
+/obj/item/modular_computer/console/preset/engineering,
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "cO" = (
@@ -1896,7 +1896,8 @@
 "dF" = (
 /obj/effect/floor_decal/corner/yellow/full,
 /obj/machinery/computer/air_control{
-	name = "O2 Sensor",sensor_tag = "sev_oxygen"
+	name = "O2 Sensor"
+	sensor_tag = "sev_oxygen"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)

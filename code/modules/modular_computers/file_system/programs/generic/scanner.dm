@@ -18,21 +18,18 @@
 	var/paper_type
 
 /datum/computer_file/program/scanner/proc/connect_scanner()	//If already connected, will reconnect.
-	if(!computer)
+	if(!computer || !computer.scanner)
 		return 0
-	var/obj/item/weapon/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-	if(scanner && istype(src, scanner.driver_type))
+	if(istype(src, computer.scanner.driver_type))
 		using_scanner = 1
-		scanner.driver = src
+		computer.scanner.driver = src
 		return 1
 	return 0
 
 /datum/computer_file/program/scanner/proc/disconnect_scanner()
 	using_scanner = 0
-	if(computer)
-		var/obj/item/weapon/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-		if(scanner && (src == scanner.driver))
-			scanner.driver = null
+	if(computer && computer.scanner && (src == computer.scanner.driver) )
+		computer.scanner.driver = null
 	data_buffer = null
 	metadata_buffer.Cut()
 	return 1
@@ -45,18 +42,15 @@
 	return 1
 
 /datum/computer_file/program/scanner/proc/check_scanning()
-	if(!computer)
+	if(!computer || !computer.scanner)
 		return 0
-	var/obj/item/weapon/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-	if(scanner)
+	if(!computer.scanner.can_run_scan)
 		return 0
-	if(!scanner.can_run_scan)
-		return 0
-	if(!scanner.check_functionality())
+	if(!computer.scanner.check_functionality())
 		return 0
 	if(!using_scanner)
 		return 0
-	if(src != scanner.driver)
+	if(src != computer.scanner.driver)
 		return 0
 	return 1
 
@@ -75,8 +69,7 @@
 	if(href_list["scan"])
 		if(check_scanning())
 			metadata_buffer.Cut()
-			var/obj/item/weapon/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-			scanner.run_scan(usr, src)
+			computer.scanner.run_scan(usr, src)
 		return 1
 
 	if(href_list["save"])
@@ -95,12 +88,11 @@
 	var/datum/computer_file/program/scanner/prog = program
 	if(!prog.computer)
 		return
-	var/obj/item/weapon/stock_parts/computer/scanner/scanner = prog.computer.get_component(PART_SCANNER)
-	if(scanner)
-		data["scanner_name"] = scanner.name
-		data["scanner_enabled"] = scanner.enabled
-		data["can_view_scan"] = scanner.can_view_scan
-		data["can_save_scan"] = (scanner.can_save_scan && prog.data_buffer)
+	if(prog.computer.scanner)
+		data["scanner_name"] = prog.computer.scanner.name
+		data["scanner_enabled"] = prog.computer.scanner.enabled
+		data["can_view_scan"] = prog.computer.scanner.can_view_scan
+		data["can_save_scan"] = (prog.computer.scanner.can_save_scan && prog.data_buffer)
 	data["using_scanner"] = prog.using_scanner
 	data["check_scanning"] = prog.check_scanning()
 	if(prog.metadata_buffer.len > 0 && prog.paper_type == /obj/item/weapon/paper/bodyscan)

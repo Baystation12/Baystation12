@@ -11,6 +11,7 @@
 	slot_flags = SLOT_ID | SLOT_BELT
 	stores_pen = TRUE
 	stored_pen = /obj/item/weapon/pen
+	receives_updates = FALSE
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
 
@@ -22,7 +23,7 @@
 	if(!CanPhysicallyInteract(user))
 		return
 	if(card_slot && istype(card_slot.stored_card))
-		card_slot.eject_id(user)
+		eject_id()
 	else
 		..()
 
