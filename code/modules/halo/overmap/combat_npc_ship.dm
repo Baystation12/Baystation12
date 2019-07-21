@@ -127,6 +127,16 @@
 
 //COVENANT//
 /obj/effect/overmap/ship/npc_ship/combat/covenant
+	ship_name_list = list(\
+	"Woe of the Treacherous",
+	"Faithful Vanguard",
+	"Ardent Shield",
+	"Unyielding Faith",
+	"Resolute Prophecy",
+	"Journey's Shield",
+	"Vanguard of Charity",
+	"Faithful's Endeavour"
+	)
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
 	faction = "Covenant"
 	message_language = "Sangheili"
