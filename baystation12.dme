@@ -2829,7 +2829,6 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
-#include "maps\area_holders\overmap_ship_area_holder.dmm"
 #include "maps\civ_ships\om_ship_areas.dm"
 #include "maps\geminus_city\geminus_city.dm"
 #include "maps\~mapsystem\map_preferences.dm"

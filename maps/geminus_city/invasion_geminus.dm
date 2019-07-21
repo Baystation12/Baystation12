@@ -1,3 +1,4 @@
+#include "../area_holders/overmap_ship_area_holder.dmm"
 
 #include "../faction_bases/Cassius_Station/Cassius_Station.dm"
 
