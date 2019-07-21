@@ -259,7 +259,10 @@ var/list/points_of_interest = list()
 	if(superstructure_failing == -1)
 		return
 	if(superstructure_failing == 1)
-		//TODO: Special messages/other effects whilst the superstructure fails.
+		if(hull_segments.len == 0)
+			return
+		var/obj/explode_at = pick(hull_segments)
+		explosion(explode_at.loc,2,4,6,8, adminlog = 0)
 		return
 	var/list/superstructure_strength = get_superstructure_strength()
 	if(isnull(superstructure_strength))
