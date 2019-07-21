@@ -58,8 +58,9 @@
 
 /obj/machinery/slipspace_engine/proc/overload_engine(var/mob/user)
 	jump_charging = -1
-	new core_to_spawn(loc)
+	var/obj/core = new core_to_spawn(loc)
 	icon_state = "[initial(icon_state)]_coreremoved"
+	core.attack_hand(user)
 
 /obj/machinery/slipspace_engine/proc/user_overload_engine(var/mob/user)
 	if(isnull(core_to_spawn))
@@ -260,12 +261,6 @@
 	explodetype = /datum/explosion/slipspace_core
 	seconds_to_explode = 300 //5 minutes to explode.
 	seconds_to_disarm = 120 // 2 minutes to disarm.
-
-/obj/payload/slipspace_core/Initialize()
-	. = ..()
-	explode_at = world.time + seconds_to_explode SECONDS
-	exploding = 1
-	GLOB.processing_objects += src
 
 /obj/payload/slipspace_core/attack_hand(var/mob/living/carbon/human/user)
 	. = ..()
