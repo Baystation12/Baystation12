@@ -146,6 +146,7 @@
 	message_language = "Flood"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake_flood)
+	projectiles_to_fire = list(/obj/item/projectile/overmap/flood_pod = 1 SECOND)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood/load_mapfile()
 	return
