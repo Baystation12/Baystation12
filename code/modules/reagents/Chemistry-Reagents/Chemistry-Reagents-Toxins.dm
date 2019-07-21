@@ -495,17 +495,19 @@
 
 	var/threshold = 2
 	if(alien == IS_SKRELL)
-		threshold = 1.2
+		threshold = 2.4
 
-	if(M.chem_doses[type] >= metabolism * threshold)
+	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
 		M.confused = max(M.confused, 2)
-	if(M.chem_doses[type] >= 3 * threshold)
-		M.Weaken(30)
-		M.make_dizzy(3)
-		M.add_chemical_effect(CE_SEDATE, 1)
 		M.add_chemical_effect(CE_VOICELOSS, 1)
-		M.eye_blurry = max(M.eye_blurry, 10)
+	if(M.chem_doses[type] > threshold * 0.5)
+		M.make_dizzy(3)
+		M.Weaken(2)
+	if(M.chem_doses[type] == round(threshold * 0.5, metabolism))
 		to_chat(M, SPAN_WARNING("Your muscles slacken and cease to obey you."))
+	if(M.chem_doses[type] >= threshold)
+		M.add_chemical_effect(CE_SEDATE, 1)
+		M.eye_blurry = max(M.eye_blurry, 10)
 
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
