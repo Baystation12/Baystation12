@@ -1333,11 +1333,11 @@
 /turf/space,
 /area/space)
 "dx" = (
-/obj/item/modular_computer/console/preset/research,
+/obj/machinery/computer/modular/preset/aislot/research,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dy" = (
-/obj/item/modular_computer/console/preset/research,
+/obj/machinery/computer/modular/preset/aislot/research,
 /obj/random/smokes,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
@@ -2710,7 +2710,7 @@
 /obj/effect/decal/cleanable/ash,
 /obj/effect/decal/cleanable/blood,
 /obj/item/clothing/under/blazer,
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 4
 	},
@@ -2978,7 +2978,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hr" = (
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,

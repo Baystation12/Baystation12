@@ -780,3 +780,10 @@
 	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/vitals_monitor
 	sort_string = "XAAAD"
+
+/datum/design/circuit/sublimator/modular_computer
+	name = "general-purpose computer"
+	id = "pc_motherboard"
+	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/modular_computer
+	sort_string = "XAAAD"

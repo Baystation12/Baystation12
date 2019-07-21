@@ -548,7 +548,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/xo)
 "be" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
@@ -1802,7 +1802,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "cV" = (
-/obj/item/modular_computer/console/preset/sysadmin{
+/obj/machinery/computer/modular/preset/aislot/sysadmin{
 	icon_state = "console";
 	dir = 1
 	},
@@ -3490,7 +3490,7 @@
 	c_tag = "Aquila - Cockpit";
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
 "fM" = (
@@ -3889,7 +3889,7 @@
 /turf/simulated/floor/reinforced,
 /area/turret_protected/ai_outer_chamber)
 "gv" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -4897,12 +4897,12 @@
 /area/turret_protected/ai)
 "jp" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/medical,
+/obj/machinery/computer/modular/preset/medical,
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai)
 "jq" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command,
 /obj/machinery/camera/all/command{
 	c_tag = "AI Core - Starboard"
 	},
@@ -4910,7 +4910,7 @@
 /area/turret_protected/ai)
 "jr" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/security,
+/obj/machinery/computer/modular/preset/security,
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai)
 "js" = (
@@ -4941,7 +4941,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "jz" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command,
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 1
 	},
@@ -7020,7 +7020,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room/deliberation)
 "nJ" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 1
 	},
@@ -7558,7 +7558,7 @@
 /area/turret_protected/ai_outer_chamber)
 "pn" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/civilian{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 1
 	},
@@ -7570,14 +7570,14 @@
 	c_tag = "AI Core - Port";
 	dir = 1
 	},
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai)
 "pp" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/research{
+/obj/machinery/computer/modular/preset/aislot/research{
 	icon_state = "console";
 	dir = 1
 	},
@@ -7639,14 +7639,14 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "pE" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bridgecheck)
 "pF" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 1
 	},
@@ -8400,7 +8400,7 @@
 /area/hallway/primary/bridge/fore)
 "rn" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -9124,7 +9124,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/bridge)
 "tj" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -10122,7 +10122,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "vQ" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -10995,7 +10995,7 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 1
 	},
@@ -11965,7 +11965,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "AZ" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -12904,7 +12904,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -12917,7 +12917,7 @@
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
 "FE" = (
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/mono,
@@ -13024,7 +13024,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -13146,7 +13146,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "GV" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -13170,7 +13170,7 @@
 /obj/machinery/newscaster/security_unit{
 	pixel_y = 32
 	},
-/obj/item/modular_computer/console/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "GZ" = (
@@ -13408,7 +13408,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/bridge)
 "HF" = (
-/obj/item/modular_computer/console/preset/dock,
+/obj/machinery/computer/modular/preset/dock,
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
@@ -13458,7 +13458,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HP" = (
-/obj/item/modular_computer/console/preset/supply{
+/obj/machinery/computer/modular/preset/supply_public{
 	icon_state = "console";
 	dir = 1
 	},
@@ -14554,7 +14554,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "Mn" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -15554,7 +15554,7 @@
 /area/maintenance/bridge/forestarboard)
 "Ra" = (
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/item/modular_computer/console/preset/security,
+/obj/machinery/computer/modular/preset/security,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Rb" = (
@@ -16545,7 +16545,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/cobed)
 "UY" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command,
 /obj/item/modular_computer/tablet/lease/preset/command,
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
@@ -16849,7 +16849,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/aquila/maintenance)
 "Wd" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -16973,7 +16973,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "WL" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
@@ -17376,7 +17376,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "YA" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},

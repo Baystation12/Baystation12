@@ -2221,7 +2221,7 @@
 "aex" = (
 /obj/effect/floor_decal/corner/red/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -7621,7 +7621,7 @@
 /turf/simulated/floor/tiled,
 /area/security/processing)
 "aAe" = (
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -9645,7 +9645,7 @@
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "aIj" = (
-/obj/item/modular_computer/console/preset/civilian,
+/obj/machinery/computer/modular/preset/civilian,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
 /area/security/brig)
@@ -10803,7 +10803,7 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/civilian{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 4
 	},
@@ -15276,7 +15276,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "cwQ" = (
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 4
 	},
@@ -17249,7 +17249,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "evb" = (
-/obj/item/modular_computer/console/preset/medical{
+/obj/machinery/computer/modular/preset/medical{
 	icon_state = "console";
 	dir = 4
 	},
@@ -17646,7 +17646,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "eRQ" = (
-/obj/item/modular_computer/console/preset/medical{
+/obj/machinery/computer/modular/preset/medical{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -18953,7 +18953,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/medical{
+/obj/machinery/computer/modular/preset/medical{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -19759,7 +19759,7 @@
 /area/medical/exam_room)
 "hle" = (
 /obj/effect/floor_decal/corner/red/mono,
-/obj/item/modular_computer/console/preset/civilian{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 4
 	},
@@ -21383,7 +21383,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/oldopscheck)
 "jfn" = (
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 4
 	},
@@ -23378,7 +23378,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/rnd/development)
 "lob" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/machinery/computer/modular/preset/security,
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "lom" = (
@@ -26098,7 +26098,7 @@
 /obj/structure/filingcabinet/wallcabinet{
 	pixel_x = 25
 	},
-/obj/item/modular_computer/console/preset/research{
+/obj/machinery/computer/modular/preset/aislot/research{
 	icon_state = "console";
 	dir = 8
 	},

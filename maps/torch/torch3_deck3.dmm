@@ -3445,7 +3445,7 @@
 	icon_state = "bordercolorhalf";
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/engineering,
+/obj/machinery/computer/modular/preset/engineering,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/engine_eva)
 "gS" = (
@@ -4544,7 +4544,7 @@
 	c_tag = "Telecommunications -  Control";
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/research{
+/obj/machinery/computer/modular/preset/aislot/research{
 	icon_state = "console";
 	dir = 8
 	},
@@ -7948,7 +7948,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
 "pR" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 4
 	},
@@ -10766,7 +10766,7 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "wz" = (
-/obj/item/modular_computer/console/preset/civilian/professional,
+/obj/machinery/computer/modular/preset/civilian,
 /turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "wA" = (
@@ -11113,7 +11113,7 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "xp" = (
-/obj/item/modular_computer/console/preset/civilian/professional{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 4
 	},
@@ -12347,7 +12347,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "AS" = (
-/obj/item/modular_computer/console/preset/civilian/professional{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 1
 	},
@@ -12531,7 +12531,7 @@
 /obj/machinery/newscaster{
 	pixel_x = -32
 	},
-/obj/item/modular_computer/console/preset/civilian{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 4
 	},
@@ -16498,7 +16498,7 @@
 /area/chapel/office)
 "LK" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/civilian{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 8
 	},
@@ -17303,7 +17303,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "Om" = (
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 8
 	},
@@ -18021,7 +18021,7 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "Qv" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/machinery/computer/modular/preset/security,
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
@@ -18038,7 +18038,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "Qx" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/machinery/computer/modular/preset/security,
 /obj/effect/floor_decal/corner/red/mono,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -18832,7 +18832,7 @@
 /area/maintenance/thirddeck/foreport)
 "SY" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 4
 	},
@@ -21215,7 +21215,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/item/modular_computer/console/preset/civilian,
+/obj/machinery/computer/modular/preset/civilian,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "ZN" = (

@@ -2978,7 +2978,7 @@
 /turf/simulated/floor/crystal,
 /area/crew_quarters/adherent)
 "jB" = (
-/obj/item/modular_computer/console/preset/civilian/professional,
+/obj/machinery/computer/modular/preset/civilian,
 /obj/structure/noticeboard{
 	pixel_x = 0;
 	pixel_y = 32
@@ -5766,7 +5766,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
 "sX" = (
-/obj/item/modular_computer/console/preset/dock{
+/obj/machinery/computer/modular/preset/dock{
 	icon_state = "console";
 	dir = 4
 	},
@@ -6472,7 +6472,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/quartermaster/hangar/top)
 "uC" = (
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 4
 	},
@@ -6856,7 +6856,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/storage/primary)
 "vx" = (
-/obj/item/modular_computer/console/preset/civilian{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 8
 	},
@@ -7271,7 +7271,7 @@
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/corner/red/mono,
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -9146,7 +9146,7 @@
 /turf/simulated/floor/plating,
 /area/vacant/monitoring)
 "EL" = (
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -11896,7 +11896,7 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "NG" = (
-/obj/item/modular_computer/console/preset/civilian/professional,
+/obj/machinery/computer/modular/preset/civilian,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
@@ -12016,7 +12016,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "NZ" = (
-/obj/item/modular_computer/console/preset/civilian/professional{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 8
 	},
@@ -12194,7 +12194,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "OJ" = (
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 1
 	},
@@ -13103,7 +13103,7 @@
 	dir = 2;
 	level = 2
 	},
-/obj/item/modular_computer/console/preset/supply{
+/obj/machinery/computer/modular/preset/supply_public{
 	dir = 2;
 	pixel_y = 0
 	},
@@ -13494,7 +13494,7 @@
 /area/hallway/primary/fourthdeck/fore)
 "Sf" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/civilian/professional{
+/obj/machinery/computer/modular/preset/civilian{
 	icon_state = "console";
 	dir = 8
 	},
@@ -14794,7 +14794,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
 	},
-/obj/item/modular_computer/console/preset/dock{
+/obj/machinery/computer/modular/preset/dock{
 	icon_state = "console";
 	dir = 4
 	},
@@ -16166,7 +16166,7 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "YV" = (
-/obj/item/modular_computer/console/preset/engineering,
+/obj/machinery/computer/modular/preset/engineering,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/power/apc{
 	dir = 8;
@@ -16454,7 +16454,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/waterstore)
 "Zz" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 8
 	},
