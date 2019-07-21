@@ -108,6 +108,9 @@
 	return MOVEMENT_PROCEED
 
 /mob/living/exosuit/lost_in_space()
+	for(var/atom/movable/AM in contents)
+		if(!AM.lost_in_space())
+			return FALSE
 	return !pilots.len
 
 /mob/living/exosuit/fall_damage()

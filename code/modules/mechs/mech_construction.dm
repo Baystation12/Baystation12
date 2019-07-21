@@ -23,8 +23,8 @@
 		head.forceMove(frame)
 		head = null
 
-	frame.is_wired = 2
-	frame.is_reinforced = 3
+	frame.is_wired = FRAME_WIRED_ADJUSTED
+	frame.is_reinforced = FRAME_REINFORCED_WELDED
 	frame.set_name = name
 	frame.name = "frame of \the [frame.set_name]"
 	frame.queue_icon_update()

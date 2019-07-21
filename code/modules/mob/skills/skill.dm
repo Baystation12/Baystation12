@@ -114,7 +114,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You can use all kinds of space suits, including specialized versions. Your years of experience in EVA keep you from being disoriented in space, and you have experience using a jetpack to move around. <br>- You cannot slip anymore.",
 						"Master"		= "You are just as much at home in a vacuum as in atmosphere. You probably do your job almost entirely EVA.<br>- You cannot get floored anymore.<br>- You get bonus speed for jetpacks.")
 
-/decl/hierarchy/skill/general/EVA/exosuit
+/decl/hierarchy/skill/general/EVA/mech
 	ID = "exosuit"
 	name = "Exosuit Operation"
 	desc = "Allows you to operate exosuits well."

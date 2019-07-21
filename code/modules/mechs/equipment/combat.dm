@@ -1,5 +1,5 @@
 /obj/item/mech_equipment/mounted_system/taser
-	name = "Mounted taser carbine"
+	name = "mounted taser carbine"
 	desc = "A dual fire mode taser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
 	holding_type = /obj/item/weapon/gun/energy/taser/carbine/mounted/mech
@@ -7,7 +7,7 @@
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
 /obj/item/mech_equipment/mounted_system/taser/ion
-	name = "Mounted ion rifle"
+	name = "mounted ion rifle"
 	desc = "An exosuit-mounted ion rifle. Handle with care."
 	icon_state = "mech_ionrifle"
 	holding_type = /obj/item/weapon/gun/energy/ionrifle/mounted/mech
