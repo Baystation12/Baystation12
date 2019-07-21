@@ -298,6 +298,26 @@ badges
 	slot_flags = SLOT_TIE
 	badge_string = "Sol Central Government"
 
+/obj/item/clothing/accessory/badge/solgov/fleet
+	name = "military ID (Fleet)"
+	desc = "An ID denoting service in the SolGov Defense Forces. This one shows the owner as part of the Fleet."
+	icon_state = "fleet"
+	badge_string = "Sol Central Government Defense Forces"
+
+/obj/item/clothing/accessory/badge/solgov/fleet/retired
+	name = "military ID (Fleet, retired)"
+	desc = "An ID denoting service in the SolGov Defense Forces. This one shows the owner as having retired from the Fleet."
+
+/obj/item/clothing/accessory/badge/solgov/army
+	name = "military ID (Army)"
+	desc = "An ID denoting service in the SolGov Defense Forces. This one shows the owner as part of the Army."
+	icon_state = "army"
+	badge_string = "Sol Central Government Defense Forces"
+
+/obj/item/clothing/accessory/badge/solgov/army/retired
+	name = "military ID (Army, retired)"
+	desc = "An ID denoting service in the SolGov Defense Forces. This one shows the owner as having retired from the Army."
+
 /*******
 armbands
 *******/

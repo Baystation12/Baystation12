@@ -38,6 +38,25 @@
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
 
+/datum/gear/accessory/military
+	display_name = "military ID (Fleet)"
+	path = /obj/item/clothing/accessory/badge/solgov/fleet
+	allowed_branches = list(/datum/mil_branch/fleet)
+
+/datum/gear/accessory/militaryretired
+	display_name = "retired military ID"
+	path = /obj/item/clothing/accessory/badge/solgov
+	allowed_branches = CIVILIAN_BRANCHES
+	description = "An ID denoting prior service in the SolGov Defense Forces."
+	whitelisted = list(SPECIES_HUMAN, SPECIES_IPC)
+
+/datum/gear/accessory/militaryretired/New()
+	..()
+	var/retired = list()
+	retired["military ID (Fleet, retired)"] = /obj/item/clothing/accessory/badge/solgov/fleet/retired
+	retired["military ID (Army, retired)"] = /obj/item/clothing/accessory/badge/solgov/army/retired
+	gear_tweaks += new/datum/gear_tweak/path(retired)
+
 /datum/gear/accessory/ec_scarf
 	display_name = "Expeditionary Corps dress scarf"
 	path = /obj/item/clothing/accessory/solgov/ec_scarf
