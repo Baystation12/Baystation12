@@ -265,3 +265,15 @@
 /area/geminus_underground/innie/echo
 	name = "\improper Geminus Insurrection Base Echo Sector"
 	icon_state = "blueold"
+
+////////////// X52 ///////////////
+
+/area/x52
+	name = "\improper X52"
+	icon_state = "yellow"
+	requires_power = 1
+	luminosity = 1
+	has_gravity = 1
+
+/area/x52/laboratory
+	name = "\improper X52 Laboratory"
