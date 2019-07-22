@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - tweak: "Electron reservoir will now shock you upon bumping/getting thrown into it."
