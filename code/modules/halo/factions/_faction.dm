@@ -36,6 +36,8 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 	var/has_base = 0
 	var/base_desc
 	var/destroyed_reason = null
+	var/list/ship_types = list()
+	var/list/npc_ships = list()
 
 /datum/faction/New()
 	. = ..()
@@ -99,8 +101,9 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 /datum/faction/covenant
 	name = "Covenant"
 	var/list/objective_types = list()
-	enemy_factions = list("UNSC","Insurrection")
+	enemy_factions = list("UNSC","Insurrection", "Human Colony","Flood")
 	commander_titles = list("Sangheili Shipmaster")
+	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
 
 /datum/faction/covenant/get_commander(var/datum/mind/check_mind)
 
@@ -115,8 +118,9 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 
 /datum/faction/unsc
 	name = "UNSC"
-	enemy_factions = list("Covenant","Insurrection")
+	enemy_factions = list("Covenant","Insurrection","Flood")
 	commander_titles = list("UNSC Bertels Commanding Officer")
+	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
 
 /datum/faction/unsc/get_commander(var/datum/mind/check_mind)
 
@@ -131,8 +135,9 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 
 /datum/faction/insurrection
 	name = "Insurrection"
-	enemy_factions = list("UNSC","Covenant")
+	enemy_factions = list("UNSC","Covenant","Flood")
 	commander_titles = list("Insurrectionist Commander")
+	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
 
 /datum/faction/insurrection/get_commander(var/datum/mind/check_mind)
 
@@ -141,5 +146,19 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 
 	. = ..()
 
+
+
+/* Human Civilian */
+
 /datum/faction/human_civ
 	name = "Human Colony"
+	ship_types = list(/obj/effect/overmap/ship/npc_ship/cargo)
+
+
+
+/* Flood */
+
+/datum/faction/flood
+	name = "Flood"
+	enemy_factions = list("Covenant","Insurrection","Human Colony","UNSC")
+	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/flood)

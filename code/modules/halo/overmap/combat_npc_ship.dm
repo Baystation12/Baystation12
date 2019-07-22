@@ -15,7 +15,7 @@
 	desc=  "A ship specialised for combat."
 
 	hull = 3000 //Hardier than a civvie ship.
-	var/atom/target
+	var/obj/effect/overmap/ship/npc_ship/target
 
 	var/target_range_from = 3 //Amount of tiles away from target ship will circle.
 
@@ -44,7 +44,7 @@
 	if(target_disengage_at == 0)
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
-		radio_message(null,"They must be disabled now! Disengaging.")
+		radio_message("They must be disabled now! Disengaging.")
 		target = null
 		target_disengage_at = 0
 		return
@@ -62,31 +62,45 @@
 
 	next_fireat = world.time + lowest_delay
 
+/obj/effect/overmap/ship/npc_ship/combat/proc/find_target()
+	var/list/targets = list()
+	target = null
+	target_loc = null
+
+	//scan ships in range
+	for(var/obj/effect/overmap/ship/ship in range(7))
+
+		//check if they're a hostile faction
+		var/datum/faction/their_faction = ship.my_faction
+		if(their_faction.name in my_faction.enemy_factions)
+			targets += ship
+
+	if(targets.len > 0)
+		//pick one at random
+		target = pick(targets)
+		radio_message("Hostile located, firing on target [target] at [target.x],[target.y].")
+
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
 		return
 	if(is_player_controlled())
 		return ..()
 	if(!target)
-		var/list/ships_fireon = list()
-		for(var/obj/effect/overmap/ship/ship in range(7))
-			if(!((ship.faction == "civilian" || ship.displaying_faction == 0) && ignore_target_civs == 1) && ship.faction != faction )
-				ships_fireon += ship
-		if(ships_fireon.len != 0)
-			target = pick(ships_fireon)
-			radio_message(null,"Hostile Located, firing on target [target] at [target.x],[target.y]. ")
+		find_target()
 
-	if(target && (target in view(7,src)))
-		if(world.time > next_fireat)
-			var/obj/effect/overmap/ship/npc_ship/targ_ship = target
-			if(istype(targ_ship))
-				if(targ_ship.hull > initial(targ_ship.hull)/4)
-					fire_at_target()
-			else
-				fire_at_target()
-		var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
-		if(target_locs.len > 0)
-			target_loc = pick(target_locs) //Let's emulate a "circling" behaviour.
+	if(target)
+		//check if they're in range
+		if(get_dist(src, target) > 7)
+			target = null
+		else
+			//open fire
+			fire_at_target()
+
+			if(!target_loc || src.loc == target_loc)
+				//Let's emulate a "circling" behaviour.
+				var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
+				if(target_locs.len > 0)
+					target_loc = pick(target_locs)
 	..()
 
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
@@ -110,6 +124,7 @@
 	faction = "UNSC"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc)
+	radio_channel = "FLEETCOM"
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/generate_ship_name()
 	. = ..()
@@ -123,17 +138,19 @@
 
 //INNIE//
 /obj/effect/overmap/ship/npc_ship/combat/innie
-	displaying_faction = 0
 	icon = 'code/modules/halo/icons/overmap/innie_prowler.dmi'
 	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie)
 
+/obj/effect/overmap/ship/npc_ship/combat/innie/New()
+	. = ..()
+	radio_channel = halo_frequencies.innie_channel_name
+
 /obj/effect/overmap/ship/npc_ship/combat/innie/generate_ship_name()
 	. = ..()
 	if(prob(50))
 		name = "URF [name]"
-		displaying_faction = 1
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/pick_ship_icon()
 	if(!findtextEx(name,"URF"))
@@ -147,7 +164,6 @@
 
 //COVENANT//
 /obj/effect/overmap/ship/npc_ship/combat/covenant
-	ignore_target_civs = 0
 	ship_name_list = list(\
 	"Woe of the Treacherous",
 	"Faithful Vanguard",
@@ -160,7 +176,8 @@
 	)
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
 	faction = "Covenant"
-	message_language = "Sangheili"
+	radio_language = "Sangheili"
+	radio_channel = "Battlenet"
 	ship_datums = list(/datum/npc_ship/cov_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov)
 
@@ -171,11 +188,9 @@
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 25 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood
-	displaying_faction = 0
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
 	messages_on_death = list("... / --- / ...")
 	faction = "Flood"
-	message_language = "Flood"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake_flood)
 	projectiles_to_fire = list(/obj/item/projectile/overmap/flood_pod = 1 SECOND)
