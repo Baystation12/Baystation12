@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Supermatter manual will now show you the wiki page for the Supermatter Engine."
