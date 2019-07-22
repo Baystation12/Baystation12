@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Underwear will now no longer be kept on species change, if the species you are changing into cannot wear underwear."
