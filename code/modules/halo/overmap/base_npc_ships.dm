@@ -33,7 +33,8 @@
 
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
-	var/message_language = "Galactic Common"
+	var/radio_language = "Galactic Common"
+	var/radio_channel = "System"
 
 	var/hull = 1500 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
@@ -52,6 +53,10 @@
 	var/list/cargo_containers = list()
 
 	var/ignore_target_civs = 1
+
+	var/last_radio_time = 0
+	var/radio_cooldown = 5 SECONDS
+	var/next_message
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_ship_icon()
 	var/list/icons_pickfrom = icons_pickfrom_list
@@ -110,34 +115,15 @@
 		return 1
 	return 0
 
-/obj/effect/overmap/ship/npc_ship/proc/radio_message(var/mob/target_mob = null,var/message = null,var/channel = "System") //If no targetmob supplied, broadcasts to all players
-	var/list/mobs_to_hear = list()
-	if(target_mob)
-		if(!istype(target_mob))
-			message = target_mob
-		else
-			mobs_to_hear += target_mob
-	if(mobs_to_hear.len == 0)
-		for(var/mob/living/m in GLOB.player_list)
-			if(m.stat == CONSCIOUS)
-				mobs_to_hear += m
-
-	for(var/mob/living/m in mobs_to_hear)
-		var/have_lang = 0
-		for(var/datum/language/l in m.languages)
-			if(l.name == message_language)
-				have_lang = 1
-				break
-		if(!have_lang)
-			var/new_message = ""
-			var/datum/language/default = m.get_default_language()
-			for(var/iter = 0, iter <= lentext(message)/2, iter++)
-				if(!isnull(default))
-					new_message += pick(default.syllables)
-				else
-					new_message += pick("a","e","i","o","u")
-			message = new_message
-		to_chat(m,"<span class = 'radio'>\[[channel]\] [name]: \"[message]\" \[[x]:[y]\]</span>")
+/obj/effect/overmap/ship/npc_ship/proc/radio_message(var/message, var/ignore_cooldown = 0)
+	//check if we're still on cooldown from last radio message
+	if(world.time >= last_radio_time + radio_cooldown || ignore_cooldown)
+		last_radio_time = world.time
+		GLOB.global_headset.autosay(message, src.name, radio_channel, radio_language)
+	else
+		//otherwise queue it up
+		//note: if there is lots of radio spam some messages will be lost so only send the latest message
+		next_message = message
 
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
@@ -176,8 +162,16 @@
 		target_loc = pick(turfs_nearobj)
 
 /obj/effect/overmap/ship/npc_ship/process()
+	//despawn after a while
 	if(world.time >= unload_at && unload_at != 0)
 		lose_to_space()
+
+	//a delay to chat messages
+	if(next_message)
+		if(world.time >= last_radio_time + radio_cooldown)
+			radio_message(next_message)
+			next_message = null
+
 	if(hull > initial(hull)/4)
 		var/stop_normal_operations = 0
 		for(var/datum/npc_ship_request/request in available_ship_requests)
@@ -203,7 +197,7 @@
 	var/message_to_use = pick(messages_on_hit)
 	if(ship_disabled)
 		message_to_use = pick(messages_on_death)
-	radio_message(null,"[message_to_use]","EBAND")
+	radio_message("[message_to_use]")
 
 /obj/effect/overmap/ship/npc_ship/proc/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	if(add_proj)

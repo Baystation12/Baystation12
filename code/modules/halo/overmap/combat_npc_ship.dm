@@ -44,7 +44,7 @@
 	if(target_disengage_at == 0)
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
-		radio_message(null,"They must be disabled now! Disengaging.")
+		radio_message("They must be disabled now! Disengaging.")
 		target = null
 		target_disengage_at = 0
 		return
@@ -74,7 +74,7 @@
 				ships_fireon += ship
 		if(ships_fireon.len != 0)
 			target = pick(ships_fireon)
-			radio_message(null,"Hostile Located, firing on target [target] at [target.x],[target.y]. ")
+			radio_message("Hostile Located, firing on target [target] at [target.x],[target.y].")
 
 	if(target && (target in view(7,src)))
 		if(world.time > next_fireat)
@@ -110,6 +110,7 @@
 	faction = "UNSC"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc)
+	radio_channel = "FLEETCOM"
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/generate_ship_name()
 	. = ..()
@@ -128,6 +129,10 @@
 	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie)
+
+/obj/effect/overmap/ship/npc_ship/combat/innie/New()
+	. = ..()
+	radio_channel = halo_frequencies.innie_channel_name
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/generate_ship_name()
 	. = ..()
@@ -160,7 +165,8 @@
 	)
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
 	faction = "Covenant"
-	message_language = "Sangheili"
+	radio_language = "Sangheili"
+	radio_channel = "Battlenet"
 	ship_datums = list(/datum/npc_ship/cov_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov)
 
@@ -175,7 +181,6 @@
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
 	messages_on_death = list("... / --- / ...")
 	faction = "Flood"
-	message_language = "Flood"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake_flood)
 	projectiles_to_fire = list(/obj/item/projectile/overmap/flood_pod = 1 SECOND)

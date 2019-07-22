@@ -27,7 +27,7 @@
 	our_ship.target_loc = call_target.loc
 
 /datum/npc_ship_request/cargo_call/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
-	ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"A trade? Of course. On our way.\"</span>")
+	ship_source.radio_message("A trade? Of course. On our way.")
 	set_cargo_call_status(map_sectors["[requester.z]"],ship_source)
 	time_leave_at = cargo_stay_time
 
@@ -36,17 +36,17 @@
 	if(cargo_call_target)
 		if(ship_source.loc == cargo_call_target.loc)
 			if(!on_call)
-				ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"Alright, we're here. Dock with us. You have [cargo_stay_time/600] minutes.\"</span>")
+				ship_source.radio_message("Alright, we're here. Dock with us. You have [cargo_stay_time/600] minutes.")
 				ship_source.target_loc = null
 				time_leave_at = world.time + BASE_CARGO_STAY_TIME
 				on_call = 1
 			else
 				ship_source.target_loc = null
 			if(time_leave_at != 0 && !already_warned && world.time > time_leave_at-warn_depart_time)
-				ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"I'll be leaving in [warn_depart_time/600] minutes. Better pack your stuff up.\"</span>")
+				ship_source.radio_message("I'll be leaving in [warn_depart_time/600] minutes. Better pack your stuff up.")
 				already_warned = 1
 			if(time_leave_at != 0 && world.time > time_leave_at)
-				ship_source.radio_message("<span class = 'radio'>\[System\] [ship_source.name]: \"Thanks for the trade! We're leaving now.\"</span>")
+				ship_source.radio_message("Thanks for the trade! We're leaving now.")
 				cargo_call_target = null
 				on_call = 0
 				already_warned = 0
@@ -101,9 +101,9 @@
 	request_auth_levels = list(AUTHORITY_LEVEL_UNSC,AUTHORITY_LEVEL_ONI)
 
 /datum/npc_ship_request/halt_fake/do_request(var/obj/effect/overmap/ship/npc_ship/combat/ship_source,var/mob/requester)
-	ship_source.radio_message(null,"Slowing dow- DIE UNSC SCUM! FOR THE URF!")
+	ship_source.radio_message("Slowing dow- DIE UNSC SCUM! FOR THE URF!", 1)
 	for(var/obj/effect/overmap/ship/npc_ship/combat/innie/ship in view(7,src))
-		ship_source.radio_message(null,"FOR THE URF!")
+		ship_source.radio_message("FOR THE URF!", 1)
 		ship.target = map_sectors["[requester.z]"]
 	ship_source.target = map_sectors["[requester.z]"]
 	. = ..()
@@ -129,12 +129,12 @@
 	for(var/obj/object in view(7,src) + view(7,map_sectors["[requester.z]"]))
 		if(object.name == "[user_input]")
 			ship_source.target = object
-			ship_source.radio_message(requester,"Located object. Firing.","Direct Comms")
+			ship_source.radio_message("Located object. Firing.")
 			return
 
-	ship_source.radio_message(requester,"We can't find any nearby object with that name. Ensure name accuracy.","Direct Comms")
+	ship_source.radio_message("We can't find any nearby object with that name. Ensure name accuracy.")
 	if(ship_source.target)
-		ship_source.radio_message(requester,"Disengaging from current target.","Direct Comms")
+		ship_source.radio_message("Disengaging from current target.")
 		ship_source.target = null
 
 /datum/npc_ship_request/fire_on_target/unsc
