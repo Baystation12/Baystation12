@@ -58,6 +58,8 @@
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_ship_icon()
 	var/list/icons_pickfrom = icons_pickfrom_list
+	if(icons_pickfrom.len == 0)
+		return
 	icon = pick(icons_pickfrom)
 
 /obj/effect/overmap/ship/npc_ship/proc/generate_ship_name()
