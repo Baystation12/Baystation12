@@ -1,0 +1,5 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Exosuits have been completely refactored. Make sure to check your skills before joining the round."
+  - rscadd: "You can now slide ID across a PAI to grant them your access."
