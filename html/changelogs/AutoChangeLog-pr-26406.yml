@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Manually toggling apc settings will no longer raise alarms. Also applies to some mapped APCs."
