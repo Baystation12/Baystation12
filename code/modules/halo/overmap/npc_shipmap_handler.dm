@@ -1,13 +1,5 @@
 var/global/datum/npc_ship_map_handler/shipmap_handler = new
 
-#define ROUNDSTART_COMBAT_SHIPS 9
-#define ROUNDSTART_CIVVIE_SHIPS 3
-#define ROUNDSTART_FLOOD_SHIP_CHANCE 10
-#define ROUNDSTART_FLOOD_SHIP_NUM 2
-#define COMBAT_SHIPS_UNSC list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
-#define COMBAT_SHIPS_INNIE list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
-#define COMBAT_SHIPS_COVIE list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
-
 /datum/npc_ship_map_handler
 
 	var/list/ship_map_zs = list()
@@ -53,22 +45,14 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		world.maxz = max_z_cached
 		return max_z_cached
 
-/datum/npc_ship_map_handler/proc/spawn_roundstart_ships()
-	if(prob(ROUNDSTART_FLOOD_SHIP_CHANCE))
-		for(var/i = 0,i < ROUNDSTART_FLOOD_SHIP_NUM,i++)
-			var/spawn_loc = pick(GLOB.overmap_tiles_uncontrolled)
-			new /obj/effect/overmap/ship/npc_ship/combat/flood (spawn_loc)
-	for(var/i = 0, i <ROUNDSTART_CIVVIE_SHIPS,i++)
-		var/spawn_loc = pick(GLOB.overmap_tiles_uncontrolled)
-		new /obj/effect/overmap/ship/npc_ship (spawn_loc)
-
-	for(var/i = 0, i <ROUNDSTART_COMBAT_SHIPS,i++)
-		var/spawn_loc = pick(GLOB.overmap_tiles_uncontrolled)
-		var/list/pickfrom = COMBAT_SHIPS_UNSC
-		if(i > ROUNDSTART_COMBAT_SHIPS/3)
-			pickfrom = COMBAT_SHIPS_INNIE
-		if(i > (ROUNDSTART_COMBAT_SHIPS/3)*2)
-			pickfrom = COMBAT_SHIPS_COVIE
-		var/picked_type = pick(pickfrom)
-		new  picked_type (spawn_loc)
-
+/datum/npc_ship_map_handler/proc/spawn_ship(var/faction_name, var/amount = 1)
+	var/turf/spawn_loc = pick(GLOB.overmap_tiles_uncontrolled)
+	var/datum/faction/F = GLOB.factions_by_name[faction_name]
+	var/ship_type = pick(F.ship_types)
+	if(ship_type)
+		for(var/i = 0, i < amount, i++)
+			var/obj/effect/overmap/ship = new ship_type(spawn_loc)
+			ship.my_faction = F
+			F.npc_ships.Add(ship)
+	else
+		message_admins("WARNING: Attempted to spawn a \"[faction_name]\" NPC ship but there were none to choose from.")

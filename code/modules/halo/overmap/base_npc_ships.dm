@@ -141,6 +141,7 @@
 		shipmap_handler.free_map(z_level)
 		map_z -= z_level
 	GLOB.processing_objects -= src
+	my_faction.npc_ships -= src
 	qdel(src)
 
 /obj/effect/overmap/ship/npc_ship/proc/ship_targetedby_defenses()

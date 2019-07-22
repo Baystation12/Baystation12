@@ -35,6 +35,7 @@ var/list/points_of_interest = list()
 	var/superstructure_failing = 0
 	var/list/connectors = list() //Used for docking umbilical type-items.
 	var/faction = "civilian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
+	var/datum/faction/my_faction
 	var/slipspace_status = 0		//0: realspace, 1: slipspace but returning to system, 2: out of system
 
 	var/datum/targeting_datum/targeting_datum = new
@@ -316,7 +317,6 @@ var/list/points_of_interest = list()
 
 	report_progress("Overmap build complete.")
 	shipmap_handler.max_z_cached = world.maxz
-	shipmap_handler.spawn_roundstart_ships()
 	return 1
 
 

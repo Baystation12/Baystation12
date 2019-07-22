@@ -33,6 +33,9 @@
 
 	setup_objectives()
 
+	shipmap_handler.spawn_ship("Human Colony", 3)
+	shipmap_handler.spawn_ship("UNSC", 2)
+
 /datum/game_mode/outer_colonies/proc/setup_factions()
 	//setup factions
 	for(var/faction_type in factions)
