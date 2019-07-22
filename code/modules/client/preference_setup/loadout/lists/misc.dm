@@ -230,3 +230,8 @@
 	path = /obj/item/weapon/material/knife/folding/swiss
 	cost = 4
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/flag
+	display_name = "flag"
+	path = /obj/item/weapon/tableflag
+	flags = GEAR_HAS_TYPE_SELECTION
