@@ -1,0 +1,5 @@
+author: "Eonoc"
+delete-after: True
+changes: 
+  - tweak: "Tweaks Vox codex entry"
+  - rscadd: "Add Vox shriek audible emote"
