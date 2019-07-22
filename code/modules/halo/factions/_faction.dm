@@ -101,7 +101,7 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 /datum/faction/covenant
 	name = "Covenant"
 	var/list/objective_types = list()
-	enemy_factions = list("UNSC","Insurrection")
+	enemy_factions = list("UNSC","Insurrection", "Human Colony","Flood")
 	commander_titles = list("Sangheili Shipmaster")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
 
@@ -118,7 +118,7 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 
 /datum/faction/unsc
 	name = "UNSC"
-	enemy_factions = list("Covenant","Insurrection")
+	enemy_factions = list("Covenant","Insurrection","Flood")
 	commander_titles = list("UNSC Bertels Commanding Officer")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
 
@@ -135,7 +135,7 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 
 /datum/faction/insurrection
 	name = "Insurrection"
-	enemy_factions = list("UNSC","Covenant")
+	enemy_factions = list("UNSC","Covenant","Flood")
 	commander_titles = list("Insurrectionist Commander")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
 
@@ -153,3 +153,12 @@ GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_
 /datum/faction/human_civ
 	name = "Human Colony"
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/cargo)
+
+
+
+/* Flood */
+
+/datum/faction/flood
+	name = "Flood"
+	enemy_factions = list("Covenant","Insurrection","Human Colony","UNSC")
+	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/flood)
