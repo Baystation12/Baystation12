@@ -596,7 +596,7 @@ BLIND     // can't see anything
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	if(isnull(stepsound))
 		return
-	playsound(src,stepsound, 25, 1)
+	playsound(src,stepsound, 15, 1)
 
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))
