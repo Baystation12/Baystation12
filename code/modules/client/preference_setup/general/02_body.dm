@@ -372,6 +372,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			pref.cultural_info = mob_species.default_cultural_info.Copy()
 
+			if(!has_flag(pref.species, HAS_UNDERWEAR))
+				pref.all_underwear.Cut()
+
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["hair_color"])
