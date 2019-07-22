@@ -15,6 +15,8 @@
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
+	var/displaying_faction = 1
+
 /obj/effect/overmap/ship/Initialize()
 	. = ..()
 	for(var/datum/ship_engine/E in ship_engines)

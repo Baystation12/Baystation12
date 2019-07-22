@@ -51,6 +51,8 @@
 
 	var/list/cargo_containers = list()
 
+	var/ignore_target_civs = 1
+
 /obj/effect/overmap/ship/npc_ship/proc/pick_ship_icon()
 	var/list/icons_pickfrom = icons_pickfrom_list
 	icon = pick(icons_pickfrom)
@@ -129,12 +131,11 @@
 		if(!have_lang)
 			var/new_message = ""
 			var/datum/language/default = m.get_default_language()
-			var/iter
-			for(iter = 0; iter <= lentext(message)/2; iter++)
-			if(!isnull(default))
-				new_message += pick(default.syllables)
-			else
-				new_message += pick("a","e","i","o","u")
+			for(var/iter = 0, iter <= lentext(message)/2, iter++)
+				if(!isnull(default))
+					new_message += pick(default.syllables)
+				else
+					new_message += pick("a","e","i","o","u")
 			message = new_message
 		to_chat(m,"<span class = 'radio'>\[[channel]\] [name]: \"[message]\" \[[x]:[y]\]</span>")
 
