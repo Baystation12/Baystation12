@@ -158,7 +158,7 @@
 	else
 		var/obj/chosen = pick(sectors_onmap)
 		var/list/turfs_nearobj = list()
-		for(var/turf/t in range(7,chosen))
+		for(var/turf/unsimulated/map/t in range(7,chosen))
 			turfs_nearobj += t
 		target_loc = pick(turfs_nearobj)
 
