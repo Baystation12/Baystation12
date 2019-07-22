@@ -15,7 +15,7 @@
 	desc=  "A ship specialised for combat."
 
 	hull = 3000 //Hardier than a civvie ship.
-	var/atom/target
+	var/obj/effect/overmap/ship/npc_ship/target
 
 	var/target_range_from = 3 //Amount of tiles away from target ship will circle.
 
@@ -62,31 +62,45 @@
 
 	next_fireat = world.time + lowest_delay
 
+/obj/effect/overmap/ship/npc_ship/combat/proc/find_target()
+	var/list/targets = list()
+	target = null
+	target_loc = null
+
+	//scan ships in range
+	for(var/obj/effect/overmap/ship/ship in range(7))
+
+		//check if they're a hostile faction
+		var/datum/faction/their_faction = ship.my_faction
+		if(their_faction.name in my_faction.enemy_factions)
+			targets += ship
+
+	if(targets.len > 0)
+		//pick one at random
+		target = pick(targets)
+		radio_message("Hostile located, firing on target [target] at [target.x],[target.y].")
+
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
 		return
 	if(is_player_controlled())
 		return ..()
 	if(!target)
-		var/list/ships_fireon = list()
-		for(var/obj/effect/overmap/ship/ship in range(7))
-			if(!((ship.faction == "civilian" || ship.displaying_faction == 0) && ignore_target_civs == 1) && ship.faction != faction )
-				ships_fireon += ship
-		if(ships_fireon.len != 0)
-			target = pick(ships_fireon)
-			radio_message("Hostile Located, firing on target [target] at [target.x],[target.y].")
+		find_target()
 
-	if(target && (target in view(7,src)))
-		if(world.time > next_fireat)
-			var/obj/effect/overmap/ship/npc_ship/targ_ship = target
-			if(istype(targ_ship))
-				if(targ_ship.hull > initial(targ_ship.hull)/4)
-					fire_at_target()
-			else
-				fire_at_target()
-		var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
-		if(target_locs.len > 0)
-			target_loc = pick(target_locs) //Let's emulate a "circling" behaviour.
+	if(target)
+		//check if they're in range
+		if(get_dist(src, target) > 7)
+			target = null
+		else
+			//open fire
+			fire_at_target()
+
+			if(!target_loc || src.loc == target_loc)
+				//Let's emulate a "circling" behaviour.
+				var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
+				if(target_locs.len > 0)
+					target_loc = pick(target_locs)
 	..()
 
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
@@ -124,7 +138,6 @@
 
 //INNIE//
 /obj/effect/overmap/ship/npc_ship/combat/innie
-	displaying_faction = 0
 	icon = 'code/modules/halo/icons/overmap/innie_prowler.dmi'
 	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
@@ -138,7 +151,6 @@
 	. = ..()
 	if(prob(50))
 		name = "URF [name]"
-		displaying_faction = 1
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/pick_ship_icon()
 	if(!findtextEx(name,"URF"))
@@ -152,7 +164,6 @@
 
 //COVENANT//
 /obj/effect/overmap/ship/npc_ship/combat/covenant
-	ignore_target_civs = 0
 	ship_name_list = list(\
 	"Woe of the Treacherous",
 	"Faithful Vanguard",
@@ -177,7 +188,6 @@
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 25 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood
-	displaying_faction = 0
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
 	messages_on_death = list("... / --- / ...")
 	faction = "Flood"

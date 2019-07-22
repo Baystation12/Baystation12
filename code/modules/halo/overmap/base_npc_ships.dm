@@ -52,8 +52,6 @@
 
 	var/list/cargo_containers = list()
 
-	var/ignore_target_civs = 1
-
 	var/last_radio_time = 0
 	var/radio_cooldown = 5 SECONDS
 	var/next_message
