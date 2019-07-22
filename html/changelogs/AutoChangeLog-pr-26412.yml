@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscadd: "Adds Jainism and Taoism to the list of human religions."
+  - rscadd: "Adds two new chaplain insignia for Jainism and Taoism."
