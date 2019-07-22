@@ -56,11 +56,11 @@
 					             "<span class='notice'>You start to bandage [M]'s [affecting.name].</span>")
 
 		if((affecting.status & ORGAN_ARTERY_CUT || affecting.status & ORGAN_BLEEDING) && !affecting.clamped())
-			user.visible_message("<span class='notice'>[user] bandages [M]'s [affecting.name].</span>", \
-					             "<span class='notice'>bandage [M]'s [affecting.name].</span>")
 
 			// Only clamp the bleeding; doesn't stop someone from eventually bleeding out
 			if(do_after(user, 20, M))
+				user.visible_message("<span class='notice'>[user] bandages [M]'s [affecting.name].</span>", \
+					             "<span class='notice'>bandage [M]'s [affecting.name].</span>")
 				affecting.clamp()
 				use(1)
 				affecting.update_damages()
