@@ -56,6 +56,12 @@
 /obj/item/mech_equipment/proc/get_effective_obj()
 	return src
 
+/obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
+	. = ..()
+	if(. && owner)
+		//Installed equipment shall not be unequiped.
+		return FALSE
+
 /obj/item/mech_equipment/mounted_system
 	var/holding_type
 	var/obj/item/holding

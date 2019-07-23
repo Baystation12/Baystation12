@@ -27,6 +27,7 @@
 	frame.is_reinforced = FRAME_REINFORCED_WELDED
 	frame.set_name = name
 	frame.name = "frame of \the [frame.set_name]"
+	frame.material = material
 	frame.queue_icon_update()
 
 	qdel(src)
