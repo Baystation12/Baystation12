@@ -240,3 +240,4 @@ obj/item/projectile/sonic/strong/proc/bang(var/mob/living/carbon/M)
 		target.throw_at(get_edge_target_turf(target, throwdir), rand(1,5), 6)
 		bang(target)
 		return 1
+
