@@ -65,7 +65,6 @@
 /obj/effect/overmap/ship/npc_ship/combat/proc/find_target()
 	var/list/targets = list()
 	target = null
-	target_loc = null
 
 	//scan ships in range
 	for(var/obj/effect/overmap/ship/ship in range(7))
