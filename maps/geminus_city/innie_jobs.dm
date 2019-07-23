@@ -34,6 +34,7 @@
 	"Insurrectionist Saboteur",\
 	"Insurrectionist Infiltrator")
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/geminus_innie/officer
 	title = "Insurrectionist Officer"

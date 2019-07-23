@@ -15,36 +15,6 @@
 	access = list(access_janitor, access_maint_tunnels, access_research)
 	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
 
-/datum/job/innie_sympathiser
-	title = "Colonist - Insurrectionist Sympathiser"
-	total_positions = 5
-	spawnpoint_override = "Colony Arrival Shuttle"
-	selection_color = "#000000"
-	spawn_faction = "Insurrection"
-	supervisors = " the Colony Mayor and your local insurrection contact"
-	account_allowed = 1
-	generate_email = 1
-	loadout_allowed = TRUE
-	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
-	whitelisted_species = list(/datum/species/human)
-
-	latejoin_at_spawnpoints = FALSE
-	access = list(access_janitor, access_maint_tunnels, access_research)
-
-/datum/job/insurrectionist_recruiter
-	title = "Colonist - Insurrectionist Recruiter"
-	total_positions = 1
-	head_position = 1
-	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
-	whitelisted_species = list(/datum/species/human)
-	account_allowed = 1
-	generate_email = 1
-	loadout_allowed = TRUE
-	spawnpoint_override = "Colony Arrival Shuttle"
-	selection_color = "#000000"
-	spawn_faction = "Insurrection"
-	supervisors = " the Insurrection"
-
 /datum/job/colonist_mayor
 	title = "Mayor"
 	department_flag = COM
@@ -108,7 +78,6 @@
 	account_allowed = 1
 	generate_email = 1
 	economic_modifier = 2
-	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/cop
 	whitelisted_species = list(/datum/species/human)
 

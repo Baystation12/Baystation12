@@ -5,8 +5,6 @@ GLOBAL_LIST_EMPTY(colony_spawns)
 	display_name = "Colony Arrival Shuttle"
 	restrict_job_type = list(\
 		/datum/job/colonist,\
-		/datum/job/innie_sympathiser,\
-		/datum/job/insurrectionist_recruiter,\
 		/datum/job/colonist_mayor,\
 		/datum/job/police,\
 		/datum/job/police_chief\

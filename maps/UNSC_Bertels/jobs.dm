@@ -13,6 +13,7 @@
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/unscbertels_medical_crew
 	title = "UNSC Bertels Hospital Corpsman"
@@ -24,6 +25,7 @@
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/unscbertels_co
 	title = "UNSC Bertels Commanding Officer"
@@ -38,6 +40,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	faction_whitelist = "UNSC"
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/unscbertels_xo
 	title = "UNSC Bertels Executive Officer"
@@ -50,6 +53,7 @@
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/unsc_ship_iwo
 	title = "UNSC Bertels Infantry Weapons Officer"
@@ -61,6 +65,7 @@
 	access = list(access_unsc,144,145,192,access_unsc_armoury, access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 
 
@@ -80,6 +85,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -92,6 +98,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 //UNSC BERTELS ODST Jobs
 
@@ -115,6 +122,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
@@ -133,3 +141,4 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
