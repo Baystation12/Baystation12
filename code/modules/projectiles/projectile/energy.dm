@@ -164,3 +164,11 @@
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
 	bang(target)
 	. = ..()
+
+/obj/item/projectile/energy/darkmatter
+	name = "dark matter pellet"
+	icon_state = "dark_pellet"
+	fire_sound = 'sound/weapons/eLuger.ogg'
+	damage = 10
+	armor_penetration = 35
+	damage_type = BRUTE

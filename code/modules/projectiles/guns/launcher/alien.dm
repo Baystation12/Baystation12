@@ -36,9 +36,11 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species && H.species.get_bodytype(H) != SPECIES_VOX)
-			to_chat(user, "<span class='warning'>\The [src] does not respond to you!</span>")
+			to_chat(user, "<span class='warning'>\The [src] hisses and jumps out of your grasping appendage.</span>") //gotta be all inclusive with your hand descriptors
+			playsound (user,'sound/voice/BugHiss.ogg', 50, 1)
+			usr.unEquip(src)
 			return 0
-	return ..()
+		return ..()
 
 //Vox pinning weapon.
 /obj/item/weapon/gun/launcher/alien/spikethrower
@@ -53,7 +55,7 @@
 	icon_state = "spikethrower3"
 	item_state = "spikethrower"
 	fire_sound_text = "a strange noise"
-	fire_sound = 'sound/weapons/bladeslice.ogg'
+	fire_sound = 'sound/weapons/spike.ogg'
 
 /obj/item/weapon/gun/launcher/alien/spikethrower/on_update_icon()
 	icon_state = "spikethrower[ammo]"

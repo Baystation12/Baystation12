@@ -63,3 +63,13 @@
 /obj/item/weapon/gun/launcher/alien/slugsling/attack_self(var/mob/living/user)
 	mode = mode == "Impact" ? "Sentry" : "Impact"
 	to_chat(user,"<span class='notice'>You switch \the [src]'s mode to \"[mode]\"</span>")
+
+/obj/item/weapon/gun/launcher/alien/slugsling/special_check(user)
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species && H.species.get_bodytype(H) != SPECIES_VOX)
+			to_chat(user, "<span class='warning'>\The [src] hisses and jumps out of your grasping appendage.</span>") //gotta be all inclusive with your hand descriptors
+			playsound (user,'sound/voice/BugHiss.ogg', 50, 1)
+			usr.unEquip(src)
+			return 0
+		return ..()

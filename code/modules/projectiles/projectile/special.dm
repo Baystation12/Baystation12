@@ -170,6 +170,7 @@
 	if(L.reagents)
 		L.reagents.add_reagent(/datum/reagent/toxin/venom, 5)
 
+
 /obj/item/missile
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "missile"
@@ -183,3 +184,59 @@
 	else
 		..()
 	return
+
+
+/obj/item/projectile/sonic
+	name = "sonic pulse"
+	icon_state = "sound"
+	fire_sound = 'sound/effects/basscannon.ogg'
+	damage = 5
+	armor_penetration = 70 //it's sound/concussive force. Can't imagine any armor but bomb armor would really work against that, and even then...
+	damage_type = BRUTE
+	vacuum_traversal = 0
+	penetration_modifier = 0.2
+	penetrating = 1
+
+/obj/item/projectile/sonic/weak
+	agony = 70
+
+/obj/item/projectile/sonic/strong
+	damage = 20
+	penetrating = 1
+
+obj/item/projectile/sonic/strong/proc/bang(var/mob/living/carbon/M)
+	to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
+	var/ear_safety = 0
+	var/mob/living/carbon/human/H = M
+	if(iscarbon(M))
+		if(ishuman(M))
+			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
+				ear_safety += 2
+			if(MUTATION_HULK in M.mutations)
+				ear_safety += 1
+			if(istype(H.head, /obj/item/clothing/head/helmet))
+				ear_safety += 1
+		if(ear_safety == 1)
+			M.make_dizzy(60)
+		else if (ear_safety > 1)
+			M.make_dizzy(10)
+		else if (!ear_safety)
+			M.make_dizzy(120)
+			M.ear_damage += rand(1, 10)
+			M.ear_deaf = max(M.ear_deaf,15)
+		if (M.ear_damage >= 15)
+			to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
+			if (prob(M.ear_damage - 5))
+				to_chat(M, "<span class='danger'>You can't hear anything!</span>")
+				M.set_sdisability(DEAF)
+		else
+			if (M.ear_damage >= 5)
+				to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
+		M.update_icons()
+
+/obj/item/projectile/sonic/strong/on_hit(var/atom/movable/target, var/blocked = 0)
+	if(ismob(target))
+		var/throwdir = get_dir(firer,target)
+		target.throw_at(get_edge_target_turf(target, throwdir), rand(1,5), 6)
+		bang(target)
+		return 1
