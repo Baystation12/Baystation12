@@ -44,8 +44,7 @@
 		return rolling_up.w_class <= get_max_item_rollup_size()
 	if(istype(thing, /mob))
 		var/mob/rolling_up = thing
-		return rolling_up.mob_size <= MOB_SMALL
-	return FALSE
+		return rolling_up.mob_size <= get_max_mob_rollup_size()
 
 /obj/structure/diona_gestalt/proc/get_max_item_rollup_size()
 	if(nymphs.len > 9)
@@ -57,3 +56,8 @@
 	if(nymphs.len > 2)
 		return ITEM_SIZE_NORMAL
 	return ITEM_SIZE_SMALL
+
+/obj/structure/diona_gestalt/proc/get_max_mob_rollup_size()
+	if(nymphs.len >= 20)
+		return MOB_MEDIUM
+	return MOB_SMALL
