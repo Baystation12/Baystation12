@@ -77,18 +77,6 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 	return 1
 
-/datum/antagonist/wizard/check_victory()
-	var/survivor
-	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || player.current.stat == DEAD)
-			continue
-		survivor = 1
-		break
-	if(!survivor)
-		SSstatistics.set_field_details("round_end_result","loss - wizard killed")
-		to_world("<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew! The Space Wizards Federation has been taught a lesson they will not soon forget!</font></span>")
-
-
 /datum/antagonist/wizard/print_player_summary()
 	..()
 	for(var/p in current_antagonists)

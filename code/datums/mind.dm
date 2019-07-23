@@ -140,11 +140,6 @@
 		var/num = 1
 		for(var/datum/objective/O in objectives)
 			out += "<b>Objective #[num]:</b> [O.explanation_text] "
-			if(O.completed)
-				out += "(<font color='green'>complete</font>)"
-			else
-				out += "(<font color='red'>incomplete</font>)"
-			out += " <a href='?src=\ref[src];obj_completed=\ref[O]'>\[toggle\]</a>"
 			out += " <a href='?src=\ref[src];obj_delete=\ref[O]'>\[remove\]</a><br>"
 			num++
 		out += "<br><a href='?src=\ref[src];obj_announce=1'>\[announce objectives\]</a>"
@@ -344,10 +339,6 @@
 					new_objective:target = M.mind
 					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.special_role ? M.mind:special_role : M.mind:assigned_role]."
 
-			if ("prevent")
-				new_objective = new /datum/objective/block
-				new_objective.owner = src
-
 			if ("hijack")
 				new_objective = new /datum/objective/hijack
 				new_objective.owner = src
@@ -415,11 +406,6 @@
 		var/datum/objective/objective = locate(href_list["obj_delete"])
 		if(!istype(objective))	return
 		objectives -= objective
-
-	else if(href_list["obj_completed"])
-		var/datum/objective/objective = locate(href_list["obj_completed"])
-		if(!istype(objective))	return
-		objective.completed = !objective.completed
 
 	else if(href_list["implant"])
 		var/mob/living/carbon/human/H = current
