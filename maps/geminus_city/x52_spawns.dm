@@ -1,7 +1,7 @@
 GLOBAL_LIST_EMPTY(x52_base_spawns)
 
 /datum/spawnpoint/x52
-	display_name = "x52"
+	display_name = "X52 Researcher"
 	restrict_job = list("X52 Researcher")
 
 /datum/spawnpoint/x52/New()

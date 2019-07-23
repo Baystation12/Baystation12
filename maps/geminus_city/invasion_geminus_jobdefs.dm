@@ -11,6 +11,8 @@
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
 		/datum/job/soe_commando_captain,\
+		/datum/job/geminus_x52/researcher,\
+		/datum/job/geminus_x52/research_director,\
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_xo,\
 		/datum/job/bertelsunsc_ship_marine,\
@@ -38,6 +40,8 @@
 		"UNSC Base Spawns",\
 		"Research Facility Spawn",\
 		"Research Facility Director Spawn",\
-		"Research Facility Security Spawn")
+		"Research Facility Security Spawn",\
+		"X52 Researcher",\
+		"X52 RD")
 
 	default_spawn = DEFAULT_SPAWNPOINT_ID
