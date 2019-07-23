@@ -274,8 +274,7 @@ var/global/list/narsie_list = list()
 			continue
 		if(cult_nh_mind.current.stat)
 			continue
-		var/turf/pos = get_turf(cult_nh_mind.current)
-		if(pos.z != src.z)
+		if(get_z(cult_nh_mind.current) != z)
 			continue
 		cultists += cult_nh_mind.current
 	if(cultists.len)
