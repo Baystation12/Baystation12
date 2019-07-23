@@ -7,7 +7,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/geminus_x52
 	access = list(access_x52)
 	selection_color = " #a01b01"
-	spawnpoint_override = "X52"
+	spawnpoint_override = "X52 Researcher"
 	alt_titles = null
 	whitelisted_species = list(/datum/species/human)
 
