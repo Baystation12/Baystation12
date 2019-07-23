@@ -217,7 +217,7 @@
 /datum/gear/bible/New()
 	..()
 	var/books = list()
-	books["bible"] = /obj/item/weapon/storage/bible
+	books["bible (adjustable)"] = /obj/item/weapon/storage/bible
 	books["Bible"] = /obj/item/weapon/storage/bible/bible
 	books["Tanakh"] = /obj/item/weapon/storage/bible/tanakh
 	books["Quran"] = /obj/item/weapon/storage/bible/quran
