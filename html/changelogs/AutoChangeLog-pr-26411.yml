@@ -1,0 +1,5 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Earmuffs now actually muffle sounds. You'll also not hear spoken things."
+  - rscadd: "Headphones can actually play music now. Drag onto yourself when worn in ear slot to access menu. They act as earmuffs when music is playing."
