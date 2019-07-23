@@ -75,6 +75,10 @@
 		explosion(location, -1, -1, 2, 3)
 
 	if(target)
+		if (istype(target, /turf))
+			for (var/obj/effect/landmark/demolition_point/D in target.contents)
+				D.demolish()
+
 		if (istype(target, /turf/simulated/wall))
 			var/turf/simulated/wall/W = target
 			W.dismantle_wall(1)
@@ -82,6 +86,7 @@
 			target.ex_act(2) // c4 can't gib mobs anymore.
 		else
 			target.ex_act(1)
+
 	if(target)
 		target.overlays -= image_overlay
 	qdel(src)

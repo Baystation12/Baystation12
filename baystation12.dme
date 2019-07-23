@@ -1499,6 +1499,7 @@
 #include "code\modules\halo\covenant\tools.dm"
 #include "code\modules\halo\covenant\wall_locker.dm"
 #include "code\modules\halo\covenant\weapon_rack.dm"
+#include "code\modules\halo\demolitions\effects.dm"
 #include "code\modules\halo\doors\halo_doors.dm"
 #include "code\modules\halo\factions\_faction.dm"
 #include "code\modules\halo\factions\faction_objectives.dm"
