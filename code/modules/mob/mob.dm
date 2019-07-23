@@ -1119,3 +1119,8 @@
 
 /mob/proc/handle_embedded_and_stomach_objects()
 	return
+
+/mob/proc/get_sound_volume_multiplier()
+	if(ear_deaf)
+		return 0
+	return 1

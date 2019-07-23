@@ -38,7 +38,7 @@
 	if(iscarbon(M))
 		eye_safety = M.eyecheck()
 		if(ishuman(M))
-			if(istype(M:l_ear, /obj/item/clothing/ears/earmuffs) || istype(M:r_ear, /obj/item/clothing/ears/earmuffs))
+			if(M.get_sound_volume_multiplier() < 0.2)
 				ear_safety += 2
 			if(MUTATION_HULK in M.mutations)
 				ear_safety += 1
