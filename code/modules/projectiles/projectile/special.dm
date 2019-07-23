@@ -191,7 +191,7 @@
 	icon_state = "sound"
 	fire_sound = 'sound/effects/basscannon.ogg'
 	damage = 5
-	armor_penetration = 70 //it's sound/concussive force. Can't imagine any armor but bomb armor would really work against that, and even then...
+	armor_penetration = 40
 	damage_type = BRUTE
 	vacuum_traversal = 0
 	penetration_modifier = 0.2
