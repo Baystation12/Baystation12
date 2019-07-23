@@ -8698,10 +8698,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftport)
-"aEF" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/tiled,
-/area/security/locker)
 "aEG" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
@@ -9452,17 +9448,6 @@
 "aHT" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/command/armoury)
-"aHW" = (
-/obj/effect/floor_decal/corner/red{
-	icon_state = "corner_white";
-	dir = 9
-	},
-/obj/structure/sign/warning/secure_area/armory{
-	dir = 4;
-	pixel_x = -32
-	},
-/turf/simulated/floor/tiled,
-/area/security/wing)
 "aHX" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -10321,6 +10306,14 @@
 	},
 /obj/structure/table/rack{
 	dir = 4
+	},
+/obj/item/weapon/storage/box/teargas{
+	pixel_x = 3;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/flashbangs{
+	pixel_x = -2;
+	pixel_y = -2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
@@ -15226,6 +15219,13 @@
 /obj/item/weapon/bedsheet/blue,
 /turf/simulated/floor/carpet/orange,
 /area/crew_quarters/safe_room/firstdeck)
+"csy" = (
+/obj/structure/sign/warning/secure_area{
+	icon_state = "securearea";
+	dir = 1
+	},
+/turf/simulated/wall/prepainted,
+/area/security/armoury)
 "ctb" = (
 /obj/random/torchcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -15347,10 +15347,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/light_switch{
-	pixel_x = -6;
-	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
@@ -19574,9 +19570,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/rnd/development)
 "hbP" = (
-/obj/machinery/door/airlock/highsecurity{
-	name = "Security Equipment"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -19589,6 +19582,9 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/security{
+	name = "Equipment Storage"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/storage)
 "hcb" = (
@@ -22822,6 +22818,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
+"kCN" = (
+/obj/structure/sign/warning/secure_area/armory{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/storage)
 "kDb" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
@@ -23217,17 +23221,7 @@
 	c_tag = "Security Wing - Armory";
 	dir = 8
 	},
-/obj/structure/table/rack{
-	dir = 4
-	},
-/obj/item/weapon/storage/box/teargas{
-	pixel_x = 3;
-	pixel_y = 2
-	},
-/obj/item/weapon/storage/box/flashbangs{
-	pixel_x = -2;
-	pixel_y = -2
-	},
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "lcL" = (
@@ -23833,6 +23827,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary/annex)
+"lRa" = (
+/obj/machinery/light_switch{
+	pixel_x = -6;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/security/storage)
 "lSb" = (
 /obj/machinery/light{
 	dir = 4
@@ -24001,6 +24002,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/evidence)
+"mfg" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/security/storage)
 "mgb" = (
 /obj/structure/table/steel,
 /obj/item/weapon/book/manual/solgov_law,
@@ -24923,7 +24928,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass/security{
 	id_tag = "detdoor";
-	name = "Equipment Storage"
+	name = "Locker Room"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -40084,7 +40089,7 @@ huf
 enM
 enM
 enM
-tiQ
+csy
 oLz
 mKq
 aQp
@@ -40487,7 +40492,7 @@ kss
 tZR
 hUc
 aLx
-enM
+kCN
 tiQ
 aOF
 oXx
@@ -40887,7 +40892,7 @@ aCu
 aCu
 aex
 aMT
-aMT
+lRa
 cxk
 aKy
 aLz
@@ -41086,10 +41091,10 @@ nkb
 hGs
 aCv
 aCv
-aEF
+aCv
 hGs
 aMT
-aMT
+mfg
 hbP
 aMT
 aMT
@@ -41291,7 +41296,7 @@ rOE
 uJd
 uKb
 krc
-aHW
+rOE
 aJn
 aKA
 aLA
