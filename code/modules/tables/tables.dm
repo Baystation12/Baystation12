@@ -33,6 +33,11 @@
 	if(istype(M))
 		M.on_table_offset(1)
 
+/obj/structure/table/proc/reset_mobs_offset()
+	var/mob/living/M = (locate() in get_turf(src))
+	if(M)
+		M.on_table_offset(0)
+
 /obj/structure/table/New()
 	if(istext(material))
 		material = SSmaterials.get_material_by_name(material)
@@ -90,6 +95,7 @@
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
 	for(var/obj/structure/table/T in oview(src, 1))
 		T.update_icon()
+	reset_mobs_offset()
 	. = ..()
 
 /obj/structure/table/examine(mob/user)
@@ -299,6 +305,7 @@
 		var/material/M = SSmaterials.get_material_by_name(MATERIAL_STEEL)
 		S = M.place_shard(loc)
 		if(S) shards += S
+	reset_mobs_offset()
 	qdel(src)
 	return shards
 
