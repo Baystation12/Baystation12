@@ -171,7 +171,7 @@
 	on_floor = 1
 
 /datum/stack_recipe/ivbag
-	title = "bag"
+	title = "IV bag"
 	result_type = /obj/item/weapon/reagent_containers/ivbag
 	req_amount = 4
 	difficulty = 2
