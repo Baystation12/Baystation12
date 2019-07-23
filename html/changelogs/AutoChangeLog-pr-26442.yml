@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "IV Bag construction option name changed from 'plastic bag' to 'plastic IV bag' so it is different from the other 'plastic bag'."
