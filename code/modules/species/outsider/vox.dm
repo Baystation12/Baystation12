@@ -135,6 +135,8 @@
 	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	brute_mod = 0.8
 	burn_mod = 0.8
+	strength = STR_HIGH
+	mob_size = MOB_LARGE
 
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/vox/armalis)
 
