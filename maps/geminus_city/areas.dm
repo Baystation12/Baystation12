@@ -272,7 +272,7 @@
 	name = "\improper X52"
 	icon_state = "yellow"
 	requires_power = 1
-	luminosity = 1
+	luminosity = 0
 	has_gravity = 1
 
 /area/x52/laboratory
