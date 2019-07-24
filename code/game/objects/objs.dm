@@ -161,7 +161,7 @@
 	..()
 	
 /obj/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(. && (obj_flags & OBJ_FLAG_ROTATABLE))
 		to_chat(user, "<span class='subtle'>Can be rotated with alt-click.</span>")
 
