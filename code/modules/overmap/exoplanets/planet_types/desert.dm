@@ -28,8 +28,11 @@
 	else
 		S.set_trait(TRAIT_REQUIRES_WATER,1)
 		S.set_trait(TRAIT_WATER_CONSUMPTION,1)
-	if(prob(15))
+	if(prob(75))
 		S.set_trait(TRAIT_STINGS,1)
+	if(prob(75))
+		S.set_trait(TRAIT_CARNIVOROUS,2)
+	S.set_trait(TRAIT_SPREAD,0)
 
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
