@@ -1,7 +1,0 @@
-author: "babydoll"
-delete-after: True
-changes: 
-  - tweak: "All hivebots now have increased health."
-  - tweak: "Increased hivebot megafauna 'hivemind' damage output."
-  - tweak: "Reduced hivemind vulnerability duration."
-  - tweak: "Reduced hivemind cycle duration."
