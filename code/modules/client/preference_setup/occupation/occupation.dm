@@ -143,7 +143,7 @@
 				rank_branch_string = "[branch_string][rank_branch_string]"
 
 				var/title = job.title
-				var/title_link = job.alt_titles ? "<a href='?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
+				var/title_link = length(job.alt_titles) ? "<a href='?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
 				if((title in SSjobs.titles_by_department(COM)) || (title == "AI"))//Bold head jobs
 					title_link = "<b>[title_link]</b>"
 
