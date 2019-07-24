@@ -7,20 +7,16 @@
 	suit = null
 	uniform = /obj/item/clothing/under/sterile
 	shoes = /obj/item/clothing/shoes/white
-	l_ear = /obj/item/device/radio/headset/insurrection
+	l_ear = /obj/item/device/radio/headset
 	gloves = null
 	pda_slot = null
 
 	flags = 0
 
-/decl/hierarchy/outfit/job/geminus_x52/equip_id(mob/living/carbon/human/H, rank, assignment)
-	. = ..()
-
-	var/obj/item/weapon/card/id/W = .
-	if(W)
-		W.rank = "Colonist"
-		W.assignment = "Colonist"
-		W.update_name()
+/decl/hierarchy/outfit/job/geminus_x52/equip_id(mob/living/carbon/human/H)
+	var/obj/item/weapon/card/id/C = ..()
+	C.assignment = "Colonist"
+	H.set_id_info(C)
 
 /decl/hierarchy/outfit/job/geminus_x52_rd
 	name = "X52 Research Director"
@@ -31,17 +27,13 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	uniform = /obj/item/clothing/under/rank/research_director
 	shoes = /obj/item/clothing/shoes/brown
-	l_ear = /obj/item/device/radio/headset/insurrection
+	l_ear = /obj/item/device/radio/headset
 	gloves = null
 	pda_slot = null
 
 	flags = 0
 
-/decl/hierarchy/outfit/job/geminus_x52_rd/equip_id(mob/living/carbon/human/H, rank, assignment)
-	. = ..()
-
-	var/obj/item/weapon/card/id/W = .
-	if(W)
-		W.rank = "Colonist"
-		W.assignment = "Colonist"
-		W.update_name()
+/decl/hierarchy/outfit/job/geminus_x52_rd/equip_id(mob/living/carbon/human/H)
+	var/obj/item/weapon/card/id/C = ..()
+	C.assignment = "Colonist"
+	H.set_id_info(C)

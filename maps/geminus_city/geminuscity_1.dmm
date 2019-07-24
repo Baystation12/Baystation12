@@ -141,7 +141,7 @@
 "cK" = (/turf/simulated/floor/pavement/empty,/area/geminus_underground)
 "cL" = (/obj/machinery/power/apc/infinite{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/plating,/area/geminus_underground)
 "cM" = (/obj/effect/landmark/sewer_tunnel_thin{bumpstairs_room_type = ""; dir = 1; max_length = 60; max_length_sidetunnels = 18; min_length = 30},/turf/simulated/floor/pavement/empty,/area/geminus_underground/northwest)
-"cN" = (/turf/simulated/wall/tech/fake,/area/geminus_underground/southeast)
+"cN" = (/turf/simulated/wall/tech/fake{faction_locked = "X52"},/area/geminus_underground/southeast)
 "cO" = (/turf/unsimulated/floor/rescue_base,/area/x52/laboratory)
 "cP" = (/turf/simulated/wall/tech,/area/x52/laboratory)
 "cQ" = (/obj/structure/table/standard,/obj/item/weapon/storage/bag/circuits,/turf/simulated/floor/tiled/white,/area/x52/laboratory)
