@@ -1,8 +1,12 @@
 /datum/language/antag
+	name = "antag"
+	desc = "You shouldn't have this."
 	hidden_from_codex = TRUE
 	flags = RESTRICTED
 
 /datum/language/antag/hiveminded
+	name = "hivemind"
+	desc = "You shouldn't have this."
 	flags = RESTRICTED | HIVEMIND
 
 
