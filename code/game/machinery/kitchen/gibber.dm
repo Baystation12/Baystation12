@@ -142,7 +142,7 @@
 /obj/machinery/gibber/proc/go_out()
 	if(operating || !src.occupant)
 		return
-	for(var/obj/O in src)
+	for(var/obj/O in (contents - component_parts))
 		O.dropInto(loc)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
