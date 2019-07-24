@@ -1,0 +1,7 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "An overmap-capable shuttle can now catch/grapple another overmap-capable shuttle currently moving on the overmap. You do this by moving to an appropriate landmark on the shuttle console."
+  - rscadd: "If a shuttle is grappling another shuttle, it cannot move on the overmap; it will be moved by the other shuttle."
+  - rscadd: "If a shuttle is being grappled by another shuttle, it cannot make shuttle jumps until the grappler has left."
+  - tweak: "Ships within ships count towards vessel mass now, meaning you'll accelerate slower with them landed/attached."
