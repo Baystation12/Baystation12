@@ -1,0 +1,4 @@
+author: "YodaDoge"
+delete-after: True
+changes: 
+  - tweak: "Order Ranks of Jobs ascending so the lowest rank is selected by default"
