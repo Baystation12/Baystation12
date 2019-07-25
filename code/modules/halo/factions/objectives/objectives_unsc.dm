@@ -74,3 +74,8 @@
 	objective_faction = "UNSC"
 	radio_frequency = "SHIPCOM"
 	radio_name = "UNSC Overwatch"
+
+/datum/objective/destroy_base/unsc_innie
+	short_text = "Demolish the Insurrectionist base"
+	explanation_text = "Without a command center, the Insurrectionists will be less organized in their defiance. Demolish their base with C12 charges."
+	target_faction_name = "Insurrection"

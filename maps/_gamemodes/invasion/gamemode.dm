@@ -69,7 +69,8 @@
 		/datum/objective/retrieve/nav_data/cole_protocol,\
 		/datum/objective/destroy_ship/unsc_cov,\
 		/datum/objective/colony_capture/unsc,\
-		/datum/objective/protect_colony)
+		/datum/objective/protect_colony,\
+		/datum/objective/destroy_base/unsc_innie)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
 	GLOB.UNSC.base_desc = "Orbital Defence Platform"
@@ -84,6 +85,7 @@
 		/datum/objective/colony_capture/innie,\
 		/datum/objective/protect_colony/innie)
 	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
+	GLOB.INSURRECTION.has_base = 1
 	GLOB.INSURRECTION.base_desc = "secret underground base"
 
 	GLOB.HUMAN_CIV.name = "Geminus City"

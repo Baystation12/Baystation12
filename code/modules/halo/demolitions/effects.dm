@@ -14,6 +14,12 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 			return 0
 
 	demolished = TRUE
+	log_and_message_admins("Demolition for Z-level: [z] is now at 100%!")
+	if(istype(src))
+		for(var/obj/effect/landmark/demolition_point/D in linked_targets)
+			spawn(30 SECONDS + rand(10) SECONDS)
+				explosion(D.loc, 3, 5, 7, 5)
+
 	return 1
 
 /datum/demolition_manager/ship

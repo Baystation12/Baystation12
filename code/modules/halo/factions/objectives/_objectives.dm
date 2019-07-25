@@ -153,6 +153,33 @@
 	return target_ship
 
 
+/* destroy base */
+/datum/objective/destroy_base
+	var/obj/effect/overmap/target_sector
+	var/datum/faction/target_faction
+	win_points = 50
+	var/target_faction_name
+
+/datum/objective/destroy_base/New()
+	target_faction = GLOB.factions_by_name[target_faction_name]
+	. = ..()
+
+/datum/objective/destroy_base/find_target()
+	if(target_faction && target_faction.has_base)
+		target_sector = target_faction.get_base()
+	return target_sector
+
+/datum/objective/destroy_base/check_completion()
+	if(override > 0)
+		return 1
+	else if(override < 0)
+		return 0
+
+	if(!target_sector)
+		return 1
+	else
+		return GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[target_sector.z]"]]"].check_demolition()
+
 
 /* retrieve */
 
