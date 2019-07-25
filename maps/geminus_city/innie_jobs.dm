@@ -39,6 +39,8 @@
 /datum/job/geminus_innie/officer
 	title = "Insurrectionist Officer"
 	spawn_faction = "Insurrection"
+	open_slot_on_death = 1
+	track_players = 1
 	latejoin_at_spawnpoints = 1
 	total_positions = 2
 	spawn_positions = 2

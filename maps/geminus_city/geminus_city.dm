@@ -12,6 +12,10 @@
 	#include "innie_spawns.dm"
 	#include "innie_jobs.dm"
 
+	#include "x52_spawns.dm"
+	#include "x52_outfits.dm"
+	#include "x52_jobs.dm"
+
 	#include "geminus_city_spawns.dm"
 	#include "geminus_city_overmap.dm"
 	#include "geminus_city_outfits.dm"

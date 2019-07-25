@@ -52,3 +52,15 @@
 	id = access_soe_captain
 	access_type = ACCESS_TYPE_SYNDICATE
 	desc = "Sons of Eridanus Command"
+
+/var/const/access_x52 = 772
+/datum/access/x52
+	id = access_x52
+	access_type = ACCESS_TYPE_SYNDICATE
+	desc = "X52 Researcher"
+
+/var/const/access_x52_rd = 773
+/datum/access/x52_rd
+	id = access_x52_rd
+	access_type = ACCESS_TYPE_SYNDICATE
+	desc = "X52 Research Director"
