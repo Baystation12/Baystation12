@@ -20,8 +20,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/civ/contractor
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -206,8 +206,8 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/fleet)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/ec/o1)
 	min_skill = list(
 		SKILL_BUREAUCRACY = SKILL_BASIC,

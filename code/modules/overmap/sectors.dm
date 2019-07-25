@@ -89,11 +89,14 @@
 		generic_waypoints -= landmark
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
-	. = generic_waypoints.Copy()
-	if(shuttle_name in restricted_waypoints)
-		. += restricted_waypoints[shuttle_name]
+	. = list()
 	for(var/obj/effect/overmap/contained in src)
 		. += contained.get_waypoints(shuttle_name)
+	for(var/thing in generic_waypoints)
+		.[thing] = name
+	if(shuttle_name in restricted_waypoints)
+		for(var/thing in restricted_waypoints[shuttle_name])
+			.[thing] = name
 
 /obj/effect/overmap/sector
 	name = "generic sector"

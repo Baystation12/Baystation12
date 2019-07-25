@@ -78,6 +78,11 @@
 			return FALSE
 	return TRUE
 
+/obj/effect/shuttle_landmark/proc/cannot_depart(datum/shuttle/shuttle)
+	return FALSE
+
+/obj/effect/shuttle_landmark/proc/shuttle_arrived(datum/shuttle/shuttle)
+
 /proc/check_collision(area/target_area, list/target_turfs)
 	for(var/target_turf in target_turfs)
 		var/turf/target = target_turf

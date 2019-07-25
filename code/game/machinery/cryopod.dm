@@ -475,7 +475,7 @@
 	icon_state = base_icon_state
 
 	//Eject any items that aren't meant to be in the pod.
-	var/list/items = src.contents
+	var/list/items = contents - component_parts
 	if(occupant) items -= occupant
 	if(announce) items -= announce
 

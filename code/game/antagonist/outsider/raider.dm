@@ -20,7 +20,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 	faction = "pirate"
 
-	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.
 	var/list/raider_uniforms = list(
 		/obj/item/clothing/under/soviet,
 		/obj/item/clothing/under/pirate,
@@ -135,52 +134,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 	global_objectives |= new /datum/objective/heist/preserve_crew
 	return 1
-
-/datum/antagonist/raider/check_victory()
-	// Totally overrides the base proc.
-	var/win_type = "Major"
-	var/win_group = "Crew"
-	var/win_msg = ""
-
-	//No objectives, go straight to the feedback.
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !global_objectives.len)
-		return
-
-	var/success = global_objectives.len
-	//Decrease success for failed objectives.
-	for(var/datum/objective/O in global_objectives)
-		if(!(O.check_completion())) success--
-	//Set result by objectives.
-	if(success == global_objectives.len)
-		win_type = "Major"
-		win_group = "Raider"
-	else if(success > 2)
-		win_type = "Minor"
-		win_group = "Raider"
-	else
-		win_type = "Minor"
-		win_group = "Crew"
-	//Now we modify that result by the state of the vox crew.
-	if(antags_are_dead())
-		win_type = "Major"
-		win_group = "Crew"
-		win_msg += "<B>The Raiders have been wiped out!</B>"
-	else if(is_raider_crew_safe())
-		if(win_group == "Crew" && win_type == "Minor")
-			win_type = "Major"
-		win_group = "Crew"
-		win_msg += "<B>The Raiders have left someone behind!</B>"
-	else
-		if(win_group == "Raider")
-			if(win_type == "Minor")
-				win_type = "Major"
-			win_msg += "<B>The Raiders escaped!</B>"
-		else
-			win_msg += "<B>The Raiders were repelled!</B>"
-
-	to_world("<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span>")
-	to_world("[win_msg]")
-	SSstatistics.set_field_details("round_end_result","heist - [win_type] [win_group]")
 
 /datum/antagonist/raider/proc/is_raider_crew_safe()
 

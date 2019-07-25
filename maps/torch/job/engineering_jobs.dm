@@ -15,10 +15,10 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_ADEPT,
@@ -71,12 +71,12 @@
 		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,

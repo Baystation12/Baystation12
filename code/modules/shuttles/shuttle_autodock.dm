@@ -123,7 +123,7 @@
 	return move_time
 
 /datum/shuttle/autodock/proc/process_launch()
-	if(!next_location.is_valid(src))
+	if(!next_location.is_valid(src) || current_location.cannot_depart(src))
 		process_state = IDLE_STATE
 		in_use = null
 		return
@@ -137,10 +137,10 @@
 	Guards
 */
 /datum/shuttle/autodock/proc/can_launch()
-	return (next_location && moving_status == SHUTTLE_IDLE && !in_use)
+	return (next_location && next_location.is_valid(src) && !current_location.cannot_depart(src) && moving_status == SHUTTLE_IDLE && !in_use)
 
 /datum/shuttle/autodock/proc/can_force()
-	return (next_location && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
+	return (next_location && next_location.is_valid(src) && !current_location.cannot_depart(src) && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
 
 /datum/shuttle/autodock/proc/can_cancel()
 	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)

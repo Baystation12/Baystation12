@@ -140,6 +140,8 @@
 
 	if(!destination.is_valid(src))
 		return FALSE
+	if(current_location.cannot_depart(src))
+		return FALSE
 	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
 	for(var/area/A in shuttle_area)
@@ -149,6 +151,7 @@
 	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
 	shuttle_moved(destination, translation)
 	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
+	destination.shuttle_arrived(src)
 	return TRUE
 
 //just moves the shuttle from A to B, if it can be moved

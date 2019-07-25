@@ -139,7 +139,7 @@ datum/track/proc/GetTrack()
 	for(var/mob/living/carbon/M in ohearers(6, src))
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
+			if(H.get_sound_volume_multiplier() < 0.2)
 				continue
 		M.sleeping = 0
 		M.stuttering += 20

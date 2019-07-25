@@ -98,7 +98,7 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
-	
+
 	if(scope_zoom)
 		verbs += /obj/item/weapon/gun/proc/scope
 
@@ -175,6 +175,11 @@
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
 		handle_suicide(user)
+	else if(user.a_intent != I_HURT && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
+		if (user.aiming.aiming_at != A)
+			PreFire(A, user)
+		else
+			Fire(A, user, pointblank=1)
 	else if(user.a_intent == I_HURT) //point blank shooting
 		Fire(A, user, pointblank=1)
 	else
@@ -349,7 +354,7 @@
 	stood_still = max(0,round((world.time - stood_still)/10) - 1)
 	if(stood_still)
 		acc_mod += min(max(2, accuracy), stood_still)
-	else 
+	else
 		acc_mod -= w_class - ITEM_SIZE_NORMAL
 		acc_mod -= bulk
 
