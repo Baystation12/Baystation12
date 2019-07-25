@@ -530,6 +530,7 @@ BLIND     // can't see anything
 
 	var/can_hold_knife
 	var/obj/item/holding
+	var/stepsound = null
 
 	permeability_coefficient = 0.50
 	force = 2
@@ -593,7 +594,9 @@ BLIND     // can't see anything
 	return ..()
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
-	return
+	if(isnull(stepsound))
+		return
+	playsound(src,stepsound, 15, 1)
 
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))

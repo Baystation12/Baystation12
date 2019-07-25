@@ -7,7 +7,7 @@
 	launch_arm_time = 10 SECONDS
 	drop_accuracy = 5
 	occupants = list(8,0)
-	pod_range = 5
+	pod_range = 8
 
 	vehicle_size = 128
 

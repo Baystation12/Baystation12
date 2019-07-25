@@ -65,7 +65,7 @@
 	return pick(responses)
 
 /datum/npc_speech_trigger/colonist_innie
-	trigger_word  = "innie"
+	trigger_word  = "Insurrection"
 	response_phrase = 1
 	var/list/responses
 
@@ -112,4 +112,25 @@
 		"I hate the colonial governor. I wish someone would overthrow them.")
 
 /datum/npc_speech_trigger/colonist_innie/get_response_phrase()
+	return pick(responses)
+
+/datum/npc_speech_trigger/colonist_covenant
+	trigger_word  = "Covenant"
+	response_phrase = 1
+	var/list/responses
+
+/datum/npc_speech_trigger/colonist_covenant/New()
+	..()
+	responses = list(\
+	"I've heard aliens are real! And they're hunting down humans.",\
+	"What are the Covenant? I wish I could find out more.",\
+	"The Covenant killed my [pick("mother","brother","sister","father","son","daughter","uncle","aunt")]",\
+	"I wish I could kill some Covenant.",\
+	"Give them hell! Humanity is with you.",\
+	"Why are they killing us?",\
+	"Well I would have been your daddy...",\
+	"I want to kill me some alien [pick("split jaws","squid heads","little squealers","gay giraffes","bird fuckers","monkey men")]!",\
+	"I can't believe they're doing this to us...")
+
+/datum/npc_speech_trigger/colonist_covenant/get_response_phrase()
 	return pick(responses)

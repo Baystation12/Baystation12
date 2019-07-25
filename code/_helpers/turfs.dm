@@ -82,13 +82,20 @@
 /proc/has_air(var/turf/T)
 	return !!T.return_air()
 
-/proc/IsTurfAtmosUnsafe(var/turf/T)
+/proc/IsTurfAtmosUnsafe(var/turf/T, var/do_list)
+	var/list/retval = list()
 	if(istype(T, /turf/space)) // Space tiles
-		return "Spawn location is open to space."
-	var/datum/gas_mixture/air = T.return_air()
-	if(!air)
-		return "Spawn location lacks atmosphere."
-	return get_atmosphere_issues(air, 1)
+		retval.Add("Spawn location is open to space.")
+	else
+		var/datum/gas_mixture/air = T.return_air()
+		if(!air)
+			retval.Add("Spawn location lacks atmosphere.")
+		else
+			retval += get_atmosphere_issues(air, do_list ? 2 : 1)
+	if(do_list)
+		return retval
+	else
+		return jointext(retval, "")
 
 /proc/IsTurfAtmosSafe(var/turf/T)
 	return !IsTurfAtmosUnsafe(T)

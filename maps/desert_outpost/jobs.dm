@@ -7,6 +7,7 @@
 	spawnpoint_override = "Crash Site"
 	spawn_faction = "UNSC"
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 
 /datum/job/stranded/unsc_marine
 	title = "UNSC marine survivor"

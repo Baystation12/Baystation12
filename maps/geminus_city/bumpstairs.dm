@@ -53,6 +53,7 @@
 	var/rightdir = turn(roomdir, 90)
 
 	cur_turf.ChangeTurf(/turf/simulated/wall/tech/fake)
+	cur_turf:faction_locked = "Insurrection"
 	cur_turf.dir = roomdir
 	nextturf = get_step(cur_turf,leftdir)
 	nextturf.ChangeTurf(/turf/simulated/wall/tech)

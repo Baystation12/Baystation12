@@ -90,7 +90,7 @@
 "bL" = (/obj/machinery/door/airlock/glass_external,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/om_ships/star)
 "bM" = (/obj/structure/closet/cabinet,/obj/random/handgun,/obj/random/tool,/turf/simulated/floor/tiled,/area/om_ships/star)
 "bN" = (/turf/simulated/floor/tiled,/area/om_ships/star)
-"bO" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/obj/machinery/alarm{pixel_y = 32},/obj/effect/landmark/start/ship_cap_civ,/turf/simulated/floor/tiled,/area/om_ships/star)
+"bO" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/obj/machinery/alarm{pixel_y = 32},/turf/simulated/floor/tiled,/area/om_ships/star)
 "bP" = (/obj/structure/table/steel,/obj/machinery/chemical_dispenser/bar_alc/full,/turf/simulated/floor/tiled,/area/om_ships/star)
 "bQ" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/star)
 "bR" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/machinery/alarm{pixel_y = 32},/turf/simulated/floor/tiled,/area/om_ships/star)
@@ -238,7 +238,7 @@
 "eD" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor/plating,/area/om_ships/star)
 "eE" = (/obj/structure/table/standard,/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/star)
 "eF" = (/obj/structure/closet/secure_closet/engineering_personal,/turf/simulated/floor/plating,/area/om_ships/star)
-"eG" = (/obj/structure/bed,/obj/effect/landmark/start/civ_crew,/turf/simulated/floor/tiled,/area/om_ships/star)
+"eG" = (/obj/structure/bed,/turf/simulated/floor/tiled,/area/om_ships/star)
 "eH" = (/obj/structure/toilet{dir = 4},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/star)
 "eI" = (/obj/machinery/door/airlock{name = "Toilet"},/turf/simulated/floor/tiled,/area/om_ships/star)
 "eJ" = (/obj/machinery/door/airlock{name = "Port Cargo #1"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/star)
@@ -252,7 +252,7 @@
 "eR" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/star)
 "eS" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/plating,/area/om_ships/star)
 "eT" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/om_ships/star)
-"eU" = (/obj/structure/bed,/obj/random/plushie,/obj/effect/landmark/start/civ_crew,/turf/simulated/floor/tiled,/area/om_ships/star)
+"eU" = (/obj/structure/bed,/obj/random/plushie,/turf/simulated/floor/tiled,/area/om_ships/star)
 "eV" = (/obj/machinery/shower{dir = 4; icon_state = "shower"; pixel_x = 0; pixel_y = -3},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/star)
 "eW" = (/obj/machinery/door/airlock{name = "Shower"},/turf/simulated/floor/tiled,/area/om_ships/star)
 "eX" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (EAST)"; icon_state = "sleeper_0"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/star)
@@ -305,8 +305,7 @@
 "fS" = (/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated,/turf/simulated/floor/plating,/area/om_ships/star)
 "fT" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{tag_airpump = "solar_xeno_pump"; tag_exterior_door = "solar_xeno_outer"; frequency = 1379; id_tag = "solar_xeno_airlock"; tag_interior_door = "solar_xeno_inner"; pixel_x = 25; req_access = list(13); tag_chamber_sensor = "solar_xeno_sensor"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "solar_xeno_sensor"; pixel_x = 25; pixel_y = 12},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 1; frequency = 1379; id_tag = "solar_xeno_pump"},/obj/structure/cable,/turf/simulated/floor/plating,/area/om_ships/star)
 "fU" = (/obj/docking_umbilical/south{name = "CCV Star Bridge B"},/turf/simulated/floor/plating,/area/om_ships/star)
-"fV" = (/obj/effect/overmap/ship/CCV_star,/turf/space,/area/space)
-"fW" = (/obj/effect/landmark/map_data,/turf/space,/area/space)
+"fV" = (/obj/effect/landmark/map_data,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -563,5 +562,5 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-fVfWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aafVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

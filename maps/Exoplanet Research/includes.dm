@@ -1,7 +1,9 @@
 
 #include "overmap.dm"
 #include "areas.dm"
-#include "spawn_jobs.dm"
+#include "spawns.dm"
+#include "outfits.dm"
+#include "jobs.dm"
 #include "lift.dm"
 
 

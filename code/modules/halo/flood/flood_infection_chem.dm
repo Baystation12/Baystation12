@@ -50,14 +50,10 @@
 	qdel(spawned_flood)
 
 //Items for testing.
-/obj/item/weapon/reagent_containers/syringe/floodtox
-	name = "Unknown Biological Contaminant"
-	desc = "A syringe filled with a green, bloodlike substance that appears to have lifeforms floating in it."
-	volume = 30
-	amount_per_transfer_from_this = 30
-
+/obj/item/weapon/reagent_containers/glass/bottle/floodtox
+	name = "Bottled Unknown Biological Contaminant"
+	desc = "A bottle of some unknown biological material, composed of spores floating in a dark-green tinted liquid. A label states: Organism critical mass threshold: 27u."
 
 	New()
-		..()
-		reagents.add_reagent(/datum/reagent/floodinfectiontoxin, 30)
-		update_icon()
+		. = ..()
+		reagents.add_reagent(/datum/reagent/floodinfectiontoxin,60)

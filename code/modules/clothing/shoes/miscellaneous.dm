@@ -105,22 +105,12 @@
 	icon_state = "clown"
 	item_state = "clown"
 	force = 0
-	var/footstep = 1	//used for squeeks whilst walking
+	stepsound = "clownstep"
 	species_restricted = null
 
 /obj/item/clothing/shoes/clown_shoes/New()
 	..()
 	slowdown_per_slot[slot_shoes]  = SHOES_SLOWDOWN+1
-
-/obj/item/clothing/shoes/clown_shoes/handle_movement(var/turf/walking, var/running)
-	if(running)
-		if(footstep >= 2)
-			footstep = 0
-			playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
-		else
-			footstep++
-	else
-		playsound(src, "clownstep", 20, 1)
 
 /obj/item/clothing/shoes/cult
 	name = "boots"

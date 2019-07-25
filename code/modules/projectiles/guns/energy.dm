@@ -25,8 +25,7 @@
 		update_icon()
 
 /obj/item/weapon/gun/energy/emp_act(severity)
-	..()
-	update_icon()
+	return //Let's not make the weapons lose all of their power on EMP. They're military grade, they should be vaguely hardened.
 
 /obj/item/weapon/gun/energy/New()
 	..()

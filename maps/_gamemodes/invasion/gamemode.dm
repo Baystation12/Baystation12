@@ -1,177 +1,146 @@
 
-#include "objectives.dm"
-#include "oni_cryopod.dm"
-
-/datum/game_mode/invasion
-	name = "Invasion"
-	config_tag = "invasion"
+/datum/game_mode/outer_colonies
+	name = "Outer Colonies"
+	config_tag = "outer_colonies"
 	round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
-
-	//uncomment this later
-	//required_players = 10
-	factions_by_name = list("UNSC", "Covenant","Insurrection","Human Civilian")
-
+	required_players = 15
+	probability = 1
 	var/faction_safe_time = 10 MINUTES
 	var/faction_safe_duration = 10 MINUTES
 	var/safe_expire_warning = 0
-
-	var/obj/effect/overmap/ship/cov_ship
-	var/list/cov_ship_areas = list()
-	var/list/unsc_base_areas = list()
-	var/obj/effect/overmap/ship/unsc_ship
-	var/obj/effect/overmap/human_colony
-
-	var/list/objectives_specific_target = list()
+	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection)
+	var/list/overmap_hide = list()
 	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
+	var/end_conditions_required = 2
 
-	var/covenant_ship_slipspaced = 0
-
-/datum/game_mode/invasion/pre_setup()
+/datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
 
+	setup_factions()
+
+	GLOB.innie_factions_controller.begin_processing()
+
+	//hide some faction sectors from factions not playing
+	for(var/obj/effect/overmap/S in world)
+		if(S.type in overmap_hide)
+			if(S && S.map_z_data.len)
+				var/obj/effect/landmark/map_data/check_data = S.map_z_data[1]
+				S.loc = check_data.loc
+			else
+				message_admins("GAMEMODE WARNING: Attempted to hide overmap object [S] ([S.type]) but it was not loaded properly.")
+
+	setup_objectives()
+
+	shipmap_handler.spawn_ship("Human Colony", 3)
+	shipmap_handler.spawn_ship("UNSC", 2)
+
+/datum/game_mode/outer_colonies/proc/setup_factions()
 	//setup factions
-	for(var/faction_name in factions_by_name)
-		var/datum/faction/F = GLOB.factions_by_name[faction_name]
-		factions_by_name[faction_name] = F
+	for(var/faction_type in factions)
+		var/datum/faction/F = GLOB.factions_by_type[faction_type]
+		factions -= faction_type
 		factions.Add(F)
 
+/datum/game_mode/outer_colonies/proc/setup_objectives()
+
 	//setup covenant objectives
-	var/datum/faction/covenant/C = locate() in factions
-	if(C)
-		var/list/objective_types = list(\
-			/datum/objective/protect_cov_ship,\
-			/datum/objective/protect/protect_cov_leader,\
-			/datum/objective/glass_colony,\
-			/datum/objective/steal_ai,\
-			/datum/objective/steal_nav_data,\
-			///datum/objective/destroy_unsc_ship,
-			/datum/objective/retrieve_artifact)
-		setup_faction_objectives(C, objective_types)
+	var/list/objective_types = list(\
+		/datum/objective/protect_ship/covenant,\
+		/datum/objective/protect/leader,\
+		/datum/objective/glass_colony,\
+		///datum/objective/retrieve/steal_ai,
+		/datum/objective/retrieve/nav_data,\
+		/datum/objective/destroy_ship/covenant_unsc,
+		/datum/objective/destroy_ship/base/covenant_odp,
+		//datum/objective/colony_capture/cov,
+		/datum/objective/retrieve/artifact)
+	GLOB.COVENANT.setup_faction_objectives(objective_types)
+	GLOB.COVENANT.has_flagship = 1
 
 	//setup unsc objectives
-	var/datum/faction/unsc/U = locate() in factions
-	if(U)
-		var/list/objective_types = list(\
-			/datum/objective/protect_unsc_ship,\
-			/datum/objective/retrieve_artifact/unsc,\
-			/datum/objective/protect/protect_unsc_leader,\
-			/datum/objective/capture_innies,\
-			/datum/objective/steal_ai/cole_protocol,\
-			/datum/objective/steal_nav_data/cole_protocol,\
-			/datum/objective/destroy_cov_ship,\
-			/datum/objective/protect_colony)
-		setup_faction_objectives(U, objective_types)
+	objective_types = list(\
+		/datum/objective/protect_ship/unsc,\
+		/datum/objective/retrieve/artifact/unsc,\
+		/datum/objective/protect/leader,\
+		/datum/objective/capture_innies,\
+		/datum/objective/retrieve/steal_ai/cole_protocol,\
+		/datum/objective/retrieve/nav_data/cole_protocol,\
+		/datum/objective/destroy_ship/unsc_cov,\
+		/datum/objective/colony_capture/unsc,\
+		/datum/objective/protect_colony)
+	GLOB.UNSC.setup_faction_objectives(objective_types)
+	GLOB.UNSC.has_flagship = 1
+	GLOB.UNSC.base_desc = "Orbital Defence Platform"
 
 	//setup innie objectives
-	var/datum/faction/insurrection/I = locate() in factions
-	if(I)
-		var/list/objective_types = list(\
-			/datum/objective/protect/protect_innie_leader,\
-			/datum/objective/destroy_unsc_ship/innie,\
-			/datum/objective/assassinate/kill_unsc_leader,\
-			///datum/objective/recruit_pirates,
-			///datum/objective/recruit_scientists,
-			/datum/objective/protect_colony/innie,\
-			/datum/objective/destroy_cov_ship/innie)
-			///datum/objective/takeover_colony)
-		setup_faction_objectives(I, objective_types)
+	objective_types = list(\
+		/datum/objective/protect/leader,\
+		/datum/objective/destroy_ship/innie_unsc,\
+		/datum/objective/assassinate/leader/innies_unsc,\
+		///datum/objective/recruit_pirates,
+		///datum/objective/recruit_scientists,
+		/datum/objective/colony_capture/innie,\
+		/datum/objective/protect_colony/innie)
+	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
+	GLOB.INSURRECTION.base_desc = "secret underground base"
 
-	//**** hard code some values which we will locate dynamically later ****//
-	find_cov_ship()
-	find_cov_ship_areas()
-	find_unsc_ship()
-	find_unsc_base_areas()
-	find_human_colony()
-	//**** finish hard codes. remove these later ****//
+	GLOB.HUMAN_CIV.name = "Geminus City"
+	GLOB.HUMAN_CIV.base_desc = "human colony"
 
-	//setup a couple of other objectives
-	for(var/datum/objective/objective in objectives_specific_target)
-		if(objective.find_target_specific())
-			objectives_specific_target -= objective
+/datum/game_mode/outer_colonies/handle_latejoin(var/mob/living/carbon/human/character)
+	for(var/datum/faction/F in factions)
+		for(var/datum/objective/objective in F.objectives_without_targets)
+			if(objective.find_target())
+				F.objectives_without_targets -= objective
 
-/datum/game_mode/invasion/handle_latejoin(var/mob/living/carbon/human/character)
-	var/list/successful = list()
-	for(var/datum/objective/objective in objectives_specific_target)
-		if(objective.find_target_specific(character.mind))
-			objectives_specific_target -= objective
-			successful += objective
-	objectives_specific_target -= successful
 	return 1
 
-/datum/game_mode/invasion/proc/find_cov_ship()
-	var/datum/faction/covenant/C = factions_by_name["Covenant"]
-	cov_ship = C.get_flagship()
-
-/datum/game_mode/invasion/proc/find_cov_ship_areas()
-	for(var/area_type in typesof(cov_ship.parent_area_type))
-		var/area/cur_area = locate(area_type) in world
-		cov_ship_areas.Add(cur_area)
-
-/datum/game_mode/invasion/proc/find_unsc_ship()
-	var/datum/faction/unsc/U = factions_by_name["UNSC"]
-	unsc_ship = U.get_flagship()
-
-/datum/game_mode/invasion/proc/find_unsc_base_areas()
-	var/datum/faction/unsc/U = factions_by_name["UNSC"]
-	var/obj/effect/overmap/unsc_base = U.get_base()
-	for(var/area_type in typesof(unsc_base.parent_area_type))
-		var/area/cur_area = locate(area_type) in world
-		unsc_base_areas.Add(cur_area)
-
-/datum/game_mode/invasion/proc/find_human_colony()
-	var/datum/faction/human_civ/H = factions_by_name["Human Civilian"]
-	human_colony = H.get_base()
-
-/datum/game_mode/invasion/proc/setup_faction_objectives(var/datum/faction/faction, var/list/objective_types)
-	for(var/objective_type in objective_types)
-		var/datum/objective/objective = new objective_type()
-		faction.all_objectives.Add(objective)
-		faction.max_points += objective.get_win_points()
-
-		//these ones might not be able to do all their setup prior to round start
-		if(objective.find_specific_target)
-			objectives_specific_target.Add(objective)
-
-		//these objectives are affected when a ship goes into slipspace and despawns
-		if(objective.slipspace_affected)
-			objectives_slipspace_affected.Add(objective)
-
-/datum/game_mode/invasion/post_setup(var/announce = 0)
+/datum/game_mode/outer_colonies/post_setup(var/announce = 0)
 	. = ..()
 	faction_safe_time = world.time + faction_safe_duration
+	for(var/datum/faction/F in factions)
+		for(var/datum/objective/objective in F.objectives_without_targets)
+			if(objective.find_target())
+				F.objectives_without_targets -= objective
 
-/datum/game_mode/invasion/check_finished()
+/datum/game_mode/outer_colonies/check_finished()
 
-	//if 2 or more end conditions are met, end the game
 	round_end_reasons = list()
+	. = evacuation_controller.round_over()
+	if(.)
+		round_end_reasons += "an early round end was voted for"
+		return .
 
-	//the cov ship has been destroyed or gone to slipspace
-	if(!cov_ship)
-		if(covenant_ship_slipspaced)
-			round_end_reasons += "the Covenant ship has gone to slipspace and left the system"
-			var/datum/faction/covenant/C = locate() in factions
-			C.ignore_players_dead = 1
-		else
-			round_end_reasons += "the Covenant ship has been destroyed"
+	for(var/datum/faction/F in factions)
 
-	//the UNSC ship has been destroyed
-	if(!unsc_ship)
-		round_end_reasons += "the UNSC ship has been destroyed"
+		if(F.has_flagship)
+			//currently only the covenant have has_flagship = 1, but this can be tweaked as needed
+			var/obj/effect/overmap/flagship = F.get_flagship()
+			if(!flagship || !flagship.loc)
+				if(F.flagship_slipspaced || flagship.slipspace_status == 2)
+					round_end_reasons += "the [F.name] ship has gone to slipspace and left the system"
+					/*var/datum/faction/covenant/C = locate() in factions
+					C.ignore_players_dead = 1*/
+				else if(!flagship.slipspace_status)
+					round_end_reasons += "the [F.name] ship has been destroyed"
 
-	//the colony has been destroyed (nuked/glassed)
-	if(human_colony)
-		if(human_colony.nuked)
-			round_end_reasons += "the human colony has been nuked"
-		if(human_colony.glassed)
-			round_end_reasons += "the human colony has been glassed"
+		if(F.has_base)
+			//currently no factions have has_base = 1, but this can be tweaked as needed (see: UNSC cassius station, innie rabbit hole base)
+			var/obj/effect/overmap/base = F.get_base()
+			if(!base || !base.loc)
+				round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been destroyed"
+			else if(base)
+				if(base.nuked)
+					round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been nuked"
+				if(base.glassed)
+					round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been glassed"
 
-	//if all faction players have been killed/captured... only check 1 faction
-	var/factions_destroyed = 0
-	if (faction_safe_time - world.time < 2 MINUTES)
-		var/safe_expire_warning_check = 0
-		for(var/datum/faction/F in factions)
+		/*
+		//if all faction players have been killed/captured... only check 1 faction
+		if(faction_safe_time - world.time < 2 MINUTES)
+			var/safe_expire_warning_check = 0
 			if(!F.players_alive() && !F.ignore_players_dead)
 				if(world.time >= faction_safe_time)
 					round_end_reasons += "the [F.name] presence in the system has been destroyed"
@@ -180,26 +149,25 @@
 				else if(!safe_expire_warning)
 					safe_expire_warning_check = 1
 					message_admins("GAMEMODE WARNING: Faction safe time expiring in 2 minutes and the [F.name] have no living players.")
-		if(safe_expire_warning_check)
-			safe_expire_warning = 1
+			if(safe_expire_warning_check)
+				safe_expire_warning = 1
+				*/
 
-	if(evacuation_controller.round_over())
-		round_end_reasons += "an early round end was voted for"
-
+	/*
 	var/end_round_triggers = round_end_reasons.len
-
 	//only count 1 destroyed faction towards the end round triggers
 	if(factions_destroyed > 0)
 		end_round_triggers -= factions_destroyed
 		end_round_triggers += 1
+		*/
 
-	return (end_round_triggers >= 2 || evacuation_controller.round_over())
+	//if 2 or more end conditions are met, end the game
+	return (round_end_reasons.len >= end_conditions_required)
 
-/datum/game_mode/invasion/declare_completion()
+/datum/game_mode/outer_colonies/declare_completion()
 
 	var/announce_text = ""
 
-	//english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
 	announce_text += "<h4>The round ended because "
 	announce_text += english_list(round_end_reasons)
 	announce_text += "</h4>"
@@ -237,6 +205,18 @@
 
 	text += "<br><br>"
 
+	//calculate victory for colony capture objectives... needs to be done here
+	var/datum/objective/colony_capture/capture_objective
+	for(var/datum/faction/F in GLOB.all_factions)
+		for(var/datum/objective/colony_capture/O in F.all_objectives)
+			if(!capture_objective)
+				if(O.capture_score > 0)
+					capture_objective = O
+			else if(O.capture_score > capture_objective.capture_score)
+				capture_objective = O
+	if(capture_objective)
+		capture_objective.is_winner = 1
+
 	//work out faction points
 	var/datum/faction/winning_faction
 	var/datum/faction/second_faction
@@ -248,6 +228,8 @@
 		else if(!second_faction && winning_faction != faction)
 			second_faction = faction
 		for(var/datum/objective/objective in faction.all_objectives)
+			if(objective.fake)
+				continue
 			var/result = objective.check_completion()
 			if(result == 1)
 				text += "<span class='good'>Completed (+[objective.get_win_points()]): [objective.short_text]</span><br>"
@@ -269,29 +251,32 @@
 		text += "<h4>Total [faction.name] Score: [faction.points] points</h4><br>"
 
 	//these victory tiers will need balancing depending on objectives and points
+	var/win_ratio
 	if(second_faction.points == winning_faction.points)
 		text += "<h2>Tie! [winning_faction.name] and [second_faction.name] ([winning_faction.points] points)</h2>"
 	else if(all_points <= 0)
 		text += "<h2>Stalemate! All factions failed in their objectives.</h2>"
 	else
 		//check if only the winning faction scored, then treat them slightly differently
+		//this rates the victory based on how many objectives are completed... disabling it means victories are only rated compared to other factions
 		if(all_points == winning_faction.points)
 			all_points = winning_faction.max_points
 
 		var/win_type = "Pyrrhic"
-		if(winning_faction.points/all_points <= 0.34)
+		win_ratio = winning_faction.points/all_points
+		if(win_ratio <= 0.34)
 			//this should never or rarely happen
 			win_type = "Pyrrhic"
-		else if(winning_faction.points/all_points < 0.66)
+		else if(win_ratio < 0.66)
 			win_type = "Minor"
-		else if(winning_faction.points/all_points < 0.9)
+		else if(win_ratio < 0.9)
 			win_type = "Moderate"
-		else if(winning_faction.points/all_points != 1)
+		else if(win_ratio != 1)
 			win_type = "Major"
 		else
 			win_type = "Supreme"
 
-		text += "<h2>[win_type] [winning_faction.name] Victory!</h2>"
+		text += "<h2>[win_type] [winning_faction.name] Victory! ([round(100*win_ratio)]% of possible score)</h2>"
 	to_world(text)
 
 	if(clients > 0)
@@ -311,10 +296,10 @@
 
 	return 0
 
-/datum/game_mode/invasion/handle_mob_death(var/mob/M, var/unsc_capture = 0)
+/datum/game_mode/outer_colonies/handle_mob_death(var/mob/M, var/unsc_capture = 0)
 	. = ..()
 
-	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander") || M.mind.faction == "Insurrectionist")
+	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander","Insurrectionist Officer") || M.mind.faction == "Insurrectionist")
 		var/datum/faction/unsc/unsc = locate() in factions
 		if(unsc)
 			var/datum/objective/capture_innies/capture_innies = locate() in unsc.all_objectives
@@ -330,10 +315,16 @@
 				F.living_minds -= M.mind
 				break
 
-/datum/game_mode/invasion/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
-	if(ship.faction == "Covenant")
+/datum/game_mode/outer_colonies/handle_slipspace_jump(var/obj/effect/overmap/ship/ship)
+
+	var/obj/effect/overmap/flagship
+	var/datum/faction/F = GLOB.factions_by_name[ship.faction]
+	if(F)
+		flagship = F.get_flagship()
+
+	if(flagship == ship)
 		//record a round end condition
-		covenant_ship_slipspaced = 1
+		F.flagship_slipspaced = 1
 
 		//lock in any covenant objectives now so they arent failed by the ship despawning
 		for(var/datum/objective/objective in objectives_slipspace_affected)
@@ -344,3 +335,6 @@
 			//a 0 means it fails so we set -1 to lock in a 0 result
 			if(!objective.override)
 				objective.override = -1
+
+		check_finished()
+

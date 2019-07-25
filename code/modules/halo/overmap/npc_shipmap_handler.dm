@@ -44,3 +44,15 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		max_z_cached += 1
 		world.maxz = max_z_cached
 		return max_z_cached
+
+/datum/npc_ship_map_handler/proc/spawn_ship(var/faction_name, var/amount = 1)
+	var/turf/spawn_loc = pick(GLOB.overmap_tiles_uncontrolled)
+	var/datum/faction/F = GLOB.factions_by_name[faction_name]
+	var/ship_type = pick(F.ship_types)
+	if(ship_type)
+		for(var/i = 0, i < amount, i++)
+			var/obj/effect/overmap/ship = new ship_type(spawn_loc)
+			ship.my_faction = F
+			F.npc_ships.Add(ship)
+	else
+		message_admins("WARNING: Attempted to spawn a \"[faction_name]\" NPC ship but there were none to choose from.")

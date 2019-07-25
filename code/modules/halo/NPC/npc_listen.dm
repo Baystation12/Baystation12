@@ -14,11 +14,5 @@
 /mob/living/simple_animal/npc/proc/do_react(var/datum/npc_speech_trigger/T)
 	if(prob(T.response_chance))
 		if(T.response_phrase)
-			var/resp_phrase = T.get_response_phrase()
-			var/speech_bubble_test = say_test(resp_phrase)
-			var/msg = "<span class='game say'><span class='name'>[src.name]</span> says, <span class='message'><span class='body'>\"[resp_phrase]\"</span></span></span>"
-			src.audible_message(msg)
-			var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
-			for(var/mob/M in view(7, src))
-				to_chat(M, speech_bubble)
-			spawn(30) qdel(speech_bubble)
+			say_next = T.get_response_phrase()
+			say_time = world.time + 2 SECONDS

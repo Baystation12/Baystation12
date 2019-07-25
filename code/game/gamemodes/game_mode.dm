@@ -41,9 +41,6 @@ var/global/list/additional_antag_types = list()
 
 	var/list/allowed_ghost_roles = list(/datum/ghost_role/mouse)
 
-	var/list/factions = list()
-	var/list/factions_by_name = list()
-
 /datum/game_mode/New()
 	..()
 	// Enforce some formatting.

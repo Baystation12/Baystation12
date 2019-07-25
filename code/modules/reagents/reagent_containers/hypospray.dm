@@ -65,9 +65,13 @@
 	amount_per_transfer_from_this = 5
 	volume = 5
 
+	var/band_color = COLOR_ORANGE
+	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
+
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 5)
+	for(var/S in starts_with)
+		reagents.add_reagent(S, starts_with[S])
 	update_icon()
 	return
 
@@ -83,6 +87,7 @@
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]0"
+	overlays+= overlay_image(icon,"injector_band",band_color,RESET_COLOR)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)

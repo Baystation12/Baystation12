@@ -35,6 +35,8 @@ var/list/points_of_interest = list()
 	var/superstructure_failing = 0
 	var/list/connectors = list() //Used for docking umbilical type-items.
 	var/faction = "civilian" //The faction of this object, used by sectors and NPC ships (before being loaded in). Ships have an override
+	var/datum/faction/my_faction
+	var/slipspace_status = 0		//0: realspace, 1: slipspace but returning to system, 2: out of system
 
 	var/datum/targeting_datum/targeting_datum = new
 
@@ -83,6 +85,14 @@ var/list/points_of_interest = list()
 			spawn_locs += t
 		src.forceMove(pick(spawn_locs))
 		GLOB.overmap_spawn_near -= src.type
+
+	if(flagship && faction)
+		var/datum/faction/F = GLOB.factions_by_name[faction]
+		F.flagship = src
+
+	if(base && faction)
+		var/datum/faction/F = GLOB.factions_by_name[faction]
+		F.base = src
 
 /obj/effect/overmap/proc/generate_targetable_areas()
 	if(isnull(parent_area_type))
@@ -250,7 +260,10 @@ var/list/points_of_interest = list()
 	if(superstructure_failing == -1)
 		return
 	if(superstructure_failing == 1)
-		//TODO: Special messages/other effects whilst the superstructure fails.
+		if(hull_segments.len == 0)
+			return
+		var/obj/explode_at = pick(hull_segments)
+		explosion(explode_at.loc,2,4,6,8, adminlog = 0)
 		return
 	var/list/superstructure_strength = get_superstructure_strength()
 	if(isnull(superstructure_strength))

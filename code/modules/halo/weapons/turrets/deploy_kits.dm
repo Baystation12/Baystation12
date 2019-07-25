@@ -39,3 +39,11 @@
 	item_state = "chaingunkit"
 
 	turret_contained = /obj/structure/turret/chaingun
+
+/obj/item/turret_deploy_kit/plasturret
+	name = "Type-52 Directed Energy Support Weapon Deploy Kit"
+
+	icon_state = "plasmaturret_kit"
+	item_state = "plaskit"
+
+	turret_contained = /obj/structure/turret/plas

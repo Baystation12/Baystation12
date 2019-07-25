@@ -87,20 +87,22 @@
 		return
 
 	if(boots)
-		if (H.equip_to_slot_if_possible(boots, slot_shoes))
+		//needs to be done this way because wearing a suit will usually block equipping shoes
+		if(!H.shoes)
+			H.equip_to_slot(boots, slot_shoes)
 			boots.canremove = 0
 
 	if(helmet)
-		if(H.head)
-			to_chat(M, "You are unable to deploy your suit's helmet as \the [H.head] is in the way.")
-		else if (H.equip_to_slot_if_possible(helmet, slot_head))
+		/*if(H.head)
+			to_chat(M, "You are unable to deploy your suit's helmet as \the [H.head] is in the way.")*/
+		if (H.equip_to_slot_if_possible(helmet, slot_head))
 			to_chat(M, "Your suit's helmet deploys with a hiss.")
 			helmet.canremove = 0
 
 	if(tank)
-		if(H.s_store) //In case someone finds a way.
-			to_chat(M, "Alarmingly, the valve on your suit's installed tank fails to engage.")
-		else if (H.equip_to_slot_if_possible(tank, slot_s_store))
+		/*if(H.s_store) //In case someone finds a way.
+			to_chat(M, "Alarmingly, the valve on your suit's installed tank fails to engage.")*/
+		if (H.equip_to_slot_if_possible(tank, slot_s_store))
 			to_chat(M, "The valve on your suit's installed tank safely engages.")
 			tank.canremove = 0
 

@@ -139,16 +139,19 @@
 	name = "blue hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is blue!"
 	icon_state = "hazard_b"
+	item_state = "hazard_b"
 
 /obj/item/clothing/suit/storage/hazardvest/white
 	name = "white hazard vest"
 	desc = "A high-visibility vest used in work zones. This one has a red cross!"
 	icon_state = "hazard_w"
+	item_state = "hazard_w"
 
 /obj/item/clothing/suit/storage/hazardvest/green
 	name = "green hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is green!"
 	icon_state = "hazard_g"
+	item_state = "hazard_g"
 
 //Lawyer
 /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
