@@ -100,3 +100,27 @@
 
 #define MAX_PUMP_PRESSURE		15000	// Maximal pressure setting for pumps and vents
 #define MAX_OMNI_PRESSURE		15000	// Maximal output(s) pressure for omni devices (filters/mixers)
+
+#define GAS_OXYGEN				"oxygen"
+#define GAS_CO2					"carbon_dioxide"
+#define GAS_CO					"carbon_monoxide"
+#define GAS_METHYL_BROMIDE		"methyl_bromide"
+#define GAS_N2O					"sleeping_agent"
+#define GAS_NITROGEN			"nitrogen"
+#define GAS_NO2					"nitrodioxide"
+#define GAS_NO					"nitricoxide"
+#define GAS_METHANE				"methane"
+#define GAS_ALIEN				"aliether"
+#define GAS_HYDROGEN			"hydrogen"
+#define GAS_DEUTERIUM			"deuterium"
+#define GAS_TRITIUM				"tritium"
+#define GAS_HELIUM				"helium"
+#define GAS_ARGON				"argon"
+#define GAS_KRYPTON				"krypton"
+#define GAS_NEON				"neon"
+#define GAS_XENON				"xenon"
+#define GAS_AMMONIA				"ammonia"
+#define GAS_CHLORINE			"chlorine"
+#define GAS_SULFUR				"sulfurdioxide"
+#define GAS_STEAM				"water"
+#define GAS_PHORON				"phoron"

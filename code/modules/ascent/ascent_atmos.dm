@@ -1,13 +1,13 @@
 /decl/environment_data/mantid
 	important_gasses = list(
-		"oxygen" =         TRUE,
-		"methyl_bromide" = TRUE,
-		"carbon_dioxide" = TRUE,
-		"methane" =        TRUE
+		GAS_OXYGEN =         TRUE,
+		GAS_METHYL_BROMIDE = TRUE,
+		GAS_CO2 = TRUE,
+		GAS_METHANE =        TRUE
 	)
 	dangerous_gasses = list(
-		"carbon_dioxide" = TRUE,
-		"methane" =        TRUE
+		GAS_CO2 = TRUE,
+		GAS_METHANE =        TRUE
 	)
 
 MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
@@ -19,5 +19,5 @@ MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
 
 /obj/machinery/alarm/ascent/Initialize()
 	. = ..()
-	TLV["methyl_bromide"] = list(16, 19, 135, 140)
-	TLV["methane"] = list(-1.0, -1.0, 5, 10)
+	TLV[GAS_METHYL_BROMIDE] = list(16, 19, 135, 140)
+	TLV[GAS_METHANE] = list(-1.0, -1.0, 5, 10)

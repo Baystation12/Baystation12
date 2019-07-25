@@ -20,7 +20,7 @@
 /obj/effect/overmap/sector/exoplanet/chlorine/generate_atmosphere()
 	..()
 	if(atmosphere)
-		atmosphere.adjust_gas("chlorine", MOLES_O2STANDARD)
+		atmosphere.adjust_gas(GAS_CHLORINE, MOLES_O2STANDARD)
 		atmosphere.temperature = T100C - rand(0, 100)
 		atmosphere.update_values()
 

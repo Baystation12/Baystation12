@@ -122,7 +122,7 @@
 	volume = 180
 
 	var/charge_cost = 12
-	var/refill_gas_type = "methyl_bromide"
+	var/refill_gas_type = GAS_METHYL_BROMIDE
 	var/gas_regen_amount = 0.05
 	var/gas_regen_cap = 50
 
@@ -132,7 +132,7 @@
 
 /obj/item/weapon/tank/mantid/oxygen
 	name = "serpentid gas reactor"
-	refill_gas_type = "oxygen"
+	refill_gas_type = GAS_OXYGEN
 	distribute_pressure = 31
 
 /obj/item/weapon/tank/mantid/Process()
