@@ -23,7 +23,8 @@
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"
 	icon_state = "vox-pressure"
-	desc = "Hey, wasn't this a prop in \'The Abyss\'?"
+	desc = "A huge, armoured, pressurized helmet. Looks like an ancient human diving suit."
+	light_overlay = "invis_light"
 
 /obj/item/clothing/suit/space/vox/pressure
 	name = "alien pressure suit"
@@ -33,7 +34,8 @@
 /obj/item/clothing/head/helmet/space/vox/carapace
 	name = "alien visor"
 	icon_state = "vox-carapace"
-	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
+	desc = "A glowing visor. The light slowly pulses, and seems to follow you."
+	light_overlay = "invis_light"
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
@@ -44,6 +46,7 @@
 	name = "alien stealth helmet"
 	icon_state = "vox-stealth"
 	desc = "A smoothly contoured, matte-black alien helmet."
+	light_overlay = "invis_light"
 
 /obj/item/clothing/suit/space/vox/stealth
 	name = "alien stealth suit"
@@ -54,6 +57,7 @@
 	name = "alien goggled helmet"
 	icon_state = "vox-medic"
 	desc = "An alien helmet with enormous goggled lenses."
+	light_overlay = "invis_light"
 
 /obj/item/clothing/suit/space/vox/medic
 	name = "alien armour"
