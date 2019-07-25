@@ -158,7 +158,10 @@
 			update_desc()
 			update_material()
 		return 1
-
+	if(istype(W, /obj/item/weapon/hand)) //playing cards
+		var/obj/item/weapon/hand/H = W
+		if(H.cards && H.cards.len == 1)
+			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
 	return ..()
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
