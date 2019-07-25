@@ -56,6 +56,13 @@ var/datum/robolimb/basic_robolimb
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
+/datum/robolimb/hephaestus/titan
+	company = "Hephaestus Titan"
+	desc = "This limb has a casing of olive drab, providing a reinforced house look."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_titan.dmi'
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
 /datum/robolimb/hephaestus/alt/monitor
 	company = "Hephaestus Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_monitor.dmi'
@@ -124,6 +131,13 @@ var/datum/robolimb/basic_robolimb
 	desc = "This limb is simple and functional; no effort has been made to make it look human."
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_main.dmi'
 	unavailable_at_fab = 1
+
+/datum/robolimb/morpheus/alt
+	company = "Morpheus Atlantis"
+	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_atlantis.dmi'
+	applies_to_part = list(BP_HEAD)
+	unavailable_at_fab = 1
+	has_eyes = FALSE
 
 /datum/robolimb/mantis
 	company = "Morpheus Mantis"
