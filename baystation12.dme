@@ -3101,6 +3101,7 @@
 #include "maps\random_ruins\space_ruins\space_ruins.dm"
 #include "maps\torch\torch.dm"
 #include "maps\torch\torch_define.dm"
+#include "maps\torch\datums\reports\medical.dm"
 #include "maps\torch\game\antagonist\outsider\deathsquad.dm"
 #include "maps\torch\game\antagonist\outsider\ert.dm"
 #include "maps\torch\game\antagonist\outsider\foundation.dm"
