@@ -1,3 +1,7 @@
+/datum/codex_category/materials/
+	name = "Materials"
+	desc = "Various natural and artificial materials."
+
 /datum/codex_category/materials/Initialize()
 	for(var/thing in SSmaterials.materials)
 		var/material/mat = thing
@@ -89,3 +93,5 @@
 			entry.mechanics_text = jointext(material_info,"<br>")
 			entry.update_links()
 			SScodex.add_entry_by_string(entry.display_name, entry)
+			items += entry.display_name
+	..()

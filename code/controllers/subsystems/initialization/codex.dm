@@ -76,17 +76,8 @@ SUBSYSTEM_DEF(codex)
 
 /datum/controller/subsystem/codex/proc/present_codex_entry(var/mob/presenting_to, var/datum/codex_entry/entry)
 	if(entry && istype(presenting_to) && presenting_to.client)
-		var/list/dat = list()
-		if(entry.lore_text)
-			dat += "<font color = '[CODEX_COLOR_LORE]'>[parse_links(entry.lore_text, presenting_to)]</font>"
-		if(entry.mechanics_text)
-			dat += "<h3>OOC Information</h3>"
-			dat += "<font color = '[CODEX_COLOR_MECHANICS]'>[parse_links(entry.mechanics_text, presenting_to)]</font>"
-		if(entry.antag_text && presenting_to.mind && player_is_antag(presenting_to.mind))
-			dat += "<h3>Antagonist Information</h3>"
-			dat += "<font color='[CODEX_COLOR_ANTAG]'>[parse_links(entry.antag_text, presenting_to)]</font>"
 		var/datum/browser/popup = new(presenting_to, "codex", "Codex - [entry.display_name]")
-		popup.set_content(jointext(dat, null))
+		popup.set_content(parse_links(entry.get_text(presenting_to), presenting_to))
 		popup.open()
 
 /datum/controller/subsystem/codex/proc/retrieve_entries_for_string(var/searching)

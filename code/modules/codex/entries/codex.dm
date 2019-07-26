@@ -16,3 +16,38 @@
 	<br><br> \
 	Information for antagonists will not be shown unless you are an antagonist, and is marked by <b><font color = '[CODEX_COLOR_ANTAG]'>red</font></b> text."
 	..()
+
+/datum/codex_entry/nexus
+	display_name = "Nexus"
+	associated_strings = list("nexus")
+	mechanics_text = "The place to start with <span codexlink='codex'>The Codex</span><br>" 
+
+/datum/codex_entry/nexus/get_text(var/mob/presenting_to)
+	var/list/dat = list("<h3>CODEX NEXUS</h3>")
+	dat += "[mechanics_text]"
+	dat += "You can use <a href='?src=\ref[presenting_to.client];codex_search=1'><b>Search-Codex <i>topic</i></b></a> to look something up, or you can click the links provided when examining some objects.<br>"
+	dat += "You can also use <a href='?src=\ref[presenting_to.client];codex_index=1'><b>List-Codex-Entries</b></a> to get a comprehensive index of all entries.<br><br>"
+	dat += "<h3>Categories</h3>"
+	var/list/categories = list()
+	for(var/type in subtypesof(/datum/codex_category))
+		var/datum/codex_category/C = type
+		var/key = "[initial(C.name)] (category)"
+		var/datum/codex_entry/entry = SScodex.get_codex_entry(key)
+		if(entry)
+			categories += "<span codexlink='[key]'>[initial(C.name)]</span>"
+	dat += jointext(categories, " ")
+	return "<font color = '[CODEX_COLOR_MECHANICS]'>[jointext(dat, null)]</font>"
+
+/client/Topic(href, href_list, hsrc)
+	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
+		return
+
+	if(href_list["codex_search"]) //nano throwing errors
+		search_codex()
+		return
+
+	if(href_list["codex_index"]) //nano throwing errors
+		list_codex_entries()
+		return
+	
+	..()

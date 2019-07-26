@@ -30,3 +30,15 @@
 	else if(associated_strings && associated_strings.len)
 		display_name = associated_strings[1]
 	..()
+
+/datum/codex_entry/proc/get_text(var/mob/presenting_to)
+	var/list/dat = list()
+	if(lore_text)
+		dat += "<font color = '[CODEX_COLOR_LORE]'>[lore_text]</font>"
+	if(mechanics_text)
+		dat += "<h3>OOC Information</h3>"
+		dat += "<font color = '[CODEX_COLOR_MECHANICS]'>[mechanics_text]</font>"
+	if(antag_text && presenting_to.mind && player_is_antag(presenting_to.mind))
+		dat += "<h3>Antagonist Information</h3>"
+		dat += "<font color='[CODEX_COLOR_ANTAG]'>[antag_text]</font>"
+	return jointext(dat, null)

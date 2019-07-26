@@ -1,3 +1,7 @@
+/datum/codex_category/cultures/
+	name = "Factions and Culture"
+	desc = "Prominent planets, cultures, factions and religions of known space."
+
 /datum/codex_category/cultures/Initialize()
 
 	for(var/thing in SSculture.cultural_info_by_name)
@@ -7,3 +11,5 @@
 			entry.lore_text = culture.description
 			entry.update_links()
 			SScodex.add_entry_by_string(culture.name, entry)
+			items += culture.name
+	..()
