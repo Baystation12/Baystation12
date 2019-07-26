@@ -329,3 +329,9 @@
 		return
 	SetName(new_name)
 	to_chat(user, SPAN_NOTICE("You have redesignated this exosuit as \the [name]."))
+
+/mob/living/exosuit/get_inventory_slot(obj/item/I)
+	for(var/h in hardpoints)
+		if(hardpoints[h] == I)
+			return h
+	return 0
