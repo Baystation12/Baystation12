@@ -42,7 +42,8 @@
 	synths = list(
 		/datum/matter_synth/metal = 	30000,
 		/datum/matter_synth/glass = 	20000,
-		/datum/matter_synth/plasteel = 	10000
+		/datum/matter_synth/plasteel = 	10000,
+		/datum/matter_synth/wire
 	)
 
 	languages = list(
