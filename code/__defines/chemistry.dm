@@ -16,6 +16,18 @@
 
 #define CHEM_SYNTH_ENERGY 500 // How much energy does it take to synthesize 1 unit of chemical, in Joules.
 
+// Atom reagent_flags
+#define INJECTABLE		(1<<0)	// Makes it possible to add reagents through droppers and syringes.
+#define DRAWABLE		(1<<1)	// Makes it possible to remove reagents through syringes.
+
+#define REFILLABLE		(1<<2)	// Makes it possible to add reagents through any reagent container.
+#define DRAINABLE		(1<<3)	// Makes it possible to remove reagents through any reagent container.
+
+#define TRANSPARENT		(1<<4)	// For containers with fully visible reagents.
+#define AMOUNT_VISIBLE	(1<<5)	// For non-transparent containers that still have the general amount of reagents in them visible.
+
+#define NO_REACT        (1<<6)  // Applied to a reagent holder, the contents will not react with each other.
+
 // Some on_mob_life() procs check for alien races.
 #define IS_DIONA   1
 #define IS_VOX     2

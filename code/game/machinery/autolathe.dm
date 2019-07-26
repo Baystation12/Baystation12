@@ -176,10 +176,10 @@
 	return data
 
 
-/obj/machinery/autolathe/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
+/obj/machinery/autolathe/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/list/data = ui_data(user, ui_key)
 
-	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -190,7 +190,7 @@
 		ui.open()
 
 /obj/machinery/autolathe/attackby(var/obj/item/I, var/mob/user)
-	if(default_deconstruction(I, user))
+	if(default_deconstruction_crowbar(I, user))
 		return
 
 	if(default_part_replacement(I, user))
@@ -628,12 +628,14 @@
 	stored_material[material] -= amount
 
 
-/obj/machinery/autolathe/on_deconstruction()
+
+/obj/machinery/autolathe/dismantle()
 	for(var/mat in stored_material)
 		eject(mat, stored_material[mat])
 
 	eject_disk()
 	..()
+
 
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()

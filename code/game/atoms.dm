@@ -13,7 +13,8 @@
 	var/used_now = FALSE //For tools system, check for it should forbid to work on atom for more than one user at time
 
 
-	///Chemistry.
+		///Chemistry.
+	var/reagent_flags = NONE
 	var/datum/reagents/reagents = null
 
 	//var/chem_is_open_container = 0
@@ -97,11 +98,23 @@
 /atom/proc/Bumped(AM as mob|obj)
 	return
 
-// Convenience proc to see if a container is open for chemistry handling
+// Convenience procs to see if a container is open for chemistry handling
 // returns true if open
 // false if closed
 /atom/proc/is_open_container()
 	return atom_flags & ATOM_FLAG_OPEN_CONTAINER
+
+/atom/proc/is_injectable(allowmobs = TRUE)
+	return reagents && (reagent_flags & (INJECTABLE | REFILLABLE))
+
+/atom/proc/is_drawable(allowmobs = TRUE)
+	return reagents && (reagent_flags & (DRAWABLE | DRAINABLE))
+
+/atom/proc/is_refillable()
+	return reagents && (reagent_flags & REFILLABLE)
+
+/atom/proc/is_drainable()
+	return reagents && (reagent_flags & DRAINABLE)
 
 /*//Convenience proc to see whether a container can be accessed in a certain way.
 

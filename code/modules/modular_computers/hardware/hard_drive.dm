@@ -7,7 +7,13 @@
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	var/max_capacity = 128
 	var/used_capacity = 0
+	var/read_only = FALSE
 	var/list/stored_files = list()		// List of stored files on this drive. DO NOT MODIFY DIRECTLY!
+	var/list/default_files = list(		// List of files stored on this drive when spawned.
+		/datum/computer_file/program/computerconfig,
+		/datum/computer_file/program/ntnetdownload,
+		/datum/computer_file/program/filemanager
+	)
 
 /obj/item/weapon/computer_hardware/hard_drive/advanced
 	name = "advanced hard drive"
@@ -156,6 +162,22 @@
 			return F
 	return null
 
+
+/obj/item/weapon/computer_hardware/hard_drive/proc/find_files_by_type(typepath)
+	var/list/files = list()
+
+	if(!check_functionality())
+		return files
+
+	if(!typepath)
+		return files
+
+	for(var/f in stored_files)
+		if(istype(f, typepath))
+			files += f
+
+	return files
+
 /obj/item/weapon/computer_hardware/hard_drive/Destroy()
 	if(holder2 && (holder2.hard_drive == src))
 		holder2.hard_drive = null
@@ -165,3 +187,16 @@
 /obj/item/weapon/computer_hardware/hard_drive/New()
 	install_default_programs()
 	..()
+
+// Adds default files to the drive.
+/obj/item/weapon/computer_hardware/hard_drive/proc/install_default_files()
+	for(var/file_typepath in default_files)
+		store_file(new file_typepath)
+	return TRUE
+
+/obj/item/weapon/computer_hardware/hard_drive/proc/get_disk_name()
+	var/datum/computer_file/data/D = find_file_by_name("DISK_NAME")
+	if(!istype(D))
+		return null
+
+	return sanitizeSafe(D.stored_data, max_length = MAX_LNAME_LEN)
