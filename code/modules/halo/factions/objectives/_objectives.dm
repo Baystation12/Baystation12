@@ -162,11 +162,19 @@
 
 /datum/objective/destroy_base/New()
 	target_faction = GLOB.factions_by_name[target_faction_name]
+
 	. = ..()
 
 /datum/objective/destroy_base/find_target()
 	if(target_faction && target_faction.has_base)
 		target_sector = target_faction.get_base()
+
+	if(target_sector)
+		// This list is populated at map load time so we shouldn't need to create an entry
+		// In fact, adding one when it doesn't exist may be problematic if a target base actually has no demo points
+		if(GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[target_sector.z]"]]"])
+			GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[target_sector.z]"]]"].target_faction = target_faction
+
 	return target_sector
 
 /datum/objective/destroy_base/check_completion()

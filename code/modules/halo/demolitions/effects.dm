@@ -4,7 +4,9 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 	var/list/linked_targets = list()
 	var/list/explosion_points = list()
 	var/demolished = FALSE
+	var/datum/faction/target_faction
 	var/z = -1
+	var/demo_time = -1
 
 /datum/demolition_manager/proc/check_demolition()
 	if(demolished)
@@ -15,11 +17,28 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 
 	demolished = TRUE
 	log_and_message_admins("Demolition for Z-level: [z] is now at 100%!")
-	for(var/turf/D in explosion_points)
-		spawn(30 SECONDS + rand(10) SECONDS)
-			explosion(D.loc, 3, 5, 7, 5)
+	demo_time = world.time + (30 + rand(10)) SECONDS
+	GLOB.processing_objects += src
+
+	if(target_faction)
+		for(var/datum/job/J)
+			if(J.spawn_faction == target_faction.name)
+				J.total_positions = 0
 
 	return 1
+
+/datum/demolition_manager/proc/process()
+	if(explosion_points.len == 0)
+		GLOB.processing_objects -= src
+		return
+
+	if (world.time >= demo_time)
+		var/turf/exp = pick(explosion_points)
+		explosion_points -= exp
+		explosion(exp, 2, 3, 4, 4) //Medium cap bomb equivalent
+		demo_time += rand(10) SECONDS
+		// TODO: Spawn rubble in area
+
 
 /turf/simulated/wall/r_wall/demo
 	var/demolished = FALSE
