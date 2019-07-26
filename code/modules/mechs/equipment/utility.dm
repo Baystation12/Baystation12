@@ -69,6 +69,11 @@
 		return carrying.name
 	. = ..()
 
+/obj/item/mech_equipment/clamp/uninstalled()
+	carrying.dropInto(loc)
+	carrying = null
+	. = ..()
+	
 // A lot of this is copied from floodlights.
 /obj/item/mech_equipment/light
 	name = "floodlight"
