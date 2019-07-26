@@ -2,6 +2,7 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 
 /datum/demolition_manager
 	var/list/linked_targets = list()
+	var/list/explosion_points = list()
 	var/demolished = FALSE
 	var/z = -1
 
@@ -9,37 +10,34 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 	if(demolished)
 		return 1
 
-	for(var/obj/effect/landmark/demolition_point/D in linked_targets)
-		if(!D.demolished)
-			return 0
+	if(linked_targets.len > 0)
+		return 0
 
 	demolished = TRUE
 	log_and_message_admins("Demolition for Z-level: [z] is now at 100%!")
-	for(var/obj/effect/landmark/demolition_point/D in linked_targets)
+	for(var/turf/D in explosion_points)
 		spawn(30 SECONDS + rand(10) SECONDS)
 			explosion(D.loc, 3, 5, 7, 5)
 
 	return 1
 
-/obj/effect/landmark/demolition_point
-	name = "demolition charge target type"
+/turf/simulated/wall/r_wall/demo
 	var/demolished = FALSE
 	var/datum/demolition_manager/manager
-	var/ship = FALSE
 
-/obj/effect/landmark/demolition_point/New()
-	..()
+/turf/simulated/wall/r_wall/demo/New(var/newloc)
+	..(newloc, "plasteel","plasteel")
 
 	if(!GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[z]"]]"])
-		if(ship)
-			GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[z]"]]"] = new/datum/demolition_manager/ship
-		else
-			GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[z]"]]"] = new/datum/demolition_manager
+		GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[z]"]]"] = new/datum/demolition_manager
 
 	manager = GLOB.DEMOLITION_MANAGER_LIST["[map_sectors["[z]"]]"]
 	manager.z = z
-	manager.linked_targets += src
+	manager.linked_targets |= src
+	manager.explosion_points |= src
 
-/obj/effect/landmark/demolition_point/proc/demolish()
-	demolished = TRUE
+/turf/simulated/wall/r_wall/demo/dismantle_wall(var/devastated, var/explode, var/no_product)
+	manager.linked_targets -= src
 	manager.check_demolition()
+
+	return ..()
