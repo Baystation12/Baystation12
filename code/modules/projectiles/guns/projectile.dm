@@ -107,7 +107,7 @@
 			ammo_magazine.stored_ammo += chambered
 		else
 			loaded += chambered
-	if(CASELESS)
+	if(handle_casings == CASELESS)
 		qdel(chambered)
 	if(handle_casings != HOLD_CASINGS)
 		chambered = null
