@@ -25,6 +25,7 @@
 	land_type = /turf/simulated/floor/exoplanet/snow
 	water_type = /turf/simulated/floor/exoplanet/ice
 	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/samak, /mob/living/simple_animal/hostile/retaliate/beast/diyaab, /mob/living/simple_animal/hostile/retaliate/beast/shantak)
+	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/giant_crab)
 	plantcolors = list("#d0fef5","#93e1d8","#93e1d8", "#b2abbf", "#3590f3", "#4b4e6d")
 
 /area/exoplanet/snow

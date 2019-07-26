@@ -29,7 +29,6 @@
 					   /mob/living/simple_animal/hostile/retaliate/jelly/alt,
 					   /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt,
 					   /mob/living/simple_animal/hostile/leech)
-
 	megafauna_types = list(/obj/structure/leech_spawner)
 	plantcolors = list("#3c5434", "#2f6655", "#0e703f", "#495139", "#394c66", "#1a3b77", "#3e3166", "#52457c", "#402d56", "#580d6d")
 
