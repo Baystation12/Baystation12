@@ -158,9 +158,9 @@
 		if(!istype(piece))
 			continue
 		piece.canremove = 0
-		piece.SetName("[suit_type] [initial(piece.name)]")
+		piece.SetName("[suit_type] [piece.name]")
 		piece.desc = "It seems to be part of a [src.name]."
-		piece.icon_state = "[initial(icon_state)]"
+		piece.icon_state = "[icon_state]"
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
@@ -170,6 +170,7 @@
 		if(islist(armor))
 			remove_extension(piece, /datum/extension/armor)
 			set_extension(piece, /datum/extension/armor, /datum/extension/armor/rig, armor)
+			set_extension(piece, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)
@@ -218,7 +219,8 @@
 		chest.check_limb_support(wearer)
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
-		piece.icon_state = "[initial(icon_state)]"
+		var/datum/extension/base_icon_state/bis = get_extension(piece, /datum/extension/base_icon_state)
+		piece.icon_state = "[bis.base_icon_state]"
 		if(airtight)
 			piece.max_pressure_protection = initial(piece.max_pressure_protection)
 			piece.min_pressure_protection = initial(piece.min_pressure_protection)
@@ -280,7 +282,9 @@
 					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,needhand=0))
 						failed_to_seal = 1
 
-					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
+					var/datum/extension/base_icon_state/bis = get_extension(piece, /datum/extension/base_icon_state)
+					piece.icon_state = "[bis.base_icon_state][!seal_target ? "_sealed" : ""]"
+
 					switch(msg_type)
 						if("boots")
 							to_chat(wearer, "<font color='blue'>\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"].</font>")
@@ -314,7 +318,8 @@
 	if(failed_to_seal)
 		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 			if(!piece) continue
-			piece.icon_state = "[initial(icon_state)][!seal_target ? "" : "_sealed"]"
+			var/datum/extension/base_icon_state/bis = get_extension(piece, /datum/extension/base_icon_state)
+			piece.icon_state = "[bis.base_icon_state][!seal_target ? "" : "_sealed"]"
 		canremove = !seal_target
 		if(airtight)
 			update_component_sealed()

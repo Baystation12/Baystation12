@@ -12,8 +12,11 @@
 // Kits must have exosuit icons in CUSTOM_ITEM_OBJ under [kit_icon].
 // Broken must be [kit_icon]-broken and open must be [kit_icon]-open.
 
-// Kits must also have hardsuit icons in CUSTOM_ITEM_MOB as [kit_icon]_suit
+// Kits must also have voidsuit icons in CUSTOM_ITEM_MOB as [kit_icon]_suit
 // and [kit_icon]_helmet, and in CUSTOM_ITEM_OBJ as [kit_icon].
+
+// Kits for hardsuit must have icons in CUSTOM_ITEM_MOB and under [kit_icon]_helmet,
+// [kit_icon]_gauntlets, [kit_icon]_boots, [kit_icon]_chestpiece
 
 /var/list/custom_items = list()
 
@@ -83,10 +86,20 @@
 		K.new_desc = kit_desc
 		K.new_icon = kit_icon
 		K.new_icon_file = CUSTOM_ITEM_OBJ
+		
 		if(istype(item, /obj/item/device/kit/suit))
 			var/obj/item/device/kit/suit/kit = item
 			kit.new_light_overlay = additional_data
 			kit.new_mob_icon_file = CUSTOM_ITEM_MOB
+		
+		if(istype(item, /obj/item/device/kit/rigsuit))
+			var/obj/item/device/kit/rigsuit/kit = item
+			kit.new_mob_icon_file = CUSTOM_ITEM_MOB
+			var/list/input_data = splittext(additional_data,", ")
+			if(input_data.len)
+				kit.new_suit_type = input_data[1]
+				if(input_data.len > 1)
+					kit.new_light_overlay = input_data[2]		
 
 	return item
 

@@ -303,3 +303,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/industrial
 	camera = /obj/machinery/camera/network/supply
+
+//paint kits!
+/obj/item/device/kit/rigsuit/general
+	new_hardsuit_restrict = list(/obj/item/weapon/rig/industrial,/obj/item/weapon/rig/exploration)
+
+/obj/item/device/kit/rigsuit/medical
+	new_hardsuit_restrict = list(/obj/item/weapon/rig/medical,/obj/item/weapon/rig/command/medical)
+
+/obj/item/device/kit/rigsuit/command
+	new_hardsuit_restrict = list(/obj/item/weapon/rig/command)
+
+/obj/item/device/kit/rigsuit/special
+	new_hardsuit_restrict = list(/obj/item/weapon/rig/industrial,/obj/item/weapon/rig/exploration,/obj/item/weapon/rig/eva)
