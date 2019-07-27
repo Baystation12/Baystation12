@@ -164,6 +164,13 @@
 		TAG_RELIGION =  RELIGION_KHARMAANI
 	)
 
+/datum/species/mantid/gyne/attempt_grab(var/mob/living/carbon/human/grabber, var/mob/living/target)
+	grabber.unEquip(grabber.l_hand)
+	grabber.unEquip(grabber.r_hand)
+	to_chat(grabber, SPAN_WARNING("You drop everything as you seize \the [target]!"))
+	playsound(grabber.loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
+	. = ..(grabber, target, GRAB_NAB)
+
 /datum/species/mantid/gyne/New()
 	equip_adjust = list(
 		slot_l_hand_str = list(
