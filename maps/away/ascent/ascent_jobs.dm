@@ -88,6 +88,7 @@
 	blacklisted_species = null
 	whitelisted_species = null
 	loadout_allowed = FALSE
+	is_semi_antagonist = TRUE
 	var/requires_supervisor = FALSE
 	var/set_species_on_join = SPECIES_MANTID_GYNE
 
@@ -137,7 +138,6 @@
 	H.name = H.real_name
 	if(H.mind)
 		H.mind.name = H.real_name
-		GLOB.provocateurs.add_antagonist(H.mind)
 	return H
 
 /datum/job/submap/ascent/alate
