@@ -78,6 +78,9 @@
 	usable = FALSE
 	selectable = TRUE
 
+/obj/item/rig_module/device/multitool/ismultitool()
+	return device && device.ismultitool()
+
 /obj/item/rig_module/device/cable_coil
 	name = "mantid cable extruder"
 	desc = "A cable nanofabricator of Ascent design."
@@ -112,6 +115,18 @@
 	device = /obj/item/clustertool
 	usable = TRUE
 	selectable = TRUE
+
+/obj/item/rig_module/device/clustertool/iswrench()
+	return device && device.iswrench()
+
+/obj/item/rig_module/device/clustertool/iswirecutter()
+	return device && device.iswirecutter()
+
+/obj/item/rig_module/device/clustertool/isscrewdriver()
+	return device && device.isscrewdriver()
+
+/obj/item/rig_module/device/clustertool/iscrowbar()
+	return device && device.iscrowbar()
 
 // Atmosphere/jetpack filler.
 /obj/item/weapon/tank/mantid
