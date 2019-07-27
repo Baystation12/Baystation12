@@ -15,6 +15,9 @@
 		/obj/item/clustertool,
 		/obj/item/clustertool, 
 		/obj/item/clustertool,
+		/obj/item/weapon/soap,
+		/obj/item/weapon/mop/advanced,
+		/obj/item/device/plunger/robot,
 		/obj/item/weapon/weldingtool/electric/mantid,
 		/obj/item/weapon/extinguisher,
 		/obj/item/device/t_scanner,
@@ -36,8 +39,7 @@
 		/obj/item/stack/material/cyborg/glass,
 		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/cable_coil/cyborg,
-		/obj/item/stack/material/cyborg/plasteel,
-		/obj/item/device/plunger/robot
+		/obj/item/stack/material/cyborg/plasteel
 	)
 	synths = list(
 		/datum/matter_synth/metal = 	30000,
