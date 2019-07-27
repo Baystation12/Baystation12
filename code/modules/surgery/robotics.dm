@@ -340,7 +340,7 @@
 	)
 	min_duration = 70
 	max_duration = 90
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP
+	surgery_candidate_flags = SURGERY_NO_STUMP
 
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()

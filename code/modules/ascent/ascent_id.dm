@@ -33,6 +33,7 @@
 	icon_state = "plant"
 	parent_organ = BP_CHEST
 	organ_tag = BP_SYSTEM_CONTROLLER
+	surface_accessible = TRUE
 	var/obj/item/weapon/card/id/id_card = /obj/item/weapon/card/id/ascent
 
 /obj/item/organ/internal/controller/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
