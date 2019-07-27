@@ -70,8 +70,9 @@
 	. = ..()
 
 /obj/item/mech_equipment/clamp/uninstalled()
-	carrying.dropInto(loc)
-	carrying = null
+	if(carrying)
+		carrying.dropInto(loc)
+		carrying = null
 	. = ..()
 	
 // A lot of this is copied from floodlights.

@@ -73,12 +73,14 @@
 				MC.repair_brute_damage(repair)
 				MC.repair_burn_damage(repair)
 				remaining_energy -= repair * repair_power_usage
+			if(remaining_energy <= 0)
+				break
 		charging.updatehealth()
 		if(fully_repaired())
 			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
 
 	var/obj/item/weapon/cell/cell = charging.get_cell()
-	if(cell && !cell.fully_charged() && remaining_energy)
+	if(cell && !cell.fully_charged() && remaining_energy > 0)
 		cell.give(remaining_energy * CELLRATE)
 		if(cell.fully_charged())
 			charging.show_message(SPAN_NOTICE("Exosuit power reserves are at maximum."))
