@@ -9,13 +9,11 @@
 	name = "ICCGN coat"
 	desc = "A ICCG Navy service coat. Black and undecorated."
 	icon_state = "terranservice"
-	//item_state = "terranservice"
 
 /obj/item/clothing/suit/storage/terran/service/navy/command
 	name = "indie command coat"
 	desc = "An ICCG Navy service command coat. White and undecorated."
 	icon_state = "terranservice_comm"
-	//item_state = "terranservice_comm"
 
 //dress
 

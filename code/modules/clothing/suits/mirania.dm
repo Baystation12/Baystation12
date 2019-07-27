@@ -2,12 +2,10 @@
 	name = "bundeforz service jacket"
 	desc = "A uniform service jacket belonging to the Miranian Defence Forces."
 	icon_state = "m_service"
-	//item_state = "m_service"
 
 /obj/item/clothing/suit/storage/service/mirania/intelligence
 	name = "intelligence service jacket"
 	desc = "A uniform service jacket belonging to the Miranian Truth Ministry."
-	//item_state = "m_service_int"
 	icon_state = "m_service_int"
 
 /obj/item/clothing/suit/dress/mirania
