@@ -12,6 +12,27 @@
 	name = "Ascent - Technician"
 	suit = /obj/item/clothing/suit/storage/ascent
 
+/obj/item/clothing/mask/gas/monarch
+	name = "serpentid facemask"
+	desc = "An alien facemask with chunky gas filters and a breathing valve."
+	filtered_gases = list(GAS_PHORON,GAS_N2O,GAS_CHLORINE,GAS_AMMONIA,GAS_CO,GAS_METHANE)
+	filter_water = TRUE
+	icon_state = "ascent_mask"
+	species_restricted = list(SPECIES_NABBER, SPECIES_MONARCH_QUEEN)
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_mask_gas.dmi'
+	)
+
+/obj/item/clothing/mask/gas/ascent
+	name = "mantid facemask"
+	desc = "An alien facemask with chunky gas filters and a breathing valve."
+	filter_water = TRUE
+	icon_state = "ascent_mask"
+	sprite_sheets = list(
+		SPECIES_MANTID_GYNE =  'icons/mob/species/mantid/onmob_mask_gyne.dmi',
+		SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_mask_alate.dmi'
+	)
+
 /obj/item/clothing/shoes/magboots/ascent
 	name = "mantid mag-claws"
 	desc = "A set of powerful gripping claws."
