@@ -9,7 +9,7 @@
 	online_slowdown = 0
 	offline_slowdown = 1
 	equipment_overlay_icon = null
-	air_type =   /obj/item/weapon/tank/mantid
+	air_type =   /obj/item/weapon/tank/mantid/reactor
 	cell_type =  /obj/item/weapon/cell/mantid
 	chest_type = /obj/item/clothing/suit/space/rig/mantid
 	helm_type =  /obj/item/clothing/head/helmet/space/rig/mantid
@@ -115,27 +115,36 @@
 
 // Atmosphere/jetpack filler.
 /obj/item/weapon/tank/mantid
-	name = "mantid gas reactor"
-	desc = "A mantid gas processing plant that continuously synthesises 'breathable' atmosphere."
+	name = "mantid gas tank"
 	icon_state = "bromomethane"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	volume = 180
 
+/obj/item/weapon/tank/mantid/methyl_bromide
+	starting_pressure = list(GAS_METHYL_BROMIDE = 6 * ONE_ATMOSPHERE)
+
+/obj/item/weapon/tank/mantid/oxygen
+	name = "mantid oxygen tank"
+	starting_pressure = list(OXYGEN = 6 * ONE_ATMOSPHERE)
+
+/obj/item/weapon/tank/mantid/reactor
+	name = "mantid gas reactor"
+	desc = "A mantid gas processing plant that continuously synthesises 'breathable' atmosphere."
 	var/charge_cost = 12
 	var/refill_gas_type = GAS_METHYL_BROMIDE
 	var/gas_regen_amount = 0.05
 	var/gas_regen_cap = 50
 
-/obj/item/weapon/tank/mantid/Initialize()
+/obj/item/weapon/tank/mantid/reactor/Initialize()
 	starting_pressure = list("[refill_gas_type]" = 6 * ONE_ATMOSPHERE)
 	. = ..()
 
-/obj/item/weapon/tank/mantid/oxygen
+/obj/item/weapon/tank/mantid/reactor/oxygen
 	name = "serpentid gas reactor"
 	refill_gas_type = GAS_OXYGEN
 	distribute_pressure = 31
 
-/obj/item/weapon/tank/mantid/Process()
+/obj/item/weapon/tank/mantid/reactor/Process()
 	..()
 	var/obj/item/weapon/rig/holder = loc
 	if(air_contents.total_moles < gas_regen_cap && istype(holder) && holder.cell && holder.cell.use(charge_cost))
@@ -182,7 +191,7 @@
 	name = "serpentid support exosuit"
 	icon_override = 'icons/mob/species/nabber/onmob_back_gas.dmi'
 	mantid_caste = SPECIES_NABBER
-	air_type =   /obj/item/weapon/tank/mantid/oxygen
+	air_type =   /obj/item/weapon/tank/mantid/reactor/oxygen
 	chest_type = /obj/item/clothing/suit/space/rig/mantid/serpentid
 	boot_type =  null
 

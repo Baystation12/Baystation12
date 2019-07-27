@@ -18,16 +18,19 @@
 	desc = "An alien facemask with chunky gas filters and a breathing valve."
 	filter_water = TRUE
 	icon_state = "ascent_mask"
+	item_state = "ascent_mask"
 	sprite_sheets = list(
 		SPECIES_NABBER =       'icons/mob/species/nabber/onmob_mask_gas.dmi',
 		SPECIES_MANTID_GYNE =  'icons/mob/species/mantid/onmob_mask_gyne.dmi',
 		SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_mask_alate.dmi'
 	)
+	species_restricted = list(SPECIES_MANTID_ALATE, SPECIES_MANTID_GYNE)
+	filtered_gases = list(GAS_PHORON,GAS_N2O,GAS_CHLORINE,GAS_AMMONIA,GAS_CO,GAS_METHANE)
 
 /obj/item/clothing/mask/gas/ascent/monarch
 	name = "serpentid facemask"
 	desc = "An alien facemask with chunky gas filters and a breathing valve."
-	filtered_gases = list(GAS_PHORON,GAS_N2O,GAS_CHLORINE,GAS_AMMONIA,GAS_CO,GAS_METHANE)
+	filtered_gases = list(GAS_PHORON,GAS_N2O,GAS_CHLORINE,GAS_AMMONIA,GAS_CO,GAS_METHYL_BROMIDE,GAS_METHANE)
 	species_restricted = list(SPECIES_NABBER, SPECIES_MONARCH_QUEEN)
 
 /obj/item/clothing/shoes/magboots/ascent
