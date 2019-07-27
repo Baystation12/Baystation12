@@ -294,7 +294,7 @@
 /obj/item/clothing/suit/space/void/pilot
 	desc = "An atmos resistant voidsuit for space and planet exploration."
 	icon_state = "rig-pilot"
-	item_state = "rig-pilot"
+	//item_state = "rig-pilot"
 	name = "pilot voidsuit"
 	armor = list(melee = 30, bullet = 5, laser = 15,energy = 5, bomb = 5, bio = 100, rad = 50)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)

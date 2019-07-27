@@ -9,7 +9,7 @@
 	name = "service jacket"
 	desc = "A uniform service jacket, plain and undecorated."
 	icon_state = "blackservice"
-	item_state = "blackservice"
+	//item_state = "blackservice"
 	body_parts_covered = UPPER_TORSO|ARMS
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
@@ -72,109 +72,109 @@
 	name = "fleet service jacket"
 	desc = "A navy blue SCG Fleet service jacket."
 	icon_state = "blueservice"
-	item_state = "blueservice"
+	//item_state = "blueservice"
 
 /obj/item/clothing/suit/storage/solgov/service/fleet/snco
 	name = "fleet SNCO service jacket"
 	desc = "A navy blue SCG Fleet service jacket with silver cuffs."
 	icon_state = "blueservice_snco"
-	item_state = "blueservice_snco"
+	//item_state = "blueservice_snco"
 
 /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 	name = "fleet officer's service jacket"
 	desc = "A navy blue SCG Fleet dress jacket with silver accents."
 	icon_state = "blueservice_off"
-	item_state = "blueservice_off"
+	//item_state = "blueservice_off"
 
 /obj/item/clothing/suit/storage/solgov/service/fleet/command
 	name = "fleet senior officer's service jacket"
 	desc = "A navy blue SCG Fleet dress jacket with gold accents."
 	icon_state = "blueservice_comm"
-	item_state = "blueservice_comm"
+	//item_state = "blueservice_comm"
 
 /obj/item/clothing/suit/storage/solgov/service/fleet/flag
 	name = "fleet flag officer's service jacket"
 	desc = "A navy blue SCG Fleet dress jacket with red accents."
 	icon_state = "blueservice_flag"
-	item_state = "blueservice_flag"
+	//item_state = "blueservice_flag"
 
 /obj/item/clothing/suit/storage/solgov/service/army
 	name = "army coat"
 	desc = "An SCG Army service coat. Green and undecorated."
-	icon_state = "greenservice"
+	//icon_state = "greenservice"
 	item_state = "greenservice"
 
 /obj/item/clothing/suit/storage/solgov/service/army/medical
 	name = "army medical jacket"
 	desc = "An SCG Army service coat. This one has blue markings."
 	icon_state = "greenservice_med"
-	item_state = "greenservice_med"
+	//item_state = "greenservice_med"
 
 /obj/item/clothing/suit/storage/solgov/service/army/medical/command
 	name = "army medical command jacket"
 	desc = "An SCG Army service coat. This one has blue and gold markings."
 	icon_state = "greenservice_medcom"
-	item_state = "greenservice_medcom"
+	//item_state = "greenservice_medcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/engineering
 	name = "army engineering jacket"
 	desc = "An SCG Army service coat. This one has orange markings."
 	icon_state = "greenservice_eng"
-	item_state = "greenservice_eng"
+	//item_state = "greenservice_eng"
 
 /obj/item/clothing/suit/storage/solgov/service/army/engineering/command
 	name = "army engineering command jacket"
 	desc = "An SCG Army service coat. This one has orange and gold markings."
 	icon_state = "greenservice_engcom"
-	item_state = "greenservice_engcom"
+	//item_state = "greenservice_engcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/supply
 	name = "army supply jacket"
 	desc = "An SCG Army service coat. This one has brown markings."
 	icon_state = "greenservice_sup"
-	item_state = "greenservice_sup"
+	//item_state = "greenservice_sup"
 
 /obj/item/clothing/suit/storage/solgov/service/army/security
 	name = "army security jacket"
 	desc = "An SCG Army service coat. This one has red markings."
 	icon_state = "greenservice_sec"
-	item_state = "greenservice_sec"
+	//item_state = "greenservice_sec"
 
 /obj/item/clothing/suit/storage/solgov/service/army/security/command
 	name = "army security command jacket"
 	desc = "An SCG Army service coat. This one has red and gold markings."
 	icon_state = "greenservice_seccom"
-	item_state = "greenservice_seccom"
+	//item_state = "greenservice_seccom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/service
 	name = "army service jacket"
 	desc = "An SCG Army service coat. This one has green markings."
 	icon_state = "greenservice_srv"
-	item_state = "greenservice_srv"
+	//item_state = "greenservice_srv"
 
 /obj/item/clothing/suit/storage/solgov/service/army/service/command
 	name = "army service command jacket"
 	desc = "An SCG Army service coat. This one has green and gold markings."
 	icon_state = "greenservice_srvcom"
-	item_state = "greenservice_srvcom"
+	//item_state = "greenservice_srvcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/exploration
 	name = "army exploration jacket"
 	desc = "An SCG Army service coat. This one has purple markings."
 	icon_state = "greenservice_exp"
-	item_state = "greenservice_exp"
+	//item_state = "greenservice_exp"
 
 /obj/item/clothing/suit/storage/solgov/service/army/exploration/command
 	name = "army exploration command jacket"
 	desc = "An SCG Army service coat. This one has purple and gold markings."
 	icon_state = "greenservice_expcom"
-	item_state = "greenservice_expcom"
+	//item_state = "greenservice_expcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/command
 	name = "army command jacket"
 	desc = "An SCG Marine Corps service coat. This one has gold markings."
 	icon_state = "greenservice_com"
-	item_state = "greenservice_com"
+	//item_state = "greenservice_com"
 
 //Dress - murder me with a gun why are these 3 different types
 
@@ -182,7 +182,7 @@
 	name = "dress jacket"
 	desc = "A uniform dress jacket, plain and undecorated."
 	icon_state = "ecdress_xpl"
-	item_state = "ecdress_xpl"
+	//item_state = "ecdress_xpl"
 	body_parts_covered = UPPER_TORSO|ARMS
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
@@ -193,7 +193,7 @@
 	name = "expeditionary dress coat"
 	desc = "A silver and black dress peacoat belonging to the SCG Expeditionary Corps. Fashionable, for the 25th century at least."
 	icon_state = "ecdress_xpl"
-	item_state = "ecdress_xpl"
+	//item_state = "ecdress_xpl"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 		)
@@ -201,33 +201,33 @@
 /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 	name = "expeditionary senior's dress coat"
 	icon_state = "ecdress_sxpl"
-	item_state = "ecdress_sxpl"
+	//item_state = "ecdress_sxpl"
 
 /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 	name = "expeditionary chief's dress coat"
 	icon_state = "ecdress_cxpl"
-	item_state = "ecdress_cxpl"
+	//item_state = "ecdress_cxpl"
 
 /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	name = "expeditionary officer's dress coat"
 	desc = "A gold and black dress peacoat belonging to the SCG Expeditionary Corps. The height of fashion."
 	icon_state = "ecdress_ofcr"
-	item_state = "ecdress_ofcr"
+	//item_state = "ecdress_ofcr"
 
 /obj/item/clothing/suit/storage/solgov/dress/expedition/command/cdr
 	name = "expeditionary commander's dress coat"
 	icon_state = "ecdress_cdr"
-	item_state = "ecdress_cdr"
+	//item_state = "ecdress_cdr"
 
 /obj/item/clothing/suit/storage/solgov/dress/expedition/command/capt
 	name = "expeditionary captain's dress coat"
 	icon_state = "ecdress_capt"
-	item_state = "ecdress_capt"
+	//item_state = "ecdress_capt"
 
 /obj/item/clothing/suit/storage/solgov/dress/expedition/command/adm
 	name = "expeditionary admiral's dress coat"
 	icon_state = "ecdress_adm"
-	item_state = "ecdress_adm"
+	//item_state = "ecdress_adm"
 
 /obj/item/clothing/suit/storage/solgov/dress/fleet
 	name = "fleet dress jacket"
@@ -239,31 +239,30 @@
 	name = "fleet dress SNCO jacket"
 	desc = "A navy blue SCG Fleet dress jacket with silver cuffs. Don't get near pasta sauce or vox."
 	icon_state = "whitedress_snco"
-	item_state = "whitedress_snco"
+	//item_state = "whitedress_snco"
 
 /obj/item/clothing/suit/storage/solgov/dress/fleet/officer
 	name = "fleet officer's dress jacket"
 	desc = "A navy blue SCG Fleet dress jacket with silver accents. Don't get near pasta sauce or vox."
 	icon_state = "whitedress_off"
-	item_state = "whitedress_off"
+	//item_state = "whitedress_off"
 
 /obj/item/clothing/suit/storage/solgov/dress/fleet/command
 	name = "fleet senior officer's dress jacket"
 	desc = "A navy blue SCG Fleet dress jacket with gold accents. Don't get near pasta sauce or vox."
 	icon_state = "whitedress_comm"
-	item_state = "whitedress_comm"
+	//item_state = "whitedress_comm"
 
 /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
 	name = "fleet flag officer's dress jacket"
 	desc = "A navy blue SCG Fleet dress jacket with red accents. Don't get near pasta sauce or vox."
 	icon_state = "whitedress_flag"
-	item_state = "whitedress_flag"
+	//item_state = "whitedress_flag"
 
 /obj/item/clothing/suit/dress/solgov
 	name = "dress jacket"
 	desc = "A uniform dress jacket, fancy."
 	icon_state = "blackdress"
-	item_state = "blackdress"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	body_parts_covered = UPPER_TORSO|ARMS
@@ -276,19 +275,16 @@
 	name = "fleet dress overwear"
 	desc = "A navy blue SCG Fleet dress suit. Almost looks like a school-girl outfit."
 	icon_state = "sailordress"
-	item_state = "whitedress"
 
 /obj/item/clothing/suit/dress/solgov/army
 	name = "army dress jacket"
 	desc = "A tailored black SCG Army dress jacket with red trim. So sexy it hurts."
 	icon_state = "blackdress"
-	item_state = "blackdress"
 
 /obj/item/clothing/suit/dress/solgov/army/command
 	name = "army officer's dress jacket"
 	desc = "A tailored black SCG Army dress jacket with gold trim. Smells like ceremony."
 	icon_state = "blackdress_com"
-	item_state = "blackdress_com"
 
 //Misc
 
