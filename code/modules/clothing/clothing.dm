@@ -493,6 +493,7 @@ BLIND     // can't see anything
 	var/down_flags_inv = 0
 	var/pull_mask = 0
 	var/hanging = 0
+	var/list/filtered_gases
 	blood_overlay_type = "maskblood"
 
 /obj/item/clothing/mask/proc/filters_water()
