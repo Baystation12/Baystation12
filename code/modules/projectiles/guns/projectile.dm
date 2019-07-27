@@ -91,8 +91,6 @@
 	..()
 	if(chambered)
 		chambered.expend()
-	if(handle_casings == EJECT_CASINGS)
-		chambered.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))
 	process_chambered()
 
 /obj/item/weapon/gun/projectile/handle_click_empty()
@@ -101,7 +99,8 @@
 
 /obj/item/weapon/gun/projectile/proc/process_chambered()
 	if (!chambered) return
-
+	if(handle_casings == EJECT_CASINGS)
+		chambered.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))
 	if(handle_casings == CYCLE_CASINGS)
 		if(ammo_magazine)
 			ammo_magazine.stored_ammo += chambered
