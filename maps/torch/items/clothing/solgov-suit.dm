@@ -95,7 +95,6 @@
 /obj/item/clothing/suit/storage/solgov/service/army
 	name = "army coat"
 	desc = "An SCG Army service coat. Green and undecorated."
-	//icon_state = "greenservice"
 	item_state = "greenservice"
 
 /obj/item/clothing/suit/storage/solgov/service/army/medical
