@@ -1,0 +1,4 @@
+author: "Rain7x"
+delete-after: True
+changes: 
+  - tweak: "Makes the \"boot selection\" in loadout available to civilians only."
