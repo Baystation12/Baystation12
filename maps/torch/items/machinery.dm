@@ -79,3 +79,16 @@
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_bridge, access_keycard_auth)
 	islocked = 1
+
+// Vending machines & dispensers
+/obj/machinery/vending/security
+	products = list(
+		/obj/item/weapon/handcuffs = 14,
+		/obj/item/weapon/grenade/flashbang = 4,
+		/obj/item/weapon/grenade/chem_grenade/teargas = 4,
+		/obj/item/device/flash = 7,
+		/obj/item/weapon/reagent_containers/spray/pepper = 4,
+		/obj/item/device/holowarrant = 4,
+		/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,
+		/obj/item/weapon/storage/box/evidence = 8,
+		/obj/item/clothing/accessory/badge/solgov/security = 6)
