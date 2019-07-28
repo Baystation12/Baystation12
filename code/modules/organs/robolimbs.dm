@@ -163,20 +163,20 @@ var/datum/robolimb/basic_robolimb
 	unavailable_at_fab = 1
 	species_cannot_use = list(SPECIES_IPC)
 
-/datum/robolimb/grayson
-	company = "Grayson"
+/datum/robolimb/shellguard
+	company = "Shellguard"
 	desc = "This limb has a sturdy and heavy build to it."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_main.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_main.dmi'
 
-/datum/robolimb/grayson/alt
-	company = "Grayson Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_alt.dmi'
+/datum/robolimb/shellguard/alt
+	company = "Shellguard Alt."
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_alt.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
-/datum/robolimb/grayson/alt/monitor
-	company = "Grayson Monitor."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_monitor.dmi'
+/datum/robolimb/shellguard/alt/monitor
+	company = "Shellguard Monitor."
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_monitor.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 	allowed_bodytypes = list(SPECIES_IPC)
