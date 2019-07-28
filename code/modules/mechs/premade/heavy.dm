@@ -22,7 +22,7 @@
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/manipulators/heavy
-	name = "combat arms"
+	name = "heavy arms"
 	exosuit_desc_string = "super-heavy reinforced manipulators"
 	icon_state = "heavy_arms"
 	desc = "Designed to function where any other piece of equipment would have long fallen apart, the Hephaestus Superheavy Lifter series can take a beating and excel at delivering it."
@@ -37,7 +37,8 @@
 	desc = "Oversized actuators struggle to move these armoured legs. "
 	icon_state = "heavy_legs"
 	move_delay = 5
-	max_damage = 90
+	turn_delay = 5
+	max_damage = 160
 	power_use = 100
 
 /obj/item/mech_component/sensors/heavy
