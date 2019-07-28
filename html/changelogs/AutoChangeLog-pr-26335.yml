@@ -1,7 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - tweak: "Unathi brains will now not accept being MMI'd."
-  - tweak: "Unathi may no longer have prosthetic internal organs attached."
-  - tweak: "Unathi may not start the round as FBPs."
-  - tweak: "Unathi may no longer select assisted or synthetic internal organs on round-start."

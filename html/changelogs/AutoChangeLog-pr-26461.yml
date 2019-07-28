@@ -1,4 +1,0 @@
-author: "Eonoc"
-delete-after: True
-changes: 
-  - bugfix: "Fixes the Vox spacesuit light overlay from a grey hat, to just nothingness, since I didn't feel up to making new sprites for it, and most of the suits have glowy-looking bits anyway."
