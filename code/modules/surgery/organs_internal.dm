@@ -306,6 +306,10 @@
 			return FALSE
 
 	var/obj/item/organ/internal/I = target.internal_organs_by_name[organ_to_replace.organ_tag]
+	if(BP_IS_ROBOTIC(I) && target.species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+		user.visible_message("<span class='notice'>[target]'s biology has rejected the attempts to attach \the [LAZYACCESS(target.surgeries_in_progress, target_zone)].</span>")
+		return FALSE
+
 	if(I && (I.parent_organ == affected.organ_tag))
 		to_chat(user, SPAN_WARNING("\The [target] already has \a [organ_to_replace]."))
 		return FALSE
@@ -318,10 +322,11 @@
 	..()
 
 /decl/surgery_step/internal/attach_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/I = LAZYACCESS(target.surgeries_in_progress, target_zone)
+
 	user.visible_message("<span class='notice'>[user] has reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].</span>")
 
-	var/obj/item/organ/I = LAZYACCESS(target.surgeries_in_progress, target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
 		I.status &= ~ORGAN_CUT_AWAY //apply fixovein
