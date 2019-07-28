@@ -231,11 +231,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 	anim(src,'icons/mob/mob.dmi',,"phaseout",,dir)
 
 /mob/living/proc/on_table_offset(var/reset = 0)
-	var/check = initial(pixel_z) + 12
+	var/check = initial(default_pixel_z) + 12
 	if(reset)
 		var/obj/structure/table/T = (locate() in get_turf(src))
-		if(!T && check && pixel_z != initial(pixel_z))
-			animate(src, pixel_z = initial(pixel_z), time = 2, easing = SINE_EASING)
+		if(!T && check && pixel_z != initial(default_pixel_z))
+			animate(src, pixel_z = initial(default_pixel_z), time = 2, easing = SINE_EASING)
 	else
 		if(!(pixel_z == check))
 			animate(src, pixel_z = check, time = 2, easing = SINE_EASING)
