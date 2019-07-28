@@ -64,6 +64,16 @@ var/global/datum/ntnet/ntnet_global = new()
 			else
 				break
 
+	for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
+		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/P = R.get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
+		if(P)
+			var/datum/computer_file/data/logfile/file = P.find_file_by_name("ntnet_log")
+			if(!istype(file))
+				file = new()
+				file.filename = "ntnet_log"
+				P.store_file(file)
+			file.stored_data += log_text + "\[br\]"
+
 /datum/ntnet/proc/get_computer_by_nid(var/NID)
 	for(var/obj/item/modular_computer/comp in SSobj.processing)
 		if(comp && comp.network_card && comp.network_card.identification_id == NID)

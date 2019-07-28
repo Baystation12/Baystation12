@@ -15,7 +15,8 @@
 	var/progress = 0
 	var/target_progress = 300
 	var/datum/access/target_access = null
-	var/list/restricted_access_codes = list(access_change_ids, access_network) // access codes that are not hackable due to balance reasons
+	var/list/restricted_access_codes = list(access_change_ids) // access codes that are not hackable due to balance reasons
+	var/list/skill_restricted_access_codes_master = list(access_network)
 
 /datum/computer_file/program/access_decrypter/kill_program(var/forced)
 	reset()
@@ -46,6 +47,8 @@
 			var/list/valid_access_values = get_all_station_access()
 			valid_access_values -= restricted_access_codes
 			valid_access_values -= RFID.stored_card.access
+			if(operator_skill < SKILL_PROF) // Don't want to randomly assign an access that we wouldn't be able to decrypt normally
+				valid_access_values -= skill_restricted_access_codes_master
 			target_access = get_access_by_id(pick(valid_access_values))
 		RFID.stored_card.access |= target_access.id
 		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
@@ -58,6 +61,7 @@
 /datum/computer_file/program/access_decrypter/Topic(href, href_list)
 	if(..())
 		return 1
+	operator_skill = usr.get_skill_value(SKILL_COMPUTER)
 	if(href_list["PRG_reset"])
 		reset()
 		return 1
@@ -79,12 +83,14 @@
 			return 1
 		if(access in restricted_access_codes)
 			return 1
+		if((access in skill_restricted_access_codes_master) && operator_skill < SKILL_PROF)
+			return 1
 		target_access = get_access_by_id(access)
 		if(!target_access)
 			return 1
 
 		running = TRUE
-		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
+
 		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
 			ntnet_global.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database from device: [computer.network_card.get_network_tag()]")
 			ntnet_global.intrusion_detection_alarm = 1
@@ -135,7 +141,7 @@
 						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
 						"ref" = access,
 						"allowed" = (access in id_card.access) ? 1 : 0,
-						"blocked" = (access in PRG.restricted_access_codes) ? 1 : 0)))
+						"blocked" = ((access in PRG.restricted_access_codes) || ((access in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_PROF)) ? 1 : 0)))
 
 			regions.Add(list(list(
 				"name" = get_region_accesses_name(i),
