@@ -28,7 +28,7 @@
 		return // Not ready yet.
 	var/output = list()
 	output += "<div align='center'>"
-	output += "<i>[GLOB.using_map.get_map_info()]</i>" 
+	output += "<i>[GLOB.using_map.get_map_info()]</i>"
 	output +="<hr>"
 	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
 
@@ -63,7 +63,7 @@
 			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
 	else
 		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
-	
+
 	output += "</div>"
 
 	panel = new(src, "Welcome","Welcome, [client.prefs.real_name]", 560, 280, src)
@@ -478,7 +478,7 @@
 		mind.active = 0 //we wish to transfer the key manually
 		mind.original = new_character
 		if(client.prefs.memory)
-			mind.store_memory(client.prefs.memory)
+			mind.StoreMemory(client.prefs.memory)
 		if(client.prefs.relations.len)
 			for(var/T in client.prefs.relations)
 				var/TT = matchmaker.relation_types[T]

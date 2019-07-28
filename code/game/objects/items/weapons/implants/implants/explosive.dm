@@ -151,8 +151,11 @@
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 	if(!phrase)
 		phrase = sanitize_phrase(input("Choose activation phrase:") as text)
+	if(!phrase)
+		return
+
 	var/memo = "Explosive implant in [target] can be activated by saying something containing the phrase ''[phrase]'', <B>say [phrase]</B> to attempt to activate. It can also be triggered with a radio signal on frequency <b>[format_frequency(src.frequency)]</b> with code <b>[code]</b>."
-	usr.mind.store_memory(memo, 0, 0)
+	usr.StoreMemory(memo, /decl/memory_options/system)
 	to_chat(usr, memo)
 	return TRUE
 
