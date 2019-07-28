@@ -28,10 +28,12 @@
 /obj/structure/table/Crossed(mob/living/M as mob)
 	if(!flipped && istype(M))
 		M.on_table_offset(0)
+	..()
 
 /obj/structure/table/Uncrossed(mob/living/M as mob)
 	if(istype(M))
 		M.on_table_offset(1)
+	..()
 
 /obj/structure/table/proc/reset_mobs_offset()
 	var/mob/living/M = (locate() in get_turf(src))
