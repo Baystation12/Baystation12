@@ -1,0 +1,7 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - maptweak: "Vox ship burn chamber now operates properly (fixes incorrect injector settings)"
+  - maptweak: "Vox ship burn chamber can no longer cause the ship to self-destruct due to temperature melting the windows, since they have been replaced with walls that handle up to 12,000K."
+  - maptweak: "Adds a temperature/gas sensor to the burn chamber."
+  - maptweak: "Vox ship ignition switch now isn't hidden under a light."
