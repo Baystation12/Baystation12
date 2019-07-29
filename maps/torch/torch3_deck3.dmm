@@ -5823,6 +5823,7 @@
 	c_tag = "Mess Hall - Bar";
 	dir = 4
 	},
+/obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
 "mm" = (
@@ -18784,8 +18785,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/engine_eva)
 "SP" = (
-/obj/structure/table/standard,
-/obj/item/sticky_pad/random,
+/obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
 "SS" = (
