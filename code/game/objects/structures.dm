@@ -11,6 +11,7 @@
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
 	var/material/material = null
 	var/footstep_type
+	var/mob_offset = 0 //used for on_structure_offset mob animation
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(wallbreaker && damage && breakable)
@@ -31,12 +32,28 @@
 	return
 
 /obj/structure/Destroy()
+	reset_mobs_offset()
 	var/turf/T = get_turf(src)
 	if(T && parts)
 		new parts(T)
 	. = ..()
 	if(istype(T))
 		T.fluid_update()
+
+/obj/structure/Crossed(mob/living/M)
+	if(istype(M))
+		M.on_structure_offset(mob_offset)
+	..()
+
+/obj/structure/Uncrossed(mob/living/M)
+	if(istype(M))
+		M.on_structure_offset(0)
+	..()
+
+/obj/structure/proc/reset_mobs_offset()
+	var/mob/living/M = (locate() in get_turf(src))
+	if(M)
+		M.on_structure_offset(0)
 
 /obj/structure/Initialize()
 	. = ..()
@@ -103,6 +120,7 @@
 			return
 		if(2.0)
 			if(prob(50))
+				reset_mobs_offset()
 				qdel(src)
 				return
 		if(3.0)
