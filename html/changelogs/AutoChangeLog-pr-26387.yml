@@ -1,7 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - tweak: "Senior Engineer now gets access_network, allowing them to use the NTNet Diagnostics and Monitoring program and various command line tools."
-  - tweak: "Access hacking antag program can now hack access_network, if the antag has master level IT skill."
-  - tweak: "The NTNet Quantum Relay in telecomms will now keep physical logs of network activity, wiping the NTNet Diagnostics Program logs will not affect these, and they cannot be accessed remotely. The portable drive can be removed via a UI eject button and the data imported from it into a modular computer."
-  - maptweak: "Telecomms storage room now has a couple of spare portable hard disks."
