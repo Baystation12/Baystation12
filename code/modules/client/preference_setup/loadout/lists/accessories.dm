@@ -121,3 +121,9 @@
 	insignia["chaplain insignia (taoism)"] = /obj/item/clothing/accessory/chaplaininsignia/taoism
 	gear_tweaks += new/datum/gear_tweak/path(insignia)
 
+/datum/gear/accessory/bracelet
+	display_name = "bracelet, color select"
+	path = /obj/item/clothing/accessory/bracelet
+	cost = 1
+	flags = GEAR_HAS_COLOR_SELECTION
+
