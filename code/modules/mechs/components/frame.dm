@@ -136,7 +136,10 @@
 			return
 
 		visible_message(SPAN_NOTICE("\The [user] begins tightening screws, flipping connectors and finishing off \the [src]."))
-		if(!do_after(user, 50 * user.skill_delay_mult(SKILL_DEVICES)))
+		if(!user.do_skilled(50, SKILL_DEVICES, src))
+			return
+
+		if(is_reinforced < FRAME_REINFORCED_WELDED || is_wired < FRAME_WIRED_ADJUSTED || !(arms && legs && head && body) || QDELETED(src) || QDELETED(user))
 			return
 
 		// We're all done. Finalize the exosuit and pass the frame to the new system.
