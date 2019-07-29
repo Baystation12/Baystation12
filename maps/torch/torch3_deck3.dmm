@@ -795,6 +795,8 @@
 /obj/item/weapon/stock_parts/subspace/transmitter,
 /obj/item/weapon/stock_parts/subspace/transmitter,
 /obj/structure/table/rack,
+/obj/item/weapon/stock_parts/computer/hard_drive/portable,
+/obj/item/weapon/stock_parts/computer/hard_drive/portable,
 /turf/simulated/floor/tiled/monotile,
 /area/tcommsat/storage)
 "bY" = (
