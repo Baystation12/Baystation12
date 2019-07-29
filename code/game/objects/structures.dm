@@ -45,14 +45,8 @@
 		M.on_structure_offset(mob_offset)
 	..()
 
-/obj/structure/Uncrossed(mob/living/M)
-	if(istype(M))
-		M.on_structure_offset(0)
-	..()
-
 /obj/structure/proc/reset_mobs_offset()
-	var/mob/living/M = (locate() in get_turf(src))
-	if(M)
+	for(var/mob/living/M in loc)
 		M.on_structure_offset(0)
 
 /obj/structure/Initialize()
@@ -120,7 +114,6 @@
 			return
 		if(2.0)
 			if(prob(50))
-				reset_mobs_offset()
 				qdel(src)
 				return
 		if(3.0)
