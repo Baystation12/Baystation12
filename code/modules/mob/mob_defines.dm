@@ -183,7 +183,6 @@
 	var/weakened = 0
 	var/drowsyness = 0.0//Carbon
 
-	var/memory = ""
 	var/flavor_text = ""
 
 	var/datum/skillset/skillset = /datum/skillset
