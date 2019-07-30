@@ -254,7 +254,7 @@
 	icon = 'icons/obj/ascent.dmi'
 	icon_state = "plant"
 	maxcharge = 1500
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_NORMAL
 	var/recharge_amount = 12
 
 /obj/item/weapon/cell/mantid/Initialize()

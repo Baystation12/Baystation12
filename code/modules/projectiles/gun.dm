@@ -493,7 +493,8 @@
 		if(firemodes.len > 1)
 			var/datum/firemode/current_mode = firemodes[sel_mode]
 			to_chat(user, "The fire selector is set to [current_mode.name].")
-	to_chat(user, "The safety is [safety() ? "on" : "off"].")
+	if(has_safety)
+		to_chat(user, "The safety is [safety() ? "on" : "off"].")
 	last_safety_check = world.time
 
 /obj/item/weapon/gun/proc/switch_firemodes()

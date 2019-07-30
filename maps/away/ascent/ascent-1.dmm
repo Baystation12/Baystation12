@@ -126,9 +126,6 @@
 "aA" = (
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_starboard_spike)
-"aB" = (
-/turf/simulated/floor/ascent,
-/area/ship/ascent/shuttle_starboard)
 "aC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -193,9 +190,6 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/ascent,
-/obj/machinery/light/ascent{
-	dir = 1
-	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "aI" = (
@@ -216,7 +210,11 @@
 /area/ship/ascent/hydroponics_starboard)
 "aK" = (
 /obj/structure/table/rack/dark,
-/obj/item/device/scanner/gas,
+/obj/item/robot_parts/robot_component/armour/light,
+/obj/item/robot_parts/robot_component/armour/light,
+/obj/item/robot_parts/robot_component/armour/light,
+/obj/item/robot_parts/robot_component/armour/light,
+/obj/item/robot_parts/robot_component/armour/light,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "aL" = (
@@ -620,8 +618,16 @@
 /area/ship/ascent/wing_starboard)
 "bJ" = (
 /obj/structure/table/rack/dark,
-/obj/item/device/lightreplacer,
-/obj/item/device/lightreplacer,
+/obj/item/robot_parts/robot_component/diagnosis_unit,
+/obj/item/robot_parts/robot_component/diagnosis_unit,
+/obj/item/robot_parts/robot_component/diagnosis_unit,
+/obj/item/robot_parts/robot_component/actuator,
+/obj/item/robot_parts/robot_component/actuator,
+/obj/item/robot_parts/robot_component/actuator,
+/obj/item/robot_parts/robot_component/actuator,
+/obj/item/robot_parts/robot_component/actuator,
+/obj/item/robot_parts/robot_component/diagnosis_unit,
+/obj/item/robot_parts/robot_component/diagnosis_unit,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "bK" = (
@@ -770,8 +776,7 @@
 	},
 /obj/structure/cable/cyan,
 /obj/machinery/power/apc/hyper/ascent/south,
-/obj/effect/catwalk_plated/ascent,
-/turf/simulated/floor/ascent,
+/turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "bZ" = (
 /obj/structure/window/phoronreinforced{
@@ -1308,7 +1313,6 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/ascent,
-/obj/machinery/light/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_port)
 "di" = (
@@ -1514,6 +1518,7 @@
 /area/ship/ascent/shuttle_starboard)
 "dI" = (
 /obj/machinery/light/ascent,
+/obj/machinery/recharge_station/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
 "dK" = (
@@ -1738,6 +1743,8 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/storage/box/beakers,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "eg" = (
@@ -2784,6 +2791,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
 	dir = 4
 	},
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "fY" = (
@@ -2808,6 +2816,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
 	dir = 4
 	},
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/storage/box/botanydisk,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_port)
 "gb" = (
@@ -3448,9 +3458,9 @@
 	dir = 1
 	},
 /obj/structure/table/rack/dark,
-/obj/item/stack/medical/resin,
-/obj/item/stack/medical/resin,
-/obj/item/stack/medical/resin,
+/obj/item/organ/internal/controller,
+/obj/item/organ/internal/controller,
+/obj/item/organ/internal/controller,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_port)
 "hw" = (
@@ -3564,16 +3574,16 @@
 /area/ship/ascent/wing_starboard)
 "hJ" = (
 /obj/effect/catwalk_plated/ascent,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_port_prow)
@@ -3597,7 +3607,9 @@
 /area/ship/ascent/engineering)
 "hO" = (
 /obj/structure/table/rack/dark,
-/obj/item/device/multitool/mantid,
+/obj/item/device/scanner/gas,
+/obj/item/device/lightreplacer,
+/obj/item/device/lightreplacer,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "hP" = (
@@ -3618,6 +3630,7 @@
 /area/ship/ascent/engineering)
 "hR" = (
 /obj/structure/table/rack/dark,
+/obj/item/stack/medical/resin,
 /obj/item/stack/medical/resin,
 /obj/item/stack/medical/resin,
 /obj/item/stack/medical/resin,
@@ -4183,6 +4196,7 @@
 /obj/machinery/light/ascent{
 	dir = 1
 	},
+/obj/machinery/recharge_station/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "jf" = (
@@ -4204,6 +4218,7 @@
 /obj/machinery/alarm/ascent{
 	pixel_y = 24
 	},
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_port)
 "ji" = (
@@ -4342,8 +4357,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/apc/hyper/ascent/north,
-/obj/effect/catwalk_plated/ascent,
-/turf/simulated/floor/ascent,
+/turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_port)
 "jx" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
@@ -4370,6 +4384,7 @@
 /obj/machinery/light/ascent,
 /obj/structure/table/rack/dark,
 /obj/item/clustertool,
+/obj/item/device/multitool/mantid,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "jB" = (
@@ -4515,15 +4530,15 @@
 /area/ship/ascent/shuttle_port)
 "jQ" = (
 /obj/effect/catwalk_plated/ascent,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "jR" = (
@@ -4551,19 +4566,82 @@
 	},
 /turf/simulated/wall/ascent,
 /area/ship/ascent/fore_hallway)
+"ng" = (
+/obj/machinery/light/ascent,
+/obj/machinery/botany/editor,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_port)
+"oL" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"oV" = (
+/obj/machinery/seed_extractor,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"wO" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_starboard)
+"zt" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/portable_atmospherics/canister/methyl_bromide,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_port)
+"Av" = (
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_port)
+"Ck" = (
+/obj/structure/bed/chair/padded/purple/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"Ew" = (
+/obj/machinery/seed_storage,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_starboard)
 "Ex" = (
 /obj/structure/table/rack/dark,
 /obj/machinery/light/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
+"GB" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/portable_atmospherics/canister/methyl_bromide,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/hydroponics_starboard)
+"Js" = (
+/obj/machinery/botany/extractor,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_port)
 "Jx" = (
 /obj/machinery/hologram/holopad/longrange/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"Ob" = (
+/obj/structure/bed/chair/padded/purple/ascent/gyne,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
+"Qs" = (
+/obj/machinery/biogenerator,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_port)
 "QJ" = (
 /obj/structure/window/phoronreinforced,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
+"QY" = (
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/machinery/chem_master,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/hydroponics_starboard)
 "RI" = (
 /obj/machinery/hologram/holopad/longrange/ascent,
 /turf/simulated/floor/tiled/ascent,
@@ -4574,6 +4652,10 @@
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"XE" = (
+/obj/structure/bed/chair/padded/purple/ascent/gyne,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
 
 (1,1,1) = {"
 aa
@@ -10999,9 +11081,9 @@ aa
 cN
 WI
 cQ
-cQ
+Ob
 gT
-cQ
+Ck
 dV
 aa
 aa
@@ -11123,7 +11205,7 @@ eT
 fq
 cQ
 gT
-cQ
+Ck
 dV
 aa
 aa
@@ -11245,7 +11327,7 @@ WI
 fr
 Jx
 gT
-cQ
+Ck
 dV
 aa
 aa
@@ -11367,7 +11449,7 @@ iM
 fs
 gT
 iS
-cQ
+Ck
 cN
 aa
 aa
@@ -12194,7 +12276,7 @@ ae
 ex
 am
 iJ
-ad
+wO
 ab
 hI
 ag
@@ -12677,7 +12759,7 @@ aa
 aa
 aa
 ab
-aB
+im
 bH
 cT
 eW
@@ -12799,7 +12881,7 @@ aa
 aa
 aa
 ad
-aB
+im
 cT
 RI
 eJ
@@ -12921,7 +13003,7 @@ aa
 aa
 aa
 ad
-aB
+im
 cT
 ae
 eX
@@ -13043,9 +13125,9 @@ aa
 aa
 aa
 ad
-aB
+im
 cT
-ae
+XE
 ae
 QJ
 ab
@@ -14149,8 +14231,8 @@ aa
 aa
 aa
 av
-aq
-aJ
+QY
+oL
 aD
 bY
 bn
@@ -14164,8 +14246,8 @@ gX
 bn
 jw
 cD
-he
-gZ
+Av
+ng
 cA
 aa
 aa
@@ -14271,8 +14353,8 @@ aa
 aa
 aa
 av
-aq
-dS
+oV
+oL
 aE
 ef
 bn
@@ -14286,8 +14368,8 @@ gX
 bn
 jh
 cX
-hf
-gZ
+Av
+Js
 cA
 aa
 aa
@@ -14393,8 +14475,8 @@ aa
 aa
 aa
 av
-av
-gY
+Ew
+oL
 aH
 fX
 cV
@@ -14408,8 +14490,8 @@ gX
 cV
 ga
 dh
-hg
-cA
+Av
+Qs
 cA
 aa
 aa
@@ -14516,7 +14598,7 @@ aa
 aa
 av
 aq
-dS
+aJ
 aT
 fY
 cV
@@ -14530,7 +14612,7 @@ hQ
 cV
 gk
 dp
-hf
+he
 gZ
 cA
 aa
@@ -15494,7 +15576,7 @@ aa
 aa
 av
 hL
-hL
+GB
 av
 aa
 aa
@@ -15504,7 +15586,7 @@ hd
 aa
 aa
 cA
-hM
+zt
 hM
 cA
 aa
@@ -15738,7 +15820,7 @@ aa
 aa
 ha
 av
-hL
+GB
 av
 aa
 aa
@@ -15748,7 +15830,7 @@ aa
 aa
 aa
 cA
-hM
+zt
 cA
 ar
 aa

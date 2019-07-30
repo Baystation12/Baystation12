@@ -33,7 +33,19 @@
 	icon_state = "plant"
 	parent_organ = BP_CHEST
 	organ_tag = BP_SYSTEM_CONTROLLER
+	surface_accessible = TRUE
 	var/obj/item/weapon/card/id/id_card = /obj/item/weapon/card/id/ascent
+
+/obj/item/organ/internal/controller/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
+	. = ..()
+	if(owner)
+		owner.add_language(LANGUAGE_MANTID_BROADCAST)
+
+/obj/item/organ/internal/controller/removed(mob/living/user, drop_organ, detach)
+	var/mob/living/carbon/H = owner
+	. = ..()
+	if(istype(H) && H != owner && !(locate(type) in H.internal_organs))
+		H.remove_language(LANGUAGE_MANTID_BROADCAST)
 
 /obj/item/organ/internal/controller/Initialize()
 	if(ispath(id_card))

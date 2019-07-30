@@ -1,35 +1,35 @@
 /area/ship/ascent
-	name = "\improper Ascent Cutter"
+	name = "\improper Ascent Seedship"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	base_turf = /turf/space
 	req_access = list(access_ascent)
 
 /area/ship/ascent/bridge
-	name = "\improper Ascent Cutter - Command Chamber"
+	name = "\improper Ascent Seedship - Command Chamber"
 	icon_state = "bridge"
 
 /area/ship/ascent/habitation
-	name = "\improper Ascent Cutter - Habitation Chamber"
+	name = "\improper Ascent Seedship - Habitation Chamber"
 	icon_state = "conf"
 
 /area/ship/ascent/wing_port
-	name = "\improper Ascent Cutter - Hospital Chamber"
+	name = "\improper Ascent Seedship - Hospital Chamber"
 	icon_state = "entry_1"
 
 /area/ship/ascent/wing_starboard
-	name = "\improper Ascent Cutter - Maintenance Chamber"
+	name = "\improper Ascent Seedship - Maintenance Chamber"
 	icon_state = "entry_2"
 
 /area/ship/ascent/engineering
-	name = "\improper Ascent Cutter - Power Chamber"
+	name = "\improper Ascent Seedship - Power Chamber"
 	icon_state = "engine_smes"
 
 /area/ship/ascent/hydroponics_starboard
-	name = "\improper Ascent Cutter - Starboard Hydroponics Chamber"
+	name = "\improper Ascent Seedship - Starboard Hydroponics Chamber"
 	icon_state = "green"
 
 /area/ship/ascent/hydroponics_port
-	name = "\improper Ascent Cutter - Port Hydroponics Chamber"
+	name = "\improper Ascent Seedship - Port Hydroponics Chamber"
 	icon_state = "hydro"
 
 /area/ship/ascent/shuttle_port
@@ -41,21 +41,21 @@
 	icon_state = "shuttlered"
 
 /area/ship/ascent/fore_hallway
-	name = "\improper Ascent Cutter - Antechamber"
+	name = "\improper Ascent Seedship - Antechamber"
 	icon_state = "dk_yellow"
 
 /area/ship/ascent/fore_starboard_prow
-	name = "\improper Ascent Cutter - Serpentid Mezzanine"
+	name = "\improper Ascent Seedship - Serpentid Mezzanine"
 	icon_state = "armory"
 
 /area/ship/ascent/fore_port_prow
-	name = "\improper Ascent Cutter - Feeding Chamber"
+	name = "\improper Ascent Seedship - Feeding Chamber"
 	icon_state = "cafeteria"
 
 /area/ship/ascent/fore_port_spike
-	name = "\improper Ascent Cutter - Fore Port Spike"
+	name = "\improper Ascent Seedship - Fore Port Spike"
 	icon_state = "purple"
 
 /area/ship/ascent/fore_starboard_spike
-	name = "\improper Ascent Cutter - Fore Starboard Spike"
+	name = "\improper Ascent Seedship - Fore Starboard Spike"
 	icon_state = "ai"
