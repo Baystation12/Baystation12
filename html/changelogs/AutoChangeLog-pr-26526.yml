@@ -1,4 +1,0 @@
-author: "WezYo"
-delete-after: True
-changes: 
-  - bugfix: "Requesting pAI personalities works now"
