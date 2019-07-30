@@ -454,17 +454,17 @@
 	var/threshold = 1
 	if(alien == IS_SKRELL)
 		threshold = 1.2
+	M.add_chemical_effect(CE_SEDATE, 1)
 
-	if(M.chem_doses[type] >= metabolism * threshold)
+	if(M.chem_doses[type] <= metabolism * threshold)
 		M.confused += 2
 		M.drowsyness += 2
-	else if(M.chem_doses[type] < 2 * threshold)
+
+	if(M.chem_doses[type] < 2 * threshold)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
-		M.add_chemical_effect(CE_SEDATE, 1)
 	else
 		M.sleeping = max(M.sleeping, 30)
-		M.add_chemical_effect(CE_SEDATE, 1)
 
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
