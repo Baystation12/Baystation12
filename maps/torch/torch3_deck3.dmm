@@ -1295,6 +1295,19 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
+"cS" = (
+/obj/machinery/button/blast_door{
+	id_tag = "d3starboardnacelle";
+	name = "combustion chamber blast door control";
+	pixel_x = 0;
+	pixel_y = -24
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 2
+	},
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3starboard)
 "cT" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -1316,6 +1329,18 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
+"cV" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 1;
+	frequency = 1447;
+	id = "fuelmode";
+	injecting = 1;
+	use_power = 1;
+	volume_rate = 4000
+	},
+/obj/effect/floor_decal/industrial/outline/red,
+/turf/simulated/floor/reinforced/airless,
+/area/thruster/d3starboard)
 "cW" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1611,6 +1636,32 @@
 /obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/hydroponics/storage)
+"dB" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	frequency = 1447;
+	id = "fuelmode";
+	injecting = 1;
+	use_power = 1;
+	volume_rate = 4000
+	},
+/obj/effect/floor_decal/industrial/outline/red,
+/turf/simulated/floor/reinforced/airless,
+/area/thruster/d3port)
+"dC" = (
+/obj/machinery/button/blast_door{
+	id_tag = "d3portnacelle";
+	name = "combustion chamber blast door control";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "dD" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
@@ -16135,19 +16186,6 @@
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
-"KO" = (
-/obj/machinery/button/blast_door{
-	id_tag = "d3starboardnacelle";
-	name = "combustion chamber blast door controll";
-	pixel_x = 0;
-	pixel_y = -24
-	},
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 2
-	},
-/obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3starboard)
 "KP" = (
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3starboard)
@@ -16182,18 +16220,6 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3starboard)
-"KU" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 1;
-	frequency = 1447;
-	id = "fuelmode";
-	injecting = 1;
-	use_power = 0;
-	volume_rate = 4000
-	},
-/obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced/airless,
 /area/thruster/d3starboard)
 "KV" = (
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
@@ -16236,17 +16262,6 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
-"Ld" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1447;
-	id = "fuelmode";
-	injecting = 1;
-	use_power = 0;
-	volume_rate = 4000
-	},
-/obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced/airless,
 /area/thruster/d3port)
 "Le" = (
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
@@ -16323,21 +16338,6 @@
 	dir = 1
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d3port)
-"Lo" = (
-/obj/machinery/button/blast_door{
-	id_tag = "d3portnacelle";
-	name = "combustion chamber blast door controll";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Lp" = (
@@ -49226,7 +49226,7 @@ Xe
 KJ
 KL
 td
-KU
+cV
 KP
 bd
 aa
@@ -49258,7 +49258,7 @@ aa
 rD
 aU
 La
-Ld
+dB
 Qi
 Ll
 Ls
@@ -49830,7 +49830,7 @@ SJ
 WF
 Jh
 zf
-KO
+cS
 KP
 KP
 KP
@@ -49866,7 +49866,7 @@ La
 La
 La
 La
-Lo
+dC
 Jj
 Jk
 Ws
