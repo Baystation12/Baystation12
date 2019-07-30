@@ -719,7 +719,7 @@
 	worn_state = "hazard"
 	gender_icons = 1
 	siemens_coefficient = 0.8
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 20)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 10)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/under/sterile

@@ -3,7 +3,7 @@
 	desc = "You shouldn't be seeing this."
 	icon = 'maps/torch/icons/obj/obj_under_solgov.dmi'
 	item_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_under_solgov.dmi')
-	armor = list(melee = 5, bullet = 0, laser = 5, energy = 5, bomb = 0, bio = 5, rad = 5)
+	armor = list(melee = 5, bullet = 0, laser = 5, energy = 5, bomb = 0, bio = 5, rad = 2.5)
 	siemens_coefficient = 0.8
 	gender_icons = 1
 

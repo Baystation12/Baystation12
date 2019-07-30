@@ -3,7 +3,7 @@
 	desc = "A sleek and dangerous hardsuit for active combat."
 	icon_state = "security_rig"
 	suit_type = "combat hardsuit"
-	armor = list(melee = 80, bullet = 65, laser = 55, energy = 15, bomb = 80, bio = 100, rad = 60)
+	armor = list(melee = 80, bullet = 65, laser = 55, energy = 15, bomb = 80, bio = 100, rad = 30)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_HEAVY
@@ -62,7 +62,7 @@
 	desc = "An austere hardsuit used by paramilitary groups and real soldiers alike."
 	icon_state = "military_rig"
 	suit_type = "military hardsuit"
-	armor = list(melee = 80, bullet = 75, laser = 60, energy = 15, bomb = 80, bio = 100, rad = 30)
+	armor = list(melee = 80, bullet = 75, laser = 60, energy = 15, bomb = 80, bio = 100, rad = 15)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_HEAVY

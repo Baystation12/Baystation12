@@ -21,6 +21,7 @@
 	var/polarized = 0
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
+	rad_resistance_modifier = 0.5
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
@@ -327,7 +328,7 @@
 
 	if (anchored)
 		to_chat(user, SPAN_NOTICE("\The [src] is secured to the floor!"))
-		return 
+		return
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
 	set_dir(turn(dir, 90))

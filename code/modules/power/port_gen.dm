@@ -412,7 +412,7 @@
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
-	var/rad_power = 2
+	var/rad_power = 4
 
 //nuclear energy is green energy!
 /obj/machinery/power/port_gen/pacman/super/process_exhaust()
@@ -442,7 +442,7 @@
 /obj/machinery/power/port_gen/pacman/super/explode()
 	//a nice burst of radiation
 	var/rads = rad_power*25 + (sheets + sheet_left)*1.5
-	SSradiation.radiate(src, (max(20, rads)))
+	SSradiation.radiate(src, (max(40, rads)))
 
 	explosion(src.loc, rad_power+1, rad_power+1, rad_power*2, 3)
 	qdel(src)
@@ -457,7 +457,7 @@
 	temperature_gain = 80	//how much the temperature increases per power output level, in degrees per level
 	max_temperature = 450
 	time_per_sheet = 400
-	rad_power = 6
+	rad_power = 12
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	anchored = 1
 
@@ -471,7 +471,7 @@
 
 /obj/machinery/power/port_gen/pacman/super/potato/UseFuel()
 	if(reagents.has_reagent("vodka"))
-		rad_power = 2
+		rad_power = 4
 		temperature_gain = 60
 		reagents.remove_any(1)
 		if(prob(2))
