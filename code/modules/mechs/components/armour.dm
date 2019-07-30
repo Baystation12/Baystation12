@@ -17,7 +17,7 @@
 /obj/item/robot_parts/robot_component/armour/exosuit/em
 	name = "EM-shielded armour plating"
 	desc = "A shielded plating that sorrounds the eletronics and protects them from electromagnetic radiation"
-	armor = list(melee = 65, bullet = 20, laser = 25, energy = 100, bomb = 10, bio = 100, rad = 60)
+	armor = list(melee = 65, bullet = 20, laser = 25, energy = 100, bomb = 10, bio = 100, rad = 30)
 	origin_tech = list(TECH_MATERIAL = 3)
 
 /obj/item/robot_parts/robot_component/armour/exosuit/combat

@@ -96,7 +96,7 @@
 	name = "cult helmet"
 	desc = "A space worthy helmet used by the followers of Nar-Sie."
 	icon_state = "cult_helmet"
-	armor = list(melee = 60, bullet = 60, laser = 60,energy = 15, bomb = 30, bio = 100, rad = 30) //Real tanky shit.
+	armor = list(melee = 60, bullet = 60, laser = 60,energy = 15, bomb = 30, bio = 100, rad = 15) //Real tanky shit.
 	siemens_coefficient = 0.3 //Bone is not very conducive to electricity.
 
 /obj/item/clothing/suit/space/cult
@@ -104,7 +104,7 @@
 	icon_state = "cult_armour"
 	desc = "A bulky suit of armour, bristling with spikes. It looks space proof."
 	allowed = list(/obj/item/weapon/book/tome,/obj/item/weapon/melee/cultblade,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
-	armor = list(melee = 60, bullet = 50, laser = 60,energy = 15, bomb = 30, bio = 100, rad = 30)
+	armor = list(melee = 60, bullet = 50, laser = 60,energy = 15, bomb = 30, bio = 100, rad = 15)
 	siemens_coefficient = 0.2
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 

@@ -47,7 +47,7 @@
 	total_health = 200
 	brute_mod = 0.9
 	burn_mod =  1.35
-	natural_armour_values = list(melee = 30, bullet = 15, laser = 0, energy = 0, bomb = 30, bio = 100, rad = 10)
+	natural_armour_values = list(melee = 30, bullet = 15, laser = 0, energy = 0, bomb = 30, bio = 100, rad = 5)
 
 	gluttonous = GLUT_SMALLER
 	mob_size = MOB_LARGE

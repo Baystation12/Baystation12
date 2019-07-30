@@ -7,7 +7,7 @@
 	desc = "A blood-red hardsuit module with heavy armour plates."
 	icon_state = "merc_rig"
 	suit_type = "crimson hardsuit"
-	armor = list(melee = 80, bullet = 65, laser = 65, energy = 15, bomb = 75, bio = 100, rad = 60)
+	armor = list(melee = 80, bullet = 65, laser = 65, energy = 15, bomb = 75, bio = 100, rad = 30)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_HEAVY
@@ -41,7 +41,7 @@
 	name = "crimson EOD hardsuit control module"
 	desc = "A blood-red hardsuit with heavy armoured plates. Judging by the abnormally thick plates, this one is for working with explosives."
 	icon_state = "merc_rig_heavy"
-	armor = list(melee = 80, bullet = 65, laser = 70, energy = 35, bomb = 100, bio = 100, rad = 80)
+	armor = list(melee = 80, bullet = 65, laser = 70, energy = 35, bomb = 100, bio = 100, rad = 40)
 	online_slowdown = 3
 	offline_slowdown = 4
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE

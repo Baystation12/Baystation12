@@ -10,7 +10,7 @@
 
 // Base variants are applied to everyone on the same Z level
 // Range variants are applied on per-range basis: numbers here are on point blank, it scales with the map size (assumes square shaped Z levels)
-#define DETONATION_RADS 20
+#define DETONATION_RADS 40
 #define DETONATION_MOB_CONCUSSION 4			// Value that will be used for Weaken() for mobs.
 
 // Base amount of ticks for which a specific type of machine will be offline for. +- 20% added by RNG.
@@ -39,7 +39,7 @@
 	var/thermal_release_modifier = 10000		//Higher == more heat released during reaction
 	var/phoron_release_modifier = 1500		//Higher == less phoron released by reaction
 	var/oxygen_release_modifier = 15000		//Higher == less oxygen released at high temperature/power
-	var/radiation_release_modifier = 1.5    //Higher == more radiation released with more power.
+	var/radiation_release_modifier = 2      //Higher == more radiation released with more power.
 	var/reaction_power_modifier =  1.1			//Higher == more overall power
 
 	//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.

@@ -262,7 +262,7 @@
 	icon_state = "coatec"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
-	armor = list(melee = 25, bullet = 10, laser = 5, energy = 10, bomb = 20, bio = 0, rad = 10)
+	armor = list(melee = 25, bullet = 10, laser = 5, energy = 10, bomb = 20, bio = 0, rad = 5)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/army
@@ -274,7 +274,7 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet
 	name = "fleet winter coat"
 	icon_state = "coatfl"
-	armor = list(melee = 20, bullet = 10, laser = 10, energy = 20, bomb = 20, bio = 0, rad = 10)
+	armor = list(melee = 20, bullet = 10, laser = 10, energy = 20, bomb = 20, bio = 0, rad = 5)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
 //SolGov Hardsuits
@@ -350,7 +350,7 @@
 	desc = "A light, radiation resistant voidsuit helmet commonly used among SCG uniformed services."
 	icon_state = "void_command"
 	item_state = "void_command"
-	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 30)
 	light_overlay = "helmet_light_dual_green"
 
 /obj/item/clothing/suit/space/void/command
@@ -360,7 +360,7 @@
 	name = "command voidsuit"
 	desc = "A light, radiation resistant voidsuit commonly used among SCG uniformed services. This one has an EC seal on its chest plate and command department markings."
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase/inflatable)
-	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 30)
 
 /obj/item/clothing/suit/space/void/command/New()
 	..()
@@ -381,7 +381,7 @@
 		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_head_solgov_skrell.dmi'
 		)
 	sprite_sheets_obj = list()
-	armor = list(melee = 30, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 90)
+	armor = list(melee = 30, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 45)
 	light_overlay = "yellow_light"
 	tinted = FALSE
 
@@ -395,7 +395,7 @@
 		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
 		)
 	sprite_sheets_obj = list()
-	armor = list(melee = 40, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 90)
+	armor = list(melee = 40, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 45)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/scanner/health,/obj/item/device/gps,/obj/item/weapon/pinpointer/radio,/obj/item/device/radio/beacon,/obj/item/weapon/material/hatchet/machete,/obj/item/weapon/shovel)
 
 /obj/item/clothing/suit/space/void/exploration/prepared

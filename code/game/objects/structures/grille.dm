@@ -9,6 +9,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
+	rad_resistance_modifier = 0.1
 	var/init_material = MATERIAL_STEEL
 	var/health = 10
 	var/destroyed = 0
