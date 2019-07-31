@@ -1334,9 +1334,45 @@
 "act" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod12/station)
+"acu" = (
+/obj/machinery/button/blast_door{
+	id_tag = "d1starboardnacelle";
+	name = "combustion chamber blast door control";
+	pixel_x = 0;
+	pixel_y = -24
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 2
+	},
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d1starboard)
+"acv" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 1;
+	frequency = 1447;
+	id = "fuelmode";
+	injecting = 1;
+	use_power = 1;
+	volume_rate = 4000
+	},
+/obj/effect/floor_decal/industrial/outline/red,
+/turf/simulated/floor/reinforced,
+/area/thruster/d1starboard)
 "acw" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod13/station)
+"acx" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	frequency = 1447;
+	id = "fuelmode";
+	injecting = 1;
+	use_power = 1;
+	volume_rate = 4000
+	},
+/obj/effect/floor_decal/industrial/outline/red,
+/turf/simulated/floor/reinforced,
+/area/thruster/d1port)
 "acz" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod14/station)
@@ -1810,19 +1846,6 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/meter,
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d1starboard)
-"adH" = (
-/obj/machinery/button/blast_door{
-	id_tag = "d1starboardnacelle";
-	name = "combustion chamber blast door controll";
-	pixel_x = 0;
-	pixel_y = -24
-	},
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 2
-	},
-/obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adI" = (
@@ -2538,18 +2561,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
-"afv" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 1;
-	frequency = 1447;
-	id = "fuelmode";
-	injecting = 1;
-	use_power = 0;
-	volume_rate = 4000
-	},
-/obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced,
-/area/thruster/d1starboard)
 "afw" = (
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
 	dir = 4;
@@ -12308,17 +12319,6 @@
 	},
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
-"aSg" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1447;
-	id = "fuelmode";
-	injecting = 1;
-	use_power = 0;
-	volume_rate = 4000
-	},
-/obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced,
-/area/thruster/d1port)
 "aSh" = (
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
 	dir = 4;
@@ -59449,7 +59449,7 @@ nys
 ada
 adE
 bbb
-afv
+acv
 aet
 abN
 abM
@@ -59485,7 +59485,7 @@ acd
 aLj
 xPU
 aPq
-aSg
+acx
 byb
 aTk
 aTU
@@ -60053,7 +60053,7 @@ hml
 vci
 bqv
 kfG
-adH
+acu
 aet
 aet
 aet
