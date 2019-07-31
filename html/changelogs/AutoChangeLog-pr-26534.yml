@@ -1,4 +1,0 @@
-author: "BlueNexus"
-delete-after: True
-changes: 
-  - rscdel: "The Security cyborg module has been disabled."
