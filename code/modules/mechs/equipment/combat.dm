@@ -1,6 +1,6 @@
 /obj/item/mech_equipment/mounted_system/taser
-	name = "mounted taser carbine"
-	desc = "A dual fire mode taser system connected to the exosuit's targetting system."
+	name = "mounted electrolaser carbine"
+	desc = "A dual fire mode electrolaser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
 	holding_type = /obj/item/weapon/gun/energy/taser/carbine/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
