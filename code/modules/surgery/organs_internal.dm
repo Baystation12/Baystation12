@@ -305,11 +305,11 @@
 			to_chat(user, SPAN_WARNING("\The [A] cannot function within a non-robotic limb."))
 			return FALSE
 
-	var/obj/item/organ/internal/I = target.internal_organs_by_name[organ_to_replace.organ_tag]
-	if(BP_IS_ROBOTIC(I) && target.species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
-		user.visible_message("<span class='notice'>[target]'s biology has rejected the attempts to attach \the [LAZYACCESS(target.surgeries_in_progress, target_zone)].</span>")
+	if(BP_IS_ROBOTIC(organ_to_replace) && target.species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+		user.visible_message("<span class='notice'>[target]'s biology has rejected the attempts to attach \the [organ_to_replace].</span>")
 		return FALSE
 
+	var/obj/item/organ/internal/I = target.internal_organs_by_name[organ_to_replace.organ_tag]
 	if(I && (I.parent_organ == affected.organ_tag))
 		to_chat(user, SPAN_WARNING("\The [target] already has \a [organ_to_replace]."))
 		return FALSE
