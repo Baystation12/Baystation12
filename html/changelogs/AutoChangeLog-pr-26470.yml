@@ -1,0 +1,5 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - rscadd: "Added the antlion and antlion queen to desert exoplanets."
+  - tweak: "Moved the giant crab megafauna to snow exoplanets."
