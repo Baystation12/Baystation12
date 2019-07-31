@@ -21,6 +21,8 @@
 
 #define ICON_FILES_PICKFROM list('code/modules/halo/overmap/freighter.dmi','code/modules/halo/icons/overmap/large_cargo_ship.dmi','code/modules/halo/icons/overmap/medical_ship.dmi','code/modules/halo/icons/overmap/mariner-class.dmi','code/modules/halo/icons/overmap/heavy_freighter.dmi')
 
+#define LIGHTRANGE_LIKELY_UNUSED 99
+
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
 	desc = "A ship, Duh."
@@ -233,13 +235,21 @@
 		to_world("Loading Ship-Map: [link]... This may cause lag.")
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		var/z_to_load_at = shipmap_handler.get_next_usable_z()
+		sleep(10) //Wait a tick again, to ensure te map is actually loaded in
 		shipmap_handler.un_free_map(z_to_load_at)
-		create_lighting_overlays_zlevel(z_to_load_at)
 		map_sectors["[z_to_load_at]"] = src
 		maploader.load_map(link,z_to_load_at)
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
+
+	for(var/z_level in map_z)
+		create_lighting_overlays_zlevel(z_level)
+		sleep(10) //Wait a tick or so.
+		for(var/obj/machinery/light/light in block(locate(1,1,z_level),locate(255,255,z_level)))
+			var/orig_range = light.light_range
+			light.set_light(LIGHTRANGE_LIKELY_UNUSED)
+			light.set_light(orig_range)
 	cargo_init()
 	damage_spawned_ship()
 	GLOB.processing_objects += src
