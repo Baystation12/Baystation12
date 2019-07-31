@@ -10,6 +10,15 @@
 	var/decl/memory_options/MO = decls_repository.get_decl(options || /decl/memory_options/default)
 	return MO.Create(src, memory)
 
+/datum/mind/proc/RemoveMemory(var/datum/memory/memory, var/mob/remover)
+	if(!memory)
+		return
+
+	LAZYREMOVE(memories, memory)
+	memory.creation_source.Log("removed a memory")
+	to_chat(remover, SPAN_NOTICE("You have removed a memory."))
+	ShowMemory(remover)
+
 /datum/mind/proc/ClearMemories(var/list/tags)
 	for(var/mem in memories)
 		var/datum/memory/M = mem
@@ -22,10 +31,9 @@
 	if(!istype(target))
 		return
 
-	var/new_tags = target.MemoryTags()
 	for(var/mem in memories)
 		var/datum/memory/M = mem
-		M.Copy(target, new_tags)
+		M.Copy(target)
 
 /datum/mind/proc/MemoryTags()
 	. = list()
@@ -36,6 +44,9 @@
 			. += antag_type
 
 /datum/mind/proc/ShowMemory(var/mob/recipient)
+	if(!istype(recipient))
+		return
+
 	var/list/output = list()
 	var/last_owner_name
 	// We pretend that memories are stored in some semblance of an order
@@ -59,19 +70,22 @@
 		var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
 		output += "<HR><B>Ambitions:</B> [ambition.summarize()]"
 
-	recipient << browse(jointext(output, "<BR>"),"window=memory")
+	show_browser(recipient, jointext(output, "<BR>"),"window=memory")
 
 /***********
 * Memories *
 ***********/
 /datum/memory
-	var/memory // Sanitized strings expected. Remember to unsanitize if adding editing
+	var/decl/memory_options/creation_source
+	var/memory        // Sanitized strings expected. Remember to unsanitize if adding editing
 	var/list/tags
 	var/weakref/owner
 	var/_owner_name
+	var/_owner_ckey   // The ckey of the original creator. Shouldn't be overriden once set
 
-/datum/memory/New(var/weakref/owner, var/memory, var/tags)
+/datum/memory/New(var/decl/memory_options/creation_source, var/weakref/owner, var/memory, var/tags)
 	..()
+	src.creation_source = creation_source
 	src.owner = owner
 	src.memory = memory
 	src.tags = tags
@@ -85,23 +99,23 @@
 	if(owner)
 		var/mob/owner_mob = owner.resolve()
 		if(owner_mob)
+			_owner_ckey = _owner_ckey || owner_mob.ckey // Re-use _owner_ckey if set
 			_owner_name = owner_mob.real_name
 		else
 			owner = null
 	return _owner_name
 
-
-/datum/memory/proc/Copy(var/datum/mind/target, var/new_tags)
-	var/datum/memory/new_memory = new/datum/memory(owner, memory, new_tags)
+/datum/memory/proc/Copy(var/datum/mind/target)
+	var/new_tags = creation_source.MemoryTags(target)
+	var/datum/memory/new_memory = new/datum/memory(creation_source, owner, memory, new_tags)
 	new_memory._owner_name = new_memory._owner_name || _owner_name
+	new_memory._owner_ckey = new_memory._owner_ckey
 	new_memory.owner = null // Copied memories are detached from their previous owners
 	LAZYADD(target.memories, new_memory)
 
 /datum/memory/user
 
-/datum/memory/system/New()
-	..()
-	tags = null // System memories never have tags
+/datum/memory/system
 
 /*****************
 * Memory Options *
@@ -118,8 +132,8 @@
 /decl/memory_options/proc/MemoryTags(var/datum/mind/target)
 	return
 
-/decl/memory_options/proc/Log(var/memory)
-	log_and_message_admins("created a memory: [memory]")
+/decl/memory_options/proc/Log(var/message)
+	log_and_message_admins(message)
 
 /decl/memory_options/proc/Create(var/datum/mind/target, var/memory)
 	var/error = Validate(target)
@@ -128,9 +142,9 @@
 
 	var/owner = weakref(target.current)
 	var/tags = MemoryTags(target)
-	var/new_memory = new memory_type(owner, memory, tags)
+	var/new_memory = new memory_type(src, owner, memory, tags)
 	LAZYADD(target.memories, new_memory)
-	Log(memory)
+	Log("created a memory")
 
 // Default memory handling
 /decl/memory_options/default
@@ -157,7 +171,7 @@
 /decl/memory_options/system
 	memory_type = /datum/memory/system
 
-/decl/memory_options/system/Log()
+/decl/memory_options/system/Log(var/message)
 	return
 
 /********
