@@ -249,6 +249,7 @@
 		for(var/obj/machinery/light/light in block(locate(1,1,z_level),locate(255,255,z_level)))
 			var/orig_range = light.light_range
 			light.set_light(LIGHTRANGE_LIKELY_UNUSED)
+			sleep(30) //Wait 3 ticks
 			light.set_light(orig_range)
 	cargo_init()
 	damage_spawned_ship()
