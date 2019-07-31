@@ -36,6 +36,7 @@
 /obj/item/weapon/robot_module/security/general
 	name = "security robot module"
 	display_name = "Security"
+	crisis_locked = TRUE
 	sprites = list(
 		"Basic" = "secborg",
 		"Red Knight" = "Security",
