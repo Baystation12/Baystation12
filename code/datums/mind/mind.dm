@@ -160,12 +160,7 @@
 
 	if(href_list["remove_memory"])
 		var/memory = locate(href_list["remove_memory"]) in memories
-		if(!memory)
-			return TRUE
-
-		LAZYREMOVE(memories, memory)
-		ShowMemory(usr)
-		to_chat(usr, SPAN_NOTICE("You have removed a memory."))
+		RemoveMemory(memory, usr)
 		return TRUE
 
 	if(href_list["abandon_goal"])
