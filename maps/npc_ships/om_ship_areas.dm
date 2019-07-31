@@ -12,18 +12,10 @@
 
 /area/om_ships/unscpatrol
 	name = "UNSC Patrol Vessel"
-	has_gravity = 1
-	power_environ = 1
-	power_light = 1
-	poweralm = 1
 	requires_power = 0
 
 /area/om_ships/covpatrol
 	name = "Covenant Patrol Vessel"
-	has_gravity = 1
-	power_environ = 1
-	power_light = 1
-	poweralm = 1
 	requires_power = 0
 
 /area/om_ships/star
@@ -42,16 +34,8 @@
 
 /area/om_ships/hum_ert
 	name = "Human ERT Vessel"
-	has_gravity = 1
-	power_environ = 1
-	power_light = 1
-	poweralm = 1
 	requires_power = 0
 
 /area/om_ships/cov_ert
 	name = "Covenant ERT Vessel"
-	has_gravity = 1
-	power_environ = 1
-	power_light = 1
-	poweralm = 1
 	requires_power = 0

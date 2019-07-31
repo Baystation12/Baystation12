@@ -11,12 +11,14 @@
 
 /obj/effect/overmap/ship/npc_ship/ert_human
 	name = "Human ERT Ship"
-	opacity = 0
+	invisibility = 60 //Ghost-tier invis.
+	default_delay = 1 SECOND
 	ship_datums = list(/datum/npc_ship/hum_ert)
 
 /obj/effect/overmap/ship/npc_ship/ert_covenant
 	name = "Covenant ERT Ship"
-	opacity = 0
+	invisibility = 60 //Ghost-tier invis.
+	default_delay = 1 SECOND
 	ship_datums = list(/datum/npc_ship/cov_ert)
 
 /datum/admin_secret_item/fun_secret/spawn_ert_ship
