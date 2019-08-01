@@ -37,6 +37,7 @@
 	exosuit_desc_string = "aerodynamic electromechanic legs"
 	icon_state = "light_legs"
 	move_delay = 2
+	turn_delay = 3
 	max_damage = 40
 	power_use = 5
 	desc = "The electrical systems driving these legs are almost totally silent. Unfortunately slamming a plate of metal against the ground is not."
@@ -68,7 +69,7 @@
 	max_damage = 50
 	power_use = 5
 	has_hardpoints = list(HARDPOINT_BACK)
-	desc = "The Veymed Odysseus series cockpits combine ultralight materials clear aluminum laminates to provide an optimized cockpit experience."
+	desc = "The Veymed Odysseus series cockpits combine ultralight materials and clear aluminum laminates to provide an optimized cockpit experience."
 
 /obj/item/mech_component/chassis/light/prebuild()
 	. = ..()

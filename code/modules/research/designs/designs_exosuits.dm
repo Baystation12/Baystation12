@@ -24,9 +24,9 @@
 	build_path = /obj/item/weapon/circuitboard/exosystem/medical
 	sort_string = "NAABA"
 
-/datum/design/circuit/exosuit/ballistics
-	name = "ballistic weapon control"
-	id = "mech_software_ballistics"
+/datum/design/circuit/exosuit/weapons
+	name = "basic weapon control"
+	id = "mech_software_weapons"
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/circuitboard/exosystem/weapons
 	sort_string = "NAACA"

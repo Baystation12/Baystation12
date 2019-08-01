@@ -34,6 +34,7 @@
 	exosuit_desc_string = "sleek hydraulic legs"
 	icon_state = "combat_legs"
 	move_delay = 3
+	turn_delay = 3
 	power_use = 20
 
 /obj/item/mech_component/sensors/combat
