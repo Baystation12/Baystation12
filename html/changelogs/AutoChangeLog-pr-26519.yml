@@ -1,0 +1,5 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Added 2 new exosuit propulsions. The quadlegs and the armored tracks."
+  - tweak: "Speed tweaks to exosuit legs."
