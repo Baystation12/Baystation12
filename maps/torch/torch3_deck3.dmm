@@ -725,6 +725,9 @@
 	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "bP" = (
@@ -16086,6 +16089,10 @@
 	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -25
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "KC" = (
@@ -17843,6 +17850,11 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "PO" = (
@@ -17906,6 +17918,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3starboard)
 "PX" = (
@@ -18205,6 +18218,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3starboard)
 "QY" = (
@@ -18397,6 +18411,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3port)
 "RI" = (
@@ -19689,6 +19704,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3port)
 "VB" = (
@@ -21183,6 +21199,10 @@
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
