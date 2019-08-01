@@ -57,7 +57,10 @@
 	// User is not necessarily the exosuit, or the same person, so update intent.
 	if(user != src)
 		a_intent = user.a_intent
-		zone_sel.set_selected_zone(user.zone_sel.selecting)
+		if(user.zone_sel)
+			zone_sel.set_selected_zone(user.zone_sel.selecting)
+		else
+			zone_sel.set_selected_zone(BP_CHEST)
 	// You may attack the target with your exosuit FIST if you're malfunctioning.
 	var/atom/movable/AM = A
 	var/fail_prob = (user != src && istype(AM) && AM.loc != src) ? (user.skill_check(SKILL_MECH, HAS_PERK) ? 0: 15 ) : 0
