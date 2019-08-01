@@ -1505,7 +1505,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/rnd)
 "dQ" = (
@@ -1534,7 +1534,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "dS" = (
@@ -1696,7 +1696,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "eq" = (
@@ -1774,7 +1774,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "ey" = (
@@ -1783,7 +1783,7 @@
 /area/unishi/common)
 "ez" = (
 /obj/effect/wingrille_spawn/reinforced,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "eA" = (
@@ -1818,7 +1818,7 @@
 "eF" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/structure/sign/xenobio_3,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "eG" = (
@@ -1838,7 +1838,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "eI" = (
@@ -1892,7 +1892,7 @@
 	icon_state = "xenobio";
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "eQ" = (
@@ -1979,7 +1979,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "fa" = (
@@ -2042,7 +2042,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fh" = (
@@ -2146,7 +2146,7 @@
 /obj/machinery/door/airlock/science,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/common)
 "fr" = (
@@ -2164,7 +2164,7 @@
 /area/unishi/common)
 "ft" = (
 /obj/machinery/door/airlock/science,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/common)
 "fu" = (
@@ -2290,7 +2290,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor,
 /area/unishi/smresearch)

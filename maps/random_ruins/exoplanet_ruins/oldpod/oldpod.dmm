@@ -20,7 +20,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "ae" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
@@ -173,7 +173,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "ax" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
@@ -303,7 +303,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aN" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/wall_frame/hull,
 /obj/structure/grille,
 /obj/item/stack/material/rods,

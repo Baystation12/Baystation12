@@ -2574,6 +2574,7 @@
 	pressure_setting = 2000;
 	sensor_tag = "d_air_sensor";
 	sensor_name = "Air Supply Tank";
+	
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2589,7 +2590,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
