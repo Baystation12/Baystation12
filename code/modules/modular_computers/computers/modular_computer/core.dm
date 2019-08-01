@@ -109,6 +109,17 @@
 		set_light(0)
 		return
 	set_light(0.2, 0.1, light_strength)
+	if(icon == CUSTOM_ITEM_OBJ)
+		if(active_program)
+			if(active_program.program_icon_state && ("[icon_state]_[active_program.program_icon_state]" in icon_states(icon)))
+				overlays.Add("[icon_state]_[active_program.program_icon_state]")
+			else
+				overlays.Add(icon_state_menu)
+			if(active_program.program_key_state)
+				overlays.Add(active_program.program_key_state)
+		else
+			overlays.Add(icon_state_menu)
+		return
 	if(active_program)
 		overlays.Add(active_program.program_icon_state ? active_program.program_icon_state : icon_state_menu)
 		if(active_program.program_key_state)
