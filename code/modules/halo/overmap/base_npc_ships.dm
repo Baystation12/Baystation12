@@ -246,11 +246,13 @@
 	for(var/z_level in map_z)
 		create_lighting_overlays_zlevel(z_level)
 		sleep(10) //Wait a tick or so.
-		for(var/obj/machinery/light/light in block(locate(1,1,z_level),locate(255,255,z_level)))
+		for(var/obj/machinery/light/light in GLOB.machines)
+			if(!(text2num("[light.z]") in map_z))
+				continue
 			var/orig_range = light.light_range
 			light.set_light(LIGHTRANGE_LIKELY_UNUSED)
-			sleep(30) //Wait 3 ticks
-			light.set_light(orig_range)
+			spawn(30) //Wait 3 ticks
+				light.set_light(orig_range)
 	cargo_init()
 	damage_spawned_ship()
 	GLOB.processing_objects += src
