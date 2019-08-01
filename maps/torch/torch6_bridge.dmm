@@ -225,7 +225,7 @@
 /area/hallway/primary/bridge/aft)
 "aA" = (
 /obj/structure/catwalk,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aB" = (
@@ -238,7 +238,7 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/xo)
 "aC" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
@@ -604,7 +604,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -735,7 +735,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "bu" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -917,7 +917,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "bK" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -935,7 +935,7 @@
 	name = "Corporate Liaison";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -1751,7 +1751,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "cS" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
 	id_tag = "csodoor";
 	name = "Chief Science Officer";
@@ -2611,7 +2611,7 @@
 	name = "XO's Quarters";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2649,7 +2649,7 @@
 "et" = (
 /obj/structure/table/steel_reinforced,
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/item/weapon/material/bell,
 /obj/machinery/door/window/brigdoor/eastright{
 	dir = 8;
@@ -2904,7 +2904,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge/storage)
@@ -3676,7 +3676,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
 "ga" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -3931,7 +3931,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "gL" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -3988,7 +3988,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "gR" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -4176,7 +4176,7 @@
 	secured_wires = 1
 	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/ce)
 "hA" = (
@@ -4357,7 +4357,7 @@
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai_foyer)
 "hV" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/sol{
 	id_tag = "starboardbridgedoor";
 	name = "Bridge";
@@ -4732,7 +4732,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
 "iX" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -4993,7 +4993,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/hallway/port)
 "jD" = (
@@ -5054,7 +5054,7 @@
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "jR" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
@@ -5119,7 +5119,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/catwalk,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/aftstarboard)
@@ -5411,7 +5411,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "kL" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/civilian,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/bridge/fore)
@@ -5991,7 +5991,7 @@
 	name = "Aquila Dock";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
@@ -6124,7 +6124,7 @@
 /area/aquila/passenger)
 "mc" = (
 /obj/structure/cable/green,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -7009,7 +7009,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "nI" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -7222,7 +7222,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/hatch/maintenance,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/aftport)
 "ol" = (
@@ -7979,7 +7979,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/cos)
 "qo" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
 	id_tag = "cosdoor";
 	name = "Chief of Security";
@@ -8241,7 +8241,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "qY" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -8321,7 +8321,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "rd" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -8426,7 +8426,7 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "rt" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -8642,7 +8642,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/bridge)
 "rR" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/vault/bolted{
 	frequency = 1379;
 	id_tag = "bridge_safe_exterior";
@@ -8742,7 +8742,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "sf" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -8896,7 +8896,7 @@
 	name = "Senior Enlisted Advisor";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
@@ -8975,7 +8975,7 @@
 	name = "Disciplinary Board Room";
 	secured_wires = 0
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -9044,7 +9044,7 @@
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
 "ta" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -9509,7 +9509,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/sgr)
 "uk" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -10385,7 +10385,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering{
 	icon_state = "closed";
 	locked = 0;
@@ -10688,7 +10688,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -10796,7 +10796,7 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/bridge/foreport)
 "xe" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -10886,7 +10886,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/bridge/foreport)
@@ -10945,7 +10945,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/bridge/aftport)
 "xo" = (
@@ -11028,7 +11028,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xz" = (
@@ -11399,7 +11399,7 @@
 	name = "Security Checkpoint";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
@@ -11601,7 +11601,7 @@
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "zN" = (
@@ -11879,7 +11879,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -11925,7 +11925,7 @@
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "AJ" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -12103,7 +12103,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -12467,7 +12467,7 @@
 	opacity = 0
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/hallway/port)
 "Db" = (
@@ -12590,7 +12590,7 @@
 /area/crew_quarters/heads/office/co)
 "DE" = (
 /obj/structure/cable/green,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge/storage)
@@ -13094,7 +13094,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Gs" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -13284,7 +13284,7 @@
 	name = "Executive Officer";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
@@ -13324,7 +13324,7 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/xo)
 "Hs" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -13403,7 +13403,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -13440,7 +13440,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "HG" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -13467,7 +13467,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HI" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/command{
 	name = "Bridge Storage"
 	},
@@ -13522,7 +13522,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HX" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/sol{
 	id_tag = "portbridgedoor";
 	name = "Bridge";
@@ -13712,7 +13712,7 @@
 	name = "CO's Quarters";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -13827,7 +13827,7 @@
 /turf/simulated/wall/titanium,
 /area/aquila/secure_storage)
 "IK" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14207,7 +14207,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -14367,7 +14367,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "Lk" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -14834,7 +14834,7 @@
 	name = "Security Checkpoint";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -15120,7 +15120,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/passenger)
 "Pc" = (
@@ -15155,7 +15155,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
 "Pe" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -15177,7 +15177,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/bridge)
 "Pg" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/vault/bolted{
 	autoset_access = 0;
 	id_tag = "bridgesafe_front";
@@ -15295,7 +15295,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/aux_eva)
 "Qd" = (
@@ -15432,7 +15432,7 @@
 	name = "Commanding Officer";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Qv" = (
@@ -15478,7 +15478,7 @@
 /turf/simulated/wall/titanium,
 /area/aquila/passenger)
 "QK" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -15852,7 +15852,7 @@
 	icon_state = "0-4"
 	},
 /obj/structure/cable/green,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -16003,7 +16003,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -16078,7 +16078,7 @@
 	autoset_access = 0;
 	name = "Head"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/heads/cobed)
 "Ta" = (
@@ -16460,7 +16460,7 @@
 /area/crew_quarters/heads/office/rd)
 "Uk" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -17159,7 +17159,7 @@
 	name = "Chief Medical Officer";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -17210,7 +17210,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "XN" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -17407,7 +17407,7 @@
 	name = "SolGov Representative";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
@@ -17458,7 +17458,7 @@
 /obj/machinery/door/airlock/maintenance{
 	name = "Disciplinary Board Room Maintenance Access"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
 "YR" = (
@@ -17508,7 +17508,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "YX" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/vault/bolted{
 	autoset_access = 0;
