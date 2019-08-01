@@ -1087,6 +1087,9 @@
 	sensor_name = "Oxygem Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "abX" = (
@@ -1223,6 +1226,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d1starboard)
 "ack" = (
@@ -1473,6 +1477,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d1starboard)
 "acX" = (
@@ -1827,6 +1832,11 @@
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
@@ -12694,6 +12704,10 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTk" = (
@@ -12901,6 +12915,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1port)
 "aTR" = (
@@ -13085,6 +13100,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/thruster/d1port)
 "aUh" = (
@@ -13256,6 +13272,10 @@
 	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUy" = (
