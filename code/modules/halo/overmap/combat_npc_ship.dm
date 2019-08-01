@@ -67,7 +67,7 @@
 	target = null
 
 	//scan ships in range
-	for(var/obj/effect/overmap/ship/ship in range(7))
+	for(var/obj/effect/overmap/ship/ship in range(7,src))
 
 		//check if they're a hostile faction
 		var/datum/faction/their_faction = ship.my_faction
