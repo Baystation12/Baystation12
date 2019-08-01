@@ -30,3 +30,7 @@
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 	whitelisted = list(SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
 	sort_category = "Xenowear"
+
+//gloves
+/datum/gear/gloves/insulated/nabber
+	allowed_roles = TECHNICAL_ROLES

@@ -161,6 +161,13 @@
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
 
+/datum/gear/gloves/nabber
+	display_name = "GAS insulated gloves"
+	path = /obj/item/clothing/gloves/nabber
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_NABBER)
+	cost = 1
+
 // Vox clothing
 /datum/gear/mask/gas/vox
 	display_name = "vox breathing mask"
