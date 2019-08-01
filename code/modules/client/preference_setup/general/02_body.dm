@@ -376,7 +376,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			sanitize_organs()
 
-			if(!has_flag(pref.species, HAS_UNDERWEAR))
+			if(!has_flag(all_species[pref.species], HAS_UNDERWEAR))
 				pref.all_underwear.Cut()
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
