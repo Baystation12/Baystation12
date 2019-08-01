@@ -317,6 +317,7 @@
 /datum/npc_ship/cov_patrol
 	mapfile_links = list('maps/npc_ships/kigyar_missionary.dmm')
 	fore_dir = WEST
+	map_bounds = list(2,114,139,44)
 
 #undef LIGHTRANGE_LIKELY_UNUSED
 #undef NPC_SHIP_LOSE_DELAY
