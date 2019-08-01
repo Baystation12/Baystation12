@@ -5,7 +5,7 @@ proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, 
 		if(image_colour)
 			I.color = image_colour
 		if(decal)
-			var/decal_key = "decal-[cache_key]"
+			var/decal_key = "[decal]-[cache_key]"
 			if(!GLOB.mech_icon_cache[decal_key])
 				var/template_key = "template-[cache_key]"
 				if(!GLOB.mech_icon_cache[template_key])
@@ -35,7 +35,10 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 		new_overlays += pilot_overlays
 	if(body)
 		new_overlays += get_mech_image(body.decal, "[body.icon_state]_overlay[hatch_closed ? "" : "_open"]", body.on_mech_icon, body.color, MECH_COCKPIT_LAYER)
-	new_overlays += get_mech_images(list(legs, arms), MECH_COCKPIT_LAYER)
+	if(arms)
+		new_overlays += get_mech_image(arms.decal, arms.icon_state, arms.on_mech_icon, arms.color, MECH_ARM_LAYER)
+	if(legs)
+		new_overlays += get_mech_image(legs.decal, legs.icon_state, legs.on_mech_icon, legs.color, MECH_LEG_LAYER)
 	for(var/hardpoint in hardpoints)
 		var/obj/item/mech_equipment/hardpoint_object = hardpoints[hardpoint]
 		if(hardpoint_object)
