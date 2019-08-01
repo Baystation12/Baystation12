@@ -32,5 +32,5 @@
 	sort_category = "Xenowear"
 
 //gloves
-/datum/gear/gloves/insulated/nabber
+/datum/gear/gloves/nabber
 	allowed_roles = TECHNICAL_ROLES
