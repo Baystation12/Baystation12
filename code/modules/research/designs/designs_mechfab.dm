@@ -371,7 +371,7 @@
 	build_path = /obj/item/mech_equipment/drill
 
 /datum/design/item/exosuit/taser
-	name = "mounted taser"
+	name = "mounted electrolaser"
 	id = "mech_taser"
 	req_tech = list(TECH_COMBAT = 1)
 	build_path = /obj/item/mech_equipment/mounted_system/taser

@@ -140,8 +140,8 @@
 	sort_string = "WCJAA"
 
 /datum/design/item/rig/taser
-	name = "Taser"
-	desc = "A taser, mountable on a RIG."
+	name = "Electrolaser"
+	desc = "An electrolaser, mountable on a RIG."
 	id = "rig_taser"
 	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 	materials = list(MATERIAL_STEEL = 4000, MATERIAL_PLASTIC = 2500, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000)

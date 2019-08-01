@@ -254,15 +254,15 @@
 
 /obj/item/rig_module/mounted/taser
 
-	name = "mounted taser"
+	name = "mounted electrolaser"
 	desc = "A shoulder-mounted nonlethal energy projector."
 	icon_state = "taser"
 	usable = 0
 
 	suit_overlay_active = "mounted-taser"
 
-	interface_name = "mounted taser"
-	interface_desc = "A shoulder-mounted, cell-powered taser."
+	interface_name = "mounted electrolaser"
+	interface_desc = "A shoulder-mounted, cell-powered electrolaser."
 	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 
 	gun = /obj/item/weapon/gun/energy/taser/mounted
