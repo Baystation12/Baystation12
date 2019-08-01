@@ -316,6 +316,7 @@
 	mapfile_links = list('maps/npc_ships/kigyar_missionary.dmm')
 	fore_dir = WEST
 
+#undef LIGHTRANGE_LIKELY_UNUSED
 #undef NPC_SHIP_LOSE_DELAY
 #undef ON_PROJECTILE_HIT_MESSAGES
 #undef ON_DEATH_MESSAGES
