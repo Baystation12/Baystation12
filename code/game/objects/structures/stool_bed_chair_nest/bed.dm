@@ -175,7 +175,7 @@
 	base_icon = "psychbed"
 
 /obj/structure/bed/psych/New(var/newloc)
-	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER)
+	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER_GENERIC)
 
 /obj/structure/bed/padded/New(var/newloc)
 	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_CLOTH)

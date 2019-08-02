@@ -18,3 +18,5 @@
 	possession_candidate = 1
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
+	skin_material = MATERIAL_SKIN_LIZARD
+	skin_amount = 1

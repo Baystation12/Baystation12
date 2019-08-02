@@ -11,6 +11,10 @@ var/datum/species/shapeshifter/promethean/prometheans
 	knockout_message = "collapses inwards, forming a disordered puddle of goo."
 	remains_type = /obj/effect/decal/cleanable/ash
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	blood_color = "#05ff9b"
 	flesh_color = "#05fffb"
 

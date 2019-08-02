@@ -1,5 +1,10 @@
 /datum/species/starlight
 	name = "Starlight Base"
+
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/unbreakable),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin/unbreakable),

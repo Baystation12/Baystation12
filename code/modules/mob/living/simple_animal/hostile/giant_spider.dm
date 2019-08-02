@@ -17,6 +17,9 @@
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
+	skin_material = MATERIAL_SKIN_CHITIN
+	bone_material = null
+	skin_amount = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
 	meat_amount = 3
 	response_help  = "pets"

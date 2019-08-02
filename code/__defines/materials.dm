@@ -9,7 +9,6 @@
 #define MATERIAL_URANIUM                 "uranium"
 #define MATERIAL_CRYSTAL                 "crystal"
 #define MATERIAL_SANDSTONE               "sandstone"
-#define MATERIAL_LEATHER                 "leather"
 #define MATERIAL_IRON                    "iron"
 #define MATERIAL_PLATINUM                "platinum"
 #define MATERIAL_BRONZE                  "bronze"
@@ -58,6 +57,19 @@
 #define MATERIAL_BAMBOO                  "bamboo"
 #define MATERIAL_YEW                     "yew"
 
+// skins and bones
+#define MATERIAL_SKIN_GENERIC            "skin"
+#define MATERIAL_SKIN_LIZARD             "lizardskin"
+#define MATERIAL_SKIN_CHITIN             "chitin"
+#define MATERIAL_SKIN_FUR                "fur"
+#define MATERIAL_BONE_GENERIC            "bone"
+#define MATERIAL_BONE_CARTILAGE          "cartilage"
+#define MATERIAL_LEATHER_GENERIC         "leather"
+#define MATERIAL_LEATHER_LIZARD          "scaled hide"
+#define MATERIAL_LEATHER_FUR             "furred hide"
+#define MATERIAL_LEATHER_CHITIN          "treated chitin"
+
+// defaults
 #define DEFAULT_WALL_MATERIAL      MATERIAL_STEEL
 #define DEFAULT_FURNITURE_MATERIAL MATERIAL_ALUMINIUM
 

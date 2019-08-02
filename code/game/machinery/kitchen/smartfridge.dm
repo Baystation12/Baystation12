@@ -135,15 +135,18 @@
 		return 1
 
 /obj/machinery/smartfridge/drying_rack
-	name = "\improper Drying Rack"
+	name = "drying rack"
 	desc = "A machine for drying plants."
 	icon_state = "drying_rack"
 
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/))
 		var/obj/item/weapon/reagent_containers/food/snacks/S = O
-		if (S.dried_type)
-			return 1
+		return S.dried_type
+	else if(istype(O, /obj/item/stack/material))
+		var/obj/item/stack/material/mat = O
+		var/material/skin/skin_mat = mat.material
+		return istype(skin_mat)
 	return 0
 
 /obj/machinery/smartfridge/drying_rack/Process()
@@ -169,19 +172,43 @@
 			icon_state = "drying_rack-close"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
+
 	for(var/datum/stored_items/I in item_records)
-		for(var/obj/item/weapon/reagent_containers/food/snacks/S in I.instances)
-			if(S.dry || !I.get_specific_product(get_turf(src), S)) continue
-			if(S.dried_type == S.type)
-				S.dry = 1
-				S.SetName("dried [S.name]")
-				S.color = "#a38463"
-				stock_item(S)
-			else
-				var/D = S.dried_type
-				new D(get_turf(src))
-				qdel(S)
-			return
+		for(var/thing in I.instances)
+
+			var/remove_thing = FALSE
+			if(istype(thing, /obj/item/weapon/reagent_containers/food/snacks))
+				var/obj/item/weapon/reagent_containers/food/snacks/S = thing
+				if(S.dry || !I.get_specific_product(get_turf(src), S)) 
+					continue
+				if(S.dried_type == S.type)
+					S.dry = 1
+					S.SetName("dried [S.name]")
+					S.color = "#a38463"
+					stock_item(S)
+					return
+				else
+					var/D = S.dried_type
+					new D(get_turf(src))
+					remove_thing = TRUE
+
+			if(istype(thing, /obj/item/stack/material))
+				var/obj/item/stack/material/skin = thing
+				if(!istype(skin.material, /material/skin))
+					continue
+				var/material/skin/skin_mat = skin.material
+				if(!skin_mat.tans_to)
+					continue
+				var/material/leather_mat = SSmaterials.get_material_by_name(skin_mat.tans_to)
+				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
+				remove_thing = TRUE
+			
+			if(remove_thing)
+				I.instances -= thing
+				I.amount--
+				qdel(thing)
+				return
+
 
 /obj/machinery/smartfridge/Process()
 	if(stat & (BROKEN|NOPOWER))

@@ -9,6 +9,10 @@
 	hidden_from_codex = FALSE
 	silent_steps = TRUE
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
 
