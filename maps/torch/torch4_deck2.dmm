@@ -14665,9 +14665,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 8;
@@ -16461,9 +16458,6 @@
 /area/engineering/atmos)
 "Po" = (
 /obj/structure/closet/coffin,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /turf/simulated/floor/wood/walnut,
 /area/vacant/chapel)
 "Pq" = (
@@ -18192,9 +18186,6 @@
 /area/maintenance/seconddeck/central)
 "Wa" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/central)

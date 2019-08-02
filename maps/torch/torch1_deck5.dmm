@@ -7174,9 +7174,6 @@
 "pN" = (
 /obj/structure/closet/crate/plastic,
 /obj/item/bodybag,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /turf/simulated/floor/tiled/white,
 /area/vacant/infirmary)
 "pO" = (
@@ -7235,9 +7232,6 @@
 /obj/random/torchcloset,
 /obj/random/maintenance,
 /obj/random/maintenance,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/fifthdeck/fore)
 "pR" = (
@@ -10018,9 +10012,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "vK" = (
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "vL" = (

@@ -8766,9 +8766,6 @@
 	dir = 5
 	},
 /obj/random/torchcloset,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/foreport)

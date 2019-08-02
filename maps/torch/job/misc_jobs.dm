@@ -76,36 +76,3 @@ Civilian
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 24
 	required_language = null
-
-/datum/job/stowaway
-	title = "Stowaway"
-	department = "Civilian"
-	department_flag = CIV
-	total_positions = 1
-	spawn_positions = 1
-	availablity_chance = 20
-	supervisors = "yourself"
-	ideal_character_age = 30
-	minimal_player_age = 0
-	create_record = 0
-	account_allowed = 0
-	outfit_type = /decl/hierarchy/outfit/job/torch/stowaway
-	allowed_branches = list(
-		/datum/mil_branch/civilian,
-		/datum/mil_branch/alien
-	)
-	allowed_ranks = list(
-		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/alien
-	)
-	latejoin_at_spawnpoints = 1
-	announced = FALSE
-	required_language = null
-	is_semi_antagonist = TRUE
-	var/list/soft_antag_species = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
-
-/datum/job/stowaway/post_equip_rank(mob/person, alt_title)
-	var/mob/living/carbon/human/H = person
-	is_semi_antagonist = (istype(H) && (H.species.name in soft_antag_species))
-	..()
-	is_semi_antagonist = initial(is_semi_antagonist)
