@@ -19397,9 +19397,6 @@
 /area/maintenance/thirddeck/foreport)
 "UJ" = (
 /obj/structure/closet/emcloset,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/forestarboard)
 "UK" = (
@@ -20582,9 +20579,6 @@
 /area/crew_quarters/cryolocker)
 "XS" = (
 /obj/random/torchcloset,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
@@ -20646,9 +20640,6 @@
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/mime,
 /obj/random/junk,
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
 /turf/simulated/floor/carpet,
 /area/vacant/cabin)
 "Yb" = (
