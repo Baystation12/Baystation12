@@ -1,0 +1,4 @@
+author: "Rain7x"
+delete-after: True
+changes: 
+  - tweak: "Tweaks the event announcement messages to be more tone-neutral & standardizes the announcement header"
