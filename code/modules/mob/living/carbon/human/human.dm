@@ -1095,6 +1095,13 @@
 
 	available_maneuvers = species.maneuvers.Copy()
 
+	meat_type =     species.meat_type
+	meat_amount =   species.meat_amount
+	skin_material = species.skin_material
+	skin_amount =   species.skin_amount
+	bone_material = species.bone_material
+	bone_amount =   species.bone_amount
+
 	spawn(0)
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)

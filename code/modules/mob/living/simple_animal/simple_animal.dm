@@ -22,8 +22,6 @@
 
 	var/turns_per_move = 1
 	var/turns_since_move = 0
-	var/meat_amount = 0
-	var/meat_type
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = 1	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.

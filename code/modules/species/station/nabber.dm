@@ -16,6 +16,8 @@
 	min_age = 8
 	max_age = 40
 
+	skin_material = MATERIAL_SKIN_CHITIN
+	bone_material = null
 	speech_sounds = list('sound/voice/bug.ogg')
 	speech_chance = 2
 

@@ -169,6 +169,9 @@
 					return D
 	return res
 
+/mob/living/carbon/human/get_blood(datum/reagents/container)
+	. = ..(container || vessel)
+
 /mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
 	if(blood_species && species.name)
 		if(blood_species != species.name)
@@ -223,9 +226,11 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
 	var/turf/T = get_turf(target)
 
-	if(istype(source,/mob/living/carbon/human))
-		var/mob/living/carbon/human/M = source
-		source = M.get_blood(M.vessel)
+	if(istype(source,/mob/living/carbon))
+		var/mob/living/carbon/M = source
+		source = M.get_blood()
+	if(!istype(source))
+		source = null
 
 	// Are we dripping or splattering?
 	var/list/drips = list()

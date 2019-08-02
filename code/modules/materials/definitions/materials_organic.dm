@@ -117,19 +117,6 @@
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
 
-/material/leather
-	name = MATERIAL_LEATHER
-	icon_colour = "#5c4831"
-	stack_origin_tech = list(TECH_MATERIAL = 2)
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+300
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
-	hidden_from_codex = TRUE
-	construction_difficulty = MATERIAL_NORMAL_DIY
-	value = 3
-
 /material/carpet
 	name = MATERIAL_CARPET
 	display_name = "red"
@@ -143,3 +130,75 @@
 	conductive = 0
 	stack_type = null
 	construction_difficulty = MATERIAL_NORMAL_DIY
+
+/material/skin
+	name = MATERIAL_SKIN_GENERIC
+	stack_type = /obj/item/stack/material/generic/skin
+	icon_colour = "#9e8c72"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+300
+	melting_point = T0C+300
+	conductive = 0
+	hidden_from_codex = TRUE
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	value = 1
+	var/tans_to = MATERIAL_LEATHER_GENERIC
+
+/material/skin/lizard
+	name = MATERIAL_SKIN_LIZARD
+	icon_colour = "#626952"
+	tans_to = MATERIAL_LEATHER_LIZARD
+
+/material/skin/insect
+	name = MATERIAL_SKIN_CHITIN
+	icon_colour = "#7a726d"
+	tans_to = MATERIAL_LEATHER_CHITIN
+
+/material/skin/fur
+	name = MATERIAL_SKIN_FUR
+	icon_colour = "#7a726d"
+	tans_to = MATERIAL_LEATHER_FUR
+
+/material/bone
+	name = MATERIAL_BONE_GENERIC
+	sheet_singular_name = "length"
+	sheet_plural_name = "lengths"
+	icon_colour = "#f0edc7"
+	stack_type = /obj/item/stack/material/generic/bone
+	ignition_point = T0C+1100
+	melting_point = T0C+1800
+	conductive = 0
+	hidden_from_codex = TRUE
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	hitsound = 'sound/weapons/smash.ogg'
+	hardness = 45
+	weight = 18
+	construction_difficulty = 1
+	value = 1
+
+/material/bone/cartilage
+	name = MATERIAL_BONE_CARTILAGE
+	hardness = 0
+	weight = 10
+
+/material/leather
+	name = MATERIAL_LEATHER_GENERIC
+	icon_colour = "#5c4831"
+	stack_origin_tech = list(TECH_MATERIAL = 2)
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+300
+	melting_point = T0C+300
+	conductive = 0
+	stack_type = /obj/item/stack/material/generic/skin
+	hidden_from_codex = TRUE
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	value = 3
+
+/material/leather/lizard
+	name = MATERIAL_LEATHER_LIZARD
+
+/material/leather/fur
+	name = MATERIAL_LEATHER_FUR
+
+/material/leather/chitin
+	name = MATERIAL_LEATHER_CHITIN

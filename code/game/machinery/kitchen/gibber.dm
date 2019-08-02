@@ -164,42 +164,41 @@
 	src.operating = 1
 	update_icon()
 
-	var/slab_name = occupant.name
-	var/slab_count = 3
-	var/slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
+	src.occupant.ghostize()
+	addtimer(CALLBACK(src, .proc/finish_gibbing), gib_time)
+
+	var/list/gib_products = shuffle(occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones())
+	if(length(gib_products) <= 0)
+		return
+
+	var/slab_name =  occupant.name
 	var/slab_nutrition = 20
+
 	if(iscarbon(occupant))
 		var/mob/living/carbon/C = occupant
 		slab_nutrition = C.nutrition / 15
 
-	// Some mobs have specific meat item types.
-	if(istype(src.occupant,/mob/living/simple_animal))
-		var/mob/living/simple_animal/critter = src.occupant
-		if(critter.meat_amount)
-			slab_count = critter.meat_amount
-		if(critter.meat_type)
-			slab_type = critter.meat_type
-	else if(istype(src.occupant,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = occupant
-		slab_name = src.occupant.real_name
-		slab_type = H.isSynthetic() ? /obj/item/stack/material/steel : H.species.meat_type
+	if(istype(occupant, /mob/living/carbon/human))
+		slab_name = occupant.real_name
 
 	// Small mobs don't give as much nutrition.
 	if(issmall(src.occupant))
 		slab_nutrition *= 0.5
-	slab_nutrition /= slab_count
 
-	for(var/i=1 to slab_count)
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
-		if(istype(new_meat))
-			new_meat.SetName("[slab_name] [new_meat.name]")
-			new_meat.reagents.add_reagent(/datum/reagent/nutriment,slab_nutrition)
-			if(src.occupant.reagents)
-				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
+	slab_nutrition /= gib_products.len
 
-	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
-	src.occupant.ghostize()
-	addtimer(CALLBACK(src, .proc/finish_gibbing), gib_time)
+	var/drop_products = Floor(gib_products.len * 0.35)
+	for(var/atom/movable/thing in gib_products)
+		if(drop_products)
+			drop_products--
+			qdel(thing)
+		else
+			thing.forceMove(src)
+			if(istype(thing, /obj/item/weapon/reagent_containers/food/snacks/meat))
+				var/obj/item/weapon/reagent_containers/food/snacks/meat/slab = thing
+				slab.SetName("[slab_name] [slab.name]")
+				slab.reagents.add_reagent(/datum/reagent/nutriment,slab_nutrition)
 
 /obj/machinery/gibber/proc/finish_gibbing()
 	operating = 0
