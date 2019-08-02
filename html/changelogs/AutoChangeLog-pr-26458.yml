@@ -1,0 +1,4 @@
+author: "WezYo"
+delete-after: True
+changes: 
+  - tweak: "Attaching a photo to a newscaster story will no longer remove it from your hand"
