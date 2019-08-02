@@ -36,7 +36,7 @@
 	title = "SOE Commando Captain"
 	spawn_faction = "SOE"
 	latejoin_at_spawnpoints = 1
-	outfit_type = /decl/hierarchy/outfit/job/soe_commando_officer
+	outfit_type = /decl/hierarchy/outfit/job/soe_commando_captain
 	alt_titles = list("Commander")
 
 	total_positions = 1

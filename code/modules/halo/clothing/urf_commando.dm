@@ -1,59 +1,114 @@
+#define ITEM_HAND 'code/modules/halo/clothing/head.dmi'
+#define URF_OVERRIDE 'code/modules/halo/clothing/urf_commando.dmi'
+
+//SUIT
 
 /obj/item/clothing/under/urfc_jumpsuit
-	name = "URF Commando uniform"
-	desc = "Standard issue URF Commando uniform, more badass than that, you die."
+	name = "SOE Commando uniform"
+	desc = "Standard issue SOE Commando uniform, more badass than that, you die."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	icon_state = "commando_uniform"
 	item_state = "commando_uniform"
-	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
+	worn_state = "commando_uniform"
+	item_state_slots = list(slot_l_hand_str = "commando_uniform", slot_r_hand_str = "commando_uniform")
+
+//HELMET
 
 /obj/item/clothing/head/helmet/urfc
-	name = "URFC Rifleman Helmet"
-	desc = "Somewhat expensive and hand crafted, this helmet has been clearly converted from an old spec ops grade EVA combat helmet as the foundation. Despite the old age, a lot of work has been put into adding additional armor and refining the base processes, such as an internal oxygen filter and the replacement of the visor. It's quite heavy, but a lot of soft material has been added to the inside to make the metal more comfy. Outdated, but can be expected in combat engagements to perform on par with modern equipment, due to the extensive modifications."
+	name = "SOE Rifleman Helmet"
+	desc = "A simple helmet. Despite the old age, a lot of work has been put into adding additional armor and refining the base processes. It's quite heavy, but a lot of soft material has been added to the inside to make the metal more comfy. Outdated, but can be expected in combat engagements to perform on par with modern equipment, due to the extensive modifications."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "rifleman_worn"
 	icon_state = "rifleman_helmet"
 	item_state_slots = list(slot_l_hand_str = "urf_helmet", slot_r_hand_str = "urf_helmet")
+	item_flags = THICKMATERIAL
+	body_parts_covered = HEAD|FACE
+	flags_inv = BLOCKHAIR
+	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 50, rad = 25)
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
+/obj/item/clothing/head/helmet/urfccommander
+	name = "SOE Commander Hat"
+	desc = "An commander hat. Weirdly made of some kind of bulletproof material."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "commander_worn"
+	icon_state = "commander_helmet"
+	item_flags = THICKMATERIAL
+	body_parts_covered = HEAD
+	armor = list(melee = 20, bullet = 25, laser = 10,energy = 10, bomb = 0, bio = 20, rad = 5)
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+
+/obj/item/clothing/head/helmet/soe
+	name = "SOE Space Helmet"
+	desc = "Non-Standard issue short-EVA capable helmet issued to (REDACTED) forces"
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "soe_worn"
+	icon_state = "soe_helmet"
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
 	body_parts_covered = HEAD|FACE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	flash_protection = FLASH_PROTECTION_MODERATE
-	cold_protection = HEAD
-	heat_protection = HEAD
+	cold_protection = HEAD | FACE
+	heat_protection = HEAD | FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 100, rad = 25)
-
+	armor = list(melee = 20, bullet = 25, laser = 15,energy = 15, bomb = 20, bio = 100, rad = 25)
+	item_state_slots = list(slot_l_hand_str = "urf_helmet", slot_r_hand_str = "urf_helmet")
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
 	on = 0
 	armor_thickness = 20
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud
+
+
+//ARMOR
 
 /obj/item/clothing/suit/armor/special/urfc
-	name = "URFC Rifleman Armour"
-	desc = "Somewhat expensive and hand crafted, this armor is the pinnacle of the work force of the URF and it's many workers. Filled with pouches and storage compartments, while still keeping a scary amount of both mobility and protection. An ideal collage of the strengths of the URF, but with the added protection found only in high tier UNSC equipment. It's quite comfy, probably won't last long in space."
+	name = "SOE Rifleman Armour"
+	desc = "A bulletproof vest. Filled with pouches and storage compartments, while still keeping a scary amount of both mobility and protection. An ideal collage of the strengths of the URF, but with the added protection found only in high tier UNSC equipment. It's quite comfy, probably won't last long in space."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "rifleman_a_worn"
 	icon_state = "rifleman_a_obj"
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	blood_overlay_type = "armor"
 	item_state_slots = list(slot_l_hand_str = "urf_armour", slot_r_hand_str = "urf_armour")
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 100, rad = 25)
-	item_flags = THICKMATERIAL | STOPPRESSUREDAMAGE
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 50, rad = 25)
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	armor_thickness = 20
+	item_flags = THICKMATERIAL
+	var/slots = 4
+	var/max_w_class = ITEM_SIZE_SMALL
+
+/obj/item/clothing/suit/armor/special/soe
+	name = "SOE Spacesuit"
+	desc = "Heavyweight,somewhat durable armour issued to (REDACTED) for increased survivability in the field."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "soe_spacesuit_worn"
+	icon_state = "soe_spacesuit"
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	blood_overlay_type = "armor"
+	armor = list(melee = 20, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 100, rad = 25)
+	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS| FEET | HANDS
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	item_state_slots = list(slot_l_hand_str = "urf_armor", slot_r_hand_str = "urf_armor")
 	armor_thickness = 20
+	slowdown_general = -0.5
+
+//SHOES
 
 /obj/item/clothing/shoes/magboots/urfc
-	name = "URFC Magboots"
+	name = "SOE Magboots"
 	desc = "Experimental black magnetic boots, used to ensure the user is safely attached to any surfaces during extra-vehicular operations. They're large enough to be worn over other footwear."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
@@ -62,6 +117,18 @@
 	item_state = "magboots"
 	can_hold_knife = 1
 	force = 5
+
+//GLOVES
+
+/obj/item/clothing/gloves/soegloves/urfc
+	name = "SOE Gloves"
+	desc = "These  gloves are somewhat fire and impact-resistant."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "merc_gloves_worn"
+	icon_state = "merc_gloves"
+	force = 5
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 
 //BACKPACKS
 
@@ -110,3 +177,54 @@
 	slot_l_hand_str = "c_pack_med",
 	slot_r_hand_str = "c_pack_med",
 	)
+
+
+//JETPACK
+
+/obj/item/weapon/tank/jetpack/urfc
+	name = "SOE Jetpack (oxygen)"
+	desc = "It works well in a void."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_state = "soe_tank_obj"
+	item_state =  "soe_tank"
+
+/obj/item/weapon/tank/jetpack/urfc/New()
+	..()
+	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+	return
+
+//MASK
+
+/obj/item/clothing/mask/gas/soebalaclava
+	name = "SOE Balaclava"
+	desc = "Designed to both hide identities and keep your face comfy and warm, a mask that can be connected to an air supply. Filters harmful gases from the air."
+	icon = ITEM_HAND
+	icon_override = URF_OVERRIDE
+	icon_state = "merc_balaclava"
+	item_state = "merc_balaclava"
+	flags_inv = HIDEFACE|BLOCKHAIR
+	body_parts_covered = FACE|HEAD
+	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.01
+	siemens_coefficient = 0.9
+	item_flags = 0
+	pull_mask = 1
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/clothing/mask/gas/soebalaclavaopen
+	name = "SOE Open Balaclava"
+	icon = ITEM_HAND
+	icon_state = "merc_balaclava_open"
+	item_state = "merc_balaclava_open"
+	icon_override = URF_OVERRIDE
+	flags_inv = HIDEFACE
+	body_parts_covered = FACE
+	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.01
+	siemens_coefficient = 0.9
+	item_flags = 0
+	pull_mask = 1
+	w_class = ITEM_SIZE_SMALL
