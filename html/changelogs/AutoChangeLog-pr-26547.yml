@@ -1,0 +1,6 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Radiation collectors are now capped at 500kW output at 250Bq radiation. They are more efficient at lower radiation levels."
+  - tweak: "Radiation collectors will have variable fuel usage, capping out at 250Bq radiation. Fuel usage increased significantly (1-10x depending on radiation levels)"
+  - tweak: "Radiation collectors will now break from high radiation levels (500Bq) as well as temperature, they will display a warning and play a warning sound."
