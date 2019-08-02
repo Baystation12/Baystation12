@@ -1,4 +1,0 @@
-author: "Nirnael"
-delete-after: True
-changes: 
-  - bugfix: "Fixes bug in using a new apc frame on a broken apc to repair it."

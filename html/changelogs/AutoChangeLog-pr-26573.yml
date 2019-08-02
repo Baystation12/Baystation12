@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Fixes inconsistent icon names for female jumpsuit icons. Should work for rolling down / roll sleeves for all jumpsuits/suits now."

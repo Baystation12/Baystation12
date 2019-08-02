@@ -57,6 +57,42 @@
 		-->
 		<div class="commit sansserif">
 
+			<h2 class="date">03 August 2019</h2>
+			<h3 class="author">Boznar updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Nacelles now have air alarms, fire alarms, and fire doors.</li>
+			</ul>
+			<h3 class="author">Nirnael updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixes bug in using a new apc frame on a broken apc to repair it.</li>
+			</ul>
+			<h3 class="author">Rain7x updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Tweaks the event announcement messages to be more tone-neutral & standardizes the announcement header</li>
+			</ul>
+			<h3 class="author">WezYo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Attaching a photo to a newscaster story will no longer remove it from your hand</li>
+			</ul>
+			<h3 class="author">afterthought2 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">The shield generator has been reworked. It is now much more expensive to keep the shields on continuously, and for large shields it's likely not viable.</li>
+				<li class="rscadd">The shield generator now has an idle and active state (as well as the off state). In the idle state, it consumes limited power and does not generate a shield. In the active state, it consumes a lot of power and produces a shield.</li>
+				<li class="rscadd">If an idle generator is toggled on, it takes a short amount of time to spin up to active state. If an active generator is toggled to idle, it will switch to that state instantly.</li>
+				<li class="rscadd">There are several levels of idle power usage that can be selected. Higher power usage decreases the spin-up time proportionately.</li>
+				<li class="rscadd">The shield generator takes time to adjust the radius of the shield. The radius will not be adjusted while the shield is active.</li>
+				<li class="tweak">The shield generator's power storage has been vastly expanded.</li>
+				<li class="tweak">The shield generator's field integrity is now tracked separately from the power storage (it's determined by the amount of power stored, up to a threshold).</li>
+			</ul>
+			<h3 class="author">mikomyazaki updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Radiation collectors are now capped at 500kW output at 250Bq radiation. They are more efficient at lower radiation levels.</li>
+				<li class="tweak">Radiation collectors will have variable fuel usage, capping out at 250Bq radiation. Fuel usage increased significantly (1-10x depending on radiation levels)</li>
+				<li class="tweak">Radiation collectors will now break from high radiation levels (500Bq) as well as temperature, they will display a warning and play a warning sound.</li>
+				<li class="maptweak">Stowaways can no longer spawn in the incinerator room, which they cannot leave.</li>
+				<li class="bugfix">Fixes inconsistent icon names for female jumpsuit icons. Should work for rolling down / roll sleeves for all jumpsuits/suits now.</li>
+			</ul>
+
 			<h2 class="date">02 August 2019</h2>
 			<h3 class="author">CrimsonShrike updated:</h3>
 			<ul class="changes bgimages16">
@@ -981,25 +1017,6 @@
 				<li class="tweak">Rescue rig can now have auto-compressor hooked on the suit storage slot.</li>
 				<li class="tweak">Ninja's chemical dispenser now has dermaline instead of radium, no more radioactive super powers today.</li>
 				<li class="bugfix">Hardsuit module item will no longer be put into bags or closets.</li>
-			</ul>
-
-			<h2 class="date">01 June 2019</h2>
-			<h3 class="author">Orelbon updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds NanoUI interface to suit storage units.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscdel">Vat-grown blanks have been removed from the SRV Petrov.</li>
-			</ul>
-			<h3 class="author">babydoll updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Many objects that were previously rotatable with a verb are now rotated using alt-click. Any such object will report in examine that it can be rotated.</li>
-				<li class="tweak">You can now rotate vending machines with alt-click.</li>
-			</ul>
-			<h3 class="author">ghostsheet updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">The Aquila's engine room has been updated, most notably it now has a fuel pump for easy refuelling.</li>
 			</ul>
 		</div>
 
