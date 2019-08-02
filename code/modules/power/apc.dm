@@ -597,21 +597,21 @@
 				to_chat(user, "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>")
 				return TRUE
 
-				user.visible_message("<span class='warning'>[user.name] replaces the damaged APC frame with a new one.</span>",\
-									"You begin to replace the damaged APC frame...")
-				if(do_after(user, 50, src) && opened && !has_electronics && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
-					user.visible_message(\
-						"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
-						"You replace the damaged APC frame with new one.")
-					qdel(W)
-					set_broken(FALSE)
-					// Malf AI, removes the APC from AI's hacked APCs list.
-					if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
-						hacker.hacked_apcs -= src
-						hacker = null
-					if (opened==2)
-						opened = 1
-					queue_icon_update()
+			user.visible_message("<span class='warning'>[user.name] replaces the damaged APC frame with a new one.</span>",\
+								"You begin to replace the damaged APC frame...")
+			if(do_after(user, 50, src) && opened && !has_electronics && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
+				user.visible_message(\
+					"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
+					"You replace the damaged APC frame with new one.")
+				qdel(W)
+				set_broken(FALSE)
+				// Malf AI, removes the APC from AI's hacked APCs list.
+				if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
+					hacker.hacked_apcs -= src
+					hacker = null
+				if (opened==2)
+					opened = 1
+				queue_icon_update()
 
 	if((. = ..())) // Further interactions are low priority attack stuff.
 		return
