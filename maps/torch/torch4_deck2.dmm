@@ -1478,6 +1478,20 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engineering_monitoring)
+"cT" = (
+/obj/structure/closet/emcloset,
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
+	},
+/obj/structure/sign/warning/fire{
+	dir = 8;
+	icon_state = "fire";
+	pixel_x = 32
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/incinerator)
 "cU" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/auxsolarstarboard)
@@ -14929,23 +14943,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
-"Ki" = (
-/obj/structure/closet/emcloset,
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_x = 0;
-	pixel_y = -24
-	},
-/obj/effect/landmark/start{
-	name = "Stowaway"
-	},
-/obj/structure/sign/warning/fire{
-	dir = 8;
-	icon_state = "fire";
-	pixel_x = 32
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/incinerator)
 "Kj" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -34045,7 +34042,7 @@ uO
 yg
 yY
 zI
-Ki
+cT
 EU
 EU
 EU
