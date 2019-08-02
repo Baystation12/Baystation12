@@ -154,7 +154,10 @@ What is the naming convention for planes or layers?
 	#define MECH_BASE_LAYER    4
 	#define MECH_INTERMEDIATE_LAYER 4.5
 	#define MECH_PILOT_LAYER   5
-	#define MECH_COCKPIT_LAYER 6
+	#define MECH_LEG_LAYER 	   6
+	#define MECH_COCKPIT_LAYER 7
+	#define MECH_ARM_LAYER     8
+	#define MECH_GEAR_LAYER    9
 	// MOB_LAYER 4
 
 #define ABOVE_HUMAN_PLANE              -6 // For things that should appear above humans.
