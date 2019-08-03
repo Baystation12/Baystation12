@@ -1,0 +1,11 @@
+author: "Eonoc"
+delete-after: True
+changes: 
+  - rscadd: "Adds a Vox RIG. Same statline as the Industrial RIG, but with full temperature and radiation resistance. Vox had no way to scavenge radioactive or volcanic planets up until now."
+  - rscadd: "Adds flux cannon. Essentially a Vox AEG, but with the lasers doing brute damage, and shock mode replaced by a mode that scatters low damage pellets in a burst."
+  - rscadd: "Adds sonic cannon. A vox stun rifle, with a mode that uses up all the gun's charge to push, deafen, and dizzy an opponent. Ear protection such as helmets and earmuffs will negate the deafening, and reduce the dizziness."
+  - rscadd: "Added the associated projectile types for both above, obviously."
+  - rscadd: "Added two new firing sounds, spike.ogg and eLuger.ogg"
+  - tweak: "Changes spike launcher firing sound to spike.ogg"
+  - tweak: "Stealth buff to Armalis to make their large size reflected more mechanically."
+  - tweak: "Changes the Vox species check on Vox guns to make the guns hiss and jump out of your hands."
