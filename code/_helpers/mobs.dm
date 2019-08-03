@@ -133,11 +133,11 @@ proc/age2agedescription(age)
 		if(uninterruptible)
 			continue
 
-		if(!user || user.incapacitated(incapacitation_flags) || user.loc != user_loc)
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || user.loc != user_loc)
 			. = 0
 			break
 
-		if(target.loc != target_loc)
+		if(QDELETED(target) || target.loc != target_loc)
 			. = 0
 			break
 
@@ -180,11 +180,11 @@ proc/age2agedescription(age)
 		if (progress)
 			progbar.update(world.time - starttime)
 
-		if(!user || user.incapacitated(incapacitation_flags) || (user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
 			. = 0
 			break
 
-		if(target_loc && (!target || QDELETED(target) || target_loc != target.loc || target_type != target.type))
+		if(target_loc && (QDELETED(target) || target_loc != target.loc || target_type != target.type))
 			. = 0
 			break
 
