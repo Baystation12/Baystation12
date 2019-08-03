@@ -1,5 +1,0 @@
-author: "WezYo"
-delete-after: True
-changes: 
-  - rscdel: "Removed the discard verb from playing cards"
-  - rscadd: "Added the ability to pick a card by clicking it with an open hand"

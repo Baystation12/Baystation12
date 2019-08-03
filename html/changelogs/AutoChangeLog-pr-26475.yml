@@ -1,4 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - rscadd: "Adds 'Codex' verb that shows user the 'frontpage' of codex, with links to search / index / categories."
