@@ -12,7 +12,7 @@
 		return
 
 	if(codex_on_cooldown || !mob.can_use_codex())
-		to_chat(src, "<span class='warning'>You cannot perform codex actions currently.</span>")
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 
 	if(!searching)
@@ -21,7 +21,7 @@
 			return
 
 	if(codex_on_cooldown || !mob.can_use_codex())
-		to_chat(src, "<span class='warning'>You cannot perform codex actions currently.</span>")
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 
 	codex_on_cooldown = TRUE
@@ -56,7 +56,7 @@
 			popup.set_content(jointext(codex_data, null))
 			popup.open()
 		else
-			to_chat(src, "<span class='notice'>The codex reports <b>no matches</b> for '[searching]'.</span>")
+			to_chat(src, SPAN_NOTICE("The codex reports <b>no matches</b> for '[searching]'."))
 
 /client/verb/list_codex_entries()
 
@@ -68,12 +68,12 @@
 		return
 
 	if(codex_on_cooldown || !mob.can_use_codex())
-		to_chat(src, "<span class='warning'>You cannot perform codex actions currently.</span>")
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 	codex_on_cooldown = TRUE
 	addtimer(CALLBACK(src, .proc/reset_codex_cooldown), 10 SECONDS)
 
-	to_chat(mob, "<span class='notice'>The codex forwards you an index file.</span>")
+	to_chat(mob, SPAN_NOTICE("The codex forwards you an index file."))
 
 	var/datum/browser/popup = new(mob, "codex-index", "Codex Index")
 	var/list/codex_data = list("<h2>Codex Entries</h2>")
@@ -100,3 +100,21 @@
 
 /client/proc/reset_codex_cooldown()
 	codex_on_cooldown = FALSE
+
+/client/verb/codex()
+	set name = "Codex"
+	set category = "IC"
+	set src = usr
+
+	if(!mob || !SScodex)
+		return
+
+	if(codex_on_cooldown || !mob.can_use_codex())
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
+		return
+
+	codex_on_cooldown = TRUE
+	addtimer(CALLBACK(src, .proc/reset_codex_cooldown), 3 SECONDS)
+
+	var/datum/codex_entry/entry = SScodex.get_codex_entry("nexus")
+	SScodex.present_codex_entry(mob, entry)

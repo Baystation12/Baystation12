@@ -1,3 +1,7 @@
+/datum/codex_category/recipes/
+	name = "Recipies"
+	desc = "Recipies for a variety of reagents."
+
 /datum/codex_category/recipes/Initialize()
 	for(var/datum/recipe/recipe in SScuisine.microwave_recipes)
 		if(recipe.hidden_from_codex || !recipe.result)
@@ -34,3 +38,5 @@
 		)
 		entry.update_links()
 		SScodex.add_entry_by_string(entry.display_name, entry)
+		items += entry.display_name
+	..()

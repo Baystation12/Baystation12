@@ -1,3 +1,7 @@
+/datum/codex_category/gases/
+	name = "Gases"
+	desc = "Notable gases."
+
 /datum/codex_category/gases/Initialize()
 	for(var/gas in gas_data.gases)
 		if(gas_data.hidden_from_codex[gas])
@@ -20,3 +24,5 @@
 			gas_info+= "At [gas_data.condensation_points[gas]] K it condenses into [initial(product.name)]."
 		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[gas_data.name[gas]] (gas)")), _mechanics_text = jointext(gas_info, "<br>"))
 		SScodex.add_entry_by_string(entry.display_name, entry)
+		items += entry.display_name
+	..()
