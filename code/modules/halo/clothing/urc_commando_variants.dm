@@ -81,6 +81,13 @@
 
 //MASKS
 
+/obj/item/clothing/mask/gas/soebalaclava/open
+	name = "SOE Open Balaclava"
+	icon_state = "merc_balaclava_open"
+	item_state = "merc_balaclava_open"
+	body_parts_covered = FACE
+	flags_inv = HIDEFACE
+
 //DONATOR GEAR
 
 //END DONATOR GEAR

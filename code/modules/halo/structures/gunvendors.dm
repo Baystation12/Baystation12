@@ -233,7 +233,7 @@
 	/obj/item/clothing/head/helmet/urfccommander/beretmerc = 7,
 	/obj/item/clothing/head/helmet/urfccommander/beretofficer = 7,
 	/obj/item/clothing/mask/gas/soebalaclava = 7,
-	/obj/item/clothing/mask/gas/soebalaclavaopen = 7,
+	/obj/item/clothing/mask/gas/soebalaclava/open = 7,
 	/obj/item/clothing/gloves/soegloves/urfc = 8,
 	/obj/item/clothing/shoes/magboots/urfc = 8,
 	/obj/item/weapon/armor_patch = 4,

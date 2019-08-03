@@ -43,7 +43,7 @@
 
 /obj/item/clothing/head/helmet/soe
 	name = "SOE Space Helmet"
-	desc = "Non-Standard issue short-EVA capable helmet issued to (REDACTED) forces"
+	desc = "Non-Standard issue short-EVA capable helmet issued to commandos."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "soe_worn"
 	icon_state = "soe_helmet"
@@ -87,7 +87,7 @@
 
 /obj/item/clothing/suit/armor/special/soe
 	name = "SOE Spacesuit"
-	desc = "Heavyweight,somewhat durable armour issued to (REDACTED) for increased survivability in the field."
+	desc = "Heavyweight, somewhat durable armour issued to commandos for increased survivability in space."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "soe_spacesuit_worn"
 	icon_state = "soe_spacesuit"
@@ -103,7 +103,7 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	item_state_slots = list(slot_l_hand_str = "urf_armor", slot_r_hand_str = "urf_armor")
 	armor_thickness = 20
-	slowdown_general = -0.5
+	slowdown_general = 1
 
 //SHOES
 
@@ -189,11 +189,6 @@
 	icon_state = "soe_tank_obj"
 	item_state =  "soe_tank"
 
-/obj/item/weapon/tank/jetpack/urfc/New()
-	..()
-	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-	return
-
 //MASK
 
 /obj/item/clothing/mask/gas/soebalaclava
@@ -205,7 +200,7 @@
 	item_state = "merc_balaclava"
 	flags_inv = HIDEFACE|BLOCKHAIR
 	body_parts_covered = FACE|HEAD
-	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
+	item_flags = FLEXIBLEMATERIAL
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
@@ -213,18 +208,5 @@
 	pull_mask = 1
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/clothing/mask/gas/soebalaclavaopen
-	name = "SOE Open Balaclava"
-	icon = ITEM_HAND
-	icon_state = "merc_balaclava_open"
-	item_state = "merc_balaclava_open"
-	icon_override = URF_OVERRIDE
-	flags_inv = HIDEFACE
-	body_parts_covered = FACE
-	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
-	gas_transfer_coefficient = 0.01
-	permeability_coefficient = 0.01
-	siemens_coefficient = 0.9
-	item_flags = 0
-	pull_mask = 1
-	w_class = ITEM_SIZE_SMALL
+#undef URF_OVERRIDE
+#undef ITEM_HAND
