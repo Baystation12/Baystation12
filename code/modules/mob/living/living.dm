@@ -622,6 +622,8 @@ default behaviour is:
 	if(!incapacitated(INCAPACITATION_KNOCKOUT) && last_resist + 2 SECONDS <= world.time)
 		last_resist = world.time
 		resist_grab()
+		if(resting)
+			lay_down()
 		if(!weakened)
 			process_resist()
 
