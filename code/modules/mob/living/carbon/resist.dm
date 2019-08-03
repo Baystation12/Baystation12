@@ -119,7 +119,6 @@
 		return
 
 	if(!buckled) return
-
 	if(!restrained())
 		..()
 	else
