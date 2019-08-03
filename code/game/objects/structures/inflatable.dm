@@ -9,10 +9,13 @@
 /obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
 		return
+	user.visible_message("[user] starts inflating \the [src].", "You start inflating \the [src].")
+	if(!do_after(user, 1 SECOND, src))
+		return
 	playsound(loc, 'sound/items/zip.ogg', 75, 1)
-	to_chat(user, "<span class='notice'>You inflate \the [src].</span>")
+	user.visible_message(SPAN_NOTICE("[user] inflates \the [src]."), SPAN_NOTICE("You inflate \the [src]."))
 	var/obj/structure/inflatable/R = new deploy_path(user.loc)
-	src.transfer_fingerprints_to(R)
+	transfer_fingerprints_to(R)
 	R.add_fingerprint(user)
 	qdel(src)
 
@@ -23,7 +26,7 @@
 	icon_state = "folded_wall"
 	deploy_path = /obj/structure/inflatable/wall
 
-/obj/item/inflatable/door/
+/obj/item/inflatable/door
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
 	icon_state = "folded_door"
