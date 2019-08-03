@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - tweak: "Blunt yet sufficiently strong weapons can now pop inflatables"
