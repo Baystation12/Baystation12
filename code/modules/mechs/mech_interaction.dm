@@ -17,6 +17,21 @@
 		body.MouseDrop_T(dropping, user)
 	else . = ..()
 
+/mob/living/exosuit/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+	if(user && (user in pilots) && user.loc == src)
+		return OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
+	return ..()
+
+/mob/living/exosuit/OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+	if(!user || incapacitated() || user.incapacitated())
+		return FALSE
+
+	if(!(user in pilots) && user != src)
+		return FALSE
+
+	//This is handled at active module level really, it is the one who has to know if it's supposed to act
+	if(selected_system)
+		return selected_system.MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
 
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
