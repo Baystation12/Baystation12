@@ -207,11 +207,6 @@
 	if(CanInteract(user, DefaultTopicState()))
 		return attackby(user, user)
 
-/obj/machinery/door/attack_tk(mob/user as mob)
-	if(requiresID() && !allowed(null))
-		return
-	..()
-
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
 
@@ -566,6 +561,11 @@
 		req_access = req_access_union(fore, aft)
 	else
 		req_access = req_access_diff(fore, aft)
+
+/obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
+	if(!requiresID() || allowed(null))
+		toggle()
+	return TRUE
 
 // Public access
 

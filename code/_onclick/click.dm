@@ -204,11 +204,6 @@
 		LaserEyes(A) // moved into a proc below
 		return TRUE
 
-	if(MUTATION_TK in mutations)
-		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		A.attack_tk(src)
-		return TRUE
-
 /*
 	Restrained ClickOn
 

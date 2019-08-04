@@ -138,47 +138,33 @@ LINEN BINS
 		hidden = I
 		to_chat(user, "<span class='notice'>You hide [I] among the sheets.</span>")
 
-/obj/structure/bedsheetbin/attack_hand(mob/user as mob)
-	if(amount >= 1)
-		amount--
-
-		var/obj/item/weapon/bedsheet/B
-		if(sheets.len > 0)
-			B = sheets[sheets.len]
-			sheets.Remove(B)
-
-		else
-			B = new /obj/item/weapon/bedsheet(loc)
-
+/obj/structure/bedsheetbin/attack_hand(var/mob/user)
+	var/obj/item/weapon/bedsheet/B = remove_sheet()
+	if(B)
 		user.put_in_hands(B)
-		to_chat(user, "<span class='notice'>You take [B] out of [src].</span>")
+		to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
+		add_fingerprint(user)
 
-		if(hidden)
-			hidden.dropInto(user.loc)
-			to_chat(user, "<span class='notice'>[hidden] falls out of [B]!</span>")
-			hidden = null
+/obj/structure/bedsheetbin/do_simple_ranged_interaction(var/mob/user)
+	remove_sheet()
+	return TRUE
 
-
-	add_fingerprint(user)
-
-/obj/structure/bedsheetbin/attack_tk(mob/user as mob)
-	if(amount >= 1)
-		amount--
-
-		var/obj/item/weapon/bedsheet/B
-		if(sheets.len > 0)
-			B = sheets[sheets.len]
-			sheets.Remove(B)
-
-		else
-			B = new /obj/item/weapon/bedsheet(loc)
-
-		B.dropInto(loc)
-		to_chat(user, "<span class='notice'>You telekinetically remove [B] from [src].</span>")
-		update_icon()
-
-		if(hidden)
-			hidden.dropInto(loc)
-			hidden = null
-
-	add_fingerprint(user)
+/obj/structure/bedsheetbin/proc/remove_sheet()
+	set waitfor = 0
+	if(amount <= 0)
+		return
+	amount--
+	var/obj/item/weapon/bedsheet/B
+	if(sheets.len > 0)
+		B = sheets[sheets.len]
+		sheets.Remove(B)
+	else
+		B = new /obj/item/weapon/bedsheet(loc)
+	B.dropInto(loc)
+	update_icon()
+	. = B
+	sleep(-1)
+	if(hidden)
+		hidden.dropInto(loc)
+		visible_message(SPAN_NOTICE("\The [hidden] falls out!"))
+		hidden = null

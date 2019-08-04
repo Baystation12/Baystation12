@@ -520,11 +520,6 @@
 /obj/item/device/electronic_assembly/proc/get_object()
 	return src
 
-/obj/item/device/electronic_assembly/attack_tk(mob/user)
-	if(anchored)
-		return
-	..()
-
 /obj/item/device/electronic_assembly/attack_hand(mob/user)
 	if(anchored)
 		attack_self(user)

@@ -829,3 +829,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 				return min(1, round((min_pressure_protection - pressure) / min_pressure_protection, 0.01))
 			else
 				return 0
+
+/obj/item/do_simple_ranged_interaction(var/mob/user)
+	if(user)
+		attack_self(user)
+	return TRUE

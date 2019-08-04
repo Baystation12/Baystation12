@@ -90,19 +90,6 @@
 	to_chat(H, "<span class='notice'>You expand your mind outwards.</span>")
 	return 1
 
-/obj/item/weapon/contract/wizard/tk
-	name = "telekinesis contract"
-	desc = "This contract makes your mind buzz. It promises to give you the ability to move things with your mind. At a price."
-	color = "#990033"
-
-/obj/item/weapon/contract/wizard/tk/contract_effect(mob/user as mob)
-	..()
-	if(!(MUTATION_TK in user.mutations))
-		user.mutations.Add(MUTATION_TK)
-		to_chat(user, "<span class='notice'>You feel your mind expanding!</span>")
-		return 1
-	return 0
-
 /obj/item/weapon/contract/boon
 	name = "boon contract"
 	desc = "this contract grants you a boon for signing it."
