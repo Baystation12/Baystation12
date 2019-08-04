@@ -336,6 +336,7 @@
 		if(!should_continue)
 			return
 	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
+	visible_message("<span class = 'danger'>[P] hits [src]!</span>")
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
