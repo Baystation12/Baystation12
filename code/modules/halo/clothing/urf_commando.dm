@@ -31,7 +31,7 @@
 
 /obj/item/clothing/head/helmet/urfccommander
 	name = "SOE Commander Hat"
-	desc = "An commander hat. Weirdly made of some kind of bulletproof material."
+	desc = "A commander hat. Weirdly made of some kind of bulletproof material."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "commander_worn"
