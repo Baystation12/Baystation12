@@ -45,7 +45,7 @@
 
 /obj/item/clothing/head/helmet/urfccommander/beretmerc
 	name = "SOE Beret"
-	desc = "An red beret. Weirdly made of some kind of bulletproof material."
+	desc = "A red beret. Weirdly made of some kind of bulletproof material."
 	item_state = "beretmerc_worn"
 	icon_state = "beretmerc_helmet"
 
