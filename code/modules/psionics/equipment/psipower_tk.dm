@@ -30,7 +30,10 @@
 		return FALSE
 
 	if(check_paramount && owner.psi.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT)
-		to_chat(owner, SPAN_WARNING("\The [_focus] is too hefty for you to get a mind-grip on."))
+		focus = _focus
+		. = attack_self(owner)
+		if(!.)
+			to_chat(owner, SPAN_WARNING("\The [_focus] is too hefty for you to get a mind-grip on."))
 		qdel(src)
 		return FALSE
 
@@ -43,16 +46,9 @@
 	return TRUE
 
 /obj/item/psychic_power/telekinesis/attack_self(var/mob/user)
-
 	user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
 	sparkle()
-
-	if(istype(focus, /obj/item))
-		var/obj/item/I = focus
-		return I.attack_self(user)
-	//if(istype(focus, /mob) && owner.psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
-	//	return // TODO: force choke
-	. = ..()
+	return focus.do_simple_ranged_interaction(user)
 
 /obj/item/psychic_power/telekinesis/afterattack(var/atom/target, var/mob/living/user, var/proximity)
 

@@ -9,6 +9,11 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 
+/obj/structure/bed/chair/do_simple_ranged_interaction(var/mob/user)
+	if(!buckled_mob && user)
+		rotate(user)
+	return TRUE
+
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
@@ -25,13 +30,6 @@
 		SK.forceMove(E)
 		SK.master = E
 		qdel(src)
-
-/obj/structure/bed/chair/attack_tk(mob/user)
-	if(buckled_mob)
-		..()
-	else
-		rotate(user)
-	return
 
 /obj/structure/bed/chair/post_buckle_mob()
 	update_icon()

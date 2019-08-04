@@ -182,14 +182,3 @@
 
 	New()
 		block=GLOB.XRAYBLOCK
-
-/datum/dna/gene/basic/tk
-	name="Telekenesis"
-	activation_messages=list("You feel smarter.")
-	mutation=MUTATION_TK
-	activation_prob=15
-
-	New()
-		block=GLOB.TELEBLOCK
-	OnDrawUnderlays(var/mob/M,var/g,var/fat)
-		return "telekinesishead[fat]_s"

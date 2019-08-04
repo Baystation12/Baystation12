@@ -72,9 +72,6 @@
 				attack_generic(user,1,"slices")
 	return ..()
 
-/obj/structure/attack_tk()
-	return
-
 /obj/structure/grab_attack(var/obj/item/grab/G)
 	if (!G.force_danger())
 		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
