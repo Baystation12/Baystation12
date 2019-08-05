@@ -200,7 +200,29 @@
 			remove_from_storage(P)
 			P.attack(target,user)
 			return 1
+
+/obj/item/weapon/storage/pill_bottle/attack_self(mob/living/user)
+	if(user.get_inactive_hand())
+		to_chat(user, "<span class='warning'>You need an empty hand to take out a pill.</span>")
+		return
+	if(contents.len)
+		var/obj/item/I = contents[1]
+		if(!remove_from_storage(I,user))
+			return
+		if(user.put_in_inactive_hand(I))
+			to_chat(user, "<span class='notice'>You take a pill out of \the [src].</span>")
+			if(iscarbon(user))
+				var/mob/living/carbon/C = user
+				C.swap_hand()
+		else
+			user.drop_from_inventory(I)
+			to_chat(user, "<span class='notice'>You fumble around with \the [src] and drop a pill on the floor.</span>")
+		return
+	else
+		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
+		return
 	
+
 /obj/item/weapon/storage/pill_bottle/Initialize()
 	. = ..()
 	update_icon()
