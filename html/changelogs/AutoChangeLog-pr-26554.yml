@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Autoinjectors now have a timer for use on other people, instant for yourself OR on incapacitated people with any skill level. They take a third the time compared to a syringe."
