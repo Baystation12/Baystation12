@@ -18,6 +18,9 @@
 /obj/item/mech_equipment/attack() //Generally it's not desired to be able to attack with items
 	return 0
 
+/obj/item/mech_equipment/resolve_attackby(atom/A, mob/user, click_params)
+	return 0
+	
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	
 	if (owner && loc == owner && ((user in owner.pilots) || user == owner))

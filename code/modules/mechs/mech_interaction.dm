@@ -115,7 +115,7 @@
 
 			var/resolved
 
-			if(adj) resolved = A.attackby(temp_system, src)
+			if(adj) resolved = temp_system.resolve_attackby(A, src, params)
 			if(!resolved && A && temp_system)
 				var/mob/ruser = src
 				if(!system_moved) //It's more useful to pass along clicker pilot when logic is fully mechside
