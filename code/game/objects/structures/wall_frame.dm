@@ -164,7 +164,7 @@
 		dismantle()
 
 /obj/structure/wall_frame/proc/dismantle()
-	new /obj/item/stack/material/steel(get_turf(src))
+	new /obj/item/stack/material/steel(get_turf(src), 3)
 	qdel(src)
 
 //Subtypes
