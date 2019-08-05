@@ -181,7 +181,7 @@
 
 //JETPACK
 
-/obj/item/weapon/tank/jetpack/urfc
+/obj/item/weapon/tank/jetpack/void/urfc
 	name = "SOE Jetpack (oxygen)"
 	desc = "It works well in a void."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
