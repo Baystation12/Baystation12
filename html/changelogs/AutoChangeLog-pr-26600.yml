@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - maptweak: "Double sets of windoors now have only the interior windoor at department reception desks."
