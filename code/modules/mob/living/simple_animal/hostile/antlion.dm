@@ -56,6 +56,9 @@
 	for(var/turf/TT in turf_targets)
 		if(!TT.is_floor()) //excludes walls, space and open space
 			turf_targets -= TT
+	if(!LAZYLEN(turf_targets)) //oh no
+		addtimer(CALLBACK(src, .proc/emerge, 2 SECONDS))
+		return
 	var/turf/T = pick(turf_targets)
 	if(T && !incapacitated())
 		forceMove(T)
