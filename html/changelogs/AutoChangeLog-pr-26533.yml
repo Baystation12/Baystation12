@@ -1,0 +1,8 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - tweak: "All non-total radiation resistance values for suits etc have been halved."
+  - tweak: "The Supermatter, nuclear reactor, R-UST, PACMANs and other radiation sources which were too weak to be relevant have been buffed."
+  - tweak: "Radiation sources that were deemed to be too strong have been nerfed, such as garbage planets."
+  - tweak: "Grilles have had most of their radiation resistance removed."
+  - tweak: "Low walls and windows have had their rad resistance halved, so they add up to a full 100% instead of 200%."
