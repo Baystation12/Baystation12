@@ -16,20 +16,20 @@
 
 /obj/item/psychic_power/telekinesis/proc/set_focus(var/atom/movable/_focus)
 
-	if(_focus.anchored || !_focus.simulated || !istype(_focus.loc, /turf))
+	if(!_focus.simulated || !istype(_focus.loc, /turf))
 		return FALSE
 
 	var/check_paramount
 	if(ismob(_focus))
 		var/mob/victim = _focus
 		check_paramount = (victim.mob_size >= MOB_MEDIUM)
-	else if(istype(_focus, /obj/item))
-		var/obj/item/item = _focus
-		check_paramount = (item.w_class >= 5)
+	else if(isobj(_focus))
+		var/obj/thing = _focus
+		check_paramount = (thing.w_class >= 5)
 	else
 		return FALSE
 
-	if(check_paramount && owner.psi.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT)
+	if(_focus.anchored || (check_paramount && owner.psi.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT))
 		focus = _focus
 		. = attack_self(owner)
 		if(!.)
@@ -83,8 +83,9 @@
 			if(!resolved && target && I)
 				I.afterattack(target,user,1) // for splashing with beakers
 		else
-			var/user_rank = owner.psi.get_rank(PSI_PSYCHOKINESIS)
-			focus.throw_at(target, user_rank*2, user_rank*10, owner)
+			if(!focus.anchored)
+				var/user_rank = owner.psi.get_rank(PSI_PSYCHOKINESIS)
+				focus.throw_at(target, user_rank*2, user_rank*10, owner)
 			sleep(1)
 			sparkle()
 
