@@ -1554,6 +1554,23 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/expedition)
+"cZ" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/window/brigdoor/northleft{
+	name = "engineering front desk"
+	},
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "engineeringdeskshutters";
+	name = "Engineering Desk Shutters";
+	opacity = 0
+	},
+/obj/item/weapon/material/bell,
+/turf/simulated/floor/tiled/monotile,
+/area/engineering/engineering_monitoring)
 "da" = (
 /obj/structure/table/rack,
 /obj/item/device/flashlight,
@@ -14679,27 +14696,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
-"Jk" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/door/firedoor,
-/obj/machinery/door/window/northright{
-	dir = 2;
-	name = "engineering front desk"
-	},
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "engineering front desk"
-	},
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 2;
-	icon_state = "shutter0";
-	id_tag = "engineeringdeskshutters";
-	name = "Engineering Desk Shutters";
-	opacity = 0
-	},
-/obj/item/weapon/material/bell,
-/turf/simulated/floor/tiled/monotile,
-/area/engineering/engineering_monitoring)
 "Jl" = (
 /obj/machinery/atmospherics/omni/filter{
 	tag_east = 5;
@@ -39885,7 +39881,7 @@ hT
 kJ
 mR
 mu
-Jk
+cZ
 IK
 qC
 tA

@@ -1668,6 +1668,26 @@
 "dD" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
+"dE" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id_tag = "hab_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/door/window/brigdoor/eastleft{
+	name = "Checkpoint Desk"
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/security/habcheck)
 "dF" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -10111,29 +10131,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
-"vL" = (
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 4;
-	icon_state = "shutter0";
-	id_tag = "hab_checkpoint_shutters";
-	name = "Hangar Deck Checkpoint Shutters";
-	opacity = 0
-	},
-/obj/structure/table/steel_reinforced,
-/obj/machinery/door/window/brigdoor/eastleft{
-	name = "Checkpoint Desk"
-	},
-/obj/machinery/door/window/westright{
-	name = "Checkpoint Desk"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/security/habcheck)
 "vM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -35328,7 +35325,7 @@ sh
 tt
 uK
 xU
-vL
+dE
 up
 Vx
 LB
