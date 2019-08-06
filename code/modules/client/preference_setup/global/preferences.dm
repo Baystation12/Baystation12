@@ -219,6 +219,10 @@ var/list/_client_preferences_by_type
 	key = "EXAMINE_MESSAGES"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
+/datum/client_preference/custom_vote_sound
+	description = "Play vote sound"
+	key = "CUSTOM_VOTE_SOUND"
+
 /********************
 * General Staff Preferences *
 ********************/
