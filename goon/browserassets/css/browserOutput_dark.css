@@ -1,0 +1,75 @@
+/* IF YOU UPDATE ANY OF THESE YOU HAVE TO UPDATE STYLESHEET.DM TOO */
+/* IF YOU UPDATE ANY OF THESE YOU HAVE TO UPDATE STYLESHEET.DM TOO */
+/* IF YOU UPDATE ANY OF THESE YOU HAVE TO UPDATE STYLESHEET.DM TOO */
+
+html, body {
+	color: #a4bad6;
+}
+body {
+	background: #171717;
+	scrollbar-face-color:#1A1A1A;
+	scrollbar-track-color:#171717;
+	scrollbar-highlight-color:#171717;
+}
+
+h1, h2, h3, h4, h5, h6 {color: #a4bad6;}
+h1.alert, h2.alert {color: #a4bad6;}
+
+a {color: #397ea5;}
+a:visited {color: #7c00e6;}
+
+.motd {color: #98971a;}
+.motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6 {color: #98971a;}
+.motd a, .motd a:link, .motd a:visited, .motd a:active, .motd a:hover {color: #98971a;}
+
+.ooc {color: #cca300;}
+.adminooc {color: #3d5bc3;}
+.admin {color: #5975da;}
+.adminmod {color: #8f5e2e;}
+.modooc {color: #ffffff;}
+
+.deadsay {color: #e2c1ff;}
+.cult {color: #aa1c1c;}
+.sinister {color: #9662b1;}
+.grey, .skeleton {color: #817e7e;}
+.mushroom {color: #ab62b1;}
+.alien {color: #b162a9;}
+
+.radio {color: #1ecc43;}
+.comradio {color: #5177ff;}
+.syndradio {color: #8f4a4b;}
+.aiprivradio {color: #d65d95;}
+.secradio {color: #dd3535;}
+.engradio {color: #f37746;}
+.medradio {color: #57b8f0;}
+.sciradio {color: #c68cfa;}
+.binaryradio {color: #bdbdbd}
+.mommiradio {color: #9c9fc9;}
+
+.attack {color: #e01c1c;}
+.disarm {color: #b42525;}
+.passive {color: #9f0f0f;}
+.userdanger {color: #c51e1e}
+.danger {color: #c51e1e;}
+.warning {color: #c51e1e}
+.alert {color: #d82020;}
+
+.info {color: #6685f5;}
+.notice {color: #6685f5;}
+.bnotice {color: #6685f5;}
+.darknotice {color: #ffffff;}
+.interface {color: #8d6ad6;}
+
+.whisper {color:#cccccc;}
+
+.newscaster {color: #c05d5d;}
+
+#newMessages {background: #222222; color: #cccccc;}
+#ping {background: #222222;}
+#options a {background: #333333; color: #cccccc;}
+#options a:hover, #options .toggle {background: #222222; color: #cccccc;}
+.popup {background: #222222;}
+.popup .close {background: #555555; color: #cccccc;}
+.popup .head {background: #666666; color: #222222;}
+
+.internal.boldnshit {color: #6685f5}

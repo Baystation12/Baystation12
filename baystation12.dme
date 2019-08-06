@@ -3077,6 +3077,7 @@
 #include "code\unit_tests\zas_tests.dm"
 #include "code\unit_tests\~helpers.dm"
 #include "code\unit_tests\~unit_test_types.dm"
+#include "goon\code\browserOutput.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
