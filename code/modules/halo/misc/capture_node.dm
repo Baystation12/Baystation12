@@ -1,4 +1,5 @@
 GLOBAL_LIST_EMPTY(capture_nodes)
+#define DEFENDER_MOBS_BY_FACTION list("UNSC"=list(/mob/living/simple_animal/hostile/sentinel/defensedrone/UNSC),"Covenant"=list(/mob/living/simple_animal/hostile/sentinel/defensedrone/Covenant),"Insurrection"=list(/mob/living/simple_animal/hostile/sentinel/defensedrone/Innie))
 
 /obj/machinery/computer/capture_node
 	name = "Sovereignty Console"
@@ -6,11 +7,13 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	icon_screen = "comm_monitor"
 	desc = "Used to determine who controls this area."
 	var/control_faction
+	var/comms_from = "Geminus Sovereignty Update"//The origin of comms messages sent by this console.
 	var/list/capturing_factions = list("UNSC","Insurrection","Covenant")
 	var/list/faction_frequencies = list()
 	var/list/faction_languages = list()
 	var/capture_time = 8 SECONDS
 	var/mob/living/interacting
+	var/list/capture_npc_spawnlocs = list()
 
 /obj/machinery/computer/capture_node/New()
 	. = ..()
@@ -19,6 +22,12 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	name = "[A] Sovereignty Console"
 
 	GLOB.capture_nodes.Add(src)
+
+/obj/machinery/computer/capture_node/Initialize()
+	. = ..()
+	for(var/obj/effect/landmark/npc_capturespawn_marker/marker in loc.loc.contents)
+		capture_npc_spawnlocs += marker.loc
+		qdel(marker)
 
 /obj/machinery/computer/capture_node/Destroy()
 	GLOB.capture_nodes.Remove(src)
@@ -94,7 +103,13 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 				O.node_reset(src, old_faction, trigger_faction)
 
 	if(control_faction)
-		minor_announcement.Announce("[control_faction] has captured the [src]!","Geminus Sovereignty Update")
+		minor_announcement.Announce("[control_faction] has captured the [src]!",comms_from)
+	for(var/turf/t in capture_npc_spawnlocs)
+		var/list/defenders_spawn = DEFENDER_MOBS_BY_FACTION["[control_faction]"]
+		if(defenders_spawn.len == 0)
+			return
+		var/to_spawn = pick(defenders_spawn)
+		new to_spawn (t)
 
 /obj/machinery/computer/capture_node/proc/reset_markers()
 	var/area/A = get_area(src)
@@ -172,3 +187,10 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	overlays -= faction_logo
 	faction_logo.alpha = new_alpha
 	overlays += faction_logo
+
+
+
+
+
+/obj/effect/landmark/npc_capturespawn_marker
+	name = "Capture-Spawn marker"
