@@ -239,4 +239,4 @@
 	/obj/item/weapon/armor_patch = 4,
 	/obj/item/clothing/head/helmet/soe = 6,
 	/obj/item/clothing/suit/armor/special/soe = 6,
-	/obj/item/weapon/tank/jetpack/urfc = 6 )
+	/obj/item/weapon/tank/jetpack/void/urfc = 6 )
