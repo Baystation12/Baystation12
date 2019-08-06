@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - maptweak: "Robotics central windows are now not tintable, surgery area still is."
