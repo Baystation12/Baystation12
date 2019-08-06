@@ -68,6 +68,9 @@
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
 
+	if(href_list["_src_"] == "chat") // Oh god the ping hrefs.
+		return chatOutput.Topic(href, href_list)
+
 	if(href_list["close_ticket"])
 		var/datum/ticket/ticket = locate(href_list["close_ticket"])
 
@@ -110,6 +113,8 @@
 	///////////
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
+
+	chatOutput = new /datum/chatOutput(src) // Right off the bat.
 
 	if(!(connection in list("seeker", "web")))					//Invalid connection type.
 		return null
@@ -168,6 +173,7 @@
 	apply_fps(prefs.clientfps)
 
 	. = ..()	//calls mob.Login()
+	chatOutput.start()
 
 	GLOB.using_map.map_info(src)
 

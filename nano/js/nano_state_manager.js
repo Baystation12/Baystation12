@@ -1,29 +1,38 @@
 // NanoStateManager handles data from the server and uses it to render templates
-NanoStateManager = function () 
+NanoStateManager = function ()
 {
 	// _isInitialised is set to true when all of this ui's templates have been processed/rendered
 	var _isInitialised = false;
 
+	// the array of template names to use for this ui
+	var _templates = null;
 	// the data for this ui
 	var _data = null;
-	
+	// new data which arrives before _isInitialised is true is stored here for processing later
+	var _earlyUpdateData = null;
+
 	// this is an array of callbacks which are called when new data arrives, before it is processed
 	var _beforeUpdateCallbacks = {};
 	// this is an array of callbacks which are called when new data arrives, before it is processed
-	var _afterUpdateCallbacks = {};		
-	
+	var _afterUpdateCallbacks = {};
+
 	// this is an array of state objects, these can be used to provide custom javascript logic
-	var _states = {};	
-	
+	var _states = {};
+
 	var _currentState = null;
-	
+
 	// the init function is called when the ui has loaded
 	// this function sets up the templates and base functionality
-	var init = function () 
+	var init = function ()
 	{
 		// We store initialData and templateData in the body tag, it's as good a place as any
-		_data = $('body').data('initialData');	
-		
+		_data = $('body').data('initialData');
+
+		if (typeof _data === 'string') //If the initial data isn't QUITE valid JSON, jQuery won't parse it automatically
+		{
+			_data = JSON_parseMore(_data); //If it's still invalid, something is very wrong and it SHOULD error
+		}
+
 		if (_data == null || !_data.hasOwnProperty('config') || !_data.hasOwnProperty('data'))
 		{
 			alert('Error: Initial data did not load correctly.');
@@ -36,33 +45,29 @@ NanoStateManager = function ()
 		}
 
 		NanoStateManager.setCurrentState(stateKey);
-		
+
 		$(document).on('templatesLoaded', function () {
 			doUpdate(_data);
-			
+
 			_isInitialised = true;
 		});
 	};
-	
+
 	// Receive update data from the server
 	var receiveUpdateData = function (jsonString)
 	{
 		var updateData;
-		
-		//alert("recieveUpdateData called." + "<br>Type: " + typeof jsonString); //debug hook
 		try
 		{
 			// parse the JSON string from the server into a JSON object
-			updateData = jQuery.parseJSON(jsonString);
+			updateData = JSON_parseMore(jsonString); //To support infinities and NaN so that the whole UI doesn't just crash
 		}
 		catch (error)
 		{
-			alert("recieveUpdateData failed. " + "<br>Error name: " + error.name + "<br>Error Message: " + error.message);
+			alert(error.name + ": " + error.Message + " at: " + error.at + " (" + error.text + ")");
 			return;
 		}
 
-		//alert("recieveUpdateData passed trycatch block."); //debug hook
-		
 		if (!updateData.hasOwnProperty('data'))
 		{
 			if (_data && _data.hasOwnProperty('data'))
@@ -74,7 +79,7 @@ NanoStateManager = function ()
 				updateData['data'] = {};
 			}
 		}
-		
+
 		if (_isInitialised) // all templates have been registered, so render them
 		{
 			doUpdate(updateData);
@@ -82,60 +87,60 @@ NanoStateManager = function ()
 		else
 		{
 			_data = updateData; // all templates have not been registered. We set _data directly here which will be applied after the template is loaded with the initial data
-		}	
+		}
 	};
 
 	// This function does the update by calling the methods on the current state
 	var doUpdate = function (data)
 	{
-        if (_currentState == null)
-        {
-            return;
-        }
+		if (_currentState == null)
+		{
+			return;
+		}
 
 		data = _currentState.onBeforeUpdate(data);
 
 		if (data === false)
 		{
-            alert('data is false, return');
+			alert('data is false, return');
 			return; // A beforeUpdateCallback returned a false value, this prevents the render from occuring
 		}
-		
+
 		_data = data;
 
-        _currentState.onUpdate(_data);
+		_currentState.onUpdate(_data);
 
-        _currentState.onAfterUpdate(_data);
+		_currentState.onAfterUpdate(_data);
 	};
-	
+
 	// Execute all callbacks in the callbacks array/object provided, updateData is passed to them for processing and potential modification
 	var executeCallbacks = function (callbacks, data)
-	{	
+	{
 		for (var key in callbacks)
 		{
 			if (callbacks.hasOwnProperty(key) && jQuery.isFunction(callbacks[key]))
 			{
-                data = callbacks[key].call(this, data);
+				data = callbacks[key].call(this, data);
 			}
 		}
-		
+
 		return data;
 	};
 
 	return {
-        init: function () 
+		init: function ()
 		{
-            init();
-        },
-		receiveUpdateData: function (jsonString) 
+			init();
+		},
+		receiveUpdateData: function (jsonString)
 		{
 			receiveUpdateData(jsonString);
-        },
+		},
 		addBeforeUpdateCallback: function (key, callbackFunction)
 		{
 			_beforeUpdateCallbacks[key] = callbackFunction;
 		},
-		addBeforeUpdateCallbacks: function (callbacks) {		
+		addBeforeUpdateCallbacks: function (callbacks) {
 			for (var callbackKey in callbacks) {
 				if (!callbacks.hasOwnProperty(callbackKey))
 				{
@@ -151,14 +156,14 @@ NanoStateManager = function ()
 				delete _beforeUpdateCallbacks[key];
 			}
 		},
-        executeBeforeUpdateCallbacks: function (data) {
-            return executeCallbacks(_beforeUpdateCallbacks, data);
-        },
+		executeBeforeUpdateCallbacks: function (data) {
+			return executeCallbacks(_beforeUpdateCallbacks, data);
+		},
 		addAfterUpdateCallback: function (key, callbackFunction)
 		{
 			_afterUpdateCallbacks[key] = callbackFunction;
 		},
-		addAfterUpdateCallbacks: function (callbacks) {		
+		addAfterUpdateCallbacks: function (callbacks) {
 			for (var callbackKey in callbacks) {
 				if (!callbacks.hasOwnProperty(callbackKey))
 				{
@@ -174,9 +179,9 @@ NanoStateManager = function ()
 				delete _afterUpdateCallbacks[key];
 			}
 		},
-        executeAfterUpdateCallbacks: function (data) {
-            return executeCallbacks(_afterUpdateCallbacks, data);
-        },
+		executeAfterUpdateCallbacks: function (data) {
+			return executeCallbacks(_afterUpdateCallbacks, data);
+		},
 		addState: function (state)
 		{
 			if (!(state instanceof NanoStateClass))
@@ -194,26 +199,26 @@ NanoStateManager = function ()
 		setCurrentState: function (stateKey)
 		{
 			if (typeof stateKey == 'undefined' || !stateKey) {
-				alert('ERROR: No state key was passed!');				
-                return false;
-            }
+				alert('ERROR: No state key was passed!');
+				return false;
+			}
 			if (!_states.hasOwnProperty(stateKey))
 			{
 				alert('ERROR: Attempted to set a current state which does not exist: ' + stateKey);
 				return false;
-			}			
-			
-			var previousState = _currentState;
-			
-            _currentState = _states[stateKey];
+			}
 
-            if (previousState != null) {
-                previousState.onRemove(_currentState);
-            }            
-			
+			var previousState = _currentState;
+
+			_currentState = _states[stateKey];
+
+			if (previousState != null) {
+				previousState.onRemove(_currentState);
+			}
+
 			_currentState.onAdd(previousState);
 
-            return true;
+			return true;
 		},
 		getCurrentState: function ()
 		{
@@ -221,4 +226,3 @@ NanoStateManager = function ()
 		}
 	};
 } ();
- 

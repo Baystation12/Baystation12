@@ -177,7 +177,7 @@ var/global/datum/controller/vote/vote = new()
 	return .
 
 /datum/controller/vote/proc/announce_result()
-	stack_trace("Fuck my shit up. Lock is \[[lock]]")
+	crash_with("Fuck my shit up. Lock is \[[lock]]")
 	var/list/winners = get_result()
 	var/text
 	var/feedbackanswer

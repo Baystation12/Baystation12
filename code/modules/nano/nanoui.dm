@@ -492,7 +492,7 @@ nanoui is used to open and update nano browser uis
 
 	var/list/send_data = get_send_data(data)
 
-//	to_chat(user, list2json_usecache(send_data))// used for debugging //NANO DEBUG HOOK
+//	to_chat(user, json_encode_usecache(send_data))// used for debugging //NANO DEBUG HOOK
 
 	user << output(list2params(list(strip_improper(json_encode(send_data)))),"[window_id].browser:receiveUpdateData")
 

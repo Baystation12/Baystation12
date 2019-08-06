@@ -2,7 +2,7 @@
 NanoBaseHelpers = function ()
 {
 	var _baseHelpers = {
-            // change ui styling to "syndicate mode"
+			// change ui styling to "syndicate mode"
 			syndicateMode: function() {
 				$('body').css("background-color","#8f1414");
 				$('body').css("background-image","url('uiBackground-Syndicate.png')");
@@ -14,6 +14,12 @@ NanoBaseHelpers = function ()
 				$('#uiTitleFluff').css("background-repeat", "no-repeat");
 
 				return '';
+			},
+			combine: function( arr1, arr2 ) {
+				return arr1 && arr2 ? arr1.concat(arr2) : arr1 || arr2;
+			},
+			dump: function( arr1 ) {
+				return JSON.stringify(arr1);
 			},
 			// Generate a Byond link
 			link: function( text, icon, parameters, status, elementClass, elementId) {
@@ -28,7 +34,7 @@ NanoBaseHelpers = function ()
 
 				if (typeof elementClass == 'undefined' || !elementClass)
 				{
-					elementClass = 'link';
+					elementClass = '';
 				}
 
 				var elementIdHtml = '';
@@ -42,15 +48,50 @@ NanoBaseHelpers = function ()
 					return '<div unselectable="on" class="link ' + iconClass + ' ' + elementClass + ' ' + status + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
 				}
 
-				return '<div unselectable="on" class="linkActive ' + iconClass + ' ' + elementClass + '" data-href="' + NanoUtility.generateHref(parameters) + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
+				return '<div unselectable="on" class="link linkActive ' + iconClass + ' ' + elementClass + '" data-href="' + NanoUtility.generateHref(parameters) + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
+			},
+			//generate a submit button styled like a link
+			submitButton: function( text, icon, formid, status, elementClass, elementId) {
+
+				var iconHtml = '';
+				var iconClass = 'noIcon';
+				if (typeof icon != 'undefined' && icon)
+				{
+					iconHtml = '<div class="uiLinkPendingIcon"></div><div class="uiIcon16 icon-' + icon + '"></div>';
+					iconClass = 'hasIcon';
+				}
+
+				if (typeof elementClass == 'undefined' || !elementClass)
+				{
+					elementClass = '';
+				}
+
+				var elementIdHtml = '';
+				if (typeof elementId != 'undefined' && elementId)
+				{
+					elementIdHtml = 'id="' + elementId + '"';
+				}
+
+				if (typeof status != 'undefined' && status)
+				{
+					return '<div unselectable="on" class="button ' + iconClass + ' ' + elementClass + ' ' + status + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
+				}
+
+				return '<div unselectable="on" class="button buttonActive ' + iconClass + ' ' + elementClass + '" data-formid="' + formid + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
+			},
+			// Since jsrender breaks the ^ operator
+			xor: function(number,bit) {
+				return number ^ bit;
+			},
+			precisionRound: function (value, places) {
+				if(places==0)
+					return Math.round(number);
+				var multiplier = Math.pow(10, places);
+				return (Math.round(value * multiplier) / multiplier);
 			},
 			// Round a number to the nearest integer
 			round: function(number) {
 				return Math.round(number);
-			},
-			// Returns the number fixed to 1 decimal
-			fixed: function(number) {
-				return Math.round(number * 10) / 10;
 			},
 			// Round a number down to integer
 			floor: function(number) {
@@ -87,35 +128,31 @@ NanoBaseHelpers = function ()
 				parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				return parts.join(".");
 			},
-			// Capitalize the first letter of a string. From http://stackoverflow.com/questions/1026069/capitalize-the-first-letter-of-string-in-javascript
-			capitalizeFirstLetter: function(string) {
-				return string.charAt(0).toUpperCase() + string.slice(1);
-			},
-			// Display a bar. Used to show health, capacity, etc. Use difClass if the entire display bar class should be different
-			displayBar: function(value, rangeMin, rangeMax, styleClass, showText, difClass, direction) {
+			// Display a bar. Used to show health, capacity, etc.
+			displayBar: function(value, rangeMin, rangeMax, styleClass, showText) {
 
 				if (rangeMin < rangeMax)
-                {
-                    if (value < rangeMin)
-                    {
-                        value = rangeMin;
-                    }
-                    else if (value > rangeMax)
-                    {
-                        value = rangeMax;
-                    }
-                }
-                else
-                {
-                    if (value > rangeMin)
-                    {
-                        value = rangeMin;
-                    }
-                    else if (value < rangeMax)
-                    {
-                        value = rangeMax;
-                    }
-                }
+				{
+					if (value < rangeMin)
+					{
+						value = rangeMin;
+					}
+					else if (value > rangeMax)
+					{
+						value = rangeMax;
+					}
+				}
+				else
+				{
+					if (value > rangeMin)
+					{
+						value = rangeMin;
+					}
+					else if (value < rangeMax)
+					{
+						value = rangeMax;
+					}
+				}
 
 				if (typeof styleClass == 'undefined' || !styleClass)
 				{
@@ -126,39 +163,94 @@ NanoBaseHelpers = function ()
 				{
 					showText = '';
 				}
-				
-				if (typeof difClass == 'undefined' || !difClass)
-				{
-					difClass = ''
-				}
-				
-				if(typeof direction == 'undefined' || !direction)
-				{
-					direction = 'width'
-				}
-				else
-				{
-					direction = 'height'
-				}
-				
+
 				var percentage = Math.round((value - rangeMin) / (rangeMax - rangeMin) * 100);
-				
-				return '<div class="displayBar' + difClass + ' ' + styleClass + '"><div class="displayBar' + difClass + 'Fill ' + styleClass + '" style="' + direction + ': ' + percentage + '%;"></div><div class="displayBar' + difClass + 'Text ' + styleClass + '">' + showText + '</div></div>';
+
+				return '<div class="displayBar ' + styleClass + '"><div class="displayBarFill ' + styleClass + '" style="width: ' + percentage + '%;"></div><div class="displayBarText ' + styleClass + '">' + showText + '</div></div>';
+			},
+			// Convert explosion range to thing.
+			explosionToClass: function(range, cap) {
+				if(range >= cap) return 'bad';
+				if(cap * 0.25 * 0.66 <= range * 0.25) return 'bad';
+				if(cap * 0.25 * 0.33 <= range * 0.25) return 'average';
+				return 'good';
+			},
+			// Convert status to class for cameras
+			statusToClass: function(status) {
+				if(status==0) return 'good';
+				if(status==1) return 'average';
+				return 'bad';
+			},
+			statusToSpan: function(level) {
+				if(level==0) return '"<span class="good">Active</span>"';
+				if(level==1) return '"<span class="average">Deactivated</span>"';
+				return '"<span class="bad">No Response</span>"';
+			},
+			// Convert danger level to class (for the air alarm)
+			dangerToClass: function(level) {
+				if(level==0) return 'good';
+				if(level==1) return 'average';
+				return 'bad';
+			},
+			dangerToSpan: function(level) {
+				if(level==0) return '"<span class="good">Good</span>"';
+				if(level==1) return '"<span class="average">Minor Alert</span>"';
+				return '"<span class="bad">Major Alert</span>"';
+			},
+			generateHref: function (parameters) {
+				var body = $('body'); // We store data in the body tag, it's as good a place as any
+				_urlParameters = body.data('urlParameters');
+				var queryString = '?';
+
+				for (var key in _urlParameters)
+				{
+					if (_urlParameters.hasOwnProperty(key))
+					{
+						if (queryString !== '?')
+						{
+							queryString += ';';
+						}
+						queryString += key + '=' + _urlParameters[key];
+					}
+				}
+
+				for (var key in parameters)
+				{
+					if (parameters.hasOwnProperty(key))
+					{
+						if (queryString !== '?')
+						{
+							queryString += ';';
+						}
+						queryString += key + '=' + parameters[key];
+					}
+				}
+				return queryString;
 			},
 			// Display DNA Blocks (for the DNA Modifier UI)
-			displayDNABlocks: function(dnaString, selectedBlock, selectedSubblock, blockSize, paramKey) {
-			    if (!dnaString)
+			displayDNABlocks: function(dnaString, selectedBlock, selectedSubblock, blockSize, paramKey, blockLabels) {
+				if (!dnaString)
 				{
 					return '<div class="notice">Please place a valid subject into the DNA modifier.</div>';
 				}
 
 				var characters = dnaString.split('');
 
-                var html = '<div class="dnaBlock"><div class="link dnaBlockNumber">1</div>';
-                var block = 1;
-                var subblock = 1;
-                for (index in characters)
-                {
+				var block = 1;
+				var subblock = 1;
+				var html;
+				// For some reason, the FIRST block index number (the black "1") is copypasted here and drawn separately. It was like that when I found it, I swear.
+				if (paramKey.toUpperCase() == 'SE')
+					{
+						html = '<div class="dnaBlock"><div class="link linkActive dnaBlockNumber" data-href="' + NanoUtility.generateHref({'changeBlockLabel' : block}) + '" title="'+blockLabels[block-1]["name"]+'" style="background:'+blockLabels[0]["color"]+'">1</div>';
+					}
+				else
+					{
+						html = '<div class="dnaBlock"><div class="link dnaBlockNumber">1</div>';
+					}
+				// And then all the actual block contents (i.e. DAC, starting from 1) and the rest of the block index numbers (starting from 2) are drawn in this loop.
+				for (index in characters)
+				{
 					if (!characters.hasOwnProperty(index) || typeof characters[index] === 'object')
 					{
 						continue;
@@ -174,38 +266,45 @@ NanoBaseHelpers = function ()
 						parameters = { 'selectSEBlock' : block, 'selectSESubblock' : subblock };
 					}
 
-                    var status = 'linkActive';
-                    if (block == selectedBlock && subblock == selectedSubblock)
-                    {
-                        status = 'selected';
-                    }
+					var status = 'linkActive';
+					if (block == selectedBlock && subblock == selectedSubblock)
+					{
+						status = 'selected';
+					}
 
-                    html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + NanoUtility.generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>'
+					html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + NanoUtility.generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>'
 
-                    index++;
-                    if (index % blockSize == 0 && index < characters.length)
-                    {
+					index++;
+					if (index % blockSize == 0 && index < characters.length)
+					{
 						block++;
-                        subblock = 1;
-                        html += '</div><div class="dnaBlock"><div class="link dnaBlockNumber">' + block + '</div>';
-                    }
-                    else
-                    {
-                        subblock++;
-                    }
-                }
+						subblock = 1;
+						if (paramKey.toUpperCase() == 'SE')
+							{
+								html += '</div><div class="dnaBlock"><div class="link linkActive dnaBlockNumber" data-href="' + NanoUtility.generateHref({'changeBlockLabel' : block}) + '" title="'+blockLabels[block-1]["name"]+'" style="background:'+blockLabels[block-1]["color"]+'">' + block + '</div>';
+							}
+						else
+							{
+								html += '</div><div class="dnaBlock"><div class="link dnaBlockNumber">' + block + '</div>';
+							}
+					}
+					else
+					{
+						subblock++;
+					}
+				}
 
-                html += '</div>';
+				html += '</div>';
 
 				return html;
 			}
 		};
-		
+
 	return {
-        addHelpers: function ()
+		addHelpers: function ()
 		{
-            NanoTemplate.addHelpers(_baseHelpers);
-        },
+			NanoTemplate.addHelpers(_baseHelpers);
+		},
 		removeHelpers: function ()
 		{
 			for (var helperKey in _baseHelpers)
@@ -214,14 +313,7 @@ NanoBaseHelpers = function ()
 				{
 					NanoTemplate.removeHelper(helperKey);
 				}
-			}            
-        }
+			}
+		}
 	};
 } ();
- 
-
-
-
-
-
-

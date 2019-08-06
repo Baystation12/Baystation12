@@ -3,95 +3,129 @@ NanoBaseCallbacks = function ()
 {
 	// _canClick is used to disable clicks for a short period after each click (to avoid mis-clicks)
 	var _canClick = true;
-	
+
 	var _baseBeforeUpdateCallbacks = {}
-	
+
 	var _baseAfterUpdateCallbacks = {
 		// this callback is triggered after new data is processed
-		// it updates the status/visibility icon and adds click event handling to buttons/links		
+		// it updates the status/visibility icon and adds click event handling to buttons/links
 		status: function (updateData) {
 			var uiStatusClass;
 			if (updateData['config']['status'] == 2)
 			{
 				uiStatusClass = 'icon24 uiStatusGood';
 				$('.linkActive').removeClass('inactive');
+				$('.buttonActive').removeClass('inactive');
 			}
 			else if (updateData['config']['status'] == 1)
 			{
 				uiStatusClass = 'icon24 uiStatusAverage';
 				$('.linkActive').addClass('inactive');
+				$('.buttonActive').addClass('inactive');
 			}
 			else
 			{
 				uiStatusClass = 'icon24 uiStatusBad'
 				$('.linkActive').addClass('inactive');
+				$('.buttonActive').addClass('inactive');
 			}
 			$('#uiStatusIcon').attr('class', uiStatusClass);
 
 			$('.linkActive').stopTime('linkPending');
 			$('.linkActive').removeClass('linkPending');
+			$('.buttonActive').stopTime('linkPending');
+			$('.buttonActive').removeClass('linkPending');
 
 			$('.linkActive')
-                .off('click')
-			    .on('click', function (event) {
-                    event.preventDefault();
-                    var href = $(this).data('href');
-                    if (href != null && _canClick)
-                    {
-                        _canClick = false;
-                        $('body').oneTime(300, 'enableClick', function () {
-                            _canClick = true;
-                        });
-                        if (updateData['config']['status'] == 2)
-                        {
-                            $(this).oneTime(300, 'linkPending', function () {
-                                $(this).addClass('linkPending');
-                            });
-                        }
-                        window.location.href = href;
-                    }
-                });
+				.off('click')
+				.on('click', function (event) {
+					event.preventDefault();
+					var href = $(this).data('href');
+					if (href != null && _canClick)
+					{
+						_canClick = false;
+						$('body').oneTime(300, 'enableClick', function () {
+							_canClick = true;
+						});
+						if (updateData['config']['status'] == 2)
+						{
+							$(this).oneTime(300, 'linkPending', function () {
+								$(this).addClass('linkPending');
+							});
+						}
+						window.location.href = href;
+					}
+				});
+			
+			$('.buttonActive')
+				.off('click')
+				.on('click', function (event) {
+					event.preventDefault();
+					var form = document.getElementById($(this).data('formid'));
+					if (form != null && _canClick)
+					{
+						_canClick = false;
+						$('body').oneTime(300, 'enableClick', function () {
+							_canClick = true;
+						});
+						if (updateData['config']['status'] == 2)
+						{
+							$(this).oneTime(300, 'linkPending', function () {
+								$(this).addClass('linkPending');
+							});
+						}
+						form.submit();
+					}
+				});
 
-            return updateData;
+				return updateData;
 		},
-        nanomap: function (updateData) {
-            $('.mapIcon')
-                .off('mouseenter mouseleave')
-                .on('mouseenter',
-                    function (event) {
-                        var self = this;
-                        $('#uiMapTooltip')
-                            .html($(this).children('.tooltip').html())
-                            .show()
-                            .stopTime()
-                            .oneTime(5000, 'hideTooltip', function () {
-                                $(this).fadeOut(500);
-                            });
-                    }
-                );
+		nanomap: function (updateData) {
+			$('.mapIcon')
+				.off('mouseenter mouseleave')
+				.on('mouseenter',
+					function (event) {
+						var self = this;
+						$('#uiMapTooltip')
+							.html($(this).children('.tooltip').html())
+							.show()
+							.stopTime()
+							.oneTime(5000, 'hideTooltip', function () {
+								$(this).fadeOut(500);
+							});
+					}
+				);
 
-            $('.zoomLink')
-                .off('click')
-                .on('click', function (event) {
-                    event.preventDefault();
-                    var zoomLevel = $(this).data('zoomLevel');
-                    var uiMapObject = $('#uiMap');
-                    var uiMapWidth = uiMapObject.width() * zoomLevel;
-                    var uiMapHeight = uiMapObject.height() * zoomLevel;
+			$('.zoomLink')
+				.off('click')
+				.on('click', function (event) {
+					event.preventDefault();
+					var zoomLevel = $(this).data('zoomLevel');
+					var uiMapObject = $('#uiMap');
+					var uiMapWidth = uiMapObject.width() * zoomLevel;
+					var uiMapHeight = uiMapObject.height() * zoomLevel;
 
-                    uiMapObject.css({
-                        zoom: zoomLevel,
-                        left: '50%',
-                        top: '50%',
-                        marginLeft: '-' + Math.floor(uiMapWidth / 2) + 'px',
-                        marginTop: '-' + Math.floor(uiMapHeight / 2) + 'px'
-                    });
-                });
+					uiMapObject.css({
+						zoom: zoomLevel,
+						left: '50%',
+						top: '50%',
+						marginLeft: '-' + Math.floor(uiMapWidth / 2) + 'px',
+						marginTop: '-' + Math.floor(uiMapHeight / 2) + 'px'
+					});
+				});
 
-            $('#uiMapImage').attr('src', updateData['config']['mapName'] + '-' + updateData['config']['mapZLevel'] + '.png');
+				$('#uiMapImage').attr('src', updateData['config']['mapName'] + updateData['config']['mapZLevel'] + '.png');
+				$('#uiMapImage').css('width', updateData['config']['worldmaxx']);
+				$('#uiMapImage').css('height', updateData['config']['worldmaxy']);
 
-            return updateData;
-        }
+				$('#uiMap').css('width', updateData['config']['worldmaxx']);
+				$('#uiMap').css('height', updateData['config']['worldmaxy']);
+
+				$('#uiMapContent').css('width', updateData['config']['worldmaxx']);
+				$('#uiMapContent').css('height', updateData['config']['worldmaxy']);
+
+				return updateData;
+		}
 	};
 
 	return {
@@ -107,17 +141,17 @@ NanoBaseCallbacks = function ()
 					NanoStateManager.removeBeforeUpdateCallback(callbackKey);
 				}
 			}
-            for (var callbackKey in _baseAfterUpdateCallbacks)
-            {
-                if (_baseAfterUpdateCallbacks.hasOwnProperty(callbackKey))
-                {
-                    NanoStateManager.removeAfterUpdateCallback(callbackKey);
-                }
-            }
-        }
+			for (var callbackKey in _baseAfterUpdateCallbacks)
+			{
+				if (_baseAfterUpdateCallbacks.hasOwnProperty(callbackKey))
+				{
+					NanoStateManager.removeAfterUpdateCallback(callbackKey);
+				}
+			}
+		}
 	};
 } ();
- 
+
 
 
 
