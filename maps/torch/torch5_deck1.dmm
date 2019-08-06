@@ -1377,6 +1377,10 @@
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
+"acy" = (
+/obj/effect/wallframe_spawn/reinforced/no_grille,
+/turf/simulated/floor/plating,
+/area/assembly/chargebay)
 "acz" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod14/station)
@@ -1385,6 +1389,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
+"acB" = (
+/obj/effect/wallframe_spawn/reinforced/no_grille,
+/turf/simulated/floor/plating,
+/area/assembly/robotics)
 "acC" = (
 /obj/structure/closet/l3closet/virology,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -1393,6 +1401,22 @@
 "acD" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/firstdeck/centralstarboard)
+"acE" = (
+/obj/effect/wallframe_spawn/reinforced/no_grille,
+/turf/simulated/floor/plating,
+/area/assembly/robotics)
+"acF" = (
+/obj/structure/closet/wardrobe/robotics_black,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light_switch{
+	pixel_x = -4;
+	pixel_y = -24
+	},
+/obj/machinery/light,
+/obj/item/clothing/under/rank/roboticist/skirt,
+/obj/item/clothing/under/rank/roboticist/skirt,
+/turf/simulated/floor/tiled/monotile,
+/area/assembly/robotics)
 "acH" = (
 /obj/structure/bed/chair/wheelchair,
 /obj/effect/decal/cleanable/cobweb,
@@ -6213,23 +6237,6 @@
 /obj/item/weapon/stock_parts/scanning_module,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics)
-"auW" = (
-/obj/structure/closet/wardrobe/robotics_black,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/light_switch{
-	pixel_x = -4;
-	pixel_y = -24
-	},
-/obj/machinery/button/windowtint{
-	id = "robotics_external_windows";
-	pixel_x = 4;
-	pixel_y = -24
-	},
-/obj/machinery/light,
-/obj/item/clothing/under/rank/roboticist/skirt,
-/obj/item/clothing/under/rank/roboticist/skirt,
-/turf/simulated/floor/tiled/monotile,
-/area/assembly/robotics)
 "auY" = (
 /obj/machinery/light,
 /turf/simulated/floor/reinforced,
@@ -6495,12 +6502,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
-"awg" = (
-/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
-	id = "robotics_external_windows"
-	},
-/turf/simulated/floor/plating,
-/area/assembly/robotics)
 "awn" = (
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -25067,12 +25068,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
-"npQ" = (
-/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
-	id = "robotics_surg"
-	},
-/turf/simulated/floor/plating,
-/area/assembly/chargebay)
 "nqb" = (
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -49384,7 +49379,7 @@ kfb
 kub
 auS
 kep
-auW
+acF
 amA
 dRf
 ayj
@@ -49587,7 +49582,7 @@ kvb
 ohy
 kNb
 kVb
-awg
+acB
 qGx
 ayg
 fnu
@@ -49991,7 +49986,7 @@ amA
 wtS
 kPb
 kXb
-awg
+acB
 axh
 ayi
 ghI
@@ -50193,7 +50188,7 @@ kyb
 atK
 apo
 kdb
-awg
+acE
 dRf
 ayg
 azq
@@ -50595,7 +50590,7 @@ iGb
 mbb
 arH
 kHb
-npQ
+acy
 arH
 arH
 axe
