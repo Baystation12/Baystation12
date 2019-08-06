@@ -84,6 +84,20 @@
 /obj/structure/stairs/south,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/galley)
+"au" = (
+/obj/machinery/door/firedoor,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/door/window/brigdoor/northleft{
+	dir = 2;
+	name = "Deck Chief"
+	},
+/obj/machinery/door/blast/shutters{
+	dir = 2;
+	id_tag = "do_office";
+	name = "DO Office Shutters"
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/deckchief)
 "av" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
@@ -91,6 +105,59 @@
 "aw" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod7/station)
+"ax" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/window/brigdoor/southright{
+	dir = 8;
+	name = "Supply Desk"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/door/blast/shutters{
+	dir = 4;
+	id_tag = "sup_office";
+	name = "Supply Desk Shutters"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/office)
+"ay" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/window/brigdoor/northleft{
+	dir = 4;
+	name = "Security Checkpoint"
+	},
+/obj/structure/table/steel_reinforced,
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/item/weapon/pen{
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 8;
+	icon_state = "shutter0";
+	id_tag = "hangar_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/hangcheck)
 "az" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/fourthdeck)
@@ -4471,25 +4538,6 @@
 	},
 /turf/simulated/open,
 /area/quartermaster/hangar/top)
-"oZ" = (
-/obj/structure/table/reinforced,
-/obj/machinery/door/window/brigdoor/southright{
-	dir = 8;
-	name = "Supply Desk"
-	},
-/obj/machinery/door/window/southleft{
-	autoset_access = 0;
-	dir = 4;
-	name = "Supply Desk"
-	},
-/obj/machinery/door/firedoor,
-/obj/machinery/door/blast/shutters{
-	dir = 4;
-	id_tag = "sup_office";
-	name = "Supply Desk Shutters"
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/office)
 "pc" = (
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/cargo_lift)
@@ -13143,49 +13191,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
-"Rl" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/window/brigdoor/northleft{
-	dir = 4;
-	name = "Security Checkpoint"
-	},
-/obj/structure/table/steel_reinforced,
-/obj/machinery/door/window/southleft{
-	dir = 8;
-	name = "Security Checkpoint"
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/item/weapon/paper_bin{
-	pixel_x = -3;
-	pixel_y = 7
-	},
-/obj/item/weapon/pen{
-	pixel_x = 4;
-	pixel_y = 4
-	},
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 8;
-	icon_state = "shutter0";
-	id_tag = "hangar_checkpoint_shutters";
-	name = "Hangar Deck Checkpoint Shutters";
-	opacity = 0
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/security/hangcheck)
 "Rm" = (
 /obj/structure/sign/warning/high_voltage{
 	icon_state = "shock";
@@ -16386,24 +16391,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage/upper)
-"Zn" = (
-/obj/machinery/door/firedoor,
-/obj/structure/table/steel_reinforced,
-/obj/machinery/door/window/brigdoor/northleft{
-	dir = 2;
-	name = "Deck Chief"
-	},
-/obj/machinery/door/window/southleft{
-	dir = 1;
-	name = "Deck Officer"
-	},
-/obj/machinery/door/blast/shutters{
-	dir = 2;
-	id_tag = "do_office";
-	name = "DO Office Shutters"
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/deckchief)
 "Zo" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -30776,7 +30763,7 @@ sB
 rj
 vC
 Nm
-Rl
+ay
 XQ
 OX
 OX
@@ -37649,7 +37636,7 @@ wa
 wa
 oP
 PX
-oZ
+ax
 vQ
 YS
 ZN
@@ -39662,7 +39649,7 @@ qy
 So
 SO
 WS
-Zn
+au
 xn
 zM
 Ad

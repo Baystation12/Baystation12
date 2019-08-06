@@ -1390,9 +1390,22 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "acB" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
-/turf/simulated/floor/plating,
-/area/assembly/robotics)
+/obj/machinery/door/firedoor,
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/window/brigdoor/eastleft{
+	name = "Emergency Armory Desk"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 1;
+	dir = 4;
+	icon_state = "pdoor1";
+	id_tag = "armory_lock";
+	name = "Armory Lockdown Shutters";
+	opacity = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/armoury/access)
 "acC" = (
 /obj/structure/closet/l3closet/virology,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -1417,6 +1430,24 @@
 /obj/item/clothing/under/rank/roboticist/skirt,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics)
+"acG" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
+/obj/structure/table/reinforced,
+/obj/item/weapon/material/bell,
+/obj/machinery/door/window/southright{
+	dir = 2;
+	name = "Fabricator Lab Desk"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/monotile,
+/area/rnd/development)
 "acH" = (
 /obj/structure/bed/chair/wheelchair,
 /obj/effect/decal/cleanable/cobweb,
@@ -14341,26 +14372,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/wing)
-"bsb" = (
-/obj/machinery/door/firedoor,
-/obj/structure/table/steel_reinforced,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/window/brigdoor/westright{
-	name = "Emergency Armory Desk"
-	},
-/obj/machinery/door/window/brigdoor/eastleft{
-	name = "Emergency Armory Desk"
-	},
-/obj/machinery/door/blast/regular/open{
-	density = 1;
-	dir = 4;
-	icon_state = "pdoor1";
-	id_tag = "armory_lock";
-	name = "Armory Lockdown Shutters";
-	opacity = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/armoury/access)
 "bta" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
@@ -20037,28 +20048,6 @@
 	pixel_z = 0
 	},
 /turf/simulated/wall/r_wall/prepainted,
-/area/rnd/development)
-"hxb" = (
-/obj/structure/disposalpipe/segment,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id_tag = "Biohazard";
-	name = "Biohazard Shutter";
-	opacity = 0
-	},
-/obj/structure/table/reinforced,
-/obj/item/weapon/material/bell,
-/obj/machinery/door/window/northleft{
-	dir = 1;
-	name = "Fabricator Lab Desk"
-	},
-/obj/machinery/door/window/southright{
-	dir = 2;
-	name = "Fabricator Lab Desk"
-	},
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/monotile,
 /area/rnd/development)
 "hyb" = (
 /obj/structure/disposalpipe/segment,
@@ -49582,7 +49571,7 @@ kvb
 ohy
 kNb
 kVb
-acB
+acE
 qGx
 ayg
 fnu
@@ -49986,7 +49975,7 @@ amA
 wtS
 kPb
 kXb
-acB
+acE
 axh
 ayi
 ghI
@@ -54636,7 +54625,7 @@ gXb
 axz
 ayy
 iXb
-hxb
+acG
 hKb
 ibb
 isb
@@ -59077,7 +59066,7 @@ atp
 aum
 aGN
 aGN
-bsb
+acB
 ayK
 jrH
 aAX
