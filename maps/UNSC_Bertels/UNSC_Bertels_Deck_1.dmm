@@ -20,7 +20,7 @@
 "at" = (/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck1/starboardhallway)
 "au" = (/obj/machinery/shower,/turf/simulated/floor/tiled/freezer,/area/corvette/unscbertels/deck1/officerquarters)
 "av" = (/obj/machinery/light{dir = 1},/obj/structure/table/steel_reinforced,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/turf/simulated/floor/tiled/freezer,/area/corvette/unscbertels/deck1/officerquarters)
-"aw" = (/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/Officermess)
+"aw" = (/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/obj/structure/cable/blue{dir = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/Officermess)
 "ax" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/tiled,/area/corvette/unscbertels/starboardbatterycontrol)
 "ay" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/unscbertelsstarboard{control_tag = "bertels_rockets"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/starboardbatterycontrol)
 "az" = (/obj/machinery/light/colored/blue,/turf/simulated/floor/tiled,/area/corvette/unscbertels/starboardbatterycontrol)
@@ -43,7 +43,7 @@
 "aQ" = (/obj/machinery/vending/coffee,/turf/simulated/floor/holofloor/wood,/area/corvette/unscbertels/deck1/Officermess)
 "aR" = (/obj/machinery/food_replicator,/turf/simulated/floor/holofloor/wood,/area/corvette/unscbertels/deck1/Officermess)
 "aS" = (/obj/machinery/light{dir = 1},/obj/structure/table/woodentable,/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,/turf/simulated/floor/holofloor/wood,/area/corvette/unscbertels/deck1/Officermess)
-"aT" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/Officermess)
+"aT" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{dir = 2; icon_state = "0-2"},/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/Officermess)
 "aU" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/wall/r_wall,/area/corvette/unscbertels/starboardbatterycontrol)
 "aV" = (/turf/simulated/wall/r_wall,/area/corvette/unscbertels/deck1/Bridge)
 "aW" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-4"},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck1/starboardhallway)
@@ -68,6 +68,7 @@
 "bp" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/grille,/turf/simulated/floor/tech/gray,/area/corvette/unscbertels/exterior)
 "bq" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/grille,/turf/simulated/floor/tech/gray,/area/corvette/unscbertels/exterior)
 "br" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/wall/r_wall,/area/corvette/unscbertels/deck1/Bridge)
+"bs" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{dir = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/auxpowercore)
 "bt" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/status_display,/turf/simulated/wall/r_wall,/area/corvette/unscbertels/deck1/Bridge)
 "bu" = (/turf/simulated/open,/area/corvette/unscbertels/deck1/starboardhallway)
 "bv" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck1/starboardhallway)
@@ -148,7 +149,6 @@
 "cS" = (/obj/machinery/computer/navigation{tag = "icon-holotable (NORTH)"; name = "Holotable"; icon_state = "holotable"; dir = 1; icon_keyboard = "holotable"; icon_screen = "holotable"},/turf/simulated/floor/holofloor/wood,/area/corvette/unscbertels/deck1/Officermess)
 "cT" = (/obj/machinery/atmospherics/binary/pump/high_power/on,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/auxpowercore)
 "cU" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/auxpowercore)
-"cV" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck1/auxpowercore)
 "cW" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/starboardbattery)
 "cX" = (/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/machinery/light/colored/blue{tag = "icon-blue1 (WEST)"; icon_state = "blue1"; dir = 8},/turf/simulated/floor/tiled,/area/corvette/unscbertels/starboardbattery)
 "cY" = (/obj/structure/grille,/turf/simulated/floor/tech/gray,/area/corvette/unscbertels/exterior)
@@ -477,7 +477,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababaeacadadadaUadabababababababab
 aaaaaaaaaaaaaaaaaaaaaablbmbnbnbnbmabababababababababababababbobpbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbqbrbrbruKaVaVaVztbtbtbtaVztaVaVaVaVbubvbwahbxbybzaIahahahahbAbBaibCbBaibCbBajbebebDbEajajajajajyQbkbkyQababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaabFbGbmbHbIbJbmababababababababababababababbKababababababababababababababababababababababababababababababababababababababababababababababaVaVaVbLbMaVbMaVbNbObPbQaVbRbSaVaVbubvatahbTbUaIaIbVaIbWahbXbYaibXbYaibXbYajbZbZbDbeajcacacacabkcbccbkyQabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaacdcecfcgchcebqbqbqbqbqbqbqbqbqbqbqbqbqbqciababababababababababababababababababababababababababababababababababababababababababababababztaVaVbLcjckcjaVclcmbPbPaVbPbPcnaVagcocpahcqcrcsctahaIcuahcvcwaicvcwaicvcwajbebfcxbebebebebebebkcyczcAbkabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaacdbncBcCbIbnabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababcDcDaVbPbPcEcFcGcFcHcIbPbPztaVcJaVaVaVagcKatahahahcLahahahahahcMaiaicNaiaicOaiajcPbDcQcQbebecRcSbebkcTcUcVbkabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaacdbncBcCbIbnabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababcDcDaVbPbPcEcFcGcFcHcIbPbPztaVcJaVaVaVagcKatahahahcLahahahahahcMaiaicNaiaicOaiajcPbDcQcQbebecRcSbebkcTcUbsbkabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaacdbmbHcWcXbmababababababababababababababcYababababababababababababababababababababababababababababababababababababababababababababcDcZdacGdbdcddcGddcGdebPbPbPbPbPdfbPbPdgdhaXaXaXaXdiaXaXaXaXaXdidjaXdidkaXdiaXdlbgdmdndobebedpdqbebkdrdsdtbkabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaacdbmbnbnbnbmababababababababababababababcYababababababababababababababababababababababababababababababababababababababababababcDcDcDdudvbPduaVdwckdwaVdxdbcGdycGcGdzdAdBdCdDatdEdFatdGdHdFdIdGdEatdJdFdHdGatatdFdKbedLdMdNbebedObebebkdPdQdQbkabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababcYababababababababababababababababababababababababababababababababababababababababababcDdRdSdTckdUdVaVdWaVdXaVbLdudYaVaVaVaVaVaVdZeaatagagagagagagagagagagagagagagagagagajajajajajajajajajajbkebecedbkabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -557,4 +557,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 hLaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 hMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
