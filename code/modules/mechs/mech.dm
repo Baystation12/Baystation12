@@ -40,7 +40,7 @@
 	var/datum/effect/effect/system/spark_spread/sparks
 
 	// Equipment tracking vars.
-	var/obj/item/selected_system
+	var/obj/item/mech_equipment/selected_system
 	var/selected_hardpoint
 	var/list/hardpoints = list()
 	var/hardpoints_locked
