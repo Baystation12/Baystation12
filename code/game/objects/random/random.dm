@@ -28,6 +28,8 @@
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 
+	return A
+
 // Returns an associative list in format path:weight
 /obj/random/proc/spawn_choices()
 	return list()
@@ -427,8 +429,14 @@ obj/random/closet //A couple of random closets to spice up maint
 	desc = "This is a random closet."
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
+	var/vermin_chance = 0.1
+	var/list/locker_vermin = list(
+		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/possum,
+		/mob/living/carbon/alien/diona
+	)
 
-obj/random/closet/spawn_choices()
+/obj/random/closet/spawn_choices()
 	return list(/obj/structure/closet,
 				/obj/structure/closet/firecloset,
 				/obj/structure/closet/emcloset,
@@ -448,7 +456,13 @@ obj/random/closet/spawn_choices()
 				/obj/structure/closet/wardrobe/xenos,
 				/obj/structure/closet/wardrobe/mixed,
 				/obj/structure/closet/wardrobe/suit,
-				/obj/structure/closet/wardrobe/orange)
+				/obj/structure/closet/wardrobe/orange
+				)
+/obj/random/closet/spawn_item()
+	. = ..()
+	if(. && length(locker_vermin) && prob(vermin_chance))
+		var/vermin_type = pickweight(locker_vermin)
+		new vermin_type(.)
 
 /obj/random/coin
 	name = "random coin"
