@@ -142,14 +142,13 @@ The megabot
 	natural_armor = list(melee = 50, bullet = 20)
 	can_escape = TRUE
 	armor_type = /datum/extension/armor/toggle
+	ability_cooldown = 3 MINUTES
 
 	pixel_x = -32
 	default_pixel_x = -32
 
 	var/attack_mode = ATTACK_MODE_MELEE
 	var/num_shots
-	var/last_cycled
-	var/cycle_cooldown = 3 MINUTES
 	var/deactivated
 
 /mob/living/simple_animal/hostile/hivebot/mega/Initialize()
@@ -161,7 +160,7 @@ The megabot
 	if(!.)
 		return
 	
-	if(last_cycled < world.time)
+	if(time_last_used_ability < world.time)
 		switch_mode(ATTACK_MODE_ROCKET)
 
 /mob/living/simple_animal/hostile/hivebot/mega/emp_act(severity)
@@ -214,7 +213,7 @@ The megabot
 			projectilesound = 'sound/effects/Explosion1.ogg'
 			projectiletype = /obj/item/projectile/bullet/gyro/megabot
 			num_shots = 4
-			last_cycled = world.time + cycle_cooldown
+			cooldown_ability(ability_cooldown)
 			fire_desc = "launches a microrocket"
 			visible_message(SPAN_MFAUNA("\The [src]'s missile pod rumbles!"))
 

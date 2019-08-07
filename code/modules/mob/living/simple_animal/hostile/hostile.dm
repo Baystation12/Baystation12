@@ -23,6 +23,8 @@
 	var/shuttletarget = null
 	var/enroute = 0
 	var/stop_automation = FALSE //stops AI procs from running
+
+	var/can_pry = TRUE
 	var/pry_time = 7 SECONDS //time it takes for mob to pry open a door
 	var/pry_desc = "prying" //"X begins pry_desc the door!"
 
@@ -271,14 +273,15 @@
 				obstacle.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
 				return
 
-		for(var/obj/machinery/door/obstacle in targ)
-			if(obstacle.density)
-				if(!obstacle.can_open(1))
+		if(can_pry)
+			for(var/obj/machinery/door/obstacle in targ)
+				if(obstacle.density)
+					if(!obstacle.can_open(1))
+						return
+					face_atom(obstacle)
+					var/pry_time_holder = (obstacle.pry_mod * pry_time)
+					pry_door(src, pry_time_holder, obstacle)
 					return
-				face_atom(obstacle)
-				var/pry_time_holder = (obstacle.pry_mod * pry_time)
-				pry_door(src, pry_time_holder, obstacle)
-				return
 
 /mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
 	visible_message("<span class='warning'>\The [user] begins [pry_desc] at \the [pesky_door]!</span>")
@@ -289,3 +292,13 @@
 	else
 		visible_message("<span class='notice'>\The [user] is interrupted.</span>")
 		stop_automation = FALSE
+
+/mob/living/simple_animal/hostile/proc/can_perform_ability()
+	if(!can_act() || time_last_used_ability > world.time)
+		return FALSE
+	return TRUE
+
+/mob/living/simple_animal/hostile/proc/cooldown_ability(var/time)
+	if(!time)
+		time = ability_cooldown
+	time_last_used_ability = world.time + ability_cooldown

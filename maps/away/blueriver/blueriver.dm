@@ -45,7 +45,7 @@
 	harm_intent_damage = 8
 	melee_damage_lower = 30
 	melee_damage_upper = 35
-	attacktext = "evisceratds"
+	attacktext = "eviscerated"
 	attack_sound = 'sound/weapons/slash.ogg'
 	var/attack_mode = FALSE
 

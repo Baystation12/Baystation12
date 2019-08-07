@@ -120,9 +120,9 @@
 	flash_vulnerability = 2 //sensitive eyes for stalking prey
 	does_spin = FALSE
 	available_maneuvers = list(/decl/maneuver/leap/spider)
+	ability_cooldown = 3 MINUTES
 
 	var/leap_range = 5
-	var/leap_cooldown = 3 MINUTES
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter

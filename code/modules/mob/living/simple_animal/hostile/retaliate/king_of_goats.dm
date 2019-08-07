@@ -198,17 +198,17 @@
 	QDEL_NULL(boss_theme)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/UnarmedAttack(atom/A)
-	..()
-	if(isliving(A))
-		var/mob/living/L = A
+/mob/living/simple_animal/hostile/retaliate/goat/king/AttackingTarget()
+	. = ..()
+	if(isliving(target_mob))
+		var/mob/living/L = target_mob
 		if(prob(stun_chance))
 			L.Weaken(0.5)
 			L.confused += 1
 			visible_message(SPAN_WARNING("\The [L] is bowled over by the impact of [src]'s attack!"))
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/UnarmedAttack()
-	..()
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/AttackingTarget()
+	. = ..()
 	if(damtype != BRUTE)
 		special_attacks++
 	
