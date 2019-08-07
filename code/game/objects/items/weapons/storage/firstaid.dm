@@ -210,12 +210,12 @@
 		if(!remove_from_storage(I,user))
 			return
 		if(user.put_in_inactive_hand(I))
-			to_chat(user, "<span class='notice'>You take \the [I] pill out of \the [src].</span>")
+			to_chat(user, "<span class='notice'>You take \the [I] out of \the [src].</span>")
 			if(iscarbon(user))
 				var/mob/living/carbon/C = user
 				C.swap_hand()
 		else
-			user.drop_from_inventory(I)
+			I.dropInto(loc)
 			to_chat(user, "<span class='notice'>You fumble around with \the [src] and drop \the [I] on the floor.</span>")
 		return
 	else
