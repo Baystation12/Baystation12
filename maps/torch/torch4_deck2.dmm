@@ -11403,6 +11403,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/turret_protected/ai_cyborg_station)
+"Av" = (
+/obj/item/trash,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "Aw" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plating,
@@ -15032,7 +15036,8 @@
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
 	},
-/turf/simulated/open,
+/obj/item/trash,
+/turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "KI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -15326,6 +15331,16 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
+"Ma" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/item/trash,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "Mb" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -16247,6 +16262,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
+"OS" = (
+/obj/item/trash,
+/obj/item/trash,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "OV" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/seconddeck/elevator)
@@ -17045,6 +17065,15 @@
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/engineering/fuelbay)
+"Ru" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/effect/decal/cleanable/vomit,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "Rx" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/plating,
@@ -18122,6 +18151,12 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/seconddeck/foreport)
+"Vu" = (
+/obj/item/trash,
+/obj/item/trash,
+/obj/item/trash,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "Vy" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -38670,8 +38705,8 @@ zV
 TG
 BI
 Ky
-Ky
-Ky
+Ma
+Ru
 Ky
 BI
 zT
@@ -38871,10 +38906,10 @@ nY
 zV
 rQ
 BI
-MI
-MI
-MI
-MI
+Vu
+OS
+OS
+Av
 BI
 zS
 AN

@@ -746,3 +746,10 @@
 	materials = list(MATERIAL_GOLD = 250, MATERIAL_DIAMOND = 250, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 1000, MATERIAL_ALUMINIUM = 1000)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/engine/ion
 	sort_string = "XAAAB"
+
+/datum/design/circuit/sublimator/sauna
+	name = "sauna heater system"
+	id = "sauna"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/sublimator/sauna
+	sort_string = "XAAAC"

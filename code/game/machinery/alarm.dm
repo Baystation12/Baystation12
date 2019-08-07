@@ -104,6 +104,9 @@
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
 
+/obj/machinery/alarm/warm
+	target_temperature = T0C+39
+
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
 
