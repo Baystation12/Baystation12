@@ -85,8 +85,8 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 
 /obj/machinery/computer/capture_node/proc/spawn_defenders()
 	var/list/defenders_spawn = DEFENDER_MOBS_BY_FACTION["[control_faction]"]
-		if(defenders_spawn.len == 0)
-			return
+	if(defenders_spawn.len == 0)
+		return
 	if(capture_npc_spawnlocs.len == 0)
 		for(var/i = 0,i < FALLBACK_MOBSPAWN_AMOUNT,i++)
 			var/to_spawn = pick(defenders_spawn)
