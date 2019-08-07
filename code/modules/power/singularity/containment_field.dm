@@ -52,7 +52,7 @@
 		user.electrocute_act(shock_damage, src)
 
 		var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
-		user.throw_at(target, 200, 4)
+		user.throw_at(target, 2, 4)
 
 		sleep(20)
 
