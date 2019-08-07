@@ -1,5 +1,6 @@
 GLOBAL_LIST_EMPTY(capture_nodes)
 #define DEFENDER_MOBS_BY_FACTION list("UNSC"=list(/mob/living/simple_animal/hostile/sentinel/defensedrone/UNSC),"Covenant"=list(/mob/living/simple_animal/hostile/sentinel/defensedrone/Covenant),"Insurrection"=list(/mob/living/simple_animal/hostile/sentinel/defensedrone/Innie))
+#define FALLBACK_MOBSPAWN_AMOUNT 4
 
 /obj/machinery/computer/capture_node
 	name = "Sovereignty Console"
@@ -82,6 +83,19 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 		for(var/datum/objective/colony_capture/O in F.all_objectives)
 			O.node_contested(src, control_faction, trigger_faction)
 
+/obj/machinery/computer/capture_node/proc/spawn_defenders()
+	var/list/defenders_spawn = DEFENDER_MOBS_BY_FACTION["[control_faction]"]
+		if(defenders_spawn.len == 0)
+			return
+	if(capture_npc_spawnlocs.len == 0)
+		for(var/i = 0,i < FALLBACK_MOBSPAWN_AMOUNT,i++)
+			var/to_spawn = pick(defenders_spawn)
+			new to_spawn (pick(view(7,src)))
+		return
+	for(var/turf/t in capture_npc_spawnlocs)
+		var/to_spawn = pick(defenders_spawn)
+		new to_spawn (t)
+
 /obj/machinery/computer/capture_node/proc/control_markers(var/owner_faction, var/trigger_faction)
 
 	var/area/A = get_area(src)
@@ -103,12 +117,7 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 
 	if(control_faction)
 		minor_announcement.Announce("[control_faction] has captured the [src]!",comms_from)
-	for(var/turf/t in capture_npc_spawnlocs)
-		var/list/defenders_spawn = DEFENDER_MOBS_BY_FACTION["[control_faction]"]
-		if(defenders_spawn.len == 0)
-			return
-		var/to_spawn = pick(defenders_spawn)
-		new to_spawn (t)
+	spawn_defenders()
 
 /obj/machinery/computer/capture_node/proc/reset_markers()
 	var/area/A = get_area(src)
