@@ -27,7 +27,6 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	. = ..()
 	for(var/obj/effect/landmark/npc_capturespawn_marker/marker in loc.loc.contents)
 		capture_npc_spawnlocs += marker.loc
-		qdel(marker)
 
 /obj/machinery/computer/capture_node/Destroy()
 	GLOB.capture_nodes.Remove(src)
