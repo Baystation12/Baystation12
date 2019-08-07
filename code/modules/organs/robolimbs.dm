@@ -164,12 +164,6 @@ var/datum/robolimb/basic_robolimb
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
-/datum/robolimb/thule
-	company = "Morpheus Thule"
-	desc = "This limb has a casing of sleek black metal and humanoid head design."
-	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_thule.dmi'
-	unavailable_at_fab = 1
-
 /datum/robolimb/mantis
 	company = "Morpheus Mantis"
 	desc = "This limb has a casing of sleek black metal and repulsive insectile design."
