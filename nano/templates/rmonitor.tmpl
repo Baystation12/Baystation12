@@ -1,0 +1,33 @@
+<style type="text/css">
+	table.wideTable   {
+		width:100%;
+	}
+</style>
+
+Reactor monitoring console #{{:data.id}}<br><br>
+Median temperature: {{:data.summarytemp}} K<br>
+{{:helper.displayBar(data.summarytemp, 0, 5000, (data.summarytemp <= 3000) ? 'good' : (data.summarytemp <= 4000) ? 'average' : 'bad')}}
+<br><br>
+<table class='wideTable'><tbody>
+	<tr><td>Name</td><td>NER</td><td>temperature</td></tr>
+	{{for data.rods}}
+		<tr>
+		<td>{{:value.name}}</td>
+		<td>
+		{{if value.broken}}
+			<span class='bad'>ERROR</span>
+		{{else}}
+			{{:value.rads}} MeV/kg
+		{{/if}}
+		</td>
+		<td>
+		{{if value.broken}}
+			<span class='bad'>ERROR</span>
+		{{else}}
+			{{:value.temp}} K
+		{{/if}}
+		</td>
+		</tr>
+	{{/for}}
+</tbody></table><br>
+

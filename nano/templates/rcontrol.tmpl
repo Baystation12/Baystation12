@@ -1,0 +1,30 @@
+<style type="text/css">
+	table.wideTable   {
+		width:100%;
+	}
+</style>
+
+Reactor control console #{{:data.id}}<br><br>
+{{:helper.link('set overall target length', '', { 'setall' : 1})}}<br>
+<table class='wideTable'><tbody>
+	<tr><td>Name</td><td>target length</td><td>length</td></tr>
+	{{for data.rods}}
+		<tr>
+		<td>{{:value.name}}</td>
+		<td>
+		{{if value.broken}}
+			<span class='bad'>ERROR</span>
+		{{else}}
+			{{:helper.link(value.targ, '', { 'settarg' : value.tag })}} meters
+		{{/if}}
+		</td>
+		<td>
+		{{if value.broken}}
+			<span class='bad'>ERROR</span>
+		{{else}}
+			{{:value.len}} meters
+		{{/if}}
+		</td>
+		</tr>
+	{{/for}}
+</tbody></table><br>
