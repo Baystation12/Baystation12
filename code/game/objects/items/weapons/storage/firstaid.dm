@@ -217,10 +217,8 @@
 		else
 			I.dropInto(loc)
 			to_chat(user, "<span class='notice'>You fumble around with \the [src] and drop \the [I] on the floor.</span>")
-		return
 	else
 		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
-		return
 
 
 /obj/item/weapon/storage/pill_bottle/Initialize()
