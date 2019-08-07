@@ -11,5 +11,4 @@
 
 /datum/npc_fleet/proc/assign_leader(var/leader)
 	leader_ship = leader
-	if(!(leader in ships_infleet))
-		ships_infleet += leader
+	ships_infleet |= leader
