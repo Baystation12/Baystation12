@@ -1134,14 +1134,18 @@ About the new airlock wires panel:
 			else
 				spawn(0)	close(1)
 
-			//if door is unbroken, but at half health or less, hit with fire axe using harm intent
-	else if (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !(stat & BROKEN) && (src.health <= src.maxhealth / 2) && user.a_intent == I_HURT)
+			//if door is unbroken, hit with fire axe using harm intent
+	else if (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
 		var/obj/item/weapon/material/twohanded/fireaxe/F = C
 		if (F.wielded)
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
-			user.visible_message("<span class='danger'>[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>", "<span class='danger'>You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>")
-			health = 0
-			set_broken(TRUE)
+			health -= F.force_wielded * 2
+			if(health <= 0)
+				user.visible_message(SPAN_DANGER("[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!"), SPAN_DANGER("You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!"))
+				health = 0
+				set_broken(TRUE)
+			else
+				user.visible_message(SPAN_DANGER("[user] smashes \the [C] into the airlock's control panel!"))
 		else
 			..()
 			return
