@@ -1,8 +1,6 @@
+var/global/nrods = list()
 
-var/list/nrods = list()
-
-
-/obj/machinery/power/nuclear_rod   //äåôàéí, ñîðü çà ñëèøêîì áîëüøîå ÷èñëî ñëîâà ßäåðíûé
+/obj/machinery/power/nuclear_rod // The main component of the reactor
 	name = "Nuclear rod"
 	desc = "A nuclear rod, that generates radiation, thermal energy and some problems ."
 	icon = 'icons/obj/machines/nuclearcore.dmi'
@@ -27,21 +25,18 @@ var/list/nrods = list()
 	var/obj/item/weapon/nuclearfuel/rod/F = null
 	var/list/possible_reactions = new /list(0)
 
-/obj/machinery/power/nuclear_rod/New()
+/obj/machinery/power/nuclear_rod/Initialize()
 	..()
 	nrods += src
-
 
 /obj/machinery/power/nuclear_rod/Destroy()
 	nrods -= src
 	return ..()
 
-
 /obj/machinery/power/nuclear_rod/examine(mob/user)
 	if (..(user, 3))
 		to_chat(user, "The thermometer placed on the rod indicates that \the [src] has the temperature of [rodtemp] K.")
 		return 1
-
 
 /obj/machinery/power/nuclear_rod/attack_hand(mob/user)   //Removing the assembly.
 	add_fingerprint(user)
@@ -50,7 +45,6 @@ var/list/nrods = list()
 		var/obj/item/weapon/nuclearfuel/rod/F = new(get_turf(src), reactants)
 		user.put_in_hands(F)
 		reactants = list()
-
 
 /obj/machinery/power/nuclear_rod/attackby(obj/item/weapon/W, mob/user)  //Interaction with tools
 	if(rodtemp < 2000)
@@ -77,8 +71,6 @@ var/list/nrods = list()
 					message_admins("[user] loaded [src] with [W]")
 					user.unEquip(W, src)
 
-
-
 			else if(isWrench(W))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				switch(anchored)
@@ -88,7 +80,7 @@ var/list/nrods = list()
 					if(0.0)
 						user.visible_message("<span class='notice'>[user] wrenched rod into place.</span>")
 						anchored = 1
-				return
+
 			else if(isWelder(W))
 				to_chat(user, "<span class='notice'>You are fixing the rod with [W].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
@@ -103,7 +95,6 @@ var/list/nrods = list()
 				if(new_name && user.Adjacent(src))
 					name = new_name
 
-
 		else
 			if(isWelder(W))
 				to_chat(user, "<span class='notice'>You are removing molten rod with [W].</span>")
@@ -112,9 +103,6 @@ var/list/nrods = list()
 					qdel(src)
 	else
 		to_chat(user, "<span class='notice'>Rod is too hot to operate.</span>")
-
-
-
 
 /obj/machinery/power/nuclear_rod/proc/check_state()   // Well, this is kinda ugly, but at least it works
 	if (rodtemp > 5000)
@@ -127,7 +115,6 @@ var/list/nrods = list()
 		reactants = list()
 		message_admins("[src] just molten down!")
 		own_rads = 2000
-
 
 /obj/machinery/power/nuclear_rod/Process()     // Here is main purpouse of the rod - heating and radiating.
 	React()
@@ -150,8 +137,6 @@ var/list/nrods = list()
 			rodtemp -= (rodtemp-chamb_temp) * ratio / thermaldecaycoeff
 		else
 			rodtemp += (chamb_temp - rodtemp) * ratio / 20
-
-
 	else
 		SSradiation.radiate(src, round (own_rads * sealcoeff))
 	own_rads = own_rads/raddecay*100
@@ -160,14 +145,11 @@ var/list/nrods = list()
 	if(reaction_rads > 5)
 		reaction_rads = reaction_rads/(rand(191,211))/(rodtemp + 500)*10000
 	check_state()
-	on_update_icon()
 	update_icon()
-
 
 /obj/machinery/power/nuclear_rod/on_update_icon()
 	if (broken == 1)
 		icon_state = "broken_rod"
-
 	else
 		if (sealed == 0)
 			if(!reactants.len)
@@ -185,15 +167,12 @@ var/list/nrods = list()
 		else
 			icon_state = "sealed_rod"
 
-
-
 /obj/machinery/power/nuclear_rod/proc/AddReact(var/name, var/quantity = 1)  //Just put reactants back in rod.
 	if(name in reactants)
 		reactants[name] += quantity
 	else
 		reactants.Add(name)
 		reactants[name] = quantity
-
 
 /obj/machinery/power/nuclear_rod/proc/React() //This proc is quite baggy, so not be suprised by some strange shit, that certanly WILL happen, if you do not fix it.
 	possible_reactions = list()
@@ -248,9 +227,6 @@ var/list/nrods = list()
 						rodtemp += amount_reacting * cur_reaction.heat_production * thermalkoeff/3
 					else
 						rodtemp += amount_reacting * cur_reaction.heat_production * thermalkoeff / 9
-		//	else
-			//	message_admins("[src] Pizdec")
-			//	rodtemp += 150
 
 			if(own_rads < 500) //Same as above, but with radiation.
 				own_rads += amount_reacting * cur_reaction.radiation * radkoeff
@@ -258,7 +234,8 @@ var/list/nrods = list()
 				own_rads += amount_reacting * cur_reaction.radiation * radkoeff/2
 			else if(own_rads < 7000)
 				own_rads += amount_reacting * cur_reaction.radiation * radkoeff/6
-			for(var/pr_reactant in cur_reaction.products)   //Well, this code is mostly copied from R-ust and chrmistry sub, you can look there for better explanations
+
+			for(var/pr_reactant in cur_reaction.products)   //Well, this code is mostly copied from R-ust and chemistry, so you can look there for better explanations
 				var/success = 0
 				for(var/check_reactant in produced_reactants)
 					if(check_reactant == pr_reactant)
@@ -271,4 +248,3 @@ var/list/nrods = list()
 		for(var/prreactant in produced_reactants)
 			AddReact(prreactant, produced_reactants[prreactant])  //Look at AddReact() for details
 	return 1
-
