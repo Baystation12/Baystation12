@@ -1,7 +1,7 @@
-/mob/living/simple_animal/possum
-	name = "possum"
-	real_name = "possum"
-	desc = "It's a possum, a small scavenging marsupial."
+/mob/living/simple_animal/opossum
+	name = "opossum"
+	real_name = "opossum"
+	desc = "It's an opossum, a small scavenging marsupial."
 	icon_state = "possum"
 	item_state = "possum"
 	icon_living = "possum"
@@ -33,7 +33,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 	var/is_angry = FALSE 
 
-/mob/living/simple_animal/possum/Life()
+/mob/living/simple_animal/opossum/Life()
 	. = ..()
 	if(. && !ckey && stat != DEAD && prob(1))
 		resting = (stat == UNCONSCIOUS)
@@ -50,17 +50,21 @@
 			is_angry = FALSE
 		update_icon()
 
-/mob/living/simple_animal/possum/adjustBruteLoss(damage)
+/mob/living/simple_animal/opossum/adjustBruteLoss(damage)
 	. = ..()
 	if(damage >= 3)
 		respond_to_damage()
 
-/mob/living/simple_animal/possum/adjustFireLoss(damage)
+/mob/living/simple_animal/opossum/adjustFireLoss(damage)
 	. = ..()
 	if(damage >= 3)
 		respond_to_damage()
 
-/mob/living/simple_animal/possum/proc/respond_to_damage()
+/mob/living/simple_animal/opossum/lay_down()
+	. = ..()
+	update_icon()
+
+/mob/living/simple_animal/opossum/proc/respond_to_damage()
 	if(!resting && stat == CONSCIOUS)
 		if(!is_angry)
 			is_angry = TRUE
@@ -70,7 +74,7 @@
 			custom_emote(src, "dies!")
 		update_icon()
 
-/mob/living/simple_animal/possum/on_update_icon()
+/mob/living/simple_animal/opossum/on_update_icon()
 	
 	if(stat == DEAD || (resting && is_angry))
 		icon_state = icon_dead
@@ -81,7 +85,7 @@
 	else
 		icon_state = icon_living
 
-/mob/living/simple_animal/possum/Initialize()
+/mob/living/simple_animal/opossum/Initialize()
 	. = ..()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
