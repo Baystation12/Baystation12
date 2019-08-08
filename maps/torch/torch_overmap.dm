@@ -3,8 +3,6 @@
 	fore_dir = WEST
 	vessel_mass = 100000
 	burn_delay = 2 SECONDS
-	start_x = 4
-	start_y = 5
 	base = TRUE
 
 	initial_restricted_waypoints = list(
@@ -49,7 +47,7 @@
 		"nav_deck2_calypso",
 		"nav_deck2_guppy",
 		"nav_deck2_aquila",
-		
+
 		//start Forth Deck
 		"nav_merc_deck4",
 		"nav_ninja_deck4",
