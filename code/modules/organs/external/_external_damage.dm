@@ -222,8 +222,9 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(owner) owner.update_body()
 
 /obj/item/organ/external/proc/unmutate()
-	src.status &= ~ORGAN_MUTATED
-	if(owner) owner.update_body()
+	if(!BP_IS_DEFORMED(src) && !BP_IS_ROBOTIC(src))
+		src.status &= ~ORGAN_MUTATED
+		if(owner) owner.update_body()
 
 // Pain/halloss
 /obj/item/organ/external/proc/get_pain()
