@@ -115,3 +115,23 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+/datum/species/human/booster
+	name = SPECIES_BOOSTER
+	name_plural = "Boosters"
+	description = "The self-proclaimed 'boosters' are a loosely affiliated group of bio-tinkers, \
+	engineers and radical philosophers dedicated to expanding the definition of what it means \
+	to be human. Conservatives frown on their excessive recklessness, and most booster habitats \
+	are found on the outskirts of systems - some even linger at the edge of human space.<br><br>The \
+	shared Booster genotype is extremely unstable and liable for rapid, apparently random change, \
+	but is certainly both unique and remarkable in its ability to cope with the extremes that the \
+	Universe can throw at it."
+
+/datum/species/human/booster/New()
+	..()
+	slowdown =      pick(-0.5, 0, 0.5)
+	brute_mod =     rand(0.85,1.15)
+	burn_mod =      rand(0.85,1.15)
+	toxins_mod =    rand(0.85,1.15)
+	radiation_mod = rand(0.85,1.15)
+	flash_mod =     rand(0.85,1.15)
