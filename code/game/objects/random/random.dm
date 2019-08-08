@@ -432,7 +432,7 @@ obj/random/closet //A couple of random closets to spice up maint
 	var/vermin_chance = 0.1
 	var/list/locker_vermin = list(
 		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/possum,
+		/mob/living/simple_animal/opossum,
 		/mob/living/carbon/alien/diona
 	)
 
