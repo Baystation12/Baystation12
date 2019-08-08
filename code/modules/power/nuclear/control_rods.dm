@@ -1,4 +1,4 @@
-var/list/control_rods = list()
+var/global/control_rods = list()
 
 /obj/machinery/control_rod  // Self-explanatory, keeps reaction stable
 	name = "Control rods"
@@ -19,7 +19,7 @@ var/list/control_rods = list()
 
 
 
-/obj/machinery/control_rod/New()
+/obj/machinery/control_rod/Initialize()
 	..()
 	control_rods += src
 
@@ -40,15 +40,18 @@ var/list/control_rods = list()
 			var/new_id = input("Enter a new ident tag.", "Control rod", id_tag) as null|text
 			if(new_id && user.Adjacent(src))
 				id_tag = new_id
+			var/new_name = input("Enter a new rod name. It'll be displayed in console.", "Control rod", name) as null|text
+			if(new_name && user.Adjacent(src))
+				name = new_name
 
 		else if(isWelder(W))
-			to_chat(user, "<span class='notice'>You are fixing the control rods with [W].</span>")
+			to_chat(user, "<span class='notice'>You are fixing the control rods with the [W].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 10, 1)
 			if(do_after(user, 40,src))
 				health = 100
 	else
 		if(isWelder(W))
-			to_chat(user, "<span class='notice'>You are removing that remained from the control rods [W].</span>")
+			to_chat(user, "<span class='notice'>You are removing that remained from the control rods with the [W].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 10, 1)
 			if(do_after(user, 20,src))
 				qdel(src)
@@ -70,18 +73,12 @@ var/list/control_rods = list()
 
 
 /obj/machinery/control_rod/Process()
-	update_state_of_rod()
 	move()
 	update_icon()
 	check()
-	rad_resistance = len * base_accp
-
-
-
-
+	rad_resistance_modifier = len * base_accp
 
 /obj/machinery/control_rod/proc/move()
-
 	if (len - 0.01 > target )
 		len -= speed
 		load = 20
@@ -91,35 +88,42 @@ var/list/control_rods = list()
 	else
 		load = 1
 
-//	else if (len == target)
-//	load = 0
-
-/obj/machinery/control_rod/proc/update_state_of_rod()
 	if(target > 4)
 		target = 4
 	if (target == 0 && len <= 0.1)
 		len = 0
+
 	if(health <= 0)
-		icon_state = "cr_broken"
 		len = 0
+		density = 1
 	else
 		switch(len)
 			if (-1 to 0.1)
-				icon_state = "cr_0"
 				density = 0
 			if (0.1 to 1)
-				icon_state = "cr_1"
 				density = 0
 			if (1 to 2)
-				icon_state = "cr_2"
 				density = 1
 			if (2 to 3)
-				icon_state = "cr_3"
 				density = 1
 			if (3 to 4.2)
-				icon_state = "cr_4"
 				density = 1
 
+/obj/machinery/control_rod/on_update_icon()
+	if(health <= 0)
+		icon_state = "cr_broken"
+	else
+		switch(len)
+			if (-1 to 0.2)
+				icon_state = "cr_0"
+			if (0.1 to 1)
+				icon_state = "cr_1"
+			if (1 to 2)
+				icon_state = "cr_2"
+			if (2 to 3)
+				icon_state = "cr_3"
+			if (3 to 4.2)
+				icon_state = "cr_4"
 
 /obj/machinery/control_rod/proc/check()
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -132,10 +136,3 @@ var/list/control_rods = list()
 		nocontrol = 1
 	if(nocontrol)
 		target = len
-
-
-
-/obj/machinery/control_rod/setup_control
-	base_accp = 200
-	len = 4
-	id_tag = "Chernobyl"
