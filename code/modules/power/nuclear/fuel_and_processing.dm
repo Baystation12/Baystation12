@@ -26,7 +26,6 @@
 	icon_state = "fabricator"
 	density = 1
 	anchored = 1
-	layer = 4
 	var/list/areactants = new /list(0)
 	var/list/buffer = new /list(0)
 	var/summarymass
@@ -202,7 +201,6 @@
 	icon_state = "centrifuge"
 	density = 1
 	anchored = 1
-	layer = 4
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 5000
