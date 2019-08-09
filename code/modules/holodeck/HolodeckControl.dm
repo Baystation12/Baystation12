@@ -166,6 +166,9 @@
 		if (last_to_emag)
 			C.friends = list(weakref(last_to_emag))
 
+	for(var/obj/machinery/optable/holo/H in linkedholodeck)
+		H.set_safety(!safety_disabled)
+
 //This could all be done better, but it works for now.
 /obj/machinery/computer/HolodeckControl/Destroy()
 	emergencyShutdown()
@@ -190,6 +193,11 @@
 			if (get_area(C.loc) != linkedholodeck)
 				holographic_mobs -= C
 				C.death()
+
+	for(var/mob/living/carbon/human/holo/H in holographic_mobs)
+		if (get_area(H.loc) != linkedholodeck)
+			holographic_mobs -= H
+			H.death()
 
 	if(!..())
 		return
@@ -304,6 +312,9 @@
 						T.hotspot_expose(50000,50000,1)
 			if(L.name=="Holocarp Spawn")
 				holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
+
+			if(L.name=="Patient Spawn")
+				holographic_mobs += new /mob/living/carbon/human/holo(L.loc)
 
 			if(L.name=="Holocarp Spawn Random")
 				if (prob(4)) //With 4 spawn points, carp should only appear 15% of the time.

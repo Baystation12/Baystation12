@@ -1470,6 +1470,9 @@
 	name = "\improper Holodeck - Plaza"
 	sound_env = SMALL_ENCLOSED
 
+/area/holodeck/source_operatingtheatre
+	name = "\improper Holodeck - Operating Theatre"
+
 // Engineering
 
 /area/engineering/atmos/storage

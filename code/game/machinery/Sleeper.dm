@@ -58,7 +58,7 @@
 					occupant.reagents.trans_to_obj(beaker, pump_speed)
 					pumped++
 				if(ishuman(occupant))
-					occupant.vessel.trans_to_obj(beaker, pumped + 1)
+					trans_to_beaker(occupant.vessel, beaker, pumped + 1)
 		else
 			toggle_filter()
 	if(pump > 0)
@@ -67,7 +67,7 @@
 				var/datum/reagents/ingested = occupant.get_ingested_reagents()
 				if(ingested)
 					for(var/datum/reagent/x in ingested.reagent_list)
-						ingested.trans_to_obj(beaker, pump_speed)
+						trans_to_beaker(ingested, beaker, pump_speed)
 		else
 			toggle_pump()
 
@@ -79,6 +79,9 @@
 
 /obj/machinery/sleeper/DefaultTopicState()
 	return GLOB.outside_state
+
+/obj/machinery/sleeper/proc/trans_to_beaker(var/datum/reagents/R, beaker, amount)
+	R.trans_to_obj(beaker, pump_speed)
 
 /obj/machinery/sleeper/interface_interact(var/mob/user)
 	ui_interact(user)

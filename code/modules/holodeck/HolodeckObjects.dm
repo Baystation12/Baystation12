@@ -41,6 +41,11 @@
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
 
+/turf/simulated/floor/holofloor/tiled/white
+	name = "white floor"
+	icon_state = "white"
+	initial_flooring = /decl/flooring/tiling/white
+
 /turf/simulated/floor/holofloor/tiled/dark
 	name = "dark floor"
 	icon_state = "dark"
@@ -424,6 +429,93 @@
 
 	for(var/mob/M in currentarea)
 		to_chat(M, "FIGHT!")
+
+// Holographic Surgery
+
+/obj/item/weapon/storage/firstaid/surgery/holo
+	holographic = TRUE
+
+/obj/item/weapon/storage/firstaid/surgery/holo/Initialize()
+	..()
+	for(var/obj/item/I in contents)
+		I.holographic = TRUE
+
+/obj/machinery/optable/holo
+	var/holo_safety = TRUE
+	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/obj/machinery/optable/holo/MouseDrop_T(mob/target, mob/user)
+	if(isholopatient(target,user) | !holo_safety)
+		..()
+
+/obj/machinery/optable/holo/proc/set_safety(var/safe)
+	holo_safety = safe
+
+/obj/machinery/sleeper/holo
+	construct_state = /decl/machine_construction/default/no_deconstruct
+	base_chemicals = list( // wider selection of free drugs for training purposes, because they will only work on holographic patients
+		"Inaprovaline" = /datum/reagent/inaprovaline,
+		"Dylovene" = /datum/reagent/dylovene,
+		"Soporific" = /datum/reagent/soporific,
+		"Paracetamol" = /datum/reagent/paracetamol,
+		"Tramadol" = /datum/reagent/tramadol,
+		"Dexalin Plus" = /datum/reagent/dexalinp,
+		"Hyrolanin" = /datum/reagent/hyronalin,
+		"Kelotane" = /datum/reagent/kelotane
+	)
+
+/obj/machinery/sleeper/holo/MouseDrop_T(var/mob/target, var/mob/user)
+	if(isholopatient(target,user)) // Never want real mobs in the holosleeper
+		..()
+
+/obj/machinery/sleeper/holo/trans_to_beaker(var/datum/reagents/R, beaker, amount)
+	R.trans_to_obj(beaker, pump_speed, 0) // don't want anything to actually be transferred to the beaker
+
+/obj/machinery/sleeper/holo/remove_beaker()
+	return
+
+/obj/machinery/body_scan_display/holo
+	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/obj/machinery/bodyscanner/holo
+	var/holo_safety = TRUE
+	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/obj/machinery/bodyscanner/holo/proc/set_safety(var/safe)
+	holo_safety = safe
+
+/obj/machinery/bodyscanner/holo/user_can_move_target_inside(var/mob/target, var/mob/user)
+	if(isholopatient(target,user) | !holo_safety)
+		..()
+
+/obj/machinery/body_scanconsole/holo
+	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/obj/machinery/computer/operating/holo
+	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/obj/machinery/atmospherics/unary/cryo_cell/holo
+	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/obj/machinery/atmospherics/unary/cryo_cell/holo/put_mob(mob/living/carbon/M as mob, var/mob/user)
+	if(isholopatient(M,user))
+		..()
+
+/obj/machinery/holopatient_spawner/holo
+	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/mob/living/carbon/human/holo
+
+/mob/living/carbon/human/holo/death()
+	..(null, "fades away!", "You have been destroyed.")
+	qdel(src)
+
+/proc/isholopatient(mob/living/carbon/M, /var/mob/user)
+	if(!istype(M,/mob/living/carbon/human/holo))
+		to_chat(user, SPAN_WARNING("\the [src] only accepts holographic patients."))
+		return FALSE
+	else
+		return TRUE
 
 //Holocarp
 
