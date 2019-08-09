@@ -8,4 +8,4 @@
 	P.set_enter_zs(TRUE)
 
 /obj/item/missile_equipment/payload/on_trigger()
-	qdel(in_missile)
+	qdel(loc)

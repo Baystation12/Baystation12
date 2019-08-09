@@ -16,9 +16,8 @@
 	icon = 'icons/obj/bigmissile.dmi'
 	icon_state = "base"
 
-	movable_flags = MOVABLE_FLAG_NO_PUSH
-
 	density = 1
+	w_class = ITEM_SIZE_HUGE
 	dir = WEST
 	does_spin = FALSE
 
@@ -50,8 +49,6 @@
 	for(var/i = 1; i <= LAZYLEN(equipment); i++)
 		var/path = equipment[i]
 		equipment[i] = new path(src)
-		var/obj/item/missile_equipment/E = equipment[i]
-		E.set_missile(src)
 
 	update_bounds()
 	update_icon()
@@ -60,8 +57,11 @@
 	. = ..()
 
 	walk(src, 0)
-	QDEL_NULL(overmap_missile)
 	QDEL_NULL_LIST(equipment)
+
+	if(!QDELETED(overmap_missile))
+		QDEL_NULL(overmap_missile)
+	overmap_missile = null
 
 /obj/structure/missile/Move()
 	. = ..()
@@ -116,12 +116,9 @@
 
 	if(maintenance_hatch_open)
 		if(istype(I, /obj/item/missile_equipment))
-			var/obj/item/missile_equipment/E = I
-
 			if(!user.unEquip(I, src))
 				return
 			equipment += I
-			E.set_missile(src)
 			to_chat(user, "You install \the [I] into \the [src].")
 
 			update_icon()
@@ -133,7 +130,6 @@
 				to_chat(user, "You remove \the [removed_component] from \the [src].")
 				user.put_in_hands(removed_component)
 				equipment -= removed_component
-				removed_component.set_missile(null)
 
 				update_icon()
 			return
@@ -185,9 +181,9 @@
 	// prevent the missile from moving on the overmap
 	overmap_missile.set_moving(FALSE)
 
-	var/heading = overmap_missile.get_heading()
+	var/heading = overmap_missile.dir
 	if(!heading)
-		heading = EAST // To prevent the missile from popping into the middle of the map and sitting there
+		heading = random_dir() // To prevent the missile from popping into the middle of the map and sitting there
 
 	var/start_x = 0
 	var/start_y = 0
@@ -212,6 +208,11 @@
 		log_and_message_admins("A dangerous missile has entered z level [z_level] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	forceMove(start)
 
+	// if we enter into a dense place, just detonate immediately
+	if(start.contains_dense_objects())
+		detonate()
+		return
+
 	// let missile equipment decide a target
 	var/list/goal_coords = null
 	for(var/obj/item/missile_equipment/E in equipment)
@@ -219,11 +220,6 @@
 		if(coords)
 			goal_coords = coords
 			break
-
-	// if we enter into a dense place, just detonate immediately
-	if(start.contains_dense_objects())
-		detonate()
-		return
 
 	// if a piece of equipment gave us a target, move towards that
 	if(!isnull(goal_coords))

@@ -7,11 +7,6 @@
 	var/next_work = 0
 	var/cooldown = 10
 
-	var/obj/structure/missile/in_missile = null
-
-/obj/item/missile_equipment/proc/set_missile(var/obj/structure/missile/M)
-	in_missile = M
-
 // Called when the missile containing this equipment is activated
 /obj/item/missile_equipment/proc/on_missile_activated(var/obj/effect/overmap/projectile/P)
 	return

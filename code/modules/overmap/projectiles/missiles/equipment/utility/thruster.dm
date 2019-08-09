@@ -9,7 +9,8 @@
 	var/atom/target
 	var/fuel = 60 // how many times can the engine do work until its out of fuel
 	var/max_fuel = 100
-	var/thrust = 0.0005
+	var/speed = 0
+	var/min_speed = 50 // slightly misleading. this is the amount of ticks between each step, so higher min speed => slower initial speed
 
 /obj/item/missile_equipment/thruster/do_overmap_work(var/obj/effect/overmap/projectile/P)
 	if(!..() || isnull(target) || !fuel)
@@ -17,50 +18,13 @@
 
 	var/turf/T = get_turf(target)
 
-	// Find the direct heading towards the target
-	var/list/heading = list(0,0)
-	if(T.x > P.x)
-		heading[1] = 1
-	else if(T.x < P.x)
-		heading[1] = -1
+	// The missile has arrived or it ran out of fuel. Stop it from moving further
+	if(P.loc == T || !fuel)
+		P.move_to(null)
 
-	if(T.y > P.y)
-		heading[2] = 1
-	else if(T.y < P.y)
-		heading[2] = -1
-
-	var/heading_length = sqrt(heading[1]**2 + heading[2]**2)
-
-	// This means we're at the target location
-	if(heading_length == 0)
-		P.set_velocity(0, 0)
-		return 1
-
-	var/list/normalized_heading = list(heading[1] / heading_length, heading[2] / heading_length)
-
-	var/list/old_heading = list(0,0)
-	var/heading_flag = P.get_heading()
-	if(heading_flag & WEST)
-		old_heading[1] = -1
-	else if(heading_flag & EAST)
-		old_heading[1] = 1
-
-	if(heading_flag & NORTH)
-		old_heading[2] = 1
-	else if(heading_flag & SOUTH)
-		old_heading[2] = -1
-
-	var/speed = P.get_speed()
-	// If the missile isn't moving, kick it off
-	if(speed == 0)
-		speed = 0.005
-
-	// the missile accelerates whenever it's going in a straight line
-	if(old_heading[1] == heading[1] && old_heading[2] == heading[2])
-		speed += thrust
-
-	P.set_velocity(normalized_heading[1] * speed, normalized_heading[2] * speed)
+	speed = min(min_speed, speed+1)
 	fuel--
+	P.move_to(T, min_speed, speed)
 	return 1
 
 /obj/item/missile_equipment/thruster/should_enter(var/obj/effect/overmap/O)
@@ -116,7 +80,6 @@
 	icon_state = "seeker"
 
 	fuel = 40
-	thrust = 0.01
 
 /obj/item/missile_equipment/thruster/hunter/is_target_valid(var/obj/effect/overmap/O)
 	return istype(O, /obj/effect/overmap/projectile)
@@ -126,8 +89,6 @@
 	name = "pointman missile booster"
 	desc = "A missile booster designed to travel to and rest at a given point. Steers away from structures."
 	icon_state = "dumbfire"
-
-	thrust = 0.0005
 
 /obj/item/missile_equipment/thruster/point/attackby(var/obj/item/I, var/mob/user)
 	if(isMultitool(I))
@@ -148,6 +109,10 @@
 
 	..()
 
+/*
+ *
+ */
+
 /obj/item/missile_equipment/thruster/planet
 	name = "planetary missile booster"
 	desc = "The standard fare missile booster, but with planetary flight capabilities."
@@ -160,6 +125,10 @@
 
 // Immediately move the missile to the target on arrival
 /obj/item/missile_equipment/thruster/planet/on_enter_level(var/z_level)
+	var/obj/structure/missile/M = loc
+	if(!istype(M))
+		return
+
 	if(z_level == planetary_target.z)
 		// Effectively apply a small random offset from the target
 		var/turf/impact_turf = planetary_target
@@ -168,8 +137,8 @@
 				impact_turf = T
 				break
 
-		in_missile.forceMove(impact_turf)
-		in_missile.detonate(impact_turf)
+		M.forceMove(impact_turf)
+		M.detonate(impact_turf)
 
 	return null
 

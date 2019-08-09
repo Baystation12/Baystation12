@@ -5,7 +5,13 @@
 	icon_state = "passenger"
 
 	var/hatch_open = FALSE
-	var/mob/passenger
+
+/obj/item/missile_equipment/passenger/proc/get_passenger()
+	var/mob/passenger = null
+	for(var/mob/M in src)
+		passenger = M
+		break
+	return passenger
 
 /obj/item/missile_equipment/passenger/MouseDrop_T(var/mob/target, var/mob/user)
 	if(!ismob(target))
@@ -18,7 +24,6 @@
 		return
 
 	user.show_viewers(SPAN_DANGER("[user] stuffs [target] into \the [src]!"))
-	passenger = target
 	target.forceMove(src)
 
 /obj/item/missile_equipment/passenger/relaymove(var/mob/user)
@@ -31,7 +36,7 @@
 		return
 
 	to_chat(user, SPAN_WARNING("You break out of the passenger compartment!"))
-	passenger.forceMove(T)
+	user.forceMove(T)
 
 /obj/item/missile_equipment/passenger/attackby(var/obj/item/I, var/mob/user)
 	if(isCrowbar(I))
@@ -50,7 +55,11 @@
 	close_hatch()
 
 /obj/item/missile_equipment/passenger/on_touch_map_edge(var/obj/effect/overmap/projectile/P)
-	if(!in_missile.active)
+	var/obj/structure/missile/M = loc
+	if(!istype(M))
+		return
+
+	if(!M.active)
 		eject_passenger()
 	close_hatch()
 
@@ -58,16 +67,25 @@
 	eject_passenger()
 
 /obj/item/missile_equipment/passenger/proc/open_hatch()
+	var/mob/passenger = get_passenger()
+	if(isnull(passenger))
+		return
+
 	hatch_open = TRUE
 	if(!isnull(passenger))
 		to_chat(passenger, SPAN_NOTICE("You hear a sharp hiss as the entrance hatch swings open."))
 
 /obj/item/missile_equipment/passenger/proc/close_hatch()
+	var/mob/passenger = get_passenger()
+	if(isnull(passenger))
+		return
+
 	hatch_open = FALSE
 	if(!isnull(passenger))
 		to_chat(passenger, SPAN_NOTICE("The entrance hatch snaps shut and seals tightly."))
 
 /obj/item/missile_equipment/passenger/proc/eject_passenger()
+	var/mob/passenger = get_passenger()
 	if(isnull(passenger))
 		return
 

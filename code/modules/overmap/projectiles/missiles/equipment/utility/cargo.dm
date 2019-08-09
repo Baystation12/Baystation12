@@ -38,8 +38,13 @@
 	P.set_enter_zs(TRUE)
 
 /obj/item/missile_equipment/cargo/on_touch_map_edge(var/obj/effect/overmap/projectile/P)
-	if(!in_missile.active)
-		eject_cargo()
+	var/obj/structure/missile/M = loc
+	if(!istype(M))
+		return
+
+	if(!M.active)
+		for(var/obj/item/I in contents)
+			qdel(I)
 
 /obj/item/missile_equipment/cargo/on_trigger()
 	eject_cargo()

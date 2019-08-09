@@ -13,20 +13,30 @@
 /obj/item/missile_equipment/sensor/Initialize()
 	. = ..()
 	cell = new(src)
+	GLOB.destroyed_event.register(cell, src, .proc/cell_qdel)
 
+/obj/item/missile_equipment/sensor/proc/cell_qdel()
+	GLOB.destroyed_event.unregister(cell, src)
+	cell = null
+
+/obj/item/missile_equipment/sensor/Destroy()
+	. = ..()
+	GLOB.destroyed_event.unregister(cell, src)
+	QDEL_NULL(cell)
 
 /obj/item/missile_equipment/sensor/attackby(var/obj/item/I, var/mob/user)
 	if(isScrewdriver(I) && !isnull(cell))
 		user.put_in_hands(cell)
 		to_chat(user, SPAN_NOTICE("You remove \the [cell] from \the [src]."))
 		cell = null
+		return
 
 	if(istype(I, /obj/item/weapon/cell) && isnull(cell))
 		if(!user.unEquip(I, src))
 			return
 		cell = I
 		to_chat(user, SPAN_NOTICE("You install \the [cell] into \the [src]."))
-	return
+		return
 
 	..()
 
@@ -40,6 +50,6 @@
 
 	if(isnull(cell) || !cell.checked_use(power_draw*sensor_range*CELLRATE))
 		P.set_light(0)
-		qdel(in_missile)
+		qdel(loc)
 
 	P.set_light(1, sensor_range, sensor_range+1)

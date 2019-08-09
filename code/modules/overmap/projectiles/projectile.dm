@@ -3,12 +3,10 @@
 	icon_state = "projectile"
 	sector_flags = OVERMAP_SECTOR_KNOWN // technically in space, but you can't visit the missile during its flight
 
-	var/list/velocity = list(0,0)
-	var/list/last_movement = list(0,0)
-
 	var/obj/structure/missile/actual_missile = null
 
-	var/moving = FALSE
+	var/walking = FALSE // walking towards something on the overmap?
+	var/moving = FALSE // is the missile moving on the overmap?
 	var/dangerous = FALSE
 	var/should_enter_zs = FALSE
 
@@ -20,7 +18,10 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/overmap/projectile/Destroy()
+	if(!QDELETED(actual_missile))
+		QDEL_NULL(actual_missile)
 	actual_missile = null
+
 	. = ..()
 
 /obj/effect/overmap/projectile/Bump(var/atom/A)
@@ -41,39 +42,26 @@
 /obj/effect/overmap/projectile/proc/set_enter_zs(var/enter_zs)
 	should_enter_zs = enter_zs
 
-/obj/effect/overmap/projectile/proc/set_velocity(var/vx, var/vy)
-	velocity[1] = vx
-	velocity[2] = vy
-
-/obj/effect/overmap/projectile/proc/get_speed()
-	return sqrt(velocity[1] ** 2 + velocity[2] ** 2)
-
-/obj/effect/overmap/projectile/proc/get_heading()
-	var/res = 0
-	if(velocity[1])
-		if(velocity[1] > 0)
-			res |= EAST
-		else
-			res |= WEST
-	if(velocity[2])
-		if(velocity[2] > 0)
-			res |= NORTH
-		else
-			res |= SOUTH
-	return res
-
-/obj/effect/overmap/projectile/proc/is_moving()
-	return (velocity[1] != 0 || velocity[2] != 0)
-
 /obj/effect/overmap/projectile/get_scan_data(mob/user)
 	. = ..()
-	. += "<br>[is_moving() ? "Heading: [dir2angle(get_heading())]deg, speed [get_speed() * 1000]" : "Not in motion"]"
+	. += "<br>General purpose projectile frame"
 	. += "<br>Additional information:<br>[get_additional_info()]"
 
 /obj/effect/overmap/projectile/proc/get_additional_info()
 	if(actual_missile)
 		return actual_missile.get_additional_info()
 	return "N/A"
+
+/obj/effect/overmap/projectile/proc/move_to(var/datum/target, var/min_speed, var/speed)
+	if(isnull(target) || !speed)
+		walk(src, 0)
+		walking = FALSE
+		update_icon()
+		return
+
+	walk_towards(src, target, min_speed - speed)
+	walking = TRUE
+	update_icon()
 
 /obj/effect/overmap/projectile/Process()
 	// Whether overmap movement occurs is controlled by the missile itself
@@ -85,17 +73,6 @@
 	// let equipment alter speed/course
 	for(var/obj/item/missile_equipment/E in actual_missile.equipment)
 		E.do_overmap_work(src)
-
-	var/list/deltas = list(0,0)
-	for(var/i=1, i<=2, i++)
-		if(velocity[i] && world.time > last_movement[i] + 1/abs(velocity[i]))
-			deltas[i] = SIGN(velocity[i])
-			last_movement[i] = world.time
-
-	if(deltas[1] != 0 || deltas[2] != 0)
-		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
-		if(newloc)
-			Move(newloc)
 
 	update_icon()
 
@@ -129,7 +106,7 @@
 	// Default behavior, just enter the first thing in space we encounter
 	if(!total_votes)
 		// Must be in motion for this to happen
-		if(velocity[1] == 0 && velocity[2] == 0)
+		if(!walking)
 			return
 
 		for(var/obj/effect/overmap/O in potential_levels)
@@ -143,9 +120,8 @@
 		actual_missile.enter_level(pick(winner.map_z))
 
 /obj/effect/overmap/projectile/on_update_icon()
-	dir = get_heading()
 	icon_state = "projectile"
-	if(is_moving())
+	if(walking)
 		icon_state += "_moving"
 
 	if(dangerous)

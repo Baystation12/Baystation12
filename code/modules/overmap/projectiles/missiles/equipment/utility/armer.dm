@@ -4,5 +4,9 @@
 	desc = "A system that automatically arms missiles."
 
 /obj/item/missile_equipment/autoarm/on_touch_map_edge(var/obj/effect/overmap/projectile/P)
-	if(!in_missile.active)
-		in_missile.activate()
+	var/obj/structure/missile/M = loc
+	if(!istype(M))
+		return
+
+	if(!M.active)
+		M.activate()
