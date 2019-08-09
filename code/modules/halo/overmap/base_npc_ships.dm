@@ -187,7 +187,7 @@
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
 			return ..()
-		if(loc == target_loc)
+		if(loc == target_loc || (our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != 0))
 			pick_target_loc()
 		else
 
