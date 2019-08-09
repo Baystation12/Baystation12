@@ -75,7 +75,7 @@
 		if(isnull(their_faction))
 			faction_name = ship.nav_comp.get_faction()
 		else
-			their_faction.name
+			faction_name = their_faction.name
 		if(isnull(my_faction) || isnull(faction_name))
 			continue
 		if(faction_name in my_faction.enemy_factions)
