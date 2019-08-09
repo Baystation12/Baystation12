@@ -71,9 +71,14 @@
 
 		//check if they're a hostile faction
 		var/datum/faction/their_faction = ship.my_faction
+		var/faction_name
 		if(isnull(their_faction))
+			faction_name = ship.get_faction()
+		else
+			faction_name = their_faction.name
+		if(isnull(my_faction) || isnull(faction_name))
 			continue
-		if(their_faction.name in my_faction.enemy_factions)
+		if(faction_name in my_faction.enemy_factions)
 			targets += ship
 
 	if(targets.len > 0)
@@ -124,7 +129,7 @@
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/prowler.dmi','code/modules/halo/icons/overmap/corvette.dmi')
 	faction = "UNSC"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
-	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc)
+	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc,/datum/npc_ship_request/control_fleet/unsc,/datum/npc_ship_request/add_to_fleet/unsc,/datum/npc_ship_request/give_control/unsc)
 	radio_channel = "FLEETCOM"
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/generate_ship_name()
@@ -142,7 +147,7 @@
 	icon = 'code/modules/halo/icons/overmap/innie_prowler.dmi'
 	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
-	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie)
+	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie,/datum/npc_ship_request/control_fleet/innie,/datum/npc_ship_request/add_to_fleet/innie,/datum/npc_ship_request/give_control/innie)
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/New()
 	. = ..()
@@ -180,7 +185,7 @@
 	radio_language = "Sangheili"
 	radio_channel = "Battlenet"
 	ship_datums = list(/datum/npc_ship/cov_patrol)
-	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov)
+	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov,/datum/npc_ship_request/control_fleet/cov,/datum/npc_ship_request/add_to_fleet/cov,/datum/npc_ship_request/give_control/cov)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.3 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)

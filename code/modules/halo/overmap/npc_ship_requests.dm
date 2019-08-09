@@ -103,7 +103,7 @@
 /datum/npc_ship_request/halt_fake/do_request(var/obj/effect/overmap/ship/npc_ship/combat/ship_source,var/mob/requester)
 	ship_source.radio_message("Slowing dow- DIE UNSC SCUM! FOR THE URF!", 1)
 	for(var/obj/effect/overmap/ship/npc_ship/combat/innie/ship in view(7,src))
-		ship_source.radio_message("FOR THE URF!", 1)
+		ship.radio_message("FOR THE URF!", 1)
 		ship.target = map_sectors["[requester.z]"]
 	ship_source.target = map_sectors["[requester.z]"]
 	. = ..()
@@ -155,3 +155,63 @@
 	return 1
 
 #undef BASE_CARGO_STAY_TIME
+
+
+/datum/npc_ship_request/control_fleet
+	request_name = "Assume Fleet Control"
+	request_auth_levels = list()
+
+/datum/npc_ship_request/control_fleet/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
+	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
+	if(!origin_ship || !istype(origin_ship))
+		return
+	ship_source.our_fleet.assign_leader(origin_ship)
+
+/datum/npc_ship_request/add_to_fleet
+	request_name = "Add To Fleet"
+	request_auth_levels = list()
+
+/datum/npc_ship_request/add_to_fleet/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
+	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
+	if(!origin_ship || !istype(origin_ship) || !origin_ship.our_fleet)
+		return
+	origin_ship.our_fleet.add_tofleet(ship_source)
+
+/datum/npc_ship_request/give_control
+	request_name = "Give Fleet Control"
+	request_auth_levels = list()
+
+/datum/npc_ship_request/give_control/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
+	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
+	if(!origin_ship || !istype(origin_ship) || !origin_ship.our_fleet)
+		return
+	ship_source.our_fleet = origin_ship.our_fleet
+	origin_ship.our_fleet = new /datum/npc_fleet (origin_ship)
+	ship_source.our_fleet.assign_leader(ship_source)
+
+/datum/npc_ship_request/control_fleet/unsc
+	request_auth_levels = list(AUTHORITY_LEVEL_UNSC, AUTHORITY_LEVEL_ONI)
+
+/datum/npc_ship_request/control_fleet/innie
+	request_auth_levels = list(AUTHORITY_LEVEL_INNIE)
+
+/datum/npc_ship_request/control_fleet/cov
+	request_auth_levels = list(AUTHORITY_LEVEL_COV)
+
+/datum/npc_ship_request/add_to_fleet/unsc
+	request_auth_levels = list(AUTHORITY_LEVEL_UNSC, AUTHORITY_LEVEL_ONI)
+
+/datum/npc_ship_request/add_to_fleet/innie
+	request_auth_levels = list(AUTHORITY_LEVEL_INNIE)
+
+/datum/npc_ship_request/add_to_fleet/cov
+	request_auth_levels = list(AUTHORITY_LEVEL_COV)
+
+/datum/npc_ship_request/give_control/unsc
+	request_auth_levels = list(AUTHORITY_LEVEL_UNSC, AUTHORITY_LEVEL_ONI)
+
+/datum/npc_ship_request/give_control/innie
+	request_auth_levels = list(AUTHORITY_LEVEL_INNIE)
+
+/datum/npc_ship_request/give_control/cov
+	request_auth_levels = list(AUTHORITY_LEVEL_COV)

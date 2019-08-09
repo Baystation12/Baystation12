@@ -23,6 +23,8 @@
 
 #define LIGHTRANGE_LIKELY_UNUSED 99
 
+#define FLEET_STICKBY_RANGE 2 //The max range a fleet-bound ship will stay from the fleet leader.
+
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
 	desc = "A ship, Duh."
@@ -68,6 +70,7 @@
 	name = pick(ship_name_list)
 
 /obj/effect/overmap/ship/npc_ship/Initialize()
+	my_faction = GLOB.factions_by_name[get_faction()]
 	generate_ship_name()
 	pick_ship_icon()
 	var/turf/start_turf = locate(x,y,z)
@@ -150,6 +153,9 @@
 	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
+	if(our_fleet && our_fleet.leader_ship != src)
+		target_loc = pick(range(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
+		return
 	var/list/sectors_onmap = list()
 	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
 		var/obj/effect/overmap/om_obj = locate(type)
@@ -182,7 +188,7 @@
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
 			return ..()
-		if(loc == target_loc)
+		if(loc == target_loc || (our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != 0))
 			pick_target_loc()
 		else
 
