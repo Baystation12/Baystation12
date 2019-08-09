@@ -18,6 +18,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 #define DECONSTRUCTOR_TROOPS_REQUIRED list(2,1,2,0)
 #define REINFORCEMENT_TROOPS_REQUIRED list(0,2,1,1) //Send at least one of everything as reinforcements, if we can.
 
+#define RADIO_COMMS_DELAY 5 SECONDS
+
 /datum/npc_report
 	var/report_type = REPORT_CONTACT
 	var/mob/living/simple_animal/hostile/reporter_mob = null
@@ -41,6 +43,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 /datum/npc_overmind
 
 	var/overmind_active = 0
+	var/overmind_name = "Overmind"
 
 	//Typepaths to mob-types of different categories.
 	var/constructor_types = list()
@@ -59,6 +62,18 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	var/list/taskpoints = list() //List of taskpoints available (currently aka Assault markers) format: taskpoint = timecreated
 
 	var/form_squad_searchrange = SQUADFORM_SEARCHRANGE
+
+	var/comms_channel = null
+	var/comms_language = "Galactic Common"
+	var/next_comms_at = 0
+
+/datum/npc_overmind/proc/create_comms_message(var/message,var/override = 0)
+	if(isnull(comms_channel))
+		return
+	if(!override && world.time < next_comms_at)
+		return
+	GLOB.global_headset.autosay(message, overmind_name, comms_channel, comms_language)
+	next_comms_at = world.time + RADIO_COMMS_DELAY
 
 /datum/npc_overmind/proc/create_report(var/report_type,var/mob/reporter,var/target_num = null,var/report_targ = null,var/reporter_assault_point = null,var/reporter_loc)
 	reports += new /datum/npc_report (report_type,reporter,report_targ,target_num,reporter_assault_point)
@@ -154,7 +169,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 		if(taskpoint_exists_for_loc(report.reporter_mob.target_mob.loc))
 			return
 		else
-			var/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
+			var/obj/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
+			create_comms_message("Hostile Contact at [taskpoint.loc.loc]. Engaging.")
 			create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
 
 /datum/npc_overmind/proc/process_casualty_report(var/datum/npc_report/report)
@@ -166,7 +182,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	if(isnull(valid_squadmembers) || valid_squadmembers.len == 0)
 		squad_assigned.Cut()
 		return
-	var/reporter_taskpoint = create_taskpoint(report.reporter_loc)
+	var/obj/reporter_taskpoint = create_taskpoint(report.reporter_loc)
+	create_comms_message("Taking casualties at [reporter_taskpoint.loc.loc].")
 	create_taskpoint_assign(pick(valid_squadmembers),reporter_taskpoint,"reinforcement",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE),form_squad_searchrange*3)
 	update_taskpoint_timeout(report.reporter_assault_point)
 	update_taskpoint_timeout(reporter_taskpoint)
@@ -178,7 +195,6 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 				process_contact_report(report)
 			if(REPORT_CASUALTY)
 				process_casualty_report(report)
-				//TODO: CASUALTY REPORTING AND SQUAD REINFORCEMENT
 			//if(REPORT_DECONSTRUCT)
 				//TODO: DECONSTRUCT DISPATCH (Door break-open, weld-smash etc.)
 			//if(REPORT_CONSTRUCT)
@@ -237,6 +253,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 		GLOB.processing_objects -= src
 
 /datum/npc_overmind/flood
+	overmind_name = "Gravemind"
 	constructor_types = list(/mob/living/simple_animal/hostile/flood/infestor)
 	combat_types = list(/mob/living/simple_animal/hostile/flood/combat_form)
 	support_types = list(/mob/living/simple_animal/hostile/flood/infestor,/mob/living/simple_animal/hostile/flood/carrier)
