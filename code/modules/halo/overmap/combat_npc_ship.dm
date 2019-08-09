@@ -72,7 +72,7 @@
 		//check if they're a hostile faction
 		var/datum/faction/their_faction = ship.my_faction
 		var/faction_name
-		if(isnull(their_faction)
+		if(isnull(their_faction))
 			faction_name = ship.nav_comp.get_faction()
 		else
 			their_faction.name
