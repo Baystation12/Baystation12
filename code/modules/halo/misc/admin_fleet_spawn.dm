@@ -1,4 +1,4 @@
-#define FACTION_NPC_SHIPS list("UNSC","COVENANT","INSURRECTIONIST","FLOOD")
+#define FACTION_NPC_SHIPS list("UNSC" = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed),"COVENANT" = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed),"INSURRECTIONIST" = list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed),"FLOOD" = list(/obj/effect/overmap/ship/npc_ship/combat/flood))
 
 
 /datum/admin_secret_item/fun_secret/spawn_fleet
