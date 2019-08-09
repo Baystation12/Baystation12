@@ -1380,9 +1380,9 @@
 	if(!current_limb || !S || !U)
 		return
 
-	var/fail_prob = skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
+	var/fail_prob = U.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
 	if(self)
-		fail_prob += skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
+		fail_prob += U.skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
 	var/datum/gender/T = gender_datums[get_gender()]
 	if(prob(fail_prob))
 		visible_message( \
