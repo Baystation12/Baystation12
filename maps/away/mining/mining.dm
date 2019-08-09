@@ -15,8 +15,6 @@
 		"nav_cluster_7"
 	)
 	known = 0
-	start_x = 4
-	start_y = 5
 
 /datum/map_template/ruin/away_site/mining_asteroid
 	name = "Mining - Asteroid"
@@ -25,7 +23,6 @@
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
 	accessibility_weight = 10
-	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
 	apc_test_exempt_areas = list(
 		/area/outpost/abandoned = NO_SCRUBBER,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
