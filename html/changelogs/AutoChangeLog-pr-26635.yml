@@ -1,0 +1,4 @@
+author: "Bxil"
+delete-after: True
+changes: 
+  - rscdel: "The asteroid will no longer spawn at the Torch every round."
