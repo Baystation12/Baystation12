@@ -71,9 +71,14 @@
 
 		//check if they're a hostile faction
 		var/datum/faction/their_faction = ship.my_faction
-		if(isnull(their_faction) || isnull(my_faction))
+		var/faction_name
+		if(isnull(their_faction)
+			faction_name = ship.nav_comp.get_faction()
+		else
+			their_faction.name
+		if(isnull(my_faction) || isnull(faction_name))
 			continue
-		if(their_faction.name in my_faction.enemy_factions)
+		if(faction_name in my_faction.enemy_factions)
 			targets += ship
 
 	if(targets.len > 0)
