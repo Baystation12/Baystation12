@@ -6,6 +6,7 @@ GLOBAL_DATUM_INIT(UNSC, /datum/faction/unsc, new /datum/faction/unsc())
 GLOBAL_DATUM_INIT(COVENANT, /datum/faction/covenant, new /datum/faction/covenant())
 GLOBAL_DATUM_INIT(INSURRECTION, /datum/faction/insurrection, new /datum/faction/insurrection())
 GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_civ())
+GLOBAL_DATUM_INIT(FLOOD, /datum/faction/flood, new /datum/faction/flood())
 /*
 /hook/startup/proc/generate_factions()
 	if(!GLOB.all_factions.len)

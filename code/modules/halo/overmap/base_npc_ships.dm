@@ -188,13 +188,14 @@
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
 			return ..()
-		if(loc == target_loc || (our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != 0))
+		if(loc == target_loc)
 			pick_target_loc()
 		else
-
 			walk(src,get_dir(src,target_loc),move_delay)
 			dir = get_dir(src,target_loc)
 			is_still() //A way to ensure umbilicals break when we move.
+			if(our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != null)
+				pick_target_loc()
 	else
 		if(is_player_controlled())
 			. = ..()
