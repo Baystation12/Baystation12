@@ -1574,6 +1574,7 @@
 #include "code\modules\halo\misc\oni_cryopod.dm"
 #include "code\modules\halo\misc\Orion Project.dm"
 #include "code\modules\halo\misc\payload.dm"
+#include "code\modules\halo\misc\placeholder_capture_mobs.dm"
 #include "code\modules\halo\misc\scrap.dm"
 #include "code\modules\halo\misc\ship_cap_ghost_role.dm"
 #include "code\modules\halo\misc\simple_mob_ai.dm"
