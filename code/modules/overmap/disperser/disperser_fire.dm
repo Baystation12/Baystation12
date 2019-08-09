@@ -94,9 +94,7 @@
 	return TRUE
 
 /obj/machinery/computer/ship/disperser/proc/fire_at_event(obj/effect/overmap_event/finaltarget, chargetype)
-	var/list/events_by_turf = overmap_event_handler.get_event_turfs_by_z_level(linked.z)
-	var/datum/overmap_event/tokill = events_by_turf[get_turf(finaltarget)]
-	if(chargetype & tokill.weaknesses)
+	if(chargetype & finaltarget.weaknesses)
 		qdel(finaltarget)
 
 /obj/machinery/computer/ship/disperser/proc/fire_at_sector(obj/effect/overmap/finaltarget, obj/structure/ship_munition/disperser_charge/charge, chargetype)
