@@ -70,6 +70,7 @@
 	name = pick(ship_name_list)
 
 /obj/effect/overmap/ship/npc_ship/Initialize()
+	my_faction = GLOB.factions_by_name[get_faction()]
 	generate_ship_name()
 	pick_ship_icon()
 	var/turf/start_turf = locate(x,y,z)

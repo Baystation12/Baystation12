@@ -73,7 +73,7 @@
 		var/datum/faction/their_faction = ship.my_faction
 		var/faction_name
 		if(isnull(their_faction))
-			faction_name = ship.nav_comp.get_faction()
+			faction_name = ship.get_faction()
 		else
 			faction_name = their_faction.name
 		if(isnull(my_faction) || isnull(faction_name))
