@@ -11,13 +11,13 @@
 "You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
 )
 #define ALL_CIVILIANS_SHIPNAMES list(\
-"Pete's Cube","The Nomad","The Alexander","Free Range","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
+"Pete's Cube","The Nomad","The Alexander","Free Range","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home","Mileage May Vary","Pimp Hand"\
 )
 
 #define STOP_WAIT_TIME 5 MINUTES
 #define STOP_DISEMBARK_TIME 2 MINUTES
 
-#define BROADCAST_ON_HIT_PROB 15
+#define BROADCAST_ON_HIT_PROB 20
 
 #define ICON_FILES_PICKFROM list('code/modules/halo/overmap/freighter.dmi','code/modules/halo/icons/overmap/large_cargo_ship.dmi','code/modules/halo/icons/overmap/medical_ship.dmi','code/modules/halo/icons/overmap/mariner-class.dmi','code/modules/halo/icons/overmap/heavy_freighter.dmi')
 
@@ -217,6 +217,7 @@
 	hull -= proj.damage
 	if(hull <= initial(hull)/4 && target_loc)
 		broadcast_hit(1)
+		target_loc = null
 	else
 		if(prob(BROADCAST_ON_HIT_PROB)) //If we get the probability, broadcast the hit.
 			broadcast_hit()
