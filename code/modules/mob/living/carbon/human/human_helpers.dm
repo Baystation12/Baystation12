@@ -113,6 +113,9 @@
 				PDA.SetName(replacetext(PDA.name, old_name, new_name))
 				search_pda = 0
 
+	if(wearing_rig && wearing_rig.update_visible_name)
+		wearing_rig.visible_name = real_name
+
 
 //Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.
 //Essentially, used when a synthetic human mob should act diffferently than a normal type mob.
