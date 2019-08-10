@@ -118,10 +118,15 @@
 /decl/surgery_step/limb/mechanize
 	name = "Attach prosthetic limb"
 	allowed_tools = list(/obj/item/robot_parts = 100)
-	core_skill = SKILL_DEVICES
 
 	min_duration = 80
 	max_duration = 100
+
+/decl/surgery_step/limb/mechanize/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	if(target.isSynthetic())
+		return SURGERY_SKILLS_ROBOTIC 
+	else
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT 
 
 /decl/surgery_step/limb/mechanize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())

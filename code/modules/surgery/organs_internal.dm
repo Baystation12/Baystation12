@@ -161,6 +161,18 @@
 				return organ_to_remove
 	return FALSE
 
+/decl/surgery_step/internal/remove_organ/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	var/target_zone = user.zone_sel.selecting
+	var/obj/item/organ/internal/O = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(BP_IS_ROBOTIC(O))
+		if(BP_IS_ROBOTIC(affected))
+			return SURGERY_SKILLS_ROBOTIC
+		else
+			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+	else
+		return ..()
+	
 /decl/surgery_step/internal/remove_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("\The [user] starts removing [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
@@ -208,6 +220,17 @@
 	min_duration = 60
 	max_duration = 80
 	var/robotic_surgery = FALSE
+
+/decl/surgery_step/internal/replace_organ/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	var/obj/item/organ/internal/O = tool
+	var/obj/item/organ/external/affected = target.get_organ(user.zone_sel.selecting)
+	if(BP_IS_ROBOTIC(O))
+		if(BP_IS_ROBOTIC(affected))
+			return SURGERY_SKILLS_ROBOTIC
+		else
+			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+	else
+		return ..()
 
 /decl/surgery_step/internal/replace_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	. = FALSE
@@ -278,6 +301,18 @@
 	min_duration = 100
 	max_duration = 120
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+
+/decl/surgery_step/internal/attach_organ/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	var/target_zone = user.zone_sel.selecting
+	var/obj/item/organ/internal/O = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(BP_IS_ROBOTIC(O))
+		if(BP_IS_ROBOTIC(affected))
+			return SURGERY_SKILLS_ROBOTIC
+		else
+			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+	else
+		return ..()
 
 /decl/surgery_step/internal/attach_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 

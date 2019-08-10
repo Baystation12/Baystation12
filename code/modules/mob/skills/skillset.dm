@@ -92,6 +92,13 @@
 	var/points = get_skill_value(skill_path)
 	return points >= needed
 
+//Passing a list in format of 'skill = level_needed'
+/mob/proc/skill_check_multiple(skill_reqs)
+	for(var/skill in skill_reqs)
+		. = skill_check(skill, skill_reqs[skill])
+		if(!.)
+			return
+
 /mob/proc/get_skill_difference(skill_path, mob/opponent)
 	return get_skill_value(skill_path) - opponent.get_skill_value(skill_path)
 

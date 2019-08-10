@@ -17,6 +17,9 @@
 /decl/surgery_step/slime/assess_surgery_candidate(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 	return isslime(target) && target.stat == DEAD
 
+/decl/surgery_step/slime/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	return list(SKILL_SCIENCE = SKILL_ADEPT)
+
 //////////////////////////////////////////////////////////////////
 //	slime flesh cutting surgery step
 //////////////////////////////////////////////////////////////////
