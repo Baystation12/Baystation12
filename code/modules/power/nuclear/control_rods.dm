@@ -40,7 +40,7 @@ var/global/control_rods = list()
 			var/new_id = input("Enter a new ident tag.", "Control rod", id_tag) as null|text
 			if(new_id && user.Adjacent(src))
 				id_tag = new_id
-			var/new_name = input("Enter a new rod name. It'll be displayed in console.", "Control rod", name) as null|text
+			var/new_name = input("Enter a new rod name. It'll be displayed in the console.", "Control rod", name) as null|text
 			if(new_name && user.Adjacent(src))
 				name = new_name
 
