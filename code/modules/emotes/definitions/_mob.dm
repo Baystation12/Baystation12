@@ -192,9 +192,9 @@
 
 /mob/living/silicon/robot/flying/ascent
 	default_emotes = list(
-		/decl/emote/audible/synth/ascent_purr,
-		/decl/emote/audible/synth/ascent_hiss,
-		/decl/emote/audible/synth/ascent_snarl
+		/decl/emote/audible/ascent_purr,
+		/decl/emote/audible/ascent_hiss,
+		/decl/emote/audible/ascent_snarl
 	)
 
 /mob/living/carbon/slime

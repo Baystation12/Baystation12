@@ -48,6 +48,13 @@
 		/decl/emote/audible/vox_shriek
 	)
 
+/datum/species/mantid
+	default_emotes = list(
+		/decl/emote/audible/ascent_purr,
+		/decl/emote/audible/ascent_hiss,
+		/decl/emote/audible/ascent_snarl
+	)
+
 /mob/living/carbon/human/set_species(var/new_species, var/default_colour = 1)
 	. = ..()
 	update_emotes()
