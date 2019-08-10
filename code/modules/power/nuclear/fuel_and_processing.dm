@@ -16,7 +16,7 @@
 /obj/item/weapon/nuclearfuel/pellet
 	icon_state = "pellet"
 	name = "Nuclear fuel pellet"
-	desc = "A small pellet of nuclear fuel. ."
+	desc = "A small pellet of nuclear fuel."
 
 
 
