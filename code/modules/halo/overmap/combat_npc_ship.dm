@@ -204,8 +204,8 @@
 /obj/effect/overmap/ship/npc_ship/combat/flood
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
 	messages_on_death = list("... / --- / ...")
-	messages_disengage = messages_on_hit
-	messages_target_found = messages_on_hit
+	messages_disengage = list("... / - -","- / .... / -","..",".","....")
+	messages_target_found = list("... / - -","- / .... / -","..",".","....")
 	faction = "Flood"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake_flood)
