@@ -37,7 +37,7 @@ var/global/control_rods = list()
 /obj/machinery/control_rod/attackby(obj/item/weapon/W, mob/user)
 	if(health > 0)
 		if(isMultitool(W))
-			var/new_id = input("Enter a new ident tag.", "Control rod", id_tag) as null|text
+			var/new_id = input("Enter a new identifier tag.", "Control rod", id_tag) as null|text
 			if(new_id && user.Adjacent(src))
 				id_tag = new_id
 			var/new_name = input("Enter a new rod name. It'll be displayed in the console.", "Control rod", name) as null|text
