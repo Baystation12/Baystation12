@@ -58,9 +58,8 @@
 				return
 
 			// Rename ourselves.
-			real_name = "[new_number] [new_name]"
-			name = real_name
-			mind.name = real_name
+			var/last_name = real_name
+			fully_replace_character_name("[new_number] [new_name]")
 
 			// Rename our alates (and only our alates).
 			cutter.gyne_name = new_name
@@ -70,10 +69,10 @@
 				var/datum/job/submap/ascent/temp_ascent_job = H.mind.assigned_job
 				if(!istype(temp_ascent_job) || temp_ascent_job.owner != ascent_job.owner)
 					continue
-				H.real_name = "[rand(10000,99999)] [new_name]"
-				H.name = H.real_name
-				if(H.mind)
-					H.mind.name = H.real_name
+
+
+
+				H.fully_replace_character_name("[is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? rand(1000,9999) : rand(10000,99999)] [new_name]")
 				to_chat(H, SPAN_NOTICE("<font size = 3>Your gyne, [real_name], has awakened, and you recall your place in the nest-lineage: <b>[H.real_name]</b>.</font>"))
 
 	verbs -= /mob/living/carbon/human/proc/gyne_rename_lineage
