@@ -51,7 +51,7 @@ var/global/control_rods = list()
 				health = 100
 	else
 		if(isWelder(W))
-			to_chat(user, "<span class='notice'>You are removing that remained from the control rods with the [W].</span>")
+			to_chat(user, "<span class='notice'>You are removing what remained from the control rods with the [W].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 10, 1)
 			if(do_after(user, 20,src))
 				qdel(src)
