@@ -5,7 +5,7 @@
 	program_icon_state = "generic"
 	program_key_state = "rd_key"
 	program_menu_icon = "power"  // Can somebody draw a radiation icon?
-	extended_desc = "A quite outdated reactor monitoring software"
+	extended_desc = "A quite outdated reactor monitoring software."
 	requires_ntnet = 1
 	network_destination = "reactor monitoring system"
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
