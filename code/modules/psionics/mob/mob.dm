@@ -9,7 +9,7 @@
 			psi.show_auras()
 
 /mob/living/Destroy()
-	if(psi) qdel(psi)
+	QDEL_NULL(psi)
 	. = ..()
 
 /mob/living/proc/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)

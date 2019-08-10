@@ -182,7 +182,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
 	visible_message("<span class='cultannounce'>\The [src] lets loose a terrific wail as its wounds close shut with a flash of light, and its eyes glow even brighter than before!</span>")
 	new /mob/living/simple_animal/hostile/retaliate/goat/king/phase2(src.loc)
-	Destroy()
+	qdel(src)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/OnDeath()
 	QDEL_NULL(boss_theme)

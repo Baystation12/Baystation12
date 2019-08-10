@@ -27,15 +27,12 @@
 	src.instrument_data = instrument
 	src.octave_range_min = GLOB.musical_config.lowest_octave
 	src.octave_range_max = GLOB.musical_config.highest_octave
-
 	instrument.create_full_sample_deviation_map()
-
-
-
 	available_channels = GLOB.musical_config.channels_per_instrument
 
 /datum/synthesized_song/Destroy()
 	player.event_manager.deactivate()
+	return ..()
 
 /datum/synthesized_song/proc/sanitize_tempo(new_tempo) // Identical to datum/song
 	new_tempo = abs(new_tempo)
