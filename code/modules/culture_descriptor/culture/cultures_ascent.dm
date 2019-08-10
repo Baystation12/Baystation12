@@ -80,6 +80,6 @@ GLOBAL_LIST_INIT(gyne_architecture, list(
 
 /decl/cultural_info/culture/ascent/get_random_name(var/gender)
 	if(gender == MALE)
-		return "[rand(10000,99999)] [get_gyne_name()]"
+		return "[random_id(/datum/species/mantid, 10000, 99999)] [get_gyne_name()]"
 	else
-		return "[rand(1,99)] [get_gyne_name()]"
+		return "[random_id(/datum/species/mantid, 1, 99)] [get_gyne_name()]"
