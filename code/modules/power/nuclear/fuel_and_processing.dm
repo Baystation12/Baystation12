@@ -10,7 +10,7 @@
 /obj/item/weapon/nuclearfuel/rod
 	icon_state = "assembly"
 	name = "Nuclear fuel assembly"
-	desc = "A nuclear fuel assemby, necessery to refuel nuclear rods ."
+	desc = "A nuclear fuel assembly, necessary to refuel nuclear rods."
 
 
 /obj/item/weapon/nuclearfuel/pellet
