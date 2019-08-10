@@ -1,5 +1,5 @@
 /datum/computer_file/program/reactor_control
-	filename = "Reactor montior"
+	filename = "Reactor monitor"
 	filedesc = "Reactor monitoring software"
 	nanomodule_path = /datum/nano_module/rmon
 	program_icon_state = "generic"
