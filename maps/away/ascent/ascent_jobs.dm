@@ -58,7 +58,6 @@
 				return
 
 			// Rename ourselves.
-			var/last_name = real_name
 			fully_replace_character_name("[new_number] [new_name]")
 
 			// Rename our alates (and only our alates).
@@ -71,8 +70,8 @@
 					continue
 
 
-
-				H.fully_replace_character_name("[is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? rand(1000,9999) : rand(10000,99999)] [new_name]")
+				var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/datum/species/mantid, 1000, 9999) : random_id(/datum/species/mantid, 10000, 99999)
+				H.fully_replace_character_name("[new_alate_number] [new_name]")
 				to_chat(H, SPAN_NOTICE("<font size = 3>Your gyne, [real_name], has awakened, and you recall your place in the nest-lineage: <b>[H.real_name]</b>.</font>"))
 
 	verbs -= /mob/living/carbon/human/proc/gyne_rename_lineage
@@ -130,10 +129,11 @@
 		H.set_species(set_species_on_join)
 	switch(H.species.name)
 		if(SPECIES_MANTID_GYNE)
-			H.real_name = "[rand(1,99)] [cutter.gyne_name]"
+			H.real_name = "[random_id(/datum/species/mantid, 1, 99)] [cutter.gyne_name]"
 			H.verbs |= /mob/living/carbon/human/proc/gyne_rename_lineage
 		if(SPECIES_MANTID_ALATE)
-			H.real_name = "[rand(10000,99999)] [cutter.gyne_name]"
+			var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/datum/species/mantid, 1000, 9999) : random_id(/datum/species/mantid, 10000, 99999)
+			H.real_name = "[new_alate_number] [cutter.gyne_name]"
 	H.name = H.real_name
 	if(H.mind)
 		H.mind.name = H.real_name
