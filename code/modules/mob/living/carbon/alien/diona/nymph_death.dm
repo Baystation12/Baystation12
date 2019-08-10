@@ -57,4 +57,4 @@
 /mob/living/carbon/alien/diona/Destroy()
 	if (previous_nymph || next_nymph)
 		remove_from_list()
-	..()
+	return ..()
