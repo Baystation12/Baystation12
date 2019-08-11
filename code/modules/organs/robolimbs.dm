@@ -32,6 +32,13 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_main.dmi'
 	unavailable_at_fab = 1
 
+/datum/robolimb/bishop/rook
+	company = "Bishop Rook"
+	desc = "This limb has a polished metallic casing and a holographic face emitter."
+	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_rook.dmi'
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
 /datum/robolimb/bishop/alt
 	company = "Bishop Alt."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_alt.dmi'
@@ -58,7 +65,7 @@ var/datum/robolimb/basic_robolimb
 
 /datum/robolimb/hephaestus/titan
 	company = "Hephaestus Titan"
-	desc = "This limb has a casing of olive drab, providing a reinforced house look."
+	desc = "The casing of this limb has a drab olive finish, and the housing has been reinforced."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_titan.dmi'
 	has_eyes = FALSE
 	unavailable_at_fab = 1
@@ -78,10 +85,22 @@ var/datum/robolimb/basic_robolimb
 	unavailable_at_fab = 1
 	allowed_bodytypes = list(SPECIES_HUMAN,SPECIES_IPC)
 
+/datum/robolimb/zenghu/spirit
+	company = "Zeng-Hu Spirit"
+	desc = "This limb has a sleek black and white polymer finish."
+	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_spirit.dmi'
+	unavailable_at_fab = 1
+
 /datum/robolimb/xion
 	company = "Xion"
 	desc = "This limb has a minimalist black and red casing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_main.dmi'
+
+/datum/robolimb/xion/econo
+	company = "Xion Econ"
+	desc = "This skeletal mechanical limb has a minimalist black and red casing."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_econo.dmi'
+	unavailable_at_fab = 1
 
 /datum/robolimb/xion/alt
 	company = "Xion Alt."
@@ -137,7 +156,6 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_atlantis.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
-	has_eyes = FALSE
 
 /datum/robolimb/mantis
 	company = "Morpheus Mantis"
