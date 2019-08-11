@@ -1,0 +1,4 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Adds shutters to the exterior windows of hydroponics, aft bubble, and lounge."
