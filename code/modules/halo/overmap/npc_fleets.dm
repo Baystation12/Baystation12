@@ -27,9 +27,10 @@
 	add_to.our_fleet = src
 	clear_target_locs()
 
-/datum/npc_fleet/proc/assign_leader(var/leader)
+/datum/npc_fleet/proc/assign_leader(var/obj/effect/overmap/ship/leader)
 	leader_ship = leader
-	our_fleet = src
+	if(istype(leader))
+		leader.our_fleet = src
 	add_tofleet(leader)
 	clear_target_locs()
 
