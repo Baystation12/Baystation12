@@ -1,11 +1,11 @@
 /datum/computer_file/program/reactor_control
-	filename = "Reactor monitor"
+	filename = "Reactor montior"
 	filedesc = "Reactor monitoring software"
 	nanomodule_path = /datum/nano_module/rmon
 	program_icon_state = "generic"
 	program_key_state = "rd_key"
 	program_menu_icon = "power"  // Can somebody draw a radiation icon?
-	extended_desc = "A quite outdated reactor monitoring software."
+	extended_desc = "A quite outdated reactor monitoring software"
 	requires_ntnet = 1
 	network_destination = "reactor monitoring system"
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
@@ -31,7 +31,7 @@
 
 
 /obj/machinery/computer/reactor_control/Process()  // I made this just to configure coefficients directly while in the game. If reactor is working correctly, you're free to delete it
-	for(var/obj/machinery/power/nuclear_rod/R in nrods)
+	for(var/obj/machinery/power/nuclear_rod/R in GLOB.nrods)
 		R.thermaldecaycoeff = overtdec
 		R.raddeccoeff = overraddec
 		R.radkoeff = overrad
@@ -52,7 +52,7 @@
 /obj/machinery/computer/reactor_control/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
-	
+
 /obj/machinery/computer/reactor_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	mon.ui_interact(user, ui_key, ui, force_open, state)
 
@@ -102,9 +102,10 @@
 
 /datum/nano_module/rmon/proc/FindDevices()
 	known_rods = list()
-	for(var/obj/machinery/power/nuclear_rod/I in nrods)
+	for(var/obj/machinery/power/nuclear_rod/I in GLOB.nrods)
 		if(I.id_tag && (I.id_tag == id_tag)) //&& (get_dist(src, I) < 50))
 			known_rods += I
+
 
 /obj/item/weapon/stock_parts/circuitboard/reactor_montor_console
 	name = T_BOARD("Reactor monitor")
