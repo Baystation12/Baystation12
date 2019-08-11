@@ -1,5 +1,6 @@
 /datum/map_template
 	var/name = "Default Template Name"
+	var/id = null // All maps that should be loadable during runtime needs an id
 	var/width = 0
 	var/height = 0
 	var/tallness = 0
@@ -19,6 +20,8 @@
 		preload_size(mappaths)
 	if(rename)
 		name = rename
+	if(!name && id)
+		name = id
 
 /datum/map_template/proc/preload_size()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
