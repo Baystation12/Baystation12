@@ -92,7 +92,7 @@
 			update_icon()
 			return 1
 
-obj/item/weapon/gun/projectile/type31needlerifle
+/obj/item/weapon/gun/projectile/type31needlerifle
 	name = "Type-31 Needle Rifle"
 	desc = "A unique combination of the Type-33 and Type-51."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
