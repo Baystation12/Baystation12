@@ -24,6 +24,7 @@
 		MATERIAL_GLASS =     12500,
 		MATERIAL_PLASTIC =   12500
 	)
+
 	var/show_category = "All"
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
@@ -206,7 +207,7 @@
 /obj/machinery/fabricator/OnTopic(user, href_list, state)
 	set waitfor = 0
 	if(href_list["change_category"])
-		var/choice = input("Which category do you wish to display?") as null|anything in SSfabrication.get_categories(fabricator_class)
+		var/choice = input("Which category do you wish to display?") as null|anything in SSfabrication.get_categories(fabricator_class)|"All"
 		if(!choice || !CanUseTopic(user, state))
 			return TOPIC_HANDLED
 		show_category = choice
