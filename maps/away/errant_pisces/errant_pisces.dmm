@@ -834,7 +834,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cn" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "co" = (

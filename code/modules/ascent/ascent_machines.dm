@@ -73,12 +73,12 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	base_chemicals["Crystalizing Agent"] = /datum/reagent/crystal
 	base_chemicals["Bromide"] = /datum/reagent/toxin/bromide
 
-/obj/machinery/autolathe/ascent
+/obj/machinery/fabricator/ascent
 	name = "\improper Ascent nanofabricator"
 	desc = "A squat, complicated fabrication system clad in purple polymer."
 	icon = 'icons/obj/nanofabricator.dmi'
 	req_access = list(access_ascent)
-	base_type = /obj/machinery/autolathe
+	base_type = /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/no_deconstruct
 
 /obj/machinery/power/apc/hyper/ascent

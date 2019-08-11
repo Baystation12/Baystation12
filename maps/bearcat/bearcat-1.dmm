@@ -2494,7 +2494,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/maintenance/techstorage)
 "rv" = (

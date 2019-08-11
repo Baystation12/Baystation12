@@ -152,3 +152,9 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define MCS_CHANGE   0 // Success
 #define MCS_CONTINUE 1 // Failed to change, silently
 #define MCS_BLOCK    2 // Failed to change, but action was performed
+
+#define FABRICATOR_EXTRA_COST_FACTOR 1.25
+#define FAB_HACKED   1
+#define FAB_DISABLED 2
+#define FAB_SHOCKED  4
+#define FAB_BUSY     8

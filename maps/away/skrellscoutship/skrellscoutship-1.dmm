@@ -2579,7 +2579,7 @@
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/maintenance/atmos)
 "CS" = (
-/obj/machinery/autolathe{
+/obj/machinery/fabricator{
 	hacked = 1
 	},
 /turf/simulated/floor/tiled/skrell/green,

@@ -1070,7 +1070,7 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
 "cI" = (

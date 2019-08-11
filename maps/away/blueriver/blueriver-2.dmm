@@ -420,7 +420,7 @@
 	},
 /area/bluespaceriver/ship)
 "bp" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bq" = (

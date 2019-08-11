@@ -29,7 +29,7 @@ obj/item/weapon/stock_parts/circuitboard/rdserver
 
 /obj/item/weapon/stock_parts/circuitboard/autolathe
 	name = T_BOARD("autolathe")
-	build_path = /obj/machinery/autolathe
+	build_path = /obj/machinery/fabricator
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2)
 	req_components = list(

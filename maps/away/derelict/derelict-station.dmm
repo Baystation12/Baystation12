@@ -862,7 +862,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "cL" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cM" = (
@@ -1774,7 +1774,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)

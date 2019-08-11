@@ -1364,7 +1364,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dz" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /obj/machinery/light{
 	dir = 1
 	},

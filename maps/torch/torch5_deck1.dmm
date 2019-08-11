@@ -20375,7 +20375,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "hOb" = (
@@ -23395,7 +23395,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/firstdeck/aft)
 "llb" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
