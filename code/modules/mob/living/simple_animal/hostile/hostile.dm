@@ -159,7 +159,9 @@
 		for(var/i = 0, i < burst_size,i++)
 			Shoot(target, src.loc, src)
 			if(casingtype)
-				new casingtype(get_turf(src))
+				var/obj/item/ammo_casing/casing = new casingtype(get_turf(src))
+				if(!isnull(casing.BB))
+					casing.expend()
 			sleep(burst_delay)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()

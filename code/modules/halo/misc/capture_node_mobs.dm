@@ -20,7 +20,8 @@
 	if(istype(g_proj))
 		ranged = 1
 		burst_size = g_proj.burst
-		burst_delay = g_energy.burst_delay
+		burst_delay = g_proj.burst_delay
+		projectilesound = g_proj.fire_sound
 		var/obj/item/ammo_casing/casing
 		if(!isnull(g_proj.magazine_type))
 			var/obj/item/ammo_magazine/mag = new g_proj.magazine_type
@@ -33,6 +34,8 @@
 		if(isnull(casing))
 			return
 		projectiletype = casing.projectile_type
+		if(isnull(projectilesound))
+			projectilesound = casing.fire_sound
 		qdel(casing)
 
 	else if(istype(g_energy))
@@ -64,7 +67,7 @@
 	name = "UNSC Defender (Marine)"
 	icon_state = "marine"
 	icon_living  = "marine"
-	icon_dead = "marine_dead"
+	icon_dead = "dead_marine"
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m392_dmr)
 
 /mob/living/simple_animal/hostile/defender_mob/unsc/odst
