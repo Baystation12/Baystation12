@@ -1,12 +1,12 @@
 
 #define ON_PROJECTILE_HIT_MESSAGES list(\
-"F-H-419; Taking fire!","Multiple hull breaches!",\
+"Multiple hull breaches!",\
 "Engineering's losing air... Sealed. How many did we lose?","Get the weapons back up!","Fire, Fire!",\
 "Life support's barely working! We could do with some assistance!",\
 "The fuck was that?","Helmsman, dodge or die!"\
 )
 #define ON_DEATH_MESSAGES list(\
-"FUCK! REACTOR'S CRITICAL, REPEAT: REAC-","WE'RE LOSING ATMOSPHERIC INTEGRITY, NEED IMMEDIATE ASSIS-","CRITICAL HULL INTEGRITY! WE'RE LOSing air fast ..."\
+"MULTIPLE SYSTEMS FAILING! EMERGENCY CODE F-H-419!","FUCK! REACTOR'S CRITICAL, REPEAT: REAC-","WE'RE LOSING ATMOSPHERIC INTEGRITY, NEED IMMEDIATE ASSIS-","CRITICAL HULL INTEGRITY! WE'RE LOSing air fast ..."\
 )
 #define TARGET_LOSE_INTEREST_DELAY 5 MINUTES
 
@@ -21,6 +21,8 @@
 
 	messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	messages_on_death = ON_DEATH_MESSAGES
+	var/list/messages_disengage = list("They must be disabled now! Disengaging.")
+	var/list/messages_target_found = list("Hostile located, firing on target") //always ends with " [target]. ([target.x],[target.y])"
 
 	var/next_fireat = 0
 	var/list/projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.05 SECONDS) //Associated list: [projectile type]=[fire_delay]
@@ -35,8 +37,9 @@
 		projectiles_nextfire_at[proj_type] = 0
 
 /obj/effect/overmap/ship/npc_ship/combat/ship_targetedby_defenses()
-	target_disengage_at = 1
-	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
+	if(isnull(target))
+		target_disengage_at = 1
+		target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
 /obj/effect/overmap/ship/npc_ship/combat/proc/fire_at_target()
 	if(is_player_controlled())
@@ -44,7 +47,7 @@
 	if(target_disengage_at == 0)
 		target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	if(target_disengage_at != 0 && world.time > target_disengage_at)
-		radio_message("They must be disabled now! Disengaging.")
+		radio_message(pick(messages_disengage))
 		target = null
 		target_disengage_at = 0
 		return
@@ -69,6 +72,10 @@
 	//scan ships in range
 	for(var/obj/effect/overmap/ship/ship in range(7,src))
 
+		var/obj/effect/overmap/ship/npc_ship/npc = ship
+		if(istype(npc) && npc.hull <= initial(npc.hull)/4)
+			continue
+
 		//check if they're a hostile faction
 		var/datum/faction/their_faction = ship.my_faction
 		var/faction_name
@@ -84,15 +91,13 @@
 	if(targets.len > 0)
 		//pick one at random
 		target = pick(targets)
-		radio_message("Hostile located, firing on target [target] at [target.x],[target.y].")
+		radio_message( pick(messages_target_found) + " [target]. ([target.x],[target.y])")
 
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
 		return
 	if(is_player_controlled())
 		return ..()
-	if(!target)
-		find_target()
 
 	if(target)
 		//check if they're in range
@@ -107,13 +112,16 @@
 				var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
 				if(target_locs.len > 0)
 					target_loc = pick(target_locs)
+	else
+		find_target()
+
 	..()
 
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
 	target = proj.overmap_fired_by
 	target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
 	for(var/obj/effect/overmap/ship/npc_ship/combat/ship in range(7,src))
-		if(ship.faction == faction && !(ship.target))
+		if(ship.get_faction() == get_faction() && !(ship.target))
 			ship.target = target
 			ship.target_disengage_at = target_disengage_at
 	. = ..()
@@ -196,6 +204,8 @@
 /obj/effect/overmap/ship/npc_ship/combat/flood
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
 	messages_on_death = list("... / --- / ...")
+	messages_disengage = list("... / - -","- / .... / -","..",".","....")
+	messages_target_found = list("... / - -","- / .... / -","..",".","....")
 	faction = "Flood"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake_flood)
