@@ -157,6 +157,7 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button/airlock_bolt)
 
 /decl/stock_part_preset/radio/basic_transmitter/button/airlock_bolt
+	frequency = AIRLOCK_FREQ
 	transmit_on_change = list("toggle_bolts" = /decl/public_access/public_variable/button_active)
 
 // Valve control
