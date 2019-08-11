@@ -1,5 +1,3 @@
-var/list/nuclear_reactions
-
 /decl/nuclear_reaction  //Nuclear reactions, simillar to fusion and you also can add them as much, as you want.
 	var/substance = ""
 	var/required_rads = 0
