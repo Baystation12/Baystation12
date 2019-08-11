@@ -174,10 +174,10 @@
 		. = TOPIC_REFRESH
 
 	else if(href_list["reset_tech"])
-		var/choice = alert(user, "Technology Data Rest", "Are you sure you want to reset this technology to its default data? Data lost cannot be recovered.", "Continue", "Cancel")
+		var/choice = alert(user, "Technology Data Reset", "Are you sure you want to reset this technology to its default data? Data lost cannot be recovered.", "Continue", "Cancel")
 		if(choice == "Continue" && CanUseTopic(user, state))
 			for(var/datum/tech/T in temp_server.files.known_tech)
-				if(T.id == href_list["reset_tech"])
+				if(T.level > 0 && T.id == href_list["reset_tech"])
 					T.level = 1
 					break
 		temp_server.files.RefreshResearch()
