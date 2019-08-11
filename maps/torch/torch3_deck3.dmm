@@ -321,6 +321,14 @@
 "be" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "hydroponics_shutters";
+	name = "Window Shutters";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/hydroponics)
 "bf" = (
@@ -895,6 +903,13 @@
 "ci" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 6
+	},
+/obj/machinery/button/blast_door{
+	desc = "A remote control-switch for shutters.";
+	id_tag = "hydroponics_shutters";
+	name = "Window Shutters";
+	pixel_x = 26;
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
@@ -18626,6 +18641,14 @@
 "Su" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "d3aft_shutters";
+	name = "Window Shutters";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "Sv" = (
@@ -18889,9 +18912,6 @@
 "Tn" = (
 /obj/effect/floor_decal/corner/lime{
 	dir = 5
-	},
-/obj/structure/closet/hydrant{
-	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -19611,6 +19631,13 @@
 /obj/effect/floor_decal/corner/lime{
 	dir = 1
 	},
+/obj/machinery/button/blast_door{
+	desc = "A remote control-switch for shutters.";
+	id_tag = "d3aft_shutters";
+	name = "Window Shutters";
+	pixel_x = -26;
+	pixel_y = 26
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "Vo" = (
@@ -19991,6 +20018,15 @@
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
+"Wx" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/aft)
 "Wy" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
@@ -45163,7 +45199,7 @@ hA
 hA
 hA
 gE
-lc
+Wx
 sF
 Mi
 TR

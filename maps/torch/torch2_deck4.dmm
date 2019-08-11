@@ -4653,6 +4653,14 @@
 "pG" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "lounge_shutters";
+	name = "Window Shutters";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/crew_quarters/lounge)
 "pJ" = (
@@ -11873,6 +11881,19 @@
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/fore)
+"Nw" = (
+/obj/structure/bed/chair/comfy/brown{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	desc = "A remote control-switch for shutters.";
+	id_tag = "lounge_shutters";
+	name = "Window Shutters";
+	pixel_x = -26;
+	pixel_y = -24
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge)
 "Nx" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -34007,7 +34028,7 @@ PO
 jr
 OO
 Jo
-Wh
+Nw
 pG
 sJ
 aa
