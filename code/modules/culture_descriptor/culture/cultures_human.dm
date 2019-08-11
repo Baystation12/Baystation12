@@ -156,4 +156,5 @@
 	. = 1 // Never executed, works around http://www.byond.com/forum/?post=2072419
 	#undef LTR
 	#undef NUM
+	#undef FIRST
 	#undef NAME
