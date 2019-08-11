@@ -1,13 +1,13 @@
-var/global/nrods = list()
+GLOBAL_LIST_INIT(nrods, list())
 
-/obj/machinery/power/nuclear_rod // The main component of the reactor
+/obj/machinery/power/nuclear_rod
 	name = "Nuclear rod"
 	desc = "A nuclear rod, that generates radiation, thermal energy and some problems ."
 	icon = 'icons/obj/machines/nuclearcore.dmi'
 	icon_state = "base_rod"
 	anchored = 1
 	density = 1
-	var/sealed = 0
+	var/sealed = FALSE
 	use_power = 0
 	var/accepted_rads = 0
 	var/own_rads = 0
@@ -27,10 +27,10 @@ var/global/nrods = list()
 
 /obj/machinery/power/nuclear_rod/Initialize()
 	..()
-	nrods += src
+	GLOB.nrods += src
 
 /obj/machinery/power/nuclear_rod/Destroy()
-	nrods -= src
+	GLOB.nrods -= src
 	return ..()
 
 /obj/machinery/power/nuclear_rod/examine(mob/user)
@@ -38,7 +38,7 @@ var/global/nrods = list()
 		to_chat(user, "The thermometer placed on the rod indicates that \the [src] has the temperature of [rodtemp] K.")
 		return 1
 
-/obj/machinery/power/nuclear_rod/attack_hand(mob/user)   //Removing the assembly.
+/obj/machinery/power/nuclear_rod/physical_attack_hand(mob/user)   //Removing the assembly.
 	add_fingerprint(user)
 	if(reactants.len && do_after(user, 30,src) && rodtemp < 1000)
 
@@ -51,28 +51,28 @@ var/global/nrods = list()
 		if(!broken)
 			src.add_fingerprint(user)
 			if(isCrowbar(W))
-				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+				playsound(loc, 'sound/machines/click.ogg', 50, 1)
 				user.visible_message("<span class='notice'>[user] begins to switch sealing on the rod.</span>")
 				if(do_after(user, 50,src))
 					switch(sealed)
-						if(1.0)
-							sealed = 0
-						if(0.0)
-							sealed = 1
-					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+						if(TRUE)
+							sealed = FALSE
+						if(FALSE)
+							sealed = TRUE
+					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					user.visible_message("<span class='notice'>[user] switched sealing on the rod.</span>")
 					return
 				return
 
 			else if(istype(W, /obj/item/weapon/nuclearfuel/rod))
 				if(!reactants.len && rodtemp < 1000)
-					playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-					src.F = W
+					playsound(loc, 'sound/machines/click.ogg', 50, 1)
+					F = W
 					message_admins("[user] loaded [src] with [W]")
 					user.unEquip(W, src)
 
 			else if(isWrench(W))
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				switch(anchored)
 					if(1.0)
 						user.visible_message("<span class='notice'>[user] unwrenched rod from the ground.</span>")
@@ -122,7 +122,7 @@ var/global/nrods = list()
 		rodtemp = 0
 	if(F && !reactants.len)
 		reactants = F.reactants
-		F = null
+		qdel(F)
 	var/raddecay = rand((raddeccoeff * 0.95), raddeccoeff)
 	var/datum/gas_mixture/environment = loc.return_air()
 	if(sealed == 0)
@@ -190,13 +190,10 @@ var/global/nrods = list()
 			if(reactants[p_reaction.substance] && (reaction_rads >= p_reaction.required_rads))
 				possible_reactions += p_reaction.type
 		while(possible_reactions.len)
-			var/cur_reaction_type = pick(possible_reactions)
+			var/cur_reaction_type = pick_n_take(possible_reactions)
 			var/decl/nuclear_reaction/cur_reaction = new cur_reaction_type
 			var/max_num_reactants = 0
-			if((cur_reaction.required_rads > 0) && (cur_reaction.radiation > 10) && (own_rads < 20))
-				own_rads = (rand(1899, 2101) / 100)
 			if(reaction_rads < cur_reaction.required_rads)
-				possible_reactions -= cur_reaction.type
 				continue
 
 			if(reactants[cur_reaction.substance] > 0.000001)  //To eliminate especially "weak" reactions
@@ -206,13 +203,10 @@ var/global/nrods = list()
 					max_num_reactants = reactants[cur_reaction.substance] / 2000
 			else
 				max_num_reactants =	reactants[cur_reaction.substance]
-
-			if(max_num_reactants <= 0)
-				continue
-
 			var/amount_reacting = rand((max_num_reactants * 0.96), max_num_reactants)//This value is sometimes manages to get negative
-
-
+			if(amount_reacting <= 0)
+				continue
+			
 			if( reactants[cur_reaction.substance] - amount_reacting >= 0 )
 				reactants[cur_reaction.substance] -= amount_reacting
 			else
@@ -244,7 +238,7 @@ var/global/nrods = list()
 						break
 				if(!success)
 					produced_reactants[pr_reactant] = cur_reaction.products[pr_reactant] * amount_reacting
-			possible_reactions -= cur_reaction.type
+		//	possible_reactions -= cur_reaction.type
 		for(var/prreactant in produced_reactants)
 			AddReact(prreactant, produced_reactants[prreactant])  //Look at AddReact() for details
 	return 1
