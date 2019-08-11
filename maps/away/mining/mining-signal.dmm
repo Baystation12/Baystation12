@@ -35,10 +35,6 @@
 /obj/item/weapon/cell/hyper,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
-"al" = (
-/obj/structure/table/steel_reinforced,
-/turf/simulated/floor/holofloor/tiled/dark,
-/area/outpost/abandoned)
 "am" = (
 /obj/structure/table/rack,
 /obj/random/energy,
@@ -153,11 +149,6 @@
 /area/outpost/abandoned)
 "aI" = (
 /turf/simulated/floor/tiled,
-/area/outpost/abandoned)
-"aJ" = (
-/obj/structure/table,
-/obj/effect/floor_decal/corner/paleblue/diagonal,
-/turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "aK" = (
 /obj/structure/bed/chair/office/dark{
@@ -2666,13 +2657,6 @@
 	},
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
-"xb" = (
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 200;
-	generation_width = 200
-	},
-/turf/unsimulated/mask,
-/area/mine/unexplored)
 "yb" = (
 /obj/item/weapon/storage/mirror{
 	icon_state = "mirror_broke";
@@ -2906,7 +2890,7 @@ aa
 aa
 aa
 aa
-xb
+aa
 "}
 (2,1,1) = {"
 aa
@@ -14912,7 +14896,7 @@ aa
 aa
 af
 aw
-aJ
+ay
 aW
 bf
 af
@@ -17939,7 +17923,7 @@ aa
 aa
 aa
 af
-al
+ai
 ao
 aF
 af

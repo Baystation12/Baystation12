@@ -88,7 +88,7 @@
 
 	var/x = round((world.maxx - width)/2)
 	var/y = round((world.maxy - height)/2)
-	var/initial_z = world.maxz
+	var/initial_z = world.maxz + 1
 
 	if (x < 1) x = 1
 	if (y < 1) y = 1
@@ -116,6 +116,7 @@
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state)
+	after_load(initial_z)
 	for(var/light_z = initial_z to world.maxz)
 		create_lighting_overlays_zlevel(light_z)
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
@@ -147,11 +148,15 @@
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state)
+	after_load(T.z)
 	SSlighting.InitializeTurfs(atoms_to_initialise)	// Hopefully no turfs get placed on new coords by SSatoms.
 	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
 	loaded++
 
 	return TRUE
+
+/datum/map_template/proc/after_load(z)
+	return
 
 /datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)
 	var/list/bounds_to_combine = existing_bounds.Copy()

@@ -1901,10 +1901,6 @@
 	},
 /turf/unsimulated/mineral,
 /area/space)
-"hb" = (
-/obj/effect/landmark/random_gen/asteroid,
-/turf/unsimulated/mineral,
-/area/space)
 "kT" = (
 /obj/item/modular_computer/console{
 	dir = 8
@@ -2145,7 +2141,7 @@ aa
 aa
 aa
 aa
-hb
+aa
 "}
 (2,1,1) = {"
 aa
