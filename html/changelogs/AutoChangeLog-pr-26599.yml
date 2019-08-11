@@ -1,0 +1,4 @@
+author: "Terror4000rus"
+delete-after: True
+changes: 
+  - rscadd: "You can take a pill from pillbottle by using it."
