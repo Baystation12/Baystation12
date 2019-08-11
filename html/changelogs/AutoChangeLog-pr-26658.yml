@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Medical Technicians can no longer have Anatomy skill at Experienced or higher."
