@@ -37,7 +37,7 @@
 	for(var/obj/machinery/control_rod/R in known_c_rods)
 		rodlist.Add(list(list(
 		"name" = R.name,
-		"len" = R.len,
+		"len" = R.rod_length,
 		"targ" = R.target,
 		"broken" = R.nocontrol,
 		"tag" = "\ref[R]"
@@ -58,7 +58,7 @@
 
 /datum/nano_module/rcontrol/proc/FindDevices()
 	known_c_rods = list()
-	for(var/obj/machinery/control_rod/I in control_rods)
+	for(var/obj/machinery/control_rod/I in GLOB.control_rods)
 		if(I.id_tag && (I.id_tag == id_tag)) //&& (get_dist(src, I) < 50))
 			known_c_rods += I
 
@@ -73,6 +73,7 @@
 		for(var/obj/machinery/control_rod/C in known_c_rods)
 			if(C.target != new_overall)
 				C.target = Clamp(new_overall, 0, 4)
+
 
 
 /obj/machinery/computer/rod_control/attackby(var/obj/item/W, var/mob/user)
