@@ -44,6 +44,6 @@
 	name = "lingophagic node"
 	desc = "A chunk of what could be discolored crystalized brain matter. It seems to pulse occasionally."
 	icon_state = "implant_melted"
-	origin_tech = list(TECH_BIO = 5, TECH_ARCANE = 2)
+	origin_tech = list(TECH_BIO = 5)
 	learning_threshold = 10
 	max_languages = 3

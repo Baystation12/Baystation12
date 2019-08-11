@@ -10,7 +10,6 @@
 #define TECH_MAGNET "magnets"
 #define TECH_DATA "programming"
 #define TECH_ILLEGAL "syndicate"
-#define TECH_ARCANE "arcane"
 
 #define IMPRINTER	0x1	//For circuits. Uses glass/chemicals.
 #define PROTOLATHE	0x2	//New stuff. Uses glass/metal/chemicals
