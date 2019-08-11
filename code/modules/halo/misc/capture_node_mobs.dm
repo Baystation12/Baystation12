@@ -45,6 +45,7 @@
 	gun_overlay = icon(g_proj.item_icons[slot_r_hand_str],g_proj.item_state)
 	g_energy = null
 	qdel(g_proj)
+	update_icon()
 
 /mob/living/simple_animal/hostile/defender_mob/update_icon()
 	. = ..()

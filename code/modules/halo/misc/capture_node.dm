@@ -1,5 +1,5 @@
 GLOBAL_LIST_EMPTY(capture_nodes)
-#define DEFENDER_MOBS_BY_FACTION list("UNSC"=list(/mob/living/simple_animal/hostile/defender_mob/unsc/marine, /mob/living/simple_animal/hostile/defender_mob/unsc/odst),"Covenant"=list(/mob/living/simple_animal/hostile/defender_mob/innie/medium, /mob/living/simple_animal/hostile/defender_mob/innie/heavy),"Insurrection"=list(/mob/living/simple_animal/hostile/defender_mob/cov/grunt, /mob/living/simple_animal/hostile/defender_mob/cov/kig))
+#define DEFENDER_MOBS_BY_FACTION list("UNSC"=list(/mob/living/simple_animal/hostile/defender_mob/unsc/marine, /mob/living/simple_animal/hostile/defender_mob/unsc/odst),"Covenant"=list(/mob/living/simple_animal/hostile/defender_mob/cov/grunt, /mob/living/simple_animal/hostile/defender_mob/cov/kig),"Insurrection"=list(/mob/living/simple_animal/hostile/defender_mob/innie/medium, /mob/living/simple_animal/hostile/defender_mob/innie/heavy))
 #define FALLBACK_MOBSPAWN_AMOUNT 4
 
 /obj/machinery/computer/capture_node
