@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Airlock bolt buttons (e.g. SMES room and engine hatch doors) will now work."
