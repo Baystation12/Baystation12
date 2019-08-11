@@ -104,6 +104,7 @@
 	hardware_closed = "bfly_hardware_closed"
 	hardware_open = "bfly_hardware"
 	handle_icon = "bfly_handle"
+	force_divisor = 0.22 // 13/17/22 when wielded with hardness 60 (steel)/ 80 (plasteel)/ 100 (diamond)
 
 /obj/item/weapon/material/knife/folding/combat/switchblade
 	name = "switchblade"
