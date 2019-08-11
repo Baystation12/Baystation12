@@ -6,6 +6,7 @@
 	anchored = TRUE
 	density = TRUE
 	opacity = FALSE
+	var/next_use
 
 /obj/structure/adherent_pylon/attack_ai(var/mob/living/user)
 	if(Adjacent(user))
@@ -15,6 +16,8 @@
 	charge_user(user)
 
 /obj/structure/adherent_pylon/proc/charge_user(var/mob/living/user)
+	if(next_use > world.time) return
+	next_use = world.time + 10
 	var/mob/living/carbon/human/H = user
 	var/obj/item/weapon/cell/power_cell
 	if(ishuman(user))
