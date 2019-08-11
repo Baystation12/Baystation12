@@ -10,13 +10,13 @@
 /obj/item/weapon/nuclearfuel/rod
 	icon_state = "assembly"
 	name = "Nuclear fuel assembly"
-	desc = "A nuclear fuel assembly, necessary to refuel nuclear rods."
+	desc = "A nuclear fuel assemby, necessery to refuel nuclear rods ."
 
 
 /obj/item/weapon/nuclearfuel/pellet
 	icon_state = "pellet"
 	name = "Nuclear fuel pellet"
-	desc = "A small pellet of nuclear fuel."
+	desc = "A small pellet of nuclear fuel. ."
 
 
 
@@ -26,6 +26,7 @@
 	icon_state = "fabricator"
 	density = 1
 	anchored = 1
+	layer = 4
 	var/list/areactants = new /list(0)
 	var/list/buffer = new /list(0)
 	var/summarymass
@@ -201,6 +202,7 @@
 	icon_state = "centrifuge"
 	density = 1
 	anchored = 1
+	layer = 4
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 5000
@@ -271,4 +273,4 @@
 
 /obj/item/weapon/nuclearfuel/pellet/thor
 	name = "Thorium pellet"
-	reactants = list("nuclear waste" = 500, "Th232" = 3
+	reactants = list("nuclear waste" = 500, "Th232" = 300)
