@@ -29,6 +29,7 @@
 
 /datum/npc_fleet/proc/assign_leader(var/leader)
 	leader_ship = leader
+	leader.our_fleet = src
 	add_tofleet(leader)
 	clear_target_locs()
 
