@@ -1,0 +1,4 @@
+author: Luftkommando
+delete-after: True
+changes: 
+  - rscadd: "Added fleet uniform colored duty gloves instead of black duty gloves to uniform vendors for fleet."
