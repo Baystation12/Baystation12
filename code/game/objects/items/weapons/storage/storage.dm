@@ -339,7 +339,7 @@
 		verbs -= /obj/item/weapon/storage/verb/toggle_gathering_mode
 
 	if(isnull(max_storage_space) && !isnull(storage_slots))
-		max_storage_space = storage_slots*base_storage_cost(max_w_class)
+		max_storage_space = storage_slots*BASE_STORAGE_COST(max_w_class)
 
 	storage_ui = new storage_ui(src)
 	prepare_ui()
@@ -420,4 +420,4 @@
 
 /obj/item/proc/get_storage_cost()
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
-	return base_storage_cost(w_class)
+	return BASE_STORAGE_COST(w_class)

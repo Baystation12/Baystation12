@@ -65,6 +65,8 @@
 			return global.SSevac;
 		if("SSevent")
 			return global.SSevent;
+		if("SSfabrication")
+			return global.SSfabrication;
 		if("SSfastprocess")
 			return global.SSfastprocess;
 		if("SSfluids")
@@ -980,6 +982,8 @@
 			global.SSevac=newval;
 		if("SSevent")
 			global.SSevent=newval;
+		if("SSfabrication")
+			global.SSfabrication=newval;
 		if("SSfastprocess")
 			global.SSfastprocess=newval;
 		if("SSfluids")
@@ -1862,6 +1866,7 @@
 	"SSdisposals",
 	"SSevac",
 	"SSevent",
+	"SSfabrication",
 	"SSfastprocess",
 	"SSfluids",
 	"SSgarbage",
@@ -1964,8 +1969,6 @@
 	"assigned_blocks",
 	"atmosphere_alarm",
 	"attack_log_repository",
-	"autolathe_categories",
-	"autolathe_recipes",
 	"base_miss_chance",
 	"basic_robolimb",
 	"blocked",
