@@ -70,16 +70,27 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			.[path] += uncreated_component_parts[path]
 
 // Returns a component instance of the given type, or null if no such type is present.
-/obj/machinery/proc/get_component_of_type(var/part_type)
+/obj/machinery/proc/get_component_of_type(var/part_type, var/strict = FALSE)
+	if(strict)
+		for(var/obj/component in component_parts)
+			if(component.type == part_type)
+				return component
+		return force_init_component(part_type)
+
 	. = locate(part_type) in component_parts
 	if(.)
 		return
 	for(var/path in uncreated_component_parts)
 		if(ispath(path, part_type))
-			uncreated_component_parts[path]-- //bookkeeping to make sure tally is correct.
-			if(!uncreated_component_parts[path])
-				LAZYREMOVE(uncreated_component_parts, path)
-			return install_component(path, TRUE)
+			return force_init_component(path)
+
+/obj/machinery/proc/force_init_component(var/path)
+	if(!uncreated_component_parts[path])
+		return
+	uncreated_component_parts[path]-- //bookkeeping to make sure tally is correct.
+	if(!uncreated_component_parts[path])
+		LAZYREMOVE(uncreated_component_parts, path)
+	return install_component(path, TRUE)
 
 // Can be given a path or an instance. False will guarantee part creation. 
 // If an instance is given or created, it is returned, otherwise null is returned.
@@ -132,6 +143,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		return part
 
 /obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
+	if(ispath(old_part))
+		old_part = get_component_of_type(old_part, TRUE)
 	old_part = uninstall_component(old_part)
 	if(R)
 		R.remove_from_storage(new_part, src)
@@ -267,7 +280,7 @@ Standard helpers for users interacting with machinery parts.
 		var/path = removable_parts[input]
 		if(!path || !components_are_accessible(path))
 			return TRUE
-		var/obj/item/weapon/stock_parts/part = uninstall_component(path)
+		var/obj/item/weapon/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
 		if(part)
 			user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
