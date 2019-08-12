@@ -325,3 +325,9 @@
 		to_chat(user, "You are too far away to read the gauge.")
 	if(welded)
 		to_chat(user, "It seems welded shut.")
+
+
+
+/obj/machinery/atmospherics/unary/vent_scrubber/on/sauna/Initialize()
+	. = ..()
+	scrubbing_gas -= GAS_STEAM

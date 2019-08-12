@@ -4421,10 +4421,21 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_eva)
 "iF" = (
+/obj/structure/closet/crate/freezer,
+/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
+/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
+/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
+/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+/obj/item/weapon/reagent_containers/food/drinks/cans/artbru,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/machinery/firealarm{
 	pixel_y = 21
 	},
-/obj/item/weapon/stool/wood,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
 "iG" = (
@@ -4770,7 +4781,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/item/weapon/stool/wood,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
 "jm" = (
@@ -5288,9 +5298,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/holocontrol)
 "ke" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1;
-	frequency = 1438
+/obj/machinery/atmospherics/unary/vent_scrubber/on/sauna{
+	icon_state = "map_scrubber_on";
+	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
@@ -5405,21 +5415,12 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
 "kt" = (
-/obj/structure/closet/crate/freezer,
-/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
-/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
-/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
-/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
-/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
-/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
-/obj/item/weapon/reagent_containers/food/drinks/cans/artbru,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
+	dir = 4;
+	external_pressure_bound = 202;
+	external_pressure_bound_default = 202
 	},
+/obj/machinery/space_heater,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
 "ku" = (
@@ -5581,10 +5582,13 @@
 	},
 /obj/structure/cable/green,
 /obj/machinery/atmospherics/binary/pump{
-	dir = 8
+	dir = 8;
+	in_use = 0
 	},
 /obj/item/weapon/reagent_containers/glass/bucket/wood,
-/obj/item/weapon/stool/wood,
+/obj/structure/hygiene/sink{
+	pixel_z = -14
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
 "kN" = (
@@ -7241,10 +7245,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ai_monitored/storage/eva)
-"oK" = (
-/obj/structure/sign/poster,
-/turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head)
 "oL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -19129,6 +19129,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/office)
+"TZ" = (
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/item/device/flashlight/lamp/lava/red{
+	pixel_z = 14
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head)
 "Ub" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -40359,7 +40368,7 @@ vY
 eE
 YK
 gK
-LL
+TZ
 hL
 iF
 jO
@@ -40559,7 +40568,7 @@ dB
 uU
 uU
 fz
-oK
+YK
 gK
 LL
 hP
