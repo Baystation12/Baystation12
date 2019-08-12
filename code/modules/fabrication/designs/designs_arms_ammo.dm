@@ -25,12 +25,9 @@
 	path = /obj/item/ammo_magazine/smg_top/rubber
 
 /datum/fabricator_recipe/arms_ammo/hidden/machete
-	name = "fabricated machete"
 	path = /obj/item/weapon/material/hatchet/machete/steel
-	resources = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 2500)
 
 /datum/fabricator_recipe/arms_ammo/hidden/flamethrower
-	name = "flamethrower"
 	path = /obj/item/weapon/flamethrower/full
 
 /datum/fabricator_recipe/arms_ammo/hidden/speedloader
@@ -98,7 +95,6 @@
 	path = /obj/item/ammo_casing/shotgun/pellet
 
 /datum/fabricator_recipe/arms_ammo/hidden/tacknife
-	name = "tactical knife"
 	path = /obj/item/weapon/material/knife/combat
 
 /datum/fabricator_recipe/arms_ammo/hidden/stunshell
