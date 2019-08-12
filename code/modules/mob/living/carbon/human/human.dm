@@ -557,6 +557,9 @@
 			I.additional_flash_effects(intensity)
 	return ..()
 
+/mob/living/carbon/human/proc/getFlashMod()
+	return (BP_IS_ROBOTIC(internal_organs_by_name[BP_EYES]) ? 1 : species.flash_mod)
+
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
 /mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
