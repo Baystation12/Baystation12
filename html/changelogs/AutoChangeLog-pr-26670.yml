@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - rscadd: "Traitor Robots will get a verb 'Reset Identity Codes' that will remove their external camera connection, robot console connection and lawsync status."
