@@ -1,0 +1,1 @@
+#define FABRICATOR_CLASS_GENERAL "general"

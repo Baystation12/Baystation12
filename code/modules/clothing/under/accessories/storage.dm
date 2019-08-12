@@ -83,7 +83,7 @@
 	slots = 4 //to accomodate it being slotless
 
 /obj/item/clothing/accessory/storage/drop_pouches/create_storage()
-	hold = new/obj/item/weapon/storage/internal/pouch(src, slots*base_storage_cost(max_w_class))
+	hold = new/obj/item/weapon/storage/internal/pouch(src, slots*BASE_STORAGE_COST(max_w_class))
 
 /obj/item/clothing/accessory/storage/drop_pouches/black
 	name = "black drop pouches"

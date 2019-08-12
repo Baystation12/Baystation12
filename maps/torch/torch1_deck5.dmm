@@ -10805,7 +10805,7 @@
 /area/maintenance/fifthdeck/fore)
 "yC" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/rnd)
 "yG" = (

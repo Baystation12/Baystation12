@@ -2746,11 +2746,7 @@
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_boxingcourt)
 "agE" = (
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -7210,11 +7206,7 @@
 	},
 /area/wizard_station)
 "art" = (
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -8575,11 +8567,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "ave" = (
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "avf" = (
@@ -11258,11 +11246,7 @@
 	},
 /area/centcom/specops)
 "aBa" = (
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -12170,11 +12154,7 @@
 	},
 /area/syndicate_mothership)
 "aCO" = (
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 8
@@ -17390,11 +17370,7 @@
 /area/syndicate_mothership/raider_base)
 "aPu" = (
 /obj/effect/decal/cleanable/cobweb,
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -19614,11 +19590,7 @@
 /turf/space,
 /area/merchant_station)
 "aUP" = (
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aUQ" = (

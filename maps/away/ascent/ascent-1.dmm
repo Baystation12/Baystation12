@@ -1425,7 +1425,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/engineering)
 "dw" = (
-/obj/machinery/autolathe/ascent,
+/obj/machinery/fabricator/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "dx" = (

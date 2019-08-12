@@ -1598,7 +1598,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "ep" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "eq" = (
