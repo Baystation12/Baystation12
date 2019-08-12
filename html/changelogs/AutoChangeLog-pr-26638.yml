@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Fire axes can now attack unpowered airlocks on harm intent, regardless of the damage level of the door."
+  - tweak: "It now takes several hits to get through an undamaged door with a fire axe."
