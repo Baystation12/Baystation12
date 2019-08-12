@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - rscadd: "Worn RIG suits will now be charged if you walk into a cyborg recharger. If you have an internal cell (FBP/IPC) then that will charge first."
