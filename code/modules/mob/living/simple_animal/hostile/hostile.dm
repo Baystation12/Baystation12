@@ -80,6 +80,12 @@
 				stance = HOSTILE_STANCE_ATTACK
 				T = M
 				break
+		else if(istype(A,/obj/vehicles))
+			var/obj/vehicles/v = A
+			if(v.occupants.len > 2)
+				stance = HOSTILE_STANCE_ATTACK
+				T = v
+				break
 
 	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(7)
@@ -175,11 +181,21 @@
 
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
-	var/list/L = hearers(src, dist)
+	var/list/L = list()
 
 	for (var/obj/mecha/M in mechas_list)
 		if (M.z == src.z && get_dist(src, M) <= dist)
 			L += M
+	for(var/A in view(dist,src))
+		if(istype(A,/mob/living))
+			L += A
+			continue
+		if(istype(A,/obj/mecha))
+			L += A
+			continue
+		if(istype(A,/obj/vehicles))
+			L += A
+			continue
 
 	return L
 
