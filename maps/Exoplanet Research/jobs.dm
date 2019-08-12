@@ -14,6 +14,7 @@
 
 /datum/job/researchdirector
 	title = "ONI Research Director"
+	spawn_faction = "UNSC"
 	supervisors = "the directors of ONI Section III"
 	total_positions = 1
 	spawn_positions = 1
@@ -27,8 +28,9 @@
 
 /datum/job/ONIGUARD
 	title = "ONI Security Guard"
+	spawn_faction = "UNSC"
 	supervisors = "the ONI Security Commander"
-	total_positions = 3
+	total_positions = 8
 	spawn_positions = 3
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
@@ -39,6 +41,7 @@
 
 /datum/job/ONIGUARDS
 	title = "ONI Security Commander"
+	spawn_faction = "UNSC"
 	supervisors = "the ONI Research Director"
 	total_positions = 1
 	spawn_positions = 1

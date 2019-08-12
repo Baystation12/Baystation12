@@ -185,10 +185,29 @@
 	"Unyielding Faith",
 	"Resolute Prophecy",
 	"Journey's Shield",
+	"Shadow of Inquisitor",
+	"Spear of Truth",
+	"The Remembered Sacrifice",
+	"Understood Silence",
+	"Unified Demise",
+	"Sundered Oath",
+	"Templar Of Light",
+	"Flayer Of Heresy",
+	"Holy Martyr",
+	"Sunderer Of Will",
+	"Spire Of Gospel",
+	"Ascendance Of Glory",
+	"Slayer Of The Damned",
+	"Heart of faith",
+	"Voice of the heavens",
+	"Essence of Loyalty",
+	"Courage and Zeal",
+	"Confirmation of Purity",
+	"Redemption Through Servitude",
 	"Vanguard of Charity",
 	"Faithful's Endeavour"
 	)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi','code/modules/halo/icons/overmap/SDV.dmi')
 	faction = "Covenant"
 	radio_language = "Sangheili"
 	radio_channel = "Battlenet"
