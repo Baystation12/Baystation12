@@ -1,0 +1,4 @@
+author: "YodaDoge"
+delete-after: True
+changes: 
+  - tweak: "reduced shield power usage"
