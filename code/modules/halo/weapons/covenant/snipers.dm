@@ -4,7 +4,7 @@
 	desc = "One of the few covenant weapons that utilise magazines."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "type 51"
-	item_state = "type 51"
+	item_state = "w_carbine"
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/cov_carbine_fire.ogg'

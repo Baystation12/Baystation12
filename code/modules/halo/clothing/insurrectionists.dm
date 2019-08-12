@@ -33,7 +33,7 @@
 
 /obj/item/clothing/head/helmet/lighturf/brown
 	name = "LV28L Armored Helmet - Brown Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_brown"
@@ -51,7 +51,7 @@
 
 /obj/item/clothing/head/helmet/lighturf/blue
 	name = "LV28L Armored Helmet - Blue Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_blue"
@@ -69,7 +69,7 @@
 
 /obj/item/clothing/head/helmet/lighturf/green
 	name = "LV28L Armored Helmet - Green Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_green"
@@ -87,7 +87,7 @@
 
 /obj/item/clothing/head/helmet/lighturf/black
 	name = "LV28L Armored Helmet - Black Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_black"
@@ -105,7 +105,7 @@
 
 /obj/item/clothing/head/helmet/lighturf/white
 	name = "LV28L Armored Helmet - White Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_white"
@@ -123,7 +123,7 @@
 
 /obj/item/clothing/head/helmet/mediumurf/brown
 	name = "LV28D Armored Helmet - Brown Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_brown"
@@ -141,7 +141,7 @@
 
 /obj/item/clothing/head/helmet/mediumurf/blue
 	name = "LV28D Armored Helmet - Blue Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_blue"
@@ -159,7 +159,7 @@
 
 /obj/item/clothing/head/helmet/mediumurf/green
 	name = "LV28D Armored Helmet - Green Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_green"
@@ -177,7 +177,7 @@
 
 /obj/item/clothing/head/helmet/mediumurf/black
 	name = "LV28D Armored Helmet - Black Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_black"
@@ -195,7 +195,7 @@
 
 /obj/item/clothing/head/helmet/mediumurf/white
 	name = "LV28D Armored Helmet - White Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_white"
@@ -213,7 +213,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/brown
 	name = "LV28H Armored Helmet - Brown Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_brown"
@@ -231,7 +231,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/vbrown
 	name = "LV28H Armored Helmet Visor Variant - Brown Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_brown_visor"
@@ -249,7 +249,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/blue
 	name = "LV28H Armored Helmet - Blue Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_blue"
@@ -267,7 +267,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/vblue
 	name = "LV28H Armored Helmet Visor Variant - Blue Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_blue_visor"
@@ -285,7 +285,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/green
 	name = "LV28H Armored Helmet - Green Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_green"
@@ -303,7 +303,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/vgreen
 	name = "LV28H Armored Helmet Visor Variant - Green Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_green_visor"
@@ -321,7 +321,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/black
 	name = "LV28H Armored Helmet - Black Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_black"
@@ -339,7 +339,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/vblack
 	name = "LV28H Armored Helmet Visor Variant - Black Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_black_visor"
@@ -357,7 +357,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/white
 	name = "LV28H Armored Helmet - White Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_white"
@@ -375,7 +375,7 @@
 
 /obj/item/clothing/head/helmet/heavyurf/vwhite
 	name = "LV28H Armored Helmet Visor Variant - White Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-25 for the new armor series being rolled out from Eridanus Secundus"
+	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_white_visor"
@@ -574,7 +574,7 @@
 
 /obj/item/clothing/suit/storage/lighturfarmor/
 	name = "M22L Body Armor"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_blue"
@@ -591,7 +591,7 @@
 
 /obj/item/clothing/suit/storage/lighturfarmor/blue
 	name = "M22L Body Armor - Blue Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_blue"
@@ -608,7 +608,7 @@
 
 /obj/item/clothing/suit/storage/lighturfarmor/brown
 	name = "M22L Body Armor - Brown Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_brown"
@@ -625,7 +625,7 @@
 
 /obj/item/clothing/suit/storage/lighturfarmor/green
 	name = "M22L Body Armor - Green Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_green"
@@ -642,7 +642,7 @@
 
 /obj/item/clothing/suit/storage/lighturfarmor/black
 	name = "M22L Body Armor - Black Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_black"
@@ -659,7 +659,7 @@
 
 /obj/item/clothing/suit/storage/lighturfarmor/white
 	name = "M22L Body Armor - White Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_white"
@@ -676,7 +676,7 @@
 
 /obj/item/clothing/suit/storage/mediumurfarmor/
 	name = "M22D Body Armor"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_blue"
@@ -693,7 +693,7 @@
 
 /obj/item/clothing/suit/storage/mediumurfarmor/blue
 	name = "M22D Body Armor - Blue Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_blue"
@@ -709,7 +709,7 @@
 
 /obj/item/clothing/suit/storage/mediumurfarmor/brown
 	name = "M22D Body Armor - Brown Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_brown"
@@ -725,7 +725,7 @@
 
 /obj/item/clothing/suit/storage/mediumurfarmor/green
 	name = "M22D Body Armor - Green Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_green"
@@ -741,7 +741,7 @@
 
 /obj/item/clothing/suit/storage/mediumurfarmor/black
 	name = "M22D Body Armor - Black Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_black"
@@ -757,7 +757,7 @@
 
 /obj/item/clothing/suit/storage/mediumurfarmor/white
 	name = "M22D Body Armor - White Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_white"
@@ -773,7 +773,7 @@
 
 /obj/item/clothing/suit/storage/heavyurfarmor/blue
 	name = "M22H Body Armor - Blue Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_blue"
@@ -791,7 +791,7 @@
 
 /obj/item/clothing/suit/storage/heavyurfarmor/
 	name = "M22H Body Armor"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_brown"
@@ -809,7 +809,7 @@
 
 /obj/item/clothing/suit/storage/heavyurfarmor/brown
 	name = "M22H Body Armor - Brown Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_brown"
@@ -827,7 +827,7 @@
 
 /obj/item/clothing/suit/storage/heavyurfarmor/green
 	name = "M22H Body Armor - Green Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_green"
@@ -845,7 +845,7 @@
 
 /obj/item/clothing/suit/storage/heavyurfarmor/black
 	name = "M22H Body Armor - Black Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_black"
@@ -863,7 +863,7 @@
 
 /obj/item/clothing/suit/storage/heavyurfarmor/white
 	name = "M22H Body Armor - White Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-25 for the new armor series being rolled out from Eridanus Secundus."
+	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_white"

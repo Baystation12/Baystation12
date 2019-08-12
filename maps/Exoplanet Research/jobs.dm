@@ -28,7 +28,7 @@
 /datum/job/ONIGUARD
 	title = "ONI Security Guard"
 	supervisors = "the ONI Security Commander"
-	total_positions = 3
+	total_positions = 8
 	spawn_positions = 3
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
