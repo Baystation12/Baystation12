@@ -240,6 +240,7 @@
 	var/datum/radio_frequency/radio_connection
 
 	var/on = 1
+	interact_offline = TRUE
 
 
 /obj/machinery/access_button/on_update_icon()
