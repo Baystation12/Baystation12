@@ -269,4 +269,4 @@
 	result_type = /obj/item/weapon/material/drill_head
 	req_amount = 3
 	send_material_data = 1
-	difficulty = 0
+	difficulty = 3
