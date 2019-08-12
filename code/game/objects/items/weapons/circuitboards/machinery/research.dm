@@ -1,8 +1,4 @@
-#ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it!
-#endif
-
-obj/item/weapon/stock_parts/circuitboard/rdserver
+/obj/item/weapon/stock_parts/circuitboard/rdserver
 	name = T_BOARD("R&D server")
 	build_path = /obj/machinery/r_n_d/server
 	board_type = "machine"
