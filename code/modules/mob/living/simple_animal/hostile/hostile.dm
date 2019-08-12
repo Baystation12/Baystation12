@@ -26,6 +26,8 @@
 
 	var/feral = 0
 
+	var/obj/item/weapon/gun/vehicle_turret/using_vehicle_gun
+
 	var/datum/npc_overmind/our_overmind
 
 /mob/living/simple_animal/hostile/New()
@@ -46,6 +48,18 @@
 		if(!sorted)
 			our_overmind.other_troops += src
 
+
+/mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
+	if(istype(loc,/obj/vehicles))
+		var/obj/vehicles/v = loc
+		if(!using_vehicle_gun && src in v.get_occupants_in_position("gunner"))
+			var/using_vehicle_gun_type = pick(v.comp_prof.gunner_weapons)
+			using_vehicle_gun = new using_vehicle_gun_type
+		. = v.relaymove(src,dir)
+	else
+		if(using_vehicle_gun)
+			qdel(using_vehicle_gun)
+		. = ..()
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
@@ -82,10 +96,15 @@
 				break
 		else if(istype(A,/obj/vehicles))
 			var/obj/vehicles/v = A
-			if(v.occupants.len > 2)
+			var/attack_vehicle = 0
+			for(var/mob/m in v.occupants)
+				if(m.stat == CONSCIOUS && m.faction != src.faction)
+					attack_vehicle = 1
+					break
+			if(attack_vehicle)
 				stance = HOSTILE_STANCE_ATTACK
 				T = v
-				break
+			break
 
 	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(7)
@@ -101,7 +120,7 @@
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(7))
-		if(ranged)
+		if(ranged || using_vehicle_gun)
 			if(get_dist(src, target_mob) <= 6)
 				walk(src, 0)
 				OpenFire(target_mob)
@@ -146,29 +165,36 @@
 		src.do_attack_animation(L)
 		spawn(1) L.updatehealth()
 		return L
-	if(istype(attacked,/obj/mecha))
-		var/obj/mecha/M = attacked
-		M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
-		return M
-
-	if(istype(attacked,/obj/structure))
-		var/obj/structure/attacked_obj = attacked
-		attacked_obj.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+	if(istype(attacked,/obj/mecha) || istype(attacked,/obj/structure))
+		var/obj/o = attacked
+		o.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		return o
+	if(istype(attacked,/obj/vehicles))
+		var/obj/vehicles/v = attacked
+		v.comp_prof.take_component_damage(rand(melee_damage_lower,melee_damage_upper),damtype)
+		return v
 
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	if(!ranged)
 		return
 	var/target = attacked
 	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
+	var/casingtype_use = casingtype
+	var/burstsize_use = burst_size
+	var/burstdelay_use = burst_delay
+	if(using_vehicle_gun)
+		casingtype_use = null
+		burstsize_use = using_vehicle_gun.burst
+		burstdelay_use = using_vehicle_gun.burst_delay
 
-	if(burst_size > 0)
-		for(var/i = 0, i < burst_size,i++)
+	if(burstsize_use > 0)
+		for(var/i = 0, i < burstsize_use,i++)
 			Shoot(target, src.loc, src)
-			if(casingtype)
+			if(casingtype_use)
 				var/obj/item/ammo_casing/casing = new casingtype(get_turf(src))
 				if(!isnull(casing.BB))
 					casing.expend()
-			sleep(burst_delay)
+			sleep(burstdelay_use)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -183,10 +209,7 @@
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	var/list/L = list()
 
-	for (var/obj/mecha/M in mechas_list)
-		if (M.z == src.z && get_dist(src, M) <= dist)
-			L += M
-	for(var/A in view(dist,src))
+	for(var/A in view(dist,src.loc))
 		if(istype(A,/mob/living))
 			L += A
 			continue
@@ -276,9 +299,14 @@
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	if(target == start)
 		return
+	var/projtype_use = projectiletype
+	var/projsound_use = projectilesound
+	if(using_vehicle_gun)
+		projtype_use = using_vehicle_gun.projectile_fired
+		projsound_use = using_vehicle_gun.fire_sound
 
-	var/obj/item/projectile/A = new projectiletype(user:loc)
-	playsound(user, projectilesound, 100, 1)
+	var/obj/item/projectile/A = new projtype_use(user:loc)
+	playsound(user, projsound_use, 100, 1)
 	if(!A)	return
 	var/def_zone = get_exposed_defense_zone(target)
 	A.launch(target, def_zone)
