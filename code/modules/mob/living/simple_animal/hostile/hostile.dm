@@ -4,11 +4,12 @@
 	var/mob/living/target_mob
 	var/attack_same = 0
 	var/ranged = 0
-	var/rapid = 0
+	var/burst_size = 1
+	var/burst_delay = 0.5 SECONDS
 	var/projectiletype
 	var/projectilesound
 	var/list/attack_sfx = list()
-	var/casingtype
+	var/obj/item/ammo_casing/casingtype
 	var/move_to_delay = 4 //delay for the automated movement.
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
@@ -154,23 +155,14 @@
 	var/target = attacked
 	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
 
-	if(rapid)
-		spawn(1)
+	if(burst_size > 0)
+		for(var/i = 0, i < burst_size,i++)
 			Shoot(target, src.loc, src)
 			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(4)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(6)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-	else
-		Shoot(target, src.loc, src)
-		if(casingtype)
-			new casingtype
+				var/obj/item/ammo_casing/casing = new casingtype(get_turf(src))
+				if(!isnull(casing.BB))
+					casing.expend()
+			sleep(burst_delay)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE

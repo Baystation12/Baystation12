@@ -33,3 +33,37 @@
 		set_light(4)
 	else
 		set_light(0)
+
+//SOE Shotgun
+
+/obj/item/weapon/gun/projectile/shotgun/soe
+	name = "KV-32 custom shotgun"
+	desc = "An old model of a shotgun, has two barrels."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "KV-32_unloaded"
+	item_state = "KV-32"
+	load_method = MAGAZINE
+	caliber = "shotgun"
+	slot_flags = SLOT_BACK
+	magazine_type = /obj/item/ammo_magazine/kv32
+	one_hand_penalty = -1
+	burst = 2
+	fire_delay = 1
+	screen_shake = 2
+	accuracy = -1
+	dispersion=list(0.0, 0.6)
+	w_class = ITEM_SIZE_LARGE
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+	wielded_item_state = "KV-32-wielded" //sort of placeholder
+	fire_sound = 'code/modules/halo/sounds/Shotgun_Shot_Sound_Effect.ogg'
+	reload_sound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
+
+/obj/item/weapon/gun/projectile/shotgun/soe/update_icon()
+	if(ammo_magazine)
+		icon_state = "KV-32_loaded"
+	else
+		icon_state = "KV-32_unloaded"
+	. = ..()

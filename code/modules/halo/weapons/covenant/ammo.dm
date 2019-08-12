@@ -1,3 +1,5 @@
+#define NEEDLER_EMBED_PROB 33
+
  // need icons for all projectiles and magazines
 /obj/item/projectile/covenant
 	name = "Plasma Bolt"
@@ -100,8 +102,8 @@
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
 
-/obj/item/projectile/bullet/covenant/needles/attack_mob(var/mob/living/carbon/human/L)
-	if(!istype(L))
+/obj/item/projectile/bullet/covenant/needles/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
+	if(blocked >= 100 || !istype(L))
 		. = ..()
 		return
 	var/list/embedded_shards[0]
@@ -114,12 +116,12 @@
 			explosion(L.loc,-1,1,2,5)
 			for(var/I in embedded_shards)
 				qdel(I)
-	if(prob(30)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
+	if(prob(NEEDLER_EMBED_PROB)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
 		var/obj/shard = new /obj/item/weapon/material/shard/shrapnel
 		var/obj/item/organ/external/embed_organ = pick(L.organs)
 		shard.name = shard_name
 		embed_organ.embed(shard)
-	..()
+	. = ..()
 
 /obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
 	if(ismob(target))
@@ -257,3 +259,4 @@
 
 #undef FUEL_ROD_IRRADIATE_RANGE
 #undef FUEL_ROD_IRRADIATE_AMOUNT
+#undef NEEDLER_EMBED_PROB
