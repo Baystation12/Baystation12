@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Resetting a tech you have no levels in at the RnD Server will no longer give you 1 in that tech."
+  - rscdel: "Removes Arcane Tech, as it did nothing."
