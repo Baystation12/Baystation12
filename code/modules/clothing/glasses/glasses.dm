@@ -413,7 +413,7 @@
 	name = "optical meson scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
-	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 
 /obj/item/clothing/glasses/thermal/plain
 	toggleable = FALSE

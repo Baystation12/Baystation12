@@ -68,7 +68,7 @@
 	name = "portable shield diffuser"
 	desc = "A small handheld device designed to disrupt energy barriers."
 	id = "portable_shield_diffuser"
-	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ILLEGAL = 2)
+	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ESOTERIC = 2)
 	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 5000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 2000)
 	build_path = /obj/item/weapon/shield_diffuser
 	sort_string = "VAGAH"

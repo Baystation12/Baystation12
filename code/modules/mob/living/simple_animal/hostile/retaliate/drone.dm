@@ -267,7 +267,7 @@
 		if(spawnees & 512)
 			C = new(src.loc)
 			C.SetName("Corrupted drone morality core")
-			C.origin_tech = list(TECH_ILLEGAL = rand(3,6))
+			C.origin_tech = list(TECH_ESOTERIC = rand(3,6))
 
 	..()
 

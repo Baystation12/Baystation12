@@ -384,7 +384,7 @@
 /datum/design/circuit/pacmanpotato
 	name = "PTTO-3 nuclear generator"
 	id = "pacmanpotato"
-	req_tech = list(TECH_DATA = 3, TECH_POWER = 5, TECH_ENGINEERING = 4, TECH_ILLEGAL = 4)
+	req_tech = list(TECH_DATA = 3, TECH_POWER = 5, TECH_ENGINEERING = 4, TECH_ESOTERIC = 4)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super/potato
 	sort_string = "JBAAD"
 
