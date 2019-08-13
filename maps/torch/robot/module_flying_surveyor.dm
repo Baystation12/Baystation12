@@ -34,6 +34,8 @@
 		/obj/item/bioreactor
 	)
 
+	emag = /obj/item/weapon/melee/energy/machete
+
 /obj/item/weapon/robot_module/flying/surveyor/finalize_synths()
 	. = ..()
 	for(var/flag_type in flag_types)
