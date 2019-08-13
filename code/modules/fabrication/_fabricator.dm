@@ -1,6 +1,7 @@
 /obj/machinery/fabricator
 	name = "autolathe"
 	desc = "It produces items using metal, glass, plastic, and aluminium. It has a built in shredder that can recycle most items, although any materials it cannot use will be wasted."
+	icon = 'icons/obj/machines/fabricators/autolathe.dmi'
 	icon_state = "autolathe"
 	density = 1
 	anchored = 1
@@ -15,6 +16,8 @@
 	base_type =       /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/panel_closed
 
+	var/base_icon_state = "autolathe"
+	var/image/panel_image
 	var/datum/fabricator_recipe/currently_building
 	var/fabricator_class = FABRICATOR_CLASS_GENERAL
 	var/list/stored_material
@@ -36,6 +39,7 @@
 	. = ..()
 	
 /obj/machinery/fabricator/Initialize()
+	panel_image = image(icon = icon, icon_state = "[base_icon_state]_p")
 	. = ..()
 	stored_material = list()
 	for(var/mat in base_storage_capacity)
@@ -44,7 +48,7 @@
 /obj/machinery/fabricator/interact(mob/user)
 	user.set_machine(src)
 
-	var/dat = "<center><h1>Autolathe Control Panel</h1><hr/>"
+	var/dat = "<center><h1>[capitalize(name)] Control Panel</h1><hr/>"
 
 	if(!(fab_status_flags & FAB_DISABLED))
 		dat += "<table width = '100%'>"
@@ -97,9 +101,13 @@
 
 		dat += "</table><hr>"
 
-	var/datum/browser/popup = new(user, "autolathenew", "Autholathe", 450, 600)
+	var/datum/browser/popup = new(user, "fab_[base_icon_state]", "[capitalize(name)]", 450, 600)
 	popup.set_content(dat)
 	popup.open()
+
+/obj/machinery/fabricator/power_change()
+	. = ..()
+	update_icon()
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
@@ -157,10 +165,15 @@
 	var/amount_used = 0    // Amount of material sheets used, if a stack, or whether the item was used, if not.
 	var/space_left = FALSE
 
+	var/mat_colour
 	for(var/material in taking_matter)
 
 		if(stored_material[material] >= storage_capacity[material])
 			continue
+
+		var/material/mat = SSmaterials.get_material_by_name(material)
+		if(istype(mat) && !mat_colour)
+			mat_colour = mat.icon_colour
 
 		var/total_material = taking_matter[material]
 		if(stored_material[material] + total_material > storage_capacity[material])
@@ -172,14 +185,17 @@
 		amount_used = max(ceil(amount_available * total_material/taking_matter[material]), amount_used) // Use only as many sheets as needed, rounding up
 
 	if(!amount_used)
-		to_chat(user, SPAN_WARNING("\The [src] is full. Please remove material from the autolathe in order to insert more."))
+		to_chat(user, SPAN_WARNING("\The [src] is full. Please remove material from \the [src] in order to insert more."))
 		return
 	else if(!space_left)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] to capacity with \the [eating]."))
 	else
 		to_chat(user, SPAN_NOTICE("You fill \the [src] with \the [eating]."))
 
-	flick("autolathe_o", src) // Plays metal insertion animation. Work out a good way to work out a fitting animation. ~Z
+	var/image/mat_overlay = image(icon = icon, icon_state = "[base_icon_state]_mat")
+	mat_overlay.color = mat_colour
+	overlays |= mat_overlay
+	addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/remove_mat_overlay, mat_overlay), 5 SECONDS)
 
 	if(istype(eating,/obj/item/stack))
 		var/obj/item/stack/stack = eating
@@ -243,31 +259,43 @@
 			if(!isnull(stored_material[material]))
 				stored_material[material] = max(0, stored_material[material] - round(currently_building.resources[material] * mat_efficiency) * multiplier)
 
-		//Fancy autolathe animation.
-		flick("autolathe_n", src)
 		addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/complete_build, multiplier, currently_building), build_time)
+		update_icon()
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
 /obj/machinery/fabricator/proc/complete_build(var/multiplier, var/building)
 
-	if(QDELETED(src) || building != currently_building)
-		return
+	if(!QDELETED(src) && building == currently_building)
 
-	fab_status_flags &= ~FAB_BUSY
-	update_use_power(POWER_USE_IDLE)
+		fab_status_flags &= ~FAB_BUSY
+		update_use_power(POWER_USE_IDLE)
 
-	if(currently_building)
-		var/obj/item/I = new currently_building.recipe.path(loc)
-		if(multiplier > 1 && istype(I, /obj/item/stack))
-			var/obj/item/stack/S = I
-			S.amount = multiplier
-			S.update_icon()
-		QDEL_NULL(currently_building)
+		if(istype(currently_building))
+			var/obj/item/I = new currently_building.path(loc)
+			if(multiplier > 1 && istype(I, /obj/item/stack))
+				var/obj/item/stack/S = I
+				S.amount = multiplier
+				S.update_icon()
+
+	currently_building = null
+	update_icon()
 
 /obj/machinery/fabricator/on_update_icon()
-	icon_state = (panel_open ? "autolathe_t" : "autolathe")
+	if(stat & NOPOWER)
+		icon_state = "[base_icon_state]_d"
+	else if(currently_building)
+		icon_state = "[base_icon_state]_p"
+	else
+		icon_state = base_icon_state
+	if(panel_open)
+		overlays |= panel_image
+	else
+		overlays -= panel_image
+
+/obj/machinery/fabricator/proc/remove_mat_overlay(var/mat_overlay)
+	overlays -= mat_overlay
 
 //Updates overall lathe storage size.
 /obj/machinery/fabricator/RefreshParts()
