@@ -15,6 +15,7 @@
 	base_type =       /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/panel_closed
 
+	var/datum/fabricator_recipe/currently_building
 	var/fabricator_class = FABRICATOR_CLASS_GENERAL
 	var/list/stored_material
 	var/list/storage_capacity
@@ -28,8 +29,12 @@
 	var/show_category = "All"
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
-	var/build_time = 50
+	var/build_time = 5 SECONDS
 
+/obj/machinery/fabricator/Destroy()
+	currently_building = null
+	. = ..()
+	
 /obj/machinery/fabricator/Initialize()
 	. = ..()
 	stored_material = list()
@@ -53,9 +58,7 @@
 		dat += "[material_top]</tr>[material_bottom]</tr></table><hr>"
 		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
 
-		var/index = 0
 		for(var/datum/fabricator_recipe/R in SSfabrication.get_recipes(fabricator_class))
-			index++
 			if(R.hidden && !(fab_status_flags & FAB_HACKED) || (show_category != "All" && show_category != R.category))
 				continue
 			var/can_make = 1
@@ -87,10 +90,10 @@
 					if(max_sheets && max_sheets > 0)
 						multiplier_string  += "<br>"
 						for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
-							multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
-						multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
+							multiplier_string  += "<a href='?src=\ref[src];make=\ref[R];multiplier=[i]'>\[x[i]\]</a>"
+						multiplier_string += "<a href='?src=\ref[src];make=\ref[R];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
 
-			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
+			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=\ref[R];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
 
 		dat += "</table><hr>"
 
@@ -215,17 +218,13 @@
 
 	else if(!(fab_status_flags & FAB_BUSY) && href_list["make"])
 		. = TOPIC_REFRESH
-		var/index = text2num(href_list["make"])
-		var/multiplier = text2num(href_list["multiplier"])
-		var/datum/fabricator_recipe/making
-
-		var/list/available_recipes = SSfabrication.get_recipes(fabricator_class)
-		if(length(available_recipes) && index > 0 && index <= length(available_recipes))
-			making = available_recipes[index]
-
-		if(!making)
+		currently_building = locate(href_list["make"])
+		if(!istype(currently_building) || !(currently_building in SSfabrication.get_recipes(fabricator_class)))
+			currently_building = null
 			return TOPIC_HANDLED
-		if(!making.is_stack && multiplier != 1)
+
+		var/multiplier = text2num(href_list["multiplier"])
+		if(!currently_building.is_stack && multiplier != 1)
 			return TOPIC_HANDLED
 		multiplier = sanitize_integer(multiplier, 1, 100, 1)
 
@@ -233,37 +232,39 @@
 		update_use_power(POWER_USE_ACTIVE)
 
 		//Check if we still have the materials.
-		for(var/material in making.resources)
+		for(var/material in currently_building.resources)
 			if(!isnull(stored_material[material]))
-				if(stored_material[material] < round(making.resources[material] * mat_efficiency) * multiplier)
+				if(stored_material[material] < round(currently_building.resources[material] * mat_efficiency) * multiplier)
 					fab_status_flags &= ~FAB_BUSY
 					return TOPIC_REFRESH
 
 		//Consume materials.
-		for(var/material in making.resources)
+		for(var/material in currently_building.resources)
 			if(!isnull(stored_material[material]))
-				stored_material[material] = max(0, stored_material[material] - round(making.resources[material] * mat_efficiency) * multiplier)
+				stored_material[material] = max(0, stored_material[material] - round(currently_building.resources[material] * mat_efficiency) * multiplier)
 
 		//Fancy autolathe animation.
 		flick("autolathe_n", src)
+		addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/complete_build, multiplier, currently_building), build_time)
 
-		sleep(build_time)
+	if(. == TOPIC_REFRESH)
+		interact(user)
 
-		fab_status_flags &= ~FAB_BUSY
-		update_use_power(POWER_USE_IDLE)
+/obj/machinery/fabricator/proc/complete_build(var/multiplier, var/building)
 
-		//Sanity check.
-		if(!making || QDELETED(src)) return TOPIC_HANDLED
+	if(QDELETED(src) || building != currently_building)
+		return
 
-		//Create the desired item.
-		var/obj/item/I = new making.path(loc)
+	fab_status_flags &= ~FAB_BUSY
+	update_use_power(POWER_USE_IDLE)
+
+	if(currently_building)
+		var/obj/item/I = new currently_building.recipe.path(loc)
 		if(multiplier > 1 && istype(I, /obj/item/stack))
 			var/obj/item/stack/S = I
 			S.amount = multiplier
 			S.update_icon()
-
-	if(. == TOPIC_REFRESH)
-		interact(user)
+		QDEL_NULL(currently_building)
 
 /obj/machinery/fabricator/on_update_icon()
 	icon_state = (panel_open ? "autolathe_t" : "autolathe")
