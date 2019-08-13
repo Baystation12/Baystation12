@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Elevator will no longer get stuck when you give it multiple move orders via the elevator panel or the buttons on each floor. It will wait for nine seconds on each floor and then move to the next one in the list."
