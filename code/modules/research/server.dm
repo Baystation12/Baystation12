@@ -204,9 +204,10 @@
 	switch(screen)
 		if(0) //Main Menu
 			dat += "Connected Servers:<BR><BR>"
-
+			var/turf/T = get_turf(src)
 			for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
-				if(istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin)
+				var/turf/ST = get_turf(S)
+				if((istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin) || (ST && !AreConnectedZLevels(ST.z, T.z)))
 					continue
 				dat += "[S.name] || "
 				dat += "<A href='?src=\ref[src];access=[S.server_id]'> Access Rights</A> | "
