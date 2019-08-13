@@ -86,19 +86,30 @@
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(3)
 
-/obj/item/weapon/extinguisher/afterattack(var/atom/target, var/mob/user, var/flag)
+/obj/item/weapon/extinguisher/resolve_attackby(var/atom/target, var/mob/user, var/flag)
+	if (istype(target, /obj/structure/hygiene/sink) && reagents.get_free_space() > 0) // fill first, wash if full
+		return FALSE
+	return ..()
 
-	if(istype(target, /obj/structure/reagent_dispensers) && flag)
+
+/obj/item/weapon/extinguisher/afterattack(var/atom/target, var/mob/user, var/flag)
+	var/issink = istype(target, /obj/structure/hygiene/sink)
+
+	if (flag && (issink || istype(target, /obj/structure/reagent_dispensers)))
 		var/obj/dispenser = target
-		if (dispenser.reagents.total_volume == 0)
-			to_chat(user, SPAN_NOTICE("\The [dispenser] is empty."))
-			return
-		var/amount = dispenser.reagents.trans_to_obj(src, 500)
-		if (amount == null)
+		var/amount = reagents.get_free_space()
+		if (amount <= 0)
 			to_chat(user, SPAN_NOTICE("\The [src] is full."))
+			return
+		if (!issink) // sinks create reagents, they don't "contain" them
+			if (dispenser.reagents.total_volume <= 0)
+				to_chat(user, SPAN_NOTICE("\The [dispenser] is empty."))
+				return
+			amount = dispenser.reagents.trans_to_obj(src, max_water)
 		else
-			to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] units from \the [dispenser]."))
-			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+			reagents.add_reagent(/datum/reagent/water, amount)
+		to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] units from \the [dispenser]."))
+		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		if (istype(target, /obj/structure/reagent_dispensers/acid))
 			to_chat(user, SPAN_WARNING("The acid violently eats away at \the [src]!"))
 			if (prob(50))

@@ -441,12 +441,12 @@
 	to_chat(usr, "<span class='notice'>You start washing \the [I].</span>")
 
 	busy = 1
-	sleep(40)
+	if(!do_after(user, 40, src))
+		busy = 0
+		return TRUE
 	busy = 0
 
-	if(user.loc != location) return				//User has moved
-	if(!I) return 								//Item's been destroyed while washing
-	if(user.get_active_hand() != I) return		//Person has switched hands or the item in their hands
+	if(istype(O, /obj/item/weapon/extinguisher/)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \
