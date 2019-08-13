@@ -72,6 +72,22 @@
 /obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	default_material = MATERIAL_PLASTIC
 
+/obj/item/weapon/material/kitchen/utensil/spork
+	name = "spork"
+	desc = "It's a spork. It's much like a fork, but much blunter."
+	icon_state = "spork"
+
+/obj/item/weapon/material/kitchen/utensil/spork/plastic
+	default_material = MATERIAL_PLASTIC
+
+/obj/item/weapon/material/kitchen/utensil/foon
+	name = "foon"
+	desc = "It's a foon. It's much like a spoon, but much sharper."
+	icon_state = "foon"
+
+/obj/item/weapon/material/kitchen/utensil/foon/plastic
+	default_material = MATERIAL_PLASTIC
+
  /*
  * Rolling Pins
  */
