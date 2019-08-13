@@ -2,7 +2,7 @@
 	name = "\improper Planet"
 	icon_state = "planet"
 	requires_power = 0
-	luminosity = 0
+	dynamic_lighting = 1
 	has_gravity = 1
 	base_turf = /turf/simulated/floor/asteroid/planet
 
@@ -10,7 +10,7 @@
 /area/planets/Geminus
 	name = "\improper Geminus City"
 	icon_state = "Holodeck"
-	luminosity = 1
+	dynamic_lighting = 0
 
 /area/planets/Geminus/outdoor
 	name = "\improper Geminus City Area"
