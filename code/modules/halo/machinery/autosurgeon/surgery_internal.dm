@@ -14,15 +14,17 @@
 				if(surgery_target_int.status & ORGAN_BROKEN)
 					//fixi the broken status... this is a bit of a gimmick
 					surgery_target_int.status &= ~ORGAN_BROKEN
-					src.visible_message("<span class='info'>\The [src] treats internal damage to [buckled_mob]'s [surgery_target_ext].</span>")
+					src.visible_message("<span class='info'>\The [src] fixes [buckled_mob]'s [surgery_target_int.name].</span>")
 					playsound(src.loc, 'sound/effects/smoke.ogg', 15, 1)
+					buckled_mob:shock_stage += 20
 					. = 1
 
 				else if(surgery_target_int.damage > 0)
 					//fix ordinary damage
 					surgery_target_int.damage = 0
-					src.visible_message("<span class='info'>\The [src] treats surface damage to [buckled_mob]'s [surgery_target_ext].</span>")
+					src.visible_message("<span class='info'>\The [src] treats organ damage in [buckled_mob]'s [surgery_target_int.name].</span>")
 					playsound(src.loc, 'sound/effects/smoke.ogg', 15, 1)
+					buckled_mob:shock_stage += 20
 					. = 1
 			else
 				//make a surgical incision so we can access it
@@ -33,7 +35,8 @@
 
 				//stop the bleeding
 				surgery_target_ext.clamp()
-				src.visible_message("<span class='info'>\The [src] opens a surgical incision on [buckled_mob]'s [surgery_target_ext] then clamps the wound.</span>")
+				buckled_mob:shock_stage += 20
+				src.visible_message("<span class='info'>\The [src] opens a surgical incision on [buckled_mob]'s [surgery_target_ext.name] then clamps the wound.</span>")
 				. = 1
 
 			if(.)
@@ -45,7 +48,7 @@
 				//check for basic problems we can fix
 				if(internal.is_broken() || internal.is_damaged())
 					surgery_target_int = internal
-					src.visible_message("<span class='notice'>\The [src] has located damage to [buckled_mob]'s [surgery_target_int].</span>")
+					src.visible_message("<span class='notice'>\The [src] has located damage to [buckled_mob]'s [surgery_target_int.name].</span>")
 
 				if(surgery_target_int)
 					playsound(src.loc, 'sound/machines/buttonbeep.ogg', 15, 1)
