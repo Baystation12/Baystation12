@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - rscadd: "Surveyor Flying Robots now have an emag item, an energy machete."
