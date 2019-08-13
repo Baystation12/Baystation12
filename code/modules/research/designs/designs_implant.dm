@@ -36,20 +36,20 @@
 /datum/design/item/implant/adrenaline
 	name = "adrenaline"
 	id = "implant_adrenaline"
-	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ILLEGAL = 3)
+	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ESOTERIC = 3)
 	build_path = /obj/item/weapon/implantcase/adrenalin
 	sort_string = "MFAAE"
 
 /datum/design/item/implant/freedom
 	name = "freedom"
 	id = "implant_free"
-	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ILLEGAL = 3)
+	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ESOTERIC = 3)
 	build_path = /obj/item/weapon/implantcase/freedom
 	sort_string = "MFAAF"
 
 /datum/design/item/implant/explosive
 	name = "explosive"
 	id = "implant_explosive"
-	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ILLEGAL = 4)
+	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_ESOTERIC = 4)
 	build_path = /obj/item/weapon/implantcase/explosive
 	sort_string = "MFAAG"

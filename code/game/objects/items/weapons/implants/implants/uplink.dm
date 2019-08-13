@@ -1,7 +1,7 @@
 /obj/item/weapon/implant/uplink
 	name = "uplink implant"
 	desc = "Summon things."
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ESOTERIC = 3)
 	hidden = 1
 	var/activation_emote
 

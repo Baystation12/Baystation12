@@ -62,6 +62,6 @@
 	desc = "A toolbox in black, with stylish red trim. This one feels particularly heavy, yet balanced."
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
-	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
+	origin_tech = list(TECH_COMBAT = 1, TECH_ESOTERIC = 1)
 	attack_cooldown = 10
 	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/weapon/wirecutters, /obj/item/device/multitool)

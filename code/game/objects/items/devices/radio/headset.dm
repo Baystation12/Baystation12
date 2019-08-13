@@ -64,7 +64,7 @@
 	return -1
 
 /obj/item/device/radio/headset/syndicate
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/syndicate
 
@@ -77,7 +77,7 @@
 	set_frequency(SYND_FREQ)
 
 /obj/item/device/radio/headset/raider
-	origin_tech = list(TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_ESOTERIC = 2)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/raider
 
@@ -86,7 +86,7 @@
 	set_frequency(RAID_FREQ)
 
 /obj/item/device/radio/headset/binary
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	ks1type = /obj/item/device/encryptionkey/binary
 
 /obj/item/device/radio/headset/headset_sec

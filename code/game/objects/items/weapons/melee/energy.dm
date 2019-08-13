@@ -129,7 +129,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
-	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 	sharp = 1
 	edge = 1
 	base_parry_chance = 50
