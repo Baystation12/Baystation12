@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Petrov RnD console will start the round able to access the Core RnD server data and sync with the rest of the Torch."
