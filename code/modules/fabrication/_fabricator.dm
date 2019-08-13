@@ -39,7 +39,7 @@
 	. = ..()
 	
 /obj/machinery/fabricator/Initialize()
-	panel_image = image(icon = icon, icon_state = "[base_icon_state]_p")
+	panel_image = image(icon, "[base_icon_state]_panel")
 	. = ..()
 	stored_material = list()
 	for(var/mat in base_storage_capacity)
@@ -192,10 +192,10 @@
 	else
 		to_chat(user, SPAN_NOTICE("You fill \the [src] with \the [eating]."))
 
-	var/image/mat_overlay = image(icon = icon, icon_state = "[base_icon_state]_mat")
-	mat_overlay.color = mat_colour
-	overlays |= mat_overlay
-	addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/remove_mat_overlay, mat_overlay), 5 SECONDS)
+	var/image/adding_mat_overlay = image(icon, "[base_icon_state]_mat")
+	adding_mat_overlay.color = mat_colour
+	overlays += adding_mat_overlay
+	addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/remove_mat_overlay, adding_mat_overlay), 1 SECOND)
 
 	if(istype(eating,/obj/item/stack))
 		var/obj/item/stack/stack = eating
