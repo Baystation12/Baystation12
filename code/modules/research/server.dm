@@ -273,6 +273,6 @@
 
 /obj/machinery/r_n_d/server/core
 	name = "Core R&D Server"
-	id_with_upload_string = "1"
-	id_with_download_string = "1"
+	id_with_upload_string = "1;3"
+	id_with_download_string = "1;3"
 	server_id = 1
