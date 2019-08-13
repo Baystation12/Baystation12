@@ -1,7 +1,3 @@
-#ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it!
-#endif
-
 /obj/item/weapon/stock_parts/circuitboard/replicator
 	name = T_BOARD("food replicator")
 	build_path = /obj/machinery/food_replicator

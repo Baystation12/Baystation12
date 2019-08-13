@@ -1,7 +1,3 @@
-#ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it!
-#endif
-
 /obj/item/weapon/stock_parts/circuitboard/smes
 	name = T_BOARD("superconductive magnetic energy storage")
 	build_path = /obj/machinery/power/smes/buildable

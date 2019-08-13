@@ -1,6 +1,3 @@
-#ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it!
-#endif
 // New shields
 /obj/item/weapon/stock_parts/circuitboard/shield_generator
 	name = T_BOARD("advanced shield generator")
