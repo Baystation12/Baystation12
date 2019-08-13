@@ -1,10 +1,8 @@
 /datum/fabricator_recipe/arms_ammo
-	name = "syringe gun cartridge"
 	path = /obj/item/weapon/syringe_cartridge
 	category = "Arms and Ammunition"
 
 /datum/fabricator_recipe/arms_ammo/shotgun_holder
-	name = "shotgun ammunition holder"
 	path = /obj/item/ammo_magazine/shotholder/empty
 
 /datum/fabricator_recipe/arms_ammo/shotgun_blanks
@@ -12,6 +10,9 @@
 	path = /obj/item/ammo_casing/shotgun/blank
 
 /datum/fabricator_recipe/arms_ammo/hidden
+	path = /obj/item/weapon/material/hatchet/machete/steel
+
+/datum/fabricator_recipe/arms_ammo/hidden/shotgun
 	name = "ammunition (shotgun, beanbag)"
 	path = /obj/item/ammo_casing/shotgun/beanbag
 	hidden = TRUE
@@ -23,9 +24,6 @@
 /datum/fabricator_recipe/arms_ammo/hidden/magazine_smg_rubber
 	name = "ammunition (SMG rubber) top mounted"
 	path = /obj/item/ammo_magazine/smg_top/rubber
-
-/datum/fabricator_recipe/arms_ammo/hidden/machete
-	path = /obj/item/weapon/material/hatchet/machete/steel
 
 /datum/fabricator_recipe/arms_ammo/hidden/flamethrower
 	path = /obj/item/weapon/flamethrower/full
