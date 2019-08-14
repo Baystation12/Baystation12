@@ -46,8 +46,6 @@
 
 /obj/item/singularity_pull(S, current_size)
 	set waitfor = 0
-	if(anchored)
-		return
 	sleep(0) //this is needed or multiple items will be thrown sequentially and not simultaneously
 	if(current_size >= STAGE_FOUR)
 		//throw_at(S, 14, 3)
