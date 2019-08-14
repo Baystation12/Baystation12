@@ -557,6 +557,27 @@
 			I.additional_flash_effects(intensity)
 	return ..()
 
+/mob/living/carbon/human/proc/getFlashMod()
+	if(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		if(!istype(I))
+			return I.flash_mod
+	return species.flash_mod
+
+/mob/living/carbon/human/proc/getDarkvisionRange()
+	if(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		if(!istype(I))
+			return I.darksight_range
+	return species.darksight_range
+
+/mob/living/carbon/human/proc/getDarkvisionTint()
+	if(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		if(!istype(I))
+			return I.darksight_tint
+	return species.darksight_tint
+
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
 /mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)

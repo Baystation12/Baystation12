@@ -4,7 +4,7 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = ..()
 
-	if(species.slowdown)
+	if(species.slowdown && !isSynthetic())
 		tally += species.slowdown
 
 	tally += species.handle_movement_delay_special(src)
