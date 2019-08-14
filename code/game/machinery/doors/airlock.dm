@@ -801,6 +801,9 @@ About the new airlock wires panel:
 			update_icon()
 	return
 
+/obj/machinery/door/airlock/attack_robot(mob/user)
+	ui_interact(user)
+
 /obj/machinery/door/airlock/attack_ai(mob/user)
 	ui_interact(user)
 
