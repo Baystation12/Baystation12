@@ -211,9 +211,6 @@
 	var/load = 0
 
 /obj/machinery/centrifuge/proc/power(var/power_usage = 0)
-
-
-
 	var/area/A = get_area(src)
 	if(!istype(A) || !A.powered(EQUIP))
 		return FALSE
