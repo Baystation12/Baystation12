@@ -52,9 +52,6 @@
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
-		if(!using_vehicle_gun && src in v.get_occupants_in_position("gunner"))
-			var/using_vehicle_gun_type = pick(v.comp_prof.gunner_weapons)
-			using_vehicle_gun = new using_vehicle_gun_type
 		. = v.relaymove(src,dir)
 	else
 		if(using_vehicle_gun)
@@ -68,7 +65,7 @@
 	//stop_automated_movement = 0
 	for(var/atom/A in ListTargets(7))
 
-		if(A == src)
+		if(A == src || A == src.loc)
 			continue
 
 		var/atom/F = Found(A)
@@ -104,7 +101,7 @@
 			if(attack_vehicle)
 				stance = HOSTILE_STANCE_ATTACK
 				T = v
-			break
+				break
 
 	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(7)
@@ -120,8 +117,8 @@
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(7))
-		if(ranged || using_vehicle_gun)
-			if(get_dist(src, target_mob) <= 6)
+		if(ranged || istype(loc,/obj/vehicles))
+			if(get_dist(loc, target_mob) <= 6)
 				walk(src, 0)
 				OpenFire(target_mob)
 			else
@@ -142,7 +139,7 @@
 		return 0
 	if(next_move >= world.time)
 		return 0
-	if(get_dist(src, target_mob) <= 1)	//Attacking
+	if(Adjacent(target_mob))	//Attacking
 		AttackingTarget()
 		return 1
 
@@ -165,20 +162,30 @@
 		src.do_attack_animation(L)
 		spawn(1) L.updatehealth()
 		return L
-	if(istype(attacked,/obj/mecha) || istype(attacked,/obj/structure))
+	if(istype(attacked,/obj/mecha) || istype(attacked,/obj/structure) || istype(attacked,/obj/vehicles))
 		var/obj/o = attacked
 		o.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		src.do_attack_animation(o)
+		if(istype(attacked,/obj/vehicles))
+			var/obj/vehicles/v = attacked
+			if(v.movement_destroyed || v.guns_disabled)
+				target_mob = null
+				stance = HOSTILE_STANCE_IDLE
 		return o
-	if(istype(attacked,/obj/vehicles))
-		var/obj/vehicles/v = attacked
-		v.comp_prof.take_component_damage(rand(melee_damage_lower,melee_damage_upper),damtype)
-		return v
 
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
-	if(!ranged)
+	var/obj/vehicles/v = loc
+	if(istype(v))
+		if(!using_vehicle_gun && src in v.get_occupants_in_position("gunner"))
+			var/using_vehicle_gun_type = pick(v.comp_prof.gunner_weapons)
+			using_vehicle_gun = new using_vehicle_gun_type
+	else if(using_vehicle_gun)
+		using_vehicle_gun = null
+
+	if(!ranged && !using_vehicle_gun)
 		return
 	var/target = attacked
-	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
+	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>")
 	var/casingtype_use = casingtype
 	var/burstsize_use = burst_size
 	var/burstdelay_use = burst_delay
@@ -205,8 +212,7 @@
 	stance = HOSTILE_STANCE_IDLE
 	walk(src, 0)
 
-
-/mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
+/mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 8)
 	var/list/L = list()
 
 	for(var/A in view(dist,src.loc))
@@ -238,7 +244,7 @@
 		return 0
 	if(client || ckey)
 		return 0
-	if(isturf(src.loc))
+	if(isturf(src.loc) || istype(src.loc,/obj/vehicles))
 		if(!stat)
 			switch(stance)
 				if(HOSTILE_STANCE_IDLE)
@@ -306,6 +312,7 @@
 		projsound_use = using_vehicle_gun.fire_sound
 
 	var/obj/item/projectile/A = new projtype_use(user:loc)
+	A.permutated += user:loc
 	playsound(user, projsound_use, 100, 1)
 	if(!A)	return
 	var/def_zone = get_exposed_defense_zone(target)
