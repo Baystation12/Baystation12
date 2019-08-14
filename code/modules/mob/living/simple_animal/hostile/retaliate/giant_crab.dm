@@ -26,6 +26,7 @@
 	melee_damage_upper = 18
 	harm_intent_damage = 1
 	natural_armor = list(melee = 35, bullet = 20)
+	ability_cooldown = 2 MINUTES
 
 	var/return_damage_min = 2 //damage inflicted on attacker if they're not using a weapon
 	var/return_damage_max = 5
@@ -33,8 +34,6 @@
 	var/grab_duration = 3 //duration of disable in life ticks to simulate a grab
 	var/grab_damage = 6 //brute damage before reductions, per crab's life tick
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
-	var/grab_cooldown = 2 MINUTES
-	var/last_grasped = 0
 	var/continue_grab_prob = 35 //probability that a successful grab will be extended by one life tick
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Initialize() //embiggen
@@ -88,7 +87,7 @@
 				visible_message(SPAN_MFAUNA("\The [src] tightens its grip on \the [victim]!"))
 				return
 
-		if(!victim && can_grab(H))
+		if(!victim && can_perform_ability(H))
 			GLOB.destroyed_event.register(victim, src, .proc/release_grab)
 			victim = H
 			H.Weaken(grab_duration)
@@ -96,10 +95,12 @@
 			visible_message(SPAN_MFAUNA("\The [src] catches \the [victim] in its powerful pincer!"))
 			stop_automation = TRUE
 
-/mob/living/simple_animal/hostile/retaliate/giant_crab/proc/can_grab(mob/living/carbon/human/H)
-	if(!can_act() || last_grasped > world.time || !Adjacent(H))
+/mob/living/simple_animal/hostile/retaliate/giant_crab/can_perform_ability(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
 		return FALSE
-	return TRUE
+	if(!Adjacent(H))
+		return FALSE
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/process_grab()
 	if(victim && !incapacitated())
@@ -114,6 +115,6 @@
 		visible_message(SPAN_NOTICE("\The [src] releases its grip on \the [victim]!"))
 		GLOB.destroyed_event.unregister(victim)
 		victim = null
-	last_grasped = world.time + grab_cooldown
+	cooldown_ability(ability_cooldown)
 	stop_automation = FALSE
 	grab_damage = initial(grab_damage)

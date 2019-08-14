@@ -19,11 +19,10 @@
 	melee_damage_lower = 7
 	melee_damage_upper = 15
 	natural_armor = list(melee = 10)
+	ability_cooldown = 30 SECONDS
 
 	var/healing = FALSE
 	var/heal_amount = 6
-	var/last_vanished
-	var/vanish_cooldown = 30 SECONDS
 
 /mob/living/simple_animal/hostile/antlion/Life()
 	. = ..()
@@ -33,13 +32,15 @@
 	if(!.)
 		return
 	
-	if(can_vanish())
+	if(can_perform_ability())
 		vanish()
 
-/mob/living/simple_animal/hostile/antlion/proc/can_vanish()
-	if(!can_act() || last_vanished > world.time || !target_mob)
+/mob/living/simple_animal/hostile/antlion/can_perform_ability()
+	. = ..()
+	if(!.)
 		return FALSE
-	return TRUE
+	if(!target_mob)
+		return FALSE
 
 /mob/living/simple_animal/hostile/antlion/proc/vanish()
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
@@ -71,7 +72,7 @@
 	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
-	last_vanished = world.time + vanish_cooldown
+	cooldown_ability(ability_cooldown)
 	for(var/mob/living/carbon/human/H in get_turf(src))
 		var/zone_to_hit = pick(BP_R_FOOT, BP_L_FOOT, BP_R_LEG, BP_L_LEG, BP_GROIN)
 		H.apply_damage(rand(melee_damage_lower, melee_damage_upper), BRUTE, zone_to_hit, DAM_EDGE, used_weapon = "antlion mandible")
@@ -101,7 +102,7 @@
 	melee_damage_upper = 29
 	natural_armor = list(melee = 20)
 	heal_amount = 9
-	vanish_cooldown = 45 SECONDS
+	ability_cooldown = 45 SECONDS
 	can_escape = TRUE
 	break_stuff_probability = 25
 

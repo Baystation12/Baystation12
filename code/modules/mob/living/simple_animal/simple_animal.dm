@@ -72,6 +72,10 @@
 	// contained in a cage
 	var/in_stasis = 0
 
+	//for simple animals with abilities, mostly megafauna
+	var/ability_cooldown
+	var/time_last_used_ability
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	if(LAZYLEN(natural_armor))

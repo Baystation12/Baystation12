@@ -175,6 +175,6 @@
 	maxHealth = 25
 	melee_damage_lower = 3
 	melee_damage_upper = 4
-	attacktext = "claws"
+	attacktext = "scratched"
 
 	wizardy_spells = list(/spell/targeted/subjugation)

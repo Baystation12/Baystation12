@@ -13,7 +13,7 @@
 	melee_damage_flags = DAM_SHARP
 	pass_flags = PASS_FLAG_TABLE
 	faction = "leeches"
-	pry_time =  18 SECONDS
+	can_pry = FALSE
 	break_stuff_probability = 5
 	flash_vulnerability = 0
 	bleed_colour = COLOR_VIOLET
