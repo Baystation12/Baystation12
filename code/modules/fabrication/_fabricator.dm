@@ -16,9 +16,12 @@
 	base_type =       /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/panel_closed
 
+	var/list/material_overlays = list()
 	var/base_icon_state = "autolathe"
 	var/image/panel_image
+
 	var/datum/fabricator_recipe/currently_building
+
 	var/fabricator_class = FABRICATOR_CLASS_GENERAL
 	var/list/stored_material
 	var/list/storage_capacity
@@ -105,10 +108,6 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/fabricator/power_change()
-	. = ..()
-	update_icon()
-
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
@@ -194,7 +193,9 @@
 
 	var/image/adding_mat_overlay = image(icon, "[base_icon_state]_mat")
 	adding_mat_overlay.color = mat_colour
-	overlays += adding_mat_overlay
+	material_overlays += adding_mat_overlay
+	update_icon()
+
 	addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/remove_mat_overlay, adding_mat_overlay), 1 SECOND)
 
 	if(istype(eating,/obj/item/stack))
@@ -267,7 +268,7 @@
 
 /obj/machinery/fabricator/proc/complete_build(var/multiplier, var/building)
 
-	if(!QDELETED(src) && building == currently_building)
+	if(building == currently_building)
 
 		fab_status_flags &= ~FAB_BUSY
 		update_use_power(POWER_USE_IDLE)
@@ -283,19 +284,22 @@
 	update_icon()
 
 /obj/machinery/fabricator/on_update_icon()
+	overlays.Cut()
 	if(stat & NOPOWER)
 		icon_state = "[base_icon_state]_d"
 	else if(currently_building)
 		icon_state = "[base_icon_state]_p"
 	else
 		icon_state = base_icon_state
+
+	var/list/new_overlays = material_overlays.Copy()
 	if(panel_open)
-		overlays |= panel_image
-	else
-		overlays -= panel_image
+		new_overlays += panel_image
+	overlays = new_overlays
 
 /obj/machinery/fabricator/proc/remove_mat_overlay(var/mat_overlay)
-	overlays -= mat_overlay
+	material_overlays -= mat_overlay
+	update_icon()
 
 //Updates overall lathe storage size.
 /obj/machinery/fabricator/RefreshParts()
