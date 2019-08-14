@@ -18,7 +18,7 @@ GLOBAL_LIST_INIT(nrods, list())
 	var/list/reactants = list()
 	var/integrity = 100
 	var/broken = 0
-	var/thermalkoeff = 360
+	var/thermalkoeff = 360  //Here is the coefficients, I added them for ingame reactor cinfigurations, if reactor is working correctly, they can be replaced with integers
 	var/radkoeff = 65
 	var/raddeccoeff = 121
 	var/thermaldecaycoeff = 10
@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(nrods, list())
 	var/list/possible_reactions = new /list(0)
 
 /obj/machinery/power/nuclear_rod/Initialize()
-	..()
+	. = ..()
 	GLOB.nrods += src
 
 /obj/machinery/power/nuclear_rod/Destroy()
@@ -183,8 +183,9 @@ GLOBAL_LIST_INIT(nrods, list())
 
 	if(reactants.len)
 		var/list/produced_reactants = new /list(0)
-		for(var/p_reaction_type in subtypesof(/decl/nuclear_reaction))
-			var/decl/nuclear_reaction/p_reaction = new p_reaction_type
+		var/list/allreactions = decls_repository.get_decls_of_subtype(/decl/nuclear_reaction)
+		for(var/decl in allreactions)
+			var/decl/nuclear_reaction/p_reaction = allreactions[decl]
 			if(!p_reaction.substance || (p_reaction.type in possible_reactions))
 				continue
 			if(reactants[p_reaction.substance] && (reaction_rads >= p_reaction.required_rads))
@@ -206,7 +207,7 @@ GLOBAL_LIST_INIT(nrods, list())
 			var/amount_reacting = rand((max_num_reactants * 0.96), max_num_reactants)//This value is sometimes manages to get negative
 			if(amount_reacting <= 0)
 				continue
-			
+
 			if( reactants[cur_reaction.substance] - amount_reacting >= 0 )
 				reactants[cur_reaction.substance] -= amount_reacting
 			else
@@ -215,15 +216,15 @@ GLOBAL_LIST_INIT(nrods, list())
 
 			if(((amount_reacting * cur_reaction.heat_production * thermalkoeff/9) < 5000) && ((amount_reacting * cur_reaction.heat_production) > 0)) //Change coefficients to configure the rod thermal output. DO NOT forget to doblicate it into if operator.
 				if(((rodtemp + amount_reacting * cur_reaction.heat_production * thermalkoeff) < 3000) || ((amount_reacting * cur_reaction.heat_production * 320) < 250))
-					rodtemp += amount_reacting * cur_reaction.heat_production * thermalkoeff
+					rodtemp += amount_reacting * cur_reaction.heat_production * thermalkoeff // Temperature increase. Stronger reaction = more temperature.
 				else
 					if(((rodtemp + amount_reacting * cur_reaction.heat_production * thermalkoeff/3) < 4000) || ((amount_reacting * cur_reaction.heat_production * 100) < 200))
-						rodtemp += amount_reacting * cur_reaction.heat_production * thermalkoeff/3
+						rodtemp += amount_reacting * cur_reaction.heat_production * thermalkoeff/3  
 					else
 						rodtemp += amount_reacting * cur_reaction.heat_production * thermalkoeff / 9
 
 			if(own_rads < 500) //Same as above, but with radiation.
-				own_rads += amount_reacting * cur_reaction.radiation * radkoeff
+				own_rads += amount_reacting * cur_reaction.radiation * radkoeff  //Coefficients are declared in define of the rod.
 			else if(own_rads < 2000)
 				own_rads += amount_reacting * cur_reaction.radiation * radkoeff/2
 			else if(own_rads < 7000)
