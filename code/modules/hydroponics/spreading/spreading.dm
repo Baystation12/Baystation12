@@ -201,7 +201,7 @@
 /obj/effect/vine/attackby(var/obj/item/weapon/W, var/mob/user)
 	START_PROCESSING(SSvines, src)
 
-	if(W.edge)
+	if(W.edge && W.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
 		if(!is_mature())
 			to_chat(user, "<span class='warning'>\The [src] is not mature enough to yield a sample yet.</span>")
 			return
@@ -217,6 +217,21 @@
 			damage *= 2
 		adjust_health(-damage)
 		playsound(get_turf(src), W.hitsound, 100, 1)
+		
+/obj/effect/vine/AltClick(var/mob/user)
+	if(!CanPhysicallyInteract(user) || user.incapacitated())
+		return ..()
+	var/obj/item/W = user.get_active_hand()
+	if(istype(W) && W.edge && W.w_class >= ITEM_SIZE_NORMAL)
+		visible_message(SPAN_NOTICE("[user] starts chopping down \the [src]."))
+		playsound(, W.hitsound, 100, 1)
+		var/chop_time = (health/W.force) * 0.5 SECONDS
+		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
+			chop_time *= 0.5
+		if(do_after(user, chop_time, src, TRUE))
+			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
+			playsound(get_turf(src), W.hitsound, 100, 1)
+			die_off()
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
 /obj/effect/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/plant/attacker_parent)
