@@ -39,7 +39,7 @@
 
 
 /obj/machinery/computer/reactor_control/Initialize()
-	..()
+	. = ..()
 	mon = new(src)
 	mon.id_tag = id_tag
 
@@ -105,7 +105,6 @@
 	for(var/obj/machinery/power/nuclear_rod/I in GLOB.nrods)
 		if(I.id_tag && (I.id_tag == id_tag)) //&& (get_dist(src, I) < 50))
 			known_rods += I
-
 
 /obj/item/weapon/stock_parts/circuitboard/reactor_montor_console
 	name = T_BOARD("Reactor monitor")
