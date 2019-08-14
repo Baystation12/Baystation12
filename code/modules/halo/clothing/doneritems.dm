@@ -1196,6 +1196,27 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
+////////Riley\\\\\\\
+
+//Marine
+
+/obj/item/clothing/head/helmet/marine/riley
+	name = " CH252MC-V modified helmet"
+	item_state = "riley-helmet_worn"
+	icon_state = "riley-helmet_obj"
+	desc = " this is a CH252MC-V modified helmet of the CH252-V version, it contains a 1 eye visor, and a blue cross instead of a  red one , also it seems to have holographic cat ears attached"
+
+/obj/item/clothing/suit/storage/marine/riley
+	desc = "this is an  M52BMC a modified M52B marine armor with Blue instead of red crosses and and front chest an tac pad monitor witch displays a blinking red cross and a text with says "you fuck up i patch up" the armor also seems to be fitted with a holographic cat tail"
+	name = "M52BMC"
+	item_state = "riley-armor_worn"
+	icon_state = "riley-armor_obj"
+
+
+/decl/hierarchy/outfit/riley_marine
+	name = "riley - marine"
+	suit = /obj/item/clothing/suit/storage/marine/riley
+	head = /obj/item/clothing/head/helmet/marine/riley
 
 
 #undef ODST_OVERRIDE
