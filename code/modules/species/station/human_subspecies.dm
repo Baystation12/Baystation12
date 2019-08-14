@@ -127,11 +127,13 @@
 	but is certainly both unique and remarkable in its ability to cope with the extremes that the \
 	Universe can throw at it."
 
+#define BOOSTER_RANDOM_STAT 0.85 + (rand() * 0.3)
 /datum/species/human/booster/New()
 	..()
 	slowdown =      pick(-0.5, 0, 0.5)
-	brute_mod =     rand(0.85,1.15)
-	burn_mod =      rand(0.85,1.15)
-	toxins_mod =    rand(0.85,1.15)
-	radiation_mod = rand(0.85,1.15)
-	flash_mod =     rand(0.85,1.15)
+	brute_mod =     BOOSTER_RANDOM_STAT
+	burn_mod =      BOOSTER_RANDOM_STAT
+	toxins_mod =    BOOSTER_RANDOM_STAT
+	radiation_mod = BOOSTER_RANDOM_STAT
+	flash_mod =     BOOSTER_RANDOM_STAT
+#undef BOOSTER_RANDOM_STAT
