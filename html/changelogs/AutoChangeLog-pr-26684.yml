@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - rscadd: "As the Torch now starts at random coordinates, the Torch round-start sensor scan will list these coordinates so it is clear where the bearings point from, incase you forget / join the round late."
