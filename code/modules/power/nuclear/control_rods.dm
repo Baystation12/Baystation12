@@ -20,7 +20,7 @@ GLOBAL_LIST_INIT(control_rods, list())
 
 
 /obj/machinery/control_rod/Initialize()
-	..()
+	. = ..()
 	GLOB.control_rods += src
 
 
