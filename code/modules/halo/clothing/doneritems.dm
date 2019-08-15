@@ -1207,7 +1207,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	desc = " this is a CH252MC-V modified helmet of the CH252-V version, it contains a 1 eye visor, and a blue cross instead of a  red one , also it seems to have holographic cat ears attached"
 
 /obj/item/clothing/suit/storage/marine/riley
-	desc = "this is an  M52BMC a modified M52B marine armor with Blue instead of red crosses and and front chest an tac pad monitor witch displays a blinking red cross and a text with says "you fuck up i patch up" the armor also seems to be fitted with a holographic cat tail"
+	desc = "this is an  M52BMC a modified M52B marine armor with Blue instead of red crosses and and front chest an tac pad monitor witch displays a blinking red cross and a text with says (you fuck up i patch up) the armor also seems to be fitted with a holographic cat tail"
 	name = "M52BMC"
 	item_state = "riley-armor_worn"
 	icon_state = "riley-armor_obj"
