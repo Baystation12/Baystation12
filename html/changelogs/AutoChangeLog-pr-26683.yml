@@ -1,6 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - tweak: "FBPs don't get affected by their species slowdown stat, positive or negative."
-  - tweak: "Robotic eyes ignore your species flash modifier."
-  - tweak: "Robotic eyes don't get species darkvision bonuses (e.g. from Space-Adapted Humans)"

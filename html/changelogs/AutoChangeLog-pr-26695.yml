@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "RnD server control consoles will only connect to things on connected Z-levels. So the Torch won't pick up away-site RnD servers only the RnD server control console."
