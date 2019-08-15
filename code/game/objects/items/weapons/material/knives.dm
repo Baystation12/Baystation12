@@ -39,6 +39,9 @@
 	applies_material_name = FALSE
 	w_class = ITEM_SIZE_SMALL
 
+/obj/item/weapon/material/knife/table/plastic
+	default_material = MATERIAL_PLASTIC
+
 /obj/item/weapon/material/knife/table/unathi
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."

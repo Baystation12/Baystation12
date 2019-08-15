@@ -14,6 +14,8 @@
 	edge = 0
 	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	default_material = MATERIAL_ALUMINIUM
+
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
 
