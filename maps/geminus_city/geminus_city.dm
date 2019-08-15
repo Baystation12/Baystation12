@@ -10,6 +10,7 @@
 
 	#include "innie_outfits.dm"
 	#include "innie_spawns.dm"
+	#include "innie_hud.dm"
 	#include "innie_jobs.dm"
 
 	#include "x52_spawns.dm"
