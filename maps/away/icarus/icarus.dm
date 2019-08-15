@@ -16,12 +16,12 @@
 	name = "[generate_planet_name()], \a [name]"
 	..()
 
-obj/effect/icarus/irradiate
+/obj/effect/icarus/irradiate
 	var/radiation_power = 20//20 Bq. Dangerous but survivable for 10-15 minutes if crew is too lazy to read away map description
 	var/datum/radiation_source/S
 	var/req_range = 100//to cover whole level
 
-obj/effect/icarus/irradiate/Initialize()
+/obj/effect/icarus/irradiate/Initialize()
 	. = ..()
 	S = new()
 	S.flat = TRUE
@@ -32,7 +32,7 @@ obj/effect/icarus/irradiate/Initialize()
 	S.update_rad_power(radiation_power)
 	SSradiation.add_source(S)
 
-obj/effect/icarus/irradiate/Destroy()
+/obj/effect/icarus/irradiate/Destroy()
 	. = ..()
 	QDEL_NULL(S)
 
@@ -42,6 +42,7 @@ obj/effect/icarus/irradiate/Destroy()
 	description = "The crashlanding site of the SEV Icarus."
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
+	generate_mining_by_z = list(1, 2)
 	area_usage_test_exempted_root_areas = list(/area/icarus)
 	area_coherency_test_exempt_areas = list(/area/icarus/vessel, /area/icarus/open)
 	apc_test_exempt_areas = list(

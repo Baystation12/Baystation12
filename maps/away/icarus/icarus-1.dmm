@@ -2659,10 +2659,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
-"iq" = (
-/obj/effect/landmark/random_gen/asteroid,
-/turf/unsimulated/mineral,
-/area/space)
 "jb" = (
 /obj/effect/shuttle_landmark/nav_icarus/nav1,
 /turf/simulated/floor/exoplanet/grass,
@@ -2913,7 +2909,7 @@ aa
 aa
 aa
 aa
-iq
+aa
 "}
 (2,1,1) = {"
 aa

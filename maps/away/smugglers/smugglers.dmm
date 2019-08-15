@@ -1038,13 +1038,6 @@
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav2,
 /turf/space,
 /area/space)
-"cD" = (
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 50;
-	generation_width = 50
-	},
-/turf/space,
-/area/space)
 "cE" = (
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav1,
 /turf/space,
@@ -3282,7 +3275,7 @@ aa
 aa
 aa
 aa
-cD
+aa
 aa
 aa
 aa

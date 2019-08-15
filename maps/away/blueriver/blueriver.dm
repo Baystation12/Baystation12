@@ -21,6 +21,7 @@
 	id = "awaysite_blue"
 	description = "Two z-level map with an arctic planet and an alien underground surface"
 	suffixes = list("blueriver/blueriver-1.dmm", "blueriver/blueriver-2.dmm")
+	generate_mining_by_z = 2
 	area_usage_test_exempted_root_areas = list(/area/bluespaceriver)
 	apc_test_exempt_areas = list(
 		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT|NO_APC,
