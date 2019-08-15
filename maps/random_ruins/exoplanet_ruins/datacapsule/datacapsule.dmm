@@ -23,7 +23,10 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/datacapsule)
 "h" = (
-/obj/machinery/r_n_d/server/core,
+/obj/machinery/r_n_d/server/core{
+	id_with_upload_string = "";
+	id_with_download_string = ""
+	},
 /turf/simulated/floor/reinforced,
 /area/map_template/datacapsule)
 "i" = (
