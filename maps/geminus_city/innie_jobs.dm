@@ -35,14 +35,16 @@
 	"Insurrectionist Infiltrator")
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	var/datum/antagonist/geminus_insurrectionist/antag
+
+/datum/job/geminus_innie/New()
+	. = ..()
+	antag = all_antag_types()["Geminus Insurrectionist"]
 
 /datum/job/geminus_innie/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	. = ..()
 
-	var/datum/antagonist/geminus_insurrectionist/antag = all_antag_types()["Geminus Insurrectionist"]
-	///datum/antagonist/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
 	antag.add_antagonist_mind(H.mind, 1, 1)
-	//antag.add_antagonist(H.mind, 1, 1, 0, 1, 1)
 
 /datum/job/geminus_innie/officer
 	title = "Insurrectionist Officer"
@@ -57,6 +59,12 @@
 	spawnpoint_override = "Geminus Innie"
 	alt_titles = null
 
+/datum/job/geminus_innie/officer/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
+	. = ..()
+
+	for(var/datum/mind/player in antag.faction_members)
+		to_chat(player.current,"<span class='info'>[title] [H] has arrived at the base.</span>")
+
 /datum/job/geminus_innie/commander
 	title = "Insurrectionist Commander"
 	department_flag = COM
@@ -70,3 +78,9 @@
 	spawnpoint_override = "Geminus Innie"
 	faction_whitelist = "Insurrection"
 	alt_titles = null
+
+/datum/job/geminus_innie/commander/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
+	. = ..()
+
+	for(var/datum/mind/player in antag.faction_members)
+		to_chat(player.current,"<span class='info'>[title] [H] has arrived at the base.</span>")
