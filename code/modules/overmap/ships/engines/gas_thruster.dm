@@ -115,7 +115,7 @@
 		new/obj/effect/engine_exhaust(T, exhaust_dir, air_contents.check_combustability() && air_contents.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE)
 
 /obj/machinery/atmospherics/unary/engine/proc/calculate_thrust(datum/gas_mixture/propellant, used_part = 1)
-	return round(sqrt(propellant.get_mass() * used_part * sqrt(air_contents.return_pressure()/200)),0.1)
+	return round(sqrt(propellant.get_mass() * used_part * sqrt(air_contents.return_pressure()/100)),0.1)
 
 //Exhaust effect
 /obj/effect/engine_exhaust
