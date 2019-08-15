@@ -37,6 +37,15 @@
 		/obj/item/weapon/stock_parts/power/apc/buildable = 1
 	)
 
+/obj/item/weapon/stock_parts/circuitboard/autolathe/micro
+	name = T_BOARD("microlathe")
+	build_path = /obj/machinery/fabricator/micro
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_DATA = 1)
+	req_components = list(
+		/obj/item/weapon/stock_parts/matter_bin = 1,
+		/obj/item/weapon/stock_parts/manipulator = 1
+	)
+
 /obj/item/weapon/stock_parts/circuitboard/protolathe
 	name = T_BOARD("protolathe")
 	build_path = /obj/machinery/r_n_d/protolathe
