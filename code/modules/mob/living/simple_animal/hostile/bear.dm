@@ -13,7 +13,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
@@ -24,14 +23,20 @@
 	melee_damage_upper = 30
 	melee_damage_flags = DAM_SHARP
 	can_escape = TRUE
+	faction = "russian"
 
 	//Space bears aren't affected by atmos.
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	var/stance_step = 0
 
-	faction = "russian"
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
+	meat_amount = 10
+	bone_amount = 20
+	skin_amount = 20
+	skin_material = MATERIAL_SKIN_FUR_HEAVY
+
+	var/stance_step = 0
 
 //SPACE BEARS! SQUEEEEEEEE~	 OW! FUCK! IT BIT MY HAND OFF!!
 /mob/living/simple_animal/hostile/bear/Hudson

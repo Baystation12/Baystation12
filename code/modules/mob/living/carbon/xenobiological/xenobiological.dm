@@ -19,6 +19,13 @@
 	// for the sake of cleanliness, though, here they are.
 	status_flags = CANPARALYSE|CANPUSH
 
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
 	var/toxloss = 0
 	var/is_adult = 0
 	var/number = 0 // Used to understand when someone is talking to it

@@ -24,13 +24,18 @@
 	supernatural = 1
 	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	var/nullblock = 0
-
 	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
 	mob_push_flags = ALLMOBS
-
 	bleed_colour = "#331111"
 
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
+	var/nullblock = 0
 	var/list/construct_spells = list()
 
 /mob/living/simple_animal/construct/cultify()

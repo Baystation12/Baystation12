@@ -2,6 +2,14 @@
 	gender = NEUTER
 	voice_name = "synthesized voice"
 	skillset = /datum/skillset/silicon
+
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws

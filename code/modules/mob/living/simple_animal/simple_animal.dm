@@ -9,6 +9,13 @@
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	meat_amount = 3
+	bone_material = MATERIAL_BONE_GENERIC
+	bone_amount = 5
+	skin_material = MATERIAL_SKIN_GENERIC 
+	skin_amount = 5
+
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
 	var/icon_living = ""

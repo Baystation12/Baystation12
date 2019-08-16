@@ -125,6 +125,13 @@
 	max_gas = null
 	minbodytemp = 0
 
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
 /mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)
 	..(null,"is smashed into pieces!", show_dead_message)
 	qdel(src)

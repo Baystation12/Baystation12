@@ -12,8 +12,6 @@
 	emote_see = list("shakes its head", "shivers")
 	speak_chance = 1
 	turns_per_move = 10
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
-	meat_amount = 3
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
@@ -21,9 +19,14 @@
 	mob_size = 8
 	possession_candidate = 1
 	holder_type = /obj/item/weapon/holder/corgi
+	pass_flags = PASS_FLAG_TABLE
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
+	meat_amount = 3
+	skin_material = MATERIAL_SKIN_FUR_ORANGE
+
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
-	pass_flags = PASS_FLAG_TABLE
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
@@ -134,6 +137,9 @@
 	icon_state = "puppy"
 	icon_living = "puppy"
 	icon_dead = "puppy_dead"
+	meat_amount = 1
+	skin_amount = 3
+	bone_amount = 3
 
 //pupplies cannot wear anything.
 /mob/living/simple_animal/corgi/puppy/Topic(href, href_list)

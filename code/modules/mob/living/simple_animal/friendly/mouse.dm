@@ -16,12 +16,10 @@
 	see_in_dark = 6
 	maxHealth = 5
 	health = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "stamps on"
 	density = 0
-	var/body_color //brown, gray and white, leave blank for random
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
 	universal_speak = FALSE
@@ -30,9 +28,15 @@
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 	can_escape = TRUE
-
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
+
+	meat_amount =   1
+	bone_amount =   1
+	skin_amount =   1
+	skin_material = MATERIAL_SKIN_FUR
+
+	var/body_color //brown, gray and white, leave blank for random
 
 /mob/living/simple_animal/mouse/Life()
 	. = ..()
@@ -72,11 +76,20 @@
 
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
+
 	icon_state = "mouse_[body_color]"
 	item_state = "mouse_[body_color]"
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+
+/mob/living/simple_animal/mouse/Initialize()
+	. = ..()
+	switch(body_color)
+		if("gray")
+			skin_material = MATERIAL_SKIN_FUR_GRAY
+		if("white")
+			skin_material = MATERIAL_SKIN_FUR_WHITE
 
 /mob/living/simple_animal/mouse/proc/splat()
 	icon_dead = "mouse_[body_color]_splat"

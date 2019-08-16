@@ -3,6 +3,13 @@
 	real_name = "host brain"
 	universal_understand = TRUE
 
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
 /mob/living/captive_brain/say(var/message)
 
 	if (src.client)

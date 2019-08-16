@@ -30,6 +30,13 @@
 
 	bleed_colour = "#181933"
 
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
 /mob/living/simple_animal/shade/cultify()
 	return
 
