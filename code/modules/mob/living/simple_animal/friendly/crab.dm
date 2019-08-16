@@ -11,18 +11,24 @@
 	emote_see = list("clacks")
 	speak_chance = 1
 	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stomps"
 	stop_automated_movement = 1
 	friendly = "pinches"
-	var/obj/item/inventory_head
-	var/obj/item/inventory_mask
 	possession_candidate = 1
 	can_escape = TRUE //snip snip
 	pass_flags = PASS_FLAG_TABLE
 	natural_armor = list(melee = 10, bullet = 5)
+
+	meat_amount =   3
+	skin_material = MATERIAL_SKIN_CHITIN
+	skin_amount =   10
+	bone_material = null
+	bone_amount =   0
+
+	var/obj/item/inventory_head
+	var/obj/item/inventory_mask
 
 /mob/living/simple_animal/crab/Life()
 	. = ..()

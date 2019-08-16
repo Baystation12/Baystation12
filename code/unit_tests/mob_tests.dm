@@ -618,6 +618,11 @@ datum/unit_test/mob_damage/halloss
 
 	for(var/mobtype in subtypesof(/mob/living))
 
+		// Humans use species for their products and are 
+		// difficult to properly unit test because of this.
+		if(ispath(mobtype, /mob/living/carbon/human))
+			continue
+
 		var/mob/living/animal = mobtype
 
 		var/mtype = ispath(initial(animal.meat_type))
@@ -627,7 +632,7 @@ datum/unit_test/mob_damage/halloss
 		else if(mtype && !mcount)
 			failed[mobtype] = "valid meat_type but meat_amount ([mcount]) is below or equal to zero"
 		else if(!mtype && mcount)
-			failed[mobtype] = "invalid meat_type ([mtype]) but meat_amount ([mcount]) above zero"
+			failed[mobtype] = "invalid meat_type ([mtype]) but meat_amount above zero"
 
 		var/smat =   initial(animal.skin_material)
 		var/stype =  (smat && istype(SSmaterials.get_material_by_name(smat), /material))
@@ -635,9 +640,9 @@ datum/unit_test/mob_damage/halloss
 		if(stype && scount)
 			check_skin += mobtype
 		else if(stype && !scount)
-			failed[mobtype] = "valid skin_material but skin_amount ([scount]) is below or equal to zero"
+			failed[mobtype] = "valid skin_material but skin_amount is below or equal to zero"
 		else if(!stype && scount)
-			failed[mobtype] = "invalid skin_material ([smat]) but skin_amount ([scount]) above zero"
+			failed[mobtype] = "invalid skin_material ([smat]) but skin_amount above zero"
 
 		var/bmat =   initial(animal.bone_material)
 		var/btype =  (bmat && istype(SSmaterials.get_material_by_name(bmat), /material))
@@ -645,9 +650,9 @@ datum/unit_test/mob_damage/halloss
 		if(btype && bcount)
 			check_bones += mobtype
 		else if(btype && !bcount)
-			failed += "[mobtype] - valid bone_material but bone_amount ([bcount]) is below or equal to zero"
+			failed += "[mobtype] - valid bone_material but bone_amount is below or equal to zero"
 		else if(!btype && bcount)
-			failed += "[mobtype] - invalid bone_material ([bmat]) but bone_amount ([bcount]) above zero"
+			failed += "[mobtype] - invalid bone_material ([bmat]) but bone_amount above zero"
 
 	var/list/spawned_mobs = list()
 	for(var/mobtype in check_skin)
@@ -675,7 +680,7 @@ datum/unit_test/mob_damage/halloss
 
 /datum/unit_test/mob_butchery/check_result()
 	if(length(failed))
-		fail("Some living mobs with butchery values have invalid values or do not produce valid products:<br>[jointext(failed, "<br>")]")
+		fail("Some living mobs with butchery values have invalid values or do not produce valid products:\n[jointext(failed, "\n")]")
 	else
 		pass("All living mobs with butchery values produce valid products.")
 	return TRUE

@@ -5,7 +5,6 @@
 	icon_state = "shark"
 	icon_living = "shark"
 	icon_dead = "shark_dead"
-	meat_amount = 10
 	turns_per_move = 2
 	move_to_delay = 2
 	attack_same = 1
@@ -23,6 +22,10 @@
 	can_escape = TRUE
 
 	break_stuff_probability = 55
+
+	meat_amount = 10
+	bone_amount = 20
+	skin_amount = 20
 
 /mob/living/simple_animal/hostile/carp/pike/carp_randomify()
 	return

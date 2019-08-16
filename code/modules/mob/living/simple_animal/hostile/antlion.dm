@@ -21,6 +21,13 @@
 	natural_armor = list(melee = 10)
 	ability_cooldown = 30 SECONDS
 
+	meat_type =     /obj/item/weapon/reagent_containers/food/snacks/xenomeat
+	meat_amount =   5
+	skin_material = MATERIAL_SKIN_CHITIN
+	skin_amount =   15
+	bone_material = MATERIAL_BONE_CARTILAGE
+	bone_amount =   10
+
 	var/healing = FALSE
 	var/heal_amount = 6
 
@@ -105,6 +112,11 @@
 	ability_cooldown = 45 SECONDS
 	can_escape = TRUE
 	break_stuff_probability = 25
+
+	meat_amount =   10
+	skin_material = MATERIAL_SKIN_CHITIN
+	skin_amount =   25
+	bone_amount =   15
 
 /mob/living/simple_animal/hostile/antlion/mega/Initialize()
 	. = ..()

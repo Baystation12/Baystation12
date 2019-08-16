@@ -4,12 +4,12 @@
 #define CARCASS_JOINTED  "jointed"
 
 /mob/living
-	var/meat_type
-	var/meat_amount = 3
-	var/skin_material
-	var/skin_amount = 3
-	var/bone_material
-	var/bone_amount = 3
+	var/meat_type =         /obj/item/weapon/reagent_containers/food/snacks/meat
+	var/meat_amount =       3
+	var/skin_material =     MATERIAL_SKIN_GENERIC
+	var/skin_amount =       3
+	var/bone_material =     MATERIAL_BONE_GENERIC
+	var/bone_amount =       3
 	var/skull_type
 	var/butchery_rotation = 90
 
@@ -137,7 +137,7 @@
 /obj/structure/kitchenspike/on_update_icon()
 	overlays.Cut()
 	if(occupant)
-		occupant.set_dir(EAST)
+		occupant.set_dir(SOUTH)
 		var/image/I = image(null)
 		I.appearance = occupant
 		var/matrix/M = matrix()

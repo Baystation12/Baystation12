@@ -17,11 +17,6 @@
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
-	skin_material = MATERIAL_SKIN_CHITIN
-	bone_material = null
-	skin_amount = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
-	meat_amount = 3
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
@@ -41,6 +36,13 @@
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
+	meat_amount = 3
+	bone_material = null
+	bone_amount =   0
+	skin_material = MATERIAL_SKIN_CHITIN
+	skin_amount =   5
 
 	var/poison_per_bite = 6
 	var/poison_type = /datum/reagent/toxin/venom

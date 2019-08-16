@@ -6,7 +6,6 @@
 	icon_gib = "carp_gib"
 	speak_chance = 0
 	turns_per_move = 3
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/poison
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
@@ -29,12 +28,13 @@
 	minbodytemp = 0
 
 	break_stuff_probability = 25
-
 	faction = "carp"
-
 	bleed_colour = "#5d0d71"
-
 	pass_flags = PASS_FLAG_TABLE
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/poison
+	skin_material = MATERIAL_SKIN_FISH_PURPLE
+	bone_material = MATERIAL_BONE_CARTILAGE
 
 	var/carp_color = "carp" //holder for icon set
 	var/list/icon_sets = list("carp", "blue", "yellow", "grape", "rust", "teal")

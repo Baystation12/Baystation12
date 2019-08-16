@@ -24,6 +24,10 @@
 	simple_parrot = TRUE
 	ability_cooldown = 2 MINUTES
 
+	meat_amount = 10
+	bone_amount = 20
+	skin_amount = 20
+
 	var/list/subspecies = list(/decl/parrot_subspecies,
 								/decl/parrot_subspecies/purple,
 								/decl/parrot_subspecies/blue,
@@ -39,6 +43,7 @@
 	if(subspecies_type)
 		var/decl/parrot_subspecies/ps = decls_repository.get_decl(subspecies_type)
 		icon_set = ps.icon_set
+		skin_material = ps.feathers
 		if(get_subspecies_name)
 			SetName(ps.name)
 	var/matrix/M = new

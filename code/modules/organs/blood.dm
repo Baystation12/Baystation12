@@ -161,12 +161,14 @@
 
 //Gets human's own blood.
 /mob/living/carbon/proc/get_blood(datum/reagents/container)
-	var/datum/reagent/blood/res = locate() in container.reagent_list //Grab some blood
-	if(res) // Make sure there's some blood at all
-		if(weakref && res.data["donor"] != weakref) //If it's not theirs, then we look for theirs
-			for(var/datum/reagent/blood/D in container.reagent_list)
-				if(weakref && D.data["donor"] != weakref)
-					return D
+	var/datum/reagent/blood/res
+	if(container)
+		res = locate() in container.reagent_list //Grab some blood
+		if(res) // Make sure there's some blood at all
+			if(weakref && res.data["donor"] != weakref) //If it's not theirs, then we look for theirs
+				for(var/datum/reagent/blood/D in container.reagent_list)
+					if(weakref && D.data["donor"] != weakref)
+						return D
 	return res
 
 /mob/living/carbon/human/get_blood(datum/reagents/container)

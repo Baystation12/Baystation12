@@ -21,6 +21,13 @@
 	natural_armor = list(melee = 20)
 	bleed_colour = SYNTH_BLOOD_COLOUR
 
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
 /mob/living/simple_animal/hostile/hivebot/range
 	desc = "A junky looking robot with four spiky legs. It's equipped with some kind of small-bore gun."
 	ranged = 1
