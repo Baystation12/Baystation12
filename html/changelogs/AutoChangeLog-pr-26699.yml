@@ -1,4 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - maptweak: "Torch's fuel pipes have been slightly remapped into safer positions with parts segmented by automatic shutoff valves to prevent leakage. The fuel lines has also been removed completed from the SM heating element (although the HE pipes are still there) and they should now be able to survive an SM delamination. To balance out these safety features, fuel line pressure has been doubled to increase the risk of bodily harm."
