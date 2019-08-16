@@ -599,3 +599,85 @@ datum/unit_test/mob_damage/halloss
 	else
 		pass("All mob organs fit.")
 	return TRUE
+
+// ============================================================================
+
+//
+// Tests butchery products.
+//
+
+/datum/unit_test/mob_butchery
+	name = "MOB: All Living Mobs Shall Have Valid Products When Butchery Values Are Set"
+	async = 1
+	var/list/failed =      list()
+	var/list/check_meat =  list()
+	var/list/check_skin =  list()
+	var/list/check_bones = list()
+
+/datum/unit_test/mob_butchery/start_test()
+
+	for(var/mobtype in subtypesof(/mob/living))
+
+		var/mob/living/animal = mobtype
+
+		var/mtype = ispath(initial(animal.meat_type))
+		var/mcount = initial(animal.meat_amount) > 0
+		if(mtype && mcount)
+			check_meat += mobtype
+		else if(mtype && !mcount)
+			failed[mobtype] = "valid meat_type but meat_amount ([mcount]) is below or equal to zero"
+		else if(!mtype && mcount)
+			failed[mobtype] = "invalid meat_type ([mtype]) but meat_amount ([mcount]) above zero"
+
+		var/smat =   initial(animal.skin_material)
+		var/stype =  (smat && istype(SSmaterials.get_material_by_name(smat), /material))
+		var/scount = initial(animal.skin_amount) > 0
+		if(stype && scount)
+			check_skin += mobtype
+		else if(stype && !scount)
+			failed[mobtype] = "valid skin_material but skin_amount ([scount]) is below or equal to zero"
+		else if(!stype && scount)
+			failed[mobtype] = "invalid skin_material ([smat]) but skin_amount ([scount]) above zero"
+
+		var/bmat =   initial(animal.bone_material)
+		var/btype =  (bmat && istype(SSmaterials.get_material_by_name(bmat), /material))
+		var/bcount = initial(animal.bone_amount) > 0
+		if(btype && bcount)
+			check_bones += mobtype
+		else if(btype && !bcount)
+			failed += "[mobtype] - valid bone_material but bone_amount ([bcount]) is below or equal to zero"
+		else if(!btype && bcount)
+			failed += "[mobtype] - invalid bone_material ([bmat]) but bone_amount ([bcount]) above zero"
+
+	var/list/spawned_mobs = list()
+	for(var/mobtype in check_skin)
+		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
+		spawned_mobs[mobtype] = M
+		if(!length(M.harvest_skin()))
+			failed += "[mobtype] - invalid skin products"
+	for(var/mobtype in check_bones)
+		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
+		spawned_mobs[mobtype] = M
+		if(!length(M.harvest_bones()))
+			failed += "[mobtype] - invalid bone products"
+	for(var/mobtype in check_meat)
+		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
+		spawned_mobs[mobtype] = M
+		if(!length(M.harvest_meat()))
+			failed += "[mobtype] - invalid meat products"
+	for(var/thing in spawned_mobs)
+		var/mob/living/M = spawned_mobs[thing]
+		if(!QDELETED(M))
+			qdel(M)
+	spawned_mobs.Cut()
+
+	return TRUE
+
+/datum/unit_test/mob_butchery/check_result()
+	if(length(failed))
+		fail("Some living mobs with butchery values have invalid values or do not produce valid products:<br>[jointext(failed, "<br>")]")
+	else
+		pass("All living mobs with butchery values produce valid products.")
+	return TRUE
+
+// ============================================================================
