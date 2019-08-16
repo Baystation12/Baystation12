@@ -560,21 +560,21 @@
 /mob/living/carbon/human/proc/getFlashMod()
 	if(species.vision_organ)
 		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
-		if(!istype(I))
+		if(istype(I))
 			return I.flash_mod
 	return species.flash_mod
 
 /mob/living/carbon/human/proc/getDarkvisionRange()
 	if(species.vision_organ)
 		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
-		if(!istype(I))
+		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
 
 /mob/living/carbon/human/proc/getDarkvisionTint()
 	if(species.vision_organ)
 		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
-		if(!istype(I))
+		if(istype(I))
 			return I.darksight_tint
 	return species.darksight_tint
 
