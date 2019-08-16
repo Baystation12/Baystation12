@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Glasses that apply a vision overlay (mesons, tactical goggles, etc.) will no longer function when you are using a sensor console to view the overmap."
