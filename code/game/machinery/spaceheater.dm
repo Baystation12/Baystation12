@@ -85,13 +85,12 @@
 	return
 
 /obj/machinery/space_heater/interface_interact(mob/user)
-	interact(user)
-	return TRUE
+	if(panel_open)
+		interact(user)
+		return TRUE
 
 /obj/machinery/space_heater/interact(mob/user)
-
 	if(panel_open)
-
 		var/list/dat = list()
 		dat += "Power cell: "
 		if(cell)
@@ -112,12 +111,15 @@
 		popup.set_content(jointext(dat, null))
 		popup.set_title_image(usr.browse_rsc_icon(src.icon, "sheater-standby"))
 		popup.open()
-	else
+
+	return
+
+/obj/machinery/space_heater/physical_attack_hand(mob/user)
+	if(!panel_open)
 		on = !on
 		user.visible_message("<span class='notice'>[user] switches [on ? "on" : "off"] the [src].</span>","<span class='notice'>You switch [on ? "on" : "off"] the [src].</span>")
 		update_icon()
-	return
-
+		return TRUE
 
 /obj/machinery/space_heater/Topic(href, href_list, state = GLOB.physical_state)
 	if (..())
