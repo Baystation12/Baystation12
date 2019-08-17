@@ -44,7 +44,6 @@
 
 /datum/fabricator_recipe/device_component/cable_coil
 	path = /obj/item/stack/cable_coil/single
-	is_stack = TRUE
 
 /datum/fabricator_recipe/device_component/electropack
 	path = /obj/item/device/radio/electropack
