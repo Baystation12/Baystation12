@@ -1604,6 +1604,7 @@
 #include "code\modules\halo\misc\SyetenArbiter\SyetenArbiter.dm"
 #include "code\modules\halo\NPC\npc.dm"
 #include "code\modules\halo\NPC\npc_buysell.dm"
+#include "code\modules\halo\NPC\npc_damage.dm"
 #include "code\modules\halo\NPC\npc_death.dm"
 #include "code\modules\halo\NPC\npc_interact.dm"
 #include "code\modules\halo\NPC\npc_listen.dm"

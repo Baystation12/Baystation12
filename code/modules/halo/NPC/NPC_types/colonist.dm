@@ -3,7 +3,7 @@
 	name = "colonist"
 	desc = "A human from one of Earth's diverse cultures who decided to try a future offplanet."
 	emote_hear = list("coughs","sneezes","sniffs","clears their throat","whistles tunelessly","sighs deeply","yawns","gasps loudly")
-	emote_see = list("shifts from side to side.","scratches their arm.","examines their nails.","stares at at the ground aimlessly.","looks bored.","Places their hands in their pockets.","Stares at you with a blank expression.")
+	emote_see = list("shifts from side to side.","scratches their arm.","examines their nails.","stares at at the ground aimlessly.","looks bored.","places their hands in their pockets.","stares at you with a blank expression.")
 	speak = list("Have you heard the latest news from Earth?",\
 		"I'd love to visit Reach one day.",\
 		"Do the UNSC really care about us? I haven't see them in years!",\
