@@ -69,7 +69,7 @@
 #define FIRE_LIQUD_MIN_BURNRATE			0.0025
 
 //How many moles of fuel are contained within one solid/liquid fuel volume unit
-#define LIQUIDFUEL_AMOUNT_TO_MOL		0.45  //mol/volume unit
+#define LIQUIDFUEL_AMOUNT_TO_MOL		0.2  //mol/volume unit
 
 // XGM gas flags.
 #define XGM_GAS_FUEL        1
