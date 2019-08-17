@@ -1327,6 +1327,7 @@
 #include "code\modules\ascent\_ascent.dm"
 #include "code\modules\ascent\ascent_atmos.dm"
 #include "code\modules\ascent\ascent_atoms.dm"
+#include "code\modules\ascent\ascent_doodads.dm"
 #include "code\modules\ascent\ascent_id.dm"
 #include "code\modules\ascent\ascent_machines.dm"
 #include "code\modules\ascent\ascent_outfit.dm"

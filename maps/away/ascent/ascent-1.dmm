@@ -999,6 +999,7 @@
 	icon_state = "0-4"
 	},
 /obj/effect/catwalk_plated/ascent,
+/obj/item/weapon/storage/bag/trash/purple/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_spike)
 "cv" = (
@@ -1014,6 +1015,7 @@
 	dir = 5
 	},
 /obj/effect/catwalk_plated/ascent,
+/obj/item/weapon/storage/bag/trash/purple/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_spike)
 "cx" = (
@@ -3693,6 +3695,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
 	dir = 1
 	},
+/obj/item/weapon/storage/box/water/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_spike)
 "hY" = (
@@ -3722,6 +3725,7 @@
 	dir = 1;
 	level = 2
 	},
+/obj/item/weapon/storage/box/water/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_spike)
 "ic" = (
@@ -3762,6 +3766,11 @@
 	},
 /obj/machinery/power/apc/hyper/ascent/west,
 /obj/effect/catwalk_plated/ascent,
+/obj/structure/hygiene/sink/ascent{
+	dir = 1;
+	icon_state = "sink";
+	pixel_y = 28
+	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_port_prow)
 "ii" = (
@@ -4101,7 +4110,7 @@
 /area/ship/ascent/shuttle_port)
 "iT" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/glasses,
+/obj/item/weapon/storage/box/water/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_prow)
 "iU" = (
@@ -4566,6 +4575,11 @@
 	},
 /turf/simulated/wall/ascent,
 /area/ship/ascent/fore_hallway)
+"kv" = (
+/obj/item/weapon/mop/advanced/ascent,
+/obj/item/weapon/reagent_containers/glass/bucket/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_spike)
 "ng" = (
 /obj/machinery/light/ascent,
 /obj/machinery/botany/editor,
@@ -4610,6 +4624,10 @@
 /obj/machinery/light/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
+"FN" = (
+/obj/item/weapon/storage/bag/trash/purple/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_port_spike)
 "GB" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/portable_atmospherics/canister/methyl_bromide,
@@ -4623,6 +4641,10 @@
 /obj/machinery/hologram/holopad/longrange/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"LN" = (
+/obj/structure/hygiene/shower/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
 "Ob" = (
 /obj/structure/bed/chair/padded/purple/ascent/gyne,
 /turf/simulated/floor/tiled/ascent,
@@ -4635,6 +4657,13 @@
 /obj/structure/window/phoronreinforced,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
+"QT" = (
+/obj/structure/hygiene/shower/ascent{
+	icon_state = "shower";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
 "QY" = (
 /obj/machinery/light/ascent{
 	dir = 1
@@ -4646,6 +4675,17 @@
 /obj/machinery/hologram/holopad/longrange/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
+"Sv" = (
+/obj/structure/closet/crate/freezer/meat/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_port_spike)
+"TO" = (
+/obj/structure/hygiene/shower/ascent{
+	icon_state = "shower";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_hallway)
 "WI" = (
 /obj/structure/window/phoronreinforced{
 	dir = 1
@@ -8634,7 +8674,7 @@ aa
 aa
 fQ
 fR
-hs
+FN
 fQ
 aa
 aa
@@ -8756,7 +8796,7 @@ aa
 aa
 fQ
 fR
-hs
+FN
 fQ
 aa
 aa
@@ -8878,7 +8918,7 @@ aa
 aa
 fQ
 fR
-fR
+Sv
 fQ
 aa
 aa
@@ -9000,7 +9040,7 @@ aa
 aa
 fQ
 hr
-fR
+kv
 fQ
 aa
 aa
@@ -10455,11 +10495,11 @@ as
 cO
 bT
 ah
-bd
+LN
 bd
 gg
 bd
-bd
+QT
 cy
 ih
 hp
@@ -10699,11 +10739,11 @@ as
 bV
 as
 ah
-bd
+TO
 bd
 gg
 bd
-bd
+TO
 cy
 iT
 dk
