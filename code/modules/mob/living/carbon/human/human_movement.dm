@@ -4,8 +4,9 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = ..()
 
-	if(species.slowdown && !isSynthetic())
-		tally += species.slowdown
+	var/obj/item/organ/external/H = get_organ(BP_GROIN) // gets species slowdown, which can be reset by robotize()
+	if(istype(H))
+		tally += H.slowdown
 
 	tally += species.handle_movement_delay_special(src)
 
