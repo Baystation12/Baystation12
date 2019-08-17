@@ -1,5 +1,6 @@
 GLOBAL_VAR_INIT(total_runtimes, 0)
 GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
+GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 
 #ifdef DEBUG
 /world/Error(exception/E)
@@ -16,7 +17,16 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 
 	GLOB.total_runtimes++
 
-	var/erroruid = "[E.file],[E.line]"
+	var/efile = E.file
+	var/eline = E.line
+
+	var/regex/actual_error_file_line = GLOB.actual_error_file_line
+	if(actual_error_file_line.Find(E.name))
+		efile = actual_error_file_line.group[1]
+		eline = actual_error_file_line.group[2]
+		E.name = actual_error_file_line.Replace(E.name, "")
+
+	var/erroruid = "[efile],[eline]"
 	var/last_seen = error_last_seen[erroruid]
 	var/cooldown = error_cooldown[erroruid] || 0
 
@@ -55,7 +65,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 			var/skipcount = abs(error_cooldown[erroruid]) - 1
 			error_cooldown[erroruid] = 0
 			if(skipcount > 0)
-				to_world_log("\[[time_stamp()]] Skipped [skipcount] runtimes in [E.file],[E.line].")
+				to_world_log("\[[time_stamp()]] Skipped [skipcount] runtimes in [erroruid].")
 				GLOB.error_cache.log_error(E, skip_count = skipcount)
 
 	error_last_seen[erroruid] = world.time
@@ -92,7 +102,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 	if(GLOB.error_cache)
 		GLOB.error_cache.log_error(E, desclines)
 
-	to_world_log("\[[time_stamp()]] Runtime in [E.file],[E.line]: [E]")
+	to_world_log("\[[time_stamp()]] Runtime in [erroruid]: [E]")
 	for(var/line in desclines)
 		to_world_log(line)
 

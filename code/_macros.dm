@@ -192,3 +192,5 @@
 #define FONT_HUGE(X) "<font size='4'>[X]</font>"
 
 #define FONT_GIANT(X) "<font size='5'>[X]</font>"
+
+#define crash_with(X) crash_at(X, __FILE__, __LINE__)
