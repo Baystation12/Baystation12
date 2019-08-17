@@ -52,30 +52,6 @@
 /datum/fabricator_recipe/weldermask
 	path = /obj/item/clothing/head/welding
 
-/datum/fabricator_recipe/metal
-	path = /obj/item/stack/material/steel
-	is_stack = TRUE
-
-/datum/fabricator_recipe/glass
-	path = /obj/item/stack/material/glass
-	is_stack = TRUE
-
-/datum/fabricator_recipe/aluminium
-	path = /obj/item/stack/material/aluminium
-	is_stack = TRUE
-
-/datum/fabricator_recipe/rglass
-	path = /obj/item/stack/material/glass/reinforced
-	is_stack = TRUE
-
-/datum/fabricator_recipe/plastic
-	path = /obj/item/stack/material/plastic
-	is_stack = TRUE
-
-/datum/fabricator_recipe/rods
-	path = /obj/item/stack/material/rods
-	is_stack = TRUE
-
 /datum/fabricator_recipe/knife
 	path = /obj/item/weapon/material/knife/kitchen
 

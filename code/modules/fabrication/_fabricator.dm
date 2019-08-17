@@ -1,3 +1,13 @@
+/datum/fabricator_build_order
+	var/datum/fabricator_recipe/target_recipe
+	var/multiplier = 1
+	var/remaining_time = 0
+	var/list/earmarked_materials = list()
+
+/datum/fabricator_build_order/Destroy()
+	target_recipe = null
+	. = ..()
+
 /obj/machinery/fabricator
 	name = "autolathe"
 	desc = "It produces items using metal, glass, plastic, and aluminium. It has a built in shredder that can recycle most items, although any materials it cannot use will be wasted."
@@ -11,6 +21,7 @@
 	clickvol = 30
 	uncreated_component_parts = null
 	stat_immune = 0
+	
 
 	wires =           /datum/wires/fabricator
 	base_type =       /obj/machinery/fabricator
@@ -20,7 +31,8 @@
 	var/base_icon_state = "autolathe"
 	var/image/panel_image
 
-	var/datum/fabricator_recipe/currently_building
+	var/list/queued_orders = list()
+	var/datum/fabricator_build_order/currently_building
 
 	var/fabricator_class = FABRICATOR_CLASS_GENERAL
 	var/list/stored_material
@@ -35,10 +47,11 @@
 	var/show_category = "All"
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
-	var/build_time = 5 SECONDS
+	var/build_time_multiplier = 1
 
 /obj/machinery/fabricator/Destroy()
-	currently_building = null
+	QDEL_NULL(currently_building)
+	QDEL_NULL_LIST(queued_orders)
 	. = ..()
 	
 /obj/machinery/fabricator/Initialize()
@@ -51,20 +64,57 @@
 /obj/machinery/fabricator/interact(mob/user)
 	user.set_machine(src)
 
-	var/dat = "<center><h1>[capitalize(name)] Control Panel</h1><hr/>"
+	var/list/dat = list()
+	dat += "<center><h1>[capitalize(name)] Control Panel</h1><hr/>"
 
-	if(!(fab_status_flags & FAB_DISABLED))
+	if(is_functioning())
+
+		// Material table.
 		dat += "<table width = '100%'>"
 		var/material_top = "<tr>"
 		var/material_bottom = "<tr>"
-
 		for(var/material in stored_material)
 			material_top += "<td width = '25%' align = center><b>[material]</b></td>"
-			material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b></td>"
-
+			material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b>"
+			material_bottom += "<br><a href='?src=\ref[src];eject_mat=[material]'>Eject</a>"
+			material_bottom += "</td>"
 		dat += "[material_top]</tr>[material_bottom]</tr></table><hr>"
-		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
 
+		// Build table.
+		dat += "<h2>Current Builds</h2>"
+		dat += "<table width = '100%'>"
+		dat += "<tr>"
+		dat += "<td><b>Build</b></td>"
+		dat += "<td><b>Number</b></td>"
+		dat += "<td><b>Status</b></td>"
+		dat += "</tr>"
+		if(currently_building)
+			dat += "<tr>"
+			dat += "<td>[currently_building.target_recipe.name]</td>"
+			dat += "<td>x[currently_building.multiplier]</td>"
+			dat += "<td>[100-round((currently_building.remaining_time/currently_building.target_recipe.build_time)*100)]%</td>"
+			dat += "</tr>"
+		else
+			dat += "<tr>"
+			dat += "<td colspan = 3>"
+			dat += "<p><center>Nothing building.</center></p>"
+			dat += "</td>"
+			dat += "</tr>"
+		if(length(queued_orders))
+			for(var/datum/fabricator_build_order/order in queued_orders)
+				dat += "<tr>"
+				dat += "<td>[order.target_recipe.name]</td>"
+				dat += "<td>x[order.multiplier]</td>"
+				dat += "<td><a href ='?src=\ref[src];cancel=\ref[order]'>Cancel</a></td>"
+				dat += "</tr>"
+		else
+			dat += "<tr><td colspan = 3>"
+			dat += "<p><center>Nothing queued.</center></p>"
+			dat += "</td></tr>"
+		dat += "</table>"
+
+		// Build controls.
+		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
 		for(var/datum/fabricator_recipe/R in SSfabrication.get_recipes(fabricator_class))
 			if(R.hidden && !(fab_status_flags & FAB_HACKED) || (show_category != "All" && show_category != R.category))
 				continue
@@ -90,7 +140,7 @@
 					material_string += "[round(R.resources[material] * mat_efficiency)] [material]"
 				material_string += ".<br></td>"
 				//Build list of multipliers for sheets.
-				if(R.is_stack)
+				if(ispath(R.path, /obj/item/stack))
 					var/obj/item/stack/R_stack = R.path
 					max_sheets = min(max_sheets, initial(R_stack.max_amount))
 					//do not allow lathe to print more sheets than the max amount that can fit in one stack
@@ -105,7 +155,7 @@
 		dat += "</table><hr>"
 
 	var/datum/browser/popup = new(user, "fab_[base_icon_state]", "[capitalize(name)]", 450, 600)
-	popup.set_content(dat)
+	popup.set_content(jointext(dat, ""))
 	popup.open()
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
@@ -121,10 +171,8 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish first.")
 	return ..()
 
-/obj/machinery/fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(fab_status_flags & FAB_BUSY)
-		to_chat(user, SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation."))
-		return
+/obj/machinery/fabricator/attackby(var/obj/item/O, var/mob/user)
+
 	if(component_attackby(O, user))
 		return TRUE
 	if(stat)
@@ -218,70 +266,116 @@
 	interact(user)
 	return TRUE
 
-/obj/machinery/fabricator/CanUseTopic(user, href_list)
+/obj/machinery/fabricator/proc/try_queue_build(var/datum/fabricator_recipe/recipe, var/multiplier)
+
+	// Do some basic sanity checking.
+	if(!is_functioning() || !istype(recipe) || !(recipe in SSfabrication.get_recipes(fabricator_class)))
+		return
+	multiplier = sanitize_integer(multiplier, 1, 100, 1)
+	if(!ispath(recipe, /obj/item/stack) && multiplier > 1)
+		multiplier = 1
+
+	// Check if sufficient resources exist.
+	for(var/material in recipe.resources)
+		if(stored_material[material] < round(recipe.resources[material] * mat_efficiency) * multiplier)
+			return
+
+	// Generate and track a new order.
+	var/datum/fabricator_build_order/order = new
+	order.remaining_time = recipe.build_time
+	order.target_recipe =  recipe
+	order.multiplier =     multiplier
+	queued_orders +=       order
+
+	// Remove/earmark resources.
+	for(var/material in recipe.resources)
+		var/removed_mat = round(recipe.resources[material] * mat_efficiency) * multiplier
+		stored_material[material] = max(0, stored_material[material] - removed_mat)
+		order.earmarked_materials[material] = removed_mat
+
+	if(!currently_building)
+		get_next_build()
+	else
+		start_building()
+
+/obj/machinery/fabricator/proc/is_functioning()
+	. = use_power != POWER_USE_OFF && !(stat & NOPOWER) && !(stat & BROKEN) && !(fab_status_flags & FAB_DISABLED)
+
+/obj/machinery/fabricator/Process(var/wait)
+	..()
+	if(use_power == POWER_USE_ACTIVE && (fab_status_flags & FAB_BUSY))
+		update_current_build(wait)
+
+/obj/machinery/fabricator/proc/update_current_build(var/spend_time)
+
+	if(!istype(currently_building) || !is_functioning())
+		return
+
+	// Decrement our current build timer.
+	currently_building.remaining_time -= max(1, max(1, spend_time * build_time_multiplier))
+	if(currently_building.remaining_time > 0)
+		return
+
+	// Print the item.
+	if(ispath(currently_building.target_recipe.path, /obj/item/stack))
+		new currently_building.target_recipe.path(get_turf(src), amount = currently_building.multiplier)
+	else
+		new currently_building.target_recipe.path(get_turf(src))
+	QDEL_NULL(currently_building)
+	get_next_build()
+	update_icon()
+
+/obj/machinery/fabricator/proc/start_building()
+	if(!(fab_status_flags & FAB_BUSY) && is_functioning())
+		fab_status_flags |= FAB_BUSY
+		update_use_power(POWER_USE_ACTIVE)
+		update_icon()
+
+/obj/machinery/fabricator/proc/stop_building()
 	if(fab_status_flags & FAB_BUSY)
-		to_chat(user, SPAN_WARNING("\The [src] is busy. Please wait for completion of previous operation."))
-		return min(STATUS_UPDATE, ..())
-	return ..()
+		fab_status_flags &= ~FAB_BUSY
+		update_use_power(POWER_USE_IDLE)
+		update_icon()
 
 /obj/machinery/fabricator/OnTopic(user, href_list, state)
-	set waitfor = 0
 	if(href_list["change_category"])
 		var/choice = input("Which category do you wish to display?") as null|anything in SSfabrication.get_categories(fabricator_class)|"All"
 		if(!choice || !CanUseTopic(user, state))
 			return TOPIC_HANDLED
 		show_category = choice
 		. = TOPIC_REFRESH
-
-	else if(!(fab_status_flags & FAB_BUSY) && href_list["make"])
+	else if(href_list["make"])
+		try_queue_build(locate(href_list["make"]), text2num(href_list["multiplier"]))
 		. = TOPIC_REFRESH
-		currently_building = locate(href_list["make"])
-		if(!istype(currently_building) || !(currently_building in SSfabrication.get_recipes(fabricator_class)))
-			currently_building = null
-			return TOPIC_HANDLED
+	else if(href_list["cancel"])
+		try_cancel_build(locate(href_list["cancel"]))
+		. = TOPIC_REFRESH
+	else if(href_list["eject_mat"])
+		var/material/mat = SSmaterials.get_material_by_name(href_list["eject_mat"])
+		if(mat && stored_material[mat.name] > mat.units_per_sheet && mat.stack_type)
+			var/sheet_count = Floor(stored_material[mat.name]/mat.units_per_sheet)
+			stored_material[mat.name] -= sheet_count * mat.units_per_sheet
+			mat.place_sheet(get_turf(src), sheet_count)
+			. = TOPIC_REFRESH
 
-		var/multiplier = text2num(href_list["multiplier"])
-		if(!currently_building.is_stack && multiplier != 1)
-			return TOPIC_HANDLED
-		multiplier = sanitize_integer(multiplier, 1, 100, 1)
+/obj/machinery/fabricator/proc/try_cancel_build(var/datum/fabricator_build_order/order)
+	if(istype(order) && currently_building != order && is_functioning())
+		if(order in queued_orders)
+			// Refund some mats.
+			for(var/mat in order.earmarked_materials)
+				stored_material[mat] = min(stored_material[mat] + (order.earmarked_materials[mat] * 0.9), storage_capacity[mat])
+			queued_orders -= order
+		qdel(order)
 
-		fab_status_flags |= FAB_BUSY
-		update_use_power(POWER_USE_ACTIVE)
-
-		//Check if we still have the materials.
-		for(var/material in currently_building.resources)
-			if(!isnull(stored_material[material]))
-				if(stored_material[material] < round(currently_building.resources[material] * mat_efficiency) * multiplier)
-					fab_status_flags &= ~FAB_BUSY
-					return TOPIC_REFRESH
-
-		//Consume materials.
-		for(var/material in currently_building.resources)
-			if(!isnull(stored_material[material]))
-				stored_material[material] = max(0, stored_material[material] - round(currently_building.resources[material] * mat_efficiency) * multiplier)
-
-		addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/complete_build, multiplier, currently_building), build_time)
-		update_icon()
-
-	if(. == TOPIC_REFRESH)
-		interact(user)
-
-/obj/machinery/fabricator/proc/complete_build(var/multiplier, var/building)
-
-	if(building == currently_building)
-
-		fab_status_flags &= ~FAB_BUSY
-		update_use_power(POWER_USE_IDLE)
-
-		if(istype(currently_building))
-			var/obj/item/I = new currently_building.path(loc)
-			if(multiplier > 1 && istype(I, /obj/item/stack))
-				var/obj/item/stack/S = I
-				S.amount = multiplier
-				S.update_icon()
-
+/obj/machinery/fabricator/proc/get_next_build()
 	currently_building = null
-	update_icon()
+	if(length(queued_orders))
+		currently_building = queued_orders[1]
+		queued_orders -= currently_building
+		start_building()
+	else
+		stop_building()
+	updateUsrDialog()
 
 /obj/machinery/fabricator/on_update_icon()
 	overlays.Cut()
@@ -309,8 +403,8 @@
 	storage_capacity = list()
 	for(var/mat in base_storage_capacity)
 		storage_capacity[mat] = mb_rating * base_storage_capacity[mat]
-	build_time =     initial(build_time) / man_rating
 	mat_efficiency = initial(mat_efficiency) - man_rating * 0.1// Normally, price is 1.25 the amount of material.
+	build_time_multiplier = initial(build_time_multiplier) * man_rating
 
 /obj/machinery/fabricator/dismantle()
 

@@ -3,9 +3,9 @@
 	var/path
 	var/hidden
 	var/category = "General"
-	var/is_stack
 	var/list/resources
 	var/list/fabricator_types = list(FABRICATOR_CLASS_GENERAL)
+	var/build_time = 5 SECONDS
 
 /datum/fabricator_recipe/New()
 	..()
