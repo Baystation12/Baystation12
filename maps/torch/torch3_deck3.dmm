@@ -18871,6 +18871,7 @@
 	dir = 9;
 	pixel_y = 0
 	},
+/obj/item/stack/material/plastic/ten,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "SU" = (
@@ -19081,13 +19082,16 @@
 /area/thruster/d3starboard)
 "TH" = (
 /obj/structure/table/marble,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/obj/machinery/fabricator/micro{
+	pixel_x = 8
+	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
 	id_tag = "kitchen";
 	name = "Kitchen Shutters"
-	},
-/obj/effect/floor_decal/corner/grey/diagonal{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
