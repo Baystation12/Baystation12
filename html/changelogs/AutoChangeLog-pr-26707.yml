@@ -1,5 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "Can no longer sample plants with machet. Need an edged weapon of size 'small' or 'tiny'. Normal size and above will chop as usual now. Harm intent also forces chopping instead of sampling."
-  - tweak: "Can alt-click vines when holding normal-sized blade (machet) in hand to chop them down. It'll take a short time, faster if you have Trained botany skill. Basically less chat-spamming alternative to just bashing them down."
