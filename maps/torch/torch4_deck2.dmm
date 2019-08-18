@@ -13571,17 +13571,20 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "FD" = (
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/ship/engines{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/fuelbay)
 "FE" = (
 /obj/machinery/computer/air_control{
+	dir = 1;
 	frequency = 1441;
 	input_tag = "fuel_in";
 	name = "Fuel Supply Control";
 	output_tag = "fuel_out";
-	sensor_tag = "fuel_sensor";
-	sensor_name = "Fuel Tank"
+	sensor_name = "Fuel Tank";
+	sensor_tag = "fuel_sensor"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/fuelbay)
