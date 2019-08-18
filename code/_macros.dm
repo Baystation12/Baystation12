@@ -151,7 +151,7 @@
 // Safely checks if I is in L
 #define LAZYISIN(L, I) (L ? (I in L) : FALSE)
 // Null-safe L.Cut()
-#define LAZYCLEARLIST(L) if(L) L.Cut()
+#define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
