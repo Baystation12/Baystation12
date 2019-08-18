@@ -17,6 +17,7 @@
 
 // Kits for hardsuit must have icons in CUSTOM_ITEM_MOB and under [kit_icon]_helmet,
 // [kit_icon]_gauntlets, [kit_icon]_boots, [kit_icon]_chestpiece
+// new_suit_type need to be inputted from json_input
 
 /var/list/custom_items = list()
 
@@ -35,6 +36,7 @@
 	var/kit_desc
 	var/kit_icon
 	var/additional_data
+	var/json_input
 
 /datum/custom_item/proc/is_valid(var/checker)
 	if(!item_path)
@@ -45,12 +47,12 @@
 		return FALSE
 	return TRUE
 
-/datum/custom_item/proc/spawn_item(var/newloc)
+/datum/custom_item/proc/spawn_item(var/newloc,var/checker)
 	var/obj/item/citem = new item_path(newloc)
-	apply_to_item(citem)
+	apply_to_item(citem,checker)
 	return citem
 
-/datum/custom_item/proc/apply_to_item(var/obj/item/item)
+/datum/custom_item/proc/apply_to_item(var/obj/item/item,var/checker)
 	if(!item)
 		return
 	if(name)
@@ -94,13 +96,22 @@
 		
 		if(istype(item, /obj/item/device/kit/rigsuit))
 			var/obj/item/device/kit/rigsuit/kit = item
+			kit.new_light_overlay = additional_data
 			kit.new_mob_icon_file = CUSTOM_ITEM_MOB
-			var/list/input_data = splittext(additional_data,", ")
-			if(input_data.len)
-				kit.new_suit_type = input_data[1]
-				if(input_data.len > 1)
-					kit.new_light_overlay = input_data[2]		
 
+	if(json_input)
+		var/list/vars_to_input = json_decode(json_input)
+		if(!vars_to_input || !vars_to_input.len)
+			to_chat(checker, "<span class='warning'>The given item ([item_path_as_string]) json_input, is incorrectly formatted.</span>")
+		else
+			var/list/error_msg = list()
+			for(var/I in vars_to_input)
+				if(!istext(I) || !(I in vars_to_input.vars))
+					error_msg += "[I]:[vars_to_input[I]]"
+				else
+					item.vars[I] = vars_to_input[I]
+			if(error_msg.len)
+				to_chat(checker, "<span class='warning'>The given item ([item_path_as_string]) json_input, is incorrectly formatted or invalid. As the following vars for said item does not exist, [english_list(error_msg)].</span>")
 	return item
 
 /datum/custom_item/proc/apply_inherit_inhands(var/obj/item/item)
@@ -203,6 +214,8 @@
 				current_data.kit_icon = field_data
 			if("additional_data")
 				current_data.additional_data = field_data
+			if("json_input")
+				current_data.json_input = field_data
 	return 1
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
@@ -247,13 +260,13 @@
 
 		// Spawn and equip the item.
 		if(existing_item)
-			citem.apply_to_item(existing_item)
+			citem.apply_to_item(existing_item,M)
 		else
 			place_custom_item(M,citem)
 
 // Places the item on the target mob.
 /proc/place_custom_item(mob/living/carbon/human/M, var/datum/custom_item/citem)
-	. = M && citem && citem.spawn_item(get_turf(M))
+	. = M && citem && citem.spawn_item(get_turf(M),M)
 	if(. && !M.equip_to_appropriate_slot(.) && !M.equip_to_storage(.))
 		to_chat(M, SPAN_WARNING("Your custom item, \the [.], could not be placed on your character."))
 		QDEL_NULL(.)

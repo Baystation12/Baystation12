@@ -1065,7 +1065,7 @@ var/global/floorIsLava = 0
 	if(!item_to_spawn || !item_to_spawn.is_valid(usr))
 		return
 
-	item_to_spawn.spawn_item(get_turf(usr))
+	item_to_spawn.spawn_item(get_turf(usr),usr)
 
 /datum/admins/proc/check_custom_items()
 
