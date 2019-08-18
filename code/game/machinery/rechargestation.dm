@@ -191,6 +191,9 @@
 		var/mob/living/carbon/human/H = M		
 		if(H.isSynthetic()) // FBPs and IPCs
 			return 1
+		if(istype(H.back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/R = H.back
+			return R.cell
 		return H.internal_organs_by_name["cell"]
 	return 0
 
