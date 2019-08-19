@@ -1167,8 +1167,7 @@
 /obj/machinery/meter,
 /obj/machinery/light/small{
 	dir = 8;
-	step_x = 0;
-	step_y = 8
+	
 	},
 /turf/simulated/floor/plating,
 /area/yacht/engine)
