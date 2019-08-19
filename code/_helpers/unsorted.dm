@@ -1109,8 +1109,8 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	STOP_PROCESSING(SSmobs, src)
 
 // call to generate a stack trace and print to runtime logs
-/proc/crash_with(msg)
-	CRASH(msg)
+/proc/crash_at(msg, file, line)
+	CRASH("%% [file],[line] %% [msg]")
 
 /proc/pass()
 	return
