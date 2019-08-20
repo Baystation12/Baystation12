@@ -1828,6 +1828,7 @@
 #include "code\modules\locks\lock.dm"
 #include "code\modules\locks\lock_construct.dm"
 #include "code\modules\maps\dmm_suite.dm"
+#include "code\modules\maps\helper_landmarks.dm"
 #include "code\modules\maps\map_template.dm"
 #include "code\modules\maps\map_template_unit_testing.dm"
 #include "code\modules\maps\reader.dm"
