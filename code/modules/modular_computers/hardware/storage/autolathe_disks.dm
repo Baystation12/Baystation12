@@ -1,5 +1,6 @@
 /obj/item/weapon/computer_hardware/hard_drive/portable/design
 	name = "design disk"
+	icon = 'icons/obj/discs.dmi'
 	icon_state = "yellow"
 	desc = "Data disk used to store autolathe designs."
 	max_capacity = 1024	// Up to 255 designs, automatically reduced to the nearest power of 2
@@ -70,7 +71,6 @@
 		/datum/design/autolathe/misc/radio_bounced,
 		/datum/design/autolathe/misc/ashtray,
 		/datum/design/autolathe/container/drinkingglass,
-		/datum/design/autolathe/container/carafe,
 		/datum/design/autolathe/container/insulated_pitcher,
 		/datum/design/autolathe/container/bucket,
 		/datum/design/autolathe/container/jar,
@@ -96,19 +96,14 @@
 		/datum/design/autolathe/device/analyzer,
 		/datum/design/autolathe/device/plant_analyzer,
 		/datum/design/autolathe/device/healthanalyzer,
-		/datum/design/research/item/medical/mass_spectrometer,
-		/datum/design/research/item/medical/reagent_scanner,
-		/datum/design/research/item/medical/robot_scanner,
 		/datum/design/autolathe/device/slime_scanner,
 		/datum/design/autolathe/device/antibody_scanner,
 		/datum/design/autolathe/device/megaphone,
 		/datum/design/autolathe/device/t_scanner,
 		/datum/design/autolathe/device/gps,
 		/datum/design/autolathe/device/destTagger,
-		/datum/design/autolathe/device/export_scanner,
 		/datum/design/autolathe/device/implanter,
-		/datum/design/autolathe/device/hand_labeler,
-		/datum/design/research/item/light_replacer
+		/datum/design/autolathe/device/hand_labeler
 	)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/robustcells
@@ -117,12 +112,7 @@
 
 	license = 8
 	designs = list(
-		/datum/design/autolathe/cell/large,
-		/datum/design/autolathe/cell/large/high,
-		/datum/design/autolathe/cell/medium,
-		/datum/design/autolathe/cell/medium/high,
-		/datum/design/autolathe/cell/small,
-		/datum/design/autolathe/cell/small/high,
+		/datum/design/autolathe/cell
 	)
 
 
@@ -134,12 +124,6 @@
 	license = 20
 	designs = list(
 		/datum/design/autolathe/part/consolescreen,
-		/datum/design/research/item/part/smes_coil,
-		/datum/design/research/item/part/basic_capacitor,
-		/datum/design/research/item/part/basic_sensor,
-		/datum/design/research/item/part/micro_mani,
-		/datum/design/research/item/part/basic_micro_laser,
-		/datum/design/research/item/part/basic_matter_bin,
 		/datum/design/autolathe/part/igniter,
 		/datum/design/autolathe/part/signaler,
 		/datum/design/autolathe/part/sensor_infra,
@@ -157,9 +141,6 @@
 	designs = list(
 		/datum/design/autolathe/tool/big_wrench,
 		/datum/design/autolathe/tool/pneumatic_crowbar,
-		/datum/design/research/item/weapon/mining/jackhammer,
-		/datum/design/research/item/weapon/mining/drill,
-		/datum/design/research/item/weapon/mining/drill_diamond,
 		/datum/design/autolathe/tool/pickaxe_excavation,
 		/datum/design/autolathe/tool/circularsaw,
 		/datum/design/autolathe/tool/chainsaw,
@@ -179,18 +160,8 @@
 		/datum/design/autolathe/circuit/airlockmodule,
 		/datum/design/autolathe/circuit/airalarm,
 		/datum/design/autolathe/circuit/firealarm,
-		/datum/design/autolathe/circuit/powermodule,
-		/datum/design/autolathe/circuit/recharger,
-		/datum/design/research/circuit/autolathe,
-		/datum/design/autolathe/circuit/autolathe_disk_cloner,
-		/datum/design/autolathe/circuit/vending,
-		/datum/design/research/circuit/arcade_battle,
-		/datum/design/research/circuit/arcade_orion_trail,
-		/datum/design/research/circuit/teleconsole,
-		/datum/design/research/circuit/operating,
 		/datum/design/autolathe/circuit/helm,
-		/datum/design/autolathe/circuit/nav,
-		/datum/design/autolathe/circuit/centrifuge,
+		/datum/design/autolathe/circuit/nav
 	)
 
 
@@ -228,6 +199,7 @@
 		/datum/design/autolathe/computer_part/frame_pda,
 		/datum/design/autolathe/computer_part/frame_tablet,
 		/datum/design/autolathe/computer_part/frame_laptop,
+		/*
 		/datum/design/research/item/modularcomponent/disk/micro,
 		/datum/design/research/item/modularcomponent/disk/small,
 		/datum/design/research/item/modularcomponent/disk/normal,
@@ -241,8 +213,7 @@
 		/datum/design/research/item/modularcomponent/teslalink,
 		/datum/design/research/item/modularcomponent/portabledrive/basic,
 		/datum/design/research/item/modularcomponent/nanoprinter,
-		/datum/design/autolathe/computer_part/gps,
-		/datum/design/autolathe/computer_part/led,
+		*/
 		/datum/design/autolathe/computer_part/scanner_paper,
 		/datum/design/autolathe/computer_part/scanner_atmos,
 	)
@@ -255,12 +226,9 @@
 
 	license = 3
 	designs = list(
-		/datum/design/autolathe/gun/mk58,
-		/datum/design/autolathe/gun/mk58_wood,
 		/datum/design/autolathe/gun/combat_shotgun,
 		/datum/design/autolathe/gun/heavysniper,
 		/datum/design/autolathe/gun/grenade_launcher,
-		/datum/design/research/item/weapon/stunrevolver,
 		/datum/design/autolathe/gun/taser,
 		/datum/design/autolathe/gun/sniperrifle
 	)
@@ -274,8 +242,6 @@
 		/datum/design/autolathe/gun/energy_crossbow,
 		/datum/design/autolathe/gun/large_energy_crossbow,
 		/datum/design/autolathe/gun/laser,
-		/datum/design/autolathe/gun/pulse,
-		/datum/design/autolathe/gun/pulse_destroyer,
 		/datum/design/autolathe/gun/ionrifle,
 	)
 
@@ -288,7 +254,7 @@
 	license = 20
 	designs = list(
 		/datum/design/autolathe/sec/secflashlight,
-		/datum/design/research/item/flash,
+		///datum/design/research/item/flash, Fix this
 		/datum/design/autolathe/sec/handcuffs,
 		/datum/design/autolathe/misc/taperecorder,
 		/datum/design/autolathe/tool/tacknife,
@@ -304,9 +270,6 @@
 
 	license = 7
 	designs = list(
-		/datum/design/autolathe/gun/giskard,
-		/datum/design/autolathe/gun/olivaw,
-		/datum/design/autolathe/gun/clarissa,
 		/datum/design/autolathe/gun/revolver_detective,
 		/datum/design/autolathe/gun/doublebarrel,
 		/datum/design/autolathe/gun/pump_shotgun,
@@ -318,23 +281,10 @@
 
 	license = 5
 	designs = list(
-		/datum/design/autolathe/gun/IH_sidearm, //pistols
-		/datum/design/autolathe/gun/IH_machinepistol,
-		/datum/design/autolathe/gun/lamia,
-		/datum/design/autolathe/gun/deagle,
-		/datum/design/autolathe/gun/revolver_consul, //revolvers
 		/datum/design/autolathe/gun/revolver_deckard,
 		/datum/design/autolathe/gun/revolver,
-		/datum/design/autolathe/gun/idaho, //smgs
 		/datum/design/autolathe/gun/wt550,
-		/datum/design/autolathe/gun/IH_smg,
-		/datum/design/autolathe/gun/atreides,
-		/datum/design/autolathe/gun/smg_sol, //other
-		/datum/design/autolathe/gun/smg_sol_rds,
-		/datum/design/autolathe/gun/z8,
-		/datum/design/autolathe/gun/IH_heavyrifle,
-		/datum/design/autolathe/gun/ak47_fs,
-		/datum/design/autolathe/gun/grenade_launcher_lenar, //GLs
+		/datum/design/autolathe/gun/z8
 	)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/fs_energy_guns
@@ -346,6 +296,7 @@
 		/datum/design/autolathe/gun/energygun
 	)
 
+/*
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/nonlethal_ammo //please, maintain general order (pistol>speedloaders>smg>other>shells)+(smaller/less damaging caliber>bigger/more damaging caliber)
 	disk_name = "Frozen Star Nonlethal Ammo Pack"
 	icon_state = "frozenstar"
@@ -354,7 +305,7 @@
 	designs = list(
 		/datum/design/autolathe/ammo/stunshell
 	)
-
+*/
 
 //This needs to be updated with proper ammo types
 /*

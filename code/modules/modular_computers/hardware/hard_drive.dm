@@ -184,9 +184,13 @@
 	stored_files = null
 	return ..()
 
-/obj/item/weapon/computer_hardware/hard_drive/New()
+
+/obj/item/weapon/computer_hardware/hard_drive/Initialize()
+	world << "Hard drive initialize 1"
+	. = ..()
+	world << "Hard drive initialize 2"
 	install_default_programs()
-	..()
+	install_default_files()
 
 // Adds default files to the drive.
 /obj/item/weapon/computer_hardware/hard_drive/proc/install_default_files()

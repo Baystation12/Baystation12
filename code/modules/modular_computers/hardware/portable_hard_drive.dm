@@ -11,6 +11,7 @@
 	origin_tech = list(TECH_DATA = 2)
 	matter = list(MATERIAL_STEEL = 1, MATERIAL_PLASTIC = 2, MATERIAL_GOLD = 0.25)
 	matter_reagents = list()
+	w_class = ITEM_SIZE_SMALL
 	var/disk_name
 	var/license = 0
 
@@ -33,9 +34,12 @@
 	origin_tech = list(TECH_DATA = 4)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/Initialize()
+	world << "portable Disk initialising 1"
 	. = ..()
-	w_class = ITEM_SIZE_SMALL
+	world << "portable Disk initialising 2"
 	if(disk_name)
+		world << "Disk name is [disk_name]"
+		world << "Setting name to ["[initial(name)] - '[disk_name]'"]"
 		SetName("[initial(name)] - '[disk_name]'")
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/Destroy()
