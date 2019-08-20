@@ -351,7 +351,10 @@
 		qdel(src) // Either way we want to ensure the SMES is deleted.
 
 /obj/machinery/power/smes/emp_act(severity)
-	if(prob(50))
+	if(!num_terminals)
+		inputting(0)
+		outputting(0)
+	else if(prob(50))
 		inputting(rand(0,1))
 		outputting(rand(0,1))
 	if(prob(50))
