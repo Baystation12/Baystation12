@@ -11,11 +11,11 @@
 
 /datum/fabricator_recipe/arms_ammo/hidden
 	path = /obj/item/weapon/material/hatchet/machete/steel
+	hidden = TRUE
 
 /datum/fabricator_recipe/arms_ammo/hidden/shotgun
 	name = "ammunition (shotgun, beanbag)"
 	path = /obj/item/ammo_casing/shotgun/beanbag
-	hidden = TRUE
 
 /datum/fabricator_recipe/arms_ammo/hidden/shotgun_flash
 	name = "ammunition (shotgun, flash)"
