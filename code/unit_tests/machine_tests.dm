@@ -66,3 +66,24 @@
 	else
 		pass("All machines had valid construction states.")
 	return  1
+
+
+/datum/unit_test/fabricator_recipes_shall_be_buildable
+	name = "MACHINE: All fabricators will be able to produce all of their recipes"
+
+/datum/unit_test/fabricator_recipes_shall_be_buildable/start_test()
+	var/failed = list()
+	for(var/thing in typesof(/obj/machinery/fabricator))
+		var/obj/machinery/fabricator/fab = new thing
+		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fab.fabricator_class))
+			for(var/mat in recipe.resources)
+				if(isnull(fab.base_storage_capacity[mat]))
+					log_bad("[fab.name] ([fab.type]) could not print [recipe.name] due to lacking [mat].")
+					failed += thing
+					break
+		qdel(fab)
+	if(length(failed))
+		fail("One or more fabricators could not produce an associated recipe.")
+	else
+		pass("All fabricators could produce their associated recipes.")
+	return  1
