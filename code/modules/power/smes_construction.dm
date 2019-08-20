@@ -184,6 +184,7 @@
 				h_user.adjustFireLoss(rand(5,10))
 				h_user.Paralyse(2)
 			charge = 0
+			return SMES_WEAK
 
 		if (16 to 35)
 			// Medium overcharge
@@ -200,6 +201,7 @@
 				empulse(src.loc, 2, 4)
 			apcs_overload(0, 5, 10)
 			charge = 0
+			return SMES_MEDIUM
 
 		if (36 to 60)
 			// Strong overcharge
@@ -220,6 +222,7 @@
 			apcs_overload(1, 10, 20)
 			energy_fail(10)
 			src.ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
+			return SMES_STRONG
 
 		if (61 to INFINITY)
 			// Massive overcharge
@@ -252,6 +255,7 @@
 					explosion(src.loc,1,2,4,8)
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
 					qdel(src)
+			return SMES_LETHAL
 
 /obj/machinery/power/smes/buildable/proc/check_total_system_failure(user)
 	// Probability of failure if safety circuit is disabled (in %)
@@ -262,8 +266,7 @@
 		failure_probability = 0
 
 	if (failure_probability && prob(failure_probability))
-		total_system_failure(failure_probability, user)
-		return TRUE
+		return total_system_failure(failure_probability, user)
 
 // Proc: apcs_overload()
 // Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
@@ -315,7 +318,7 @@
 		if(user)
 			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/weapon/stock_parts/smes_coil), src) && isCrowbar(user.get_active_hand()))
 				return MCS_BLOCK
-			if(check_total_system_failure(user))
+			if(check_total_system_failure(user) == SMES_LETHAL)//only stop it when it explodes, sissy emp can't stop the power of a crowbar!
 				return MCS_BLOCK
 	return ..()
 
@@ -329,7 +332,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(check_total_system_failure(user))
+	if(check_total_system_failure(user) > SMES_MEDIUM)//low power discharge will not stop you from installing that extra coil
 		return FALSE
 
 // Proc: attackby()

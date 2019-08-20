@@ -158,3 +158,9 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define FAB_DISABLED 2
 #define FAB_SHOCKED  4
 #define FAB_BUSY     8
+
+// Used to determine how bad a SMES discharge is
+#define SMES_WEAK 		1
+#define SMES_MEDIUM		2
+#define SMES_STRONG		3
+#define SMES_LETHAL		4
