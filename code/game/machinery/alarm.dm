@@ -104,8 +104,14 @@
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
 
+/decl/environment_data/finnish/Initialize()
+	. = ..()
+	important_gasses[GAS_STEAM] = TRUE
+	dangerous_gasses -= GAS_STEAM
+
 /obj/machinery/alarm/warm
 	target_temperature = T0C+39
+	environment_type = /decl/environment_data/finnish
 
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
