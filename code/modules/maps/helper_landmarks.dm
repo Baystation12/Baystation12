@@ -1,18 +1,7 @@
-//Load a random map template from the list
+//Load a random map template from the list. Maploader handles it to avoid order of init madness
 /obj/effect/landmark/map_load_mark
 	name = "map loader landmark"
-	delete_me = TRUE
 	var/list/templates	//list of template types to pick from
-
-/obj/effect/landmark/map_load_mark/Initialize()
-	..() 
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/effect/landmark/map_load_mark/LateInitialize()
-	if(LAZYLEN(templates))
-		var/template = pick(templates)
-		var/datum/map_template/M = new template()
-		M.load(get_turf(src), TRUE)
 
 //Throw things in the area around randomly
 /obj/effect/landmark/carnage_mark
