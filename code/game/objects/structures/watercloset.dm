@@ -441,12 +441,12 @@
 	to_chat(usr, "<span class='notice'>You start washing \the [I].</span>")
 
 	busy = 1
-	if(!do_after(user, 40, src))
-		busy = 0
-		return TRUE
+	sleep(40)
 	busy = 0
 
-	if(istype(O, /obj/item/weapon/extinguisher/)) return TRUE // We're washing, not filling.
+	if(user.loc != location) return				//User has moved
+	if(!I) return 								//Item's been destroyed while washing
+	if(user.get_active_hand() != I) return		//Person has switched hands or the item in their hands
 
 	O.clean_blood()
 	user.visible_message( \
@@ -472,3 +472,52 @@
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"
+
+//toilet paper interaction for clogging toilets and other facilities
+
+/obj/structure/hygiene/attackby(obj/item/I, var/mob/user)
+	if(istype(I,/obj/item/taperoll/bog))
+		if(clogged < 0)
+			clog(1)
+			to_chat(user, SPAN_NOTICE("You unceremoniously jam \the [src] with \the [I]. What a rebel."))
+			qdel(/obj/item/taperoll/bog)
+		return
+		if(clogged > 0)
+			to_chat(user, SPAN_NOTICE("\the [src] is already clogged!"))
+		return
+		if(clogged == -1)
+			to_chat(user, SPAN_NOTICE("Try as you might, you can not clog \the [src] with \the [I]."))
+
+/obj/item/taperoll/bog
+	name = "toilet paper roll"
+	icon = 'icons/obj/watercloset.dmi'
+	desc = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to SolGov's 'Abuse Of The Trees Act'."
+	tape_type = /obj/item/tape/bog
+	icon_state = "bogroll"
+	item_state = "mummy_poor"
+	slot_flags = SLOT_MASK | SLOT_OCLOTHING
+	var/sheets = 30
+
+/obj/item/tape/bog
+	name = "toilet paper"
+	desc = "A length of toilet paper. Seems like custodia are marking their territory again."
+	icon_base = "stripetape"
+	color = COLOR_WHITE
+	detail_overlay = "stripes"
+	detail_color = COLOR_WHITE
+
+/obj/item/taperoll/bog/attack_self(mob/user)
+	if(sheets > 0)
+		visible_message("\The [user] tears a sheet from \the [src].", "You tear a sheet from \the [src].")
+		var/obj/item/weapon/paper/crumpled/bog/C =  new(loc)
+		user.put_in_hands(C)
+		sheets--
+	else
+		to_chat(user, "The [src] is depleted.")
+		qdel(src)
+
+/obj/item/weapon/paper/crumpled/bog
+	name = "sheet of toilet paper"
+	desc = "A single sheet of toilet paper."
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "bogroll_sheet"

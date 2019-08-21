@@ -18705,6 +18705,9 @@
 	},
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /obj/structure/hygiene/toilet,
+/obj/item/taperoll/bog{
+	pixel_x = -12
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/maintenance/seconddeck/foreport)
 "XA" = (
