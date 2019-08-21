@@ -218,6 +218,7 @@
 /area/maintenance/disposal)
 "at" = (
 /obj/machinery/button/mass_driver{
+	desc = "A remote switch to eject the engine core. WARNING: Vent must be opened for proper ejection.";
 	id_tag = "enginecore";
 	name = "Emergency Core Eject";
 	pixel_x = 0;
@@ -231,19 +232,18 @@
 	name = "emergency core eject"
 	},
 /obj/machinery/button/blast_door{
-	desc = "A remote control-switch for engine core.";
+	desc = "A remote switch to open the engine core vent to space.";
 	id_tag = "EngineVent";
-	name = "Engine Ventillatory Control";
+	name = "Emergency Core Vent Control";
 	pixel_x = -24;
-	pixel_y = 10
+	pixel_y = 6
 	},
-/obj/machinery/button/alternate/door/bolts{
-	desc = "A remote control-switch for the engine core airlock hatch bolts.";
-	id_tag = "engine_access_hatch";
-	name = "Engine Hatch Bolt Control";
+/obj/machinery/button/blast_door{
+	desc = "A remote control switch for venting the engine room. Push in case of engine room fire.";
+	id_tag = "engineroomvent";
+	name = "Emergency Engine Room Vents";
 	pixel_x = -24;
-	pixel_y = -10;
-	req_access = list("ACCESS_ENGINEERING")
+	pixel_y = -6
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
@@ -3178,6 +3178,14 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"gz" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/blast/regular{
+	id_tag = "engineroomvent";
+	name = "Engine room vent"
+	},
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 "gA" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -3570,7 +3578,7 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "hw" = (
 /obj/structure/bed/chair/shuttle{
@@ -5498,10 +5506,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
-"lw" = (
-/obj/structure/lattice,
-/turf/simulated/wall/r_wall/hull,
-/area/space)
 "ly" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -5828,6 +5832,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "mq" = (
@@ -6469,13 +6474,17 @@
 	dir = 9;
 	pixel_y = 0
 	},
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 4
+	},
+/obj/machinery/button/alternate/door/bolts{
+	desc = "A remote control-switch for the engine core airlock hatch bolts.";
+	id_tag = "engine_access_hatch";
+	name = "Engine Hatch Bolt Control";
+	pixel_x = 24;
+	pixel_y = 0;
+	req_access = list("ACCESS_ENGINEERING")
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
@@ -6740,6 +6749,9 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
+"ox" = (
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 "oz" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/structure/cable/cyan{
@@ -6833,6 +6845,13 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
+"oQ" = (
+/obj/structure/sign/warning/vent_port{
+	icon_state = "securearea";
+	dir = 1
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/engineering/engine_room)
 "oV" = (
 /obj/structure/table/marble,
 /turf/simulated/floor/wood/walnut,
@@ -8227,6 +8246,10 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/maintenance/seconddeck/foreport)
+"rv" = (
+/obj/machinery/door/airlock/hatch,
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 "ry" = (
 /obj/structure/closet/secure_closet/engineering_electrical,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -8482,10 +8505,6 @@
 "sr" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 10
-	},
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -10715,6 +10734,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
+"yZ" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "engineroomvent";
+	name = "Engine room vent"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 "zb" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -14252,6 +14279,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 9
 	},
+/obj/structure/sign/warning/vacuum,
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/engine_room)
 "HY" = (
@@ -14529,6 +14557,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/turret_protected/ai_cyborg_station)
+"IR" = (
+/obj/structure/grille,
+/turf/simulated/floor/airless,
+/area/space)
 "IW" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -14993,6 +15025,15 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
+"KP" = (
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/meter,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/techfloor,
+/area/engineering/engine_room)
 "KT" = (
 /obj/structure/closet/crate,
 /obj/random/single{
@@ -15470,6 +15511,10 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)
+"ME" = (
+/obj/structure/sign/warning/vent_port,
+/turf/simulated/wall/r_wall/hull,
+/area/engineering/engine_room)
 "MH" = (
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/lower)
@@ -15494,6 +15539,10 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/seconddeck/foreport)
+"MS" = (
+/obj/random/junk,
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 "MW" = (
 /obj/structure/lattice,
 /obj/structure/disposalpipe/segment{
@@ -16103,6 +16152,10 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engineering_monitoring)
+"OB" = (
+/obj/structure/sign/warning/vent_port,
+/turf/simulated/wall/r_wall/hull,
+/area/space)
 "OG" = (
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/reinforced/airless,
@@ -16540,6 +16593,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/seconddeck)
+"PY" = (
+/obj/structure/grille,
+/turf/simulated/floor/plating,
+/area/engineering/engine_room)
 "Qb" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron,
@@ -16744,6 +16801,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/engineering/drone_fabrication)
+"QE" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/random/junk,
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 "QJ" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -16780,6 +16844,13 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
+"QT" = (
+/obj/structure/sign/warning/vent_port{
+	icon_state = "securearea";
+	dir = 1
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/space)
 "QX" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -17518,6 +17589,10 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
+"Tp" = (
+/obj/structure/sign/warning/vacuum,
+/turf/simulated/wall/r_wall/prepainted,
+/area/engineering/engine_room)
 "Tq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	icon_state = "intact";
@@ -17597,6 +17672,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
+"TK" = (
+/obj/structure/grille,
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 "TL" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -18410,6 +18489,12 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics/lower)
+"WU" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/engine_room)
 "WW" = (
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
@@ -19298,6 +19383,10 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/central)
+"ZZ" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/airless,
+/area/engineering/engine_room)
 
 (1,1,1) = {"
 aa
@@ -44649,7 +44738,7 @@ mL
 jL
 pZ
 so
-je
+KP
 sZ
 sZ
 sZ
@@ -45443,9 +45532,9 @@ IE
 IE
 IE
 dp
-dp
-dp
-if
+Tp
+WU
+yR
 if
 je
 jL
@@ -45641,13 +45730,13 @@ ag
 aa
 aa
 aa
-Zs
-Zs
-Zs
-Zs
-dp
-dp
-if
+TK
+ox
+MS
+yZ
+PY
+mN
+yR
 if
 jf
 jN
@@ -45668,12 +45757,12 @@ uJ
 xa
 Wn
 yR
-yR
-dp
-dp
-Zs
-Zs
-Zs
+jL
+PY
+gz
+ox
+ox
+TK
 aa
 aa
 aa
@@ -45843,12 +45932,12 @@ ag
 ag
 aa
 aa
-Zs
-Zs
-Zs
-Zs
-Zs
-dp
+TK
+ox
+ox
+gz
+PY
+mN
 hu
 ih
 jg
@@ -45870,12 +45959,12 @@ vs
 xb
 xT
 mS
-yR
-dp
-Zs
-Zs
-Zs
-Zs
+jL
+PY
+gz
+ox
+ox
+TK
 aa
 aa
 ag
@@ -46045,9 +46134,9 @@ aa
 ag
 ag
 aa
+oQ
 Zs
-Zs
-Zs
+ox
 Zs
 Zs
 Zs
@@ -46075,9 +46164,9 @@ Zs
 Zs
 Zs
 Zs
+MS
 Zs
-Zs
-Zs
+ME
 aa
 ag
 ag
@@ -46249,10 +46338,10 @@ ag
 ag
 Zs
 Zs
+ox
 Zs
 Zs
 Zs
-fT
 fT
 ij
 jh
@@ -46274,10 +46363,10 @@ ij
 jh
 ij
 fT
-fT
 Zs
 Zs
 Zs
+ox
 Zs
 Zs
 ag
@@ -46449,13 +46538,13 @@ aa
 aa
 aa
 ag
-ag
+fT
 Zs
-Zs
-fT
-fT
-fT
-fT
+ox
+ox
+ox
+ox
+rv
 ik
 ji
 ik
@@ -46475,13 +46564,13 @@ ik
 ik
 ji
 ik
-fT
-fT
-fT
-fT
+rv
+ox
+ox
+ox
+ox
 Zs
-Zs
-ag
+fT
 ag
 aa
 aa
@@ -46652,11 +46741,11 @@ aa
 aa
 aa
 ag
-ag
-Zs
 fT
 fT
 fT
+QE
+ox
 fT
 ik
 ik
@@ -46678,11 +46767,11 @@ ik
 ik
 ik
 fT
+ox
+ZZ
 fT
 fT
 fT
-Zs
-ag
 ag
 aa
 aa
@@ -46855,10 +46944,10 @@ aa
 aa
 aa
 ag
-ag
 fT
-lw
 fT
+fT
+ox
 fT
 ik
 ji
@@ -46880,10 +46969,10 @@ ik
 ji
 ik
 fT
+ox
 fT
-lw
 fT
-ag
+fT
 ag
 aa
 aa
@@ -47058,9 +47147,9 @@ aa
 aa
 aa
 ag
-ag
-ag
 fT
+fT
+ox
 fT
 ik
 ji
@@ -47082,9 +47171,9 @@ ik
 ji
 ik
 fT
+ox
 fT
-ag
-ag
+fT
 ag
 aa
 aa
@@ -47261,8 +47350,8 @@ aa
 aa
 aa
 ag
-ag
 fT
+ox
 fT
 ik
 ji
@@ -47284,8 +47373,8 @@ ik
 ji
 ik
 fT
+MS
 fT
-ag
 ag
 aa
 aa
@@ -47463,8 +47552,8 @@ aa
 aa
 aa
 aa
-ag
 FW
+ox
 fT
 ik
 ik
@@ -47486,8 +47575,8 @@ ik
 ik
 ik
 fT
+ox
 gE
-ag
 aa
 aa
 aa
@@ -47665,8 +47754,8 @@ aa
 aa
 aa
 aa
-fT
-fT
+TK
+ox
 fT
 ik
 ji
@@ -47688,8 +47777,8 @@ ik
 ji
 ik
 fT
-fT
-fT
+ox
+TK
 aa
 aa
 aa
@@ -47867,9 +47956,9 @@ aa
 aa
 aa
 aa
-fT
-fT
-fT
+QT
+ox
+rv
 ik
 ji
 ik
@@ -47889,9 +47978,9 @@ ik
 ik
 ji
 ik
-fT
-fT
-fT
+rv
+ox
+OB
 aa
 aa
 aa
@@ -48069,8 +48158,8 @@ aa
 aa
 aa
 aa
-fT
-fT
+TK
+ox
 fT
 il
 jj
@@ -48092,8 +48181,8 @@ jj
 il
 jj
 fT
-fT
-fT
+ox
+IR
 aa
 aa
 aa
