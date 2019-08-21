@@ -1327,3 +1327,15 @@ var/list/random_useful_
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/purple,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/grey,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/brown)
+
+/obj/random/vendor
+	name = "random vending machine"
+	desc = "This is a randomly selected vending machine."
+	icon = 'icons/obj/vending.dmi'
+	icon_state = ""
+
+/obj/random/vendor/spawn_choices()
+	return list(/obj/machinery/vending/weeb,
+				/obj/machinery/vending/sol,
+				/obj/machinery/vending/snix
+				)

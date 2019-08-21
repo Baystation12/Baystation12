@@ -8077,6 +8077,8 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/structure/table/rack,
+/obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
 "zE" = (
@@ -8652,8 +8654,6 @@
 /turf/simulated/open,
 /area/quartermaster/hangar/top)
 "Ct" = (
-/obj/structure/table/rack,
-/obj/random/maintenance/solgov,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -14427,6 +14427,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/random/vendor,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
 "Um" = (
@@ -16105,6 +16106,14 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
+/obj/random/single{
+	icon = 'icons/obj/items.dmi';
+	icon_state = "lighter-g";
+	name = "randomly spawned lighter";
+	spawn_nothing_percentage = 50;
+	spawn_object = /obj/item/weapon/flame/lighter
+	},
+/obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
 "YF" = (
@@ -16553,14 +16562,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "ZF" = (
-/obj/structure/table/rack,
-/obj/random/single{
-	icon = 'icons/obj/items.dmi';
-	icon_state = "lighter-g";
-	name = "randomly spawned lighter";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/flame/lighter
-	},
 /obj/machinery/newscaster{
 	pixel_x = -32
 	},
