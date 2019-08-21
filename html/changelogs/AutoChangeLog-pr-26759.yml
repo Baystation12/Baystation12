@@ -1,4 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - rscadd: "SMES chance to discharge is now skill based, with 50% increase at unskilled and 50% decrease at master."
