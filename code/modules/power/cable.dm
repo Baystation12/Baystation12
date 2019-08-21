@@ -472,6 +472,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	name = "multipurpose cable coil"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
+	storage_icon = "coil"
 	randpixel = 2
 	amount = MAXCOIL
 	max_amount = MAXCOIL

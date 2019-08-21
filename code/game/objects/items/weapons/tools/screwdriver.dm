@@ -4,6 +4,7 @@
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "screwdriver_preview"
 	item_state = "screwdriver"
+	storage_icon = "screwdriver"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT | SLOT_EARS
 	force = 4.0

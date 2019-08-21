@@ -3,6 +3,7 @@
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "welder_m"
 	item_state = "welder"
+	storage_icon = "welder"
 	desc = "A portable welding gun with a port for attaching fuel tanks."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT

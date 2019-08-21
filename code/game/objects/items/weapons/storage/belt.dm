@@ -29,7 +29,7 @@
 	overlays.Cut()
 	if(overlay_flags & BELT_OVERLAY_ITEMS)
 		for(var/obj/item/I in contents)
-			overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
+			overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.storage_icon]")
 
 /obj/item/weapon/storage/belt/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
