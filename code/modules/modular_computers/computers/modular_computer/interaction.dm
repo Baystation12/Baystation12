@@ -1,3 +1,4 @@
+    
 /obj/item/modular_computer/proc/update_verbs()
 	verbs.Cut()
 	if(ai_slot)
@@ -128,8 +129,11 @@
 
 	for(var/datum/computer_file/program/P in idle_threads)
 		P.event_idremoved(1)
-
-	user.put_in_hands(card_slot.stored_card)
+	
+	if(isAI(user))
+		card_slot.stored_card.dropInto(src.loc)
+	else
+		user.put_in_hands(card_slot.stored_card)
 	to_chat(user, "You remove [card_slot.stored_card] from [src].")
 	card_slot.stored_card = null
 	update_uis()
