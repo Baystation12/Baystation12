@@ -3,39 +3,30 @@
 	//Icon for fire on turfs.
 
 	anchored = 1
-	mouse_opacity = 0
-
-	blend_mode = BLEND_ADD
 
 	icon = 'icons/effects/fire.dmi'
-	icon_state = "fire"//"1"
+	icon_state = "fire"
 	light_color = "#ED9200"
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
-	layer = FIRE_LAYER
 
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
 
 /obj/effect/fire/New(newLoc,fl = 1)
-	..()
+	. = ..()
 
 	if(!istype(loc, /turf))
 		qdel(src)
 		return
 
-	set_dir(pick(GLOB.cardinal))
-
 	var/datum/gas_mixture/air_contents = loc.return_air()
-	color = fire_color(air_contents.temperature)
-	set_light(3, 1, color)
 
+	set_dir(pick(GLOB.cardinal))
+	set_light(3, 1, light_color)
 	firelevel = fl
-	//air_master.active_hotspots.Add(src)
 	GLOB.processing_objects.Add(src)
 
 	//ignite all the fuel
 	for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in src.loc)
-		fuel.icon_state = "nothing"
-		fuel.name = "chemical fire"
+		fuel.invisibility = INVISIBILITY_SYSTEM
 
 	//burn anything here
 	for(var/mob/living/L in loc)
@@ -44,7 +35,6 @@
 	loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
 	for(var/atom/A in loc)
 		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
-
 
 /obj/effect/fire/proc/fire_color(var/env_temperature)
 	var/temperature = max(4000*sqrt(firelevel/vsc.fire_firelevel_multiplier), env_temperature)
@@ -57,8 +47,6 @@
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 	var/datum/gas_mixture/burn_gas = air_contents.remove_ratio(vsc.fire_consuption_rate, 1)
 
-	//datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
-	//var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
 	var/firelevel = burn_gas.zburn(my_tile.zone, force_burn = 1, no_check = 1, target_turf = my_tile)
 
 	air_contents.merge(burn_gas)
@@ -102,7 +90,7 @@
 
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
 				//reduce firelevel.
-				if(enemy_tile.fire_protection > world.time-30)
+				if(enemy_tile.fire_protection + FIRE_PROTECTION_TIME < world.time)
 					firelevel -= 1.5
 					continue
 
@@ -116,40 +104,37 @@
 			else
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
 
-	if(!firelevel)
+	if(firelevel <= 0)
 		qdel(src)
 	else
-		animate(src, color = fire_color(air_contents.temperature), 5)
-		set_light(l_color = color)
+		set_light(3, 1, light_color)
 
 /obj/effect/fire/Destroy()
-	RemoveFire()
-	GLOB.processing_objects.Remove(src)
-
-	. = ..()
-
-/obj/effect/fire/proc/RemoveFire()
 	//in case there is any fuel left... fires could go out from extinguisher spray or lack of oxygen
 	for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in src.loc)
 		if(fuel.amount <= FIRE_LIQUD_MIN_BURNRATE)
 			qdel(fuel)
 		else
-			fuel.icon_state = initial(fuel.icon_state)
-			fuel.name = initial(fuel.name)
+			fuel.invisibility = initial(fuel.invisibility)
 	var/turf/T = loc
 	if (istype(T))
 		set_light(0)
+	GLOB.processing_objects.Remove(src)
 
-		loc = null
-
+	. = ..()
 
 /obj/effect/fire/Crossed(atom/movable/O)
 	. = ..()
 
-	//burn anything crossing over us
-	var/turf/simulated/my_tile = get_turf(loc)
-	var/datum/gas_mixture/air_contents = my_tile.return_air()
-	if(isliving(O))
-		var/mob/living/L = O
-		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
-	O.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+	//get put out
+	if(istype(O, /obj/effect/effect/water))
+		qdel(src)
+
+	else
+		//burn anything crossing over us
+		var/turf/simulated/my_tile = get_turf(loc)
+		var/datum/gas_mixture/air_contents = my_tile.return_air()
+		if(isliving(O))
+			var/mob/living/L = O
+			L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
+		O.fire_act(air_contents, air_contents.temperature, air_contents.volume)
