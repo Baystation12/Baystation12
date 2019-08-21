@@ -13,8 +13,9 @@
 	icon_state = "wm_00"
 	density = 1
 	anchored = 1
-	interact_offline = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/state = 0
 	var/gibs_ready = 0
 	var/obj/crayon
@@ -203,7 +204,7 @@
 
 	return ..()
 
-/obj/machinery/washing_machine/attack_hand(mob/user)
+/obj/machinery/washing_machine/physical_attack_hand(mob/user)
 	if(state & WASHER_STATE_RUNNING)
 		to_chat(user, SPAN_WARNING("\The [src] is busy."))
 		return TRUE

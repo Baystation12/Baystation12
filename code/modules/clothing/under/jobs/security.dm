@@ -36,7 +36,6 @@
 	name = "dispatcher's uniform"
 	desc = "A dress shirt and khakis with a security patch sewn on."
 	icon_state = "dispatch"
-	//item_state = "dispatch"
 	worn_state = "dispatch"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
@@ -53,19 +52,16 @@
 
 /obj/item/clothing/under/rank/security/corp
 	icon_state = "sec_corporate"
-	//item_state = "sec_corporate"
 	worn_state = "sec_corporate"
 
 /obj/item/clothing/under/rank/warden/corp
 	icon_state = "warden_corporate"
-	//item_state = "warden_corporate"
 	worn_state = "warden_corporate"
 
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon_state = "swatunder"
-	//item_state = "swatunder"
 	worn_state = "swatunder"
 	gender_icons = 1
 	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
@@ -136,7 +132,6 @@
 
 /obj/item/clothing/under/rank/head_of_security/corp
 	icon_state = "hos_corporate"
-	//item_state = "hos_corporate"
 	worn_state = "hos_corporate"
 
 /obj/item/clothing/head/HoS
@@ -157,7 +152,6 @@
 	name = "armored coat"
 	desc = "A greatcoat enhanced with a special alloy for some protection and style."
 	icon_state = "hos"
-	item_state = "hos"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	armor = list(melee = 65, bullet = 30, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
@@ -176,7 +170,6 @@
 	name = "armored trenchcoat"
 	desc = "A trenchcoat augmented with a special alloy for some protection and style."
 	icon_state = "hostrench"
-	item_state = "hostrench"
 	flags_inv = 0
 	siemens_coefficient = 0.6
 

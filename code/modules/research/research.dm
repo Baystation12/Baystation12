@@ -191,16 +191,10 @@ research holder datum.
 	desc = "Computer and artificial intelligence and data storage systems."
 	id = TECH_DATA
 
-/datum/tech/syndicate
-	name = "ILLEGAL"
-	desc = "WARNING: Controlled technology detected. Fabrication of items using this technology is a direct violation of Federal Law 352-C part II and is a serious crime."
-	id = TECH_ILLEGAL
-	level = 0
-
-/datum/tech/arcane
-	name = "Arcane"
-	desc = "Techniques not explained by the mainstream science, commonly regarded as 'occult'."
-	id = TECH_ARCANE
+/datum/tech/esoteric
+	name = "Esoteric Technology"
+	desc = "A miscellaneous tech category filled with information on non-standard designs, personal projects and half-baked ideas."
+	id = TECH_ESOTERIC
 	level = 0
 
 /obj/item/weapon/disk/tech_disk

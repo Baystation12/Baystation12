@@ -119,3 +119,4 @@
 
 /spell/targeted/ethereal_jaunt/tower
 	charge_max = 2
+	spell_flags = Z2NOCAST | INCLUDEUSER

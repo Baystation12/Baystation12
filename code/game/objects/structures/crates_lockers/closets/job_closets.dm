@@ -66,7 +66,7 @@
 		/obj/item/device/lightreplacer,
 		/obj/item/weapon/storage/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
-		/obj/item/weapon/soap/nanotrasen,
+		/obj/item/weapon/soap,
 		/obj/item/weapon/storage/belt/janitor
 	)
 

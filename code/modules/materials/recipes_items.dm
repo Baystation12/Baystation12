@@ -171,7 +171,7 @@
 	on_floor = 1
 
 /datum/stack_recipe/ivbag
-	title = "bag"
+	title = "IV bag"
 	result_type = /obj/item/weapon/reagent_containers/ivbag
 	req_amount = 4
 	difficulty = 2
@@ -263,3 +263,10 @@
 	result_type = /obj/item/weapon/material/urn
 	req_amount = 5
 	send_material_data = 1
+
+/datum/stack_recipe/drill_head
+	title = "drill head"
+	result_type = /obj/item/weapon/material/drill_head
+	req_amount = 3
+	send_material_data = 1
+	difficulty = 0

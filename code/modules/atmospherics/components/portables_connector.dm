@@ -19,15 +19,10 @@
 	uncreated_component_parts = null
 	level = 1
 
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
-	pipe_type = PIPE_CONNECTOR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "connector"
 
 	pipe_class = PIPE_CLASS_UNARY
-
-/obj/machinery/atmospherics/portables_connector/Initialize()
-	initialize_directions = dir
-	. = ..()
 
 /obj/machinery/atmospherics/portables_connector/on_update_icon()
 	icon_state = "connector"

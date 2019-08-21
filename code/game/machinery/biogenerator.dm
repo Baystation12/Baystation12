@@ -14,6 +14,8 @@
 	idle_power_usage = 40
 	base_type = /obj/machinery/biogenerator
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/processing = 0
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0
@@ -177,12 +179,9 @@
 			state = BG_READY
 	return TOPIC_REFRESH
 
-/obj/machinery/biogenerator/attack_hand(mob/user as mob)
-	if((. = component_attack_hand(user)))
-		return
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/biogenerator/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/biogenerator/proc/activate()
 	if (usr.stat)

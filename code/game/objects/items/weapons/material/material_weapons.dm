@@ -24,11 +24,11 @@
 	var/worth_multiplier = 1
 
 /obj/item/weapon/material/New(var/newloc, var/material_key)
-	..(newloc)
-	queue_icon_update()
 	if(!material_key)
 		material_key = default_material
 	set_material(material_key)
+	..(newloc)
+	queue_icon_update()
 	if(!material)
 		qdel(src)
 		return

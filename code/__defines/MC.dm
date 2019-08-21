@@ -43,6 +43,7 @@ if(Datum.is_processing) {\
 // For SSmachines, use these instead
 
 #define START_PROCESSING_MACHINE(machine, flag)\
+	if(!istype(machine, /obj/machinery)) CRASH("A non-machine [log_info_line(machine)] was queued to process on the machinery subsystem.");\
 	machine.processing_flags |= flag;\
 	START_PROCESSING(SSmachines, machine)
 

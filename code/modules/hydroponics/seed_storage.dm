@@ -154,13 +154,12 @@
 		/obj/item/seeds/random = 2
 	)
 
-/obj/machinery/seed_storage/attack_hand(mob/user as mob)
-	user.set_machine(src)
+/obj/machinery/seed_storage/interface_interact(mob/user)
 	interact(user)
+	return TRUE
 
 /obj/machinery/seed_storage/interact(mob/user as mob)
-	if (..())
-		return
+	user.set_machine(src)
 
 	var/dat = "<center><h1>Seed storage contents</h1></center>"
 	if (piles.len == 0)
@@ -286,7 +285,7 @@
 					if (N.amount <= 0 || N.seeds.len <= 0)
 						piles -= N
 						qdel(N)
-					flick("[initial(icon_state)]_vend", src)
+					flick("[initial(icon_state)]-vend", src)
 					O.dropInto(loc)
 				else
 					piles -= N
@@ -344,5 +343,5 @@
 			newID = N.ID + 1
 
 	piles += new /datum/seed_pile(O, newID)
-	flick("[initial(icon_state)]_vend", src)
+	flick("[initial(icon_state)]-vend", src)
 	return

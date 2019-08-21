@@ -14,20 +14,16 @@
 /obj/proc/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	return TOPIC_NOACTION
 
-/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if(user.CanUseObjTopic(src))
-		return ..()
-	return STATUS_CLOSE
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
+	return min(..(), user.CanUseObjTopic(src, state))
 
-/mob/living/silicon/CanUseObjTopic(var/obj/O)
-	var/id = src.GetIdCard()
-	if(id && O.check_access(id))
-		return TRUE
-	to_chat(src, "<span class='danger'>\icon[src] Access Denied!</span>")
-	return FALSE
+/mob/living/CanUseObjTopic(var/obj/O, var/datum/topic_state/state)
+	. = ..()
+	if(state.check_access && !O.check_access(src))
+		. = min(., STATUS_UPDATE)
 
 /mob/proc/CanUseObjTopic()
-	return TRUE
+	return STATUS_INTERACTIVE
 
 /obj/proc/CouldUseTopic(var/mob/user)
 	user.AddTopicPrint(src)

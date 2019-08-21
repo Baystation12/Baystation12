@@ -117,7 +117,6 @@
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/rdservercontrol
 	var/screen = 0
 	var/obj/machinery/r_n_d/server/temp_server
 	var/list/servers = list()
@@ -175,10 +174,10 @@
 		. = TOPIC_REFRESH
 
 	else if(href_list["reset_tech"])
-		var/choice = alert(user, "Technology Data Rest", "Are you sure you want to reset this technology to its default data? Data lost cannot be recovered.", "Continue", "Cancel")
+		var/choice = alert(user, "Technology Data Reset", "Are you sure you want to reset this technology to its default data? Data lost cannot be recovered.", "Continue", "Cancel")
 		if(choice == "Continue" && CanUseTopic(user, state))
 			for(var/datum/tech/T in temp_server.files.known_tech)
-				if(T.id == href_list["reset_tech"])
+				if(T.level > 0 && T.id == href_list["reset_tech"])
 					T.level = 1
 					break
 		temp_server.files.RefreshResearch()
@@ -194,23 +193,21 @@
 		temp_server.files.RefreshResearch()
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+/obj/machinery/computer/rdservercontrol/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/rdservercontrol/attack_hand(mob/user)
-	if(component_attack_hand(user))
-		return TRUE
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/rdservercontrol/interact(mob/user)
 	user.set_machine(src)
 	var/dat = ""
 
 	switch(screen)
 		if(0) //Main Menu
 			dat += "Connected Servers:<BR><BR>"
-
+			var/turf/T = get_turf(src)
 			for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
-				if(istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin)
+				var/turf/ST = get_turf(S)
+				if((istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin) || (ST && !AreConnectedZLevels(ST.z, T.z)))
 					continue
 				dat += "[S.name] || "
 				dat += "<A href='?src=\ref[src];access=[S.server_id]'> Access Rights</A> | "
@@ -264,6 +261,7 @@
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
+		req_access.Cut()
 		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
 		src.updateUsrDialog()
 		return 1
@@ -276,6 +274,6 @@
 
 /obj/machinery/r_n_d/server/core
 	name = "Core R&D Server"
-	id_with_upload_string = "1"
-	id_with_download_string = "1"
+	id_with_upload_string = "1;3"
+	id_with_download_string = "1;3"
 	server_id = 1

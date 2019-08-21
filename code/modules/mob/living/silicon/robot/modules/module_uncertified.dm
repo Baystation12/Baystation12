@@ -4,6 +4,9 @@
 		"Roller" = "omoikane"
 	)
 	upgrade_locked = TRUE
+	skills = list(
+		SKILL_FINANCE = SKILL_PROF
+	) // For the money launcher, of course
 
 /obj/item/weapon/robot_module/uncertified/party
 	name = "Madhouse Productions Official Party Module"

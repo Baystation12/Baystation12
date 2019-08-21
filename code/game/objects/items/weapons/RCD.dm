@@ -184,12 +184,15 @@
 
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
 	var/cost = amount*70 //Arbitary number that hopefully gives it as many uses as a plain RCD.
+	var/obj/item/weapon/cell/cell
 	if(istype(loc,/obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
 		if(module.holder && module.holder.cell)
-			if(module.holder.cell.charge >= cost)
-				module.holder.cell.use(cost)
-				return 1
+			cell = module.holder.cell
+	else if(loc) cell = loc.get_cell()
+	if(cell && cell.charge >= cost)
+		cell.use(cost)
+		return 1
 	return 0
 
 /obj/item/weapon/rcd/mounted/attackby()

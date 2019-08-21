@@ -71,7 +71,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 			break
 	return spawned_ruins
 
-proc/load_ruin(turf/central_turf, datum/map_template/template)
+/proc/load_ruin(turf/central_turf, datum/map_template/template)
 	if(!template)
 		return FALSE
 	for(var/i in template.get_affected_turfs(central_turf, 1))

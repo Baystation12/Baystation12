@@ -1,6 +1,6 @@
 // The following four defines can be used to tweak the difficulty of the gamemode
-#define METEOR_DELAY 30 MINUTES			// This should be enough for crew to set up.
-#define METEOR_FAILSAFE_THRESHOLD 90 MINUTES	// Failsafe that guarantees Severity will be at least 15 when the round hits this time.
+#define METEOR_DELAY 15 MINUTES			// This should be enough for crew to set up.
+#define METEOR_FAILSAFE_THRESHOLD 45 MINUTES	// Failsafe that guarantees Severity will be at least 15 when the round hits this time.
 
 // In general, a PVE oriented game mode. A middle ground between Extended and actual antagonist based rounds.
 /datum/game_mode/meteor
@@ -19,27 +19,27 @@
 	var/alert_text
 	var/start_text
 	var/maximal_severity = 40
+	var/meteor_wave_delay = 30 SECONDS //minimum wait between waves in tenths of seconds
 
 	// Moved these from defines to variables, to allow for in-round tweaking via varedit:
-	var/time_between_waves_minutes = 2
-	var/escalation_probability = 90
+	var/escalation_probability = 45
 	var/send_admin_broadcasts = TRUE	// Enables debugging/information mode, sending admin messages when waves occur and when severity escalates.
 
 	event_delay_mod_moderate = 0.5		// As a bonus, more frequent events.
 	event_delay_mod_major = 0.3
 
-/decl/vv_set_handler/meteor_handler
+/decl/vv_set_handler/meteor_severity_handler
 	handled_type = /datum/game_mode/meteor
 	handled_vars = list(
 		"meteor_severity" = /datum/game_mode/meteor/proc/set_meteor_severity,
-		"time_between_waves_minutes" = /datum/game_mode/meteor/proc/set_time_between_waves_minutes
+		"meteor_wave_delay" = /datum/game_mode/meteor/proc/set_meteor_wave_delay
 	)
 
 /datum/game_mode/meteor/proc/set_meteor_severity(value)
 	meteor_severity = Clamp(value, 0, maximal_severity)
 
-/datum/game_mode/meteor/proc/set_time_between_waves_minutes(value)
-	time_between_waves_minutes = max(value, 1)
+/datum/game_mode/meteor/proc/set_meteor_wave_delay(value)
+	meteor_wave_delay = max(10 SECONDS, value)
 
 /datum/game_mode/meteor/VV_static()
 	return ..() + "maximal_severity"
@@ -62,14 +62,14 @@
 		command_announcement.Announce(start_text, alert_title)
 		for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
 			SD.meteor_alarm(INFINITY)
-		next_wave = round_duration_in_ticks + (meteor_wave_delay * time_between_waves_minutes)
+		next_wave = round_duration_in_ticks + meteor_wave_delay
 	if((round_duration_in_ticks >= METEOR_FAILSAFE_THRESHOLD) && (meteor_severity < 15) && !failsafe_triggered)
 		log_and_message_admins("Meteor mode severity failsafe triggered: Severity forced to 15.")
 		meteor_severity = 15
 		failsafe_triggered = 1
 
 	if(round_duration_in_ticks >= next_wave)
-		next_wave = round_duration_in_ticks + (meteor_wave_delay * time_between_waves_minutes)
+		next_wave = round_duration_in_ticks + meteor_wave_delay
 		// Starts as barely noticeable dust impact, ends as barrage of most severe meteor types the code has to offer. Have fun.
 		spawn()
 			spawn_meteors(meteor_severity, get_meteor_types(), pick(GLOB.cardinal), pick(GLOB.using_map.station_levels))
@@ -82,17 +82,17 @@
 
 /datum/game_mode/meteor/proc/get_meteor_types()
 	switch(meteor_severity)
-		if(1 to 3)
+		if(1 to 9)
 			return meteors_dust
-		if(4 to 6)
+		if(10 to 19)
 			return meteors_normal
-		if(7 to 9)
+		if(20 to 29)
 			return meteors_threatening
-		if(10 to 12)
+		if(30 to 34)
 			return meteors_catastrophic
-		if(13 to 19)
+		if(35 to 39)
 			return meteors_armageddon
-		if(20 to INFINITY)
+		if(40 to INFINITY)
 			return meteors_cataclysm
 	// Just in case we /somehow/ get here (looking at you, varedit)
 	return meteors_normal

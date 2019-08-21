@@ -18,7 +18,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -50,8 +50,8 @@
 /area/map_template/ecship/cockpit)
 "al" = (
 /obj/structure/table/standard,
-/obj/machinery/button/remote/blast_door{
-	id = "scraplock";
+/obj/machinery/button/blast_door{
+	id_tag = "scraplock";
 	name = "External Lockdown"
 	},
 /obj/machinery/light{
@@ -257,7 +257,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -427,7 +427,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "fusion_observation"
+	id_tag = "fusion_observation"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/science)
@@ -1581,7 +1581,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -1887,7 +1887,7 @@
 "dE" = (
 /obj/structure/table/standard,
 /obj/machinery/button/ignition{
-	id = "sev_engine";
+	id_tag = "sev_engine";
 	pixel_x = -5
 	},
 /obj/effect/floor_decal/corner/yellow/full,
@@ -1939,7 +1939,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},

@@ -105,7 +105,7 @@
 
 /obj/effect/projectile/laser/pulse/impact
 	icon_state = "impact_u_laser"
-	
+
 //----------------------------
 // Skrell laser beam
 //----------------------------
@@ -199,3 +199,48 @@
 
 /obj/effect/projectile/confuseray/impact
 	icon_state = "impact_grass"
+
+//----------------------------
+// Particle beam
+//----------------------------
+/obj/effect/projectile/laser_particle
+	light_color = COLOR_CYAN
+
+/obj/effect/projectile/laser_particle/tracer
+	icon_state = "beam_particle"
+
+/obj/effect/projectile/laser_particle/muzzle
+	icon_state = "muzzle_particle"
+
+/obj/effect/projectile/laser_particle/impact
+	icon_state = "impact_particle"
+
+//----------------------------
+// Dark matter
+//----------------------------
+/obj/effect/projectile/darkmatter
+	light_color = COLOR_PURPLE
+
+/obj/effect/projectile/darkmatter/tracer
+	icon_state = "beam_darkb"
+
+/obj/effect/projectile/darkmatter/muzzle
+	icon_state = "muzzle_darkb"
+
+/obj/effect/projectile/darkmatter/impact
+	icon_state = "impact_darkb"
+
+	//----------------------------
+// Dark matter stun
+//----------------------------
+/obj/effect/projectile/stun/darkmatter
+	light_color = COLOR_PURPLE
+
+/obj/effect/projectile/stun/darkmatter/tracer
+	icon_state = "beam_darkt"
+
+/obj/effect/projectile/stun/darkmatter/muzzle
+	icon_state = "muzzle_darkt"
+
+/obj/effect/projectile/stun/darkmatter/impact
+	icon_state = "impact_darkt"

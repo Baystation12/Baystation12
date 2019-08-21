@@ -15,6 +15,8 @@
 	idle_power_usage = 0
 	active_power_usage = 1.2 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/image/glow_icon
 	var/image/beaker_icon
@@ -63,13 +65,9 @@
 		update_use_power(POWER_USE_IDLE)
 		queue_icon_update()
 
-/obj/machinery/reagent_temperature/attack_hand(var/mob/user)
-	if(component_attack_hand(user))
-		return TRUE
+/obj/machinery/reagent_temperature/interface_interact(var/mob/user)
 	interact(user)
-
-/obj/machinery/reagent_temperature/attack_ai(var/mob/user)
-	interact(user)
+	return TRUE
 
 /obj/machinery/reagent_temperature/ProcessAtomTemperature()
 	if(use_power >= POWER_USE_ACTIVE)
@@ -163,7 +161,7 @@
 	popup.open()
 
 /obj/machinery/reagent_temperature/CanUseTopic(var/mob/user, var/state, var/href_list)
-	if(href_list["remove_container"])
+	if(href_list && href_list["remove_container"])
 		. = ..(user, GLOB.physical_state, href_list)
 		if(. == STATUS_CLOSE)
 			to_chat(user, SPAN_WARNING("You are too far away."))

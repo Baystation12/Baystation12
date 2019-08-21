@@ -47,7 +47,6 @@
 
 	//Some moron disregarded the cooldown warning. Let's blow in their face.
 	if(prob(cool_failchance()))
-		message_admins("[cool_failchance()]")
 		explosion(middle,rand(1,2),rand(2,3),rand(3,4))
 	next_shot = coolinterval + world.time
 
@@ -83,7 +82,7 @@
 		return TRUE
 
 	var/obj/effect/overmap/finaltarget = pick(candidates)
-	message_admins("A type [chargetype] artillery strike was launched at [finaltarget]; overmap coordinates [finaltarget.x],[finaltarget.y],[finaltarget.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[finaltarget.x];Y=[finaltarget.y];Z=[finaltarget.z]'>JMP</a>).")
+	log_and_message_admins("A type [chargetype] artillery strike was launched at [finaltarget].", location=finaltarget)
 
 	//Deletion of the overmap effect and the actual event trigger. Bye bye pesky meteors.
 	if(istype(finaltarget, /obj/effect/overmap_event))
@@ -106,7 +105,7 @@
 	var/area/finalarea = pick(targetareas)
 	var/turf/targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
 
-	message_admins("Aforementioned artillery strike hit sector at [get_area(targetturf)]: [targetturf.x],[targetturf.y],[targetturf.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[targetturf.x];Y=[targetturf.y];Z=[targetturf.z]'>JMP</a>).")
+	log_and_message_admins("Aforementioned artillery strike hit sector at [get_area(targetturf)].", location=targetturf)
 	if(chargetype == BSA_DROPPOD)
 		if(targetturf.density)
 			targetturf.ex_act(1)
@@ -115,7 +114,7 @@
 		charge.forceMove(targetturf)
 		//The BSA is not a taxi
 		for(var/mob/living/L in charge)
-			to_chat(L, "As you pass through bluespace above the speed of light, you suddenly ram into the fourth wall.")
+			to_chat(L, SPAN_DANGER("As you pass through bluespace above the speed of light, you suddenly ram into the fourth wall."))
 			L.forceMove(targetturf)
 			L.ex_act(1)
 	else

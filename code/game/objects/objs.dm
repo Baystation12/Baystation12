@@ -43,25 +43,14 @@
 /obj/proc/updateUsrDialog()
 	if(in_use)
 		var/is_in_use = 0
-		var/list/nearby = viewers(1, src)
+		var/list/nearby = viewers(1, src) | usr
 		for(var/mob/M in nearby)
 			if ((M.client && M.machine == src))
-				is_in_use = 1
-				src.attack_hand(M)
-		if (istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot))
-			if (!(usr in nearby))
-				if (usr.client && usr.machine==src) // && M.machine == src is omitted because if we triggered this by using the dialog, it doesn't matter if our machine changed in between triggering it and this - the dialog is probably still supposed to refresh.
+				if(CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
-					src.attack_ai(usr)
-
-		// check for TK users
-
-		if (istype(usr, /mob/living/carbon/human))
-			if(istype(usr.l_hand, /obj/item/tk_grab) || istype(usr.r_hand, /obj/item/tk_grab/))
-				if(!(usr in nearby))
-					if(usr.client && usr.machine==src)
-						is_in_use = 1
-						src.attack_hand(usr)
+					interact(M)
+				else
+					M.unset_machine()
 		in_use = is_in_use
 
 /obj/proc/updateDialog()
@@ -71,8 +60,11 @@
 		var/is_in_use = 0
 		for(var/mob/M in nearby)
 			if ((M.client && M.machine == src))
-				is_in_use = 1
-				src.interact(M)
+				if(CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
+					is_in_use = 1
+					interact(M)
+				else
+					M.unset_machine()
 		var/ai_in_use = AutoUpdateAI(src)
 
 		if(!ai_in_use && !is_in_use)
@@ -169,7 +161,7 @@
 	..()
 	
 /obj/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(. && (obj_flags & OBJ_FLAG_ROTATABLE))
 		to_chat(user, "<span class='subtle'>Can be rotated with alt-click.</span>")
 

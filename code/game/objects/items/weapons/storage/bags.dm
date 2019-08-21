@@ -28,12 +28,12 @@
 		w_class = max(w_class, I.w_class)
 
 	var/cur_storage_space = storage_space_used()
-	while(base_storage_capacity(w_class) < cur_storage_space)
+	while(BASE_STORAGE_CAPACITY(w_class) < cur_storage_space)
 		w_class++
 
 /obj/item/weapon/storage/bag/get_storage_cost()
 	var/used_ratio = storage_space_used()/max_storage_space
-	return max(base_storage_cost(w_class), round(used_ratio*base_storage_cost(max_w_class), 1))
+	return max(BASE_STORAGE_COST(w_class), round(used_ratio*BASE_STORAGE_COST(max_w_class), 1))
 
 // -----------------------------
 //          Trash bag

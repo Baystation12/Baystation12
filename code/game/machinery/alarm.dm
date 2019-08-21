@@ -1,3 +1,20 @@
+/decl/environment_data
+	var/list/important_gasses = list(
+		GAS_OXYGEN =         TRUE,
+		GAS_NITROGEN =       TRUE,
+		GAS_CO2 = TRUE
+	)
+	var/list/dangerous_gasses = list(
+		GAS_CO2 = TRUE
+	)
+	var/list/filter_gasses = list(
+		GAS_OXYGEN =         list("command" = "o2_scrub",  "value" = "filter_o2"),
+		GAS_NITROGEN =       list("command" = "n2_scrub",	 "value" = "filter_n2"),
+		GAS_CO2 = list("command" = "co2_scrub", "value" = "filter_co2"),
+		GAS_N2O = list("command" = "n2o_scrub", "value" = "filter_n2o"),
+		GAS_PHORON =         list("command" = "tox_scrub", "value" = "filter_phoron")
+	)
+
 ////////////////////////////////////////
 //CONTAINS: Air Alarms and Fire Alarms//
 ////////////////////////////////////////
@@ -59,7 +76,7 @@
 	var/aidisabled = 0
 	var/shorted = 0
 
-	var/datum/wires/alarm/wires
+	wires = /datum/wires/alarm
 
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
@@ -81,11 +98,20 @@
 	var/co2_dangerlevel = 0
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
-
+	var/environment_type = /decl/environment_data
 	var/report_danger_level = 1
 
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
+
+/decl/environment_data/finnish/Initialize()
+	. = ..()
+	important_gasses[GAS_STEAM] = TRUE
+	dangerous_gasses -= GAS_STEAM
+
+/obj/machinery/alarm/warm
+	target_temperature = T0C+39
+	environment_type = /decl/environment_data/finnish
 
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
@@ -102,8 +128,6 @@
 
 /obj/machinery/alarm/Destroy()
 	unregister_radio(src, frequency)
-	qdel(wires)
-	wires = null
 	if(alarm_area && alarm_area.master_air_alarm == src)
 		alarm_area.master_air_alarm = null
 		elect_master(exclude_self = TRUE)
@@ -130,24 +154,28 @@
 	if (name == "alarm")
 		SetName("[alarm_area.name] Air Alarm")
 
-	if(!wires)
-		wires = new(src)
-
 	// breathable air according to human/Life()
-	TLV["oxygen"] =			list(16, 19, 135, 140) // Partial pressure, kpa
-	TLV["carbon dioxide"] = list(-1.0, -1.0, 5, 10) // Partial pressure, kpa
+	TLV[GAS_OXYGEN] =			list(16, 19, 135, 140) // Partial pressure, kpa
+	TLV[GAS_CO2] = list(-1.0, -1.0, 5, 10) // Partial pressure, kpa
 	TLV["other"] =			list(-1.0, -1.0, 0.2, 0.5) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
+
+	var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 	for(var/g in gas_data.gases)
-		if(!(g in list("oxygen","nitrogen","carbon_dioxide")))
+		if(!env_info.important_gasses[g])
 			trace_gas += g
 
 	set_frequency(frequency)
 	if (!master_is_operating())
 		elect_master()
 	update_icon()
+
+/obj/machinery/alarm/get_req_access()
+	if(!locked)
+		return list()
+	return ..()
 
 /obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
@@ -246,8 +274,8 @@
 		other_moles += environment.gas[g] //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
-	oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, TLV["oxygen"])
-	co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, TLV["carbon dioxide"])
+	oxygen_dangerlevel = get_danger_level(environment.gas[GAS_OXYGEN]*partial_pressure, TLV[GAS_OXYGEN])
+	co2_dangerlevel = get_danger_level(environment.gas[GAS_CO2]*partial_pressure, TLV[GAS_CO2])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
 	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 
@@ -297,7 +325,7 @@
 /obj/machinery/alarm/proc/get_danger_level(var/current_value, var/list/danger_levels)
 	if((current_value >= danger_levels[4] && danger_levels[4] > 0) || current_value <= danger_levels[1])
 		return 2
-	if((current_value >= danger_levels[3] && danger_levels[3] > 0) || current_value <= danger_levels[2])
+	if((current_value > danger_levels[3] && danger_levels[3] > 0) || current_value < danger_levels[2])
 		return 1
 	return 0
 
@@ -484,18 +512,9 @@
 
 	frequency.post_signal(src, alert_signal)
 
-/obj/machinery/alarm/attack_ai(mob/user)
+/obj/machinery/alarm/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/alarm/attack_hand(mob/user)
-	. = ..()
-	if (.)
-		return
-	return interact(user)
-
-/obj/machinery/alarm/interact(mob/user)
-	ui_interact(user)
-	wires.Interact(user)
+	return TRUE
 
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
@@ -534,10 +553,14 @@
 	if(total)
 		var/pressure = environment.return_pressure()
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Nitrogen", "value" = environment.gas["nitrogen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = co2_dangerlevel)
-
+		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+		for(var/gas_id in env_info.important_gasses)
+			environment_data[++environment_data.len] = list(
+				"name" =  gas_data.name[gas_id],
+				"value" = environment.gas[gas_id] / total * 100,
+				"unit" = "%",
+				"danger_level" = env_info.dangerous_gasses[gas_id] ? co2_dangerlevel : oxygen_dangerlevel
+			)
 		var/other_moles = 0
 		for(var/g in trace_gas)
 			other_moles += environment.gas[g]
@@ -585,11 +608,17 @@
 						"panic"		= info["panic"],
 						"filters"	= list()
 					)
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Oxygen",			"command" = "o2_scrub",	"val" = info["filter_o2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrogen",		"command" = "n2_scrub",	"val" = info["filter_n2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Carbon Dioxide", "command" = "co2_scrub","val" = info["filter_co2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Toxin"	, 		"command" = "tox_scrub","val" = info["filter_phoron"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrous Oxide",	"command" = "n2o_scrub","val" = info["filter_n2o"]))
+				var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+				for(var/gas_id in env_info.filter_gasses)
+					var/list/filter_data = env_info.filter_gasses[gas_id]
+					scrubbers[scrubbers.len]["filters"] += list(
+						list(
+							"name" =    gas_data.name[gas_id],
+							"command" = filter_data["command"],
+							"val" =     info[filter_data["value"]]
+						)
+					)
+
 			data["scrubbers"] = scrubbers
 		if(AALARM_SCREEN_MODE)
 			var/modes[0]
@@ -606,8 +635,8 @@
 			var/thresholds[0]
 
 			var/list/gas_names = list(
-				"oxygen"         = "O<sub>2</sub>",
-				"carbon dioxide" = "CO<sub>2</sub>",
+				GAS_OXYGEN         = "O<sub>2</sub>",
+				GAS_CO2 = "CO<sub>2</sub>",
 				"other"          = "Other")
 			for (var/g in gas_names)
 				thresholds[++thresholds.len] = list("name" = gas_names[g], "settings" = list())
@@ -664,7 +693,7 @@
 		var/list/selected = TLV["temperature"]
 		var/max_temperature = min(selected[3] - T0C, MAX_TEMPERATURE)
 		var/min_temperature = max(selected[2] - T0C, MIN_TEMPERATURE)
-		var/input_temperature = input(user, "What temperature would you like the system to mantain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C) as num|null
+		var/input_temperature = input(user, "What temperature would you like the system to maintain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C) as num|null
 		if(isnum(input_temperature) && CanUseTopic(user, state))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
 				to_chat(user, "Temperature must be between [min_temperature]C and [max_temperature]C")
@@ -954,9 +983,6 @@ FIRE ALARM
 			src.alarm()			// added check of detector status here
 	return
 
-/obj/machinery/firealarm/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/firealarm/bullet_act()
 	return src.alarm()
 
@@ -1041,13 +1067,11 @@ FIRE ALARM
 	if(locate(/obj/fire) in loc)
 		alarm()
 
-/obj/machinery/firealarm/attack_hand(mob/user as mob)
-	if(user.stat || stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/firealarm/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-	if (buildstage != 2)
-		return
-
+/obj/machinery/firealarm/interact(mob/user)
 	user.set_machine(src)
 	var/area/A = src.loc
 	var/d1
@@ -1111,7 +1135,7 @@ FIRE ALARM
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+		interact(user)
 
 /obj/machinery/firealarm/proc/reset()
 	if (!( src.working ))
@@ -1179,10 +1203,11 @@ Just a object used in constructing fire alarms
 	idle_power_usage = 2
 	active_power_usage = 6
 
-/obj/machinery/partyalarm/attack_hand(mob/user as mob)
-	if(user.stat || stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/partyalarm/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
+/obj/machinery/partyalarm/interact(mob/user)
 	user.machine = src
 	var/area/A = get_area(src)
 	ASSERT(isarea(A))
@@ -1252,4 +1277,4 @@ Just a object used in constructing fire alarms
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+		interact(user)

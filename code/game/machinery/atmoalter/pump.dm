@@ -25,7 +25,7 @@
 	..()
 
 	var/list/air_mix = StandardAirMix()
-	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
+	src.air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN], GAS_NITROGEN, air_mix[GAS_NITROGEN])
 
 /obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	overlays.Cut()
@@ -103,17 +103,9 @@
 
 	src.updateDialog()
 
-/obj/machinery/portable_atmospherics/powered/pump/attack_ai(var/mob/user)
-	src.add_hiddenprint(user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/pump/attack_ghost(var/mob/user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/pump/attack_hand(var/mob/user)
-	if((. = ..()))
-		return
+/obj/machinery/portable_atmospherics/powered/pump/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/pump/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data[0]

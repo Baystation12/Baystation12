@@ -20,16 +20,11 @@
 	var/datum/pipe_network/network_node3
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
-	
-	pipe_type = PIPE_MTVALVE
+	connect_dir_type = SOUTH | WEST | NORTH
 	pipe_class = PIPE_CLASS_TRINARY
 
 	build_icon = 'icons/atmos/tvalve.dmi'
 	build_icon_state = "map_tvalve0"
-
-/obj/machinery/atmospherics/tvalve/New()
-	initialize_directions()
-	..()
 
 /obj/machinery/atmospherics/tvalve/on_update_icon(animation)
 	if(animation)
@@ -54,17 +49,6 @@
 
 /obj/machinery/atmospherics/tvalve/hide(var/i)
 	update_underlays()
-
-/obj/machinery/atmospherics/tvalve/proc/initialize_directions()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = SOUTH|NORTH|EAST
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH|WEST
-		if(EAST)
-			initialize_directions = WEST|EAST|SOUTH
-		if(WEST)
-			initialize_directions = EAST|WEST|NORTH	
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -170,17 +154,17 @@
 
 	return 1
 
-/obj/machinery/atmospherics/tvalve/attack_ai(mob/user as mob)
-	return
+/obj/machinery/atmospherics/tvalve/proc/toggle()
+	return state ? go_straight() : go_to_side()
 
-/obj/machinery/atmospherics/tvalve/attack_hand(mob/user as mob)
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/tvalve/physical_attack_hand(mob/user)
+	user_toggle()
+	return TRUE
+
+/obj/machinery/atmospherics/tvalve/proc/user_toggle()
 	update_icon(1)
 	sleep(10)
-	if (src.state)
-		src.go_straight()
-	else
-		src.go_to_side()
+	toggle()
 
 /obj/machinery/atmospherics/tvalve/Process()
 	..()
@@ -299,16 +283,49 @@
 		new /obj/item/pipe(loc, src)
 		qdel(src)
 
+/decl/public_access/public_variable/tvalve_state
+	expected_type = /obj/machinery/atmospherics/tvalve
+	name = "valve state"
+	desc = "If true, the output is diverted to the side; if false, the output goes straight."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/tvalve_state/access_var(obj/machinery/atmospherics/tvalve/tvalve)
+	return tvalve.state
+
+/decl/public_access/public_method/tvalve_go_straight
+	name = "valve go straight"
+	desc = "Sets the valve to send output straight."
+	call_proc = /obj/machinery/atmospherics/tvalve/proc/go_straight
+
+/decl/public_access/public_method/tvalve_go_side
+	name = "valve go side"
+	desc = "Redirects output to the side."
+	call_proc = /obj/machinery/atmospherics/tvalve/proc/go_to_side
+
+/decl/public_access/public_method/tvalve_toggle
+	name = "valve toggle"
+	desc = "Toggles the output direction."
+	call_proc = /obj/machinery/atmospherics/tvalve/proc/toggle
+
+/decl/stock_part_preset/radio/receiver/tvalve
+	frequency = FUEL_FREQ
+	filter = RADIO_ATMOSIA
+	receive_and_call = list(
+		"valve_open" = /decl/public_access/public_method/tvalve_go_side,
+		"valve_close" = /decl/public_access/public_method/tvalve_go_straight,
+		"valve_toggle" = /decl/public_access/public_method/tvalve_toggle
+	)
+
 //Mirrored editions		
 /obj/machinery/atmospherics/tvalve/mirrored
 	icon_state = "map_tvalvem0"
 	
-	pipe_type =  PIPE_MTVALVEM
+	connect_dir_type = SOUTH | EAST | NORTH
 	build_icon_state = "map_tvalvem0"
 
 /obj/machinery/atmospherics/tvalve/mirrored/atmos_init()
 	..()
-	initialize_directions()
 
 	var/node1_dir
 	var/node2_dir
@@ -320,16 +337,6 @@
 
 	init_nodes(node1_dir, node2_dir, node3_dir)
 
-/obj/machinery/atmospherics/tvalve/mirrored/initialize_directions()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = SOUTH|NORTH|WEST
-		if(SOUTH)
-			initialize_directions = NORTH|SOUTH|EAST
-		if(EAST)
-			initialize_directions = WEST|EAST|NORTH
-		if(WEST)
-			initialize_directions = EAST|WEST|SOUTH
 
 /obj/machinery/atmospherics/tvalve/mirrored/on_update_icon(animation)
 	if(animation)
@@ -342,64 +349,35 @@
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalve0"
-
-	frequency = 1441
-	var/id = null
-	var/datum/radio_frequency/radio_connection
 	
-	pipe_type =  PIPE_DTVALVE
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 
-/obj/machinery/atmospherics/tvalve/digital/New()
-	..()
-	initialize_directions()
-
-/obj/machinery/atmospherics/tvalve/digital/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	public_variables = list(/decl/public_access/public_variable/tvalve_state)
+	public_methods = list(
+		/decl/public_access/public_method/tvalve_go_side,
+		/decl/public_access/public_method/tvalve_go_straight,
+		/decl/public_access/public_method/tvalve_toggle
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/tvalve = 1)
 
 /obj/machinery/atmospherics/tvalve/digital/on_update_icon()
 	..()
 	if(!powered())
 		icon_state = "tvalvenopower"
-		
-/obj/machinery/atmospherics/tvalve/digital/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-	
-/obj/machinery/atmospherics/tvalve/digital/attack_hand(mob/user as mob)
-	if(!powered())
-		return
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	..()
 
-/obj/machinery/atmospherics/tvalve/digital/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+/obj/machinery/atmospherics/tvalve/digital/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	user_toggle()
+	return TRUE
 
-/obj/machinery/atmospherics/tvalve/digital/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || signal.data["tag"] != id)
-		return 0
-
-	switch(signal.data["command"])
-		if("valve_open")
-			if(!state)
-				go_to_side()
-
-		if("valve_close")
-			if(state)
-				go_straight()
-
-		if("valve_toggle")
-			if(state)
-				go_straight()
-			else
-				go_to_side()
+/obj/machinery/atmospherics/tvalve/digital/physical_attack_hand(mob/user)
+	return FALSE
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital		// can be controlled by AI
 	name = "digital switching valve"
@@ -407,65 +385,34 @@
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalvem0"
 
-	frequency = 1441
-	var/id = null
-	var/datum/radio_frequency/radio_connection
-
-	pipe_type =  PIPE_DTVALVEM
-
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalvem0"
 
-/obj/machinery/atmospherics/tvalve/mirrored/digital/New()
-	..()
-	initialize_directions()
-
-/obj/machinery/atmospherics/tvalve/mirrored/digital/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	public_variables = list(/decl/public_access/public_variable/tvalve_state)
+	public_methods = list(
+		/decl/public_access/public_method/tvalve_go_side,
+		/decl/public_access/public_method/tvalve_go_straight,
+		/decl/public_access/public_method/tvalve_toggle
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/tvalve = 1)
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/on_update_icon()
 	..()
 	if(!powered())
 		icon_state = "tvalvemnopower"
 
-/obj/machinery/atmospherics/tvalve/mirrored/digital/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+/obj/machinery/atmospherics/tvalve/mirrored/digital/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	user_toggle()
+	return TRUE
 
-/obj/machinery/atmospherics/tvalve/mirrored/digital/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/atmospherics/tvalve/mirrored/digital/attack_hand(mob/user as mob)
-	if(!powered())
-		return
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	..()
-
-/obj/machinery/atmospherics/tvalve/mirrored/digital/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || signal.data["tag"] != id)
-		return 0
-
-	switch(signal.data["command"])
-		if("valve_open")
-			if(!state)
-				go_to_side()
-
-		if("valve_close")
-			if(state)
-				go_straight()
-
-		if("valve_toggle")
-			if(state)
-				go_straight()
-			else
-				go_to_side()
-
+/obj/machinery/atmospherics/tvalve/mirrored/digital/physical_attack_hand(mob/user)
+	return FALSE
 
 //Bypass editions
 /obj/machinery/atmospherics/tvalve/digital/bypass

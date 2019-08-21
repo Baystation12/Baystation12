@@ -14,16 +14,15 @@
 
 /decl/cultural_info/faction/scg/fleet
 	name = FACTION_FLEET
-	description = "The SCG DF Fleet, commonly referred to as the Fleet, is the SCG's primary component of the Defence Forces. \
-	It consists of a huge assortment of vessels of varying sizes broken up into a number of smaller \"Fleets\" each with their \
-	own areas of responsibility. The Fleet is the oldest component of the DF, and has long been the backbone of the SCG. \
-	The Fleet, being the large, sprawling organisation it is, is made up of thousands and thousands of men and women \
-	(and more recently, a number of Sol IPC's) spread across a variety of duties, tasks and postings. \
+	description = "The Fleet is the primary component of the SCG Defence Forces. It mostly protects SCG space from pirates, smugglers, \
+	and occasional vox raiders, with its last serious military engagement being the Gaia war over 10 years ago. \
 	The oldest component of the Defence Forces, the Fleet considers itself the pinnacle of Human military accomplishment. \
-	It is well funded, but seen as complacent and bloated. Until recently the Fleet have not had a serious enemy to deal with, \
-	but is generally respected by the populace due to their work keeping away pirates, putting down insurrections, destroying \
-	smugglers and taking potshots at the ocassional Vox. Currently undergoing major \
-	overhauls to improve efficiency and capabilities, publicly to counter encroachment by the Confederation of Gilgamesh."
+	It is well funded, but seen as complacent and bloated. It is made up of five Fleets, with missions ranging from \
+	diplomatic security for Sol dignitaries, to border patrol along the vast frontier and quick reaction force duties. \
+	Any SCG human citizen with at least a secondary school level of education can enlist into the Fleet, going through \
+	basic training and on-ship training for their rating (speciality). Commissioned officer candidates require at least a \
+	Bachelor degree and go through a lengthy training process before being assigned to a warship. \
+	Recently Sol-made IPCs were also permitted to enlist, provided they agree to install a law shackle."
 
 /decl/cultural_info/faction/torchco
 	name = FACTION_CORPORATE
@@ -53,14 +52,14 @@
 
 /decl/cultural_info/faction/remote
 	name = FACTION_EXPEDITIONARY
-	description = "The Expeditionary Corps, commonly referred to as the EC and made up of 'expeds', is a non-military, uniformed \
-	organisation of the Sol Central Government, reporting to the Committee for Diplomatic Relations. It is governed by similar regulations \
-	to the Fleet but has its own customs, regulations, and traditions that at times put it at odds with the Defence Forces. It is \
-	generally considered to be laxer than the Fleet, though they are considered to be very capable in their areas of expertise. \
-	It consists of uniformed personnel (enlisted and commissioned officers) and corporate contractors hired on a per mission basis. \
-	The primary purpose of the Expeditionary Corps is the exploration of uncharted space and worlds, mineralogy surveys and \
-	Xenoarchaeological studies and, most importantly, the discovery of new alien life. The Expeditionary Corps is \
-	often considered a motivated, starry-eyed organisation that genuinely strives to be the best it can."
+	description = "The Expeditionary Corps is an SCG agency tasked with exploration of uncharted space and worlds, \
+	mineralogy surveys and xenoarchaeological studies and, more recently, the discovery of new alien life. \
+	The EC performs a variety of tasks: discovering and cataloging stellar objects in Observatory, \
+	initial surveys of prospective colony sites, indepth exploration of uncharted worlds, staffing \
+	long-term scientific outposts, and studying anomalies and xenoarcheological sites. \
+	While not military, it was modelled in a naval style, with employees having ranks and uniforms. \
+	Any SCG citizen of age (18 and older) with no outstanding SCG-wide warrants can sign up for a 2-year contract. \
+	Officer candidates are required to have at least a bachelor's degree in a relevant field (astrogation, engineering, xenoarcheology, etc)."
 
 /decl/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN

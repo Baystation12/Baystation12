@@ -12,6 +12,8 @@
 	idle_power_usage = 40
 	active_power_usage = 300
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/stored_matter = 0
 	var/max_stored_matter = 0
@@ -54,20 +56,18 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish printing first!")
 	return ..()
 
-/obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
-	if(component_attack_hand(user))
-		return TRUE
-	if(printing || (stat & (BROKEN|NOPOWER)))
+/obj/machinery/organ_printer/physical_attack_hand(mob/user, var/choice = null)
+	if(printing)
 		return
 
 	if(!choice)
 		choice = input("What would you like to print?") as null|anything in products
 
-	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
-		return
+	if(!choice || printing || !CanPhysicallyInteract(user))
+		return TRUE
 
 	if(!can_print(choice))
-		return
+		return TRUE
 
 	stored_matter -= products[choice][2]
 
@@ -82,7 +82,7 @@
 	update_icon()
 
 	if(!choice || !src || (stat & (BROKEN|NOPOWER)))
-		return
+		return TRUE
 
 	print_organ(choice)
 
@@ -120,7 +120,8 @@
 		BP_L_FOOT   = list(/obj/item/organ/external/foot,       40),
 		BP_R_FOOT   = list(/obj/item/organ/external/foot/right, 40),
 		BP_L_HAND   = list(/obj/item/organ/external/hand,       40),
-		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40)
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40),
+		BP_CELL		= list(/obj/item/organ/internal/cell, 25)
 		)
 
 	var/matter_amount_per_sheet = 10
@@ -204,7 +205,7 @@
 	visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
 	return O
 
-/obj/machinery/organ_printer/flesh/attack_hand(mob/user)
+/obj/machinery/organ_printer/flesh/physical_attack_hand(mob/user)
 	if(!loaded_dna_datum || !loaded_species)
 		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
 		return

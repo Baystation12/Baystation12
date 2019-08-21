@@ -127,6 +127,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else
 		pref.body_markings &= GLOB.body_marking_styles_list
 
+	sanitize_organs()
+
 	var/list/last_descriptors = list()
 	if(islist(pref.body_descriptors))
 		last_descriptors = pref.body_descriptors.Copy()
@@ -371,6 +373,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
 
 			pref.cultural_info = mob_species.default_cultural_info.Copy()
+
+			sanitize_organs()
+
+			if(!has_flag(all_species[pref.species], HAS_UNDERWEAR))
+				pref.all_underwear.Cut()
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -621,6 +628,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ = BP_KIDNEYS
 
 		var/list/organ_choices = list("Normal","Assisted","Synthetic")
+
+		if(mob_species && mob_species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+			organ_choices -= "Assisted"
+			organ_choices -= "Synthetic"
+
 		if(pref.organ_data[BP_CHEST] == "cyborg")
 			organ_choices -= "Normal"
 			organ_choices += "Synthetic"
@@ -635,6 +647,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				pref.organ_data[organ] = "assisted"
 			if("Synthetic")
 				pref.organ_data[organ] = "mechanical"
+
+		sanitize_organs()
 		return TOPIC_REFRESH
 
 	else if(href_list["disabilities"])
@@ -679,3 +693,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else
 		//this shouldn't happen
 		pref.f_style = GLOB.facial_hair_styles_list["Shaved"]
+
+/datum/category_item/player_setup_item/physical/body/proc/sanitize_organs()
+	var/datum/species/mob_species = all_species[pref.species]
+	if(mob_species && mob_species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+		for(var/name in pref.organ_data)
+			var/status = pref.organ_data[name]
+			if(status in list("assisted","mechanical"))
+				pref.organ_data[name] = null

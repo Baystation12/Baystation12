@@ -23,14 +23,14 @@
 
 /obj/machinery/pipedispenser/proc/build_quantity(var/datum/pipe/P, var/quantity)
 	for(var/I = quantity;I > 0;I -= 1)
-		P.Build(P, loc, pipe_color)
+		P.Build(P, loc, pipe_colors[pipe_color])
 
 /obj/machinery/pipedispenser/Topic(href, href_list)
 	if((. = ..()))
 		return
 	if(href_list["build"])
 		var/datum/pipe/P = locate(href_list["build"])
-		P.Build(P, loc, pipe_color)
+		P.Build(P, loc, pipe_colors[pipe_color])
 	if(href_list["buildfive"])
 		var/datum/pipe/P = locate(href_list["buildfive"])
 		build_quantity(P, 5)
@@ -44,7 +44,11 @@
 		pipe_color = choice
 		updateUsrDialog()
 
-/obj/machinery/pipedispenser/attack_hand(user as mob)
+/obj/machinery/pipedispenser/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/pipedispenser/interact(mob/user)
 	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
@@ -107,7 +111,7 @@
 
 	qdel(pipe)
 
-/obj/machinery/pipedispenser/disposal/attack_hand(user as mob)
+/obj/machinery/pipedispenser/disposal/interact(mob/user)
 	var/datum/browser/popup = new (user, "Disposal Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_disposal_pipe_datums_by_category))
 	popup.open()

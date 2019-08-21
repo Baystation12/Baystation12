@@ -22,6 +22,7 @@ Pipelines + Other Objects -> Pipe network
 	layer = EXPOSED_PIPE_LAYER
 
 	var/connect_types = CONNECT_TYPE_REGULAR
+	var/connect_dir_type = SOUTH // Assume your dir is SOUTH. What dirs should you connect to?
 	var/icon_connect_type = "" //"-supply" or "-scrubbers"
 
 	var/initialize_directions = 0
@@ -32,13 +33,13 @@ Pipelines + Other Objects -> Pipe network
 	var/obj/machinery/atmospherics/node2
 
 	var/atmos_initalized = FALSE
-	var/pipe_type = PIPE_SIMPLE_STRAIGHT
 	var/build_icon = 'icons/obj/pipe-item.dmi'
 	var/build_icon_state = "buildpipe"
 
 	var/pipe_class = PIPE_CLASS_OTHER //If somehow something isn't set properly, handle it as something with zero connections. This will prevent runtimes.
+	var/rotate_class = PIPE_ROTATE_STANDARD
 
-/obj/machinery/atmospherics/New()
+/obj/machinery/atmospherics/Initialize()
 	if(!icon_manager)
 		icon_manager = new()
 
@@ -48,7 +49,9 @@ Pipelines + Other Objects -> Pipe network
 
 	if(!pipe_color_check(pipe_color))
 		pipe_color = null
-	..()
+
+	set_dir(dir) // Does full dir init.
+	. = ..()
 
 /obj/machinery/atmospherics/proc/atmos_init()
 	atmos_initalized = TRUE
@@ -140,3 +143,33 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 /obj/machinery/atmospherics/on_update_icon()
 	return null
+
+// returns all pipe's endpoints. You can override, but you may then need to use a custom /item/pipe constructor.
+/obj/machinery/atmospherics/proc/get_initialze_directions()
+	return base_pipe_initialize_directions(dir, connect_dir_type)
+
+/proc/base_pipe_initialize_directions(dir, connect_dir_type)
+	if(!dir)
+		return 0
+	if(!(dir in GLOB.cardinal))
+		return dir // You're on your own. Used for bent pipes.
+	. = 0
+
+	if(connect_dir_type & SOUTH)
+		. |= dir
+	if(connect_dir_type & NORTH)
+		. |= turn(dir, 180)
+	if(connect_dir_type & WEST)
+		. |= turn(dir, -90)
+	if(connect_dir_type & EAST)
+		. |= turn(dir, 90)
+
+/obj/machinery/atmospherics/set_dir(new_dir)
+	. = ..()
+	initialize_directions = get_initialze_directions()
+
+// Used by constructors. Shouldn't generally be called from elsewhere.
+/obj/machinery/proc/set_initial_level()
+	var/turf/T = get_turf(src)
+	if(T)
+		level = (!T.is_plating() ? 2 : 1)

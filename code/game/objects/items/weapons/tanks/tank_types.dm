@@ -14,9 +14,9 @@
 /obj/item/weapon/tank/oxygen
 	name = "oxygen tank"
 	desc = "A tank of oxygen."
-	icon_state = "oxygen"
+	icon_state = GAS_OXYGEN
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE)
 	volume = 180
 
 /obj/item/weapon/tank/oxygen/yellow
@@ -35,7 +35,7 @@
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
 	item_state = "an_tank"
-	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE*O2STANDARD, "sleeping_agent" = 6*ONE_ATMOSPHERE*N2STANDARD)
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, GAS_N2O = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 270
 
 /*
@@ -44,8 +44,8 @@
 /obj/item/weapon/tank/air
 	name = "air tank"
 	desc = "Mixed anyone?"
-	icon_state = "oxygen"
-	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE*O2STANDARD, "nitrogen" = 6*ONE_ATMOSPHERE*N2STANDARD)
+	icon_state = GAS_OXYGEN
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, GAS_NITROGEN = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 180
 
 /*
@@ -58,7 +58,7 @@
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null	//they have no straps!
-	starting_pressure = list("phoron" = 3*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_PHORON = 3*ONE_ATMOSPHERE)
 
 /*
  * Hydrogen
@@ -70,16 +70,8 @@
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null
-	starting_pressure = list("hydrogen" = 3*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_HYDROGEN = 3*ONE_ATMOSPHERE)
 
-/obj/item/weapon/tank/hydrogen/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if (istype(W, /obj/item/weapon/flamethrower))
-		var/obj/item/weapon/flamethrower/F = W
-		if (!F.status || F.ptank || user.unEquip(src, F))
-			return
-		master = F
-		F.ptank = src
 /*
  * Emergency Oxygen
  */
@@ -102,7 +94,7 @@
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list("oxygen" = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_OXYGEN = 10*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
@@ -121,7 +113,7 @@
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list("nitrogen" = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/emergency/nitrogen/double
 	name = "double emergency nitrogen tank"
@@ -137,5 +129,5 @@
 	desc = "A tank of nitrogen."
 	icon_state = "oxygen_fr"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list("nitrogen" = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
 	volume = 180

@@ -9,6 +9,10 @@
 	hidden_from_codex = FALSE
 	silent_steps = TRUE
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
 
@@ -50,7 +54,6 @@
 	virus_immune = 1
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
-	pixel_offset_y = -4
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(

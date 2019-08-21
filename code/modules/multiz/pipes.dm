@@ -18,26 +18,6 @@ obj/machinery/atmospherics/pipe/zpipe
 
 	level = 1
 
-obj/machinery/atmospherics/pipe/zpipe/New()
-	..()
-	switch(dir)
-		if(SOUTH)
-			initialize_directions = SOUTH
-		if(NORTH)
-			initialize_directions = NORTH
-		if(WEST)
-			initialize_directions = WEST
-		if(EAST)
-			initialize_directions = EAST
-		if(NORTHEAST)
-			initialize_directions = NORTH
-		if(NORTHWEST)
-			initialize_directions = WEST
-		if(SOUTHEAST)
-			initialize_directions = EAST
-		if(SOUTHWEST)
-			initialize_directions = SOUTH
-
 /obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(i ? 101 : 0)
@@ -71,12 +51,6 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 	smoke.set_up(1,0, src.loc, 0)
 	smoke.start()
 	qdel(src) // NOT qdel.
-
-obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
-	if(dir == (NORTH|SOUTH))
-		set_dir(NORTH)
-	else if(dir == (EAST|WEST))
-		set_dir(EAST)
 
 obj/machinery/atmospherics/pipe/zpipe/Destroy()
 	if(node1)
@@ -115,7 +89,6 @@ obj/machinery/atmospherics/pipe/zpipe/up
 
 obj/machinery/atmospherics/pipe/zpipe/up/atmos_init()
 	..()
-	normalize_dir()
 	var/node1_dir
 
 	for(var/direction in GLOB.cardinal)
@@ -154,7 +127,6 @@ obj/machinery/atmospherics/pipe/zpipe/down
 
 obj/machinery/atmospherics/pipe/zpipe/down/atmos_init()
 	..()
-	normalize_dir()
 	var/node1_dir
 
 	for(var/direction in GLOB.cardinal)

@@ -6,7 +6,7 @@
 	dir = SOUTH
 
 	load_item_visible = 1
-	buckle_pixel_shift = "x=0;y=5"
+	buckle_pixel_shift = "x=0;y=0;z=5"
 	health = 100
 	maxhealth = 100
 

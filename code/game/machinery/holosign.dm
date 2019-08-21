@@ -9,20 +9,19 @@
 	active_power_usage = 70
 	anchored = 1
 	var/lit = 0
-	var/id = null
 	var/on_icon = "sign_on"
-	var/_wifi_id
-	var/datum/wifi/receiver/button/holosign/wifi_receiver
 
-/obj/machinery/holosign/Initialize()
-	. = ..()
-	if(_wifi_id)
-		wifi_receiver = new(_wifi_id, src)
-
-/obj/machinery/holosign/Destroy()
-	qdel(wifi_receiver)
-	wifi_receiver = null
-	return ..()
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/holosign_on
+	)
+	public_methods = list(
+		/decl/public_access/public_method/holosign_toggle
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/holosign = 1)
 
 /obj/machinery/holosign/proc/toggle()
 	if (inoperable())
@@ -39,10 +38,34 @@
 		icon_state = on_icon
 		set_light(0.5, 0.5, 1, l_color = COLOR_CYAN_BLUE)
 
+/decl/public_access/public_variable/holosign_on
+	expected_type = /obj/machinery/holosign
+	name = "holosign active"
+	desc = "Whether or not the holosign is active."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/holosign_on/access_var(obj/machinery/holosign/sign)
+	return sign.lit
+
+/decl/public_access/public_method/holosign_toggle
+	name = "holosign toggle"
+	desc = "Toggle the holosign's active state."
+	call_proc = /obj/machinery/holosign/proc/toggle
+
+/decl/stock_part_preset/radio/receiver/holosign
+	frequency = BUTTON_FREQ
+	receive_and_call = list("button_active" = /decl/public_access/public_method/holosign_toggle)
+
 /obj/machinery/holosign/surgery
 	name = "surgery holosign"
 	desc = "Small wall-mounted holographic projector. This one reads SURGERY."
 	on_icon = "surgery"
+
+/obj/machinery/holosign/chapel
+	name = "chapel holosign"
+	desc = "Small wall-mounted holographic projector. This one reads SERVICE."
+	on_icon = "service"
 
 ////////////////////SWITCH///////////////////////////////////////
 /obj/machinery/button/holosign
@@ -50,18 +73,6 @@
 	desc = "A remote control switch for holosign."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "crema_switch"
-
-/obj/machinery/button/holosign/attack_hand(mob/user as mob)
-	if(..())
-		return
-
-	active = !active
-	use_power_oneoff(5)
-	update_icon()
-
-	for(var/obj/machinery/holosign/M in SSmachines.machinery)
-		if (M.id == src.id)
-			M.toggle()
 
 /obj/machinery/button/holosign/on_update_icon()
 	icon_state = "light[active]"

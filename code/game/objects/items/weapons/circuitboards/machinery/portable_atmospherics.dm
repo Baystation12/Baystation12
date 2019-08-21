@@ -4,10 +4,16 @@
 	build_path = /obj/machinery/portable_atmospherics/powered/scrubber
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
 	req_components = list(
-							/obj/item/weapon/stock_parts/capacitor = 2,
-							/obj/item/weapon/stock_parts/matter_bin = 2,
-							/obj/item/pipe = 2,
-							/obj/item/weapon/cell = 1)
+		/obj/item/weapon/stock_parts/capacitor = 2,
+		/obj/item/weapon/stock_parts/matter_bin = 2,
+		/obj/item/pipe = 2)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1,
+		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/weapon/cell = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/pump
 	name = T_BOARD("portable pump")
@@ -35,7 +41,12 @@
 	build_path = /obj/machinery/portable_atmospherics/hydroponics
 	origin_tech = list(TECH_BIO = 3, TECH_MATERIAL = 2, TECH_DATA = 1)
 	req_components = list(
-							/obj/item/weapon/stock_parts/matter_bin = 2,
-							/obj/item/weapon/reagent_containers/glass/beaker = 1,
-							/obj/item/weedkiller = 1,
-							/obj/item/pipe = 2)
+		/obj/item/weapon/stock_parts/matter_bin = 2,
+		/obj/item/weapon/reagent_containers/glass/beaker = 1,
+		/obj/item/weedkiller = 1,
+		/obj/item/pipe = 2)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)

@@ -2,7 +2,8 @@
 	name = "imprinting implant"
 	desc = "Latest word in training your peons."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 3)
-	var/list/instructions = list("Do your job.", "Respect your superiours.", "Wash you hands after using the toilet.")
+	hidden = 1
+	var/list/instructions = list("Do your job.", "Respect your superiors.", "Wash you hands after using the toilet.")
 	var/brainwashing = 0
 	var/last_reminder
 
@@ -45,18 +46,19 @@
 		return FALSE
 	if(H.reagents.has_reagent(/datum/reagent/mindbreaker))
 		brainwashing = 1
-	var/msg
+	var/msg = list()
 	if(brainwashing)
 		msg += "<span class='danger'>The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:</span><br>"
 	else
 		msg += "<span class='notice'>You hear an annoying voice in the back of your head. The things it keeps reminding you of:</span><br>"
 	for(var/thing in instructions)
 		msg += "- [thing]<br>"
+	msg = JOINTEXT(msg)
 	to_chat(M, msg)
 	if(M.mind)
-		M.mind.store_memory("<hr>[msg]")
+		M.StoreMemory(msg, /decl/memory_options/system)
 	if(brainwashing)
-		message_admins("[key_name_admin(M)] was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].")
+		log_and_message_admins("was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].", M)
 	START_PROCESSING(SSobj, src)
 	return TRUE
 

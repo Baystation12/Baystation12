@@ -1,7 +1,7 @@
 /mob/living/simple_animal/slime
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."
-	icon = 'icons/mob/slimes.dmi'
+	icon = 'icons/mob/simple_animal/slimes.dmi'
 	icon_state = "grey baby slime"
 	icon_living = "grey baby slime"
 	icon_dead = "grey baby slime dead"
@@ -23,7 +23,7 @@
 /mob/living/simple_animal/adultslime
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."
-	icon = 'icons/mob/slimes.dmi'
+	icon = 'icons/mob/simple_animal/slimes.dmi'
 	health = 200
 	maxHealth = 200
 	icon_state = "grey adult slime"

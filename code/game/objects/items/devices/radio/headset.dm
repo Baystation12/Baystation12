@@ -12,7 +12,6 @@
 	cell = null
 	power_usage = 0
 	var/translate_binary = 0
-	var/translate_hive = 0
 	var/list/encryption_keys = list()
 	var/max_keys = 2
 
@@ -51,9 +50,6 @@
 		if (translate_binary)
 			var/datum/language/binary = all_languages[LANGUAGE_ROBOT_GLOBAL]
 			binary.broadcast(M, message)
-		if (translate_hive)
-			var/datum/language/hivemind = all_languages[LANGUAGE_XENOPHAGE_GLOBAL]
-			hivemind.broadcast(M, message)
 		return null
 
 	return ..()
@@ -68,7 +64,7 @@
 	return -1
 
 /obj/item/device/radio/headset/syndicate
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/syndicate
 
@@ -81,7 +77,7 @@
 	set_frequency(SYND_FREQ)
 
 /obj/item/device/radio/headset/raider
-	origin_tech = list(TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_ESOTERIC = 2)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/raider
 
@@ -90,7 +86,7 @@
 	set_frequency(RAID_FREQ)
 
 /obj/item/device/radio/headset/binary
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	ks1type = /obj/item/device/encryptionkey/binary
 
 /obj/item/device/radio/headset/headset_sec
@@ -349,7 +345,6 @@
 /obj/item/device/radio/headset/recalculateChannels(var/setDescription = 0)
 	src.channels = list()
 	src.translate_binary = 0
-	src.translate_hive = 0
 	src.syndie = 0
 	for(var/obj/ekey in encryption_keys)
 		import_key_data(ekey)
@@ -373,8 +368,6 @@
 		src.channels[ch_name] = key.channels[ch_name]
 	if(key.translate_binary)
 		src.translate_binary = 1
-	if(key.translate_hive)
-		src.translate_hive = 1
 	if(key.syndie)
 		src.syndie = 1
 

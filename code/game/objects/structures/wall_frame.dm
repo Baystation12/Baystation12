@@ -16,6 +16,7 @@
 	var/health = 100
 	var/paint_color
 	var/stripe_color
+	rad_resistance_modifier = 0.5
 
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
@@ -164,7 +165,7 @@
 		dismantle()
 
 /obj/structure/wall_frame/proc/dismantle()
-	new /obj/item/stack/material/steel(get_turf(src))
+	new /obj/item/stack/material/steel(get_turf(src), 3)
 	qdel(src)
 
 //Subtypes

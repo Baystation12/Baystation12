@@ -17,9 +17,9 @@
 /decl/closet_appearance/secure_closet/torch/medical/cmo
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_BABY_BLUE,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_BABY_BLUE,
-		"medical" = COLOR_GOLD
+		"medical" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/counselor

@@ -12,6 +12,7 @@
 	allowed_ranks = null
 	allowed_branches = null
 	skill_points = 25
+	give_psionic_implant_on_join = FALSE
 	max_skill = list(   SKILL_BUREAUCRACY = SKILL_MAX,
 	                    SKILL_FINANCE = SKILL_MAX,
 	                    SKILL_EVA = SKILL_MAX,
@@ -41,7 +42,7 @@
 	var/list/spawnpoints
 	var/datum/submap/owner
 	var/list/blacklisted_species = RESTRICTED_SPECIES
-	var/list/whitelisted_species = STATION_SPECIES
+	var/list/whitelisted_species = UNRESTRICTED_SPECIES
 
 /datum/job/submap/New(var/datum/submap/_owner, var/abstract_job = FALSE)
 	if(!abstract_job)

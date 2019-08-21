@@ -51,14 +51,15 @@
 	equipment_darkness_modifier = 0
 	equipment_overlays.Cut()
 
-	if(istype(src.head, /obj/item/clothing/head))
-		add_clothing_protection(head)
-	if(istype(src.glasses, /obj/item/clothing/glasses))
-		process_glasses(glasses)
-	if(istype(src.wear_mask, /obj/item/clothing/mask))
-		add_clothing_protection(wear_mask)
-	if(istype(back,/obj/item/weapon/rig))
-		process_rig(back)
+	if (!client || client.eye == src) // !client is so the unit tests function
+		if(istype(src.head, /obj/item/clothing/head))
+			add_clothing_protection(head)
+		if(istype(src.glasses, /obj/item/clothing/glasses))
+			process_glasses(glasses)
+		if(istype(src.wear_mask, /obj/item/clothing/mask))
+			add_clothing_protection(wear_mask)
+		if(istype(back,/obj/item/weapon/rig))
+			process_rig(back)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
 	if(G)
@@ -112,6 +113,9 @@
 			if(findtext(PDA.name, old_name))
 				PDA.SetName(replacetext(PDA.name, old_name, new_name))
 				search_pda = 0
+
+	if(wearing_rig && wearing_rig.update_visible_name)
+		wearing_rig.visible_name = real_name
 
 
 //Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.

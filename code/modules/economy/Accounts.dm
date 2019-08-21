@@ -14,8 +14,9 @@
 /datum/money_account/New(var/account_type)
 	account_type = account_type ? account_type : ACCOUNT_TYPE_PERSONAL
 
-/datum/money_account/proc/add_transaction(var/datum/transaction/T)
-	money = max(0, money + T.amount)
+// is_source inverts the amount.
+/datum/money_account/proc/add_transaction(var/datum/transaction/T, is_source = FALSE)
+	money = max(is_source ? money - T.amount : money + T.amount, 0)
 	transaction_log += T
 
 /datum/money_account/proc/get_balance()
@@ -77,7 +78,7 @@
 
 		//stamp the paper
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.icon_state = "paper_stamp-cent"
+		stampoverlay.icon_state = "paper_stamp-boss"
 		if(!R.stamped)
 			R.stamped = new
 		R.stamped += /obj/item/weapon/stamp

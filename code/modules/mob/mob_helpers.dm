@@ -1,10 +1,3 @@
-// fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
-/proc/isxenomorph(A)
-	if(istype(A, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = A
-		return istype(H.species, /datum/species/xenos)
-	return 0
-
 /proc/issmall(A)
 	if(A && istype(A, /mob/living))
 		var/mob/living/L = A
@@ -338,6 +331,9 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			else
 				M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
 			sleep(1)
+			if(!M.client)
+				return
+
 		M.client.eye=oldeye
 		M.shakecamera = 0
 
@@ -423,8 +419,7 @@ proc/is_blind(A)
 /proc/broadcast_hud_message(var/message, var/broadcast_source, var/list/targets, var/icon)
 	var/turf/sourceturf = get_turf(broadcast_source)
 	for(var/mob/M in targets)
-		var/turf/targetturf = get_turf(M)
-		if(!sourceturf || (targetturf.z in GetConnectedZlevels(sourceturf.z)))
+		if(!sourceturf || (get_z(M) in GetConnectedZlevels(sourceturf.z)))
 			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
 
 /proc/mobs_in_area(var/area/A)
@@ -606,7 +601,8 @@ proc/is_blind(A)
 		client.images -= image
 
 /mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	return
+	for(var/mob/M in contents)
+		M.flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)
 
 /mob/proc/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
 	if(!new_name || new_name == real_name)	return 0
@@ -625,11 +621,11 @@ proc/is_blind(A)
 	return //Only for living/carbon/human/
 
 /mob/living/carbon/human/jittery_damage()
-	var/mob/living/carbon/human/H = src
-	var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
-	if(L && istype(L))
-		if(BP_IS_ROBOTIC(L))
-			return 0//Robotic hearts don't get jittery.
+	var/obj/item/organ/internal/heart/L = internal_organs_by_name[BP_HEART]
+	if(!istype(L))
+		return 0
+	if(BP_IS_ROBOTIC(L))
+		return 0//Robotic hearts don't get jittery.
 	if(src.jitteriness >= 400 && prob(5)) //Kills people if they have high jitters.
 		if(prob(1))
 			L.take_internal_damage(L.max_damage / 2, 0)
@@ -662,6 +658,7 @@ proc/is_blind(A)
 	var/attempt = null
 	var/success = 0
 	var/turf/end
+	var/candidates = L.Copy()
 	while(L.len)
 		attempt = pick(L)
 		success = Move(attempt)
@@ -672,7 +669,7 @@ proc/is_blind(A)
 			break
 
 	if(!success)
-		end = pick(L)
+		end = pick(candidates)
 		forceMove(end)
 
 	return end
@@ -709,3 +706,16 @@ proc/is_blind(A)
 
 /mob/proc/unset_sdisability(sdisability)
 	sdisabilities &= ~sdisability
+
+/mob/proc/get_accumulated_vision_handlers()
+	var/result[2]
+	var/asight = 0
+	var/ainvis = 0
+	for(var/atom/vision_handler in additional_vision_handlers)
+		//Grab their flags
+		asight |= vision_handler.additional_sight_flags()
+		ainvis = max(ainvis, vision_handler.additional_see_invisible())
+	result[1] = asight
+	result[2] = ainvis
+
+	return result

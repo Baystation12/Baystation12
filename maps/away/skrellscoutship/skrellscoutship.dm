@@ -1,3 +1,5 @@
+#define WEBHOOK_SUBMAP_LOADED_SKRELL "webhook_submap_skrell"
+
 #include "skrellscoutship_areas.dm"
 #include "skrellscoutship_shuttles.dm"
 
@@ -8,7 +10,13 @@
 	suffixes = list("skrellscoutship/skrellscoutship-1.dmm", "skrellscoutship/skrellscoutship-2.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/skrellscoutship, /datum/shuttle/autodock/overmap/skrellscoutshuttle)
-	
+	apc_test_exempt_areas = list(
+		/area/ship/skrellscoutshuttle =                NO_SCRUBBER,
+		/area/ship/skrellscoutship/crew/toilets =      NO_SCRUBBER|NO_VENT,
+		/area/ship/skrellscoutship/maintenance/power = NO_SCRUBBER,
+		/area/ship/skrellscoutship/solars =            NO_SCRUBBER|NO_VENT|NO_APC
+	)
+
 /obj/effect/overmap/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
@@ -26,6 +34,9 @@
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship/leader
 	name = "Qrri-Vuxix"
 
+/decl/webhook/submap_loaded/skrell
+	id = WEBHOOK_SUBMAP_LOADED_SKRELL
+
 /decl/submap_archetype/skrellscoutship
 	descriptor = "Skrellian Scout Ship"
 	map = "Xilvuxix"
@@ -33,7 +44,8 @@
 		/datum/job/submap/skrellscoutship_crew,
 		/datum/job/submap/skrellscoutship_crew/leader
 	)
-	
+	call_webhook = WEBHOOK_SUBMAP_LOADED_SKRELL
+
 //Access + Loadout	
 
 /var/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
@@ -166,3 +178,29 @@
 /datum/mil_rank/skrell_fleet
 	name = "NULL"
 	
+/obj/machinery/power/apc/skrell
+	req_access = list(access_skrellscoutship)
+
+/obj/machinery/alarm/skrell
+	req_access = list(access_skrellscoutship)
+	target_temperature = T0C+65
+
+/obj/machinery/alarm/skrell/Initialize()
+	. = ..()
+	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.40) /* kpa */
+	TLV["temperature"] =	list(T0C-26, T0C, T0C+80, T0C+90) // K
+
+/obj/machinery/power/smes/buildable/preset/skrell
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
+		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2)
+	_input_maxed = TRUE
+	_output_maxed = TRUE
+	_input_on = TRUE
+	_output_on = TRUE
+	_fully_charged = TRUE
+
+/obj/machinery/vending/medical/skrell
+	req_access = list(access_skrellscoutship)
+
+#undef WEBHOOK_SUBMAP_LOADED_SKRELL

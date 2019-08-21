@@ -118,12 +118,11 @@
 		N.escape_net(src) //super snowflake but is literally used NOWHERE ELSE.-Luke
 		return
 
-	setClickCooldown(100)
 	if(!buckled) return
-
 	if(!restrained())
 		..()
 	else
+		setClickCooldown(100)
 		var/unbuckle_time = 2 MINUTES
 		if(psi && psi.can_use())
 			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))

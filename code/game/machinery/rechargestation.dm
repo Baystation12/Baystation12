@@ -7,18 +7,16 @@
 	anchored = 1
 	idle_power_usage = 50
 	base_type = /obj/machinery/recharge_station
-	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/battery,
-		/obj/item/weapon/stock_parts/power/apc
-	)
+	uncreated_component_parts = null
+	stat_immune = 0
 	construct_state = /decl/machine_construction/default/panel_closed
+
+	var/overlay_icon = 'icons/obj/objects.dmi'
 	var/mob/living/occupant = null
 	var/charging = 0
 	var/last_overlay_state
 
 	var/charging_power			// W. Power rating used for charging the cyborg. 120 kW if un-upgraded
-	var/restore_power_active	// W. Power drawn from APC when an occupant is charging. 40 kW if un-upgraded
-	var/restore_power_passive	// W. Power drawn from APC when idle. 7 kW if un-upgraded
 	var/weld_rate = 0			// How much brute damage is repaired per tick
 	var/wire_rate = 0			// How much burn damage is repaired per tick
 
@@ -72,6 +70,10 @@
 		var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
 		if(potato)
 			target = potato.cell
+		if((!target || target.percent() > 95) && istype(H.back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/R = H.back
+			if(R.cell && !R.cell.fully_charged())
+				target = R.cell
 
 	if(target && !target.fully_charged())
 		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
@@ -119,8 +121,6 @@
 	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 
 	charging_power = 40000 + 40000 * cap_rating
-	restore_power_active = 10000 + 15000 * cap_rating
-	restore_power_passive = 5000 + 1000 * cap_rating
 	weld_rate = max(0, man_rating - 3)
 	wire_rate = max(0, man_rating - 5)
 
@@ -130,11 +130,6 @@
 		desc += "<br>It is capable of repairing structural damage."
 	if(wire_rate)
 		desc += "<br>It is capable of repairing burn damage."
-
-	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
-	if(bat)
-		bat.charge_rate = restore_power_passive * CELLRATE
-		bat.charge_channel = power_channel
 
 /obj/machinery/recharge_station/proc/overlay_state()
 	var/obj/item/weapon/cell/cell = get_cell()
@@ -167,7 +162,7 @@
 		icon_state = "borgcharger0"
 
 	last_overlay_state = overlay_state()
-	overlays = list(image('icons/obj/objects.dmi', overlay_state()))
+	overlays = list(image(overlay_icon, overlay_state()))
 
 /obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
 	go_in(R)
@@ -185,9 +180,6 @@
 	M.reset_view(src)
 	M.forceMove(src)
 	occupant = M
-	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
-	if(bat)
-		bat.charge_rate = restore_power_active * CELLRATE
 	update_icon()
 	return 1
 
@@ -199,6 +191,9 @@
 		var/mob/living/carbon/human/H = M		
 		if(H.isSynthetic()) // FBPs and IPCs
 			return 1
+		if(istype(H.back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/R = H.back
+			return R.cell
 		return H.internal_organs_by_name["cell"]
 	return 0
 
@@ -209,9 +204,6 @@
 	occupant.forceMove(loc)
 	occupant.reset_view()
 	occupant = null
-	var/obj/item/weapon/stock_parts/power/battery/bat = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
-	if(bat)
-		bat.charge_rate = restore_power_passive * CELLRATE
 	update_icon()
 
 /obj/machinery/recharge_station/verb/move_eject()

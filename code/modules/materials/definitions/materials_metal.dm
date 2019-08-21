@@ -24,7 +24,7 @@
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/gold
-	icon_colour = "#ffcc33"
+	icon_colour = COLOR_GOLD
 	weight = 25
 	hardness = 25
 	integrity = 100

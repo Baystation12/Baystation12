@@ -79,3 +79,6 @@
 	info = "Day 18. I think. Life support is failing, I am running out of power. I think at this point I just am writing this to avoid thinking about what's to come.<br>I failed. I rallied some of the sane crewmen, and we made a break for the cargo hold, but we were too badly outnumbered. I holed up in the dropship, but the bastards just locked the hatch and overrode controls to send me planetside. And they didn't go for a soft descent. Wrecked dropship hard, barely left the inner hull intact. Some debris pierced my side."
 /obj/item/weapon/paper/marooned/note09
 	info = "Day ???. I'm not getting better. I can barely move now, and even if I try to eat something, I just puke it out. Guess this is it. I am not going to lie here and puke to death, I'm an officer dammit. I'd write something profound, if I could. Damn that obelisk. Glory to Magnitka."
+
+/obj/machinery/computer/dummy
+	construct_state = null

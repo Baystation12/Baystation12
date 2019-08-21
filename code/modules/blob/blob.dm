@@ -110,10 +110,6 @@
 	if(V)
 		V.ex_act(2)
 		return
-	var/obj/mecha/M = locate() in T
-	if(M)
-		attack_mech(M)
-		return
 	var/obj/machinery/camera/CA = locate() in T
 	if(CA)
 		CA.take_damage(30)
@@ -151,12 +147,6 @@
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
 
-/obj/effect/blob/proc/attack_mech(var/obj/mecha/mech)
-	if(!mech)
-		return
-	mech.visible_message(SPAN_DANGER("A tendril flies out from \the [src] and slams into \the [mech]!"))
-	mech.take_damage(rand(damage_min, damage_max))
-
 /obj/effect/blob/proc/attempt_attack(var/list/dirs)
 	var/attackDir = pick(dirs)
 	var/turf/T = get_step(src, attackDir)
@@ -164,8 +154,6 @@
 		if(victim.stat == DEAD)
 			continue
 		attack_living(victim)
-	for(var/obj/mecha/mech in T)
-		attack_mech(mech)
 
 /obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)
@@ -186,7 +174,7 @@
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
 			return
-		else	
+		else
 			if(!pruned)
 				to_chat(user, SPAN_NOTICE("You collect a sample from \the [src]."))
 				new product(user.loc)
@@ -213,8 +201,7 @@
 	desc = "A huge glowing nucleus surrounded by thick tendrils."
 	icon_state = "blob_core"
 	maxHealth = 200
-	brute_resist = 1
-	fire_resist = 4
+	fire_resist = 2
 	regen_rate = 2
 	damage_min = 30
 	damage_max = 40
@@ -277,6 +264,7 @@
 	damage_min = 16
 	damage_max = 28
 	attack_freq = 5
+	regen_rate = 4
 	expandType = /obj/effect/blob/ravaging
 	light_color = BLOB_COLOR_SHIELD
 

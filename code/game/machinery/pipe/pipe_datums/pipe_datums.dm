@@ -13,20 +13,19 @@
 	name = "a pipe fitting"
 	desc = "a straight pipe segment."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SIMPLE_STRAIGHT
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/simple/bent
 	name = "bent pipe fitting"
 	desc = "a bent pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SIMPLE_BENT
 	dir = PIPE_BENT
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/simple/manifold
 	name = "pipe manifold fitting"
 	desc = "a pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_MANIFOLD
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden
 	pipe_class = PIPE_CLASS_TRINARY
@@ -35,16 +34,15 @@
 	name = "four-way pipe manifold fitting"
 	desc = "a four-way pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_MANIFOLD4W
 	build_icon_state = "manifold4w"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold4w/hidden
 	pipe_class = PIPE_CLASS_QUATERNARY
+	rotate_class = PIPE_ROTATE_ONEDIR
 
 /datum/pipe/pipe_dispenser/simple/cap
 	name = "pipe cap fitting"
 	desc = "a pipe cap for a regular pipe."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_CAP
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden
 	pipe_class = PIPE_CLASS_UNARY
@@ -53,7 +51,6 @@
 	name = "downward pipe fitting"
 	desc = "a downward pipe."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_DOWN
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down
@@ -62,7 +59,6 @@
 	name = "upward pipe fitting"
 	desc = "an upward pipe."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_UP
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up
@@ -79,20 +75,19 @@
 	name = "supply pipe fitting"
 	desc = "a straight supply pipe segment."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SUPPLY_STRAIGHT
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/supply/bent
 	name = "bent supply pipe fitting"
 	desc = "a bent supply pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SUPPLY_BENT
 	dir = PIPE_BENT
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/supply/manifold
 	name = "supply pipe manifold fitting"
 	desc = "a supply pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SUPPLY_MANIFOLD
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden/supply
 	pipe_class = PIPE_CLASS_TRINARY
@@ -101,16 +96,15 @@
 	name = "four-way supply pipe manifold fitting"
 	desc = "a four-way supply pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SUPPLY_MANIFOLD4W
 	build_icon_state = "manifold4w"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply
 	pipe_class = PIPE_CLASS_QUATERNARY
+	rotate_class = PIPE_ROTATE_ONEDIR
 
 /datum/pipe/pipe_dispenser/supply/cap
 	name = "supply pipe cap fitting"
 	desc = "a pipe cap for a regular pipe."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SUPPLY_CAP
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/supply
 	pipe_class = PIPE_CLASS_UNARY
@@ -119,7 +113,6 @@
 	name = "upward supply pipe fitting"
 	desc = "an upward supply pipe segment."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SUPPLY_UP
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/supply
@@ -128,7 +121,6 @@
 	name = "downward supply pipe fitting"
 	desc = "a downward supply pipe segment."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SUPPLY_DOWN
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/supply
@@ -145,20 +137,19 @@
 	name = "scrubber pipe fitting"
 	desc = "a straight scrubber pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBERS_STRAIGHT
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/scrubber/bent
 	name = "bent scrubber pipe fitting"
 	desc = "a bent scrubber pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBERS_BENT
+	rotate_class = PIPE_ROTATE_TWODIR
 	dir = PIPE_BENT
 
 /datum/pipe/pipe_dispenser/scrubber/manifold
 	name = "scrubber pipe manifold fitting"
 	desc = "a scrubber pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBERS_MANIFOLD
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers
 	pipe_class = PIPE_CLASS_TRINARY
@@ -167,16 +158,15 @@
 	name = "four-way scrubber pipe manifold fitting"
 	desc = "a four-way scrubber pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBERS_MANIFOLD4W
 	build_icon_state = "manifold4w"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers
 	pipe_class = PIPE_CLASS_QUATERNARY
+	rotate_class = PIPE_ROTATE_ONEDIR
 
 /datum/pipe/pipe_dispenser/scrubber/up
 	name = "upward scrubber pipe fitting"
 	desc = "an upward scrubber pipe segment."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBERS_UP
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/supply
@@ -185,7 +175,6 @@
 	name = "downward scrubber pipe fitting"
 	desc = "a downward scrubber pipe segment."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBERS_DOWN
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/supply
@@ -194,7 +183,6 @@
 	name = "scrubber pipe cap fitting"
 	desc = "a pipe cap for a scrubber pipe."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBERS_CAP
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
 	pipe_class = PIPE_CLASS_UNARY
@@ -211,20 +199,19 @@
 	name = "fuel pipe fitting"
 	desc = "a striaght fuel pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_FUEL_STRAIGHT
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/fuel/bent
 	name = "bent fuel pipe fitting"
 	desc = "a bent fuel pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_FUEL_BENT
+	rotate_class = PIPE_ROTATE_TWODIR
 	dir = PIPE_BENT
 
 /datum/pipe/pipe_dispenser/fuel/manifold
 	name = "fuel pipe manifold fitting"
 	desc = "a fuel pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_FUEL_MANIFOLD
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden/fuel
 	pipe_class = PIPE_CLASS_TRINARY
@@ -233,16 +220,15 @@
 	name = "four-way supply pipe manifold fitting"
 	desc = "a four-way fuel pipe manifold segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_FUEL_MANIFOLD4W
 	build_icon_state = "manifold4w"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel
 	pipe_class = PIPE_CLASS_QUATERNARY
+	rotate_class = PIPE_ROTATE_ONEDIR
 
 /datum/pipe/pipe_dispenser/fuel/cap
 	name = "fuel pipe cap fitting"
 	desc = "a pipe cap for a fuel pipe."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_FUEL_CAP
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/fuel
 	pipe_class = PIPE_CLASS_UNARY
@@ -258,15 +244,15 @@
 	name = "heat exchanger pipe fitting"
 	desc = "a heat exchanger pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_HE_STRAIGHT
 	build_icon_state = "he"
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/he/bent
 	name = "bent heat exchanger pipe fitting"
 	desc = "a bent heat exchanger pipe segment"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_HE_BENT
 	connect_types = CONNECT_TYPE_HE
+	rotate_class = PIPE_ROTATE_TWODIR
 	build_icon_state = "he"
 	dir = PIPE_BENT
 
@@ -274,7 +260,6 @@
 	name = "heat exchanger junction"
 	desc = "a heat exchanger junction"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_JUNCTION
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
 	build_icon_state = "junction"
 	constructed_path = /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
@@ -283,7 +268,6 @@
 	name = "heat exchanger"
 	desc = "a heat exchanger"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_HEAT_EXCHANGE
 	connect_types = CONNECT_TYPE_REGULAR
 	build_icon_state = "heunary"
 	constructed_path = /obj/machinery/atmospherics/unary/heat_exchanger

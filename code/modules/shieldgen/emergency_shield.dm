@@ -247,13 +247,15 @@
 				malfunction = 1
 	checkhp()
 
-/obj/machinery/shieldgen/attack_hand(mob/user as mob)
+/obj/machinery/shieldgen/interface_interact(mob/user as mob)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(locked)
 		to_chat(user, "The machine is locked, you are unable to use it.")
-		return
+		return TRUE
 	if(is_open)
 		to_chat(user, "The panel must be closed before operating this machine.")
-		return
+		return TRUE
 
 	if (src.active)
 		user.visible_message("<span class='notice'>\icon[src] [user] deactivated the shield generator.</span>", \
@@ -268,7 +270,7 @@
 			src.shields_up()
 		else
 			to_chat(user, "The device must first be secured to the floor.")
-	return
+	return TRUE
 
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
 	if(!malfunction)

@@ -114,7 +114,7 @@
 	var/has_electronics = 0 // 0 - none, 1 - plugged in, 2 - secured by screwdriver
 	var/beenhit = 0 // used for counting how many times it has been hit, used for Aliens at the moment
 	var/longtermpower = 10  // Counter to smooth out power state changes; do not modify.
-	var/datum/wires/apc/wires = null
+	wires = /datum/wires/apc
 	var/update_state = -1
 	var/update_overlay = -1
 	var/list/update_overlay_chan		// Used to determine if there is a change in channels
@@ -156,9 +156,6 @@
 	return amount - use_power_oneoff(amount, LOCAL)
 
 /obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE, var/building=0)
-
-	wires = new(src)
-
 	// offset 22 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
 	if (building)
@@ -184,10 +181,10 @@
 		opened = 1
 		operating = 0
 		stat |= MAINT
-		update_icon()
+		queue_icon_update()
 
 	if(operating)
-		src.update()
+		force_update_channels()
 	power_change()
 
 /obj/machinery/power/apc/Destroy()
@@ -197,13 +194,16 @@
 	area.power_equip = 0
 	area.power_environ = 0
 	area.power_change()
-	qdel(wires)
-	wires = null
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
 		hacker.hacked_apcs -= src
 
+	return ..()
+
+/obj/machinery/power/apc/get_req_access()
+	if(!locked)
+		return list()
 	return ..()
 
 /obj/machinery/power/apc/proc/energy_fail(var/duration)
@@ -220,7 +220,7 @@
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
 	term.make_terminal(src)
 
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/power/apc/proc/terminal()
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
@@ -511,7 +511,7 @@
 		else if(hacker && !hacker.hacked_apcs_hidden)
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		else
-			if(allowed(user) && !isWireCut(APC_WIRE_IDSCAN))
+			if(has_access(req_access, user.GetAccess()) && !isWireCut(APC_WIRE_IDSCAN))
 				locked = !locked
 				to_chat(user, "You [ locked ? "lock" : "unlock"] the APC interface.")
 				update_icon()
@@ -597,21 +597,21 @@
 				to_chat(user, "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>")
 				return TRUE
 
-				user.visible_message("<span class='warning'>[user.name] replaces the damaged APC frame with a new one.</span>",\
-									"You begin to replace the damaged APC frame...")
-				if(do_after(user, 50, src) && opened && !has_electronics && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
-					user.visible_message(\
-						"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
-						"You replace the damaged APC frame with new one.")
-					qdel(W)
-					set_broken(FALSE)
-					// Malf AI, removes the APC from AI's hacked APCs list.
-					if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
-						hacker.hacked_apcs -= src
-						hacker = null
-					if (opened==2)
-						opened = 1
-					queue_icon_update()
+			user.visible_message("<span class='warning'>[user.name] replaces the damaged APC frame with a new one.</span>",\
+								"You begin to replace the damaged APC frame...")
+			if(do_after(user, 50, src) && opened && !has_electronics && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
+				user.visible_message(\
+					"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
+					"You replace the damaged APC frame with new one.")
+				qdel(W)
+				set_broken(FALSE)
+				// Malf AI, removes the APC from AI's hacked APCs list.
+				if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
+					hacker.hacked_apcs -= src
+					hacker = null
+				if (opened==2)
+					opened = 1
+				queue_icon_update()
 
 	if((. = ..())) // Further interactions are low priority attack stuff.
 		return
@@ -630,7 +630,7 @@
 		if (istype(user, /mob/living/silicon))
 			return attack_robot(user)
 		if (!opened && wiresexposed && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/device/assembly/signaler)))
-			return interact(user)
+			return wires.Interact(user)
 
 		user.visible_message("<span class='danger'>The [src.name] has been hit with the [W.name] by [user.name]!</span>", \
 			"<span class='danger'>You hit the [src.name] with your [W.name]!</span>", \
@@ -665,6 +665,7 @@
 			if (do_after(user,6,src))
 				if(prob(50))
 					emagged = 1
+					req_access.Cut()
 					locked = 0
 					to_chat(user, "<span class='notice'>You emag the APC interface.</span>")
 					update_icon()
@@ -672,10 +673,7 @@
 					to_chat(user, "<span class='warning'>You fail to [ locked ? "unlock" : "lock"] the APC interface.</span>")
 				return 1
 
-/obj/machinery/power/apc/attack_hand(mob/user)
-	if((. = ..()))
-		return
-
+/obj/machinery/power/apc/physical_attack_hand(mob/user)
 	//Human mob special interaction goes here.
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
@@ -697,21 +695,11 @@
 				src.visible_message("<span class='warning'>\The [src]'s wires are shredded!</span>")
 			else
 				beenhit += 1
-			return
-	if(stat & (BROKEN|MAINT))
-		return
-	// do APC interaction
-	src.interact(user)
+			return TRUE
 
-/obj/machinery/power/apc/interact(mob/user)
-	if(!user)
-		return
-
-	if(wiresexposed && !istype(user, /mob/living/silicon/ai))
-		wires.Interact(user)
-
-	return ui_interact(user)
-
+/obj/machinery/power/apc/interface_interact(mob/user)
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/apc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!user)
@@ -816,23 +804,11 @@
 	return wires.IsIndexCut(wireIndex)
 
 
-/obj/machinery/power/apc/proc/can_use(mob/user as mob, var/loud = 0) //used by attack_hand() and Topic()
-	if (user.stat)
-		to_chat(user, "<span class='warning'>You must be conscious to use [src]!</span>")
-		return 0
-	if(!user.client)
-		return 0
-	if(stat & (BROKEN|MAINT))
-		return 0
-	if(!user.IsAdvancedToolUser())
-		return 0
-	if(user.restrained())
-		to_chat(user, "<span class='warning'>You must have free hands to use [src].</span>")
-		return 0
+/obj/machinery/power/apc/CanUseTopic(mob/user, datum/topic_state/state)
 	if(user.lying)
 		to_chat(user, "<span class='warning'>You must stand to use [src]!</span>")
-		return 0
-	if (istype(user, /mob/living/silicon))
+		return STATUS_CLOSE
+	if(istype(user, /mob/living/silicon))
 		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user
 		var/mob/living/silicon/robot/robot = user
@@ -843,23 +819,14 @@
 				permit = 1
 
 		if(aidisabled && !permit)
-			if(!loud)
-				to_chat(user, "<span class='danger'>\The [src] have AI control disabled!</span>")
-			return 0
-	else
-		if (!in_range(src, user) || !istype(src.loc, /turf))
-			return 0
-	var/mob/living/carbon/human/H = user
-	if (istype(H) && prob(H.getBrainLoss()))
-		to_chat(user, "<span class='danger'>You momentarily forget how to use [src].</span>")
-		return 0
-	return 1
+			return STATUS_CLOSE
+	. = ..()
+	if(user.restrained())
+		to_chat(user, "<span class='warning'>You must have free hands to use [src].</span>")
+		. = min(., STATUS_UPDATE)
 
 /obj/machinery/power/apc/Topic(href, href_list)
 	if(..())
-		return 1
-
-	if(!can_use(usr, 1))
 		return 1
 
 	if(!istype(usr, /mob/living/silicon) && (locked && !emagged))
@@ -887,20 +854,17 @@
 	else if (href_list["eqp"])
 		var/val = text2num(href_list["eqp"])
 		equipment = setsubsystem(val)
-		update_icon()
-		update()
+		force_update_channels()
 
 	else if (href_list["lgt"])
 		var/val = text2num(href_list["lgt"])
 		lighting = setsubsystem(val)
-		update_icon()
-		update()
+		force_update_channels()
 
 	else if (href_list["env"])
 		var/val = text2num(href_list["env"])
 		environ = setsubsystem(val)
-		update_icon()
-		update()
+		force_update_channels()
 
 	else if (href_list["overload"])
 		if(istype(usr, /mob/living/silicon))
@@ -916,10 +880,15 @@
 
 	return 0
 
+/obj/machinery/power/apc/proc/force_update_channels()
+	autoflag = -1 // This clears state, forcing a full recalculation
+	update_channels(TRUE)
+	update()
+	queue_icon_update()
+
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
-	src.update()
-	update_icon()
+	force_update_channels()
 
 /obj/machinery/power/apc/get_power_usage()
 	if(autoflag)
@@ -1000,7 +969,7 @@
 	else if (last_ch != charging)
 		queue_icon_update()
 
-/obj/machinery/power/apc/proc/update_channels()
+/obj/machinery/power/apc/proc/update_channels(suppress_alarms = FALSE)
 	// Allow the APC to operate as normal if the cell can charge
 	if(charging && longtermpower < 10)
 		longtermpower += 1
@@ -1009,12 +978,13 @@
 	var/obj/item/weapon/cell/cell = get_cell()
 	var/percent = cell && cell.percent()
 
-	if(!cell || shorted || (stat & NOPOWER))
+	if(!cell || shorted || (stat & NOPOWER) || !operating)
 		if(autoflag != 0)
 			equipment = autoset(equipment, 0)
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
-			power_alarm.triggerAlarm(loc, src)
+			if(!suppress_alarms)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
 	else if((percent > AUTO_THRESHOLD_LIGHTING) || longtermpower >= 0)              // Put most likely at the top so we don't check it last, effeciency 101
 		if(autoflag != 3)
@@ -1028,14 +998,16 @@
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
-			power_alarm.triggerAlarm(loc, src)
+			if(!suppress_alarms)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(percent <= AUTO_THRESHOLD_EQUIPMENT)        // <25%, turn off lighting & equipment
 		if(autoflag != 1)
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
-			power_alarm.triggerAlarm(loc, src)
+			if(!suppress_alarms)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 1
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
@@ -1130,8 +1102,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	equipment = POWERCHAN_ON_AUTO
 	environ = POWERCHAN_ON_AUTO
 
-	update_icon()
-	update()
+	force_update_channels()
 
 /obj/machinery/power/apc/proc/set_chargemode(new_mode)
 	chargemode = new_mode
@@ -1154,19 +1125,13 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 				sleep(1)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)
-	var/obj/item/weapon/cell/cell = get_cell()
-	if(cell && cell.charge > 0)
-		switch(val)
-			if(2) return POWERCHAN_ON_AUTO
-			if(1) return POWERCHAN_ON
-			else return POWERCHAN_OFF
-	else
-		switch(val)
-			if(2) return POWERCHAN_OFF_AUTO
-			if(1) return POWERCHAN_OFF_TEMP
-			else return POWERCHAN_OFF
-
-
+	switch(val)
+		if(2)
+			return POWERCHAN_OFF_AUTO
+		if(1) 
+			return POWERCHAN_OFF_TEMP
+		else 
+			return POWERCHAN_OFF
 
 // Malfunction: Transfers APC under AI's control
 /obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)

@@ -1,25 +1,24 @@
 /datum/pipe/pipe_dispenser/device
 	category = "Devices"
-	colorable = TRUE
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL|CONNECT_TYPE_SCRUBBER
-	pipe_color = PIPE_COLOR_GREY
+	colorable = FALSE
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	pipe_color = PIPE_COLOR_WHITE
 
 /datum/pipe/pipe_dispenser/device/universaladapter
 	name = "universal pipe adapter"
 	desc = "an adapter designed to fit any type of pipe."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_UNIVERSAL
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_HE
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	build_icon_state = "universal"
 	constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden/universal
 	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/device/connector
 	name = "connector"
 	desc = "a connector for canisters."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_CONNECTOR
-	connect_types = CONNECT_TYPE_REGULAR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "connector"
 	constructed_path = /obj/machinery/atmospherics/portables_connector
 	pipe_class = PIPE_CLASS_UNARY
@@ -28,7 +27,6 @@
 	name = "unary vent"
 	desc = "a unary vent"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_UVENT
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL
 	build_icon_state = "uvent"
 	constructed_path = /obj/machinery/atmospherics/unary/vent_pump
@@ -43,8 +41,7 @@
 	name = "gas pump"
 	desc = "a pump. For gasses."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_PUMP
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "pump"
 	constructed_path = /obj/machinery/atmospherics/binary/pump
 	pipe_class = PIPE_CLASS_BINARY
@@ -53,8 +50,7 @@
 	name = "pressure regulator"
 	desc = "a device that regulates pressure."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_PASSIVE_GATE
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "passivegate"
 	constructed_path = /obj/machinery/atmospherics/binary/passive_gate
 	pipe_class = PIPE_CLASS_BINARY
@@ -63,8 +59,7 @@
 	name = "high powered gas pump"
 	desc = "a high powered pump. For gasses."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_VOLUME_PUMP
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "volumepump"
 	constructed_path = /obj/machinery/atmospherics/binary/pump/high_power
 	pipe_class = PIPE_CLASS_BINARY
@@ -73,7 +68,6 @@
 	name = "scrubber"
 	desc = "scrubs out undesirable gasses"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SCRUBBER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
 	build_icon_state = "scrubber"
 	constructed_path = /obj/machinery/atmospherics/unary/vent_scrubber
@@ -83,7 +77,6 @@
 	name = "meter"
 	desc = "a meter that monitors pressure and temperature on the attached pipe."
 	build_path = /obj/item/pipe_meter
-	pipe_type = null
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE
@@ -95,7 +88,6 @@
 	name = "omni gas mixer"
 	desc = "a device that takes in two or three gasses and mixes them into a precise output."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_OMNI_MIXER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "omni_mixer"
 	constructed_path = /obj/machinery/atmospherics/omni/mixer
@@ -105,7 +97,6 @@
 	name = "omni gas filter"
 	desc = "a device that filters out undesireable elements"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_OMNI_FILTER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "omni_filter"
 	constructed_path = /obj/machinery/atmospherics/omni/filter
@@ -115,34 +106,33 @@
 	name = "manual valve"
 	desc = "a valve that has to be manipulated by hand"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_MVALVE
 	build_icon_state = "mvalve"
 	constructed_path = /obj/machinery/atmospherics/valve
 	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/device/digitalvalve
 	name = "digital valve"
 	desc = "a valve controlled electronically"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_DVALVE
 	build_icon_state = "dvalve"
 	constructed_path = /obj/machinery/atmospherics/valve/digital
 	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/device/autoshutoff
 	name = "automatic shutoff valve"
 	desc = "a valve that can automatically shut itself off"
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_SVALVE
 	build_icon_state = "svalve"
 	constructed_path = /obj/machinery/atmospherics/valve/shutoff
 	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/device/mtvalve
 	name = "manual t-valve"
 	desc = "a three-way valve. T-shaped."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_MTVALVE
 	build_icon_state = "mtvalve"
 	constructed_path = /obj/machinery/atmospherics/tvalve
 	pipe_class = PIPE_CLASS_TRINARY
@@ -151,7 +141,6 @@
 	name = "manual t-valve (mirrored)"
 	desc = "a three-way valve. T-shaped."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_MTVALVEM
 	build_icon_state = "mtvalvem"
 	constructed_path = /obj/machinery/atmospherics/tvalve/mirrored
 	pipe_class = PIPE_CLASS_TRINARY
@@ -160,7 +149,6 @@
 	name = "digital t-valve"
 	desc = "a three-way valve. T-shaped. This one can be controlled electronically."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_DTVALVE
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 	constructed_path = /obj/machinery/atmospherics/tvalve/digital
@@ -170,7 +158,6 @@
 	name = "digital t-valve (mirrored)"
 	desc = "a three-way valve. T-shaped. This one can be controlled electronically."
 	build_path = /obj/item/pipe
-	pipe_type = PIPE_DTVALVEM
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalvem0"
 	constructed_path = /obj/machinery/atmospherics/tvalve/mirrored/digital
@@ -180,7 +167,6 @@
 	name = "gas sensor"
 	desc = "a sensor. It detects gasses."
 	build_path = /obj/item/air_sensor
-	pipe_type = null
 	build_icon_state = "gsensor1"
 	build_icon = 'icons/obj/stationobjs.dmi'
 	pipe_color = null
@@ -197,7 +183,6 @@
 	build_path = /obj/item/pipe
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	colorable = FALSE
-	pipe_type = PIPE_INJECTOR
 	pipe_color = null
 	constructed_path = /obj/machinery/atmospherics/unary/outlet_injector
 	pipe_class = PIPE_CLASS_UNARY
@@ -210,9 +195,8 @@
 	build_path = /obj/item/drain
 	connect_types = null
 	colorable = FALSE
-	pipe_type = null
 	pipe_color = null
-	constructed_path = /obj/structure/drain
+	constructed_path = /obj/structure/hygiene/drain
 	pipe_class = PIPE_CLASS_OTHER
 
 /datum/pipe/pipe_dispenser/device/tank
@@ -222,6 +206,6 @@
 	build_icon_state = "air"
 	build_path = /obj/item/pipe/tank
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
-	pipe_type = PIPE_TANK
 	constructed_path = /obj/machinery/atmospherics/unary/tank
 	pipe_class = PIPE_CLASS_UNARY
+	colorable = TRUE

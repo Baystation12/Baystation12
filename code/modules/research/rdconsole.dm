@@ -49,7 +49,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/rdconsole
+	base_type = /obj/machinery/computer/rdconsole/core
 	var/datum/research/files							//Stores all the collected research data.
 	var/obj/item/weapon/disk/tech_disk/t_disk = null	//Stores the technology disk.
 	var/obj/item/weapon/disk/design_disk/d_disk = null	//Stores the design disk.
@@ -146,18 +146,19 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/rdconsole/emp_act(var/remaining_charges, var/mob/user)
+/obj/machinery/computer/rdconsole/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
+		req_access.Cut()
 		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
 		return 1
 
 /obj/machinery/computer/rdconsole/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if(href_list["menu"])
+	if(href_list && href_list["menu"])
 		var/temp_screen = text2num(href_list["menu"])
-		if(!(temp_screen <= 1.1 || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(usr) || emagged))
-			to_chat(usr, "Unauthorized Access.")
+		if(!((temp_screen <= 1.1) || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(user)))
+			to_chat(user, "Unauthorized Access.")
 			return STATUS_CLOSE
 	return ..()
 
@@ -303,7 +304,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						if(!istype(S, /obj/machinery/r_n_d/server/centcom) && server_processed)
 							S.produce_heat()
 					screen = 1.6
-					attack_hand(user)
+					interact(user)
 
 	else if(href_list["togglesync"]) //Prevents the console from being synced by other consoles. Can still send data.
 		sync = !sync
@@ -385,7 +386,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		spawn(10)
 			SyncRDevices()
 			screen = 1.7
-			attack_hand(user)
+			interact(user)
 
 	else if(href_list["disconnect"]) //The R&D console disconnects with a specific device.
 		. = TOPIC_REFRESH
@@ -412,7 +413,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			files = new /datum/research(src)
 			spawn(20)
 				screen = 1.6
-				attack_hand(user)
+				interact(user)
 
 	else if (href_list["print"]) //Print research information
 		screen = 0.5
@@ -432,10 +433,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			PR.dropInto(loc)
 			spawn(10)
 				screen = ((text2num(href_list["print"]) == 2) ? 5.0 : 1.1)
-				attack_hand(user)
-
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+				interact(user)
 
 /obj/machinery/computer/rdconsole/proc/finish_deconstruct(weakref/W)
 	CHECK_DESTROY
@@ -459,7 +457,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			qdel(M)
 		if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
 			var/obj/item/stack/material/S = I
-			if(S.use(1))
+			if(S.use(1) && S.amount)
 				linked_destroy.loaded_item = S
 			else
 				qdel(S)
@@ -471,8 +469,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	use_power_oneoff(linked_destroy.active_power_usage)
 	screen = 1.0
-	if(user)
-		attack_hand(user)
+	if(CanInteract(user, DefaultTopicState()))
+		interact(user)
 
 /obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
 	var/dat
@@ -497,10 +495,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	dat += "</UL>"
 	return dat
 
-/obj/machinery/computer/rdconsole/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/rdconsole/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
+/obj/machinery/computer/rdconsole/interact(mob/user)
 	user.set_machine(src)
 	var/dat = list()
 	files.RefreshResearch()

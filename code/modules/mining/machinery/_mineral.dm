@@ -3,6 +3,8 @@
 	density =  TRUE
 	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/turf/input_turf
 	var/turf/output_turf
@@ -73,12 +75,9 @@
 		usr.set_machine(console)
 		console.add_fingerprint(usr)
 
-/obj/machinery/mineral/attack_ai(var/mob/user)
+/obj/machinery/mineral/interface_interact(var/mob/user)
 	interact(user)
-
-/obj/machinery/mineral/attack_hand(var/mob/user)
-	add_fingerprint(user)
-	interact(user)
+	return TRUE
 
 /obj/machinery/mineral/proc/can_configure(var/mob/user)
 	if(user.incapacitated())

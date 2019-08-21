@@ -259,7 +259,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -406,14 +406,14 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "ba" = (
 /obj/machinery/mass_driver{
 	dir = 4;
-	id = "enginecore"
+	id_tag = "enginecore"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -421,7 +421,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -542,7 +542,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /turf/simulated/floor/airless,
@@ -552,7 +552,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -778,7 +778,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "EngineBlast";
+	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
@@ -847,7 +847,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "EngineBlast";
+	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
@@ -1322,10 +1322,6 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "dd" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -2358,8 +2354,7 @@
 	tag_east_con = 0.21;
 	tag_north = 2;
 	tag_south = 1;
-	tag_south_con = 0.79;
-	
+	tag_south_con = 0.79
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -3820,7 +3815,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/soap/deluxe,
+/obj/item/weapon/soap,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jZ" = (

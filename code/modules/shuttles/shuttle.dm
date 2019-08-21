@@ -129,28 +129,30 @@
 /datum/shuttle/proc/fuel_check()
 	return 1 //fuel check should always pass in non-overmap shuttles (they have magic engines)
 
+/*****************
+* Shuttle Moved Handling * (Observer Pattern Implementation: Shuttle Moved)
+* Shuttle Pre Move Handling * (Observer Pattern Implementation: Shuttle Pre Move)
+*****************/
+
 /datum/shuttle/proc/attempt_move(var/obj/effect/shuttle_landmark/destination)
 	if(current_location == destination)
 		return FALSE
 
 	if(!destination.is_valid(src))
 		return FALSE
+	if(current_location.cannot_depart(src))
+		return FALSE
 	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
+	var/old_location = current_location
+	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
 	shuttle_moved(destination, translation)
+	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
+	destination.shuttle_arrived(src)
 	return TRUE
-
-/*****************
-* Shuttle Moved Handling * (Observer Pattern Implementation: Shuttle Moved)
-*****************/
-/datum/shuttle/attempt_move()
-	var/obj/effect/shuttle_landmark/old_location = current_location
-	. = ..()
-	if(.) // If not moved, returns FALSE.
-		GLOB.shuttle_moved_event.raise_event(src, old_location, current_location)
 
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. shuttle_moved() must absolutely not, under any circumstances, fail to move the shuttle.

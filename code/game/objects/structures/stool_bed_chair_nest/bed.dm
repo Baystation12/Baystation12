@@ -175,40 +175,10 @@
 	base_icon = "psychbed"
 
 /obj/structure/bed/psych/New(var/newloc)
-	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER)
+	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER_GENERIC)
 
 /obj/structure/bed/padded/New(var/newloc)
 	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
-
-/obj/structure/bed/pew
-	name = "pew"
-	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
-	icon_state = "pew"
-	base_icon = "pew"
-	color = WOOD_COLOR_GENERIC
-	var/material/pew_material = MATERIAL_WOOD
-
-/obj/structure/bed/pew/left
-	icon_state = "pew_left"
-	base_icon = "pew_left"
-
-/obj/structure/bed/pew/New(var/newloc)
-	..(newloc, pew_material)
-
-/obj/structure/bed/pew/mahogany
-	color = WOOD_COLOR_RICH
-	pew_material = MATERIAL_MAHOGANY
-
-/obj/structure/bed/pew/left/mahogany
-	color = WOOD_COLOR_RICH
-	pew_material = MATERIAL_MAHOGANY
-
-/obj/structure/bed/alien
-	name = "resting contraption"
-	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
-
-/obj/structure/bed/alien/New(var/newloc)
-	..(newloc,MATERIAL_RESIN)
 
 /*
  * Roller beds
@@ -218,7 +188,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
-	buckle_pixel_shift = "x=0;y=6"
+	buckle_pixel_shift = "x=0;y=0;z=6"
 	var/item_form_type = /obj/item/roller	//The folded-up object path.
 	var/obj/item/weapon/reagent_containers/beaker
 	var/iv_attached = 0

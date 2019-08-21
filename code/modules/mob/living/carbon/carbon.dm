@@ -504,3 +504,18 @@
 
 /mob/living/carbon/proc/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)
+
+/mob/living/carbon/proc/set_internals(obj/item/weapon/tank/source, source_string)
+	var/old_internal = internal
+
+	internal = source
+
+	if(!old_internal && internal)
+		if(!source_string)
+			source_string = source.name
+		to_chat(src, "<span class='notice'>You are now running on internals from \the [source_string].</span>")
+		playsound(src, 'sound/effects/internals.ogg', 50, 0)
+	if(old_internal && !internal)
+		to_chat(src, "<span class='warning'>You are no longer running on internals.</span>")
+	if(internals)
+		internals.icon_state = "internal[!!internal]"

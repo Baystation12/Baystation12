@@ -42,12 +42,12 @@ var/global/datum/ntnet/ntnet_global = new()
 	build_reports_list()
 	add_log("NTNet logging system activated.")
 
-/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
 	if(intrusion_detection_enabled)
 		add_log(log_string, source)
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
-/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
 	var/log_text = "[stationtime2text()] - "
 	if(source)
 		log_text += "[source.get_network_tag()] - "
@@ -63,6 +63,16 @@ var/global/datum/ntnet/ntnet_global = new()
 				logs.Remove(L)
 			else
 				break
+
+	for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
+		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/P = R.get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
+		if(P)
+			var/datum/computer_file/data/logfile/file = P.find_file_by_name("ntnet_log")
+			if(!istype(file))
+				file = new()
+				file.filename = "ntnet_log"
+				P.store_file(file)
+			file.stored_data += log_text + "\[br\]"
 
 /datum/ntnet/proc/get_computer_by_nid(var/NID)
 	for(var/obj/item/modular_computer/comp in SSobj.processing)
@@ -225,7 +235,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	add_log("Email address changed for [user]: [old_login] changed to [new_login]")
 	if(user.mind)
 		user.mind.initial_email_login["login"] = new_login
-		user.mind.store_memory("Your email account address has been changed to [new_login].")
+		user.StoreMemory("Your email account address has been changed to [new_login].", /decl/memory_options/system)
 	if(issilicon(user))
 		var/mob/living/silicon/S = user
 		var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
@@ -243,14 +253,14 @@ var/global/datum/ntnet/ntnet_global = new()
 	// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
 	if(find_email_by_name(login))
 		to_chat(user, "You were not assigned an email address.")
-		user.mind.store_memory("You were not assigned an email address.")
+		user.StoreMemory("You were not assigned an email address.", /decl/memory_options/system)
 	else
 		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account(login, user.real_name, assignment)
 		EA.password = GenerateKey()
 		if(user.mind)
 			user.mind.initial_email_login["login"] = EA.login
 			user.mind.initial_email_login["password"] = EA.password
-			user.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+			user.StoreMemory("Your email account address is [EA.login] and the password is [EA.password].", /decl/memory_options/system)
 		if(issilicon(user))
 			var/mob/living/silicon/S = user
 			var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)

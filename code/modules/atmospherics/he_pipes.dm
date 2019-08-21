@@ -21,14 +21,16 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	can_buckle = 1
 	buckle_lying = 1
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/New()
+obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
+	. = ..()
+	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
+
+obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
 	..()
 	initialize_directions_he = initialize_directions	// The auto-detection from /pipe is good enough for a simple HE pipe
-	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	..()
-	normalize_dir()
 	var/node1_dir
 	var/node2_dir
 
@@ -112,24 +114,11 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	level = 2
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE|CONNECT_TYPE_FUEL
 	build_icon_state = "junction"
-	pipe_type = PIPE_JUNCTION
 
 // Doubling up on initialize_directions is necessary to allow HE pipes to connect
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/New()
-	.. ()
-	switch (dir)
-		if (SOUTH)
-			initialize_directions_he = SOUTH
-			initialize_directions = NORTH|SOUTH
-		if (NORTH)
-			initialize_directions_he = NORTH
-			initialize_directions = NORTH|SOUTH
-		if (EAST)
-			initialize_directions_he = EAST
-			initialize_directions = EAST|WEST
-		if (WEST)
-			initialize_directions_he = WEST
-			initialize_directions = EAST|WEST
+obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)
+	..()
+	initialize_directions_he = dir
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/atmos_init()
 	..()

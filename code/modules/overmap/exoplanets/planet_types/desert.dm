@@ -28,8 +28,11 @@
 	else
 		S.set_trait(TRAIT_REQUIRES_WATER,1)
 		S.set_trait(TRAIT_WATER_CONSUMPTION,1)
-	if(prob(15))
+	if(prob(75))
 		S.set_trait(TRAIT_STINGS,1)
+	if(prob(75))
+		S.set_trait(TRAIT_CARNIVOROUS,2)
+	S.set_trait(TRAIT_SPREAD,0)
 
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
@@ -40,8 +43,8 @@
 	flora_prob = 10
 	large_flora_prob = 0
 	flora_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug)
-	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/giant_crab)
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/antlion)
+	megafauna_types = list(/mob/living/simple_animal/hostile/antlion/mega)
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
@@ -155,12 +158,12 @@
 	else
 		..()
 
-/obj/structure/quicksand/Crossed(AM)
+/obj/structure/quicksand/Crossed(var/atom/movable/AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if (L.can_overcome_gravity())
+		if(L.throwing || L.can_overcome_gravity())
 			return
 		buckle_mob(L)
 		if(!exposed)
 			expose()
-		to_chat(L, "<span class='danger'>You fall into \the [src]!</span>")
+		to_chat(L, SPAN_DANGER("You fall into \the [src]!"))

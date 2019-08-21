@@ -45,3 +45,6 @@
 #define TICKET_CLOSED 0   // Ticket has been resolved or declined
 #define TICKET_OPEN     1 // Ticket has been created, but not responded to
 #define TICKET_ASSIGNED 2 // An admin has assigned themself to the ticket and will respond
+
+#define LAST_CKEY(M) (M.ckey || M.last_ckey)
+#define LAST_KEY(M)  (M.key || M.last_ckey)

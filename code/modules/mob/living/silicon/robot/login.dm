@@ -10,3 +10,6 @@
 	// Forces synths to select an icon relevant to their module
 	if(!icon_selected)
 		choose_icon(icon_selection_tries, module_sprites)
+
+	if(hands)
+		hands.icon_state = istype(module) ? lowertext(module.display_name) : "nomod"

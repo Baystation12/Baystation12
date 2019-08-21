@@ -3,17 +3,16 @@
 #define   UNIDNASIZE 13
 
 // Generic mutations:
-#define MUTATION_TK              1
-#define MUTATION_COLD_RESISTANCE 2
-#define MUTATION_XRAY            3
-#define MUTATION_HULK            4
-#define MUTATION_CLUMSY          5
-#define MUTATION_FAT             6
-#define MUTATION_HUSK            7
-#define MUTATION_LASER           8  // Harm intent - click anywhere to shoot lasers from eyes.
-#define MUTATION_HEAL            9 // Healing people with hands.
-#define MUTATION_SPACERES        10 // Can't be harmed via pressure damage.
-#define MUTATION_SKELETON        11
+#define MUTATION_COLD_RESISTANCE 1
+#define MUTATION_XRAY            2
+#define MUTATION_HULK            3
+#define MUTATION_CLUMSY          4
+#define MUTATION_FAT             5
+#define MUTATION_HUSK            6
+#define MUTATION_LASER           7  // Harm intent - click anywhere to shoot lasers from eyes.
+#define MUTATION_HEAL            8 // Healing people with hands.
+#define MUTATION_SPACERES        9 // Can't be harmed via pressure damage.
+#define MUTATION_SKELETON        10
 
 // Other Mutations:
 #define mNobreath      100 // No need to breathe.

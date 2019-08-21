@@ -156,3 +156,8 @@ var/global/list/stool_cache = list() //haha stool
 		remove_padding()
 	else
 		..()
+
+//Generated subtypes for mapping porpoises
+
+/obj/item/weapon/stool/wood/New(var/newloc)
+	..(newloc,MATERIAL_WOOD)

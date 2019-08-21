@@ -3,6 +3,13 @@
 	desc = "A captured soul."
 	anchored = 1
 
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
 /mob/living/starlight_soul/Initialize(var/maploading, var/mob/living/old_mob)
 	. = ..()
 	if(old_mob)

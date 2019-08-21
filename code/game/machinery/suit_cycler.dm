@@ -16,7 +16,7 @@
 	var/radiation_level = 2 // 1 is removing germs, 2 is removing blood, 3 is removing phoron.
 	var/model_text = ""     // Some flavour text for the topic box.
 	var/locked = 1          // If locked, nothing can be taken from or added to the cycler.
-	var/can_repair          // If set, the cycler can repair voidsuits.
+	var/can_repair = 1         // If set, the cycler can repair voidsuits.
 	var/electrified = 0
 
 	// Possible modifications to pick between
@@ -52,7 +52,7 @@
 	var/obj/item/clothing/suit/space/void/suit = null
 	var/obj/item/clothing/head/helmet/space/helmet = null
 
-	var/datum/wires/suit_storage_unit/wires = null
+	wires = /datum/wires/suit_storage_unit
 
 /obj/machinery/suit_cycler/Initialize()
 	. = ..()
@@ -62,7 +62,6 @@
 
 	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
-	wires = new(src)
 	target_modification = available_modifications[1]
 	target_species = species[1]
 
@@ -70,11 +69,7 @@
 	DROP_NULL(occupant)
 	DROP_NULL(suit)
 	DROP_NULL(helmet)
-	QDEL_NULL(wires)
 	return ..()
-
-/obj/machinery/suit_cycler/attack_ai(mob/user as mob)
-	return attack_hand(user)
 
 /obj/machinery/suit_cycler/attackby(obj/item/I as obj, mob/user as mob)
 
@@ -187,17 +182,16 @@
 	updateUsrDialog()
 	return 1
 
-/obj/machinery/suit_cycler/attack_hand(mob/user as mob)
-	if(..() || stat & (BROKEN|NOPOWER))
-		return
-
-	if(!user.IsAdvancedToolUser())
-		return 0
-
+/obj/machinery/suit_cycler/physical_attack_hand(mob/user)
 	if(electrified != 0)
 		if(shock(user, 100))
-			return
+			return TRUE
 
+/obj/machinery/suit_cycler/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/suit_cycler/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = list()
@@ -228,9 +222,6 @@
 		dat += "<h2>Customisation</h2>"
 		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_species=1'>[target_species]</a>."
 		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
-
-	if(panel_open)
-		wires.Interact(user)
 
 	show_browser(user, JOINTEXT(dat), "window=suit_cycler")
 	onclose(user, "suit_cycler")

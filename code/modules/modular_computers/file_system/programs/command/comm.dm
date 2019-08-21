@@ -326,8 +326,7 @@ var/last_message_id = 0
 		return
 
 	if(evacuation_controller.cancel_evacuation())
-		log_game("[key_name(user)] has cancelled the evacuation.")
-		message_admins("[key_name_admin(user)] has cancelled the evacuation.", 1)
+		log_and_message_admins("has cancelled the evacuation.", user)
 
 	return
 

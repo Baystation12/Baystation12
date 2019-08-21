@@ -7,6 +7,11 @@
 		/obj/item/weapon/stock_parts/manipulator = 1,
 		/obj/item/weapon/stock_parts/micro_laser = 2,
 		/obj/item/weapon/stock_parts/matter_bin = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/gibber
 	name = T_BOARD("meat gibber")
@@ -17,6 +22,10 @@
 		/obj/item/weapon/stock_parts/manipulator = 2,
 		/obj/item/weapon/stock_parts/matter_bin = 1,
 		/obj/item/weapon/material/knife/kitchen/cleaver = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/cooker
 	name = T_BOARD("candy machine")
@@ -28,6 +37,11 @@
 		/obj/item/weapon/stock_parts/manipulator = 2,
 		/obj/item/weapon/stock_parts/matter_bin = 1,
 		/obj/item/stack/cable_coil = 10)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/weapon/stock_parts/circuitboard/cooker/get_buildable_types()
 	return subtypesof(/obj/machinery/cooker)
@@ -56,3 +70,26 @@
 		/obj/item/weapon/stock_parts/micro_laser = 1,
 		/obj/item/weapon/stock_parts/matter_bin = 1,
 		/obj/item/pipe = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/vending
+	name = T_BOARD("vending machine")
+	build_path = /obj/machinery/vending/assist
+	board_type = "machine"
+	origin_tech = list(TECH_ENGINEERING = 2)
+	req_components = list(
+		/obj/item/weapon/stock_parts/matter_bin = 1,
+		/obj/item/weapon/stock_parts/manipulator = 1
+	)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1,
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	)
+	buildtype_select = TRUE
+
+/obj/item/weapon/stock_parts/circuitboard/vending/get_buildable_types()
+	. = list()
+	for(var/path in typesof(/obj/machinery/vending))
+		var/obj/machinery/vending/vendor = path
+		var/base_type = initial(vendor.base_type) || path
+		. |= base_type

@@ -24,6 +24,14 @@
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
+
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
 	var/datum/effect/effect/system/trail/ion_trail
 
 	//the drone randomly switches between these states if it's malfunctioning
@@ -267,7 +275,7 @@
 		if(spawnees & 512)
 			C = new(src.loc)
 			C.SetName("Corrupted drone morality core")
-			C.origin_tech = list(TECH_ILLEGAL = rand(3,6))
+			C.origin_tech = list(TECH_ESOTERIC = rand(3,6))
 
 	..()
 

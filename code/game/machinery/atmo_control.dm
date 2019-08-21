@@ -7,7 +7,6 @@
 
 	var/frequency = 1441
 	var/datum/radio_frequency/radio_connection
-	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management
 
 	var/pressure_setting = ONE_ATMOSPHERE * 45
 	var/input_flow_setting = 200
@@ -38,10 +37,9 @@ obj/machinery/computer/air_control/Destroy()
 		radio_controller.remove_object(src, frequency)
 	..()
 
-/obj/machinery/computer/air_control/attack_hand(mob/user)
-	if(..(user))
-		return
+/obj/machinery/computer/air_control/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/air_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)		
@@ -270,7 +268,6 @@ obj/machinery/computer/air_control/Destroy()
 
 	var/cutoff_temperature = 2000
 	var/on_temperature = 1200
-	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management/injector_control
 
 /obj/machinery/computer/air_control/fuel_injection/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption) return
@@ -329,5 +326,4 @@ obj/machinery/computer/air_control/Destroy()
 /obj/machinery/computer/air_control/supermatter_core
 	icon = 'icons/obj/computer.dmi'
 	frequency = 1438
-	circuit = /obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core
 	out_pressure_mode = 1

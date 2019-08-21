@@ -40,6 +40,7 @@
 	large_flora_prob = 0
 	flora_diversity = 3
 	fauna_types = list(/mob/living/simple_animal/thinbug)
+	megafauna_types = list(/mob/living/simple_animal/hostile/drake)
 
 //Squashing most of 1 tile lava puddles
 /datum/random_map/noise/exoplanet/volcanic/cleanup()

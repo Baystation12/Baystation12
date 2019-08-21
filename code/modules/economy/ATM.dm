@@ -103,9 +103,9 @@
 	else
 		..()
 
-/obj/machinery/atm/attack_hand(mob/user)
-	if(!..())
-		interact(user)
+/obj/machinery/atm/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
 /obj/machinery/atm/interact(mob/user)
 
@@ -228,6 +228,8 @@
 		return
 
 /obj/machinery/atm/Topic(var/href, var/href_list)
+	if((. = ..()))
+		return
 	if(href_list["choice"])
 		switch(href_list["choice"])
 			if("transfer")
@@ -348,7 +350,7 @@
 
 					//stamp the paper
 					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-					stampoverlay.icon_state = "paper_stamp-cent"
+					stampoverlay.icon_state = "paper_stamp-boss"
 					if(!R.stamped)
 						R.stamped = new
 					R.stamped += /obj/item/weapon/stamp
@@ -390,7 +392,7 @@
 
 					//stamp the paper
 					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-					stampoverlay.icon_state = "paper_stamp-cent"
+					stampoverlay.icon_state = "paper_stamp-boss"
 					if(!R.stamped)
 						R.stamped = new
 					R.stamped += /obj/item/weapon/stamp
@@ -419,7 +421,7 @@
 				authenticated_account = null
 				account_security_level = 0
 
-	src.attack_hand(usr)
+	interact(usr)
 
 /obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user as mob)
 	if(!authenticated_account)

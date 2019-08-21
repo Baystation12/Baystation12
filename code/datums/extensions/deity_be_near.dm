@@ -11,10 +11,14 @@
 	GLOB.moved_event.register(holder,src, .proc/check_movement)
 	connected_deity = connect
 	GLOB.destroyed_event.register(holder, src, .proc/dead_deity)
+	var/obj/O = holder
+	O.desc += "<br><span class='cult'>This item deals damage to its wielder the [keep_away_instead ? "closer" : "farther"] it is from a deity structure</span>"
+
 
 /datum/extension/deity_be_near/Destroy()
 	GLOB.moved_event.unregister(holder,src)
 	GLOB.destroyed_event.unregister(holder, src)
+	GLOB.item_equipped_event.unregister(holder, src)
 	. = ..()
 
 /datum/extension/deity_be_near/proc/check_movement()
@@ -39,7 +43,6 @@
 	var/obj/item/I = holder
 	I.visible_message("<span class='warning'>\The [holder]'s power fades!</span>")
 	qdel(src)
-
 
 /datum/extension/deity_be_near/proc/wearing_full()
 	var/obj/item/I = holder

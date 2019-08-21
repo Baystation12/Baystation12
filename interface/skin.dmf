@@ -853,20 +853,6 @@ menu "menu"
 		category = "&File"
 		saved-params = "is-checked"
 	elem 
-		name = "&Icons"
-		command = ""
-		saved-params = "is-checked"
-	elem 
-		name = "&Size"
-		command = ""
-		category = "&Icons"
-		saved-params = "is-checked"
-	elem 
-		name = "&Scaling"
-		command = ""
-		category = "&Icons"
-		saved-params = "is-checked"
-	elem 
 		name = "&Size"
 		command = ""
 		saved-params = "is-checked"

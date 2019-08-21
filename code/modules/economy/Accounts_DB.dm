@@ -2,15 +2,13 @@
 /obj/machinery/computer/account_database
 	name = "accounts uplink terminal"
 	desc = "Access transaction logs, account data and all kinds of other financial records."
-	req_access = list(list(access_hop, access_captain))
+	var/needed_access = list(list(access_hop, access_captain))
 	var/receipt_num
 	var/machine_id = ""
 	var/obj/item/weapon/card/id/held_card
 	var/datum/money_account/detailed_account_view
 	var/creating_new_account = 0
 	var/const/fund_cap = 1000000
-
-	circuit = /obj/item/weapon/stock_parts/circuitboard/account_database
 
 	proc/get_access_level()
 		if (!held_card)
@@ -45,9 +43,9 @@
 
 	attack_hand(user)
 
-/obj/machinery/computer/account_database/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN)) return
+/obj/machinery/computer/account_database/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/account_database/ui_interact(mob/user, ui_key="main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
@@ -56,7 +54,7 @@
 	data["src"] = "\ref[src]"
 	data["id_inserted"] = !!held_card
 	data["id_card"] = held_card ? text("[held_card.registered_name], [held_card.assignment]") : "-----"
-	data["access_level"] = check_access(held_card)
+	data["access_level"] = has_access(needed_access, held_card && held_card.GetAccess())
 	data["machine_id"] = machine_id
 	data["creating_new_account"] = creating_new_account
 	data["detailed_account_view"] = !!detailed_account_view

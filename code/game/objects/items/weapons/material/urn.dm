@@ -26,3 +26,7 @@
 			A.dropInto(loc)
 			user.visible_message("\The [user] pours \the [A] out from \the [src].", "You pour \the [A] out from \the [src].")
 
+/obj/item/weapon/material/urn/examine(mob/user)
+	. = ..()
+	if(. && contents.len)
+		to_chat(user, "\The [src] is full.")

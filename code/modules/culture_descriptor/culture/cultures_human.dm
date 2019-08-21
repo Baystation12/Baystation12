@@ -146,13 +146,15 @@
 	// #defines so it's easier to read what's actually being generated
 	#define LTR ascii2text(rand(65,90)) // A-Z
 	#define NUM ascii2text(rand(48,57)) // 0-9
-	#define NAME capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male))
+	#define FIRST capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male))
+	#define NAME capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	switch(rand(1,4))
 		if(1) return NAME
-		if(2) return "[LTR][LTR]-[NAME]"
-		if(3) return "[NAME]-[NUM][NUM][NUM]"
+		if(2) return "[LTR][LTR]-[FIRST]"
+		if(3) return "[FIRST]-[NUM][NUM][NUM]"
 		if(4) return "[LTR][LTR]-[NUM][NUM][NUM]"
 	. = 1 // Never executed, works around http://www.byond.com/forum/?post=2072419
 	#undef LTR
 	#undef NUM
+	#undef FIRST
 	#undef NAME

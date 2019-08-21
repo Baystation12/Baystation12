@@ -10,6 +10,7 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
+	holder_type = /obj/item/weapon/holder
 	idcard = /obj/item/weapon/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
@@ -118,12 +119,7 @@
 	return 0
 
 /mob/living/silicon/pai/restrained()
-	if(istype(src.loc,/obj/item/device/paicard))
-		return 0
-	..()
-
-/mob/living/silicon/pai/MouseDrop(atom/over_object)
-	return
+	return !istype(loc, /obj/item/device/paicard) && ..()
 
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
@@ -212,8 +208,9 @@
 					break
 		holder.drop_from_inventory(card)
 
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = src
+	if(client)
+		client.perspective = EYE_PERSPECTIVE
+		client.eye = src
 	dropInto(card.loc)
 
 	card.forceMove(src)
@@ -286,6 +283,12 @@
 
 //Overriding this will stop a number of headaches down the track.
 /mob/living/silicon/pai/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	var/obj/item/weapon/card/id/card = W.GetIdCard()
+	if(card)
+		var/list/new_access = card.GetAccess()
+		src.idcard.access = new_access
+		visible_message("<span class='notice'>[user.name] slides [W] across [src].</span>")
+		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
 	if(W.force)
 		visible_message("<span class='danger'>[user.name] attacks [src] with [W]!</span>")
 		src.adjustBruteLoss(W.force)
@@ -305,15 +308,16 @@
 
 	last_special = world.time + 100
 
-	if(src.loc == card)
+	if(loc == card)
 		return
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
-	src.stop_pulling()
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = card
+	stop_pulling()
+	if(client)
+		client.perspective = EYE_PERSPECTIVE
+		client.eye = card
 
 	//stop resting
 	resting = 0
@@ -324,13 +328,13 @@
 		var/mob/living/M = H.loc
 		if(istype(M))
 			M.drop_from_inventory(H, get_turf(src))
-		dropInto(loc)
+		H.dropInto(get_turf(M))
 
 	// Move us into the card and move the card to the ground.
-	forceMove(card)
-	card.dropInto(card.loc)
+	card.dropInto(get_turf(card))
 	resting = 0
 	icon_state = "[chassis]"
+	forceMove(card)
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
@@ -338,13 +342,13 @@
 
 // Handle being picked up.
 /mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
-	var/obj/item/weapon/holder/H = ..(grabber, self_drop)
-	if(!istype(H))
-		return
-	H.icon_state = "pai-[icon_state]"
-	grabber.update_inv_l_hand()
-	grabber.update_inv_r_hand()
-	return H
+	. = ..()
+	if(.)
+		var/obj/item/weapon/holder/H = .
+		if(istype(H))
+			H.icon_state = "pai-[icon_state]"
+			grabber.update_inv_l_hand()
+			grabber.update_inv_r_hand()
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"

@@ -7,7 +7,7 @@
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
 	desc = "A monstrously huge green spider with shimmering eyes."
-	icon = 'icons/mob/spider.dmi'
+	icon = 'icons/mob/simple_animal/spider.dmi'
 	icon_state = "green"
 	icon_living = "green"
 	icon_dead = "green_dead"
@@ -17,8 +17,6 @@
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
-	meat_amount = 3
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
@@ -33,11 +31,18 @@
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
 	speed = 1
-	max_gas = list("phoron" = 1, "carbon_dioxide" = 5, "methyl_bromide" = 1)
+	max_gas = list(GAS_PHORON = 1, GAS_CO2 = 5, GAS_METHYL_BROMIDE = 1)
 	bleed_colour = "#0d5a71"
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
+	meat_amount = 3
+	bone_material = null
+	bone_amount =   0
+	skin_material = MATERIAL_SKIN_CHITIN
+	skin_amount =   5
 
 	var/poison_per_bite = 6
 	var/poison_type = /datum/reagent/toxin/venom
@@ -117,9 +122,9 @@
 	flash_vulnerability = 2 //sensitive eyes for stalking prey
 	does_spin = FALSE
 	available_maneuvers = list(/decl/maneuver/leap/spider)
+	ability_cooldown = 3 MINUTES
 
 	var/leap_range = 5
-	var/leap_cooldown = 3 MINUTES
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter

@@ -62,17 +62,12 @@ var/global/list/navbeacons = list()
 			to_chat(user, "You must open the cover first!")
 	return
 
-/obj/machinery/navbeacon/attack_ai(var/mob/user)
-	interact(user, 1)
+/obj/machinery/navbeacon/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/navbeacon/attack_hand(var/mob/user)
-
-	if(!user.IsAdvancedToolUser())
-		return 0
-
-	interact(user, 0)
-
-/obj/machinery/navbeacon/interact(var/mob/user, var/ai = 0)
+/obj/machinery/navbeacon/interact(var/mob/user)
+	var/ai = isAI(user)
 	var/turf/T = loc
 	if(!T.is_plating())
 		return		// prevent intraction when T-scanner revealed

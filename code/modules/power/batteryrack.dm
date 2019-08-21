@@ -16,7 +16,7 @@
 	charge = 0
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/batteryrack
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 12)
+	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
 
 	var/max_transfer_rate = 0							// Maximal input/output rate. Determined by used capacitors when building the device.
 	var/mode = PSU_OFFLINE								// Current inputting/outputting mode
@@ -238,8 +238,9 @@
 		else
 			to_chat(user, "\The [src] has no empty slot for \the [W]")
 
-/obj/machinery/power/smes/batteryrack/attack_hand(var/mob/user)
+/obj/machinery/power/smes/batteryrack/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/smes/batteryrack/inputting()
 	return

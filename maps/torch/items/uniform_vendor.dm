@@ -25,10 +25,11 @@
 	else
 		icon_state = "[initial(icon_state)]-off"
 
-/obj/machinery/uniform_vendor/attack_hand(mob/user)
-	if(..())
-		return
+/obj/machinery/uniform_vendor/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
+/obj/machinery/uniform_vendor/interact(mob/user)
 	var/dat = list()
 	dat += "User ID: <a href='byond://?src=\ref[src];ID=1'>[ID ? "[ID.registered_name], [ID.military_rank], [ID.military_branch]" : "--------"]</a>"
 	dat += "<hr>"

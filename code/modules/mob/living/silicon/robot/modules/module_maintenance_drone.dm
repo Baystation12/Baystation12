@@ -44,6 +44,12 @@
 		/datum/matter_synth/wire =    30
 	)
 	emag = /obj/item/weapon/gun/energy/plasmacutter
+	skills = list(
+		SKILL_ATMOS        = SKILL_EXPERT,
+		SKILL_ENGINES      = SKILL_EXPERT,
+		SKILL_CONSTRUCTION = SKILL_EXPERT,
+		SKILL_ELECTRICAL   = SKILL_EXPERT
+	)
 
 /obj/item/weapon/robot_module/drone/finalize_equipment(var/mob/living/silicon/robot/R)
 	. = ..()

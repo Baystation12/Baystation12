@@ -21,7 +21,6 @@
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-	pipe_type = PIPE_INJECTOR
 
 	level = 1
 
@@ -30,8 +29,8 @@
 	build_icon = 'icons/atmos/injector.dmi'
 	build_icon_state = "map_injector"
 
-/obj/machinery/atmospherics/unary/outlet_injector/New()
-	..()
+/obj/machinery/atmospherics/unary/outlet_injector/Initialize()
+	. = ..()
 	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	
 
@@ -47,7 +46,7 @@
 	if (!node)
 		update_use_power(POWER_USE_OFF)
 
-	if(!powered())
+	if(stat & NOPOWER)
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"

@@ -33,7 +33,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 		return SETUP_FAILED	//Not enough space or other issues.
 	P.hard_drive.store_file(program)
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in your new program to unlock its hidden features.</span>")
-	M.mind.store_memory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).")
+	M.StoreMemory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).", /decl/memory_options/system)
 
 /decl/uplink_source/radio
 	name = "Radio"
@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	R.hidden_uplink = T
 	R.traitor_frequency = freq
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features.</span>")
-	M.mind.store_memory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).")
+	M.StoreMemory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).", /decl/memory_options/system)
 
 /decl/uplink_source/implant
 	name = "Implant"

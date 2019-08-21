@@ -282,6 +282,9 @@ var/list/solars_list = list()
 	density = 1
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 250
+	construct_state = /decl/machine_construction/default/panel_closed/computer
+	base_type = /obj/machinery/power/solar_control
+	frame_type = /obj/machinery/constructable_frame/computerframe
 	var/id = 0
 	var/cdir = 0
 	var/targetdir = 0		// target angle in manual tracking (since it updates every game minute)
@@ -366,9 +369,9 @@ var/list/solars_list = list()
 		overlays += image('icons/obj/computer.dmi', "solcon-o", FLY_LAYER, angle2dir(cdir))
 	return
 
-/obj/machinery/power/solar_control/attack_hand(mob/user)
-	if(!..())
-		interact(user)
+/obj/machinery/power/solar_control/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
 /obj/machinery/power/solar_control/interact(mob/user)
 
@@ -397,39 +400,6 @@ var/list/solars_list = list()
 	var/datum/browser/popup = new(user, "solar", name)
 	popup.set_content(t)
 	popup.open()
-
-	return
-
-/obj/machinery/power/solar_control/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20,src))
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/material/shard( src.loc )
-				var/obj/item/weapon/stock_parts/circuitboard/solar_control/M = new /obj/item/weapon/stock_parts/circuitboard/solar_control( A )
-				for (var/obj/C in src)
-					C.dropInto(loc)
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				qdel(src)
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/stock_parts/circuitboard/solar_control/M = new /obj/item/weapon/stock_parts/circuitboard/solar_control( A )
-				for (var/obj/C in src)
-					C.dropInto(loc)
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				qdel(src)
-	else
-		src.attack_hand(user)
-	return
 
 /obj/machinery/power/solar_control/Process()
 	lastgen = gen

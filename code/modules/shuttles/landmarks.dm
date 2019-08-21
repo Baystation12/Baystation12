@@ -43,7 +43,7 @@
 	if(!docking_controller)
 		return
 	var/docking_tag = docking_controller
-	docking_controller = locate(docking_tag)
+	docking_controller = SSshuttle.docking_registry[docking_tag]
 	if(!istype(docking_controller))
 		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 	if(GLOB.using_map.use_overmap)
@@ -77,6 +77,11 @@
 		if(!(w in conn))
 			return FALSE
 	return TRUE
+
+/obj/effect/shuttle_landmark/proc/cannot_depart(datum/shuttle/shuttle)
+	return FALSE
+
+/obj/effect/shuttle_landmark/proc/shuttle_arrived(datum/shuttle/shuttle)
 
 /proc/check_collision(area/target_area, list/target_turfs)
 	for(var/target_turf in target_turfs)

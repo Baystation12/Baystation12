@@ -8,7 +8,7 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 	landmark_id = "ActorSpawn"
 	id_type = /obj/item/weapon/card/id/syndicate
 
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_SET_APPEARANCE | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 
 	hard_cap = 7
 	hard_cap_round = 10

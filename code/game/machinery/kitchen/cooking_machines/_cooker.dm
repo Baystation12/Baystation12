@@ -12,6 +12,8 @@
 	anchored = 1
 	idle_power_usage = 5
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/on_icon						// Icon state used when cooking.
 	var/off_icon					// Icon state used when not cooking.
@@ -192,33 +194,30 @@
 		cooking = 0
 		return TRUE
 
-/obj/machinery/cooker/attack_hand(var/mob/user)
-
+/obj/machinery/cooker/physical_attack_hand(var/mob/user)
 	if(cooking_obj)
 		to_chat(user, "<span class='notice'>You grab \the [cooking_obj] from \the [src].</span>")
 		user.put_in_hands(cooking_obj)
 		cooking = 0
 		cooking_obj = null
 		icon_state = off_icon
-		return
+		return TRUE
 
 	if(output_options.len)
-
 		if(cooking)
 			to_chat(user, "<span class='warning'>\The [src] is in use!</span>")
-			return
+			return TRUE
 
 		var/choice = input("What specific food do you wish to make with \the [src]?") as null|anything in output_options+"Default"
 		if(!choice)
-			return
+			return TRUE
 		if(choice == "Default")
 			selected_option = null
 			to_chat(user, "<span class='notice'>You decide not to make anything specific with \the [src].</span>")
 		else
 			selected_option = choice
 			to_chat(user, "<span class='notice'>You prepare \the [src] to make \a [selected_option].</span>")
-
-	return ..()
+	return TRUE
 
 /obj/machinery/cooker/proc/cook_mob(var/mob/living/victim, var/mob/user)
 	return

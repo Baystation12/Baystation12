@@ -7,7 +7,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king
 	name = "king of goats"
 	desc = "The oldest and wisest of goats; king of his race, peerless in dignity and power. His golden fleece radiates nobility."
-	icon = 'icons/mob/king_of_goats.dmi'
+	icon = 'icons/mob/simple_animal/king_of_goats.dmi'
 	icon_state = "king_goat"
 	icon_living = "king_goat"
 	icon_dead = "goat_dead"
@@ -24,7 +24,7 @@
 	melee_damage_upper = 55
 	mob_size = MOB_LARGE
 	mob_bump_flag = HEAVY
-	can_escape = 1
+	can_escape = TRUE
 	move_to_delay = 3
 	min_gas = null
 	max_gas = null
@@ -61,7 +61,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/guard
 	name = "honour guard"
 	desc = "A very handsome and noble beast."
-	icon = 'icons/mob/king_of_goats.dmi'
+	icon = 'icons/mob/simple_animal/king_of_goats.dmi'
 	icon_state = "goat_guard"
 	icon_living = "goat_guard"
 	icon_dead = "goat_guard_dead"
@@ -182,7 +182,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
 	visible_message("<span class='cultannounce'>\The [src] lets loose a terrific wail as its wounds close shut with a flash of light, and its eyes glow even brighter than before!</span>")
 	new /mob/living/simple_animal/hostile/retaliate/goat/king/phase2(src.loc)
-	Destroy()
+	qdel(src)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/OnDeath()
 	QDEL_NULL(boss_theme)
@@ -198,17 +198,17 @@
 	QDEL_NULL(boss_theme)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/UnarmedAttack(atom/A)
-	..()
-	if(isliving(A))
-		var/mob/living/L = A
+/mob/living/simple_animal/hostile/retaliate/goat/king/AttackingTarget()
+	. = ..()
+	if(isliving(target_mob))
+		var/mob/living/L = target_mob
 		if(prob(stun_chance))
 			L.Weaken(0.5)
 			L.confused += 1
 			visible_message(SPAN_WARNING("\The [L] is bowled over by the impact of [src]'s attack!"))
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/UnarmedAttack()
-	..()
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/AttackingTarget()
+	. = ..()
 	if(damtype != BRUTE)
 		special_attacks++
 	

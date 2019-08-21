@@ -46,16 +46,14 @@
 	if(stat &NOPOWER)
 		icon_state = "auth_off"
 
-/obj/machinery/keycard_auth/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		to_chat(user, "This device is not powered.")
-		return
-	if(!user.IsAdvancedToolUser())
-		return 0
+/obj/machinery/keycard_auth/interface_interact(mob/user)
 	if(busy)
 		to_chat(user, "This device is busy.")
-		return
+		return TRUE
+	interact(user)
+	return TRUE
 
+/obj/machinery/keycard_auth/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "<h1>Keycard Authentication Device</h1>"
@@ -132,8 +130,7 @@
 	if(confirmed)
 		confirmed = 0
 		trigger_event(event)
-		log_game("[key_name(event_triggered_by)] triggered and [key_name(event_confirmed_by)] confirmed event [event]")
-		message_admins("[key_name(event_triggered_by)] triggered and [key_name(event_confirmed_by)] confirmed event [event]", 1)
+		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [event]", event_triggered_by || usr)
 	reset()
 
 /obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source)

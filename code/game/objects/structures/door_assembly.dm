@@ -46,6 +46,7 @@
 	glass_icon = 'icons/obj/doors/external/fill_glass.dmi'
 	base_name = "External Airlock"
 	airlock_type = /obj/machinery/door/airlock/external
+	glass_type = /obj/machinery/door/airlock/external/glass
 	paintable = 0
 
 /obj/structure/door_assembly/multi_tile
@@ -56,7 +57,7 @@
 	dir = EAST
 	var/width = 1
 	airlock_type = /obj/machinery/door/airlock/multi_tile
-	glass_type = "/multi_tile/glass"
+	glass_type = /obj/machinery/door/airlock/multi_tile/glass
 
 	New()
 		if(dir in list(EAST, WEST))

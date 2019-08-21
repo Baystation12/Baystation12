@@ -67,17 +67,11 @@
 				"bribe_accept"      = "Why not! Glad to be here for a few more minutes.",
 				)
 
-	possible_trading_items = list(/obj/item/weapon/computer_hardware/battery_module      = TRADER_SUBTYPES_ONLY,
+	possible_trading_items = list(/obj/item/weapon/stock_parts/computer/battery_module      = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/stock_parts/circuitboard                            = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/stock_parts/circuitboard/telecomms                  = TRADER_BLACKLIST,
 								/obj/item/weapon/stock_parts/circuitboard/unary_atmos                = TRADER_BLACKLIST,
 								/obj/item/weapon/stock_parts/circuitboard/arcade                     = TRADER_BLACKLIST,
-								/obj/item/weapon/stock_parts/circuitboard/mecha                      = TRADER_BLACKLIST,
-								/obj/item/weapon/stock_parts/circuitboard/mecha/odysseus             = TRADER_BLACKLIST,
-								/obj/item/weapon/stock_parts/circuitboard/mecha/honker               = TRADER_BLACKLIST,
-								/obj/item/weapon/stock_parts/circuitboard/mecha/durand               = TRADER_BLACKLIST,
-								/obj/item/weapon/stock_parts/circuitboard/mecha/gygax                = TRADER_BLACKLIST,
-								/obj/item/weapon/stock_parts/circuitboard/mecha/ripley               = TRADER_BLACKLIST,
 								/obj/item/weapon/stock_parts/circuitboard/broken                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil                               = TRADER_SUBTYPES_ONLY,
 								/obj/item/stack/cable_coil/cyborg                        = TRADER_BLACKLIST,

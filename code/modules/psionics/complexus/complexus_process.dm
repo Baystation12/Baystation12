@@ -20,8 +20,8 @@
 			highest_rank = check_rank
 
 	UNSETEMPTY(latencies)
-
-	if(force || last_rating != ceil(combined_rank/ranks.len))
+	var/rank_count = max(1, LAZYLEN(ranks))
+	if(force || last_rating != ceil(combined_rank/rank_count))
 		if(highest_rank <= 1)
 			if(highest_rank == 0)
 				qdel(src)
@@ -29,9 +29,10 @@
 		else
 			rebuild_power_cache = TRUE
 			sound_to(owner, 'sound/effects/psi/power_unlock.ogg')
-			rating = ceil(combined_rank/ranks.len)
+			rating = ceil(combined_rank/rank_count)
 			cost_modifier = 1
-			if(rating > 1) cost_modifier -= min(1, max(0.1, (rating-1) / 10))
+			if(rating > 1) 
+				cost_modifier -= min(1, max(0.1, (rating-1) / 10))
 			if(!ui)
 				ui = new(owner)
 				if(owner.client)
@@ -45,6 +46,7 @@
 				for(var/thing in SSpsi.all_aura_images)
 					owner.client.images |= thing
 
+			var/image/aura_image = get_aura_image()
 			if(rating >= PSI_RANK_PARAMOUNT) // spooky boosters
 				aura_color = "#aaffaa"
 				aura_image.blend_mode = BLEND_SUBTRACT
@@ -58,6 +60,8 @@
 					aura_color = "#33cc33"
 				else if(highest_faculty == PSI_ENERGISTICS)
 					aura_color = "#cccc33"
+			aura_image.pixel_x = -64 - owner.default_pixel_x
+			aura_image.pixel_y = -64 - owner.default_pixel_y
 
 	if(!announced && owner && owner.client && !QDELETED(src))
 		announced = TRUE
@@ -108,7 +112,7 @@
 		var/matrix/M = matrix()
 		if(next_aura_size != 1)
 			M.Scale(next_aura_size)
-		animate(aura_image, alpha = next_aura_alpha, transform = M, color = aura_color, time = 3)
+		animate(get_aura_image(), alpha = next_aura_alpha, transform = M, color = aura_color, time = 3)
 
 	if(update_hud)
 		ui.update_icon()

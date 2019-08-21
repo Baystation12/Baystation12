@@ -21,6 +21,7 @@
 	id = "awaysite_blue"
 	description = "Two z-level map with an arctic planet and an alien underground surface"
 	suffixes = list("blueriver/blueriver-1.dmm", "blueriver/blueriver-2.dmm")
+	generate_mining_by_z = 2
 	area_usage_test_exempted_root_areas = list(/area/bluespaceriver)
 	apc_test_exempt_areas = list(
 		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -40,12 +41,12 @@
 	speed = -1
 	health = 280
 	maxHealth = 280
-	can_escape = 1
+	can_escape = TRUE
 
 	harm_intent_damage = 8
 	melee_damage_lower = 30
 	melee_damage_upper = 35
-	attacktext = "evisceratds"
+	attacktext = "eviscerated"
 	attack_sound = 'sound/weapons/slash.ogg'
 	var/attack_mode = FALSE
 
@@ -98,7 +99,7 @@
 /mob/living/simple_animal/hostile/hive_alien/defender/wounded
 	name = "wounded hive defender"
 	health = 80
-	can_escape = 0
+	can_escape = FALSE
 
 /obj/effect/shuttle_landmark/nav_blueriv/nav1
 	name = "Arctic Planet Landing Point #1"

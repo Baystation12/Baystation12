@@ -26,6 +26,7 @@
 #define SS_PRIORITY_INACTIVITY     10	// Idle kicking.
 #define SS_PRIORITY_SUPPLY         10   // Supply point accumulation.
 #define SS_PRIORITY_TRADE          10   // Adds/removes traders.
+#define SS_PRIORITY_GHOST_IMAGES   10   // Updates ghost client images.
 
 // SS_BACKGROUND
 #define SS_PRIORITY_OBJECTS       100	// processing_objects processing.
@@ -37,7 +38,6 @@
 #define SS_PRIORITY_TURF          30    // Radioactive walls/blob.
 #define SS_PRIORITY_EVAC          30    // Processes the evac controller.
 #define SS_PRIORITY_CIRCUIT       30	// Processing Circuit's ticks and all that.
-#define SS_PRIORITY_WIRELESS      30	// Wireless connection setup.
 #define SS_PRIORITY_CHAR_SETUP    25    // Writes player preferences to savefiles.
 #define SS_PRIORITY_GARBAGE       20	// Garbage collection.
 

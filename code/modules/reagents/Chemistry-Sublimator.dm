@@ -34,13 +34,16 @@
 /obj/machinery/portable_atmospherics/reagent_sublimator
 	name = "reagent sublimator"
 	desc = "An advanced machine that converts liquid or solid reagents into gasses."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/subliminator.dmi'
 	icon_state = "sublimator-off-unloaded-notank"
 	density = TRUE
 	use_power = POWER_USE_IDLE
 
+	var/icon_set = "subliminator"
 	var/sublimated_units_per_tick = 20
 	var/obj/item/weapon/reagent_containers/container
+	var/list/reagent_whitelist //if this is set, the subliminator will only work with the listed reagents
+	var/output_temperature = T20C
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/New()
 	. = ..()
@@ -89,16 +92,11 @@
 	else
 		to_chat(user, "<span class='warning'>\The [src] has no reagent container loaded.</span>")
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/attack_ai(var/mob/user)
-	attack_hand(user)
-
-/obj/machinery/portable_atmospherics/reagent_sublimator/attack_hand(var/mob/user)
-	if(stat & (BROKEN|NOPOWER))
-		to_chat(user, "<span class='warning'>\The [src] is not currently functional.</span>")
-		return
+/obj/machinery/portable_atmospherics/reagent_sublimator/physical_attack_hand(var/mob/user)
 	update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 	user.visible_message("<span class='notice'>\The [user] switches \the [src] [use_power == 2 ? "on" : "off"].</span>")
 	update_icon()
+	return TRUE
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/attackby(var/obj/item/weapon/thing, var/mob/user)
 	if(istype(thing, /obj/item/weapon/tank))
@@ -128,6 +126,14 @@
 		return
 
 	if(use_power >= POWER_USE_ACTIVE && container && container.reagents)
+		if(reagent_whitelist)
+			for(var/datum/reagent/R in container.reagents.reagent_list)
+				if(!is_type_in_list(R, reagent_whitelist))
+					audible_message(SPAN_NOTICE("\The [src] pings rapidly and powers down, refusing to process the contents of \the [container]."))
+					update_use_power(POWER_USE_OFF)
+					update_icon()
+					return
+
 		var/datum/gas_mixture/produced = new
 		var/added_gas = FALSE
 		for(var/datum/reagent/R in container.reagents.reagent_list)
@@ -141,7 +147,7 @@
 			if(produced.total_moles >= sublimated_units_per_tick)
 				break
 		if(added_gas)
-			produced.temperature = T20C
+			produced.temperature = output_temperature
 			air_contents.merge(produced)
 		else
 			visible_message("<span class='notice'>\The [src] pings as it finishes processing the contents of \the [container].</span>")
@@ -149,7 +155,7 @@
 			update_icon()
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/on_update_icon()
-	icon_state = "sublimator-[use_power == POWER_USE_ACTIVE ? "on" : "off"]-[container ? "loaded" : "unloaded"]-[holding ? "tank" : "notank"]"
+	icon_state = "[icon_set]-[use_power == POWER_USE_ACTIVE ? "on" : "off"]-[container ? "loaded" : "unloaded"]-[holding ? "tank" : "notank"]"
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/examine(var/mob/user)
 	. = ..()
@@ -160,3 +166,12 @@
 			to_chat(user, "\The [src] has \a [container] loaded. It is empty.")
 	if(holding)
 		to_chat(user, "\The [src] has \a [holding] connected.")
+
+
+/obj/machinery/portable_atmospherics/reagent_sublimator/sauna
+	name = "sauna heater"
+	desc = "A top of the line electric sauna heater - it accepts water, and produces steam. Wow!"
+	icon_state = "sauna-off-unloaded-notank"
+	icon_set = "sauna"
+	reagent_whitelist = list(/datum/reagent/water)
+	output_temperature = T0C+40

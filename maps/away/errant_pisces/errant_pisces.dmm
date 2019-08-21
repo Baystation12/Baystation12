@@ -834,7 +834,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cn" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "co" = (
@@ -1076,10 +1076,6 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_starboard)
 "cX" = (
-/obj/machinery/atmospherics/unary/tank/air{
-	dir = 4;
-	start_pressure = 740.5
-	},
 /obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 4
 	},
@@ -1438,7 +1434,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
@@ -1586,7 +1582,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
@@ -1697,7 +1693,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1011;
@@ -1951,7 +1947,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1013;
@@ -2343,7 +2339,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
@@ -2549,7 +2545,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
@@ -3554,8 +3550,8 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "iq" = (
-/obj/machinery/button/remote/blast_door{
-	id = "xynergy_bd_cell1";
+/obj/machinery/button/blast_door{
+	id_tag = "xynergy_bd_cell1";
 	name = "Cell 1 blast door-control";
 	pixel_y = -25
 	},
@@ -3566,16 +3562,16 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "is" = (
-/obj/machinery/button/remote/blast_door{
-	id = "xynergy_bd_cell2";
+/obj/machinery/button/blast_door{
+	id_tag = "xynergy_bd_cell2";
 	name = "Cell 2 blast door-control";
 	pixel_y = -25
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "it" = (
-/obj/machinery/button/remote/blast_door{
-	id = "xynergy_bd_cell3";
+/obj/machinery/button/blast_door{
+	id_tag = "xynergy_bd_cell3";
 	name = "Cell 3 blast door-control";
 	pixel_y = -25
 	},
@@ -3662,19 +3658,19 @@
 /area/errant_pisces/dorms)
 "iK" = (
 /obj/machinery/door/blast/regular{
-	id = "xynergy_bd_cell1"
+	id_tag = "xynergy_bd_cell1"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "iL" = (
 /obj/machinery/door/blast/regular{
-	id = "xynergy_bd_cell2"
+	id_tag = "xynergy_bd_cell2"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "iM" = (
 /obj/machinery/door/blast/regular{
-	id = "xynergy_bd_cell3"
+	id_tag = "xynergy_bd_cell3"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
@@ -3938,7 +3934,7 @@
 /area/errant_pisces/dorms)
 "ju" = (
 /obj/structure/table/marble,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "jv" = (
@@ -4784,7 +4780,6 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/structure/table/standard,
 /obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -5368,7 +5363,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -6005,7 +6000,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -6374,7 +6369,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/errant_pisces/bridge)
@@ -6652,8 +6647,8 @@
 /area/errant_pisces/bridge)
 "qf" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
-	id = "xynergy_perimeter_blast";
+/obj/machinery/button/blast_door{
+	id_tag = "xynergy_perimeter_blast";
 	name = "perimeter blast door-control"
 	},
 /turf/simulated/floor/tiled,
@@ -6932,7 +6927,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "xynergy_perimeter_blast"
+	id_tag = "xynergy_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,

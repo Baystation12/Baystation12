@@ -56,6 +56,13 @@ var/datum/robolimb/basic_robolimb
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
+/datum/robolimb/hephaestus/titan
+	company = "Hephaestus Titan"
+	desc = "This limb has a casing of olive drab, providing a reinforced house look."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_titan.dmi'
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
 /datum/robolimb/hephaestus/alt/monitor
 	company = "Hephaestus Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_monitor.dmi'
@@ -125,6 +132,13 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_main.dmi'
 	unavailable_at_fab = 1
 
+/datum/robolimb/morpheus/alt
+	company = "Morpheus Atlantis"
+	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_atlantis.dmi'
+	applies_to_part = list(BP_HEAD)
+	unavailable_at_fab = 1
+	has_eyes = FALSE
+
 /datum/robolimb/mantis
 	company = "Morpheus Mantis"
 	desc = "This limb has a casing of sleek black metal and repulsive insectile design."
@@ -149,20 +163,20 @@ var/datum/robolimb/basic_robolimb
 	unavailable_at_fab = 1
 	species_cannot_use = list(SPECIES_IPC)
 
-/datum/robolimb/grayson
-	company = "Grayson"
+/datum/robolimb/shellguard
+	company = "Shellguard"
 	desc = "This limb has a sturdy and heavy build to it."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_main.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_main.dmi'
 
-/datum/robolimb/grayson/alt
-	company = "Grayson Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_alt.dmi'
+/datum/robolimb/shellguard/alt
+	company = "Shellguard Alt."
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_alt.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
-/datum/robolimb/grayson/alt/monitor
-	company = "Grayson Monitor."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_monitor.dmi'
+/datum/robolimb/shellguard/alt/monitor
+	company = "Shellguard Monitor."
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_monitor.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 	allowed_bodytypes = list(SPECIES_IPC)

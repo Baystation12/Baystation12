@@ -121,6 +121,9 @@
 						break
 				update_icon()
 
+/obj/structure/catwalk/refresh_neighbors()
+	return
+
 /obj/effect/catwalk_plated
 	name = "plated catwalk spawner"
 	icon = 'icons/obj/catwalks.dmi'

@@ -21,6 +21,11 @@
 	..()
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(typesof(/obj/item/clothing/mask/bandana) + typesof(/obj/item/clothing/head/bandana))
 
+/datum/gear/head/beanie
+	display_name = "beanie, color select"
+	path = /obj/item/clothing/head/beanie
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
 	path = /obj/item/clothing/head/hairflower/bow
@@ -122,6 +127,10 @@
 	display_name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/head/rastacap
+	display_name = "rastacap"
+	path = /obj/item/clothing/head/rastacap
 
 /datum/gear/head/surgical
 	display_name = "standard surgical caps"

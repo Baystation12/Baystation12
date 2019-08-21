@@ -21,16 +21,15 @@
 	var/datum/sound_token/sound_token
 	build_icon_state = "simple"
 	build_icon = 'icons/obj/pipe-item.dmi'
-	pipe_type = PIPE_SIMPLE_STRAIGHT
 	pipe_class = PIPE_CLASS_BINARY
 
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 
-/obj/machinery/atmospherics/pipe/New()
+/obj/machinery/atmospherics/pipe/Initialize()
+	. = ..()
 	if(istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
 		level = 1
-	..()
 
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level != 2
@@ -132,15 +131,12 @@
 		if (do_after(user, 40, src))
 			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")
 		
-			var/obj/item/pipe/P = new /obj/item/pipe(loc, src)
+			new /obj/item/pipe(loc, src)
 
 			for (var/obj/machinery/meter/meter in T)
 				if (meter.target == src)
 					new /obj/item/pipe_meter(T)
 					qdel(meter)
-
-			P.dir = dir
-
 			qdel(src)
 
 /obj/machinery/atmospherics/proc/change_color(var/new_color)
@@ -182,29 +178,15 @@
 
 	level = 1
 
-	pipe_type = PIPE_SIMPLE_STRAIGHT
+	rotate_class = PIPE_ROTATE_TWODIR
+	connect_dir_type = SOUTH | NORTH // Overridden if dir is not a cardinal for bent pipes. For straight pipes this is correct.
 
-/obj/machinery/atmospherics/pipe/simple/New()
-	..()
-
+/obj/machinery/atmospherics/pipe/simple/Initialize()
+	. = ..()
 	// Pipe colors and icon states are handled by an image cache - so color and icon should
 	//  be null. For mapping purposes color is defined in the object definitions.
 	icon = null
 	alpha = 255
-
-	switch(dir)
-		if(SOUTH || NORTH)
-			initialize_directions = SOUTH|NORTH
-		if(EAST || WEST)
-			initialize_directions = EAST|WEST
-		if(NORTHEAST)
-			initialize_directions = NORTH|EAST
-		if(NORTHWEST)
-			initialize_directions = NORTH|WEST
-		if(SOUTHEAST)
-			initialize_directions = SOUTH|EAST
-		if(SOUTHWEST)
-			initialize_directions = SOUTH|WEST
 
 /obj/machinery/atmospherics/pipe/simple/hide(var/i)
 	if(istype(loc, /turf/simulated))
@@ -216,9 +198,10 @@
 		..()
 	else if(leaking)
 		parent.mingle_with_turf(loc, volume)
-		if(!sound_token && parent.air.return_pressure())
+		var/air = parent.air && parent.air.return_pressure()
+		if(!sound_token && air)
 			update_sound(1)
-		else if(sound_token && !parent.air.return_pressure())
+		else if(sound_token && !air)
 			update_sound(0)
 	else
 		. = PROCESS_KILL
@@ -251,12 +234,6 @@
 	smoke.set_up(1,0, src.loc, 0)
 	smoke.start()
 	qdel(src)
-
-/obj/machinery/atmospherics/pipe/simple/proc/normalize_dir()
-	if(dir==3)
-		set_dir(1)
-	else if(dir==12)
-		set_dir(4)
 
 /obj/machinery/atmospherics/pipe/simple/Destroy()
 	if(node1)
@@ -308,7 +285,6 @@
 
 /obj/machinery/atmospherics/pipe/simple/atmos_init()
 	..()
-	normalize_dir()
 	var/node1_dir
 	var/node2_dir
 
@@ -364,7 +340,6 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
-	pipe_type = PIPE_SCRUBBERS_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/visible/supply
 	name = "Air supply pipe"
@@ -373,7 +348,6 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
-	pipe_type = PIPE_SUPPLY_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/visible/yellow
 	color = PIPE_COLOR_YELLOW
@@ -400,7 +374,6 @@
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
-	pipe_type = PIPE_FUEL_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/hidden
 	icon_state = "intact"
@@ -414,7 +387,6 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
-	pipe_type = PIPE_SCRUBBERS_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/hidden/supply
 	name = "Air supply pipe"
@@ -423,7 +395,6 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
-	pipe_type = PIPE_SUPPLY_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow
 	color = PIPE_COLOR_YELLOW
@@ -450,14 +421,12 @@
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
-	pipe_type = PIPE_FUEL_STRAIGHT
 
 /obj/machinery/atmospherics/pipe/manifold
 	icon = 'icons/atmos/manifold.dmi'
 	icon_state = ""
 	name = "pipe manifold"
 	desc = "A manifold composed of regular pipes."
-	pipe_type = PIPE_MANIFOLD
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
 
 	dir = SOUTH
@@ -468,21 +437,12 @@
 	level = 1
 
 	pipe_class = PIPE_CLASS_TRINARY
+	connect_dir_type = NORTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold/New()
-	..()
+/obj/machinery/atmospherics/pipe/manifold/Initialize()
+	. = ..()
 	alpha = 255
 	icon = null
-
-	switch(dir)
-		if(NORTH)
-			initialize_directions = EAST|SOUTH|WEST
-		if(SOUTH)
-			initialize_directions = WEST|NORTH|EAST
-		if(EAST)
-			initialize_directions = SOUTH|WEST|NORTH
-		if(WEST)
-			initialize_directions = NORTH|EAST|SOUTH
 
 /obj/machinery/atmospherics/pipe/manifold/hide(var/i)
 	if(istype(loc, /turf/simulated))
@@ -723,7 +683,6 @@
 	icon_state = ""
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes."
-	pipe_type = PIPE_MANIFOLD4W
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
 
 	dir = SOUTH
@@ -735,9 +694,11 @@
 	level = 1
 
 	pipe_class = PIPE_CLASS_QUATERNARY
+	rotate_class = PIPE_ROTATE_ONEDIR
+	connect_dir_type = NORTH | SOUTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold4w/New()
-	..()
+/obj/machinery/atmospherics/pipe/manifold4w/Initialize()
+	. = ..()
 	alpha = 255
 	icon = null
 
@@ -993,7 +954,6 @@
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = ""
 	level = 2
-	pipe_type = PIPE_CAP
 	volume = 35
 
 	dir = SOUTH
@@ -1001,10 +961,6 @@
 	build_icon_state = "cap"
 
 	var/obj/machinery/atmospherics/node
-
-/obj/machinery/atmospherics/pipe/cap/New()
-	..()
-	initialize_directions = dir
 
 /obj/machinery/atmospherics/pipe/cap/hide(var/i)
 	if(istype(loc, /turf/simulated))
@@ -1073,7 +1029,6 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
-	pipe_type = PIPE_SCRUBBERS_CAP
 
 /obj/machinery/atmospherics/pipe/cap/visible/supply
 	name = "supply pipe endcap"
@@ -1082,14 +1037,12 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
-	pipe_type = PIPE_SUPPLY_CAP
 
 /obj/machinery/atmospherics/pipe/cap/visible/fuel
 	name = "fuel pipe endcap"
 	desc = "An endcap for fuel pipes."
 	color = PIPE_COLOR_ORANGE
 	connect_types = CONNECT_TYPE_FUEL
-	pipe_type = PIPE_FUEL_CAP
 
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
@@ -1103,7 +1056,6 @@
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
-	pipe_type = PIPE_SCRUBBERS_CAP
 
 /obj/machinery/atmospherics/pipe/cap/hidden/supply
 	name = "supply pipe endcap"
@@ -1112,14 +1064,12 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
-	pipe_type = PIPE_SUPPLY_CAP
 
 /obj/machinery/atmospherics/pipe/cap/hidden/fuel
 	name = "fuel pipe endcap"
 	desc = "An endcap for fuel pipes."
 	color = PIPE_COLOR_ORANGE
 	connect_types = CONNECT_TYPE_FUEL
-	pipe_type = PIPE_FUEL_CAP
 
 /obj/machinery/atmospherics/pipe/vent
 	icon = 'icons/obj/atmospherics/pipe_vent.dmi'
@@ -1136,13 +1086,7 @@
 	initialize_directions = SOUTH
 
 	var/build_killswitch = 1
-	pipe_type = PIPE_UVENT
 	build_icon_state = "uvent"
-
-
-/obj/machinery/atmospherics/pipe/vent/New()
-	initialize_directions = dir
-	..()
 
 /obj/machinery/atmospherics/pipe/vent/high_volume
 	name = "Larger vent"
@@ -1210,9 +1154,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/universal
 	name="Universal pipe adapter"
 	desc = "An adapter for regular, supply, scrubbers, and fuel pipes."
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	icon_state = "map_universal"
-	pipe_type = PIPE_UNIVERSAL
 	build_icon_state = "universal"
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon(var/safety = 0)
@@ -1247,7 +1190,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal
 	name="Universal pipe adapter"
 	desc = "An adapter for regular, supply and scrubbers pipes."
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	icon_state = "map_universal"
 
 /obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon(var/safety = 0)

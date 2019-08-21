@@ -23,7 +23,7 @@
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
 		for(var/g in gas_data.gases)
-			if(g != "oxygen" && g != "nitrogen")
+			if(g != GAS_OXYGEN && g != GAS_NITROGEN)
 				scrubbing_gas += g
 
 
@@ -87,17 +87,9 @@
 	//src.update_icon()
 	src.updateDialog()
 
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_ai(var/mob/user)
-	src.add_hiddenprint(user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_ghost(var/mob/user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/scrubber/attack_hand(var/mob/user)
-	if((. = ..()))
-		return
+/obj/machinery/portable_atmospherics/powered/scrubber/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/scrubber/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data[0]
@@ -142,6 +134,17 @@
 		update_icon()
 
 
+//Broken scrubber Used in hanger atmoshperic storage
+/obj/machinery/portable_atmospherics/powered/scrubber/broken
+	construct_state = /decl/machine_construction/default/panel_open
+	panel_open = 1
+
+/obj/machinery/portable_atmospherics/powered/scrubber/broken/Initialize()
+	. = ..()
+	var/part = uninstall_component(/obj/item/weapon/stock_parts/power/battery/buildable/stock)
+	if(part)
+		qdel(part)
+
 //Huge scrubber
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "Huge Air Scrubber"
@@ -152,7 +155,7 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
 
 	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc)
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 12)
+	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	power_rating = 100000 //100 kW ~ 135 HP
 
@@ -167,8 +170,11 @@
 
 	name = "[name] (ID [id])"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(var/mob/user as mob)
-		to_chat(usr, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(mob/user)
+	if((. = ..()))
+		return
+	to_chat(user, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
+	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
 	overlays.Cut()

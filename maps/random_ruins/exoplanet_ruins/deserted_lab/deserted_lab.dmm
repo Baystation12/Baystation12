@@ -83,13 +83,11 @@
 /turf/template_noop,
 /area/template_noop)
 "at" = (
-/obj/structure/bed/nest,
 /obj/random/loot,
 /mob/living/simple_animal/hostile/voxslug,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "au" = (
-/obj/structure/alien/node,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "av" = (

@@ -8,6 +8,8 @@
 	idle_power_usage = 1
 	active_power_usage = 5
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/suppressing = FALSE
 	var/mob/living/carbon/human/victim = null
@@ -51,39 +53,33 @@
 			return
 	return ..()
 
-/obj/machinery/optable/attack_ai(var/mob/user)
-	attack_hand(user)
-
 /obj/machinery/optable/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/optable/attack_hand(var/mob/user)
-	if(component_attack_hand(user))
-		return TRUE
-
+/obj/machinery/optable/physical_attack_hand(var/mob/user)
 	if(MUTATION_HULK in user.mutations)
 		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
 		src.set_density(0)
 		qdel(src)
-		return
+		return TRUE
 
 	if(!victim)
 		to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
-		return
+		return TRUE
 
 	if(user != victim && !suppressing) // Skip checks if you're doing it to yourself or turning it off, this is an anti-griefing mechanic more than anything.
 		user.visible_message("<span class='warning'>\The [user] begins switching on \the [src]'s neural suppressor.</span>")
 		if(!do_after(user, 30, src) || !user || !src || user.incapacitated() || !user.Adjacent(src))
-			return
+			return TRUE
 		if(!victim)
 			to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
-			return
+			return TRUE
 
 	suppressing = !suppressing
 	user.visible_message("<span class='notice'>\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor.</span>")
-
+	return TRUE
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -141,7 +137,7 @@
 
 /obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
 	var/mob/living/M = user
-	if(user.stat || user.restrained() || !check_table(user) || !iscarbon(target))
+	if(user.stat || user.restrained() || !iscarbon(target) || !check_table(target))
 		return
 	if(istype(M))
 		take_victim(target,user)

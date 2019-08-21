@@ -89,7 +89,7 @@
 			damage = 2
 	visible_message("<span class='warning'>\The [src] slices open a finger and begins to chant and paint symbols on the floor.</span>", "<span class='notice'>[self]</span>", "You hear chanting.")
 	if(do_after(src, timer))
-		pay_for_rune(cost * damage)
+		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
 		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
@@ -105,10 +105,10 @@
 		return
 	..()
 
-/mob/proc/pay_for_rune(var/blood)
+/mob/proc/remove_blood_simple(var/blood)
 	return
 
-/mob/living/carbon/human/pay_for_rune(var/blood)
+/mob/living/carbon/human/remove_blood_simple(var/blood)
 	if(should_have_organ(BP_HEART))
 		vessel.remove_reagent(/datum/reagent/blood, blood)
 
@@ -297,7 +297,7 @@ var/list/Tier4Runes = list(
 		return
 
 	message_cult_communicate()
-	pay_for_rune(3)
+	remove_blood_simple(3)
 
 	var/input = input(src, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
 	if(!input)

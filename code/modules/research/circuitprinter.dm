@@ -29,7 +29,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/Process()
 	..()
-	if(stat)
+	if(stat & (BROKEN | NOPOWER))
 		update_icon()
 		return
 	if(queue.len == 0)
@@ -81,7 +81,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state) && linked_console.linked_imprinter)
+	if(istype(new_state) && linked_console)
 		linked_console.linked_imprinter = null
 		linked_console = null
 
@@ -112,7 +112,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	if(!istype(O, /obj/item/stack/material))
 		to_chat(user, "<span class='notice'>You cannot insert this item into \the [src]!</span>")
 		return 0
-	if(stat)
+	if(stat & (BROKEN | NOPOWER))
 		return 1
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)

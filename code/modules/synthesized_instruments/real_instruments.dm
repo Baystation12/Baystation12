@@ -195,6 +195,7 @@
 /datum/real_instrument/Destroy()
 	QDEL_NULL(player)
 	owner = null
+	return ..()
 
 /obj/structure/synthesized_instrument
 	var/datum/real_instrument/real_instrument

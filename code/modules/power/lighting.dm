@@ -405,20 +405,17 @@
 
 // attack with hand - remove tube/bulb
 // if hands aren't protected and the light is on, burn the player
-/obj/machinery/light/attack_hand(mob/user)
-
-	add_fingerprint(user)
-
+/obj/machinery/light/physical_attack_hand(mob/living/user)
 	if(!lightbulb)
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
-		return
+		return TRUE
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass")
 			broken()
-			return
+			return TRUE
 
 	// make it burn hands if not wearing fire-insulated gloves
 	if(on)
@@ -438,25 +435,17 @@
 
 		if(prot > 0 || (MUTATION_COLD_RESISTANCE in user.mutations))
 			to_chat(user, "You remove the [get_fitting_name()]")
-		else if(MUTATION_TK in user.mutations)
+		else if(istype(user) && user.psi && !user.psi.suppressed && user.psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT)
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 		else
 			to_chat(user, "You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
-			return				// if burned, don't remove the light
+			return TRUE				// if burned, don't remove the light
 	else
 		to_chat(user, "You remove the [get_fitting_name()].")
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
-
-
-/obj/machinery/light/attack_tk(mob/user)
-	if(!lightbulb)
-		to_chat(user, "There is no [get_fitting_name()] in this light.")
-		return
-
-	to_chat(user, "You telekinetically remove the [get_fitting_name()].")
-	remove_bulb()
+	return TRUE
 
 // ghost attack - make lights flicker like an AI, but even spookier!
 /obj/machinery/light/attack_ghost(mob/user)
@@ -679,8 +668,7 @@
 
 		if(S.reagents.has_reagent(/datum/reagent/toxin/phoron, 5))
 
-			log_admin("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
-			message_admins("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
+			log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
 
 			rigged = 1
 
@@ -714,8 +702,7 @@
 /obj/item/weapon/light/proc/switch_on()
 	switchcount++
 	if(rigged)
-		log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
-		message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+		log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 		var/turf/T = get_turf(src.loc)
 		spawn(0)
 			sleep(2)
@@ -728,3 +715,8 @@
 	else if(sound_on)
 		playsound(src, sound_on, 75)
 	return status
+
+/obj/machinery/light/do_simple_ranged_interaction(var/mob/user)
+	if(lightbulb)
+		remove_bulb()
+	return TRUE

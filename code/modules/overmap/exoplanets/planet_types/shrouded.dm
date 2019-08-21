@@ -19,12 +19,17 @@
 	smoothing_iterations = 2
 	flora_prob = 10
 	large_flora_prob = 20
+	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
 	flora_diversity = 3
 	water_level_max = 3
 	water_level_min = 2
 	land_type = /turf/simulated/floor/exoplanet/shrouded
 	water_type = /turf/simulated/floor/exoplanet/water/shallow/tar
-	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/royalcrab, /mob/living/simple_animal/hostile/retaliate/jelly/alt, /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt)
+	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/royalcrab,
+					   /mob/living/simple_animal/hostile/retaliate/jelly/alt,
+					   /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt,
+					   /mob/living/simple_animal/hostile/leech)
+	megafauna_types = list(/obj/structure/leech_spawner)
 	plantcolors = list("#3c5434", "#2f6655", "#0e703f", "#495139", "#394c66", "#1a3b77", "#3e3166", "#52457c", "#402d56", "#580d6d")
 
 /area/exoplanet/shrouded

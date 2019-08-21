@@ -98,14 +98,14 @@
 	name = "broken cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 
 /obj/item/weapon/card/emag
 	desc = "It's a card with a magnetic strip attached to some circuitry."
 	name = "cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = list(TECH_MAGNET = 2, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	var/uses = 10
 
 	var/static/list/card_choices = list(
@@ -146,10 +146,11 @@ var/const/NO_EMAG_ACT = -50
 	set category = "Chameleon Items"
 	set src in usr
 
-	if(!ispath(card_choices[picked]))
-		return
+	if (!(usr.incapacitated()))
+		if(!ispath(card_choices[picked]))
+			return
 
-	disguise(card_choices[picked], usr)
+		disguise(card_choices[picked], usr)
 
 /obj/item/weapon/card/emag/examine(mob/user)
 	. = ..()
@@ -163,7 +164,7 @@ var/const/NO_EMAG_ACT = -50
 	item_state = "card-id"
 	slot_flags = SLOT_ID
 
-	var/access = list()
+	var/list/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
 	var/associated_account_number = 0
 	var/list/associated_email_login = list("login" = "", "password" = "")

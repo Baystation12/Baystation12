@@ -24,7 +24,7 @@ effective or pretty fucking useless.
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	item_state = "electronic"
-	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 3, TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 3, TECH_ESOTERIC = 3)
 
 	var/times_used = 0 //Number of times it's been used.
 	var/max_uses = 2

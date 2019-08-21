@@ -236,7 +236,7 @@
 
 				callHook("reassign_employee", list(id_card))
 		if("access")
-			if(href_list["allowed"] && computer && can_run(user, 1))
+			if(href_list["allowed"] && computer && can_run(user, 1) && id_card)
 				var/access_type = href_list["access_target"]
 				var/access_allowed = text2num(href_list["allowed"])
 				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
@@ -260,4 +260,4 @@
 	id_card.access |= accesses
 
 /datum/computer_file/program/card_mod/proc/authorized(var/obj/item/weapon/card/id/id_card)
-	return (access_change_ids in id_card.access)
+	return id_card && (access_change_ids in id_card.access)

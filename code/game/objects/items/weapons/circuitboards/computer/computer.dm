@@ -1,7 +1,3 @@
-#ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it!
-#endif
-
 /obj/item/weapon/stock_parts/circuitboard/message_monitor
 	name = T_BOARD("message monitor console")
 	build_path = /obj/machinery/computer/message_monitor
@@ -25,10 +21,6 @@
 /obj/item/weapon/stock_parts/circuitboard/atmos_alert
 	name = T_BOARD("atmospheric alert console")
 	build_path = /obj/machinery/computer/atmos_alert
-
-/obj/item/weapon/stock_parts/circuitboard/pod
-	name = T_BOARD("massdriver control")
-	build_path = /obj/machinery/computer/pod
 
 /obj/item/weapon/stock_parts/circuitboard/robotics
 	name = T_BOARD("robotics control console")
@@ -63,25 +55,9 @@
 	name = T_BOARD("power monitoring console")
 	build_path = /obj/machinery/computer/power_monitor
 
-/obj/item/weapon/stock_parts/circuitboard/olddoor
-	name = T_BOARD("DoorMex")
-	build_path = /obj/machinery/computer/pod/old
-
-/obj/item/weapon/stock_parts/circuitboard/syndicatedoor
-	name = T_BOARD("ProComp Executive")
-	build_path = /obj/machinery/computer/pod/old/syndicate
-
-/obj/item/weapon/stock_parts/circuitboard/swfdoor
-	name = T_BOARD("Magix")
-	build_path = /obj/machinery/computer/pod/old/swf
-
 /obj/item/weapon/stock_parts/circuitboard/prisoner
 	name = T_BOARD("prisoner management console")
 	build_path = /obj/machinery/computer/prisoner
-
-/obj/item/weapon/stock_parts/circuitboard/mecha_control
-	name = T_BOARD("exosuit control console")
-	build_path = /obj/machinery/computer/mecha
 
 /obj/item/weapon/stock_parts/circuitboard/rdservercontrol
 	name = T_BOARD("R&D server control console")
@@ -104,6 +80,12 @@
 /obj/item/weapon/stock_parts/circuitboard/splicer
 	name = T_BOARD("disease splicer")
 	build_path = /obj/machinery/computer/diseasesplicer
+	origin_tech = list(TECH_DATA = 5, TECH_BIO = 5)
+
+/obj/item/weapon/stock_parts/circuitboard/centrifuge
+	name = T_BOARD("isolation centrifuge")
+	build_path = /obj/machinery/computer/centrifuge
+	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 
 /obj/item/weapon/stock_parts/circuitboard/helm
 	name = T_BOARD("helm control console")
@@ -117,20 +99,9 @@
 	name = T_BOARD("navigation console")
 	build_path = /obj/machinery/computer/ship/navigation
 
-/obj/item/weapon/stock_parts/circuitboard/mining_shuttle
-	name = T_BOARD("mining shuttle console")
-	build_path = /obj/machinery/computer/shuttle_control/mining
-	origin_tech = list(TECH_DATA = 2)
-
-/obj/item/weapon/stock_parts/circuitboard/engineering_shuttle
-	name = T_BOARD("engineering shuttle console")
-	build_path = /obj/machinery/computer/shuttle_control/engineering
-	origin_tech = list(TECH_DATA = 2)
-
-/obj/item/weapon/stock_parts/circuitboard/research_shuttle
-	name = T_BOARD("research shuttle console")
-	build_path = /obj/machinery/computer/shuttle_control/research
-	origin_tech = list(TECH_DATA = 2)
+/obj/item/weapon/stock_parts/circuitboard/sensors
+	name = T_BOARD("sensors console")
+	build_path = /obj/machinery/computer/ship/sensors
 
 /obj/item/weapon/stock_parts/circuitboard/area_atmos
 	name = T_BOARD("area air control console")
@@ -145,3 +116,7 @@
 /obj/item/weapon/stock_parts/circuitboard/account_database
 	name = T_BOARD("accounts uplink terminal")
 	build_path = /obj/machinery/computer/account_database
+
+/obj/item/weapon/stock_parts/circuitboard/guestpass
+	name = T_BOARD("guest pass terminal")
+	build_path = /obj/machinery/computer/guestpass

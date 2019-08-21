@@ -22,12 +22,13 @@
 
 	var/list/ports = new()
 
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 
 	pipe_class = PIPE_CLASS_OMNI
+	connect_dir_type = SOUTH | NORTH | EAST | WEST
 
-/obj/machinery/atmospherics/omni/New()
-	..()
+/obj/machinery/atmospherics/omni/Initialize()
+	. = ..()
 	icon_state = "base"
 
 	ports = new()
@@ -96,13 +97,9 @@
 		new /obj/item/pipe(loc, src)
 		qdel(src)
 
-/obj/machinery/atmospherics/omni/attack_hand(user as mob)
-	if(..())
-		return
-
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/omni/interface_interact(mob/user)
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/machinery/atmospherics/omni/proc/build_icons()
 	if(!check_icon_cache())

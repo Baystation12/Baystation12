@@ -70,8 +70,8 @@
 		letter.icon_state = "paper_words"
 
 		var/gift_path = pick(possible_gifts)
-		// 0.1% chance to get a rare gift (effectively a 0.00025% chance when the event happens)
-		if(rand(1,1000) == 1)
+		// 15% chance to get a rare gift
+		if(prob(15))
 			gift_path = pick(rare_gifts)
 
 		var/obj/item/gift = new gift_path()

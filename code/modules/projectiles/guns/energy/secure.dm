@@ -65,6 +65,7 @@
 	use_external_power = 1
 	one_hand_penalty = 0
 	has_safety = FALSE
+	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/weapon/gun/energy/gun/secure/mounted/Initialize()
 	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)

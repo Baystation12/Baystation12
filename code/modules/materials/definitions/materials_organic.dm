@@ -117,19 +117,6 @@
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
 
-/material/leather
-	name = MATERIAL_LEATHER
-	icon_colour = "#5c4831"
-	stack_origin_tech = list(TECH_MATERIAL = 2)
-	flags = MATERIAL_PADDING
-	ignition_point = T0C+300
-	melting_point = T0C+300
-	conductive = 0
-	stack_type = null
-	hidden_from_codex = TRUE
-	construction_difficulty = MATERIAL_NORMAL_DIY
-	value = 3
-
 /material/carpet
 	name = MATERIAL_CARPET
 	display_name = "red"
@@ -143,3 +130,146 @@
 	conductive = 0
 	stack_type = null
 	construction_difficulty = MATERIAL_NORMAL_DIY
+
+/material/skin
+	name = MATERIAL_SKIN_GENERIC
+	stack_type = /obj/item/stack/material/generic/skin
+	icon_colour = "#9e8c72"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+300
+	melting_point = T0C+300
+	conductive = 0
+	hidden_from_codex = TRUE
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	value = 1
+	var/tans_to = MATERIAL_LEATHER_GENERIC
+
+/material/skin/lizard
+	name = MATERIAL_SKIN_LIZARD
+	icon_colour = "#626952"
+	tans_to = MATERIAL_LEATHER_LIZARD
+
+/material/skin/insect
+	name = MATERIAL_SKIN_CHITIN
+	icon_colour = "#7a726d"
+	tans_to = MATERIAL_LEATHER_CHITIN
+
+/material/skin/fur
+	name = MATERIAL_SKIN_FUR
+	icon_colour = "#7a726d"
+	tans_to = MATERIAL_LEATHER_FUR
+
+/material/skin/fur/gray
+	name = MATERIAL_SKIN_FUR_GRAY
+
+/material/skin/fur/white
+	name = MATERIAL_SKIN_FUR_WHITE
+
+/material/skin/fur/orange
+	name = MATERIAL_SKIN_FUR_ORANGE
+	icon_colour = COLOR_ORANGE
+
+/material/skin/fur/black
+	name = MATERIAL_SKIN_FUR_BLACK
+	icon_colour = COLOR_GRAY20
+
+/material/skin/fur/heavy
+	name = MATERIAL_SKIN_FUR_HEAVY
+	icon_colour = COLOR_GUNMETAL
+
+/material/skin/goat
+	name = MATERIAL_SKIN_GOATHIDE
+	icon_colour = COLOR_SILVER
+
+/material/skin/cow
+	name = MATERIAL_SKIN_COWHIDE
+	icon_colour = COLOR_GRAY40
+
+/material/skin/shark
+	name = MATERIAL_SKIN_SHARK
+	icon_colour = COLOR_PURPLE_GRAY
+
+/material/skin/fish
+	name = MATERIAL_SKIN_FISH
+	icon_colour = COLOR_BOTTLE_GREEN
+
+/material/skin/fish/purple
+	name = MATERIAL_SKIN_FISH_PURPLE
+	icon_colour = COLOR_PALE_PURPLE_GRAY
+
+/material/skin/feathers
+	name = MATERIAL_SKIN_FEATHERS
+	icon_colour = COLOR_SILVER
+
+/material/skin/feathers/purple
+	name = MATERIAL_SKIN_FEATHERS_PURPLE
+	icon_colour = COLOR_PALE_PURPLE_GRAY
+
+/material/skin/feathers/blue
+	name = MATERIAL_SKIN_FEATHERS_BLUE
+	icon_colour = COLOR_SKY_BLUE
+
+/material/skin/feathers/green
+	name = MATERIAL_SKIN_FEATHERS_GREEN
+	icon_colour = COLOR_BOTTLE_GREEN
+
+/material/skin/feathers/brown
+	name = MATERIAL_SKIN_FEATHERS_BROWN
+	icon_colour = COLOR_BEASTY_BROWN
+
+/material/skin/feathers/red
+	name = MATERIAL_SKIN_FEATHERS_RED
+	icon_colour = COLOR_RED
+
+/material/skin/feathers/black
+	name = MATERIAL_SKIN_FEATHERS_BLACK
+	icon_colour = COLOR_GRAY15
+
+/material/bone
+	name = MATERIAL_BONE_GENERIC
+	sheet_singular_name = "length"
+	sheet_plural_name = "lengths"
+	icon_colour = "#f0edc7"
+	stack_type = /obj/item/stack/material/generic/bone
+	ignition_point = T0C+1100
+	melting_point = T0C+1800
+	conductive = 0
+	hidden_from_codex = TRUE
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	hitsound = 'sound/weapons/smash.ogg'
+	hardness = 45
+	weight = 18
+	construction_difficulty = 1
+	value = 1
+
+/material/bone/fish
+	name = MATERIAL_BONE_FISH
+	hardness = 20
+	weight = 13
+
+/material/bone/cartilage
+	name = MATERIAL_BONE_CARTILAGE
+	hardness = 0
+	weight = 10
+
+/material/leather
+	name = MATERIAL_LEATHER_GENERIC
+	icon_colour = "#5c4831"
+	stack_origin_tech = list(TECH_MATERIAL = 2)
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+300
+	melting_point = T0C+300
+	conductive = 0
+	stack_type = /obj/item/stack/material/generic/skin
+	hidden_from_codex = TRUE
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	value = 3
+
+/material/leather/lizard
+	name = MATERIAL_LEATHER_LIZARD
+
+/material/leather/fur
+	name = MATERIAL_LEATHER_FUR
+
+/material/leather/chitin
+	name = MATERIAL_LEATHER_CHITIN

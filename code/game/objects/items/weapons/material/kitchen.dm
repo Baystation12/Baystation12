@@ -14,6 +14,8 @@
 	edge = 0
 	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	default_material = MATERIAL_ALUMINIUM
+
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
 
@@ -70,6 +72,22 @@
 	force_divisor = 0.1 //2 when wielded with weight 20 (steel)
 
 /obj/item/weapon/material/kitchen/utensil/spoon/plastic
+	default_material = MATERIAL_PLASTIC
+
+/obj/item/weapon/material/kitchen/utensil/spork
+	name = "spork"
+	desc = "It's a spork. It's much like a fork, but much blunter."
+	icon_state = "spork"
+
+/obj/item/weapon/material/kitchen/utensil/spork/plastic
+	default_material = MATERIAL_PLASTIC
+
+/obj/item/weapon/material/kitchen/utensil/foon
+	name = "foon"
+	desc = "It's a foon. It's much like a spoon, but much sharper."
+	icon_state = "foon"
+
+/obj/item/weapon/material/kitchen/utensil/foon/plastic
 	default_material = MATERIAL_PLASTIC
 
  /*

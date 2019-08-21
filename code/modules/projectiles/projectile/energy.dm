@@ -130,37 +130,79 @@
 	agony = 70
 	damage_type = BURN
 	vacuum_traversal = 0
+	var/min_dizziness_amt = 60
+	var/med_dizziness_amt = 120
+	var/max_dizziness_amt = 300
 
 /obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
-	to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
+
+	if(!istype(M))
+		return
+
+	to_chat(M, SPAN_DANGER("You hear a loud roar!"))
+
 	var/ear_safety = 0
-	var/mob/living/carbon/human/H = M
-	if(iscarbon(M))
-		if(ishuman(M))
-			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_safety += 2
-			if(MUTATION_HULK in M.mutations)
-				ear_safety += 1
-			if(istype(H.head, /obj/item/clothing/head/helmet))
-				ear_safety += 1
-		if(ear_safety == 1)
-			M.make_dizzy(120)
-		else if (ear_safety > 1)
-			M.make_dizzy(60)
-		else if (!ear_safety)
-			M.make_dizzy(300)
-			M.ear_damage += rand(1, 10)
-			M.ear_deaf = max(M.ear_deaf,15)
-		if (M.ear_damage >= 15)
-			to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
-			if (prob(M.ear_damage - 5))
-				to_chat(M, "<span class='danger'>You can't hear anything!</span>")
-				M.set_sdisability(DEAF)
-		else
-			if (M.ear_damage >= 5)
-				to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
-		M.update_icons()
+	if(M.get_sound_volume_multiplier() < 0.2)
+		ear_safety += 2
+	if(MUTATION_HULK in M.mutations)
+		ear_safety += 1
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(istype(H.head, /obj/item/clothing/head/helmet))
+			ear_safety += 1
+
+	if(!ear_safety)
+		M.make_dizzy(max_dizziness_amt)
+		M.ear_damage += rand(1, 10)
+		M.ear_deaf = max(M.ear_deaf,15)
+	else if(ear_safety > 1)
+		M.make_dizzy(min_dizziness_amt)
+	else
+		M.make_dizzy(med_dizziness_amt)
+
+	if(M.ear_damage >= 15)
+		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
+		if(prob(M.ear_damage - 5))
+			to_chat(M, SPAN_DANGER("You can't hear anything!"))
+			M.set_sdisability(DEAF)
+	else
+		if(M.ear_damage >= 5)
+			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
 
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
 	bang(target)
 	. = ..()
+
+/obj/item/projectile/energy/plasmastun/sonic
+	name = "sonic pulse"
+	icon_state = "sound"
+	fire_sound = 'sound/effects/basscannon.ogg'
+	damage = 5
+	armor_penetration = 40
+	damage_type = BRUTE
+	vacuum_traversal = 0
+	penetration_modifier = 0.2
+	penetrating = 1
+	min_dizziness_amt = 10
+	med_dizziness_amt = 60
+	max_dizziness_amt = 120
+
+/obj/item/projectile/energy/plasmastun/sonic/bang(var/mob/living/carbon/M)
+	..()
+	if(istype(M, /atom/movable) && M.simulated && !M.anchored)
+		M.throw_at(get_edge_target_turf(M, get_dir(src, M)), rand(1,5), 6)
+
+/obj/item/projectile/energy/plasmastun/sonic/weak
+	agony = 70
+
+/obj/item/projectile/energy/plasmastun/sonic/strong
+	damage = 20
+	penetrating = 1
+
+/obj/item/projectile/energy/darkmatter
+	name = "dark matter pellet"
+	icon_state = "dark_pellet"
+	fire_sound = 'sound/weapons/eLuger.ogg'
+	damage = 10
+	armor_penetration = 35
+	damage_type = BRUTE

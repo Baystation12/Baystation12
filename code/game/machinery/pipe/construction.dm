@@ -6,7 +6,6 @@ Buildable meters
 /obj/item/pipe
 	name = "pipe"
 	desc = "A pipe."
-	var/pipe_type = 0
 	var/pipename
 	var/connect_types = CONNECT_TYPE_REGULAR
 	force = 7
@@ -20,32 +19,25 @@ Buildable meters
 	dir = SOUTH
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
+	var/rotate_class = PIPE_ROTATE_STANDARD
 
 /obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P)
 	. = ..()
 	if(!P)
 		return
 	if(!P.dir)
-		set_dir(2)
+		set_dir(SOUTH)
 	else
 		set_dir(P.dir)
-	name = P.name
+	SetName(P.name)
 	desc = P.desc
-	if(P.pipe_type < PIPE_UTILITY_START)//Utility pipes should not be adjusted.
-		if(P.dir == WEST|NORTH|EAST || P.dir == NORTH|EAST|SOUTH || P.dir == EAST|SOUTH|WEST || P.dir == SOUTH|WEST|NORTH)			
-			pipe_type = P.pipe_type			
-		else if(P.dir != NORTH|SOUTH || P.dir != EAST|WEST)
-			pipe_type = P.pipe_type + 1			
-		else			
-			pipe_type = P.pipe_type
-	else		
-		pipe_type = P.pipe_type
 
 	connect_types = P.connect_types
 	color = P.pipe_color
 	icon = P.build_icon
 	icon_state = P.build_icon_state
 	pipe_class = P.pipe_class
+	rotate_class = P.rotate_class
 	constructed_path = P.type
 
 //called when a turf is attacked with a pipe item
@@ -57,77 +49,23 @@ Buildable meters
 		return ..()
 
 /obj/item/pipe/rotate(mob/user)
-	..()
-
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_DVALVE, PIPE_SVALVE, PIPE_FUEL_STRAIGHT))
-		if(dir==2)
-			set_dir(1)
-		else if(dir==8)
-			set_dir(4)
-	else if (pipe_type in list (PIPE_MANIFOLD4W, PIPE_SUPPLY_MANIFOLD4W, PIPE_SCRUBBERS_MANIFOLD4W, PIPE_FUEL_MANIFOLD4W))
-		set_dir(2)
-	return
+	. = ..()
+	sanitize_dir()
 
 /obj/item/pipe/Move()
-	..()
-	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT, PIPE_HE_BENT, PIPE_FUEL_BENT))	&& (src.dir in GLOB.cardinal))
-		src.set_dir(src.dir|turn(src.dir, 90))
-	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_DVALVE, PIPE_SVALVE, PIPE_FUEL_STRAIGHT))
-		if(dir==2)
-			set_dir(1)
-		else if(dir==8)
-			set_dir(4)
-	return
+	var/old_dir = dir
+	. = ..()
+	set_dir(old_dir)
 
-// returns all pipe's endpoints
-
-/obj/item/pipe/proc/get_pipe_dir()
-	if (!dir)
-		return 0
-	var/flip = turn(dir, 180)
-	var/cw = turn(dir, -90)
-	var/acw = turn(dir, 90)
-
-	switch(pipe_type)
-		if(	PIPE_SIMPLE_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_JUNCTION ,	PIPE_PUMP ,	PIPE_VOLUME_PUMP , PIPE_PASSIVE_GATE ,	PIPE_MVALVE, PIPE_DVALVE, PIPE_SVALVE,\
-			PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_FUEL_STRAIGHT)
-			return dir|flip
-		if(PIPE_MANIFOLD4W, PIPE_SUPPLY_MANIFOLD4W, PIPE_SCRUBBERS_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER, PIPE_FUEL_MANIFOLD4W)
-			return dir|flip|cw|acw
-		if(PIPE_MANIFOLD, PIPE_SUPPLY_MANIFOLD, PIPE_SCRUBBERS_MANIFOLD, PIPE_FUEL_MANIFOLD)
-			return flip|cw|acw
-		if(PIPE_MTVALVE)
-			return dir|flip|cw
-		if(PIPE_MTVALVEM)
-			return dir|flip|acw
-		else
-			return dir
-	return 0
-
-/obj/item/pipe/proc/get_pdir() //endpoints for regular pipes
-	var/flip = turn(dir, 180)
-
-	if (!(pipe_type in list(PIPE_HE_STRAIGHT, PIPE_HE_BENT, PIPE_JUNCTION)))
-		return get_pipe_dir()
-	switch(pipe_type)
-		if(PIPE_HE_STRAIGHT,PIPE_HE_BENT)
-			return 0
-		if(PIPE_JUNCTION)
-			return flip
-	return 0
-
-// return the h_dir (heat-exchange pipes) from the type and the dir
-
-/obj/item/pipe/proc/get_hdir() //endpoints for h/e pipes
-	switch(pipe_type)
-		if(PIPE_HE_STRAIGHT)
-			return get_pipe_dir()
-		if(PIPE_HE_BENT)
-			return get_pipe_dir()
-		if(PIPE_JUNCTION)
-			return dir
-		else
-			return 0
+/obj/item/pipe/proc/sanitize_dir()
+	switch(rotate_class)
+		if(PIPE_ROTATE_TWODIR)
+			if(dir==2)
+				set_dir(1)
+			else if(dir==8)
+				set_dir(4)
+		if(PIPE_ROTATE_ONEDIR)
+			set_dir(2)
 
 /obj/item/pipe/attack_self(mob/user as mob)
 	return rotate(user)
@@ -195,22 +133,16 @@ Buildable meters
 	return 0
 
 /obj/item/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	. = ..()
-	//*
 	if(!isWrench(W))
 		return ..()
-	if (!isturf(src.loc))
+	if (!isturf(loc))
 		return 1
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_DVALVE, PIPE_SVALVE, PIPE_FUEL_STRAIGHT))
-		if(dir==2)
-			set_dir(1)
-		else if(dir==8)
-			set_dir(4)
-	else if (pipe_type in list(PIPE_MANIFOLD4W, PIPE_SUPPLY_MANIFOLD4W, PIPE_SCRUBBERS_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER, PIPE_FUEL_MANIFOLD4W))
-		set_dir(2)
-	var/pipe_dir = get_pipe_dir()
 
-	for(var/obj/machinery/atmospherics/M in src.loc)
+	sanitize_dir()
+	var/obj/machinery/atmospherics/fake_machine = constructed_path
+	var/pipe_dir = base_pipe_initialize_directions(dir, initial(fake_machine.connect_dir_type))
+
+	for(var/obj/machinery/atmospherics/M in loc)
 		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
 			to_chat(user, "<span class='warning'>There is already a pipe of the same type at this location.</span>")
 			return 1
@@ -223,13 +155,7 @@ Buildable meters
 
 	P.pipe_color = color
 	P.set_dir(dir)
-	P.initialize_directions = pipe_dir
-
-	if(P.pipe_type == PIPE_TANK)
-		P.level = 1//Tanks are always on top.
-	else
-		var/turf/T = P.loc
-		P.level = (!T.is_plating() ? 2 : 1)
+	P.set_initial_level()
 
 	if(P.pipe_class == PIPE_CLASS_UNARY)
 		if(build_unary(P, pipefailtext))
@@ -258,12 +184,9 @@ Buildable meters
 		"You hear ratchet.")
 	qdel(src)	// remove the pipe item
 
-	return
-
 /obj/item/pipe/injector
 	name = "Injector"
 	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
-	pipe_type = PIPE_INJECTOR
 	connect_types =  CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	icon = 	'icons/atmos/injector.dmi'
 	icon_state = "map_injector"
@@ -283,7 +206,6 @@ Buildable meters
 	set_dir(I.dir)
 	name = I.name
 	desc = I.desc
-	pipe_type = I.pipe_type
 	connect_types = I.connect_types
 
 /obj/item/pipe_meter

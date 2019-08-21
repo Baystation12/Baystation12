@@ -105,7 +105,7 @@
 "ap" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock";
+	id_tag = "xil_airlock";
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
@@ -178,13 +178,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/skrellscoutship/dock)
 "aA" = (
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -24;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
@@ -225,14 +221,10 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
 "aF" = (
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_x = 0;
-	pixel_y = -32;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
@@ -386,14 +378,10 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
 "ba" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/skrell{
 	dir = 2;
-	icon_state = "alarm0";
 	pixel_x = 0;
-	pixel_y = 32;
-	req_access = list("ACCESS_SKRELLSCOUT");
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/fit)
@@ -663,7 +651,7 @@
 "bH" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock";
+	id_tag = "xil_airlock";
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
@@ -672,8 +660,8 @@
 	locked = 1
 	},
 /obj/effect/shuttle_landmark/skrellscoutship/start,
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	pixel_x = 32;
 	req_access = list("ACCESS_SKRELLSCOUT")
@@ -747,8 +735,8 @@
 /area/ship/skrellscoutship/crew/hallway/d1)
 "bO" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	req_access = list("ACCESS_SKRELLSCOUT")
 	},
@@ -784,25 +772,17 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
 "bU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_x = 24
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1039,7 +1019,7 @@
 /area/ship/skrellscoutship/crew/hallway/d1)
 "cu" = (
 /obj/structure/cable,
-/obj/machinery/power/smes/buildable/preset/torch/engine_main{
+/obj/machinery/power/smes/buildable/preset/skrell{
 	charge = 5e+006;
 	input_attempt = 1;
 	input_level = 200000;
@@ -1204,15 +1184,15 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock"
+	id_tag = "xil_airlock"
 	},
 /obj/machinery/door/airlock/external/glass{
 	frequency = 1291;
 	id_tag = "xil_solar_outer";
 	locked = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	pixel_y = 32;
 	req_access = list("ACCESS_SKRELLSCOUT")
@@ -1274,17 +1254,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
-	},
-/obj/machinery/power/apc/critical{
-	req_access = list("ACCESS_SKRELLSCOUT");
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /obj/structure/cable{
 	d2 = 8;
 	icon_state = "0-8"
@@ -1297,13 +1266,9 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
 "cL" = (
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -24;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock/alt)
@@ -1532,7 +1497,7 @@
 "dm" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	id = "xil_airlock";
+	id_tag = "xil_airlock";
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
@@ -1540,8 +1505,8 @@
 	id_tag = "xil_air_outer";
 	locked = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "xil_airlock";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
 	name = "Airlock Blast Doors";
 	pixel_x = 32;
 	req_access = list("ACCESS_SKRELLSCOUT")
@@ -1556,13 +1521,9 @@
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/dock/alt)
 "dn" = (
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock/alt)
@@ -1594,7 +1555,6 @@
 /area/ship/skrellscoutship/maintenance/power)
 "dq" = (
 /obj/structure/ladder,
-/turf/space,
 /turf/simulated/open,
 /area/ship/skrellscoutship/solars)
 "dr" = (
@@ -1722,14 +1682,10 @@
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/crew/rec)
 "rz" = (
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_x = 0;
-	pixel_y = -32;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_y = -32
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -1776,8 +1732,8 @@
 /area/ship/skrellscoutship/crew/rec)
 "wS" = (
 /obj/structure/table/steel,
-/obj/machinery/button/remote/blast_door{
-	id = "xil_bridge";
+/obj/machinery/button/blast_door{
+	id_tag = "xil_bridge";
 	name = "Mess Hall Blast Doors"
 	},
 /turf/simulated/floor/tiled/skrell/red,
@@ -1793,14 +1749,10 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/skrell{
 	dir = 2;
-	icon_state = "alarm0";
 	pixel_x = 0;
-	pixel_y = 32;
-	req_access = list("ACCESS_SKRELLSCOUT");
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/toilets)
@@ -1911,14 +1863,10 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/machinery/alarm{
-	req_access = list("ACCESS_SKRELLSCOUT");
+/obj/machinery/alarm/skrell{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_x = 0;
-	pixel_y = -32;
-	target_temperature = 313.15;
-	temperature = 313.15
+	pixel_y = -32
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled/skrell,
@@ -6713,7 +6661,7 @@ aa
 aa
 aa
 Mg
-Bz
+Mg
 Mg
 Mg
 Mg

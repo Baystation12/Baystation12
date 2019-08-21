@@ -17,11 +17,9 @@
 	else
 		icon_state = "meter_off"
 
-/obj/machinery/psi_meter/attack_hand(var/mob/user)
+/obj/machinery/psi_meter/interface_interact(var/mob/user)
 	interact(user)
-
-/obj/machinery/psi_meter/attack_ai(var/mob/user)
-	interact(user)
+	return TRUE
 
 /obj/machinery/psi_meter/interact(var/mob/user)
 

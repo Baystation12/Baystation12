@@ -666,7 +666,6 @@
 	name = "Officer's Mess"
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
-	req_access = list(list(access_bridge, access_kitchen))
 
 /area/command/pathfinder
 	name = "\improper Pathfinder's Office"
@@ -831,10 +830,6 @@
 	name = "\improper Permanent Brig"
 	icon_state = "brig"
 
-/area/vacant/office
-	name = "\improper Unused Office"
-	icon_state = "conference"
-
 /area/vacant/bar
 	name = "\improper Hidden Bar"
 	icon_state = "bar"
@@ -916,6 +911,11 @@
 	icon_state = "mining"
 	req_access = list(list(access_mining, access_explorer, access_xenoarch))
 
+/area/quartermaster/expedition/atmos
+	name = "\improper Hangar Atmospheric Storage"
+	icon_state = "mining"
+	req_access = list(list(access_mining, access_explorer, access_xenoarch))
+
 /area/quartermaster/exploration
 	name = "\improper Exploration Equipment"
 	icon_state = "exploration"
@@ -983,6 +983,10 @@
 /area/crew_quarters/head/aux
 	name = "\improper First Deck Head"
 
+/area/crew_quarters/head/sauna
+	name = "\improper Sauna"
+	icon_state = "sauna"
+
 /area/crew_quarters/gym
 	name = "\improper Gym"
 	icon_state = "fitness"
@@ -1031,6 +1035,10 @@
 	name = "\improper Adherent Maintenence"
 	icon_state = "robotics"
 
+/area/crew_quarters/office
+	name = "\improper Computer Lab"
+	icon_state = "conference"
+
 /area/holocontrol
 	name = "\improper Holodeck Control"
 	icon_state = "Holodeck"
@@ -1050,16 +1058,36 @@
 	icon_state = "Warden"
 	req_access = list(access_armory)
 
-/area/security/equipment
-	name = "\improper Security Equipment"
+/area/security/storage
+	name = "\improper Security - Equipment Storage"
+	icon_state = "security"
+	req_access = list(access_brig)
+
+/area/security/armoury
+	name = "\improper Security - Armory"
+	icon_state = "Warden"
+	req_access = list(access_armory)
+
+/area/security/detectives_office
+	name = "\improper Security - Investigations Office"
+	icon_state = "detective"
+	sound_env = MEDIUM_SOFTFLOOR
+	req_access = list(access_forensics_lockers)
+
+/area/security/locker
+	name = "\improper Security - Locker Room"
 	icon_state = "security"
 
 /area/security/evidence
-	name = "\improper Security Evidence Storage"
+	name = "\improper Security - Evidence Storage"
 	icon_state = "security"
 
 /area/security/processing
-	name = "\improper Security Processing"
+	name = "\improper Security - Processing"
+	icon_state = "security"
+
+/area/security/questioning
+	name = "\improper Security - Interview Room"
 	icon_state = "security"
 
 /area/security/wing
@@ -1608,34 +1636,18 @@
 	requires_power = 0
 	req_access = list(access_cent_storage)
 
-// Security
+// Secure
 
 /area/prison/solitary
 	name = "Solitary Confinement"
 	icon_state = "brig"
 	req_access = list(access_brig)
 
-/area/security/armoury
-	name = "\improper Security - Armory"
-	icon_state = "Warden"
-	req_access = list(access_armory)
-
-/area/security/detectives_office
-	name = "\improper Security - Forensic Office"
-	icon_state = "detective"
-	sound_env = MEDIUM_SOFTFLOOR
-	req_access = list(access_forensics_lockers)
-
 /area/security/nuke_storage
 	name = "\improper Vault"
 	icon_state = "nuke_storage"
 	area_flags = AREA_FLAG_IS_NOT_PERSISTENT
 	req_access = list(access_heads_vault)
-
-/area/security/range
-	name = "\improper Decommissioned Firing Range"
-	icon_state = "firingrange"
-	req_access = list(access_solgov_crew)
 
 // Crew
 

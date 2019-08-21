@@ -4,7 +4,6 @@
 	name = "bluespace artillery control"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "computer"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/bsa
 
 	core_skill = SKILL_PILOT
 	var/skill_offset = SKILL_ADEPT - 1 //After which skill level it starts to matter. -1, because we have to index from zero
@@ -76,7 +75,7 @@ obj/machinery/computer/ship/bsa/proc/is_valid_setup()
 	middle = null
 	back = null
 
-/obj/machinery/computer/ship/bsa/proc/get_calbiration()
+/obj/machinery/computer/ship/bsa/proc/get_calibration()
 	var/list/calresult[caldigit]
 	for(var/i = 1 to caldigit)
 		if(calibration[i] == calexpected[i])
@@ -97,7 +96,7 @@ obj/machinery/computer/ship/bsa/proc/is_valid_setup()
 /obj/machinery/computer/ship/bsa/proc/cal_accuracy()
 	var/top = 0
 	var/divisor = caldigit * 2 //maximum possible value, aka 100% accuracy
-	for(var/i in get_calbiration())
+	for(var/i in get_calibration())
 		top += i
 	return round(top * 100 / divisor)
 
@@ -144,10 +143,10 @@ obj/machinery/computer/ship/bsa/proc/is_valid_setup()
 		data["nopower"] = !data["faillink"] && (!front.powered() || !middle.powered() || !back.powered())
 		data["skill"] = user.get_skill_value(core_skill) > skill_offset
 
-		var/charge = "<b>UNKNOWN ERROR</b>"
+		var/charge = SPAN_BOLD("UNKNOWN ERROR")
 		switch(get_charge_type())
 			if(BSA_NOCHARGE)
-				charge = "<b>ERROR</b>: No valid charge detected."
+				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
 			if(BSA_DROPPOD)
 				charge = "HERMES"
 			else

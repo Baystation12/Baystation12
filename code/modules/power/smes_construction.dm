@@ -59,7 +59,7 @@
 /obj/machinery/power/smes/buildable
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
-	var/datum/wires/smes/wires
+	wires = /datum/wires/smes
 	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
 	var/RCon = 1				// Cut to disable AI and remote control.
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
@@ -68,8 +68,7 @@
 	charge = 0
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/buildable
-	uncreated_component_parts = null
-	maximum_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 6, /obj/item/weapon/stock_parts = 12)
+	maximum_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 6, /obj/item/weapon/stock_parts = 15)
 	interact_offline = TRUE
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
@@ -91,7 +90,6 @@
 
 
 /obj/machinery/power/smes/buildable/Destroy()
-	QDEL_NULL(wires)
 	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 	return ..()
@@ -114,27 +112,11 @@
 // Proc: attack_ai()
 // Parameters: None
 // Description: AI requires the RCON wire to be intact to operate the SMES.
-/obj/machinery/power/smes/buildable/attack_ai()
+/obj/machinery/power/smes/buildable/attack_ai(mob/user)
 	if(RCon)
 		..()
 	else // RCON wire cut
-		to_chat(usr, "<span class='warning'>Connection error: Destination Unreachable.</span>")
-
-	// Cyborgs standing next to the SMES can play with the wiring.
-	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && panel_open)
-		wires.Interact(usr)
-
-/obj/machinery/power/smes/buildable/Initialize()
-	. = ..()
-	wires = new /datum/wires/smes(src)
-
-// Proc: attack_hand()
-// Parameters: None
-// Description: Opens the UI as usual, and if cover is removed opens the wiring panel.
-/obj/machinery/power/smes/buildable/attack_hand()
-	..()
-	if(panel_open)
-		wires.Interact(usr)
+		to_chat(user, "<span class='warning'>Connection error: Destination Unreachable.</span>")
 
 // Proc: recalc_coils()
 // Parameters: None
@@ -186,8 +168,7 @@
 		var/obj/item/clothing/gloves/G = h_user.gloves
 		if(G.siemens_coefficient == 0)
 			user_protected = 1
-	log_game("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100")
-	message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
+	log_and_message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
 
 
 	switch (intensity)
@@ -258,8 +239,7 @@
 
 			if (prob(50))
 				// Added admin-notifications so they can stop it when griffed.
-				log_game("SMES explosion imminent.")
-				message_admins("SMES explosion imminent.")
+				log_and_message_admins("SMES explosion imminent.")
 				src.ping("DANGER! Magnetic containment field unstable! Containment field failure imminent!")
 				failing = 1
 				// 30 - 60 seconds and then BAM!
@@ -273,7 +253,7 @@
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
 					qdel(src)
 
-/obj/machinery/power/smes/buildable/proc/check_total_system_failure(user)
+/obj/machinery/power/smes/buildable/proc/check_total_system_failure(var/mob/user)
 	// Probability of failure if safety circuit is disabled (in %)
 	var/failure_probability = capacity ? round((charge / capacity) * 100) : 0
 
@@ -281,7 +261,7 @@
 	if (failure_probability < 5)
 		failure_probability = 0
 
-	if (failure_probability && prob(failure_probability))
+	if (failure_probability && prob(failure_probability * (1.5 - (user.get_skill_value(SKILL_ELECTRICAL) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))))// 0.5 - 1.5, step of 0.25
 		total_system_failure(failure_probability, user)
 		return TRUE
 
@@ -324,12 +304,12 @@
 /obj/machinery/power/smes/buildable/cannot_transition_to(state_path, mob/user)
 	if(failing)
 		return SPAN_WARNING("\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
-	if(charge > (capacity/100) && safeties_enabled)
-		return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
-	if(output_attempt || input_attempt)
-		return SPAN_WARNING("Turn \the [src] off first!")
 
 	if(state_path == /decl/machine_construction/default/deconstructed)
+		if(charge > (capacity/100) && safeties_enabled)
+			return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
+		if(output_attempt || input_attempt)
+			return SPAN_WARNING("Turn \the [src] off first!")
 		if(!(stat & BROKEN))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
@@ -340,6 +320,12 @@
 	return ..()
 
 /obj/machinery/power/smes/buildable/can_add_component(obj/item/weapon/stock_parts/component, mob/user)
+	if(charge > (capacity/100) && safeties_enabled)
+		to_chat(user,  SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!"))
+		return FALSE
+	if(output_attempt || input_attempt)
+		to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
+		return FALSE
 	. = ..()
 	if(!.)
 		return

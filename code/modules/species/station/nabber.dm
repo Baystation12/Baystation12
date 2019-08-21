@@ -16,6 +16,8 @@
 	min_age = 8
 	max_age = 40
 
+	skin_material = MATERIAL_SKIN_CHITIN
+	bone_material = null
 	speech_sounds = list('sound/voice/bug.ogg')
 	speech_chance = 2
 
@@ -47,7 +49,7 @@
 	total_health = 200
 	brute_mod = 0.9
 	burn_mod =  1.35
-	natural_armour_values = list(melee = 30, bullet = 15, laser = 0, energy = 0, bomb = 30, bio = 100, rad = 10)
+	natural_armour_values = list(melee = 30, bullet = 15, laser = 0, energy = 0, bomb = 30, bio = 100, rad = 5)
 
 	gluttonous = GLUT_SMALLER
 	mob_size = MOB_LARGE
@@ -73,11 +75,11 @@
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 
 	has_organ = list(    // which required-organ checks are conducted.
-		BP_BRAIN =    /obj/item/organ/internal/brain/nabber,
-		BP_EYES =     /obj/item/organ/internal/eyes/nabber,
-		BP_TRACH =    /obj/item/organ/internal/lungs/nabber,
+		BP_BRAIN =    /obj/item/organ/internal/brain/insectoid/nabber,
+		BP_EYES =     /obj/item/organ/internal/eyes/insectoid/nabber,
+		BP_TRACH =    /obj/item/organ/internal/lungs/insectoid/nabber,
+		BP_LIVER =    /obj/item/organ/internal/liver/insectoid/nabber,
 		BP_HEART =    /obj/item/organ/internal/heart/open,
-		BP_LIVER =    /obj/item/organ/internal/liver/nabber,
 		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_PHORON =   /obj/item/organ/internal/phoron,
 		BP_ACETONE =  /obj/item/organ/internal/acetone,
@@ -85,17 +87,17 @@
 		)
 
 	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest/nabber),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin/nabber),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/nabber),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/nabber),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/nabber),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/nabber),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/nabber),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/nabber),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/nabber),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/nabber),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/nabber)
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest/insectoid/nabber),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin/insectoid/nabber),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/insectoid/nabber),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/insectoid),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
 		)
 
 	base_skin_colours = list(
@@ -135,9 +137,10 @@
 
 /datum/species/nabber/New()
 	equip_adjust = list(
-		slot_back_str =    list("[NORTH]" = list("x" = 0, "y" = 7), "[EAST]" = list("x" = 0, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" = 0, "y" = 8)),
-		slot_belt_str =    list("[NORTH]" = list("x" = 0, "y" = 0), "[EAST]" = list("x" = 8, "y" = 0), "[SOUTH]" = list("x" = 0, "y" = 0), "[WEST]" = list("x" = -8, "y" = 0)),
-		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = 10), "[EAST]" = list("x" = 0, "y" = 11), "[SOUTH]" = list("x" = 0, "y" = 11), "[WEST]" = list("x" = 0, "y" = 11)),
+		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
+		slot_back_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
+		slot_belt_str =    list("[NORTH]" = list("x" = 0, "y" = 0),  "[EAST]" = list("x" = 8, "y" = 0),  "[SOUTH]" = list("x" = 0, "y" = 0),  "[WEST]" = list("x" = -8, "y" = 0)),
+		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = 10), "[EAST]" = list("x" = 0, "y" = 11), "[SOUTH]" = list("x" = 0, "y" = 11), "[WEST]" = list("x" = 0, "y" = 11))
 	)
 	..()
 
@@ -215,8 +218,8 @@
 	H.remove_cloaking_source(src)
 
 	var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
-	if(istype(B,/obj/item/organ/internal/brain/nabber))
-		var/obj/item/organ/internal/brain/nabber/N = B
+	if(istype(B,/obj/item/organ/internal/brain/insectoid/nabber))
+		var/obj/item/organ/internal/brain/insectoid/nabber/N = B
 
 		tally += N.lowblood_tally * 2
 	return tally

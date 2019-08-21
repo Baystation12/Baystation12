@@ -5,10 +5,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	icon_keyboard = "teleport_key"
 	icon_screen = "helm"
 	light_color = "#7faaff"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/helm
 	core_skill = SKILL_PILOT
 	var/autopilot = 0
-	var/manual_control = 0
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
@@ -57,36 +55,18 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 				linked.decelerate()
 			// Heading does not match direction
 			else if (heading & ~direction)
-				linked.accelerate(turn(heading & ~direction, 180))
+				linked.accelerate(turn(heading & ~direction, 180), accellimit)
 			// All other cases, move toward direction
 			else if (speed + acceleration <= speedlimit)
-				linked.accelerate(direction)
-
+				linked.accelerate(direction, accellimit)
 		return
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
-	if(manual_control && linked)
+	if(viewing_overmap(user) && linked)
 		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
 			direction = turn(direction,pick(90,-90))
 		linked.relaymove(user, direction, accellimit)
 		return 1
-
-/obj/machinery/computer/ship/helm/check_eye(var/mob/user as mob)
-	if (!manual_control)
-		return -1
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		return -1
-	return 0
-
-/obj/machinery/computer/ship/helm/attack_hand(var/mob/user as mob)
-	if(..())
-		manual_control = 0
-		return
-
-	if(!isAI(user))
-		operator_skill = user.get_skill_value(core_skill)
-		if(linked)
-			user.reset_view(linked)
 
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -109,7 +89,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit*1000)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
-		data["manual_control"] = manual_control
+		data["manual_control"] = viewing_overmap(user)
 		data["canburn"] = linked.can_burn()
 		data["accellimit"] = accellimit*1000
 
@@ -227,7 +207,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		autopilot = !autopilot
 
 	if (href_list["manual"])
-		manual_control = !manual_control
+		viewing_overmap(user) ? unlook(user) : look(user)
 
 	add_fingerprint(user)
 	updateUsrDialog()
@@ -235,8 +215,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/navigation
 	name = "navigation console"
-	circuit = /obj/item/weapon/stock_parts/circuitboard/nav
-	var/viewing = 0
 	icon_keyboard = "generic_key"
 	icon_screen = "helm"
 
@@ -258,7 +236,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	data["speed"] = round(linked.get_speed()*1000, 0.01)
 	data["accel"] = round(linked.get_acceleration()*1000, 0.01)
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
-	data["viewing"] = viewing
+	data["viewing"] = viewing_overmap(user)
 
 	if(linked.get_speed())
 		data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
@@ -272,22 +250,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/ship/navigation/check_eye(var/mob/user as mob)
-	if (!viewing)
-		return -1
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		viewing = 0
-		return -1
-	return 0
-
-/obj/machinery/computer/ship/navigation/attack_hand(var/mob/user as mob)
-	if(..())
-		viewing = 0
-		return
-
-	if(viewing && linked &&!isAI(user))
-		user.reset_view(linked)
-
 /obj/machinery/computer/ship/navigation/OnTopic(var/mob/user, var/list/href_list)
 	if(..())
 		return TOPIC_HANDLED
@@ -296,7 +258,5 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
-		viewing = !viewing
-		if(viewing && !isAI(user))
-			user.reset_view(linked)
+		viewing_overmap(user) ? unlook(user) : look(user)
 		return TOPIC_REFRESH

@@ -9,8 +9,7 @@
 #define TECH_COMBAT "combat"
 #define TECH_MAGNET "magnets"
 #define TECH_DATA "programming"
-#define TECH_ILLEGAL "syndicate"
-#define TECH_ARCANE "arcane"
+#define TECH_ESOTERIC "esoteric"
 
 #define IMPRINTER	0x1	//For circuits. Uses glass/chemicals.
 #define PROTOLATHE	0x2	//New stuff. Uses glass/metal/chemicals

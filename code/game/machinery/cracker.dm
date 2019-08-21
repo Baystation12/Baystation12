@@ -21,19 +21,14 @@
 /obj/machinery/portable_atmospherics/cracker/on_update_icon()
 	icon_state = (use_power == POWER_USE_ACTIVE) ? "cracker_on" : "cracker"
 
-/obj/machinery/portable_atmospherics/cracker/attack_ai(var/mob/user)
-	if(istype(user, /mob/living/silicon/ai) || user.Adjacent(src))
-		attack_hand(user)
-
-/obj/machinery/portable_atmospherics/cracker/attack_hand(var/mob/user)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/portable_atmospherics/cracker/interface_interact(mob/user)
 	if(use_power == POWER_USE_IDLE)
 		update_use_power(POWER_USE_ACTIVE)
 	else
 		update_use_power(POWER_USE_IDLE)
 	user.visible_message(SPAN_NOTICE("\The [user] [use_power == POWER_USE_ACTIVE ? "engages" : "disengages"] \the [src]."))
 	update_icon()
+	return TRUE
 
 /obj/machinery/portable_atmospherics/cracker/attackby(var/obj/item/thing, var/mob/user)
 	// remove deuterium as a reagent
@@ -80,8 +75,8 @@
 			// Gas production.
 			var/datum/gas_mixture/produced = new
 			var/gen_amt = min(1, (gas_generated_per_tick * (consuming/fluid_consumption_per_tick)))
-			produced.adjust_gas("oxygen",  gen_amt)
-			produced.adjust_gas("hydrogen", gen_amt * 2)
+			produced.adjust_gas(GAS_OXYGEN,  gen_amt)
+			produced.adjust_gas(GAS_HYDROGEN, gen_amt * 2)
 			produced.temperature = T20C //todo water temperature
 			air_contents.merge(produced)
 

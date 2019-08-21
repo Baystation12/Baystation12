@@ -15,7 +15,7 @@
 		if(reflexively)
 			strength *= reflexive_modifier
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
-		animate(pixel_z = 0, time = 3, easing = SINE_EASING | EASE_OUT)
+		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
 		user.throw_at(get_turf(target), strength, 1, user)
 		user.pass_flags = old_pass_flags
 		user.does_spin = last_does_spin

@@ -84,19 +84,9 @@ datum/track/proc/GetTrack()
 		else
 			overlays += "[state_base]-running"
 
-/obj/machinery/media/jukebox/interact(mob/user)
-	if(!anchored)
-		to_chat(usr, "<span class='warning'>You must secure \the [src] first.</span>")
-		return
-
-	if(stat & (NOPOWER|BROKEN))
-		to_chat(usr, "\The [src] doesn't appear to function.")
-		return
-
-	ui_interact(user)
-
 /obj/machinery/media/jukebox/CanUseTopic(user, state)
-	if(!anchored || inoperable())
+	if(!anchored)
+		to_chat(user, "<span class='warning'>You must secure \the [src] first.</span>")
 		return STATUS_CLOSE
 	return ..()
 
@@ -149,7 +139,7 @@ datum/track/proc/GetTrack()
 	for(var/mob/living/carbon/M in ohearers(6, src))
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
+			if(H.get_sound_volume_multiplier() < 0.2)
 				continue
 		M.sleeping = 0
 		M.stuttering += 20
@@ -163,11 +153,9 @@ datum/track/proc/GetTrack()
 	spawn(15)
 		explode()
 
-/obj/machinery/media/jukebox/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/media/jukebox/attack_hand(var/mob/user as mob)
-	interact(user)
+/obj/machinery/media/jukebox/interface_interact(var/mob/user)
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/media/jukebox/proc/explode()
 	walk_to(src,0)

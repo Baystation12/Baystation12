@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/energy/taser
-	name = "taser gun"
+	name = "electrolaser"
 	desc = "The NT Mk30 NL is a small, low capacity gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T design. It can switch between high and low intensity stun shots."
 	icon = 'icons/obj/guns/taser.dmi'
 	icon_state = "taser"
@@ -14,7 +14,7 @@
 		)
 
 /obj/item/weapon/gun/energy/taser/carbine
-	name = "taser carbine"
+	name = "electrolaser carbine"
 	desc = "The NT Mk44 NL is a high capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
 	icon = 'icons/obj/guns/taser_carbine.dmi'
 	icon_state = "tasercarbine"
@@ -34,13 +34,13 @@
 		)
 
 /obj/item/weapon/gun/energy/taser/mounted
-	name = "mounted taser gun"
+	name = "mounted electrolaser"
 	self_recharge = 1
 	use_external_power = 1
 	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/taser/mounted/cyborg
-	name = "taser gun"
+	name = "electrolaser"
 	max_shots = 6
 	recharge_time = 10 //Time it takes for shots to recharge (in ticks)
 
@@ -79,7 +79,7 @@
 	icon_state = "crossbow"
 	w_class = ITEM_SIZE_NORMAL
 	item_state = "crossbow"
-	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ESOTERIC = 5)
 	matter = list(MATERIAL_STEEL = 2000)
 	slot_flags = SLOT_BELT
 	silenced = 1

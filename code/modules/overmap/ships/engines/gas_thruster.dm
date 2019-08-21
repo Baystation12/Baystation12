@@ -47,19 +47,25 @@
 	power_rating = 7500			//7500 W ~ 10 HP
 	opacity = 1
 	density = 1
-	atmos_canpass = CANPASS_DENSITY
+	atmos_canpass = CANPASS_NEVER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	construct_state = /decl/machine_construction/default/panel_closed
 	var/on = 1
 	var/datum/ship_engine/gas_thruster/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/volume_per_burn = 20 //litres
 
+/obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return 0
+
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()
 	controller = new(src)
+	update_nearby_tiles(need_rebuild=1)
 
 /obj/machinery/atmospherics/unary/engine/Destroy()
 	QDEL_NULL(controller)
+	update_nearby_tiles()
 	. = ..()
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()
@@ -97,6 +103,8 @@
 		return 0
 	var/exhaust_dir = reverse_direction(dir)
 	var/datum/gas_mixture/removed = air_contents.remove_ratio(volume_per_burn * thrust_limit / air_contents.volume)
+	if(!removed)
+		return 0
 	. = calculate_thrust(removed)
 	playsound(loc, 'sound/machines/thruster.ogg', 100 * thrust_limit, 0, world.view * 4, 0.1)
 	if(network)
@@ -130,7 +138,7 @@
 /obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine
 	name = T_BOARD("gas thruster")
 	icon_state = "mcontroller"
-	build_path = /obj/machinery/atmospherics/unary/engine/
+	build_path = /obj/machinery/atmospherics/unary/engine
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 2)
 	req_components = list(
 							/obj/item/stack/cable_coil = 2,

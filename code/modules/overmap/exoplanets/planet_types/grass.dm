@@ -20,10 +20,14 @@
 /obj/effect/overmap/sector/exoplanet/grass/adapt_seed(var/datum/seed/S)
 	..()
 	var/carnivore_prob = rand(100)
-	if(carnivore_prob < 15)
+	if(carnivore_prob < 30)
 		S.set_trait(TRAIT_CARNIVOROUS,2)
-	else if(carnivore_prob < 30)
+		if(prob(75))
+			S.get_trait(TRAIT_STINGS, 1)
+	else if(carnivore_prob < 60)
 		S.set_trait(TRAIT_CARNIVOROUS,1)
+		if(prob(50))
+			S.get_trait(TRAIT_STINGS)
 	if(prob(15) || (S.get_trait(TRAIT_CARNIVOROUS) && prob(40)))
 		S.set_trait(TRAIT_BIOLUM,1)
 		S.set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
@@ -58,6 +62,7 @@
 	large_flora_prob = 50
 	flora_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
+	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna)
 
 	var/grass_color
 

@@ -1,6 +1,3 @@
-/var/const/meteor_wave_delay = 1 MINUTE //minimum wait between waves in tenths of seconds
-//set to at least 100 unless you want evarr ruining every round
-
 //Meteor groups, used for various random events and the Meteor gamemode.
 
 // Dust, used by space dust event and during earliest stages of meteor mode.

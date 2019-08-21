@@ -1,5 +1,6 @@
 /datum/unit_test/extensions
 	name = "EXTENSIONS template"
+	template = /datum/unit_test/extensions
 	async = 0
 
 /datum/unit_test/extensions/shall_initalize_as_expected

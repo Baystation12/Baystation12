@@ -6,7 +6,7 @@ jdk: openjdk8
 env:
   global:
     BYOND_MAJOR="512"
-    BYOND_MINOR="1467"
+    BYOND_MINOR="1472"
 
 # ALL MAPS MUST BE PRESENT HERE
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
@@ -39,3 +39,8 @@ addons:
 
 script:
   - test/run-test.sh
+
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL

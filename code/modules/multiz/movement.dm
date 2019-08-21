@@ -254,6 +254,8 @@
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
 		if(fall_damage())
 			for(var/mob/living/M in landing.contents)
+				if(M == src)
+					continue
 				visible_message("\The [src] hits \the [M.name]!")
 				M.take_overall_damage(fall_damage())
 
@@ -265,7 +267,7 @@
 		return 0
 	if(w_class == ITEM_SIZE_NO_CONTAINER)
 		return 100
-	return base_storage_cost(w_class)
+	return BASE_STORAGE_COST(w_class)
 
 /mob/living/carbon/human/handle_fall_effect(var/turf/landing)
 	if(species && species.handle_fall_special(src, landing))

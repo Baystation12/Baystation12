@@ -371,10 +371,11 @@
 		to_chat(user, "<span class='warning'>There is another [display_name()] here!</span>")
 		return FALSE
 
-	if (on_floor && !isfloor(user.loc))
+	var/turf/T = get_turf(user.loc)
+	if (on_floor && !T.is_floor())
 		to_chat(user, "<span class='warning'>\The [display_name()] must be constructed on the floor!</span>")
 		return FALSE
-	
+
 	return TRUE
 
 /*

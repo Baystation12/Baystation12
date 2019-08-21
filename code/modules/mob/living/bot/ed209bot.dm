@@ -52,7 +52,7 @@
 /mob/living/bot/secbot/ed209/handleRangedTarget()
 	RangedAttack(target)
 
-/mob/living/bot/secbot/ed209/RangedAttack(var/atom/A)
+/mob/living/bot/secbot/ed209/RangedAttack(var/atom/A, var/params)
 	if(last_shot + shot_delay > world.time)
 		to_chat(src, "You are not ready to fire yet!")
 		return TRUE
@@ -159,7 +159,7 @@
 
 		if(7)
 			if(istype(W, /obj/item/weapon/gun/energy/taser))
-				SetName("taser ED-209 assembly")
+				SetName("electrolaser ED-209 assembly")
 				build_step++
 				to_chat(user, "<span class='notice'>You add [W] to [src].</span>")
 				item_state = "ed209_taser"

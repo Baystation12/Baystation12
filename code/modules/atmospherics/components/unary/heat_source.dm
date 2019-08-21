@@ -12,6 +12,8 @@
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	base_type = /obj/machinery/atmospherics/unary/heater
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/max_temperature = T20C + 680
 	var/internal_volume = 600	//L
@@ -75,13 +77,9 @@
 
 	update_icon()
 
-/obj/machinery/atmospherics/unary/heater/attack_ai(mob/user)
+/obj/machinery/atmospherics/unary/heater/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/atmospherics/unary/heater/attack_hand(mob/user)
-	if(component_attack_hand(user))
-		return TRUE
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/atmospherics/unary/heater/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui

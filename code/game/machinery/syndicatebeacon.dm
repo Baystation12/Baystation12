@@ -19,8 +19,12 @@
 	var/selfdestructing = 0
 	var/charges = 1
 
-/obj/machinery/syndicate_beacon/attack_hand(var/mob/user as mob)
-	usr.set_machine(src)
+/obj/machinery/syndicate_beacon/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/syndicate_beacon/interact(var/mob/user)
+	user.set_machine(src)
 	var/dat = "<font color=#005500><i>Scanning [pick("retina pattern", "voice print", "fingerprints", "dna sequence")]...<br>Identity confirmed,<br></i></font>"
 	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
 		if(is_special_character(user))
@@ -62,7 +66,7 @@
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
 			GLOB.traitors.add_antagonist(N.mind)
 			GLOB.traitors.equip(N)
-			message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
+			log_and_message_admins("has accepted a traitor objective from a syndicate beacon.", M)
 
 
 	src.updateUsrDialog()
@@ -116,17 +120,15 @@
 		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
 
 
-/obj/machinery/power/singularity_beacon/attack_ai(mob/user as mob)
-	return
-
-
-/obj/machinery/power/singularity_beacon/attack_hand(var/mob/user as mob)
+/obj/machinery/power/singularity_beacon/physical_attack_hand(var/mob/user)
+	. = TRUE
 	if(anchored)
-		return active ? Deactivate(user) : Activate(user)
+		if(active)
+			Deactivate(user)
+		else
+			Activate(user)
 	else
 		to_chat(user, "<span class='danger'>You need to screw the beacon to the floor first!</span>")
-		return
-
 
 /obj/machinery/power/singularity_beacon/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isScrewdriver(W))

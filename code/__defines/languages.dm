@@ -24,8 +24,6 @@
 #define LANGUAGE_NABBER            "Serpentid"
 
 //Antag
-#define LANGUAGE_XENOPHAGE         "Xenophage"
-#define LANGUAGE_XENOPHAGE_GLOBAL  "Hivemind"
 #define LANGUAGE_CULT              "Cult"
 #define LANGUAGE_CULT_GLOBAL       "Occult"
 #define LANGUAGE_ALIUM             "Alium"
@@ -37,6 +35,9 @@
 #define LANGUAGE_DRONE_GLOBAL      "Drone Talk"
 #define LANGUAGE_CHANGELING_GLOBAL "Changeling"
 #define LANGUAGE_BORER_GLOBAL      "Cortical Link"
+#define LANGUAGE_MANTID_NONVOCAL   "Ascent-Glow"
+#define LANGUAGE_MANTID_VOCAL      "Ascent-Voc"
+#define LANGUAGE_MANTID_BROADCAST  "Worldnet"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.

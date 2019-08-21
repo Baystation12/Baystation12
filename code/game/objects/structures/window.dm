@@ -21,6 +21,7 @@
 	var/polarized = 0
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
+	rad_resistance_modifier = 0.5
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
@@ -173,10 +174,6 @@
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
 
-/obj/structure/window/attack_tk(mob/user as mob)
-	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
-	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
-
 /obj/structure/window/attack_hand(mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)
@@ -220,6 +217,11 @@
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
+
+/obj/structure/window/do_simple_ranged_interaction(var/mob/user)
+	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))
+	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
+	return TRUE
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
@@ -326,7 +328,7 @@
 
 	if (anchored)
 		to_chat(user, SPAN_NOTICE("\The [src] is secured to the floor!"))
-		return 
+		return
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
 	set_dir(turn(dir, 90))
@@ -489,13 +491,12 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
 	desc = "A remote control switch for electrochromic windows."
+	var/id
 	var/range = 7
-
-/obj/machinery/button/windowtint/attack_hand(mob/user as mob)
-	if(..())
-		return 1
-
-	toggle_tint()
+	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/apc
+	)
 
 /obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(isMultitool(W))
@@ -515,19 +516,18 @@
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
 
-/obj/machinery/button/windowtint/proc/toggle_tint()
-	use_power_oneoff(5)
-
-	active = !active
-	queue_icon_update()
+/obj/machinery/button/windowtint/activate()
+	if(operating)
+		return
 	for(var/obj/structure/window/W in range(src,range))
 		if(W.polarized && (W.id == src.id || !W.id))
 			W.toggle()
+	..()
 
 /obj/machinery/button/windowtint/power_change()
 	. = ..()
-	if(active && !powered(power_channel))
-		toggle_tint()
+	if(active && (stat & NOPOWER))
+		activate()
 
 /obj/machinery/button/windowtint/on_update_icon()
 	icon_state = "light[active]"

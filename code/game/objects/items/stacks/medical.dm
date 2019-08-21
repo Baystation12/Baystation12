@@ -320,6 +320,10 @@
 	heal_brute = 10
 	heal_burn =  10
 
+/obj/item/stack/medical/resin/drone
+	amount = 25
+	max_amount = 25
+
 /obj/item/stack/medical/resin/handmade
 	name = "resin globules"
 	desc = "A lump of slick, shiny resin. Used to repair damage to crystalline bodyparts."

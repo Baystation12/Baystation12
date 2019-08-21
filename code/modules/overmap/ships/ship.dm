@@ -58,11 +58,16 @@
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/ship/proc/get_acceleration()
-	return round(get_total_thrust()/vessel_mass, SHIP_MOVE_RESOLUTION)
+	return round(get_total_thrust()/get_vessel_mass(), SHIP_MOVE_RESOLUTION)
 
 //Does actual burn and returns the resulting acceleration
 /obj/effect/overmap/ship/proc/get_burn_acceleration()
-	return round(burn() / vessel_mass, SHIP_MOVE_RESOLUTION)
+	return round(burn() / get_vessel_mass(), SHIP_MOVE_RESOLUTION)
+
+/obj/effect/overmap/ship/proc/get_vessel_mass()
+	. = vessel_mass
+	for(var/obj/effect/overmap/ship/ship in src)
+		. += ship.get_vessel_mass()
 
 /obj/effect/overmap/ship/proc/get_speed()
 	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)

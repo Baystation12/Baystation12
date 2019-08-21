@@ -60,7 +60,7 @@
 		to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 
-/obj/machinery/cell_charger/attack_hand(mob/user)
+/obj/machinery/cell_charger/physical_attack_hand(mob/user)
 	if(charging)
 		user.put_in_hands(charging)
 		charging.add_fingerprint(user)
@@ -71,10 +71,7 @@
 		chargelevel = -1
 		set_power()
 		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-
-/obj/machinery/cell_charger/attack_robot(mob/user)
-	if(Adjacent(user)) // Borgs can remove the cell if they are near enough
-		attack_hand(user)
+		return TRUE
 
 /obj/machinery/cell_charger/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -83,11 +80,8 @@
 		charging.emp_act(severity)
 	..(severity)
 
-/obj/machinery/cell_charger/power_change()
-	if(..())
-		set_power()
-
 /obj/machinery/cell_charger/proc/set_power()
+	queue_icon_update()
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
 		update_use_power(POWER_USE_OFF)
 		return
@@ -95,7 +89,6 @@
 		update_use_power(POWER_USE_ACTIVE)
 	else
 		update_use_power(POWER_USE_IDLE)
-	queue_icon_update()
 
 /obj/machinery/cell_charger/Process()
 	. = ..()
@@ -103,4 +96,4 @@
 		return
 	. = 0
 	charging.give(active_power_usage*CELLRATE)
-	update_icon()
+	set_power()

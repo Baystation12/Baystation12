@@ -22,7 +22,6 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	var/blood_level = 0                  // How much blood this step can get on surgeon. 1 - hands, 2 - full body.
 	var/shock_level = 0	                 // what shock level will this step put patient on
 	var/delicate = 0                     // if this step NEEDS stable optable or can be done on any valid surface with no penalty
-	var/core_skill = SKILL_ANATOMY       // The skill that's checked for speed modifiers.
 	var/surgery_candidate_flags = 0      // Various bitflags for requirements of the surgery.
 	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements. 
 
@@ -53,6 +52,11 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	return 1
 
+/decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	if(delicate)
+		return SURGERY_SKILLS_DELICATE
+	else
+		return SURGERY_SKILLS_GENERIC
 
 // checks whether this step can be applied with the given user and target
 /decl/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -62,6 +66,10 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	if(istype(target) && target_zone)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(affected)
+			// Check if clothing is blocking access
+			var/obj/item/I = target.get_covering_equipped_item_by_zone(target_zone)
+			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
+				return FALSE
 			// Check various conditional flags.
 			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_ROBOTIC(affected)) || \
 			 ((surgery_candidate_flags & SURGERY_NO_CRYSTAL) && BP_IS_CRYSTAL(affected))   || \
@@ -120,12 +128,13 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	. = tool_quality(tool)
 	if(user == target)
 		. -= 10
-
-	if(!user.skill_check(SKILL_ANATOMY, SKILL_ADEPT + delicate))
-		. -= 10 * (SKILL_ADEPT + delicate - user.get_skill_value(SKILL_ANATOMY))
-
-	if(user.skill_check(SKILL_ANATOMY, SKILL_PROF))
-		. += 20
+	
+	var/skill_reqs = get_skill_reqs(user, target, tool)
+	for(var/skill in skill_reqs)
+		var/penalty = delicate ? 40 : 20
+		. -= max(0, penalty * (skill_reqs[skill] - user.get_skill_value(skill)))
+		if(user.skill_check(skill, SKILL_PROF))
+			. += 20
 
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -134,6 +143,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			. -= 20
 		if(H.eye_blind)
 			. -= 60
+
 	if(delicate)
 		if(user.slurring)
 			. -= 10
@@ -186,7 +196,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	else if(LAZYLEN(possible_surgeries) >= 1)
 		if(user.client) // In case of future autodocs.
 			S = input(user, "Which surgery would you like to perform?", "Surgery") as null|anything in possible_surgeries
-		if(S && !user.skill_check(S.core_skill, SKILL_BASIC))
+		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src)))
 			S = pick(possible_surgeries)
 
 	// We didn't find a surgery, or decided not to perform one.
@@ -213,7 +223,8 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			if(operation_data)
 				LAZYSET(M.surgeries_in_progress, zone, operation_data)
 				S.begin_step(user, M, zone, src)
-				var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
+				var/skill_reqs = S.get_skill_reqs(user, M, src)
+				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration)
 				if(prob(S.success_chance(user, M, src)) && do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)
 					handle_post_surgery()

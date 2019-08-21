@@ -23,6 +23,8 @@
 	var/shuttletarget = null
 	var/enroute = 0
 	var/stop_automation = FALSE //stops AI procs from running
+
+	var/can_pry = TRUE
 	var/pry_time = 7 SECONDS //time it takes for mob to pry open a door
 	var/pry_desc = "prying" //"X begins pry_desc the door!"
 
@@ -82,11 +84,6 @@
 			if (H.is_cloaked())
 				return FALSE
 
-	if(istype(A, /obj/mecha))
-		var/obj/mecha/M = A
-		if(!M.occupant)
-			return FALSE
-
 	return TRUE
 
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
@@ -142,10 +139,6 @@
 		var/mob/living/L = target_mob
 		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense,melee_damage_flags)
 		return L
-	if(istype(target_mob,/obj/mecha))
-		var/obj/mecha/M = target_mob
-		M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
-		return M
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -158,10 +151,6 @@
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	var/list/L = hearers(src, dist)
-
-	for (var/obj/mecha/M in mechas_list)
-		if (M.z == src.z && get_dist(src, M) <= dist)
-			L += M
 	return L
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
@@ -284,14 +273,15 @@
 				obstacle.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
 				return
 
-		for(var/obj/machinery/door/obstacle in targ)
-			if(obstacle.density)
-				if(!obstacle.can_open(1))
+		if(can_pry)
+			for(var/obj/machinery/door/obstacle in targ)
+				if(obstacle.density)
+					if(!obstacle.can_open(1))
+						return
+					face_atom(obstacle)
+					var/pry_time_holder = (obstacle.pry_mod * pry_time)
+					pry_door(src, pry_time_holder, obstacle)
 					return
-				face_atom(obstacle)
-				var/pry_time_holder = (obstacle.pry_mod * pry_time)
-				pry_door(src, pry_time_holder, obstacle)
-				return
 
 /mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
 	visible_message("<span class='warning'>\The [user] begins [pry_desc] at \the [pesky_door]!</span>")
@@ -302,3 +292,13 @@
 	else
 		visible_message("<span class='notice'>\The [user] is interrupted.</span>")
 		stop_automation = FALSE
+
+/mob/living/simple_animal/hostile/proc/can_perform_ability()
+	if(!can_act() || time_last_used_ability > world.time)
+		return FALSE
+	return TRUE
+
+/mob/living/simple_animal/hostile/proc/cooldown_ability(var/time)
+	if(!time)
+		time = ability_cooldown
+	time_last_used_ability = world.time + ability_cooldown

@@ -127,10 +127,9 @@
 			qdel(src)
 		return
 
-/obj/machinery/beehive/attack_hand(var/mob/user)
-	if((. = ..()))
-		return
+/obj/machinery/beehive/physical_attack_hand(var/mob/user)
 	if(!closed)
+		. = TRUE
 		if(honeycombs < 100)
 			to_chat(user, "<span class='notice'>There are no filled honeycombs.</span>")
 			return
@@ -142,10 +141,9 @@
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
 			--frames
-			update_icon()
+		update_icon()
 		if(honeycombs < 100)
 			to_chat(user, "<span class='notice'>You take all filled honeycombs out.</span>")
-		return
 
 /obj/machinery/beehive/Process()
 	if(closed && !smoked && bee_count)
@@ -172,6 +170,9 @@
 	icon_state = "centrifuge"
 	anchored = 1
 	density = 1
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/processing = 0
 	var/honey = 0

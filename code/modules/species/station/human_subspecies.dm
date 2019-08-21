@@ -115,3 +115,58 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+/datum/species/human/booster
+	name = SPECIES_BOOSTER
+	name_plural = "Boosters"
+	description = "The self-proclaimed 'boosters' are a loosely affiliated group of bio-tinkers, \
+	engineers and radical philosophers dedicated to expanding the definition of what it means \
+	to be human. Conservatives frown on their excessive recklessness, and most booster habitats \
+	are found on the outskirts of systems - some even linger at the edge of human space.<br><br>The \
+	shared Booster genotype is extremely unstable and liable for rapid, apparently random change, \
+	but is certainly both unique and remarkable in its ability to cope with the extremes that the \
+	Universe can throw at it."
+
+/datum/species/human/booster/New()
+	..()
+	slowdown =      pick(-0.5, 0, 0.5)
+	MULT_BY_RANDOM_COEF(brute_mod, 0.85, 1.15)
+	MULT_BY_RANDOM_COEF(burn_mod, 0.85, 1.15)
+	MULT_BY_RANDOM_COEF(toxins_mod, 0.85, 1.15)
+	MULT_BY_RANDOM_COEF(radiation_mod, 0.85, 1.15)
+	MULT_BY_RANDOM_COEF(flash_mod, 0.85, 1.15)
+
+/datum/species/human/mule
+	name = SPECIES_MULE
+	name_plural = "Mules"
+	description = "There are a huge number of 'uncurated' genetic lines in human space, many of which fall under the \
+	general header of baseline humanity. One recently discovered genotype is remarkable for both being deeply feral, \
+	in the sense that it still has many of the inherited diseases and weaknesses that plagued pre-expansion humanity, \
+	and for a strange affinity for psionic operancy. The Mules, as they are called, are born on the very edges of \
+	civilization, and are physically diminutive and unimposing, with scrawny, often deformed bodies. Their physiology \
+	rejects prosthetics and synthetic organs, and their lifespans are short, but their raw psionic potential is unmatched."
+
+	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
+	brute_mod =     1.25
+	burn_mod =      1.25
+	oxy_mod =       1.25
+	toxins_mod =    1.25
+	radiation_mod = 1.25
+	flash_mod =     1.25
+	blood_volume =  SPECIES_BLOOD_DEFAULT * 0.85
+	min_age =       18
+	max_age =       45
+
+/datum/species/human/mule/handle_post_spawn(var/mob/living/carbon/human/H)
+	if(!H.psi)
+		H.psi = new(H)
+		var/list/faculties = list("[PSI_COERCION]", "[PSI_REDACTION]", "[PSI_ENERGISTICS]", "[PSI_PSYCHOKINESIS]")
+		for(var/i = 1 to rand(2,3))
+			H.set_psi_rank(pick_n_take(faculties), 1)
+	H.psi.max_stamina = 70
+	var/obj/item/organ/external/E = pick(H.organs)
+	if(!BP_IS_ROBOTIC(E))
+		E.mutate()
+		E.limb_flags |= ORGAN_FLAG_DEFORMED
+		E.status |= ORGAN_DISFIGURED
+		E.status |= ORGAN_MUTATED

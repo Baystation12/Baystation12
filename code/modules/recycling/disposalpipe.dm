@@ -16,9 +16,8 @@
 	layer = DISPOSALS_PIPE_LAYER
 	var/base_icon_state	// initial icon state on map
 	var/sort_type = ""
-	var/subtype = 0
-	var/ptype = DISPOSAL_STRAIGHT
 	var/turn = DISPOSAL_FLIP_NONE
+	var/flipped_state // If it has a mirrored version, this is the typepath for it.
 	// new pipe, set the icon_state as on map
 
 /obj/structure/disposalpipe/Initialize()
@@ -26,7 +25,6 @@
 	alpha = 255
 	plane = ABOVE_PLATING_PLANE
 	base_icon_state = icon_state
-	return
 
 // pipe is deleted
 // ensure if holder is present, it is expelled
@@ -50,6 +48,10 @@ obj/structure/disposalpipe/Destroy()
 		if(H)
 			expel(H, T, 0)
 	. = ..()
+
+/obj/structure/disposalpipe/proc/on_build()
+	update()
+	update_icon()
 
 	// returns the direction of the next pipe object, given the entrance dir
 	// by default, returns the bitmask of remaining directions
@@ -274,7 +276,7 @@ obj/structure/disposalpipe/Destroy()
 
 // a straight or bent segment
 /obj/structure/disposalpipe/segment
-	icon_state = "pipe-s"
+	icon_state = "pipe-s" // Sadly this var stores state. "pipe-c" is corner. Should be changed, but requires huge map diff.
 	turn = DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/segment/Initialize()
@@ -283,15 +285,17 @@ obj/structure/disposalpipe/Destroy()
 		dpdir = dir | turn(dir, 180)
 	else
 		dpdir = dir | turn(dir, -90)
-		turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
+		turn = DISPOSAL_FLIP_RIGHT
 
 	update()
 	return
 
+/obj/structure/disposalpipe/segment/bent
+	icon_state = "pipe-c"
+
 ///// Z-Level stuff
 /obj/structure/disposalpipe/up
 	icon_state = "pipe-u"
-	ptype = DISPOSAL_UP
 
 /obj/structure/disposalpipe/up/Initialize()
 	. = ..()
@@ -342,7 +346,6 @@ obj/structure/disposalpipe/Destroy()
 
 /obj/structure/disposalpipe/down
 	icon_state = "pipe-d"
-	ptype = DISPOSAL_DOWN
 
 /obj/structure/disposalpipe/down/Initialize()
 	. = ..()
@@ -391,14 +394,19 @@ obj/structure/disposalpipe/Destroy()
 
 /obj/structure/disposalpipe/junction/yjunction
 	icon_state = "pipe-y"
-	ptype = DISPOSAL_JUNCTION_Y
 	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_RIGHT
+	flipped_state = null
+
+/obj/structure/disposalpipe/junction/mirrored
+	icon_state = "pipe-j2"
+	flipped_state = /obj/structure/disposalpipe/junction
+	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
 
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
 	icon_state = "pipe-j1"
-	ptype = DISPOSAL_JUNCTION1
 	turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
+	flipped_state = /obj/structure/disposalpipe/junction/mirrored
 
 /obj/structure/disposalpipe/junction/Initialize()
 	. = ..()
@@ -448,7 +456,6 @@ obj/structure/disposalpipe/Destroy()
 	icon_state = "pipe-tagger"
 	var/sort_tag = ""
 	var/partial = 0
-	ptype = DISPOSAL_TAGGER
 	turn = DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/tagger/proc/updatedesc()
@@ -496,7 +503,6 @@ obj/structure/disposalpipe/Destroy()
 	name = "partial package tagger"
 	icon_state = "pipe-tagger-partial"
 	partial = 1
-	ptype = DISPOSAL_TAGGER_PARTIAL
 	turn = DISPOSAL_FLIP_FLIP
 
 /obj/structure/disposalpipe/diversion_junction
@@ -510,8 +516,8 @@ obj/structure/disposalpipe/Destroy()
 	var/sortdir = 0
 	var/id_tag
 	var/obj/machinery/disposal_switch/linked
-	ptype = DISPOSAL_DIVERSION
-	turn = DISPOSAL_FLIP_FLIP
+	turn = DISPOSAL_FLIP_FLIP | DISPOSAL_FLIP_RIGHT
+	flipped_state = /obj/structure/disposalpipe/diversion_junction/flipped
 
 /obj/structure/disposalpipe/diversion_junction/proc/updatedesc()
 	desc = initial(desc)
@@ -534,6 +540,11 @@ obj/structure/disposalpipe/Destroy()
 	updatedir()
 	updatedesc()
 	update()
+
+/obj/structure/disposalpipe/diversion_junction/on_build()
+	..()
+	updatedir()
+	updatedesc()
 
 /obj/structure/disposalpipe/diversion_junction/Destroy()
 	if(linked)
@@ -582,6 +593,8 @@ obj/structure/disposalpipe/Destroy()
 
 /obj/structure/disposalpipe/diversion_junction/flipped //for easier and cleaner mapping
 	icon_state = "pipe-j2s"
+	turn = DISPOSAL_FLIP_FLIP | DISPOSAL_FLIP_LEFT
+	flipped_state = /obj/structure/disposalpipe/diversion_junction
 
 //a three-way junction that sorts objects
 /obj/structure/disposalpipe/sortjunction
@@ -592,8 +605,8 @@ obj/structure/disposalpipe/Destroy()
 	var/posdir = 0
 	var/negdir = 0
 	var/sortdir = 0
-	ptype = DISPOSAL_JUNCTION_SORT1
-	subtype = DISPOSAL_SUB_SORT_NORMAL
+	turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
+	flipped_state = /obj/structure/disposalpipe/sortjunction/flipped
 
 /obj/structure/disposalpipe/sortjunction/proc/updatedesc()
 	desc = initial(desc)
@@ -625,6 +638,12 @@ obj/structure/disposalpipe/Destroy()
 	updatename()
 	updatedesc()
 	update()
+
+/obj/structure/disposalpipe/sortjunction/on_build()
+	..()
+	updatedir()
+	updatedesc()
+	updatename()
 
 /obj/structure/disposalpipe/sortjunction/attackby(var/obj/item/I, var/mob/user)
 	if(..())
@@ -681,33 +700,39 @@ obj/structure/disposalpipe/Destroy()
 /obj/structure/disposalpipe/sortjunction/wildcard
 	name = "wildcard sorting junction"
 	desc = "An underfloor disposal pipe which filters all wrapped and tagged items."
-	subtype = DISPOSAL_SUB_SORT_WILD
-	ptype = DISPOSAL_JUNCTION_SORT1
-	divert_check(var/checkTag)
-		return checkTag != ""
+	flipped_state = /obj/structure/disposalpipe/sortjunction/wildcard/flipped
+
+/obj/structure/disposalpipe/sortjunction/wildcard/divert_check(var/checkTag)
+	return checkTag != ""
 
 //junction that filters all untagged items
 /obj/structure/disposalpipe/sortjunction/untagged
 	name = "untagged sorting junction"
 	desc = "An underfloor disposal pipe which filters all untagged items."
-	subtype = DISPOSAL_SUB_SORT_UNTAGGED
-	divert_check(var/checkTag)
-		return checkTag == ""
+	flipped_state = /obj/structure/disposalpipe/sortjunction/untagged/flipped
+
+/obj/structure/disposalpipe/sortjunction/untagged/divert_check(var/checkTag)
+	return checkTag == ""
 
 /obj/structure/disposalpipe/sortjunction/flipped //for easier and cleaner mapping
 	icon_state = "pipe-j2s"
+	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
+	flipped_state = /obj/structure/disposalpipe/sortjunction
 
 /obj/structure/disposalpipe/sortjunction/wildcard/flipped
 	icon_state = "pipe-j2s"
+	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
+	flipped_state = /obj/structure/disposalpipe/sortjunction/wildcard
 
 /obj/structure/disposalpipe/sortjunction/untagged/flipped
 	icon_state = "pipe-j2s"
+	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
+	flipped_state = /obj/structure/disposalpipe/sortjunction/untagged
 
 //a trunk joining to a disposal bin or outlet on the same turf
 /obj/structure/disposalpipe/trunk
 	icon_state = "pipe-t"
 	var/obj/linked 	// the linked obj/machinery/disposal or obj/disposaloutlet
-	ptype = DISPOSAL_TRUNK
 
 /obj/structure/disposalpipe/trunk/Initialize()
 	. = ..()
@@ -809,5 +834,5 @@ obj/structure/disposalpipe/Destroy()
 	// called when welded
 	// for broken pipe, remove and turn into scrap
 
-	welded()
+/obj/structure/disposalpipe/broken/welded()
 	qdel(src)

@@ -21,7 +21,6 @@
 	var/locked = 0
 	var/scan_id = 1
 	var/is_secure = 0
-	var/datum/wires/smartfridge/wires = null
 
 /obj/machinery/smartfridge/secure
 	is_secure = 1
@@ -35,11 +34,14 @@
 	update_icon()
 
 /obj/machinery/smartfridge/Destroy()
-	qdel(wires)
-	wires = null
 	for(var/datum/stored_items/S in item_records)
 		qdel(S)
 	item_records = null
+	return ..()
+
+/obj/machinery/smartfridge/get_req_access()
+	if(!scan_id)
+		return list()
 	return ..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
@@ -133,15 +135,18 @@
 		return 1
 
 /obj/machinery/smartfridge/drying_rack
-	name = "\improper Drying Rack"
+	name = "drying rack"
 	desc = "A machine for drying plants."
 	icon_state = "drying_rack"
 
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/))
 		var/obj/item/weapon/reagent_containers/food/snacks/S = O
-		if (S.dried_type)
-			return 1
+		return S.dried_type
+	else if(istype(O, /obj/item/stack/material))
+		var/obj/item/stack/material/mat = O
+		var/material/skin/skin_mat = mat.material
+		return istype(skin_mat)
 	return 0
 
 /obj/machinery/smartfridge/drying_rack/Process()
@@ -167,19 +172,43 @@
 			icon_state = "drying_rack-close"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
+
 	for(var/datum/stored_items/I in item_records)
-		for(var/obj/item/weapon/reagent_containers/food/snacks/S in I.instances)
-			if(S.dry || !I.get_specific_product(get_turf(src), S)) continue
-			if(S.dried_type == S.type)
-				S.dry = 1
-				S.SetName("dried [S.name]")
-				S.color = "#a38463"
-				stock_item(S)
-			else
-				var/D = S.dried_type
-				new D(get_turf(src))
-				qdel(S)
-			return
+		for(var/thing in I.instances)
+
+			var/remove_thing = FALSE
+			if(istype(thing, /obj/item/weapon/reagent_containers/food/snacks))
+				var/obj/item/weapon/reagent_containers/food/snacks/S = thing
+				if(S.dry || !I.get_specific_product(get_turf(src), S)) 
+					continue
+				if(S.dried_type == S.type)
+					S.dry = 1
+					S.SetName("dried [S.name]")
+					S.color = "#a38463"
+					stock_item(S)
+					return
+				else
+					var/D = S.dried_type
+					new D(get_turf(src))
+					remove_thing = TRUE
+
+			if(istype(thing, /obj/item/stack/material))
+				var/obj/item/stack/material/skin = thing
+				if(!istype(skin.material, /material/skin))
+					continue
+				var/material/skin/skin_mat = skin.material
+				if(!skin_mat.tans_to)
+					continue
+				var/material/leather_mat = SSmaterials.get_material_by_name(skin_mat.tans_to)
+				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
+				remove_thing = TRUE
+			
+			if(remove_thing)
+				I.instances -= thing
+				I.amount--
+				qdel(thing)
+				return
+
 
 /obj/machinery/smartfridge/Process()
 	if(stat & (BROKEN|NOPOWER))
@@ -277,6 +306,7 @@
 	if(!emagged)
 		emagged = 1
 		locked = -1
+		req_access.Cut()
 		to_chat(user, "You short out the product lock on [src].")
 		return 1
 
@@ -294,14 +324,9 @@
 	I.add_product(O)
 	SSnano.update_uis(src)
 
-/obj/machinery/smartfridge/attack_ai(mob/user as mob)
-	attack_hand(user)
-
-/obj/machinery/smartfridge/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		return
-	wires.Interact(user)
+/obj/machinery/smartfridge/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /*******************
 *   SmartFridge Menu
@@ -385,10 +410,8 @@
 *   Secure SmartFridges
 *************************/
 
-/obj/machinery/smartfridge/secure/Topic(href, href_list)
-	if(stat & (NOPOWER|BROKEN)) return 0
-	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
-		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"] && scan_id)
-			to_chat(usr, "<span class='warning'>Access denied.</span>")
-			return 0
+/obj/machinery/smartfridge/secure/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	if(!allowed(user) && !emagged && locked != -1 && href_list && href_list["vend"] && scan_id)
+		to_chat(user, "<span class='warning'>Access denied.</span>")
+		return STATUS_CLOSE
 	return ..()

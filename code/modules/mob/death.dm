@@ -80,7 +80,8 @@
 			log_debug("[src] ([src.type]) died but does not have a valid health7 icon_state (using health6 instead). report this error to Ccomp5950 or your nearest Developer")
 
 	timeofdeath = world.time
-	if(mind) mind.store_memory("Time of death: [stationtime2text()]", 0)
+	if(mind)
+		mind.StoreMemory("Time of death: [stationtime2text()]", /decl/memory_options/system)
 	switch_from_living_to_dead_mob_list()
 
 	update_icon()

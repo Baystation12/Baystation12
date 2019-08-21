@@ -9,6 +9,8 @@
 	clickvol = 30
 	base_type = /obj/machinery/sleeper
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/mob/living/carbon/human/occupant = null
 	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
 	var/list/available_chemicals = list()
@@ -22,13 +24,15 @@
 	var/stasis = 1
 	var/synth_modifier = 1
 	var/pump_speed
+	var/stasis_power = 5 KILOWATTS
 
 	idle_power_usage = 15
 	active_power_usage = 1 KILOWATTS //builtin health analyzer, dialysis machine, injectors.
 
-/obj/machinery/sleeper/Initialize()
+/obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
-	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+	if(populate_parts)
+		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
 /obj/machinery/sleeper/examine(mob/user)
@@ -73,11 +77,12 @@
 /obj/machinery/sleeper/on_update_icon()
 	icon_state = "sleeper_[occupant ? "1" : "0"]"
 
-/obj/machinery/sleeper/attack_hand(var/mob/user)
-	if(..())
-		return 1
+/obj/machinery/sleeper/DefaultTopicState()
+	return GLOB.outside_state
 
+/obj/machinery/sleeper/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.outside_state)
 	var/data[0]
@@ -93,7 +98,7 @@
 		reagents += list(reagent)
 	data["reagents"] = reagents.Copy()
 
-	if(occupant)
+	if(istype(occupant))
 		var/scan = user.skill_check(SKILL_MEDICAL, SKILL_ADEPT) ? medical_scan_results(occupant) : "<span class='white'><b>Contains: \the [occupant]</b></span>"
 		scan = replacetext(scan,"'scan_notice'","'white'")
 		scan = replacetext(scan,"'scan_warning'","'average'")
@@ -147,11 +152,8 @@
 		var/nstasis = text2num(href_list["stasis"])
 		if(stasis != nstasis && nstasis in stasis_settings)
 			stasis = text2num(href_list["stasis"])
-			change_power_consumption(initial(active_power_usage) + 5 KILOWATTS * (stasis-1), POWER_USE_ACTIVE)
+			change_power_consumption(initial(active_power_usage) + stasis_power * (stasis-1), POWER_USE_ACTIVE)
 			return TOPIC_REFRESH
-
-/obj/machinery/sleeper/attack_ai(var/mob/user)
-	return attack_hand(user)
 
 /obj/machinery/sleeper/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
@@ -274,7 +276,7 @@
 /obj/machinery/sleeper/proc/inject_chemical(var/mob/living/user, var/chemical_name, var/amount)
 	if(stat & (BROKEN|NOPOWER))
 		return
-
+		
 	var/chemical_type = available_chemicals[chemical_name]
 	if(occupant && occupant.reagents)
 		if(occupant.reagents.get_reagent_amount(chemical_type) + amount <= 20)

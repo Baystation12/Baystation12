@@ -15,7 +15,14 @@
 	part_flags = 0
 	var/build_path = null
 	var/board_type = "computer"
-	var/list/req_components = null
+	var/list/req_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1,
+		/obj/item/weapon/stock_parts/keyboard = 1
+	)  // Components needed to build the machine.
+	var/list/spawn_components // If set, will be used as a replacement for req_components when setting components at round start.
+	var/list/additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable = 1
+	) // unlike the above, this is added to req_components instead of replacing them.
 	var/buildtype_select = FALSE
 
 //Called when the circuitboard is used to contruct a new machine.
@@ -45,4 +52,5 @@
 	. = ..()
 	if(buildtype_select && machine)
 		build_path = machine.base_type || machine.type
-		SetName(T_BOARD(machine.name))
+		var/obj/machinery/thing = build_path
+		SetName(T_BOARD(initial(thing.name)))

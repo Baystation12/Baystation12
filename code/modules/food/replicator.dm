@@ -9,6 +9,8 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	base_type = /obj/machinery/food_replicator
 	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/biomass = 100
 	var/biomass_max = 100
@@ -125,7 +127,7 @@
 	if(queued_dishes && queued_dishes.len)
 		if(start_making) //want to do this first so that the first dish won't instantly come out
 			src.audible_message("<b>\The [src]</b> rumbles and vibrates.")
-			playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
+			playsound(src.loc, 'sound/machines/juicer_old.ogg', 50, 1)
 			make_time = world.time + rand(100, 300)
 			start_making = 0
 		if(world.time > make_time)
