@@ -3,6 +3,8 @@
 	fore_dir = WEST
 	vessel_mass = 100000
 	burn_delay = 2 SECONDS
+	start_x = 4
+	start_y = 5
 	base = TRUE
 
 	initial_restricted_waypoints = list(
