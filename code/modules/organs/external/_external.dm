@@ -9,6 +9,8 @@
 	organ_tag = "limb"
 	appearance_flags = PIXEL_SCALE
 
+	var/slowdown = 0
+
 	// Strings
 	var/broken_description             // fracture string if any.
 	var/damage_state = "00"            // Modifier used for generating the on-mob damage overlay for this limb.
@@ -98,6 +100,8 @@
 		replaced(owner)
 		sync_colour_to_human(owner)
 	get_icon()
+
+	slowdown = species.slowdown
 
 /obj/item/organ/external/Destroy()
 
@@ -1096,6 +1100,8 @@ obj/item/organ/external/proc/remove_clamps()
 	remove_splint()
 	update_icon(1)
 	unmutate()
+
+	slowdown = 0
 
 	for(var/obj/item/organ/external/T in children)
 		T.robotize(company, 1)
