@@ -1,0 +1,6 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Adds large vents to both sides of the engine room. These can be opened with a button in the emergency box in the control room."
+  - maptweak: "Renamed all of the glass box emergency buttons and added descriptions."
+  - maptweak: "Engine hatch bolt control button has been moved to the inside of the engine room next to the hatches."
