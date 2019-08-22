@@ -43,9 +43,9 @@
 
 	var/datum/computer_file/binary/design/current_file = null
 	var/list/queue = list()
-	var/queue_max = 8
+	var/queue_max = 12
 
-	var/speed = 2
+	var/speed = 1
 
 	var/progress = 0
 

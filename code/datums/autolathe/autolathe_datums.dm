@@ -88,7 +88,9 @@ other types of metals and chemistry for reagents).
 
 	var/list/mats = O.matter
 	if (mats && mats.len)
+
 		for(var/a in mats)
+
 			var/amount = mats[a] * multiplier
 			if(amount)
 				LAZYAPLUS(materials, a, amount)

@@ -89,10 +89,10 @@ Used In File(s): \code\game\machinery\autolathe.dm
 <div class="fixedLeftWider" style="width:50%; display: table-cell">
 	{{for data.designs}}
 		<div class="item">
-			<div class="block" style='padding: 0px; overflow: auto'>
-				<div class="item" style="margin: 0px">
-					<div style ='float: left; height: 24px; width: 24px; margin: 4px' class='statusDisplayItem'><img src= {{:value.icon}} height=24 width=24></div>
-					<div class="itemContentWidest">{{:value.name}}</div>
+			<div class="block" style='padding: 0px; overflow: hidden'>
+				<div class="item" style='margin: 0px; overflow: hidden'>
+					<div style ='float: left; height: 24px; width: 24px; margin: 4px; margin-top: 0px' class='statusDisplayItem'><img src= {{:value.icon}} height=24 width=24></div>
+					<div class="itemContentWidest" style ='margin-top:4px'>{{:value.name}}</div>
 				</div>
 				{{if value.filename == data.unfolded}}
 					<div class="statusDisplay" style="margin: 0px 4px 4px 4px">

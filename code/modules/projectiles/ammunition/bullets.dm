@@ -110,7 +110,7 @@
 	icon_state = "pshell"
 	spent_icon = "pshell-spent"
 	projectile_type = /obj/item/projectile/bullet/shotgun/practice
-	matter = list("metal" = 90)
+	matter = list(MATERIAL_STEEL = 90)
 
 /obj/item/ammo_casing/shotgun/beanbag
 	name = "beanbag shell"
