@@ -2206,6 +2206,7 @@
 	dir = 5;
 	id = "garbage"
 	},
+/obj/random_multi/single_item/poppy,
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "ep" = (
@@ -6731,6 +6732,7 @@
 	icon_state = "chair_preview";
 	dir = 4
 	},
+/obj/random_multi/single_item/poppy,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
 "ow" = (
@@ -7280,6 +7282,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bluespace)
+"pN" = (
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/tiled/techfloor,
+/area/vacant/cargo)
 "pO" = (
 /obj/structure/closet/secure_closet/engineering_torch,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -13928,6 +13934,10 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
+"GZ" = (
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/foreport)
 "Hb" = (
 /obj/effect/shuttle_landmark/petrov/out,
 /turf/space,
@@ -32136,7 +32146,7 @@ Zp
 cF
 aK
 nc
-pi
+GZ
 Bf
 Wp
 Wp
@@ -36179,7 +36189,7 @@ xs
 AF
 mT
 BT
-Cr
+pN
 CY
 mT
 pi

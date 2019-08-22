@@ -309,6 +309,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aG" = (
+/obj/random_multi/single_item/poppy,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "aH" = (
@@ -17381,6 +17382,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"Ys" = (
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/plating,
+/area/maintenance/bridge/forestarboard)
 "Yz" = (
 /obj/structure/flora/pottedplant/orientaltree,
 /obj/effect/floor_decal/spline/fancy/wood/corner{
@@ -25910,7 +25915,7 @@ VB
 zq
 FL
 GW
-aj
+Ys
 qO
 zC
 dE

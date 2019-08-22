@@ -24651,6 +24651,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/random_multi/single_item/poppy,
 /turf/simulated/floor/blackgrid,
 /area/security/nuke_storage)
 "mOb" = (
@@ -30801,6 +30802,10 @@
 /obj/item/weapon/reagent_containers/glass/beaker/insulated/large,
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
+"uvu" = (
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/firstdeck/aftstarboard)
 "uBg" = (
 /obj/structure/sign/double/solgovflag/left{
 	pixel_y = 32
@@ -55853,7 +55858,7 @@ aaa
 mpy
 mpy
 acT
-uXe
+uvu
 adt
 aep
 kYM
