@@ -138,10 +138,10 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent(/datum/reagent/aluminum, 30)
-		B1.reagents.add_reagent(/datum/reagent/fuel,30)
-		B2.reagents.add_reagent(/datum/reagent/toxin/phoron, 30)
-		B2.reagents.add_reagent(/datum/reagent/acid, 30)
+		B1.reagents.add_reagent(/datum/reagent/aluminum, 40)
+		B1.reagents.add_reagent(/datum/reagent/toxin/phoron, 20)
+		B2.reagents.add_reagent(/datum/reagent/toxin/phoron, 20)
+		B2.reagents.add_reagent(/datum/reagent/acid, 40)
 
 		assembly = new/obj/item/device/assembly_holder/prox_igniter(src)
 
