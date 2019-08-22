@@ -3466,6 +3466,10 @@
 /obj/machinery/washing_machine,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
+"lE" = (
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/plating,
+/area/vacant/monitoring)
 "lG" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -12004,6 +12008,13 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
+"NU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/forestarboard)
 "NV" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -29375,7 +29386,7 @@ BU
 CV
 CV
 EJ
-CV
+lE
 Gc
 GD
 Hp
@@ -33991,7 +34002,7 @@ aa
 aa
 ak
 ak
-Os
+NU
 bu
 XG
 Mp

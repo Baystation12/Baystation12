@@ -1877,6 +1877,7 @@
 /area/vacant/mess)
 "dW" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/random_multi/single_item/poppy,
 /turf/simulated/floor/plating,
 /area/vacant/mess)
 "dX" = (
@@ -2458,6 +2459,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/random_multi/single_item/poppy,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "fh" = (
@@ -8561,6 +8563,15 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ai_monitored/storage/eva)
+"rK" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "rL" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -14267,6 +14278,7 @@
 	pixel_x = -22;
 	pixel_y = 0
 	},
+/obj/random_multi/single_item/poppy,
 /turf/simulated/floor/tiled/dark,
 /area/vacant/cabin)
 "Gj" = (
@@ -17440,6 +17452,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/bsa)
+"Ox" = (
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/tiled/dark,
+/area/vacant/cabin)
 "Oy" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -20009,6 +20025,10 @@
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
+"We" = (
+/obj/random_multi/single_item/poppy,
+/turf/simulated/floor/tiled,
+/area/vacant/brig)
 "Wh" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -40819,7 +40839,7 @@ fH
 tu
 cl
 Dz
-Eq
+rK
 ze
 ze
 ze
@@ -42215,7 +42235,7 @@ ag
 ae
 aq
 ao
-ae
+We
 ID
 ag
 az
@@ -44883,7 +44903,7 @@ RG
 RG
 CU
 ub
-Fj
+Ox
 FK
 Fj
 GP
