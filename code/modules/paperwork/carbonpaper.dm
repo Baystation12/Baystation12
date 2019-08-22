@@ -35,13 +35,14 @@
 		var/copycontents = html_decode(c.info)
 		var/obj/item/weapon/paper/carbon/copy = new /obj/item/weapon/paper/carbon (usr.loc)
 		// <font>
-		copycontents = replacetext(copycontents, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
-		copycontents = replacetext(copycontents, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
-		copy.info += copycontents
-		copy.info += "</font>"
-		copy.SetName("Copy - " + c.name)
-		copy.fields = c.fields
-		copy.updateinfolinks()
+		if(info)
+			copycontents = replacetext(copycontents, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
+			copycontents = replacetext(copycontents, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+			copy.info += copycontents
+			copy.info += "</font>"
+			copy.SetName("Copy - " + c.name)
+			copy.fields = c.fields
+			copy.updateinfolinks()
 		to_chat(usr, "<span class='notice'>You tear off the carbon-copy!</span>")
 		c.copied = 1
 		copy.iscopy = 1
