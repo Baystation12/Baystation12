@@ -998,6 +998,7 @@
 #include "code\game\objects\items\weapons\circuitboards\machinery\chemistry.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\cloning.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\commsantenna.dm"
+#include "code\game\objects\items\weapons\circuitboards\machinery\floodlight.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\household.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\mech_recharger.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\medical.dm"
