@@ -110,7 +110,7 @@
 	dangerous_gasses -= GAS_STEAM
 
 /obj/machinery/alarm/warm
-	target_temperature = T0C+39
+	target_temperature = T0C+75
 	environment_type = /decl/environment_data/finnish
 
 /obj/machinery/alarm/nobreach

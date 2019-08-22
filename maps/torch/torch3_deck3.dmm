@@ -5421,7 +5421,9 @@
 	external_pressure_bound = 202;
 	external_pressure_bound_default = 202
 	},
-/obj/machinery/space_heater,
+/obj/machinery/space_heater{
+	set_temperature = 348.15
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
 "ku" = (
