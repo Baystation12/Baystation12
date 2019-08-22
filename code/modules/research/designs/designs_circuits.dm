@@ -571,33 +571,40 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/miningdrillbrace
 	sort_string = "KCAAB"
 
+/datum/design/circuit/floodlight
+	name = "emergency floodlight"
+	id = "floodlight"
+	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/floodlight
+	sort_string = "KCAAC"
+
 /datum/design/circuit/bsafront
 	name = "bluespace particle beam generator mark VI."
 	id = "bsafront"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/bsafront
-	sort_string = "KCAAC"
+	sort_string = "KCAAD"
 
 /datum/design/circuit/bsamiddle
 	name = "bluespace fusor mark VI."
 	id = "bsamiddle"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/bsamiddle
-	sort_string = "KCAAD"
+	sort_string = "KCAAE"
 
 /datum/design/circuit/bsaback
 	name = "bluespace material deconstructor mark VI."
 	id = "bsaback"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/bsaback
-	sort_string = "KCAAE"
+	sort_string = "KCAAF"
 
 /datum/design/circuit/bsa_console
 	name = "bluespace artillery control console"
 	id = "bsa_console"
 	req_tech = list(TECH_DATA = 2, TECH_COMBAT = 5, TECH_BLUESPACE = 5)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/bsa
-	sort_string = "KCAAF"
+	sort_string = "KCAAG"
 
 /datum/design/circuit/tcom
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
