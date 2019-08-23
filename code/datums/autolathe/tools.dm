@@ -142,6 +142,6 @@
 	name = "sawblade"
 	build_path = /obj/item/ammo_casing/sawblade
 
-/datum/design/autolathe/tool/sawblade
+/datum/design/autolathe/tool/sawblade/diamond
 	name = "diamond blade"
 	build_path = /obj/item/ammo_casing/sawblade/diamond

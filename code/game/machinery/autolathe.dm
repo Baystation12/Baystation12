@@ -69,6 +69,7 @@
 /obj/machinery/autolathe/Initialize()
 	. = ..()
 	wires = new(src)
+	world << "Autolathe located at [jumplink(src)]"
 
 /obj/machinery/autolathe/Destroy()
 	if(wires)
