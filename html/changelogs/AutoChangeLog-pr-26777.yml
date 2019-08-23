@@ -1,0 +1,6 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Floodlights are now constructable circuit machines."
+  - rscadd: "Floodlights can now be upgraded with capacitor components, for increased brightness with a higher power cost."
+  - bugfix: "Floodlights also work in areas without APC."
