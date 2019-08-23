@@ -195,14 +195,6 @@
 /area/maintenance/substation/seconddeck
 	name = "Second Deck Substation"
 
-/area/crew_quarters/safe_room/seconddeck
-	name = "\improper Second Deck Safe Room"
-
-/area/maintenance/bluespace
-	name = "Bluespace Drive"
-	icon_state = "engineering"
-	req_access = list(list(access_engine_equip, access_heads), access_engine, access_maint_tunnels)
-
 //First Deck (Z-4)
 /area/maintenance/firstdeck
 	name = "First Deck Maintenance"
@@ -760,6 +752,16 @@
 
 // Engineering
 
+/area/engineering/shieldbay
+	name = "Shield Bay"
+	icon_state = "engineering"
+	req_access = list(access_engine, access_engine_equip)
+
+/area/engineering/bluespace
+	name = "Bluespace Drive"
+	icon_state = "engineering"
+	req_access = list(list(access_engine_equip, access_heads), access_engine, access_maint_tunnels)
+
 /area/engineering/atmos/aux
 	name = "\improper Auxiliary Atmospherics"
 	icon_state = "atmos"
@@ -1190,9 +1192,6 @@
 
 /area/shield/firstdeck
 	name = "\improper First Deck Shield Generator"
-
-/area/shield/seconddeck
-	name = "\improper Second Deck Shield Generator"
 
 /area/shield/thirddeck
 	name = "\improper Third Deck Shield Generator"

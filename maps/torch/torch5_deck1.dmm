@@ -4411,9 +4411,6 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Shield Generator - First Deck"
-	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shield/firstdeck)
@@ -4643,7 +4640,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "ami" = (
-/obj/machinery/power/shield_generator,
 /obj/structure/cable/green,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
