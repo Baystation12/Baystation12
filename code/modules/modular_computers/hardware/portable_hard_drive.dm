@@ -34,9 +34,7 @@
 	origin_tech = list(TECH_DATA = 4)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/Initialize()
-	world << "portable Disk initialising 1"
 	. = ..()
-	world << "portable Disk initialising 2"
 	if(disk_name)
 		world << "Disk name is [disk_name]"
 		world << "Setting name to ["[initial(name)] - '[disk_name]'"]"
