@@ -19,7 +19,10 @@
 	var/maxx
 	var/maxy
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
+
 	var/list/rock_colors = list(COLOR_ASTEROID_ROCK)
+	var/list/plant_colors = list("RANDOM")
+	var/grass_color
 
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
 	var/list/species = list() //list of names to use for simple animals
@@ -157,6 +160,11 @@
 	repopulate_types |= M.type
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
+	var/list/grasscolors = plant_colors.Copy()
+	grasscolors -= "RANDOM"
+	if(length(grasscolors))
+		grass_color = pick(grasscolors)
+
 	for(var/datum/exoplanet_theme/T in themes)
 		T.before_map_generation(src)
 	for(var/zlevel in map_z)
@@ -170,7 +178,7 @@
 		var/padding = TRANSITIONEDGE
 		for(var/map_type in map_generators)
 			if(ispath(map_type, /datum/random_map/noise/exoplanet))
-				var/datum/random_map/noise/exoplanet/RM = new map_type(null,padding,padding,zlevel,maxx-padding,maxy-padding,0,1,1,planetary_area)
+				var/datum/random_map/noise/exoplanet/RM = new map_type(null,padding,padding,zlevel,maxx-padding,maxy-padding,0,1,1,planetary_area, plant_colors)
 				get_biostuff(RM)
 			else
 				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1)

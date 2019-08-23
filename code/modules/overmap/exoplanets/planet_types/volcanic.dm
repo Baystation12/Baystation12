@@ -4,13 +4,14 @@
 	color = "#8e3900"
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
+	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#5c755e","#120309")
 	possible_themes = list()
 	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 
 /obj/effect/overmap/sector/exoplanet/volcanic/generate_habitability()
 	return HABITABILITY_BAD
-	
+
 /obj/effect/overmap/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
 	if(atmosphere)
@@ -33,7 +34,6 @@
 	water_type = /turf/simulated/floor/exoplanet/lava
 	water_level_min = 5
 	water_level_max = 6
-	plantcolors = list("#a23c05","#3f1f0d","#662929","#ba6222","#5c755e","#120309")
 
 	fauna_prob = 1
 	flora_prob = 7
@@ -77,7 +77,7 @@
 
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
 	..()
-	if(planetary_area)	
+	if(planetary_area)
 		T.mined_turf = prob(90) ? planetary_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava
