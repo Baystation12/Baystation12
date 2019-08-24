@@ -80,6 +80,9 @@
 	if(!isnull(lbound))  nval = max(nval,lbound)
 	traits["[trait]"] =  nval
 
+	if(trait == TRAIT_PLANT_ICON)
+		update_growth_stages()
+
 /datum/seed/proc/create_spores(var/turf/T)
 	if(!T)
 		return
