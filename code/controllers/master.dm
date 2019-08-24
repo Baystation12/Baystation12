@@ -397,6 +397,8 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 			continue
 		if (SS.next_fire > world.time)
 			continue
+		if(SS.suspended)
+			continue
 		SS_flags = SS.flags
 		if (SS_flags & SS_NO_FIRE)
 			subsystemstocheck -= SS
