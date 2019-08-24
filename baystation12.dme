@@ -2665,6 +2665,7 @@
 #include "code\modules\random_map\noise\magma.dm"
 #include "code\modules\random_map\noise\noise.dm"
 #include "code\modules\random_map\noise\ore.dm"
+#include "code\modules\random_map\noise\seafloor.dm"
 #include "code\modules\random_map\noise\tundra.dm"
 #include "code\modules\reagents\Chemistry-Colours.dm"
 #include "code\modules\reagents\Chemistry-Grinder.dm"

@@ -91,6 +91,9 @@
 * Update icon and overlays of open space to be that of the turf below, plus any visible objects on that turf.
 */
 /turf/simulated/open/on_update_icon()
+	
+	update_flood_overlay()
+	
 	overlays.Cut()
 	underlays.Cut()
 	var/turf/below = GetBelow(src)
