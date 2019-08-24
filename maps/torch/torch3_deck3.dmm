@@ -470,7 +470,7 @@
 	tag = "icon-railing0 (EAST)"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "bu" = (
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
@@ -1639,7 +1639,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "dA" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
@@ -2636,7 +2636,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "fB" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/mess)
@@ -3446,7 +3446,7 @@
 	tag = "icon-railing0 (EAST)"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "gU" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -3911,7 +3911,7 @@
 "hM" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "hN" = (
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
@@ -4339,13 +4339,13 @@
 "iw" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/light,
-/obj/structure/ship_munition/bsa_charge/mining,
+/obj/structure/ship_munition/disperser_charge/mining,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "ix" = (
 /obj/machinery/light,
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "iy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4372,7 +4372,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "iA" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
@@ -5409,7 +5409,7 @@
 	name = "Bluespace Artillery Maintenance External Airlock"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/command/bsa)
+/area/command/disperser)
 "ks" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -5662,7 +5662,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "kT" = (
 /obj/structure/sign/directions/bridge{
 	dir = 1;
@@ -7197,7 +7197,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "oA" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/reagent_dispensers/fueltank,
@@ -7907,7 +7907,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/command/bsa)
+/area/command/disperser)
 "pS" = (
 /obj/structure/sign/directions/evac{
 	dir = 2;
@@ -8054,9 +8054,9 @@
 	icon_state = "tube1";
 	dir = 1
 	},
-/obj/structure/ship_munition/bsa_charge/emp,
+/obj/structure/ship_munition/disperser_charge/emp,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "qr" = (
 /obj/structure/bed/chair/wood{
 	dir = 4
@@ -8548,7 +8548,7 @@
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "rH" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -9679,7 +9679,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "tz" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -10042,7 +10042,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "uB" = (
 /obj/machinery/camera/network/command{
 	c_tag = "AI Upload - Center";
@@ -10242,7 +10242,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/command/bsa)
+/area/command/disperser)
 "vg" = (
 /obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
@@ -11811,7 +11811,7 @@
 	icon_state = "map"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "zn" = (
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Vacant Offices";
@@ -11934,7 +11934,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "zG" = (
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/cryolocker)
@@ -12392,7 +12392,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "Bg" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -13207,7 +13207,7 @@
 	dir = 4
 	},
 /turf/simulated/wall/prepainted,
-/area/command/bsa)
+/area/command/disperser)
 "DG" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13229,7 +13229,7 @@
 	},
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "DK" = (
 /obj/random/firstaid,
 /obj/random/medical,
@@ -13258,7 +13258,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "DN" = (
 /obj/structure/table/standard,
 /obj/item/device/paicard,
@@ -13379,7 +13379,7 @@
 	network = list("Command")
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "DV" = (
 /obj/effect/floor_decal/corner/lime{
 	dir = 8
@@ -13546,7 +13546,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Em" = (
 /obj/structure/sign/directions/supply{
 	dir = 2;
@@ -14093,7 +14093,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "FH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -14171,7 +14171,7 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "FV" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -14772,7 +14772,7 @@
 	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HD" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14810,11 +14810,11 @@
 	name = "Observation Blast Door"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HI" = (
 /obj/structure/sign/warning/secure_area,
 /turf/simulated/wall/r_wall/hull,
-/area/command/bsa)
+/area/command/disperser)
 "HJ" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -14824,7 +14824,7 @@
 	name = "Bluespace Artillery Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/command/bsa)
+/area/command/disperser)
 "HK" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14839,7 +14839,7 @@
 	name = "Bluespace Artillery Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/command/bsa)
+/area/command/disperser)
 "HL" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
@@ -14848,12 +14848,12 @@
 	c_tag = "Bluespace Artillery - Access"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HM" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HN" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14863,7 +14863,7 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HO" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
@@ -14878,14 +14878,14 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HP" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HQ" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
@@ -14895,14 +14895,14 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "HR" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HS" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -14912,14 +14912,14 @@
 	name = "Bluespace Artillery Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/command/bsa)
+/area/command/disperser)
 "HT" = (
 /obj/structure/disposaloutlet,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
-/area/command/bsa)
+/area/command/disperser)
 "HU" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/disposal/deliveryChute{
@@ -14929,24 +14929,24 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/command/bsa)
+/area/command/disperser)
 "HV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "HW" = (
 /turf/simulated/wall/prepainted,
-/area/command/bsa)
+/area/command/disperser)
 "HX" = (
 /obj/effect/floor_decal/industrial/hatch/blue,
-/obj/structure/ship_munition/bsa_charge/emp,
+/obj/structure/ship_munition/disperser_charge/emp,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "HZ" = (
 /obj/effect/floor_decal/industrial/loading,
 /turf/simulated/floor/tiled/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Ia" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
@@ -14956,7 +14956,7 @@
 	name = "Observation Blast Door"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "Ib" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
@@ -14970,27 +14970,27 @@
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Ic" = (
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 1
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Id" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Ie" = (
 /obj/structure/table/steel,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/command/bsa)
+/area/command/disperser)
 "If" = (
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -15000,12 +15000,12 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Ih" = (
 /obj/effect/floor_decal/industrial/hatch/orange,
-/obj/structure/ship_munition/bsa_charge/fire,
+/obj/structure/ship_munition/disperser_charge/fire,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Ik" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 10
@@ -15028,25 +15028,25 @@
 	name = "BSA Blast Door"
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "In" = (
-/obj/machinery/bsa/front{
+/obj/machinery/disperser/front{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Io" = (
-/obj/machinery/bsa/middle{
+/obj/machinery/disperser/middle{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Ip" = (
-/obj/machinery/bsa/back{
+/obj/machinery/disperser/back{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Iq" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 6
@@ -15058,19 +15058,19 @@
 	c_tag = "Bluespace Artillery - Control";
 	dir = 4
 	},
-/obj/machinery/computer/ship/bsa{
+/obj/machinery/computer/ship/disperser{
 	icon_state = "computer";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/command/bsa)
+/area/command/disperser)
 "Is" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "It" = (
 /obj/machinery/door/airlock/command{
 	name = "Bluespace Charge Storage";
@@ -15081,12 +15081,12 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Iw" = (
 /obj/effect/floor_decal/industrial/hatch/red,
-/obj/structure/ship_munition/bsa_charge/explosive,
+/obj/structure/ship_munition/disperser_charge/explosive,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Ix" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -15099,7 +15099,7 @@
 	dir = 1
 	},
 /turf/simulated/wall/r_wall/hull,
-/area/command/bsa)
+/area/command/disperser)
 "IA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4;
@@ -15118,14 +15118,14 @@
 	pixel_y = -20
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "IB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4;
 	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "ID" = (
 /obj/random_multi/single_item/punitelly,
 /turf/simulated/floor/tiled,
@@ -15158,7 +15158,7 @@
 	},
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "IL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -16902,7 +16902,7 @@
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/command/bsa)
+/area/command/disperser)
 "MG" = (
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
@@ -17453,7 +17453,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Ox" = (
 /obj/random_multi/single_item/poppy,
 /turf/simulated/floor/tiled/dark,
@@ -17588,7 +17588,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/command/bsa)
+/area/command/disperser)
 "OS" = (
 /obj/machinery/atmospherics/binary/pump/on{
 	dir = 4;
@@ -17720,7 +17720,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Pn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -17748,7 +17748,7 @@
 /area/maintenance/thirddeck/starboard)
 "Pp" = (
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Pq" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -18009,7 +18009,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Qk" = (
 /obj/machinery/button/blast_door{
 	id_tag = "d3portnacelle";
@@ -18065,7 +18065,7 @@
 /area/hydroponics)
 "Qq" = (
 /turf/simulated/wall/r_wall/hull,
-/area/command/bsa)
+/area/command/disperser)
 "Qr" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
@@ -18200,9 +18200,9 @@
 /area/engineering/hardstorage)
 "QL" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/ship_munition/bsa_charge/mining,
+/obj/structure/ship_munition/disperser_charge/mining,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "QM" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -18310,7 +18310,7 @@
 	name = "hermes crate"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Rm" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19294,7 +19294,7 @@
 "Ui" = (
 /obj/machinery/meter/turf,
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Um" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/light{
@@ -19525,7 +19525,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "UO" = (
 /obj/structure/largecrate,
 /obj/random/maintenance/solgov,
@@ -19564,7 +19564,7 @@
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "UV" = (
 /obj/effect/floor_decal/corner/green{
 	icon_state = "corner_white";
@@ -19744,7 +19744,7 @@
 	name = "Observation Blast Door"
 	},
 /turf/simulated/floor/plating,
-/area/command/bsa)
+/area/command/disperser)
 "Vp" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19929,7 +19929,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/command/bsa)
+/area/command/disperser)
 "VR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -20186,7 +20186,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "WH" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -20352,7 +20352,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "Xe" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -20511,7 +20511,7 @@
 	pixel_y = -20
 	},
 /turf/simulated/floor/airless,
-/area/command/bsa)
+/area/command/disperser)
 "Xz" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -20637,7 +20637,7 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark,
-/area/command/bsa)
+/area/command/disperser)
 "XO" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -20928,7 +20928,7 @@
 "YL" = (
 /obj/machinery/hologram/holopad/longrange,
 /turf/simulated/floor/tiled/monotile,
-/area/command/bsa)
+/area/command/disperser)
 "YM" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";

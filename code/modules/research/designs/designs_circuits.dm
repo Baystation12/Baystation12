@@ -578,32 +578,32 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/floodlight
 	sort_string = "KCAAC"
 
-/datum/design/circuit/bsafront
-	name = "bluespace particle beam generator mark VI."
-	id = "bsafront"
+/datum/design/circuit/disperserfront
+	name = "obstruction field disperser beam generator"
+	id = "disperserfront"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/bsafront
+	build_path = /obj/item/weapon/stock_parts/circuitboard/disperserfront
 	sort_string = "KCAAD"
 
-/datum/design/circuit/bsamiddle
-	name = "bluespace fusor mark VI."
-	id = "bsamiddle"
+/datum/design/circuit/dispersermiddle
+	name = "obstruction field disperser fusor"
+	id = "dispersermiddle"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/bsamiddle
+	build_path = /obj/item/weapon/stock_parts/circuitboard/dispersermiddle
 	sort_string = "KCAAE"
 
-/datum/design/circuit/bsaback
-	name = "bluespace material deconstructor mark VI."
+/datum/design/circuit/disperserback
+	name = "obstruction field disperser material deconstructor"
 	id = "bsaback"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_COMBAT = 2, TECH_BLUESPACE = 2)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/bsaback
+	build_path = /obj/item/weapon/stock_parts/circuitboard/disperserback
 	sort_string = "KCAAF"
 
-/datum/design/circuit/bsa_console
-	name = "bluespace artillery control console"
-	id = "bsa_console"
+/datum/design/circuit/disperser_console
+	name = "obstruction field disperser control console"
+	id = "disperser_console"
 	req_tech = list(TECH_DATA = 2, TECH_COMBAT = 5, TECH_BLUESPACE = 5)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/bsa
+	build_path = /obj/item/weapon/stock_parts/circuitboard/disperser
 	sort_string = "KCAAG"
 
 /datum/design/circuit/tcom

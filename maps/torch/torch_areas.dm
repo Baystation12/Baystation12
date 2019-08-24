@@ -692,9 +692,9 @@
 	icon_state = "Tactical"
 	req_access = list(access_emergency_armory)
 
-/area/command/bsa
-	name = "\improper Bluespace Artillery"
-	icon_state = "firingrange"
+/area/command/disperser
+	name = "\improper Obstruction Field Disperser"
+	icon_state = "disperser"
 	req_access = list(access_bridge)
 
 /area/crew_quarters/heads
