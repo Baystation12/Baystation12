@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(control_rods, list())
 	var/rod_length = 0
 	var/target = 0
 	var/speed = 0.1
-	catched_rad_resistance = 0
+	rad_resistance_modifier = 0
 	var/health = 200
 	var/load = 0
 	var/nocontrol = 0
