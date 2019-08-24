@@ -25,7 +25,7 @@
 /obj/effect/fluid/Initialize()
 	. = ..()
 	start_loc = get_turf(src)
-	if(!istype(start_loc))
+	if(!istype(start_loc) || start_loc.flooded)
 		qdel(src)
 		return
 	var/turf/simulated/T = start_loc
