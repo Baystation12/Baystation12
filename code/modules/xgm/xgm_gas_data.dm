@@ -100,5 +100,5 @@
 
 /obj/effect/gas_overlay/Initialize()
 	. = ..()
-	animate(src, alpha = 175, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
-	animate(alpha = 255, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
+	animate(src, alpha = 165, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
+	animate(alpha = 185, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
