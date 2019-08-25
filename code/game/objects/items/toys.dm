@@ -931,19 +931,19 @@
 		visible_message("<span class='warning'>\The [src] says, \"[pick(possible_answers) ]\" as it hits \the [O]!</span>")
 
 /obj/item/weapon/buzzer
-    name = "buzzer"
-    desc = "A very annoying buzzer."
-    icon_state = "buzzton"
-    throwforce = 3
-    w_class = ITEM_SIZE_SMALL
-    throw_speed = 3
-    throw_range = 15
-    var/audio_files = list("sound/machines/buzz-two.ogg")
-    var/next_buzz = 0
+	name = "buzzer"
+	desc = "A very annoying buzzer."
+	icon_state = "buzzton"
+	throwforce = 3
+	w_class = ITEM_SIZE_SMALL
+	throw_speed = 3
+	throw_range = 15
+	var/audio_files = list("sound/machines/buzz-two.ogg")
+	var/next_buzz = 0
 
 /obj/item/weapon/buzzer/attack_self(var/mob/user)
-    if(world.time < next_buzz)
-        return
-    next_buzz = world.time + 15
-    playsound(src.loc, pick(audio_files), 50, 1)
-    add_fingerprint(user)
+	if(world.time < next_buzz)
+		return
+	next_buzz = world.time + 15
+	playsound(src.loc, pick(audio_files), 50, 1)
+	add_fingerprint(user)
