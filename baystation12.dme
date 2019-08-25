@@ -979,6 +979,7 @@
 #include "code\game\objects\items\weapons\teleportation.dm"
 #include "code\game\objects\items\weapons\tools_crystal.dm"
 #include "code\game\objects\items\weapons\towels.dm"
+#include "code\game\objects\items\weapons\toys.dm"
 #include "code\game\objects\items\weapons\traps.dm"
 #include "code\game\objects\items\weapons\trays.dm"
 #include "code\game\objects\items\weapons\weaponry.dm"
