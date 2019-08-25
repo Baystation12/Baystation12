@@ -13183,9 +13183,6 @@
 /turf/simulated/floor/plating,
 /area/shield/thirddeck)
 "DC" = (
-/obj/machinery/camera/network/engineering{
-	c_tag = "Shield Generator - Third Deck"
-	},
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
@@ -13561,7 +13558,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "En" = (
-/obj/machinery/power/shield_generator,
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"

@@ -8711,9 +8711,6 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Shield Generator - Fifth Deck"
-	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -8732,7 +8729,6 @@
 /turf/simulated/floor/plating,
 /area/shield/fifthdeck)
 "sz" = (
-/obj/machinery/power/shield_generator,
 /obj/structure/cable/green,
 /obj/machinery/light/small{
 	icon_state = "bulb1";

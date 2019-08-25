@@ -9797,7 +9797,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
 "GM" = (
-/obj/machinery/power/shield_generator,
 /obj/structure/cable/green,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -12093,9 +12092,6 @@
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
-	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Shield Generator - Fourth Deck"
 	},
 /turf/simulated/floor/plating,
 /area/shield/fourthdeck)
