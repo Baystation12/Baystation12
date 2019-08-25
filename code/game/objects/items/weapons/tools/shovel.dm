@@ -9,7 +9,7 @@
 	item_state = "shovel"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
-	matter = list(MATERIAL_STEEL = 5)
+	matter = list(MATERIAL_STEEL = 700)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0
 	edge = 1

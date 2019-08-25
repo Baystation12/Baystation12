@@ -16,7 +16,7 @@
 	throw_range = 15
 	throw_speed = 3
 	tool_qualities = list(QUALITY_PULSING = 30)
-	matter = list(MATERIAL_PLASTIC = 2, MATERIAL_GLASS = 1)
+	matter = list(MATERIAL_PLASTIC = 200, MATERIAL_GLASS = 100)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 

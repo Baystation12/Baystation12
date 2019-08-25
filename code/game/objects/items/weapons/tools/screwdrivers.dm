@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_TINY
 	throw_speed = 3
 	throw_range = 5
-	matter = list(MATERIAL_STEEL = 2, MATERIAL_PLASTIC = 1)
+	matter = list(MATERIAL_STEEL = 800, MATERIAL_PLASTIC = 400)
 	attack_verb = list("stabbed")
 	tool_qualities = list(QUALITY_SCREW_DRIVING = 30, QUALITY_BONE_SETTING = 10)
 
@@ -24,7 +24,6 @@
 	desc = "Screwdriver powered by S class cell."
 	icon_state = "e-screwdriver"
 	worksound = WORKSOUND_DRIVER_TOOL
-	matter = list(MATERIAL_STEEL = 2, MATERIAL_PLASTIC = 1)
 	tool_qualities = list(QUALITY_SCREW_DRIVING = 40, QUALITY_DRILLING = 10, QUALITY_BONE_SETTING = 10)
 	degradation = 0.07
 	use_power_cost = 0.18
@@ -36,7 +35,7 @@
 	icon_state = "combi_driver"
 	w_class = ITEM_SIZE_NORMAL
 	worksound = WORKSOUND_DRIVER_TOOL
-	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTIC = 2)
+	matter = list(MATERIAL_STEEL = 900, MATERIAL_PLASTIC = 600)
 	tool_qualities = list(QUALITY_SCREW_DRIVING = 50, QUALITY_BOLT_TURNING = 50, QUALITY_DRILLING = 20)
 	degradation = 0.07
 	use_power_cost = 0.24

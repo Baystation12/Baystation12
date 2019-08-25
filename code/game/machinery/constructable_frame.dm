@@ -9,7 +9,6 @@
 	density = 1
 	anchored = 1
 	use_power = 0
-	var/obj/item/weapon/circuitboard/circuit = null
 	var/list/components = null
 	var/list/req_components = null
 	var/list/req_component_names = null
@@ -105,7 +104,7 @@
 								break
 						if(component_check)
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc, src.dir)
+							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc, src.dir, nocircuit = TRUE)
 
 							if(new_machine.component_parts)
 								new_machine.component_parts.Cut()

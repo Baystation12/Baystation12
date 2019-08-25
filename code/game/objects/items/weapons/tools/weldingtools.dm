@@ -9,7 +9,7 @@
 	worksound = WORKSOUND_WELDING
 	throw_speed = 1
 	throw_range = 5
-	matter = list(MATERIAL_STEEL = 5)
+	matter = list(MATERIAL_STEEL = 2000)
 	origin_tech = list(TECH_ENGINEERING = 1)
 	switched_on_qualities = list(QUALITY_WELDING = 30, QUALITY_CAUTERIZING = 10, QUALITY_WIRE_CUTTING = 10)
 

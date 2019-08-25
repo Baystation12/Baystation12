@@ -928,7 +928,7 @@
 	vend_delay = 14
 	req_access = list(access_security)
 	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/weapon/grenade/chem_grenade/teargas = 4,/obj/item/device/flash = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
+					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6, /obj/item/weapon/computer_hardware/hard_drive/portable/design/security = 3)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/box/donut = 2)
 
 /obj/machinery/vending/hydronutrients
@@ -1219,3 +1219,22 @@
 					/obj/item/weapon/reagent_containers/food/snacks/old/hotdog = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/old/taco = 1
 					)
+
+
+
+/obj/machinery/vending/printomat
+	name = "Asters Guild Print-o-Mat"
+	desc = "Everything you can imagine (not really) on a disc! Print your own gun TODAY."
+	product_slogans = "Print your own gun TODAY!;The future is NOW!;Can't stop the industrial revolution!"
+	product_ads = "Almost free!;Print it yourself!;Don't copy that floppy!"
+	icon_state = "discomat"
+	products = list(/obj/item/weapon/computer_hardware/hard_drive/portable = 3, /obj/item/weapon/computer_hardware/hard_drive/portable/design/misc = 2,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/devices = 2, /obj/item/weapon/computer_hardware/hard_drive/portable/design/tools = 3, /obj/item/weapon/computer_hardware/hard_drive/portable/design/components = 2,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/adv_tools = 1, /obj/item/weapon/computer_hardware/hard_drive/portable/design/circuits = 5, /obj/item/weapon/computer_hardware/hard_drive/portable/design/medical = 3,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/computer = 2,
+					/obj/item/weapon/circuitboard/autolathe = 1 )
+	prices = list(/obj/item/weapon/computer_hardware/hard_drive/portable = 50, /obj/item/weapon/computer_hardware/hard_drive/portable/design/misc = 300,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/devices = 400, /obj/item/weapon/computer_hardware/hard_drive/portable/design/tools = 400, /obj/item/weapon/computer_hardware/hard_drive/portable/design/components = 500,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/adv_tools = 1800, /obj/item/weapon/computer_hardware/hard_drive/portable/design/circuits = 600, /obj/item/weapon/computer_hardware/hard_drive/portable/design/medical = 400,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/computer = 500,
+					/obj/item/weapon/circuitboard/autolathe = 700,)

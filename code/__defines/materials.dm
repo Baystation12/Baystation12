@@ -1,3 +1,6 @@
+#define SHEET_MATERIAL_AMOUNT 2000
+
+
 #define MATERIAL_ALTERATION_NONE 0
 #define MATERIAL_ALTERATION_NAME 1
 #define MATERIAL_ALTERATION_DESC 2
@@ -37,7 +40,6 @@
 #define MATERIAL_CARPET "carpet"
 #define MATERIAL_CRYSTAL "crystal"
 #define MATERIAL_BRONZE	"bronze"
-#define MATERIAL_OCP	"osmium-carbide plasteel"
 
 
 #define PLASTEEL_COLOUR "#8e9799"

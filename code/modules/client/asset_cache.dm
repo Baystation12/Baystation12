@@ -198,6 +198,19 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
 
+
+//This loads little icons used for proto/autolathe
+/datum/asset/simple/design_icons/register()
+	for(var/D in SSresearch.all_designs)
+		var/datum/design/design = D
+
+		var/filename = sanitizeFileName("[design.build_path].png")
+		var/icon/I = getFlatTypeIcon(design.build_path)
+		register_asset(filename, I)
+		assets[filename] = I
+
+		design.ui_data["icon"] = filename
+
 /datum/asset/simple/tgui
 	isTrivial = FALSE
 	assets = list(

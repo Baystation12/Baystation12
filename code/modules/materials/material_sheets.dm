@@ -35,7 +35,7 @@
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 
-	matter = material.get_matter()
+	matter = list("[material.name]" = SHEET_MATERIAL_AMOUNT)
 	update_strings()
 
 /obj/item/stack/material/get_material()
@@ -197,18 +197,6 @@
 /obj/item/stack/material/osmium/ten
 	amount = 10
 
-/obj/item/stack/material/ocp
-	name = MATERIAL_OCP
-	icon_state = "sheet-plasteel"
-	item_state = "sheet-metal"
-	default_type = MATERIAL_OCP
-	apply_colour = 1
-
-/obj/item/stack/material/ocp/ten
-	amount = 10
-
-/obj/item/stack/material/ocp/fifty
-	amount = 50
 
 // Fusion fuel.
 /obj/item/stack/material/deuterium
@@ -236,6 +224,11 @@
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	default_type = MATERIAL_PLASTEEL
+
+/obj/item/stack/material/plasteel/random/Initialize()
+	..()
+	amount = rand(1, 10)
+
 
 /obj/item/stack/material/plasteel/ten
 	amount = 10

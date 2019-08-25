@@ -4,11 +4,6 @@
 /turf/simulated/wall/r_wall/New(var/newloc)
 	..(newloc, MATERIAL_PLASTEEL,MATERIAL_PLASTEEL) //3strong
 
-/turf/simulated/wall/ocp_wall
-	icon_state = "rgeneric"
-
-/turf/simulated/wall/ocp_wall/New(var/newloc)
-	..(newloc, MATERIAL_OCP, MATERIAL_OCP)
 
 /turf/simulated/wall/r_wall/rglass_wall/New(var/newloc) //Structural, but doesn't impede line of sight. Fairly pretty anyways.
 	..(newloc, "rglass", "steel")

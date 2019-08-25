@@ -64,6 +64,7 @@
 				///obj/random/voidsuit = 0.5,
 				///obj/random/pouch = 5,
 				/obj/random/tool_upgrade = 25,
+				/obj/random/lathe_disk = 10,
 				///obj/random/rig_module = 5,
 				///obj/random/mecha_equipment = 5
 				/obj/item/stack/power_node = 5

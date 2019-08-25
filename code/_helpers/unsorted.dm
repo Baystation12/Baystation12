@@ -528,8 +528,11 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	return round(GaussRand(sigma),roundto)
 
 //Will return the contents of an atom recursivly to a depth of 'searchDepth'
-/atom/proc/GetAllContents(searchDepth = 5)
+/atom/proc/GetAllContents(searchDepth = 5, var/includeSelf = FALSE)
 	var/list/toReturn = list()
+
+	if (includeSelf)
+		toReturn += src
 
 	for(var/atom/part in contents)
 		toReturn += part

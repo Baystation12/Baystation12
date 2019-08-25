@@ -2,7 +2,7 @@
 	name = "cautery"
 	desc = "This stops bleeding."
 	icon_state = "cautery"
-	matter = list(MATERIAL_STEEL = 5, MATERIAL_GLASS = 2)
+	matter = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 200)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("burnt")

@@ -1,0 +1,228 @@
+<!-- 
+Title: Autolathe
+Used In File(s): \code\game\machinery\autolathe.dm
+ -->
+
+<div style="display: table; width:100%">
+
+
+<div style="display: table-row">
+
+	<div class="fixedLeft" style="width:50%; display: table-cell">
+		<div class="block">
+			<div class="item">
+				<div class="itemLabelWidest"><b>Loaded materials</b></div>
+			</div>
+			{{for data.materials}}
+				<div class="item">
+					<div class="itemLabelNarrow">{{:value.name}}</div> 
+					<div class="itemContentNarrow">{{:value.count}}/{{:data.mat_capacity}}</div>
+					<div class="itemLabelNarrow">{{:helper.link('', 'eject', {'eject_material' : value.name}, null, 'statusValue')}}</b></div>
+				</div>
+			{{empty}}
+				<div class="item">
+					<div class="itemLabelNarrow">empty</div> 
+				</div>
+			{{/for}}
+			<div class="item">
+				{{:helper.link('INSERT MATERIALS', '', {'insert' : 1}, null, 'bigButton')}}
+			</div>
+		</div>
+	</div>
+	
+	<div class="fixedLeft" style="width:50%; display: table-cell">
+		<div class="block">
+			<div class="item">
+				<div class="itemLabelWidest"><b>Inserted beaker</b></div>
+			</div>
+			{{if data.container}}
+				{{for data.reagents}}
+					<div class="item">
+						<div class="itemLabelWider">{{:value.name}} </div>
+						<div class="itemContentWidest">{{:value.count}}</div>
+					</div>
+				{{empty}}
+					<div class="item">
+						<div class="itemLabelWidest">empty</div>
+					</div>
+				{{/for}}
+				<div class="item">
+					<div class="itemContentWidest">{{:helper.link('', 'eject', {'eject_container' : 1}, null, 'statusValue')}}</b></div>
+				</div>
+			{{else}}
+				<div class="item">
+					<div class="itemLabelWidest">not inserted</div>
+				</div>
+				<div class="item">
+					<div class="itemContentWidest">{{:helper.link('insert', 'eject', {'insert_beaker' : 1}, null, 'statusValue')}}</b></div>
+				</div>
+			{{/if}}
+		</div>
+	</div>
+
+</div>
+
+{{if data.have_disk}}
+<div class="fixedWidest" style="width:100%; display: table-row">
+	<div class="block">
+		<div class="item">
+			<div class="itemContentWide">
+			Disk: 
+			{{if data.disk}}
+				<b>{{:data.disk.name ? data.disk.name : 'data disk'}}</b>
+	
+				{{if data.disk.license}}
+					<br>{{:data.disk.license}} uses left
+				{{/if}}
+			{{else}}
+				not inserted
+			{{/if}}
+			</div>
+			<div class="itemlabelNarrow">{{:helper.link(data.disk ? 'eject' : 'insert', 'eject', {'disk' : 1}, null, 'statusValue')}}</div>
+		</div>
+	</div>
+</div>
+{{/if}}
+
+<div style="display: table-row">
+
+<div class="fixedLeftWider" style="width:50%; display: table-cell">
+	{{for data.designs}}
+		<div class="item">
+			<div class="block" style='padding: 0px; overflow: hidden'>
+				<div class="item" style='margin: 0px; overflow: hidden'>
+					<div style ='float: left; height: 24px; width: 24px; margin: 4px; margin-top: 0px' class='statusDisplayItem'><img src= {{:value.icon}} height=24 width=24></div>
+					<div class="itemContentWidest" style ='margin-top:4px'>{{:value.name}}</div>
+				</div>
+				{{if value.filename == data.unfolded}}
+					<div class="statusDisplay" style="margin: 0px 4px 4px 4px">
+						{{if value.materials}}
+						<div class="item">
+							<div class="itemLabelWidest">Materials</div>
+							{{for value.materials :material:material_i}}
+								<div class="itemContentWidest">{{:material.name}}: {{:material.req}}</div>
+							{{/for}}
+						</div>
+						{{/if}}
+						{{if value.chemicals}}
+						<div class="item">
+							<div class="itemLabelWidest">Reagents</div>
+							{{for value.chemicals :chemical:chemical_i}}
+								<div class="itemContentWidest">{{:chemical.name}}: {{:chemical.req}}</div>
+							{{/for}}
+						</div>
+						{{/if}}
+						<div class="item">
+							<div style="margin-top:8px" class="itemLabelWidest"><b>Build time:</b> {{:value.time}}</div>
+						</div>
+					</div>
+				{{/if}}
+			</div>
+			<div class="itemlabelNarrow">{{:helper.link('Print', 'plus', {'add_to_queue' : value.filename}, null, 'statusValue')}}</b></div>
+			<div class="itemlabelNarrow">{{:helper.link('Print several', 'calculator', {'add_to_queue' : value.filename, 'several' : 1}, null, 'statusValue')}}</b></div>
+			<div class="itemlabelNarrow">{{:helper.link('', 'triangle-1-' + value.filename == data.unfolded ? 'n' : 's', {'unfold' : value.filename}, null, 'statusValue')}}</b></div>
+			
+		</div>
+	{{empty}}
+		<div class="block" style ='position: relative;'>
+			<div class="item">
+				<div class="itemLabelWidest"><b>
+				{{if !data.disk && data.have_disk}}
+					No disk
+				{{else}}
+					No recipes
+				{{/if}}
+				</b></div>
+			</div>
+		</div>
+	{{/for}}
+</div>
+
+<div class="fixedLeft" style="width:50%; display: table-cell">
+	<div class="block" style ='position: relative;'>
+		<div class="item">
+			<div class="item">
+				{{if data.paused}}
+					{{:helper.link('', 'play', {'pause' : 1}, null, 'bigYellowButton')}}
+				{{else}}
+					{{:helper.link('', 'pause', {'pause' : 1}, null, 'bigButton')}}
+				{{/if}}
+			</div>
+			{{if data.current}}
+				<div style ='position: absolute; top: 8px; right: 8px; max-height:48px; max-width:48px; height:48px; width:48px; margin-left:0px' class='statusDisplayItem'><img src= {{:data.current.icon}} height=48 width=48></div>
+				<div class="itemLabelwidest">Printing {{:data.current.name}}</div>
+				<div class="itemLabel">
+				{{if data.error}}
+					<div class="bad">{{:data.error}}</div>
+				{{else}}
+					{{:helper.displayBar(data.progress / data.current.time, 0, 1, 'good', data.progress + "/" + data.current.time)}}
+					<br>
+				{{/if}}
+				</div>
+				<div class="item">
+					{{:helper.link('ABORT', '', {'abort_print' : 1}, null, 'bigButton')}}
+				</div>
+				<div class="statusDisplay">
+					{{if data.current.materials}}
+					<div class="item">
+						<div class="itemLabelWidest">Materials</div>
+						{{for data.current.materials :material:material_i}}
+							<div class="itemContentWidest">{{:material.name}}: {{:material.req}}</div>
+						{{/for}}
+					</div>
+					{{/if}}
+					{{if data.current.chemicals}}
+					<div class="item">
+						<div class="itemLabelWidest">Reagents</div>
+						{{for data.current.chemicals :chemical:chemical_i}}
+							<div class="itemContentWidest">{{:chemical.name}}: {{:chemical.req}}</div>
+						{{/for}}
+					</div>
+					{{/if}}
+					<div class="item">
+						<div style="margin-top:8px" class="itemLabelWidest"><b>Build time:</b> {{:data.current.time}}</div>
+					</div>
+
+				</div>
+			{{else}}
+				<div class="itemLabelWidest"><div class="average">Idle</div></div>
+			{{/if}}	
+		</div>	
+		<div class="statusDisplay">
+			<div class="item">
+				<div class="itemLabelWidest">Queue: {{:data.queue_len}}/{{:data.queue_max}} </div>
+				{{for data.queue}}
+					<div class="item">
+						<div class="itemContentWidest" style ='position: relative;'>
+							<div style ='position: absolute; top: 10px; right: 10px; max-height:24px; max-width:24px; height:24px; width:24px; margin-left:0px' class='statusDisplayItem'><img src= {{:value.icon}} height=24 width=24></div>
+							{{if value.error >= 2}}
+								<div class="bad">{{:value.name}}</div>
+							{{else}}
+								{{if value.error == 1}}
+									<div class="average">{{:value.name}}</div>
+								{{else}}
+									{{:value.name}}
+								{{/if}}	
+							{{/if}}				
+						</div>
+						<div class="itemLabelWidest">
+							{{if value.ind > 1}}
+								{{:helper.link('', 'triangle-1-n', {'move_up_queue' : value.ind}, null, 'statusValue')}}
+							{{/if}}
+							{{if value.ind < data.queue_len}}
+								{{:helper.link('', 'triangle-1-s', {'move_down_queue' : value.ind}, null, 'statusValue')}}
+							{{/if}}
+							{{:helper.link('', 'close', {'remove_from_queue' : value.ind}, null, 'statusValue')}}
+						</div>
+					</div>
+				{{empty}}
+					<div class="itemContentWidest">Empty</div>
+				{{/for}}
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+</div>

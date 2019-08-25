@@ -5,7 +5,7 @@
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
 	tool_qualities = list(QUALITY_ADHESIVE = 30, QUALITY_SEALING = 30)
-	matter = list(MATERIAL_PLASTIC = 3)
+	matter = list(MATERIAL_PLASTIC = 2000)
 	worksound = WORKSOUND_TAPE
 	use_stock_cost = 0.15
 	max_stock = 80
@@ -27,7 +27,7 @@
 	desc = "A roll of flexible adhesive polymer mesh, which sets as strong as welded steel."
 	icon_state = "fiber_tape"
 	tool_qualities = list(QUALITY_ADHESIVE = 50, QUALITY_SEALING = 50)
-	matter = list(MATERIAL_PLASTIC = 20)
+	matter = list(MATERIAL_PLASTIC = 6000)
 	use_stock_cost = 0.10
 	max_stock = 100
 

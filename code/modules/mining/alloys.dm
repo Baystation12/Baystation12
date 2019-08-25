@@ -18,16 +18,6 @@
 	product_mod = 0.3
 	product = /obj/item/stack/material/plasteel
 
-/datum/alloy/ocp
-	metaltag = MATERIAL_OCP
-	requires = list(
-		"platinum" = 1,
-		"carbon" = 3,
-		"iron" = 2,
-		"osmium" = 2
-		)
-	product_mod = 0.3
-	product = /obj/item/stack/material/ocp
 
 /datum/alloy/steel
 	metaltag = MATERIAL_STEEL

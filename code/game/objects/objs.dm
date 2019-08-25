@@ -5,6 +5,7 @@
 
 	//Used to store information about the contents of the object.
 	var/list/matter
+	var/list/matter_reagents
 	var/w_class // Size of the object.
 	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
 	animate_movement = 2

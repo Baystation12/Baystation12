@@ -298,6 +298,13 @@ default behaviour is:
 /mob/living/proc/setMaxHealth(var/newMaxHealth)
 	maxHealth = newMaxHealth
 
+
+/mob/living/is_injectable(allowmobs = TRUE)
+	return (allowmobs && reagents && can_inject())
+
+/mob/living/is_drawable(allowmobs = TRUE)
+	return (allowmobs && reagents && can_inject())
+
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
 /mob/proc/get_contents()
