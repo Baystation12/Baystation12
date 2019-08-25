@@ -72,9 +72,6 @@ LOG_PDA
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
-## sql switching
-# SQL_ENABLED
-
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
@@ -165,7 +162,6 @@ ANTAG_HUD_RESTRICTED
 
 ## allow AI job
 ALLOW_AI
-
 
 ## disable abandon mob
 # NORESPAWN
