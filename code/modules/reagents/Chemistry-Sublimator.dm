@@ -174,6 +174,8 @@
 		emagged = !emagged
 		reagent_whitelist.Cut()
 		to_chat(user, "\The [src]'s safety light turns off.")
+		return 1
+	return
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/sauna
 	name = "sauna heater"
