@@ -1,6 +1,0 @@
-author: "Boznar"
-delete-after: True
-changes: 
-  - maptweak: "Shield generators have been consolidated to a single shield bay with its own substation. Bridge deck shield has been left in place to account for all 5 shield generators. Shields also have their own SMES units so that configuring each individual shield can be done more precisely."
-  - maptweak: "Bluespace drive has been remapped to be prettier. It is no longer considered a maintenance area and wont spawn drones or trash."
-  - maptweak: "Deck two saferoom has been removed to make room for these changes."
