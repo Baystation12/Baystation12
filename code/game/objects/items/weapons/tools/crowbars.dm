@@ -47,7 +47,7 @@
 	throwforce = WEAPON_FORCE_WEAK
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MATERIAL_STEEL = 80)
+	matter = list(MATERIAL_STEEL = 800)
 	tool_qualities = list(QUALITY_PRYING = 5, QUALITY_DIGGING = 5)
 
 /obj/item/weapon/tool/crowbar/prybar/Initialize()

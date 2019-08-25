@@ -118,11 +118,52 @@ Class Procs:
 	var/core_skill = SKILL_DEVICES //The skill used for skill checks for this machine (mostly so subtypes can use different skills).
 	var/operator_skill      // Machines often do all operations on Process(). This caches the user's skill while the operations are running.
 
+	//The typepath of the circuitboard used by this machine, if any.
+	//This will be repurposed at runtime to create and store an instance of that type.
+	//The specified circuitboard will be created in Initialize
+	var/obj/item/weapon/circuitboard/circuit = null
+
+/obj/machinery/New(var/atom/location, var/direction, var/nocircuit = FALSE)
+
+
+	//Nocircuit=TRUE will skip the default circuit init
+	//This is used when constructing a machine ingame, by inserting components into a frame, so that duplicate components and circuits aren't spawned
+	//Nocircuit should be false for anything mapped in or spawned whole
+	if (nocircuit)
+		circuit = null
+
+	.=..()
+
 /obj/machinery/Initialize(mapload, d=0)
 	. = ..()
 	if(d)
 		set_dir(d)
+	InitCircuit()
 	START_PROCESSING(SSmachines, src)
+
+
+/obj/machinery/proc/InitCircuit()
+	if(!circuit)
+		return
+
+	if(ispath(circuit))
+		circuit = new circuit
+
+	if (!component_parts)
+		component_parts = list()
+	if(circuit)
+		component_parts += circuit
+
+	for(var/item in circuit.req_components)
+		if(item == /obj/item/stack/cable_coil)
+			component_parts += new item(null, circuit.req_components[item])
+		else
+			for(var/j = 1 to circuit.req_components[item])
+				component_parts += new item
+
+	RefreshParts()
+
+
 
 /obj/machinery/Destroy()
 	STOP_PROCESSING(SSmachines, src)

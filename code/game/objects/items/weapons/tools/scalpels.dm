@@ -12,7 +12,7 @@
 	throw_speed = WEAPON_FORCE_WEAK
 	throw_range = 5
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
-	matter = list(MATERIAL_STEEL = 4)
+	matter = list(MATERIAL_STEEL = 200)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	tool_qualities = list(QUALITY_CUTTING = 30, QUALITY_WIRE_CUTTING = 10)
 
@@ -20,7 +20,7 @@
 	name = "advanced scalpel"
 	desc = "Made of more expensive materials, sharper and generally more reliable."
 	icon_state = "scalpel_t4"
-	matter = list(MATERIAL_STEEL = 5)
+	matter = list(MATERIAL_STEEL = 900)
 	tool_qualities = list(QUALITY_CUTTING = 40, QUALITY_WIRE_CUTTING = 10)
 	degradation = 0.12
 	max_upgrades = 4
@@ -31,7 +31,7 @@
 	icon_state = "scalpel_t5"
 	damtype = "fire"
 	force = WEAPON_FORCE_DANGEROUS
-	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLASTIC = 4)
+	matter = list(MATERIAL_STEEL = 800, MATERIAL_PLASTIC = 800)
 	tool_qualities = list(QUALITY_CUTTING = 50, QUALITY_WIRE_CUTTING = 20, QUALITY_LASER_CUTTING = 40)
 	degradation = 0.11
 	use_power_cost = 0.12
@@ -46,7 +46,7 @@
 	icon_state = "impro_shiv"
 	worksound = WORKSOUND_HARD_SLASH
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	matter = list(MATERIAL_GLASS = 1)
+	matter = list(MATERIAL_GLASS = 250)
 	sharp = TRUE
 	edge = TRUE
 	force = WEAPON_FORCE_NORMAL

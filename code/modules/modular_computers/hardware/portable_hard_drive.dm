@@ -36,8 +36,6 @@
 /obj/item/weapon/computer_hardware/hard_drive/portable/Initialize()
 	. = ..()
 	if(disk_name)
-		world << "Disk name is [disk_name]"
-		world << "Setting name to ["[initial(name)] - '[disk_name]'"]"
 		SetName("[initial(name)] - '[disk_name]'")
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/Destroy()

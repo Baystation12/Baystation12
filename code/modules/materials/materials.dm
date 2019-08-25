@@ -418,7 +418,7 @@ var/list/name_to_material
 	hardness = 80
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
-	composite_material = list(MATERIAL_STEEL = 3750, "platinum" = 3750) //todo
+	composite_material = list(MATERIAL_STEEL = SHEET_MATERIAL_AMOUNT*0.5, MATERIAL_PLATINUM = SHEET_MATERIAL_AMOUNT*0.5) //todo
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = 1
 
@@ -436,20 +436,7 @@ var/list/name_to_material
 	icon_reinf = "reinf_metal"
 	construction_difficulty = 1
 
-/material/plasteel/ocp
-	name = MATERIAL_OCP
-	stack_type = /obj/item/stack/material/ocp
-	integrity = 200
-	melting_point = 12000
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
-	icon_colour = "#9bc6f2"
-	brute_armor = 4
-	burn_armor = 20
-	weight = 27
-	stack_origin_tech = list(TECH_MATERIAL = 3)
-	composite_material = list(MATERIAL_PLASTEEL = 7500, "osmium" = 3750)
-	construction_difficulty = 2
+
 
 /material/glass
 	name = MATERIAL_GLASS

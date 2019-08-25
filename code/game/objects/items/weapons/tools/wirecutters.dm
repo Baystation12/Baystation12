@@ -8,7 +8,7 @@
 	throw_speed = 2
 	throw_range = 9
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
-	matter = list(MATERIAL_STEEL = 2, MATERIAL_PLASTIC = 1)
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_PLASTIC = 800)
 	attack_verb = list("pinched", "nipped")
 	sharp = TRUE
 	edge = TRUE
@@ -29,7 +29,7 @@
 	desc = "Bigger brother of wirecutter. Can't do much in terms of emergency surgery, but dose its main job better."
 	icon_state = "arm-cutter"
 	force = WEAPON_FORCE_NORMAL
-	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLASTIC = 1)
+	matter = list(MATERIAL_STEEL = 1200, MATERIAL_PLASTIC = 600)
 	tool_qualities = list(QUALITY_WIRE_CUTTING = 40, QUALITY_CUTTING = 30)
 	degradation = 0.07
 	max_upgrades = 4

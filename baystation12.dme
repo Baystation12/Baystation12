@@ -1026,6 +1026,7 @@
 #include "code\game\objects\items\weapons\tools\wrenches.dm"
 #include "code\game\objects\items\weapons\tools\mods\_upgrades.dm"
 #include "code\game\objects\items\weapons\tools\mods\mod_types.dm"
+#include "code\game\objects\random\design_disks.dm"
 #include "code\game\objects\random\random.dm"
 #include "code\game\objects\random\tools.dm"
 #include "code\game\objects\structures\barsign.dm"
