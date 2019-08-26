@@ -15399,7 +15399,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
 "PA" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/pipedispenser{
+	anchored = 1
+	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},

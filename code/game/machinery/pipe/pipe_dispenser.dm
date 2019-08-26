@@ -3,7 +3,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = 1
-	anchored = 1
+	anchored = 0
 	stat_immune = NOSCREEN//Doesn't need screen, just input for the parts wanted
 
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -11,9 +11,14 @@
 
 	idle_power_usage = 500
 	power_channel = EQUIP
-	use_power = POWER_USE_IDLE
+	use_power = POWER_USE_OFF
 
 	var/pipe_color = "white"
+
+/obj/machinery/pipedispenser/Initialize()//for mapping purposes. Anchor them by map var edit if needed.
+	. = ..()
+	if(anchored)
+		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/pipedispenser/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
 	. = list()
@@ -54,11 +59,6 @@
 		updateUsrDialog()
 
 /obj/machinery/pipedispenser/interface_interact(mob/user)
-	interact(user)
-	return TRUE
-
-/obj/machinery/pipedispenser/physical_attack_hand(mob/user)
-	add_fingerprint(user)
 	interact(user)
 	return TRUE
 
@@ -109,8 +109,6 @@
 	name = "Disposal Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
-	anchored = 1.0
 
 //Allow you to drag-drop disposal pipes into it
 /obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
@@ -129,12 +127,3 @@
 	var/datum/browser/popup = new (user, "Disposal Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_disposal_pipe_datums_by_category))
 	popup.open()
-
-// adding a pipe dispensers that spawn unhooked from the ground
-/obj/machinery/pipedispenser/orderable
-	anchored = 0
-	use_power = POWER_USE_OFF
-
-/obj/machinery/pipedispenser/disposal/orderable
-	anchored = 0
-	use_power = POWER_USE_OFF

@@ -3944,7 +3944,7 @@
 	},
 /area/rescue_base/base)
 "ajw" = (
-/obj/machinery/pipedispenser/orderable,
+/obj/machinery/pipedispenser,
 /obj/item/device/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
@@ -3955,7 +3955,7 @@
 	},
 /area/rescue_base/base)
 "ajx" = (
-/obj/machinery/pipedispenser/disposal/orderable,
+/obj/machinery/pipedispenser/disposal,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -9437,14 +9437,14 @@
 	},
 /area/centcom/specops)
 "axn" = (
-/obj/machinery/pipedispenser/orderable,
+/obj/machinery/pipedispenser,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
 	},
 /area/centcom/specops)
 "axo" = (
-/obj/machinery/pipedispenser/disposal/orderable,
+/obj/machinery/pipedispenser/disposal,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
