@@ -9004,7 +9004,9 @@
 /area/engineering/atmos)
 "tP" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/pipedispenser,
+/obj/machinery/pipedispenser{
+	anchored = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "tQ" = (
@@ -9012,7 +9014,9 @@
 	c_tag = "Atmospherics - North"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/pipedispenser/disposal,
+/obj/machinery/pipedispenser/disposal{
+	anchored = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "tU" = (
