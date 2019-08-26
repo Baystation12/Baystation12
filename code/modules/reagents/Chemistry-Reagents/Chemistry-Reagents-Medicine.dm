@@ -19,6 +19,7 @@
 
 /datum/reagent/inaprovaline/overdose(var/mob/living/carbon/M, var/alien)
 	M.add_chemical_effect(CE_SLOWDOWN, 1)
+	M.add_chemical_effect(CE_BLOCKAGE, (15 + volume - overdose)/100)
 	if(prob(5))
 		M.slurring = max(M.slurring, 10)
 	if(prob(2))
@@ -87,6 +88,7 @@
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00a000"
+	overdose = REAGENTS_OVERDOSE * 2
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 2.1
@@ -114,6 +116,13 @@
 		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			M.reagents.remove_reagent(R.type, removing)
 			return
+
+/datum/reagent/dylovene/overdose(var/mob/living/carbon/M, var/alien)
+	M.add_chemical_effect(CE_PULSE, -1)
+	if(prob(5))
+		M.slurring = max(M.slurring, 10)
+	if(prob(2))
+		M.drowsyness = max(M.drowsyness, 5)
 
 /datum/reagent/dexalin
 	name = "Dexalin"
@@ -157,6 +166,7 @@
 	taste_description = "grossness"
 	reagent_state = LIQUID
 	color = "#8040ff"
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 6
@@ -244,7 +254,7 @@
 	taste_description = "sickness"
 	reagent_state = LIQUID
 	color = "#c8a5dc"
-	overdose = 60
+	overdose = REAGENTS_OVERDOSE * 2
 	reagent_state = LIQUID
 	scannable = 1
 	metabolism = 0.02
@@ -543,7 +553,7 @@
 	reagent_state = LIQUID
 	color = "#008000"
 	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 2.7
@@ -561,7 +571,7 @@
 	reagent_state = LIQUID
 	color = "#c1c1c1"
 	metabolism = REM * 0.1
-	overdose = REAGENTS_OVERDOSE/2
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	value = 2.5
 
@@ -801,8 +811,8 @@
 	taste_description = "mint"
 	reagent_state = LIQUID
 	color = "#80af9c"
-	metabolism = REM * 0.002
 	overdose = REAGENTS_OVERDOSE * 0.25
+	metabolism = REM * 0.002
 	scannable = 1
 	data = 0
 
@@ -819,7 +829,7 @@
 	taste_description = "sickness"
 	reagent_state = SOLID
 	color = "#669900"
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 5
@@ -858,7 +868,7 @@
 	taste_description = "cough syrup"
 	reagent_state = LIQUID
 	color = "#c8a5dc"
-	overdose = 60
+	overdose = REAGENTS_OVERDOSE * 2
 	scannable = 1
 	metabolism = REM * 0.05
 	flags = IGNORE_MOB_SIZE
