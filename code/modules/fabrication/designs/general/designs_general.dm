@@ -35,7 +35,7 @@
 	path = /obj/machinery/floor_light
 
 /datum/fabricator_recipe/extinguisher
-	path = /obj/item/weapon/extinguisher
+	path = /obj/item/weapon/extinguisher/empty
 
 /datum/fabricator_recipe/jar
 	path = /obj/item/glass_jar
