@@ -1,0 +1,5 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - bugfix: "Fixes various bugs for emergency fire shutters construction/deconstruction, such as going invisible, returning incorrect amount of metal and skipping steps."
+  - tweak: "Emergency fire shutters will now have a delay for welding them."
