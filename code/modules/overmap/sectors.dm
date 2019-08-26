@@ -98,6 +98,21 @@
 		for(var/thing in restricted_waypoints[shuttle_name])
 			.[thing] = name
 
+/obj/effect/overmap/proc/generate_skybox()
+	var/image/skybox = SSskybox.get_base_skybox()
+	for(var/obj/effect/overmap/O in loc)
+		if(O == src)
+			continue
+		var/image/extra = O.get_skybox_representation()
+		if(extra)
+			extra.appearance_flags = RESET_COLOR
+			skybox.overlays |= extra
+	return skybox
+
+//Overlay of how this object should look on other skyboxes
+/obj/effect/overmap/proc/get_skybox_representation()
+	return
+
 /obj/effect/overmap/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."

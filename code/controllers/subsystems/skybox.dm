@@ -8,6 +8,7 @@ SUBSYSTEM_DEF(skybox)
 	var/skybox_icon = 'icons/turf/skybox.dmi' //Path to our background. Lets us use anything we damn well please. Skyboxes need to be 736x736
 	var/background_icon = "dyable"
 	var/use_stars = TRUE
+	var/use_overmap_details = TRUE
 	var/star_path = 'icons/turf/skybox.dmi'
 	var/star_state = "stars"
 	var/list/skybox_cache = list()
@@ -26,16 +27,34 @@ SUBSYSTEM_DEF(skybox)
 	return skybox_cache["[z]"]
 
 /datum/controller/subsystem/skybox/proc/generate_skybox_appearance(z)
+	if(use_overmap_details)
+		var/obj/effect/overmap/O = map_sectors["[z]"]
+		if(istype(O))
+			var/image/overmap_skybox = O.generate_skybox()
+			if(overmap_skybox)
+				return overmap_skybox.appearance
+
+	var/image/base = get_base_skybox()
+	return base.appearance
+
+/datum/controller/subsystem/skybox/proc/get_base_skybox()
 	var/image/base = image(skybox_icon, background_icon)
 	base.color = background_color
 	if(use_stars)
 		var/image/stars = image(skybox_icon, src, star_state)
 		stars.appearance_flags = RESET_COLOR
 		base.overlays += stars
-	return base.appearance
+	return base
+
+/datum/controller/subsystem/skybox/proc/rebuild_skybox_appearances(var/list/zlevels)
+	for(var/z in zlevels)
+		skybox_cache["[z]"] = generate_skybox_appearance(z)
+
+	for(var/client/C)
+		C.update_skybox()
 
 //Update skyboxes. Called by universes, for now.
-/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color, new_use_stars)
+/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color, new_use_stars, new_use_overmap_details)
 	var/need_rebuild = FALSE
 	if(new_state != background_icon)
 		background_icon = new_state
@@ -47,6 +66,10 @@ SUBSYSTEM_DEF(skybox)
 
 	if(new_use_stars != use_stars)
 		use_stars = new_use_stars
+		need_rebuild = TRUE
+
+	if(new_use_overmap_details != use_overmap_details)
+		use_overmap_details = new_use_overmap_details
 		need_rebuild = TRUE
 
 	if(need_rebuild)
