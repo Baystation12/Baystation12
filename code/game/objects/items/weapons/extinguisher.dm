@@ -16,6 +16,7 @@
 
 	var/spray_particles = 3
 	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
+	var/starting_water = 2000
 	var/max_water = 2000
 	var/last_use = 1.0
 	var/safety = 1
@@ -31,13 +32,18 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 3.0
 	spray_amount = 80
+	starting_water = 1000
 	max_water = 1000
 	sprite_name = "miniFE"
 
-/obj/item/weapon/extinguisher/New()
+/obj/item/weapon/extinguisher/Initialize()
+	. = ..()
 	create_reagents(max_water)
-	reagents.add_reagent(/datum/reagent/water, max_water)
-	..()
+	if(starting_water > 0)
+		reagents.add_reagent(/datum/reagent/water, starting_water)
+
+/obj/item/weapon/extinguisher/empty
+	starting_water = 0
 
 /obj/item/weapon/extinguisher/examine(mob/user)
 	if(..(user, 0))

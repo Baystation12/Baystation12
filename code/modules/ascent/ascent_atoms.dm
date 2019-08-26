@@ -1,8 +1,6 @@
 // Submap specific atom definitions.
 
-MANTIDIFY(/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle, "hydration cylinder", "hydration")
-MANTIDIFY(/obj/item/weapon/material/knife/kitchen/cleaver, "mantid cleaver", "cleaver")
-MANTIDIFY(/obj/structure/reagent_dispensers/water_cooler, "mantid fluid dispenser", "water dispensing")
+MANTIDIFY(/obj/item/weapon/storage/bag/trash/purple, "sample collection carrier", "material storer pickerupper")
 MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place")
 
 /obj/structure/bed/chair/padded/purple/ascent
