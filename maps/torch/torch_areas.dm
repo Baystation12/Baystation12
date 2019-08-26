@@ -758,9 +758,14 @@
 	req_access = list(access_engine, access_engine_equip)
 
 /area/engineering/bluespace
-	name = "Bluespace Drive"
+	name = "Bluespace Drive Monitoring"
 	icon_state = "engineering"
+	color = COLOR_BLUE_GRAY
 	req_access = list(list(access_engine_equip, access_heads), access_engine, access_maint_tunnels)
+
+/area/engineering/bluespace/containment
+	name = "Bluespace Drive Containment"
+	color = COLOR_BLUE_LIGHT
 
 /area/engineering/atmos/aux
 	name = "\improper Auxiliary Atmospherics"
@@ -1189,18 +1194,6 @@
 
 /area/shield/bridge
 	name = "\improper Bridge Shield Generator"
-
-/area/shield/firstdeck
-	name = "\improper First Deck Shield Generator"
-
-/area/shield/thirddeck
-	name = "\improper Third Deck Shield Generator"
-
-/area/shield/fourthdeck
-	name = "\improper Fourth Deck Shield Generator"
-
-/area/shield/fifthdeck
-	name = "\improper Fifth Deck Shield Generator"
 
 // Misc
 /area/deity_spawn
