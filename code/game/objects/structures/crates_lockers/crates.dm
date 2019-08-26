@@ -156,6 +156,17 @@
 /obj/structure/closet/crate/freezer/rations/WillContain()
 	return list(/obj/random/mre = 6)
 
+/obj/structure/closet/crate/freezer/meat
+	name = "meat crate"
+	desc = "A crate of meat."
+
+/obj/structure/closet/crate/freezer/meat/WillContain()
+	return list(
+		/obj/item/weapon/reagent_containers/food/snacks/meat/beef = 4,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 4,
+		/obj/item/weapon/reagent_containers/food/snacks/fish = 4
+	)
+
 /obj/structure/closet/crate/bin
 	name = "large bin"
 	desc = "A large bin."
