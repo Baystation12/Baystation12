@@ -105,7 +105,6 @@
 			continue
 		var/image/extra = O.get_skybox_representation()
 		if(extra)
-			extra.appearance_flags = RESET_COLOR
 			skybox.overlays |= extra
 	return skybox
 
