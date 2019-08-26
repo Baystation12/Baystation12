@@ -21,34 +21,34 @@ SUBSYSTEM_DEF(skybox)
 	background_color = SSskybox.background_color
 	skybox_cache = SSskybox.skybox_cache
 
-/datum/controller/subsystem/skybox/proc/get_skybox_appearance(z)
+/datum/controller/subsystem/skybox/proc/get_skybox(z)
 	if(!skybox_cache["[z]"])
-		skybox_cache["[z]"] = generate_skybox_appearance(z)
+		skybox_cache["[z]"] = generate_skybox(z)
 	return skybox_cache["[z]"]
 
-/datum/controller/subsystem/skybox/proc/generate_skybox_appearance(z)
+/datum/controller/subsystem/skybox/proc/generate_skybox(z)
 	if(use_overmap_details)
 		var/obj/effect/overmap/O = map_sectors["[z]"]
 		if(istype(O))
 			var/image/overmap_skybox = O.generate_skybox()
 			if(overmap_skybox)
-				return overmap_skybox.appearance
+				return overmap_skybox
 
 	var/image/base = get_base_skybox()
-	return base.appearance
+	return base
 
 /datum/controller/subsystem/skybox/proc/get_base_skybox()
-	var/image/base = image(skybox_icon, background_icon)
+	var/image/base = image(skybox_icon, icon_state = background_icon)
 	base.color = background_color
 	if(use_stars)
-		var/image/stars = image(skybox_icon, src, star_state)
+		var/image/stars = image(skybox_icon, icon_state = star_state)
 		stars.appearance_flags = RESET_COLOR
 		base.overlays += stars
 	return base
 
-/datum/controller/subsystem/skybox/proc/rebuild_skybox_appearances(var/list/zlevels)
+/datum/controller/subsystem/skybox/proc/rebuild_skyboxes(var/list/zlevels)
 	for(var/z in zlevels)
-		skybox_cache["[z]"] = generate_skybox_appearance(z)
+		skybox_cache["[z]"] = generate_skybox(z)
 
 	for(var/client/C)
 		C.update_skybox()
