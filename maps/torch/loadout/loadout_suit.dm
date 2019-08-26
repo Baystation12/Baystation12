@@ -18,7 +18,7 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/medical_poncho
-	allowed_roles = list(/datum/job/senior_doctor, /datum/job/doctor, /datum/job/psychiatrist, /datum/job/biomech, /datum/job/merchant, /datum/job/chemist)
+	allowed_roles = list(/datum/job/senior_doctor, /datum/job/doctor, /datum/job/psychiatrist, /datum/job/merchant, /datum/job/chemist)
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/engineering_poncho
