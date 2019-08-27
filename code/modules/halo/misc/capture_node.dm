@@ -1,5 +1,4 @@
 GLOBAL_LIST_EMPTY(capture_nodes)
-#define DEFENDER_MOBS_BY_FACTION list("UNSC"=list(/mob/living/simple_animal/hostile/defender_mob/unsc/marine, /mob/living/simple_animal/hostile/defender_mob/unsc/odst),"Covenant"=list(/mob/living/simple_animal/hostile/defender_mob/cov/grunt, /mob/living/simple_animal/hostile/defender_mob/cov/kig),"Insurrection"=list(/mob/living/simple_animal/hostile/defender_mob/innie/medium, /mob/living/simple_animal/hostile/defender_mob/innie/heavy))
 #define FALLBACK_MOBSPAWN_AMOUNT 4
 
 /obj/machinery/computer/capture_node
@@ -84,12 +83,13 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 			O.node_contested(src, control_faction, trigger_faction)
 
 /obj/machinery/computer/capture_node/proc/spawn_defenders()
-	var/list/defenders_spawn = DEFENDER_MOBS_BY_FACTION["[control_faction]"]
+	var/datum/faction/F = GLOB.factions_by_name[control_faction]
+	var/list/defenders_spawn = F.defender_mob_types
 	if(defenders_spawn.len == 0)
 		return
 	if(capture_npc_spawnlocs.len == 0)
 		for(var/i = 0,i < FALLBACK_MOBSPAWN_AMOUNT,i++)
-			var/to_spawn = pick(defenders_spawn)
+			var/to_spawn = pickweight(defenders_spawn)
 			new to_spawn (pick(view(7,src)))
 		return
 	for(var/turf/t in capture_npc_spawnlocs)

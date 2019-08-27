@@ -1,35 +1,22 @@
-GLOBAL_LIST_EMPTY(all_factions)
-GLOBAL_LIST_EMPTY(factions_by_name)
-GLOBAL_LIST_EMPTY(factions_by_type)
 
-GLOBAL_DATUM_INIT(UNSC, /datum/faction/unsc, new /datum/faction/unsc())
-GLOBAL_DATUM_INIT(COVENANT, /datum/faction/covenant, new /datum/faction/covenant())
-GLOBAL_DATUM_INIT(INSURRECTION, /datum/faction/insurrection, new /datum/faction/insurrection())
-GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_civ())
-GLOBAL_DATUM_INIT(FLOOD, /datum/faction/flood, new /datum/faction/flood())
-/*
-/hook/startup/proc/generate_factions()
-	if(!GLOB.all_factions.len)
-		for(var/faction_type in typesof(/datum/faction) - /datum/faction)
-			var/datum/faction/F = new faction_type()
-			GLOB.all_factions.Add(F)
-			GLOB.factions_by_name[F.name] = F
-	return 1
-*/
 /datum/faction
 	var/name = "Unknown faction"
+	var/parent_faction
+	var/codename = ""
 	var/points = 0
 	var/list/all_objectives = list()
 	var/list/objectives_without_targets = list()
 	var/list/assigned_minds = list()
 	var/list/living_minds = list()
+	var/list/defender_mob_types = list()
 	var/max_points = 0
 	var/ignore_players_dead = 0
 	var/obj/effect/overmap/flagship
 	var/obj/effect/overmap/base
 	var/list/enemy_factions = list()
+	var/list/angry_factions = list()
 	var/list/active_quests = list()
-	var/list/complete_quests = list()
+	var/list/completed_quests = list()
 	var/datum/job/commander_job		//this needs to be set in the gamemode code
 	var/commander_titles = list()	//checks in order of priority for objective purposes
 	var/has_flagship = 0
@@ -39,12 +26,61 @@ GLOBAL_DATUM_INIT(FLOOD, /datum/faction/flood, new /datum/faction/flood())
 	var/destroyed_reason = null
 	var/list/ship_types = list()
 	var/list/npc_ships = list()
+	var/list/faction_reputation = list()
+	var/leader_name
+	var/datum/computer_file/data/com/faction_contact_data
+	var/is_processing = 0
+	var/datum/money_account/money_account
+	var/max_npc_quests = 0
+	var/time_next_quest = 0
+	var/quest_interval_min = 1 SECONDS
+	var/quest_interval_max = 5 MINUTES
 
 /datum/faction/New()
 	. = ..()
 	GLOB.all_factions.Add(src)
 	GLOB.factions_by_name[src.name] = src
 	GLOB.factions_by_type[src.type] = src
+
+	while(length(codename) < 6)
+		codename += pick(ascii2text(rand(text2ascii("a"), text2ascii("z"))), "[rand(0,9)]")
+
+	//generate some stuff for radio contacts
+	faction_contact_data = new()
+	faction_contact_data.generate_data(src)
+
+	//leader name
+	if(prob(50))
+		leader_name = capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
+	else
+		leader_name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+
+/datum/faction/proc/Initialize()
+
+/datum/faction/proc/add_faction_reputation(var/faction_name, var/new_rep)
+	if(!faction_reputation.Find(faction_name))
+		faction_reputation[faction_name] = 0
+	faction_reputation[faction_name] += new_rep
+	if(faction_reputation[faction_name] < 0.1 && faction_reputation[faction_name] > -0.1)
+		faction_reputation[faction_name] = 0
+
+	if(faction_reputation[faction_name] < 0)
+		var/datum/faction/F = GLOB.factions_by_name[faction_name]
+		angry_factions.Add(F)
+		start_processing()
+
+/datum/faction/proc/get_faction_reputation(var/faction_name)
+	if(faction_reputation.Find(faction_name))
+		return faction_reputation[faction_name]
+	else
+		return 0
+
+/datum/faction/proc/is_angry_at_faction(var/faction_name)
+	for(var/datum/faction/F in angry_factions)
+		if(F.name == faction_name)
+			return 1
+
+	return 0
 
 /datum/faction/proc/players_alive()
 	return living_minds.len
@@ -94,72 +130,3 @@ GLOBAL_DATUM_INIT(FLOOD, /datum/faction/flood, new /datum/faction/flood())
 			found_areas.Add(A)
 
 	return found_areas
-
-
-
-/* Covenant */
-
-/datum/faction/covenant
-	name = "Covenant"
-	var/list/objective_types = list()
-	enemy_factions = list("UNSC","Insurrection", "Human Colony","Flood")
-	commander_titles = list("Sangheili Shipmaster")
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
-
-/datum/faction/covenant/get_commander(var/datum/mind/check_mind)
-
-	if(!. && check_mind && check_mind.assigned_role == "Sangheili - Shipmaster")
-		return check_mind
-
-	. = ..()
-
-
-
-/* UNSC */
-
-/datum/faction/unsc
-	name = "UNSC"
-	enemy_factions = list("Covenant","Insurrection","Flood")
-	commander_titles = list("UNSC Bertels Commanding Officer")
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
-
-/datum/faction/unsc/get_commander(var/datum/mind/check_mind)
-
-	if(!. && check_mind && check_mind.assigned_role == "UNSC Bertels Commanding Officer")
-		return check_mind
-
-	. = ..()
-
-
-
-/* Insurrection */
-
-/datum/faction/insurrection
-	name = "Insurrection"
-	enemy_factions = list("UNSC","Covenant","Flood")
-	commander_titles = list("Insurrectionist Commander")
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
-
-/datum/faction/insurrection/get_commander(var/datum/mind/check_mind)
-
-	if(!. && check_mind && check_mind.assigned_role == "Insurrectionist Commander")
-		return check_mind
-
-	. = ..()
-
-
-
-/* Human Civilian */
-
-/datum/faction/human_civ
-	name = "Human Colony"
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/cargo)
-
-
-
-/* Flood */
-
-/datum/faction/flood
-	name = "Flood"
-	enemy_factions = list("Covenant","Insurrection","Human Colony","UNSC")
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/flood)

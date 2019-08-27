@@ -1,12 +1,50 @@
 
-/datum/faction/urf
+/datum/faction/npc
+	max_npc_quests = 4
+	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/innie/medium = 3, /mob/living/simple_animal/hostile/defender_mob/innie/heavy)
+
+/datum/faction/npc/New()
+	. = ..()
+	GLOB.npc_factions.Add(src)
+	GLOB.innie_factions.Add(src)
+	GLOB.innie_factions_by_name[name] = src
+
+/datum/faction/npc/Initialize()
+	start_processing()
+	generate_quest()
+
+/datum/faction/npc/urf
 	name = "United Rebel Front"
-	enemy_factions = list("UNSC")
+	enemy_factions = list("UNSC","ONI")
 
-/datum/faction/kosovo
+/datum/faction/npc/kosovo
 	name = "Kosovics"
-	enemy_factions = list("UNSC")
+	enemy_factions = list("UNSC","ONI")
 
-/datum/faction/coral
+/datum/faction/npc/coral
 	name = "Coral Insurgency"
-	enemy_factions = list("UNSC")
+	enemy_factions = list("UNSC","ONI")
+
+/datum/faction/random_criminal/New()
+	. = ..()
+	name = "[random_syndicate_name()] (criminals)"
+	GLOB.factions_controller.criminal_factions.Add(src)
+
+	switch(pick(1,2,3))
+		if(1)
+			defender_mob_types = list(\
+				/mob/living/simple_animal/hostile/russian = 3,\
+				/mob/living/simple_animal/hostile/russian/ranged,\
+				/mob/living/simple_animal/hostile/bear = 2)
+		if(2)
+			defender_mob_types = list(\
+				/mob/living/simple_animal/hostile/pirate = 3,\
+				/mob/living/simple_animal/hostile/pirate/ranged,\
+				/mob/living/simple_animal/hostile/carp = 2)
+		if(3)
+			defender_mob_types = list(\
+				/mob/living/simple_animal/hostile/syndicate = 3,\
+				/mob/living/simple_animal/hostile/syndicate/melee = 2,\
+				/mob/living/simple_animal/hostile/syndicate/melee/space = 2,\
+				/mob/living/simple_animal/hostile/syndicate/ranged = 1,\
+				/mob/living/simple_animal/hostile/syndicate/ranged/space = 1)
