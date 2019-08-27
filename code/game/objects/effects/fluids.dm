@@ -92,7 +92,8 @@
 /obj/effect/flood
 	name = ""
 	mouse_opacity = 0
-	layer = FLY_LAYER
+	layer = DEEP_FLUID_LAYER
+	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	color = COLOR_OCEAN
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
