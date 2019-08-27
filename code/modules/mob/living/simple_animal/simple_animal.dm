@@ -66,6 +66,7 @@
 	var/list/death_sounds = list()
 
 	var/respawning = 0
+	var/limited_respawn  = 0
 	var/respawn_timer = 3 MINUTES
 	var/turf/spawn_turf
 
@@ -83,8 +84,10 @@
 			switch_from_dead_to_living_mob_list()
 			set_stat(CONSCIOUS)
 			set_density(1)
-		else if(respawning)
+		else if(respawning || limited_respawn)
 			if(world.time > timeofdeath + respawn_timer)
+				if(limited_respawn > 0)
+					limited_respawn--
 				health = maxHealth
 				src.forceMove(spawn_turf)
 		return 0
