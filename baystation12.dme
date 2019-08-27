@@ -2849,7 +2849,7 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
-#include "maps\ccs_battlecruiser\ccs_battlecruiser.dm"
+#include "maps\geminus_city\geminus_city.dm"
 #include "maps\geminus_city\innie_quest\file_comms.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
