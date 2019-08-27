@@ -62,7 +62,6 @@
 	return max(0, round(ticksleft/10,1))
 
 /datum/shuttle/autodock/ferry/trade/short_jump()
-	world << "[src] [src.type] /datum/shuttle/autodock/ferry/trade/short_jump()"
 
 	if(moving_status != SHUTTLE_IDLE)
 		return
@@ -73,7 +72,6 @@
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
 	warmup_time = world.time + warmup_length
-	world << "	/datum/shuttle/autodock/ferry/trade/short_jump() check1"
 
 /datum/shuttle/autodock/ferry/trade/process()
 	. = ..()

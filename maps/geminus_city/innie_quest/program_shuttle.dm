@@ -147,10 +147,8 @@
 					//if we're heading to or from home, we'll do a real launch
 					//as the program interface will ensure we never target somewhere we already are
 					if(my_shuttle.current_location.name == "Rabbit Hole Base" || my_shuttle.next_location.name == "Rabbit Hole Base")
-						world << "shuttle real launch"
 						my_shuttle.launch(user)
 					else
-						world << "shuttle fake launch"
 						my_shuttle.fake_launch(user)
 
 					destination_quest = null
