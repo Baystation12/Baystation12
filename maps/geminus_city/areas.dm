@@ -14,7 +14,6 @@
 
 /area/planets/Geminus/outdoor
 	name = "\improper Geminus City Area"
-	luminosity = 0
 
 /area/planets/Geminus/outdoor/north
 	name = "\improper Geminus City - North"
@@ -247,24 +246,30 @@
 	icon_state = "green"
 
 /area/geminus_underground/innie
-	name = "\improper Geminus Insurrection Base Alpha Sector"
+	name = "\improper Rabbit Hole Base Alpha Sector"
 	icon_state = "red"
 
 /area/geminus_underground/innie/bravo
-	name = "\improper Geminus Insurrection Base Bravo Sector"
+	name = "\improper Rabbit Hole Base Bravo Sector"
 	icon_state = "purple"
 
 /area/geminus_underground/innie/charlie
-	name = "\improper Geminus Insurrection Base Charlie Sector"
+	name = "\improper Rabbit Hole Base Charlie Sector"
 	icon_state = "green"
 
 /area/geminus_underground/innie/delta
-	name = "\improper Geminus Insurrection Base Delta Sector"
+	name = "\improper Rabbit Hole Base Delta Sector"
 	icon_state = "yellow"
 
 /area/geminus_underground/innie/echo
-	name = "\improper Geminus Insurrection Base Echo Sector"
+	name = "\improper Rabbit Hole Base Echo Sector"
 	icon_state = "blueold"
+
+/area/geminus_underground/innie/valley
+	name = "\improper Rabbit Hole Base Secret Valley Landing Pad"
+	icon_state = "start"
+	dynamic_lighting = 0
+	requires_power = 0
 
 ////////////// X52 ///////////////
 
