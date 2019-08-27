@@ -970,6 +970,7 @@
 #include "code\game\turfs\biomes\snow_doodads.dm"
 #include "code\game\turfs\doodads\_flora.dm"
 #include "code\game\turfs\doodads\_tree.dm"
+#include "code\game\turfs\doodads\_tree_indestructable.dm"
 #include "code\game\turfs\doodads\flora_grassy.dm"
 #include "code\game\turfs\doodads\flora_snow.dm"
 #include "code\game\turfs\doodads\rocks.dm"
