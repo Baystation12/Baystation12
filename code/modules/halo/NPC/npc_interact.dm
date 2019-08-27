@@ -10,8 +10,11 @@
 	if(user && istype(user) && can_use(user))
 		if(interacting_mob && !can_use(interacting_mob))
 			interacting_mob = null
-		if(interacting_mob && interacting_mob != user)
-			to_chat(user, "[src] is already dealing with [interacting_mob]!")
+
+		if(last_afraid)
+			to_chat(user, "<span class='notice'>[src] is too panicked right now!</span>")
+		else if(interacting_mob && interacting_mob != user)
+			to_chat(user, "<span class='notice'>[src] is already dealing with [interacting_mob]!</span>")
 		else
 			current_greeting_index = rand(1, greetings.len)
 			say(greetings[current_greeting_index])
@@ -99,7 +102,10 @@
 	if(ui)
 		ui.close()
 	interacting_mob = null
-	say(pick(goodbyes))
+	if(last_afraid)
+		say(pick(afraid_responses))
+	else
+		say(pick(goodbyes))
 	speak_chance = initial(speak_chance)
 
 /mob/living/simple_animal/npc/Topic(href, href_list)

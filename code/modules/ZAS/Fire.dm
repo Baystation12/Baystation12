@@ -39,8 +39,6 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /zone/proc/process_fire()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
 
-	//datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
-	//var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
 	var/firelevel = burn_gas.zburn(src, force_burn = 1, no_check = 1)
 
 	air.merge(burn_gas)
@@ -71,7 +69,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	//As a simplification, we remove fuel equally from all fuel sources. It might be that some fuel sources have more fuel,
 	//some have less, but whatever. It will mean that sometimes we will remove a tiny bit less fuel then we intended to.
 
-	var/fuel_to_remove = used_liquid_fuel/(fuel_objs.len*LIQUIDFUEL_AMOUNT_TO_MOL) //convert back to liquid volume units
+	var/fuel_to_remove = used_liquid_fuel/(fuel_objs.len) //convert back to liquid volume units
 
 	for(var/O in fuel_objs)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = O
@@ -80,7 +78,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			continue
 
 		fuel.amount -= fuel_to_remove
-		if(fuel.amount <= fuel_to_remove)
+		if(fuel.amount <= 0)
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
@@ -226,7 +224,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	fire_protection = world.time
 
 //Returns the firelevel
-/datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
+/datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0, var/turf/simulated/target_turf = null)
 	. = 0
 	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
 
@@ -251,9 +249,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//Liquid Fuel
 		var/fuel_area = 0
-		if(zone)
+		if(target_turf)
+			fuel_area = 1
+			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in target_turf)
+				liquid_fuel += fuel.amount
+		else if(zone)
 			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in zone.fuel_objs)
-				liquid_fuel += fuel.amount*LIQUIDFUEL_AMOUNT_TO_MOL
+				liquid_fuel += fuel.amount
 				fuel_area++
 
 		total_fuel = gas_fuel + liquid_fuel
@@ -313,7 +315,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			for(var/g in burned_fuel.gas)
 				adjust_gas(gas_data.burn_product[g], burned_fuel.gas[g])
 
-		if(zone)
+		if(target_turf)
+			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in target_turf)
+				fuel.amount -= used_liquid_fuel
+				if(fuel.amount <= 0)
+					qdel(fuel)
+
+		else if(zone)
 			zone.remove_liquidfuel(used_liquid_fuel, !check_combustability())
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix

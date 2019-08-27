@@ -561,10 +561,13 @@ proc/GaussRandRound(var/sigma,var/roundto)
 
 /proc/is_blocked_turf(var/turf/T)
 	var/cant_pass = 0
-	if(T.density) cant_pass = 1
-	for(var/atom/A in T)
-		if(A.density)//&&A.anchored
-			cant_pass = 1
+	if(T.density)
+		cant_pass = 1
+	else
+		for(var/atom/A in T)
+			if(A.density)//&&A.anchored
+				cant_pass = 1
+				break
 	return cant_pass
 
 /proc/get_step_towards2(var/atom/ref , var/atom/trg)
