@@ -4,6 +4,7 @@ datum/computer_file/program/auto_mac
 	filedesc = "MAC Automated Fire Control"
 	program_icon_state = "forensic"
 	nanomodule_path = /datum/nano_module/auto_mac
+	available_on_ntnet = 0
 	extended_desc = "Reroutes targetted_ship and firing the onboard Magnetic Accelerator Cannon to the AI subroutines."
 	size = 30
 
