@@ -8,7 +8,6 @@
 	//ID of the controller on the shuttle
 	var/dock_target = null
 
-	var/obj/effect/shuttle_landmark/next_location
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
 	var/obj/effect/shuttle_landmark/landmark_transition
