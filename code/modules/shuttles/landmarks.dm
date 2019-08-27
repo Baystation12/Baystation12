@@ -24,7 +24,7 @@
 	..()
 	tag = landmark_tag //since tags cannot be set at compile time
 	base_area = locate(base_area || world.area)
-	name = name + " ([x],[y])"
+	//name = name + " ([x],[y])"
 
 /obj/effect/shuttle_landmark/Initialize()
 	. = ..()
@@ -36,10 +36,12 @@
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
+		testing("[src] can't move to [shuttle.current_location], as it's already there!")
 		return FALSE
 	for(var/area/A in shuttle.shuttle_area)
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
 		if(check_collision(translation))
+			testing("[src] can't move [shuttle.next_location] because it is blocked!")
 			return FALSE
 	return TRUE
 
