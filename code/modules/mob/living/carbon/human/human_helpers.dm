@@ -51,7 +51,7 @@
 	equipment_darkness_modifier = 0
 	equipment_overlays.Cut()
 
-	if (!client || client.eye == src) // !client is so the unit tests function
+	if (!client || client.eye == src || client.eye == src.loc) // !client is so the unit tests function
 		if(istype(src.head, /obj/item/clothing/head))
 			add_clothing_protection(head)
 		if(istype(src.glasses, /obj/item/clothing/glasses))
