@@ -27,15 +27,18 @@ SUBSYSTEM_DEF(skybox)
 	return skybox_cache["[z]"]
 
 /datum/controller/subsystem/skybox/proc/generate_skybox(z)
-	if(use_overmap_details)
+	var/image/res
+	if(GLOB.using_map.use_overmap && use_overmap_details)
 		var/obj/effect/overmap/O = map_sectors["[z]"]
 		if(istype(O))
-			var/image/overmap_skybox = O.generate_skybox()
-			if(overmap_skybox)
-				return overmap_skybox
-
-	var/image/base = get_base_skybox()
-	return base
+			res = O.generate_skybox()
+	else
+		res = get_base_skybox()
+	
+	for(var/datum/event/E in SSevent.active_events)
+		if(E.has_skybox_image && E.isRunning && (z in E.affecting_z))
+			res.overlays |= E.get_skybox_image()
+	return res
 
 /datum/controller/subsystem/skybox/proc/get_base_skybox()
 	var/image/base = image(skybox_icon, icon_state = background_icon)
