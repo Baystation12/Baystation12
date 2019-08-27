@@ -1,45 +1,68 @@
+#define SHUTTLE_FLAGS_NONE 0
+#define SHUTTLE_FLAGS_PROCESS 1
+#define SHUTTLE_FLAGS_SUPPLY 2
+#define SHUTTLE_FLAGS_TRADE 4
+#define SHUTTLE_FLAGS_ALL (~SHUTTLE_FLAGS_NONE)
 
-/datum/shuttle/autodock/ferry/geminus_innie
-	name = "Geminus Innie Supply Shuttle"
-	shuttle_area = /area/shuttle/innie_shuttle
-	//dock_target = "innie_shuttle"
+/datum/shuttle/autodock/ferry/trade
+	name = "Trade Shuttle"
+	category = /datum/shuttle/autodock/ferry/trade
 	warmup_time = 0
 	var/warmup_length = 5 SECONDS
 	move_time = 0
 	location = 0
-	flags = SHUTTLE_FLAGS_PROCESS
+	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_TRADE
+	var/datum/money_account/money_account
+	var/list/all_exports = list()
+	var/list/exports_formatted = list()
+	var/list/export_credits = 0
+	//
+	var/list/requestlist = list()
+	var/list/shoppinglist = list()
+	//
+	var/spawn_trader_type = /mob/living/simple_animal/npc/colonist/weapon_smuggler
 
-	//category = /datum/shuttle/autodock/ferry/geminus_innie
-
-	waypoint_station = "geminus_innie_supply"
-	waypoint_offsite = "offsite_innie_supply"
-
-/datum/shuttle/autodock/ferry/geminus_innie/New()
-	. = ..()
-	GLOB.innie_factions_controller.geminus_supply_shuttle = src
-
-/datum/shuttle/autodock/ferry/geminus_innie/proc/at_station()
+/datum/shuttle/autodock/ferry/trade/proc/at_station()
 	return (!location)
 
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
-/datum/shuttle/autodock/ferry/geminus_innie/proc/forbidden_atoms_check()
+/datum/shuttle/autodock/ferry/trade/proc/forbidden_atoms_check()
 	if (!at_station())
 		return 0	//if badmins want to send forbidden atoms on the supply shuttle from centcom we don't care
 
+	. = 0
 	for(var/area/A in shuttle_area)
-		if(GLOB.innie_factions_controller.forbidden_atoms_check(A))
+		for(var/atom/movable/AM in A)
+			if(check_forbidden_atom(AM))
+				return 1
+
+/datum/shuttle/autodock/ferry/trade/proc/check_forbidden_atom(var/atom/A)
+	if(istype(A,/mob/living))
+		if(!istype(A,/mob/living/simple_animal))
+			return 1
+	if(istype(A,/obj/item/weapon/disk/nuclear))
+		return 1
+	if(istype(A,/obj/machinery/nuclearbomb))
+		return 1
+	if(istype(A,/obj/item/device/radio/beacon))
+		return 1
+
+	for(var/i=1, i<=A.contents.len, i++)
+		var/atom/B = A.contents[i]
+		if(.(B))
 			return 1
 
 //returns the ETA in minutes
-/datum/shuttle/autodock/ferry/geminus_innie/proc/eta_minutes()
+/datum/shuttle/autodock/ferry/trade/proc/eta_minutes()
 	var/ticksleft = arrive_time - world.time
 	return max(0, round(ticksleft/600,1))
 
-/datum/shuttle/autodock/ferry/geminus_innie/proc/eta_seconds()
+/datum/shuttle/autodock/ferry/trade/proc/eta_seconds()
 	var/ticksleft = arrive_time - world.time
 	return max(0, round(ticksleft/10,1))
 
-/datum/shuttle/autodock/ferry/geminus_innie/short_jump()
+/datum/shuttle/autodock/ferry/trade/short_jump()
+	world << "[src] [src.type] /datum/shuttle/autodock/ferry/trade/short_jump()"
 
 	if(moving_status != SHUTTLE_IDLE)
 		return
@@ -50,8 +73,9 @@
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
 	warmup_time = world.time + warmup_length
+	world << "	/datum/shuttle/autodock/ferry/trade/short_jump() check1"
 
-/datum/shuttle/autodock/ferry/geminus_innie/process()
+/datum/shuttle/autodock/ferry/trade/process()
 	. = ..()
 	switch(moving_status)
 		if(SHUTTLE_IDLE)
@@ -64,7 +88,7 @@
 					return
 
 				if (!at_station())	//at centcom
-					GLOB.innie_factions_controller.shuttle_buy()
+					shuttle_buy()
 
 				//We pretend it's a long_jump by making the shuttle stay at centcom for the "in-transit" period.
 				var/obj/effect/shuttle_landmark/away_waypoint = get_location_waypoint(1)
@@ -91,4 +115,7 @@
 				moving_status = SHUTTLE_IDLE
 
 				if (!at_station())	//at centcom
-					GLOB.innie_factions_controller.shuttle_sell(in_use)
+					//GLOB.innie_factions_controller.shuttle_sell(in_use)
+					shuttle_sell()
+
+#undef SHUTTLE_FLAGS_PROCESS
