@@ -9,6 +9,7 @@
 		/obj/item/clothing/shoes/black,
 		/obj/item/clothing/suit/chaplain_hoodie,
 		/obj/item/weapon/storage/candle_box = 2,
+		/obj/item/weapon/storage/candle_box/incense,
 		/obj/item/weapon/deck/tarot,
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
 		/obj/item/weapon/nullrod,
