@@ -26,9 +26,11 @@
 	enemy_factions = list("UNSC","ONI")
 
 /datum/faction/random_criminal/New()
-	. = ..()
 	name = "[random_syndicate_name()] (criminals)"
-	GLOB.factions_controller.criminal_factions.Add(src)
+	GLOB.criminal_factions.Add(src)
+	GLOB.criminal_factions_by_name[name] = src
+
+	. = ..()
 
 	switch(pick(1,2,3))
 		if(1)

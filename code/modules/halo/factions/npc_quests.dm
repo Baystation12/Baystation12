@@ -57,9 +57,12 @@
 /datum/faction/proc/generate_quest()
 	//create a new quest
 	var/datum/npc_quest/new_quest = new()
+	active_quests.Add(new_quest)
+	new_quest.faction = src
+	. = new_quest
 
 	//quest details
-	new_quest.enemy_faction = pick(enemy_factions + GLOB.criminal_factions)
+	new_quest.enemy_faction = pick(enemy_factions + GLOB.criminal_factions_by_name)
 	new_quest.location_name = "\
 		[pick(GLOB.station_departments)] \
 		[pick(GLOB.station_suffixes)] \
@@ -97,11 +100,6 @@
 	//quest enemies
 	var/datum/faction/F = GLOB.factions_by_name[new_quest.enemy_faction]
 	new_quest.quest_objective.defender_types = F.defender_mob_types
-
-	//finish up
-	active_quests.Add(new_quest)
-	new_quest.faction = src
-	return new_quest
 
 /datum/faction/proc/reject_quest(var/faction_name, var/datum/npc_quest/Q)
 	active_quests.Remove(Q)

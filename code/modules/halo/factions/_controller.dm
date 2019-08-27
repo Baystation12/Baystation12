@@ -13,6 +13,7 @@ GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)
 	var/list/innie_factions
 	var/list/innie_factions_by_name
 	var/list/criminal_factions
+	var/list/criminal_factions_by_name
 	var/list/npc_factions
 
 /datum/controller/process/factions/New()
@@ -24,6 +25,7 @@ GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)
 	innie_factions = GLOB.innie_factions
 	innie_factions_by_name = GLOB.innie_factions_by_name
 	criminal_factions = GLOB.criminal_factions
+	criminal_factions_by_name = GLOB.criminal_factions_by_name
 	npc_factions = GLOB.npc_factions
 	. = ..()
 
