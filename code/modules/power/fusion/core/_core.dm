@@ -6,7 +6,6 @@
 	desc = "An enormous solenoid for generating extremely high power electromagnetic fields. It includes a kinetic energy harvester."
 	icon = 'icons/obj/machines/power/fusion_core.dmi'
 	icon_state = "core0"
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	use_power = POWER_USE_IDLE

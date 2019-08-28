@@ -6,7 +6,6 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals.dmi'
-	plane = ABOVE_TURF_PLANE
 	layer = DECAL_LAYER
 	appearance_flags = RESET_COLOR
 	var/supplied_dir
@@ -22,7 +21,7 @@ var/list/floor_decals = list()
 	if(supplied_dir) set_dir(supplied_dir)
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
-		plane = T.is_plating() ? ABOVE_PLATING_PLANE : ABOVE_TURF_PLANE
+		layer = T.is_plating() ? DECAL_PLATING_LAYER : DECAL_LAYER
 		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]-[detail_overlay]-[detail_color]"
 		if(!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
@@ -1133,7 +1132,6 @@ var/list/floor_decals = list()
 	icon_state = "snowfloor"
 
 /obj/effect/floor_decal/floordetail
-	plane = TURF_PLANE
 	layer = TURF_DETAIL_LAYER
 	color = COLOR_GUNMETAL
 	icon_state = "manydot"

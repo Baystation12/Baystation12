@@ -4,7 +4,6 @@
 	icon = 'icons/mecha/mech_bay.dmi'
 	icon_state = "recharge_floor"
 	density = 0
-	plane = ABOVE_TURF_PLANE
 	layer = ABOVE_TILE_LAYER
 	anchored = 1
 	idle_power_usage = 200	// Some electronics, passive drain.

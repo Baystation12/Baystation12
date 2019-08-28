@@ -3,7 +3,7 @@
 	name = "plating"
 	icon = 'icons/turf/flooring/plating.dmi'
 	icon_state = "plating"
-	plane = PLATING_PLANE
+	layer = PLATING_LAYER
 
 /turf/simulated/floor/bluegrid
 	name = "mainframe floor"
@@ -395,7 +395,7 @@
 
 /turf/simulated/floor/beach/water/New()
 	..()
-	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=MOB_LAYER+0.1)
+	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=BASE_MOB_LAYER+0.1)
 
 /turf/simulated/floor/crystal
 	name = "crystal floor"

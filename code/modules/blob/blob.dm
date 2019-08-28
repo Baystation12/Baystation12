@@ -10,7 +10,6 @@
 	anchored = 1
 	mouse_opacity = 2
 
-	plane = BLOB_PLANE
 	layer = BLOB_SHIELD_LAYER
 
 	var/maxHealth = 30

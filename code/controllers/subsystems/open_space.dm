@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(open_space)
 /datum/controller/subsystem/open_space/Initialize()
 	. = ..()
 	GLOB.over_OS_darkness.plane = OVER_OPENSPACE_PLANE
-	GLOB.over_OS_darkness.layer = MOB_LAYER
+	GLOB.over_OS_darkness.layer = BASE_MOB_LAYER
 
 /datum/controller/subsystem/open_space/fire(resumed = 0)
 	// We use a different list so any additions to the update lists during a delay from CHECK_TICK

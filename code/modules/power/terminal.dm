@@ -8,7 +8,6 @@
 	icon_state = "term"
 	desc = "It's an underfloor wiring terminal for power equipment."
 	level = 1
-	plane = ABOVE_TURF_PLANE
 	layer = EXPOSED_WIRE_TERMINAL_LAYER
 	var/obj/item/weapon/stock_parts/power/terminal/master
 	anchored = 1
@@ -26,7 +25,6 @@
 
 /obj/machinery/power/terminal/hide(var/do_hide)
 	if(do_hide && level == 1)
-		plane = ABOVE_PLATING_PLANE
 		layer = WIRE_TERMINAL_LAYER
 	else
 		reset_plane_and_layer()

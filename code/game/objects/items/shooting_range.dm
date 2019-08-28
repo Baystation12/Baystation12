@@ -66,7 +66,6 @@
 		bmark.pixel_x = p_x
 		bmark.pixel_y = p_y
 		bmark.icon = 'icons/effects/effects.dmi'
-		bmark.plane = OBJ_PLANE
 		bmark.layer = ABOVE_OBJ_LAYER
 		bmark.icon_state = "scorch"
 

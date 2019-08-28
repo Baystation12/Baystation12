@@ -93,7 +93,6 @@
 	desc = "You shouldn't be clicking this."
 	icon = 'icons/effects/tile_effects.dmi'
 	icon_state = "generic"
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = 0

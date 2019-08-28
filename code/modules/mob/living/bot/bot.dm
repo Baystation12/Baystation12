@@ -44,7 +44,6 @@
 	var/frustration = 0
 	var/max_frustration = 0
 
-	plane = HIDING_MOB_PLANE
 	layer = HIDING_MOB_LAYER
 
 /mob/living/bot/New()

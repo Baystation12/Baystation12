@@ -36,7 +36,6 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	desc = "It's a floor-mounted device for projecting holographic images."
 	icon_state = "holopad-B0"
 
-	plane = ABOVE_TURF_PLANE
 	layer = ABOVE_TILE_LAYER
 
 	var/power_per_hologram = 500 //per usage per hologram
@@ -277,7 +276,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		if(A.holo_icon_malf == TRUE)
 			hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
 	hologram.mouse_opacity = 0//So you can't click on it.
-	hologram.plane = ABOVE_HUMAN_PLANE
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = 1//So space wind cannot drag it.
 	if(caller_id)

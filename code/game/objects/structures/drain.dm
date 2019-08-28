@@ -7,7 +7,7 @@
 	icon_state = "drain"
 	anchored = 1
 	density = 0
-	layer = TURF_LAYER+0.1
+	layer = BASE_TURF_LAYER+0.1
 	can_drain = 1
 	var/welded
 

@@ -5,7 +5,6 @@ var/list/floor_light_cache = list()
 	icon = 'icons/obj/machines/floor_light.dmi'
 	icon_state = "base"
 	desc = "A backlit floor panel."
-	plane = ABOVE_TURF_PLANE
 	layer = ABOVE_TILE_LAYER
 	anchored = 0
 	use_power = POWER_USE_ACTIVE
