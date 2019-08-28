@@ -280,11 +280,14 @@ Standard helpers for users interacting with machinery parts.
 		var/path = removable_parts[input]
 		if(!path || !components_are_accessible(path))
 			return TRUE
-		var/obj/item/weapon/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
-		if(part)
-			user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
-			user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
+		remove_part_and_give_to_user(path, user)
 		return TRUE
+
+/obj/machinery/proc/remove_part_and_give_to_user(var/path, mob/user)
+	var/obj/item/weapon/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
+	if(part)
+		user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
+		user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
 
 /obj/machinery/proc/missing_parts()
 	if(!construct_state)
