@@ -121,6 +121,7 @@
 	var/atom/movable/locked
 	equipment_delay = 30 //Stunlocks are not ideal
 	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
+	require_adjacent = FALSE
 
 /obj/item/mech_equipment/catapult/get_hardpoint_maptext()
 	var/string
