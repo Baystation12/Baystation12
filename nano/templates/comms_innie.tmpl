@@ -35,7 +35,10 @@
 	{{/for}}
 {{else data.screen == 2}}
 	<h1>{{:data.selected_faction}} ({{:data.codename}})</h1>
+	{{:data.faction_blurb}}
+	<br><br>
 	You are currently talking to {{:data.leader_name}} who is the leader of the {{:data.selected_faction}}. You currently have {{:data.reputation}} reputation with this faction.
+
 	<h2>Finished missions for this faction:</h1>
 	{{for data.faction_quests}}	
 		<div class='block'>

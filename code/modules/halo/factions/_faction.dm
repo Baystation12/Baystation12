@@ -4,6 +4,7 @@
 	var/parent_faction
 	var/codename = ""
 	var/points = 0
+	var/blurb
 	var/list/all_objectives = list()
 	var/list/objectives_without_targets = list()
 	var/list/assigned_minds = list()

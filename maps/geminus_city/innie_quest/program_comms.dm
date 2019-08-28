@@ -60,6 +60,7 @@
 			data["leader_name"] = selected_faction.leader_name
 			data["reputation"] = selected_faction.get_faction_reputation("Insurrection")
 			data["faction_quests"] = faction_quests
+			data["faction_blurb"] = selected_faction.blurb
 
 		if(3)// Quests
 			data["selected_faction"] = selected_faction.name
