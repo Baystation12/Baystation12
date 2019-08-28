@@ -11,3 +11,6 @@
 //however the walls must be simulated (simulated walls can be destroyed, unsimulated cannot; keep that in mind)
 
 //Example maps aren to be used! Do not modify them.
+
+//The CIVILIAN subfolder is meant for multi-purposes map, especially those that do not strictly apply to a faction setting!
+//If your instance can be used for any and all faction, chances are it belongs in this folder.
