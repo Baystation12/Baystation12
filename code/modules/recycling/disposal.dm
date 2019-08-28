@@ -621,6 +621,11 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			to_chat(user, "You need more welding fuel to complete this task.")
 			return
 
+/obj/structure/disposaloutlet/forceMove()//updates this when shuttle moves. So you can YEET things out the airlock
+	. = ..()
+	if(.)
+		target = get_ranged_target_turf(src, dir, 10)
+
 // called when movable is expelled from a disposal pipe or outlet
 // by default does nothing, override for special behaviour
 
