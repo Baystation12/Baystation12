@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - bugfix: "Fixes exosuits being able to use all modules at any range."
