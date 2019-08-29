@@ -20,8 +20,9 @@
 	return attack_hand(user)
 
 /obj/machinery/pager/interface_interact(mob/living/user)
-	if(istype(user, /mob/living/carbon))
-		playsound(src, "button", 60)
+	if(!CanPhysicallyInteract(user))
+		return FALSE
+	playsound(src, "button", 60)
 	flick("doorbellpressed",src)
 	activate(user)
 	return TRUE
