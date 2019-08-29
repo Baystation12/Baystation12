@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - bugfix: "Fixes toolbelt overlay. Putting tools into toolbelt will now show up the belt icon again."
