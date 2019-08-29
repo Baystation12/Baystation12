@@ -24,7 +24,7 @@
 	var/list/big_flora_types = list()
 	var/list/plantcolors = list("RANDOM")
 
-/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/_planetary_area)
+/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/_planetary_area, var/list/_plant_colors)
 	target_turf_type = world.turf
 	water_level = rand(water_level_min,water_level_max)
 	generate_flora()
@@ -34,14 +34,15 @@
 	flora_prob *= size_mod
 	large_flora_prob *= size_mod
 	fauna_prob *= size_mod
-
+	if(_plant_colors)
+		plantcolors = _plant_colors
 	..()
 
 	GLOB.using_map.base_turf_by_z[num2text(tz)] = land_type
 
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
 	return min(9,max(0,round((value/cell_range)*10)))
-	
+
 /datum/random_map/noise/exoplanet/proc/is_edge_turf(turf/T)
 	return T.x <= TRANSITIONEDGE || T.x >= (limit_x - TRANSITIONEDGE + 1) || T.y <= TRANSITIONEDGE || T.y >= (limit_y - TRANSITIONEDGE + 1)
 

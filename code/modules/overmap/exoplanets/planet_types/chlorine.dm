@@ -4,6 +4,7 @@
 	color = "#efff7c"
 	planetary_area = /area/exoplanet/chlorine
 	rock_colors = list(COLOR_GRAY80, COLOR_PALE_GREEN_GRAY, COLOR_PALE_BTL_GREEN)
+	plant_colors = list("#eba487", "#ceeb87", "#eb879c", "#ebd687", "#f6d6c9", "#f2b3e0")
 	map_generators = list(/datum/random_map/noise/exoplanet/chlorine, /datum/random_map/noise/ore/poor)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 
@@ -31,7 +32,6 @@
 	water_type = /turf/simulated/floor/exoplanet/water/shallow/chlorine_liquid
 	water_level_min = 2
 	water_level_max = 3
-	plantcolors = list("#eba487", "#ceeb87", "#eb879c", "#ebd687", "#f6d6c9", "#f2b3e0")
 	fauna_prob = 2
 	flora_prob = 30
 	large_flora_prob = 0
