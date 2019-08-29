@@ -13,7 +13,7 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/roboticist_skirt
-	allowed_roles = list(/datum/job/roboticist, /datum/job/biomech)
+	allowed_roles = list(/datum/job/roboticist)
 
 /datum/gear/uniform/suit
 	allowed_roles = FORMAL_ROLES
