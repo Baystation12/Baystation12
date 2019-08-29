@@ -190,8 +190,6 @@ What is the naming convention for planes or layers?
 
 //This is difference between planes used for atoms and effects
 #define PLANE_DIFFERENCE              3
-/image
-	plane = FLOAT_PLANE			// this is defunct, lummox fixed this on recent compilers, but it will bug out if I remove it for coders not on the most recent compile.
 
 /atom
 	plane = DEFAULT_PLANE
