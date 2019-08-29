@@ -296,7 +296,7 @@
 /area/map_template/oldpod)
 "aM" = (
 /obj/effect/landmark/corpse/scientist,
-/obj/item/weapon/material/wirerod,
+/obj/item/weapon/melee/baton/cattleprod,
 /obj/item/weapon/material/shard,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,

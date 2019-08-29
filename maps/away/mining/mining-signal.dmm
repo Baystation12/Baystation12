@@ -1242,7 +1242,6 @@
 /area/outpost/abandoned)
 "ed" = (
 /obj/effect/decal/cleanable/liquid_fuel,
-/obj/item/weapon/secbot_assembly,
 /obj/effect/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)

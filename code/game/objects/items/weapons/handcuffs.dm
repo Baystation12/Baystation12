@@ -168,17 +168,6 @@ var/last_chew = 0
 /obj/item/weapon/handcuffs/cable/white
 	color = COLOR_SILVER
 
-/obj/item/weapon/handcuffs/cable/attackby(var/obj/item/I, mob/user as mob)
-	..()
-	if(istype(I, /obj/item/stack/material/rods))
-		var/obj/item/stack/material/rods/R = I
-		if (R.use(1))
-			var/obj/item/weapon/material/wirerod/W = new(get_turf(user))
-			user.put_in_hands(W)
-			to_chat(user, "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>")
-			qdel(src)
-			update_icon(user)
-
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1
 

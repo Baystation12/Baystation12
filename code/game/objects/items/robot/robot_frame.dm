@@ -34,21 +34,8 @@
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 
-	// Prepare the frame for ED209 construction.
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_STEEL && !LAZYLEN(parts))
-		var/obj/item/stack/material/M = W
-		if (M.use(1))
-			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly(get_turf(src))
-			to_chat(user, SPAN_WARNING("You armed the robot frame."))
-			if (user.get_inactive_hand()==src)
-				user.drop_from_inventory(src) //clears inactive hand; item will be deleted anyway.
-				user.put_in_inactive_hand(B)
-			qdel(src)
-		else
-			to_chat(user, SPAN_WARNING("You need one sheet of metal to arm the robot frame."))
-
 	// Uninstall a robotic part.
-	else if(isCrowbar(W))
+	if(isCrowbar(W))
 		if(!parts.len)
 			to_chat(user, SPAN_WARNING("\The [src] has no parts to remove."))
 			return
