@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscdel: "Removes the Biomechanical Engineer as a role."
+  - tweak: "Gives the Roboticist trained Anatomy by default."
