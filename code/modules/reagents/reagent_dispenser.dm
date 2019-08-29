@@ -118,7 +118,15 @@
 		to_chat(user, "<span class='warning'>Someone has wrenched open its tap - it's spilling everywhere!</span>")
 
 /obj/structure/reagent_dispensers/watertank/attackby(obj/item/weapon/W, mob/user)
+
 	src.add_fingerprint(user)
+
+	if((istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm)) && user.unEquip(W))
+		to_chat(user, "You add \the [W] arm to \the [src].")
+		qdel(W)
+		new /obj/item/weapon/farmbot_arm_assembly(loc, src)
+		return
+
 	if(isWrench(W))
 		modded = !modded
 		user.visible_message("<span class='notice'>\The [user] wrenches \the [src]'s tap [modded ? "open" : "shut"].</span>", \

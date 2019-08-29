@@ -213,7 +213,6 @@
 				/obj/item/weapon/contraband/poster = 5,
 				/obj/item/weapon/material/butterflyblade = 3,
 				/obj/item/weapon/material/butterflyhandle = 3,
-				/obj/item/weapon/material/wirerod = 3,
 				/obj/item/weapon/melee/baton/cattleprod = 1,
 				/obj/item/weapon/material/knife/combat = 1,
 				/obj/item/weapon/material/knife/folding = 1,

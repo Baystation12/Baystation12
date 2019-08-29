@@ -120,7 +120,8 @@
 
 /obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
-		new /obj/item/weapon/material/wirerod(get_turf(src)) //give back the wired rod
+		new /obj/item/stack/material/rods(get_turf(src), 1)
+		new /obj/item/stack/cable_coil(get_turf(src), 3)
 	..()
 
 /obj/item/weapon/material/twohanded/baseballbat
