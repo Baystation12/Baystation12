@@ -1,18 +1,18 @@
-//Most interesting stuff happens in disperser_fire.dm
+//Most interesting stuff happens in bsa_fire.dm
 //This is just basic construction and deconstruction and the like
 
-/obj/machinery/disperser
-	icon = 'icons/obj/disperser.dmi'
+/obj/machinery/bsa
+	icon = 'icons/obj/bsa.dmi'
 	density = TRUE
 	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 
-/obj/machinery/disperser/examine(mob/user)
+/obj/machinery/bsa/examine(mob/user)
 	. = ..()
 	if(. && panel_open)
 		to_chat(user, "The maintenance panel is open.")
 
-/obj/machinery/disperser/attackby(obj/item/I, mob/user)
+/obj/machinery/bsa/attackby(obj/item/I, mob/user)
 	if(isWrench(I))
 		if(panel_open)
 			user.visible_message("<span class='notice'>\The [user] rotates \the [src] with \the [I].</span>", "<span class='notice'>You rotate \the [src] with \the [I].</span>")
@@ -23,23 +23,23 @@
 	else
 		return ..()
 
-/obj/machinery/disperser/front
-	name = "obstruction field disperser beam generator"
-	desc = "A complex machine which shoots concentrated material beams.\
+/obj/machinery/bsa/front
+	name = "bluespace particle beam generator mark VI."
+	desc = "A complex machine which shoots concentrated bluespace beams.\
 		<br>A sign on it reads: <i>STAY CLEAR! DO NOT BLOCK!</i>"
 	icon_state = "front"
 
-/obj/machinery/disperser/middle
-	name = "obstruction field disperser fusor"
+/obj/machinery/bsa/middle
+	name = "bluespace fusor mark VI."
 	desc = "A complex machine which transmits immense amount of data \
 		from the material deconstructor to the particle beam generator.\
 		<br>A sign on it reads: <i>EXPLOSIVE! DO NOT OVERHEAT!</i>"
 	icon_state = "middle"
 	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
 
-/obj/machinery/disperser/back
-	name = "obstruction field disperser material deconstructor"
-	desc = "A prototype machine which can deconstruct materials atom by atom.\
+/obj/machinery/bsa/back
+	name = "bluespace material deconstructor mark VI."
+	desc = "A prototype machine which can deconstruct materials atom by atom and send them through bluespace instanteniously.\
 		<br>A sign on it reads: <i>KEEP AWAY FROM LIVING MATERIAL!</i>"
 	icon_state = "back"
 	density = FALSE
