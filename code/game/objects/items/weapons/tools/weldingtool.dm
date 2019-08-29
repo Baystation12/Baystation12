@@ -1,7 +1,7 @@
 /obj/item/weapon/weldingtool
 	name = "welding tool"
 	icon = 'icons/obj/tools.dmi'
-	icon_state = "welder_m"
+	icon_state = "welder"
 	item_state = "welder"
 	desc = "A portable welding gun with a port for attaching fuel tanks."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -216,7 +216,11 @@
 
 /obj/item/weapon/weldingtool/on_update_icon()
 	..()
-	icon_state = "welder" + (tank ? "_" + tank.icon_state : "") + (welding ? "_on" : "")
+	overlays.Cut()
+	if(tank)
+		overlays += image('icons/obj/tools.dmi', "welder_[tank.icon_state]")
+	if(welding)
+		overlays += image('icons/obj/tools.dmi', "welder_on")
 	item_state = welding ? "welder1" : "welder"
 	var/mob/M = loc
 	if(istype(M))
