@@ -1,0 +1,4 @@
+author: "BRAINOS, Plaguewalker"
+delete-after: True
+changes: 
+  - rscadd: "Ported new prosthetic types from Aurora; Bishop Rook, ZH Spirit, Xion Econ"
