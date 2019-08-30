@@ -123,3 +123,22 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 	worth_multiplier = 20
+
+
+/obj/item/weapon/material/cross
+	name = "cross"
+	desc = "It's a cross, commonly used as a holy symbol by Christians."
+	icon_state = "cross"
+	force_divisor = 0.1
+	thrown_force_divisor = 0.1
+	w_class = ITEM_SIZE_SMALL
+	attack_verb = list("attacked", "bashed")
+
+/obj/item/weapon/material/cross/wood
+	default_material = MATERIAL_WOOD
+
+/obj/item/weapon/material/cross/silver
+	default_material = MATERIAL_SILVER
+
+/obj/item/weapon/material/cross/gold
+	default_material = MATERIAL_GOLD

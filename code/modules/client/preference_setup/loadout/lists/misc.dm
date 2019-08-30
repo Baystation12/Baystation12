@@ -230,3 +230,17 @@
 	path = /obj/item/weapon/material/knife/folding/swiss
 	cost = 4
 	flags = GEAR_HAS_COLOR_SELECTION
+
+
+/datum/gear/cross
+	display_name = "cross"
+	path = /obj/item/weapon/material/cross
+	cost = 2
+
+/datum/gear/cross/New()
+	..()
+	var/crosstype = list()
+	crosstype["cross, wood"] = /obj/item/weapon/material/cross/wood
+	crosstype["cross, silver"] = /obj/item/weapon/material/cross/silver
+	crosstype["cross, gold"] = /obj/item/weapon/material/cross/gold
+	gear_tweaks += new/datum/gear_tweak/path(crosstype)
