@@ -72,6 +72,7 @@
 	allowed_branches = list(/datum/mil_branch/skrell_fleet)
 	allowed_ranks = list(/datum/mil_rank/skrell_fleet)
 	skill_points = 30
+	is_semi_antagonist = TRUE
 
 /datum/job/submap/skrellscoutship_crew/leader
 	title = "Qrri-Vuxix"
@@ -79,6 +80,7 @@
 	total_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/skrellscoutship
 	info = "Your vessel is scouting through unknown space, working to map out any potential dangers, as well as potential allies."
+	is_semi_antagonist = TRUE
 	
 /datum/job/submap/skrellscoutship_crew/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..(H, alt_title, branch, grade)	//passing through arguments
