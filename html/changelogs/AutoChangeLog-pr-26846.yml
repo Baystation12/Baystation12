@@ -1,0 +1,4 @@
+author: "WezYo"
+delete-after: True
+changes: 
+  - rscadd: "Skrellship crew can now be selected as provocateur"
