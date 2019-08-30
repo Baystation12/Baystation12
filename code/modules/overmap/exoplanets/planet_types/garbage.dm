@@ -63,6 +63,7 @@
 			var/datum/radiation_source/S = new(T, 2*fallout, FALSE)
 			S.range = 4
 			SSradiation.add_source(S)
+			T.set_light(0.4, 1, 2, l_color = PIPE_COLOR_GREEN)
 		if(prob(0.02))
 			var/datum/artifact_find/A = new()
 			new A.artifact_find_type(T)
