@@ -205,8 +205,8 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/skrell
 		)
 
-/datum/species/skrell/get_sex(var/mob/living/carbon/H)
-	return descriptors["headtail length"] == 1 ? MALE : FEMALE
+/datum/species/skrell/get_sex(var/mob/living/carbon/human/H)
+	return istype(H) && (H.descriptors["headtail length"] == 1 ? MALE : FEMALE)
 
 /datum/species/skrell/check_background()
 	return TRUE
