@@ -3,7 +3,9 @@
 /turf
 	var/permit_ao = TRUE
 	var/tmp/list/ao_overlays	// Current ambient occlusion overlays. Tracked so we can reverse them without dropping all priority overlays.
+	var/tmp/list/ao_overlays_mimic
 	var/tmp/ao_neighbors
+	var/tmp/ao_neighbors_mimic
 	var/ao_queued = AO_UPDATE_NONE
 
 /turf/set_density(var/new_density)
@@ -23,6 +25,8 @@
 		return
 
 	var/turf/T
+	if (z_flags & ZM_MIMIC_BELOW)
+		CALCULATE_NEIGHBORS(src, ao_neighbors_mimic, T, (T.z_flags & ZM_MIMIC_BELOW))
 	if (AO_TURF_CHECK(src))
 		CALCULATE_NEIGHBORS(src, ao_neighbors, T, AO_TURF_CHECK(T))
 
@@ -36,7 +40,6 @@
 	I.blend_mode = BLEND_OVERLAY
 	I.appearance_flags = RESET_ALPHA|RESET_COLOR|TILE_BOUND
 	I.layer = AO_LAYER
-	I.plane = DEFAULT_PLANE
 	// If there's an offset, counteract it.
 	if (px || py || pz || pw)
 		I.pixel_x = -px
@@ -71,21 +74,33 @@
 		LAZYADD(AO_LIST, I); \
 	}
 
+#define CUT_AO(TARGET, AO_LIST) \
+	if (AO_LIST) { \
+		TARGET.overlays -= AO_LIST; \
+		AO_LIST.Cut(); \
+	}
+
+#define REGEN_AO(TARGET, AO_LIST, NEIGHBORS) \
+	if (permit_ao && NEIGHBORS != AO_ALL_NEIGHBORS) { \
+		var/corner;\
+		PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, 1, NORTHWEST); \
+		PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, 2, SOUTHEAST); \
+		PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, 3, NORTHEAST); \
+		PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, 4, SOUTHWEST); \
+	} \
+	UNSETEMPTY(AO_LIST); \
+	if (AO_LIST) { \
+		TARGET.overlays |= AO_LIST; \
+	}
+
 /turf/proc/update_ao()
-	if(ao_overlays)
-		overlays -= ao_overlays
-		ao_overlays.Cut()
-	if(AO_TURF_CHECK(src))
-		if(permit_ao && ao_neighbors != AO_ALL_NEIGHBORS)
-			var/list/cache = SSao.cache
-			var/corner
-			PROCESS_AO_CORNER(ao_overlays, ao_neighbors, 1, NORTHWEST)
-			PROCESS_AO_CORNER(ao_overlays, ao_neighbors, 2, SOUTHEAST)
-			PROCESS_AO_CORNER(ao_overlays, ao_neighbors, 3, NORTHEAST)
-			PROCESS_AO_CORNER(ao_overlays, ao_neighbors, 4, SOUTHWEST)
-		UNSETEMPTY(ao_overlays)
-		if(ao_overlays)
-			overlays |= ao_overlays
+	var/list/cache = SSao.cache
+	CUT_AO(shadower, ao_overlays_mimic)
+	CUT_AO(src, ao_overlays)
+	if (z_flags & ZM_MIMIC_BELOW)
+		REGEN_AO(shadower, ao_overlays_mimic, ao_neighbors_mimic)
+	if(AO_TURF_CHECK(src) && !(z_flags & ZM_MIMIC_NO_AO))
+		REGEN_AO(src, ao_overlays, ao_neighbors)
 
 #undef PROCESS_AO_CORNER
 

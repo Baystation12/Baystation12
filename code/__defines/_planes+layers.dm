@@ -62,8 +62,6 @@ What is the naming convention for planes or layers?
 
 #define CLICKCATCHER_PLANE -100
 
-//Reserve planes for openspace
-
 #define SPACE_PLANE               -99
 	#define SPACE_LAYER                  1
 #define SKYBOX_PLANE              -98
@@ -73,10 +71,9 @@ What is the naming convention for planes or layers?
 	#define DEBRIS_LAYER                 1
 	#define DUST_LAYER                   2
 
-//Reserve planes for openspace
-#define OPENSPACE_PLANE            -96
-#define OVER_OPENSPACE_PLANE        -3
+// Openspace uses planes -80 through -74.
 
+#define OVER_OPENSPACE_PLANE        -3
 
 #define DEFAULT_PLANE                   0
 	#define PLATING_LAYER               1

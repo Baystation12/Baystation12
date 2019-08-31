@@ -114,6 +114,8 @@
 		)
 
 	luminosity = set_luminosity
+	// if (T.above && T.shadower)
+	// 	T.shadower.copy_lighting(src)
 
 // Variety of overrides so the overlays don't get affected by weird things.
 /atom/movable/lighting_overlay/ex_act()
