@@ -319,7 +319,7 @@
 			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
 				rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))	
+		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
 			set_internals(null)
 
 		if(internal)
@@ -1137,7 +1137,7 @@
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
-		if(shadow && client.eye == shadow && !is_physically_disabled())
+		if(bound_overlay && client.eye == bound_overlay && !is_physically_disabled())
 			isRemoteObserve = 1
 		else if((mRemote in mutations) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)

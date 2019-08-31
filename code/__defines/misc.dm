@@ -13,6 +13,7 @@
 #define INVISIBILITY_OBSERVER    60
 #define INVISIBILITY_EYE         61
 #define INVISIBILITY_SYSTEM      99
+#define INVISIBILITY_ABSTRACT   101	// special: this can never be seen, regardless of see_invisible
 
 #define SEE_INVISIBLE_LIVING     25
 #define SEE_INVISIBLE_NOLIGHTING 15
