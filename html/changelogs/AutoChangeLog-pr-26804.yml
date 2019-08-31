@@ -1,0 +1,5 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - maptweak: "Replaced all the various depreciated shield rooms."
+  - maptweak: "Split the bluespace drive chamber into two areas for air alarm accuracy."
