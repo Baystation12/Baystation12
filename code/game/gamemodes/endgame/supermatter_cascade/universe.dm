@@ -55,7 +55,7 @@ var/global/universe_has_ended = 0
 	GLOB.cult.allow_narsie = 0
 
 	PlayerSet()
-	SSskybox.reinstate_skyboxes("cascade", FALSE)
+	SSskybox.change_skybox("cascade", new_use_stars = FALSE, new_use_overmap_details = FALSE)
 
 	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
 	spawn(rand(30,60) SECONDS)

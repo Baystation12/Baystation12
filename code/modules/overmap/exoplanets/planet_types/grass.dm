@@ -18,6 +18,9 @@
 		atmosphere.temperature = T20C + rand(10, 30)
 		atmosphere.update_values()
 
+/obj/effect/overmap/sector/exoplanet/grass/get_surface_color()
+	return grass_color
+
 /obj/effect/overmap/sector/exoplanet/grass/adapt_seed(var/datum/seed/S)
 	..()
 	var/carnivore_prob = rand(100)

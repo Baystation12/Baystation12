@@ -8,12 +8,17 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/shrouded, /datum/random_map/noise/ore/poor)
 	ruin_tags_blacklist = RUIN_HABITAT
 	lightlevel = -0.15
+	surface_color = "#3e3960"
+	water_color = "#2b2840"
 
 /obj/effect/overmap/sector/exoplanet/shrouded/generate_atmosphere()
 	..()
 	if(atmosphere)
 		atmosphere.temperature = T20C - rand(10, 20)
 		atmosphere.update_values()
+
+/obj/effect/overmap/sector/exoplanet/shrouded/get_atmosphere_color()
+	return COLOR_BLACK
 
 /datum/random_map/noise/exoplanet/shrouded
 	descriptor = "shrouded exoplanet"

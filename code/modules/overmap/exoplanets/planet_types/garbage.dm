@@ -6,6 +6,8 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/garbage, /datum/random_map/noise/ore/poor)
 	ruin_tags_whitelist = RUIN_ALIEN|RUIN_NATURAL|RUIN_WRECK
 	plant_colors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
+	surface_color = "#a5a18b"
+	water_color = null
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_map()
 	if(prob(50))

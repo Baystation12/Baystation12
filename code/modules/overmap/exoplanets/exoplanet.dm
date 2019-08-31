@@ -23,6 +23,9 @@
 	var/list/rock_colors = list(COLOR_ASTEROID_ROCK)
 	var/list/plant_colors = list("RANDOM")
 	var/grass_color
+	var/surface_color = COLOR_ASTEROID_ROCK
+	var/water_color = "#436499"
+	var/image/skybox_image
 
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
 	var/list/species = list() //list of names to use for simple animals
@@ -88,6 +91,7 @@
 	generate_landing(2)
 	update_biome()
 	generate_daycycle()
+	generate_planet_image()
 	START_PROCESSING(SSobj, src)
 
 //attempt at more consistent history generation for xenoarch finds.
@@ -391,6 +395,65 @@
 			extra_data += "<hr>[ruin_num] possible artificial structure\s detected."
 
 	. += jointext(extra_data, "<br>")
+
+/obj/effect/overmap/sector/exoplanet/get_skybox_representation()
+	return skybox_image
+
+/obj/effect/overmap/sector/exoplanet/proc/generate_planet_image()
+	skybox_image = image('icons/skybox/planet.dmi', "")
+
+	var/image/base = image('icons/skybox/planet.dmi', "base")
+	base.color = get_surface_color()
+	skybox_image.overlays += base
+
+	for(var/datum/exoplanet_theme/theme in themes)
+		skybox_image.overlays += theme.get_planet_image_extra()
+	
+	if(water_color) //TODO: move water levels out of randommap into exoplanet
+		var/image/water = image('icons/skybox/planet.dmi', "water")
+		water.color = water_color
+		water.appearance_flags = PIXEL_SCALE
+		water.transform = water.transform.Turn(rand(0,360))
+		skybox_image.overlays += water
+	
+	if(atmosphere && atmosphere.return_pressure() > SOUND_MINIMUM_PRESSURE)
+
+		var/atmo_color = get_atmosphere_color()
+		if(!atmo_color)
+			atmo_color = COLOR_WHITE
+
+		var/image/clouds = image('icons/skybox/planet.dmi', "weak_clouds")
+
+		if(water_color)
+			clouds.overlays += image('icons/skybox/planet.dmi', "clouds")
+
+		clouds.color = atmo_color
+		skybox_image.overlays += clouds
+
+		var/image/atmo = image('icons/skybox/planet.dmi', "atmoring")
+		skybox_image.underlays += atmo
+		
+	var/image/shadow = image('icons/skybox/planet.dmi', "shadow")
+	shadow.blend_mode = BLEND_MULTIPLY
+	skybox_image.overlays += shadow
+
+	var/image/light = image('icons/skybox/planet.dmi', "lightrim")
+	skybox_image.overlays += light
+
+	skybox_image.pixel_x = rand(0,256)
+	skybox_image.pixel_y = rand(0,256)
+	skybox_image.appearance_flags = RESET_COLOR
+
+/obj/effect/overmap/sector/exoplanet/proc/get_surface_color()
+	return surface_color
+
+/obj/effect/overmap/sector/exoplanet/proc/get_atmosphere_color()
+	var/list/colors = list()
+	for(var/g in atmosphere.gas)
+		if(gas_data.tile_overlay_color[g])
+			colors += gas_data.tile_overlay_color[g]
+	if(colors.len)
+		return MixColors(colors)
 
 /area/exoplanet
 	name = "\improper Planetary surface"
