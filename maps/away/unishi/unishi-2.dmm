@@ -1607,7 +1607,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "eb" = (
-/obj/machinery/food_replicator,
+/obj/machinery/fabricator/replicator,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "ec" = (

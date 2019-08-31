@@ -77,7 +77,7 @@
 		var/obj/machinery/fabricator/fab = new thing
 		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fab.fabricator_class))
 			for(var/mat in recipe.resources)
-				if(isnull(fab.base_storage_capacity[mat]))
+				if(isnull(fab.storage_capacity[mat]))
 					log_bad("[fab.name] ([fab.type]) could not print [recipe.name] due to lacking [mat].")
 					failed += thing
 					break

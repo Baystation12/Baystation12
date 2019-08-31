@@ -729,7 +729,6 @@ var/list/worths = list(
 					/obj/machinery/microscope = -550,
 					/obj/machinery/computer/account_database = -3000,
 					/obj/machinery/atm = -4500,
-					/obj/machinery/food_replicator = -9000,
 					/obj/machinery/readybutton = -0,
 					/obj/machinery/botany/editor = -16000,
 					/obj/machinery/botany = -9050,

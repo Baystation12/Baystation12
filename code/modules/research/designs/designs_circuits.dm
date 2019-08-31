@@ -240,47 +240,54 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/autolathe
 	sort_string = "HABAD"
 
+/datum/design/circuit/replicator
+	name = "replicator board"
+	id = "replicator"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 3, TECH_BIO = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/replicator
+	sort_string = "HABAE"
+
 /datum/design/circuit/microlathe
 	name = "microlathe board"
 	id = "microlathe"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/autolathe/micro
-	sort_string = "HABAE"
+	sort_string = "HABAF"
 
 /datum/design/circuit/mining_console
 	name = "mining console board"
 	id = "mining_console"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/mineral_processing
-	sort_string = "HABAF"
+	sort_string = "HABAG"
 
 /datum/design/circuit/mining_processor
 	name = "mining processor board"
 	id = "mining_processor"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/mining_processor
-	sort_string = "HABAG"
+	sort_string = "HABAH"
 
 /datum/design/circuit/mining_unloader
 	name = "ore unloader board"
 	id = "mining_unloader"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/mining_unloader
-	sort_string = "HABAH"
+	sort_string = "HABAI"
 
 /datum/design/circuit/mining_stacker
 	name = "sheet stacker board"
 	id = "mining_stacker"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/mining_stacker
-	sort_string = "HABAI"
+	sort_string = "HABAJ"
 
 /datum/design/circuit/suspension_gen
 	name = "suspension generator"
 	id = "suspension_gen"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_MAGNET = 4)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/suspension_gen
-	sort_string = "HABAJ"
+	sort_string = "HABAK"
 
 /datum/design/circuit/rdservercontrol
 	name = "R&D server control console"
@@ -688,13 +695,6 @@
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/ntnet_relay
 	sort_string = "WAAAA"
-
-/datum/design/circuit/replicator
-	name = "food replicator"
-	id = "freplicator"
-	req_tech = list(TECH_BIO = 3, TECH_DATA = 3)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/replicator
-	sort_string = "WAAAR"
 
 /datum/design/circuit/washer
 	name = "washing machine"
