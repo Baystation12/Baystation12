@@ -2,8 +2,7 @@
 	name = "Blueforge Aura"
 	icon = 'icons/mob/human_races/species/eyes.dmi'
 	icon_state = "eyes_blueforged_s"
-	plane = ABOVE_HUMAN_PLANE
-	layer = MOB_LAYER
+	layer = BASE_MOB_LAYER
 
 /obj/aura/blueforge_aura/life_tick()
 	user.adjustToxLoss(-10)

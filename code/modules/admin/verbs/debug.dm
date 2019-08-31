@@ -451,7 +451,6 @@
 /obj/effect/debugmarker
 	icon = 'icons/effects/lighting_overlay.dmi'
 	icon_state = "transparent"
-	plane = ABOVE_TURF_PLANE
 	layer = HOLOMAP_LAYER
 	alpha = 127
 
@@ -468,7 +467,8 @@
 		var/netcolor = rgb(rand(100,255),rand(100,255),rand(100,255))
 		for(var/obj/structure/cable/C in PN.cables)
 			var/image/I = image('icons/effects/lighting_overlay.dmi', get_turf(C), "transparent")
-			I.plane = ABOVE_TURF_PLANE
+			I.plane = DEFAULT_PLANE
+			I.layer = EXPOSED_WIRE_LAYER
 			I.alpha = 127
 			I.color = netcolor
 			I.maptext = "\ref[PN]"

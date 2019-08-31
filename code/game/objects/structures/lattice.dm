@@ -6,7 +6,6 @@
 	density = 0
 	anchored = 1
 	w_class = ITEM_SIZE_NORMAL
-	plane = ABOVE_PLATING_PLANE
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
 	var/init_material = MATERIAL_STEEL

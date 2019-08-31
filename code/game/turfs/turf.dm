@@ -2,7 +2,6 @@
 	icon = 'icons/turf/floors.dmi'
 	level = 1
 
-	plane = TURF_PLANE
 	layer = BASE_TURF_LAYER
 
 	var/turf_flags

@@ -8,8 +8,7 @@
 	icon = 'icons/mob/bot/secbot.dmi'
 	icon_state = "secbot0"
 	var/attack_state = "secbot-c"
-	plane = MOB_PLANE
-	layer = MOB_LAYER
+	layer = BASE_MOB_LAYER
 	maxHealth = 50
 	health = 50
 	req_access = list(list(access_security, access_forensics_lockers))

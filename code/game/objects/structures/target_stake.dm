@@ -36,7 +36,7 @@
 	else
 		set_density(1)
 		pinned_target.set_density(0)
-		pinned_target.layer = OBJ_LAYER
+		pinned_target.layer = BASE_OBJECT_LAYER
 		GLOB.moved_event.unregister(pinned_target, src)
 		GLOB.moved_event.unregister(src, pinned_target)
 		pinned_target.stake = null

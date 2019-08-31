@@ -2,7 +2,6 @@
 	name = "radiant aura"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "fire_goon"
-	plane = OBJ_PLANE
 	layer = ABOVE_WINDOW_LAYER
 
 /obj/aura/radiant_aura/added_to(var/mob/living/L)
