@@ -5296,7 +5296,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/shieldbay)
+/area/maintenance/seconddeck/aftport)
 "kW" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -9689,7 +9689,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/shieldbay)
+/area/maintenance/seconddeck/aftport)
 "vS" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/hologram/holopad,
@@ -16728,7 +16728,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/shieldbay)
+/area/maintenance/seconddeck/aftport)
 "Rb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -18662,9 +18662,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
-"XT" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/engineering/shieldbay)
 "XV" = (
 /obj/machinery/button/blast_door{
 	desc = "A remote-control switch.";
@@ -37544,7 +37541,7 @@ jV
 QZ
 kV
 vR
-XT
+zV
 zV
 zV
 CJ
