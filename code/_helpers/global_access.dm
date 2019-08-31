@@ -785,14 +785,14 @@
 			return global.sqladdress;
 		if("sqldb")
 			return global.sqldb;
+		if("sqlenabled")
+			return global.sqlenabled;
 		if("sqlfdbkdb")
 			return global.sqlfdbkdb;
 		if("sqlfdbklogin")
 			return global.sqlfdbklogin;
 		if("sqlfdbkpass")
 			return global.sqlfdbkpass;
-		if("sqllogging")
-			return global.sqllogging;
 		if("sqllogin")
 			return global.sqllogin;
 		if("sqlpass")
@@ -1704,14 +1704,14 @@
 			global.sqladdress=newval;
 		if("sqldb")
 			global.sqldb=newval;
+		if("sqlenabled")
+			global.sqlenabled=newval;
 		if("sqlfdbkdb")
 			global.sqlfdbkdb=newval;
 		if("sqlfdbklogin")
 			global.sqlfdbklogin=newval;
 		if("sqlfdbkpass")
 			global.sqlfdbkpass=newval;
-		if("sqllogging")
-			global.sqllogging=newval;
 		if("sqllogin")
 			global.sqllogin=newval;
 		if("sqlpass")
@@ -2230,10 +2230,10 @@
 	"splatter_cache",
 	"sqladdress",
 	"sqldb",
+	"sqlenabled",
 	"sqlfdbkdb",
 	"sqlfdbklogin",
 	"sqlfdbkpass",
-	"sqllogging",
 	"sqllogin",
 	"sqlpass",
 	"sqlport",

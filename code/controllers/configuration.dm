@@ -20,7 +20,6 @@ var/list/gamemode_cache = list()
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
 	var/log_world_output = 0			// log world.log << messages
-	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/ert_admin_call_only = 0
@@ -301,9 +300,6 @@ var/list/gamemode_cache = list()
 				if ("log_access")
 					config.log_access = 1
 
-				if ("sql_enabled")
-					config.sql_enabled = text2num(value)
-
 				if ("log_say")
 					config.log_say = 1
 
@@ -345,7 +341,7 @@ var/list/gamemode_cache = list()
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
-				
+
 				if ("log_runtime")
 					config.log_runtime = 1
 
@@ -610,7 +606,7 @@ var/list/gamemode_cache = list()
 
 				if("forbidden_versions")
 					config.forbidden_versions = splittext(value, ";")
-				
+
 				if("minimum_byond_version")
 					config.minimum_byond_version = text2num(value)
 
@@ -848,6 +844,8 @@ var/list/gamemode_cache = list()
 			continue
 
 		switch (name)
+			if ("enabled")
+				sqlenabled = TRUE
 			if ("address")
 				sqladdress = value
 			if ("port")
@@ -864,8 +862,6 @@ var/list/gamemode_cache = list()
 				sqlfdbklogin = value
 			if ("feedback_password")
 				sqlfdbkpass = value
-			if ("enable_stat_tracking")
-				sqllogging = 1
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 
