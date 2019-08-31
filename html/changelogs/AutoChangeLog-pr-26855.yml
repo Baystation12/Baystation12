@@ -1,0 +1,4 @@
+author: "Zenithstar"
+delete-after: True
+changes: 
+  - maptweak: "Maintenance near the shield bay now has radiation shielding."
