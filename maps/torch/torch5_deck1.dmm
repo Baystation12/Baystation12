@@ -822,9 +822,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
@@ -1687,6 +1685,9 @@
 /obj/item/weapon/storage/mirror{
 	pixel_x = 32
 	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "adn" = (
@@ -1714,10 +1715,11 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "ado" = (
-/obj/machinery/light/small,
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/light/small{
+	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "adp" = (
@@ -4100,9 +4102,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
-"aka" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/shield/firstdeck)
 "akb" = (
 /obj/machinery/cryopod{
 	dir = 2
@@ -4386,34 +4385,30 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "akZ" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+/obj/structure/hygiene/sink{
+	icon_state = "sink";
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
 	},
-/obj/machinery/alarm{
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22;
-	pixel_y = 0
+	layer = 2.4;
+	level = 2
 	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/firstdeck)
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "ala" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
 	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
 	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/firstdeck)
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "alh" = (
 /obj/structure/cable{
 	d1 = 32;
@@ -4640,29 +4635,18 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "ami" = (
-/obj/structure/cable/green,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/plating,
-/area/shield/firstdeck)
-"amj" = (
-/obj/structure/cable/green,
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	operating = 1;
-	pixel_y = -28
-	},
-/obj/machinery/light/small{
-	icon_state = "bulb1";
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
+"amj" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1;
+	frequency = 1331
 	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/firstdeck)
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "amn" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
@@ -10041,11 +10025,6 @@
 	dir = 6
 	},
 /obj/structure/catwalk,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aJL" = (
@@ -14537,9 +14516,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
-"bFA" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/crew_quarters/head/aux)
 "bGb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -21116,15 +21092,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/development)
-"iKf" = (
-/obj/structure/catwalk,
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/foreport)
 "iLb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -26869,17 +26836,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/firstdeck/aft)
-"puz" = (
-/obj/machinery/door/airlock/engineering{
-	name = "First Deck Shield Generator"
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/shield/firstdeck)
 "puL" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -28299,10 +28255,10 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
 "riD" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "riX" = (
@@ -30056,6 +30012,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
+"sYU" = (
+/obj/machinery/door/airlock/civilian{
+	name = "Stall"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "sZb" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	dir = 1
@@ -46389,10 +46353,10 @@ qKU
 ahL
 ksh
 qKU
-bFA
-aka
-aka
-aka
+ahL
+ahL
+ahL
+ahL
 aIr
 qxb
 qVb
@@ -46591,10 +46555,10 @@ ahL
 ahL
 aal
 ahL
-bFA
+ahL
 akZ
 ami
-aka
+ahL
 aIr
 aIr
 aIr
@@ -46793,10 +46757,10 @@ abR
 acA
 riD
 ado
-bFA
+sYU
 ala
 amj
-aka
+ahL
 aLN
 aMV
 aNV
@@ -46995,10 +46959,10 @@ abS
 ahL
 adi
 ahL
-bFA
-puz
-aka
-aka
+ahL
+ahL
+ahL
+ahL
 aLO
 aMW
 aNW
@@ -47198,7 +47162,7 @@ ahL
 adq
 aee
 ahL
-iKf
+jTV
 aJK
 aKT
 aLP

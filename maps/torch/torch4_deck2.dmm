@@ -5622,8 +5622,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "lE" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -5891,11 +5896,16 @@
 	name = "Drive Containment"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "mn" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "mo" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/hydrogen,
@@ -6494,7 +6504,7 @@
 	name = "Drive Containment"
 	},
 /turf/space,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "nF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/structure/cable/cyan{
@@ -6939,7 +6949,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "oY" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -7314,12 +7324,22 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
 "pL" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
@@ -8206,6 +8226,18 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"ro" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/bluespace/containment)
 "rq" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -9017,7 +9049,7 @@
 /area/engineering/atmos)
 "tU" = (
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "tV" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
@@ -9408,6 +9440,9 @@
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"va" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/engineering/bluespace/containment)
 "vb" = (
 /obj/structure/table/steel,
 /obj/machinery/power/apc/high{
@@ -11426,7 +11461,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "AT" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
 	dir = 8
@@ -12177,7 +12212,7 @@
 	name = "Containment Shield"
 	},
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "CJ" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14041,6 +14076,14 @@
 	icon_state = "walnut_broken3"
 	},
 /area/vacant/chapel)
+"HA" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace/containment)
 "HB" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -15112,7 +15155,7 @@
 "LK" = (
 /obj/structure/sign/warning/secure_area,
 /turf/simulated/wall/r_wall/prepainted,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "LN" = (
 /obj/structure/disposaloutlet{
 	dir = 4
@@ -15643,7 +15686,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "Nz" = (
 /obj/effect/floor_decal/corner/green,
 /turf/simulated/floor/tiled,
@@ -16350,7 +16393,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "PF" = (
 /obj/structure/sign/warning/high_voltage{
 	icon_state = "shock";
@@ -17284,7 +17327,7 @@
 /area/hallway/primary/seconddeck/fore)
 "SX" = (
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "SY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -17461,6 +17504,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
@@ -17654,8 +17702,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "Uj" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -17965,6 +18018,10 @@
 /obj/item/trash,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"Vv" = (
+/obj/machinery/ai_status_display,
+/turf/simulated/wall/r_wall/prepainted,
+/area/engineering/bluespace/containment)
 "Vy" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -18718,6 +18775,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"Yd" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace/containment)
 "Ye" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -19199,8 +19264,13 @@
 	name = "Bluespace Drive"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "ZF" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -35107,13 +35177,13 @@ bd
 bI
 IN
 su
-jV
-jV
+va
+va
 LK
-jV
+va
 LK
-jV
-jV
+va
+va
 VQ
 tn
 Qq
@@ -35309,13 +35379,13 @@ hM
 bI
 oq
 Fj
-jV
-jV
+va
+va
 AR
 oW
 SX
-jV
-jV
+va
+va
 TJ
 RF
 no
@@ -35517,7 +35587,7 @@ SX
 tU
 SX
 SX
-jV
+va
 Ym
 tH
 PI
@@ -35718,8 +35788,8 @@ tU
 tU
 CI
 tU
-tU
-IL
+ro
+Vv
 tp
 OF
 PX
@@ -35919,9 +35989,9 @@ nD
 SX
 SX
 mn
-SX
-SX
-jV
+HA
+Yd
+va
 FK
 tH
 PI
@@ -36118,12 +36188,12 @@ XR
 nW
 Sa
 LK
-jV
+va
 PE
 Ui
 Nx
-jV
-jV
+va
+va
 tr
 OF
 PX
@@ -36320,11 +36390,11 @@ XR
 ng
 Wi
 QQ
-jV
+va
 mm
 lD
 mm
-jV
+va
 sL
 tq
 tH
@@ -36522,11 +36592,11 @@ Sz
 XO
 qt
 QQ
-jV
+va
 LK
 ZE
-jV
-jV
+va
+va
 QR
 tq
 tH
