@@ -724,3 +724,8 @@
 	name = "Gentle 2 Long"
 	icon_state = "hair_gentle2long"
 	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/trimrsidecut
+	name = "Trimmed Right Sidecut"
+	icon_state = "hair_rightside_trim"
+	flags = HAIR_TIEABLE
