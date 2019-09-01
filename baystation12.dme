@@ -302,6 +302,7 @@
 #include "code\datums\movement\atom_movable.dm"
 #include "code\datums\movement\mob.dm"
 #include "code\datums\movement\movement.dm"
+#include "code\datums\movement\multiz.dm"
 #include "code\datums\movement\robot.dm"
 #include "code\datums\movement\~defines.dm"
 #include "code\datums\music_tracks\1.dm"

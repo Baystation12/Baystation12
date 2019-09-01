@@ -248,6 +248,9 @@
 		G.assailant_moved()
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
+	
+	if(mob.pulling && (direction & (UP|DOWN)))
+		mob.zPull(direction)
 
 	//Moving with objects stuck in you can cause bad times.
 	if(get_turf(mob) != old_turf)
