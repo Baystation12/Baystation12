@@ -1,0 +1,5 @@
+author: "babydoll"
+delete-after: True
+changes: 
+  - tweak: "Reduced attack frequency and damage for nearly all castes of asteroclast."
+  - tweak: "Asteroclast nucleus' values change as they're damaged. They become more aggressive, but more vulnerable to attack, and spend more energy regenerating than trying to expand."
