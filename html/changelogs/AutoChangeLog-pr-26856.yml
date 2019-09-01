@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - imageadd: "Adds the 'Trimmed Right Sidecut' hairstyle."
