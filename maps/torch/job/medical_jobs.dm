@@ -11,7 +11,7 @@
 	economic_power = 8
 	alt_titles = list(
 		"Surgeon",
-		"Trauma Surgeon")
+		"Resident")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/senior
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
