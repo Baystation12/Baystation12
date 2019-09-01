@@ -1964,7 +1964,6 @@
 	name = "Emergency NanoMed";
 	icon_state = "wallmed";
 	dir = 8;
-	layer = 3.3;
 	pixel_x = 28;
 	pixel_y = 0
 	},
@@ -3025,7 +3024,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
@@ -9425,7 +9423,6 @@
 	name = "Emergency NanoMed";
 	icon_state = "wallmed";
 	dir = 8;
-	layer = 3.3;
 	pixel_x = 28;
 	pixel_y = 0
 	},
@@ -11086,7 +11083,6 @@
 "Lo" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -11158,7 +11154,6 @@
 "LB" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -13154,7 +13149,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /obj/item/modular_computer/console/preset/supply{
@@ -13894,7 +13888,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/wood/walnut,

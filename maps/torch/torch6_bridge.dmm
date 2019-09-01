@@ -1403,7 +1403,6 @@
 	},
 /obj/machinery/firealarm{
 	dir = 4;
-	layer = 3.3;
 	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/dark,
@@ -3110,7 +3109,6 @@
 	},
 /obj/machinery/firealarm{
 	dir = 4;
-	layer = 3.3;
 	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/dark,
@@ -7668,7 +7666,6 @@
 "pG" = (
 /obj/machinery/status_display{
 	density = 0;
-	layer = 4
 	},
 /turf/simulated/wall/prepainted,
 /area/security/bridgecheck)
@@ -8638,7 +8635,6 @@
 "rQ" = (
 /obj/machinery/status_display{
 	density = 0;
-	layer = 4
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/bridge)
@@ -11285,7 +11281,6 @@
 "yg" = (
 /obj/machinery/status_display{
 	density = 0;
-	layer = 4
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/xo)
@@ -13424,7 +13419,6 @@
 "HE" = (
 /obj/machinery/status_display{
 	density = 0;
-	layer = 4
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/bridge)
@@ -15256,7 +15250,6 @@
 "PP" = (
 /obj/machinery/firealarm{
 	dir = 4;
-	layer = 3.3;
 	pixel_x = 26
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
