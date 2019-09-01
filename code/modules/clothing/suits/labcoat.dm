@@ -124,6 +124,13 @@
 	icon_open = "labcoat_zeng_open"
 	icon_closed = "labcoat_zeng"
 
+/obj/item/clothing/suit/storage/toggle/labcoat/science/morpheus
+	name = "\improper Morpheus Cyberkinetics labcoat"
+	desc = "A suit that protects against minor chemical spills. It has a gray stripe on the shoulder and gray trim on the sleeves, denoting it as a Morpheus Cyberkinetics labcoat."
+	icon_state = "labcoat_morpheus_open"
+	icon_open = "labcoat_morpheus_open"
+	icon_closed = "labcoat_morpheus"
+
 /obj/item/clothing/suit/storage/toggle/labcoat/science/dais
 	name = "\improper DAIS labcoat"
 	desc = "A labcoat with a the logo of Deimos Advanced Information Systems emblazoned on the back. It has a stylish blue \
