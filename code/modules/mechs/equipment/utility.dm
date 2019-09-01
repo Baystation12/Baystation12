@@ -108,6 +108,11 @@
 		icon_state = "[initial(icon_state)]"
 		set_light(0, 0)
 
+/obj/item/mech_equipment/light/uninstalled()
+	on = FALSE
+	update_icon()
+	. = ..()
+	
 #define CATAPULT_SINGLE 1
 #define CATAPULT_AREA   2
 
