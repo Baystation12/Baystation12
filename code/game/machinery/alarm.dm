@@ -906,8 +906,8 @@ FIRE ALARM
 /obj/machinery/firealarm
 	name = "fire alarm"
 	desc = "<i>\"Pull this in case of emergency\"</i>. Thus, keep pulling it forever."
-	icon = 'icons/obj/monitors.dmi'
-	icon_state = "fire0"
+	icon = 'icons/obj/firealarm.dmi'
+	icon_state = "casing"
 	var/detecting = 1.0
 	var/working = 1.0
 	var/time = 10.0
@@ -921,6 +921,7 @@ FIRE ALARM
 	var/wiresexposed = 0
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
+	var/global/list/overlays_cache
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..(user)
@@ -930,6 +931,11 @@ FIRE ALARM
 /obj/machinery/firealarm/Initialize()
 	. = ..()
 	update_icon()
+
+/obj/machinery/firealarm/proc/get_cached_overlay(state)
+	if(!LAZYACCESS(overlays_cache, state))
+		LAZYSET(overlays_cache, state, image(icon, state))
+	return overlays_cache[state]
 
 /obj/machinery/firealarm/on_update_icon()
 	overlays.Cut()
@@ -948,34 +954,29 @@ FIRE ALARM
 		else if(dir == WEST)
 			pixel_x = -21
 
+	icon_state = "casing"
 	if(wiresexposed)
-		switch(buildstage)
-			if(2)
-				icon_state="fire_b2"
-			if(1)
-				icon_state="fire_b1"
-			if(0)
-				icon_state="fire_b0"
+		overlays += get_cached_overlay("b[buildstage]")
 		set_light(0)
 		return
 
 	if(stat & BROKEN)
-		icon_state = "firex"
+		overlays += get_cached_overlay("broken")
 		set_light(0)
 	else if(stat & NOPOWER)
-		icon_state = "firep"
+		overlays += get_cached_overlay("unpowered")
 		set_light(0)
 	else
-		if(!src.detecting)
-			icon_state = "fire1"
+		if(!detecting)
+			overlays += get_cached_overlay("fire1")
 			set_light(0.25, 0.1, 1, 2, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
-			icon_state = "fire0"
+			overlays += get_cached_overlay("fire0")
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
-			src.overlays += image(sl.icon, sl.overlay_alarm)
+			overlays += image(sl.icon, sl.overlay_alarm)
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(src.detecting)

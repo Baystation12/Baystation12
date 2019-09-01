@@ -146,14 +146,8 @@
 /obj/item/device/radio/intercom/on_update_icon()
 	if(!on)
 		icon_state = "intercom-p"
-	else if (broadcasting && listening)
-		icon_state = "intercom_11"
-	else if (broadcasting)
-		icon_state = "intercom_10"
-	else if (listening)
-		icon_state = "intercom_01"
 	else
-		icon_state = "intercom_00"
+		icon_state = "intercom_[broadcasting][listening]"
 
 /obj/item/device/radio/intercom/ToggleBroadcast()
 	..()
