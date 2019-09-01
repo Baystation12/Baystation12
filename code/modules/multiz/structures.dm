@@ -10,6 +10,7 @@
 	density = 0
 	opacity = 0
 	anchored = 1
+	obj_flags = OBJ_FLAG_NOFALL
 
 	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up

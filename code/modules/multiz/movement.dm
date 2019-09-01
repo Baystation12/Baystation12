@@ -134,8 +134,9 @@
 
 	//Override will make checks from different location used for prediction
 	if(location_override)
-		if(locate(/obj/structure/lattice, location_override) || locate(/obj/structure/catwalk, location_override) || locate(/obj/structure/ladder, location_override))
-			return FALSE
+		for(var/obj/O in location_override)
+			if(O.obj_flags & OBJ_FLAG_NOFALL)
+				return FALSE
 
 		var/turf/below = GetBelow(location_override)
 		for(var/atom/A in below)

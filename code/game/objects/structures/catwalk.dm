@@ -7,6 +7,7 @@
 	anchored = 1.0
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
+	obj_flags = OBJ_FLAG_NOFALL
 	var/hatch_open = FALSE
 	var/obj/item/stack/tile/mono/plated_tile
 
