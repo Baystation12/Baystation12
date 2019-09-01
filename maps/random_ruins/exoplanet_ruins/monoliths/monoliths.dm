@@ -46,6 +46,7 @@
 		if(istype(E))
 			var/mob/living/carbon/human/H = user
 			if(!H.isSynthetic())
+				playsound(src, 'sound/effects/zapbeep.ogg', 100, 1)
 				active = 1
 				update_icon()
 				if(prob(70))
