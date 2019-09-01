@@ -37,7 +37,7 @@
 	descriptor = "garbage exoplanet"
 	smoothing_iterations = 4
 	land_type = /turf/simulated/floor/exoplanet/desert
-	flora_prob = 1
+	flora_prob = 0.5
 	large_flora_prob = 0
 	flora_diversity = 2
 	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator/hive)

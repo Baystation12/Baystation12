@@ -4,7 +4,7 @@
 	color = "#8e3900"
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
-	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#5c755e","#120309")
+	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#7a5b3a","#120309")
 	possible_themes = list()
 	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
@@ -36,7 +36,7 @@
 	water_level_max = 6
 
 	fauna_prob = 1
-	flora_prob = 7
+	flora_prob = 3
 	large_flora_prob = 0
 	flora_diversity = 3
 	fauna_types = list(/mob/living/simple_animal/thinbug)

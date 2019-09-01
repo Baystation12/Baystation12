@@ -58,8 +58,8 @@
 	land_type = /turf/simulated/floor/exoplanet/grass
 	water_type = /turf/simulated/floor/exoplanet/water/shallow
 
-	flora_prob = 30
-	large_flora_prob = 50
+	flora_prob = 10
+	large_flora_prob = 30
 	flora_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna)
