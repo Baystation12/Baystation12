@@ -6564,7 +6564,6 @@
 /area/rescue_base/start)
 "apH" = (
 /obj/machinery/vending/wallmed1{
-	layer = 3.3;
 	name = "Emergency NanoMed";
 	pixel_x = 28;
 	pixel_y = 0;
@@ -13442,7 +13441,6 @@
 	pixel_y = 0
 	},
 /obj/machinery/vending/wallmed1{
-	layer = 3.3;
 	name = "Emergency NanoMed";
 	pixel_x = 0;
 	pixel_y = -32
@@ -14961,13 +14959,11 @@
 "aJD" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/o2{
-	layer = 2.8;
 	pixel_x = 4;
 	pixel_y = 6
 	},
 /obj/item/weapon/storage/firstaid/toxin,
 /obj/item/weapon/storage/firstaid/fire{
-	layer = 2.9;
 	pixel_x = 2;
 	pixel_y = 3
 	},
@@ -15712,7 +15708,6 @@
 "aLj" = (
 /obj/effect/forcefield{
 	desc = "You can't get in. Heh.";
-	layer = 1;
 	name = "Blocker"
 	},
 /obj/effect/wingrille_spawn/reinforced/crescent,
@@ -15723,7 +15718,6 @@
 "aLk" = (
 /obj/effect/forcefield{
 	desc = "You can't get in. Heh.";
-	layer = 1;
 	name = "Blocker"
 	},
 /obj/structure/disposalpipe/segment,
@@ -16506,7 +16500,6 @@
 "aNm" = (
 /obj/effect/forcefield{
 	desc = "You can't get in. Heh.";
-	layer = 1;
 	name = "Blocker"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -16561,12 +16554,10 @@
 /obj/structure/table/reinforced,
 /obj/item/weapon/storage/firstaid/toxin,
 /obj/item/weapon/storage/firstaid/o2{
-	layer = 2.8;
 	pixel_x = 4;
 	pixel_y = 6
 	},
 /obj/item/weapon/storage/firstaid/fire{
-	layer = 2.9;
 	pixel_x = 2;
 	pixel_y = 3
 	},

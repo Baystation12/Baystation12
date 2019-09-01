@@ -2027,7 +2027,6 @@
 "fz" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/borderfloor/cee,

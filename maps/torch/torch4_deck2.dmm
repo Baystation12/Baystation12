@@ -2956,7 +2956,6 @@
 "gh" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/stack/material/glass{
@@ -4087,7 +4086,6 @@
 /obj/machinery/vending/wallmed1{
 	dir = 1;
 	icon_state = "wallmed";
-	layer = 3.3;
 	name = "Emergency NanoMed";
 	pixel_x = 0;
 	pixel_y = -32
@@ -7691,7 +7689,6 @@
 /obj/item/weapon/aicard,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -11768,7 +11765,6 @@
 /obj/machinery/access_button{
 	command = "cycle_exterior";
 	frequency = 1379;
-	layer = 7;
 	master_tag = "incinerator_access_control";
 	name = "Incinerator airlock control";
 	pixel_x = 10;
@@ -16053,7 +16049,6 @@
 "OQ" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
 	},
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil,
@@ -16101,7 +16096,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -16622,7 +16616,6 @@
 "Qt" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -17307,7 +17300,6 @@
 "SQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -18218,7 +18210,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
