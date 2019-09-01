@@ -164,8 +164,8 @@
 	department = "Engineering"
 	department_flag = ENG
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	minimal_player_age = 0
 	supervisors = "the Chief Engineer and the Corporate Liaison."
 	selection_color = "#5b4d20"
