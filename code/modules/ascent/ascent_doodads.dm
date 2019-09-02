@@ -37,7 +37,7 @@
 	name = "hydration ration"
 	desc = "Approximately ten units of liquid hydration in a edible membrane. Unflavored."
 	icon = 'icons/obj/ascent_doodads.dmi'
-	icon_state = "h20_ration"
+	icon_state = "h2o_ration"
 	bitesize = 10
 /obj/item/weapon/reagent_containers/food/snacks/hydration/Initialize()
 	.=..()
