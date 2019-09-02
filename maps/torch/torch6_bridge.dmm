@@ -4554,13 +4554,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -7664,9 +7658,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bridgecheck)
 "pG" = (
-/obj/machinery/status_display{
-	density = 0;
-	},
+/obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
 /area/security/bridgecheck)
 "pI" = (
@@ -8633,9 +8625,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "rQ" = (
-/obj/machinery/status_display{
-	density = 0;
-	},
+/obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/bridge)
 "rR" = (
@@ -11279,9 +11269,7 @@
 /turf/simulated/floor/plating,
 /area/bridge)
 "yg" = (
-/obj/machinery/status_display{
-	density = 0;
-	},
+/obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/xo)
 "yh" = (
@@ -13417,9 +13405,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HE" = (
-/obj/machinery/status_display{
-	density = 0;
-	},
+/obj/machinery/status_display,
 /turf/simulated/wall/r_wall/hull,
 /area/bridge)
 "HF" = (

@@ -16396,13 +16396,7 @@
 /area/merchant_station)
 "aMZ" = (
 /obj/structure/table/woodentable,
-/obj/random/single{
-	icon = 'icons/obj/items.dmi';
-	icon_state = "lighter-g";
-	name = "randomly spawned lighter";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/flame/lighter
-	},
+/obj/random/single/lighter,
 /obj/random/toy,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
