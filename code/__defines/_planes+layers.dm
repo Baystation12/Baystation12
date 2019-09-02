@@ -155,6 +155,8 @@ What is the naming convention for planes or layers?
 	#define ABOVE_PROJECTILE_LAYER      61
 	#define SINGULARITY_LAYER           62
 	#define POINTER_LAYER               63
+
+	#define BASE_FLY_LAYER              63.5
 	//OBSERVER
 	#define OBSERVER_LAYER              64
 
