@@ -47,7 +47,7 @@
 	//and following a N/Z ratio of 1.5, the molar mass of a monatomic gas is:
 	molar_mass = 0.405	// kg/mol
 
-	tile_overlay = GAS_PHORON
+	tile_color = "#ff9940"
 	overlay_limit = 0.7
 	flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
 	breathed_product = /datum/reagent/toxin/phoron
@@ -99,6 +99,9 @@
 
 	symbol_html = "X<sup>[num]</sup>"
 	symbol = "X-[num]"
+	if(prob(50))
+		tile_color = RANDOM_RGB
+		overlay_limit = 0.5
 
 /decl/xgm_gas/hydrogen
 	id = GAS_HYDROGEN
@@ -169,6 +172,7 @@
 /decl/xgm_gas/nitrodioxide
 	id = GAS_NO2
 	name = "Nitrogen Dioxide"
+	tile_color = "#ca6409"
 	specific_heat = 37	// J/(mol*K)
 	molar_mass = 0.054	// kg/mol
 	flags = XGM_GAS_OXIDIZER
@@ -189,7 +193,7 @@
 /decl/xgm_gas/chlorine
 	id = GAS_CHLORINE
 	name = "Chlorine"
-	tile_overlay = "chlorine"
+	tile_color = "#c5f72d"
 	overlay_limit = 0.5
 	specific_heat = 5	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
