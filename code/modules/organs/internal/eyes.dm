@@ -100,7 +100,7 @@
 	..()
 	flash_mod = species.flash_mod
 	darksight_range = species.darksight_range
-	darksight_tint = species.darksight_range
+	darksight_tint = species.darksight_tint
 
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
 	return (flash_protection + innate_flash_protection)
