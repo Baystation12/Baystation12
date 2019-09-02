@@ -567,6 +567,7 @@
 /obj/structure/cable{
 	icon_state = "6-8"
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "bw" = (
@@ -709,6 +710,7 @@
 /area/ship/scrap/cargo/lower)
 "bL" = (
 /obj/effect/landmark/test/safe_turf,
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "bM" = (
@@ -2228,12 +2230,15 @@
 /obj/item/weapon/tape_roll,
 /obj/structure/table/standard,
 /obj/item/device/radio/intercom{
-	pixel_y = -32
+	dir = 1;
+	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "eZ" = (
-/obj/machinery/vending/tool,
+/obj/machinery/vending/tool{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "fb" = (
@@ -2698,6 +2703,7 @@
 	dir = 4;
 	level = 2
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "Dl" = (
@@ -6248,7 +6254,7 @@ ak
 av
 aH
 aT
-aU
+du
 Dh
 bv
 bL

@@ -7,6 +7,13 @@
 /datum/job/captain
 	supervisors = "the Merchant Code and your conscience"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/captain
+	min_skill = list(   SKILL_WEAPONS = SKILL_ADEPT,
+	                    SKILL_SCIENCE     = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_ADEPT)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_WEAPONS     = SKILL_MAX)
+	skill_points = 30
 
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -52,6 +59,19 @@
 	supervisors = "the Captain"
 	department_flag = ENG
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/chief_engineer
+	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
+	                    SKILL_COMPUTER     = SKILL_ADEPT,
+	                    SKILL_EVA          = SKILL_ADEPT,
+	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	                    SKILL_ELECTRICAL   = SKILL_ADEPT,
+	                    SKILL_ATMOS        = SKILL_ADEPT,
+	                    SKILL_ENGINES      = SKILL_EXPERT)
+
+	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
+	                    SKILL_ELECTRICAL   = SKILL_MAX,
+	                    SKILL_ATMOS        = SKILL_MAX,
+	                    SKILL_ENGINES      = SKILL_MAX)
+	skill_points = 30
 
 /datum/job/doctor
 	title = "Doc"
@@ -62,12 +82,32 @@
 	total_positions = 1
 	spawn_positions = 1
 	hud_icon = "hudmedicaldoctor"
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_MEDICAL     = SKILL_EXPERT,
+	                    SKILL_ANATOMY     = SKILL_EXPERT,
+	                    SKILL_CHEMISTRY   = SKILL_BASIC,
+	                    SKILL_VIROLOGY    = SKILL_BASIC)
+
+	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
+	                    SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_CHEMISTRY   = SKILL_MAX,
+	                    SKILL_VIROLOGY    = SKILL_MAX)
+	skill_points = 28
 
 /datum/job/hop
 	title = "First Mate"
 	supervisors = "the Captain and the Merchant Code"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/mate
 	hud_icon = "hudheadofpersonnel"
+	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
+	                    SKILL_FINANCE     = SKILL_EXPERT,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_ADEPT)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_FINANCE     = SKILL_MAX,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT)
+	skill_points = 30
 
 /datum/job/assistant
 	title = "Deck Hand"
@@ -85,6 +125,18 @@
 	total_positions = 2
 	spawn_positions = 2
 	hud_icon = "hudengineer"
+	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
+	                    SKILL_EVA          = SKILL_BASIC,
+	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	                    SKILL_ELECTRICAL   = SKILL_BASIC,
+	                    SKILL_ATMOS        = SKILL_BASIC,
+	                    SKILL_ENGINES      = SKILL_BASIC)
+
+	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
+	                    SKILL_ELECTRICAL   = SKILL_MAX,
+	                    SKILL_ATMOS        = SKILL_MAX,
+	                    SKILL_ENGINES      = SKILL_MAX)
+	skill_points = 20
 
 /datum/job/cyborg
 	supervisors = "your laws and the Captain"
