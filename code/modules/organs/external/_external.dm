@@ -1432,8 +1432,8 @@ obj/item/organ/external/proc/remove_clamps()
 			if(istype(I,/obj/item/weapon/implant) && !imp.hidden)
 				if (imp.known)
 					. += "[capitalize(imp.name)] implanted"
-				else
-					unknown_body++
+				continue
+			unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
 	for(var/obj/item/organ/internal/augment/aug in internal_organs)
