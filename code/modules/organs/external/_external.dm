@@ -1429,10 +1429,12 @@ obj/item/organ/external/proc/remove_clamps()
 		var/unknown_body = 0
 		for(var/I in implants)
 			var/obj/item/weapon/implant/imp = I
-			if(istype(I,/obj/item/weapon/implant) && !imp.hidden)
+			if(istype(I,/obj/item/weapon/implant)
+				if(imp.hidden)
+					continue
 				if (imp.known)
 					. += "[capitalize(imp.name)] implanted"
-				continue
+					continue
 			unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
