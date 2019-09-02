@@ -33,7 +33,7 @@
 	water_level_min = 2
 	water_level_max = 3
 	fauna_prob = 2
-	flora_prob = 30
+	flora_prob = 5
 	large_flora_prob = 0
 	flora_diversity = 5
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/samak/alt, /mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)

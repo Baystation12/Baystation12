@@ -40,7 +40,7 @@
 	smoothing_iterations = 4
 	land_type = /turf/simulated/floor/exoplanet/desert
 
-	flora_prob = 10
+	flora_prob = 5
 	large_flora_prob = 0
 	flora_diversity = 4
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/antlion)

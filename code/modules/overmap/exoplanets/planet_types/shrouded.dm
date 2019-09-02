@@ -18,7 +18,7 @@
 /datum/random_map/noise/exoplanet/shrouded
 	descriptor = "shrouded exoplanet"
 	smoothing_iterations = 2
-	flora_prob = 10
+	flora_prob = 5
 	large_flora_prob = 20
 	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
 	flora_diversity = 3

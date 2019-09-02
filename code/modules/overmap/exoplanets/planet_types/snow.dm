@@ -20,8 +20,8 @@
 /datum/random_map/noise/exoplanet/snow
 	descriptor = "snow exoplanet"
 	smoothing_iterations = 1
-	flora_prob = 10
-	large_flora_prob = 20
+	flora_prob = 5
+	large_flora_prob = 10
 	water_level_max = 3
 	land_type = /turf/simulated/floor/exoplanet/snow
 	water_type = /turf/simulated/floor/exoplanet/ice
