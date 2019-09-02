@@ -1,0 +1,4 @@
+author: "Piccione"
+delete-after: True
+changes: 
+  - rscadd: "Added Crosses buildable out of Material Sheets. Can also be found in Loadout."
