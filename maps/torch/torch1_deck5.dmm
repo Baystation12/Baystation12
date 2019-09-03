@@ -6572,6 +6572,8 @@
 /area/quartermaster/storage)
 "ox" = (
 /obj/structure/railing/mapped,
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/powerloader/old,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "oy" = (
