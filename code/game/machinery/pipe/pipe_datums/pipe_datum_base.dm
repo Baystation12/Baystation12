@@ -67,6 +67,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 		if(istype(new_item))
 			if(D.connect_types != null)
 				new_item.connect_types = D.connect_types
+			new_item.pipe_class = D.pipe_class
 			new_item.rotate_class = D.rotate_class
 			new_item.constructed_path = D.constructed_path
 		if(D.colorable)
