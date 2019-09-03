@@ -8,6 +8,8 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/barren, /datum/random_map/noise/ore/rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	features_budget = 6
+	surface_color = "#847c6f"
+	water_color = null
 
 /obj/effect/overmap/sector/exoplanet/barren/generate_habitability()
 	return HABITABILITY_BAD

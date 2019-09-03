@@ -7,9 +7,14 @@
 	plant_colors = list("#eba487", "#ceeb87", "#eb879c", "#ebd687", "#f6d6c9", "#f2b3e0")
 	map_generators = list(/datum/random_map/noise/exoplanet/chlorine, /datum/random_map/noise/ore/poor)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
+	surface_color = "#a3b879"
+	water_color = COLOR_BOTTLE_GREEN
 
 /obj/effect/overmap/sector/exoplanet/chlorine/generate_habitability()
 	return HABITABILITY_BAD
+
+/obj/effect/overmap/sector/exoplanet/chlorine/get_atmosphere_color()
+	return "#e5f2bd"
 
 /obj/effect/overmap/sector/exoplanet/chlorine/generate_map()
 	if(prob(50))

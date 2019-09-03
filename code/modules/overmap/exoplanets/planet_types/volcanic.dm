@@ -8,6 +8,11 @@
 	possible_themes = list()
 	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
+	surface_color = "#261e19"
+	water_color = "#c74d00"
+
+/obj/effect/overmap/sector/exoplanet/volcanic/get_atmosphere_color()
+	return COLOR_GRAY20
 
 /obj/effect/overmap/sector/exoplanet/volcanic/generate_habitability()
 	return HABITABILITY_BAD
