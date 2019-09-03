@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "You can now grab yourself. Can't grab grabbing limb (e.g. right arm with right hand), can't throw yourself, can't nab yourself. Otherwise you can do whatever you want, like inspecting limbs, or covering your own eyes, or dislocating your leg as a party trick."
