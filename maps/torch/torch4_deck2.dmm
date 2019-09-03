@@ -1255,13 +1255,7 @@
 /area/storage/medical)
 "ct" = (
 /obj/structure/table/standard,
-/obj/random/single{
-	icon = 'icons/obj/playing_cards.dmi';
-	icon_state = "deck";
-	name = "randomly spawned deck of cards";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/deck
-	},
+/obj/random/single/playing_cards,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -2956,6 +2950,7 @@
 "gh" = (
 /obj/structure/table/rack{
 	dir = 8;
+	
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/stack/material/glass{
@@ -10859,13 +10854,7 @@
 /area/engineering/atmos)
 "zA" = (
 /obj/structure/closet,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
 "zB" = (
@@ -12336,13 +12325,7 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
@@ -14953,13 +14936,7 @@
 /area/engineering/bluespace)
 "KT" = (
 /obj/structure/closet/crate,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/random/tech_supply,
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
@@ -16049,6 +16026,7 @@
 "OQ" = (
 /obj/structure/table/rack{
 	dir = 8;
+	
 	},
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil,

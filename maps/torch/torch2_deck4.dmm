@@ -1659,13 +1659,7 @@
 /obj/effect/floor_decal/corner/brown/mono,
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov/clean,
-/obj/random/single{
-	icon = 'icons/obj/playing_cards.dmi';
-	icon_state = "deck";
-	name = "randomly spawned deck of cards";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/deck
-	},
+/obj/random/single/playing_cards,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3981,13 +3975,7 @@
 	dir = 1;
 	target_pressure = 200
 	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/structure/table/gamblingtable,
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -8203,13 +8191,7 @@
 /obj/structure/table/steel,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
-/obj/random/single{
-	icon = 'icons/obj/items.dmi';
-	icon_state = "lighter-g";
-	name = "randomly spawned lighter";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/flame/lighter
-	},
+/obj/random/single/lighter,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/foreport)
 "At" = (
@@ -8244,27 +8226,9 @@
 /area/maintenance/fourthdeck/port)
 "AD" = (
 /obj/structure/closet/crate/freezer,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
+/obj/random/single/cola,
+/obj/random/single/cola,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/forestarboard)
@@ -11303,13 +11267,7 @@
 /area/maintenance/fourthdeck/forestarboard)
 "LZ" = (
 /obj/structure/table/rack,
-/obj/random/single{
-	icon = 'icons/obj/items.dmi';
-	icon_state = "lighter-g";
-	name = "randomly spawned lighter";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/flame/lighter
-	},
+/obj/random/single/lighter,
 /obj/machinery/newscaster{
 	pixel_x = 0;
 	pixel_y = 32
@@ -12432,13 +12390,7 @@
 "Pi" = (
 /obj/structure/closet/crate/plastic,
 /obj/random/maintenance/solgov,
-/obj/random/single{
-	icon = 'icons/obj/items.dmi';
-	icon_state = "lighter-g";
-	name = "randomly spawned lighter";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/flame/lighter
-	},
+/obj/random/single/lighter,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "Pj" = (
@@ -12788,13 +12740,7 @@
 /area/quartermaster/office)
 "PY" = (
 /obj/structure/table/rack,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
@@ -14148,13 +14094,7 @@
 "Tt" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/random/single{
-	icon = 'icons/obj/items.dmi';
-	icon_state = "lighter-g";
-	name = "randomly spawned lighter";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/flame/lighter
-	},
+/obj/random/single/lighter,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/foreport)
 "Tu" = (
@@ -16098,13 +16038,7 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/random/single{
-	icon = 'icons/obj/items.dmi';
-	icon_state = "lighter-g";
-	name = "randomly spawned lighter";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/flame/lighter
-	},
+/obj/random/single/lighter,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)

@@ -141,3 +141,28 @@
 	else
 		pass("All item modifiers have valid icon states.")
 	return 1
+
+/datum/unit_test/icon_test/random_spawners_shall_have_icon_states
+	name = "ICON STATE - Random Spawners Shall Have Icon States"
+
+/datum/unit_test/icon_test/random_spawners_shall_have_icon_states/start_test()
+	var/states_per_icon = list()
+	var/list/invalid_spawners = list()
+	for(var/random_type in typesof(/obj/random))
+		var/obj/random/R = random_type
+		var/icon = initial(R.icon)
+		var/icon_state = initial(R.icon_state) || ""
+
+		var/icon_states = states_per_icon[icon]
+		if(!icon_states)
+			icon_states = icon_states(icon)
+			states_per_icon[icon] = icon_states
+
+		if(!(icon_state in icon_states))
+			invalid_spawners += random_type
+
+	if(invalid_spawners.len)
+		fail("[invalid_spawners.len] /obj/random type\s with missing icon states: [json_encode(invalid_spawners)]")
+	else
+		pass("All /obj/random types have valid icon states.")
+	return 1

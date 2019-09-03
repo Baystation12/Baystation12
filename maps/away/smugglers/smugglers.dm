@@ -96,7 +96,7 @@
 	name = "Random Ammo Magazine"
 	desc = "This is smuggler's random ammo magazine."
 	icon = 'icons/obj/ammo.dmi'
-	icon_state = "45-10"
+	icon_state = "magnum"
 
 /obj/random/ammo_magazine_smug/spawn_choices()
 	return list(

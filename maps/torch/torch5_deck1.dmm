@@ -11129,9 +11129,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "aOK" = (
-/obj/machinery/status_display{
-	density = 0;
-	},
+/obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/wing)
 "aOL" = (
@@ -16950,6 +16948,7 @@
 "ehb" = (
 /obj/structure/table/rack{
 	dir = 8;
+	
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding{
@@ -22462,13 +22461,7 @@
 /area/medical/infirmary)
 "kld" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -24514,6 +24507,7 @@
 /obj/item/weapon/storage/box/masks,
 /obj/structure/table/rack{
 	dir = 8;
+	
 	},
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
