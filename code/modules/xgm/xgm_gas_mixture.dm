@@ -352,11 +352,13 @@
 	for(var/g in gas_data.overlay_limit)
 		//Overlay isn't applied for this gas, check if it's valid and needs to be added.
 		if(gas[g] > gas_data.overlay_limit[g])
-			LAZYADD(graphic_add, get_tile_overlay(g))
+			var/tile_overlay = get_tile_overlay(g)
+			if(!(tile_overlay in graphic))
+				LAZYADD(graphic_add, tile_overlay)
 	. = 0
 	//Apply changes
 	if(graphic_add && graphic_add.len)
-		graphic += graphic_add
+		graphic |= graphic_add
 		. = 1
 	if(graphic_remove && graphic_remove.len)
 		graphic -= graphic_remove
