@@ -6,8 +6,8 @@
 	supervisors = "the captain"
 	selection_color = "#2f2f7f"
 	ideal_character_age = 21
-	
-	access = list(access_bar, access_kitchen)
+
+	access = list(access_service)
 	outfit_type = /decl/hierarchy/outfit/job/ds13bartender
 
 /datum/job/ds13linecook
@@ -18,8 +18,8 @@
 	supervisors = "the captain"
 	selection_color = "#2f2f7f"
 	ideal_character_age = 21
-	
-	access = list(access_kitchen, access_bar)
+
+	access = list(access_service)
 	outfit_type = /decl/hierarchy/outfit/job/ds13linecook
 
 /datum/job/ds13dom
@@ -33,8 +33,8 @@
 	selection_color = "#515151"
 	minimal_player_age = 3
 	ideal_character_age = 55
-	
-	access = list(access_heads, access_mining, access_mining_station, access_cargo)
+
+	access = list(access_bridge, access_mining, access_cargo)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/ds13dom
 
 /datum/job/ds13supplyofficer
@@ -47,8 +47,8 @@
 	selection_color = "#515151"
 	minimal_player_age = 3
 	ideal_character_age = 40
-	
-	access = list(access_heads, access_cargo)
+
+	access = list(access_bridge, access_cargo)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/ds13supplyofficer
 
 /datum/job/ds13cargojockey
@@ -59,7 +59,7 @@
 	spawn_positions = 4
 	supervisors = "the supply officer"
 	selection_color = "#515151"
-	
+
 	access = list(access_cargo)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/ds13cargojockey
 
@@ -71,8 +71,8 @@
 	spawn_positions = 4
 	supervisors = "the mining foreman and the captain"
 	selection_color = "#515151"
-	
-	access = list(access_mining, access_mining_station)
+
+	access = list(access_mining)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/ds13gravityman
 
 /datum/job/ds13miningforeman
@@ -83,8 +83,8 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#515151"
-	
-	access = list(access_heads, access_mining, access_mining_station)
+
+	access = list(access_bridge, access_mining)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/ds13miningforeman
 
 /datum/job/ds13necromorphbait
@@ -95,8 +95,8 @@
 	spawn_positions = 20
 	supervisors = "the CEC"
 	selection_color = "#515151"
-	
-	access = list(access_mining_station)
+
+	access = list()
 	outfit_type = /decl/hierarchy/outfit/job/cargo/ds13necromorphbait
 
 
@@ -115,8 +115,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
-	access = list(access_hydroponics, access_bar, access_kitchen)
-	minimal_access = list(access_bar)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/service/bartender
 
 /datum/job/chef
@@ -127,8 +127,8 @@
 	spawn_positions = 2
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
-	access = list(access_hydroponics, access_bar, access_kitchen)
-	minimal_access = list(access_kitchen)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
 
 /datum/job/hydro
@@ -139,8 +139,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
-	access = list(access_hydroponics, access_bar, access_kitchen)
-	minimal_access = list(access_hydroponics)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/service/gardener
 
 //Cargo
@@ -152,8 +152,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
-	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	access = list()
+	minimal_access = list()
 	minimal_player_age = 3
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/cargo/qm
@@ -166,8 +166,8 @@
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#515151"
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
-	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
 
 /datum/job/mining
@@ -178,8 +178,8 @@
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#515151"
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
-	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
 
 /datum/job/janitor
@@ -190,8 +190,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
-	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
-	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/service/janitor
 
 //More or less assistants
@@ -203,8 +203,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
-	access = list(access_library, access_maint_tunnels)
-	minimal_access = list(access_library)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/librarian
 
 /datum/job/lawyer
@@ -215,8 +215,8 @@
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#515151"
-	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
-	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	access = list()
+	minimal_access = list()
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
 

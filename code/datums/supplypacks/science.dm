@@ -24,7 +24,7 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper APLU \"Ripley\" Circuit Crate"
-	access = access_robotics
+	access = access_research
 
 /decl/hierarchy/supply_pack/science/mecha_odysseus
 	name = "Circuit Crate (\"Odysseus\")"
@@ -33,7 +33,7 @@
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper \"Odysseus\" Circuit Crate"
-	access = access_robotics
+	access = access_research
 
 /decl/hierarchy/supply_pack/science/phoron
 	name = "Phoron assembly crate"

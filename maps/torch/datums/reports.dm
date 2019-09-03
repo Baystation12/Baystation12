@@ -12,7 +12,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch - Office of the Executive Officer")
 	add_field(/datum/report_field/people/from_manifest, "Name (XO)")
 	add_field(/datum/report_field/people/from_manifest, "Name (applicant)", required = 1)
-	add_field(/datum/report_field/date, "Date filed")	
+	add_field(/datum/report_field/date, "Date filed")
 	add_field(/datum/report_field/time, "Time filed")
 	add_field(/datum/report_field/simple_text, "Present position")
 	add_field(/datum/report_field/simple_text, "Requested position")
@@ -38,7 +38,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch - Office of the Executive Officer")
 	add_field(/datum/report_field/people/from_manifest, "Name (XO)")
 	add_field(/datum/report_field/people/from_manifest, "Name (applicant)", required = 1)
-	add_field(/datum/report_field/date, "Date filed")	
+	add_field(/datum/report_field/date, "Date filed")
 	add_field(/datum/report_field/time, "Time filed")
 	add_field(/datum/report_field/simple_text, "Present position")
 	add_field(/datum/report_field/simple_text, "Requested access")
@@ -64,7 +64,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch - Office of the Executive Officer")
 	add_field(/datum/report_field/people/from_manifest, "Name (XO)")
 	add_field(/datum/report_field/people/from_manifest, "Name (subject)", required = 1)
-	add_field(/datum/report_field/date, "Date filed")	
+	add_field(/datum/report_field/date, "Date filed")
 	add_field(/datum/report_field/time, "Time filed")
 	add_field(/datum/report_field/instruction, "I, undersigned, hereby agree to willingly undergo a Regulation Lobotimization with intention of cyborgification or AI assimilation, and I am aware of all the consequences of such act. I also understand that this operation may be irreversible, and that my employment contract will be terminated.")
 	add_field(/datum/report_field/signature, "Subject's signature")
@@ -79,7 +79,7 @@
 /datum/computer_file/report/recipient/sec/New()
 	..()
 	set_access(access_security)
-	set_access(access_heads, override = 0)
+	set_access(access_bridge, override = 0)
 
 /datum/computer_file/report/recipient/sec/investigation
 	form_name = "SCG-SEC-43"
@@ -91,7 +91,7 @@
 	add_field(/datum/report_field/instruction, "SEV Torch Security Department")
 	add_field(/datum/report_field/instruction, "For internal use only.")
 	add_field(/datum/report_field/people/from_manifest, "Name")
-	add_field(/datum/report_field/date, "Date")	
+	add_field(/datum/report_field/date, "Date")
 	add_field(/datum/report_field/time, "Time")
 	add_field(/datum/report_field/simple_text, "Case name")
 	add_field(/datum/report_field/pencode_text, "Summary")
@@ -110,7 +110,7 @@
 	add_field(/datum/report_field/instruction, "To be filled out by Officer on duty responding to the Incident. Report must be signed and submitted before the end of the shift!")
 	add_field(/datum/report_field/people/from_manifest, "Reporting Officer")
 	add_field(/datum/report_field/simple_text, "Offense/Incident Type")
-	add_field(/datum/report_field/date, "Date")	
+	add_field(/datum/report_field/date, "Date")
 	add_field(/datum/report_field/time, "Time of incident")
 	add_field(/datum/report_field/people/list_from_manifest, "Assisting Officer(s)")
 	add_field(/datum/report_field/simple_text, "Location")
@@ -129,7 +129,7 @@
 	..()
 	var/datum/report_field/temp_field
 	add_field(/datum/report_field/instruction, "SEV Torch Security Department")
-	add_field(/datum/report_field/date, "Date")	
+	add_field(/datum/report_field/date, "Date")
 	add_field(/datum/report_field/time, "Time")
 	add_field(/datum/report_field/people/from_manifest, "Confiscated from")
 	add_field(/datum/report_field/pencode_text, "List of items in custody/evidence lockup")
@@ -137,7 +137,7 @@
 	temp_field = add_field(/datum/report_field/signature, "Brig Officer's signature")
 	temp_field.set_access(access_edit = list(access_security, access_armory))
 	temp_field = add_field(/datum/report_field/signature, "Forensic Technician's signature")
-	temp_field.set_access(access_edit = list(access_security, access_forensics_lockers))
+	temp_field.set_access(access_edit = list(access_security))
 
 //Supply and Exploration; these are not shown in deck manager.
 
@@ -150,14 +150,14 @@
 /datum/computer_file/report/recipient/docked/New()
 	..()
 	set_access(access_cargo, access_cargo)
-	set_access(access_heads, override = 0)
+	set_access(access_bridge, override = 0)
 
 /datum/computer_file/report/recipient/docked/generate_fields()
 	..()
 	add_field(/datum/report_field/instruction, "SEV Torch Supply and Hangar Management Department")
 	add_field(/datum/report_field/instruction, "General Info")
 	add_field(/datum/report_field/date, "Date")
-	add_field(/datum/report_field/simple_text, "Vessel Name")		
+	add_field(/datum/report_field/simple_text, "Vessel Name")
 	add_field(/datum/report_field/simple_text, "Vessel Pilot/Owner")
 	add_field(/datum/report_field/simple_text, "Vessel Intended Purpose")
 	add_field(/datum/report_field/people/from_manifest, "Docking Authorized by")
@@ -181,7 +181,7 @@
 
 /datum/computer_file/report/recipient/docked/New()
 	..()
-	set_access(access_edit = access_hangar)
+	set_access(access_edit = access_bridge)
 	set_access(access_edit = access_research, override = 0)
 
 /datum/computer_file/report/recipient/fauna/generate_fields()
@@ -239,8 +239,7 @@
 
 /datum/computer_file/report/recipient/nt/fire/New()
 	..()
-	set_access(access_heads, access_heads)
-	set_access(access_nanotrasen, override = 0)
+	set_access(access_bridge)
 
 /datum/computer_file/report/recipient/nt/fire/generate_fields()
 	..()
@@ -375,7 +374,7 @@
 	add_field(/datum/report_field/instruction, "Dear Sir/Madam, we regret to inform you that your volunteer application for service as a test subject with the NanoTrasen Corporation has been rejected. We thank you for your interest in our company and the progression of research. Attached, you will find a copy of your original volunteer form for your records. Regards,")
 	add_field(/datum/report_field/signature, "NanoTrasen Representative's Signature")
 	add_field(/datum/report_field/people/from_manifest, "Name of Volunteer")
-	add_field(/datum/report_field/instruction, "Reason for Rejection")	
+	add_field(/datum/report_field/instruction, "Reason for Rejection")
 	add_field(/datum/report_field/options/yes_no, "Physically Unfit")
 	add_field(/datum/report_field/options/yes_no, "Mentally Unfit")
 	add_field(/datum/report_field/options/yes_no, "Project Cancellation")
@@ -499,7 +498,7 @@
 	add_field(/datum/report_field/pencode_text, "Description of incident")
 	add_field(/datum/report_field/signature, "Signature")
 	add_field(/datum/report_field/options/yes_no, "Approved")
-	set_access(access_edit = list(access_heads, access_solgov_crew))
+	set_access(access_edit = list(access_bridge, access_solgov_crew))
 
 /datum/computer_file/report/recipient/sol/audit
 	form_name = "SCG-REP-03b"

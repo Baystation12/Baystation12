@@ -137,7 +137,7 @@
 
 /obj/item/weapon/rig/eva/equipped
 
-	req_access = list(access_engine_equip)
+	req_access = list(access_engineering)
 
 	initial_modules = list(
 		/obj/item/rig_module/mounted/plasmacutter,

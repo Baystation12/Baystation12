@@ -10,8 +10,7 @@
 	req_admin_notify = 1
 	ideal_character_age = 50
 
-	access = list(access_heads, access_research, access_medical, access_morgue, 
-					access_surgery)
+	access = list(access_bridge, access_research, access_medical)
 	outfit_type = /decl/hierarchy/outfit/job/science/ds13chiefsciencenerd
 
 /datum/job/ds13juniorsciencenerd
@@ -23,8 +22,8 @@
 	supervisors = "the chief science officer"
 	selection_color = "#633d63"
 	ideal_character_age = 26
-	
-	access = list(access_research, access_medical, access_morgue)
+
+	access = list(access_research, access_medical)
 	outfit_type = /decl/hierarchy/outfit/job/science/ds13juniorsciencenerd
 
 
@@ -48,14 +47,8 @@
 	selection_color = "#ad6bad"
 	req_admin_notify = 1
 
-	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
-			            access_tox_storage, access_teleporter, access_sec_doors,
-			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
-			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
-	minimal_access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
-			            access_tox_storage, access_teleporter, access_sec_doors,
-			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
-			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
+	access = list()
+	minimal_access = list()
 	minimal_player_age = 14
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
@@ -70,9 +63,9 @@
 	supervisors = "the research director"
 	selection_color = "#633d63"
 
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
-	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-	
+	access = list()
+	minimal_access = list()
+
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/science/scientist
 
@@ -86,8 +79,8 @@
 	supervisors = "the research director"
 	selection_color = "#633d63"
 
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
-	minimal_access = list(access_research, access_xenobiology, access_hydroponics)
+	access = list()
+	minimal_access = list()
 
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
@@ -102,8 +95,8 @@
 	supervisors = "research director"
 	selection_color = "#633d63"
 
-	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
-	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	access = list()
+	minimal_access = list()
 
 	minimal_player_age = 3
 	outfit_type = /decl/hierarchy/outfit/job/science/roboticist

@@ -690,5 +690,5 @@
 
 //Makes the deck management program use hangar access
 /datum/nano_module/deck_management
-	default_access = list(access_hangar, access_cargo, access_heads)
+	default_access = list(access_hangar, access_cargo, access_bridge)
 

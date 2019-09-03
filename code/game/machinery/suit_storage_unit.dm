@@ -54,7 +54,7 @@
 	boots_type = /obj/item/clothing/shoes/magboots
 	tank_type = /obj/item/weapon/tank/oxygen
 	mask_type = /obj/item/clothing/mask/breath
-	req_access = list(access_atmospherics)
+	req_access = list(access_engineering)
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/atmos/alt
@@ -68,7 +68,7 @@
 	boots_type = /obj/item/clothing/shoes/magboots
 	tank_type = /obj/item/weapon/tank/oxygen
 	mask_type = /obj/item/clothing/mask/breath
-	req_access = list(access_engine)
+	req_access = list(access_engineering)
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/engineering/alt
@@ -629,7 +629,7 @@
 	icon = 'icons/obj/suitstorage.dmi'
 	icon_state = "close"
 
-	req_access = list(access_captain,access_heads)
+	req_access = list(access_captain,access_bridge)
 
 	var/active = 0          // PLEASE HOLD.
 	var/safeties = 1        // The cycler won't start with a living thing inside it unless safeties are off.

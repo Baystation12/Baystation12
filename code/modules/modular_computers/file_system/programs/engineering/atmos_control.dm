@@ -6,7 +6,7 @@
 	program_key_state = "atmos_key"
 	program_menu_icon = "shuffle"
 	extended_desc = "This program allows remote control of air alarms. This program can not be run on tablet computers."
-	required_access = access_atmospherics
+	required_access = access_engineering
 	requires_ntnet = 1
 	network_destination = "atmospheric control system"
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL

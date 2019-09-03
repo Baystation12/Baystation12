@@ -35,7 +35,7 @@
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Command armor crate"
-	access = access_heads
+	access = access_bridge
 
 /decl/hierarchy/supply_pack/security/nanoarmor
 	name = "Armor - NanoTrasen"
@@ -195,5 +195,5 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper .44 magnum ammunition crate"
-	access = access_heads
+	access = access_bridge
 	security_level = SUPPLY_SECURITY_ELEVATED

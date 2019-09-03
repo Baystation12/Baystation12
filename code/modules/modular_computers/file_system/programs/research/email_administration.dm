@@ -9,7 +9,7 @@
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/email_administration
-	required_access = access_network
+	required_access = access_bridge
 
 
 
@@ -75,7 +75,7 @@
 
 	// High security - can only be operated when the user has an ID with access on them.
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
-	if(!istype(I) || !(access_network in I.access))
+	if(!istype(I) || !(access_bridge in I.access))
 		return 1
 
 	if(href_list["back"])
