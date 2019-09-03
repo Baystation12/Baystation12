@@ -55,7 +55,7 @@
 
 	anchored = 1
 	unacidable = 1
-	layer = BASE_TURF_LAYER
+	layer = TURF_LAYER
 
 	var/spell/mark_recall/spell
 
