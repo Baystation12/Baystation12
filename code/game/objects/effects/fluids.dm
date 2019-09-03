@@ -5,7 +5,7 @@
 	simulated = 0
 	opacity = 0
 	mouse_opacity = 0
-	layer = FLY_LAYER
+	layer = BASE_FLY_LAYER
 	alpha = 0
 	color = COLOR_OCEAN
 
