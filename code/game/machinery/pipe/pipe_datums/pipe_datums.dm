@@ -163,6 +163,13 @@
 	pipe_class = PIPE_CLASS_QUATERNARY
 	rotate_class = PIPE_ROTATE_ONEDIR
 
+/datum/pipe/pipe_dispenser/scrubber/cap
+	name = "scrubber pipe cap fitting"
+	desc = "a pipe cap for a scrubber pipe."
+	build_path = /obj/item/pipe
+	build_icon_state = "cap"
+	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
+
 /datum/pipe/pipe_dispenser/scrubber/up
 	name = "upward scrubber pipe fitting"
 	desc = "an upward scrubber pipe segment."
@@ -178,13 +185,6 @@
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/supply
-
-/datum/pipe/pipe_dispenser/scrubber/cap
-	name = "scrubber pipe cap fitting"
-	desc = "a pipe cap for a scrubber pipe."
-	build_path = /obj/item/pipe
-	build_icon_state = "cap"
-	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
 	pipe_class = PIPE_CLASS_UNARY
 
 /datum/pipe/pipe_dispenser/fuel
