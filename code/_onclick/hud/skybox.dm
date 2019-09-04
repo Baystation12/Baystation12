@@ -25,7 +25,6 @@
 
 /mob/Login()
 	..()
-	client.screen |= client.skybox
 	client.update_skybox(1)
 
 /mob/Move()
