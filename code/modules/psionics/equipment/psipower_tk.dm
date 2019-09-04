@@ -96,7 +96,7 @@
 		O.name = "sparkles"
 		O.anchored = 1
 		O.density = 0
-		O.layer = BASE_FLY_LAYER
+		O.layer = FLY_LAYER
 		O.set_dir(pick(GLOB.cardinal))
 		O.icon = 'icons/effects/effects.dmi'
 		O.icon_state = "nothing"

@@ -80,7 +80,7 @@
 		O.hide(O.hides_under_flooring() && src.flooring)
 
 	if(flooring)
-		layer = BASE_TURF_LAYER
+		layer = TURF_LAYER
 	else
 		layer = PLATING_LAYER
 
