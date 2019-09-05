@@ -50,7 +50,7 @@
 /datum/report_field/proc/set_value(given_value)
 	value = given_value
 
-//Exports the contents of the field into html for viewing. 
+//Exports the contents of the field into html for viewing.
 /datum/report_field/proc/get_value()
 	return value
 
@@ -128,7 +128,7 @@ Basic field subtypes.
 	needs_big_box = 1
 
 /datum/report_field/pencode_text/get_value()
-	return pencode2html(value)
+	return digitalPencode2html(value)
 
 /datum/report_field/pencode_text/set_value(given_value)
 	if(istext(given_value))

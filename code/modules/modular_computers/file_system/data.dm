@@ -17,7 +17,7 @@
 	size = max(1, round(length(stored_data) / block_size))
 
 /datum/computer_file/data/proc/generate_file_data(var/mob/user)
-	return pencode2html(stored_data)
+	return digitalPencode2html(stored_data)
 
 /datum/computer_file/data/logfile
 	filetype = "LOG"
@@ -26,7 +26,7 @@
 	filetype = "TXT"
 
 /datum/computer_file/data/bodyscan
-	filetype = "BSC"	
+	filetype = "BSC"
 	read_only = 1
 	papertype = /obj/item/weapon/paper/bodyscan
 
