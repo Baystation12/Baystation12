@@ -46,7 +46,7 @@
 		return 1
 
 	if(href_list["PRG_txtrpeview"])
-		show_browser(usr,"<HTML><HEAD><TITLE>[open_file]</TITLE></HEAD>[pencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
+		show_browser(usr,"<HTML><HEAD><TITLE>[open_file]</TITLE></HEAD>[digitalPencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
 		return 1
 
 	if(href_list["PRG_taghelp"])
@@ -162,7 +162,7 @@
 		if(!computer.nano_printer)
 			error = "Missing Hardware: Your computer does not have the required hardware to complete this operation."
 			return 1
-		if(!computer.nano_printer.print_text(pencode2html(loaded_data)))
+		if(!computer.nano_printer.print_text(digitalPencode2html(loaded_data)))
 			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return 1
 
@@ -205,10 +205,10 @@
 						)))
 				data["usbfiles"] = usbfiles
 	else if(PRG.open_file)
-		data["filedata"] = pencode2html(PRG.loaded_data)
+		data["filedata"] = digitalPencode2html(PRG.loaded_data)
 		data["filename"] = PRG.is_edited ? "[PRG.open_file]*" : PRG.open_file
 	else
-		data["filedata"] = pencode2html(PRG.loaded_data)
+		data["filedata"] = digitalPencode2html(PRG.loaded_data)
 		data["filename"] = "UNNAMED"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
