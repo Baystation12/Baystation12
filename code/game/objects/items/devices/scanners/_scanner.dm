@@ -13,14 +13,14 @@
 	//For displaying scans
 	var/window_width = 450
 	var/window_height = 600
-	
+
 	var/use_delay
 	var/scan_sound
-	
-/obj/item/device/scanner/attack_self(mob/user)
-	show_results(user)
 
-/obj/item/device/scanner/proc/show_results(mob/user)
+/obj/item/device/scanner/attack_self(mob/user)
+	show_menu(user)
+
+/obj/item/device/scanner/proc/show_menu(mob/user)
 	var/datum/browser/popup = new(user, "scanner", scan_title, window_width, window_height)
 	popup.set_content("[get_header()]<hr>[scan_data]")
 	popup.open()
