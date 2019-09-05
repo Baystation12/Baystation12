@@ -8,7 +8,6 @@
 	)
 	equipment = list(
 		/obj/item/device/flash,
-		/obj/item/weapon/melee/baton/loaded,
 		/obj/item/weapon/extinguisher,
 		/obj/item/weapon/wrench,
 		/obj/item/weapon/crowbar,

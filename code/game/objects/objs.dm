@@ -1,5 +1,5 @@
 /obj
-	layer = BASE_OBJECT_LAYER
+	layer = OBJ_LAYER
 	animate_movement = 2
 
 	var/obj_flags

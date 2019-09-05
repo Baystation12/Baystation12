@@ -21,11 +21,11 @@
 		if(rebuild)
 			skybox.overlays.Cut()
 			skybox.overlays += SSskybox.get_skybox(T.z)
+			screen |= skybox
 		skybox.screen_loc = "CENTER:[-224 - T.x],CENTER:[-224 - T.y]"
 
 /mob/Login()
 	..()
-	client.screen |= client.skybox
 	client.update_skybox(1)
 
 /mob/Move()

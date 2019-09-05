@@ -211,7 +211,7 @@
 	var/growth_range = 8 // Maximal distance for new blob pieces from this core.
 	var/blob_may_process = 1
 	var/reported_low_damage = FALSE
-	var/times_to_pulse
+	var/times_to_pulse = 0
 
 /obj/effect/blob/core/proc/get_health_percent()
 	return ((health / maxHealth) * 100)
@@ -295,6 +295,7 @@ regen() will cover update_icon() for this proc
 	damage_max = 20
 	layer = BLOB_NODE_LAYER
 	product = /obj/item/weapon/blob_tendril/core/aux
+	times_to_pulse = 4
 
 /obj/effect/blob/core/secondary/process_core_health()
 	return

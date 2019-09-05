@@ -81,86 +81,86 @@ What is the naming convention for planes or layers?
 #define DEFAULT_PLANE                   0
 	#define PLATING_LAYER               1
 	//ABOVE PLATING
-	#define HOLOMAP_LAYER               2
-	#define DECAL_PLATING_LAYER         3
-	#define DISPOSALS_PIPE_LAYER        4
-	#define LATTICE_LAYER               5
-	#define PIPE_LAYER                  6
-	#define WIRE_LAYER                  7
-	#define WIRE_TERMINAL_LAYER         8
-	#define ABOVE_WIRE_LAYER            9
+	#define HOLOMAP_LAYER               1.01
+	#define DECAL_PLATING_LAYER         1.02
+	#define DISPOSALS_PIPE_LAYER        1.03
+	#define LATTICE_LAYER               1.04
+	#define PIPE_LAYER                  1.05
+	#define WIRE_LAYER                  1.06
+	#define WIRE_TERMINAL_LAYER         1.07
+	#define ABOVE_WIRE_LAYER            1.08
 	//TURF PLANE
-	#define BASE_TURF_LAYER             10
-	#define TURF_DETAIL_LAYER           11
-	#define TURF_SHADOW_LAYER           12
+	//TURF_LAYER = 2
+	#define TURF_DETAIL_LAYER           2.01
+	#define TURF_SHADOW_LAYER           2.02
 	//ABOVE TURF
-	#define DECAL_LAYER                 13
-	#define RUNE_LAYER                  14
-	#define ABOVE_TILE_LAYER            15
-	#define EXPOSED_PIPE_LAYER          16
-	#define EXPOSED_WIRE_LAYER          17
-	#define EXPOSED_WIRE_TERMINAL_LAYER 18
-	#define CATWALK_LAYER               19
-	#define BLOOD_LAYER                 20
-	#define MOUSETRAP_LAYER             21
-	#define PLANT_LAYER                 22
-	#define AO_LAYER                    23
+	#define DECAL_LAYER                 2.03
+	#define RUNE_LAYER                  2.04
+	#define ABOVE_TILE_LAYER            2.05
+	#define EXPOSED_PIPE_LAYER          2.06
+	#define EXPOSED_WIRE_LAYER          2.07
+	#define EXPOSED_WIRE_TERMINAL_LAYER 2.08
+	#define CATWALK_LAYER               2.09
+	#define BLOOD_LAYER                 2.10
+	#define MOUSETRAP_LAYER             2.11
+	#define PLANT_LAYER                 2.12
+	#define AO_LAYER                    2.13
 	//HIDING MOB
-	#define HIDING_MOB_LAYER            24
-	#define SHALLOW_FLUID_LAYER         25
-	#define MOB_SHADOW_LAYER            26
+	#define HIDING_MOB_LAYER            2.14
+	#define SHALLOW_FLUID_LAYER         2.15
+	#define MOB_SHADOW_LAYER            2.16
 	//OBJ
-	#define BELOW_DOOR_LAYER            27
-	#define OPEN_DOOR_LAYER             28
-	#define BELOW_TABLE_LAYER           29
-	#define TABLE_LAYER                 30
-	#define BELOW_OBJ_LAYER             31
-	#define STRUCTURE_LAYER             32
-	#define BASE_OBJECT_LAYER           33
-	#define ABOVE_OBJ_LAYER             34
-	#define CLOSED_DOOR_LAYER           35
-	#define ABOVE_DOOR_LAYER            36
-	#define SIDE_WINDOW_LAYER           37
-	#define FULL_WINDOW_LAYER           38
-	#define ABOVE_WINDOW_LAYER          39
+	#define BELOW_DOOR_LAYER            2.17
+	#define OPEN_DOOR_LAYER             2.18
+	#define BELOW_TABLE_LAYER           2.19
+	#define TABLE_LAYER                 2.20
+	#define BELOW_OBJ_LAYER             2.21
+	#define STRUCTURE_LAYER             2.22
+	// OBJ_LAYER                        3
+	#define ABOVE_OBJ_LAYER             3.01
+	#define CLOSED_DOOR_LAYER           3.02
+	#define ABOVE_DOOR_LAYER            3.03
+	#define SIDE_WINDOW_LAYER           3.04
+	#define FULL_WINDOW_LAYER           3.05
+	#define ABOVE_WINDOW_LAYER          3.06
 	//LYING MOB AND HUMAN
-	#define LYING_MOB_LAYER             40
-	#define LYING_HUMAN_LAYER           41
-	#define BASE_ABOVE_OBJ_LAYER        41.5
+	#define LYING_MOB_LAYER             3.07
+	#define LYING_HUMAN_LAYER           3.08
+	#define BASE_ABOVE_OBJ_LAYER        3.09
 	//HUMAN
-	#define BASE_HUMAN_LAYER            42
+	#define BASE_HUMAN_LAYER            3.10
 	//MOB
-	#define MECH_UNDER_LAYER            43
-	#define BASE_MOB_LAYER              44
-	#define MECH_BASE_LAYER             44
-	#define MECH_INTERMEDIATE_LAYER     45
-	#define MECH_PILOT_LAYER            46
-	#define MECH_LEG_LAYER              47
-	#define MECH_COCKPIT_LAYER          48
-	#define MECH_ARM_LAYER              49
-	#define MECH_GEAR_LAYER             50
+	#define MECH_UNDER_LAYER            3.11
+	// MOB_LAYER                        4
+	#define MECH_BASE_LAYER             4.01
+	#define MECH_INTERMEDIATE_LAYER     4.02
+	#define MECH_PILOT_LAYER            4.03
+	#define MECH_LEG_LAYER              4.04
+	#define MECH_COCKPIT_LAYER          4.05
+	#define MECH_ARM_LAYER              4.06
+	#define MECH_GEAR_LAYER             4.07
 	//ABOVE HUMAN
-	#define ABOVE_HUMAN_LAYER           51
-	#define VEHICLE_LOAD_LAYER          52
-	#define CAMERA_LAYER                53
+	#define ABOVE_HUMAN_LAYER           4.08
+	#define VEHICLE_LOAD_LAYER          4.09
+	#define CAMERA_LAYER                4.10
 	//BLOB
-	#define BLOB_SHIELD_LAYER           54
-	#define BLOB_NODE_LAYER             55
-	#define BLOB_CORE_LAYER	            56
+	#define BLOB_SHIELD_LAYER           4.11
+	#define BLOB_NODE_LAYER             4.12
+	#define BLOB_CORE_LAYER	            4.13
 	//EFFECTS BELOW LIGHTING
-	#define BELOW_PROJECTILE_LAYER      57
-	#define DEEP_FLUID_LAYER            58
-	#define FIRE_LAYER                  59
-	#define PROJECTILE_LAYER            60
-	#define ABOVE_PROJECTILE_LAYER      61
-	#define SINGULARITY_LAYER           62
-	#define POINTER_LAYER               63
+	#define BELOW_PROJECTILE_LAYER      4.14
+	#define DEEP_FLUID_LAYER            4.15
+	#define FIRE_LAYER                  4.16
+	#define PROJECTILE_LAYER            4.17
+	#define ABOVE_PROJECTILE_LAYER      4.18
+	#define SINGULARITY_LAYER           4.19
+	#define POINTER_LAYER               4.20
 
-	#define BASE_FLY_LAYER              63.5
+	//FLY_LAYER                          5
 	//OBSERVER
-	#define OBSERVER_LAYER              64
+	#define OBSERVER_LAYER              5.1
 
-	#define OBFUSCATION_LAYER           65
+	#define OBFUSCATION_LAYER           5.2
 	#define BASE_AREA_LAYER             999
 
 #define OBSERVER_PLANE             1

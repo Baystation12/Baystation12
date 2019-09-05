@@ -12,7 +12,7 @@
 	desc = "A Multiple Utility Load Effector bot."
 	icon = 'icons/mob/bot/mulebot.dmi'
 	icon_state = "mulebot0"
-	layer = BASE_MOB_LAYER
+	layer = MOB_LAYER
 	anchored = 1
 	density = 1
 	health = 150
