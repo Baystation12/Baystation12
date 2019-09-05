@@ -1,0 +1,4 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - tweak: "Default Cyborgs no longer have stunbatons"
