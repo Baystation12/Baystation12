@@ -62,7 +62,7 @@
 	return cameras
 
 /area/proc/is_shuttle_locked()
-	return 0
+	return FALSE
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
@@ -86,12 +86,12 @@
 		for (var/obj/machinery/alarm/AA in src)
 			AA.update_icon()
 
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /area/proc/air_doors_close()
 	if(!air_doors_activated)
-		air_doors_activated = 1
+		air_doors_activated = TRUE
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
@@ -104,7 +104,7 @@
 
 /area/proc/air_doors_open()
 	if(air_doors_activated)
-		air_doors_activated = 0
+		air_doors_activated = FALSE
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
@@ -119,7 +119,7 @@
 
 /area/proc/fire_alert()
 	if(!fire)
-		fire = 1	//used for firedoor checks
+		fire = TRUE	//used for firedoor checks
 		update_icon()
 		mouse_opacity = 0
 		if(!all_doors)
@@ -134,7 +134,7 @@
 
 /area/proc/fire_reset()
 	if (fire)
-		fire = 0	//used for firedoor checks
+		fire = FALSE	//used for firedoor checks
 		update_icon()
 		mouse_opacity = 0
 		if(!all_doors)
@@ -149,26 +149,26 @@
 
 /area/proc/readyalert()
 	if(!eject)
-		eject = 1
+		eject = TRUE
 		update_icon()
 	return
 
 /area/proc/readyreset()
 	if(eject)
-		eject = 0
+		eject = FALSE
 		update_icon()
 	return
 
 /area/proc/partyalert()
 	if (!( party ))
-		party = 1
+		party = TRUE
 		update_icon()
 		mouse_opacity = 0
 	return
 
 /area/proc/partyreset()
 	if (party)
-		party = 0
+		party = FALSE
 		mouse_opacity = 0
 		update_icon()
 		for(var/obj/machinery/door/firedoor/D in src)
@@ -222,7 +222,7 @@ var/list/mob/living/forced_ambiance_list = new
 	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
 	if(oldarea.has_gravity != newarea.has_gravity)
-		if(newarea.has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
+		if(newarea.has_gravity == TRUE && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
 			thunk(L)
 		L.update_floating()
 
@@ -234,11 +234,11 @@ var/list/mob/living/forced_ambiance_list = new
 	if(!(L && L.client && L.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))	return
 
 	var/turf/T = get_turf(L)
-	var/hum = 0
+	var/hum = FALSE
 	if(L.get_sound_volume_multiplier() >= 0.2 && !always_unpowered && power_environ)
 		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in src)
 			if(vent.can_pump())
-				hum = 1
+				hum = TRUE
 				break
 	if(hum)
 		if(!L.client.ambience_playing)
@@ -300,15 +300,15 @@ var/list/mob/living/forced_ambiance_list = new
 	return has_gravity
 
 /area/space/has_gravity()
-	return 0
+	return FALSE
 
 /proc/has_gravity(atom/AT, turf/T)
 	if(!T)
 		T = get_turf(AT)
 	var/area/A = get_area(T)
 	if(A && A.has_gravity())
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /area/proc/get_dimensions()
 	var/list/res = list("x"=1,"y"=1)

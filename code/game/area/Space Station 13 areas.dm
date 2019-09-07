@@ -6,7 +6,7 @@
 	name = "NICE NAME" 				(not required but makes things really nice)
 	icon = "ICON FILENAME" 			(defaults to areas.dmi)
 	icon_state = "NAME OF ICON" 	(defaults to "unknown" (blank))
-	requires_power = 0 				(defaults to 1)
+	requires_power = FALSE 			(defaults to TRUE)
 
 NOTE: there are two lists of areas in the end of this file: centcom and station itself. Please maintain these lists valid. --rastaf0
 
@@ -33,7 +33,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/eject = null
 
 	var/debug = 0
-	var/requires_power = 1
+	var/requires_power = TRUE
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
 	var/power_equip = 1 // Status
@@ -46,12 +46,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/oneoff_light   = 0
 	var/oneoff_environ = 0
 
-	var/has_gravity = 1
+	var/has_gravity = TRUE
 	var/obj/machinery/power/apc/apc = null
 	var/no_air = null
 //	var/list/lights				// list of all lights on this area
 	var/list/all_doors = null		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
-	var/air_doors_activated = 0
+	var/air_doors_activated = FALSE
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/list/forced_ambience = null
 	var/sound_env = STANDARD_STATION
@@ -66,13 +66,13 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/space
 	name = "\improper Space"
 	icon_state = "space"
-	requires_power = 1
-	always_unpowered = 1
-	dynamic_lighting = 1
+	requires_power = TRUE
+	always_unpowered = TRUE
+	dynamic_lighting = TRUE
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
-	has_gravity = 0
+	has_gravity = FALSE
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
 	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
 	secure = FALSE
@@ -98,8 +98,8 @@ area/space/atmosalert()
 /area/centcom
 	name = "\improper Centcom"
 	icon_state = "centcom"
-	requires_power = 0
-	dynamic_lighting = 0
+	requires_power = FALSE
+	dynamic_lighting = FALSE
 	req_access = list(access_cent_general)
 
 /area/centcom/holding
@@ -206,7 +206,7 @@ area/space/atmosalert()
 //All shuttles should now be under shuttle since we have smooth-wall code.
 
 /area/shuttle
-	requires_power = 0
+	requires_power = FALSE
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
 
@@ -216,16 +216,16 @@ area/space/atmosalert()
 /area/wizard_station
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 0
+	requires_power = FALSE
+	dynamic_lighting = FALSE
 	req_access = list(access_syndicate)
 
 /area/beach
 	name = "Keelin's private beach"
 	icon_state = "null"
-	luminosity = 1
-	dynamic_lighting = 0
-	requires_power = 0
+	luminosity = TRUE
+	dynamic_lighting = FALSE
+	requires_power = FALSE
 	var/sound/mysound = null
 
 /area/beach/New()
@@ -234,7 +234,7 @@ area/space/atmosalert()
 	mysound = S
 	S.file = 'sound/ambience/shore.ogg'
 	S.repeat = 1
-	S.wait = 0
+	S.wait = FALSE
 	S.channel = GLOB.sound_channels.RequestChannel(/area/beach)
 	S.volume = 100
 	S.priority = 255

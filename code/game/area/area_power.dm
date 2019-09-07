@@ -6,9 +6,9 @@
 
 /area/proc/powered(var/chan)		// return true if the area has power to given channel
 	if(!requires_power)
-		return 1
+		return TRUE
 	if(always_unpowered)
-		return 0
+		return FALSE
 	switch(chan)
 		if(EQUIP)
 			return power_equip
@@ -19,7 +19,7 @@
 		if(LOCAL)
 			return FALSE // if you're running on local power, don't come begging for help here.
 
-	return 0
+	return FALSE
 
 // called when power status changes
 /area/proc/power_change()
