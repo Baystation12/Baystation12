@@ -1016,7 +1016,7 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/plating,
 /area/thruster/d3starboard)
 "cv" = (
 /obj/structure/lattice,
@@ -15912,7 +15912,7 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/plating,
 /area/thruster/d3port)
 "Kg" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
