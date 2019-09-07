@@ -1128,7 +1128,7 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/plating,
 /area/thruster/d1starboard)
 "acb" = (
 /obj/structure/sign/warning/airlock,
@@ -11603,7 +11603,7 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/plating,
 /area/thruster/d1port)
 "aQp" = (
 /obj/structure/table/rack,
