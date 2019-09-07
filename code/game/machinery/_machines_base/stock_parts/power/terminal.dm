@@ -9,6 +9,9 @@
 	var/terminal_dir = 0
 
 /obj/item/weapon/stock_parts/power/terminal/on_uninstall(var/obj/machinery/machine)
+	if(status & PART_STAT_ACTIVE)
+		machine.update_power_channel(cached_channel)
+		unset_status(machine, PART_STAT_ACTIVE)
 	unset_terminal(loc, terminal)
 	..()
 
@@ -38,7 +41,6 @@
 /obj/item/weapon/stock_parts/power/terminal/can_provide_power(var/obj/machinery/machine)
 	if(terminal && terminal.surplus() && machine.can_use_power_oneoff(machine.get_power_usage(), LOCAL) <= 0)
 		set_status(machine, PART_STAT_ACTIVE)
-		cached_channel = machine.power_channel
 		machine.update_power_channel(LOCAL)
 		start_processing(machine)
 		return TRUE
