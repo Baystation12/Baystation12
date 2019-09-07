@@ -251,6 +251,10 @@
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/weapon/W, mob/user)
+
+	if(SSfabrication.try_craft_with(src, W, user))
+		return
+
 	if(istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = W
 		if(S.use_to_pickup)
@@ -260,7 +264,6 @@
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
 				return
-	. = ..()
 
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
