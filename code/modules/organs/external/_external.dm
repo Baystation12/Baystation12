@@ -101,7 +101,7 @@
 		sync_colour_to_human(owner)
 	get_icon()
 
-	slowdown = species.slowdown
+	slowdown = species.get_slowdown(owner)
 
 /obj/item/organ/external/Destroy()
 
@@ -164,7 +164,7 @@
 			burn_damage = 7.5
 
 	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
-	burn_damage *= mult/species.burn_mod //ignore burn mod for EMP damage
+	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
 
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)

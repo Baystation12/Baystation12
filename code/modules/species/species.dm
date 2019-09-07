@@ -82,9 +82,10 @@
 	var/list/natural_armour_values            // Armour values used if naked.
 	var/brute_mod =      1                    // Physical damage multiplier.
 	var/burn_mod =       1                    // Burn damage multiplier.
-	var/oxy_mod =        1                    // Oxyloss modifier
 	var/toxins_mod =     1                    // Toxloss modifier
 	var/radiation_mod =  1                    // Radiation modifier
+
+	var/oxy_mod =        1                    // Oxyloss modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
 	var/stun_mod =       1                    // Stun period modifier.

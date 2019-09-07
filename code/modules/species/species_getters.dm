@@ -90,3 +90,18 @@
 
 /datum/species/proc/get_footstep(var/mob/living/carbon/human/H, var/footstep_type)
 	return
+
+/datum/species/proc/get_brute_mod(var/mob/living/carbon/human/H)
+	. = brute_mod
+
+/datum/species/proc/get_burn_mod(var/mob/living/carbon/human/H)
+	. = burn_mod
+
+/datum/species/proc/get_toxins_mod(var/mob/living/carbon/human/H)
+	. = toxins_mod
+
+/datum/species/proc/get_radiation_mod(var/mob/living/carbon/human/H)
+	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
+
+/datum/species/proc/get_slowdown(var/mob/living/carbon/human/H)
+	. = (H && H.isSynthetic() ? 0 : slowdown)

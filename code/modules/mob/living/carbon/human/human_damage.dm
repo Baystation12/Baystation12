@@ -190,7 +190,7 @@
 	amount = abs(amount)
 
 	if (!heal)
-		amount = amount * species.toxins_mod
+		amount = amount * species.get_toxins_mod(src)
 		if (CE_ANTITOX in chem_effects)
 			amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
