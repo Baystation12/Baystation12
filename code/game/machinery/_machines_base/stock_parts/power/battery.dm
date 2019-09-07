@@ -19,6 +19,9 @@
 	start_processing(machine)
 
 /obj/item/weapon/stock_parts/power/battery/on_uninstall(var/obj/machinery/machine)
+	if(status & PART_STAT_ACTIVE)
+		machine.update_power_channel(cached_channel)
+		unset_status(machine, PART_STAT_ACTIVE)
 	if(cell && (part_flags & PART_FLAG_QDEL))
 		cell.dropInto(loc)
 		remove_cell()
@@ -97,7 +100,6 @@
 
 /obj/item/weapon/stock_parts/power/battery/can_provide_power(var/obj/machinery/machine)
 	if(cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
-		cached_channel = machine.power_channel
 		machine.update_power_channel(LOCAL)
 		set_status(machine, PART_STAT_ACTIVE)
 		return TRUE
