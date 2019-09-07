@@ -274,13 +274,13 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 // Getter version of above.
 /datum/dna/proc/GetSEValueRange(var/block,var/maxvalue)
-	if (block<=0) return 0
+	if (block<=0) return FALSE
 	var/value = GetSEValue(block)
 	return round(1 +(value / 4096)*maxvalue)
 
 // Is the block "on" (1) or "off" (0)? (Un-assigned genes are always off.)
 /datum/dna/proc/GetSEState(var/block)
-	if (block<=0) return 0
+	if (block<=0) return FALSE
 	var/list/BOUNDS=GetDNABounds(block)
 	var/value=GetSEValue(block)
 	return (value > BOUNDS[DNA_ON_LOWERBOUND])
@@ -336,7 +336,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	for(var/block in UI)
 		uni_identity += EncodeDNABlock(block)
 	//testing("New UI: [uni_identity]")
-	dirtyUI=0
+	dirtyUI = FALSE
 
 /datum/dna/proc/UpdateSE()
 	//var/oldse=struc_enzymes
@@ -345,7 +345,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		struc_enzymes += EncodeDNABlock(block)
 	//testing("Old SE: [oldse]")
 	//testing("New SE: [struc_enzymes]")
-	dirtySE=0
+	dirtySE = FALSE
 
 // BACK-COMPAT!
 //  Just checks our character has all the crap it needs.

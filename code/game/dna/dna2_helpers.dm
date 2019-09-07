@@ -29,7 +29,7 @@
 			return
 	M.dna.check_integrity()
 	var/block = pick(GLOB.GLASSESBLOCK,GLOB.COUGHBLOCK,GLOB.FAKEBLOCK,GLOB.NERVOUSBLOCK,GLOB.CLUMSYBLOCK,GLOB.TWITCHBLOCK,GLOB.HEADACHEBLOCK,GLOB.BLINDBLOCK,GLOB.DEAFBLOCK,GLOB.HALLUCINATIONBLOCK)
-	M.dna.SetSEState(block, 1)
+	M.dna.SetSEState(block, TRUE)
 
 // Give Random Good Mutation to M
 /proc/randmutg(var/mob/living/M)
@@ -40,7 +40,7 @@
 			return
 	M.dna.check_integrity()
 	var/block = pick(GLOB.HULKBLOCK,GLOB.XRAYBLOCK,GLOB.FIREBLOCK,GLOB.TELEBLOCK,GLOB.NOBREATHBLOCK,GLOB.REMOTEVIEWBLOCK,GLOB.REGENERATEBLOCK,GLOB.INCREASERUNBLOCK,GLOB.REMOTETALKBLOCK,GLOB.MORPHBLOCK,GLOB.BLENDBLOCK,GLOB.NOPRINTSBLOCK,GLOB.SHOCKIMMUNITYBLOCK,GLOB.SMALLSIZEBLOCK)
-	M.dna.SetSEState(block, 1)
+	M.dna.SetSEState(block, TRUE)
 
 // Random Appearance Mutation
 /proc/randmuti(var/mob/living/M)
@@ -55,14 +55,14 @@
 	if(UI)
 		for(var/i = 1, i <= DNA_UI_LENGTH-1, i++)
 			if(prob(prob))
-				M.dna.SetUIValue(i,rand(1,4095),1)
+				M.dna.SetUIValue(i,rand(1,4095), TRUE)
 		M.dna.UpdateUI()
 		M.UpdateAppearance()
 
 	else
 		for(var/i = 1, i <= DNA_SE_LENGTH-1, i++)
 			if(prob(prob))
-				M.dna.SetSEValue(i,rand(1,4095),1)
+				M.dna.SetSEValue(i,rand(1,4095), TRUE)
 		M.dna.UpdateSE()
 		domutcheck(M, null)
 	return
@@ -190,9 +190,9 @@
 		H.update_eyes()
 		H.update_hair()
 
-		return 1
+		return TRUE
 	else
-		return 0
+		return FALSE
 
 // Used below, simple injection modifier.
 /proc/probinj(var/pr, var/inj)
