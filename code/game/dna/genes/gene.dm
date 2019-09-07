@@ -32,7 +32,7 @@
 // Return 1 if we can activate.
 // HANDLE MUTCHK_FORCED HERE!
 /datum/dna/gene/proc/can_activate(var/mob/M, var/flags)
-	return 0
+	return FALSE
 
 // Called when the gene activates.  Do your magic here.
 /datum/dna/gene/proc/activate(var/mob/M, var/connected, var/flags)
@@ -70,10 +70,10 @@
 *
 * @params M The subject.
 * @params g Gender (m or f)
-* @params fat Fat? (0 or 1)
+* @params fat Fat? (FALSE or TRUE)
 */
 /datum/dna/gene/proc/OnDrawUnderlays(var/mob/M, var/g, var/fat)
-	return 0
+	return FALSE
 
 
 /////////////////////
@@ -105,7 +105,7 @@
 
 /datum/dna/gene/basic/can_activate(var/mob/M,var/flags)
 	if(flags & MUTCHK_FORCED)
-		return 1
+		return TRUE
 	// Probability check
 	return probinj(activation_prob,(flags&MUTCHK_FORCED))
 
