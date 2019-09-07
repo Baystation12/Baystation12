@@ -21,7 +21,7 @@
 	if(T.holy)
 		to_chat(src, "<span class='notice'>You may not use your abilities on the blessed ground.</span>")
 		return FALSE
-	if(ghost_magic_d > world.time)
+	if(ghost_magic_cd > world.time)
 		to_chat(src, "<span class='notice'>You need [round((ghost_magic_cd - world.time) / 10)] more seconds before you can use your abilities.</span>")
 		return FALSE
 	return TRUE
