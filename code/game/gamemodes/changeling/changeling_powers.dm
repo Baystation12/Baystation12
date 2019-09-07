@@ -10,7 +10,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/sting_range = 1
 	var/changelingID = "Changeling"
 	var/geneticdamage = 0
-	var/isabsorbing = 0
+	var/isabsorbing = FALSE
 	var/geneticpoints = 25
 	var/purchasedpowers = list()
 	var/mimicing = ""
@@ -180,7 +180,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!affecting)
 		to_chat(src, "<span class='warning'>They are missing that body part!</span>")
 
-	changeling.isabsorbing = 1
+	changeling.isabsorbing = TRUE
 	for(var/stage = 1, stage<=3, stage++)
 		switch(stage)
 			if(1)
@@ -197,7 +197,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		SSstatistics.add_field_details("changeling_powers","A[stage]")
 		if(!do_mob(src, T, 150))
 			to_chat(src, "<span class='warning'>Our absorption of [T] has been interrupted!</span>")
-			changeling.isabsorbing = 0
+			changeling.isabsorbing = FALSE
 			return
 
 	to_chat(src, "<span class='notice'>We have absorbed [T]!</span>")
@@ -247,11 +247,11 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		T.mind.changeling.absorbedcount = 0
 
 	changeling.absorbedcount++
-	changeling.isabsorbing = 0
+	changeling.isabsorbing = FALSE
 
-	T.death(0)
+	T.death(FALSE)
 	T.Drain()
-	return 1
+	return TRUE
 
 
 //Change our DNA to that of somebody we've absorbed.
@@ -259,7 +259,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set category = "Changeling"
 	set name = "Transform (5)"
 
-	var/datum/changeling/changeling = changeling_power(5,1,0)
+	var/datum/changeling/changeling = changeling_power(5, 1, 0)
 	if(!changeling)	return
 
 	var/list/names = list()
@@ -297,7 +297,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling_update_languages(changeling.absorbed_languages)
 
 	SSstatistics.add_field_details("changeling_powers","TR")
-	return 1
+	return TRUE
 
 /mob/proc/handle_changeling_transform(var/datum/absorbed_dna/chosen_dna)
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
@@ -322,7 +322,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set category = "Changeling"
 	set name = "Lesser Form (1)"
 
-	var/datum/changeling/changeling = changeling_power(1,0,0)
+	var/datum/changeling/changeling = changeling_power(1, 0, 0)
 	if(!changeling)	return
 
 	if(src.has_brain_worms())
@@ -341,14 +341,14 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	to_chat(H, "<span class='warning'>Our genes cry out!</span>")
 	H = H.monkeyize()
 	SSstatistics.add_field_details("changeling_powers","LF")
-	return 1
+	return TRUE
 
 //Transform into a human
 /mob/proc/changeling_lesser_transform()
 	set category = "Changeling"
 	set name = "Transform (1)"
 
-	var/datum/changeling/changeling = changeling_power(1,1,0)
+	var/datum/changeling/changeling = changeling_power(1, 1, 0)
 	if(!changeling)	return
 
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
@@ -421,7 +421,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	SSstatistics.add_field_details("changeling_powers","LFT")
 	qdel(C)
-	return 1
+	return TRUE
 
 
 //Fake our own death and fully heal. You will appear to be dead but regenerate fully after a short delay.
@@ -429,7 +429,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set category = "Changeling"
 	set name = "Regenerative Stasis (20)"
 
-	var/datum/changeling/changeling = changeling_power(20,1,100,DEAD)
+	var/datum/changeling/changeling = changeling_power(20, 1, 100, DEAD)
 	if(!changeling)	return
 
 	var/mob/living/carbon/C = src
@@ -451,7 +451,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 			C.verbs += /mob/proc/changeling_revive
 
 	SSstatistics.add_field_details("changeling_powers","FD")
-	return 1
+	return TRUE
 
 /mob/proc/changeling_revive()
 	set category = "Changeling"
@@ -478,14 +478,14 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set desc="Your next sting ability can be used against targets 2 squares away."
 
 	var/datum/changeling/changeling = changeling_power(10,0,100)
-	if(!changeling)	return 0
+	if(!changeling)	return FALSE
 	changeling.chem_charges -= 10
 	to_chat(src, "<span class='notice'>Your throat adjusts to launch the sting.</span>")
 	changeling.sting_range = 2
 	src.verbs -= /mob/proc/changeling_boost_range
 	spawn(5)	src.verbs += /mob/proc/changeling_boost_range
 	SSstatistics.add_field_details("changeling_powers","RS")
-	return 1
+	return TRUE
 
 
 //Recover from stuns.
@@ -495,7 +495,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set desc = "Removes all stuns"
 
 	var/datum/changeling/changeling = changeling_power(45,0,100,UNCONSCIOUS)
-	if(!changeling)	return 0
+	if(!changeling)	return FALSE
 	changeling.chem_charges -= 45
 
 	var/mob/living/carbon/human/C = src
@@ -503,24 +503,24 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.SetParalysis(0)
 	C.SetStunned(0)
 	C.SetWeakened(0)
-	C.lying = 0
+	C.lying = FALSE
 	C.UpdateLyingBuckledAndVerbStatus()
 
 	src.verbs -= /mob/proc/changeling_unstun
 	spawn(5)	src.verbs += /mob/proc/changeling_unstun
 	SSstatistics.add_field_details("changeling_powers","UNS")
-	return 1
+	return TRUE
 
 
 //Speeds up chemical regeneration
 /mob/proc/changeling_fastchemical()
 	src.mind.changeling.chem_recharge_rate *= 2
-	return 1
+	return TRUE
 
 //Increases macimum chemical storage
 /mob/proc/changeling_engorgedglands()
 	src.mind.changeling.chem_storage += 25
-	return 1
+	return TRUE
 
 
 //Prevents AIs tracking you but makes you easily detectable to the human-eye.
@@ -530,7 +530,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set desc = "The AI can no longer track us, but we will look different if examined.  Has a constant cost while active."
 
 	var/datum/changeling/changeling = changeling_power()
-	if(!changeling)	return 0
+	if(!changeling)	return FALSE
 
 	var/mob/living/carbon/human/C = src
 	if(C.digitalcamo)	to_chat(C, "<span class='notice'>We return to normal.</span>")
@@ -545,7 +545,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	src.verbs -= /mob/proc/changeling_digitalcamo
 	spawn(5)	src.verbs += /mob/proc/changeling_digitalcamo
 	SSstatistics.add_field_details("changeling_powers","CAM")
-	return 1
+	return TRUE
 
 
 //Starts healing you every second for 10 seconds. Can be used whilst unconscious.
@@ -554,8 +554,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	set name = "Rapid Regeneration (30)"
 	set desc = "Begins rapidly regenerating.  Does not effect stuns or chemicals."
 
-	var/datum/changeling/changeling = changeling_power(30,0,100,UNCONSCIOUS)
-	if(!changeling)	return 0
+	var/datum/changeling/changeling = changeling_power(30, 0, 100, UNCONSCIOUS)
+	if(!changeling)	return FALSE
 	src.mind.changeling.chem_charges -= 30
 
 	var/mob/living/carbon/human/C = src
@@ -571,7 +571,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	src.verbs -= /mob/proc/changeling_rapidregen
 	spawn(5)	src.verbs += /mob/proc/changeling_rapidregen
 	SSstatistics.add_field_details("changeling_powers","RR")
-	return 1
+	return TRUE
 
 // HIVE MIND UPLOAD/DOWNLOAD DNA
 
@@ -582,15 +582,15 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Hive Channel (10)"
 	set desc = "Allows you to channel DNA in the airwaves to allow other changelings to absorb it."
 
-	var/datum/changeling/changeling = changeling_power(10,1)
+	var/datum/changeling/changeling = changeling_power(10, 1)
 	if(!changeling)	return
 
 	var/list/names = list()
 	for(var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
-		var/valid = 1
+		var/valid = TRUE
 		for(var/datum/absorbed_dna/DNB in hivemind_bank)
 			if(DNA.name == DNB.name)
-				valid = 0
+				valid = FALSE
 				break
 		if(valid)
 			names += DNA.name
@@ -616,14 +616,14 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	hivemind_bank += chosen_dna
 	to_chat(src, "<span class='notice'>We channel the DNA of [S] to the air.</span>")
 	SSstatistics.add_field_details("changeling_powers","HU")
-	return 1
+	return TRUE
 
 /mob/proc/changeling_hivedownload()
 	set category = "Changeling"
 	set name = "Hive Absorb (20)"
 	set desc = "Allows you to absorb DNA that is being channeled in the airwaves."
 
-	var/datum/changeling/changeling = changeling_power(20,1)
+	var/datum/changeling/changeling = changeling_power(20, 1)
 	if(!changeling)	return
 
 	var/list/names = list()
@@ -645,7 +645,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	absorbDNA(chosen_dna)
 	to_chat(src, "<span class='notice'>We absorb the DNA of [S] from the air.</span>")
 	SSstatistics.add_field_details("changeling_powers","HD")
-	return 1
+	return TRUE
 
 // Fake Voice
 
@@ -685,15 +685,15 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 /mob/proc/sting_can_reach(mob/M as mob, sting_range = 1)
 	if(M.loc == src.loc)
-		return 1 //target and source are in the same thing
+		return TRUE //target and source are in the same thing
 	if(!isturf(src.loc) || !isturf(M.loc))
 		to_chat(src, "<span class='warning'>We cannot reach \the [M] with a sting!</span>")
-		return 0 //One is inside, the other is outside something.
+		return FALSE //One is inside, the other is outside something.
 	// Maximum queued turfs set to 25; I don't *think* anything raises sting_range above 2, but if it does the 25 may need raising
 	if(!AStar(src.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, max_nodes=25, max_node_depth=sting_range)) //If we can't find a path, fail
 		to_chat(src, "<span class='warning'>We cannot find a path to sting \the [M] by!</span>")
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 //Handles the general sting code to reduce on copypasta (seeming as somebody decided to make SO MANY dumb abilities)
 /mob/proc/changeling_sting(var/required_chems=0, var/verb_path, var/loud)
@@ -738,64 +738,64 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Hallucination Sting (15)"
 	set desc = "Causes terror in the target."
 
-	var/mob/living/carbon/human/T = changeling_sting(15,/mob/proc/changeling_lsdsting)
-	if(!T)	return 0
+	var/mob/living/carbon/human/T = changeling_sting(15, /mob/proc/changeling_lsdsting)
+	if(!T)	return FALSE
 	spawn(rand(300,600))
 		if(T)	T.hallucination(400, 80)
 	SSstatistics.add_field_details("changeling_powers","HS")
-	return 1
+	return TRUE
 
 /mob/proc/changeling_silence_sting()
 	set category = "Changeling"
 	set name = "Silence sting (10)"
 	set desc="Sting target"
 
-	var/mob/living/carbon/human/T = changeling_sting(10,/mob/proc/changeling_silence_sting)
-	if(!T)	return 0
+	var/mob/living/carbon/human/T = changeling_sting(10, /mob/proc/changeling_silence_sting)
+	if(!T)	return FALSE
 	T.silent += 30
 	SSstatistics.add_field_details("changeling_powers","SS")
-	return 1
+	return TRUE
 
 /mob/proc/changeling_blind_sting()
 	set category = "Changeling"
 	set name = "Blind sting (20)"
 	set desc="Sting target"
 
-	var/mob/living/carbon/human/T = changeling_sting(20,/mob/proc/changeling_blind_sting)
-	if(!T)	return 0
+	var/mob/living/carbon/human/T = changeling_sting(20, /mob/proc/changeling_blind_sting)
+	if(!T)	return FALSE
 	to_chat(T, "<span class='danger'>Your eyes burn horrificly!</span>")
 	T.disabilities |= NEARSIGHTED
 	spawn(300)	T.disabilities &= ~NEARSIGHTED
 	T.eye_blind = 10
 	T.eye_blurry = 20
 	SSstatistics.add_field_details("changeling_powers","BS")
-	return 1
+	return TRUE
 
 /mob/proc/changeling_deaf_sting()
 	set category = "Changeling"
 	set name = "Deaf sting (5)"
 	set desc="Sting target:"
 
-	var/mob/living/carbon/human/T = changeling_sting(5,/mob/proc/changeling_deaf_sting)
-	if(!T)	return 0
+	var/mob/living/carbon/human/T = changeling_sting(5, /mob/proc/changeling_deaf_sting)
+	if(!T)	return FALSE
 	to_chat(T, "<span class='danger'>Your ears pop and begin ringing loudly!</span>")
 	T.ear_deaf += 15
 	SSstatistics.add_field_details("changeling_powers","DS")
-	return 1
+	return TRUE
 
 /mob/proc/changeling_DEATHsting()
 	set category = "Changeling"
 	set name = "Death Sting (40)"
 	set desc = "Causes spasms onto death."
-	var/loud = 1
+	var/loud = TRUE
 
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud)
-	if(!T)	return 0
+	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_DEATHsting,loud)
+	if(!T)	return FALSE
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
 	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 40)
 	SSstatistics.add_field_details("changeling_powers","DTHS")
-	return 1
+	return TRUE
 
 /mob/proc/changeling_extract_dna_sting()
 	set category = "Changeling"
@@ -806,13 +806,13 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(src.mind && src.mind.changeling)
 		changeling = src.mind.changeling
 	if(!changeling)
-		return 0
+		return FALSE
 
 	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
-	if(!T)	return 0
+	if(!T)	return FALSE
 	if((MUTATION_HUSK in T.mutations) || (T.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
-		return 0
+		return FALSE
 
 	if(T.species.species_flags & SPECIES_FLAG_NEED_DIRECT_ABSORB)
 		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")
@@ -822,4 +822,4 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	absorbDNA(newDNA)
 
 	SSstatistics.add_field_details("changeling_powers","ED")
-	return 1
+	return TRUE

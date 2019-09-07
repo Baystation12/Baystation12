@@ -7,11 +7,11 @@ var/list/datum/power/changeling/powerinstances = list()
 	var/name = "Power"
 	var/desc = "Placeholder"
 	var/helptext = ""
-	var/isVerb = 1 	// Is it an active power, or passive?
+	var/isVerb = TRUE 	// Is it an active power, or passive?
 	var/verbpath // Path to a verb that contains the effects.
 
 /datum/power/changeling
-	var/allowduringlesserform = 0
+	var/allowduringlesserform = FALSE
 	var/genomecost = 500000 // Cost for the changling to evolve this power.
 
 /datum/power/changeling/absorb_dna
@@ -31,7 +31,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	desc = "We become weakened to a death-like state, where we will rise again from death."
 	helptext = "Can be used before or after death. Duration varies greatly."
 	genomecost = 0
-	allowduringlesserform = 1
+	allowduringlesserform = TRUE
 	verbpath = /mob/proc/changeling_fakedeath
 
 // Hivemind
@@ -60,14 +60,14 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Deaf Sting"
 	desc = "We silently sting a human, completely deafening them for a short time."
 	genomecost = 1
-	allowduringlesserform = 1
+	allowduringlesserform = TRUE
 	verbpath = /mob/proc/changeling_deaf_sting
 
 /datum/power/changeling/blind_sting
 	name = "Blind Sting"
 	desc = "We silently sting a human, completely blinding them for a short time."
 	genomecost = 2
-	allowduringlesserform = 1
+	allowduringlesserform = TRUE
 	verbpath = /mob/proc/changeling_blind_sting
 
 /datum/power/changeling/silence_sting
@@ -75,7 +75,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	desc = "We silently sting a human, completely silencing them for a short time."
 	helptext = "Does not provide a warning to a victim that they have been stung, until they try to speak and cannot."
 	genomecost = 3
-	allowduringlesserform = 1
+	allowduringlesserform = TRUE
 	verbpath = /mob/proc/changeling_silence_sting
 
 /datum/power/changeling/mimicvoice
@@ -90,7 +90,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	desc = "We stealthily sting a target and extract the DNA from them."
 	helptext = "Will give you the DNA of your target, allowing you to transform into them. Does not count towards absorb objectives."
 	genomecost = 2
-	allowduringlesserform = 1
+	allowduringlesserform = TRUE
 	verbpath = /mob/proc/changeling_extract_dna_sting
 
 /datum/power/changeling/LSDSting
@@ -112,7 +112,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Boost Range"
 	desc = "We evolve the ability to shoot our stingers at humans, with some preperation."
 	genomecost = 2
-	allowduringlesserform = 1
+	allowduringlesserform = TRUE
 	verbpath = /mob/proc/changeling_boost_range
 
 /datum/power/changeling/Epinephrine
@@ -127,7 +127,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	desc = "We evolve new pathways for producing our necessary chemicals, permitting us to naturally create them faster."
 	helptext = "Doubles the rate at which we naturally recharge chemicals."
 	genomecost = 4
-	isVerb = 0
+	isVerb = FALSE
 	verbpath = /mob/proc/changeling_fastchemical
 /*
 /datum/power/changeling/AdvChemicalSynth
@@ -135,7 +135,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	desc = "We evolve new pathways for producing our necessary chemicals, permitting us to naturally create them faster."
 	helptext = "Doubles the rate at which we naturally recharge chemicals."
 	genomecost = 8
-	isVerb = 0
+	isVerb = FALSE
 	verbpath = /mob/proc/changeling_fastchemical
 */
 /datum/power/changeling/EngorgedGlands
@@ -143,7 +143,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	desc = "Our chemical glands swell, permitting us to store more chemicals inside of them."
 	helptext = "Allows us to store an extra 25 units of chemicals."
 	genomecost = 4
-	isVerb = 0
+	isVerb = FALSE
 	verbpath = /mob/proc/changeling_engorgedglands
 
 /datum/power/changeling/DigitalCamoflague
@@ -151,7 +151,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	desc = "We evolve the ability to distort our form and proprtions, defeating common altgorthms used to detect lifeforms on cameras."
 	helptext = "We cannot be tracked by camera while using this skill.  However, humans looking at us will find us.. uncanny.  We must constantly expend chemicals to maintain our form like this."
 	genomecost = 1
-	allowduringlesserform = 1
+	allowduringlesserform = TRUE
 	verbpath = /mob/proc/changeling_digitalcamo
 
 /datum/power/changeling/rapidregeneration
@@ -386,10 +386,10 @@ var/list/datum/power/changeling/powerinstances = list()
 
 	var/i = 1
 	for(var/datum/power/changeling/P in powerinstances)
-		var/ownsthis = 0
+		var/ownsthis = FALSE
 
 		if(P in purchasedpowers)
-			ownsthis = 1
+			ownsthis = TRUE
 
 
 		var/color = "#e6e6e6"
