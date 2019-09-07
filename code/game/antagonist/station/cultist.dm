@@ -16,9 +16,9 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 
 /proc/iscultist(var/mob/player)
 	if(!GLOB.cult || !player.mind)
-		return 0
+		return FALSE
 	if(player.mind in GLOB.cult.current_antagonists)
-		return 1
+		return TRUE
 
 /datum/antagonist/cultist
 	id = MODE_CULTIST
@@ -42,8 +42,8 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	antaghud_indicator = "hudcultist"
 	skill_setter = /datum/antag_skill_setter/station
 
-	var/allow_narsie = 1
-	var/powerless = 0
+	var/allow_narsie = TRUE
+	var/powerless = FALSE
 	var/datum/mind/sacrifice_target
 	var/list/obj/effect/rune/teleport/teleport_runes = list()
 	var/list/rune_strokes = list()
@@ -74,7 +74,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 /datum/antagonist/cultist/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
-		return 0
+		return FALSE
 
 	var/obj/item/weapon/book/tome/T = new(get_turf(player))
 	var/list/slots = list (
@@ -94,7 +94,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
-		return 0
+		return FALSE
 	to_chat(player.current, "<span class='danger'>An unfamiliar white light flashes through your mind, cleansing the taint of the dark-one and the memories of your time as his servant with it.</span>")
 	player.ClearMemories(type)
 	if(show_message)
@@ -162,7 +162,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 
 /datum/antagonist/cultist/Topic(href, href_list)
 	if(href_list["confirmleave"])
-		GLOB.cult.remove_antagonist(usr.mind, 1)
+		GLOB.cult.remove_antagonist(usr.mind, TRUE)
 
 /datum/antagonist/cultist/proc/remove_cultiness(var/amount)
 	cult_rating = max(0, cult_rating - amount)

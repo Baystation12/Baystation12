@@ -21,7 +21,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 /datum/antagonist/rogue_ai/can_become_antag(var/datum/mind/player, var/ignore_role)
 	. = ..(player, ignore_role)
 	if(jobban_isbanned(player.current, "AI"))
-		return 0
+		return FALSE
 	return .
 
 /datum/antagonist/rogue_ai/build_candidate_list()
@@ -38,8 +38,8 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 		var/mob/living/silicon/ai/p = player.current
 		if(istype(p))
 			p.stop_malf()
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 // Malf setup things have to be here, since game tends to break when it's moved somewhere else. Don't blame me, i didn't design this system.
 /datum/antagonist/rogue_ai/greet(var/datum/mind/player)
@@ -54,7 +54,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 			error("Non-AI mob designated malf AI! Report this.")
 			to_world("##ERROR: Non-AI mob designated malf AI! Report this.")
 
-			return 0
+			return FALSE
 
 		A.setup_for_malf()
 		A.laws = new /datum/ai_laws/nanotrasen/malfunction

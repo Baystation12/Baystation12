@@ -11,7 +11,6 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	victory_feedback_tag = "win - rev heads killed"
 	loss_feedback_tag = "loss - heads killed"
 	antaghud_indicator = "hudloyalist"
-	flags = 0
 
 	hard_cap = 2
 	hard_cap_round = 4
@@ -23,7 +22,7 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	faction_descriptor = "COMPANY"
 	faction_verb = /mob/living/proc/convert_to_loyalist
 	faction_indicator = "hud_loyal"
-	faction_invisible = 1
+	faction_invisible = TRUE
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
 	skill_setter = /datum/antag_skill_setter/station
 
@@ -37,7 +36,7 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 
 /datum/antagonist/loyalists/create_global_objectives()
 	if(!..())
-		return
+		return FALSE
 	global_objectives = list()
 	for(var/mob/living/carbon/human/player in SSmobs.mob_list)
 		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(COM)))

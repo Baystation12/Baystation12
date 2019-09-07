@@ -51,7 +51,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 /datum/antagonist/renegade/create_objectives(var/datum/mind/player)
 
 	if(!..())
-		return
+		return FALSE
 
 	var/datum/objective/survive/survive = new
 	survive.owner = player
@@ -60,7 +60,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 /datum/antagonist/renegade/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
-		return
+		return FALSE
 
 	var/gun_type = pick(spawn_guns)
 	if(islist(gun_type))
@@ -81,7 +81,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 
 /proc/rightandwrong()
 	to_chat(usr, "<B>You summoned guns!</B>")
-	message_admins("[key_name_admin(usr, 1)] summoned guns!")
+	message_admins("[key_name_admin(usr, TRUE)] summoned guns!")
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(H.stat == 2 || !(H.client)) continue
 		if(is_special_character(H)) continue

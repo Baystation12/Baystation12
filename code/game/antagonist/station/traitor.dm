@@ -14,14 +14,14 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 
 /datum/antagonist/traitor/Topic(href, href_list)
 	if (..())
-		return 1
+		return TRUE
 	if(href_list["spawn_uplink"])
 		spawn_uplink(locate(href_list["spawn_uplink"]))
-		return 1
+		return TRUE
 
 /datum/antagonist/traitor/create_objectives(var/datum/mind/traitor)
 	if(!..())
-		return
+		return FALSE
 
 	if(istype(traitor.current, /mob/living/silicon))
 		var/datum/objective/assassinate/kill_objective = new
@@ -75,12 +75,12 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 		if(istype(traitor_mob, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = traitor_mob
 			R.SetLockdown(0)
-			R.emagged = 1 // Provides a traitor robot with its module's emag item
+			R.emagged = TRUE // Provides a traitor robot with its module's emag item
 			R.verbs |= /mob/living/silicon/robot/proc/ResetSecurityCodes
-		return 1
+		return FALSE
 
 	if(!..())
-		return 0
+		return FALSE
 
 	spawn_uplink(traitor_mob)
 	give_intel(traitor_mob)

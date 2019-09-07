@@ -29,7 +29,7 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 
 /datum/antagonist/changeling/create_objectives(var/datum/mind/changeling)
 	if(!..())
-		return
+		return FALSE
 
 	//OBJECTIVES - Always absorb 5 genomes, plus random traitor objectives.
 	//If they have two objectives as well as absorb, they must survive rather than escape
@@ -70,16 +70,16 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 			if(ishuman(player.current))
 				var/mob/living/carbon/human/H = player.current
 				if(H.isSynthetic())
-					return 0
+					return FALSE
 				if(H.species.species_flags & SPECIES_FLAG_NO_SCAN)
-					return 0
-				return 1
+					return FALSE
+				return TRUE
 			else if(isnewplayer(player.current))
 				if(player.current.client && player.current.client.prefs)
 					var/datum/species/S = all_species[player.current.client.prefs.species]
 					if(S && (S.species_flags & SPECIES_FLAG_NO_SCAN))
-						return 0
+						return FALSE
 					if(player.current.client.prefs.organ_data[BP_CHEST] == "cyborg") // Full synthetic.
-						return 0
-					return 1
- 	return 0
+						return FALSE
+					return TRUE
+ 	return FALSE
