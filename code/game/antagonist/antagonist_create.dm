@@ -26,10 +26,10 @@
 	else
 		M = new /mob/living/carbon/human(get_turf(source))
 	M.ckey = source.ckey
-	add_antagonist(M.mind, 1, 0, 1) // Equip them and move them to spawn.
+	add_antagonist(M.mind, TRUE, FALSE, TRUE) // Equip them and move them to spawn.
 	return M
 
-/datum/antagonist/proc/create_id(var/assignment, var/mob/living/carbon/human/player, var/equip = 1)
+/datum/antagonist/proc/create_id(var/assignment, var/mob/living/carbon/human/player, var/equip = TRUE)
 
 	var/obj/item/weapon/card/id/W = new id_type(player)
 	if(!W) return
@@ -108,7 +108,7 @@
 		create_nuke()
 
 	src.show_objectives_at_creation(player)
-	return 1
+	return TRUE
 
 /datum/antagonist/proc/set_antag_name(var/mob/living/player)
 	// Choose a name, if any.

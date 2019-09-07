@@ -10,7 +10,7 @@
 	if(spawn_announcement)
 		if(announced)
 			return
-		announced = 1
+		announced = TRUE
 		spawn(0)
 			if(spawn_announcement_delay)
 				sleep(spawn_announcement_delay)

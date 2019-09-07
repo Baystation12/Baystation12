@@ -30,7 +30,7 @@
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		if(!implanted || !(antag.flags & ANTAG_IMPLANT_IMMUNE))
-			antag.remove_antagonist(player, 1, implanted)
+			antag.remove_antagonist(player, TRUE, implanted)
 
 /proc/update_antag_icons(var/datum/mind/player)
 	var/list/all_antag_types = GLOB.all_antag_types_
@@ -49,7 +49,7 @@
 		return antag.current_antagonists
 	return list()
 
-/proc/player_is_antag(var/datum/mind/player, var/only_offstation_roles = 0)
+/proc/player_is_antag(var/datum/mind/player, var/only_offstation_roles = FALSE)
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
@@ -59,7 +59,7 @@
 			return antag
 		if(player in antag.pending_antagonists)
 			return antag
-	return 0
+	return FALSE
 
 GLOBAL_LIST_EMPTY(all_antag_types_)
 GLOBAL_LIST_EMPTY(all_antag_spawnpoints_)

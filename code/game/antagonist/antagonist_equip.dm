@@ -1,7 +1,7 @@
 /datum/antagonist/proc/equip(var/mob/living/carbon/human/player)
 
 	if(!istype(player))
-		return 0
+		return FALSE
 	
 	if (required_language)
 		player.add_language(required_language)
@@ -14,12 +14,12 @@
 				qdel(thing)
 		//mainly for vox antag compatibility. Should not effect item spawning.
 		player.species.equip_survival_gear(player)
-	return 1
+	return TRUE
 
 /datum/antagonist/proc/unequip(var/mob/living/carbon/human/player)
 	if(!istype(player))
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 /datum/antagonist/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
 	set waitfor = 0
@@ -30,7 +30,7 @@
 		player.equip_to_slot_or_del(rig,slot_back)
 		if(rig)
 			rig.visible_name = player.real_name
-			rig.toggle_seals(src,1)
+			rig.toggle_seals(src, TRUE)
 			rig.seal_delay = initial(rig.seal_delay)
 			if(rig.air_supply)
 				player.set_internals(rig.air_supply)

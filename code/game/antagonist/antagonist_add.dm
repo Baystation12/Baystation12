@@ -21,17 +21,17 @@
 
 	if(player.current)
 		player.current.faction = faction
-	return 1
+	return TRUE
 
 /datum/antagonist/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
 	if(!istype(player))
-		return 0
+		return FALSE
 	if(!player.current)
-		return 0
+		return FALSE
 	if(player in current_antagonists)
-		return 0
+		return FALSE
 	if(!can_become_antag(player, ignore_role))
-		return 0
+		return FALSE
 	current_antagonists |= player
 
 	if(faction_verb)
@@ -57,11 +57,11 @@
 		if(nonstandard_role_msg)
 			to_chat(player.current, "<span class='notice'>[nonstandard_role_msg]</span>")
 		update_icons_added(player)
-	return 1
+	return TRUE
 
 /datum/antagonist/proc/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!istype(player))
-		return 0
+		return FALSE
 	if(player.current && faction_verb)
 		player.current.verbs -= faction_verb
 	if(faction && player.current.faction == faction)
@@ -83,5 +83,5 @@
 				if(player.current.client)
 					player.current.client.verbs -= /client/proc/aooc
 			qdel(SSgoals.ambitions[player])
-		return 1
-	return 0
+		return TRUE
+	return FALSE

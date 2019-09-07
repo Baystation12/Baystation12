@@ -1,16 +1,16 @@
-/datum/antagonist/proc/create_global_objectives(var/override=0)
+/datum/antagonist/proc/create_global_objectives(var/override=FALSE)
 	if(config.objectives_disabled != CONFIG_OBJECTIVE_ALL && !override)
-		return 0
+		return FALSE
 	if(global_objectives && global_objectives.len)
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
-/datum/antagonist/proc/create_objectives(var/datum/mind/player, var/override=0)
+/datum/antagonist/proc/create_objectives(var/datum/mind/player, var/override=FALSE)
 	if(config.objectives_disabled != CONFIG_OBJECTIVE_ALL && !override)
-		return 0
+		return FALSE
 	if(create_global_objectives(override) || global_objectives.len)
 		player.objectives |= global_objectives
-	return 1
+	return TRUE
 
 /datum/antagonist/proc/get_special_objective_text()
 	return ""

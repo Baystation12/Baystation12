@@ -102,7 +102,7 @@
 		if(faction_role_text) GLOB.hud_icon_reference[faction_role_text] = antaghud_indicator
 
 /datum/antagonist/proc/tick()
-	return 1
+	return TRUE
 
 // Get the raw list of potential players.
 /datum/antagonist/proc/build_candidate_list(datum/game_mode/mode, ghosts_only)
@@ -153,7 +153,7 @@
 
 /datum/antagonist/proc/attempt_auto_spawn()
 	if(!can_late_spawn())
-		return 0
+		return FALSE
 
 	update_current_antag_max(SSticker.mode)
 	var/active_antags = get_active_antag_count()
@@ -161,26 +161,26 @@
 
 	if(active_antags >= cur_max)
 		message_admins("Could not auto-spawn a [role_text], active antag limit reached.")
-		return 0
+		return FALSE
 
 	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
 	if(!candidates.len)
 		message_admins("Could not auto-spawn a [role_text], no candidates found.")
-		return 0
+		return FALSE
 
 	attempt_spawn(1) //auto-spawn antags one at a time
 	if(!pending_antagonists.len)
 		message_admins("Could not auto-spawn a [role_text], none of the available candidates could be selected.")
-		return 0
+		return FALSE
 
 	var/datum/mind/player = pending_antagonists[1]
-	if(!add_antagonist(player,0,0,0,1,1))
+	if(!add_antagonist(player, FALSE, FALSE, FALSE, TRUE, TRUE))
 		message_admins("Could not auto-spawn a [role_text], failed to add antagonist.")
-		return 0
+		return FALSE
 
 	reset_antag_selection()
 
-	return 1
+	return TRUE
 
 //Selects players that will be spawned in the antagonist role from the potential candidates
 //Selected players are added to the pending_antagonists lists.
@@ -193,7 +193,7 @@
 
 	// Update our boundaries.
 	if(!candidates.len)
-		return 0
+		return FALSE
 
 	//Grab candidates randomly until we have enough.
 	while(candidates.len && pending_antagonists.len < spawn_target)
@@ -201,22 +201,22 @@
 		candidates -= player
 		draft_antagonist(player)
 
-	return 1
+	return TRUE
 
 /datum/antagonist/proc/draft_antagonist(var/datum/mind/player)
 	//Check if the player can join in this antag role, or if the player has already been given an antag role.
 	if(!can_become_antag(player))
 		log_debug("[player.key] was selected for [role_text] by lottery, but is not allowed to be that role.")
-		return 0
+		return FALSE
 	if(player.special_role)
 		log_debug("[player.key] was selected for [role_text] by lottery, but they already have a special role.")
-		return 0
+		return FALSE
 	if(!(flags & ANTAG_OVERRIDE_JOB) && (!player.current || istype(player.current, /mob/new_player)))
 		log_debug("[player.key] was selected for [role_text] by lottery, but they have not joined the game.")
-		return 0
+		return FALSE
 	if(GAME_STATE >= RUNLEVEL_GAME && (isghostmind(player) || isnewplayer(player.current)) && !(player in SSticker.antag_pool))
 		log_debug("[player.key] was selected for [role_text] by lottery, but they are a ghost not in the antag pool.")
-		return 0
+		return FALSE
 
 	pending_antagonists |= player
 	log_debug("[player.key] has been selected for [role_text] by lottery.")
@@ -229,7 +229,7 @@
 	//Ensure that a player cannot be drafted for multiple antag roles, taking up slots for antag roles that they will not fill.
 	player.special_role = role_text
 
-	return 1
+	return TRUE
 
 //Spawns all pending_antagonists. This is done separately from attempt_spawn in case the game mode setup fails.
 /datum/antagonist/proc/finalize_spawn()
@@ -238,7 +238,7 @@
 
 	for(var/datum/mind/player in pending_antagonists)
 		pending_antagonists -= player
-		add_antagonist(player,0,0,1)
+		add_antagonist(player, FALSE, FALSE, TRUE)
 
 	reset_antag_selection()
 

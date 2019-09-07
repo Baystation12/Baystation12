@@ -1,7 +1,7 @@
 /datum/antagonist/proc/print_player_summary()
 
 	if(!current_antagonists.len)
-		return 0
+		return FALSE
 
 	var/text = list()
 	text += "<br><br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
