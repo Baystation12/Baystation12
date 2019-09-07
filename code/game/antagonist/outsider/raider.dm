@@ -110,7 +110,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 /datum/antagonist/raider/create_global_objectives()
 
 	if(!..())
-		return 0
+		return FALSE
 
 	var/i = 1
 	var/max_objectives = pick(2,2,2,2,3,3,3,4)
@@ -133,22 +133,22 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		i++
 
 	global_objectives |= new /datum/objective/heist/preserve_crew
-	return 1
+	return TRUE
 
 /datum/antagonist/raider/proc/is_raider_crew_safe()
 
 	if(!current_antagonists || current_antagonists.len == 0)
-		return 0
+		return FALSE
 
 	for(var/datum/mind/player in current_antagonists)
 		if(!player.current || get_area(player.current) != locate(/area/skipjack_station/start))
-			return 0
-	return 1
+			return FALSE
+	return TRUE
 
 /datum/antagonist/raider/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
-		return 0
+		return FALSE
 
 	if(player.species && player.species.get_bodytype(player) == SPECIES_VOX)
 		equip_vox(player)
@@ -171,7 +171,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
 		equip_weapons(player)
 
-	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = 0)
+	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = FALSE)
 	id.SetName("[player.real_name]'s Passport")
 	id.assignment = "Visitor"
 	var/obj/item/weapon/storage/wallet/W = new(player)
@@ -180,7 +180,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	spawn_money(rand(50,150)*10,W)
 	create_radio(RAID_FREQ, player)
 
-	return 1
+	return TRUE
 
 /datum/antagonist/raider/proc/equip_weapons(var/mob/living/carbon/human/player)
 	var/new_gun = pick(raider_guns)
@@ -249,5 +249,5 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
 
 	player.set_internals(locate(/obj/item/weapon/tank) in player.contents)
-	return 1
+	return TRUE
 

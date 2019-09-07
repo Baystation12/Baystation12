@@ -14,7 +14,7 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 	hard_cap_round = 10
 	initial_spawn_req = 1
 	initial_spawn_target = 1
-	show_objectives_on_creation = 0 //actors are not antagonists and do not need the antagonist greet text
+	show_objectives_on_creation = FALSE //actors are not antagonists and do not need the antagonist greet text
 
 /datum/antagonist/actor/greet(var/datum/mind/player)
 	if(!..())
@@ -32,14 +32,14 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 	player.set_id_info(C)
 	player.equip_to_slot_or_del(C,slot_wear_id)
 
-	return 1
+	return TRUE
 
 /client/verb/join_as_actor()
 	set category = "IC"
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
 
-	if(!MayRespawn(1) || !GLOB.actor.can_become_antag(usr.mind, 1))
+	if(!MayRespawn(TRUE) || !GLOB.actor.can_become_antag(usr.mind, TRUE))
 		return
 
 	var/choice = alert("Are you sure you'd like to join as an actor?", "Confirmation","Yes", "No")

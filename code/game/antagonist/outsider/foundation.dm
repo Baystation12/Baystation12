@@ -30,7 +30,7 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 /datum/antagonist/foundation/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
-		return 0
+		return FALSE
 
 	player.set_psi_rank(PSI_REDACTION,     3, defer_update = TRUE)
 	player.set_psi_rank(PSI_COERCION,      3, defer_update = TRUE)

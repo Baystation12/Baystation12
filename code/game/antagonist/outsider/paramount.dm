@@ -19,7 +19,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 /datum/antagonist/paramount/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
-		return 0
+		return FALSE
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/psi_amp(player), slot_head)
 	player.set_psi_rank(PSI_REDACTION, 3,     defer_update = TRUE)
@@ -36,7 +36,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	gloves.color = COLOR_GRAY80
 	player.equip_to_slot_or_del(gloves, slot_gloves)
 	//player.internal_organs_by_name["frontal lobe"] = new /obj/item/organ/internal/corona_pollentia(player) //TODO
-	return 1
+	return TRUE
 
 /datum/antagonist/paramount/create_objectives(var/datum/mind/player)
 

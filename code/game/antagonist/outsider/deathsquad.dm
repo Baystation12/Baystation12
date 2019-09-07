@@ -17,11 +17,11 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 
 	faction = "deathsquad"
 
-	var/deployed = 0
+	var/deployed = FALSE
 
 /datum/antagonist/deathsquad/attempt_spawn()
 	if(..())
-		deployed = 1
+		deployed = TRUE
 
 /datum/antagonist/deathsquad/equip(var/mob/living/carbon/human/player)
 	if(!..())
@@ -81,4 +81,4 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 
 /datum/antagonist/deathsquad/create_antagonist()
 	if(..() && !deployed)
-		deployed = 1
+		deployed = TRUE
