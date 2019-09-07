@@ -3,8 +3,8 @@
 	desc = "An arcane weapon wielded by the followers of Nar-Sie."
 	icon_state = "cultblade"
 	item_state = "cultblade"
-	edge = 1
-	sharp = 1
+	edge = TRUE
+	sharp = TRUE
 	w_class = ITEM_SIZE_LARGE
 	force = 30
 	throwforce = 10
@@ -37,7 +37,7 @@
 	var/spooky = pick('sound/hallucinations/growl1.ogg', 'sound/hallucinations/growl2.ogg', 'sound/hallucinations/growl3.ogg', 'sound/hallucinations/wail.ogg')
 	playsound(loc, spooky, 50, 1)
 
-	return 1
+	return TRUE
 
 /obj/item/weapon/melee/cultblade/pickup(mob/living/user as mob)
 	if(!iscultist(user))

@@ -1,5 +1,5 @@
 var/global/narsie_behaviour = "CultStation13"
-var/global/narsie_cometh = 0
+var/global/narsie_cometh = FALSE
 var/global/list/narsie_list = list()
 /obj/singularity/narsie //Moving narsie to its own file for the sake of being clearer
 	name = "Nar-Sie"
@@ -10,8 +10,8 @@ var/global/list/narsie_list = list()
 	pixel_y = -256
 
 	current_size = 9 //It moves/eats like a max-size singulo, aside from range. --NEO.
-	contained = 0 // Are we going to move around?
-	dissipate = 0 // Do we lose energy over time?
+	contained = FALSE // Are we going to move around?
+	dissipate = FALSE // Do we lose energy over time?
 	grav_pull = 10 //How many tiles out do we pull?
 	consume_range = 3 //How many tiles out do we eat
 
@@ -37,8 +37,8 @@ var/global/list/narsie_list = list()
 
 	current_size = 6
 	consume_range = 6 // How many tiles out do we eat.
-	var/announce=1
-	var/cause_hell = 1
+	var/announce = TRUE
+	var/cause_hell = TRUE
 
 /obj/singularity/narsie/large/New()
 	..()
@@ -51,11 +51,11 @@ var/global/list/narsie_list = list()
 	if(!narsie_cometh)//so we don't initiate Hell more than one time.
 		if(cause_hell)
 			SetUniversalState(/datum/universal_state/hell)
-		narsie_cometh = 1
+		narsie_cometh = TRUE
 
 		spawn(10 SECONDS)
 			if(evacuation_controller)
-				evacuation_controller.call_evacuation(null, TRUE, 1)
+				evacuation_controller.call_evacuation(null, TRUE, TRUE)
 				evacuation_controller.evac_no_return = 0 // Cannot recall
 
 /obj/singularity/narsie/Process()
@@ -97,9 +97,9 @@ var/global/list/narsie_list = list()
 	else if(istype(A, /obj/structure/cult))
 		qdel(A)
 
-/obj/singularity/narsie/move(var/force_move = 0)
+/obj/singularity/narsie/move(var/force_move = FALSE)
 	if(!move_self)
-		return 0
+		return FALSE
 
 	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
 
@@ -113,11 +113,11 @@ var/global/list/narsie_list = list()
 		step(src, movement_dir)
 	spawn(1)
 		step(src, movement_dir)
-	return 1
+	return TRUE
 
-/obj/singularity/narsie/large/move(var/force_move = 0)
+/obj/singularity/narsie/large/move(var/force_move = FALSE)
 	if(!move_self)
-		return 0
+		return FALSE
 
 	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
 
@@ -138,7 +138,7 @@ var/global/list/narsie_list = list()
 		for(var/mob/M in GLOB.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
-	return 1
+	return TRUE
 
 /obj/singularity/narsie/proc/narsiefloor(var/turf/T)//leaving "footprints"
 	if(!(istype(T, /turf/simulated/wall/cult)||istype(T, /turf/space)))
@@ -171,7 +171,7 @@ var/global/list/narsie_list = list()
 		var/mob/M = A
 
 		if(M.status_flags & GODMODE)
-			return 0
+			return FALSE
 
 		M.cultify()
 
@@ -187,18 +187,18 @@ var/global/list/narsie_list = list()
 		if (dist <= consume_range && !istype(A, /turf/space))
 			var/turf/T = A
 			if(T.holy)
-				T.holy = 0 //Nar-Sie doesn't give a shit about sacred grounds.
+				T.holy = FALSE //Nar-Sie doesn't give a shit about sacred grounds.
 			T.cultify()
 
 /obj/singularity/narsie/proc/old_narsie(const/atom/A)
 	if(!(A.singuloCanEat()))
-		return 0
+		return FALSE
 
 	if (istype(A, /mob/living/))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)
-			return 0
+			return FALSE
 
 		C2.dust() // Changed from gib(), just for less lag.
 
@@ -224,13 +224,13 @@ var/global/list/narsie_list = list()
 
 /obj/singularity/narsie/consume(const/atom/A) //This one is for the small ones.
 	if(!(A.singuloCanEat()))
-		return 0
+		return FALSE
 
 	if (istype(A, /mob/living/))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)
-			return 0
+			return FALSE
 
 		C2.dust() // Changed from gib(), just for less lag.
 
@@ -317,33 +317,33 @@ var/global/list/narsie_list = list()
 	else
 		to_chat(target, "<span class='danger'>[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL.</span>")
 /obj/singularity/narsie/on_capture()
-	chained = 1
-	move_self = 0
+	chained = TRUE
+	move_self = FALSE
 	icon_state ="narsie-small-chains"
 
 /obj/singularity/narsie/on_release()
-	chained = 0
-	move_self = 1
+	chained = FALSE
+	move_self = TRUE
 	icon_state ="narsie-small"
 
 /obj/singularity/narsie/large/on_capture()
-	chained = 1
-	move_self = 0
+	chained = TRUE
+	move_self = FALSE
 	icon_state ="narsie-chains"
 	for(var/mob/M in SSmobs.mob_list)//removing the client image of nar-sie while it is chained
 		if(M.client)
 			M.see_narsie(src)
 
 /obj/singularity/narsie/large/on_release()
-	chained = 0
-	move_self = 1
+	chained = FALSE
+	move_self = TRUE
 	icon_state ="narsie"
 
 /**
  * Wizard narsie.
  */
 /obj/singularity/narsie/wizard
-	grav_pull = 0
+	grav_pull = FALSE
 
 /obj/singularity/narsie/wizard/eat()
 	for (var/turf/T in trange(consume_range, src))
@@ -352,8 +352,8 @@ var/global/list/narsie_list = list()
 /obj/singularity/narsie/proc/narsie_spawn_animation()
 	icon = 'icons/obj/narsie_spawn_anim.dmi'
 	dir = SOUTH
-	move_self = 0
+	move_self = FALSE
 	flick("narsie_spawn_anim",src)
 	sleep(11)
-	move_self = 1
+	move_self = TRUE
 	icon = initial(icon)

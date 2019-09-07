@@ -1,10 +1,10 @@
 /obj/effect/rune
 	name = "rune"
 	desc = "A strange collection of symbols drawn in blood."
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
-	unacidable = 1
+	unacidable = TRUE
 	layer = RUNE_LAYER
 
 	var/blood
@@ -94,7 +94,7 @@
 
 /obj/effect/rune/convert
 	cultname = "convert"
-	var/spamcheck = 0
+	var/spamcheck = FALSE
 
 /obj/effect/rune/convert/cast(var/mob/living/user)
 	if(spamcheck)
@@ -113,14 +113,14 @@
 	target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
 
 	to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
-	if(!GLOB.cult.can_become_antag(target.mind, 1))
+	if(!GLOB.cult.can_become_antag(target.mind, TRUE))
 		to_chat(target, "<span class='danger'>Are you going insane?</span>")
 	else
 		to_chat(target, "<span class='cult'>Do you want to join the cult of Nar'Sie? You can choose to ignore offer... <a href='?src=\ref[src];join=1'>Join the cult</a>.</span>")
 
-	spamcheck = 1
+	spamcheck = TRUE
 	spawn(40)
-		spamcheck = 0
+		spamcheck = FALSE
 		if(!iscultist(target) && target.loc == get_turf(src)) // They hesitated, resisted, or can't join, and they are still on the rune - burn them
 			if(target.stat == CONSCIOUS)
 				target.take_overall_damage(0, 10)
@@ -140,7 +140,7 @@
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"])
 		if(usr.loc == loc && !iscultist(usr))
-			GLOB.cult.add_antagonist(usr.mind, ignore_role = 1, do_not_equip = 1)
+			GLOB.cult.add_antagonist(usr.mind, ignore_role = TRUE, do_not_equip = TRUE)
 
 /obj/effect/rune/teleport
 	cultname = "teleport"
@@ -328,7 +328,7 @@
 		return
 	speak_incantation(user, "Fwe[pick("'","`")]sh mah erl nyag r'ya!")
 	user.visible_message("<span class='warning'>\The [user]'s eyes glow blue as \he freezes in place, absolutely motionless.</span>", "<span class='warning'>The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry...</span>", "You hear only complete silence for a moment.")
-	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
+	announce_ghost_joinleave(user.ghostize(TRUE), TRUE, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
 	var/mob/observer/ghost/soul
 	for(var/mob/observer/ghost/O in GLOB.ghost_mob_list)
 		if(O.key == tmpkey)
@@ -353,7 +353,7 @@
 	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
 	for(var/turf/T in range(1, src))
 		if(T.holy)
-			T.holy = 0
+			T.holy = FALSE
 		else
 			T.cultify()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
@@ -363,11 +363,11 @@
 	cultname = "obscure"
 
 /obj/effect/rune/obscure/cast(var/mob/living/user)
-	var/runecheck = 0
+	var/runecheck = FALSE
 	for(var/obj/effect/rune/R in orange(1, src))
 		if(R != src)
 			R.set_invisibility(INVISIBILITY_OBSERVER)
-		runecheck = 1
+		runecheck = TRUE
 	if(runecheck)
 		speak_incantation(user, "Kla[pick("'","`")]atu barada nikt'o!")
 		visible_message("<span class='warning'>\ The rune turns into gray dust that conceals the surrounding runes.</span>")
@@ -377,11 +377,11 @@
 	cultname = "reveal"
 
 /obj/effect/rune/reveal/cast(var/mob/living/user)
-	var/irunecheck = 0
+	var/irunecheck = FALSE
 	for(var/obj/effect/rune/R in orange(1, src))
 		if(R != src)
 			R.set_invisibility(SEE_INVISIBLE_NOLIGHTING)
-		irunecheck = 1
+		irunecheck = TRUE
 	if(irunecheck)
 		speak_incantation(user, "Nikt[pick("'","`")]o barada kla'atu!")
 		visible_message("<span class='warning'>\ The rune turns into red dust that reveals the surrounding runes.</span>")
@@ -627,7 +627,7 @@
 			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
 		for(var/turf/T in range(5, src))
 			if(T.holy)
-				T.holy = 0
+				T.holy = FALSE
 			else
 				T.cultify()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
@@ -845,13 +845,13 @@
 
 /obj/effect/rune/imbue/cast(var/mob/living/user)
 	var/obj/item/weapon/paper/target
-	var/tainted = 0
+	var/tainted = FALSE
 	for(var/obj/item/weapon/paper/P in get_turf(src))
 		if(!P.info)
 			target = P
 			break
 		else
-			tainted = 1
+			tainted = TRUE
 	if(!target)
 		if(tainted)
 			to_chat(user, "<span class='warning'>The blank is tainted. It is unsuitable.</span>")

@@ -1,13 +1,12 @@
 /obj/structure/cult
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	icon = 'icons/obj/cult.dmi'
 
 /obj/structure/cult/talisman
 	name = "Altar"
 	desc = "A bloodstained altar dedicated to Nar-Sie."
 	icon_state = "talismanaltar"
-
 
 /obj/structure/cult/forge
 	name = "Daemon forge"
@@ -18,7 +17,7 @@
 	name = "Pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon_state = "pylon"
-	var/isbroken = 0
+	var/isbroken = FALSE
 	light_max_bright = 0.5
 	light_inner_range = 1
 	light_outer_range = 13
@@ -45,8 +44,8 @@
 				)
 			user.do_attack_animation(src)
 			playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, 1)
-			isbroken = 1
-			set_density(0)
+			isbroken = TRUE
+			set_density(FALSE)
 			icon_state = "pylon-broken"
 			set_light(0)
 		else
@@ -64,8 +63,8 @@
 /obj/structure/cult/pylon/proc/repair(mob/user as mob)
 	if(isbroken)
 		to_chat(user, "You repair the pylon.")
-		isbroken = 0
-		set_density(1)
+		isbroken = FALSE
+		set_density(TRUE)
 		icon_state = "pylon"
 		set_light(0.5)
 
@@ -89,9 +88,9 @@
 	desc = "You're pretty sure that abyss is staring back."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "hole"
-	density = 1
-	unacidable = 1
-	anchored = 1.0
+	density = TRUE
+	unacidable TRUE
+	anchored = TRUE
 	var/spawnable = null
 
 /obj/effect/gateway/active

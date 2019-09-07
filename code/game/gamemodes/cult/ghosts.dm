@@ -20,11 +20,11 @@
 	var/turf/T = get_turf(src)
 	if(T.holy)
 		to_chat(src, "<span class='notice'>You may not use your abilities on the blessed ground.</span>")
-		return 0
-	if(ghost_magic_cd > world.time)
+		return FALSE
+	if(ghost_magic_d > world.time)
 		to_chat(src, "<span class='notice'>You need [round((ghost_magic_cd - world.time) / 10)] more seconds before you can use your abilities.</span>")
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 /mob/observer/ghost/proc/flick_lights()
 	set category = "Cult"
@@ -46,7 +46,7 @@
 
 	bloody_doodle_proc(0)
 
-/mob/observer/ghost/proc/bloody_doodle_proc(var/bloodless = 0)
+/mob/observer/ghost/proc/bloody_doodle_proc(var/bloodless = FALSE)
 	if(!ghost_ability_check())
 		return
 
@@ -170,7 +170,7 @@
 
 	whisper_proc()
 
-/mob/observer/ghost/proc/whisper_proc(var/anyone = 0)
+/mob/observer/ghost/proc/whisper_proc(var/anyone = FALSE)
 	if(!ghost_ability_check())
 		return
 
@@ -219,7 +219,7 @@
 
 	var/method = pick("bit", "scratched")
 	to_chat(choice, "<span class='danger'>Something invisible [method] you!</span>")
-	choice.apply_effect(5, PAIN, 0)
+	choice.apply_effect(5, PAIN, FALSE)
 	to_chat(src, "<span class='notice'>You [method] \the [choice].</span>")
 
 	log_and_message_admins("used ghost magic to bite \the [choice] - [x]-[y]-[z]")
@@ -259,14 +259,14 @@
 	set name = "Whisper to mind"
 	set desc = "Whisper to a human of your choice."
 
-	whisper_proc(1)
+	whisper_proc(TRUE)
 
 /mob/observer/ghost/proc/bloodless_doodle()
 	set category = "Cult"
 	set name = "Write in own blood"
 	set desc = "Write a short message in blood on the floor or a wall. You don't need blood nearby to use this."
 
-	bloody_doodle_proc(1)
+	bloody_doodle_proc(TRUE)
 
 /mob/observer/ghost/proc/toggle_visiblity()
 	set category = "Cult"
