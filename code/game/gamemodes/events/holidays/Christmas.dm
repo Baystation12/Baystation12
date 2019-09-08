@@ -21,13 +21,13 @@
 	icon = 'icons/obj/christmas.dmi'
 	icon_state = "cracker"
 	desc = "Directions for use: Requires two people, one to pull each end."
-	var/cracked = 0
+	var/cracked = FALSE
 
 /obj/item/weapon/toy/xmas_cracker/New()
 	..()
 
 /obj/item/weapon/toy/xmas_cracker/attack(mob/target, mob/user)
-	if( !cracked && istype(target,/mob/living/carbon/human) && (target.stat == CONSCIOUS) && !target.get_active_hand() )
+	if(!cracked && istype(target,/mob/living/carbon/human) && (target.stat == CONSCIOUS) && !target.get_active_hand())
 		target.visible_message("<span class='notice'>[user] and [target] pop \an [src]! *pop*</span>", "<span class='notice'>You pull \an [src] with [target]! *pop*</span>", "<span class='notice'>You hear a *pop*.</span>")
 		var/obj/item/weapon/paper/Joke = new /obj/item/weapon/paper(user.loc)
 		Joke.SetName("[pick("awful","terrible","unfunny")] joke")
@@ -43,14 +43,14 @@
 			"Why doesn't Santa have any children?\n\n<i>Because he only comes down the chimney.</i>")
 		new /obj/item/clothing/head/festive(target.loc)
 		user.update_icons()
-		cracked = 1
+		cracked = TRUE
 		icon_state = "cracker1"
 		var/obj/item/weapon/toy/xmas_cracker/other_half = new /obj/item/weapon/toy/xmas_cracker(target)
-		other_half.cracked = 1
+		other_half.cracked = TRUE
 		other_half.icon_state = "cracker2"
 		target.put_in_active_hand(other_half)
 		playsound(user, 'sound/effects/snap.ogg', 50, 1)
-		return 1
+		return TRUE
 	return ..()
 
 /obj/item/clothing/head/festive

@@ -4,9 +4,9 @@
 	desc = "FUCK FUCK FUCK AAAHHH!"
 	icon_state = "bhole3"
 	opacity = 1
-	unacidable = 1
-	density = 0
-	anchored = 1
+	unacidable = TRUE
+	density = FALSE
+	anchored = TRUE
 
 /obj/effect/bhole/New()
 	spawn(4)
@@ -31,32 +31,32 @@
 			ST.ChangeTurf(base_turf)
 
 		sleep(6)
-		grav(10, 4, 10, 0 )
+		grav(10, 4, 10, 0)
 		sleep(6)
-		grav( 8, 4, 10, 0 )
+		grav(8, 4, 10, 0)
 		sleep(6)
-		grav( 9, 4, 10, 0 )
+		grav(9, 4, 10, 0)
 		sleep(6)
-		grav( 7, 3, 40, 1 )
+		grav(7, 3, 40, 1)
 		sleep(6)
-		grav( 5, 3, 40, 1 )
+		grav(5, 3, 40, 1)
 		sleep(6)
-		grav( 6, 3, 40, 1 )
+		grav(6, 3, 40, 1)
 		sleep(6)
-		grav( 4, 2, 50, 6 )
+		grav(4, 2, 50, 6)
 		sleep(6)
-		grav( 3, 2, 50, 6 )
+		grav(3, 2, 50, 6)
 		sleep(6)
-		grav( 2, 2, 75,25 )
+		grav(2, 2, 75, 25)
 		sleep(6)
 
 
 
 		//MOVEMENT
-		if( prob(50) )
-			src.anchored = 0
+		if(prob(50))
+			src.anchored = FALSE
 			step(src,pick(GLOB.alldirs))
-			src.anchored = 1
+			src.anchored = TRUE
 
 /obj/effect/bhole/proc/grav(var/r, var/ex_act_force, var/pull_chance, var/turf_removal_chance)
 	if(!isturf(loc))	//blackhole cannot be contained inside anything. Weird stuff might happen
@@ -75,7 +75,7 @@
 	if(isnull(T))	return
 
 	//Pulling and/or ex_act-ing movable atoms in that turf
-	if( prob(pull_chance) )
+	if(prob(pull_chance))
 		for(var/obj/O in T.contents)
 			if(O.anchored)
 				O.ex_act(ex_act_force)
@@ -85,7 +85,7 @@
 			step_towards(M,src)
 
 	//Destroying the turf
-	if( T && istype(T,/turf/simulated) && prob(turf_removal_chance) )
+	if(T && istype(T,/turf/simulated) && prob(turf_removal_chance))
 		var/turf/simulated/ST = T
 		var/base_turf = get_base_turf_by_area(src)
 		if(ST.type != base_turf)
