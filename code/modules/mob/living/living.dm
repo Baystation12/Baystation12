@@ -518,10 +518,15 @@ default behaviour is:
 	if (buckled)
 		return
 
+	if(get_dist(src, pulling) > 1)
+		stop_pulling()
+
+	var/turf/old_loc = get_turf(src)
+
 	. = ..()
 
 	if(. && pulling)
-		handle_pulling_after_move()
+		handle_pulling_after_move(old_loc)
 
 	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
 		s_active.close(src)
@@ -540,21 +545,19 @@ default behaviour is:
 	if(restrained())
 		return FALSE
 
-	// var/diag = get_dir(src, pulling)
-	// diag = ((diag - 1) & diag)
 	if(get_dist(src, pulling) > 2)
 		return FALSE
 
 	if(pulling.z != z)
-		if(!AreConnectedZLevels(pulling.z, z))
+		if(pulling.z < z)
+			return FALSE
+		var/turf/T = GetAbove(src)
+		if(!isopenspace(T))
 			return FALSE
 	return TRUE
 
-/mob/living/proc/handle_pulling_after_move()
+/mob/living/proc/handle_pulling_after_move(turf/old_loc)
 	if(!pulling)
-		return
-	var/turf/T = get_turf(src)
-	if(get_dist(src, pulling) < 2)
 		return
 
 	if(!can_pull())
@@ -562,7 +565,7 @@ default behaviour is:
 		return
 	
 	if (!isliving(pulling))
-		step(pulling, get_dir(pulling.loc, T))
+		step(pulling, get_dir(pulling.loc, old_loc))
 	else
 		var/mob/living/M = pulling
 		if(M.grabbed_by.len)
@@ -576,7 +579,7 @@ default behaviour is:
 
 			var/atom/movable/t = M.pulling
 			M.stop_pulling()
-			step(M, get_dir(pulling.loc, T))
+			step(M, get_dir(pulling.loc, old_loc))
 			if(t)
 				M.start_pulling(t)
 
