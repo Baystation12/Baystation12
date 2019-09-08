@@ -1,5 +1,5 @@
 /obj/structure/deity/trap
-	density = 0
+	density = FALSE
 	health = 1
 	var/triggered = 0
 

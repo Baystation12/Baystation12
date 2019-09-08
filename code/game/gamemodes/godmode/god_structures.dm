@@ -5,15 +5,15 @@
 	if(flags & DEITY_STRUCTURE_NEAR_IMPORTANT && !deity.near_structure(target))
 		if(user)
 			to_chat(user, "<span class='warning'>You need to be near \a [deity.get_type_name(/obj/structure/deity/altar)] to build this!</span>")
-		return 0
+		return FALSE
 
 	if(flags & DEITY_STRUCTURE_ALONE)
 		for(var/structure in deity.structures)
 			if(istype(structure,type) && get_dist(target,structure) <= 3)
 				if(user)
 					to_chat(user, "<span class='warning'>You are too close to another [deity.get_type_name(type)]!</span>")
-				return 0
-	return 1
+				return FALSE
+	return TRUE
 
 /obj/structure/deity
 	icon = 'icons/obj/cult.dmi'
@@ -22,8 +22,8 @@
 	var/power_adjustment = 1 //How much power we get/lose
 	var/build_cost = 0 //How much it costs to build this item.
 	var/deity_flags = DEITY_STRUCTURE_NEAR_IMPORTANT
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	icon_state = "tomealtar"
 
 /obj/structure/deity/New(var/newloc, var/god)

@@ -12,7 +12,7 @@
 	set desc = "Activates or deactivates self destruct sequence of your physical mainframe."
 	var/mob/living/silicon/ai/user = usr
 
-	if(!ability_prechecks(user, 0, 1))
+	if(!ability_prechecks(user, 0, TRUE))
 		return
 
 	if(!user.hardware || !istype(user.hardware, /datum/malf_hardware/core_bomb))
@@ -20,17 +20,17 @@
 
 	if(user.bombing_core)
 		to_chat(user, "***** CORE SELF-DESTRUCT SEQUENCE ABORTED *****")
-		user.bombing_core = 0
+		user.bombing_core = FALSE
 		return
 
 	var/choice = alert("Really destroy core?", "Core self-destruct", "YES", "NO")
 	if(choice != "YES")
 		return
 
-	if(!ability_prechecks(user, 0, 1))
+	if(!ability_prechecks(user, 0, TRUE))
 		return
 
-	user.bombing_core = 1
+	user.bombing_core = TRUE
 
 	to_chat(user, "***** CORE SELF-DESTRUCT SEQUENCE ACTIVATED *****")
 	to_chat(user, "Use command again to cancel self-destruct. Destroying in 15 seconds.")
@@ -51,7 +51,7 @@
 	set desc = "Activates or deactivates your APU generator, allowing you to operate even without power."
 	var/mob/living/silicon/ai/user = usr
 
-	if(!ability_prechecks(user, 0, 1))
+	if(!ability_prechecks(user, 0, TRUE))
 		return
 
 	if(!user.hardware || !istype(user.hardware, /datum/malf_hardware/apu_gen))
@@ -68,7 +68,7 @@
 	set desc = "Uses your special hardware piece to instantly advance all research by one level."
 	var/mob/living/silicon/ai/user = usr
 
-	if(!ability_prechecks(user, 0, 1))
+	if(!ability_prechecks(user, 0, TRUE))
 		return
 
 	if(!user.hardware || !istype(user.hardware, /datum/malf_hardware/instant_research))
@@ -86,7 +86,7 @@
 	if(HW.spent)
 		return
 
-	HW.spent = 1
+	HW.spent = TRUE
 	user.research.advance_all()
 	to_chat(user, "You activate your hardware piece. You have advanced research in all ability trees by one.")
 
@@ -94,12 +94,12 @@
 /datum/game_mode/malfunction/verb/ai_destroy_station()
 	set category = "Hardware"
 	set name = "Destroy Installation"
-	set desc = "Activates or deactivates self destruct sequence of this installation. Sequence takes two minutes, and if you are shut down before timer reaches zero it will be cancelled."
+	set desc = "Activates or deactivates self destruct sequence of this installation. Sequence takes five minutes, and if you are shut down before timer reaches zero it will be cancelled."
 	var/mob/living/silicon/ai/user = usr
 	var/obj/item/device/radio/radio = new/obj/item/device/radio()
 
 
-	if(!ability_prechecks(user, 0, 0))
+	if(!ability_prechecks(user, 0, FALSE))
 		return
 
 	if(user.system_override != 2)
@@ -107,23 +107,23 @@
 		return
 
 	if(user.bombing_station)
-		user.bombing_station = 0
+		user.bombing_station = FALSE
 		return
 
 	var/choice = alert("Really destroy installation?", "Installation self-destruct", "YES", "NO")
 	if(choice != "YES")
 		return
-	if(!ability_prechecks(user, 0, 0))
+	if(!ability_prechecks(user, 0, FALSE))
 		return
 	to_chat(user, "***** INSTALLATION SELF-DESTRUCT SEQUENCE INITIATED *****")
 	to_chat(user, "Self-destructing in 5 minutes. Use this command again to abort.")
-	user.bombing_station = 1
+	user.bombing_station = TRUE
 
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	radio.autosay("Self destruct sequence has been activated. Self-destructing in 5 minutes.", "Self-Destruct Control")
 
-	var/timer = 300
+	var/timer = 5 MINUTES
 	while(timer)
 		sleep(10)
 		if(!user || !user.bombing_station || user.stat == DEAD)

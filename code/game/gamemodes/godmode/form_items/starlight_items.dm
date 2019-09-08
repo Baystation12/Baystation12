@@ -104,7 +104,7 @@
 	desc = "Look closely into its crystal; there's a miniature sun. Or maybe that's just some fancy LEDs. Either way, it looks thoroughly mystical."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "starstaff"
-	self_recharge = 0
+	self_recharge = FALSE
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/flash
 	required_antag_type = MODE_GODCULTIST
@@ -139,7 +139,7 @@
 		if(last_near_structure < world.time - 30 SECONDS) //If it has been at least 30 seconds.
 			if(prob(5))
 				to_chat(loc, "<span class='warning'>\The [src] begins to fade, its power dimming this far away from a shrine.</span>")
-		else if(last_near_structure + 1800 < world.time)
+		else if(last_near_structure + 3 MINUTES < world.time)
 			visible_message("<span class='warning'>\The [src] disintegrates into a pile of ash!</span>")
 			new /obj/effect/decal/cleanable/ash(get_turf(src))
 			qdel(src)

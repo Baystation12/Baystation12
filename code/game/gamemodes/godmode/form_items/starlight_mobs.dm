@@ -1,7 +1,7 @@
 /mob/living/starlight_soul
 	name = "soul"
 	desc = "A captured soul."
-	anchored = 1
+	anchored = TRUE
 
 	meat_type = null
 	meat_amount = 0

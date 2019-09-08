@@ -12,7 +12,7 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
 	power_adjustment = 1
-	density = 0
+	density = FALSE
 	var/weakref/target_ref
 	var/start_time = 0
 	var/power_drain = 7
@@ -129,7 +129,7 @@
 		for(var/s in possible_forms[looking_for]["spells"])
 			var/spell/S = new s
 			H.add_spell(S)
-		GLOB.godcult.add_antagonist_mind(H.mind, 1, "[looking_for] of [linked_god]", "You are a powerful entity in the service to \the [linked_god]. [possible_forms[looking_for]["species"]]", specific_god = linked_god)
+		GLOB.godcult.add_antagonist_mind(H.mind, TRUE, "[looking_for] of [linked_god]", "You are a powerful entity in the service to \the [linked_god]. [possible_forms[looking_for]["species"]]", specific_god = linked_god)
 		stop_looking_for(TRUE)
 
 		return TOPIC_HANDLED
@@ -153,7 +153,7 @@
 	power_adjustment = 1
 	deity_flags = DEITY_STRUCTURE_NEAR_IMPORTANT|DEITY_STRUCTURE_ALONE
 	var/charge = 0
-	var/charging = 0 //Charging, dispersing, etc.
+	var/charging = FALSE //Charging, dispersing, etc.
 
 /obj/structure/deity/radiant_statue/on_update_icon()
 	if(charging)
@@ -197,12 +197,12 @@
 /obj/structure/deity/radiant_statue/proc/activate_charging()
 	var/list/followers = get_followers_nearby()
 	if(is_processing || !followers.len)
-		return 0
-	charging = 1
+		return FALSE
+	charging = TRUE
 	START_PROCESSING(SSobj, src)
 	src.visible_message("<span class='notice'><b>\The [src]</b> hums, activating.</span>")
 	update_icon()
-	return 1
+	return TRUE
 
 /obj/structure/deity/radiant_statue/attackby(var/obj/item/I, var/mob/user)
 	if(charging && (istype(I, /obj/item/weapon/material/knife/ritual/shadow) || istype(I, /obj/item/weapon/gun/energy/staff/beacon)) && charge_item(I, user))
@@ -210,16 +210,16 @@
 	..()
 
 /obj/structure/deity/radiant_statue/proc/charge_item(var/obj/item/I, var/mob/user)
-	. = 0
+	. = FALSE
 	if(istype(I, /obj/item/weapon/gun/energy))
 		var/obj/item/weapon/gun/energy/energy = I
 		if(energy.power_supply)
 			energy.power_supply.give(energy.charge_cost * energy.max_shots)
-			. = 1
+			. = TRUE
 	else if(istype(I ,/obj/item/weapon/material/knife/ritual/shadow))
 		var/obj/item/weapon/material/knife/ritual/shadow/shad = I
 		shad.charge = initial(shad.charge)
-		. = 1
+		. = TRUE
 	if(.)
 		to_chat(user, "<span class='notice'>\The [src]'s glow envelops \the [I], restoring it to proper use.</span>")
 		charge -= 1
@@ -234,7 +234,7 @@
 
 		if(charge == 40)
 			src.visible_message("<span class='notice'><b>\The [src]</b> lights up, pulsing with energy.</span>")
-			charging = 0
+			charging = FALSE
 			update_icon()
 	else
 		charge -= 0.5
@@ -254,7 +254,7 @@
 /obj/structure/deity/radiant_statue/proc/stop_charging()
 	STOP_PROCESSING(SSobj, src)
 	src.visible_message("<span class='notice'><b>\The [src]</b> powers down, returning to it's dormant form.</span>")
-	charging = 0
+	charging = FALSE
 	update_icon()
 
 /obj/structure/deity/blood_forge/starlight

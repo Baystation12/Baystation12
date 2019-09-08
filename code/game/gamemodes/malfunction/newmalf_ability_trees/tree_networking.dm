@@ -41,7 +41,7 @@
 /datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_unhacked_apcs(src))
 	set category = "Software"
 	set name = "Basic Encryption Hack"
-	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs"
+	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs."
 	var/price = 10
 	var/mob/living/silicon/ai/user = usr
 
@@ -57,7 +57,7 @@
 			to_chat(user, "You already control this APC!")
 			return
 		else if(A.aidisabled)
-			to_chat(user, "<span class='notice'>Unable to connect to APC. Please verify wire connection and try again.</span>")
+			to_chat(user, "<span class='notice'>Unable to connect to the APC. Please verify the wire connection and try again.</span>")
 			return
 	else
 		return
@@ -65,27 +65,27 @@
 	if(!ability_prechecks(user, price, TRUE) || !ability_pay(user, price))
 		return
 
-	log_ability_use(user, "basic encryption hack", A, 0)	// Does not notify admins, but it's still logged for reference.
+	log_ability_use(user, "basic encryption hack", A, FALSE)	// Does not notify admins, but it's still logged for reference.
 	to_chat(user, "Beginning APC system override...")
-	sleep(300)
+	sleep(30 SECONDS)
 	to_chat(user, "APC hack completed. Uploading modified operation software..")
-	sleep(200)
+	sleep(20 SECONDS)
 	to_chat(user, "Restarting APC to apply changes..")
-	sleep(100)
+	sleep(10 SECONDS)
 	if(A)
 		A.ai_hack(user)
 		if(A.hacker == user)
 			to_chat(user, "Hack successful. You now have full control over \the [A].")
 		else
-			to_chat(user, "<span class='notice'>Hack failed. Connection to APC has been lost. Please verify wire connection and try again.</span>")
+			to_chat(user, "<span class='notice'>Hack failed. Connection to the APC has been lost. Please verify hte wire connection and try again.</span>")
 	else
-		to_chat(user, "<span class='notice'>Hack failed. Unable to locate APC. Please verify the APC still exists.</span>")
+		to_chat(user, "<span class='notice'>Hack failed. Unable to locate the APC. Please verify the APC still exists.</span>")
 
 
 /datum/game_mode/malfunction/verb/advanced_encryption_hack()
 	set category = "Software"
 	set name = "Advanced Encryption Hack"
-	set desc = "75 CPU - Attempts to bypass encryption on the Command Quantum Relay, giving you ability to fake legitimate messages. Has chance of failing."
+	set desc = "75 CPU - Attempts to bypass encryption on the Command Quantum Relay, giving you the ability to fake legitimate messages. Has a chance of failing."
 	var/price = 75
 	var/mob/living/silicon/ai/user = usr
 
@@ -122,7 +122,7 @@
 /datum/game_mode/malfunction/verb/elite_encryption_hack()
 	set category = "Software"
 	set name = "Elite Encryption Hack"
-	set desc = "200 CPU - Allows you to hack ALERTCON system, changing alert level. Has high chance of failing."
+	set desc = "200 CPU - Allows you to hack the ALERTCON system, to change the alert level. Has a high chance of failing."
 	var/price = 200
 	var/mob/living/silicon/ai/user = usr
 	if(!ability_prechecks(user, price))
@@ -150,7 +150,7 @@
 /datum/game_mode/malfunction/verb/system_override()
 	set category = "Software"
 	set name = "System Override"
-	set desc = "500 CPU - Begins hacking primary firewall, quickly overtaking remaining APC systems. When completed grants access to the self-destruct mechanism. Network administrators will probably notice this."
+	set desc = "500 CPU - Begins hacking the primary firewall, quickly overtaking remaining APC systems. When completed, grants access to the self-destruct mechanism. Network administrators will probably notice this."
 	var/price = 500
 	var/mob/living/silicon/ai/user = usr
 	if (alert(user, "Begin system override? This cannot be stopped once started. The network administrators will probably notice this.", "System Override:", "Yes", "No") != "Yes")
@@ -168,7 +168,7 @@
 			continue
 		remaining_apcs += A
 
-	var/duration = (remaining_apcs.len * 100)		// Calculates duration for announcing system
+	var/duration = (remaining_apcs.len * 10 SECONDS)		// Calculates duration for announcing system
 	if(user.hack_can_fail)								// Two types of announcements. Short hacks trigger immediate warnings. Long hacks are more "progressive".
 		spawn(0)
 			sleep(duration/5)
@@ -189,11 +189,11 @@
 			command_announcement.Announce("We have traced the intrude#, it seem& t( e yo3r AI s7stem, it &# *#ck@ng th$ sel$ destru$t mechani&m, stop i# bef*@!)$#&&@@  <CONNECTION LOST>", "Network Monitoring")
 
 	to_chat(user, "## BEGINNING SYSTEM OVERRIDE.")
-	to_chat(user, "## ESTIMATED DURATION: [round((duration+300)/600)] MINUTES")
-	user.system_override = 1
+	to_chat(user, "## ESTIMATED DURATION: [round((duration+30 SECONDS)/1 MINUTE)] MINUTES")
+	user.system_override = TRUE
 	// Now actually begin the hack. Each APC takes 10 seconds.
 	for(var/obj/machinery/power/apc/A in shuffle(remaining_apcs))
-		sleep(100)
+		sleep(10 SECONDS)
 		if(!user || user.stat == DEAD)
 			return
 		if(!A || !istype(A) || A.aidisabled)
@@ -202,7 +202,7 @@
 		if(A.hacker == user)
 			to_chat(user, "## OVERRIDDEN: [A.name]")
 
-	to_chat(user, "## REACHABLE APC SYSTEMS OVERTAKEN. BYPASSING PRIMARY FIREWALL.")
+	to_chat(user, "## APC SYSTEMS OVERTAKEN. BYPASSING PRIMARY FIREWALL.")
 	sleep(1 MINUTE)
 	// Hack all APCs, including those built during hack sequence.
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
@@ -214,6 +214,6 @@
 
 	if(user.hack_can_fail)
 		command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [GLOB.using_map.station_name]'s systems.", "Network Administration Center")
-	user.hack_can_fail = 0
+	user.hack_can_fail = FALSE
 	user.system_override = 2
 	user.verbs += new/datum/game_mode/malfunction/verb/ai_destroy_station()

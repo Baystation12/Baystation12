@@ -14,7 +14,7 @@
 		return
 
 	hitter.visible_message("<span class='notice'>\The [hitter] dips their hands into \the [src], a soft glow emanating from them.</span>")
-	if(do_after(hitter,300,src,needhand=0))
+	if(do_after(hitter, 300, src, needhand=FALSE))
 		for(var/s in hitter.mind.learned_spells)
 			var/spell/spell = s
 			spell.charge_counter = spell.charge_max

@@ -9,7 +9,7 @@
 	icon_state = "forge"
 	build_cost = 1000
 	health = 50
-	var/busy = 0
+	var/busy = FALSE
 	var/recipe_feat_list = "Blood Crafting"
 	var/text_modifications = list("Cost" = "Blood",
 								"Dip" = "fire. Pain envelopes you as blood seeps out of your hands and you begin to shape it into something more useful",
@@ -19,7 +19,7 @@
 	power_adjustment = 2
 
 /obj/structure/deity/blood_forge/attack_hand(var/mob/user)
-	if(!linked_god || !linked_god.is_follower(user, silent = 1) || !ishuman(user))
+	if(!linked_god || !linked_god.is_follower(user, silent = TRUE) || !ishuman(user))
 		return
 
 	var/list/recipes = linked_god.feats[recipe_feat_list]
@@ -34,7 +34,7 @@
 	show_browser(user, dat, "window=forge")
 
 /obj/structure/deity/blood_forge/CanUseTopic(var/user)
-	if(!linked_god || !linked_god.is_follower(user, silent = 1) || !ishuman(user))
+	if(!linked_god || !linked_god.is_follower(user, silent = TRUE) || !ishuman(user))
 		return STATUS_CLOSE
 	return ..()
 
@@ -52,18 +52,18 @@
 		to_chat(user, "<span class='warning'>Someone is already using \the [src]!</span>")
 		return
 
-	busy = 1
+	busy = TRUE
 	to_chat(user, "<span class='notice'>You dip your hands into \the [src]'s [text_modifications["Dip"]]</span>")
 	for(var/count = 0, count < blood_cost/10, count++)
 		if(!do_after(user, 50,src))
-			busy = 0
+			busy = FALSE
 			return
 		user.visible_message("\The [user] swirls their hands in \the [src].", text_modifications["Shape"])
 		if(linked_god)
 			linked_god.take_charge(user, 10)
 	var/obj/item/I = new path(get_turf(src))
 	user.visible_message("\The [user] pull out \the [I] from the [text_modifications["Out"]].", "You pull out the completed [I] from the [text_modifications["Out"]].")
-	busy = 0
+	busy = FALSE
 
 /obj/structure/deity/blood_forge/proc/take_charge(var/mob/living/user, var/charge)
 	if(linked_god)
@@ -79,15 +79,15 @@
 	build_cost = 700
 
 /obj/structure/deity/blood_stone/attack_hand(var/mob/user)
-	if(!linked_god || !linked_god.is_follower(user, silent = 1) || !ishuman(user))
+	if(!linked_god || !linked_god.is_follower(user, silent = TRUE) || !ishuman(user))
 		return
 
 	var/mob/living/carbon/human/H = user
-	user.visible_message("<span class='warning'>\The [user] calmly slices their finger on \the [src], smeering it over the black stone.</span>","<span class='warning'>You slowly slide your finger down one of \the [src]'s sharp edges, smeering it over its smooth surface.</span>")
+	user.visible_message("<span class='warning'>\The [user] calmly slices their finger on \the [src], smeering it over the black stone.</span>","<span class='warning'>You slowly slide your finger down one of \the [src]'s sharp edges, smearing it over its smooth surface.</span>")
 	while(do_after(H,50,src))
 		user.audible_message("\The [user] utters something under their breath.", "<span class='cult'>You mutter a dark prayer to your master as you feel the stone eat away at your lifeforce.</span>")
 		if(H.should_have_organ(BP_HEART))
 			H.drip(5,get_turf(src))
 		else
 			H.adjustBruteLoss(5)
-		linked_god.adjust_power_min(1,1)
+		linked_god.adjust_power_min(1, 1)

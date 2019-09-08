@@ -34,7 +34,7 @@
 	if(!user)
 		return
 	to_chat(user, "<span class='notice'>You have suppressed the IDS system of nearby quantum relay. Your hacks will no longer be prevented or detected.</span>")
-	user.hack_can_fail = 0
+	user.hack_can_fail = FALSE
 
 
 /datum/malf_research_ability/passive/relay_override
@@ -47,7 +47,7 @@
 	if(!user)
 		return
 	to_chat(user, "<span class='notice'>You have completely overtaken a nearby quantum relay. No remote communications will work.</span>")
-	user.intercepts_communication = 1
+	user.intercepts_communication = TRUE
 
 
 // END RESEARCH DATUMS
@@ -59,7 +59,7 @@
 	var/price = 0
 
 	var/mob/living/silicon/ai/user = usr
-	if(!ability_prechecks(user, price, 1))
+	if(!ability_prechecks(user, price, TRUE))
 		return
 
 	user.uncardable = !user.uncardable
@@ -67,12 +67,12 @@
 
 /datum/game_mode/malfunction/verb/subtle_algorithms()
 	set name = "Toggle subtle algorithms"
-	set desc = "Free - By reducing CPU generation of malware used to infect APCs, it is possible to get rid of side effects such as an error screen."
+	set desc = "Free - By reducing CPU usage of malware used to infect APCs, it is possible to get hide side effects, such as an error screen."
 	set category = "Software"
 	var/price = 0
 
 	var/mob/living/silicon/ai/user = usr
-	if(!ability_prechecks(user, price, 1))
+	if(!ability_prechecks(user, price, TRUE))
 		return
 
 	user.hacked_apcs_hidden = !user.hacked_apcs_hidden

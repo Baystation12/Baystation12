@@ -59,10 +59,10 @@
 			AP.overload_lighting()
 		if(prob(2.5) && (get_area(AP) != get_area(user))) // Very very small chance to actually destroy the APC, but not if the APC is powering the AI.
 			AP.set_broken(TRUE)
-	user.hacking = 1
+	user.hacking = TRUE
 	log_ability_use(user, "electrical pulse")
 	spawn(15 SECONDS)
-		user.hacking = 0
+		user.hacking = FALSE
 
 /datum/game_mode/malfunction/verb/reboot_camera(var/obj/machinery/camera/target in cameranet.cameras)
 	set name = "Reboot Camera"
@@ -102,10 +102,10 @@
 
 	to_chat(user, "Emergency forcefield projection completed.")
 	new/obj/machinery/shield/malfai(T)
-	user.hacking = 1
+	user.hacking = TRUE
 	log_ability_use(user, "emergency forcefield", T)
 	spawn(2 SECONDS)
-		user.hacking = 0
+		user.hacking = FALSE
 
 
 /datum/game_mode/malfunction/verb/machine_overload(obj/machinery/M in SSmachines.machinery)
@@ -185,7 +185,7 @@
 
 /datum/game_mode/malfunction/verb/machine_upgrade(obj/machinery/M in SSmachines.machinery)
 	set name = "Machine Upgrade"
-	set desc = "800 CPU - Pushes existing hardware to it's technological limits by rapidly upgrading it's software."
+	set desc = "800 CPU - Pushes existing hardware to it's technological limits by rapidly upgrading its software."
 	set category = "Software"
 	var/price = 800
 	var/mob/living/silicon/ai/user = usr
@@ -204,6 +204,6 @@
 		to_chat(user, "\The [M] cannot be upgraded.")
 		return
 
-	ability_pay(user,price)
+	ability_pay(user, price)
 
 // END ABILITY VERBS

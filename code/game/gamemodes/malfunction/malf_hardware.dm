@@ -41,7 +41,7 @@
 	desc = "Expanded memory cells which allow you to store double amount of CPU time."
 
 /datum/malf_hardware/dual_ram/get_examine_desc()
-	return "It seems to have additional memory blocks connected to it's core."
+	return "It seems to have additional memory blocks connected to its core."
 
 /datum/malf_hardware/core_bomb
 	name = "Self-Destruct Explosives"
@@ -49,7 +49,7 @@
 	driver = /datum/game_mode/malfunction/verb/ai_self_destruct
 
 /datum/malf_hardware/core_bomb/get_examine_desc()
-	return "<span class='warning'>It seems to have grey blocks of unknown substance and some circuitry connected to it's core. [owner.bombing_core ? "A red light is blinking on the circuit." : ""]</span>"
+	return "<span class='warning'>It seems to have grey blocks of unknown substance and some circuitry connected to it's core.[owner.bombing_core ? " A red light is blinking on the circuit." : ""]</span>"
 
 /datum/malf_hardware/instant_research
 	name = "Quantum Knowledge Databank"
@@ -58,4 +58,4 @@
 	var/spent = FALSE
 
 /datum/malf_hardware/instant_research/get_examine_desc()
-	return "It seems to have an unidentified circuit board connected to it's core.[spent ? "It is not powered and seems to be burned out." : "It is emitting a faint pulsating light."]"
+	return "It seems to have an unidentified circuit board connected to it's core.[spent ? " It seems to be burned out." : " It is emitting a faint pulsating light."]"

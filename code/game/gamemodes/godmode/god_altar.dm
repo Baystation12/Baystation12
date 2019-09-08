@@ -38,7 +38,7 @@
 	cycles_before_converted--
 	if(!cycles_before_converted)
 		src.visible_message("For one thundering moment, \the [target] cries out in pain before going limp and broken.")
-		GLOB.godcult.add_antagonist_mind(target.mind,1, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
+		GLOB.godcult.add_antagonist_mind(target.mind, TRUE, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
 		remove_target()
 		return
 
@@ -50,7 +50,7 @@
 		if(2)
 			text = "You can't.... concentrate.. must... resist!"
 		if(1)
-			text = "Can't... resist. ... anymore."
+			text = "Can't... resist... anymore."
 			to_chat(linked_god, "<span class='warning'>\The [target] is getting close to conversion!</span>")
 	to_chat(target, "<span class='cult'>[text]. <a href='?src=\ref[src];resist=\ref[target]'>Resist Conversion</a></span>")
 
