@@ -9,6 +9,10 @@
 	pda_slot = 0
 	flags =    0
 
+/decl/hierarchy/outfit/job/ascent/attendant
+	name = "Ascent - Attendant"
+	back = /obj/item/weapon/rig/mantid
+
 /decl/hierarchy/outfit/job/ascent/tech
 	name = "Ascent - Technician"
 	suit = /obj/item/clothing/suit/storage/ascent

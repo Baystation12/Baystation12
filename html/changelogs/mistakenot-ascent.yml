@@ -1,0 +1,6 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - rscadd: "Added a generic Ascent voidsuit and a number of 'mantidified' tools pending unique icons."
+  - tweak: "Removed alate combat exosuits from the seedship."
+  - tweak: "Replaced seedship serpentid mezzanine with a chemical lab and mining facility."
