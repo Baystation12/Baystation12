@@ -17,7 +17,7 @@
 
 /datum/universal_state/nuclear_explosion/OnEnter()
 	if(SSticker.mode)
-		SSticker.mode.explosion_in_progress = 1
+		SSticker.mode.explosion_in_progress = TRUE
 
 	start_cinematic_intro()
 
@@ -42,14 +42,14 @@
 	sleep(200)
 
 	if(SSticker.mode)
-		SSticker.mode.station_was_nuked = 1
-		SSticker.mode.explosion_in_progress = 0
+		SSticker.mode.station_was_nuked = TRUE
+		SSticker.mode.explosion_in_progress = FALSE
 		if(!SSticker.mode.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
-			universe_has_ended = 1
+			universe_has_ended = TRUE
 
 /datum/universal_state/nuclear_explosion/OnExit()
 	if(SSticker.mode)
-		SSticker.mode.explosion_in_progress = 0
+		SSticker.mode.explosion_in_progress = FALSE
 
 /datum/universal_state/nuclear_explosion/proc/dust_mobs(var/list/affected_z_levels)
 	for(var/mob/living/L in SSmobs.mob_list)

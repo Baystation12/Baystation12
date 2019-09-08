@@ -6,9 +6,9 @@
 	icon = 'icons/obj/rift.dmi'
 	icon_state = "rift"
 
-	move_self = 0
-	announce=0
-	cause_hell=0
+	move_self = FALSE
+	announce = FALSE
+	cause_hell = FALSE
 
 	layer=LIGHTING_LAYER+2 // ITS SO BRIGHT
 
@@ -32,7 +32,7 @@
 
 /obj/singularity/narsie/large/exit/consume(const/atom/A)
 	if(!(A.singuloCanEat()))
-		return 0
+		return FALSE
 
 	if (istype(A, /mob/living/))
 		var/mob/living/L = A
@@ -47,7 +47,7 @@
 		var/turf/T = A
 		var/dist = get_dist(T, src)
 		if (dist <= consume_range && T.density)
-			T.set_density(0)
+			T.set_density(FALSE)
 
 		for (var/atom/movable/AM in T.contents)
 			if (AM == src) // This is the snowflake.
@@ -64,7 +64,7 @@
 				if (101 == AM.invisibility)
 					continue
 
-				spawn (0)
+				spawn(0)
 					AM.singularity_pull(src, src.current_size)
 
 

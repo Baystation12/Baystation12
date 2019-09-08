@@ -1,4 +1,4 @@
-var/global/universe_has_ended = 0
+var/global/universe_has_ended = FALSE
 
 
 /datum/universal_state/supermatter_cascade
@@ -10,7 +10,7 @@ var/global/universe_has_ended = 0
 /datum/universal_state/supermatter_cascade/OnShuttleCall(var/mob/user)
 	if(user)
 		to_chat(user, "<span class='sinister'>All you hear on the frequency is static and panicked screaming. There will be no shuttle call today.</span>")
-	return 0
+	return FALSE
 
 /datum/universal_state/supermatter_cascade/OnTurfChange(var/turf/T)
 	var/turf/space/S = T
@@ -52,7 +52,7 @@ var/global/universe_has_ended = 0
 	OverlayAndAmbientSet()
 
 	// Disable Nar-Sie.
-	GLOB.cult.allow_narsie = 0
+	GLOB.cult.allow_narsie = FALSE
 
 	PlayerSet()
 	SSskybox.change_skybox("cascade", new_use_stars = FALSE, new_use_overmap_details = FALSE)
@@ -75,7 +75,7 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 
 		spawn(5 MINUTES)
 			GLOB.cinematic.station_explosion_cinematic(0,null) // TODO: Custom cinematic
-			universe_has_ended = 1
+			universe_has_ended = TRUE
 		return
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
@@ -89,9 +89,9 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 	spawn(0)
 		for(var/datum/lighting_corner/L in world)
 			if(L.z in GLOB.using_map.admin_levels)
-				L.update_lumcount(1,1,1)
+				L.update_lumcount(1, 1, 1)
 			else
-				L.update_lumcount(0.0, 0.4, 1)
+				L.update_lumcount(0, 0.4, 1)
 
 		for(var/turf/space/T)
 			OnTurfChange(T)
@@ -104,11 +104,11 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 /datum/universal_state/supermatter_cascade/proc/APCSet()
 	for (var/obj/machinery/power/apc/APC in SSmachines.machinery)
 		if (!(APC.stat & BROKEN) && !APC.is_critical)
-			APC.chargemode = 0
+			APC.chargemode = FALSE
 			var/obj/item/weapon/cell/cell = APC.get_cell()
 			if(cell)
 				cell.charge = 0
-			APC.emagged = 1
+			APC.emagged = TRUE
 			APC.queue_icon_update()
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()
