@@ -15,8 +15,8 @@ var/list/nuke_disks = list()
 	required_players = 15
 	required_enemies = 1
 	end_on_antag_death = FALSE
-	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
-	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
+	var/nuke_off_station = FALSE //Used for tracking if the syndies actually haul the nuke to the station
+	var/syndies_didnt_escape = FALSE //Used for tracking if the syndies got the shuttle off of the z-level
 	antag_tags = list(MODE_MERCENARY)
 	cinematic_icon_states = list(
 		"intro_nuke" = 35,
@@ -69,7 +69,7 @@ var/list/nuke_disks = list()
 		to_world("<FONT size = 3><B>Crew Major Victory!</B></FONT>")
 		to_world("<B>The Research Staff has saved the disc and killed the [syndicate_name()] Operatives</B>")
 
-	else if ( disk_rescued                                        )
+	else if (disk_rescued                                        )
 		SSstatistics.set_field_details("round_end_result","loss - evacuation - disk secured")
 		to_world("<FONT size = 3><B>Crew Major Victory</B></FONT>")
 		to_world("<B>The Research Staff has saved the disc and stopped the [syndicate_name()] Operatives!</B>")

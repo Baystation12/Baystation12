@@ -9,12 +9,12 @@
 	extended_round_description = "We are on an unavoidable collision course with an asteroid field. You have only a moment to prepare before you are barraged by dust and meteors. As if it was not enough, all kinds of negative events seem to happen more frequently. Good Luck."
 	config_tag = "meteor"
 	required_players = 15				// Definitely not good for low-pop
-	votable = 1
+	votable = TRUE
 	shuttle_delay = 2
 	var/next_wave = INFINITY			// Set in post_setup() correctly to take into account potential longer pre-start times.
 	var/alert_sent = 0
 	var/meteor_severity = 1				// Slowly increases the tension at the beginning of meteor strikes. Prevents "tunguska on first wave" style problems.
-	var/failsafe_triggered = 0
+	var/failsafe_triggered = FALSE
 	var/alert_title
 	var/alert_text
 	var/start_text
@@ -66,7 +66,7 @@
 	if((round_duration_in_ticks >= METEOR_FAILSAFE_THRESHOLD) && (meteor_severity < 15) && !failsafe_triggered)
 		log_and_message_admins("Meteor mode severity failsafe triggered: Severity forced to 15.")
 		meteor_severity = 15
-		failsafe_triggered = 1
+		failsafe_triggered = TRUE
 
 	if(round_duration_in_ticks >= next_wave)
 		next_wave = round_duration_in_ticks + meteor_wave_delay

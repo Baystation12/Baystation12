@@ -1,6 +1,6 @@
 /datum/game_mode/var/next_spawn = 0
-/datum/game_mode/var/min_autotraitor_delay = 4200  // Approx 7 minutes.
-/datum/game_mode/var/max_autotraitor_delay = 12000 // Approx 20 minutes.
+/datum/game_mode/var/min_autotraitor_delay = 7 MINUTES
+/datum/game_mode/var/max_autotraitor_delay = 20 MINUTES
 /datum/game_mode/var/process_count = 0
 
 ///process()
@@ -25,10 +25,10 @@
 	if(character.mind)
 		character.mind.generate_goals(character.mind.assigned_job, is_spawning=TRUE)
 		character.show_goals()
-	return 0
+	return FALSE
 
 /datum/game_mode/proc/handle_offsite_latejoin(var/mob/living/carbon/human/character)
-	return 0
+	return FALSE
 
 /datum/game_mode/proc/process_autoantag()
 	message_admins("[uppertext(name)]: Attempting autospawn.")
@@ -41,7 +41,7 @@
 
 	if(!usable_templates.len)
 		message_admins("[uppertext(name)]: Failed to find configured mode spawn templates, please re-enable auto-antagonists after one is added.")
-		round_autoantag = 0
+		round_autoantag = FALSE
 		return
 
 	while(usable_templates.len)

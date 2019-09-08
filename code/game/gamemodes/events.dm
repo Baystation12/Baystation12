@@ -23,7 +23,7 @@
 
 */
 var/eventchance = 10 // Percent chance per 5 minutes.
-var/hadevent    = 0
+var/hadevent    = FALSE
 
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in shuffle(GLOB.living_mob_list_))
@@ -31,7 +31,7 @@ var/hadevent    = 0
 			var/obj/item/organ/internal/appendix/A = H.internal_organs_by_name[BP_APPENDIX]
 			if(!istype(A) || (A && A.inflamed))
 				continue
-			A.inflamed = 1
+			A.inflamed = TRUE
 			A.update_icon()
 			break
 
@@ -69,10 +69,10 @@ var/hadevent    = 0
 		if(C.name == "carpspawn")
 			new /mob/living/simple_animal/hostile/carp(C.loc)
 	//sleep(100)
-	spawn(rand(300, 600)) //Delayed announcements to keep the crew on their toes.
+	spawn(rand(30 SECONDS, 1 MINUTE)) //Delayed announcements to keep the crew on their toes.
 		GLOB.using_map.unknown_biological_entities_announcement()
 
-/proc/lightsout(isEvent = 0, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
+/proc/lightsout(isEvent = FALSE, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
 	if(isEvent)
 		command_announcement.Announce("An Electrical storm has been detected in your area, please repair potential electronic overloads.","Electrical Storm Alert")
 

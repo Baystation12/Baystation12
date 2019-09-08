@@ -8,7 +8,7 @@
 	item_state = "electronic"
 	matter = list(MATERIAL_STEEL = 500)
 	var/weakref/target
-	var/active = 0
+	var/active = FALSE
 	var/beeping = 2
 
 /obj/item/weapon/pinpointer/Destroy()
@@ -114,15 +114,15 @@
 
 //Nuke ops locator
 /obj/item/weapon/pinpointer/nukeop
-	var/locate_shuttle = 0
+	var/locate_shuttle = FALSE
 
 /obj/item/weapon/pinpointer/nukeop/Process()
 	var/new_mode
 	if(!locate_shuttle && bomb_set)
-		locate_shuttle = 1
+		locate_shuttle = TRUE
 		new_mode = "Shuttle Locator"
 	else if (locate_shuttle && !bomb_set)
-		locate_shuttle = 0
+		locate_shuttle = FALSE
 		new_mode = "Authentication Disk Locator"
 	if(new_mode)
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)

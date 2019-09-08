@@ -8,7 +8,7 @@
 /proc/getAssignedBlock(var/name,var/list/blocksLeft, var/activity_bounds=DNA_DEFAULT_BOUNDS)
 	if(blocksLeft.len==0)
 		warning("[name]: No more blocks left to assign!")
-		return 0
+		return FALSE
 	var/assigned = pick(blocksLeft)
 	blocksLeft.Remove(assigned)
 	assigned_blocks[assigned]=name
@@ -18,11 +18,11 @@
 
 /proc/setupgenetics()
 
-	if (prob(50))
+	if(prob(50))
 		// Currently unused.  Will revisit. - N3X
-		GLOB.BLOCKADD = rand(-300,300)
-	if (prob(75))
-		GLOB.DIFFMUT = rand(0,20)
+		GLOB.BLOCKADD = rand(-300, 300)
+	if(prob(75))
+		GLOB.DIFFMUT = rand(0, 20)
 
 	var/list/numsToAssign=new()
 	for(var/i=1;i<DNA_SE_LENGTH;i++)

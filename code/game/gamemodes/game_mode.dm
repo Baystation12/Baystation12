@@ -35,8 +35,8 @@ var/global/list/additional_antag_types = list()
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
 
-	var/waittime_l = 60 SECONDS				 // Lower bound on time before start of shift report
-	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
+	var/waittime_l = 1 MINUTE				 // Lower bound on time before start of shift report
+	var/waittime_h = 3 MINUTES			     // Upper bounds on time before start of shift report
 
 	//Format: list(start_animation = duration, hit_animation, miss_animation). null means animation is skipped.
 	var/cinematic_icon_states = list(
@@ -186,14 +186,14 @@ var/global/list/additional_antag_types = list()
 					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
-					return 0
+					return FALSE
 		return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
 	else
-		return 0
+		return FALSE
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
-		SSevent.report_at_round_end = 1
+		SSevent.report_at_round_end = TRUE
 		if(event_delay_mod_moderate)
 			var/datum/event_container/EModerate = SSevent.event_containers[EVENT_LEVEL_MODERATE]
 			EModerate.delay_modifier = event_delay_mod_moderate
@@ -222,7 +222,7 @@ var/global/list/additional_antag_types = list()
 
 	spawn (rand(waittime_l, waittime_h))
 		GLOB.using_map.send_welcome()
-		sleep(rand(100,150))
+		sleep(rand(10 SECONDS, 15 SECONDS))
 		announce_ert_disabled()
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
@@ -248,7 +248,7 @@ var/global/list/additional_antag_types = list()
 	if(SSticker.mode)
 		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
 	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
-	return 1
+	return TRUE
 
 /datum/game_mode/proc/fail_setup()
 	for(var/datum/antagonist/antag in antag_templates)
@@ -294,17 +294,17 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/check_finished()
 	if(evacuation_controller.round_over() || station_was_nuked)
-		return 1
+		return TRUE
 	if(end_on_antag_death && antag_templates && antag_templates.len)
-		var/has_antags = 0
+		var/has_antags = FALSE
 		for(var/datum/antagonist/antag in antag_templates)
 			if(!antag.antags_are_dead())
-				has_antags = 1
+				has_antags = TRUE
 				break
 		if(!has_antags)
 			evacuation_controller.recall = 0
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /datum/game_mode/proc/cleanup()	//This is called when the round has ended but not the game, if any cleanup would be necessary in that case.
 	return
@@ -383,10 +383,10 @@ var/global/list/additional_antag_types = list()
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts))
 
-	return 0
+	return FALSE
 
 /datum/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
-	return 0
+	return FALSE
 
 /datum/game_mode/proc/get_players_for_role(var/antag_id)
 	var/list/players = list()
@@ -489,7 +489,7 @@ var/global/list/additional_antag_types = list()
 			cinematic_screen.icon_state = end
 
 	else
-		sleep(50)
+		sleep(5 SECONDS)
 	sound_to(world, sound('sound/effects/explosionfar.ogg'))
 
 //////////////////////////
@@ -500,10 +500,10 @@ proc/display_roundstart_logout_report()
 	for(var/mob/living/L in SSmobs.mob_list)
 
 		if(L.ckey)
-			var/found = 0
+			var/found = FALSE
 			for(var/client/C in GLOB.clients)
 				if(C.ckey == L.ckey)
-					found = 1
+					found = TRUE
 					break
 			if(!found)
 				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (<font color='#ffcc00'><b>Disconnected</b></font>)\n"

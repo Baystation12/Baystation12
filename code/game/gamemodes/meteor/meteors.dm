@@ -129,13 +129,13 @@
 	desc = "You should probably run instead of gawking at this."
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "small"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	var/hits = 4
 	var/hitpwr = 2 //Level of ex_act to be called on hit.
 	var/dest
 	pass_flags = PASS_FLAG_TABLE
-	var/heavy = 0
+	var/heavy = FALSE
 	var/z_original
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 1
@@ -161,7 +161,7 @@
 		qdel(src)
 
 /obj/effect/meteor/Destroy()
-	walk(src,0) //this cancels the walk_towards() proc
+	walk(src, 0) //this cancels the walk_towards() proc
 	return ..()
 
 /obj/effect/meteor/New()
@@ -249,7 +249,7 @@
 	name = "large meteor"
 	icon_state = "large"
 	hits = 6
-	heavy = 1
+	heavy = TRUE
 	dropamt = 3
 
 /obj/effect/meteor/big/meteor_effect()
@@ -261,7 +261,7 @@
 	name = "flaming meteor"
 	icon_state = "flaming"
 	hits = 5
-	heavy = 1
+	heavy = TRUE
 	meteordrop = /obj/item/weapon/ore/phoron
 
 /obj/effect/meteor/flaming/meteor_effect()
@@ -272,7 +272,7 @@
 /obj/effect/meteor/irradiated
 	name = "glowing meteor"
 	icon_state = "glowing"
-	heavy = 1
+	heavy = TRUE
 	meteordrop = /obj/item/weapon/ore/uranium
 
 /obj/effect/meteor/irradiated/meteor_effect()
@@ -316,7 +316,7 @@
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
 	hits = 10
 	hitpwr = 1
-	heavy = 1
+	heavy = TRUE
 	meteordrop = /obj/item/weapon/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.
 
 /obj/effect/meteor/tunguska/meteor_effect()

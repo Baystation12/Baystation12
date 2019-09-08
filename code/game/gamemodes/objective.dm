@@ -76,7 +76,7 @@ var/global/list/all_objectives = list()
 // Brig //
 
 /datum/objective/anti_revolution/brig
-	var/already_completed = 0
+	var/already_completed = FALSE
 
 /datum/objective/anti_revolution/brig/find_target()
 	..()
@@ -167,7 +167,7 @@ var/global/list/all_objectives = list()
 // Brig, similar to the anti-rev objective, but for traitors //
 
 /datum/objective/brig
-	var/already_completed = 0
+	var/already_completed = FALSE
 
 /datum/objective/brig/find_target()
 	..()
@@ -188,7 +188,7 @@ var/global/list/all_objectives = list()
 // Harm a crew member, making an example of them //
 
 /datum/objective/harm
-	var/already_completed = 0
+	var/already_completed = FALSE
 
 /datum/objective/harm/find_target()
 	..()
@@ -288,7 +288,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/download
 	proc/gen_amount_goal()
-		target_amount = rand(10,20)
+		target_amount = rand(10, 20)
 		explanation_text = "Download [target_amount] research levels."
 		return target_amount
 
@@ -297,7 +297,7 @@ var/global/list/all_objectives = list()
 /datum/objective/capture
 
 /datum/objective/capture/proc/gen_amount_goal()
-	target_amount = rand(5,10)
+	target_amount = rand(5, 10)
 	explanation_text = "Accumulate [target_amount] capture points."
 	return target_amount
 
