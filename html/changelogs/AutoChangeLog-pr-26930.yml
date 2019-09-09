@@ -1,4 +1,0 @@
-author: "Boznar"
-delete-after: True
-changes: 
-  - maptweak: "Skrell Air alarms are now set to 40 degrees instead of 65 degrees. Server air alarm added to Skrellship engineering bay at 20 degrees."
