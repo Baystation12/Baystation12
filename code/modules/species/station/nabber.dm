@@ -309,6 +309,9 @@
 
 	if(grabber.pulling_punches)
 		return ..()
+	if(grabber == target)
+		return ..()
+
 	grabber.unEquip(grabber.l_hand)
 	grabber.unEquip(grabber.r_hand)
 	to_chat(grabber, "<span class='warning'>You drop everything as you spring out to nab \the [target]!.</span>")

@@ -24,6 +24,7 @@
 	same_tile = 1
 	ladder_carry = 1
 	force_danger = 1
+	can_grab_self = 0
 
 /datum/grab/nab/on_hit_grab(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting

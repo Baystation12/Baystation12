@@ -193,7 +193,7 @@
 		return MOVEMENT_STOP
 
 	for(var/obj/item/grab/G in mob.grabbed_by)
-		if(G.stop_move())
+		if(G.assailant != mob && G.stop_move())
 			if(mover == mob)
 				to_chat(mob, "<span class='notice'>You're stuck in a grab!</span>")
 			mob.ProcessGrabs()
@@ -248,6 +248,9 @@
 		G.assailant_moved()
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
+
+	if(mob.pulling && (direction & (UP|DOWN)))
+		mob.zPull(direction)
 	
 	if(direction & (UP|DOWN))
 		var/txt_dir = direction & UP ? "upwards" : "downwards"
@@ -278,6 +281,8 @@
 	. = 0
 	// TODO: Look into making grabs use movement events instead, this is a mess.
 	for (var/obj/item/grab/G in mob)
+		if(G.assailant == G.affecting)
+			return
 		. = max(., G.grab_slowdown())
 		var/list/L = mob.ret_grab()
 		if(istype(L, /list))
