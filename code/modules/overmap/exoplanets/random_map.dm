@@ -127,7 +127,10 @@
 /datum/random_map/noise/exoplanet/proc/get_grass_overlay()
 	var/grass_num = "[rand(1,6)]"
 	if(!LAZYACCESS(grass_cache, grass_num))
-		var/image/grass = overlay_image('icons/obj/flora/greygrass.dmi', "grass_[grass_num]", pick(plantcolors - "RANDOM"), RESET_COLOR)
+		var/color = pick(plantcolors)
+		if(color == "RANDOM")
+			color = get_random_colour(0,75,190)
+		var/image/grass = overlay_image('icons/obj/flora/greygrass.dmi', "grass_[grass_num]", color, RESET_COLOR)
 		grass.underlays += overlay_image('icons/obj/flora/greygrass.dmi', "grass_[grass_num]_shadow", null, RESET_COLOR)
 		LAZYSET(grass_cache, grass_num, grass)
 	return grass_cache[grass_num]
