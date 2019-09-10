@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Added guidance on law priority and conflicts to the text shown when laws are listed."
