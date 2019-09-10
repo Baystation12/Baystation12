@@ -246,12 +246,6 @@ var/const/NO_EMAG_ACT = -50
 	item_state = "gold_id"
 	job_access_type = /datum/job/captain
 
-/obj/item/weapon/card/id/syndicate_command
-	name = "syndicate ID card"
-	desc = "An ID straight from the Syndicate."
-	registered_name = "Syndicate"
-	assignment = "Syndicate Overlord"
-	access = list(access_syndicate, access_external_airlocks)
 
 /obj/item/weapon/card/id/captains_spare
 	name = "captain's spare ID"
@@ -273,7 +267,7 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Synthetic"
 
 /obj/item/weapon/card/id/synthetic/New()
-	access = get_all_station_access() + access_synth
+	access = get_all_station_access()// + access_synth
 	..()
 
 /obj/item/weapon/card/id/centcom
@@ -431,12 +425,6 @@ var/const/NO_EMAG_ACT = -50
 	name = "identification card"
 	desc = "A card which represents common sense and responsibility."
 	icon_state = "civGold"
-
-/obj/item/weapon/card/id/merchant
-	name = "identification card"
-	desc = "A card issued to Merchants, indicating their right to sell and buy goods."
-	icon_state = "trader"
-	access = list(access_merchant)
 
 
 

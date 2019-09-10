@@ -16,9 +16,9 @@
 	desc = "Security Equipment"
 	region = ACCESS_REGION_SECURITY
 
-/var/const/access_brig = 2 // Brig timers and permabrig
+/var/const/access_security = 2 // Brig timers and permabrig
 /datum/access/holding
-	id = access_brig
+	id = access_security
 	desc = "Holding Cells"
 	region = ACCESS_REGION_SECURITY
 
@@ -28,9 +28,9 @@
 	desc = "Armory"
 	region = ACCESS_REGION_SECURITY
 
-/var/const/access_forensics_lockers = 4
+/var/const/access_security = 4
 /datum/access/forensics_lockers
-	id = access_forensics_lockers
+	id = access_security
 	desc = "Forensics"
 	region = ACCESS_REGION_SECURITY
 
@@ -46,15 +46,15 @@
 	desc = "Morgue"
 	region = ACCESS_REGION_MEDBAY
 
-/var/const/access_tox = 7
+/var/const/access_research = 7
 /datum/access/tox
-	id = access_tox
+	id = access_research
 	desc = "Research Labs"
 	region = ACCESS_REGION_RESEARCH
 
-/var/const/access_tox_storage = 8
+/var/const/access_research_storage = 8
 /datum/access/tox_storage
-	id = access_tox_storage
+	id = access_research_storage
 	desc = "Toxins Lab"
 	region = ACCESS_REGION_RESEARCH
 
@@ -154,9 +154,9 @@
 	desc = "Atmospherics"
 	region = ACCESS_REGION_ENGINEERING
 
-/var/const/access_bar = 25
+/var/const/access_service = 25
 /datum/access/bar
-	id = access_bar
+	id = access_service
 	desc = "Bar"
 	region = ACCESS_REGION_GENERAL
 
@@ -196,9 +196,9 @@
 	desc = "Cargo Bay"
 	region = ACCESS_REGION_SUPPLY
 
-/var/const/access_construction = 32
+/var/const/access_engineering = 32
 /datum/access/construction
-	id = access_construction
+	id = access_engineering
 	desc = "Construction Areas"
 	region = ACCESS_REGION_ENGINEERING
 
@@ -214,9 +214,9 @@
 	desc = "Cargo Bot Delivery"
 	region = ACCESS_REGION_SUPPLY
 
-/var/const/access_hydroponics = 35
+/var/const/access_service = 35
 /datum/access/hydroponics
-	id = access_hydroponics
+	id = access_service
 	desc = "Hydroponics"
 	region = ACCESS_REGION_GENERAL
 
@@ -232,15 +232,15 @@
 	desc = "Library"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_lawyer = 38
+/var/const/access_security = 38
 /datum/access/lawyer
-	id = access_lawyer
+	id = access_security
 	desc = "Internal Affairs"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_virology = 39
+/var/const/access_medical = 39
 /datum/access/virology
-	id = access_virology
+	id = access_medical
 	desc = "Virology"
 	region = ACCESS_REGION_MEDBAY
 
@@ -250,9 +250,9 @@
 	desc = "Chief Medical Officer"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_qm = 41
+/var/const/access_cargo = 41
 /datum/access/qm
-	id = access_qm
+	id = access_cargo
 	desc = "Quartermaster"
 	region = ACCESS_REGION_SUPPLY
 
@@ -300,9 +300,9 @@
 // /var/const/free_access_id = 51
 // /var/const/free_access_id = 52
 
-/var/const/access_bridge_vault = 53
+/var/const/access_bridge = 53
 /datum/access/heads_vault
-	id = access_bridge_vault
+	id = access_bridge
 	desc = "Main Vault"
 	region = ACCESS_REGION_COMMAND
 
@@ -312,9 +312,9 @@
 	desc = "Mining EVA"
 	region = ACCESS_REGION_SUPPLY
 
-/var/const/access_xenobiology = 55
+/var/const/access_research = 55
 /datum/access/xenobiology
-	id = access_xenobiology
+	id = access_research
 	desc = "Xenobiology Lab"
 	region = ACCESS_REGION_RESEARCH
 
@@ -366,21 +366,21 @@
 	desc = "Security"
 	region = ACCESS_REGION_SECURITY
 
-/var/const/access_psychiatrist = 64 // Psychiatrist's office
+/var/const/access_medical = 64 // Psychiatrist's office
 /datum/access/psychiatrist
-	id = access_psychiatrist
+	id = access_medical
 	desc = "Psychiatrist's Office"
 	region = ACCESS_REGION_MEDBAY
 
-/var/const/access_xenoarch = 65
+/var/const/access_research = 65
 /datum/access/xenoarch
-	id = access_xenoarch
+	id = access_research
 	desc = "Xenoarchaeology"
 	region = ACCESS_REGION_RESEARCH
 
-/var/const/access_medical_equip = 66
+/var/const/access_medical = 66
 /datum/access/medical_equip
-	id = access_medical_equip
+	id = access_medical
 	desc = "Medical Equipment"
 	region = ACCESS_REGION_MEDBAY
 

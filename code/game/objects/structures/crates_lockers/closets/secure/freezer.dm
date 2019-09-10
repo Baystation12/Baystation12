@@ -48,7 +48,7 @@
 	icon_locked = "fridge1"
 	icon_opened = "fridgeopen"
 	icon_off = "fridgebroken"
-	req_access = list(access_bridge_vault)
+	req_access = list(access_bridge)
 
 /obj/structure/closet/secure_closet/freezer/money/Initialize()
 	. = ..()

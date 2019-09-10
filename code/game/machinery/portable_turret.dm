@@ -101,7 +101,6 @@
 /obj/machinery/porta_turret/crescent/New()
 	..()
 	req_one_access.Cut()
-	req_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/Destroy()
 	qdel(spark_system)

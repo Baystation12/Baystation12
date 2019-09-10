@@ -45,7 +45,6 @@
 	helmet_type = /obj/item/clothing/head/helmet/space
 	tank_type = /obj/item/weapon/tank/oxygen
 	mask_type = /obj/item/clothing/mask/breath
-	req_access = list(access_eva)
 
 /obj/machinery/suit_storage_unit/atmos
 	name = "Atmospherics Voidsuit Storage Unit"
@@ -118,7 +117,7 @@
 	boots_type = /obj/item/clothing/shoes/magboots
 	tank_type = /obj/item/weapon/tank/oxygen
 	mask_type = /obj/item/clothing/mask/breath
-	req_access = list(access_xenoarch)
+	req_access = list(access_research)
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/security
@@ -143,7 +142,6 @@
 	boots_type = /obj/item/clothing/shoes/magboots
 	tank_type = /obj/item/weapon/tank/oxygen
 	mask_type = /obj/item/clothing/mask/breath
-	req_access = list(access_syndicate)
 	islocked = 1
 
 
@@ -670,7 +668,7 @@
 /obj/machinery/suit_cycler/engineering
 	name = "Engineering suit cycler"
 	model_text = "Engineering"
-	req_access = list(access_construction)
+	req_access = list(access_engineering)
 	departments = list("Engineering","Atmos")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
 
@@ -684,7 +682,7 @@
 /obj/machinery/suit_cycler/science
 	name = "Excavation suit cycler"
 	model_text = "Excavation"
-	req_access = list(access_xenoarch)
+	req_access = list(access_research)
 	departments = list("Science")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
@@ -705,7 +703,6 @@
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
 	model_text = "Nonstandard"
-	req_access = list(access_syndicate)
 	departments = list("Mercenary")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 	can_repair = 1
@@ -713,7 +710,7 @@
 /obj/machinery/suit_cycler/pilot
 	name = "Pilot suit cycler"
 	model_text = "Pilot"
-	req_access = list(access_mining_office)
+	req_access = list(access_mining)
 	departments = list("Pilot")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 

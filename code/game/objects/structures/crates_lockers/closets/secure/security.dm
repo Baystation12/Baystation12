@@ -148,7 +148,7 @@
 
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
-	req_access = list(access_brig)
+	req_access = list(access_security)
 	icon_state = "sec1"
 	icon_closed = "sec"
 	icon_locked = "sec1"
@@ -201,7 +201,7 @@
 
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"
-	req_access = list(access_forensics_lockers)
+	req_access = list(access_security)
 	icon_state = "cabinetdetective_locked"
 	icon_closed = "cabinetdetective"
 	icon_locked = "cabinetdetective_locked"
@@ -244,7 +244,7 @@
 
 /obj/structure/closet/secure_closet/brig
 	name = "brig locker"
-	req_access = list(access_brig)
+	req_access = list(access_security)
 	anchored = 1
 	var/id = null
 
@@ -256,7 +256,7 @@
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"
-	req_access = list(access_lawyer)
+	req_access = list(access_security)
 
 /obj/structure/closet/secure_closet/courtroom/WillContain()
 	return list(
@@ -284,7 +284,7 @@
 
 /obj/structure/closet/secure_closet/lawyer
 	name = "internal affairs secure closet"
-	req_access = list(access_lawyer)
+	req_access = list(access_security)
 
 /obj/structure/closet/secure_closet/lawyer/WillContain()
 	return list(

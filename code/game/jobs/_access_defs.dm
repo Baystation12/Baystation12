@@ -3,7 +3,7 @@
 // (access_armory) allows access to the armory and the chief security officer's private quarters.
 // (access_security) allows access to the security offices. when combined with access_mining_station, allows access to PSEC HQ on the colony.
 // (access_maint_tunnels) allows access to all maintenance vents both on the ishimura and the colony.
-// (access_bar) allows access to the bar.
+// (access_service) allows access to the bar.
 // (access_kitchen) allows access to the kitchen.
 // (access_cargo) allows access to the supply offices.
 // (access_mining) allows access to the shuttle used to transport between ship and colony.

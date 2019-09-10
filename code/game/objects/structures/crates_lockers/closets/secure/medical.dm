@@ -19,7 +19,7 @@
 	icon_locked = "medical1"
 	icon_opened = "medicalopen"
 	icon_off = "medicaloff"
-	req_access = list(access_medical_equip)
+	req_access = list(access_medical)
 
 /obj/structure/closet/secure_closet/medical1/WillContain()
 	return list(
@@ -52,7 +52,7 @@
 
 /obj/structure/closet/secure_closet/medical3
 	name = "medical doctor's locker"
-	req_access = list(access_medical_equip)
+	req_access = list(access_medical)
 	icon_state = "securemed1"
 	icon_closed = "securemed"
 	icon_locked = "securemed1"
@@ -86,7 +86,7 @@
 	icon_locked = "medical1"
 	icon_opened = "medicalopen"
 	icon_off = "medicaloff"
-	req_access = list(access_medical_equip)
+	req_access = list(access_medical)
 
 /obj/structure/closet/secure_closet/paramedic/WillContain()
 	return list(
@@ -168,11 +168,11 @@
 	density = 0
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
-	req_access = list(access_medical_equip)
+	req_access = list(access_medical)
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
-	req_access = list(access_psychiatrist,access_chapel_office)
+	req_access = list(access_medical,access_chapel_office)
 	icon_state = "chaplainsecure1"
 	icon_closed = "chaplainsecure"
 	icon_locked = "chaplainsecure1"
@@ -212,7 +212,7 @@
 	icon_locked = "secureviro1"
 	icon_opened = "secureviroopen"
 	icon_off = "securevirooff"
-	req_access = list(access_virology)
+	req_access = list(access_medical)
 
 /obj/structure/closet/secure_closet/virology/WillContain()
 	return list(
@@ -242,7 +242,7 @@
 	icon_locked = "securemed1"
 	icon_opened = "securemedopen"
 	icon_off = "securemedoff"
-	req_access = list(access_psychiatrist)
+	req_access = list(access_medical)
 
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(

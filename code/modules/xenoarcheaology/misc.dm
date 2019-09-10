@@ -53,7 +53,7 @@
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"
-	req_access = list(access_xenoarch)
+	req_access = list(access_research)
 	icon_state = "secureres1"
 	icon_closed = "secureres"
 	icon_locked = "secureres1"

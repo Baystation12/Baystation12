@@ -26,7 +26,7 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Peacekeeper armor crate"
-	access = access_emergency_armory
+	access = access_armory
 
 /decl/hierarchy/supply_pack/security/comarmor
 	name = "Armor - Command"
@@ -70,7 +70,7 @@
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Laser carbines crate"
-	access = access_emergency_armory
+	access = access_armory
 	security_level = SUPPLY_SECURITY_ELEVATED
 
 /decl/hierarchy/supply_pack/security/laser/shady
@@ -88,7 +88,7 @@
 	cost = 100
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Advanced Laser Weapons crate"
-	access = access_emergency_armory
+	access = access_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/sniperlaser
@@ -97,7 +97,7 @@
 	cost = 70
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Energy marksman crate"
-	access = access_emergency_armory
+	access = access_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/pdw
@@ -106,7 +106,7 @@
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Ballistic PDW crate"
-	access = access_emergency_armory
+	access = access_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/bullpup
@@ -115,7 +115,7 @@
 	cost = 80 //Because 5.56 is OP as fuck right now.
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Bullpup automatic rifle crate"
-	access = access_emergency_armory
+	access = access_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/pistolammo
