@@ -104,16 +104,19 @@
 
 /obj/random/toolbox
 	name = "random toolbox"
-	icon_state = "box-green"
+	desc = "This is a random toolbox."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "red"
 
 /obj/random/toolbox/item_to_spawn()
-	return pickweight(list(/obj/item/weapon/storage/toolbox/mechanical = 3,
-				/obj/item/weapon/storage/toolbox/electrical = 2,
-				/obj/item/weapon/storage/toolbox/emergency = 1))
+	return pickweight(list(/obj/item/weapon/storage/toolbox/mechanical = 30,
+				/obj/item/weapon/storage/toolbox/electrical = 20,
+				/obj/item/weapon/storage/toolbox/emergency = 20,
+				/obj/item/weapon/storage/toolbox/syndicate = 1))
 
 /obj/random/toolbox/low_chance
 	name = "low chance random toolbox"
-	icon_state = "box-green-low"
+	icon_state = "yellow"
 	spawn_nothing_percentage = 60
 
 
