@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/scientist
 	name = "scientist's locker"
-	req_one_access = list(access_research,access_research_storage)
+	req_one_access = list(access_research)
 	icon_state = "secureres1"
 	icon_closed = "secureres"
 	icon_locked = "secureres1"

@@ -336,9 +336,6 @@ var/last_message_id = 0
 		to_chat(user, "<span class='notice'>Cannot establish a bluespace connection.</span>")
 		return
 
-	if(GLOB.deathsquad.deployed)
-		to_chat(user, "[GLOB.using_map.boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
-		return
 
 	if(evacuation_controller.deny)
 		to_chat(user, "An evacuation cannot be called at this time. Please try again later.")

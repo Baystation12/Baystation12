@@ -172,7 +172,7 @@
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
-	req_access = list(access_medical,access_chapel_office)
+	req_access = list(access_medical)
 	icon_state = "chaplainsecure1"
 	icon_closed = "chaplainsecure"
 	icon_locked = "chaplainsecure1"

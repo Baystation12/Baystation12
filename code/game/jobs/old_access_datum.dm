@@ -172,9 +172,9 @@
 	desc = "Crematorium"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_kitchen = 28
+/var/const/access_service = 28
 /datum/access/kitchen
-	id = access_kitchen
+	id = access_service
 	desc = "Kitchen"
 	region = ACCESS_REGION_GENERAL
 

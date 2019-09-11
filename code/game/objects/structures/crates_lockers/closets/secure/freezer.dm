@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/freezer/kitchen
 	name = "kitchen cabinet"
-	req_access = list(access_kitchen)
+	req_access = list(access_service)
 
 /obj/structure/closet/secure_closet/freezer/kitchen/WillContain()
 	return list(

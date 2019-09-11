@@ -177,7 +177,7 @@
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper shield generator construction kit crate"
-	access = access_engine
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/smbig
 	name = "Supermatter Core"
@@ -252,4 +252,4 @@
 	cost = 120
 	containername = "\improper Engineering voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_engine
+	access = access_engineering
