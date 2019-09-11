@@ -1,0 +1,9 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Gas thruster is now modifiable machine."
+  - bugfix: "Gas thruster now hooks up to their ship when built."
+  - rscadd: "Gas thrusters now has a boot up time."
+  - rscadd: "Gas thruster can be upgraded with matter bin for extra fuel intake volume and less boot up time or capacitor for energy efficiency."
+  - rscadd: "Gas thrusters has an increased energy usage on idle (6 Wh per tick so every 2 second) and 10 Wh per burn. So please keep them off unless you need them, for that same reason all thrusts starts offline."
+  - tweak: "Guppy's mass and max speed has both been increased."
