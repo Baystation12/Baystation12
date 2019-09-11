@@ -186,7 +186,7 @@
 	else if(nanoui_menu == 2)
 		var/permanentData[0]
 		for(var/datum/computer_file/report/crew_record/L in GLOB.all_crew_records)
-			permanentData[++permanentData.len] = list(Name = L.get_name(),"id" = L.uid, "exploit" = length(L.get_antagRecord()))
+			permanentData[++permanentData.len] = list(Name = L.get_name(),"id" = L.uid) //,"exploit" = length(L.get_antagRecord()))
 		nanoui_data["exploit_records"] = permanentData
 	else if(nanoui_menu == 21)
 		nanoui_data["exploit_exists"] = 0

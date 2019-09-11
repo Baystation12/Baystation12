@@ -13,7 +13,7 @@
 	throw_range = 2
 	w_class = ITEM_SIZE_TINY
 	var/access = list()
-	access = access_crate_cash
+	access = access_bridge
 	var/worth = 0
 	var/global/denominations = list(1000,500,200,100,50,20,10,1)
 
