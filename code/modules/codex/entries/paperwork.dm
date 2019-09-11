@@ -19,4 +19,9 @@ Pen exclusive commands
 \[small\] - \[/small\] : Decreases the size of the text.
 \[list\] - \[/list\] : A list.
 \[*\] : A dot used for lists.
-\[hr\] : Adds a horizontal rule."}
+\[hr\] : Adds a horizontal rule.
+\[pre\] : Adds preformatted text, forcing the text to be fixed width.
+\[fontred\] : Makes the text red.
+\[fontblue\] : Makes the text blue.
+\[fontgreen\] : Makes the text green.
+\[/font\] : Used to close any fontred/blue/green commands."}
