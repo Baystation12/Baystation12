@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - tweak: "Wizard and Ninja now require a minimum of 5 players."
