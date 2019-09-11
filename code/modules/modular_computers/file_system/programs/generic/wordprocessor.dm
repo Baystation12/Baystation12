@@ -49,41 +49,10 @@
 		show_browser(usr,"<HTML><HEAD><TITLE>[open_file]</TITLE></HEAD>[digitalPencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
 		return 1
 
-	if(href_list["PRG_taghelp"])
-		to_chat(usr, "<span class='notice'>The hologram of a googly-eyed paper clip helpfully tells you:</span>")
-		var/help = {"
-		\[br\] : Creates a linebreak.
-		\[center\] - \[/center\] : Centers the text.
-		\[h1\] - \[/h1\] : First level heading.
-		\[h2\] - \[/h2\] : Second level heading.
-		\[h3\] - \[/h3\] : Third level heading.
-		\[b\] - \[/b\] : Bold.
-		\[i\] - \[/i\] : Italic.
-		\[u\] - \[/u\] : Underlined.
-		\[small\] - \[/small\] : Decreases the size of the text.
-		\[large\] - \[/large\] : Increases the size of the text.
-		\[field\] : Inserts a blank text field, which can be filled later. Useful for forms.
-		\[date\] : Current station date.
-		\[time\] : Current station time.
-		\[list\] - \[/list\] : Begins and ends a list.
-		\[*\] : A list item.
-		\[hr\] : Horizontal rule.
-		\[table\] - \[/table\] : Creates table using \[row\] and \[cell\] tags.
-		\[grid\] - \[/grid\] : Table without visible borders, for layouts.
-		\[row\] - New table row.
-		\[cell\] - New table cell.
-		\[logo\] - Inserts EXO logo image.
-		\[ntlogo\] - Inserts the NT logo image.
-		\[bluelogo\] - Inserts blue NT logo image.
-		\[solcrest\] - Inserts SCG crest image.
-		\[eclogo\] - Inserts the Expeditionary Corps logo.
-		\[daislogo\] - Inserts the Deimos Advanced Information Systems logo.
-		\[xynlogo\] - Inserts the Xyngergy logo.
-		\[iccgseal\] - Inserts ICCG seal
-		\[fleetlogo\] - Inserts the logo of the SCG Fleet"
-		\[ocielogo\] - Inserts the logo of the Office of Civil Investigation and Enforcement"}
-
-		to_chat(usr, help)
+	if(href_list["PRG_taghelp"])		
+		var/datum/codex_entry/entry = SScodex.get_codex_entry("pen")
+		if(entry)
+			SScodex.present_codex_entry(usr, entry)
 		return 1
 
 	if(href_list["PRG_closebrowser"])
