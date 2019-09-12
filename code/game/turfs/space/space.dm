@@ -5,7 +5,7 @@
 	name = "\proper space"
 	icon_state = "default"
 	dynamic_lighting = 0
-	temperature = T20C
+	temperature = TCMB
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/static/list/dust_cache
 	permit_ao = FALSE
