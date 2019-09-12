@@ -105,7 +105,7 @@ obj/item/clothing
 
 // Does this clothing slot count as wizard garb? (Combines a few checks)
 /proc/is_wiz_garb(var/obj/item/clothing/C)
-	return C && C.wizard_garb
+	return istype(C) && C.wizard_garb
 
 /*Checks if the wizard is wearing the proper attire.
 Made a proc so this is not repeated 14 (or more) times.*/

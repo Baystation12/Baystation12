@@ -136,7 +136,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 /obj/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing)
 
-	if(!owner)
+	if(!owner || !isliving(target))
 		return
 
 	if(owner.incapacitated())
