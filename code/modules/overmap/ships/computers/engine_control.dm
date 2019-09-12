@@ -50,8 +50,8 @@
 	if(href_list["global_toggle"])
 		linked.engines_state = !linked.engines_state
 		for(var/datum/ship_engine/E in linked.engines)
-			if(linked.engines_state != E.is_on())
-				E.toggle()				
+			if(linked.engines_state == !E.is_on())
+				E.toggle()
 		return TOPIC_REFRESH
 
 	if(href_list["set_global_limit"])

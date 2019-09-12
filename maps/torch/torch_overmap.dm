@@ -93,9 +93,9 @@
 	name = "Guppy"
 	desc = "A small general utility pod. It's capable of limited independant space travel. It's marked as TORCH GUP #1"
 	shuttle = "Guppy"
-	max_speed = 1/(5 SECONDS)
+	max_speed = 1/(3 SECONDS)
 	burn_delay = 2 SECONDS
-	vessel_mass = 2500 //very inefficient pod
+	vessel_mass = 3000 //very inefficient pod
 	fore_dir = SOUTH
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_TINY

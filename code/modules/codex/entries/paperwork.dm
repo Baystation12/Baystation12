@@ -19,6 +19,9 @@
 \[grid\] - \[/grid\] : Table without visible borders, for layouts.<br>
 \[row\] - New table row.<br>
 \[cell\] - New table cell.<br>
+\[hr\] : Adds a horizontal rule.<br>
+\[list\] - \[/list\] : A list. (Does not work with crayons)<br>
+\[*\] : A dot used for lists. (Does not work with crayons)<br>
 \[logo\] - Inserts EXO logo image.<br>
 \[ntlogo\] - Inserts the NT logo image.<br>
 \[bluelogo\] - Inserts blue NT logo image.<br>
@@ -29,13 +32,8 @@
 \[iccgseal\] - Inserts ICCG seal.<br>
 \[fleetlogo\] - Inserts the logo of the SCG Fleet.<br>
 \[ocielogo\] - Inserts the logo of the Office of Civil Investigation and Enforcement.<br><br>
-<b>Pen exclusive commands:</b><br>
-\[list\] - \[/list\] : A list.<br>
-\[*\] : A dot used for lists.<br><br>
-<b>Digital exclusive commands (Nanowork, emails, reports, text files, etc):</b><br>
+<b>Digital exclusive commands (NanoWord, emails, reports, text files, etc):</b><br>
 \[pre\] - \[/pre\] : Adds preformatted text, forcing the text to be fixed width.<br>
 \[fontred\] - \[/font\] : Makes the text red.<br>
 \[fontblue\] - \[/font\] : Makes the text blue.<br>
-\[fontgreen\] - \[/font\] : Makes the text green.<br><br>
-<b>Digital and Pen exclusive commands:</b><br>
-\[hr\] : Adds a horizontal rule.<br><br>"}
+\[fontgreen\] - \[/font\] : Makes the text green.<br><br>"}

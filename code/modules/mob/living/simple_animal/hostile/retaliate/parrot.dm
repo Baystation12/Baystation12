@@ -52,8 +52,8 @@
 	stop_automated_movement = 1
 	universal_speak = TRUE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
-	meat_amount = 2
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken/game
+	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FEATHERS
 
 	var/parrot_state = PARROT_WANDER //Hunt for a perch when created

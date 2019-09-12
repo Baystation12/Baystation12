@@ -249,9 +249,6 @@
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
 
-	if(mob.pulling && (direction & (UP|DOWN)))
-		mob.zPull(direction)
-	
 	if(direction & (UP|DOWN))
 		var/txt_dir = direction & UP ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
