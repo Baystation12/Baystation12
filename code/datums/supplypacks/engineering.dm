@@ -77,7 +77,7 @@
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Emitter crate"
-	access = access_engine_equip
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/field_gen
 	name = "Field Generator crate"
@@ -101,7 +101,7 @@
 	cost = 6
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Collector crate"
-	access = access_engine_equip
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/PA
 	name = "Particle Accelerator crate"
@@ -145,7 +145,7 @@
 	cost = 75
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Mk1 TEG crate"
-	access = access_engine_equip
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/circulator
 	name = "Binary atmospheric circulator"
@@ -153,7 +153,7 @@
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Atmospheric circulator crate"
-	access = access_atmospherics
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/air_dispenser
 	name = "Pipe Dispenser"
@@ -161,7 +161,7 @@
 	cost = 35
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Pipe Dispenser Crate"
-	access = access_atmospherics
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/disposals_dispenser
 	name = "Disposals Pipe Dispenser"
@@ -169,7 +169,7 @@
 	cost = 35
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Disposal Dispenser Crate"
-	access = access_atmospherics
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/shield_generator
 	name = "Shield Generator Construction Kit"
@@ -177,7 +177,7 @@
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper shield generator construction kit crate"
-	access = access_engine
+	access = access_engineering
 
 /decl/hierarchy/supply_pack/engineering/smbig
 	name = "Supermatter Core"
@@ -203,7 +203,7 @@
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/gear
 	containername = "\improper Robotics assembly"
-	access = access_robotics
+	access = access_research
 
 /decl/hierarchy/supply_pack/engineering/radsuit
 	name = "Radiation protection gear"
@@ -252,4 +252,4 @@
 	cost = 120
 	containername = "\improper Engineering voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_engine
+	access = access_engineering

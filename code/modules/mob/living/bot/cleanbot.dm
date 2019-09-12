@@ -3,8 +3,8 @@
 	desc = "A little cleaning robot, he looks so excited!"
 	icon = 'icons/mob/bot/cleanbot.dmi'
 	icon_state = "cleanbot0"
-	req_one_access = list(access_janitor, access_robotics)
-	botcard_access = list(access_janitor, access_maint_tunnels)
+	req_one_access = list(access_service, access_research)
+	botcard_access = list(access_service, access_maint_tunnels)
 
 	wait_if_pulled = 1
 	min_target_dist = 0

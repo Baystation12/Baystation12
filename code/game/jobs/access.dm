@@ -47,26 +47,9 @@
 		if(has_access(access_pattern, list(), access))
 			return 1
 
+//No centcomm in this setting
 /proc/get_centcom_access(job)
-	switch(job)
-		if("VIP Guest")
-			return list(access_cent_general)
-		if("Custodian")
-			return list(access_cent_general, access_cent_living, access_cent_storage)
-		if("Thunderdome Overseer")
-			return list(access_cent_general, access_cent_thunder)
-		if("Intel Officer")
-			return list(access_cent_general, access_cent_living)
-		if("Medical Officer")
-			return list(access_cent_general, access_cent_living, access_cent_medical)
-		if("Death Commando")
-			return list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
-		if("Research Officer")
-			return list(access_cent_general, access_cent_specops, access_cent_medical, access_cent_teleporter, access_cent_storage)
-		if("BlackOps Commander")
-			return list(access_cent_general, access_cent_thunder, access_cent_specops, access_cent_living, access_cent_storage, access_cent_creed)
-		if("Supreme Commander")
-			return get_all_centcom_access()
+	return list()
 
 /var/list/datum/access/priv_all_access_datums
 /proc/get_all_access_datums()

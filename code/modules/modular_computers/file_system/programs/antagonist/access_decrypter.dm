@@ -76,7 +76,7 @@
 
 /datum/nano_module/program/access_decrypter
 	name = "NTNet Access Decrypter"
-	var/list/restricted_access_codes = list(access_change_ids, access_network) // access codes that are not hackable due to balance reasons
+	var/list/restricted_access_codes = list() // access codes that are not hackable due to balance reasons
 
 /datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	if(!ntnet_global)

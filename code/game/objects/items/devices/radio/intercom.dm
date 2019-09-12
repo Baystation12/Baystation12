@@ -81,9 +81,11 @@
 	subspace_transmission = 1
 	syndie = 1
 
+/*
 /obj/item/device/radio/intercom/syndicate/Initialize()
 	. = ..()
 	internal_channels[num2text(SYND_FREQ)] = list(access_syndicate)
+*/
 
 /obj/item/device/radio/intercom/raider
 	name = "illicit intercom"
@@ -91,10 +93,11 @@
 	frequency = RAID_FREQ
 	subspace_transmission = 1
 	syndie = 1
-
+/*
 /obj/item/device/radio/intercom/raider/Initialize()
 	. = ..()
 	internal_channels[num2text(RAID_FREQ)] = list(access_syndicate)
+*/
 
 /obj/item/device/radio/intercom/Destroy()
 	STOP_PROCESSING(SSobj, src)

@@ -11,8 +11,7 @@
 	minimal_player_age = 7
 	ideal_character_age = 50
 
-	access = list(access_heads, access_medical, access_morgue, access_surgery, 
-					access_maint_tunnels)
+	access = list(access_bridge, access_medical, access_maint_tunnels, access_chemistry, access_surgery)
 	outfit_type = /decl/hierarchy/outfit/job/medical/ds13seniormedofficer
 
 /datum/job/ds13meddoctor
@@ -25,7 +24,7 @@
 	supervisors = "the senior medical officer"
 	selection_color = "#013d3b"
 
-	access = list(access_medical, access_morgue)
+	access = list(access_medical, access_chemistry)
 	outfit_type = /decl/hierarchy/outfit/job/medical/ds13meddoctor
 
 /datum/job/ds13medsurgeon
@@ -38,7 +37,7 @@
 	supervisors = "the senior medical officer"
 	selection_color = "#013d3b"
 
-	access = list(access_medical, access_morgue, access_surgery)
+	access = list(access_medical, access_surgery)
 	outfit_type = /decl/hierarchy/outfit/job/medical/ds13medsurgeon
 
 
@@ -62,13 +61,9 @@
 	supervisors = "the captain"
 	selection_color = "#026865"
 	req_admin_notify = 1
-	
-	access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
-			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
-			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_maint_tunnels, access_external_airlocks)
-	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
-			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
-			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_maint_tunnels, access_external_airlocks)
+
+	access = list()
+	minimal_access = list()
 
 	minimal_player_age = 14
 	ideal_character_age = 50
@@ -85,8 +80,8 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
 
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
-	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology)
+	access = list()
+	minimal_access = list()
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
 
@@ -102,8 +97,8 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
 
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
-	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
+	access = list()
+	minimal_access = list()
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 
@@ -118,8 +113,8 @@
 	supervisors = "the chief medical officer and research director"
 	selection_color = "#013d3b"
 
-	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
-	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
 
 /datum/job/psychiatrist
@@ -133,8 +128,8 @@
 	minimal_player_age = 3
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)
-	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
+	access = list()
+	minimal_access = list()
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
 
@@ -149,7 +144,7 @@
 	selection_color = "#013d3b"
 
 	minimal_player_age = 7
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
-	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
-	
+	access = list()
+	minimal_access = list()
+
 	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
