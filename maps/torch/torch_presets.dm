@@ -16,7 +16,7 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 		if(NETWORK_AQUILA)
 			return access_aquila
 		if(NETWORK_BRIDGE)
-			return access_heads
+			return access_bridge
 		if(NETWORK_CALYPSO)
 			return access_expedition_shuttle
 		if(NETWORK_POD)
@@ -198,7 +198,7 @@ var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 /datum/map/proc/get_shared_network_access(var/network)
 	switch(network)
 		if(NETWORK_COMMAND)
-			return access_heads
+			return access_bridge
 		if(NETWORK_ENGINE, NETWORK_ENGINEERING_OUTPOST)
 			return access_engine
 
@@ -208,14 +208,14 @@ var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 		num2text(AI_FREQ)    = list(access_synth),
 		num2text(ENT_FREQ)   = list(),
 		num2text(ERT_FREQ)   = list(access_cent_specops),
-		num2text(COMM_FREQ)  = list(access_heads),
-		num2text(ENG_FREQ)   = list(access_engine_equip, access_atmospherics),
-		num2text(MED_FREQ)   = list(access_medical_equip),
-		num2text(MED_I_FREQ) = list(access_medical_equip),
+		num2text(COMM_FREQ)  = list(access_bridge),
+		num2text(ENG_FREQ)   = list(access_engineering),
+		num2text(MED_FREQ)   = list(access_medical),
+		num2text(MED_I_FREQ) = list(access_medical),
 		num2text(SEC_FREQ)   = list(access_security),
 		num2text(SEC_I_FREQ) = list(access_security),
-		num2text(SCI_FREQ)   = list(access_tox,access_robotics,access_xenobiology),
+		num2text(SCI_FREQ)   = list(access_research,access_research,access_research),
 		num2text(SUP_FREQ)   = list(access_cargo),
-		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
+		num2text(SRV_FREQ)   = list(access_janitor, access_service),
 		num2text(EXP_FREQ)   = list(access_explorer)
 	)

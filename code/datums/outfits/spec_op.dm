@@ -53,7 +53,7 @@
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/edfengieholobadge
 	id_desc = "A holographic ID beloning to an EDF marine assigned to the USM Valor."
-	
+
 /decl/hierarchy/outfit/ds_edf_grunt
 	name = "DS Spec Ops - EDF Marine"
 	uniform = /obj/item/clothing/under/rigunder
@@ -215,14 +215,14 @@
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/centcom/ERT
-
+/*
 /decl/hierarchy/outfit/death_command
 	name = "Spec Ops - Death commando"
 
 /decl/hierarchy/outfit/death_command/equip(var/mob/living/carbon/human/H)
 	GLOB.deathsquad.equip(H)
 	return 1
-
+*/
 /decl/hierarchy/outfit/syndicate_command
 	name = "Spec Ops - Syndicate commando"
 

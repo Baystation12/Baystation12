@@ -1,14 +1,12 @@
 // FOR THE PURPOSES OF THE DEAD SPACE 13 ACCESS STUFF, THESE ARE CURRENTLY USED ACCESS VARIABLES AND WHERE THEY SHOULD BE USED:
-// (access_heads) allows access to the bridge.
+// (access_bridge) allows access to the bridge.
 // (access_armory) allows access to the armory and the chief security officer's private quarters.
 // (access_security) allows access to the security offices. when combined with access_mining_station, allows access to PSEC HQ on the colony.
 // (access_maint_tunnels) allows access to all maintenance vents both on the ishimura and the colony.
-// (access_bar) allows access to the bar.
-// (access_kitchen) allows access to the kitchen.
+// (access_service) allows access to the bar and kitchen
 // (access_cargo) allows access to the supply offices.
 // (access_mining) allows access to the shuttle used to transport between ship and colony.
-// (access_mining_station) allows access to doors around the colony. when combined with access_security, allows access to PSEC HQ on the colony.
-// (access_engine) allows access to the engine room and basic tools, such as rock saws, rivet guns and general maintenance tools.
+// (access_engineering) allows access to the engine room and basic tools, such as rock saws, rivet guns and general maintenance tools.
 // (access_emergency_storage) allows access to advanced tools such as plasma cutters, plasma torches (blowtorch), that sort of thing.
 // (access_external_airlocks) allows access to EVA storage rooms and the external airlocks.
 // (access_medical) allows access to the medical wing.
@@ -16,8 +14,8 @@
 // (access_surgery) allows access to the surgery room.
 // (access_research) allows access to the research wing.
 				///////////////////ERT ACCESS BELOW///////////////////
-// (access_ai_upload) allows access to the USM valor and its various rooms, components, computers, etc. a universal EDF access rank.
-// (access_tcomsat) allows access to the Deliverance and the various unitologist cult related access requiring areas.
+// (access_bridge) allows access to the USM valor and its various rooms, components, computers, etc. a universal EDF access rank.
+// (access_engineering) allows access to the Deliverance and the various unitologist cult related access requiring areas.
 // (access_teleporter) allows access to the Kellion and the various components within.
 
 

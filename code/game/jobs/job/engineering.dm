@@ -11,8 +11,7 @@
 	ideal_character_age = 45
 	minimal_player_age = 14
 
-	access = list(access_heads, access_engine, access_maint_tunnels, access_emergency_storage, 
-					access_external_airlocks)
+	access = list(access_bridge, access_engineering, access_maint_tunnels, access_external_airlocks)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/ds13chiefofengines
 
 /datum/job/ds13expendableengineer
@@ -26,7 +25,7 @@
 	ideal_character_age = 30
 	minimal_player_age = 7
 
-	access = list(access_engine, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
+	access = list(access_engineering, access_maint_tunnels, access_external_airlocks)
 	outfit_type = /decl/hierarchy/outfit/job/engineering/ds13expendableengineer
 
 
@@ -52,14 +51,8 @@
 	ideal_character_age = 50
 
 
-	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
-			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
-			            access_heads, access_construction, access_sec_doors,
-			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
-	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
-			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
-			            access_heads, access_construction, access_sec_doors,
-			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
+	access = list()
+	minimal_access = list()
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 
@@ -73,8 +66,8 @@
 	supervisors = "the chief engineer"
 	selection_color = "#5b4d20"
 	minimal_player_age = 7
-	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
-	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 
 /datum/job/atmos
@@ -86,8 +79,8 @@
 	spawn_positions = 0
 	supervisors = "the chief engineer"
 	selection_color = "#5b4d20"
-	
+
 	minimal_player_age = 7
-	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
-	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	access = list()
+	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos

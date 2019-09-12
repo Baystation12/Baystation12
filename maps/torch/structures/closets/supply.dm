@@ -32,7 +32,7 @@
 
 /obj/structure/closet/secure_closet/deckofficer
 	name = "deck officer's locker"
-	req_access = list(access_qm)
+	req_access = list(access_cargo)
 	icon_state = "secureqm1"
 	icon_closed = "secureqm"
 	icon_locked = "secureqm1"

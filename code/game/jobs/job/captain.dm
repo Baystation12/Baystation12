@@ -10,10 +10,10 @@
 	req_admin_notify = 1
 	minimal_player_age = 14
 	ideal_character_age = 60
-	
-	access = list(access_heads, access_security, access_maint_tunnels, access_bar, access_kitchen,
-				access_cargo, access_mining, access_mining_station, access_engine, access_emergency_storage,
-				access_external_airlocks, access_medical, access_morgue, access_surgery, access_research,
+
+	access = list(access_bridge, access_security, access_maint_tunnels, access_service,
+				access_cargo, access_mining, access_engineering,
+				access_external_airlocks, access_medical, access_research,
 				access_armory)
 	outfit_type = /decl/hierarchy/outfit/job/ds13captain
 
@@ -28,8 +28,8 @@
 	req_admin_notify = 1
 	minimal_player_age = 7
 	ideal_character_age = 35
-	
-	access = list(access_heads, access_security, access_maint_tunnels)
+
+	access = list(access_bridge, access_security, access_armory, access_maint_tunnels)
 	outfit_type = /decl/hierarchy/outfit/job/ds13flieutenant
 
 /datum/job/ds13bensign
@@ -41,8 +41,8 @@
 	selection_color = "#2f2f7f"
 	minimal_player_age = 2
 	ideal_character_age = 22
-	
-	access = list(access_heads, access_security, access_maint_tunnels)
+
+	access = list(access_bridge, access_security, access_maint_tunnels)
 	outfit_type = /decl/hierarchy/outfit/job/ds13bensign
 
 
@@ -99,11 +99,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimal_player_age = 14
 	ideal_character_age = 50
 
-	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
-			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
-			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
-			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
-			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
-			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
+	access = list()
 
 	outfit_type = /decl/hierarchy/outfit/job/hop

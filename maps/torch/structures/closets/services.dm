@@ -64,7 +64,7 @@
 /obj/structure/closet/secure_closet/bar_torch
 	name = "bar locker"
 	desc = "It's a storage unit for bar equipment."
-	req_access = list(access_bar)
+	req_access = list(access_service)
 
 /obj/structure/closet/secure_closet/bar_torch/WillContain()
 	return list(

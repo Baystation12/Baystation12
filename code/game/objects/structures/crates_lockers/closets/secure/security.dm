@@ -146,9 +146,43 @@
 		/obj/random/tool
 	)
 
+/obj/structure/closet/secure_closet/brigofficer
+	name = "brig officer's locker"
+	req_access = list(access_armory)
+	icon_state = "wardensecure1"
+	icon_closed = "wardensecure"
+	icon_locked = "wardensecure1"
+	icon_opened = "wardensecureopen"
+	icon_off = "wardensecureoff"
+
+/obj/structure/closet/secure_closet/brigofficer/WillContain()
+	return list(
+		/obj/item/clothing/suit/armor/pcarrier/medium/security,
+		/obj/item/clothing/head/helmet/solgov/security,
+		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/device/radio/headset/headset_sec/alt,
+		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
+		/obj/item/taperoll/police,
+		/obj/item/weapon/storage/belt/holster/security,
+		/obj/item/weapon/reagent_containers/spray/pepper,
+		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/weapon/gun/energy/gun/secure,
+		/obj/item/clothing/accessory/storage/black_vest,
+		/obj/item/weapon/handcuffs,
+		/obj/item/device/hailer,
+		/obj/item/device/flash,
+		/obj/item/device/megaphone,
+		/obj/item/weapon/hand_labeler,
+		/obj/item/device/holowarrant,
+		/obj/item/clothing/gloves/thick,
+		/obj/item/device/flashlight/maglight,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
+	)
+
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
-	req_access = list(access_brig)
+	req_access = list(access_security)
 	icon_state = "sec1"
 	icon_closed = "sec"
 	icon_locked = "sec1"
@@ -201,7 +235,7 @@
 
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"
-	req_access = list(access_forensics_lockers)
+	req_access = list(access_security)
 	icon_state = "cabinetdetective_locked"
 	icon_closed = "cabinetdetective"
 	icon_locked = "cabinetdetective_locked"
@@ -244,7 +278,7 @@
 
 /obj/structure/closet/secure_closet/brig
 	name = "brig locker"
-	req_access = list(access_brig)
+	req_access = list(access_security)
 	anchored = 1
 	var/id = null
 
@@ -256,7 +290,7 @@
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"
-	req_access = list(access_lawyer)
+	req_access = list(access_security)
 
 /obj/structure/closet/secure_closet/courtroom/WillContain()
 	return list(
@@ -284,7 +318,7 @@
 
 /obj/structure/closet/secure_closet/lawyer
 	name = "internal affairs secure closet"
-	req_access = list(access_lawyer)
+	req_access = list(access_security)
 
 /obj/structure/closet/secure_closet/lawyer/WillContain()
 	return list(
@@ -293,4 +327,36 @@
 		/obj/item/device/camera_film = 2,
 		/obj/item/device/taperecorder = 2,
 		/obj/item/weapon/storage/secure/briefcase = 2,
+	)
+
+
+/obj/structure/closet/secure_closet/forensics
+	name = "forensics technician's locker"
+	req_access = list(access_security)
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_off = "secoff"
+
+/obj/structure/closet/secure_closet/forensics/WillContain()
+	return list(
+		/obj/item/clothing/gloves/forensic,
+		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/device/radio/headset/headset_sec/alt,
+		/obj/item/clothing/head/helmet/solgov/security,
+		/obj/item/clothing/suit/armor/pcarrier/medium/security,
+		/obj/item/weapon/gun/energy/gun/small/secure,
+		/obj/item/device/flash,
+		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/weapon/reagent_containers/spray/pepper,
+		/obj/item/taperoll/police,
+		/obj/item/device/tape/random = 3,
+		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
+		/obj/item/device/holowarrant,
+		/obj/item/device/flashlight/maglight,
+		/obj/item/weapon/storage/belt/holster/forensic,
+		/obj/item/weapon/storage/belt/holster/security,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)

@@ -117,11 +117,11 @@
 	stripe_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/hatch/autoname/command
-	req_access = list(access_heads)
+	req_access = list(access_bridge)
 	stripe_color = COLOR_COMMAND_BLUE
 
 /obj/machinery/door/airlock/hatch/autoname/engineering
-	req_access = list(access_engine)
+	req_access = list(access_engineering)
 	stripe_color = COLOR_AMBER
 
 
