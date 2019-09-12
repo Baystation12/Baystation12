@@ -3,11 +3,9 @@
 // (access_armory) allows access to the armory and the chief security officer's private quarters.
 // (access_security) allows access to the security offices. when combined with access_mining_station, allows access to PSEC HQ on the colony.
 // (access_maint_tunnels) allows access to all maintenance vents both on the ishimura and the colony.
-// (access_service) allows access to the bar.
-// (access_service) allows access to the kitchen.
+// (access_service) allows access to the bar and kitchen
 // (access_cargo) allows access to the supply offices.
 // (access_mining) allows access to the shuttle used to transport between ship and colony.
-// (access_mining_station) allows access to doors around the colony. when combined with access_security, allows access to PSEC HQ on the colony.
 // (access_engineering) allows access to the engine room and basic tools, such as rock saws, rivet guns and general maintenance tools.
 // (access_emergency_storage) allows access to advanced tools such as plasma cutters, plasma torches (blowtorch), that sort of thing.
 // (access_external_airlocks) allows access to EVA storage rooms and the external airlocks.
