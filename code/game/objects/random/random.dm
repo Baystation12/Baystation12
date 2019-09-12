@@ -1,7 +1,7 @@
 /obj/random
 	name = "random object"
 	icon = 'icons/misc/landmarks.dmi'
-	alpha = 64 //Or else they cover half of the map
+	alpha = 100 //Or else they cover half of the map
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 	var/min_amount = 1
 	var/max_amount = 1
@@ -156,17 +156,8 @@
 				/obj/item/device/assembly/timer,
 				/obj/item/device/multitool))
 
-/obj/random/toolbox
-	name = "random toolbox"
-	desc = "This is a random toolbox."
-	icon = 'icons/obj/storage.dmi'
-	icon_state = "red"
 
-/obj/random/toolbox/item_to_spawn()
-	return pickweight(list(/obj/item/weapon/storage/toolbox/mechanical = 30,
-				/obj/item/weapon/storage/toolbox/electrical = 20,
-				/obj/item/weapon/storage/toolbox/emergency = 20,
-				/obj/item/weapon/storage/toolbox/syndicate = 1))
+
 
 /obj/random/tech_supply
 	name = "random tech supply"
@@ -627,6 +618,7 @@ obj/random/obstruction //Large objects to block things off in maintenance
 	desc = "This is a random obstruction."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "cultgirder"
+	alpha = 128
 
 obj/random/obstruction/item_to_spawn()
 	return pickweight(list(/obj/structure/barricade,
