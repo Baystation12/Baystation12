@@ -27,6 +27,7 @@
 		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
 			desc += "\nThere are images on it: [E.get_engravings()]"
+	update_icon()
 
 /obj/structure/monolith/on_update_icon()
 	overlays.Cut()
@@ -38,6 +39,11 @@
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += I
 		set_light(0.3, 0.1, 2, l_color = I.color)
+
+	var/turf/simulated/floor/exoplanet/T = get_turf(src)
+	if(istype(T))
+		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
+		overlays += I
 
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")

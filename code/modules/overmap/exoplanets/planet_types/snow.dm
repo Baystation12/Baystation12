@@ -46,6 +46,7 @@
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
+	dirt_color = "#e3e7e8"
 
 /turf/simulated/floor/exoplanet/snow/New()
 	icon_state = pick("snow[rand(1,12)]","snow0")
