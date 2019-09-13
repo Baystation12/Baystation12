@@ -1,4 +1,4 @@
-#define MAX_ACTS_PER_INTERVAL 15
+#define MAX_ACTS_PER_INTERVAL 140
 #define ACT_INTERVAL_TIME 1
 
 GLOBAL_LIST_EMPTY(ckey_to_actions)
