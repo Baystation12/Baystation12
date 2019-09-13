@@ -72,7 +72,6 @@
 	icon = 'icons/turf/jungle.dmi'
 	icon_state = "greygrass"
 	color = "#799c4b"
-	mudpit = 1
 	footstep_type = FOOTSTEP_GRASS
 
 /turf/simulated/floor/exoplanet/grass/Initialize()
