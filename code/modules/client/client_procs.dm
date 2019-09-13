@@ -23,8 +23,6 @@
 /client/Topic(href, href_list, hsrc)
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
 		return
-	if(!user_acted(src))
-		return
 
 	#if defined(TOPIC_DEBUGGING)
 	log_debug("[src]'s Topic: [href] destined for [hsrc].")
@@ -78,6 +76,8 @@
 
 		ticket.close(client_repository.get_lite_client(usr.client))
 
+
+
 	//Logs all hrefs
 	if(config && config.log_hrefs && href_logfile)
 		to_chat(href_logfile, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
@@ -88,19 +88,10 @@
 		if("prefs")		return prefs.process_link(usr,href_list)
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
 
-	if(codex_topic(href, href_list))
-		return
-
-	if(href_list["SDQL_select"])
-		debug_variables(locate(href_list["SDQL_select"]))
-		return
-
 	..()	//redirect to hsrc.Topic()
 
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
 /client/AllowUpload(filename, filelength)
-	if(!user_acted(src))
-		return 0
 	if(filelength > UPLOAD_LIMIT)
 		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
 		return 0

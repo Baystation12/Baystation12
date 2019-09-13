@@ -159,8 +159,6 @@
 			src.last_move = get_dir(A, src.loc)
 
 /client/Move(n, direction)
-	if(!user_acted(src))
-		return
 	if(!mob)
 		return // Moved here to avoid nullrefs below
 	return mob.SelfMove(direction)

@@ -38,11 +38,16 @@
 	dat += jointext(categories, " ")
 	return "<font color = '[CODEX_COLOR_MECHANICS]'>[jointext(dat, null)]</font>"
 
-/client/proc/codex_topic(href, href_list)
+/client/Topic(href, href_list, hsrc)
+	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
+		return
+
 	if(href_list["codex_search"]) //nano throwing errors
 		search_codex()
-		return TRUE
+		return
 
 	if(href_list["codex_index"]) //nano throwing errors
 		list_codex_entries()
-		return TRUE
+		return
+	
+	..()
