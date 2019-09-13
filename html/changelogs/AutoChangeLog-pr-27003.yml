@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - admin: "Some rudimentary spam prevention has been added. Offending users will be kicked and noted, and you will receive notice of this. If you see patterns of abuse, further admin action may be warranted. False positives due to overly aggressive client macros may be possible."
