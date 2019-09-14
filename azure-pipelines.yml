@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'Ubuntu 18.04'
 
 variables:
   imageName: 'registry.baystation12.net/baystation12:latest'
@@ -9,13 +9,14 @@ steps:
   displayName: 'clone custom items'
 
 - task: DownloadSecureFile@1
+  name: libbyond
   inputs:
     secureFile: 'libbyond.so'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'echo "COPY libbyond.so /usr/local/byond/bin/libbyond.so" >> Dockerfile'
+    script: 'cp $(libbyond.secureFilePath) . && echo "COPY libbyond.so /usr/local/byond/bin/libbyond.so" >> Dockerfile'
 
 - task: Docker@0
   displayName: 'build'
