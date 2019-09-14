@@ -24,17 +24,25 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 
 	flash_pain(min(round(2*power)+55, 255))
 
+	var/force_emote
 	// Anti message spam checks
 	if(force || (message != last_pain_message) || (world.time >= next_pain_time))
 		last_pain_message = message
 		if(power >= 70)
 			to_chat(src, "<span class='danger'><font size=3>[message]</font></span>")
+			force_emote = pick("scream", "whimper", "shiver", "moan", "cry")
 		else if(power >= 40)
 			to_chat(src, "<span class='danger'><font size=2>[message]</font></span>")
+			force_emote = pick("groan", "grunt", "shiver", "moan")
 		else if(power >= 10)
+			force_emote = pick("groan", "grunt")
 			to_chat(src, "<span class='danger'>[message]</span>")
 		else
 			to_chat(src, "<span class='warning'>[message]</span>")
+		if(force_emote && prob(power))
+			var/decl/emote/use_emote = usable_emotes[force_emote]
+			if(!(use_emote.message_type == AUDIBLE_MESSAGE && silent))
+				emote(force_emote)
 	next_pain_time = world.time + (100-power)
 
 mob/living/carbon/human/proc/handle_pain()
