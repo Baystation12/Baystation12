@@ -8,16 +8,6 @@ steps:
 - script: git clone https://github.com/Baystation12/custom-items
   displayName: 'clone custom items'
 
-- task: DownloadSecureFile@1
-  name: libbyond
-  inputs:
-    secureFile: 'libbyond.so'
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'cp $(libbyond.secureFilePath) . && echo "COPY libbyond.so /usr/local/byond/bin/libbyond.so" >> Dockerfile'
-
 - task: Docker@0
   displayName: 'build'
   inputs:
