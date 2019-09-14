@@ -18,15 +18,17 @@
 	<b>Special Features:</b>
 	<i>Micro-Capsule</i>- Can be loaded with any sort of chemical agent via the common syringe and can hold 50 units.<BR>
 	Can only be loaded while still in its original case.<BR>
-	<b>Integrity:</b> Implant will last so long as the subject is alive. However, if the subject suffers from malnutrition,<BR>
-	the implant may become unstable and either pre-maturely inject the subject or simply break."}
+	<b>Integrity:</b> Implant will last so long as the subject is alive. However, if the subject suffers from prolonged malnutrition,<BR>
+	nine or more days without nutrients, the implant may become unstable and either pre-maturely inject the subject or simply break."}
 
 /obj/item/weapon/implant/chem/New()
 	..()
 	create_reagents(50)
 
 /obj/item/weapon/implant/chem/activate(var/amount)
-	if((!amount) || (!iscarbon(imp_in)))	return 0
+	if(malfunction || (!iscarbon(imp_in)))	return 0
+	if(!amount)
+		amount = rand(1,25)
 	var/mob/living/carbon/R = imp_in
 	reagents.trans_to_mob(R, amount, CHEM_BLOOD)
 	to_chat(R, "<span class='notice'>You hear a faint *beep*.</span>")
@@ -41,22 +43,6 @@
 				to_chat(user, "<span class='notice'>You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units.</span>")
 	else
 		..()
-
-/obj/item/weapon/implant/chem/emp_act(severity)
-	if (malfunction)
-		return
-	malfunction = MALFUNCTION_TEMPORARY
-
-	switch(severity)
-		if(1)
-			if(prob(60))
-				activate(20)
-		if(2)
-			if(prob(30))
-				activate(5)
-
-	spawn(20)
-		malfunction = 0
 
 /obj/item/weapon/implantcase/chem
 	name = "glass case - 'chem'"
