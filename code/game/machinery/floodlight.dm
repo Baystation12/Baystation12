@@ -19,7 +19,7 @@
 	var/l_outer_range = 4.5 //outer range of light when on, can be negative
 
 /obj/machinery/floodlight/on_update_icon()
-	icon_state = "flood[panel_open ? "o" : ""][panel_open && get_cell() ? "b" : ""]0[use_power]"
+	icon_state = "flood[panel_open ? "o" : ""][panel_open && get_cell() ? "b" : ""]0[use_power == POWER_USE_ACTIVE]"
 
 /obj/machinery/floodlight/power_change()
 	. = ..()
