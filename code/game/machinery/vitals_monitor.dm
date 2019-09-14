@@ -12,6 +12,7 @@
 	uncreated_component_parts = null
 
 	var/mob/living/carbon/human/victim
+	var/beep = TRUE
 
 /obj/machinery/vitals_monitor/Destroy()
 	victim = null
@@ -55,6 +56,8 @@
 		victim = null
 		update_use_power(POWER_USE_IDLE)
 	update_icon()
+	if(beep && victim && victim.pulse())
+		playsound(src, 'sound/machines/quiet_beep.ogg')
 	
 /obj/machinery/vitals_monitor/MouseDrop(over_object, src_location, over_location)
 	if(!CanMouseDrop(over_object))
@@ -120,3 +123,16 @@
 	additional_spawn_components = list(
 		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1
 	)
+
+/obj/machinery/vitals_monitor/verb/toggle_beep()
+	set name = "Toggle Monitor Beeping"
+	set category = "Object"
+	set src in view(1)
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	
+	if(CanPhysicallyInteract(user))
+		beep = !beep
+		to_chat(user, SPAN_NOTICE("You turn the sound on \the [src] [beep ? "on" : "off"]."))
