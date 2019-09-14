@@ -1,5 +1,7 @@
 #!/bin/sh
 
+[ -f libbyond.so ] && cp libbyond.so /usr/local/byond/bin/libbyond.so
+
 mkdir /byond
 chown $RUNAS:$RUNAS /byond /bs12 baystation12.rsc
 
