@@ -1,4 +1,0 @@
-author: "WezYo"
-delete-after: True
-changes: 
-  - bugfix: "Turning on a floodlight will no longer make it invisible"
