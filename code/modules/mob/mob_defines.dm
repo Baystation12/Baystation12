@@ -34,7 +34,7 @@
 	var/computer_id = null
 	var/last_ckey
 
-	var/stat = CONSCIOUS //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null

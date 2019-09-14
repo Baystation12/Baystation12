@@ -13,11 +13,10 @@
 	delicate = 1
 
 /decl/surgery_step/limb/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(!affected)
-			var/list/organ_data = target.species.has_limbs["[target_zone]"]
-			return !isnull(organ_data)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(!affected)
+		var/list/organ_data = target.species.has_limbs["[target_zone]"]
+		return !isnull(organ_data)
 
 //////////////////////////////////////////////////////////////////
 //	 limb attachment surgery step
@@ -44,7 +43,8 @@
 		. = TRUE
 
 /decl/surgery_step/limb/attach/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
+	. = ..()
+	if(.)
 		var/obj/item/organ/external/E = tool
 		var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
 		. = (P && !P.is_stump() && !(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E)))
@@ -86,9 +86,8 @@
 	max_duration = 120
 
 /decl/surgery_step/limb/connect/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
-		var/obj/item/organ/external/E = target.get_organ(target_zone)
-		return E && !E.is_stump() && (E.status & ORGAN_CUT_AWAY)
+	var/obj/item/organ/external/E = target.get_organ(target_zone)
+	return E && !E.is_stump() && (E.status & ORGAN_CUT_AWAY)
 
 /decl/surgery_step/limb/connect/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = target.get_organ(target_zone)
@@ -125,9 +124,9 @@
 
 /decl/surgery_step/limb/mechanize/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	if(target.isSynthetic())
-		return SURGERY_SKILLS_ROBOTIC
+		return SURGERY_SKILLS_ROBOTIC 
 	else
-		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT 
 
 /decl/surgery_step/limb/mechanize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())

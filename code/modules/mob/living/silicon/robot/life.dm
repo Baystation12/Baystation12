@@ -135,7 +135,7 @@
 		src.druggy = max(0, src.druggy)
 
 	//update the state of modules and components here
-	if (src.stat != CONSCIOUS)
+	if (src.stat != 0)
 		uneq_all()
 
 	if(silicon_radio)

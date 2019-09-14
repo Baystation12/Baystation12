@@ -155,7 +155,7 @@ var/obj/screen/robot_inventory
 
 
 /datum/hud/proc/update_robot_modules_display()
-	if(!isrobot(mymob) || !mymob.client)
+	if(!isrobot(mymob))
 		return
 
 	var/mob/living/silicon/robot/r = mymob
