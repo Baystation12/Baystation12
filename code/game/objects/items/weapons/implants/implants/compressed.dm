@@ -7,20 +7,6 @@
 	var/activation_emote
 	var/obj/item/scanned
 
-
-/obj/item/weapon/implant/compressed/get_data()
-	var/dat = {"
-	<b>Implant Specifications:</b><BR>
-	<b>Name:</b> [GLOB.using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
-	<b>Life:</b> Activates upon death.<BR>
-	<b>Important Notes:</b> Alerts crew to crewmember death.<BR>
-	<HR>
-	<b>Implant Details:</b><BR>
-	<b>Function:</b> Contains a compact radio signaler that triggers when the host's lifesigns cease.<BR>
-	<b>Special Features:</b> Alerts crew to crewmember death.<BR>
-<b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
-	return dat
-
 /obj/item/weapon/implant/compressed/trigger(emote, mob/source)
 	if (src.scanned == null)
 		return 0
@@ -30,6 +16,7 @@
 		activate()
 
 /obj/item/weapon/implant/compressed/activate()
+	if(malfunction) return
 	var/turf/T = get_turf(src)
 	if (imp_in)
 		imp_in.put_in_hands(scanned)
