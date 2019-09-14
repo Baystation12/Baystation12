@@ -66,7 +66,7 @@
 
 /datum/gear/suit/labcoat_ec_cso
 	display_name = "labcoat, chief science officer, Expeditionary Corps"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/cso
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd/ec
 	allowed_roles = list(/datum/job/rd)
 
 /datum/gear/suit/wintercoat_dais
