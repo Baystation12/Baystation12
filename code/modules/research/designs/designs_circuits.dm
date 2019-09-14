@@ -760,3 +760,10 @@
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/sublimator/sauna
 	sort_string = "XAAAC"
+
+/datum/design/circuit/vitals
+	name = "vitals monitor"
+	id = "vitals"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/vitals_monitor
+	sort_string = "XAAAD"

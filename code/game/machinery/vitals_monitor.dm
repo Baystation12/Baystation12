@@ -10,6 +10,7 @@
 	active_power_usage = 100
 	stat_immune = NOINPUT
 	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/mob/living/carbon/human/victim
 	var/beep = TRUE
@@ -115,15 +116,6 @@
 	else
 		overlays += image(icon, icon_state = "breathing_warning")
 
-/obj/item/weapon/stock_parts/circuitboard/vitals_monitor
-	name = "circuit board (Vitals Monitor)"
-	build_path = /obj/machinery/vitals_monitor
-	req_components = list(
-		/obj/item/weapon/stock_parts/console_screen = 1)
-	additional_spawn_components = list(
-		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1
-	)
-
 /obj/machinery/vitals_monitor/verb/toggle_beep()
 	set name = "Toggle Monitor Beeping"
 	set category = "Object"
@@ -136,3 +128,13 @@
 	if(CanPhysicallyInteract(user))
 		beep = !beep
 		to_chat(user, SPAN_NOTICE("You turn the sound on \the [src] [beep ? "on" : "off"]."))
+		
+/obj/item/weapon/stock_parts/circuitboard/vitals_monitor
+	name = "circuit board (Vitals Monitor)"
+	build_path = /obj/machinery/vitals_monitor
+	board_type = "machine"
+	req_components = list(
+		/obj/item/weapon/stock_parts/console_screen = 1)
+	additional_spawn_components = list(
+		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1
+	)
