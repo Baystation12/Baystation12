@@ -626,6 +626,8 @@
 		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(channels)]'>Channel Bans</th></tr><tr align='center'>"
 		for(var/channel_type in channels)
 			var/decl/communication_channel/channel = channels[channel_type]
+			if(channel.flags & COMMUNICATION_CANNOT_BAN)
+				continue
 			if(jobban_isbanned(M, channel.name))
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[channel.name];jobban4=\ref[M]'><font color=red>[channel.name]</font></a></td>"
 			else

@@ -259,7 +259,6 @@
 	LAZYREMOVE(user.additional_vision_handlers, src)
 	if(user.client)
 		user.client.screen -= hud_elements
-		user.client.eye = user
 	if(user in pilots)
 		a_intent = I_HURT
 		LAZYREMOVE(pilots, user)

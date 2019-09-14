@@ -1,7 +1,6 @@
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
-	virtual_mob = null
 
 /mob/living/carbon/human/dummy/mannequin/Initialize()
 	. = ..()

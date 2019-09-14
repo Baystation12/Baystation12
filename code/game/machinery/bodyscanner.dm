@@ -40,8 +40,6 @@
 	if(!user_can_move_target_inside(usr,usr))
 		return
 	usr.pulling = null
-	usr.client.perspective = EYE_PERSPECTIVE
-	usr.client.eye = src
 
 /obj/machinery/bodyscanner/proc/drop_contents()
 	for(var/obj/O in (contents - component_parts))
@@ -51,9 +49,6 @@
 	if ((!( src.occupant ) || src.locked))
 		return
 	drop_contents()
-	if (src.occupant.client)
-		src.occupant.client.eye = src.occupant.client.mob
-		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_use_power(POWER_USE_IDLE)

@@ -95,9 +95,6 @@
 			return
 		if(M == occupant) // so that the guy inside can't eject himself -Agouri
 			return
-		if (src.occupant.client)
-			src.occupant.client.eye = src.occupant.client.mob
-			src.occupant.client.perspective = MOB_PERSPECTIVE
 		occupant.dropInto(loc)
 		if(injecting)
 			implant(src.occupant)
@@ -114,9 +111,6 @@
 		if(src.occupant)
 			to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
 			return
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
 		M.stop_pulling()
 		M.forceMove(src)
 		src.occupant = M

@@ -114,10 +114,6 @@
 /obj/structure/disposalholder/proc/merge(var/obj/structure/disposalholder/other)
 	for(var/atom/movable/AM in other)
 		AM.forceMove(src)		// move everything in other holder to this one
-		if(ismob(AM))
-			var/mob/M = AM
-			if(M.client)	// if a client mob, update eye to follow this holder
-				M.client.eye = src
 	qdel(other)
 
 /obj/structure/disposalholder/proc/settag(var/new_tag)

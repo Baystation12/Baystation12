@@ -169,9 +169,6 @@
 		if(CLOSET_CHECK_TOO_BIG(mob_size))
 			break
 		. += mob_size
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
 		M.forceMove(src)
 
 /obj/structure/closet/proc/store_structures(var/stored_units)

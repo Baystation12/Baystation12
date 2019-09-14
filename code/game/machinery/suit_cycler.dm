@@ -102,9 +102,6 @@
 		if(do_after(user, 20, src))
 			if(!G || !G.affecting) return
 			var/mob/M = G.affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
 			M.forceMove(src)
 			occupant = M
 

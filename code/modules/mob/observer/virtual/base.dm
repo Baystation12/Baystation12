@@ -1,4 +1,4 @@
-var/list/all_virtual_listeners = list()
+GLOBAL_LIST_EMPTY(all_virtual_mobs)
 
 /mob/observer/virtual
 	icon = 'icons/mob/virtual.dmi'
@@ -23,17 +23,17 @@ var/list/all_virtual_listeners = list()
 	src.host = host
 	GLOB.moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
 
-	all_virtual_listeners += src
+	GLOB.all_virtual_mobs += src
 
 	update_icon()
-   
+
 /mob/observer/virtual/Initialize()
 	. = ..()
 	STOP_PROCESSING(SSmobs, src)
 
 /mob/observer/virtual/Destroy()
 	GLOB.moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
-	all_virtual_listeners -= src
+	GLOB.all_virtual_mobs -= src
 	host = null
 	return ..()
 
@@ -53,11 +53,11 @@ var/list/all_virtual_listeners = list()
 * Virtual Mob Creation *
 ***********************/
 /atom/movable
-	var/mob/observer/virtual/virtual_mob
+	var/mob/observer/virtual/virtual_mob // A mob may have multiple virtual mobs but only one main one
 
 /atom/movable/Initialize()
 	. = ..()
-	if(shall_have_virtual_mob())
+	if(ispath(virtual_mob))
 		virtual_mob = new virtual_mob(get_turf(src), src)
 
 /atom/movable/Destroy()
@@ -66,5 +66,5 @@ var/list/all_virtual_listeners = list()
 	virtual_mob = null
 	return ..()
 
-/atom/movable/proc/shall_have_virtual_mob()
-	return ispath(initial(virtual_mob))
+/atom/movable/proc/VirtualMobs()
+	return list(virtual_mob)

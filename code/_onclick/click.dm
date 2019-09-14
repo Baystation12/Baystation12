@@ -237,9 +237,8 @@
 	A.ShiftClick(src)
 	return
 /atom/proc/ShiftClick(var/mob/user)
-	if(user.client && user.client.eye == user)
+	if(user.client && user.client.eye == user.virtual_mob)
 		user.examinate(src)
-	return
 
 /*
 	Ctrl click

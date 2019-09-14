@@ -286,12 +286,6 @@
 	C.plane = plane
 	overlays += C
 
-	if(ismob(C))
-		var/mob/M = C
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
-
 	busy = 0
 
 /mob/living/bot/mulebot/proc/unload(var/dirn = 0)
@@ -304,11 +298,6 @@
 	load.forceMove(loc)
 	load.pixel_y -= 9
 	load.reset_plane_and_layer()
-	if(ismob(load))
-		var/mob/M = load
-		if(M.client)
-			M.client.perspective = MOB_PERSPECTIVE
-			M.client.eye = src
 
 	if(dirn)
 		step(load, dirn)
@@ -321,9 +310,4 @@
 		AM.forceMove(loc)
 		AM.reset_plane_and_layer()
 		AM.pixel_y = initial(AM.pixel_y)
-		if(ismob(AM))
-			var/mob/M = AM
-			if(M.client)
-				M.client.perspective = MOB_PERSPECTIVE
-				M.client.eye = src
 	busy = 0

@@ -73,9 +73,6 @@
 		occupant.dropInto(loc)
 		playsound(loc, 'sound/effects/slosh.ogg', 50, 1)
 		if(occupant.loc != src)
-			if(occupant.client)
-				occupant.client.eye = occupant.client.mob
-				occupant.client.perspective = MOB_PERSPECTIVE
 			occupant.regenerate_icons()
 			occupant = null
 			STOP_PROCESSING(SSobj, src)

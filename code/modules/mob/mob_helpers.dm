@@ -323,11 +323,14 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		if(!M.client)
 			return
 
-		var/atom/oldeye=M.client.eye
+		var/atom/oldeye = M.client.eye
+		var/atom/oldperspective = M.client.perspective
+		
 		var/aiEyeFlag = 0
 		if(istype(oldeye, /mob/observer/eye/aiEye))
 			aiEyeFlag = 1
 
+		M.client.perspective = MOB_PERSPECTIVE
 		var/x
 		for(x=0; x<duration, x++)
 			if(aiEyeFlag)
@@ -338,7 +341,8 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			if(!M.client)
 				return
 
-		M.client.eye=oldeye
+		M.client.eye = oldeye
+		M.client.perspective = oldperspective
 		M.shakecamera = 0
 
 

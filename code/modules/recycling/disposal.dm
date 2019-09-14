@@ -114,9 +114,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			var/mob/GM = G.affecting
 			usr.visible_message(SPAN_DANGER("\The [usr] starts putting [GM.name] into the disposal."))
 			if(do_after(usr, 20, src))
-				if (GM.client)
-					GM.client.perspective = EYE_PERSPECTIVE
-					GM.client.eye = src
 				GM.forceMove(src)
 				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in the [src] by \the [user]."))
 				qdel(G)
@@ -197,9 +194,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 							 "<span class='notice'>You stuff [AM] into [src].</span>")
 		if(ismob(M))
 			admin_attack_log(user, M, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
 
 	AM.forceMove(src)
 	update_icon()
@@ -215,10 +209,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // leave the disposal
 /obj/machinery/disposal/proc/go_out(mob/user)
-
-	if (user.client)
-		user.client.eye = user.client.mob
-		user.client.perspective = MOB_PERSPECTIVE
 	user.forceMove(src.loc)
 	update_icon()
 	return
@@ -632,14 +622,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 // by default does nothing, override for special behaviour
 
 /atom/movable/proc/pipe_eject(var/direction)
-	return
-
-// check if mob has client, if so restore client view on eject
-/mob/pipe_eject(var/direction)
-	if (src.client)
-		src.client.perspective = MOB_PERSPECTIVE
-		src.client.eye = src
-
 	return
 
 /obj/effect/decal/cleanable/blood/gibs/pipe_eject(var/direction)

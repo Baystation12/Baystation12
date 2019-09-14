@@ -137,9 +137,6 @@
 		visible_message(SPAN_WARNING("[user] starts putting [G.affecting.name] into the Suit Storage Unit."))
 		if(do_after(user, 20, src) && G && G.affecting)
 			var/mob/M = G.affecting
-			if(M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
 			M.forceMove(src)
 			occupant = M
 			isopen = FALSE

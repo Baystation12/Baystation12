@@ -266,11 +266,6 @@
 /obj/machinery/atmospherics/unary/cryo_cell/proc/go_out()
 	if(!( occupant ))
 		return
-	//for(var/obj/O in src)
-	//	O.loc = loc
-	if (occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.forceMove(get_step(loc, SOUTH))
 	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) 
 		occupant.bodytemperature = 261									  
@@ -297,9 +292,6 @@
 	if(!node)
 		to_chat(usr, "<span class='warning'>The cell is not correctly connected to its pipe network!</span>")
 		return
-	if (M.client)
-		M.client.perspective = EYE_PERSPECTIVE
-		M.client.eye = src
 	M.stop_pulling()
 	M.forceMove(src)
 	M.ExtinguishMob()
