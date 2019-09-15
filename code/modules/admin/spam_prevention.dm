@@ -1,6 +1,3 @@
-#define MAX_ACTS_PER_INTERVAL 140
-#define ACT_INTERVAL_TIME 1
-
 GLOBAL_LIST_EMPTY(ckey_to_actions)
 GLOBAL_LIST_EMPTY(ckey_to_act_time)
 GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant record-keeping.
@@ -10,12 +7,14 @@ GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant reco
 	var/ckey = C && C.ckey
 	if(!ckey)
 		return FALSE
+	if (config.do_not_prevent_spam)
+		return TRUE
 	var/time = world.time
-	if(GLOB.ckey_to_act_time[ckey] + ACT_INTERVAL_TIME < time)
+	if(GLOB.ckey_to_act_time[ckey] + config.act_interval < time)
 		GLOB.ckey_to_act_time[ckey] = time
 		GLOB.ckey_to_actions[ckey] = 1
 		return TRUE
-	if(GLOB.ckey_to_actions[ckey] <= MAX_ACTS_PER_INTERVAL)
+	if(GLOB.ckey_to_actions[ckey] <= config.max_acts_per_interval)
 		GLOB.ckey_to_actions[ckey]++
 		return TRUE
 
@@ -44,6 +43,3 @@ GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant reco
 	if(!user_acted(src))
 		return
 	return ..()
-
-#undef MAX_ACTS_PER_INTERVAL
-#undef ACT_INTERVAL_TIME
