@@ -719,7 +719,7 @@
 	name = "Gentle 2"
 	icon_state = "hair_gentle2"
 	flags = HAIR_TIEABLE
-	
+
 /datum/sprite_accessory/hair/gentle2long
 	name = "Gentle 2 Long"
 	icon_state = "hair_gentle2long"
@@ -728,6 +728,32 @@
 /datum/sprite_accessory/hair/trimrsidecut
 	name = "Trimmed Right Sidecut"
 	icon_state = "hair_rightside_trim"
+	flags = HAIR_TIEABLE
+
+//Hairs ported from eris
+/datum/sprite_accessory/hair/ladylike
+	name = "Ladylike"
+	icon_state = "hair_ladylike"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/ladylike2
+	name = "Ladylike Alt"
+	icon_state = "hair_ladylike2"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/eighties
+	name = "Eighties"
+	icon_state = "hair_80s"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/modern
+	name = "Modern"
+	icon_state = "hair_modern"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/nia
+	name = "Nia"
+	icon_state = "hair_nia"
 	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/booster

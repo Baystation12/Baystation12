@@ -8,7 +8,7 @@ var/list/gamemode_cache = list()
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
 	var/log_admin = 0					// log admin actions
-	var/log_debug = 1					// log debug output
+	var/log_debug = TRUE					// log debug output
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
 	var/log_whisper = 0					// log client whisper
@@ -24,9 +24,9 @@ var/list/gamemode_cache = list()
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/ert_admin_call_only = 0
 	var/allow_vote_mode = 0				// allow votes to change mode
-	var/allow_admin_jump = 1			// allows admin jumping
-	var/allow_admin_spawning = 1		// allows admin item spawning
-	var/allow_admin_rev = 1				// allows admin revives
+	var/allow_admin_jump = TRUE			// allows admin jumping
+	var/allow_admin_spawning = TRUE		// allows admin item spawning
+	var/allow_admin_rev = TRUE				// allows admin revives
 	var/vote_delay = 6000				// minimum time between voting sessions (deciseconds, 10 minute default)
 	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
 	var/vote_autotransfer_initial = 108000 // Length of time before the first autotransfer vote is called
@@ -36,7 +36,7 @@ var/list/gamemode_cache = list()
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 	var/vote_no_dead_crew_transfer = 0	// dead people can't vote on crew transfer votes
 //	var/enable_authentication = 0		// goon authentication
-	var/del_new_on_log = 1				// del's new players if they log before they spawn in
+	var/del_new_on_log = TRUE				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/objectives_disabled = 0 			//if objectives are disabled or not
@@ -55,10 +55,10 @@ var/list/gamemode_cache = list()
 	var/list/probabilities = list()		// relative probability of each mode
 	var/humans_need_surnames = 0
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
-	var/allow_ai = 1					// allow ai job
+	var/allow_ai = TRUE					// allow ai job
 	var/hostedby = null
 	var/respawn_delay = 30
-	var/guest_jobban = 1
+	var/guest_jobban = TRUE
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/mods_can_tempban = 0
@@ -68,14 +68,14 @@ var/list/gamemode_cache = list()
 	var/load_jobs_from_txt = 0
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
-	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
+	var/cult_ghostwriter = TRUE               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
 	var/character_slots = 10				// The number of available character slots
 	var/loadout_slots = 3					// The number of loadout slots per character
 
 	var/max_maint_drones = 5				//This many drones can spawn,
-	var/allow_drone_spawn = 1				//assuming the admin allow them to.
+	var/allow_drone_spawn = TRUE				//assuming the admin allow them to.
 	var/drone_build_time = 1200				//A drone will become available every X ticks since last drone spawn. Default is 2 minutes.
 
 	var/disable_player_mice = 0
@@ -86,7 +86,7 @@ var/list/gamemode_cache = list()
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 	var/allow_extra_antags = 0
-	var/guests_allowed = 1
+	var/guests_allowed = TRUE
 	var/debugparanoid = 0
 
 	var/serverurl
@@ -111,16 +111,16 @@ var/list/gamemode_cache = list()
 	//so that it's similar to PAIN. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
 	var/organ_damage_spillover_multiplier = 0.5
 
-	var/bones_can_break = 1
-	var/limbs_can_break = 1
+	var/bones_can_break = TRUE
+	var/limbs_can_break = TRUE
 
-	var/revival_pod_plants = 1
-	var/revival_cloning = 1
+	var/revival_pod_plants = TRUE
+	var/revival_cloning = TRUE
 	var/revival_brain_life = -1
 
 	var/use_loyalty_implants = 0
 
-	var/welder_vision = 1
+	var/welder_vision = TRUE
 	var/generate_map = 0
 	var/no_click_cooldown = 0
 
@@ -131,7 +131,7 @@ var/list/gamemode_cache = list()
 	var/creep_delay = 6
 	var/minimum_sprint_cost = 0.8
 	var/skill_sprint_cost_range = 0.8
-	var/minimum_stamina_recovery = 1
+	var/minimum_stamina_recovery = TRUE
 	var/maximum_stamina_recovery = 3
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
@@ -165,7 +165,7 @@ var/list/gamemode_cache = list()
 
 	var/login_export_addr = null
 
-	var/enter_allowed = 1
+	var/enter_allowed = TRUE
 	var/player_limit = 0
 
 	var/use_irc_bot = 0
@@ -189,12 +189,12 @@ var/list/gamemode_cache = list()
 	var/aliens_allowed = 0
 	var/alien_eggs_allowed = 0
 	var/ninjas_allowed = 0
-	var/abandon_allowed = 1
-	var/ooc_allowed = 1
-	var/looc_allowed = 1
-	var/dooc_allowed = 1
-	var/dsay_allowed = 1
-	var/aooc_allowed = 1
+	var/abandon_allowed = TRUE
+	var/ooc_allowed = TRUE
+	var/looc_allowed = TRUE
+	var/dooc_allowed = TRUE
+	var/dsay_allowed = TRUE
+	var/aooc_allowed = TRUE
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
@@ -211,7 +211,7 @@ var/list/gamemode_cache = list()
 	var/auto_map_vote = 0 // Automatically call a map vote at end of round and switch to the selected map
 	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
-	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
+	var/radiation_decay_rate = TRUE //How much radiation is reduced by each tick
 	var/radiation_resistance_multiplier = 1.25
 	var/radiation_material_resistance_divisor = 2 //A turf's possible radiation resistance is divided by this number, to get the real value.
 	var/radiation_lower_limit = 0.15 //If the radiation level for a turf would be below this, ignore it.
@@ -228,6 +228,13 @@ var/list/gamemode_cache = list()
 	var/allow_ic_printing = TRUE //Whether players should be allowed to print IC circuits from scripts.
 
 	var/allow_unsafe_narrates = FALSE //Whether admins can use unsanitized narration; when true, allows HTML etc.
+
+//Debugging Config Options
+//-------------------------
+	var/auto_start = FALSE
+	var/auto_observe = FALSE
+	var/auto_bst = FALSE
+	var/no_overmap = FALSE
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -248,7 +255,6 @@ var/list/gamemode_cache = list()
 
 /datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
 	var/list/Lines = file2list(filename)
-
 	for(var/t in Lines)
 		if(!t)	continue
 
@@ -273,110 +279,128 @@ var/list/gamemode_cache = list()
 
 		if(type == "config")
 			switch (name)
+				//Debug configs
+				//-------------------------
+				if ("auto_start")
+					config.auto_start = TRUE
+
+				if ("auto_observe")
+					config.auto_observe = TRUE
+
+				if ("auto_bst")
+					config.auto_bst = TRUE
+
+				if ("no_overmap")
+					config.no_overmap = TRUE
+					//Mapping subsystem loads before config, so we'll set this here
+					if (GLOB.using_map)
+						GLOB.using_map.use_overmap = FALSE
+
+				//-------------------------
 				if ("resource_urls")
 					config.resource_urls = splittext(value, " ")
 
 				if ("admin_legacy_system")
-					config.admin_legacy_system = 1
+					config.admin_legacy_system = TRUE
 
 				if ("ban_legacy_system")
-					config.ban_legacy_system = 1
+					config.ban_legacy_system = TRUE
 
 				if ("use_age_restriction_for_jobs")
-					config.use_age_restriction_for_jobs = 1
+					config.use_age_restriction_for_jobs = TRUE
 
 				if ("use_age_restriction_for_antags")
-					config.use_age_restriction_for_antags = 1
+					config.use_age_restriction_for_antags = TRUE
 
 				if ("jobs_have_minimal_access")
-					config.jobs_have_minimal_access = 1
+					config.jobs_have_minimal_access = TRUE
 
 				if ("use_recursive_explosions")
-					use_recursive_explosions = 1
+					use_recursive_explosions = TRUE
 
 				if ("log_ooc")
-					config.log_ooc = 1
+					config.log_ooc = TRUE
 
 				if ("log_access")
-					config.log_access = 1
+					config.log_access = TRUE
 
 				if ("log_say")
-					config.log_say = 1
+					config.log_say = TRUE
 
 				if ("debug_paranoid")
-					config.debugparanoid = 1
+					config.debugparanoid = TRUE
 
 				if ("log_admin")
-					config.log_admin = 1
+					config.log_admin = TRUE
 
 				if ("log_debug")
 					config.log_debug = text2num(value)
 
 				if ("log_game")
-					config.log_game = 1
+					config.log_game = TRUE
 
 				if ("log_vote")
-					config.log_vote = 1
+					config.log_vote = TRUE
 
 				if ("log_whisper")
-					config.log_whisper = 1
+					config.log_whisper = TRUE
 
 				if ("log_attack")
-					config.log_attack = 1
+					config.log_attack = TRUE
 
 				if ("log_emote")
-					config.log_emote = 1
+					config.log_emote = TRUE
 
 				if ("log_adminchat")
-					config.log_adminchat = 1
+					config.log_adminchat = TRUE
 
 				if ("log_adminwarn")
-					config.log_adminwarn = 1
+					config.log_adminwarn = TRUE
 
 				if ("log_pda")
-					config.log_pda = 1
+					config.log_pda = TRUE
 
 				if ("log_world_output")
-					config.log_world_output = 1
+					config.log_world_output = TRUE
 
 				if ("log_hrefs")
-					config.log_hrefs = 1
+					config.log_hrefs = TRUE
 
 				if ("log_runtime")
-					config.log_runtime = 1
+					config.log_runtime = TRUE
 
 				if ("generate_asteroid")
-					config.generate_map = 1
+					config.generate_map = TRUE
 
 				if ("no_click_cooldown")
-					config.no_click_cooldown = 1
+					config.no_click_cooldown = TRUE
 
 				if("allow_admin_ooccolor")
-					config.allow_admin_ooccolor = 1
+					config.allow_admin_ooccolor = TRUE
 
 				if ("allow_vote_restart")
-					config.allow_vote_restart = 1
+					config.allow_vote_restart = TRUE
 
 				if ("allow_vote_mode")
-					config.allow_vote_mode = 1
+					config.allow_vote_mode = TRUE
 
 				if ("allow_admin_jump")
-					config.allow_admin_jump = 1
+					config.allow_admin_jump = TRUE
 
 				if("allow_admin_rev")
-					config.allow_admin_rev = 1
+					config.allow_admin_rev = TRUE
 
 				if ("allow_admin_spawning")
-					config.allow_admin_spawning = 1
+					config.allow_admin_spawning = TRUE
 
 				if ("no_dead_vote")
-					config.vote_no_dead = 1
+					config.vote_no_dead = TRUE
 
 				if ("no_dead_vote_crew_transfer")
-					config.vote_no_dead_crew_transfer = 1
+					config.vote_no_dead_crew_transfer = TRUE
 
 				if ("default_no_vote")
-					config.vote_no_default = 1
+					config.vote_no_default = TRUE
 
 				if ("vote_delay")
 					config.vote_delay = text2num(value)
@@ -394,13 +418,13 @@ var/list/gamemode_cache = list()
 					config.vote_autogamemode_timeleft = text2num(value)
 
 				if("ert_admin_only")
-					config.ert_admin_call_only = 1
+					config.ert_admin_call_only = TRUE
 
 				if ("allow_ai")
-					config.allow_ai = 1
+					config.allow_ai = TRUE
 
 //				if ("authentication")
-//					config.enable_authentication = 1
+//					config.enable_authentication = TRUE
 
 				if ("respawn_delay")
 					config.respawn_delay = text2num(value)
@@ -410,7 +434,7 @@ var/list/gamemode_cache = list()
 					config.server_name = value
 
 				if ("serversuffix")
-					config.server_suffix = 1
+					config.server_suffix = TRUE
 
 				if ("hostedby")
 					config.hostedby = value
@@ -440,7 +464,7 @@ var/list/gamemode_cache = list()
 					config.ghosts_can_possess_animals = value
 
 				if ("guest_jobban")
-					config.guest_jobban = 1
+					config.guest_jobban = TRUE
 
 				if ("guest_ban")
 					config.guests_allowed = 0
@@ -467,25 +491,25 @@ var/list/gamemode_cache = list()
 					config.abandon_allowed = 0
 
 				if ("usewhitelist")
-					config.usewhitelist = 1
+					config.usewhitelist = TRUE
 
 				if ("feature_object_spell_system")
-					config.feature_object_spell_system = 1
+					config.feature_object_spell_system = TRUE
 
 				if ("allow_metadata")
-					config.allow_Metadata = 1
+					config.allow_Metadata = TRUE
 
 				if ("traitor_scaling")
-					config.traitor_scaling = 1
+					config.traitor_scaling = TRUE
 
 				if ("aliens_allowed")
-					config.aliens_allowed = 1
+					config.aliens_allowed = TRUE
 
 				if("alien_eggs_allowed")
-					config.alien_eggs_allowed = 1
+					config.alien_eggs_allowed = TRUE
 
 				if ("ninjas_allowed")
-					config.ninjas_allowed = 1
+					config.ninjas_allowed = TRUE
 
 				if ("objectives_disabled")
 					if(!value)
@@ -503,7 +527,7 @@ var/list/gamemode_cache = list()
 								log_misc("Incorrect objective disabled definition: [value]")
 								config.objectives_disabled = CONFIG_OBJECTIVE_NONE
 				if("protect_roles_from_antagonist")
-					config.protect_roles_from_antagonist = 1
+					config.protect_roles_from_antagonist = TRUE
 
 				if ("probability")
 					var/prob_pos = findtext(value, " ")
@@ -521,16 +545,16 @@ var/list/gamemode_cache = list()
 						log_misc("Incorrect probability configuration definition: [prob_name]  [prob_value].")
 
 				if("allow_random_events")
-					config.allow_random_events = 1
+					config.allow_random_events = TRUE
 
 				if("kick_inactive")
 					config.kick_inactive = text2num(value)
 
 				if("mods_can_tempban")
-					config.mods_can_tempban = 1
+					config.mods_can_tempban = TRUE
 
 				if("mods_can_job_tempban")
-					config.mods_can_job_tempban = 1
+					config.mods_can_job_tempban = TRUE
 
 				if("mod_tempban_max")
 					config.mod_tempban_max = text2num(value)
@@ -539,19 +563,19 @@ var/list/gamemode_cache = list()
 					config.mod_job_tempban_max = text2num(value)
 
 				if("load_jobs_from_txt")
-					load_jobs_from_txt = 1
+					load_jobs_from_txt = TRUE
 
 				if("forbid_singulo_possession")
-					forbid_singulo_possession = 1
+					forbid_singulo_possession = TRUE
 
 				if("popup_admin_pm")
-					config.popup_admin_pm = 1
+					config.popup_admin_pm = TRUE
 
 				if("allow_holidays")
-					Holiday = 1
+					Holiday = TRUE
 
 				if("use_irc_bot")
-					use_irc_bot = 1
+					use_irc_bot = TRUE
 
 				if("ticklag")
 					var/ticklag = text2num(value)
@@ -565,38 +589,38 @@ var/list/gamemode_cache = list()
 					tick_limit_mc_init = text2num(value)
 
 				if("allow_antag_hud")
-					config.antag_hud_allowed = 1
+					config.antag_hud_allowed = TRUE
 				if("antag_hud_restricted")
-					config.antag_hud_restricted = 1
+					config.antag_hud_restricted = TRUE
 
 				if("humans_need_surnames")
-					humans_need_surnames = 1
+					humans_need_surnames = TRUE
 
 				if("usealienwhitelist")
-					usealienwhitelist = 1
+					usealienwhitelist = TRUE
 				if("usealienwhitelist_sql") // above need to be enabled as well
-					usealienwhitelistSQL = 1;
+					usealienwhitelistSQL = TRUE;
 				if("alien_player_ratio")
-					limitalienplayers = 1
+					limitalienplayers = TRUE
 					alien_to_human_ratio = text2num(value)
 
 				if("assistant_maint")
-					config.assistant_maint = 1
+					config.assistant_maint = TRUE
 
 				if("gateway_delay")
 					config.gateway_delay = text2num(value)
 
 				if("continuous_rounds")
-					config.continous_rounds = 1
+					config.continous_rounds = TRUE
 
 				if("ghost_interaction")
-					config.ghost_interaction = 1
+					config.ghost_interaction = TRUE
 
 				if("disable_player_mice")
-					config.disable_player_mice = 1
+					config.disable_player_mice = TRUE
 
 				if("uneducated_mice")
-					config.uneducated_mice = 1
+					config.uneducated_mice = TRUE
 
 				if("comms_password")
 					config.comms_password = value
@@ -629,7 +653,7 @@ var/list/gamemode_cache = list()
 					config.announce_shuttle_dock_to_irc = TRUE
 
 				if("allow_cult_ghostwriter")
-					config.cult_ghostwriter = 1
+					config.cult_ghostwriter = TRUE
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = text2num(value)
@@ -659,7 +683,7 @@ var/list/gamemode_cache = list()
 					config.allow_ic_printing = FALSE
 
 				if("allow_extra_antags")
-					config.allow_extra_antags = 1
+					config.allow_extra_antags = TRUE
 
 				if("event_custom_start_mundane")
 					var/values = text2numlist(value, ";")
@@ -698,19 +722,19 @@ var/list/gamemode_cache = list()
 					law_zero = value
 
 				if("aggressive_changelog")
-					config.aggressive_changelog = 1
+					config.aggressive_changelog = TRUE
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE
 
 				if("map_switching")
-					config.allow_map_switching = 1
+					config.allow_map_switching = TRUE
 
 				if("auto_map_vote")
-					config.auto_map_vote = 1
+					config.auto_map_vote = TRUE
 
 				if("wait_for_sigusr1")
-					config.wait_for_sigusr1_reboot = 1
+					config.wait_for_sigusr1_reboot = TRUE
 
 				if("autostealth")
 					config.autostealth = text2num(value)
@@ -772,7 +796,7 @@ var/list/gamemode_cache = list()
 				if("organ_damage_spillover_multiplier")
 					config.organ_damage_spillover_multiplier = value / 100
 				if("organs_can_decay")
-					config.organs_decay = 1
+					config.organs_decay = TRUE
 				if("bones_can_break")
 					config.bones_can_break = value
 				if("limbs_can_break")
@@ -810,7 +834,7 @@ var/list/gamemode_cache = list()
 
 
 				if("use_loyalty_implants")
-					config.use_loyalty_implants = 1
+					config.use_loyalty_implants = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

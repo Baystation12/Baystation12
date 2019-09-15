@@ -25,7 +25,7 @@
 
 /obj/effect/overmap/Initialize()
 	. = ..()
-	if(!GLOB.using_map.use_overmap)
+	if(!GLOB.using_map.use_overmap || config.no_overmap)
 		return INITIALIZE_HINT_QDEL
 
 	if(!GLOB.using_map.overmap_z)

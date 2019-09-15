@@ -10,8 +10,9 @@ var/list/admin_verbs_default = list(
 	/client/proc/watched_variables,
 	/client/proc/debug_global_variables,//as above but for global variables,
 //	/client/proc/check_antagonists,		//shows all antags,
-	/client/proc/cmd_check_new_players
+	/client/proc/cmd_check_new_players,
 //	/client/proc/deadchat				//toggles deadchat on/off,
+	/client/proc/cmd_dev_bst
 	)
 var/list/admin_verbs_admin = list(
 	/client/proc/player_panel_new,		//shows an interface for all players, with links to various panels,

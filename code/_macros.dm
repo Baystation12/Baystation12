@@ -23,6 +23,8 @@
 
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
+#define isbst(A) istype(A, /mob/living/carbon/human/bst)
+
 #define iscarbon(A) istype(A, /mob/living/carbon)
 
 #define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))

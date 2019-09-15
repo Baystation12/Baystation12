@@ -163,8 +163,17 @@
 	initialized = TRUE
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
 	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
-	to_chat(world, "<span class='boldannounce'>[msg]</span>")
-	log_world(msg)
+	if (time > 1)
+		to_chat(world, "<span class='boldannounce'>[msg]</span>")
+	else if (time > 0.2)
+		to_chat(world, SPAN_NOTICE(msg))
+	else
+		to_chat(world, "[msg]")
+
+	//Checking world port here is used to prevent spamming a developer with duplicate reports when running in single user mode.
+	//Only do this log if port is nonzero, which means we are hosting through dream daemon
+	if (world.port)
+		log_world(msg)
 	return time
 
 //hook for printing stats to the "MC" statuspanel for admins to see performance and related stats etc.
