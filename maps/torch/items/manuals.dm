@@ -83,6 +83,9 @@
 
 /obj/item/weapon/folder/envelope/captain/LateInitialize()
 	..()
+	//Throws runtimes without overmap
+	if (config.no_overmap)
+		return
 	var/obj/effect/overmap/torch = map_sectors["[z]"]
 	var/memo = {"
 	<tt><center><b><font color='red'>SECRET - CODE WORDS: TORCH</font></b>

@@ -234,6 +234,7 @@ var/list/gamemode_cache = list()
 	var/auto_start = FALSE
 	var/auto_observe = FALSE
 	var/auto_bst = FALSE
+	var/no_overmap = FALSE
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -288,6 +289,13 @@ var/list/gamemode_cache = list()
 
 				if ("auto_bst")
 					config.auto_bst = TRUE
+
+				if ("no_overmap")
+					config.no_overmap = TRUE
+					//Mapping subsystem loads before config, so we'll set this here
+					if (GLOB.using_map)
+						GLOB.using_map.use_overmap = FALSE
+
 				//-------------------------
 				if ("resource_urls")
 					config.resource_urls = splittext(value, " ")
