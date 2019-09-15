@@ -17,14 +17,18 @@ var/list/solars_list = list()
 	var/obscured = 0
 	var/sunfrac = 0
 	var/efficiency = 1
+	var/base_gen = 0
 	var/adir = SOUTH // actual dir
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
-	
-/obj/machinery/power/solar/improved
-	name = "improved solar panel"
-	efficiency = 2
+
+/obj/machinery/power/solar/skrellian
+	name = "skrellian solar panel"
+	desc = "An advanced solar panel, capable of generating power from indirect light and across multiple energy spectrums."
+	efficiency = 3
+	color = COLOR_GREEN
+	base_gen = 1000
 
 /obj/machinery/power/solar/drain_power()
 	return -1
@@ -124,9 +128,9 @@ var/list/solars_list = list()
 
 	if(powernet)
 		if(powernet == control.powernet)//check if the panel is still connected to the computer
-			if(obscured) //get no light from the sun, so don't generate power
-				return
-			var/sgen = solar_gen_rate * sunfrac * efficiency
+			var/sgen = base_gen
+			if(!obscured) //get no light from the sun, so don't generate power
+				sgen += (solar_gen_rate * sunfrac * efficiency)
 			add_avail(sgen)
 			control.gen += sgen
 		else //if we're no longer on the same powernet, remove from control computer
