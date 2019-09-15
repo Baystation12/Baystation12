@@ -272,7 +272,7 @@
 "aM" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
+	2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/skrell,
@@ -552,7 +552,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
+	2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/skrell/orange,
