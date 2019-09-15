@@ -2004,7 +2004,6 @@
 /obj/item/weapon/stock_parts/circuitboard/telecomms/bus,
 /obj/item/weapon/stock_parts/circuitboard/telecomms/bus,
 /obj/item/weapon/stock_parts/circuitboard/telecomms/broadcaster,
-/obj/item/weapon/stock_parts/circuitboard/telecomms/relay,
 /turf/simulated/floor/tiled,
 /area/tcommsat/storage)
 "ej" = (
