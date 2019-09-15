@@ -16425,6 +16425,7 @@
 	dir = 5
 	},
 /obj/structure/cable/green,
+/obj/structure/closet/crate/secure/biohazard/alt,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "dBF" = (
@@ -16947,8 +16948,7 @@
 /area/medical/subacute)
 "ehb" = (
 /obj/structure/table/rack{
-	dir = 8;
-	
+	dir = 8
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding{
@@ -17599,8 +17599,6 @@
 /area/medical/surgery2)
 "eQb" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/bodybags,
-/obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 8
 	},
@@ -17619,6 +17617,9 @@
 	pixel_x = -2;
 	pixel_y = 24
 	},
+/obj/item/weapon/storage/firstaid/adv,
+/obj/item/weapon/reagent_containers/spray/sterilizine,
+/obj/item/weapon/reagent_containers/spray/cleaner/drone,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eQK" = (
@@ -21718,13 +21719,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
 "jxb" = (
-/obj/structure/table/standard,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
 	},
 /obj/effect/floor_decal/floordetail/edgedrain,
-/obj/item/weapon/storage/firstaid/adv,
+/obj/structure/closet/crate/secure/biohazard/alt,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "jxG" = (
@@ -24506,8 +24506,7 @@
 /obj/item/weapon/storage/box/gloves,
 /obj/item/weapon/storage/box/masks,
 /obj/structure/table/rack{
-	dir = 8;
-	
+	dir = 8
 	},
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,

@@ -697,3 +697,9 @@
 	decals = list(
 		"biohazard" = COLOR_GRAY80
 	)
+
+/decl/closet_appearance/cart/biohazard/alt
+	color = COLOR_SURGERY_BLUE
+	decals = list(
+		"biohazard" = COLOR_RED_GRAY
+	)
