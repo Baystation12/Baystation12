@@ -259,7 +259,7 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/fourthdeck/starboard)
 "aY" = (
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "bc" = (
 /obj/machinery/door/airlock/atmos{
@@ -3374,7 +3374,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "lo" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
@@ -3806,7 +3806,7 @@
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "mG" = (
 /obj/structure/railing/mapped,
@@ -4487,7 +4487,7 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "oR" = (
 /obj/structure/railing/mapped{
@@ -4499,7 +4499,7 @@
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "oW" = (
 /obj/structure/railing/mapped{
@@ -6928,7 +6928,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "vJ" = (
 /obj/machinery/door/firedoor,
@@ -7284,7 +7284,7 @@
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "wT" = (
 /obj/effect/wallframe_spawn/no_grille,
@@ -8611,7 +8611,7 @@
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "Cr" = (
 /obj/machinery/door/blast/shutters{
@@ -12473,7 +12473,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "Po" = (
 /obj/structure/catwalk,
@@ -14060,7 +14060,7 @@
 	icon_state = "railing0-1";
 	tag = "icon-railing0 (EAST)"
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "Tr" = (
 /obj/effect/floor_decal/corner/brown/half{
@@ -15062,7 +15062,7 @@
 /area/maintenance/substation/fourthdeck)
 "Wf" = (
 /obj/structure/railing/mapped,
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "Wh" = (
 /obj/structure/bed/chair/comfy/brown{
@@ -15123,7 +15123,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "Ww" = (
 /obj/structure/cable/green{
@@ -15253,7 +15253,7 @@
 /area/hallway/primary/fourthdeck/fore)
 "WI" = (
 /obj/structure/catwalk,
-/turf/simulated/floor/shuttle_ceiling/skrell/air,
+/turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "WJ" = (
 /obj/machinery/conveyor{
