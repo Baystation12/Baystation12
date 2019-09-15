@@ -1,6 +1,0 @@
-author: "Anticept"
-delete-after: True
-changes: 
-  - bugfix: "Rigsuit codex entries now read the correct armor values for each piece. Has no effect on damage calculations, that has always worked correctly."
-  - tweak: "Medical voidsuit descriptions no longer imply that they have some incredible radiation resistance, but it's still relatively good to most things in the game."
-  - tweak: "Medical voidsuit bomb resistance values increased slightly. It's still not a bomb suit!"
