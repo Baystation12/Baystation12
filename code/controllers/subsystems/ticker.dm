@@ -28,8 +28,11 @@ SUBSYSTEM_DEF(ticker)
 	var/looking_for_antags = 0
 
 /datum/controller/subsystem/ticker/Initialize()
-	to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
-	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+	if (config.auto_start)
+		start_ASAP = TRUE
+	else
+		to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
+		to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
 	return ..()
 
 /datum/controller/subsystem/ticker/fire(resumed = 0)
@@ -92,10 +95,23 @@ SUBSYSTEM_DEF(ticker)
 
 	callHook("roundstart")
 
+	//Here we will trigger the auto-observe and auto bst debug things
+	if (config.auto_observe)
+		for(var/client/C in GLOB.clients)
+			if (C.mob)
+				make_observer(C.mob)
+	spawn(5)
+		if (config.auto_bst)
+			for(var/client/C in GLOB.clients)
+				if (C.mob)
+					C.cmd_dev_bst(TRUE)
+
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
+
+
 
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
@@ -480,4 +496,6 @@ Helpers
 		SSvote.cancel_vote(user)
 		bypass_gamemode_vote = 1
 	Master.SetRunLevel(RUNLEVEL_SETUP)
+
+
 	return 1
