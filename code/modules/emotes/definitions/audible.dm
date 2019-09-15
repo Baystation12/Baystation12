@@ -169,3 +169,24 @@
 	key ="shriek"
 	emote_message_3p = "USER SHRIEKS!"
 	emote_sound = 'sound/voice/shriek1.ogg'
+
+/decl/emote/audible/roar
+	key = "roar"
+	emote_message_3p = "USER roars!"
+
+/decl/emote/audible/bellow
+	key = "bellow"
+	emote_message_3p = "USER bellows!"
+
+/decl/emote/audible/howl
+	key = "howl"
+	emote_message_3p = "USER howls!"
+
+/decl/emote/audible/wheeze
+	key = "wheeze"
+	emote_message_3p = "USER wheezes."
+
+/decl/emote/audible/hiss
+	key ="hiss_"
+	emote_message_3p_target = "USER hisses softly at TARGET."
+	emote_message_3p = "USER hisses softly."
