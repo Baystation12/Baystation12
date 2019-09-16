@@ -15,6 +15,9 @@
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
 	var/electric = FALSE //if the glasses should be disrupted by EMP
+	
+	var/toggle_on_message //set these in initialize if you want messages other than about the optical matrix
+	var/toggle_off_message
 
 /obj/item/clothing/glasses/Initialize()
 	. = ..()
@@ -54,17 +57,24 @@
 			user.update_inv_glasses()
 			flash_protection = FLASH_PROTECTION_NONE
 			tint = TINT_NONE
-			to_chat(usr, "You deactivate the optical matrix on the [src].")
+			if(toggle_off_message)
+				to_chat(user, toggle_off_message)
+			else
+				to_chat(user, "You deactivate the optical matrix on \the [src].")
 		else
 			active = TRUE
 			icon_state = initial(icon_state)
 			user.update_inv_glasses()
 			if(activation_sound)
-				sound_to(usr, activation_sound)
-
+				sound_to(user, activation_sound)
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
-			to_chat(usr, "You activate the optical matrix on the [src].")
+			if(toggle_on_message)
+				to_chat(user, toggle_on_message)
+			else
+				to_chat(user, "You activate the optical matrix on \the [src].")
+		update_clothing_icon()
+		update_vision()
 		user.update_action_buttons()
 
 /obj/item/clothing/glasses/meson
