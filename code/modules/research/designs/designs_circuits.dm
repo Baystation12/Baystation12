@@ -645,13 +645,6 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/telecomms/hub
 	sort_string = "PAAAD"
 
-/datum/design/circuit/tcom/relay
-	name = "relay mainframe"
-	id = "tcom-relay"
-	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 4, TECH_BLUESPACE = 3)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/telecomms/relay
-	sort_string = "PAAAE"
-
 /datum/design/circuit/tcom/broadcaster
 	name = "subspace broadcaster"
 	id = "tcom-broadcaster"

@@ -9082,12 +9082,6 @@
 	dir = 1
 	},
 /area/centcom/specops)
-"awu" = (
-/obj/machinery/telecomms/relay/preset/centcom,
-/turf/unsimulated/floor{
-	icon_state = "lino"
-	},
-/area/centcom/creed)
 "awv" = (
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -21650,6 +21644,12 @@
 	},
 /turf/simulated/floor/holofloor/grass,
 /area/holodeck/source_plaza)
+"dAV" = (
+/obj/machinery/hologram/holopad/longrange,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/rescue_base/base)
 "dBi" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
@@ -22749,6 +22749,10 @@
 /obj/effect/overlay/palmtree_r,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_temple)
+"wbj" = (
+/obj/machinery/hologram/holopad/longrange,
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "wda" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/brflowers,
@@ -24662,7 +24666,7 @@ aaL
 aaL
 aef
 aae
-aaO
+dAV
 fuX
 aaO
 ahg
@@ -26907,7 +26911,7 @@ alU
 amm
 amF
 kRX
-anl
+wbj
 anl
 aoe
 anl
@@ -31194,7 +31198,7 @@ asS
 asS
 asR
 avZ
-awu
+awv
 awN
 axb
 axq
