@@ -719,7 +719,7 @@
 	name = "Gentle 2"
 	icon_state = "hair_gentle2"
 	flags = HAIR_TIEABLE
-	
+
 /datum/sprite_accessory/hair/gentle2long
 	name = "Gentle 2 Long"
 	icon_state = "hair_gentle2long"
@@ -729,86 +729,3 @@
 	name = "Trimmed Right Sidecut"
 	icon_state = "hair_rightside_trim"
 	flags = HAIR_TIEABLE
-
-/datum/sprite_accessory/hair/booster
-	name = "Cat Biomods (Bald)"
-	icon = 'icons/mob/human_races/species/human/subspecies/booster_hair.dmi'
-	icon_state = "ears_plain"
-	species_allowed = list(SPECIES_HUMAN)
-	subspecies_allowed = list(SPECIES_BOOSTER)
-
-/datum/sprite_accessory/hair/booster/straight
-	name = "Cat Biomods (Straight)"
-	icon_state = "hair_straight"
-
-/datum/sprite_accessory/hair/booster/clean
-	name = "Cat Biomods (Clean)"
-	icon_state = "hair_clean"
-
-/datum/sprite_accessory/hair/booster/shaggy
-	name = "Cat Biomods (Shaggy)"
-	icon_state = "hair_shaggy"
-
-/datum/sprite_accessory/hair/booster/mohawk
-	name = "Cat Biomods (Mohawk)"
-	icon_state = "hair_mohawk"
-
-/datum/sprite_accessory/hair/booster/plait
-	name = "Cat Biomods (Plait)"
-	icon_state = "hair_plait"
-
-/datum/sprite_accessory/hair/booster/long
-	name = "Cat Biomods (Long)"
-	icon_state = "hair_long"
-
-/datum/sprite_accessory/hair/booster/rattail
-	name = "Cat Biomods (Rat Tail)"
-	icon_state = "hair_rattail"
-
-/datum/sprite_accessory/hair/booster/spiky
-	name = "Cat Biomods (Spiky)"
-	icon_state = "hair_tajspiky"
-
-/datum/sprite_accessory/hair/booster/messy
-	name = "Cat Biomods (Messy)"
-	icon_state = "hair_messy"
-
-/datum/sprite_accessory/hair/booster/bangs
-	name = "Cat Biomods (Bangs)"
-	icon_state = "hair_bangs"
-
-/datum/sprite_accessory/hair/booster/braid
-	name = "Cat Biomods (Braid)"
-	icon_state = "hair_tbraid"
-
-/datum/sprite_accessory/hair/booster/bob
-	name = "Cat Biomods (Bob)"
-	icon_state = "hair_tbob"
-
-/datum/sprite_accessory/hair/booster/fingerwave
-	name = "Cat Biomods (Fingerwave)"
-	icon_state = "hair_fingerwave"
-
-/datum/sprite_accessory/hair/booster/ramhorns
-	name = "Horn Biomods (Ram Horns)"
-	icon_state = "ram_horns"
-
-/datum/sprite_accessory/hair/booster/spineslong
-	name = "Horn Biomods (Long Spines)"
-	icon_state = "soghun_longspines"
-
-/datum/sprite_accessory/hair/booster/frillslong
-	name = "Horn Biomods (Long Frills)"
-	icon_state = "soghun_longfrills"
-
-/datum/sprite_accessory/hair/booster/spinesshort
-	name = "Horn Biomods (Short Spines)"
-	icon_state = "soghun_shortspines"
-
-/datum/sprite_accessory/hair/booster/frillsshort
-	name = "Horn Biomods (Short Frills)"
-	icon_state = "soghun_shortfrills"
-
-/datum/sprite_accessory/hair/booster/short_horns
-	name = "Horn Biomods (Short)"
-	icon_state = "soghun_horns"
