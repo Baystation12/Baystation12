@@ -217,11 +217,11 @@
 
 /obj/item/clothing/glasses/sunglasses
 	name = "sunglasses"
-	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes."
+	desc = "Glasses with treated lenses to prevent glare. They provide some rudamentary protection from dazzling attacks."
 	icon_state = "sun"
 	item_state = "sunglasses"
 	darkness_view = -1
-	flash_protection = FLASH_PROTECTION_MODERATE
+	flash_protection = FLASH_PROTECTION_SOME
 
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
@@ -325,8 +325,6 @@
 	to_chat(usr, SPAN_WARNING("You can't adjust \the [src]!"))
 	return
 
-
-
 /obj/item/clothing/glasses/sunglasses/prescription
 	name = "prescription sunglasses"
 	prescription = 5
@@ -350,14 +348,14 @@
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
 	name = "HUD aviators"
-	desc = "Modified aviator glasses that can be switched between HUD and flash protection modes."
+	desc = "Modified aviator glasses that can be switched between HUD and darkened modes."
 	icon_state = "sec_hud"
 	off_state = "sec_flash"
 	action_button_name = "Toggle Mode"
-	var/on = TRUE
 	toggleable = TRUE
 	activation_sound = 'sound/effects/pop.ogg'
 
+	var/on = TRUE
 	var/hud_holder
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/Initialize()
@@ -380,7 +378,7 @@
 		else
 			flash_protection = initial(flash_protection)
 			src.hud = null
-			to_chat(user, "You switch \the [src] to flash protection mode.")
+			to_chat(user, "You toggle \the [src]'s darkened mode on.")
 		update_icon()
 		sound_to(user, activation_sound)
 		user.update_inv_glasses()
