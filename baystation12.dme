@@ -1653,6 +1653,7 @@
 #include "code\modules\detectivework\tools\luminol.dm"
 #include "code\modules\detectivework\tools\rag.dm"
 #include "code\modules\detectivework\tools\sample_kits.dm"
+#include "code\modules\detectivework\tools\scene_cards.dm"
 #include "code\modules\detectivework\tools\storage.dm"
 #include "code\modules\detectivework\tools\swabs.dm"
 #include "code\modules\detectivework\tools\uvlight.dm"
