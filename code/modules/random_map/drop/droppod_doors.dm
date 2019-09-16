@@ -6,7 +6,6 @@
 	anchored = 1
 	density = 1
 	opacity = 1
-	plane = OBJ_PLANE
 	layer = ABOVE_DOOR_LAYER
 	var/deploying
 	var/deployed

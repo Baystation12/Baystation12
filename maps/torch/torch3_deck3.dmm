@@ -1016,7 +1016,7 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/plating,
 /area/thruster/d3starboard)
 "cv" = (
 /obj/structure/lattice,
@@ -2004,7 +2004,6 @@
 /obj/item/weapon/stock_parts/circuitboard/telecomms/bus,
 /obj/item/weapon/stock_parts/circuitboard/telecomms/bus,
 /obj/item/weapon/stock_parts/circuitboard/telecomms/broadcaster,
-/obj/item/weapon/stock_parts/circuitboard/telecomms/relay,
 /turf/simulated/floor/tiled,
 /area/tcommsat/storage)
 "ej" = (
@@ -2120,6 +2119,11 @@
 /obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/crew_quarters/galley)
+"ez" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/hatch/maintenance,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/hallway/primary/thirddeck/fore)
 "eA" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/monotile,
@@ -2184,6 +2188,11 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
+"eH" = (
+/obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/maintenance/thirddeck/foreport)
 "eI" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/substation/thirddeck)
@@ -2892,6 +2901,13 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/sleep/cryo)
+"fT" = (
+/obj/structure/table/rack,
+/obj/random/maintenance/solgov,
+/obj/random/maintenance/solgov,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/thirddeck/foreport)
 "fU" = (
 /obj/structure/table/steel,
 /obj/random/maintenance/solgov,
@@ -3204,6 +3220,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"gu" = (
+/obj/structure/largecrate,
+/obj/random/maintenance/solgov,
+/obj/random/maintenance/solgov,
+/obj/random/maintenance/solgov,
+/obj/random/maintenance/solgov,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/thirddeck/foreport)
 "gv" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -3337,41 +3362,11 @@
 /area/vacant/mess)
 "gJ" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
+/obj/random/single/cola,
+/obj/random/single/cola,
+/obj/random/single/cola,
+/obj/random/single/cola,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/simulated/floor/tiled/dark,
@@ -3405,6 +3400,10 @@
 /obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
+"gM" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/thirddeck/foreport)
 "gN" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/holocontrol)
@@ -3428,6 +3427,19 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
+"gQ" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/random/trash,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "gR" = (
 /obj/effect/floor_decal/corner/yellow/half{
 	icon_state = "bordercolorhalf";
@@ -3447,6 +3459,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/disperser)
+"gT" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/random/junk,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "gU" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -3763,6 +3783,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"hv" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "hw" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -4666,15 +4693,18 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
 "ja" = (
-/obj/machinery/door/firedoor,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
 	},
-/obj/machinery/door/airlock/hatch/maintenance,
-/turf/simulated/floor/tiled/steel_ridged,
-/area/hallway/primary/thirddeck/fore)
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/random/trash,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "jb" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -5653,7 +5683,6 @@
 "kS" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/alarm{
@@ -5703,6 +5732,16 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark,
 /area/holocontrol)
+"kX" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/structure/railing/mapped,
+/obj/random/maintenance/solgov,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "kY" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5728,6 +5767,11 @@
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
+"lb" = (
+/obj/structure/railing/mapped,
+/obj/random/trash,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "lc" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -5747,6 +5791,13 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/center)
+"lf" = (
+/obj/structure/railing/mapped,
+/obj/random/junk,
+/obj/random/trash,
+/obj/random/tech_supply,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "lg" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -5771,6 +5822,15 @@
 /obj/effect/floor_decal/corner/yellow/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
+"lh" = (
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1";
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/structure/railing/mapped,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "li" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -5920,14 +5980,6 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
-"lA" = (
-/obj/structure/largecrate,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/thirddeck/foreport)
 "lB" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -6329,13 +6381,7 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "mq" = (
@@ -10996,15 +11042,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
-"wZ" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/maintenance/thirddeck/foreport)
 "xb" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
@@ -11313,11 +11350,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/steel_grid,
@@ -11970,15 +12002,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
-"zM" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/foreport)
 "zR" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/updown,
@@ -12172,15 +12195,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
-"Ax" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/foreport)
 "AA" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -12711,9 +12725,6 @@
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
-"Cl" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/crew_quarters/sleep/bunk)
 "Cm" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance{
@@ -13175,45 +13186,12 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
-"DB" = (
-/obj/machinery/alarm{
-	pixel_y = 24
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/thirddeck)
-"DC" = (
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/thirddeck)
-"DD" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/shield/thirddeck)
 "DF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/wall/prepainted,
 /area/command/disperser)
-"DG" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/foreport)
 "DI" = (
 /obj/structure/table/standard,
 /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG,
@@ -13557,35 +13535,6 @@
 /obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
-"En" = (
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/plating,
-/area/shield/thirddeck)
-"Eo" = (
-/obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
-	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/thirddeck)
 "Ep" = (
 /obj/machinery/atmospherics/binary/pump/on{
 	dir = 2;
@@ -13749,17 +13698,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
-"EM" = (
-/obj/machinery/door/airlock/engineering{
-	name = "Third Deck Shield Generator"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/shield/thirddeck)
 "EN" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -13985,15 +13923,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
-"Fu" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/foreport)
 "Fv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 9;
@@ -14054,12 +13983,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
-"FA" = (
-/obj/structure/table/rack,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/thirddeck/foreport)
 "FB" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/cryolocker)
@@ -15908,7 +15831,7 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/plating,
 /area/thruster/d3port)
 "Kg" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -20820,10 +20743,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
-"Yu" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/thirddeck/foreport)
 "Yv" = (
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
@@ -21263,10 +21182,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
-"ZG" = (
-/obj/random/junk,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/thirddeck/foreport)
 "ZH" = (
 /obj/structure/stairs/south,
 /obj/structure/railing/mapped{
@@ -21290,7 +21205,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/crew_quarters/sleep/bunk)
+/area/maintenance/thirddeck/foreport)
 "ZK" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -32375,11 +32290,11 @@ yN
 yN
 yN
 yN
-DD
-DD
-DD
+PD
+PD
+PD
 zS
-zS
+eH
 zS
 GS
 Ur
@@ -32577,11 +32492,11 @@ gq
 Xc
 Cg
 yN
-DB
-En
-DD
-Ft
-Yu
+fT
+Ur
+Ur
+Ur
+Yb
 zS
 GT
 Ur
@@ -32779,10 +32694,10 @@ XH
 Bj
 Cf
 yN
-DC
-Eo
-EM
-Fu
+fT
+Ur
+gQ
+kX
 Yb
 zS
 zS
@@ -32981,10 +32896,10 @@ At
 Bi
 Cc
 yN
-DD
-DD
-DD
-Wq
+gu
+Ur
+gT
+lb
 Yb
 Tp
 Ur
@@ -33183,10 +33098,10 @@ At
 MG
 Cc
 yN
-FA
-FA
-zS
-Wq
+gM
+Ur
+hv
+lf
 Yb
 zS
 GU
@@ -33385,10 +33300,10 @@ Au
 Bk
 Ce
 yN
-lA
-Yb
-zS
-Wq
+Ft
+Ur
+ja
+lh
 Yb
 zS
 zS
@@ -33587,12 +33502,12 @@ yN
 yN
 yN
 yN
-zM
-Ax
-wZ
-DG
+Ur
+Ur
+Ur
+Ur
 Yb
-ZG
+Yb
 zS
 XS
 BV
@@ -33783,13 +33698,13 @@ pM
 vJ
 wR
 xR
-ja
-Ax
-Ax
-Ax
-Ax
-Ax
-DG
+ez
+Ur
+Ur
+Ur
+Ur
+Ur
+Ur
 Bm
 Bm
 Bm
@@ -36009,7 +35924,7 @@ Vx
 Ou
 PD
 Br
-Cl
+Yb
 uM
 vN
 wW

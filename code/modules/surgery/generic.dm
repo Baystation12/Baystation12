@@ -306,6 +306,14 @@
 	if(affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && !affected.how_open())
 		return affected
 
+/decl/surgery_step/generic/amputate/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	var/target_zone = user.zone_sel.selecting
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(BP_IS_ROBOTIC(affected))
+		return SURGERY_SKILLS_ROBOTIC
+	else
+		return ..()
+
 /decl/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] is beginning to amputate [target]'s [affected.name] with \the [tool]." , \

@@ -14,6 +14,7 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
+	var/plural_name
 	var/base_state
 	var/plural_icon_state
 	var/max_icon_state
@@ -31,6 +32,11 @@
 	if (amount >= 1)
 		src.amount = amount
 	..()
+
+/obj/item/stack/Initialize()
+	. = ..()
+	if(!plural_name)
+		plural_name = "[singular_name]s"
 
 /obj/item/stack/Destroy()
 	if(uses_charge)

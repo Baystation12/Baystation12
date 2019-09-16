@@ -56,17 +56,6 @@
 	if(is_type_in_list(O, blacklisted_types))
 		to_chat(user, SPAN_NOTICE("\The [src] cannot grind \the [O]."))
 		return
-	
-	if(O.w_class > item_size_limit)
-		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))
-		return
-
-	if(holdingitems && holdingitems.len >= limit)
-		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))
-		return 1
-
-	if(!istype(O))
-		return
 
 	if(is_type_in_list(O, bag_whitelist))
 		var/obj/item/weapon/storage/bag = O
@@ -92,6 +81,17 @@
 
 		src.updateUsrDialog()
 		return 0
+	
+	if(O.w_class > item_size_limit)
+		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))
+		return
+
+	if(holdingitems && holdingitems.len >= limit)
+		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))
+		return 1
+
+	if(!istype(O))
+		return
 
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O

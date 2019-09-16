@@ -2,58 +2,13 @@
 	set name = "Move Upwards"
 	set category = "IC"
 
-	if(zMove(UP))
-		to_chat(src, "<span class='notice'>You move upwards.</span>")
-		zPull(UP)
+	SelfMove(UP)
 
 /mob/verb/down()
 	set name = "Move Down"
 	set category = "IC"
 
-	if(zMove(DOWN))
-		to_chat(src, "<span class='notice'>You move down.</span>")
-		zPull(DOWN)
-
-/mob/proc/zMove(direction)
-	if(eyeobj)
-		return eyeobj.zMove(direction)
-	if(!can_ztravel())
-		to_chat(src, "<span class='warning'>You lack means of travel in that direction.</span>")
-		return
-
-	var/turf/start = loc
-	if(!istype(start))
-		to_chat(src, "<span class='notice'>You are unable to move from here.</span>")
-		return 0
-
-	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
-	if(!destination)
-		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
-		return 0
-
-	if(!start.CanZPass(src, direction))
-		to_chat(src, "<span class='warning'>\The [start] is in the way.</span>")
-		return 0
-	if(!destination.CanZPass(src, direction))
-		to_chat(src, "<span class='warning'>You bump against \the [destination].</span>")
-		return 0
-
-	var/area/area = get_area(src)
-	if(direction == UP && area.has_gravity() && !can_overcome_gravity())
-		to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
-		return 0
-
-	for(var/atom/A in destination)
-		if(!A.CanMoveOnto(src, start, 1.5, direction))
-			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
-			return 0
-
-	if(direction == UP && area.has_gravity() && can_fall(FALSE, destination))
-		to_chat(src, "<span class='warning'>You see nothing to hold on to.</span>")
-		return 0
-
-	forceMove(destination)
-	return 1
+	SelfMove(DOWN)
 
 /mob/proc/zPull(direction)
 	//checks and handles pulled items across z levels
@@ -81,8 +36,6 @@
 
 	pulling.forceMove(destination)
 	return 1
-
-
 
 /atom/proc/CanMoveOnto(atom/movable/mover, turf/target, height=1.5, direction = 0)
 	//Purpose: Determines if the object can move through this
@@ -112,30 +65,10 @@
 				return 1
 	return 0
 
-/mob/observer/zMove(direction)
-	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
-	if(destination)
-		forceMove(destination)
-	else
-		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
-
-/mob/observer/eye/zMove(direction)
-	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
-	if(destination)
-		setLoc(destination)
-	else
-		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
-
 /mob/proc/can_ztravel()
 	return 0
 
-/mob/observer/can_ztravel()
-	return 1
-
 /mob/living/carbon/human/can_ztravel()
-	if(incapacitated())
-		return 0
-
 	if(Allow_Spacemove())
 		return 1
 
@@ -145,9 +78,6 @@
 				return 1
 
 /mob/living/silicon/robot/can_ztravel()
-	if(incapacitated() || is_dead())
-		return 0
-
 	if(Allow_Spacemove()) //Checks for active jetpack
 		return 1
 

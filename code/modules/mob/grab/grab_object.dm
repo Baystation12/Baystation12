@@ -139,9 +139,6 @@
 		return 0
 	if(assailant.anchored || affecting.anchored)
 		return 0
-	if(assailant == affecting)
-		to_chat(assailant, "<span class='notice'>You can't grab yourself.</span>")
-		return 0
 	if(assailant.get_active_hand())
 		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
 		return 0
@@ -152,6 +149,14 @@
 	if(!istype(organ))
 		to_chat(assailant, "<span class='notice'>\The [affecting] is missing that body part!</span>")
 		return 0
+	if(assailant == affecting)
+		if(!current_grab.can_grab_self)	//let's not nab ourselves
+			to_chat(assailant, "<span class='notice'>You can't grab yourself!</span>")
+			return 0
+		var/list/bad_parts = assailant.hand ? list(BP_L_ARM, BP_L_HAND) :  list(BP_R_ARM, BP_R_HAND)
+		if(organ.organ_tag in bad_parts)
+			to_chat(assailant, "<span class='notice'>You can't grab your own [organ.name] with itself!</span>")
+			return 0
 	for(var/obj/item/grab/G in affecting.grabbed_by)
 		if(G.assailant == assailant && G.target_zone == target_zone)
 			var/obj/O = G.get_targeted_organ()

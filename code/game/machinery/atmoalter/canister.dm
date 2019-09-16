@@ -18,7 +18,6 @@
 	var/temperature_resistance = 1000 + T0C
 	volume = 1000
 	interact_offline = 1 // Allows this to be used when not in powered area.
-	var/release_log = ""
 	var/update_flag = 0
 
 /obj/machinery/portable_atmospherics/canister/drain_power()
@@ -305,16 +304,8 @@ update_flag
 
 /obj/machinery/portable_atmospherics/canister/OnTopic(var/mob/user, href_list, state)
 	if(href_list["toggle"])
-		if (valve_open)
-			if (holding)
-				release_log += "Valve was <b>closed</b> by [user] ([user.ckey]), stopping the transfer into the [holding]<br>"
-			else
-				release_log += "Valve was <b>closed</b> by [user] ([user.ckey]), stopping the transfer into the <font color='red'><b>air</b></font><br>"
-		else
-			if (holding)
-				release_log += "Valve was <b>opened</b> by [user] ([user.ckey]), starting the transfer into the [holding]<br>"
-			else
-				release_log += "Valve was <b>opened</b> by [user] ([user.ckey]), starting the transfer into the <font color='red'><b>air</b></font><br>"
+		if (!valve_open)
+			if(!holding)
 				log_open()
 		valve_open = !valve_open
 		. = TOPIC_REFRESH
@@ -324,7 +315,6 @@ update_flag
 			return TOPIC_HANDLED
 		if (valve_open)
 			valve_open = 0
-			release_log += "Valve was <b>closed</b> by [user] ([user.ckey]), stopping the transfer into the [holding]<br>"
 		if(istype(holding, /obj/item/weapon/tank))
 			holding.manipulated_by = user.real_name
 		holding.dropInto(loc)

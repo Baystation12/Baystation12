@@ -272,7 +272,6 @@
 "aM" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/skrell,
@@ -552,7 +551,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/skrell/orange,
@@ -1098,6 +1096,12 @@
 	d2 = 4
 	},
 /obj/machinery/telecomms/allinone/skrellscoutship,
+/obj/machinery/alarm/server{
+	dir = 4;
+	pixel_x = -22;
+	pixel_y = 0;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/maintenance/power)
 "cA" = (

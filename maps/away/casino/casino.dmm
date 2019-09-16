@@ -726,7 +726,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/plating,
@@ -975,7 +974,6 @@
 /obj/random/firstaid,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3094,7 +3092,6 @@
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3564,7 +3561,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -4307,7 +4303,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/power/apc{
@@ -4364,7 +4359,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/power/apc{
@@ -4421,7 +4415,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/power/apc{
@@ -5162,7 +5155,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/cable{
@@ -5224,7 +5216,6 @@
 /obj/machinery/computer/arcade,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5321,7 +5312,6 @@
 /obj/item/ammo_casing/rifle/used,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/alarm{
@@ -5541,7 +5531,6 @@
 /obj/item/ammo_casing/pistol/magnum/used,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/flora/pottedplant/unusual,
@@ -5949,7 +5938,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,

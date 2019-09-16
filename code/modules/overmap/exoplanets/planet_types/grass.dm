@@ -4,6 +4,7 @@
 	color = "#538224"
 	planetary_area = /area/exoplanet/grass
 	rock_colors = list(COLOR_ASTEROID_ROCK, COLOR_GRAY80, COLOR_BROWN)
+	plant_colors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 	map_generators = list(/datum/random_map/noise/exoplanet/grass)
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
@@ -16,6 +17,9 @@
 	if(atmosphere)
 		atmosphere.temperature = T20C + rand(10, 30)
 		atmosphere.update_values()
+
+/obj/effect/overmap/sector/exoplanet/grass/get_surface_color()
+	return grass_color
 
 /obj/effect/overmap/sector/exoplanet/grass/adapt_seed(var/datum/seed/S)
 	..()
@@ -56,37 +60,26 @@
 	smoothing_iterations = 2
 	land_type = /turf/simulated/floor/exoplanet/grass
 	water_type = /turf/simulated/floor/exoplanet/water/shallow
-	plantcolors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 
-	flora_prob = 30
-	large_flora_prob = 50
+	flora_prob = 10
+	large_flora_prob = 30
 	flora_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna)
-
-	var/grass_color
-
-/datum/random_map/noise/exoplanet/grass/New()
-	var/list/colors = plantcolors.Copy()
-	colors -= "RANDOM"
-	grass_color = pick(colors)
-	..()
-
-/datum/random_map/noise/exoplanet/grass/get_additional_spawns(var/value, var/turf/T)
-	..()
-	if(istype(T,/turf/simulated/floor/exoplanet/grass))
-		T.color = grass_color
 
 /turf/simulated/floor/exoplanet/grass
 	name = "grass"
 	icon = 'icons/turf/jungle.dmi'
 	icon_state = "greygrass"
 	color = "#799c4b"
-	mudpit = 1
 	footstep_type = FOOTSTEP_GRASS
 
 /turf/simulated/floor/exoplanet/grass/Initialize()
 	. = ..()
+	if(GLOB.using_map.use_overmap)
+		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+		if(istype(E) && E.grass_color)
+			color = E.grass_color
 	if(!resources)
 		resources = list()
 	if(prob(70))
@@ -100,4 +93,5 @@
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
 		SetName("scorched ground")
 		icon_state = "scorched"
+		footstep_type = FOOTSTEP_ASTEROID
 		color = null

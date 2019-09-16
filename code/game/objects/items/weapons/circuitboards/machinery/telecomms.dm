@@ -24,14 +24,6 @@
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/subspace/filter = 2)
 
-/obj/item/weapon/stock_parts/circuitboard/telecomms/relay
-	name = T_BOARD("relay mainframe")
-	build_path = /obj/machinery/telecomms/relay
-	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 4, TECH_BLUESPACE = 3)
-	req_components = list(
-							/obj/item/weapon/stock_parts/manipulator = 2,
-							/obj/item/weapon/stock_parts/subspace/filter = 2)
-
 /obj/item/weapon/stock_parts/circuitboard/telecomms/bus
 	name = T_BOARD("bus mainframe")
 	build_path = /obj/machinery/telecomms/bus

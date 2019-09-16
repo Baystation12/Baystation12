@@ -4,7 +4,6 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
 	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	invisibility = 0

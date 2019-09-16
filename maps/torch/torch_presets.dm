@@ -132,24 +132,6 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 /obj/machinery/camera/all/command
 	network = list(NETWORK_COMMAND)
 
-//
-// T-Coms
-//
-
-/obj/machinery/telecomms/relay/preset/shuttle
-	id = "Charon Relay"
-	toggled = 0
-	autolinkers = list("s_relay")
-
-/obj/machinery/telecomms/relay/preset/exploration_shuttle
-	id = "Charon Relay"
-	toggled = 0
-	autolinkers = list("s_relay")
-
-/obj/machinery/telecomms/relay/preset/aquila
-	id = "Aquila Relay"
-	toggled = 0
-	autolinkers = list("s_relay")
 
 //
 // SMES units

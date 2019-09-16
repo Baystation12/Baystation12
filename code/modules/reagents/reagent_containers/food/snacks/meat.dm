@@ -40,3 +40,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
 	name = "chicken piece"
 	desc = "It tastes like you'd expect."
+
+/obj/item/weapon/reagent_containers/food/snacks/meat/chicken/game
+	name = "game bird piece"
+	desc = "Fresh game meat, harvested from some wild bird."

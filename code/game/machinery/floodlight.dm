@@ -13,19 +13,17 @@
 	power_channel = LIGHT
 	use_power = POWER_USE_OFF
 
-	var/on = 0
-
 	//better laser, increased brightness & power consumption
 	var/l_max_bright = 0.8 //brightness of light when on, can be negative
 	var/l_inner_range = 0 //inner range of light when on, can be negative
 	var/l_outer_range = 4.5 //outer range of light when on, can be negative
 
 /obj/machinery/floodlight/on_update_icon()
-	icon_state = "flood[panel_open ? "o" : ""][panel_open && get_cell() ? "b" : ""]0[on]"
+	icon_state = "flood[panel_open ? "o" : ""][panel_open && get_cell() ? "b" : ""]0[use_power == POWER_USE_ACTIVE]"
 
 /obj/machinery/floodlight/power_change()
 	. = ..()
-	if(!. || !on) return
+	if(!. || !use_power) return
 
 	if(stat & NOPOWER)
 		turn_off(1)
@@ -35,7 +33,7 @@
 	if(prob(30))
 		set_light(l_max_bright / 2, l_inner_range, l_outer_range)
 		spawn(20)
-			if(on)
+			if(use_power)
 				set_light(l_max_bright, l_inner_range, l_outer_range)
 
 // Returns 0 on failure and 1 on success
@@ -43,7 +41,6 @@
 	if(stat & NOPOWER)
 		return 0
 
-	on = 1
 	set_light(l_max_bright, l_inner_range, l_outer_range)
 	update_use_power(POWER_USE_ACTIVE)
 	use_power_oneoff(active_power_usage)//so we drain cell if they keep trying to use it
@@ -54,7 +51,6 @@
 	return 1
 
 /obj/machinery/floodlight/proc/turn_off(var/loud = 0)
-	on = 0
 	set_light(0, 0)
 	update_use_power(POWER_USE_OFF)
 	update_icon()
@@ -65,7 +61,7 @@
 /obj/machinery/floodlight/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	if(on)
+	if(use_power)
 		turn_off(1)
 	else
 		if(!turn_on(1))
@@ -82,5 +78,5 @@
 	l_inner_range = light_mod     + initial(l_inner_range)
 	l_outer_range = light_mod*1.5 + initial(l_outer_range)
 	change_power_consumption(initial(active_power_usage) * light_mod , POWER_USE_ACTIVE)
-	if(on)
+	if(use_power)
 		set_light(l_max_bright, l_inner_range, l_outer_range)

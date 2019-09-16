@@ -300,7 +300,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(A && istype(A))
 		B = A.brute_mult
 	if(!BP_IS_ROBOTIC(src))
-		B *= species.brute_mod
+		B *= species.get_brute_mod(owner)
 	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
 
 /obj/item/organ/external/proc/get_burn_mod()
@@ -309,7 +309,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(A && istype(A))
 		B = A.burn_mult
 	if(!BP_IS_ROBOTIC(src))
-		B *= species.burn_mod
+		B *= species.get_burn_mod(owner)
 	return B
 
 //organs can come off in three cases

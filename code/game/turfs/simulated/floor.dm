@@ -58,7 +58,7 @@
 	icon = base_icon
 	icon_state = base_icon_state
 	color = base_color
-	plane = PLATING_PLANE
+	layer = PLATING_LAYER
 
 	if(flooring)
 		flooring.on_remove()
@@ -80,9 +80,9 @@
 		O.hide(O.hides_under_flooring() && src.flooring)
 
 	if(flooring)
-		plane = TURF_PLANE
+		layer = TURF_LAYER
 	else
-		plane = PLATING_PLANE
+		layer = PLATING_LAYER
 
 /turf/simulated/floor/can_engrave()
 	return (!flooring || flooring.can_engrave)

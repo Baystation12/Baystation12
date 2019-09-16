@@ -11,7 +11,7 @@
 	economic_power = 8
 	alt_titles = list(
 		"Surgeon",
-		"Trauma Surgeon")
+		"Resident")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/senior
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -85,38 +85,6 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 	skill_points = 26
-
-/datum/job/biomech
-	title = "Biomechanical Engineer"
-	department = "Medical"
-	department_flag = MED
-	minimal_player_age = 0
-	ideal_character_age = 45
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Chief Medical Officer and the Corporate Liaison"
-	selection_color = "#013d3b"
-	economic_power = 6
-	alt_titles = null
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/biomech
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_ANATOMY		= SKILL_ADEPT,
-		                SKILL_MEDICAL       = SKILL_ADEPT,
-	                    SKILL_DEVICES		= SKILL_ADEPT)
-
-	max_skill = list(   SKILL_MEDICAL     	= SKILL_MAX,
-	                    SKILL_ANATOMY    	= SKILL_MAX,
-	                    SKILL_DEVICES       = SKILL_MAX,
-	                    SKILL_COMPUTER      = SKILL_MAX,
-	                    SKILL_CONSTRUCTION 	= SKILL_EXPERT,
-	                    SKILL_ELECTRICAL 	= SKILL_EXPERT)
-	skill_points = 24
-	access = list(access_robotics, access_robotics_engineering, access_morgue, access_medical, access_solgov_crew)
-	minimal_access = list()
-
-/datum/job/biomech/get_description_blurb()
-	return "You are the Biomechanical Engineer. You are responsible for repairing, upgrading and handling all bio-synthetic crew (like FBPs) on board. You are also responsible for placing brains into MMIs and anything involving augments. You answer to the Chief Medical Officer and the Corporate Liaison."
 
 /datum/job/medical_trainee
 	title = "Trainee Medical Technician"

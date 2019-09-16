@@ -270,3 +270,10 @@
 	req_amount = 3
 	send_material_data = 1
 	difficulty = 0
+
+/datum/stack_recipe/cross
+	title = "cross"
+	result_type = /obj/item/weapon/material/cross
+	req_amount = 2
+	on_floor = 1
+	send_material_data = 1

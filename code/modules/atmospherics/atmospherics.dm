@@ -18,7 +18,6 @@ Pipelines + Other Objects -> Pipe network
 	var/nodealert = 0
 	var/power_rating //the maximum amount of power the machine can use to do work, affects how powerful the machine is, in Watts
 
-	plane = ABOVE_TURF_PLANE
 	layer = EXPOSED_PIPE_LAYER
 
 	var/connect_types = CONNECT_TYPE_REGULAR
@@ -58,7 +57,6 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/hide(var/do_hide)
 	if(do_hide && level == 1)
-		plane = ABOVE_PLATING_PLANE
 		layer = PIPE_LAYER
 	else
 		reset_plane_and_layer()

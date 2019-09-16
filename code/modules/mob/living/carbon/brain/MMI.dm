@@ -191,4 +191,4 @@
 	..()
 
 /obj/item/device/mmi/on_update_icon()
-	icon_state = brainmob ? "mmi-full" : "mmi-empty"
+	icon_state = brainmob ? "mmi_full" : "mmi_empty"

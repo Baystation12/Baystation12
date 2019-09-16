@@ -5,7 +5,7 @@
 	icon_state = "railing0-1"
 	density = 1
 	throwpass = 1
-	layer = 5.2
+	layer = OBJ_LAYER
 	climb_speed_mult = 0.25
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE

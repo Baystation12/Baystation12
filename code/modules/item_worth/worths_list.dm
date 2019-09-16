@@ -4,13 +4,6 @@
 
 var/list/worths = list(
 //ROBOT ASSEMBLIES,
-					/obj/item/weapon/secbot_assembly = 180,
-					/obj/item/weapon/secbot_assembly/ed209_assembly = 280,
-					/obj/item/weapon/farmbot_arm_assembly = 130,
-					/obj/item/weapon/toolbox_tiles = 80,
-					/obj/item/weapon/toolbox_tiles_sensor = 180,
-					/obj/item/weapon/firstaid_arm_assembly = 150,
-					/obj/item/weapon/bucket_sensor = 40,
 					/obj/item/device/bot_kit = 300,
 //REAGENT CONTAINERS,
 					/obj/item/weapon/reagent_containers/hypospray = -90,
@@ -729,7 +722,6 @@ var/list/worths = list(
 					/obj/machinery/microscope = -550,
 					/obj/machinery/computer/account_database = -3000,
 					/obj/machinery/atm = -4500,
-					/obj/machinery/food_replicator = -9000,
 					/obj/machinery/readybutton = -0,
 					/obj/machinery/botany/editor = -16000,
 					/obj/machinery/botany = -9050,

@@ -111,26 +111,26 @@
 	if(istype(W,/obj/item/device/pipe_painter))
 		return 0
 
-	if(isWrench(W))		
+	if(isWrench(W))
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && !T.is_plating())
 			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 			return 1
-		
+
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
-		
+
 		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 			add_fingerprint(user)
 			return 1
-		
+
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 
 		if (do_after(user, 40, src))
 			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")
-		
+
 			new /obj/item/pipe(loc, src)
 
 			for (var/obj/machinery/meter/meter in T)
@@ -956,6 +956,7 @@
 	level = 2
 	volume = 35
 
+	pipe_class = PIPE_CLASS_UNARY
 	dir = SOUTH
 	initialize_directions = SOUTH
 	build_icon_state = "cap"
@@ -1004,7 +1005,7 @@
 	alpha = 255
 
 	overlays.Cut()
-	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "cap")
+	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, icon_state)
 
 /obj/machinery/atmospherics/pipe/cap/atmos_init()
 	..()
@@ -1052,7 +1053,7 @@
 /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
 	name = "scrubbers pipe endcap"
 	desc = "An endcap for scrubbers pipes."
-	icon_state = "cap-f-scrubbers"
+	icon_state = "cap-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -1060,7 +1061,7 @@
 /obj/machinery/atmospherics/pipe/cap/hidden/supply
 	name = "supply pipe endcap"
 	desc = "An endcap for supply pipes."
-	icon_state = "cap-f-supply"
+	icon_state = "cap-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE

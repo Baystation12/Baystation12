@@ -1,5 +1,5 @@
 /atom/movable
-	plane = OBJ_PLANE
+	layer = OBJ_LAYER
 
 	appearance_flags = TILE_BOUND
 	glide_size = 8

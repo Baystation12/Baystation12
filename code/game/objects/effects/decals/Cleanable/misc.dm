@@ -53,7 +53,6 @@
 /obj/effect/decal/cleanable/cobweb
 	name = "cobweb"
 	desc = "Somebody should remove that."
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb1"
@@ -69,7 +68,6 @@
 /obj/effect/decal/cleanable/cobweb2
 	name = "cobweb"
 	desc = "Somebody should remove that."
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb2"

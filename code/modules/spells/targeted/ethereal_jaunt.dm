@@ -30,7 +30,7 @@
 			animation.set_density(0)
 			animation.anchored = 1
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.layer = 5
+			animation.layer = FLY_LAYER 
 			target.ExtinguishMob()
 			if(target.buckled)
 				target.buckled = null

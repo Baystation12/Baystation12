@@ -76,8 +76,6 @@
 		update_icon()
 		return
 
-	//Rapid Crossbow Device crafting memes
-
 	if(isScrewdriver(W))
 		crafting = !crafting
 		if(!crafting)
@@ -87,20 +85,6 @@
 		src.add_fingerprint(user)
 		return
 
-	if((crafting) && (istype(W,/obj/item/weapon/crossbowframe)))
-		var/obj/item/weapon/crossbowframe/F = W
-		if(F.buildstate == 5)
-			if(!user.unEquip(src))
-				return
-			qdel(F)
-			var/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/CB = new(get_turf(user))
-			forceMove(CB)
-			CB.stored_matter = src.stored_matter
-			add_fingerprint(user)
-			return
-		else
-			to_chat(user, "<span class='notice'>You need to fully assemble the crossbow frame first!</span>")
-			return
 	..()
 
 /obj/item/weapon/rcd/attack_self(mob/user)

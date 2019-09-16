@@ -208,3 +208,9 @@
 	antag_text = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126?C). \
 	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173?C. \
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
+
+/datum/codex_entry/gas_analyzer
+	associated_paths = list(/obj/item/device/scanner/gas)
+	mechanics_text = "A device that analyzes the gas contents of a tile or atmospherics devices. Has 3 modes: Default operates without \
+	additional output data; Moles and volume shows the moles per gas in the mixture and the total moles and volume; Gas \
+	traits and data describes the traits per gas, how it interacts with the world, and some of its property constants."

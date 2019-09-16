@@ -10,22 +10,21 @@
 	anchored = 1
 	mouse_opacity = 2
 
-	plane = BLOB_PLANE
 	layer = BLOB_SHIELD_LAYER
 
 	var/maxHealth = 30
 	var/health
 	var/regen_rate = 5
-	var/brute_resist = 4
-	var/fire_resist = 1
+	var/brute_resist = 4.3
+	var/fire_resist = 0.8
 	var/laser_resist = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
 	var/expandType = /obj/effect/blob
 	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
-	var/damage_min = 20
-	var/damage_max = 35
+	var/damage_min = 15
+	var/damage_max = 30
 	var/pruned = FALSE
 	var/product = /obj/item/weapon/blob_tendril
-	var/attack_freq = 3 //see proc/attempt_attack; lower is more often, min 1
+	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
 
 /obj/effect/blob/New(loc)
 	health = maxHealth
@@ -57,6 +56,7 @@
 		icon_state = "blob_damaged"
 
 /obj/effect/blob/Process(wait, times_fired)
+	regen()
 	if(times_fired % attack_freq)
 		return
 	attempt_attack(GLOB.alldirs)
@@ -127,7 +127,6 @@
 		new expandType(T, min(health, 30))
 
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
-	regen()
 	sleep(4)
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
@@ -198,27 +197,71 @@
 
 /obj/effect/blob/core
 	name = "master nucleus"
-	desc = "A huge glowing nucleus surrounded by thick tendrils."
+	desc = "A massive, fragile nucleus guarded by a shield of thick tendrils."
 	icon_state = "blob_core"
-	maxHealth = 200
-	fire_resist = 2
-	regen_rate = 2
+	maxHealth = 450
 	damage_min = 30
 	damage_max = 40
 	expandType = /obj/effect/blob/shield
 	product = /obj/item/weapon/blob_tendril/core
-	attack_freq = 4
-	light_color = BLOB_COLOR_CORE
 
+	light_color = BLOB_COLOR_CORE
 	layer = BLOB_CORE_LAYER
 
-	var/growth_range = 10 // Maximal distance for new blob pieces from this core.
+	var/growth_range = 8 // Maximal distance for new blob pieces from this core.
 	var/blob_may_process = 1
+	var/reported_low_damage = FALSE
+	var/times_to_pulse = 0
+
+/obj/effect/blob/core/proc/get_health_percent()
+	return ((health / maxHealth) * 100)
+
+/*
+the master core becomes more vulnereable to damage as it weakens,
+but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading
+regen() will cover update_icon() for this proc
+*/
+/obj/effect/blob/core/proc/process_core_health() 
+	switch(get_health_percent())
+		if(75 to INFINITY)
+			brute_resist = 3.5
+			fire_resist = 2
+			attack_freq = 5
+			regen_rate = 2
+			times_to_pulse = 4
+			if(reported_low_damage)
+				report_shield_status("high")
+		if(50 to 74)
+			brute_resist = 2.5
+			fire_resist = 1.5
+			attack_freq = 4
+			regen_rate = 3
+			times_to_pulse = 3
+		if(34 to 49)
+			brute_resist = 1
+			fire_resist = 0.8
+			attack_freq = 3
+			regen_rate = 4
+			times_to_pulse = 2
+		if(-INFINITY to 33)
+			brute_resist = 0.5
+			fire_resist = 0.3
+			regen_rate = 5
+			times_to_pulse = 1
+			if(!reported_low_damage)
+				report_shield_status("low")
+
+/obj/effect/blob/core/proc/report_shield_status(var/status)
+	if(status == "low")
+		visible_message(SPAN_DANGER("The [src]'s tendril shield fails, leaving the nucleus vulnerable!"), 3)
+		reported_low_damage = TRUE
+	if(status == "high")
+		visible_message(SPAN_NOTICE("The [src]'s tendril shield seems to have fully reformed."), 3)
+		reported_low_damage = FALSE
 
 // Rough icon state changes that reflect the core's health
 /obj/effect/blob/core/on_update_icon()
-	var/health_percent = (health / maxHealth) * 100
-	switch(health_percent)
+	switch(get_health_percent())
 		if(66 to INFINITY)
 			icon_state = "blob_core"
 		if(33 to 66)
@@ -232,26 +275,30 @@
 		return
 	blob_may_process = 0
 	sleep(0)
-	pulse(20, GLOB.alldirs)
-	pulse(20, GLOB.alldirs)
-	pulse(20, GLOB.alldirs)
-	pulse(20, GLOB.alldirs)
+	process_core_health()
+	regen()
+	for(var/I in 1 to times_to_pulse)
+		pulse(20, GLOB.alldirs)
 	attempt_attack(GLOB.alldirs)
 	attempt_attack(GLOB.alldirs)
 	blob_may_process = 1
 
-// Half the stats of a normal core. Blob has a very small probability of growing these when spreading. These will spread the blob further.
+// Blob has a very small probability of growing these when spreading. These will spread the blob further.
 /obj/effect/blob/core/secondary
 	name = "auxiliary nucleus"
 	desc = "An interwoven mass of tendrils. A glowing nucleus pulses at its center."
 	icon_state = "blob_node"
-	maxHealth = 100
+	maxHealth = 125
 	regen_rate = 1
-	growth_range = 3
-	damage_min = 20
-	damage_max = 30
+	growth_range = 4
+	damage_min = 15
+	damage_max = 20
 	layer = BLOB_NODE_LAYER
 	product = /obj/item/weapon/blob_tendril/core/aux
+	times_to_pulse = 4
+
+/obj/effect/blob/core/secondary/process_core_health()
+	return
 
 /obj/effect/blob/core/secondary/on_update_icon()
 	icon_state = (health / maxHealth >= 0.5) ? "blob_node" : "blob_factory"
@@ -260,14 +307,13 @@
 	name = "shielding mass"
 	desc = "A pulsating mass of interwoven tendrils. These seem particularly robust, but not quite as active."
 	icon_state = "blob_idle"
-	maxHealth = 100
-	damage_min = 16
-	damage_max = 28
-	attack_freq = 5
+	maxHealth = 120
+	damage_min = 13
+	damage_max = 25
+	attack_freq = 7
 	regen_rate = 4
 	expandType = /obj/effect/blob/ravaging
 	light_color = BLOB_COLOR_SHIELD
-
 
 /obj/effect/blob/shield/New()
 	..()
@@ -292,9 +338,10 @@
 /obj/effect/blob/ravaging
 	name = "ravaging mass"
 	desc = "A mass of interwoven tendrils. They thrash around haphazardly at anything in reach."
-	damage_min = 35
-	damage_max = 45
-	attack_freq = 2
+	maxHealth = 20
+	damage_min = 27
+	damage_max = 36
+	attack_freq = 3
 	light_color = BLOB_COLOR_RAV
 	color = "#ffd400" //Temporary, for until they get a new sprite.
 
@@ -317,12 +364,12 @@
 		tendril_type = pick(types_of_tendril)
 		switch(tendril_type)
 			if("solid")
-				desc = "An incredibly dense tendril, removed from an asteroclast."
+				desc = "An incredibly dense, yet flexible, tendril, removed from an asteroclast."
 				force = 10
 				color = COLOR_BRONZE
 				origin_tech = list(TECH_MATERIAL = 2)
 			if("fire")
-				desc = "A tendril removed from an asteroclast. It's so hot that it almost hurts to hold onto it."
+				desc = "A tendril removed from an asteroclast. It's hot to the touch."
 				damtype = BURN
 				force = 15
 				color = COLOR_AMBER

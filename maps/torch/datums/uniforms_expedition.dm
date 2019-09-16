@@ -461,4 +461,4 @@
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
-						 /obj/item/clothing/suit/storage/toggle/labcoat/science/cso)
+						 /obj/item/clothing/suit/storage/toggle/labcoat/rd/ec)

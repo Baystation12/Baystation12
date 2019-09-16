@@ -59,6 +59,8 @@
 			return global.SScuisine;
 		if("SSculture")
 			return global.SSculture;
+		if("SScustomitems")
+			return global.SScustomitems;
 		if("SSdisposals")
 			return global.SSdisposals;
 		if("SSevac")
@@ -77,6 +79,10 @@
 			return global.SSghost_images;
 		if("SSgoals")
 			return global.SSgoals;
+		if("SSgraphs_process")
+			return global.SSgraphs_process;
+		if("SSgraphs_update")
+			return global.SSgraphs_update;
 		if("SSicon_update")
 			return global.SSicon_update;
 		if("SSinactivity")
@@ -307,8 +313,6 @@
 			return global.channel_to_radio_key;
 		if("chargen_robolimbs")
 			return global.chargen_robolimbs;
-		if("checked_for_inactives")
-			return global.checked_for_inactives;
 		if("chemical_reaction_logs")
 			return global.chemical_reaction_logs;
 		if("chicken_count")
@@ -347,8 +351,6 @@
 			return global.csrfz_check;
 		if("custom_event_msg")
 			return global.custom_event_msg;
-		if("custom_items")
-			return global.custom_items;
 		if("damage_icon_parts")
 			return global.damage_icon_parts;
 		if("dbcon")
@@ -491,8 +493,6 @@
 			return global.id_card_states;
 		if("image_repository")
 			return global.image_repository;
-		if("inactive_keys")
-			return global.inactive_keys;
 		if("init")
 			return global.init;
 		if("intents")
@@ -527,8 +527,6 @@
 			return global.limb_icon_cache;
 		if("loadout_categories")
 			return global.loadout_categories;
-		if("lobby_image")
-			return global.lobby_image;
 		if("log_end")
 			return global.log_end;
 		if("lunchables_drink_reagents_")
@@ -785,14 +783,14 @@
 			return global.sqladdress;
 		if("sqldb")
 			return global.sqldb;
+		if("sqlenabled")
+			return global.sqlenabled;
 		if("sqlfdbkdb")
 			return global.sqlfdbkdb;
 		if("sqlfdbklogin")
 			return global.sqlfdbklogin;
 		if("sqlfdbkpass")
 			return global.sqlfdbkpass;
-		if("sqllogging")
-			return global.sqllogging;
 		if("sqllogin")
 			return global.sqllogin;
 		if("sqlpass")
@@ -978,6 +976,8 @@
 			global.SScuisine=newval;
 		if("SSculture")
 			global.SSculture=newval;
+		if("SScustomitems")
+			global.SScustomitems=newval;
 		if("SSdisposals")
 			global.SSdisposals=newval;
 		if("SSevac")
@@ -996,6 +996,10 @@
 			global.SSghost_images=newval;
 		if("SSgoals")
 			global.SSgoals=newval;
+		if("SSgraphs_process")
+			global.SSgraphs_process=newval;
+		if("SSgraphs_update")
+			global.SSgraphs_update=newval;
 		if("SSicon_update")
 			global.SSicon_update=newval;
 		if("SSinactivity")
@@ -1226,8 +1230,6 @@
 			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
 			global.chargen_robolimbs=newval;
-		if("checked_for_inactives")
-			global.checked_for_inactives=newval;
 		if("chemical_reaction_logs")
 			global.chemical_reaction_logs=newval;
 		if("chicken_count")
@@ -1266,8 +1268,6 @@
 			global.csrfz_check=newval;
 		if("custom_event_msg")
 			global.custom_event_msg=newval;
-		if("custom_items")
-			global.custom_items=newval;
 		if("damage_icon_parts")
 			global.damage_icon_parts=newval;
 		if("dbcon")
@@ -1410,8 +1410,6 @@
 			global.id_card_states=newval;
 		if("image_repository")
 			global.image_repository=newval;
-		if("inactive_keys")
-			global.inactive_keys=newval;
 		if("init")
 			global.init=newval;
 		if("intents")
@@ -1446,8 +1444,6 @@
 			global.limb_icon_cache=newval;
 		if("loadout_categories")
 			global.loadout_categories=newval;
-		if("lobby_image")
-			global.lobby_image=newval;
 		if("log_end")
 			global.log_end=newval;
 		if("lunchables_drink_reagents_")
@@ -1704,14 +1700,14 @@
 			global.sqladdress=newval;
 		if("sqldb")
 			global.sqldb=newval;
+		if("sqlenabled")
+			global.sqlenabled=newval;
 		if("sqlfdbkdb")
 			global.sqlfdbkdb=newval;
 		if("sqlfdbklogin")
 			global.sqlfdbklogin=newval;
 		if("sqlfdbkpass")
 			global.sqlfdbkpass=newval;
-		if("sqllogging")
-			global.sqllogging=newval;
 		if("sqllogin")
 			global.sqllogin=newval;
 		if("sqlpass")
@@ -1867,6 +1863,7 @@
 	"SScodex",
 	"SScuisine",
 	"SSculture",
+	"SScustomitems",
 	"SSdisposals",
 	"SSevac",
 	"SSevent",
@@ -1876,6 +1873,8 @@
 	"SSgarbage",
 	"SSghost_images",
 	"SSgoals",
+	"SSgraphs_process",
+	"SSgraphs_update",
 	"SSicon_update",
 	"SSinactivity",
 	"SSjobs",
@@ -1991,7 +1990,6 @@
 	"channel_color_presets",
 	"channel_to_radio_key",
 	"chargen_robolimbs",
-	"checked_for_inactives",
 	"chemical_reaction_logs",
 	"chicken_count",
 	"church_name",
@@ -2011,7 +2009,6 @@
 	"crew_repository",
 	"csrfz_check",
 	"custom_event_msg",
-	"custom_items",
 	"damage_icon_parts",
 	"dbcon",
 	"dbcon_old",
@@ -2083,7 +2080,6 @@
 	"human_icon_cache",
 	"id_card_states",
 	"image_repository",
-	"inactive_keys",
 	"init",
 	"intents",
 	"intercom_range_display_status",
@@ -2101,7 +2097,6 @@
 	"lighting_overlays_initialised",
 	"limb_icon_cache",
 	"loadout_categories",
-	"lobby_image",
 	"log_end",
 	"lunchables_drink_reagents_",
 	"lunchables_drinks_",
@@ -2230,10 +2225,10 @@
 	"splatter_cache",
 	"sqladdress",
 	"sqldb",
+	"sqlenabled",
 	"sqlfdbkdb",
 	"sqlfdbklogin",
 	"sqlfdbkpass",
-	"sqllogging",
 	"sqllogin",
 	"sqlpass",
 	"sqlport",

@@ -3,7 +3,6 @@
 	desc = "I Better stay away from that thing."
 	density = 1
 	anchored = 1
-	plane = OBJ_PLANE
 	layer = OBJ_LAYER
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "uglymine"

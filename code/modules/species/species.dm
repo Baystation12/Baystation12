@@ -82,9 +82,10 @@
 	var/list/natural_armour_values            // Armour values used if naked.
 	var/brute_mod =      1                    // Physical damage multiplier.
 	var/burn_mod =       1                    // Burn damage multiplier.
-	var/oxy_mod =        1                    // Oxyloss modifier
 	var/toxins_mod =     1                    // Toxloss modifier
 	var/radiation_mod =  1                    // Radiation modifier
+
+	var/oxy_mod =        1                    // Oxyloss modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
 	var/stun_mod =       1                    // Stun period modifier.
@@ -664,7 +665,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		LAZYSET(hair_styles, type, L)
 		for(var/hairstyle in GLOB.hair_styles_list)
 			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hairstyle]
-			if(!(get_bodytype() in S.species_allowed))
+			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+				continue
+			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
 			ADD_SORTED(L, hairstyle, /proc/cmp_text_asc)
 			L[hairstyle] = S
@@ -687,7 +690,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				continue
 			if(gender == FEMALE && S.gender == MALE)
 				continue
-			if(!(get_bodytype() in S.species_allowed))
+			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+				continue
+			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
 			ADD_SORTED(facial_hair_style_by_gender, facialhairstyle, /proc/cmp_text_asc)
 			facial_hair_style_by_gender[facialhairstyle] = S

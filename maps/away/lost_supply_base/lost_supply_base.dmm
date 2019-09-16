@@ -1003,7 +1003,7 @@
 /turf/simulated/wall,
 /area/lost_supply_base/common)
 "cw" = (
-/obj/machinery/food_replicator,
+/obj/machinery/fabricator/replicator,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "cx" = (

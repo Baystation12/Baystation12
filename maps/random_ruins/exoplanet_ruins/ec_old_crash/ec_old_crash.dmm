@@ -70,7 +70,6 @@
 "am" = (
 /obj/machinery/atmospherics/unary/vent_pump/low{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/alarm/low{
@@ -184,7 +183,6 @@
 "aC" = (
 /obj/machinery/atmospherics/unary/vent_pump/low{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/item/weapon/stool/padded,
@@ -1272,7 +1270,6 @@
 "cx" = (
 /obj/machinery/atmospherics/unary/vent_pump/low{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white/lowpressure,

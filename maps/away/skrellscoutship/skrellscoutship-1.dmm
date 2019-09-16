@@ -1100,7 +1100,6 @@
 "cP" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/microwave{
@@ -1267,7 +1266,6 @@
 "dk" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/bed/chair/comfy/black{
@@ -1560,7 +1558,6 @@
 "dS" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -1747,7 +1744,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/alarm/skrell{
@@ -1793,7 +1789,6 @@
 "eu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/skrell/blue,
@@ -2487,7 +2482,6 @@
 "wp" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/skrell/blue,

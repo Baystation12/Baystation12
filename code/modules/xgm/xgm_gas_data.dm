@@ -64,15 +64,10 @@
 		gas_data.name[gas.id] = gas.name
 		gas_data.specific_heat[gas.id] = gas.specific_heat
 		gas_data.molar_mass[gas.id] = gas.molar_mass
-		if(gas.overlay_limit) 
+		if(gas.overlay_limit)
 			gas_data.overlay_limit[gas.id] = gas.overlay_limit
-			var/obj/effect/gas_overlay/I = new()
-			if(gas.tile_overlay)
-				I.icon_state = gas.tile_overlay
-			if(gas.tile_color)
-				gas_data.tile_overlay_color[gas.id] = gas.tile_color
-				I.color = gas.tile_color
-			gas_data.tile_overlay[gas.id] = I
+			gas_data.tile_overlay[gas.id] = gas.tile_overlay
+			gas_data.tile_overlay_color[gas.id] = gas.tile_color
 		gas_data.flags[gas.id] = gas.flags
 		gas_data.burn_product[gas.id] = gas.burn_product
 
@@ -93,12 +88,20 @@
 	desc = "You shouldn't be clicking this."
 	icon = 'icons/effects/tile_effects.dmi'
 	icon_state = "generic"
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = 0
+	var/gas_id
 
-/obj/effect/gas_overlay/Initialize()
+/obj/effect/gas_overlay/proc/update_alpha_animation(var/new_alpha)
+	animate(src, alpha = new_alpha)
+	alpha = new_alpha
+	animate(src, alpha = 0.8 * new_alpha, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
+	animate(alpha = new_alpha, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
+
+/obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	animate(src, alpha = 165, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
-	animate(alpha = 185, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
+	gas_id = gas
+	if(gas_data.tile_overlay[gas_id])
+		icon_state = gas_data.tile_overlay[gas_id]
+	color = gas_data.tile_overlay_color[gas_id]

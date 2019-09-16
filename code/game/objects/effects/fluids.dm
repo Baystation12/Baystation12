@@ -51,10 +51,8 @@
 
 	if(fluid_amount > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER
-		plane = EFFECTS_BELOW_LIGHTING_PLANE
 	else
 		layer = SHALLOW_FLUID_LAYER
-		plane = HIDING_MOB_PLANE
 
 	if(fluid_amount > FLUID_DEEP)
 		alpha = FLUID_MAX_ALPHA
@@ -93,7 +91,6 @@
 	name = ""
 	mouse_opacity = 0
 	layer = DEEP_FLUID_LAYER
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	color = COLOR_OCEAN
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"

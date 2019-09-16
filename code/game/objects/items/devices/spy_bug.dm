@@ -4,7 +4,6 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "eshield0"
 	item_state = "nothing"
-	plane = OBJ_PLANE
 	layer = BELOW_TABLE_LAYER
 
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

@@ -5,7 +5,7 @@
 	desc = "A wooden pole bearing a banner of Sol Central Government. Ave."
 	anchored = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 
 /obj/structure/solbanner/exo
 	name = "exoplanet SCG banner"

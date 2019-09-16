@@ -1963,7 +1963,6 @@
 /obj/item/weapon/storage/box/autoinjectors,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -2166,7 +2165,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/light/small{
@@ -3556,7 +3554,6 @@
 "gr" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/closet/secure_closet/freezer/fridge,
@@ -3662,7 +3659,6 @@
 "gC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/table/marble,
@@ -3733,7 +3729,6 @@
 "gJ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3951,7 +3946,6 @@
 /obj/machinery/pipedispenser,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/techfloor{
@@ -5248,7 +5242,6 @@
 "jj" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /obj/item/weapon/stool/bar/padded,
@@ -5657,7 +5650,6 @@
 "jQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/vending/lavatory{
@@ -5807,7 +5799,6 @@
 "ka" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/flora/pottedplant/orientaltree,
@@ -6471,7 +6462,6 @@
 "lk" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6696,7 +6686,6 @@
 "lI" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/borderfloorwhite,
@@ -7312,7 +7301,6 @@
 "mF" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/cable{
@@ -7996,7 +7984,6 @@
 "nL" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -8673,7 +8660,6 @@
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,

@@ -5,7 +5,6 @@
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
 	unacidable = 1
-	plane = ABOVE_TURF_PLANE
 	layer = RUNE_LAYER
 
 	var/blood

@@ -461,9 +461,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/list/usable_markings = pref.body_markings.Copy() ^ GLOB.body_marking_styles_list.Copy()
 		for(var/M in usable_markings)
 			var/datum/sprite_accessory/S = usable_markings[M]
-			if(!S.species_allowed.len)
-				continue
-			else if(!(pref.species in S.species_allowed))
+			if((S.species_allowed && !(mob_species.get_bodytype() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
 				usable_markings -= M
 
 		var/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings

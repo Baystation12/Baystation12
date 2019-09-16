@@ -164,8 +164,8 @@
 	department = "Engineering"
 	department_flag = ENG
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	minimal_player_age = 0
 	supervisors = "the Chief Engineer and the Corporate Liaison."
 	selection_color = "#5b4d20"
@@ -178,6 +178,7 @@
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT,
 	                    SKILL_EVA           = SKILL_ADEPT,
+	                    SKILL_ANATOMY       = SKILL_ADEPT,
 	                    SKILL_MECH          = HAS_PERK)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
@@ -185,8 +186,8 @@
 	                    SKILL_ATMOS        = SKILL_EXPERT,
 	                    SKILL_ENGINES      = SKILL_EXPERT,
 	                    SKILL_DEVICES      = SKILL_MAX,
-	                    SKILL_ANATOMY      = SKILL_EXPERT,
-	                    SKILL_MEDICAL      = SKILL_EXPERT)
+	                    SKILL_MEDICAL      = SKILL_EXPERT,
+	                    SKILL_ANATOMY      = SKILL_EXPERT)
 	skill_points = 20
 
 	access = list(access_robotics, access_robotics_engineering, access_engine, access_solgov_crew)

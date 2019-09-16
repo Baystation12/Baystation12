@@ -58,12 +58,19 @@
 /mob/living/simple_animal/hostile/antlion/proc/diggy()
 	var/list/turf_targets
 	if(target_mob)
-		turf_targets = trange(1, get_turf(target_mob))
+		for(var/turf/T in range(1, get_turf(target_mob)))
+			if(!T.is_floor())
+				continue
+			if(!T.z != src.z)
+				continue
+			turf_targets += T
 	else
-		turf_targets = trange(5, get_turf(src))
-	for(var/turf/TT in turf_targets)
-		if(!TT.is_floor()) //excludes walls, space and open space
-			turf_targets -= TT
+		for(var/turf/T in orange(5, src))
+			if(!T.is_floor())
+				continue
+			if(!T.z != src.z)
+				continue
+			turf_targets += T
 	if(!LAZYLEN(turf_targets)) //oh no
 		addtimer(CALLBACK(src, .proc/emerge, 2 SECONDS))
 		return
@@ -102,6 +109,7 @@
 	desc = "A huge antlion. It looks displeased."
 	icon_state = "queen"
 	icon_living = "queen"
+	icon_dead = "queen_dead"
 	mob_size = MOB_LARGE
 	health = 275
 	maxHealth = 275

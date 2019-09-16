@@ -1607,7 +1607,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "eb" = (
-/obj/machinery/food_replicator,
+/obj/machinery/fabricator/replicator,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "ec" = (
@@ -2543,7 +2543,6 @@
 /obj/item/remains,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2753,7 +2752,6 @@
 /obj/item/clothing/suit/storage/toggle/labcoat/chemist,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,

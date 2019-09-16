@@ -29,6 +29,7 @@
 	. += new/datum/stack_recipe/ring(src)
 	. += new/datum/stack_recipe/clipboard(src)
 	. += new/datum/stack_recipe/urn(src)
+	. += new/datum/stack_recipe/cross(src)
 
 	if(integrity>50)
 		. += new/datum/stack_recipe/furniture/chair(src) //NOTE: the wood material has it's own special chair recipe

@@ -925,7 +925,6 @@
 "cg" = (
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/valve/open{
-	layer = 5.1;
 	open = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -2411,7 +2410,6 @@
 "eW" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/lino,
@@ -3065,7 +3063,6 @@
 "gF" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -3496,17 +3493,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/fore)
-"id" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/reagent_dispensers/fueltank,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/fifthdeck/aftstarboard)
 "ie" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/maintenance,
@@ -3921,7 +3907,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -4109,7 +4094,6 @@
 "jw" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/lino,
@@ -6588,6 +6572,8 @@
 /area/quartermaster/storage)
 "ox" = (
 /obj/structure/railing/mapped,
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/powerloader/old,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "oy" = (
@@ -7485,7 +7471,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -8674,68 +8659,20 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
-"sv" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/airlock/engineering{
-	name = "Fourth Deck Shield Generator"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/shield/fifthdeck)
 "sw" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22;
-	pixel_y = 0
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/fifthdeck)
+/obj/structure/reagent_dispensers/watertank,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/fifthdeck/aftstarboard)
 "sx" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/fifthdeck)
-"sy" = (
-/obj/structure/cable/green,
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/shield/fifthdeck)
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/fifthdeck/aftstarboard)
 "sz" = (
-/obj/structure/cable/green,
-/obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/shield/fifthdeck)
+/obj/structure/reagent_dispensers/fueltank,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/fifthdeck/aftstarboard)
 "sA" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -9529,7 +9466,6 @@
 "uu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -10644,7 +10580,6 @@
 "yl" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
@@ -11460,7 +11395,6 @@
 "Bg" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/alarm{
@@ -11645,7 +11579,6 @@
 "BN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark,
@@ -12200,7 +12133,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/table/rack,
@@ -12735,7 +12667,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -13584,7 +13515,6 @@
 	},
 /obj/machinery/firealarm{
 	dir = 4;
-	layer = 3.3;
 	pixel_x = 26
 	},
 /turf/simulated/floor/plating,
@@ -13668,7 +13598,8 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/turf/simulated/wall/prepainted,
+/obj/effect/wallframe_spawn/no_grille,
+/turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "Jh" = (
 /obj/structure/sign/warning/deathsposal,
@@ -14280,29 +14211,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
-"Lh" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftstarboard)
 "Li" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
@@ -14438,7 +14346,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/cable/cyan{
@@ -14621,7 +14528,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -15827,7 +15733,6 @@
 /obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -16761,11 +16666,6 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
 "Un" = (
@@ -16822,7 +16722,7 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "Ut" = (
 /turf/simulated/wall/r_wall/prepainted,
-/area/shield/fifthdeck)
+/area/maintenance/fifthdeck/aftstarboard)
 "Uu" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /turf/simulated/floor/tiled/white,
@@ -16975,7 +16875,6 @@
 "Vb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/handrai{
@@ -17384,17 +17283,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition/eva)
-"WM" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/reagent_dispensers/watertank,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/fifthdeck/aftstarboard)
 "WO" = (
 /obj/structure/table/standard,
 /obj/item/weapon/disk/tech_disk{
@@ -17529,7 +17417,6 @@
 "Xs" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
@@ -38791,11 +38678,11 @@ aa
 aa
 ZG
 ZG
-Lh
+aH
 Um
-sv
+Ea
 sw
-sy
+sw
 ag
 oI
 eH
@@ -38994,8 +38881,8 @@ aa
 ZG
 ZG
 aH
-WM
-Ut
+Um
+Ea
 sx
 sz
 ag
@@ -39196,8 +39083,8 @@ aa
 ZG
 ZG
 aH
-id
-Ut
+Um
+Ea
 Ut
 Ut
 ag

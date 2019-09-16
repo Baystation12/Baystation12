@@ -122,6 +122,5 @@
 	if(usr.incapacitated())
 		return
 
-	plane = ABOVE_TURF_PLANE
 	layer = MOUSETRAP_LAYER
 	to_chat(usr, "<span class='notice'>You hide [src].</span>")

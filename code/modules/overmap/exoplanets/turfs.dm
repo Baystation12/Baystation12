@@ -6,7 +6,7 @@
 	has_resources = 1
 	footstep_type = FOOTSTEP_CARPET
 	var/diggable = 1
-	var/mudpit = 0	//if pits should not take turf's color
+	var/dirt_color = "#7c5e42"
 
 /turf/simulated/floor/exoplanet/can_engrave()
 	return FALSE
@@ -60,7 +60,6 @@
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "seashallow"
 	movement_delay = 2
-	mudpit = 1
 	footstep_type = FOOTSTEP_WATER
 	var/reagent_type = /datum/reagent/water
 
@@ -81,6 +80,8 @@
 
 /turf/simulated/floor/exoplanet/on_update_icon(var/update_neighbors)
 	overlays.Cut()
+	if(LAZYLEN(decals))
+		overlays += decals
 	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if(!istype(turf_to_check, type))

@@ -21,7 +21,7 @@
 /obj/item/device/scanner/plant/scan(atom/A, mob/user)
 	scan_title = "[A] at [get_area(A)]"
 	scan_data = plant_scan_results(A)
-	show_results(user)
+	show_menu(user)
 
 /proc/plant_scan_results(obj/target)
 	var/datum/seed/grown_seed
@@ -50,7 +50,7 @@
 
 	if(grown_seed.mysterious && !grown_seed.scanned && !(get_z(src) in GLOB.using_map.station_levels))
 		grown_seed.scanned = TRUE
-		SSstatistics.add_field("xenoplants_scanned", 1) 
+		SSstatistics.add_field("xenoplants_scanned", 1)
 
 	var/list/dat = list()
 
@@ -179,5 +179,5 @@
 
 	if(grown_seed.get_trait(TRAIT_CONSUME_GASSES))
 		dat += "<br>It will remove gas from the environment."
-	
+
 	return JOINTEXT(dat)

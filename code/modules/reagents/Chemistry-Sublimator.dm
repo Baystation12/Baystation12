@@ -166,7 +166,15 @@
 			to_chat(user, "\The [src] has \a [container] loaded. It is empty.")
 	if(holding)
 		to_chat(user, "\The [src] has \a [holding] connected.")
+	if(reagent_whitelist)
+		to_chat(user, "\The [src]'s safety light is on.")
 
+/obj/machinery/portable_atmospherics/reagent_sublimator/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged && length(reagent_whitelist))
+		emagged = TRUE
+		reagent_whitelist.Cut()
+		to_chat(user, "\The [src]'s safety light turns off.")
+		return 1
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/sauna
 	name = "sauna heater"

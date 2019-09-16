@@ -322,14 +322,6 @@
 				//text += "[t]<br>"
 			usr << browse(text, "window=sdql_result")
 
-
-/client/Topic(href,href_list[],hsrc)
-	if(href_list["SDQL_select"])
-		debug_variables(locate(href_list["SDQL_select"]))
-
-	..()
-
-
 /proc/SDQL_evaluate(datum/object, list/equation)
 	if(equation.len == 0)
 		return null

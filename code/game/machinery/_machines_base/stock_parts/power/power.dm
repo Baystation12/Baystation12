@@ -14,6 +14,7 @@
 	..()
 	ADD_SORTED(machine.power_components, src, /proc/cmp_power_component_priority)
 	machine.power_change() // Makes the machine recompute its power status.
+	cached_channel = initial(machine.power_channel)
 
 /obj/item/weapon/stock_parts/power/on_uninstall(var/obj/machinery/machine)
 	machine.power_components -= src

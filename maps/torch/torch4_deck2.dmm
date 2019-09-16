@@ -1255,13 +1255,7 @@
 /area/storage/medical)
 "ct" = (
 /obj/structure/table/standard,
-/obj/random/single{
-	icon = 'icons/obj/playing_cards.dmi';
-	icon_state = "deck";
-	name = "randomly spawned deck of cards";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/deck
-	},
+/obj/random/single/playing_cards,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -2956,7 +2950,7 @@
 "gh" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
+	
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/stack/material/glass{
@@ -4087,7 +4081,6 @@
 /obj/machinery/vending/wallmed1{
 	dir = 1;
 	icon_state = "wallmed";
-	layer = 3.3;
 	name = "Emergency NanoMed";
 	pixel_x = 0;
 	pixel_y = -32
@@ -5296,7 +5289,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/shieldbay)
+/area/maintenance/seconddeck/aftport)
 "kW" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -5622,8 +5615,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "lE" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -5891,11 +5889,16 @@
 	name = "Drive Containment"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "mn" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "mo" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/hydrogen,
@@ -6494,7 +6497,7 @@
 	name = "Drive Containment"
 	},
 /turf/space,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "nF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/structure/cable/cyan{
@@ -6939,7 +6942,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "oY" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -7314,12 +7317,22 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
 "pL" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
@@ -7671,7 +7684,6 @@
 /obj/item/weapon/aicard,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8206,6 +8218,18 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"ro" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/bluespace/containment)
 "rq" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -9017,7 +9041,7 @@
 /area/engineering/atmos)
 "tU" = (
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "tV" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
@@ -9408,6 +9432,9 @@
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"va" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/engineering/bluespace/containment)
 "vb" = (
 /obj/structure/table/steel,
 /obj/machinery/power/apc/high{
@@ -9689,7 +9716,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/shieldbay)
+/area/maintenance/seconddeck/aftport)
 "vS" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/hologram/holopad,
@@ -10827,13 +10854,7 @@
 /area/engineering/atmos)
 "zA" = (
 /obj/structure/closet,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
 "zB" = (
@@ -11426,7 +11447,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "AT" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
 	dir = 8
@@ -11733,7 +11754,6 @@
 /obj/machinery/access_button{
 	command = "cycle_exterior";
 	frequency = 1379;
-	layer = 7;
 	master_tag = "incinerator_access_control";
 	name = "Incinerator airlock control";
 	pixel_x = 10;
@@ -12177,7 +12197,7 @@
 	name = "Containment Shield"
 	},
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "CJ" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12305,13 +12325,7 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
@@ -14041,6 +14055,14 @@
 	icon_state = "walnut_broken3"
 	},
 /area/vacant/chapel)
+"HA" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace/containment)
 "HB" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -14914,13 +14936,7 @@
 /area/engineering/bluespace)
 "KT" = (
 /obj/structure/closet/crate,
-/obj/random/single{
-	icon = 'icons/obj/drinks.dmi';
-	icon_state = "cola";
-	name = "randomly spawned cola";
-	spawn_nothing_percentage = 50;
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /obj/random/tech_supply,
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
@@ -15112,7 +15128,7 @@
 "LK" = (
 /obj/structure/sign/warning/secure_area,
 /turf/simulated/wall/r_wall/prepainted,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "LN" = (
 /obj/structure/disposaloutlet{
 	dir = 4
@@ -15643,7 +15659,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "Nz" = (
 /obj/effect/floor_decal/corner/green,
 /turf/simulated/floor/tiled,
@@ -16010,7 +16026,7 @@
 "OQ" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
+	
 	},
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil,
@@ -16058,7 +16074,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -16350,7 +16365,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "PF" = (
 /obj/structure/sign/warning/high_voltage{
 	icon_state = "shock";
@@ -16579,7 +16594,6 @@
 "Qt" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -16728,7 +16742,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/shieldbay)
+/area/maintenance/seconddeck/aftport)
 "Rb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -17264,7 +17278,6 @@
 "SQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -17284,7 +17297,7 @@
 /area/hallway/primary/seconddeck/fore)
 "SX" = (
 /turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "SY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -17461,6 +17474,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
@@ -17654,8 +17672,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "Uj" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -17965,6 +17988,10 @@
 /obj/item/trash,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"Vv" = (
+/obj/machinery/ai_status_display,
+/turf/simulated/wall/r_wall/prepainted,
+/area/engineering/bluespace/containment)
 "Vy" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -18161,7 +18188,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -18662,9 +18688,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
-"XT" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/engineering/shieldbay)
 "XV" = (
 /obj/machinery/button/blast_door{
 	desc = "A remote-control switch.";
@@ -18721,6 +18744,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"Yd" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace/containment)
 "Ye" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -19202,8 +19233,13 @@
 	name = "Bluespace Drive"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/bluespace)
+/area/engineering/bluespace/containment)
 "ZF" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -35110,13 +35146,13 @@ bd
 bI
 IN
 su
-jV
-jV
+va
+va
 LK
-jV
+va
 LK
-jV
-jV
+va
+va
 VQ
 tn
 Qq
@@ -35312,13 +35348,13 @@ hM
 bI
 oq
 Fj
-jV
-jV
+va
+va
 AR
 oW
 SX
-jV
-jV
+va
+va
 TJ
 RF
 no
@@ -35520,7 +35556,7 @@ SX
 tU
 SX
 SX
-jV
+va
 Ym
 tH
 PI
@@ -35721,8 +35757,8 @@ tU
 tU
 CI
 tU
-tU
-IL
+ro
+Vv
 tp
 OF
 PX
@@ -35922,9 +35958,9 @@ nD
 SX
 SX
 mn
-SX
-SX
-jV
+HA
+Yd
+va
 FK
 tH
 PI
@@ -36121,12 +36157,12 @@ XR
 nW
 Sa
 LK
-jV
+va
 PE
 Ui
 Nx
-jV
-jV
+va
+va
 tr
 OF
 PX
@@ -36323,11 +36359,11 @@ XR
 ng
 Wi
 QQ
-jV
+va
 mm
 lD
 mm
-jV
+va
 sL
 tq
 tH
@@ -36525,11 +36561,11 @@ Sz
 XO
 qt
 QQ
-jV
+va
 LK
 ZE
-jV
-jV
+va
+va
 QR
 tq
 tH
@@ -37544,7 +37580,7 @@ jV
 QZ
 kV
 vR
-XT
+zV
 zV
 zV
 CJ

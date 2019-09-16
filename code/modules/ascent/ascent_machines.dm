@@ -209,7 +209,6 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 		field_image.color = COLOR_CYAN
 		field_image.alpha = 50
 		field_image.layer = SINGULARITY_LAYER
-		field_image.plane = EFFECTS_BELOW_LIGHTING_PLANE
 		field_image.appearance_flags |= RESET_COLOR
 
 		var/matrix/M = matrix()

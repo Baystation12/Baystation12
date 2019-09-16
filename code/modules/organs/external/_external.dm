@@ -101,7 +101,7 @@
 		sync_colour_to_human(owner)
 	get_icon()
 
-	slowdown = species.slowdown
+	slowdown = species.get_slowdown(owner)
 
 /obj/item/organ/external/Destroy()
 
@@ -164,7 +164,7 @@
 			burn_damage = 7.5
 
 	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
-	burn_damage *= mult/species.burn_mod //ignore burn mod for EMP damage
+	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
 
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
@@ -1429,11 +1429,13 @@ obj/item/organ/external/proc/remove_clamps()
 		var/unknown_body = 0
 		for(var/I in implants)
 			var/obj/item/weapon/implant/imp = I
-			if(istype(I,/obj/item/weapon/implant) && !imp.hidden)
+			if(istype(I,/obj/item/weapon/implant))
+				if(imp.hidden)
+					continue
 				if (imp.known)
 					. += "[capitalize(imp.name)] implanted"
-				else
-					unknown_body++
+					continue
+			unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
 	for(var/obj/item/organ/internal/augment/aug in internal_organs)

@@ -123,11 +123,13 @@
 	var/image/res = image(species.icon_template,"")
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.f_style]
-		if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype(owner) in facial_hair_style.species_allowed))
-			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-			if(facial_hair_style.do_colouration)
-				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
-			res.overlays |= facial_s
+		if(facial_hair_style)
+			if(!facial_hair_style.species_allowed || (species.get_bodytype(owner) in facial_hair_style.species_allowed))
+				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
+					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
+					if(facial_hair_style.do_colouration)
+						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
+					res.overlays |= facial_s
 
 	if(owner.h_style)
 		var/style = owner.h_style
@@ -135,11 +137,13 @@
 		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GLOB.hair_styles_list["Short Hair"]
-		if(hair_style && (species.get_bodytype(owner) in hair_style.species_allowed))
-			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-			if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
-				hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
-			res.overlays |= hair_s
+		if(hair_style)
+			if(!hair_style.species_allowed || (species.get_bodytype(owner) in hair_style.species_allowed))
+				if(!hair_style.subspecies_allowed || (species.name in hair_style.subspecies_allowed))
+					var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
+					if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
+						hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
+					res.overlays |= hair_s
 	return res
 
 /obj/item/organ/external/head/no_eyes

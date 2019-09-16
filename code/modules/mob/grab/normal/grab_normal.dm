@@ -6,7 +6,12 @@
 	if(!(. = ..()))
 		return
 	var/obj/O = get_targeted_organ()
-	visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
+	if(affecting != assailant)
+		visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
+	else
+		var/datum/gender/T = gender_datums[assailant.get_gender()]
+		visible_message("<span class='notice'>[assailant] has grabbed [T.his] [O.name]!</span>")
+
 	if(!(affecting.a_intent == I_HELP))
 		upgrade(TRUE)
 
@@ -195,11 +200,11 @@
 	if(G.special_target_functional)
 		switch(G.target_zone)
 			if(BP_MOUTH)
-				if(G.affecting.silent < 3)
-					G.affecting.silent = 3
+				if(G.affecting.silent < 2)
+					G.affecting.silent = 2
 			if(BP_EYES)
-				if(G.affecting.eye_blind < 3)
-					G.affecting.eye_blind = 3
+				if(G.affecting.eye_blind < 2)
+					G.affecting.eye_blind = 2
 
 // Handles when they change targeted areas and something is supposed to happen.
 /datum/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)

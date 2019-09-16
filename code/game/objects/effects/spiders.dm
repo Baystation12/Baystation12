@@ -117,7 +117,6 @@
 	desc = "It never stays still for long."
 	icon_state = "guard"
 	anchored = 0
-	plane = OBJ_PLANE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -306,7 +305,6 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
 	anchored = 1
-	plane = ABOVE_TURF_PLANE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon

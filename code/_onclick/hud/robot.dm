@@ -10,7 +10,7 @@ var/obj/screen/robot_inventory
 
 	var/obj/screen/using
 
-//Radio
+	//Radio
 	using = new /obj/screen()
 	using.SetName("radio")
 	using.set_dir(SOUTHWEST)
@@ -19,7 +19,7 @@ var/obj/screen/robot_inventory
 	using.screen_loc = ui_movi
 	src.adding += using
 
-//Module select
+	//Module select
 
 	using = new /obj/screen()
 	using.SetName("module1")
@@ -48,9 +48,9 @@ var/obj/screen/robot_inventory
 	src.adding += using
 	mymob:inv3 = using
 
-//End of module select
+	//End of module select
 
-//Intent
+	//Intent
 	using = new /obj/screen()
 	using.SetName("act_intent")
 	using.set_dir(SOUTHWEST)
@@ -60,28 +60,28 @@ var/obj/screen/robot_inventory
 	src.adding += using
 	action_intent = using
 
-//Cell
+	//Cell
 	mymob:cells = new /obj/screen()
 	mymob:cells.icon = 'icons/mob/screen1_robot.dmi'
 	mymob:cells.icon_state = "charge-empty"
 	mymob:cells.SetName("cell")
 	mymob:cells.screen_loc = ui_toxin
 
-//Health
+	//Health
 	mymob.healths = new /obj/screen()
 	mymob.healths.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.healths.icon_state = "health0"
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = ui_borg_health
 
-//Installed Module
+	//Installed Module
 	mymob.hands = new /obj/screen()
 	mymob.hands.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.hands.icon_state = "nomod"
 	mymob.hands.SetName("module")
 	mymob.hands.screen_loc = ui_borg_module
 
-//Module Panel
+	//Module Panel
 	using = new /obj/screen()
 	using.SetName("panel")
 	using.icon = 'icons/mob/screen1_robot.dmi'
@@ -89,21 +89,21 @@ var/obj/screen/robot_inventory
 	using.screen_loc = ui_borg_panel
 	src.adding += using
 
-//Store
+	//Store
 	mymob.throw_icon = new /obj/screen()
 	mymob.throw_icon.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.throw_icon.icon_state = "store"
 	mymob.throw_icon.SetName("store")
 	mymob.throw_icon.screen_loc = ui_borg_store
 
-//Inventory
+	//Inventory
 	robot_inventory = new /obj/screen()
 	robot_inventory.SetName("inventory")
 	robot_inventory.icon = 'icons/mob/screen1_robot.dmi'
 	robot_inventory.icon_state = "inventory"
 	robot_inventory.screen_loc = ui_borg_inventory
 
-//Temp
+	//Temp
 	mymob.bodytemp = new /obj/screen()
 	mymob.bodytemp.icon = 'icons/mob/status_indicators.dmi'
 	mymob.bodytemp.icon_state = "temp0"
@@ -122,7 +122,7 @@ var/obj/screen/robot_inventory
 	mymob.pullin.icon_state = "pull0"
 	mymob.pullin.SetName("pull")
 	mymob.pullin.screen_loc = ui_borg_pull
-	
+
 	mymob.fire = new /obj/screen()
 	mymob.fire.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.fire.icon_state = "fire0"
@@ -155,7 +155,7 @@ var/obj/screen/robot_inventory
 
 
 /datum/hud/proc/update_robot_modules_display()
-	if(!isrobot(mymob))
+	if(!isrobot(mymob) || !mymob.client)
 		return
 
 	var/mob/living/silicon/robot/r = mymob
