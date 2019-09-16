@@ -109,6 +109,7 @@
 	desc = "A huge antlion. It looks displeased."
 	icon_state = "queen"
 	icon_living = "queen"
+	icon_dead = "queen_dead"
 	mob_size = MOB_LARGE
 	health = 275
 	maxHealth = 275
