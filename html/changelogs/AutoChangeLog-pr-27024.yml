@@ -1,0 +1,6 @@
+author: "Rain7x"
+delete-after: True
+changes: 
+  - tweak: "Members of the exploration department can now select Science Goggles, Botany Gloves, and the Brown Webbing Vest in loadout"
+  - tweak: "Non-Civilian pilots can no longer take the EXO Flightsuit"
+  - tweak: "Webbing names now reflect their color, rather than their department."
