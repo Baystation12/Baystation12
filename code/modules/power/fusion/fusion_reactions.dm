@@ -78,6 +78,15 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	instability = 0.5
 	radiation = 3
 
+/decl/fusion_reaction/deuterium_uranium
+	p_react = GAS_DEUTERIUM
+	s_react = "uranium"
+	energy_consumption = 5
+	energy_production = 0
+	products = list(GAS_RADIUM = 1)
+	instability = 2
+	radiation = 10
+
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
 	p_react = GAS_OXYGEN
