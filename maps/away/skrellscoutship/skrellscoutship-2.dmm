@@ -2,9 +2,43 @@
 "aa" = (
 /turf/space,
 /area/space)
+"ab" = (
+/obj/machinery/door/blast/regular/open{
+	dir = 4;
+	id_tag = "xil_airlock";
+	name = "Blast Doors"
+	},
+/obj/machinery/door/airlock/external/glass{
+	frequency = 1289;
+	id_tag = "xil_dock_outer";
+	locked = 1
+	},
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1289;
+	master_tag = "xil_dock";
+	pixel_x = -32;
+	pixel_y = 6;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/turf/simulated/floor/plating,
+/area/ship/skrellscoutship/dock)
 "ac" = (
 /turf/simulated/floor/reinforced/airless,
 /area/ship/skrellscoutship/solars)
+"ad" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1289;
+	id_tag = "xil_dock_pump"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1289;
+	id_tag = "xil_dock";
+	pixel_x = -22;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/turf/simulated/floor/plating,
+/area/ship/skrellscoutship/dock)
 "ae" = (
 /obj/machinery/door/firedoor/autoset,
 /obj/machinery/door/airlock/glass{
@@ -12,6 +46,17 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/fit)
+"af" = (
+/obj/machinery/light,
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1289;
+	master_tag = "xil_dock";
+	pixel_y = 24;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/turf/simulated/floor/tiled/skrell,
+/area/ship/skrellscoutship/dock)
 "ag" = (
 /obj/machinery/power/solar/skrellian,
 /obj/structure/cable/yellow{
@@ -102,26 +147,48 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/skrellscoutship/solars)
-"ap" = (
-/obj/machinery/door/blast/regular/open{
-	dir = 4;
-	id_tag = "xil_airlock";
-	name = "Blast Doors"
-	},
-/obj/machinery/door/airlock/external/glass{
-	frequency = 1289;
-	id_tag = "xil_dock_outer";
-	locked = 1
-	},
+"ao" = (
 /obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1289;
-	master_tag = "xil_dock";
-	pixel_x = -32;
-	pixel_y = 6
+	command = "cycle_interior";
+	frequency = 1291;
+	master_tag = "xil_solar";
+	pixel_x = 24;
+	pixel_y = 0;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/solar_control/autostart,
+/turf/simulated/floor/plating,
+/area/ship/skrellscoutship/maintenance/power)
+"ap" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light/small,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 1;
+	frequency = 1291;
+	id_tag = "xil_solar_pump"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1291;
+	id_tag = "xil_solar_sensor";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1291;
+	id_tag = "xil_solar";
+	pixel_y = -24;
+	req_access = list("ACCESS_SKRELLSCOUT")
 	},
 /turf/simulated/floor/plating,
-/area/ship/skrellscoutship/dock)
+/area/ship/skrellscoutship/maintenance/power)
 "aq" = (
 /obj/structure/hygiene/shower{
 	dir = 1
@@ -141,6 +208,17 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/dock)
+"as" = (
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1291;
+	master_tag = "xil_solar";
+	pixel_x = -24;
+	pixel_y = 0;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/ship/skrellscoutship/solars)
 "at" = (
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
@@ -177,6 +255,16 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/r_wall,
 /area/ship/skrellscoutship/dock)
+"az" = (
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1290;
+	master_tag = "xil_air";
+	pixel_y = -24;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/turf/simulated/floor/tiled/skrell,
+/area/ship/skrellscoutship/dock/alt)
 "aA" = (
 /obj/machinery/alarm/skrell{
 	dir = 4;
@@ -236,16 +324,23 @@
 /area/ship/skrellscoutship/dock)
 "aH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1289;
-	id_tag = "xil_dock_pump"
+	dir = 4;
+	frequency = 1290;
+	id_tag = "xil_air_pump"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1290;
+	id_tag = "xil_air_sensor";
+	pixel_x = 24
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1289;
-	id_tag = "xil_dock";
-	pixel_x = -22
+	frequency = 1290;
+	id_tag = "xil_air";
+	pixel_x = -22;
+	req_access = list("ACCESS_SKRELLSCOUT")
 	},
 /turf/simulated/floor/plating,
-/area/ship/skrellscoutship/dock)
+/area/ship/skrellscoutship/dock/alt)
 "aI" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	frequency = 1289;
@@ -259,6 +354,33 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
+"aK" = (
+/obj/machinery/door/blast/regular/open{
+	dir = 4;
+	id_tag = "xil_airlock";
+	name = "Blast Doors"
+	},
+/obj/machinery/door/airlock/external/glass{
+	frequency = 1290;
+	id_tag = "xil_air_outer";
+	locked = 1
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "xil_airlock";
+	name = "Airlock Blast Doors";
+	pixel_x = 32;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1290;
+	master_tag = "xil_air";
+	pixel_x = -32;
+	pixel_y = -6;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/turf/simulated/floor/plating,
+/area/ship/skrellscoutship/dock/alt)
 "aL" = (
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -706,16 +828,6 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
-"bL" = (
-/obj/machinery/light,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1289;
-	master_tag = "xil_dock";
-	pixel_y = 24
-	},
-/turf/simulated/floor/tiled/skrell,
-/area/ship/skrellscoutship/dock)
 "bN" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -803,21 +915,6 @@
 /obj/structure/bed/chair/comfy/black,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/command/bridge)
-"bZ" = (
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1291;
-	master_tag = "xil_solar";
-	pixel_x = 24;
-	pixel_y = 0
-	},
-/obj/structure/cable/yellow{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/solar_control/autostart,
-/turf/simulated/floor/plating,
-/area/ship/skrellscoutship/maintenance/power)
 "ca" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -880,31 +977,6 @@
 	name = "Engineering"
 	},
 /turf/simulated/floor/tiled/skrell,
-/area/ship/skrellscoutship/maintenance/power)
-"ch" = (
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/light/small,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 1;
-	frequency = 1291;
-	id_tag = "xil_solar_pump"
-	},
-/obj/machinery/airlock_sensor{
-	frequency = 1291;
-	id_tag = "xil_solar_sensor";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1291;
-	id_tag = "xil_solar";
-	pixel_y = -24
-	},
-/turf/simulated/floor/plating,
 /area/ship/skrellscoutship/maintenance/power)
 "ci" = (
 /obj/structure/cable{
@@ -990,16 +1062,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/maintenance/power)
-"cq" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1291;
-	master_tag = "xil_solar";
-	pixel_x = -24;
-	pixel_y = 0
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/ship/skrellscoutship/solars)
 "ct" = (
 /obj/machinery/light{
 	dir = 4;
@@ -1381,15 +1443,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/dock)
-"cY" = (
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1290;
-	master_tag = "xil_air";
-	pixel_y = -24
-	},
-/turf/simulated/floor/tiled/skrell,
-/area/ship/skrellscoutship/dock/alt)
 "cZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 6;
@@ -1426,24 +1479,6 @@
 /area/ship/skrellscoutship/dock/alt)
 "de" = (
 /turf/simulated/floor/tiled/skrell,
-/area/ship/skrellscoutship/dock/alt)
-"df" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 4;
-	frequency = 1290;
-	id_tag = "xil_air_pump"
-	},
-/obj/machinery/airlock_sensor{
-	frequency = 1290;
-	id_tag = "xil_air_sensor";
-	pixel_x = 24
-	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1290;
-	id_tag = "xil_air";
-	pixel_x = -22
-	},
-/turf/simulated/floor/plating,
 /area/ship/skrellscoutship/dock/alt)
 "dg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1492,32 +1527,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/r_wall,
 /area/ship/skrellscoutship/dock)
-"dm" = (
-/obj/machinery/door/blast/regular/open{
-	dir = 4;
-	id_tag = "xil_airlock";
-	name = "Blast Doors"
-	},
-/obj/machinery/door/airlock/external/glass{
-	frequency = 1290;
-	id_tag = "xil_air_outer";
-	locked = 1
-	},
-/obj/machinery/button/blast_door{
-	id_tag = "xil_airlock";
-	name = "Airlock Blast Doors";
-	pixel_x = 32;
-	req_access = list("ACCESS_SKRELLSCOUT")
-	},
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1290;
-	master_tag = "xil_air";
-	pixel_x = -32;
-	pixel_y = -6
-	},
-/turf/simulated/floor/plating,
-/area/ship/skrellscoutship/dock/alt)
 "dn" = (
 /obj/machinery/alarm/skrell{
 	dir = 8;
@@ -7764,7 +7773,7 @@ aW
 bN
 bP
 cj
-bZ
+ao
 cw
 cC
 dp
@@ -8009,7 +8018,7 @@ bG
 bP
 cl
 ax
-ch
+ap
 bP
 bP
 cK
@@ -8254,7 +8263,7 @@ am
 am
 am
 bB
-cq
+as
 pj
 bR
 de
@@ -8721,9 +8730,9 @@ aa
 aa
 aa
 aa
-ap
+ab
 ar
-aH
+ad
 cx
 bh
 vb
@@ -8870,8 +8879,8 @@ bR
 de
 de
 dd
-df
-dm
+aH
+aK
 aa
 aa
 aa
@@ -8969,7 +8978,7 @@ vb
 dl
 db
 Cd
-bL
+af
 vb
 ac
 ag
@@ -8990,7 +8999,7 @@ dj
 ac
 bR
 cP
-cY
+az
 cZ
 dk
 bR
