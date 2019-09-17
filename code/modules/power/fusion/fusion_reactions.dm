@@ -78,14 +78,14 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	instability = 0.5
 	radiation = 3
 
-/decl/fusion_reaction/deuterium_uranium
-	p_react = GAS_DEUTERIUM
-	s_react = "uranium"
+/decl/fusion_reaction/uranium_deuterium
+	p_react = MATERIAL_URANIUM
+	s_react = GAS_DEUTERIUM
 	energy_consumption = 5
 	energy_production = 0
-	products = list(GAS_RADIUM = 1)
+	products = list(GAS_RADIUM = 5)
 	instability = 2
-	radiation = 10
+	radiation = 20
 
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
@@ -98,13 +98,22 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	products = list("silicon"= 1)
 
 /decl/fusion_reaction/iron_iron
-	p_react = "iron"
-	s_react = "iron"
-	products = list("silver" = 10, "gold" = 10, "platinum" = 10) // Not realistic but w/e
+	p_react = MATERIAL_IRON
+	s_react = MATERIAL_IRON
+	products = list(MATERIAL_SILVER = 10, MATERIAL_GOLD = 10, MATERIAL_PLATINUM = 10) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
 	instability = 2
 	minimum_reaction_temperature = 10000
+
+/decl/fusion_reaction/graphite_graphite
+	p_react = MATERIAL_GRAPHITE
+	s_react = MATERIAL_GRAPHITE
+	products = list(MATERIAL_DIAMOND = 10)
+	energy_consumption = 15
+	energy_production = 0
+	instability = 3
+	minimum_reaction_temperature = 25000
 
 /decl/fusion_reaction/phoron_hydrogen
 	p_react = GAS_HYDROGEN
@@ -117,7 +126,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 
 // VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/phoron_supermatter
-	p_react = "supermatter"
+	p_react = MATERIAL_SUPERMATTER
 	s_react = GAS_PHORON
 	energy_consumption = 0
 	energy_production = 5
@@ -158,9 +167,9 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen
-	p_react = "aluminium"
-	s_react = GAS_HYDROGEN
-	minimum_energy_level = FUSION_HEAT_CAP * 0.35
+	p_react = GAS_HYDROGEN
+	s_react = MATERIAL_ALUMINIUM
+	minimum_reaction_temperature = 45000
 	energy_consumption = 3
 	energy_production = 10
 	radiation = 3
