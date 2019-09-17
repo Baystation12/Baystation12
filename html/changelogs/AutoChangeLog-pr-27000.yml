@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Inflatables now have maximum pressure difference and maximum temperature they can endure. Currently it's 5000 kPa pressure difference and 5000 K temperature. Every second or so when they're in worse condition than that it'll take damage. You can patch them once with duct tape but otherwise just consider more permanent solutions."
