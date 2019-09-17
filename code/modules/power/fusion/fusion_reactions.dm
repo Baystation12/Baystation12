@@ -78,15 +78,6 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	instability = 0.5
 	radiation = 3
 
-/decl/fusion_reaction/deuterium_lithium
-	p_react = GAS_DEUTERIUM
-	s_react = "lithium"
-	energy_consumption = 2
-	energy_production = 0
-	radiation = 3
-	products = list(GAS_TRITIUM= 1)
-	instability = 1
-
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
 	p_react = GAS_OXYGEN
@@ -158,10 +149,19 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen
-	p_react = "boron"
+	p_react = "aluminium"
 	s_react = GAS_HYDROGEN
-	minimum_energy_level = FUSION_HEAT_CAP * 0.5
+	minimum_energy_level = FUSION_HEAT_CAP * 0.35
 	energy_consumption = 3
-	energy_production = 15
+	energy_production = 10
 	radiation = 3
 	instability = 3
+
+/decl/fusion_reaction/deuterium_lithium
+	p_react = GAS_DEUTERIUM
+	s_react = "lithium"
+	energy_consumption = 2
+	energy_production = 4
+	radiation = 5
+	products = list(GAS_TRITIUM = 1)
+	instability = 1
