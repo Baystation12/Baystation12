@@ -272,7 +272,6 @@
 "aM" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	
 	level = 2
 	},
 /turf/simulated/floor/tiled/skrell,
