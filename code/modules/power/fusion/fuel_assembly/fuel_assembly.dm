@@ -75,3 +75,6 @@
 
 /obj/item/weapon/fuel_assembly/hydrogen/New(var/newloc)
 	..(newloc, MATERIAL_HYDROGEN)
+
+/obj/item/weapon/fuel_assembly/uranium/New(var/newloc)
+	..(newloc, MATERIAL_URANIUM)
