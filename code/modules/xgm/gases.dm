@@ -242,3 +242,11 @@
 	breathed_product = /datum/reagent/carbon_monoxide
 	symbol_html = "CO"
 	symbol = "CO"
+
+/decl/xgm_gas/radium
+	id = GAS_RADIUM
+	name = "Radium"
+	specific_heat = 12	// J/(mol*K)
+	molar_mass = 0.226	// kg/mol
+	symbol_html = "Ra"
+	symbol = "Ra"
