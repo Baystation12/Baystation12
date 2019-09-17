@@ -250,3 +250,4 @@
 	molar_mass = 0.226	// kg/mol
 	symbol_html = "Ra"
 	symbol = "Ra"
+	breathed_product = /datum/reagent/radium
