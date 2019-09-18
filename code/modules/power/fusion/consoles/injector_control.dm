@@ -9,8 +9,9 @@
 		var/obj/machinery/fusion_fuel_injector/I = locate(href_list["toggle_injecting"])
 		if(!istype(I))
 			return TOPIC_NOACTION
-		var/datum/fusion_plant/plant = get_fusion_plant()
-		if(!plant || !plant.fuel_injectors[I])
+		var/datum/local_network/lan = get_local_network()
+		var/list/fuel_injectors = lan.get_devices(/obj/machinery/fusion_fuel_injector)
+		if(!lan || !fuel_injectors || !fuel_injectors[I])
 			return TOPIC_NOACTION
 		if(I.injecting)
 			I.StopInjecting()
@@ -20,13 +21,14 @@
 
 /obj/machinery/computer/fusion/fuel_control/build_ui_data()
 	. = ..()
-	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
+	var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+	var/datum/local_network/lan = fusion.get_local_network()
 	var/list/injectors = list()
-	if(plant)
-		for(var/i = 1 to LAZYLEN(plant.fuel_injectors))
+	if(lan)
+		var/list/fuel_injectors = lan.get_devices(/obj/machinery/fusion_fuel_injector)
+		for(var/i = 1 to LAZYLEN(fuel_injectors))
 			var/list/injector = list()
-			var/obj/machinery/fusion_fuel_injector/I = plant.fuel_injectors[i]
+			var/obj/machinery/fusion_fuel_injector/I = fuel_injectors[i]
 			injector["id"] =       "#[i]"
 			injector["ref"] =       "\ref[I]"
 			injector["injecting"] =  I.injecting
