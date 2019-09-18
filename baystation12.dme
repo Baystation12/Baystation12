@@ -807,6 +807,7 @@
 #include "code\game\machinery\telecomms\presets.dm"
 #include "code\game\machinery\telecomms\telecomunications.dm"
 #include "code\game\machinery\telecomms\telemonitor.dm"
+#include "code\game\objects\alien_props.dm"
 #include "code\game\objects\buckling.dm"
 #include "code\game\objects\empulse.dm"
 #include "code\game\objects\explosion.dm"
