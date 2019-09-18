@@ -84,7 +84,10 @@
 
 	prone_overlay_offset = list(-4, -4)
 
-	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/unathi)
+	override_organ_types = list(
+		BP_EYES = /obj/item/organ/internal/eyes/unathi,
+		BP_BRAIN = /obj/item/organ/internal/brain/unathi
+	)
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 2,
