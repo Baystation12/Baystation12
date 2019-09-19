@@ -80,7 +80,7 @@
 	desc = "A ceramics-reinforced synthetic armor plate, providing state of of the art protection. Attaches to a plate carrier."
 	icon_state = "armor_merc"
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
-	slowdown = 1
+	slowdown = 0.5
 
 //Arm guards
 /obj/item/clothing/accessory/armguards
