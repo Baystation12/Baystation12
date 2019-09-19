@@ -1,0 +1,4 @@
+author: "SparklySheep"
+delete-after: True
+changes: 
+  - rscadd: "Adds in the fake moustache as a cheap 1 crystal item for traitors. It will hide your identity, but that's about it."
