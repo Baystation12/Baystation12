@@ -185,3 +185,9 @@
 	name = "autoinjector"
 	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/mindbreaker = 5)
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/empty
+	name = "autoinjector"
+	band_color = COLOR_WHITE
+	starts_with = list()
+	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)

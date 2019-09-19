@@ -4,6 +4,12 @@
 /datum/uplink_item/item/stealth_items
 	category = /datum/uplink_category/stealth_items
 
+/datum/uplink_item/item/stealth_items/fakemoustache
+	name = "Fake Moustache"
+	desc = "A simple fiber moustache that will conceal the wearer's face."
+	item_cost = 1
+	path = /obj/item/clothing/mask/fakemoustache
+
 /datum/uplink_item/item/stealth_items/syndigaloshes
 	name = "No-Slip Shoes"
 	desc = "These shoes have a non-slip grip on them, so those pesky janitors can't ruin your operations!"

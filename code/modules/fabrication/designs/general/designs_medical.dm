@@ -40,3 +40,6 @@
 
 /datum/fabricator_recipe/medical/pill_bottle
 	path = /obj/item/weapon/storage/pill_bottle
+
+/datum/fabricator_recipe/medical/hypospray/autoinjector
+	path = /obj/item/weapon/reagent_containers/hypospray/autoinjector/empty

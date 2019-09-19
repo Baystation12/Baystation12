@@ -4601,6 +4601,7 @@
 /area/security/evidence)
 "alX" = (
 /obj/machinery/dnaforensics,
+/obj/structure/table/glass,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "alZ" = (
@@ -16947,8 +16948,7 @@
 /area/medical/subacute)
 "ehb" = (
 /obj/structure/table/rack{
-	dir = 8;
-	
+	dir = 8
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding{
@@ -23555,12 +23555,11 @@
 /area/rnd/entry)
 "lym" = (
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/swabs,
-/obj/item/weapon/storage/box/fingerprints,
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 1
 	},
+/obj/machinery/microscope,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "lAb" = (
@@ -24373,7 +24372,8 @@
 /area/security/questioning)
 "mCe" = (
 /obj/structure/table/glass,
-/obj/machinery/microscope,
+/obj/item/weapon/storage/box/fingerprints,
+/obj/item/weapon/storage/box/swabs,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "mCi" = (
@@ -24506,8 +24506,7 @@
 /obj/item/weapon/storage/box/gloves,
 /obj/item/weapon/storage/box/masks,
 /obj/structure/table/rack{
-	dir = 8;
-	
+	dir = 8
 	},
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
