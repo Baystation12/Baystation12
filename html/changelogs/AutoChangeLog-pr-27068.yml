@@ -1,0 +1,4 @@
+author: "Rain7x"
+delete-after: True
+changes: 
+  - bugfix: "The supermatter grenade box now has a working icon and is no longer invisible."
