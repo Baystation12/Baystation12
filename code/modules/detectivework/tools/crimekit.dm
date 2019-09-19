@@ -12,4 +12,5 @@
 		/obj/item/device/uv_light,
 		/obj/item/weapon/forensics/sample_kit,
 		/obj/item/weapon/forensics/sample_kit/powder,
+		/obj/item/weapon/storage/csi_markers
 		)
