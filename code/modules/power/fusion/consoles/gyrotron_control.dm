@@ -29,13 +29,13 @@
 			return TOPIC_REFRESH
 
 		if(href_list["modifyrate"])
-			var/new_val = input("Enter new emission delay between 1 and 10 seconds.", "Modifying emission rate", G.rate) as num
+			var/new_val = input("Enter new emission delay between 2 and 10 seconds.", "Modifying emission rate", G.rate) as num
 			if(!istype(G))
 				return TOPIC_NOACTION
 			if(!new_val)
 				to_chat(user, SPAN_WARNING("That's not a valid number."))
 				return TOPIC_NOACTION
-			G.rate = Clamp(new_val, 1, 10)
+			G.rate = Clamp(new_val, 2, 10)
 			return TOPIC_REFRESH
 
 		if(href_list["toggle"])
