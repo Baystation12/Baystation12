@@ -139,7 +139,7 @@
 			new_mods["burn"] =      MOD_BASE + (MOD_VARIANCE * rand())
 			new_mods["toxins"] =    MOD_BASE + (MOD_VARIANCE * rand())
 			new_mods["radiation"] = MOD_BASE + (MOD_VARIANCE * rand())
-			new_mods["slowdown"] =  MOD_BASE + (MOD_VARIANCE * rand())
+			new_mods["slowdown"] =  pick(-0.5, 0, 0.5)
 			mods[mob_ref] = new_mods
 		var/list/mob_mods = mods[mob_ref]
 		. = mob_mods[mod_type] || 1
