@@ -29,6 +29,12 @@
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
 	click_handler.OnDblClick(src, params)
 
+/atom/proc/allow_click_through(var/atom/A, var/params, var/mob/user)
+	return FALSE
+
+/turf/allow_click_through(var/atom/A, var/params, var/mob/user)
+	return TRUE
+	
 /*
 	Standard mob ClickOn()
 	Handles exceptions: middle click, modified clicks, exosuit actions
@@ -118,7 +124,7 @@
 		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
 
-	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
+	if(!loc.allow_click_through(A, params, src)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
 	//Atoms on turfs (not on your person)
