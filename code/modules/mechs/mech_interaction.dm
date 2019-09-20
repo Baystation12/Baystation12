@@ -46,17 +46,6 @@
 /datum/click_handler/default/mech/OnDblClick(var/atom/A, var/params)
 	OnClick(A, params)
 
-//We will allow interaction if cockpit is open
-/mob/living/exosuit/contents_nano_distance(var/src_object, var/mob/living/user)
-	if(!hatch_closed)
-		return shared_living_nano_distance(src_object)
-	return ..()
-
-/mob/living/exosuit/contents_nano_distance(var/src_object, var/mob/living/user)
-	if(!hatch_closed)
-		return shared_living_nano_distance(src_object)
-	return ..()
-
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
 	if(!user || incapacitated() || user.incapacitated())
