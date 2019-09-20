@@ -1,4 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - bugfix: "Boosters randomised speed has been fixed, no more indefinite speed malaise."
