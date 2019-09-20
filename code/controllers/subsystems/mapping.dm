@@ -9,8 +9,27 @@ SUBSYSTEM_DEF(mapping)
 	var/list/away_sites_templates = list()
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
+	var/list/zlevels = list()
+	var/list/all_level_datums = list()
+	var/list/all_scene_datums = list()
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+	//Load level and scene datums
+	for (var/t in subtypesof(/datum/scene))
+		var/datum/scene/S = new t
+		all_scene_datums[S.id] = S
+
+	for (var/t in subtypesof(/datum/level))
+		var/datum/level/L = new t
+		if (L.base_type == t) //Don't store base types
+			continue
+		//Lets try to retrieve the scene
+		var/datum/scene/S = all_scene_datums[L.scene_id]
+		if (S)
+			L.scene = S
+		//The inverse, populating the scene with a list of levels it contains, will be done later, as the landmarks are loaded and levels are assigned z numbers
+		all_level_datums[L.id] = L
+
 	// Load templates and build away sites.
 	preloadTemplates()
 	for(var/atype in subtypesof(/decl/submap_archetype))
@@ -68,3 +87,22 @@ SUBSYSTEM_DEF(mapping)
 			space_ruins_templates[MT.name] = MT
 		else if(istype(MT, /datum/map_template/ruin/away_site))
 			away_sites_templates[MT.name] = MT
+
+
+//This loops through every zlevel that exists in memory, and throws up errors about those that don't have datums setup
+//We do this by looping through numbers until we fail to retrieve a tile
+/hook/roundstart/proc/check_zlevel_datums()
+	var/done = FALSE
+	var/index = 1
+	while(!done)
+		var/turf/T = locate(1,1,index)
+		if (istype(T))//If we found T then this zlevel exists
+			var/datum/level/L = SSmapping.zlevels["[T.z]"]
+			if (!istype(L))
+				log_world("Error: Z level [T.z] has no associated level datum.")
+		else
+			//If we found no zlevel, we've reached the end
+			done = TRUE
+		index++
+
+	return TRUE

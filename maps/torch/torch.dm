@@ -13,6 +13,7 @@
 	#include "torch_presets.dm"
 	#include "torch_procs.dm"
 	#include "torch_ranks.dm"
+	#include "torch_scene.dm"
 	#include "torch_security_state.dm"
 	#include "torch_setup.dm"
 	#include "torch_shuttles.dm"
