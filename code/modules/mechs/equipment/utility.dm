@@ -12,6 +12,14 @@
 		return 0
 	return ..()
 
+/obj/item/mech_equipment/clamp/attack_hand(mob/user)
+	if(owner && LAZYISIN(owner.pilots, user))
+		if(!owner.hatch_closed && carrying)
+			if(user.put_in_active_hand(carrying))
+				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [carrying] from \the [src]."))
+				carrying = null
+	. = ..()
+
 /obj/item/mech_equipment/clamp/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 

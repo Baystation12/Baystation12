@@ -46,6 +46,11 @@
 /datum/click_handler/default/mech/OnDblClick(var/atom/A, var/params)
 	OnClick(A, params)
 
+/mob/living/exosuit/allow_click_through(atom/A, params, mob/user)
+	if(LAZYISIN(pilots, user) && !hatch_closed)
+		return TRUE
+	. = ..()
+	
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
 	if(!user || incapacitated() || user.incapacitated())
