@@ -1,3 +1,5 @@
+#define MAX_EVIDENCE_SIZE 64
+
 /obj/item/weapon/forensics
 	icon = 'icons/obj/forensics.dmi'
 	w_class = ITEM_SIZE_TINY
@@ -28,9 +30,11 @@ obj/item/var/list/trace_DNA
 		var/mob/living/carbon/human/H = M
 		if (H.gloves)
 			src.fingerprintshidden += "\[[time_stamp()]\] (Wearing gloves). Real name: [H.real_name], Key: [H.key]"
+			truncate_oldest(src.fingerprintshidden, MAX_EVIDENCE_SIZE * 4)
 			return 0
 
 	src.fingerprintshidden += "\[[time_stamp()]\] Real name: [M.real_name], Key: [M.key]"
+	truncate_oldest(src.fingerprintshidden, MAX_EVIDENCE_SIZE * 4)
 	return 1
 
 /atom/proc/add_fingerprint(mob/M, ignoregloves, obj/item/tool)
@@ -77,7 +81,9 @@ obj/item/var/list/trace_DNA
 
 /atom/proc/add_partial_print(full_print, bonus)
 	LAZYINITLIST(fingerprints)
+
 	if(!fingerprints[full_print])
+		truncate_oldest(fingerprints, MAX_EVIDENCE_SIZE)
 		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
 	else
 		switch(max(stringpercent(fingerprints[full_print]) - bonus,0))		//tells us how many stars are in the current prints.
@@ -165,6 +171,9 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		if(fibertext && prob(20*item_multiplier))
 			LAZYDISTINCTADD(suit_fibers, fibertext)
 
+	// Garbage reduction code.
+	truncate_oldest(suit_fibers, MAX_EVIDENCE_SIZE)
+
 /obj/item/proc/add_trace_DNA(mob/living/carbon/M)
 	if(!istype(M))
 		return
@@ -172,6 +181,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		return
 	if(istype(M.dna))
 		LAZYDISTINCTADD(trace_DNA, M.dna.unique_enzymes)
+		truncate_oldest(trace_DNA, MAX_EVIDENCE_SIZE)
 
 /mob/proc/get_full_print()
 	return FALSE
@@ -188,8 +198,6 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
 	if(E)
 		return E.get_fingerprint()
-
-
 
 //on examination get hints of evidence
 /mob/examinate(atom/A as mob|obj|turf in view())
@@ -215,3 +223,4 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 			clue = 1
 		if(clue && has_client_color(/datum/client_color/noir))
 			playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)
+#undef MAX_EVIDENCE_SIZE
