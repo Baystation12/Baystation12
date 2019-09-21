@@ -22,7 +22,7 @@
 	//----------------
 	name = "Lower Deck"
 	id	=	"bearcat_lower"
-	connections = list("[UP]" = "bearcat_upper")
+	connections = list(UP_S = "bearcat_upper")
 
 /obj/effect/landmark/map_data/bearcat/lower
 	level_id	=	"bearcat_lower"
@@ -34,7 +34,7 @@
 	//----------------
 	name = "Upper Deck"
 	id	=	"bearcat_upper"
-	connections = list("[DOWN]" =  "bearcat_lower")
+	connections = list(DOWN_S =  "bearcat_lower")
 
 /obj/effect/landmark/map_data/bearcat/upper
 	level_id	=	"bearcat_upper"

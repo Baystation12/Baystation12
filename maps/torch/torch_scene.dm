@@ -22,7 +22,7 @@
 	//----------------
 	name = "Hangar Deck"
 	id	=	"torch_deck5"
-	connections = list("[UP]" = "torch_deck4")
+	connections = list(UP_S = "torch_deck4")
 
 /obj/effect/landmark/map_data/torch/hangar
 	level_id	=	"torch_deck5"
@@ -34,8 +34,8 @@
 	//----------------
 	name = "Supply Deck"
 	id	=	"torch_deck4"
-	connections = list("[UP]" = "torch_deck3",
-	"[DOWN]" =  "torch_deck5")
+	connections = list(UP_S = "torch_deck3",
+	DOWN_S =  "torch_deck5")
 
 /obj/effect/landmark/map_data/torch/supply
 	level_id	=	"torch_deck4"
@@ -47,8 +47,8 @@
 	name = "Habitation Deck"
 	id	=	"torch_deck3"
 
-	connections = list("[UP]" = "torch_deck2",
-	"[DOWN]" =  "torch_deck4")
+	connections = list(UP_S = "torch_deck2",
+	DOWN_S =  "torch_deck4")
 
 /obj/effect/landmark/map_data/torch/hab
 	level_id	=	"torch_deck3"
@@ -61,8 +61,8 @@
 	name = "Operations Deck"
 	id	=	"torch_deck2"
 
-	connections = list("[UP]" = "torch_deck1",
-	"[DOWN]" =  "torch_deck3")
+	connections = list(UP_S = "torch_deck1",
+	DOWN_S =  "torch_deck3")
 
 /obj/effect/landmark/map_data/torch/ops
 	level_id	=	"torch_deck2"
@@ -72,8 +72,8 @@
 	//----------------
 	name = "Medical Deck"
 	id	=	"torch_deck1"
-	connections = list("[UP]" = "torch_deck0",
-	"[DOWN]" =  "torch_deck2")
+	connections = list(UP_S = "torch_deck0",
+	DOWN_S =  "torch_deck2")
 
 /obj/effect/landmark/map_data/torch/medical
 	level_id	=	"torch_deck1"
@@ -85,7 +85,7 @@
 	//----------------
 	name = "Command Deck"
 	id	=	"torch_deck0"
-	connections = list("[DOWN]" =  "torch_deck1")
+	connections = list(DOWN_S =  "torch_deck1")
 
 /obj/effect/landmark/map_data/torch/bridge
 	level_id	=	"torch_deck0"

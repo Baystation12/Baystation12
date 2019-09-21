@@ -42,14 +42,8 @@
 
 	//Set the Zvalue
 	zlevel.z = src.z
+	zlevel.Initialize() //And tell the level to do its thing now that it has a number
 
-	//Add it to the global list of all zlevels
-	SSmapping.zlevels["[zlevel.z]"] = zlevel
-
-	//And add it to the list in the parent scene datum
-	var/datum/scene/S = zlevel.scene
-	S.levels["[zlevel.z]"] = level
-	S.level_numbers |= zlevel.z //There should never be two of these landmarks on the same level, but lets use |= anyway in case someone screwed up
 
 /obj/effect/landmark/map_data/proc/find_and_set_level()
 	find_level()

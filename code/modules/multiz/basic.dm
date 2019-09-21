@@ -20,17 +20,25 @@
 	if (!atom)
 		return null
 	var/datum/level/L = get_level_from_z(atom.z)
+	if (!L)
+		return null
 	var/datum/level/L2 = L.connections["[UP]"]
+	if (!L2)
+		return null
 	var/vector2/landing_coords = L2.get_landing_point(atom, UP, _method, L)
 	var/turf/turf = locate(landing_coords.x, landing_coords.y, L2.z)
 
 	return turf
 
-/proc/GetBelow(var/atom/atom)
+/proc/GetBelow(var/atom/atom, var/_method = ZMOVE_PHASE)
 	if (!atom)
 		return null
 	var/datum/level/L = get_level_from_z(atom.z)
-	var/datum/level/L2 = L.connections["[DOWN]"]
+	if (!L)
+		return null
+	var/datum/level/L2 = L.connections["[UP]"]
+	if (!L2)
+		return null
 	var/vector2/landing_coords = L2.get_landing_point(atom, DOWN, _method, L)
 	var/turf/turf = locate(landing_coords.x, landing_coords.y, L2.z)
 
