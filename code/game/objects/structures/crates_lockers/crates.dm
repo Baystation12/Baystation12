@@ -149,12 +149,12 @@
 /obj/structure/closet/crate/freezer/ProcessAtomTemperature()
 	return PROCESS_KILL
 
-/obj/structure/closet/crate/freezer/rations //Fpr use in the escape shuttle
+/obj/structure/closet/crate/freezer/rations //For use in the escape shuttle
 	name = "emergency rations"
 	desc = "A crate of emergency rations."
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/random/mre = 6)
+	return list(/obj/random/mre = 6, /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 12)
 
 /obj/structure/closet/crate/freezer/meat
 	name = "meat crate"
