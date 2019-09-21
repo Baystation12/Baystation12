@@ -1,3 +1,4 @@
+//These Has* procs return true/false if there is a connected level in the specified direction
 /proc/HasAbove(var/z)
 	var/datum/level/L = get_level_from_z(z)
 	if (L)
@@ -6,7 +7,7 @@
 			return TRUE
 	return FALSE
 
-/proc/HasAbove(var/z)
+/proc/HasBelow(var/z)
 	var/datum/level/L = get_level_from_z(z)
 	if (L)
 		var/datum/level/L2 = L.connections["[DOWN]"]
@@ -36,14 +37,20 @@
 	return turf
 
 /proc/GetConnectedZlevels(z)
-	. = list(z)
-	for(var/level = z, HasBelow(level), level--)
-		. |= level-1
-	for(var/level = z, HasAbove(level), level++)
-		. |= level+1
+	var/datum/scene/S = get_scene_from_z(z)
+	if (S)
+		return S.level_numbers
+	else
+		return list(z)
 
 /proc/AreConnectedZLevels(var/zA, var/zB)
-	return zA == zB || (zB in GetConnectedZlevels(zA))
+	if (zA == zB)
+		return TRUE
+	var/datum/scene/S1 = get_scene_from_z(zA)
+	var/datum/scene/S2 = get_scene_from_z(zB)
+	if (S1 == S2)
+		return TRUE
+	return FALSE
 
 /proc/get_zstep(ref, dir)
 	if(dir == UP)

@@ -10,6 +10,13 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include <kaiochao\event\Event.dme>
+#include <kaiochao\hypot\Hypot.dme>
+#include <kaiochao\mouseposition\MousePosition.dme>
+#include <kaiochao\shapes\shapes.dme>
+#include <kaiochao\tilesizes\TileSizes.dme>
+#include <kaiochao\vector2\Vector2.dme>
+#include <kaiochao\viewporttoworldpoint\ViewportToWorldPoint.dme>
 #include "code\_macros.dm"
 #include "code\client_macros.dm"
 #include "code\hub.dm"
@@ -2375,7 +2382,6 @@
 #include "code\modules\modular_computers\terminal\terminal_commands.dm"
 #include "code\modules\modular_computers\terminal\terminal_remote.dm"
 #include "code\modules\modular_computers\terminal\terminal_skill_fail.dm"
-#include "code\modules\multiz\_readme.dm"
 #include "code\modules\multiz\_stubs.dm"
 #include "code\modules\multiz\basic.dm"
 #include "code\modules\multiz\landmark.dm"
@@ -3127,7 +3133,6 @@
 #include "maps\_map_include.dm"
 #include "maps\away\away_sites.dm"
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
-#include "maps\bearcat\bearcat.dm"
 #include "maps\bearcat\bearcat_define.dm"
 #include "maps\example\example_define.dm"
 #include "maps\random_ruins\exoplanet_ruins\exoplanet_ruins.dm"
@@ -3147,6 +3152,7 @@
 #include "maps\random_ruins\exoplanet_ruins\spider_nest\spider_nest.dm"
 #include "maps\random_ruins\exoplanet_ruins\tar_anomaly\tar_anomaly.dm"
 #include "maps\random_ruins\space_ruins\space_ruins.dm"
+#include "maps\torch\torch.dm"
 #include "maps\torch\torch_define.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
