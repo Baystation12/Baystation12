@@ -204,8 +204,10 @@ else if(##equipment_var) {\
 	var/slot = H.get_inventory_slot(src)
 	if(slot != slot_wear_suit && slot != slot_l_hand && slot != slot_r_hand) return// let them eject those tanks when they're in hand or stuff for ease of use
 
+
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
 	tank.canremove = 1
+	H.drop_from_inventory(tank, src)
 	H.put_in_hands(tank)
 	src.tank = null
 
@@ -251,6 +253,7 @@ else if(##equipment_var) {\
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s helmet mount.")
 			src.helmet = W
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
@@ -263,6 +266,7 @@ else if(##equipment_var) {\
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s boot mounts.")
 			boots = W
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/weapon/tank))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
@@ -275,6 +279,7 @@ else if(##equipment_var) {\
 				return
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
 			tank = W
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 
 	..()
