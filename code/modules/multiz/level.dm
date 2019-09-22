@@ -8,8 +8,8 @@
 	//Authortime
 	//----------------
 
-	var/name = "Deck 1" //Name of the level. This should NOT include the name of the scene, as that will be automatically prepended in most cases
-	var/id	=	"unknown_deck1" //ID of the level, this must be unique, so do include the scene name in this case. this will be used for a landmark to find this level
+	var/name = "Space" //Name of the level. This should NOT include the name of the scene, as that will be automatically prepended in most cases
+	var/id	=	"unknown_space" //ID of the level, this must be unique, so do include the scene name in this case. this will be used for a landmark to find this level
 	var/scene_id = "unknown_location"	//ID of the scene, must be unique, used to link this level to the scene datum
 	var/base_type	= /datum/level //The parent/base type of this level. It will be excluded from the all_level_datums list
 
@@ -30,6 +30,10 @@
 	At runtime, this list is converted from ids to datum references as the value. key remains unchanged
 	*/
 
+
+	var/sealed = FALSE
+	//If false, players will end up floating in space when they fall of the edge
+	//If true, players can't walk off the edge of this map unless theres a specific connection.
 
 
 	//Runtime
@@ -65,14 +69,31 @@
 /datum/level/proc/can_enter_level(var/atom/mover = null, var/direction = null,  var/method = ZMOVE_PHASE, var/datum/level/origin = null)
 	return TRUE
 
+
+//Origin is not used in this base class, but it could be used in an override to direct people to a different level based on their exact position
+/datum/level/proc/get_connected_level(var/direction, var/atom/origin = null)
+	if (direction)
+		if (connections["[direction]"])
+			return connections["[direction]"]
+
+	if (sealed)
+		return null //You're not walking off the edge
+
+	else
+
+
+
 //Called on the recieving zlevel when someone moves between levels.  Mover cannot be null
 /datum/level/proc/get_landing_point(var/atom/mover, var/direction = null,  var/method = ZMOVE_PHASE, var/datum/level/origin = null)
-	var/vector2/destination
+	var/vector2/destination = new /vector2(mover.x, mover.y)
 	if (!mover)
 		return null
 	if (direction == UP || direction == DOWN)
-		destination = new /vector2(mover.x, mover.y)
+
 		return destination
+	else
+		if (direction == UP)
+			destination.y = world.maxy //Bizarrely coordinates are counted from the topleft corner, so maxy is the bottom of the screen
 	//Todo: Horizontal directions? Will we use this system for those?
 	return null
 
@@ -98,7 +119,22 @@
 		return TRUE
 	return FALSE
 
+/proc/get_empty_level()
+	if(!SSmapping.empty_levels.len)
+		create_empty_level()
+	if(SSmapping.empty_levels.len)
+		return pick(SSmapping.empty_levels)
 
+	return null
+
+/proc/create_empty_level()
+	world.maxz++ //This adds a new level onto the end of the list
+	SSmapping.map_index++ //Increment the index
+	var/datum/level/newlevel = new()
+	newlevel.id += "[newlevel.id]_[SSmapping.map_index]" //The new level uses the default values, but with the map index appended onto the end of the ID
+	//This ensures that the id is unique and prevents namespace collisions.
+	//All the empty levels will be in the same scene, but not directly connected to each other
+	SSmapping.empty_levels += newlevel
 
 /*--------------------------------------------------------------------------------------------------------------
 

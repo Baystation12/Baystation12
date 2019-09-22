@@ -250,23 +250,26 @@
 	var/new_x
 	var/new_y
 	var/new_z = GLOB.using_map.get_transit_zlevel(z)
-	if(new_z)
-		if(x <= TRANSITIONEDGE)
-			new_x = world.maxx - TRANSITIONEDGE - 2
-			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+	var/datum/level/current = get_level_from_z(z)
+	var/datum/level/next = null
+	var/direction = null
 
-		else if (x >= (world.maxx - TRANSITIONEDGE + 1))
-			new_x = TRANSITIONEDGE + 1
-			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+	if(x <= TRANSITIONEDGE)
+		direction = WEST
 
-		else if (y <= TRANSITIONEDGE)
-			new_y = world.maxy - TRANSITIONEDGE -2
-			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+	else if (x >= (world.maxx - TRANSITIONEDGE + 1))
+		direction = EAST
 
-		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
-			new_y = TRANSITIONEDGE + 1
-			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+	else if (y <= TRANSITIONEDGE)
+		direction = SOUTH
 
-		var/turf/T = locate(new_x, new_y, new_z)
-		if(T)
-			forceMove(T)
+	else if (y >= (world.maxy - TRANSITIONEDGE + 1))
+		direction = NORTH
+
+	if (direction && current)
+		next = current.get_connected_level(direction, src)
+
+	if (next)
+		var/turf/T = next.get_landing_point(src, direction,  ZMOVE_PHASE, var/datum/level/origin = current)
+	if(T)
+		forceMove(T)

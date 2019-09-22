@@ -2,6 +2,7 @@ SUBSYSTEM_DEF(mapping)
 	name = "Mapping"
 	init_order = SS_INIT_MAPPING
 	flags = SS_NO_FIRE
+	var/map_index = 0 //This is incremented whenever a new map is created, and used to prevent namespace collisions
 
 	var/list/map_templates = list()
 	var/list/space_ruins_templates = list()
@@ -10,6 +11,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
 	var/list/zlevels = list()
+	var/list/empty_levels = list()
 	var/list/all_level_datums = list()
 	var/list/all_scene_datums = list()
 

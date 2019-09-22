@@ -227,7 +227,8 @@
 			if(OO.in_space || istype(OO,/obj/effect/overmap/sector/exoplanet))
 				possible_locations |= text2num(level)
 
-	var/newz = GLOB.using_map.get_empty_zlevel()
+	var/datum/level/L = SSmapping.get_empty_level()
+	var/newz = L.z
 	if(possible_locations.len && prob(10))
 		newz = pick(possible_locations)
 	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)

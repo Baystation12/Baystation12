@@ -39,7 +39,8 @@ proc/get_deepspace(x,y)
 		res.y = y
 		return res
 	else
-		return new /obj/effect/overmap/sector/temporary(x, y, GLOB.using_map.get_empty_zlevel())
+		var/datum/level/L = SSmapping.get_empty_level()
+		return new /obj/effect/overmap/sector/temporary(x, y, L.z)
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)
