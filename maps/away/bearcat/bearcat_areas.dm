@@ -169,3 +169,21 @@
   name = "Cargo Lift"
   icon_state = "shuttle3"
   base_turf = /turf/simulated/open
+
+/area/ship/scrap/broken_shuttle
+	name = "\improper Swordfish"
+	icon_state = "shuttlered"
+	base_turf = /turf/simulated/floor/plating
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+
+/area/ship/scrap/broken_shuttle/cockpit
+	name = "\improper Swordfish - Cockpit"
+
+/area/ship/scrap/broken_shuttle/cargo
+	name = "\improper Swordfish - Cargo Bay"
+
+/area/ship/scrap/broken_shuttle/airlock
+	name = "\improper Swordfish - Airlock Compartment"
+
+/area/ship/scrap/broken_shuttle/power
+	name = "\improper Swordfish - Engineering Compartment"

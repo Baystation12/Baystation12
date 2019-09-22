@@ -37,6 +37,12 @@
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/cargo/lower)
+"af" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/internals/fuel,
+/turf/simulated/floor/tiled/usedup,
+/area/ship/scrap/cargo/lower)
 "ag" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -925,11 +931,6 @@
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
-"bS" = (
-/obj/effect/floor_decal/industrial/warning,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/usedup,
-/area/ship/scrap/cargo/lower)
 "bT" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -1788,7 +1789,7 @@
 "dx" = (
 /obj/structure/mopbucket,
 /obj/structure/table/rack{
-	dir = 8;
+	dir = 8
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/device/multitool{
@@ -10032,7 +10033,7 @@ aQ
 bc
 bt
 bI
-bS
+af
 ce
 cw
 cw

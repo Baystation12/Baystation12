@@ -40,6 +40,14 @@
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/bridge)
+"ae" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/space,
+/area/ship/scrap/broken_shuttle/cockpit)
+"af" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/tiled,
+/area/ship/scrap/broken_shuttle/cockpit)
 "ag" = (
 /obj/item/modular_computer/console/preset/command,
 /turf/simulated/floor/bluegrid/airless,
@@ -78,6 +86,10 @@
 /obj/item/weapon/gun/energy/captain,
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
+"al" = (
+/obj/machinery/computer/shuttle_control/explore/swordfish,
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/cockpit)
 "am" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -237,8 +249,20 @@
 	},
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
+"aG" = (
+/obj/machinery/computer/ship/helm{
+	icon_state = "computer";
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/cockpit)
 "aH" = (
-/turf/simulated/floor/bluegrid/airless,
+/obj/machinery/telecomms/broadcaster{
+	autolinkers = list("broadcaster1");
+	id = "Broadcaster 1";
+	network = "changeme"
+	},
+/turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
 "aI" = (
 /obj/machinery/light{
@@ -340,8 +364,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/comms)
 "aO" = (
-/obj/machinery/message_server,
-/turf/simulated/floor/bluegrid/airless,
+/turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
 "aP" = (
 /obj/machinery/door/window/westleft,
@@ -446,37 +469,23 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/captain)
 "aX" = (
-/obj/machinery/alarm{
-	dir = 1;
-	icon_state = "alarm0";
-	pixel_x = 0;
-	pixel_y = -32;
-	req_access = newlist()
+/obj/machinery/telecomms/receiver{
+	autolinkers = list("receiver1");
+	freq_listening = list(1459);
+	id = "Receiver 1";
+	network = "changeme"
 	},
-/obj/machinery/computer/message_monitor{
-	icon_state = "computer";
-	dir = 4
-	},
-/turf/simulated/floor/bluegrid/airless,
+/turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
 "aY" = (
-/obj/structure/window/reinforced{
-	dir = 8
+/obj/machinery/telecomms/server{
+	autolinkers = list("common");
+	channel_tags = list(list(1459,"General","#408010"));
+	freq_listening = list(1459);
+	id = "Common Server";
+	network = "changeme"
 	},
-/obj/item/device/radio/intercom{
-	pixel_y = -32
-	},
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24;
-	req_access = newlist()
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	level = 2
-	},
-/turf/simulated/floor/tiled/dark/usedup,
+/turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
 "aZ" = (
 /obj/structure/cable{
@@ -570,6 +579,14 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/dock)
+"bi" = (
+/obj/structure/bed/chair{
+	icon_state = "chair_preview";
+	dir = 1
+	},
+/obj/effect/overmap/ship/landable/swordfish,
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/cockpit)
 "bj" = (
 /obj/machinery/atm{
 	pixel_y = 25
@@ -618,16 +635,8 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bm" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/turf/simulated/floor/usedup,
-/area/space)
+/turf/simulated/floor/tiled,
+/area/ship/scrap/dock)
 "bn" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -999,6 +1008,12 @@
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
+"bJ" = (
+/obj/machinery/computer/ship/sensors{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/cockpit)
 "bK" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
@@ -1115,7 +1130,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/usedup,
-/area/space)
+/area/ship/scrap/dock)
 "bT" = (
 /obj/structure/sign/warning/docking_area,
 /obj/effect/paint/brown,
@@ -1148,6 +1163,23 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
+"bX" = (
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -28
+	},
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	d1 = 32;
+	d2 = 4;
+	icon_state = "32-4"
+	},
+/obj/structure/table/steel,
+/obj/machinery/light/small,
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/cockpit)
 "bY" = (
 /obj/structure/lattice,
 /turf/space,
@@ -1166,6 +1198,14 @@
 "ca" = (
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/hallway/port)
+"cb" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/cockpit)
 "cc" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -1177,6 +1217,19 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/dock)
+"cd" = (
+/obj/machinery/computer/ship/engines{
+	icon_state = "computer";
+	dir = 8
+	},
+/obj/machinery/alarm{
+	alarm_id = "misc_research";
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/cockpit)
 "ce" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -1408,6 +1461,9 @@
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/toilets)
+"cG" = (
+/turf/simulated/wall,
+/area/ship/scrap/broken_shuttle/cockpit)
 "cH" = (
 /obj/machinery/door/airlock/autoname/bearcat,
 /obj/machinery/door/firedoor,
@@ -2066,7 +2122,9 @@
 "dL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/portable_atmospherics/canister/air,
+/obj/machinery/portable_atmospherics/canister/air{
+	start_pressure = 9110
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "dM" = (
@@ -2076,7 +2134,9 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/portable_atmospherics/canister/air,
+/obj/machinery/portable_atmospherics/canister/air{
+	start_pressure = 9110
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "dN" = (
@@ -2237,7 +2297,9 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/portable_atmospherics/canister/air,
+/obj/machinery/portable_atmospherics/canister/air{
+	start_pressure = 9110
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "ec" = (
@@ -3046,6 +3108,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/usedup,
 /area/space)
+"fn" = (
+/obj/machinery/shipsensors/weak,
+/turf/simulated/floor,
+/area/ship/scrap/broken_shuttle/cockpit)
 "fo" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -3228,7 +3294,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/random/junk,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
 	dir = 4
@@ -3247,8 +3312,6 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/library,
-/obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -3260,6 +3323,7 @@
 	icon_state = "intact";
 	dir = 10
 	},
+/obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/unused)
 "fA" = (
@@ -3428,10 +3492,6 @@
 "fR" = (
 /obj/effect/decal/cleanable/generic,
 /obj/item/device/flashlight,
-/obj/structure/skele_stand{
-	anchored = 0;
-	name = "Spookers"
-	},
 /obj/structure/cable{
 	icon_state = "2-9"
 	},
@@ -3442,11 +3502,11 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/unused)
 "fS" = (
-/obj/random/junk,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
 	dir = 5
 	},
+/obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/unused)
 "fT" = (
@@ -3547,7 +3607,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/item/weapon/stool/padded,
+/obj/machinery/vending/hydroseeds/generic,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/unused)
 "gc" = (
@@ -3556,12 +3616,11 @@
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable,
-/obj/machinery/icecream_vat,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/unused)
 "gd" = (
 /obj/random/maintenance,
-/obj/item/weapon/clothingbag/rubbersuit,
+/obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/unused)
 "ge" = (
@@ -3628,6 +3687,16 @@
 /obj/item/seeds/poppyseed,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/fire)
+"gn" = (
+/obj/machinery/door/airlock,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor,
+/area/ship/scrap/broken_shuttle/cockpit)
 "go" = (
 /obj/effect/decal/cleanable/cobweb2,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -3709,6 +3778,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/hallway)
+"gu" = (
+/turf/simulated/wall,
+/area/ship/scrap/broken_shuttle/cargo)
 "gv" = (
 /obj/machinery/light_switch{
 	pixel_y = 25
@@ -4101,6 +4173,14 @@
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/hallway)
+"gV" = (
+/obj/machinery/telecomms/hub{
+	autolinkers = list("hub","receiver1","broadcaster1","common","processor1");
+	id = "Telecommunication Hub";
+	network = "changeme"
+	},
+/turf/simulated/floor/bluegrid,
+/area/ship/scrap/comms)
 "gW" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
@@ -4337,6 +4417,37 @@
 /obj/item/weapon/storage/firstaid/regular,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
+"hs" = (
+/obj/machinery/alarm{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_x = 0;
+	pixel_y = -32;
+	req_access = newlist()
+	},
+/obj/machinery/telecomms/processor{
+	autolinkers = list("processor1");
+	id = "Processor 1";
+	network = "changeme"
+	},
+/turf/simulated/floor/bluegrid,
+/area/ship/scrap/comms)
+"ht" = (
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/cargo)
 "hu" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
@@ -4376,16 +4487,6 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
 "hy" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/blue/diagonal,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "hz" = (
@@ -4942,20 +5043,19 @@
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iq" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/machinery/atmospherics/unary/outlet_injector{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	icon_state = "map_vent_in";
 	dir = 4;
-	frequency = 1441;
-	icon_state = "map_injector";
-	id = "n2_in";
-	use_power = 1
-	},
-/obj/effect/floor_decal/corner/white/diagonal,
-/obj/effect/floor_decal/corner/white/diagonal{
-	icon_state = "corner_white_diagonal";
-	dir = 4
+	use_power = 1;
+	id_tag = "air_out";
+	pump_direction = 0;
+	external_pressure_bound = 0;
+	internal_pressure_bound = 2000;
+	pressure_checks = 2;
+	external_pressure_bound_default = 0;
+	internal_pressure_bound_default = 2000;
+	pressure_checks_default = 2;
+	frequency = 1443
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
@@ -4985,6 +5085,15 @@
 	},
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
+"it" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/broken_shuttle/cargo)
 "iu" = (
 /obj/structure/sign/warning/fire{
 	pixel_y = 32
@@ -5123,6 +5232,11 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
+"iK" = (
+/obj/item/stack/material/steel,
+/obj/item/stack/material/steel,
+/turf/space,
+/area/space)
 "iL" = (
 /obj/machinery/atmospherics/omni/mixer{
 	tag_north = 1;
@@ -5333,15 +5447,6 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/red/diagonal{
-	icon_state = "corner_white_diagonal";
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/red/diagonal,
-/obj/structure/window/reinforced{
-	dir = 2;
-	health = 1e+007
-	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "je" = (
@@ -5419,12 +5524,19 @@
 /obj/item/stack/material/steel,
 /turf/space,
 /area/space)
+"jq" = (
+/obj/effect/wallframe_spawn,
+/turf/simulated/wall,
+/area/ship/scrap/broken_shuttle/cargo)
 "jr" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 1
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 4;
+	frequency = 1441;
+	icon_state = "map_injector";
+	id = "n2_in";
+	use_power = 1
 	},
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "js" = (
 /obj/machinery/atmospherics/valve/open,
@@ -5520,12 +5632,12 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/atmos)
 "jD" = (
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/yellow{
-	dir = 8
+/obj/effect/floor_decal/corner/red/diagonal{
+	icon_state = "corner_white_diagonal";
+	dir = 4
 	},
-/obj/machinery/space_heater,
-/turf/simulated/floor/tiled/airless,
+/obj/effect/floor_decal/corner/red/diagonal,
+/turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "jE" = (
 /obj/machinery/pipedispenser,
@@ -5558,6 +5670,9 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
+"jJ" = (
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/broken_shuttle/cargo)
 "jK" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -5679,6 +5794,14 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
+"ka" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/broken_shuttle/cargo)
 "kb" = (
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -5719,14 +5842,426 @@
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/toilets)
+"kc" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"kd" = (
+/obj/item/stack/material/ocp,
+/turf/space,
+/area/space)
+"ke" = (
+/turf/space,
+/area/ship/scrap/broken_shuttle/cargo)
+"kf" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"kg" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"kh" = (
+/obj/structure/cable,
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"ki" = (
+/obj/structure/bed/chair{
+	icon_state = "chair_preview";
+	dir = 1
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"kj" = (
+/obj/item/stack/material/rods,
+/obj/item/stack/cable_coil/cut,
+/turf/space,
+/area/space)
+"kk" = (
+/obj/structure/lattice,
+/turf/space,
+/area/ship/scrap/broken_shuttle/cargo)
+"kl" = (
+/obj/effect/wallframe_spawn/no_grille,
+/turf/space,
+/area/ship/scrap/broken_shuttle/cargo)
 "km" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/toilets)
-"lF" = (
-/obj/machinery/meter/turf,
+"kn" = (
+/obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/turf/space,
+/area/ship/scrap/broken_shuttle/cargo)
+"ko" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/usedup,
+/area/ship/scrap/dock)
+"kp" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/space,
+/area/ship/scrap/dock)
+"kq" = (
+/obj/structure/bed/chair{
+	icon_state = "chair_preview";
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	frequency = 1331
+	},
+/obj/effect/shuttle_landmark/scrap/swordfish/start,
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"kr" = (
+/obj/machinery/door/airlock{
+	id_tag = "swordfish_dock_in"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor,
+/area/ship/scrap/broken_shuttle/airlock)
+"ks" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 2;
+	id_tag = "swordfish_dock_pump";
+	level = 2
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/airlock)
+"kt" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	display_name = "docking port controller";
+	frequency = 1380;
+	id_tag = "swordfish_dock_port";
+	pixel_x = 24;
+	pixel_y = 24;
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
+	tag_airpump = "merchant_shuttle_station_pump";
+	tag_chamber_sensor = "merchant_shuttle_station_sensor";
+	tag_exterior_door = "merchant_shuttle_station_exterior";
+	tag_interior_door = "merchant_shuttle_station_interior"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1331;
+	id_tag = "swordfish_dock_sensor";
+	pixel_x = 24;
+	pixel_y = -24
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/scrap/broken_shuttle/airlock)
+"ku" = (
+/obj/machinery/door/airlock{
+	id_tag = "swordfish_dock_out"
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor,
+/area/ship/scrap/broken_shuttle/airlock)
+"kv" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/dock)
+"kw" = (
+/turf/simulated/wall,
+/area/ship/scrap/broken_shuttle/power)
+"kx" = (
+/obj/machinery/door/airlock,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor,
+/area/ship/scrap/broken_shuttle/power)
+"ky" = (
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/turf/simulated/wall,
+/area/ship/scrap/broken_shuttle/power)
+"kz" = (
+/obj/structure/bed/chair{
+	icon_state = "chair_preview";
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/supply{
+	dir = 4
+	},
+/obj/machinery/alarm{
+	alarm_id = "misc_research";
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"kA" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/access_button/airlock_interior{
+	master_tag = "swordfish_dock_port";
+	pixel_x = 23;
+	pixel_y = 23
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
 /turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/cargo)
+"kB" = (
+/obj/machinery/light_switch{
+	step_y = 9
+	},
+/turf/simulated/wall,
+/area/ship/scrap/broken_shuttle/cargo)
+"kC" = (
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/machinery/power/port_gen/pacman,
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kD" = (
+/obj/structure/lattice,
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 32;
+	d2 = 1;
+	icon_state = "32-1"
+	},
+/obj/structure/cable{
+	d1 = 32;
+	d2 = 4;
+	icon_state = "32-4"
+	},
+/turf/space,
+/area/ship/scrap/broken_shuttle/power)
+"kE" = (
+/turf/space,
+/area/ship/scrap/broken_shuttle/power)
+"kF" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kG" = (
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kH" = (
+/obj/structure/window/reinforced,
+/turf/space,
+/area/ship/scrap/broken_shuttle/power)
+"kI" = (
+/obj/structure/lattice,
+/obj/structure/window/reinforced,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/turf/space,
+/area/ship/scrap/broken_shuttle/power)
+"kJ" = (
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kK" = (
+/obj/machinery/atmospherics/binary/pump,
+/obj/machinery/alarm{
+	alarm_id = "misc_research";
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kL" = (
+/obj/structure/fuel_port,
+/turf/simulated/wall,
+/area/ship/scrap/broken_shuttle/power)
+"kM" = (
+/obj/item/stack/material/rods,
+/obj/item/stack/material/steel,
+/turf/space,
+/area/space)
+"kN" = (
+/obj/machinery/constructable_frame,
+/turf/space,
+/area/ship/scrap/broken_shuttle/power)
+"kO" = (
+/obj/machinery/constructable_frame,
+/turf/simulated/floor,
+/area/ship/scrap/broken_shuttle/power)
+"kP" = (
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
+	},
+/turf/simulated/floor,
+/area/ship/scrap/broken_shuttle/power)
+"kQ" = (
+/obj/item/stack/cable_coil/cut,
+/turf/space,
+/area/space)
+"kR" = (
+/obj/machinery/portable_atmospherics/canister/nitrogen{
+	start_pressure = 9119
+	},
+/turf/space,
+/area/space)
+"kS" = (
+/obj/effect/floor_decal/corner/red/diagonal{
+	icon_state = "corner_white_diagonal";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red/diagonal,
+/obj/structure/window/reinforced{
+	dir = 2;
+	health = 1e+007
+	},
+/turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
+"kT" = (
+/obj/structure/window/reinforced,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kU" = (
+/obj/effect/floor_decal/corner/blue,
+/obj/effect/floor_decal/corner/yellow{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/maintenance/atmos)
+"kV" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/nitrogen{
+	start_pressure = 9119
+	},
+/turf/simulated/floor/tiled/airless,
+/area/ship/scrap/maintenance/atmos)
+"kW" = (
+/obj/structure/window/reinforced,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	icon_state = "map";
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kX" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/device/radio/intercom{
+	pixel_y = -32
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24;
+	req_access = newlist()
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/machinery/computer/telecomms/monitor{
+	dir = 1;
+	network = "changeme"
+	},
+/turf/simulated/floor/tiled/dark/usedup,
+/area/ship/scrap/comms)
+"kY" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 8
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/broken_shuttle/power)
+"kZ" = (
+/obj/machinery/telecomms/bus{
+	autolinkers = list("processor1","common");
+	freq_listening = list(1459);
+	id = "Bus Mainframe";
+	network = "changeme"
+	},
+/turf/simulated/floor/bluegrid,
+/area/ship/scrap/comms)
 "mB" = (
 /obj/effect/landmark{
 	name = "carpspawn"
@@ -5778,14 +6313,6 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/space)
-"zT" = (
-/obj/machinery/meter/turf,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/blue/diagonal,
-/turf/simulated/floor/reinforced/airless,
-/area/ship/scrap/maintenance/atmos)
 "Cs" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/paint/red,
@@ -5817,10 +6344,6 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/kitchen)
-"Hd" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/space,
-/area/space)
 "HQ" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/reinforced/airless,
@@ -5879,15 +6402,6 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/fire)
-"Mm" = (
-/obj/machinery/meter/turf,
-/obj/effect/floor_decal/corner/red/diagonal{
-	icon_state = "corner_white_diagonal";
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/red/diagonal,
-/turf/simulated/floor/reinforced/airless,
-/area/ship/scrap/maintenance/atmos)
 "Mp" = (
 /obj/structure/closet/crate,
 /obj/random/loot,
@@ -10658,7 +11172,7 @@ aa
 aa
 aa
 aa
-aa
+jB
 aa
 aa
 aa
@@ -10784,7 +11298,7 @@ aa
 aa
 aa
 aa
-aa
+jB
 aa
 aa
 aa
@@ -10898,20 +11412,20 @@ aa
 aa
 aa
 aa
+jB
+aa
+aa
+aa
+aa
+aa
+kd
 aa
 aa
 aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+kM
 aa
 aa
 aa
@@ -11024,18 +11538,18 @@ aa
 aa
 aa
 aa
+jp
+aa
+aa
+kd
+aa
+aa
+jB
 aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+jB
 aa
 aa
 aa
@@ -11147,6 +11661,9 @@ aa
 aa
 aa
 aa
+iK
+kd
+kj
 aa
 aa
 aa
@@ -11155,10 +11672,7 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
+jp
 aa
 aa
 aa
@@ -11264,22 +11778,22 @@ aa
 aa
 aa
 aa
+ae
+ae
+ae
+cG
+gu
+jq
+ke
+ke
+kk
+kw
+kw
+kw
+kE
+kE
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+jB
 aa
 aa
 aa
@@ -11385,22 +11899,22 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-bg
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ae
+af
+aG
+bX
+cG
+ht
+kc
+kh
+kk
+kA
+kx
+kY
+kD
+kH
+kN
+jp
 aa
 aa
 aa
@@ -11507,21 +12021,21 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ae
+al
+bi
+cb
+gn
+it
+kf
+ki
+kB
+kr
+kw
+kC
+kE
+kI
+kO
 aa
 aa
 aa
@@ -11629,23 +12143,23 @@ aa
 aa
 aa
 aa
+ae
+af
+bJ
+cd
+ae
+jJ
+jJ
+kq
+kl
+ks
+ky
+kF
+kJ
+kT
+kP
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+kQ
 aa
 aa
 aa
@@ -11752,20 +12266,20 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ae
+ae
+cG
+cG
+ka
+kg
+kz
+kn
+kt
+kw
+kG
+kK
+kW
+kP
 aa
 aa
 aa
@@ -11876,18 +12390,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+fn
+cG
+gu
+jq
+gu
+gu
+ku
+kw
+kw
+kw
+kL
+kw
 xU
 xU
 Lp
@@ -11916,7 +12430,7 @@ iP
 hw
 id
 hw
-Hd
+kR
 aa
 aa
 aa
@@ -12003,9 +12517,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+ko
+bu
+ko
 aa
 aa
 aa
@@ -12125,9 +12639,9 @@ aa
 aa
 aa
 aa
-bm
-bu
-bm
+kp
+kv
+kp
 aa
 aa
 aa
@@ -12151,13 +12665,13 @@ gz
 gJ
 gY
 hi
-zT
+hy
 hO
 HQ
-lF
+hx
 hx
 IG
-Mm
+jD
 hN
 hx
 hM
@@ -12239,17 +12753,17 @@ aa
 aa
 aa
 aq
+xU
+xU
+xU
 aa
-aa
-aa
-aa
-aa
-aa
+xU
+xU
 aa
 xU
 Ly
 bv
-bm
+ko
 aa
 aa
 aa
@@ -12273,13 +12787,13 @@ gA
 gK
 gZ
 hj
-hy
-hP
 if
 iq
+jd
+jr
 hP
 iR
-jd
+kS
 YS
 jC
 hx
@@ -12362,11 +12876,11 @@ aa
 aa
 aa
 xU
-xU
-xU
-Lp
-xU
-xU
+ar
+ar
+aN
+ar
+Yv
 aa
 xU
 be
@@ -12402,8 +12916,8 @@ ir
 iD
 iS
 je
-jr
-jD
+kV
+kU
 gY
 aa
 aa
@@ -12483,12 +12997,12 @@ aa
 aa
 xU
 xU
-xU
 ar
 ar
-aN
+aY
+gV
+hs
 ar
-Yv
 aa
 Ly
 be
@@ -12603,13 +13117,13 @@ aa
 aa
 aa
 aa
-xU
 Yv
 Yv
 ar
 aH
 aO
-aX
+aO
+aO
 Yv
 aa
 bh
@@ -12725,13 +13239,13 @@ aa
 aa
 aa
 aa
-Lp
 as
 ax
 aD
-aH
-aH
-aH
+aX
+aO
+aO
+kZ
 aD
 aa
 bh
@@ -12853,7 +13367,7 @@ at
 ar
 aI
 aP
-aY
+kX
 Yv
 Ly
 Ly
@@ -14077,9 +14591,9 @@ aa
 aa
 aa
 aa
+kp
 bm
-bI
-bm
+kp
 bY
 bY
 aa
@@ -14199,9 +14713,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+ko
+bI
+ko
 aa
 aa
 aa

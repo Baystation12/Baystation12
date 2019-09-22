@@ -1,6 +1,7 @@
 #include "bearcat_areas.dm"
 #include "bearcat_jobs.dm"
 #include "bearcat_access.dm"
+#include "bearcat_shuttles.dm"
 
 /obj/effect/submap_landmark/joinable_submap/bearcat
 	name = "FTV Bearcat"
@@ -20,9 +21,12 @@
 	vessel_mass = 60
 	max_speed = 1/(10 SECONDS)
 	burn_delay = 10 SECONDS
+	initial_restricted_waypoints = list(
+		"Swordfish" = list("nav_hangar_bearcat_one")
+	)
 
 /obj/effect/overmap/ship/bearcat/New()
-	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
+	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable", "Horizon", "Vagrant")]"
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"
 		GLOB.using_map.area_purity_test_exempt_areas += A.type
@@ -49,6 +53,9 @@
 		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
+	)
+	shuttles_to_initialise = list(
+		/datum/shuttle/autodock/overmap/swordfish
 	)
 
 /datum/shuttle/autodock/ferry/lift
