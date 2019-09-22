@@ -55,6 +55,7 @@
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+		playsound(src, 'sound/weapons/Genhit.ogg', 15, 1,-1)
 	attack_animation(user)
 
 /obj/machinery/door/New()
@@ -554,7 +555,7 @@
 	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
 	fore = fore || aft
 	aft = aft || fore
-	
+
 	if (!fore && !aft)
 		req_access = list()
 	else if (fore.secure || aft.secure)

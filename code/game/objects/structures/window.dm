@@ -192,7 +192,7 @@
 				attack_generic(H,25)
 				return
 
-		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
+		playsound(src.loc, 'sound/effects/glassknock.ogg', 100, 1, 10, 10)
 		user.do_attack_animation(src)
 		user.visible_message("<span class='danger'>\The [user] bangs against \the [src]!</span>",
 							"<span class='danger'>You bang against \the [src]!</span>",
@@ -211,13 +211,12 @@
 	if(istype(user))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
-	if(!damage)
-		return
 	if(damage >= 10)
 		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+		playsound(src.loc, 'sound/effects/glasshit.ogg', 30, 1)
 	return 1
 
 /obj/structure/window/do_simple_ranged_interaction(var/mob/user)

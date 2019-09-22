@@ -159,7 +159,7 @@
 	if(obj_flags & OBJ_FLAG_ROTATABLE)
 		rotate(user)
 	..()
-	
+
 /obj/examine(mob/user)
 	. = ..()
 	if(. && (obj_flags & OBJ_FLAG_ROTATABLE))
@@ -172,10 +172,23 @@
 
 	if(anchored)
 		to_chat(user, SPAN_NOTICE("\The [src] is secured to the floor!"))
-		return 
+		return
 
 	set_dir(turn(dir, 90))
 	update_icon() 
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)
+	update_icon()
+
+//To be called from things that spill objects on the floor.
+//Makes an object move around randomly for a couple of tiles
+/obj/proc/tumble(var/dist = 2)
+	set waitfor = FALSE
+	if (dist >= 1)
+		dist += rand(0,1)
+		for(var/i = 1, i <= dist, i++)
+			if(src)
+				step(src, pick(NORTH,SOUTH,EAST,WEST))
+				sleep(rand(2,4))
+

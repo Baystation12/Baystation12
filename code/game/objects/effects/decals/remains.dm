@@ -23,11 +23,12 @@
 	icon_state = "remainsrobot"
 
 /obj/item/remains/mouse
+	icon = 'icons/mob/simple_animal/animal.dmi'
 	desc = "They look like the remains of a small rodent."
-	icon_state = "mouse"
+	icon_state = "mouse_skeleton"
 
 /obj/item/remains/lizard
-	desc = "They look like the remains of a small rodent."
+	desc = "They look like the remains of a small reptile."
 	icon_state = "lizard"
 
 /obj/item/remains/attack_hand(mob/user as mob)

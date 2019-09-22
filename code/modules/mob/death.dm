@@ -24,7 +24,7 @@
 //This is the proc for turning a mob into ash. Mostly a copy of gib code (above).
 //Originally created for wizard disintegrate. I've removed the virus code since it's irrelevant here.
 //Dusting robots does not eject the MMI, so it's a bit more powerful than gib() /N
-/mob/proc/dust(anim="dust-m",remains=/obj/effect/decal/cleanable/ash)
+/mob/proc/dust(var/anim="dust-m",var/remains=/obj/effect/decal/cleanable/ash, var/iconfile = 'icons/mob/mob.dmi')
 	death(1)
 	var/atom/movable/overlay/animation = null
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
@@ -33,7 +33,7 @@
 
 	animation = new(loc)
 	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
+	animation.icon = iconfile
 	animation.master = src
 
 	flick(anim, animation)
