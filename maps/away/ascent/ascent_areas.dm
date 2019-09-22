@@ -45,7 +45,7 @@
 	icon_state = "dk_yellow"
 
 /area/ship/ascent/fore_starboard_prow
-	name = "\improper Ascent Seedship - Serpentid Mezzanine"
+	name = "\improper Ascent Seedship - Fabrication Bay"
 	icon_state = "armory"
 
 /area/ship/ascent/fore_port_prow

@@ -635,9 +635,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/structure/bed/chair/padded/purple/ascent{
-	dir = 1
-	},
+/obj/structure/bed/chair/padded/purple/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "bL" = (
@@ -1230,10 +1228,6 @@
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/bridge)
-"cZ" = (
-/obj/effect/wallframe_spawn/phoron,
-/turf/simulated/floor/ascent,
-/area/ship/ascent/fore_starboard_prow)
 "da" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -1547,6 +1541,11 @@
 	dir = 5
 	},
 /obj/effect/catwalk_plated/ascent,
+/obj/structure/table/rack/dark,
+/obj/item/weapon/tank/mantid/oxygen,
+/obj/item/weapon/tank/mantid/oxygen,
+/obj/item/weapon/material/knife/kitchen/cleaver/ascent,
+/obj/item/stack/medical/bruise_pack,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "dM" = (
@@ -1562,6 +1561,9 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/ascent,
+/obj/structure/table/rack/dark,
+/obj/item/weapon/reagent_containers/glass/beaker,
+/obj/item/weapon/reagent_containers/glass/beaker,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "dN" = (
@@ -1605,6 +1607,10 @@
 	},
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/light/ascent,
+/obj/machinery/reagentgrinder{
+	color = "PURPLE";
+	name = "reactant obliterator"
+	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "dS" = (
@@ -2770,6 +2776,7 @@
 /area/ship/ascent/bridge)
 "fV" = (
 /obj/structure/table/rack/dark,
+/obj/item/weapon/tank/mantid/methyl_bromide,
 /obj/item/weapon/gun/energy/particle/small,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/bridge)
@@ -3388,14 +3395,6 @@
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
-"hk" = (
-/obj/structure/table/rack/dark,
-/obj/item/weapon/rig/mantid/nabber/queen,
-/obj/item/weapon/rig/mantid/nabber/queen,
-/obj/item/weapon/gun/energy/particle/small,
-/obj/item/weapon/gun/energy/particle/small,
-/turf/simulated/floor/tiled/ascent,
-/area/ship/ascent/habitation)
 "hl" = (
 /obj/machinery/shipsensors,
 /turf/simulated/floor/ascent{
@@ -3403,14 +3402,8 @@
 	},
 /area/ship/ascent/engineering)
 "hm" = (
-/obj/structure/table/rack/dark,
-/obj/item/weapon/rig/mantid/nabber,
-/obj/item/weapon/rig/mantid/nabber,
-/obj/item/weapon/rig/mantid/nabber,
-/obj/item/weapon/gun/energy/particle,
-/obj/item/weapon/gun/energy/particle,
-/obj/item/weapon/gun/energy/particle,
-/turf/simulated/floor/tiled/ascent,
+/obj/effect/wallframe_spawn/phoron,
+/turf/simulated/floor/ascent,
 /area/ship/ascent/habitation)
 "hn" = (
 /obj/machinery/light/ascent{
@@ -3423,17 +3416,13 @@
 /obj/structure/table/rack/dark,
 /obj/item/weapon/gun/energy/particle/small,
 /obj/item/weapon/rig/mantid/gyne,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
 "hp" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/ascent,
-/area/ship/ascent/fore_port_prow)
-"hq" = (
-/obj/effect/wallframe_spawn/phoron,
-/turf/simulated/floor/ascent,
 /area/ship/ascent/fore_port_prow)
 "hr" = (
 /obj/machinery/power/apc/hyper/ascent/north,
@@ -3536,6 +3525,7 @@
 	dir = 1
 	},
 /obj/structure/table/rack/dark,
+/obj/item/weapon/tank/mantid/methyl_bromide,
 /obj/item/weapon/gun/energy/particle/small,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/bridge)
@@ -3661,24 +3651,30 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "hV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+/obj/structure/table/steel_reinforced,
+/obj/machinery/reagent_temperature{
+	color = "PURPLE";
+	name = "reactant boiler"
 	},
-/obj/effect/catwalk_plated/ascent,
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "hW" = (
-/obj/effect/catwalk_plated/ascent,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+/obj/structure/table/steel_reinforced,
+/obj/machinery/reagent_temperature/cooler{
+	color = "PURPLE";
+	name = "reactant cooler"
 	},
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -3688,6 +3684,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "hX" = (
@@ -3801,6 +3801,7 @@
 "il" = (
 /obj/machinery/light/ascent,
 /obj/structure/table/rack/dark,
+/obj/item/weapon/tank/mantid/methyl_bromide,
 /obj/item/weapon/gun/energy/particle/small,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/bridge)
@@ -3981,14 +3982,6 @@
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_starboard)
-"iF" = (
-/obj/structure/table/rack/dark,
-/obj/item/weapon/rig/mantid,
-/obj/item/weapon/rig/mantid,
-/obj/item/weapon/gun/energy/particle/small,
-/obj/item/weapon/gun/energy/particle/small,
-/turf/simulated/floor/tiled/ascent,
-/area/ship/ascent/habitation)
 "iG" = (
 /obj/machinery/door/airlock/external/bolted/ascent{
 	frequency = 1333;
@@ -4157,12 +4150,16 @@
 "iY" = (
 /obj/structure/table/rack/dark,
 /obj/structure/window/phoronreinforced,
+/obj/item/weapon/storage/bag/trash/purple/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
 "ja" = (
-/obj/structure/table/rack/dark,
 /obj/structure/window/phoronreinforced{
 	dir = 1
+	},
+/obj/structure/ore_box{
+	color = "PURPLE";
+	name = "heavy duty box"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
@@ -4480,7 +4477,7 @@
 "jJ" = (
 /obj/machinery/light/ascent,
 /obj/machinery/body_scanconsole/ascent{
-	dir = 4
+	dir = 2
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_port)
@@ -4538,16 +4535,18 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "jQ" = (
-/obj/effect/catwalk_plated/ascent,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light/ascent,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "jR" = (
@@ -4575,16 +4574,47 @@
 	},
 /turf/simulated/wall/ascent,
 /area/ship/ascent/fore_hallway)
+"kp" = (
+/obj/machinery/body_scanconsole/ascent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/wing_port)
 "kv" = (
 /obj/item/weapon/mop/advanced/ascent,
 /obj/item/weapon/reagent_containers/glass/bucket/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_spike)
+"lk" = (
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"lG" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/gun/energy/particle/small,
+/obj/item/weapon/gun/energy/particle/small,
+/obj/item/weapon/gun/energy/particle/small,
+/obj/item/weapon/gun/energy/particle/small,
+/obj/item/weapon/tank/jetpack/ascent,
+/obj/item/weapon/tank/jetpack/ascent,
+/obj/item/weapon/tank/jetpack/ascent,
+/obj/item/weapon/tank/jetpack/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"mN" = (
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "ng" = (
 /obj/machinery/light/ascent,
 /obj/machinery/botany/editor,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_port)
+"om" = (
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "oL" = (
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_starboard)
@@ -4592,6 +4622,89 @@
 /obj/machinery/seed_extractor,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_starboard)
+"pp" = (
+/obj/structure/table/rack/dark,
+/obj/item/clothing/suit/space/void/ascent,
+/obj/item/clothing/suit/space/void/ascent,
+/obj/item/clothing/suit/space/void/ascent,
+/obj/item/clothing/suit/space/void/ascent,
+/obj/item/clothing/head/helmet/space/void/ascent,
+/obj/item/clothing/head/helmet/space/void/ascent,
+/obj/item/clothing/head/helmet/space/void/ascent,
+/obj/item/clothing/head/helmet/space/void/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"qr" = (
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/obj/structure/hygiene/sink/ascent{
+	dir = 1;
+	icon_state = "sink";
+	pixel_y = 28
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"qI" = (
+/obj/structure/railing/mapped,
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"qR" = (
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"sM" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"uk" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/computer/mining{
+	color = "PURPLE";
+	name = "distributor control";
+	pixel_y = 32
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"uV" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/structure/window/phoronreinforced{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"vt" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/gun/energy/particle,
+/obj/item/weapon/gun/energy/particle,
+/obj/item/weapon/gun/energy/particle/small,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"vz" = (
+/obj/structure/window/phoronreinforced{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"vY" = (
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "wO" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /obj/structure/cable/cyan{
@@ -4601,20 +4714,62 @@
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
+"yx" = (
+/obj/structure/window/phoronreinforced,
+/obj/structure/ore_box{
+	color = "PURPLE";
+	name = "heavy duty box"
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
 "zt" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/portable_atmospherics/canister/methyl_bromide,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_port)
+"zw" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/tank/mantid/reactor/oxygen,
+/obj/item/weapon/tank/mantid/reactor/oxygen,
+/obj/item/weapon/tank/mantid/reactor/oxygen,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"As" = (
+/obj/machinery/portable_atmospherics/canister/methyl_bromide,
+/obj/structure/window/phoronreinforced{
+	dir = 4
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
 "Av" = (
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_port)
+"AI" = (
+/obj/machinery/mineral/stacking_machine{
+	color = "PURPLE";
+	input_turf = 4;
+	name = "materials distributor";
+	output_turf = 2
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "Ck" = (
 /obj/structure/bed/chair/padded/purple/ascent{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"Es" = (
+/obj/structure/ore_box{
+	color = "PURPLE";
+	name = "heavy duty box"
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "Ew" = (
 /obj/machinery/seed_storage,
 /turf/simulated/floor/tiled/ascent,
@@ -4624,6 +4779,22 @@
 /obj/machinery/light/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
+"EB" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/computer/mining{
+	color = "PURPLE";
+	name = "compression dynamo control"
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"ER" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/pickaxe/diamonddrill/ascent,
+/obj/item/weapon/pickaxe/diamonddrill/ascent,
+/obj/item/weapon/pickaxe/diamonddrill/ascent,
+/obj/item/weapon/pickaxe/diamonddrill/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "FN" = (
 /obj/item/weapon/storage/bag/trash/purple/ascent,
 /turf/simulated/floor/ascent,
@@ -4641,6 +4812,41 @@
 /obj/machinery/hologram/holopad/longrange/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"JE" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/rig/mantid/nabber/queen,
+/obj/item/weapon/rig/mantid/nabber,
+/obj/item/weapon/rig/mantid/nabber,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"Ka" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/rig/mantid,
+/obj/item/weapon/rig/mantid,
+/obj/machinery/light/ascent,
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/obj/machinery/door/window/northright{
+	color = "PURPLE"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"Lp" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/rig/mantid,
+/obj/item/weapon/rig/mantid,
+/obj/machinery/light/ascent{
+	dir = 1
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/obj/machinery/door/window/southright{
+	color = "PURPLE"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
 "LN" = (
 /obj/structure/hygiene/shower/ascent,
 /turf/simulated/floor/tiled/ascent,
@@ -4649,10 +4855,61 @@
 /obj/structure/bed/chair/padded/purple/ascent/gyne,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"Os" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/storage/ore{
+	color = "PURPLE";
+	name = "mineral carrier"
+	},
+/obj/item/weapon/storage/ore{
+	color = "PURPLE";
+	name = "mineral carrier"
+	},
+/obj/item/weapon/storage/ore{
+	color = "PURPLE";
+	name = "mineral carrier"
+	},
+/obj/item/weapon/storage/ore{
+	color = "PURPLE";
+	name = "mineral carrier"
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"OZ" = (
+/obj/machinery/mineral/unloading_machine{
+	color = "PURPLE";
+	input_turf = 2;
+	name = "mineral collector";
+	output_turf = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"Pv" = (
+/obj/machinery/mineral/processing_unit{
+	color = "PURPLE";
+	input_turf = 4;
+	name = "compression dynamo";
+	output_turf = 8
+	},
+/obj/structure/railing/mapped,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"PF" = (
+/obj/structure/window/phoronreinforced,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "Qs" = (
 /obj/machinery/biogenerator,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_port)
+"Qy" = (
+/obj/structure/table/rack/dark,
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
+/obj/item/weapon/storage/bag/trash/purple/ascent,
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_port)
 "QJ" = (
 /obj/structure/window/phoronreinforced,
 /turf/simulated/floor/tiled/ascent,
@@ -4679,6 +4936,13 @@
 /obj/structure/closet/crate/freezer/meat/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_spike)
+"Te" = (
+/obj/structure/window/phoronreinforced,
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "TO" = (
 /obj/structure/hygiene/shower/ascent{
 	icon_state = "shower";
@@ -4686,12 +4950,71 @@
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_hallway)
+"Uf" = (
+/obj/machinery/door/window/brigdoor{
+	color = "PURPLE"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"Uy" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/chem_master{
+	color = "PURPLE";
+	name = "chemical analyzer"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
+"Vr" = (
+/obj/structure/table/rack/dark,
+/obj/item/weapon/tank/mantid/reactor,
+/obj/item/weapon/tank/mantid/reactor,
+/obj/item/weapon/tank/mantid/reactor,
+/obj/item/weapon/tank/mantid/reactor,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/habitation)
+"Vx" = (
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "WI" = (
 /obj/structure/window/phoronreinforced{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"Xi" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/ascent,
+/obj/machinery/chemical_dispenser/full{
+	color = "PURPLE";
+	name = "chemical fabricator"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_prow)
 "XE" = (
 /obj/structure/bed/chair/padded/purple/ascent/gyne,
 /turf/simulated/floor/tiled/ascent,
@@ -9513,7 +9836,7 @@ aa
 aa
 ac
 ac
-as
+vz
 aF
 dC
 dL
@@ -9634,8 +9957,8 @@ aa
 aa
 aa
 ap
-as
-as
+om
+PF
 as
 as
 dM
@@ -9756,12 +10079,12 @@ aa
 aa
 aa
 ap
+om
+Uf
 as
 as
-as
-as
-dC
-dL
+Xi
+Uy
 dR
 ac
 ew
@@ -9878,8 +10201,8 @@ aa
 aa
 aa
 ap
-as
-as
+qR
+Te
 as
 as
 as
@@ -10000,8 +10323,8 @@ aa
 aa
 aa
 ap
-as
-as
+om
+Uf
 as
 as
 as
@@ -10123,7 +10446,7 @@ aa
 aa
 ac
 ac
-bB
+qr
 as
 as
 as
@@ -10245,8 +10568,8 @@ aa
 aa
 aa
 ac
-as
-as
+uk
+Vx
 as
 as
 as
@@ -10367,8 +10690,8 @@ aa
 aa
 aa
 ah
-as
-as
+AI
+vY
 as
 aX
 ah
@@ -10489,8 +10812,8 @@ ab
 ab
 aa
 ah
-as
-as
+qI
+mN
 as
 cO
 bT
@@ -10610,9 +10933,9 @@ ab
 QJ
 gS
 aa
-cL
-as
-as
+ah
+Pv
+EB
 as
 bi
 hj
@@ -10732,12 +11055,12 @@ ae
 QJ
 gS
 aa
-cL
-as
-as
+ah
+sM
+mN
 as
 bV
-as
+Os
 ah
 TO
 bd
@@ -10855,11 +11178,11 @@ iY
 ab
 aa
 ah
-bB
+OZ
+Es
 as
 as
-as
-as
+ER
 ah
 aQ
 aQ
@@ -10977,10 +11300,10 @@ Ex
 ab
 aa
 ah
+lk
+lk
 as
-as
-as
-ah
+aX
 ah
 ah
 cW
@@ -10990,7 +11313,7 @@ bb
 dF
 cy
 cy
-cy
+cv
 cv
 hc
 ic
@@ -11095,24 +11418,24 @@ ao
 ba
 jS
 aR
-iY
+yx
 ab
 aa
-ah
+cL
 as
 as
 as
-ah
-hk
-bb
+as
+aQ
+pp
 bt
 bN
 bU
 bN
 cz
-bb
-iF
-cy
+JE
+aQ
+cv
 cv
 hc
 hY
@@ -11220,21 +11543,21 @@ eI
 eR
 gS
 aa
-ah
+cL
 as
 as
 as
-cZ
+as
 hm
-bb
+Vr
 br
 bb
 eb
 bb
 br
-bb
-iF
-hq
+zw
+hm
+cv
 cv
 hc
 hZ
@@ -11342,21 +11665,21 @@ bC
 QJ
 gS
 aa
-ah
-bB
+cL
 as
 as
-ah
+as
+as
 aQ
-fJ
+lG
 br
 bu
 bz
 fJ
 br
-bu
+vt
 aQ
-cy
+cv
 cv
 hK
 cy
@@ -11465,19 +11788,19 @@ iI
 gS
 aa
 ah
-as
+bB
 as
 as
 ah
-bl
-bb
+aQ
+As
 bE
 bK
 bA
 gR
 fA
-bb
-cm
+uV
+aQ
 cy
 cv
 hc
@@ -11591,7 +11914,7 @@ as
 as
 as
 ah
-ch
+bl
 bb
 br
 iR
@@ -11599,7 +11922,7 @@ bz
 fJ
 br
 bb
-dB
+cm
 cy
 cv
 hc
@@ -11713,7 +12036,7 @@ as
 as
 as
 ah
-bl
+ch
 bb
 br
 bb
@@ -11721,7 +12044,7 @@ cc
 bb
 br
 bb
-cm
+dB
 cy
 cv
 hc
@@ -11835,15 +12158,15 @@ as
 as
 iy
 ah
-aQ
-fJ
+bl
+bb
 bF
 cz
 bb
 bt
 cF
-bu
-aQ
+bb
+cm
 cy
 iz
 cv
@@ -13423,11 +13746,11 @@ bJ
 az
 az
 az
-dq
-be
+Lp
+fM
 ho
-be
-dx
+fM
+Ka
 az
 az
 az
@@ -13437,7 +13760,7 @@ jJ
 bP
 aa
 cN
-ja
+Qy
 cQ
 cQ
 cN
@@ -13555,7 +13878,7 @@ hv
 hR
 jx
 gI
-jK
+kp
 dU
 aa
 ik
@@ -13677,7 +14000,7 @@ bQ
 cd
 da
 gI
-bQ
+jK
 dU
 aa
 ik
