@@ -1,0 +1,4 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - tweak: "Change heavy armor plate slowdown from 1 to 0.5"
