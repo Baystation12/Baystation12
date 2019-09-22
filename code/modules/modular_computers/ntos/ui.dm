@@ -58,11 +58,7 @@
 
 /datum/extension/interactive/ntos/CanUseTopic(mob/user, state)
 	. = holder.CanUseTopic(user, state)
-	if(!on || !host_status())
-		return STATUS_CLOSE
-	//There is no bypassing the update, mwhahaha
-	if(updating)
-		. = min(STATUS_UPDATE, .)
+	. = min(., extension_status(user))
 
 // Handles user's GUI input
 /datum/extension/interactive/ntos/extension_act(href, href_list, user)

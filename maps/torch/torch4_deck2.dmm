@@ -17,6 +17,7 @@
 /obj/machinery/camera/network/engine{
 	c_tag = "Tech Storage - Main"
 	},
+/obj/item/weapon/stock_parts/circuitboard/modular_computer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "ac" = (
