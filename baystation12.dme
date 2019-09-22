@@ -1338,6 +1338,7 @@
 #include "code\modules\ascent\ascent_outfit.dm"
 #include "code\modules\ascent\ascent_rigs.dm"
 #include "code\modules\ascent\ascent_structures.dm"
+#include "code\modules\ascent\ascent_suits.dm"
 #include "code\modules\ascent\ascent_turfs.dm"
 #include "code\modules\ascent\~ascent.dm"
 #include "code\modules\assembly\assembly.dm"
