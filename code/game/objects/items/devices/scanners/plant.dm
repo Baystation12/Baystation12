@@ -48,9 +48,13 @@
 	if(!grown_seed)
 		return
 
-	if(grown_seed.mysterious && !grown_seed.scanned && !(get_z(src) in GLOB.using_map.station_levels))
+	if(grown_seed.mysterious && !grown_seed.scanned)
 		grown_seed.scanned = TRUE
-		SSstatistics.add_field("xenoplants_scanned", 1)
+		var/area/map = locate(/area/overmap)
+		for(var/obj/effect/overmap/sector/exoplanet/P in map)
+			if(grown_seed in P.seeds)
+				SSstatistics.add_field("xenoplants_scanned", 1)
+				break
 
 	var/list/dat = list()
 
