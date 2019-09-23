@@ -1,0 +1,7 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - tweak: "Space adapted human oxygen pressure requirement has been lowered to 14 kPa."
+  - tweak: "Grav adapted human oxygen pressure requirement has been increased to 18 kPa."
+  - tweak: "Grav adapted strength has been increased to high, this means they get reduced slowdown for wearing or carrying heavier gear, eg. dufflebags, voidsuit. Still slower than human in most regards."
+  - tweak: "Unathi oxygen pressure requirement has been increased to  20 kPa. They need more oxygen to support their extremely robust metabolism."
