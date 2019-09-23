@@ -6066,7 +6066,7 @@
 /area/ship/scrap/broken_shuttle/cargo)
 "kB" = (
 /obj/machinery/light_switch{
-	step_y = 9
+	pixel_y = 5
 	},
 /turf/simulated/wall,
 /area/ship/scrap/broken_shuttle/cargo)
@@ -6312,6 +6312,12 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/space)
+"zj" = (
+/obj/machinery/portable_atmospherics/canister/nitrogen{
+	start_pressure = 9110
+	},
+/turf/space,
+/area/ship/scrap/maintenance/atmos)
 "Cs" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/paint/red,
@@ -6358,6 +6364,10 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
+"Jk" = (
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/space,
+/area/space)
 "Jy" = (
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -11542,7 +11552,7 @@ aa
 aa
 kd
 aa
-aa
+Jk
 jB
 aa
 aa
@@ -12424,7 +12434,7 @@ hx
 hw
 ie
 ip
-hw
+zj
 iP
 hw
 id
