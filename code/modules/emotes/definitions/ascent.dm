@@ -18,7 +18,7 @@
 	emote_message_3p = "USER flickers prismatically."
 
 /decl/emote/visible/ascent_glint
-	key = "glints"
+	key = "glint"
 	emote_message_3p = "USER glints."
 
 /decl/emote/visible/ascent_glimmer
@@ -32,7 +32,7 @@
 /decl/emote/visible/ascent_shine
 	key = "shine"
 	emote_message_3p = "USER shines brightly!"
-	
+
 /decl/emote/visible/ascent_dazzle
 	key = "dazzle"
 	emote_message_3p = "USER dazzles!"
