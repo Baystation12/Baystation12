@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "'Settled' exoplanets have been renamed to 'ruined' for 23% less confusing."
