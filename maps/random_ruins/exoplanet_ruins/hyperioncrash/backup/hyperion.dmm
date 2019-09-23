@@ -1,0 +1,114 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/simulated/wall/r_wall,/area/space)
+"ac" = (/obj/effect/wallframe_spawn/reinforced/hull,/turf/simulated/floor/tiled,/area/space)
+"ad" = (/turf/simulated/floor/shuttle/black,/area/space)
+"ae" = (/obj/effect/wallframe_spawn/reinforced/hull,/turf/simulated/floor/tiled,/area/ship/hyperion/cockpit)
+"af" = (/obj/effect/wallframe_spawn/reinforced,/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"ag" = (/obj/machinery/mining/drill,/turf/simulated/floor/shuttle/black,/area/space)
+"ah" = (/obj/machinery/computer/ship/helm,/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"ai" = (/obj/machinery/computer/shuttle_control/explore/hyperion,/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"aj" = (/obj/machinery/mining/brace{dir = 4},/turf/simulated/floor/shuttle/black,/area/space)
+"ak" = (/obj/machinery/mining/brace{dir = 8},/turf/simulated/floor/shuttle/black,/area/space)
+"al" = (/obj/machinery/computer/ship/engines,/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"am" = (/obj/machinery/computer/ship/navigation{icon_state = "computer"; dir = 4},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"an" = (/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"ao" = (/obj/machinery/computer/ship/sensors{dir = 8},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"ap" = (/turf/simulated/wall/r_wall,/area/ship/hyperion/cockpit)
+"aq" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4; external_pressure_bound = 202; external_pressure_bound_default = 202},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"ar" = (/obj/machinery/power/apc{dir = 2; name = "south bump"; operating = 1; pixel_y = -28},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"as" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"at" = (/obj/machinery/atmospherics/unary/vent_scrubber{dir = 8},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"au" = (/turf/simulated/wall/r_wall,/area/ship/hyperion/medbay)
+"av" = (/obj/effect/wallframe_spawn/reinforced/hull,/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"aw" = (/turf/simulated/wall/r_wall,/area/ship/hyperion/hallway)
+"ax" = (/obj/machinery/atmospherics/pipe/simple/visible/supply,/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 1; icon_state = "intact-scrubbers"},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/cockpit)
+"ay" = (/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"az" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 2; level = 2},/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"aA" = (/obj/machinery/alarm{alarm_id = "xenobio4_alarm"; dir = 2; icon_state = "alarm0"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"aB" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{icon_state = "intact-supply"; dir = 6},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24; req_access = list("ACCESS_ENGINE_EQUIP")},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aC" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aD" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aE" = (/obj/machinery/alarm{alarm_id = "xenobio4_alarm"; dir = 2; icon_state = "alarm0"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aF" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24; req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))},/turf/simulated/floor/shuttle/black,/area/space)
+"aG" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"aH" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 2; level = 2},/turf/simulated/floor/shuttle/black,/area/space)
+"aI" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"aJ" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{icon_state = "intact-supply"; dir = 9},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aK" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4; external_pressure_bound = 202; external_pressure_bound_default = 202},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aL" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aM" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{dir = 8},/obj/machinery/atmospherics/pipe/manifold4w/visible/supply,/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aN" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aO" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/shuttle/black,/area/space)
+"aP" = (/obj/machinery/access_button/airlock_interior{master_tag = "prototype_controller"; pixel_x = 23; pixel_y = 23},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/shuttle/black,/area/space)
+"aQ" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/manifold/visible/supply,/turf/simulated/floor/shuttle/black,/area/space)
+"aR" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 6; icon_state = "intact-scrubbers"},/obj/machinery/atmospherics/pipe/simple/visible/supply{icon_state = "intact-supply"; dir = 9},/turf/simulated/floor/shuttle/black,/area/space)
+"aS" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/shuttle/black,/area/ship/hyperion/hallway)
+"aT" = (/obj/machinery/atmospherics/unary/vent_scrubber{icon_state = "map_scrubber_off"; dir = 1},/turf/simulated/floor/shuttle/black,/area/space)
+"aU" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"aV" = (/obj/machinery/atmospherics/unary/vent_scrubber{icon_state = "map_scrubber_off"; dir = 1},/turf/simulated/floor/tiled,/area/ship/hyperion/medbay)
+"aW" = (/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aX" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{icon_state = "intact-supply"; dir = 6},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aY" = (/obj/machinery/atmospherics/unary/vent_scrubber{icon_state = "map_scrubber_off"; dir = 1},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"aZ" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 1; icon_state = "intact-scrubbers"},/obj/machinery/atmospherics/pipe/simple/visible/supply,/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"ba" = (/turf/simulated/wall/r_wall,/area/ship/hyperion/engine/star)
+"bb" = (/turf/simulated/wall/r_wall,/area/ship/hyperion/engineering)
+"bc" = (/turf/simulated/floor,/area/ship/hyperion/engine/star)
+"bd" = (/obj/machinery/pipedispenser,/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24; req_access = list("ACCESS_ENGINE_EQUIP")},/turf/simulated/floor,/area/ship/hyperion/engine/star)
+"be" = (/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"bf" = (/obj/machinery/power/smes/buildable/preset/torch/engine_main,/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"bg" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"bh" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 2; level = 2},/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"bi" = (/obj/machinery/alarm{dir = 8; pixel_x = 25; pixel_y = 0},/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"bj" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{dir = 8},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"bk" = (/obj/machinery/atmospherics/unary/vent_scrubber{dir = 8},/turf/simulated/floor/tiled,/area/ship/hyperion/hallway)
+"bl" = (/obj/machinery/alarm{dir = 4; locked = 0; pixel_x = -25; pixel_y = 0},/turf/simulated/floor,/area/ship/hyperion/engine/star)
+"bm" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 2; level = 2},/turf/simulated/floor,/area/ship/hyperion/engine/star)
+"bn" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"bo" = (/obj/machinery/power/emitter/gyrotron/anchored,/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bp" = (/obj/machinery/atmospherics/unary/vent_scrubber{icon_state = "map_scrubber_off"; dir = 1},/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"bq" = (/obj/machinery/power/apc{dir = 2; name = "south bump"; operating = 1; pixel_y = -28},/turf/simulated/floor/reinforced,/area/ship/hyperion/engineering)
+"br" = (/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bs" = (/obj/machinery/atmospherics/unary/vent_scrubber{icon_state = "map_scrubber_off"; dir = 1},/turf/simulated/floor,/area/ship/hyperion/engine/star)
+"bt" = (/turf/simulated/wall/r_wall,/area/ship/hyperion/engine/port)
+"bu" = (/turf/simulated/floor/reinforced,/area/ship/hyperion/engine/port)
+"bv" = (/obj/effect/wallframe_spawn/reinforced_phoron/titanium,/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bw" = (/turf/simulated/floor,/area/ship/hyperion/engine/port)
+"bx" = (/obj/machinery/atmospherics/unary/vent_scrubber{dir = 4; frequency = 1431; id_tag = "guppy_shuttle_pump_out_internal"; power_rating = 15000; scrubbing = "siphon"},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24; req_access = list("ACCESS_ENGINE_EQUIP")},/turf/simulated/floor,/area/ship/hyperion/engine/port)
+"by" = (/obj/machinery/fusion_fuel_injector/mapped{anchored = 1; dir = 4; initial_id_tag = "aux_fusion_plant"},/turf/simulated/floor/reinforced,/area/ship/hyperion/engine/port)
+"bz" = (/obj/effect/wallframe_spawn/reinforced_phoron/titanium,/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{icon_state = "intact"; dir = 4},/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bA" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 4},/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bB" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 10},/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bC" = (/obj/machinery/fusion_fuel_injector/mapped{anchored = 1; dir = 8; initial_id_tag = "aux_fusion_plant"},/turf/simulated/floor/reinforced,/area/ship/hyperion/engine/star)
+"bD" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4; external_pressure_bound = 202; external_pressure_bound_default = 202},/turf/simulated/floor,/area/ship/hyperion/engine/port)
+"bE" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 6; icon_state = "intact"},/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bF" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 4},/obj/machinery/power/fusion_core,/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bG" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 9},/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bH" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 5; icon_state = "intact"},/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bI" = (/obj/effect/wallframe_spawn/reinforced_phoron/titanium,/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{dir = 8; icon_state = "intact"},/turf/simulated/floor/reinforced,/area/ship/hyperion/hallway)
+"bJ" = (/obj/machinery/atmospherics/unary/engine{dir = 1},/turf/simulated/floor,/area/ship/hyperion/engine/port)
+"bK" = (/obj/machinery/atmospherics/unary/engine{dir = 1},/turf/simulated/floor,/area/ship/hyperion/engine/star)
+"bL" = (/turf/space,/area/ship/hyperion/engine/port)
+"bM" = (/turf/space,/area/ship/hyperion/engine/star)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaeaeaeaeaeaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaeafahaialafaeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaeamanananaoaeaaaaaaaaaaaaaa
+aaaaaaaaaaaaapanaqarasatapaaaaaaaaaaaaaa
+auauavavavauawawanapaxawawababababacabab
+auayayazayaAawaBaCaCaDaEawagaFabaHaHaHab
+avayayaGaIaIaCaJaKaLaMaNaSaOaPaOaQaQaRad
+auaUayaVayayawaWaWaXaJaYawajakabaTaTaTab
+auauayayayayawaWaWaZaWaWawbababaabababab
+aabbbbbbbbbbawawaWaZaWawawbcbdbababaaaaa
+aabbbebebfbebebbaWaZaWbabcbcbcbcbcbaaaaa
+aabbbebebgbhbibbaKbjbkbablbcbmbcbcbaaaaa
+bbbbbebebebnbebeaWboaWbcbcbcbcbcbcbabaaa
+bbbebebebebpbqawaWbraWawbcbcbsbcbcbcbaaa
+bbbbbbbbbtbubbawawbvawawbcbcbcbcbcbcbaaa
+btbwbwbwbxbwbybzbAbAbBbvbCbcbcbcbcbcbaaa
+btbwbwbwbDbwbybvbEbFbGbvbCbcbcbcbcbcbaaa
+btbwbwbwbwbwbybvbHbAbAbIbCbcbcbcbcbcbaaa
+btbtbJbJbJbtbtawawbrawawbababKbKbKbabaaa
+aabtbLbLbLbtaaaabrbrbraaaababMbMbMbaaaaa
+"}
