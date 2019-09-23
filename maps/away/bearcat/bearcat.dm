@@ -52,7 +52,11 @@
 		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
+		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/broken_shuttle/airlock = NO_SCRUBBER|NO_APC,
+		/area/ship/scrap/broken_shuttle/cockpit = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/broken_shuttle/cargo = NO_SCRUBBER,
+		/area/ship/scrap/broken_shuttle/power = NO_SCRUBBER
 	)
 	shuttles_to_initialise = list(
 		/datum/shuttle/autodock/overmap/swordfish
