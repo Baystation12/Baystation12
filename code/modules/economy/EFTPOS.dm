@@ -48,12 +48,12 @@
 
 		//stamp the paper
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.icon_state = "paper_stamp-cent"
+		stampoverlay.icon_state = "paper_stamp-boss"
 		if(!R.stamped)
 			R.stamped = new
 		R.offset_x += 0
 		R.offset_y += 0
-		R.ico += "paper_stamp-cent"
+		R.ico += "paper_stamp-boss"
 		R.stamped += /obj/item/weapon/stamp
 		R.overlays += stampoverlay
 		R.stamps += "<HR><i>This paper has been stamped by the EFTPOS device.</i>"
@@ -71,7 +71,7 @@
 
 	//stamp the paper
 	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-	stampoverlay.icon_state = "paper_stamp-cent"
+	stampoverlay.icon_state = "paper_stamp-boss"
 	if(!R.stamped)
 		R.stamped = new
 	R.stamped += /obj/item/weapon/stamp
@@ -122,21 +122,22 @@
 	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
 		var/obj/item/weapon/spacecash/ewallet/E = O
 		if (linked_account)
-			if(!linked_account.suspended)
-				if(transaction_locked && !transaction_paid)
-					if(transaction_amount <= E.worth)
+			if(transaction_locked && !transaction_paid)
+				if(transaction_amount <= E.worth)
+					//transfer the money
+					var/purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
+					purpose += ", paid by [E.owner_name]"
+
+					if(linked_account.deposit(transaction_amount, purpose, machine_id))
+						E.worth -= transaction_amount
+
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						src.visible_message("\icon[src] \The [src] chimes.")
 						transaction_paid = 1
-
-						//transfer the money
-						E.worth -= transaction_amount
-						var/datum/transaction/T = new(E.owner_name, (transaction_purpose ? transaction_purpose : "None supplied."), transaction_amount, machine_id)
-						linked_account.do_transaction(T)
 					else
-						to_chat(usr, "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>")
-			else
-				to_chat(usr, "\icon[src]<span class='warning'>Connected account has been suspended.</span>")
+						to_chat(usr, "\icon[src]<span class='warning'>Transaction failed! Please try again.</span>")
+				else
+					to_chat(usr, "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>")
 		else
 			to_chat(usr, "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>")
 
@@ -235,22 +236,13 @@
 						D = null
 					D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
 					if(D)
-						if(!D.suspended)
-							if(transaction_amount <= D.money)
-								playsound(src, 'sound/machines/chime.ogg', 50, 1)
-								src.visible_message("\icon[src] \The [src] chimes.")
-								transaction_paid = 1
-
-								//transfer the money
-								var/datum/transaction/T = new("[linked_account.owner_name] (via [eftpos_name])", transaction_purpose, -transaction_amount, machine_id)
-								D.do_transaction(T)
-
-								T = new(D.owner_name, transaction_purpose, transaction_amount, machine_id)
-								linked_account.do_transaction(T)
-							else
-								to_chat(usr, "\icon[src]<span class='warning'>You don't have that much money!</span>")
+						//transfer the money
+						if(D.transfer(linked_account, transaction_amount, "[transaction_purpose] (via [eftpos_name]/[machine_id])"))
+							playsound(src, 'sound/machines/chime.ogg', 50, 1)
+							src.visible_message("\icon[src] \The [src] chimes.")
+							transaction_paid = 1
 						else
-							to_chat(usr, "\icon[src]<span class='warning'>Your account has been suspended.</span>")
+							to_chat(usr, "\icon[src]<span class='warning'>Transaction failed! Please try again.</span>")
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>")
 				else

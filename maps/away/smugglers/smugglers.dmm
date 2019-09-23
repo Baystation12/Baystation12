@@ -447,7 +447,6 @@
 "aX" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
 	},
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor,
@@ -500,7 +499,6 @@
 "bf" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
 	},
 /obj/item/weapon/tank/air{
 	pixel_x = 5
@@ -549,7 +547,6 @@
 "bm" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
 	},
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
@@ -1036,13 +1033,6 @@
 /area/smugglers/dorms)
 "cC" = (
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav2,
-/turf/space,
-/area/space)
-"cD" = (
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 50;
-	generation_width = 50
-	},
 /turf/space,
 /area/space)
 "cE" = (
@@ -3282,7 +3272,7 @@ aa
 aa
 aa
 aa
-cD
+aa
 aa
 aa
 aa

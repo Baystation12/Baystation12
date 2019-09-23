@@ -37,7 +37,7 @@
 	var/initial_spawn_req = 1               // Gamemode using this template won't start without this # candidates.
 	var/initial_spawn_target = 3            // Gamemode will attempt to spawn this many antags.
 	var/announced                           // Has an announcement been sent?
-	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. xenos)
+	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. borers)
 	var/spawn_announcement_title            // Report title.
 	var/spawn_announcement_sound            // Report sound clip.
 	var/spawn_announcement_delay            // Time between initial spawn and round announcement.
@@ -51,6 +51,7 @@
 	var/flags = 0                           // Various runtime options.
 	var/show_objectives_on_creation = 1     // Whether or not objectives are shown when a player is added to this antag datum
 	var/datum/antag_skill_setter/skill_setter = /datum/antag_skill_setter/generic // Used to set up skills.
+	var/datum/language/required_language = null
 
 	// Used for setting appearance.
 	var/list/valid_species =       list(SPECIES_UNATHI,SPECIES_SKRELL,SPECIES_HUMAN,SPECIES_VOX)
@@ -83,7 +84,8 @@
 	GLOB.all_antag_types_[id] = src
 	GLOB.all_antag_spawnpoints_[landmark_id] = list()
 	GLOB.antag_names_to_ids_[role_text] = id
-	skill_setter = new skill_setter
+	if(ispath(skill_setter))
+		skill_setter = new skill_setter
 	..()
 
 /datum/antagonist/proc/Initialize()

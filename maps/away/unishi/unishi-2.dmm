@@ -251,29 +251,28 @@
 /area/unishi/common)
 "aH" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/solar_control,
-/obj/item/weapon/circuitboard/roboprinter,
+/obj/item/weapon/stock_parts/circuitboard/solar_control,
+/obj/item/weapon/stock_parts/circuitboard/roboprinter,
 /obj/item/device/bot_kit,
 /turf/simulated/floor,
 /area/unishi/common)
 "aI" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/mecha/gygax/main,
 /obj/item/integrated_circuit/converter/text2num,
 /turf/simulated/floor,
 /area/unishi/common)
 "aJ" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/roboprinter,
-/obj/item/weapon/circuitboard/rdserver,
-/obj/item/weapon/circuitboard/helm,
+/obj/item/weapon/stock_parts/circuitboard/roboprinter,
+/obj/item/weapon/stock_parts/circuitboard/rdserver,
+/obj/item/weapon/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
 "aK" = (
 /obj/structure/table/standard,
-/obj/item/weapon/circuitboard/robotics,
-/obj/item/weapon/circuitboard/protolathe,
-/obj/item/weapon/circuitboard/helm,
+/obj/item/weapon/stock_parts/circuitboard/robotics,
+/obj/item/weapon/stock_parts/circuitboard/protolathe,
+/obj/item/weapon/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
 "aL" = (
@@ -536,11 +535,6 @@
 	icon_state = "1-2"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
@@ -610,17 +604,7 @@
 	},
 /turf/simulated/floor,
 /area/unishi/common)
-"bD" = (
-/obj/structure/table/standard,
-/obj/item/weapon/pen/blue,
-/turf/simulated/floor/tiled/dark,
-/area/unishi/classroom)
 "bE" = (
-/turf/simulated/floor/tiled/dark,
-/area/unishi/classroom)
-"bF" = (
-/obj/structure/table/standard,
-/obj/item/weapon/pen/crayon/green,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "bG" = (
@@ -642,9 +626,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "bI" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
@@ -697,24 +678,6 @@
 	icon_state = "32-1"
 	},
 /turf/simulated/open,
-/area/unishi/common)
-"bM" = (
-/obj/structure/bed/chair,
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/unishi/classroom)
-"bN" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "bO" = (
 /obj/machinery/floodlight,
@@ -1045,7 +1008,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1148,7 +1111,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor,
 /area/unishi/toxins)
@@ -1282,7 +1245,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/door/airlock/glass/research{
 	icon_state = "closed";
@@ -1345,7 +1308,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor,
@@ -1379,7 +1342,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dz" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -1520,7 +1483,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/rnd)
 "dQ" = (
@@ -1549,7 +1512,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "dS" = (
@@ -1594,7 +1557,6 @@
 /area/unishi/hydro)
 "dX" = (
 /obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/weapon/circuitboard/mecha/gygax/peripherals,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dY" = (
@@ -1623,7 +1585,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "eb" = (
-/obj/machinery/food_replicator,
+/obj/machinery/fabricator/replicator,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "ec" = (
@@ -1712,7 +1674,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "eq" = (
@@ -1790,7 +1752,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "ey" = (
@@ -1799,7 +1761,7 @@
 /area/unishi/common)
 "ez" = (
 /obj/effect/wingrille_spawn/reinforced,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "eA" = (
@@ -1834,7 +1796,7 @@
 "eF" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/structure/sign/xenobio_3,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "eG" = (
@@ -1854,7 +1816,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/hydro)
 "eI" = (
@@ -1908,7 +1870,7 @@
 	icon_state = "xenobio";
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "eQ" = (
@@ -1995,7 +1957,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
 "fa" = (
@@ -2058,7 +2020,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fh" = (
@@ -2123,9 +2085,6 @@
 "fm" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 2;
@@ -2165,7 +2124,7 @@
 /obj/machinery/door/airlock/science,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/common)
 "fr" = (
@@ -2183,7 +2142,7 @@
 /area/unishi/common)
 "ft" = (
 /obj/machinery/door/airlock/science,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/common)
 "fu" = (
@@ -2207,7 +2166,6 @@
 /area/unishi/common)
 "fy" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/circuitboard/mecha/gygax/targeting,
 /obj/random/snack,
 /obj/item/device/flashlight/lamp,
 /turf/simulated/floor/tiled/dark,
@@ -2298,7 +2256,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -2310,7 +2268,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2402,7 +2360,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "fW" = (
-/obj/machinery/atmospherics/pipe/tank/phoron,
+/obj/machinery/atmospherics/unary/tank/phoron,
 /obj/structure/window/phoronreinforced{
 	dir = 8
 	},
@@ -2428,27 +2386,27 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/unishi/smresearch)
 "fZ" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/structure/window/phoronreinforced{
 	dir = 8
 	},
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "ga" = (
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gb" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen,
+/obj/machinery/atmospherics/unary/tank/hydrogen,
 /obj/machinery/light/small,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gc" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen,
+/obj/machinery/atmospherics/unary/tank/nitrogen,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gd" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen,
+/obj/machinery/atmospherics/unary/tank/oxygen,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "ge" = (
@@ -2461,7 +2419,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -2561,10 +2519,15 @@
 "gs" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
 /obj/item/remains,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 2;
+	level = 2
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gt" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gu" = (
@@ -2576,7 +2539,7 @@
 	dir = 9
 	},
 /obj/machinery/button/mass_driver{
-	id = "unishi_sm_eject";
+	id_tag = "unishi_sm_eject";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2590,7 +2553,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -2646,9 +2609,6 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/vomit,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2658,16 +2618,14 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/machinery/light/small,
@@ -2677,6 +2635,9 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gE" = (
@@ -2685,12 +2646,6 @@
 	},
 /obj/machinery/atmospherics/binary/pump/high_power/on{
 	target_pressure = 15000
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
 	},
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -2706,9 +2661,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
 /obj/structure/cable/yellow{
 	d2 = 8;
 	icon_state = "0-8"
@@ -2721,8 +2673,8 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "unishi_eject";
+/obj/machinery/button/blast_door{
+	id_tag = "unishi_eject";
 	pixel_x = 22
 	},
 /obj/effect/floor_decal/industrial/warning,
@@ -2776,37 +2728,40 @@
 /area/unishi/smresearch)
 "gN" = (
 /obj/item/clothing/suit/storage/toggle/labcoat/chemist,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gO" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	layer = 2.4;
-	level = 2
-	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gP" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 6
 	},
-/obj/machinery/computer/general_air_control/supermatter_core{
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/machinery/computer/air_control/supermatter_core{
 	dir = 8;
-	frequency = 2002;
+	frequency = 1438;
 	icon_state = "computer";
 	input_tag = "unishi_cooling_in";
 	name = "Supermatter Test Room Cooling Control";
 	output_tag = "unishi_cooling_out";
 	pressure_setting = 100;
-	sensors = list("engine_sensor" = "Engine Core")
-	},
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	sensor_name = "Engine Core";
+	sensor_tag = "engine_sensor"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -2870,18 +2825,16 @@
 /area/unishi/smresearch)
 "gZ" = (
 /obj/item/device/geiger,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "ha" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	layer = 2.4;
-	level = 2
-	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hb" = (
@@ -3004,7 +2957,7 @@
 	color = ""
 	},
 /obj/machinery/mass_driver{
-	id = "unishi_sm_eject"
+	id_tag = "unishi_sm_eject"
 	},
 /turf/simulated/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
@@ -3013,7 +2966,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "Biohazard";
+	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
@@ -3067,7 +3020,7 @@
 /area/unishi/smresearch)
 "hy" = (
 /obj/machinery/door/blast/regular{
-	id = "unishi_eject"
+	id_tag = "unishi_eject"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/unishi/smresearch)
@@ -3112,6 +3065,20 @@
 /obj/structure/lattice,
 /turf/space,
 /area/unishi/smresearch)
+"qW" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/white,
+/area/unishi/chem)
+"xD" = (
+/obj/machinery/reagentgrinder,
+/turf/simulated/floor/tiled/white,
+/area/unishi/chem)
+"OW" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/white,
+/area/unishi/chem)
 "Ul" = (
 /obj/effect/landmark{
 	name = "carpspawn"
@@ -7533,8 +7500,8 @@ ax
 ax
 ay
 ay
-bm
-bm
+ay
+ay
 bm
 bm
 bm
@@ -7634,11 +7601,11 @@ aA
 aL
 aT
 bb
+xD
+bj
 bj
 bn
 bt
-bD
-bM
 bQ
 bt
 ca
@@ -7736,11 +7703,11 @@ aB
 aM
 aM
 aM
-bj
+aM
+aM
+aM
 bn
 bu
-bE
-bE
 bR
 bE
 bE
@@ -7838,11 +7805,11 @@ aC
 aN
 aU
 bc
+OW
+qW
 bk
 bn
 bv
-bF
-bt
 bS
 bt
 cb
@@ -7941,10 +7908,10 @@ aO
 aV
 bd
 bd
+bd
+bd
 bn
 bw
-bn
-bn
 bT
 bW
 cc
@@ -8044,9 +8011,9 @@ aW
 be
 be
 bo
-bx
+be
 bG
-bn
+bw
 bU
 bn
 bn
@@ -8148,7 +8115,7 @@ bf
 bf
 by
 bH
-bN
+dD
 bV
 bf
 cd

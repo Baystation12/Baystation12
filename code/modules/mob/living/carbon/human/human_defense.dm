@@ -302,6 +302,7 @@ meteor_act
 
 //this proc handles being hit by a thrown atom
 /mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)
+
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 
@@ -398,6 +399,8 @@ meteor_act
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
 					src.anchored = 1
 					src.pinned += O
+	else
+		..()
 
 /mob/living/carbon/human/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	if(!def_zone) ..()
@@ -477,3 +480,9 @@ meteor_act
 		perm += perm_by_part[part]
 
 	return perm
+
+/mob/living/carbon/human/lava_act(datum/gas_mixture/air, temperature, pressure)
+	var/was_burned = FireBurn(0.4 * vsc.fire_firelevel_multiplier, temperature, pressure)
+	if (was_burned)
+		fire_act(air, temperature)
+	return FALSE

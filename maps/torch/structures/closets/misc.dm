@@ -43,7 +43,9 @@
 		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50),
-		/obj/item/weapon/storage/fakebook
+		/obj/item/weapon/storage/fakebook,
+		/obj/item/device/radio/headset/heads/torchntcommand,
+		/obj/item/device/radio/headset/heads/torchntcommand/alt
 	)
 
 /decl/closet_appearance/secure_closet/torch/corporate/bodyguard
@@ -71,7 +73,9 @@
 		/obj/item/clothing/head/helmet/nt/guard,
 		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
 		/obj/item/clothing/glasses/sunglasses/big,
-		/obj/item/clothing/accessory/badge/nanotrasen
+		/obj/item/clothing/accessory/badge/nanotrasen,
+		/obj/item/device/radio/headset/heads/torchcorp,
+		/obj/item/device/radio/headset/heads/torchcorp/alt
 	)
 
 /obj/structure/closet/secure_closet/representative
@@ -138,9 +142,18 @@
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined/WillContain()
 	return list(
-		/obj/item/weapon/gun/energy/gun/small/secure = 2,
-		/obj/item/weapon/storage/belt/holster/general = 2,
-		/obj/item/weapon/gun/energy/gun/secure = 2,
+		/obj/item/weapon/storage/belt/holster/general = 3,
+		/obj/item/weapon/gun/energy/gun/secure = 3,
+		/obj/item/weapon/gun/energy/gun/small/secure = 1,
+	)
+
+/obj/structure/closet/secure_closet/guncabinet/PPE
+	name = "Bridge PPE cabinet"
+	req_access = list(list(access_armory,access_emergency_armory,access_hos,access_hop,access_ce,access_cmo,access_rd,access_senadv))
+
+/obj/structure/closet/secure_closet/guncabinet/PPE/WillContain()
+	return list(
+		/obj/item/weapon/gun/energy/gun/small/secure = 3,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command = 3,
 		/obj/item/clothing/head/helmet/solgov/command = 3
 	)

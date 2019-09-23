@@ -23,9 +23,6 @@
 #endif
 
 
-/turf/simulated/wall //landlubbers go home
-	name = "bulkhead"
-
 /turf/simulated/floor
 	name = "bare deck"
 

@@ -1,6 +1,6 @@
 /obj/item/weapon/card/id/syndicate
 	assignment = "Agent"
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	var/electronic_warfare = 1
 	var/mob/registered_user = null
 	color = COLOR_GRAY40

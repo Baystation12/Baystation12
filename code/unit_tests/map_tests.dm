@@ -657,13 +657,13 @@ datum/unit_test/ladder_check/start_test()
 			continue
 		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)
 		if(!bin)
-			log_bad("Junction with tag [sort.sortType] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
+			log_bad("Junction with tag [sort.sort_type] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
 			fail = TRUE
 			continue
-		all_tagged_destinations[sort.sortType] = bin
+		all_tagged_destinations[sort.sort_type] = bin
 		if(!istype(bin)) // Can also be an outlet.
 			continue
-		all_tagged_bins[sort.sortType] = bin
+		all_tagged_bins[sort.sort_type] = bin
 	if(fail)
 		fail("Improperly connected junction detected.")
 		return
@@ -747,7 +747,7 @@ datum/unit_test/ladder_check/start_test()
 		if(next_pipe in traversed)
 			return
 		traversed += next_pipe
-		current_dir = next_pipe.nextdir(current_dir, sort.sortType)
+		current_dir = next_pipe.nextdir(current_dir, sort.sort_type)
 		our_pipe = next_pipe
 
 /datum/unit_test/req_access_shall_have_valid_strings

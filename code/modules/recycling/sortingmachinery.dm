@@ -409,7 +409,6 @@
 
 /obj/machinery/disposal/deliveryChute/Bumped(var/atom/movable/AM) //Go straight into the chute
 	if(istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))	return
-	if(istype(AM, /obj/mecha))	return
 	switch(dir)
 		if(NORTH)
 			if(AM.loc.y != src.loc.y+1) return
@@ -487,11 +486,8 @@
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
 				to_chat(user, "You sliced the floorweld off the delivery chute.")
-				var/obj/structure/disposalconstruct/C = new (src.loc)
-				C.ptype = 8 // 8 =  Delivery chute
+				var/obj/structure/disposalconstruct/C = new (loc, src)
 				C.update()
-				C.anchored = 1
-				C.set_density(1)
 				qdel(src)
 			return
 		else

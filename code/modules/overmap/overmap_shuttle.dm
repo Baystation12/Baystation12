@@ -62,10 +62,11 @@
 
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
-	for (var/obj/effect/overmap/S in range(waypoint_sector(current_location), range))
-		for(var/obj/effect/shuttle_landmark/LZ in S.get_waypoints(src.name))
+	for (var/obj/effect/overmap/S in range(get_turf(waypoint_sector(current_location)), range))
+		var/list/waypoints = S.get_waypoints(name)
+		for(var/obj/effect/shuttle_landmark/LZ in waypoints)
 			if(LZ.is_valid(src))
-				res["[S.name] - [LZ.name]"] = LZ
+				res["[waypoints[LZ]] - [LZ.name]"] = LZ
 	return res
 
 /datum/shuttle/autodock/overmap/get_location_name()

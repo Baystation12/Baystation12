@@ -15,6 +15,9 @@
 	var/apply_eye_colour = TRUE
 	var/tmp/last_cached_eye_colour
 	var/tmp/last_eye_cache_key
+	var/flash_mod
+	var/darksight_range
+	var/darksight_tint
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = rgb(eye_colour[1],eye_colour[2], eye_colour[3])
@@ -93,6 +96,12 @@
 	if(is_broken())
 		owner.eye_blind = 20
 
+/obj/item/organ/internal/eyes/New()
+	..()
+	flash_mod = species.flash_mod
+	darksight_range = species.darksight_range
+	darksight_tint = species.darksight_tint
+
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
 	return (flash_protection + innate_flash_protection)
 
@@ -114,3 +123,9 @@
 	dead_icon = "camera_broken"
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 	update_colour()
+	flash_mod = 1
+	darksight_range = 2
+	darksight_tint = DARKTINT_NONE
+
+/obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
+	return "retinal overlayed [name]"

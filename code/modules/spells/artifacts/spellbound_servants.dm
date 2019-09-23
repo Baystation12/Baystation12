@@ -9,6 +9,15 @@
 	var/mob/living/carbon/human/H = new(a)
 	H.ckey = user.ckey
 	H.change_appearance(APPEARANCE_GENDER|APPEARANCE_EYE_COLOR|APPEARANCE_HAIR|APPEARANCE_FACIAL_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR_COLOR|APPEARANCE_SKIN)
+
+	var/obj/item/weapon/implant/translator/natural/I = new()
+	I.implant_in_mob(H, BP_HEAD)
+	if (master.languages.len)
+		var/datum/language/lang = master.languages[1]
+		H.add_language(lang.name)
+		H.set_default_language(lang)
+		I.languages[lang.name] = 1
+
 	modify_servant(equip_servant(H), H)
 	set_antag(H.mind, master)
 	var/name_choice = sanitize(input(H, "Choose a name. If you leave this blank, it will be defaulted to your current characters.", "Name change") as null|text, MAX_NAME_LEN)

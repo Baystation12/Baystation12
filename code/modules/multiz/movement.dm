@@ -2,58 +2,13 @@
 	set name = "Move Upwards"
 	set category = "IC"
 
-	if(zMove(UP))
-		to_chat(src, "<span class='notice'>You move upwards.</span>")
-		zPull(UP)
+	SelfMove(UP)
 
 /mob/verb/down()
 	set name = "Move Down"
 	set category = "IC"
 
-	if(zMove(DOWN))
-		to_chat(src, "<span class='notice'>You move down.</span>")
-		zPull(DOWN)
-
-/mob/proc/zMove(direction)
-	if(eyeobj)
-		return eyeobj.zMove(direction)
-	if(!can_ztravel())
-		to_chat(src, "<span class='warning'>You lack means of travel in that direction.</span>")
-		return
-
-	var/turf/start = loc
-	if(!istype(start))
-		to_chat(src, "<span class='notice'>You are unable to move from here.</span>")
-		return 0
-
-	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
-	if(!destination)
-		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
-		return 0
-
-	if(!start.CanZPass(src, direction))
-		to_chat(src, "<span class='warning'>\The [start] is in the way.</span>")
-		return 0
-	if(!destination.CanZPass(src, direction))
-		to_chat(src, "<span class='warning'>You bump against \the [destination].</span>")
-		return 0
-
-	var/area/area = get_area(src)
-	if(direction == UP && area.has_gravity() && !can_overcome_gravity())
-		to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
-		return 0
-
-	for(var/atom/A in destination)
-		if(!A.CanMoveOnto(src, start, 1.5, direction))
-			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
-			return 0
-
-	if(direction == UP && area.has_gravity() && can_fall(FALSE, destination))
-		to_chat(src, "<span class='warning'>You see nothing to hold on to.</span>")
-		return 0
-
-	forceMove(destination)
-	return 1
+	SelfMove(DOWN)
 
 /mob/proc/zPull(direction)
 	//checks and handles pulled items across z levels
@@ -81,8 +36,6 @@
 
 	pulling.forceMove(destination)
 	return 1
-
-
 
 /atom/proc/CanMoveOnto(atom/movable/mover, turf/target, height=1.5, direction = 0)
 	//Purpose: Determines if the object can move through this
@@ -112,30 +65,10 @@
 				return 1
 	return 0
 
-/mob/observer/zMove(direction)
-	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
-	if(destination)
-		forceMove(destination)
-	else
-		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
-
-/mob/observer/eye/zMove(direction)
-	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
-	if(destination)
-		setLoc(destination)
-	else
-		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
-
 /mob/proc/can_ztravel()
 	return 0
 
-/mob/observer/can_ztravel()
-	return 1
-
 /mob/living/carbon/human/can_ztravel()
-	if(incapacitated())
-		return 0
-
 	if(Allow_Spacemove())
 		return 1
 
@@ -145,9 +78,6 @@
 				return 1
 
 /mob/living/silicon/robot/can_ztravel()
-	if(incapacitated() || is_dead())
-		return 0
-
 	if(Allow_Spacemove()) //Checks for active jetpack
 		return 1
 
@@ -158,7 +88,7 @@
 //FALLING STUFF
 
 //Holds fall checks that should not be overriden by children
-/atom/movable/proc/fall()
+/atom/movable/proc/fall(var/lastloc)
 	if(!isturf(loc))
 		return
 
@@ -179,18 +109,23 @@
 		return
 
 	if(can_fall())
-		// We spawn here to let the current move operation complete before we start falling. fall() is normally called from
-		// Entered() which is part of Move(), by spawn()ing we let that complete.  But we want to preserve if we were in client movement
-		// or normal movement so other move behavior can continue.
-		var/mob/M = src
-		var/is_client_moving = (ismob(M) && M.moving)
-		spawn(0)
-			if(is_client_moving) M.moving = 1
-			handle_fall(below)
-			if(is_client_moving) M.moving = 0
+		begin_falling(lastloc, below)
+
+// We timer(0) here to let the current move operation complete before we start falling. fall() is normally called from
+// Entered() which is part of Move(), by spawn()ing we let that complete.  But we want to preserve if we were in client movement
+// or normal movement so other move behavior can continue.
+/atom/movable/proc/begin_falling(var/lastloc, var/below)
+	addtimer(CALLBACK(src, /atom/movable/proc/fall_callback, below), 0)
+
+/atom/movable/proc/fall_callback(var/turf/below)
+	var/mob/M = src
+	var/is_client_moving = (ismob(M) && M.moving)
+	if(is_client_moving) M.moving = 1
+	handle_fall(below)
+	if(is_client_moving) M.moving = 0
 
 //For children to override
-/atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
+/atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	if(!simulated)
 		return FALSE
 
@@ -210,16 +145,16 @@
 
 	return TRUE
 
-/obj/can_fall()
+/obj/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return ..(anchor_fall)
 
-/obj/effect/can_fall()
+/obj/effect/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return FALSE
 
-/obj/effect/decal/cleanable/can_fall()
+/obj/effect/decal/cleanable/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return TRUE
 
-/obj/item/pipe/can_fall()
+/obj/item/pipe/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	var/turf/simulated/open/below = loc
 	below = below.below
 
@@ -231,7 +166,7 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
-/mob/living/carbon/human/can_fall()
+/mob/living/carbon/human/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	if(..())
 		return species.can_fall(src)
 
@@ -244,11 +179,13 @@
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	if(istype(landing, /turf/simulated/open))
-		visible_message("\The [src] falls from the deck above through \the [landing]!", "You hear a whoosh of displaced air.")
+		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
-		visible_message("\The [src] falls from the deck above and slams into \the [landing]!", "You hear something slam into the deck.")
+		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
 		if(fall_damage())
 			for(var/mob/living/M in landing.contents)
+				if(M == src)
+					continue
 				visible_message("\The [src] hits \the [M.name]!")
 				M.take_overall_damage(fall_damage())
 
@@ -260,7 +197,7 @@
 		return 0
 	if(w_class == ITEM_SIZE_NO_CONTAINER)
 		return 100
-	return base_storage_cost(w_class)
+	return BASE_STORAGE_COST(w_class)
 
 /mob/living/carbon/human/handle_fall_effect(var/turf/landing)
 	if(species && species.handle_fall_special(src, landing))

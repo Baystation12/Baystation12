@@ -23,12 +23,13 @@
 	sheet_plural_name = "planks"
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 	chem_products = list(
 				/datum/reagent/carbon = 10,
 				/datum/reagent/water = 5
 				)
 	sale_price = 1
+	value = 3
 
 /material/wood/holographic
 	name = "holo" + MATERIAL_WOOD
@@ -36,7 +37,8 @@
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
-	sale_price = null
+	sale_price = 0
+	value = 0
 	hidden_from_codex = TRUE
 
 /material/wood/mahogany
@@ -44,8 +46,9 @@
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	adjective_name = MATERIAL_MAHOGANY
 	icon_colour = WOOD_COLOR_RICH
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	sale_price = 3
+	value = 45
 
 /material/wood/maple
 	name = MATERIAL_MAPLE
@@ -63,8 +66,9 @@
 	icon_colour = WOOD_COLOR_BLACK
 	weight = 22
 	integrity = 100
-	construction_difficulty = 4
-	sale_price = 4
+	construction_difficulty = MATERIAL_VERY_HARD_DIY
+	sale_price = 6
+	value = 85
 
 /material/wood/walnut
 	name = MATERIAL_WALNUT
@@ -74,8 +78,9 @@
 	adjective_name = MATERIAL_WALNUT
 	icon_colour = WOOD_COLOR_CHOCOLATE
 	weight = 20
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	sale_price = 2
+	value = 21
 
 /material/wood/bamboo
 	name = MATERIAL_BAMBOO
@@ -85,3 +90,15 @@
 	icon_colour = WOOD_COLOR_PALE2
 	weight = 16
 	hardness = 40
+
+/material/wood/yew
+	name = MATERIAL_YEW
+	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
+				tree can live for nearly a thousand years thanks to its natural disease resistance."
+	adjective_name = MATERIAL_YEW
+	icon_colour = WOOD_COLOR_YELLOW
+	chem_products = list(
+				/datum/reagent/carbon = 10,
+				/datum/reagent/water = 5,
+				/datum/reagent/toxin/taxine = 0.05
+				)

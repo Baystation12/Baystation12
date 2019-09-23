@@ -9,11 +9,8 @@
 		if(all_money_accounts.len)
 			var/datum/money_account/D = pick(all_money_accounts)
 			winner_name = D.owner_name
-			if(!D.suspended)
-				var/datum/transaction/T = new("Nyx Daily Grand Slam -Stellar- Lottery", "Winner!", winner_sum, "Biesel TCD Terminal #[rand(111,333)]")
-				D.do_transaction(T)
-				deposit_success = 1
 
+			deposit_success = D.deposit(winner_sum, "Nyx Daily Loan Lottery winner!", "Biesel TCD Terminal #[rand(111,333)]")
 	else
 		winner_name = random_name(pick(MALE,FEMALE), species = SPECIES_HUMAN)
 		deposit_success = pick(0,1)

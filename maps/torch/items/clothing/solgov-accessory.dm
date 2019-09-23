@@ -68,6 +68,12 @@ medals
 	desc = "A white heart emblazoned with a red cross awarded to members of the SCG for service as a medical professional in a combat zone."
 	icon_state = "white_heart"
 
+/obj/item/clothing/accessory/solgov
+	var/check_codex_val = FACTION_FLEET
+
+/obj/item/clothing/accessory/solgov/get_codex_value()
+	return check_codex_val || ..()
+
 /obj/item/clothing/accessory/solgov/torch_patch
 	name = "\improper Torch mission patch"
 	desc = "A fire resistant shoulder patch, worn by the personnel involved in the Torch Project."
@@ -78,12 +84,16 @@ medals
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
 		)
 
+/*****
+patches
+*****/
 /obj/item/clothing/accessory/solgov/ec_patch
 	name = "\improper Observatory patch"
 	desc = "A laminated shoulder patch, carrying the symbol of the Sol Central Government Expeditionary Corpss Observatory, or SCGEO for short, the eyes and ears of the Expeditionary Corps' missions."
 	icon_state = "ecpatch1"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
+	check_codex_val = FACTION_EXPEDITIONARY
 
 /obj/item/clothing/accessory/solgov/ec_patch/fieldops
 	name = "\improper Field Operations patch"
@@ -95,6 +105,7 @@ medals
 	desc = "A radiation-shielded shoulder patch, denoting service in the the Sol Central Government Expeditionary Corps Cultural Exchange program."
 	icon_state = "ecpatch3"
 	slot = ACCESSORY_SLOT_INSIGNIA
+	check_codex_val = FACTION_EXPEDITIONARY
 
 /obj/item/clothing/accessory/solgov/fleet_patch
 	name = "\improper First Fleet patch"
@@ -122,6 +133,29 @@ medals
 	name = "\improper Fifth Fleet patch"
 	desc = "A tactical shoulder patch carrying insignia of Fifth Fleet, the Quick Reaction Force, recently formed and outfited with last tech."
 	icon_state = "fleetpatch5"
+
+/*****
+scarves
+*****/
+/obj/item/clothing/accessory/solgov/ec_scarf
+	name = "expeditionary dress scarf"
+	desc = "An SCG blue silk scarf, meant to be worn with the Expeditionary Corps dress uniform."
+	icon = 'icons/obj/clothing/obj_accessories.dmi'
+	accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
+	icon_state = "whitescarf"
+	on_rolled = list("down" = "none")
+	color = "#68a0ce"
+	check_codex_val = FACTION_EXPEDITIONARY
+
+/obj/item/clothing/accessory/solgov/ec_scarf/observatory
+	name = "\improper Observatory dress scarf"
+	desc = "A silk scarf in Expeditionary Corps Observatory section colors, meant to be worn with the Expeditionary Corps dress uniform."
+	color = "#58bb59"
+
+/obj/item/clothing/accessory/solgov/ec_scarf/fieldops
+	name = "\improper Field Operations dress scarf"
+	desc = "A silk scarf in Expeditionary Corps Field Operations section colors, meant to be worn with the Expeditionary Corps dress uniform."
+	color = "#9f84b3"
 
 /******
 ribbons
@@ -175,7 +209,7 @@ specialty pins
 
 /obj/item/clothing/accessory/solgov/specialty/brig
 	name = "brig blazes"
-	desc = "Red blazes denoting a brig officer."
+	desc = "Red blazes denoting a brig chief."
 	icon_state = "fleetspec_brig"
 
 /obj/item/clothing/accessory/solgov/specialty/forensic
@@ -235,6 +269,9 @@ badges
 	icon_state = "tags"
 	badge_string = "Sol Central Government"
 	slot_flags = SLOT_MASK | SLOT_TIE
+	var/owner_rank
+	var/owner_name
+	var/owner_branch
 
 /obj/item/clothing/accessory/badge/solgov/tags/Initialize()
 	. = ..()
@@ -247,6 +284,9 @@ badges
 /obj/item/clothing/accessory/badge/solgov/tags/set_desc(var/mob/living/carbon/human/H)
 	if(!istype(H))
 		return
+	owner_rank = H.char_rank && H.char_rank.name
+	owner_name = H.real_name
+	owner_branch = H.char_branch && H.char_branch.name
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
 	var/religion = culture ? culture.name : "Unset"
 	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.b_type]"
@@ -351,6 +391,10 @@ department tags
 /obj/item/clothing/accessory/solgov/department/command/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/command/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#d6bb64"
+
 /obj/item/clothing/accessory/solgov/department/command/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the command department. These fit Fleet uniforms."
@@ -368,6 +412,9 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/engineering/service
 	icon_state = "dept_exped_service"
+
+/obj/item/clothing/accessory/solgov/department/engineering/jumper
+	icon_state = "dept_exped_jumper"
 
 /obj/item/clothing/accessory/solgov/department/engineering/fleet
 	icon_state = "dept_fleet"
@@ -387,6 +434,10 @@ department tags
 /obj/item/clothing/accessory/solgov/department/security/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/security/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#721b1b"
+
 /obj/item/clothing/accessory/solgov/department/security/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the security department. These fit Fleet uniforms."
@@ -404,6 +455,11 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/medical/service
 	icon_state = "dept_exped_service"
+	color = "#7faad1"
+
+/obj/item/clothing/accessory/solgov/department/medical/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#7faad1"
 
 /obj/item/clothing/accessory/solgov/department/medical/fleet
 	icon_state = "dept_fleet"
@@ -423,6 +479,10 @@ department tags
 /obj/item/clothing/accessory/solgov/department/supply/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/supply/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#7faad1"
+
 /obj/item/clothing/accessory/solgov/department/supply/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the supply department. These fit Fleet uniforms."
@@ -440,6 +500,10 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/service/service
 	icon_state = "dept_exped_service"
+
+/obj/item/clothing/accessory/solgov/department/service/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#7b965d"
 
 /obj/item/clothing/accessory/solgov/department/service/fleet
 	icon_state = "dept_fleet"
@@ -459,6 +523,9 @@ department tags
 /obj/item/clothing/accessory/solgov/department/exploration/service
 	icon_state = "dept_exped_service"
 
+/obj/item/clothing/accessory/solgov/department/exploration/jumper
+	icon_state = "dept_exped_jumper"
+
 /obj/item/clothing/accessory/solgov/department/exploration/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the exploration department. These fit Fleet uniforms."
@@ -476,6 +543,10 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/research/service
 	icon_state = "dept_exped_service"
+
+/obj/item/clothing/accessory/solgov/department/research/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#916f8d"
 
 /*********
 ranks - ec

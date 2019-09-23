@@ -222,7 +222,7 @@
 		else if(ispath(build_type, /obj/item/integrated_circuit))
 			var/obj/item/integrated_circuit/IC = SScircuit.cached_components[build_type]
 			cost = IC.matter
-		else if(!build_type in SScircuit.circuit_fabricator_recipe_list["Tools"])
+		else if(!(build_type in SScircuit.circuit_fabricator_recipe_list["Tools"]))
 			return
 
 		if(!debug && !subtract_material_costs(cost, usr))

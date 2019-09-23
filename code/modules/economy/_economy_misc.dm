@@ -46,6 +46,9 @@
 
 #define GEAR_EVA 15
 
+#define ACCOUNT_TYPE_PERSONAL 1
+#define ACCOUNT_TYPE_DEPARTMENT 2
+
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
 //Corporation NanoTrasen - Generalised / high tech research and phoron exploitation.
 //Corporation Vessel Contracting - Ship and station construction, materials research.

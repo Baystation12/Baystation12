@@ -92,5 +92,4 @@
 	l_hand =   /obj/item/weapon/storage/briefcase/foundation
 	l_ear =    /obj/item/device/radio/headset/foundation
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit
-	id_type =  /obj/item/weapon/card/id/foundation
 	id_slot =  slot_wear_id

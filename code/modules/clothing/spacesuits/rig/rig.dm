@@ -16,9 +16,12 @@
 	center_of_mass = null
 
 	// These values are passed on to all component pieces.
-	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 10)
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = RIG_MAX_PRESSURE
+	min_pressure_protection = 0
+
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
 	unacidable = 1
@@ -78,8 +81,9 @@
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction = TINT_NONE
 	var/offline_vision_restriction = TINT_HEAVY               // tint value given to helmet
-	var/airtight = 1 //If set, will adjust ITEM_FLAG_AIRTIGHT and ITEM_FLAG_STOPPRESSUREDAMAGE flags on components. Otherwise it should leave them untouched.
+	var/airtight = 1 //If set, will adjust ITEM_FLAG_AIRTIGHT flags on components. Otherwise it should leave them untouched.
 	var/visible_name
+	var/update_visible_name = FALSE
 
 	var/emp_protection = 0
 
@@ -88,6 +92,9 @@
 	var/datum/effect/effect/system/spark_spread/spark_system
 
 	var/banned_modules = list()
+
+/obj/item/weapon/rig/get_cell()
+	return cell
 
 /obj/item/weapon/rig/examine()
 	. = ..()
@@ -161,6 +168,7 @@
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
 		if(islist(armor))
+			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
 			set_extension(piece, /datum/extension/armor, /datum/extension/armor/rig, armor)
 
@@ -213,7 +221,9 @@
 		if(!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
 		if(airtight)
-			piece.item_flags &= ~(ITEM_FLAG_STOPPRESSUREDAMAGE|ITEM_FLAG_AIRTIGHT)
+			piece.max_pressure_protection = initial(piece.max_pressure_protection)
+			piece.min_pressure_protection = initial(piece.min_pressure_protection)
+			piece.item_flags &= ~ITEM_FLAG_AIRTIGHT
 	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/initiator,var/instant)
@@ -292,6 +302,7 @@
 					var/datum/extension/armor/rig/armor_datum = get_extension(piece, /datum/extension/armor)
 					if(istype(armor_datum))
 						armor_datum.sealed = !seal_target
+					playsound(src, 'sound/machines/suitstorage_lockdoor.ogg', 10, 0)
 
 				else
 					failed_to_seal = 1
@@ -314,6 +325,8 @@
 	// Success!
 	canremove = seal_target
 	to_chat(wearer, "<font color='blue'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></font>")
+	if(!canremove && update_visible_name)
+		visible_name = wearer.real_name
 
 	if(wearer != initiator)
 		to_chat(initiator, "<font color='blue'>Suit adjustment complete. Suit is now [canremove ? "unsealed" : "sealed"].</font>")
@@ -329,9 +342,13 @@
 /obj/item/weapon/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(canremove)
-			piece.item_flags &= ~(ITEM_FLAG_STOPPRESSUREDAMAGE|ITEM_FLAG_AIRTIGHT)
+			piece.max_pressure_protection = initial(piece.max_pressure_protection)
+			piece.min_pressure_protection = initial(piece.min_pressure_protection)
+			piece.item_flags &= ~ITEM_FLAG_AIRTIGHT
 		else
-			piece.item_flags |=  (ITEM_FLAG_STOPPRESSUREDAMAGE|ITEM_FLAG_AIRTIGHT)
+			piece.max_pressure_protection = max_pressure_protection
+			piece.min_pressure_protection = min_pressure_protection
+			piece.item_flags |=  ITEM_FLAG_AIRTIGHT
 	if (hides_uniform && chest)
 		if(canremove)
 			chest.flags_inv &= ~(HIDEJUMPSUIT)
@@ -392,7 +409,8 @@
 			malfunction()
 
 		for(var/obj/item/rig_module/module in installed_modules)
-			cell.use(module.Process() * CELLRATE)
+			if(!cell.checked_use(module.Process() * CELLRATE))
+				module.deactivate()//turns off modules when your cell is dry
 
 //offline should not change outside this proc
 /obj/item/weapon/rig/proc/update_offline()
@@ -466,6 +484,22 @@
 	data["securitycheck"] = security_check_enabled
 	data["malf"] =          malfunction_delay
 
+	if(wearer) //Internals below!!!
+		data["valveOpen"] = (wearer.internal == air_supply)
+
+		if(!wearer.internal || wearer.internal == air_supply)	// if they have no active internals or if tank is current internal
+			if(wearer.wear_mask && (wearer.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))// mask
+				data["maskConnected"] = 1
+			else if(wearer.head && (wearer.head.item_flags & ITEM_FLAG_AIRTIGHT)) // Make sure they have a helmet and its airtight
+				data["maskConnected"] = 1
+			else
+				data["maskConnected"] = 0
+
+	data["tankPressure"] = round(air_supply && air_supply.air_contents && air_supply.air_contents.return_pressure() ? air_supply.air_contents.return_pressure() : 0)
+	data["releasePressure"] = round(air_supply && air_supply.distribute_pressure ? air_supply.distribute_pressure : 0)
+	data["defaultReleasePressure"] = air_supply ? round(initial(air_supply.distribute_pressure)) : 0
+	data["maxReleasePressure"] = air_supply ? round(TANK_MAX_RELEASE_PRESSURE) : 0
+	data["tank"] = air_supply ? 1 : 0
 
 	var/list/module_list = list()
 	var/i = 1
@@ -490,8 +524,7 @@
 		if(module.charges && module.charges.len)
 
 			module_data["charges"] = list()
-			var/datum/rig_charge/selected = module.charges[module.charge_selected]
-			module_data["chargetype"] = selected ? "[selected.display_name]" : "none"
+			module_data["chargetype"] = module.charge_selected
 
 			for(var/chargetype in module.charges)
 				var/datum/rig_charge/charge = module.charges[chargetype]
@@ -548,6 +581,11 @@
 				ret.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")
 	return ret
 
+/obj/item/weapon/rig/get_req_access()
+	if(!security_check_enabled)
+		return list()
+	return ..()
+
 /obj/item/weapon/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
 
 	if(!security_check_enabled)
@@ -595,7 +633,10 @@
 				if("engage")
 					module.engage()
 				if("select")
-					module.select()
+					if(selected_module == module)
+						deselect_module()
+					else
+						module.select()
 				if("select_charge_type")
 					module.charge_selected = href_list["charge_type"]
 		return 1
@@ -605,6 +646,9 @@
 		return 1
 	if(href_list["toggle_suit_lock"])
 		locked = !locked
+		return 1
+	if(href_list["air_supply"])
+		air_supply.OnTopic(wearer,href_list)
 		return 1
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
@@ -736,6 +780,14 @@
 	if(wearer)
 		wearer.wearing_rig = null
 		wearer = null
+
+/obj/item/weapon/rig/proc/deselect_module()
+	if(selected_module.suit_overlay_inactive)
+		selected_module.suit_overlay = selected_module.suit_overlay_inactive
+	else
+		selected_module.suit_overlay = null
+	selected_module = null
+	update_icon()
 
 //Todo
 /obj/item/weapon/rig/proc/malfunction()

@@ -17,7 +17,6 @@
 		TAG_CULTURE = CULTURE_ALIUM
 	)
 
-#define RANDOM_COEF(VAR,LO,HI) ##VAR =  round((##VAR*rand(##LO*100, ##HI*100))/100, 0.1)
 /datum/species/alium/New()
 	//Coloring
 	blood_color = RANDOM_RGB
@@ -25,13 +24,13 @@
 	base_color  = RANDOM_RGB
 
 	//Combat stats
-	RANDOM_COEF(total_health, 0.8, 1.2)
-	RANDOM_COEF(brute_mod, 0.5, 1.5)
-	RANDOM_COEF(burn_mod, 0.8, 1.2)
-	RANDOM_COEF(oxy_mod, 0.5, 1.5)
-	RANDOM_COEF(toxins_mod, 0, 2)
-	RANDOM_COEF(radiation_mod, 0, 2)
-	RANDOM_COEF(flash_mod, 0.5, 1.5)
+	MULT_BY_RANDOM_COEF(total_health, 0.8, 1.2)
+	MULT_BY_RANDOM_COEF(brute_mod, 0.5, 1.5)
+	MULT_BY_RANDOM_COEF(burn_mod, 0.8, 1.2)
+	MULT_BY_RANDOM_COEF(oxy_mod, 0.5, 1.5)
+	MULT_BY_RANDOM_COEF(toxins_mod, 0, 2)
+	MULT_BY_RANDOM_COEF(radiation_mod, 0, 2)
+	MULT_BY_RANDOM_COEF(flash_mod, 0.5, 1.5)
 
 	if(brute_mod < 1 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_MINOR_CUT
@@ -85,7 +84,6 @@
 		species_flags |= SPECIES_FLAG_NO_PAIN
 
 	..()
-#undef RANDOM_COEF
 
 /datum/species/alium/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN

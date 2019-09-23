@@ -46,14 +46,24 @@ var/global/floorIsLava = 0
 
 	var/body = "<html><head><title>Options for [M.key]</title></head>"
 	body += "<body>Options panel for <b>[M]</b>"
+	var/last_ckey = LAST_CKEY(M)
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
+	else if(last_ckey)
+		body += " (last occupied by ckey <b>[last_ckey]</b>)"
 
 	if(istype(M, /mob/new_player))
 		body += " <B>Hasn't Entered Game</B> "
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
+
+	var/mob/living/exosuit/E = M
+	if(istype(E) && E.pilots)
+		body += "<br><b>Exosuit pilots:</b><br>"
+		for(var/mob/living/pilot in E.pilots)
+			body += "[pilot] "
+			body += " \[<A href='?src=\ref[src];pilot=\ref[pilot]'>link</a>\]<br>"
 
 	body += {"
 		<br><br>\[
@@ -65,8 +75,8 @@ var/global/floorIsLava = 0
 		<b>Mob type:</b> [M.type]<br>
 		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
-		<A href='?_src_=holder;warn=[M.ckey]'>Warn</A> |
-		<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> |
+		<A href='?_src_=holder;warn=[last_ckey]'>Warn</A> |
+		<A href='?src=\ref[src];newban=\ref[M];last_key=[last_ckey]'>Ban</A> |
 		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
 		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
 	"}
@@ -183,10 +193,6 @@ var/global/floorIsLava = 0
 				<b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>
 				<A href='?src=\ref[src];simplemake=observer;mob=\ref[M]'>Observer</A> |
 				\[ Xenos: <A href='?src=\ref[src];simplemake=larva;mob=\ref[M]'>Larva</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenophage Drone;mob=\ref[M]'>Drone</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenophage Hunter;mob=\ref[M]'>Hunter</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenophage Sentinel;mob=\ref[M]'>Sentinel</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenophage Queen;mob=\ref[M]'>Queen</A> \] |
 				\[ Crew: <A href='?src=\ref[src];simplemake=human;mob=\ref[M]'>Human</A>
 				<A href='?src=\ref[src];simplemake=human;species=Unathi;mob=\ref[M]'>Unathi</A>
 				<A href='?src=\ref[src];simplemake=human;species=Skrell;mob=\ref[M]'>Skrell</A>
@@ -898,19 +904,6 @@ var/global/floorIsLava = 0
 	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
 	SSstatistics.add_field_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/toggle_alien_eggs()
-	set category = "Server"
-	set desc="Toggle xenomorph egg laying"
-	set name="Toggle Alien Eggs"
-
-	if(!check_rights(R_ADMIN))
-		return
-	config.alien_eggs_allowed = !config.alien_eggs_allowed
-	log_admin("[key_name(usr)] toggled Alien Egg Laying to [config.alien_eggs_allowed].")
-	message_admins("[key_name_admin(usr)] toggled Alien Egg Laying [config.alien_eggs_allowed ? "on" : "off"].", 1)
-	SSstatistics.add_field_details("admin_verb","AEA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-
 /datum/admins/proc/toggle_space_ninja()
 	set category = "Server"
 	set desc="Toggle space ninjas spawning."
@@ -1063,16 +1056,17 @@ var/global/floorIsLava = 0
 
 	if(!check_rights(R_SPAWN))	return
 
-	var/owner = input("Select a ckey.", "Spawn Custom Item") as null|anything in custom_items
-	if(!owner|| !custom_items[owner])
+	var/owner = input("Select a ckey.", "Spawn Custom Item") as null|anything in SScustomitems.custom_items_by_ckey
+	if(!owner|| !SScustomitems.custom_items_by_ckey[owner])
 		return
 
-	var/list/possible_items = custom_items[owner]
-	var/datum/custom_item/item_to_spawn = input("Select an item to spawn.", "Spawn Custom Item") as null|anything in possible_items
-	if(!item_to_spawn || !item_to_spawn.is_valid(usr))
-		return
-
-	item_to_spawn.spawn_item(get_turf(usr))
+	var/list/possible_items = list()
+	for(var/datum/custom_item/item in SScustomitems.custom_items_by_ckey[owner])
+		possible_items[item.item_name] = item
+	var/item_to_spawn = input("Select an item to spawn.", "Spawn Custom Item") as null|anything in possible_items
+	if(item_to_spawn && possible_items[item_to_spawn])
+		var/datum/custom_item/item_datum = possible_items[item_to_spawn]
+		item_datum.spawn_item(get_turf(usr))
 
 /datum/admins/proc/check_custom_items()
 
@@ -1082,19 +1076,19 @@ var/global/floorIsLava = 0
 
 	if(!check_rights(R_SPAWN))	return
 
-	if(!custom_items)
+	if(!SScustomitems.custom_items_by_ckey)
 		to_chat(usr, "Custom item list is null.")
 		return
 
-	if(!custom_items.len)
+	if(!SScustomitems.custom_items_by_ckey.len)
 		to_chat(usr, "Custom item list not populated.")
 		return
 
-	for(var/assoc_key in custom_items)
+	for(var/assoc_key in SScustomitems.custom_items_by_ckey)
 		to_chat(usr, "[assoc_key] has:")
-		var/list/current_items = custom_items[assoc_key]
+		var/list/current_items = SScustomitems.custom_items_by_ckey[assoc_key]
 		for(var/datum/custom_item/item in current_items)
-			to_chat(usr, "- name: [item.name] icon: [item.item_icon] path: [item.item_path] desc: [item.item_desc]")
+			to_chat(usr, "- name: [item.item_name] icon: [item.item_icon_state] path: [item.item_path] desc: [item.item_desc]")
 
 /datum/admins/proc/spawn_plant(seedtype in SSplants.seeds)
 	set category = "Debug"
@@ -1498,12 +1492,12 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 
 		if(!P.ico)
 			P.ico = new
-		P.ico += "paper_stamp-cent"
-		stampoverlay.icon_state = "paper_stamp-cent"
+		P.ico += "paper_stamp-boss"
+		stampoverlay.icon_state = "paper_stamp-boss"
 
 		if(!P.stamped)
 			P.stamped = new
-		P.stamped += /obj/item/weapon/stamp/centcomm
+		P.stamped += /obj/item/weapon/stamp/boss
 		P.overlays += stampoverlay
 
 	var/obj/item/rcvdcopy

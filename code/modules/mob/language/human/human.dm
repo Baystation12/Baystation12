@@ -5,10 +5,10 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
-	key = "]"
 	flags = WHITELISTED
 	shorthand = "???"
 	space_chance = 40
+	category = /datum/language/human
 
 /datum/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)

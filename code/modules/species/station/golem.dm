@@ -11,6 +11,10 @@
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	breath_type = null
 	poison_types = null
 

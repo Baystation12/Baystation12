@@ -25,6 +25,12 @@
 	var/list/condensation_points = list()
 	// Reagent path resulting from condesation.
 	var/list/condensation_products = list()
+	//If it shouldn't autogenerate a codex entry
+	var/list/hidden_from_codex = list()
+
+	//Holds the symbols
+	var/list/symbol_html = list()
+	var/list/symbol = list()
 
 /decl/xgm_gas
 	var/id = ""
@@ -37,10 +43,14 @@
 	var/overlay_limit = null
 
 	var/flags = 0
-	var/burn_product = "carbon_dioxide"
+	var/burn_product = GAS_CO2
 	var/breathed_product
 	var/condensation_point = INFINITY
 	var/condensation_product
+	var/hidden_from_codex
+	var/symbol_html = "X"
+	var/symbol = "X"
+
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
@@ -54,23 +64,22 @@
 		gas_data.name[gas.id] = gas.name
 		gas_data.specific_heat[gas.id] = gas.specific_heat
 		gas_data.molar_mass[gas.id] = gas.molar_mass
-		if(gas.overlay_limit) 
+		if(gas.overlay_limit)
 			gas_data.overlay_limit[gas.id] = gas.overlay_limit
-			var/obj/effect/gas_overlay/I = new()
-			if(gas.tile_overlay)
-				I.icon_state = gas.tile_overlay
-			if(gas.tile_color)
-				gas_data.tile_overlay_color[gas.id] = gas.tile_color
-				I.color = gas.tile_color
-			gas_data.tile_overlay[gas.id] = I
+			gas_data.tile_overlay[gas.id] = gas.tile_overlay
+			gas_data.tile_overlay_color[gas.id] = gas.tile_color
 		gas_data.flags[gas.id] = gas.flags
 		gas_data.burn_product[gas.id] = gas.burn_product
+
+		gas_data.symbol_html[gas.id] = gas.symbol_html
+		gas_data.symbol[gas.id] = gas.symbol
 
 		if(!isnull(gas.condensation_product) && !isnull(gas.condensation_point))
 			gas_data.condensation_points[gas.id] = gas.condensation_point
 			gas_data.condensation_products[gas.id] = gas.condensation_product
 
 		gas_data.breathed_product[gas.id] = gas.breathed_product
+		gas_data.hidden_from_codex[gas.id] = gas.hidden_from_codex
 
 	return 1
 
@@ -79,12 +88,20 @@
 	desc = "You shouldn't be clicking this."
 	icon = 'icons/effects/tile_effects.dmi'
 	icon_state = "generic"
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = 0
+	var/gas_id
 
-/obj/effect/gas_overlay/Initialize()
+/obj/effect/gas_overlay/proc/update_alpha_animation(var/new_alpha)
+	animate(src, alpha = new_alpha)
+	alpha = new_alpha
+	animate(src, alpha = 0.8 * new_alpha, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
+	animate(alpha = new_alpha, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
+
+/obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	animate(src, alpha = 175, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
-	animate(alpha = 255, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
+	gas_id = gas
+	if(gas_data.tile_overlay[gas_id])
+		icon_state = gas_data.tile_overlay[gas_id]
+	color = gas_data.tile_overlay_color[gas_id]

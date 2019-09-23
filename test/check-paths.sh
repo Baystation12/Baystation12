@@ -31,9 +31,9 @@ exactly 10 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 43 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 509 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 477 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
-exactly 23 "text2path uses" 'text2path'
+exactly 24 "text2path uses" 'text2path'
 exactly 1 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 0 "goto uses" 'goto '
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong

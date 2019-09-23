@@ -133,7 +133,11 @@
 	. = ..()
 
 /atom/movable/lighting_overlay/forceMove()
-	return 0 //should never move
+	//should never move
+	//In theory... except when getting deleted :C
+	if(QDELING(src))
+		return ..()
+	return 0
 
 /atom/movable/lighting_overlay/Move()
 	return 0

@@ -63,12 +63,12 @@
 		kill_program()
 		return TOPIC_HANDLED
 	if( href_list["PC_enable_component"] )
-		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
+		var/obj/item/weapon/stock_parts/computer/H = find_hardware_by_name(href_list["PC_enable_component"])
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
 		. = TOPIC_HANDLED
 	if( href_list["PC_disable_component"] )
-		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
+		var/obj/item/weapon/stock_parts/computer/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
 		. = TOPIC_HANDLED

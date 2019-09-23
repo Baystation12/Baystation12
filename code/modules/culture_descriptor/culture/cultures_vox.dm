@@ -1,14 +1,17 @@
 /decl/cultural_info/culture/vox
 	name = CULTURE_VOX_ARKSHIP
-	language = LANGUAGE_VOX
-	default_language = LANGUAGE_VOX
-	name_language = LANGUAGE_VOX
-	secondary_langs = list(LANGUAGE_GALCOM)
 	description = "The vast majority of vox are born and die on the enormous moon-sized arkships that form the only \
 	permanent home any of the creatures have. Tending to the vast, decaying vessels is a full-time job for crews of thousands, \
 	and although the glamour and allure of the raider life appeals to many, staying home is seen as a more responsible and mature \
 	pursuit than haring off across the stars to attack the meat and steal their goods."
 	hidden_from_codex = TRUE
+	language = LANGUAGE_VOX
+	secondary_langs = list(
+		LANGUAGE_HUMAN_EURO,
+		LANGUAGE_SPACER,
+		LANGUAGE_GUTTER,
+		LANGUAGE_SIGN
+	)
 
 /decl/cultural_info/culture/vox/salvager
 	name = CULTURE_VOX_SALVAGER

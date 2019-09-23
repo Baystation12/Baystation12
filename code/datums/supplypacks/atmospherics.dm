@@ -13,13 +13,12 @@
 	name = "Emergency equipment"
 	contains = list(/obj/item/weapon/storage/toolbox/emergency = 2,
 					/obj/item/clothing/suit/storage/hazardvest = 2,
-					/obj/item/clothing/suit/armor/vest = 2,
 					/obj/item/weapon/tank/emergency/oxygen/engi = 4,
 			 		/obj/item/clothing/suit/space/emergency = 4,
 					/obj/item/clothing/head/helmet/space/emergency = 4,
 					/obj/item/clothing/mask/gas = 4,
 					/obj/item/device/flashlight/flare/glowstick = 5)
-	cost = 45
+	cost = 25
 
 	containername = "emergency crate"
 
@@ -114,7 +113,7 @@
 
 /decl/hierarchy/supply_pack/atmospherics/scanner_module
 	name = "Electronics - Atmospherics scanner modules"
-	contains = list(/obj/item/weapon/computer_hardware/scanner/atmos = 4)
+	contains = list(/obj/item/weapon/stock_parts/computer/scanner/atmos = 4)
 	cost = 20
 	containername = "atmospherics scanner module crate"
 	containertype = /obj/structure/closet/crate/secure

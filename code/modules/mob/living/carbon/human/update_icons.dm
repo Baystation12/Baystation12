@@ -195,7 +195,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(lying)
 		M.Turn(90)
 		M.Scale(size_multiplier)
-		M.Translate(1,-6)
+		M.Translate(1, -6-default_pixel_z)
 	else
 		M.Scale(size_multiplier)
 		M.Translate(0, 16*(size_multiplier-1))

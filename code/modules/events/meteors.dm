@@ -1,6 +1,7 @@
 /datum/event/meteor_wave
 	startWhen		= 30	// About one minute early warning
 	endWhen 		= 60	// Adjusted automatically in tick()
+	has_skybox_image = TRUE
 	var/alarmWhen   = 30
 	var/next_meteor = 40
 	var/waves = 1
@@ -8,6 +9,8 @@
 	var/next_meteor_lower = 10
 	var/next_meteor_upper = 20
 
+/datum/event/meteor_wave/get_skybox_image()
+	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 
 /datum/event/meteor_wave/setup()
 	waves = 0

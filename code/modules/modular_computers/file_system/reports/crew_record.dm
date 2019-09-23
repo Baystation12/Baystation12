@@ -65,6 +65,21 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_bloodtype(H ? H.b_type : "Unset")
 	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? html_decode(H.med_record) : "No record supplied"))
 
+	if(H)
+		if(H.isSynthetic())
+			set_implants("Fully synthetic body")
+		else
+			var/organ_data = list("\[*\]")
+			for(var/obj/item/organ/external/E in H.organs)
+				if(BP_IS_ROBOTIC(E))
+					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(BP_IS_ASSISTED(I))
+					organ_data += I.get_mechanical_assisted_descriptor()
+				else if (BP_IS_ROBOTIC(I))
+					organ_data += "robotic [I.name] prosthetic"
+			set_implants(jointext(organ_data, "\[*\]"))
+
 	// Security record
 	set_criminalStatus(GLOB.default_security_status)
 	set_dna(H ? H.dna.unique_enzymes : "")
@@ -181,13 +196,14 @@ FIELD_LIST_EDIT("Status", status, GLOB.physical_statuses, null, access_medical)
 FIELD_SHORT("Species",species, null, access_change_ids)
 FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
 FIELD_LIST("Rank", rank, record_ranks(), null, access_change_ids)
+FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
 
 FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
 // MEDICAL RECORDS
 FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
 FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
-FIELD_SHORT("Religion", religion, access_medical, access_medical)
+FIELD_LONG("Known Implants", implants, access_medical, access_medical)
 
 // SECURITY RECORDS
 FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security, access_security)

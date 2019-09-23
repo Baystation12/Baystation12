@@ -36,7 +36,7 @@
 	var/damage_flags = DAM_BULLET
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
-	var/kill_count = 50 //This will de-increment every process(). When 0, it will delete the projectile.
+	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
 		//Effects
 	var/stun = 0
 	var/weaken = 0
@@ -59,6 +59,7 @@
 
 	var/fire_sound
 	var/miss_sounds
+	var/ricochet_sounds
 	var/shrapnel_type = /obj/item/weapon/material/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
@@ -311,7 +312,7 @@
 	var/first_step = 1
 
 	spawn while(src && src.loc)
-		if(kill_count-- < 1)
+		if(life_span-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
 			return
@@ -344,7 +345,7 @@
 		if(first_step)
 			muzzle_effect(effect_transform)
 			first_step = 0
-		else if(!bumped && kill_count > 0)
+		else if(!bumped && life_span > 0)
 			tracer_effect(effect_transform)
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
@@ -407,9 +408,9 @@
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(impact_type))
-		var/obj/effect/projectile/P = new impact_type(location.loc)
+		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
 
-		if(istype(P))
+		if(istype(P) && location)
 			P.set_transform(M)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
@@ -428,7 +429,7 @@
 		return //cannot shoot yourself
 	if(istype(A, /obj/item/projectile))
 		return
-	if(istype(A, /mob/living) || istype(A, /obj/mecha) || istype(A, /obj/vehicle))
+	if(istype(A, /mob/living) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
 		return
 	result = 1

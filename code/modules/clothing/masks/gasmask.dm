@@ -11,10 +11,19 @@
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
 	armor = list(melee = 5, bullet = 5, laser = 5, energy = 0, bomb = 0, bio = 75, rad = 0)
+	filtered_gases = list(
+		GAS_PHORON,
+		GAS_N2O,
+		GAS_CHLORINE,
+		GAS_AMMONIA,
+		GAS_CO,
+		GAS_METHYL_BROMIDE,
+		GAS_METHANE
+	)
 	var/clogged
 	var/filter_water
 	var/gas_filter_strength = 1			//For gas mask filters
-	var/list/filtered_gases = list("phoron","sleeping_agent","chlorine","ammonia","carbon_monoxide","methyl_bromide")
+
 
 /obj/item/clothing/mask/gas/examine(var/mob/user)
 	. = ..()
@@ -161,7 +170,7 @@
 	flags_inv = 0
 	body_parts_covered = 0
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
-	filtered_gases = list("phoron", "sleeping_agent", "oxygen")
+	filtered_gases = list(GAS_PHORON, GAS_N2O, GAS_OXYGEN)
 
 
 /obj/item/clothing/mask/gas/swat/vox
@@ -171,7 +180,7 @@
 	item_state = "voxswat"
 	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
-	filtered_gases = list("phoron", "sleeping_agent", "oxygen")
+	filtered_gases = list(GAS_PHORON, GAS_N2O, GAS_OXYGEN)
 
 /obj/item/clothing/mask/gas/aquabreather
 	name = "aquabreather"

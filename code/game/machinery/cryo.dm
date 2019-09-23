@@ -6,10 +6,12 @@
 	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
-	plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	interact_offline = 1
 	layer = ABOVE_HUMAN_LAYER
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/on = 0
 	idle_power_usage = 20
@@ -27,22 +29,11 @@
 	. = ..()
 	icon = 'icons/obj/cryogenics_split.dmi'
 	update_icon()
-	initialize_directions = dir
 	atmos_init()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/cryo_cell(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/console_screen(src),
-		new /obj/item/pipe(src))
-	RefreshParts()
-
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
-	var/turf/T = loc
-	T.contents += contents
+	for(var/atom/movable/A in src)
+		A.dropInto(loc)
 	if(beaker)
 		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
 		beaker = null
@@ -99,8 +90,9 @@
 	if(src.occupant == user && !user.stat)
 		go_out()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user)
+/obj/machinery/atmospherics/unary/cryo_cell/interface_interact(user)
 	ui_interact(user)
+	return TRUE
 
  /**
   * The ui_interact proc is used to open and update Nano UIs
@@ -197,15 +189,14 @@
 		go_out()
 		return TOPIC_REFRESH
 
+/obj/machinery/atmospherics/unary/cryo_cell/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, G))
-		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, G))
-		return
-	if(default_part_replacement(user, G))
-		return
+	if(component_attackby(G, user))
+		return TRUE
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")

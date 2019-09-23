@@ -4,7 +4,6 @@
 /obj/effect/effect/smoke/chem
 	icon = 'icons/effects/chemsmoke.dmi'
 	opacity = 0
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE | PASS_FLAG_GLASS //PASS_FLAG_GLASS is fine here, it's just so the visual effect can "flow" around glass
@@ -146,11 +145,9 @@
 			var/more = ""
 			if(M)
 				more = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
-			message_admins("A chemical smoke reaction has taken place in ([whereLink])[contained]. Last associated key is [carry.my_atom.fingerprintslast][more].", 0, 1)
-			log_game("A chemical smoke reaction has taken place in ([where])[contained]. Last associated key is [carry.my_atom.fingerprintslast].")
+			log_and_message_admins("A chemical smoke reaction has taken place in ([whereLink])[contained]. Last associated key is [carry.my_atom.fingerprintslast][more].")
 		else
-			message_admins("A chemical smoke reaction has taken place in ([whereLink]). No associated key.", 0, 1)
-			log_game("A chemical smoke reaction has taken place in ([where])[contained]. No associated key.")
+			log_and_message_admins("A chemical smoke reaction has taken place in ([whereLink]). No associated key.")
 
 //Runs the chem smoke effect
 // Spawns damage over time loop for each reagent held in the cloud.

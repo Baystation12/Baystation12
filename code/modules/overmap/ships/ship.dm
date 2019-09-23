@@ -28,7 +28,7 @@
 
 	var/obj/machinery/computer/ship/helm/nav_control
 	var/list/engines = list()
-	var/engines_state = 1 //global on/off toggle for all engines
+	var/engines_state = 0 //global on/off toggle for all engines
 	var/thrust_limit = 1  //global thrust limit for all engines, 0..1
 	var/halted = 0        //admin halt or other stop.
 	var/skill_needed = SKILL_ADEPT  //piloting skill needed to steer it without going in random dir
@@ -45,19 +45,29 @@
 	SSshuttle.ships -= src
 	. = ..()
 
-/obj/effect/overmap/ship/relaymove(mob/user, direction)
-	accelerate(direction)
+/obj/effect/overmap/ship/relaymove(mob/user, direction, accel_limit)
+	accelerate(direction, accel_limit)
 
 /obj/effect/overmap/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
+/obj/effect/overmap/ship/get_scan_data(mob/user)
+	. = ..()
+	if(!is_still())
+		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * 1000]"
+
 //Projected acceleration based on information from engines
 /obj/effect/overmap/ship/proc/get_acceleration()
-	return round(get_total_thrust()/vessel_mass, SHIP_MOVE_RESOLUTION)
+	return round(get_total_thrust()/get_vessel_mass(), SHIP_MOVE_RESOLUTION)
 
 //Does actual burn and returns the resulting acceleration
 /obj/effect/overmap/ship/proc/get_burn_acceleration()
-	return round(burn() / vessel_mass, SHIP_MOVE_RESOLUTION)
+	return round(burn() / get_vessel_mass(), SHIP_MOVE_RESOLUTION)
+
+/obj/effect/overmap/ship/proc/get_vessel_mass()
+	. = vessel_mass
+	for(var/obj/effect/overmap/ship/ship in src)
+		. += ship.get_vessel_mass()
 
 /obj/effect/overmap/ship/proc/get_speed()
 	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)
@@ -93,6 +103,8 @@
 		return 0
 	if(!burn_delay)
 		return 0
+	if(!get_speed())
+		return 0
 	var/num_burns = get_speed()/get_acceleration() + 2 //some padding in case acceleration drops form fuel usage
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns/burns_per_grid)
@@ -105,18 +117,18 @@
 			adjust_speed(0, -SIGN(speed[2]) * min(get_burn_acceleration(),abs(speed[2])))
 		last_burn = world.time
 
-/obj/effect/overmap/ship/proc/accelerate(direction)
+/obj/effect/overmap/ship/proc/accelerate(direction, accel_limit)
 	if(can_burn())
 		last_burn = world.time
-
+		var/acceleration = min(get_burn_acceleration(), accel_limit)
 		if(direction & EAST)
-			adjust_speed(get_burn_acceleration(), 0)
+			adjust_speed(acceleration, 0)
 		if(direction & WEST)
-			adjust_speed(-get_burn_acceleration(), 0)
+			adjust_speed(-acceleration, 0)
 		if(direction & NORTH)
-			adjust_speed(0, get_burn_acceleration())
+			adjust_speed(0, acceleration)
 		if(direction & SOUTH)
-			adjust_speed(0, -get_burn_acceleration())
+			adjust_speed(0, -acceleration)
 
 /obj/effect/overmap/ship/Process()
 	if(!halted && !is_still())
@@ -153,7 +165,7 @@
 		return 0
 	for(var/datum/ship_engine/E in engines)
 		. |= E.can_burn()
-		
+
 //deciseconds to next step
 /obj/effect/overmap/ship/proc/ETA()
 	. = INFINITY

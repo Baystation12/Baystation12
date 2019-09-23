@@ -1,45 +1,12 @@
-/datum/language/xenocommon
-	name = LANGUAGE_XENOPHAGE
-	colour = "alien"
-	desc = "The common tongue of the xenophages."
-	speech_verb = "hisses"
-	ask_verb = "hisses"
-	exclaim_verb = "hisses"
-	key = "l"
-	flags = RESTRICTED
-	syllables = list("sss","sSs","SSS")
-	machine_understands = 0
-	shorthand = "Xeno"
-
-/datum/language/xenos
-	name = LANGUAGE_XENOPHAGE_HIVE
-	desc = "Xenophages have the strange ability to commune over a psychic hivemind."
-	speech_verb = "hisses"
-	ask_verb = "hisses"
-	exclaim_verb = "hisses"
-	colour = "alien"
-	key = "a"
-	flags = RESTRICTED | HIVEMIND
-	shorthand = "N/A"
-
-/datum/language/xenos/check_special_condition(var/mob/other)
-
-	var/mob/living/carbon/M = other
-	if(!istype(M))
-		return 1
-	if(locate(/obj/item/organ/internal/xeno/hivenode) in M.internal_organs)
-		return 1
-
-	return 0
-
 /datum/language/ling
-	name = "Changeling"
+	name = LANGUAGE_CHANGELING_GLOBAL
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
 	speech_verb = "says"
 	colour = "changeling"
 	key = "g"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
+	hidden_from_codex = TRUE
 
 /datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -49,7 +16,7 @@
 		..(speaker,message)
 
 /datum/language/corticalborer
-	name = "Cortical Link"
+	name = LANGUAGE_BORER_GLOBAL
 	desc = "Cortical borers possess a strange link between their tiny minds."
 	speech_verb = "sings"
 	ask_verb = "sings"
@@ -58,6 +25,7 @@
 	key = "z"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
+	hidden_from_codex = TRUE
 
 /datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -70,6 +38,11 @@
 		B = speaker
 
 	if(B)
+		if(B.host)
+			if(B.host.nutrition < 50 || B.host.stat)
+				to_chat(speaker, SPAN_WARNING("Your host is too weak to relay your broadcast."))
+				return FALSE
+			B.host.nutrition -= rand(1, 3)
 		speaker_mask = B.truename
 	..(speaker,message,speaker_mask)
 
@@ -119,9 +92,10 @@
 		"d'rekkathnor", "khari'd", "gual'te", "nikka", "nikt'o", "barada", "kla'atu", "barhah", "hra" ,"zar'garis")
 	machine_understands = 0
 	shorthand = "CT"
+	hidden_from_codex = TRUE
 
 /datum/language/cult
-	name = LANGUAGE_OCCULT
+	name = LANGUAGE_CULT_GLOBAL
 	desc = "The initiated can share their thoughts by means defying all reason."
 	speech_verb = "intones"
 	ask_verb = "intones"
@@ -130,6 +104,7 @@
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
+	hidden_from_codex = TRUE
 
 /datum/language/alium
 	name = LANGUAGE_ALIUM
@@ -142,6 +117,7 @@
 	"eg","bog","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
 	machine_understands = 0
 	shorthand = "AL"
+	hidden_from_codex = TRUE
 
 /datum/language/alium/New()
 	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")

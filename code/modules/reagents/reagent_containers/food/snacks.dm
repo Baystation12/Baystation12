@@ -14,6 +14,7 @@
 	var/dry = 0
 	var/nutriment_amt = 0
 	var/list/nutriment_desc = list("food" = 1)
+	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	center_of_mass = "x=16;y=16"
 	w_class = ITEM_SIZE_SMALL
 
@@ -45,7 +46,9 @@
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		qdel(src)
 		return 0
-
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
+		return 0
 	if(istype(M, /mob/living/carbon))
 		//TODO: replace with standard_feed_mob() call.
 		var/mob/living/carbon/C = M
@@ -90,8 +93,9 @@
 			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 			user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
 
-		if(reagents)								//Handle ingestion of the reagent.
-			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
+		if(reagents) //Handle ingestion of the reagent.
+			if(eat_sound)
+				playsound(M, pick(eat_sound), rand(10, 50), 1)
 			if(reagents.total_volume)
 				if(reagents.total_volume > bitesize)
 					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
@@ -119,7 +123,9 @@
 	if(istype(W,/obj/item/weapon/storage))
 		..()// -> item/attackby()
 		return
-
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
+		return 0
 	// Eating with forks
 	if(istype(W,/obj/item/weapon/material/kitchen/utensil))
 		var/obj/item/weapon/material/kitchen/utensil/U = W
@@ -164,7 +170,7 @@
 
 			to_chat(user, "<span class='warning'>You slip \the [W] inside \the [src].</span>")
 			add_fingerprint(user)
-			contents += W
+			W.forceMove(src)
 			return
 
 		if (has_edge(W))
@@ -1170,6 +1176,8 @@
 	filling_color = "#785210"
 	center_of_mass = "x=16;y=8"
 	bitesize = 5
+	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
+
 /obj/item/weapon/reagent_containers/food/snacks/meatballsoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
@@ -1181,6 +1189,8 @@
 	icon_state = "slimesoup"//nonexistant?
 	filling_color = "#c4dba0"
 	bitesize = 5
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/slimesoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/slimejelly, 5)
@@ -1193,6 +1203,8 @@
 	filling_color = "#ff0000"
 	center_of_mass = "x=16;y=7"
 	bitesize = 5
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/bloodsoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
@@ -1208,6 +1220,8 @@
 	nutriment_desc = list("salt" = 1, "the worst joke" = 3)
 	nutriment_amt = 4
 	bitesize = 5
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/clownstears/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/drink/juice/banana, 5)
@@ -1223,6 +1237,8 @@
 	nutriment_desc = list("carrot" = 2, "corn" = 2, "eggplant" = 2, "potato" = 2)
 	nutriment_amt = 8
 	bitesize = 5
+	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
+
 /obj/item/weapon/reagent_containers/food/snacks/vegetablesoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/water, 5)
@@ -1237,6 +1253,8 @@
 	nutriment_desc = list("salad" = 4, "egg" = 2, "potato" = 2)
 	nutriment_amt = 8
 	bitesize = 5
+	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
+
 /obj/item/weapon/reagent_containers/food/snacks/nettlesoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/water, 5)
@@ -1252,6 +1270,8 @@
 	nutriment_desc = list("backwash" = 1)
 	nutriment_amt = 1
 	bitesize = 5
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/mysterysoup/Initialize()
 	.=..()
 	switch(rand(1,10))
@@ -1298,6 +1318,8 @@
 	filling_color = "#d1f4ff"
 	center_of_mass = "x=16;y=11"
 	bitesize = 5
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/wishsoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/water, 10)
@@ -1371,9 +1393,11 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(var/mob/user)
 	icon_state = "monkeycube"
 	desc = "Just add water!"
-	to_chat(user, "You unwrap the cube.")
+	to_chat(user, SPAN_NOTICE("You unwrap \the [src]."))
 	wrapped = 0
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	var/trash = new /obj/item/trash/cubewrapper(get_turf(user))
+	user.put_in_hands(trash)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
 	if(ishuman(M))
@@ -1560,6 +1584,8 @@
 	nutriment_desc = list("soup" = 5)
 	nutriment_amt = 5
 	bitesize = 3
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/tomatosoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 10)
@@ -1644,6 +1670,8 @@
 	nutriment_desc = list("soy" = 8)
 	nutriment_amt = 8
 	bitesize = 4
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/milosoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/water, 5)
@@ -1895,6 +1923,7 @@
 	nutriment_desc = list("mushroom" = 8, "milk" = 2)
 	nutriment_amt = 8
 	bitesize = 3
+	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 
 /obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit
 	name = "plump helmet biscuit"
@@ -1937,6 +1966,8 @@
 	nutriment_desc = list("tomato" = 4, "beet" = 4)
 	nutriment_amt = 8
 	bitesize = 2
+	eat_sound = 'sound/items/drink.ogg'
+
 /obj/item/weapon/reagent_containers/food/snacks/beetsoup/Initialize()
 	.=..()
 	name = pick(list("borsch","bortsch","borstch","borsh","borshch","borscht"))
@@ -2104,7 +2135,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread
 	name = "tofubread"
-	icon_state = "Like meatbread but for vegetarians. Not guaranteed to give superpowers."
+	desc = "Like meatbread but for vegetarians. Not guaranteed to give superpowers."
 	icon_state = "tofubread"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/tofubread
 	slices_num = 5
@@ -2386,7 +2417,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
 	name = "bread"
-	icon_state = "Some plain old Earthen bread."
+	desc = "Some plain old Earthen bread."
 	icon_state = "bread"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/bread
 	slices_num = 5
@@ -3071,7 +3102,127 @@
 	nutriment_desc = list("raw potato" = 3)
 	nutriment_amt = 3
 
+//Canned Foods - crack open, eat.
+
+/obj/item/weapon/reagent_containers/food/snacks/canned
+	name = "void can"
+	icon = 'icons/obj/food_canned.dmi'
+	atom_flags = 0
+	var/sealed = TRUE
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/Initialize()
+	. = ..()
+	if(!sealed)
+		unseal()
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/examine(mob/user)
+	. = ..()
+	if (.)
+		to_chat(user, "It is [sealed ? "" : "un"]sealed.")
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/proc/unseal()
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	sealed = FALSE
+	update_icon()
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/attack_self(var/mob/user)
+	if(sealed)
+		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+		to_chat(user, "<span class='notice'>You unseal \the [src] with a crack of metal.</span>")
+		unseal()
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/on_update_icon()
+	if(!sealed)
+		icon_state = "[initial(icon_state)]-open"
+
+//Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/beef
+	name = "quadrangled beefium"
+	icon_state = "beef"
+	desc = "Proteins carefully cloned from extinct stock of holstein in the meat foundries of Mars."
+	trash = /obj/item/trash/beef
+	filling_color = "#663300"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("beef" = 1)
+	bitesize = 3
+/obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 12)
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/beans
+	name = "baked beans"
+	icon_state = "beans"
+	desc = "Luna Colony beans. Carefully synthethized from soy."
+	trash = /obj/item/trash/beans
+	filling_color = "#ff6633"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("beans" = 1)
+	nutriment_amt = 12
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/tomato
+	name = "tomato soup"
+	icon_state = "tomato"
+	desc = "Plain old unseasoned tomato soup. This can predates the formation of the SCG."
+	trash = /obj/item/trash/tomato
+	filling_color = "#ae0000"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("tomato" = 1)
+	bitesize = 3
+	eat_sound = 'sound/items/drink.ogg'
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/tomato/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 12)
+
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/tomato/feed_sound(var/mob/user)
+	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/spinach
+	name = "spinach"
+	icon_state = "spinach"
+	desc = "Wup-Az! Brand canned spinach. Notably has less iron in it than a watermelon."
+	trash = /obj/item/trash/spinach
+	filling_color = "#003300"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
+	bitesize = 20
+/obj/item/weapon/reagent_containers/food/snacks/canned/spinach/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment, 5,
+						/datum/reagent/adrenaline, 5,
+						/datum/reagent/hyperzine, 5,
+						/datum/reagent/iron, 5)
+
 //Vending Machine Foods should go here.
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar
+	name = "\improper Terran Caviar"
+	icon_state = "fisheggs"
+	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt. Skrell approved!"
+	trash = /obj/item/trash/fishegg
+	filling_color = "#000000"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("fish" = 1, "salt" = 1)
+	nutriment_amt = 6
+	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true
+	name = "\improper Terran Caviar"
+	icon_state = "carpeggs"
+	desc = "Terran caviar, or space carp eggs. Banned by the Sol Food Health Administration for exceeding the legally set amount of carpotoxins in food stuffs."
+	trash = /obj/item/trash/carpegg
+	filling_color = "#330066"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
+	nutriment_amt = 6
+	bitesize = 1
+/obj/item/weapon/reagent_containers/food/snacks/caviar/true/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sosjerky
 	name = "\improper Scaredy's Private Reserve Beef Jerky"
@@ -3134,6 +3285,17 @@
 
 //terran delights
 
+/obj/item/weapon/reagent_containers/food/snacks/pistachios
+	name = "pistachios"
+	icon_state = "pistachios"
+	desc = "Pistachios. There is absolutely nothing remarkable about these."
+	trash = /obj/item/trash/pistachios
+	filling_color = "#825d26"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("nuts" = 1)
+	nutriment_amt = 3
+	bitesize = 0.5
+
 /obj/item/weapon/reagent_containers/food/snacks/semki
 	name = "\improper Semki"
 	icon_state = "semki"
@@ -3144,17 +3306,6 @@
 	nutriment_desc = list("sunflower seeds" = 1)
 	nutriment_amt = 6
 	bitesize = 0.5
-
-/obj/item/weapon/reagent_containers/food/snacks/caviar
-	name = "\improper Terran Caviar"
-	icon_state = "fisheggs"
-	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt. Skrell approved!"
-	trash = /obj/item/trash/caviar
-	filling_color = "#000000"
-	center_of_mass = "x=15;y=9"
-	nutriment_desc = list("fish" = 1, "salt" = 1)
-	nutriment_amt = 6
-	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/squid
 	name = "\improper Calamari Crisps"
@@ -3169,7 +3320,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/squid/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/croutons
 	name = "\improper Suhariki"
@@ -3196,7 +3346,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
 
-
 /obj/item/weapon/reagent_containers/food/snacks/driedfish
 	name = "\improper Vobla"
 	icon_state = "driedfish"
@@ -3210,7 +3359,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/driedfish/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood
 	name = "\improper LiquidFood MRE"
@@ -3272,7 +3420,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/sugar, 3)
 
-
 /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
 	name = "protein bar"
 	desc = "SwoleMAX brand protein bars, guaranteed to get you feeling perfectly overconfident."
@@ -3285,7 +3432,6 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
 	reagents.add_reagent(/datum/reagent/sugar, 4)
 
-
 /obj/item/weapon/reagent_containers/food/snacks/candy/donor
 	name = "donor candy"
 	desc = "A little treat for blood donors."
@@ -3296,7 +3442,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 10)
 	reagents.add_reagent(/datum/reagent/sugar, 3)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/candy_corn
 	name = "candy corn"
@@ -3311,7 +3456,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 4)
 	reagents.add_reagent(/datum/reagent/sugar, 2)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/chips
 	name = "chips"
@@ -3349,7 +3493,6 @@
 	reagents.add_reagent(/datum/reagent/sugar, 2)
 	reagents.add_reagent(/datum/reagent/nutriment/coco, 2)
 
-
 /obj/item/weapon/reagent_containers/food/snacks/chocolateegg
 	name = "chocolate egg"
 	desc = "Such sweet, fattening food."
@@ -3363,7 +3506,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/sugar, 2)
 	reagents.add_reagent(/datum/reagent/nutriment/coco, 2)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/donut
 	name = "donut"
@@ -3473,6 +3615,169 @@
 		src.SetName("frosted jelly donut")
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
+//Sol Vendor
+
+obj/item/weapon/reagent_containers/food/snacks/lunacake
+	name = "\improper Luna Cake"
+	icon_state = "lunacake_wrapped"
+	desc = "Now with 20% less lawsuit enabling rhegolith!"
+	trash = /obj/item/trash/cakewrap
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "vanilla" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/lunacake/mochicake
+	name = "\improper Mochi Cake"
+	icon_state = "mochicake_wrapped"
+	desc = "Konnichiwa! Many go lucky rice cakes in future!"
+	trash = /obj/item/trash/mochicakewrap
+	nutriment_desc = list("sweet" = 4, "rice" = 1)
+
+obj/item/weapon/reagent_containers/food/snacks/lunacake/mooncake
+	name = "\improper Dark Side Luna Cake"
+	icon_state = "mooncake_wrapped"
+	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
+	trash = /obj/item/trash/mooncakewrap
+	filling_color = "#000000"
+	nutriment_desc = list("sweet" = 4, "chocolate" = 1)
+
+
+obj/item/weapon/reagent_containers/food/snacks/triton
+	name = "\improper Tidal Gobs"
+	icon_state = "tidegobs"
+	desc = "Contains over 9000% of your daily recommended intake of salt."
+	trash = /obj/item/trash/tidegobs
+	filling_color = "#2556b0"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("salt" = 4, "seagull?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/saturn
+	name = "\improper Saturn-Os"
+	icon_state = "saturno"
+	desc = "A day ration of salt, styrofoam and possibly sawdust."
+	trash = /obj/item/trash/saturno
+	filling_color = "#dca319"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("salt" = 4, "peanut" = 2,  "wood?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/jupiter
+	name = "\improper Jove Gello"
+	icon_state = "jupiter"
+	desc = "By Joove! It's some kind of gel."
+	trash = /obj/item/trash/jupiter
+	filling_color = "#dc1919"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "vanilla?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/pluto
+	name = "\improper Plutonian Rods"
+	icon_state = "pluto"
+	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
+	trash = /obj/item/trash/pluto
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("chalk" = 4, "sad?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/mars
+	name = "\improper Frouka"
+	icon_state = "mars"
+	desc = "Celebrate founding day with a steaming self-heated bowl of sweet eggs and taters!"
+	trash = /obj/item/trash/mars
+	filling_color = "#d2c63f"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("eggs" = 4, "potato" = 4, "mustard" = 2)
+	nutriment_amt = 8
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/venus
+	name = "\improper Venusian Hot Cakes"
+	icon_state = "venus"
+	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
+	trash = /obj/item/trash/venus
+	filling_color = "#d2c63f"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("heat" = 4, "burning!" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/venus/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/capsaicin = 5)
+
+obj/item/weapon/reagent_containers/food/snacks/oort
+	name = "\improper Oort Cloud Rocks"
+	icon_state = "oort"
+	desc = "Pop rocks themed on the most important industrial sector in Sol, new formula guarantees fewer shrapnel induced oral injury."
+	trash = /obj/item/trash/oort
+	filling_color = "#3f7dd2"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("fizz" = 4, "sweet?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/oort/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/frostoil = 5)
+
+//weebo vend! So japanese it hurts
+
+obj/item/weapon/reagent_containers/food/snacks/ricecake
+	name = "rice cake"
+	icon_state = "ricecake"
+	desc = "Ancient earth snack food made from balled up rice."
+	nutriment_desc = list("rice" = 4, "sweet?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/pokey
+	name = "pokeys"
+	icon_state = "pokeys"
+	desc = "A bundle of chocolate coated bisquit sticks."
+	nutriment_desc = list("chocolate" = 4, "bisquit" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+obj/item/weapon/reagent_containers/food/snacks/weebonuts
+	name = "\improper Red Alert Nuts!"
+	icon_state = "weebonuts"
+	trash = /obj/item/trash/weebonuts
+	desc = "A bag of Red Alert! brand spicy nuts. Goes well with your beer!"
+	nutriment_desc = list("nuts" = 4, "spicy!" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/weebonuts/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/capsaicin = 1)
+
+obj/item/weapon/reagent_containers/food/snacks/chocobanana
+	name = "\improper Choco Banang"
+	icon_state = "chocobanana"
+	trash = /obj/item/trash/stick
+	desc = "A chocolate and sprinkles coated banana. On a stick."
+	nutriment_desc = list("chocolate" = 4, "wax?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/chocobanana/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 10)
+
+obj/item/weapon/reagent_containers/food/snacks/dango
+	name = "dango"
+	icon_state = "dango"
+	trash = /obj/item/trash/stick
+	desc = "Food dyed rice dumplings on a stick."
+	nutriment_desc = list("rice" = 4, "topping?" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
 //inedible old vendor food
 
 /obj/item/weapon/reagent_containers/food/snacks/old
@@ -3482,6 +3787,7 @@
 	nutriment_desc = list("rot" = 5, "mold" = 5)
 	nutriment_amt = 10
 	bitesize = 3
+	filling_color = "#336b42"
 /obj/item/weapon/reagent_containers/food/snacks/old/Initialize()
 	.=..()
 	reagents.add_reagent(pick(list(

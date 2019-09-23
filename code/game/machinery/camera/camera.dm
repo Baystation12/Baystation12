@@ -6,7 +6,6 @@
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 5
 	active_power_usage = 10
-	plane = ABOVE_HUMAN_PLANE
 	layer = CAMERA_LAYER
 
 	var/list/network = list(NETWORK_EXODUS)
@@ -22,7 +21,7 @@
 	var/toughness = 5 //sorta fragile
 
 	// WIRES
-	var/datum/wires/camera/wires = null // Wires datum
+	wires = /datum/wires/camera
 
 	//OTHER
 
@@ -71,7 +70,6 @@
 	return 1
 
 /obj/machinery/camera/New()
-	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
 
@@ -111,8 +109,6 @@
 	if(assembly)
 		qdel(assembly)
 		assembly = null
-	qdel(wires)
-	wires = null
 	return ..()
 
 /obj/machinery/camera/Process()
@@ -122,9 +118,6 @@
 		update_icon()
 		update_coverage()
 	return internal_process()
-
-/obj/machinery/camera/proc/internal_process()
-	return
 
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof() && prob(100/severity))
@@ -136,7 +129,7 @@
 			triggerCameraAlarm()
 			update_icon()
 			update_coverage()
-			START_PROCESSING(SSmachines, src)
+			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.get_structure_damage())
@@ -163,10 +156,9 @@
 	src.view_range = num
 	cameranet.update_visibility(src, 0)
 
-/obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
+/obj/machinery/camera/physical_attack_hand(mob/living/carbon/human/user)
 	if(!istype(user))
 		return
-
 	if(user.species.can_shred(user))
 		set_status(0)
 		user.do_attack_animation(src)
@@ -174,9 +166,11 @@
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
 		destroy()
+		return TRUE
 
 /obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
 	update_coverage()
+	var/datum/wires/camera/camera_wires = wires
 	// DECONSTRUCTION
 	if(isScrewdriver(W))
 //		to_chat(user, "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>")
@@ -187,9 +181,9 @@
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
 	else if((isWirecutter(W) || isMultitool(W)) && panel_open)
-		interact(user)
+		return wires.Interact(user)
 
-	else if(isWelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
+	else if(isWelder(W) && (camera_wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
 			if(assembly)
 				assembly.dropInto(loc)
@@ -384,32 +378,18 @@
 
 	if(busy)
 		return 0
-	if(!WT.isOn())
-		return 0
 
-	// Do after stuff here
-	to_chat(user, "<span class='notice'>You start to weld the [src]..</span>")
-	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-	WT.eyecheck(user)
-	busy = 1
-	if(do_after(user, 100, src))
-		busy = 0
-		if(!WT.isOn())
-			return 0
-		return 1
+	if(WT.remove_fuel(0, user))
+		to_chat(user, "<span class='notice'>You start to weld \the [src]..</span>")
+		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+		busy = 1
+		if(do_after(user, 100, src) && WT.isOn())
+			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+			busy = 0
+			return 1
+
 	busy = 0
 	return 0
-
-/obj/machinery/camera/interact(mob/living/user as mob)
-	if(!panel_open || istype(user, /mob/living/silicon/ai))
-		return
-
-	if(stat & BROKEN)
-		to_chat(user, "<span class='warning'>\The [src] is broken.</span>")
-		return
-
-	user.set_machine(src)
-	wires.Interact(user)
 
 /obj/machinery/camera/proc/add_network(var/network_name)
 	add_networks(list(network_name))

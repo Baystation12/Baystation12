@@ -61,7 +61,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 					<div class='fixedLeft boldText'>
 						AI control:
 					</div>
-					<div class='fixedLeft'>
+					<div class='fixedLeftWider'>
 						{{if data.aioverride}}
 							<div class='greenText boldText'>ENABLED</div>
 						{{else}}
@@ -76,7 +76,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 					<div class='fixedLeft boldText'>
 						Suit status:
 					</div>
-					<div class='fixedLeft'>
+					<div class='fixedLeftWider'>
 						{{if data.sealing == 1}}
 							<div class='orangeText boldText'>PROCESSING</div>
 						{{else}}
@@ -95,7 +95,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 					<div class='fixedLeft boldText'>
 						Cover status:
 					</div>
-					<div class='fixedLeft'>
+					<div class='fixedLeftWider'>
 						{{if data.emagged || !data.securitycheck}}
 							<div class='orangeText boldText'>ERROR - MAINTENANCE LOCK CONTROL OFFLINE</div>
 						{{else}}
@@ -113,8 +113,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 			</div>
 		</div>
 
-		<h2>Hardware</h2>
-		<h3>Suit pieces</h3>
+		<h2>Suit pieces</h2>
 
 		<div>
 			<div class='inlineBlock'>
@@ -171,6 +170,47 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 			</div>
 		</div>
 
+		<h2>Life support system</h2>
+		{{if data.seals == 1 || data.sealing == 1}}
+			<h3><div class = 'bad'>HARDSUIT SYSTEMS OFFLINE</div></h3>
+		{{else data.tank == 0}}
+			<h3><div class = 'bad'>INTERNAL TANK NOT FOUND</div></h3>
+		{{else}}
+			<div class='inlineBlock extraTopPadding'>
+				<div class='fixedLeft boldText'>
+					Tank Pressure:
+				</div>
+				<div>
+					{{:helper.displayBar(data.tankPressure, 0, 1013, (data.tankPressure > 200) ? 'good' : ((data.tankPressure > 100) ? 'average' : 'bad'))}}
+					<div class="statusValue">
+						{{:data.tankPressure}} kPa
+					</div>
+				</div>
+				<div class='fixedLeft boldText'>
+					Release Pressure:
+				</div>
+				<div class="itemContent">
+					{{:helper.displayBar(data.releasePressure, 0, data.maxReleasePressure, (data.releasePressure >= 21) ? null : ((data.releasePressure >= 17) ? 'average' : 'bad'))}}
+					<div style="clear: both; padding-top: 4px;">
+						{{:helper.link('-', null, {'air_supply' : 1, 'dist_p' : -10}, (data.releasePressure > 0) ? null : 'disabled')}}
+						{{:helper.link('-', null, {'air_supply' : 1, 'dist_p' : -1}, (data.releasePressure > 0) ? null : 'disabled')}}
+						<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:data.releasePressure}} kPa&nbsp;</div>
+						{{:helper.link('+', null, {'air_supply' : 1, 'dist_p' : 1}, (data.releasePressure < data.maxReleasePressure) ? null : 'disabled')}}
+						{{:helper.link('+', null, {'air_supply' : 1, 'dist_p' : 10}, (data.releasePressure < data.maxReleasePressure) ? null : 'disabled')}}
+						{{:helper.link('Max', null, {'air_supply' : 1, 'dist_p' : 'max'}, (data.releasePressure < data.maxReleasePressure) ? null : 'disabled')}}
+						{{:helper.link('Reset', null, {'air_supply' : 1, 'dist_p' : 'reset'}, (data.releasePressure != data.defaultReleasePressure) ? null : 'disabled')}}
+					</div>
+				</div>
+				<div class='fixedLeft boldText'>
+					Release Valve:
+				</div>
+				<div class="itemContent">
+					{{:helper.link('Open', 'unlocked', {'air_supply' : 1, 'stat' : 1}, (!data.maskConnected) ? 'disabled' : (data.valveOpen ? 'selected' : null))}}
+					{{:helper.link('Close', 'locked', {'air_supply' : 1, 'stat' : 1}, data.valveOpen ? null : 'selected')}}
+				</div>
+			</div>
+		{{/if}}
+
 		<h2>System modules</h2>
 		{{if data.seals == 1 || data.sealing == 1}}
 			<h3><div class = 'bad'>HARDSUIT SYSTEMS OFFLINE</div></h3>
@@ -192,9 +232,9 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 									{{if value.damage > 0}}
 										<div class='floatLeft'>
 											{{if value.damage == 1}}
-												(<div class='orangeText'>damaged</div>)
+												<div>(<font class='orangeText'>damaged</font>)</div>
 											{{else}}
-												(<div class='redText'>destroyed</div>)
+												<div>(<font class='redText'>destroyed</font>)</div>
 											{{/if}}
 										</div>
 									{{/if}}
@@ -215,17 +255,13 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 											{{/if}}
 											{{if value.can_select == 1}}
 												<div class='inlineBlock'>
-													{{if value.name == data.primarysystem}}
-														<div class ='good boldText'>SELECTED</div>
-													{{else}}
-														{{:helper.link('Select', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'select'}, null)}}
-													{{/if}}
+													{{:helper.link('Select', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'select'}, null, (value.name == data.primarysystem) ? 'linkOn' : null)}}
 												</div>
 											{{/if}}
 											{{if value.can_toggle == 1}}
 												<div class='inlineBlock'>
 													{{if value.is_active == 1}}
-														{{:helper.link(value.deactivatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'deactivate'}, null)}}
+														{{:helper.link(value.deactivatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'deactivate'}, null, 'linkOn')}}
 													{{else}}
 														{{:helper.link(value.activatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'activate'}, null)}}
 													{{/if}}
@@ -237,10 +273,9 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 								<div class='floatLeft' style='clear: left; margin-left: 10px; width: 100%'>
 									{{if value.charges}}
 										<div class='average boldText'>Stored charges</div>
-										<div class='boldText'>Selected: {{:helper.capitalizeFirstLetter(value.chargetype)}}</div>
 										{{for value.charges :itemValue:itemIndex}}
 											<div class='floatLeft' style='padding: 2px 0px'>
-												{{:helper.link(helper.capitalizeFirstLetter(itemValue.caption), null, {'interact_module' : value.index, 'module_mode' : 'select_charge_type', 'charge_type' : itemValue.index}, null)}}
+												{{:helper.link(helper.capitalizeFirstLetter(itemValue.caption), null, {'interact_module' : value.index, 'module_mode' : 'select_charge_type', 'charge_type' : itemValue.index}, (itemValue.index == value.chargetype) ? 'selected' : null)}}
 											</div>
 										{{/for}}
 									{{/if}}

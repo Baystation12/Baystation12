@@ -15,10 +15,10 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_ADEPT,
@@ -35,7 +35,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_tcomsat, access_solgov_crew, access_seneng, access_hangar)
+			            access_tcomsat, access_solgov_crew, access_seneng, access_hangar, access_network)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
@@ -71,12 +71,12 @@
 		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
@@ -164,8 +164,8 @@
 	department = "Engineering"
 	department_flag = ENG
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	minimal_player_age = 0
 	supervisors = "the Chief Engineer and the Corporate Liaison."
 	selection_color = "#5b4d20"
@@ -176,18 +176,21 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
-	                    SKILL_DEVICES		= SKILL_ADEPT)
+	                    SKILL_DEVICES		= SKILL_ADEPT,
+	                    SKILL_EVA           = SKILL_ADEPT,
+	                    SKILL_ANATOMY       = SKILL_ADEPT,
+	                    SKILL_MECH          = HAS_PERK)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ATMOS        = SKILL_EXPERT,
 	                    SKILL_ENGINES      = SKILL_EXPERT,
 	                    SKILL_DEVICES      = SKILL_MAX,
-	                    SKILL_ANATOMY      = SKILL_EXPERT,
-	                    SKILL_MEDICAL      = SKILL_EXPERT)
+	                    SKILL_MEDICAL      = SKILL_EXPERT,
+	                    SKILL_ANATOMY      = SKILL_EXPERT)
 	skill_points = 20
 
-	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
+	access = list(access_robotics, access_robotics_engineering, access_engine, access_solgov_crew)
 	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()

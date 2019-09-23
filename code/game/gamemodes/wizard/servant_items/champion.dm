@@ -28,7 +28,6 @@
 	icon_state = "medievalboots"
 	force = 5
 	armor = list(melee = 45, bullet = 10, laser = 5, energy = 15, bomb = 30, bio = 0, rad = 0)
-	can_hold_knife = 0
 
 /obj/item/weapon/excalibur
 	name = "champion's blade"

@@ -288,6 +288,9 @@ Admin version, with debugging options.
 		if(!antag)
 			to_chat(usr, "Mob lacks valid antag status.")
 			return 1
+		if(!istype(antag.skill_setter))
+			to_chat(usr, "Antag has no skill setter assigned.")
+			return 1
 		antag.skill_setter.initialize_skills(skillset)
 		log_and_message_admins("SKILLS: The antag skills for [key_name_admin(skillset.owner)] have been re-initialized.")
 		return 1

@@ -1,38 +1,3 @@
-//Captain's Spacesuit
-/obj/item/clothing/head/helmet/space/capspace
-	name = "space helmet"
-	icon_state = "capspace"
-	item_state = "capspace"
-	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Only for the most fashionable of military figureheads."
-	flags_inv = HIDEFACE
-	permeability_coefficient = 0.01
-	armor = list(melee = 65, bullet = 50, laser = 50,energy = 25, bomb = 50, bio = 100, rad = 50)
-
-//Captain's space suit This is not the proper path but I don't currently know enough about how this all works to mess with it.
-/obj/item/clothing/suit/armor/captain
-	name = "Captain's armor"
-	desc = "A bulky, heavy-duty piece of exclusive corporate armor. YOU are in charge!"
-	icon_state = "caparmor"
-	item_state_slots = list(
-		slot_l_hand_str = "capspacesuit",
-		slot_r_hand_str = "capspacesuit",
-	)
-	w_class = ITEM_SIZE_HUGE
-	gas_transfer_coefficient = 0.01
-	permeability_coefficient = 0
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
-	allowed = list(/obj/item/weapon/tank/emergency, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
-	armor = list(melee = 65, bullet = 50, laser = 50, energy = 25, bomb = 50, bio = 100, rad = 50)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.7
-
-/obj/item/clothing/suit/armor/captain/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1.5
-
 //Deathsquad suit
 /obj/item/clothing/head/helmet/space/deathsquad
 	name = "deathsquad helmet"
@@ -42,8 +7,9 @@
 		slot_l_hand_str = "syndicate-helm-black-red",
 		slot_r_hand_str = "syndicate-helm-black-red",
 		)
-	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 100, rad = 60)
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL
+	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 100, rad = 30)
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.6
 
@@ -53,7 +19,6 @@
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon_state = "santahat"
 	item_state = "santahat"
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 
@@ -61,7 +26,6 @@
 	name = "Santa's suit"
 	desc = "Festive!"
 	icon_state = "santa"
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE
 	allowed = list(/obj/item) //for stuffing exta special presents
 
 /obj/item/clothing/suit/space/santa/New()
@@ -74,7 +38,7 @@
 	desc = "Yarr."
 	icon_state = "pirate"
 	item_state = "pirate"
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
+	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 15)
 	flags_inv = BLOCKHAIR
 	body_parts_covered = 0
 	siemens_coefficient = 0.9
@@ -85,7 +49,7 @@
 	icon_state = "pirate"
 	w_class = ITEM_SIZE_NORMAL
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency)
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
+	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 15)
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
@@ -115,31 +79,4 @@
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment. The tinting can be toggled for flash protection at the cost of worse visibility."
 	icon_state = "spacebowl"
 	light_overlay = "yellow_light"
-	var/tinted = FALSE
-
-/obj/item/clothing/head/helmet/space/fishbowl/Initialize()
-	. = ..()
-	update_tint()
-
-/obj/item/clothing/head/helmet/space/fishbowl/proc/update_tint()
-	if(tinted)
-		icon_state = "spacebowl_dark"
-		flash_protection = FLASH_PROTECTION_MAJOR
-		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-		tint = TINT_MODERATE
-	else
-		icon_state = "spacebowl"
-		flash_protection = FLASH_PROTECTION_NONE
-		flags_inv = HIDEEARS|BLOCKHAIR
-		tint = TINT_NONE
-	update_icon()
-	update_clothing_icon()
-
-/obj/item/clothing/head/helmet/space/fishbowl/verb/toggle_tint()
-	set name = "Toggle Helmet Tint"
-	set category = "Object"
-	set src in usr
-
-	tinted = !tinted
-	to_chat(usr, "You toggle [src]'s visor tint.")
-	update_tint()
+	tinted = FALSE

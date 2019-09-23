@@ -42,7 +42,6 @@
 "ai" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark,
@@ -311,7 +310,6 @@
 "aV" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -471,7 +469,7 @@
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "goatzone";
+	id_tag = "goatzone";
 	name = "Containment Zone"
 	},
 /turf/simulated/floor/tiled/white,
@@ -588,8 +586,8 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "goatzone";
+/obj/machinery/button/blast_door{
+	id_tag = "goatzone";
 	name = "containment zone control";
 	pixel_w = 0;
 	pixel_x = 0;
@@ -668,7 +666,6 @@
 "bJ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
@@ -1021,7 +1018,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
 "cE" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -1070,7 +1067,7 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
 "cI" = (
@@ -1199,7 +1196,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
 "cZ" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
 	start_pressure = 740.5
 	},
@@ -1521,7 +1518,7 @@
 	icon_state = "tube1";
 	dir = 1
 	},
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /obj/structure/table/glass/pglass,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -2303,8 +2300,8 @@
 /area/map_template/hydrobase/station/growA)
 "fp" = (
 /obj/structure/catwalk,
-/obj/machinery/button/remote/blast_door{
-	id = "shipping";
+/obj/machinery/button/blast_door{
+	id_tag = "shipping";
 	pixel_x = -25
 	},
 /turf/simulated/floor/fixed/alium,
@@ -2424,7 +2421,7 @@
 /obj/machinery/atmospherics/binary/pump/on,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "shipping"
+	id_tag = "shipping"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
@@ -2531,8 +2528,8 @@
 /area/map_template/hydrobase/station/shipaccess)
 "fO" = (
 /obj/structure/catwalk,
-/obj/machinery/button/remote/blast_door{
-	id = "shipping";
+/obj/machinery/button/blast_door{
+	id_tag = "shipping";
 	pixel_x = 25
 	},
 /turf/simulated/floor/fixed/alium,
@@ -3026,7 +3023,7 @@
 	},
 /turf/template_noop,
 /area/template_noop)
-"TT" = (
+"NL" = (
 /mob/living/simple_animal/hostile/retaliate/goat/hydro,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
@@ -3986,7 +3983,7 @@ aa
 aa
 aa
 aw
-TT
+NL
 aV
 be
 bm

@@ -32,11 +32,20 @@
 
 	var/obj/screen/psi/hub/ui	      // Reference to the master psi UI object.
 	var/mob/living/owner              // Reference to our owner.
-	var/image/aura_image              // Client image
+	var/image/_aura_image             // Client image
 
-/datum/psi_complexus/New(var/mob/_owner)
-	owner = _owner
-	aura_image = image(loc = owner, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
+/datum/psi_complexus/proc/get_aura_image()
+	if(_aura_image && !istype(_aura_image))
+		var/atom/A = _aura_image
+		debug_print("Non-image found in psi complexus: \ref[A] - \the [A] - [istype(A) ? A.type : "non-atom"]")
+		destroy_aura_image(_aura_image)
+		_aura_image = null
+	if(!_aura_image)
+		_aura_image = create_aura_image(owner)
+	return _aura_image
+
+/proc/create_aura_image(var/newloc)
+	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
 	aura_image.blend_mode = BLEND_MULTIPLY
 	aura_image.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	aura_image.layer = TURF_LAYER + 0.5
@@ -45,29 +54,27 @@
 	aura_image.pixel_y = -64
 	aura_image.mouse_opacity = 0
 	aura_image.appearance_flags = 0
-	var/matrix/M = matrix()
-	M.Scale(-5)
-	aura_image.transform = M
-
-	START_PROCESSING(SSpsi, src)
-
-	// Add initial aura.
 	for(var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
 		if(psychic.owner.client && !psychic.suppressed)
 			psychic.owner.client.images += aura_image
 	SSpsi.all_aura_images[aura_image] = TRUE
-	set_extension(src, /datum/extension/armor, /datum/extension/armor/psionic)
+	return aura_image
 
-/datum/psi_complexus/Destroy()
-
-	// Remove aura.
+/proc/destroy_aura_image(var/image/aura_image)
 	for(var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
 		if(psychic.owner.client)
 			psychic.owner.client.images -= aura_image
 	SSpsi.all_aura_images -= aura_image
 
+/datum/psi_complexus/New(var/mob/_owner)
+	owner = _owner
+	START_PROCESSING(SSpsi, src)
+	set_extension(src, /datum/extension/armor, /datum/extension/armor/psionic)
+
+/datum/psi_complexus/Destroy()
+	destroy_aura_image(_aura_image)
 	STOP_PROCESSING(SSpsi, src)
 	if(owner)
 		cancel()

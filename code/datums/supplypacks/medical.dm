@@ -320,7 +320,7 @@
 
 /decl/hierarchy/supply_pack/medical/scanner_module
 	name = "Electronics - Medical scanner modules"
-	contains = list(/obj/item/weapon/computer_hardware/scanner/medical = 4)
+	contains = list(/obj/item/weapon/stock_parts/computer/scanner/medical = 4)
 	cost = 20
 	containername = "medical scanner module crate"
 	containertype = /obj/structure/closet/crate/secure

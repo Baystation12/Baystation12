@@ -33,21 +33,24 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y)
+/dmm_suite/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
 	#ifdef TESTING
 	turfsSkipped = 0
 	#endif
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y)
+	initialized_areas_by_type = initialized_areas_by_type || list()
+	if(!(world.area in initialized_areas_by_type))
+		initialized_areas_by_type[world.area] = locate(world.area)
+	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type)
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY)
+/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
 		tfile = file2text(tfile)
@@ -169,7 +172,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 								if(!no_afterchange || (model_key != space_key))
 									if(!grid_models[model_key])
 										throw EXCEPTION("Undefined model key in DMM.")
-									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents)
+									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents, initialized_areas_by_type)
 									if (M)
 										atoms_to_initialise += M.atoms_to_initialise
 										atoms_to_delete += M.atoms_to_delete
@@ -228,11 +231,10 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		/obj/effect,
 		/obj/item,
 		/obj/machinery,
-		/obj/mecha,
 		/obj/structure,
 	)
 
-/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num)
+/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num, initialized_areas_by_type)
 	/*Method parse_grid()
 	- Accepts a text string containing a comma separated list of type paths of the
 		same construction as those contained in a .dmm file, and instantiates them.
@@ -332,13 +334,10 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		if (LAZYLEN(attr))
 			GLOB._preloader.setup(attr)//preloader for assigning  set variables on atom creation
 		var/atype = members[index]
-		var/atom/instance
-		for(var/area/A in world)
-			if(A.type == atype)
-				instance = A
-				break
+		var/atom/instance = initialized_areas_by_type[atype]
 		if(!instance)
 			instance = new atype(null)
+			initialized_areas_by_type[atype] = instance
 		if(crds)
 			instance.contents.Add(crds)
 

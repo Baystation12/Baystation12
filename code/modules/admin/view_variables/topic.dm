@@ -483,7 +483,8 @@
 
 		to_chat(usr, "Removed [rem_organ] from [M].")
 		rem_organ.removed()
-		qdel(rem_organ)
+		if(!QDELETED(rem_organ))
+			qdel(rem_organ)
 
 	else if(href_list["fix_nano"])
 		if(!check_rights(R_DEBUG)) return

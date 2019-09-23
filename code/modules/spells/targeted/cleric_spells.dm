@@ -83,6 +83,7 @@
 
 /spell/targeted/heal_target/major/tower
 	charge_max = 1
+	spell_flags = INCLUDEUSER | SELECTABLE
 
 /spell/targeted/heal_target/area
 	name = "Cure Area"

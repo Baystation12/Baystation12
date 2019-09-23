@@ -115,9 +115,20 @@
 	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I)
 
 //this proc handles being hit by a thrown atom
-/mob/living/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)//Standardization and logging -Sieve
+/mob/living/hitby(var/atom/movable/AM, var/speed = THROWFORCE_SPEED_DIVISOR)
+
+	if(isliving(AM))
+		var/mob/living/M = AM
+		playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
+		if(skill_fail_prob(SKILL_COMBAT, 75))
+			Weaken(rand(3,5))
+		if(M.skill_fail_prob(SKILL_HAULING, 100))
+			M.Weaken(rand(4,8))
+		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
+
 	if(!aura_check(AURA_TYPE_THROWN, AM, speed))
 		return
+
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 		var/dtype = O.damtype

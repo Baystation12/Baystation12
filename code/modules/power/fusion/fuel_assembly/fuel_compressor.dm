@@ -10,6 +10,7 @@
 	density = 1
 	anchored = 1
 	layer = 4
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/fusion_fuel_compressor/MouseDrop_T(var/atom/movable/target, var/mob/user)
 	if(user.incapacitated() || !user.Adjacent(src))
@@ -45,12 +46,11 @@
 		if(!mat.is_fusion_fuel)
 			to_chat(user, "<span class='warning'>It would be pointless to make a fuel rod out of [mat.use_name].</span>")
 			return
-		if(M.get_amount() < 5)
+		if(!M.use(5))
 			to_chat(user, "<span class='warning'>You need at least five [mat.sheet_plural_name] to make a fuel rod.</span>")
 			return
 		var/obj/item/weapon/fuel_assembly/F = new(get_turf(src), mat.name)
 		visible_message("<span class='notice'>\The [src] compresses the [mat.use_name] into a new fuel assembly.</span>")
-		M.use(5)
 		user.put_in_hands(F)
 		return 1
 	return 0

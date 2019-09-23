@@ -16,6 +16,7 @@
 	default_material = MATERIAL_GLASS
 	unbreakable = 1 //It's already broken.
 	drops_debris = 0
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 /obj/item/weapon/material/shard/set_material(var/new_material)
 	..(new_material)

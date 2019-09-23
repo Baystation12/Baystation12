@@ -56,7 +56,7 @@
 				CHECK_TICK
 			T.resources = list()
 			T.resources[MATERIAL_SAND] = rand(3,5)
-			T.resources[MATERIAL_GRAPHENE] = rand(3,5)
+			T.resources[MATERIAL_GRAPHITE] = rand(3,5)
 
 			var/tmp_cell
 			TRANSLATE_AND_VERIFY_COORD(x, y)

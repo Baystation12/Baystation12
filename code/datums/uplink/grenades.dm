@@ -6,6 +6,7 @@
 
 /datum/uplink_item/item/grenades/anti_photon
 	name = "1x Photon Disruption Grenade"
+	desc = "An experimental device for temporarily removing light in a limited area for a small amount of time."
 	item_cost = 4
 	path = /obj/item/weapon/grenade/anti_photon
 
@@ -16,6 +17,7 @@
 
 /datum/uplink_item/item/grenades/smoke
 	name = "1x Smoke Grenade"
+	desc = "A grenade that will erupt into a vision obscuring cloud of smoke. Makes for great getaways!"
 	item_cost = 4
 	path = /obj/item/weapon/grenade/smokebomb
 
@@ -26,6 +28,7 @@
 
 /datum/uplink_item/item/grenades/emp
 	name = "1x EMP Grenade"
+	desc = "A grenade that will send electronics into a frenzy, or possibly fry them altogether. The timer is adjustable with a screwdriver."
 	item_cost = 8
 	path = /obj/item/weapon/grenade/empgrenade
 

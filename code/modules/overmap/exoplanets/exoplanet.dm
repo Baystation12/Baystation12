@@ -19,7 +19,13 @@
 	var/maxx
 	var/maxy
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
+
 	var/list/rock_colors = list(COLOR_ASTEROID_ROCK)
+	var/list/plant_colors = list("RANDOM")
+	var/grass_color
+	var/surface_color = COLOR_ASTEROID_ROCK
+	var/water_color = "#436499"
+	var/image/skybox_image
 
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
 	var/list/species = list() //list of names to use for simple animals
@@ -37,6 +43,19 @@
 	var/ruin_tags_blacklist
 	var/features_budget = 4
 	var/list/possible_features = list()
+	var/list/spawned_features
+
+	var/habitability_class
+
+/obj/effect/overmap/sector/exoplanet/proc/generate_habitability()
+	var/roll = rand(1,100)
+	switch(roll)
+		if(1 to 10)
+			habitability_class = HABITABILITY_IDEAL
+		if(11 to 50)
+			habitability_class = HABITABILITY_OKAY
+		else
+			habitability_class = HABITABILITY_BAD
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -65,12 +84,14 @@
 	..()
 
 /obj/effect/overmap/sector/exoplanet/proc/build_level()
+	generate_habitability()
 	generate_atmosphere()
 	generate_map()
 	generate_features()
-	generate_landing(2)		//try making 4 landmarks
+	generate_landing(2)
 	update_biome()
 	generate_daycycle()
+	generate_planet_image()
 	START_PROCESSING(SSobj, src)
 
 //attempt at more consistent history generation for xenoarch finds.
@@ -143,6 +164,11 @@
 	repopulate_types |= M.type
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
+	var/list/grasscolors = plant_colors.Copy()
+	grasscolors -= "RANDOM"
+	if(length(grasscolors))
+		grass_color = pick(grasscolors)
+
 	for(var/datum/exoplanet_theme/T in themes)
 		T.before_map_generation(src)
 	for(var/zlevel in map_z)
@@ -156,13 +182,13 @@
 		var/padding = TRANSITIONEDGE
 		for(var/map_type in map_generators)
 			if(ispath(map_type, /datum/random_map/noise/exoplanet))
-				var/datum/random_map/noise/exoplanet/RM = new map_type(null,padding,padding,zlevel,maxx-padding,maxy-padding,0,1,1,planetary_area)
+				var/datum/random_map/noise/exoplanet/RM = new map_type(null,padding,padding,zlevel,maxx-padding,maxy-padding,0,1,1,planetary_area, plant_colors)
 				get_biostuff(RM)
 			else
 				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_features()
-	seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
+	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/sector/exoplanet/proc/get_biostuff(var/datum/random_map/noise/exoplanet/random_map)
 	if(!istype(random_map))
@@ -222,6 +248,19 @@
 		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
 	if(atmosphere)
+		//Set up gases for living things
+		if(!LAZYLEN(breathgas))
+			var/list/goodgases = gas_data.gases.Copy()
+			var/gasnum = min(rand(1,3), goodgases.len)
+			for(var/i = 1 to gasnum)
+				var/gas = pick(goodgases)
+				breathgas[gas] = round(0.4*goodgases[gas])
+				goodgases -= gas
+		if(!badgas)
+			var/list/badgases = gas_data.gases.Copy()
+			badgases -= atmosphere.gas
+			badgas = pick(badgases)
+
 		A.minbodytemp = atmosphere.temperature - 20
 		A.maxbodytemp = atmosphere.temperature + 30
 		A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
@@ -282,35 +321,41 @@
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
-	if(prob(10))	//small chance of getting a perfectly habitable planet
-		atmosphere.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
-		atmosphere.adjust_gas("nitrogen", MOLES_N2STANDARD)
+	if(habitability_class == HABITABILITY_IDEAL)
+		atmosphere.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
+		atmosphere.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 	else //let the fuckery commence
 		var/list/newgases = gas_data.gases.Copy()
 		if(prob(90)) //all phoron planet should be rare
-			newgases -= "phoron"
+			newgases -= GAS_PHORON
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
-			newgases -= "aliether"
-		newgases -= "watervapor"
-
-		var/sanity = prob(99.9)
+			newgases -= GAS_ALIEN
+		newgases -= GAS_STEAM
 
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
+		var/badflag = 0
+
+		//Breathable planet
+		if(habitability_class == HABITABILITY_OKAY)
+			atmosphere.gas[GAS_OXYGEN] += MOLES_O2STANDARD
+			total_moles -= MOLES_O2STANDARD
+			badflag = XGM_GAS_FUEL|XGM_GAS_CONTAMINANT
+
 		var/gasnum = rand(1,4)
 		var/i = 1
+		var/sanity = prob(99.9)
 		while(i <= gasnum && total_moles && newgases.len)
+			if(badflag && sanity)
+				for(var/g in newgases)
+					if(gas_data.flags[g] & badflag)
+						newgases -= g
 			var/ng = pick_n_take(newgases)	//pick a gas
 			if(sanity) //make sure atmosphere is not flammable... always
-				var/badflag = 0
 				if(gas_data.flags[ng] & XGM_GAS_OXIDIZER)
-					badflag = XGM_GAS_FUEL
+					badflag |= XGM_GAS_FUEL
 				if(gas_data.flags[ng] & XGM_GAS_FUEL)
-					badflag = XGM_GAS_OXIDIZER
-				if(badflag)
-					for(var/g in newgases)
-						if(gas_data.flags[g] & badflag)
-							newgases -= g
-					sanity = 0
+					badflag |= XGM_GAS_OXIDIZER
+				sanity = 0
 
 			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
 			if(i == gasnum || !newgases.len) //if it's last gas, let it have all remaining moles
@@ -319,13 +364,98 @@
 			total_moles = max(total_moles - part, 0)
 			i++
 
-	//Set up gases for living things
-	for(var/gas in atmosphere.gas)
-		breathgas[gas] = round(0.4*atmosphere.gas[gas])
-	var/list/badgases = gas_data.gases.Copy()
-	badgases -= atmosphere.gas
-	badgas = pick(badgases)
+/obj/effect/overmap/sector/exoplanet/get_scan_data(mob/user)
+	. = ..()
+	var/list/extra_data = list("<hr>")
+	if(atmosphere)
+		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT))
+			var/list/gases = list()
+			for(var/g in atmosphere.gas)
+				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
+					gases += gas_data.name[g]
+			extra_data += "Atmosphere composition: [english_list(gases)]"
+			var/inaccuracy = rand(8,12)/10
+			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
+		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+			extra_data += "Atmosphere present"
+		extra_data += "<hr>"
+
+	if(seeds.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		extra_data += "Xenoflora detected"
+
+	if(animals.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		extra_data += "Life traces detected"
+
+	if(LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
+		var/ruin_num = 0
+		for(var/datum/map_template/ruin/exoplanet/R in spawned_features)
+			if(!(R.ruin_tags & RUIN_NATURAL))
+				ruin_num++
+		if(ruin_num)
+			extra_data += "<hr>[ruin_num] possible artificial structure\s detected."
+
+	. += jointext(extra_data, "<br>")
+
+/obj/effect/overmap/sector/exoplanet/get_skybox_representation()
+	return skybox_image
+
+/obj/effect/overmap/sector/exoplanet/proc/generate_planet_image()
+	skybox_image = image('icons/skybox/planet.dmi', "")
+
+	var/image/base = image('icons/skybox/planet.dmi', "base")
+	base.color = get_surface_color()
+	skybox_image.overlays += base
+
+	for(var/datum/exoplanet_theme/theme in themes)
+		skybox_image.overlays += theme.get_planet_image_extra()
+	
+	if(water_color) //TODO: move water levels out of randommap into exoplanet
+		var/image/water = image('icons/skybox/planet.dmi', "water")
+		water.color = water_color
+		water.appearance_flags = PIXEL_SCALE
+		water.transform = water.transform.Turn(rand(0,360))
+		skybox_image.overlays += water
+	
+	if(atmosphere && atmosphere.return_pressure() > SOUND_MINIMUM_PRESSURE)
+
+		var/atmo_color = get_atmosphere_color()
+		if(!atmo_color)
+			atmo_color = COLOR_WHITE
+
+		var/image/clouds = image('icons/skybox/planet.dmi', "weak_clouds")
+
+		if(water_color)
+			clouds.overlays += image('icons/skybox/planet.dmi', "clouds")
+
+		clouds.color = atmo_color
+		skybox_image.overlays += clouds
+
+		var/image/atmo = image('icons/skybox/planet.dmi', "atmoring")
+		skybox_image.underlays += atmo
+		
+	var/image/shadow = image('icons/skybox/planet.dmi', "shadow")
+	shadow.blend_mode = BLEND_MULTIPLY
+	skybox_image.overlays += shadow
+
+	var/image/light = image('icons/skybox/planet.dmi', "lightrim")
+	skybox_image.overlays += light
+
+	skybox_image.pixel_x = rand(0,256)
+	skybox_image.pixel_y = rand(0,256)
+	skybox_image.appearance_flags = RESET_COLOR
+
+/obj/effect/overmap/sector/exoplanet/proc/get_surface_color()
+	return surface_color
+
+/obj/effect/overmap/sector/exoplanet/proc/get_atmosphere_color()
+	var/list/colors = list()
+	for(var/g in atmosphere.gas)
+		if(gas_data.tile_overlay_color[g])
+			colors += gas_data.tile_overlay_color[g]
+	if(colors.len)
+		return MixColors(colors)
 
 /area/exoplanet
 	name = "\improper Planetary surface"
 	ambience = list('sound/effects/wind/wind_2_1.ogg','sound/effects/wind/wind_2_2.ogg','sound/effects/wind/wind_3_1.ogg','sound/effects/wind/wind_4_1.ogg','sound/effects/wind/wind_4_2.ogg','sound/effects/wind/wind_5_1.ogg')
+	always_unpowered = 1

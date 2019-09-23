@@ -12,6 +12,8 @@
 
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 	miss_sounds = list('sound/weapons/guns/miss1.ogg','sound/weapons/guns/miss2.ogg','sound/weapons/guns/miss3.ogg','sound/weapons/guns/miss4.ogg')
+	ricochet_sounds = list('sound/weapons/guns/ricochet1.ogg', 'sound/weapons/guns/ricochet2.ogg',
+							'sound/weapons/guns/ricochet3.ogg', 'sound/weapons/guns/ricochet4.ogg')
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
@@ -36,9 +38,6 @@
 
 /obj/item/projectile/bullet/check_penetrate(var/atom/A)
 	if(QDELETED(A) || !A.density) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
-
-	if(istype(A, /obj/mecha))
-		return 1 //mecha have their own penetration handling
 
 	if(ismob(A))
 		if(!mob_passthrough_check)
@@ -217,10 +216,13 @@
 /obj/item/projectile/bullet/gyro
 	name = "minirocket"
 	fire_sound = 'sound/effects/Explosion1.ogg'
+	var/gyro_devastation = -1
+	var/gyro_heavy_impact = 0
+	var/gyro_light_impact = 2
 
 /obj/item/projectile/bullet/gyro/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
-		explosion(target, -1, 0, 2)
+		explosion(target, gyro_devastation, gyro_heavy_impact, gyro_light_impact)
 	..()
 
 /obj/item/projectile/bullet/blank
@@ -259,7 +261,7 @@
 	icon_state = "rock"
 	damage = 40
 	armor_penetration = 25
-	kill_count = 255
+	life_span = 255
 	distance_falloff = 0
 
 /obj/item/projectile/bullet/rock/New()

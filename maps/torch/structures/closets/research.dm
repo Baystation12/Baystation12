@@ -11,9 +11,9 @@
 /decl/closet_appearance/secure_closet/torch/science/cso
 	extra_decals = list(
 		"stripe_vertical_left_full" =  COLOR_PURPLE_GRAY,
-		"stripe_vertical_mid_full" =   COLOR_GOLD,
+		"stripe_vertical_mid_full" =   COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_PURPLE_GRAY,
-		"research" = COLOR_GOLD
+		"research" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/RD_torch
@@ -25,13 +25,14 @@
 	return list(
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science/cso,
+		/obj/item/clothing/suit/storage/toggle/labcoat/rd/ec,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
 		/obj/item/device/radio/headset/heads/torchntdirector,
 		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flash,
+		/obj/item/weapon/gun/energy/confuseray,
 		/obj/item/device/megaphone,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,

@@ -26,8 +26,8 @@ var/list/mob_hat_cache = list()
 	maxHealth = 35
 	health = 35
 	cell_emp_mult = 1
-	universal_speak = 0
-	universal_understand = 1
+	universal_speak = FALSE
+	universal_understand = TRUE
 	gender = NEUTER
 	pass_flags = PASS_FLAG_TABLE
 	braintype = "Drone"
@@ -66,10 +66,10 @@ var/list/mob_hat_cache = list()
 	. = ..()
 
 	verbs += /mob/living/proc/hide
-	remove_language("Robot Talk")
-	add_language("Robot Talk", 0)
-	add_language("Drone Talk", 1)
-	default_language = all_languages["Drone Talk"]
+	remove_language(LANGUAGE_ROBOT_GLOBAL)
+	add_language(LANGUAGE_ROBOT_GLOBAL, 0)
+	add_language(LANGUAGE_DRONE_GLOBAL, 1)
+	default_language = all_languages[LANGUAGE_DRONE_GLOBAL]
 	// NO BRAIN.
 	mmi = null
 
@@ -203,7 +203,7 @@ var/list/mob_hat_cache = list()
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return
 
-	else if(isCrowbar(W))
+	else if(isCrowbar(W) && user.a_intent != I_HURT)
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 
@@ -254,7 +254,7 @@ var/list/mob_hat_cache = list()
 	else
 		to_chat(src, "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>")
 
-	message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
+	log_and_message_admins("emagged drone [key_name_admin(src)].  Laws overridden.", user)
 	log_game("[key_name(user)] emagged drone [key_name(src)][controlling_ai ? " but AI [key_name(controlling_ai)] is in remote control" : " Laws overridden"].")
 	var/time = time2text(world.realtime,"hh:mm:ss")
 	GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")

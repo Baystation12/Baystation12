@@ -1,7 +1,5 @@
 /decl/cultural_info/culture/skrell
 	name = CULTURE_SKRELL_QERR
-	language = LANGUAGE_SKRELLIAN
-	name_language = LANGUAGE_SKRELLIAN
 	description = "Considered as the leaders of Skrellkind, the Qerr-Katish are the face and soul of skrellian society. \
 		Managers, diplomats, lawyers, they are notably the only caste allowed to fulfil the role of Qerr-Skria,\
 		and the only one forbidden from being appointed to the Xaq Moglar. As the representatives of the Skrell, \
@@ -12,6 +10,15 @@
 		small, being generally limited to one, sometimes two bondings. They often dress in clothing made from softer, shinier materials \
 		that are long and flowing and have often been compared to the clothing of ancient Chinese nobles by human scholars. Their skin is generally bright green."
 	economic_power = 1.4
+	language = LANGUAGE_SKRELLIAN
+	secondary_langs = list(
+		LANGUAGE_SIGN,
+		LANGUAGE_HUMAN_EURO,
+		LANGUAGE_GUTTER,
+		LANGUAGE_SPACER,
+		LANGUAGE_MANTID_VOCAL,
+		LANGUAGE_MANTID_NONVOCAL
+	)
 
 /decl/cultural_info/culture/skrell/caste_malish
 	name = CULTURE_SKRELL_MALISH

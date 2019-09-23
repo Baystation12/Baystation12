@@ -56,7 +56,7 @@
 /obj/item/weapon/ore/iron/New(var/newloc)
 	..(newloc, MATERIAL_HEMATITE)
 /obj/item/weapon/ore/coal/New(var/newloc)
-	..(newloc, MATERIAL_GRAPHENE)
+	..(newloc, MATERIAL_GRAPHITE)
 /obj/item/weapon/ore/glass/New(var/newloc)
 	..(newloc, MATERIAL_SAND)
 /obj/item/weapon/ore/silver/New(var/newloc)

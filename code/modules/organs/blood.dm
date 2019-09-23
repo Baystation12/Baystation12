@@ -161,13 +161,18 @@
 
 //Gets human's own blood.
 /mob/living/carbon/proc/get_blood(datum/reagents/container)
-	var/datum/reagent/blood/res = locate() in container.reagent_list //Grab some blood
-	if(res) // Make sure there's some blood at all
-		if(weakref && res.data["donor"] != weakref) //If it's not theirs, then we look for theirs
-			for(var/datum/reagent/blood/D in container.reagent_list)
-				if(weakref && D.data["donor"] != weakref)
-					return D
+	var/datum/reagent/blood/res
+	if(container)
+		res = locate() in container.reagent_list //Grab some blood
+		if(res) // Make sure there's some blood at all
+			if(weakref && res.data["donor"] != weakref) //If it's not theirs, then we look for theirs
+				for(var/datum/reagent/blood/D in container.reagent_list)
+					if(weakref && D.data["donor"] != weakref)
+						return D
 	return res
+
+/mob/living/carbon/human/get_blood(datum/reagents/container)
+	. = ..(container || vessel)
 
 /mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
 	if(blood_species && species.name)
@@ -223,9 +228,11 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
 	var/turf/T = get_turf(target)
 
-	if(istype(source,/mob/living/carbon/human))
-		var/mob/living/carbon/human/M = source
-		source = M.get_blood(M.vessel)
+	if(istype(source,/mob/living/carbon))
+		var/mob/living/carbon/M = source
+		source = M.get_blood()
+	if(!istype(source))
+		source = null
 
 	// Are we dripping or splattering?
 	var/list/drips = list()

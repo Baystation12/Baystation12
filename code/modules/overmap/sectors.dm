@@ -47,6 +47,9 @@
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/proc/populate_sector_objects()
 
+/obj/effect/overmap/proc/get_scan_data(mob/user)
+	return desc
+
 /obj/effect/overmap/proc/get_areas()
 	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
 
@@ -86,11 +89,32 @@
 		generic_waypoints -= landmark
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
-	. = generic_waypoints.Copy()
-	if(shuttle_name in restricted_waypoints)
-		. += restricted_waypoints[shuttle_name]
+	. = list()
 	for(var/obj/effect/overmap/contained in src)
 		. += contained.get_waypoints(shuttle_name)
+	for(var/thing in generic_waypoints)
+		.[thing] = name
+	if(shuttle_name in restricted_waypoints)
+		for(var/thing in restricted_waypoints[shuttle_name])
+			.[thing] = name
+
+/obj/effect/overmap/proc/generate_skybox()
+	return
+
+//Overlay of how this object should look on other skyboxes
+/obj/effect/overmap/proc/get_skybox_representation()
+	return
+
+/obj/effect/overmap/Crossed(var/obj/effect/overmap/other)
+	if(istype(other))
+		for(var/obj/effect/overmap/O in loc)
+			SSskybox.rebuild_skyboxes(O.map_z)
+
+/obj/effect/overmap/Uncrossed(var/obj/effect/overmap/other)
+	if(istype(other))
+		SSskybox.rebuild_skyboxes(other.map_z)
+		for(var/obj/effect/overmap/O in loc)
+			SSskybox.rebuild_skyboxes(O.map_z)
 
 /obj/effect/overmap/sector
 	name = "generic sector"
@@ -117,17 +141,14 @@
 	testing("Building overmap...")
 	world.maxz++
 	GLOB.using_map.overmap_z = world.maxz
-	var/list/turfs = list()
+	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))
 		var/turf/T = square
 		if(T.x == GLOB.using_map.overmap_size || T.y == GLOB.using_map.overmap_size)
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
-			T = T.ChangeTurf(/turf/unsimulated/map/)
-		turfs += T
-
-	var/area/overmap/A = new
-	A.contents.Add(turfs)
+			T = T.ChangeTurf(/turf/unsimulated/map)
+		ChangeArea(T, A)
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 

@@ -7,7 +7,6 @@
 	icon_screen = "explosive"
 	light_color = "#a91515"
 	req_access = list(access_armory)
-	circuit = /obj/item/weapon/circuitboard/prisoner
 	var/id = 0.0
 	var/temp = null
 	var/status = 0

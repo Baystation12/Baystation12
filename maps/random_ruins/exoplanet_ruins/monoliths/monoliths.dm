@@ -12,7 +12,6 @@
 	desc = "An obviously artifical structure of unknown origin. The symbols '<font face='Shage'>DWNbTX</font>' are engraved on the base."
 	icon = 'icons/obj/monolith.dmi'
 	icon_state = "jaggy1"
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	anchored = 1
@@ -28,6 +27,7 @@
 		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
 			desc += "\nThere are images on it: [E.get_engravings()]"
+	update_icon()
 
 /obj/structure/monolith/on_update_icon()
 	overlays.Cut()
@@ -40,6 +40,11 @@
 		overlays += I
 		set_light(0.3, 0.1, 2, l_color = I.color)
 
+	var/turf/simulated/floor/exoplanet/T = get_turf(src)
+	if(istype(T))
+		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
+		overlays += I
+
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")
 	if(GLOB.using_map.use_overmap && istype(user,/mob/living/carbon/human))
@@ -47,6 +52,7 @@
 		if(istype(E))
 			var/mob/living/carbon/human/H = user
 			if(!H.isSynthetic())
+				playsound(src, 'sound/effects/zapbeep.ogg', 100, 1)
 				active = 1
 				update_icon()
 				if(prob(70))

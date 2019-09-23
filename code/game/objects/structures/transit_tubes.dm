@@ -7,7 +7,6 @@
 	icon = 'icons/obj/pipes/transit_tube.dmi'
 	icon_state = "E-W"
 	density = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	anchored = 1.0
 	var/list/tube_dirs = null
@@ -82,7 +81,7 @@ obj/structure/ex_act(severity)
 /obj/structure/transit_tube_pod/New(loc)
 	..(loc)
 
-	air_contents.adjust_multi("oxygen", MOLES_O2STANDARD * 2, "nitrogen", MOLES_N2STANDARD)
+	air_contents.adjust_multi(GAS_OXYGEN, MOLES_O2STANDARD * 2, GAS_NITROGEN, MOLES_N2STANDARD)
 	air_contents.temperature = T20C
 
 	// Give auto tubes time to align before trying to start moving

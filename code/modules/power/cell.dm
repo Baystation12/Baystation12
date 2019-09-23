@@ -37,10 +37,13 @@
 /obj/item/weapon/cell/on_update_icon()
 
 	var/new_overlay_state = null
-	if(percent() >= 95)
-		new_overlay_state = "cell-o2"
-	else if(charge >= 0.05)
-		new_overlay_state = "cell-o1"
+	switch(percent())
+		if(95 to 100)
+			new_overlay_state = "cell-o2"
+		if(25 to 95)
+			new_overlay_state = "cell-o1"
+		if(0.05 to 25)
+			new_overlay_state = "cell-o0"
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
@@ -180,7 +183,7 @@
 /obj/item/weapon/cell/high/empty
 	charge = 0
 
-/obj/item/weapon/cell/mecha
+/obj/item/weapon/cell/exosuit
 	name = "exosuit power cell"
 	desc = "A special power cell designed for heavy-duty use in industrial exosuits."
 	origin_tech = list(TECH_POWER = 3)
@@ -239,7 +242,29 @@
 	name = "charged slime core"
 	desc = "A yellow slime core infused with phoron, it crackles with power."
 	origin_tech = list(TECH_POWER = 2, TECH_BIO = 4)
-	icon = 'icons/mob/slimes.dmi' //'icons/obj/harvest.dmi'
+	icon = 'icons/mob/simple_animal/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 200
 	matter = null
+
+// Self-charging power cell.
+/obj/item/weapon/cell/mantid
+	name = "mantid microfusion plant"
+	desc = "An impossibly tiny fusion reactor of mantid design."
+	icon = 'icons/obj/ascent.dmi'
+	icon_state = "plant"
+	maxcharge = 1500
+	w_class = ITEM_SIZE_NORMAL
+	var/recharge_amount = 12
+
+/obj/item/weapon/cell/mantid/Initialize()
+	START_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/weapon/cell/mantid/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/weapon/cell/mantid/Process()
+	if(charge < maxcharge)
+		give(recharge_amount)

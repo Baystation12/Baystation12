@@ -51,6 +51,9 @@
 /datum/gear/head/bandana
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/head/beanie
+	allowed_branches = CIVILIAN_BRANCHES
+
 /datum/gear/head/bow
 	allowed_branches = CIVILIAN_BRANCHES
 
@@ -90,4 +93,17 @@
 	berets["third fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/third
 	berets["fourth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/fourth
 	berets["fifth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/fifth
+	gear_tweaks += new/datum/gear_tweak/path(berets)
+
+/datum/gear/head/ECberet
+	display_name = "EC sections beret selection"
+	description = "A beret denoting service in one of the branches within the SCG EC."
+	path = /obj/item/clothing/head/beret/solgov/expedition/branch
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+/datum/gear/head/ECberet/New()
+	..()
+	var/berets = list()
+	berets["field operation beret"] = /obj/item/clothing/head/beret/solgov/expedition/branch
+	berets["observatory beret"] = /obj/item/clothing/head/beret/solgov/expedition/branch/observatory
 	gear_tweaks += new/datum/gear_tweak/path(berets)

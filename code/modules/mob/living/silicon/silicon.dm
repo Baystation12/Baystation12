@@ -2,6 +2,14 @@
 	gender = NEUTER
 	voice_name = "synthesized voice"
 	skillset = /datum/skillset/silicon
+
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
@@ -39,8 +47,8 @@
 	if(silicon_camera)
 		silicon_camera = new silicon_camera(src)
 
-	add_language(LANGUAGE_GALCOM)
-	default_language = all_languages[LANGUAGE_GALCOM]
+	add_language(LANGUAGE_HUMAN_EURO)
+	default_language = all_languages[LANGUAGE_HUMAN_EURO]
 	init_id()
 	init_subsystems()
 
@@ -240,7 +248,7 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text)
+	pose =  sanitize(input(usr, "This is [src]. It...", "Pose", null)  as text)
 
 /mob/living/silicon/verb/set_flavor()
 	set name = "Set Flavour Text"

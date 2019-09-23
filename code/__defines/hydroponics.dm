@@ -59,6 +59,7 @@
 #define TRAIT_FLESH_COLOUR         39
 #define TRAIT_LARGE            	   40
 #define TRAIT_LEAVES_COLOUR        41
+#define TRAIT_PHOTOSYNTHESIS       42
 
 // Seed noun datums
 #define SEED_NOUN_SPORES          "spores"

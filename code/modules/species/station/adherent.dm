@@ -9,6 +9,10 @@
 	hidden_from_codex = FALSE
 	silent_steps = TRUE
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	genders =                 list(PLURAL)
 	cyborg_noun =             null
 
@@ -42,7 +46,7 @@
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
-	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
+	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	appearance_flags = HAS_EYE_COLOR | HAS_BASE_SKIN_COLOURS
 	blood_color = "#2de00d"
@@ -50,7 +54,6 @@
 	virus_immune = 1
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
-	pixel_offset_y = -4
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(

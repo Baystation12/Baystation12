@@ -126,6 +126,7 @@
 	w_class = ITEM_SIZE_TINY
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 	var/band_color = COLOR_CYAN
+	var/time = 1 SECONDS // takes less time than a normal syringe
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
@@ -135,6 +136,10 @@
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
+	if(user != M && !M.incapacitated())
+		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
+		if(!do_mob(user, M, time))
+			return
 	..()
 	if(reagents.total_volume <= 0) //Prevents autoinjectors to be refilled.
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
@@ -180,3 +185,9 @@
 	name = "autoinjector"
 	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/mindbreaker = 5)
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/empty
+	name = "autoinjector"
+	band_color = COLOR_WHITE
+	starts_with = list()
+	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)

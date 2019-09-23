@@ -292,7 +292,7 @@ Helpers
 				captainless=0
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
 				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
-				equip_custom_items(player)
+				SScustomitems.equip_custom_items(player)
 	if(captainless)
 		for(var/mob/M in GLOB.player_list)
 			if(!istype(M,/mob/new_player))

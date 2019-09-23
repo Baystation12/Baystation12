@@ -8,7 +8,7 @@
 	var/list/resources
 
 	var/thermite = 0
-	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
@@ -72,6 +72,7 @@
 	. = ..()
 
 /turf/simulated/Entered(atom/A, atom/OL)
+	. = ..()
 	if (istype(A,/mob/living))
 		var/mob/living/M = A
 
@@ -106,7 +107,7 @@
 				bloodDNA = null
 
 		if(M.lying)
-			return ..()
+			return
 
 		if(src.wet)
 
@@ -134,8 +135,6 @@
 				M.inertia_dir = 0
 		else
 			M.inertia_dir = 0
-
-	..()
 
 //returns 1 if made bloody, returns 0 otherwise
 /turf/simulated/add_blood(mob/living/carbon/human/M as mob)

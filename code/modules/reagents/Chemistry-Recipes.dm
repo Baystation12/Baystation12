@@ -333,6 +333,12 @@
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/acid/hydrochloric = 3, /datum/reagent/water = 1)
 	result_amount = 1
 
+/datum/chemical_reaction/vecuronium_bromide
+	name = "Vecuronium Bromide"
+	result = /datum/reagent/vecuronium_bromide
+	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/mercury = 2, /datum/reagent/hydrazine = 2)
+	result_amount = 1
+
 /datum/chemical_reaction/potassium_chloride
 	name = "Potassium Chloride"
 	result = /datum/reagent/toxin/potassium_chloride
@@ -1101,7 +1107,7 @@
 		return
 
 	var/turf/location = get_turf(holder.my_atom)
-	location.assume_gas("phoron", 250, 1400)
+	location.assume_gas(GAS_PHORON, 250, 1400)
 	location.hotspot_expose(700, 400)
 
 //Yellow
@@ -2263,7 +2269,7 @@
 	result = /datum/reagent/three_eye
 	result_amount = 2
 	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
-	minimum_temperature = 100 CELSIUS
+	minimum_temperature = 40 CELSIUS
 	reaction_sound = 'sound/effects/psi/power_used.ogg'
 	hidden_from_codex = TRUE
 

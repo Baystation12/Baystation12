@@ -10,11 +10,13 @@
 	health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
+	pry_mod = 0.5
 
 /obj/machinery/door/window/New()
 	..()
@@ -77,13 +79,6 @@
 				open()
 				sleep(50)
 				close()
-		else if(istype(AM, /obj/mecha))
-			var/obj/mecha/mecha = AM
-			if(density)
-				if(mecha.occupant && src.allowed(mecha.occupant))
-					open()
-					sleep(50)
-					close()
 		return
 	var/mob/M = AM // we've returned by here if M is not a mob
 	if (src.operating)
@@ -154,19 +149,14 @@
 		shatter()
 		return
 
-/obj/machinery/door/window/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/door/window/attack_hand(mob/user as mob)
-
+/obj/machinery/door/window/physical_attack_hand(mob/user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message("<span class='danger'>[user] smashes against the [src.name].</span>", 1)
 			take_damage(25)
-			return
-	return src.attackby(user, user)
+			return TRUE
 
 /obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)
 	if (density && operable())
@@ -267,6 +257,7 @@
 	var/id = null
 	maxhealth = 300
 	health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	pry_mod = 0.65
 
 
 /obj/machinery/door/window/northleft

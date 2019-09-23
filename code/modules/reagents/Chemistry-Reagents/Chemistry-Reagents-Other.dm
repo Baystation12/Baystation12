@@ -119,6 +119,7 @@
 	taste_description = "expensive metal"
 	reagent_state = SOLID
 	color = "#f7c430"
+	value = 7
 
 /datum/reagent/silver
 	name = "Silver"
@@ -126,6 +127,7 @@
 	taste_description = "expensive yet reasonable metal"
 	reagent_state = SOLID
 	color = "#d0d0d0"
+	value = 4
 
 /datum/reagent/uranium
 	name = "Uranium"
@@ -133,6 +135,7 @@
 	taste_description = "the inside of a reactor"
 	reagent_state = SOLID
 	color = "#b8b8c0"
+	value = 9
 
 /datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_ingest(M, alien, removed)
@@ -190,6 +193,7 @@
 	taste_description = "iron"
 	reagent_state = LIQUID
 	color = "#604030"
+	value = 0.9
 
 /datum/reagent/surfactant // Foam precursor
 	name = "Azosurfactant"
@@ -197,6 +201,7 @@
 	taste_description = "metal"
 	reagent_state = LIQUID
 	color = "#9e6b38"
+	value = 0.05
 
 /datum/reagent/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "Foaming agent"
@@ -212,6 +217,7 @@
 	reagent_state = SOLID
 	color = "#673910"
 	touch_met = 50
+	value = 6
 
 /datum/reagent/thermite/touch_turf(var/turf/T)
 	if(volume >= 5)
@@ -256,6 +262,7 @@
 	reagent_state = LIQUID
 	color = "#a5f0ee"
 	touch_met = 50
+	value = 0.7
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	O.clean_blood()
@@ -300,12 +307,13 @@
 			return
 	M.clean_blood()
 
-/datum/reagent/lube // TODO: spraying on borgs speeds them up
+/datum/reagent/lube
 	name = "Space Lube"
 	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#009ca8"
+	value = 0.6
 
 /datum/reagent/lube/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -329,6 +337,7 @@
 	taste_description = "sweetness"
 	reagent_state = LIQUID
 	color = "#808080"
+	value = 8
 
 /datum/reagent/nitroglycerin
 	name = "Nitroglycerin"
@@ -336,6 +345,7 @@
 	taste_description = "oil"
 	reagent_state = LIQUID
 	color = "#808080"
+	value = 9
 
 /datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -349,6 +359,7 @@
 	taste_mult = 1.1
 	reagent_state = LIQUID
 	color = "#c8a5dc"
+	value = 0.8
 
 /datum/reagent/coolant/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -398,6 +409,7 @@
 	taste_description = "metal"
 	reagent_state = LIQUID
 	color = "#f2f3f4"
+	value = 1.4
 
 /datum/reagent/luminol/touch_obj(var/obj/O)
 	O.reveal_blood()

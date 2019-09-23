@@ -9,10 +9,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	appearance_flags = KEEP_TOGETHER
 	blinded = 0
 	anchored = 1	//  don't get pushed around
-	universal_speak = 1
+	universal_speak = TRUE
 
 	mob_flags = MOB_FLAG_HOLY_BAD
-	movement_handlers = list(/datum/movement_handler/mob/incorporeal)
+	movement_handlers = list(/datum/movement_handler/mob/multiz_connected, /datum/movement_handler/mob/incorporeal)
 
 	var/is_manifest = FALSE
 	var/next_visibility_toggle = 0
@@ -150,6 +150,8 @@ Works together with spawning an observer, noted above.
 			ghost.verbs -= /mob/observer/ghost/verb/toggle_antagHUD	// Poor guys, don't know what they are missing!
 		return ghost
 
+/mob/observer/ghostize() // Do not create ghosts of ghosts.
+
 /*
 This is the proc mobs get to turn into a ghost. Forked from ghostize due to compatibility issues.
 */
@@ -175,9 +177,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(response != "Ghost")
 			return
 		resting = 1
-		var/turf/location = get_turf(src)
-		message_admins("[key_name_admin(usr)] has ghosted. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
-		log_game("[key_name_admin(usr)] has ghosted.")
+		log_and_message_admins("has ghosted.")
 		var/mob/observer/ghost/ghost = ghostize(0)	//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
@@ -324,12 +324,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	..()
 
-/mob/observer/ghost/memory()
+/mob/observer/ghost/StoreMemory()
 	set hidden = 1
 	to_chat(src, "<span class='warning'>You are dead! You have no mind to store memory!</span>")
-/mob/observer/ghost/add_memory()
+
+/mob/observer/ghost/AddMemory()
 	set hidden = 1
 	to_chat(src, "<span class='warning'>You are dead! You have no mind to store memory!</span>")
+
 /mob/observer/ghost/PostIncorporealMovement()
 	stop_following()
 
@@ -394,7 +396,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='warning'>Unable to find any unwelded vents to spawn mice at.</span>")
 	if(host)
 		if(config.uneducated_mice)
-			host.universal_understand = 0
+			host.universal_understand = FALSE
 		announce_ghost_joinleave(src, 0, "They are now a mouse.")
 		host.ckey = src.ckey
 		host.status_flags |= NO_ANTAG
@@ -493,7 +495,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		set_see_invisible(SEE_INVISIBLE_NOLIGHTING)
 	else
 		set_see_invisible(ghostvision ? SEE_INVISIBLE_OBSERVER : SEE_INVISIBLE_LIVING)
-	updateghostimages()
+	SSghost_images.queue_image_update(src)
 
 /mob/observer/ghost/proc/updateghostimages()
 	if (!client)

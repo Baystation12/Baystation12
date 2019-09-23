@@ -12,14 +12,15 @@
 	death_msg = "expires with a pitiful chirrup..."
 	health = 60
 	maxHealth = 60
+	available_maneuvers = list(/decl/maneuver/leap)
 
 	language = LANGUAGE_ROOTLOCAL
 	species_language = LANGUAGE_ROOTLOCAL
 	only_species_language = 1
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
-	universal_understand = 0
-	universal_speak = 0
+	universal_understand = FALSE
+	universal_speak = FALSE
 
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
@@ -38,6 +39,9 @@
 	var/tmp/image/flower
 	var/tmp/image/eyes
 	var/tmp/last_glow
+
+/mob/living/carbon/alien/diona/get_jump_distance()
+	return 3
 
 /mob/living/carbon/alien/diona/Login()
 	. = ..()
@@ -61,7 +65,7 @@
 
 	species = all_species[SPECIES_DIONA]
 	add_language(LANGUAGE_ROOTGLOBAL)
-	add_language(LANGUAGE_GALCOM)
+	add_language(LANGUAGE_HUMAN_EURO, 0)
 
 	eyes = image(icon = icon, icon_state = "eyes_[icon_state]")
 	eyes.layer = EYE_GLOW_LAYER

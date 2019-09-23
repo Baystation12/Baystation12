@@ -46,6 +46,10 @@
 					pref.all_underwear[WRC.name] = WRI.name
 					break
 
+	var/datum/species/mob_species = all_species[pref.species]
+	if(!(mob_species && mob_species.appearance_flags & HAS_UNDERWEAR))
+		pref.all_underwear.Cut()
+
 	if(!istype(pref.all_underwear_metadata))
 		pref.all_underwear_metadata = list()
 

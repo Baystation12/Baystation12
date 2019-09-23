@@ -424,8 +424,25 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
+//pencode translation to html for tags exclusive to digital files (currently email, nanoword, report editor fields,
+//modular scanner data and txt file printing) and prints from them
+/proc/digitalPencode2html(var/text)
+	text = replacetext(text, "\[pre\]", "<pre>")
+	text = replacetext(text, "\[/pre\]", "</pre>")
+	text = replacetext(text, "\[fontred\]", "<font color=\"red\">") //</font> to pass travis html tag integrity check
+	text = replacetext(text, "\[fontblue\]", "<font color=\"blue\">")//</font> to pass travis html tag integrity check
+	text = replacetext(text, "\[fontgreen\]", "<font color=\"green\">")
+	text = replacetext(text, "\[/font\]", "</font>")
+	return pencode2html(text)
+
 //Will kill most formatting; not recommended.
 /proc/html2pencode(t)
+	t = replacetext(t, "<pre>", "\[pre\]")
+	t = replacetext(t, "</pre>", "\[/pre\]")
+	t = replacetext(t, "<font color=\"red\">", "\[fontred\]")//</font> to pass travis html tag integrity check
+	t = replacetext(t, "<font color=\"blue\">", "\[fontblue\]")//</font> to pass travis html tag integrity check
+	t = replacetext(t, "<font color=\"green\">", "\[fontgreen\]")
+	t = replacetext(t, "</font>", "\[/font\]")
 	t = replacetext(t, "<BR>", "\[br\]")
 	t = replacetext(t, "<br>", "\[br\]")
 	t = replacetext(t, "<B>", "\[b\]")

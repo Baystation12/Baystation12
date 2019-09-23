@@ -4,7 +4,10 @@
 	color = "#d6cca4"
 	planetary_area = /area/exoplanet/desert
 	rock_colors = list(COLOR_BEIGE, COLOR_PALE_YELLOW, COLOR_GRAY80, COLOR_BROWN)
+	plant_colors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#420d22")
 	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
+	surface_color = "#d6cca4"
+	water_color = null
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
 	if(prob(70))
@@ -14,7 +17,11 @@
 /obj/effect/overmap/sector/exoplanet/desert/generate_atmosphere()
 	..()
 	if(atmosphere)
-		atmosphere.temperature = T20C + rand(20, 100)
+		var/limit = 1000
+		if(habitability_class <= HABITABILITY_OKAY)
+			var/datum/species/human/H = /datum/species/human
+			limit = initial(H.heat_level_1) - rand(1,10)
+		atmosphere.temperature = min(T20C + rand(20, 100), limit)
 		atmosphere.update_values()
 
 /obj/effect/overmap/sector/exoplanet/desert/adapt_seed(var/datum/seed/S)
@@ -24,19 +31,22 @@
 	else
 		S.set_trait(TRAIT_REQUIRES_WATER,1)
 		S.set_trait(TRAIT_WATER_CONSUMPTION,1)
-	if(prob(15))
+	if(prob(75))
 		S.set_trait(TRAIT_STINGS,1)
+	if(prob(75))
+		S.set_trait(TRAIT_CARNIVOROUS,2)
+	S.set_trait(TRAIT_SPREAD,0)
 
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
 	smoothing_iterations = 4
 	land_type = /turf/simulated/floor/exoplanet/desert
-	plantcolors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#420d22")
 
-	flora_prob = 10
+	flora_prob = 5
 	large_flora_prob = 0
 	flora_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug)
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/antlion)
+	megafauna_types = list(/mob/living/simple_animal/hostile/antlion/mega)
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
@@ -54,6 +64,7 @@
 
 /turf/simulated/floor/exoplanet/desert
 	name = "sand"
+	dirt_color = "#ae9e66"
 
 /turf/simulated/floor/exoplanet/desert/New()
 	icon_state = "desert[rand(0,5)]"
@@ -131,7 +142,6 @@
 	if(buckled_mob)
 		overlays += buckled_mob
 		var/image/I = image(icon,icon_state="overlay")
-		I.plane = ABOVE_HUMAN_PLANE
 		I.layer = ABOVE_HUMAN_LAYER
 		overlays += I
 
@@ -150,12 +160,12 @@
 	else
 		..()
 
-/obj/structure/quicksand/Crossed(AM)
+/obj/structure/quicksand/Crossed(var/atom/movable/AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if (L.can_overcome_gravity())
+		if(L.throwing || L.can_overcome_gravity())
 			return
 		buckle_mob(L)
 		if(!exposed)
 			expose()
-		to_chat(L, "<span class='danger'>You fall into \the [src]!</span>")
+		to_chat(L, SPAN_DANGER("You fall into \the [src]!"))

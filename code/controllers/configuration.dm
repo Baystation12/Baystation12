@@ -20,7 +20,6 @@ var/list/gamemode_cache = list()
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
 	var/log_world_output = 0			// log world.log << messages
-	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/ert_admin_call_only = 0
@@ -68,7 +67,6 @@ var/list/gamemode_cache = list()
 	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
-	var/use_cortical_stacks = 0
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -128,8 +126,13 @@ var/list/gamemode_cache = list()
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
-	var/run_speed = 2
-	var/walk_speed = 1
+	var/run_delay = 2
+	var/walk_delay = 4
+	var/creep_delay = 6
+	var/minimum_sprint_cost = 0.8
+	var/skill_sprint_cost_range = 0.8
+	var/minimum_stamina_recovery = 1
+	var/maximum_stamina_recovery = 3
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
@@ -226,6 +229,10 @@ var/list/gamemode_cache = list()
 
 	var/allow_unsafe_narrates = FALSE //Whether admins can use unsanitized narration; when true, allows HTML etc.
 
+	var/do_not_prevent_spam = FALSE //If this is true, skips spam prevention for user actions; inputs, verbs, macros, etc.
+	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
+	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -297,9 +304,6 @@ var/list/gamemode_cache = list()
 				if ("log_access")
 					config.log_access = 1
 
-				if ("sql_enabled")
-					config.sql_enabled = text2num(value)
-
 				if ("log_say")
 					config.log_say = 1
 
@@ -341,7 +345,7 @@ var/list/gamemode_cache = list()
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
-				
+
 				if ("log_runtime")
 					config.log_runtime = 1
 
@@ -505,9 +509,6 @@ var/list/gamemode_cache = list()
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
 
-				if("use_cortical_stacks")
-					config.use_cortical_stacks = 1
-
 				if ("probability")
 					var/prob_pos = findtext(value, " ")
 					var/prob_name = null
@@ -609,7 +610,7 @@ var/list/gamemode_cache = list()
 
 				if("forbidden_versions")
 					config.forbidden_versions = splittext(value, ";")
-				
+
 				if("minimum_byond_version")
 					config.minimum_byond_version = text2num(value)
 
@@ -751,6 +752,13 @@ var/list/gamemode_cache = list()
 				if ("allow_unsafe_narrates")
 					config.allow_unsafe_narrates = TRUE
 
+				if ("do_not_prevent_spam")
+					config.do_not_prevent_spam = TRUE
+				if ("max_acts_per_interval")
+					config.max_acts_per_interval = text2num(value)
+				if ("act_interval")
+					config.act_interval = text2num(value) SECONDS
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -781,10 +789,20 @@ var/list/gamemode_cache = list()
 				if("limbs_can_break")
 					config.limbs_can_break = value
 
-				if("run_speed")
-					config.run_speed = value
-				if("walk_speed")
-					config.walk_speed = value
+				if("run_delay")
+					config.run_delay = value
+				if("walk_delay")
+					config.walk_delay = value
+				if("creep_delay")
+					config.creep_delay = value
+				if("minimum_sprint_cost")
+					config.minimum_sprint_cost = value
+				if("skill_sprint_cost_range")
+					config.skill_sprint_cost_range = value
+				if("minimum_stamina_recovery")
+					config.minimum_stamina_recovery = value
+				if("maximum_stamina_recovery")
+					config.maximum_stamina_recovery = value
 
 				if("human_delay")
 					config.human_delay = value
@@ -837,6 +855,8 @@ var/list/gamemode_cache = list()
 			continue
 
 		switch (name)
+			if ("enabled")
+				sqlenabled = TRUE
 			if ("address")
 				sqladdress = value
 			if ("port")
@@ -853,8 +873,6 @@ var/list/gamemode_cache = list()
 				sqlfdbklogin = value
 			if ("feedback_password")
 				sqlfdbkpass = value
-			if ("enable_stat_tracking")
-				sqllogging = 1
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 

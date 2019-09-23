@@ -58,7 +58,7 @@
 
 /datum/gear/coffeecup
 	display_name = "coffee cup"
-	path = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
+	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/knife
@@ -210,12 +210,37 @@
 	cost = 2
 
 /datum/gear/bible
-	display_name = "bible"
+	display_name = "holy book"
 	path = /obj/item/weapon/storage/bible
 	cost = 2
+
+/datum/gear/bible/New()
+	..()
+	var/books = list()
+	books["bible (adjustable)"] = /obj/item/weapon/storage/bible
+	books["Bible"] = /obj/item/weapon/storage/bible/bible
+	books["Tanakh"] = /obj/item/weapon/storage/bible/tanakh
+	books["Quran"] = /obj/item/weapon/storage/bible/quran
+	books["Kitab-i-Aqdas"] = /obj/item/weapon/storage/bible/aqdas
+	books["Kojiki"] = /obj/item/weapon/storage/bible/kojiki
+	gear_tweaks += new/datum/gear_tweak/path(books)
 
 /datum/gear/swiss
 	display_name = "multi-tool"
 	path = /obj/item/weapon/material/knife/folding/swiss
 	cost = 4
 	flags = GEAR_HAS_COLOR_SELECTION
+
+
+/datum/gear/cross
+	display_name = "cross"
+	path = /obj/item/weapon/material/cross
+	cost = 2
+
+/datum/gear/cross/New()
+	..()
+	var/crosstype = list()
+	crosstype["cross, wood"] = /obj/item/weapon/material/cross/wood
+	crosstype["cross, silver"] = /obj/item/weapon/material/cross/silver
+	crosstype["cross, gold"] = /obj/item/weapon/material/cross/gold
+	gear_tweaks += new/datum/gear_tweak/path(crosstype)

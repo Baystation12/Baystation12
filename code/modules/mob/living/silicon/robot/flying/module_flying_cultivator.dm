@@ -20,3 +20,10 @@
 		/obj/item/device/scanner/plant,
 		/obj/item/weapon/robot_harvester
 	)
+	emag = /obj/item/weapon/melee/energy/machete
+	skills = list(
+		SKILL_BOTANY    = SKILL_MAX,
+		SKILL_COMBAT    = SKILL_EXPERT,
+		SKILL_CHEMISTRY = SKILL_EXPERT,
+		SKILL_SCIENCE   = SKILL_EXPERT,
+	)

@@ -265,13 +265,17 @@
 			var/obj/item/grab/G = W
 			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 			return 0
-		if(istype(W,/obj/item/tk_grab))
-			return 0
 		if(isWelder(W))
 			var/obj/item/weapon/weldingtool/WT = W
-			if(WT.isOn())
+			if(WT.remove_fuel(0,user))
 				slice_into_parts(WT, user)
 				return
+		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+			if(!cutter.slice(user))
+				return
+			slice_into_parts(W, user)
+			return
 		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
 			var/obj/item/weapon/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
@@ -315,13 +319,10 @@
 	else
 		src.attack_hand(user)
 
-/obj/structure/closet/proc/slice_into_parts(obj/item/weapon/weldingtool/WT, mob/user)
-	if(!WT.remove_fuel(0,user))
-		to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-		return
-	new /obj/item/stack/material/steel(src.loc)
-	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", \
-						 "<span class='notice'>You have cut \the [src] apart with \the [WT].</span>", \
+/obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
+	new /obj/item/stack/material/steel(src.loc, 2)
+	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
+						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
 						 "You hear welding.")
 	qdel(src)
 
@@ -362,12 +363,6 @@
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	src.toggle(user)
-
-// tk grab then use on self
-/obj/structure/closet/attack_self_tk(mob/user as mob)
-	src.add_fingerprint(user)
-	if(!src.toggle())
-		to_chat(usr, "<span class='notice'>It won't budge!</span>")
 
 /obj/structure/closet/attack_ghost(mob/ghost)
 	if(ghost.client && ghost.client.inquisitive_ghost)
@@ -416,12 +411,14 @@
 		return 1 // Closed and locked
 	return (!welded) //closed but not welded...
 
-/obj/structure/closet/proc/mob_breakout(var/mob/living/escapee)
+/obj/structure/closet/mob_breakout(var/mob/living/escapee)
+
+	. = ..()
 	var/breakout_time = 2 //2 minutes by default
-
 	if(breakout || !req_breakout())
-		return
+		return FALSE
 
+	. = TRUE
 	escapee.setClickCooldown(100)
 
 	//okay, so the closet is either welded or locked... resist!!!
@@ -433,11 +430,11 @@
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		if(!do_after(escapee, 50, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
 			breakout = 0
-			return
+			return FALSE
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
 		if(!req_breakout())
 			breakout = 0
-			return
+			return FALSE
 
 		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 		shake_animation()

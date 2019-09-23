@@ -34,8 +34,8 @@
 		air_contents = new /datum/gas_mixture()
 		air_contents.volume = 200 //liters
 		air_contents.temperature = T20C
-		var/list/air_mix = list("oxygen" = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-		air_contents.adjust_multi("oxygen", air_mix["oxygen"])
+		var/list/air_mix = list(GAS_OXYGEN = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
+		air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN])
 		START_PROCESSING(SSprocessing, src)
 
 // Process of Oxygen candles releasing air. Makes 200 volume of oxygen
@@ -63,8 +63,8 @@
 		return
 	environment.merge(removed)
 	volume -= 200
-	var/list/air_mix = list("oxygen" = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-	air_contents.adjust_multi("oxygen", air_mix["oxygen"])
+	var/list/air_mix = list(GAS_OXYGEN = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
+	air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN])
 
 /obj/item/device/oxycandle/on_update_icon()
 	if(on == 1)

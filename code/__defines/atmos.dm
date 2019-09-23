@@ -21,9 +21,9 @@
 
 #define SOUND_MINIMUM_PRESSURE 10
 
-#define PRESSURE_DAMAGE_COEFFICIENT 4 // The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE.
-#define    MAX_HIGH_PRESSURE_DAMAGE 4 // This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
-#define         LOW_PRESSURE_DAMAGE 2 // The amount of damage someone takes when in a low pressure area. (The pressure threshold is so low that it doesn't make sense to do any calculations, so it just applies this flat value).
+#define PRESSURE_DAMAGE_COEFFICIENT 4   // The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE.
+#define    MAX_HIGH_PRESSURE_DAMAGE 4   // This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
+#define         LOW_PRESSURE_DAMAGE 0.6 // The amount of damage someone takes when in a low pressure area. (The pressure threshold is so low that it doesn't make sense to do any calculations, so it just applies this flat value).
 
 #define MINIMUM_PRESSURE_DIFFERENCE_TO_SUSPEND (MINIMUM_AIR_TO_SUSPEND*R_IDEAL_GAS_EQUATION*T20C)/CELL_VOLUME			// Minimum pressure difference between zones to suspend
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing
@@ -100,3 +100,27 @@
 
 #define MAX_PUMP_PRESSURE		15000	// Maximal pressure setting for pumps and vents
 #define MAX_OMNI_PRESSURE		15000	// Maximal output(s) pressure for omni devices (filters/mixers)
+
+#define GAS_OXYGEN				"oxygen"
+#define GAS_CO2					"carbon_dioxide"
+#define GAS_CO					"carbon_monoxide"
+#define GAS_METHYL_BROMIDE		"methyl_bromide"
+#define GAS_N2O					"sleeping_agent"
+#define GAS_NITROGEN			"nitrogen"
+#define GAS_NO2					"nitrodioxide"
+#define GAS_NO					"nitricoxide"
+#define GAS_METHANE				"methane"
+#define GAS_ALIEN				"aliether"
+#define GAS_HYDROGEN			"hydrogen"
+#define GAS_DEUTERIUM			"deuterium"
+#define GAS_TRITIUM				"tritium"
+#define GAS_HELIUM				"helium"
+#define GAS_ARGON				"argon"
+#define GAS_KRYPTON				"krypton"
+#define GAS_NEON				"neon"
+#define GAS_XENON				"xenon"
+#define GAS_AMMONIA				"ammonia"
+#define GAS_CHLORINE			"chlorine"
+#define GAS_SULFUR				"sulfurdioxide"
+#define GAS_STEAM				"water"
+#define GAS_PHORON				"phoron"

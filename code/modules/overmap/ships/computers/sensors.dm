@@ -3,19 +3,8 @@
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
-	//circuit = /obj/item/weapon/circuitboard/sensors
+	extra_view = 4
 	var/obj/machinery/shipsensors/sensors
-	var/viewing = 0
-	var/list/viewers
-
-/obj/machinery/computer/ship/sensors/Destroy()
-	sensors = null
-	if(LAZYLEN(viewers))
-		for(var/weakref/W in viewers)
-			var/M = W.resolve()
-			if(M)
-				unlook(M)
-	. = ..()
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/ship/sector)
 	if(!(. = ..()))
@@ -37,7 +26,7 @@
 
 	var/data[0]
 
-	data["viewing"] = viewing
+	data["viewing"] = viewing_overmap(user)
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
@@ -53,6 +42,16 @@
 			data["status"] = "VACUUM SEAL BROKEN"
 		else
 			data["status"] = "OK"
+		var/list/contacts = list()
+		for(var/obj/effect/overmap/O in view(7,linked))
+			if(linked == O)
+				continue
+			var/bearing = round(90 - Atan2(O.x - linked.x, O.y - linked.y),5)
+			if(bearing < 0)
+				bearing += 360
+			contacts.Add(list(list("name"=O.name, "ref"="\ref[O]", "bearing"=bearing)))
+		if(contacts.len)
+			data["contacts"] = contacts
 	else
 		data["status"] = "MISSING"
 		data["range"] = "N/A"
@@ -65,57 +64,16 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/ship/sensors/check_eye(var/mob/user as mob)
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		viewing = 0
-	if (!viewing)
-		return -1
-	else
-		return 0
-
-/obj/machinery/computer/ship/sensors/attack_hand(var/mob/user as mob)
-	if(..())
-		viewing = 0
-		unlook(user)
-		return
-
-	if(!isAI(user))
-		if(viewing)
-			look(user)
-
-/obj/machinery/computer/ship/sensors/proc/look(var/mob/user)
-	if(linked)
-		user.reset_view(linked)
-	if(user.client)
-		user.client.view = world.view + 4
-	GLOB.moved_event.register(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
-	GLOB.stat_set_event.register(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
-	LAZYDISTINCTADD(viewers, weakref(user))
-
-/obj/machinery/computer/ship/sensors/proc/unlook(var/mob/user)
-	user.reset_view()
-	if(user.client)
-		user.client.view = world.view
-	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
-	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/sensors/proc/unlook)
-	LAZYREMOVE(viewers, weakref(user))
-
 /obj/machinery/computer/ship/sensors/OnTopic(var/mob/user, var/list/href_list, state)
 	if(..())
-		return TOPIC_HANDLED
-
-	if(href_list["close"])
-		unlook(user)
-		user.unset_machine()
 		return TOPIC_HANDLED
 
 	if (!linked)
 		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
-		viewing = !viewing
 		if(user && !isAI(user))
-			viewing ? look(user) : unlook(user)
+			viewing_overmap(user) ? unlook(user) : look(user)
 		return TOPIC_REFRESH
 
 	if (href_list["link"])
@@ -134,9 +92,12 @@
 			sensors.toggle()
 			return TOPIC_REFRESH
 
-/obj/machinery/computer/ship/sensors/CouldNotUseTopic(mob/user)
-	unlook(user)
-	. = ..()
+	if (href_list["scan"])
+		var/obj/effect/overmap/O = locate(href_list["scan"])
+		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
+			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
+			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
+		return TOPIC_HANDLED
 
 /obj/machinery/computer/ship/sensors/Process()
 	..()
@@ -221,7 +182,6 @@
 	queue_icon_update()
 
 /obj/machinery/shipsensors/Process()
-	..()
 	if(use_power) //can't run in non-vacuum
 		if(!in_vacuum())
 			toggle()

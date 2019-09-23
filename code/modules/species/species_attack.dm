@@ -23,9 +23,10 @@
 	sharp = 1
 	edge = 1
 	attack_name = "claws"
+	var/blocked_by_gloves = TRUE
 
 /datum/unarmed_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if(user.gloves)
+	if(user.gloves && blocked_by_gloves)
 		var/obj/item/clothing/gloves/gloves = user.gloves
 		if(istype(gloves) && !gloves.clipped)
 			return 0
@@ -74,6 +75,9 @@
 	damage = 5
 	shredding = 1
 	attack_name = "strong claws"
+
+/datum/unarmed_attack/claws/strong/gloves
+	blocked_by_gloves = FALSE
 
 /datum/unarmed_attack/bite/strong
 	attack_verb = list("mauled")

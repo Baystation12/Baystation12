@@ -9,6 +9,10 @@
 #define ACCESS_REGION_SUPPLY 7
 #define ACCESS_REGION_NT 8
 
+// Keep those two up to date
+#define ACCESS_REGION_MIN 1
+#define ACCESS_REGION_MAX 8
+
 #define ACCESS_TYPE_NONE 1
 #define ACCESS_TYPE_CENTCOM 2
 #define ACCESS_TYPE_STATION 4

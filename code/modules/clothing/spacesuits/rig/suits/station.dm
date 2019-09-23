@@ -38,12 +38,14 @@
 	suit_type = "industrial hardsuit"
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
-	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 50)
+	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 25)
 	online_slowdown = 3
 	offline_slowdown = 10
 	vision_restriction = TINT_HEAVY
 	offline_vision_restriction = TINT_BLIND
 	emp_protection = -20
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
 
 	chest_type = /obj/item/clothing/suit/space/rig/industrial
 	helm_type = /obj/item/clothing/head/helmet/space/rig/industrial
@@ -156,6 +158,8 @@
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/inflatable_dispenser,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe,/obj/item/weapon/rcd)
 
 	req_access = list(access_ce)
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
 
 /obj/item/weapon/rig/ce/equipped
 
@@ -231,7 +235,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/medical
 	glove_type = /obj/item/clothing/gloves/rig/medical
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical,/obj/item/roller )
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr)
 
 	req_access = list(access_medical_equip)
 
@@ -268,6 +272,7 @@
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/vision/medhud,
+		/obj/item/rig_module/device/defib,
 		/obj/item/rig_module/cooling_unit
 		)
 
@@ -276,7 +281,7 @@
 	suit_type = "hazard hardsuit"
 	desc = "A security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
-	armor = list(melee = 60, bullet = 40, laser = 40, energy = 15, bomb = 60, bio = 100, rad = 30)
+	armor = list(melee = 60, bullet = 40, laser = 40, energy = 15, bomb = 60, bio = 100, rad = 15)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_BLIND
@@ -317,7 +322,7 @@
 	suit_type = "null hardsuit"
 	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you're wearing nothing at all."
 	icon_state = "null_rig"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 20)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 10)
 	online_slowdown = 0
 	offline_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY //You're wearing a flash protective space suit without light compensation, think it makes sense
@@ -326,6 +331,8 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/zero
 	boot_type = null
 	glove_type = null
+	max_pressure_protection = null
+	min_pressure_protection = 0
 
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)

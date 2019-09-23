@@ -11,7 +11,6 @@
 	origin_tech = list(TECH_COMBAT = 4)
 	attack_verb = list("flicked", "whipped", "lashed")
 
-
 /obj/item/weapon/melee/whip/abyssal
 	name = "abyssal whip"
 	desc = "A weapon from the abyss. Requires 70 attack to wield."
@@ -24,6 +23,16 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 4)
 	attack_verb = list("flicked", "whipped", "lashed")
+
+/obj/item/weapon/melee/whip/tail
+	name = "drake's tail"
+	desc = "The tail of a large scaled creature, obviously evolved as some kind of whipping weapon. It's razor sharp and incredibly tough, though relatively lightweight."
+	icon_state = "tailwhip"
+	item_state = "whip"
+	obj_flags = null
+	force = 19
+	edge = TRUE
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5)
 
 /obj/item/weapon/melee/whip/chainofcommand
 	name = "chain of command"

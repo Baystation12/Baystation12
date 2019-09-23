@@ -83,7 +83,6 @@
 		return
 
 	for (var/obj/item/weapon/ore/O in contents)
-		contents -= O
 		O.dropInto(loc)
 	to_chat(usr, "<span class='notice'>You empty the ore box</span>")
 

@@ -18,6 +18,7 @@
 	description = "Yarr."
 	suffixes = list("smugglers/smugglers.dmm")
 	cost = 1
+	generate_mining_by_z = 1
 	area_usage_test_exempted_root_areas = list(/area/smugglers)
 	apc_test_exempt_areas = list(
 		/area/smugglers/base = NO_SCRUBBER,
@@ -95,7 +96,7 @@
 	name = "Random Ammo Magazine"
 	desc = "This is smuggler's random ammo magazine."
 	icon = 'icons/obj/ammo.dmi'
-	icon_state = "45-10"
+	icon_state = "magnum"
 
 /obj/random/ammo_magazine_smug/spawn_choices()
 	return list(

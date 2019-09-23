@@ -16,7 +16,7 @@ GLOBAL_VAR(carp_events)
 /datum/event/carp_migration/announce()
 	var/announcement = ""
 	if(no_show)
-		announcement = "A massive migration of unknown biological entities has been detected in the vicinity of the [location_name()] gravity well. Caution is advised."
+		announcement = "A large migration of unknown biological entities has been detected in the vicinity of the [location_name()] gravity well. Caution is advised."
 	else if(severity == EVENT_LEVEL_MAJOR)
 		announcement = "A massive migration of unknown biological entities has been captured by the [location_name()] gravity well. Exercise external operations with caution."
 	else

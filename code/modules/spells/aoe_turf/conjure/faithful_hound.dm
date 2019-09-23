@@ -20,3 +20,4 @@
 
 /spell/aoe_turf/conjure/faithful_hound/tower
 	charge_max = 1
+	spell_flags = 0

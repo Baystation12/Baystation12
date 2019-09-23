@@ -45,7 +45,7 @@
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
 		var/datum/gas_mixture/sharkmaw_phoron = new
-		sharkmaw_phoron.adjust_gas("phoron",  10)
+		sharkmaw_phoron.adjust_gas(GAS_PHORON,  10)
 		environment.merge(sharkmaw_phoron)
 		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
 
@@ -87,7 +87,6 @@
 	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
 	icon_state = "net_f"
 	anchored = 1
-	plane = ABOVE_TURF_PLANE//on the floor
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	var/health = 100
 
@@ -148,7 +147,6 @@ obj/structure/net/Initialize(var/mapload)
 /obj/structure/net/net_wall
 	icon_state = "net_w"
 	density = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/structure/net/net_wall/Initialize(var/mapload)

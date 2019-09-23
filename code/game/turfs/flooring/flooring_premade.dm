@@ -3,7 +3,7 @@
 	name = "plating"
 	icon = 'icons/turf/flooring/plating.dmi'
 	icon_state = "plating"
-	plane = PLATING_PLANE
+	layer = PLATING_LAYER
 
 /turf/simulated/floor/bluegrid
 	name = "mainframe floor"
@@ -42,27 +42,32 @@
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"
+	color = WOOD_COLOR_GENERIC
 	initial_flooring = /decl/flooring/wood
 
 /turf/simulated/floor/wood/mahogany
-	icon_state = "mahogany"
+	color = WOOD_COLOR_RICH
 	initial_flooring = /decl/flooring/wood/mahogany
 
 /turf/simulated/floor/wood/maple
-	icon_state = "maple"
+	color = WOOD_COLOR_PALE
 	initial_flooring = /decl/flooring/wood/maple
 
 /turf/simulated/floor/wood/ebony
-	icon_state = "ebony"
+	color = WOOD_COLOR_BLACK
 	initial_flooring = /decl/flooring/wood/ebony
 
 /turf/simulated/floor/wood/walnut
-	icon_state = "walnut"
+	color = WOOD_COLOR_CHOCOLATE
 	initial_flooring = /decl/flooring/wood/walnut
 
 /turf/simulated/floor/wood/bamboo
-	icon_state = "maple"
+	color = WOOD_COLOR_PALE2
 	initial_flooring = /decl/flooring/wood/bamboo
+
+/turf/simulated/floor/wood/yew
+	color = WOOD_COLOR_YELLOW
+	initial_flooring = /decl/flooring/wood/yew
 
 /turf/simulated/floor/grass
 	name = "grass patch"
@@ -85,6 +90,16 @@
 	name = "pale blue carpet"
 	icon_state = "blue2"
 	initial_flooring = /decl/flooring/carpet/blue2
+
+/turf/simulated/floor/carpet/blue3
+	name = "sea blue carpet"
+	icon_state = "blue3"
+	initial_flooring = /decl/flooring/carpet/blue3
+
+/turf/simulated/floor/carpet/magenta
+	name = "magenta carpet"
+	icon_state = "magenta"
+	initial_flooring = /decl/flooring/carpet/magenta
 
 /turf/simulated/floor/carpet/purple
 	name = "purple carpet"
@@ -116,35 +131,35 @@
 	initial_gas = null
 
 /turf/simulated/floor/reinforced/airmix
-	initial_gas = list("oxygen" = MOLES_O2ATMOS, "nitrogen" = MOLES_N2ATMOS)
+	initial_gas = list(GAS_OXYGEN = MOLES_O2ATMOS, GAS_NITROGEN = MOLES_N2ATMOS)
 
 /turf/simulated/floor/reinforced/nitrogen
-	initial_gas = list("nitrogen" = ATMOSTANK_NITROGEN)
+	initial_gas = list(GAS_NITROGEN = ATMOSTANK_NITROGEN)
 
 /turf/simulated/floor/reinforced/hydrogen
-	initial_gas = list("hydrogen" = ATMOSTANK_HYDROGEN)
+	initial_gas = list(GAS_HYDROGEN = ATMOSTANK_HYDROGEN)
 
 /turf/simulated/floor/reinforced/oxygen
-	initial_gas = list("oxygen" = ATMOSTANK_OXYGEN)
+	initial_gas = list(GAS_OXYGEN = ATMOSTANK_OXYGEN)
 
 /turf/simulated/floor/reinforced/phoron
-	initial_gas = list("phoron" = ATMOSTANK_PHORON)
+	initial_gas = list(GAS_PHORON = ATMOSTANK_PHORON)
 
 /turf/simulated/floor/reinforced/nitrogen/engine
 	name = "engine floor"
-	initial_gas = list("nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/reinforced/phoron/fuel
-	initial_gas = list("phoron" = ATMOSTANK_PHORON_FUEL)
+	initial_gas = list(GAS_PHORON = ATMOSTANK_PHORON_FUEL)
 
 /turf/simulated/floor/reinforced/hydrogen/fuel
-	initial_gas = list("hydrogen" = ATMOSTANK_HYDROGEN_FUEL)
+	initial_gas = list(GAS_HYDROGEN = ATMOSTANK_HYDROGEN_FUEL)
 
 /turf/simulated/floor/reinforced/carbon_dioxide
-	initial_gas = list("carbon_dioxide" = ATMOSTANK_CO2)
+	initial_gas = list(GAS_CO2 = ATMOSTANK_CO2)
 
 /turf/simulated/floor/reinforced/n20
-	initial_gas = list("sleeping_agent" = ATMOSTANK_NITROUSOXIDE)
+	initial_gas = list(GAS_N2O = ATMOSTANK_NITROUSOXIDE)
 
 
 /turf/simulated/floor/cult
@@ -317,7 +332,7 @@
 	temperature = TCMB
 
 /turf/simulated/floor/greengrid/nitrogen
-	initial_gas = list("nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD)
 
 // Placeholders
 /turf/simulated/floor/airless/lava
@@ -368,6 +383,9 @@
 	name = "water"
 	icon_state = "water"
 	turf_flags = TURF_IS_WET
+
+/turf/simulated/floor/beach/water/is_flooded(lying_mob, absolute)
+	. = absolute ? ..() : lying_mob
 
 /turf/simulated/floor/beach/water/update_dirt()
 	return	// Water doesn't become dirty

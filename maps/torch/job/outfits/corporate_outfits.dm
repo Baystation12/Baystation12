@@ -21,10 +21,6 @@
 	..()
 	BACKPACK_OVERRIDE_RESEARCH
 
-/decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych
-	name = OUTFIT_JOB_NAME("Psychologist - Torch")
-	uniform = /obj/item/clothing/under/rank/psych
-
 /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")
 	uniform = /obj/item/clothing/under/rank/scientist

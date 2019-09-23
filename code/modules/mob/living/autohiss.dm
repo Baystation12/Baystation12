@@ -22,8 +22,8 @@
 			"x" = list("ks", "kss", "ksss")
 		)
 	autohiss_exempt = list(
-					LANGUAGE_UNATHI,
-					LANGUAGE_YEOSA
+					LANGUAGE_UNATHI_SINTA,
+					LANGUAGE_UNATHI_YEOSA
 	)
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)

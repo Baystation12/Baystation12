@@ -135,7 +135,7 @@
 		src.druggy = max(0, src.druggy)
 
 	//update the state of modules and components here
-	if (src.stat != 0)
+	if (src.stat != CONSCIOUS)
 		uneq_all()
 
 	if(silicon_radio)
@@ -144,7 +144,7 @@
 		else
 			silicon_radio.on = 1
 
-	if(is_component_functioning("camera"))
+	if(isnull(components["camera"]) || is_component_functioning("camera"))
 		src.blinded = 0
 	else
 		src.blinded = 1

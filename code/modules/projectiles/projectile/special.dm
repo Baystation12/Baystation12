@@ -132,7 +132,7 @@
 		if(ishuman(target)) //These rays make plantmen fat.
 			var/mob/living/carbon/human/H = M
 			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
-				H.nutrition += 30
+				H.adjust_nutrition(30)
 		else if (istype(target, /mob/living/carbon/))
 			M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 		else
@@ -169,3 +169,33 @@
 	var/mob/living/L = target
 	if(L.reagents)
 		L.reagents.add_reagent(/datum/reagent/toxin/venom, 5)
+
+/obj/item/missile
+	icon = 'icons/obj/grenade.dmi'
+	icon_state = "missile"
+	var/primed = null
+	throwforce = 15
+
+/obj/item/missile/throw_impact(atom/hit_atom)
+	if(primed)
+		explosion(hit_atom, 0, 1, 2, 4)
+		qdel(src)
+	else
+		..()
+	return
+
+/obj/item/projectile/hotgas
+	name = "gas vent"
+	icon_state = null
+	damage_type = BURN
+	damage_flags = 0
+	life_span = 3
+	silenced = TRUE
+
+/obj/item/projectile/hotgas/on_hit(atom/target, blocked, def_zone)
+	. = ..()
+	if(isliving(target))
+		var/mob/living/L = target
+		to_chat(target, SPAN_WARNING("You feel a wave of heat wash over you!"))
+		L.adjust_fire_stacks(rand(5,8))
+		L.IgniteMob()

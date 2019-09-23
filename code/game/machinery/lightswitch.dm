@@ -59,9 +59,11 @@
 		update_icon()
 		return 1
 
-/obj/machinery/light_switch/attack_hand(mob/user)
-	playsound(src, "switch", 30)
-	set_state(!on)
+/obj/machinery/light_switch/interface_interact(mob/user)
+	if(CanInteract(user, DefaultTopicState()))
+		playsound(src, "switch", 30)
+		set_state(!on)
+		return TRUE
 
 /obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
 	if(istype(tool, /obj/item/weapon/screwdriver))

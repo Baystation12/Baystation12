@@ -13,6 +13,7 @@
 	var/open_file
 	var/error
 	usage_flags = PROGRAM_ALL
+	category = PROG_UTIL
 
 /datum/computer_file/program/filemanager/Topic(href, href_list)
 	if(..())
@@ -26,7 +27,7 @@
 		var/newname = sanitize(input(usr, "Enter file name or leave blank to cancel:", "File rename"))
 		if(!newname)
 			return 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
 		var/datum/computer_file/data/F = new/datum/computer_file/data()
@@ -35,7 +36,7 @@
 		HDD.store_file(F)
 	if(href_list["PRG_deletefile"])
 		. = 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
 		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_deletefile"])
@@ -44,7 +45,7 @@
 		HDD.remove_file(F)
 	if(href_list["PRG_usbdeletefile"])
 		. = 1
-		var/obj/item/weapon/computer_hardware/hard_drive/RHDD = computer.portable_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/RHDD = computer.portable_drive
 		if(!RHDD)
 			return 1
 		var/datum/computer_file/F = RHDD.find_file_by_name(href_list["PRG_usbdeletefile"])
@@ -57,7 +58,7 @@
 		error = null
 	if(href_list["PRG_clone"])
 		. = 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
 		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_clone"])
@@ -67,7 +68,7 @@
 		HDD.store_file(C)
 	if(href_list["PRG_rename"])
 		. = 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
 		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_rename"])
@@ -80,7 +81,7 @@
 		. = 1
 		if(!open_file)
 			return 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
@@ -114,7 +115,7 @@
 		. = 1
 		if(!open_file)
 			return 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
 		if(!HDD)
 			return 1
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
@@ -123,13 +124,13 @@
 		if(!computer.nano_printer)
 			error = "Missing Hardware: Your computer does not have required hardware to complete this operation."
 			return 1
-		if(!computer.nano_printer.print_text(pencode2html(F.stored_data),F.filename,F.papertype, F.metadata))
+		if(!computer.nano_printer.print_text(digitalPencode2html(F.stored_data),F.filename,F.papertype, F.metadata))
 			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return 1
 	if(href_list["PRG_copytousb"])
 		. = 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
-		var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = computer.portable_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = computer.portable_drive
 		if(!HDD || !RHDD)
 			return 1
 		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_copytousb"])
@@ -139,8 +140,8 @@
 		RHDD.store_file(C)
 	if(href_list["PRG_copyfromusb"])
 		. = 1
-		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
-		var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = computer.portable_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
+		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = computer.portable_drive
 		if(!HDD || !RHDD)
 			return 1
 		var/datum/computer_file/F = RHDD.find_file_by_name(href_list["PRG_copyfromusb"])
@@ -159,8 +160,8 @@
 	var/datum/computer_file/program/filemanager/PRG
 	PRG = program
 
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD
-	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD
+	var/obj/item/weapon/stock_parts/computer/hard_drive/HDD
+	var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD
 	if(PRG.error)
 		data["error"] = PRG.error
 	if(PRG.open_file)

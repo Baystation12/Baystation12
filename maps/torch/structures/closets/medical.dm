@@ -17,10 +17,13 @@
 /decl/closet_appearance/secure_closet/torch/medical/cmo
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_BABY_BLUE,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_BABY_BLUE,
-		"medical" = COLOR_GOLD
+		"medical" = COLOR_CLOSET_GOLD
 	)
+
+/obj/structure/closet/secure_closet/counselor
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/medical
 
 /obj/structure/closet/secure_closet/CMO_torch
 	name = "chief medical officer's locker"
@@ -37,6 +40,7 @@
 		/obj/item/device/radio/headset/heads/cmo,
 		/obj/item/device/radio/headset/heads/cmo/alt,
 		/obj/item/device/flash,
+		/obj/item/weapon/gun/energy/confuseray,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/reagent_containers/hypospray/vial,
 		/obj/item/weapon/storage/fancy/vials,

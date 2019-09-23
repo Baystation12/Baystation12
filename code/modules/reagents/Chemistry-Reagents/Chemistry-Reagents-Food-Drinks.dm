@@ -7,8 +7,10 @@
 	reagent_state = SOLID
 	metabolism = REM * 4
 	var/nutriment_factor = 10 // Per unit
+	var/hydration_factor = 0 // Per unit
 	var/injectable = 0
 	color = "#664330"
+	value = 0.1
 
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
@@ -46,9 +48,14 @@
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
 /datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
-	switch(alien)
-		if(IS_UNATHI) removed *= 0.1 // Unathi get most of their nutrition from meat.
-	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	var/nut_removed = removed
+	var/hyd_removed = removed
+	if(alien == IS_UNATHI)
+		removed *= 0.1 // Unathi get most of their nutrition from meat.
+	if(nutriment_factor)
+		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
+	if(hydration_factor)
+		M.adjust_hydration(hydration_factor * hyd_removed) // For thirst
 
 /datum/reagent/nutriment/glucose
 	name = "Glucose"
@@ -72,7 +79,7 @@
 /datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
 		if(IS_UNATHI) removed *= 2.25
-	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	M.adjust_nutrition(nutriment_factor * removed)
 
 /datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien && alien == IS_SKRELL)
@@ -314,9 +321,10 @@
 	reagent_state = LIQUID
 	color = "#bbeda4"
 	overdose = REAGENTS_OVERDOSE
+	value = 0.11
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition = max(M.nutrition - 10 * removed, 0)
+	M.adjust_nutrition(-10)
 
 /* Non-food stuff like condiments */
 
@@ -327,6 +335,7 @@
 	reagent_state = SOLID
 	color = "#ffffff"
 	overdose = REAGENTS_OVERDOSE
+	value = 0.11
 
 /datum/reagent/blackpepper
 	name = "Black Pepper"
@@ -334,6 +343,7 @@
 	taste_description = "pepper"
 	reagent_state = SOLID
 	color = "#000000"
+	value = 0.1
 
 /datum/reagent/enzyme
 	name = "Universal Enzyme"
@@ -343,6 +353,7 @@
 	reagent_state = LIQUID
 	color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
+	value = 0.2
 
 /datum/reagent/frostoil
 	name = "Frost Oil"
@@ -351,6 +362,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#07aab2"
+	value = 0.2
 
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -373,6 +385,7 @@
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
+	value = 0.2
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -404,7 +417,7 @@
 	taste_description = "scorching agony"
 	taste_mult = 10
 	reagent_state = LIQUID
-	touch_met = 50 // Get rid of it quickly
+	touch_met = 5 // Get rid of it quickly
 	color = "#b31008"
 	agony_dose = 0.5
 	agony_amount = 4
@@ -483,7 +496,7 @@
 	else
 		M.apply_effect(6, PAIN, 0)
 		if(prob(5))
-			M.visible_message("<span class='danger'>You feel like your insides are burning!</span>")
+			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
 			M.Stun(2)
 	if(istype(M, /mob/living/carbon/slime))
@@ -514,17 +527,22 @@
 	reagent_state = LIQUID
 	color = "#e78108"
 	var/nutrition = 0 // Per unit
+	var/hydration = 6 // Per unit
 	var/adj_dizzy = 0 // Per tick
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
 	var/adj_temp = 0
+	value = 0.1
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition += nutrition * removed
+	if(nutrition)
+		M.adjust_nutrition(nutrition * removed)
+	if(hydration)
+		M.adjust_hydration(hydration * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
@@ -778,7 +796,6 @@
 
 	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
-	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -852,7 +869,6 @@
 
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
-	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/sodawater
 	name = "Soda Water"
@@ -2105,7 +2121,6 @@
 
 	glass_name = "black tea"
 	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
-	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()

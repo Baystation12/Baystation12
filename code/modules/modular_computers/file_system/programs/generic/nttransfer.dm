@@ -13,6 +13,7 @@ var/global/nttransfer_uid = 0
 	network_destination = "other device via P2P tunnel"
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/computer_nttransfer/
+	category = PROG_UTIL
 
 	var/error = ""										// Error screen
 	var/server_password = ""							// Optional password to download the file.

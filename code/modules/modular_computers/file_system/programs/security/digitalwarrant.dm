@@ -14,6 +14,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	available_on_ntnet = 1
 	required_access = access_security
 	nanomodule_path = /datum/nano_module/digitalwarrant/
+	category = PROG_SEC
 
 /datum/nano_module/digitalwarrant/
 	name = "Warrant Assistant"

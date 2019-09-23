@@ -34,7 +34,7 @@ GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
 	if(GLOB.moved_event.has_listeners(am))
 		GLOB.moved_event.register(src, am, /atom/movable/proc/recursive_move)
 
-/atom/movable/Exited(var/atom/movable/am, atom/old_loc)
+/atom/movable/Exited(var/atom/movable/am, atom/new_loc)
 	. = ..()
 	GLOB.moved_event.unregister(src, am, /atom/movable/proc/recursive_move)
 

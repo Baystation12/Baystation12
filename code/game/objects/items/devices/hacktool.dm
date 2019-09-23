@@ -80,6 +80,7 @@
 
 /datum/topic_state/default/must_hack
 	var/obj/item/device/multitool/hacktool/hacktool
+	check_access = FALSE
 
 /datum/topic_state/default/must_hack/New(var/hacktool)
 	src.hacktool = hacktool

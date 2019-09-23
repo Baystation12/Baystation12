@@ -43,15 +43,12 @@
 			continue // No (de)gravitizing space.
 		localareas |= A
 
-/obj/machinery/computer/gravity_control_computer/attack_ai(mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/computer/gravity_control_computer/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/gravity_control_computer/attack_hand(mob/user as mob)
+/obj/machinery/computer/gravity_control_computer/interact(mob/user)
 	user.set_machine(src)
-	add_fingerprint(user)
-
-	if(stat & (BROKEN|NOPOWER))
-		return
 
 	updatemodules()
 

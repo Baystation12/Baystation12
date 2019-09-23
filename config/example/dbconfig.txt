@@ -1,5 +1,8 @@
 # MySQL Connection Configuration
 
+# First of all, should SQL be used at all. Unhash next line, if yes
+# ENABLED
+
 # Server the MySQL database can be found at
 # Examples: localhost, 200.135.5.43, www.mysqldb.com, etc.
 ADDRESS localhost
@@ -20,7 +23,3 @@ PASSWORD mypassword
 FEEDBACK_DATABASE test
 FEEDBACK_LOGIN mylogin
 FEEDBACK_PASSWORD mypassword
-
-# Track population and death statistics
-# Comment this out to disable
-#ENABLE_STAT_TRACKING

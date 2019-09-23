@@ -41,7 +41,7 @@
 	var/check_records = 1	//checks if a security record exists at all
 	var/check_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
 	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
-	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
+	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms
 	var/check_synth	 = 0 	//if active, will shoot at anything not an AI or cyborg
 	var/ailock = 0 			// AI cannot use this
 
@@ -192,17 +192,9 @@ var/list/turret_icons
 
 	return 0
 
-/obj/machinery/porta_turret/attack_ai(mob/user)
-	if(isLocked(user))
-		return
-
+/obj/machinery/porta_turret/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/porta_turret/attack_hand(mob/user)
-	if(isLocked(user))
-		return
-
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/porta_turret/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -437,8 +429,6 @@ var/list/turret_icons
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
 
 /obj/machinery/porta_turret/Process()
-	//the main machinery process
-
 	if(stat & (NOPOWER|BROKEN))
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already
 		popDown()
@@ -508,9 +498,6 @@ var/list/turret_icons
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
-
-	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
-		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
 		if(assess_perp(L) < 4)

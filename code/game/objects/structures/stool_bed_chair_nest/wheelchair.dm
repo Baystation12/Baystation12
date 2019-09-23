@@ -18,7 +18,6 @@
 	..()
 	overlays.Cut()
 	var/image/O = image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", dir = src.dir)
-	O.plane = ABOVE_HUMAN_PLANE
 	O.layer = ABOVE_HUMAN_LAYER
 	overlays += O
 	if(buckled_mob)
@@ -134,7 +133,8 @@
 			to_chat(usr, "You let go of \the [name]'s handles.")
 			pulling.pulledby = null
 			pulling = null
-		return
+		return TRUE
+	return FALSE
 
 /obj/structure/bed/chair/wheelchair/Bump(atom/A)
 	..()

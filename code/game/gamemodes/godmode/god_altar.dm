@@ -23,7 +23,7 @@
 			G.affecting.dropInto(loc)
 			G.affecting.Weaken(1)
 			user.visible_message("<span class='warning'>\The [user] throws \the [G.affecting] onto \the [src]!</span>")
-			user.drop_from_inventory(G)
+			qdel(G)
 	else ..()
 
 /obj/structure/deity/altar/Process()

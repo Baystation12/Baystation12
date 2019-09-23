@@ -202,6 +202,8 @@ function run_code_tests {
     shopt -s globstar
     run_test "check travis contains all maps" "scripts/validateTravisContainsAllMaps.sh"
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
+    run_test_fail "maps contain no layer adjustments" "grep 'layer = ' maps/**/*.dmm"
+    run_test_fail "maps contain no plane adjustments" "grep 'plane = ' maps/**/*.dmm"
     run_test_fail "ensure nanoui templates unique" "find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano"
     run_test_fail "no invalid spans" "grep -En \"<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>\" **/*.dm"
     run_test "code quality checks" "test/check-paths.sh"
@@ -211,21 +213,7 @@ function run_code_tests {
     run_test "check color hex" "python3 tools/ColorHexChecker/color-hex-checker.py ."
     run_test "check punctuation" "python2 tools/PunctuationChecker/punctuation-checker.py ."
     run_test "check icon state limit" "python2 tools/dmitool/check_icon_state_limit.py ."
-    run_test_ci "check changelog builds" "python2 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
-}
-
-function run_web_tests {
-    msg "*** running web tests ***"
-    find_web_deps
-    msg "installing web tools"
-    if [[ "$CI" == "true" ]]; then
-        rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
-        npm install --no-spin -g gulp-cli
-    fi
-
-    msg "installing node modules"
-    cd tgui && npm install --no-spin && cd ..
-    run_test "check tgui builds" "cd tgui && gulp; cd .."
+    run_test_ci "check changelog builds" "python3 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
 function run_byond_tests {
@@ -242,7 +230,7 @@ function run_byond_tests {
         source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
     run_test_ci "check globals build" "python3 tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
-    run_test "check globals unchanged" "md5sum -c - <<< '5cb136b2982239611648b9ee9cb7084d *code/_helpers/global_access.dm'"
+    run_test "check globals unchanged" "md5sum -c - <<< '7c5e15cbffb4a7792c2c60179176ab90 *code/_helpers/global_access.dm'"
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"
     run_test "run unit tests" "DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt"
@@ -256,7 +244,6 @@ function run_byond_tests {
 
 function run_all_tests {
     run_code_tests
-    run_web_tests
     run_byond_tests
 }
 
@@ -272,9 +259,6 @@ function run_configured_tests {
             ;;
         "MAP")
             run_byond_tests
-            ;;
-        "WEB")
-            run_web_tests
             ;;
         "CODE")
             run_code_tests

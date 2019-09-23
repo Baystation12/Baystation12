@@ -7,13 +7,13 @@
 	color = COLOR_PALE_GREEN_GRAY
 	detail_color = COLOR_GREEN
 
-	var/temp_access = list() //to prevent agent cards stealing access as permanent
+	var/list/temp_access = list() //to prevent agent cards stealing access as permanent
 	var/expiration_time = 0
 	var/reason = "NOT SPECIFIED"
 
 /obj/item/weapon/card/id/guest/GetAccess()
 	if (world.time > expiration_time)
-		return access
+		return ..()
 	else
 		return temp_access
 
@@ -71,13 +71,11 @@
 		return
 	..()
 
-/obj/machinery/computer/guestpass/attack_ai(var/mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/computer/guestpass/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/guestpass/attack_hand(var/mob/user as mob)
-	if(..())
-		return
-
+/obj/machinery/computer/guestpass/interact(var/mob/user)
 	user.set_machine(src)
 	var/dat
 
@@ -187,5 +185,3 @@
 					to_chat(user, "<span class='warning'>Cannot issue pass without issuing ID.</span>")
 				else if(!accesses.len)
 					to_chat(user, "<span class='warning'>Cannot issue pass without at least one granted access permission.</span>")
-	if(.)
-		attack_hand(user)

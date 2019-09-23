@@ -94,13 +94,13 @@ Subtypes
 /datum/terminal_command/hwinfo/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(text == "hwinfo")
 		. = list("Hardware Detected:")
-		for(var/obj/item/weapon/computer_hardware/ch in  terminal.computer.get_all_components())
+		for(var/obj/item/weapon/stock_parts/computer/ch in  terminal.computer.get_all_components())
 			. += ch.name
 		return
 	if(length(text) < 8)
 		return "hwinfo: Improper syntax. Use hwinfo \[name\]."
 	text = copytext(text, 8)
-	var/obj/item/weapon/computer_hardware/ch = terminal.computer.find_hardware_by_name(text)
+	var/obj/item/weapon/stock_parts/computer/ch = terminal.computer.find_hardware_by_name(text)
 	if(!ch)
 		return "hwinfo: No such hardware found."
 	ch.diagnostics(user)
@@ -224,7 +224,7 @@ Subtypes
 
 /datum/terminal_command/proxy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/obj/item/modular_computer/comp = terminal.computer
-	if(!comp || !comp.get_ntnet_status())
+	if(!comp || !comp.network_card || !comp.network_card.check_functionality())
 		return "proxy: Error; check networking hardware."
 	if(text == "proxy")
 		if(!comp.network_card.proxy_id)
@@ -235,6 +235,8 @@ Subtypes
 			return "proxy: Error; this device is not using a proxy."
 		comp.network_card.proxy_id = null
 		return "proxy: Device proxy cleared."
+	if(!comp.network_card || !comp.network_card.check_functionality() || !comp.get_ntnet_status())
+		return "proxy: Error; check networking hardware."
 	var/syntax_error = "proxy: Invalid input. Enter man proxy for syntax help."
 	if(length(text) < 10)
 		return syntax_error
@@ -244,6 +246,7 @@ Subtypes
 	if(!id)
 		return syntax_error
 	var/obj/item/modular_computer/target = ntnet_global.get_computer_by_nid(id)
+	if(target == comp) return "proxy: Cannot setup a device to be its own proxy"
 	if(!target || !target.enabled || !target.get_ntnet_status())
 		return "proxy: Error; cannot locate target device."
 	if(target.hard_drive)

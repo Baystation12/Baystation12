@@ -252,7 +252,6 @@ I said no!
 
 /datum/recipe/muffin
 	reagents = list(/datum/reagent/nutriment/batter/cakebatter = 10)
-
 	result = /obj/item/weapon/reagent_containers/food/snacks/muffin
 
 /datum/recipe/eggplantparm

@@ -47,6 +47,8 @@
 	var/list/break_chance_table = list(100)
 	var/breakability = 2
 
+	var/can_grab_self = 1
+
 	// The names of different intents for use in attack logs
 	var/help_action = "help intent"
 	var/disarm_action = "disarm intent"
@@ -111,6 +113,9 @@
 	process_effect(G)
 
 /datum/grab/proc/throw_held(var/obj/item/grab/G)
+	if(G.assailant == G.affecting)
+		return
+
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	if(can_throw)
@@ -125,7 +130,6 @@
 		if(!istype(G))	return
 		qdel(G)
 		return
-	return null
 
 /datum/grab/proc/hit_with_grab(var/obj/item/grab/G)
 	if(downgrade_on_action)
@@ -273,7 +277,7 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
-		to_chat(G.assailant, "<span class='warning'>You can't resist in your current state!</span>")
+		to_chat(G.affecting, "<span class='warning'>You can't resist in your current state!</span>")
 	var/skill_mod = Clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
 	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
 
@@ -283,7 +287,7 @@
 		break_strength--
 
 	if(break_strength < 1)
-		to_chat(G.assailant, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
+		to_chat(G.affecting, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
 		return
 
 	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]

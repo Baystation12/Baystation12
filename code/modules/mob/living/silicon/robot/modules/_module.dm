@@ -11,8 +11,7 @@
 	var/networks = list()
 	var/languages = list(
 		LANGUAGE_HUMAN_EURO = 1,
-		LANGUAGE_UNATHI = 0,
-		LANGUAGE_SIIK_MAAS = 0,
+		LANGUAGE_UNATHI_SINTA = 0,
 		LANGUAGE_SKRELLIAN = 0,
 		LANGUAGE_GUTTER = 1,
 		LANGUAGE_SIGN = 0,
@@ -40,6 +39,7 @@
 	// Please note that due to how locate() works, equipments that are subtypes of other equipment need to be placed after their closest parent
 	var/list/equipment = list()
 	var/list/synths = list()
+	var/list/skills = list() // Skills that this module grants. Other skills will remain at minimum levels.
 
 /obj/item/weapon/robot_module/Initialize()
 
@@ -51,6 +51,7 @@
 
 	R.module = src
 
+	grant_skills(R)
 	add_camera_networks(R)
 	add_languages(R)
 	add_subsystems(R)
@@ -120,10 +121,11 @@
 	remove_languages(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
+	reset_skills(R)
 
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
-	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
+	R.choose_icon(0, R.set_module_sprites(list("Default" = initial(R.icon_state))))
 
 /obj/item/weapon/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)
@@ -208,3 +210,11 @@
 
 /obj/item/weapon/robot_module/proc/handle_emagged()
 	return
+
+/obj/item/weapon/robot_module/proc/grant_skills(var/mob/living/silicon/robot/R)
+	reset_skills(R) // for safety
+	R.buff_skill(skills, buff_type = /datum/skill_buff/robot)
+
+/obj/item/weapon/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
+	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
+		buff.remove()

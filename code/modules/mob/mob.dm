@@ -2,6 +2,7 @@
 	STOP_PROCESSING(SSmobs, src)
 	GLOB.dead_mob_list_ -= src
 	GLOB.living_mob_list_ -= src
+	GLOB.player_list -= src
 	unset_machine()
 	QDEL_NULL(hud_used)
 	if(istype(skillset))
@@ -47,7 +48,10 @@
 /mob/Initialize()
 	. = ..()
 	skillset = new skillset(src)
-	move_intent = decls_repository.get_decl(move_intent)
+	if(!move_intent)
+		move_intent = move_intents[1]
+	if(ispath(move_intent))
+		move_intent = decls_repository.get_decl(move_intent)
 	START_PROCESSING(SSmobs, src)
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -182,7 +186,7 @@
 		var/turf/T = loc
 		. += T.movement_delay
 
-	if ((drowsyness > 0) && !MOVING_DELIBERATELY(src))
+	if (drowsyness > 0)
 		. += 6
 	if(lying) //Crawling, it's slower
 		. += (8 + ((weakened * 3) + (confused * 2)))
@@ -350,8 +354,6 @@
 	set category = "Object"
 	set src = usr
 
-	if(istype(loc,/obj/mecha)) return
-
 	if(hand)
 		var/obj/item/W = l_hand
 		if (W)
@@ -366,37 +368,6 @@
 			update_inv_r_hand()
 		else
 			attack_empty_hand(BP_R_HAND)
-
-/mob/verb/memory()
-	set name = "Notes"
-	set category = "IC"
-	if(mind)
-		mind.show_memory(src)
-	else
-		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
-/mob/verb/add_memory(msg as message)
-	set name = "Add Note"
-	set category = "IC"
-
-	msg = sanitize(msg)
-
-	if(mind)
-		mind.store_memory(msg)
-	else
-		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
-/mob/proc/store_memory(msg as message, popup, sane = 1)
-	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-
-	if (sane)
-		msg = sanitize(msg)
-
-	if (length(memory) == 0)
-		memory += msg
-	else
-		memory += "<BR>[msg]"
-
-	if (popup)
-		memory()
 
 /mob/proc/update_flavor_text()
 	set src in usr
@@ -419,13 +390,6 @@
 			return "<span class='notice'>[msg]</span>"
 		else
 			return "<span class='notice'>[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a></span>"
-
-/*
-/mob/verb/help()
-	set name = "Help"
-	src << browse('html/help.html', "window=help")
-	return
-*/
 
 /client/verb/changes()
 	set name = "Changelog"
@@ -453,7 +417,7 @@
 	src << browse('html/changelog.html', "window=changes;size=675x650")
 	if(prefs.lastchangelog != changelog_hash)
 		prefs.lastchangelog = changelog_hash
-		prefs.save_preferences()
+		SScharacter_setup.queue_preferences_save(prefs)
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
 
 /mob/verb/cancel_camera()
@@ -704,7 +668,7 @@
 
 /mob/proc/reset_layer()
 	if(lying)
-		plane = LYING_MOB_PLANE
+		plane = DEFAULT_PLANE
 		layer = LYING_MOB_LAYER
 	else
 		reset_plane_and_layer()
@@ -934,12 +898,7 @@
 
 //Check for brain worms in head.
 /mob/proc/has_brain_worms()
-
-	for(var/I in contents)
-		if(istype(I,/mob/living/simple_animal/borer))
-			return I
-
-	return 0
+	return locate(/mob/living/simple_animal/borer) in contents
 
 // A mob should either use update_icon(), overriding this definition, or use update_icons(), not touching update_icon().
 // It should not use both.
@@ -973,8 +932,14 @@
 
 /mob/set_dir()
 	if(facing_dir)
-		if(!canface() || lying || buckled || restrained())
+		if(!canface() || lying || restrained())
 			facing_dir = null
+		else if(buckled)
+			if(buckled.obj_flags & OBJ_FLAG_ROTATABLE)
+				buckled.set_dir(facing_dir)
+				return ..(facing_dir)
+			else
+				facing_dir = null
 		else if(dir != facing_dir)
 			return ..(facing_dir)
 	else
@@ -1113,3 +1078,11 @@
 
 /mob/proc/get_footstep(var/footstep_type)
 	return
+
+/mob/proc/handle_embedded_and_stomach_objects()
+	return
+
+/mob/proc/get_sound_volume_multiplier()
+	if(ear_deaf)
+		return 0
+	return 1

@@ -1,9 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Added several new human languages: Yangyu, a Chinese language (key 2); New Dehlavi, a Hindustani language (key 3); Prototype Standard Arabic, an Arabic language (key 4); and Iberian, a Spanish-Portugese language (key 5)."
-  - tweak: "Changed the way human culture defines assign language. Please double-check your loadout."
-  - tweak: "Sol Common's syllable list has been adjusted."
-  - tweak: "Renamed 'Independent' to Pan-Slavic."
-  - tweak: "The language keys of several languages have changed. Xenophage (4 to L); Borer (x to z); Vox (5 to x)"
-  - rscdel: "Removed 'Lunar' and 'Spacer' languages."

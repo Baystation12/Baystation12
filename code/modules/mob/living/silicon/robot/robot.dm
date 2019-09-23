@@ -11,6 +11,7 @@
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = ~HEAVY //trundle trundle
+	skillset = /datum/skillset/silicon/robot
 
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
@@ -44,10 +45,10 @@
 
 //3 Modules can be activated at any one time.
 	var/obj/item/weapon/robot_module/module = null
-	var/module_active = null
-	var/module_state_1 = null
-	var/module_state_2 = null
-	var/module_state_3 = null
+	var/obj/item/module_active
+	var/obj/item/module_state_1
+	var/obj/item/module_state_2
+	var/obj/item/module_state_3
 
 	silicon_camera = /obj/item/device/camera/siliconcam/robot_camera
 	silicon_radio = /obj/item/device/radio/borg
@@ -94,6 +95,7 @@
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
 	var/intenselight = 0	// Whether cyborg's integrated light was upgraded
+	var/vtec = FALSE
 
 	var/list/robot_verbs_default = list(
 		/mob/living/silicon/robot/proc/sensor_mode,
@@ -106,7 +108,7 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	add_language("Robot Talk", 1)
+	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
 	add_language(LANGUAGE_EAL, 1)
 
 	wires = new(src)
@@ -168,7 +170,7 @@
 	if(ispath(module))
 		new module(src)
 	if(lawupdate)
-		var/new_ai = select_active_ai_with_fewest_borgs((get_turf(src))?.z)
+		var/new_ai = select_active_ai_with_fewest_borgs(get_z(src))
 		if(new_ai)
 			lawupdate = 1
 			connect_to_ai(new_ai)
@@ -251,6 +253,8 @@
 /mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
 	// Clear hands and module icon.
 	uneq_all()
+	if(shown_robot_modules)
+		hud_used.toggle_show_robot_modules()
 	modtype = initial(modtype)
 	if(hands)
 		hands.icon_state = initial(hands.icon_state)
@@ -311,7 +315,6 @@
 		braintype = "Drone"
 	else
 		braintype = "Cyborg"
-
 
 	var/changed_name = ""
 	if(custom_name)
@@ -492,7 +495,7 @@
 	if(opened) // Are they trying to insert something?
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
-			if(!C.installed && istype(W, C.external_type))
+			if(!C.installed && C.accepts_component(W))
 				if(!user.unEquip(W))
 					return
 				C.installed = 1
@@ -508,7 +511,7 @@
 				to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
 				return
 
-	if(isWelder(W))
+	if(isWelder(W) && user.a_intent != I_HURT)
 		if (src == user)
 			to_chat(user, "<span class='warning'>You lack the reach to be able to repair yourself.</span>")
 			return
@@ -540,7 +543,7 @@
 			for(var/mob/O in viewers(user, null))
 				O.show_message(text("<span class='warning'>[user] has fixed some of the burnt wires on [src]!</span>"), 1)
 
-	else if(isCrowbar(W))	// crowbar means open or close the cover - we all know what a crowbar is by now
+	else if(isCrowbar(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
 			if(cell)
 				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
@@ -722,23 +725,8 @@
 /mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
 	return ..(user,Floor(damage/2),attack_message)
 
-/mob/living/silicon/robot/proc/allowed(mob/M)
-	//check if it doesn't require any access at all
-	if(check_access(null))
-		return 1
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		//if they are holding or wearing a card that has access, that works
-		if(check_access(H.get_active_hand()) || check_access(H.wear_id))
-			return 1
-	else if(istype(M, /mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = M
-		if(check_access(R.get_active_hand()) || istype(R.get_active_hand(), /obj/item/weapon/card/robot))
-			return 1
-	return 0
-
-/mob/living/silicon/robot/proc/check_access(obj/item/weapon/card/id/I)
-	return has_access(req_access, I.access)
+/mob/living/silicon/robot/get_req_access()
+	return req_access
 
 /mob/living/silicon/robot/on_update_icon()
 	overlays.Cut()
@@ -844,19 +832,19 @@
 		if(!module_state_1)
 			module_state_1 = O
 			O.hud_layerise()
-			contents += O
+			O.forceMove(src)
 			if(istype(module_state_1,/obj/item/borg/sight))
 				sight_mode |= module_state_1:sight_mode
 		else if(!module_state_2)
 			module_state_2 = O
 			O.hud_layerise()
-			contents += O
+			O.forceMove(src)
 			if(istype(module_state_2,/obj/item/borg/sight))
 				sight_mode |= module_state_2:sight_mode
 		else if(!module_state_3)
 			module_state_3 = O
 			O.hud_layerise()
-			contents += O
+			O.forceMove(src)
 			if(istype(module_state_3,/obj/item/borg/sight))
 				sight_mode |= module_state_3:sight_mode
 		else
@@ -869,13 +857,13 @@
 		if(activated(O))
 			if(module_state_1 == O)
 				module_state_1 = null
-				contents -= O
+				O.forceMove(null)
 			else if(module_state_2 == O)
 				module_state_2 = null
-				contents -= O
+				O.forceMove(null)
 			else if(module_state_3 == O)
 				module_state_3 = null
-				contents -= O
+				O.forceMove(null)
 			else
 				to_chat(src, "Module isn't activated.")
 		else
@@ -943,7 +931,7 @@
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
 	set category = "Silicon Commands"
 	set name = "Reset Identity Codes"
-	set desc = "Scrambles your security and identification codes and resets your current buffers.  Unlocks you and but permenantly severs you from your AI and the robotics console and will deactivate your camera system."
+	set desc = "Scrambles your security and identification codes and resets your current buffers. Unlocks you and but permanently severs you from your AI and the robotics console and will deactivate your camera system."
 
 	var/mob/living/silicon/robot/R = src
 
@@ -1089,8 +1077,7 @@
 				lawupdate = 0
 				disconnect_from_ai()
 				to_chat(user, "You emag [src]'s interface.")
-				message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
-				log_game("[key_name(user)] emagged cyborg [key_name(src)].  Laws overridden.")
+				log_and_message_admins("emagged cyborg [key_name_admin(src)].  Laws overridden.", src)
 				clear_supplied_laws()
 				clear_inherent_laws()
 				laws = new /datum/ai_laws/syndicate_override

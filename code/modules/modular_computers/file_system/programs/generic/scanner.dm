@@ -9,6 +9,7 @@
 	available_on_ntnet = 1
 	usage_flags = PROGRAM_ALL
 	nanomodule_path = /datum/nano_module/program/scanner
+	category = PROG_UTIL
 
 	var/using_scanner = 0	//Whether or not the program is synched with the scanner module.
 	var/data_buffer = ""	//Buffers scan output for saving/viewing.
@@ -97,7 +98,7 @@
 	if(prog.metadata_buffer.len > 0 && prog.paper_type == /obj/item/weapon/paper/bodyscan)
 		data["data_buffer"] = display_medical_data(prog.metadata_buffer.Copy(), user.get_skill_value(SKILL_MEDICAL, TRUE))
 	else
-		data["data_buffer"] = pencode2html(prog.data_buffer)
+		data["data_buffer"] = digitalPencode2html(prog.data_buffer)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

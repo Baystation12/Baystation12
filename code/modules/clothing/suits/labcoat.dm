@@ -2,7 +2,6 @@
 	name = "labcoat"
 	desc = "A suit that protects against minor chemical spills."
 	icon_state = "labcoat_open"
-	//item_state = "labcoat" //Is this even used for anything?
 	icon_open = "labcoat_open"
 	icon_closed = "labcoat"
 	blood_overlay_type = "coat"
@@ -16,7 +15,6 @@
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."
 	icon_state = "labcoat_cmo_open"
-	//item_state = "labcoat_cmo"
 	icon_open = "labcoat_cmo_open"
 	icon_closed = "labcoat_cmo"
 
@@ -31,7 +29,6 @@
 	name = "The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
 	icon_state = "labgreen_open"
-	//item_state = "labgreen"
 	icon_open = "labgreen_open"
 	icon_closed = "labgreen"
 
@@ -78,6 +75,13 @@
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 20, rad = 0)
 	species_restricted = list(SPECIES_IPC)
 
+/obj/item/clothing/suit/storage/toggle/labcoat/foundation
+	name = "\improper Foundation labcoat"
+	desc = "A medical labcoat with a Cuchulain Foundation crest stencilled on the back."
+	icon_state = "labcoat_foundation"
+	icon_open = "labcoat_foundation_open"
+	icon_closed = "labcoat_foundation"
+
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "\improper EXO labcoat"
 	desc = "A coat that protects against minor chemical spills. It has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organisation labcoat."
@@ -91,13 +95,6 @@
 	icon_state = "labcoat_tox_open"
 	icon_open = "labcoat_tox_open"
 	icon_closed = "labcoat_tox"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/science/cso
-	name = "chief science officer's labcoat"
-	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as an Expeditionary Corps labcoat, and purple trim to indicate a Chief Science Officer."
-	icon_state = "labcoat_cso_open"
-	icon_open = "labcoat_cso_open"
-	icon_closed = "labcoat_cso"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
 	name = "\improper NanoTrasen labcoat"
@@ -119,6 +116,13 @@
 	icon_state = "labcoat_zeng_open"
 	icon_open = "labcoat_zeng_open"
 	icon_closed = "labcoat_zeng"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/science/morpheus
+	name = "\improper Morpheus Cyberkinetics labcoat"
+	desc = "A suit that protects against minor chemical spills. It has a gray stripe on the shoulder and gray trim on the sleeves, denoting it as a Morpheus Cyberkinetics labcoat."
+	icon_state = "labcoat_morpheus_open"
+	icon_open = "labcoat_morpheus_open"
+	icon_closed = "labcoat_morpheus"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/dais
 	name = "\improper DAIS labcoat"
@@ -152,9 +156,17 @@
 	icon_open = "labcoat_rd_heph_open"
 	icon_closed = "labcoat_rd_heph"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/rd/heph
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/zeng
 	name = "\improper Z-H research director's labcoat"
 	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Zeng-Hu Pharmaceuticals management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_zeng_open"
 	icon_open = "labcoat_rd_zeng_open"
 	icon_closed = "labcoat_rd_zeng"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/ec
+	name = "chief science officer's labcoat"
+	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as an Expeditionary Corps labcoat, and purple trim to indicate a Chief Science Officer."
+	icon_state = "labcoat_cso_open"
+	icon_open = "labcoat_cso_open"
+	icon_closed = "labcoat_cso"
+	body_parts_covered = UPPER_TORSO|ARMS

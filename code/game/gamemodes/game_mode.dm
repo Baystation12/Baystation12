@@ -238,7 +238,7 @@ var/global/list/additional_antag_types = list()
 	// Update goals, now that antag status and jobs are both resolved.
 	for(var/thing in SSticker.minds)
 		var/datum/mind/mind = thing
-		mind.generate_goals(mind.assigned_job)
+		mind.generate_goals(mind.assigned_job, is_spawning=TRUE)
 		mind.current.show_goals()
 
 	if(evacuation_controller && auto_recall_shuttle)
@@ -284,7 +284,7 @@ var/global/list/additional_antag_types = list()
 		"artifacts of eldritch horror",
 		"a brain slug infestation",
 		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenomorph specimens",
+		"a deserted transport carrying xenofauna specimens",
 		"an emissary for the gestalt requesting a security detail",
 		"radical Skrellian transevolutionaries",
 		"classified security operations",
@@ -312,12 +312,10 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/declare_completion()
 	set waitfor = FALSE
 
-	check_victory()
 	sleep(2)
 
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.check_victory()
 		antag.print_player_summary()
 		sleep(2)
 	for(var/antag_type in all_antag_types)
@@ -368,7 +366,7 @@ var/global/list/additional_antag_types = list()
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
 
 	to_world(text)
-	
+
 	if(clients > 0)
 		SSstatistics.set_field("round_end_clients",clients)
 	if(ghosts > 0)
@@ -383,6 +381,7 @@ var/global/list/additional_antag_types = list()
 		SSstatistics.set_field("escaped_total",escaped_total)
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
+	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts))
 
 	return 0
 
@@ -467,9 +466,6 @@ var/global/list/additional_antag_types = list()
 
 	shuffle(antag_templates) //In the case of multiple antag types
 	newscaster_announcements = pick(newscaster_standard_feeds)
-
-/datum/game_mode/proc/check_victory()
-	return
 
 // Manipulates the end-game cinematic in conjunction with GLOB.cinematic
 /datum/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)

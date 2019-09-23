@@ -93,7 +93,7 @@
 
 /obj/item/weapon/pen/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
 
 /obj/item/weapon/pen/reagent/New()
 	..()
@@ -118,11 +118,11 @@
  */
 /obj/item/weapon/pen/reagent/sleepy
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\"."
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
 
 /obj/item/weapon/pen/reagent/sleepy/New()
 	..()
-	reagents.add_reagent(/datum/reagent/chloralhydrate, 15)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22, reducing it further to 15 because fuck you OD code./N
+	reagents.add_reagent(/datum/reagent/vecuronium_bromide, 15)
 
 
 /*

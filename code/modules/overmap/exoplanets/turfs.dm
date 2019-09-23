@@ -6,7 +6,7 @@
 	has_resources = 1
 	footstep_type = FOOTSTEP_CARPET
 	var/diggable = 1
-	var/mudpit = 0	//if pits should not take turf's color
+	var/dirt_color = "#7c5e42"
 
 /turf/simulated/floor/exoplanet/can_engrave()
 	return FALSE
@@ -24,8 +24,7 @@
 			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
 			set_light(E.lightlevel, 0.1, 2)
 			if(E.planetary_area && istype(loc, world.area))
-				E.planetary_area.contents.Add(src)
-				E.planetary_area.Entered(src)
+				ChangeArea(src, E.planetary_area)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
@@ -37,6 +36,11 @@
 			diggable = 0
 		else
 			to_chat(user,"<span class='notice'>You stop shoveling.</span>")
+	else if(istype(C, /obj/item/stack/tile))
+		var/obj/item/stack/tile/T = C
+		if(T.use(1))
+			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
+			ChangeTurf(/turf/simulated/floor, FALSE, FALSE, TRUE)
 	else
 		..()
 
@@ -48,12 +52,14 @@
 			if(prob(40))
 				ChangeTurf(get_base_turf_by_area(src))
 
+/turf/simulated/floor/exoplanet/water/is_flooded(lying_mob, absolute)
+	. = absolute ? ..() : lying_mob
+
 /turf/simulated/floor/exoplanet/water/shallow
 	name = "shallow water"
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "seashallow"
 	movement_delay = 2
-	mudpit = 1
 	footstep_type = FOOTSTEP_WATER
 	var/reagent_type = /datum/reagent/water
 
@@ -74,6 +80,8 @@
 
 /turf/simulated/floor/exoplanet/on_update_icon(var/update_neighbors)
 	overlays.Cut()
+	if(LAZYLEN(decals))
+		overlays += decals
 	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if(!istype(turf_to_check, type))
@@ -137,7 +145,7 @@
 	if(!istype(E))
 		return
 	if(E.planetary_area && istype(loc, world.area))
-		E.planetary_area.contents.Add(src)
+		ChangeArea(src, E.planetary_area)
 	var/new_x = A.x
 	var/new_y = A.y
 	if(x <= TRANSITIONEDGE)

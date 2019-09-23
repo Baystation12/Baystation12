@@ -20,7 +20,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "am" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/airless,
 /area/djstation)
 "an" = (
@@ -66,7 +66,7 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "ay" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "az" = (
@@ -433,13 +433,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
-"Fb" = (
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 200;
-	generation_width = 200
-	},
-/turf/space,
-/area/space)
 
 (1,1,1) = {"
 aa
@@ -641,7 +634,7 @@ aa
 aa
 aa
 aa
-Fb
+aa
 "}
 (2,1,1) = {"
 aa

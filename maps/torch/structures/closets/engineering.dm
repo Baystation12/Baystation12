@@ -25,9 +25,9 @@
 /decl/closet_appearance/secure_closet/torch/engineering/ce
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_WARM_YELLOW,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_WARM_YELLOW,
-		"exped" = COLOR_GOLD
+		"exped" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/engineering_chief_torch
@@ -51,6 +51,7 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/multitool,
 		/obj/item/device/flash,
+		/obj/item/weapon/gun/energy/confuseray,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/crowbar/brace_jack,
@@ -59,9 +60,7 @@
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/material/clipboard,
-		/obj/item/device/flashlight,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/folder/yellow,
 		/obj/item/weapon/storage/box/armband/engine,
 		/obj/item/weapon/storage/box/secret_project_disks,
 		/obj/item/weapon/material/knife/folding/swiss/officer,

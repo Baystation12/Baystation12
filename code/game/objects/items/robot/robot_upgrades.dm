@@ -121,13 +121,14 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/vtec/action(var/mob/living/silicon/robot/R)
-	if(..()) return 0
+	if(..()) return FALSE
 
-	if(R.speed == -1)
-		return 0
+	if(R.vtec == TRUE)
+		return FALSE
 
 	R.speed--
-	return 1
+	R.vtec = TRUE
+	return TRUE
 
 
 /obj/item/borg/upgrade/weaponcooler

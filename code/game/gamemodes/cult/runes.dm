@@ -5,7 +5,6 @@
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
 	unacidable = 1
-	plane = ABOVE_TURF_PLANE
 	layer = RUNE_LAYER
 
 	var/blood
@@ -252,7 +251,7 @@
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
 		t = wall.health
-	user.pay_for_rune(t / 50)
+	user.remove_blood_simple(t / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
 

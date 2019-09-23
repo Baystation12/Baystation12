@@ -18,9 +18,9 @@
 /decl/closet_appearance/secure_closet/torch/exploration/pathfinder
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_PURPLE,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_PURPLE,
-		"exped" = COLOR_GOLD
+		"exped" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/pathfinder
@@ -50,6 +50,7 @@
 		/obj/item/weapon/storage/box/encryptionkey/exploration,
 		/obj/item/device/binoculars,
 		/obj/item/weapon/material/knife/folding/swiss/explorer,
+		/obj/item/clothing/accessory/buddytag,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
@@ -72,6 +73,7 @@
 		/obj/item/device/radio/headset/exploration,
 		/obj/item/device/radio/headset/exploration/alt,
 		/obj/item/device/binoculars,
+		/obj/item/clothing/accessory/buddytag,
 		/obj/item/weapon/material/knife/folding/swiss/explorer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),

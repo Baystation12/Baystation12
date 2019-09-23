@@ -165,7 +165,7 @@
 	continuous = FALSE
 	event_icon_states = list("meteor1", "meteor2", "meteor3", "meteor4")
 	difficulty = EVENT_LEVEL_MAJOR
-	weaknesses = BSA_MINING | BSA_EXPLOSIVE
+	weaknesses = OVERMAP_WEAKNESS_MINING | OVERMAP_WEAKNESS_EXPLOSIVE
 
 /datum/overmap_event/meteor/enter(var/obj/effect/overmap/ship/victim)
 	..()
@@ -182,7 +182,7 @@
 	opacity = 0
 	event_icon_states = list("electrical1", "electrical2", "electrical3", "electrical4")
 	difficulty = EVENT_LEVEL_MAJOR
-	weaknesses = BSA_EMP
+	weaknesses = OVERMAP_WEAKNESS_EMP
 
 /datum/overmap_event/dust
 	name = "dust cloud"
@@ -190,7 +190,7 @@
 	count = 16
 	radius = 4
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")
-	weaknesses = BSA_MINING | BSA_EXPLOSIVE | BSA_FIRE
+	weaknesses = OVERMAP_WEAKNESS_MINING | OVERMAP_WEAKNESS_EXPLOSIVE | OVERMAP_WEAKNESS_FIRE
 
 /datum/overmap_event/ion
 	name = "ion cloud"
@@ -200,7 +200,7 @@
 	opacity = 0
 	event_icon_states = list("ion1", "ion2", "ion3", "ion4")
 	difficulty = EVENT_LEVEL_MAJOR
-	weaknesses = BSA_EMP
+	weaknesses = OVERMAP_WEAKNESS_EMP
 
 /datum/overmap_event/carp
 	name = "carp shoal"
@@ -211,7 +211,7 @@
 	difficulty = EVENT_LEVEL_MODERATE
 	continuous = FALSE
 	event_icon_states = list("carp1", "carp2")
-	weaknesses = BSA_EXPLOSIVE | BSA_FIRE
+	weaknesses = OVERMAP_WEAKNESS_EXPLOSIVE | OVERMAP_WEAKNESS_FIRE
 
 /datum/overmap_event/carp/major
 	name = "carp school"

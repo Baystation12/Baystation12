@@ -140,8 +140,8 @@
 	sort_string = "WCJAA"
 
 /datum/design/item/rig/taser
-	name = "Taser"
-	desc = "A taser, mountable on a RIG."
+	name = "Electrolaser"
+	desc = "An electrolaser, mountable on a RIG."
 	id = "rig_taser"
 	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 	materials = list(MATERIAL_STEEL = 4000, MATERIAL_PLASTIC = 2500, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000)
@@ -161,7 +161,7 @@
 	name = "Energy Net"
 	desc = "An advanced energy-patterning projector used to capture targets, mountable on a RIG."
 	id = "rig_enet"
-	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ILLEGAL = 4, TECH_ENGINEERING = 6)
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_DIAMOND = 2000, MATERIAL_PLASTIC = 2000)
 	build_path = /obj/item/rig_module/fabricator/energy_net
 	sort_string = "WCKAC"
@@ -170,7 +170,7 @@
 	name = "Active Camouflage"
 	desc = "An integrated active camouflage system, mountable on a RIG."
 	id = "rig_stealth"
-	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ILLEGAL = 6, TECH_ENGINEERING = 7)
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_DIAMOND = 2000, MATERIAL_SILVER = 2000, MATERIAL_URANIUM = 2000, MATERIAL_GOLD = 2000, MATERIAL_PLASTIC = 2000)
 	build_path = /obj/item/rig_module/stealth_field
 	sort_string = "WCLAA"

@@ -15,6 +15,11 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/purchasedpowers = list()
 	var/mimicing = ""
 
+/datum/changeling/Destroy()
+	purchasedpowers = null
+	absorbed_languages.Cut()
+	absorbed_dna.Cut()
+	. = ..()
 
 /datum/changeling/New()
 	..()
@@ -56,7 +61,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
 
 	verbs += /datum/changeling/proc/EvolutionMenu
-	add_language("Changeling")
+	add_language(LANGUAGE_CHANGELING_GLOBAL)
 
 	var/lesser_form = !ishuman(src)
 
@@ -132,7 +137,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		languages += language
 
 	//This isn't strictly necessary but just to be safe...
-	add_language("Changeling")
+	add_language(LANGUAGE_CHANGELING_GLOBAL)
 
 	return
 
@@ -210,10 +215,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
 	absorbDNA(newDNA)
+
 	if(mind && T.mind)
-		mind.store_memory("[T.real_name]'s memories:")
-		mind.store_memory(T.mind.memory)
-		mind.store_memory("<hr>")
+		T.mind.CopyMemories(mind)
 
 	if(T.mind && T.mind.changeling)
 		if(T.mind.changeling.absorbed_dna)

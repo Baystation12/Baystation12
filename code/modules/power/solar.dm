@@ -92,9 +92,9 @@ var/list/solars_list = list()
 	..()
 	overlays.Cut()
 	if(stat & BROKEN)
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = FLY_LAYER)
+		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
 	else
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
+		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
 		src.set_dir(angle2dir(adir))
 	return
 
@@ -116,7 +116,7 @@ var/list/solars_list = list()
 	sunfrac = cos(p_angle) ** 2
 	//isn't the power recieved from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
-/obj/machinery/power/solar/Process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
+/obj/machinery/power/solar/Process()
 	if(stat & BROKEN)
 		return
 	if(!GLOB.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
@@ -169,8 +169,7 @@ var/list/solars_list = list()
 	..(loc, S, 0)
 
 /obj/machinery/power/solar/fake/Process()
-	. = PROCESS_KILL
-	return
+	return PROCESS_KILL
 
 //trace towards sun to see if we're in shadow
 /obj/machinery/power/solar/proc/occlusion()
@@ -283,6 +282,9 @@ var/list/solars_list = list()
 	density = 1
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 250
+	construct_state = /decl/machine_construction/default/panel_closed/computer
+	base_type = /obj/machinery/power/solar_control
+	frame_type = /obj/machinery/constructable_frame/computerframe
 	var/id = 0
 	var/cdir = 0
 	var/targetdir = 0		// target angle in manual tracking (since it updates every game minute)
@@ -364,12 +366,12 @@ var/list/solars_list = list()
 	icon_state = "solar"
 	overlays.Cut()
 	if(cdir > -1)
-		overlays += image('icons/obj/computer.dmi', "solcon-o", FLY_LAYER, angle2dir(cdir))
+		overlays += image('icons/obj/computer.dmi', "solcon-o", ABOVE_OBJ_LAYER, angle2dir(cdir))
 	return
 
-/obj/machinery/power/solar_control/attack_hand(mob/user)
-	if(!..())
-		interact(user)
+/obj/machinery/power/solar_control/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
 /obj/machinery/power/solar_control/interact(mob/user)
 
@@ -398,39 +400,6 @@ var/list/solars_list = list()
 	var/datum/browser/popup = new(user, "solar", name)
 	popup.set_content(t)
 	popup.open()
-
-	return
-
-/obj/machinery/power/solar_control/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20,src))
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/material/shard( src.loc )
-				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
-				for (var/obj/C in src)
-					C.dropInto(loc)
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				qdel(src)
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
-				for (var/obj/C in src)
-					C.dropInto(loc)
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				qdel(src)
-	else
-		src.attack_hand(user)
-	return
 
 /obj/machinery/power/solar_control/Process()
 	lastgen = gen

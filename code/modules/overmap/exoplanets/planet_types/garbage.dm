@@ -5,6 +5,9 @@
 	planetary_area = /area/exoplanet/garbage
 	map_generators = list(/datum/random_map/noise/exoplanet/garbage, /datum/random_map/noise/ore/poor)
 	ruin_tags_whitelist = RUIN_ALIEN|RUIN_NATURAL|RUIN_WRECK
+	plant_colors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
+	surface_color = "#a5a18b"
+	water_color = null
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_map()
 	if(prob(50))
@@ -36,17 +39,17 @@
 	descriptor = "garbage exoplanet"
 	smoothing_iterations = 4
 	land_type = /turf/simulated/floor/exoplanet/desert
-	plantcolors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
-	flora_prob = 1
+	flora_prob = 0.5
 	large_flora_prob = 0
 	flora_diversity = 2
-	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator)
+	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator/hive)
 	fauna_prob = 1
+	megafauna_types = list(/mob/living/simple_animal/hostile/hivebot/mega)
 	var/fallout = 0
 
 /datum/random_map/noise/exoplanet/garbage/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
 	if(prob(60))
-		fallout = rand(20, 75)
+		fallout = rand(10, 37.5)
 	..()
 
 /datum/random_map/noise/exoplanet/garbage/get_additional_spawns(var/value, var/turf/T)
@@ -62,6 +65,7 @@
 			var/datum/radiation_source/S = new(T, 2*fallout, FALSE)
 			S.range = 4
 			SSradiation.add_source(S)
+			T.set_light(0.4, 1, 2, l_color = PIPE_COLOR_GREEN)
 		if(prob(0.02))
 			var/datum/artifact_find/A = new()
 			new A.artifact_find_type(T)

@@ -23,7 +23,7 @@
 	var/check_records = 1	//checks if a security record exists at all
 	var/check_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
 	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
-	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
+	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms
 	var/check_synth = 0 	//if active, will shoot at anything not an AI or cyborg
 	var/ailock = 0 	//Silicons cannot use this
 
@@ -104,21 +104,14 @@
 	if(!emagged)
 		to_chat(user, "<span class='danger'>You short out the turret controls' access analysis module.</span>")
 		emagged = 1
+		req_access.Cut()
 		locked = 0
 		ailock = 0
 		return 1
 
-/obj/machinery/turretid/attack_ai(mob/user as mob)
-	if(isLocked(user))
-		return
-
+/obj/machinery/turretid/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/turretid/attack_hand(mob/user as mob)
-	if(isLocked(user))
-		return
-
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/turretid/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -176,8 +169,7 @@
 			check_anomalies = value
 
 		if(!isnull(log_action))
-			log_admin("[key_name(usr)] has [log_action]")
-			message_admins("[key_name_admin(usr)] has [log_action]", 1)
+			log_and_message_admins("has [log_action]", 1)
 
 		updateTurrets()
 		return 1

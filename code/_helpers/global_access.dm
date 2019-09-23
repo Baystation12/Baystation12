@@ -41,6 +41,8 @@
 			return global.SSalarm;
 		if("SSantags")
 			return global.SSantags;
+		if("SSao")
+			return global.SSao;
 		if("SSatoms")
 			return global.SSatoms;
 		if("SScharacter_setup")
@@ -53,22 +55,34 @@
 			return global.SScircuit_components;
 		if("SScodex")
 			return global.SScodex;
+		if("SScuisine")
+			return global.SScuisine;
 		if("SSculture")
 			return global.SSculture;
+		if("SScustomitems")
+			return global.SScustomitems;
 		if("SSdisposals")
 			return global.SSdisposals;
 		if("SSevac")
 			return global.SSevac;
 		if("SSevent")
 			return global.SSevent;
+		if("SSfabrication")
+			return global.SSfabrication;
 		if("SSfastprocess")
 			return global.SSfastprocess;
 		if("SSfluids")
 			return global.SSfluids;
 		if("SSgarbage")
 			return global.SSgarbage;
+		if("SSghost_images")
+			return global.SSghost_images;
 		if("SSgoals")
 			return global.SSgoals;
+		if("SSgraphs_process")
+			return global.SSgraphs_process;
+		if("SSgraphs_update")
+			return global.SSgraphs_update;
 		if("SSicon_update")
 			return global.SSicon_update;
 		if("SSinactivity")
@@ -119,8 +133,6 @@
 			return global.SSsupply;
 		if("SStemperature")
 			return global.SStemperature;
-		if("SStgui")
-			return global.SStgui;
 		if("SSticker")
 			return global.SSticker;
 		if("SStimer")
@@ -133,8 +145,8 @@
 			return global.SSvines;
 		if("SSvote")
 			return global.SSvote;
-		if("SSwireless")
-			return global.SSwireless;
+		if("SSwebhooks")
+			return global.SSwebhooks;
 		if("SSxenoarch")
 			return global.SSxenoarch;
 		if("Tier1Runes")
@@ -267,10 +279,6 @@
 			return global.atmosphere_alarm;
 		if("attack_log_repository")
 			return global.attack_log_repository;
-		if("autolathe_categories")
-			return global.autolathe_categories;
-		if("autolathe_recipes")
-			return global.autolathe_recipes;
 		if("base_miss_chance")
 			return global.base_miss_chance;
 		if("basic_robolimb")
@@ -305,8 +313,6 @@
 			return global.channel_to_radio_key;
 		if("chargen_robolimbs")
 			return global.chargen_robolimbs;
-		if("checked_for_inactives")
-			return global.checked_for_inactives;
 		if("chemical_reaction_logs")
 			return global.chemical_reaction_logs;
 		if("chicken_count")
@@ -345,8 +351,6 @@
 			return global.csrfz_check;
 		if("custom_event_msg")
 			return global.custom_event_msg;
-		if("custom_items")
-			return global.custom_items;
 		if("damage_icon_parts")
 			return global.damage_icon_parts;
 		if("dbcon")
@@ -489,8 +493,6 @@
 			return global.id_card_states;
 		if("image_repository")
 			return global.image_repository;
-		if("inactive_keys")
-			return global.inactive_keys;
 		if("init")
 			return global.init;
 		if("intents")
@@ -525,8 +527,6 @@
 			return global.limb_icon_cache;
 		if("loadout_categories")
 			return global.loadout_categories;
-		if("lobby_image")
-			return global.lobby_image;
 		if("log_end")
 			return global.log_end;
 		if("lunchables_drink_reagents_")
@@ -625,8 +625,6 @@
 			return global.next_station_date_change;
 		if("ninjastart")
 			return global.ninjastart;
-		if("not_incapacitated_turf_state")
-			return global.not_incapacitated_turf_state;
 		if("ntnet_card_uid")
 			return global.ntnet_card_uid;
 		if("ntnet_global")
@@ -785,14 +783,14 @@
 			return global.sqladdress;
 		if("sqldb")
 			return global.sqldb;
+		if("sqlenabled")
+			return global.sqlenabled;
 		if("sqlfdbkdb")
 			return global.sqlfdbkdb;
 		if("sqlfdbklogin")
 			return global.sqlfdbklogin;
 		if("sqlfdbkpass")
 			return global.sqlfdbkpass;
-		if("sqllogging")
-			return global.sqllogging;
 		if("sqllogin")
 			return global.sqllogin;
 		if("sqlpass")
@@ -849,34 +847,6 @@
 			return global.telecomms_list;
 		if("text_tag_icons")
 			return global.text_tag_icons;
-		if("tg_admin_state")
-			return global.tg_admin_state;
-		if("tg_always_state")
-			return global.tg_always_state;
-		if("tg_conscious_state")
-			return global.tg_conscious_state;
-		if("tg_contained_state")
-			return global.tg_contained_state;
-		if("tg_deep_inventory_state")
-			return global.tg_deep_inventory_state;
-		if("tg_default_state")
-			return global.tg_default_state;
-		if("tg_hands_state")
-			return global.tg_hands_state;
-		if("tg_human_adjacent_state")
-			return global.tg_human_adjacent_state;
-		if("tg_inventory_state")
-			return global.tg_inventory_state;
-		if("tg_not_contained_state")
-			return global.tg_not_contained_state;
-		if("tg_not_incapacitated_state")
-			return global.tg_not_incapacitated_state;
-		if("tg_physical_state")
-			return global.tg_physical_state;
-		if("tg_self_state")
-			return global.tg_self_state;
-		if("tg_z_state")
-			return global.tg_z_state;
 		if("ticket_panels")
 			return global.ticket_panels;
 		if("tickets")
@@ -988,6 +958,8 @@
 			global.SSalarm=newval;
 		if("SSantags")
 			global.SSantags=newval;
+		if("SSao")
+			global.SSao=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
 		if("SScharacter_setup")
@@ -1000,22 +972,34 @@
 			global.SScircuit_components=newval;
 		if("SScodex")
 			global.SScodex=newval;
+		if("SScuisine")
+			global.SScuisine=newval;
 		if("SSculture")
 			global.SSculture=newval;
+		if("SScustomitems")
+			global.SScustomitems=newval;
 		if("SSdisposals")
 			global.SSdisposals=newval;
 		if("SSevac")
 			global.SSevac=newval;
 		if("SSevent")
 			global.SSevent=newval;
+		if("SSfabrication")
+			global.SSfabrication=newval;
 		if("SSfastprocess")
 			global.SSfastprocess=newval;
 		if("SSfluids")
 			global.SSfluids=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
+		if("SSghost_images")
+			global.SSghost_images=newval;
 		if("SSgoals")
 			global.SSgoals=newval;
+		if("SSgraphs_process")
+			global.SSgraphs_process=newval;
+		if("SSgraphs_update")
+			global.SSgraphs_update=newval;
 		if("SSicon_update")
 			global.SSicon_update=newval;
 		if("SSinactivity")
@@ -1066,8 +1050,6 @@
 			global.SSsupply=newval;
 		if("SStemperature")
 			global.SStemperature=newval;
-		if("SStgui")
-			global.SStgui=newval;
 		if("SSticker")
 			global.SSticker=newval;
 		if("SStimer")
@@ -1080,8 +1062,8 @@
 			global.SSvines=newval;
 		if("SSvote")
 			global.SSvote=newval;
-		if("SSwireless")
-			global.SSwireless=newval;
+		if("SSwebhooks")
+			global.SSwebhooks=newval;
 		if("SSxenoarch")
 			global.SSxenoarch=newval;
 		if("Tier1Runes")
@@ -1214,10 +1196,6 @@
 			global.atmosphere_alarm=newval;
 		if("attack_log_repository")
 			global.attack_log_repository=newval;
-		if("autolathe_categories")
-			global.autolathe_categories=newval;
-		if("autolathe_recipes")
-			global.autolathe_recipes=newval;
 		if("base_miss_chance")
 			global.base_miss_chance=newval;
 		if("basic_robolimb")
@@ -1252,8 +1230,6 @@
 			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
 			global.chargen_robolimbs=newval;
-		if("checked_for_inactives")
-			global.checked_for_inactives=newval;
 		if("chemical_reaction_logs")
 			global.chemical_reaction_logs=newval;
 		if("chicken_count")
@@ -1292,8 +1268,6 @@
 			global.csrfz_check=newval;
 		if("custom_event_msg")
 			global.custom_event_msg=newval;
-		if("custom_items")
-			global.custom_items=newval;
 		if("damage_icon_parts")
 			global.damage_icon_parts=newval;
 		if("dbcon")
@@ -1436,8 +1410,6 @@
 			global.id_card_states=newval;
 		if("image_repository")
 			global.image_repository=newval;
-		if("inactive_keys")
-			global.inactive_keys=newval;
 		if("init")
 			global.init=newval;
 		if("intents")
@@ -1472,8 +1444,6 @@
 			global.limb_icon_cache=newval;
 		if("loadout_categories")
 			global.loadout_categories=newval;
-		if("lobby_image")
-			global.lobby_image=newval;
 		if("log_end")
 			global.log_end=newval;
 		if("lunchables_drink_reagents_")
@@ -1572,8 +1542,6 @@
 			global.next_station_date_change=newval;
 		if("ninjastart")
 			global.ninjastart=newval;
-		if("not_incapacitated_turf_state")
-			global.not_incapacitated_turf_state=newval;
 		if("ntnet_card_uid")
 			global.ntnet_card_uid=newval;
 		if("ntnet_global")
@@ -1732,14 +1700,14 @@
 			global.sqladdress=newval;
 		if("sqldb")
 			global.sqldb=newval;
+		if("sqlenabled")
+			global.sqlenabled=newval;
 		if("sqlfdbkdb")
 			global.sqlfdbkdb=newval;
 		if("sqlfdbklogin")
 			global.sqlfdbklogin=newval;
 		if("sqlfdbkpass")
 			global.sqlfdbkpass=newval;
-		if("sqllogging")
-			global.sqllogging=newval;
 		if("sqllogin")
 			global.sqllogin=newval;
 		if("sqlpass")
@@ -1796,34 +1764,6 @@
 			global.telecomms_list=newval;
 		if("text_tag_icons")
 			global.text_tag_icons=newval;
-		if("tg_admin_state")
-			global.tg_admin_state=newval;
-		if("tg_always_state")
-			global.tg_always_state=newval;
-		if("tg_conscious_state")
-			global.tg_conscious_state=newval;
-		if("tg_contained_state")
-			global.tg_contained_state=newval;
-		if("tg_deep_inventory_state")
-			global.tg_deep_inventory_state=newval;
-		if("tg_default_state")
-			global.tg_default_state=newval;
-		if("tg_hands_state")
-			global.tg_hands_state=newval;
-		if("tg_human_adjacent_state")
-			global.tg_human_adjacent_state=newval;
-		if("tg_inventory_state")
-			global.tg_inventory_state=newval;
-		if("tg_not_contained_state")
-			global.tg_not_contained_state=newval;
-		if("tg_not_incapacitated_state")
-			global.tg_not_incapacitated_state=newval;
-		if("tg_physical_state")
-			global.tg_physical_state=newval;
-		if("tg_self_state")
-			global.tg_self_state=newval;
-		if("tg_z_state")
-			global.tg_z_state=newval;
 		if("ticket_panels")
 			global.ticket_panels=newval;
 		if("tickets")
@@ -1914,20 +1854,27 @@
 	"SSairflow",
 	"SSalarm",
 	"SSantags",
+	"SSao",
 	"SSatoms",
 	"SScharacter_setup",
 	"SSchemistry",
 	"SScircuit",
 	"SScircuit_components",
 	"SScodex",
+	"SScuisine",
 	"SSculture",
+	"SScustomitems",
 	"SSdisposals",
 	"SSevac",
 	"SSevent",
+	"SSfabrication",
 	"SSfastprocess",
 	"SSfluids",
 	"SSgarbage",
+	"SSghost_images",
 	"SSgoals",
+	"SSgraphs_process",
+	"SSgraphs_update",
 	"SSicon_update",
 	"SSinactivity",
 	"SSjobs",
@@ -1953,14 +1900,13 @@
 	"SSsun",
 	"SSsupply",
 	"SStemperature",
-	"SStgui",
 	"SSticker",
 	"SStimer",
 	"SStrade",
 	"SSturf",
 	"SSvines",
 	"SSvote",
-	"SSwireless",
+	"SSwebhooks",
 	"SSxenoarch",
 	"Tier1Runes",
 	"Tier2Runes",
@@ -2027,8 +1973,6 @@
 	"assigned_blocks",
 	"atmosphere_alarm",
 	"attack_log_repository",
-	"autolathe_categories",
-	"autolathe_recipes",
 	"base_miss_chance",
 	"basic_robolimb",
 	"blocked",
@@ -2046,7 +1990,6 @@
 	"channel_color_presets",
 	"channel_to_radio_key",
 	"chargen_robolimbs",
-	"checked_for_inactives",
 	"chemical_reaction_logs",
 	"chicken_count",
 	"church_name",
@@ -2066,7 +2009,6 @@
 	"crew_repository",
 	"csrfz_check",
 	"custom_event_msg",
-	"custom_items",
 	"damage_icon_parts",
 	"dbcon",
 	"dbcon_old",
@@ -2138,7 +2080,6 @@
 	"human_icon_cache",
 	"id_card_states",
 	"image_repository",
-	"inactive_keys",
 	"init",
 	"intents",
 	"intercom_range_display_status",
@@ -2156,7 +2097,6 @@
 	"lighting_overlays_initialised",
 	"limb_icon_cache",
 	"loadout_categories",
-	"lobby_image",
 	"log_end",
 	"lunchables_drink_reagents_",
 	"lunchables_drinks_",
@@ -2206,7 +2146,6 @@
 	"next_duration_update",
 	"next_station_date_change",
 	"ninjastart",
-	"not_incapacitated_turf_state",
 	"ntnet_card_uid",
 	"ntnet_global",
 	"ntnrc_uid",
@@ -2286,10 +2225,10 @@
 	"splatter_cache",
 	"sqladdress",
 	"sqldb",
+	"sqlenabled",
 	"sqlfdbkdb",
 	"sqlfdbklogin",
 	"sqlfdbkpass",
-	"sqllogging",
 	"sqllogin",
 	"sqlpass",
 	"sqlport",
@@ -2318,20 +2257,6 @@
 	"tape_roll_applications",
 	"telecomms_list",
 	"text_tag_icons",
-	"tg_admin_state",
-	"tg_always_state",
-	"tg_conscious_state",
-	"tg_contained_state",
-	"tg_deep_inventory_state",
-	"tg_default_state",
-	"tg_hands_state",
-	"tg_human_adjacent_state",
-	"tg_inventory_state",
-	"tg_not_contained_state",
-	"tg_not_incapacitated_state",
-	"tg_physical_state",
-	"tg_self_state",
-	"tg_z_state",
 	"ticket_panels",
 	"tickets",
 	"total_lighting_corners",

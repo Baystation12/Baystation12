@@ -5,6 +5,7 @@
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
+
 	var/list/valid_targets = list(
 		/mob/living/carbon/human,
 		/mob/living/simple_animal,

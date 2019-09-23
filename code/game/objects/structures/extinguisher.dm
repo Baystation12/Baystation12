@@ -48,16 +48,6 @@
 		opened = !opened
 	update_icon()
 
-/obj/structure/extinguisher_cabinet/attack_tk(mob/user)
-	if(has_extinguisher)
-		has_extinguisher.dropInto(loc)
-		to_chat(user, "<span class='notice'>You telekinetically remove [has_extinguisher] from [src].</span>")
-		has_extinguisher = null
-		opened = 1
-	else
-		opened = !opened
-	update_icon()
-
 /obj/structure/extinguisher_cabinet/on_update_icon()
 	if(!opened)
 		icon_state = "extinguisher_closed"
@@ -75,3 +65,12 @@
 		opened = !opened
 		update_icon()
 
+/obj/structure/extinguisher_cabinet/do_simple_ranged_interaction(var/mob/user)
+	if(has_extinguisher)
+		has_extinguisher.dropInto(loc)
+		has_extinguisher = null
+		opened = 1
+	else
+		opened = !opened
+	update_icon()
+	return TRUE

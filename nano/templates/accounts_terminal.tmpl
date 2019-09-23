@@ -135,15 +135,6 @@
           </div>
           {{:helper.link('Revoke', 'transferthick-e-w', {'choice' : 'revoke_payroll'}, data.account_number == data.station_account_number ? 'disabled' : null, 'linkDanger')}}
         </div>
-        {{if data.access_level >= 2}}
-        <div class='item'>
-          <div class='fixedLeft'>
-            Silent Fund Adjustment:
-          </div>
-          {{:helper.link('Add', 'plus', {'choice' : 'add_funds'})}}
-          {{:helper.link('Remove', 'minus', {'choice' : 'remove_funds'})}}
-        </div>
-        {{/if}}
     {{else}}
 
       <div class='item'>

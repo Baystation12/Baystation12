@@ -6,7 +6,6 @@
 	anchored = 1
 	density = 0
 	opacity = 0
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	simulated = 0
 	mouse_opacity = 0
@@ -137,7 +136,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 /obj/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing)
 
-	if(!owner)
+	if(!owner || !isliving(target))
 		return
 
 	if(owner.incapacitated())

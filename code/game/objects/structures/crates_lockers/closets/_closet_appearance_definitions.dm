@@ -263,9 +263,9 @@
 /decl/closet_appearance/secure_closet/engineering/ce
 	color = COLOR_OFF_WHITE
 	extra_decals = list(
-		"stripe_vertical_right_partial" = COLOR_GOLD,
-		"stripe_vertical_mid_partial" = COLOR_GOLD,
-		"eng_narrow" = COLOR_GOLD
+		"stripe_vertical_right_partial" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_mid_partial" = COLOR_CLOSET_GOLD,
+		"eng_narrow" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/mining
@@ -294,16 +294,16 @@
 		"upper_holes"
 	)
 	extra_decals = list(
-		"stripe_vertical_left_partial" = COLOR_GOLD,
-		"stripe_vertical_right_partial" = COLOR_GOLD,
-		"captain" = COLOR_GOLD
+		"stripe_vertical_left_partial" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_right_partial" = COLOR_CLOSET_GOLD,
+		"captain" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/command/hop
 	color = COLOR_PALE_BLUE_GRAY
 	extra_decals = list(
-		"stripe_vertical_mid_partial" = COLOR_GOLD,
-		"hop" = COLOR_GOLD
+		"stripe_vertical_mid_partial" = COLOR_CLOSET_GOLD,
+		"hop" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/cmo
@@ -313,9 +313,9 @@
 		"lower_side_vent"
 	)
 	extra_decals = list(
-		"medcircle" = COLOR_GOLD,
-		"stripe_vertical_right_partial" = COLOR_GOLD,
-		"stripe_vertical_mid_partial" = COLOR_GOLD
+		"medcircle" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_right_partial" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_mid_partial" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/medical
@@ -384,8 +384,8 @@
 	extra_decals = list(
 		"stripe_vertical_left_full" =  COLOR_WARM_YELLOW,
 		"stripe_vertical_right_full" = COLOR_WARM_YELLOW,
-		"stripe_vertical_mid_full" =  COLOR_GOLD,
-		"security" = COLOR_GOLD
+		"stripe_vertical_mid_full" =  COLOR_CLOSET_GOLD,
+		"security" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/bomb
@@ -434,9 +434,9 @@
 /decl/closet_appearance/secure_closet/expedition/pathfinder
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_PURPLE,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_PURPLE,
-		"security" = COLOR_GOLD
+		"security" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/expedition/science
@@ -447,10 +447,10 @@
 
 /decl/closet_appearance/secure_closet/rd
 	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_left_full" = COLOR_PURPLE,
 		"stripe_vertical_right_full" = COLOR_PURPLE,
-		"research" = COLOR_GOLD
+		"research" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/corporate
@@ -696,4 +696,10 @@
 	can_lock = TRUE
 	decals = list(
 		"biohazard" = COLOR_GRAY80
+	)
+
+/decl/closet_appearance/cart/biohazard/alt
+	color = COLOR_SURGERY_BLUE
+	decals = list(
+		"biohazard" = COLOR_RED_GRAY
 	)

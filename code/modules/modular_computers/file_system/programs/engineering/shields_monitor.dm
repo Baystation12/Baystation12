@@ -10,6 +10,7 @@
 	requires_ntnet = 1
 	network_destination = "shields monitoring system"
 	size = 10
+	category = PROG_ENG
 
 /datum/nano_module/shields_monitor
 	name = "Shields monitor"
@@ -50,6 +51,7 @@
 		data["field_integrity"] = active.field_integrity()
 		data["max_energy"] = round(active.max_energy / 1000000, 0.1)
 		data["current_energy"] = round(active.current_energy / 1000000, 0.1)
+		data["percentage_energy"] = round(data["current_energy"] / data["max_energy"] * 100)
 		data["total_segments"] = active.field_segments ? active.field_segments.len : 0
 		data["functional_segments"] = active.damaged_segments ? data["total_segments"] - active.damaged_segments.len : data["total_segments"]
 		data["field_radius"] = active.field_radius

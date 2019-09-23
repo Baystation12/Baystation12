@@ -6,13 +6,10 @@
 	icon_screen = "robot"
 	light_color = "#a97faa"
 	req_access = list(access_robotics)
-	circuit = /obj/item/weapon/circuitboard/robotics
 
-/obj/machinery/computer/robotics/attack_ai(var/mob/user as mob)
+/obj/machinery/computer/robotics/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/computer/robotics/attack_hand(var/mob/user as mob)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/robotics/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -55,8 +52,7 @@
 			return TOPIC_HANDLED
 
 		if(target.SetLockdown(!target.lockcharge))
-			message_admins("<span class='notice'>[key_name_admin(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!</span>")
-			log_game("[key_name(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!")
+			log_and_message_admins("[target.lockcharge ? "locked down" : "released"] [target.name]!")
 			if(target.lockcharge)
 				to_chat(target, "<span class='danger'>You have been locked down!</span>")
 			else
@@ -87,8 +83,7 @@
 		if(!target || !istype(target))
 			return TOPIC_HANDLED
 
-		message_admins("<span class='notice'>[key_name_admin(usr)] emagged [target.name] using robotic console!</span>")
-		log_game("[key_name(usr)] emagged [target.name] using robotic console!")
+		log_and_message_admins("emagged [target.name] using robotic console!")
 		target.emagged = 1
 		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
 		. = TOPIC_REFRESH

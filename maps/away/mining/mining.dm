@@ -15,8 +15,14 @@
 		"nav_cluster_7"
 	)
 	known = 0
-	start_x = 4
-	start_y = 5
+
+/obj/effect/overmap/sector/cluster/generate_skybox()
+	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+
+/obj/effect/overmap/sector/cluster/get_skybox_representation()
+	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.transform *= 0.5
+	return res
 
 /datum/map_template/ruin/away_site/mining_asteroid
 	name = "Mining - Asteroid"
@@ -25,7 +31,7 @@
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
 	accessibility_weight = 10
-	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
+	generate_mining_by_z = 1
 	apc_test_exempt_areas = list(
 		/area/outpost/abandoned = NO_SCRUBBER,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -81,12 +87,21 @@
 	)
 	known = 0
 
+/obj/effect/overmap/sector/away/generate_skybox()
+	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+
+/obj/effect/overmap/sector/away/get_skybox_representation()
+	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.transform *= 0.3
+	return res
+
 /datum/map_template/ruin/away_site/mining_signal
 	name = "Mining - Planetoid"
 	id = "awaysite_mining_signal"
 	description = "A mineral-rich, formerly-volcanic site on a planetoid."
 	suffixes = list("mining/mining-signal.dmm")
 	cost = 1
+	generate_mining_by_z = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
 	area_usage_test_exempted_root_areas = list(/area/mine, /area/outpost)
 	apc_test_exempt_areas = list(
@@ -142,6 +157,12 @@
 	)
 	known = 0
 
+/obj/effect/overmap/sector/orb/get_skybox_representation()
+	var/image/res = overlay_image('icons/skybox/skybox_rock_128.dmi', "bigrock", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.pixel_x = rand(256,512)
+	res.pixel_y = rand(256,512)
+	return res
+
 /datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
 	id = "awaysite_mining_orb"
@@ -149,6 +170,7 @@
 	suffixes = list("mining/mining-orb.dmm")
 	cost = 1
 	accessibility_weight = 10
+	generate_mining_by_z = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
 	area_usage_test_exempted_root_areas = list(/area/mine)
 	area_usage_test_exempted_areas = list(/area/djstation)

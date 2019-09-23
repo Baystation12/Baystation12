@@ -1,3 +1,7 @@
+/datum/codex_category/species/
+	name = "Species"
+	desc = "Sapient species encountered in known space."
+
 /datum/codex_category/species/Initialize()
 	for(var/thing in all_species)
 		var/datum/species/species = all_species[thing]
@@ -8,3 +12,5 @@
 			entry.update_links()
 			SScodex.add_entry_by_string(entry.display_name, entry)
 			SScodex.add_entry_by_string(species.name, entry)
+			items += entry.display_name
+	..()

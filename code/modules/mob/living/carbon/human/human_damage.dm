@@ -189,8 +189,10 @@
 	var/heal = amount < 0
 	amount = abs(amount)
 
-	if(!heal && (CE_ANTITOX in chem_effects))
-		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
+	if (!heal)
+		amount = amount * species.get_toxins_mod(src)
+		if (CE_ANTITOX in chem_effects)
+			amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 
@@ -321,6 +323,11 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/brute_avg = brute / parts.len
 	var/burn_avg = burn / parts.len
 	for(var/obj/item/organ/external/E in parts)
+		if(QDELETED(E))
+			continue
+		if(E.owner != src)
+			continue // The code below may affect the children of an organ.
+
 		if(brute_avg)
 			apply_damage(damage = brute_avg, damagetype = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
 		if(burn_avg)
@@ -406,10 +413,8 @@ This function restores all organs.
 	damageoverlaytemp = 20
 	switch(damagetype)
 		if(BRUTE)
-			damage = damage*species.brute_mod
 			created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
 		if(BURN)
-			damage = damage*species.burn_mod
 			created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon)
 		if(PAIN)
 			organ.add_pain(damage)

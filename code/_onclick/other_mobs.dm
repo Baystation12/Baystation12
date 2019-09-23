@@ -31,7 +31,12 @@
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	return
 
-/mob/living/carbon/human/RangedAttack(var/atom/A)
+/mob/living/CtrlClickOn(var/atom/A)
+	. = ..()
+	if(!. && a_intent == I_GRAB && length(available_maneuvers))
+		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
+
+/mob/living/carbon/human/RangedAttack(var/atom/A, var/params)
 	//Climbing up open spaces
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
 		var/turf/T = get_turf(A)
@@ -40,7 +45,7 @@
 
 			var/area/location = get_area(loc)
 			if(location.has_gravity && !can_overcome_gravity())
-				return
+				return FALSE
 
 			visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
 			shadow.visible_message("<span class='notice'>[shadow] starts climbing onto \the [A]!</span>")
@@ -51,13 +56,13 @@
 			else
 				visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
 				shadow.visible_message("<span class='warning'>[shadow] gives up on trying to climb onto \the [A]!</span>")
-			return
+			return TRUE
 
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
 		if(istype(G) && G.Touch(A,0)) // for magic gloves
-			return
-
+			return TRUE
+	
 	. = ..()
 
 /mob/living/RestrainedClickOn(var/atom/A)

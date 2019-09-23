@@ -32,6 +32,12 @@
 		/obj/item/weapon/crowbar
 	)
 	emag = /obj/item/weapon/gun/energy/plasmacutter
+	skills = list(
+		SKILL_PILOT        = SKILL_EXPERT,
+		SKILL_EVA          = SKILL_PROF,
+		SKILL_MECH         = HAS_PERK,
+		SKILL_CONSTRUCTION = SKILL_EXPERT
+	)
 
 /obj/item/weapon/robot_module/miner/handle_emagged()
 	var/obj/item/weapon/pickaxe/D = locate(/obj/item/weapon/pickaxe/borgdrill) in equipment

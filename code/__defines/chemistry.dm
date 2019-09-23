@@ -1,4 +1,5 @@
 #define DEFAULT_HUNGER_FACTOR 0.03 // Factor of how fast mob nutrition decreases
+#define DEFAULT_THIRST_FACTOR 0.03 // Factor of how fast mob hydration decreases
 
 #define REM 0.2 // Means 'Reagent Effect Multiplier'. This is how many units of reagent are consumed per tick
 
@@ -21,9 +22,9 @@
 #define IS_VOX     2
 #define IS_SKRELL  3
 #define IS_UNATHI  4
-#define IS_XENOS   5
-#define IS_SLIME   6
-#define IS_NABBER  7
+#define IS_SLIME   5
+#define IS_NABBER  6
+#define IS_MANTID  7
 
 #define CE_STABLE        "stable"       // Inaprovaline
 #define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin
@@ -47,6 +48,8 @@
 #define CE_SQUEAKY		 "squeaky"      // Helium voice. Squeak squeak.
 #define CE_THIRDEYE      "thirdeye"     // Gives xray vision.
 #define CE_SEDATE        "sedate"       // Applies sedation effects, i.e. paralysis, inability to use items, etc.
+#define CE_ENERGETIC     "energetic"    // Speeds up stamina recovery.
+#define	CE_VOICELOSS     "whispers"     // Lowers the subject's voice to a whisper
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

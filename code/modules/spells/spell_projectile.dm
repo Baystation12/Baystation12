@@ -7,7 +7,7 @@
 	var/spell/targeted/projectile/carried
 
 	penetrating = 0
-	kill_count = 10 //set by the duration of the spell
+	life_span = 10 //set by the duration of the spell
 
 	var/proj_trail = 0 //if it leaves a trail
 	var/proj_trail_lifespan = 0 //deciseconds

@@ -113,7 +113,7 @@
 /obj/structure/closet/crate/solar/WillContain()
 	return list(
 		/obj/item/solar_assembly = 14,
-		/obj/item/weapon/circuitboard/solar_control,
+		/obj/item/weapon/stock_parts/circuitboard/solar_control,
 		/obj/item/weapon/tracker_electronics,
 		/obj/item/weapon/paper/solar
 	)
@@ -155,6 +155,17 @@
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
 	return list(/obj/random/mre = 6)
+
+/obj/structure/closet/crate/freezer/meat
+	name = "meat crate"
+	desc = "A crate of meat."
+
+/obj/structure/closet/crate/freezer/meat/WillContain()
+	return list(
+		/obj/item/weapon/reagent_containers/food/snacks/meat/beef = 4,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 4,
+		/obj/item/weapon/reagent_containers/food/snacks/fish = 4
+	)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"
@@ -251,6 +262,12 @@
 		if(closet != src && !(istype(closet, /obj/structure/closet/body_bag/cryobag)))
 			return 0
 	return 1
+
+/obj/structure/closet/crate/secure/biohazard/alt
+	name = "biowaste disposal cart"
+	desc = "A heavy cart used for organ disposal with markings indicating the things inside are probably gross."
+	req_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology)
+	closet_appearance = /decl/closet_appearance/cart/biohazard/alt
 
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"

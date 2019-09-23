@@ -53,6 +53,9 @@
 		TAG_FACTION =   FACTION_TEST_SUBJECTS
 	)
 
+	var/list/no_touchie = list(/obj/item/weapon/mirror,
+							   /obj/item/weapon/storage/mirror)
+
 /datum/species/monkey/New()
 	equip_adjust = list(
 		slot_l_hand_str = list("[NORTH]" = list("x" = 1, "y" = 3), "[EAST]" = list("x" = -3, "y" = 2), "[SOUTH]" = list("x" = -1, "y" = 3), "[WEST]" = list("x" = 3, "y" = 2)),
@@ -83,7 +86,7 @@
 	if(!held && !H.restrained() && prob(5))
 		var/list/touchables = list()
 		for(var/obj/O in range(1,get_turf(H)))
-			if(O.simulated && O.Adjacent(H))
+			if(O.simulated && O.Adjacent(H) && !is_type_in_list(O, no_touchie))
 				touchables += O
 		if(touchables.len)
 			var/obj/touchy = pick(touchables)

@@ -31,7 +31,7 @@
 	name = "orion trail"
 	desc = "Imported straight from Outpost-T71!"
 	icon_state = "arcade"
-	circuit = /obj/item/weapon/circuitboard/arcade/orion_trail
+	random = FALSE
 	var/list/supplies = list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5" = 0, "6" = 0) //engine,hull,electronics,food,fuel
 	var/list/supply_cost = list("1" = 1000, "2" = 950, "3" = 1100, "4" = 75, "5" = 100)
 	var/list/supply_name = list("1" = "engine parts", "2" = "hull parts", "3" = "electronic parts", "4" = "food", "5" = "fuel", "6" = "thalers")
@@ -84,9 +84,7 @@
 	port = 0
 	view = ORION_VIEW_MAIN
 
-/obj/machinery/computer/arcade/orion_trail/attack_hand(mob/user)
-	if(..())
-		return
+/obj/machinery/computer/arcade/orion_trail/interact(mob/user)
 	var/dat = ""
 	if(event == null)
 		newgame()
@@ -183,7 +181,6 @@
 				event = ORION_TRAIL_SPACEPORT
 			if(event == ORION_TRAIL_GAMEOVER)
 				event = null
-				attack_hand(user)
 				return TOPIC_REFRESH
 			if(!settlers.len)
 				event_desc = "You and your crew were killed on the way to Orion, your ship left abandoned for scavengers to find."
@@ -277,9 +274,6 @@
 					remove_settler(null, "died while you were escaping!")
 		event = ORION_TRAIL_SPACEPORT_RAIDED
 		return TOPIC_REFRESH
-
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
 
 /obj/machinery/computer/arcade/orion_trail/proc/change_resource(var/specific = null, var/add = 1)
 	if(!specific)
@@ -470,8 +464,7 @@
 	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
 	if(emagged)
 		new /obj/item/weapon/orion_ship(src.loc)
-		message_admins("[key_name_admin(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
-		log_game("[key_name(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
+		log_and_message_admins("made it to Orion on an emagged machine and got an explosive toy ship.")
 	else
 		prizevend()
 	event = null
@@ -495,8 +488,7 @@
 /obj/item/weapon/orion_ship/attack_self(mob/user)
 	if(active)
 		return
-	message_admins("[key_name_admin(usr)] primed an explosive Orion ship for detonation.")
-	log_game("[key_name(usr)] primed an explosive Orion ship for detonation.")
+	log_and_message_admins("primed an explosive Orion ship for detonation.", user)
 	to_chat(user, "<span class='warning'>You flip the switch on the underside of [src].</span>")
 	active = 1
 	src.visible_message("<span class='notice'>[src] softly beeps and whirs to life!</span>")

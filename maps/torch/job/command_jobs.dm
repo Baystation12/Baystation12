@@ -27,6 +27,11 @@
 /datum/job/captain/get_description_blurb()
 	return "You are the Commanding Officer. You are the top dog. You are an experienced professional officer in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfils its space exploration mission. Delegate to your Executive Officer, your department heads, and your Senior Enlisted Advisor to effectively manage the ship, and listen to and trust their expertise."
 
+/datum/job/captain/post_equip_rank(var/mob/person, var/alt_title)
+	var/sound/announce_sound = (GAME_STATE <= RUNLEVEL_SETUP)? null : sound('sound/misc/boatswain.ogg', volume=20)
+	captain_announcement.Announce("All hands, [alt_title || title] [person.real_name] on deck!", new_sound = announce_sound)
+	..()
+
 /datum/job/hop
 	title = "Executive Officer"
 	supervisors = "the Commanding Officer"
@@ -42,8 +47,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o5,
-		/datum/mil_rank/fleet/o5,
-		/datum/mil_rank/fleet/o4
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/fleet/o5
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
@@ -118,9 +123,9 @@
 		access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 		access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
 		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
-		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd, 
-		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew, 
-		access_expedition_shuttle, access_expedition_shuttle_helm
+		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd,
+		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew,
+		access_expedition_shuttle, access_expedition_shuttle_helm, access_maint_tunnels
 	)
 	minimal_access = list()
 
@@ -144,8 +149,8 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/o4,
 		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4,
 		/datum/mil_rank/ec/o3
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -188,8 +193,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o3,
-		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o2
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3
 	)
 	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
 	                    SKILL_COMPUTER     = SKILL_ADEPT,
@@ -243,8 +248,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o3,
-		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o2
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_EVA         = SKILL_BASIC,
@@ -270,7 +275,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hos/get_description_blurb()
-	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
+	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Chief and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -313,9 +318,9 @@
 		/datum/mil_branch/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/fleet/e8
+		/datum/mil_rank/fleet/e9
 	)
 	min_skill = list(   SKILL_EVA        = SKILL_BASIC,
 	                    SKILL_COMBAT     = SKILL_BASIC,

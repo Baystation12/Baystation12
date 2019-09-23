@@ -10,6 +10,7 @@
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/email_administration
 	required_access = access_network
+	category = PROG_ADMIN
 
 /datum/nano_module/program/email_administration
 	name = "Email Administration"
@@ -31,7 +32,7 @@
 		data["error"] = error
 	else if(istype(current_message))
 		data["msg_title"] = current_message.title
-		data["msg_body"] = pencode2html(current_message.stored_data)
+		data["msg_body"] = digitalPencode2html(current_message.stored_data)
 		data["msg_timestamp"] = current_message.timestamp
 		data["msg_source"] = current_message.source
 	else if(istype(current_account))

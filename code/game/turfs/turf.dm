@@ -2,8 +2,7 @@
 	icon = 'icons/turf/floors.dmi'
 	level = 1
 
-	plane = TURF_PLANE
-	layer = BASE_TURF_LAYER
+	layer = TURF_LAYER
 
 	var/turf_flags
 
@@ -43,6 +42,7 @@
 
 /turf/on_update_icon()
 	update_flood_overlay()
+	queue_ao(FALSE)
 
 /turf/proc/update_flood_overlay()
 	if(is_flooded(absolute = TRUE))
@@ -309,3 +309,12 @@ var/const/enterloopsanity = 100
 		to_chat(vandal, "<span class='notice'>You feel much safer.</span>")
 
 	return TRUE
+
+/turf/proc/is_wall()
+	return FALSE
+
+/turf/proc/is_open()
+	return FALSE
+
+/turf/proc/is_floor()
+	return FALSE

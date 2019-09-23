@@ -4,6 +4,7 @@
 	icon_state = "soil"
 	density = 0
 	use_power = POWER_USE_OFF
+	stat_immune = NOINPUT | NOSCREEN | NOPOWER
 	mechanical = 0
 	tray_light = 0
 

@@ -31,7 +31,7 @@
 
 /*
 	Standard mob ClickOn()
-	Handles exceptions: middle click, modified clicks, mech actions
+	Handles exceptions: middle click, modified clicks, exosuit actions
 
 	After that, mostly just check your state, check whether you're holding an item,
 	check whether you're adjacent to the target, then pass off the click to whoever
@@ -48,6 +48,11 @@
 		return
 
 	next_click = world.time + 1
+
+	// I hate to do this but intercepting it here is much nicer than a dozen overrides.
+	if(istype(loc, /mob/living/exosuit) && !(A in src.contents))
+		var/mob/living/exosuit/M = loc
+		return M.ClickOn(A, params, src)
 
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
@@ -78,12 +83,6 @@
 
 	if(!canClick()) // in the year 2000...
 		return
-
-	if(istype(loc, /obj/mecha))
-		if(!locate(/turf) in list(A, A.loc)) // Prevents inventory from being drilled
-			return
-		var/obj/mecha/M = loc
-		return M.click_action(A, src)
 
 	if(restrained())
 		setClickCooldown(10)
@@ -198,12 +197,13 @@
 	animals lunging, etc.
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
-	if(!mutations.len) return
+	if(!mutations.len) 
+		return FALSE
+
 	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
-	else if(MUTATION_TK in mutations)
-		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		A.attack_tk(src)
+		return TRUE
+
 /*
 	Restrained ClickOn
 
@@ -245,14 +245,16 @@
 	For most objects, pull
 */
 /mob/proc/CtrlClickOn(var/atom/A)
-	A.CtrlClick(src)
-	return
+	return A.CtrlClick(src)
+	
 /atom/proc/CtrlClick(var/mob/user)
-	return
+	return FALSE
 
 /atom/movable/CtrlClick(var/mob/user)
 	if(Adjacent(user))
 		user.start_pulling(src)
+		return TRUE
+	. = ..()
 
 /*
 	Alt click
@@ -324,10 +326,10 @@
 /mob/living/carbon/human/LaserEyes()
 	if(nutrition>0)
 		..()
-		nutrition = max(nutrition - rand(1,5),0)
+		adjust_nutrition(-(rand(1,5)))
 		handle_regular_hud_updates()
 	else
-		to_chat(src, "<span class='warning'>You're out of energy!  You need food!</span>")
+		to_chat(src, SPAN_WARNING("You're out of energy! You need food!"))
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)

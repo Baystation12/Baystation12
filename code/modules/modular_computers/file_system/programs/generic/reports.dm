@@ -6,10 +6,11 @@
 	filedesc = "Report Editor"
 	nanomodule_path = /datum/nano_module/program/reports
 	extended_desc = "A general paperwork viewing and editing utility."
-	size = 6
+	size = 2
 	available_on_ntnet = 1
 	requires_ntnet = 0
 	usage_flags = PROGRAM_ALL
+	category = PROG_OFFICE
 
 /datum/nano_module/program/reports
 	name = "Report Editor"

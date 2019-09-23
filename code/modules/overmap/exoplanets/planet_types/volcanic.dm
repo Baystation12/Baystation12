@@ -4,9 +4,18 @@
 	color = "#8e3900"
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
+	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#7a5b3a","#120309")
 	possible_themes = list()
 	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
+	surface_color = "#261e19"
+	water_color = "#c74d00"
+
+/obj/effect/overmap/sector/exoplanet/volcanic/get_atmosphere_color()
+	return COLOR_GRAY20
+
+/obj/effect/overmap/sector/exoplanet/volcanic/generate_habitability()
+	return HABITABILITY_BAD
 
 /obj/effect/overmap/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
@@ -30,13 +39,13 @@
 	water_type = /turf/simulated/floor/exoplanet/lava
 	water_level_min = 5
 	water_level_max = 6
-	plantcolors = list("#a23c05","#3f1f0d","#662929","#ba6222","#5c755e","#120309")
 
 	fauna_prob = 1
-	flora_prob = 7
+	flora_prob = 3
 	large_flora_prob = 0
 	flora_diversity = 3
 	fauna_types = list(/mob/living/simple_animal/thinbug)
+	megafauna_types = list(/mob/living/simple_animal/hostile/drake)
 
 //Squashing most of 1 tile lava puddles
 /datum/random_map/noise/exoplanet/volcanic/cleanup()
@@ -63,6 +72,7 @@
 	name = "volcanic floor"
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "cold"
+	dirt_color = COLOR_GRAY20
 
 /datum/random_map/automata/cave_system/mountains/volcanic
 	iterations = 2
@@ -73,7 +83,7 @@
 
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
 	..()
-	if(planetary_area)	
+	if(planetary_area)
 		T.mined_turf = prob(90) ? planetary_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava
@@ -81,6 +91,7 @@
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "lava"
 	movement_delay = 4
+	dirt_color = COLOR_GRAY20
 	var/list/victims
 
 /turf/simulated/floor/exoplanet/lava/on_update_icon()
@@ -106,6 +117,7 @@
 		START_PROCESSING(SSobj, src)
 
 /turf/simulated/floor/exoplanet/lava/Exited(atom/movable/AM)
+	. = ..()
 	LAZYREMOVE(victims, weakref(AM))
 
 /turf/simulated/floor/exoplanet/lava/Process()

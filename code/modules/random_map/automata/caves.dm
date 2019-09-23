@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(weighted_minerals_sparse, \
 		MATERIAL_PITCHBLENDE =  8, \
 		MATERIAL_PLATINUM =     8, \
 		MATERIAL_HEMATITE =    35, \
-		MATERIAL_GRAPHENE =    35, \
+		MATERIAL_GRAPHITE =    35, \
 		MATERIAL_DIAMOND =      5, \
 		MATERIAL_GOLD =         8, \
 		MATERIAL_SILVER =       8, \
@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 		MATERIAL_PITCHBLENDE = 10, \
 		MATERIAL_PLATINUM =    10, \
 		MATERIAL_HEMATITE =    20, \
-		MATERIAL_GRAPHENE =    20, \
+		MATERIAL_GRAPHITE =    20, \
 		MATERIAL_DIAMOND =      5, \
 		MATERIAL_GOLD =        10, \
 		MATERIAL_SILVER =      10, \

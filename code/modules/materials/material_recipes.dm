@@ -28,7 +28,9 @@
 	. += new/datum/stack_recipe/spoon(src)
 	. += new/datum/stack_recipe/ring(src)
 	. += new/datum/stack_recipe/clipboard(src)
-		
+	. += new/datum/stack_recipe/urn(src)
+	. += new/datum/stack_recipe/cross(src)
+
 	if(integrity>50)
 		. += new/datum/stack_recipe/furniture/chair(src) //NOTE: the wood material has it's own special chair recipe
 		. += new/datum/stack_recipe_list("padded [display_name] chairs", create_recipe_list(/datum/stack_recipe/furniture/chair/padded))
@@ -38,6 +40,8 @@
 		. += new/datum/stack_recipe/furniture/stool(src)
 		. += new/datum/stack_recipe/furniture/bar_stool(src)
 		. += new/datum/stack_recipe/furniture/bed(src)
+		. += new/datum/stack_recipe/furniture/pew(src)
+		. += new/datum/stack_recipe/furniture/pew_left(src)
 		. += new/datum/stack_recipe/lock(src)
 		. += new/datum/stack_recipe/railing(src)
 		. += new/datum/stack_recipe/rod(src)
@@ -48,6 +52,7 @@
 		. += new/datum/stack_recipe/knife(src)
 		. += new/datum/stack_recipe/bell(src)
 		. += new/datum/stack_recipe/blade(src)
+		. += new/datum/stack_recipe/drill_head(src)
 
 /material/steel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -65,6 +70,7 @@
 	. += new/datum/stack_recipe/furniture/rack(src)
 	. += new/datum/stack_recipe/furniture/closet(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
+	. += new/datum/stack_recipe/furniture/tank(src)
 	. += new/datum/stack_recipe/cannon(src)
 	. += create_recipe_list(/datum/stack_recipe/tile/metal)
 	. += new/datum/stack_recipe/furniture/computerframe(src)
@@ -164,4 +170,4 @@
 	if(reinforce_material)	//recipies below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/table_frame(src)
-	. += new/datum/stack_recipe/grenade(src) 
+	. += new/datum/stack_recipe/grenade(src)
