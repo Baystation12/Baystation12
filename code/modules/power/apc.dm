@@ -671,6 +671,9 @@
 					to_chat(user, "<span class='warning'>You fail to [ locked ? "unlock" : "lock"] the APC interface.</span>")
 				return 1
 
+/obj/machinery/power/apc/CanUseTopicPhysical(var/mob/user)
+	return GLOB.physical_state.can_use_topic(nano_host(), user)
+
 /obj/machinery/power/apc/physical_attack_hand(mob/user)
 	//Human mob special interaction goes here.
 	if(istype(user,/mob/living/carbon/human))
