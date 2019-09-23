@@ -609,7 +609,7 @@
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 1;
 	dir = 4;
-	initial_id_tag = "aux_fusion_plant"
+	initial_id_tag = "hyperion_engine"
 	},
 /turf/simulated/floor/reinforced,
 /area/ship/hyperion/engine/port)
@@ -635,7 +635,7 @@
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 1;
 	dir = 8;
-	initial_id_tag = "aux_fusion_plant"
+	initial_id_tag = "hyperion_engine"
 	},
 /turf/simulated/floor/reinforced,
 /area/ship/hyperion/engine/star)
@@ -983,7 +983,9 @@
 /turf/simulated/floor/tiled,
 /area/ship/hyperion/spine)
 "ci" = (
-/obj/machinery/power/emitter/gyrotron/anchored,
+/obj/machinery/power/emitter/gyrotron/anchored{
+	initial_id_tag = "hyperion_engine"
+	},
 /obj/structure/cable{
 	d1 = 32;
 	d2 = 2;
@@ -1261,7 +1263,7 @@
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 1;
 	dir = 4;
-	initial_id_tag = "aux_fusion_plant"
+	initial_id_tag = "hyperion_engine"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
@@ -1287,7 +1289,7 @@
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 1;
 	dir = 4;
-	initial_id_tag = "aux_fusion_plant"
+	initial_id_tag = "hyperion_engine"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -1325,7 +1327,8 @@
 	dir = 4
 	},
 /obj/machinery/power/fusion_core{
-	anchored = 1
+	anchored = 1;
+	initial_id_tag = "hyperion_engine"
 	},
 /obj/structure/cable{
 	d1 = 32;
@@ -1381,7 +1384,7 @@
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 1;
 	dir = 8;
-	initial_id_tag = "aux_fusion_plant"
+	initial_id_tag = "hyperion_engine"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
