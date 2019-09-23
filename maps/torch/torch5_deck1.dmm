@@ -15500,7 +15500,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
 "cEb" = (
-/obj/machinery/computer/operating,
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
 	dir = 5
@@ -15509,6 +15508,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/vitals_monitor,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "cFb" = (
@@ -17541,9 +17541,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/washroom)
 "eNb" = (
-/obj/machinery/computer/operating{
-	name = "Robotics Operating Computer"
-	},
 /obj/effect/floor_decal/corner/yellow,
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
@@ -17566,6 +17563,7 @@
 	dir = 4;
 	network = list("Medical, Engineering")
 	},
+/obj/machinery/vitals_monitor,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eOb" = (
