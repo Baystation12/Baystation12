@@ -1,0 +1,5 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - rscadd: "Added vitals monitor machines. Drag them onto people to 'hook' them. They will display general state of brain activity, pulse and breathing, with blinky warnings if something's wrong."
+  - maptweak: "Replaced computers by optables with vitals monitors."
