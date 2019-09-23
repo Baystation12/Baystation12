@@ -1,0 +1,9 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Pipe dispenser is now a modifiable machine."
+  - rscadd: "Pipe dispenser circuit is now a printable research design."
+  - bugfix: "Disposal outlet will now properly eject objects outside of shuttles"
+  - tweak: "SMES installing/removing components are possible while active. They still need to have their safety wire disabled but this will allow for more sabotage or anti tampering opportunity."
+  - tweak: "SMES discharge will now call electrocution (with some minor nerfs so it's little less lethal), so insulation and armour will be taken into calculations."
+  - tweak: "SMES will now shock people upon pulsing/cutting the grounding wire, similar to vending machines. The severity is based upon the SMES's powernet and is reduced with the safety wire on."
