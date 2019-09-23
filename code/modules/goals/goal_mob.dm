@@ -45,3 +45,26 @@
 		to_chat(mind.current, SPAN_NOTICE("<br><br>You can check your round goals with the <b>Show Goals</b> verb."))
 
 	to_chat(src, "<hr>")
+
+/mob/living/var/last_goal_reminder
+
+/mob/living/proc/handle_goal_reminder()
+	if(!mind || !client)
+		return
+
+	if(!LAZYLEN(mind.goals))
+		return
+	
+	var/cooldown = 0
+	switch(client.get_preference_value(/datum/client_preference/goal_reminder))
+		if(GLOB.PREF_NEVER)
+			return
+		if(GLOB.PREF_45_MINUTES)
+			cooldown = 45 MINUTES
+		if(GLOB.PREF_90_MINUTES)
+			cooldown = 90 MINUTES
+	if(world.time > last_goal_reminder + cooldown)
+		last_goal_reminder = world.time
+		to_chat(src, SPAN_NOTICE("Your goals for this shift:"))
+		to_chat(src, SPAN_NOTICE(jointext(mind.summarize_goals(FALSE, FALSE, src), "<br>")))
+		

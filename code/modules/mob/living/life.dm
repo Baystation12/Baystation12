@@ -38,6 +38,9 @@
 
 	handle_regular_hud_updates()
 
+	if(client && mind && LAZYLEN(mind.goals))
+		handle_goal_reminder()
+
 	return 1
 
 /mob/living/proc/handle_breathing()

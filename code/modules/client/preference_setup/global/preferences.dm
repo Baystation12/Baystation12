@@ -25,6 +25,8 @@ GLOBAL_VAR_CONST(PREF_SHORTHAND, "Shorthand")
 GLOBAL_VAR_CONST(PREF_NEVER, "Never")
 GLOBAL_VAR_CONST(PREF_NON_ANTAG, "Non-Antag Only")
 GLOBAL_VAR_CONST(PREF_ALWAYS, "Always")
+GLOBAL_VAR_CONST(PREF_45_MINUTES, "45 minutes")
+GLOBAL_VAR_CONST(PREF_90_MINUTES, "90 minutes")
 
 var/list/_client_preferences
 var/list/_client_preferences_by_key
@@ -218,6 +220,11 @@ var/list/_client_preferences_by_type
 	description ="Examining messages"
 	key = "EXAMINE_MESSAGES"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
+/datum/client_preference/goal_reminder
+	description ="Remind about goals"
+	key = "GOAL_REMINDER"
+	options = list(GLOB.PREF_90_MINUTES, GLOB.PREF_45_MINUTES, GLOB.PREF_NEVER)
 
 /********************
 * General Staff Preferences *
