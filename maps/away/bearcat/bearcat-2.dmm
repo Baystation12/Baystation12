@@ -5977,11 +5977,10 @@
 	id_tag = "swordfish_dock_port";
 	pixel_x = 24;
 	pixel_y = 24;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	tag_airpump = "merchant_shuttle_station_pump";
-	tag_chamber_sensor = "merchant_shuttle_station_sensor";
-	tag_exterior_door = "merchant_shuttle_station_exterior";
-	tag_interior_door = "merchant_shuttle_station_interior"
+	tag_airpump = "swordfish_dock_pump";
+	tag_chamber_sensor = "swordfish_dock_sensor";
+	tag_exterior_door = "swordfish_dock_out";
+	tag_interior_door = "swordfish_dock_in"
 	},
 /obj/structure/cable{
 	d1 = 4;
