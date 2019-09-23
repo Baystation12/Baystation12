@@ -4,7 +4,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/hyperion/pathfinder
 	supervisors = "the infinite expanse of space"
 	info = "Your ship has suffered a catastrophic amount of damage after an unplanned rapid landing on this planet, due to \
-	an ill-timed ionic anomaly. Gather your explorers and survive long enough to make it off this planet."
+	an ill-timed bluespace anomaly. Gather your explorers and survive long enough to make it off this planet."
 
 /datum/job/submap/hyperion_explorer
 	title = "Independant Explorer"
@@ -12,7 +12,7 @@
 	total_positions = 3
 	outfit_type = /decl/hierarchy/outfit/job/hyperion/explorer
 	info = "Your ship has suffered a catastrophic amount of damage after an unplanned rapid landing on this planet, due to \
-	an ill-timed ionic anomaly. Work together with the Pathfinder and what's left of the crew, and maybe you'll be able \
+	an ill-timed bluespace anomaly. Work together with the Pathfinder and what's left of the crew, and maybe you'll be able \
 	to survive long enough to get off this planet."
 
 #define HYPERION_OUTFIT_JOB_NAME(job_name) ("Hyperion - Job - " + job_name)
@@ -27,24 +27,14 @@
 
 /decl/hierarchy/outfit/job/hyperion/explorer
 	name = HYPERION_OUTFIT_JOB_NAME("Explorer")
-	id_type = /obj/item/weapon/card/id/bearcat
+	id_type = /obj/item/weapon/card/id/hyperion
 
 /decl/hierarchy/outfit/job/hyperion/pathfinder
 	name = HYPERION_OUTFIT_JOB_NAME("Pathfinder")
-	uniform = /obj/item/clothing/under/casual_pants/classicjeans
+	uniform = /datum/gear/uniform/jumpsuit
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
-	id_type = /obj/item/weapon/card/id/bearcat_captain
-
-/decl/hierarchy/outfit/job/hyperion/pathfinder/post_equip(var/mob/living/carbon/human/H)
-	..()
-	var/obj/item/clothing/uniform = H.w_uniform
-	if(uniform)
-		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
-		if(uniform.can_attach_accessory(eyegore))
-			uniform.attach_accessory(null, eyegore)
-		else
-			qdel(eyegore)
+	id_type = /obj/item/weapon/card/id/hyperion_pathfinder
 
 #undef HYPERION_OUTFIT_JOB_NAME
 
