@@ -497,6 +497,10 @@
 	var/turf/T = get_turf(holder)
 	if(T)
 		var/adj_power = round(boompower * activated_volume/60)
+		var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
+		var/gas_moles = 3 * volume
+		products.adjust_multi(GAS_CO2, 0.5 * gas_moles, GAS_NITROGEN, 0.3 * gas_moles, GAS_STEAM, 0.2 * gas_moles)
+		T.assume_air(products)
 		explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
 		remove_self(activated_volume)
 
