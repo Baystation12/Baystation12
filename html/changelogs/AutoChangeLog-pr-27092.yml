@@ -1,6 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - rscadd: "Chemical explosions (welderfuel and ANFO) now produce a bunch of heated gas during explosion."
-  - rscadd: "Welderfuel produces N, NO, NO2 and a pinch of Hydrogen for flavor"
-  - rscadd: "ANFO produces CO2, nitrogen and water"

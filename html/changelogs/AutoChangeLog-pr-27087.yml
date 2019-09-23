@@ -1,4 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - bugfix: "APC construction has been fixed, they will now be deconstructable even when broken."
