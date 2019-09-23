@@ -1,0 +1,5 @@
+author: "NanakoAC"
+delete-after: True
+changes: 
+  - tweak: "Adds bottled water to gym vendor"
+  - tweak: "Adds bottled water to ration crates"
