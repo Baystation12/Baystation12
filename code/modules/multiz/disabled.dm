@@ -1,5 +1,3 @@
-GLOBAL_VAR_CONST(HIGHEST_CONNECTABLE_ZLEVEL_INDEX, 0)
-
 proc/HasAbove(var/z)
 	return 0
 proc/HasBelow(var/z)

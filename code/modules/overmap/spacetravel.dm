@@ -39,7 +39,7 @@ proc/get_deepspace(x,y)
 		res.y = y
 		return res
 	else
-		var/datum/level/L = SSmapping.get_empty_level()
+		var/datum/level/L = get_empty_level()
 		return new /obj/effect/overmap/sector/temporary(x, y, L.z)
 
 /atom/movable/proc/lost_in_space()
@@ -51,6 +51,12 @@ proc/get_deepspace(x,y)
 /mob/lost_in_space()
 	return isnull(client)
 
+
+//Oddly, this proc is only for drifting mobs. shuttles don't use it
+//TODO Here:
+	//Pass in the direction if precalculated
+	//And/or Make a function for better edge direction calculation to remove that goddamn 4-stage elsif block
+	//Find/create level datums for the random areas of space and ID them appropriately
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if (!T || !A)
 		return
@@ -68,6 +74,8 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/ny = 1
 	var/nz = 1
 
+	//Figure out what edge of the world we're off
+		//Todo: Replace this shit
 	if(T.x <= TRANSITIONEDGE)
 		nx = world.maxx - TRANSITIONEDGE - 2
 		ny = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
@@ -86,14 +94,24 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 
 	testing("[A] spacemoving from [M] ([M.x], [M.y]).")
 
+
+	//This level is where the overmap itself exists. the thing which is visible in helm consoles
 	var/turf/map = locate(M.x,M.y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/TM
 	for(var/obj/effect/overmap/O in map)
+		//This is finding all the possible visitable locations within the specified map tile
+		//TODO: Remove this stupid 50% probabiltiy
 		if(O != M && O.in_space && prob(50))
 			TM = O
 			break
+
 	if(!TM)
+		//This function gets an empty level.
+			//Todo: Make the returned level be removed from the empty levels list and be named appropriately with overmap grid goords
 		TM = get_deepspace(M.x,M.y)
+
+	//This is picking from all the possible visitable locations within the specified map tile, and levels within.
+	//This could include ships or planets, or it could be an already-generated empty space tile from the call above
 	nz = pick(TM.map_z)
 
 	var/turf/dest = locate(nx,ny,nz)

@@ -92,10 +92,18 @@
 
 		return destination
 	else
-		if (direction == UP)
-			destination.y = world.maxy //Bizarrely coordinates are counted from the topleft corner, so maxy is the bottom of the screen
-	//Todo: Horizontal directions? Will we use this system for those?
-	return null
+		if (direction == NORTH)
+			destination.y = world.maxy - (TRANSITIONEDGE +1)  //Bizarrely coordinates are counted from the topleft corner, so maxy is the bottom of the screen
+		else if (direction == SOUTH)
+			destination.y = (TRANSITIONEDGE +1)
+		else if (direction == EAST)
+			destination.x = (TRANSITIONEDGE +1)
+		else if (direction == WEST)
+			destination.x = world.maxx - (TRANSITIONEDGE +1)
+		else
+			return null //Should not happen
+
+	return destination
 
 
 

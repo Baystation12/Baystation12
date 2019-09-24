@@ -237,7 +237,11 @@
 	if(!simulated)
 		return
 
-	if(!z || (z in GLOB.using_map.sealed_levels))
+	var/datum/level/current = get_level_from_z(z)
+	var/datum/level/next = null
+	var/direction = null
+
+	if (!current || current.sealed)
 		return
 
 	if(!GLOB.universe.OnTouchMapEdge(src))
@@ -246,13 +250,6 @@
 	if(GLOB.using_map.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
-
-	var/new_x
-	var/new_y
-	var/new_z = GLOB.using_map.get_transit_zlevel(z)
-	var/datum/level/current = get_level_from_z(z)
-	var/datum/level/next = null
-	var/direction = null
 
 	if(x <= TRANSITIONEDGE)
 		direction = WEST
@@ -269,7 +266,8 @@
 	if (direction && current)
 		next = current.get_connected_level(direction, src)
 
+	var/turf/T
 	if (next)
-		var/turf/T = next.get_landing_point(src, direction,  ZMOVE_PHASE, var/datum/level/origin = current)
+		T = next.get_landing_point(src, direction,  ZMOVE_PHASE, current)
 	if(T)
 		forceMove(T)
