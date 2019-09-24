@@ -17,6 +17,7 @@
 	bcolor = blcolor
 	blood = nblood
 	update_icon()
+	set_extension(src, /datum/extension/turf_hand, /datum/extension/turf_hand, 10)
 
 /obj/effect/rune/on_update_icon()
 	overlays.Cut()
