@@ -16,7 +16,7 @@
 /decl/submap_archetype/hyperioncrash
 	descriptor = "hyperion crashsite"
 	crew_jobs = list(
-		/datum/job/submap/hyperion_pathfinder, 
+		/datum/job/submap/hyperion_pathfinder,
 		/datum/job/submap/hyperion_explorer
 	)
 
@@ -34,7 +34,7 @@
 	burn_delay = 6 SECONDS
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_LARGE
-	
+
 /obj/effect/shuttle_landmark/hyperion/start
 	name = "Hyperion Crashsite"
 	base_area = /area/ship/hyperion

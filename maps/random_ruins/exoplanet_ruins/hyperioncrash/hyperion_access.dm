@@ -7,7 +7,7 @@
 /var/const/access_hyperion_pathfinder = "ACCESS_HYPERION_PATHFINDER" //997
 /datum/access/hyperion_pathfinder
 	id = access_hyperion_pathfinder
-	desc = "IND Pathfinder"
+	desc = "IND Expedition Leader"
 	region = ACCESS_REGION_NONE
 
 /obj/item/weapon/card/id/hyperion

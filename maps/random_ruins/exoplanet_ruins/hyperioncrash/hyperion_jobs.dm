@@ -1,5 +1,5 @@
 /datum/job/submap/hyperion_pathfinder
-	title = "Independant Pathfinder"
+	title = "Independant Expedition Leader"
 	total_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/hyperion/pathfinder
 	supervisors = "the infinite expanse of space"
@@ -8,11 +8,11 @@
 
 /datum/job/submap/hyperion_explorer
 	title = "Independant Explorer"
-	supervisors = "the Pathfinder"
+	supervisors = "the Expedition Leader"
 	total_positions = 3
 	outfit_type = /decl/hierarchy/outfit/job/hyperion/explorer
 	info = "Your ship has suffered a catastrophic amount of damage after an unplanned rapid landing on this planet, due to \
-	an ill-timed bluespace anomaly. Work together with the Pathfinder and what's left of the crew, and maybe you'll be able \
+	an ill-timed bluespace anomaly. Work together with the Expedition Leader and what's left of the crew, and maybe you'll be able \
 	to survive long enough to get off this planet."
 
 #define HYPERION_OUTFIT_JOB_NAME(job_name) ("Hyperion - Job - " + job_name)
@@ -39,7 +39,7 @@
 #undef HYPERION_OUTFIT_JOB_NAME
 
 /obj/effect/submap_landmark/spawnpoint/hyperion/pathfinder
-	name = "Independant Pathfinder"
+	name = "Independant Expedition Leader"
 
 /obj/effect/submap_landmark/spawnpoint/hyperion/explorer
 	name = "Independant Explorer"

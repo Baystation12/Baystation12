@@ -4,6 +4,7 @@
 
 /area/ship/hyperion/spine
 	name = "Hallway - Spine"
+	icon_state = "green"
 
 /area/ship/hyperion/medbay
 	name = "Medical Bay"

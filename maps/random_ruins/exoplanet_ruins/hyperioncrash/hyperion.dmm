@@ -13,7 +13,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "rescuedock";
+	id_tag = "hyperion_shutters";
 	name = "Blast Shutters";
 	opacity = 0
 	},
@@ -25,7 +25,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "rescuedock";
+	id_tag = "hyperion_shutters";
 	name = "Blast Shutters";
 	opacity = 0
 	},
@@ -45,7 +45,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "rescuedock";
+	id_tag = "hyperion_shutters";
 	name = "Blast Shutters";
 	opacity = 0
 	},
@@ -180,6 +180,13 @@
 	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	desc = "A remote control-switch for shutters.";
+	id_tag = "hyperion_shutters";
+	name = "Window Shutters";
+	pixel_x = 26;
+	pixel_y = 0
 	},
 /turf/simulated/floor/shuttle/black,
 /area/ship/hyperion/cockpit)
@@ -421,7 +428,10 @@
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 4
 	},
-/obj/machinery/door/airlock/external,
+/obj/machinery/door/airlock/external{
+	frequency = 1371;
+	id_tag = "hyperion_airlock_internal"
+	},
 /turf/simulated/floor/shuttle/black,
 /area/ship/hyperion/eva)
 "aY" = (
@@ -479,7 +489,7 @@
 /turf/simulated/floor/reinforced,
 /area/ship/hyperion/engineering)
 "bf" = (
-/obj/machinery/power/smes/buildable/preset/torch/engine_main,
+/obj/machinery/power/smes/buildable/max_cap_in_out,
 /turf/simulated/floor/reinforced,
 /area/ship/hyperion/engineering)
 "bg" = (
@@ -568,7 +578,6 @@
 /turf/simulated/floor/tiled,
 /area/ship/hyperion/spine)
 "bp" = (
-/obj/machinery/suit_storage_unit/explorer,
 /turf/simulated/floor/shuttle/black,
 /area/ship/hyperion/eva)
 "bq" = (
@@ -595,7 +604,10 @@
 /turf/simulated/floor/tiled,
 /area/ship/hyperion/spine)
 "bv" = (
-/obj/machinery/door/airlock/external,
+/obj/machinery/door/airlock/external{
+	frequency = 1371;
+	id_tag = "hyperion_airlock_external"
+	},
 /turf/simulated/floor/shuttle/black,
 /area/ship/hyperion/eva)
 "bw" = (
@@ -927,7 +939,6 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/suit_storage_unit/explorer,
 /turf/simulated/floor/shuttle/black,
 /area/ship/hyperion/eva)
 "ce" = (
@@ -1119,6 +1130,11 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
+/obj/machinery/button/blast_door{
+	desc = "It controls the reactor blast doors, remotely.";
+	id_tag = "reactor_blast";
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled,
 /area/ship/hyperion/spine)
 "ct" = (
@@ -1303,7 +1319,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "rescuedock";
+	id_tag = "reactor_blast";
 	name = "Blast Shutters";
 	opacity = 0
 	},
@@ -1350,7 +1366,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "rescuedock";
+	id_tag = "reactor_blast";
 	name = "Blast Shutters";
 	opacity = 0
 	},
@@ -1366,7 +1382,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "rescuedock";
+	id_tag = "reactor_blast";
 	name = "Blast Shutters";
 	opacity = 0
 	},
@@ -1422,7 +1438,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "rescuedock";
+	id_tag = "reactor_blast";
 	name = "Blast Shutters";
 	opacity = 0
 	},
@@ -1448,6 +1464,8 @@
 /area/ship/hyperion/eva)
 "da" = (
 /obj/machinery/access_button/airlock_interior{
+	frequency = 1371;
+	id_tag = "hyperion_dock_button";
 	master_tag = "prototype_controller";
 	pixel_x = 23;
 	pixel_y = 23
@@ -1659,7 +1677,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/vending/engineering/bearcat,
+/obj/machinery/vending/tool,
 /turf/simulated/floor,
 /area/ship/hyperion/engine/star)
 "dv" = (
@@ -1769,6 +1787,31 @@
 	},
 /turf/template_noop,
 /area/ship/hyperion/spine)
+"Kf" = (
+/obj/machinery/atmospherics/unary/vent_scrubber{
+	icon_state = "map_scrubber_off";
+	dir = 1
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
+	frequency = 1371;
+	id_tag = "hyperion_docking_port";
+	pixel_y = -24
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/hyperion/eva)
+"Ua" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 2;
+	level = 2
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1371;
+	id_tag = "hyperion_dock_sensor";
+	pixel_y = 24
+	},
+/turf/simulated/floor/shuttle/black,
+/area/ship/hyperion/eva)
 
 (1,1,1) = {"
 aa
@@ -2152,7 +2195,7 @@ aa
 ac
 aj
 aH
-aT
+Kf
 ab
 ba
 ba
@@ -2172,7 +2215,7 @@ aa
 aa
 aa
 ab
-aj
+Ua
 bi
 aT
 ab
