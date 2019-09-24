@@ -1,0 +1,4 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - tweak: "Command Announcements can now be multi line to allow for clever formatting"
