@@ -126,7 +126,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 
 /decl/fusion_reaction/phoron_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 
-	wormhole_event()
+	wormhole_event(GetConnectedZlevels(holder))
 
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()

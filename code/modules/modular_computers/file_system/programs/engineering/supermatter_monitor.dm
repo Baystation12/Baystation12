@@ -45,7 +45,7 @@
 	var/turf/T = get_turf(nano_host())
 	if(!T)
 		return
-	var/valid_z_levels = (GetConnectedZlevels(T.z) & GLOB.using_map.station_levels)
+	var/valid_z_levels = GetConnectedZlevels(T.z)
 	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
 		// Delaminating, not within coverage, not on a tile.
 		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !istype(S.loc, /turf/))
