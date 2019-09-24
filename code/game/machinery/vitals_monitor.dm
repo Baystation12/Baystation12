@@ -22,6 +22,9 @@
 /obj/machinery/vitals_monitor/examine(mob/user)
 	. = ..()
 	if(. && victim)
+		if(stat & NOPOWER)
+			to_chat(user, SPAN_NOTICE("It's unpowered."))
+			return
 		to_chat(user, SPAN_NOTICE("Vitals of [victim]:"))
 		to_chat(user, SPAN_NOTICE("Pulse: [victim.get_pulse(GETPULSE_TOOL)]"))
 
@@ -56,7 +59,8 @@
 	if(victim && !Adjacent(victim))
 		victim = null
 		update_use_power(POWER_USE_IDLE)
-	update_icon()
+	if(victim)
+		update_icon()
 	if(beep && victim && victim.pulse())
 		playsound(src, 'sound/machines/quiet_beep.ogg')
 	
@@ -136,5 +140,6 @@
 	req_components = list(
 		/obj/item/weapon/stock_parts/console_screen = 1)
 	additional_spawn_components = list(
-		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1
+		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/weapon/cell/high = 1
 	)
