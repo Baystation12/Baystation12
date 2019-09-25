@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - rscadd: "Using xenolife scanner on a stasis cage will now scan the animal inside."
