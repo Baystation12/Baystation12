@@ -39,8 +39,3 @@
 	power_usage = 10
 	processing_power = 2
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
-
-/obj/item/weapon/stock_parts/computer/processor_unit/Destroy()
-	if(holder2 && (holder2.processor_unit == src))
-		holder2.processor_unit = null
-	return ..()

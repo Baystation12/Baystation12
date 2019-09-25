@@ -6,12 +6,8 @@
 
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
-	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
 	var/last_power_usage = 0								// Last tick power usage of this computer
-	var/last_battery_percent = 0							// Used for deciding if battery percentage has chandged
-	var/last_world_time = "00:00"
-	var/list/last_header_icons
 	var/computer_emagged = FALSE							// Whether the computer is emagged.
 	var/apc_powered = FALSE									// Set automatically. Whether the computer used APC power last tick.
 	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
@@ -28,12 +24,9 @@
 	center_of_mass = null									// No pixelshifting by placing on tables, etc.
 	randpixel = 0											// And no random pixelshifting on-creation either.
 	var/icon_state_unpowered = null							// Icon state when the computer is turned off
-	var/icon_state_menu = "menu"							// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
-	var/icon_state_screensaver = "standby"
 	var/max_hardware_size = 0								// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
 	var/steel_sheet_cost = 5								// Amount of steel sheets refunded when disassembling an empty frame of this computer.
 	var/light_strength = 0									// Intensity of light this computer emits. Comparable to numbers light fixtures use.
-	var/list/idle_threads = list()							// Idle programs on background. They still receive process calls but can't be interacted with.
 
 	// Damage of the chassis. If the chassis takes too much damage it will break apart.
 	var/damage = 0				// Current damage level
@@ -59,13 +52,6 @@
 
 	var/stores_pen = FALSE
 	var/obj/item/weapon/pen/stored_pen
-
-	//Pain and suffering
-	var/receives_updates = TRUE
-	var/updating = FALSE
-	var/updates = 0
-	var/update_progress = 0
-	var/update_postshutdown
 
 	var/interact_sounds
 	var/interact_sound_volume = 40

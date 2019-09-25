@@ -9,7 +9,7 @@
 	critical = 0
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 
-	var/driver_type = /datum/computer_file/program/scanner		// A program type that the scanner interfaces with and attempts to install on insertion.
+	var/datum/computer_file/program/scanner/driver_type = /datum/computer_file/program/scanner		// A program type that the scanner interfaces with and attempts to install on insertion.
 	var/datum/computer_file/program/scanner/driver		 		// A driver program which has been set up to interface with the scanner.
 	var/can_run_scan = 0	//Whether scans can be run from the program directly.
 	var/can_view_scan = 1	//Whether the scan output can be viewed in the program.
@@ -19,23 +19,24 @@
 	do_before_uninstall()
 	. = ..()
 
-/obj/item/weapon/stock_parts/computer/scanner/proc/do_after_install(user, obj/item/modular_computer/device)
-	if(!driver_type || !device)
+/obj/item/weapon/stock_parts/computer/scanner/proc/do_after_install(user, atom/device)
+	var/datum/extension/interactive/ntos/os = get_extension(device, /datum/extension/interactive/ntos)
+	if(!driver_type || !device || !os)
 		return 0
-	if(!device.hard_drive)
+	if(!os.has_component(PART_HDD))
 		to_chat(user, "Driver installation for \the [src] failed: \the [device] lacks a hard drive.")
 		return 0
-	var/datum/computer_file/program/scanner/driver_file = new driver_type
-	var/datum/computer_file/program/scanner/old_driver = device.hard_drive.find_file_by_name(driver_file.filename)
+	var/datum/computer_file/program/scanner/old_driver = os.get_file(initial(driver_type.filename))
 	if(istype(old_driver))
 		to_chat(user, "Drivers found on \the [device]; \the [src] has been installed.")
 		old_driver.connect_scanner()
 		return 1
-	if(!device.hard_drive.store_file(driver_file))
-		to_chat(user, "Driver installation for \the [src] failed: file could not be written to \the [device.hard_drive].")
+	var/datum/computer_file/program/scanner/driver_file = new driver_type
+	if(!os.store_file(driver_file))
+		to_chat(user, "Driver installation for \the [src] failed: file could not be written to the hard drive.")
 		return 0
 	to_chat(user, "Driver software for \the [src] has been installed on \the [device].")
-	driver_file.computer = device
+	driver_file.computer = os
 	driver_file.connect_scanner()
 	return 1
 
@@ -48,6 +49,9 @@
 /obj/item/weapon/stock_parts/computer/scanner/proc/run_scan(mob/user, datum/computer_file/program/scanner/program) //For scans done from the software.
 
 /obj/item/weapon/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
+
+/obj/item/weapon/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
+	do_on_attackby(user, W)
 
 /obj/item/weapon/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)
 

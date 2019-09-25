@@ -4,7 +4,6 @@
 	icon = 'icons/obj/modular_telescreen.dmi'
 	icon_state = "telescreen"
 	icon_state_unpowered = "telescreen"
-	icon_state_menu = "menu"
 	hardware_flag = PROGRAM_TELESCREEN
 	anchored = TRUE
 	density = 0

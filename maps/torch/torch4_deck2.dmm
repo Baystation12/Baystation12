@@ -17,6 +17,7 @@
 /obj/machinery/camera/network/engine{
 	c_tag = "Tech Storage - Main"
 	},
+/obj/item/weapon/stock_parts/circuitboard/modular_computer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "ac" = (
@@ -5941,7 +5942,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
 "mt" = (
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 4
 	},
@@ -5956,7 +5957,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 8
 	},
@@ -6834,7 +6835,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
 "ow" = (
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 8
 	},
@@ -7647,7 +7648,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/seconddeck/fore)
 "qo" = (
-/obj/item/modular_computer/console/preset/engineering,
+/obj/machinery/computer/modular/preset/engineering,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos/storage)
 "qq" = (
@@ -10302,7 +10303,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "xQ" = (
-/obj/item/modular_computer/console/preset/engineering,
+/obj/machinery/computer/modular/preset/engineering,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
@@ -16416,7 +16417,7 @@
 /obj/structure/fireaxecabinet{
 	pixel_x = -32
 	},
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 4
 	},
@@ -16929,7 +16930,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "RB" = (
-/obj/item/modular_computer/console/preset/research,
+/obj/machinery/computer/modular/preset/aislot/research,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -17646,7 +17647,7 @@
 /obj/machinery/camera/network/engine{
 	c_tag = "Engine - Prototype Chamber 01"
 	},
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 8
 	},
@@ -18012,7 +18013,7 @@
 /turf/space,
 /area/space)
 "VE" = (
-/obj/item/modular_computer/console/preset/engineering,
+/obj/machinery/computer/modular/preset/engineering,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/bluespace)
 "VL" = (
@@ -18248,7 +18249,7 @@
 	icon_state = "techfloor_edges";
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 4
 	},
@@ -18372,7 +18373,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "WM" = (
-/obj/item/modular_computer/console/preset/engineering,
+/obj/machinery/computer/modular/preset/engineering,
 /obj/machinery/button/blast_door{
 	id_tag = "bsd";
 	name = "Bluespace Drive Containment";
