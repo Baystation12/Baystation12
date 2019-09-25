@@ -52,6 +52,16 @@
 		. += "Breathes:\t[list_gases(A.min_gas)]"
 		. += "Known toxins:\t[list_gases(A.max_gas)]"
 		. += "Temperature comfort zone:\t[A.minbodytemp] K to [A.maxbodytemp] K"
+		var/area/map = locate(/area/overmap)
+		for(var/obj/effect/overmap/sector/exoplanet/P in map)
+			if((A in P.animals) || is_type_in_list(A, P.repopulate_types))
+				var/list/discovered = SSstatistics.get_field(STAT_XENOFAUNA_SCANNED)
+				if(!discovered)
+					discovered = list()
+				discovered |= "[P.name]-[A.type]"
+				SSstatistics.set_field(STAT_XENOFAUNA_SCANNED, discovered)
+				. += "New xenofauna species discovered!"
+				break
 	else if(istype(target, /mob/living/carbon/slime/))
 		var/mob/living/carbon/slime/T = target
 		. += "Slime scan result for \the [T]:"
