@@ -191,14 +191,6 @@
 	icon_state = "greenflag"
 	fringe = "greenflag_fringe"
 	light_color = COLOR_LIME
-
-/obj/item/stack/flag/solgov
-	name = "sol gov flags"
-	singular_name = "sol gov flag"
-	icon_state = "solgovflag"
-	fringe = "solgovflag_fringe"
-	desc = "A portable flag with the Sol Government symbol on it. I claim this land for Sol!"
-	light_color = COLOR_BLUE
 	
 /obj/item/stack/flag/blue
 	name = "blue flags"
