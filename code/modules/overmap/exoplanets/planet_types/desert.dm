@@ -65,6 +65,7 @@
 /turf/simulated/floor/exoplanet/desert
 	name = "sand"
 	dirt_color = "#ae9e66"
+	footstep_type = FOOTSTEP_SAND
 
 /turf/simulated/floor/exoplanet/desert/New()
 	icon_state = "desert[rand(0,5)]"

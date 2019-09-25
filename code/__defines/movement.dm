@@ -15,3 +15,5 @@
 #define FOOTSTEP_BLANK		"blank"
 #define FOOTSTEP_CATWALK	"catwalk"
 #define FOOTSTEP_LAVA		"lava"
+#define FOOTSTEP_SNOW		"snow"
+#define FOOTSTEP_SAND		"sand"
