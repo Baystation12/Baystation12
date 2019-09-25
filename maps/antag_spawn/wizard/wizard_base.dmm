@@ -1,0 +1,1947 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/space/bluespace,
+/area/space)
+"ab" = (
+/turf/unsimulated/wall,
+/area/map_template/wizard_station)
+"ac" = (
+/turf/unsimulated/wall/fakeglass{
+	icon_state = "fakewindows";
+	dir = 8
+	},
+/area/map_template/wizard_station)
+"ad" = (
+/turf/unsimulated/wall/fakeglass{
+	dir = 8;
+	icon_state = "fakewindows2"
+	},
+/area/map_template/wizard_station)
+"ae" = (
+/turf/unsimulated/wall/fakeglass{
+	dir = 4
+	},
+/area/map_template/wizard_station)
+"af" = (
+/obj/structure/table/woodentable,
+/obj/item/device/flashlight/lamp/green{
+	on = 0;
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"ag" = (
+/obj/structure/bed/padded,
+/obj/item/weapon/bedsheet/rd,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"ah" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/storage/backpack/satchel/grey/withwallet,
+/obj/item/clothing/glasses/monocle,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"ai" = (
+/obj/structure/table/woodentable,
+/obj/effect/landmark{
+	name = "Teleport-Scroll"
+	},
+/obj/item/toy/figure/ninja,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"aj" = (
+/obj/effect/landmark/start{
+	name = "wizard"
+	},
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"ak" = (
+/obj/structure/aliumizer,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"al" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/storage/backpack/cultpack,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"am" = (
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"an" = (
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"ao" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/storage/backpack/satchel/grey/withwallet,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"ap" = (
+/obj/structure/undies_wardrobe,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"aq" = (
+/obj/machinery/door/unpowered/simple/wood,
+/turf/simulated/floor/carpet,
+/area/map_template/wizard_station)
+"ar" = (
+/obj/structure/bookcase{
+	name = "Forbidden Knowledge"
+	},
+/obj/effect/decal/cleanable/cobweb,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"as" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/dice,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"at" = (
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"au" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/dice/d20,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"av" = (
+/obj/structure/bookcase{
+	name = "bookcase (Tactics)"
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aw" = (
+/obj/structure/bookcase{
+	name = "Forbidden Knowledge"
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"ax" = (
+/mob/living/carbon/human/monkey{
+	name = "Murphey"
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"ay" = (
+/turf/unsimulated/wall/fakeglass{
+	dir = 1;
+	icon_state = "fakewindows"
+	},
+/area/map_template/wizard_station)
+"az" = (
+/turf/unsimulated/floor{
+	dir = 2;
+	icon = 'icons/misc/beach.dmi';
+	icon_state = "seashallow";
+	name = "water"
+	},
+/area/map_template/wizard_station)
+"aA" = (
+/obj/item/weapon/bikehorn/rubberducky,
+/turf/unsimulated/floor{
+	dir = 2;
+	icon = 'icons/misc/beach.dmi';
+	icon_state = "seashallow";
+	name = "water"
+	},
+/area/map_template/wizard_station)
+"aB" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/machinery/acting/changer/mirror{
+	pixel_y = 32
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/wizard_station)
+"aC" = (
+/obj/structure/hygiene/toilet{
+	pixel_y = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/wizard_station)
+"aD" = (
+/obj/structure/table/woodentable,
+/obj/machinery/computer/modular/preset/library,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aE" = (
+/obj/structure/bed/chair/wood/wings{
+	icon_state = "wooden_chair_wings";
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aF" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/reagent_containers/food/snacks/chawanmushi,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aG" = (
+/obj/structure/bed/chair/wood/wings{
+	icon_state = "wooden_chair_wings";
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aH" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/storage/box/cups,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aI" = (
+/obj/structure/closet,
+/obj/item/clothing/suit/wizrobe/red,
+/obj/item/clothing/shoes/sandal,
+/obj/item/clothing/head/wizard/red,
+/obj/item/weapon/staff,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"aJ" = (
+/obj/structure/closet,
+/obj/item/clothing/suit/wizrobe/marisa,
+/obj/item/clothing/shoes/sandal/marisa,
+/obj/item/clothing/head/wizard/marisa,
+/obj/item/weapon/staff/broom,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"aK" = (
+/obj/structure/closet,
+/obj/item/clothing/suit/wizrobe/magusblue,
+/obj/item/clothing/head/wizard/magus,
+/obj/item/weapon/staff,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"aL" = (
+/obj/structure/closet,
+/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing,
+/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine,
+/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey,
+/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"aM" = (
+/turf/unsimulated/wall/fakeglass{
+	icon_state = "fakewindows2";
+	dir = 1
+	},
+/area/map_template/wizard_station)
+"aN" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/wizard_station)
+"aO" = (
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/wizard_station)
+"aP" = (
+/obj/machinery/door/unpowered/simple/iron,
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/wizard_station)
+"aQ" = (
+/obj/structure/table/woodentable,
+/obj/item/device/megaphone,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aR" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/storage/box/donut,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aS" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/spacecash/bundle/c1,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"aT" = (
+/obj/machinery/door/unpowered/simple/wood,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"aU" = (
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"aV" = (
+/turf/unsimulated/wall/fakeglass,
+/area/map_template/wizard_station)
+"aW" = (
+/obj/item/weapon/soap,
+/turf/unsimulated/floor{
+	dir = 2;
+	icon = 'icons/misc/beach.dmi';
+	icon_state = "seashallow";
+	name = "water"
+	},
+/area/map_template/wizard_station)
+"aX" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/item/device/radio/intercom/syndicate{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/wizard_station)
+"aY" = (
+/obj/structure/hygiene/sink{
+	dir = 4;
+	icon_state = "sink";
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/obj/item/weapon/storage/mirror{
+	pixel_x = 32
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/wizard_station)
+"aZ" = (
+/obj/machinery/vending/magivend,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"ba" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/reagent_containers/food/snacks/milosoup,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bb" = (
+/obj/structure/table/woodentable,
+/obj/machinery/chemical_dispenser/bar_soft/full,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bc" = (
+/obj/structure/closet,
+/obj/item/clothing/under/psysuit,
+/obj/item/clothing/suit/wizrobe/psypurple,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"bd" = (
+/obj/structure/closet,
+/obj/item/clothing/shoes/sandal/marisa{
+	desc = "A set of fancy shoes that are as functional as they are comfortable.";
+	name = "Gentlemans Shoes"
+	},
+/obj/item/clothing/under/gentlesuit,
+/obj/item/clothing/suit/wizrobe/gentlecoat,
+/obj/item/clothing/head/wizard/cap,
+/obj/item/weapon/staff/gentcane,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"be" = (
+/obj/structure/closet,
+/obj/item/clothing/suit/wizrobe/magusred,
+/obj/item/clothing/head/wizard/magus,
+/obj/item/weapon/staff,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"bf" = (
+/obj/structure/closet,
+/obj/item/weapon/storage/briefcase,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/wizard_station)
+"bg" = (
+/obj/structure/bookcase,
+/obj/item/weapon/book/manual/nuclear,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bh" = (
+/obj/structure/bookcase,
+/obj/item/weapon/book/manual/robotics_cyborgs,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bi" = (
+/obj/structure/bookcase,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bj" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/storage/bag/cash,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bk" = (
+/obj/structure/table/woodentable,
+/obj/item/weapon/storage/candle_box,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bl" = (
+/obj/machinery/door/unpowered/simple/silver,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bm" = (
+/obj/item/device/radio/intercom/syndicate{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "wood"
+	},
+/area/map_template/wizard_station)
+"bn" = (
+/obj/structure/closet/coffin,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bo" = (
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bp" = (
+/obj/item/device/radio/intercom/syndicate{
+	pixel_y = 22
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bq" = (
+/obj/structure/cult/pylon,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"br" = (
+/obj/structure/kitchenspike,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bs" = (
+/obj/item/remains/human,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "lava"
+	},
+/area/map_template/wizard_station)
+"bt" = (
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "lava"
+	},
+/area/map_template/wizard_station)
+"bu" = (
+/turf/unsimulated/floor{
+	icon_state = "grass0";
+	name = "grass"
+	},
+/area/map_template/wizard_station)
+"bv" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/unsimulated/floor{
+	icon_state = "grass0";
+	name = "grass"
+	},
+/area/map_template/wizard_station)
+"bw" = (
+/mob/living/simple_animal/hostile/creature{
+	name = "Experiment 35b"
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "lava"
+	},
+/area/map_template/wizard_station)
+"bx" = (
+/obj/structure/cult/talisman,
+/obj/item/weapon/material/knife/ritual,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"by" = (
+/obj/effect/gateway/active/cult,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bz" = (
+/obj/structure/table/marble,
+/obj/item/device/flashlight/slime,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bA" = (
+/mob/living/simple_animal/hostile/retaliate/goat{
+	name = "Experiment 97d"
+	},
+/turf/unsimulated/floor{
+	icon_state = "grass0";
+	name = "grass"
+	},
+/area/map_template/wizard_station)
+"bB" = (
+/obj/structure/flora/ausbushes/grassybush,
+/turf/unsimulated/floor{
+	icon_state = "grass0";
+	name = "grass"
+	},
+/area/map_template/wizard_station)
+"bC" = (
+/obj/structure/flora/pottedplant/unusual,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bD" = (
+/obj/structure/table/woodentable,
+/obj/item/xenos_claw,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/wizard_station)
+"bE" = (
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/map_template/wizard_station)
+"bF" = (
+/obj/effect/overlay/palmtree_r,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/map_template/wizard_station)
+"bG" = (
+/mob/living/simple_animal/crab{
+	name = "Experiment 68a"
+	},
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/map_template/wizard_station)
+"bH" = (
+/obj/effect/overlay/coconut,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/map_template/wizard_station)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(3,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(5,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(6,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(8,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ay
+aM
+aV
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(9,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+az
+az
+aW
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bs
+bt
+bt
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(10,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aA
+az
+az
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bt
+bt
+bt
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(11,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aB
+aN
+aX
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bt
+bw
+bt
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(12,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aC
+aO
+aY
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bt
+bt
+bs
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+aP
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ay
+aM
+aV
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(14,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+aw
+aD
+at
+aZ
+bg
+ab
+ab
+aa
+aa
+aa
+ab
+ab
+bq
+bo
+bx
+bo
+bq
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+"}
+(15,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ar
+at
+at
+at
+at
+at
+bi
+ab
+ay
+aM
+aV
+ab
+bn
+bo
+bo
+bo
+bo
+bo
+bC
+ab
+ab
+ab
+ab
+ab
+ab
+"}
+(16,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+af
+ai
+al
+ao
+ab
+as
+at
+aE
+aQ
+aE
+at
+bj
+ab
+at
+at
+bm
+ab
+bo
+bo
+ac
+ab
+ac
+bo
+bo
+ac
+bE
+bE
+bE
+bH
+ab
+"}
+(17,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ag
+aj
+am
+am
+aq
+at
+at
+aF
+aR
+ba
+at
+at
+bl
+at
+at
+at
+bl
+bo
+bo
+ad
+by
+ad
+bo
+bD
+ad
+bE
+bE
+bG
+bE
+ab
+"}
+(18,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+ah
+ak
+an
+ap
+ab
+au
+ax
+aG
+aS
+aG
+at
+bk
+ab
+at
+at
+at
+ab
+bp
+bo
+ae
+ab
+ae
+bo
+bo
+ae
+bE
+bF
+bE
+bE
+ab
+"}
+(19,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+av
+at
+at
+at
+at
+at
+bi
+ab
+ay
+aM
+aV
+ab
+bn
+bo
+bo
+bo
+bo
+bo
+bC
+ab
+ab
+ab
+ab
+ab
+ab
+"}
+(20,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+av
+aH
+at
+bb
+bh
+ab
+ab
+aa
+aa
+aa
+ab
+ab
+br
+bo
+bz
+bo
+br
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+"}
+(21,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+aT
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ay
+aM
+aV
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aI
+aU
+bc
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bu
+bu
+bB
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(23,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aJ
+aU
+bd
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bu
+bu
+bu
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(24,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aK
+aU
+be
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bu
+bA
+bu
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aL
+aU
+bf
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+bv
+bu
+bu
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(26,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ay
+aM
+aV
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(27,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(28,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(29,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(30,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(31,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(32,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(33,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}

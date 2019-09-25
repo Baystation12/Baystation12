@@ -79,6 +79,9 @@
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
+	
+	// Map template that antag needs to load before spawning. Nulled after it's loaded.
+	var/datum/map_template/base_to_load
 
 /datum/antagonist/New()
 	GLOB.all_antag_types_[id] = src
