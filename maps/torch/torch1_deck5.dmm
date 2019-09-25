@@ -4366,14 +4366,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/shuttlefuel)
 "jW" = (
-/obj/structure/table/rack,
-/obj/item/weapon/storage/belt/archaeology,
-/obj/item/weapon/storage/belt/archaeology,
-/obj/item/weapon/storage/belt/archaeology,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/weapon/storage/ore,
-/obj/item/weapon/storage/ore,
-/obj/item/weapon/storage/ore,
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
@@ -4382,6 +4375,42 @@
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
+	},
+/obj/structure/table/steel,
+/obj/item/stack/flag/green{
+	pixel_x = 10;
+	pixel_y = 11
+	},
+/obj/item/stack/flag/green{
+	pixel_x = 7;
+	pixel_y = 8
+	},
+/obj/item/stack/flag/yellow{
+	pixel_x = 1;
+	pixel_y = 10
+	},
+/obj/item/stack/flag/yellow{
+	pixel_x = -2;
+	pixel_y = 8
+	},
+/obj/item/stack/flag/red{
+	pixel_x = -8;
+	pixel_y = 10
+	},
+/obj/item/stack/flag/red{
+	pixel_x = -10;
+	pixel_y = 8
+	},
+/obj/item/device/spaceflare{
+	pixel_x = 5;
+	pixel_y = -3
+	},
+/obj/item/device/spaceflare{
+	pixel_y = -2
+	},
+/obj/item/device/spaceflare{
+	pixel_x = -5;
+	pixel_y = -1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
@@ -7148,6 +7177,10 @@
 	pixel_x = 12;
 	pixel_y = 1
 	},
+/obj/item/device/flashlight/lantern{
+	pixel_x = -14;
+	pixel_y = 2
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
 "pM" = (
@@ -7169,30 +7202,6 @@
 /area/vacant/infirmary)
 "pP" = (
 /obj/structure/table/steel,
-/obj/item/device/scanner/xenobio{
-	pixel_x = -6;
-	pixel_y = -3
-	},
-/obj/item/device/scanner/xenobio{
-	pixel_x = -6;
-	pixel_y = -4
-	},
-/obj/item/device/scanner/xenobio{
-	pixel_x = -6;
-	pixel_y = -5
-	},
-/obj/item/device/scanner/xenobio{
-	pixel_x = -6;
-	pixel_y = -6
-	},
-/obj/item/device/scanner/gas{
-	pixel_x = 6;
-	pixel_y = -3
-	},
-/obj/item/device/scanner/gas{
-	pixel_x = 6;
-	pixel_y = -4
-	},
 /obj/item/device/scanner/gas{
 	pixel_x = 6;
 	pixel_y = -5
@@ -7211,6 +7220,20 @@
 	},
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/item/device/scanner/mining{
+	pixel_x = -11;
+	pixel_y = -6
+	},
+/obj/item/device/scanner/mining{
+	pixel_x = -10;
+	pixel_y = -7
+	},
+/obj/item/clothing/glasses/meson{
+	pixel_y = -8
+	},
+/obj/item/clothing/glasses/meson{
+	pixel_y = -4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
@@ -7348,12 +7371,6 @@
 /obj/item/weapon/shovel{
 	pixel_x = -5
 	},
-/obj/item/weapon/shovel{
-	pixel_x = -5
-	},
-/obj/item/weapon/shovel{
-	pixel_x = -5
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7361,7 +7378,7 @@
 	icon_state = "1-2"
 	},
 /obj/item/weapon/pickaxe,
-/obj/item/weapon/pickaxe,
+/obj/item/weapon/shovel,
 /obj/item/weapon/pickaxe,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
@@ -7376,27 +7393,16 @@
 /area/quartermaster/expedition)
 "qi" = (
 /obj/structure/table/rack,
-/obj/item/device/scanner/mining,
-/obj/item/device/scanner/mining,
-/obj/item/device/scanner/mining,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/clothing/glasses/meson,
-/obj/item/clothing/glasses/meson,
-/obj/item/clothing/glasses/meson,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/stack/flag/red,
-/obj/item/stack/flag/red,
-/obj/item/stack/flag/red,
-/obj/item/stack/flag/yellow,
-/obj/item/stack/flag/yellow,
-/obj/item/stack/flag/yellow,
-/obj/item/stack/flag/green,
-/obj/item/stack/flag/green,
-/obj/item/stack/flag/green,
+/obj/item/weapon/storage/ore,
+/obj/item/weapon/storage/ore,
+/obj/item/weapon/storage/ore,
+/obj/item/weapon/storage/belt/archaeology,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
 "qj" = (

@@ -56,7 +56,7 @@
 		slot_l_hand_str = "mining_voidsuit",
 		slot_r_hand_str = "mining_voidsuit",
 	)
-	armor = list(melee = 50, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 10)
+	armor = list(melee = 50, bullet = 10, laser = 15,energy = 10, bomb = 55, bio = 100, rad = 10)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/stack/flag,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
 /obj/item/clothing/suit/space/void/mining/prepared
