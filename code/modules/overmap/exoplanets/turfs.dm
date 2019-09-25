@@ -4,7 +4,7 @@
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 	has_resources = 1
-	footstep_type = FOOTSTEP_CARPET
+	footstep_type = FOOTSTEP_ASTEROID
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 
