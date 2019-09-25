@@ -150,6 +150,10 @@
 	..()
 	z_original = z
 
+/obj/effect/meteor/Initialize()
+	. = ..()
+	GLOB.meteor_list += src
+
 /obj/effect/meteor/Move()
 	. = ..() //process movement...
 	move_count++
@@ -162,6 +166,7 @@
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
+	GLOB.meteor_list -= src
 	return ..()
 
 /obj/effect/meteor/New()
