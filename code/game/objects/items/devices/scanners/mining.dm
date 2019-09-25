@@ -10,6 +10,7 @@
 	icon_state = "ore"
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	use_delay = 50
+	printout_color = "#fff7f0"
 	var/survey_data = 0
 
 	scan_sound = 'sound/effects/ping.ogg'
