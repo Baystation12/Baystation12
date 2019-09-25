@@ -1,9 +1,0 @@
-author: "Imienny"
-delete-after: True
-changes: 
-  - tweak: "Ammonia now work like Dexalin Plus for Vox instead of removing oxy loss"
-  - tweak: "Nerfs Vox breathing mask to filter out only oxygen"
-  - tweak: "Updates Vox alien mask's filtered gases list"
-  - rscadd: "Adds inaprovaline autoinjector to Vox survival kit"
-  - tweak: "Change Vox minimum/maximum age from 17 - 70 to 1 - 100"
-  - tweak: "Vox get +8 skill point bonus instead of bonus based on their age."

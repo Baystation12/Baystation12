@@ -1,5 +1,0 @@
-author: "Boznar"
-delete-after: True
-changes: 
-  - maptweak: "Adds mineral processing, chemistry, and cages to the ascent seedship."
-  - rscadd: "Adds voidsuits for Alates to replace the hardsuits as base gear. Hardsuits can still be granted to alates at the Gyne's discretion. Icons and code credit to Zuhayr/Loaf/MistakeNot."
