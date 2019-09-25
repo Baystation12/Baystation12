@@ -1,5 +1,5 @@
 /datum/click_handler/build_mode
-	flags = CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT
+	flags = CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT | CLICK_HANDLER_REMOVE_IF_NOT_TOP
 	var/dir
 
 	var/list/build_modes
@@ -21,13 +21,14 @@
 	for(var/button_type in subtypesof(/obj/effect/bmode))
 		var/obj/effect/bmode/build_button = new button_type(src)
 		build_buttons += build_button
+	to_chat(user, "Build Mode Enabled")
 
 /datum/click_handler/build_mode/Destroy()
 	QDEL_NULL(current_build_mode)
 
 	QDEL_NULL_LIST(build_modes)
 	QDEL_NULL_LIST(build_buttons)
-
+	to_chat(user, "Build Mode Disabled")
 	. = ..()
 
 /datum/click_handler/build_mode/Enter()
