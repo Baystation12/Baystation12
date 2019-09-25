@@ -21,3 +21,5 @@ GLOBAL_DATUM_INIT(sun, /datum/sun, new)
 GLOBAL_DATUM_INIT(universe, /datum/universal_state, new)
 
 GLOBAL_LIST_INIT(full_alphabet, list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"))
+
+GLOBAL_LIST_EMPTY(meteor_list)
