@@ -249,9 +249,8 @@
 		if(!silent)
 			to_chat(user, SPAN_NOTICE("You climb out of \the [src]."))
 
-	for(var/datum/click_handler/default/mech/H in user.click_handlers)
-		user.RemoveClickHandler(H)
-	user.forceMove(get_turf(src))
+	user.RemoveClickHandler(/datum/click_handler/default/mech)
+	user.dropInto(loc)
 	LAZYREMOVE(user.additional_vision_handlers, src)
 	if(user.client)
 		user.client.screen -= hud_elements
