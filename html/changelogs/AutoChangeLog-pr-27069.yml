@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Exosuit pilots can now manage their inventory, throw items and some other minor actions so long the cockpit is open. This prevents usage of exosuit modules."
