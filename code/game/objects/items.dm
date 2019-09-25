@@ -251,19 +251,7 @@
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/weapon/W, mob/user)
-
-	if(SSfabrication.try_craft_with(src, W, user))
-		return
-
-	if(istype(W, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = W
-		if(S.use_to_pickup)
-			if(S.collection_mode) //Mode is set to collect all items
-				if(isturf(src.loc))
-					S.gather_all(src.loc, user)
-			else if(S.can_be_inserted(src, user))
-				S.handle_item_insertion(src)
-				return
+	return !SSfabrication.try_craft_with(src, W, user)
 
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
@@ -823,13 +811,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/get_pressure_weakness(pressure)
 	. = 1
 	if(pressure > ONE_ATMOSPHERE)
-		if(max_pressure_protection != null) 
+		if(max_pressure_protection != null)
 			if(max_pressure_protection < pressure)
 				return min(1, round((pressure - max_pressure_protection) / max_pressure_protection, 0.01))
 			else
 				return 0
 	if(pressure < ONE_ATMOSPHERE)
-		if(min_pressure_protection != null) 
+		if(min_pressure_protection != null)
 			if(min_pressure_protection > pressure)
 				return min(1, round((min_pressure_protection - pressure) / min_pressure_protection, 0.01))
 			else

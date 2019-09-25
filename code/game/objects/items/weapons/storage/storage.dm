@@ -252,7 +252,9 @@
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/weapon/storage/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+	. = ..()
+	if (!.) //if the item was used as a crafting component, just return
+		return
 
 	if(isrobot(user) && (W == user.get_active_hand()))
 		return //Robots can't store their modules.

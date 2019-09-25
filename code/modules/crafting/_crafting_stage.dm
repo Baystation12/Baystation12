@@ -96,6 +96,9 @@
 /decl/crafting_stage/pipe
 	completion_trigger_type = /obj/item/pipe
 
+/decl/crafting_stage/scanner
+	completion_trigger_type = /obj/item/device/scanner/health
+
 /decl/crafting_stage/proximity
 	completion_trigger_type = /obj/item/device/assembly/prox_sensor
 
