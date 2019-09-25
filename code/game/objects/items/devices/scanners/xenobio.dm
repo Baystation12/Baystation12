@@ -15,6 +15,9 @@
 /obj/item/device/scanner/xenobio/is_valid_scan_target(atom/O)
 	if(is_type_in_list(O, valid_targets))
 		return TRUE
+	if(istype(O, /obj/structure/stasis_cage))
+		var/obj/structure/stasis_cage/cagie = O
+		return !!cagie.contained
 	return FALSE
 
 /obj/item/device/scanner/xenobio/scan(mob/O, mob/user)
@@ -30,6 +33,9 @@
 
 /proc/xenobio_scan_results(mob/target)
 	. = list()
+	if(istype(target, /obj/structure/stasis_cage))
+		var/obj/structure/stasis_cage/cagie = target
+		target = cagie.contained
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
 		. += "Data for [H]:"
@@ -83,5 +89,5 @@
 		. += "Growth progress:\t[T.amount_grown]/10."
 	else
 		. += "Incompatible life form, analysis failed."
-	
+
 	. = jointext(., "<br>")
