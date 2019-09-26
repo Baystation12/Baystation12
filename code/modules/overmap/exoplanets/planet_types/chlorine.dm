@@ -62,7 +62,7 @@
 	icon_state = "chlorine_sand1"
 	desc = "Sand that has been heavily contaminated by chlorine."
 	dirt_color = "#d2e0b7"
-	footstep_type = FOOTSTEP_SAND
+	footstep_type = /decl/footsteps/sand
 
 /turf/simulated/floor/exoplanet/chlorine_sand/New()
 	icon_state = "chlorine_sand[rand(0,11)]"

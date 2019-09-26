@@ -4,7 +4,7 @@
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 	has_resources = 1
-	footstep_type = FOOTSTEP_ASTEROID
+	footstep_type = /decl/footsteps/asteroid
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 
@@ -60,7 +60,7 @@
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "seashallow"
 	movement_delay = 2
-	footstep_type = FOOTSTEP_WATER
+	footstep_type = /decl/footsteps/water
 	var/reagent_type = /datum/reagent/water
 
 /turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
@@ -111,7 +111,7 @@
 	dynamic_lighting = FALSE
 	icon = null
 	icon_state = null
-	
+
 /turf/simulated/planet_edge/Initialize()
 	. = ..()
 	var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
@@ -128,7 +128,7 @@
 		ny = y + (E.maxy - 2*TRANSITIONEDGE) - 1
 	else if (y >= (E.maxy - TRANSITIONEDGE))
 		ny = y - (E.maxy - 2*TRANSITIONEDGE) + 1
-	
+
 	var/turf/NT = locate(nx, ny, z)
 	if(NT)
 		vis_contents = list(NT)

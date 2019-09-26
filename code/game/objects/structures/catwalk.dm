@@ -6,7 +6,7 @@
 	density = 0
 	anchored = 1.0
 	layer = CATWALK_LAYER
-	footstep_type = FOOTSTEP_CATWALK
+	footstep_type = /decl/footsteps/catwalk
 	var/hatch_open = FALSE
 	var/obj/item/stack/tile/mono/plated_tile
 

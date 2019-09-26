@@ -72,7 +72,7 @@
 	icon = 'icons/turf/jungle.dmi'
 	icon_state = "greygrass"
 	color = "#799c4b"
-	footstep_type = FOOTSTEP_GRASS
+	footstep_type = /decl/footsteps/grass
 
 /turf/simulated/floor/exoplanet/grass/Initialize()
 	. = ..()
@@ -93,5 +93,5 @@
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
 		SetName("scorched ground")
 		icon_state = "scorched"
-		footstep_type = FOOTSTEP_ASTEROID
+		footstep_type = /decl/footsteps/asteroid
 		color = null

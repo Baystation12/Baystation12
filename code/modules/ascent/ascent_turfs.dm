@@ -6,7 +6,7 @@
 	has_base_range = 6
 	color = COLOR_GRAY40
 	flags = TURF_CAN_BREAK | TURF_CAN_BURN
-	footstep_type = FOOTSTEP_TILES
+	footstep_type = /decl/footsteps/tiles
 
 /turf/simulated/wall/ascent
 	color = COLOR_PURPLE

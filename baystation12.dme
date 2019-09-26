@@ -232,6 +232,7 @@
 #include "code\datums\category.dm"
 #include "code\datums\cinematic.dm"
 #include "code\datums\datum.dm"
+#include "code\datums\footsteps.dm"
 #include "code\datums\hierarchy.dm"
 #include "code\datums\mil_ranks.dm"
 #include "code\datums\progressbar.dm"
