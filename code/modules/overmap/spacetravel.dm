@@ -75,7 +75,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/nz = 1
 
 	//Figure out what edge of the world we're off
-		//Todo: Replace this shit
+		//Todo: Replace this with get_crossed_world_edge
 	if(T.x <= TRANSITIONEDGE)
 		nx = world.maxx - TRANSITIONEDGE - 2
 		ny = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
@@ -100,7 +100,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/obj/effect/overmap/TM
 	for(var/obj/effect/overmap/O in map)
 		//This is finding all the possible visitable locations within the specified map tile
-		//TODO: Remove this stupid 50% probabiltiy
+		//TODO: Remove this poorly designed 50% probabiltiy
 		if(O != M && O.in_space && prob(50))
 			TM = O
 			break
