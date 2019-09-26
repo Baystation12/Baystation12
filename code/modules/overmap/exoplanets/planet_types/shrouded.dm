@@ -51,7 +51,7 @@
 	dirt_color = "#3e3960"
 
 /turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(var/mob/caller)
-	return get_footstep(FOOTSTEP_WATER, caller)
+	return get_footstep(/decl/footsteps/water, caller)
 
 
 /turf/simulated/floor/exoplanet/shrouded
