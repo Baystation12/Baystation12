@@ -53,3 +53,9 @@
 /datum/scene/overmap
 	name = "Overmap"
 	id = "overmap"
+
+
+//Generic scene for empty space which hasn't been assigned to a specific one
+/datum/scene/space
+	name = "Space"
+	id = "space"

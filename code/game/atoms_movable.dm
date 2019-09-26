@@ -251,23 +251,14 @@
 		overmap_spacetravel(get_turf(src), src)
 		return
 
-	if(x <= TRANSITIONEDGE)
-		direction = WEST
-
-	else if (x >= (world.maxx - TRANSITIONEDGE + 1))
-		direction = EAST
-
-	else if (y <= TRANSITIONEDGE)
-		direction = SOUTH
-
-	else if (y >= (world.maxy - TRANSITIONEDGE + 1))
-		direction = NORTH
+	direction = get_crossed_world_edge(new /vector2(x,y))
 
 	if (direction && current)
 		next = current.get_connected_level(direction, src)
 
 	var/turf/T
 	if (next)
-		T = next.get_landing_point(src, direction,  ZMOVE_PHASE, current)
+		var/vector2/V = next.get_landing_point(src, direction,  ZMOVE_PHASE, current)
+		T = locate(V.x, V.y, next.z)
 	if(T)
 		forceMove(T)

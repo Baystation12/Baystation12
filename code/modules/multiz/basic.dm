@@ -25,10 +25,8 @@
 	var/datum/level/L2 = L.connections["[UP]"]
 	if (!L2)
 		return null
-	var/vector2/landing_coords = L2.get_landing_point(atom, UP, _method, L)
-	var/turf/turf = locate(landing_coords.x, landing_coords.y, L2.z)
+	return L2.get_landing_point(atom, UP, _method, L)
 
-	return turf
 
 /proc/GetBelow(var/atom/atom, var/_method = ZMOVE_PHASE)
 	if (!atom)
@@ -39,10 +37,7 @@
 	var/datum/level/L2 = L.connections["[UP]"]
 	if (!L2)
 		return null
-	var/vector2/landing_coords = L2.get_landing_point(atom, DOWN, _method, L)
-	var/turf/turf = locate(landing_coords.x, landing_coords.y, L2.z)
-
-	return turf
+	return L2.get_landing_point(atom, DOWN, _method, L)
 
 /proc/GetConnectedZlevels(z)
 	var/datum/scene/S = get_scene_from_z(z)

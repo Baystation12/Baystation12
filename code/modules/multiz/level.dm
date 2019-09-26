@@ -82,11 +82,13 @@
 		return null //You're not walking off the edge
 
 	else
+		//We are not sealed, but there's no connection, lets send them to empty space
+		return get_empty_level()
 
 
 
 //Called on the recieving zlevel when someone moves between levels.  Mover cannot be null
-/datum/level/proc/get_landing_point(var/atom/mover, var/direction = null,  var/method = ZMOVE_PHASE, var/datum/level/origin = null)
+/datum/level/proc/get_landing_coords(var/atom/mover, var/direction = null,  var/method = ZMOVE_PHASE, var/datum/level/origin = null)
 	var/vector2/destination = new /vector2(mover.x, mover.y)
 	if (!mover)
 		return null
@@ -95,9 +97,9 @@
 		return destination
 	else
 		if (direction == NORTH)
-			destination.y = world.maxy - (TRANSITIONEDGE +1)  //Bizarrely coordinates are counted from the topleft corner, so maxy is the bottom of the screen
-		else if (direction == SOUTH)
 			destination.y = (TRANSITIONEDGE +1)
+		else if (direction == SOUTH)
+			destination.y = world.maxy - (TRANSITIONEDGE +1)
 		else if (direction == EAST)
 			destination.x = (TRANSITIONEDGE +1)
 		else if (direction == WEST)
@@ -108,6 +110,10 @@
 	return destination
 
 
+//Wrapper for the above that returns a turf
+/datum/level/proc/get_landing_point(var/atom/mover, var/direction = null,  var/method = ZMOVE_PHASE, var/datum/level/origin = null)
+	var/vector2/coords = get_landing_coords(mover, direction, method, origin)
+	return locate(coords.x, coords.y, z)
 
 
 
@@ -146,7 +152,6 @@
 	SSmapping.map_index++ //Increment the index
 	var/datum/level/newlevel = new()
 	newlevel.z = world.maxz
-	world << "Creating new level [newlevel.z]"
 	newlevel.id = "[newlevel.id]_[SSmapping.map_index]" //The new level uses the default values, but with the map index appended onto the end of the ID
 	//This ensures that the id is unique and prevents namespace collisions.
 	//All the empty levels will be in the same scene, but not directly connected to each other
@@ -223,3 +228,4 @@
 //This is done to reduce in-round lag
 /datum/level/empty/precached
 	id = "empty_precached"
+	scene_id = "space"
