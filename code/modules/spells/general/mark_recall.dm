@@ -4,7 +4,7 @@
 	feedback = "MK"
 	school = "conjuration"
 	charge_max = 600 //1 minutes for how OP this shit is (apparently not as op as I thought)
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	invocation = "Re-Alki R'natha."
 	invocation_type = SpI_WHISPER
 	cooldown_min = 300

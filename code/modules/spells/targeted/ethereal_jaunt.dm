@@ -4,7 +4,7 @@
 	feedback = "EJ"
 	school = "transmutation"
 	charge_max = 300
-	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
+	spell_flags = NO_ADMIN_CAST | NEEDSCLOTHES | INCLUDEUSER
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = -1
@@ -30,7 +30,7 @@
 			animation.set_density(0)
 			animation.anchored = 1
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.layer = FLY_LAYER 
+			animation.layer = FLY_LAYER
 			target.ExtinguishMob()
 			if(target.buckled)
 				target.buckled = null
@@ -119,4 +119,4 @@
 
 /spell/targeted/ethereal_jaunt/tower
 	charge_max = 2
-	spell_flags = Z2NOCAST | INCLUDEUSER
+	spell_flags = NO_ADMIN_CAST | INCLUDEUSER

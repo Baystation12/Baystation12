@@ -13,7 +13,7 @@
 
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 0, Sp_POWER = 2)
 
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	range = 6
 	max_targets = 1
 	compatible_mobs = list(/mob/living)

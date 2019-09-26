@@ -146,7 +146,7 @@
 	holder_var_type = "bruteloss"
 	holder_var_amount = 20
 
-	spell_flags = Z2NOCAST | IGNOREPREV | IGNOREDENSE
+	spell_flags = NO_ADMIN_CAST | IGNOREPREV | IGNOREDENSE
 	summon_type = list(/turf/simulated/floor/diona)
 	seed_type = /datum/seed/diona
 
@@ -201,7 +201,7 @@
 	charge_type = Sp_RECHARGE
 
 
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	hud_state = "wiz_IPC"
 	var/mob/observer/eye/vision
 	var/eye_type = /mob/observer/eye/wizard_eye

@@ -35,6 +35,8 @@
 	//If false, players will end up floating in space when they fall of the edge
 	//If true, players can't walk off the edge of this map unless theres a specific connection.
 
+	//If true, this is a place for admins and antags,not for normal players. Certain things may be restricted here
+	var/admin_level = FALSE
 
 	//Runtime
 	//----------------
@@ -122,6 +124,10 @@
 /proc/get_level_from_z(var/z)
 	return SSmapping.zlevels["[z]"]
 
+/proc/get_level_by_id(var/_id)
+	var/datum/level/L = SSmapping.all_level_datums[_id]
+	return L
+
 /proc/can_move_between_levels(var/atom/mover = null, var/direction = null,  var/method = ZMOVE_PHASE, var/datum/level/origin, var/datum/level/destination)
 	if (origin.can_leave_level(mover, direction, method, destination) && destination.can_enter_level(mover, direction, method, origin))
 		return TRUE
@@ -139,10 +145,42 @@
 	world.maxz++ //This adds a new level onto the end of the list
 	SSmapping.map_index++ //Increment the index
 	var/datum/level/newlevel = new()
-	newlevel.id += "[newlevel.id]_[SSmapping.map_index]" //The new level uses the default values, but with the map index appended onto the end of the ID
+	newlevel.z = world.maxz
+	world << "Creating new level [newlevel.z]"
+	newlevel.id = "[newlevel.id]_[SSmapping.map_index]" //The new level uses the default values, but with the map index appended onto the end of the ID
 	//This ensures that the id is unique and prevents namespace collisions.
 	//All the empty levels will be in the same scene, but not directly connected to each other
+	newlevel.Initialize()
 	SSmapping.empty_levels += newlevel
+
+//This creates and initializes a new level datum. z and _id are the only mandatory parameter
+//It can also be used to repurpose and re-initialize an existing level
+/proc/create_level(var/_z, var/_id, var/_scene_id, var/_name, var/_type = /datum/level)
+	if (!_z || !_id)
+		return
+
+	//If a level already exists for this z, we wipe it and replace it with our new one
+	var/datum/level/L = SSmapping.zlevels["[_z]"]
+	if (istype(L))
+		qdel(L)
+		SSmapping.zlevels["[_z]"] = null
+
+	//Check if a predefined datum exists for this id.
+	L = get_level_by_id(_id)
+	if (!istype(L))
+		L = new _type
+		L.id = _id
+		if (_scene_id)
+			L.scene_id = _scene_id
+		if (_name)
+			L.name = _name
+
+	if (L)
+		L.z = _z
+		L.Initialize()
+		return L
+
+
 
 /*--------------------------------------------------------------------------------------------------------------
 
@@ -156,7 +194,7 @@
 	name = "" //Name of the level. This should NOT include the name of the scene, as that will be automatically prepended in most cases
 	id	=	"admin_level_1" //ID of the level, this must be unique, so do include the scene name in this case. this will be used for a landmark to find this level
 	scene_id = "admin_space"	//ID of the scene, must be unique, used to link this level to the scene datum
-
+	admin_level = TRUE
 
 /datum/level/transit
 	//Authortime
@@ -164,3 +202,24 @@
 	name = "" //The name of the location. This may be shown in interfaces and should be human-readable
 	id = "transit_level_1"	  //ID must be unique, landmarks will use it to link levels to this scene datum
 	scene_id = "transit_space"
+
+/datum/level/overmap
+	name = "Overmap"
+	id = "overmap"
+	scene_id = "overmap"
+	admin_level = TRUE
+	sealed = TRUE
+
+
+//Subtype which adds itself to the empty levels list. Don't use this as is, make subtypes
+/datum/level/empty
+	base_type	= /datum/level/empty
+
+/datum/level/empty/Initialize()
+	.=..()
+	SSmapping.empty_levels |= src
+
+//Used for an empty zlevel which is loaded along with all the other maps as an included dmm
+//This is done to reduce in-round lag
+/datum/level/empty/precached
+	id = "empty_precached"

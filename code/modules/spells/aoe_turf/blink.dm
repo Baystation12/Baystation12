@@ -4,7 +4,7 @@
 	feedback = "BL"
 	school = "conjuration"
 	charge_max = 20
-	spell_flags = Z2NOCAST | IGNOREDENSE | IGNORESPACE
+	spell_flags = NO_ADMIN_CAST | IGNOREDENSE | IGNORESPACE
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 7

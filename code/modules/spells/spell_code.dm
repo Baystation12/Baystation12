@@ -211,7 +211,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 /*Checkers, cost takers, message makers, etc*/
 
 /spell/proc/cast_check(skipcharge = 0,mob/user = usr, var/list/targets) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
-	
+
 	if(silenced > 0)
 		return 0
 
@@ -229,7 +229,8 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(!user_turf)
 		to_chat(user, "<span class='warning'>You cannot cast spells in null space!</span>")
 
-	if((spell_flags & Z2NOCAST) && (user_turf.z in GLOB.using_map.admin_levels)) //Certain spells are not allowed on the centcomm zlevel
+	var/datum/level/LV = get_level_from_z(user_turf.z)
+	if((spell_flags & NO_ADMIN_CAST) && LV.admin_level) //Certain spells are not allowed on admin areas
 		return 0
 
 	if(spell_flags & CONSTRUCT_CHECK)

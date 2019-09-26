@@ -4,7 +4,7 @@
 
 	school = "transmutation"
 	charge_max = 200
-	spell_flags = Z2NOCAST | CONSTRUCT_CHECK | INCLUDEUSER
+	spell_flags = NO_ADMIN_CAST | CONSTRUCT_CHECK | INCLUDEUSER
 	invocation = ""
 	invocation_type = SpI_NONE
 	range = 0

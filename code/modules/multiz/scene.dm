@@ -47,3 +47,9 @@
 	//------------------
 	name = "In transit" //The name of the location. This may be shown in interfaces and should be human-readable
 	id = "transit_space"	  //ID must be unique, landmarks will use it to link levels to this scene datum
+
+
+//The overmap level/scene is assigned through code in overmap/sectors.dm
+/datum/scene/overmap
+	name = "Overmap"
+	id = "overmap"

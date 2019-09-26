@@ -9,7 +9,7 @@
 	affected_levels = zlevels
 
 /datum/universal_state/bluespace_jump/OnEnter()
-	var/datum/level/space_zlevel = SSmapping.get_empty_level() //get a place for stragglers
+	var/datum/level/space_zlevel = get_empty_level() //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)

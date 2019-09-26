@@ -3,7 +3,7 @@
 	desc = "A much used spell used in the vasteness of space to make it not so killey."
 
 	charge_max = 200
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	invocation = "none"
 	invocation_type = SpI_NONE
 

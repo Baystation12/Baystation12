@@ -7,7 +7,7 @@
 
 	cast_delay = 10
 	charge_max = 100
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	invocation = "none"
 	invocation_type = SpI_NONE
 

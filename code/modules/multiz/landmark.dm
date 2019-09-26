@@ -24,30 +24,9 @@
 
 /obj/effect/landmark/map_data/Initialize()
 	..()
-	find_and_set_level()
+	create_level(z, level_id) //This proc is in multiz/level.dm
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/map_data/proc/find_level()
-	var/datum/level/l = SSmapping.all_level_datums[level_id]
-	if (istype(l))
-		//We have found the right level
-		zlevel = l
-		return
-
-	log_world("ERROR: Landmark located at [jumplink(src)] could not find level datum matching id [level_id]")
-
-/obj/effect/landmark/map_data/proc/set_level()
-	if (!zlevel)
-		return
-
-	//Set the Zvalue
-	zlevel.z = src.z
-	zlevel.Initialize() //And tell the level to do its thing now that it has a number
-
-
-/obj/effect/landmark/map_data/proc/find_and_set_level()
-	find_level()
-	set_level()
 
 
 
@@ -62,3 +41,6 @@
 
 /obj/effect/landmark/map_data/transit
 	level_id = "transit_level_1"
+
+/obj/effect/landmark/map_data/empty_precached
+	level_id = "empty_precached"

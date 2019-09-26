@@ -140,6 +140,7 @@
 
 	testing("Building overmap...")
 	world.maxz++
+	create_level(world.maxz, "overmap") //This proc is in multiz/level.dm
 	GLOB.using_map.overmap_z = world.maxz
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))

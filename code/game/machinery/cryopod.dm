@@ -227,7 +227,7 @@
 			if(OO.in_space || istype(OO,/obj/effect/overmap/sector/exoplanet))
 				possible_locations |= text2num(level)
 
-	var/datum/level/L = SSmapping.get_empty_level()
+	var/datum/level/L = get_empty_level()
 	var/newz = L.z
 	if(possible_locations.len && prob(10))
 		newz = pick(possible_locations)

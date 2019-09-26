@@ -3,7 +3,7 @@
 	desc = "Use your mental strength to literally tear a hole from this dimension to the next, letting things through..."
 
 	charge_max = 300
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	invocation = "none"
 	invocation_type = SpI_NONE
 
