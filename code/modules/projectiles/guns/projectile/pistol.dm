@@ -68,7 +68,6 @@
 	force = 9
 	caliber = CALIBER_PISTOL_MAGNUM
 	fire_delay = 12
-	screen_shake = 2
 	magazine_type = /obj/item/ammo_magazine/magnum
 	allowed_magazines = /obj/item/ammo_magazine/magnum
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'

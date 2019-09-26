@@ -58,7 +58,6 @@
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/fire_anim = null
-	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
 	var/silenced = 0
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
@@ -308,10 +307,6 @@
 				if(8 to INFINITY)
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
-	if(screen_shake)
-		spawn()
-			shake_camera(user, screen_shake+1, screen_shake)
-
 	if(combustion)
 		var/turf/curloc = get_turf(src)
 		if(curloc)
@@ -477,15 +472,12 @@
 		accuracy = scoped_accuracy
 		if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
 			accuracy += 2
-		if(screen_shake)
-			screen_shake = round(screen_shake*zoom_amount+1) //screen shake is worse when looking through a scope
 
-//make sure accuracy and screen_shake are reset regardless of how the item is unzoomed.
+//make sure accuracy is reset regardless of how the item is unzoomed.
 /obj/item/weapon/gun/zoom()
 	..()
 	if(!zoom)
 		accuracy = initial(accuracy)
-		screen_shake = initial(screen_shake)
 
 /obj/item/weapon/gun/examine(mob/user)
 	. = ..()
