@@ -100,16 +100,13 @@
 
 /datum/nano_module/email_client/proc/log_in()
 	var/list/id_login
-
-	if(istype(host, /datum/extension/interactive/ntos/))
-		var/datum/extension/interactive/ntos/computer = host
-		var/obj/item/weapon/card/id/id = computer.get_inserted_id()
-		var/atom/A = computer.get_physical_host()
-		if(!id && A && ismob(A.loc))
-			var/mob/M = A.loc
-			id = M.GetIdCard()
-		if(id)
-			id_login = id.associated_email_login.Copy()
+	var/atom/movable/A = nano_host()
+	var/obj/item/weapon/card/id/id = A.GetIdCard()
+	if(!id && ismob(A.loc))
+		var/mob/M = A.loc
+		id = M.GetIdCard()
+	if(id)
+		id_login = id.associated_email_login.Copy()
 
 	var/datum/computer_file/data/email_account/target
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
