@@ -180,8 +180,10 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	damage_flags = 0
 	sharp = 0 //not a laser
+	damage = 1//flavor burn! still not a laser, dmg will be reduce by energy resistance not laser resistances
+	damage_type = BURN
+	eyeblur = 1//Some feedback that you've been hit
 	agony = 40
-	damage_type = STUN
 
 	muzzle_type = /obj/effect/projectile/stun/muzzle
 	tracer_type = /obj/effect/projectile/stun/tracer
@@ -189,19 +191,19 @@
 
 /obj/item/projectile/beam/stun/heavy
 	name = "heavy stun beam"
+	damage = 2
 	agony = 60
 
 /obj/item/projectile/beam/stun/shock
 	name = "shock beam"
+	agony = 0
+	damage = 15
 	damage_type = ELECTROCUTE
-	damage = 10
-	agony  = 5
 	fire_sound='sound/weapons/pulse.ogg'
 
 /obj/item/projectile/beam/stun/shock/heavy
 	name = "heavy shock beam"
-	damage = 20
-	agony  = 10
+	damage = 30
 
 /obj/item/projectile/beam/plasmacutter
 	name = "plasma arc"

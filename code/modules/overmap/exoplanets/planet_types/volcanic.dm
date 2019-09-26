@@ -72,6 +72,7 @@
 	name = "volcanic floor"
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "cold"
+	dirt_color = COLOR_GRAY20
 
 /datum/random_map/automata/cave_system/mountains/volcanic
 	iterations = 2
@@ -90,6 +91,7 @@
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "lava"
 	movement_delay = 4
+	dirt_color = COLOR_GRAY20
 	var/list/victims
 
 /turf/simulated/floor/exoplanet/lava/on_update_icon()

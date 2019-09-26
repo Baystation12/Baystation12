@@ -33,6 +33,19 @@
 	if(selected_system)
 		return selected_system.MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
 
+/datum/click_handler/default/mech/OnClick(var/atom/A, var/params)
+	var/mob/living/exosuit/E = user.loc
+	if(!istype(E))
+		//If this happens something broke tbh
+		user.RemoveClickHandler(src)
+		return
+	if(E.hatch_closed)
+		return E.ClickOn(A, params, user)
+	else return ..()
+
+/datum/click_handler/default/mech/OnDblClick(var/atom/A, var/params)
+	OnClick(A, params)
+
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
 	if(!user || incapacitated() || user.incapacitated())
@@ -211,6 +224,7 @@
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()
+	user.PushClickHandler(/datum/click_handler/default/mech)
 	return 1
 
 /mob/living/exosuit/proc/sync_access()
@@ -235,6 +249,8 @@
 		if(!silent)
 			to_chat(user, SPAN_NOTICE("You climb out of \the [src]."))
 
+	for(var/datum/click_handler/default/mech/H in user.click_handlers)
+		user.RemoveClickHandler(H)
 	user.forceMove(get_turf(src))
 	LAZYREMOVE(user.additional_vision_handlers, src)
 	if(user.client)

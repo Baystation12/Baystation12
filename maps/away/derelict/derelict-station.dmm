@@ -94,7 +94,7 @@
 /turf/space,
 /area/derelict/ship)
 "am" = (
-/obj/item/modular_computer/console/preset/medical,
+/obj/machinery/computer/modular/preset/medical,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "an" = (
@@ -775,7 +775,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cs" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "ct" = (
@@ -2574,7 +2574,7 @@
 	pressure_setting = 2000;
 	sensor_tag = "d_air_sensor";
 	sensor_name = "Air Supply Tank";
-	
+
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4

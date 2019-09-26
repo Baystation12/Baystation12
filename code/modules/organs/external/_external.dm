@@ -175,6 +175,12 @@
 		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
 		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
 
+	if(owner && limb_flags & ORGAN_FLAG_CAN_GRASP)
+		owner.grasp_damage_disarm(src)
+
+	if(owner && limb_flags & ORGAN_FLAG_CAN_STAND)
+		owner.stance_damage_prone(src)
+
 /obj/item/organ/external/attack_self(var/mob/user)
 	if((owner && loc == owner) || !contents.len)
 		return ..()

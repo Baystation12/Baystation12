@@ -1,5 +1,5 @@
 /obj/effect/overmap/sector/exoplanet/garbage
-	name = "settled exoplanet"
+	name = "ruined exoplanet"
 	desc = "An arid exoplanet with unnatural formations covering the surface. Hotspots of radiation detected."
 	color = "#a5a18b"
 	planetary_area = /area/exoplanet/garbage
@@ -34,6 +34,11 @@
 /obj/effect/overmap/sector/exoplanet/garbage/adapt_animal(var/mob/living/simple_animal/A)
 	..()
 	A.faction = "Guardian" //stops bots form hitting each other
+
+/obj/effect/overmap/sector/exoplanet/garbage/get_base_image()
+	var/image/I = ..()
+	I.overlays += image('icons/skybox/planet.dmi', "ruins")
+	return I
 
 /datum/random_map/noise/exoplanet/garbage
 	descriptor = "garbage exoplanet"

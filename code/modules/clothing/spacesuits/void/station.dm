@@ -12,6 +12,7 @@
 		)
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 40)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
+	siemens_coefficient = 0.3
 
 /obj/item/clothing/suit/space/void/engineering
 	name = "engineering voidsuit"
@@ -22,6 +23,7 @@
 		slot_r_hand_str = "eng_voidsuit",
 	)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
+	siemens_coefficient = 0.3
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 40)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
 
@@ -98,7 +100,7 @@
 		slot_r_hand_str = "sec_helm",
 		)
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 5)
-	siemens_coefficient = 0.7
+	siemens_coefficient = 0.3
 	light_overlay = "helmet_light_dual"
 
 /obj/item/clothing/suit/space/void/security
@@ -111,7 +113,7 @@
 	)
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 5)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
-	siemens_coefficient = 0.7
+	siemens_coefficient = 0.3
 
 /obj/item/clothing/suit/space/void/security/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/security
@@ -197,15 +199,15 @@
 	desc = "A trendy, lightly radiation-shielded voidsuit helmet trimmed in a fetching blue."
 	icon_state = "rig0-medicalalt"
 	item_state = "medicalalt_helm"
-	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 30)
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 25, bio = 100, rad = 30)
 	light_overlay = "helmet_light_dual_green"
 
 /obj/item/clothing/suit/space/void/medical/alt
 	icon_state = "rig-medicalalt"
 	name = "streamlined medical voidsuit"
-	desc = "A more recent model of Vey-Med voidsuit, featuring the latest in radiation shielding technology, without sacrificing comfort or style."
+	desc = "A more recent and stylish model of Vey-Med voidsuit, with a minor upgrade to radiation shielding."
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical)
-	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 30)
+	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 25, bio = 100, rad = 30)
 
 /obj/item/clothing/suit/space/void/medical/alt/New()
 	..()

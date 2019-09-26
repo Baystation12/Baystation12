@@ -170,7 +170,7 @@
 	flags_inv = 0
 	body_parts_covered = 0
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
-	filtered_gases = list(GAS_PHORON, GAS_N2O, GAS_OXYGEN)
+	filtered_gases = list(GAS_OXYGEN)
 
 
 /obj/item/clothing/mask/gas/swat/vox
@@ -178,9 +178,18 @@
 	desc = "Clearly not designed for a human face."
 	icon_state = "voxswat"
 	item_state = "voxswat"
-	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
+	body_parts_covered = EYES
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
-	filtered_gases = list(GAS_PHORON, GAS_N2O, GAS_OXYGEN)
+	filtered_gases = list(
+		GAS_OXYGEN,
+		GAS_PHORON,
+		GAS_N2O,
+		GAS_CHLORINE,
+		GAS_AMMONIA,
+		GAS_CO,
+		GAS_METHYL_BROMIDE,
+		GAS_METHANE
+		)
 
 /obj/item/clothing/mask/gas/aquabreather
 	name = "aquabreather"

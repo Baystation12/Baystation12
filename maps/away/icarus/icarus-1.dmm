@@ -356,7 +356,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/icarus/vessel)
 "bx" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "by" = (

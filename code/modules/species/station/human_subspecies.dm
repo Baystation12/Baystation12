@@ -12,9 +12,11 @@
 
 	flash_mod =     0.9
 	oxy_mod =       1.1
+	breath_pressure = 18
 	radiation_mod = 0.5
 	brute_mod =     0.85
 	slowdown =      1
+	strength = STR_HIGH
 
 	descriptors = list(
 		/datum/mob_descriptor/height = -1,
@@ -33,6 +35,7 @@
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/spacer_preview.dmi'
 
 	oxy_mod =   0.8
+	breath_pressure = 14
 	toxins_mod =   0.9
 	flash_mod = 1.2
 	brute_mod = 1.1
@@ -139,7 +142,7 @@
 			new_mods["burn"] =      MOD_BASE + (MOD_VARIANCE * rand())
 			new_mods["toxins"] =    MOD_BASE + (MOD_VARIANCE * rand())
 			new_mods["radiation"] = MOD_BASE + (MOD_VARIANCE * rand())
-			new_mods["slowdown"] =  MOD_BASE + (MOD_VARIANCE * rand())
+			new_mods["slowdown"] =  pick(-0.5, 0, 0.5)
 			mods[mob_ref] = new_mods
 		var/list/mob_mods = mods[mob_ref]
 		. = mob_mods[mod_type] || 1

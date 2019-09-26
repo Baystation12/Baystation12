@@ -13,6 +13,8 @@
 	var/rate = 3
 	var/mega_energy = 1
 
+	construct_state = /decl/machine_construction/default/panel_closed
+
 
 /obj/machinery/power/emitter/gyrotron/anchored
 	anchored = 1

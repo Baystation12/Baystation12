@@ -4,9 +4,9 @@
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 	has_resources = 1
-	footstep_type = FOOTSTEP_CARPET
+	footstep_type = FOOTSTEP_ASTEROID
 	var/diggable = 1
-	var/mudpit = 0	//if pits should not take turf's color
+	var/dirt_color = "#7c5e42"
 
 /turf/simulated/floor/exoplanet/can_engrave()
 	return FALSE
@@ -60,7 +60,6 @@
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "seashallow"
 	movement_delay = 2
-	mudpit = 1
 	footstep_type = FOOTSTEP_WATER
 	var/reagent_type = /datum/reagent/water
 

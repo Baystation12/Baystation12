@@ -134,7 +134,10 @@
 			RELIGION_OTHER
 		)
 	)
-
+	pain_emotes_with_pain_level = list(
+			list(/decl/emote/audible/bug_hiss) = 40
+	)
+	
 /datum/species/nabber/New()
 	equip_adjust = list(
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),

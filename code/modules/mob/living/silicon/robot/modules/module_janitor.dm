@@ -18,7 +18,8 @@
 		/obj/item/device/lightreplacer,
 		/obj/item/borg/sight/hud/jani,
 		/obj/item/device/plunger/robot,
-		/obj/item/weapon/crowbar
+		/obj/item/weapon/crowbar,
+		/obj/item/weapon/weldingtool
 	)
 	emag = /obj/item/weapon/reagent_containers/spray
 	skills = list(

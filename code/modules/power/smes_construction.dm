@@ -177,12 +177,11 @@
 			// Sparks, Weak shock
 			s.set_up(2, 1, src)
 			s.start()
-			if (user_protected && prob(80))
-				to_chat(h_user, "Small electrical arc almost burns your hand. Luckily you had your gloves on!")
+			if(user_protected && prob(80))
+				to_chat(h_user, SPAN_WARNING("Small electrical arc almost burns your hand. Luckily you had your gloves on!"))
 			else
-				to_chat(h_user, "Small electrical arc sparks and burns your hand as you touch the [src]!")
-				h_user.adjustFireLoss(rand(5,10))
-				h_user.Paralyse(2)
+				to_chat(h_user, SPAN_DANGER("Small electrical arc sparks and burns your hand as you touch the [src]!"))
+				h_user.electrocute_act(rand(5,20), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)//corrected to counter act armor and stuff
 			charge = 0
 
 		if (16 to 35)
@@ -191,11 +190,10 @@
 			s.set_up(4,1,src)
 			s.start()
 			if (user_protected && prob(25))
-				to_chat(h_user, "Medium electrical arc sparks and almost burns your hand. Luckily you had your gloves on!")
+				to_chat(h_user, SPAN_WARNING("Medium electrical arc sparks and almost burns your hand. Luckily you had your gloves on!"))
 			else
-				to_chat(h_user, "Medium electrical sparks as you touch the [src], severely burning your hand!")
-				h_user.adjustFireLoss(rand(10,25))
-				h_user.Paralyse(5)
+				to_chat(h_user, SPAN_DANGER("Medium electrical sparks as you touch the [src], severely burning your hand!"))
+				h_user.electrocute_act(rand(15,35), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)
 			spawn(0)
 				empulse(src.loc, 2, 4)
 			apcs_overload(0, 5, 10)
@@ -207,13 +205,13 @@
 			s.set_up(7,1,src)
 			s.start()
 			if (user_protected)
-				to_chat(h_user, "Strong electrical arc sparks between you and [src], ignoring your gloves and burning your hand!")
-				h_user.adjustFireLoss(rand(25,60))
-				h_user.Paralyse(8)
+				to_chat(h_user, SPAN_DANGER("Strong electrical arc sparks between you and [src], ignoring your gloves and burning your hand!"))
+				h_user.electrocute_act(rand(30,60), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)
+				h_user.Paralyse(3)
 			else
-				to_chat(h_user, "Strong electrical arc sparks between you and [src], knocking you out for a while!")
-				h_user.adjustFireLoss(rand(35,75))
-				h_user.Paralyse(12)
+				to_chat(h_user, SPAN_DANGER("Strong electrical arc sparks between you and [src], knocking you out for a while!"))
+				h_user.electrocute_act(rand(40,80), src, def_zone = ran_zone(null))
+				h_user.Paralyse(6)
 			spawn(0)
 				empulse(src.loc, 8, 16)
 			charge = 0
@@ -226,10 +224,10 @@
 			// Sparks, Near - instantkill shock, Strong EMP, 25% light overload, 5% APC failure. 50% of SMES explosion. This is bad.
 			s.set_up(10,1,src)
 			s.start()
-			to_chat(h_user, "Massive electrical arc sparks between you and [src]. Last thing you can think about is \"Oh shit...\"")
+			to_chat(h_user, SPAN_WARNING("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is <span class='danger'>\"Oh shit...\"</span>"))
 			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
-			h_user.adjustFireLoss(rand(150,195))
-			h_user.Paralyse(25)
+			h_user.electrocute_act(rand(170,210), src, def_zone = ran_zone(null))
+			h_user.Paralyse(8)
 			spawn(0)
 				empulse(src.loc, 32, 64)
 			charge = 0
@@ -261,7 +259,7 @@
 	if (failure_probability < 5)
 		failure_probability = 0
 
-	if (failure_probability && prob(failure_probability * (1.5 - (user.get_skill_value(SKILL_ELECTRICAL) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))))// 0.5 - 1.5, step of 0.25
+	if (failure_probability && prob(failure_probability * (1.5 - (user.get_skill_value(core_skill) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))))// 0.5 - 1.5, step of 0.25
 		total_system_failure(failure_probability, user)
 		return TRUE
 
@@ -292,15 +290,6 @@
 	else
 		..()
 
-/obj/machinery/power/smes/buildable/components_are_accessible(path)
-	if(failing)
-		return FALSE
-	if(charge > (capacity/100) && safeties_enabled)
-		return FALSE
-	if(output_attempt || input_attempt)
-		return FALSE
-	return ..()
-
 /obj/machinery/power/smes/buildable/cannot_transition_to(state_path, mob/user)
 	if(failing)
 		return SPAN_WARNING("\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
@@ -323,14 +312,27 @@
 	if(charge > (capacity/100) && safeties_enabled)
 		to_chat(user,  SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!"))
 		return FALSE
-	if(output_attempt || input_attempt)
-		to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
-		return FALSE
 	. = ..()
 	if(!.)
 		return
-	if(check_total_system_failure(user))
-		return FALSE
+	if(istype(component,/obj/item/weapon/stock_parts/smes_coil))
+		if(output_attempt || input_attempt)
+			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
+			return FALSE
+		if(!do_after(user, 5 SECONDS, src) || check_total_system_failure(user))
+			return FALSE
+
+/obj/machinery/power/smes/buildable/remove_part_and_give_to_user(path, mob/user)
+	if(charge > (capacity/100) && safeties_enabled)
+		to_chat(user,  SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!"))
+		return
+	if(ispath(path,/obj/item/weapon/stock_parts/smes_coil))
+		if(output_attempt || input_attempt)
+			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
+			return
+		if(!do_after(user, 5 SECONDS, src) || check_total_system_failure(user))
+			return
+	..()
 
 // Proc: attackby()
 // Parameters: 2 (W - object that was used on this machine, user - person which used the object)

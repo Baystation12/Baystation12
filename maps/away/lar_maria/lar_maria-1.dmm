@@ -503,7 +503,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bq" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "br" = (
@@ -1590,7 +1590,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eg" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eh" = (
@@ -2092,7 +2092,7 @@
 	icon_state = "0-2";
 	d2 = 2
 	},
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fr" = (

@@ -55,6 +55,7 @@
 		var/datum/level/L = SSmapping.all_level_datums[name]
 		connections[direction] = L
 
+
 	//And add it to the list in the parent scene datum
 	scene.levels["[z]"] = src
 	scene.level_numbers |= z //There should never be two of these landmarks on the same level, but lets use |= anyway in case someone screwed up

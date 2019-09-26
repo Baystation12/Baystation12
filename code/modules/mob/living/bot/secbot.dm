@@ -39,11 +39,11 @@
 	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
 	will_patrol = 1
 
-/mob/living/bot/secbot/New()
-	..()
+/mob/living/bot/secbot/Initialize()
 	stun_baton = new(src)
 	stun_baton.bcell = new /obj/item/weapon/cell/infinite(stun_baton)
 	stun_baton.set_status(1, null)
+	. = ..()
 
 	handcuffs = new(src)
 

@@ -7,6 +7,7 @@
 	closet_appearance = /decl/closet_appearance/wall
 	density = 0
 	anchored = 1
+	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 

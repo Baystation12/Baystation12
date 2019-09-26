@@ -50,7 +50,18 @@ GLOBAL_LIST_INIT(footstep_sounds, list(
 		'sound/effects/footstep/lava2.ogg',
 		'sound/effects/footstep/lava3.ogg'),
 	FOOTSTEP_BLANK = list(
-		'sound/effects/footstep/blank.ogg')
+		'sound/effects/footstep/blank.ogg'),
+	FOOTSTEP_SNOW = list(
+		'sound/effects/footstep/snow1.ogg',
+		'sound/effects/footstep/snow2.ogg',
+		'sound/effects/footstep/snow3.ogg',
+		'sound/effects/footstep/snow4.ogg',
+		'sound/effects/footstep/snow5.ogg'),
+	FOOTSTEP_SAND = list(
+		'sound/effects/footstep/sand1.ogg',
+		'sound/effects/footstep/sand2.ogg',
+		'sound/effects/footstep/sand3.ogg',
+		'sound/effects/footstep/sand4.ogg')
 ))
 
 /proc/get_footstep(var/footstep_type, var/mob/caller)
@@ -67,11 +78,11 @@ GLOBAL_LIST_INIT(footstep_sounds, list(
 	if(check_fluid_depth(10) && !is_flooded(TRUE))
 		return get_footstep(FOOTSTEP_WATER, caller)
 
-	if(is_plating())
-		return get_footstep(FOOTSTEP_PLATING, caller)
-
 	if(footstep_type)
 		return get_footstep(footstep_type, caller)
+
+	if(is_plating())
+		return get_footstep(FOOTSTEP_PLATING, caller)
 
 /turf/simulated/floor/get_footstep_sound(var/mob/caller)
 	. = ..()

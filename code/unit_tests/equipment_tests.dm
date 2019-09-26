@@ -57,7 +57,7 @@
 
 /datum/unit_test/vision_glasses/plain
 	name = "EQUIPMENT: Plain glasses. see_invis"
-	glasses_type = /obj/item/clothing/glasses/regular
+	glasses_type = /obj/item/clothing/glasses/prescription
 	expectation = SEE_INVISIBLE_LIVING
 
 // ============================================================================

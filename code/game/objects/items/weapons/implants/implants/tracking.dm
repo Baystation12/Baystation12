@@ -36,21 +36,11 @@
 	return TRUE
 
 /obj/item/weapon/implant/tracking/emp_act(severity)
-	if (malfunction)	//no, dawg, you can't malfunction while you are malfunctioning
-		return
-	malfunction = MALFUNCTION_TEMPORARY
-
-	var/delay = 20
-	switch(severity)
-		if(1)
-			if(prob(60))
-				removed()
-				qdel(src)
-		if(2)
-			delay = rand(5,15) * 600	//from 5 to 15 minutes of free time
-
-	spawn(delay)
-		malfunction = 0
+	var/power = 4 - severity
+	if(prob(power * 15))
+		meltdown()
+	else if(prob(power * 40))
+		disable(rand(power*500,power*5000))//adds in extra time because this is the only other way to sabotage it
 
 /obj/item/weapon/implantcase/tracking
 	name = "glass case - 'tracking'"

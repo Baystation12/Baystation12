@@ -16,12 +16,16 @@
 	var/seeds
 
 /datum/goal/department/plant_samples/New()
-	seeds = rand(3,5)
+	var/total_seeds = 0
+	var/area/map = locate(/area/overmap)
+	for(var/obj/effect/overmap/sector/exoplanet/P in map)
+		total_seeds += P.seeds.len
+	seeds = rand(total_seeds)
 	..()
 
 /datum/goal/department/plant_samples/update_strings()
-	description = "Scan at least [seeds] different plant\s while on the expeditions."
-
+	description = "Scan at least [seeds] different plant\s native to exoplanets."
+	
 /datum/goal/department/plant_samples/get_summary_value()
 	var/scanned = SSstatistics.get_field("xenoplants_scanned")
 	return " ([scanned ? scanned : 0 ] plant specie\s so far)"

@@ -399,12 +399,15 @@
 /obj/effect/overmap/sector/exoplanet/get_skybox_representation()
 	return skybox_image
 
+/obj/effect/overmap/sector/exoplanet/proc/get_base_image()
+	var/image/base = image('icons/skybox/planet.dmi', "base")
+	base.color = get_surface_color()
+	return base
+
 /obj/effect/overmap/sector/exoplanet/proc/generate_planet_image()
 	skybox_image = image('icons/skybox/planet.dmi', "")
 
-	var/image/base = image('icons/skybox/planet.dmi', "base")
-	base.color = get_surface_color()
-	skybox_image.overlays += base
+	skybox_image.overlays += get_base_image()
 
 	for(var/datum/exoplanet_theme/theme in themes)
 		skybox_image.overlays += theme.get_planet_image_extra()

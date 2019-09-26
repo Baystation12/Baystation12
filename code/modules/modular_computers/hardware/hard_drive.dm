@@ -157,8 +157,6 @@
 	return null
 
 /obj/item/weapon/stock_parts/computer/hard_drive/Destroy()
-	if(holder2 && (holder2.hard_drive == src))
-		holder2.hard_drive = null
 	stored_files = null
 	return ..()
 

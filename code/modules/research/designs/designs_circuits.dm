@@ -465,6 +465,19 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/atmoscontrol
 	sort_string = "JCAAF"
 
+/datum/design/circuit/pipe_dispenser
+	name = "pipe dispenser"
+	id = "pipe_dispenser"
+	req_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/pipedispensor
+	sort_string = "JCAAG"
+
+/datum/design/circuit/pipe_dispenser/disposal
+	name = "disposal pipe dispenser"
+	id = "pipe_disposal"
+	build_path = /obj/item/weapon/stock_parts/circuitboard/pipedispensor/disposal
+	sort_string = "JCAAH"
+
 /datum/design/circuit/secure_airlock
 	name = "secure airlock electronics"
 	desc =  "Allows for the construction of a tamper-resistant airlock electronics."
@@ -645,13 +658,6 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/telecomms/hub
 	sort_string = "PAAAD"
 
-/datum/design/circuit/tcom/relay
-	name = "relay mainframe"
-	id = "tcom-relay"
-	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 4, TECH_BLUESPACE = 3)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/telecomms/relay
-	sort_string = "PAAAE"
-
 /datum/design/circuit/tcom/broadcaster
 	name = "subspace broadcaster"
 	id = "tcom-broadcaster"
@@ -767,3 +773,17 @@
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/sublimator/sauna
 	sort_string = "XAAAC"
+
+/datum/design/circuit/vitals
+	name = "vitals monitor"
+	id = "vitals"
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/vitals_monitor
+	sort_string = "XAAAD"
+
+/datum/design/circuit/sublimator/modular_computer
+	name = "general-purpose computer"
+	id = "pc_motherboard"
+	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/modular_computer
+	sort_string = "XAAAD"

@@ -16,7 +16,7 @@
 	nanomodule_path = /datum/nano_module/email_client
 
 // Persistency. Unless you log out, or unless your password changes, this will pre-fill the login data when restarting the program
-/datum/computer_file/program/email_client/kill_program()
+/datum/computer_file/program/email_client/on_shutdown()
 	if(NM)
 		var/datum/nano_module/email_client/NME = NM
 		if(NME.current_account)
@@ -28,7 +28,7 @@
 			stored_password = ""
 	. = ..()
 
-/datum/computer_file/program/email_client/run_program()
+/datum/computer_file/program/email_client/on_startup()
 	. = ..()
 
 	if(NM)
@@ -40,8 +40,7 @@
 		NME.check_for_new_messages(1)
 
 /datum/computer_file/program/email_client/proc/new_mail_notify()
-	computer.visible_message("\The [computer] beeps softly, indicating a new email has been received.", 1)
-	playsound(computer, 'sound/machines/twobeep.ogg', 50, 1)
+	computer.visible_notification("You got mail!")
 
 /datum/computer_file/program/email_client/process_tick()
 	..()
@@ -102,11 +101,12 @@
 /datum/nano_module/email_client/proc/log_in()
 	var/list/id_login
 
-	if(istype(host, /obj/item/modular_computer))
-		var/obj/item/modular_computer/computer = host
-		var/obj/item/weapon/card/id/id = computer.GetIdCard()
-		if(!id && ismob(computer.loc))
-			var/mob/M = computer.loc
+	if(istype(host, /datum/extension/interactive/ntos/))
+		var/datum/extension/interactive/ntos/computer = host
+		var/obj/item/weapon/card/id/id = computer.get_inserted_id()
+		var/atom/A = computer.get_physical_host()
+		if(!id && A && ismob(A.loc))
+			var/mob/M = A.loc
 			id = M.GetIdCard()
 		if(id)
 			id_login = id.associated_email_login.Copy()

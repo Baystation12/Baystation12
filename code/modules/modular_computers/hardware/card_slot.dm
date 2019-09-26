@@ -7,6 +7,7 @@
 	hardware_size = 1
 	origin_tech = list(TECH_DATA = 2)
 	usage_flags = PROGRAM_ALL & ~PROGRAM_PDA
+	external_slot = TRUE
 	var/can_write = TRUE
 	var/can_broadcast = FALSE
 
@@ -49,7 +50,68 @@
 	
 	to_chat(user, JOINTEXT(to_send))
 		
+/obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id(mob/user)
+	set name = "Remove ID"
+	set category = "Object"
+	set src in view(1)
 
+	if(!user)
+		user = usr
+
+	if(!CanPhysicallyInteract(user))
+		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+		return
+
+	var/obj/item/weapon/stock_parts/computer/card_slot/device = src
+	if (!istype(device))
+		device = locate() in src
+
+	if(!device.stored_card)
+		to_chat(user, "There is no card in \the [src]")
+		return
+
+	device.eject_id(user)
+
+/obj/item/weapon/stock_parts/computer/card_slot/proc/eject_id(mob/user)
+	if(!stored_card)
+		return FALSE
+
+	if(user)
+		to_chat(user, "You remove [stored_card] from [src].")
+		user.put_in_hands(stored_card)
+	else
+		dropInto(loc)
+	stored_card = null
+	
+	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)
+	if(os)
+		os.event_idremoved()
+	loc.verbs -= /obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id
+	return TRUE
+
+/obj/item/weapon/stock_parts/computer/card_slot/proc/insert_id(var/obj/item/weapon/card/id/I, mob/user)
+	if(!istype(I))
+		return FALSE
+
+	if(stored_card)
+		to_chat(user, "You try to insert [I] into [src], but its ID card slot is occupied.")
+		return FALSE
+
+	if(user && !user.unEquip(I, src))
+		return FALSE
+
+	stored_card = I
+	to_chat(user, "You insert [I] into [src].")
+	if(isobj(loc))
+		loc.verbs |= /obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id
+	return TRUE
+
+/obj/item/weapon/stock_parts/computer/card_slot/attackby(obj/item/weapon/card/id/I, mob/living/user)
+	if(!istype(I))
+		return
+	insert_id(I, user)
+	return TRUE
+	
 /obj/item/weapon/stock_parts/computer/card_slot/broadcaster // read only
 	name = "RFID card broadcaster"
 	desc = "Reads and broadcasts the RFID signal of an inserted card."
@@ -59,9 +121,7 @@
 	usage_flags = PROGRAM_PDA
 
 /obj/item/weapon/stock_parts/computer/card_slot/Destroy()
-	if(holder2 && (holder2.card_slot == src))
-		holder2.card_slot = null
+	loc.verbs -= /obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id
 	if(stored_card)
-		stored_card.dropInto(holder2 ? holder2.loc : loc)
-	holder2 = null
+		stored_card.dropInto(loc)
 	return ..()

@@ -54,7 +54,7 @@
 
 /datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
-		M.adjustOxyLoss(-removed * 10)
+		M.add_chemical_effect(CE_OXYGENATED, 2)
 	else if(alien != IS_DIONA)
 		M.adjustToxLoss(removed * 1.5)
 

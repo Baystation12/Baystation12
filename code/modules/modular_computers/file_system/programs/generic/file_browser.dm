@@ -27,51 +27,24 @@
 		var/newname = sanitize(input(usr, "Enter file name or leave blank to cancel:", "File rename"))
 		if(!newname)
 			return 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		if(!HDD)
+		if(computer.create_file(newname, file_type = /datum/computer_file/data/text))
 			return 1
-		var/datum/computer_file/data/F = new/datum/computer_file/data()
-		F.filename = newname
-		F.filetype = "TXT"
-		HDD.store_file(F)
 	if(href_list["PRG_deletefile"])
-		. = 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		if(!HDD)
-			return 1
-		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_deletefile"])
-		if(!F || F.undeletable)
-			return 1
-		HDD.remove_file(F)
+		return computer.delete_file(href_list["PRG_deletefile"])
+	
 	if(href_list["PRG_usbdeletefile"])
-		. = 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/RHDD = computer.portable_drive
-		if(!RHDD)
-			return 1
-		var/datum/computer_file/F = RHDD.find_file_by_name(href_list["PRG_usbdeletefile"])
-		if(!F || F.undeletable)
-			return 1
-		RHDD.remove_file(F)
+		var/obj/item/weapon/stock_parts/computer/hard_drive/RHDD = computer.get_component(PART_DRIVE)
+		return computer.delete_file(href_list["PRG_deletefile"], RHDD)
+
 	if(href_list["PRG_closefile"])
 		. = 1
 		open_file = null
 		error = null
 	if(href_list["PRG_clone"])
-		. = 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		if(!HDD)
-			return 1
-		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_clone"])
-		if(!F || !istype(F))
-			return 1
-		var/datum/computer_file/C = F.clone(1)
-		HDD.store_file(C)
+		return computer.clone_file(href_list["PRG_clone"])
 	if(href_list["PRG_rename"])
 		. = 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		if(!HDD)
-			return 1
-		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_rename"])
+		var/datum/computer_file/F = computer.get_file(href_list["PRG_rename"])
 		if(!F || !istype(F))
 			return 1
 		var/newname = sanitize(input(usr, "Enter new file name:", "File rename", F.filename))
@@ -81,10 +54,7 @@
 		. = 1
 		if(!open_file)
 			return 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		if(!HDD)
-			return 1
-		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
+		var/datum/computer_file/data/F = computer.get_file(open_file)
 		if(!F || !istype(F))
 			return 1
 		if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
@@ -101,54 +71,21 @@
 			return
 
 		if(F)
-			var/datum/computer_file/data/backup = F.clone()
-			HDD.remove_file(F)
-			F.stored_data = newtext
-			F.calculate_size()
-			// We can't store the updated file, it's probably too large. Print an error and restore backed up version.
-			// This is mostly intended to prevent people from losing texts they spent lot of time working on due to running out of space.
-			// They will be able to copy-paste the text from error screen and store it in notepad or something.
-			if(!HDD.store_file(F))
-				error = "I/O error: Unable to overwrite file. Hard drive is probably full. You may want to backup your changes before closing this window:<br><br>[html_decode(F.stored_data)]<br><br>"
-				HDD.store_file(backup)
+			computer.save_file(F.filename, newtext)
 	if(href_list["PRG_printfile"])
 		. = 1
 		if(!open_file)
 			return 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		if(!HDD)
-			return 1
-		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
+		var/datum/computer_file/data/F = computer.get_file(open_file)
 		if(!F || !istype(F))
 			return 1
-		if(!computer.nano_printer)
-			error = "Missing Hardware: Your computer does not have required hardware to complete this operation."
-			return 1
-		if(!computer.nano_printer.print_text(digitalPencode2html(F.stored_data),F.filename,F.papertype, F.metadata))
-			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
+		if(!computer.print_paper(digitalPencode2html(F.stored_data),F.filename,F.papertype, F.metadata))
+			error = "Hardware error: Unable to print the file."
 			return 1
 	if(href_list["PRG_copytousb"])
-		. = 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = computer.portable_drive
-		if(!HDD || !RHDD)
-			return 1
-		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_copytousb"])
-		if(!F || !istype(F))
-			return 1
-		var/datum/computer_file/C = F.clone(0)
-		RHDD.store_file(C)
+		computer.copy_between_disks(computer.get_component(PART_HDD), computer.get_component(PART_DRIVE))
 	if(href_list["PRG_copyfromusb"])
-		. = 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = computer.portable_drive
-		if(!HDD || !RHDD)
-			return 1
-		var/datum/computer_file/F = RHDD.find_file_by_name(href_list["PRG_copyfromusb"])
-		if(!F || !istype(F))
-			return 1
-		var/datum/computer_file/C = F.clone(0)
-		HDD.store_file(C)
+		computer.copy_between_disks(computer.get_component(PART_DRIVE), computer.get_component(PART_HDD))
 	if(.)
 		SSnano.update_uis(NM)
 
@@ -160,31 +97,26 @@
 	var/datum/computer_file/program/filemanager/PRG
 	PRG = program
 
-	var/obj/item/weapon/stock_parts/computer/hard_drive/HDD
-	var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD
 	if(PRG.error)
 		data["error"] = PRG.error
 	if(PRG.open_file)
 		var/datum/computer_file/data/F
 
-		if(!PRG.computer || !PRG.computer.hard_drive)
+		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
 			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
-			HDD = PRG.computer.hard_drive
-			F = HDD.find_file_by_name(PRG.open_file)
+			F = PRG.computer.get_file(PRG.open_file)
 			if(!istype(F))
 				data["error"] = "I/O ERROR: Unable to open file."
 			else
 				data["filedata"] = F.generate_file_data(user)
 				data["filename"] = "[F.filename].[F.filetype]"
 	else
-		if(!PRG.computer || !PRG.computer.hard_drive)
+		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
 			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
-			HDD = PRG.computer.hard_drive
-			RHDD = PRG.computer.portable_drive
 			var/list/files[0]
-			for(var/datum/computer_file/F in HDD.stored_files)
+			for(var/datum/computer_file/F in PRG.computer.get_all_files())
 				files.Add(list(list(
 					"name" = F.filename,
 					"type" = F.filetype,
@@ -192,10 +124,11 @@
 					"undeletable" = F.undeletable
 				)))
 			data["files"] = files
+			var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
 			if(RHDD)
 				data["usbconnected"] = 1
 				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in RHDD.stored_files)
+				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
 					usbfiles.Add(list(list(
 						"name" = F.filename,
 						"type" = F.filetype,

@@ -6,7 +6,7 @@
 	if(!can_use_scanner(user, target, proximity))
 		return
 
-	var/dat = medical_scan_action(target, user, holder2, 1)
+	var/dat = medical_scan_action(target, user, loc, 1)
 
 	if(dat && driver && driver.using_scanner)
 		driver.data_buffer = html2pencode(dat)
