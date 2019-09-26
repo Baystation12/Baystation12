@@ -21,12 +21,8 @@
 	deselect_shield()
 
 /datum/nano_module/shields_monitor/proc/get_shields()
-	var/turf/T = get_turf(nano_host())
-	if(!T)
-		return list()
-
 	var/list/shields = list()
-	var/connected_z_levels = GetConnectedZlevels(T.z)
+	var/connected_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
 		if(!(S.z in connected_z_levels))
 			continue

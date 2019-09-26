@@ -156,8 +156,8 @@ Subtypes
 	if(!origin || !origin.get_ntnet_status())
 		return
 	var/nid = text2num(copytext(text, 8))
-	var/datum/extension/interactive/ntos/comp = ntnet_global.get_computer_by_nid(nid)
-	if(!comp || !comp.on || !comp.get_ntnet_status())
+	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
+	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
 		return
 	return "... Estimating location: [get_area(comp)]"
 
@@ -177,8 +177,8 @@ Subtypes
 		. += "failed. Check network status."
 		return
 	var/nid = text2num(copytext(text, 6))
-	var/datum/extension/interactive/ntos/comp = ntnet_global.get_computer_by_nid(nid)
-	if(!comp || !comp.on || !comp.get_ntnet_status())
+	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
+	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
 		. += "failed. Target device not responding."
 		return
 	. += "ping successful."
@@ -198,10 +198,10 @@ Subtypes
 	if(!origin || !origin.get_ntnet_status())
 		return "ssh: Check network connectivity."
 	var/nid = text2num(copytext(text, 5))
-	var/datum/extension/interactive/ntos/comp = ntnet_global.get_computer_by_nid(nid)
+	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
 	if(comp == origin)
 		return "ssh: Error; can not open remote terminal to self."
-	if(!comp || !comp.on || !comp.get_ntnet_status())
+	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
 		return "ssh: No active device with this nid found."
 	if(comp.has_terminal(user))
 		return "ssh: A remote terminal to this device is already active."
@@ -247,9 +247,9 @@ Subtypes
 	var/id = text2num(copytext(text, 10))
 	if(!id)
 		return syntax_error
-	var/datum/extension/interactive/ntos/target = ntnet_global.get_computer_by_nid(id)
+	var/datum/extension/interactive/ntos/target = ntnet_global.get_os_by_nid(id)
 	if(target == comp) return "proxy: Cannot setup a device to be its own proxy"
-	if(!target || !target.on || !target.get_ntnet_status())
+	if(!target || !target.host_status() || !target.get_ntnet_status())
 		return "proxy: Error; cannot locate target device."
 	var/datum/computer_file/data/logfile/file = target.get_file("proxy")
 	if(!istype(file))
