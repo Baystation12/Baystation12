@@ -315,7 +315,6 @@ swapmap
 		if(!ischunk)
 			if(world.maxz<=swapmaps_compiled_maxz)
 				z1=swapmaps_compiled_maxz+1
-				log_world("Swapmaps increased z to [z1]")
 				x1=1;y1=1
 			else
 				var/list/l=ConsiderRegion(1,1,world.maxx,world.maxy,swapmaps_compiled_maxz+1)

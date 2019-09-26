@@ -93,7 +93,6 @@
 	var/y = round((world.maxy - height)/2)
 	var/initial_z = world.maxz + 1
 
-	log_world("Map template loading new z [initial_z]")
 
 	if (x < 1) x = 1
 	if (y < 1) y = 1

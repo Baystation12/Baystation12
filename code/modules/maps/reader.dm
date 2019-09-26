@@ -61,7 +61,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		y_offset = 1
 	if(!z_offset)
 		z_offset = world.maxz + 1
-		log_world("DMM Suite reader increased z to [z_offset]")
 
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/list/grid_models = list()
