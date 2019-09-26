@@ -26,7 +26,7 @@
 	desc = "This spell constructs a cult floor"
 
 	charge_max = 20
-	spell_flags = Z2NOCAST | CONSTRUCT_CHECK
+	spell_flags = NO_ADMIN_CAST | CONSTRUCT_CHECK
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 0
@@ -39,7 +39,7 @@
 	desc = "This spell constructs a cult wall"
 
 	charge_max = 100
-	spell_flags = Z2NOCAST | CONSTRUCT_CHECK
+	spell_flags = NO_ADMIN_CAST | CONSTRUCT_CHECK
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 0
@@ -52,7 +52,7 @@
 	desc = "This spell constructs a reinforced metal wall"
 
 	charge_max = 300
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 0

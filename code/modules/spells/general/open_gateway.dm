@@ -3,7 +3,7 @@
 	desc = "Open a gateway for your master. Don't do it for too long, or you will die."
 
 	charge_max = 600
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	invocation = "none"
 	invocation_type = SpI_NONE
 

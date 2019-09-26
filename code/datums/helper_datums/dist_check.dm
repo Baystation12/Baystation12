@@ -1,3 +1,4 @@
+//None of these specify a distance to check within
 /decl/dist_check/proc/within_dist(var/atom/a, var/atom/b)
 	return FALSE
 

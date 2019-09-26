@@ -237,7 +237,11 @@
 	if(!simulated)
 		return
 
-	if(!z || (z in GLOB.using_map.sealed_levels))
+	var/datum/level/current = get_level_from_z(z)
+	var/datum/level/next = null
+	var/direction = null
+
+	if (!current || current.sealed)
 		return
 
 	if(!GLOB.universe.OnTouchMapEdge(src))
@@ -247,26 +251,14 @@
 		overmap_spacetravel(get_turf(src), src)
 		return
 
-	var/new_x
-	var/new_y
-	var/new_z = GLOB.using_map.get_transit_zlevel(z)
-	if(new_z)
-		if(x <= TRANSITIONEDGE)
-			new_x = world.maxx - TRANSITIONEDGE - 2
-			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+	direction = get_crossed_world_edge(new /vector2(x,y))
 
-		else if (x >= (world.maxx - TRANSITIONEDGE + 1))
-			new_x = TRANSITIONEDGE + 1
-			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+	if (direction && current)
+		next = current.get_connected_level(direction, src)
 
-		else if (y <= TRANSITIONEDGE)
-			new_y = world.maxy - TRANSITIONEDGE -2
-			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
-
-		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
-			new_y = TRANSITIONEDGE + 1
-			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
-
-		var/turf/T = locate(new_x, new_y, new_z)
-		if(T)
-			forceMove(T)
+	var/turf/T
+	if (next)
+		var/vector2/V = next.get_landing_point(src, direction,  ZMOVE_PHASE, current)
+		T = locate(V.x, V.y, next.z)
+	if(T)
+		forceMove(T)

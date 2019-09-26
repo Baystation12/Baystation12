@@ -303,11 +303,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		return current_z_level
 	return text2num(pickweight(candidates))
 
-/datum/map/proc/get_empty_zlevel()
-	if(empty_levels == null)
-		world.maxz++
-		empty_levels = list(world.maxz)
-	return pick(empty_levels)
 
 
 /datum/map/proc/setup_economy()

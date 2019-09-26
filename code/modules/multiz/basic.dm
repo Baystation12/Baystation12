@@ -1,54 +1,59 @@
-// If you add a more comprehensive system, just untick this file.
-var/list/z_levels = list()// Each bit re... haha just kidding this is a list of bools now
-
-// If the height is more than 1, we mark all contained levels as connected.
-/obj/effect/landmark/map_data/New(turf/loc, _height)
-	..()
-	if(!istype(loc)) // Using loc.z is safer when using the maploader and New.
-		return
-	if(_height)
-		height = _height
-	for(var/i = (loc.z - height + 1) to (loc.z-1))
-		if (z_levels.len <i)
-			z_levels.len = i
-		z_levels[i] = TRUE
-
-/obj/effect/landmark/map_data/Initialize()
-	..()
-	return INITIALIZE_HINT_QDEL
-
+//These Has* procs return true/false if there is a connected level in the specified direction
 /proc/HasAbove(var/z)
-	if(z >= world.maxz || z < 1 || z > z_levels.len)
-		return 0
-	return z_levels[z]
+	var/datum/level/L = get_level_from_z(z)
+	if (L)
+		var/datum/level/L2 = L.connections["[UP]"]
+		if (istype(L2))
+			return TRUE
+	return FALSE
 
 /proc/HasBelow(var/z)
-	if(z > world.maxz || z < 2 || (z-1) > z_levels.len)
-		return 0
-	return z_levels[z-1]
+	var/datum/level/L = get_level_from_z(z)
+	if (L)
+		var/datum/level/L2 = L.connections["[DOWN]"]
+		if (istype(L2))
+			return TRUE
+	return FALSE
 
 // Thankfully, no bitwise magic is needed here.
-/proc/GetAbove(var/atom/atom)
-	var/turf/turf = get_turf(atom)
-	if(!turf)
+/proc/GetAbove(var/atom/atom, var/_method = ZMOVE_PHASE)
+	if (!atom)
 		return null
-	return HasAbove(turf.z) ? get_step(turf, UP) : null
+	var/datum/level/L = get_level_from_z(atom.z)
+	if (!L)
+		return null
+	var/datum/level/L2 = L.connections["[UP]"]
+	if (!L2)
+		return null
+	return L2.get_landing_point(atom, UP, _method, L)
 
-/proc/GetBelow(var/atom/atom)
-	var/turf/turf = get_turf(atom)
-	if(!turf)
+
+/proc/GetBelow(var/atom/atom, var/_method = ZMOVE_PHASE)
+	if (!atom)
 		return null
-	return HasBelow(turf.z) ? get_step(turf, DOWN) : null
+	var/datum/level/L = get_level_from_z(atom.z)
+	if (!L)
+		return null
+	var/datum/level/L2 = L.connections["[UP]"]
+	if (!L2)
+		return null
+	return L2.get_landing_point(atom, DOWN, _method, L)
 
 /proc/GetConnectedZlevels(z)
-	. = list(z)
-	for(var/level = z, HasBelow(level), level--)
-		. |= level-1
-	for(var/level = z, HasAbove(level), level++)
-		. |= level+1
+	var/datum/scene/S = get_scene_from_z(z)
+	if (S)
+		return S.level_numbers
+	else
+		return list(z)
 
 /proc/AreConnectedZLevels(var/zA, var/zB)
-	return zA == zB || (zB in GetConnectedZlevels(zA))
+	if (zA == zB)
+		return TRUE
+	var/datum/scene/S1 = get_scene_from_z(zA)
+	var/datum/scene/S2 = get_scene_from_z(zB)
+	if (S1 == S2)
+		return TRUE
+	return FALSE
 
 /proc/get_zstep(ref, dir)
 	if(dir == UP)

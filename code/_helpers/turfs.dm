@@ -155,3 +155,21 @@
 		M.forceMove(new_turf)
 
 	return new_turf
+
+//Figures out if we've crossed the transition zone and which direction we're about to leave this map in
+//Cardinal only, no diagonals for now
+/proc/get_crossed_world_edge(var/vector2/position)
+	var/direction = null
+	if(position.x <= TRANSITIONEDGE)
+		direction = WEST
+
+	else if (position.x >= (world.maxx - TRANSITIONEDGE + 1))
+		direction = EAST
+
+	else if (position.y <= TRANSITIONEDGE)
+		direction = SOUTH
+
+	else if (position.y >= (world.maxy - TRANSITIONEDGE + 1))
+		direction = NORTH
+
+	return direction

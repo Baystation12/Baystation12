@@ -3,7 +3,7 @@
 	desc = "This spell allows you to pass through walls"
 
 	charge_max = 200
-	spell_flags = Z2NOCAST | INCLUDEUSER | CONSTRUCT_CHECK
+	spell_flags = NO_ADMIN_CAST | INCLUDEUSER | CONSTRUCT_CHECK
 	invocation_type = SpI_NONE
 	range = -1
 	duration = 50 //in deciseconds

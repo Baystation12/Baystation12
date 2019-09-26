@@ -15,3 +15,11 @@
 #define FOOTSTEP_BLANK		"blank"
 #define FOOTSTEP_CATWALK	"catwalk"
 #define FOOTSTEP_LAVA		"lava"
+
+//Bitflags for methods of z movement
+#define ZMOVE_PHASE		0	//Includes ghost/admin/BST movement. Can never fail, and thus is the default
+#define ZMOVE_FLIGHT	1	//Includes jetpacks, wings, antigrav, hovering, etc. Flight using some kind of ingame means.
+	//Generally never fails, but it will go slower when moving against gravity
+#define ZMOVE_STRUCTURE_CLIMB	2	//Includes climbing up walls and ship spokes. Generally requires 0g or superhuman climbing abilities
+#define ZMOVE_OBJECT_CLIMB		4	//Climbing Ladders, stairs, and stacks of dense objects.
+//This is primarily a seperate category so that these can be prevented from making certain very long zjourneys

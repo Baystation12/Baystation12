@@ -9,12 +9,12 @@
 	affected_levels = zlevels
 
 /datum/universal_state/bluespace_jump/OnEnter()
-	var/space_zlevel = GLOB.using_map.get_empty_zlevel() //get a place for stragglers
+	var/datum/level/space_zlevel = get_empty_level() //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)
 			if(istype(A,/area/space)) //straggler
-				var/turf/T = locate(M.x, M.y, space_zlevel)
+				var/turf/T = locate(M.x, M.y, space_zlevel.z)
 				if(T)
 					M.forceMove(T)
 			else

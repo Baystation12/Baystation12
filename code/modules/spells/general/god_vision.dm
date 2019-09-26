@@ -3,7 +3,7 @@
 	desc = "See what your master sees."
 
 	charge_max = 10
-	spell_flags = Z2NOCAST
+	spell_flags = NO_ADMIN_CAST
 	invocation = "none"
 	invocation_type = SpI_NONE
 
