@@ -1,5 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "Made modular computer consoles proper machines instead of big items. Report any odd behavior."
-  - tweak: "Modular computers are now constructed via normal computer frames, requiring a circuitboard and various generic machinery parts like input/output controllers like other computers."
