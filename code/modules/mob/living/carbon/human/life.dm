@@ -1115,6 +1115,7 @@
 	full_prosthetic = null
 	shock_stage = 0
 	..()
+	adjust_stamina(100)
 
 /mob/living/carbon/human/reset_view(atom/A)
 	..()

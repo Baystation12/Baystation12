@@ -53,6 +53,7 @@
 	icon = 'icons/turf/chlorine.dmi'
 	icon_state = "chlorine_liquid"
 	desc = "A pool of noxious liquid chlorine. It's full of silt and plant matter."
+	dirt_color = "#d2e0b7"
 	reagent_type = /datum/reagent/toxin/chlorine
 
 /turf/simulated/floor/exoplanet/chlorine_sand
@@ -60,6 +61,8 @@
 	icon = 'icons/turf/chlorine.dmi'
 	icon_state = "chlorine_sand1"
 	desc = "Sand that has been heavily contaminated by chlorine."
+	dirt_color = "#d2e0b7"
+	footstep_type = FOOTSTEP_SAND
 
 /turf/simulated/floor/exoplanet/chlorine_sand/New()
 	icon_state = "chlorine_sand[rand(0,11)]"

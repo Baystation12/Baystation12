@@ -110,7 +110,7 @@
 	return replace_characters(phrase, replacechars)
 
 /obj/item/weapon/implant/explosive/activate()
-	if (malfunction == MALFUNCTION_PERMANENT)
+	if (malfunction)
 		return
 
 	var/turf/T = get_turf(src)
@@ -158,20 +158,6 @@
 	usr.StoreMemory(memo, /decl/memory_options/system)
 	to_chat(usr, memo)
 	return TRUE
-
-/obj/item/weapon/implant/explosive/emp_act(severity)
-	if (malfunction)
-		return
-	malfunction = MALFUNCTION_TEMPORARY
-	switch (severity)
-		if (1)	//strong EMP will melt implant either making it go off, or disarming it
-			if (prob(25))
-				if (prob(50))
-					activate()		//50% chance of bye bye
-				else
-					meltdown()		//50% chance of implant disarming
-	spawn (20)
-		malfunction = 0
 
 /obj/item/weapon/implant/explosive/Destroy()
 	removed()

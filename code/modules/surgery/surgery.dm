@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	var/shock_level = 0	                 // what shock level will this step put patient on
 	var/delicate = 0                     // if this step NEEDS stable optable or can be done on any valid surface with no penalty
 	var/surgery_candidate_flags = 0      // Various bitflags for requirements of the surgery.
-	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements. 
+	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements.
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
@@ -91,8 +91,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 					open_threshold = SURGERY_RETRACTED
 				else if(surgery_candidate_flags & SURGERY_NEEDS_ENCASEMENT)
 					open_threshold = (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
-				if(open_threshold                                                      && \
-				 ((strict_access_requirement && affected.how_open() != open_threshold) || \
+				if(open_threshold && ((strict_access_requirement && affected.how_open() != open_threshold) || \
 				 affected.how_open() < open_threshold))
 					return FALSE
 			return affected
@@ -128,7 +127,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	. = tool_quality(tool)
 	if(user == target)
 		. -= 10
-	
+
 	var/skill_reqs = get_skill_reqs(user, target, tool)
 	for(var/skill in skill_reqs)
 		var/penalty = delicate ? 40 : 20
@@ -215,7 +214,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	// Otherwise we can make a start on surgery!
 	else if(istype(M) && !QDELETED(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
-		// Double-check this in case it changed between initial check and now. 
+		// Double-check this in case it changed between initial check and now.
 		if(zone in M.surgeries_in_progress)
 			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
 		else if(S.can_use(user, M, zone, src) && S.is_valid_target(M))

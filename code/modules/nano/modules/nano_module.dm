@@ -51,14 +51,9 @@
 	return istype(host) ? get_z(host) : 0
 
 /datum/nano_module/proc/print_text(var/text, var/mob/user)
-	var/obj/item/modular_computer/MC = nano_host()
-	if(istype(MC))
-		if(!MC.nano_printer)
-			to_chat(user, "Error: No printer detected. Unable to print document.")
-			return
-
-		if(!MC.nano_printer.print_text(text))
-			to_chat(user, "Error: Printer was unable to print the document. It may be out of paper.")
+	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
+	if(os)
+		os.print_paper(text)
 	else
 		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running NTOSv2 compatible system?")
 

@@ -12,5 +12,7 @@
 			updates_to_install = rand(500000, 1000000)
 
 	for(var/obj/item/modular_computer/C in SSobj.processing)
-		if((C.z in GLOB.using_map.station_levels) && C.get_ntnet_status() && C.receives_updates)
-			C.updates = updates_to_install
+		if((C.z in GLOB.using_map.station_levels))
+			var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+			if(os && os.get_ntnet_status() && os.receives_updates)
+				os.updates = updates_to_install

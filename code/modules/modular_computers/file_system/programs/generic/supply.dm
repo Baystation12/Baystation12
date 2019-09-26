@@ -20,7 +20,7 @@
 	..()
 	var/datum/nano_module/supply/SNM = NM
 	if(istype(SNM))
-		SNM.emagged = computer_emagged
+		SNM.emagged = computer.emagged()
 		if(SNM.notifications_enabled)
 			if(SSsupply.requestlist.len)
 				ui_header = "supply_new_order.gif"

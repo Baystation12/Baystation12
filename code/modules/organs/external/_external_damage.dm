@@ -253,26 +253,37 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		pain = 0
 		return
 	var/last_pain = pain
+	if(owner)
+		amount -= (owner.chem_effects[CE_PAINKILLER]/3)
+		if(amount <= 0)
+			return
 	pain = max(0,min(max_damage,pain+amount))
 	if(owner && ((amount > 15 && prob(20)) || (amount > 30 && prob(60))))
 		owner.emote("scream")
 	return pain-last_pain
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)
-	if(agony_amount > 5 && owner)
+	if(agony_amount && owner && can_feel_pain())
+		agony_amount -= (owner.chem_effects[CE_PAINKILLER]/2)//painkillers does wonders!
+		agony_amount += get_pain()
+		if(agony_amount < 5) return
 
-		if((limb_flags & ORGAN_FLAG_CAN_GRASP) && prob(25))
-			owner.grasp_damage_disarm(src)
+		if(limb_flags & ORGAN_FLAG_CAN_GRASP)
+			if(prob((agony_amount/max_damage)*100))
+				owner.grasp_damage_disarm(src)
+				return 1
 
-		if((limb_flags & ORGAN_FLAG_CAN_STAND) && prob(min(agony_amount * ((body_part == LEG_LEFT || body_part == LEG_RIGHT)? 2 : 4),70)))
-			owner.stance_damage_prone(src)
+		else if((limb_flags & ORGAN_FLAG_CAN_STAND))
+			if(prob((agony_amount/max_damage)*100))
+				owner.stance_damage_prone(src)
+				return 1
 
-		if(vital && get_pain() > 0.5 * max_damage)
+		else if(agony_amount > 0.5 * max_damage)
 			owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
-			if(has_genitals() || get_pain() + agony_amount > max_damage)
-				owner.Weaken(6)
+			if(has_genitals() || agony_amount > max_damage)
+				owner.Weaken(4)
 			else
-				owner.Stun(6)
+				owner.Stun(4)
 				owner.drop_l_hand()
 				owner.drop_r_hand()
 			return 1

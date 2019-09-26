@@ -1,6 +1,6 @@
-#define DEFAULT_MODE 1
-#define MV_MODE 2 //moles and volume
-#define GAS_TRAIT_MODE 3 //gas traits and constants
+#define DEFAULT_MODE 0
+#define MV_MODE 1 //moles and volume
+#define GAS_TRAIT_MODE 2 //gas traits and constants
 
 /obj/item/device/scanner/gas
 	name = "gas analyzer"
@@ -60,12 +60,12 @@
 
 			var/perGas_add_string = ""
 			for(var/mix in mixture.gas)
-				var/percentage = round(mixture.gas[mix]/total_moles * 100, mode ? 0.001 : 0.01)
+				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
 				if(!percentage)
 					continue
 				switch(mode)
 					if(MV_MODE)
-						perGas_add_string = ", Moles: [mixture.gas[mix]]"
+						perGas_add_string = ", Moles: [round(mixture.gas[mix], 0.01)]"
 					if(GAS_TRAIT_MODE)
 						var/list/traits = list()
 						if(gas_data.flags[mix] & XGM_GAS_FUEL)
@@ -80,7 +80,7 @@
 				. += "[gas_data.name[mix]]: [percentage]%[perGas_add_string]"
 			var/totalGas_add_string = ""
 			if(mode == MV_MODE)
-				totalGas_add_string = ", Total moles: [mixture.total_moles], Volume: [mixture.volume]L"
+				totalGas_add_string = ", Total moles: [round(mixture.total_moles, 0.01)], Volume: [mixture.volume]L"
 			. += "Temperature: [round(mixture.temperature-T0C)]&deg;C / [round(mixture.temperature)]K[totalGas_add_string]"
 
 			return

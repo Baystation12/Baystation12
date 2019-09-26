@@ -168,6 +168,7 @@
 		piece.permeability_coefficient = permeability_coefficient
 		piece.unacidable = unacidable
 		if(islist(armor))
+			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
 			set_extension(piece, /datum/extension/armor, /datum/extension/armor/rig, armor)
 

@@ -15,6 +15,8 @@
 #define FOOTSTEP_BLANK		"blank"
 #define FOOTSTEP_CATWALK	"catwalk"
 #define FOOTSTEP_LAVA		"lava"
+#define FOOTSTEP_SNOW		"snow"
+#define FOOTSTEP_SAND		"sand"
 
 //Bitflags for methods of z movement
 #define ZMOVE_PHASE		0	//Includes ghost/admin/BST movement. Can never fail, and thus is the default

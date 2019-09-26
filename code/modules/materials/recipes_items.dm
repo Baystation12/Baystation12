@@ -141,12 +141,6 @@
 	req_amount = 2
 	difficulty = 2
 
-/datum/stack_recipe/computer/console
-	title = "modular console frame"
-	result_type = /obj/item/modular_computer/console
-	req_amount = 20
-	difficulty = 2
-
 /datum/stack_recipe/computer/telescreen
 	title = "modular telescreen frame"
 	result_type = /obj/item/modular_computer/telescreen

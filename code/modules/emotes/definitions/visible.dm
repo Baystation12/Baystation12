@@ -44,11 +44,6 @@
 	key ="jump"
 	emote_message_3p = "USER jumps!"
 
-/decl/emote/visible/hiss
-	key ="hiss_"
-	emote_message_3p_target = "USER hisses softly at TARGET."
-	emote_message_3p = "USER hisses softly."
-
 /decl/emote/visible/shiver
 	key ="shiver"
 	emote_message_3p = "USER shivers."

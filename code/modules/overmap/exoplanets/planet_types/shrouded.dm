@@ -48,6 +48,7 @@
 	desc = "A pool of viscous and sticky tar."
 	movement_delay = 12
 	reagent_type = /datum/reagent/toxin/tar
+	dirt_color = "#3e3960"
 
 /turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(var/mob/caller)
 	return get_footstep(FOOTSTEP_WATER, caller)
@@ -58,6 +59,7 @@
 	icon = 'icons/turf/shrouded.dmi'
 	icon_state = "shrouded"
 	desc = "Sand that has been packed in to solid earth."
+	dirt_color = "#3e3960"
 
 /turf/simulated/floor/exoplanet/shrouded/New()
 	icon_state = "shrouded[rand(0,8)]"

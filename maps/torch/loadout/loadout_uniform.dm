@@ -75,6 +75,7 @@
 
 /datum/gear/uniform/corp_flight
 	allowed_roles = list(/datum/job/nt_pilot)
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/uniform/corp_exec
 	allowed_roles = list(/datum/job/liaison)

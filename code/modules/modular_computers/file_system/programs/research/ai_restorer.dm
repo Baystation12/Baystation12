@@ -14,9 +14,10 @@
 	var/restoring = 0
 
 /datum/computer_file/program/aidiag/proc/get_ai()
-	if(computer && computer.ai_slot && computer.ai_slot.check_functionality() && computer.ai_slot.enabled && computer.ai_slot.stored_card && computer.ai_slot.stored_card.carded_ai)
-		return computer.ai_slot.stored_card.carded_ai
-	return null
+	var/obj/item/weapon/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
+
+	if(ai_slot && ai_slot.check_functionality() && ai_slot.enabled && ai_slot.stored_card)
+		return ai_slot.stored_card.carded_ai
 
 /datum/computer_file/program/aidiag/Topic(href, href_list)
 	if(..())
