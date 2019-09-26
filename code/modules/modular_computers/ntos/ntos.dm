@@ -79,8 +79,6 @@
 	update_host_icon()
 
 /datum/extension/interactive/ntos/proc/kill_program(var/datum/computer_file/program/P, var/forced = 0)
-	if(!P)
-		return
 	P.on_shutdown(forced)
 	running_programs -= P
 	if(active_program == P)

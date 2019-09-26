@@ -35,15 +35,3 @@
 	..()
 	var/obj/machinery/M = holder
 	M.update_use_power(POWER_USE_IDLE)
-
-/datum/extension/interactive/ntos/console/host_status()
-	var/obj/machinery/M = holder
-	return !(M.stat & NOPOWER)
-
-// Hack to make status bar work
-
-/obj/machinery/initial_data()
-	. = ..()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		. += os.get_header_data()

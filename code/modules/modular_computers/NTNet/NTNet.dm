@@ -75,6 +75,11 @@ var/global/datum/ntnet/ntnet_global = new()
 				P.store_file(file)
 			file.stored_data += log_text + "\[br\]"
 
+/datum/ntnet/proc/get_computer_by_nid(var/NID)
+	for(var/obj/item/modular_computer/comp in SSobj.processing)
+		if(comp && comp.network_card && comp.network_card.identification_id == NID)
+			return comp
+
 /datum/ntnet/proc/get_os_by_nid(var/NID)
 	return registered_nids["[NID]"]
 

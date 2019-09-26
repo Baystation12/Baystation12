@@ -56,7 +56,7 @@ var/global/ntnet_card_uid = 1
 // Returns a string identifier of this network card
 /obj/item/weapon/stock_parts/computer/network_card/proc/get_network_tag(list/routed_through) // Argument is a safety parameter for internal calls. Don't use manually.
 	if(proxy_id && !(src in routed_through))
-		var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
+		var/datum/extension/interactive/ntos/comp = ntnet_global.get_computer_by_nid(proxy_id)
 		if(comp) // If not we default to exposing ourselves, but it means there was likely a logic error elsewhere.
 			LAZYADD(routed_through, src)
 			var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
@@ -96,7 +96,7 @@ var/global/ntnet_card_uid = 1
 		. = strength - 1
 
 	if(proxy_id)
-		var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
+		var/datum/extension/interactive/ntos/comp = ntnet_global.get_computer_by_nid(proxy_id)
 		if(!comp || !comp.on)
 			return 0
 		if(src in routed_through) // circular proxy chain

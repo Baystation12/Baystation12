@@ -30,7 +30,7 @@
 		program["desc"] = P.filedesc
 		program["icon"] = P.program_menu_icon
 		program["autorun"] = (istype(autorun) && (autorun.stored_data == P.filename)) ? 1 : 0
-		if(P in running_programs)
+		if(P == active_program)
 			program["running"] = 1
 		programs.Add(list(program))
 
@@ -220,6 +220,3 @@
 
 /datum/extension/interactive/ntos/update_layout()
 	return TRUE
-
-/datum/extension/interactive/ntos/nano_host()
-	return holder.nano_host()

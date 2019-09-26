@@ -47,7 +47,8 @@
 	. = ..()
 
 /datum/nano_module/proc/get_host_z()
-	return get_z(nano_host())
+	var/atom/host = nano_host()
+	return istype(host) ? get_z(host) : 0
 
 /datum/nano_module/proc/print_text(var/text, var/mob/user)
 	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)

@@ -35,4 +35,4 @@
 		program.computer.show_error(user, "ID not found")
 
 	prog.authenticated = 0
-	program.computer.kill_program(program)
+	program.computer.kill_program()
