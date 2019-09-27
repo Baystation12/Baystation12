@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - rscadd: "Adds loadout accessories that are locked behind Trained skill level."
