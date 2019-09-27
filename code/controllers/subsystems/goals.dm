@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(goals)
 	name = "Goals"
-	init_order = SS_INIT_MISC_LATE
+	init_order = SS_INIT_GOALS
 	flags = SS_NO_FIRE
 	var/list/global_personal_goals = list(
 		/datum/goal/achievement/specific_object/food,

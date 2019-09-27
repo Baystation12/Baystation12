@@ -254,7 +254,7 @@
 			var/gasnum = min(rand(1,3), goodgases.len)
 			for(var/i = 1 to gasnum)
 				var/gas = pick(goodgases)
-				breathgas[gas] = round(0.4*goodgases[gas])
+				breathgas[gas] = round(0.4*goodgases[gas], 0.1)
 				goodgases -= gas
 		if(!badgas)
 			var/list/badgases = gas_data.gases.Copy()
