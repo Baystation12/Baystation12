@@ -41,7 +41,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 25)
 	online_slowdown = 3
 	offline_slowdown = 10
-	vision_restriction = TINT_HEAVY
+	vision_restriction = TINT_MODERATE
 	offline_vision_restriction = TINT_BLIND
 	emp_protection = -20
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
@@ -86,7 +86,6 @@
 	icon_state = "eva_rig"
 	armor = list(melee = 30, bullet = 10, laser = 20,energy = 25, bomb = 20, bio = 100, rad = 100)
 	online_slowdown = 0
-	offline_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/eva
@@ -148,7 +147,6 @@
 	icon_state = "ce_rig"
 	armor = list(melee = 40, bullet = 25, laser = 30, energy = 25, bomb = 40, bio = 100, rad = 100)
 	online_slowdown = 0
-	offline_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
 
@@ -235,7 +233,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/medical
 	glove_type = /obj/item/clothing/gloves/rig/medical
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/weapon/inflatable_dispenser)
 
 	req_access = list(access_medical_equip)
 
