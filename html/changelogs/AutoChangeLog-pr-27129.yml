@@ -1,0 +1,8 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - tweak: "Rescue rig can now carry an inflatable dispenser in its suit slot."
+  - tweak: "EVA and CE rigsuit's offline slowdown has been increased to standard offline slowdown."
+  - tweak: "Mining prep, and prospector's locket has its round start equipment changed."
+  - tweak: "Mining voidsuit has its laser resistance lowered and its bullet and energy resistance rounded up, to be more a well rounded suit."
+  - tweak: "The industrial rig has its tint lowered to moderate."
