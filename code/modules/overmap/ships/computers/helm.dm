@@ -10,13 +10,12 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
-	var/speedlimit = 1/(45 SECONDS) //top speed for autopilot
+	var/speedlimit = 1/(20 SECONDS) //top speed for autopilot, 5
 	var/accellimit = 0.001 //manual limiter for acceleration
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
 	get_known_sectors()
-	speedlimit = round(speedlimit)
 
 /obj/machinery/computer/ship/helm/attempt_hook_up(obj/effect/overmap/ship/sector)
 	if(!(. = ..()))
@@ -51,7 +50,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			var/heading = linked.get_heading()
 
 			// Destination is current grid or speedlimit is exceeded
-			if ((get_dist(linked.loc, T) <= brake_path) || ((speedlimit) && (speed > speedlimit)))
+			if ((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
 				linked.decelerate()
 			// Heading does not match direction
 			else if (heading & ~direction)
@@ -59,6 +58,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			// All other cases, move toward direction
 			else if (speed + acceleration <= speedlimit)
 				linked.accelerate(direction, accellimit)
+		linked.operator_skill = null//if this is on you can't dodge meteors
 		return
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
@@ -85,7 +85,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["dest"] = dy && dx
 		data["d_x"] = dx
 		data["d_y"] = dy
-		data["speedlimit"] = speedlimit ? speedlimit*1000 : "None"
+		data["speedlimit"] = speedlimit ? speedlimit*1000 : "Halted"
 		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit*1000)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
@@ -186,7 +186,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		dy = 0
 
 	if (href_list["speedlimit"])
-		var/newlimit = input("Input new speed limit for autopilot (0 to disable)", "Autopilot speed limit", speedlimit*1000) as num|null
+		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit*1000) as num|null
 		if(newlimit)
 			speedlimit = Clamp(newlimit/1000, 0, 100)
 	if (href_list["accellimit"])
