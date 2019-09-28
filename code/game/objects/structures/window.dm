@@ -258,7 +258,7 @@
 				S.update_strings()
 				S.update_icon()
 			qdel(src)
-	else if(isCoil(W) && reinf_material && !polarized)
+	else if(isCoil(W) && !polarized && is_fulltile())
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
@@ -414,6 +414,9 @@
 /obj/structure/window/basic/full
 	dir = 5
 	icon_state = "window_full"
+
+/obj/structure/window/basic/full/polarized
+	polarized = 1
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"

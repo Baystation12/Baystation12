@@ -136,18 +136,22 @@
 
 
 /obj/effect/wallframe_spawn/reinforced/polarized
-	name = "polarized wall frame window spawner"
+	name = "polarized reinforced wall frame window spawner"
 	color = "#444444"
 	win_path = /obj/structure/window/reinforced/polarized/full
 	var/id
 
 /obj/effect/wallframe_spawn/reinforced/polarized/no_grille
-	name = "polarized wall frame window spawner (no grille)"
+	name = "polarized reinforced wall frame window spawner (no grille)"
 	grille_path = null
 
-/obj/effect/wallframe_spawn/reinforced/polarized/full
-	name = "polarized wall frame window spawner - full tile"
+/obj/effect/wallframe_spawn/reinforced/polarized/full//wtf it's the same as the other one, not gonna touch this cause I don't wanna remap a million things
+	name = "polarized reinforced wall frame window spawner - full tile"
 	win_path = /obj/structure/window/reinforced/polarized/full
+
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille/regular
+	name = "polarized wall frame window spawner (no grille) (non reinforced)"
+	win_path = /obj/structure/window/basic/full/polarized
 
 /obj/effect/wallframe_spawn/reinforced/polarized/handle_window_spawn(var/obj/structure/window/reinforced/polarized/P)
 	if(id)
