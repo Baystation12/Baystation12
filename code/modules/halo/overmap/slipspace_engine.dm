@@ -269,7 +269,7 @@
 	. = ..()
 	if(exploding && !disarming)
 		for(var/mob/player in GLOB.mobs_in_sectors[map_sectors["[z]"]])
-			to_chat(player,"<span class = 'danger'>UNSTABLE SLIPSPACE SIGNATURE DETECTED AT [x],[y],[z]. STABALISE SIGNATURE OR SUPERSTRUCTURE FAILURE WILL BE IMMINENT.</span>")
+			to_chat(player,"<span class = 'danger'>UNSTABLE SLIPSPACE SIGNATURE DETECTED AT [loc.loc] ([x],[y],[z]). STABALISE SIGNATURE OR SUPERSTRUCTURE FAILURE WILL BE IMMINENT.</span>")
 
 /datum/explosion/slipspace_core/New(var/obj/payload/b)
 	if(config.oni_discord)

@@ -13,9 +13,6 @@
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
-		/datum/job/soe_commando,\
-		/datum/job/soe_commando_officer,\
-		/datum/job/soe_commando_captain,\
 		/datum/job/bertelsODST,\
 		/datum/job/bertelsODSTO,\
 		/datum/job/covenant/sangheili_minor,\

@@ -32,14 +32,13 @@
 
 				//only repair 1 wound per tick
 				if(action_desc)
-					. = 1
-					if(do_after(buckled_mob, W.damage, src))
-						if(used_medical && used_medical.amount > 0)
-							src.visible_message("<span class='info'>[src] [action_desc] over \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
-							call(W, procname)()	//this is extra cheeky, dont do this
-							used_medical.use(1)
-						else
-							src.visible_message("<span class='warning'>\The [src] has used up its [procname].</span>")
+					if(used_medical && used_medical.amount > 0)
+						src.visible_message("<span class='info'>[src] [action_desc] over \a [W.desc] on [buckled_mob]'s [affecting.name].</span>")
+						call(W, procname)()	//this is extra cheeky, dont do this
+						used_medical.use(1)
+						. = 1
+					else
+						src.visible_message("<span class='warning'>\The [src] has used up its [procname].</span>")
 					break
 
 			affecting.update_damages()

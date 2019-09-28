@@ -12,6 +12,8 @@
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
 		/datum/job/soe_commando_captain,\
+		/datum/job/geminus_x52/researcher,\
+		/datum/job/geminus_x52/research_director,\
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\

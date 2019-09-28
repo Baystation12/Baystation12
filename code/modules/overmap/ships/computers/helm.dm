@@ -9,7 +9,6 @@
 	var/list/known_sectors = list()
 	var/dx		//destnation
 	var/dy		//coordinates
-	var/speedlimit = 1/(10 SECONDS) //top speed for autopilot
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()
@@ -46,22 +45,13 @@
 				else
 					linked.decelerate()
 
-			else
-				var/brake_path = linked.get_brake_path()
-				var/direction = get_dir(linked.loc, T)
-				var/acceleration = linked.get_acceleration()
-				var/speed = linked.get_speed()
-				var/heading = linked.get_heading()
+			var/brake_path = linked.get_brake_path()
 
-				// Destination is current grid or speedlimit is exceeded
-				if ((get_dist(linked.loc, T) <= brake_path) || ((speedlimit) && (speed > speedlimit)))
-					linked.decelerate()
-				// Heading does not match direction
-				else if (heading & ~direction)
-					linked.accelerate(turn(heading & ~direction, 180))
-				// All other cases, move toward direction
-				else if (speed + acceleration <= speedlimit)
-					linked.accelerate(direction)
+			if(get_dist(linked.loc, T) > brake_path)
+				linked.accelerate(get_dir(linked.loc, T))
+			else
+				linked.decelerate()
+
 		return 1
 	else
 		return 0

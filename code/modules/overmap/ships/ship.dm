@@ -15,6 +15,12 @@
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
+	var/datum/npc_fleet/our_fleet
+
+/obj/effect/overmap/ship/New()
+	. = ..()
+	our_fleet = new(src)
+
 /obj/effect/overmap/ship/Initialize()
 	. = ..()
 	for(var/datum/ship_engine/E in ship_engines)
@@ -35,6 +41,17 @@
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
 	GLOB.processing_objects.Add(src)
+
+/obj/effect/overmap/ship/proc/assign_fleet(var/assign)
+	if(our_fleet == assign)
+		return
+	if(our_fleet.leader_ship == src)
+		our_fleet.ships_infleet -= src
+		if(our_fleet.ships_infleet > 0)
+			our_fleet.assign_leader(pick(our_fleet.ships_infleet))
+		else
+			qdel(our_fleet)
+	our_fleet = assign
 
 /obj/effect/overmap/ship/generate_targetable_areas()
 	if(isnull(parent_area_type))
