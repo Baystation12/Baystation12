@@ -166,8 +166,8 @@
 /atom/movable/openspace/overlay/attack_generic(mob/user)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
 
-/atom/movable/openspace/overlay/examine(mob/examiner)
-	associated_atom.examine(examiner)
+/atom/movable/openspace/overlay/examine(...)
+	associated_atom.examine(arglist(args))	// just pass all the args to the copied atom
 
 /atom/movable/openspace/overlay/forceMove(turf/dest)
 	. = ..()
