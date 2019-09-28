@@ -59,10 +59,9 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 	// High brute damage or sharp objects may damage internal organs
 	if(LAZYLEN(internal_organs))
-		var/taken_damage_divisor = damage_internal_organs(brute, burn, damage_flags)
-		brute /= taken_damage_divisor
-		if(laser)
-			burn /= taken_damage_divisor
+		if(damage_internal_organs(brute, burn, damage_flags))
+			brute /= 2
+			burn /= 2
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
@@ -123,7 +122,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 /obj/item/organ/external/proc/damage_internal_organs(brute, burn, damage_flags)
 	if(!LAZYLEN(internal_organs))
-		return
+		return FALSE
 
 	var/laser = (damage_flags & DAM_LASER)
 
@@ -132,33 +131,41 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(laser || BP_IS_ROBOTIC(src))
 		damage_amt += burn
 		cur_damage += burn_dam
-	
-	var/organ_damage_threshold = 5
+
+	if(!damage_amt)
+		return FALSE
+
+	var/organ_damage_threshold = 10
 	if(damage_flags & DAM_SHARP)
 		organ_damage_threshold *= 0.5
+	if(laser)
+		organ_damage_threshold *= 2
 
-	var/organ_damage_prob = 10 * damage_amt/organ_damage_threshold //more damage, higher chance to damage
+	if(!(cur_damage + damage_amt >= max_damage) && !(damage_amt >= organ_damage_threshold))
+		return FALSE
+
+	var/list/victims = list()
+	var/organ_hit_chance = 0
+	for(var/obj/item/organ/internal/I in internal_organs)
+		if(I.damage < I.max_damage)
+			victims[I] = I.relative_size
+			organ_hit_chance += I.relative_size
+
+	//No damageable organs
+	if(!length(victims))
+		return FALSE
+
+	organ_hit_chance += 5 * damage_amt/organ_damage_threshold
+
 	if(encased && !(status & ORGAN_BROKEN)) //ribs protect
-		if(!laser)
-			organ_damage_prob *= 0.2
-		else
-			organ_damage_prob *= 0.5
-
-	var/taken_damage_divisor = 1
-	if((cur_damage + damage_amt >= max_damage || damage_amt >= organ_damage_threshold) && prob(organ_damage_prob))
-		// Damage an internal organ
-		var/list/victims = list()
-		for(var/obj/item/organ/internal/I in internal_organs)
-			if(I.damage < I.max_damage && prob(I.relative_size))
-				victims += I
-		if(!victims.len)
-			victims += pick(internal_organs)
-		for(var/v in victims)
-			var/obj/item/organ/internal/victim = v
-			damage_amt -= max(damage_amt*victim.damage_reduction, 0)
-			victim.take_internal_damage(damage_amt)
-			taken_damage_divisor *= 2
-	return taken_damage_divisor
+		organ_hit_chance *= 0.6
+	
+	organ_hit_chance = min(organ_hit_chance, 100)
+	if(prob(organ_hit_chance))
+		var/obj/item/organ/internal/victim = pickweight(victims)
+		damage_amt -= max(damage_amt*victim.damage_reduction, 0)
+		victim.take_internal_damage(damage_amt)
+		return TRUE
 
 /obj/item/organ/external/heal_damage(brute, burn, internal = 0, robo_repair = 0)
 	if(BP_IS_ROBOTIC(src) && !robo_repair)
