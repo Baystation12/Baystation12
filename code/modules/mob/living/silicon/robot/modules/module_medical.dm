@@ -42,7 +42,8 @@
 		/obj/item/weapon/shockpaddles/robot,
 		/obj/item/weapon/crowbar,
 		/obj/item/stack/nanopaste,
-		/obj/item/stack/medical/advanced/bruise_pack
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/weapon/reagent_containers/dropper/
 	)
 	synths = list(
 		/datum/matter_synth/medicine = 10000,
