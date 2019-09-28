@@ -2,11 +2,6 @@
 	var/tmp/atom/movable/openspace/overlay/bound_overlay	// The overlay that is directly mirroring us that we proxy movement to.
 	var/no_z_overlay	// If TRUE, this atom will not be drawn on open turfs.
 
-/atom/movable/Destroy()
-	. = ..()
-	if (bound_overlay)
-		QDEL_NULL(bound_overlay)
-
 /atom/movable/forceMove(atom/dest)
 	. = ..(dest)
 	if (. && bound_overlay)
