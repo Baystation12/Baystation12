@@ -148,10 +148,10 @@
 
 /atom/movable/openspace/overlay/New()
 	atom_flags |= ATOM_FLAG_INITIALIZED
-	SSzcopy.openspace_overlays += src
+	SSzcopy.openspace_overlays += 1
 
 /atom/movable/openspace/overlay/Destroy()
-	SSzcopy.openspace_overlays -= src
+	SSzcopy.openspace_overlays -= 1
 
 	if (associated_atom)
 		associated_atom.bound_overlay = null
@@ -163,13 +163,13 @@
 	return ..()
 
 /atom/movable/openspace/overlay/attackby(obj/item/W, mob/user)
-	user << SPAN_NOTICE("\The [src] is too far away.")
+	to_chat(user, SPAN_NOTICE("\The [src] is too far away."))
 
-/atom/movable/openspace/overlay/attack_hand(mob/user as mob)
-	user << SPAN_NOTICE("You cannot reach \the [src] from here.")
+/atom/movable/openspace/overlay/attack_hand(mob/user)
+	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
 
-/atom/movable/openspace/overlay/attack_generic(mob/user as mob)
-	user << SPAN_NOTICE("You cannot reach \the [src] from here.")
+/atom/movable/openspace/overlay/attack_generic(mob/user)
+	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
 
 /atom/movable/openspace/overlay/examine(mob/examiner)
 	associated_atom.examine(examiner)
@@ -181,12 +181,12 @@
 			deltimer(destruction_timer)
 			destruction_timer = null
 	else if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(GLOBAL_PROC, /proc/qdel, src), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/overlay/proc/owning_turf_changed()
 	if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(GLOBAL_PROC, /proc/qdel, src), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
 
 // This one's a little different because it's mimicing a turf.
 /atom/movable/openspace/turf_overlay

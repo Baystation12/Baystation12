@@ -1,7 +1,6 @@
-#define OPENTURF_MAX_PLANE -75
-#define OPENTURF_CAP_PLANE -74
-#define OPENTURF_MIN_PLANE -80
-#define OPENTURF_MAX_DEPTH 5		// The maxiumum number of planes deep we'll go before we just dump everything on the same plane.
+#define OPENTURF_MAX_PLANE -70
+#define OPENTURF_CAP_PLANE -69
+#define OPENTURF_MAX_DEPTH 10		// The maxiumum number of planes deep we'll go before we just dump everything on the same plane.
 #define SHADOWER_DARKENING_FACTOR 0.6	// The multiplication factor for openturf shadower darkness. Lighting will be multiplied by this.
 
 SUBSYSTEM_DEF(zcopy)
@@ -16,26 +15,37 @@ SUBSYSTEM_DEF(zcopy)
 	var/list/queued_overlays = list()
 	var/qo_idex = 1
 
-	var/list/openspace_overlays = list()
-	var/list/openspace_turfs = list()
+	var/openspace_overlays = 0
+	var/openspace_turfs = 0
 
 // for admin proc-call
 /datum/controller/subsystem/zcopy/proc/update_all()
 	disable()
-	for (var/thing in openspace_overlays)
-		var/atom/movable/AM = thing
+	log_debug("SSzcopy: update_all() invoked.")
 
-		var/turf/T = get_turf(AM)
-		if (TURF_IS_MIMICING(T))
-			T.update_mimic()
-		else
-			qdel(AM)
+	var/turf/T 	// putting the declaration up here totally speeds it up, right?
+	var/num_upd = 0
+	var/num_del = 0
+	var/num_amupd = 0
+	for (var/atom/A in world)
+		if (isturf(A))
+			T = A
+			if (T.z_flags & ZM_MIMIC_BELOW)
+				T.update_mimic()
+				num_upd += 1
+
+		else if (istype(A, /atom/movable/openspace/overlay))
+			var/turf/Tloc = A.loc
+			if (TURF_IS_MIMICING(Tloc))
+				Tloc.update_mimic()
+				num_upd += 1
+			else
+				qdel(A)
+				num_del += 1
 
 		CHECK_TICK
 
-	for (var/thing in openspace_turfs)
-		var/turf/T = thing
-		T.update_mimic()
+	log_debug("SSzcopy: [num_upd + num_amupd] turf updates queued ([num_upd] direct, [num_amupd] indirect), [num_del] orphans destroyed.")
 
 	enable()
 
@@ -44,32 +54,33 @@ SUBSYSTEM_DEF(zcopy)
 	disable()
 	log_debug("SSzcopy: hard_reset() invoked.")
 	var/num_deleted = 0
-	var/thing
-	for (thing in openspace_overlays)
-		qdel(thing)
-		num_deleted++
-		CHECK_TICK
-
-	log_debug("SSzcopy: deleted [num_deleted] overlays.")
-
 	var/num_turfs = 0
-	for (var/turf/T in world)
-		if (T.z_flags & ZM_MIMIC_BELOW)
-			T.update_mimic()
-			num_turfs++
+
+	var/turf/T
+	for (var/atom/A in world)
+		if (isturf(A))
+			T = A
+			if (T.z_flags & ZM_MIMIC_BELOW)
+				T.update_mimic()
+				num_turfs += 1
+
+		else if (istype(A, /atom/movable/openspace/overlay))
+			qdel(A)
+			num_deleted += 1
 
 		CHECK_TICK
 
-	log_debug("SSzcopy: queued [num_turfs] turfs for update. hard_reset() complete.")
+	log_debug("SSzcopy: deleted [num_deleted] overlays, and queued [num_turfs] turfs for update.")
+
 	enable()
 
 /datum/controller/subsystem/zcopy/stat_entry()
-	..("Q:{T:[queued_turfs.len - (qt_idex - 1)]|O:[queued_overlays.len - (qo_idex - 1)]} T:{T:[openspace_turfs.len]|O:[openspace_overlays.len]}")
+	..("Q:{T:[queued_turfs.len - (qt_idex - 1)]|O:[queued_overlays.len - (qo_idex - 1)]} T:{T:[openspace_turfs]|O:[openspace_overlays]}")
 
 /datum/controller/subsystem/zcopy/Initialize(timeofday)
 	// Flush the queue.
 	fire(FALSE, TRUE)
-	..()
+	return ..()
 
 /datum/controller/subsystem/zcopy/fire(resumed = FALSE, no_mc_tick = FALSE)
 	if (!resumed)
@@ -137,14 +148,7 @@ SUBSYSTEM_DEF(zcopy)
 			T.desc = initial(T.desc)
 			T.gender = NEUTER
 			T.opacity = FALSE
-
-			// Hack to make space parallax / skybox et-al work.
-			if (T.icon == SPACE_ICON)
-				T.plane = SPACE_PLANE
-			else if (T.below.plane == 0)
-				T.plane = t_target
-			else
-				T.plane = t_target - depth
+			T.plane = t_target - depth
 
 		T.queue_ao()	// No need to recalculate ajacencies, shouldn't have changed.
 
@@ -224,13 +228,10 @@ SUBSYSTEM_DEF(zcopy)
 		// Actually update the overlay.
 		OO.dir = OO.associated_atom.dir
 		OO.appearance = OO.associated_atom
-		if (OO.icon == SPACE_ICON)
-			OO.plane = SPACE_PLANE
-		else
-			OO.plane = OPENTURF_MAX_PLANE - OO.depth
-			switch (OO.mimiced_type)
-				if (/atom/movable/openspace/multiplier, /atom/movable/openspace/turf_overlay)
-					OO.plane -= 1
+		OO.plane = OPENTURF_MAX_PLANE - OO.depth
+		switch (OO.mimiced_type)
+			if (/atom/movable/openspace/multiplier, /atom/movable/openspace/turf_overlay)
+				OO.plane -= 1
 
 		OO.opacity = FALSE
 		OO.queued = FALSE
@@ -289,4 +290,4 @@ SUBSYSTEM_DEF(zcopy)
 
 	out += "</ul>"
 
-	usr << browse(out.Join("<br>"), "window=openturfanalysis-\ref[T]")
+	show_browser(usr, out.Join("<br>"), "window=openturfanalysis-\ref[T]")

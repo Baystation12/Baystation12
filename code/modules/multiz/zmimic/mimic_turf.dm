@@ -48,7 +48,7 @@
 	if (shadower)
 		CRASH("Attempt to enable Z-mimic on already-enabled turf!")
 	shadower = new(src)
-	SSzcopy.openspace_turfs += src
+	SSzcopy.openspace_turfs += 1
 	var/turf/under = GetBelow(src)
 	if (under)
 		below = under
@@ -58,7 +58,7 @@
 
 // Cleans up Z-mimic objects for this turf. You shouldn't call this directly 99% of the time.
 /turf/proc/cleanup_zmimic()
-	SSzcopy.openspace_turfs -= src
+	SSzcopy.openspace_turfs -= 1
 	if (z_queued)
 		while (z_queued)
 			SSzcopy.queued_turfs -= src
