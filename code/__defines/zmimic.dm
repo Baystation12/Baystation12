@@ -20,6 +20,3 @@ var/list/mimic_defines = list(
 	"ZM_ALLOW_ATMOS",
 	"ZM_MIMIC_NO_AO"
 )
-
-// This exists so Z-M can detect space turfs a bit more reliably. Yes it's awful, feel free to refactor it.
-#define SPACE_ICON 'icons/turf/space.dmi'
