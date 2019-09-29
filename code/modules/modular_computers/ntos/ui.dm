@@ -154,9 +154,6 @@
 		if(active_program.NM)
 			SSnano.update_uis(active_program.NM)
 
-/datum/extension/interactive/ntos/nano_host()
-	return src
-
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /datum/extension/interactive/ntos/proc/get_header_data()
 	var/list/data = list()
