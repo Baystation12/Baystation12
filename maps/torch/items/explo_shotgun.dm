@@ -22,11 +22,11 @@
 	. += "<br>You can reinforce the barrel with a simple pipe, lowering chance of explosion to 1 in 10.<br>"
 
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/on_update_icon()
+	..()
 	if(!reinforced)
 		icon_state = "expshotgun[!!chambered]"
 	else
 		icon_state = "ghettexpshotgun[!!chambered]"
-	..()
 	
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/Destroy()
 	QDEL_NULL(reinforced)
