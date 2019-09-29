@@ -48,7 +48,7 @@
 	if(!computer)
 		return 0
 	var/obj/item/weapon/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-	if(scanner)
+	if(!scanner)
 		return 0
 	if(!scanner.can_run_scan)
 		return 0
