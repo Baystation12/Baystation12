@@ -1,7 +1,3 @@
-/obj/item/modular_computer/Initialize()
-	set_extension(src, /datum/extension/interactive/ntos, /datum/extension/interactive/ntos/device)
-	. = ..()
-
 /obj/item/modular_computer/Process()
 	if(!enabled) // The computer is turned off
 		last_power_usage = 0
@@ -44,6 +40,7 @@
 
 /obj/item/modular_computer/Initialize()
 	START_PROCESSING(SSobj, src)
+	set_extension(src, /datum/extension/interactive/ntos, /datum/extension/interactive/ntos/device)
 
 	if(stores_pen && ispath(stored_pen))
 		stored_pen = new stored_pen(src)
