@@ -13,13 +13,12 @@
 		. = SKILL_MAX
 	. = max(min, .)
 
-/datum/preferences/proc/get_total_skill_value(datum/job/job, skill_type)
+/datum/preferences/proc/get_total_skill_value(datum/job/job, decl/hierarchy/skill/req_skill)
 	if(!(job in skills_allocated))
 		return 0
 	var/allocated = skills_allocated[job]
-	for(var/decl/hierarchy/skill/S in allocated)
-		if(S.type == skill_type)
-			return allocated[S] + get_min_skill(job, S)
+	if(req_skill in allocated)
+		return allocated[req_skill] + get_min_skill(job, req_skill)
 
 /datum/preferences/proc/get_min_skill(datum/job/job, decl/hierarchy/skill/S)
 	if(job && job.min_skill)
