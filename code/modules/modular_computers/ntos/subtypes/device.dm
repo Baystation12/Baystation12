@@ -28,3 +28,10 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		. += os.get_header_data()
+
+/obj/item/modular_computer/check_eye()
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		return os.check_eye()
+	else 
+		return ..()
