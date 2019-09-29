@@ -32,7 +32,6 @@
 		disk.store_file(old_version)
 		return FALSE
 	else
-		qdel(old_version)
 		return TRUE
 
 /datum/extension/interactive/ntos/proc/save_file(var/newname, var/data, var/file_type = /datum/computer_file/data, var/list/metadata, var/obj/item/weapon/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))

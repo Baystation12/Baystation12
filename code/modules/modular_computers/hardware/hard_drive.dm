@@ -90,6 +90,7 @@
 
 	if(F in stored_files)
 		stored_files -= F
+		F.holder = null
 		recalculate_size()
 		return 1
 	else
