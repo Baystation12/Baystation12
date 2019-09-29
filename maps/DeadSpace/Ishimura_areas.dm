@@ -69,6 +69,12 @@
 /area/ishimura/upper/engineering/prep
 	name = "\improper Engineer Equipment Prep"
 
+/area/ishimura/upper/engineering/tcomms
+	name = "\improper Telecommunications"
+
+/area/ishimura/upper/engineering/tcomms/control
+	name = "\improper Telecommunications Control Room"
+
 /area/ishimura/upper/engineering/waste_tank_room
 	name = "\improper Waste Tank Temporary Storage"
 
@@ -372,6 +378,9 @@
 /area/ishimura/lower/engineering/storage_closet/midship
 	name = "\improper Midship Parts Storage"
 
+/area/ishimura/lower/engineering/storage_closet/electronics
+	name = "\improper Electronic Parts Storage"
+
 /area/ishimura/lower/engineering/substation/crew
 	name = "\improper Crew Quarters Substation"
 	icon_state = "crew_engistation"
@@ -438,15 +447,22 @@
 
 /area/ishimura/lower/mining/shuttle/one
 	name = "\improper Mining Shuttle One"
+	icon_state = "m_shuttle_one"
 
 /area/ishimura/lower/mining/shuttle/two
 	name = "\improper Mining Shuttle Two"
+	icon_state = "m_shuttle_two"
+
+/area/ishimura/lower/mining/shuttlebay
+	name = "\improper Mining Shuttle Bay"
 
 /area/ishimura/lower/mining/shuttlebay/port
 	name = "\improper Mining Shuttle Bay One"
+	icon_state = "m_shuttlebay_one"
 
 /area/ishimura/lower/mining/shuttlebay/starboard
 	name = "\improper Mining Shuttle Bay Two"
+	icon_state = "m_shuttlebay_two"
 
 /area/ishimura/lower/mining/storage
 	name = "\improper Mining Storage"
