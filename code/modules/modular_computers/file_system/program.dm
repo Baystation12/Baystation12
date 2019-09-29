@@ -32,6 +32,7 @@
 		computer.kill_program(src)
 	computer = null
 	. = ..()
+	crash_with("Something is deleting a program")
 
 /datum/computer_file/program/nano_host()
 	return computer && computer.nano_host()
