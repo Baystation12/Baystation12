@@ -13,15 +13,19 @@
 	requires_ntnet = 1
 	category = PROG_SUPPLY
 
-/datum/nano_module/docking
-	name = "Docking Control program"
-	var/list/docking_controllers = list() //list of tags
-
 /datum/computer_file/program/docking/on_startup()
 	. = ..()
 	if(NM)
 		var/datum/nano_module/docking/NMD = NM
 		NMD.refresh_docks()
+
+/datum/nano_module/docking
+	name = "Docking Control program"
+	var/list/docking_controllers = list() //list of tags
+
+/datum/nano_module/docking/New(var/datum/host, var/topic_manager)
+	..()
+	refresh_docks()
 
 /datum/nano_module/docking/proc/refresh_docks()
 	docking_controllers.Cut()
