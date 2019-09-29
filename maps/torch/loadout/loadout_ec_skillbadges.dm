@@ -57,5 +57,5 @@
 
 /datum/gear/skill/science
 	display_name = "Research Specialist badge"
-	path = /obj/item/clothing/accessory/solgov/skillbadge/electric
+	path = /obj/item/clothing/accessory/solgov/skillbadge/science
 	allowed_skills = list(SKILL_SCIENCE = SKILL_ADEPT)
