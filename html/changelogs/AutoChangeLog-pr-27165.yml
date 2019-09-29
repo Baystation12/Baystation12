@@ -1,0 +1,5 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - maptweak: "Most interior windows inside medical are now non-reinforced windows"
+  - tweak: "Full-tile glass are now tintable whereas border windows are not."
