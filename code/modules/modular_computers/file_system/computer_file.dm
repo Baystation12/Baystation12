@@ -24,7 +24,6 @@ var/global/file_uid = 0
 		return
 
 	holder.remove_file(src)
-	holder = null
 
 // Returns independent copy of this file.
 /datum/computer_file/proc/clone(var/rename = 0)
