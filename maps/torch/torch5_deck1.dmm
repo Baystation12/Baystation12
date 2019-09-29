@@ -2884,7 +2884,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/surgery)
 "agg" = (
-/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille/regular{
 	id = "surgery_windows"
 	},
 /turf/simulated/floor/plating,
@@ -4919,7 +4919,7 @@
 /turf/simulated/floor/plating,
 /area/medical/sleeper)
 "anN" = (
-/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille/regular{
 	id = "recov_windows"
 	},
 /turf/simulated/floor/plating,
@@ -18694,6 +18694,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
+"fYD" = (
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille/regular{
+	id = "robotics_surg"
+	},
+/turf/simulated/floor/plating,
+/area/assembly/robotics/surgery)
 "fZn" = (
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/techfloor{
@@ -22806,7 +22812,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille/regular{
 	id = "robotics_surg"
 	},
 /turf/simulated/floor/plating,
@@ -23709,6 +23715,12 @@
 "lHb" = (
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
+"lHO" = (
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille/regular{
+	id = "exam_windows"
+	},
+/turf/simulated/floor/plating,
+/area/medical/exam_room)
 "lJb" = (
 /obj/structure/table/glass,
 /obj/item/weapon/reagent_containers/spray/luminol,
@@ -24730,7 +24742,6 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/firstdeck/fore)
 "ncM" = (
-/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -24739,6 +24750,7 @@
 	name = "Counselor's Office Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/counselor)
 "ndb" = (
@@ -26270,6 +26282,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary/annex)
+"oMi" = (
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille/regular{
+	id = "robotics_windows"
+	},
+/turf/simulated/floor/plating,
+/area/medical/surgery2)
 "oMq" = (
 /obj/effect/floor_decal/corner/yellow{
 	dir = 4
@@ -27250,6 +27268,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary/annex)
+"pWW" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "mhealthshutters";
+	name = "Counselor's Office Shutters";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
+/turf/simulated/floor/plating,
+/area/medical/counselor)
 "pXm" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/sol{
@@ -30657,7 +30687,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "uiY" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/infirmary)
 "ujx" = (
@@ -49138,7 +49168,7 @@ oMq
 lYA
 kEb
 kMb
-kUb
+fYD
 lYA
 lgb
 bHp
@@ -50547,7 +50577,7 @@ tCw
 tCw
 tCw
 ghb
-iGb
+oMi
 mbb
 arH
 kHb
@@ -53377,7 +53407,7 @@ anN
 fdb
 fub
 mob
-anH
+lHO
 ofb
 gzb
 ovb
@@ -53579,7 +53609,7 @@ anN
 gPb
 aqJ
 fLb
-anH
+lHO
 okb
 orb
 owb
@@ -57219,7 +57249,7 @@ sHb
 vZK
 sIb
 vii
-ncM
+pWW
 usl
 sLb
 azM
@@ -57421,7 +57451,7 @@ nMb
 sIg
 ovZ
 dnr
-ncM
+pWW
 hiD
 ayB
 azN
@@ -57623,7 +57653,7 @@ asi
 ati
 ovZ
 aug
-ncM
+pWW
 aGx
 hnN
 uZi
