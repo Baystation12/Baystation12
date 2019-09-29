@@ -66,7 +66,7 @@
 		return computer.add_log(text)
 	return 0
 
-/datum/computer_file/program/proc/is_supported_by_hardware(var/hardware_flag, var/mob/user, var/loud)
+/datum/computer_file/program/proc/is_supported_by_hardware(var/hardware_flag, var/mob/user, var/loud = FALSE)
 	if(!(hardware_flag & usage_flags))
 		if(loud && computer && user)
 			computer.show_error(user, "Hardware Error - Incompatible software")
