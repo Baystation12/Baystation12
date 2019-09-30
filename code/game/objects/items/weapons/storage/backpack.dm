@@ -142,7 +142,7 @@
 	icon_state = "viropack"
 
 /obj/item/weapon/storage/backpack/chemistry
-	name = "chemistry backpack"
+	name = "pharmacist's backpack"
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
 
@@ -319,8 +319,8 @@
 	icon_state = "satchel-vir"
 
 /obj/item/weapon/storage/backpack/satchel/chem
-	name = "chemist satchel"
-	desc = "A sterile satchel with chemist colours."
+	name = "pharmacist satchel"
+	desc = "A sterile satchel with pharmacist colours."
 	icon_state = "satchel-chem"
 
 /obj/item/weapon/storage/backpack/satchel/gen
@@ -438,7 +438,7 @@
 	icon_state = "courierbag"
 
 /obj/item/weapon/storage/backpack/messenger/chem
-	name = "chemistry messenger bag"
+	name = "pharmacy messenger bag"
 	desc = "A serile backpack worn over one shoulder.  This one is in Chemsitry colors."
 	icon_state = "courierbagchem"
 

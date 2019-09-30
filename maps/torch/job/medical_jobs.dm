@@ -52,7 +52,6 @@
 	ideal_character_age = 40
 	minimal_player_age = 0
 	alt_titles = list(
-		"Nursing Assistant",
 		"Paramedic",
 		"Corpsman")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
@@ -131,7 +130,7 @@
 	return "You are a Trainee Medical Technician. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
 
 /datum/job/chemist
-	title = "Chemist"
+	title = "Pharmacist"
 	department = "Medical"
 	department_flag = MED
 	total_positions = 1
@@ -140,7 +139,7 @@
 	selection_color = "#013d3b"
 	economic_power = 4
 	ideal_character_age = 30
-	minimal_player_age = 0
+	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
