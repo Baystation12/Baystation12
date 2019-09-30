@@ -8,6 +8,7 @@
 	selection_color = "#68099e"
 	minimal_player_age = 1
 	economic_power = 7
+	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
@@ -49,6 +50,7 @@
 	selection_color = "#68099e"
 	economic_power = 10
 	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 24)
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
 	allowed_branches = list(
@@ -84,6 +86,7 @@
 	spawn_positions = 5
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
