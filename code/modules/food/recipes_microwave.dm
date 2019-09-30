@@ -84,7 +84,7 @@ I said no!
 /datum/recipe/meatburger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/weapon/reagent_containers/food/snacks/meat
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatburger
 
@@ -215,8 +215,8 @@ I said no!
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet,
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
 	)
@@ -278,7 +278,7 @@ I said no!
 /datum/recipe/meatpie
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatpie
 
@@ -334,8 +334,8 @@ I said no!
 /datum/recipe/meatkabob
 	items = list(
 		/obj/item/stack/material/rods,
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatkabob
 
@@ -419,13 +419,13 @@ I said no!
 
 /datum/recipe/meatsteak
 	reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/blackpepper = 1)
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/cutlet)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 
 /datum/recipe/loadedsteak
 	reagents = list(/datum/reagent/nutriment/garlicsauce = 5)
 	fruit = list("onion" = 1, "mushroom" = 1)
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/cutlet)
 	result = /obj/item/weapon/reagent_containers/food/snacks/loadedsteak
 
 /datum/recipe/syntisteak
@@ -447,8 +447,8 @@ I said no!
 	fruit = list("tomato" = 1)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet,
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza
@@ -506,12 +506,12 @@ I said no!
 
 /datum/recipe/hotchili
 	fruit = list("chili" = 1, "tomato" = 1)
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/cutlet)
 	result = /obj/item/weapon/reagent_containers/food/snacks/hotchili
 
 /datum/recipe/coldchili
 	fruit = list("icechili" = 1, "tomato" = 1)
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/cutlet)
 	result = /obj/item/weapon/reagent_containers/food/snacks/coldchili
 
 /datum/recipe/amanita_pie
