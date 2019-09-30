@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - bugfix: "Overmap shuttles can now dodge meteors again."
