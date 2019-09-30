@@ -1,4 +1,0 @@
-author: "nearlyNon"
-delete-after: True
-changes: 
-  - bugfix: "Certain IPC monitor options will no longer shapeshift you into a Morpheus monitor head."
