@@ -31,10 +31,19 @@
 
 /* done */
 
-/datum/objective/destroy_ship/innie_unsc
+/datum/objective/overmap/innie_unsc_ship
 	short_text = "Destroy the UNSC warship"
 	explanation_text = "UNSC warships are deadly, carrying special weapons and soldiers to crush many revolts before they can begin. Don't allow this one to escape."
 	target_faction_name = "UNSC"
+	objective_type = 0
+	win_points = 100
+
+/datum/objective/overmap/innie_base
+	short_text = "Protect Rabbit Hole Base"
+	explanation_text = "Protect your hidden base. From there you can launch the campaign to take over Geminus and beyond!"
+	target_faction_name = "Insurrection"
+	overmap_type = 0
+	lose_points = 100
 
 /datum/objective/protect_colony/innie
 	short_text = "Protect the human colony"

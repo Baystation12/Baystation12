@@ -243,7 +243,7 @@
 "eI" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "eJ" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/item/device/radio/intercom{dir = 1; icon_state = "intercom"; name = "intercom"; pixel_x = 0; pixel_y = -32; tag = "icon-intercom (NORTH)"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "eK" = (/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
-"eL" = (/obj/structure/closet/secure_closet/personal/empty{anchored = 1; name = "Marine Equipment"},/obj/item/clothing/head/helmet/marine,/obj/item/clothing/mask/marine,/obj/item/clothing/shoes/marine,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/gloves/thick/unsc,/obj/item/clothing/under/unsc/marine_fatigues,/obj/machinery/light/colored/green,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
+"eL" = (/obj/machinery/light/colored/green,/obj/structure/table/rack,/obj/item/weapon/pinpointer/demolition,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/obj/item/weapon/plastique,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "eM" = (/turf/simulated/wall/r_wall,/area/corvette/unscbertels/deck2/starboardforehallway)
 "eN" = (/turf/simulated/open,/area/corvette/unscbertels/deck2/starboardforehallway)
 "eO" = (/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/starboardforehallway)

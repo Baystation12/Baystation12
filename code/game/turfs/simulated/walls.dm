@@ -110,7 +110,7 @@
 	if(!damage)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
-		var/dam = damage / material.integrity
+		var/dam = damage / max_health()
 		if(dam <= 0.3)
 			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
 		else if(dam <= 0.6)
@@ -144,13 +144,16 @@
 		update_damage()
 	return
 
-/turf/simulated/wall/proc/update_damage()
+/turf/simulated/wall/proc/max_health()
 	var/cap = material.integrity
 	if(reinf_material)
 		cap += reinf_material.integrity
-
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		cap = cap / 10
+	return cap
+
+/turf/simulated/wall/proc/update_damage()
+	var/cap = max_health()
 
 	if(damage >= cap)
 		dismantle_wall()

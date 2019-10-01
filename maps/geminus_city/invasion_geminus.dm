@@ -16,6 +16,8 @@
 
 #include "../Covenant Corvette/includes.dm"
 
+#include "innie_overmap.dm"
+
 #include "invasion_geminus_jobdefs.dm"
 #include "invasion_geminus_unit_tests.dm"
 

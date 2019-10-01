@@ -1,9 +1,11 @@
 
 /* UNSC */
 
-/datum/objective/protect_ship/unsc
+/datum/objective/overmap/unsc_ship
 	short_text = "Protect the UNSC warship"
+	target_faction_name = "UNSC"
 	explanation_text = "Although cheaper than a MJOLNIR suit, even Spartans need a way to leave atmosphere. Protect the UNSC ship."
+	lose_points = 100
 
 //see objectives_cov.dm
 /datum/objective/retrieve/nav_data/cole_protocol
@@ -62,11 +64,13 @@
 		return 0
 	return 1
 
-/datum/objective/destroy_ship/unsc_cov
+/datum/objective/overmap/unsc_cov_ship
 	short_text = "Destroy the Covenant warship"
 	explanation_text = "We cannot allow any Covenant warship to escape to threaten Earth. Take them out before they can retreat from the system."
 	slipspace_affected = 1
+	objective_type = 0
 	target_faction_name = "Covenant"
+	win_points = 150
 
 /datum/objective/colony_capture/unsc
 	short_text = "Hold the UEG colony"
@@ -74,3 +78,11 @@
 	objective_faction = "UNSC"
 	radio_frequency = "SHIPCOM"
 	radio_name = "UNSC Overwatch"
+
+/datum/objective/overmap/unsc_innie_base
+	short_text = "Demolish the Insurrectionist base"
+	explanation_text = "Without a command center, the Insurrectionists will be less organized in their defiance. Demolish their base by taking out structural weak points."
+	target_faction_name = "Insurrection"
+	objective_type = 0
+	overmap_type = 0
+	win_points = 100
