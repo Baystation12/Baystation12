@@ -13,6 +13,8 @@
 	var/ignore_players_dead = 0
 	var/obj/effect/overmap/flagship
 	var/obj/effect/overmap/base
+	var/archived_base_name = "NA_BASE_NAME"
+	var/archived_flagship_name = "NA_FLAGSHIP_NAME"
 	var/list/enemy_factions = list()
 	var/list/angry_factions = list()
 	var/list/active_quests = list()
@@ -94,6 +96,12 @@
 /datum/faction/proc/get_flagship()
 	return flagship
 
+/datum/faction/proc/get_flagship_name()
+	if(!flagship)
+		return archived_flagship_name
+	archived_flagship_name = "[name] \"[flagship.name]\""
+	return archived_flagship_name
+
 /*/datum/faction/proc/find_flagship()
 	for(var/obj/effect/overmap/ship in world)
 		if(ship.faction != src.name)
@@ -112,6 +120,12 @@
 		if(sector.base)
 			base = sector
 			break*/
+
+/datum/faction/proc/get_base_name()
+	if(!base)
+		return archived_base_name
+	archived_base_name = "[name] [base_desc] \"[base.name]\""
+	return archived_base_name
 
 /datum/faction/proc/get_commander(var/datum/mind/check_mind)
 	if(!commander_job)

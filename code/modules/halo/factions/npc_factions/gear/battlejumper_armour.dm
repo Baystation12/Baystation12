@@ -39,7 +39,7 @@
 	name = "Gao Battlejumper Magboots"
 	desc = "Feetfirst into hell, outer colonies style."
 	icon = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
-	icon_override = 'code/modules/halo/factions/npc_factions/gao.dmi'
+	icon_override = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
 	icon_state = "Gao Battle Jumper Boots0"
 	icon_base = "Gao Battle Jumper Boots"
 	item_state = "Gao Battle Jumper Boots1"
@@ -50,7 +50,7 @@
 	name = "Gao Battlejumper Gloves"
 	desc = "Feetfirst into hell, outer colonies style."
 	icon = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
-	icon_override = 'code/modules/halo/factions/npc_factions/gao.dmi'
+	icon_override = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
 	item_state = "Gao Battle Jumper Gloves"
 	icon_state = "Gao Battle Jumper Gloves"
 	force = 5

@@ -10,7 +10,7 @@
 //see code/game/antagoninst/antagonist_helpers.dm
 //this is in place so jobbans cant fuck with the hud code
 /datum/antagonist/geminus_insurrectionist/can_become_antag(var/datum/mind/player, var/ignore_role)
-	return 1
+	return list()
 
 //see code/game/antagoninst/antagonist_update.dm
 /datum/antagonist/geminus_insurrectionist/get_indicator(var/datum/mind/recipient, var/datum/mind/other)
@@ -23,3 +23,6 @@
 		antag_indicator = "hudinsurrectionistcommander"
 
 	return image('icons/mob/hud.dmi', loc = other.current, icon_state = antag_indicator, layer = LIGHTING_LAYER+0.1)
+
+/datum/antagonist/geminus_insurrectionist/draft_antagonist(var/datum/mind/player)
+	player.special_role = null
