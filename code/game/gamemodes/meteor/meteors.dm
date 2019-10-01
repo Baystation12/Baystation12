@@ -140,6 +140,7 @@
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 1
 	var/ismissile //missiles don't spin
+	var/targeted = 0 //Are we going to get shot?
 
 	var/move_count = 0
 

@@ -244,3 +244,19 @@
 
 /obj/effect/projectile/stun/darkmatter/impact
 	icon_state = "impact_darkt"
+
+//----------------------------
+// Point defense
+//----------------------------
+/obj/effect/projectile/pointdefense
+	light_color = COLOR_GOLD
+	light_max_bright = 1
+
+/obj/effect/projectile/pointdefense/tracer
+	icon_state = "beam_pointdef_d"
+
+/obj/effect/projectile/pointdefense/muzzle
+	icon_state = "muzzle_pointdef_d"
+
+/obj/effect/projectile/pointdefense/impact
+	icon_state = "impact_pointdef_d"
