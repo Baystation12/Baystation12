@@ -34,8 +34,12 @@
 		var/datum/supply_order/SO = S
 		var/decl/hierarchy/supply_pack/SP = SO.object
 
-		var/obj/A = new SP.containertype(pickedloc)
-		A.name = "[SP.containername][SO.comment ? " ([SO.comment])":"" ]"
+		var/obj/A
+		if(SP.containertype)
+			A = new SP.containertype(pickedloc)
+			A.name = "[SP.containername][SO.comment ? " ([SO.comment])":"" ]"
+		else
+			A = pickedloc
 		//supply manifest generation begin
 
 		T.amount += SP.cost * CARGO_CRATE_COST_MULTI

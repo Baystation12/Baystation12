@@ -21,8 +21,8 @@
 			qdel(W)
 
 		for(var/obj/AM in subarea)
-			if(istype(AM, /obj/structure/closet/crate))
-				var/obj/structure/closet/crate/C = AM
+			if(istype(AM, /obj/structure/closet))
+				var/obj/structure/closet/C = AM
 				for(var/obj/O in C)
 					if(O.type in GLOB.trade_controller.trade_items_by_type)
 						var/datum/trade_item/T = GLOB.trade_controller.trade_items_by_type[O.type]
