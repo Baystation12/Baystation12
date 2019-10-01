@@ -20,8 +20,8 @@ var/list/nuke_disks = list()
 	attack_self()
 		if(!active)
 			active = 1
-			workdisk()
 			to_chat(usr, "<span class='notice'>You activate the pinpointer</span>")
+			workdisk()
 		else
 			active = 0
 			icon_state = "pinoff"
