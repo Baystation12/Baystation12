@@ -2841,7 +2841,6 @@
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
 #include "maps\geminus_city\geminus_city.dm"
-#include "maps\geminus_city\invasion_geminus.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"
