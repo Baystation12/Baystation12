@@ -42,6 +42,7 @@ var/list/points_of_interest = list()
 
 	var/glassed = 0
 	var/nuked = 0
+	var/demolished = 0
 
 	var/last_adminwarn_attack = 0
 

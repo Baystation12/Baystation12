@@ -3,20 +3,27 @@
 
 /* COVENANT */
 
-/datum/objective/destroy_ship/covenant_unsc
+/datum/objective/overmap/covenant_unsc_ship
 	short_text = "Destroy the human warship"
 	explanation_text = "The human weapons are crude but occasionally effective. Eliminate any warships in the area."
 	target_faction_name = "UNSC"
+	objective_type = 0
+	win_points = 50
 
-/datum/objective/destroy_ship/base/covenant_odp
+/datum/objective/overmap/covenant_odp
 	short_text = "Destroy the human defence platform"
 	explanation_text = "We require safe access to the human worlds. Take out their defence platforms!"
 	target_faction_name = "UNSC"
+	objective_type = 0
+	overmap_type = 0
+	win_points = 50
 
-/datum/objective/protect_ship/covenant
+/datum/objective/overmap/covenant_ship
 	short_text = "Protect Covenant ship"
 	explanation_text = "Your ship is your only route back to Covenant space. Do not allow it to be destroyed."
 	slipspace_affected = 1
+	target_faction_name = "Covenant"
+	lose_points = 150
 
 /datum/objective/retrieve/steal_ai
 	short_text = "Capture human construct"
@@ -78,7 +85,7 @@
 /datum/objective/glass_colony
 	short_text = "Glass the human colony"
 	explanation_text = "These humans cannot be allowed to live. The surface of their worlds must burn until they are glass!"
-	win_points = 50
+	win_points = 10
 	slipspace_affected = 1
 
 /datum/objective/glass_colony/check_completion()
