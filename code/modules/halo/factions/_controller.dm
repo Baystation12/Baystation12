@@ -1,5 +1,7 @@
 GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)
 
+#define CARGO_CRATE_COST_MULTI 10
+
 /datum/controller/process/factions
 	name = "Factions Controller"
 	var/quest_interval_min = 2 MINUTES
@@ -15,6 +17,9 @@ GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)
 	var/list/criminal_factions
 	var/list/criminal_factions_by_name
 	var/list/npc_factions
+	var/datum/npc_quest/loaded_quest_instance
+	var/list/unlocked_supply_packs = list()
+	var/list/active_quest_coords = list()
 
 /datum/controller/process/factions/New()
 	GLOB.factions_controller = src
@@ -47,3 +52,6 @@ GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)
 /datum/controller/process/factions/doWork()
 	for(var/datum/faction/F in processing_factions)
 		F.process()
+
+	if(loaded_quest_instance)
+		loaded_quest_instance.process()

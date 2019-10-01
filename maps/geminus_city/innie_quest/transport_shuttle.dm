@@ -13,8 +13,14 @@
 	var/atmos_speed = 120000
 	var/fake_launch = 0
 
+	var/next_distance = 0
+	var/next_name = ""
+	var/current_name = ""
+
 	waypoint_station = "geminus_innie_transport"
 	waypoint_offsite = "offsite_innie_transport"
+	var/obj/effect/shuttle_instance/shuttle_instance
+	var/datum/npc_quest/instance_quest
 
 //returns the ETA in minutes
 /datum/shuttle/autodock/ferry/geminus_innie_transport/proc/eta_minutes()
@@ -31,8 +37,17 @@
 
 /datum/shuttle/autodock/ferry/geminus_innie_transport/attempt_move(var/obj/effect/shuttle_landmark/destination)
 
-	next_location.load_quest_instance(next_location.quest)
+	shuttle_instance = locate() in world
+	shuttle_instance.load_instance(instance_quest)
+
+	//relocate the instance
+	waypoint_offsite = locate("offsite_innie_transport")
+	next_location = get_location_waypoint(!location)
+	destination = next_location
+
 	if(fake_launch)
+		/*
+		//unused for now
 		testing("[src] moving to [destination]. This move is a fake launch.")
 		for(var/area/A in shuttle_area)
 			for(var/mob/M in A)
@@ -48,7 +63,25 @@
 					if(!M.buckled)
 						M.Weaken(3)
 		fake_launch = 0
+		*/
 
 		return TRUE
+
+	return ..(next_location)
+
+/*
+/datum/shuttle/autodock/ferry/geminus_innie_transport/process_launch()
+	if(next_location.name != "Rabbit Hole Base")
+		next_location.load_quest_instance(next_location.quest)
+
+	. = ..()
+*/
+/datum/shuttle/autodock/ferry/geminus_innie_transport/process_arrived()
+	. = ..()
+
+	current_name = next_name
+	if(current_name == "Rabbit Hole Base")
+		next_name = null
+		next_distance =  0
 	else
-		return ..()
+		next_name = "Rabbit Hole Base"

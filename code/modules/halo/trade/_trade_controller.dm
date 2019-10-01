@@ -1,5 +1,4 @@
 GLOBAL_DATUM(trade_controller, /datum/controller/process/trade_controller)
-#define CARGO_CRATE_COST_MULTI 10
 
 /datum/controller/process/trade_controller
 	var/list/trade_items = list()

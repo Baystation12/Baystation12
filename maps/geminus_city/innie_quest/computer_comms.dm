@@ -15,7 +15,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 	set_autorun("base_comms")
-
+/*
 /obj/item/modular_computer/console/preset/innie_comms/Initialize()
 	. = ..()
 
@@ -23,3 +23,4 @@
 
 		//add our pregenerated file
 		hard_drive.store_file(F.faction_contact_data)
+		*/

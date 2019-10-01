@@ -25,9 +25,9 @@
 	var/list/loaded_factions = list()
 	var/list/faction_quests = list()
 	var/time_last_msg = 0
-	var/idle_interval_min = 4 SECONDS
+	var/idle_interval_min = 6 SECONDS
 	var/idle_interval_current = 8 SECONDS
-	var/idle_interval_max = 12 SECONDS
+	var/idle_interval_max = 14 SECONDS
 
 /datum/nano_module/program/innie_comms/New()
 	. = ..()
@@ -56,14 +56,21 @@
 
 		if(2)// Hail
 			data["selected_faction"] = selected_faction.name
-			data["codename"] = selected_faction.codename
 			data["leader_name"] = selected_faction.leader_name
 			data["reputation"] = selected_faction.get_faction_reputation("Insurrection")
 			data["faction_quests"] = faction_quests
 			data["faction_blurb"] = selected_faction.blurb
+			if(!selected_faction.locked_rep_rewards.len && !selected_faction.unlocked_rep_rewards.len)
+				selected_faction.generate_rep_rewards()
+			data["locked_rewards"] = selected_faction.locked_rep_rewards
+			data["unlocked_rewards"] = selected_faction.unlocked_rep_rewards
 
 		if(3)// Quests
 			data["selected_faction"] = selected_faction.name
+			for(var/list/cur_quest in faction_quests)
+				var/datum/npc_quest/Q = locate(cur_quest["quest_ref"])
+				//cur_faction["reputation"] = F.get_faction_reputation("Insurrection")
+				cur_quest["time_left"] = Q.get_time_left()
 			data["faction_quests"] = faction_quests
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -72,45 +79,6 @@
 		ui.set_auto_update(1)
 		ui.set_initial_data(data)
 		ui.open()
-
-/datum/nano_module/program/innie_comms/proc/reload_contacts()
-	//grab some stuff from our host computer
-	var/datum/computer_file/program/filemanager/PRG = program
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = PRG.computer.hard_drive
-	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = PRG.computer.portable_drive
-
-	//reset these
-	faction_names = list()
-	faction_contents = list()
-	loaded_factions = list()
-
-	. = 1
-	for(var/datum/computer_file/data/com/contact_details in (HDD ? HDD.stored_files : list()) + (RHDD ? RHDD.stored_files : list()))
-		if(!contact_details.data_integrity())
-			. = 0
-			continue
-		var/datum/faction/F = contact_details.contact_faction
-		loaded_factions.Add(F)
-		faction_names.Add(F.name)
-		faction_contents.Add(list(list(
-			"name" = F.name,
-			"leadername" = F.leader_name,
-			"codename" = F.codename,
-			"reputation" = F.get_faction_reputation("Insurrection")
-		)))
-
-/datum/nano_module/program/innie_comms/proc/export_contacts()
-	//grab some stuff from our host computer
-	var/datum/computer_file/program/filemanager/PRG = program
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = PRG.computer.hard_drive
-
-	. = 1
-	for(var/datum/faction/F in loaded_factions)
-		//grab their pre-generated contact details and attempt to save them
-		if(!HDD.store_file(F.faction_contact_data))
-			//something went wrong! we couldnt save the file
-			//no info is provided on why it went wrong... just that it did. could be out of memory, or the file could already exist etc
-			. = 0
 
 /datum/nano_module/program/innie_comms/proc/reload_faction_quests(var/active = 1)
 	faction_quests = list()
@@ -126,8 +94,51 @@
 				"location_name" = Q.location_name,\
 				"status_desc" = Q.get_status_text(),\
 				"target" = Q.enemy_faction,\
+				"time_left" = Q.get_time_left(),\
 				"quest_ref" = "\ref[Q]"\
 			)))
+
+/datum/nano_module/program/innie_comms/proc/reload_contacts()
+	/*
+	//grab some stuff from our host computer
+	var/datum/computer_file/program/filemanager/PRG = program
+	var/obj/item/weapon/computer_hardware/hard_drive/HDD = PRG.computer.hard_drive
+	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = PRG.computer.portable_drive
+	var/list/filestorage = list() + (HDD ? HDD.stored_files : list()) + (RHDD ? RHDD.stored_files : list())
+	*/
+
+	//reset these
+	faction_names = list()
+	faction_contents = list()
+	loaded_factions = list()
+
+	. = 1
+	for(var/datum/faction/F in GLOB.innie_factions)
+		var/datum/computer_file/data/com/contact_details = F.faction_contact_data
+		if(!contact_details.data_integrity())
+			. = 0
+			continue
+		loaded_factions.Add(F)
+		faction_names.Add(F.name)
+		faction_contents.Add(list(list(
+			"name" = F.name,
+			"filename" = "[contact_details.filename].[contact_details.filetype]",\
+			"leadername" = F.leader_name,
+			"reputation" = F.get_faction_reputation("Insurrection")
+		)))
+
+/datum/nano_module/program/innie_comms/proc/export_contacts()
+	//grab some stuff from our host computer
+	var/datum/computer_file/program/filemanager/PRG = program
+	var/obj/item/weapon/computer_hardware/hard_drive/HDD = PRG.computer.hard_drive
+
+	. = 1
+	for(var/datum/faction/F in loaded_factions)
+		//grab their pre-generated contact details and attempt to save them
+		if(!HDD.store_file(F.faction_contact_data))
+			//something went wrong! we couldnt save the file
+			//no info is provided on why it went wrong... just that it did. could be out of memory, or the file could already exist etc
+			. = 0
 
 //ripped from mob code
 /datum/nano_module/program/innie_comms/proc/say_test(var/text)
@@ -195,17 +206,17 @@
 
 	if(href_list["accept_quest"])
 		var/datum/npc_quest/Q = locate(href_list["accept_quest"])
-		Q.quest_status = 1
-		Q.attempting_faction = GLOB.factions_by_name["Insurrection"]
+		Q.accept_quest(GLOB.factions_by_name["Insurrection"])
 		var/accept_hail = selected_faction.hail_quest_accept()
-		accept_hail = "I've uploaded the destination coordinates to your console. Use a flash drive to transfer them to your shuttle console. \
+		accept_hail = "I've uploaded the destination coordinates to your console. Use a portable storage drive to transfer them to your shuttle console. \
 			They'll only be valid for a short while so you'll only get one shot at this. " + accept_hail
 		say_message(selected_faction.leader_name, accept_hail)
 
-		var/obj/item/modular_computer/MC = nano_host()
 		var/datum/computer_file/data/coord/coords = new()
 		coords.generate_data(Q)
-		MC.hard_drive.store_file(coords)
+		//var/obj/item/modular_computer/MC = nano_host()
+		//MC.hard_drive.store_file(coords)
+		GLOB.factions_controller.active_quest_coords.Add(coords)
 		reload_faction_quests(1)
 		return 1
 
@@ -213,7 +224,7 @@
 		var/datum/npc_quest/Q = locate(href_list["reject_quest"])
 		var/obj/item/modular_computer/MC = nano_host()
 
-		selected_faction.reject_quest("Insurrection", Q)
+		selected_faction.reject_quest("Insurrection", Q, 1)
 		var/new_rep = selected_faction.get_faction_reputation("Insurrection")
 		var/reply_message
 		var/reply_name = selected_faction.leader_name
@@ -225,7 +236,7 @@
 		else
 			reload_faction_quests(1)
 			reply_message = "[selected_faction.hail_disappointed()]"
-		say_message(reply_name, reply_message + " (-[Q.favour_reward] rep)")
+		say_message(reply_name, reply_message + " (-[Q.favour_reward * 2] rep)")
 		reload_contacts()
 		return 1
 
@@ -250,6 +261,10 @@
 			say_message(old_faction.leader_name, old_faction.hail_end())
 			playsound(MC.loc, 'sound/machines/buttonbeep.ogg', 25, 5)
 			screen = 1
+
+	if(href_list["activate_ability"])
+		var/ability_name = href_list["activate_ability"]
+		world << "ACTIVATING: [ability_name]"
 
 		return 1
 

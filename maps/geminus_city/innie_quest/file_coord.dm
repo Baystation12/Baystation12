@@ -5,10 +5,11 @@
 	var/datum/npc_quest/quest
 
 /datum/computer_file/data/coord/proc/generate_data(var/datum/npc_quest/new_quest)
-	filename = new_quest.location_name
+	filename = "coords_[(rand(1,100) * world.time) % 9999]"
 	quest = new_quest
 
 	//generate some gibberish encrypted data
+	/*
 	var/datalength = 0
 	do
 		stored_data += "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
@@ -16,6 +17,7 @@
 		if(datalength < block_size)
 			stored_data += "."
 	while(datalength < block_size)
+	*/
 
 	original_data = stored_data
 

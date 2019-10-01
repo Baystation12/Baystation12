@@ -12,20 +12,14 @@
 <hr>
 {{if data.screen == 1}}
 	<h1>Known Contacts</h1>
-	{{:helper.link('Reload contacts from drive', 'disk', {'reload_contacts' : null}, null)}}
-	{{:helper.link('Export contacts to drive', 'folder-open', {'export_contacts' : null}, null)}}
-	<br>
 	{{for data.faction_contents}}	
 		<div class='block'>
 			<div class='item'>
-				<div class='itemLabel' style='width:15%'>
+				<div class='itemLabel' style='width:30%'>
 					{{:value.name}} 
 				</div>
-				<div class='itemContent' style='width:10%'>
+				<div class='itemContent' style='width:20%'>
 					{{:helper.link('Send hail', null, {'select_faction' : value.name}, null)}}
-				</div>
-				<div class='itemContent' style='width:40%'>
-					Faction codename: {{:value.codename}}
 				</div>
 				<div class='itemContent' style='width:20%'>
 					Reputation: {{:value.reputation}}
@@ -34,11 +28,57 @@
 		</div>
 	{{/for}}
 {{else data.screen == 2}}
-	<h1>{{:data.selected_faction}} ({{:data.codename}})</h1>
+	<h1>{{:data.selected_faction}}</h1>
 	{{:data.faction_blurb}}
 	<br><br>
-	You are currently talking to {{:data.leader_name}} who is the leader of the {{:data.selected_faction}}. You currently have {{:data.reputation}} reputation with this faction.
+	You are currently talking to <b>{{:data.leader_name}}</b> who is the leader of the <b>{{:data.selected_faction}}</b>. You currently have {{:data.reputation}} reputation with this faction.
 
+	<h2>Your reputation with this faction has unlocked:</h1>
+	<div class='block'>
+		{{for data.unlocked_rewards}}
+			<div class='item'>
+				<div class='itemLabel'>
+					{{:value.name}}
+				</div>
+				<div class='itemContent'>
+					Reputation required: {{:value.rep}}<br>
+					Cost: {{:value.cost}}<br>
+					{{if value.type == 'supply'}}
+						Orderable from the trade console.
+					{{else value.type == 'ability'}}
+						{{:helper.link('Activate', 'lightbulb', {'activate_ability' : value.name}, null)}}
+					{{/if}}
+				</div>
+			</div>
+			<hr>
+		{{empty}}
+			Nothing.
+		{{/for}}
+	</div>
+	
+	<h2>Increase your reputation to unlock:</h1>
+	<div class='block'>
+		{{for data.locked_rewards}}
+			<div class='item'>
+				<div class='itemLabel'>
+					{{:value.name}}
+				</div>
+				<div class='itemContent'>
+					Reputation required: {{:value.rep}}<br>
+					Cost: {{:value.cost}}<br>
+					{{if value.type == 'supply'}}
+						Orderable from the trade console.
+					{{else value.type == 'ability'}}
+						Activate this ability from the comms console once unlocked.
+					{{/if}}
+				</div>
+			</div>
+			<hr>
+		{{empty}}
+			Nothing.
+		{{/for}}
+	</div>
+	
 	<h2>Finished missions for this faction:</h1>
 	{{for data.faction_quests}}	
 		<div class='block'>
@@ -67,7 +107,10 @@
 		<div class='block'>
 			<div class='item'>
 				<div class='itemLabel'>
-					{{:value.status_desc}}
+					{{:value.status_desc}} 
+					{{if value.status_desc == 'In progress'}}
+						({{:value.time_left}})
+					{{/if}}
 				</div>
 				<div class='itemContent'>
 					Mission ({{:value.difficulty_desc}} difficulty): {{:value.desc_text}}<br>

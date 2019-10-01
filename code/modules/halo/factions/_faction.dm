@@ -2,7 +2,6 @@
 /datum/faction
 	var/name = "Unknown faction"
 	var/parent_faction
-	var/codename = ""
 	var/points = 0
 	var/blurb
 	var/list/all_objectives = list()
@@ -17,6 +16,7 @@
 	var/list/enemy_factions = list()
 	var/list/angry_factions = list()
 	var/list/active_quests = list()
+	var/list/accepted_quests = list()
 	var/list/completed_quests = list()
 	var/datum/job/commander_job		//this needs to be set in the gamemode code
 	var/commander_titles = list()	//checks in order of priority for objective purposes
@@ -36,6 +36,7 @@
 	var/time_next_quest = 0
 	var/quest_interval_min = 1 SECONDS
 	var/quest_interval_max = 5 MINUTES
+	var/gear_supply_type
 
 /datum/faction/New()
 	. = ..()
@@ -43,8 +44,11 @@
 	GLOB.factions_by_name[src.name] = src
 	GLOB.factions_by_type[src.type] = src
 
+	/*
+	//in case this bit of code becomes useful in future, because i know im going to forget it
 	while(length(codename) < 6)
 		codename += pick(ascii2text(rand(text2ascii("a"), text2ascii("z"))), "[rand(0,9)]")
+		*/
 
 	//generate some stuff for radio contacts
 	faction_contact_data = new()
@@ -61,13 +65,14 @@
 /datum/faction/proc/add_faction_reputation(var/faction_name, var/new_rep)
 	if(!faction_reputation.Find(faction_name))
 		faction_reputation[faction_name] = 0
+	var/old_rep = faction_reputation[faction_name]
 	faction_reputation[faction_name] += new_rep
 	if(faction_reputation[faction_name] < 0.1 && faction_reputation[faction_name] > -0.1)
 		faction_reputation[faction_name] = 0
 
-	if(faction_reputation[faction_name] < 0)
+	if(old_rep >= 0 && old_rep + new_rep < 0)
 		var/datum/faction/F = GLOB.factions_by_name[faction_name]
-		angry_factions.Add(F)
+		angry_factions |= F
 		start_processing()
 
 /datum/faction/proc/get_faction_reputation(var/faction_name)

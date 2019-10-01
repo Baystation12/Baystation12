@@ -26,10 +26,11 @@
 
 /datum/faction/unsc
 	name = "UNSC"
+	contraband_gear = "UNSC"
 	enemy_factions = list("Covenant","Insurrection","Flood")
 	commander_titles = list("UNSC Bertels Commanding Officer")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/unsc/marine = 3, /mob/living/simple_animal/hostile/defender_mob/unsc/odst)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/unsc/marine)
 
 /datum/faction/unsc/Initialize()
 	. = ..()
@@ -45,6 +46,7 @@
 
 /datum/faction/oni
 	name = "ONI"
+	contraband_gear = "UNSC"
 	enemy_factions = list("Covenant","Insurrection","Flood")
 	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/unsc/odst)
 
@@ -54,6 +56,7 @@
 
 /datum/faction/insurrection
 	name = "Insurrection"
+	contraband_gear = "Insurrection"
 	enemy_factions = list("UNSC","Covenant","Flood")
 	commander_titles = list("Insurrectionist Commander")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)

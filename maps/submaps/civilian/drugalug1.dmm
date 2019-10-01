@@ -1,153 +1,148 @@
-"aa" = (/turf/simulated/wall,/area/space)
-"ab" = (/turf/simulated/floor/pavement/empty,/area/space)
-"ac" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/pavement/empty,/area/space)
-"ad" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/pavement/empty,/area/space)
-"ae" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/planet/dirt,/area/space)
-"af" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/planet/dirt,/area/space)
-"ag" = (/turf/simulated/floor/planet/dirt,/area/space)
-"ah" = (/obj/machinery/chemical_dispenser/full,/obj/item/weapon/reagent_containers/glass/beaker,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ai" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/pavement/empty,/area/space)
-"aj" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ak" = (/obj/effect/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/pavement/empty,/area/space)
-"al" = (/obj/structure/closet/crate/trashcart,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"am" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/pavement/empty,/area/space)
-"an" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/automatic/machine_pistol,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ao" = (/obj/item/weapon/material/kitchen/utensil/knife/boot,/turf/simulated/floor/pavement/empty,/area/space)
-"ap" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/obj/item/metalscrap,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aq" = (/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ar" = (/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"as" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/dropper,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"at" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/glass/beaker,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"au" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"av" = (/obj/effect/decal/cleanable/dirt,/obj/structure/door_assembly,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aw" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ax" = (/obj/structure/safe/floor,/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ay" = (/obj/item/weapon/storage/box/masks,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"az" = (/obj/effect/decal/cleanable/flour,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aA" = (/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aB" = (/obj/effect/decal/cleanable/dirt,/obj/item/ammo_magazine/mc9mmt,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aC" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/pavement/empty,/area/space)
-"aD" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aE" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aF" = (/obj/item/metalscrap,/turf/simulated/floor/pavement/empty,/area/space)
-"aG" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/pavement/empty,/area/space)
-"aH" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/planet/dirt,/area/space)
-"aI" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/stack/material/steel/ten,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aJ" = (/obj/structure/table/rack,/obj/item/weapon/storage/box/syringes,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aK" = (/obj/structure/table/rack,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aL" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aM" = (/obj/structure/electric_fence/ew,/turf/simulated/floor/planet/dirt,/area/space)
-"aN" = (/obj/effect/decal/cleanable/dirt,/obj/structure/closet/bombcloset,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aO" = (/obj/structure/table/rack,/obj/item/weapon/reagent_containers/syringe/steroid,/obj/item/weapon/reagent_containers/syringe/steroid,/obj/item/weapon/reagent_containers/syringe/steroid,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aP" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/planet/dirt,/area/space)
-"aQ" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/planet/dirt,/area/space)
-"aR" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/spray/luminol,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aS" = (/obj/effect/decal/cleanable/dirt,/obj/item/stack/cable_coil,/turf/simulated/floor/pavement/empty,/area/space)
-"aT" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/shard/shrapnel,/turf/simulated/floor/pavement/empty,/area/space)
-"aU" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/planet/dirt,/area/space)
-"aV" = (/obj/machinery/autolathe,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aW" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/pavement/empty,/area/space)
-"aX" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/sec/MK,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"aY" = (/obj/structure/door_assembly,/turf/simulated/floor/pavement/empty,/area/space)
-"aZ" = (/obj/machinery/chem_master,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ba" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/planet/dirt,/area/space)
-"bb" = (/obj/structure/dogbed,/mob/living/simple_animal/dog{stop_automated_movement = 1},/turf/simulated/floor/planet/dirt,/area/space)
-"bc" = (/obj/effect/decal/cleanable/dirt,/obj/item/metalscraps,/obj/item/weapon/beartrap{alpha = 50; anchored = 1; deployed = 1; icon_state = "beartrap1"; name = "rusted mechanical trap"},/turf/simulated/floor/planet/dirt,/area/space)
-"bd" = (/obj/effect/decal/cleanable/dirt,/obj/structure/electric_fence,/turf/simulated/floor/planet/dirt,/area/space)
-"be" = (/obj/structure/closet/cabinet,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bf" = (/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bg" = (/obj/machinery/door/airlock,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bh" = (/obj/structure/bed/chair/comfy/black,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bi" = (/obj/structure/bookcase/manuals/medical,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bj" = (/obj/structure/bookcase/manuals/engineering,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bk" = (/obj/structure/curtain/open/shower,/obj/machinery/shower,/turf/simulated/floor/tiled/freezer,/area/space)
-"bl" = (/obj/structure/table/woodentable,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bm" = (/obj/structure/sink{dir = 8; icon_state = "sink"; pixel_x = -14; pixel_y = 0},/turf/simulated/floor/tiled/freezer,/area/space)
-"bn" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled/freezer,/area/space)
-"bo" = (/obj/item/weapon/bedsheet/brown,/obj/structure/bed,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bp" = (/obj/structure/bed/chair/wood{dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bq" = (/obj/structure/bed/chair/wood{icon_state = "wooden_chair_preview"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"br" = (/obj/structure/sign/poster{icon_state = "bsposter45"},/turf/simulated/wall,/area/space)
-"bs" = (/obj/structure/sign/monkey_painting,/turf/simulated/wall,/area/space)
-"bt" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 14},/turf/simulated/floor/tiled/freezer,/area/space)
-"bu" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/obj/machinery/chem_master,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"bv" = (/obj/structure/flora/pottedplant/minitree,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bw" = (/obj/random/junk,/turf/simulated/floor/pavement/empty,/area/space)
-"bx" = (/obj/structure/grille/smallfence{icon_state = "fence2"},/turf/simulated/floor/planet/dirt,/area/space)
-"by" = (/obj/structure/grille/smallfence{icon_state = "fence3"},/turf/simulated/floor/planet/dirt,/area/space)
-"bz" = (/turf/simulated/floor/pavement,/area/space)
-"bA" = (/obj/machinery/light/street,/turf/simulated/floor/pavement,/area/space)
-"bB" = (/turf/simulated/floor/road{icon_state = "road"; dir = 1},/area/space)
-"bC" = (/turf/simulated/floor/road/empty,/area/space)
-"bD" = (/turf/simulated/floor,/area/space)
-"bE" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/nw,/area/space)
-"bF" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
-"bG" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 4},/area/space)
-"bH" = (/obj/structure/bed/chair,/turf/simulated/floor/shuttle/red,/area/space)
-"bI" = (/obj/structure/bed/chair,/obj/machinery/light/colored/red{icon_state = "red1"; dir = 1},/turf/simulated/floor/shuttle/red,/area/space)
-"bJ" = (/obj/structure/bed/chair,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/shuttle/red,/area/space)
-"bK" = (/obj/structure/thruster/dark/thruster{icon_state = "se1"; dir = 4},/turf/simulated/floor,/area/space)
-"bL" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/space)
-"bM" = (/obj/machinery/door/airlock/glass_external,/turf/simulated/floor/shuttle/red,/area/space)
-"bN" = (/turf/simulated/floor/shuttle/red,/area/space)
-"bO" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/shuttle/red,/area/space)
-"bP" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/sw,/area/space)
-"bQ" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/shuttle/red,/area/space)
-"bR" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/light/colored/red,/turf/simulated/floor/shuttle/red,/area/space)
-"bS" = (/obj/structure/bed/chair{dir = 1},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/shuttle/red,/area/space)
-"bT" = (/turf/simulated/floor/road,/area/space)
-"bU" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"bV" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/automatic/wt550,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"bW" = (/obj/item/weapon/handcuffs,/turf/simulated/floor/pavement/empty,/area/space)
-"bX" = (/obj/effect/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"bY" = (/obj/structure/door_assembly,/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"bZ" = (/obj/item/stack/material/glass/ten,/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ca" = (/obj/structure/table/rack,/obj/item/ammo_magazine/c38,/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"cb" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/planet/dirt,/area/space)
-"cc" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/butterflyblade,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"cd" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/pavement/empty,/area/space)
-"ce" = (/obj/structure/table/rack,/obj/machinery/light/small,/obj/random/drinkbottle,/obj/random/drinkbottle,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"cf" = (/obj/structure/table/standard,/obj/machinery/reagentgrinder,/obj/machinery/light/small,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"cg" = (/obj/effect/decal/cleanable/dirt,/obj/item/ammo_magazine/mc9mm,/obj/machinery/light/small,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/space)
-"ch" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/airlock_electronics,/turf/simulated/floor/pavement/empty,/area/space)
-"ci" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/space)
-"cj" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/planet/dirt,/area/space)
-"ck" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"cl" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"cm" = (/obj/structure/bed/chair/wood{dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"cn" = (/obj/structure/bed/chair/wood{icon_state = "wooden_chair_preview"; dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"co" = (/obj/structure/toilet{icon_state = "toilet00"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/freezer,/area/space)
-"cp" = (/obj/structure/toilet{icon_state = "toilet00"; dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/freezer,/area/space)
+"aa" = (/turf/simulated/wall,/area/planets/Geminus/indoor/quest_instance)
+"ab" = (/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"ac" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"ad" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"ae" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"af" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"ag" = (/obj/effect/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"ah" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"ai" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"aj" = (/obj/item/weapon/material/kitchen/utensil/knife/boot,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"ak" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"al" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"am" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"an" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"ao" = (/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"ap" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"aq" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"ar" = (/obj/machinery/chemical_dispenser/full,/obj/item/weapon/reagent_containers/glass/beaker,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"as" = (/obj/machinery/chem_master,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"at" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"au" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/obj/machinery/chem_master,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"av" = (/obj/random/junk,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"aw" = (/obj/structure/closet/crate/trashcart,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"ax" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"ay" = (/obj/structure/table/rack,/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"az" = (/obj/structure/table/rack,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aA" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/obj/item/metalscrap,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aB" = (/obj/item/weapon/handcuffs,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"aC" = (/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aD" = (/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aE" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/dropper,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aF" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/glass/beaker,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aG" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aH" = (/obj/effect/decal/cleanable/dirt,/obj/structure/door_assembly,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aI" = (/obj/effect/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aJ" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aK" = (/obj/structure/safe/floor,/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aL" = (/obj/item/weapon/storage/box/masks,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aM" = (/obj/effect/decal/cleanable/flour,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aN" = (/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aO" = (/obj/effect/decal/cleanable/dirt,/obj/item/ammo_magazine/mc9mmt,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aP" = (/obj/structure/door_assembly,/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aQ" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aR" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aS" = (/obj/item/metalscrap,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"aT" = (/obj/item/stack/material/glass/ten,/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aU" = (/obj/structure/table/rack,/obj/item/ammo_magazine/c38,/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aV" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"aW" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/stack/material/steel/ten,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aX" = (/obj/structure/table/rack,/obj/item/weapon/storage/box/syringes,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aY" = (/obj/structure/table/rack,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"aZ" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"ba" = (/obj/structure/electric_fence/ew,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bb" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/butterflyblade,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bc" = (/obj/effect/decal/cleanable/dirt,/obj/structure/closet/bombcloset,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bd" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"be" = (/obj/structure/table/rack,/obj/item/weapon/reagent_containers/syringe/steroid,/obj/item/weapon/reagent_containers/syringe/steroid,/obj/item/weapon/reagent_containers/syringe/steroid,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bf" = (/obj/structure/table/rack,/obj/machinery/light/small,/obj/random/drinkbottle,/obj/random/drinkbottle,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bg" = (/obj/structure/table/standard,/obj/machinery/reagentgrinder,/obj/machinery/light/small,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bh" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/spray/luminol,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bi" = (/obj/effect/decal/cleanable/dirt,/obj/item/stack/cable_coil,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"bj" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/shard/shrapnel,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"bk" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bl" = (/obj/machinery/autolathe,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bm" = (/obj/effect/decal/cleanable/dirt,/obj/item/ammo_magazine/mc9mm,/obj/machinery/light/small,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bn" = (/obj/effect/decal/cleanable/dirt,/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"bo" = (/obj/structure/door_assembly,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"bp" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/airlock_electronics,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"bq" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"br" = (/obj/structure/dogbed,/mob/living/simple_animal/dog{stop_automated_movement = 1},/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bs" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"bt" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bu" = (/obj/effect/decal/cleanable/dirt,/obj/item/metalscraps,/obj/item/weapon/beartrap{alpha = 50; anchored = 1; deployed = 1; icon_state = "beartrap1"; name = "rusted mechanical trap"},/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bv" = (/obj/effect/decal/cleanable/dirt,/obj/structure/electric_fence,/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bw" = (/obj/structure/closet/cabinet,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bx" = (/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"by" = (/obj/machinery/door/airlock,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bz" = (/obj/structure/bed/chair/comfy/black,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bA" = (/obj/structure/bookcase/manuals/medical,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bB" = (/obj/structure/bookcase/manuals/engineering,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bC" = (/obj/structure/curtain/open/shower,/obj/machinery/shower,/turf/simulated/floor/tiled/freezer,/area/planets/Geminus/indoor/quest_instance)
+"bD" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bE" = (/obj/structure/table/woodentable,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bF" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bG" = (/obj/structure/sink{dir = 8; icon_state = "sink"; pixel_x = -14; pixel_y = 0},/turf/simulated/floor/tiled/freezer,/area/planets/Geminus/indoor/quest_instance)
+"bH" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled/freezer,/area/planets/Geminus/indoor/quest_instance)
+"bI" = (/obj/item/weapon/bedsheet/brown,/obj/structure/bed,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bJ" = (/obj/structure/bed/chair/wood{dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bK" = (/obj/structure/bed/chair/wood{icon_state = "wooden_chair_preview"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bL" = (/obj/structure/sign/poster{icon_state = "bsposter45"},/turf/simulated/wall,/area/planets/Geminus/indoor/quest_instance)
+"bM" = (/obj/structure/sign/monkey_painting,/turf/simulated/wall,/area/planets/Geminus/indoor/quest_instance)
+"bN" = (/obj/structure/bed/chair/wood{dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bO" = (/obj/structure/bed/chair/wood{icon_state = "wooden_chair_preview"; dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bP" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 14},/turf/simulated/floor/tiled/freezer,/area/planets/Geminus/indoor/quest_instance)
+"bQ" = (/obj/structure/toilet{icon_state = "toilet00"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/freezer,/area/planets/Geminus/indoor/quest_instance)
+"bR" = (/obj/structure/flora/pottedplant/minitree,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bS" = (/obj/structure/toilet{icon_state = "toilet00"; dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/freezer,/area/planets/Geminus/indoor/quest_instance)
+"bT" = (/obj/structure/grille/smallfence{icon_state = "fence2"},/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bU" = (/obj/structure/grille/smallfence{icon_state = "fence3"},/turf/simulated/floor/planet/dirt,/area/planets/Geminus/indoor/quest_instance)
+"bV" = (/turf/simulated/floor/pavement,/area/planets/Geminus/indoor/quest_instance)
+"bW" = (/obj/machinery/light/street,/turf/simulated/floor/pavement,/area/planets/Geminus/indoor/quest_instance)
+"bX" = (/turf/simulated/floor/road{icon_state = "road"; dir = 1},/area/planets/Geminus/indoor/quest_instance)
+"bY" = (/turf/simulated/floor/road/empty,/area/planets/Geminus/indoor/quest_instance)
+"bZ" = (/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
+"ca" = (/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"cb" = (/obj/structure/table/woodentable,/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"cc" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 4},/area/planets/Geminus/indoor/quest_instance)
+"cd" = (/obj/effect/decal/cleanable/dirt,/obj/effect/landmark/instance_defender,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"ce" = (/obj/effect/decal/cleanable/dirt,/obj/effect/landmark/instance_defender,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"cf" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"cg" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"ch" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/planets/Geminus/indoor/quest_instance)
+"ci" = (/obj/effect/landmark/instance_boss,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
+"cp" = (/turf/simulated/floor/road,/area/planets/Geminus/indoor/quest_instance)
+"cq" = (/obj/effect/shuttle_landmark/innie_offsite_transport,/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaabababacacababababacadacacaiabaeakaeaeacacaeafacafamaaaa
-aaaaaoadaiabababaCacababadadacaGacaHafafafafaPadafacaeagaaaa
-aaaaabadaaaaaaaaaaaaaaaaabacaaaaaaaaabagaaaaaaaaaaaQaeadaaaa
-aaaaaiaWaaahaZaaaaajbuaabwacaaalbUaaagagaaanbVapaaaaamacaaaa
-aaaaambWaaaqarasatauaqavabacaabXawaaababaaauauaqaxaaaeacaaaa
-aaaaacaiaaaqayauaqazaqaaacadababaeagagbwaaaqaAaBaAaaadafaaaa
-aaaaacabbYauaqaDauaqaEaaacacaFacaeacabagbZaqaqaucaaacbacaaaa
-aaaaababaaaqaqauaDauaqaaabacabaPacagabaeaaaAauaqaIaaaebwaaaa
-aaaaabacaaauaDaJaKaLauawabababaaaaaMagaeaaccaqauaNaaamakaaaa
-aaaaabcdaaaOceaaaacfaRaaabaSabagaTadabaUaaaVcgaXaaaaacaeaaaa
-aaaaadadaaaaaaaaaaaaaaaaaYchadaeacbaacaeaaaaaaaaaabbabacaaaa
-aaaaababacciababababciabababaeacacbwaeacaecjacaeacaeagaeaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcbdaaaa
-aaaaaabebfbfbgbfbfbfbhbiaaaabjbhbfbfbfbgbfbfbeaaaaaaaeaeaaaa
-aabkaackbfbfaabfbfbfbfblaaaablbfbfbfbfaabfbfclaabkaaaeagaaaa
-aabmbnbfbfboaacmblbqbfbfbrbsbfbfbpblcnaabobfbfbnbtaaagaeaaaa
-aacoaabfbfblaabpblbqbfbvaaaabvbfbpblbqaablbfbfaacpaaaeaeaaaa
-aaaaaaaaaaaaaaaaaaaabgaaaaaaaabgaaaaaaaaaaaaaaaaaaaabxbyaaaa
+aaaaabababacacababababacadacacaeabafagafafacacafahacahaiaaaa
+aaaaajadaeabababakacababadadacalacamahahahahanadahacafaoaaaa
+aaaaabadaaaaaaaaaaaaaaaaabacaaaaaaaaabaoaaaaaaaaaaapafadaaaa
+aaaaaeaqaaarasaaaaatauaaavacaaawaxaaaoaoaaayazaAaaaaaiacaaaa
+aaaaaiaBaaaCaDaEaFaGaCaHabacaaaIaJaaababaaaGaGaCaKaaafacaaaa
+aaaaacaeaaaCaLcdaCaMaCaaacadababafaoaoavaaaCaNaOaNaaadahaaaa
+aaaaacabaPaGciaQbnaCaRaaacacaSceafacabaoaTaCcicdaUaaaVacaaaa
+aaaaababaaaCcfcaaQaGaCaaabacabanacaoabafaaaNcdaCaWaaafavaaaa
+aaaaabacaaaGaQaXaYaZaGaJabababaaaabaaoafaabbaCaGbcaaaiagaaaa
+aaaaabbdaabebfaaaabgbhaaabbiabaobjadabbkaablbmayaaaaacafaaaa
+aaaaadadaaaaaaaaaaaaaaaabobpadafacbqacafaaaaaaaaaabrabacaaaa
+aaaaababacbsababababbsabababafacacavafacafbtacafacafaoafaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabubvaaaa
+aaaaaabwbxbxbybxbxbxbzbAaaaabBbzbxbxbxbybxbxbwaaaaaaafafaaaa
+aabCaabDcgbxaabxbxcgbxcbaaaacbbxcgbxbxaabxcgbFaabCaaafaoaaaa
+aabGbHbxbxbIaabJbEbKbxbxbLbMbxbxbNbEbOaabIbxbxbHbPaaaoafaaaa
+aabQaabxbxcbaabNbEbKbxbRaaaabRbxbNbEbKaacbbxbxaabSaaafafaaaa
+aaaaaaaaaaaaaaaaaaaabyaaaaaaaabyaaaaaaaaaaaaaaaaaaaabTbUaaaa
 abababababababababababababababababababababababababababababab
 abababababababababababababababababababababababababababababab
-bzbzbzbzbzbzbAbzbzbzbzbzbzbzbzbzbzbzbzbAbzbzbzbzbzbzbzbzbzbz
-bBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbB
-bCbCbCbCbCbCbCbCbCbCbCbCbCbCbCbDbEbFbFbFbFbFbFbCbGbGbGbCbCbC
-bCbCbCbCbCbCbCbCbCbCbCbCbCbCbCbEbFbHbHbIbHbJbKbCbGbGbGbCbCbC
-bLbLbLbCbLbLbLbCbLbLbLbCbLbLbLbMbNbNbNbNbNbObKbCbGbGbGbCbLbL
-bCbCbCbCbCbCbCbCbCbCbCbCbCbCbCbPbFbQbQbRbQbSbKbCbGbGbGbCbCbC
-bCbCbCbCbCbCbCbCbCbCbCbCbCbCbCbDbPbFbFbFbFbFbFbCbGbGbGbCbCbC
-bTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbT
+bVbVbVbVbVbVbWbVbVbVbVbVbVbVbVbVbVbVbVbWbVbVbVbVbVbVbVbVbVbV
+bXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbXbX
+bYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbZbZbZbZbZbZbZbZbYccccccbYbYbY
+bYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbZbZbZbZbZbZbZbZbYccccccbYbYbY
+chchchbYchchchbYchchchbYchchchbZbZbZbZbZbZbZbZbYccccccbYchch
+bYbYbYbYbYbYbYbYbYbYbYbYbYbYbYbZbZbZbZbZbZbZbZbYccccccbYbYbY
+bYbYbYbYbYbYbYbYbYbYbYbYbYbYbYcqbZbZbZbZbZbZbZbYccccccbYbYbY
+cpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcp
 "}

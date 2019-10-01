@@ -16,7 +16,6 @@
 	name = "Shuttle Control Program"
 	var/datum/shuttle/autodock/ferry/geminus_innie_transport/my_shuttle
 	var/list/loaded_coords = list()
-	var/datum/npc_quest/destination_quest
 
 /datum/nano_module/program/innie_shuttle/New()
 	. = ..()
@@ -46,12 +45,14 @@
 		data["fuel_efficiency"] = my_shuttle.fuel_efficiency
 		//
 		data["shuttle_status"] = get_shuttle_status()
-		data["location"] = my_shuttle.current_location.name
+		data["location"] = my_shuttle.current_name
+		data["on_quest"] = my_shuttle.location
 		//
-		if(destination_quest)
-			data["target_coords"] = destination_quest.location_name
-			data["target_dist"] = destination_quest.dist
+		data["target_coords"] = my_shuttle.next_name
+		data["target_dist"] = my_shuttle.next_distance
 		//
+		if(GLOB.factions_controller.active_quest_coords.len != loaded_coords.len)
+			reload_coords()
 		data["loaded_coords"] = loaded_coords
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -61,46 +62,30 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/program/innie_shuttle/proc/update_home_dist()
-	//grab some stuff from our host computer
-	var/datum/computer_file/program/filemanager/PRG = program
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = PRG.computer.hard_drive
-	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = PRG.computer.portable_drive
-
-	//loop over the files to update our coordinate distances
-	//slightly hacky and not mathematically accurate but oh well
-	var/list/filestorage = list() + (HDD ? HDD.stored_files : list()) + (RHDD ? RHDD.stored_files : list())
-	for(var/datum/computer_file/data/coord/coords in filestorage)
-		if(coords.quest.location_name == "Rabbit Hole Base")
-			if(my_shuttle.next_location.name != "Rabbit Hole Base")
-				coords.quest.dist = my_shuttle.next_location.quest.dist
-
-			//update the UI
-			for(var/list/coords_ui in loaded_coords)
-				if(coords_ui["name"] == "Rabbit Hole Base")
-					coords_ui["dist"] = coords.quest.dist
-
 /datum/nano_module/program/innie_shuttle/proc/reload_coords()
+	/*
 	//grab some stuff from our host computer
 	var/datum/computer_file/program/filemanager/PRG = program
 	var/obj/item/weapon/computer_hardware/hard_drive/HDD = PRG.computer.hard_drive
 	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD = PRG.computer.portable_drive
+	var/list/filestorage = list() + (HDD ? HDD.stored_files : list()) + (RHDD ? RHDD.stored_files : list())
+	*/
 
 	//reset these
 	loaded_coords = list()
 
 	. = 1
 
-	var/list/filestorage = list() + (HDD ? HDD.stored_files : list()) + (RHDD ? RHDD.stored_files : list())
-	for(var/datum/computer_file/data/coord/coords in filestorage)
+	for(var/datum/computer_file/data/coord/coords in GLOB.factions_controller.active_quest_coords)
 		if(!coords.data_integrity())
 			. = 0
 			continue
 		loaded_coords.Add(list(list(
 			"name" = coords.quest.location_name,\
+			"filename" = "[coords.filename].[coords.filetype]",\
 			"dist" = coords.quest.dist,\
 			"expired" = coords.quest.is_expired(),\
-			"questref" = coords.quest.is_expired() ? null : "\ref[coords.quest]"\
+			"questref" = "\ref[coords.quest]"\
 		)))
 
 /datum/nano_module/program/innie_shuttle/Topic(href, href_list)
@@ -119,67 +104,72 @@
 				playsound(MC.loc, 'sound/machines/chime.ogg', 25, 5)
 
 	if(href_list["embark"])
+
+		if(my_shuttle.location && \
+			alert("You will not be able to return. Ensure you are fully loaded before departure.","Departing","Continue","Abort") == "Abort")
+			return
+
 		var/obj/item/modular_computer/MC = nano_host()
-		if(my_shuttle)
-			var/fuel_needed = destination_quest.dist / my_shuttle.fuel_efficiency
-			if(my_shuttle.fuel_left >= fuel_needed)
-				if(my_shuttle.fuel_left > 20 || alert("You are critically low on fuel. Launch anyway?","Low fuel","Continue","Abort") == "Continue")
+		var/fuel_needed = my_shuttle.next_distance / my_shuttle.fuel_efficiency
+		if(my_shuttle.fuel_left >= fuel_needed)
+			if(my_shuttle.fuel_left < 20 && alert("You are critically low on fuel. Launch anyway?","Low fuel","Continue","Abort") == "Abort")
+				return
 
-					to_chat(user, "\icon[MC] <span class='notice'>Shuttle launching...</span>")
-					//playsound(MC.loc, 'sound/effects/start.ogg', 25, 5)
-					my_shuttle.fuel_left -= fuel_needed
+			to_chat(user, "\icon[MC] <span class='notice'>Shuttle launching...</span>")
+			//playsound(MC.loc, 'sound/effects/start.ogg', 25, 5)
+			my_shuttle.fuel_left -= fuel_needed
 
-					//quests are one shot only - finish our current quest if we are here
-					if(my_shuttle.current_location.quest)
-						my_shuttle.current_location.quest.finalise_quest()
-						my_shuttle.current_location.quest = null
-						reload_coords()
+			//quests are one shot only - finish our current quest if we are here
+			if(my_shuttle.current_name == my_shuttle.instance_quest.location_name)
+				my_shuttle.instance_quest.finish_quest()
+				my_shuttle.instance_quest = null
+				reload_coords()
 
-					//todo:ghost any players left here
-					//
+			//todo:ghost any players left here
+			//
 
-					//prepare the next location, if it isn't our home base
-					if(destination_quest.location_name != "Rabbit Hole Base")
-						//get the next location ready
-						my_shuttle.next_location.quest = destination_quest
-						my_shuttle.next_location.name = destination_quest.location_name
+			//prepare the next location, if it isn't our home base
+			/*
+			if(destination_quest.location_name != "Rabbit Hole Base")
+				//get the next location ready
+				my_shuttle.next_location.quest = destination_quest
+				my_shuttle.next_location.name = destination_quest.location_name
+				*/
 
-					//if we're heading to or from home, we'll do a real launch
-					//as the program interface will ensure we never target somewhere we already are
-					if(my_shuttle.current_location.name == "Rabbit Hole Base" || my_shuttle.next_location.name == "Rabbit Hole Base")
-						my_shuttle.launch(user)
-					else
-						my_shuttle.fake_launch(user)
-
-					destination_quest = null
-
-					//
-					update_home_dist()
+			//if we're heading to or from home, we'll do a real launch
+			//as the program interface will ensure we never target somewhere we already are
+			/*
+			if(my_shuttle.current_location.name == "Rabbit Hole Base" || my_shuttle.next_location.name == "Rabbit Hole Base")
+				my_shuttle.launch(user)
 			else
-				to_chat(user, "\icon[MC] <span class='warning'>Shuttle is out of fuel!</span>")
-				playsound(MC.loc, 'sound/machines/buzz-sigh.ogg', 25, 5)
+				my_shuttle.fake_launch(user)
+				*/
+
+			my_shuttle.launch(user)
+
 		else
-			to_chat(user, "\icon[MC] <span class='warning'>Device is unable to locate host shuttle!</span>")
-			playsound(MC.loc, 'sound/machines/buzz-two.ogg', 25, 5)
+			to_chat(user, "\icon[MC] <span class='warning'>Shuttle is out of fuel!</span>")
+			playsound(MC.loc, 'sound/machines/buzz-sigh.ogg', 25, 5)
 
 	if(href_list["set_dest"])
 		var/obj/item/modular_computer/MC = nano_host()
 		var/datum/npc_quest/Q = locate(href_list["set_dest"])
-		destination_quest = Q
-		if(destination_quest.location_name == "Rabbit Hole Base")
-			my_shuttle.next_location = my_shuttle.get_location_waypoint(0)
-		else
-			my_shuttle.next_location = my_shuttle.get_location_waypoint(1)
+		//my_shuttle.next_location = my_shuttle.get_location_waypoint(1)
+		my_shuttle.instance_quest = Q
+		my_shuttle.next_distance = Q.dist
+		my_shuttle.next_name = Q.location_name
 		to_chat(user, "\icon[MC] <span class='notice'>Destination coordinates locked in.</span>")
 		playsound(MC.loc, 'sound/machines/ping.ogg', 25, 5)
+		return 1
 
 /datum/nano_module/program/innie_shuttle/proc/get_shuttle_status()
 	if(my_shuttle.has_arrive_time())
 		return "In transit ([my_shuttle.eta_seconds()] s)"
 
-	if(my_shuttle.has_arrive_time())
-		return "In transit ([my_shuttle.eta_seconds()] s)"
-
 	if (my_shuttle.can_launch())
 		return "Docked"
+
+	if(my_shuttle.moving_status == SHUTTLE_WARMUP)
+		return "Launching"
+
 	return "Docking/Undocking"

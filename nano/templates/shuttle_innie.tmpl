@@ -65,35 +65,37 @@
 	</div>
 	
 	<h1>Navigation</h1>
-	{{:helper.link('Reload destination coordinates from drive', 'folder-open', {'reload_coords' : 1}, null)}}
-	<br>
 	<div class="block">
-		{{for data.loaded_coords}}	
-			<div class='item'>
-				<div class='itemLabel'>
-					{{:value.name}}
+		{{if data.on_quest}}
+			<span class='warning'>Return coordinates to Rabbit Hole Base locked in.</span>
+		{{else}}
+			{{for data.loaded_coords}}	
+				<div class='item'>
+					<div class='itemLabel' style='width:30%'>
+						{{:value.name}}
+					</div>
+					<div class='itemContent' style='width:70%'>
+						{{if data.location == value.name}}
+							Distance: 0 ({{:value.dist}}) km 
+						{{else}}
+							Distance: {{:value.dist}} km 
+						{{/if}}
+						{{if value.expired == 1}}
+							(coordinates expired)
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'disabled')}}
+						{{else data.location == value.name}}
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'disabled')}}
+						{{else data.target_coords == value.name}}
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'selected')}}
+						{{else}}
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, null)}}
+						{{/if}}
+					</div>
 				</div>
-				<div class='itemContent'>
-					{{if data.location == value.name}}
-						Distance: 0 km 
-					{{else}}
-						Distance: {{:value.dist}} km 
-					{{/if}}
-					{{if value.expired == 1}}
-						(coordinates expired)
-						{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'disabled')}}
-					{{else data.location == value.name}}
-						{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'disabled')}}
-					{{else data.target_coords == value.name}}
-						{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'selected')}}
-					{{else}}
-						{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, null)}}
-					{{/if}}
-				</div>
-			</div>
-		{{empty}}
-			No coordinate files loaded.
-		{{/for}}
+			{{empty}}
+				No coordinate files loaded.
+			{{/for}}
+		{{/if}}
 	</div>
 	
 {{else}}

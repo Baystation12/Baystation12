@@ -15,8 +15,6 @@
 	name = "Rabbit Hole Base Supply Management program"
 	var/screen = 1		// 0: Ordering menu, 1: Statistics 2: Shuttle control, 3: Orders menu
 	var/selected_category
-	var/list/category_names
-	var/list/category_contents
 	var/emagged = FALSE	// TODO: Implement synchronisation with modular computer framework.
 	var/datum/shuttle/autodock/ferry/trade/my_shuttle
 
@@ -37,18 +35,19 @@
 /datum/nano_module/program/innie_supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/is_admin = check_access(user, access_innie_boss)
-	if(!category_names || !category_contents)
-		generate_categories()
+	var/datum/faction/innie = GLOB.factions_controller.factions_by_name["Insurrection"]
+	if(!innie.supply_category_names.len || !innie.supply_category_contents.len)
+		innie.generate_supply_categories()
 
 	data["is_admin"] = is_admin
 	data["screen"] = screen
 	data["credits"] = "[my_shuttle.money_account.money]"
 	switch(screen)
 		if(1)// Main ordering menu
-			data["categories"] = category_names
+			data["categories"] = innie.supply_category_names
 			if(selected_category)
 				data["category"] = selected_category
-				data["possible_purchases"] = category_contents[selected_category]
+				data["possible_purchases"] = innie.supply_category_contents[selected_category]
 
 		if(2)// Statistics screen with credit overview
 			data["total_credits"] = my_shuttle.export_credits
@@ -220,23 +219,6 @@
 				my_shuttle.money_account.money += SO.object.cost * CARGO_CRATE_COST_MULTI
 				break
 		return 1
-
-/datum/nano_module/program/innie_supply/proc/generate_categories()
-	category_names = list()
-	category_contents = list()
-	for(var/decl/hierarchy/supply_pack/sp in cargo_supply_pack_root.children)
-		if(sp.is_category())
-			category_names.Add(sp.name)
-			var/list/category[0]
-			for(var/decl/hierarchy/supply_pack/spc in sp.children)
-				if((spc.hidden || spc.contraband) && !emagged)
-					continue
-				category.Add(list(list(
-					"name" = spc.name,
-					"cost" = spc.cost * CARGO_CRATE_COST_MULTI,
-					"ref" = "\ref[spc]"
-				)))
-			category_contents[sp.name] = category
 
 /datum/nano_module/program/innie_supply/proc/get_shuttle_status()
 	if(my_shuttle.has_arrive_time())
