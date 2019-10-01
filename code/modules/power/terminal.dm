@@ -28,3 +28,15 @@
 		layer = WIRE_TERMINAL_LAYER
 	else
 		reset_plane_and_layer()
+
+/obj/machinery/power/terminal/connect_to_network()
+	. = ..()
+	var/obj/machinery/machine = master_machine()
+	if(machine)
+		machine.power_change()
+
+/obj/machinery/power/terminal/disconnect_from_network()
+	. = ..()
+	var/obj/machinery/machine = master_machine()
+	if(machine)
+		machine.power_change()

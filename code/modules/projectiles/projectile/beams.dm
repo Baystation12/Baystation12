@@ -296,3 +296,14 @@
 	muzzle_type = /obj/effect/projectile/stun/darkmatter/muzzle
 	tracer_type = /obj/effect/projectile/stun/darkmatter/tracer
 	impact_type = /obj/effect/projectile/stun/darkmatter/impact
+
+/obj/item/projectile/beam/pointdefense
+	name = "point defense salvo"
+	icon_state = "laser"
+	damage = 15
+	damage_type = ELECTROCUTE //You should be safe inside a voidsuit
+	sharp = FALSE //"Wide" spectrum beam
+	damage_flags = DAM_DISPERSED
+	muzzle_type = /obj/effect/projectile/pointdefense/muzzle
+	tracer_type = /obj/effect/projectile/pointdefense/tracer
+	impact_type = /obj/effect/projectile/pointdefense/impact
