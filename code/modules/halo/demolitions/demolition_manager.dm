@@ -1,9 +1,4 @@
 GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
-var/global/list/demolition_sounds = list(\
-	'sound/ambience/shipclunk.ogg',\
-	'sound/ambience/shipclunk2.ogg',\
-	'sound/ambience/shipcreak.ogg',\
-	'sound/ambience/shipcreak2.ogg')
 
 /datum/demolition_manager
 	var/list/structural_turfs = list()
@@ -162,7 +157,11 @@ var/global/list/demolition_sounds = list(\
 	//destruction ambience
 	if(world.time > next_sound_time)
 		next_sound_time = world.time + sound_interval
-		play_mobs_sound(pick(demolition_sounds))
+		play_mobs_sound(pick(\
+		'sound/ambience/shipclunk.ogg',\
+		'sound/ambience/shipclunk2.ogg',\
+		'sound/ambience/shipcreak.ogg',\
+		'sound/ambience/shipcreak2.ogg'))
 		var/chance = 100 * (1 - check_integrity_quick())
 		if(prob(chance))
 			to_chat(get_mobs_inside(), "<span class='notice'>The entire structure creaks and groans around you! It's not going to last much longer...</span>")
