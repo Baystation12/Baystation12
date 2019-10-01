@@ -264,7 +264,7 @@
 
 	if(href_list["activate_ability"])
 		var/ability_name = href_list["activate_ability"]
-		world << "ACTIVATING: [ability_name]"
+		to_world("ACTIVATING: [ability_name]")
 
 		return 1
 

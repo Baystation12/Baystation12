@@ -14,7 +14,6 @@
 			generate_supply_category_contents(sp)
 
 /datum/faction/proc/generate_supply_category_contents(var/decl/hierarchy/supply_pack/sp)
-	world << "/datum/faction/proc/generate_supply_category_contents([sp.name])"
 	supply_category_names.Add(sp.name)
 	var/list/category[0]
 	for(var/decl/hierarchy/supply_pack/spc in sp.children)
@@ -31,12 +30,10 @@
 
 /datum/faction/proc/update_reputation_gear(var/datum/faction/rep_faction)
 	var/new_reputation = rep_faction.get_faction_reputation(src.name)
-	world << "/datum/faction/proc/update_reputation_gear([rep_faction.name] [new_reputation])"
 	for(var/decl/hierarchy/supply_pack/sp in cargo_supply_pack_root.children)
 		if(sp.contraband && sp.contraband != contraband_gear)
 			continue
 		if(sp.is_category() && sp.name == rep_faction.name)
-			world << "	category [sp.name]"
 			//remove the old ui entries
 			supply_category_names -= sp.name
 			sp.hidden = 1
@@ -44,25 +41,19 @@
 			//remake the ui entries
 			var/list/category[0]
 			for(var/decl/hierarchy/supply_pack/spc in sp.children)
-				world << "	checking [spc.name]..."
 				if(spc.contraband && spc.contraband != contraband_gear)
-					world << "		restricted"
 					continue
 				spc.hidden = 1
 				if(new_reputation >= spc:rep_unlock)
-					world << "	supply unlocked: [spc.name]"
 					spc.hidden = 0
 					category.Add(list(list(
 						"name" = spc.name,
 						"cost" = spc.cost * CARGO_CRATE_COST_MULTI,
 						"ref" = "\ref[spc]"
 					)))
-				else
-					world << "	supply locked: [spc.name] ([spc:rep_unlock])"
 			if(category.len)
 				sp.hidden = 0
 				supply_category_names.Add(sp.name)
 				supply_category_contents[sp.name] = category
-				world << "	category unlocked: [sp.name]"
 
 			break
