@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - rscadd: "Minimum character age for jobs is now code-enforced. You may have to adjust your chars to be able to join as your preferred job."
