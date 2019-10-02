@@ -16,6 +16,7 @@
 
 	var/use_delay
 	var/scan_sound
+	var/printout_color
 
 /obj/item/device/scanner/attack_self(mob/user)
 	show_menu(user)
@@ -85,5 +86,7 @@
 		to_chat(user, "There is no scan data to print.")
 		return
 	var/obj/item/weapon/paper/P = new(get_turf(src), scan_data, "paper - [scan_title]")
+	if(printout_color)
+		P.color = printout_color
 	user.put_in_hands(P)
 	user.visible_message("\The [src] spits out a piece of paper.")

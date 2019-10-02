@@ -4,6 +4,7 @@
 	icon_state = "xenobio"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/scanbeep.ogg'
+	printout_color = "#f3e6ff"
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 
 	var/list/valid_targets = list(
