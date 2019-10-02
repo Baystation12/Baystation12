@@ -1576,6 +1576,7 @@
 #include "code\modules\codex\categories\category_materials.dm"
 #include "code\modules\codex\categories\category_reagents.dm"
 #include "code\modules\codex\categories\category_recipes.dm"
+#include "code\modules\codex\categories\category_skills.dm"
 #include "code\modules\codex\categories\category_species.dm"
 #include "code\modules\codex\entries\_codex_entry.dm"
 #include "code\modules\codex\entries\ascent.dm"
