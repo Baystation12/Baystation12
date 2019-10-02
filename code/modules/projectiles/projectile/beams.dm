@@ -302,7 +302,6 @@
 	damage = 15
 	damage_type = ELECTROCUTE //You should be safe inside a voidsuit
 	sharp = FALSE //"Wide" spectrum beam
-	damage_flags = DAM_DISPERSED
 	muzzle_type = /obj/effect/projectile/pointdefense/muzzle
 	tracer_type = /obj/effect/projectile/pointdefense/tracer
 	impact_type = /obj/effect/projectile/pointdefense/impact

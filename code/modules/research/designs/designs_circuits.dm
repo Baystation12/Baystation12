@@ -695,6 +695,22 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/shield_diffuser
 	sort_string = "VAAAB"
 
+/datum/design/circuit/pointdefense
+	name = "Point defense battery"
+	desc = "Allows for the construction of a point defense battery circuit board."
+	id = "pointdefense"
+	req_tech = list(TECH_COMBAT = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/pointdefense
+	sort_string = "VAAAC"
+
+/datum/design/circuit/pointdefense_control
+	name = "Fire Assist Mainframe"
+	desc = "Allows for the construction of a fire assist mainframe circuit board."
+	id = "pointdefense_control"
+	req_tech = list(TECH_COMBAT = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/pointdefense_control
+	sort_string = "VAAAD"
+
 /datum/design/circuit/ntnet_relay
 	name = "NTNet Quantum Relay"
 	id = "ntnet_relay"

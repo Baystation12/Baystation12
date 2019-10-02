@@ -45,3 +45,10 @@
 		/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1,
 		/obj/item/weapon/cell/high = 1
 	)
+
+/obj/item/weapon/stock_parts/circuitboard/pointdefense_control
+	name = T_BOARD("fire assist mainframe")
+	board_type = "machine"
+	desc = "A control computer to synchronize point defense batteries."
+	build_path = /obj/machinery/pointdefense_control
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_COMBAT = 2)

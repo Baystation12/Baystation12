@@ -79,7 +79,7 @@
 	var/obj/effect/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
 	spawn(0)
-		walk_towards(M, M.dest, 1)
+		walk_towards(M, M.dest, 3)
 	return
 
 /proc/spaceDebrisStartLoc(startSide, Z)
@@ -140,7 +140,6 @@
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 1
 	var/ismissile //missiles don't spin
-	var/targeted = 0 //Are we going to get shot?
 
 	var/move_count = 0
 

@@ -55,3 +55,23 @@ GLOBAL_LIST_INIT(local_networks, new)
 	for(var/entity_type in network_entities)
 		if(ispath(entity_type, device_type))
 			return network_entities[entity_type]
+
+
+//Multilevel network
+GLOBAL_LIST_INIT(multilevel_local_networks, new)	
+
+/datum/local_network/multilevel/New(var/_id)
+	id_tag = _id
+	GLOB.multilevel_local_networks[id_tag] = src
+
+/datum/local_network/multilevel/Destroy()
+	network_entities.Cut()
+	GLOB.multilevel_local_networks -= src
+	. = ..()
+
+/datum/local_network/multilevel/within_radius(var/atom/checking)
+	for(var/entity_list in network_entities)
+		for(var/atom/entity in entity_list)
+			if(!(get_z(entity) in GetConnectedZlevels(get_z(checking))))
+				return FALSE
+	return TRUE

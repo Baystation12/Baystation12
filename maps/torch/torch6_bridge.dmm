@@ -5402,9 +5402,7 @@
 /area/crew_quarters/heads/office/xo)
 "kE" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay2{
-	step_x = 2
-	},
+/obj/machinery/light/navigation/delay2,
 /turf/space,
 /area/space)
 "kI" = (
@@ -11563,7 +11561,9 @@
 /area/maintenance/bridge/forestarboard)
 "zx" = (
 /obj/structure/catwalk,
-/obj/machinery/pointdefense,
+/obj/machinery/pointdefense{
+	initial_id_tag = "torch_primary_pd"
+	},
 /obj/machinery/power/terminal{
 	dir = 4
 	},
@@ -13505,6 +13505,9 @@
 /area/bridge)
 "HK" = (
 /obj/effect/overmap/ship/torch,
+/obj/machinery/pointdefense_control{
+	initial_id_tag = "torch_primary_pd"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HP" = (
