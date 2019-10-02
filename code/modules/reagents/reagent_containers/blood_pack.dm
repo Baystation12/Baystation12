@@ -29,8 +29,6 @@
 	else
 		w_class = ITEM_SIZE_TINY
 
-/obj/item/weapon/reagent_containers/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 /obj/item/weapon/reagent_containers/ivbag/on_update_icon()
 	overlays.Cut()
 	var/percent = round(reagents.total_volume / volume * 100)
