@@ -1,6 +1,7 @@
 
 /mob/living/simple_animal/npc/colonist/weapon_smuggler
-	name = "NPC weapon smuggler"
+	name = "NPC Weapon Trader"
+	npc_job_title = "NPC Weapon Trader"
 	trade_categories_by_name =  list("innie","weapon","weapon_unsc")
 	interact_screen = 2
 	suits = list(\

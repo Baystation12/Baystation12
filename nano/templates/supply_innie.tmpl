@@ -2,13 +2,13 @@
 	{{if data.is_admin}}
 		You are authenticated. You may access all functions of this program.
 	{{else}}
-		You are unauthenticated. Some functions may me unavailable.
+		You are unauthenticated. Some functions may be unavailable.
 	{{/if}}
 </div>
 <div class="item">
 	{{:helper.link('Browse Goods', 'cart', {'set_screen' : 1}, data.screen == 1 ? 'selected' : null)}}
 	{{:helper.link('View Statistics', 'calculator', {'set_screen' : 2}, data.screen == 2 ? 'selected' : null)}}
-	{{:helper.link('Shuttle Control', 'bullet', {'set_screen' : 3}, data.screen == 3 ? 'selected' : null)}}
+	{{:helper.link('Shuttle Control', 'key', {'set_screen' : 3}, data.screen == 3 ? 'selected' : null)}}
 	{{:helper.link('Browse Orders', 'check', {'set_screen' : 4}, data.screen == 4 ? 'selected' : null)}}
 </div>
 <hr>
@@ -121,6 +121,7 @@
 				{{/for}}
 			</table>
 		</div>
+		<hr>
 		<div class="item">
 			<center><h3>Approved orders</h3></span>
 			<table style="width:100%">

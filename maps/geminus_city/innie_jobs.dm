@@ -5,6 +5,8 @@
 	latejoin_at_spawnpoints = 1
 	total_positions = -1
 	spawn_positions = -1
+	generate_email = 1
+	account_allowed = 1
 	access = list(access_innie)
 	outfit_type = /decl/hierarchy/outfit/job/colonist/geminus_innie
 	selection_color = "#ff0000"
@@ -36,6 +38,9 @@
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
 	var/datum/antagonist/geminus_insurrectionist/antag
+
+/datum/job/geminus_innie/get_email_domain()
+	return "geminus.net"
 
 /datum/job/geminus_innie/New()
 	. = ..()

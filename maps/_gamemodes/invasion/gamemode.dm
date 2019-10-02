@@ -18,10 +18,6 @@
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
 
-	setup_factions()
-
-	GLOB.innie_factions_controller.begin_processing()
-
 	//hide some faction sectors from factions not playing
 	for(var/obj/effect/overmap/S in world)
 		if(S.type in overmap_hide)
@@ -35,13 +31,6 @@
 
 	shipmap_handler.spawn_ship("Human Colony", 3)
 	shipmap_handler.spawn_ship("UNSC", 2)
-
-/datum/game_mode/outer_colonies/proc/setup_factions()
-	//setup factions
-	for(var/faction_type in factions)
-		var/datum/faction/F = GLOB.factions_by_type[faction_type]
-		factions -= faction_type
-		factions.Add(F)
 
 /datum/game_mode/outer_colonies/proc/setup_objectives()
 

@@ -1,119 +1,114 @@
-"aa" = (/turf/simulated/wall/r_wall,/area/space)
-"ab" = (/turf/simulated/floor/pavement/empty,/area/space)
-"ac" = (/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 4},/area/space)
-"ad" = (/turf/simulated/floor/road{icon_state = "road"; dir = 8},/area/space)
-"ae" = (/turf/simulated/floor/road/empty,/area/space)
-"af" = (/turf/simulated/floor/road/markings,/area/space)
-"ag" = (/turf/simulated/floor/carpet/blue,/area/space)
-"ah" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/carpet/blue,/area/space)
-"ai" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/carpet/blue,/area/space)
-"aj" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/carpet/blue,/area/space)
-"ak" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/carpet/blue,/area/space)
-"al" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet/blue,/area/space)
-"am" = (/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"an" = (/obj/structure/flora/pottedplant/minitree,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"ao" = (/obj/machinery/camera{icon_state = "camera"; dir = 4},/obj/structure/bed/chair/comfy/black,/turf/simulated/floor/carpet/blue,/area/space)
-"ap" = (/obj/structure/bed/chair/comfy/black,/turf/simulated/floor/carpet/blue,/area/space)
-"aq" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/carpet/blue,/area/space)
-"ar" = (/obj/structure/bed/chair/office/dark{icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/carpet/blue,/area/space)
-"as" = (/obj/structure/table/standard,/obj/machinery/door/window/brigdoor,/obj/machinery/door/window/brigdoor/westright,/turf/simulated/floor/carpet/blue,/area/space)
-"at" = (/obj/machinery/light/street,/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 4},/area/space)
-"au" = (/obj/structure/table/standard,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet/blue,/area/space)
-"av" = (/obj/structure/table/standard,/turf/simulated/floor/carpet/blue,/area/space)
-"aw" = (/obj/machinery/camera{icon_state = "camera"; dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"ax" = (/obj/machinery/camera{icon_state = "camera"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"ay" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/space)
-"az" = (/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 1},/turf/simulated/floor/carpet/blue,/area/space)
-"aA" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"aB" = (/turf/simulated/floor,/area/space)
-"aC" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/nw,/area/space)
-"aD" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
-"aE" = (/obj/structure/bed/chair,/turf/simulated/floor/shuttle/red,/area/space)
-"aF" = (/obj/structure/bed/chair,/obj/machinery/light/colored/red{icon_state = "red1"; dir = 1},/turf/simulated/floor/shuttle/red,/area/space)
-"aG" = (/obj/structure/bed/chair,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/shuttle/red,/area/space)
-"aH" = (/obj/structure/thruster/dark/thruster{icon_state = "se1"; dir = 4},/turf/simulated/floor,/area/space)
-"aI" = (/obj/machinery/door/airlock/glass_external,/turf/simulated/floor/shuttle/red,/area/space)
-"aJ" = (/turf/simulated/floor/shuttle/red,/area/space)
-"aK" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/shuttle/red,/area/space)
-"aL" = (/turf/simulated/floor/road,/area/space)
-"aM" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/sw,/area/space)
-"aN" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/shuttle/red,/area/space)
-"aO" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/light/colored/red,/turf/simulated/floor/shuttle/red,/area/space)
-"aP" = (/obj/structure/bed/chair{dir = 1},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/shuttle/red,/area/space)
-"aQ" = (/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/space)
-"aR" = (/obj/machinery/camera{icon_state = "camera"; dir = 4},/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 1},/turf/simulated/floor/carpet/blue,/area/space)
-"aS" = (/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"aT" = (/obj/machinery/camera,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"aU" = (/obj/machinery/camera,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet/blue,/area/space)
-"aV" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet/blue,/area/space)
-"aW" = (/obj/structure/table/woodentable,/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/carpet/blue,/area/space)
-"aX" = (/obj/structure/reagent_dispensers/water_cooler,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/carpet/blue,/area/space)
-"aY" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"aZ" = (/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"ba" = (/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bb" = (/obj/structure/flora/pottedplant/orientaltree,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bc" = (/obj/machinery/vending/cola,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bd" = (/obj/structure/flora/pottedplant/minitree,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"be" = (/obj/machinery/vending/coffee,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bf" = (/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bg" = (/obj/machinery/light,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/space)
-"bh" = (/obj/structure/table/woodentable,/obj/machinery/light,/turf/simulated/floor/carpet/blue,/area/space)
-"bi" = (/obj/machinery/door/airlock/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bj" = (/obj/structure/filingcabinet/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bk" = (/obj/machinery/computer/skills,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bl" = (/obj/structure/filingcabinet/filingcabinet,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bm" = (/obj/structure/bed/chair/office/dark{icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bn" = (/obj/machinery/computer/account_database,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bo" = (/obj/structure/filingcabinet/filingcabinet,/obj/machinery/camera{icon_state = "camera"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bp" = (/obj/structure/table/standard,/obj/item/modular_computer/laptop/preset/custom_loadout/advanced,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bq" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech,/area/space)
-"br" = (/obj/machinery/camera/motion,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech,/area/space)
-"bs" = (/obj/structure/safe,/obj/machinery/camera/motion{icon_state = "camera"; dir = 4},/turf/simulated/floor/tech,/area/space)
-"bt" = (/obj/structure/closet/secure_closet/freezer/money,/turf/simulated/floor/tech,/area/space)
-"bu" = (/obj/structure/safe,/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tech,/area/space)
-"bv" = (/obj/structure/safe,/turf/simulated/floor/tech,/area/space)
-"bw" = (/obj/item/modular_computer/console/preset/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bx" = (/obj/machinery/door/airlock/vault/bolted,/turf/simulated/floor/tech,/area/space)
-"by" = (/turf/simulated/floor/tech,/area/space)
-"bz" = (/obj/structure/table/standard,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bA" = (/obj/structure/bed/chair/office/dark{icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bB" = (/obj/machinery/computer/secure_data,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bC" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech,/area/space)
-"bD" = (/obj/structure/safe,/obj/machinery/light,/turf/simulated/floor/tech,/area/space)
-"bE" = (/obj/structure/closet/secure_closet/security,/obj/machinery/camera{icon_state = "camera"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bF" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bG" = (/obj/structure/closet/secure_closet/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
-"bH" = (/obj/machinery/vending/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/space)
+"aa" = (/turf/simulated/wall/r_wall,/area/planets/Geminus/indoor/quest_instance)
+"ab" = (/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
+"ac" = (/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 4},/area/planets/Geminus/indoor/quest_instance)
+"ad" = (/turf/simulated/floor/road{icon_state = "road"; dir = 8},/area/planets/Geminus/indoor/quest_instance)
+"ae" = (/turf/simulated/floor/road/empty,/area/planets/Geminus/indoor/quest_instance)
+"af" = (/turf/simulated/floor/road/markings,/area/planets/Geminus/indoor/quest_instance)
+"ag" = (/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"ah" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"ai" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aj" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"ak" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/full,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"al" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"am" = (/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"an" = (/obj/structure/flora/pottedplant/minitree,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"ao" = (/obj/machinery/camera{icon_state = "camera"; dir = 4},/obj/structure/bed/chair/comfy/black,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"ap" = (/obj/structure/bed/chair/comfy/black,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aq" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"ar" = (/obj/structure/bed/chair/office/dark{icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"as" = (/obj/structure/table/standard,/obj/machinery/door/window/brigdoor,/obj/machinery/door/window/brigdoor/westright,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"at" = (/obj/machinery/light/street,/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 4},/area/planets/Geminus/indoor/quest_instance)
+"au" = (/obj/structure/table/standard,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"av" = (/obj/structure/table/standard,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aw" = (/obj/machinery/camera{icon_state = "camera"; dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"ax" = (/obj/machinery/camera{icon_state = "camera"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"ay" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/planets/Geminus/indoor/quest_instance)
+"az" = (/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 1},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aA" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"aB" = (/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
+"aC" = (/obj/effect/shuttle_landmark/innie_offsite_transport,/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
+"aD" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aE" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"aF" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"aG" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"aH" = (/obj/effect/landmark/instance_loot,/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"aI" = (/obj/effect/landmark/instance_boss,/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"aL" = (/turf/simulated/floor/road,/area/planets/Geminus/indoor/quest_instance)
+"aQ" = (/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/planets/Geminus/indoor/quest_instance)
+"aR" = (/obj/machinery/camera{icon_state = "camera"; dir = 4},/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 1},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aS" = (/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"aT" = (/obj/machinery/camera,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"aU" = (/obj/machinery/camera,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aV" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aW" = (/obj/structure/table/woodentable,/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aX" = (/obj/structure/reagent_dispensers/water_cooler,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"aY" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"aZ" = (/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"ba" = (/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bb" = (/obj/structure/flora/pottedplant/orientaltree,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bc" = (/obj/machinery/vending/cola,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bd" = (/obj/structure/flora/pottedplant/minitree,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"be" = (/obj/machinery/vending/coffee,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bf" = (/obj/structure/bed/chair/comfy/black{icon_state = "comfychair_preview"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bg" = (/obj/machinery/light,/turf/simulated/floor/decor{icon_state = "tiles3"},/area/planets/Geminus/indoor/quest_instance)
+"bh" = (/obj/structure/table/woodentable,/obj/machinery/light,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/indoor/quest_instance)
+"bi" = (/obj/machinery/door/airlock/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bj" = (/obj/structure/filingcabinet/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bk" = (/obj/machinery/computer/skills,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bl" = (/obj/structure/filingcabinet/filingcabinet,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bm" = (/obj/structure/bed/chair/office/dark{icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bn" = (/obj/machinery/computer/account_database,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bo" = (/obj/structure/filingcabinet/filingcabinet,/obj/machinery/camera{icon_state = "camera"; dir = 4},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bp" = (/obj/structure/table/standard,/obj/item/modular_computer/laptop/preset/custom_loadout/advanced,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bq" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"br" = (/obj/machinery/camera/motion,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bs" = (/obj/structure/safe,/obj/machinery/camera/motion{icon_state = "camera"; dir = 4},/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bt" = (/obj/structure/closet/secure_closet/freezer/money,/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bu" = (/obj/structure/safe,/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bv" = (/obj/structure/safe,/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bw" = (/obj/item/modular_computer/console/preset/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bx" = (/obj/machinery/door/airlock/vault/bolted,/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"by" = (/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bz" = (/obj/structure/table/standard,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bA" = (/obj/structure/bed/chair/office/dark{icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bB" = (/obj/machinery/computer/secure_data,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bC" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bD" = (/obj/structure/safe,/obj/machinery/light,/turf/simulated/floor/tech,/area/planets/Geminus/indoor/quest_instance)
+"bE" = (/obj/machinery/door/airlock/security{name = "Security"},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bF" = (/obj/structure/closet/secure_closet/security,/obj/machinery/camera{icon_state = "camera"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bG" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bH" = (/obj/structure/closet/secure_closet/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"bI" = (/obj/machinery/vending/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacadaeaeaeafaeaeae
 aaagagagagahaiajakalamamamamamamamanaaababacadaeaeaeafaeaeae
-aaaoagagapagaqarasagamamamamamamamamaaababatadaeaeaeafaeaeae
-aaauagagavahaiajakalamamawaaaxamamamaaababacadaeaeaeaeayayay
+aaaoagaDapagaqarasagamamamamamamamamaaababatadaeaeaeafaeaeae
+aaauagagavahaiajakalamamawaaaxaEamamaaababacadaeaeaeaeayayay
 aaazagagazagaqarasagamamamamamamamamaAababacadaeaeaeaeaeaeae
-aaagagagagagaiajakagamamamamamamamamaaababaBaCaDaDaDaDaDaDae
-aaagagagagagaiajakagamamamamamamamamaaababaCaDaEaEaFaEaGaHae
-aaapagagapagaqarasagamamamamamamamamaAababaIaJaJaJaJaJaKaHaL
-aaauagagavahaiajakalamamawaaaxamamamaaababaMaDaNaNaOaNaPaHaQ
-aaaRagagazagaqarasagamamamamamamamamaaababaBaMaDaDaDaDaDaDab
+aaagagagagagaiajakagamamamamamamamamaaababaBaBaBaBaBaBaBaBae
+aaagagagagagaiajakagamamamaEamamamamaaababaBaBaBaBaBaBaBaBae
+aaapagaDapagaqarasagamamamamamamamamaAababaBaBaBaBaBaBaBaBaL
+aaauagagavahaiajakalamamawaaaxamamamaaababaBaBaBaBaBaBaBaBaQ
+aaaRagagazagaqarasagamamamamamamamamaaababaCaBaBaBaBaBaBaBab
 aaagagagagahaiajakalamamamamamamamanaaababababababababababab
 aaaaaaaqaqaaaaaaaaaaaaaaaaaaaaaqaqaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaamanagaganaSamamaTamamamaSanagagaaaUapaVapaWapaVapaXaaabab
 aaaYagagagagagagagagagagagagagagagaqagaZaZaZaZaZaZaZagaaabab
-aaamagagagagagagagagagagagagagagagaqagbabbbcbdbebbbfagaaabab
-aaaYagagagagagagagagagagagagagagagaqagaZaZaZaZaZaZaZagaaabab
+aaamagagaDagagagagagagagagagaDagagaqagbabbbcbdbebbbfagaaabab
+aaaYagagagagagagagagagagagagagagagaqagaZaZaZaFaZaZaZagaaabab
 aaamanamamambgamamamamamambgamamamaaalazaVazbhazaVazaXaaabab
 aaaaaabiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aabjaZaZaZbkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aablaZaZbmbnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aaboaZaZaZbpaaaabqbraaaabsbtbubvbtbvbtbtbvbvbubtbvaaaaaaabab
-aabwaZaZaZaZbxbybybybybxbybybybybybybybybybybybybyaaaaaaabab
-aabzbAaZaZaZbxbybybybybxbybybybybybybybybybybybybyaaaaaaabab
+aabwaZaFaZaZbxbybyaGbybxbyaHbybyaGbyaHbybybybyaHbyaaaaaaabab
+aabzbAaZaZaZbxbybybybybxbyaHbybybybyaHbyaIbybyaHbyaaaaaaabab
 aabBaZaZaZaZaaaabqbCaaaabvbtbDbvbvbvbtbvbvbvbDbtbtaaaaaaabab
-aaaaaabiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
-aaaaaaaZaZaZbEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
-aaaaaabFaZaZbGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
-aaaaaaaabHaaaaaaaaaaaaababababababababababababababababababab
+aaaaaabEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
+aaaaaaaZaZaZbFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
+aaaaaabGaZaFbHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
+aaaaaaaabIaaaaaaaaaaaaababababababababababababababababababab
 aaaaaaaaaaaaaaaaaaaaabababababababababababababababababababab
 aaaaaaaaaaaaaaaaaaaaabababababababababababababababababababab
 "}

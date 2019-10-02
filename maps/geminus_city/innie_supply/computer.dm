@@ -12,3 +12,5 @@
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
+
+	set_autorun("base_supply")
