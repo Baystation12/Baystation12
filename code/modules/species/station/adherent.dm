@@ -132,6 +132,9 @@
 /datum/species/adherent/can_fall(var/mob/living/carbon/human/H)
 	. = !can_overcome_gravity(H)
 
+/datum/species/adherent/get_slowdown(var/mob/living/carbon/human/H)
+	return slowdown
+
 /datum/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 
 	if(can_overcome_gravity(H))
