@@ -52,7 +52,7 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/labcoat
-	allowed_roles = STERILE_ROLES
+	allowed_roles = DOCTOR_ROLES
 
 /datum/gear/suit/labcoat_corp
 	allowed_roles = STERILE_ROLES
