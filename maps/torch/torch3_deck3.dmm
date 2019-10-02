@@ -16215,7 +16215,9 @@
 	icon_state = "term";
 	dir = 1
 	},
-/obj/machinery/pointdefense,
+/obj/machinery/pointdefense{
+	initial_id_tag = "torch_primary_pd"
+	},
 /obj/structure/cable/green,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -18957,7 +18959,10 @@
 /obj/machinery/power/terminal{
 	dir = 8
 	},
-/obj/machinery/pointdefense,
+/obj/machinery/pointdefense{
+	id_tag = null;
+	initial_id_tag = "torch_primary_pd"
+	},
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
@@ -20613,7 +20618,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
 "Xr" = (
-/obj/machinery/pointdefense,
+/obj/machinery/pointdefense{
+	id_tag = null;
+	initial_id_tag = "torch_primary_pd"
+	},
 /obj/machinery/power/terminal,
 /obj/structure/cable/green{
 	d2 = 2;
