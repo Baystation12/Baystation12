@@ -572,7 +572,7 @@ default behaviour is:
 			if (prob(75))
 				var/obj/item/grab/G = pick(M.grabbed_by)
 				if(istype(G))
-					M.visible_message(M, SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]"))
+					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
 					qdel(G)
 		if (!M.grabbed_by.len)
 			M.handle_pull_damage(src)
