@@ -8,6 +8,8 @@
 
 #undef RESTRICTED_ROLES
 
+#undef DOCTOR_ROLES
+
 #undef MEDICAL_ROLES
 
 #undef STERILE_ROLES

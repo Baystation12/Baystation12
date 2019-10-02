@@ -12,6 +12,9 @@
 //For roles with no uniform or formal clothing requirements
 #define RESTRICTED_ROLES list(/datum/job/assistant, /datum/job/bartender, /datum/job/merchant)
 
+//For roles that would have a higher level of education, typically doctors and other scientists
+#define DOCTOR_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist)
+
 //For members of the medical department
 #define MEDICAL_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/psychiatrist, /datum/job/chemist, /datum/job/medical_trainee)
 

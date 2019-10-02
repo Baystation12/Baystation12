@@ -127,6 +127,5 @@
 		RANDOM_SCRUBS = 4,
 		/obj/item/clothing/suit/surgicalapron = 2,
 		/obj/item/clothing/shoes/white = 2,
-		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
 		/obj/item/clothing/mask/surgical = 2
 	)
