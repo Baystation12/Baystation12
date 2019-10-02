@@ -4,12 +4,14 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 	var/list/structural_turfs = list()
 	var/max_turfs = 0
 	var/max_health = 0
-	var/buckle_ratio = 0.75
-	var/buckle_damage = 100
+	var/buckle_ratio = 0.5
+	var/buckle_damage = 45
 	var/is_processing = 0
 	var/list/linked_areas = list()
 	var/next_sound_time = 0
-	var/sound_interval = 6 SECONDS
+	var/sound_interval = 5 SECONDS
+	var/target_destruction_timer = 180	//seconds
+	var/time_last_process = 0
 	var/overmap_z = 0		//this will be a random zlevel from one of the demo walls... doesnt matter which level because we only use it to get the overmap object
 
 /datum/demolition_manager/proc/wall_added(var/turf/simulated/wall/r_wall/demo/new_wall)
@@ -24,6 +26,10 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 	structural_turfs -= destroyed_wall
 
 	if(structural_turfs.len / max_turfs <= buckle_ratio)
+		//calculate destruction rate
+		var/remaining_wall_health = max_health * buckle_ratio
+		buckle_damage = round(remaining_wall_health / target_destruction_timer)
+
 		set_processing(1)
 
 	log_and_message_admins("Structural turf for z[destroyed_wall.z] destroyed! [structural_turfs.len] out of [max_turfs] turfs left. [get_info_string()]")
@@ -89,7 +95,8 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 					qdel(I)
 				for(var/mob/living/M in T)
 					M.visible_message("\icon[M] <span class='warning'>[M] is crushed by a falling boulder as the roof collapses!</span>")
-					M.apply_damage(1000, def_zone = BP_HEAD)
+					M.apply_damage(300, def_zone = BP_HEAD)
+					M.apply_damage(300, def_zone = BP_CHEST)
 				playsound(T, 'sound/effects/bang.ogg', 100, 1)
 				new /obj/structure/boulder(T)
 
@@ -119,7 +126,7 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 		if(check_buckling())
 			var/health_left = integrity * max_health
 			var/time_left = round(health_left / buckle_damage)		//this assumes 1 tick per second which is approximately correct
-			info_message += " WARNING: Structure buckling from strain, collapse in approximately [time_left] seconds."
+			info_message += " WARNING: Structure buckling from strain, collapse in approximately [time_left + 1] seconds."
 		return info_message
 	else
 		return "This area has been subjected to a massive recent structural upheaval."
@@ -149,7 +156,11 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 
 	else if(structural_turfs.len / max_turfs <= buckle_ratio)
 		var/turf/simulated/wall/r_wall/demo/structural_turf = pick(structural_turfs)
-		structural_turf.buckle(buckle_damage)
+
+		//adjust the damage applied based on time passed
+		var/delta_time = (world.time - time_last_process) / 10
+
+		structural_turf.buckle(buckle_damage * delta_time)
 
 	else
 		set_processing(0)
@@ -166,11 +177,14 @@ GLOBAL_LIST_INIT(DEMOLITION_MANAGER_LIST, new)
 		if(prob(chance))
 			to_chat(get_mobs_inside(), "<span class='notice'>The entire structure creaks and groans around you! It's not going to last much longer...</span>")
 
+	time_last_process = world.time
+
 /datum/demolition_manager/proc/set_processing(var/do_process = 1)
 	if(do_process)
 		if(!is_processing)
 			is_processing = 1
 			GLOB.processing_objects += src
+			time_last_process = world.time
 	else
 		if(is_processing)
 			is_processing = 0
