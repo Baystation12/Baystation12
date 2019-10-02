@@ -10,9 +10,8 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	take_external_damage(amount)
 
 /obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon = null)
-
-	brute = round(brute * get_brute_mod(), 0.1)
-	burn = round(burn * get_burn_mod(), 0.1)
+	brute = round(brute * get_brute_mod(damage_flags), 0.1)
+	burn = round(burn * get_burn_mod(damage_flags), 0.1)
 
 	if((brute <= 0) && (burn <= 0))
 		return 0
@@ -20,27 +19,20 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	var/sharp = (damage_flags & DAM_SHARP)
 	var/edge  = (damage_flags & DAM_EDGE)
 	var/laser = (damage_flags & DAM_LASER)
-	var/blunt = brute && !sharp && !edge
+	var/blunt = !!(brute && !sharp && !edge)
 
 	// Handle some status-based damage multipliers.
-	if(blunt)
-		if(BP_IS_BRITTLE(src))
-			brute = Floor(brute * 1.5)
-	else if(BP_IS_CRYSTAL(src))
-		if(burn && laser)
-			burn = Floor(burn * 0.1)
-			if(burn)
-				brute += burn // Stress fracturing from heat!
-				owner.bodytemperature += burn
-				burn = 0
-			if(prob(25))
-				owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
-		if(brute)
-			brute = Floor(brute * 0.8)
+	if(BP_IS_CRYSTAL(src) && burn && laser)
+		brute += burn // Stress fracturing from heat!
+		owner.bodytemperature += burn
+		burn = 0
+		if(prob(25))
+			owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
 
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
-	var/can_cut = (!BP_IS_ROBOTIC(src) && (sharp || prob(brute*2)))
+
+	var/can_cut = !BP_IS_ROBOTIC(src) && (sharp || prob(brute*2))
 	var/spillover = 0
 	var/pure_brute = brute
 	if(!is_damageable(brute + burn))
@@ -66,36 +58,10 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		fracture()
 
 	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs && internal_organs.len)
-		var/damage_amt = brute
-		var/cur_damage = brute_dam
-		if(laser || BP_IS_ROBOTIC(src))
-			damage_amt += burn
-			cur_damage += burn_dam
-		var/organ_damage_threshold = 5
-		if(sharp)
-			organ_damage_threshold *= 0.5
-		var/organ_damage_prob = 10 * damage_amt/organ_damage_threshold //more damage, higher chance to damage
-		if(encased && !(status & ORGAN_BROKEN)) //ribs protect
-			if(!laser)
-				organ_damage_prob *= 0.2
-			else
-				organ_damage_prob *= 0.5
-		if ((cur_damage + damage_amt >= max_damage || damage_amt >= organ_damage_threshold) && prob(organ_damage_prob))
-			// Damage an internal organ
-			var/list/victims = list()
-			for(var/obj/item/organ/internal/I in internal_organs)
-				if(I.damage < I.max_damage && prob(I.relative_size))
-					victims += I
-			if(!victims.len)
-				victims += pick(internal_organs)
-			for(var/v in victims)
-				var/obj/item/organ/internal/victim = v
-				brute /= 2
-				if(laser)
-					burn /= 2
-				damage_amt -= max(damage_amt*victim.damage_reduction, 0)
-				victim.take_internal_damage(damage_amt)
+	if(LAZYLEN(internal_organs))
+		if(damage_internal_organs(brute, burn, damage_flags))
+			brute /= 2
+			burn /= 2
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
@@ -153,6 +119,53 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		owner.UpdateDamageIcon()
 
 	return created_wound
+
+/obj/item/organ/external/proc/damage_internal_organs(brute, burn, damage_flags)
+	if(!LAZYLEN(internal_organs))
+		return FALSE
+
+	var/laser = (damage_flags & DAM_LASER)
+
+	var/damage_amt = brute
+	var/cur_damage = brute_dam
+	if(laser || BP_IS_ROBOTIC(src))
+		damage_amt += burn
+		cur_damage += burn_dam
+
+	if(!damage_amt)
+		return FALSE
+
+	var/organ_damage_threshold = 10
+	if(damage_flags & DAM_SHARP)
+		organ_damage_threshold *= 0.5
+	if(laser)
+		organ_damage_threshold *= 2
+
+	if(!(cur_damage + damage_amt >= max_damage) && !(damage_amt >= organ_damage_threshold))
+		return FALSE
+
+	var/list/victims = list()
+	var/organ_hit_chance = 0
+	for(var/obj/item/organ/internal/I in internal_organs)
+		if(I.damage < I.max_damage)
+			victims[I] = I.relative_size
+			organ_hit_chance += I.relative_size
+
+	//No damageable organs
+	if(!length(victims))
+		return FALSE
+
+	organ_hit_chance += 5 * damage_amt/organ_damage_threshold
+
+	if(encased && !(status & ORGAN_BROKEN)) //ribs protect
+		organ_hit_chance *= 0.6
+	
+	organ_hit_chance = min(organ_hit_chance, 100)
+	if(prob(organ_hit_chance))
+		var/obj/item/organ/internal/victim = pickweight(victims)
+		damage_amt -= max(damage_amt*victim.damage_reduction, 0)
+		victim.take_internal_damage(damage_amt)
+		return TRUE
 
 /obj/item/organ/external/heal_damage(brute, burn, internal = 0, robo_repair = 0)
 	if(BP_IS_ROBOTIC(src) && !robo_repair)
@@ -305,22 +318,29 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		return TRUE
 	return FALSE
 
-/obj/item/organ/external/proc/get_brute_mod()
+/obj/item/organ/external/proc/get_brute_mod(var/damage_flags)
 	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name[BP_AUGMENT_CHEST_ARMOUR]
 	var/B = 1
 	if(A && istype(A))
 		B = A.brute_mult
 	if(!BP_IS_ROBOTIC(src))
 		B *= species.get_brute_mod(owner)
+	var/blunt = !(damage_flags & DAM_EDGE|DAM_SHARP)
+	if(blunt && BP_IS_BRITTLE(src))
+		B *= 1.5
+	if(BP_IS_CRYSTAL(src))
+		B *= 0.8
 	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
 
-/obj/item/organ/external/proc/get_burn_mod()
+/obj/item/organ/external/proc/get_burn_mod(var/damage_flags)
 	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name[BP_AUGMENT_CHEST_ARMOUR]
 	var/B = 1
 	if(A && istype(A))
 		B = A.burn_mult
 	if(!BP_IS_ROBOTIC(src))
 		B *= species.get_burn_mod(owner)
+	if(BP_IS_CRYSTAL(src))
+		B *= 0.1
 	return B
 
 //organs can come off in three cases
