@@ -1,0 +1,6 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Lepidoptera has been remapped to be more compact for planetary landing. Extra space has been utilized for additional rooms."
+  - bugfix: "Ascent airlocks will now all cycle and dock correctly."
+  - maptweak: "Ascent seedship walls made more uniform. Keel is composed of reinforced walls, while the outside is regular walls. The Tricoptera has been tweaked to prioritize form over function."
