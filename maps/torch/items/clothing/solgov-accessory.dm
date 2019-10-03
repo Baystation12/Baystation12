@@ -228,8 +228,8 @@ specialty pins
 	icon_state = "fleetspec_counselor"
 
 /obj/item/clothing/accessory/solgov/specialty/chemist
-	name = "chemistry blazes"
-	desc = "Orange blazes denoting a chemist."
+	name = "pharmacy blazes"
+	desc = "Orange blazes denoting a pharmacist."
 	icon_state = "fleetspec_chemist"
 
 /obj/item/clothing/accessory/solgov/specialty/enlisted
