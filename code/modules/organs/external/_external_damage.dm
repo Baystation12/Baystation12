@@ -117,6 +117,10 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(owner && update_damstate())
 		owner.UpdateDamageIcon()
 
+	if(created_wound && isobj(used_weapon))
+		var/obj/O = used_weapon
+		O.after_wounding(src, created_wound)
+
 	return created_wound
 
 /obj/item/organ/external/proc/damage_internal_organs(brute, burn, damage_flags)
