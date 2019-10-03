@@ -53,3 +53,20 @@
 /obj/item/clothing/head/hardhat/firefighter/Chief
 	icon_state = "Firefighter-Helmet-Chief"
 
+/obj/item/clothing/head/hardhat/DamageControl
+	name = "damage control helmet"
+	desc = "A helmet commonly used by engineers and first responders throughout the human space. Comes with a built-in flashlight."
+	icon_state = "Damage-Control-Helmet"
+	light_overlay = "DC_light"
+	flags_inv = HIDEEARS|BLOCKHAIR
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
+
+/obj/item/clothing/head/hardhat/DamageControl/Yellow
+	name = "senior damage control helmet"
+	icon_state = "Damage-Control-Helmet-Yellow"
+
+/obj/item/clothing/head/hardhat/DamageControl/White
+	name = "chief damage control helmet"
+	icon_state = "Damage-Control-Helmet-White"
+
+
