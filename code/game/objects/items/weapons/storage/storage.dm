@@ -286,9 +286,13 @@
 /obj/item/weapon/storage/proc/gather_all(var/turf/T, var/mob/user)
 	var/success = 0
 	var/failure = 0
+	var/list/rejections = list()			//Rejections idea shamlessly stolen from paradise station
 
 	for(var/obj/item/I in T)
+		if(I.type in rejections)			//Skip anything that allready failed
+			continue
 		if(!can_be_inserted(I, user, 0))	// Note can_be_inserted still makes noise when the answer is no
+			rejections += I.type
 			failure = 1
 			continue
 		success = 1
