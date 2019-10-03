@@ -29,7 +29,6 @@
 	var/components_per_page = 5
 	health = 30
 	pass_flags = 0
-	armor = list("melee" = 50, "bullet" = 70, "laser" = 70, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 	var/list/color_whitelist = list( //This is just for checking that hacked colors aren't in the save data.

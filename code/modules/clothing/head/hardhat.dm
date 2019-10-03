@@ -6,7 +6,14 @@
 	brightness_on = 0.5 //luminosity when on
 	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
-	armor = list(melee = 30, bullet = 5, laser = 20,energy = 10, bomb = 20, bio = 10, rad = 10)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_MINOR, 
+		rad = ARMOR_RAD_MINOR
+	)
 	flags_inv = 0
 	siemens_coefficient = 0.9
 	heat_protection = HEAD
@@ -31,7 +38,13 @@
 	icon_state = "EMS_helmet"
 	light_overlay = "EMS_light"
 	w_class = ITEM_SIZE_NORMAL
-	armor = list(melee = 30, bullet = 10, laser = 10,energy = 10, bomb = 20, bio = 10, rad = 2.5)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_MINOR,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_MINOR
+	)
 	max_heat_protection_temperature = 1300
 
 /obj/item/clothing/head/hardhat/firefighter

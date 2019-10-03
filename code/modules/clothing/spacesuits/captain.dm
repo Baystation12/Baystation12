@@ -9,7 +9,15 @@
 	min_pressure_protection = 0
 	flags_inv = HIDEFACE|BLOCKHAIR
 	permeability_coefficient = 0.01
-	armor = list(melee = 65, bullet = 50, laser = 50,energy = 25, bomb = 50, bio = 100, rad = 25)
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR, 
+		bullet = ARMOR_BALLISTIC_RESISTANT, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 
 //Captain's space suit This is not the proper path but I don't currently know enough about how this all works to mess with it.
 /obj/item/clothing/suit/armor/captain
@@ -27,7 +35,15 @@
 	min_pressure_protection = 0
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/tank/emergency, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
-	armor = list(melee = 65, bullet = 50, laser = 50, energy = 25, bomb = 50, bio = 100, rad = 25)
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR, 
+		bullet = ARMOR_BALLISTIC_RESISTANT, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE

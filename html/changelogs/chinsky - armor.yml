@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - experiment: "Armor calculations and some values were changed. It should be generally more protecting now. Report weird stuff happening."

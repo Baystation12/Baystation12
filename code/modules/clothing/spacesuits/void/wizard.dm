@@ -8,7 +8,15 @@
 		slot_r_hand_str = "wiz_helm",
 		)
 	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
-	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 30)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_SMALL, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 	siemens_coefficient = 0.7
 	sprite_sheets_obj = null
 	wizard_garb = 1
@@ -19,7 +27,15 @@
 	desc = "A bizarre gem-encrusted suit that radiates magical energies."
 	w_class = ITEM_SIZE_LARGE //normally voidsuits are bulky but this one is magic I suppose
 	unacidable = 1
-	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 30)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_SMALL, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 	siemens_coefficient = 0.7
 	sprite_sheets_obj = null
 	wizard_garb = 1
@@ -45,5 +61,13 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
 	unacidable = 1
-	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 30)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_SMALL, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 	siemens_coefficient = 0.7

@@ -267,3 +267,21 @@ proc/age2agedescription(age)
 				selected = M
 				break
 	return selected
+
+/proc/damflags_to_strings(damflags)
+	var/list/res = list()
+	if(damflags & DAM_SHARP)
+		res += "sharp"
+	if(damflags & DAM_EDGE)
+		res += "edge"
+	if(damflags & DAM_LASER)
+		res += "laser"
+	if(damflags & DAM_BULLET)
+		res += "bullet"
+	if(damflags & DAM_EXPLODE)
+		res += "explode"
+	if(damflags & DAM_DISPERSED)
+		res += "dispersed"
+	if(damflags & DAM_BIO)
+		res += "bio"
+	return english_list(res)

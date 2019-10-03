@@ -2,14 +2,24 @@
 	name = "immaculate fedora"
 	desc = "Whoever owns this hat means business. Hopefully, it's just good business."
 	icon_state = "infhat"
-	armor = list(melee = 5, bullet = 15, laser = 10,energy = 10, bomb = 0, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR
+		)
 	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/suit/infilsuit
 	name = "immaculate suit"
 	desc = "The clothes of an impeccable diplomat. Or perhaps a businessman. Let's not consider the horrors that might arise if it belongs to a lawyer."
 	icon_state = "infsuit"
-	armor = list(melee = 10, bullet = 35, laser = 10,energy = 15, bomb = 0, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR, 
+		bullet = ARMOR_BALLISTIC_PISTOL, 
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR
+		)
 
 /obj/item/clothing/under/lawyer/infil
 	name = "formal outfit"

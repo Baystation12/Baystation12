@@ -59,7 +59,7 @@
 			apply_damage(damage, PAIN, affecting)
 			if(damage >= 9)
 				visible_message("<span class='danger'>[H] has weakened \the [src]!</span>")
-				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE)
+				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE, damage = damage)
 				apply_effect(4, WEAKEN, armor_block)
 
 			return
@@ -81,7 +81,7 @@
 					return 0
 
 				var/pumping_skill = max(M.get_skill_value(SKILL_MEDICAL),M.get_skill_value(SKILL_ANATOMY))
-				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2) 
+				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2)
 				cpr_time = 0
 
 				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
