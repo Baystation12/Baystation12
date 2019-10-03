@@ -191,8 +191,6 @@ SUBSYSTEM_DEF(jobs)
 		var/datum/job/job = get_by_title(rank)
 		if(!job)
 			return 0
-		if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
-			return 0
 		if(jobban_isbanned(player, rank))
 			return 0
 		if(!job.player_old_enough(player.client))
