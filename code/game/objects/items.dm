@@ -251,7 +251,7 @@
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/weapon/W, mob/user)
-	return !SSfabrication.try_craft_with(src, W, user)
+	return SSfabrication.try_craft_with(src, W, user)
 
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
