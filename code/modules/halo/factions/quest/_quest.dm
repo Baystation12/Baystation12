@@ -27,6 +27,7 @@
 	var/datum/objective/npc_quest/quest_objective
 	var/datum/faction/faction
 	var/datum/faction/attempting_faction
+	var/datum/computer_file/data/coord/coords
 	var/map_path
 	var/instance_loaded = 0
 	var/time_failed = 0
@@ -65,14 +66,14 @@
 	else
 		return "very easy"
 
-/datum/npc_quest/proc/accept_quest(var/attempt_faction)
+/datum/npc_quest/proc/accept_quest(var/datum/faction/attempt_faction)
 	quest_status = 1
 	time_failed = world.time + 20 MINUTES
 	attempting_faction = attempt_faction
 	faction.accepted_quests.Add(src)
 	faction.start_processing()
 
-/datum/faction/proc/reject_quest(var/faction_name, var/datum/npc_quest/Q, var/abandoned = 0)
+/datum/faction/proc/reject_quest(var/datum/faction/attempting_faction, var/datum/npc_quest/Q, var/abandoned = 0)
 	active_quests.Remove(Q)
 	accepted_quests.Remove(Q)
 	if(Q.quest_status == STATUS_PROGRESS)
@@ -81,14 +82,13 @@
 		if(abandoned)
 			Q.quest_status = STATUS_ABANDON
 			favour_multiplier = -2
-		add_faction_reputation(faction_name, Q.favour_reward * favour_multiplier)
+		add_faction_reputation(attempting_faction.name, Q.favour_reward * favour_multiplier)
 		completed_quests.Add(Q)
 	else
-		add_faction_reputation(faction_name, -Q.favour_reward)
+		add_faction_reputation(attempting_faction.name, -Q.favour_reward)
 		qdel(Q)
-	var/datum/faction/F = GLOB.factions_controller.factions_by_name[faction_name]
-	F.update_reputation_gear(src)
-	generate_rep_rewards(get_faction_reputation(faction_name))
+	attempting_faction.update_reputation_gear(src)
+	generate_rep_rewards(get_faction_reputation(attempting_faction.name))
 
 /datum/faction/proc/complete_quest(var/datum/npc_quest/Q)
 	active_quests.Remove(Q)
