@@ -124,6 +124,7 @@
 		/obj/item/weapon/storage/med_pouch/burn,
 		/obj/item/weapon/storage/med_pouch/oxyloss,
 		/obj/item/weapon/storage/med_pouch/toxin,
+		/obj/item/weapon/storage/med_pouch/radiation,
 		)
 
 /obj/item/weapon/storage/firstaid/surgery
