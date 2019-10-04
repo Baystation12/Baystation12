@@ -1,5 +1,0 @@
-author: "Flying_loulou"
-delete-after: True
-changes: 
-  - rscadd: "Creates the red (\"grunt\"), Yellow (Senior) and White (Chief) Damage Control Helmets"
-  - rscadd: "Damage control helmets have now been issued to the engineering department, they can be found in the engineer's personnal equipment lockers."
