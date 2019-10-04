@@ -6,7 +6,7 @@
 	)
 	additional_spawn_components = list(
 		/obj/item/weapon/stock_parts/computer/network_card/wired = 1,
-		/obj/item/weapon/stock_parts/computer/hard_drive = 1,
+		/obj/item/weapon/stock_parts/computer/hard_drive/super = 1,
 		/obj/item/weapon/stock_parts/console_screen = 1,
 		/obj/item/weapon/stock_parts/keyboard = 1,
 		/obj/item/weapon/stock_parts/power/apc/buildable = 1,
