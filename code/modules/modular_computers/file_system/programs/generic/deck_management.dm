@@ -7,6 +7,9 @@
 	filename = "deckmngr"
 	filedesc = "Deck Management"
 	nanomodule_path = /datum/nano_module/deck_management
+	program_icon_state = "request"
+	program_key_state = "rd_key"
+	program_menu_icon = "clock"
 	extended_desc = "A tool for managing shuttles, filling out flight plans, and submitting flight-related paperwork."
 	size = 18
 	available_on_ntnet = 1

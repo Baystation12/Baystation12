@@ -49,7 +49,7 @@
 			var/new_number = input("What is your position in your lineage?", "Name Nest-Lineage") as num|null
 			if(!new_number)
 				return
-			new_number = Clamp(new_number, 1, 99)
+			new_number = Clamp(new_number, 1, 999)
 			var/new_name = sanitize(input("What is the true name of your nest-lineage?", "Name Nest-Lineage") as text|null, MAX_NAME_LEN)
 			if(!new_name)
 				return

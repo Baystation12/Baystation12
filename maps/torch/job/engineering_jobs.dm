@@ -59,10 +59,8 @@
 	minimum_character_age = list(SPECIES_HUMAN = 19)
 	ideal_character_age = 30
 	alt_titles = list(
-		"Maintenance Technician",
 		"Engine Technician",
 		"Damage Control Technician",
-		"EVA Technician",
 		"Electrician",
 		"Atmospheric Technician",
 		)

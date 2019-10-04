@@ -499,8 +499,8 @@
 	icon_state = "chef"
 
 /obj/item/toy/figure/chemist
-	name = "Chemist action figure"
-	desc = "A \"Space Life\" brand Chemist action figure."
+	name = "Pharmacist action figure"
+	desc = "A \"Space Life\" brand Pharmacist action figure."
 	icon_state = "chemist"
 
 /obj/item/toy/figure/clown

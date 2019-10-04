@@ -251,7 +251,17 @@
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/weapon/W, mob/user)
-	return !SSfabrication.try_craft_with(src, W, user)
+	if((. = SSfabrication.try_craft_with(src, W, user)))
+		return
+
+	if(istype(W, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = W
+		if(S.use_to_pickup)
+			if(S.collection_mode) //Mode is set to collect all items
+				if(isturf(src.loc))
+					S.gather_all(src.loc, user)
+			else if(S.can_be_inserted(src, user))
+				S.handle_item_insertion(src)
 
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
