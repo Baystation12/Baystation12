@@ -66,6 +66,7 @@
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/pill,
 		/obj/item/weapon/reagent_containers/ivbag,
+		/obj/item/stack/material/phoron,
 		/obj/item/weapon/storage/pill_bottle,
 		)
 
