@@ -1,0 +1,5 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Thrown items will go down the ladder if they hit it."
+  - tweak: "If you use Move Up verb, it will try climbing random climbable turf above if you couldn't just straight up move up."
