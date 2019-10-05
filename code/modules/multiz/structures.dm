@@ -10,6 +10,7 @@
 	density = 0
 	opacity = 0
 	anchored = 1
+	obj_flags = OBJ_FLAG_NOFALL
 
 	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up
@@ -42,6 +43,29 @@
 
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
 	climb(user, I)
+
+/turf/hitby(atom/movable/AM, var/speed)
+	if(isobj(AM))
+		var/obj/structure/ladder/L = locate() in contents
+		if(L)
+			L.hitby(AM)
+			return
+	..()
+
+/obj/structure/ladder/hitby(obj/item/I)
+	var/area/room = get_area(src)
+	if(!room.has_gravity())
+		return
+	var/atom/blocker
+	for(var/atom/A in target_down)
+		if(!A.CanPass(I, I.loc, 1.5, 0))
+			blocker = A
+			break
+	if(blocker)
+		visible_message(SPAN_WARNING("\The [I] fails to go down \the [src], blocked by the [blocker]!"))
+	else
+		visible_message(SPAN_WARNING("\The [I] goes down \the [src]!"))
+		I.forceMove(target_down)
 
 /obj/structure/ladder/attack_hand(var/mob/M)
 	climb(M)

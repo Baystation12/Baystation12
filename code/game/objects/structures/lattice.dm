@@ -9,7 +9,7 @@
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
 	var/init_material = MATERIAL_STEEL
-	//	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_NOFALL
 
 /obj/structure/lattice/get_material()
 	return material
