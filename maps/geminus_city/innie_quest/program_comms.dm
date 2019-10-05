@@ -208,12 +208,13 @@
 		var/datum/npc_quest/Q = locate(href_list["accept_quest"])
 		Q.accept_quest(GLOB.factions_by_name["Insurrection"])
 		var/accept_hail = selected_faction.hail_quest_accept()
-		accept_hail = "I've uploaded the destination coordinates to your console. Use a portable storage drive to transfer them to your shuttle console. \
+		accept_hail = "I've uploaded the destination coordinates to your console. \
 			They'll only be valid for a short while so you'll only get one shot at this. " + accept_hail
 		say_message(selected_faction.leader_name, accept_hail)
 
 		var/datum/computer_file/data/coord/coords = new()
 		coords.generate_data(Q)
+		Q.coords = coords
 		//var/obj/item/modular_computer/MC = nano_host()
 		//MC.hard_drive.store_file(coords)
 		GLOB.factions_controller.active_quest_coords.Add(coords)

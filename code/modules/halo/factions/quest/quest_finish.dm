@@ -29,6 +29,9 @@
 		if(quest_status == STATUS_FAIL && world.time > time_failed)
 			quest_status = STATUS_TIMEOUT
 
+		GLOB.factions_controller.active_quest_coords.Remove(coords)
+		qdel(coords)
+
 	if(faction)
 		faction.complete_quest(src)
 		attempting_faction.update_reputation_gear(faction)

@@ -63,6 +63,8 @@
 		ui.open()
 
 /datum/nano_module/program/innie_shuttle/proc/reload_coords()
+	if(Debug2)
+		testing(" /datum/nano_module/program/innie_shuttle/proc/reload_coords()")
 	/*
 	//grab some stuff from our host computer
 	var/datum/computer_file/program/filemanager/PRG = program
@@ -77,8 +79,11 @@
 	. = 1
 
 	for(var/datum/computer_file/data/coord/coords in GLOB.factions_controller.active_quest_coords)
+		if(Debug2)
+			testing("found: [coords.filename]")
 		if(!coords.data_integrity())
 			. = 0
+			testing("[coords.filename] no integrity")
 			continue
 		loaded_coords.Add(list(list(
 			"name" = coords.quest.location_name,\

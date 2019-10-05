@@ -2877,6 +2877,7 @@
 #include "maps\_map_include.dm"
 #include "maps\geminus_city\geminus_city.dm"
 #include "maps\geminus_city\innie_quest\file_comms.dm"
+#include "maps\geminus_city\innie_quest\file_coord.dm"
 #include "maps\geminus_city\innie_quest\transport_area.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
