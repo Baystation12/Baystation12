@@ -326,7 +326,7 @@
 	item_state = "glowstick"
 	randpixel = 12
 	produce_heat = 0
-	activation_sound = null
+	activation_sound = 'sound/effects/glowstick.ogg'
 
 	flashlight_max_bright = 0.6
 	flashlight_inner_range = 0.1
