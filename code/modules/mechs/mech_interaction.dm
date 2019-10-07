@@ -56,7 +56,7 @@
 
 	var/modifiers = params2list(params)
 	if(modifiers["shift"])
-		A.examine(user)
+		user.examinate(A)
 		return
 
 	if(!(user in pilots) && user != src)
@@ -155,7 +155,7 @@
 			var/extra_delay = 0
 			if(ME != null)
 				ME = selected_system
-				extra_delay = ME.equipment_delay	
+				extra_delay = ME.equipment_delay
 			setClickCooldown(arms ? arms.action_delay + extra_delay : 15 + extra_delay)
 			if(system_moved)
 				temp_system.forceMove(selected_system)

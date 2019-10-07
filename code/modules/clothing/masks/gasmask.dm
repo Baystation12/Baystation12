@@ -28,7 +28,7 @@
 	var/gas_filter_strength = 1			//For gas mask filters
 
 
-/obj/item/clothing/mask/gas/examine(var/mob/user)
+/obj/item/clothing/mask/gas/examine(mob/user)
 	. = ..()
 	if(clogged)
 		to_chat(user, "<span class='warning'>The intakes are clogged with [clogged]!</span>")

@@ -113,11 +113,6 @@
 				else
 					to_chat(user, "<span class='warning'>\The [W] is empty.</span>")
 
-	examine(mob/user)
-		. = ..(user)
-		if(detonator)
-			to_chat(user, "With attached [detonator.name]")
-
 	activate(mob/user as mob)
 		if(active) return
 
@@ -184,6 +179,10 @@
 		spawn(50)		   //To make sure all reagents can work
 			qdel(src)	   //correctly before deleting the grenade.
 
+/obj/item/weapon/grenade/chem_grenade/examine(mob/user)
+	. = ..()
+	if(detonator)
+		to_chat(user, "With attached [detonator.name]")
 
 /obj/item/weapon/grenade/chem_grenade/large
 	name = "large chem grenade"

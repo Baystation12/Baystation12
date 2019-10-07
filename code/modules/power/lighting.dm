@@ -47,14 +47,16 @@
 		if(2) icon_state = "tube-construct-stage2"
 		if(3) icon_state = "tube-empty"
 
-/obj/machinery/light_construct/examine(mob/user)
-	if(!..(user, 2))
+/obj/machinery/light_construct/examine(mob/user, distance)
+	. = ..()
+	if(distance > 2)
 		return
 
 	switch(src.stage)
 		if(1) to_chat(user, "It's an empty frame.")
 		if(2) to_chat(user, "It's wired.")
 		if(3) to_chat(user, "The casing is closed.")
+
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if(isWrench(W))

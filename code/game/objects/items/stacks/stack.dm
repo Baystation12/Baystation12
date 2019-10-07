@@ -45,8 +45,9 @@
 		usr << browse(null, "window=stack")
 	return ..()
 
-/obj/item/stack/examine(mob/user)
-	if(..(user, 1))
+/obj/item/stack/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		if(!uses_charge)
 			to_chat(user, "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack.")
 		else

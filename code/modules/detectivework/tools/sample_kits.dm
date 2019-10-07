@@ -13,9 +13,9 @@
 		name = "[initial(name)] (\the [supplied])"
 		object = "[supplied], [get_area(supplied)]"
 
-/obj/item/weapon/sample/examine(var/user)
-	. = ..(user, 1)
-	if(. && object)
+/obj/item/weapon/sample/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 && object)
 		to_chat(user, "The label says: '[object]'")
 
 /obj/item/weapon/sample/print/New(var/newloc, var/atom/supplied)

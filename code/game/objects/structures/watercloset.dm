@@ -47,10 +47,10 @@
 		return
 	. = ..()
 
-/obj/structure/hygiene/examine()
+/obj/structure/hygiene/examine(mob/user)
 	. = ..()
 	if(clogged > 0)
-		to_chat(usr, "<span class='warning'>It seems to be badly clogged.</span>")
+		to_chat(user, "<span class='warning'>It seems to be badly clogged.</span>")
 
 /obj/structure/hygiene/Process()
 	if(clogged <= 0)

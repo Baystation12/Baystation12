@@ -20,8 +20,7 @@
 	var/cuff_type = "handcuffs"
 
 /obj/item/weapon/handcuffs/examine(mob/user)
-	if (!(. = ..()))
-		return
+	. = ..()
 	if (health)
 		var display = health / initial(health) * 100
 		if (display > 66)

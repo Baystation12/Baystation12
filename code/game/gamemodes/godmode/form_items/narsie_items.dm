@@ -42,9 +42,9 @@
 	base_icon = "bone_axe"
 	var/stored_power = 0
 
-/obj/item/weapon/material/twohanded/fireaxe/cult/examine(var/mob/user)
+/obj/item/weapon/material/twohanded/fireaxe/cult/examine(mob/user)
 	. = ..()
-	if(. && stored_power)
+	if(stored_power)
 		to_chat(user, "<span class='notice'>It exudes a death-like smell.</span>")
 
 /obj/item/weapon/material/twohanded/fireaxe/cult/resolve_attackby(var/atom/a, var/mob/user, var/click_params)

@@ -157,7 +157,7 @@
 /obj/machinery/portable_atmospherics/reagent_sublimator/on_update_icon()
 	icon_state = "[icon_set]-[use_power == POWER_USE_ACTIVE ? "on" : "off"]-[container ? "loaded" : "unloaded"]-[holding ? "tank" : "notank"]"
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/examine(var/mob/user)
+/obj/machinery/portable_atmospherics/reagent_sublimator/examine(mob/user)
 	. = ..()
 	if(container)
 		if(container.reagents && container.reagents.total_volume)

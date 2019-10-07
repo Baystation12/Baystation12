@@ -224,8 +224,9 @@
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
 	return term && term.terminal
 
-/obj/machinery/power/apc/examine(mob/user)
-	if(..(user, 1))
+/obj/machinery/power/apc/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		if(stat & BROKEN)
 			to_chat(user, "Looks broken.")
 			return

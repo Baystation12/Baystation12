@@ -189,8 +189,10 @@
 	else
 		return ..()
 
-/obj/vehicle/train/cargo/engine/examine(mob/user)
-	if(!..(user, 1))
+/obj/vehicle/train/cargo/engine/examine(mob/user, distance)
+	. = ..()
+
+	if(distance > 1)
 		return
 
 	if(!istype(usr, /mob/living/carbon/human))

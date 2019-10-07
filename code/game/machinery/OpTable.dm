@@ -24,7 +24,7 @@
 			computer.table = src
 			break
 
-/obj/machinery/optable/examine(var/mob/user)
+/obj/machinery/optable/examine(mob/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>The neural suppressors are switched [suppressing ? "on" : "off"].</span>")
 

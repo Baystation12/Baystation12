@@ -28,7 +28,7 @@
 	subject += " " + pick("that is extremely powerful", "which is highly efficient", "which is incredibly compact",\
 	"that runs off of phoron", "that runs off of hydrogen gas", "created by the Skrell", "that just looks really cool")
 
-/obj/item/weapon/disk/secret_project/examine(var/user)
+/obj/item/weapon/disk/secret_project/examine(mob/user)
 	..()
 	if(!locked)
 		to_chat(user, "With the disk's classified contents unlocked, \

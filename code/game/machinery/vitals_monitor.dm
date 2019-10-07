@@ -21,7 +21,7 @@
 	
 /obj/machinery/vitals_monitor/examine(mob/user)
 	. = ..()
-	if(. && victim)
+	if(victim)
 		if(stat & NOPOWER)
 			to_chat(user, SPAN_NOTICE("It's unpowered."))
 			return

@@ -11,7 +11,7 @@
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/examine(mob/user)
 	. = ..()
-	if(. && filter)
+	if(filter)
 		to_chat(user, "Capped off one end with a filter.")
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/on_update_icon()

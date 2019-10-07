@@ -73,7 +73,7 @@
 	// Good to go.
 	return 1
 
-/obj/item/weapon/stock_parts/computer/examine(var/mob/user)
+/obj/item/weapon/stock_parts/computer/examine(mob/user)
 	. = ..()
 	if(damage > damage_failure)
 		to_chat(user, "<span class='danger'>It seems to be severely damaged!</span>")
