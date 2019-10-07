@@ -94,7 +94,7 @@ Basic field subtypes.
 
 //For information between fields.
 /datum/report_field/text_label/instruction/generate_row_pencode(access, with_fields)
-	return "\[small\]\[i\][display_name()]\[i\]\[/small\]"
+	return "\[small\]\[i\][display_name()]\[/i\]\[/small\]"
 
 /datum/report_field/text_label/instruction/generate_nano_data(list/given_access)
 	var/dat = ..()
@@ -103,7 +103,7 @@ Basic field subtypes.
 
 //For headers between fields.
 /datum/report_field/text_label/header/generate_row_pencode(access, with_fields)
-	return "\[h3][display_name()]\[h3]"
+	return "\[h3][display_name()]\[/h3]"
 
 /datum/report_field/text_label/header/generate_nano_data(list/given_access)
 	var/dat = ..()
