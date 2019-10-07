@@ -33,7 +33,7 @@
 
 	maptext_x = 34
 	maptext_y = 3
-	maptext_width = 64
+	maptext_width = 72
 
 /obj/screen/movable/exosuit/hardpoint/MouseDrop()
 	..()
