@@ -26,7 +26,6 @@
 	var/list/last_movement = list(0,0)  //worldtime when ship last moved in x,y direction
 	var/fore_dir = NORTH                //what dir ship flies towards for purpose of moving stars effect procs
 
-	var/obj/machinery/computer/ship/helm/nav_control
 	var/list/engines = list()
 	var/engines_state = 0 //global on/off toggle for all engines
 	var/thrust_limit = 1  //global thrust limit for all engines, 0..1

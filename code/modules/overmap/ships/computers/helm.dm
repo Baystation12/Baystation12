@@ -17,11 +17,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	. = ..()
 	get_known_sectors()
 
-/obj/machinery/computer/ship/helm/attempt_hook_up(obj/effect/overmap/ship/sector)
-	if(!(. = ..()))
-		return
-	sector.nav_control = src
-
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
