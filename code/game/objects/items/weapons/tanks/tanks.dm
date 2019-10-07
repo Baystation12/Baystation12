@@ -64,29 +64,28 @@ var/list/global/tank_gauge_cache = list()
 	. = ..()
 
 /obj/item/weapon/tank/examine(mob/user)
-	. = ..(user, 0)
-	if(.)
-		var/descriptive
-		if(!air_contents)
-			descriptive = "empty"
-		else
-			var/celsius_temperature = air_contents.temperature - T0C
-			switch(celsius_temperature)
-				if(300 to INFINITY)
-					descriptive = "furiously hot"
-				if(100 to 300)
-					descriptive = "hot"
-				if(80 to 100)
-					descriptive = "warm"
-				if(40 to 80)
-					descriptive = "lukewarm"
-				if(20 to 40)
-					descriptive = "room temperature"
-				if(-20 to 20)
-					descriptive = "cold"
-				else
-					descriptive = "bitterly cold"
-		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
+	. = ..()
+	var/descriptive
+	if(!air_contents)
+		descriptive = "empty"
+	else
+		var/celsius_temperature = air_contents.temperature - T0C
+		switch(celsius_temperature)
+			if(300 to INFINITY)
+				descriptive = "furiously hot"
+			if(100 to 300)
+				descriptive = "hot"
+			if(80 to 100)
+				descriptive = "warm"
+			if(40 to 80)
+				descriptive = "lukewarm"
+			if(20 to 40)
+				descriptive = "room temperature"
+			if(-20 to 20)
+				descriptive = "cold"
+			else
+				descriptive = "bitterly cold"
+	to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
 
 	if(proxyassembly.assembly || wired)
 		to_chat(user, "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && proxyassembly.assembly? "and ":""][proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>")

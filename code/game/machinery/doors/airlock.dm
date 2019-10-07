@@ -1413,15 +1413,15 @@ About the new airlock wires panel:
 		..(amount)
 	update_icon()
 
-/obj/machinery/door/airlock/examine()
+/obj/machinery/door/airlock/examine(mob/user)
 	. = ..()
 	if (lock_cut_state == BOLTS_EXPOSED)
-		to_chat(usr, "The bolt cover has been cut open.")
+		to_chat(user, "The bolt cover has been cut open.")
 	if (lock_cut_state == BOLTS_CUT)
-		to_chat(usr, "The door bolts have been cut.")
+		to_chat(user, "The door bolts have been cut.")
 	if(brace)
-		to_chat(usr, "\The [brace] is installed on \the [src], preventing it from opening.")
-		to_chat(usr, brace.examine_health())
+		to_chat(user, "\The [brace] is installed on \the [src], preventing it from opening.")
+		to_chat(user, brace.examine_health())
 
 /obj/machinery/door/airlock/autoname
 

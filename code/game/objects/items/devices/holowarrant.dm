@@ -13,11 +13,11 @@
 	var/datum/computer_file/data/warrant/active
 
 //look at it
-/obj/item/device/holowarrant/examine(mob/user)
+/obj/item/device/holowarrant/examine(mob/user, distance)
 	. = ..()
 	if(active)
 		to_chat(user, "It's a holographic warrant for '[active.fields["namewarrant"]]'.")
-	if(in_range(user, src) || isghost(user))
+	if(distance <= 1)
 		show_content(user)
 	else
 		to_chat(user, "<span class='notice'>You have to be closer if you want to read it.</span>")

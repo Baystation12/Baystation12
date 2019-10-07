@@ -156,7 +156,7 @@
 			if (prob(5))
 				qdel(src)
 
-/obj/item/examine(mob/user, var/distance = -1)
+/obj/item/examine(mob/user, distance)
 	var/size
 	switch(src.w_class)
 		if(ITEM_SIZE_TINY)

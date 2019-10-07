@@ -25,9 +25,9 @@
 		Keep your crew alive and hull intact, but remember - you are not here to sightsee. Dangers are obstacles to be cleared, not the roadblocks. Weigh risks carefully and keep your Primary Mission in mind.
 		</center><hr>"}
 
-/obj/structure/sign/ecplaque/examine()
-	..()
-	to_chat(usr, "The founding principles of EC are written there: <A href='?src=\ref[src];show_info=1'>Expeditionary Directives</A>")
+/obj/structure/sign/ecplaque/examine(mob/user)
+	. = ..()
+	to_chat(user, "The founding principles of EC are written there: <A href='?src=\ref[src];show_info=1'>Expeditionary Directives</A>")
 
 /obj/structure/sign/ecplaque/CanUseTopic()
 	return STATUS_INTERACTIVE
@@ -87,7 +87,7 @@
 			fallen += "[T.owner_rank] [T.owner_name]"
 			qdel(T)
 
-/obj/structure/sign/floorplaque/examine(mob/user)
-	. = ..(user, 2)
-	if (. && fallen.len)
+/obj/structure/sign/floorplaque/examine(mob/user, distance)
+	. = ..()
+	if (distance <= 2 && fallen.len)
 		to_chat(user, "<b>The fallen:</b> [jointext(fallen, "<br>")]")

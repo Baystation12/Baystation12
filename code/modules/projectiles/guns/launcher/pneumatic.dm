@@ -99,8 +99,9 @@
 	item_storage.remove_from_storage(launched, src)
 	return launched
 
-/obj/item/weapon/gun/launcher/pneumatic/examine(mob/user)
-	if(!..(user, 2))
+/obj/item/weapon/gun/launcher/pneumatic/examine(mob/user, distance)
+	. = ..()
+	if(distance > 2)
 		return
 	to_chat(user, "The valve is dialed to [pressure_setting]%.")
 	if(tank)

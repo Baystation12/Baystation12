@@ -21,7 +21,7 @@
 				A.activate()
 
 /obj/structure/closet/crate/examine(mob/user)
-	..()
+	. = ..()
 	if(rigged && opened)
 		var/list/devices = list()
 		for(var/obj/item/device/assembly_holder/H in src)

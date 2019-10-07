@@ -79,7 +79,7 @@
 		overlays += welder_image
 
 /obj/item/weapon/weldpack/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	to_chat(user, text("\icon[] [] units of fuel left!", src, src.reagents.total_volume))
 
 	if(welder)

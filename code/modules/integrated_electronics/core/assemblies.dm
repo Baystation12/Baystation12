@@ -52,8 +52,6 @@
 
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..()
-	if(!.)
-		return
 	if(IC_FLAG_ANCHORABLE & circuit_flags)
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
@@ -300,7 +298,7 @@
 	overlays += detail_overlay
 
 /obj/item/device/electronic_assembly/examine(mob/user)
-	..()
+	. = ..()
 	for(var/I in assembly_components)
 		var/obj/item/integrated_circuit/IC = I
 		IC.external_examine(user)

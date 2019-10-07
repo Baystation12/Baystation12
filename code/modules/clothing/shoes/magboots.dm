@@ -84,7 +84,7 @@
 	wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	var/state = "disabled"
 	if(item_flags & ITEM_FLAG_NOSLIP)
 		state = "enabled"

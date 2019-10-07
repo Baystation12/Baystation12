@@ -114,7 +114,7 @@
 			show_inv(usr)
 			return 1
 
-/mob/living/simple_animal/crow/examine(var/mob/user)
+/mob/living/simple_animal/crow/examine(mob/user)
 	. = ..()
 	if(Adjacent(src))
 		if(messenger_bag)

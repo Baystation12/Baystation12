@@ -115,8 +115,8 @@
 /obj/effect/bluegoast/proc/mirror_dir(var/atom/movable/am, var/old_dir, var/new_dir)
 	set_dir(GLOB.reverse_dir[new_dir])
 
-/obj/effect/bluegoast/examine(user)
-	return daddy.examine(user)
+/obj/effect/bluegoast/examine()
+	return daddy.examine(arglist(args))
 
 /obj/effect/bluegoast/proc/blueswitch()
 	var/mob/living/carbon/human/H = new(get_turf(src), daddy.species.name)
