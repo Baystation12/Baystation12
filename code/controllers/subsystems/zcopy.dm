@@ -190,7 +190,7 @@ SUBSYSTEM_DEF(zcopy)
 
 		T.z_queued -= 1
 		if (!no_mc_tick && T.above)
-			T.above.update_mimic(FALSE)
+			T.above.update_mimic()
 
 		if (no_mc_tick)
 			CHECK_TICK

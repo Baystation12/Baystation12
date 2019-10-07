@@ -71,7 +71,7 @@ What is the naming convention for planes or layers?
 	#define DEBRIS_LAYER                 1
 	#define DUST_LAYER                   2
 
-// Openspace uses planes -80 through -74.
+// Openspace uses planes -80 through -69.
 
 #define OVER_OPENSPACE_PLANE        -3
 
