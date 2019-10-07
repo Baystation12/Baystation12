@@ -68,9 +68,9 @@
 		deactivate()
 	. = ..()
 
-/obj/item/device/uplink_service/examine(var/user)
-	. = ..(user, 1)
-	if(.)
+/obj/item/device/uplink_service/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		switch(state)
 			if(AWAITING_ACTIVATION)
 				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")

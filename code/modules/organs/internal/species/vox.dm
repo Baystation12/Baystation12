@@ -185,8 +185,8 @@
 	do_backup()
 	robotize()
 
-/obj/item/organ/internal/voxstack/examine(var/mob/user)
-	. = ..(user)
+/obj/item/organ/internal/voxstack/examine(mob/user)
+	. = ..()
 
 	var/user_vox = isspecies(user, SPECIES_VOX) || isspecies(user, SPECIES_VOX_ARMALIS)
 	if (istype(backup))

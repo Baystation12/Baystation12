@@ -20,7 +20,7 @@
 	return tally
 
 /mob/living/bot/remotebot/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the \icon[holding] [holding].</span>")
 

@@ -34,7 +34,7 @@
 	. += "  <a href='?src=\ref[src];look_at_me=1'>\[View\]</a>"
 
 /obj/item/clothing/accessory/badge/examine(user)
-	..()
+	. = ..()
 	if(stored_name)
 		to_chat(user,"It reads: [stored_name], [badge_string].")
 
@@ -98,7 +98,7 @@
 	name = "[name] ([badge_number])"
 
 /obj/item/clothing/accessory/badge/holo/examine(user)
-	..()
+	. = ..()
 	if(badge_number)
 		to_chat(user,"The badge number is [badge_number].")
 

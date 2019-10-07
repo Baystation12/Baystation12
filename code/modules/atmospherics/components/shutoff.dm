@@ -12,8 +12,8 @@
 /obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[open]"
 
-/obj/machinery/atmospherics/valve/shutoff/examine(var/mob/user)
-	..()
+/obj/machinery/atmospherics/valve/shutoff/examine(mob/user)
+	. = ..()
 	to_chat(user, "The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"].")
 
 /obj/machinery/atmospherics/valve/shutoff/Initialize()

@@ -31,8 +31,7 @@
 	boombox_break()
 
 /obj/item/device/boombox/examine(mob/user)
-	if(!(. = ..(user)))
-		return
+	. = ..()
 	if(!panel)
 		to_chat(user, SPAN_NOTICE("The front panel is unhinged."))
 	if(broken)

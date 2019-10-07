@@ -39,7 +39,7 @@
 
 /obj/structure/stasis_cage/examine(mob/user)
 	. = ..()
-	if(. && contained)
+	if(contained)
 		to_chat(user, "\The [contained] is kept inside.")
 
 /obj/structure/stasis_cage/proc/contain(var/mob/living/simple_animal/animal)

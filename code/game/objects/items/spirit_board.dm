@@ -8,7 +8,7 @@
 	var/planchette = "A"
 	var/lastuser = null
 
-/obj/item/weapon/spirit_board/examine(var/user)
+/obj/item/weapon/spirit_board/examine(mob/user)
 	..()
 	to_chat(user, "The planchette is sitting at \"[planchette]\".")
 
