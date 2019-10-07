@@ -25,13 +25,6 @@
 		list(mode_name="long bursts",   burst=8, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,0,-1,-1,-1,-1,-2,-2), dispersion=list(0.0, 0.0, 0.5, 0.6, 0.8, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/on_update_icon()
-	..()
-	if(ammo_magazine)
-		icon_state = "prototype"
-	else
-		icon_state = "prototype-empty"
-
 /obj/item/weapon/gun/projectile/automatic/machine_pistol
 	name = "machine pistol"
 	desc = "The Hephaestus Industries MP6 Vesper, A fairly common machine pistol. Sometimes refered to as an 'uzi' by the backwater spacers it is often associated with."
@@ -168,7 +161,7 @@
 /obj/item/weapon/gun/projectile/automatic/sec_smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		overlays += image(icon, "mag-[round(ammo_magazine.stored_ammo.len,4)]")
+		overlays += image(icon, "mag-[round(ammo_magazine.stored_ammo.len,5)]")
 	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
 		overlays += image(icon, "ammo-ok")
 	else
