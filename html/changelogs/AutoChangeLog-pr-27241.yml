@@ -1,0 +1,4 @@
+author: "PhosphoricPanda"
+delete-after: True
+changes: 
+  - tweak: "Stabilization kits now have a radiation pouch."
