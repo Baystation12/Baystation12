@@ -28,5 +28,5 @@
 
 /obj/item/weapon/material/urn/examine(mob/user)
 	. = ..()
-	if(. && contents.len)
+	if(contents.len)
 		to_chat(user, "\The [src] is full.")

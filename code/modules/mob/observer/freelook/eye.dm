@@ -51,7 +51,7 @@
 	return 0
 
 /mob/observer/eye/examine(mob/user)
-	return
+	return TRUE
 
 /mob/observer/eye/proc/possess(var/mob/user)
 	if(owner && owner != user)

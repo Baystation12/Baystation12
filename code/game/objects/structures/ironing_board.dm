@@ -42,7 +42,7 @@
 
 	. = ..()
 
-/obj/structure/bed/roller/ironingboard/examine(var/mob/user)
+/obj/structure/bed/roller/ironingboard/examine(mob/user)
 	. = ..()
 	if(cloth)
 		to_chat(user, "<span class='notice'>\The \icon[cloth] [cloth] lies on it.</span>")

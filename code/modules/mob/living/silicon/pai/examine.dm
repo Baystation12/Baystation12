@@ -1,5 +1,5 @@
-/mob/living/silicon/pai/examine(mob/user)
-	. = ..(user, infix = ", personal AI")
+/mob/living/silicon/pai/examine(mob/user, distance)
+	. = ..(user, distance, infix = ", personal AI")
 
 	var/msg = ""
 	switch(src.stat)

@@ -22,7 +22,7 @@
 		update_icon()
 
 /obj/item/weapon/gun/launcher/alien/examine(mob/user)
-	..(user)
+	. = ..()
 	to_chat(user, "It has [ammo] [ammo_name]\s remaining.")
 
 /obj/item/weapon/gun/launcher/alien/consume_next_projectile()

@@ -102,9 +102,9 @@
 	var/new_range = range + (rand(0,6) / severity) - (rand(0,3) / severity)
 	set_range(new_range)
 
-obj/item/device/suit_sensor_jammer/examine(var/user)
-	. = ..(user, 3)
-	if(.)
+obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 3)
 		var/list/message = list()
 		message += "This device appears to be [active ? "" : "in"]active and "
 		if(bcell)

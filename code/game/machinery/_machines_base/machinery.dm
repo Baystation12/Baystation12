@@ -409,25 +409,24 @@ Class Procs:
 		to_chat(user, "<span class='notice'>	[initial(thing.name)] ([uncreated_component_parts[path] || 1])</span>")
 
 /obj/machinery/examine(mob/user)
-	. = ..(user)
-	if(.)
-		if(component_parts && hasHUD(user, HUD_SCIENCE))
-			display_parts(user)
-		if(stat & NOSCREEN)
-			to_chat(user, "It is missing a screen, making it hard to interact with.")
-		else if(stat & NOINPUT)
-			to_chat(user, "It is missing any input device.")
-		else if((stat & NOPOWER) && !interact_offline)
-			to_chat(user, "It is not receiving power.")
-		if(construct_state && construct_state.mechanics_info())
-			to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
-		var/list/missing = missing_parts()
-		if(missing)
-			var/list/parts = list()
-			for(var/type in missing)
-				var/obj/item/fake_thing = type
-				parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
-			to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
+	. = ..()
+	if(component_parts && hasHUD(user, HUD_SCIENCE))
+		display_parts(user)
+	if(stat & NOSCREEN)
+		to_chat(user, "It is missing a screen, making it hard to interact with.")
+	else if(stat & NOINPUT)
+		to_chat(user, "It is missing any input device.")
+	else if((stat & NOPOWER) && !interact_offline)
+		to_chat(user, "It is not receiving power.")
+	if(construct_state && construct_state.mechanics_info())
+		to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
+	var/list/missing = missing_parts()
+	if(missing)
+		var/list/parts = list()
+		for(var/type in missing)
+			var/obj/item/fake_thing = type
+			parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
+		to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(var/depth)

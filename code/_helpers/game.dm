@@ -43,9 +43,9 @@
 	if (isarea(A))
 		return A
 
-/proc/in_range(source, user)
+/proc/in_range(atom/source, mob/user)
 	if(get_dist(source, user) <= 1)
-		return 1
+		return source.z == user.z
 
 	return 0 //not in range and not telekinetic
 

@@ -54,8 +54,9 @@
 	var/emagged = 0
 	var/charge = 0
 
-/obj/item/device/lightreplacer/examine(mob/user)
-	if(..(user, 2))
+/obj/item/device/lightreplacer/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 2)
 		to_chat(user, "It has [uses] light\s remaining.")
 
 /obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
