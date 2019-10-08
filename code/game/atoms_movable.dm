@@ -157,10 +157,14 @@
 		minor_dir = dx
 		minor_dist = dist_x
 
+	// and yet it moves
+	if(src.does_spin)
+		src.SpinAnimation(speed = 4, loops = 1)
+
 	while(src && target && src.throwing && istype(src.loc, /turf) \
-		  && ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < range) \
-		  	   || (a && a.has_gravity == 0) \
-			   || istype(src.loc, /turf/space)))
+			&& ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < range) \
+				|| (a && a.has_gravity == 0) \
+				|| istype(src.loc, /turf/space)))
 		// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 		var/atom/step
 		if(error >= 0)
@@ -179,9 +183,6 @@
 			dist_since_sleep = 0
 			sleep(1)
 		a = get_area(src.loc)
-		// and yet it moves
-		if(src.does_spin)
-			src.SpinAnimation(speed = 4, loops = 1)
 
 	//done throwing, either because it hit something or it finished moving
 	if(isobj(src)) src.throw_impact(get_turf(src),speed)
