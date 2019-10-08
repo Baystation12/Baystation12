@@ -443,8 +443,8 @@
 	var/image/light = image('icons/skybox/planet.dmi', "lightrim")
 	skybox_image.overlays += light
 
-	skybox_image.pixel_x = rand(0,256)
-	skybox_image.pixel_y = rand(0,256)
+	skybox_image.pixel_x = rand(0,64)
+	skybox_image.pixel_y = rand(128,256)
 	skybox_image.appearance_flags = RESET_COLOR
 
 /obj/effect/overmap/sector/exoplanet/proc/get_surface_color()
