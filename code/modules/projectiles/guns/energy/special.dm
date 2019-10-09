@@ -230,9 +230,11 @@
 	return ..()
 
 /obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
-	if(power_supply.checked_use(charge_cost/2)) //consumes half a shot per use
-		if(M)//makes spark and eyecheck for deconstructing things
-			M.welding_eyecheck()
+	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
+		if(M)
+			M.welding_eyecheck()//Welding tool eye check
+			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
+				return 0
 		spark_system.start()
 		return 1
 	handle_click_empty(M)
