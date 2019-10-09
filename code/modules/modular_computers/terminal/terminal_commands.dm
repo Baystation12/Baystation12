@@ -159,7 +159,7 @@ Subtypes
 	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
 	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
 		return
-	return "... Estimating location: [get_area(comp)]"
+	return "... Estimating location: [get_area(comp.get_physical_host())]"
 
 /datum/terminal_command/ping
 	name = "ping"
