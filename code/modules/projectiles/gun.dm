@@ -568,10 +568,12 @@
 /obj/item/weapon/gun/proc/can_autofire()
 	return (can_autofire && world.time >= next_fire_time)
 
-/obj/item/weapon/gun/proc/check_accidents(mob/living/user)
+/obj/item/weapon/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
 	if(istype(user))
-		if(!safety() && user.skill_fail_prob(SKILL_WEAPONS, 20, SKILL_EXPERT, 2) && special_check(user))
-			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
+		if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
+			user.visible_message(SPAN_WARNING(message))
 			var/list/targets = list(user)
-			targets += trange(2, src)
-			afterattack(pick(targets), user)
+			targets += trange(2, get_turf(src))
+			var/picked = pick(targets)
+			afterattack(picked, user)
+			return 1
