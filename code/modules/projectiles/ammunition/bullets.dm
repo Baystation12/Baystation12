@@ -19,13 +19,13 @@
 /obj/item/ammo_casing/pistol/small
 	desc = "A small pistol bullet casing."
 	caliber = CALIBER_PISTOL_SMALL
-	projectile_type = /obj/item/projectile/bullet/pistol
+	projectile_type = /obj/item/projectile/bullet/pistol/holdout
 	icon_state = "smallcasing"
 	spent_icon = "smallcasing-spent"
 
 /obj/item/ammo_casing/pistol/small/rubber
 	desc = "A small pistol rubber bullet casing."
-	projectile_type = /obj/item/projectile/bullet/pistol/rubber
+	projectile_type = /obj/item/projectile/bullet/pistol/rubber/holdout
 	icon_state = "pistolcasing_r"
 
 /obj/item/ammo_casing/pistol/small/practice
