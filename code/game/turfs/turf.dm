@@ -33,12 +33,18 @@
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
 
-/turf/New()
-	..()
+	var/tmp/changing_turf
+
+/turf/Initialize(mapload)
+	. = ..()
 	if(dynamic_lighting)
 		luminosity = 0
 	else
 		luminosity = 1
+
+	opaque_counter = opacity
+	if (mapload && permit_ao)
+		queue_ao()
 
 /turf/on_update_icon()
 	update_flood_overlay()
@@ -52,9 +58,17 @@
 		QDEL_NULL(flood_object)
 
 /turf/Destroy()
+	if (!changing_turf)
+		crash_with("Improper turf qdel. Do not qdel turfs directly.")
+
+	changing_turf = FALSE
+
 	remove_cleanables()
 	fluid_update()
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
+	if (ao_queued)
+		SSao.queue -= src
+		ao_queued = 0
 	..()
 	return QDEL_HINT_IWILLGC
 

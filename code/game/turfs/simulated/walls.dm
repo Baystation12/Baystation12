@@ -47,7 +47,6 @@
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
-	dismantle_wall(null,null,1)
 	. = ..()
 
 // Walls always hide the stuff below them.
