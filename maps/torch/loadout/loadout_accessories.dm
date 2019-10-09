@@ -218,24 +218,21 @@
  tactical accessories
 *********************/
 /datum/gear/tactical/ubac
-	display_name = "black UBAC shirt"
-	path = /obj/item/clothing/accessory/ubac
+	display_name = "UBAC shirt selection"
+	category = /obj/item/clothing/accessory/ubac
 	allowed_roles = ARMORED_ROLES
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet)
 
-/datum/gear/tactical/ubac/blue
-	display_name = "navy blue UBAC shirt"
-	path = /obj/item/clothing/accessory/ubac/blue
-	allowed_branches = list(/datum/mil_branch/fleet)
+/datum/gear/tactical/ubac
 
-/datum/gear/tactical/ubac/misc
-	display_name = "miscellaneous UBAC shirt selection"
 	path = /obj/item/clothing/accessory/ubac
 	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/tactical/ubac/misc/New()
+/datum/gear/tactical/ubac/New()
 	..()
 	var/shirts = list()
+	shirts["black UBAC shirt"] = /obj/item/clothing/accessory/ubac
+	shirts["blue UBAC shirt"] = /obj/item/clothing/accessory/ubac/blue
 	shirts["green UBAC shirt"] = /obj/item/clothing/accessory/ubac/green
 	shirts["tan UBAC shirt"] = /obj/item/clothing/accessory/ubac/tan
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
