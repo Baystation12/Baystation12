@@ -77,6 +77,39 @@
 				destination.loc.Entered(src, origin)
 	return 1
 
+/atom/movable/forceMove(atom/dest)
+	var/old_loc = loc
+	. = ..()
+	if (.)
+		// observ
+		if(!loc)
+			GLOB.moved_event.raise_event(src, old_loc, null)
+
+		// freelook
+		if(opacity)
+			updateVisibility(src)
+
+		// lighting
+		if (light_sources)	// Yes, I know you can for-null safely, but this is slightly faster. Hell knows why.
+			for (var/datum/light_source/L in light_sources)
+				L.source_atom.update_light()
+
+/atom/movable/Move(...)
+	var/old_loc = loc
+	. = ..()
+	if (.)
+		if(!loc)
+			GLOB.moved_event.raise_event(src, old_loc, null)
+
+		// freelook
+		if(opacity)
+			updateVisibility(src)
+
+		// lighting
+		if (light_sources)	// Yes, I know you can for-null safely, this is slightly faster. Hell knows why.
+			for (var/datum/light_source/L in light_sources)
+				L.source_atom.update_light()
+
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/speed)
 	if(istype(hit_atom,/mob/living))
