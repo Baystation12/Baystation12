@@ -36,6 +36,7 @@
 
 //	log_debug("Replacing [src.type] with [N]")
 
+	changing_turf = TRUE
 
 	if(connections) connections.erase_all()
 
@@ -53,6 +54,9 @@
 	for(var/atom/movable/A in src)
 		old_contents += A
 		A.forceMove(null)
+
+	// Run the Destroy() chain.
+	qdel(src)
 
 	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 	for(var/atom/movable/A in old_contents)

@@ -49,10 +49,6 @@
 		holy = 1
 	levelupdate()
 
-/turf/simulated/Destroy()
-	deltimer(timer_id)
-	return ..()
-
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor=COLOR_BLOOD_HUMAN)
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
