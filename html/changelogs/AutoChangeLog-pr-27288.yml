@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Stack recipies that you don't have skills for are now visible too, marked with red warning label. You can even attempt them, wasting resources almost certainly."
