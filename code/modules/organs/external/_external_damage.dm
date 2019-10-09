@@ -32,7 +32,6 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
 
-	var/can_cut = !BP_IS_ROBOTIC(src) && (sharp || prob(brute*2))
 	var/spillover = 0
 	var/pure_brute = brute
 	if(!is_damageable(brute + burn))
@@ -70,13 +69,13 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
-	var/block_cut = !(brute > 15 || !(species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
+	var/block_cut = (species.species_flags & SPECIES_FLAG_NO_MINOR_CUT) && brute <= 15
+	var/can_cut = !block_cut && !BP_IS_ROBOTIC(src) && (sharp || prob(brute))
 
 	if(brute)
 		var/to_create = BRUISE
 		if(can_cut)
-			if(!block_cut)
-				to_create = CUT
+			to_create = CUT
 			//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
 			if(sharp && !edge)
 				to_create = PIERCE
@@ -117,6 +116,10 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 	if(owner && update_damstate())
 		owner.UpdateDamageIcon()
+
+	if(created_wound && isobj(used_weapon))
+		var/obj/O = used_weapon
+		O.after_wounding(src, created_wound)
 
 	return created_wound
 
