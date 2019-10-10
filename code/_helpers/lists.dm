@@ -147,7 +147,7 @@ Checks if a list has the same entries and values as an element of big.
 
 //Picks a random element from a list based on a weighting system:
 //1. Adds up the total of weights for each element
-//2. Gets the total from 0% to 100% of previous total value.
+//2. Generates a random value between 0% to 100% of previous total value.
 //3. For each element in the list, subtracts its weighting from that number
 //4. If that makes the number 0 or less, return that element.
 /proc/pickweight(list/L, base_weight = 1)
@@ -164,11 +164,11 @@ Checks if a list has the same entries and values as an element of big.
 		if (total <= 0)
 			return item
 
+
 //Picks a number of elements from a list based on weight.
 //This is highly optimised and good for things like grabbing 200 items from a list of 40,000
 //Much more efficient than many pickweight calls
 /proc/pickweight_mult(list/L, quantity, base_weight = 1)
-	//First we total the list as normal
 	var/total = 0
 	var/item
 	for (item in L)
@@ -177,28 +177,23 @@ Checks if a list has the same entries and values as an element of big.
 		total += L[item]
 
 	//Next we will make a list of randomly generated numbers, called Requests
-	//It is critical that this list be sorted in ascending order, so we will build it in that order
-	//First one is free, so we start counting at 2
+	//It is critical that this list be sorted in ascending order, so we will build it in that order. First one is free, so we start counting at 2
 	var/list/requests = list(rand(1, total))
 	for (var/i in 2 to quantity)
 		//Each time we generate the next request
 		var/newreq = rand()* total
-		//We will loop through all existing requests
-		for (var/j in 1 to requests.len)
-			//We keep going through the list until we find an element which is bigger than the one we want to add
-			if (requests[j] > newreq)
-				//And then we insert the newqreq at that point, pushing everything else forward
-				requests.Insert(j, newreq)
+
+		for (var/j in 1 to requests.len)	//We will loop through all existing requests
+
+			if (requests[j] > newreq)	//We keep going through the list until we find an element which is bigger than the one we want to add
+				requests.Insert(j, newreq)	//And then we insert the newqreq at that point, pushing everything else forward
 				break
 
 
 
-	//Now when we get here, we have a list of random numbers sorted in ascending order.
-	//The length of that list is equal to Quantity passed into this function
-	//Next we make a list to store results
+	//We have a list of random numbers sorted in ascending order.
 	var/list/results = list()
 
-	//Zero the total, we'll reuse it
 	total = 0
 
 	//Now we will iterate forward through the items list, adding each weight to the total
@@ -211,12 +206,8 @@ Checks if a list has the same entries and values as an element of big.
 			results += item //We add this item to the results list
 			requests.Cut(1,2) //And we cut off the top of the requests list
 
-			//This while loop will repeat until the next request is higher than the total.
-			//The current item might be added to the results list many times, in this process
+			//This while loop will repeat until the next request is higher than the total. The current item might be added to the results list many times, in this process
 
-	//By the time we get here:
-		//Requests will be empty
-		//Results will have a length of quality
 	return results
 
 //Pick a random element from the list and remove it from the list.
@@ -807,3 +798,9 @@ proc/dd_sortedTextList(list/incoming)
 		if(ispath(T, key))
 			return key
 
+// Gets the first instance that is of the given type (strictly)
+/proc/get_instance_of_strict_type(var/list/L, var/T)
+	for(var/key in L)
+		var/atom/A = key
+		if(A.type == T)
+			return A
