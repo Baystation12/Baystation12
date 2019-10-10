@@ -1147,10 +1147,6 @@
 	icon_state = "medbay"
 	req_access = list(access_medical)
 
-/area/medical/infirmary/annex
-	name = "\improper Infirmary Annex"
-	color = COLOR_ALUMINIUM
-
 /area/medical/infirmreception
 	name = "\improper Infirmary Reception"
 	icon_state = "medbay2"
