@@ -20,7 +20,7 @@
 	darksight_tint = DARKTINT_MODERATE
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
-	breath_pressure = 20
+	breath_pressure = 18
 	slowdown = 0.5
 	brute_mod = 0.8
 	flash_mod = 1.2
