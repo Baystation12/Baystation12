@@ -8,7 +8,7 @@
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 100
+	hardness = MATERIAL_VERY_HARD + 20
 	brute_armor = 10
 	burn_armor = 50		// Diamond walls are immune to fire, therefore it makes sense for them to be almost undamageable by burn damage type.
 	stack_origin_tech = list(TECH_MATERIAL = 6)
@@ -28,7 +28,7 @@
 
 /material/diamond/crystal
 	name = MATERIAL_CRYSTAL
-	hardness = 80
+	hardness = MATERIAL_VERY_HARD
 	stack_type = null
 	ore_compresses_to = null
 	sale_price = null
@@ -44,7 +44,7 @@
 	icon_colour = "#d9c179"
 	shard_type = SHARD_STONE_PIECE
 	weight = 22
-	hardness = 55
+	hardness = MATERIAL_HARD - 5
 	brute_armor = 3
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -62,7 +62,7 @@
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
 	icon_colour = "#aaaaaa"
 	weight = 26
-	hardness = 60
+	hardness = MATERIAL_HARD
 	brute_armor = 3
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble

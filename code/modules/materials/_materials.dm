@@ -88,7 +88,7 @@
 	var/list/window_options = list()
 
 	// Damage values.
-	var/hardness = 60            // Prob of wall destruction by hulk, used for edge damage in weapons.
+	var/hardness = MATERIAL_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/weight = 20              // Determines blunt damage/throwforce for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
