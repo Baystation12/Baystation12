@@ -123,5 +123,5 @@
 /obj/item/weapon/stock_parts/computer/card_slot/Destroy()
 	loc.verbs -= /obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id
 	if(stored_card)
-		stored_card.dropInto(loc)
+		QDEL_NULL(stored_card)
 	return ..()
