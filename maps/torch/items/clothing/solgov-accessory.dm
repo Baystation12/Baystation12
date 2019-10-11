@@ -352,8 +352,8 @@ armour attachments
 	icon_state = "medictag"
 
 /obj/item/clothing/accessory/armor/tag/solgov/agent
-	name = "\improper OCIE AGENT tag"
-	desc = "An armor tag with the word OCIE AGENT printed in gold lettering on it."
+	name = "\improper SFP AGENT tag"
+	desc = "An armor tag with the words SFP AGENT printed in gold lettering on it."
 	icon_state = "agenttag"
 
 /obj/item/clothing/accessory/armor/tag/solgov/com

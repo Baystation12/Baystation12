@@ -356,7 +356,7 @@
 
 /obj/item/clothing/suit/storage/toggle/agent_jacket
 	name = "agent jacket"
-	desc = "A black leather jacket belonging to an agent of the Office of Civil Investigation and Enforcement."
+	desc = "A black leather jacket belonging to an agent of the Sol Federal Police."
 	icon_state = "agent_jacket"
 	icon_open = "agent_jacket_open"
 	icon_closed = "agent_jacket"

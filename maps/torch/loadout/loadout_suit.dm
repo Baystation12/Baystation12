@@ -113,7 +113,7 @@
 	armors["tan plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/tan
 	gear_tweaks += new/datum/gear_tweak/path(armors)
 
-/datum/gear/suit/ocie
+/datum/gear/suit/sfp
 	display_name = "Agent's jacket"
 	path = /obj/item/clothing/suit/storage/toggle/agent_jacket
 	allowed_roles = list(/datum/job/detective)
