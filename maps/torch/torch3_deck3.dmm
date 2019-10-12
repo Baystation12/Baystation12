@@ -12541,7 +12541,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/uniform_vendor{
 	dir = 8;
-	icon_state = "uniform"
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
