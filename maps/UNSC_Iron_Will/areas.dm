@@ -6,9 +6,6 @@
 	poweralm = 1
 	requires_power = 1
 
-/area/corvette/unscironwill/exterior
-	name = "UNSC Iron Will Exterior"
-
 //deck 1 areas
 /area/corvette/unscironwill/Bridge
 	name = "UNSC Iron Will Bridge"
@@ -71,9 +68,6 @@
 
 /area/corvette/unscironwill/starboardumbilical
 	name = "UNSC Iron Will Starboard Docking Umbilical"
-
-/area/corvette/unscironwill/rearporthallway
-	name = "UNSC Iron Will Rear Port Hallway"
 
 /area/corvette/unscironwill/porthangar
 	name = "UNSC Iron Will Port Hangar"
