@@ -18,3 +18,10 @@
 /obj/machinery/power/smes/advanced/update_icon()
 	//todo: overlays showing power level
 	return
+
+/obj/machinery/power/smes/advanced/max_cap_in_out/Initialize()
+	. = ..()
+	input_attempt = TRUE
+	output_attempt = TRUE
+	input_level = input_level_max
+	output_level = output_level_max
