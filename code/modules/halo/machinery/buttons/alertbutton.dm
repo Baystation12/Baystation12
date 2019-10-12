@@ -21,21 +21,6 @@
 	update_icon()
 	operating = 0
 
-/obj/machinery/button/toggle/alarm_button/corvette
-	area_base = /area/corvette/unscironwill
-
-/obj/machinery/button/toggle/alarm_button/corvette/v2
-	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j1.ogg'
-	alarm_loop_time = 4.898 SECONDS //The amount of time it takes for the alarm sound to end. Used for restarting the sound.
-
-/obj/machinery/button/toggle/alarm_button/corvette/v3
-	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j2.ogg'
-	alarm_loop_time = 6.535 SECONDS
-
-/obj/machinery/button/toggle/alarm_button/corvette/v4
-	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j3.ogg'
-	alarm_loop_time = 15.267 SECONDS
-
 /obj/machinery/button/toggle/alarm_button/proc/toggle_alert(var/on = 1)
 	//First, tell all players in the ship-area that an alert has started.
 	for(var/mob/m in GLOB.player_list)
@@ -60,16 +45,3 @@
 		else
 			l.brightness_color = "#FFFFFF" //The base light-color.
 		l.update()
-
-/obj/random_corvette_alarm_button
-	name = "Random Corvette Alarm Button"
-
-/obj/random_corvette_alarm_button/New()
-	var/obj/to_spawn = pick(list(\
-	/obj/machinery/button/toggle/alarm_button/corvette = 75,/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,\
-	/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,/obj/machinery/button/toggle/alarm_button/corvette/v4 = 5
-	))
-	new to_spawn (loc)
-
-/obj/random_corvette_alarm_button/Initialize()
-	return INITIALIZE_HINT_QDEL
