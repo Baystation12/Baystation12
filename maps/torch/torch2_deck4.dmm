@@ -226,6 +226,17 @@
 /area/maintenance/fourthdeck/starboard)
 "aJ" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	display_name = "Starboard Dock C";
+	frequency = 1380;
+	id_tag = "admin_shuttle_dock_airlock";
+	pixel_x = -24;
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
+	tag_airpump = "admin_shuttle_dock_pump";
+	tag_chamber_sensor = "admin_shuttle_dock_sensor";
+	tag_exterior_door = "admin_shuttle_dock_outer";
+	tag_interior_door = "admin_shuttle_dock_inner"
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "aK" = (
@@ -305,18 +316,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
 "bk" = (
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	display_name = "Starboard Dock C";
-	frequency = 1380;
-	id_tag = "admin_shuttle_dock_airlock";
-	pixel_x = -24;
-	pixel_y = 26;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	tag_airpump = "admin_shuttle_dock_pump";
-	tag_chamber_sensor = "admin_shuttle_dock_sensor";
-	tag_exterior_door = "admin_shuttle_dock_outer";
-	tag_interior_door = "admin_shuttle_dock_inner"
-	},
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
 	dir = 8
@@ -3503,6 +3502,21 @@
 	},
 /obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/fourthdeck/aft)
+"lQ" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	display_name = "Port Dock C";
+	frequency = 1331;
+	id_tag = "rescue_shuttle_dock_airlock";
+	pixel_x = -24;
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
+	tag_airpump = "rescue_shuttle_dock_pump";
+	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
+	tag_exterior_door = "rescue_shuttle_dock_outer";
+	tag_interior_door = "rescue_shuttle_dock_inner"
+	},
+/turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "lX" = (
 /obj/structure/disposalpipe/segment{
@@ -10529,18 +10543,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
 "JP" = (
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	display_name = "Port Dock C";
-	frequency = 1331;
-	id_tag = "rescue_shuttle_dock_airlock";
-	pixel_x = -24;
-	pixel_y = -24;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	tag_airpump = "rescue_shuttle_dock_pump";
-	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
-	tag_exterior_door = "rescue_shuttle_dock_outer";
-	tag_interior_door = "rescue_shuttle_dock_inner"
-	},
 /obj/effect/floor_decal/corner/red/half{
 	icon_state = "bordercolorhalf";
 	dir = 8
@@ -34953,7 +34955,7 @@ vH
 aY
 aY
 aY
-Ga
+aY
 aY
 aY
 aY
@@ -35958,9 +35960,9 @@ Mp
 Mp
 VW
 VW
-lr
-oW
-Ga
+WI
+vH
+aY
 Ga
 Ga
 Ga
@@ -40830,7 +40832,7 @@ uj
 uj
 Jx
 JP
-aJ
+lQ
 Px
 Ms
 Yj

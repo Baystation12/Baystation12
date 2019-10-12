@@ -3394,6 +3394,7 @@
 /area/maintenance/seconddeck/aftstarboard)
 "gZ" = (
 /obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/foreport)
 "hb" = (
