@@ -443,6 +443,14 @@
 	var/image/light = image('icons/skybox/planet.dmi', "lightrim")
 	skybox_image.overlays += light
 
+	if(prob(20))
+		var/image/rings = image('icons/skybox/planet_rings.dmi')
+		rings.icon_state = pick("sparse", "dense")
+		rings.color = pick("#f0fcff", "#dcc4ad", "#d1dcad", "#adb8dc")
+		rings.pixel_x = -128
+		rings.pixel_y = -128
+		skybox_image.overlays += rings
+
 	skybox_image.pixel_x = rand(0,64)
 	skybox_image.pixel_y = rand(128,256)
 	skybox_image.appearance_flags = RESET_COLOR
