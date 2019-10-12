@@ -12540,8 +12540,7 @@
 "Bw" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/uniform_vendor{
-	icon_state = "robotics";
-	dir = 8
+	dir = 8;
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
