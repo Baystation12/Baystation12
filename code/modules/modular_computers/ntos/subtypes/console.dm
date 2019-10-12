@@ -40,6 +40,12 @@
 	var/obj/machinery/M = holder
 	return !(M.stat & NOPOWER)
 
+/datum/extension/interactive/ntos/console/extension_act(href, href_list, user)
+	. = ..()
+	var/obj/machinery/M = holder
+	if(istype(M) && M.clicksound && CanPhysicallyInteractWith(user, M))
+		playsound(M, M.clicksound, 40)
+
 // Hack to make status bar work
 
 /obj/machinery/initial_data()
