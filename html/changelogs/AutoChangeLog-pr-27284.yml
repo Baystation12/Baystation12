@@ -1,7 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - rscadd: "Plasma cutters can now be ordered from supply, they are locked to mining access and engineering access"
-  - tweak: "Plasma cutters now needs trained construction to deconstruct safely."
-  - rscadd: "Updated the skill description of the EVA, Piloting and Construction skills."
-  - bugfix: "Fixes gun accidents only hitting the user; instead now everything in their general vicinity is fair game."
