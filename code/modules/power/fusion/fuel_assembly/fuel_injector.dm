@@ -14,9 +14,9 @@
 	var/obj/item/weapon/fuel_assembly/cur_assembly
 
 /obj/machinery/fusion_fuel_injector/Initialize()
-	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member)
 	if(initial_id_tag)
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 	. = ..()
 
@@ -39,8 +39,8 @@
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
 	if(isMultitool(W))
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-		fusion.get_new_tag(user)
+		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
+		lanm.set_tag(null, initial_id_tag)
 		return
 
 	if(istype(W, /obj/item/weapon/fuel_assembly))
