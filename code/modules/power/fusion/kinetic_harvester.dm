@@ -12,10 +12,10 @@
 	var/obj/machinery/power/fusion_core/harvest_from
 
 /obj/machinery/kinetic_harvester/Initialize()
-	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member)
 	if(initial_id_tag)
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-		fusion.set_tag(null, initial_id_tag)
+		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
+		lanm.set_tag(null, initial_id_tag)
 	find_core()
 	queue_icon_update()
 	. = ..()
@@ -26,18 +26,21 @@
 
 /obj/machinery/kinetic_harvester/attackby(var/obj/item/thing, var/mob/user)
 	if(isMultitool(thing))
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-		if(fusion.get_new_tag(user))
+		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
+		if(lanm.get_new_tag(user))
 			find_core()
 		return
 	return ..()
 
 /obj/machinery/kinetic_harvester/proc/find_core()
 	harvest_from = null
-	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
-	if(plant && plant.fusion_cores.len)	
-		harvest_from = plant.fusion_cores[1]
+	var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
+	var/datum/local_network/lan = lanm.get_local_network()
+
+	if(lan)	
+		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
+		if(fusion_cores && fusion_cores.len)
+			harvest_from = fusion_cores[1]
 	return harvest_from
 
 /obj/machinery/kinetic_harvester/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -46,8 +49,8 @@
 		to_chat(user, SPAN_WARNING("This machine cannot locate a fusion core. Please ensure the machine is correctly configured to share a fusion plant network."))
 		return
 
-	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
+	var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+	var/datum/local_network/plant = fusion.get_local_network()
 	var/list/data = list()
 
 	data["id"] = plant ? plant.id_tag : "unset"
