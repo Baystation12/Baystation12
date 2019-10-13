@@ -1218,6 +1218,60 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/storage/marine/riley
 	head = /obj/item/clothing/head/helmet/marine/riley
 
+	////////ashvor\\\\\\\\
+
+//Marine
+
+/obj/item/clothing/under/unsc/marine_fatigues/ashvor
+	desc = "Reach Variant of the standard issue uniform for UNSC Marine Corps."
+	name = "UNSC Reach Marine Fatigues"
+	item_state = "ashvor_uniform"
+	icon_state = "ashvor_uniform_inslot"
+	worn_state = "ashvor_uniform"
+	starting_accessories = /obj/item/clothing/accessory/badge/tags
+
+/obj/item/clothing/head/helmet/eva/marine/ashvor
+	desc = "The ECH252 is an enclosed variant of the standard CH252 helmet. The helmet can be fully enclosed and environmentally sealed,"
+	name = "ECH252 Enclosed Helmet"
+	item_state = "ashvor_helmet"
+	icon_state = "ashvor_helmet_inslot"
+
+/obj/item/clothing/suit/spaceeva/eva/ashvor
+	desc = "A pressurized Atmospheric/Exoatmospheric (A/X) version of the standard M52 Body Armor, Worn mitigate the atmospheric hazards caused by nearby glassing,"
+	name = "M52A/X Body Armor"
+	item_state = "ashvor_armor"
+	icon_state = "ashvor_armor_inslot"
+
+/obj/item/clothing/gloves/thick/unsc/ashvor
+	desc = "The Reach variant of the combat gloves worn by the members of the UNSC Marine Corps,"
+	name = "Reach Combat Gloves"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "ashvor_gloves"
+	icon_state = "ashvor_gloves_inslot"
+
+/obj/item/clothing/shoes/eva/marine/ashvor
+	desc = "A sealed variant of the combat boots worn by the members of the UNSC Marine Corps,"
+	name = "A/X Combat Boots"
+	item_state = "ashvor_boots"
+	icon_state = "ashvor_boots_inslot"
+
+/obj/item/weapon/storage/backpack/odst/regular/ashvor
+	desc = "The Reach variant of the standard backpack worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	name = "UNSC Reach Backpack"
+	item_state = "ashvor_backpack"
+	icon_state = "ashvor_backpack-inslot"
+
+
+/decl/hierarchy/outfit/ashvor
+	name = "ashvor-marine"
+	uniform = /obj/item/clothing/under/urfc_jumpsuit/ashvor
+	mask = /obj/item/clothing/mask/marine/ashvor
+	suit = /obj/item/clothing/suit/storage/marine/ashvor
+	shoes = /obj/item/clothing/shoes/marine/ashvor
+	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
+	head = /obj/item/clothing/head/helmet/marine/ashvor
+
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
