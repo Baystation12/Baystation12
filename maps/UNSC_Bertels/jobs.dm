@@ -9,6 +9,8 @@
 	"UNSC Ship Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
 	total_positions = 8
 	spawn_positions = 8
+	account_allowed = 1
+	economic_modifier = 0.5
 	selection_color = "#0A0A95"
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
@@ -21,6 +23,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/medical
 	total_positions = 4
 	spawn_positions = 4
+	account_allowed = 1
+	economic_modifier = 0.5
 	selection_color = "#0A0A95"
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
@@ -34,6 +38,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 1
 	track_players = 1
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
@@ -49,6 +55,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 1
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
@@ -60,6 +68,8 @@
 	spawn_faction = "UNSC"
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_armoury, access_unsc_marine)
@@ -86,6 +96,8 @@
 	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 0.5
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -99,6 +111,8 @@
 	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
 
 //UNSC Ship ODST Jobs
 
@@ -123,6 +137,8 @@
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
@@ -142,3 +158,5 @@
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
