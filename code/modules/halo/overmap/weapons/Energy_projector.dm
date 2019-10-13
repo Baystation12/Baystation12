@@ -215,7 +215,7 @@
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
 			if(hit.map_z.Find(z_level) < hit.map_z.len)
 				var/turf/under_loc = GetBelow(F)
-				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated/floor))
+				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated))
 					F.ChangeTurf(/turf/simulated/open)
 					under_loc.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
 				else
