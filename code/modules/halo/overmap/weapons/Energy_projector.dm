@@ -235,7 +235,7 @@
 	icon_state = ""
 	alpha = 0
 	damage = 900
-	penetrating = 999
+	penetrating = 6
 	step_delay = 0.0 SECONDS
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj
