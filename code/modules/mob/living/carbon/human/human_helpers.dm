@@ -231,7 +231,7 @@
 			E.damage += rand(1, 2)
 			if(E.damage > 12)
 				eye_blurry += rand(3,6)
-		if(FLASH_PROTECTION_SOME)
+		if(FLASH_PROTECTION_MINOR)
 			to_chat(src, "<span class='warning'>Your eyes stings!</span>")
 			E.damage += rand(1, 4)
 			if(E.damage > 10)
