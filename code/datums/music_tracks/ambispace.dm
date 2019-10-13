@@ -1,5 +1,5 @@
 /music_track/ambispace
-	artist = "Unknown"
-	title = "Unknown"
+	artist = "Alstroemeria Records"
+	title = "Bad Apple!! (slowed down)"
 	song = 'sound/ambience/ambispace.ogg'
 	license = /decl/license/grandfathered
