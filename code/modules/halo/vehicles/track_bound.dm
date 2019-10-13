@@ -29,8 +29,11 @@
 		icon_state = initial(icon_state)
 
 /obj/structure/track/attackby(var/obj/item/tool,var/mob/user)
+	if(!damaged)
+		to_chat(user,"<span class='notice'>[src] is not damaged!</span>")
+		return
 	if(istype(tool,/obj/item/weapon/wrench))
-		visible_message("[user] repairs [src]")
+		visible_message("<span class='notice'>[user] repairs [src]</span>")
 
 /obj/structure/track/ex_act(severity)
 	damaged = 1
