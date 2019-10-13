@@ -282,25 +282,26 @@
 		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 //Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/mob/living/silicon/pai/attackby(obj/item/weapon/W, mob/user)
 	var/obj/item/weapon/card/id/card = W.GetIdCard()
-	if(card)
+	if(card && user.a_intent == I_HELP)
 		var/list/new_access = card.GetAccess()
 		src.idcard.access = new_access
-		visible_message("<span class='notice'>[user.name] slides [W] across [src].</span>")
+		visible_message("<span class='notice'>[user] slides [W] across [src].</span>")
 		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
+		return FALSE // don't continue processing click callstack.
 	if(W.force)
-		visible_message("<span class='danger'>[user.name] attacks [src] with [W]!</span>")
+		visible_message("<span class='danger'>[user] attacks [src] with [W]!</span>")
 		src.adjustBruteLoss(W.force)
 		src.updatehealth()
 	else
-		visible_message("<span class='warning'>[user.name] bonks [src] harmlessly with [W].</span>")
+		visible_message("<span class='warning'>[user] bonks [src] harmlessly with [W].</span>")
 	spawn(1)
 		if(stat != 2) close_up()
 	return
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
-	visible_message("<span class='danger'>[user.name] boops [src] on the head.</span>")
+	visible_message("<span class='danger'>[user] boops [src] on the head.</span>")
 	close_up()
 
 //I'm not sure how much of this is necessary, but I would rather avoid issues.
