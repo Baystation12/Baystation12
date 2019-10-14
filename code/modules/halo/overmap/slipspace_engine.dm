@@ -60,6 +60,7 @@
 
 /obj/machinery/slipspace_engine/proc/overload_engine(var/mob/user)
 	jump_charging = -1
+	src.density = 0
 	var/obj/core = new core_to_spawn(loc)
 	icon_state = "[initial(icon_state)]_coreremoved"
 	core.attack_hand(user)
