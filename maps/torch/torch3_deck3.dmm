@@ -4063,7 +4063,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/structure/reagent_dispensers/water_cooler,
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 8
+	},
 /obj/machinery/light{
 	dir = 4
 	},
@@ -12715,7 +12717,7 @@
 	dir = 4
 	},
 /obj/structure/reagent_dispensers/water_cooler{
-	pixel_x = 6
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
@@ -17852,8 +17854,7 @@
 	dir = 4
 	},
 /obj/machinery/vending/coffee{
-	icon_state = "coffee";
-	dir = 4
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
