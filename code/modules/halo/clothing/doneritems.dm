@@ -947,6 +947,32 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	gloves = /obj/item/clothing/gloves/thick/unsc/sleepy_retard
 	head = /obj/item/clothing/head/helmet/marine/sleepy_retard
 
+
+//ODST
+
+obj/item/clothing/head/helmet/odst/donator/sleepy
+	name = "Customized ODST Helmet"
+	item_state = "sleepy-helmet_worn"
+	icon_state = "sleepy-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/sleepy
+	name = "Customized ODST Armour"
+	icon_state = "sleepy-armor_obj"
+	item_state = "sleepy-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/sleepy
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Customized Backpack"
+	item_state = "sleepy-backpack_worn"
+	icon_state = "sleepy-backpack_obj"
+
+/decl/hierarchy/outfit/pinstripe_odst
+	name = "sleepy - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/sleepy
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/sleepy
+    back = /obj/item/weapon/storage/backpack/odst/sleepy
+
 ////////Spartankiller\\\\\\\\
 
 //ODST
