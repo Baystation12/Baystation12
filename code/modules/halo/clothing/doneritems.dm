@@ -1263,14 +1263,14 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_state = "ashvor_backpack-inslot"
 
 
-/decl/hierarchy/outfit/ashvor
-	name = "ashvor-marine"
-	uniform = /obj/item/clothing/under/urfc_jumpsuit/ashvor
-	mask = /obj/item/clothing/mask/marine/ashvor
-	suit = /obj/item/clothing/suit/storage/marine/ashvor
-	shoes = /obj/item/clothing/shoes/marine/ashvor
-	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
-	head = /obj/item/clothing/head/helmet/marine/ashvor
+/decl/hierarchy/outfit/ashvor_marine
+ name = "ashvor - marine"
+ uniform = /obj/item/clothing/under/unsc/marine_fatigues/ashvor
+ suit = /obj/item/clothing/suit/spaceeva/eva/ashvor
+ shoes = /obj/item/clothing/shoes/eva/marine/ashvor
+ gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
+ head = /obj/item/clothing/head/helmet/eva/marine/ashvor
+ back = /obj/item/weapon/storage/backpack/odst/regular/ashvor
 
 
 #undef ODST_OVERRIDE
