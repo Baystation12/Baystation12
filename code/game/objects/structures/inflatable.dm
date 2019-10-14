@@ -33,6 +33,7 @@
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
 	icon_state = "folded_door"
+	item_state = "folded_door"
 	deploy_path = /obj/structure/inflatable/door
 
 /obj/structure/inflatable
