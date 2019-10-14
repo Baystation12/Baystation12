@@ -952,20 +952,20 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 obj/item/clothing/head/helmet/odst/donator/sleepy
 	name = "Customized ODST Helmet"
-	item_state = "sleepy-helmet-worn"
-	icon_state = "sleepy-helmet-obj"
+	item_state = "sleepy-helmet_worn"
+	icon_state = "sleepy-helmet_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/sleepy
 	name = "Customized ODST Armour"
-	icon_state = "sleepy-armor-obj"
-	item_state = "sleepy-armor-worn"
+	icon_state = "sleepy-armor_obj"
+	item_state = "sleepy-armor_worn"
 
 /obj/item/weapon/storage/backpack/odst/sleepy
 	icon = ITEM_INHAND
 	icon_override = ODST_OVERRIDE
 	name = "Customized Backpack"
-	item_state = "sleepy-backpack-worn"
-	icon_state = "sleepy-backpack-obj"
+	item_state = "sleepy-backpack_worn"
+	icon_state = "sleepy-backpack_obj"
 
 /decl/hierarchy/outfit/sleepy_odst
 	name = "sleepy - ODST"
