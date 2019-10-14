@@ -35,32 +35,9 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 20, bio = 0, rad = 0)
 	species_restricted = list("Kig-Yar")
 	action_button_name = "Toggle Night Vision"
-	var/linked_glasses
-	var/mob/living/carbon/human/u
 	flags_inv = null
 
-/obj/item/clothing/head/helmet/kigyar/proc/try_equip_NV()
-	if(u.equip_to_slot_if_possible(new /obj/item/clothing/glasses/hud/tactical/kigyar_nv,slot_glasses))
-		linked_glasses = u.glasses
-		to_chat(u,"<span class ='notice'>Night Vision active.</span>")
-	else
-		to_chat(u,"<span class='notice'>NV activation error. Eyes Blocked.</span>")
-
-/obj/item/clothing/head/helmet/kigyar/equipped(mob/user)
-	u = user
-
-/obj/item/clothing/head/helmet/kigyar/dropped()
-	del(linked_glasses)
-	..()
-
-/obj/item/clothing/head/helmet/kigyar/ui_action_click()
-	if(u.head != src)
-		return
-	if(!linked_glasses)
-		try_equip_NV()
-	else
-		del(linked_glasses)
-		to_chat(u,"<span class = 'notice'>Night Vision deactivated.</span>")
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
 
 /obj/item/clothing/glasses/hud/tactical/kigyar_nv
 	name = "Kig-Yar Scout Helmet Night Vision"
