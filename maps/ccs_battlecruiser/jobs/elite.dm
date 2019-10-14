@@ -30,6 +30,15 @@
 	total_positions = 2
 	spawn_positions = 2
 
+/datum/job/opredflag_cov/elite/honourguard
+	title = "Sangheili Honour Guard"
+	supervisors = "the Prophet"
+	total_positions = 2
+	spawn_positions = 2
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/sangheili/honour_guard
+	whitelisted_species = list(/datum/species/sangheili)
+
 /datum/job/opredflag_cov/elite/shipmaster
 	title = "Sangheili Shipmaster"
 	supervisors = "the Prophets"

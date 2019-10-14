@@ -11,13 +11,13 @@
 	w_class = ITEM_SIZE_HUGE
 
 	var/vision_range = 9
-	var/burst_size = 7
+	var/burst_size = 5
 	var/list/friendlies_stored = list()
 	var/list/allowed_materials = list("steel" = 5) //Format: material name = amount of bullets created
 	var/obj/item/projectile/to_fabricate = /obj/item/projectile/bullet/a762_M392
 	var/max_rounds = 100
 	var/list/loaded_ammo = list()
-	var/burst_delay = 0.3 SECONDS
+	var/burst_delay = 0.7 SECONDS
 	var/fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
 	var/list/targets_in_view = list()
 
@@ -174,6 +174,6 @@
 	icon_state = "artifact"
 
 /obj/structure/autoturret/ONI/New()
-	fabricate_rounds(max_rounds)
+	fabricate_rounds(max_rounds/5)
 	anchored = 1
 	GLOB.processing_objects += src

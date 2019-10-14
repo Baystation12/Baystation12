@@ -58,6 +58,7 @@
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft
 	name = "Shuttle Craft"
+	icons_pickfrom_list = list()
 	vessel_mass = 1
 	default_delay = 3 SECONDS //double the speed of a normal ship.
 
@@ -68,7 +69,7 @@
 
 //FACTION DEFINES//
 /datum/npc_ship/cov_shuttle
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Covenant_Shuttle.dmm')
+	mapfile_links = list('maps/faction_bases/Covenant_Shuttle.dmm')
 	fore_dir = WEST
 	map_bounds = list(3,26,48,3)
 
@@ -78,7 +79,7 @@
 	ship_datums = list(/datum/npc_ship/cov_shuttle)
 
 /datum/npc_ship/unsc_shuttle
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Human_Shuttle.dmm')
+	mapfile_links = list('maps/faction_bases/Human_Shuttle.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,29,48,5)
 
@@ -88,13 +89,13 @@
 	ship_datums = list(/datum/npc_ship/unsc_shuttle)
 
 /datum/npc_ship/innie_shuttle
-	mapfile_links = list('maps/first_contact/maps/faction_bases/Innie_Shuttle.dmm')
+	mapfile_links = list('maps/faction_bases/Innie_Shuttle.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,29,48,5)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/innie
 	icon = 'code/modules/halo/icons/overmap/darter.dmi'
-	faction = "innie"
+	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/innie_shuttle)
 
 /obj/machinery/shuttle_spawner/cov

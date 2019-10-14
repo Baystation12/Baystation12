@@ -22,9 +22,9 @@
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()
 	..()
 	if(bolt_open)
-		icon_state = "heavysniper-open"
+		icon_state = "[initial(icon_state)]-open"
 	else
-		icon_state = "heavysniper"
+		icon_state = "[initial(icon_state)]"
 
 /obj/item/weapon/gun/projectile/heavysniper/attack_self(mob/user as mob)
 	playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)

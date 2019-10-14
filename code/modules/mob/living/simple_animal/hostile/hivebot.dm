@@ -29,7 +29,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/rapid
 	ranged = 1
-	rapid = 1
+	burst_size = 3
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	name = "Strong Hivebot"

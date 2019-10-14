@@ -1,4 +1,3 @@
-#define COMMS_REQUESTS list("halt")
 
 /obj/machinery/overmap_weapon_console/npc_comms_console
 	name = "Local Comms Console"
@@ -45,3 +44,8 @@
 
 /obj/machinery/overmap_weapon_console/npc_comms_console/innie
 	authority_level = AUTHORITY_LEVEL_INNIE
+
+/obj/machinery/overmap_weapon_console/npc_comms_console/cov
+	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon_state = "covie_console"
+	authority_level = AUTHORITY_LEVEL_COV

@@ -196,36 +196,36 @@
 		qdel(f)
 
 /obj/item/nav_data_chip/unsc
-	chip_faction = "unsc"
-	known_sectors = list("Deviance Station","VT9-042","KS7-535")
+	chip_faction = "UNSC"
+	known_sectors = list("Deviance Station","VT9-042","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
-	chip_faction = "covenant"
-	known_sectors = list("Vanguard's Mantle","KS7-535")
+	chip_faction = "Covenant"
+	known_sectors = list("Vanguard's Mantle","VT9-042")
 
 /obj/item/nav_data_chip/innie
-	chip_faction = "innie"
-	known_sectors = list("Camp New Hope","Asteroid","KS7-535")
+	chip_faction = "Insurrection"
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/fragmented/unsc
 	name = "Fragmented Nav Data Chip"
-	chip_faction = "unsc"
-	known_sectors = list("Deviance Station","VT9-042","KS7-535")
+	chip_faction = "UNSC"
+	known_sectors = list("Deviance Station","VT9-042","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/fragmented/covenant
 	name = "Fragmented Nav Data Chip"
 	icon_state = "nav_data_chip_cov"
-	chip_faction = "covenant"
-	known_sectors = list("Vanguard's Mantle","KS7-535")
+	chip_faction = "Covenant"
+	known_sectors = list("Vanguard's Mantle","VT9-042")
 
 /obj/item/nav_data_chip/fragmented/covenant/kig_yar
-	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535")
+	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/item/nav_data_chip/fragmented/innie
 	name = "Fragmented Nav Data Chip"
-	chip_faction = "innie"
-	known_sectors = list("Camp New Hope","Asteroid","KS7-535")
+	chip_faction = "Insurrection"
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
 
 /obj/machinery/nav_computer/npc/unsc
 	data_chip = new /obj/item/nav_data_chip/fragmented/unsc

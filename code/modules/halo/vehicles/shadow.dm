@@ -30,6 +30,10 @@
 	else
 		bounds = "96,64"
 
+/obj/vehicles/shadow/on_death()
+	. = ..()
+	guns_disabled = 0
+
 /obj/item/vehicle_component/health_manager/shadow
 	integrity = 650
 	resistances = list("brute"=35,"burn"=40,"emp"=20,"bomb"=30)

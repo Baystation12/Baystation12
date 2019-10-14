@@ -55,22 +55,3 @@
 /obj/structure/closet/walllocker/emerglocker/east
 	pixel_x = 32
 	dir = EAST
-
-/obj/structure/closet/walllocker/emerglocker/covvie
-	spawnitems = list(/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/oxygen,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/weapon/storage/toolbox/emergency)
-
-/obj/structure/closet/walllocker/emerglocker/covvie/north
-	pixel_y = 32
-	dir = SOUTH
-
-/obj/structure/closet/walllocker/emerglocker/covvie/south
-	pixel_y = -32
-	dir = NORTH
-
-/obj/structure/closet/walllocker/emerglocker/covvie/west
-	pixel_x = -32
-	dir = WEST
-
-/obj/structure/closet/walllocker/emerglocker/covvie/east
-	pixel_x = 32
-	dir = EAST

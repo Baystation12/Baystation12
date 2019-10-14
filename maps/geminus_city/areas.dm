@@ -2,7 +2,7 @@
 	name = "\improper Planet"
 	icon_state = "planet"
 	requires_power = 0
-	luminosity = 0
+	dynamic_lighting = 1
 	has_gravity = 1
 	base_turf = /turf/simulated/floor/asteroid/planet
 
@@ -10,11 +10,10 @@
 /area/planets/Geminus
 	name = "\improper Geminus City"
 	icon_state = "Holodeck"
-	luminosity = 1
+	dynamic_lighting = 0
 
 /area/planets/Geminus/outdoor
 	name = "\improper Geminus City Area"
-	luminosity = 0
 
 /area/planets/Geminus/outdoor/north
 	name = "\improper Geminus City - North"
@@ -54,11 +53,11 @@
 /area/planets/Geminus/indoor/arrivalbus
 	name = "\improper Arrival Bus"
 	icon_state = "yellow"
-
+/*
 /area/planets/Geminus/indoor/disco
 	name = "\improper Disco"
 	icon_state = "red"
-
+*/
 /area/planets/Geminus/indoor/backroom
 	name = "\improper Nightclub Backroom"
 	icon_state = "green"
@@ -214,7 +213,72 @@
 
 /area/planets/Geminus/outdoor/space_elevator
 	name = "\improper Space Elevator"
+	icon_state = "observatory"
 
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
+	icon_state = "firingrange"
+
+//UNDERGROUND//
+/area/geminus_underground
+	name = "\improper Geminus Underground Northeast"
+	icon_state = "yellow"
+
+/area/geminus_underground/northwest
+	name = "\improper Geminus Underground Northwest"
+	icon_state = "blueold"
+
+/area/geminus_underground/north
+	name = "\improper Geminus Underground North"
+	icon_state = "dark"
+
+/area/geminus_underground/southwest
+	name = "\improper Geminus Underground South"
+	icon_state = "purple"
+
+/area/geminus_underground/south
+	name = "\improper Geminus Underground South"
+	icon_state = "red"
+
+/area/geminus_underground/southeast
+	name = "\improper Geminus Underground South"
+	icon_state = "green"
+
+/area/geminus_underground/innie
+	name = "\improper Rabbit Hole Base Alpha Sector"
+	icon_state = "red"
+
+/area/geminus_underground/innie/bravo
+	name = "\improper Rabbit Hole Base Bravo Sector"
+	icon_state = "purple"
+
+/area/geminus_underground/innie/charlie
+	name = "\improper Rabbit Hole Base Charlie Sector"
+	icon_state = "green"
+
+/area/geminus_underground/innie/delta
+	name = "\improper Rabbit Hole Base Delta Sector"
+	icon_state = "yellow"
+
+/area/geminus_underground/innie/echo
+	name = "\improper Rabbit Hole Base Echo Sector"
+	icon_state = "blueold"
+
+/area/geminus_underground/innie/valley
+	name = "\improper Rabbit Hole Base Secret Valley Landing Pad"
+	icon_state = "start"
+	dynamic_lighting = 0
+	requires_power = 0
+
+////////////// X52 ///////////////
+
+/area/x52
+	name = "\improper X52"
+	icon_state = "yellow"
+	requires_power = 1
+	luminosity = 0
+	has_gravity = 1
+
+/area/x52/laboratory
+	name = "\improper X52 Laboratory"

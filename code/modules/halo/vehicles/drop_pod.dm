@@ -17,6 +17,8 @@
 
 	comp_prof =/datum/component_profile/drop_pod
 
+	exposed_positions = list()
+
 	var/list/species_offsets = list("Human" = "0,7")
 
 	var/launched = 0
@@ -25,7 +27,7 @@
 
 	var/launch_arm_time = 5 SECONDS
 
-	var/pod_range = 3 //Range of pod in overmap tiles
+	var/pod_range = 8 //Range of pod in overmap tiles
 
 /obj/vehicles/drop_pod/on_death()
 	return

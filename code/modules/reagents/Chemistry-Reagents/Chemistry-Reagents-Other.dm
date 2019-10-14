@@ -246,6 +246,9 @@
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	O.clean_blood()
+	if(istype(O, /obj/machinery/autosurgeon))
+		var/obj/machinery/autosurgeon/A = O
+		A.dirtiness = 0
 
 /datum/reagent/space_cleaner/touch_turf(var/turf/T)
 	if(volume >= 1)

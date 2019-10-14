@@ -14,15 +14,16 @@ env:
     - TEST=WEB
     #- TEST=MAP MAP_PATH=example
     #- TEST=MAP MAP_PATH=overmap_example
-    - TEST=MAP MAP_PATH=insurrection
+    - TEST=MAP MAP_PATH=operation_trebuchet
     - TEST=MAP MAP_PATH=slayer
     #- TEST=MAP MAP_PATH=unsc_frigate
     - TEST=MAP MAP_PATH=desert_outpost
     - TEST=MAP MAP_PATH=geminus_city
-    #- TEST=MAP MAP_PATH=first_contact
+    #- TEST=MAP MAP_PATH=ks7_elmsville
     - TEST=MAP MAP_PATH=ccs_battlecruiser
     - TEST=MAP MAP_PATH=doisac
     - TEST=MAP MAP_PATH=crashsite_zeta
+    # - TEST=MAP MAP_PATH=unsc_achlys
 
 cache:
   directories:

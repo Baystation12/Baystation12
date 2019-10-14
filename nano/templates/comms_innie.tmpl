@@ -1,0 +1,137 @@
+<div class='notice'>
+	{{if data.is_admin}}
+		You are authenticated. You may access all functions of this program.
+	{{else}}
+		You are unauthenticated. Some functions may me unavailable.
+	{{/if}}
+</div>
+{{:helper.link('End Transmission', 'cancel', {'select_faction' : null}, data.screen == 1 ? 'disabled' : null)}}
+{{:helper.link('Hail', 'comment', {'set_screen' : 2}, data.screen == 3 ? null : (data.screen == 2 ? 'selected' : 'disabled'))}}
+{{:helper.link('Missions', 'mail-closed', {'set_screen' : 3}, data.screen == 2 ? null : (data.screen == 3 ? 'selected' : 'disabled'))}}
+<br>
+<hr>
+{{if data.screen == 1}}
+	<h1>Known Contacts</h1>
+	{{for data.faction_contents}}	
+		<div class='block'>
+			<div class='item'>
+				<div class='itemLabel' style='width:30%'>
+					{{:value.name}} 
+				</div>
+				<div class='itemContent' style='width:20%'>
+					{{:helper.link('Send hail', null, {'select_faction' : value.name}, null)}}
+				</div>
+				<div class='itemContent' style='width:20%'>
+					Reputation: {{:value.reputation}}
+				</div>
+			</div>
+		</div>
+	{{/for}}
+{{else data.screen == 2}}
+	<h1>{{:data.selected_faction}}</h1>
+	{{:data.faction_blurb}}
+	<br><br>
+	You are currently talking to <b>{{:data.leader_name}}</b> who is the leader of the <b>{{:data.selected_faction}}</b>. You currently have {{:data.reputation}} reputation with this faction.
+
+	<h2>Your reputation with this faction has unlocked:</h1>
+	<div class='block'>
+		{{for data.unlocked_rewards}}
+			<div class='item'>
+				<div class='itemLabel'>
+					{{:value.name}}
+				</div>
+				<div class='itemContent'>
+					Reputation required: {{:value.rep}}<br>
+					Cost: {{:value.cost}}<br>
+					{{if value.type == 'supply'}}
+						Orderable from the trade console.
+					{{else value.type == 'ability'}}
+						{{:helper.link('Activate', 'lightbulb', {'activate_ability' : value.name}, null)}}
+					{{/if}}
+				</div>
+			</div>
+			<hr>
+		{{empty}}
+			Nothing.
+		{{/for}}
+	</div>
+	
+	<h2>Increase your reputation to unlock:</h1>
+	<div class='block'>
+		{{for data.locked_rewards}}
+			<div class='item'>
+				<div class='itemLabel'>
+					{{:value.name}}
+				</div>
+				<div class='itemContent'>
+					Reputation required: {{:value.rep}}<br>
+					Cost: {{:value.cost}}<br>
+					{{if value.type == 'supply'}}
+						Orderable from the trade console.
+					{{else value.type == 'ability'}}
+						Activate this ability from the comms console once unlocked.
+					{{/if}}
+				</div>
+			</div>
+			<hr>
+		{{empty}}
+			Nothing.
+		{{/for}}
+	</div>
+	
+	<h2>Finished missions for this faction:</h1>
+	{{for data.faction_quests}}	
+		<div class='block'>
+			<div class='item'>
+				<div class='itemLabel'>
+					{{:value.status_desc}}
+				</div>
+				<div class='itemContent'>
+					Mission ({{:value.difficulty_desc}} difficulty): {{:value.desc_text}}<br>
+					Target: <b>{{:value.target}}</b><br>
+					Location: {{:value.location_name}}<br>
+					{{if value.credit_reward > 0}}
+						Rewards: {{:value.favour_reward}} reputation and {{:value.credit_reward}} credits
+					{{else}}
+						Rewards: {{:value.favour_reward}} reputation
+					{{/if}}
+				</div>
+			</div>
+		</div>
+    {{empty}}
+		None.
+	{{/for}}
+{{else data.screen == 3}}
+	<h1>{{:data.selected_faction}} available missions</h1>
+	{{for data.faction_quests}}
+		<div class='block'>
+			<div class='item'>
+				<div class='itemLabel'>
+					{{:value.status_desc}} 
+					{{if value.status_desc == 'In progress'}}
+						({{:value.time_left}})
+					{{/if}}
+				</div>
+				<div class='itemContent'>
+					Mission ({{:value.difficulty_desc}} difficulty): {{:value.desc_text}}<br>
+					Target: <b>{{:value.target}}</b><br>
+					Location: {{:value.location_name}}<br>
+					{{if value.credit_reward > 0}}
+						Rewards: {{:value.favour_reward}} reputation and {{:value.credit_reward}} credits
+					{{else}}
+						Rewards: {{:value.favour_reward}} reputation
+					{{/if}}
+					<br>
+					{{if value.status_desc == "Available"}}
+						{{:helper.link('Accept Quest', 'check', {'accept_quest' : value.quest_ref}, null)}}
+						{{:helper.link('Reject Quest', 'cancel', {'reject_quest' : value.quest_ref}, null)}}
+					{{else}}
+						{{:helper.link('Abandon Quest', 'cancel', {'reject_quest' : value.quest_ref}, null)}}
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	{{empty}}
+		There are currently no faction quests available.
+	{{/for}}
+{{/if}}

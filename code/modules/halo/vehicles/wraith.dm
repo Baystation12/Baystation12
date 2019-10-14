@@ -107,5 +107,5 @@
 	. = ..()
 
 /obj/item/projectile/covenant/wraith_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,0,1,4,5,guaranteed_damage = 75,guaranteed_damage_range = 3)
+	explosion(impacted,0,2,3,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
 	. = ..()

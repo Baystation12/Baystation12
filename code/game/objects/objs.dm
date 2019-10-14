@@ -143,8 +143,8 @@
 	if(src.machine)
 		unset_machine()
 	src.machine = O
-	if(istype(O))
-		O.in_use = 1
+	if(hasvar(O, "in_use"))
+		O:in_use = 1
 
 /obj/item/proc/updateSelfDialog()
 	var/mob/M = src.loc

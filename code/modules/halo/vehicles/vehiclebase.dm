@@ -60,6 +60,19 @@
 		verbs += /obj/vehicles/verb/toggle_headlights
 		set_light(0) //Switch off at spawn.
 
+/obj/vehicles/attack_generic(var/mob/living/simple_animal/attacker,var/damage,var/text)
+	visible_message("<span class = 'danger'>[attacker] [text] [src]</span>")
+	var/pos_to_dam = should_damage_occ()
+	if(!isnull(pos_to_dam))
+		var/list/occ_list = get_occupants_in_position(pos_to_dam)
+		if(isnull(occ_list) || !occ_list.len)
+			return 1
+		var/mob/mob_to_hit = pick(occ_list)
+		if(isnull(mob_to_hit))
+			return 1
+		attacker.UnarmedAttack(mob_to_hit)
+	comp_prof.take_component_damage(damage,"brute")
+
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
 	if(!active)
@@ -114,6 +127,7 @@
 /obj/vehicles/proc/on_death()
 	explosion(loc,-1,-1,2,5)
 	movement_destroyed = 1
+	guns_disabled = 1
 	icon_state = "[initial(icon_state)]_destroyed"
 
 /obj/vehicles/proc/kick_occupants()
@@ -335,6 +349,7 @@
 		if(!should_continue)
 			return
 	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
+	visible_message("<span class = 'danger'>[P] hits [src]!</span>")
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
@@ -359,7 +374,7 @@
 			break
 	if(!is_driver)
 		return
-	Move(new_loc,direction)
+	. = Move(new_loc,direction)
 	if(move_sound)
 		playsound(loc,move_sound,75,0,4)
 	user.client.move_delay = world.time + vehicle_move_delay

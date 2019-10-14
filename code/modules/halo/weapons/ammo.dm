@@ -176,7 +176,6 @@
 
 /obj/item/projectile/bullet/m95_sap
 	damage = 35
-	accuracy = 1
 
 /obj/item/weapon/storage/box/m95_sap
 	name = "box of 9.5mm M634 magazines"
@@ -216,7 +215,7 @@
 
 /obj/item/ammo_magazine/m145_ap
 	name = "magazine (14.5mm) M112 AP-FS-DS"
-	desc = "14.5×114mm M112 armor piercing, fin-stabilized, discarding sabot magazine containing 4 rounds. Not much this won't penetrate"
+	desc = "14.5Ã—114mm M112 armor piercing, fin-stabilized, discarding sabot magazine containing 4 rounds. Not much this won't penetrate"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SRS99mag"
 	mag_type = MAGAZINE
@@ -241,7 +240,6 @@
 	step_delay = 0.1
 	penetrating = 5
 	armor_penetration = 80
-	accuracy = 6
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
 
@@ -290,7 +288,6 @@
 
 /obj/item/projectile/bullet/m5
 	damage = 20
-	accuracy = -3
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
 	name = "rubber bullet"
@@ -367,3 +364,53 @@
 	can_hold = list(/obj/item/ammo_magazine/spnkr)
 	slot_flags = SLOT_BACK
 	max_w_class = ITEM_SIZE_HUGE
+
+//ACL-55 rocket launcher
+/obj/item/ammo_magazine/m26
+	name = "M-26 Bottle Rocket"
+	desc = "A single tube of M-26 102mm HEAT rockets for the ACL-55."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "m26_exp"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/m26
+	caliber = "m26"
+	max_ammo = 1
+	w_class = ITEM_SIZE_HUGE
+
+/obj/item/ammo_casing/m26
+	caliber = "rocket_used"
+	projectile_type = /obj/item/projectile/bullet/m26
+
+/obj/item/projectile/bullet/m26
+	name = "bottle rocket"
+	icon_state = "m26"
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	check_armour = "bomb"
+	step_delay = 1.2
+
+/obj/item/projectile/bullet/m26/on_impact(var/atom/target)
+	explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
+	..()
+
+/obj/item/weapon/storage/box/m26
+	name = "M-26 Bottle Rocket crate"
+	desc = "URF certified crate containing two four of M-26 Bottle Rocket rockets for a total of four rockets to be loaded in the ACL-55."
+	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
+	icon_state = "m26crate"
+	max_storage_space = base_storage_capacity(6)
+	startswith = list(/obj/item/ammo_magazine/m26 = 2)
+	can_hold = list(/obj/item/ammo_magazine/m26)
+	slot_flags = SLOT_BACK
+	max_w_class = ITEM_SIZE_HUGE
+
+/obj/item/ammo_magazine/kv32
+	name = "magazine (12 gauge) Buckshot"
+	desc = "12 gauge magazine containing 4 rounds. Fits the KV-32."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "kv_mag"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+	matter = list(DEFAULT_WALL_MATERIAL = 1500)
+	caliber = "shotgun"
+	max_ammo = 4
+	multiple_sprites = 1

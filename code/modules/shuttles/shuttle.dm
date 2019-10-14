@@ -7,6 +7,7 @@
 
 	var/area/shuttle_area //can be both single area type or a list of areas
 	var/obj/effect/shuttle_landmark/current_location
+	var/obj/effect/shuttle_landmark/next_location
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 	var/flags = SHUTTLE_FLAGS_PROCESS
@@ -65,6 +66,8 @@
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
+	if(sound_landing && next_location)
+		playsound(next_location, sound_landing, 100, 20, 0.2)
 	spawn(warmup_time*10)
 		if (moving_status == SHUTTLE_IDLE)
 			return FALSE	//someone cancelled the launch

@@ -4,6 +4,7 @@
 	npc_job_title = "NPC Crop Trader"
 	desc = "A human from one of Earth's diverse cultures. This NPC buys crops for cash"
 	trade_categories_by_name =  list("crops")
+	interact_screen = 2
 	suits = list(\
 		/obj/item/clothing/suit/apron \
 	)

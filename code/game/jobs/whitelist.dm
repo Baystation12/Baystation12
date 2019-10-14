@@ -8,7 +8,7 @@ var/list/whitelist = list()
 	return 1
 
 /proc/load_whitelist()
-	var/list/whitelist_base = file2list(WHITELISTFILE)
+	var/list/whitelist_base = file2list(WHITELISTFILE, log_error = 0)
 	if(!whitelist_base.len)	whitelist = null
 	whitelist = list()
 	for(var/value in whitelist_base) //Added some code to handle jobs.

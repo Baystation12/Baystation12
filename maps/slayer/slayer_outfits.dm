@@ -6,7 +6,6 @@
 
 /decl/hierarchy/outfit/spartan_two/blue_team
 	name = "Blue Team Spartan"
-	uniform = null
 	suit = /obj/item/clothing/suit/armor/special/spartan/blue
 	head = /obj/item/clothing/head/helmet/spartan/blue
 

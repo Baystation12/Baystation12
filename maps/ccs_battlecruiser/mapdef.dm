@@ -23,6 +23,7 @@
 		/datum/job/opredflag_cov/elite/zealot,\
 		/datum/job/opredflag_cov/elite/ranger,\
 		/datum/job/opredflag_cov/elite/specops,\
+		/datum/job/opredflag_cov/elite/honourguard,\
 		/datum/job/opredflag_cov/grunt,\
 		/datum/job/opredflag_cov/grunt/major,\
 		/datum/job/opredflag_cov/grunt/ultra,\
@@ -37,12 +38,10 @@
 		/datum/job/opredflag_spartan/commander\
 	)
 
-	allowed_spawns = list("Arrivals Shuttle")
-	default_spawn = null
-
-
-
 /datum/map/covenant_cruiser/New()
 	. = ..()
-	name = "Damaged CCS [pick(GLOB.covenant_ship_names)]"
-	full_name = "Damaged CCS Battlecruiser \"[name]\""
+	name = "CCS [pick(GLOB.covenant_ship_names)]"
+	full_name = "Damaged \"[name]\""
+
+/datum/spawnpoint/default
+	disable_atmos_unsafe = 0	//so unggoy methane den spawns arent disabled

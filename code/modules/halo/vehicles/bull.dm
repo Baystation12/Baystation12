@@ -29,6 +29,10 @@
 	if(dir == WEST)
 		pixel_x = -32
 
+/obj/vehicles/bull/on_death()
+	. = ..()
+	guns_disabled = 0
+
 /obj/item/vehicle_component/health_manager/bull
 	integrity = 500
 	resistances = list("brute"=50,"burn"=45,"emp"=30,"bomb"=30)

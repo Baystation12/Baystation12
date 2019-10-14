@@ -97,9 +97,10 @@ steam.start() -- spawns the effect
 	anchored = 1.0
 	mouse_opacity = 0
 
-/obj/effect/sparks/New()
+/obj/effect/sparks/New(var/newloc,var/silent=0)
 	..()
-	playsound(src.loc, "sparks", 100, 1)
+	if(!silent)
+		playsound(src.loc, "sparks", 100, 1)
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
@@ -136,13 +137,13 @@ steam.start() -- spawns the effect
 		else
 			location = get_turf(loca)
 
-	start()
+	start(var/silent=0)
 		var/i = 0
 		for(i=0, i<src.number, i++)
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
+				var/obj/effect/sparks/sparks = new /obj/effect/sparks(location,silent)
 				var/direction
 				if(src.cardinals)
 					direction = pick(GLOB.cardinal)

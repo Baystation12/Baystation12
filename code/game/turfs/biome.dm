@@ -49,13 +49,19 @@
 
 			//spawn something there
 			if(do_spawn)
-				//dont spawn if there is already something there
-				var/obj/O = locate() in cur_turf
-				if(O && !istype(O, /obj/effect/landmark))
-					continue
 
-				var/atom_type = pickweight(atom_types)
-				new atom_type(cur_turf)
+				//dont spawn if there is already something there
+				if(cur_turf.density)
+					do_spawn = 0
+				else
+					for(var/atom/A in cur_turf)
+						if(A.density)
+							do_spawn = 0
+							break
+
+				if(do_spawn)
+					var/atom_type = pickweight(atom_types)
+					new atom_type(cur_turf)
 
 		//increment the counters
 		turf_index++

@@ -483,6 +483,8 @@
 			return global.fire_alarm;
 		if("flesh_hud_colours")
 			return global.flesh_hud_colours;
+		if("flood_overmind")
+			return global.flood_overmind;
 		if("floorIsLava")
 			return global.floorIsLava;
 		if("floor_decals")
@@ -581,8 +583,6 @@
 			return global.init;
 		if("initialization_stage")
 			return global.initialization_stage;
-		if("insurrection_objectives")
-			return global.insurrection_objectives;
 		if("integrated_circuit_blacklist")
 			return global.integrated_circuit_blacklist;
 		if("intents")
@@ -1157,8 +1157,6 @@
 			return global.total_lighting_sources;
 		if("total_unit_tests")
 			return global.total_unit_tests;
-		if("trade_controller")
-			return global.trade_controller;
 		if("traitors")
 			return global.traitors;
 		if("transfer_controller")
@@ -1714,6 +1712,8 @@
 			global.fire_alarm=newval;
 		if("flesh_hud_colours")
 			global.flesh_hud_colours=newval;
+		if("flood_overmind")
+			global.flood_overmind=newval;
 		if("floorIsLava")
 			global.floorIsLava=newval;
 		if("floor_decals")
@@ -1812,8 +1812,6 @@
 			global.init=newval;
 		if("initialization_stage")
 			global.initialization_stage=newval;
-		if("insurrection_objectives")
-			global.insurrection_objectives=newval;
 		if("integrated_circuit_blacklist")
 			global.integrated_circuit_blacklist=newval;
 		if("intents")
@@ -2388,8 +2386,6 @@
 			global.total_lighting_sources=newval;
 		if("total_unit_tests")
 			global.total_unit_tests=newval;
-		if("trade_controller")
-			global.trade_controller=newval;
 		if("traitors")
 			global.traitors=newval;
 		if("transfer_controller")
@@ -2703,6 +2699,7 @@
 	"finds_as_strings",
 	"fire_alarm",
 	"flesh_hud_colours",
+	"flood_overmind",
 	"floorIsLava",
 	"floor_decals",
 	"floor_light_cache",
@@ -2752,7 +2749,6 @@
 	"inactive_keys",
 	"init",
 	"initialization_stage",
-	"insurrection_objectives",
 	"integrated_circuit_blacklist",
 	"intents",
 	"intercom_range_display_status",
@@ -3040,7 +3036,6 @@
 	"total_lighting_overlays",
 	"total_lighting_sources",
 	"total_unit_tests",
-	"trade_controller",
 	"traitors",
 	"transfer_controller",
 	"turbolift_controller",

@@ -1,0 +1,103 @@
+<div class='notice'>
+	{{if data.is_admin}}
+		You are authenticated. You may access all functions of this program.
+	{{else}}
+		You are unauthenticated. Some functions may be unavailable.
+	{{/if}}
+</div>
+<hr>
+{{if data.shuttle_connected == 1}}
+
+	<h1>Flight control</h1>
+	{{:helper.link('Embark', 'arrowstop-1-w', {'embark' : 1}, data.target_coords ? null : 'disabled')}}
+	<br>
+	<div class="block">
+		<div class="item">
+			<div class="itemLabel">
+				Location:
+			</div>
+			<div class="itemContent">
+				{{:data.location}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Status:
+			</div>
+			<div class="itemContent">
+				{{:data.shuttle_status}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Destination coords:
+			</div>
+			{{if data.target_coords}}
+				<div class="itemContent">
+					{{:data.target_coords}} ({{:data.target_dist}} km)
+				</div>
+			{{/if}}
+		</div>
+	</div>
+	
+	<h1>Shuttle status</h1>
+	<div class="block">
+		<div class="item">
+			<div class="itemLabel">
+				Top speed (atmosphere):
+			</div>
+			<div class="itemContent">
+				{{:data.atmos_speed}} km/h
+			</div>
+			<div class="itemLabel">
+				Fuel stock:
+			</div>
+			<div class="itemContent">
+				{{:data.fuel_left}} / {{:data.fuel_max}} blocks
+			</div>
+			<div class="itemLabel">
+				Fuel efficiency (per block):
+			</div>
+			<div class="itemContent">
+				{{:data.fuel_efficiency}} km
+			</div>
+		</div>
+	</div>
+	
+	<h1>Navigation</h1>
+	<div class="block">
+		{{if data.on_quest}}
+			<span class='warning'>Return coordinates to Rabbit Hole Base locked in.</span>
+		{{else}}
+			{{for data.loaded_coords}}	
+				<div class='item'>
+					<div class='itemLabel' style='width:30%'>
+						{{:value.name}}
+					</div>
+					<div class='itemContent' style='width:70%'>
+						{{if data.location == value.name}}
+							Distance: 0 ({{:value.dist}}) km 
+						{{else}}
+							Distance: {{:value.dist}} km 
+						{{/if}}
+						{{if value.expired == 1}}
+							(coordinates expired)
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'disabled')}}
+						{{else data.location == value.name}}
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'disabled')}}
+						{{else data.target_coords == value.name}}
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, 'selected')}}
+						{{else}}
+							{{:helper.link('Set destination', 'extlink', {'set_dest' : value.questref}, null)}}
+						{{/if}}
+					</div>
+				</div>
+			{{empty}}
+				No coordinate files loaded.
+			{{/for}}
+		{{/if}}
+	</div>
+	
+{{else}}
+	<h1>Unable to locate shuttle. Ensure the host device is inside a controllable shuttle.</h1>
+{{/if}}

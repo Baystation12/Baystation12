@@ -440,6 +440,9 @@
 		outputting = 0
 
 /obj/machinery/power/smes/proc/take_damage(var/amount)
+	if(damage > maxdamage)
+		//dont get in an infinite loop of destruction
+		return
 	amount = max(0, round(amount))
 	damage += amount
 	if(damage > maxdamage)

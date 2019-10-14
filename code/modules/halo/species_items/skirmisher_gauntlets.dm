@@ -37,7 +37,7 @@
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/get_mob_overlay(mob/user_mob, slot)
 	var/image/retval = ..()
-	if(slot == "slot_gloves")
+	if(slot == "slot_gloves" && my_shield)
 		my_shield.update_mob_overlay(retval)
 	return retval
 

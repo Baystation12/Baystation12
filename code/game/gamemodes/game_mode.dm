@@ -17,6 +17,7 @@ var/global/list/additional_antag_types = list()
 	var/deny_respawn = 0	                 // Disable respawn during this round.
 
 	var/list/disabled_jobs = list()           // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
+	var/list/disabled_jobs_types = list()
 
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
 	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
@@ -39,9 +40,6 @@ var/global/list/additional_antag_types = list()
 	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
 
 	var/list/allowed_ghost_roles = list(/datum/ghost_role/mouse)
-
-	var/list/factions = list()
-	var/list/factions_by_name = list()
 
 /datum/game_mode/New()
 	..()

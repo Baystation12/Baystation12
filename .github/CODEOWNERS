@@ -1,0 +1,8 @@
+# Require administrator approval in general
+*    @HaloSpaceStation/administrators
+
+# Code changes should have developer review
+*.dm @HaloSpaceStation/developers
+
+# Map changes shoudl require mapper review
+*.dmm @HaloSpaceStation/mappers

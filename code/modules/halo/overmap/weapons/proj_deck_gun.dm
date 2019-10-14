@@ -81,12 +81,13 @@
 	for(var/obj/machinery/deck_gun/gun in available_deck_guns)
 		if(gun.can_fire(target,user,click_params))
 			gun.rounds_loaded--
-			gun.next_reload_time = world.time + DECK_GUN_ROUND_RELOAD_TIME
 			fired_projectile = gun.fired_projectile
 			gun.do_fire_animation()
 			fire_sound = gun.fire_sound
 			fire_projectile(target,user,directly_above)
 			sleep(rand(DECK_GUN_FIRE_DELAY_LOWER,DECK_GUN_FIRE_DELAY_UPPER))
+	for(var/obj/machinery/deck_gun/gun in available_deck_guns)
+		gun.next_reload_time = world.time + gun.round_reload_time
 	fire_sound = initial(fire_sound)
 	fired_projectile = initial(fired_projectile)
 	currently_firing = 0
@@ -152,12 +153,13 @@
 
 //PROJECTILE DEFINES//
 /obj/item/projectile/deck_gun_damage_proj
-	name = "bullet"
+	name = "deck gun round"
 	desc = "oh hello"
 
 	step_delay = 0.1 SECONDS
 	damtype = BRUTE
 	damage = 200
+	penetrating = 0
 
 /obj/item/projectile/deck_gun_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
@@ -165,6 +167,11 @@
 		damage *= 10 //counteract the /10 from wallcode damage processing
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
 	. = ..()
+
+/obj/item/projectile/deck_gun_damage_proj/on_impact(var/atom/a)
+	. = ..()
+	if(!istype(a,/obj/effect/shield))
+		explosion(a,-1,-1,2,4, adminlog = 0)
 
 /obj/item/projectile/overmap/deck_gun_proj
 	name = "deck gun round"

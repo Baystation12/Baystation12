@@ -17,6 +17,7 @@
 	var/field_radius = 1				// Current field radius.
 	var/running = SHIELD_OFF			// Whether the generator is enabled or not.
 	var/input_cap = 1 MEGAWATTS			// Currently set input limit. Set to 0 to disable limits altogether. The shield will try to input this value per tick at most
+	var/input_charge_cap = 1 MEGAWATTS //A hardcoded cap to the amount of energy the input_cap can be set to.
 	var/upkeep_power_usage = 0			// Upkeep power usage last tick.
 	var/upkeep_multiplier = 1			// Multiplier of upkeep values.
 	var/power_usage = 0					// Total power usage last tick.
@@ -293,11 +294,13 @@
 		. = 1
 
 	if(href_list["set_input_cap"])
-		var/new_cap = round(input(usr, "Enter new input cap (in kW). Enter 0 or nothing to disable input cap.", "Generator Power Control", round(input_cap / 1000)) as num)
+		var/new_cap = round(input(usr, "Enter new input cap (in kW). Enter 0 or nothing to disable input cap. Values greater than [input_charge_cap] are capped.", "Generator Power Control", round(input_cap / 1000)) as num)
 		if(!new_cap)
 			input_cap = 0
 			return
 		input_cap = max(0, new_cap) * 1000
+		if(input_cap > input_charge_cap)
+			input_cap = input_charge_cap
 		. = 1
 
 	if(href_list["toggle_mode"])

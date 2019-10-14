@@ -12,14 +12,13 @@
 	deform = 'code/modules/halo/icons/species/r_kig-yar.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet
 	language = "Sangheili"
-	secondary_langs = list("Ruuhti")
-	num_alternate_languages = 1
+	additional_langs = list("Ruuhti")
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 6
-	brute_mod = 1.2
+	brute_mod = 1.1
 	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(0,0)
 	total_health = 200
@@ -81,15 +80,14 @@
 	blood_color = "#4A4A64" //Same blood colour as Elites.
 	default_language = "Sangheili"
 	language = "Sangheili"
-	secondary_langs = list("Tvoai")
-	num_alternate_languages = 1
+	additional_langs = list("Tvoai")
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
 	default_faction = "Covenant"
 
 	pain_mod = 0.8
-	brute_mod = 1.3
+	brute_mod = 1.2
 	slowdown = -2
 
 	total_health = 200

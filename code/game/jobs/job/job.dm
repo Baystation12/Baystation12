@@ -23,21 +23,21 @@
 	var/head_position = 0                 // Is this position Command?
 	var/minimum_character_age = 0
 	var/ideal_character_age = 30
-	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
+	var/create_record = 0                 // Do we announce/make records for people who spawn on this job?
 
-	var/account_allowed = 1               // Does this job type come with a station account?
-	var/economic_modifier = 2             // With how much does this job modify the initial account amount?
+	var/account_allowed = 0               // Does this job type come with a station account?
+	var/economic_modifier = 1             // With how much does this job modify the initial account amount?
 
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
-	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
+	var/loadout_allowed = FALSE            // Whether or not loadout equipment is allowed and to be created when joining.
 	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
 	var/list/allowed_ranks                // Ditto
 
 	var/announced = FALSE                  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
-	var/generate_email = 1
+	var/generate_email = 0
 	var/track_players = 0
 	var/list/assigned_players = list()
 	var/spawn_faction
@@ -65,7 +65,7 @@
 	if(spawn_faction)
 		H.faction = spawn_faction
 		if(ticker.mode)
-			var/datum/faction/F = ticker.mode.factions_by_name[spawn_faction]
+			var/datum/faction/F = GLOB.factions_by_name[spawn_faction]
 			if(F && H.mind)
 				F.assigned_minds.Add(H.mind)
 				F.living_minds.Add(H.mind)
@@ -247,3 +247,6 @@
 
 /datum/job/proc/assign_player(var/datum/mind/new_mind)
 	assigned_players += new_mind
+
+/datum/job/proc/get_email_domain()
+	return "freemail.co"

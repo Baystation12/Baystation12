@@ -2,11 +2,12 @@
 /datum/flood_spawner
 	var/atom/movable/owner
 	var/max_flood = 10
-	var/respawn_delay = 600		//deciseconds
+	var/respawn_delay = 1 MINUTE
 	var/list/live_flood = list()
 	var/list_verify_index = 1
 	var/time_next_respawn = 0
 	var/spawning = 1
+	var/fast_spawn = 1
 	var/list/spawn_pool = list(\
 	/mob/living/simple_animal/hostile/flood/carrier,\
 	/mob/living/simple_animal/hostile/flood/combat_form/human,\
@@ -16,27 +17,33 @@
 	/mob/living/simple_animal/hostile/flood/combat_form/minor,
 	/mob/living/simple_animal/hostile/flood/combat_form/major)
 
-/datum/flood_spawner/New(var/atom/a_owner, var/a_max_flood, var/a_respawn_delay)
+/datum/flood_spawner/New(var/atom/a_owner, var/a_max_flood, var/a_respawn_delay,var/list/a_spawn_pool)
 	owner = a_owner
 	max_flood = a_max_flood
 	respawn_delay = a_respawn_delay
+	if(a_spawn_pool.len > 0)
+		spawn_pool = a_spawn_pool
 
 	if(!owner || !owner.loc)
-		destroy()
+		qdel(src)
 		return
 
-	spawn(0)
-		while(live_flood.len < max_flood)
-			if(!spawn_flood())
-				destroy()
-				return
+	spawning = 1
+	GLOB.processing_objects.Add(src)
 
 /datum/flood_spawner/proc/process()
 	if(world.time > time_next_respawn)
 		time_next_respawn = world.time + respawn_delay
 		if(live_flood.len < max_flood)
-			if(!spawn_flood())
-				destroy()
+			if(fast_spawn)
+				while(live_flood.len < max_flood)
+					if(!spawn_flood())
+						qdel(src)
+						break
+				fast_spawn = 0
+			else
+				if(!spawn_flood())
+					qdel(src)
 		else
 			GLOB.processing_objects.Remove(src)
 			spawning = 0
@@ -69,8 +76,6 @@
 	var/spawn_type = pick(spawn_pool)
 	var/turf/spawn_turf = owner.loc//pick(owner.locs)
 	F = new spawn_type(spawn_turf)
-	F.wander = 1
-	F.stop_automated_movement = 0
 	F.flood_spawner = src
 	live_flood.Add(F)
 	return 1
@@ -82,7 +87,11 @@
 		GLOB.processing_objects.Add(src)
 		time_next_respawn = world.time + respawn_delay
 
-/datum/flood_spawner/proc/destroy()
+/datum/flood_spawner/Destroy()
 	if(spawning)
 		GLOB.processing_objects.Remove(src)
+	if(hasvar(owner, "flood_spawner"))
+		owner:flood_spawner = null
 	qdel(src)
+
+	. = ..()

@@ -142,6 +142,13 @@
 /datum/component_profile/pelican/civ
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/civ)
 
+/obj/vehicles/air/overmap/pelican/civ
+	desc = "A civilian pelican lacking in both weapons and armor."
+	faction = "police"
+	occupants = list(6,0)
+
+	comp_prof = /datum/component_profile/pelican/civ
+
 /obj/vehicles/air/pelican/innie
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has a red fist painted onto the armor. A 40mm Chain-Gun is mounted on the nose."
 	faction = "innie"

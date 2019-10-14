@@ -4,7 +4,7 @@
 	desc = "A man-portable weapon capable of inflicting heavy damage on both vehicles and infantry."
 	icon = 'code/modules/halo/icons/fuel_rod_cannon.dmi'
 	icon_state = "fuel_rod"
-	item_state = "fuel_rod"
+	item_state = "w_fuelrod"
 	fire_sound = 'code/modules/halo/sounds/fuel_rod_fire.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/fuel_rod
@@ -13,6 +13,7 @@
 	caliber = "fuel rod"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',

@@ -23,6 +23,7 @@ var/global/datum/loot_distributor/loot_distributor = new
 	var/loot_type = "generic"
 
 /obj/effect/loot_marker/Initialize()
+	..()
 	. = INITIALIZE_HINT_QDEL
 	var/loot_to_spawn = loot_distributor.get_loot_for_type(loot_type)
 	if(isnull(loot_to_spawn))
@@ -31,7 +32,6 @@ var/global/datum/loot_distributor/loot_distributor = new
 	if(!istype(loc,/turf))
 		loc.contents += spawned_loot
 	do_loot_modifications(spawned_loot)
-	return
 
 /obj/effect/loot_marker/proc/do_loot_modifications(var/obj/loot_spawned)
 	loot_spawned.dir = dir

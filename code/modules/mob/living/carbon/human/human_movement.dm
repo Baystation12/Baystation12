@@ -78,6 +78,9 @@
 	if(CE_SPEEDBOOST in chem_effects)
 		tally -= SPEEDBOOST_CHEM_SPEED_INCREASE
 
+	var/turf/T = get_turf(src)
+	tally += T.get_movement_delay()
+
 	return (tally+config.human_delay)
 
 /mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)

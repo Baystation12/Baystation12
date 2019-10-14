@@ -19,9 +19,12 @@
 	var/activeoverlay = "MFDD Armed Screen"
 	var/strength=1 //The size of the explosion
 	var/free_explode = 0
+	var/list/blocked_species = COVENANT_SPECIES_AND_MOBS
 
-/obj/payload/attack_hand(var/mob/living/user)
+/obj/payload/attack_hand(var/mob/living/carbon/human/user)
 	if(!exploding)
+		if(blocked_species.len && user.species in blocked_species)
+			to_chat(user,"<span class='warning'>Your species does not know how to use that!</span>")
 		if(!checkturf())
 			src.visible_message("<span class='danger'>The [src] beeps a warning:'OPTIMAL LOCATION NOT REACHED'</span>")
 		else
@@ -79,8 +82,9 @@
 		desc = explodedesc + " [(explode_at - world.time)/10] seconds remain."
 	if(exploding && world.time >= explode_at)
 		GLOB.processing_objects -= src
-		new explodetype(src)
+		var/explode_datum = new explodetype(src)
 		loc = null
+		qdel(explode_datum)
 		qdel(src)
 		return
 
@@ -123,6 +127,7 @@
 	seconds_to_disarm = 60
 	strength=1.5
 	explodetype = /datum/explosion
+	blocked_species = list(/datum/species/human)
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator
 	name = "Optimal Ordinance Yield Locator"
@@ -148,7 +153,6 @@
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
-		qdel(src)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
 	radiation_repository.radiate(b.loc,1000,10000)

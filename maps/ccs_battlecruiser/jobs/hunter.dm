@@ -22,7 +22,7 @@
 
 	//hard_cap = 10
 	//initial_spawn_req = 0
-	//initial_spawn_target = 0
+	initial_spawn_target = 1
 
 	landmark_id = "hunter_start"
 	mob_path = /mob/living/simple_animal/mgalekgolo
@@ -32,7 +32,8 @@
 
 	//min_player_age = 0
 
-	antag_text = "You are Mga'lekgolo, a colony of sentient worms encased in powerful armour and carrying heavy weaponry. Protect the ship and the prophets with all your being."
+	welcome_text = "You are Mga'lekgolo, a colony of sentient worms encased in powerful armour and carrying heavy weaponry."
+	antag_text = "Protect the ship and the prophets with all your being."
 
 /datum/antagonist/opredflag_cov/hunter/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
 	. = ..()

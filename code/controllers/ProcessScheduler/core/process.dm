@@ -167,6 +167,11 @@
 	log_debug(msg)
 	message_admins(msg)
 
+#ifdef UNIT_TEST
+	to_world_log("## PROCESS HANG ##: [msg] | [tg_list2text(getContextData())]")
+	log_debug("## PROCESS HANG ##: [msg] | [tg_list2text(getContextData())]")
+#endif
+
 	main.restartProcess(src.name)
 
 /datum/controller/process/proc/kill()

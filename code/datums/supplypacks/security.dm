@@ -29,12 +29,12 @@
 /decl/hierarchy/supply_pack/security/weapons
 	name = "Weapons crate"
 	contains = list(/obj/item/weapon/melee/baton = 2,
-					/obj/item/weapon/gun/energy/gun = 2,
-					/obj/item/weapon/gun/energy/taser = 2,
+					//obj/item/weapon/gun/energy/gun = 2,
+					//obj/item/weapon/gun/energy/taser = 2,
 					/obj/item/weapon/gun/projectile/sec = 2,
 					/obj/item/weapon/storage/box/flashbangs,
 					/obj/item/weapon/storage/box/teargas)
-	cost = 40
+	cost = 100
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Weapons crate"
 	access = access_security
@@ -49,7 +49,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Flare gun crate"
 	access = access_security
-
+/*
 /decl/hierarchy/supply_pack/security/eweapons
 	name = "Advanced Energy Weapons crate"
 	contains = list(/obj/item/weapon/gun/energy/xray = 2,
@@ -182,14 +182,14 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Experimental armor crate"
 	access = access_armory
-
+*/
 /decl/hierarchy/supply_pack/security/securitybarriers
 	name = "Security barrier crate"
-	contains = list(/obj/machinery/deployable/barrier = 4)
+	contains = list(/obj/machinery/deployable/barrier = 2)
 	cost = 20
-	containertype = /obj/structure/closet/crate/secure/gear
+	containertype = /obj/structure/closet/crate/large
 	containername = "\improper Security barrier crate"
-
+/*
 /decl/hierarchy/supply_pack/security/securitybarriers
 	name = "Wall shield Generators"
 	contains = list(/obj/machinery/shieldwallgen = 2)
@@ -197,7 +197,7 @@
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper wall shield generators crate"
 	access = access_teleporter
-
+*/
 /decl/hierarchy/supply_pack/security/holster
 	name = "Holster crate"
 	num_contained = 4
@@ -210,7 +210,7 @@
 	containername = "\improper Holster crate"
 	access = access_security
 	supply_method = /decl/supply_method/randomized
-
+/*
 /decl/hierarchy/supply_pack/security/securityextragear
 	name = "Security surplus equipment"
 	contains = list(/obj/item/weapon/storage/belt/security = 3,
@@ -242,7 +242,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Forensic equipment"
 	access = access_forensics_lockers
-
+*/
 /decl/hierarchy/supply_pack/security/detectiveclothes
 	name = "Investigation apparel"
 	contains = list(/obj/item/clothing/under/det/black = 2,
@@ -260,7 +260,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Investigation clothing"
 	access = access_forensics_lockers
-
+/*
 /decl/hierarchy/supply_pack/security/officergear
 	name = "Officer equipment"
 	contains = list(/obj/item/clothing/suit/storage/vest/nt,
@@ -367,7 +367,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Navy blue security uniform crate"
 	access = access_security
-
+*/
 /decl/hierarchy/supply_pack/security/corporatesecurityclothing
 	name = "Corporate security uniform crate"
 	contains = list(/obj/item/weapon/storage/backpack/satchel_sec = 2,

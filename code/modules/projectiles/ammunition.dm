@@ -21,14 +21,15 @@
 	if(ispath(projectile_type))
 		BB = new projectile_type(src)
 
-//removes the projectile from the ammo casing
 /obj/item/ammo_casing/proc/expend()
 	. = BB
 	BB = null
-	set_dir(pick(GLOB.alldirs)) //spin spent casings
-	pixel_x = rand(-40,40)
-	pixel_y = rand(-40,40)		//random pixel offset... possibility of turf overlay
+	update_icon()
 
+/obj/item/ammo_casing/proc/eject(var/turf/landing, var/dir_throw)
+	forceMove(landing)
+	throw_at(get_edge_target_turf(landing, dir_throw), rand(1,3), 1)
+	animate(src, pixel_x = rand(-16,16), pixel_y = rand(-16,16), transform = turn(matrix(), rand(120,300)), time  = rand(3,8))
 	// Aurora forensics port, gunpowder residue.
 	if(leaves_residue)
 		leave_residue()

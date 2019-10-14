@@ -140,7 +140,7 @@
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
-	adminmsg2adminirc(src, C, html_decode(msg))
+	ahelp2discord(src, C, html_decode(msg))
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	update_ticket_panels()
@@ -170,7 +170,7 @@
 //		return
 
 	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
-	adminmsg2adminirc(src, sender, html_decode(msg))
+	ahelp2discord(src, sender, html_decode(msg))
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
 	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[sender]</span>: <span class='message'>[msg]</span></span></span>")

@@ -20,9 +20,11 @@ var/command_name = null
 	if (command_name)
 		return command_name
 
-	var/name = "[GLOB.using_map.boss_name]"
+	var/name = "(BUG) Unable to set command name"
+	if(GLOB.using_map)
+		name = "[GLOB.using_map.boss_name]"
 
-	command_name = name
+		command_name = name
 	return name
 
 /proc/change_command_name(var/name)
@@ -127,9 +129,11 @@ var/religion_name = null
 
 var/syndicate_name = null
 /proc/syndicate_name()
-	if (syndicate_name)
-		return syndicate_name
+	if (!syndicate_name)
+		syndicate_name = random_syndicate_name()
+	return syndicate_name
 
+/proc/random_syndicate_name()
 	var/name = ""
 
 	// Prefix
@@ -152,7 +156,6 @@ var/syndicate_name = null
 		name += pick("-", "*", "")
 		name += pick("Tech", "Sun", "Co", "Tek", "X", "Inc", "Gen", "Star", "Dyne", "Code", "Hive")
 
-	syndicate_name = name
 	return name
 
 

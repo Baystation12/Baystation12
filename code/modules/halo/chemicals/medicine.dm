@@ -57,6 +57,7 @@
 
 /datum/reagent/biofoam/proc/mend_external(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/external/o in H.organs)
+		check_and_stop_bleeding(o)
 		if(o.brute_dam + o.burn_dam >= o.min_bruised_damage)
 			o.brute_dam -= o.min_bruised_damage
 			o.burn_dam -= o.min_bruised_damage
@@ -66,7 +67,6 @@
 			o.status &= ~ORGAN_BROKEN
 			H.next_pain_time = world.time //Overrides the next pain timer
 			H.custom_pain("<span class = 'userdanger'>You feel the bones in your [o.name] being pushed into place.</span>",10)
-			check_and_stop_bleeding(o)
 
 /datum/reagent/biofoam/proc/mend_internal(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/I in H.internal_organs)

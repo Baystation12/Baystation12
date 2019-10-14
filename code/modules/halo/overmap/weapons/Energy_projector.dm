@@ -190,6 +190,7 @@
 	desc = "An incredibly hot beam of pure light"
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'
 	icon_state = "pulse_mega_proj"
+	damage = 2000
 	ship_damage_projectile = /obj/item/projectile/projector_laser_damage_proj
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/projector_laser_proj
@@ -212,7 +213,15 @@
 
 	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
-			new /turf/unsimulated/floor/lava/glassed_turf(F)
+			if(hit.map_z.Find(z_level) < hit.map_z.len)
+				var/turf/under_loc = GetBelow(F)
+				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated/floor))
+					F.ChangeTurf(/turf/simulated/open)
+					under_loc.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
+				else
+					F.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
+			else
+				F.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
 
 
 /obj/effect/projectile/projector_laser_proj
@@ -247,7 +256,7 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,0,1,2,4, adminlog = 0)
+	explosion(a,0,2,3,5, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

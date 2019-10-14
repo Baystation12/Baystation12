@@ -26,6 +26,7 @@
 	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
+	var/ignore_overmap_range = 0
 
 /obj/item/device/radio
 	var/datum/radio_frequency/radio_connection
@@ -456,10 +457,11 @@
 		return -1
 	if(!listening)
 		return -1
-	if(!(0 in level))
-		var/turf/position = get_turf(src)
-		if(!position || !("[position.z]" in level))
-			return -1
+	if(!ignore_overmap_range)
+		if(!(0 in level))
+			var/turf/position = get_turf(src)
+			if(!position || !("[position.z]" in level))
+				return -1
 	if(freq in ANTAG_FREQS)
 		if(!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys
 			return -1
@@ -701,6 +703,7 @@
 	listening = 0
 
 /obj/item/device/radio/announcer
+	ignore_overmap_range = 1
 	invisibility = 101
 	listening = 0
 	canhear_range = 0

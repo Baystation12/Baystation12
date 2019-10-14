@@ -8,7 +8,7 @@
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap
 	var/sound/fire_sound = null
 	var/requires_ammo = 0
-	var/do_track_fired_proj = 0
+	var/do_track_fired_proj = 1
 	var/currently_tracked_proj = null
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
@@ -85,7 +85,7 @@
 
 /obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user,var/directly_above = 0)
 	var/obj/om_obj = map_sectors["[z]"]
-	var/obj/item/projectile/overmap/new_projectile = new fired_projectile (om_obj.loc)
+	var/obj/item/projectile/overmap/new_projectile = new fired_projectile (om_obj.loc,src)
 	new_projectile.damage += get_linked_device_damage_mod()
 	new_projectile.permutated += om_obj //Ensuring we don't hit ourselves somehow
 	new_projectile.firer = user

@@ -16,7 +16,8 @@
 	var/data = ""
 	for(var/typepath in known_locations)
 		var/obj/instance = locate(typepath)
-		data += "[known_locations[typepath]] : [instance.x],[instance.y]\n"
+		if(instance)
+			data += "[known_locations[typepath]] : [instance.x],[instance.y]\n"
 
 	visible_message("[user] accesses [src]'s databanks.")
 	to_chat(user,"<span class = 'notice'>Data Retrieved:\n[data]</span>")

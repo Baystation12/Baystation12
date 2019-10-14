@@ -30,7 +30,7 @@
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
 
 	if(chambered)//We have a shell in the chamber
-		chambered.loc = get_turf(src)//Eject casing
+		chambered.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))//Eject casing
 		chambered = null
 
 	if(loaded.len)

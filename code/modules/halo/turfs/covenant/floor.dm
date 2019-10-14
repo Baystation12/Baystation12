@@ -22,7 +22,7 @@
 	name = "Nanolaminate Flooring"
 	desc = "Floor made of an advanced alien alloy."
 	icon = 'code/modules/halo/turfs/covenant/floors.dmi'
-	icon_base = "Nanolaminate Flooring"
+	icon_base = "cov_floor"
 	build_type = /obj/item/stack/tile/covenant
 	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE | TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/covenant

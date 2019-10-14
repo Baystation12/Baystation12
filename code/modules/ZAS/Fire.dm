@@ -39,8 +39,6 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /zone/proc/process_fire()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
 
-	//datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
-	//var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
 	var/firelevel = burn_gas.zburn(src, force_burn = 1, no_check = 1)
 
 	air.merge(burn_gas)
@@ -71,7 +69,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	//As a simplification, we remove fuel equally from all fuel sources. It might be that some fuel sources have more fuel,
 	//some have less, but whatever. It will mean that sometimes we will remove a tiny bit less fuel then we intended to.
 
-	var/fuel_to_remove = used_liquid_fuel/(fuel_objs.len*LIQUIDFUEL_AMOUNT_TO_MOL) //convert back to liquid volume units
+	var/fuel_to_remove = used_liquid_fuel/(fuel_objs.len) //convert back to liquid volume units
 
 	for(var/O in fuel_objs)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = O
@@ -80,7 +78,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			continue
 
 		fuel.amount -= fuel_to_remove
-		if(fuel.amount <= fuel_to_remove)
+		if(fuel.amount <= 0)
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
@@ -226,7 +224,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	fire_protection = world.time
 
 //Returns the firelevel
-/datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
+/datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0, var/turf/simulated/target_turf = null)
 	. = 0
 	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
 
@@ -251,9 +249,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//Liquid Fuel
 		var/fuel_area = 0
-		if(zone)
+		if(target_turf)
+			fuel_area = 1
+			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in target_turf)
+				liquid_fuel += fuel.amount
+		else if(zone)
 			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in zone.fuel_objs)
-				liquid_fuel += fuel.amount*LIQUIDFUEL_AMOUNT_TO_MOL
+				liquid_fuel += fuel.amount
 				fuel_area++
 
 		total_fuel = gas_fuel + liquid_fuel
@@ -313,7 +315,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 			for(var/g in burned_fuel.gas)
 				adjust_gas(gas_data.burn_product[g], burned_fuel.gas[g])
 
-		if(zone)
+		if(target_turf)
+			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in target_turf)
+				fuel.amount -= used_liquid_fuel
+				if(fuel.amount <= 0)
+					qdel(fuel)
+
+		else if(zone)
 			zone.remove_liquidfuel(used_liquid_fuel, !check_combustability())
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
@@ -396,8 +404,8 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 
 /mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
-	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
-	apply_damage(2.5*mx, BURN)
+	var/mx = firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
+	apply_damage(mx, BURN)
 
 
 /mob/living/carbon/human/FireBurn(var/firelevel, var/last_temperature, var/pressure)
@@ -428,10 +436,11 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 			if(C.body_parts_covered & ARMS)
 				arms_exposure = 0
 	//minimize this for low-pressure enviroments
-	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
+	var/mx = firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
+	/*
 	apply_damage(2.5*mx*head_exposure,  BURN, BP_HEAD,  0, 0, "Fire")
 	apply_damage(2.5*mx*chest_exposure, BURN, BP_CHEST, 0, 0, "Fire")
 	apply_damage(2.0*mx*groin_exposure, BURN, BP_GROIN, 0, 0, "Fire")
@@ -439,3 +448,11 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, 0, 0, "Fire")
+	*/
+	apply_damage(0.3*mx*head_exposure,  BURN, BP_HEAD,  0, 0, "Fire")
+	apply_damage(0.3*mx*chest_exposure, BURN, BP_CHEST, 0, 0, "Fire")
+	apply_damage(0.05*mx*groin_exposure, BURN, BP_GROIN, 0, 0, "Fire")
+	apply_damage(0.1*mx*legs_exposure,  BURN, BP_L_LEG, 0, 0, "Fire")
+	apply_damage(0.1*mx*legs_exposure,  BURN, BP_R_LEG, 0, 0, "Fire")
+	apply_damage(0.1*mx*arms_exposure,  BURN, BP_L_ARM, 0, 0, "Fire")
+	apply_damage(0.1*mx*arms_exposure,  BURN, BP_R_ARM, 0, 0, "Fire")

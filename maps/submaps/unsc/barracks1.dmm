@@ -1,0 +1,81 @@
+"a" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/decor{icon_state = "square"},/area/space)
+"b" = (/turf/simulated/wall/r_wall,/area/space)
+"c" = (/obj/item/weapon/bedsheet/brown,/obj/structure/bed,/turf/simulated/floor/tiled/dark,/area/space)
+"d" = (/turf/simulated/floor/tiled/dark,/area/space)
+"e" = (/obj/effect/floor_decal/corner/green/three_quarters{icon_state = "corner_white_three_quarters"; dir = 8},/turf/simulated/floor/tiled/dark,/area/space)
+"f" = (/obj/effect/floor_decal/corner/green{icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled/dark,/area/space)
+"g" = (/obj/effect/floor_decal/corner/green/three_quarters{icon_state = "corner_white_three_quarters"; dir = 1},/turf/simulated/floor/tiled/dark,/area/space)
+"h" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{icon_state = "square"},/area/space)
+"i" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 8},/turf/simulated/floor/decor{icon_state = "square"},/area/space)
+"j" = (/turf/simulated/floor/decor{icon_state = "techfloor_gray"},/area/space)
+"k" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 4},/turf/simulated/floor/decor{icon_state = "square"},/area/space)
+"l" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/dark,/area/space)
+"m" = (/obj/effect/floor_decal/corner/green{icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/dark,/area/space)
+"n" = (/obj/effect/floor_decal/corner/green{icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled/dark,/area/space)
+"o" = (/obj/effect/floor_decal/corner/green/three_quarters,/turf/simulated/floor/tiled/dark,/area/space)
+"p" = (/obj/effect/floor_decal/corner/green{icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled/dark,/area/space)
+"q" = (/obj/effect/floor_decal/corner/green/three_quarters{icon_state = "corner_white_three_quarters"; dir = 4},/turf/simulated/floor/tiled/dark,/area/space)
+"r" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 8},/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"s" = (/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"t" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"u" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"v" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/vehicles/warthog,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"w" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/vehicles/warthog/troop,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"x" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/vehicles/warthog/turretless,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"y" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 8},/obj/machinery/floodlight,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"z" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"A" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/obj/machinery/floodlight,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"B" = (/turf/simulated/floor/decor{icon_state = "techfloor_lightedcorner"; dir = 8},/area/space)
+"C" = (/turf/simulated/floor/decor{icon_state = "techfloor_lightedcorner"; dir = 4},/area/space)
+"D" = (/obj/machinery/door/airlock/halo,/turf/space,/area/space)
+"E" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate/marine/marine_medic,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"F" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate/marine/rifleman,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"G" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate/marine/cqc,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"H" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate/secure/weapon,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"I" = (/obj/machinery/floodlight,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"J" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 10},/obj/machinery/floodlight,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"K" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 6},/obj/machinery/floodlight,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"L" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"M" = (/obj/effect/floor_decal/industrial/shutoff{name = "fueltank marker"},/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"N" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/space)
+"O" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/space)
+"P" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "square"},/area/space)
+"Q" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "square"},/area/space)
+"R" = (/obj/effect/floor_decal/corner/green{icon_state = "corner_white"; dir = 9},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/space)
+"S" = (/obj/effect/floor_decal/corner/green{icon_state = "corner_white"; dir = 6},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/space)
+"T" = (/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"U" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+"V" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled{icon = 'icons/turf/floors.dmi'; icon_state = "asteroidfloor"},/area/space)
+
+(1,1,1) = {"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bcdbefgbdcbahijjkhabcdbefgbdcb
+bNdlmdnldObaaijjkaabNdlmdnldOb
+bcdbmdnbdcbPaijjkaQbcdbmdnbdcb
+bbbbRdSbbbbaaijjkaabbbbRdSbbbb
+bcdbmdnbdcbahijjkhabcdbmdnbdcb
+bNdlmdnldObBjjjjjjCbNdlmdnldOb
+bcdbmdnbdcbBjjjjjjCbcdbmdnbdcb
+bbbbRdSbbbbahijjkhabbbbRdSbbbb
+bcdbmdnbdcbaaijjkaabcdbmdnbdcb
+bNdlmdnldObPaijjkaQbNdlmdnldOb
+bcdbmdnbdcbaaijjkaabcdbmdnbdcb
+bbbbRdSbbbbahijjkhabbbbRdSbbbb
+bcdbmdnbdcbBjjjjjjCbcdbmdnbdcb
+bNdlmdnldObBjjjjjjCbNdlmdnldOb
+bcdbmdnbdcbahijjkhabcdbmdnbdcb
+bbbbRdSbbbbaaijjkaabbbbRdSbbbb
+bcdbmdnbdcbPaijjkaQbcdbmdnbdcb
+bNdlmdnldObaaijjkaabNdlmdnldOb
+bcdbopqbdcbahijjkhabcdbopqbdcb
+bbbblblbbbbbbbDDbbbbbbblblbbbb
+yssssssssssssTssTssssssssssssA
+rsssssssssssssssssssssssssssst
+rsEFEsssGGGssssssssuussuussuut
+rsEEGsssFGHsssLLssMvusMwusMxut
+rsssssIssssssUbbVsssssssssssst
+rsHEFsssEFFsssLLsssuussuussuut
+rsGHEsssFHHsssssssMvusMwusMxut
+rsssssssssssssssssssssssssssst
+JzzzzzzzzzzzzzzzzzzzzzzzzzzzzK
+"}

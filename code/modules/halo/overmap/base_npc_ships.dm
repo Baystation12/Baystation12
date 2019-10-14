@@ -11,13 +11,19 @@
 "You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
 )
 #define ALL_CIVILIANS_SHIPNAMES list(\
-"Pete's Cube","The Nomad","The Alexander","Free Range","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
+"Pete's Cube","The Nomad","The Alexander","Free Range","Heavenly Punisher","Sky Ruler","Bare Necessities","Arizona Killer","Iron Horse","Linebacker","Last Light","Hopes Eclipse","Fleeting Dawn","Titans Might","Despacito","Skippy","No True Scotsman","Blade Of Mars","Targeting Solution","Wooden Cat","The Cerberus","Message of Peace","Persian Persuader","Beowulf","Trojan Horse","Jade Dragon","Danger Zone","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home","Mileage May Vary","Pimp Hand"\
 )
 
 #define STOP_WAIT_TIME 5 MINUTES
 #define STOP_DISEMBARK_TIME 2 MINUTES
 
-#define BROADCAST_ON_HIT_PROB 15
+#define BROADCAST_ON_HIT_PROB 20
+
+#define ICON_FILES_PICKFROM list('code/modules/halo/overmap/freighter.dmi','code/modules/halo/icons/overmap/large_cargo_ship.dmi','code/modules/halo/icons/overmap/medical_ship.dmi','code/modules/halo/icons/overmap/mariner-class.dmi','code/modules/halo/icons/overmap/heavy_freighter.dmi')
+
+#define LIGHTRANGE_LIKELY_UNUSED 99
+
+#define FLEET_STICKBY_RANGE 2 //The max range a fleet-bound ship will stay from the fleet leader.
 
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
@@ -27,12 +33,14 @@
 	icon_state = "ship"
 
 	var/list/ship_name_list = ALL_CIVILIANS_SHIPNAMES
+	var/list/icons_pickfrom_list = ICON_FILES_PICKFROM
 
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
-	var/message_language = "Galactic Common"
+	var/radio_language = "Galactic Common"
+	var/radio_channel = "System"
 
-	var/hull = 700 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
+	var/hull = 1500 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
 	var/move_delay = 6 SECONDS //The amount of ticks to delay for when auto-moving across the system map.
 	var/turf/target_loc
@@ -48,9 +56,29 @@
 
 	var/list/cargo_containers = list()
 
-/obj/effect/overmap/ship/npc_ship/New()
+	var/last_radio_time = 0
+	var/radio_cooldown = 5 SECONDS
+	var/next_message
+
+/obj/effect/overmap/ship/npc_ship/proc/pick_ship_icon()
+	var/list/icons_pickfrom = icons_pickfrom_list
+	if(icons_pickfrom.len == 0)
+		return
+	icon = pick(icons_pickfrom)
+
+/obj/effect/overmap/ship/npc_ship/proc/generate_ship_name()
+	name = pick(ship_name_list)
+
+/obj/effect/overmap/ship/npc_ship/Initialize()
+	my_faction = GLOB.factions_by_name[get_faction()]
 	generate_ship_name()
+	pick_ship_icon()
+	var/turf/start_turf = locate(x,y,z)
 	. = ..()
+	map_z.Cut()
+	if(!isnull(start_turf))
+		forceMove(start_turf)
+	pick_target_loc()
 
 /obj/effect/overmap/ship/npc_ship/proc/cargo_init()
 	if(cargo_containers.len == 0 || cargo_contained.len == 0)
@@ -92,17 +120,15 @@
 		return 1
 	return 0
 
-/obj/effect/overmap/ship/npc_ship/proc/radio_message(var/mob/target_mob = null,var/message = null) //If no targetmob supplied, broadcasts to all players
-	if(target_mob)
-		if(!istype(target_mob))
-			message = target_mob
-		else
-			to_chat(target_mob,message)
-			return
-
-	for(var/mob/living/m in GLOB.player_list)
-		if(m.stat == CONSCIOUS)
-			to_chat(m,message)
+/obj/effect/overmap/ship/npc_ship/proc/radio_message(var/message, var/ignore_cooldown = 0)
+	//check if we're still on cooldown from last radio message
+	if(world.time >= last_radio_time + radio_cooldown || ignore_cooldown)
+		last_radio_time = world.time
+		GLOB.global_headset.autosay(message, src.name, radio_channel, radio_language)
+	else
+		//otherwise queue it up
+		//note: if there is lots of radio spam some messages will be lost so only send the latest message
+		next_message = message
 
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
@@ -120,32 +146,41 @@
 		shipmap_handler.free_map(z_level)
 		map_z -= z_level
 	GLOB.processing_objects -= src
+	my_faction.npc_ships -= src
 	qdel(src)
-
-/obj/effect/overmap/ship/npc_ship/proc/generate_ship_name()
-	name = pick(ship_name_list)
-
-/obj/effect/overmap/ship/npc_ship/Initialize()
-	var/turf/start_turf = locate(x,y,z)
-	. = ..()
-	map_z.Cut()
-	if(!isnull(start_turf))
-		forceMove(start_turf)
-	pick_target_loc()
 
 /obj/effect/overmap/ship/npc_ship/proc/ship_targetedby_defenses()
 	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
-
-	var/n_x = rand(1, GLOB.using_map.overmap_size - 1)
-	var/n_y = rand(1, GLOB.using_map.overmap_size - 1)
-
-	target_loc = locate(n_x,n_y,GLOB.using_map.overmap_z)
+	if(our_fleet && our_fleet.leader_ship != src)
+		target_loc = pick(range(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
+		return
+	var/list/sectors_onmap = list()
+	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
+		var/obj/effect/overmap/om_obj = locate(type)
+		if(om_obj && !isnull(om_obj.loc) && om_obj.base && om_obj.loc in GLOB.overmap_tiles_uncontrolled) //Only even try going if it's a "base" object
+			sectors_onmap += om_obj
+	if(sectors_onmap.len == 0)
+		target_loc = pick(GLOB.overmap_tiles_uncontrolled)
+	else
+		var/obj/chosen = pick(sectors_onmap)
+		var/list/turfs_nearobj = list()
+		for(var/turf/unsimulated/map/t in range(7,chosen))
+			turfs_nearobj += t
+		target_loc = pick(turfs_nearobj)
 
 /obj/effect/overmap/ship/npc_ship/process()
+	//despawn after a while
 	if(world.time >= unload_at && unload_at != 0)
 		lose_to_space()
+
+	//a delay to chat messages
+	if(next_message)
+		if(world.time >= last_radio_time + radio_cooldown)
+			radio_message(next_message)
+			next_message = null
+
 	if(hull > initial(hull)/4)
 		var/stop_normal_operations = 0
 		for(var/datum/npc_ship_request/request in available_ship_requests)
@@ -156,10 +191,11 @@
 		if(loc == target_loc)
 			pick_target_loc()
 		else
-
 			walk(src,get_dir(src,target_loc),move_delay)
 			dir = get_dir(src,target_loc)
 			is_still() //A way to ensure umbilicals break when we move.
+			if(our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != null)
+				pick_target_loc()
 	else
 		if(is_player_controlled())
 			. = ..()
@@ -171,23 +207,7 @@
 	var/message_to_use = pick(messages_on_hit)
 	if(ship_disabled)
 		message_to_use = pick(messages_on_death)
-	for(var/mob/living/m in GLOB.player_list)
-		var/have_lang = 0
-		for(var/datum/language/l in m.languages)
-			if(l.name == message_language)
-				radio_message(m,"<span class = 'radio'>\[EBAND\] [name]: \"[message_to_use]\" \[[x]:[y]\]</span>")
-				have_lang = 1
-				break
-		if(!have_lang)
-			var/new_message = ""
-			var/datum/language/default = m.get_default_language()
-			var/iter
-			for(iter = 0; iter <= lentext(message_to_use)/2; iter++)
-			if(!isnull(default))
-				new_message += pick(default.syllables)
-			else
-				new_message += pick("a","e","i","o","u")
-			radio_message(m,"<span class = 'radio'>\[EBAND\] [name]: \"[new_message]\" \[[x]:[y]\]</span>")
+	radio_message("[message_to_use]")
 
 /obj/effect/overmap/ship/npc_ship/proc/take_projectiles(var/obj/item/projectile/overmap/proj,var/add_proj = 1)
 	if(add_proj)
@@ -197,6 +217,7 @@
 	hull -= proj.damage
 	if(hull <= initial(hull)/4 && target_loc)
 		broadcast_hit(1)
+		target_loc = null
 	else
 		if(prob(BROADCAST_ON_HIT_PROB)) //If we get the probability, broadcast the hit.
 			broadcast_hit()
@@ -222,13 +243,24 @@
 		to_world("Loading Ship-Map: [link]... This may cause lag.")
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		var/z_to_load_at = shipmap_handler.get_next_usable_z()
+		sleep(10) //Wait a tick again, to ensure te map is actually loaded in
 		shipmap_handler.un_free_map(z_to_load_at)
 		map_sectors["[z_to_load_at]"] = src
 		maploader.load_map(link,z_to_load_at)
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
-		create_lighting_overlays_zlevel(z_to_load_at)
+
+	for(var/z_level in map_z)
+		create_lighting_overlays_zlevel(z_level)
+		sleep(10) //Wait a tick or so.
+		for(var/obj/machinery/light/light in GLOB.machines)
+			if(!(text2num("[light.z]") in map_z))
+				continue
+			var/orig_range = light.light_range
+			light.set_light(LIGHTRANGE_LIKELY_UNUSED)
+			spawn(30) //Wait 3 ticks
+				light.set_light(orig_range)
 	cargo_init()
 	damage_spawned_ship()
 	GLOB.processing_objects += src
@@ -245,8 +277,10 @@
 	for(var/datum/npc_ship_request/npc_ship_request in available_ship_requests)
 		if(npc_ship_request.request_name == "")
 			continue
-		if(authority_level in npc_ship_request.request_auth_levels)
-			requestable_actions += npc_ship_request.request_name
+		for(var/auth_level in npc_ship_request.request_auth_levels)
+			if("[authority_level]" == "[auth_level]")
+				requestable_actions += npc_ship_request.request_name
+				break
 
 /obj/effect/overmap/ship/npc_ship/proc/parse_action_request(var/request,var/mob/requester,var/auth_level)
 	for(var/datum/npc_ship_request/npc_ship_request in available_ship_requests)
@@ -262,59 +296,38 @@
 
 /datum/npc_ship_request/proc/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source) //Return 1 in this to stop normal NPC ship move processing.
 
-/datum/npc_ship_request/halt
-	request_name = "Halt"
-	request_auth_levels = list(AUTHORITY_LEVEL_UNSC,AUTHORITY_LEVEL_ONI)
-	var/time_leave_at = 0
-	var/already_warned = 0
-
-/datum/npc_ship_request/halt/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
-	if(time_leave_at > 0)
-		to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Woah, Calm down. We're already waiting on someone's behalf.\"</span>")
-		return
-	ship_source.target_loc = null
-	to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"Slowing down.. I can only give you [STOP_WAIT_TIME/600] minutes.\"</span>")
-	request_requires_processing = 1
-	time_leave_at = world.time + STOP_WAIT_TIME
-
-/datum/npc_ship_request/halt/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source)
-	if(time_leave_at != 0 && world.time > time_leave_at)
-		if(already_warned)
-			time_leave_at = 0
-			ship_source.pick_target_loc()
-			already_warned = 0
-			request_requires_processing = 0
-			return
-		already_warned = 1
-		to_world("<span class = 'radio'>\[System\] [ship_source.name]: \"I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.\"</span>")
-		time_leave_at = world.time + STOP_DISEMBARK_TIME
-
 /datum/npc_ship
-	var/list/mapfile_links = list('maps/civ_hauler/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
+	var/list/mapfile_links = list('maps/npc_ships/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
 
 	var/fore_dir = WEST //The direction of "fore" for the mapfile.
 	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile. Format: Topleft-x,Topleft-y,bottomright-x,bottomright-y
 
 /datum/npc_ship/ccv_star
-	mapfile_links = list('maps/overmap_ships/CCV_Star.dmm')
+	mapfile_links = list('maps/npc_ships/CCV_Star.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_comet
-	mapfile_links = list('maps/overmap_ships/CCV_Comet.dmm')
+	mapfile_links = list('maps/npc_ships/CCV_Comet.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_sbs
-	mapfile_links = list('maps/overmap_ships/CCV_Slow_But_Steady.dmm')
+	mapfile_links = list('maps/npc_ships/CCV_Slow_But_Steady.dmm')
 	fore_dir = WEST
 	map_bounds = list(6,51,72,27)
 
 /datum/npc_ship/unsc_patrol
-	mapfile_links = list('maps/overmap_ships/UNSC_Corvette.dmm')
+	mapfile_links = list('maps/npc_ships/UNSC_Corvette.dmm')
 	fore_dir = WEST
 	map_bounds = list(7,70,54,29)
 
+/datum/npc_ship/cov_patrol
+	mapfile_links = list('maps/npc_ships/kigyar_missionary.dmm')
+	fore_dir = WEST
+	map_bounds = list(2,114,139,44)
+
+#undef LIGHTRANGE_LIKELY_UNUSED
 #undef NPC_SHIP_LOSE_DELAY
 #undef ON_PROJECTILE_HIT_MESSAGES
 #undef ON_DEATH_MESSAGES
