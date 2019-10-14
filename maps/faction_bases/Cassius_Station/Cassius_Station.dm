@@ -10,7 +10,7 @@
 	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
 	icon_state = "SMAC"
 	faction = "UNSC"
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/odst_corvette)
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unscironwill)
 	base = 1
 	block_slipspace = 1
 	fore_dir = WEST

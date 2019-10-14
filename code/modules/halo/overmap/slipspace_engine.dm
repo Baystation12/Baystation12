@@ -260,6 +260,7 @@
 /obj/payload/slipspace_core
 	name = "Slipspace Core"
 	desc = "The core of a slipspace device, detached and armed."
+	w_class = ITEM_SIZE_HUGE
 	free_explode = 1
 	explodetype = /datum/explosion/slipspace_core
 	seconds_to_explode = 300 //5 minutes to explode.

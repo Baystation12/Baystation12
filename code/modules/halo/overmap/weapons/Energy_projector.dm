@@ -3,7 +3,7 @@
 #define LOAD_AMMO_DELAY 140
 #define CAPACITOR_DAMAGE_AMOUNT 0.8
 #define CAPACITOR_MAX_STORED_CHARGE 150000
-#define CAPACITOR_RECHARGE_TIME 15 //This is in seconds.
+#define CAPACITOR_RECHARGE_TIME 30 //This is in seconds.
 
 /turf/unsimulated/floor/lava/glassed_turf
 	var/cool_at = 0
@@ -215,7 +215,7 @@
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
 			if(hit.map_z.Find(z_level) < hit.map_z.len)
 				var/turf/under_loc = GetBelow(F)
-				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated/floor))
+				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated))
 					F.ChangeTurf(/turf/simulated/open)
 					under_loc.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
 				else
@@ -235,7 +235,7 @@
 	icon_state = ""
 	alpha = 0
 	damage = 900
-	penetrating = 999
+	penetrating = 8
 	step_delay = 0.0 SECONDS
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj
@@ -256,33 +256,11 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
-	explosion(a,0,2,3,5, adminlog = 0)
+	explosion(a,2,3,4,5, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 		S.adminwarn_attack()
-
-/obj/item/projectile/projector_laser_damage_proj/launch()
-	create_child_projs()
-	. = ..()
-
-/obj/item/projectile/projector_laser_damage_proj/proc/create_child_projs()
-	//Spawn 4 child-projectiles
-	var/list/obj/item/projectile/child_projs = list()
-	var/list/adjacent_turfs = orange(starting,1)
-	var/i = 0//Why do you need to do it this way, DMcode, WHY?!?!
-	for(i=0,i<=4,i++)
-		var/turf/spawnloc = pick(adjacent_turfs)
-		adjacent_turfs =- spawnloc
-		var/spawned_proj = new /obj/item/projectile/projector_laser_damage_proj/childproj(spawnloc)
-		child_projs.Add(spawned_proj)
-
-	for(var/obj/item/projectile/childproj in child_projs)
-		childproj.launch(pick(range(original,1)-original))
-
-
-/obj/item/projectile/projector_laser_damage_proj/childproj/create_child_projs()
-	return
 
 #undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE

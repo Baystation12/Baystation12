@@ -1,11 +1,11 @@
-//UNSC BERTELS Crew Outfits
+//UNSC Ship Crew Outfits
 
 /decl/hierarchy/outfit/job/UNSC_ship
 	name = "UNSC ship"
 	hierarchy_type = /decl/hierarchy/outfit/job/UNSC_ship
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician
-	name = "UNSC Bertels Engineer"
+	name = "UNSC Ship Engineer"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/technician
@@ -16,7 +16,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman
-	name = "UNSC Bertels Helmsman"
+	name = "UNSC Ship Helmsman"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/pilot
@@ -26,7 +26,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew
-	name = "UNSC Bertels Bridge Crew"
+	name = "UNSC Ship Bridge Crew"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/command
@@ -36,7 +36,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot
-	name = "UNSC Bertels Pelican Pilot"
+	name = "UNSC Ship Pelican Pilot"
 
 	l_ear = /obj/item/device/radio/headset/unsc/pilot
 	uniform = /obj/item/clothing/under/unsc/pilot
@@ -47,7 +47,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor
-	name = "UNSC Bertels Janitor"
+	name = "UNSC Ship Janitor"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/logistics
@@ -57,7 +57,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelscrew
-	name = "UNSC Bertels Ship Crew"
+	name = "UNSC Ship Ship Crew"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/tactical
@@ -67,7 +67,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
-	name = "UNSC Bertels Commanding Officer"
+	name = "UNSC Ship Commanding Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
@@ -78,7 +78,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
-	name = "UNSC Bertels Executive Officer"
+	name = "UNSC Ship Executive Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/officer
 	uniform = /obj/item/clothing/under/unsc/command
@@ -87,10 +87,10 @@
 
 	flags = 0
 
-//UNSC BERTELS Medical Staff Outfits
+//UNSC Ship Medical Staff Outfits
 
 /decl/hierarchy/outfit/job/UNSC_ship/medical
-	name = "UNSC Bertels Medical Staff"
+	name = "UNSC Ship Medical Staff"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/medical
