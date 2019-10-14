@@ -1,5 +1,0 @@
-author: "Nanako"
-delete-after: True
-changes: 
-  - rscadd: "Airlocks, curtains, ladders and cult runes can now be interacted with by clicking the floor in their tile."
-  - tweak: "Lift call buttons and panels are now easier to click"
