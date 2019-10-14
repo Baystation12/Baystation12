@@ -4063,7 +4063,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/structure/reagent_dispensers/water_cooler,
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 4
+	},
 /obj/machinery/light{
 	dir = 4
 	},
@@ -11855,7 +11857,6 @@
 	pixel_x = -24
 	},
 /obj/structure/reagent_dispensers/water_cooler{
-	icon_state = "water_cooler";
 	dir = 4
 	},
 /obj/structure/cable/green{
@@ -12716,7 +12717,7 @@
 	dir = 4
 	},
 /obj/structure/reagent_dispensers/water_cooler{
-	pixel_x = 6
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
@@ -17854,7 +17855,7 @@
 	},
 /obj/machinery/vending/coffee{
 	icon_state = "coffee";
-	dir = 4
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -17900,7 +17901,6 @@
 /area/space)
 "Qd" = (
 /obj/structure/reagent_dispensers/water_cooler{
-	icon_state = "water_cooler";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
