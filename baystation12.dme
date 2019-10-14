@@ -289,6 +289,7 @@
 #include "code\datums\extensions\multitool\items\stock_parts_radio.dm"
 #include "code\datums\extensions\on_click\on_alt_click.dm"
 #include "code\datums\extensions\on_click\on_click.dm"
+#include "code\datums\extensions\on_click\turf_hand.dm"
 #include "code\datums\graph\graph.dm"
 #include "code\datums\graph\node.dm"
 #include "code\datums\helper_datums\construction_datum.dm"

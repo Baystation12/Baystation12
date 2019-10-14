@@ -47,6 +47,8 @@
 	var/list/tile_info[4]
 	var/list/dir_alerts[4] // 4 dirs, bitflags
 
+	turf_hand_priority = 2 //Lower priority than normal doors to prevent interference
+
 	// MUST be in same order as FIREDOOR_ALERT_*
 	var/list/ALERT_STATES=list(
 		"hot",

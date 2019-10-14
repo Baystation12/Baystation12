@@ -32,6 +32,10 @@
 				return
 	update_icon()
 
+
+	set_extension(src, /datum/extension/turf_hand, /datum/extension/turf_hand)
+
+
 /obj/structure/ladder/Destroy()
 	if(target_down)
 		target_down.target_up = null
@@ -264,10 +268,10 @@
 /obj/structure/stairs/west
 	dir = WEST
 	bound_width = 64
-	
+
 /obj/structure/stairs/short
 	bound_height = 32
 	bound_width = 32
-	
+
 /obj/structure/stairs/short/west
 	dir = WEST
