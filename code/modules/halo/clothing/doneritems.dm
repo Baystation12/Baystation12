@@ -967,7 +967,7 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 	item_state = "sleepy-backpack-worn"
 	icon_state = "sleepy-backpack-obj"
 
-/decl/hierarchy/outfit/pinstripe_odst
+/decl/hierarchy/outfit/sleepy_odst
 	name = "sleepy - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/sleepy
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/sleepy
