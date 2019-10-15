@@ -46,7 +46,14 @@
 	name = "knight's armor"
 	desc = "Now, you can be the knight in shining armor you've always wanted to be. With complementary sun insignia."
 	icon_state = "star_champion"
-	armor = list(melee = 75, bullet = 50, laser = 55, energy = 40, bomb = 50, bio = 10, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH, 
+		bullet = ARMOR_BALLISTIC_RIFLE, 
+		laser = ARMOR_LASER_HANDGUNS, 
+		energy = ARMOR_ENERGY_RESISTANT, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_MINOR
+	)
 
 /obj/item/clothing/head/helmet/sunhelm
 	name = "knight's helm"
@@ -58,7 +65,14 @@
 	name = "oracle's robe"
 	desc = "The robes of a priest. One that praises the sun, apparently. Well, it certainly reflects light well."
 	icon_state = "star_oracle"
-	armor = list(melee = 25, bullet = 20, laser = 45,energy = 40, bomb = 25, bio = 10, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_MINOR
+	)
 
 /obj/item/clothing/suit/armor/sunrobe/Initialize()
 	. = ..()

@@ -7,7 +7,9 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(/obj/item/device/scanner/gas,/obj/item/stack/medical,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/scanner/health,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
+	armor = list(
+		bio = ARMOR_BIO_RESISTANT
+		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
@@ -52,7 +54,6 @@
 	icon_state = "labcoat_vir_open"
 	icon_open = "labcoat_vir_open"
 	icon_closed = "labcoat_vir"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/blue
 	name = "blue-edged labcoat"
@@ -72,7 +73,10 @@
 	icon_state = "labcoat_xy"
 	icon_open = "labcoat_xy_open"
 	icon_closed = "labcoat_xy"
-	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 20, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR, 
+		bio = ARMOR_BIO_MINOR
+		)
 	species_restricted = list(SPECIES_IPC)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/foundation
@@ -131,7 +135,9 @@
 	icon_state = "labcoat_dais"
 	icon_open = "labcoat_dais_open"
 	icon_closed = "labcoat_dais"
-	armor = list(melee = 5, bullet = 0, laser = 0,energy = 5, bomb = 0, bio = 0, rad = 0)//They don't need to protect against the environment very much.
+	armor = list(
+		melee = ARMOR_MELEE_MINOR
+	)//They don't need to protect against the environment very much.
 	siemens_coefficient = 0.5 //These guys work with electronics. DAIS's labcoats shouldn't conduct very well.
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd

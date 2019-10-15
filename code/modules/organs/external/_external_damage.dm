@@ -162,7 +162,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 	if(encased && !(status & ORGAN_BROKEN)) //ribs protect
 		organ_hit_chance *= 0.6
-	
+
 	organ_hit_chance = min(organ_hit_chance, 100)
 	if(prob(organ_hit_chance))
 		var/obj/item/organ/internal/victim = pickweight(victims)

@@ -10,7 +10,10 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
-	armor = list(melee = 5, bullet = 5, laser = 5, energy = 0, bomb = 0, bio = 75, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR,
+		bio = ARMOR_BIO_STRONG
+		)
 	filtered_gases = list(
 		GAS_PHORON,
 		GAS_N2O,
@@ -63,7 +66,12 @@
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE
 	w_class = ITEM_SIZE_SMALL
-	armor = list(melee = 10, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 55, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SMALL, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_MINOR, 
+		bio = ARMOR_BIO_RESISTANT
+		)
 
 //In scaling order of utility and seriousness
 
@@ -73,7 +81,11 @@
 	icon_state = "gas_mask"
 	item_state = "gas_mask"
 	body_parts_covered = FACE|EYES
-	armor = list(melee = 5, bullet = 5, laser = 5, energy = 0, bomb = 0, bio = 75, rad = 25)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR,
+		bio = ARMOR_BIO_STRONG,
+		rad = ARMOR_RAD_SMALL
+		)
 
 /obj/item/clothing/mask/gas/budget
 	name = "gas mask"
@@ -81,7 +93,10 @@
 	icon_state = "gas_alt"
 	item_state = "gas_alt"
 	body_parts_covered = FACE|EYES
-	armor = list(melee = 5, bullet = 5, laser = 5, energy = 0, bomb = 0, bio = 25, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR,
+		bio = ARMOR_BIO_SMALL
+		)
 
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
@@ -90,7 +105,12 @@
 	item_state = "swat"
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE|EYES
-	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SMALL, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_MINOR, 
+		bio = ARMOR_BIO_STRONG
+		)
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "tactical mask"
@@ -98,7 +118,12 @@
 	icon_state = "swat"
 	item_state = "swat"
 	siemens_coefficient = 0.7
-	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SMALL, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_MINOR, 
+		bio = ARMOR_BIO_STRONG
+		)
 
 /obj/item/clothing/mask/gas/death_commando
 	name = "\improper Death Commando Mask"
@@ -119,7 +144,9 @@
 	desc = "A modernised version of the classic design, this mask will not only filter out phoron but it can also be connected to an air supply."
 	icon_state = "plaguedoctor"
 	item_state = "plaguedoctor"
-	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 90, rad = 0)
+	armor = list(
+		bio = ARMOR_BIO_SHIELDED
+		)
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/mask/gas/clown_hat

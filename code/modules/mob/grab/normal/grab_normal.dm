@@ -182,7 +182,7 @@
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
-	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE)
+	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE, damage = 10)
 	target.apply_damage(damage, BRUTE, BP_HEAD, damage_flags)
 	attacker.apply_damage(10, BRUTE, BP_HEAD)
 
@@ -261,7 +261,7 @@
 	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
 		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
 		if(armor_datum)
-			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags)
+			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
 
 	var/total_damage = 0
 	for(var/i in 1 to 3)

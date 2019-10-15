@@ -111,8 +111,23 @@
 		if("Bear")
 			var/obj/item/clothing/under/under = locate() in equipment
 			var/obj/item/clothing/head/head = locate() in equipment
-			under.armor = list(melee = 60, bullet = 35, laser = 20,energy = 20, bomb = 0, bio = 0, rad = 0) //More armor
-			head.armor = list(melee = 30, bullet = 15, laser = 10,energy = 10, bomb = 0, bio = 0, rad = 0)
+
+			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
+			if(A)
+				A.armor_values = list(
+					melee = ARMOR_MELEE_VERY_HIGH, 
+					bullet = ARMOR_BALLISTIC_PISTOL, 
+					laser = ARMOR_LASER_SMALL, 
+					energy = ARMOR_ENERGY_SMALL
+					) //More armor
+			A = get_extension(head, /datum/extension/armor)
+			if(A)
+				A.armor_values = list(
+					melee = ARMOR_MELEE_RESISTANT, 
+					bullet = ARMOR_BALLISTIC_MINOR, 
+					laser = ARMOR_LASER_MINOR, 
+					energy = ARMOR_ENERGY_MINOR
+					)
 			familiar_type = /mob/living/simple_animal/hostile/bear
 	var/spell/targeted/shapeshift/familiar/F = new()
 	F.possible_transformations = list(familiar_type)

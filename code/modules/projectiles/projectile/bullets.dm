@@ -132,7 +132,6 @@
 /obj/item/projectile/bullet/pistol/strong
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	damage = 50
-	armor_penetration = 20
 	penetration_modifier = 0.8
 	distance_falloff = 2.5
 

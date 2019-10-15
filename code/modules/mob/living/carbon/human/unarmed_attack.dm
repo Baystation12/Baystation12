@@ -55,7 +55,7 @@ var/global/list/sparring_attack_cache = list()
 		return
 
 	var/stun_chance = rand(0, 100)
-	var/armour = target.get_blocked_ratio(zone, BRUTE)
+	var/armour = target.get_blocked_ratio(zone, BRUTE, damage = attack_damage)
 
 	if(attack_damage >= 5 && armour < 1 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit

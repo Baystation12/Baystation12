@@ -25,7 +25,7 @@
 		var/mob/living/pilot = pick(pilots)
 		return pilot.hitby(AM, speed)
 	. = ..()
-	
+
 
 /mob/living/exosuit/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
@@ -70,7 +70,7 @@
 
 	if(!damage)
 		return 0
-	
+
 	var/target = zoneToComponent(def_zone)
 	//Only 3 types of damage concern mechs and vehicles
 	switch(damagetype)
@@ -106,9 +106,9 @@
 
 /mob/living/exosuit/emp_act(var/severity)
 
-	var ratio = get_blocked_ratio(null, BURN, null, 0)
+	var/ratio = get_blocked_ratio(null, BURN, null, (4-severity) * 20)
 
-	if(ratio >= 1)
+	if(ratio >= 0.5)
 		for(var/mob/living/m in pilots)
 			to_chat(m, SPAN_NOTICE("Your Faraday shielding absorbed the pulse!"))
 		return

@@ -3,7 +3,15 @@
 	desc = "A strange rig. Parts of it writhe and squirm as if alive. The visor looks more like a thick membrane."
 	suit_type = "alien rig"
 	icon_state = "vox_rig"
-	armor = list(melee = 60, bullet = 50, laser = 50, energy = 30, bomb = 30, bio = 100, rad = 100)
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR, 
+		bullet = ARMOR_BALLISTIC_RESISTANT, 
+		laser = ARMOR_LASER_HANDGUNS, 
+		energy = ARMOR_ENERGY_RESISTANT, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SHIELDED
+		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	air_type =   /obj/item/weapon/tank/nitrogen

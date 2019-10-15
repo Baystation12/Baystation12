@@ -25,7 +25,10 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 18
 	harm_intent_damage = 1
-	natural_armor = list(melee = 35, bullet = 20)
+	natural_armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_PISTOL
+		)
 	ability_cooldown = 2 MINUTES
 
 	var/return_damage_min = 2 //damage inflicted on attacker if they're not using a weapon
