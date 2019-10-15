@@ -29,7 +29,7 @@
 	icon_state = "plasma_pod"
 	fire_sound = 'code/modules/halo/sounds/plasma_torpedoes_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/plas_torp
-	round_reload_time = 20 SECONDS
+	round_reload_time = 10 SECONDS
 	rounds_loaded = 1
 	max_rounds_loadable = 1
 
@@ -53,10 +53,11 @@
 	desc = "A ball of plasma within a magnetic field"
 	icon = 'code/modules/halo/overmap/weapons/plasma_torpedo.dmi'
 	icon_state = "plasma_torp"
-	damage = 0 //It's a missile, it has no innate damage.
+	penetrating = 1
+	damage = 7 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/plas_torp_damage_proj/on_impact(var/atom/impacted)
-	explosion(loc,2,-1,3,5, adminlog = 0)
+	explosion(loc,1,3,4,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
 	. = ..()

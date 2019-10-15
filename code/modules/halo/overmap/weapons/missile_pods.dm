@@ -24,7 +24,7 @@
 	icon_state = "missile_pod"
 	fire_sound = 'code/modules/halo/sounds/rocket_pod_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/missile
-	round_reload_time = 25 SECONDS
+	round_reload_time = 12 SECONDS
 	rounds_loaded = 4
 	max_rounds_loadable = 4
 
@@ -48,11 +48,12 @@
 	desc = "An explosive warhead on the end of a guided thruster."
 	icon = 'code/modules/halo/overmap/weapons/deck_missile_pod.dmi'
 	icon_state = "missile"
-	damage = 0 //It's a missile, it has no innate damage.
+	penetrating = 1
+	damage = 7 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/missile_damage_proj/on_impact(var/atom/impacted)
 	if(!istype(impacted,/obj/effect/shield))
-		explosion(loc,-1,2,4,5, adminlog = 0)
+		explosion(loc,0,4,5,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
 	. = ..()

@@ -1,14 +1,16 @@
 /datum/job/unscbertels_ship_crew
-	title = "UNSC Bertels Ship Crew"
+	title = "UNSC Ship Crew"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelscrew
-	alt_titles = list("UNSC Bertels Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician,
-	"UNSC Bertels Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
-	"UNSC Bertels Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew ,
-	"UNSC Bertels Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor ,
-	"UNSC Bertels Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
+	alt_titles = list("UNSC Ship Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician,
+	"UNSC Ship Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
+	"UNSC Ship Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew ,
+	"UNSC Ship Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor ,
+	"UNSC Ship Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
 	total_positions = 8
 	spawn_positions = 8
+	account_allowed = 1
+	economic_modifier = 0.5
 	selection_color = "#0A0A95"
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
@@ -16,11 +18,13 @@
 	loadout_allowed = TRUE
 
 /datum/job/unscbertels_medical_crew
-	title = "UNSC Bertels Hospital Corpsman"
+	title = "UNSC Ship Hospital Corpsman"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/medical
 	total_positions = 4
 	spawn_positions = 4
+	account_allowed = 1
+	economic_modifier = 0.5
 	selection_color = "#0A0A95"
 	access = list(access_unsc)
 	spawnpoint_override = "UNSC Base Spawns"
@@ -28,12 +32,14 @@
 	loadout_allowed = TRUE
 
 /datum/job/unscbertels_co
-	title = "UNSC Bertels Commanding Officer"
+	title = "UNSC Ship Commanding Officer"
 	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 1
 	track_players = 1
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
@@ -43,12 +49,14 @@
 	loadout_allowed = TRUE
 
 /datum/job/unscbertels_xo
-	title = "UNSC Bertels Executive Officer"
+	title = "UNSC Ship Executive Officer"
 	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 1
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
@@ -56,10 +64,12 @@
 	loadout_allowed = TRUE
 
 /datum/job/unsc_ship_iwo
-	title = "UNSC Bertels Infantry Weapons Officer"
+	title = "UNSC Ship Infantry Weapons Officer"
 	spawn_faction = "UNSC"
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_armoury, access_unsc_marine)
@@ -69,7 +79,7 @@
 
 
 
-//UNSC Bertels Marine Jobs
+//UNSC Ship Marine Jobs
 
 /datum/job/bertelsunsc_ship_marine
 	title = "UNSC Marine"
@@ -86,6 +96,8 @@
 	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 0.5
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -99,8 +111,10 @@
 	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
 
-//UNSC BERTELS ODST Jobs
+//UNSC Ship ODST Jobs
 
 /datum/job/bertelsODST
 	title = "Orbital Drop Shock Trooper"
@@ -123,6 +137,8 @@
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
@@ -142,3 +158,5 @@
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
