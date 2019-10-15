@@ -492,7 +492,7 @@
 /obj/machinery/seed_storage/garden,
 /obj/effect/floor_decal/corner/green/mono,
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Hydro Storage"
+	c_tag = "Hydroponics -  Storage"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
@@ -8189,7 +8189,7 @@
 	amount = 50
 	},
 /obj/machinery/camera/network/command{
-	c_tag = "EVA- Center";
+	c_tag = "EVA - Center";
 	dir = 4
 	},
 /obj/machinery/firealarm{
@@ -12542,7 +12542,7 @@
 "Bw" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/uniform_vendor{
-	dir = 8;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
@@ -13350,7 +13350,7 @@
 /area/maintenance/thirddeck/port)
 "DU" = (
 /obj/machinery/camera/network/command{
-	c_tag = "Bluespace Artillery - Storage";
+	c_tag = "Fire Control - Storage";
 	dir = 4;
 	network = list("Command")
 	},
@@ -14741,7 +14741,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 0;
-	name = "Bluespace Artillery Control"
+	name = "Fire Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/disperser)
@@ -14756,7 +14756,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 0;
-	name = "Bluespace Artillery Control"
+	name = "Fire Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/disperser)
@@ -14765,7 +14765,7 @@
 	dir = 9
 	},
 /obj/machinery/camera/network/command{
-	c_tag = "Bluespace Artillery - Access"
+	c_tag = "Fire Control - Access"
 	},
 /turf/simulated/floor/plating,
 /area/command/disperser)
@@ -14829,7 +14829,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 0;
-	name = "Bluespace Artillery Control"
+	name = "Fire Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/disperser)
@@ -14975,7 +14975,7 @@
 /area/hallway/primary/thirddeck/fore)
 "Ir" = (
 /obj/machinery/camera/network/command{
-	c_tag = "Bluespace Artillery - Control";
+	c_tag = "Fire Control - Controls";
 	dir = 4
 	},
 /obj/machinery/computer/ship/disperser{

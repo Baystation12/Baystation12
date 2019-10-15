@@ -12446,7 +12446,7 @@
 	pixel_x = -3
 	},
 /obj/machinery/camera/network/fourth_deck{
-	c_tag = "Laundry Room";
+	c_tag = "Fourth Deck - Laundry Room";
 	dir = 8
 	},
 /obj/item/device/radio/intercom{

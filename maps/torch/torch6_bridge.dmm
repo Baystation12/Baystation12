@@ -16186,7 +16186,7 @@
 	icon_state = "tube1"
 	},
 /obj/machinery/camera/network/command{
-	c_tag = "EVA- Command";
+	c_tag = "EVA - Command";
 	dir = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
