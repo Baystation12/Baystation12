@@ -427,7 +427,7 @@
 		load_vehicle(v,user)
 	else
 		var/item_size_use = over_object.w_class
-		if(istype(over_object,/obj/structure/closet))
+		if(istype(over_object,/obj/structure/closet) || istype(over_object,/obj/structure/mecha))
 			item_size_use = ITEM_SIZE_GARGANTUAN
 		if(!comp_prof.can_put_cargo(item_size_use))
 			to_chat(user,"<span class = 'notice'>[src] is full or cannot fit objects of [over_object]'s size.</span>")
