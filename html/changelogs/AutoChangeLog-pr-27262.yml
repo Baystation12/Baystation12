@@ -1,6 +1,0 @@
-author: "PsiOmegaDelta"
-delete-after: True
-changes: 
-  - tweak: "Most objects now always consider ghosts to be adjacent when examined"
-  - tweak: "Must now shift+click to interact with boardgames"
-  - tweak: "Must now shift+click to interact with integrated circuits"
