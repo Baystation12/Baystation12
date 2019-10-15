@@ -14,7 +14,7 @@
 	var/overload_coeff = 2
 	wreckage = /obj/effect/decal/mecha_wreckage/hrunting
 	internal_damage_threshold = 35
-	max_equip = 5
+	max_equip = 3
 
 /obj/mecha/combat/hrunting/add_cell()
 	cell = new /obj/item/weapon/cell/hyper(src)
@@ -42,7 +42,7 @@
 /obj/mecha/combat/hrunting/do_move(direction)
 	if(!..()) return
 	if(overload)
-		health--
+		health -= 2
 		if(health < initial(health) - initial(health)/3)
 			overload = 0
 			step_in = initial(step_in)
