@@ -1249,8 +1249,8 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 //Marine
 
 /obj/item/clothing/under/unsc/marine_fatigues/ashvor
-	desc = "Reach Variant of the standard issue uniform for UNSC Marine Corps."
-	name = "UNSC Reach Marine Fatigues"
+	desc = A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps."
+	name = "UNSC Cross Branch Battle Dress Uniform"
 	item_state = "ashvor_uniform"
 	icon_state = "ashvor_uniform_inslot"
 	worn_state = "ashvor_uniform"
@@ -1269,8 +1269,8 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 	icon_state = "ashvor_armor_inslot"
 
 /obj/item/clothing/gloves/thick/unsc/ashvor
-	desc = "The Reach variant of the combat gloves worn by the members of the UNSC Marine Corps,"
-	name = "Reach Combat Gloves"
+	desc = "The pressurized and sealed combat gloves worn with the A/X armor for the members of the UNSC Marine Corps."
+	name = "A/X Combat Gloves"
 	icon = MARINE_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "ashvor_gloves"
@@ -1278,13 +1278,13 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 
 /obj/item/clothing/shoes/eva/marine/ashvor
 	desc = "A sealed variant of the combat boots worn by the members of the UNSC Marine Corps,"
-	name = "A/X Combat Boots"
+	name = "VZG7 A/X Combat Boots"
 	item_state = "ashvor_boots"
 	icon_state = "ashvor_boots_inslot"
 
 /obj/item/weapon/storage/backpack/odst/regular/ashvor
-	desc = "The Reach variant of the standard backpack worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	name = "UNSC Reach Backpack"
+	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force."
+	name = "UNSC Tactical Backpack"
 	item_state = "ashvor_backpack"
 	icon_state = "ashvor_backpack-inslot"
 
