@@ -1249,7 +1249,7 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 //Marine
 
 /obj/item/clothing/under/unsc/marine_fatigues/ashvor
-	desc = A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps."
+	desc = "A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps."
 	name = "UNSC Cross Branch Battle Dress Uniform"
 	item_state = "ashvor_uniform"
 	icon_state = "ashvor_uniform_inslot"
