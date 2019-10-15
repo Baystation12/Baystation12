@@ -1,0 +1,4 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - bugfix: "PAI should no longer fold up when hitting it with an access card while on help intent."
