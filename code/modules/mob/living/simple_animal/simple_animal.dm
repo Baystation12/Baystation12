@@ -57,6 +57,9 @@
 	var/friendly = "nuzzles"
 	var/environment_smash = 0
 	var/resistance		  = 0	// Damage reduction
+	var/can_ignite = 0
+	var/ignite_overlay = "Generic_mob_burning"
+	var/image/fire_overlay_image
 
 	//Null rod stuff
 	var/supernatural = 0
@@ -66,6 +69,7 @@
 	var/list/death_sounds = list()
 
 	var/respawning = 0
+	var/limited_respawn  = 0
 	var/respawn_timer = 3 MINUTES
 	var/turf/spawn_turf
 
@@ -83,8 +87,10 @@
 			switch_from_dead_to_living_mob_list()
 			set_stat(CONSCIOUS)
 			set_density(1)
-		else if(respawning)
+		else if(respawning || limited_respawn)
 			if(world.time > timeofdeath + respawn_timer)
+				if(limited_respawn > 0)
+					limited_respawn--
 				health = maxHealth
 				src.forceMove(spawn_turf)
 		return 0
@@ -347,6 +353,8 @@
 		var/obj/mecha/M = target_mob
 		if (M.occupant)
 			return (0)
+	if(istype(target_mob,/obj/vehicles))
+		return (0)
 	return 1
 
 /mob/living/simple_animal/say(var/message)
@@ -385,14 +393,24 @@
 			gib()
 
 /mob/living/simple_animal/handle_fire()
-	return
+	if(can_ignite)
+		. = ..()
 
 /mob/living/simple_animal/update_fire()
-	return
+	overlays -= fire_overlay_image
+	fire_overlay_image = null
+	if(on_fire)
+		var/image/standing = overlay_image('icons/mob/OnFire.dmi', ignite_overlay, RESET_COLOR)
+		fire_overlay_image = standing
+		overlays += fire_overlay_image
+
 /mob/living/simple_animal/IgniteMob()
-	return
+	if(can_ignite)
+		. = ..()
+
 /mob/living/simple_animal/ExtinguishMob()
-	return
+	if(can_ignite)
+		. = ..()
 
 /mob/living/simple_animal/updatehealth()
 	. = ..()

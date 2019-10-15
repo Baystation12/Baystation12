@@ -81,7 +81,6 @@
 	if(is_winner)
 		return 1
 
-
 	/*
 	if(capture_score > 0)
 		return 2
@@ -91,66 +90,41 @@
 
 
 
-/* protect ship */
+/* overmap (generic objective) */
 
-/datum/objective/protect_ship
-	var/obj/effect/overmap/target_ship
-	lose_points = 50
-
-/datum/objective/protect_ship/find_target()
-	target_ship = my_faction.get_flagship()
-	return target_ship
-
-/datum/objective/protect_ship/check_completion()
-	if(override > 0)
-		return 1
-	else if(override < 0)
-		return 0
-
-	if(target_ship)
-		if(target_ship.loc)
-			return 1
-		if(target_ship.slipspace_status == 2)
-			return 1
-	return 0
-
-
-
-/* destroy ship */
-
-/datum/objective/destroy_ship
-	var/obj/effect/overmap/target_ship
-	var/datum/faction/target_faction
-	win_points = 50
+/datum/objective/overmap
+	var/obj/effect/overmap/target_overmap
+	var/objective_type = 1	//1 for protect, 0 for destroy
+	var/overmap_type = 1	//1 for ship, 0 for base
 	var/target_faction_name
+	var/datum/faction/target_faction
 
-/datum/objective/destroy_ship/New()
+/datum/objective/overmap/find_target()
 	target_faction = GLOB.factions_by_name[target_faction_name]
-	. = ..()
+	if(overmap_type == 1)
+		target_overmap = target_faction.get_flagship()
+	else if(overmap_type == 0)
+		target_overmap = target_faction.get_base()
+	return target_overmap
 
-/datum/objective/destroy_ship/find_target()
-	if(target_faction)
-		target_ship = target_faction.get_flagship()
-	return target_ship
-
-
-/datum/objective/destroy_ship/check_completion()
+/datum/objective/overmap/check_completion()
 	if(override > 0)
 		return 1
 	else if(override < 0)
 		return 0
 
-	if(!target_ship)
-		return 1
-	if(!target_ship.loc)
-		if(target_ship.slipspace_status == 0)
-			return 1
-	return 0
+	if(target_overmap)
+		if(target_overmap.slipspace_status == 2)
+			return objective_type
+		else if(!target_overmap.loc)
+			return !objective_type
 
-/datum/objective/destroy_ship/base/find_target()
-	if(target_faction)
-		target_ship = target_faction.get_base()
-	return target_ship
+		if(objective_type)
+			return !(target_overmap.nuked || target_overmap.glassed || target_overmap.demolished)
+		else
+			return (target_overmap.nuked || target_overmap.glassed || target_overmap.demolished)
+
+	return !objective_type
 
 
 
@@ -222,8 +196,8 @@
 
 /datum/objective/assassinate/leader
 	win_points = 50
-	var/datum/faction/target_faction
 	var/target_faction_name
+	var/datum/faction/target_faction
 
 /datum/objective/assassinate/leader/New()
 	target_faction = GLOB.factions_by_name[target_faction_name]

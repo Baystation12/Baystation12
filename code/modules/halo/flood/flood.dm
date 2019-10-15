@@ -383,6 +383,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	pickup_gun(attacked)
 
 /mob/living/simple_animal/hostile/flood/combat_form/RangedAttack(var/atom/attacked)
+	. = ..()
 	if(!our_gun)
 		return
 	var/gun_fire = our_gun.Fire(attacked,src)

@@ -18,10 +18,6 @@
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
 
-	setup_factions()
-
-	GLOB.innie_factions_controller.begin_processing()
-
 	//hide some faction sectors from factions not playing
 	for(var/obj/effect/overmap/S in world)
 		if(S.type in overmap_hide)
@@ -36,24 +32,17 @@
 	shipmap_handler.spawn_ship("Human Colony", 3)
 	shipmap_handler.spawn_ship("UNSC", 2)
 
-/datum/game_mode/outer_colonies/proc/setup_factions()
-	//setup factions
-	for(var/faction_type in factions)
-		var/datum/faction/F = GLOB.factions_by_type[faction_type]
-		factions -= faction_type
-		factions.Add(F)
-
 /datum/game_mode/outer_colonies/proc/setup_objectives()
 
 	//setup covenant objectives
 	var/list/objective_types = list(\
-		/datum/objective/protect_ship/covenant,\
+		/datum/objective/overmap/covenant_ship,\
 		/datum/objective/protect/leader,\
 		/datum/objective/glass_colony,\
 		///datum/objective/retrieve/steal_ai,
 		/datum/objective/retrieve/nav_data,\
-		/datum/objective/destroy_ship/covenant_unsc,
-		/datum/objective/destroy_ship/base/covenant_odp,
+		/datum/objective/overmap/covenant_unsc_ship,
+		/datum/objective/overmap/covenant_odp,
 		//datum/objective/colony_capture/cov,
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
@@ -61,15 +50,16 @@
 
 	//setup unsc objectives
 	objective_types = list(\
-		/datum/objective/protect_ship/unsc,\
+		/datum/objective/overmap/unsc_ship,\
 		/datum/objective/retrieve/artifact/unsc,\
 		/datum/objective/protect/leader,\
 		/datum/objective/capture_innies,\
 		/datum/objective/retrieve/steal_ai/cole_protocol,\
 		/datum/objective/retrieve/nav_data/cole_protocol,\
-		/datum/objective/destroy_ship/unsc_cov,\
+		/datum/objective/overmap/unsc_cov_ship,\
 		/datum/objective/colony_capture/unsc,\
-		/datum/objective/protect_colony)
+		/datum/objective/protect_colony,\
+		/datum/objective/overmap/unsc_innie_base)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
 	GLOB.UNSC.base_desc = "Orbital Defence Platform"
@@ -77,14 +67,15 @@
 	//setup innie objectives
 	objective_types = list(\
 		/datum/objective/protect/leader,\
-		/datum/objective/destroy_ship/innie_unsc,\
+		/datum/objective/overmap/innie_unsc_ship,\
 		/datum/objective/assassinate/leader/innies_unsc,\
 		///datum/objective/recruit_pirates,
 		///datum/objective/recruit_scientists,
 		/datum/objective/colony_capture/innie,\
-		/datum/objective/protect_colony/innie)
+		/datum/objective/overmap/innie_base)
 	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
-	GLOB.INSURRECTION.base_desc = "secret underground base"
+	GLOB.INSURRECTION.has_base = 1
+	GLOB.INSURRECTION.base_desc = "secret underground HQ"
 
 	GLOB.HUMAN_CIV.name = "Geminus City"
 	GLOB.HUMAN_CIV.base_desc = "human colony"
@@ -129,13 +120,16 @@
 		if(F.has_base)
 			//currently no factions have has_base = 1, but this can be tweaked as needed (see: UNSC cassius station, innie rabbit hole base)
 			var/obj/effect/overmap/base = F.get_base()
+			var/base_name = F.get_base_name()
 			if(!base || !base.loc)
-				round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been destroyed"
+				round_end_reasons += "the [base_name] has been destroyed"
 			else if(base)
+				if(base.demolished)
+					round_end_reasons += "the [base_name] has been demolished"
 				if(base.nuked)
-					round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been nuked"
+					round_end_reasons += "the [base_name] has been nuked"
 				if(base.glassed)
-					round_end_reasons += "the [F.name] [F.base_desc] [base.name] has been glassed"
+					round_end_reasons += "the [base_name] has been glassed"
 
 		/*
 		//if all faction players have been killed/captured... only check 1 faction

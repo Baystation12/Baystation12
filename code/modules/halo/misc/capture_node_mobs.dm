@@ -95,7 +95,7 @@
 	icon_living  = "heavy_innie_brown"
 	icon_dead = "dead_heavy_innie_brown"
 
-	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie,/obj/item/weapon/gun/projectile/shotgun/soe)
+	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie,/obj/item/weapon/gun/projectile/shotgun/pump)
 
 /mob/living/simple_animal/hostile/defender_mob/cov
 	faction = "Covenant"

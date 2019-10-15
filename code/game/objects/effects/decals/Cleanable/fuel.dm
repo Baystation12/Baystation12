@@ -42,45 +42,48 @@
 
 		Spread()
 			//The spread for flamethrower fuel is much more precise, to create a wide fire pattern.
-			if(amount < 0.1) return
-			var/turf/simulated/S = loc
-			if(!istype(S)) return
+			//if(amount < 0.1) return
+			var/turf/simulated/start_turf = loc
+			if(!istype(start_turf)) return
 
-			var/list/new_fuel_turfs = list()
-			for(var/turf/simulated/O in orange(1,S))
-				if(locate(/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel) in O)
-					continue
-				if(O.CanPass(null, S, 0, 0) && S.CanPass(null, O, 0, 0))
-					new_fuel_turfs.Add(O)
+			//we want a minimum of 1.5 fuel per turf, as under optimum burn conditions 0.25 will be consumed per tick (therefore 6 tick duration)
+			var/max_turfs = amount / 1.5
+			var/max_dist = sqrt(max_turfs)		//take the square root to give us the radius
 
-			var/spread_amount = amount / (new_fuel_turfs.len + 1)
-			if(new_fuel_turfs.len && spread_amount >= 1)
-				var/list/fires = list()
-				for(var/turf/simulated/O in new_fuel_turfs)
-					var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F = new(O,spread_amount, src.dir)
-					fires.Add(F)
-					O.hotspot_expose((T20C*2) + 380,500) //Light flamethrower fuel on fire immediately.
+			var/list/unspread_turfs = list(start_turf)
+			var/list/new_fuel = list(src)
+			while(unspread_turfs.len)
+				var/turf/simulated/check_turf = unspread_turfs[1]
 
-				amount -= spread_amount * new_fuel_turfs.len
+				for(var/turf/simulated/adjacent in orange(1, check_turf))
+					if(locate(/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel) in adjacent)
+						continue
 
-				for(var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F in fires)
-					F.Spread()
+					if(get_dist(start_turf, adjacent) > max_dist)
+						continue
+
+					if(adjacent.Enter(src, start_turf))
+						unspread_turfs |= adjacent
+
+				var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F = new(check_turf, 1.5, src.dir)
+				new_fuel.Add(F)
+				new /obj/effect/fire(check_turf)
+
+				unspread_turfs.Remove(check_turf)
+
+			var/spread_amount = amount / new_fuel.len
+			for(var/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/F in new_fuel)
+				F.amount = spread_amount
+
 
 /obj/effect/decal/cleanable/liquid_fuel/Initialize()
+	. = ..()
+
 	if(amount < 0.05)
 		return INITIALIZE_HINT_QDEL
 
-	var/has_spread = 0
 	//Be absorbed by any other liquid fuel in the tile.
 	for(var/obj/effect/decal/cleanable/liquid_fuel/other in loc)
 		if(other != src)
 			other.amount += src.amount
-			//other.Spread()
-			has_spread = 1
-			break
-
-	. = ..()
-	if(!has_spread)
-		//Spread()
-	else
-		return INITIALIZE_HINT_QDEL
+			return INITIALIZE_HINT_QDEL

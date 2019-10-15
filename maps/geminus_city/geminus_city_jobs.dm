@@ -15,6 +15,9 @@
 	access = list(access_janitor, access_maint_tunnels, access_research)
 	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
 
+/datum/job/colonist/get_email_domain()
+	return "geminus.net"
+
 /datum/job/colonist_mayor
 	title = "Mayor"
 	department_flag = COM

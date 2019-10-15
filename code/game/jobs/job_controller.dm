@@ -518,7 +518,7 @@ var/global/datum/controller/occupations/job_master
 			if(H.char_branch && H.char_branch.email_domain)
 				domain = H.char_branch.email_domain
 			else
-				domain = "freemail.nt"
+				domain = job.get_email_domain()
 			var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
 			var/complete_login = "[sanitized_name]@[domain]"
 

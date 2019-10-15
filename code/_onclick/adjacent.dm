@@ -87,9 +87,13 @@ Quick adjacency (to turf):
 		var/atom/movable/AM = neighbor
 		if(AM.elevation != src.elevation)
 			return 0
-	for(var/turf/T in locs)
-		if(isnull(T)) continue
-		if(T.Adjacent(neighbor,src)) return 1
+		for(var/turf/T in locs)
+			for(var/turf/T2 in neighbor:locs)
+				if(T.Adjacent(T2)) return 1
+	else
+		for(var/turf/T in locs)
+			if(isnull(T)) continue
+			if(T.Adjacent(neighbor,src)) return 1
 	return 0
 
 // This is necessary for storage items not on your person.

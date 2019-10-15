@@ -247,3 +247,6 @@
 
 /datum/job/proc/assign_player(var/datum/mind/new_mind)
 	assigned_players += new_mind
+
+/datum/job/proc/get_email_domain()
+	return "freemail.co"

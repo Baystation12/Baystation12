@@ -12,9 +12,9 @@
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_COMBAT = 1, TECH_PHORON = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
-	var/fire_dist = 6
 	var/status = 0
-	var/throw_amount = 100
+	var/max_release_pressure = 40
+	var/pressure_per_tile = 6.6
 	var/lit = 0	//on or off
 	var/operating = 0//cooldown
 	var/turf/previousturf = null
@@ -61,36 +61,38 @@
 	// Make sure our user is still holding us
 	if(user && user.get_active_hand() == src)
 		var/turf/target_turf = get_turf(target)
-		if(target_turf && target_turf != get_turf(user))
+		if(target_turf)
 			var/turf/start_turf = get_turf(src)
-			var/turflist = get_turf_line(start_turf, target_turf)
+			if(target_turf == start_turf)
+				to_chat(user, "<span class='warning'>You cannot target your own turf!</span>")
+			else
+				//get the turfs to flame (note: for
+				var/turflist = get_turf_line(start_turf, target_turf)
 
-			//dont flame our own turf
-			turflist -= start_turf
-			flame_turf(turflist)
+				//dont flame our own turf
+				turflist -= start_turf
 
-			//flame the first turf after us
-			/*start_turf = turflist[1]
-			start_turf.hotspot_expose(700, 2)*/
+				//flame the calculated turfs
+				flame_turfs(turflist)
 
 /obj/item/weapon/flamethrower/proc/get_turf_line(var/turf/start, var/turf/end)
 	var/list/turfline = list(start)
 	if(start != end)
 		var/turf/cur_turf = start
-		var/flipped = 0
-		for(var/i=0,i<fire_dist,i++)
-			if(flipped)
-				cur_turf = get_step_away(cur_turf, start)
-				turfline += cur_turf
-			else
-				cur_turf = get_step_towards(cur_turf, end)
-				turfline += cur_turf
+		for(var/i=0,i<(max_release_pressure / pressure_per_tile),i++)
+			var/turf/next_turf = get_step(cur_turf, get_dir(cur_turf, end))
 
-			if(cur_turf.density || istype(cur_turf, /turf/space))
+			//check if there is air flow so our fuel spray can reach this turf
+			var/blocked_result = cur_turf.c_airblock(next_turf)
+			if(!blocked_result || blocked_result == ZONE_BLOCKED)
+				turfline += next_turf
+			else
 				break
 
+			cur_turf = next_turf
+
 			if(cur_turf == end)
-				flipped = 1
+				break
 
 	return turfline
 
@@ -151,7 +153,11 @@
 	if(!ptank)
 		to_chat(user, "<span class='notice'>Attach a phoron tank first!</span>")
 		return
-	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove phorontank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
+	var/dat = text("\n<B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\
+		\nTank Pressure: [ptank.air_contents.return_pressure()] kPa<BR>\
+		\nRelease pressure: <A HREF='?src=\ref[src];amount=-10'>--</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [max_release_pressure < 10 ? " " : ""][max_release_pressure] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>++</A> kPa<BR>\
+		\nNote: approx 7 kPa pressure required for each tile of spray distance.<BR>\
+		\n<A HREF='?src=\ref[src];remove=1'>Remove phorontank</A> - <A HREF='?src=\ref[src];close=1'>Close</A>")
 	user << browse(dat, "window=flamethrower;size=600x300")
 	onclose(user, "flamethrower")
 	return
@@ -175,8 +181,8 @@
 		if(lit)
 			GLOB.processing_objects.Add(src)
 	if(href_list["amount"])
-		throw_amount = throw_amount + text2num(href_list["amount"])
-		throw_amount = max(50, min(5000, throw_amount))
+		max_release_pressure = max_release_pressure + text2num(href_list["amount"])
+		max_release_pressure = max(1, min(40, max_release_pressure))
 	if(href_list["remove"])
 		if(!ptank)	return
 		usr.put_in_hands(ptank)
@@ -191,44 +197,55 @@
 	return
 
 
-//Called from turf.dm turf/dblclick
-/obj/item/weapon/flamethrower/proc/flame_turf(var/list/turflist)
-	if(!lit || operating)	return
+/obj/item/weapon/flamethrower/proc/flame_turfs(var/list/turflist)
+	if(!lit || operating || !turflist.len)	return
 	operating = 1
-	var/success = 0
-	for(var/turf/T in turflist)
-		if(T.density || istype(T, /turf/space))
-			continue
-		success = ignite_turf(T)
-		sleep(1)
+
+	//work out the release amount
+	var/release_pressure = min(max_release_pressure, pressure_per_tile * turflist.len)
+	var/tank_pressure = ptank.air_contents.return_pressure()
+	var/out_of_fuel = 0
+	if(tank_pressure > 0)
+		var/release_ratio = release_pressure / tank_pressure
+
+		//remove it from the tank
+		var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(release_ratio)
+		var/total_fuel = air_transfer.gas["phoron"] / LIQUIDFUEL_AMOUNT_TO_MOL
+		air_transfer.gas["phoron"] = 0
+
+		//vent any excess gas into the local environment
+		var/turf/simulated/source_turf = get_turf(src)
+		source_turf.assume_air(air_transfer)
+
+		//how much fuel per turf?
+		var/fuel_per_turf = total_fuel / turflist.len
+
+		for(var/turf/T in turflist)
+			if(T.density)
+				continue
+
+			if(fuel_per_turf <= 0)
+				out_of_fuel = 1
+				break
+
+			//create the fuel then the fire
+			new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(T,fuel_per_turf,get_dir(source_turf,T))
+			new /obj/effect/fire(T)
+
+			total_fuel -= fuel_per_turf
+
+			sleep(1)
+	else
+		out_of_fuel = 1
+
 	operating = 0
-	if(!success)
+	if(out_of_fuel)
 		src.visible_message("\icon[src]<span class='warning'>[src] hisses as it runs out of fuel!</span>")
 	for(var/mob/M in viewers(1, loc))
 		if((M.client && M.machine == src))
 			attack_self(M)
 	return
 
-
-/obj/item/weapon/flamethrower/proc/ignite_turf(turf/target)
-	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...
-	//Transfer 5% of current tank air contents to turf
-	var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.02*(throw_amount/100))
-	var/amount = air_transfer.gas["phoron"]
-	if(amount < 0.05)
-		ptank.air_contents.merge(air_transfer)
-		return 0
-
-	//air_transfer.toxins = air_transfer.toxins * 5 // This is me not comprehending the air system. I realize this is retarded and I could probably make it work without fucking it up like this, but there you have it. -- TLE
-	new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/(target,amount,get_dir(loc,target))
-	//F.Spread()
-	air_transfer.gas["phoron"] = 0
-	target.assume_air(air_transfer)
-	//Burn it based on transfered gas
-	//target.hotspot_expose(part4.air_contents.temperature*2,300)
-	target.hotspot_expose((ptank.air_contents.temperature*2) + 380,500) // -- More of my "how do I shot fire?" dickery. -- TLE
-	//location.hotspot_expose(1000,500,1)
-	return 1
 
 /obj/item/weapon/flamethrower/full/New(var/loc)
 	..()
