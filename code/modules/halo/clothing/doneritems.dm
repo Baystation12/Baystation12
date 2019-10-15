@@ -960,7 +960,7 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 	icon_state = "sleepy-armor_obj"
 	item_state = "sleepy-armor_worn"
 
-/obj/item/weapon/storage/backpack/odst/sleepy
+/obj/item/weapon/storage/backpack/odst/donator/sleepy
 	icon = ITEM_INHAND
 	icon_override = ODST_OVERRIDE
 	name = "Customized Backpack"
@@ -971,7 +971,7 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 	name = "sleepy - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/sleepy
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/sleepy
-    back = /obj/item/weapon/storage/backpack/odst/sleepy
+	back = /obj/item/weapon/storage/backpack/odst/donator/sleepy
 
 ////////Spartankiller\\\\\\\\
 
