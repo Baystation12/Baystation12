@@ -957,6 +957,7 @@ mob/proc/yank_out_object()
 		R.adjustFireLoss(10)
 
 	selection.forceMove(get_turf(src))
+	embedded -= selection
 	if(!(U.l_hand && U.r_hand))
 		U.put_in_hands(selection)
 
