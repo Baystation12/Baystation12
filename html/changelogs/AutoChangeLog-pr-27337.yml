@@ -1,0 +1,4 @@
+author: "Datraen"
+delete-after: True
+changes: 
+  - bugfix: "Microwaves now properly handle non-item based recipes all the time"
