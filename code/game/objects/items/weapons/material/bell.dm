@@ -19,6 +19,7 @@
 	else
 		user.visible_message("<span class='notice'>\The [user] rings \the [src].</span>")
 		playsound(user.loc, 'sound/items/oneding.ogg', 20)
+	flick("bell_dingeth", src)
 
 /obj/item/weapon/material/bell/apply_hit_effect()
 	. = ..()
