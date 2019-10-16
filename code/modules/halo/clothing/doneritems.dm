@@ -947,32 +947,6 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	gloves = /obj/item/clothing/gloves/thick/unsc/sleepy_retard
 	head = /obj/item/clothing/head/helmet/marine/sleepy_retard
 
-
-//ODST
-
-obj/item/clothing/head/helmet/odst/donator/sleepy
-	name = "Customized ODST Helmet"
-	item_state = "sleepy-helmet_worn"
-	icon_state = "sleepy-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/odst/donator/sleepy
-	name = "Customized ODST Armour"
-	icon_state = "sleepy-armor_obj"
-	item_state = "sleepy-armor_worn"
-
-/obj/item/weapon/storage/backpack/odst/donator/sleepy
-	icon = ITEM_INHAND
-	icon_override = ODST_OVERRIDE
-	name = "Customized Backpack"
-	item_state = "sleepy-backpack_worn"
-	icon_state = "sleepy-backpack_obj"
-
-/decl/hierarchy/outfit/sleepy_odst
-	name = "sleepy - ODST"
-	head = /obj/item/clothing/head/helmet/odst/donator/sleepy
-	suit = /obj/item/clothing/suit/armor/special/odst/donator/sleepy
-	back = /obj/item/weapon/storage/backpack/odst/donator/sleepy
-
 ////////Spartankiller\\\\\\\\
 
 //ODST
@@ -1243,60 +1217,6 @@ obj/item/clothing/head/helmet/odst/donator/sleepy
 	name = "riley - marine"
 	suit = /obj/item/clothing/suit/storage/marine/riley
 	head = /obj/item/clothing/head/helmet/marine/riley
-
-	////////ashvor\\\\\\\\
-
-//Marine
-
-/obj/item/clothing/under/unsc/marine_fatigues/ashvor
-	desc = "A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps."
-	name = "UNSC Cross Branch Battle Dress Uniform"
-	item_state = "ashvor_uniform"
-	icon_state = "ashvor_uniform_inslot"
-	worn_state = "ashvor_uniform"
-	starting_accessories = /obj/item/clothing/accessory/badge/tags
-
-/obj/item/clothing/head/helmet/eva/marine/ashvor
-	desc = "The ECH252 is an enclosed variant of the standard CH252 helmet. The helmet can be fully enclosed and environmentally sealed,"
-	name = "ECH252 Enclosed Helmet"
-	item_state = "ashvor_helmet"
-	icon_state = "ashvor_helmet_inslot"
-
-/obj/item/clothing/suit/spaceeva/eva/ashvor
-	desc = "A pressurized Atmospheric/Exoatmospheric (A/X) version of the standard M52 Body Armor, Worn mitigate the atmospheric hazards caused by nearby glassing,"
-	name = "M52A/X Body Armor"
-	item_state = "ashvor_armor"
-	icon_state = "ashvor_armor_inslot"
-
-/obj/item/clothing/gloves/thick/unsc/ashvor
-	desc = "The pressurized and sealed combat gloves worn with the A/X armor for the members of the UNSC Marine Corps."
-	name = "A/X Combat Gloves"
-	icon = MARINE_INHAND
-	icon_override = MARINE_OVERRIDE
-	item_state = "ashvor_gloves"
-	icon_state = "ashvor_gloves_inslot"
-
-/obj/item/clothing/shoes/eva/marine/ashvor
-	desc = "A sealed variant of the combat boots worn by the members of the UNSC Marine Corps,"
-	name = "VZG7 A/X Combat Boots"
-	item_state = "ashvor_boots"
-	icon_state = "ashvor_boots_inslot"
-
-/obj/item/weapon/storage/backpack/odst/regular/ashvor
-	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force."
-	name = "UNSC Tactical Backpack"
-	item_state = "ashvor_backpack"
-	icon_state = "ashvor_backpack-inslot"
-
-
-/decl/hierarchy/outfit/ashvor_marine
- name = "ashvor - marine"
- uniform = /obj/item/clothing/under/unsc/marine_fatigues/ashvor
- suit = /obj/item/clothing/suit/spaceeva/eva/ashvor
- shoes = /obj/item/clothing/shoes/eva/marine/ashvor
- gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
- head = /obj/item/clothing/head/helmet/eva/marine/ashvor
- back = /obj/item/weapon/storage/backpack/odst/regular/ashvor
 
 
 #undef ODST_OVERRIDE
