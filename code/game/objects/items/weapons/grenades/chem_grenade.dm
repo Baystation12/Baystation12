@@ -302,3 +302,25 @@
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
 
+/obj/item/weapon/grenade/chem_grenade/water
+	name = "water grenade"
+	desc = "A water grenade, generally used for firefighting."
+	icon_state = "waterg"
+	item_state = "waterg"
+	stage = 2
+	path = 1
+
+/obj/item/weapon/grenade/chem_grenade/water/Initialize()
+	. = ..()
+	var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
+	var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
+
+	B1.reagents.add_reagent(/datum/reagent/water, 40)
+	B2.reagents.add_reagent(/datum/reagent/water, 40)
+
+	detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+
+	beakers += B1
+	beakers += B2
+	icon_state = initial(icon_state) +"_locked"
+

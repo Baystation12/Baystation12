@@ -168,3 +168,20 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 
+/obj/item/clothing/gloves/fire
+	desc = "A pair of Gloves specially design for firefight and damage control."
+	name = "fire gloves"
+	icon_state = "fire_gloves"
+	item_state = "fire_gloves"
+	siemens_coefficient = 0.50
+	gas_transfer_coefficient = 0.90
+	permeability_coefficient = 0.50
+	item_flags = ITEM_FLAG_THICKMATERIAL
+	body_parts_covered = HANDS
+	cold_protection = HANDS
+	heat_protection = HANDS
+	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = HANDS
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+

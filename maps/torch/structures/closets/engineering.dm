@@ -132,11 +132,10 @@
 /obj/structure/closet/secure_closet/atmos_torch/WillContain()
 	return list(
 		/obj/item/clothing/under/hazard,
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/head/hardhat/red,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/storage/belt/utility/full,
-		/obj/item/weapon/extinguisher,
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/device/radio/headset/headset_eng/alt,
 		/obj/item/weapon/tank/emergency/oxygen/double,

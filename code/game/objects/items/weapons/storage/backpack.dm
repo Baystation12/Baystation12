@@ -236,6 +236,17 @@
 	icon_state = "duffle_eng"
 	item_state_slots = list(slot_l_hand_str = "duffle_eng", slot_r_hand_str = "duffle_eng")
 
+/obj/item/weapon/storage/backpack/dufflebag/firefighter
+	startswith = list(
+		/obj/item/weapon/storage/belt/fire_belt/full,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/extinguisher,
+		/obj/item/clothing/gloves/fire,
+		/obj/item/clothing/accessory/fire_overpants,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/clothing/head/hardhat/firefighter,
+		/obj/item/weapon/extinguisher
+	)
 /*
  * Satchel Types
  */

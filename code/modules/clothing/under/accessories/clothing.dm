@@ -318,3 +318,20 @@
 	name = "tangzhuang jacket"
 	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."
 	icon_state = "tangzhuang"  //This was originally intended to have the ability to roll sleeves. I can't into code. Will be done later (hopefully.)
+
+/obj/item/clothing/accessory/fire_overpants
+	name = "fire overpants"
+	desc = "some overpants made of fire-resistant synthetic fibers. To be worn over the uniform."
+	icon_state = "fire_overpants"
+	gas_transfer_coefficient = 0.90
+	permeability_coefficient = 0.50
+	body_parts_covered = LEG_LEFT | LEG_RIGHT | LOWER_TORSO
+	cold_protection = LOWER_TORSO | LEG_LEFT | LEG_RIGHT
+	heat_protection = LOWER_TORSO | LEG_LEFT | LEG_RIGHT
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	armor = list(melee = 0, bullet = 0, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
+
+/obj/item/clothing/accessory/fire_overpants/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 0.2
