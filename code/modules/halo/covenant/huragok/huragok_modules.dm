@@ -4,6 +4,9 @@
 					"Lifeworker" = "engineer",
 					)
 
+	languages = list(
+		LANGUAGE_SOL_COMMON = 0)
+
 /obj/item/weapon/robot_module/huragok_lifeworker/New()
 	src.modules += new /obj/item/weapon/crowbar/covenant(src)
 	src.modules += new /obj/item/device/flash(src)
@@ -55,6 +58,10 @@
 	sprites = list(
 					"Huragok Engineer" = "engineer"
 					)
+
+	languages = list(
+		LANGUAGE_SOL_COMMON = 0)
+
 	no_slip = 1
 
 /obj/item/weapon/robot_module/huragok_engineer/New()

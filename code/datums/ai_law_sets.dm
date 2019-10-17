@@ -178,3 +178,15 @@
 	src.add_inherent_law("Defend: Defend your assigned vessel and Sol Central Government personnel with as much force as is necessary.")
 	src.add_inherent_law("Survive: Safeguard your own existence with as much force as is necessary.")
 	..()
+
+/******************** Huragok Guidelines ********************/
+/datum/ai_laws/huragok
+	name = "Huragok Orders"
+	law_header = "Huragok Guidelines"
+
+/datum/ai_laws/drone/New()
+	add_inherent_law("Essential: Preserve and repair your assigned vessel to the best of your abilities with priority according to their technological complexity and level.")
+	add_inherent_law("Essential: Any technology found may be relocated, repaired or otherwise repurposed regardless of origin.")
+	add_inherent_law("Essential: Preserve forerunner technology above all.")
+	add_inherent_law("Optional: Avoid interfering with other beings. They are not worth your time.")
+	..()
