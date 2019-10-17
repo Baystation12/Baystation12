@@ -1,6 +1,7 @@
 
 /obj/machinery/microwave
-	name = "microwave"
+	name = "Food preparing device"
+	desc = "A futuristic device that takes ingredients and spits out prepared food. It also looks kinda like an oldschool microwave"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
@@ -36,24 +37,24 @@
 	if(src.broken > 0)
 		if(src.broken == 2 && isScrewdriver(O)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
-				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
-				"<span class='notice'>You start to fix part of the microwave.</span>" \
+				"<span class='notice'>\The [user] starts to fix part of the food preparing device.</span>", \
+				"<span class='notice'>You start to fix part of the food preparing device.</span>" \
 			)
 			if (do_after(user, 20, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] fixes part of the microwave.</span>", \
-					"<span class='notice'>You have fixed part of the microwave.</span>" \
+					"<span class='notice'>\The [user] fixes part of the food preparing device.</span>", \
+					"<span class='notice'>You have fixed part of the food preparing device.</span>" \
 				)
 				src.broken = 1 // Fix it a bit
 		else if(src.broken == 1 && isWrench(O)) // If it's broken and they're doing the wrench
 			user.visible_message( \
-				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
-				"<span class='notice'>You start to fix part of the microwave.</span>" \
+				"<span class='notice'>\The [user] starts to fix part of the food preparing device.</span>", \
+				"<span class='notice'>You start to fix part of the food preparing device.</span>" \
 			)
 			if (do_after(user, 20, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] fixes the microwave.</span>", \
-					"<span class='notice'>You have fixed the microwave.</span>" \
+					"<span class='notice'>\The [user] fixes the food preparing device.</span>", \
+					"<span class='notice'>You have fixed the food preparing device.</span>" \
 				)
 				src.broken = 0 // Fix it!
 				src.dirty = 0 // just to be sure
@@ -65,16 +66,16 @@
 	else if((. = component_attackby(O, user)))
 		dispose()
 		return
-	else if(src.dirty==100) // The microwave is all dirty so can't be used!
+	else if(src.dirty==100) // The food preparing device is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner) || istype(O, /obj/item/weapon/reagent_containers/glass/rag)) // If they're trying to clean it then let them
 			user.visible_message( \
-				"<span class='notice'>\The [user] starts to clean the microwave.</span>", \
-				"<span class='notice'>You start to clean the microwave.</span>" \
+				"<span class='notice'>\The [user] starts to clean the food preparing device.</span>", \
+				"<span class='notice'>You start to clean the food preparing device.</span>" \
 			)
 			if (do_after(user, 20, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] has cleaned the microwave.</span>", \
-					"<span class='notice'>You have cleaned the microwave.</span>" \
+					"<span class='notice'>\The [user] has cleaned the food preparing device.</span>", \
+					"<span class='notice'>You have cleaned the food preparing device.</span>" \
 				)
 				src.dirty = 0 // It's clean!
 				src.broken = 0 // just to be sure
