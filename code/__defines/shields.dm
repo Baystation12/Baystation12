@@ -2,9 +2,9 @@
 #define SHIELD_DAMTYPE_EM 2			// Electromagnetic damage - Ion weaponry, stun beams, ...
 #define SHIELD_DAMTYPE_HEAT 3		// Heat damage - Lasers, fire
 
-#define ENERGY_PER_HP (50 KILOWATTS)// Base amount energy that will be deducted from the generator's internal reserve per 1 HP of damage taken
-#define ENERGY_UPKEEP_PER_TILE (6 KILOWATTS)	// Base upkeep per tile protected. Multiplied by various enabled shield modes. Without them the field does literally nothing.
-#define ENERGY_UPKEEP_IDLE 50                  // Base upkeep when idle; modified by other factors.
+#define ENERGY_PER_HP (30 KILOWATTS)// Base amount energy that will be deducted from the generator's internal reserve per 1 HP of damage taken
+#define ENERGY_UPKEEP_PER_TILE 25	// Base upkeep per tile protected. Multiplied by various enabled shield modes. Without them the field does literally nothing.
+#define ENERGY_UPKEEP_IDLE 5                  // Base upkeep when idle; modified by other factors.
 
 // This shield model is slightly inspired by Sins of a Solar Empire series. In short, shields are designed to analyze what hits them, and adapt themselves against that type of damage.
 // This means shields will become increasingly effective against things like emitters - as they will adapt to heat damage, however they will be vulnerable to brute and EM damage.
@@ -19,12 +19,12 @@
 // Shield modes allow you to calibrate the field to fit specific needs. It is, for example, possible to create a field that will block airflow, but let people pass by calibrating it
 // properly. Each enabled shield mode adds up to the upkeep power usage, however. The following defines are a multiplier - 1.5 means the power usage will be increased 1.5x.
 
-#define MODEUSAGE_HYPERKINETIC 			// Blocks meteors and projectile based weapons. Relatively low as the shields are primarily intended as an anti-meteor countermeasure.
-#define MODEUSAGE_PHOTONIC 				// Blocks energy weapons, and makes the field opaque.
-#define MODEUSAGE_NONHUMANS 				// Blocks most organic lifeforms, with an exception being humanoid mobs. Typical uses include carps.
-#define MODEUSAGE_HUMANOIDS 			// Blocks humanoid mobs.
-#define MODEUSAGE_ANORGANIC 				// Blocks silicon-based mobs (cyborgs, drones, FBPs, IPCs, ..)
-#define MODEUSAGE_ATMOSPHERIC 			// Blocks airflow.
+#define MODEUSAGE_HYPERKINETIC 9			// Blocks meteors and projectile based weapons. Relatively low as the shields are primarily intended as an anti-meteor countermeasure.
+#define MODEUSAGE_PHOTONIC 4				// Blocks energy weapons, and makes the field opaque.
+#define MODEUSAGE_NONHUMANS 5				// Blocks most organic lifeforms, with an exception being humanoid mobs. Typical uses include carps.
+#define MODEUSAGE_HUMANOIDS 5			// Blocks humanoid mobs.
+#define MODEUSAGE_ANORGANIC 5				// Blocks silicon-based mobs (cyborgs, drones, FBPs, IPCs, ..)
+#define MODEUSAGE_ATMOSPHERIC 16			// Blocks airflow.
 #define MODEUSAGE_HULL 1					// Enables hull shielding mode, which changes a square shaped field into a field that covers external hull only.
 #define MODEUSAGE_BYPASS 					// Attempts to counter shield diffusers. Puts very large EM strain on the shield when doing so. Has to be hacked.
 #define MODEUSAGE_OVERCHARGE 3				// Overcharges the shield, causing it to shock anyone who touches a field segment. Best used with MODE_ORGANIC_HUMANOIDS. Has to be hacked.

@@ -68,8 +68,8 @@
 	max_energy = 0
 	full_shield_strength = 0
 	for(var/obj/item/weapon/stock_parts/smes_coil/S in component_parts)
-		full_shield_strength += (S.ChargeCapacity / CELLRATE) * 5
-	max_energy = full_shield_strength * 20
+		max_energy += (S.ChargeCapacity / CELLRATE) * 5
+	full_shield_strength = max_energy * 0.05
 	current_energy = between(0, current_energy, max_energy)
 
 	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
@@ -160,7 +160,11 @@
 
 	if(powernet && (running >= SHIELD_RUNNING) && !input_cut)
 		var/energy_buffer = 0
-		energy_buffer = draw_power(min(upkeep_power_usage, input_cap))
+		if(input_cap)
+			energy_buffer = draw_power(min(upkeep_power_usage, input_cap))
+		else
+			energy_buffer = draw_power(upkeep_power_usage)
+			
 		power_usage += round(energy_buffer)
 
 		if(energy_buffer < upkeep_power_usage)
@@ -174,7 +178,7 @@
 			energy_to_demand = max(0, max_energy - current_energy)
 		energy_buffer = draw_power(energy_to_demand)
 		power_usage += energy_buffer
-		current_energy += round(energy_buffer)
+		current_energy += (round(energy_buffer) * 0.10)
 	else
 		current_energy -= round(upkeep_power_usage)	// We are shutting down, or we lack external power connection. Use energy from internal source instead.
 

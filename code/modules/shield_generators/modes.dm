@@ -12,43 +12,43 @@
 	mode_name = "Hyperkinetic Projectiles"
 	mode_desc = "This mode blocks various fast moving physical objects, such as bullets, blunt weapons, meteors and other."
 	mode_flag = MODEFLAG_HYPERKINETIC
-	multiplier = 1.2
+	multiplier = 9
 
 /datum/shield_mode/photonic
 	mode_name = "Photonic Dispersion"
 	mode_desc = "This mode blocks majority of light. This includes beam weaponry and most of the visible light spectrum."
 	mode_flag = MODEFLAG_PHOTONIC
-	multiplier = 1.3
+	multiplier = 4
 
 /datum/shield_mode/em
 	mode_name = "Electro-Magnetic Shielding"
 	mode_desc = "This mode blocks various high-power emissions like electrical storms."
 	mode_flag = MODEFLAG_EM
-	multiplier = 1.3
+	multiplier = 11
 
 /datum/shield_mode/humanoids
 	mode_name = "Humanoid Lifeforms"
 	mode_desc = "This mode blocks various humanoid lifeforms. Does not affect fully synthetic humanoids."
 	mode_flag = MODEFLAG_HUMANOIDS
-	multiplier = 1.5
+	multiplier = 5
 
 /datum/shield_mode/silicon
 	mode_name = "Silicon Lifeforms"
 	mode_desc = "This mode blocks various silicon based lifeforms."
 	mode_flag = MODEFLAG_ANORGANIC
-	multiplier = 1.5
+	multiplier = 5
 
 /datum/shield_mode/mobs
 	mode_name = "Unknown Lifeforms"
 	mode_desc = "This mode blocks various other non-humanoid and non-silicon lifeforms. Typical uses include blocking carps."
 	mode_flag = MODEFLAG_NONHUMANS
-	multiplier = 1.5
+	multiplier = 5
 
 /datum/shield_mode/atmosphere
 	mode_name = "Atmospheric Containment"
 	mode_desc = "This mode blocks air flow and acts as atmosphere containment."
 	mode_flag = MODEFLAG_ATMOSPHERIC
-	multiplier = 1.3
+	multiplier = 16
 
 /datum/shield_mode/hull
 	mode_name = "Hull Shielding"
