@@ -40,12 +40,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
-"ad" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "ae" = (
 /obj/machinery/keycard_auth/torch{
 	pixel_x = -24;
@@ -24857,7 +24851,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -26660,7 +26654,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -27091,7 +27085,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -27260,7 +27254,6 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
 aa
@@ -27270,7 +27263,8 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
 aa
 aa
 aa
@@ -28722,7 +28716,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -32298,7 +32292,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -33574,7 +33568,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -34124,7 +34118,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -36128,7 +36122,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -41385,7 +41379,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -42259,7 +42253,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -44479,7 +44473,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -44619,7 +44613,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -46503,7 +46497,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -47251,7 +47245,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -49494,7 +49488,6 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
 aa
@@ -49510,7 +49503,6 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
 aa
@@ -49520,7 +49512,9 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
 aa
 aa
 aa
@@ -49891,7 +49885,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa

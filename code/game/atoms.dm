@@ -303,8 +303,10 @@ its easier to just keep the beam vertical.
 	qdel(src)
 	. = TRUE
 
-/atom/proc/hitby(var/atom/movable/AM)//already handled by throw impact
-	return
+/atom/proc/hitby(atom/movable/AM, var/datum/thrownthing/TT)//already handled by throw impact
+	if(isliving(AM))
+		var/mob/living/M = AM
+		M.apply_damage(TT.speed*5, BRUTE)
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)

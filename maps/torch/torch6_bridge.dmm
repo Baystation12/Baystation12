@@ -16470,12 +16470,6 @@
 /obj/structure/bed/chair/padded/green,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
-"Ut" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "Uu" = (
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -22673,7 +22667,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -22916,7 +22910,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -23299,7 +23293,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -27509,7 +27503,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -27773,7 +27767,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -34384,7 +34378,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -34435,7 +34429,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -38610,7 +38604,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -38692,7 +38686,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -42867,7 +42861,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 ad
 ad
@@ -43122,7 +43116,7 @@ ad
 ae
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -47728,7 +47722,6 @@ aa
 aa
 aa
 aa
-Ut
 aa
 aa
 aa
@@ -47753,7 +47746,8 @@ aa
 aa
 aa
 aa
-Ut
+aa
+aa
 aa
 aa
 aa
