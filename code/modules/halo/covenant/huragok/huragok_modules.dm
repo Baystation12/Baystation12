@@ -1,10 +1,10 @@
-/obj/item/weapon/robot_module/huragok/lifeworker
+/obj/item/weapon/robot_module/huragok_lifeworker
 	name = "huragok lifeworker specialization"
 	sprites = list(
 					"Lifeworker" = "engineer",
 					)
 
-/obj/item/weapon/robot_module/huragok/lifeworker/New()
+/obj/item/weapon/robot_module/huragok_lifeworker/New()
 	src.modules += new /obj/item/weapon/crowbar/covenant(src)
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/hud/med(src)
@@ -49,7 +49,7 @@
 
 	..()
 
-/obj/item/weapon/robot_module/huragok/engineer
+/obj/item/weapon/robot_module/huragok_engineer
 	name = "huragok engineer specialization"
 	supported_upgrades = list(/obj/item/borg/upgrade/rcd)
 	sprites = list(
@@ -57,7 +57,7 @@
 					)
 	no_slip = 1
 
-/obj/item/weapon/robot_module/huragok/engineer/New()
+/obj/item/weapon/robot_module/huragok_engineer/New()
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/extinguisher(src)
