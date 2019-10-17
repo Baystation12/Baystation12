@@ -15,17 +15,6 @@
 /datum
 	var/list/datum/extension/extensions
 
-/datum/Destroy()
-	if(extensions)
-		for(var/expansion_key in extensions)
-			var/list/extension = extensions[expansion_key]
-			if(islist(extension))
-				extension.Cut()
-			else
-				qdel(extension)
-		extensions = null
-	return ..()
-
 //Variadic - Additional positional arguments can be given. Named arguments might not work so well
 /proc/set_extension(var/datum/source, var/datum/extension/base_type, var/extension_type)
 	if(!source.extensions)

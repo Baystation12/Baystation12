@@ -67,39 +67,10 @@
 		light.destroy()
 		light = null
 	return ..()
-	
+
 /atom/set_opacity()
 	. = ..()
 	if(.)
 		var/turf/T = loc
 		if(istype(T))
 			T.handle_opacity_change(src)
-
-#define LIGHT_MOVE_UPDATE \
-var/turf/old_loc = loc;\
-. = ..();\
-if(loc != old_loc) {\
-	for(var/datum/light_source/L in light_sources) {\
-		L.source_atom.update_light();\
-	}\
-}
-
-/atom/movable/Move()
-	LIGHT_MOVE_UPDATE
-
-/atom/movable/forceMove()
-	LIGHT_MOVE_UPDATE
-
-#undef LIGHT_MOVE_UPDATE
-
-/obj/item/equipped()
-	. = ..()
-	update_light()
-
-/obj/item/pickup()
-	. = ..()
-	update_light()
-
-/obj/item/dropped()
-	. = ..()
-	update_light()
