@@ -1,11 +1,3 @@
-///////////////////// Huragok /////////////////////
-
-/*
-var/global/list/robot_modules = list(
-	"Huragok Engineer"		= /obj/item/weapon/robot_module/huragok/engineer,
-	"Huragok Lifeworker"	= /obj/item/weapon/robot_module/huragok/lifeworker
-	)
-
 /obj/item/weapon/robot_module/huragok/lifeworker
 	name = "huragok lifeworker specialization"
 	sprites = list(
@@ -84,25 +76,27 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/pipe_painter(src)
 //	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)	//Might as well make a new version of this that deploys weak energy barriers that act as a temporaru fix for breaches.
 
-	var/datum/matter_synth/metal = new /datum/matter_synth/metal(9999999999999)	//When an alternative is coded in for the huragoks to regenerate matter outside a cyborg recharge station, let's get rid of this infinite resource.
-	var/datum/matter_synth/glass = new /datum/matter_synth/glass(9999999999999)
-	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel(9999999999999)
-	var/datum/matter_synth/wire = new /datum/matter_synth/wire(9999999999999)
+	var/datum/matter_synth/metal = new /datum/matter_synth/metal(600000)	//When an alternative is coded in for the huragoks to regenerate matter outside a cyborg recharge station, let's get rid of this infinite resource.
+	var/datum/matter_synth/glass = new /datum/matter_synth/glass(600000)
+	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel(600000)
+	var/datum/matter_synth/wire = new /datum/matter_synth/wire(600000)
+	var/datum/matter_synth/nanolaminate = new /datum/matter_synth/nanolaminate(600000)
 	synths += metal
 	synths += glass
 	synths += plasteel
 	synths += wire
+	synths += nanolaminate
 
 	var/obj/item/weapon/matter_decompiler/MD = new /obj/item/weapon/matter_decompiler(src)
 	MD.metal = metal
 	MD.glass = glass
 	src.modules += MD
 
-	var/obj/item/stack/material/cyborg/steel/M = new (src)
+	var/obj/item/stack/material/cyborg/steel/high_cap/M = new (src)
 	M.synths = list(metal)
 	src.modules += M
 
-	var/obj/item/stack/material/cyborg/glass/G = new (src)
+	var/obj/item/stack/material/cyborg/glass/high_cap/G = new (src)
 	G.synths = list(glass)
 	src.modules += G
 
@@ -111,20 +105,24 @@ var/global/list/robot_modules = list(
 	src.modules += R
 
 	var/obj/item/stack/cable_coil/cyborg/C = new /obj/item/stack/cable_coil/cyborg(src)
-	C.synths = list(wire)
+	C.synths = list(metal)
 	src.modules += C
 
 	var/obj/item/stack/tile/floor/cyborg/S = new /obj/item/stack/tile/floor/cyborg(src)
 	S.synths = list(metal)
 	src.modules += S
 
-	var/obj/item/stack/material/cyborg/glass/reinforced/RG = new (src)
+	var/obj/item/stack/material/cyborg/glass/reinforced/high_cap/RG = new (src)
 	RG.synths = list(metal, glass)
 	src.modules += RG
 
-	var/obj/item/stack/material/cyborg/plasteel/PL = new (src)
+	var/obj/item/stack/material/cyborg/plasteel/high_cap/PL = new (src)
 	PL.synths = list(plasteel)
 	src.modules += PL
+
+	var/obj/item/stack/material/cyborg/nanolaminate/ZW = new (src)
+	ZW.synths = list(nanolaminate)
+	src.modules += ZW
 
 	..()
 
@@ -132,4 +130,3 @@ var/global/list/robot_modules = list(
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
 	LR.Charge(R, amount)
 	..()
-*/
