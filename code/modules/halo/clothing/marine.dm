@@ -223,6 +223,7 @@
 	name = "\improper EVA Marine Helmet"
 	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
 	icon = 'code/modules/halo/clothing/marine.dmi'
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = FACE|HEAD
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE

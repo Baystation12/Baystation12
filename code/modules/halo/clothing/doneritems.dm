@@ -5,6 +5,58 @@
 #define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
 #define MARINE_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 
+////////ashvor\\\\\\\\
+
+//Marine
+
+/obj/item/clothing/under/unsc/marine_fatigues/ashvor
+	desc = "A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps"
+	name = "UNSC Cross Branch Battle Dress Uniform"
+	item_state = "ashvor-uniform"
+	icon_state = "ashvor-uniform_obj"
+	worn_state = "ashvor-uniform"
+
+/obj/item/clothing/head/helmet/eva/marine/ashvor
+	desc = "The ECH252 is an enclosed variant of the standard CH252 helmet. The helmet can be fully enclosed and environmentally sealed,"
+	name = "ECH252 Enclosed Helmet"
+	item_state = "ashvor-helmet_worn"
+	icon_state = "ashvor-helmet_obj"
+
+/obj/item/clothing/suit/spaceeva/eva/ashvor
+	desc = "A pressurized Atmospheric/Exoatmospheric (A/X) version of the standard M52 Body Armor, Worn mitigate the atmospheric hazards caused by nearby glassing,"
+	name = "M52A/X Body Armor"
+	item_state = "ashvor-armor_worn"
+	icon_state = "ashvor-armor_obj"
+
+/obj/item/clothing/gloves/thick/unsc/ashvor
+	desc = "The pressurized and sealed combat gloves worn with the A/X armor for the members of the UNSC Marine Corps."
+	name = "A/X Combat_Gloves"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "ashvor-gloves_worn"
+	icon_state = "ashvor-gloves_obj"
+
+/obj/item/clothing/shoes/eva/marine/ashvor
+	desc = "The Atmospheric/Exoatmospheric sealed variant of the standard combat boots worn by the members of the UNSC Marine Corps."
+	name = "A/X Combat Boots"
+	item_state = "ashvor-boots_worn"
+	icon_state = "ashvor-boots_obj"
+
+/obj/item/weapon/storage/backpack/odst/regular/ashvor
+	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force."
+	name = "UNSC Tactical Backpack"
+	item_state = "ashvor-backpack_worn"
+	icon_state = "ashvor-backpack_obj"
+
+/decl/hierarchy/outfit/ashvor_marine
+	name = "ashvor - marine"
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/ashvor
+	suit = /obj/item/clothing/suit/spaceeva/eva/ashvor
+	shoes = /obj/item/clothing/shoes/eva/marine/ashvor
+	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
+	head = /obj/item/clothing/head/helmet/eva/marine/ashvor
+	back = /obj/item/weapon/storage/backpack/odst/regular/ashvor
+
 
 ////////caelumz\\\\\\\\
 
@@ -908,13 +960,12 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "sleepy-marine_worn"
 	icon_state = "sleepy-marine_obj"
 
-/obj/item/clothing/under/urfc_jumpsuit/sleepy_retard
+/obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard
 	desc = "Standard issue uniform for UNSC marine corps."
 	name = "UNSC Marine fatigues"
-	icon = 'code/modules/halo/clothing/marine_items.dmi'
-	icon_override = 'code/modules/halo/clothing/marine_items.dmi'
-	item_state = "sleepy_uniform"
-	icon_state = "sleepy_uniform"
+	item_state = "sleepy-uniform"
+	icon_state = "sleepy-uniform_obj"
+	worn_state = "sleepy-uniform"
 
 /obj/item/clothing/shoes/marine/sleepy_retard
 	name = "VZG-S Armored Boots."
@@ -927,8 +978,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	desc = "Standard issue UNSC gloves, but with a coarse material for better grip. Or just poor materials."
 	icon = MARINE_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "sleepy-gloves"
-	icon_state = "sleepy-gloves"
+	item_state = "sleepy-gloves_worn"
+	icon_state = "sleepy-gloves_obj"
 
 /obj/item/clothing/mask/marine/sleepy_retard
 	name = "UNSC Bandana"
@@ -940,12 +991,41 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /decl/hierarchy/outfit/sleepy_marine
 	name = "sleepy - marine"
-	uniform = /obj/item/clothing/under/urfc_jumpsuit/sleepy_retard
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard
 	mask = /obj/item/clothing/mask/marine/sleepy_retard
 	suit = /obj/item/clothing/suit/storage/marine/sleepy_retard
 	shoes = /obj/item/clothing/shoes/marine/sleepy_retard
 	gloves = /obj/item/clothing/gloves/thick/unsc/sleepy_retard
 	head = /obj/item/clothing/head/helmet/marine/sleepy_retard
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/engineer/sleepy
+	name = "ODST Mechanist Helmet"
+	desc = "Standard issue short-EVA capable helmet issued to ODST forces. This one is highlighted yellow, in accordance to the now-defunct Mechanist Corps."
+	item_state = "sleepy odst-helmet_worn"
+	icon_state = "sleepy odst-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/sleepy
+	name = "ODST Mechanist Armour"
+	desc = "Lightweight, durable armour issued to Orbital Drop Shock Troopers for increased survivability in the field. This one is highlighted yellow, in accordance to the now-defunct Mechanist Corps."
+	item_state = "sleepy odst-armor_worn"
+	icon_state = "sleepy odst-armour_obj"
+
+/obj/item/weapon/storage/backpack/odst/sleepy
+	name = "ODST Servo Arm Carriage"
+	desc = "Standard issue Servo Arm Carriage for the ODST Mechanist Corps. The servo arm seems to be staring at you, with an intense smug aura. No eyes are seen."
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	item_state = "sleepy odst-backpack_worn"
+	icon_state = "sleepy odst-backpack_obj"
+
+/decl/hierarchy/outfit/sleepy_odst
+	name = "sleepy - odst Mechanist"
+	suit = /obj/item/clothing/suit/armor/special/odst/sleepy
+	head = /obj/item/clothing/head/helmet/odst/engineer/sleepy
+	back = /obj/item/weapon/storage/backpack/odst/sleepy
+
 
 ////////Spartankiller\\\\\\\\
 
