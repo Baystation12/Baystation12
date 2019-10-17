@@ -9,7 +9,9 @@ var/global/list/robot_modules = list(
 	"Security" 		= /obj/item/weapon/robot_module/security/general,
 	"Combat" 		= /obj/item/weapon/robot_module/security/combat,
 	"Engineering"	= /obj/item/weapon/robot_module/engineering/general,
-	"Janitor" 		= /obj/item/weapon/robot_module/janitor
+	"Janitor" 		= /obj/item/weapon/robot_module/janitor,
+	"Huragok Engineer"		= /obj/item/weapon/robot_module/huragok_engineer,
+	"Huragok Lifeworker"	= /obj/item/weapon/robot_module/huragok_lifeworker
 	)
 
 /obj/item/weapon/robot_module
