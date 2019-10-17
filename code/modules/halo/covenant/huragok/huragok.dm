@@ -15,11 +15,9 @@
 	universal_understand = 1
 	scrambledcodes = 1
 	req_access = list(-1)
+//	intenselight = 1
+	light_color = " 1fe5ef"	//Yeah for some reason, the space at the beginning is vital. Go figure.
 
 	cell = /obj/item/weapon/cell/infinite
 	radio = /obj/item/device/radio/headset/covenant
 	common_radio = /obj/item/device/radio/headset/covenant
-
-/mob/living/silicon/robot/huragok/updatename(var/prefix as text)
-	name = "[modtype] [num2text(ident)]"
-	real_name = name
