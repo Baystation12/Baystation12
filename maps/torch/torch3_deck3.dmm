@@ -5438,7 +5438,7 @@
 	frequency = 1379;
 	id_tag = "bsa_ex";
 	locked = 1;
-	name = "Bluespace Artillery Maintenance External Airlock"
+	name = "Obstruction Field Disperser Maintenance External Airlock"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/disperser)
@@ -14945,7 +14945,7 @@
 /obj/machinery/door/blast/regular{
 	dir = 4;
 	id_tag = "bsa-core";
-	name = "BSA Blast Door"
+	name = "OFD Blast Door"
 	},
 /turf/simulated/floor/airless,
 /area/command/disperser)
@@ -14993,7 +14993,7 @@
 /area/command/disperser)
 "It" = (
 /obj/machinery/door/airlock/command{
-	name = "Bluespace Charge Storage";
+	name = "Obstruction Field Disperser Magazine";
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor,
@@ -16815,7 +16815,7 @@
 	frequency = 1379;
 	id_tag = "bsa_in";
 	locked = 1;
-	name = "Bluespace Artillery Maintenance Internal Airlock"
+	name = "Obstruction Field Disperser Maintenance Internal Airlock"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4;
