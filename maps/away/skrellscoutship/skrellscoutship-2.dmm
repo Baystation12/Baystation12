@@ -1914,12 +1914,6 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d1)
-"Tb" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "TF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
@@ -7905,7 +7899,7 @@ aa
 aa
 aa
 aa
-Tb
+aa
 aa
 aa
 aa
@@ -8233,7 +8227,7 @@ aa
 aa
 aa
 aa
-Tb
+aa
 aa
 aa
 aa
@@ -10460,7 +10454,7 @@ aa
 aa
 aa
 aa
-Tb
+aa
 aa
 aa
 aa

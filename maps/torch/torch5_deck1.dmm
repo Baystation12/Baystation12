@@ -14,12 +14,6 @@
 /obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle,
 /turf/space,
 /area/space)
-"aae" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "aaf" = (
 /turf/simulated/wall/r_wall/hull,
 /area/medical/virology)
@@ -34819,7 +34813,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -36449,7 +36443,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -37049,7 +37043,6 @@ aaa
 aaa
 aaa
 aaa
-aae
 aaa
 aaa
 aaa
@@ -37079,7 +37072,8 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -37263,7 +37257,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -39645,7 +39639,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -41124,7 +41118,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -41267,7 +41261,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -44501,7 +44495,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -44565,7 +44559,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -45709,7 +45703,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -46780,7 +46774,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -49415,7 +49409,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -49747,7 +49741,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -50820,7 +50814,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -54668,7 +54662,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -55201,7 +55195,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -58293,7 +58287,7 @@ aUu
 xPU
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -58635,7 +58629,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -61316,7 +61310,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -61483,7 +61477,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -61703,7 +61697,7 @@ acd
 aaa
 acd
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -62123,7 +62117,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -63709,7 +63703,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
