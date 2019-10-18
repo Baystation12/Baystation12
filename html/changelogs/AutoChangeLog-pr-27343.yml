@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Allow some more interactions from inside exosuits such as grabbing items from clamp if the cockpit is open."
