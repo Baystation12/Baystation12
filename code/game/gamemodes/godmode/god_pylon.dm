@@ -3,6 +3,7 @@
 	name = "pylon"
 	desc = "A crystal platform used to communicate with the deity."
 	build_cost = 400
+	icon = 'icons/obj/pylon.dmi'
 	icon_state = "pylon"
 	var/list/intuned = list()
 
