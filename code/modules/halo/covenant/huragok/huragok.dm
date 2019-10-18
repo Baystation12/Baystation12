@@ -9,6 +9,7 @@
 	icon_state = "engineer"
 	maxHealth = 75
 	health = 75
+	faction = "Covenant"
 	spawn_sound = null
 	speak_statement = "chirps"
 	speak_exclamation = "chirps"
@@ -23,6 +24,7 @@
 	req_access = list(-1)
 //	intenselight = 1
 	light_color = " 1fe5ef"	//Yeah for some reason, the space at the beginning is vital. Go figure.
+	light_power = 3
 
 	cell = /obj/item/weapon/cell/infinite
 	radio = /obj/item/device/radio/headset/covenant
@@ -37,4 +39,5 @@
 	remove_language("Robot Talk", 1)
 	remove_language(LANGUAGE_EAL, 1)
 	remove_language(LANGUAGE_GALCOM, 1)
+	remove_language(LANGUAGE_SOL_COMMON, 1)
 	add_language(LANGUAGE_SIGN, 1)

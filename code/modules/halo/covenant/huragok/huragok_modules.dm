@@ -4,9 +4,6 @@
 					"Lifeworker" = "engineer",
 					)
 
-	languages = list(
-		LANGUAGE_SOL_COMMON = 0)
-
 /obj/item/weapon/robot_module/huragok_lifeworker/New()
 	src.modules += new /obj/item/weapon/crowbar/covenant(src)
 	src.modules += new /obj/item/device/flash(src)
@@ -31,20 +28,20 @@
 	src.modules += new /obj/item/weapon/surgicaldrill/covenant(src)
 	src.modules += new /obj/item/weapon/gripper/organ(src)
 
-	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(25000)
+	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(20000)
 	synths += medicine
 
-	var/obj/item/stack/medical/ointment/O = new /obj/item/stack/medical/ointment(src)
-	var/obj/item/stack/medical/bruise_pack/B = new /obj/item/stack/medical/bruise_pack(src)
+	var/obj/item/stack/medical/advanced/ointment/O = new /obj/item/stack/medical/advanced/ointment(src)
+	var/obj/item/stack/medical/advanced/bruise_pack/B = new /obj/item/stack/medical/advanced/bruise_pack(src)
 	var/obj/item/stack/medical/splint/S = new /obj/item/stack/medical/splint(src)
 	O.uses_charge = 1
-	O.charge_costs = list(1000)
+	O.charge_costs = list(0.1)
 	O.synths = list(medicine)
 	B.uses_charge = 1
-	B.charge_costs = list(1000)
+	B.charge_costs = list(0.1)
 	B.synths = list(medicine)
 	S.uses_charge = 1
-	S.charge_costs = list(1000)
+	S.charge_costs = list(0.1)
 	S.synths = list(medicine)
 	src.modules += O
 	src.modules += B
@@ -58,9 +55,6 @@
 	sprites = list(
 					"Huragok Engineer" = "engineer"
 					)
-
-	languages = list(
-		LANGUAGE_SOL_COMMON = 0)
 
 	no_slip = 1
 
@@ -78,16 +72,17 @@
 	src.modules += new /obj/item/device/analyzer(src)
 	src.modules += new /obj/item/device/geiger(src)
 	src.modules += new /obj/item/weapon/gripper(src)
+	src.modules += new /obj/item/weapon/gripper/cilia(src)
 	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
 //	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)	//Might as well make a new version of this that deploys weak energy barriers that act as a temporaru fix for breaches.
 
-	var/datum/matter_synth/metal = new /datum/matter_synth/metal(600000)	//When an alternative is coded in for the huragoks to regenerate matter outside a cyborg recharge station, let's get rid of this infinite resource.
-	var/datum/matter_synth/glass = new /datum/matter_synth/glass(600000)
-	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel(600000)
-	var/datum/matter_synth/wire = new /datum/matter_synth/wire(600000)
-	var/datum/matter_synth/nanolaminate = new /datum/matter_synth/nanolaminate(600000)
+	var/datum/matter_synth/metal = new /datum/matter_synth/metal(600000000)	//When an alternative is coded in for the huragoks to regenerate matter outside a cyborg recharge station, let's get rid of this infinite resource.
+	var/datum/matter_synth/glass = new /datum/matter_synth/glass(600000000)
+	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel(600000000)
+	var/datum/matter_synth/wire = new /datum/matter_synth/wire(600000000)
+	var/datum/matter_synth/nanolaminate = new /datum/matter_synth/nanolaminate(600000000)
 	synths += metal
 	synths += glass
 	synths += plasteel
