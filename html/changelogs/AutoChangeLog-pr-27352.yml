@@ -1,7 +1,0 @@
-author: "Marie Taylor"
-delete-after: True
-changes: 
-  - imageadd: "Resprited holopad, the artist of the previous version has been executed"
-  - imageadd: "Resprited bell"
-  - imageadd: "Added ringing animation to bell"
-  - imageadd: "Resprited notice board, added 4 dir"
