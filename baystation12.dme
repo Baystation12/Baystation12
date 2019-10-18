@@ -1483,6 +1483,7 @@
 #include "code\modules\halo\covenant\item_manufactory_interact.dm"
 #include "code\modules\halo\covenant\jump_pad.dm"
 #include "code\modules\halo\covenant\lekgolo_spawner.dm"
+#include "code\modules\halo\covenant\medical.dm"
 #include "code\modules\halo\covenant\medmachines.dm"
 #include "code\modules\halo\covenant\multitile_airlocks.dm"
 #include "code\modules\halo\covenant\pillar_lift.dm"
