@@ -6690,7 +6690,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = 26;
 	pixel_y = -25;
-	req_access = list("ACCESS_CARGO")
+	req_access = list(list("ACCESS_CARGO","ACCESS_MINING"))
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
