@@ -7,7 +7,7 @@
 
 /obj/effect/overmap/ship/unsc_odp_cassius
 	name = "ODP Cassius"
-	desc = "Located in geosynchronous orbit above the planet, this relatively compact Orbital Defense Platform has enough firepower to pierce any spacecraft known to man in a single hit."
+	desc = "Located in geosynchronous orbit above the planet, this relatively compact Moncton-class Orbital Defense Platform has enough firepower to pierce any spacecraft known to man in a single hit."
 	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
 	icon_state = "SMAC"
 	faction = "UNSC"
