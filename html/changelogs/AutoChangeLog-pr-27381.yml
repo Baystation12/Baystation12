@@ -1,0 +1,4 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - bugfix: "PAIs, Photos, Integrated Circuit Printers, Printed Crew records, and Warrant Projectors should be working again."
