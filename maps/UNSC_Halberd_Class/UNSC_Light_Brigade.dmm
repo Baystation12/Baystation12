@@ -35,7 +35,7 @@
 "aI" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/destroyer/unsclightbrigade/reactor)
 "aJ" = (/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/defibrillator/loaded,/obj/structure/table/glass/white,/turf/simulated/floor/tiled/white,/area/destroyer/unsclightbrigade/medbay)
 "aK" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/destroyer/unsclightbrigade/medbay)
-"aL" = (/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/roller,/obj/item/roller,/obj/item/roller,/obj/item/roller,/obj/structure/table/glass/white,/turf/simulated/floor/tiled/white,/area/destroyer/unsclightbrigade/medbay)
+"aL" = (/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/roller,/obj/item/roller,/obj/item/roller,/obj/item/roller,/obj/structure/table/glass/white,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/turf/simulated/floor/tiled/white,/area/destroyer/unsclightbrigade/medbay)
 "aM" = (/obj/structure/cable/blue,/obj/machinery/light/colored/orange,/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+007; cur_coils = 6},/turf/simulated/floor/plating,/area/destroyer/unsclightbrigade/medbay)
 "aN" = (/turf/simulated/wall/r_wall,/area/destroyer/unsclightbrigade/starboardengine)
 "aO" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/destroyer/unsclightbrigade/medbay)
