@@ -20,6 +20,8 @@
 
 	. = ..()
 
+/mob/living/exosuit/premade/powerloader/spawn_mech_equipment()
+	..()
 	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
 
@@ -115,11 +117,10 @@
 
 	material = SSmaterials.get_material_by_name(MATERIAL_OSMIUM_CARBIDE_PLASTEEL)
 
+/mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
+	..()
 	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
-
-	
-
 
 /obj/item/mech_component/sensors/firefighter/prebuild()
 	..()
@@ -143,3 +144,8 @@
 		parts -= damaged
 		damaged = pick(parts)
 		damaged.take_brute_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)
+
+/mob/living/exosuit/premade/powerloader/old/spawn_mech_equipment()
+	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
+	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_LEFT_HAND)
+	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
