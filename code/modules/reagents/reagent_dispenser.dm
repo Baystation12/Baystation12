@@ -27,11 +27,9 @@
 
 	..()
 
-/obj/structure/reagent_dispensers/examine(mob/user, distance)
-	. = ..()
-	if(distance > 2)
+/obj/structure/reagent_dispensers/examine(mob/user)
+	if(!..(user, 2))
 		return
-
 	to_chat(user, "<span class='notice'>It contains:</span>")
 	if(reagents && reagents.reagent_list.len)
 		for(var/datum/reagent/R in reagents.reagent_list)

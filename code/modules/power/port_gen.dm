@@ -71,9 +71,8 @@
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/power/port_gen/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
+/obj/machinery/power/port_gen/examine(mob/user)
+	if(!..(user,1 ))
 		return
 	if(active)
 		to_chat(usr, "<span class='notice'>The generator is on.</span>")
@@ -467,7 +466,7 @@
 	..()
 
 /obj/machinery/power/port_gen/pacman/super/potato/examine(mob/user)
-	. = ..()
+	..()
 	to_chat(user, "Auxilary tank shows [reagents.total_volume]u of liquid in it.")
 
 /obj/machinery/power/port_gen/pacman/super/potato/UseFuel()

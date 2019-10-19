@@ -39,10 +39,11 @@
 
 /obj/machinery/cooker/examine(mob/user)
 	. = ..()
-	if(cooking_obj)
-		to_chat(user, "You can see \a [cooking_obj] inside.")
-	if(panel_open)
-		to_chat(user, "The panel is open")
+	if(.)
+		if(cooking_obj)
+			to_chat(user, "You can see \a [cooking_obj] inside.")
+		if(panel_open)
+			to_chat(user, "The panel is open")
 
 /obj/machinery/cooker/components_are_accessible(path)
 	return !cooking && ..()

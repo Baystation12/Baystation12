@@ -20,10 +20,10 @@
 	else
 		..()
 
-/obj/item/weapon/gun/launcher/net/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 2 && chambered)
-		to_chat(user, "\A [chambered] is chambered.")
+/obj/item/weapon/gun/launcher/net/examine(mob/user)
+	if(..(user, 2))
+		if(chambered)
+			to_chat(user, "\A [chambered] is chambered.")
 
 /obj/item/weapon/gun/launcher/net/proc/can_load(var/obj/item/weapon/net_shell/S, var/mob/user)
 	if(chambered)

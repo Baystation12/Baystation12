@@ -64,8 +64,7 @@ var/global/photo_count = 0
 			scribble = txt
 	..()
 
-/obj/item/weapon/photo/examine(mob/user, distance)
-	. = TRUE
+/obj/item/weapon/photo/examine(mob/user)
 	if(!img)
 		return
 	if(in_range(user, src))
@@ -225,7 +224,9 @@ var/global/photo_count = 0
 	update_icon()
 
 /obj/item/device/camera/examine(mob/user)
-	. = ..()
+	if(!..(user))
+		return
+
 	to_chat(user, "It has [pictures_left] photo\s left.")
 
 //Proc for capturing check

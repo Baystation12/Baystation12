@@ -40,7 +40,7 @@
 			if(81 to 100)
 				overlays += "bees5"
 
-/obj/machinery/beehive/examine(mob/user)
+/obj/machinery/beehive/examine(var/mob/user)
 	. = ..()
 	if(!closed)
 		to_chat(user, "The lid is open.")

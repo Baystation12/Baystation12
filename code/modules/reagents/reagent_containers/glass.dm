@@ -46,11 +46,9 @@
 	..()
 	base_name = name
 
-/obj/item/weapon/reagent_containers/glass/examine(mob/user, distance)
-	. = ..()
-	if(distance > 2)
+/obj/item/weapon/reagent_containers/glass/examine(var/mob/user)
+	if(!..(user, 2))
 		return
-	
 	if(reagents && reagents.reagent_list.len)
 		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
 	else

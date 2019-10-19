@@ -13,9 +13,9 @@
 	excavation_amount = 0
 	sharp = 1
 
-/obj/item/weapon/pickaxe/xeno/examine(mob/user)
-	. = ..()
-	to_chat(user, "This tool has a [excavation_amount] centimetre excavation depth.")
+/obj/item/weapon/pickaxe/xeno/examine()
+	..()
+	to_chat(usr, "This tool has a [excavation_amount] centimetre excavation depth.")
 
 /obj/item/weapon/pickaxe/xeno/brush
 	name = "wire brush"

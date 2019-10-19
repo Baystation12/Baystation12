@@ -36,8 +36,8 @@
 	GLOB.invisibility_set_event.unregister(owner, src, /mob/zshadow/proc/update_invisibility)
 	. = ..()
 
-/mob/zshadow/examine()
-	return owner.examine(arglist(args))
+/mob/zshadow/examine(mob/user, distance, infix, suffix)
+	return owner.examine(user, distance, infix, suffix)
 
 // Relay some stuff they hear
 /mob/zshadow/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)

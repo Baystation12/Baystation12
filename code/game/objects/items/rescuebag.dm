@@ -48,11 +48,12 @@
 
 /obj/item/bodybag/rescue/examine(mob/user)
 	. = ..()
-	if(airtank)
-		to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
-		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
-	else
-		to_chat(user, "<span class='warning'>The air tank is missing.</span>")
+	if(.)
+		if(airtank)
+			to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
+			to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
+		else
+			to_chat(user, "<span class='warning'>The air tank is missing.</span>")
 		
 /obj/structure/closet/body_bag/rescue
 	name = "rescue bag"
@@ -126,13 +127,15 @@
 
 /obj/structure/closet/body_bag/rescue/examine(mob/user)
 	. = ..()
-	if(airtank)
-		to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
-		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
-	else
-		to_chat(user, "<span class='warning'>The air tank is missing.</span>")
-	to_chat(user,"The pressure meter on [src] shows '[atmo.return_pressure()] kPa'.")
-	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
-		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
-		for(var/mob/living/L in contents)
-			L.examine(arglist(args))
+	if(.)
+		if(airtank)
+			to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
+			to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
+		else
+			to_chat(user, "<span class='warning'>The air tank is missing.</span>")
+		to_chat(user,"The pressure meter on [src] shows '[atmo.return_pressure()] kPa'.")
+		if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
+			to_chat(user, "<span class='info'>You peer into \the [src].</span>")
+			for(var/mob/living/L in contents)
+				L.examine(user)
+ 

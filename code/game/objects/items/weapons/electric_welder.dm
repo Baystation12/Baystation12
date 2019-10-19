@@ -15,12 +15,12 @@
 		cell = new cell(src)
 	. = ..()
 
-/obj/item/weapon/weldingtool/electric/examine(mob/user, distance)
-	. = ..()
+/obj/item/weapon/weldingtool/electric/examine(mob/user)
+	var/near = ..(user, 0)
 	if (!cell)
 		to_chat(user, "There is no [welding_resource] source attached.")
 	else
-		to_chat(user, (distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
+		to_chat(user, (near ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
 
 /obj/item/weapon/weldingtool/electric/afterattack(var/obj/O, var/mob/user, var/proximity)
 	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank))

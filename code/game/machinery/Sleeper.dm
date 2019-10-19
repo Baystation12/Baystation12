@@ -35,13 +35,13 @@
 		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
-/obj/machinery/sleeper/examine(mob/user, distance)
+/obj/machinery/sleeper/examine(mob/user)
 	. = ..()
-	if (distance <= 1)
+	if (. && user.Adjacent(src))
 		if (beaker)
 			to_chat(user, "It is loaded with a beaker.")
 		if(occupant)
-			occupant.examine(arglist(args))
+			occupant.examine(user)
 		if (emagged && user.skill_check(SKILL_MEDICAL, SKILL_EXPERT))
 			to_chat(user, "The sleeper chemical synthesis controls look tampered with.")
 
@@ -276,7 +276,7 @@
 /obj/machinery/sleeper/proc/inject_chemical(var/mob/living/user, var/chemical_name, var/amount)
 	if(stat & (BROKEN|NOPOWER))
 		return
-
+		
 	var/chemical_type = available_chemicals[chemical_name]
 	if(occupant && occupant.reagents)
 		if(occupant.reagents.get_reagent_amount(chemical_type) + amount <= 20)

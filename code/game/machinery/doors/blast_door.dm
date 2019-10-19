@@ -63,7 +63,7 @@
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
-	if((stat & BROKEN))
+	if(. && (stat & BROKEN))
 		to_chat(user, "It's broken.")
 
 // Proc: Bumped()

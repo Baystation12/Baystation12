@@ -59,7 +59,7 @@
 	alarm = round(max(alarm, duration))
 	update_icon()
 
-/obj/machinery/shield_diffuser/examine(mob/user)
+/obj/machinery/shield_diffuser/examine(var/mob/user)
 	. = ..()
 	to_chat(user, "It is [enabled ? "enabled" : "disabled"].")
 	if(alarm)

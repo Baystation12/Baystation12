@@ -54,7 +54,7 @@
 	remove_language(LANGUAGE_ROBOT_GLOBAL)
 	default_language = all_languages[LANGUAGE_MANTID_NONVOCAL]
 
-/mob/living/silicon/robot/flying/ascent/examine(mob/user)
+/mob/living/silicon/robot/flying/ascent/examine(var/user)
 	. = ..()
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user

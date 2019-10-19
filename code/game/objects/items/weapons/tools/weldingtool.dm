@@ -40,12 +40,14 @@
 
 	return ..()
 
-/obj/item/weapon/weldingtool/examine(mob/user, distance)
-	. = ..()
+/obj/item/weapon/weldingtool/examine(mob/user)
+	var/near = ..(user, 0)
+	if (istype(src, /obj/item/weapon/weldingtool/electric))
+		return near
 	if (!tank)
 		to_chat(user, "There is no [welding_resource] source attached.")
 	else
-		to_chat(user, (distance <= 1 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[tank] is attached.")
+		to_chat(user, (near ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[tank] is attached.")
 
 /obj/item/weapon/weldingtool/MouseDrop(atom/over)
 	if(!CanMouseDrop(over, usr))
@@ -358,7 +360,7 @@
 	force = 6
 	throwforce = 6
 	size_in_use = ITEM_SIZE_NORMAL
-
+	
 
 /obj/item/weapon/welder_tank/huge
 	name = "huge welding fuel tank"

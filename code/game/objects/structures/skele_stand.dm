@@ -36,7 +36,7 @@
 	rattle_bones(null, thing)
 
 /obj/structure/skele_stand/examine(mob/user)
-	. = ..()
+	..()
 	if(swag.len)
 		var/list/swagnames = list()
 		for(var/slot in swag)

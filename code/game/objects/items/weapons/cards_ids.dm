@@ -25,12 +25,13 @@
 	slot_flags = SLOT_ID
 	var/signed_by
 
-/obj/item/weapon/card/union/examine(mob/user)
+/obj/item/weapon/card/union/examine(var/mob/user)
 	. = ..()
-	if(signed_by)
-		to_chat(user, "It has been signed by [signed_by].")
-	else
-		to_chat(user, "It has a blank space for a signature.")
+	if(.)
+		if(signed_by)
+			to_chat(user, "It has been signed by [signed_by].")
+		else
+			to_chat(user, "It has a blank space for a signature.")
 
 /obj/item/weapon/card/union/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/weapon/pen))
@@ -153,7 +154,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/emag/examine(mob/user)
 	. = ..()
-	if(user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
+	if(. && user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
 		to_chat(user, SPAN_WARNING("This ID card has some form of non-standard modifications."))
 
 /obj/item/weapon/card/id
@@ -225,10 +226,10 @@ var/const/NO_EMAG_ACT = -50
 			user.examinate(src)
 			return TOPIC_HANDLED
 
-/obj/item/weapon/card/id/examine(mob/user, distance)
+/obj/item/weapon/card/id/examine(mob/user)
 	. = ..()
 	to_chat(user, "It says '[get_display_name()]'.")
-	if(distance <= 1)
+	if(in_range(user, src))
 		show(user)
 
 /obj/item/weapon/card/id/proc/prevent_tracking()
@@ -419,9 +420,9 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Field Agent"
 	icon_state = "warrantcard"
 
-/obj/item/weapon/card/id/foundation/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1 && isliving(user))
+/obj/item/weapon/card/id/foundation/examine(var/mob/user)
+	. = ..(user, 1)
+	if(. && isliving(user))
 		var/mob/living/M = user
 		if(M.psi)
 			to_chat(user, SPAN_WARNING("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'"))

@@ -144,6 +144,6 @@
 	power_rating = max_power_rating * (power_setting/100)
 
 /obj/machinery/atmospherics/unary/heater/examine(mob/user)
-	. = ..()
+	. = ..(user)
 	if(panel_open)
 		to_chat(user, "The maintenance hatch is open.")

@@ -229,7 +229,7 @@
 		. = ..()
 
 /obj/item/weapon/hand/examine(mob/user)
-	. = ..()
+	. = ..(user)
 	if((!concealed || src.loc == user) && cards.len)
 		to_chat(user, "It contains: ")
 		for(var/datum/playingcard/P in cards)

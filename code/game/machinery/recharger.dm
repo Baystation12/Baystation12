@@ -98,12 +98,13 @@
 
 /obj/machinery/recharger/examine(mob/user)
 	. = ..()
-	if(isnull(charging))
+	if(!. || isnull(charging))
 		return
 
-	var/obj/item/weapon/cell/C = charging.get_cell()
-	if(!isnull(C))
-		to_chat(user, "Item's charge at [round(C.percent())]%.")
+	else
+		var/obj/item/weapon/cell/C = charging.get_cell()
+		if(!isnull(C))
+			to_chat(user, "Item's charge at [round(C.percent())]%.")
 
 /obj/machinery/recharger/wallcharger
 	name = "wall recharger"

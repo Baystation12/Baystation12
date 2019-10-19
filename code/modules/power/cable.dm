@@ -568,9 +568,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/stack/cable_coil/examine(mob/user, distance)
+/obj/item/stack/cable_coil/examine(mob/user)
 	. = ..()
-	if(distance > 1)
+	if(get_dist(src, user) > 1)
 		return
 
 	if(get_amount() == 1)

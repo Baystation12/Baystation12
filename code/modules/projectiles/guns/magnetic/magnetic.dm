@@ -78,8 +78,8 @@
 	if(loaded)
 		to_chat(user, "<span class='notice'>It has \a [loaded] loaded.</span>")
 
-/obj/item/weapon/gun/magnetic/examine(mob/user)
-	. = ..()
+/obj/item/weapon/gun/magnetic/examine(var/mob/user)
+	. = ..(user)
 	if(cell)
 		to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
 	if(capacitor)

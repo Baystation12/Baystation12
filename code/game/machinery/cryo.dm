@@ -50,11 +50,11 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell/examine(mob/user)
 	. = ..()
-	if (user.Adjacent(src))
+	if (. && user.Adjacent(src))
 		if (beaker)
 			to_chat(user, "It is loaded with a beaker.")
 		if (occupant)
-			occupant.examine(arglist(args))
+			occupant.examine(user)
 
 /obj/machinery/atmospherics/unary/cryo_cell/Process()
 	..()

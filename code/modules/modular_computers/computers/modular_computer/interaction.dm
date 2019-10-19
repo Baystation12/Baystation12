@@ -197,10 +197,10 @@
 
 	..()
 
-/obj/item/modular_computer/examine(mob/user)
+/obj/item/modular_computer/examine(var/mob/user)
 	. = ..()
 
-	if(enabled)
+	if(enabled && .)
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
 
 	if(card_slot && card_slot.stored_card)

@@ -60,10 +60,11 @@
 	else
 		set_light(0)
 
-/obj/item/weapon/melee/baton/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		examine_cell(user)
+/obj/item/weapon/melee/baton/examine(mob/user)
+	if(!..(user, 1))
+		return 0
+	examine_cell(user)
+	return 1
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/weapon/melee/baton/proc/examine_cell(mob/user)

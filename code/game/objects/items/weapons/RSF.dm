@@ -16,9 +16,8 @@ RSF
 	var/mode = 1
 	w_class = ITEM_SIZE_NORMAL
 
-/obj/item/weapon/rsf/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 0)
+/obj/item/weapon/rsf/examine(mob/user)
+	if(..(user, 0))
 		to_chat(user, "It currently holds [stored_matter]/30 fabrication-units.")
 
 /obj/item/weapon/rsf/attackby(obj/item/weapon/W as obj, mob/user as mob)
