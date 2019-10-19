@@ -3749,8 +3749,10 @@
 /area/command/pilot)
 "iL" = (
 /obj/machinery/door/airlock/mining{
+	autoset_access = 0;
 	id_tag = null;
-	name = "Warehouse"
+	name = "Warehouse";
+	req_access = list(list("ACCESS_CARGO","ACCESS_MINING"))
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -6684,7 +6686,7 @@
 	name = "Warehouse Door Control";
 	pixel_x = 24;
 	pixel_y = 6;
-	req_access = list("ACCESS_CARGO")
+	req_access = list(list("ACCESS_CARGO","ACCESS_MINING"))
 	},
 /obj/structure/closet/crate/radiation,
 /turf/simulated/floor/plating,

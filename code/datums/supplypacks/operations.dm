@@ -35,7 +35,7 @@
 	cost = 120
 	containertype = /obj/structure/closet/crate/secure
 	containername = "plasma cutter crate"
-	access = list(access_mining,access_engine)
+	access = list(list(access_mining,access_engine))
 
 /decl/hierarchy/supply_pack/operations/orebox
 	name = "Equipment - Ore box"
