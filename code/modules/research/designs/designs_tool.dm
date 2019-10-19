@@ -73,6 +73,15 @@
 	build_path = /obj/item/weapon/shield_diffuser
 	sort_string = "VAGAH"
 
+/datum/design/item/tool/rpd
+	name = "rapid piping device"
+	desc = "A compacted and complicated device, that relies on compressed matter to dispense piping on the move."
+	id = "rpd"
+	req_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 6)
+	materials = list(MATERIAL_STEEL = 15000, MATERIAL_GLASS = 10000, MATERIAL_SILVER = 2000)
+	build_path = /obj/item/weapon/rpd
+	sort_string = "VAGAI"
+
 /datum/design/item/tool/oxycandle
 	name = "oxycandle"
 	desc = "a device which, via a chemical reaction, can pressurise small areas."
@@ -81,4 +90,4 @@
 	materials = list(MATERIAL_STEEL = 3000)
 	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
 	build_path = /obj/item/device/oxycandle
-	sort_string = "VAGAI"
+	sort_string = "VAGAJ"
