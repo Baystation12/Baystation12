@@ -27,6 +27,10 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 
+	examine(mob/user)
+		if(..(user, 1))
+			to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
+
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(locked)
 			if (istype(W, /obj/item/weapon/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
@@ -120,12 +124,6 @@
 					src.attack_self(M)
 				return
 		return
-		
-	
-/obj/item/weapon/storage/secure/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
 
 /obj/item/weapon/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	if(!emagged)

@@ -27,7 +27,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	temperature_coefficient = 4
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M)
+/obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
 	. = ..()
 
 	for(var/I in extras)

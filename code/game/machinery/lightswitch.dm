@@ -43,9 +43,8 @@
 		overlays += overlay
 		set_light(0.1, 0.1, 1, 2, on ? "#82ff4c" : "#f86060")
 
-/obj/machinery/light_switch/examine(mob/user, distance)
-	. = ..()
-	if(distance)
+/obj/machinery/light_switch/examine(mob/user)
+	if(..(user, 1))
 		to_chat(user, "A light switch. It is [on? "on" : "off"].")
 
 /obj/machinery/light_switch/proc/set_state(var/newstate)

@@ -19,10 +19,10 @@
 	create_reagents(180)
 
 
-/obj/structure/janitorialcart/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
+/obj/structure/janitorialcart/examine(mob/user)
+	if(..(user, 1))
 		to_chat(user, "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!")
+	//everything else is visible, so doesn't need to be mentioned
 
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
@@ -180,9 +180,8 @@
 	. = ..()
 	create_reagents(100)
 
-/obj/structure/bed/chair/janicart/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
+/obj/structure/bed/chair/janicart/examine(mob/user)
+	if(!..(user, 1))
 		return
 
 	to_chat(user, "\icon[src] This [callme] contains [reagents.total_volume] unit\s of water!")

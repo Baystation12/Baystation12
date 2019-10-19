@@ -11,8 +11,8 @@
 /obj/item/device/gps/attack_self(var/mob/user as mob)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
 
-/obj/item/device/gps/examine(mob/user)
-	. = ..()
+/obj/item/device/gps/examine(var/mob/user)
+	..()
 	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[get_coordinates()]</i>.</span>")
 
 /obj/item/device/gps/proc/get_coordinates()

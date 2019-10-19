@@ -581,7 +581,8 @@ BLIND     // can't see anything
 		QDEL_NULL(attached_cuffs)
 
 /obj/item/clothing/shoes/examine(mob/user)
-	. = ..()
+	if (!(. = ..()))
+		return
 	if (attached_cuffs)
 		to_chat(user, SPAN_WARNING("They are connected by \the [attached_cuffs]."))
 	if (hidden_item)
@@ -905,7 +906,7 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/under/examine(mob/user)
-	. = ..()
+	. = ..(user)
 	switch(src.sensor_mode)
 		if(0)
 			to_chat(user, "Its sensors appear to be disabled.")

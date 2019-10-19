@@ -182,9 +182,8 @@
 	return
 
 
-/obj/item/weapon/wrapping_paper/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
+/obj/item/weapon/wrapping_paper/examine(mob/user)
+	if(..(user, 1))
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)

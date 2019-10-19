@@ -43,7 +43,9 @@
 	add_fingerprint(user)
 
 /obj/item/weapon/material/knife/folding/swiss/examine(mob/user)
-	. = ..()
+	. = ..(user)
+	if(!.)
+		return
 	to_chat(user, active_tool == SWISSKNF_CLOSED ? "It is closed." : "Its [lowertext(active_tool)] is folded out.")
 
 /obj/item/weapon/material/knife/folding/swiss/update_force()

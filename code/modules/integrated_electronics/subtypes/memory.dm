@@ -19,7 +19,8 @@
 	. = ..()
 
 /obj/item/integrated_circuit/memory/examine(mob/user)
-	. = ..()
+	if(!(. = ..()))
+		return
 	var/i
 	for(i = 1, i <= outputs.len, i++)
 		var/datum/integrated_io/O = outputs[i]

@@ -2,7 +2,7 @@
 	category_text = "Input"
 	power_draw_per_use = 5
 
-/obj/item/integrated_circuit/input/external_examine(mob/user)
+/obj/item/integrated_circuit/input/external_examine(var/mob/user)
 	var/initial_name = initial(name)
 	var/message
 	if(initial_name == name)

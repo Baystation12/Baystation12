@@ -59,10 +59,11 @@
 
 /obj/item/weapon/defibrillator/examine(mob/user)
 	. = ..()
-	if(bcell)
-		to_chat(user, "The charge meter is showing [bcell.percent()]% charge left.")
-	else
-		to_chat(user, "There is no cell inside.")
+	if(.)
+		if(bcell)
+			to_chat(user, "The charge meter is showing [bcell.percent()]% charge left.")
+		else
+			to_chat(user, "There is no cell inside.")
 
 /obj/item/weapon/defibrillator/ui_action_click()
 	toggle_paddles()

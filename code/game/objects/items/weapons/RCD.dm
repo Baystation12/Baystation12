@@ -44,7 +44,7 @@
 /obj/item/weapon/rcd/proc/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && user.get_active_hand() == src && !user.incapacitated())
 
-/obj/item/weapon/rcd/examine(mob/user)
+/obj/item/weapon/rcd/examine(var/user)
 	. = ..()
 	if(src.type == /obj/item/weapon/rcd && loc == user)
 		to_chat(user, "The current mode is '[work_mode]'")
@@ -133,9 +133,9 @@
 	matter = list(MATERIAL_STEEL = 15000,MATERIAL_GLASS = 7500)
 	var/remaining = 30
 
-/obj/item/weapon/rcd_ammo/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
+/obj/item/weapon/rcd_ammo/examine(var/mob/user)
+	. = ..(user,1)
+	if(.)
 		to_chat(user, "<span class='notice'>It has [remaining] unit\s of matter left.</span>")
 
 /obj/item/weapon/rcd_ammo/large

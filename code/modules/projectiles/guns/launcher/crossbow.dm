@@ -290,6 +290,7 @@
 	else
 		icon_state = "rxb"
 
-/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/examine(mob/user)
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/examine(var/user)
 	. = ..()
-	to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
+	if(.)
+		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")

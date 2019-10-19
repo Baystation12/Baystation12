@@ -99,7 +99,8 @@
 
 /obj/item/weapon/tank/jetpack/rig/examine()
 	. = ..()
-	CRASH("A [name] was examined")
+	to_chat(usr, "It's a jetpack. If you can see this, report it on the bug tracker.")
+	return 0
 
 /obj/item/weapon/tank/jetpack/rig/allow_thrust(num, mob/living/user as mob)
 

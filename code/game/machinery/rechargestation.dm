@@ -85,12 +85,13 @@
 		target.give(charge_used)
 
 /obj/machinery/recharge_station/examine(mob/user)
-	. = ..()
-	var/obj/item/weapon/cell/cell = get_cell()
-	if(cell)
-		to_chat(user, "The charge meter reads: [cell.percent()]%")
-	else
-		to_chat(user, "The indicator shows that the cell is missing.")
+	. = ..(user)
+	if(.)
+		var/obj/item/weapon/cell/cell = get_cell()
+		if(cell)
+			to_chat(user, "The charge meter reads: [cell.percent()]%")
+		else
+			to_chat(user, "The indicator shows that the cell is missing.")
 
 /obj/machinery/recharge_station/relaymove(mob/user as mob)
 	if(user.stat)

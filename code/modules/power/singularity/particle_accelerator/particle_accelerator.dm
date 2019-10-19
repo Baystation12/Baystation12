@@ -89,21 +89,21 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/structure/particle_accelerator/on_update_icon()
 	..()
 	return
-	
+
 /obj/structure/particle_accelerator/examine(mob/user)
-	. = ..()
-	switch(construction_state)
+	switch(src.construction_state)
 		if(0)
-			to_chat(user, "Looks like it's not attached to the flooring")
+			src.desc = text("A [name], looks like it's not attached to the flooring")
 		if(1)
-			to_chat(user, "It is missing some cables")
+			src.desc = text("A [name], it is missing some cables")
 		if(2)
-			to_chat(user, "The panel is open")
+			src.desc = text("A [name], the panel is open")
 		if(3)
+			src.desc = text("The [name] is assembled")
 			if(powered)
-				to_chat(user, desc_holder)
-			else
-				to_chat(user, "\The [src] is assembled")
+				src.desc = src.desc_holder
+	..()
+	return
 
 
 /obj/structure/particle_accelerator/attackby(obj/item/W, mob/user)
@@ -250,19 +250,19 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	return
 
 /obj/machinery/particle_accelerator/examine(mob/user)
-	. = ..()
-	switch(construction_state)
+	switch(src.construction_state)
 		if(0)
-			to_chat(user, "Looks like it's not attached to the flooring")
+			src.desc = text("A [name], looks like it's not attached to the flooring")
 		if(1)
-			to_chat(user, "It is missing some cables")
+			src.desc = text("A [name], it is missing some cables")
 		if(2)
-			to_chat(user, "The panel is open")
+			src.desc = text("A [name], the panel is open")
 		if(3)
+			src.desc = text("The [name] is assembled")
 			if(powered)
-				to_chat(user, desc_holder)
-			else
-				to_chat(user, "\The [src] is assembled")
+				src.desc = src.desc_holder
+	..()
+	return
 
 
 /obj/machinery/particle_accelerator/attackby(obj/item/W, mob/user)

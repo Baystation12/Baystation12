@@ -107,9 +107,8 @@
 
 	return 0
 
-/obj/item/weapon/reagent_containers/food/snacks/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
+/obj/item/weapon/reagent_containers/food/snacks/examine(mob/user)
+	if(!..(user, 1))
 		return
 	if (bitecount==0)
 		return
@@ -3118,7 +3117,8 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/examine(mob/user)
 	. = ..()
-	to_chat(user, "It is [sealed ? "" : "un"]sealed.")
+	if (.)
+		to_chat(user, "It is [sealed ? "" : "un"]sealed.")
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/proc/unseal()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER

@@ -152,6 +152,10 @@
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
+	examine(mob/user)
+		if(..(user, 2) && bullets)
+			to_chat(user, "<span class='notice'>It is loaded with [bullets] foam darts!</span>")
+
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
 			if(bullets <= 4)
@@ -232,11 +236,6 @@
 				if (O.client)	O.show_message(text("<span class='danger'>\The [] casually lines up a shot with []'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!</span>", user, M), 1, "<span class='warning'>You hear someone fall</span>", 2)
 			user.Weaken(5)
 		return
-		
-/obj/item/toy/crossbow/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 2 && bullets)
-		to_chat(user, "<span class='notice'>It is loaded with [bullets] foam darts!</span>")
 
 /obj/item/toy/ammo/crossbow
 	name = "foam dart"

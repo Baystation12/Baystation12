@@ -34,7 +34,10 @@
 	update_icon()
 
 /obj/structure/wall_frame/examine(mob/user)
-	. = ..()
+	. = ..(user)
+
+	if(!.)
+		return
 
 	if(health == material.integrity)
 		to_chat(user, "<span class='notice'>It seems to be in fine condition.</span>")

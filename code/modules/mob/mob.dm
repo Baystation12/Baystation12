@@ -310,17 +310,7 @@
 						continue
 					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks at \the [A].</span>")
 
-	var/distance = INFINITY
-	if(isghost(src) || stat == DEAD)
-		distance = 0
-	else
-		var/turf/source_turf = get_turf(src)
-		var/turf/target_turf = get_turf(A)
-		if(source_turf && source_turf.z == target_turf?.z)
-			distance = get_dist(source_turf, target_turf)
-
-	if(!A.examine(src, distance))
-		crash_with("Improper /examine() override: [log_info_line(A)]")
+	A.examine(src)
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"

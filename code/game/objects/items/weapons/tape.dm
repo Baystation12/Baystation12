@@ -101,8 +101,8 @@
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
-/obj/item/weapon/ducttape/examine()
-	return stuck ? stuck.examine(arglist(args)) : ..()
+/obj/item/weapon/ducttape/examine(mob/user)
+	return stuck ? stuck.examine(user) : ..()
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
 	stuck = W

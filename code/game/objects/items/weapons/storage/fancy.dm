@@ -21,9 +21,8 @@
 		var/key_count = count_by_type(contents, key_type)
 		src.icon_state = "[initial(icon_state)][key_count]"
 
-/obj/item/weapon/storage/fancy/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
+/obj/item/weapon/storage/fancy/examine(mob/user)
+	if(!..(user, 1))
 		return
 
 	var/key_name = initial(key_type.name)

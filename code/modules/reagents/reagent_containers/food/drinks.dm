@@ -71,9 +71,8 @@
 /obj/item/weapon/reagent_containers/food/drinks/feed_sound(var/mob/user)
 	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
-/obj/item/weapon/reagent_containers/food/drinks/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
+/obj/item/weapon/reagent_containers/food/drinks/examine(mob/user)
+	if(!..(user, 1))
 		return
 	if(!reagents || reagents.total_volume == 0)
 		to_chat(user, "<span class='notice'>\The [src] is empty!</span>")

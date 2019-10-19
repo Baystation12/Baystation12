@@ -166,10 +166,10 @@
 	mode = !mode
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
-/obj/structure/iv_drip/examine(mob/user, distance)
-	. = ..()
+/obj/structure/iv_drip/examine(mob/user)
+	. = ..(user)
 
-	if (distance >= 2) 
+	if (get_dist(src, user) > 2) 
 		return
 
 	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")

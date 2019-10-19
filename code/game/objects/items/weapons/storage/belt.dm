@@ -79,7 +79,7 @@
 		. = ..(user)
 
 /obj/item/weapon/storage/belt/holster/examine(mob/user)
-	. = ..()
+	. = ..(user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	H.examine_holster(user)
 
