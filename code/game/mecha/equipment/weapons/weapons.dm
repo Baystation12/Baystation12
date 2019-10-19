@@ -200,11 +200,11 @@
 	name = "\improper LBX AC 10 \"Scattershot\""
 	icon_state = "mecha_scatter"
 	equip_cooldown = 20
-	projectile = /obj/item/projectile/bullet/pistol/medium
+	projectile = /obj/item/projectile/bullet/pellet/shotgun
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	fire_volume = 80
 	projectiles = 40
-	projectiles_per_shot = 4
+	projectiles_per_shot = 2
 	deviation = 0.7
 	projectile_energy_cost = 50 KILOWATTS
 
@@ -221,7 +221,7 @@
 	fire_cooldown = 2
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack
-	var/missile_speed = 2
+	var/missile_speed = 1
 	var/missile_range = 30
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/Fire(atom/movable/AM, atom/target)
@@ -263,7 +263,7 @@
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "missile"
 	var/primed = null
-	throwforce = 15
+	throwforce = 2
 	var/fire_sound  //The lack of this var causes runtimes with the rocket launcher
 
 /obj/item/missile/throw_impact(atom/hit_atom)

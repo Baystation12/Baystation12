@@ -2,7 +2,7 @@
 #include "../npc_ships/om_ship_areas.dm"
 #include "../area_holders/overmap_ship_area_holder.dmm"
 
-#include "../faction_bases/Cassius_Station/Cassius_Station.dm"
+#include "../faction_bases/ODP_Cassius/ODP_Cassius.dm"
 
 #include "../Exoplanet Research/includes.dm"
 
