@@ -169,13 +169,20 @@
 
 /obj/item/clothing/suit/armor/special/odst/donator/eonoc
 	name = "Barnabus's ODST Armor"
-
 	icon_state = "eonoc-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/eonoc
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Barnabus's ODST Backpack"
+	item_state = "eonoc-backpack_worn"
+	icon_state = "eonoc-backpack_obj"
 
 /decl/hierarchy/outfit/eonoc_odst
 	name = "eonoc - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/eonoc
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/eonoc
+	back = /obj/item/weapon/storage/backpack/odst/eonoc
 
 ////////flaksim\\\\\\\\
 
@@ -1145,6 +1152,43 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	back = /obj/item/weapon/gun/projectile/ma5b_ar
+
+//Sangheili (MAJOR)
+
+/obj/item/clothing/head/helmet/sangheili/socks
+	name = "Sock's Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "socks_helm_obj"
+	item_state = "socks_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/socks
+	name = "Sock's Sangheili Combat Harness"
+	icon_state = "socks_chest_obj"
+	item_state = "socks_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/socks
+	name = "Sock's Sanghelli Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "socks_legs_obj"
+	item_state = "socks_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/socks
+	name = "Sock's Sanghelli Combat Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "socks_gloves_obj"
+	item_state = "socks_gloves"
+
+/decl/hierarchy/outfit/socks_sangheili
+	name = "socks - sangheili"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/socks
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/socks
+	shoes = /obj/item/clothing/shoes/sangheili/socks
+	head = /obj/item/clothing/head/helmet/sangheili/socks
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 ////////Stingray\\\\\\\\
 
