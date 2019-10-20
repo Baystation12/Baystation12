@@ -226,6 +226,7 @@ else if(##equipment_var) {\
 	H.drop_from_inventory(tank, src)
 	H.put_in_hands(tank)
 	src.tank = null
+	playsound(loc, 'sound/effects/spray3.ogg', 50)
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -243,6 +244,7 @@ else if(##equipment_var) {\
 			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
 			if(!choice) return
 
+			playsound(loc, 'sound/items/Screwdriver.ogg', 50)
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
 				user.put_in_hands(tank)
