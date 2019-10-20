@@ -1,7 +1,7 @@
 
 /obj/machinery/microwave
-	name = "Food preparing device"
-	desc = "A futuristic device that takes ingredients and spits out prepared food. It also looks kinda like an oldschool microwave"
+	name = "WaffleCo Kitchen Buddy"
+	desc = "A food preparing device from WaffleCo, it can do everything from grilling meat through baking a pie to making a salad!"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
@@ -37,24 +37,24 @@
 	if(src.broken > 0)
 		if(src.broken == 2 && isScrewdriver(O)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
-				"<span class='notice'>\The [user] starts to fix part of the food preparing device.</span>", \
-				"<span class='notice'>You start to fix part of the food preparing device.</span>" \
+				"<span class='notice'>\The [user] starts to fix part of the WaffleCo Kitchen Buddy.</span>", \
+				"<span class='notice'>You start to fix part of the WaffleCo Kitchen Buddy.</span>" \
 			)
 			if (do_after(user, 20, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] fixes part of the food preparing device.</span>", \
-					"<span class='notice'>You have fixed part of the food preparing device.</span>" \
+					"<span class='notice'>\The [user] fixes part of the WaffleCo Kitchen Buddy.</span>", \
+					"<span class='notice'>You have fixed part of the WaffleCo Kitchen Buddy.</span>" \
 				)
 				src.broken = 1 // Fix it a bit
 		else if(src.broken == 1 && isWrench(O)) // If it's broken and they're doing the wrench
 			user.visible_message( \
-				"<span class='notice'>\The [user] starts to fix part of the food preparing device.</span>", \
-				"<span class='notice'>You start to fix part of the food preparing device.</span>" \
+				"<span class='notice'>\The [user] starts to fix part of the WaffleCo Kitchen Buddy.</span>", \
+				"<span class='notice'>You start to fix part of the WaffleCo Kitchen Buddy.</span>" \
 			)
 			if (do_after(user, 20, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] fixes the food preparing device.</span>", \
-					"<span class='notice'>You have fixed the food preparing device.</span>" \
+					"<span class='notice'>\The [user] fixes the WaffleCo Kitchen Buddy.</span>", \
+					"<span class='notice'>You have fixed the WaffleCo Kitchen Buddy.</span>" \
 				)
 				src.broken = 0 // Fix it!
 				src.dirty = 0 // just to be sure
@@ -69,13 +69,13 @@
 	else if(src.dirty==100) // The food preparing device is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner) || istype(O, /obj/item/weapon/reagent_containers/glass/rag)) // If they're trying to clean it then let them
 			user.visible_message( \
-				"<span class='notice'>\The [user] starts to clean the food preparing device.</span>", \
-				"<span class='notice'>You start to clean the food preparing device.</span>" \
+				"<span class='notice'>\The [user] starts to clean the WaffleCo Kitchen Buddy.</span>", \
+				"<span class='notice'>You start to clean the WaffleCo Kitchen Buddy.</span>" \
 			)
 			if (do_after(user, 20, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] has cleaned the food preparing device.</span>", \
-					"<span class='notice'>You have cleaned the food preparing device.</span>" \
+					"<span class='notice'>\The [user] has cleaned the WaffleCo Kitchen Buddy.</span>", \
+					"<span class='notice'>You have cleaned the WaffleCo Kitchen Buddy.</span>" \
 				)
 				src.dirty = 0 // It's clean!
 				src.broken = 0 // just to be sure
@@ -122,14 +122,14 @@
 		return 1
 	else if(isWrench(O))
 		user.visible_message( \
-			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
-			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
+			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the WaffleCo Kitchen Buddy.</span>", \
+			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the WaffleCo Kitchen Buddy.</span>"
 			)
 		if (do_after(user,20, src))
 			src.anchored = !src.anchored
 			user.visible_message( \
-			"<span class='notice'>\The [user] [src.anchored ? "secures" : "unsecures"] the microwave.</span>", \
-			"<span class='notice'>You [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
+			"<span class='notice'>\The [user] [src.anchored ? "secures" : "unsecures"] the WaffleCo Kitchen Buddy.</span>", \
+			"<span class='notice'>You [src.anchored ? "secure" : "unsecure"] the WaffleCo Kitchen Buddy.</span>"
 			)
 		else
 			to_chat(user, "<span class='notice'>You decide not to do that.</span>")
@@ -170,9 +170,9 @@
 	if(src.broken > 0)
 		dat += "<TT>Bzzzzttttt</TT>"
 	else if(src.operating)
-		dat += "<TT>Microwaving in progress!<BR>Please wait...!</TT>"
+		dat += "<TT>Food preparing in progress!<BR>Please wait...!</TT>"
 	else if(src.dirty==100)
-		dat += "<TT>This microwave is dirty!<BR>Please clean it before use!</TT>"
+		dat += "<TT>This WaffleCo Kitchen Buddy is dirty!<BR>Please clean it before use!</TT>"
 	else
 		var/list/items_counts = new
 		var/list/items_measures = new
@@ -220,7 +220,7 @@
 			dat += "<b>Ingredients:</b><br>[dat]"
 		dat += "<HR><BR><A href='?src=\ref[src];action=cook'>Turn on!<BR><A href='?src=\ref[src];action=dispose'>Eject ingredients!"
 
-	show_browser(user, "<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[jointext(dat,"<br>")]</TT>", "window=microwave")
+	show_browser(user, "<HEAD><TITLE>WaffleCo Kitchen Buddy Controls</TITLE></HEAD><TT>[jointext(dat,"<br>")]</TT>", "window=microwave")
 	onclose(user, "microwave")
 	return
 
