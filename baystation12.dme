@@ -840,6 +840,7 @@
 #include "code\game\objects\effects\razorweb.dm"
 #include "code\game\objects\effects\spiders.dm"
 #include "code\game\objects\effects\step_triggers.dm"
+#include "code\game\objects\effects\temporaray.dm"
 #include "code\game\objects\effects\temporary_effect.dm"
 #include "code\game\objects\effects\chem\chemsmoke.dm"
 #include "code\game\objects\effects\chem\foam.dm"

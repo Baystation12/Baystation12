@@ -244,7 +244,10 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 		decal_type = /obj/effect/decal/cleanable/blood/drip
 
 	// Find a blood decal or create a new one.
-	B = locate(decal_type) in T
+	if(T)
+		var/list/existing = filter_list(T.contents, decal_type)
+		if(length(existing) > 3)
+			B = pick(existing)
 	if(!B)
 		B = new decal_type(T)
 

@@ -304,3 +304,6 @@
 		var/turf/T = locate(new_x, new_y, new_z)
 		if(T)
 			forceMove(T)
+
+/atom/movable/proc/get_bullet_impact_effect_type()
+	return BULLET_IMPACT_NONE

@@ -60,6 +60,7 @@
 	var/fire_sound
 	var/miss_sounds
 	var/ricochet_sounds
+	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
 	var/shrapnel_type = /obj/item/weapon/material/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
