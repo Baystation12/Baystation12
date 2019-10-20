@@ -120,3 +120,13 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
 
 #undef DELTA_CALC
+
+/proc/acquire_days_per_month()
+	. = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+	if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
+		.[2] = 29
+
+/proc/current_month_and_day()
+	var/time_string = time2text(world.realtime, "MM-DD")
+	var/time_list = splittext(time_string, "-")
+	return list(text2num(time_list[1]), text2num(time_list[2]))
