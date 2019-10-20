@@ -59,6 +59,9 @@
 	name = "UNSC Light Brigade Crew Bunks"
 
 
+/area/destroyer/unsclightbrigade/brig
+	name = "UNSC Light Brigade Brig"
+
 /area/destroyer/unsclightbrigade/storage
 	name = "UNSC Light Brigade Storage Room"
 
