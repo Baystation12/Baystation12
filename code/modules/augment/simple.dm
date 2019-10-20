@@ -67,7 +67,7 @@
 /obj/item/organ/internal/augment/active/simple/can_activate()
 	if(..())
 		if(!holding)
-			owner.visible_message(owner, SPAN_WARNING("The device is damaged and fails to deploy"))
+			to_chat(owner, SPAN_WARNING("The device is damaged and fails to deploy"))
 			return FALSE
 		return TRUE
 	return FALSE
