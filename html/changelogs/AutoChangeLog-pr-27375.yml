@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - soundadd: "Voidsuit now has sounds for tank ejection and disassembling."
