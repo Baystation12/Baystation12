@@ -1,4 +1,0 @@
-author: "Higgin"
-delete-after: True
-changes: 
-  - bugfix: "SecHUDs and goggles will now protect against flashes and flashbangs as they used to."
