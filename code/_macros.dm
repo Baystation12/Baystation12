@@ -1,6 +1,20 @@
+#if DM_VERSION < 513
+
+#define any2ref(x) "\ref[x]"
+
+#define islist(A) istype(A, /list)
+
+#define ismovable(A) istype(A, /atom/movable)
+
+#else
+
+#define any2ref(x) ref(x)
+
+#endif
+
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
-#define Clamp(value, low, high) 	(value <= low ? low : (value >= high ? high : value))
+#define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
 #define get_turf(A) get_step(A,0)
@@ -39,13 +53,9 @@
 
 #define isitem(A) istype(A, /obj/item)
 
-#define islist(A) istype(A, /list)
-
 #define isliving(A) istype(A, /mob/living)
 
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
-
-#define ismovable(A) istype(A, /atom/movable)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 
@@ -104,8 +114,6 @@
 #define map_image_file_name(z_level) "[GLOB.using_map.path]-[z_level].png"
 
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
-
-#define any2ref(x) "\ref[x]"
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
 
