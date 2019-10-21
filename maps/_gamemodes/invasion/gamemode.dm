@@ -32,6 +32,13 @@
 	shipmap_handler.spawn_ship("Human Colony", 3)
 	shipmap_handler.spawn_ship("UNSC", 2)
 
+	for(var/faction_type in factions)
+		factions.Remove(faction_type)
+		var/datum/faction/F = GLOB.factions_by_type[faction_type]
+
+		//this is normally bad practice, but it seems to work fine in byond
+		factions.Add(F)
+
 /datum/game_mode/outer_colonies/proc/setup_objectives()
 
 	//setup covenant objectives
