@@ -1,7 +1,7 @@
 
 /obj/machinery/microwave
 	name = "Kitchen Buddy"
-	desc = "A food preparing device from WaffleCo, it can do everything from grilling meat through baking a pie to making a salad! Guaranteed not to nuke your workplace! (Warranty void if nuked)"
+	desc = "A food preparation device from WaffleCo, it can do everything from grilling meat through baking a pie to making a salad, all in a device that looks oddly like a microwave! Guaranteed not to nuke your workplace! (Warranty void if nuked)"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
@@ -170,7 +170,7 @@
 	if(src.broken > 0)
 		dat += "<TT>Bzzzzttttt</TT>"
 	else if(src.operating)
-		dat += "<TT>Food preparing in progress!<BR>Please wait...!</TT>"
+		dat += "<TT>Preparation in progress!<BR>Please wait...!</TT>"
 	else if(src.dirty==100)
 		dat += "<TT>This \the [name] is dirty!<BR>Please clean it before use!</TT>"
 	else
