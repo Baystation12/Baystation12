@@ -16,6 +16,10 @@
 
 	parent_area_type = /area/planets/Geminus
 
+/obj/effect/overmap/sector/geminus_city/LateInitialize()
+	. = ..()
+	new /obj/effect/overmap/ship/npc_ship/shipyard/unsc (loc)
+
 /obj/structure/co_ord_console/vt9_gc
 	icon = 'code/modules/halo/icons/machinery/computer.dmi'
 	icon_state = "comm"
