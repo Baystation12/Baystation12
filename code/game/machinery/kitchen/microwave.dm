@@ -1,7 +1,7 @@
 
 /obj/machinery/microwave
 	name = "Kitchen Buddy"
-	desc = "A food preparation device from WaffleCo, it can do everything from grilling meat through baking a pie to making a salad, all in a device that looks oddly like a microwave! Guaranteed not to nuke your workplace! (Warranty void if nuked)"
+	desc = "A food preparation device from WaffleCo, capable of variety of functions, from grilling meat through baking a pie to making a salad, all in a device that looks oddly like a microwave! Guaranteed not to nuke your workplace! (Warranty void if nuked)"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
