@@ -17,6 +17,8 @@
 
 //Variadic - Additional positional arguments can be given. Named arguments might not work so well
 /proc/set_extension(var/datum/source, var/datum/extension/base_type, var/extension_type)
+	if(!ispath(extension_type, base_type))
+		CRASH("Invalid extension type: Expected [base_type], was [log_info_line(extension_type)]")
 	if(!source.extensions)
 		source.extensions = list()
 	var/datum/extension/existing_extension = source.extensions[base_type]
