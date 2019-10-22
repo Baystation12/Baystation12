@@ -98,13 +98,13 @@ else if(##equipment_var) {\
 	QDEL_NULL(helmet)
 	QDEL_NULL(tank)
 
-/obj/item/clothing/suit/space/void/examine(user)
+/obj/item/clothing/suit/space/void/examine(user,distance)
 	. = ..()
 	var/list/part_list = new
 	for(var/obj/item/I in list(helmet,boots,tank))
 		part_list += "\a [I]"
 	to_chat(user, "\The [src] has [english_list(part_list)] installed.")
-	if(tank && in_range(src,user))
+	if(tank && distance <= 1)
 		to_chat(user, "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>")
 
 /obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
