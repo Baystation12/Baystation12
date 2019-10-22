@@ -1,6 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - tweak: "Senior researcher no longer has access to mining."
-  - bugfix: "Plasma cutter crate access has been fixed to work with both engineering and mining access"
-  - tweak: "Supply's warehouse is now open to mining access."
