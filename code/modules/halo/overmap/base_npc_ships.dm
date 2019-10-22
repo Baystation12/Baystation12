@@ -259,7 +259,7 @@
 				continue
 			var/orig_range = light.light_range
 			light.set_light(LIGHTRANGE_LIKELY_UNUSED)
-			spawn(30) //Wait 3 ticks
+			spawn(50) //Wait 5 ticks
 				light.set_light(orig_range)
 	cargo_init()
 	damage_spawned_ship()

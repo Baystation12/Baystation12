@@ -210,7 +210,7 @@
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi','code/modules/halo/icons/overmap/SDV.dmi')
 	faction = "Covenant"
 	radio_language = "Sangheili"
-	radio_channel = "Battlenet"
+	radio_channel = "BattleNet"
 	ship_datums = list(/datum/npc_ship/cov_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov,/datum/npc_ship_request/control_fleet/cov,/datum/npc_ship_request/add_to_fleet/cov,/datum/npc_ship_request/give_control/cov)
 
