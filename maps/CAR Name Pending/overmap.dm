@@ -3,7 +3,7 @@
 	name = "CAR Name Pending"
 	desc = "The silhouette of this ship matches no known ship signatures"
 
-	icon = 'Corvette2.dmi'
+	icon = 'CRSlightcruiser.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 	vessel_mass = 5
