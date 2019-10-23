@@ -45,3 +45,12 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 		rev_obj.target = player.mind
 		rev_obj.explanation_text = "Assassinate, capture or convert [player.real_name], the [player.mind.assigned_role]."
 		global_objectives += rev_obj
+
+/datum/antagonist/revolutionary/equip(var/mob/living/carbon/human/revolutionary_mob)
+	spawn_uplink(revolutionary_mob)
+	. = ..()
+	if(!.)
+		return
+
+/datum/antagonist/revolutionary/proc/spawn_uplink(var/mob/living/carbon/human/revolutionary_mob)
+	setup_uplink_source(revolutionary_mob, DEFAULT_TELECRYSTAL_AMOUNT)
