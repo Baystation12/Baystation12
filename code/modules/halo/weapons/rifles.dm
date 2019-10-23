@@ -71,13 +71,22 @@
 	attachment_slots = null
 	attachments_on_spawn = null
 
-
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA37"
 	else
 		icon_state = "MA37_unloaded"
+
+/obj/item/weapon/gun/projectile/ma5b_ar/proc/toggle_light()
+	set category = "Weapon"
+	set name = "Toggle Gun Light"
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+		set_light(4)
+	else
+		set_light(0)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA3
 	name = "\improper MA3 Assault Rifle"
@@ -103,7 +112,6 @@
 		icon_state = "MA3"
 	else
 		icon_state = "MA3_unloaded"
-
 
 //BR85 battle
 
