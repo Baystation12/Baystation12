@@ -9,7 +9,7 @@
 	faction = "UNSC"
 	flagship = 1
 
-	map_bounds = list(3,52,148,101)
+	map_bounds = list(3,57,116,101)
 
 	parent_area_type = /area/destroyer/unsclightbrigade
 
