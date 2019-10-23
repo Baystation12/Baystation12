@@ -81,3 +81,7 @@ SUBSYSTEM_DEF(webhooks)
 		log_and_message_admins("has pinged webhook [choice].", usr)
 		to_world_log("[usr.key] has pinged webhook [choice].")
 		webhook.send()
+
+/hook/roundstart/proc/run_webhook()
+	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()))
+	return 1
