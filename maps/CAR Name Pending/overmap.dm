@@ -1,6 +1,6 @@
 
 /obj/effect/overmap/ship/covenant_light_cruiser
-	name = "CAR To Be Named"
+	name = "CAR Name Pending"
 	desc = "The silhouette of this ship matches no known ship signatures"
 
 	icon = 'Corvette2.dmi'
