@@ -118,10 +118,6 @@
 	name = "CAR Name Pending Secondary Starboard Armory"
 	icon_state = "engine_port"
 
-/area/covenant_light_cruiser/foretoolstorage
-	name = "CAR Name Pending Forward Tool Storage"
-	icon_state = "engine_port"
-
 /area/covenant_light_cruiser/starboardengine
 	name = "CAR Name Pending Starboard Engine"
 	icon_state = "engine_starboard"
