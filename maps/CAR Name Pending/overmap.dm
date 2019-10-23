@@ -1,6 +1,6 @@
 
 /obj/effect/overmap/ship/covenant_light_cruiser
-	name = "CAR Name Pending"
+	name = "CRS Unyielding Transgression"
 	desc = "The silhouette of this ship matches no known ship signatures"
 
 	icon = 'CRSlightcruiser.dmi'
