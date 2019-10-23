@@ -1,0 +1,4 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Maps Vox rigs, soundcannon, and flux cannon to Vox base"
