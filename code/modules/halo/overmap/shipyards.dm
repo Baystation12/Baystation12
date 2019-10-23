@@ -23,7 +23,7 @@
 
 /obj/effect/overmap/ship/npc_ship/shipyard/unsc
 	icons_pickfrom_list = list()
-	templates_available = list("/obj/effect/overmap/ship/unscironwill" = "maps/UNSC_Iron_Will/UNSC_Iron_Will")
+	templates_available = list(/obj/effect/overmap/ship/unscironwill = "maps/UNSC_Iron_Will/UNSC_Iron_Will")
 
 	faction = "UNSC"
 	radio_channel = "FLEETCOM"
@@ -39,7 +39,7 @@
 	radio_language = "Sangheili"
 	radio_channel = "BattleNet"
 
-	templates_available = list("/obj/effect/overmap/ship/covenant_corvette" = "maps/Covenant Corvette/DAV_Vindicative_Infraction")
+	templates_available = list(/obj/effect/overmap/ship/covenant_corvette = "maps/Covenant Corvette/DAV_Vindicative_Infraction")
 
 	available_ship_requests = newlist(/datum/npc_ship_request/shipyard_repair/cov)
 

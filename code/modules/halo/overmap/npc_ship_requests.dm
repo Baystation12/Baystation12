@@ -238,7 +238,7 @@
 	//Get all the typepaths
 	var/list/template_paths = list()
 	for(var/entry in ship_source.templates_available)
-		if(entry == "[origin_ship.type]")
+		if("[entry]" == "[origin_ship.type]")
 			template_paths += ship_source.templates_available[entry]
 
 	if(template_paths.len == 0)
