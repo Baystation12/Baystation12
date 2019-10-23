@@ -37,7 +37,7 @@
 
 /obj/effect/overmap/ship/npc_ship/shipyard/cov
 	icons_pickfrom_list = list()
-	icon = 'code/modules/halo/icons/faction_misc.dmi'
+	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
 	icon_state = "cov_defenseplatform"
 
 	faction = "Covenant"
