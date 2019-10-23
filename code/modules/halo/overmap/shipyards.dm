@@ -3,8 +3,8 @@
 	name = "Shipyard"
 	desc = "A shipyard equpped with a variety of repair equipment. Repairs ships."
 
-	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
-	icon_state = "SMAC"
+	icon = 'code/modules/halo/icons/overmap/32x32 Overmap Space Station.dmi'
+	icon_state = "Static Station"
 
 	ship_name_list = list()
 
@@ -37,6 +37,7 @@
 
 /obj/effect/overmap/ship/npc_ship/shipyard/cov
 	icons_pickfrom_list = list()
+	icon = 'code/modules/halo/icons/faction_misc.dmi'
 	icon_state = "cov_defenseplatform"
 
 	faction = "Covenant"
