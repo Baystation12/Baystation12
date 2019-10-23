@@ -51,15 +51,11 @@
 	else
 		icon_state = "MA5-Base-Empty"
 
-/obj/item/weapon/gun/projectile/ma5b_ar/verb/toggle_light()
-	set category = "Object"
-	set name = "Toggle Gun Light"
-	on = !on
-	if(on && activation_sound)
-		playsound(src.loc, activation_sound, 75, 1)
-		set_light(4)
-	else
-		set_light(0)
+/obj/item/weapon/gun/projectile/ma5b_ar/proc/add_flashlight()
+	verbs += /obj/item/weapon/gun/projectile/ma5b_ar/proc/toggle_light
+
+/obj/item/weapon/gun/projectile/ma5b_ar/MA37/add_flashlight()
+	return
 
 /obj/item/weapon/gun/projectile/ma5b_ar/training
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B/TTR
@@ -73,7 +69,8 @@
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
 	attachment_slots = null
-	attachments_on_spawn = null
+	attachments_on_spawn = list(/obj/item/weapon_attachment/light)
+
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
 	. = ..()
