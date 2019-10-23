@@ -21,6 +21,10 @@
 /obj/effect/overmap/ship/npc_ship/shipyard/pick_target_loc()
 	target_loc = loc
 
+//PLACEHOLDER TYPEPATHS//
+/obj/effect/overmap/ship/unscironwill
+/obj/effect/overmap/ship/covenant_corvette
+
 /obj/effect/overmap/ship/npc_ship/shipyard/unsc
 	icons_pickfrom_list = list()
 	templates_available = list(/obj/effect/overmap/ship/unscironwill = "maps/UNSC_Iron_Will/UNSC_Iron_Will")
