@@ -6,7 +6,7 @@
 SUBSYSTEM_DEF(atoms)
 	name = "Atoms"
 	init_order = SS_INIT_ATOMS
-	flags = SS_NO_FIRE
+	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 
 	var/atom_init_stage = INITIALIZATION_INSSATOMS
 	var/old_init_stage

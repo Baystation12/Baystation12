@@ -90,9 +90,12 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	sortTim(subsystems, /proc/cmp_subsystem_init)
 	reverseRange(subsystems)
 	for(var/datum/controller/subsystem/ss in subsystems)
-		report_progress("Shutting down [ss.name] subsystem...")
-		ss.Shutdown()
-	report_progress("Shutdown complete")
+		if (ss.flags & SS_NEEDS_SHUTDOWN)
+			var/time = REALTIMEOFDAY
+			report_progress("Shutting down [ss] subsystem...")
+			ss.Shutdown()
+			report_progress("[ss] shutdown in [(REALTIMEOFDAY - time)/10]s.")
+	report_progress("Shutdown complete.")
 
 // Returns 1 if we created a new mc, 0 if we couldn't due to a recent restart,
 //	-1 if we encountered a runtime trying to recreate it
