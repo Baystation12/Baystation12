@@ -11,7 +11,8 @@
 		for(var/obj/I in S.contents)
 			if(!check_tradeable(I))
 				return 0
-		return 1
+			. = 1
+		return .
 
 	if(O.trader_category && O.trader_category in trade_categories_by_name)
 		return 1

@@ -177,32 +177,33 @@
 
 	//work out survivors
 	var/clients = 0
-	var/surviving_humans = 0
 	var/surviving_total = 0
 	var/ghosts = 0
-	//var/escaped_humans = 0
-	//var/escaped_total = 0
+	var/list/survivor_factions = list()
 
 	for(var/mob/M in GLOB.player_list)
 		if(M.client)
 			clients++
 			if(M.stat != DEAD)
 				surviving_total++
-				if(ishuman(M))
-					surviving_humans++
-				/*var/area/A = get_area(M)
-				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
-					escaped_total++
-					if(ishuman(M))
-						escaped_humans++*/
+				if(!M.faction)
+					M.faction = "unaligned"
+				if(survivor_factions[M.faction])
+					survivor_factions[M.faction] += 1
+				else
+					survivor_factions[M.faction] = 1
+
 			else if(isghost(M))
 				ghosts++
 
 	var/text = ""
 	if(surviving_total > 0)
-		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
+		var/list/formatted_survivors = list()
+		for(var/faction_name in survivor_factions)
+			formatted_survivors.Add("[survivor_factions[faction_name]] [faction_name]")
+		text += "<br>There was [english_list(formatted_survivors)] survivor[surviving_total != 1 ? "s" : ""] (<b>[ghosts] ghost[ghosts != 1 ? "s" : ""]</b>)."
 	else
-		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
+		text += "There were <b>no survivors</b> (<b>[ghosts] ghost[ghosts > 1 ? "s" : ""]</b>)."
 
 	text += "<br><br>"
 
@@ -258,13 +259,10 @@
 	else if(all_points <= 0)
 		text += "<h2>Stalemate! All factions failed in their objectives.</h2>"
 	else
-		//check if only the winning faction scored, then treat them slightly differently
-		//this rates the victory based on how many objectives are completed... disabling it means victories are only rated compared to other factions
-		if(all_points == winning_faction.points)
-			all_points = winning_faction.max_points
+		//calculate the win type based on whether other faction scored points and how many of the winning faction objectives are completed
+		win_ratio = (winning_faction.points) / (all_points + winning_faction.max_points - winning_faction.points)
 
 		var/win_type = "Pyrrhic"
-		win_ratio = winning_faction.points/all_points
 		if(win_ratio <= 0.34)
 			//this should never or rarely happen
 			win_type = "Pyrrhic"
@@ -277,21 +275,15 @@
 		else
 			win_type = "Supreme"
 
-		text += "<h2>[win_type] [winning_faction.name] Victory! ([round(100*win_ratio)]% of possible score)</h2>"
+		text += "<h2>[win_type] [winning_faction.name] Victory! ([round(100*win_ratio)]% of objectives)</h2>"
 	to_world(text)
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
 	if(ghosts > 0)
 		feedback_set("round_end_ghosts",ghosts)
-	if(surviving_humans > 0)
-		feedback_set("survived_human",surviving_humans)
 	if(surviving_total > 0)
 		feedback_set("survived_total",surviving_total)
-	/*if(escaped_humans > 0)
-		feedback_set("escaped_human",escaped_humans)
-	if(escaped_total > 0)
-		feedback_set("escaped_total",escaped_total)*/
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 

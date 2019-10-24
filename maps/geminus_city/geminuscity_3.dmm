@@ -210,7 +210,7 @@
 "eb" = (/obj/machinery/door/airlock/research{name = "Miscellaneous Reseach Room"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "ec" = (/turf/simulated/open,/area/planets/Geminus/indoor/living1sw)
 "ed" = (/obj/structure/table/steel,/obj/item/weapon/crossbowframe,/obj/item/weapon/arrow,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
-"ee" = (/obj/effect/landmark/map_data{name = "Geminus City Colony"},/turf/unsimulated/wall,/area/planets/Geminus/outdoor/level1)
+"ee" = (/obj/effect/landmark/map_data{name = "Geminus Colony"},/turf/unsimulated/wall,/area/planets/Geminus/outdoor/level1)
 "ef" = (/obj/structure/table/steel,/obj/machinery/recharger,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "eg" = (/obj/machinery/vending/coffee,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "eh" = (/obj/machinery/door/airlock/glass_research{name = "Research and Development"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)

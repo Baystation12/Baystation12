@@ -1,6 +1,6 @@
 
 /obj/effect/overmap/sector/geminus_city
-	name = "Geminus City Colony"
+	name = "Geminus Colony"
 	icon = 'maps/geminus_city/sector_icon.dmi'
 	desc = "A temperate, lightly forested world with deposits of valuable ore and a large human colony."
 	icon_state = "geminus"
@@ -15,6 +15,7 @@
 	block_slipspace = 1
 
 	parent_area_type = /area/planets/Geminus
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius)
 
 /obj/structure/co_ord_console/vt9_gc
 	icon = 'code/modules/halo/icons/machinery/computer.dmi'
