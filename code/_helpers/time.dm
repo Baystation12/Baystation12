@@ -12,6 +12,12 @@
 
 #define TimeOfGame (get_game_time())
 #define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
+
+#define TICKS *world.tick_lag
+
+#define DS2TICKS(DS) ((DS)/world.tick_lag)
+#define TICKS2DS(T) ((T) TICKS)
+
 /proc/get_game_time()
 	var/global/time_offset = 0
 	var/global/last_time = 0
