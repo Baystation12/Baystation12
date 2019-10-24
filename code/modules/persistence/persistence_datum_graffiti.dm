@@ -1,15 +1,7 @@
 /datum/persistent/graffiti
 	name = "graffiti"
-	tokens_per_line = 6
 	entries_expire_at = 50
 	has_admin_data = TRUE
-
-/datum/persistent/graffiti/LabelTokens(var/list/tokens)
-	var/list/labelled_tokens = ..()
-	var/entries = LAZYLEN(labelled_tokens)
-	labelled_tokens["author"] =  tokens[entries+1]
-	labelled_tokens["message"] = tokens[entries+2]
-	return labelled_tokens
 
 /datum/persistent/graffiti/GetValidTurf(var/turf/T, var/list/tokens)
 	var/turf/checking_turf = ..()
@@ -40,8 +32,8 @@
 /datum/persistent/graffiti/CompileEntry(var/atom/entry, var/write_file)
 	. = ..()
 	var/obj/effect/decal/writing/save_graffiti = entry
-	LAZYADD(., "[save_graffiti.author ? save_graffiti.author : "unknown"]")
-	LAZYADD(., "[save_graffiti.message]")
+	.["author"] =  save_graffiti.author || "unknown"
+	.["message"] = save_graffiti.message
 
 /datum/persistent/graffiti/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
 	var/obj/effect/decal/writing/save_graffiti = thing
