@@ -272,5 +272,6 @@
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		log_admin("Repair Underway. This may lag.")
 		maploader.load_map(path,origin_ship.map_z[ctr],0,0,1)
+		create_lighting_overlays_zlevel(origin_ship.map_z[ctr])
 
 	ship_source.mapload_reset_lights(origin_ship.map_z)
