@@ -14,7 +14,7 @@
 
 #include "../Asteroid Listening Post/includes.dm"
 
-#include "../Covenant Corvette/includes.dm"
+#include "../CRS_Unyielding_Transgression/includes.dm"
 
 #include "innie_overmap.dm"
 

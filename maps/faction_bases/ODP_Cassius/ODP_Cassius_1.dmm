@@ -135,7 +135,7 @@
 "cE" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck2/smac)
 "cF" = (/obj/machinery/autosurgeon,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/unsc/odp/interior/deck2/medbay)
 "cG" = (/obj/structure/curtain/medical,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/odp/interior/deck2/medbay)
-"cH" = (/obj/structure/table/glass,/obj/structure/window/reinforced{dir = 8},/obj/machinery/reagentgrinder,/obj/item/stack/material/phoron/ten,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/odp/interior/deck2/medbay)
+"cH" = (/obj/structure/table/glass,/obj/structure/window/reinforced{dir = 8},/obj/machinery/reagentgrinder,/obj/item/stack/material/phoron{amount = 10000},/obj/item/stack/material/phoron{amount = 10000},/turf/simulated/floor/tiled/white,/area/faction_base/unsc/odp/interior/deck2/medbay)
 "cI" = (/obj/structure/table/glass,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/odp/interior/deck2/medbay)
 "cJ" = (/obj/structure/table/glass,/obj/item/weapon/reagent_containers/dropper,/obj/item/device/reagent_scanner/adv,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/odp/interior/deck2/medbay)
 "cK" = (/obj/structure/morgue,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/morgue)
