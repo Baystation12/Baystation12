@@ -271,17 +271,15 @@
 //MAC SHIPHIT PROJECTILE//
 /obj/item/projectile/mac_round
 	name = "MAC Slug"
-	penetrating = 2
+	penetrating = 1
 	var/warned = 0
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
 	var/increase_from_damage = (damage/250)
 	if(increase_from_damage > 2)
-		increase_from_damage = (increase_from_damage-2)/4
-	else
-		increase_from_damage = 0
-	explosion(impacted,3 + increase_from_damage,5 + increase_from_damage,7 + increase_from_damage,10 + increase_from_damage, adminlog = 0)
+		increase_from_damage *= 0.25
+	explosion(impacted,2 + increase_from_damage,4 + increase_from_damage,5 + increase_from_damage,6 + increase_from_damage, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

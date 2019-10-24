@@ -1,6 +1,6 @@
 /datum/job/geminus_x52/researcher
 	title = "X52 Researcher"
-	spawn_faction = "X52"
+	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	total_positions = 4
 	spawn_positions = 4
@@ -15,7 +15,7 @@
 
 /datum/job/geminus_x52/research_director
 	title = "X52 Research Director"
-	spawn_faction = "X52"
+	spawn_faction = "Insurrection"
 	department_flag = COM
 	latejoin_at_spawnpoints = 1
 	total_positions = 1

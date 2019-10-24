@@ -53,6 +53,11 @@
 	silenced = 1
 	screen_shake = 0
 
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+
 /obj/item/weapon/gun/projectile/m6c_magnum_s/verb/scope()
 	set category = "Weapon"
 	set name = "Use Scope (Sidearm)"

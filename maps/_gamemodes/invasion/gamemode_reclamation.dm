@@ -28,3 +28,6 @@
 
 	var/datum/objective/colony_capture/unsc/obj2 = locate() in GLOB.UNSC.all_objectives
 	obj2.fake = 1
+
+	var/datum/objective/overmap/unsc_innie_base/obj3 = locate() in GLOB.UNSC.all_objectives
+	obj3.fake = 1

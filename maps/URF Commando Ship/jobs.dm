@@ -1,7 +1,7 @@
 
 /datum/job/soe_commando
 	title = "SOE Commando"
-	spawn_faction = "SOE"
+	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando
 	alt_titles = list("Initiate",\
@@ -18,7 +18,7 @@
 
 /datum/job/soe_commando_officer
 	title = "SOE Commando Officer"
-	spawn_faction = "SOE"
+	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando_officer
 	alt_titles = list("Sergeant",\
@@ -34,7 +34,7 @@
 
 /datum/job/soe_commando_captain
 	title = "SOE Commando Captain"
-	spawn_faction = "SOE"
+	spawn_faction = "Insurrection"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando_captain
 	alt_titles = list("Commander")
