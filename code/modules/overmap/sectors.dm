@@ -12,6 +12,7 @@ var/list/points_of_interest = list()
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
+	dir = 1
 	var/list/map_z = list()
 	var/list/map_z_data = list()
 	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
@@ -54,6 +55,9 @@ var/list/points_of_interest = list()
 
 	var/list/overmap_spawn_near_me = list()	//type path of other overmap objects to spawn near this object
 	var/list/overmap_spawn_in_me = list()	//type path of other overmap objects to spawn inside this object
+
+	var/datum/pixel_transform/my_pixel_transform
+	var/list/my_observers = list()
 
 /obj/effect/overmap/New()
 	//this should already be named with a custom name by this point
