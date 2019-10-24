@@ -113,7 +113,6 @@
 	else
 		icon_state = "MA3_unloaded"
 
-
 //BR85 battle
 
 /obj/item/weapon/gun/projectile/br85
