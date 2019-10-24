@@ -229,6 +229,21 @@
 	chosen_ship_datum = pick(ship_datums)
 	chosen_ship_datum = new chosen_ship_datum
 
+/obj/effect/overmap/ship/npc_ship/proc/mapload_reset_lights(var/list/light_list)
+	if(isnull(light_list))
+		light_list = map_z
+	var/list/lights_reset = list() //FORMAT light ref, original light val
+	for(var/obj/machinery/light/light in GLOB.machines)
+		if(!(text2num("[light.z]") in light_list))
+			continue
+		var/orig_range = light.light_range
+		light.set_light(LIGHTRANGE_LIKELY_UNUSED)
+		lights_reset[light] = "[orig_range]"
+	var/datum/controller/process/lighting_controller = processScheduler.nameToProcessMap["lighting"]
+	lighting_controller.doWork(0)
+	for(var/obj/machinery/light/l in lights_reset)
+		l.set_light(text2num(lights_reset[l]))
+
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
 	set background = 1
 	if(unload_at)
@@ -239,6 +254,7 @@
 	map_bounds = chosen_ship_datum.map_bounds
 	fore_dir = chosen_ship_datum.fore_dir
 	map_z = list()
+	lighting_overlays_initialised = FALSE
 	for(var/link in chosen_ship_datum.mapfile_links)
 		to_world("Loading Ship-Map: [link]... This may cause lag.")
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
@@ -250,17 +266,12 @@
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
+		create_lighting_overlays_zlevel(z_to_load_at)
 
-	for(var/z_level in map_z)
-		create_lighting_overlays_zlevel(z_level)
-		sleep(10) //Wait a tick or so.
-		for(var/obj/machinery/light/light in GLOB.machines)
-			if(!(text2num("[light.z]") in map_z))
-				continue
-			var/orig_range = light.light_range
-			light.set_light(LIGHTRANGE_LIKELY_UNUSED)
-			spawn(50) //Wait 5 ticks
-				light.set_light(orig_range)
+	mapload_reset_lights()
+
+	lighting_overlays_initialised = TRUE
+
 	cargo_init()
 	damage_spawned_ship()
 	GLOB.processing_objects += src

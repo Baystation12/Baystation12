@@ -273,14 +273,4 @@
 		log_admin("Repair Underway. This may lag.")
 		maploader.load_map(path,origin_ship.map_z[ctr],0,0,1)
 
-	//STOLEN FROM NPC SHIPMAP LOADING CODE//
-	for(var/z_level in origin_ship.map_z)
-		create_lighting_overlays_zlevel(z_level)
-		sleep(10) //Wait a tick or so.
-		for(var/obj/machinery/light/light in GLOB.machines)
-			if(!(text2num("[light.z]") in origin_ship.map_z))
-				continue
-			var/orig_range = light.light_range
-			light.set_light(99999999)
-			spawn(50) //Wait 5 ticks
-				light.set_light(orig_range)
+	ship_source.mapload_reset_lights(origin_ship.map_z)
