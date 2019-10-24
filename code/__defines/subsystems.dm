@@ -1,7 +1,3 @@
-//For servers that can't do with any additional lag, set this to none in flightpacks.dm in subsystem/processing.
-#define FLIGHTSUIT_PROCESSING_NONE 0
-#define FLIGHTSUIT_PROCESSING_FULL 1
-
 #define INITIALIZATION_INSSATOMS      0	//New should not call Initialize
 #define INITIALIZATION_INSSATOMS_LATE 1	//New should not call Initialize; after the first pass is complete (handled differently)
 #define INITIALIZATION_INNEW_MAPLOAD  2	//New should call Initialize(TRUE)
