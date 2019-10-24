@@ -608,6 +608,8 @@
 				stat("Master Controller:", "ERROR")
 			if(Failsafe)
 				Failsafe.stat_entry()
+			else if (Master.initializing)
+				stat("Failsafe Controller:", "Waiting for MC")
 			else
 				stat("Failsafe Controller:", "ERROR")
 			if(Master)
