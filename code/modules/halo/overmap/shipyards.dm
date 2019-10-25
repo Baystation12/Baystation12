@@ -23,7 +23,7 @@
 
 //PLACEHOLDER TYPEPATHS//
 /obj/effect/overmap/ship/unscironwill
-/obj/effect/overmap/ship/covenant_corvette
+/obj/effect/overmap/ship/covenant_light_cruiser
 
 /obj/effect/overmap/ship/npc_ship/shipyard/unsc
 	icons_pickfrom_list = list()
@@ -44,7 +44,7 @@
 	radio_language = "Sangheili"
 	radio_channel = "BattleNet"
 
-	templates_available = list(/obj/effect/overmap/ship/covenant_corvette = "maps/Covenant Corvette/DAV_Vindicative_Infraction")
+	templates_available = list(/obj/effect/overmap/ship/covenant_light_cruiser = "maps/CRS_Unyielding_Transgression/CRS_Unyielding_Transgression")
 
 	available_ship_requests = newlist(/datum/npc_ship_request/shipyard_repair/cov)
 
