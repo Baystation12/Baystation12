@@ -17,7 +17,7 @@
 
 	occupants = list(0,1)
 
-	vehicle_size = 64
+	vehicle_size = ITEM_SIZE_VEHICLE
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 

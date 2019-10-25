@@ -19,7 +19,7 @@
 
 	sprite_offsets = list("1" = list(0,3),"2" = list(0,3),"4" = list(0,3),"8" = list(0,3))
 
-	vehicle_size = 16
+	vehicle_size = ITEM_SIZE_VEHICLE_SMALL
 
 	light_color = "#E1FDFF"
 

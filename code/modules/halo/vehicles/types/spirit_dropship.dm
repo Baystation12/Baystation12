@@ -23,7 +23,9 @@
 
 	exposed_positions = list()//No-one can get hit when inside this.
 
-	vehicle_size = 128
+	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
+	vehicle_carry_size = ITEM_SIZE_VEHICLE
+	capacity_flag = ITEM_SIZE_VEHICLE_LARGE
 
 	light_color = "#C1CEFF"
 

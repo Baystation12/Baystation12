@@ -13,7 +13,8 @@
 
 	occupants = list(0,0)
 
-	vehicle_size = 32
+	vehicle_size = ITEM_SIZE_VEHICLE_SMALL
+	capacity_flag = ITEM_SIZE_VEHICLE_SMALL
 
 	comp_prof =/datum/component_profile/drop_pod
 

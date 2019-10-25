@@ -23,7 +23,9 @@
 
 	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
 
-	vehicle_size = 128
+	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
+	vehicle_carry_size = ITEM_SIZE_VEHICLE
+	capacity_flag = ITEM_SIZE_VEHICLE_LARGE
 
 	light_color = "#E1FDFF"
 

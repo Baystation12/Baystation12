@@ -18,7 +18,7 @@
 	icon = 'code/modules/halo/vehicles/types/ghost.dmi'
 	icon_state = "base"
 
-	vehicle_size = 16
+	vehicle_size = ITEM_SIZE_VEHICLE_SMALL
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 

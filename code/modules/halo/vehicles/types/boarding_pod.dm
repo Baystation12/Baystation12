@@ -9,8 +9,6 @@
 	occupants = list(8,0)
 	pod_range = 8
 
-	vehicle_size = 128
-
 	light_color = "#E1FDFF"
 
 /obj/vehicles/drop_pod/overmap/boarding_pod/update_object_sprites()
