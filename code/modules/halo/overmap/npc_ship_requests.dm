@@ -1,6 +1,7 @@
 
 #define BASE_CARGO_STAY_TIME 10 MINUTES
 #define BASE_CARGO_DEPART_TIME 2 MINUTES
+#define SHIPYARD_REPAIR_COOLDOWN 10 MINUTES
 
 /datum/npc_ship_request/cargo_call
 	request_name = "Trade With"
@@ -215,3 +216,62 @@
 
 /datum/npc_ship_request/give_control/cov
 	request_auth_levels = list(AUTHORITY_LEVEL_COV)
+
+/datum/npc_ship_request/shipyard_repair
+	request_name = "Rapair/Refit Ship"
+	request_auth_levels = list(AUTHORITY_LEVEL_UNSC)
+
+/datum/npc_ship_request/shipyard_repair/cov
+	request_auth_levels = list(AUTHORITY_LEVEL_COV)
+
+/datum/npc_ship_request/shipyard_repair/do_request(var/obj/effect/overmap/ship/npc_ship/shipyard/ship_source,var/mob/requester)
+	if(!istype(ship_source))
+		return
+	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
+	if(world.time < ship_source.next_repair_at)
+		ship_source.radio_message("ERROR: Recovering resources from previous repair. Please wait.")
+		return
+	if(get_dist(origin_ship,ship_source) > 1)
+		ship_source.radio_message("ERROR: Vessel out of repair range.")
+		return
+
+	//Get all the typepaths
+	var/list/template_paths = list()
+	for(var/entry in ship_source.templates_available)
+		if("[entry]" == "[origin_ship.type]")
+			template_paths += ship_source.templates_available[entry]
+
+	if(template_paths.len == 0)
+		ship_source.radio_message("ERROR: No compatible schematic on file.")
+		return
+
+	var/user_input = input("Select Repair Type","Repair Type","Cancel") in list("Walls","Floors")
+	if(user_input == "Cancel")
+		return
+
+	for(var/path in template_paths)
+		template_paths -= path
+		path = "[path]_[user_input].dmm"
+		template_paths += path
+
+	//Modify the typepaths according to previous wall/floor selection.
+
+	ship_source.radio_message("Repair teams prepping and dispatching.")
+
+	if(get_dist(origin_ship,ship_source) > 1)
+		ship_source.radio_message("ERROR: Vessel has left repair range.")
+		return
+	if(world.time < ship_source.next_repair_at)
+		ship_source.radio_message("ERROR: Recovering resources from previous repair. Please wait.")
+		return
+
+	ship_source.next_repair_at = world.time + SHIPYARD_REPAIR_COOLDOWN
+	var/ctr = 0
+	for(var/path in template_paths)
+		ctr += 1
+		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
+		log_admin("Repair Underway. This may lag.")
+		maploader.load_map(path,origin_ship.map_z[ctr],0,0,1)
+		create_lighting_overlays_zlevel(origin_ship.map_z[ctr])
+
+	ship_source.mapload_reset_lights(origin_ship.map_z)

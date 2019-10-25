@@ -1667,6 +1667,7 @@
 #include "code\modules\halo\overmap\npc_ship_requests.dm"
 #include "code\modules\halo\overmap\npc_shipmap_handler.dm"
 #include "code\modules\halo\overmap\player_shuttles.dm"
+#include "code\modules\halo\overmap\shipyards.dm"
 #include "code\modules\halo\overmap\slipspace_engine.dm"
 #include "code\modules\halo\overmap\slipspace_engine_longrange.dm"
 #include "code\modules\halo\overmap\umbilicals.dm"
