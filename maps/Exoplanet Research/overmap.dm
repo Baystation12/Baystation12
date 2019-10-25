@@ -10,8 +10,6 @@
 
 	parent_area_type = /area/exo_research_facility
 
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius)
-
 /obj/effect/overmap/sector/exo_research/LateInitialize()
 	. = ..()
 	new /obj/effect/overmap/ship/npc_ship/shipyard/unsc (loc)
