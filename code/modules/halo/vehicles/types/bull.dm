@@ -3,7 +3,7 @@
 	name = "Bull APC"
 	desc = "An old APC chassis with modern modifications and a mounted machine gun."
 
-	icon = 'code/modules/halo/vehicles/Bull.dmi'
+	icon = 'code/modules/halo/vehicles/types/Bull.dmi'
 	icon_state = "bull"
 	anchored = 1
 

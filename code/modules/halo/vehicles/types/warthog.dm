@@ -3,7 +3,7 @@
 	name = "M12 Warthog LRV"
 	desc = "A nimble vehicle capable of providing anti-infantry support and small-scale troop transport."
 
-	icon = 'code/modules/halo/vehicles/finalwarthog-chaingun.dmi'
+	icon = 'code/modules/halo/vehicles/types/finalwarthog-chaingun.dmi'
 	icon_state = "warthog-chaingun"
 	anchored = 1
 
@@ -53,7 +53,7 @@
 	name = "M12 Warthog LRV Recon Modified"
 	desc = "A nimble vehicle capable of performing small scale recon operations."
 
-	icon = 'code/modules/halo/vehicles/finalwarthog-turretless.dmi'
+	icon = 'code/modules/halo/vehicles/types/finalwarthog-turretless.dmi'
 	icon_state = "warthog-turretless"
 
 	vehicle_move_delay = 1.6
@@ -65,7 +65,7 @@
 	name = "M12 Warthog LRV Troop Transport Modified"
 	desc = "A nimble vehicle capable of providing small to medium scale troop transport."
 
-	icon = 'code/modules/halo/vehicles/finalwarthog.dmi'
+	icon = 'code/modules/halo/vehicles/types/finalwarthog.dmi'
 	icon_state = "Warthog"
 
 	vehicle_move_delay = 1.4
@@ -77,5 +77,5 @@
 	name = "M12 Warthog LRV Police Modified"
 	desc = "A nimble vehicle capable of providing small to medium scale troop transport."
 
-	icon = 'code/modules/halo/vehicles/GCPD_Warthog.dmi'
+	icon = 'code/modules/halo/vehicles/types/GCPD_Warthog.dmi'
 	icon_state = "Warthog"

@@ -3,7 +3,7 @@
 	name = "M808B Scorpion"
 	desc = "The M808B Main Battle Tank is equipped with a 90mm cannon loaded with HE shells and a linked machine gun firing 7.62mm AP rounds. This will present a great foe to any force."
 
-	icon = 'code/modules/halo/vehicles/Scorpion.dmi'
+	icon = 'code/modules/halo/vehicles/types/Scorpion.dmi'
 	icon_state = "move"
 	anchored = 1
 

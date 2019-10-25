@@ -15,7 +15,7 @@
 	occupants = list(0,0)
 	exposed_positions = list("driver" = 20)
 
-	icon = 'code/modules/halo/vehicles/ghost.dmi'
+	icon = 'code/modules/halo/vehicles/types/ghost.dmi'
 	icon_state = "base"
 
 	vehicle_size = 16

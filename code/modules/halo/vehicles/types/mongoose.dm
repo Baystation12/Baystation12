@@ -4,7 +4,7 @@
 	name = "M274 Ultra-Light All-Terrain Vehicle"
 	desc = "Also known as the \"Mongoose\""
 
-	icon = 'code/modules/halo/vehicles/mongoose.dmi'
+	icon = 'code/modules/halo/vehicles/types/mongoose.dmi'
 	icon_state = "base"
 
 	bound_height = 32

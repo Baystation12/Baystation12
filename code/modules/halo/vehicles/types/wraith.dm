@@ -3,7 +3,7 @@
 	name = "Type-26 Assault Gun Carriage"
 	desc = "The Type-26 Assault Gun Carriage is equipped with a heavy plasma mortar and a set of twin linked medium plasma cannons."
 
-	icon = 'code/modules/halo/vehicles/Wraith.dmi'
+	icon = 'code/modules/halo/vehicles/types/Wraith.dmi'
 	icon_state = "wraith"
 	anchored = 1
 
@@ -77,7 +77,7 @@
 
 /obj/item/projectile/covenant/wraith_cannon
 	damage = 100
-	icon = 'code/modules/halo/vehicles/Wraith.dmi'
+	icon = 'code/modules/halo/vehicles/types/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
 	damage_type = "bomb"
 	density = 0

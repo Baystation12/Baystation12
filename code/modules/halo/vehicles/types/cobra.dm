@@ -3,7 +3,7 @@
 	name = "SP42 Cobra"
 	desc = "An anti-fortification and anti-materiel tank capable of providing high damage anti-armour at incredible ranges, however, its durability is low."
 
-	icon = 'code/modules/halo/vehicles/Cobra.dmi'
+	icon = 'code/modules/halo/vehicles/types/Cobra.dmi'
 	icon_state = "cobra"
 	anchored = 1
 

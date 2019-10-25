@@ -3,7 +3,7 @@
 	name = "Type 29 Troop/Vehicle Transport"
 	desc = "A well armoured and armed heavy troop and vehicle transport vehicle."
 
-	icon = 'code/modules/halo/vehicles/shadow.dmi'
+	icon = 'code/modules/halo/vehicles/types/shadow.dmi'
 	icon_state = "shadow"
 	anchored = 1
 
