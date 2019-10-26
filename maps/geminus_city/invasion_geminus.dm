@@ -8,7 +8,7 @@
 
 #include "../Admin Planet/includes.dm"
 
-#include "../UNSC_Iron_Will/includes.dm"
+#include "../UNSC_Halberd_Class/includes.dm"
 
 #include "../URF Commando Ship/includes.dm"
 

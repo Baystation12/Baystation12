@@ -8,7 +8,7 @@
 	icon_state = "base_unsc"
 	faction = "UNSC"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unscironwill)
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsclightbrigade)
 	base = 1
 
 GLOBAL_LIST_EMPTY(unsc_base_spawns)
