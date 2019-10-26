@@ -41,3 +41,5 @@
 	if(istype(over_object) && Adjacent(over_object) && CanMouseDrop(over_object, usr))
 		Bumped(usr)
 		over_object.contain(src)
+	else
+		return ..()
