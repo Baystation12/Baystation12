@@ -88,9 +88,9 @@
 	if(movement_destroyed)
 		to_chat(user,"[src]'s movement is damaged beyond use.")
 	if(cargo_capacity)
-		if(get_dist(user, src) > 2)
+		if(!src.Adjacent(user))
 			if(used_cargo_space > 0)
-				to_chat(user,"<span>It contains some cargo.</span>")
+				to_chat(user,"<span>It looks like there is something in the cargo hold.</span>")
 		else
 			to_chat(user,"<span>It's cargo hold contains [used_cargo_space] of [cargo_capacity] units of cargo ([round(100*used_cargo_space/cargo_capacity)]% full).</span>")
 	if(carried_vehicle)
