@@ -33,8 +33,9 @@
 	if(!istype(user) || !src.Adjacent(user) || user.incapacitated())
 		return
 	var/player_pos_choice
-	if(ALL_VEHICLE_POSITIONS.len == 1)
-		player_pos_choice = ALL_VEHICLE_POSITIONS[1]
+	var/list/L = ALL_VEHICLE_POSITIONS
+	if(L.len == 1)
+		player_pos_choice = L[1]
 	else
 		player_pos_choice = input(user,"Enter which position?","Vehicle Entry Position Select","Cancel") in ALL_VEHICLE_POSITIONS + list("Cancel")
 	if(player_pos_choice == "Cancel")
