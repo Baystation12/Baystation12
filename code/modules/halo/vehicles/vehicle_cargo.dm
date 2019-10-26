@@ -1,26 +1,43 @@
 
 /obj/vehicles/proc/can_put_cargo(var/obj/object)
+	world << "/obj/vehicles/proc/can_put_cargo([object] [object.type])"
 	if(!istype(object))
 		return 0
-	if(object.w_class == ITEM_SIZE_NO_CONTAINER)
+	if(object.anchored)
 		return 0
 
-	var/space_needed = base_storage_cost(object.w_class)
+	var/space_needed = base_storage_cost(get_cargo_size(object))
 	return space_needed <= (cargo_capacity - used_cargo_space)
 
-/obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
+/obj/vehicles/proc/get_cargo_size(var/obj/object)
+	var/item_size = object.w_class
+	if(istype(object, /obj/structure))
+		item_size = ITEM_SIZE_HUGE
+	if(istype(object, /obj/machinery))
+		item_size = ITEM_SIZE_HUGE
+	if(istype(object, /obj/vehicles))
+		var/obj/vehicles/vehicle = object
+		item_size = vehicle.vehicle_size
+	return item_size
+
+/obj/vehicles/proc/put_cargo_item(var/mob/user, var/obj/O)
+
 	if(!src.Adjacent(user) || !src.Adjacent(O))
+		return
+	if(!can_put_cargo(O))
+		to_chat(user,"<span class = 'notice'>[src] can not be loaded into [O]</span>")
 		return
 	var/confirm = alert(user,"Place [O] into [src]'s storage?",,"Yes","No")
 	if(confirm != "Yes")
 		return
-	if(!can_put_cargo(O))
-		to_chat(user,"<span class = 'notice'>[src] can not fit [O]</span>")
+	var/cargo_size = get_cargo_size(O)
+	if(cargo_size > 4 && !do_after(user, 30, O, progbar_on_user = 1))
 		return
+	user.visible_message("<span class = 'notice'>[user] loads [O] into [src].</span>")
 	user.drop_from_inventory(O)
 	O.loc = src
 	cargo_contents += O
-	used_cargo_space += base_storage_cost(O.w_class)
+	used_cargo_space += base_storage_cost(get_cargo_size(O))
 	src.verbs |= /obj/vehicles/proc/get_cargo_item
 
 /obj/vehicles/proc/load_vehicle(var/obj/vehicles/v,var/mob/user)
@@ -41,7 +58,7 @@
 		return
 
 	user.visible_message("<span class = 'notice'>[user] starts loading [v] into [src]\'s storage.</span>")
-	if(!do_after(user,VEHICLE_ITEM_LOAD,v))
+	if(!do_after(user,VEHICLE_ITEM_LOAD,v, progbar_on_user = 1))
 		return
 	user.visible_message("<span class = 'info'>[user] loads [v] into [src].</span>")
 	carried_vehicle = v
@@ -66,12 +83,7 @@
 	if(istype(v))
 		load_vehicle(v,user)
 	else
-		if(!can_put_cargo(dropping))
-			to_chat(user,"<span class = 'notice'>[src] is too full to fit [dropping].</span>")
-			return
-		if(!do_after(user,VEHICLE_ITEM_LOAD,dropping))
-			return
-		user.visible_message("<span class = 'notice'>[user] loads [dropping] into [src].</span>")
+		put_cargo_item(user, dropping)
 
 /obj/vehicles/proc/get_cargo_item()
 	set name = "Retrieve Cargo"
@@ -90,9 +102,10 @@
 	if(item_name_remove == "Cancel")
 		return
 	var/obj/object_removed = cargo_list_names[item_name_remove]
-	user.put_in_hands(object_removed)
+	if(!user.put_in_hands(object_removed))
+		object_removed.loc = user.loc
 	cargo_contents -= object_removed
-	used_cargo_space -= base_storage_cost(object_removed.w_class)
+	used_cargo_space -= base_storage_cost(get_cargo_size(object_removed))
 	if(!cargo_contents.len)
 		src.verbs -= /obj/vehicles/proc/get_cargo_item
 
