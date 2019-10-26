@@ -11,7 +11,8 @@
 	slot_flags = SLOT_BACK
 	one_hand_penalty = 4
 	charge_cost = 30
-	max_shots = 10
+	max_shots = 8
+	fire_delay = 30
 	projectile_type = /obj/item/projectile/ion
 	wielded_item_state = "ionrifle-wielded"
 	combustion = 0
@@ -31,7 +32,7 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	one_hand_penalty = 0
 	charge_cost = 20
-	max_shots = 6
+	max_shots = 4
 	projectile_type = /obj/item/projectile/ion/small
 
 /obj/item/weapon/gun/energy/decloner
