@@ -102,6 +102,18 @@
 		to_chat(imp_in,"<span class='warning'>A wave of nausea comes over you.</span><br><span class='good'> You are no longer so sure of those beliefs you've had...</span>")
 	. = ..()
 
+/obj/item/weapon/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
+	var/mob/living/carbon/human/H = M	
+	if(istype(H))
+		var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
+		if(!B || H.isSynthetic())
+			to_chat(user, "<span class='warning'>\The [M] cannot be imprinted.</span>")
+			return FALSE
+		if(!(B.parent_organ == check_zone(target_zone)))
+			to_chat(user, "<span class='warning'>\The [src] must be implanted in [H.get_organ(B.parent_organ)].</span>")
+			return FALSE
+	return TRUE
+
 /obj/item/weapon/implanter/imprinting
 	name = "imprinting implanter"
 	imp = /obj/item/weapon/implant/imprinting
