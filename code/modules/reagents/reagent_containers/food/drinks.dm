@@ -313,3 +313,11 @@
 /obj/item/weapon/reagent_containers/food/drinks/tea/green/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/tea/green, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/tea/chai
+	name = "cup of chai tea"
+	desc = "A tall plastic cup of hot chai tea."
+
+/obj/item/weapon/reagent_containers/food/drinks/tea/chai/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/tea/chai, 30)

@@ -858,6 +858,22 @@
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
 
+/datum/reagent/drink/coffee/cafe_latte/mocha
+	name = "Mocha Latte"
+	description = "Coffee and chocolate, smooth and creamy."
+	taste_description = "bitter creamy chocolate"
+
+	glass_name = "mocha latte"
+	glass_desc = "Coffee and chocolate, smooth and creamy."
+
+/datum/reagent/drink/coffee/cafe_latte/pumpkin
+	name = "Pumpkin Spice Latte"
+	description = "Smells and tastes like Autumn."
+	taste_description = "bitter creamy pumpkin spice"
+
+	glass_name = "pumpkin spice latte"
+	glass_desc = "Smells and tastes like Autumn."
+
 /datum/reagent/drink/hot_coco
 	name = "Hot Chocolate"
 	description = "Made with love! And cocoa beans."
@@ -2154,6 +2170,14 @@
 	glass_name = "Baron Grey tea"
 	glass_desc = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
 
+/datum/reagent/drink/tea/barongrey/latte
+	name = "London Fog"
+	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
+	taste_description = "creamy, tangy black tea"
+
+	glass_name = "London Fog"
+	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
+
 //green tea
 /datum/reagent/drink/tea/green
 	name = "Green Tea"
@@ -2189,3 +2213,100 @@
 
 	glass_name = "Maghrebi mint tea"
 	glass_desc = "Iced green tea prepared with mint and sugar. Refreshing!"
+
+/datum/reagent/drink/tea/chai
+	name = "Chai Tea"
+	description = "A spiced, dark tea. Goes great with milk."
+	taste_description = "spiced black tea"
+	color = "#151000"
+
+	glass_name = "chai tea"
+	glass_desc = "A spiced, dark tea. Goes great with milk."
+
+/datum/reagent/drink/tea/icetea/chai
+	name = "Iced Chai Tea"
+	description = "It's the chai tea you know and love, but now it's cold."
+	taste_description = "cold spiced black tea"
+	color = "#151000"
+
+	glass_name = "iced chai tea"
+	glass_desc = "It's the chai tea you know and love, but now it's cold."
+
+/datum/reagent/drink/tea/icetea/chai/sweet
+	name = "Sweet Chai Tea"
+	description = "It's the chai tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet spiced black tea"
+
+	glass_name = "sweet chai tea"
+	glass_desc = "It's the chai tea you know and love, but now it's cold. And sweet."
+
+/datum/reagent/drink/tea/chai/latte
+	name = "Chai Latte"
+	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
+	taste_description = "creamy spiced tea"
+	color = "#c8a988"
+
+	glass_name = "chai latte"
+	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
+
+/datum/reagent/drink/tea/red
+	name = "Rooibos Tea"
+	description = "A caffeine-free dark red tea, flavorful and full of antioxidants."
+	taste_description = "nutty red tea"
+	color = "#ab4c3a"
+
+	glass_name = "rooibos tea"
+	glass_desc = "A caffeine-free dark red tea, flavorful and full of antioxidants."
+
+/datum/reagent/drink/tea/icetea/red
+	name = "Iced Rooibos Tea"
+	description = "It's the red tea you know and love, but now it's cold."
+	taste_description = "cold nutty red tea"
+	color = "#ab4c3a"
+
+	glass_name = "iced rooibos tea"
+	glass_desc = "It's the red tea you know and love, but now it's cold."
+
+/datum/reagent/drink/tea/icetea/red/sweet
+	name = "Sweet Rooibos Tea"
+	description = "It's the red tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet nutty red tea"
+
+	glass_name = "sweet rooibos tea"
+	glass_desc = "It's the red tea you know and love, but now it's cold. And sweet."
+
+/datum/reagent/drink/syrup_chocolate
+	name = "Chocolate Syrup"
+	description = "Thick chocolate syrup used to flavor drinks."
+	taste_description = "chocolate"
+	color = "#542a0c"
+
+	glass_name = "chocolate syrup"
+	glass_desc = "Thick chocolate syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_caramel
+	name = "Caramel Syrup"
+	description = "Thick caramel syrup used to flavor drinks."
+	taste_description = "caramel"
+	color = "#85461e"
+
+	glass_name = "caramel syrup"
+	glass_desc = "Thick caramel syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_vanilla
+	name = "Vanilla Syrup"
+	description = "Thick vanilla syrup used to flavor drinks."
+	taste_description = "vanilla"
+	color = "#f3e5ab"
+
+	glass_name = "vanilla syrup"
+	glass_desc = "Thick vanilla syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_pumpkin
+	name = "Pumpkin Spice Syrup"
+	description = "Thick spiced pumpkin syrup used to flavor drinks."
+	taste_description = "spiced pumpkin"
+	color = "#d88b4c"
+
+	glass_name = "pumpkin spice syrup"
+	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."

@@ -2015,6 +2015,20 @@
 	result_amount = 2
 	mix_message = "The milk suffuses the coffee with pale shades."
 
+/datum/chemical_reaction/mocha_latte
+	name = "Mocha Latte"
+	result = /datum/reagent/drink/coffee/cafe_latte/mocha
+	required_reagents = list(/datum/reagent/drink/coffee/cafe_latte = 3, /datum/reagent/drink/syrup_chocolate = 1)
+	result_amount = 4
+	mix_message = "The chocolate swirls into the latte."
+
+/datum/chemical_reaction/pumpkin_latte
+	name = "Pumpkin Spice Latte"
+	result = /datum/reagent/drink/coffee/cafe_latte/pumpkin
+	required_reagents = list(/datum/reagent/drink/coffee/cafe_latte = 3, /datum/reagent/drink/syrup_pumpkin = 1)
+	result_amount = 4
+	mix_message = "The pumpkin spice swirls into the latte."
+
 /datum/chemical_reaction/acidspit
 	name = "Acid Spit"
 	result = /datum/reagent/ethanol/acid_spit
@@ -2306,6 +2320,13 @@
 	result_amount = 4
 	mix_message = "The juice swirls into the tea."
 
+/datum/chemical_reaction/latte_barongrey
+	name = "London Fog"
+	result = /datum/reagent/drink/tea/barongrey/latte
+	required_reagents = list(/datum/reagent/drink/tea/barongrey = 2, /datum/reagent/drink/milk = 1)
+	result_amount = 3
+	mix_message = "The milk swirls into the tea."
+
 //green tea drinks
 /datum/chemical_reaction/icetea_green
 	name = "Iced Green Tea"
@@ -2328,6 +2349,41 @@
 	catalysts = list(/datum/reagent/nutriment/mint)
 	result_amount = 3
 	mix_message = "The mint swirls into the drink."
+
+/datum/chemical_reaction/icetea_chai
+	name = "Iced Chai Tea"
+	result = /datum/reagent/drink/tea/icetea/chai
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the tea."
+
+/datum/chemical_reaction/sweettea_chai
+	name = "Iced Chai Tea"
+	result = /datum/reagent/drink/tea/icetea/chai/sweet
+	required_reagents = list(/datum/reagent/drink/tea/icetea/chai = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
+	mix_message = "The ice clinks together in the sweet tea."
+
+/datum/chemical_reaction/latte_chai
+	name = "Chai Latte"
+	result = /datum/reagent/drink/tea/chai/latte
+	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk = 1)
+	result_amount = 3
+	mix_message = "The milk swirls into the drink."
+
+/datum/chemical_reaction/icetea_red
+	name = "Iced Rooibos tea"
+	result = /datum/reagent/drink/tea/icetea/red
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/red = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the tea."
+
+/datum/chemical_reaction/sweettea_red
+	name = "Iced Rooibos tea"
+	result = /datum/reagent/drink/tea/icetea/red/sweet
+	required_reagents = list(/datum/reagent/drink/tea/icetea/red = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
+	mix_message = "The ice clinks together in the sweet tea."
 
 /datum/chemical_reaction/chazuke
 	name = "Chazuke"
