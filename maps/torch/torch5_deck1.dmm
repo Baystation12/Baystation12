@@ -26980,12 +26980,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
-"pQl" = (
-/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
-	id = "robotics_surg"
-	},
-/turf/simulated/floor/plating,
-/area/medical/counselor)
 "pQr" = (
 /obj/machinery/button/alternate/door/bolts{
 	id_tag = "medtoilet";
@@ -57260,7 +57254,7 @@ fOu
 fOu
 fOu
 dnr
-pQl
+pWW
 hiD
 ayB
 azN
@@ -57462,7 +57456,7 @@ ovZ
 ovZ
 ovZ
 ovZ
-pQl
+pWW
 aGx
 hnN
 uZi
