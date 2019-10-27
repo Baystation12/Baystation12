@@ -1199,6 +1199,12 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken2)
 "cr" = (
@@ -1695,6 +1701,12 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken1)
 "do" = (
@@ -1788,7 +1800,7 @@
 "dx" = (
 /obj/structure/mopbucket,
 /obj/structure/table/rack{
-	dir = 8;
+	dir = 8
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/device/multitool{
@@ -2280,6 +2292,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "er" = (
@@ -2531,6 +2549,11 @@
 	dir = 9
 	},
 /obj/structure/table/rack,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eI" = (
