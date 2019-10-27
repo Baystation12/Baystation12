@@ -84,8 +84,8 @@
 /datum/job/bertelsunsc_ship_marine
 	title = "UNSC Marine"
 	spawn_faction = "UNSC"
-	total_positions = 16
-	spawn_positions = 16
+	total_positions = 32
+	spawn_positions = 32
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine
 	selection_color = "#0A0A95"
 	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\

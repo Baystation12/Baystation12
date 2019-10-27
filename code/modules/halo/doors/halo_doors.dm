@@ -36,26 +36,26 @@
 obj/machinery/door/airlock/multi_tile/halo/triple
 	icon = 'code/modules/halo/doors/blastdoor.dmi'
 	maxhealth = 2000
-
-	bound_width = 3
+	dir = NORTH
+	width = 3
 
 obj/machinery/door/airlock/multi_tile/halo/quadruple
 	icon = 'code/modules/halo/doors/Longer Blastdoor.dmi'
 	maxhealth = 2500
-
-	bound_width = 4
+	dir = NORTH
+	width = 4
 
 obj/machinery/door/airlock/multi_tile/halo/triplens
 	icon = 'code/modules/halo/doors/3xblastdoorsns.dmi'
 	maxhealth = 2000
-
-	bound_height = 3
+	dir = EAST
+	width = 3
 
 obj/machinery/door/airlock/multi_tile/halo/quadruplens
 	icon = 'code/modules/halo/doors/4xBlastdoorns.dmi'
 	maxhealth = 2500
-
-	bound_height = 4
+	dir = EAST
+	width = 4
 
 /obj/machinery/door/airlock/multi_tile/secure
 	name = "Secure Airlock"
