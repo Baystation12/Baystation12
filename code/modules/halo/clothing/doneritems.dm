@@ -126,11 +126,11 @@
 /decl/hierarchy/outfit/burnedsweetpotato_spartan
 	name = "BurnedSweetPotato - Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
-	suit = /obj/item/clothing/suit/armor/special/spartan/praetor
+	suit = /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	head = /obj/item/clothing/head/helmet/spartan/praetor
+	head = /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	l_pocket = /obj/item/ammo_magazine/m762_ap
