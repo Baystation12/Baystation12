@@ -72,7 +72,7 @@
 	economic_modifier = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
-	access = list(access_unsc,144,145,192,access_unsc_armoury, access_unsc_marine)
+	access = list(access_unsc,142,144,145,192,access_unsc_armoury, access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE

@@ -16,6 +16,7 @@
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_xo,\
 		/datum/job/bertelsunsc_ship_marine,\
+		/datum/job/unsc_ship_iwo,\
 		/datum/job/unsc_ship_marineplatoon,\
 		/datum/job/bertelsODST,\
 		/datum/job/bertelsODSTO,\
