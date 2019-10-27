@@ -55,7 +55,9 @@
 		return
 
 	. = medical_scan_results(scan_subject, verbose, user.get_skill_value(SKILL_MEDICAL))
-	to_chat(user, "<hr>[.]<hr>")
+	to_chat(user, "<hr>")
+	to_chat(user, .)
+	to_chat(user, "<hr>")
 
 /proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_level = SKILL_DEFAULT)
 	. = list()
