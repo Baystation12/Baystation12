@@ -1,11 +1,11 @@
 /datum/job/unscbertels_ship_crew
-	title = "UNSC Bertels Ship Crew"
+	title = "UNSC Ship Crew"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelscrew
-	alt_titles = list("UNSC Bertels Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician,
-	"UNSC Bertels Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
-	"UNSC Bertels Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew ,
-	"UNSC Bertels Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor ,
-	"UNSC Bertels Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
+	alt_titles = list("UNSC Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician,
+	"UNSC Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
+	"UNSC Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew ,
+	"UNSC Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor ,
+	"UNSC Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
 	total_positions = 8
 	spawn_positions = 8
 	selection_color = "#0A0A95"
@@ -13,7 +13,7 @@
 	spawnpoint_override = "UNSC Bertels Ship Crew Spawn"
 
 /datum/job/unscbertels_medical_crew
-	title = "UNSC Bertels Hospital Corpsman"
+	title = "UNSC Hospital Corpsman"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/medical
 	total_positions = 4
 	spawn_positions = 4
@@ -22,7 +22,7 @@
 	spawnpoint_override = "UNSC Bertels Medical Staff Spawn"
 
 /datum/job/unscbertels_co
-	title = "UNSC Bertels Commanding Officer"
+	title = "Commanding Officer"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
 	total_positions = 1
 	spawn_positions = 1
@@ -31,7 +31,7 @@
 	spawnpoint_override = "UNSC Bertels CO Spawn"
 
 /datum/job/unscbertels_xo
-	title = "UNSC Bertels Executive Officer"
+	title = "Executive Officer"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
 	total_positions = 1
 	spawn_positions = 1
