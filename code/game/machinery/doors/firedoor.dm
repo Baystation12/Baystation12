@@ -88,7 +88,7 @@
 
 /obj/machinery/door/firedoor/examine(mob/user, distance)
 	. = ..()
-	if(distance >= 1 || !density)
+	if(distance > 1 || !density)
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
@@ -122,6 +122,7 @@
 			for(var/i = 2 to users_to_open.len)
 				users_to_open_string += ", [users_to_open[i]]"
 		to_chat(user, "These people have opened \the [src] during an alert: [users_to_open_string].")
+
 /obj/machinery/door/firedoor/Bumped(atom/AM)
 	if(p_open || operating)
 		return
