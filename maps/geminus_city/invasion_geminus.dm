@@ -10,7 +10,7 @@
 
 #include "../UNSC_Halberd_Class/includes.dm"
 
-#include "../URF Commando Ship/includes.dm"
+#include "../SOE_Argentum/includes.dm"
 
 #include "../Asteroid Listening Post/includes.dm"
 
