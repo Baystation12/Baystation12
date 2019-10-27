@@ -1,0 +1,369 @@
+"aa" = (/turf/simulated/wall/r_wall,/area/soe_argentum/boardingpods)
+"ab" = (/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
+"ac" = (/turf/simulated/wall/r_wall,/area/soe_argentum/engine)
+"ad" = (/turf/simulated/wall/r_wall,/area/soe_argentum/Messhall)
+"ae" = (/obj/effect/floor_decal/industrial/warning/corner,/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
+"af" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
+"ag" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 8},/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
+"ah" = (/turf/space,/area/soe_argentum/Messhall)
+"ai" = (/obj/machinery/door/blast/regular,/turf/simulated/wall/r_wall,/area/soe_argentum/boardingpods)
+"aj" = (/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/obj/structure/cable/blue{icon_state = "0-4"},/obj/structure/cable/blue{icon_state = "0-8"},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ak" = (/obj/effect/floor_decal/industrial/warning,/obj/machinery/power/terminal{dir = 8},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"al" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 6},/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"am" = (/obj/machinery/atmospherics/unary/freezer{dir = 2; icon_state = "freezer_1"; set_temperature = 73; use_power = 1},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"an" = (/obj/machinery/atmospherics/unary/freezer{dir = 2; icon_state = "freezer_1"; set_temperature = 73; use_power = 1},/obj/machinery/light/colored/red{dir = 1},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ao" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 10},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ap" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aq" = (/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"ar" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"as" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"at" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"au" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/tiled,/area/soe_argentum/boardingpods)
+"av" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 4},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aw" = (/obj/machinery/meter,/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/structure/cable/blue{dir = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ax" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ay" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"az" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aA" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aB" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (EAST)"; icon_state = "cooling_manifold"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aC" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aD" = (/obj/structure/table/standard,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"aE" = (/obj/effect/decal/cleanable/blood/gibs/robot,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"aF" = (/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"aG" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aH" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aI" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aJ" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aK" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/blue{icon_state = "0-4"},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aL" = (/obj/machinery/atmospherics/binary/fusion_cooling,/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aM" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"aN" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/obj/item/clothing/suit/straight_jacket,/obj/structure/closet/walllocker/emerglocker/north,/obj/item/clothing/mask/muzzle,/obj/item/clothing/mask/muzzle,/obj/item/clothing/suit/straight_jacket,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"aO" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"aP" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/boarding_pod,/turf/simulated/floor/tiled,/area/soe_argentum/boardingpods)
+"aQ" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"aR" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"aS" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/boarding_pod,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"aT" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/warning,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aU" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 9},/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aV" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aW" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aX" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/obj/item/trash/pistachios,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aY" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"aZ" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ba" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/effect/floor_decal/industrial/warning,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bb" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"bc" = (/obj/machinery/telecomms/relay/ship_relay{name = "Signal Relay"},/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"bd" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"be" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bf" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Cell 1"; req_access = list(142)},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bg" = (/obj/effect/decal/cleanable/flour,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bh" = (/obj/effect/landmark/start/commando_spawn,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bi" = (/obj/structure/table/steel_reinforced,/obj/item/trash/waffles,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bj" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bk" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"bl" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"bm" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/overmap_weapon_console/deck_gun_control/local/argentumport,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"bn" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"bo" = (/obj/machinery/suit_storage_unit/standard_unit,/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bp" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bq" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"br" = (/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bs" = (/obj/effect/decal/cleanable/liquid_fuel,/obj/effect/landmark/start/commando_spawn,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bt" = (/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bu" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bv" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"bw" = (/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"bx" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"by" = (/obj/structure/bed,/obj/machinery/light/small,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bz" = (/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bA" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bB" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bC" = (/obj/structure/sign/neon/diner,/turf/simulated/wall/r_wall,/area/soe_argentum/boardingpods)
+"bD" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/boardingpods)
+"bE" = (/obj/structure/sign/warning/pods,/turf/simulated/wall/r_wall,/area/soe_argentum/boardingpods)
+"bF" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/soe_argentum/boardingpods)
+"bG" = (/obj/structure/sign/neon/open,/turf/simulated/wall/r_wall,/area/soe_argentum/boardingpods)
+"bH" = (/obj/machinery/suit_storage_unit/standard_unit,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bI" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/item/trash/popcorn,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bJ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bK" = (/obj/effect/decal/cleanable/blood/oil,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bL" = (/obj/structure/reagent_dispensers/watertank,/obj/item/weapon/reagent_containers/glass/bucket,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bM" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bN" = (/obj/effect/decal/cleanable/vomit,/obj/item/clothing/mask/gas/clown_hat,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"bO" = (/obj/machinery/door/airlock/hatch,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"bP" = (/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"bQ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"bR" = (/obj/structure/window/reinforced/treated,/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"bS" = (/obj/structure/window/reinforced/treated,/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"bT" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"bU" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"bV" = (/obj/machinery/deck_gun/chaingun{icon_state = "deck_gatling3"; dir = 8},/turf/space,/area/soe_argentum/portguns)
+"bW" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"bX" = (/obj/structure/dispenser/oxygen,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bY" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"bZ" = (/obj/effect/decal/cleanable/dirt,/obj/structure/repair_bench,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ca" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/machinery/autolathe/ammo_fabricator,/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/light,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"cb" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/steel/fifty,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"cc" = (/obj/machinery/autolathe,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/powercore)
+"cd" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
+"ce" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"cf" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"cg" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light/small,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"ch" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"ci" = (/obj/item/weapon/storage/firstaid/combat,/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/hand_labeler,/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cj" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"ck" = (/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/structure/closet/crate/medical,/obj/effect/decal/cleanable/blood/splatter,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cl" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/Messhall)
+"cm" = (/obj/structure/sign/neon/lovehotel,/turf/simulated/wall/r_wall,/area/soe_argentum/Messhall)
+"cn" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"co" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cp" = (/obj/structure/table/standard,/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 1},/obj/item/weapon/paper_bin,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cq" = (/obj/machinery/overmap_weapon_console/npc_comms_console/innie,/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 1},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cr" = (/obj/machinery/overmap_weapon_console/deck_gun_control{control_tag = null; dir = 2; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; tag = "icon-comm (NORTH)"},/obj/structure/computerframe{tag = "icon-computer"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cs" = (/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
+"ct" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cu" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cv" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
+"cw" = (/obj/structure/sign/neon/disco,/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
+"cx" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/soe_argentum/powercore)
+"cy" = (/obj/structure/sign/neon/exit,/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
+"cz" = (/obj/effect/decal/cleanable/blood/gibs/robot,/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/windoor_assembly,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"cA" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cB" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cC" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cD" = (/obj/structure/closet/crate/freezer,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cE" = (/obj/structure/bed,/obj/effect/landmark/start/commando_spawn,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cF" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp/green,/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cG" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/effect/landmark/start/commando_spawn,/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cH" = (/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cI" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 8},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cJ" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/obj/effect/landmark/start/commando_officer_spawn,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cK" = (/obj/structure/bed/chair/comfy/captain{dir = 1; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (NORTH)"},/obj/effect/landmark/start/commando_officer_spawn,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cL" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/table/standard,/obj/machinery/photocopier/faxmachine{department = "Mariner-Class SOE Osprey"},/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/power/apc{name = "APC"; dir = 4; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cM" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cN" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/effect/decal/cleanable/dirt,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cO" = (/obj/machinery/light/colored/red{dir = 8},/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
+"cP" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/engine)
+"cQ" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"cR" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cS" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cT" = (/obj/effect/landmark/start/commando_spawn,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cU" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cV" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"cW" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Messhall)
+"cX" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"cY" = (/obj/structure/table/standard,/obj/item/weapon/pen,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cZ" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"da" = (/obj/effect/landmark/start/commando_captain_spawn,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"db" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dc" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dd" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"de" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"df" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dg" = (/obj/machinery/power/apc{dir = 8; name = "APC"; pixel_x = -24},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/obj/structure/cable/blue,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"dh" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"di" = (/obj/machinery/iv_drip,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"dj" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp/green,/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"dk" = (/obj/effect/landmark/start/commando_spawn,/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"dl" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"dm" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/computer/helm{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dn" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/obj/effect/landmark/start/commando_officer_spawn,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"do" = (/obj/machinery/nav_computer/innie,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dp" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"dq" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dr" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"ds" = (/obj/docking_umbilical/east,/turf/simulated/wall/r_wall,/area/soe_argentum/engine)
+"dt" = (/obj/machinery/optable,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"du" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"dv" = (/obj/structure/table/standard,/obj/item/weapon/tank/anesthetic,/obj/item/clothing/mask/breath/anesthetic,/obj/structure/table/standard,/obj/machinery/recharger,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"dw" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/Armory)
+"dx" = (/turf/simulated/wall/r_wall,/area/soe_argentum/Armory)
+"dy" = (/obj/structure/sign/neon/armory,/turf/simulated/wall/r_wall,/area/soe_argentum/Armory)
+"dz" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"dA" = (/obj/structure/table/standard,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dB" = (/obj/machinery/computer/engines{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 1},/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/obj/structure/window/reinforced/treated,/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dC" = (/obj/structure/window/reinforced/treated,/obj/machinery/squad_camera_console{tag = "icon-camera_console (NORTH)"; icon_state = "camera_console"; dir = 1},/obj/item/squad_manager,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dD" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
+"dE" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"dF" = (/turf/simulated/wall/r_wall,/area/soe_argentum/storageroom)
+"dG" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/soe_argentum/storageroom)
+"dH" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/storageroom)
+"dI" = (/obj/effect/decal/cleanable/liquid_fuel,/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"dJ" = (/obj/machinery/vending/armory/commandovend/armour,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"dK" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"dL" = (/obj/structure/table/steel_reinforced,/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"dM" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"dN" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "0-4"},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Armory)
+"dO" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dP" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"dQ" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"dR" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dS" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/wall/r_wall,/area/soe_argentum/storageroom)
+"dT" = (/obj/structure/reagent_dispensers/fueltank,/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/obj/effect/decal/cleanable/cobweb,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"dU" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"dV" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"dW" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"dX" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-8"},/obj/machinery/light/small{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"dY" = (/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"dZ" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"ea" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"eb" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light/small{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"ec" = (/obj/effect/overmap/ship/soe_argentum,/turf/space,/area/space)
+"ed" = (/obj/machinery/vending/armory/commandovend,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"ee" = (/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"ef" = (/obj/machinery/door/airlock/hatch,/turf/simulated/floor/tiled,/area/soe_argentum/boardingpods)
+"eg" = (/obj/machinery/button/remote/blast_door{id = "slipspace_osprey"; name = "Slipspace Engine"},/turf/simulated/wall/r_wall,/area/soe_argentum/storageroom)
+"eh" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"ei" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"ej" = (/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"ek" = (/obj/machinery/power/smes/buildable/max_cap_in_out{capacity = 5e+010; charge = 5e+010; input_attempt = 1; input_level = 200000; output_attempt = 1; output_level = 200000},/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"el" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"em" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"en" = (/obj/item/trash/plate,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"eo" = (/obj/structure/closet/crate/trashcart,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"ep" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"eq" = (/obj/item/trash/candy,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"er" = (/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"es" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"et" = (/obj/machinery/door/blast/regular{id = "slipspace_osprey"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eu" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/effect/decal/cleanable/liquid_fuel,/obj/effect/landmark/start/commando_spawn,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"ev" = (/obj/machinery/power/terminal{tag = "icon-term (NORTH)"; icon_state = "term"; dir = 1},/obj/structure/cable/blue{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"ew" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"ex" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/obj/item/weapon/storage/bag/trash,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"ey" = (/obj/structure/closet/l3closet/janitor,/turf/simulated/floor/plating,/area/soe_argentum/engine)
+"ez" = (/obj/machinery/vending/armory/commandovend,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"eA" = (/obj/structure/table/rack,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/obj/item/weapon/tank/emergency/oxygen/double,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"eB" = (/obj/machinery/slipspace_engine/human,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eC" = (/obj/item/trash/semki,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eD" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eE" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eF" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eG" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eH" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/obj/item/weapon/material/kitchen/rollingpin,/obj/item/weapon/reagent_containers/food/condiment/enzyme,/obj/item/weapon/material/kitchen/utensil/knife,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"eI" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"eJ" = (/obj/item/trash/syndi_cakes,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"eK" = (/obj/structure/sign/neon/pizza,/turf/simulated/wall/r_wall,/area/soe_argentum/storageroom)
+"eL" = (/obj/structure/table/standard,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eM" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"eN" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/tanktrap_dead,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"eO" = (/obj/structure/closet/secure_closet/engineering_electrical,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eP" = (/obj/structure/closet/secure_closet/engineering_welding,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eQ" = (/obj/structure/bed,/obj/effect/landmark/start/commando_spawn,/obj/item/weapon/bedsheet/hos,/obj/item/clothing/under/rank/clown,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"eR" = (/obj/structure/table/standard,/obj/item/weapon/storage/belt/utility,/obj/item/weapon/storage/belt/utility,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eS" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eT" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eU" = (/turf/space,/area/space)
+"eV" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/glass/fifty,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eW" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"eX" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/electrical,/obj/item/weapon/storage/box/lights,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"fa" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"fb" = (/obj/structure/table/rack,/obj/item/weapon/gun/energy/SDSR_10,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"fc" = (/obj/structure/table/standard,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/clothing/shoes/clown_shoes,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
+"fd" = (/turf/space,/area/soe_argentum/portguns)
+"fe" = (/obj/machinery/deck_gun/chaingun{icon_state = "deck_gatling3"; dir = 8},/turf/space,/area/soe_argentum/starboardguns)
+"ff" = (/turf/space,/area/soe_argentum/starboardguns)
+"fg" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+"fh" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/argentumstarboard,/turf/simulated/floor/plating,/area/soe_argentum/boardingpods)
+
+(1,1,1) = {"
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUaaaaaaaaaaaaaaaaaaabababababababababaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaaaaaaaaaaaaaaaaaaabababaeafafagababacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUahahadadadadaiaiaaaaaaaaaaaiaiabajakalamanaoapapaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadadararasaaaaaaatarauabavawaxayazaAaBaCaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadadaDadararaEaaaaaaaFararabavazaGaHaIaJaKaLacacacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaMaNaOadaParaQaabmaaaRaSarabaTaUaVaWaXaYaZbaacbbbcacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUbVfdadbdbebfbgbhbibjadbkaFaFblfgbnaEaFbkabbobpbqbrbsbrbtbuacbvbwbNaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadbybzbAbBbzbgbzadbCaabDbEbFbEaabGaaabbHbtbIbJbtbtbtbKacbxbwbwaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadbAbAadbLbMeHbgbObPbQbRbRbSbTbTbUbWabbXbtbYbZcacbcccdcecfcgchaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadcicjckadcladcmadadcncocpcqcrcscsctcucvabcwcxabababcyabacczacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadcAcBcCcDadeQcFfacGadcHcocIcJcKcLcsctcHbWcMbWctcNbPbPbPcOcPcQaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadcRcScTcUcVcWcWcWcWcVcXcocYcZdadbdcdddededededfcHbPbPbPbPacdgaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddhbzdiadcEdjfadkadctdldmdncHdocsctcHdpcMcHctdqbPdrbPcOdscQaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddtdudvaddwdxdxdxdydzcodAdBdCdDcsdEcudFdFdFdGdFdFdFdHdFacdIacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaddJdKdLdMdNdOdedPdPdPdQbTdRdedSdTdUdVdUdWdXdYdZceeaebchaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadedeeeeeedxaabDaabEefbEaaaaaadFdFdFegeheiejekelacemeneoaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUfeffdxdxdxdxdJeedKepdwbkaFeqeraFesaFaFbkdFdYdYetdYeuevevewcPexbweyaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdxezeAeedxararasaafhaaaRaraudFeBdYeteCeDeEeFeGacchchacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdxdxfbdxarareIaaaaaaeJarardFdFeKegdYdYdYdYeLacacacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdxdxaSareMaaaaaaeNaSardFeOePfcdYehdYdYeRaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxaiaiaaaaaaaaaaaiaidHeSdYdYdYeTeVeWeXaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxaaaaaaaaaaaaaaaaaadFdFdFdFdFdFdFdFdFacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUaaaaaaaaaaaaaaaaaadFdFdFdFdFdFdFdFdFaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+"}
