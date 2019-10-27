@@ -2,6 +2,7 @@
 /obj/item/weapon_attachment/light
 	name = "flashlight attachment"
 	desc = "An attachment designed to provide light."
+	weapon_slot = "underbarrel rail"
 
 	var/on = 0
 	var/intensity = 4
