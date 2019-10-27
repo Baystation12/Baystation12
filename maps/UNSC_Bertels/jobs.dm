@@ -2,11 +2,11 @@
 	title = "UNSC Ship Crew"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelscrew
-	alt_titles = list("UNSC Ship Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician,
-	"UNSC Ship Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
-	"UNSC Ship Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew ,
-	"UNSC Ship Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor ,
-	"UNSC Ship Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
+	alt_titles = list("UNSC Engineer"= /decl/hierarchy/outfit/job/UNSC_ship/bertelstechnician,
+	"UNSC Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
+	"UNSC Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew ,
+	"UNSC Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor ,
+	"UNSC Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
 	total_positions = 8
 	spawn_positions = 8
 	account_allowed = 1
@@ -18,7 +18,7 @@
 	loadout_allowed = TRUE
 
 /datum/job/unscbertels_medical_crew
-	title = "UNSC Ship Hospital Corpsman"
+	title = "Hospital Corpsman"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/medical
 	total_positions = 4
@@ -32,7 +32,7 @@
 	loadout_allowed = TRUE
 
 /datum/job/unscbertels_co
-	title = "UNSC Ship Commanding Officer"
+	title = "Commanding Officer"
 	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsCO
@@ -49,7 +49,7 @@
 	loadout_allowed = TRUE
 
 /datum/job/unscbertels_xo
-	title = "UNSC Ship Executive Officer"
+	title = "Executive Officer"
 	department_flag = COM
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsXO
@@ -64,7 +64,7 @@
 	loadout_allowed = TRUE
 
 /datum/job/unsc_ship_iwo
-	title = "UNSC Ship Infantry Weapons Officer"
+	title = "Infantry Weapons Officer"
 	spawn_faction = "UNSC"
 	total_positions = 1
 	spawn_positions = 1
@@ -72,7 +72,7 @@
 	economic_modifier = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
 	selection_color = "#0A0A95"
-	access = list(access_unsc,144,145,192,access_unsc_armoury, access_unsc_marine)
+	access = list(access_unsc,142,144,145,192,access_unsc_armoury, access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
@@ -84,8 +84,8 @@
 /datum/job/bertelsunsc_ship_marine
 	title = "UNSC Marine"
 	spawn_faction = "UNSC"
-	total_positions = 16
-	spawn_positions = 16
+	total_positions = 32
+	spawn_positions = 32
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine
 	selection_color = "#0A0A95"
 	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
