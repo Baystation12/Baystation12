@@ -2,14 +2,14 @@
 	name = "UNSC Light Brigade"
 	desc = "Halberd Class Destroyer."
 
-	icon = 'Heavycorvette.dmi'
+	icon = 'Halberdclass.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 	vessel_mass = 4
 	faction = "UNSC"
 	flagship = 1
 
-	map_bounds = list(3,57,116,101)
+	map_bounds = list(2,59,117,104)
 
 	parent_area_type = /area/destroyer/unsclightbrigade
 
