@@ -1220,6 +1220,9 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/lower)
 "cs" = (
