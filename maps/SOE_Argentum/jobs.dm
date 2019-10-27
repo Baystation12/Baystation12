@@ -4,10 +4,10 @@
 	spawn_faction = "SOE"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando
-	alt_titles = list("Initiate",\
-	"Trooper",\
-	"Corporal",\
-	"Surgeon")
+	alt_titles = list("SOE Initiate",\
+	"SOE Trooper",\
+	"SOE Corporal",\
+	"SOE Surgeon")
 
 	total_positions = 8
 	spawn_positions = 8
@@ -21,9 +21,9 @@
 	spawn_faction = "SOE"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando_officer
-	alt_titles = list("Sergeant",\
-	"Adjutant",\
-	"Lieutenant")
+	alt_titles = list("SOE Sergeant",\
+	"SOE Adjutant",\
+	"SOE Lieutenant")
 
 	total_positions = 2
 	spawn_positions = 1
@@ -37,7 +37,8 @@
 	spawn_faction = "SOE"
 	latejoin_at_spawnpoints = 1
 	outfit_type = /decl/hierarchy/outfit/job/soe_commando_captain
-	alt_titles = list("Commander")
+	alt_titles = list("SOE Commander",\
+	"SOE Captain")
 
 	total_positions = 1
 	spawn_positions = 1
