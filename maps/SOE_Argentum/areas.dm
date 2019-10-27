@@ -30,9 +30,14 @@
 	name = "SOE Argentum Engineering"
 	icon_state = "engineering"
 
-/area/soe_argentum/boardingpods
-	name = "SOE Argentum Boarding Pods"
+/area/soe_argentum/portboardingpods
+	name = "SOE Argentum Port Boarding Pods"
 	icon_state = "Tactical"
+
+/area/soe_argentum/starboardingpods
+	name = "SOE Argentum Starboard Boarding Pods"
+	icon_state = "Tactical"
+
 
 /area/soe_argentum/portguns
 	name = "Soe Argentum Port Deck Gun"
