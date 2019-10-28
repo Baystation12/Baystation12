@@ -27,7 +27,7 @@
 	species_restricted = list("Orion")
 	icon_state = "orion1"
 	item_state = "orion1"
-	armor_thickness = 30
+	armor_thickness = 20
 	flags_inv = 29
 	breach_threshold = 100
 	flags_inv = HIDESHOES
@@ -40,7 +40,7 @@
 	species_restricted = list("Orion")
 	icon_state = "orion2"
 	item_state = "orion2"
-	armor_thickness = 50
+	armor_thickness = 20
 	flags_inv = 29
 	breach_threshold = 100
 	flags_inv = HIDESHOES
@@ -53,7 +53,7 @@
 	species_restricted = list("Orion")
 	icon_state = "orion3"
 	item_state = "orion3"
-	armor_thickness = 50
+	armor_thickness = 20
 	flags_inv = 29
 	breach_threshold = 100
 	flags_inv = HIDESHOES
@@ -62,7 +62,7 @@
 	name = "Red Orion Helmet"
 	desc = "A prototype Helmet made from flexible high grade metals meant to intimidate the wearer's foes and for use by an Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet. This helmet happens to be red."
 	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 30, "bomb" = 50, "bio" = 0, "rad" = 0)
-	armor_thickness = 40
+	armor_thickness = 20
 	icon_state = "orion1"
 	item_state = "orion1"
 	species_restricted = list("Orion")
@@ -71,7 +71,7 @@
 	name = "Green Orion Helmet"
 	desc = "A prototype Helmet made from flexible high grade metals meant to intimidate the wearer's foes and for use by an Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet. This helmet happens to be green."
 	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 30, "bomb" = 50, "bio" = 0, "rad" = 0)
-	armor_thickness = 40
+	armor_thickness = 20
 	icon_state = "orion2"
 	item_state = "orion2"
 	species_restricted = list("Orion")
@@ -80,7 +80,7 @@
 	name = "Blue Orion Helmet"
 	desc = "A prototype Helmet made from flexible high grade metals meant to intimidate the wearer's foes and for use by an Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet. This helmet happens to be blue."
 	armor = list("melee" = 55, "bullet" = 55, "laser" = 45, "energy" = 30, "bomb" = 50, "bio" = 0, "rad" = 0)
-	armor_thickness = 40
+	armor_thickness = 20
 	icon_state = "orion3"
 	item_state = "orion3"
 	species_restricted = list("Orion")
@@ -115,6 +115,7 @@
 	item_state = "ma5b"
 	caliber = "a762"
 	burst_delay = 0.5
+	one_hand_penalty = 3
 	w_class = ITEM_SIZE_LARGE
 	wielded_item_state = "ma5b"
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
