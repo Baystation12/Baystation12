@@ -221,19 +221,16 @@
 	request_name = "Rapair/Refit Ship"
 	request_auth_levels = list(AUTHORITY_LEVEL_UNSC)
 
-/datum/npc_ship_request/shipyard_repair/cov
-	request_auth_levels = list(AUTHORITY_LEVEL_COV)
-
 /datum/npc_ship_request/shipyard_repair/do_request(var/obj/effect/overmap/ship/npc_ship/shipyard/ship_source,var/mob/requester)
 	if(!istype(ship_source))
-		return
+		return 0
 	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
 	if(world.time < ship_source.next_repair_at)
 		ship_source.radio_message("ERROR: Recovering resources from previous repair. Please wait.")
-		return
+		return 0
 	if(get_dist(origin_ship,ship_source) > 1)
 		ship_source.radio_message("ERROR: Vessel out of repair range.")
-		return
+		return 0
 
 	//Get all the typepaths
 	var/list/template_paths = list()
@@ -243,11 +240,11 @@
 
 	if(template_paths.len == 0)
 		ship_source.radio_message("ERROR: No compatible schematic on file.")
-		return
+		return 0
 
 	var/user_input = input("Select Repair Type","Repair Type","Cancel") in list("Walls","Floors")
 	if(user_input == "Cancel")
-		return
+		return 0
 
 	for(var/path in template_paths)
 		template_paths -= path
@@ -260,18 +257,34 @@
 
 	if(get_dist(origin_ship,ship_source) > 1)
 		ship_source.radio_message("ERROR: Vessel has left repair range.")
-		return
+		return 0
 	if(world.time < ship_source.next_repair_at)
 		ship_source.radio_message("ERROR: Recovering resources from previous repair. Please wait.")
-		return
+		return 0
 
 	ship_source.next_repair_at = world.time + SHIPYARD_REPAIR_COOLDOWN
 	var/ctr = 0
 	for(var/path in template_paths)
 		ctr += 1
-		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		log_admin("Repair Underway. This may lag.")
 		maploader.load_map(path,origin_ship.map_z[ctr],0,0,1)
 		create_lighting_overlays_zlevel(origin_ship.map_z[ctr])
 
 	ship_source.mapload_reset_lights(origin_ship.map_z)
+	return 1
+
+// The /insecure subtype reports it's location to EBAND once a certain amount of activations is reached.
+/datum/npc_ship_request/shipyard_repair/insecure
+	var/repairs_until_loc_transmit = 2 //loc transmit will trigger on 3rd repair.
+	var/transmit_lang = "Galactic Common"
+
+/datum/npc_ship_request/shipyard_repair/insecure/do_request(var/obj/effect/overmap/ship/npc_ship/shipyard/ship_source,var/mob/requester)
+	. = ..()
+	if(.)
+		if(repairs_until_loc_transmit > 0)
+			repairs_until_loc_transmit--
+		else
+			GLOB.global_headset.autosay("Previously unlogged object located at [ship_source.x],[ship_source.y]", "System Scan", "EBAND", transmit_lang)
+
+/datum/npc_ship_request/shipyard_repair/insecure/cov
+	request_auth_levels = list(AUTHORITY_LEVEL_COV)
