@@ -88,7 +88,7 @@
 
 /obj/machinery/door/firedoor/examine(mob/user, distance)
 	. = ..()
-	if(distance >= 1 || !density)
+	if(distance > 1 || !density)
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
