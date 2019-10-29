@@ -18,10 +18,10 @@
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
 	burst = 5
-	burst_delay = 0.5
+	burst_delay = 1
 	fire_delay = 2
 	burst_accuracy = list(0,-1,-1,-2,-2)
-	dispersion = list(1.0, 1.1, 1.1, 1.1, 1.2)
+	dispersion = list(1.0, 1.2, 1.3, 1.4, 1.5)
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -55,10 +55,10 @@
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
 	burst = 5
-	burst_delay = 0.4
+	burst_delay = 1
 	fire_delay = 2.5
 	burst_accuracy = list(0,-1,-1,-2,-2)
-	dispersion = list(1.1, 1.2, 1.2, 1.3, 1.4)
+	dispersion = list(1.1, 1.2, 1.4, 1.5, 1.6)
 
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
