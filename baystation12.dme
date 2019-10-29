@@ -1818,6 +1818,7 @@
 #include "code\modules\halo\weapons\covenant\handheld_shields.dm"
 #include "code\modules\halo\weapons\covenant\hunter_projectiles.dm"
 #include "code\modules\halo\weapons\covenant\launchers.dm"
+#include "code\modules\halo\weapons\covenant\lmg.dm"
 #include "code\modules\halo\weapons\covenant\melee.dm"
 #include "code\modules\halo\weapons\covenant\pistols.dm"
 #include "code\modules\halo\weapons\covenant\rifles.dm"
