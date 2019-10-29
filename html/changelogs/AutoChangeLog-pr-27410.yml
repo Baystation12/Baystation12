@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - rscadd: "Added rooibos tea, chai tea, chai latte, london fog, and mocha latte as dispensable or mixable drinks."
-  - rscadd: "Added chocolate, vanilla, caramel, and pumpkin spice syrups for flavoring drinks."
-  - rscadd: "Added alternate title 'Barista' to the Bartender job."
