@@ -249,8 +249,8 @@
 	name = "\improper SRM-8 missile rack"
 	icon_state = "mecha_missilerack"
 	projectile = /obj/item/missile
-	fire_sound = 'sound/effects/bang.ogg'
-	projectiles = 8
+	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
+	projectiles = 4
 	projectile_energy_cost = 200 KILOWATTS
 	equip_cooldown = 60
 
@@ -260,8 +260,9 @@
 	..()
 
 /obj/item/missile
-	icon = 'icons/obj/grenade.dmi'
-	icon_state = "missile"
+	name = "missile"
+	icon_state = "ssr"
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	var/primed = null
 	throwforce = 2
 	var/fire_sound  //The lack of this var causes runtimes with the rocket launcher
