@@ -126,11 +126,11 @@
 /decl/hierarchy/outfit/burnedsweetpotato_spartan
 	name = "BurnedSweetPotato - Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
-	suit = /obj/item/clothing/suit/armor/special/spartan/praetor
+	suit = /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	head = /obj/item/clothing/head/helmet/spartan/praetor
+	head = /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	l_pocket = /obj/item/ammo_magazine/m762_ap
@@ -306,14 +306,15 @@
 /obj/item/clothing/suit/storage/marine/karmac
 	item_state = "karmac-marine_worn"
 	icon_state = "karmac-marine_obj"
+
 //For whatever goddamn reason I can only get jumpsuits to work with the urfc path... If you can change this to /unsc/marine_fatigues/ or whatever it is, please do and tell me what I did wrong -Stingray
-/obj/item/clothing/under/urfc_jumpsuit/karmac
-	desc = "Standard issue uniform for UNSC marine corps."
+
+/obj/item/clothing/under/unsc/marine_fatigues/karmac
+	desc = "Standard issue uniform for UNSC Marine Corps."
 	name = "UNSC Marine fatigues"
-	icon = 'code/modules/halo/clothing/marine_items.dmi'
-	icon_override = 'code/modules/halo/clothing/marine_items.dmi'
-	item_state = "Karmac_uniform"
-	icon_state = "Karmac_uniform"
+	item_state = "karmac-uniform"
+	icon_state = "karmac-uniform_obj"
+	worn_state = "karmac-uniform"
 
 /obj/item/clothing/shoes/marine/karmac
 	item_state = "karmac-marineboots_worn"
@@ -321,12 +322,13 @@
 
 /obj/item/clothing/gloves/thick/unsc/karmac
 	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
 	item_state = "karmac-marinegloves_worn"
 	icon_state = "karmac-marinegloves_obj"
 
 /decl/hierarchy/outfit/karmac_marine
 	name = "karmac - marine"
-	uniform = /obj/item/clothing/under/urfc_jumpsuit/karmac
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/karmac
 	suit = /obj/item/clothing/suit/storage/marine/karmac
 	shoes = /obj/item/clothing/shoes/marine/karmac
 	gloves = /obj/item/clothing/gloves/thick/unsc/karmac
@@ -968,7 +970,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_state = "sleepy-marine_obj"
 
 /obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard
-	desc = "Standard issue uniform for UNSC marine corps."
+	desc = "Standard issue uniform for UNSC Marine Corps."
 	name = "UNSC Marine fatigues"
 	item_state = "sleepy-uniform"
 	icon_state = "sleepy-uniform_obj"

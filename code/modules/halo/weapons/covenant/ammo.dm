@@ -29,9 +29,9 @@
 	damage = 60
 	icon_state = "Overcharged_Plasmapistol shot"
 
-/obj/item/projectile/covenant/plasmapistol/overcharge/on_impact()
+/obj/item/projectile/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
-	empulse(src.loc,1,2)
+	empulse(impacted,0,1)
 
 /obj/item/projectile/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.

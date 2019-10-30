@@ -36,7 +36,7 @@
 		)
 
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock", "stock")
-	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper)
+	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper,/obj/item/weapon_attachment/light/ma5_flashlight)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/can_use_when_prone()
 	return 1
@@ -112,7 +112,6 @@
 		icon_state = "MA3"
 	else
 		icon_state = "MA3_unloaded"
-
 
 //BR85 battle
 

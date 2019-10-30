@@ -123,7 +123,7 @@
 "cs" = (/obj/machinery/light,/turf/simulated/floor/pavement/empty,/area/geminus_underground/north)
 "ct" = (/turf/unsimulated/mineral,/area/geminus_underground/southwest)
 "cu" = (/turf/unsimulated/mineral,/area/geminus_underground/southeast)
-"cv" = (/obj/effect/landmark/map_data{name = "Geminus City Colony"},/turf/unsimulated/mineral,/area/geminus_underground/southwest)
+"cv" = (/obj/effect/landmark/map_data{name = "Geminus Colony"},/turf/unsimulated/mineral,/area/geminus_underground/southwest)
 "cw" = (/turf/unsimulated/mineral,/area/geminus_underground/south)
 "cx" = (/obj/structure/table/reinforced,/obj/item/device/flashlight/lantern,/turf/simulated/floor/decor{tag = "icon-stonepavement"; icon_state = "stonepavement"},/area/geminus_underground/northwest)
 "cy" = (/obj/structure/table/reinforced,/obj/item/device/flashlight/lantern,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/decor{tag = "icon-stonepavement"; icon_state = "stonepavement"},/area/geminus_underground/northwest)

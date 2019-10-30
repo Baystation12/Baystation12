@@ -24,8 +24,8 @@
 	icon_state = "rifleman_helmet"
 	item_state_slots = list(slot_l_hand_str = "urf_helmet", slot_r_hand_str = "urf_helmet")
 	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD|FACE
-	flags_inv = BLOCKHAIR
+	body_parts_covered = HEAD
+	flags_inv = HIDEEARS
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 50, rad = 25)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -199,13 +199,11 @@
 	icon_state = "merc_balaclava"
 	item_state = "merc_balaclava"
 	flags_inv = HIDEFACE|BLOCKHAIR
-	body_parts_covered = FACE|HEAD
-	item_flags = FLEXIBLEMATERIAL
+	body_parts_covered = FACE
+	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
-	item_flags = 0
-	pull_mask = 1
 	w_class = ITEM_SIZE_SMALL
 
 #undef URF_OVERRIDE

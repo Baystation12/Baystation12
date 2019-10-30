@@ -7,7 +7,7 @@
 	required_players = 0
 	end_conditions_required = 1
 	factions = list(/datum/faction/unsc, /datum/faction/covenant)
-	overmap_hide = list(/obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/soe_osprey)
+	overmap_hide = list(/obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/soe_argentum)
 	disabled_jobs_types = list(\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
@@ -28,3 +28,6 @@
 
 	var/datum/objective/colony_capture/unsc/obj2 = locate() in GLOB.UNSC.all_objectives
 	obj2.fake = 1
+
+	var/datum/objective/overmap/unsc_innie_base/obj3 = locate() in GLOB.UNSC.all_objectives
+	obj3.fake = 1
