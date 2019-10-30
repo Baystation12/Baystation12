@@ -7,7 +7,7 @@
 	var/break_on_impact = 1 //There are two modes to the eggs.
 							//One breaks the egg on hit,
 
-/obj/item/weapon/slugegg/throw_impact(atom/hit_atom, var/speed)
+/obj/item/weapon/slugegg/throw_impact(atom/hit_atom)
 	if(break_on_impact)
 		squish()
 	else

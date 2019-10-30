@@ -36,7 +36,7 @@
 			P.launch(target)
 			playsound(src, P.fire_sound ? P.fire_sound : 'sound/effects/teleport.ogg', 60, 1)
 		else
-			picked.throw_at(target, 5, 10, src)
+			picked.throw_at(target, 5, 10)
 			playsound(src,'sound/effects/teleport.ogg',60,1)
 		sleep(1)
 	qdel(src)

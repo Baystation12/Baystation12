@@ -286,13 +286,13 @@ var/const/enterloopsanity = 100
 		decals = null
 
 // Called when turf is hit by a thrown object
-/turf/hitby(atom/movable/AM as mob|obj, var/speed)
+/turf/hitby(atom/movable/AM as mob|obj, var/datum/thrownthing/TT)
 	if(src.density)
-		spawn(2)
-			step(AM, turn(AM.last_move, 180))
 		if(isliving(AM))
 			var/mob/living/M = AM
-			M.turf_collision(src, speed)
+			M.turf_collision(src, TT.speed)
+		spawn(2)
+			step(AM, turn(TT.init_dir, 180))
 
 /turf/proc/can_engrave()
 	return FALSE

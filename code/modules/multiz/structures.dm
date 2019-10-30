@@ -48,7 +48,7 @@
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
 	climb(user, I)
 
-/turf/hitby(atom/movable/AM, var/speed)
+/turf/hitby(atom/movable/AM)
 	if(isobj(AM))
 		var/obj/structure/ladder/L = locate() in contents
 		if(L)

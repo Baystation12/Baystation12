@@ -7,18 +7,15 @@
 	. = ..()
 	if(.)
 		var/old_pass_flags = user.pass_flags
-		var/last_does_spin = user.does_spin
 		user.pass_flags |= (PASS_FLAG_TABLE | PASS_FLAG_GRILLE)
-		user.does_spin = FALSE
 		user.visible_message(SPAN_DANGER("\The [user] takes a flying leap!"))
 		strength = max(2, strength * user.get_jump_distance())
 		if(reflexively)
 			strength *= reflexive_modifier
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
 		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
-		user.throw_at(get_turf(target), strength, 1, user)
+		user.throw_at(get_turf(target), strength, 1, user, spin = FALSE)
 		user.pass_flags = old_pass_flags
-		user.does_spin = last_does_spin
 
 /decl/maneuver/leap/show_initial_message(var/mob/living/user, var/atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))

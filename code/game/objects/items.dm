@@ -218,7 +218,9 @@
 		var/obj/item/weapon/storage/S = loc
 		S.remove_from_storage(src)
 
-	throwing = 0
+	if(!QDELETED(throwing))
+		throwing.finalize(hit=TRUE)
+
 	if (loc == user)
 		if(!user.unEquip(src))
 			return
