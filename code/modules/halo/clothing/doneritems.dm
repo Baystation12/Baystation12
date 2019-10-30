@@ -150,10 +150,15 @@
 /obj/item/clothing/shoes/jiralhanae/boltersam
 	icon_state = "bolter_greaves"
 
+/obj/item/weapon/grav_hammer/boltersam
+	icon_state = "goremaul"
+	item_state_slots = list(slot_l_hand_str = "goremaul", slot_r_hand_str = "goremaul", slot_back_str = "back_maul")
+
 /decl/hierarchy/outfit/boltersam_jiralhanae
 	name = "boltersam - jiralhanae"
 	head = /obj/item/clothing/head/helmet/jiralhanae/boltersam
 	suit = /obj/item/clothing/suit/armor/jiralhanae/boltersam
+	back = /obj/item/weapon/grav_hammer/boltersam
 
 ////////eonoc\\\\\\\\
 
