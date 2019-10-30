@@ -199,6 +199,7 @@
 #include "code\controllers\subsystems\statistics.dm"
 #include "code\controllers\subsystems\sun.dm"
 #include "code\controllers\subsystems\supply.dm"
+#include "code\controllers\subsystems\throwing.dm"
 #include "code\controllers\subsystems\ticker.dm"
 #include "code\controllers\subsystems\timer.dm"
 #include "code\controllers\subsystems\trade.dm"
