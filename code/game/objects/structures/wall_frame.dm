@@ -146,12 +146,15 @@
 	take_damage(damage)
 	return
 
-/obj/structure/wall_frame/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
+/obj/structure/wall_frame/hitby(AM as mob|obj, var/datum/thrownthing/TT)
 	..()
-	if(ismob(AM))
-		return
-	var/obj/O = AM
-	var/tforce = O.throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
+	var/tforce = 0
+	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
+		var/mob/I = AM
+		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+	else
+		var/obj/O = AM
+		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
 	take_damage(tforce)

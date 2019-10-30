@@ -133,7 +133,7 @@
 		user.visible_message("\The [user] deals a card to \himself.")
 	else
 		user.visible_message("\The [user] deals a card to \the [target].")
-	H.throw_at(get_step(target,target.dir),10,1,H)
+	H.throw_at(get_step(target,target.dir),10,1,user)
 
 /obj/item/weapon/hand/attackby(obj/O, mob/user)
 	if(istype(O,/obj/item/weapon/hand))

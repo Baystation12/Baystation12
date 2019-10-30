@@ -284,12 +284,12 @@ meteor_act
 	return 1
 
 //this proc handles being hit by a thrown atom
-/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)
+/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj, var/datum/thrownthing/TT)
 
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 
-		if(in_throw_mode && !get_active_hand() && speed <= THROWFORCE_SPEED_DIVISOR)	//empty active hand and we're in throw mode
+		if(in_throw_mode && !get_active_hand() && TT.speed <= THROWFORCE_SPEED_DIVISOR)	//empty active hand and we're in throw mode
 			if(!incapacitated())
 				if(isturf(O.loc))
 					put_in_active_hand(O)
@@ -298,25 +298,20 @@ meteor_act
 					return
 
 		var/dtype = O.damtype
-		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
+		var/throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/zone = BP_CHEST
-		if (istype(O.thrower, /mob/living))
-			var/mob/living/L = O.thrower
-			if(L.zone_sel)
-				zone = check_zone(L.zone_sel.selecting)
+		if (TT.target_zone)
+			zone = check_zone(TT.target_zone)
 		else
-			zone = ran_zone(BP_CHEST,75)	//Hits a random part of the body, geared towards the chest
+			zone = ran_zone()	//Hits a random part of the body, -was already geared towards the chest
 
 		//check if we hit
-		var/miss_chance = 15
-		if (O.throw_source)
-			var/distance = get_dist(O.throw_source, loc)
-			miss_chance = max(15*(distance-2), 0)
+		var/miss_chance = max(15*(TT.dist_travelled-2),0)
 		zone = get_zone_with_miss_chance(zone, src, miss_chance, ranged_attack=1)
 
-		if(zone && O.thrower != src)
-			var/shield_check = check_shields(throw_damage, O, thrower, zone, "[O]")
+		if(zone && TT.thrower && TT.thrower != src)
+			var/shield_check = check_shields(throw_damage, O, TT.thrower, zone, "[O]")
 			if(shield_check == PROJECTILE_FORCE_MISS)
 				zone = null
 			else if(shield_check)
@@ -326,8 +321,6 @@ meteor_act
 			visible_message("<span class='notice'>\The [O] misses [src] narrowly!</span>")
 			return
 
-		O.throwing = 0		//it hit, so stop moving
-
 		var/obj/item/organ/external/affecting = get_organ(zone)
 		var/hit_area = affecting.name
 		var/datum/wound/created_wound
@@ -335,11 +328,10 @@ meteor_act
 		src.visible_message("<span class='warning'>\The [src] has been hit in the [hit_area] by \the [O].</span>")
 		created_wound = apply_damage(throw_damage, dtype, zone, O.damage_flags(), O, O.armor_penetration)
 
-		if(ismob(O.thrower))
-			var/mob/M = O.thrower
-			var/client/assailant = M.client
+		if(TT.thrower)
+			var/client/assailant = TT.thrower.client
 			if(assailant)
-				admin_attack_log(M, src, "Threw \an [O] at their victim.", "Had \an [O] thrown at them", "threw \an [O] at")
+				admin_attack_log(TT.thrower, src, "Threw \an [O] at their victim.", "Had \an [O] thrown at them", "threw \an [O] at")
 
 		//thrown weapon embedded object code.
 		if(dtype == BRUTE && istype(O,/obj/item))
@@ -364,10 +356,10 @@ meteor_act
 		if(istype(O, /obj/item))
 			var/obj/item/I = O
 			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
-		var/momentum = speed*mass
+		var/momentum = TT.speed*mass
 
-		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/dir = get_dir(O.throw_source, src)
+		if(momentum >= THROWNOBJ_KNOCKBACK_SPEED)
+			var/dir = TT.init_dir
 
 			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)

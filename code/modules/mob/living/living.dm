@@ -62,9 +62,8 @@ default behaviour is:
 	// This is boilerplate from /atom/movable/Bump() but in all honest
 	// I have no clue what is going on in the logic below this and I'm
 	// afraid to touch it in case it explodes and kills me.
-	if(throwing)
-		throw_impact(AM)
-		throwing = FALSE
+	if(!QDELETED(throwing))
+		throwing.hit_atom(AM)
 		return
 	// End boilerplate.
 

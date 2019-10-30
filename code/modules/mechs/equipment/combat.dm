@@ -196,11 +196,11 @@
 			spark_system.start()
 			playsound(loc, "sparks", 25, 1)
 
-/obj/aura/mechshield/hitby(atom/movable/M, speed)
+/obj/aura/mechshield/hitby(atom/movable/M, var/datum/thrownthing/TT)
 	. = ..()
 	if(!active)
 		return
-	if(shields.charge && speed <= 5)
+	if(shields.charge && TT.speed <= 5)
 		user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash briefly as they deflect \the [M]."))
 		flick("shield_impact", src)
 		playsound(user,'sound/effects/basscannon.ogg',10,1)
