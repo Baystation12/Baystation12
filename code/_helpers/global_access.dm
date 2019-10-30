@@ -133,6 +133,8 @@
 			return global.SSsupply;
 		if("SStemperature")
 			return global.SStemperature;
+		if("SSthrowing")
+			return global.SSthrowing;
 		if("SSticker")
 			return global.SSticker;
 		if("SStimer")
@@ -915,7 +917,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1050,6 +1052,8 @@
 			global.SSsupply=newval;
 		if("SStemperature")
 			global.SStemperature=newval;
+		if("SSthrowing")
+			global.SSthrowing=newval;
 		if("SSticker")
 			global.SSticker=newval;
 		if("SStimer")
@@ -1832,7 +1836,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -1900,6 +1904,7 @@
 	"SSsun",
 	"SSsupply",
 	"SStemperature",
+	"SSthrowing",
 	"SSticker",
 	"SStimer",
 	"SStrade",
