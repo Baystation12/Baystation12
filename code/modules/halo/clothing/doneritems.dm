@@ -1163,25 +1163,25 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //Sangheili (MAJOR)
 
 /obj/item/clothing/head/helmet/sangheili/socks
-	name = "Sock's Sangheili Helmet"
+	name = "‘Nasan Clan - Major Sangheili Helmet"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_helm_obj"
 	item_state = "socks_helm"
 
 /obj/item/clothing/suit/armor/special/combatharness/socks
-	name = "Sock's Sangheili Combat Harness"
+	name = "‘Nasan Clan - Major Combat Harness"
 	icon_state = "socks_chest_obj"
 	item_state = "socks_chest"
 	totalshields = 125
 
 /obj/item/clothing/shoes/sangheili/socks
-	name = "Sock's Sanghelli Leg Armour"
+	name = "‘Nasan Clan - Major Leg Armour"
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_legs_obj"
 	item_state = "socks_legs"
 
 /obj/item/clothing/gloves/thick/sangheili/socks
-	name = "Sock's Sanghelli Combat Gauntlets"
+	name = "‘Nasan Clan - Major Gauntlets"
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_gloves_obj"
 	item_state = "socks_gloves"
