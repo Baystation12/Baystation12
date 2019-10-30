@@ -150,6 +150,7 @@
 	UnarmedAttack(target_mob)
 
 /mob/living/simple_animal/hostile/UnarmedAttack(var/atom/attacked,var/prox_flag)
+	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	if(istype(attacked,/mob/living))
 		var/mob/living/L = attacked
 		var/damage_to_apply = rand(melee_damage_lower,melee_damage_upper)
@@ -202,6 +203,10 @@
 				if(!isnull(casing.BB))
 					casing.expend()
 			sleep(burstdelay_use)
+	var/fire_delay_use = 6 //Same as base gun fire delay.
+	if(using_vehicle_gun)
+		fire_delay_use = using_vehicle_gun.fire_delay
+	setClickCooldown(fire_delay_use)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
