@@ -11,6 +11,12 @@
 	item_cost = 8
 	path = /obj/item/weapon/storage/toolbox/syndicate
 
+/datum/uplink_item/item/tools/ductape
+	name = "Duct Tape"
+	desc = "A roll of duct tape. changes \"HELP\" in to sexy \"mmm\"."
+	item_cost = 8
+	path = /obj/item/weapon/tape_roll
+
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
 	item_cost = 8

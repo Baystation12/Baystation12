@@ -23,6 +23,12 @@
 	var/obj/item/I = new balloon_type(loc)
 	return I
 
+/datum/uplink_item/item/badassery/crayonmre
+	name = "Crayon MRE"
+	desc = "Exceptionally robust MRE"
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
+	path = /obj/item/weapon/storage/mre/menu11/special
+
 /**************
 * Random Item *
 **************/
