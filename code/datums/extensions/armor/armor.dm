@@ -2,6 +2,7 @@
 	base_type = /datum/extension/armor
 	expected_type = /atom/movable
 	var/list/armor_values
+	var/list/max_armor_values
 	var/full_block_message = "Your armor absorbs the blow!"
 	var/partial_block_message = "Your armor softens the blow!"
 
@@ -15,10 +16,15 @@
 	//  E.g. setting it to more than 1 will make mitigation drop off faster, effectively reducing the range of damage mitigation
 	var/over_armor_mult = 1
 
+	var/armor_degradation_coef //How fast armor degrades with blocked damage, with armor value reduced by [coef * damage taken]
+	var/list/last_reported_damage  //for wearer feedback
+
 /datum/extension/armor/New(atom/movable/holder, list/armor)
 	..()
 	if(armor)
 		armor_values = armor.Copy()
+		max_armor_values = armor.Copy()
+	armor_degradation_coef = armor_degradation_speed
 
 // Takes in incoming damage value
 // Applies state changes to self, holder, and whatever else caused by damage mitigation
@@ -28,15 +34,14 @@
 		return args.Copy()
 
 	var/blocked = get_blocked(damage_type, damage_flags, armor_pen, damage)
+	on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
+
 	// Blocking values that mean the damage was under armor, so all dangerous flags are removed (edge/sharp)
 	var/armor_border_blocking = 1 - (under_armor_mult * 1/armor_range_mult)
 	if(blocked >= armor_border_blocking)
 		if(damage_flags & DAM_LASER)
 			damage *= FLUIDLOSS_CONC_BURN/FLUIDLOSS_WIDE_BURN
 		damage_flags &= ~(DAM_SHARP | DAM_EDGE | DAM_LASER)
-
-	on_blocking(damage, blocked)
-
 	if(damage_type == IRRADIATE)
 		damage = max(0, damage - 100 * blocked)
 		silent = TRUE
@@ -49,7 +54,45 @@
 			to_chat(victim, SPAN_NOTICE(partial_block_message))
 	return args.Copy()
 
-/datum/extension/armor/proc/on_blocking(damage, blocked)
+/datum/extension/armor/proc/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
+	if(!(damage_type == BRUTE || damage_type == BURN))
+		return
+	if(armor_degradation_coef)
+		var/key = get_armor_key(damage_type, damage_flags)
+		var/damage_blocked = round(damage * blocked)
+		if(damage_blocked)
+			var/new_armor = max(0, get_value(key) - armor_degradation_coef * damage_blocked)
+			set_value(key, new_armor)
+			var/mob/M = get_holder_of_type(holder, /mob)
+			if(istype(M))
+				var/list/visible = get_visible_damage()
+				for(var/k in visible)
+					if(LAZYACCESS(last_reported_damage, k) != visible[k])
+						LAZYSET(last_reported_damage, k, visible[k])
+						to_chat(M, SPAN_WARNING("The [k] armor on your [holder] has [visible[k]] damage now!"))
+
+/datum/extension/armor/proc/get_damage()
+	for(var/key in armor_values)
+		var/damage = max_armor_values[key] - armor_values[key]
+		if(damage > 0)
+			LAZYSET(., key, damage)
+
+/datum/extension/armor/proc/get_visible_damage()
+	var/list/damages = get_damage()
+	if(!LAZYLEN(damages))
+		return
+	var/result = list()
+	for(var/key in damages)
+		switch(round(100 * damages[key]/max_armor_values[key]))
+			if(5 to 10)
+				result[key] = "minor"
+			if(11 to 25)
+				result[key] = "moderate"
+			if(26 to 50)
+				result[key] = "serious"
+			if(51 to 100)
+				result[key] = "catastrophic"
+	return result
 
 // A simpler proc used as a helper for above but can also be used externally. Does not modify state.
 /datum/extension/armor/proc/get_blocked(damage_type, damage_flags, armor_pen = 0, damage = 5)
@@ -68,6 +111,9 @@
 	if(isnull(armor_values[key]))
 		return 0
 	return min(armor_values[key], 100)
+
+/datum/extension/armor/proc/set_value(key, newval)
+	armor_values[key] = Clamp(newval, 0, 100)
 
 // There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
 /proc/get_armor_key(damage_type, damage_flags)
