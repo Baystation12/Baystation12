@@ -1614,6 +1614,20 @@
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled coffee."
 
+/datum/chemical_reaction/icesoylatte
+	name = "Iced Soy Latte"
+	result = /datum/reagent/drink/coffee/icecoffee/soy_latte
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/soy_latte = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled soy latte."
+
+/datum/chemical_reaction/icecafelatte
+	name = "Iced Cafe Latte"
+	result = /datum/reagent/drink/coffee/icecoffee/cafe_latte
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/cafe_latte = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled cafe latte."
+
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
 	result = /datum/reagent/drink/nuka_cola
@@ -2022,12 +2036,54 @@
 	result_amount = 4
 	mix_message = "The chocolate swirls into the latte."
 
+/datum/chemical_reaction/soy_mocha_latte
+	name = "Mocha Soy Latte"
+	result = /datum/reagent/drink/coffee/soy_latte/mocha
+	required_reagents = list(/datum/reagent/drink/coffee/soy_latte = 3, /datum/reagent/drink/syrup_chocolate = 1)
+	result_amount = 4
+	mix_message = "The chocolate swirls into the latte."
+
+/datum/chemical_reaction/ice_mocha_latte
+	name = "Iced Mocha Latte"
+	result = /datum/reagent/drink/coffee/icecoffee/cafe_latte/mocha
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/cafe_latte/mocha = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled mocha latte."
+
+/datum/chemical_reaction/ice_soy_mocha_latte
+	name = "Iced Soy Mocha Latte"
+	result = /datum/reagent/drink/coffee/icecoffee/soy_latte/mocha
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/soy_latte/mocha = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled soy mocha latte."
+
 /datum/chemical_reaction/pumpkin_latte
 	name = "Pumpkin Spice Latte"
 	result = /datum/reagent/drink/coffee/cafe_latte/pumpkin
 	required_reagents = list(/datum/reagent/drink/coffee/cafe_latte = 3, /datum/reagent/drink/syrup_pumpkin = 1)
 	result_amount = 4
 	mix_message = "The pumpkin spice swirls into the latte."
+
+/datum/chemical_reaction/soy_pumpkin_latte
+	name = "Pumpkin Spice Soy Latte"
+	result = /datum/reagent/drink/coffee/soy_latte/pumpkin
+	required_reagents = list(/datum/reagent/drink/coffee/soy_latte = 3, /datum/reagent/drink/syrup_pumpkin = 1)
+	result_amount = 4
+	mix_message = "The pumpkin spice swirls into the latte."
+
+/datum/chemical_reaction/ice_pumpkin_latte
+	name = "Iced Pumpkin Spice Latte"
+	result = /datum/reagent/drink/coffee/icecoffee/cafe_latte/pumpkin
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/cafe_latte/pumpkin = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled pumpkin spice latte."
+
+/datum/chemical_reaction/ice_soy_pumpkin_latte
+	name = "Iced Pumpkin Spice Soy Latte"
+	result = /datum/reagent/drink/coffee/icecoffee/soy_latte/pumpkin
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/soy_latte/pumpkin = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled pumpkin spice soy latte."
 
 /datum/chemical_reaction/acidspit
 	name = "Acid Spit"
@@ -2327,6 +2383,27 @@
 	result_amount = 3
 	mix_message = "The milk swirls into the tea."
 
+/datum/chemical_reaction/soy_latte_barongrey
+	name = "Soy London Fog"
+	result = /datum/reagent/drink/tea/barongrey/soy_latte
+	required_reagents = list(/datum/reagent/drink/tea/barongrey = 2, /datum/reagent/drink/milk/soymilk = 1)
+	result_amount = 3
+	mix_message = "The soy swirls into the tea."
+
+/datum/chemical_reaction/ice_latte_barongrey
+	name = "Iced London Fog"
+	result = /datum/reagent/drink/tea/icetea/barongrey/latte
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/barongrey/latte = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled london fog."
+
+/datum/chemical_reaction/ice_soy_latte_barongrey
+	name = "Iced Soy London Fog"
+	result = /datum/reagent/drink/tea/icetea/barongrey/soy_latte
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/barongrey/soy_latte = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled soy london fog."
+
 //green tea drinks
 /datum/chemical_reaction/icetea_green
 	name = "Iced Green Tea"
@@ -2370,6 +2447,27 @@
 	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk = 1)
 	result_amount = 3
 	mix_message = "The milk swirls into the drink."
+
+/datum/chemical_reaction/soy_latte_chai
+	name = "Chai Soy Latte"
+	result = /datum/reagent/drink/tea/chai/soy_latte
+	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk/soymilk = 1)
+	result_amount = 3
+	mix_message = "The milk swirls into the drink."
+
+/datum/chemical_reaction/ice_latte_chai
+	name = "Iced Chai Latte"
+	result = /datum/reagent/drink/tea/icetea/chai/latte
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai/latte = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled chai latte."
+
+/datum/chemical_reaction/ice_soy_latte_chai
+	name = "Iced Chai Soy Latte"
+	result = /datum/reagent/drink/tea/icetea/chai/soy_latte
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai/soy_latte = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the chilled chai soy latte."
 
 /datum/chemical_reaction/icetea_red
 	name = "Iced Rooibos tea"
