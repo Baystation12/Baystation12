@@ -18,6 +18,12 @@
 	darkness_view = 4
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 
+/obj/item/clothing/glasses/hud/tactical/odst_hud/medic
+	name = "Medic HUD"
+
+/obj/item/clothing/glasses/hud/tactical/odst_hud/medic/process_hud(var/mob/M)
+	process_med_hud(M, 1)
+
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Rifleman Helmet"
 	desc = "Standard issue short-EVA capable helmet issued to ODST forces"
@@ -164,6 +170,8 @@
 	icon_state = "Helmet Medic"
 	item_state_novisr = "Odst Helmet Medic Transparent"
 	icon_state_novisr = "Helmet Medic Transparent"
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud/medic
 
 ///obj/item/clothing/head/helmet/odst/medic/health/process_hud(var/mob/M)
 //	process_med_hud(M, 1)
