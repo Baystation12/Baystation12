@@ -1,6 +1,3 @@
-	// These should all be procs, you can add them to humans/subspecies by
-// species.dm's inherent_verbs ~ Z
-
 /****************
  true human verbs
 ****************/
