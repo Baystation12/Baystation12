@@ -10,7 +10,7 @@
 	slot_flags = 0	//too unwieldy to carry on your back
 	one_hand_penalty = -1
 	burst = 6
-	max_shots =180
+	max_shots =200
 	burst_delay = 1.3
 	fire_delay = 5
 	charge_meter = 0
