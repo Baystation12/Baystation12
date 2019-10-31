@@ -256,13 +256,13 @@
 	starting_reagents = list(/datum/reagent/nutriment/soysauce = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee
-	name = "coffee powder packet"
-	desc = "Contains 5u of coffee powder. Mix with 25u of water and heat."
+	name = "instant coffee powder packet"
+	desc = "Contains 5u of instant coffee powder. Mix with 25u of water."
 	starting_reagents = list(/datum/reagent/nutriment/coffee = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/tea
-	name = "tea powder packet"
-	desc = "Contains 5u of black tea powder. Mix with 25u of water and heat."
+	name = "instant tea powder packet"
+	desc = "Contains 5u of instant black tea powder. Mix with 25u of water."
 	starting_reagents = list(/datum/reagent/nutriment/tea = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/cocoa

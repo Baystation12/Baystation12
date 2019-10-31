@@ -1394,18 +1394,14 @@
 	result = /datum/reagent/drink/coffee
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coffee = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
-	mix_message = "The solution thickens into a steaming dark brown beverage."
+	mix_message = "The solution thickens into dark brown beverage."
 
 /datum/chemical_reaction/tea
 	name = "Black tea"
 	result = /datum/reagent/drink/tea
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/tea = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
-	mix_message = "The solution thickens into a steaming black beverage."
+	mix_message = "The solution thickens into black beverage."
 
 /datum/chemical_reaction/hot_coco
 	name = "Hot Coco"

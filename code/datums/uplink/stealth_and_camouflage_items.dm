@@ -10,6 +10,11 @@
 	item_cost = 1
 	path = /obj/item/clothing/mask/fakemoustache
 
+/datum/uplink_item/item/stealth_items/balaclava
+	name = "Balaclava"
+	item_cost = 1
+	path = /obj/item/clothing/mask/balaclava
+
 /datum/uplink_item/item/stealth_items/syndigaloshes
 	name = "No-Slip Shoes"
 	desc = "These shoes have a non-slip grip on them, so those pesky janitors can't ruin your operations!"
