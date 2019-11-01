@@ -18,7 +18,7 @@
 
 /datum/uplink_item/item/visible_weapons/ancient
 	name = "Replica Pistol"
-	desc = "Cheap replica of some earth handgun"
+	desc = "A cheap replica of an earth handgun. To reload, buy another."
 	item_cost = 16
 	path = /obj/item/weapon/gun/projectile/pistol/throwback
 	

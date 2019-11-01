@@ -13,7 +13,7 @@
 
 /datum/uplink_item/item/tools/ductape
 	name = "Duct Tape"
-	desc = "A roll of duct tape. changes \"HELP\" in to sexy \"mmm\"."
+	desc = "A roll of duct tape. changes \"HELP\" into sexy \"mmm\"."
 	item_cost = 8
 	path = /obj/item/weapon/tape_roll
 
