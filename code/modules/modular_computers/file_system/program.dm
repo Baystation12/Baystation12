@@ -3,6 +3,7 @@
 	filetype = "PRG"
 	filename = "UnknownProgram"						// File name. FILE NAME MUST BE UNIQUE IF YOU WANT THE PROGRAM TO BE DOWNLOADABLE FROM NTNET!
 	var/required_access = null						// List of required accesses to run/download the program.
+	var/required_access_one = null					// List of accesses to run/download the program; any will do. If required_access also set, both must be satisfied.
 	var/requires_access_to_run = 1					// Whether the program checks for required_access when run.
 	var/requires_access_to_download = 1				// Whether the program checks for required_access when downloading.
 	var/datum/nano_module/NM = null					// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
@@ -99,11 +100,6 @@
 /datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/access_to_check)
 	if(!requires_access_to_run)
 		return 1
-	// Defaults to required_access
-	if(!access_to_check)
-		access_to_check = required_access
-	if(!access_to_check) // No required_access, allow it.
-		return 1
 
 	// Admin override - allows operation of any computer as aghosted admin, as if you had any required access.
 	if(isghost(user) && check_rights(R_ADMIN, 0, user))
@@ -112,15 +108,34 @@
 	if(!istype(user))
 		return 0
 
+	if(!access_to_check && !required_access && !required_access_one) // No required_access, allow it.
+		return 1
+
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	if(!I)
 		if(loud)
 			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
 		return 0
 
-	if(access_to_check in I.access)
+	var/access_denied = 0
+	if(access_to_check && !(access_to_check in I.access))
+		access_denied = 1
+
+	if(required_access_one)
+		var/valid = 0
+		for(var/access in required_access_one)
+			if (access in I.access)
+				valid = 1
+				break
+		if(!valid)
+			access_denied = 1
+
+	if(required_access && !(required_access in I.access))
+		access_denied = 1
+
+	if(!access_denied)
 		return 1
-	else if(loud)
+	else if(loud && access_denied)
 		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
