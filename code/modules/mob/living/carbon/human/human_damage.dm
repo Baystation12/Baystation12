@@ -159,13 +159,12 @@
 	if(!need_breathe())
 		return
 	var/heal = amount < 0
-	amount = abs(amount*species.oxy_mod)
 	var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
 	if(breathe_organ)
 		if(heal)
-			breathe_organ.remove_oxygen_deprivation(amount)
+			breathe_organ.remove_oxygen_deprivation(abs(amount))
 		else
-			breathe_organ.add_oxygen_deprivation(amount)
+			breathe_organ.add_oxygen_deprivation(abs(amount*species.oxy_mod))
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/getToxLoss()
