@@ -406,6 +406,11 @@ var/global/datum/controller/occupations/job_master
 			//Equip job items.
 			job.setup_account(H)
 			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
+			if(job.lace_access && isnull(H.GetLace()))
+				H.create_stack(job.access)
+				var/obj/item/weapon/card/id/my_id = H.GetIdCard()
+				if(my_id) //If we're using lace access storage, null out our ID's accesses.
+					my_id.access = list()
 			job.apply_fingerprints(H)
 
 			if(H.char_rank && H.char_rank.accessory)

@@ -10,12 +10,12 @@
 	slot_flags = 0	//too unwieldy to carry on your back
 	one_hand_penalty = -1
 	burst = 6
-	max_shots = 360
-	burst_delay = 1.2
+	max_shots =200
+	burst_delay = 1.3
 	fire_delay = 5
 	charge_meter = 0
-	burst_accuracy = list(-3,-3,-2,-2,-1,-1) //Values might look off, but this offsets the increased accuracy from plasrifle projectiles.
-	dispersion = list(1.6, 1.4, 1.2, 0.8,0.8, 0.6)
+	burst_accuracy = list(-3,-3,-3,-2,-1,-1) //Values might look off, but this offsets the increased accuracy from plasrifle projectiles.
+	dispersion = list(2, 1.8, 1.5, 1.2,0.8, 0.8)
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 5
 

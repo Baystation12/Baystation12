@@ -14,9 +14,18 @@
 
 /atom/movable/proc/GetAccess()
 	var/obj/item/weapon/card/id/id = GetIdCard()
-	return id ? id.GetAccess() : list()
+	var/obj/item/organ/internal/stack/lace = GetLace()
+	var/list/access_combo = list()
+	if(id)
+		access_combo |= id.GetAccess()
+	if(lace)
+		access_combo |= lace.access
+	return access_combo
 
 /atom/movable/proc/GetIdCard()
+	return null
+
+/atom/movable/proc/GetLace()
 	return null
 
 /obj/proc/check_access(obj/item/I)
@@ -215,8 +224,11 @@
 		if(id)
 			return id
 
+/mob/living/carbon/human/GetLace()
+	return internal_organs_by_name["stack"]
+
 /mob/living/carbon/human/GetAccess()
-	. = list()
+	. = ..()
 	for(var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
 		if(I)

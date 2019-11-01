@@ -24,7 +24,7 @@
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
 	req_access = list(308)
-	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 5,/obj/item/weapon/gun/projectile/m739_lmg = 2
+	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 2
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/projectile/m41 = 1, /obj/item/weapon/storage/box/spnkr = 2,/obj/item/weapon/plastique = 2,/obj/item/weapon/armor_patch = 2)
 
 /obj/machinery/vending/armory/police
@@ -195,7 +195,7 @@
 	/obj/item/ammo_magazine/kv32 = 10,
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
-	/obj/item/ammo_magazine/lmg_30cal_box_ap = 5,
+	/obj/item/ammo_magazine/lmg_30cal_box_ap = 6,
 	/obj/item/ammo_magazine/m127_saphe =10,
 	/obj/item/ammo_magazine/m127_saphp =10,
 	/obj/item/weapon/storage/belt/marine_ammo = 4,

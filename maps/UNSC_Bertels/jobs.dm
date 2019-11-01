@@ -16,6 +16,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	lace_access = TRUE
 
 /datum/job/unscbertels_medical_crew
 	title = "Hospital Corpsman"
@@ -30,6 +31,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	lace_access = TRUE
 
 /datum/job/unscbertels_co
 	title = "Commanding Officer"
@@ -47,6 +49,7 @@
 	faction_whitelist = "UNSC"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	lace_access = TRUE
 
 /datum/job/unscbertels_xo
 	title = "Executive Officer"
@@ -62,6 +65,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	lace_access = TRUE
 
 /datum/job/unsc_ship_iwo
 	title = "Infantry Weapons Officer"
@@ -76,7 +80,7 @@
 	spawnpoint_override = "UNSC Base Spawns"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
-
+	lace_access = TRUE
 
 
 //UNSC Ship Marine Jobs
@@ -98,6 +102,7 @@
 	loadout_allowed = TRUE
 	account_allowed = 1
 	economic_modifier = 0.5
+	lace_access = TRUE
 
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
@@ -113,6 +118,7 @@
 	loadout_allowed = TRUE
 	account_allowed = 1
 	economic_modifier = 1
+	lace_access = TRUE
 
 //UNSC Ship ODST Jobs
 
@@ -139,6 +145,7 @@
 	loadout_allowed = TRUE
 	account_allowed = 1
 	economic_modifier = 1
+	lace_access = TRUE
 
 /datum/job/bertelsODSTO
 	title = "Orbital Drop Shock Trooper Officer"
@@ -160,3 +167,4 @@
 	loadout_allowed = TRUE
 	account_allowed = 1
 	economic_modifier = 1
+	lace_access = TRUE
