@@ -1,0 +1,4 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - tweak: "Fix races with low oxy_mod recovering slower from oxygen deprivation than races with high oxy_mod"
