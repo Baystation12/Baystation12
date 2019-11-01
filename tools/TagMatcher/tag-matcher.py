@@ -26,8 +26,8 @@ opt.add_argument('dir', help='The directory to scan for *.dm files with non-matc
 args = opt.parse_args()
 
 if(not path.isdir(args.dir)):
-    print('Not a directory')
-    sys.exit(1)
+	print('Not a directory')
+	sys.exit(1)
 
 # These tuples are expected to be ordered as:
 # A unique human readable name (henceforth referred to as tuple name), a regex pattern matching an opening tag, a regex pattern matching a closing tag
@@ -54,13 +54,13 @@ def get_tag_matches(line):
 
 # Support def that simply checks if a given dictionary in the format tag/list of unmatched lines has mismatch entries.
 def has_mismatch(match_list):
-	for tag, list_of_mismatched_lines in match_list.iteritems():
+	for tag, list_of_mismatched_lines in match_list.items():
 		if(len(list_of_mismatched_lines) > 0):
 			return 1
 	return 0
-	
+
 def arrange_mismatches(mismatches_by_tag, mismatch_line, mismatch_counts):
-	for tag, mismatch_count in mismatch_counts.iteritems():
+	for tag, mismatch_count in mismatch_counts.items():
 		stack_of_existing_mismatches = mismatches_by_tag[tag]
 		for i in range(0, abs(mismatch_count)):
 			if len(stack_of_existing_mismatches) == 0:
@@ -83,10 +83,10 @@ def arrange_mismatches(mismatches_by_tag, mismatch_line, mismatch_counts):
 
 # This section parses all *.dm files in the given directory, recursively.
 for root, subdirs, files in walk(args.dir):
-    for filename in files:
-        if filename.endswith('.dm'):
-            file_path = path.join(root, filename)
-            with open(file_path, 'r') as file:
+	for filename in files:
+		if filename.endswith('.dm'):
+			file_path = path.join(root, filename)
+			with open(file_path, 'r', encoding="latin-1") as file:
 				mismatches_by_file[file_path] = defaultdict(list)
 				for line_number, line in enumerate(file, 1):
 					# Then for each line in the file, conduct the tuple open/close matching.
@@ -97,10 +97,10 @@ for root, subdirs, files in walk(args.dir):
 # Loops over all matches and checks if there is a mismatch of tags.
 # If so, then and only then is the corresponding file path printed along with the number of unmatched open/close tags.
 total_mismatches = 0
-for file, mismatches_by_tag in mismatches_by_file.iteritems():
+for file, mismatches_by_tag in mismatches_by_file.items():
 	if has_mismatch(mismatches_by_tag):
 		print(file)
-		for tag, mismatch_list in mismatches_by_tag.iteritems():
+		for tag, mismatch_list in mismatches_by_tag.items():
 			# A positive number means an excess of opening tag, a negative number means an excess of closing tags.
 			total_mismatches += len(mismatch_list)
 			if len(mismatch_list) > 0:
@@ -111,10 +111,10 @@ for file, mismatches_by_tag in mismatches_by_file.iteritems():
 				for mismatch_line in sorted(set(mismatch_list)):
 					print('\t\tLine {0}'.format(abs(mismatch_line)))
 
-# Simply prints the total number of mismatches found and if so returns 1 to, for example, fail Travis builds.				
+# Simply prints the total number of mismatches found and if so returns 1 to, for example, fail Travis builds.
 if(total_mismatches == 0):
 	print('No mismatches found.')
-else:	
+else:
 	print('')
 	print('Total number of mismatches: {0}'.format(total_mismatches))
 	sys.exit(1)

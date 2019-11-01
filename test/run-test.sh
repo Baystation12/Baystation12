@@ -164,7 +164,6 @@ function find_code_deps {
     need_cmd grep
     need_cmd awk
     need_cmd md5sum
-    need_cmd python2
     need_cmd python3
     need_cmd pip
 }
@@ -209,10 +208,10 @@ function run_code_tests {
     run_test "code quality checks" "test/check-paths.sh"
     run_test "indentation check" "awk -f tools/indentation.awk **/*.dm"
     run_test "check changelog example unchanged" "md5sum -c - <<< '683a3e0d21b90581ae6e4c95052d461e *html/changelogs/example.yml'"
-    run_test "check tags" "python2 tools/TagMatcher/tag-matcher.py ."
+    run_test "check tags" "python3 tools/TagMatcher/tag-matcher.py ."
     run_test "check color hex" "python3 tools/ColorHexChecker/color-hex-checker.py ."
-    run_test "check punctuation" "python2 tools/PunctuationChecker/punctuation-checker.py ."
-    run_test "check icon state limit" "python2 tools/dmitool/check_icon_state_limit.py ."
+    run_test "check punctuation" "python3 tools/PunctuationChecker/punctuation-checker.py ."
+    run_test "check icon state limit" "python3 tools/dmitool/check_icon_state_limit.py ."
     run_test_ci "check changelog builds" "python3 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
