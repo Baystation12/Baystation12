@@ -135,7 +135,7 @@
 
 	if(!access_denied)
 		return 1
-	else if(loud && access_denied)
+	else if(loud)
 		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
