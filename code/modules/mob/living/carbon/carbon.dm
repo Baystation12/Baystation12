@@ -25,7 +25,7 @@
 	bloodstr.clear_reagents()
 	touching.clear_reagents()
 	var/datum/reagents/R = get_ingested_reagents()
-	if(istype(R)) 
+	if(istype(R))
 		R.clear_reagents()
 	set_nutrition(400)
 	set_hydration(400)
@@ -368,14 +368,17 @@
 	if(istype(AM, /mob/living/carbon) && prob(10))
 		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/slip(var/slipped_on,stun_duration=8)
+/mob/living/carbon/slip(slipped_on, stun_duration = 8)
+	var/area/A = get_area(src)
+	if(!A.has_gravity())
+		return FALSE
 	if(buckled)
-		return 0
+		return FALSE
 	stop_pulling()
-	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
-	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
+	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(Floor(stun_duration/2))
-	return 1
+	return TRUE
 
 /mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
 	if(effect in chem_effects)
