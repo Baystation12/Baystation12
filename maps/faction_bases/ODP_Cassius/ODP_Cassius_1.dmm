@@ -340,14 +340,15 @@
 "gB" = (/obj/machinery/light/colored/green,/turf/simulated/floor/reinforced,/area/faction_base/unsc/odp/interior/deck2/selfdestruct)
 "gC" = (/obj/machinery/light/colored/green{tag = "icon-green1 (WEST)"; icon_state = "green1"; dir = 8},/obj/payload,/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/reinforced,/area/faction_base/unsc/odp/interior/deck2/selfdestruct)
 "gD" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/smac)
-"gE" = (/obj/structure/closet/crate/bin,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
+"gE" = (/obj/machinery/vending/boozeomat,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
 "gF" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 23; tag = "icon-alarm0 (WEST)"},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
 "gG" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
 "gH" = (/obj/machinery/light/spot,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
-"gI" = (/obj/item/device/radio/intercom{dir = 1; icon_state = "intercom"; name = "intercom"; pixel_x = 0; pixel_y = -32; tag = "icon-intercom (NORTH)"},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
+"gI" = (/obj/item/device/radio/intercom{dir = 1; icon_state = "intercom"; name = "intercom"; pixel_x = 0; pixel_y = -32; tag = "icon-intercom (NORTH)"},/obj/structure/closet/crate/bin{anchored = 1},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
 "gJ" = (/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
 "gK" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/obj/machinery/light/spot,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/recroom)
 "gL" = (/obj/structure/closet/medical_wall/filled{pixel_y = -32},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/smac)
+"gM" = (/obj/structure/closet/crate/bin{anchored = 1},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck2/smac)
 
 (1,1,1) = {"
 dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
@@ -436,7 +437,7 @@ dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWdcbqcGbqbq
 dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWdkbqcGbqbqaWdlbqbqgjaWbYbYdmbYaCaCaXaLdobzbzbzbzbzbzcbfKbzdDbzdTfPcfcfcBfdcwczcXdrehfefWdxfWdxfWdxfWdxfWdxfWdxfWdUaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
 dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWaWaWaWbqbqbqbqbqbqbqbqdzaCaCaCaCaCaXaLfudXdBdCdCdBeGfuaLaLaLaLaLaMgncfcfcfdsdtdsdtdsdGdGdGdGdGdGdGdGdGdGdGdGdGdGeLaMfCghgwgxaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
 dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWdHdIgkbqbqdJbqbqdkdKcYdMdNaCdOaCcyaXaLdRbzbzbzbzbzbzbzdibzbzdhdigpcfcfcfgodudFdFfBfbgLcfdYdZeacfcfcfcfcfcfeacfcfcfgyghgzbmbmaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
-dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWebbqbqbqecaWbVbXaWaWaWedededededeeedaLdQfKbzbzfKbzdpdVfKbzbzbzbzgqcffOcffvcfcfcfaMeuaMaMaMaMaMaMaMbgaMfvaMaMaMcfcfgAgBghgwgCaMaMaMaMaMaMaMaMaMaMaMaMaMahahahahahahahahahahahahahahahahahahahahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
+dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWebbqbqbqecaWbVbXaWaWaWedededededeeedaLdQfKbzbzfKbzdpdVfKbzbzbzbzgqcffOcffvcfcfgMaMeuaMaMaMaMaMaMaMbgaMfvaMaMaMcfcfgAgBghgwgCaMaMaMaMaMaMaMaMaMaMaMaMaMahahahahahahahahahahahahahahahahahahahahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
 dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWeibqcjbqeiaWahahahahedggekelemeneoedaLaLaLegbzaLaLaLaLaLaLaLgrgvaMaMaMaMaMetcfetaMewevcdaMezezezeJeKfjaMaMaMaMcfgDaMaMaMaMaMaMaMaMaMaMaMaMahahahahahahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
 dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahaWaWcGaWcGaWaWahdwdwahedenenenenenexederesbzbzbzbzgmaLeDdSfQesbzbzgsfRcfeUaMeteyetaMfkflfmaMfofofofoewfoaMaMaMaMcfcfaMaMaMaMaMaMaMahahahahahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
 dwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwahbdeAbqaWbqeAaWahdwdwahedeneneBeneneCedfxfybzfzbzfzfAaLfSefbzbzbzbzcfcfcffTaMeHeteIaMfnfqfpfpfrfrfrfrfrfsaMaMaMaMcfgDaMaMaMaMahahahahdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdwdw
