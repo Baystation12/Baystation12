@@ -428,7 +428,7 @@
 "il" = (/obj/machinery/door/airlock/multi_tile/covenant/four{name = "Ghost Storage Bay"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portgarage)
 "im" = (/obj/machinery/door/airlock/multi_tile/covenant/four{name = "Supplies Storage Bay"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portgarage)
 "in" = (/obj/structure/lekgolo_tank,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/lekgolo)
-"io" = (/obj/payload/covenant{free_explode = 1},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
+"io" = (/obj/payload/covenant{anchored = 0; free_explode = 1},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "ip" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portholdingcell)
 "iq" = (/obj/machinery/light/covenant/north{dir = 4; icon_state = "covie_light1"; pixel_x = 16; pixel_y = 0; tag = "icon-covie_light1 (EAST)"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portholdingcell)
 "ir" = (/obj/machinery/light/covenant/north,/obj/machinery/portable_atmospherics/canister/oxygen{canister_color = "black"; icon_state = "black"; name = "\improper Covenant Canister: \[O2]"; start_pressure = 7559.63},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/emergencyo2)
