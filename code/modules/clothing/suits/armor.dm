@@ -12,8 +12,6 @@
 
 	armor_thickness = 20
 
-	armor_thickness_modifiers = list(BURN = 0.5)
-
 /obj/item/clothing/suit/armor/vest/old //just realized these had never been removed
 	name = "armor"
 	desc = "An armored vest that protects against some damage."
