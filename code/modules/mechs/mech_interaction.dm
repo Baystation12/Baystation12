@@ -353,6 +353,38 @@
 				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
 					to_fix.repair_burn_generic(thing, user)
 				return
+			else if(isCrowbar(thing))
+				if(!maintenance_protocols)
+					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
+					return
+				if(!body || !body.cell)
+					to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
+					return
+				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
+				if(!do_after(user, delay) || !maintenance_protocols || !body || !body.cell)
+					return
+
+				user.put_in_hands(body.cell)
+				to_chat(user, SPAN_NOTICE("You remove \the [body.cell] from \the [src]."))
+				playsound(user.loc, 'sound/items/Crowbar.ogg', 50, 1)
+				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using the \the [thing]."))
+				body.cell = null
+				return
+			else if(istype(thing, /obj/item/weapon/cell))
+				if(!maintenance_protocols)
+					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
+					return
+				if(!body || body.cell)
+					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
+					return
+				
+				if(user.unEquip(thing))
+					thing.forceMove(body)
+					body.cell = thing
+					to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
+					playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+					visible_message(SPAN_NOTICE("\The [user] installs \the [body.cell] into \the [src]."))
+				return
 	return ..()
 
 /mob/living/exosuit/attack_hand(var/mob/user)
