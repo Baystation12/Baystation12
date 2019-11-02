@@ -350,9 +350,9 @@
 
 /datum/species/diona/skills_from_age(age)
 	switch(age)
-		if(146 to 200) 	. = 16
-		if(100 to 200) 	. = 24
-		if(21 to 300)	. = 32
+		if(100 to 180) 	. = 16
+		if(181 to 250) 	. = 24
+		if(250 to 300)	. = 32
 		else			. = ..()
 
 // Dionaea spawned by hand or by joining will not have any
