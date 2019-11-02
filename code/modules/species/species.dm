@@ -788,7 +788,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		if(0 to 22) 	. = -4
 		if(23 to 30) 	. = 0
 		if(31 to 45)	. = 4
-		else			. = 8
+		if(46 to 100)	. = 8
+		if(101 to 200)	. = 16	//older species start here, humans end at 100
+		if(201 to 299)	. = 24
+		else			. = 32	//increases from 2 masters to 4 masters for ancient species
 
 /datum/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	return
