@@ -174,6 +174,8 @@
 		burn_fuel(amount)
 		if(M)
 			M.welding_eyecheck()//located in mob_helpers.dm
+			set_light(0.7, 2, 5, l_color = COLOR_LIGHT_CYAN)
+			addtimer(CALLBACK(src, /atom/proc/update_icon), 5)
 		return 1
 	else
 		if(M)
@@ -219,6 +221,9 @@
 		overlays += image('icons/obj/tools.dmi', "welder_[tank.icon_state]")
 	if(welding)
 		overlays += image('icons/obj/tools.dmi', "welder_on")
+		set_light(0.6, 0.5, 2.5, l_color =COLOR_PALE_ORANGE)
+	else
+		set_light(0)
 	item_state = welding ? "welder1" : "welder"
 	var/mob/M = loc
 	if(istype(M))
