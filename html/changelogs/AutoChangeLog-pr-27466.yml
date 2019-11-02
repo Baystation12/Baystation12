@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Exosuit cells can now be swapped without disassembling entire thing. Simply use a crowbar while mainteance protocols are active to take one out."
