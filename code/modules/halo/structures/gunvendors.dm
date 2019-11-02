@@ -24,7 +24,7 @@
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
 	req_access = list(308)
-	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 5,/obj/item/weapon/gun/projectile/m739_lmg = 2
+	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 2
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/projectile/m41 = 1, /obj/item/weapon/storage/box/spnkr = 2,/obj/item/weapon/plastique = 2,/obj/item/weapon/armor_patch = 2)
 
 /obj/machinery/vending/armory/police
@@ -180,12 +180,11 @@
 	req_access = list()
 	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
-	/obj/item/weapon/gun/projectile/heavysniper/handgonne = 1,
 	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 2,
 	/obj/item/weapon/gun/projectile/m392_dmr/innie = 2,
-	/obj/item/weapon/gun/projectile/shotgun/soe = 4,
+	/obj/item/weapon/gun/projectile/shotgun/soe = 2,
 	/obj/item/weapon/gun/projectile/m739_lmg/lmg30cal = 1,
 	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 8,
 	/obj/item/ammo_box/heavysniper = 3,
@@ -196,14 +195,14 @@
 	/obj/item/ammo_magazine/kv32 = 10,
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
-	/obj/item/ammo_magazine/lmg_30cal_box_ap = 5,
+	/obj/item/ammo_magazine/lmg_30cal_box_ap = 6,
 	/obj/item/ammo_magazine/m127_saphe =10,
 	/obj/item/ammo_magazine/m127_saphp =10,
 	/obj/item/weapon/storage/belt/marine_ammo = 4,
 	/obj/item/weapon/storage/belt/marine_medic = 4,
 	/obj/item/weapon/material/knife/combat_knife = 4,
 	/obj/item/weapon/material/machete = 2,
-	/obj/item/weapon/plastique = 9,
+	/obj/item/weapon/plastique = 12,
 	/obj/item/weapon/storage/firstaid/unsc = 6,
 	/obj/item/device/binoculars = 4,
 	/obj/item/weapon/handcuffs/ = 5,
@@ -211,8 +210,7 @@
 	/obj/item/device/landmine = 4,
 	/obj/item/weapon/grenade/frag/m9_hedp = 4,
 	/obj/item/weapon/armor_patch = 4,
-	/obj/item/drop_pod_beacon = 1
-	)
+	/obj/item/drop_pod_beacon = 1 )
 
 /obj/machinery/vending/armory/commandovend/armour
 	products = list(
@@ -226,7 +224,7 @@
 	/obj/item/weapon/storage/backpack/cmdo/cqc = 2,
 	/obj/item/clothing/head/helmet/urfc/squadleader = 1,
 	/obj/item/clothing/suit/armor/special/urfc/squadleader = 1,
-	/obj/item/clothing/suit/armor/special/urfc = 15,
+	/obj/item/clothing/suit/armor/special/urfc = 8,
 	/obj/item/clothing/under/urfc_jumpsuit = 8,
 	/obj/item/clothing/under/urfc_jumpsuit/tanktop = 8,
 	/obj/item/clothing/under/urfc_jumpsuit/jumpsuit = 8,

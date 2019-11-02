@@ -46,7 +46,7 @@
 
 	templates_available = list(/obj/effect/overmap/ship/covenant_light_cruiser = "maps/CRS_Unyielding_Transgression/CRS_Unyielding_Transgression")
 
-	available_ship_requests = newlist(/datum/npc_ship_request/shipyard_repair/cov)
+	available_ship_requests = newlist(/datum/npc_ship_request/shipyard_repair/insecure/cov)
 
 /obj/effect/overmap/ship/npc_ship/shipyard/cov/generate_ship_name()
 	name = "Shipyard"

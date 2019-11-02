@@ -126,11 +126,11 @@
 /decl/hierarchy/outfit/burnedsweetpotato_spartan
 	name = "BurnedSweetPotato - Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
-	suit = /obj/item/clothing/suit/armor/special/spartan/praetor
+	suit = /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	head = /obj/item/clothing/head/helmet/spartan/praetor
+	head = /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	l_pocket = /obj/item/ammo_magazine/m762_ap
@@ -150,10 +150,15 @@
 /obj/item/clothing/shoes/jiralhanae/boltersam
 	icon_state = "bolter_greaves"
 
+/obj/item/weapon/grav_hammer/boltersam
+	icon_state = "goremaul"
+	item_state_slots = list(slot_l_hand_str = "goremaul", slot_r_hand_str = "goremaul", slot_back_str = "back_maul")
+
 /decl/hierarchy/outfit/boltersam_jiralhanae
 	name = "boltersam - jiralhanae"
 	head = /obj/item/clothing/head/helmet/jiralhanae/boltersam
 	suit = /obj/item/clothing/suit/armor/jiralhanae/boltersam
+	back = /obj/item/weapon/grav_hammer/boltersam
 
 ////////eonoc\\\\\\\\
 
@@ -1158,25 +1163,25 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //Sangheili (MAJOR)
 
 /obj/item/clothing/head/helmet/sangheili/socks
-	name = "Sock's Sangheili Helmet"
+	name = "‘Nasan Clan - Major Sangheili Helmet"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_helm_obj"
 	item_state = "socks_helm"
 
 /obj/item/clothing/suit/armor/special/combatharness/socks
-	name = "Sock's Sangheili Combat Harness"
+	name = "‘Nasan Clan - Major Combat Harness"
 	icon_state = "socks_chest_obj"
 	item_state = "socks_chest"
 	totalshields = 125
 
 /obj/item/clothing/shoes/sangheili/socks
-	name = "Sock's Sanghelli Leg Armour"
+	name = "‘Nasan Clan - Major Leg Armour"
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_legs_obj"
 	item_state = "socks_legs"
 
 /obj/item/clothing/gloves/thick/sangheili/socks
-	name = "Sock's Sanghelli Combat Gauntlets"
+	name = "‘Nasan Clan - Major Gauntlets"
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_gloves_obj"
 	item_state = "socks_gloves"

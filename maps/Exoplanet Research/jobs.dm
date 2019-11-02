@@ -11,6 +11,7 @@
 	spawnpoint_override = "Research Facility Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	lace_access = TRUE
 
 /datum/job/researchdirector
 	title = "ONI Research Director"
@@ -24,7 +25,7 @@
 	spawnpoint_override = "Research Facility Director Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
-
+	lace_access = TRUE
 
 /datum/job/ONIGUARD
 	title = "ONI Security Guard"
@@ -38,6 +39,7 @@
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	lace_access = TRUE
 
 /datum/job/ONIGUARDS
 	title = "ONI Security Commander"
@@ -51,3 +53,4 @@
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	lace_access = TRUE
