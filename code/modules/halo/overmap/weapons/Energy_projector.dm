@@ -45,6 +45,19 @@
 	requires_ammo = 1
 	accelerator_overlay_icon_state = "lrport1"
 
+/obj/machinery/overmap_weapon_console/mac/orbital_bombard/energy_projector
+	name = "Energy Projector Orbital Cleansing Console"
+	desc = "Controls the firing of the Energy Projector on a lower power setting to allow for concentrated cleansing of manually designated targets."
+	icon = 'code/modules/halo/overmap/weapons/plasma_cannon.dmi'
+	icon_state = "covie_console"
+	fire_sound = 'code/modules/halo/sounds/pulse_turret_fire.ogg'
+	designator_spawn = /obj/item/weapon/laser_designator/covenant
+
+/obj/machinery/overmap_weapon_console/mac/orbital_bombard/energy_projector/bombard_impact(var/turf/bombard)
+	var/obj/item/projectile/overmap/beam/b = new (loc)
+	b.do_glassing_effect(bombard,3)
+	qdel(b)
+
 /obj/item/projectile/overmap/beam
 	name = "Super laser"
 	desc = "An incredibly hot beam of pure light"
@@ -57,23 +70,15 @@
 	tracer_delay_time = 2 SECONDS
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/eprojector_hit_sound.wav'
 
-/obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
-	if(initial(kill_count) - kill_count > 1)
-		console_fired_by.visible_message("<span class = 'notice'>[console_fired_by] emits a warning: \"Beam impact dissipated due to atmospheric interference. Orbit the object to perform glassing.\"</span>")
+/obj/item/projectile/overmap/beam/proc/do_glassing_effect(var/turf/to_glass,var/glass_radius = 20)
+	if(istype(to_glass,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
+		to_glass = GetBelow(to_glass)
+	if(isnull(to_glass))
 		return
-	hit.glassed += 1
-	for(var/mob/m in GLOB.mobs_in_sectors[hit])
-		to_chat(m,"<span class = 'danger'>A wave of heat washes over you as the atmosphere boils and the ground liquefies. [hit] is being glassed!</span>")
-	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
-	if(istype(turf_to_explode,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
-		var/prev_index = hit.map_z.Find(z_level)
-		if(hit.map_z.len > 1 && prev_index != 1)
-			z_level = hit.map_z[prev_index++]
-			turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 
-	for(var/turf/simulated/F in circlerange(turf_to_explode,25))
+	for(var/turf/simulated/F in circlerange(to_glass,glass_radius))
 		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
-			if(hit.map_z.Find(z_level) < hit.map_z.len)
+			if(!isnull(GetBelow(F)))
 				var/turf/under_loc = GetBelow(F)
 				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated))
 					F.ChangeTurf(/turf/simulated/open)
@@ -83,6 +88,15 @@
 			else
 				F.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
 
+/obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
+	if(initial(kill_count) - kill_count > 1)
+		console_fired_by.visible_message("<span class = 'notice'>[console_fired_by] emits a warning: \"Beam impact dissipated due to atmospheric interference. Orbit the object to perform glassing.\"</span>")
+		return
+	hit.glassed += 1
+	for(var/mob/m in GLOB.mobs_in_sectors[hit])
+		to_chat(m,"<span class = 'danger'>A wave of heat washes over you as the atmosphere boils and the ground liquefies. [hit] is being glassed!</span>")
+	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
+	do_glassing_effect(turf_to_explode)
 
 /obj/effect/projectile/projector_laser_proj
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'

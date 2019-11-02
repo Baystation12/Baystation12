@@ -179,8 +179,8 @@
 		if(istype(target,/obj/effect/overmap))
 			play_fire_sound(target)
 
-/obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = src.loc)
-	if(isnull(src.fire_sound) || !istype(overmap_object))
+/obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = loc)
+	if(isnull(fire_sound) || !istype(overmap_object))
 		return
 	if(overmap_object.map_z.len ==0)
 		return
@@ -204,12 +204,11 @@
 	name = "MAC Orbital Bombardment Console"
 	desc = "Controls a limited power setting for orbital bombardment"
 	icon_state = "mac_bombard_control"
+	var/designator_spawn = /obj/item/weapon/laser_designator
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/New()
 	. = ..()
-	var/obj/ld = new /obj/item/weapon/laser_designator (src)
-	ld.loc = loc
-	ld = new /obj/item/weapon/laser_designator (src)
+	var/obj/ld = new designator_spawn (loc)
 	ld.loc = loc
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attack_hand(var/mob/user)
@@ -241,6 +240,9 @@
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/fire_projectile()
 	return
 
+/obj/machinery/overmap_weapon_console/mac/orbital_bombard/proc/bombard_impact(var/atom/hit_turf)
+	explosion(hit_turf,4,6,7,20, adminlog = 0)
+
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/fire(var/atom/target,var/mob/user)
 	if(!do_power_check(user))
 		return
@@ -252,7 +254,7 @@
 		play_fire_sound()
 		var/obj/effect/overmap/targ_overmap = map_sectors["[target.z]"]
 		play_fire_sound(targ_overmap,target_turf)
-		explosion(target_turf,4,5,6,20, adminlog = 0)
+		bombard_impact(target_turf)
 		targ_overmap.adminwarn_attack()
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attackby(var/obj/item/weapon/W, var/mob/user)
