@@ -175,7 +175,7 @@
 
 // Procs/code after this point is used to convert the stationary pai item into a
 // mobile pai mob. This also includes handling some of the general shit that can occur
-// to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
+// to it. Really this deserves its own file.
 
 /mob/living/silicon/pai/verb/fold_out()
 	set category = "pAI Commands"

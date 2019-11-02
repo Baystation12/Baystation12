@@ -2,7 +2,7 @@
 	MATERIAL DATUMS
 	This data is used by various parts of the game for basic physical properties and behaviors
 	of the metals/materials used for constructing many objects. Each var is commented and should be pretty
-	self-explanatory but the various object types may have their own documentation. ~Z
+	self-explanatory but the various object types may have their own documentation.
 
 	PATHS THAT USE DATUMS
 		turf/simulated/wall

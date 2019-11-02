@@ -163,7 +163,7 @@
 	set desc = "Release an item from your magnetic gripper."
 	set category = "Silicon Commands"
 	if(!wrapped)
-		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
+		// Ensure fumbled items are accessible.
 		for(var/obj/item/thing in src.contents)
 			thing.dropInto(loc)
 		return
@@ -183,7 +183,7 @@
 
 /obj/item/weapon/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
 
-	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
+	// Ensure fumbled items are accessible.
 	if(!wrapped)
 		for(var/obj/item/thing in src.contents)
 			wrapped = thing
@@ -354,7 +354,7 @@
 				plastic.add_charge(2000)
 		else if(istype(W,/obj/item/weapon/light))
 			var/obj/item/weapon/light/L = W
-			if(L.status >= 2) //In before someone changes the inexplicably local defines. ~ Z
+			if(L.status >= 2)
 				if(metal)
 					metal.add_charge(250)
 				if(glass)

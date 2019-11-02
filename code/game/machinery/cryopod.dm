@@ -3,7 +3,6 @@
  * Stealing a lot of concepts/code from sleepers due to massive laziness.
  * The despawn tick will only fire if it's been more than time_till_despawned ticks
  * since time_entered, which is world.time when the occupant moves in.
- * ~ Zuhayr
  */
 
 
@@ -291,7 +290,7 @@
 	if (occupant && user.Adjacent(src))
 		occupant.examine(arglist(args))
 
-//Lifted from Unity stasis.dm and refactored. ~Zuhayr
+//Lifted from Unity stasis.dm and refactored.
 /obj/machinery/cryopod/Process()
 	if(occupant)
 		if(applies_stasis && iscarbon(occupant) && (world.time > time_entered + 20 SECONDS))

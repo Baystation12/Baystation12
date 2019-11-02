@@ -626,7 +626,7 @@
 			C.installed = 1
 			C.wrapped = W
 			C.install()
-			//This will mean that removing and replacing a power cell will repair the mount, but I don't care at this point. ~Z
+			// This means that removing and replacing a power cell will repair the mount.
 			C.brute_damage = 0
 			C.electronics_damage = 0
 
