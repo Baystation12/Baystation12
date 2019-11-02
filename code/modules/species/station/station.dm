@@ -348,6 +348,13 @@
 	else
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
 
+/datum/species/diona/skills_from_age(age)
+	switch(age)
+		if(100 to 180) 	. = 16
+		if(181 to 250) 	. = 24
+		if(251 to 300)	. = 32
+		else			. = ..()
+	
 // Dionaea spawned by hand or by joining will not have any
 // nymphs passed to them. This should take care of that.
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
