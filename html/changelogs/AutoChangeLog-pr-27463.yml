@@ -1,0 +1,5 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Welding tool now gives off light when active (it's a little weaker than a flashlight) and sparks blue when it's welding."
+  - tweak: "Lighters had their light color adjusted for the sake of ambience"
