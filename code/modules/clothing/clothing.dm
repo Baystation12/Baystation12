@@ -530,7 +530,7 @@ BLIND     // can't see anything
 
 	var/can_hold_knife
 	var/obj/item/holding
-	var/stepsound = null
+	var/stepsound = 'code/modules/halo/sounds/walk_sounds/generic_walk.ogg'
 
 	permeability_coefficient = 0.50
 	force = 2
