@@ -1,7 +1,7 @@
 
 var/global/datum/halo_frequencies/halo_frequencies = new()
 
-//These defines are undef'd in commsitems.dm
+//These defines are undef'd in telecomms_jammers.
 #define SHIPCOM_NAME "SHIPCOM"
 #define TEAMCOM_NAME "TEAMCOM"
 #define SQUADCOM_NAME "SQUADCOM"
