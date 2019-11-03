@@ -304,9 +304,23 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		for(var/obj/machinery/telecomms_jammers/tj in telecomms_list)
 			if(tj.jamming_active == 0)
 				continue
-			if(get_dist(tj,R) <= tj.jam_range)
+			if((!(connection.frequency in tj.ignore_freqs) || prob(tj.jam_ignore_malfunction_chance)) && get_dist(tj,R) <= tj.jam_range)
 				if(prob(tj.jam_chance))
-					compression += tj.jam_power
+					if(tj.jam_power < 0)
+						switch (tj.jam_power)
+							if(-1)
+								heard_gibberish += R
+								compression += 100
+							if(-2)
+								heard_garbled += R
+							else
+								log_admin("Telecomms jammer has a invalid negative value.")
+					else
+						if(prob(tj.jam_power))
+							heard_garbled += R
+						else
+							heard_gibberish += R
+							compression += 100
 					signal_jammed = 1
 				break
 
