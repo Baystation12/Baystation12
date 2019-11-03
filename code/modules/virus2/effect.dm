@@ -312,6 +312,7 @@
 	delay = 25 SECONDS
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
 		mob.emote("shiver")
+		mob.bodytemperature = min(mob.bodytemperature, 220)
 
 /datum/disease2/effect/hair
 	name = "Hair Loss"

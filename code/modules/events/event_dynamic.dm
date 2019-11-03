@@ -54,6 +54,9 @@ var/list/event_last_fired = list()
 		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 10
 		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 10
 
+	if(active_with_role["Surgical"] > 0)
+		possibleEvents[/datum/event/space_cold] = active_with_role["Surgical"] * 20
+
 	possibleEvents[/datum/event/prison_break] = active_with_role["Security"] * 50
 	if(active_with_role["Security"] > 0)
 		if(!sent_spiders_to_station)
@@ -95,6 +98,7 @@ var/list/event_last_fired = list()
 	var/list/active_with_role = list()
 	active_with_role["Engineer"] = 0
 	active_with_role["Medical"] = 0
+	active_with_role["Virology"] = 0
 	active_with_role["Security"] = 0
 	active_with_role["Scientist"] = 0
 	active_with_role["AI"] = 0
@@ -125,6 +129,9 @@ var/list/event_last_fired = list()
 
 		if(M.mind.assigned_role in SSjobs.titles_by_department(MED))
 			active_with_role["Medical"]++
+
+		if(M.mind.assigned_role == ("Physician" || "Chief Medical Officer"))
+			active_with_role["Virology"]++
 
 		if(M.mind.assigned_role in SSjobs.titles_by_department(SEC))
 			active_with_role["Security"]++

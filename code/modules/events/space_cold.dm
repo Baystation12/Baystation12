@@ -8,9 +8,30 @@ datum/event/space_cold/start()
 		return
 
 	var/datum/disease2/disease/sniffle = new
-	sniffle.max_stage = 3
-	sniffle.makerandom(1)
-	sniffle.spreadtype = "Airborne"
+	if(prob(60))
+		sniffle.max_stage = 3
+		sniffle.makerandom(VIRUS_MILD)
+		sniffle.spreadtype = "Airborne"
+	else
+		if(prob(75))
+			sniffle.max_stage = 3
+			sniffle.makerandom(VIRUS_COMMON)
+			sniffle.spreadtype = "Airborne"
+		else
+			if(prob(75))
+				sniffle.max_stage = 3
+				sniffle.makerandom(VIRUS_ENGINEERED)
+				if(prob(50))
+					sniffle.spreadtype = "Airborne"
+				else
+					sniffle.spreadtype = "Contact"
+			else
+				sniffle.max_stage = 4
+				sniffle.makerandom(VIRUS_ENGINEERED)
+				if(prob(25))
+					sniffle.spreadtype = "Airborne"
+				else
+					sniffle.spreadtype = "Contact"
 
 	var/victims = min(rand(1,3), candidates.len)
 	while(victims)
