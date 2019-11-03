@@ -58,13 +58,15 @@
 		slot_r_hand_str = "mining_helm",
 		)
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	light_overlay = "helmet_light_dual"
+	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 
 /obj/item/clothing/suit/space/void/mining
 	icon_state = "rig-mining"
@@ -75,12 +77,14 @@
 		slot_r_hand_str = "mining_voidsuit",
 	)
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
+	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/stack/flag,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
 /obj/item/clothing/suit/space/void/mining/prepared
