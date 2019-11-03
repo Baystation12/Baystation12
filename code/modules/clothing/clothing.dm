@@ -594,9 +594,9 @@ BLIND     // can't see anything
 	return ..()
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
-	if(isnull(stepsound))
+	if(isnull(stepsound) || !running)
 		return
-	playsound(src,stepsound, 15, 1)
+	playsound(src,stepsound, 15, 1,0,0,1)
 
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))
