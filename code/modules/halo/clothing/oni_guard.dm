@@ -74,6 +74,7 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 /obj/item/clothing/gloves/thick/oni_guard
 	desc = "Standard Issue ONI security gloves."
