@@ -353,7 +353,7 @@
 
 	stood_still = max(0,round((world.time - stood_still)/10) - 1)
 	if(stood_still)
-		acc_mod += min(max(2, accuracy), stood_still)
+		acc_mod += min(max(3, accuracy), stood_still)
 	else
 		acc_mod -= w_class - ITEM_SIZE_NORMAL
 		acc_mod -= bulk
