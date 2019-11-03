@@ -89,6 +89,7 @@
 	item_state = "magboots"
 	can_hold_knife = 1
 	force = 5
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 //Defines for armour subtypes//
 
