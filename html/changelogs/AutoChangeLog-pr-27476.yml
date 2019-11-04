@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Borgs can now alt-click doors to access the tile tab instead of shocking them. To shock a door, use harm intent when alt-clicking."

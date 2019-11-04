@@ -1,4 +1,0 @@
-author: "Higgin"
-delete-after: True
-changes: 
-  - tweak: "Harm-intent clicking will now remove shotshells directly from shotholders."
