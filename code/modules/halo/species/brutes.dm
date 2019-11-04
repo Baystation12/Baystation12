@@ -21,9 +21,10 @@
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.7 //receives 70% of brute damage
-	pain_mod = 0.25 //receives a quarter of pain damage
+	pain_mod = 0.25 //receives 25% pain damage.
 	burn_mod = 0.7  // receives 70% of burn damage
 	default_faction = "Covenant"
+	pixel_offset_x = -12
 
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
