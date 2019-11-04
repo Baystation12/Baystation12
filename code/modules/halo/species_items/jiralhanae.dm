@@ -91,6 +91,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	icon_state = "helm_covenant"
 	desc = "The standard issue helmets of Jiralhanae soldiers within the covenant."
 	armor = list(melee = 45,bullet = 10,laser = 30,energy = 5,bomb = 30,bio = 0,rad = 0)
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	name = "Jiralhanae Helm (Minor)"
