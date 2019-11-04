@@ -35,6 +35,7 @@
 /area/covenant_light_cruiser/plasmaprojector
 	name = "CRS Unyielding Transgression Plasma Projector"
 	icon_state = "green"
+	requires_power = 1
 
 /area/covenant_light_cruiser/emergencyo2
 	name = "CRS Unyielding Transgression Emergency O2 Storage"
