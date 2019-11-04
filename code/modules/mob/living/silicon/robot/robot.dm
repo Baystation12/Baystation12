@@ -25,6 +25,7 @@
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
+	var/list/original_languages = list()
 
 //Icon stuff
 

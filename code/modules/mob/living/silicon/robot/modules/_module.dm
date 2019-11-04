@@ -31,7 +31,6 @@
 	var/upgrade_locked =  FALSE
 
 	// Bookkeeping
-	var/list/original_languages = list()
 	var/list/added_networks = list()
 
 	// Gear lists/types.
@@ -80,7 +79,7 @@
 			var/obj/item/I = thing
 			I.forceMove(src)
 			created_equipment |= I
-		else 
+		else
 			log_debug("Invalid var type in [type] equipment creation - [thing]")
 	equipment = created_equipment
 
@@ -98,7 +97,7 @@
 				created_synths += new thing
 		else if(istype(thing, /datum/matter_synth))
 			created_synths |= thing
-		else 
+		else
 			log_debug("Invalid var type in [type] synth creation - [thing]")
 	synths = created_synths
 
@@ -165,20 +164,20 @@
 /obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
 	// Stores the languages as they were before receiving the module, and whether they could be synthezized.
 	for(var/datum/language/language_datum in R.languages)
-		original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
+		R.original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
 
-	for(var/language in languages)
-		R.add_language(language, languages[language])
+	for(var/language in R.languages)
+		R.add_language(language, R.languages[language])
 
 /obj/item/weapon/robot_module/proc/remove_languages(var/mob/living/silicon/robot/R)
 	// Clear all added languages, whether or not we originally had them.
-	for(var/language in languages)
+	for(var/language in R.languages)
 		R.remove_language(language)
 
 	// Then add back all the original languages, and the relevant synthezising ability
-	for(var/original_language in original_languages)
-		R.add_language(original_language, original_languages[original_language])
-	original_languages.Cut()
+	for(var/original_language in R.original_languages)
+		R.add_language(original_language, R.original_languages[original_language])
+	R.original_languages.Cut()
 
 /obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
 	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
