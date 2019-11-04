@@ -30,6 +30,16 @@
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
 
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/brutescream1.ogg',
+	'code/modules/halo/sounds/species_pain_screams/brutescream2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/brutescream3.ogg',
+	'code/modules/halo/sounds/species_pain_screams/brutescream4.ogg',
+	'code/modules/halo/sounds/species_pain_screams/brutescream5.ogg',
+	'code/modules/halo/sounds/species_pain_screams/brutescream6.ogg',
+	'code/modules/halo/sounds/species_pain_screams/brutescream7.ogg',
+	'code/modules/halo/sounds/species_pain_screams/brutescream8.ogg')
+
 /datum/species/brutes/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 
