@@ -141,7 +141,10 @@
 	return
 
 /obj/machinery/door/airlock/BorgAltClick() // Eletrifies doors. Forwards to AI code.
-	AICtrlAltClick()
+	if (usr.a_intent != I_HELP)
+		AICtrlAltClick()
+	else
+		..()
 
 /obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
 	AIAltClick()
