@@ -56,7 +56,7 @@
 		if(istype(mover, /obj/item/projectile))
 			return prob(30)
 		else
-			return (!density || mover.elevation != elevation)
+			return (!density || (mover && mover.elevation != elevation))
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return

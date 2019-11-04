@@ -51,7 +51,7 @@ obj/structure/windoor_assembly/Destroy()
 		return 1
 	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
 		if(air_group) return 0
-		return (!density || mover.elevation != elevation)
+		return (!density || (mover && mover.elevation != elevation))
 	else
 		return 1
 
