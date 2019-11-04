@@ -35,6 +35,9 @@
 	. = ..()
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 
+/obj/item/weapon/melee/energy/elite_sword/can_embed()
+	return FALSE
+
 /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe()
 	set name = "Enable weapon failsafe"
 	set category = "IC"
