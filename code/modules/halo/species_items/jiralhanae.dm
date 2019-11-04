@@ -89,11 +89,21 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant
 	icon_state = "helm_covenant"
+	desc = "The standard issue helmets of Jiralhanae soldiers within the covenant."
+	armor = list(melee = 45,bullet = 10,laser = 30,energy = 5,bomb = 30,bio = 0,rad = 0)
 
+/obj/item/clothing/head/helmet/jiralhanae/covenant/minor
+	name = "Jiralhanae Helm (Minor)"
+	icon_state = "helm_minor"
 
+/obj/item/clothing/head/helmet/jiralhanae/covenant/major
+	name = "Jiralhanae Helm (Major)"
+	icon_state = "helm_major"
 
-
-
+/obj/item/clothing/head/helmet/jiralhanae/covenant/captain
+	name = "Jiralhanae Helm (Captain)"
+	desc = "This modified helmet is of some significance to Jiralhanae clans. It is a mark of importance, however now diminished by the covenant hierarchy."
+	icon_state = "helm_captain"
 
 /* ARMOUR */
 
@@ -163,14 +173,24 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
 
 
-
 /obj/item/clothing/suit/armor/jiralhanae/covenant
 	icon_state = "armour_covenant"
+	desc = "The armour of Jiralhanae soldiers within the covenant."
+	armor = list(melee = 90, bullet = 50, laser = 45, energy = 45, bomb = 50, bio = 25, rad = 25)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
 
+/obj/item/clothing/suit/armor/jiralhanae/covenant/minor
+	name = "Jiralhanae Armor (Minor)"
+	icon_state = "armour_minor"
 
+/obj/item/clothing/suit/armor/jiralhanae/covenant/major
+	name = "Jiralhanae Armor (Major)"
+	icon_state = "armour_major"
 
-
-
+/obj/item/clothing/suit/armor/jiralhanae/covenant/captain
+	name = "Jiralhanae Armor (Captain)"
+	desc = "This modified armor used to be a mark of importance to a Jiralhanae clan. The Covenant hierarchy has diminished it's power."
+	icon_state = "armour_captain"
 
 /* SHOES */
 
@@ -187,7 +207,11 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	body_parts_covered = LEGS|FEET
 
 /obj/item/clothing/shoes/jiralhanae/covenant
+	name = "Jiralhanae Greaves"
+	desc = "The footwear of Jiralhanae soldiers within the covenant."
 	icon_state = "greaves_covenant"
+	item_flags = NOSLIP
+	armor = list(melee = 50, bullet = 40, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
 
 
 
