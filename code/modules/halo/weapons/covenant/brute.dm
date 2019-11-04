@@ -19,7 +19,7 @@
 
 	//less explosive power but more spikes
 	explosion_size = 0
-	num_fragments = 150
+	num_fragments = 250 //50 more than a high yield frag bomb
 
 /obj/item/weapon/grenade/frag/spike/can_embed()
 	return FALSE

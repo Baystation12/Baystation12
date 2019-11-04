@@ -25,6 +25,7 @@
 	burn_mod = 0.7  // receives 70% of burn damage
 	default_faction = "Covenant"
 	pixel_offset_x = -12
+	item_icon_offsets = list(5,4)
 
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
