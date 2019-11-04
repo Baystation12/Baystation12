@@ -1,4 +1,4 @@
-/obj/effect/overmap/sector/exoplanet/chlorine
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine
 	name = "chlorine exoplanet"
 	desc = "An exoplanet with a chlorine based ecosystem. Large quantities of liquid chlorine are present."
 	color = "#efff7c"
@@ -10,20 +10,20 @@
 	surface_color = "#a3b879"
 	water_color = COLOR_BOTTLE_GREEN
 
-/obj/effect/overmap/sector/exoplanet/chlorine/generate_habitability()
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_habitability()
 	return HABITABILITY_BAD
 
-/obj/effect/overmap/sector/exoplanet/chlorine/get_atmosphere_color()
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_atmosphere_color()
 	return "#e5f2bd"
 
-/obj/effect/overmap/sector/exoplanet/chlorine/generate_map()
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_map()
 	if(prob(50))
 		lightlevel = rand(7,10)/10 //It could be night.
 	else
 		lightlevel = 0.1
 	..()
 
-/obj/effect/overmap/sector/exoplanet/chlorine/generate_atmosphere()
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_atmosphere()
 	..()
 	if(atmosphere)
 		atmosphere.adjust_gas(GAS_CHLORINE, MOLES_O2STANDARD)

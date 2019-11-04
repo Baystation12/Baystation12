@@ -13,7 +13,7 @@
 		/datum/job/submap/unishi_researcher
 	)
 
-/obj/effect/overmap/ship/unishi
+/obj/effect/overmap/visitable/ship/unishi
 	name = "SRV Verne"
 	desc = "Sensor array detects unknown class medium size vessel. The vessel appears unarmed.\
 	A small amount of radiation has been detected at the aft of the ship"

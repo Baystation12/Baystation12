@@ -128,7 +128,7 @@
 /turf/simulated/mineral,
 /area/mine/explored)
 "aT" = (
-/obj/effect/overmap/sector/orb,
+/obj/effect/overmap/visitable/sector/orb,
 /turf/simulated/wall/alium,
 /area/mine/explored)
 "aU" = (

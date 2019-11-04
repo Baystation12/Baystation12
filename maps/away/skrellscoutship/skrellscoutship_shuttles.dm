@@ -8,7 +8,7 @@
 	req_access = list(access_skrellscoutship)
 	shuttle_tag = "Skrellian Shuttle"
 
-/obj/effect/overmap/ship/landable/skrellscoutship
+/obj/effect/overmap/visitable/ship/landable/skrellscoutship
 	name = "light skrellian vessel"
 	shuttle = "Skrellian Scout"
 	multiz = 1
@@ -23,11 +23,11 @@
 	)
 
 
-/obj/effect/overmap/ship/landable/skrellscoutship/New()
+/obj/effect/overmap/visitable/ship/landable/skrellscoutship/New()
 	name = "SSV [pick("Xilvuxix", "Zuuvixix", "Quizuu", "Vulzxixvuu","Quumzoox","Quuvuzxuu")]"
 	..()
 
-/obj/effect/overmap/ship/landable/skrellscoutshuttle
+/obj/effect/overmap/visitable/ship/landable/skrellscoutshuttle
 	name = "SSV-S"
 	shuttle = "Skrellian Shuttle"
 	fore_dir = WEST

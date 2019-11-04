@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(skybox)
 	if(!skybox_cache["[z]"])
 		skybox_cache["[z]"] = generate_skybox(z)
 		if(GLOB.using_map.use_overmap)
-			var/obj/effect/overmap/O = map_sectors["[z]"]
+			var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 			if(istype(O))
 				for(var/zlevel in O.map_z)
 					skybox_cache["[zlevel]"] = skybox_cache["[z]"]
@@ -44,11 +44,11 @@ SUBSYSTEM_DEF(skybox)
 	res.overlays += base
 
 	if(GLOB.using_map.use_overmap && use_overmap_details)
-		var/obj/effect/overmap/O = map_sectors["[z]"]
+		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 		if(istype(O))
 			var/image/overmap = image(skybox_icon)
 			overmap.overlays += O.generate_skybox()
-			for(var/obj/effect/overmap/other in O.loc)
+			for(var/obj/effect/overmap/visitable/other in O.loc)
 				if(other != O)
 					overmap.overlays += other.get_skybox_representation()
 			overmap.appearance_flags = RESET_COLOR

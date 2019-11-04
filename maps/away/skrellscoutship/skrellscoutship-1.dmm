@@ -642,7 +642,7 @@
 	icon_state = "computer";
 	dir = 4
 	},
-/obj/effect/overmap/ship/landable/skrellscoutshuttle,
+/obj/effect/overmap/visitable/ship/landable/skrellscoutshuttle,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutshuttle)
 "bM" = (

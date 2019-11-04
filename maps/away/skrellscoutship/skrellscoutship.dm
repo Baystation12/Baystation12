@@ -17,7 +17,7 @@
 		/area/ship/skrellscoutship/solars =            NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
-/obj/effect/overmap/sector/skrellscoutspace
+/obj/effect/overmap/visitable/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
 	in_space = 1

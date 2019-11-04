@@ -1921,7 +1921,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "fT" = (
-/obj/effect/overmap/sector/derelict,
+/obj/effect/overmap/visitable/sector/derelict,
 /turf/simulated/floor/airless,
 /area/constructionsite/solar)
 "fU" = (
@@ -2574,7 +2574,7 @@
 	pressure_setting = 2000;
 	sensor_tag = "d_air_sensor";
 	sensor_name = "Air Supply Tank";
-
+	
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4

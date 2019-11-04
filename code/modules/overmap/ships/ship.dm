@@ -9,7 +9,7 @@
 		{speed_var = SANITIZE_SPEED((speed_var + v_diff)/(1 + speed_var*v_diff/(max_speed ** 2)))}
 // Uses Lorentzian dynamics to avoid going too fast.
 
-/obj/effect/overmap/ship
+/obj/effect/overmap/visitable/ship
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
@@ -33,47 +33,47 @@
 	var/skill_needed = SKILL_ADEPT  //piloting skill needed to steer it without going in random dir
 	var/operator_skill
 
-/obj/effect/overmap/ship/Initialize()
+/obj/effect/overmap/visitable/ship/Initialize()
 	. = ..()
 	min_speed = round(min_speed, SHIP_MOVE_RESOLUTION)
 	max_speed = round(max_speed, SHIP_MOVE_RESOLUTION)
 	SSshuttle.ships += src
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/overmap/ship/Destroy()
+/obj/effect/overmap/visitable/ship/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
 	. = ..()
 
-/obj/effect/overmap/ship/relaymove(mob/user, direction, accel_limit)
+/obj/effect/overmap/visitable/ship/relaymove(mob/user, direction, accel_limit)
 	accelerate(direction, accel_limit)
 	operator_skill = user.get_skill_value(SKILL_PILOT)
 
-/obj/effect/overmap/ship/proc/is_still()
+/obj/effect/overmap/visitable/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
 
-/obj/effect/overmap/ship/get_scan_data(mob/user)
+/obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
 	if(!is_still())
 		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * 1000]"
 
 //Projected acceleration based on information from engines
-/obj/effect/overmap/ship/proc/get_acceleration()
+/obj/effect/overmap/visitable/ship/proc/get_acceleration()
 	return round(get_total_thrust()/get_vessel_mass(), SHIP_MOVE_RESOLUTION)
 
 //Does actual burn and returns the resulting acceleration
-/obj/effect/overmap/ship/proc/get_burn_acceleration()
+/obj/effect/overmap/visitable/ship/proc/get_burn_acceleration()
 	return round(burn() / get_vessel_mass(), SHIP_MOVE_RESOLUTION)
 
-/obj/effect/overmap/ship/proc/get_vessel_mass()
+/obj/effect/overmap/visitable/ship/proc/get_vessel_mass()
 	. = vessel_mass
-	for(var/obj/effect/overmap/ship/ship in src)
+	for(var/obj/effect/overmap/visitable/ship/ship in src)
 		. += ship.get_vessel_mass()
 
-/obj/effect/overmap/ship/proc/get_speed()
+/obj/effect/overmap/visitable/ship/proc/get_speed()
 	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)
 
-/obj/effect/overmap/ship/proc/get_heading()
+/obj/effect/overmap/visitable/ship/proc/get_heading()
 	var/res = 0
 	if(MOVING(speed[1]))
 		if(speed[1] > 0)
@@ -87,7 +87,7 @@
 			res |= SOUTH
 	return res
 
-/obj/effect/overmap/ship/proc/adjust_speed(n_x, n_y)
+/obj/effect/overmap/visitable/ship/proc/adjust_speed(n_x, n_y)
 	CHANGE_SPEED_BY(speed[1], n_x)
 	CHANGE_SPEED_BY(speed[2], n_y)
 	for(var/zz in map_z)
@@ -97,7 +97,7 @@
 			toggle_move_stars(zz, fore_dir)
 	update_icon()
 
-/obj/effect/overmap/ship/proc/get_brake_path()
+/obj/effect/overmap/visitable/ship/proc/get_brake_path()
 	if(!get_acceleration())
 		return INFINITY
 	if(is_still())
@@ -110,7 +110,7 @@
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns/burns_per_grid)
 
-/obj/effect/overmap/ship/proc/decelerate()
+/obj/effect/overmap/visitable/ship/proc/decelerate()
 	if(((speed[1]) || (speed[2])) && can_burn())
 		if (speed[1])
 			adjust_speed(-SIGN(speed[1]) * min(get_burn_acceleration(),abs(speed[1])), 0)
@@ -118,7 +118,7 @@
 			adjust_speed(0, -SIGN(speed[2]) * min(get_burn_acceleration(),abs(speed[2])))
 		last_burn = world.time
 
-/obj/effect/overmap/ship/proc/accelerate(direction, accel_limit)
+/obj/effect/overmap/visitable/ship/proc/accelerate(direction, accel_limit)
 	if(can_burn())
 		last_burn = world.time
 		var/acceleration = min(get_burn_acceleration(), accel_limit)
@@ -131,7 +131,7 @@
 		if(direction & SOUTH)
 			adjust_speed(0, -acceleration)
 
-/obj/effect/overmap/ship/Process()
+/obj/effect/overmap/visitable/ship/Process()
 	if(!halted && !is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
@@ -144,22 +144,22 @@
 			handle_wraparound()
 		update_icon()
 
-/obj/effect/overmap/ship/on_update_icon()
+/obj/effect/overmap/visitable/ship/on_update_icon()
 	if(!is_still())
 		icon_state = moving_state
 		dir = get_heading()
 	else
 		icon_state = initial(icon_state)
 
-/obj/effect/overmap/ship/proc/burn()
+/obj/effect/overmap/visitable/ship/proc/burn()
 	for(var/datum/ship_engine/E in engines)
 		. += E.burn()
 
-/obj/effect/overmap/ship/proc/get_total_thrust()
+/obj/effect/overmap/visitable/ship/proc/get_total_thrust()
 	for(var/datum/ship_engine/E in engines)
 		. += E.get_thrust()
 
-/obj/effect/overmap/ship/proc/can_burn()
+/obj/effect/overmap/visitable/ship/proc/can_burn()
 	if(halted)
 		return 0
 	if (world.time < last_burn + burn_delay)
@@ -168,14 +168,14 @@
 		. |= E.can_burn()
 
 //deciseconds to next step
-/obj/effect/overmap/ship/proc/ETA()
+/obj/effect/overmap/visitable/ship/proc/ETA()
 	. = INFINITY
 	for(var/i=1, i<=2, i++)
 		if(MOVING(speed[i]))
 			. = min(last_movement[i] - world.time + 1/abs(speed[i]), .)
 	. = max(.,0)
 
-/obj/effect/overmap/ship/proc/handle_wraparound()
+/obj/effect/overmap/visitable/ship/proc/handle_wraparound()
 	var/nx = x
 	var/ny = y
 	var/low_edge = 1
@@ -196,23 +196,23 @@
 	if(T)
 		forceMove(T)
 
-/obj/effect/overmap/ship/proc/halt()
+/obj/effect/overmap/visitable/ship/proc/halt()
 	adjust_speed(-speed[1], -speed[2])
 	halted = 1
 
-/obj/effect/overmap/ship/proc/unhalt()
+/obj/effect/overmap/visitable/ship/proc/unhalt()
 	if(!SSshuttle.overmap_halted)
 		halted = 0
 
-/obj/effect/overmap/ship/Bump(var/atom/A)
+/obj/effect/overmap/visitable/ship/Bump(var/atom/A)
 	if(istype(A,/turf/unsimulated/map/edge))
 		handle_wraparound()
 	..()
 
-/obj/effect/overmap/ship/proc/get_helm_skill()//delete this mover operator skill to overmap obj
+/obj/effect/overmap/visitable/ship/proc/get_helm_skill()//delete this mover operator skill to overmap obj
 	return operator_skill
 
-/obj/effect/overmap/ship/populate_sector_objects()
+/obj/effect/overmap/visitable/ship/populate_sector_objects()
 	..()
 	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
 		S.attempt_hook_up(src)
@@ -220,7 +220,7 @@
 		if(check_ownership(E.holder))
 			engines |= E
 
-/obj/effect/overmap/ship/proc/get_landed_info()
+/obj/effect/overmap/visitable/ship/proc/get_landed_info()
 	return "This ship cannot land."
 
 #undef MOVING

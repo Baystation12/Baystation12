@@ -4313,7 +4313,7 @@
 /turf/space,
 /area/slavers_base/maint)
 "kW" = (
-/obj/effect/overmap/sector/slavers_base,
+/obj/effect/overmap/visitable/sector/slavers_base,
 /turf/space,
 /area/space)
 "kX" = (

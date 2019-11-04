@@ -49,7 +49,7 @@
 	if(!CanInteract(usr, GLOB.conscious_state))
 		return
 
-	for(var/obj/effect/overmap/sector/exoplanet/E)
+	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
 			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)

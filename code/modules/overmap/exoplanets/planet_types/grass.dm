@@ -1,4 +1,4 @@
-/obj/effect/overmap/sector/exoplanet/grass
+/obj/effect/overmap/visitable/sector/exoplanet/grass
 	name = "lush exoplanet"
 	desc = "Planet with abundant flora and fauna."
 	color = "#538224"
@@ -7,21 +7,21 @@
 	plant_colors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 	map_generators = list(/datum/random_map/noise/exoplanet/grass)
 
-/obj/effect/overmap/sector/exoplanet/grass/generate_map()
+/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
 	if(prob(40))
 		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
 	..()
 
-/obj/effect/overmap/sector/exoplanet/grass/generate_atmosphere()
+/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
 	..()
 	if(atmosphere)
 		atmosphere.temperature = T20C + rand(10, 30)
 		atmosphere.update_values()
 
-/obj/effect/overmap/sector/exoplanet/grass/get_surface_color()
+/obj/effect/overmap/visitable/sector/exoplanet/grass/get_surface_color()
 	return grass_color
 
-/obj/effect/overmap/sector/exoplanet/grass/adapt_seed(var/datum/seed/S)
+/obj/effect/overmap/visitable/sector/exoplanet/grass/adapt_seed(var/datum/seed/S)
 	..()
 	var/carnivore_prob = rand(100)
 	if(carnivore_prob < 30)
@@ -77,7 +77,7 @@
 /turf/simulated/floor/exoplanet/grass/Initialize()
 	. = ..()
 	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E) && E.grass_color)
 			color = E.grass_color
 	if(!resources)

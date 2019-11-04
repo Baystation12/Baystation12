@@ -355,7 +355,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
 	},
-/obj/effect/overmap/ship/ascent_seedship,
+/obj/effect/overmap/visitable/ship/ascent_seedship,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
 "bl" = (
@@ -3666,7 +3666,7 @@
 /obj/machinery/computer/shuttle_control/explore/ascent{
 	dir = 1
 	},
-/obj/effect/overmap/ship/landable/ascent,
+/obj/effect/overmap/visitable/ship/landable/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "iD" = (
@@ -4529,7 +4529,7 @@
 /area/ship/ascent/fore_starboard_prow)
 "vF" = (
 /obj/machinery/computer/ship/engines/ascent,
-/obj/effect/overmap/ship/landable/ascent/two,
+/obj/effect/overmap/visitable/ship/landable/ascent/two,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_starboard)
 "vY" = (

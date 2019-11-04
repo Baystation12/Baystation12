@@ -125,7 +125,7 @@
 /area/icarus/vessel)
 "aB" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/overmap/sector/icarus,
+/obj/effect/overmap/visitable/sector/icarus,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aD" = (

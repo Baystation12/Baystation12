@@ -6415,7 +6415,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pz" = (
-/obj/effect/overmap/ship/errant_pisces,
+/obj/effect/overmap/visitable/ship/errant_pisces,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pA" = (

@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/obj/effect/overmap/ship/yacht,
+/obj/effect/overmap/visitable/ship/yacht,
 /turf/space,
 /area/space)
 "ac" = (

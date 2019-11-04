@@ -1128,7 +1128,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "cA" = (
-/obj/effect/overmap/ship/landable/guppy,
+/obj/effect/overmap/visitable/ship/landable/guppy,
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
@@ -2120,7 +2120,7 @@
 	dir = 4
 	},
 /obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle,
-/obj/effect/overmap/ship/landable/exploration_shuttle,
+/obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/airlock)
 "el" = (

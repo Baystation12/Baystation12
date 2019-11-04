@@ -589,7 +589,7 @@
 /turf/space,
 /area/space)
 "bp" = (
-/obj/effect/overmap/sector/lost_supply_base,
+/obj/effect/overmap/visitable/sector/lost_supply_base,
 /turf/space,
 /area/space)
 "bq" = (

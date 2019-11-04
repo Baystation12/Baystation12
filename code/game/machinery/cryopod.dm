@@ -221,9 +221,9 @@
 
 	var/list/possible_locations = list()
 	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/O = map_sectors["[z]"]
-		for(var/obj/effect/overmap/OO in range(O,2))
-			if(OO.in_space || istype(OO,/obj/effect/overmap/sector/exoplanet))
+		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
+		for(var/obj/effect/overmap/visitable/OO in range(O,2))
+			if(OO.in_space || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
 				possible_locations |= text2num(level)
 
 	var/newz = GLOB.using_map.get_empty_zlevel()

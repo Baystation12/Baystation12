@@ -1,4 +1,4 @@
-/obj/effect/overmap/sector/exoplanet/shrouded
+/obj/effect/overmap/visitable/sector/exoplanet/shrouded
 	name = "shrouded exoplanet"
 	desc = "An exoplanet shrouded in a perpetual storm of bizzare, light absorbing particles."
 	color = "#3e3960"
@@ -11,13 +11,13 @@
 	surface_color = "#3e3960"
 	water_color = "#2b2840"
 
-/obj/effect/overmap/sector/exoplanet/shrouded/generate_atmosphere()
+/obj/effect/overmap/visitable/sector/exoplanet/shrouded/generate_atmosphere()
 	..()
 	if(atmosphere)
 		atmosphere.temperature = T20C - rand(10, 20)
 		atmosphere.update_values()
 
-/obj/effect/overmap/sector/exoplanet/shrouded/get_atmosphere_color()
+/obj/effect/overmap/visitable/sector/exoplanet/shrouded/get_atmosphere_color()
 	return COLOR_BLACK
 
 /datum/random_map/noise/exoplanet/shrouded

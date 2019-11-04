@@ -110,7 +110,7 @@
 /turf/space,
 /area/space)
 "aq" = (
-/obj/effect/overmap/ship/bearcat,
+/obj/effect/overmap/visitable/ship/bearcat,
 /turf/space,
 /area/space)
 "ar" = (

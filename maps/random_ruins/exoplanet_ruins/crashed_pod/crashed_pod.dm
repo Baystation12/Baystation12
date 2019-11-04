@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	descriptor = "crashed survival pod"
 	crew_jobs = list(/datum/job/submap/pod)
 
-/datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/cell)
+/datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/visitable/cell)
 	cell.has_distress_beacon = name
 
 /datum/job/submap/pod

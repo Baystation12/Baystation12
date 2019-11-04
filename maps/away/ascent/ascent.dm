@@ -17,7 +17,7 @@
 	)
 
 // Overmap objects.
-/obj/effect/overmap/ship/ascent_seedship
+/obj/effect/overmap/visitable/ship/ascent_seedship
 	name = ASCENT_COLONY_SHIP_NAME
 	desc = "Wake signature indicates a small to medium sized vessel of unknown design."
 	vessel_mass = 6500

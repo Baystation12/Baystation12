@@ -51,7 +51,7 @@
 /turf/space,
 /area/space)
 "ak" = (
-/obj/effect/overmap/ship/bearcat,
+/obj/effect/overmap/visitable/ship/bearcat,
 /turf/space,
 /area/space)
 "ar" = (
