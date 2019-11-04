@@ -50,7 +50,7 @@
 	name = "M392 Designated Marksman Rifle"
 	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance. Has an inbuilt underbarrel flashlight.  Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-	icon_state = "M395"
+	icon_state = "M395-Loaded-Base"
 	item_state = "m392"
 	load_method = MAGAZINE
 	caliber = "a762dmr"
@@ -72,33 +72,19 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+	wielded_item_state = "m392-wielded"
+	attachment_slots = list("barrel","sight")
+	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/M395,/obj/item/weapon_attachment/sight/M395_scope)
 
 /obj/item/weapon/gun/projectile/m392_dmr/can_use_when_prone()
 	return 1
 
-/obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
-	set category = "Weapon"
-	set name = "Use Scope"
-	set popup_menu = 1
-
-	toggle_scope(usr, 1.35)
-
 /obj/item/weapon/gun/projectile/m392_dmr/update_icon()
 	if(ammo_magazine)
-		icon_state = "M395"
+		icon_state = "M395-Loaded-Base"
 	else
-		icon_state = "M395_unloaded"
+		icon_state = "M395_Unloaded-Base"
 	. = ..()
-
-/obj/item/weapon/gun/projectile/m392_dmr/verb/toggle_light()
-	set category = "Weapon"
-	set name = "Toggle Gun Light"
-	on = !on
-	if(on && activation_sound)
-		playsound(src.loc, activation_sound, 75, 1)
-		set_light(4)
-	else
-		set_light(0)
 
 /obj/item/weapon/gun/projectile/m392_dmr/innie
 	name = "Modified M392 DMR"

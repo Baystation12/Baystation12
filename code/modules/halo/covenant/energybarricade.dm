@@ -87,7 +87,7 @@
 		return ..()
 
 	//block movement from some directions if we are active
-	if(A && T && shield_health > 0 && !(A in climbing))
+	if(A && T && shield_health > 0 && !(A in climbing) && A.elevation == elevation)
 		var/turf/front_turf = get_step(src, dir)
 
 		//movement in front of the shield

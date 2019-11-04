@@ -131,9 +131,9 @@
 
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return !block_air_zones
-	if(istype(mover) && mover.checkpass(PASSGLASS))
-		return !opacity
-	return !density
+	if(istype(mover) && (mover.checkpass(PASSGLASS) || mover.elevation != elevation))
+		return (!opacity || (mover && mover.elevation != elevation))
+	return (!density)
 
 
 /obj/machinery/door/proc/bumpopen(mob/user as mob)
