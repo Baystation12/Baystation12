@@ -735,3 +735,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/can_use_when_prone()
 	return (w_class <= ITEM_SIZE_NORMAL)
+
+/obj/item/proc/can_embed()
+	return 1

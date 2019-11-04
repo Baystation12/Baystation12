@@ -44,10 +44,29 @@
 	name = "Covenant Jiralhanae Soldier"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant
+	l_ear = /obj/item/device/radio/headset/covenant
+	r_hand = /obj/item/weapon/grenade/frag/spike
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant
 
+/decl/hierarchy/outfit/jiralhanae/covenant/minor
+	name = "Covenant Jiralhanae Minor"
 
+	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
+	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/minor
+
+/decl/hierarchy/outfit/jiralhanae/covenant/major
+	name = "Covenant Jiralhanae Major"
+
+	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/major
+	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/major
+
+/decl/hierarchy/outfit/jiralhanae/covenant/captain
+	name = "Covenant Jiralhanae Captain"
+
+	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
+	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
+	back = /obj/item/clothing/jiralhanae_flag_random
 
 /* Ram Clan Jiralhanae */
 

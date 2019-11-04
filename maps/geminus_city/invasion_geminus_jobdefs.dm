@@ -32,7 +32,10 @@
 		/datum/job/covenant/kigyarminor,\
 		/datum/job/covenant/unggoy_minor,\
 		/datum/job/covenant/skirmmurmillo,\
-		/datum/job/covenant/skirmcommando)
+		/datum/job/covenant/skirmcommando,\
+		/datum/job/covenant/brute_minor,\
+		/datum/job/covenant/brute_major,\
+		/datum/job/covenant/brute_captain)
 
 	allowed_spawns = list(\
 		DEFAULT_SPAWNPOINT_ID,\
