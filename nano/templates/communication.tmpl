@@ -3,8 +3,8 @@
 
 		<h4>Command</h4>
 		<div class=itemGroup>
-			<div class=item>{{:helper.link('Make an announcement', null, {'action' : 'announce'}, data.isAI || !data.net_comms ? 'disabled' : null)}} </div>
-			<div class=item>{{:helper.link('Change alert level', null, {'action' : 'sw_menu', 'target' : 5}, data.isAI || !data.net_syscont || !data.net_comms ? 'disabled' : null)}} </div>
+			<div class=item>{{:helper.link('Make an announcement', null, {'action' : 'announce'}, data.issilicon || !data.net_comms ? 'disabled' : null)}} </div>
+			<div class=item>{{:helper.link('Change alert level', null, {'action' : 'sw_menu', 'target' : 5}, (data.issilicon && !data.isAI) || !data.net_syscont || !data.net_comms ? 'disabled' : null)}} </div>
 			<div class=item>{{:helper.link('Set status display', null, {'action' : 'sw_menu', 'target' : 4}, !data.net_syscont ? 'disabled' : null)}} </div>
 		</div>
 
@@ -12,19 +12,19 @@
 		<div class=itemGroup>
 			<div class=item>{{:helper.link('Message list', null, {'action' : 'sw_menu', 'target' : 2}, !data.net_comms ? 'disabled' : null)}} </div>
 			<div class=item>{{if data.emagged}}
-				{{:helper.link('Send an emergency message to [UNKNOWN]', null, {'action' : 'message', 'target' : 'emagged'}, data.isAI || !data.net_comms ? 'disabled' : null)}}
+				{{:helper.link('Send an emergency message to [UNKNOWN]', null, {'action' : 'message', 'target' : 'emagged'}, data.issilicon || !data.net_comms ? 'disabled' : null)}}
 			{{else}}
-				{{:helper.link('Send an emergency message to ' + data.boss_short, null, {'action' : 'message', 'target' : 'regular'}, data.isAI || !data.net_comms ? 'disabled' : null)}}
+				{{:helper.link('Send an emergency message to ' + data.boss_short, null, {'action' : 'message', 'target' : 'regular'}, data.issilicon || !data.net_comms ? 'disabled' : null)}}
 			{{/if}} </div>
 		</div>
 
 		<h4>Additional</h4>
 		<div class=itemGroup>
 			<div class="item">{{:helper.link('Unbolt saferoom doors', null, {'action' : 'unbolt_doors'})}}</div>
-			<div class="item">{{:helper.link('Bolt saferoom doors', null, {'action' : 'bolt_doors'})}}</div>		
+			<div class="item">{{:helper.link('Bolt saferoom doors', null, {'action' : 'bolt_doors'})}}</div>
 			{{for data.evac_options}}
 				<div class="item">
-					{{:helper.link(value.option_text, null, {'action' : 'evac', 'target' : value.option_target}, ((value.needs_syscontrol && !data.net_syscont) || (!value.silicon_allowed && data.isAI)) ? 'disabled' : null, 'redButton')}}
+					{{:helper.link(value.option_text, null, {'action' : 'evac', 'target' : value.option_target}, ((value.needs_syscontrol && !data.net_syscont) || (!value.silicon_allowed && data.issilicon)) ? 'disabled' : null, 'redButton')}}
 				</div>
 			{{empty}}
 				<div class=bad>No further options currently available.</div>
@@ -77,7 +77,7 @@
                 {{:helper.link(data.message_line2 ? data.message_line2 : '(none)', null, {'action' : 'setstatus', 'target' : 'line2'})}}
             </div>
         </div>
-        
+
         <div class="item">
             <div class="itemLabel">
                 <b>Alert:</b>
@@ -102,7 +102,7 @@
 				<div class=itemGroup>
 				{{for data.security_levels}}
 					<div class="item">
-						<div class=item>{{:helper.link(value.title, null, {'action' : 'setalert', 'target' : value.ref}, data.current_security_level_ref === value.ref || data.isAI ? 'disabled' : null)}} </div>
+						<div class=item>{{:helper.link(value.title, null, {'action' : 'setalert', 'target' : value.ref}, data.current_security_level_ref === value.ref || (data.issilicon && !data.isAI) ? 'disabled' : null)}} </div>
 					</div>
 				{{/for}}
 			{{/if}}
