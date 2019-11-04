@@ -118,6 +118,7 @@
 	edge = 1
 	sharp = 1
 	force = 40
+	is_heavy = 1
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 
@@ -205,7 +206,7 @@
 	item_state = "blank"
 	pump_sound = null
 	max_grenades = 6
-	one_hand_penalty = 4
+	one_hand_penalty = -1
 	fire_sound = 'code/modules/halo/sounds/bruteshotfire.ogg'
 	var/reload_sound = 'code/modules/halo/sounds/bruteshotreload.ogg'
 	var/reload_time = 30
