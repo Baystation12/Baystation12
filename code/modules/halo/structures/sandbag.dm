@@ -32,7 +32,7 @@
 		if(mover.checkpass(PASSTABLE))
 			return 1
 	if(get_dir(loc, target) == dir)
-		return !density
+		return (!density || (mover && mover.elevation != elevation))
 	else
 		return 1
 

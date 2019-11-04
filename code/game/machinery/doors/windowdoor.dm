@@ -96,11 +96,11 @@
 	return
 
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && (mover.checkpass(PASSGLASS) || mover.elevation != elevation))
 		return 1
 	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
 		if(air_group) return 0
-		return !density
+		return (!density || (mover && mover.elevation != elevation))
 	else
 		return 1
 
