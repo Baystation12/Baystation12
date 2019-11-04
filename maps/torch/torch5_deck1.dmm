@@ -17568,7 +17568,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "eRQ" = (
-/obj/machinery/computer/modular/preset/medical{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
