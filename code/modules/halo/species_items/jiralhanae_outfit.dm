@@ -66,6 +66,7 @@
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
+	back = /obj/item/clothing/jiralhanae_flag_random
 
 /* Ram Clan Jiralhanae */
 

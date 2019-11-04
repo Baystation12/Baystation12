@@ -251,5 +251,30 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 		slot_l_hand_str = "flag_blue_left",
 		slot_r_hand_str = "flag_blue_right" )
 
+/obj/item/clothing/jiralhanae_flag_random
+	name = "Jiralhanae Clan Flag"
+	desc = "A flag belonging to a nearly forgotten clan."
+	slot_flags = SLOT_BACK
+	force = 30
+	w_class = ITEM_SIZE_LARGE
+	species_restricted = list("Jiralhanae")
+	icon = JIRALHANAE_ICON_PATH_OBJ
+	icon_override = JIRALHANAE_ICON_PATH_MOB
+
+/obj/item/clothing/jiralhanae_flag_random/Initialize()
+	. = ..()
+	if(prob(50))
+		icon_state = "flag_blue"
+		item_state = "flag_back_blue"
+		item_state_slots = list(
+		slot_l_hand_str = "flag_blue_left",
+		slot_r_hand_str = "flag_blue_right" )
+	else
+		icon_state = "flag_red"
+		item_state = "flag_back_red"
+		item_state_slots = list(
+		slot_l_hand_str = "flag_red_left",
+		slot_r_hand_str = "flag_red_right" )
+
 #undef JIRALHANAE_ICON_PATH_MOB
 #undef JIRALHANAE_ICON_PATH_OBJ
