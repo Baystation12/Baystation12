@@ -64,6 +64,7 @@
 		"BR55 suppressor" = "BR55-Suppressor",
 		"BR55 scope" = "BR55-CarryHandle-Scope",
 		"BR55 cheekrest" = "BR55-Cheekrest",
+		"SOE underslung shotgun" = "BR-Shotgun",
 		"BR55 hand guard" = "BR55-Bottom",
 		"BR55 vertical grip" = "BR55-Grip",
 		"BR55 carry handle" = "BR55-CarryHandle")
@@ -72,6 +73,7 @@
 	"BR55 barrel attachment" = list(3,0),
 	"BR55 scope" = list(0,0),
 	"BR55 cheekrest" = list(0,0),
+	"SOE underslung shotgun" = list(0,0),
 	"BR55 hand guard" = list(0,0),
 	"BR55 vertical grip" = list(0,0),
 	"BR55 carry handle" = list(0,0)
@@ -81,7 +83,25 @@
 		"BR55 barrel attachment" = list(0,1,0),
 		"BR55 scope" = list(0,0,0),
 		"BR55 cheekrest" = list(0,0,0),
+		"SOE underslung shotgun" = list(0.5,0,0),
 		"BR55 hand guard" = list(0,0,0),
 		"BR55 vertical grip" = list(-0.75,0.5,0),
 		"BR55 carry handle" = list(0,0,0)
+		)
+
+/datum/attachment_profile/M395
+	weapon_name = "M392 Designated Marksman Rifle"
+	on_item_icon_states = list(\
+		"M395 barrel attachment" = "M395-Barrel",
+		"M395 suppressor" = "M395-Suppressor",
+		"M395 scope" = "M395-Scope")
+	weapon_pixel_offsets = list(\
+	"M395 suppressor" = list(4,0),
+	"M395 barrel attachment" = list(5,0),
+	"M395 scope" = list(0,0)
+	)
+	attribute_modifications = list(\
+		"M395 suppressor" = list(-0.5,0.5,0),
+		"M395 barrel attachment" = list(0,1,0),
+		"M395 scope" = list(0,0,0)
 		)
