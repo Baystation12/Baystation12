@@ -74,7 +74,7 @@
 	var/radiation_mod =  1                    // Radiation modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
-	var/pain_mod = 1						  //Traumatic Shock modifier
+	var/pain_mod = 1						  //GetHalLoss modifier
 	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
