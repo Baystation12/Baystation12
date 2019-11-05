@@ -31,7 +31,7 @@
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/jiralhanae/covenant/captain
 	access = list(240,250)
-	is_whitelisted = 1
+	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/brutes)
 
 /datum/job/covenant/brute_major
