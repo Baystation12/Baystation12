@@ -105,3 +105,20 @@
 		"M395 barrel attachment" = list(0,1,0),
 		"M395 scope" = list(0,0,0)
 		)
+
+/datum/attachment_profile/M395
+	weapon_name = "Modified M392 DMR"
+	on_item_icon_states = list(\
+		"M395 barrel attachment" = "M395-Barrel",
+		"M395 suppressor" = "M395-Suppressor",
+		"M395 scope" = "M395-Scope")
+	weapon_pixel_offsets = list(\
+	"M395 suppressor" = list(4,0),
+	"M395 barrel attachment" = list(5,0),
+	"M395 scope" = list(0,0)
+	)
+	attribute_modifications = list(\
+		"M395 suppressor" = list(-0.5,0.5,0),
+		"M395 barrel attachment" = list(0,1,0),
+		"M395 scope" = list(0,0,0)
+		)
