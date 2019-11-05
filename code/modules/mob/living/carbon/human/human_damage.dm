@@ -45,7 +45,7 @@
 	var/amount = 0
 	for(var/obj/item/organ/external/E in organs)
 		amount += E.get_pain()
-	return amount
+	return amount * species.pain_mod
 
 /mob/living/carbon/human/setHalLoss(var/amount)
 	adjustHalLoss(getHalLoss()-amount)
@@ -433,8 +433,6 @@ This function restores all organs.
 		traumatic_shock *= 0.75
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.5
-	if(species && species.pain_mod)
-		traumatic_shock *= species.pain_mod
 
 	return max(0,traumatic_shock)
 
