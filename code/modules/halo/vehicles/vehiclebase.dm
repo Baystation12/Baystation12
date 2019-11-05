@@ -375,7 +375,7 @@
 	if(!is_driver)
 		return
 	. = Move(new_loc,direction)
-	if(move_sound)
+	if(move_sound && world.time % 2 == 0)
 		playsound(loc,move_sound,75,0,4)
 	user.client.move_delay = world.time + vehicle_move_delay
 

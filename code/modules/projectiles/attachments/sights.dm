@@ -31,3 +31,9 @@
 	desc = "A scope specific to the BR55 that allows 2x magnification."
 	icon_state = "BR55-CarryHandle-Scope"
 	zoom_amount = 1.3
+
+/obj/item/weapon_attachment/sight/M395_scope
+	name = "M395 scope"
+	desc = "A scope specific to the BR55 that allows 2x magnification."
+	icon_state = "M395-Scope"
+	zoom_amount = 1.35

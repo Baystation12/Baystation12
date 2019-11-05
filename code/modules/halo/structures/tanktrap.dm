@@ -15,7 +15,7 @@
 			return 1
 		if(mover.throwing)
 			return 1
-	return !density
+	return (!density || (mover && mover.elevation != elevation))
 
 /obj/structure/tanktrap/Bumped(atom/movable/AM)
 	if(isliving(AM) && AM:a_intent == I_HELP)

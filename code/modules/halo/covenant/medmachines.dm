@@ -6,6 +6,9 @@
 /obj/machinery/organ_printer/flesh/covenant
 	icon = 'machines.dmi'
 	icon_state = "covenant_organ_printer"
+
+	stored_matter = 1000
+	max_stored_matter = 1000
 	/*
 	products = list(
 		BP_HEART   = list(/obj/item/organ/internal/heart,  25),

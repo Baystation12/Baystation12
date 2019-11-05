@@ -5,16 +5,24 @@
 
 /obj/item/weapon/grenade/frag/spike
 	name = "spike grenade"
-	desc = "This device embeds itself into soft targets and explodes into a hail of deadly shards."
+	desc = "This device embeds itself into soft targets and explodes into a hail of deadly shards. Works well as a melee weapon."
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 	icon_state = "spikegren0"
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	item_state = "blank"
 	item_state_slots = list(slot_l_hand_str = "spnade", slot_r_hand_str = "spnade")
 
+	force = 35
+
+	sharp = 1
+	edge = 1
+
 	//less explosive power but more spikes
 	explosion_size = 0
-	num_fragments = 150
+	num_fragments = 250 //50 more than a high yield frag bomb
+
+/obj/item/weapon/grenade/frag/spike/can_embed()
+	return FALSE
 
 /obj/item/weapon/grenade/frag/spike/activate(mob/user as mob)
 	. = ..()
@@ -55,6 +63,9 @@
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 
+/obj/item/weapon/gun/projectile/spiker/can_embed()
+	return FALSE
+
 /obj/item/ammo_magazine/spiker
 	name = "spiker magazine"
 	desc = "A 20 round magazine for the Jiralhanae spiker"
@@ -65,7 +76,7 @@
 	ammo_type = /obj/item/ammo_casing/m5
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	caliber = "spiker"
-	max_ammo = 20
+	max_ammo = 30
 
 /obj/item/ammo_casing/spiker
 	desc = "A spike round casing."
@@ -73,8 +84,18 @@
 	projectile_type = /obj/item/projectile/bullet/spiker
 
 /obj/item/projectile/bullet/spiker
+	name = "Spike"
 	damage = 18
 	accuracy = -3
+
+/obj/item/projectile/bullet/spiker/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
+	if(blocked >= 100 || !istype(L))
+		. = ..()
+		return
+	var/obj/shard = new /obj/item/weapon/material/shard/shrapnel
+	var/obj/item/organ/external/embed_organ = pick(L.organs)
+	shard.name = "Spike shrapnel"
+	embed_organ.embed(shard)
 
 #undef CASELESS
 
@@ -97,8 +118,12 @@
 	edge = 1
 	sharp = 1
 	force = 40
+	is_heavy = 1
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
+
+/obj/item/weapon/gun/projectile/mauler/can_embed()
+	return FALSE
 
 /obj/item/ammo_magazine/mauler
 	name = "mauler magazine"
@@ -181,13 +206,12 @@
 	item_state = "blank"
 	pump_sound = null
 	max_grenades = 6
-	one_hand_penalty = 4
+	one_hand_penalty = -1
 	fire_sound = 'code/modules/halo/sounds/bruteshotfire.ogg'
 	var/reload_sound = 'code/modules/halo/sounds/bruteshotreload.ogg'
 	var/reload_time = 30
-	force = 45
+	force = 50
 	edge = 1
-	sharp = 1
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
@@ -235,7 +259,7 @@
 	icon = 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 	icon_state = "bruteshot_belt"
 	var/fire_sound = null
-	det_time = 0
+	det_time = 50
 	arm_sound = null
 	var/amount = 12
 	var/max_amount = 12
@@ -252,7 +276,6 @@
 	to_chat(user, "<span class='info'>It has [amount] grenade[amount != 1 ? "s" : ""] remaining on the belt.</span>")
 
 /obj/item/weapon/grenade/brute_shot/detonate()
-	..()
 
 	explosion(get_turf(src), 0, 0, max(amount / 2, 2), max(amount / 2, 3), 0)
 
@@ -263,7 +286,7 @@
 		if(!M.anchored)
 			var/atom/throw_target = get_edge_target_turf(M, get_dir(src, get_step_away(M, src)))
 			M.throw_at(throw_target, 1, 4, src)
-
+	. = ..()
 	qdel(src)
 
 /obj/item/weapon/grenade/brute_shot/proc/modify_amount(var/transferred, var/delete_if_empty = 1)
