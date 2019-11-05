@@ -138,6 +138,37 @@
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
+////////bobatnight\\\\\\\
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/bobatnight
+	name = "Sal's ODST Helmet"
+
+	item_state = "bobatnight-helmet_worn"
+	icon_state = "bobatnight-helmet_obj"
+	item_state_novisr = "bobatnight-helmet_worn"
+	icon_state_novisr = "bobatnight-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/bobatnight
+	name = "Sal's ODST Armour"
+
+	icon_state = "bobatnight-armor_obj"
+	item_state = "bobatnight-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/bobatnight
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Sal's ODST Backpack"
+	item_state = "bobatnight-backpack_worn"
+	icon_state = "bobatnight-backpack_obj"
+
+/decl/hierarchy/outfit/bobatnight_odst
+	name = "bobatnight - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/bobatnight
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/bobatnight
+	back = /obj/item/weapon/storage/backpack/odst/bobatnight
+
 ////////Boltersam\\\\\\\\
 
 //JIRALHANAE
