@@ -15,16 +15,16 @@ var/global/ntnet_card_uid = 1
 	var/proxy_id     // If set, uses the value to funnel connections through another network card.
 	malfunction_probability = 1
 
-/obj/item/weapon/stock_parts/computer/network_card/diagnostics(var/mob/user)
-	..()
-	to_chat(user, "NIX Unique ID: [identification_id]")
-	to_chat(user, "NIX User Tag: [identification_string]")
-	to_chat(user, "Supported protocols:")
-	to_chat(user, "511.m SFS (Subspace) - Standard Frequency Spread")
+/obj/item/weapon/stock_parts/computer/network_card/diagnostics()
+	. = ..()
+	. += "NIX Unique ID: [identification_id]"
+	. += "NIX User Tag: [identification_string]"
+	. += "Supported protocols:"
+	. += "511.m SFS (Subspace) - Standard Frequency Spread"
 	if(long_range)
-		to_chat(user, "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth")
+		. += "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth"
 	if(ethernet)
-		to_chat(user, "OpenEth (Physical Connection) - Physical network connection port")
+		. += "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/weapon/stock_parts/computer/network_card/New(var/l)
 	..(l)
@@ -105,7 +105,7 @@ var/global/ntnet_card_uid = 1
 		var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
 		if(network_card)
 			. = min(., network_card.get_signal(specific_action, routed_through))
-		
+
 /obj/item/weapon/stock_parts/computer/network_card/on_disable()
 	ntnet_global.unregister(identification_id)
 

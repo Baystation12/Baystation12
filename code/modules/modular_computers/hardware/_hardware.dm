@@ -19,7 +19,7 @@
 	// Multitool. Runs diagnostics
 	if(isMultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
-		diagnostics(user)
+		to_chat(user, jointext(diagnostics(), "\n"))
 		to_chat(user, "******************************")
 		return 1
 	// Nanopaste. Repair all damage if present for a single unit.
@@ -45,8 +45,8 @@
 
 
 // Called on multitool click, prints diagnostic information to the user.
-/obj/item/weapon/stock_parts/computer/proc/diagnostics(var/mob/user)
-	to_chat(user, "Hardware Integrity Test... (Corruption: [damage]/[max_damage]) [damage > damage_failure ? "FAIL" : damage > damage_malfunction ? "WARN" : "PASS"]")
+/obj/item/weapon/stock_parts/computer/proc/diagnostics()
+	return list("Hardware Integrity Test... (Corruption: [damage]/[max_damage]) [damage > damage_failure ? "FAIL" : damage > damage_malfunction ? "WARN" : "PASS"]")
 
 /obj/item/weapon/stock_parts/computer/Initialize()
 	. = ..()
