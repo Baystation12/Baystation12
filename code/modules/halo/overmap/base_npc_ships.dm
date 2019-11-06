@@ -194,8 +194,8 @@
 		else
 			walk(src,get_dir(src,target_loc),move_delay)
 			dir = get_dir(src,target_loc)
-			is_still() //A way to ensure umbilicals break when we move.
-			if(our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != null)
+			break_umbilicals()
+			if(our_fleet && our_fleet.leader_ship != src)
 				pick_target_loc()
 	else
 		if(is_player_controlled())

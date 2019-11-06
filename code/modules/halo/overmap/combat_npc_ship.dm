@@ -92,10 +92,11 @@
 		//pick one at random
 		target = pick(targets)
 		radio_message( pick(messages_target_found) + " [target]. ([target.x],[target.y])")
+		target_loc = null
 
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
-		return
+		return ..()
 	if(is_player_controlled())
 		return ..()
 
