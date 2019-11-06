@@ -73,7 +73,11 @@
 	hardhats["blue hardhat"] = /obj/item/clothing/head/hardhat/dblue
 	hardhats["orange hardhat"] = /obj/item/clothing/head/hardhat/orange
 	hardhats["red hardhat"] = /obj/item/clothing/head/hardhat/red
-	hardhats["yellow hardhat"] = /obj/item/clothing/head/hardhat
+	hardhats["light damage control helmet"] = /obj/item/clothing/head/hardhat/EMS/DC_light
+	hardhats["Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB
+	hardhats["red ancient Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient
+	hardhats["yellow ancient Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/yellow
+	hardhats["white ancient Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/white
 	gear_tweaks += new/datum/gear_tweak/path(hardhats)
 
 /datum/gear/head/formalhat
