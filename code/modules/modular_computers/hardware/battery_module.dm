@@ -61,9 +61,9 @@
 	battery = new/obj/item/weapon/cell/infinite(src)
 
 
-/obj/item/weapon/stock_parts/computer/battery_module/diagnostics(var/mob/user)
-	..()
-	to_chat(user, "Internal battery charge: [battery.charge]/[battery.maxcharge] CU")
+/obj/item/weapon/stock_parts/computer/battery_module/diagnostics()
+	. = ..()
+	. += "Internal battery charge: [battery.charge]/[battery.maxcharge] CU"
 
 /obj/item/weapon/stock_parts/computer/battery_module/Initialize()
 	. = ..()

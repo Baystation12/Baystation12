@@ -104,8 +104,9 @@ Subtypes
 	var/obj/item/weapon/stock_parts/computer/ch = terminal.computer.find_hardware_by_name(text)
 	if(!ch)
 		return "hwinfo: No such hardware found."
-	ch.diagnostics(user)
-	return "Running diagnostic protocols..."	
+	. = list("Running diagnostic protocols...")
+	. += ch.diagnostics()
+	return
 
 // Sysadmin
 /datum/terminal_command/relays

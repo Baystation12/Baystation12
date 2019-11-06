@@ -10,9 +10,9 @@
 	var/max_paper = 50
 	var/last_print
 
-/obj/item/weapon/stock_parts/computer/nano_printer/diagnostics(var/mob/user)
-	..()
-	to_chat(user, "Paper buffer level: [stored_paper]/[max_paper]")
+/obj/item/weapon/stock_parts/computer/nano_printer/diagnostics()
+	. = ..()
+	. += "Paper buffer level: [stored_paper]/[max_paper]"
 
 /obj/item/weapon/stock_parts/computer/nano_printer/proc/print_text(var/text_to_print, var/paper_title = null, var/paper_type = /obj/item/weapon/paper, var/list/md = null)
 	if(printer_ready())

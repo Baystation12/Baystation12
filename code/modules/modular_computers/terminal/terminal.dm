@@ -54,6 +54,7 @@
 /datum/terminal/proc/update_content()
 	var/list/content = history.Copy()
 	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>> <input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
+	content += "<i>type `man` for a list of available commands.</i>"
 	panel.set_content(jointext(content, "<br>"))
 
 /datum/terminal/Topic(href, href_list)
