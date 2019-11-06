@@ -39,7 +39,8 @@
 		/obj/item/weapon/crowbar,
 		/obj/item/weapon/wirecutters,
 		/obj/item/device/multitool,
-		/obj/item/bioreactor
+		/obj/item/bioreactor,
+		/obj/item/weapon/inflatable_dispenser/robot
 	)
 
 	emag = /obj/item/weapon/melee/energy/machete
