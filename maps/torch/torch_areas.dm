@@ -1180,7 +1180,7 @@
 // Command
 
 /area/bridge
-	name = "\improper Bridge"
+	name = "\improper SEV Torch Bridge"
 	icon_state = "bridge"
 	req_access = list(access_bridge)
 
