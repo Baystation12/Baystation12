@@ -32,6 +32,8 @@
 	icon = 'code/modules/halo/overmap/freighter.dmi'
 	icon_state = "ship"
 
+	move_delay = 2
+
 	var/list/ship_name_list = ALL_CIVILIANS_SHIPNAMES
 	var/list/icons_pickfrom_list = ICON_FILES_PICKFROM
 
@@ -192,7 +194,7 @@
 		if(loc == target_loc)
 			pick_target_loc()
 		else
-			walk(src,get_dir(src,target_loc),move_delay)
+			walk_to(src,target_loc,0,move_delay)
 			dir = get_dir(src,target_loc)
 			break_umbilicals()
 			if(our_fleet && our_fleet.leader_ship != src)
