@@ -28,7 +28,6 @@
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/fifthdeck/aftstarboard = NO_SCRUBBER,
 		/area/maintenance/waterstore = 0,
-		/area/ninja_dojo = NO_SCRUBBER |NO_VENT | NO_APC,
 		/area/shield = NO_SCRUBBER|NO_VENT,
 		/area/shuttle = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/merchant = NO_SCRUBBER|NO_APC,
@@ -40,7 +39,6 @@
 		/area/shuttle/escape_pod9/station = NO_SCRUBBER|NO_APC,
 		/area/shuttle/escape_pod10/station = NO_SCRUBBER|NO_APC,
 		/area/shuttle/escape_pod11/station = NO_SCRUBBER|NO_APC,
-		/area/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/security/oldopscheck = NO_APC,
 		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/storage = NO_SCRUBBER|NO_VENT,
@@ -50,7 +48,6 @@
 		/area/storage/tech = 0,
 		/area/storage/tools = 0,
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/thruster = NO_SCRUBBER,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/turret_protected/ai = NO_SCRUBBER|NO_VENT,
@@ -64,7 +61,6 @@
 		/area/vacant/infirmary = NO_SCRUBBER|NO_VENT,
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/vacant/mess = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(

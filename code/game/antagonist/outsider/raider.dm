@@ -19,6 +19,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	id_type = /obj/item/weapon/card/id/syndicate
 
 	faction = "pirate"
+	base_to_load = /datum/map_template/ruin/antag_spawn/heist
 
 	var/list/raider_uniforms = list(
 		/obj/item/clothing/under/soviet,
@@ -141,7 +142,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		return 0
 
 	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || get_area(player.current) != locate(/area/skipjack_station/start))
+		if(!player.current || get_area(player.current) != locate(/area/map_template/skipjack_station/start))
 			return 0
 	return 1
 
