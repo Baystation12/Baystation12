@@ -5,6 +5,7 @@
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "PlasmaRepeater"
 	item_state = "plasmarifle"//Need an inhand sprite. Plasrifle used as placeholder.
+	w_class = ITEM_SIZE_HUGE
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	projectile_type = /obj/item/projectile/covenant/plasmarifle
 	slot_flags = 0	//too unwieldy to carry on your back
