@@ -8,10 +8,10 @@
 )
 #define ON_DEATH_MESSAGES list(\
 "Do you feel like a hero yet?","Oof-",\
-"You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
+"You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required.","Automated Alert: CAPTAIN OVERRIDE: I think we just failed the vibe check."\
 )
 #define ALL_CIVILIANS_SHIPNAMES list(\
-"Pete's Cube","The Nomad","The Alexander","Free Range","Heavenly Punisher","Sky Ruler","Bare Necessities","Arizona Killer","Iron Horse","Linebacker","Last Light","Hopes Eclipse","Fleeting Dawn","Titans Might","Despacito","Skippy","No True Scotsman","Blade Of Mars","Targeting Solution","Wooden Cat","The Cerberus","Message of Peace","Persian Persuader","Beowulf","Trojan Horse","Jade Dragon","Danger Zone","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home","Mileage May Vary","Pimp Hand"\
+"Pete's Cube","The Nomad","The Alexander","Free Range","Heavenly Punisher","Sky Ruler","Bare Necessities","Arizona Killer","Iron Horse","Linebacker","Last Light","Hopes Eclipse","Fleeting Dawn","Titans Might","Despacito","Skippy","No True Scotsman","Blade Of Mars","Targeting Solution","Wooden Cat","The Cerberus","Message of Peace","Persian Persuader","Beowulf","Trojan Horse","Jade Dragon","Danger Zone","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home","Mileage May Vary","Pimp Hand","Vibe Check"\
 )
 
 #define STOP_WAIT_TIME 5 MINUTES
@@ -24,7 +24,7 @@
 #define LIGHTRANGE_LIKELY_UNUSED 99
 
 #define FLEET_STICKBY_RANGE 2 //The max range a fleet-bound ship will stay from the fleet leader.
-#define NPC_SHIP_TARGET_TOLERANCE 3 //At this range, the ship will start braking instead of accelerating.
+#define NPC_SHIP_TARGET_TOLERANCE 2 //At this range, the ship will start braking instead of accelerating.
 
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
@@ -198,7 +198,7 @@
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
 			return ..()
-		if(is_still())
+		if(!target_loc || is_still())
 			pick_target_loc()
 		if(get_dist(src,target_loc) < NPC_SHIP_TARGET_TOLERANCE)
 			decelerate() //NPC ships process less often so we let them cheat with multiple calls at the same time.

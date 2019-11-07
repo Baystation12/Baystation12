@@ -108,10 +108,10 @@
 			//open fire
 			fire_at_target()
 
-			if(!target_loc || src.loc == target_loc)
+			if(!target_loc || is_still())
 				//Let's emulate a "circling" behaviour.
 				var/list/target_locs = list()
-				for(var/turf/unsimulated/map/m in view(view(target_range_from,target)-view(target_range_from-1,target)))
+				for(var/turf/unsimulated/map/m in view(target_range_from,target))
 					if(istype(m,/turf/unsimulated/map/edge))
 						continue
 					target_locs += m
@@ -153,6 +153,7 @@
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/corvette.dmi','code/modules/halo/icons/overmap/Cruiser.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2 SECONDS, /obj/item/projectile/overmap/mac/npc = 15 SECONDS)
 
 //INNIE//
@@ -220,7 +221,7 @@
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov,/datum/npc_ship_request/control_fleet/cov,/datum/npc_ship_request/add_to_fleet/cov,/datum/npc_ship_request/give_control/cov)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed
-	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.3 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)
+	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 25 SECONDS)
@@ -233,7 +234,7 @@
 	faction = "Flood"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake_flood)
-	projectiles_to_fire = list(/obj/item/projectile/overmap/flood_pod = 1 SECOND)
+	projectiles_to_fire = list(/obj/item/projectile/overmap/flood_pod = 5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood/load_mapfile()
 	return
