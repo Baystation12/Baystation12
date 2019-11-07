@@ -24,6 +24,7 @@
 #define LIGHTRANGE_LIKELY_UNUSED 99
 
 #define FLEET_STICKBY_RANGE 2 //The max range a fleet-bound ship will stay from the fleet leader.
+#define NPC_SHIP_TARGET_TOLERANCE 3 //At this range, the ship will start braking instead of accelerating.
 
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
@@ -42,7 +43,6 @@
 
 	var/hull = 1500 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
-	var/move_delay = 6 SECONDS //The amount of ticks to delay for when auto-moving across the system map.
 	var/turf/target_loc
 
 	var/unload_at = 0
@@ -154,6 +154,7 @@
 	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
+	walk(src,0)
 	if(our_fleet && our_fleet.leader_ship != src)
 		target_loc = pick(range(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
 		return
@@ -168,8 +169,16 @@
 		var/obj/chosen = pick(sectors_onmap)
 		var/list/turfs_nearobj = list()
 		for(var/turf/unsimulated/map/t in range(7,chosen))
+			if(istype(t,/turf/unsimulated/map/edge))
+				continue
 			turfs_nearobj += t
 		target_loc = pick(turfs_nearobj)
+
+/obj/effect/overmap/ship/npc_ship/can_burn()
+	if(!is_player_controlled())
+		return 1
+	else
+		return ..()
 
 /obj/effect/overmap/ship/npc_ship/process()
 	//despawn after a while
@@ -189,14 +198,18 @@
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
 			return ..()
-		if(loc == target_loc)
+		if(is_still())
 			pick_target_loc()
+		if(get_dist(src,target_loc) < NPC_SHIP_TARGET_TOLERANCE)
+			decelerate() //NPC ships process less often so we let them cheat with multiple calls at the same time.
+			decelerate()
+			decelerate()
 		else
-			walk(src,get_dir(src,target_loc),move_delay)
-			dir = get_dir(src,target_loc)
-			is_still() //A way to ensure umbilicals break when we move.
-			if(our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != null)
-				pick_target_loc()
+			accelerate(get_dir(src,target_loc))
+			accelerate(get_dir(src,target_loc))
+		break_umbilicals()
+		if(our_fleet && our_fleet.leader_ship != src)
+			pick_target_loc()
 	else
 		if(is_player_controlled())
 			. = ..()

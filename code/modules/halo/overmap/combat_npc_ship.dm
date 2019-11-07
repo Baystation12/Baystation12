@@ -92,16 +92,17 @@
 		//pick one at random
 		target = pick(targets)
 		radio_message( pick(messages_target_found) + " [target]. ([target.x],[target.y])")
+		target_loc = null
 
 /obj/effect/overmap/ship/npc_ship/combat/process()
 	if(hull <= initial(hull)/4)
-		return
+		return ..()
 	if(is_player_controlled())
 		return ..()
 
 	if(target)
 		//check if they're in range
-		if(get_dist(src, target) > 7)
+		if(get_dist(src, target) > 14)//Two screen range because it's so easy to run from ships now.
 			target = null
 		else
 			//open fire
@@ -109,7 +110,11 @@
 
 			if(!target_loc || src.loc == target_loc)
 				//Let's emulate a "circling" behaviour.
-				var/list/target_locs = view(target_range_from,target)-view(target_range_from-1,target)
+				var/list/target_locs = list()
+				for(var/turf/unsimulated/map/m in view(view(target_range_from,target)-view(target_range_from-1,target)))
+					if(istype(m,/turf/unsimulated/map/edge))
+						continue
+					target_locs += m
 				if(target_locs.len > 0)
 					target_loc = pick(target_locs)
 	else

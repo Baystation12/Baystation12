@@ -191,11 +191,13 @@
 	. = ..()
 	if(moving_dir)
 		accelerate(moving_dir)
+		break_umbilicals()
 		if(!lock_thrust)
 			moving_dir = 0
 			icon_state = initial(icon_state)
 	else if(braking)
 		decelerate()
+		break_umbilicals()
 		if(!lock_thrust)
 			braking = 0
 			icon_state = initial(icon_state)
