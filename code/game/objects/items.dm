@@ -48,7 +48,7 @@
 	var/armor_thickness //The thickness of the armor, in mm. Keep null to opt-out usage of system for item. This value, set at compile time is the maximum value of thickness for this item. Armor can only lose 10% of this value per-hit.
 	var/list/armor_thickness_modifiers = list()//A list containing the weaknesses of the armor, used when performing armor-thickness depletion. Format: damage_type - multiplier
 	var/list/allowed = null //suit storage stuff.
-	var/max_suitstore_w_class = ITEM_SIZE_NORMAL //suitstore stuff
+	var/max_suitstore_w_class = ITEM_SIZE_LARGE //suitstore stuff
 	var/obj/item/device/uplink/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
@@ -365,7 +365,7 @@ var/list/global/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(usr, "<span class='warning'>You somehow have a suit with no defined allowed items for suit storage, stop that.</span>")
 				return 0
-			if( !(istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed) || item_w_class <= H.wear_suit.max_suitstore_w_class) )
+			if( !(istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || (is_type_in_list(src, H.wear_suit.allowed) && item_w_class <= H.wear_suit.max_suitstore_w_class)))
 				return 0
 		if(slot_handcuffed)
 			if(!istype(src, /obj/item/weapon/handcuffs))
