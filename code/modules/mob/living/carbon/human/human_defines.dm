@@ -110,3 +110,5 @@
 	var/became_younger
 
 	var/list/descriptors
+
+	var/last_smelt = 0

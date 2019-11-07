@@ -74,6 +74,7 @@
 		lit = 0
 		update_icon()
 		set_light(0)
+		remove_extension(src, /datum/extension/scent)
 
 /obj/item/weapon/storage/candle_box
 	name = "candle pack"
