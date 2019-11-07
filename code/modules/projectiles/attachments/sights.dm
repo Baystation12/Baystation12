@@ -14,11 +14,17 @@
 /obj/item/weapon_attachment/sight/remove_attachment_effects(var/obj/item/weapon/gun/gun)
 	. = ..()
 	gun.verbs -= /obj/item/weapon/gun/proc/use_scope
-/*
+
 /obj/item/weapon_attachment/sight/rds
-	name = "Red Dot Sight"
+	name = "red dot sight"
 	desc = "A red dot sight which provides an increase in accuracy, resulting in a tighter grouping of consecutive shots."
-*/
+	icon_state = "red-dot-obj"
+
+/obj/item/weapon_attachment/sight/acog
+	name = "acog sight"
+	desc = "An ACOG which provides an increase in accuracy, resulting in a tighter grouping of consecutive shots."
+	icon_state = "acog-scope-obj"
+
 /obj/item/weapon_attachment/sight/ma5_scope
 	name = "MA5B scope"
 	desc = "A scope which provides slight magnification and an increase in accuracy."
