@@ -8,7 +8,7 @@
 )
 #define ON_DEATH_MESSAGES list(\
 "Do you feel like a hero yet?","Oof-",\
-"You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required.","Vibe Check!"\
+"You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required.","Automated Alert: CAPTAIN OVERRIDE: I think we just failed the vibe check."\
 )
 #define ALL_CIVILIANS_SHIPNAMES list(\
 "Pete's Cube","The Nomad","The Alexander","Free Range","Heavenly Punisher","Sky Ruler","Bare Necessities","Arizona Killer","Iron Horse","Linebacker","Last Light","Hopes Eclipse","Fleeting Dawn","Titans Might","Despacito","Skippy","No True Scotsman","Blade Of Mars","Targeting Solution","Wooden Cat","The Cerberus","Message of Peace","Persian Persuader","Beowulf","Trojan Horse","Jade Dragon","Danger Zone","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home","Mileage May Vary","Pimp Hand","Vibe Check"\
