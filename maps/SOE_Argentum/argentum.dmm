@@ -174,7 +174,7 @@
 "dr" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
 "ds" = (/obj/docking_umbilical/east,/turf/simulated/wall/r_wall,/area/soe_argentum/engine)
 "dt" = (/obj/machinery/optable,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
-"du" = (/obj/structure/table/steel_reinforced,/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-4"},/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe,/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
+"du" = (/obj/structure/table/steel_reinforced,/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-4"},/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
 "dv" = (/obj/structure/table/standard,/obj/item/weapon/tank/anesthetic,/obj/item/clothing/mask/breath/anesthetic,/obj/structure/table/standard,/obj/machinery/recharger,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "dw" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/Armory)
 "dx" = (/turf/simulated/wall/r_wall,/area/soe_argentum/Armory)
@@ -276,6 +276,7 @@
 "fp" = (/obj/item/trash/syndi_cakes,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fq" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/tanktrap_dead,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fr" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/tanktrap_dead,/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
+"fs" = (/obj/machinery/vending/armory/attachment/soe,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
 "ft" = (/obj/machinery/door/blast/regular,/turf/simulated/wall/r_wall,/area/soe_argentum/starboardingpods)
 "fu" = (/obj/structure/table/standard,/obj/item/device/flashlight,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "fv" = (/obj/machinery/nav_computer/innie,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
@@ -340,8 +341,8 @@ eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddtcddvad
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaddJdKdudMdNdOdedPdPeqdQbTdRdedSeHdUdVdUdWdXdYdZceeaebchaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadedeeeeeedxeresereIeJeIerererdFdFdFegeheiejekelacemendLaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUfeffdxdxdxdxdJeedKepdwcOeNeYdTfgfhfieoeMdFdYdYetdYeuevevewcPexbweyaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdxezeAeedxfjfjfkerflerfmfjfjdFeBdYeteCeDeEeFeGacchchacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdxdxfbdxfjfjfnerererfpfjfjdFdFeKegdYdYdYdYeLacacacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxezeeeAeedxfjfjfkerflerfmfjfjdFeBdYeteCeDeEeFeGacchchacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxfsdxfbdxfjfjfnerererfpfjfjdFdFeKegdYdYdYdYeLacacacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdxdxfofjfqerererfreZfjdFeOePfcdYehdYdYeRaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxftfterererererftftdHeSdYdYdYeTeVeWeXaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxerererererererererdFdFdFdFdFdFdFdFdFacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU

@@ -36,7 +36,7 @@
 		)
 
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock", "stock")
-	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper,/obj/item/weapon_attachment/light/ma5_flashlight)
+	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper,/obj/item/weapon_attachment/light/flashlight)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/can_use_when_prone()
 	return 1
@@ -105,6 +105,10 @@
 		list(mode_name="4-round bursts", burst=4, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1),       dispersion=list(0.3, 0.9, 1.3, 1.6)),
 		list(mode_name="short bursts", 	burst=6, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1,-2,-2), dispersion=list(0.3, 0.7, 1.2, 1.2, 1.6, 1.6)),
 		)
+
+	attachment_slots = list("underbarrel rail","sight","barrel")
+	attachments_on_spawn = list(/obj/item/weapon_attachment/light/flashlight)
+
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA3/update_icon()
 	. = ..()

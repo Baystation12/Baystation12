@@ -61,15 +61,30 @@
 	req_access = list(308)
 	products = list(\
 	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
-	/obj/item/weapon_attachment/ma5_grip = 3,
 	/obj/item/weapon_attachment/ma5_upper_railed =3,
 	/obj/item/weapon_attachment/barrel/suppressor = 2,
 	/obj/item/weapon_attachment/sight/ma5_scope = 3,
-	/obj/item/weapon_attachment/light/ma5_flashlight = 5,
+	/obj/item/weapon_attachment/light/flashlight = 5,
 	/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun = 2,
-	/obj/item/weapon_attachment/barrel/suppressor/br55 = 2,
-	/obj/item/weapon_attachment/br55_grip = 3)
+	/obj/item/weapon_attachment/barrel/suppressor = 2,
+	/obj/item/weapon_attachment/vertical_grip = 3)
 	//products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6)
+
+/obj/machinery/vending/armory/attachment/soe
+	name = "SOE Attachments Vendor"
+	desc = "A vendor full? of attachments *the rest is scratched off*."
+	icon_state ="ironhammer"
+	product_ads = "ME WANT ATTACHMENTS!"
+	icon_deny = "ironhammer-deny"
+	req_access = list()
+	products = list(\
+	/obj/item/weapon_attachment/barrel/suppressor = 5,
+	/obj/item/weapon_attachment/light/flashlight = 5,
+	/obj/item/weapon_attachment/vertical_grip = 5,
+	/obj/item/weapon_attachment/sight/rds = 5,
+	/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe = 5,
+	/obj/item/weapon_attachment/sight/acog = 5,
+)
 
 /obj/machinery/vending/armory/odstvend
 	name = "Armtech 5530"
@@ -178,7 +193,6 @@
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
 	icon_state = "ironhammer"
 	icon_deny = "ironhammer-deny"
-	color = COLOR_DARK_GRAY
 	req_access = list()
 	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
