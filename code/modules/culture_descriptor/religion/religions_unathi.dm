@@ -1,7 +1,7 @@
 /decl/cultural_info/religion/unathi
 	name = RELIGION_UNATHI_VINE
 	description = "A faith of semi-nomadic travelers who believe the destruction of Moghes is meant to be a chance for the Unathi to \
-	turn it into their own paradise. They’re always looking for new ways to grow life on their world and often refer to themselves as \
+	turn it into their own paradise. They're always looking for new ways to grow life on their world and often refer to themselves as \
 	'her hands'."
 
 /decl/cultural_info/religion/unathi_precursors

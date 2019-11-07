@@ -1,5 +1,26 @@
-/obj/item/weapon/forensics/swab
+/obj/item/swabber
 	name = "swab kit"
+	desc = "A kit full of sterilized cotton swabs and vials used to take forensic samples."
+	icon = 'icons/obj/forensics.dmi'
+	icon_state = "swab"
+
+/obj/item/swabber/attack()
+	return 0
+
+// This is pretty nasty but is a damn sight easier than trying to make swabs a stack item.
+/obj/item/swabber/afterattack(var/atom/A, var/mob/user, var/proximity, var/params)
+	if(proximity)
+		var/obj/item/weapon/forensics/swab/swab = new(user)
+		var/resolved = swab.resolve_attackby(A, user, params)
+		if(!resolved && A && !QDELETED(A))
+			swab.afterattack(A, user, TRUE, params)
+		if(swab.is_used())
+			swab.dropInto(user.loc)
+		else
+			qdel(swab)
+
+/obj/item/weapon/forensics/swab
+	name = "swab"
 	desc = "A sterilized cotton swab and vial used to take forensic samples."
 	icon_state = "swab"
 	var/list/gunshot_residue_sample

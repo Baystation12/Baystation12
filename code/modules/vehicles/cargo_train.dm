@@ -9,7 +9,7 @@
 
 	load_item_visible = 1
 	load_offset_x = 0
-	buckle_pixel_shift = "x=0;y=7"
+	buckle_pixel_shift = "x=0;y=0;z=7"
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
@@ -34,7 +34,7 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	load_offset_y = 4
-	buckle_pixel_shift = "x=0;y=8"
+	buckle_pixel_shift = "x=0;y=0;z=8"
 
 //-------------------------------------------
 // Standard procs
@@ -189,8 +189,10 @@
 	else
 		return ..()
 
-/obj/vehicle/train/cargo/engine/examine(mob/user)
-	if(!..(user, 1))
+/obj/vehicle/train/cargo/engine/examine(mob/user, distance)
+	. = ..()
+
+	if(distance > 1)
 		return
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -361,7 +363,7 @@
 	else
 		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains
 		move_delay *= (1 / max(1, active_engines)) * 2 										//overweight penalty (scaled by the number of engines)
-		move_delay += config.run_speed 														//base reference speed
+		move_delay += config.run_delay 														//base reference speed
 		move_delay *= 1.1																	//makes cargo trains 10% slower than running when not overweight
 
 /obj/vehicle/train/cargo/trolley/update_car(var/train_length, var/active_engines)

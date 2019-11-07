@@ -136,7 +136,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_x = 27
 	},
-/obj/item/weapon/circuitboard/solar_control,
+/obj/item/weapon/stock_parts/circuitboard/solar_control,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "aq" = (
@@ -280,10 +280,10 @@
 "aG" = (
 /obj/structure/closet/crate,
 /obj/effect/floor_decal/industrial/hatch/orange,
-/obj/item/device/analyzer,
-/obj/item/weapon/circuitboard/unary_atmos/cooler,
-/obj/item/weapon/circuitboard/unary_atmos/heater,
-/obj/item/weapon/circuitboard/oxyregenerator,
+/obj/item/device/scanner/gas,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
+/obj/item/weapon/stock_parts/circuitboard/oxyregenerator,
 /obj/item/weapon/tank/oxygen/red,
 /obj/structure/cable,
 /obj/item/stack/material/uranium/ten,
@@ -302,7 +302,7 @@
 /obj/item/trash/candy/proteinbar,
 /obj/item/trash/liquidfood,
 /obj/item/weapon/stock_parts/matter_bin/super,
-/obj/item/weapon/circuitboard/biogenerator,
+/obj/item/weapon/stock_parts/circuitboard/biogenerator,
 /obj/item/weapon/bedsheet/orange,
 /obj/item/weapon/bedsheet/orange,
 /obj/item/weapon/stock_parts/matter_bin/adv,
@@ -322,7 +322,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "aI" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/effect/decal/cleanable/generic,
 /turf/simulated/floor/tiled/techfloor,
@@ -411,7 +411,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "aR" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -562,7 +562,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/metal,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
 "bk" = (
@@ -712,9 +712,6 @@
 /area/map_template/crashed_pod)
 "bE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1049,7 +1046,7 @@
 /obj/item/weapon/cell/device/high,
 /obj/item/weapon/cell/crap,
 /obj/item/weapon/storage/box/lights,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
 /obj/item/weapon/reagent_containers/food/drinks/cans/speer,
 /obj/item/weapon/reagent_containers/food/drinks/cans/speer,
 /obj/item/weapon/reagent_containers/food/drinks/cans/speer,

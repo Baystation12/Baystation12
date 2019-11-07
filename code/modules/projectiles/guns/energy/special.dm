@@ -211,9 +211,31 @@
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
 	self_recharge = 1
+	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/weapon/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"
 	use_external_power = 1
 	max_shots = 4
 	has_safety = FALSE
+
+/obj/item/weapon/gun/energy/plasmacutter/Initialize()
+	. = ..()
+	spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system.set_up(5, 0, src)
+	spark_system.attach(src)
+
+/obj/item/weapon/gun/energy/plasmacutter/Destroy()
+	QDEL_NULL(spark_system)
+	return ..()
+
+/obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
+	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
+		if(M)
+			M.welding_eyecheck()//Welding tool eye check
+			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
+				return 0
+		spark_system.start()
+		return 1
+	handle_click_empty(M)
+	return 0

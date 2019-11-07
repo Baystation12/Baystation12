@@ -79,6 +79,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/on_update_icon()
 	overlays.Cut()
+	underlays.Cut()
 
 	if(mode == SYRINGE_BROKEN)
 		icon_state = "broken"
@@ -104,7 +105,7 @@
 		filling.icon_state = "syringe[rounded_vol]"
 
 		filling.color = reagents.get_color()
-		overlays += filling
+		underlays += filling
 
 /obj/item/weapon/reagent_containers/syringe/proc/handleTarget(var/atom/target, var/mob/user)
 	switch(mode)
@@ -270,7 +271,7 @@
 		if((user != target) && H.check_shields(7, src, user, "\the [src]"))
 			return
 
-		if (target != user && H.get_blocked_ratio(target_zone, BRUTE) > 0.05 && prob(50))
+		if (target != user && H.get_blocked_ratio(target_zone, BRUTE, damage_flags=DAM_SHARP) > 0.1 && prob(50))
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message(text("<span class='danger'>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</span>"), 1)
 			qdel(src)

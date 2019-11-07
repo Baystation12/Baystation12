@@ -72,7 +72,6 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
 		step(src.connected, src.dir)
-		src.connected.layer = OBJ_LAYER
 		var/turf/T = get_step(src, src.dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -113,7 +112,6 @@
 		return
 	src.connected = new /obj/structure/m_tray( src.loc )
 	step(src.connected, EAST)
-	src.connected.layer = OBJ_LAYER
 	var/turf/T = get_step(src, EAST)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
@@ -190,22 +188,11 @@
 	var/cremating = FALSE
 	var/id = 1
 	var/locked = FALSE
-	var/_wifi_id
-	var/datum/wifi/receiver/button/crematorium/wifi_receiver
-
-
-/obj/structure/crematorium/Initialize()
-	. = ..()
-	if(_wifi_id)
-		wifi_receiver = new(_wifi_id, src)
 
 /obj/structure/crematorium/Destroy()
 	if(connected)
 		qdel(connected)
 		connected = null
-	if(wifi_receiver)
-		qdel(wifi_receiver)
-		wifi_receiver = null
 	return ..()
 
 /obj/structure/crematorium/proc/update()
@@ -257,7 +244,6 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray(src.loc)
 		step(src.connected, dir)
-		src.connected.layer = OBJ_LAYER
 		var/turf/T = get_step(src, dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -290,7 +276,6 @@
 		return
 	src.connected = new /obj/structure/c_tray( src.loc )
 	step(src.connected, SOUTH)
-	src.connected.layer = OBJ_LAYER
 	var/turf/T = get_step(src, SOUTH)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
@@ -436,18 +421,16 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "crema_switch"
 	req_access = list(access_crematorium)
-	id = 1
+	id_tag = 1
 
 /obj/machinery/button/crematorium/on_update_icon()
 	return
 
-/obj/machinery/button/crematorium/attack_hand(mob/user as mob)
-	if(..())
+/obj/machinery/button/crematorium/activate(mob/user)
+	if(operating)
 		return
-	if(src.allowed(user))
-		for (var/obj/structure/crematorium/C in world)
-			if (C.id == id)
-				if (!C.cremating)
-					C.cremate(user)
-	else
-		to_chat(usr, "<span class='warning'>Access denied.</span>")
+	for(var/obj/structure/crematorium/C in range())
+		if (C.id == id_tag)
+			if (!C.cremating)
+				C.cremate(user)
+	..() // sets operating for click cooldown.

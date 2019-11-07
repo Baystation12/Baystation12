@@ -3,17 +3,23 @@
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/inflatable.dmi'
 	var/deploy_path = null
+	var/inflatable_health
 
 	atmos_canpass = CANPASS_DENSITY
 
 /obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
 		return
+	user.visible_message("[user] starts inflating \the [src].", "You start inflating \the [src].")
+	if(!do_after(user, 1 SECOND, src))
+		return
 	playsound(loc, 'sound/items/zip.ogg', 75, 1)
-	to_chat(user, "<span class='notice'>You inflate \the [src].</span>")
+	user.visible_message(SPAN_NOTICE("[user] inflates \the [src]."), SPAN_NOTICE("You inflate \the [src]."))
 	var/obj/structure/inflatable/R = new deploy_path(user.loc)
-	src.transfer_fingerprints_to(R)
+	transfer_fingerprints_to(R)
 	R.add_fingerprint(user)
+	if(inflatable_health)
+		R.health = inflatable_health
 	qdel(src)
 
 
@@ -23,10 +29,11 @@
 	icon_state = "folded_wall"
 	deploy_path = /obj/structure/inflatable/wall
 
-/obj/item/inflatable/door/
+/obj/item/inflatable/door
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
 	icon_state = "folded_door"
+	item_state = "folded_door"
 	deploy_path = /obj/structure/inflatable/door
 
 /obj/structure/inflatable
@@ -39,7 +46,11 @@
 	icon_state = "wall"
 
 	var/undeploy_path = null
-	var/health = 50.0
+	var/health = 10
+	var/taped
+
+	var/max_pressure_diff = RIG_MAX_PRESSURE
+	var/max_temp = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/structure/inflatable/wall
 	name = "inflatable wall"
@@ -49,22 +60,55 @@
 	..()
 	update_nearby_tiles(need_rebuild=1)
 
+/obj/structure/inflatable/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj,src)
+
 /obj/structure/inflatable/Destroy()
 	update_nearby_tiles()
+	STOP_PROCESSING(SSobj,src)
 	return ..()
+
+/obj/structure/inflatable/Process()
+	check_environment()
+
+/obj/structure/inflatable/proc/check_environment()
+	var/min_pressure = INFINITY
+	var/max_pressure = 0
+	var/max_local_temp = 0
+
+	for(var/check_dir in GLOB.cardinal)
+		var/turf/T = get_step(get_turf(src), check_dir)
+		var/datum/gas_mixture/env = T.return_air()
+		var/pressure = env.return_pressure()
+		min_pressure = min(min_pressure, pressure)
+		max_pressure = max(max_pressure, pressure)
+		max_local_temp = max(max_local_temp, env.temperature)
+
+	if(prob(50) && (max_pressure - min_pressure > max_pressure_diff || max_local_temp > max_temp))
+		take_damage(1)
+		if(health == round(0.7*initial(health)))
+			visible_message(SPAN_WARNING("\The [src] is taking damage!"))
+		if(health == round(0.3*initial(health)))
+			visible_message(SPAN_WARNING("\The [src] is barely holding up!"))
+
+/obj/structure/inflatable/examine(mob/user)
+	. = ..()
+	if(health >= initial(health))
+		to_chat(user, SPAN_NOTICE("It's undamaged."))
+	else if(health >= 0.5 * initial(health))
+		to_chat(user, SPAN_WARNING("It's showing signs of damage."))
+	else if(health >= 0)
+		to_chat(user, SPAN_DANGER("It's heavily damaged!"))
+	to_chat(user, SPAN_NOTICE("It's been duct taped in few places."))
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	if(!proj_damage) return
-
-	health -= proj_damage
-	..()
+	take_damage(Proj.get_structure_damage())
 	if(health <= 0)
-		deflate(1)
-	return
+		return PROJECTILE_CONTINUE
 
 /obj/structure/inflatable/ex_act(severity)
 	switch(severity)
@@ -83,26 +127,37 @@
 	add_fingerprint(user)
 	return
 
-/obj/structure/inflatable/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/inflatable/attackby(obj/item/weapon/W, mob/user)
 	if(!istype(W) || istype(W, /obj/item/weapon/inflatable_dispenser)) return
 
-	if((W.damtype == BRUTE || W.damtype == BURN) && W.can_puncture())
+	if(istype(W, /obj/item/weapon/tape_roll) && health < initial(health) - 3)
+		if(taped)
+			to_chat(user, SPAN_NOTICE("\The [src] can't be patched any more with \the [W]!"))
+			return TRUE
+		else
+			taped = TRUE
+			to_chat(user, SPAN_NOTICE("You patch some damage in \the [src] with \the [W]!"))
+			take_damage(-3)
+			return TRUE
+	else if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
 		..()
 		if(hit(W.force))
 			visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
 	return
 
 /obj/structure/inflatable/proc/hit(var/damage, var/sound_effect = 1)
-	health = max(0, health - damage)
+	take_damage(damage)
 	if(sound_effect)
 		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+	return health <= 0
+
+/obj/structure/inflatable/take_damage(damage)
+	health = max(0, health - damage)
 	if(health <= 0)
 		deflate(1)
-		return 1
-	return 0
 
 /obj/structure/inflatable/CtrlClick()
-	hand_deflate()
+	return hand_deflate()
 
 /obj/structure/inflatable/proc/deflate(var/violent=0)
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
@@ -118,6 +173,7 @@
 		spawn(50)
 			var/obj/item/inflatable/R = new undeploy_path(src.loc)
 			src.transfer_fingerprints_to(R)
+			R.inflatable_health = health
 			qdel(src)
 
 /obj/structure/inflatable/verb/hand_deflate()
@@ -126,10 +182,11 @@
 	set src in oview(1)
 
 	if(isobserver(usr) || usr.restrained() || !usr.Adjacent(src))
-		return
+		return FALSE
 
 	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
+	return TRUE
 
 /obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	health -= damage
@@ -184,8 +241,6 @@
 					SwitchState()
 			else
 				SwitchState()
-	else if(istype(user, /obj/mecha))
-		SwitchState()
 
 /obj/structure/inflatable/door/proc/SwitchState()
 	if(state)

@@ -93,6 +93,7 @@
 				if(T)
 					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
 				if(do_after(user, 10 SECONDS))
+					if(!broken && !burnt || !(is_plating()))return
 					visible_message("<span class='warning'>[user] has pried off the damaged plating.</span>")
 					new /obj/item/stack/tile/floor(src)
 					src.ReplaceWithLattice()
@@ -106,67 +107,40 @@
 			var/obj/item/weapon/weldingtool/welder = C
 			if(welder.isOn() && (is_plating()))
 				if(broken || burnt)
-					if(welder.isOn())
+					if(welder.remove_fuel(0, user))
 						to_chat(user, "<span class='notice'>You fix some dents on the broken plating.</span>")
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						icon_state = "plating"
 						burnt = null
 						broken = null
-					else
-						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return
 				else
-					if(welder.isOn())
+					if(welder.remove_fuel(0, user))
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-						if(do_after(user, 5 SECONDS) && welder.isOn())
+						if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
-							burnt = 1
-							remove_decals()
-							update_icon()
-					else
-						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return
+		else if(istype(C, /obj/item/weapon/gun/energy/plasmacutter) && (is_plating()) && !broken && !burnt)
+			var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
+			if(!cutter.slice(user))
+				return ..()
+			playsound(src, 'sound/items/Welder.ogg', 80, 1)
+			visible_message("<span class='notice'>[user] has started slicing through the plating's reinforcements!</span>")
+			if(do_after(user, 3 SECONDS) && welder_melt())
+				visible_message("<span class='warning'>[user] has sliced through the plating's reinforcements! It should be possible to pry it off.</span>")
+				playsound(src, 'sound/items/Welder.ogg', 80, 1)
 
 	return ..()
 
-/turf/simulated/floor/acid_melt()
-	. = FALSE
-	var/turf/T = GetBelow(src)
-
-	if(flooring)
-		visible_message("<span class='alium'>The acid dissolves the [flooring.descriptor]!</span>")
-		make_plating()
-
-	else if(is_plating() && !(broken || burnt))
-		playsound(src, 'sound/items/Welder.ogg', 80, 1)
-		visible_message("<span class='alium'>The acid has started melting \the [name]'s reinforcements!</span>")
-		if(T)
-			T.audible_message("<span class='warning'>A strange sizzling noise eminates from the ceiling.</span>")
-		burnt = 1
-		remove_decals()
-		update_icon()
-
-	else if(broken || burnt)
-		if(acid_melted == 0)
-			visible_message("<span class='alium'>The acid has melted the plating's reinforcements! It's about to break through!.</span>")
-			playsound(src, 'sound/items/Welder.ogg', 80, 1)
-
-			if(T)
-				T.visible_message("<span class='warning'>A strange substance drips from the ceiling, dropping below with a sizzle.</span>")
-			acid_melted++
-		else
-			visible_message("<span class='danger'>The acid melts the plating away into nothing!</span>")
-			new /obj/item/stack/tile/floor(src)
-			src.ReplaceWithLattice()
-			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-			if(T)
-				T.visible_message("<span class='danger'>The ceiling above melts away!</span>")
-			. = TRUE
-			qdel(src)
-	else
-		return TRUE
+/turf/simulated/floor/proc/welder_melt()
+	if(!(is_plating()) || broken || burnt)
+		return 0
+	burnt = 1
+	remove_decals()
+	update_icon()
+	return 1
 
 /turf/simulated/floor/can_build_cable(var/mob/user)
 	if(!is_plating() || flooring)

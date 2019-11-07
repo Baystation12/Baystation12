@@ -25,6 +25,29 @@
 
 
 // -----------------------------
+//          Evidence bag
+// -----------------------------
+/obj/item/weapon/storage/evidence
+	name = "evidence case"
+	desc = "A heavy steel case for storing evidence."
+	icon = 'icons/obj/forensics.dmi'
+	icon_state = "case"
+	max_storage_space = 100
+	max_w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
+	can_hold = list(
+		/obj/item/weapon/sample,
+		/obj/item/weapon/evidencebag,
+		/obj/item/weapon/forensics,
+		/obj/item/weapon/photo,
+		/obj/item/weapon/paper,
+		/obj/item/weapon/paper_bundle
+	)
+	allow_quick_gather = 1
+	allow_quick_empty = 1
+	use_to_pickup = 1
+
+// -----------------------------
 //          Plant bag
 // -----------------------------
 

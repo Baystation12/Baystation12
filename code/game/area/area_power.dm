@@ -16,6 +16,8 @@
 			return power_light
 		if(ENVIRON)
 			return power_environ
+		if(LOCAL)
+			return FALSE // if you're running on local power, don't come begging for help here.
 
 	return 0
 

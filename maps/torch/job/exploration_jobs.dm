@@ -8,6 +8,7 @@
 	selection_color = "#68099e"
 	minimal_player_age = 1
 	economic_power = 7
+	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
@@ -37,7 +38,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/pathfinder/get_description_blurb()
-	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if nobody else provides a pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
+	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC's Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if nobody else provides a pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
 
 /datum/job/nt_pilot
 	title = "Shuttle Pilot"
@@ -49,6 +50,7 @@
 	selection_color = "#68099e"
 	economic_power = 10
 	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 24)
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
 	allowed_branches = list(
@@ -80,10 +82,11 @@
 	title = "Explorer"
 	department = "Exploration"
 	department_flag = EXP
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)

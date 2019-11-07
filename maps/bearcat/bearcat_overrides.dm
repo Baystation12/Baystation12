@@ -2,9 +2,6 @@
 /datum/computer_file/program/merchant //wild capitalism
 	required_access = null
 
-/turf/simulated/wall //landlubbers go home
-	name = "bulkhead"
-
 /turf/simulated/floor
 	name = "bare deck"
 

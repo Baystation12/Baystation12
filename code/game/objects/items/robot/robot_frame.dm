@@ -34,21 +34,8 @@
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 
-	// Prepare the frame for ED209 construction.
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_STEEL && !LAZYLEN(parts))
-		var/obj/item/stack/material/M = W
-		if (M.use(1))
-			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly(get_turf(src))
-			to_chat(user, SPAN_WARNING("You armed the robot frame."))
-			if (user.get_inactive_hand()==src)
-				user.drop_from_inventory(src) //clears inactive hand; item will be deleted anyway.
-				user.put_in_inactive_hand(B)
-			qdel(src)
-		else
-			to_chat(user, SPAN_WARNING("You need one sheet of metal to arm the robot frame."))
-
 	// Uninstall a robotic part.
-	else if(isCrowbar(W))
+	if(isCrowbar(W))
 		if(!parts.len)
 			to_chat(user, SPAN_WARNING("\The [src] has no parts to remove."))
 			return
@@ -104,22 +91,24 @@
 			to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
 			return
 
-		if(!B.key)
-			var/ghost_can_reenter = 0
-			if(B.mind)
+		var/ghost_can_reenter = 0
+		if(B.mind)
+			if(!B.key)
 				for(var/mob/observer/ghost/G in GLOB.player_list)
 					if(G.can_reenter_corpse && G.mind == B.mind)
 						ghost_can_reenter = 1
 						break
-			if(!ghost_can_reenter)
-				to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
-				return
+			else
+				ghost_can_reenter = 1
+		if(!ghost_can_reenter)
+			to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
+			return
 
-			if(!user.unEquip(W))
-				return
+		if(!user.unEquip(W))
+			return
 
 		SSstatistics.add_field("cyborg_frames_built",1)
-		var/mob/living/silicon/robot/O = new product(get_turf(loc), unfinished = 1)
+		var/mob/living/silicon/robot/O = new product(get_turf(loc))
 		if(!O)
 			return
 
@@ -135,7 +124,6 @@
 
 		var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
 		chest.cell.forceMove(O)
-		user.drop_from_inventory(W)
 		W.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 
 		// Since we "magically" installed a cell, we also have to update the correct component.

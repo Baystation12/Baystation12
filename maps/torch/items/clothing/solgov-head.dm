@@ -2,7 +2,6 @@
 	name = "master solgov hat"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
 //Utility
@@ -27,7 +26,7 @@
 		)
 
 /obj/item/clothing/head/soft/solgov/expedition/co
-	name = "\improper Expeditionary Corps command cap"
+	name = "\improper Expeditionary Corps captain's cap"
 	desc = "It's a black ballcap bearing the Expeditonary Corps crest. The brim has gold trim."
 	icon_state = "expeditioncomsoft"
 
@@ -78,17 +77,27 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/solgov/service/expedition
-	name = "expedition peaked cap"
-	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps."
-	icon_state = "greydresscap"
+	name = "expeditionary peaked cap"
+	desc = "A peaked black uniform cap belonging to the SCG Expeditionary Corps."
+	icon_state = "ecdresscap"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi'
 		)
 
 /obj/item/clothing/head/solgov/service/expedition/command
-	name = "expedition officer's peaked cap"
-	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
-	icon_state = "greydresscap_com"
+	name = "expeditionary officer's peaked cap"
+	desc = "A peaked black uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
+	icon_state = "ecdresscap_ofcr"
+
+/obj/item/clothing/head/solgov/service/expedition/captain
+	name = "expeditionary captain's peaked cap"
+	desc = "A gold-trimmed peaked black uniform cap belonging to a Captain of the SCG Expeditionary Corps."
+	icon_state = "ecdresscap_capt"
+
+/obj/item/clothing/head/solgov/service/expedition/senior_command
+	name = "senior expedition officer's peaked cap"
+	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold and blue."
+	icon_state = "greydresscap_senior"
 
 /obj/item/clothing/head/solgov/service/army
 	name = "army wheel cover"
@@ -253,6 +262,16 @@
 	desc = "An SCG Expeditionary Corps beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_command"
 
+/obj/item/clothing/head/beret/solgov/expedition/branch
+	name = "\improper Field Operations beret"
+	desc = "An SCG Fleet beret carrying insignia of the Field Operations section of the Expeditionary Corps. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_fieldOps"
+
+/obj/item/clothing/head/beret/solgov/expedition/branch/observatory
+	name = "\improper Observatory beret"
+	desc = "An SCG Fleet beret carrying insignia of the Observatory section of the Expeditionary Corps. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_observatory"
+
 /obj/item/clothing/head/beret/solgov/fleet
 	name = "fleet beret"
 	desc = "A navy blue beret belonging to the SCG Fleet. For personnel that are more inclined towards style than safety."
@@ -396,7 +415,7 @@
 
 /obj/item/clothing/head/helmet/space/void/exploration
 	camera = /obj/machinery/camera/network/exploration
-	
+
 //SolGov Hardsuits
 
 /obj/item/clothing/head/helmet/space/void/engineering/alt/sol

@@ -12,6 +12,10 @@
 	description = "Non-euclidian mess."
 	suffixes = list("mobius_rift/mobius_rift.dmm")
 	cost = 1
+	area_usage_test_exempted_root_areas = list(/area/mobius_rift)
+	apc_test_exempt_areas = list(
+		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 
 /obj/effect/step_trigger/mobius_rift/seamless_portal
 	var/obj/effect/step_trigger/mobius_rift/seamless_portal/dest

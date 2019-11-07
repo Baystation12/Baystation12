@@ -22,7 +22,6 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-stage1"
 	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
 	var/stage = 1
@@ -48,14 +47,16 @@
 		if(2) icon_state = "tube-construct-stage2"
 		if(3) icon_state = "tube-empty"
 
-/obj/machinery/light_construct/examine(mob/user)
-	if(!..(user, 2))
+/obj/machinery/light_construct/examine(mob/user, distance)
+	. = ..()
+	if(distance > 2)
 		return
 
 	switch(src.stage)
 		if(1) to_chat(user, "It's an empty frame.")
 		if(2) to_chat(user, "It's wired.")
 		if(3) to_chat(user, "The casing is closed.")
+
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if(isWrench(W))
@@ -119,7 +120,6 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
 	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	stage = 1
 	fixture_type = /obj/machinery/light/small
@@ -139,7 +139,6 @@
 	icon_state = "tube_map"
 	desc = "A lighting fixture."
 	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 2
@@ -227,7 +226,7 @@
 			on = 0
 
 	if(istype(lightbulb, /obj/item/weapon/light/))
-		var/image.I = image(icon, src, _state)
+		var/image/I = image(icon, src, _state)
 		I.color = lightbulb.b_colour
 		overlays += I
 
@@ -279,6 +278,9 @@
 		update_icon(0)
 
 /obj/machinery/light/proc/set_emergency_lighting(var/enable)
+	if(!lightbulb)
+		return
+
 	if(enable)
 		if(LIGHTMODE_EMERGENCY in lightbulb.lighting_modes)
 			set_mode(LIGHTMODE_EMERGENCY)
@@ -405,20 +407,17 @@
 
 // attack with hand - remove tube/bulb
 // if hands aren't protected and the light is on, burn the player
-/obj/machinery/light/attack_hand(mob/user)
-
-	add_fingerprint(user)
-
+/obj/machinery/light/physical_attack_hand(mob/living/user)
 	if(!lightbulb)
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
-		return
+		return TRUE
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass")
 			broken()
-			return
+			return TRUE
 
 	// make it burn hands if not wearing fire-insulated gloves
 	if(on)
@@ -426,9 +425,7 @@
 		var/mob/living/carbon/human/H = user
 
 		if(istype(H))
-			if(H.getSpeciesOrSynthTemp(HEAT_LEVEL_1) > LIGHT_BULB_TEMPERATURE)
-				prot = 1
-			else if(H.gloves)
+			if(H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
 				if(G.max_heat_protection_temperature)
 					if(G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
@@ -438,25 +435,22 @@
 
 		if(prot > 0 || (MUTATION_COLD_RESISTANCE in user.mutations))
 			to_chat(user, "You remove the [get_fitting_name()]")
-		else if(MUTATION_TK in user.mutations)
+		else if(istype(user) && user.psi && !user.psi.suppressed && user.psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT)
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
+		else if(user.a_intent != I_HELP)
+			var/obj/item/organ/external/hand = H.organs_by_name[user.hand ? BP_L_HAND : BP_R_HAND]
+			if(hand && hand.is_usable() && !hand.can_feel_pain())
+				user.apply_damage(3, BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
+				user.visible_message(SPAN_WARNING("\The [user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."), SPAN_WARNING("Your [hand] burns and sizzles as you remove the hot [get_fitting_name()]."))
 		else
 			to_chat(user, "You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
-			return				// if burned, don't remove the light
+			return TRUE
 	else
 		to_chat(user, "You remove the [get_fitting_name()].")
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
-
-
-/obj/machinery/light/attack_tk(mob/user)
-	if(!lightbulb)
-		to_chat(user, "There is no [get_fitting_name()] in this light.")
-		return
-
-	to_chat(user, "You telekinetically remove the [get_fitting_name()].")
-	remove_bulb()
+	return TRUE
 
 // ghost attack - make lights flicker like an AI, but even spookier!
 /obj/machinery/light/attack_ghost(mob/user)
@@ -479,7 +473,7 @@
 	update_icon()
 
 /obj/machinery/light/proc/fix()
-	if(get_status() == LIGHT_OK)
+	if(get_status() == LIGHT_OK || !lightbulb)
 		return
 	lightbulb.status = LIGHT_OK
 	on = 1
@@ -679,8 +673,7 @@
 
 		if(S.reagents.has_reagent(/datum/reagent/toxin/phoron, 5))
 
-			log_admin("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
-			message_admins("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
+			log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
 
 			rigged = 1
 
@@ -714,8 +707,7 @@
 /obj/item/weapon/light/proc/switch_on()
 	switchcount++
 	if(rigged)
-		log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
-		message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+		log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 		var/turf/T = get_turf(src.loc)
 		spawn(0)
 			sleep(2)
@@ -728,3 +720,8 @@
 	else if(sound_on)
 		playsound(src, sound_on, 75)
 	return status
+
+/obj/machinery/light/do_simple_ranged_interaction(var/mob/user)
+	if(lightbulb)
+		remove_bulb()
+	return TRUE

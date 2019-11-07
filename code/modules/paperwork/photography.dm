@@ -64,10 +64,11 @@ var/global/photo_count = 0
 			scribble = txt
 	..()
 
-/obj/item/weapon/photo/examine(mob/user)
+/obj/item/weapon/photo/examine(mob/user, distance)
+	. = TRUE
 	if(!img)
 		return
-	if(in_range(user, src))
+	if(distance <= 1)
 		show(user)
 		to_chat(user, desc)
 	else
@@ -90,8 +91,9 @@ var/global/photo_count = 0
 
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, MAX_NAME_LEN)
 	//loc.loc check is for making possible renaming photos in clipboards
-	if(( (loc == usr || (loc.loc && loc.loc == usr)) && usr.stat == 0))
-		SetName("[(n_name ? text("[n_name]") : "photo")]")
+	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
+		return
+	SetName("[(n_name ? text("[n_name]") : "photo")]")
 	add_fingerprint(usr)
 	return
 
@@ -223,9 +225,7 @@ var/global/photo_count = 0
 	update_icon()
 
 /obj/item/device/camera/examine(mob/user)
-	if(!..(user))
-		return
-
+	. = ..()
 	to_chat(user, "It has [pictures_left] photo\s left.")
 
 //Proc for capturing check

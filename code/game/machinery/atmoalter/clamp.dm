@@ -37,14 +37,15 @@
 			var/datum/pipeline/P2 = node2.parent
 			network_node2 = P2.network
 
-/obj/machinery/clamp/attack_hand(var/mob/user)
-	if(!target || !user)
-		return
+/obj/machinery/clamp/physical_attack_hand(var/mob/user)
+	if(!target)
+		return FALSE
 	if(!open)
 		open()
 	else
 		close()
 	to_chat(user, "<span class='notice'>You turn [open ? "off" : "on"] \the [src]</span>")
+	return TRUE
 
 /obj/machinery/clamp/Destroy()
 	if(!open)

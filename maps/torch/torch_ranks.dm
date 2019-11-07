@@ -3,6 +3,7 @@
 	rank =   /datum/mil_rank/civ/civ
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	required_language = null
 
 /datum/map/torch
 	branch_types = list(
@@ -31,7 +32,7 @@
 			/datum/mil_branch/expeditionary_corps,
 			/datum/mil_branch/fleet,
 			/datum/mil_branch/civilian,
-			/datum/mil_branch/solgov, 
+			/datum/mil_branch/solgov,
 			/datum/mil_branch/skrell_fleet
 		)
 	)
@@ -43,6 +44,14 @@
 		/datum/species/unathi     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/adherent   = list(/datum/mil_branch/civilian),
 		/datum/species/vox        = list(/datum/mil_branch/alien)
+	)
+
+	species_to_rank_blacklist = list(
+		/datum/species/machine = list(
+			/datum/mil_branch/solgov = list(
+				/datum/mil_rank/sol/agent
+			)
+		)
 	)
 
 	species_to_rank_whitelist = list(
@@ -62,9 +71,6 @@
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
-			),
-			/datum/mil_branch/solgov = list(
-				/datum/mil_rank/sol/agent
 			)
 		),
 		/datum/species/skrell = list(
@@ -173,8 +179,7 @@
 	)
 
 	assistant_job = /datum/job/crew
-	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
-						SKILL_WEAPONS = SKILL_BASIC,
+	min_skill = list(	SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/army
@@ -488,7 +493,7 @@
 	name = "Admiral"
 	name_short = "ADM"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
-	sort_order = 16
+	sort_order = 18
 
 /*
  *  Army
@@ -636,7 +641,7 @@
  *  Civilians
  *  =========
  */
- 
+
 /datum/mil_rank/civ/civ
 	name = "Civilian"
 
@@ -657,9 +662,9 @@
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/representative)
 
 /datum/mil_rank/sol/agent
-	name = "OCIE Agent"
+	name = "SFP Agent"
 	name_short = "AGT"
-	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
+	accessory = list(/obj/item/clothing/accessory/badge/agent)
 
 /datum/mil_rank/sol/scientist
 	name = "Government Scientist"

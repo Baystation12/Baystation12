@@ -17,12 +17,11 @@
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 30000			// 30000 W ~ 40 HP
 
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY //connects to regular and supply pipes
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL //connects to regular, supply pipes, and fuel pipes
 
 	var/area/initial_loc
 	level = 1
 	var/area_uid
-	var/id_tag = null
 
 	var/hibernate = 0 //Do we even process?
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
@@ -48,6 +47,9 @@
 	var/radio_filter_out
 	var/radio_filter_in
 
+	var/controlled = TRUE  //if we should register with an air alarm on spawn
+	build_icon_state = "uvent"
+
 /obj/machinery/atmospherics/unary/vent_pump/on
 	use_power = POWER_USE_IDLE
 	icon_state = "map_vent_out"
@@ -69,8 +71,8 @@
 	pressure_checks = 2
 	pressure_checks_default = 2
 
-/obj/machinery/atmospherics/unary/vent_pump/New()
-	..()
+/obj/machinery/atmospherics/unary/vent_pump/Initialize()
+	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
 
@@ -84,26 +86,26 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
 	power_channel = EQUIP
-	power_rating = 15000	//15 kW ~ 20 HP
+	power_rating = 45000
 
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
-	..()
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/Initialize()
+	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
-	power_rating = 30000	//15 kW ~ 20 HP
+	power_rating = 30000
 
-/obj/machinery/atmospherics/unary/vent_pump/engine/New()
-	..()
+/obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()
+	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
 
 /obj/machinery/atmospherics/unary/vent_pump/on_update_icon(var/safety = 0)
 	if(!check_icon_cache())
 		return
 	if (!node)
-		update_use_power(POWER_USE_OFF)
+		return
 
 	overlays.Cut()
 
@@ -223,8 +225,8 @@
 	signal.source = src
 
 	signal.data = list(
-		"area" = src.area_uid,
-		"tag" = src.id_tag,
+		"area" = controlled ? area_uid : "NONE",
+		"tag" = id_tag,
 		"device" = "AVP",
 		"power" = use_power,
 		"direction" = pump_direction?("release"):("siphon"),
@@ -237,11 +239,12 @@
 		"flow_rate" = last_flow_rate,
 	)
 
-	if(!initial_loc.air_vent_names[id_tag])
-		var/new_name = "[initial_loc.name] Vent Pump #[initial_loc.air_vent_names.len+1]"
-		initial_loc.air_vent_names[id_tag] = new_name
-		src.SetName(new_name)
-	initial_loc.air_vent_info[id_tag] = signal.data
+	if(controlled)
+		if(!initial_loc.air_vent_names[id_tag])
+			var/new_name = "[initial_loc.name] Vent Pump #[initial_loc.air_vent_names.len+1]"
+			initial_loc.air_vent_names[id_tag] = new_name
+			SetName(new_name)
+		initial_loc.air_vent_info[id_tag] = signal.data
 
 	radio_connection.post_signal(src, signal, radio_filter_out)
 
@@ -368,8 +371,9 @@
 	else
 		..()
 
-/obj/machinery/atmospherics/unary/vent_pump/examine(mob/user)
-	if(..(user, 1))
+/obj/machinery/atmospherics/unary/vent_pump/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
 	else
 		to_chat(user, "You are too far away to read the gauge.")
@@ -377,30 +381,78 @@
 		to_chat(user, "It seems welded shut.")
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!isWrench(W))
-		return ..()
-	if (!(stat & NOPOWER) && use_power)
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
-		return 1
-	var/turf/T = src.loc
-	if (node && node.level==1 && isturf(T) && !T.is_plating())
-		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
-		return 1
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		qdel(src)
+	if(isWrench(W))
+		if (!(stat & NOPOWER) && use_power)
+			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
+			return 1
+		var/turf/T = src.loc
+		if (node && node.level==1 && isturf(T) && !T.is_plating())
+			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
+			return 1
+		var/datum/gas_mixture/int_air = return_air()
+		var/datum/gas_mixture/env_air = loc.return_air()
+		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
+			add_fingerprint(user)
+			return 1
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+		if (do_after(user, 40, src))
+			user.visible_message( \
+				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
+				"<span class='notice'>You have unfastened \the [src].</span>", \
+				"You hear a ratchet.")
+			new /obj/item/pipe(loc, src)
+			qdel(src)
+	if(isMultitool(W))
+		var/datum/browser/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
+		popup.set_content(jointext(get_console_data(),"<br>"))
+		popup.open()
+		return
+	else
+		return ..()	
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/get_console_data()
+	. = list()
+	. += "<table>"
+	. += "<tr><td><b>Name:</b></td><td>[name]</td>"
+	. += "<tr><td><b>Pump Status:</b></td><td>[pump_direction?("<font color = 'green'>Releasing</font>"):("<font color = 'red'>Siphoning</font>")]</td><td><a href='?src=\ref[src];switchMode=\ref[src]'>Toggle</a></td></tr>"
+	. += "<tr><td><b>ID Tag:</b></td><td>[id_tag]</td><td><a href='?src=\ref[src];settag=\ref[id_tag]'>Set ID Tag</a></td></td></tr>"
+	if(frequency%10)
+		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10]</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
+	else
+		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10].0</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
+	.+= "</table>"
+	. = JOINTEXT(.)
+
+/obj/machinery/atmospherics/unary/vent_pump/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if((. = ..()))
+		return
+	if(href_list["switchMode"])
+		pump_direction = !pump_direction
+		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+		queue_icon_update() //force the icon to refresh after changing directional mode.
+		return TOPIC_REFRESH
+	if(href_list["settag"])		
+		var/t = sanitizeSafe(input(user, "Enter the ID tag for [src.name]", src.name, id_tag), MAX_NAME_LEN)
+		if(t && CanInteract(user, state))
+			id_tag = t
+			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
+	if(href_list["setfreq"])
+		var/freq = input(user, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
+		if(freq && CanInteract(user, state))
+			set_frequency(freq)
+			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/set_frequency(new_frequency)
+	radio_controller.remove_object(src, frequency)
+	frequency = new_frequency
+	if(frequency)
+		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 #undef DEFAULT_PRESSURE_DELTA
 

@@ -6,10 +6,12 @@
 	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
-	plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	interact_offline = 1
 	layer = ABOVE_HUMAN_LAYER
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/on = 0
 	idle_power_usage = 20
@@ -27,22 +29,11 @@
 	. = ..()
 	icon = 'icons/obj/cryogenics_split.dmi'
 	update_icon()
-	initialize_directions = dir
 	atmos_init()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/cryo_cell(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/console_screen(src),
-		new /obj/item/pipe(src))
-	RefreshParts()
-
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
-	var/turf/T = loc
-	T.contents += contents
+	for(var/atom/movable/A in src)
+		A.dropInto(loc)
 	if(beaker)
 		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
 		beaker = null
@@ -59,11 +50,11 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell/examine(mob/user)
 	. = ..()
-	if (. && user.Adjacent(src))
+	if (user.Adjacent(src))
 		if (beaker)
 			to_chat(user, "It is loaded with a beaker.")
 		if (occupant)
-			occupant.examine(user)
+			occupant.examine(arglist(args))
 
 /obj/machinery/atmospherics/unary/cryo_cell/Process()
 	..()
@@ -99,8 +90,9 @@
 	if(src.occupant == user && !user.stat)
 		go_out()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user)
+/obj/machinery/atmospherics/unary/cryo_cell/interface_interact(user)
 	ui_interact(user)
+	return TRUE
 
  /**
   * The ui_interact proc is used to open and update Nano UIs
@@ -197,15 +189,14 @@
 		go_out()
 		return TOPIC_REFRESH
 
+/obj/machinery/atmospherics/unary/cryo_cell/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, G))
-		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, G))
-		return
-	if(default_part_replacement(user, G))
-		return
+	if(component_attackby(G, user))
+		return TRUE
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
@@ -255,13 +246,7 @@
 		if(occupant.stat == DEAD)
 			return
 		occupant.set_stat(UNCONSCIOUS)
-		if(occupant.bodytemperature < 225)
-			if (occupant.getToxLoss())
-				occupant.adjustToxLoss(max(-1, -10/occupant.getToxLoss()))
-			var/heal_brute = occupant.getBruteLoss() ? min(1, 20/occupant.getBruteLoss()) : 0
-			var/heal_fire = occupant.getFireLoss	() ? min(1, 20/occupant.getFireLoss()) : 0
-			occupant.heal_organ_damage(heal_brute,heal_fire)
-		var/has_cryo_medicine = occupant.reagents.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone)) >= REM
+		var/has_cryo_medicine = occupant.reagents.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone, /datum/reagent/nanitefluid)) >= REM
 		if(beaker && !has_cryo_medicine)
 			beaker.reagents.trans_to_mob(occupant, REM, CHEM_BLOOD)
 
@@ -286,9 +271,9 @@
 	if (occupant.client)
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
-	occupant.forceMove(get_step(loc, SOUTH))	//this doesn't account for walls or anything, but i don't forsee that being a problem.
-	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) //Patch by Aranclanos to stop people from taking burn damage after being ejected
-		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
+	occupant.forceMove(get_step(loc, SOUTH))
+	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) 
+		occupant.bodytemperature = 261									  
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
 	update_use_power(POWER_USE_IDLE)

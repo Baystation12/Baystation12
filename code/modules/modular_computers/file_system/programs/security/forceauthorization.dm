@@ -10,6 +10,7 @@
 	available_on_ntnet = 1
 	required_access = access_armory
 	nanomodule_path = /datum/nano_module/forceauthorization/
+	category = PROG_SEC
 
 /datum/nano_module/forceauthorization/
 	name = "Use of Force Authorization Manager"

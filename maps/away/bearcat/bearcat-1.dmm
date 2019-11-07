@@ -12,7 +12,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -50,7 +50,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "engwindow";
+	id_tag = "engwindow";
 	name = "blast door";
 	opacity = 0
 	},
@@ -89,7 +89,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -104,7 +104,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "engwindow";
+	id_tag = "engwindow";
 	name = "blast door";
 	opacity = 0
 	},
@@ -127,7 +127,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -143,7 +143,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -464,7 +464,6 @@
 "bb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -563,7 +562,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -757,7 +756,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -771,7 +770,6 @@
 "bC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/holostool,
@@ -817,7 +815,7 @@
 /area/ship/scrap/cargo/lower)
 "bG" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/mech_wreckage/powerloader,
 /obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
@@ -883,7 +881,6 @@
 "bM" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/holostool,
@@ -1157,7 +1154,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -1202,6 +1199,12 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken2)
 "cr" = (
@@ -1216,6 +1219,9 @@
 	d2 = 2;
 	icon_state = "1-2";
 	pixel_y = 0
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/lower)
@@ -1320,7 +1326,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -1334,7 +1340,6 @@
 "cE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/foamedmetal,
@@ -1378,7 +1383,6 @@
 "cI" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/item/weapon/storage/briefcase,
@@ -1659,7 +1663,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -1700,6 +1704,12 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken1)
 "do" = (
@@ -1782,7 +1792,7 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -1793,8 +1803,7 @@
 "dx" = (
 /obj/structure/mopbucket,
 /obj/structure/table/rack{
-	dir = 8;
-	layer = 2.9
+	dir = 8
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/device/multitool{
@@ -1808,7 +1817,6 @@
 "dy" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -1866,7 +1874,6 @@
 "dF" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/holostool,
@@ -2093,9 +2100,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/techstorage)
 "eb" = (
-/obj/item/weapon/circuitboard/pacman,
-/obj/item/weapon/circuitboard/recharge_station,
-/obj/item/weapon/circuitboard/shield_generator,
+/obj/item/weapon/stock_parts/circuitboard/pacman,
+/obj/item/weapon/stock_parts/circuitboard/recharge_station,
+/obj/item/weapon/stock_parts/circuitboard/shield_generator,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -2105,8 +2112,8 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "ec" = (
-/obj/item/weapon/circuitboard/helm,
-/obj/item/weapon/circuitboard/unary_atmos/cooler,
+/obj/item/weapon/stock_parts/circuitboard/helm,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -2120,8 +2127,8 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "ed" = (
-/obj/item/weapon/circuitboard/autolathe,
-/obj/item/weapon/circuitboard/unary_atmos/heater,
+/obj/item/weapon/stock_parts/circuitboard/autolathe,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
@@ -2161,7 +2168,7 @@
 /obj/item/weapon/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/weapon/storage/box/glowsticks,
-/obj/item/weapon/mining_scanner,
+/obj/item/device/scanner/mining,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eg" = (
@@ -2173,7 +2180,6 @@
 /obj/item/device/radio,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /obj/item/weapon/storage/bag/trash,
@@ -2288,6 +2294,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
@@ -2422,7 +2434,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
@@ -2513,19 +2525,18 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "eG" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/pacman/super/potato,
+/obj/item/weapon/stock_parts/circuitboard/pacman/super/potato,
 /obj/item/stack/material/glass/phoronrglass/ten,
 /obj/item/stack/material/ocp/ten,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
-/obj/item/weapon/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "eH" = (
@@ -2535,12 +2546,17 @@
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 9
 	},
 /obj/structure/table/rack,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eI" = (
@@ -2613,7 +2629,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -2697,7 +2712,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "scraplock";
+	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},

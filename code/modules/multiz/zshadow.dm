@@ -13,7 +13,7 @@
 	//auto_init = FALSE 			// We do not need to be initialize()d
 	var/mob/owner = null		// What we are a shadow of.
 
-/mob/zshadow/can_fall()
+/mob/zshadow/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
 	return FALSE
 
 /mob/zshadow/New(var/mob/L)
@@ -28,9 +28,7 @@
 
 
 /mob/Destroy()
-	if(shadow)
-		qdel(shadow)
-		shadow = null
+	QDEL_NULL(shadow)
 	. = ..()
 
 /mob/zshadow/Destroy()
@@ -38,8 +36,8 @@
 	GLOB.invisibility_set_event.unregister(owner, src, /mob/zshadow/proc/update_invisibility)
 	. = ..()
 
-/mob/zshadow/examine(mob/user, distance, infix, suffix)
-	return owner.examine(user, distance, infix, suffix)
+/mob/zshadow/examine()
+	return owner.examine(arglist(args))
 
 // Relay some stuff they hear
 /mob/zshadow/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)

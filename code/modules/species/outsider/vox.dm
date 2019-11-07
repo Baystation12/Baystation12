@@ -9,10 +9,10 @@
 	blood_mask =      'icons/mob/human_races/species/vox/blood_mask.dmi'
 
 	unarmed_types = list(
-		/datum/unarmed_attack/stomp, 
-		/datum/unarmed_attack/kick,  
-		/datum/unarmed_attack/claws/strong, 
-		/datum/unarmed_attack/punch, 
+		/datum/unarmed_attack/stomp,
+		/datum/unarmed_attack/kick,
+		/datum/unarmed_attack/claws/strong,
+		/datum/unarmed_attack/punch,
 		/datum/unarmed_attack/bite/strong
 	)
 	rarity_value = 4
@@ -27,17 +27,7 @@
 	codex_description = "The Vox are a hostile, deeply untrustworthy species from the edges of human space. They prey \
 	on isolated stations, ships or settlements without any apparent logic or reason, and tend to refuse communications \
 	or negotiations except when their backs are to the wall or they are in dire need of resources. They are four to five \
-	feet tall, reptillian, beaked, tailed and quilled; human crews often refer to them as 'shitbirds' for their violent \
-	and offensive nature, as well as their horrible smell. \
-	<br/><br/> \
-	Standard procedure when dealing with a Vox: \
-	<ol> \
-	<li>Block your nose.</li> \
-	<li>Block your ears.</li> \
-	<li>Find an airlock.</li> \
-	<li>Space them.</li> \
-	</ol> \
-	Under no circumstances should you allow a Vox to sell you home, vessel or life insurance."
+	feet tall, reptillian, beaked, tailed and quilled."
 	hidden_from_codex = FALSE
 
 	taste_sensitivity = TASTE_DULL
@@ -50,12 +40,15 @@
 	cold_level_1 = 80
 	cold_level_2 = 50
 	cold_level_3 = 0
-
+	
+	min_age = 1
+	max_age = 100
+	
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
 
-	breath_type = "nitrogen"
-	poison_types = list("oxygen" = TRUE)
+	breath_type = GAS_NITROGEN
+	poison_types = list(GAS_OXYGEN = TRUE)
 	siemens_coefficient = 0.2
 
 	species_flags = SPECIES_FLAG_NO_SCAN
@@ -66,14 +59,11 @@
 	flesh_color = "#808d11"
 
 	reagent_tag = IS_VOX
-
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/leap
-		)
+	maneuvers = list(/decl/maneuver/leap/grab)
+	standing_jump_range = 5
 
 	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_HEAD = /obj/item/organ/external/head/vox
+		BP_GROIN = /obj/item/organ/external/groin/vox
 	)
 
 	has_organ = list(
@@ -83,8 +73,8 @@
 		BP_LIVER =      /obj/item/organ/internal/liver/vox,
 		BP_KIDNEYS =    /obj/item/organ/internal/kidneys/vox,
 		BP_BRAIN =      /obj/item/organ/internal/brain,
-		BP_EYES =       /obj/item/organ/internal/eyes,
-		BP_STACK =      /obj/item/organ/internal/stack/vox,
+		BP_EYES =       /obj/item/organ/internal/eyes/vox,
+		BP_STACK =      /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
 
@@ -122,18 +112,18 @@
 	if(istype(H.get_equipped_item(slot_back), /obj/item/weapon/storage/backpack))
 		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H.back), slot_in_backpack)
-		H.internal = H.r_hand
+		H.set_internals(H.r_hand)
 	else
 		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H), slot_r_hand)
-		H.internal = H.back
-
-	if(H.internals)
-		H.internals.icon_state = "internal1"
+		H.set_internals(H.back)
 
 /datum/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.</span>\n"
+	
+/datum/species/vox/skills_from_age(age)
+	. = 8
 
 /datum/species/vox/armalis
 	name = SPECIES_VOX_ARMALIS
@@ -151,11 +141,9 @@
 	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	brute_mod = 0.8
 	burn_mod = 0.8
+	strength = STR_HIGH
 
-	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_HEAD = /obj/item/organ/external/head/vox_armalis
-	)
+	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/vox/armalis)
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 2,

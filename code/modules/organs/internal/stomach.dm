@@ -86,18 +86,23 @@
 /obj/item/organ/internal/stomach/return_air()
 	return null
 
+// This call needs to be split out to make sure that all the ingested things are metabolised
+// before the process call is made on any of the other organs
+/obj/item/organ/internal/stomach/proc/metabolize()
+	if(is_usable())
+		ingested.metabolize()
+	
+#define STOMACH_VOLUME 65
+	
 /obj/item/organ/internal/stomach/Process()
-
 	..()
 
 	if(owner)
-
 		var/functioning = is_usable()
-		if(functioning && damage >= min_bruised_damage && prob(damage))
+		if(damage >= min_bruised_damage && prob((damage / max_damage) * 100))
 			functioning = FALSE
-		
+
 		if(functioning)
-			ingested.metabolize()
 			for(var/mob/living/M in contents)
 				if(M.stat == DEAD)
 					qdel(M)
@@ -115,11 +120,19 @@
 			next_cramp = world.time + rand(200,800)
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
 
-		var/alcohol_threshold_met = (ingested.get_reagent_amount(/datum/reagent/ethanol) > 60)
+		var/alcohol_volume = ingested.get_reagent_amount(/datum/reagent/ethanol)
+		
+		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
 		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
 			owner.seizure()
-
-		if(ingested.total_volume > 60 || ((alcohol_threshold_met || ingested.total_volume > 35) && prob(15)))
+		
+		// Alcohol counts as double volume for the purposes of vomit probability
+		var/effective_volume = ingested.total_volume + alcohol_volume
+		
+		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
+		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6
+		if(prob(vomit_probability))
 			owner.vomit()
 
+#undef STOMACH_VOLUME
 #undef PUKE_ACTION_NAME

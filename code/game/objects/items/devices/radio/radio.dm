@@ -28,11 +28,13 @@
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
-	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device
+	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/device
 	var/power_usage = 2800
 
 	var/datum/radio_frequency/radio_connection
 	var/list/datum/radio_frequency/secure_radio_connections = new
+
+	var/last_radio_sound = -INFINITY
 
 /obj/item/device/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -83,8 +85,9 @@
 	data["speaker"] = listening
 	data["freq"] = format_frequency(frequency)
 	data["rawfreq"] = num2text(frequency)
-	if(cell)
-		var/charge = round(cell.percent())
+	var/obj/item/weapon/cell/has_cell = get_cell()
+	if(has_cell)
+		var/charge = round(has_cell.percent())
 		data["charge"] = charge ? "[charge]%" : "NONE"
 	data["mic_cut"] = (wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
 	data["spk_cut"] = (wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
@@ -255,13 +258,18 @@
 
 	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
 
-	// Sedation chemical effect should prevent radio use (Chloral and Soporific)
-	var/mob/living/carbon/C = M
-	if ((istype(C)) && (C.chem_effects[CE_SEDATE]))
-		to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
-		return 0
+	if (!broadcasting)
+		// Sedation chemical effect should prevent radio use (Chloral and Soporific)
+		var/mob/living/carbon/C = M
+		if ((istype(C)) && (C.chem_effects[CE_SEDATE] || C.incapacitated(INCAPACITATION_DISRUPTED)))
+			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
+			return 0
 
-	if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
+		if((istype(C)) && C.radio_interrupt_cooldown > world.time)
+			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
+			return 0
+
+		if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
@@ -273,9 +281,10 @@
 
 
 	if(power_usage)
-		if(!cell)
+		var/obj/item/weapon/cell/has_cell = get_cell()
+		if(!has_cell)
 			return 0
-		if(!cell.checked_use(power_usage * CELLRATE))
+		if(!has_cell.checked_use(power_usage * CELLRATE))
 			return 0
 
 	if(loc == M)
@@ -452,8 +461,9 @@
 		"verb" = verb
 	)
 	signal.frequency = connection.frequency // Quick frequency set
-	if(cell && cell.percent() < 20)
-		signal.data["compression"] = max(0, 80 - cell.percent()*3)
+	var/obj/item/weapon/cell/has_cell = get_cell()
+	if(has_cell && has_cell.percent() < 20)
+		signal.data["compression"] = max(0, 80 - has_cell.percent()*3)
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
@@ -534,14 +544,13 @@
 		return get_mobs_or_objects_in_view(canhear_range, src)
 
 
-/obj/item/device/radio/examine(mob/user)
+/obj/item/device/radio/examine(mob/user, distance)
 	. = ..()
-	if ((in_range(src, user) || loc == user))
+	if (distance <= 1 || loc == user)
 		if (b_stat)
-			user.show_message("<span class='notice'>\The [src] can be attached and modified!</span>")
+			to_chat(user, "<span class='notice'>\The [src] can be attached and modified!</span>")
 		else
-			user.show_message("<span class='notice'>\The [src] can not be modified or attached!</span>")
-	return
+			to_chat(user, "<span class='notice'>\The [src] can not be modified or attached!</span>")
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -659,7 +668,7 @@
 	src.syndie = 0
 
 	var/mob/living/silicon/robot/D = src.loc
-	if(D.module)
+	if(istype(D.module))
 		for(var/ch_name in D.module.channels)
 			if(ch_name in src.channels)
 				continue
@@ -808,3 +817,44 @@
 	icon_state = "radio"
 	intercept = 1
 	w_class = ITEM_SIZE_NORMAL
+
+
+//The exosuit  radio subtype. It allows pilots to interact and consumes exosuit power
+
+/obj/item/device/radio/exosuit
+	name = "exosuit radio"
+	cell = null
+
+/obj/item/device/radio/exosuit/get_cell()
+	. = ..()
+	if(!.)
+		var/mob/living/exosuit/E = loc
+		if(istype(E))
+			return E.get_cell()
+
+/obj/item/device/radio/exosuit/nano_host()
+	var/mob/living/exosuit/E = loc
+	if(istype(E))
+		return E
+	return null
+
+/obj/item/device/radio/exosuit/attack_self(var/mob/user)
+	var/mob/living/exosuit/exosuit = loc
+	if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
+		user.set_machine(src)
+		interact(user)
+	else
+		to_chat(user, SPAN_WARNING("The radio is too damaged to function."))
+
+/obj/item/device/radio/exosuit/CanUseTopic()
+	. = ..()
+	if(.)
+		var/mob/living/exosuit/exosuit = loc
+		if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
+			return ..()
+
+/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
+	. = ..()
+
+
+

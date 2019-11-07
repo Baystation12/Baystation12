@@ -1,6 +1,6 @@
 /obj/item/weapon/card/id/syndicate
 	assignment = "Agent"
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	var/electronic_warfare = 1
 	var/mob/registered_user = null
 	color = COLOR_GRAY40
@@ -85,8 +85,8 @@
 	GLOB.destroyed_event.unregister(registered_user, src)
 	registered_user = null
 
-/obj/item/weapon/card/id/syndicate/CanUseTopic(mob/user)
-	if(user != registered_user)
+/obj/item/weapon/card/id/syndicate/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
+	if(!(href_list && href_list["look_at_id"]) && (user != registered_user))
 		return STATUS_CLOSE
 	return ..()
 

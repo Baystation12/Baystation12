@@ -7,6 +7,7 @@
 	although staying on base is tempting. Plenty of nitrogen, and not much hazards to worry about."
 	whitelisted_species = list(SPECIES_VOX)
 	blacklisted_species = null
+	is_semi_antagonist = TRUE
 
 #define VOXSHIP_OUTFIT_JOB_NAME(job_name) ("Vox Asteroid Base - Job - " + job_name)
 /decl/hierarchy/outfit/job/voxship

@@ -6,14 +6,12 @@
 	icon_state = "infrared"
 	origin_tech = list(TECH_MAGNET = 2)
 	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_WASTE = 100)
-
 	wires = WIRE_PULSE
-
 	secured = 0
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_ROTATABLE
 
 	var/on = 0
 	var/visible = 0
-
 	var/list/beams
 	var/list/seen_turfs
 	var/datum/proximity_trigger/line/proximity_trigger
@@ -92,13 +90,6 @@
 
 	if(usr)
 		attack_self(usr)
-
-/obj/item/device/assembly/infra/verb/rotate()//This could likely be better
-	set name = "Rotate Infrared Laser"
-	set category = "Object"
-	set src in usr
-
-	set_dir(turn(dir, 90))
 
 /obj/item/device/assembly/infra/proc/on_beam_entered(var/atom/enterer)
 	if(enterer == src)

@@ -32,6 +32,13 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_main.dmi'
 	unavailable_at_fab = 1
 
+/datum/robolimb/bishop/rook
+	company = "Bishop Rook"
+	desc = "This limb has a polished metallic casing and a holographic face emitter."
+	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_rook.dmi'
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
 /datum/robolimb/bishop/alt
 	company = "Bishop Alt."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_alt.dmi'
@@ -56,6 +63,13 @@ var/datum/robolimb/basic_robolimb
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
+/datum/robolimb/hephaestus/titan
+	company = "Hephaestus Titan"
+	desc = "This limb has a casing of an olive drab finish, providing a reinforced housing look."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_titan.dmi'
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
 /datum/robolimb/hephaestus/alt/monitor
 	company = "Hephaestus Monitor."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_monitor.dmi'
@@ -71,10 +85,22 @@ var/datum/robolimb/basic_robolimb
 	unavailable_at_fab = 1
 	allowed_bodytypes = list(SPECIES_HUMAN,SPECIES_IPC)
 
+/datum/robolimb/zenghu/spirit
+	company = "Zeng-Hu Spirit"
+	desc = "This limb has a sleek black and white polymer finish."
+	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_spirit.dmi'
+	unavailable_at_fab = 1
+
 /datum/robolimb/xion
 	company = "Xion"
 	desc = "This limb has a minimalist black and red casing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_main.dmi'
+
+/datum/robolimb/xion/econo
+	company = "Xion Econ"
+	desc = "This skeletal mechanical limb has a minimalist black and red casing."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_econo.dmi'
+	unavailable_at_fab = 1
 
 /datum/robolimb/xion/alt
 	company = "Xion Alt."
@@ -125,6 +151,33 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_main.dmi'
 	unavailable_at_fab = 1
 
+/datum/robolimb/morpheus/alt
+	company = "Morpheus Atlantis"
+	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_atlantis.dmi'
+	applies_to_part = list(BP_HEAD)
+	unavailable_at_fab = 1
+
+/datum/robolimb/morpheus/alt/blitz
+	company = "Morpheus Blitz"
+	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_blitz.dmi'
+	applies_to_part = list(BP_HEAD)
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
+/datum/robolimb/morpheus/alt/airborne
+	company = "Morpheus Airborne"
+	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_airborne.dmi'
+	applies_to_part = list(BP_HEAD)
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
+/datum/robolimb/morpheus/alt/prime
+	company = "Morpheus Prime"
+	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_prime.dmi'
+	applies_to_part = list(BP_HEAD)
+	has_eyes = FALSE
+	unavailable_at_fab = 1
+
 /datum/robolimb/mantis
 	company = "Morpheus Mantis"
 	desc = "This limb has a casing of sleek black metal and repulsive insectile design."
@@ -149,20 +202,31 @@ var/datum/robolimb/basic_robolimb
 	unavailable_at_fab = 1
 	species_cannot_use = list(SPECIES_IPC)
 
-/datum/robolimb/grayson
-	company = "Grayson"
+/datum/robolimb/shellguard
+	company = "Shellguard"
 	desc = "This limb has a sturdy and heavy build to it."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_main.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_main.dmi'
 
-/datum/robolimb/grayson/alt
-	company = "Grayson Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_alt.dmi'
+/datum/robolimb/shellguard/alt
+	company = "Shellguard Alt."
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_alt.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
-/datum/robolimb/grayson/alt/monitor
-	company = "Grayson Monitor."
-	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_monitor.dmi'
+/datum/robolimb/shellguard/alt/monitor
+	company = "Shellguard Monitor."
+	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_monitor.dmi'
 	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 	allowed_bodytypes = list(SPECIES_IPC)
+
+/datum/robolimb/vox
+	company = "Arkmade"
+	icon = 'icons/mob/human_races/cyberlimbs/vox/primalis.dmi'
+	unavailable_at_fab = 1
+	allowed_bodytypes = list(SPECIES_VOX)
+	species_cannot_use = list(SPECIES_VOX_ARMALIS)
+
+/datum/robolimb/vox/crap
+	company = "Improvised"
+	icon = 'icons/mob/human_races/cyberlimbs/vox/improvised.dmi'

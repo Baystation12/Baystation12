@@ -7,8 +7,10 @@
 	reagent_state = SOLID
 	metabolism = REM * 4
 	var/nutriment_factor = 10 // Per unit
+	var/hydration_factor = 0 // Per unit
 	var/injectable = 0
 	color = "#664330"
+	value = 0.1
 
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
@@ -46,18 +48,24 @@
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
 /datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
-	switch(alien)
-		if(IS_UNATHI) removed *= 0.1 // Unathi get most of their nutrition from meat.
-	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	var/nut_removed = removed
+	var/hyd_removed = removed
+	if(alien == IS_UNATHI)
+		removed *= 0.1 // Unathi get most of their nutrition from meat.
+	if(nutriment_factor)
+		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
+	if(hydration_factor)
+		M.adjust_hydration(hydration_factor * hyd_removed) // For thirst
 
 /datum/reagent/nutriment/glucose
 	name = "Glucose"
 	color = "#ffffff"
+	scannable = 1
 
 	injectable = 1
 
 /datum/reagent/nutriment/protein // Bad for Skrell!
-	name = "animal protein"
+	name = "Animal Protein"
 	taste_description = "some sort of protein"
 	color = "#440000"
 
@@ -71,7 +79,7 @@
 /datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
 		if(IS_UNATHI) removed *= 2.25
-	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	M.adjust_nutrition(nutriment_factor * removed)
 
 /datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien && alien == IS_SKRELL)
@@ -313,9 +321,10 @@
 	reagent_state = LIQUID
 	color = "#bbeda4"
 	overdose = REAGENTS_OVERDOSE
+	value = 0.11
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition = max(M.nutrition - 10 * removed, 0)
+	M.adjust_nutrition(-10)
 
 /* Non-food stuff like condiments */
 
@@ -326,6 +335,7 @@
 	reagent_state = SOLID
 	color = "#ffffff"
 	overdose = REAGENTS_OVERDOSE
+	value = 0.11
 
 /datum/reagent/blackpepper
 	name = "Black Pepper"
@@ -333,6 +343,7 @@
 	taste_description = "pepper"
 	reagent_state = SOLID
 	color = "#000000"
+	value = 0.1
 
 /datum/reagent/enzyme
 	name = "Universal Enzyme"
@@ -342,6 +353,7 @@
 	reagent_state = LIQUID
 	color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
+	value = 0.2
 
 /datum/reagent/frostoil
 	name = "Frost Oil"
@@ -350,6 +362,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#07aab2"
+	value = 0.2
 
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -372,6 +385,7 @@
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
+	value = 0.2
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -403,7 +417,7 @@
 	taste_description = "scorching agony"
 	taste_mult = 10
 	reagent_state = LIQUID
-	touch_met = 50 // Get rid of it quickly
+	touch_met = 5 // Get rid of it quickly
 	color = "#b31008"
 	agony_dose = 0.5
 	agony_amount = 4
@@ -413,9 +427,12 @@
 /datum/reagent/capsaicin/condensed/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	var/eyes_covered = 0
 	var/mouth_covered = 0
+	var/partial_mouth_covered = 0
+	var/stun_probability = 50
 	var/no_pain = 0
 	var/obj/item/eye_protection = null
 	var/obj/item/face_protection = null
+	var/obj/item/partial_face_protection = null
 
 	var/effective_strength = 5
 
@@ -439,13 +456,16 @@
 			if((I.body_parts_covered & FACE) && !(I.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 				mouth_covered = 1
 				face_protection = I.name
+			else if(I.body_parts_covered & FACE)
+				partial_mouth_covered = 1
+				partial_face_protection = I.name
 
-	var/message = null
 	if(eyes_covered)
 		if(!mouth_covered)
-			message = "<span class='warning'>Your [eye_protection] protects your eyes from the pepperspray!</span>"
+			to_chat(M, "<span class='warning'>Your [eye_protection] protects your eyes from the pepperspray!</span>")
 	else
-		message = "<span class='warning'>The pepperspray gets in your eyes!</span>"
+		to_chat(M, "<span class='warning'>The pepperspray gets in your eyes!</span>")
+		M.confused += 2
 		if(mouth_covered)
 			M.eye_blurry = max(M.eye_blurry, effective_strength * 3)
 			M.eye_blind = max(M.eye_blind, effective_strength)
@@ -454,14 +474,17 @@
 			M.eye_blind = max(M.eye_blind, effective_strength * 2)
 
 	if(mouth_covered)
-		if(!message)
-			message = "<span class='warning'>Your [face_protection] protects you from the pepperspray!</span>"
+		to_chat(M, "<span class='warning'>Your [face_protection] protects you from the pepperspray!</span>")
 	else if(!no_pain)
-		message = "<span class='danger'>Your face and throat burn!</span>"
-		if(prob(25))
+		if(partial_mouth_covered)
+			to_chat(M, "<span class='warning'>Your [partial_face_protection] partially protects you from the pepperspray!</span>")
+			stun_probability *= 0.5
+		to_chat(M, "<span class='danger'>Your face and throat burn!</span>")
+		if(M.stunned > 0  && !M.lying)
+			M.Weaken(4)
+		if(prob(stun_probability))
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
-		M.Weaken(5)
-		M.Stun(6)
+			M.Stun(3)
 
 /datum/reagent/capsaicin/condensed/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
@@ -471,9 +494,11 @@
 	if(M.chem_doses[type] == metabolism)
 		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	else
-		M.apply_effect(4, PAIN, 0)
+		M.apply_effect(6, PAIN, 0)
 		if(prob(5))
-			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
+			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
+			M.Stun(2)
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(15, 30)
 	holder.remove_reagent(/datum/reagent/frostoil, 5)
@@ -502,17 +527,22 @@
 	reagent_state = LIQUID
 	color = "#e78108"
 	var/nutrition = 0 // Per unit
+	var/hydration = 6 // Per unit
 	var/adj_dizzy = 0 // Per tick
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
 	var/adj_temp = 0
+	value = 0.1
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition += nutrition * removed
+	if(nutrition)
+		M.adjust_nutrition(nutrition * removed)
+	if(hydration)
+		M.adjust_hydration(hydration * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
@@ -762,19 +792,21 @@
 	adj_drowsy = -3
 	adj_sleepy = -2
 	adj_temp = 25
-	overdose = 45
+	overdose = 60
 
 	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
-	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
 	..()
+
 	if(adj_temp > 0)
 		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
 	if(volume > 15)
+		M.add_chemical_effect(CE_PULSE, 1)
+	if(volume > 45)
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -785,7 +817,7 @@
 	if(alien == IS_DIONA)
 		return
 	M.make_jittery(5)
-	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/drink/coffee/icecoffee
 	name = "Iced Coffee"
@@ -826,6 +858,22 @@
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
 
+/datum/reagent/drink/coffee/cafe_latte/mocha
+	name = "Mocha Latte"
+	description = "Coffee and chocolate, smooth and creamy."
+	taste_description = "bitter creamy chocolate"
+
+	glass_name = "mocha latte"
+	glass_desc = "Coffee and chocolate, smooth and creamy."
+
+/datum/reagent/drink/coffee/cafe_latte/pumpkin
+	name = "Pumpkin Spice Latte"
+	description = "Smells and tastes like Autumn."
+	taste_description = "bitter creamy pumpkin spice"
+
+	glass_name = "pumpkin spice latte"
+	glass_desc = "Smells and tastes like Autumn."
+
 /datum/reagent/drink/hot_coco
 	name = "Hot Chocolate"
 	description = "Made with love! And cocoa beans."
@@ -837,7 +885,6 @@
 
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
-	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/sodawater
 	name = "Soda Water"
@@ -2090,7 +2137,6 @@
 
 	glass_name = "black tea"
 	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
-	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -2100,21 +2146,21 @@
 
 /datum/reagent/drink/tea/icetea
 	name = "Iced Black Tea"
-	description = "It's the tea you know and love, but now it's cold."
+	description = "It's the black tea you know and love, but now it's cold."
 	taste_description = "cold black tea"
 	adj_temp = -5
 
 	glass_name = "iced black tea"
-	glass_desc = "It's the tea you know and love, but now it's cold."
+	glass_desc = "It's the black tea you know and love, but now it's cold."
 	glass_special = list(DRINK_ICE)
 
 /datum/reagent/drink/tea/icetea/sweet
 	name = "Sweet Black Tea"
-	description = "It's the tea you know and love, but now it's cold. And sweet."
+	description = "It's the black tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet tea"
 
 	glass_name = "sweet black tea"
-	glass_desc = "It's the tea you know and love, but now it's cold. And sweet."
+	glass_desc = "It's the black tea you know and love, but now it's cold. And sweet."
 
 /datum/reagent/drink/tea/barongrey
 	name = "Baron Grey Tea"
@@ -2124,24 +2170,41 @@
 	glass_name = "Baron Grey tea"
 	glass_desc = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
 
+/datum/reagent/drink/tea/barongrey/latte
+	name = "London Fog"
+	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
+	taste_description = "creamy, tangy black tea"
+
+	glass_name = "London Fog"
+	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
+
 //green tea
 /datum/reagent/drink/tea/green
 	name = "Green Tea"
+	description = "Subtle green tea, it has antioxidants, it's good for you!"
 	taste_description = "subtle green tea"
 	color = "#b4cd94"
+
 	glass_name = "green tea"
+	glass_desc = "Subtle green tea, it has antioxidants, it's good for you!"
 
 /datum/reagent/drink/tea/icetea/green
 	name = "Iced Green Tea"
+	description = "It's the green tea you know and love, but now it's cold."
 	taste_description = "cold green tea"
 	color = "#b4cd94"
+
 	glass_name = "iced green tea"
+	glass_desc = "It's the green tea you know and love, but now it's cold."
 
 /datum/reagent/drink/tea/icetea/green/sweet
 	name = "Sweet Green Tea"
+	description = "It's the green tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet green tea"
 	color = "#b4cd94"
+
 	glass_name = "sweet green tea"
+	glass_desc = "It's the green tea you know and love, but now it's cold. And sweet."
 
 /datum/reagent/drink/tea/icetea/green/sweet/mint
 	name = "Maghrebi Tea"
@@ -2150,3 +2213,100 @@
 
 	glass_name = "Maghrebi mint tea"
 	glass_desc = "Iced green tea prepared with mint and sugar. Refreshing!"
+
+/datum/reagent/drink/tea/chai
+	name = "Chai Tea"
+	description = "A spiced, dark tea. Goes great with milk."
+	taste_description = "spiced black tea"
+	color = "#151000"
+
+	glass_name = "chai tea"
+	glass_desc = "A spiced, dark tea. Goes great with milk."
+
+/datum/reagent/drink/tea/icetea/chai
+	name = "Iced Chai Tea"
+	description = "It's the chai tea you know and love, but now it's cold."
+	taste_description = "cold spiced black tea"
+	color = "#151000"
+
+	glass_name = "iced chai tea"
+	glass_desc = "It's the chai tea you know and love, but now it's cold."
+
+/datum/reagent/drink/tea/icetea/chai/sweet
+	name = "Sweet Chai Tea"
+	description = "It's the chai tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet spiced black tea"
+
+	glass_name = "sweet chai tea"
+	glass_desc = "It's the chai tea you know and love, but now it's cold. And sweet."
+
+/datum/reagent/drink/tea/chai/latte
+	name = "Chai Latte"
+	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
+	taste_description = "creamy spiced tea"
+	color = "#c8a988"
+
+	glass_name = "chai latte"
+	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
+
+/datum/reagent/drink/tea/red
+	name = "Rooibos Tea"
+	description = "A caffeine-free dark red tea, flavorful and full of antioxidants."
+	taste_description = "nutty red tea"
+	color = "#ab4c3a"
+
+	glass_name = "rooibos tea"
+	glass_desc = "A caffeine-free dark red tea, flavorful and full of antioxidants."
+
+/datum/reagent/drink/tea/icetea/red
+	name = "Iced Rooibos Tea"
+	description = "It's the red tea you know and love, but now it's cold."
+	taste_description = "cold nutty red tea"
+	color = "#ab4c3a"
+
+	glass_name = "iced rooibos tea"
+	glass_desc = "It's the red tea you know and love, but now it's cold."
+
+/datum/reagent/drink/tea/icetea/red/sweet
+	name = "Sweet Rooibos Tea"
+	description = "It's the red tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet nutty red tea"
+
+	glass_name = "sweet rooibos tea"
+	glass_desc = "It's the red tea you know and love, but now it's cold. And sweet."
+
+/datum/reagent/drink/syrup_chocolate
+	name = "Chocolate Syrup"
+	description = "Thick chocolate syrup used to flavor drinks."
+	taste_description = "chocolate"
+	color = "#542a0c"
+
+	glass_name = "chocolate syrup"
+	glass_desc = "Thick chocolate syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_caramel
+	name = "Caramel Syrup"
+	description = "Thick caramel syrup used to flavor drinks."
+	taste_description = "caramel"
+	color = "#85461e"
+
+	glass_name = "caramel syrup"
+	glass_desc = "Thick caramel syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_vanilla
+	name = "Vanilla Syrup"
+	description = "Thick vanilla syrup used to flavor drinks."
+	taste_description = "vanilla"
+	color = "#f3e5ab"
+
+	glass_name = "vanilla syrup"
+	glass_desc = "Thick vanilla syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_pumpkin
+	name = "Pumpkin Spice Syrup"
+	description = "Thick spiced pumpkin syrup used to flavor drinks."
+	taste_description = "spiced pumpkin"
+	color = "#d88b4c"
+
+	glass_name = "pumpkin spice syrup"
+	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."

@@ -1,5 +1,5 @@
 /atom/movable
-	plane = OBJ_PLANE
+	layer = OBJ_LAYER
 
 	appearance_flags = TILE_BOUND
 	glide_size = 8
@@ -45,6 +45,8 @@
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
+	if((gc_destroyed && gc_destroyed != GC_CURRENTLY_BEING_QDELETED) && !isnull(destination))
+		CRASH("Attempted to forceMove a QDELETED [src] out of nullspace!!!")
 	if(loc == destination)
 		return 0
 	var/is_origin_turf = isturf(loc)
@@ -74,6 +76,39 @@
 			if(is_new_area && is_destination_turf)
 				destination.loc.Entered(src, origin)
 	return 1
+
+/atom/movable/forceMove(atom/dest)
+	var/old_loc = loc
+	. = ..()
+	if (.)
+		// observ
+		if(!loc)
+			GLOB.moved_event.raise_event(src, old_loc, null)
+
+		// freelook
+		if(opacity)
+			updateVisibility(src)
+
+		// lighting
+		if (light_sources)	// Yes, I know you can for-null safely, but this is slightly faster. Hell knows why.
+			for (var/datum/light_source/L in light_sources)
+				L.source_atom.update_light()
+
+/atom/movable/Move(...)
+	var/old_loc = loc
+	. = ..()
+	if (.)
+		if(!loc)
+			GLOB.moved_event.raise_event(src, old_loc, null)
+
+		// freelook
+		if(opacity)
+			updateVisibility(src)
+
+		// lighting
+		if (light_sources)	// Yes, I know you can for-null safely, this is slightly faster. Hell knows why.
+			for (var/datum/light_source/L in light_sources)
+				L.source_atom.update_light()
 
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/speed)
@@ -155,10 +190,14 @@
 		minor_dir = dx
 		minor_dist = dist_x
 
+	// and yet it moves
+	if(src.does_spin)
+		src.SpinAnimation(speed = 4, loops = 1)
+
 	while(src && target && src.throwing && istype(src.loc, /turf) \
-		  && ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < range) \
-		  	   || (a && a.has_gravity == 0) \
-			   || istype(src.loc, /turf/space)))
+			&& ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < range) \
+				|| (a && a.has_gravity == 0) \
+				|| istype(src.loc, /turf/space)))
 		// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 		var/atom/step
 		if(error >= 0)
@@ -177,9 +216,6 @@
 			dist_since_sleep = 0
 			sleep(1)
 		a = get_area(src.loc)
-		// and yet it moves
-		if(src.does_spin)
-			src.SpinAnimation(speed = 4, loops = 1)
 
 	//done throwing, either because it hit something or it finished moving
 	if(isobj(src)) src.throw_impact(get_turf(src),speed)
@@ -268,3 +304,6 @@
 		var/turf/T = locate(new_x, new_y, new_z)
 		if(T)
 			forceMove(T)
+
+/atom/movable/proc/get_bullet_impact_effect_type()
+	return BULLET_IMPACT_NONE

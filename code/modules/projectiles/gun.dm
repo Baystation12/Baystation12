@@ -98,7 +98,7 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
-	
+
 	if(scope_zoom)
 		verbs += /obj/item/weapon/gun/proc/scope
 
@@ -175,6 +175,11 @@
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
 		handle_suicide(user)
+	else if(user.a_intent != I_HURT && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
+		if (user.aiming.aiming_at != A)
+			PreFire(A, user)
+		else
+			Fire(A, user, pointblank=1)
 	else if(user.a_intent == I_HURT) //point blank shooting
 		Fire(A, user, pointblank=1)
 	else
@@ -227,7 +232,7 @@
 		if(pointblank)
 			process_point_blank(projectile, user, target)
 
-		if(process_projectile(projectile, user, target, user.zone_sel.selecting, clickparams))
+		if(process_projectile(projectile, user, target, user.zone_sel?.selecting, clickparams))
 			handle_post_fire(user, target, pointblank, reflex)
 			update_icon()
 
@@ -348,8 +353,8 @@
 
 	stood_still = max(0,round((world.time - stood_still)/10) - 1)
 	if(stood_still)
-		acc_mod += min(max(2, accuracy), stood_still)
-	else 
+		acc_mod += min(max(3, accuracy), stood_still)
+	else
 		acc_mod -= w_class - ITEM_SIZE_NORMAL
 		acc_mod -= bulk
 
@@ -488,7 +493,8 @@
 		if(firemodes.len > 1)
 			var/datum/firemode/current_mode = firemodes[sel_mode]
 			to_chat(user, "The fire selector is set to [current_mode.name].")
-	to_chat(user, "The safety is [safety() ? "on" : "off"].")
+	if(has_safety)
+		to_chat(user, "The safety is [safety() ? "on" : "off"].")
 	last_safety_check = world.time
 
 /obj/item/weapon/gun/proc/switch_firemodes()
@@ -535,8 +541,8 @@
 /obj/item/weapon/gun/CtrlClick(var/mob/user)
 	if(loc == user)
 		toggle_safety(user)
-	else
-		..()
+		return TRUE
+	. = ..()
 
 /obj/item/weapon/gun/proc/safety()
 	return has_safety && safety_state
@@ -562,20 +568,12 @@
 /obj/item/weapon/gun/proc/can_autofire()
 	return (can_autofire && world.time >= next_fire_time)
 
-/client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
-	. = ..()
-	if(over_object)
-		var/mob/living/M = mob
-		if(istype(M) && !M.incapacitated())
-			var/obj/item/weapon/gun/gun = mob.get_active_hand()
-			if(istype(gun) && gun.can_autofire())
-				M.set_dir(get_dir(M, over_object))
-				gun.Fire(get_turf(over_object), mob, params, (get_dist(over_object, mob) <= 1), FALSE)
-
-/obj/item/weapon/gun/proc/check_accidents(mob/living/user)
+/obj/item/weapon/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
 	if(istype(user))
-		if(!safety() && user.skill_fail_prob(SKILL_WEAPONS, 20, SKILL_EXPERT, 2) && special_check(user))
-			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
+		if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
+			user.visible_message(SPAN_WARNING(message))
 			var/list/targets = list(user)
-			targets += trange(2, src)
-			afterattack(pick(targets), user)
+			targets += trange(2, get_turf(src))
+			var/picked = pick(targets)
+			afterattack(picked, user)
+			return 1

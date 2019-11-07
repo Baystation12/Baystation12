@@ -22,9 +22,10 @@
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
 
 	var/list/mixing_inputs = list()
+	build_icon_state = "omni_mixer"
 
-/obj/machinery/atmospherics/omni/mixer/New()
-	..()
+/obj/machinery/atmospherics/omni/mixer/Initialize()
+	. = ..()
 	if(mapper_set())
 		var/con = 0
 		for(var/datum/omni_port/P in ports)

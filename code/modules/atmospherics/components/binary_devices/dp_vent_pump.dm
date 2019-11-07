@@ -41,8 +41,8 @@
 	//2: Do not pass input_pressure_min
 	//4: Do not pass output_pressure_max
 
-/obj/machinery/atmospherics/binary/dp_vent_pump/New()
-	..()
+/obj/machinery/atmospherics/binary/dp_vent_pump/Initialize()
+	. = ..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
@@ -50,8 +50,8 @@
 /obj/machinery/atmospherics/binary/dp_vent_pump/high_volume
 	name = "Large Dual Port Air Vent"
 
-/obj/machinery/atmospherics/binary/dp_vent_pump/high_volume/New()
-	..()
+/obj/machinery/atmospherics/binary/dp_vent_pump/high_volume/Initialize()
+	. = ..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
@@ -194,8 +194,9 @@
 	if(frequency)
 		set_frequency(frequency)
 
-/obj/machinery/atmospherics/binary/dp_vent_pump/examine(mob/user)
-	if(..(user, 1))
+/obj/machinery/atmospherics/binary/dp_vent_pump/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/receive_signal(datum/signal/signal)

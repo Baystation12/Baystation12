@@ -5,7 +5,7 @@ var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
 var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
-	for(var/type in typesof(/datum/map) - /datum/map)
+	for(var/type in subtypesof(/datum/map))
 		var/datum/map/M
 		if(type == GLOB.using_map.type)
 			M = GLOB.using_map
@@ -13,7 +13,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		else
 			M = new type
 		if(!M.path)
-			log_error("Map '[M]' does not have a defined path, not adding to map list!")
+			log_error("Map '[M]' ([type]) does not have a defined path, not adding to map list!")
 		else
 			GLOB.all_maps[M.path] = M
 	return 1
@@ -85,8 +85,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 
-	var/lobby_icon									// The icon which contains the lobby image(s)
-	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
+	var/list/lobby_screens = list('icons/default_lobby.png')    // The list of lobby screen images to pick() from.
+	var/current_lobby_screen
 	var/music_track/lobby_track                     // The track that will play in the lobby screen.
 	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
 	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
@@ -168,13 +168,18 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			RELIGION_JUDAISM,
 			RELIGION_HINDUISM,
 			RELIGION_BUDDHISM,
+			RELIGION_SIKHISM,
+			RELIGION_JAINISM,
 			RELIGION_ISLAM,
 			RELIGION_CHRISTIANITY,
+			RELIGION_BAHAI_FAITH,
 			RELIGION_AGNOSTICISM,
 			RELIGION_DEISM,
 			RELIGION_ATHEISM,
 			RELIGION_THELEMA,
-			RELIGION_SPIRITUALISM
+			RELIGION_SPIRITUALISM,
+			RELIGION_SHINTO,
+			RELIGION_TAOISM
 		)
 	)
 
@@ -196,9 +201,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 
 	// List of /datum/department types to instantiate at roundstart.
-	var/list/departments = list(
-		/datum/department/medbay
-	)
+	var/list/departments
 
 /datum/map/New()
 	if(!map_levels)
@@ -209,17 +212,20 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			var/datum/job/job = jtype
 			if(initial(job.available_by_default))
 				allowed_jobs += jtype
-	if(!planet_size)
+	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
+	current_lobby_screen = pick(lobby_screens)
 
-/datum/map/proc/setup_map()
+/datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(lobby_tracks.len)
-		lobby_track_type = pick(lobby_tracks)
+		lobby_track_type = pick(lobby_tracks - exclude)
 	else
-		lobby_track_type = pick(subtypesof(/music_track))
+		lobby_track_type = pick(subtypesof(/music_track) - exclude)
+	return decls_repository.get_decl(lobby_track_type)
 
-	lobby_track = decls_repository.get_decl(lobby_track_type)
+/datum/map/proc/setup_map()
+	lobby_track = get_lobby_track()
 	world.update_status()
 
 /datum/map/proc/setup_job_lists()
@@ -312,7 +318,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		weighted_mundaneevent_locations[D] = D.viable_mundane_events.len
 
 	if(!station_account)
-		station_account = create_account("[station_name()] Primary Account", starting_money)
+		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	for(var/job in allowed_jobs)
 		var/datum/job/J = job
@@ -321,13 +327,17 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			station_departments |= dept
 
 	for(var/department in station_departments)
-		department_accounts[department] = create_account("[department] Account", department_money)
+		department_accounts[department] = create_account("[department] Account", "[department]", department_money, ACCOUNT_TYPE_DEPARTMENT)
 
-	department_accounts["Vendor"] = create_account("Vendor Account", 0)
+	department_accounts["Vendor"] = create_account("Vendor Account", "Vendor", 0, ACCOUNT_TYPE_DEPARTMENT)
 	vendor_account = department_accounts["Vendor"]
 
 /datum/map/proc/map_info(var/client/victim)
-	return
+	to_chat(victim, "<h2>Current map information</h2>")
+	to_chat(victim, get_map_info())
+
+/datum/map/proc/get_map_info()
+	return "No map information available"
 
 /datum/map/proc/bolt_saferooms()
 	return // overriden by torch
@@ -361,3 +371,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		num2text(SUP_FREQ)   = list(access_cargo),
 		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
 	)
+
+/datum/map/proc/show_titlescreen(client/C)
+	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
+	
+	show_browser(C, current_lobby_screen, "file=titlescreen.png;display=0")
+	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
+
+/datum/map/proc/hide_titlescreen(client/C)
+	if(C.mob) // Check if the client is still connected to something
+		// Hide title screen, allowing player to see the map
+		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")

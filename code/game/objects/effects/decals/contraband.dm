@@ -35,9 +35,9 @@
 	if (!adjacent)
 		return
 
-	//must place on a wall and user must not be inside a closet/mecha/whatever
+	//must place on a wall and user must not be inside a closet/exosuit/whatever
 	var/turf/W = A
-	if (!iswall(W) || !isturf(user.loc))
+	if (!W.is_wall() || !isturf(user.loc))
 		to_chat(user, "<span class='warning'>You can't place this here!</span>")
 		return
 
@@ -56,7 +56,7 @@
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
-	if(do_after(user, 28, W) && iswall(W) && !ArePostersOnWall(W, P))
+	if(do_after(user, 28, W) && W.is_wall() && !ArePostersOnWall(W, P))
 		user.visible_message("<span class='notice'>\The [user] has placed a poster on \the [W].</span>","<span class='notice'>You have placed the poster on \the [W].</span>")
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails

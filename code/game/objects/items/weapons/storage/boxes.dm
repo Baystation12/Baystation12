@@ -95,6 +95,7 @@
 	icon_state = "survivalvox"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
@@ -260,7 +261,7 @@
 	name = "box of prescription glasses"
 	desc = "This box contains nerd glasses."
 	icon_state = "glasses"
-	startswith = list(/obj/item/clothing/glasses/regular = 7)
+	startswith = list(/obj/item/clothing/glasses/prescription = 7)
 
 /obj/item/weapon/storage/box/cdeathalarm_kit
 	name = "death alarm kit"
@@ -304,7 +305,7 @@
 
 /obj/item/weapon/storage/box/monkeycubes/farwacubes
 	name = "farwa cube box"
-	desc = "Drymate brand farwa cubes, shipped from Ahdomai. Just add water!"
+	desc = "Drymate brand farwa cubes, shipped from Nyx. Just add water!"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube = 5)
 
 /obj/item/weapon/storage/box/monkeycubes/stokcubes
@@ -591,3 +592,18 @@
 
 /obj/item/weapon/storage/box/snack/chips
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/chips = 7)
+
+//canned goods in cardboard
+/obj/item/weapon/storage/box/canned
+	name = "box of canned food"
+	desc = "A box full of canned foods."
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/spinach = 1)
+
+/obj/item/weapon/storage/box/canned/beef
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/beef = 6)
+
+/obj/item/weapon/storage/box/canned/beans
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/beans = 6)
+
+/obj/item/weapon/storage/box/canned/tomato
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/tomato = 6)

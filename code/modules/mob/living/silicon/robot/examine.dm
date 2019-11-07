@@ -1,6 +1,6 @@
-/mob/living/silicon/robot/examine(mob/user)
+/mob/living/silicon/robot/examine(mob/user, distance)
 	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
-	. = ..(user, infix = custom_infix)
+	. = ..(user, distance, infix = custom_infix)
 
 	var/msg = ""
 	msg += "<span class='warning'>"
@@ -36,7 +36,7 @@
 	if (pose)
 		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "\nIt is [pose]"
+		msg += "\nIt [pose]"
 
 	to_chat(user, msg)
 	user.showLaws(src)

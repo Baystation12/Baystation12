@@ -63,6 +63,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	return ..()
 
 /obj/machinery/message_server/Process()
+	..()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
@@ -107,17 +108,18 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			Console.set_light(0.3, 0.1, 2)
 
 
-/obj/machinery/message_server/attack_hand(user as mob)
+/obj/machinery/message_server/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	to_chat(user, "You toggle PDA message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
 	active = !active
 	power_failure = 0
 	update_icon()
-
-	return
+	return TRUE
 
 /obj/machinery/message_server/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
 	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(O,/obj/item/weapon/circuitboard/message_monitor))
+		istype(O,/obj/item/weapon/stock_parts/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
 		qdel(O)
 		to_chat(user, "You install additional memory and processors into message server. Its filtering capabilities been enhanced.")

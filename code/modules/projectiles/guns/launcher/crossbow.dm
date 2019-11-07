@@ -139,7 +139,18 @@
 		return
 
 
-/obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
+	
+	if(istype(W, /obj/item/weapon/rcd))
+		var/obj/item/weapon/rcd/rcd = W
+		if(rcd.crafting && user.unEquip(rcd) && user.unEquip(src))
+			new /obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice(get_turf(src))
+			qdel(rcd)
+			qdel_self()
+		else
+			to_chat(user, SPAN_WARNING("\The [rcd] is not prepared for installation in \the [src]."))
+		return
+
 	if(!bolt)
 		if (istype(W,/obj/item/weapon/arrow) && user.unEquip(W, src))
 			bolt = W
@@ -197,87 +208,6 @@
 		icon_state = "crossbow-nocked"
 	else
 		icon_state = "crossbow"
-
-
-// Crossbow construction.
-/obj/item/weapon/crossbowframe
-	name = "crossbow frame"
-	desc = "A half-finished crossbow."
-	icon_state = "crossbowframe0"
-	item_state = "crossbow-solid"
-	icon = 'icons/obj/guns/crossbow.dmi'
-
-	var/buildstate = 0
-
-/obj/item/weapon/crossbowframe/on_update_icon()
-	icon_state = "crossbowframe[buildstate]"
-
-/obj/item/weapon/crossbowframe/examine(mob/user)
-	. = ..(user)
-	switch(buildstate)
-		if(1) to_chat(user, "It has a loose rod frame in place.")
-		if(2) to_chat(user, "It has a steel backbone welded in place.")
-		if(3) to_chat(user, "It has a steel backbone and a cell mount installed.")
-		if(4) to_chat(user, "It has a steel backbone, plastic lath and a cell mount installed.")
-		if(5) to_chat(user, "It has a steel cable loosely strung across the lath.")
-
-/obj/item/weapon/crossbowframe/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack/material/rods))
-		if(buildstate == 0)
-			var/obj/item/stack/material/rods/R = W
-			if(R.use(3))
-				to_chat(user, "<span class='notice'>You assemble a backbone of rods around the wooden stock.</span>")
-				buildstate++
-				update_icon()
-			else
-				to_chat(user, "<span class='notice'>You need at least three rods to complete this task.</span>")
-			return
-	else if(isWelder(W))
-		if(buildstate == 1)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				to_chat(user, "<span class='notice'>You weld the rods into place.</span>")
-			buildstate++
-			update_icon()
-		return
-	else if(isCoil(W))
-		var/obj/item/stack/cable_coil/C = W
-		if(buildstate == 2)
-			if(C.use(5))
-				to_chat(user, "<span class='notice'>You wire a crude cell mount into the top of the crossbow.</span>")
-				buildstate++
-				update_icon()
-			else
-				to_chat(user, "<span class='notice'>You need at least five segments of cable coil to complete this task.</span>")
-			return
-		else if(buildstate == 4)
-			if(C.use(5))
-				to_chat(user, "<span class='notice'>You string a steel cable across the crossbow's lath.</span>")
-				buildstate++
-				update_icon()
-			else
-				to_chat(user, "<span class='notice'>You need at least five segments of cable coil to complete this task.</span>")
-			return
-	else if(istype(W,/obj/item/stack/material) && W.get_material_name() == MATERIAL_PLASTIC)
-		if(buildstate == 3)
-			var/obj/item/stack/material/P = W
-			if(P.use(3))
-				to_chat(user, "<span class='notice'>You assemble and install a heavy plastic lath onto the crossbow.</span>")
-				buildstate++
-				update_icon()
-			else
-				to_chat(user, "<span class='notice'>You need at least three plastic sheets to complete this task.</span>")
-			return
-	else if(isScrewdriver(W))
-		if(buildstate == 5)
-			to_chat(user, "<span class='notice'>You secure the crossbow's various parts.</span>")
-			new /obj/item/weapon/gun/launcher/crossbow(get_turf(src))
-			qdel(src)
-		return
-	else
-		..()
 
 /*////////////////////////////
 //	Rapid Crossbow Device	//
@@ -360,7 +290,6 @@
 	else
 		icon_state = "rxb"
 
-/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/examine(var/user)
+/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/examine(mob/user)
 	. = ..()
-	if(.)
-		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
+	to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")

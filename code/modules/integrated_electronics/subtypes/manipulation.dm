@@ -82,7 +82,7 @@
 		if(1)
 			var/datum/integrated_io/xo = inputs[1]
 			var/datum/integrated_io/yo = inputs[2]
-			if(assembly && xo.data && yo.data)
+			if(assembly && !isnull(xo.data) && !isnull(yo.data))
 				if(isnum(xo.data))
 					xo.data = round(xo.data, 1)
 				if(isnum(yo.data))
@@ -97,6 +97,7 @@
 		if(2)
 			var/datum/firemode/next_firemode = installed_gun.switch_firemodes()
 			set_pin_data(IC_OUTPUT, 2, next_firemode ? next_firemode.name : null)
+			push_data()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/proc/shootAt(turf/target)
 	var/turf/T = get_turf(src)
@@ -208,7 +209,7 @@
 			dt = 15
 		addtimer(CALLBACK(attached_grenade, /obj/item/weapon/grenade.proc/activate), dt)
 		var/atom/holder = loc
-		message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
+		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
 
 // These procs do not relocate the grenade, that's the callers responsibility
 /obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/weapon/grenade/G)
@@ -347,7 +348,6 @@
 	var/max_items = 10
 
 /obj/item/integrated_circuit/manipulation/grabber/do_work()
-	var/max_w_class = assembly.w_class
 	var/atom/movable/acting_object = get_object()
 	var/turf/T = get_turf(acting_object)
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
@@ -355,7 +355,7 @@
 		var/mode = get_pin_data(IC_INPUT, 2)
 		if(mode == 1)
 			if(check_target(AM))
-				if((contents.len < max_items) && AM.w_class <= max_w_class)
+				if((contents.len < max_items) && AM.w_class <= assembly.w_class)
 					AM.forceMove(src)
 		if(mode == 0)
 			if(contents.len)
@@ -404,7 +404,6 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 50
 	ext_cooldown = 1
-	var/max_w_class = ITEM_SIZE_SMALL
 	var/obj/item/pulling
 
 /obj/item/integrated_circuit/manipulation/claw/Destroy()
@@ -442,7 +441,7 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/claw/proc/can_pull(var/obj/item/I)
-	return I && I.w_class <= max_w_class && !I.anchored
+	return assembly && I && I.w_class <= assembly.w_class && !I.anchored
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
 	var/obj/acting_object = get_object()
@@ -490,7 +489,6 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
 	power_draw_per_use = 50
-	var/max_w_class = ITEM_SIZE_SMALL
 
 /obj/item/integrated_circuit/manipulation/thrower/do_work()
 	var/target_x_rel = round(get_pin_data(IC_INPUT, 1))
@@ -503,7 +501,7 @@
 	if (istype(assembly.loc, /obj/item/weapon/implant/compressed)) //Prevents the more abusive form of chestgun.
 		return
 
-	if(max_w_class && (A.w_class > max_w_class))
+	if(A.w_class > assembly.w_class)
 		return
 
 	if(!(IC_FLAG_CAN_FIRE & assembly.circuit_flags) && ishuman(assembly.loc))
@@ -658,3 +656,81 @@
 /obj/item/integrated_circuit/manipulation/ai/Destroy()
 	unload_ai()
 	return ..()
+
+/obj/item/integrated_circuit/manipulation/anchoring
+	name = "anchoring bolts"
+	desc = "Pop-out anchoring bolts which can secure an assembly to the floor."
+
+	outputs = list(
+		"enabled" = IC_PINTYPE_BOOLEAN
+	)
+	activators = list(
+		"toggle" = IC_PINTYPE_PULSE_IN,
+		"on toggle" = IC_PINTYPE_PULSE_OUT
+	)
+
+	complexity = 8
+	cooldown_per_use = 2 SECOND
+	power_draw_per_use = 50
+	spawn_flags = IC_SPAWN_DEFAULT
+	origin_tech = list(TECH_ENGINEERING = 2)
+
+/obj/item/integrated_circuit/manipulation/anchoring/do_work(ord)
+	if(!isturf(assembly.loc))
+		return
+
+	// Doesn't work with anchorable assemblies
+	if(assembly.circuit_flags & IC_FLAG_ANCHORABLE)
+		visible_message("<span class='warning'>\The [get_object()]'s anchoring bolt circuitry blinks red. The preinstalled assembly anchoring bolts are in the way of the pop-out bolts!</span>")
+		return
+
+	if(ord == 1)
+		assembly.anchored = !assembly.anchored
+
+		visible_message(
+			assembly.anchored ? \
+			"<span class='notice'>\The [get_object()] deploys a set of anchoring bolts!</span>" \
+			: \
+			"<span class='notice'>\The [get_object()] retracts its anchoring bolts</span>"
+		)
+
+		set_pin_data(IC_OUTPUT, 1, assembly.anchored)
+		push_data()
+		activate_pin(2)
+
+/obj/item/integrated_circuit/manipulation/hatchlock
+	name = "maintenance hatch lock"
+	desc = "An electronically controlled lock for the assembly's maintenance hatch."
+	extended_desc = "WARNING: If you lock the hatch with no circuitry to reopen it, there is no way to open the hatch again!"
+	icon_state = "hatch_lock"
+
+	outputs = list(
+		"enabled" = IC_PINTYPE_BOOLEAN
+	)
+	activators = list(
+		"toggle" = IC_PINTYPE_PULSE_IN,
+		"on toggle" = IC_PINTYPE_PULSE_OUT
+	)
+
+	complexity = 4
+	cooldown_per_use = 2 SECOND
+	power_draw_per_use = 50
+	spawn_flags = IC_SPAWN_DEFAULT
+	origin_tech = list(TECH_ENGINEERING = 2)
+
+	var/lock_enabled = FALSE
+
+/obj/item/integrated_circuit/manipulation/hatchlock/do_work(ord)
+	if(ord == 1)
+		lock_enabled = !lock_enabled
+
+		visible_message(
+			lock_enabled ? \
+			"<span class='notice'>\The [get_object()] whirrs. The screws are now covered.</span>" \
+			: \
+			"<span class='notice'>\The [get_object()] whirrs. The screws are now exposed!</span>"
+		)
+
+		set_pin_data(IC_OUTPUT, 1, lock_enabled)
+		push_data()
+		activate_pin(2)

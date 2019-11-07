@@ -143,7 +143,7 @@
 
 	deactivate(var/mob/M, var/connected, var/flags)
 		..(M,connected,flags)
-		M.pass_flags &= ~PASS_FLAG_TABLE //This may cause issues down the track, but offhand I can't think of any other way for humans to get passtable short of varediting so it should be fine. ~Z
+		M.pass_flags &= ~PASS_FLAG_TABLE
 
 /datum/dna/gene/basic/hulk
 	name="Hulk"
@@ -182,14 +182,3 @@
 
 	New()
 		block=GLOB.XRAYBLOCK
-
-/datum/dna/gene/basic/tk
-	name="Telekenesis"
-	activation_messages=list("You feel smarter.")
-	mutation=MUTATION_TK
-	activation_prob=15
-
-	New()
-		block=GLOB.TELEBLOCK
-	OnDrawUnderlays(var/mob/M,var/g,var/fat)
-		return "telekinesishead[fat]_s"

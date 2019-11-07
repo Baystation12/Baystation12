@@ -49,7 +49,8 @@
 		client_preference_keys |= client_pref.key
 
 		// if the preference has never been set, or if the player is no longer allowed to set the it, set it to default
-		if(!client_pref.may_set(preference_mob()) || !(client_pref.key in pref.preference_values))
+		preference_mob() // we don't care about the mob it returns, but it finds the correct client.
+		if(!client_pref.may_set(pref.client) || !(client_pref.key in pref.preference_values))
 			pref.preference_values[client_pref.key] = client_pref.default_value
 
 

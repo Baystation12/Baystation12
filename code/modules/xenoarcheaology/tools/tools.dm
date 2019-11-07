@@ -11,8 +11,8 @@
 /obj/item/device/gps/attack_self(var/mob/user as mob)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
 
-/obj/item/device/gps/examine(var/mob/user)
-	..()
+/obj/item/device/gps/examine(mob/user)
+	. = ..()
 	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[get_coordinates()]</i>.</span>")
 
 /obj/item/device/gps/proc/get_coordinates()
@@ -251,6 +251,8 @@
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
 	for(var/obj/item/device/radio/beacon/R in world)
+		if(!R.functioning)
+			continue
 		if((R.z in zlevels) && R.frequency == tracking_freq)
 			var/check_dist = get_dist(src,R)
 			if(check_dist < cur_dist)

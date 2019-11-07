@@ -23,8 +23,7 @@
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/T = W
 		if(T.welding & prob(50))
-			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
-			log_game("[key_name(user)] triggered a fueltank explosion.")
+			log_and_message_admins("triggered a fueltank explosion.", user)
 			to_chat(user, "<span class='danger'>That was stupid of you.</span>")
 			explosion(get_turf(src),-1,0,2)
 			if(src)
@@ -80,7 +79,7 @@
 		overlays += welder_image
 
 /obj/item/weapon/weldpack/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	to_chat(user, text("\icon[] [] units of fuel left!", src, src.reagents.total_volume))
 
 	if(welder)

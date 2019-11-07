@@ -7,7 +7,9 @@ var/bomb_set
 	icon_state = "idle"
 	density = 1
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	unacidable = 1
+	interact_offline = TRUE
 
 	var/deployable = 0
 	var/extended = 0
@@ -22,17 +24,14 @@ var/bomb_set
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	var/lastentered
 	var/previous_level = ""
-	var/datum/wires/nuclearbomb/wires = null
+	wires = /datum/wires/nuclearbomb
 	var/decl/security_level/original_level
 
 /obj/machinery/nuclearbomb/New()
 	..()
 	r_code = "[rand(10000, 99999.0)]"//Creates a random code upon object spawn.
-	wires = new/datum/wires/nuclearbomb(src)
 
 /obj/machinery/nuclearbomb/Destroy()
-	qdel(wires)
-	wires = null
 	qdel(auth)
 	auth = null
 	return ..()
@@ -145,16 +144,9 @@ var/bomb_set
 				return
 	..()
 
-/obj/machinery/nuclearbomb/attack_ghost(mob/user as mob)
-	attack_hand(user)
-
-/obj/machinery/nuclearbomb/attack_hand(mob/user as mob)
-	if(extended)
-		if(panel_open)
-			wires.Interact(user)
-		else
-			ui_interact(user)
-	else if(deployable)
+/obj/machinery/nuclearbomb/physical_attack_hand(mob/user)
+	if(!extended && deployable)
+		. = TRUE
 		if(removal_stage < 5)
 			src.anchored = 1
 			visible_message("<span class='warning'>With a steely snap, bolts slide out of [src] and anchor it to the flooring!</span>")
@@ -163,8 +155,12 @@ var/bomb_set
 		extended = 1
 		if(!src.lighthack)
 			flick("lock", src)
-			update_icon()
-	return
+			update_icon()	
+
+/obj/machinery/nuclearbomb/interface_interact(mob/user as mob)
+	if(extended && !panel_open)
+		ui_interact(user)
+		return TRUE
 
 /obj/machinery/nuclearbomb/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -405,8 +401,8 @@ var/bomb_set
 		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap/
 	)
 
-/obj/item/weapon/storage/secure/briefcase/nukedisk/examine(var/user)
-	..()
+/obj/item/weapon/storage/secure/briefcase/nukedisk/examine(mob/user)
+	. = ..()
 	to_chat(user,"On closer inspection, you see \a [GLOB.using_map.company_name] emblem is etched into the front of it.")
 
 /obj/item/weapon/folder/envelope/nuke_instructions

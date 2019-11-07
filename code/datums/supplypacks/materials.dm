@@ -113,13 +113,13 @@
 	name = "25 mahogany planks"
 	contains = list(/obj/item/stack/material/wood/mahogany/twentyfive)
 	cost = 10
-	containername = "wooden planks crate"
+	containername = "mahogany planks crate"
 
-/decl/hierarchy/supply_pack/materials/maple25
-	name = "25 maple planks"
+/decl/hierarchy/supply_pack/materials/maple50
+	name = "50 maple planks"
 	contains = list(/obj/item/stack/material/wood/maple/twentyfive = 2)
 	cost = 10
-	containername = "wooden planks crate"
+	containername = "maple planks crate"
 
 /decl/hierarchy/supply_pack/materials/walnut25
 	name = "25 walnut planks"
@@ -132,3 +132,9 @@
 	contains = list(/obj/item/stack/material/wood/ebony/twentyfive)
 	cost = 15 //luxury tax
 	containername = "ebony planks crate"
+
+/decl/hierarchy/supply_pack/materials/yew25
+	name = "25 yew planks"
+	contains = list(/obj/item/stack/material/wood/yew/twentyfive)
+	cost = 10
+	containername = "yew planks crate"

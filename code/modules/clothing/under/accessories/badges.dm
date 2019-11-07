@@ -34,7 +34,7 @@
 	. += "  <a href='?src=\ref[src];look_at_me=1'>\[View\]</a>"
 
 /obj/item/clothing/accessory/badge/examine(user)
-	..()
+	. = ..()
 	if(stored_name)
 		to_chat(user,"It reads: [stored_name], [badge_string].")
 
@@ -98,7 +98,7 @@
 	name = "[name] ([badge_number])"
 
 /obj/item/clothing/accessory/badge/holo/examine(user)
-	..()
+	. = ..()
 	if(badge_number)
 		to_chat(user,"The badge number is [badge_number].")
 
@@ -170,21 +170,21 @@
 	icon_state = "ntbadge"
 	badge_string = "Corporate Executive Body"
 
-/obj/item/clothing/accessory/badge/ocieagent
-	name = "\improper OCIE Agent's badge"
-	desc = "A leather-backed gold badge displaying the crest of the Office of Civil Investigation and Enforcement."
+/obj/item/clothing/accessory/badge/agent
+	name = "\improper SFP Agent's badge"
+	desc = "A leather-backed gold badge displaying the crest of the Sol Federal Police."
 	icon_state = "agentbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	badge_string = "Office of Civil Investigation and Enforcement"
+	badge_string = "Sol Federal Police"
 
 /obj/item/clothing/accessory/badge/tracker
 	name = "\improper Tracker's badge"
-	desc = "A blue leather-backed gold badge displaying the crest of the Office of Civil Investigation and Enforcement."
+	desc = "A blue leather-backed gold badge displaying the crest of the Sol Federal Police."
 	icon_state = "trackerbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	badge_string = "Office of Civil Investigation and Enforcement"
+	badge_string = "Sol Federal Police"
 
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"

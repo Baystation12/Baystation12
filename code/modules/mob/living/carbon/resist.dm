@@ -61,9 +61,21 @@
 	if(do_after(src, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 		if(!handcuffed || buckled)
 			return
+		if (handcuffed.health) // Improvised cuffs can break because their health is > 0
+			handcuffed.health = handcuffed.health - initial(handcuffed.health) / 2
+			if (handcuffed.health < 1)
+				visible_message(
+					SPAN_DANGER("\The [src] manages to remove \the [handcuffed], breaking them!"),
+					SPAN_NOTICE("You successfully remove \the [handcuffed], breaking them!")
+				)
+				QDEL_NULL(handcuffed)
+				if(buckled && buckled.buckle_require_restraints)
+					buckled.unbuckle_mob()
+				update_inv_handcuffed()
+				return
 		visible_message(
-			"<span class='danger'>\The [src] manages to remove \the [handcuffed]!</span>",
-			"<span class='notice'>You successfully remove \the [handcuffed].</span>"
+			SPAN_WARNING("\The [src] manages to remove \the [handcuffed]!"),
+			SPAN_NOTICE("You successfully remove \the [handcuffed]!")
 			)
 		drop_from_inventory(handcuffed)
 
@@ -106,12 +118,11 @@
 		N.escape_net(src) //super snowflake but is literally used NOWHERE ELSE.-Luke
 		return
 
-	setClickCooldown(100)
 	if(!buckled) return
-
 	if(!restrained())
 		..()
 	else
+		setClickCooldown(100)
 		var/unbuckle_time = 2 MINUTES
 		if(psi && psi.can_use())
 			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))

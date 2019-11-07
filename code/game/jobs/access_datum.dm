@@ -355,7 +355,7 @@
 /var/const/access_psychiatrist = "ACCESS_PSYCHIATRIST" // Psychiatrist's office 64
 /datum/access/psychiatrist
 	id = access_psychiatrist
-	desc = "Psychiatrist's Office"
+	desc = "Counselor's Office"
 	region = ACCESS_REGION_MEDBAY
 
 /var/const/access_xenoarch = "ACCESS_XENOARCH" //65
@@ -461,4 +461,11 @@
 /datum/access/merchant
 	id = access_merchant
 	desc = "Merchant"
+	access_type = ACCESS_TYPE_NONE
+
+// Ascent access.
+/var/const/access_ascent = "ACCESS_ASCENT"
+/datum/access/ascent
+	id = access_ascent
+	desc = "Ascent Materiel"
 	access_type = ACCESS_TYPE_NONE

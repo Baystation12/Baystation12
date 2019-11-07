@@ -9,10 +9,6 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
-/datum/gear/head/whitentberet
-	display_name = "beret, corporate security"
-	path = /obj/item/clothing/head/beret/guard
-
 /datum/gear/head/bandana
 	display_name = "bandana selection"
 	path = /obj/item/clothing
@@ -20,6 +16,11 @@
 /datum/gear/head/bandana/New()
 	..()
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(typesof(/obj/item/clothing/mask/bandana) + typesof(/obj/item/clothing/head/bandana))
+
+/datum/gear/head/beanie
+	display_name = "beanie, color select"
+	path = /obj/item/clothing/head/beanie
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
@@ -122,6 +123,10 @@
 	display_name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/head/rastacap
+	display_name = "rastacap"
+	path = /obj/item/clothing/head/rastacap
 
 /datum/gear/head/surgical
 	display_name = "standard surgical caps"

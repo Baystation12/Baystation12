@@ -21,7 +21,7 @@
 	harm_intent_damage = 8
 	melee_damage_lower = 10
 	melee_damage_upper = 10
-	can_escape = 1
+	can_escape = TRUE
 	attacktext = "attacked"
 	attack_sound = 'sound/items/bikehorn.ogg'
 	minbodytemp = 270

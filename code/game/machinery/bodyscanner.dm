@@ -9,23 +9,14 @@
 	anchored = 1
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
-
-/obj/machinery/bodyscanner/Initialize()
-	. = ..()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/bodyscanner(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/scanning_module(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/manipulator(src),
-		new /obj/item/weapon/stock_parts/console_screen(src))
-	RefreshParts()
-
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
-	if (. && occupant && user.Adjacent(src))
-		occupant.examine(user)
+	if (occupant && user.Adjacent(src))
+		occupant.examine(arglist(args))
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	..()
@@ -69,19 +60,19 @@
 	update_icon()
 	SetName(initial(name))
 
+/obj/machinery/bodyscanner/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
+
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
-	if(!istype(G))
-		if(default_deconstruction_screwdriver(user, G))
-			updateUsrDialog()
+	if(istype(G))
+		var/mob/M = G.affecting
+		if(!user_can_move_target_inside(M, user))
 			return
-		if(default_deconstruction_crowbar(user, G))
-			return
-		if(default_part_replacement(user, G))
-			return
-	var/mob/M = G.affecting
-	if(!user_can_move_target_inside(M, user))
-		return
-	qdel(G)
+		qdel(G)
+		return TRUE
+	return ..()
 
 /obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
 	if(!istype(user) || !istype(target))

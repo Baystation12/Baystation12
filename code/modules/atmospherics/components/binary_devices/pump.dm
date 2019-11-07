@@ -33,9 +33,11 @@ Thus, the two variables affect pump operation are set in New():
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	build_icon_state = "pump"
 
-/obj/machinery/atmospherics/binary/pump/New()
-	..()
+/obj/machinery/atmospherics/binary/pump/Initialize()
+	. = ..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 
@@ -151,6 +153,10 @@ Thus, the two variables affect pump operation are set in New():
 	if(frequency)
 		set_frequency(frequency)
 
+/obj/machinery/atmospherics/binary/pump/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
+
 /obj/machinery/atmospherics/binary/pump/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
@@ -181,16 +187,9 @@ Thus, the two variables affect pump operation are set in New():
 	update_icon()
 	return
 
-/obj/machinery/atmospherics/binary/pump/attack_hand(user as mob)
-	if(..())
-		return
-	src.add_fingerprint(usr)
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	usr.set_machine(src)
+/obj/machinery/atmospherics/binary/pump/interface_interact(mob/user)
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/machinery/atmospherics/binary/pump/Topic(href,href_list)
 	if((. = ..())) return
@@ -233,5 +232,5 @@ Thus, the two variables affect pump operation are set in New():
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)

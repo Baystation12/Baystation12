@@ -2,6 +2,7 @@
 	name = "chemical dispenser"
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dispenser"
+	layer = BELOW_OBJ_LAYER
 	clicksound = "button"
 	clickvol = 20
 
@@ -173,11 +174,9 @@
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
 
-/obj/machinery/chemical_dispenser/attack_ai(mob/user as mob)
+/obj/machinery/chemical_dispenser/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/chemical_dispenser/attack_hand(mob/user as mob)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/chemical_dispenser/on_update_icon()
 	overlays.Cut()

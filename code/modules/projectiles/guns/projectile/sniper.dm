@@ -1,13 +1,13 @@
 /obj/item/weapon/gun/projectile/heavysniper
 	name = "anti-materiel rifle"
-	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
+	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
 	icon = 'icons/obj/guns/heavysniper.dmi'
 	icon_state = "heavysniper"
 	item_state = "heavysniper" //sort of placeholder
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	slot_flags = SLOT_BACK
-	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
+	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
 	caliber = CALIBER_ANTIMATERIAL
 	screen_shake = 2 //extra kickback
 	handle_casings = HOLD_CASINGS

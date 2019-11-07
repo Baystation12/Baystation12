@@ -12,8 +12,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/goat
-	meat_amount = 4
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
@@ -22,6 +20,13 @@
 	health = 40
 	melee_damage_lower = 1
 	melee_damage_upper = 5
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/goat
+	meat_amount = 4
+	bone_amount = 8
+	skin_material = MATERIAL_SKIN_GOATHIDE
+	skin_amount = 8
+
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/hostile/retaliate/goat/New()
@@ -99,13 +104,18 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/beef
-	meat_amount = 6
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 	attacktext = "kicked"
 	health = 50
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/beef
+	meat_amount = 6
+	bone_amount = 10
+	skin_material = MATERIAL_SKIN_COWHIDE
+	skin_amount = 10
+
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/cow/New()
@@ -160,16 +170,21 @@
 	emote_see = list("pecks at the ground","flaps its tiny wings")
 	speak_chance = 2
 	turns_per_move = 2
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
-	meat_amount = 1
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 	attacktext = "kicked"
 	health = 1
-	var/amount_grown = 0
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_MINISCULE
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
+	meat_amount = 1
+	bone_amount = 3
+	skin_amount = 3
+	skin_material = MATERIAL_SKIN_FEATHERS
+
+	var/amount_grown = 0
 
 /mob/living/simple_animal/chick/New()
 	..()
@@ -200,17 +215,20 @@ var/global/chicken_count = 0
 	emote_see = list("pecks at the ground","flaps its wings viciously")
 	speak_chance = 2
 	turns_per_move = 3
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
-	meat_amount = 2
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 	attacktext = "kicked"
 	health = 10
-	var/eggsleft = 0
-	var/body_color
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
+	meat_amount = 2
+	skin_material = MATERIAL_SKIN_FEATHERS
+
+	var/eggsleft = 0
+	var/body_color
 
 /mob/living/simple_animal/chicken/New()
 	..()

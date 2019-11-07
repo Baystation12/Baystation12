@@ -8,8 +8,10 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics
 	can_infect = 0
-	core_skill = SKILL_DEVICES
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP
+
+decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	return SURGERY_SKILLS_ROBOTIC
 
 /decl/surgery_step/robotics/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -202,6 +204,10 @@
 			var/obj/item/weapon/weldingtool/welder = tool
 			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return FALSE
+		if(istype(tool, /obj/item/weapon/gun/energy/plasmacutter))
+			var/obj/item/weapon/gun/energy/plasmacutter/cutter = tool
+			if(!cutter.slice(user))
+				return FALSE
 		return TRUE
 	return FALSE
 
@@ -294,10 +300,9 @@
 		else
 			var/obj/item/stack/cable_coil/C = tool
 			if(istype(C))
-				if(C.get_amount() < 3)
+				if(!C.use(3))
 					to_chat(user, SPAN_WARNING("You need three or more cable pieces to repair this damage."))
 				else
-					C.use(3)
 					return TRUE
 	return FALSE
 
@@ -337,7 +342,13 @@
 	)
 	min_duration = 70
 	max_duration = 90
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP
+	surgery_candidate_flags = SURGERY_NO_STUMP
+
+/decl/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	if(target.isSynthetic())
+		return SURGERY_SKILLS_ROBOTIC 
+	else
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT 
 
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -496,7 +507,7 @@
 			to_chat(user, SPAN_WARNING("You're pretty sure [target.species.name_plural] don't normally have a brain."))
 		else if(target.internal_organs[BP_BRAIN])
 			to_chat(user, SPAN_WARNING("Your subject already has a brain."))
-		else 
+		else
 			return TRUE
 	return FALSE
 
@@ -535,13 +546,12 @@
 /decl/surgery_step/internal/remove_organ/robotic
 	name = "Remove robotic component"
 	can_infect = 0
-	core_skill = SKILL_DEVICES
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/internal/replace_organ/robotic
 	name = "Replace robotic component"
 	can_infect = 0
-	core_skill = SKILL_DEVICES
+	robotic_surgery = TRUE
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/remove_mmi
@@ -554,8 +564,10 @@
 		/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 	can_infect = 0
-	core_skill = SKILL_DEVICES
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+
+/decl/surgery_step/remove_mmi/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	return SURGERY_SKILLS_ROBOTIC
 
 /decl/surgery_step/remove_mmi/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()

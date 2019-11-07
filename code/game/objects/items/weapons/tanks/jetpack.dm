@@ -76,14 +76,14 @@
 	desc = "It works well in a void."
 	icon_state = "jetpack-void"
 	item_state =  "jetpack-void"
-	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/jetpack/oxygen
 	name = "jetpack (oxygen)"
 	desc = "A tank of compressed oxygen for use as propulsion in zero-gravity areas. Use with caution."
 	icon_state = "jetpack"
 	item_state = "jetpack"
-	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/jetpack/carbondioxide
 	name = "jetpack (carbon dioxide)"
@@ -91,7 +91,7 @@
 	distribute_pressure = 0
 	icon_state = "jetpack-black"
 	item_state =  "jetpack-black"
-	starting_pressure = list("carbon_dioxide" = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(GAS_CO2 = 6*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/jetpack/rig
 	name = "jetpack"
@@ -99,8 +99,7 @@
 
 /obj/item/weapon/tank/jetpack/rig/examine()
 	. = ..()
-	to_chat(usr, "It's a jetpack. If you can see this, report it on the bug tracker.")
-	return 0
+	CRASH("A [name] was examined")
 
 /obj/item/weapon/tank/jetpack/rig/allow_thrust(num, mob/living/user as mob)
 

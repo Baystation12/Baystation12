@@ -25,15 +25,6 @@
 	containertype = /obj/structure/largecrate
 	containername = "coolant tank crate"
 
-/decl/hierarchy/supply_pack/science/mecha_odysseus
-	name = "Electronics - Circuit (\"Odysseus\")"
-	contains = list(/obj/item/weapon/circuitboard/mecha/odysseus/peripherals, //TEMPORARY due to lack of circuitboard printer,
-					/obj/item/weapon/circuitboard/mecha/odysseus/main) //TEMPORARY due to lack of circuitboard printer
-	cost = 25
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper \"Odysseus\" Circuit crate"
-	access = access_robotics
-
 /decl/hierarchy/supply_pack/science/robotics
 	name = "Parts - Robotics"
 	contains = list(/obj/item/device/assembly/prox_sensor = 3,
@@ -58,7 +49,7 @@
 
 /decl/hierarchy/supply_pack/science/scanner_module
 	name = "Electronics - Reagent scanner modules"
-	contains = list(/obj/item/weapon/computer_hardware/scanner/reagent = 4)
+	contains = list(/obj/item/weapon/stock_parts/computer/scanner/reagent = 4)
 	cost = 20
 	containername = "reagent scanner module crate"
 
@@ -70,12 +61,12 @@
 					/obj/item/clothing/under/rank/miner,
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/black,
-					/obj/item/device/analyzer,
+					/obj/item/device/scanner/gas,
 					/obj/item/weapon/storage/ore,
 					/obj/item/device/flashlight/lantern,
 					/obj/item/weapon/shovel,
 					/obj/item/weapon/pickaxe,
-					/obj/item/weapon/mining_scanner,
+					/obj/item/device/scanner/mining,
 					/obj/item/clothing/glasses/material,
 					/obj/item/clothing/glasses/meson)
 	cost = 15

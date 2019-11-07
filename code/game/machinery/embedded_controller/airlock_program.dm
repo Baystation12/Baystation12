@@ -28,6 +28,8 @@
 	var/tag_pump_out_external
 	var/tag_pump_out_internal
 
+	var/tag_air_alarm
+
 /datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
 	..(M)
 
@@ -55,6 +57,7 @@
 		tag_interior_sensor = controller.tag_interior_sensor || "[id_tag]_interior_sensor"
 		tag_airlock_mech_sensor = controller.tag_airlock_mech_sensor? controller.tag_airlock_mech_sensor : "[id_tag]_airlock_mech"
 		tag_shuttle_mech_sensor = controller.tag_shuttle_mech_sensor? controller.tag_shuttle_mech_sensor : "[id_tag]_shuttle_mech"
+		tag_air_alarm = controller.tag_air_alarm || "[id_tag]_alarm"
 		memory["secure"] = controller.tag_secure
 
 		spawn(10)
@@ -275,11 +278,21 @@
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 	memory["purge"] = cycle_to_external_air
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	shutAlarm()
+
+/datum/computer/file/embedded_program/airlock/proc/begin_dock_cycle()
+	state = STATE_IDLE
+	target_state = TARGET_INOPEN
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
 	target_state = TARGET_OUTOPEN
 	memory["purge"] = cycle_to_external_air
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
@@ -309,6 +322,12 @@
 	signal.data["tag"] = tag
 	signal.data["command"] = command
 	post_signal(signal, RADIO_AIRLOCK)
+
+/datum/computer/file/embedded_program/airlock/proc/shutAlarm()
+	var/datum/signal/signal = new
+	signal.data["alarm_id"] = tag_air_alarm
+	signal.data["command"] = "shutdown"
+	post_signal(signal)
 
 /datum/computer/file/embedded_program/airlock/proc/signalPump(var/tag, var/power, var/direction, var/pressure)
 	var/datum/signal/signal = new

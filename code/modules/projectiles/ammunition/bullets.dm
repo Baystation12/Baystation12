@@ -19,13 +19,13 @@
 /obj/item/ammo_casing/pistol/small
 	desc = "A small pistol bullet casing."
 	caliber = CALIBER_PISTOL_SMALL
-	projectile_type = /obj/item/projectile/bullet/pistol
+	projectile_type = /obj/item/projectile/bullet/pistol/holdout
 	icon_state = "smallcasing"
 	spent_icon = "smallcasing-spent"
 
 /obj/item/ammo_casing/pistol/small/rubber
 	desc = "A small pistol rubber bullet casing."
-	projectile_type = /obj/item/projectile/bullet/pistol/rubber
+	projectile_type = /obj/item/projectile/bullet/pistol/rubber/holdout
 	icon_state = "pistolcasing_r"
 
 /obj/item/ammo_casing/pistol/small/practice
@@ -104,7 +104,7 @@
 //is blocked by clothing that stops tasers and is vulnerable to EMP
 /obj/item/ammo_casing/shotgun/stunshell
 	name = "stun shell"
-	desc = "A taser cartridge."
+	desc = "An energy stun cartridge."
 	icon_state = "stunshell"
 	spent_icon = "stunshell-spent"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
@@ -179,7 +179,7 @@
 	icon_state = "pistolcasing_h"
 	matter = list(MATERIAL_STEEL = 130, MATERIAL_URANIUM = 100)
 
-/obj/item/ammo_casing/pistol/emp/small
+/obj/item/ammo_casing/pistol/small/emp
 	name = "small haywire round"
 	desc = "A small bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/tiny

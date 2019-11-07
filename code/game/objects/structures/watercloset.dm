@@ -2,26 +2,28 @@
 /obj/structure/hygiene
 	var/next_gurgle = 0
 	var/clogged = 0 // -1 = never clog
+	var/can_drain = 0
+	var/drainage = 0.5
+	var/last_gurgle = 0
 
 /obj/structure/hygiene/New()
 	..()
 	SSfluids.hygiene_props += src
+	START_PROCESSING(SSobj, src)
 
 /obj/structure/hygiene/Destroy()
-	STOP_PROCESSING(SSprocessing, src)
 	SSfluids.hygiene_props -= src
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/structure/hygiene/proc/clog(var/severity)
 	if(clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
 		return FALSE
 	clogged = severity
-	START_PROCESSING(SSprocessing, src)
 	return TRUE
 
 /obj/structure/hygiene/proc/unclog()
 	clogged = 0
-	STOP_PROCESSING(SSprocessing, src)
 
 /obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
 	if(clogged > 0 && isPlunger(thing))
@@ -45,14 +47,14 @@
 		return
 	. = ..()
 
-/obj/structure/hygiene/examine()
+/obj/structure/hygiene/examine(mob/user)
 	. = ..()
 	if(clogged > 0)
-		to_chat(usr, "<span class='warning'>It seems to be badly clogged.</span>")
+		to_chat(user, "<span class='warning'>It seems to be badly clogged.</span>")
 
 /obj/structure/hygiene/Process()
 	if(clogged <= 0)
-		return
+		drain()
 	var/flood_amt
 	switch(clogged)
 		if(1)
@@ -72,6 +74,20 @@
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
 			SET_FLUID_DEPTH(F, min(F.fluid_amount + (rand(30,50)*clogged), flood_amt))
+
+/obj/structure/hygiene/proc/drain()
+	if(!can_drain) return
+	var/turf/T = get_turf(src)
+	if(!istype(T)) return
+	var/fluid_here = T.get_fluid_depth()
+	if(fluid_here <= 0)
+		return
+
+	T.remove_fluid(ceil(fluid_here*drainage))
+	T.show_bubbles()
+	if(world.time > last_gurgle + 80)
+		last_gurgle = world.time
+		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
 /obj/structure/hygiene/toilet
 	name = "toilet"
@@ -188,6 +204,8 @@
 	density = 0
 	anchored = 1
 	clogged = -1
+	can_drain = 1
+	drainage = 0.2 			//showers are tiny, drain a little slower
 
 	var/on = 0
 	var/obj/effect/mist/mymist = null
@@ -199,7 +217,6 @@
 /obj/structure/hygiene/shower/New()
 	..()
 	create_reagents(50)
-	START_PROCESSING(SSprocessing, src)
 
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -222,7 +239,7 @@
 			G.clean_blood()
 
 /obj/structure/hygiene/shower/attackby(obj/item/I as obj, var/mob/user)
-	if(istype(I, /obj/item/device/analyzer))
+	if(istype(I, /obj/item/device/scanner/gas))
 		to_chat(user, "<span class='notice'>The water temperature seems to be [watertemp].</span>")
 		return
 
@@ -276,6 +293,7 @@
 		reagents.splash(washing, 10)
 
 /obj/structure/hygiene/shower/Process()
+	..()
 	if(!on) return
 
 	for(var/thing in loc)
@@ -362,18 +380,18 @@
 		return
 
 	to_chat(usr, "<span class='notice'>You start washing your hands.</span>")
+	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	sleep(40)
+	if(!do_after(user, 40, src))
+		busy = 0
+		return TRUE
 	busy = 0
 
-	if(!Adjacent(user)) return		//Person has moved away from the sink
-
 	user.clean_blood()
-	if(ishuman(user))
-		user:update_inv_gloves()
-	for(var/mob/V in viewers(src, null))
-		V.show_message("<span class='notice'>[user] washes their hands using \the [src].</span>")
+	user.visible_message( \
+		"<span class='notice'>[user] washes their hands using \the [src].</span>", \
+		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
 /obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
@@ -389,6 +407,7 @@
 	if (istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(/datum/reagent/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
+		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
 	else if (istype(O, /obj/item/weapon/melee/baton))
@@ -421,14 +440,15 @@
 	if(!I || !istype(I,/obj/item)) return
 
 	to_chat(usr, "<span class='notice'>You start washing \the [I].</span>")
+	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	sleep(40)
+	if(!do_after(user, 40, src))
+		busy = 0
+		return TRUE
 	busy = 0
 
-	if(user.loc != location) return				//User has moved
-	if(!I) return 								//Item's been destroyed while washing
-	if(user.get_active_hand() != I) return		//Person has switched hands or the item in their hands
+	if(istype(O, /obj/item/weapon/extinguisher/)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \

@@ -6,6 +6,8 @@
 	randpixel = 8
 	force = 1
 	throwforce = 1
+	force_divisor = 0.1
+	thrown_force_divisor = 0.1
 	w_class = 1
 	slot_flags = SLOT_EARS
 	var/string_colour
@@ -15,6 +17,7 @@
 	..()
 
 /obj/item/weapon/material/coin/on_update_icon()
+	..()
 	if(!isnull(string_colour))
 		var/image/I = image(icon = icon, icon_state = "coin_string_overlay")
 		I.appearance_flags |= RESET_COLOR

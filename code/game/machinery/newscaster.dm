@@ -191,17 +191,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	icon_state = "newscaster_normal"
 	return
 
-/obj/machinery/newscaster/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/newscaster/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/newscaster/attack_hand(mob/user as mob)            //########### THE MAIN BEEF IS HERE! And in the proc below this...############
-
-	if(inoperable())
-		return
-
-	if(!user.IsAdvancedToolUser())
-		return 0
-
+/obj/machinery/newscaster/interact(mob/user)            //########### THE MAIN BEEF IS HERE! And in the proc below this...############
 	if(istype(user, /mob/living/carbon/human) || istype(user,/mob/living/silicon) )
 		var/mob/living/human_or_robot_user = user
 		var/dat
@@ -240,7 +234,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 						if(CHANNEL.is_admin_channel)
 							dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen '><A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
 						else
-							dat+="<B><A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : ()]<BR></B>"
+							dat+="<B><A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR></B>"
 				dat+="<BR><HR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
 			if(2)
@@ -254,8 +248,14 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<HR><B><A href='?src=\ref[src];set_channel_receiving=1'>Receiving Channel</A>:</B> [src.channel_name]<BR>" //MARK
 				dat+="<B>Message Author:</B> <FONT COLOR='green'>[src.scanned_user]</FONT><BR>"
 				dat+="<B><A href='?src=\ref[src];set_new_message=1'>Message Body</A>:</B> [src.msg] <BR>"
-				dat+="<B><A href='?src=\ref[src];set_attachment=1'>Attach Photo</A>:</B>  [(src.photo_data ? "Photo Attached" : "No Photo")]</BR>"
-				dat+="<BR><A href='?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
+				dat+="<B>Photo</B>: "
+				if(photo_data && photo_data.photo)
+					send_rsc(usr, photo_data.photo.img, "tmp_photo.png")
+					dat+="<BR><img src='tmp_photo.png' width = '180'>"
+					dat+="<BR><B><A href='?src=\ref[src];set_attachment=1'>Delete Photo</A></B></BR>"
+				else
+					dat+="<A href='?src=\ref[src];set_attachment=1'>Attach Photo</A>"
+				dat+="<BR><BR><A href='?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
 			if(4)
 				dat+="Feed story successfully submitted to [src.channel_name].<BR><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
@@ -339,7 +339,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
 					for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
-						dat+="<A href='?src=\ref[src];pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : ()]<BR>"
+						dat+="<A href='?src=\ref[src];pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A>"
 			if(11)
 				dat+="<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>"
@@ -350,7 +350,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
 					for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
-						dat+="<A href='?src=\ref[src];pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : ()]<BR>"
+						dat+="<A href='?src=\ref[src];pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
 			if(12)
@@ -392,7 +392,13 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<HR>"
 				dat+="<A href='?src=\ref[src];set_wanted_name=1'>Criminal Name</A>: [src.channel_name] <BR>"
 				dat+="<A href='?src=\ref[src];set_wanted_desc=1'>Description</A>: [src.msg] <BR>"
-				dat+="<A href='?src=\ref[src];set_attachment=1'>Attach Photo</A>: [(src.photo_data ? "Photo Attached" : "No Photo")]</BR>"
+				dat+="<B>Photo</B>: "
+				if(photo_data && photo_data.photo)
+					send_rsc(usr, photo_data.photo.img, "tmp_photo.png")
+					dat+="<BR><img src='tmp_photo.png' width = '180'>"
+					dat+="<BR><B><A href='?src=\ref[src];set_attachment=1'>Delete Photo</A></B></BR>"
+				else
+					dat+="<A href='?src=\ref[src];set_attachment=1'>Attach Photo</A><BR>"
 				if(wanted_already)
 					dat+="<B>Wanted Issue created by:</B><FONT COLOR='green'> [news_network.wanted_issue.backup_author]</FONT><BR>"
 				else
@@ -420,9 +426,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<B><FONT COLOR ='maroon'>-- STATIONWIDE WANTED ISSUE --</B></FONT><BR><FONT SIZE=2>\[Submitted by: <FONT COLOR='green'>[news_network.wanted_issue.backup_author]</FONT>\]</FONT><HR>"
 				dat+="<B>Criminal</B>: [news_network.wanted_issue.author]<BR>"
 				dat+="<B>Description</B>: [news_network.wanted_issue.body]<BR>"
-				dat+="<B>Photo:</B>: "
+				dat+="<B>Photo</B>: "
 				if(news_network.wanted_issue.img)
-					usr << browse_rsc(news_network.wanted_issue.img, "tmp_photow.png")
+					send_rsc(usr, news_network.wanted_issue.img, "tmp_photow.png")
 					dat+="<BR><img src='tmp_photow.png' width = '180'>"
 				else
 					dat+="None"
@@ -507,7 +513,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				SSstatistics.add_field("newscaster_stories",1)
 				news_network.SubmitArticle(src.msg, src.scanned_user, src.channel_name, image, 0)
 				if(photo_data)
-					photo_data.photo.dropInto(loc)
+					qdel(photo_data)
+					photo_data = null
 				src.screen=4
 
 			src.updateUsrDialog()
@@ -676,6 +683,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				src.c_locked=0;
 				channel_name="";
 				src.viewing_channel = null
+				if (photo_data)
+					qdel(photo_data)
+					photo_data = null
 			src.updateUsrDialog()
 
 		else if(href_list["show_channel"])
@@ -723,9 +733,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			to_chat(user, "<span class='notice'>This does nothing.</span>")
 	queue_icon_update()
 
-/obj/machinery/newscaster/attack_ai(mob/user as mob)
-	return src.attack_hand(user) //or maybe it'll have some special functions? No idea.
-
 /datum/news_photo
 	var/is_synth = 0
 	var/obj/item/weapon/photo/photo = null
@@ -736,17 +743,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 /obj/machinery/newscaster/proc/AttachPhoto(mob/user as mob)
 	if(photo_data)
-		if(!photo_data.is_synth)
-			photo_data.photo.dropInto(loc)
-			if(!issilicon(user))
-				user.put_in_hands(photo_data.photo)
 		qdel(photo_data)
 		photo_data = null
 		return
 
 	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
-		if(!user.unequip_item(src))
-			return
 		var/obj/item/photo = user.get_active_hand()
 		photo_data = new(photo, 0)
 	else if(istype(user,/mob/living/silicon))
@@ -840,7 +841,7 @@ obj/item/weapon/newspaper/attack_self(mob/user)
 					dat+="<B>Description</B>: [important_message.body]<BR>"
 					dat+="<B>Photo:</B>: "
 					if(important_message.img)
-						user << browse_rsc(important_message.img, "tmp_photow.png")
+						send_rsc(user, important_message.img, "tmp_photow.png")
 						dat+="<BR><img src='tmp_photow.png' width = '180'>"
 					else
 						dat+="None"

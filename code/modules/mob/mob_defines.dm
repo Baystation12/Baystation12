@@ -1,6 +1,7 @@
 /mob
 	density = 1
-	plane = MOB_PLANE
+	plane = DEFAULT_PLANE
+	layer = MOB_LAYER
 
 	appearance_flags = PIXEL_SCALE
 	animate_movement = 2
@@ -20,18 +21,20 @@
 		/datum/movement_handler/mob/physically_capable,
 		/datum/movement_handler/mob/physically_restrained,
 		/datum/movement_handler/mob/space,
+		/datum/movement_handler/mob/multiz,
 		/datum/movement_handler/mob/movement
 	)
 
 	var/mob_flags
-
+	var/last_quick_move_time = 0
 	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
 
 	var/lastKnownIP = null
 	var/computer_id = null
+	var/last_ckey
 
-	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+	var/stat = CONSCIOUS //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
@@ -46,6 +49,7 @@
 	var/obj/screen/healths = null
 	var/obj/screen/throw_icon = null
 	var/obj/screen/nutrition_icon = null
+	var/obj/screen/hydration_icon = null
 	var/obj/screen/pressure = null
 	var/obj/screen/pain = null
 	var/obj/screen/gun/item/item_use_icon = null
@@ -86,6 +90,8 @@
 	var/lying = 0
 	var/lying_prev = 0
 
+	var/radio_interrupt_cooldown = 0
+
 	var/unacidable = 0
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
@@ -103,12 +109,16 @@
 	var/bodytemperature = 310.055	//98.7 F
 	var/default_pixel_x = 0
 	var/default_pixel_y = 0
+	var/default_pixel_z = 0
 
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
 
-	var/decl/move_intent/move_intent = /decl/move_intent/run
-	var/move_intents = list(/decl/move_intent/run, /decl/move_intent/walk)
+	var/decl/move_intent/move_intent = /decl/move_intent/walk
+	var/list/move_intents = list(/decl/move_intent/walk)
+
+	var/decl/move_intent/default_walk_intent
+	var/decl/move_intent/default_run_intent
 
 	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living
@@ -157,8 +167,8 @@
 	var/obj/control_object //Used by admins to possess objects. All mobs should have this var
 
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
-	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
-	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
+	var/universal_speak = FALSE // Set to TRUE to enable the mob to speak to everyone -- TLE
+	var/universal_understand = FALSE // Set to TRUE to enable the mob to understand everyone, not necessarily speak
 
 	//If set, indicates that the client "belonging" to this (clientless) mob is currently controlling some other mob
 	//so don't treat them as being SSD even though their client var is null.
@@ -175,9 +185,9 @@
 	var/weakened = 0
 	var/drowsyness = 0.0//Carbon
 
-	var/memory = ""
 	var/flavor_text = ""
 
 	var/datum/skillset/skillset = /datum/skillset
 
-	var/last_radio_sound = -INFINITY
+
+	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved

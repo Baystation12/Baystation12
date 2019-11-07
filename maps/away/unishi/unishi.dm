@@ -31,6 +31,7 @@
 	description = "CTI research ship.."
 	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
 	cost = 2
+	area_usage_test_exempted_root_areas = list(/area/unishi)
 
 
 /obj/effect/shuttle_landmark/nav_unishi/nav1
@@ -96,16 +97,19 @@ obj/item/weapon/paper/prof2
 
 
 
-/obj/machinery/computer/log_printer/
+/obj/machinery/computer/log_printer
 	name = "Computer"
+	construct_state = null
+	base_type = /obj/machinery/computer/log_printer
 	var/logtype
 	var/used = 0
 
-/obj/machinery/computer/log_printer/attack_hand(mob/living/user as mob)
-	if(!used && !isghost(usr))
-		to_chat(usr, "Default Boot Device File Integrity Damaged. Startup aborted. Error log printing.")
+/obj/machinery/computer/log_printer/interface_interact(mob/living/user)
+	if(CanInteract(user, DefaultTopicState()))
+		to_chat(user, "Default Boot Device File Integrity Damaged. Startup aborted. Error log printing.")
 		new logtype(loc)
 		used = 1
+		return TRUE
 
 /obj/machinery/computer/log_printer/prof1
 	name = "Professor's Computer"

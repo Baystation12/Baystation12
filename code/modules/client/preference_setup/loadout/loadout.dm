@@ -73,6 +73,16 @@ var/list/gear_datums = list()
 			continue
 		. += gear_name
 
+/datum/category_item/player_setup_item/loadout/proc/skill_check(var/list/jobs, var/list/skills_required)
+	for(var/datum/job/J in jobs)
+		. = TRUE
+		for(var/R in skills_required)
+			if(pref.get_total_skill_value(J, R) < skills_required[R])
+				. = FALSE
+				break
+		if(.)
+			return
+
 /datum/category_item/player_setup_item/loadout/sanitize_character()
 	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, config.loadout_slots, initial(pref.gear_slot))
 	if(!islist(pref.gear_list)) pref.gear_list = list()
@@ -170,24 +180,63 @@ var/list/gear_datums = list()
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
 		var/allowed = 1
-
 		if(allowed && G.allowed_roles)
 			var/good_job = 0
 			var/bad_job = 0
 			entry += "<br><i>"
-			var/ind = 0
+			var/list/jobchecks = list()
 			for(var/datum/job/J in jobs)
-				++ind
-				if(ind > 1)
-					entry += ", "
 				if(J.type in G.allowed_roles)
-					entry += "<font color=55cc55>[J.title]</font>"
+					jobchecks += "<font color=55cc55>[J.title]</font>"
 					good_job = 1
 				else
-					entry += "<font color=cc5555>[J.title]</font>"
+					jobchecks += "<font color=cc5555>[J.title]</font>"
 					bad_job = 1
 			allowed = good_job || !bad_job
-			entry += "</i>"
+			entry += "[english_list(jobchecks)]</i>"
+
+		if(allowed && G.allowed_branches)
+			var/list/branches = list()
+			for(var/datum/job/J in jobs)
+				if(pref.branches[J.title])
+					branches |= pref.branches[J.title]
+			if(length(branches))
+				var/list/branch_checks = list()
+				var/good_branch = 0
+				entry += "<br><i>"
+				for(var/branch in branches)
+					var/datum/mil_branch/player_branch = mil_branches.get_branch(branch)
+					if(player_branch.type in G.allowed_branches)
+						branch_checks += "<font color=55cc55>[player_branch.name]</font>"
+						good_branch = 1
+					else
+						branch_checks += "<font color=cc5555>[player_branch.name]</font>"
+				allowed = good_branch
+
+				entry += "[english_list(branch_checks)]</i>"
+
+		if(allowed && G.allowed_skills)
+			var/list/skills_required = list()//make it into instances? instead of path
+			for(var/skill in G.allowed_skills)
+				var/decl/hierarchy/skill/instance = decls_repository.get_decl(skill)
+				skills_required[instance] = G.allowed_skills[skill]
+
+			allowed = skill_check(jobs, skills_required)//Checks if a single job has all the skills required
+
+			entry += "<br><i>"
+			var/list/skill_checks = list()
+			for(var/R in skills_required)
+				var/decl/hierarchy/skill/S = R
+				var/skill_entry
+				skill_entry += "[S.levels[skills_required[R]]]"
+				if(allowed)
+					skill_entry = "<font color=55cc55>[skill_entry] [R]</font>"
+				else
+					skill_entry = "<font color=cc5555>[skill_entry] [R]</font>"
+				skill_checks += skill_entry
+
+			entry += "[english_list(skill_checks)]</i>"
+
 		entry += "</tr>"
 		if(ticked)
 			entry += "<tr><td colspan=3>"
@@ -296,6 +345,7 @@ var/list/gear_datums = list()
 	var/slot               //Slot to equip to.
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/list/allowed_branches //Service branches that can spawn with it.
+	var/list/allowed_skills //Skills required to spawn with this item.
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/flags              //Special tweaks in new

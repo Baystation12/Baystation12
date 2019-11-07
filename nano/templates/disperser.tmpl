@@ -1,0 +1,91 @@
+{{if data.faillink}}
+	<div class='notice'>
+		ERROR: Machine is incomplete, out of range, or misaligned!
+	</div>
+{{else}}
+<div style="float:left;width:50%">
+	<h3>Targeting</h3>
+	<div class='block'>
+		<div class='item'>
+			<div class='item'>
+				{{:helper.link('', 'triangle-1-nw', { 'choose' : 9 }, data.overmapdir == 9 ? 'selected' : null, null)}}
+				{{:helper.link('', 'triangle-1-n', { 'choose' : 1 }, data.overmapdir == 1 ? 'selected' : null, null)}}
+				{{:helper.link('', 'triangle-1-ne', { 'choose' : 5 }, data.overmapdir == 5 ? 'selected' : null, null)}}
+			</div>
+			<div class='item'>
+				{{:helper.link('', 'triangle-1-w', { 'choose' : 8 }, data.overmapdir == 8 ? 'selected' : null, null)}}
+				{{:helper.link('', 'circle-close', { 'choose' : 0 }, data.overmapdir == 0 ? 'selected' : null, null)}}
+				{{:helper.link('', 'triangle-1-e', { 'choose' : 4 }, data.overmapdir == 4 ? 'selected' : null, null)}}
+			</div>
+			<div class='item'>
+				{{:helper.link('', 'triangle-1-sw', { 'choose' : 10 }, data.overmapdir == 10 ? 'selected' : null, null)}}
+				{{:helper.link('', 'triangle-1-s', { 'choose' : 2 }, data.overmapdir == 2 ? 'selected' : null, null)}}
+				{{:helper.link('', 'triangle-1-se', { 'choose' : 6 }, data.overmapdir == 6 ? 'selected' : null, null)}}
+			</div>
+		</div>
+	</div>
+</div>
+<div style="float:right;width:50%">
+	<h3>Charge</h3>
+	<div class='block'>
+		{{if data.nopower}}
+			<b>At least one part of the machine is unpowered.</b>
+		{{/if}}
+		<div class='itemLabelWidest'>
+			Charge Load Type
+		</div>
+		<div class='item'>
+			{{:data.chargeload}}
+		</div>
+		<div class='itemLabelWidest'>
+			Cooldown
+		</div>
+		<div class='item'>
+			{{if data.next_shot == 0}}
+			Ready
+			{{else}}
+			{{:data.next_shot}} seconds
+			<br><i>Warning: Do not fire during cooldown.</i>
+			{{/if}}
+		</div>
+	</div>
+</div>
+<hr>
+<div style="float:left;width:50%">
+	<h3>Calibration</h3>
+	<div class='block'>
+		<div class='itemLabelWidest'>
+			{{:data.cal_accuracy}}%
+		</div>
+		<div class='itemLabelWidest'>
+			{{:helper.link('Pre-Calibration', 'transfer-e-w', { 'skill_calibration' : 1 }, data.skill ?  null : 'disabled', null)}}
+		</div><br>
+		{{for data.calibration}}
+			<div class='item'>
+				{{:helper.link(value, 'shuffle', { 'calibration' : index }, null, null)}}
+				<br>
+			</div>
+		{{/for}}
+	</div>
+</div>
+<div style="float:right;width:50%">
+	<h3>Setup</h3>
+	<div class='block'>
+		<div class='itemLabelWidest'>
+			Strength
+		</div>
+		<div class='item'>
+			{{:helper.link(data.strength, 'lightbulb', { 'strength' : 1 }, null, null)}}
+		</div>
+		<div class='itemLabelWidest'>
+			Radius
+		</div>
+		<div class='item'>
+			{{:helper.link(data.range, 'arrow-4-diag', { 'range' : 1 }, null, null)}}
+		</div>
+	</div>
+</div>
+<div class='item'>	
+{{:helper.link("Fire", 'alert', { 'fire' : 1 }, null, null)}}
+</div>
+{{/if}}

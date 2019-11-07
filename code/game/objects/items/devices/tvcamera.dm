@@ -29,11 +29,11 @@
 	radio.power_usage = 0
 	. = ..()
 
-/obj/item/device/camera/tvcamera/examine()
+/obj/item/device/camera/tvcamera/examine(mob/user)
 	. = ..()
-	to_chat(usr, "Video feed is currently: [camera.status ? "Online" : "Offline"]")
-	to_chat(usr, "Audio feed is currently: [radio.broadcasting ? "Online" : "Offline"]")
-	to_chat(usr, "Photography setting is currently: [on ? "On" : "Off"]")
+	to_chat(user, "Video feed is currently: [camera.status ? "Online" : "Offline"]")
+	to_chat(user, "Audio feed is currently: [radio.broadcasting ? "Online" : "Offline"]")
+	to_chat(user, "Photography setting is currently: [on ? "On" : "Off"]")
 
 /obj/item/device/camera/tvcamera/attack_self(mob/user)
 	add_fingerprint(user)
@@ -135,7 +135,6 @@ Using robohead because of restricting to roboticist */
 					to_chat(user, "<span class='notice'>You need three cable coils to wire the devices.</span>")
 					..()
 					return
-				C.use(3)
 				buildstep++
 				to_chat(user, "<span class='notice'>You wire the assembly</span>")
 				desc = "This TV camera assembly has wires sticking out"
@@ -149,12 +148,11 @@ Using robohead because of restricting to roboticist */
 		if(4)
 			if(istype(W, /obj/item/stack/material/steel))
 				var/obj/item/stack/material/steel/S = W
-				buildstep++
-				S.use(1)
-				to_chat(user, "<span class='notice'>You encase the assembly.</span>")
-				var/turf/T = get_turf(src)
-				new /obj/item/device/camera/tvcamera(T)
-				qdel(src)
-				return
-
+				if(S.use(1))
+					buildstep++
+					to_chat(user, "<span class='notice'>You encase the assembly.</span>")
+					var/turf/T = get_turf(src)
+					new /obj/item/device/camera/tvcamera(T)
+					qdel(src)
+					return
 	..()

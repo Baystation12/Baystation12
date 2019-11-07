@@ -6,7 +6,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	role_text_plural = "Ninja"
 	landmark_id = "ninjastart"
 	welcome_text = "<span class='info'>You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudninja"
 
 	initial_spawn_req = 1
@@ -18,6 +18,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	id_type = /obj/item/weapon/card/id/syndicate
 
 	faction = "ninja"
+	base_to_load = /datum/map_template/ruin/antag_spawn/ninja
 
 /datum/antagonist/ninja/attempt_random_spawn()
 	if(config.ninjas_allowed) ..()
@@ -78,7 +79,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	if(!..())
 		return 0
 	var/directive = generate_ninja_directive("heel")
-	player.store_memory("<B>Directive:</B> <span class='danger'>[directive]</span><br>")
+	player.StoreMemory("<B>Directive:</B> <span class='danger'>[directive]</span><br>", /decl/memory_options/system)
 	to_chat(player, "<b>Remember your directive:</b> [directive].")
 
 /datum/antagonist/ninja/update_antag_mob(var/datum/mind/player)
@@ -92,39 +93,18 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	player.name = H.name
 
 /datum/antagonist/ninja/equip(var/mob/living/carbon/human/player)
-
-	if(!..())
-		return 0
-
-	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(player)
-	player.equip_to_slot_or_del(R, slot_l_ear)
-	player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_belt)
-	create_id("Infiltrator", player)
-
-	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(get_turf(player))
-	ninjasuit.seal_delay = 0
-	player.put_in_hands(ninjasuit)
-	player.equip_to_slot_or_del(ninjasuit,slot_back)
-	if(ninjasuit)
-		ninjasuit.toggle_seals(src,1)
-		ninjasuit.seal_delay = initial(ninjasuit.seal_delay)
-
-	if(istype(player.back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = player.back
-		if(rig.air_supply)
-			player.internal = rig.air_supply
-
-	var/obj/item/modular_computer/pda/syndicate/U = new
-	player.put_in_hands(U)
-	var/decl/uplink_source/pda/uplink_source = new
-	uplink_source.setup_uplink_source(player, 0)
-
-	spawn(10)
-		if(player.internal)
-			player.internals.icon_state = "internal1"
-		else
-			to_chat(player, "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>")
+	. = ..()
+	if(.)
+		var/obj/item/device/radio/R = new /obj/item/device/radio/headset(player)
+		player.equip_to_slot_or_del(R, slot_l_ear)
+		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform)
+		player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_belt)
+		create_id("Infiltrator", player)
+		equip_rig(/obj/item/weapon/rig/light/ninja, player)
+		var/obj/item/modular_computer/pda/syndicate/U = new
+		player.put_in_hands(U)
+		var/decl/uplink_source/pda/uplink_source = new
+		uplink_source.setup_uplink_source(player, 0)
 
 /datum/antagonist/ninja/proc/generate_ninja_directive(side)
 	var/directive = "[side=="face"?"[GLOB.using_map.company_name]":"A criminal syndicate"] is your employer. "//Let them know which side they're on.

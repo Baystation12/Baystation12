@@ -1,7 +1,8 @@
 SUBSYSTEM_DEF(codex)
 	name = "Codex"
 	flags = SS_NO_FIRE
-	init_order = SS_INIT_MISC_LATE
+	init_order = SS_INIT_MISC_CODEX
+	var/regex/linkRegex
 
 	var/list/entries_by_path =   list()
 	var/list/entries_by_string = list()
@@ -9,6 +10,10 @@ SUBSYSTEM_DEF(codex)
 	var/list/search_cache =      list()
 
 /datum/controller/subsystem/codex/Initialize()
+	// Codex link syntax is such: 
+	// <l>keyword</l> when keyword is mentioned verbatim, 
+	// <span codexlink='keyword'>whatever</span> when shit gets tricky
+	linkRegex = regex(@"<(span|l)(\s+codexlink='([^>]*)'|)>([^<]+)</(span|l)>","g")
 
 	// Create general hardcoded entries.
 	for(var/ctype in typesof(/datum/codex_entry))
@@ -39,6 +44,19 @@ SUBSYSTEM_DEF(codex)
 	index_file = sortAssoc(index_file)
 	. = ..()
 
+/datum/controller/subsystem/codex/proc/parse_links(string, viewer)
+	while(linkRegex.Find(string))
+		var/key = linkRegex.group[4]
+		if(linkRegex.group[2])
+			key = linkRegex.group[3]
+		key = lowertext(trim(key))
+		var/datum/codex_entry/linked_entry = get_entry_by_string(key)
+		var/replacement = linkRegex.group[4]
+		if(linked_entry)
+			replacement = "<a href='?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[viewer]'>[replacement]</a>"
+		string = replacetextEx(string, linkRegex.match, replacement)
+	return string
+
 /datum/controller/subsystem/codex/proc/get_codex_entry(var/entry)
 	if(istype(entry, /atom))
 		var/atom/entity = entry
@@ -58,17 +76,8 @@ SUBSYSTEM_DEF(codex)
 
 /datum/controller/subsystem/codex/proc/present_codex_entry(var/mob/presenting_to, var/datum/codex_entry/entry)
 	if(entry && istype(presenting_to) && presenting_to.client)
-		var/list/dat = list()
-		if(entry.lore_text)
-			dat += "<font color='#abdb9b'>[entry.lore_text]</font>"
-		if(entry.mechanics_text)
-			dat += "<h3>OOC Information</h3>"
-			dat += "<font color='#9ebcd8'>[entry.mechanics_text]</font>"
-		if(entry.antag_text && presenting_to.mind && player_is_antag(presenting_to.mind))
-			dat += "<h3>Antagonist Information</h3>"
-			dat += "<font color='#e5a2a2'>[entry.antag_text]</font>"
 		var/datum/browser/popup = new(presenting_to, "codex", "Codex - [entry.display_name]")
-		popup.set_content(jointext(dat, null))
+		popup.set_content(parse_links(entry.get_text(presenting_to), presenting_to))
 		popup.open()
 
 /datum/controller/subsystem/codex/proc/retrieve_entries_for_string(var/searching)

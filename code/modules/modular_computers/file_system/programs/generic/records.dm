@@ -9,6 +9,7 @@
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/records
 	usage_flags = PROGRAM_ALL
+	category = PROG_OFFICE
 
 /datum/nano_module/records
 	name = "Crew Records"
@@ -51,8 +52,9 @@
 /datum/nano_module/records/proc/get_record_access(var/mob/user)
 	var/list/user_access = using_access || user.GetAccess()
 
-	var/obj/item/modular_computer/PC = nano_host()
-	if(istype(PC) && PC.computer_emagged)
+	var/obj/PC = nano_host()
+	var/datum/extension/interactive/ntos/os = get_extension(PC, /datum/extension/interactive/ntos)
+	if(os && os.emagged())
 		user_access = user_access.Copy()
 		user_access |= access_syndicate
 
@@ -105,7 +107,7 @@
 			return
 		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			var/datum/report_field/field = R.field_from_name(field_name)
-			if(lowertext(field.get_value()) == lowertext(search))
+			if(findtext(lowertext(field.get_value()), lowertext(search)))
 				active_record = R
 				return 1
 		message = "Unable to find record containing '[search]'"

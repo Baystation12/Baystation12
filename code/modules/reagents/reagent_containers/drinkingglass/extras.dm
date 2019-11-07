@@ -53,7 +53,7 @@
 	var/glass_desc
 	var/glass_color
 	w_class = ITEM_SIZE_TINY
-	icon = DRINK_ICON_FILE
+	icon = 'icons/obj/drink_glasses/extras.dmi'
 
 /obj/item/weapon/glass_extra/stick
 	name = "stick"
@@ -68,5 +68,3 @@
 	glass_addition = "straw"
 	glass_desc = "There is a straw in the glass."
 	icon_state = "straw"
-
-#undef DRINK_ICON_FILE

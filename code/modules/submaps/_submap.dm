@@ -83,6 +83,9 @@
 		qdel(src)
 		return
 
+	if(archetype && archetype.call_webhook)
+		SSwebhooks.send(archetype.call_webhook, list("name" = name))
+
 /datum/submap/proc/sync_cell(var/obj/effect/overmap/cell)
 	name = cell.name
 

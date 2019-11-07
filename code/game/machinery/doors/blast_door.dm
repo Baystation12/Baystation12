@@ -26,7 +26,6 @@
 	var/close_sound = 'sound/machines/blastdoor_close.ogg'
 
 	closed_layer = ABOVE_WINDOW_LAYER
-	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
 
@@ -35,15 +34,24 @@
 	block_air_zones = 0
 
 	var/begins_closed = TRUE
-	var/_wifi_id
-	var/datum/wifi/receiver/button/door/wifi_receiver
 	var/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
+	pry_mod = 1.35
+
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	// To be fleshed out and moved to parent door, but staying minimal for now.
+	public_methods = list(
+		/decl/public_access/public_method/open_door,
+		/decl/public_access/public_method/close_door_delayed,
+		/decl/public_access/public_method/toggle_door
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/blast_door = 1)
 
 /obj/machinery/door/blast/Initialize()
 	. = ..()
-	if(_wifi_id)
-		wifi_receiver = new(_wifi_id, src)
 
 	if(!begins_closed)
 		icon_state = icon_state_open
@@ -55,13 +63,8 @@
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
-	if(. && (stat & BROKEN))
+	if((stat & BROKEN))
 		to_chat(user, "It's broken.")
-
-/obj/machinery/door/airlock/Destroy()
-	qdel(wifi_receiver)
-	wifi_receiver = null
-	return ..()
 
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
@@ -153,7 +156,7 @@
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
 			return
 		var/obj/item/stack/P = C
-		if(P.amount < amt)
+		if(!P.can_use(amt))
 			to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 			return
 		to_chat(user, "<span class='notice'>You begin repairing \the [src]...</span>")
@@ -189,6 +192,10 @@
 		return
 	force_close()
 
+/obj/machinery/door/blast/toggle()
+	if (operating || (stat & BROKEN || stat & NOPOWER))
+		return
+	force_toggle()
 
 // Proc: repair()
 // Parameters: None
@@ -202,7 +209,43 @@
 	if(air_group) return 1
 	return ..()
 
+// Used with mass drivers to time the close.
+/obj/machinery/door/blast/proc/delayed_close()
+	set waitfor = FALSE
+	sleep(5 SECONDS)
+	close()
 
+/decl/public_access/public_method/close_door_delayed
+	name = "delayed close door"
+	desc = "Closes the door if possible, after a short delay."
+	call_proc = /obj/machinery/door/blast/proc/delayed_close
+
+/decl/stock_part_preset/radio/receiver/blast_door
+	frequency = BLAST_DOORS_FREQ
+	receive_and_call = list(
+		"open_door" = /decl/public_access/public_method/open_door,
+		"close_door_delayed" = /decl/public_access/public_method/close_door_delayed,
+		"toggle_door" = /decl/public_access/public_method/toggle_door
+	)
+
+/obj/machinery/button/blast_door
+	icon = 'icons/obj/stationobjs.dmi'
+	name = "remote blast door-control"
+	desc = "It controls blast doors, remotely."
+	icon_state = "blastctrl"
+	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/blast_door_button = 1)
+
+/decl/stock_part_preset/radio/basic_transmitter/blast_door_button
+	transmit_on_change = list(
+		"toggle_door" = /decl/public_access/public_variable/button_active,
+	)
+	frequency = BLAST_DOORS_FREQ
+
+/obj/machinery/button/blast_door/on_update_icon()
+	if(operating)
+		icon_state = "blastctrl1"
+	else
+		icon_state = "blastctrl"
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
@@ -252,6 +295,7 @@
 	min_force = 15
 	maxhealth = 500
 	explosion_resistance = 10
+	pry_mod = 0.55
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE

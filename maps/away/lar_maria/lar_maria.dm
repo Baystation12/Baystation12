@@ -12,6 +12,7 @@
 	description = "An orbital virus research station."
 	suffixes = list("lar_maria/lar_maria-1.dmm", "lar_maria/lar_maria-2.dmm")
 	cost = 2
+	area_usage_test_exempted_root_areas = list(/area/lar_maria)
 
 ///////////////////////////////////custom virus for prisoners to spread
 /datum/disease2/disease/lar_maria
@@ -95,7 +96,7 @@
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = 8
-	can_escape = 1
+	can_escape = TRUE
 	stop_automated_movement_when_pulled = 0
 	attacktext = "punched"
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null
@@ -267,14 +268,14 @@
 	name = "paper note"
 	info = {"<center><b><font color='green'>Zeng-Hu Pharmaceuticals</font></b></center>
 			<center><font color='red'><small>CONFIDENTIAL USE ONLY</small></font></center>
-			<i>The samples of Type 8 we've got are almost out, but it seems like we're actually onto something major here. We'll need to get more sent over asap. This stuff may well be the key to proper immortality, not just cloning and resleeving. We cut off one of the test subject's arms and they just put it back on and it healed in an hour or so to the point it was working fine. It's nothing short of miraculous.</i>
+			<i>The samples of Type 8 we've got are almost out, but it seems like we're actually onto something major here. We'll need to get more sent over asap. This stuff may well be the key to immortality. We cut off one of the test subject's arms and they just put it back on and it healed in an hour or so to the point it was working fine. It's nothing short of miraculous.</i>
 			"}
 
 /obj/item/weapon/paper/lar_maria/note_4
 	name = "paper note"
 	info = {"<center><b><font color='green'>Zeng-Hu Pharmaceuticals</font></b></center>
 			<center><font color='red'><small>CONFIDENTIAL USE ONLY</small></font></center>
-			<i>Tedd, don't get into the cells with the Type 8 subjects anymore, something's off about them the last couple days. They haven't been moving right, and they seem distracted nearly constantly, and not in a normal way. They also look like they're turning kinda… green? One of the other guys says it's probably just a virus or something reacting with it, but I don't know, something seems off.</i>
+			<i>Tedd, don't get into the cells with the Type 8 subjects anymore, something's off about them the last couple days. They haven't been moving right, and they seem distracted nearly constantly, and not in a normal way. They also look like they're turning kinda... green? One of the other guys says it's probably just a virus or something reacting with it, but I don't know, something seems off.</i>
 			"}
 
 /obj/item/weapon/paper/lar_maria/note_5

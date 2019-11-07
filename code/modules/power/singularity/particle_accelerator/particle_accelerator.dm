@@ -65,6 +65,8 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	icon_state = "none"
 	anchored = 0
 	density = 1
+	obj_flags = OBJ_FLAG_ROTATABLE
+
 	var/obj/machinery/particle_accelerator/control_box/master = null
 	var/construction_state = 0
 	var/reference = null
@@ -87,44 +89,21 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/structure/particle_accelerator/on_update_icon()
 	..()
 	return
-
-
-/obj/structure/particle_accelerator/verb/rotate()
-	set name = "Rotate Clockwise"
-	set category = "Object"
-	set src in oview(1)
-
-	if (src.anchored || usr:stat)
-		to_chat(usr, "It is fastened to the floor!")
-		return 0
-	src.set_dir(turn(src.dir, 270))
-	return 1
-
-/obj/structure/particle_accelerator/verb/rotateccw()
-	set name = "Rotate Counter Clockwise"
-	set category = "Object"
-	set src in oview(1)
-
-	if (src.anchored || usr:stat)
-		to_chat(usr, "It is fastened to the floor!")
-		return 0
-	src.set_dir(turn(src.dir, 90))
-	return 1
-
+	
 /obj/structure/particle_accelerator/examine(mob/user)
-	switch(src.construction_state)
+	. = ..()
+	switch(construction_state)
 		if(0)
-			src.desc = text("A [name], looks like it's not attached to the flooring")
+			to_chat(user, "Looks like it's not attached to the flooring")
 		if(1)
-			src.desc = text("A [name], it is missing some cables")
+			to_chat(user, "It is missing some cables")
 		if(2)
-			src.desc = text("A [name], the panel is open")
+			to_chat(user, "The panel is open")
 		if(3)
-			src.desc = text("The [name] is assembled")
 			if(powered)
-				src.desc = src.desc_holder
-	..()
-	return
+				to_chat(user, desc_holder)
+			else
+				to_chat(user, "\The [src] is assembled")
 
 
 /obj/structure/particle_accelerator/attackby(obj/item/W, mob/user)
@@ -267,46 +246,23 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	var/strength = 0
 	var/desc_holder = null
 
-
-/obj/machinery/particle_accelerator/verb/rotate()
-	set name = "Rotate Clockwise"
-	set category = "Object"
-	set src in oview(1)
-
-	if (src.anchored || usr:stat)
-		to_chat(usr, "It is fastened to the floor!")
-		return 0
-	src.set_dir(turn(src.dir, 270))
-	return 1
-
-/obj/machinery/particle_accelerator/verb/rotateccw()
-	set name = "Rotate Counter-Clockwise"
-	set category = "Object"
-	set src in oview(1)
-
-	if (src.anchored || usr:stat)
-		to_chat(usr, "It is fastened to the floor!")
-		return 0
-	src.set_dir(turn(src.dir, 90))
-	return 1
-
 /obj/machinery/particle_accelerator/on_update_icon()
 	return
 
 /obj/machinery/particle_accelerator/examine(mob/user)
-	switch(src.construction_state)
+	. = ..()
+	switch(construction_state)
 		if(0)
-			src.desc = text("A [name], looks like it's not attached to the flooring")
+			to_chat(user, "Looks like it's not attached to the flooring")
 		if(1)
-			src.desc = text("A [name], it is missing some cables")
+			to_chat(user, "It is missing some cables")
 		if(2)
-			src.desc = text("A [name], the panel is open")
+			to_chat(user, "The panel is open")
 		if(3)
-			src.desc = text("The [name] is assembled")
 			if(powered)
-				src.desc = src.desc_holder
-	..()
-	return
+				to_chat(user, desc_holder)
+			else
+				to_chat(user, "\The [src] is assembled")
 
 
 /obj/machinery/particle_accelerator/attackby(obj/item/W, mob/user)

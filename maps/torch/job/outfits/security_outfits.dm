@@ -7,15 +7,15 @@
 	..()
 	BACKPACK_OVERRIDE_SECURITY
 
-/decl/hierarchy/outfit/job/torch/crew/security/brig_officer
-	name = OUTFIT_JOB_NAME("Brig Officer")
+/decl/hierarchy/outfit/job/torch/crew/security/brig_chief
+	name = OUTFIT_JOB_NAME("Brig Chief")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/crew/security/brigofficer
+	id_type = /obj/item/weapon/card/id/torch/crew/security/brigchief
 	pda_type = /obj/item/modular_computer/pda/security
 
-/decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
-	name = OUTFIT_JOB_NAME("Brig Officer - Fleet")
+/decl/hierarchy/outfit/job/torch/crew/security/brig_chief/fleet
+	name = OUTFIT_JOB_NAME("Brig Chief - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
@@ -40,7 +40,7 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
-	name = OUTFIT_JOB_NAME("Forensic Technician - OCIE Agent")
+	name = OUTFIT_JOB_NAME("Forensic Technician - SFP Agent")
 	uniform = /obj/item/clothing/under/det/grey
 	suit = /obj/item/clothing/suit/storage/toggle/agent_jacket
 	shoes = /obj/item/clothing/shoes/dress

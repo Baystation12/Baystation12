@@ -118,7 +118,7 @@
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
-	if(user && user.isEquipped(W) && !user.canUnEquip(W))
+	if(user && !user.canUnEquip(W))
 		return 0
 
 	if(src.loc == W)
@@ -252,7 +252,9 @@
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/weapon/storage/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+	. = ..()
+	if (.) //if the item was used as a crafting component, just return
+		return
 
 	if(isrobot(user) && (W == user.get_active_hand()))
 		return //Robots can't store their modules.
@@ -339,7 +341,7 @@
 		verbs -= /obj/item/weapon/storage/verb/toggle_gathering_mode
 
 	if(isnull(max_storage_space) && !isnull(storage_slots))
-		max_storage_space = storage_slots*base_storage_cost(max_w_class)
+		max_storage_space = storage_slots*BASE_STORAGE_COST(max_w_class)
 
 	storage_ui = new storage_ui(src)
 	prepare_ui()
@@ -420,4 +422,4 @@
 
 /obj/item/proc/get_storage_cost()
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
-	return base_storage_cost(w_class)
+	return BASE_STORAGE_COST(w_class)

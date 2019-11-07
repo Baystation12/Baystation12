@@ -1,3 +1,5 @@
+#define DISPENSER_REAGENT_VALUE 0.2
+
 /datum/reagent/acetone
 	name = "Acetone"
 	description = "A colorless liquid solvent used in chemical synthesis."
@@ -5,6 +7,7 @@
 	reagent_state = LIQUID
 	color = "#808080"
 	metabolism = REM * 0.2
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_NABBER)
@@ -29,13 +32,14 @@
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 	return
 
-/datum/reagent/aluminum
-	name = "Aluminum"
+/datum/reagent/aluminium
+	name = "Aluminium"
 	taste_description = "metal"
 	taste_mult = 1.1
 	description = "A silvery white and ductile member of the boron group of chemical elements."
 	reagent_state = SOLID
 	color = "#a8a8a8"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/ammonia
 	name = "Ammonia"
@@ -46,10 +50,11 @@
 	color = "#404030"
 	metabolism = REM * 0.5
 	overdose = 5
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
-		M.adjustOxyLoss(-removed * 10)
+		M.add_chemical_effect(CE_OXYGENATED, 2)
 	else if(alien != IS_DIONA)
 		M.adjustToxLoss(removed * 1.5)
 
@@ -65,6 +70,7 @@
 	reagent_state = SOLID
 	color = "#1c1300"
 	ingest_met = REM * 5
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -91,6 +97,7 @@
 	description = "A highly ductile metal."
 	taste_description = "copper"
 	color = "#6e3b08"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/ethanol
 	name = "Ethanol" //Parent class for all alcoholic reagents.
@@ -100,6 +107,7 @@
 	color = "#404030"
 	touch_met = 5
 	var/nutriment_factor = 0
+	var/hydration_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/toxicity = 1
 
@@ -110,6 +118,7 @@
 
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -120,7 +129,8 @@
 	return
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition += nutriment_factor * removed
+	M.adjust_nutrition(nutriment_factor * removed)
+	M.adjust_hydration(hydration_factor * removed)
 	var/strength_mod = 1
 	if(alien == IS_SKRELL)
 		strength_mod *= 5
@@ -186,6 +196,7 @@
 	color = "#808080"
 	metabolism = REM * 0.2
 	touch_met = 5
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/hydrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(4 * removed)
@@ -205,6 +216,7 @@
 	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#353535"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -216,6 +228,7 @@
 	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#808080"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -230,6 +243,7 @@
 	taste_mult = 0 //mercury apparently is tasteless. IDK
 	reagent_state = LIQUID
 	color = "#484848"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -245,6 +259,7 @@
 	taste_description = "vinegar"
 	reagent_state = SOLID
 	color = "#832828"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/potassium
 	name = "Potassium"
@@ -252,6 +267,7 @@
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
 	reagent_state = SOLID
 	color = "#a0a0a0"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(volume > 3)
@@ -265,6 +281,7 @@
 	taste_description = "the color blue, and regret"
 	reagent_state = SOLID
 	color = "#c7c7c7"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
@@ -300,9 +317,11 @@
 	touch_met = 50 // It's acid!
 	var/power = 5
 	var/meltdose = 10 // How much is needed to melt
+	var/max_damage = 40
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.take_organ_damage(0, removed * power * 2)
+	M.take_organ_damage(0, removed * power)
 
 /datum/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // This is the most interesting
 	if(ishuman(M))
@@ -350,11 +369,11 @@
 	if(M.unacidable)
 		return
 
-	if(volume < meltdose) // Not enough to melt anything
-		M.take_organ_damage(0, removed * power * 0.1) //burn damage, since it causes chemical burns. Acid doesn't make bones shatter, like brute trauma would.
+	if(removed < meltdose) // Not enough to melt anything
+		M.take_organ_damage(0, min(removed * power * 0.1, max_damage)) //burn damage, since it causes chemical burns. Acid doesn't make bones shatter, like brute trauma would.
 	else
-		M.take_organ_damage(0, removed * power * 0.2)
-		if(removed && ishuman(M) && prob(100 * removed / meltdose)) // Applies disfigurement
+		M.take_organ_damage(0, min(removed * power * 0.2, max_damage))
+		if(ishuman(M)) // Applies disfigurement
 			var/mob/living/carbon/human/H = M
 			var/screamed
 			for(var/obj/item/organ/external/affecting in H.organs)
@@ -382,12 +401,15 @@
 	color = "#808080"
 	power = 3
 	meltdose = 8
+	max_damage = 30
+	value = DISPENSER_REAGENT_VALUE * 2
 
 /datum/reagent/silicon
 	name = "Silicon"
 	description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
 	reagent_state = SOLID
 	color = "#a8a8a8"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/sodium
 	name = "Sodium"
@@ -395,21 +417,24 @@
 	taste_description = "salty metal"
 	reagent_state = SOLID
 	color = "#808080"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/sugar
 	name = "Sugar"
 	description = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	taste_description = "sugar"
-	taste_mult = 1.8
+	taste_mult = 3
 	reagent_state = SOLID
 	color = "#ffffff"
+	scannable = 1
 
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	glass_icon = DRINK_ICON_NOISY
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	M.nutrition += removed * 3
+	M.adjust_nutrition(removed * 3)
 
 	if(alien == IS_UNATHI)
 		var/datum/species/unathi/S = M.species
@@ -421,6 +446,7 @@
 	taste_description = "old eggs"
 	reagent_state = SOLID
 	color = "#bf8c00"
+	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/tungsten
 	name = "Tungsten"
@@ -428,3 +454,6 @@
 	taste_mult = 0 //no taste
 	reagent_state = SOLID
 	color = "#dcdcdc"
+	value = DISPENSER_REAGENT_VALUE
+
+#undef DISPENSER_REAGENT_VALUE

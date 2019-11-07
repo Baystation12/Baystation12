@@ -23,6 +23,11 @@
 	description = "Asteroid with slavers base inside."
 	suffixes = list("slavers/slavers_base.dmm")
 	cost = 1
+	generate_mining_by_z = 1
+	area_usage_test_exempted_root_areas = list(/area/slavers_base)
+	apc_test_exempt_areas = list(
+		/area/slavers_base/hangar = NO_SCRUBBER
+	)
 
 /obj/effect/shuttle_landmark/nav_slavers_base/nav1
 	name = "Slavers Base Navpoint #1"
@@ -146,7 +151,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 30
-	can_escape = 1
+	can_escape = TRUE
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist
 	var/weapon = /obj/item/weapon/gun/energy/laser
@@ -180,4 +185,9 @@
 	icon_state = "abol_suit"
 	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 30, bullet = 25, laser = 10, energy = 10, bomb = 5, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_PISTOL, 
+		laser = ARMOR_LASER_MINOR, 
+		energy = ARMOR_ENERGY_MINOR
+		)

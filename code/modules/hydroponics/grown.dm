@@ -188,7 +188,7 @@
 				qdel(src)
 				return
 			else if(seed.chems)
-				if(istype(W,/obj/item/weapon/material/hatchet || istype(W,/obj/item/weapon/material/knife)))
+				if(isHatchet(W))
 					if(!isnull(seed.chems[/datum/reagent/woodpulp]))
 						user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
 						new /obj/item/stack/material/wood(user.loc)

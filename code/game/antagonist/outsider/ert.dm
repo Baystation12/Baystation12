@@ -15,7 +15,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	landmark_id = "Response Team"
 	id_type = /obj/item/weapon/card/id/centcom/ERT
 
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 	antaghud_indicator = "hudloyalist"
 
 	hard_cap = 5
@@ -23,6 +23,8 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	initial_spawn_req = 5
 	initial_spawn_target = 7
 	show_objectives_on_creation = 0 //we are not antagonists, we do not need the antagonist shpiel/objectives
+
+	base_to_load = /datum/map_template/ruin/antag_spawn/ert
 
 /datum/antagonist/ert/create_default(var/mob/source)
 	var/mob/living/carbon/human/M = ..()

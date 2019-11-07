@@ -38,6 +38,7 @@
 	var/pressure_alert = 0
 	var/temperature_alert = 0
 	var/heartbeat = 0
+	var/stamina = 100
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -76,6 +77,8 @@
 
 		handle_pain()
 
+		handle_stamina()
+
 		handle_medical_side_effects()
 
 		if(!client && !mind)
@@ -87,6 +90,27 @@
 
 	//Update our name based on whether our face is obscured/disfigured
 	SetName(get_visible_name())
+
+/mob/living/carbon/human/get_stamina()
+	return stamina
+
+/mob/living/carbon/human/adjust_stamina(var/amt)
+	var/last_stamina = stamina
+	if(stat == DEAD)
+		stamina = 0
+	else
+		stamina = Clamp(stamina + amt, 0, 100)
+		if(stamina <= 0)
+			to_chat(src, SPAN_WARNING("You are exhausted!"))
+			if(MOVING_QUICKLY(src))
+				set_moving_slowly()
+	if(last_stamina != stamina && hud_used)
+		hud_used.update_stamina()
+
+/mob/living/carbon/human/proc/handle_stamina()
+	if((world.time - last_quick_move_time) > 5 SECONDS)
+		var/mod = (lying + (nutrition / initial(nutrition))) / 2
+		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+chem_effects[CE_ENERGETIC]))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	var/old_stat = stat
@@ -112,23 +136,28 @@
 			active_breaths = L.active_breathing
 		..(active_breaths)
 
-// Calculate how vulnerable the human is to under- and overpressure.
-// Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
+// Calculate how vulnerable the human is to the current pressure.
+// Returns 0 (equals 0 %) if sealed in an undamaged suit that's rated for the pressure, 1 if unprotected (equals 100%).
 // Suitdamage can modifiy this in 10% steps.
-/mob/living/carbon/human/proc/get_pressure_weakness()
+/mob/living/carbon/human/proc/get_pressure_weakness(pressure)
 
-	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
-
-	if(wear_suit && (wear_suit.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE) && head && (head.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
-		pressure_adjustment_coefficient = 0
-
-		// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.
-		if(istype(wear_suit,/obj/item/clothing/suit/space))
-			var/obj/item/clothing/suit/space/S = wear_suit
-			if(S.can_breach && S.damage)
-				pressure_adjustment_coefficient += S.damage * 0.1
-
-	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) // So it isn't less than 0 or larger than 1.
+	var/pressure_adjustment_coefficient = 0
+	var/list/zones = list(HEAD, UPPER_TORSO, LOWER_TORSO, LEGS, FEET, ARMS, HANDS)
+	for(var/zone in zones)
+		var/list/covers = get_covering_equipped_items(zone)
+		var/zone_exposure = 1
+		for(var/obj/item/clothing/C in covers)
+			zone_exposure = min(zone_exposure, C.get_pressure_weakness(pressure))
+		if(zone_exposure >= 1)
+			return 1
+		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
+		for(var/obj/item/clothing/C in covers)
+			if(C.accessories.len)
+				for(var/obj/item/clothing/accessory/A in C.accessories)
+					if(A & zone)
+						if(pressure_adjustment_coefficient)
+							. += pressure_adjustment_coefficient
+	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
 
@@ -149,7 +178,7 @@
 	else
 		// Otherwise calculate how much of that absolute pressure difference affects us, can be 0 to 1 (equals 0% to 100%).
 		// This is our relative difference.
-		pressure_difference *= get_pressure_weakness()
+		pressure_difference *= get_pressure_weakness(pressure)
 
 	// The difference is always positive to avoid extra calculations.
 	// Apply the relative difference on a standard atmosphere to get the final result.
@@ -216,12 +245,10 @@
 			var/rads = radiation/25
 
 			radiation -= rads
-			nutrition += rads
+			set_nutrition(Clamp(nutrition+rads, 0, 550))
 
 			if (radiation < 2)
 				radiation = 0
-
-			nutrition = Clamp(nutrition, 0, 550)
 
 			return
 
@@ -261,7 +288,7 @@
 			damage = 8
 			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
-		damage = Floor(damage * (isSynthetic() ? 0.5 : species.radiation_mod))
+		damage = Floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
@@ -298,12 +325,10 @@
 				rig_supply = rig.air_supply
 
 		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
-			internal = null
+			set_internals(null)
 
 		if(internal)
 			return internal.remove_air_volume(volume_needed)
-		else if(internals)
-			internals.icon_state = "internal0"
 	return null
 
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
@@ -324,7 +349,7 @@
 	if(!environment || (MUTATION_SPACERES in mutations))
 		return
 
-	//Stuff like the xenomorph's plasma regen happens here.
+	//Stuff like diona water absorbtion happens here.
 	species.handle_environment_special(src)
 
 	//Moved pressure calculations here for use in skip-processing check.
@@ -416,7 +441,12 @@
 	else if(adjusted_pressure >= species.hazard_low_pressure)
 		pressure_alert = -1
 	else
-		take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+		var/list/obj/item/organ/external/parts = get_damageable_organs()
+		for(var/obj/item/organ/external/O in parts)
+			if(QDELETED(O) || !(O.owner == src))
+				continue
+			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
+				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
@@ -444,20 +474,17 @@
 		return //too busy for pesky metabolic regulation
 
 	if(bodytemperature < species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
-		if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
-			nutrition -= 2
-		var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
-//		log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-		bodytemperature += recovery_amt
+		var/nut_remove = 10 * DEFAULT_HUNGER_FACTOR
+		if(nutrition >= nut_remove) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
+			adjust_nutrition(-nut_remove)
+			bodytemperature += max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
 	else if(species.cold_level_1 <= bodytemperature && bodytemperature <= species.heat_level_1)
-		var/recovery_amt = body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
-//		log_debug("Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-		bodytemperature += recovery_amt
+		bodytemperature += body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
 	else if(bodytemperature > species.heat_level_1) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
-		//We totally need a sweat system cause it totally makes sense...~
-		var/recovery_amt = min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
-//		log_debug("Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-		bodytemperature += recovery_amt
+		var/hyd_remove = 10 * DEFAULT_THIRST_FACTOR
+		if(hydration >= hyd_remove)
+			adjust_hydration(-hyd_remove)
+			bodytemperature += min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
@@ -467,6 +494,10 @@
 		if(C)
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
+			if(C.accessories.len)
+				for(var/obj/item/clothing/accessory/A in C.accessories)
+					if(A.max_heat_protection_temperature && A.max_heat_protection_temperature >= temperature)
+						. |= A.heat_protection
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
@@ -476,6 +507,11 @@
 		if(C)
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
+			if(C.accessories.len)
+				for(var/obj/item/clothing/accessory/A in C.accessories)
+					if(A.min_cold_protection_temperature && A.min_cold_protection_temperature <= temperature)
+						. |= A.cold_protection
+
 
 /mob/living/carbon/human/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
 	var/thermal_protection_flags = get_heat_protection_flags(temperature)
@@ -526,12 +562,14 @@
 	if(isSynthetic())
 		return
 
+	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
+
 	if(reagents)
 		if(touching) touching.metabolize()
 		if(bloodstr) bloodstr.metabolize()
+		if(ingested) metabolize_ingested_reagents()
 
 	// Trace chemicals
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
 	for(var/T in chem_doses)
 		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
 			continue
@@ -594,7 +632,7 @@
 						AdjustSleeping(-1)
 				species.handle_sleeping(src)
 			if(prob(2) && is_asystole() && isSynthetic())
-				visible_message(src, "<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
+				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
 		//CONSCIOUS
 		else
 			set_stat(CONSCIOUS)
@@ -638,8 +676,10 @@
 			adjustToxLoss(total_phoronloss)
 
 		// nutrition decrease
-		if (nutrition > 0)
-			nutrition = max (0, nutrition - species.hunger_factor)
+		if(nutrition > 0)
+			adjust_nutrition(-species.hunger_factor)
+		if(hydration > 0)
+			adjust_hydration(-species.thirst_factor)
 
 		if(stasis_value > 1 && drowsyness < stasis_value * 4)
 			drowsyness += min(stasis_value, 3)
@@ -751,6 +791,14 @@
 				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
 				else							nutrition_icon.icon_state = "nutrition4"
 
+		if(hydration_icon)
+			switch(hydration)
+				if(450 to INFINITY)				hydration_icon.icon_state = "hydration0"
+				if(350 to 450)					hydration_icon.icon_state = "hydration1"
+				if(250 to 350)					hydration_icon.icon_state = "hydration2"
+				if(150 to 250)					hydration_icon.icon_state = "hydration3"
+				else							hydration_icon.icon_state = "hydration4"
+
 		if(isSynthetic())
 			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
 			if (istype(C))
@@ -762,14 +810,11 @@
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 		if(toxin)
-			if(phoron_alert)	toxin.icon_state = "tox1"
-			else									toxin.icon_state = "tox0"
+			toxin.icon_state = "tox[phoron_alert ? "1" : "0"]"
 		if(oxygen)
-			if(oxygen_alert)	oxygen.icon_state = "oxy1"
-			else									oxygen.icon_state = "oxy0"
+			oxygen.icon_state = "oxy[oxygen_alert ? "1" : "0"]"
 		if(fire)
-			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
-			else									fire.icon_state = "fire0"
+			fire.icon_state = "fire[fire_alert ? fire_alert : 0]"
 
 		if(bodytemp)
 			if (!species)
@@ -949,8 +994,6 @@
 		var/image/holder = hud_list[STATUS_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
-		else if(status_flags & XENO_HOST)
-			holder.icon_state = "hudxeno"
 		else if(foundVirus)
 			holder.icon_state = "hudill"
 		else if(has_brain_worms())
@@ -965,8 +1008,6 @@
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
 		if(stat == DEAD)
 			holder2.icon_state = "huddead"
-		else if(status_flags & XENO_HOST)
-			holder2.icon_state = "hudxeno"
 		else if(has_brain_worms())
 			holder2.icon_state = "hudbrainworm"
 		else if(virus2.len)
@@ -1081,13 +1122,14 @@
 
 	for(var/obj/item/organ/external/E in organs)
 		if(!(E.body_part & protected_limbs) && prob(20))
-			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = fire)
+			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = "fire")
 
 /mob/living/carbon/human/rejuvenate()
 	restore_blood()
 	full_prosthetic = null
 	shock_stage = 0
 	..()
+	adjust_stamina(100)
 
 /mob/living/carbon/human/reset_view(atom/A)
 	..()

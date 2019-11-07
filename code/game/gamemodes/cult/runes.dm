@@ -5,7 +5,6 @@
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
 	unacidable = 1
-	plane = ABOVE_TURF_PLANE
 	layer = RUNE_LAYER
 
 	var/blood
@@ -18,6 +17,7 @@
 	bcolor = blcolor
 	blood = nblood
 	update_icon()
+	set_extension(src, /datum/extension/turf_hand, /datum/extension/turf_hand, 10)
 
 /obj/effect/rune/on_update_icon()
 	overlays.Cut()
@@ -39,7 +39,7 @@
 	color = bcolor
 	desc = "A strange collection of symbols drawn in [blood]."
 
-/obj/effect/rune/examine(var/mob/user)
+/obj/effect/rune/examine(mob/user)
 	. = ..()
 	if(iscultist(user))
 		to_chat(user, "This is \a [cultname] rune.")
@@ -160,7 +160,7 @@
 		A.forceMove(T)
 	return ..()
 
-/obj/effect/rune/teleport/examine(var/mob/user)
+/obj/effect/rune/teleport/examine(mob/user)
 	. = ..()
 	if(iscultist(user))
 		to_chat(user, "Its name is [destination].")
@@ -252,7 +252,7 @@
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
 		t = wall.health
-	user.pay_for_rune(t / 50)
+	user.remove_blood_simple(t / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
 
@@ -281,7 +281,7 @@
 		rune = null
 	return ..()
 
-/obj/effect/cultwall/examine(var/mob/user)
+/obj/effect/cultwall/examine(mob/user)
 	. = ..()
 	if(iscultist(user))
 		if(health == max_health)
@@ -360,6 +360,34 @@
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
+/obj/effect/rune/obscure
+	cultname = "obscure"
+
+/obj/effect/rune/obscure/cast(var/mob/living/user)
+	var/runecheck = 0
+	for(var/obj/effect/rune/R in orange(1, src))
+		if(R != src)
+			R.set_invisibility(INVISIBILITY_OBSERVER)
+		runecheck = 1
+	if(runecheck)
+		speak_incantation(user, "Kla[pick("'","`")]atu barada nikt'o!")
+		visible_message("<span class='warning'>\ The rune turns into gray dust that conceals the surrounding runes.</span>")
+		qdel(src)
+
+/obj/effect/rune/reveal
+	cultname = "reveal"
+
+/obj/effect/rune/reveal/cast(var/mob/living/user)
+	var/irunecheck = 0
+	for(var/obj/effect/rune/R in orange(1, src))
+		if(R != src)
+			R.set_invisibility(SEE_INVISIBLE_NOLIGHTING)
+		irunecheck = 1
+	if(irunecheck)
+		speak_incantation(user, "Nikt[pick("'","`")]o barada kla'atu!")
+		visible_message("<span class='warning'>\ The rune turns into red dust that reveals the surrounding runes.</span>")
+		qdel(src)
+
 /* Tier 2 runes */
 
 
@@ -376,10 +404,10 @@
 		user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
 	O = user.get_equipped_item(slot_wear_suit)
 	if(O && !istype(O, /obj/item/clothing/suit/cultrobes) && user.unEquip(O))
-		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)	
+		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)
 	O = user.get_equipped_item(slot_shoes)
 	if(O && !istype(O, /obj/item/clothing/shoes/cult) && user.unEquip(O))
-		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)	
+		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
 
 	O = user.get_equipped_item(slot_back)
 	if(istype(O, /obj/item/weapon/storage) && !istype(O, /obj/item/weapon/storage/backpack/cultpack) && user.unEquip(O)) // We don't want to make the vox drop their nitrogen tank, though
@@ -518,7 +546,7 @@
 			charges -= healburn
 			healbrute = min(healbrute, charges)
 			charges -= healbrute
-		user.heal_organ_damage(healbrute, healburn)
+		user.heal_organ_damage(healbrute, healburn, 1)
 		statuses += "your wounds mend"
 		if(!charges)
 			return statuses
@@ -572,7 +600,7 @@
 		M.add_chemical_effect(CE_PAINKILLER, 40)
 		M.add_chemical_effect(CE_SPEEDBOOST, 1)
 		M.adjustOxyLoss(-10 * removed)
-		M.heal_organ_damage(5 * removed, 5 * removed)
+		M.heal_organ_damage(5 * removed, 5 * removed, 1)
 		M.adjustToxLoss(-5 * removed)
 	else
 		M.fire_stacks = max(2, M.fire_stacks)
@@ -834,6 +862,10 @@
 	new papertype(get_turf(src))
 	qdel(target)
 	qdel(src)
+
+/obj/effect/rune/imbue/stun
+	cultname = "stun imbue"
+	papertype = /obj/item/weapon/paper/talisman/stun
 
 /obj/effect/rune/imbue/emp
 	cultname = "destroy technology imbue"

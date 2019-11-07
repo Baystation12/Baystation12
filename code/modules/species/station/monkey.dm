@@ -53,6 +53,9 @@
 		TAG_FACTION =   FACTION_TEST_SUBJECTS
 	)
 
+	var/list/no_touchie = list(/obj/item/weapon/mirror,
+							   /obj/item/weapon/storage/mirror)
+
 /datum/species/monkey/New()
 	equip_adjust = list(
 		slot_l_hand_str = list("[NORTH]" = list("x" = 1, "y" = 3), "[EAST]" = list("x" = -3, "y" = 2), "[SOUTH]" = list("x" = -1, "y" = 3), "[WEST]" = list("x" = 3, "y" = 2)),
@@ -73,17 +76,22 @@
 	if(held && prob(1))
 		var/turf/T = get_random_turf_in_range(H, 7, 2)
 		if(T)
-			H.throw_item(T)
+			if(istype(held, /obj/item/weapon/gun) && prob(80))
+				var/obj/item/weapon/gun/G = held
+				G.Fire(T, H)
+			else
+				H.throw_item(T)
 		else
 			H.unequip_item()
 	if(!held && !H.restrained() && prob(5))
 		var/list/touchables = list()
-		for(var/obj/O in range(1,H))
-			if(O.simulated && O.Adjacent(H))
+		for(var/obj/O in range(1,get_turf(H)))
+			if(O.simulated && O.Adjacent(H) && !is_type_in_list(O, no_touchie))
 				touchables += O
-		var/obj/touchy = pick(touchables)
-		touchy.attack_hand(H)
-	
+		if(touchables.len)
+			var/obj/touchy = pick(touchables)
+			touchy.attack_hand(H)
+
 	if(prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
 

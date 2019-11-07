@@ -219,6 +219,11 @@ var/world_topic_spam_protect_time = world.timeofday
 			info["name"] = S.name
 			info["key"] = S.key
 
+			if(istype(S, /mob/living/silicon/robot))
+				var/mob/living/silicon/robot/R = S
+				info["master"] = R.connected_ai?.name
+				info["sync"] = R.lawupdate
+
 			if(!S.laws)
 				info["laws"] = null
 				return list2params(info)

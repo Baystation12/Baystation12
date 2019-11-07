@@ -24,6 +24,7 @@
 	same_tile = 1
 	ladder_carry = 1
 	force_danger = 1
+	can_grab_self = 0
 
 /datum/grab/nab/on_hit_grab(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -70,8 +71,9 @@
 	G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting]'s [damaging.name]!</span>")
 
 	if(prob(30))
-		G.affecting.apply_damage(max(attack_damage + 10, 15), BRUTE, hit_zone, DAM_SHARP, used_weapon = "organic punctures")
-		var/armor = 100 * G.affecting.get_blocked_ratio(hit_zone, BRUTE)
+		var/hit_damage = max(attack_damage + 10, 15)
+		G.affecting.apply_damage(hit_damage, BRUTE, hit_zone, DAM_SHARP, used_weapon = "organic punctures")
+		var/armor = 100 * G.affecting.get_blocked_ratio(hit_zone, BRUTE, damage = hit_damage)
 		G.affecting.apply_effect(attack_damage, PAIN, armor)
 		G.affecting.visible_message("<span class='danger'>[G.assailant]'s spikes dig in painfully!</span>")
 	else

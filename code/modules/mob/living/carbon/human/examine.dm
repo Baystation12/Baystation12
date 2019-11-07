@@ -1,4 +1,5 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/carbon/human/examine(mob/user, distance)
+	. = TRUE
 	var/skipgloves = 0
 	var/skipsuitstorage = 0
 	var/skipjumpsuit = 0
@@ -22,10 +23,12 @@
 		skipface = head.flags_inv & HIDEFACE
 
 	if(wear_mask)
+		skipeyes |= wear_mask.flags_inv & HIDEEYES
+		skipears |= wear_mask.flags_inv & HIDEEARS
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
 	//no accuately spotting headsets from across the room.
-	if(get_dist(user, src) > 3)
+	if(distance > 3)
 		skipears = 1
 
 	var/list/msg = list("<span class='info'>*---------*\nThis is ")
@@ -158,11 +161,6 @@
 	if(mSmallsize in mutations)
 		msg += "[T.He] [T.is] small halfling!\n"
 
-	var/distance = 0
-	if(isghost(user) || user.stat == DEAD) // ghosts can see anything
-		distance = 1
-	else
-		distance = get_dist(user,src)
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be unconscious.</span>\n"
 		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)
@@ -232,7 +230,7 @@
 		else
 			if(E.is_stump())
 				wound_flavor_text[E.name] += "<b>[T.He] [T.has] a stump where [T.his] [organ_descriptor] should be.</b>\n"
-				if(E.wounds.len && E.parent)
+				if(LAZYLEN(E.wounds) && E.parent)
 					wound_flavor_text[E.name] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.parent.name].<br>"
 			else
 				if(!is_synth && BP_IS_ROBOTIC(E) && (E.parent && !BP_IS_ROBOTIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
@@ -248,7 +246,7 @@
 
 		for(var/datum/wound/wound in E.wounds)
 			var/list/embedlist = wound.embedded_objects
-			if(embedlist.len)
+			if(LAZYLEN(embedlist))
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)

@@ -29,9 +29,7 @@
 
 /obj/machinery/oxygen_pump/Destroy()
 	if(breather)
-		breather.internal = null
-		if(breather.internals)
-			breather.internals.icon_state = "internal0"
+		breather.set_internals(null)
 	if(tank)
 		qdel(tank)
 	if(breather)
@@ -57,25 +55,21 @@
 			src.add_fingerprint(usr)
 
 
-/obj/machinery/oxygen_pump/attack_hand(mob/user as mob)
+/obj/machinery/oxygen_pump/physical_attack_hand(mob/user)
 	if((stat & MAINT) && tank)
 		user.visible_message("<span class='notice'>\The [user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
 		user.put_in_hands(tank)
 		src.add_fingerprint(user)
 		tank.add_fingerprint(user)
 		tank = null
-		return
-	if (!tank)
-		to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
-		return
+		return TRUE
 	if(breather)
 		detach_mask(user)
-	else
-		ui_interact(usr)
+		return TRUE
 
-
-/obj/machinery/oxygen_pump/attack_ai(mob/user as mob)
+/obj/machinery/oxygen_pump/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
@@ -88,9 +82,7 @@
 /obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
 	if(C && istype(C))
 		if(!C.internal && tank)
-			C.internal = tank
-			if(C.internals)
-				C.internals.icon_state = "internal1"
+			breather.set_internals(tank)
 		update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/oxygen_pump/proc/detach_mask(mob/user)
@@ -162,7 +154,7 @@
 	if(istype(W, /obj/item/weapon/tank) && !stat)
 		to_chat(user, "<span class='warning'>Please open the maintenance hatch first.</span>")
 
-/obj/machinery/oxygen_pump/examine(var/mob/user)
+/obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()
 	if(tank)
 		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")

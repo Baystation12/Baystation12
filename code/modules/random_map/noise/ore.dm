@@ -56,7 +56,7 @@
 				CHECK_TICK
 			T.resources = list()
 			T.resources[MATERIAL_SAND] = rand(3,5)
-			T.resources[MATERIAL_GRAPHENE] = rand(3,5)
+			T.resources[MATERIAL_GRAPHITE] = rand(3,5)
 
 			var/tmp_cell
 			TRANSLATE_AND_VERIFY_COORD(x, y)
@@ -67,6 +67,7 @@
 				T.resources[MATERIAL_GOLD] =     rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
 				T.resources[MATERIAL_SILVER] =   rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
 				T.resources[MATERIAL_URANIUM] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+				T.resources[MATERIAL_RUTILE] = 0
 				T.resources[MATERIAL_DIAMOND] =  0
 				T.resources[MATERIAL_PHORON] =   0
 				T.resources[MATERIAL_OSMIUM] =   0
@@ -77,6 +78,7 @@
 				T.resources[MATERIAL_URANIUM] =  rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources[MATERIAL_PHORON] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources[MATERIAL_OSMIUM] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+				T.resources[MATERIAL_RUTILE] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources[MATERIAL_HYDROGEN] = 0
 				T.resources[MATERIAL_DIAMOND] =  0
 				T.resources[MATERIAL_IRON] =     0
@@ -86,6 +88,7 @@
 				T.resources[MATERIAL_PHORON] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
 				T.resources[MATERIAL_OSMIUM] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
 				T.resources[MATERIAL_HYDROGEN] = rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+				T.resources[MATERIAL_RUTILE] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources[MATERIAL_IRON] =     0
 				T.resources[MATERIAL_GOLD] =     0
 				T.resources[MATERIAL_SILVER] =   0
@@ -97,3 +100,17 @@
 		return "R"
 	else
 		return "D"
+
+/datum/random_map/noise/ore/filthy_rich
+	deep_val = 0.6
+	rare_val = 0.4
+
+/datum/random_map/noise/ore/rich
+	deep_val = 0.7
+	rare_val = 0.5
+	
+/datum/random_map/noise/ore/poor
+	deep_val = 0.8
+	rare_val = 0.7
+	min_rare_ratio = 0.02
+	min_rare_ratio = 0.01

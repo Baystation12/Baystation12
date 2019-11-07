@@ -18,7 +18,7 @@ steps:
   displayName: 'registry login'
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: 'bs12'
+    dockerRegistryEndpoint: 'bs12_2'
     command: login
 
 - task: Docker@1

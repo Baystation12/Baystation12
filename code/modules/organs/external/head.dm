@@ -17,45 +17,23 @@
 
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
+	var/draw_eyes = TRUE
 	var/glowing_eyes = FALSE
 	var/can_intake_reagents = 1
-	var/eye_icon_location = 'icons/mob/human_races/species/default_eyes.dmi'
 	var/has_lips = 1
 	var/forehead_graffiti
 	var/graffiti_style
-	var/tmp/last_cached_eye_colour
-	var/tmp/last_eye_cache_key
-	var/apply_eye_colour = TRUE
-
-/obj/item/organ/external/head/proc/get_eye_cache_key()
-	last_cached_eye_colour = rgb(128,0,0)
-	if(owner)
-		var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
-		if(eyes) last_cached_eye_colour = rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])
-	last_eye_cache_key = "[type]-[eye_icon_location]-[last_cached_eye_colour]"
-	return last_eye_cache_key
 
 /obj/item/organ/external/head/proc/get_eye_overlay()
 	if(glowing_eyes)
-		var/icon/I = get_eyes()
-		if(I)
-			var/cache_key = "[last_eye_cache_key]-glow"
-			if(!human_icon_cache[cache_key])
-				var/image/eye_glow = image(I)
-				eye_glow.layer = EYE_GLOW_LAYER
-				eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-				human_icon_cache[cache_key] = eye_glow
-			return human_icon_cache[cache_key]
+		var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
+		if(eyes)
+			return eyes.get_special_overlay()
 
 /obj/item/organ/external/head/proc/get_eyes()
-	if(eye_icon_location)
-		var/cache_key = get_eye_cache_key()
-		if(!human_icon_cache[cache_key])
-			var/icon/eyes_icon = icon(icon = eye_icon_location, icon_state = "")
-			if(apply_eye_colour)
-				eyes_icon.Blend(last_cached_eye_colour, ICON_ADD)
-			human_icon_cache[cache_key] = eyes_icon
-		return human_icon_cache[cache_key]
+	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
+	if(eyes)
+		return eyes.get_onhead_icon()
 
 /obj/item/organ/external/head/examine(mob/user)
 	. = ..()
@@ -103,7 +81,7 @@
 		var/datum/robolimb/R = all_robolimbs[company]
 		if(R)
 			can_intake_reagents = R.can_eat
-			eye_icon_location = R.has_eyes ? initial(eye_icon_location) : null
+			draw_eyes = R.has_eyes
 	. = ..(company, skip_prosthetics, 1)
 	has_lips = null
 
@@ -122,14 +100,15 @@
 
 	if(owner)
 		// Base eye icon.
-		var/icon/I = get_eyes()
-		if(I)
-			overlays |= I
-			mob_icon.Blend(I, ICON_OVERLAY)
+		if(draw_eyes)
+			var/icon/I = get_eyes()
+			if(I)
+				overlays |= I
+				mob_icon.Blend(I, ICON_OVERLAY)
 
-		// Floating eyes or other effects.
-		var/image/eye_glow = get_eye_overlay()
-		if(eye_glow) overlays |= eye_glow
+			// Floating eyes or other effects.
+			var/image/eye_glow = get_eye_overlay()
+			if(eye_glow) overlays |= eye_glow
 
 		if(owner.lip_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
 			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.lip_style]_s")
@@ -144,11 +123,13 @@
 	var/image/res = image(species.icon_template,"")
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.f_style]
-		if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype(owner) in facial_hair_style.species_allowed))
-			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-			if(facial_hair_style.do_colouration)
-				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
-			res.overlays |= facial_s
+		if(facial_hair_style)
+			if(!facial_hair_style.species_allowed || (species.get_bodytype(owner) in facial_hair_style.species_allowed))
+				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
+					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
+					if(facial_hair_style.do_colouration)
+						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
+					res.overlays |= facial_s
 
 	if(owner.h_style)
 		var/style = owner.h_style
@@ -156,12 +137,14 @@
 		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GLOB.hair_styles_list["Short Hair"]
-		if(hair_style && (species.get_bodytype(owner) in hair_style.species_allowed))
-			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-			if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
-				hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
-			res.overlays |= hair_s
+		if(hair_style)
+			if(!hair_style.species_allowed || (species.get_bodytype(owner) in hair_style.species_allowed))
+				if(!hair_style.subspecies_allowed || (species.name in hair_style.subspecies_allowed))
+					var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
+					if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
+						hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
+					res.overlays |= hair_s
 	return res
 
 /obj/item/organ/external/head/no_eyes
-	eye_icon_location = null
+	draw_eyes = FALSE

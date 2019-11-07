@@ -6,7 +6,7 @@ jdk: openjdk8
 env:
   global:
     BYOND_MAJOR="512"
-    BYOND_MINOR="1463"
+    BYOND_MINOR="1485"
 
 # ALL MAPS MUST BE PRESENT HERE
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
@@ -14,8 +14,6 @@ matrix:
     include:
     - name: "Code"
       env: TEST=CODE
-    - name: "Web"
-      env: TEST=WEB
     - name: "Map - Example"
       env: TEST=MAP MAP_PATH=example
     - name: "Map - Torch"
@@ -27,7 +25,6 @@ matrix:
 
 cache:
   directories:
-    - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
 
 addons:
@@ -38,6 +35,12 @@ addons:
       - libstdc++6:i386
       - python
       - python-pip
+      - uchardet
 
 script:
   - test/run-test.sh
+
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL

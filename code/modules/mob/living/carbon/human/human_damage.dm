@@ -159,13 +159,12 @@
 	if(!need_breathe())
 		return
 	var/heal = amount < 0
-	amount = abs(amount*species.oxy_mod)
 	var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
 	if(breathe_organ)
 		if(heal)
-			breathe_organ.remove_oxygen_deprivation(amount)
+			breathe_organ.remove_oxygen_deprivation(abs(amount))
 		else
-			breathe_organ.add_oxygen_deprivation(amount)
+			breathe_organ.add_oxygen_deprivation(abs(amount*species.oxy_mod))
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/getToxLoss()
@@ -189,8 +188,10 @@
 	var/heal = amount < 0
 	amount = abs(amount)
 
-	if(!heal && (CE_ANTITOX in chem_effects))
-		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
+	if (!heal)
+		amount = amount * species.get_toxins_mod(src)
+		if (CE_ANTITOX in chem_effects)
+			amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 
@@ -261,11 +262,11 @@
 //Heals ONE external organ, organ gets randomly selected from damaged ones.
 //It automatically updates damage overlays if necesary
 //It automatically updates health status
-/mob/living/carbon/human/heal_organ_damage(var/brute, var/burn)
+/mob/living/carbon/human/heal_organ_damage(var/brute, var/burn, var/affect_robo = 0)
 	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
 	if(!parts.len)	return
 	var/obj/item/organ/external/picked = pick(parts)
-	if(picked.heal_damage(brute,burn))
+	if(picked.heal_damage(brute,burn,robo_repair = affect_robo))
 		BITSET(hud_updateflag, HEALTH_HUD)
 	updatehealth()
 
@@ -321,6 +322,11 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/brute_avg = brute / parts.len
 	var/burn_avg = burn / parts.len
 	for(var/obj/item/organ/external/E in parts)
+		if(QDELETED(E))
+			continue
+		if(E.owner != src)
+			continue // The code below may affect the children of an organ.
+
 		if(brute_avg)
 			apply_damage(damage = brute_avg, damagetype = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
 		if(burn_avg)
@@ -349,6 +355,7 @@ This function restores all organs.
 		var/obj/item/organ/external/current_organ = organs_by_name[bodypart]
 		if(istype(current_organ))
 			current_organ.rejuvenate(ignore_prosthetic_prefs)
+	verbs -= /mob/living/carbon/human/proc/undislocate
 
 /mob/living/carbon/human/proc/HealDamage(zone, brute, burn)
 	var/obj/item/organ/external/E = get_organ(zone)
@@ -400,16 +407,14 @@ This function restores all organs.
 	if(!damage)
 		return 0
 
-	if(damage > 15 && prob(damage*4))
+	if(damage > 15 && prob(damage*4) && organ.can_feel_pain())
 		make_reagent(round(damage/10), /datum/reagent/adrenaline)
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
 		if(BRUTE)
-			damage = damage*species.brute_mod
 			created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
 		if(BURN)
-			damage = damage*species.burn_mod
 			created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon)
 		if(PAIN)
 			organ.add_pain(damage)

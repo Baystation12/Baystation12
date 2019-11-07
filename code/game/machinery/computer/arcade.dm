@@ -1,9 +1,10 @@
-/obj/machinery/computer/arcade/
+/obj/machinery/computer/arcade
 	name = "random arcade"
 	desc = "A random arcade machine."
 	icon_state = "arcade"
 	icon_keyboard = null
 	icon_screen = "invaders"
+	var/random = TRUE
 	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops										= 2,
 							/obj/item/toy/blink															= 2,
 							/obj/item/clothing/under/syndicate/tacticool								= 2,
@@ -13,7 +14,7 @@
 							/obj/item/clothing/suit/syndicatefake										= 2,
 							/obj/item/weapon/storage/fancy/crayons										= 2,
 							/obj/item/toy/spinningtoy													= 2,
-							/obj/item/toy/prize/ripley													= 1,
+							/obj/item/toy/prize/powerloader													= 1,
 							/obj/item/toy/prize/fireripley												= 1,
 							/obj/item/toy/prize/deathripley												= 1,
 							/obj/item/toy/prize/gygax													= 1,
@@ -34,11 +35,15 @@
 	. = ..()
 	// If it's a generic arcade machine, pick a random arcade
 	// circuit board for it and make the new machine
-	if(!circuit)
-		var/choice = pick(typesof(/obj/item/weapon/circuitboard/arcade) - /obj/item/weapon/circuitboard/arcade)
-		var/obj/item/weapon/circuitboard/CB = new choice()
-		new CB.build_path(loc, CB)
+	if(random)
+		var/obj/item/weapon/stock_parts/circuitboard/arcade/A = pick(subtypesof(/obj/item/weapon/stock_parts/circuitboard/arcade))
+		var/path = initial(A.build_path)
+		new path(loc)
 		return INITIALIZE_HINT_QDEL
+
+/obj/machinery/computer/arcade/interface_interact(user)
+	interact(user)
+	return TRUE
 
 /obj/machinery/computer/arcade/proc/prizevend()
 	if(!contents.len)
@@ -51,10 +56,6 @@
 	else
 		var/atom/movable/prize = pick(contents)
 		prize.forceMove(src.loc)
-
-/obj/machinery/computer/arcade/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
 
 /obj/machinery/computer/arcade/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN))
@@ -81,7 +82,7 @@
 	name = "arcade machine"
 	desc = "Does not support Pinball."
 	icon_state = "arcade"
-	circuit = /obj/item/weapon/circuitboard/arcade/battle
+	random = FALSE
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners don't use space drugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points
@@ -110,9 +111,7 @@
 	src.SetName((name_action + name_part1 + name_part2))
 
 
-/obj/machinery/computer/arcade/battle/attack_hand(mob/user as mob)
-	if(..())
-		return
+/obj/machinery/computer/arcade/battle/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<a href='byond://?src=\ref[src];close=1'>Close</a>"
 	dat += "<center><h4>[src.enemy_name]</h4></center>"
@@ -135,7 +134,7 @@
 	return
 
 /obj/machinery/computer/arcade/battle/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if((blocked || gameover) && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
+	if((blocked || gameover) && href_list && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
@@ -198,9 +197,6 @@
 			SetupGame()
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
-
 /obj/machinery/computer/arcade/battle/proc/arcade_action(var/user)
 	if ((src.enemy_mp <= 0) || (src.enemy_hp <= 0))
 		if(!gameover)
@@ -227,7 +223,7 @@
 		var/stealamt = rand(2,3)
 		src.temp = "[src.enemy_name] steals [stealamt] of your power!"
 		src.player_mp -= stealamt
-		attack_hand(user)
+		interface_interact(user)
 
 		if (src.player_mp <= 0)
 			src.gameover = 1

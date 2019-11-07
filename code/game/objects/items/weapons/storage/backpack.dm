@@ -67,6 +67,11 @@
 		return 1
 	return ..()
 
+/obj/item/weapon/storage/backpack/holding/duffle
+	name = "dufflebag of holding"
+	icon_state = "holdingduffle"
+	item_state_slots = list(slot_l_hand_str = "duffle", slot_r_hand_str = "duffle")
+
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
@@ -137,7 +142,7 @@
 	icon_state = "viropack"
 
 /obj/item/weapon/storage/backpack/chemistry
-	name = "chemistry backpack"
+	name = "pharmacist's backpack"
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
 
@@ -145,27 +150,27 @@
 	name = "black rucksack"
 	desc = "A sturdy military-grade backpack with low-profile straps. Designed to work well with armor."
 	icon_state = "rucksack"
-	item_state_slots = list(slot_l_hand_str = "rucksack", slot_r_hand_str = "rucksack",)
+	item_state_slots = list(slot_l_hand_str = "rucksack", slot_r_hand_str = "rucksack")
 
 /obj/item/weapon/storage/backpack/rucksack/blue
 	name = "blue rucksack"
 	icon_state = "rucksack_blue"
-	item_state_slots = list(slot_l_hand_str = "rucksack_blue", slot_r_hand_str = "rucksack_blue",)
+	item_state_slots = list(slot_l_hand_str = "rucksack_blue", slot_r_hand_str = "rucksack_blue")
 
 /obj/item/weapon/storage/backpack/rucksack/green
 	name = "green rucksack"
 	icon_state = "rucksack_green"
-	item_state_slots = list(slot_l_hand_str = "rucksack_green", slot_r_hand_str = "rucksack_green",)
+	item_state_slots = list(slot_l_hand_str = "rucksack_green", slot_r_hand_str = "rucksack_green")
 
 /obj/item/weapon/storage/backpack/rucksack/navy
 	name = "navy rucksack"
 	icon_state = "rucksack_navy"
-	item_state_slots = list(slot_l_hand_str = "rucksack_navy", slot_r_hand_str = "rucksack_navy",)
+	item_state_slots = list(slot_l_hand_str = "rucksack_navy", slot_r_hand_str = "rucksack_navy")
 
 /obj/item/weapon/storage/backpack/rucksack/tan
 	name = "tan rucksack"
 	icon_state = "rucksack_tan"
-	item_state_slots = list(slot_l_hand_str = "rucksack_tan", slot_r_hand_str = "rucksack_tan",)
+	item_state_slots = list(slot_l_hand_str = "rucksack_tan", slot_r_hand_str = "rucksack_tan")
 
 /*
  * Duffle Types
@@ -189,6 +194,7 @@
 	name = "black dufflebag"
 	desc = "A large dufflebag for holding extra tactical supplies."
 	icon_state = "duffle_syndie"
+	item_state_slots = list(slot_l_hand_str = "duffle_syndie", slot_r_hand_str = "duffle_syndie")
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/New()
 	..()
@@ -198,32 +204,49 @@
 	name = "medical dufflebag"
 	desc = "A large dufflebag for holding extra tactical medical supplies."
 	icon_state = "duffle_syndiemed"
+	item_state_slots = list(slot_l_hand_str = "duffle_syndiemed", slot_r_hand_str = "duffle_syndiemed")
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/ammo
 	name = "ammunition dufflebag"
 	desc = "A large dufflebag for holding extra weapons ammunition and supplies."
 	icon_state = "duffle_syndieammo"
+	item_state_slots = list(slot_l_hand_str = "duffle_syndieammo", slot_r_hand_str = "duffle_syndieammo")
 
 /obj/item/weapon/storage/backpack/dufflebag/captain
 	name = "captain's dufflebag"
 	desc = "A large dufflebag for holding extra captainly goods."
 	icon_state = "duffle_captain"
+	item_state_slots = list(slot_l_hand_str = "duffle_captain", slot_r_hand_str = "duffle_captain")
 
 /obj/item/weapon/storage/backpack/dufflebag/med
 	name = "medical dufflebag"
 	desc = "A large dufflebag for holding extra medical supplies."
 	icon_state = "duffle_med"
+	item_state_slots = list(slot_l_hand_str = "duffle_med", slot_r_hand_str = "duffle_med")
 
 /obj/item/weapon/storage/backpack/dufflebag/sec
 	name = "security dufflebag"
 	desc = "A large dufflebag for holding extra security supplies and ammunition."
 	icon_state = "duffle_sec"
+	item_state_slots = list(slot_l_hand_str = "duffle_sec", slot_r_hand_str = "duffle_sec")
 
 /obj/item/weapon/storage/backpack/dufflebag/eng
 	name = "industrial dufflebag"
 	desc = "A large dufflebag for holding extra tools and supplies."
 	icon_state = "duffle_eng"
+	item_state_slots = list(slot_l_hand_str = "duffle_eng", slot_r_hand_str = "duffle_eng")
 
+/obj/item/weapon/storage/backpack/dufflebag/firefighter
+	startswith = list(
+		/obj/item/weapon/storage/belt/fire_belt/full,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/extinguisher,
+		/obj/item/clothing/gloves/fire,
+		/obj/item/clothing/accessory/fire_overpants,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/clothing/head/hardhat/firefighter,
+		/obj/item/weapon/extinguisher
+	)
 /*
  * Satchel Types
  */
@@ -307,8 +330,8 @@
 	icon_state = "satchel-vir"
 
 /obj/item/weapon/storage/backpack/satchel/chem
-	name = "chemist satchel"
-	desc = "A sterile satchel with chemist colours."
+	name = "pharmacist satchel"
+	desc = "A sterile satchel with pharmacist colours."
 	icon_state = "satchel-chem"
 
 /obj/item/weapon/storage/backpack/satchel/gen
@@ -426,7 +449,7 @@
 	icon_state = "courierbag"
 
 /obj/item/weapon/storage/backpack/messenger/chem
-	name = "chemistry messenger bag"
+	name = "pharmacy messenger bag"
 	desc = "A serile backpack worn over one shoulder.  This one is in Chemsitry colors."
 	icon_state = "courierbagchem"
 

@@ -81,9 +81,6 @@
 /area/map_template/colony/tcomms)
 "an" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/organ/internal/stack,
-/obj/item/organ/internal/stack,
-/obj/item/organ/internal/stack,
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
@@ -119,12 +116,12 @@
 /area/map_template/colony/medbay)
 "av" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "colsecarm";
+/obj/machinery/button/blast_door{
+	id_tag = "colsecarm";
 	name = "Armory Secure Access"
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "colarm";
+/obj/machinery/button/blast_door{
+	id_tag = "colarm";
 	name = "Armory Blast Door Control";
 	pixel_y = 8
 	},
@@ -142,7 +139,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "ay" = (
-/obj/item/modular_computer/console/preset/merchant,
+/obj/machinery/computer/modular/preset/merchant,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "az" = (
@@ -210,17 +207,17 @@
 /area/map_template/colony/surgery)
 "aH" = (
 /obj/structure/closet/crate,
-/obj/item/weapon/circuitboard/fusion/core_control,
-/obj/item/weapon/circuitboard/fusion_core,
-/obj/item/weapon/circuitboard/fusion_fuel_compressor,
-/obj/item/weapon/circuitboard/fusion_fuel_control,
-/obj/item/weapon/circuitboard/fusion_injector,
-/obj/item/weapon/circuitboard/fusion_injector,
-/obj/item/weapon/circuitboard/fusion_injector,
-/obj/item/weapon/circuitboard/fusion_injector,
-/obj/item/weapon/circuitboard/fusion_injector,
-/obj/item/weapon/circuitboard/fusion_injector,
-/obj/item/weapon/circuitboard/gyrotron_control,
+/obj/item/weapon/stock_parts/circuitboard/fusion/core_control,
+/obj/item/weapon/stock_parts/circuitboard/fusion_core,
+/obj/item/weapon/stock_parts/circuitboard/fusion_fuel_compressor,
+/obj/item/weapon/stock_parts/circuitboard/fusion_fuel_control,
+/obj/item/weapon/stock_parts/circuitboard/fusion_injector,
+/obj/item/weapon/stock_parts/circuitboard/fusion_injector,
+/obj/item/weapon/stock_parts/circuitboard/fusion_injector,
+/obj/item/weapon/stock_parts/circuitboard/fusion_injector,
+/obj/item/weapon/stock_parts/circuitboard/fusion_injector,
+/obj/item/weapon/stock_parts/circuitboard/fusion_injector,
+/obj/item/weapon/stock_parts/circuitboard/gyrotron_control,
 /obj/item/weapon/stock_parts/manipulator/pico,
 /obj/item/weapon/stock_parts/manipulator/pico,
 /obj/item/weapon/stock_parts/manipulator/pico,
@@ -1900,12 +1897,13 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 7664;
 	input_tag = "cn2n";
 	name = "Nitrogen Supply Control";
 	output_tag = "cn2o";
-	sensors = list("c1" = "Tank")
+	sensor_name = "Nitrogen Tank";
+	sensor_tag = "c1"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
@@ -1965,7 +1963,6 @@
 /obj/item/weapon/storage/box/autoinjectors,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -2168,7 +2165,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/light/small{
@@ -2355,7 +2351,7 @@
 /area/map_template/colony/surgery)
 "eG" = (
 /obj/machinery/door/blast/shutters{
-	id = "colsen";
+	id_tag = "colsen";
 	name = "Hard Storage Shutter";
 	tag = ""
 	},
@@ -2380,13 +2376,13 @@
 /obj/item/weapon/stock_parts/scanning_module,
 /obj/item/weapon/stock_parts/scanning_module,
 /obj/item/weapon/stock_parts/scanning_module/adv,
-/obj/item/weapon/smes_coil/weak,
-/obj/item/weapon/smes_coil/super_capacity,
-/obj/item/weapon/smes_coil/super_capacity,
-/obj/item/weapon/smes_coil/super_io,
-/obj/item/weapon/smes_coil/super_io,
-/obj/item/weapon/smes_coil/weak,
-/obj/item/weapon/smes_coil/weak,
+/obj/item/weapon/stock_parts/smes_coil/weak,
+/obj/item/weapon/stock_parts/smes_coil/super_capacity,
+/obj/item/weapon/stock_parts/smes_coil/super_capacity,
+/obj/item/weapon/stock_parts/smes_coil/super_io,
+/obj/item/weapon/stock_parts/smes_coil/super_io,
+/obj/item/weapon/stock_parts/smes_coil/weak,
+/obj/item/weapon/stock_parts/smes_coil/weak,
 /obj/item/stack/material/tritium/fifty,
 /obj/item/stack/material/tritium/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2451,7 +2447,7 @@
 	dir = 5
 	},
 /obj/item/weapon/storage/belt/medical,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /obj/item/weapon/storage/pill_bottle/tramadol,
 /obj/item/weapon/storage/pill_bottle/tramadol,
 /obj/item/weapon/storage/pill_bottle/spaceacillin,
@@ -2499,7 +2495,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/engineering)
 "eS" = (
-/obj/structure/table/steel_reinforced,
 /obj/machinery/reagentgrinder,
 /obj/item/stack/material/phoron/ten,
 /obj/effect/floor_decal/corner/paleblue{
@@ -2726,12 +2721,13 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 7663;
 	input_tag = "co2n";
 	name = "Oxygen Supply Control";
 	output_tag = "co2o";
-	sensors = list("c2" = "Tank")
+	sensor_name = "Oxygen Tank";
+	sensor_tag = "c2"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
@@ -2819,12 +2815,13 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	frequency = 7662;
 	input_tag = "cco2n";
 	name = "Carbon Dioxide Tank Control";
 	output_tag = "cco2o";
-	sensors = list("c3" = "Tank")
+	sensor_name = "Carbon Dioxide Tank";
+	sensor_tag = "c3"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
@@ -3365,6 +3362,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/pitcher,
 /obj/item/weapon/reagent_containers/glass/beaker/bowl,
 /obj/item/weapon/reagent_containers/food/condiment/salt,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gf" = (
@@ -3556,7 +3554,6 @@
 "gr" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/closet/secure_closet/freezer/fridge,
@@ -3662,7 +3659,6 @@
 "gC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/table/marble,
@@ -3676,7 +3672,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/drain,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "gE" = (
@@ -3703,7 +3699,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
 "gG" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
@@ -3733,7 +3729,6 @@
 "gJ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/techfloor{
@@ -3951,7 +3946,6 @@
 /obj/machinery/pipedispenser,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4426,7 +4420,7 @@
 	},
 /obj/machinery/door/airlock/highsecurity,
 /obj/machinery/door/blast/regular{
-	id = "colarm"
+	id_tag = "colarm"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/map_template/colony/armory)
@@ -4435,7 +4429,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/structure/drain,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "hX" = (
@@ -4704,7 +4698,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/highsecurity,
 /obj/machinery/door/blast/regular{
-	id = "colsecarm"
+	id_tag = "colsecarm"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/map_template/colony/armory)
@@ -5107,7 +5101,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/drain,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "iY" = (
@@ -5116,9 +5110,9 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/obj/item/device/analyzer,
-/obj/item/device/analyzer,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
 /obj/item/clamp,
 /obj/item/clamp,
 /obj/item/clamp,
@@ -5248,7 +5242,6 @@
 "jj" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
-	layer = 2.4;
 	level = 2
 	},
 /obj/item/weapon/stool/bar/padded,
@@ -5657,7 +5650,6 @@
 "jQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/vending/lavatory{
@@ -5807,7 +5799,6 @@
 "ka" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/flora/pottedplant/orientaltree,
@@ -5855,7 +5846,7 @@
 	dir = 8
 	},
 /obj/structure/table/steel_reinforced,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/hydroponics)
@@ -5938,13 +5929,6 @@
 	tag_west = 2
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8;
-	frequency = 2222;
-	id_tag = "playablecolonymain_pump_out_internal";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "ko" = (
@@ -6169,11 +6153,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "colj";
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "colj";
 	name = "Jail Bolt Control";
-	pixel_x = 28;
-	specialfunctions = 4
+	pixel_x = 28
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
@@ -6248,7 +6231,7 @@
 /area/map_template/colony/mineralprocessing)
 "kN" = (
 /obj/machinery/button/crematorium{
-	id = 8;
+	id_tag = 8;
 	pixel_y = 25;
 	req_access = list()
 	},
@@ -6384,13 +6367,13 @@
 "lb" = (
 /obj/machinery/door/window/eastright,
 /obj/structure/table/steel_reinforced,
-/obj/machinery/button/remote/blast_door{
-	id = "colmainexit";
+/obj/machinery/button/blast_door{
+	id_tag = "colmainexit";
 	name = "Exit Blast Doors";
 	pixel_y = 0
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "colmainblast";
+/obj/machinery/button/blast_door{
+	id_tag = "colmainblast";
 	name = "Entry Blast Doors";
 	pixel_y = 8
 	},
@@ -6479,7 +6462,6 @@
 "lk" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6523,7 +6505,7 @@
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "lp" = (
-/obj/structure/drain,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "lq" = (
@@ -6704,7 +6686,6 @@
 "lI" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/borderfloorwhite,
@@ -7013,11 +6994,7 @@
 /turf/simulated/floor/exoplanet/concrete,
 /area/template_noop)
 "me" = (
-/obj/machinery/autolathe{
-	desc = "Your typical Autolathe. It appears to have much more options than your regular one, however...";
-	hacked = 1;
-	name = "Unlocked Autolathe"
-	},
+/obj/machinery/fabricator/hacked,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "mf" = (
@@ -7074,7 +7051,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainblast";
+	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7145,7 +7122,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainexit"
+	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -7267,15 +7244,15 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainblast";
+	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "mC" = (
 /obj/structure/catwalk,
-/obj/machinery/button/remote/blast_door{
-	id = "colsen";
+/obj/machinery/button/blast_door{
+	id_tag = "colsen";
 	name = "Hard Equipment Storage";
 	pixel_y = 28;
 	tag = ""
@@ -7324,7 +7301,6 @@
 "mF" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/cable{
@@ -8008,7 +7984,6 @@
 "nL" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -8088,7 +8063,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id = "colmainexit"
+	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -8194,7 +8169,7 @@
 	dir = 10
 	},
 /obj/structure/sign/warning/nosmoking_burned{
-	dir = 3;
+	dir = 1;
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -8322,7 +8297,7 @@
 /obj/item/weapon/cell/super,
 /obj/item/weapon/cell/super,
 /obj/item/weapon/cell/super,
-/obj/item/weapon/mining_scanner,
+/obj/item/device/scanner/mining,
 /obj/item/weapon/storage/box/greenglowsticks,
 /obj/item/weapon/storage/box/greenglowsticks,
 /obj/item/weapon/storage/box/greenglowsticks,
@@ -8544,9 +8519,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
 "ox" = (
@@ -8688,7 +8660,6 @@
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,

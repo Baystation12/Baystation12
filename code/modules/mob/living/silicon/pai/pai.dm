@@ -10,6 +10,7 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
+	holder_type = /obj/item/weapon/holder
 	idcard = /obj/item/weapon/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
@@ -81,7 +82,7 @@
 	card = paicard
 
 	//As a human made device, we'll understand sol common without the need of the translator
-	add_language(LANGUAGE_SOL_COMMON, 1)
+	add_language(LANGUAGE_HUMAN_EURO, 1)
 
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
@@ -118,12 +119,7 @@
 	return 0
 
 /mob/living/silicon/pai/restrained()
-	if(istype(src.loc,/obj/item/device/paicard))
-		return 0
-	..()
-
-/mob/living/silicon/pai/MouseDrop(atom/over_object)
-	return
+	return !istype(loc, /obj/item/device/paicard) && ..()
 
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
@@ -179,7 +175,7 @@
 
 // Procs/code after this point is used to convert the stationary pai item into a
 // mobile pai mob. This also includes handling some of the general shit that can occur
-// to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
+// to it. Really this deserves its own file.
 
 /mob/living/silicon/pai/verb/fold_out()
 	set category = "pAI Commands"
@@ -212,8 +208,9 @@
 					break
 		holder.drop_from_inventory(card)
 
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = src
+	if(client)
+		client.perspective = EYE_PERSPECTIVE
+		client.eye = src
 	dropInto(card.loc)
 
 	card.forceMove(src)
@@ -285,19 +282,26 @@
 		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 //Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/mob/living/silicon/pai/attackby(obj/item/weapon/W, mob/user)
+	var/obj/item/weapon/card/id/card = W.GetIdCard()
+	if(card && user.a_intent == I_HELP)
+		var/list/new_access = card.GetAccess()
+		src.idcard.access = new_access
+		visible_message("<span class='notice'>[user] slides [W] across [src].</span>")
+		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
+		return FALSE // don't continue processing click callstack.
 	if(W.force)
-		visible_message("<span class='danger'>[user.name] attacks [src] with [W]!</span>")
+		visible_message("<span class='danger'>[user] attacks [src] with [W]!</span>")
 		src.adjustBruteLoss(W.force)
 		src.updatehealth()
 	else
-		visible_message("<span class='warning'>[user.name] bonks [src] harmlessly with [W].</span>")
+		visible_message("<span class='warning'>[user] bonks [src] harmlessly with [W].</span>")
 	spawn(1)
 		if(stat != 2) close_up()
 	return
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
-	visible_message("<span class='danger'>[user.name] boops [src] on the head.</span>")
+	visible_message("<span class='danger'>[user] boops [src] on the head.</span>")
 	close_up()
 
 //I'm not sure how much of this is necessary, but I would rather avoid issues.
@@ -305,15 +309,16 @@
 
 	last_special = world.time + 100
 
-	if(src.loc == card)
+	if(loc == card)
 		return
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
-	src.stop_pulling()
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = card
+	stop_pulling()
+	if(client)
+		client.perspective = EYE_PERSPECTIVE
+		client.eye = card
 
 	//stop resting
 	resting = 0
@@ -324,13 +329,13 @@
 		var/mob/living/M = H.loc
 		if(istype(M))
 			M.drop_from_inventory(H, get_turf(src))
-		dropInto(loc)
+		H.dropInto(get_turf(M))
 
 	// Move us into the card and move the card to the ground.
-	forceMove(card)
-	card.dropInto(card.loc)
+	card.dropInto(get_turf(card))
 	resting = 0
 	icon_state = "[chassis]"
+	forceMove(card)
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
@@ -338,13 +343,13 @@
 
 // Handle being picked up.
 /mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
-	var/obj/item/weapon/holder/H = ..(grabber, self_drop)
-	if(!istype(H))
-		return
-	H.icon_state = "pai-[icon_state]"
-	grabber.update_inv_l_hand()
-	grabber.update_inv_r_hand()
-	return H
+	. = ..()
+	if(.)
+		var/obj/item/weapon/holder/H = .
+		if(istype(H))
+			H.icon_state = "pai-[icon_state]"
+			grabber.update_inv_l_hand()
+			grabber.update_inv_r_hand()
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"

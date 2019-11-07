@@ -1,6 +1,7 @@
 /datum/event/meteor_wave
 	startWhen		= 30	// About one minute early warning
 	endWhen 		= 60	// Adjusted automatically in tick()
+	has_skybox_image = TRUE
 	var/alarmWhen   = 30
 	var/next_meteor = 40
 	var/waves = 1
@@ -8,6 +9,8 @@
 	var/next_meteor_lower = 10
 	var/next_meteor_upper = 20
 
+/datum/event/meteor_wave/get_skybox_image()
+	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 
 /datum/event/meteor_wave/setup()
 	waves = 0
@@ -117,11 +120,23 @@
 	. = ..()
 	if(!victim)
 		return
-	if(victim.get_helm_skill() == SKILL_PROF)
+	var/skill = victim.get_helm_skill()
+	var/speed = victim.get_speed()
+	if(skill >= SKILL_PROF)
 		. = round(. * 0.5)
 	if(victim.is_still()) //Standing still means less shit flies your way
-		. = round(. * 0.25)
-	if(victim.get_speed() < victim.min_speed * 5) //Slow and steady
-		. = round(. * 0.6)
-	if(victim.get_speed() > victim.max_speed * 0.75) //Sanic stahp
+		. = round(. * 0.1)
+	if(speed < SHIP_SPEED_SLOW) //Slow and steady
+		. = round(. * 0.5)
+	if(speed > SHIP_SPEED_FAST) //Sanic stahp
 		. *= 2
+	
+	//Smol ship evasion
+	if(victim.vessel_size < SHIP_SIZE_LARGE && speed < SHIP_SPEED_FAST)
+		var/skill_needed = SKILL_PROF
+		if(speed < SHIP_SPEED_SLOW)
+			skill_needed = SKILL_ADEPT
+		if(victim.vessel_size < SHIP_SIZE_SMALL)
+			skill_needed = skill_needed - 1
+		if(skill >= max(skill_needed, victim.skill_needed))
+			return 0

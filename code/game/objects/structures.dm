@@ -11,6 +11,7 @@
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
 	var/material/material = null
 	var/footstep_type
+	var/mob_offset = 0 //used for on_structure_offset mob animation
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(wallbreaker && damage && breakable)
@@ -23,16 +24,30 @@
 	take_damage(damage)
 	return 1
 
+/obj/structure/proc/mob_breakout(var/mob/living/escapee)
+	set waitfor = FALSE
+	return FALSE
+
 /obj/structure/proc/take_damage(var/damage)
 	return
 
 /obj/structure/Destroy()
+	reset_mobs_offset()
 	var/turf/T = get_turf(src)
 	if(T && parts)
 		new parts(T)
 	. = ..()
 	if(istype(T))
 		T.fluid_update()
+
+/obj/structure/Crossed(mob/living/M)
+	if(istype(M))
+		M.on_structure_offset(mob_offset)
+	..()
+
+/obj/structure/proc/reset_mobs_offset()
+	for(var/mob/living/M in loc)
+		M.on_structure_offset(0)
 
 /obj/structure/Initialize()
 	. = ..()
@@ -57,16 +72,13 @@
 				attack_generic(user,1,"slices")
 	return ..()
 
-/obj/structure/attack_tk()
-	return
-
 /obj/structure/grab_attack(var/obj/item/grab/G)
 	if (!G.force_danger())
 		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
 		return TRUE
 	if (G.assailant.a_intent == I_HURT)
 		// Slam their face against the table.
-		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE)
+		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 		if (prob(30 * (1 - blocked)))
 			G.affecting.Weaken(5)
 		G.affecting.apply_damage(8, BRUTE, BP_HEAD)
@@ -110,12 +122,14 @@
 /obj/structure/proc/can_visually_connect_to(var/obj/structure/S)
 	return istype(S, src)
 
+/obj/structure/proc/refresh_neighbors()
+	for(var/thing in RANGE_TURFS(src, 1))
+		var/turf/T = thing
+		T.update_icon()
+
 /obj/structure/proc/update_connections(propagate = 0)
 	var/list/dirs = list()
 	var/list/other_dirs = list()
-
-	if(!anchored)
-		return
 
 	for(var/obj/structure/S in orange(src, 1))
 		if(can_visually_connect_to(S))
@@ -124,6 +138,11 @@
 					S.update_connections()
 					S.update_icon()
 				dirs += get_dir(src, S)
+
+	if(!can_visually_connect())
+		connections = list("0", "0", "0", "0")
+		other_connections = list("0", "0", "0", "0")
+		return FALSE
 
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
@@ -135,7 +154,6 @@
 					var/turf/simulated/wall/W = T
 					if(istype(W))
 						W.update_connections(1)
-						W.update_icon()
 				if(success)
 					break
 			if(success)
@@ -161,5 +179,8 @@
 			dirs += get_dir(src, T)
 			other_dirs += get_dir(src, T)
 
+	refresh_neighbors()
+
 	connections = dirs_to_corner_states(dirs)
 	other_connections = dirs_to_corner_states(other_dirs)
+	return TRUE

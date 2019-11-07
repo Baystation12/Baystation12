@@ -11,6 +11,7 @@
 	requires_ntnet = 1
 	network_destination = "supermatter monitoring system"
 	size = 5
+	category = PROG_ENG
 	var/last_status = 0
 
 /datum/computer_file/program/supermatter_monitor/process_tick()
@@ -21,8 +22,7 @@
 		last_status = new_status
 		ui_header = "smmon_[last_status].gif"
 		program_icon_state = "smmon_[last_status]"
-		if(istype(computer))
-			computer.update_icon()
+		update_computer_icon()
 
 /datum/nano_module/supermatter_monitor
 	name = "Supermatter monitor"
@@ -41,10 +41,7 @@
 // Refreshes list of active supermatter crystals
 /datum/nano_module/supermatter_monitor/proc/refresh()
 	supermatters = list()
-	var/turf/T = get_turf(nano_host())
-	if(!T)
-		return
-	var/valid_z_levels = (GetConnectedZlevels(T.z) & GLOB.using_map.station_levels)
+	var/valid_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
 		// Delaminating, not within coverage, not on a tile.
 		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !istype(S.loc, /turf/))
@@ -91,12 +88,12 @@
 		data["SM_ambientpressure"] = process_data_output(engine_skill, air.return_pressure())
 		data["SM_EPR"] = process_data_output(engine_skill, active.get_epr())
 		if(air.total_moles)
-			data["SM_gas_O2"] = round(100*air.gas["oxygen"]/air.total_moles,0.01)
-			data["SM_gas_CO2"] = round(100*air.gas["carbon_dioxide"]/air.total_moles,0.01)
-			data["SM_gas_N2"] = round(100*air.gas["nitrogen"]/air.total_moles,0.01)
-			data["SM_gas_PH"] = round(100*air.gas["phoron"]/air.total_moles,0.01)
-			data["SM_gas_N2O"] = round(100*air.gas["sleeping_agent"]/air.total_moles,0.01)
-			data["SM_gas_H2"] = round(100*air.gas["hydrogen"]/air.total_moles,0.01)
+			data["SM_gas_O2"] = round(100*air.gas[GAS_OXYGEN]/air.total_moles,0.01)
+			data["SM_gas_CO2"] = round(100*air.gas[GAS_CO2]/air.total_moles,0.01)
+			data["SM_gas_N2"] = round(100*air.gas[GAS_NITROGEN]/air.total_moles,0.01)
+			data["SM_gas_PH"] = round(100*air.gas[GAS_PHORON]/air.total_moles,0.01)
+			data["SM_gas_N2O"] = round(100*air.gas[GAS_N2O]/air.total_moles,0.01)
+			data["SM_gas_H2"] = round(100*air.gas[GAS_HYDROGEN]/air.total_moles,0.01)
 		else
 			data["SM_gas_O2"] = 0
 			data["SM_gas_CO2"] = 0

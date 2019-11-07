@@ -18,8 +18,7 @@
 		"Basic" = "Engineering",
 		"Antique" = "engineerrobot",
 		"Landmate" = "landmate",
-		"Landmate - Treaded" = "engiborg+tread",
-		"Doot" = "eyebot-engineering"
+		"Landmate - Treaded" = "engiborg+tread"
 	)
 	no_slip = 1
 	equipment = list(
@@ -33,7 +32,7 @@
 		/obj/item/weapon/wirecutters,
 		/obj/item/device/multitool,
 		/obj/item/device/t_scanner,
-		/obj/item/device/analyzer,
+		/obj/item/device/scanner/gas,
 		/obj/item/device/geiger,
 		/obj/item/taperoll/engineering,
 		/obj/item/taperoll/atmos,
@@ -50,8 +49,8 @@
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
-		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/material/cyborg/glass,
+		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel
 	)
@@ -62,6 +61,13 @@
 		/datum/matter_synth/wire
 	)
 	emag = /obj/item/weapon/melee/baton/robot/electrified_arm
+	skills = list(
+		SKILL_ATMOS        = SKILL_PROF,
+		SKILL_ENGINES      = SKILL_PROF,
+		SKILL_CONSTRUCTION = SKILL_PROF,
+		SKILL_ELECTRICAL   = SKILL_PROF,
+		SKILL_COMPUTER     = SKILL_EXPERT
+	)
 
 /obj/item/weapon/robot_module/engineering/finalize_synths()
 

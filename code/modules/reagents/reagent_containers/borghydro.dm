@@ -107,12 +107,12 @@
 			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[initial(R.name)]'.</span>")
 		return TOPIC_REFRESH
 
-/obj/item/weapon/reagent_containers/borghypo/examine(mob/user)
-	if(!..(user, 2))
+/obj/item/weapon/reagent_containers/borghypo/examine(mob/user, distance)
+	. = ..()
+	if(distance > 2)
 		return
 
 	var/datum/reagent/R = reagent_ids[mode]
-
 	to_chat(user, "<span class='notice'>It is currently producing [initial(R.name)] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>")
 
 /obj/item/weapon/reagent_containers/borghypo/service
@@ -120,11 +120,45 @@
 	desc = "A portable drink dispencer."
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "shaker"
-	charge_cost = 20
+	charge_cost = 5
 	recharge_time = 3
 	volume = 60
 	possible_transfer_amounts = "5;10;20;30"
-	reagent_ids = list(/datum/reagent/ethanol/beer, /datum/reagent/ethanol/coffee/kahlua, /datum/reagent/ethanol/whiskey, /datum/reagent/ethanol/wine, /datum/reagent/ethanol/vodka, /datum/reagent/ethanol/gin, /datum/reagent/ethanol/rum, /datum/reagent/ethanol/tequilla, /datum/reagent/ethanol/vermouth, /datum/reagent/ethanol/cognac, /datum/reagent/ethanol/ale, /datum/reagent/ethanol/mead, /datum/reagent/water, /datum/reagent/sugar, /datum/reagent/drink/ice, /datum/reagent/drink/tea, /datum/reagent/drink/tea/icetea, /datum/reagent/drink/space_cola, /datum/reagent/drink/spacemountainwind, /datum/reagent/drink/dr_gibb, /datum/reagent/drink/space_up, /datum/reagent/drink/tonic, /datum/reagent/drink/sodawater, /datum/reagent/drink/lemon_lime, /datum/reagent/drink/juice/orange, /datum/reagent/drink/juice/lime, /datum/reagent/drink/juice/watermelon)
+	reagent_ids = list(
+		/datum/reagent/ethanol/beer,
+		/datum/reagent/ethanol/coffee/kahlua,
+		/datum/reagent/ethanol/whiskey,
+		/datum/reagent/ethanol/wine,
+		/datum/reagent/ethanol/vodka,
+		/datum/reagent/ethanol/gin,
+		/datum/reagent/ethanol/rum,
+		/datum/reagent/ethanol/tequilla,
+		/datum/reagent/ethanol/vermouth,
+		/datum/reagent/ethanol/cognac,
+		/datum/reagent/ethanol/ale,
+		/datum/reagent/ethanol/mead,
+		/datum/reagent/water,
+		/datum/reagent/sugar,
+		/datum/reagent/drink/ice,
+		/datum/reagent/drink/tea,
+		/datum/reagent/drink/tea/icetea,
+		/datum/reagent/drink/space_cola,
+		/datum/reagent/drink/spacemountainwind,
+		/datum/reagent/drink/dr_gibb,
+		/datum/reagent/drink/space_up,
+		/datum/reagent/drink/tonic,
+		/datum/reagent/drink/sodawater,
+		/datum/reagent/drink/lemon_lime,
+		/datum/reagent/drink/juice/orange,
+		/datum/reagent/drink/juice/lime,
+		/datum/reagent/drink/juice/watermelon,
+		/datum/reagent/drink/coffee,
+		/datum/reagent/drink/hot_coco,
+		/datum/reagent/drink/tea/green,
+		/datum/reagent/drink/spacemountainwind,
+		/datum/reagent/ethanol/beer,
+		/datum/reagent/ethanol/coffee/kahlua
+		)
 
 /obj/item/weapon/reagent_containers/borghypo/service/attack(var/mob/M, var/mob/user)
 	return

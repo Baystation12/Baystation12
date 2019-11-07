@@ -7,21 +7,26 @@
 	sprites = list(
 		"Basic" = "JanBot2",
 		"Mopbot"  = "janitorrobot",
-		"Mop Gear Rex" = "mopgearrex",
-		"Doot" = "eyebot-janitor"
+		"Mop Gear Rex" = "mopgearrex"
 	)
 	equipment = list(
 		/obj/item/device/flash,
-		/obj/item/weapon/soap/nanotrasen,
+		/obj/item/weapon/soap,
 		/obj/item/weapon/storage/bag/trash,
 		/obj/item/weapon/mop/advanced,
 		/obj/item/holosign_creator,
 		/obj/item/device/lightreplacer,
 		/obj/item/borg/sight/hud/jani,
 		/obj/item/device/plunger/robot,
-		/obj/item/weapon/crowbar
+		/obj/item/weapon/crowbar,
+		/obj/item/weapon/weldingtool
 	)
 	emag = /obj/item/weapon/reagent_containers/spray
+	skills = list(
+		SKILL_EVA    = SKILL_MAX,
+		SKILL_MECH   = HAS_PERK,
+		SKILL_BOTANY = SKILL_MAX
+	) // lol, idk
 
 /obj/item/weapon/robot_module/janitor/finalize_emag()
 	. = ..()

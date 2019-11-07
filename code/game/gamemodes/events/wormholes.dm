@@ -1,23 +1,20 @@
-/proc/wormhole_event()
+/proc/wormhole_event(var/list/zlevels = GLOB.using_map.station_levels)
 	spawn()
 		var/list/pick_turfs = list()
-		for(var/turf/simulated/floor/T in world)
-			if(T.z in GLOB.using_map.station_levels)
+		for(var/z in zlevels)
+			var/list/turfs = block(locate(1, 1, z), locate(world.maxx, world.maxy, z))
+			for(var/turf/simulated/floor/T in turfs)
 				pick_turfs += T
 
 		if(pick_turfs.len)
 			//All ready. Announce that bad juju is afoot.
 			GLOB.using_map.space_time_anomaly_detected_annoncement()
-
-			//prob(20) can be approximated to 1 wormhole every 5 turfs!
-			//admittedly less random but totally worth it >_<
 			var/event_duration = 3000	//~5 minutes in ticks
 			var/number_of_selections = (pick_turfs.len/5)+1	//+1 to avoid division by zero!
 			var/sleep_duration = round( event_duration / number_of_selections )
 			var/end_time = world.time + event_duration	//the time by which the event should have ended
 
 			var/increment =	max(1,round(number_of_selections/50))
-//			log_debug("number_of_selections: [number_of_selections] | sleep_duration: [sleep_duration]")
 
 
 			var/i = 1
@@ -25,11 +22,9 @@
 
 				//we've run into overtime. End the event
 				if( end_time < world.time )
-//					log_debug("we've run into overtime. End the event")
 
 					return
 				if( !pick_turfs.len )
-//					log_debug("we've run out of turfs to pick. End the event")
 
 					return
 

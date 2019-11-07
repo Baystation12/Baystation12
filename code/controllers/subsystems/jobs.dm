@@ -177,7 +177,7 @@ SUBSYSTEM_DEF(jobs)
 	if(airstatus || radlevel > 0)
 		var/reply = alert(spawner, "Warning. Your selected spawn location seems to have unfavorable conditions. \
 		You may die shortly after spawning. \
-		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Bq", "Atmosphere warning", "Abort", "Spawn anyway")
+		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Roentgen", "Atmosphere warning", "Abort", "Spawn anyway")
 		if(reply == "Abort")
 			return FALSE
 		else
@@ -190,8 +190,6 @@ SUBSYSTEM_DEF(jobs)
 	if(player && player.mind && rank)
 		var/datum/job/job = get_by_title(rank)
 		if(!job)
-			return 0
-		if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 			return 0
 		if(jobban_isbanned(player, rank))
 			return 0
@@ -409,11 +407,16 @@ SUBSYSTEM_DEF(jobs)
 					else
 						permitted = 1
 
+				if(permitted && G.allowed_skills)
+					for(var/required in G.allowed_skills)
+						if(!H.skill_check(required,G.allowed_skills[required]))
+							permitted = 0
+
 				if(G.whitelisted && (!(H.species.name in G.whitelisted)))
 					permitted = 0
 
 				if(!permitted)
-					to_chat(H, "<span class='warning'>Your current species, job, branch or whitelist status does not permit you to spawn with [thing]!</span>")
+					to_chat(H, "<span class='warning'>Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!</span>")
 					continue
 
 				if(!G.slot || G.slot == slot_tie || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
@@ -466,7 +469,7 @@ SUBSYSTEM_DEF(jobs)
 			else
 				domain = "freemail.net"
 			if(domain)
-				ntnet_global.create_email(H, H.real_name, domain)
+				ntnet_global.create_email(H, H.real_name, domain, rank)
 		// END EMAIL GENERATION
 
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
@@ -502,7 +505,7 @@ SUBSYSTEM_DEF(jobs)
 			remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
 			remembered_info += "<b>Your department's account funds are:</b> T[department_account.money]<br>"
 
-		H.mind.store_memory(remembered_info)
+		H.StoreMemory(remembered_info, /decl/memory_options/system)
 
 	var/alt_title = null
 	if(H.mind)
@@ -510,14 +513,10 @@ SUBSYSTEM_DEF(jobs)
 		H.mind.assigned_role = rank
 		alt_title = H.mind.role_alt_title
 
-		switch(rank)
-			if("Robot")
-				return H.Robotize(SSrobots.get_mob_type_by_title(alt_title ? alt_title : job.title))
-			if("AI")
-				return H
-			if("Captain")
-				var/sound/announce_sound = (GAME_STATE <= RUNLEVEL_SETUP)? null : sound('sound/misc/boatswain.ogg', volume=20)
-				captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
+	var/mob/other_mob = job.handle_variant_join(H, alt_title)
+	if(other_mob)
+		job.post_equip_rank(other_mob, alt_title || rank)
+		return other_mob
 
 	if(spawn_in_storage)
 		for(var/datum/gear/G in spawn_in_storage)
@@ -534,7 +533,7 @@ SUBSYSTEM_DEF(jobs)
 			W.buckled_mob = H
 			W.add_fingerprint(H)
 
-	to_chat(H, "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>")
+	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
 
 	if(job.supervisors)
 		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
@@ -546,7 +545,7 @@ SUBSYSTEM_DEF(jobs)
 
 	//Gives glasses to the vision impaired
 	if(H.disabilities & NEARSIGHTED)
-		var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(H), slot_glasses)
+		var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)
 		if(equipped)
 			var/obj/item/clothing/glasses/G = H.glasses
 			G.prescription = 7
@@ -554,8 +553,8 @@ SUBSYSTEM_DEF(jobs)
 	BITSET(H.hud_updateflag, ID_HUD)
 	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
-	
-	job.post_equip_rank(H)
+
+	job.post_equip_rank(H, alt_title || rank)
 
 	return H
 

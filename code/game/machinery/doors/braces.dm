@@ -25,7 +25,7 @@
 	var/obj/item/weapon/airlock_electronics/brace/electronics
 
 
-/obj/item/weapon/airlock_brace/examine(var/mob/user)
+/obj/item/weapon/airlock_brace/examine(mob/user)
 	. = ..()
 	to_chat(user, examine_health())
 

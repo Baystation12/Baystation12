@@ -19,7 +19,7 @@
 	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		GLOB._preloader.load(src)
 
-	var/do_initialize = SSatoms.init_state
+	var/do_initialize = SSatoms.atom_init_stage
 	var/list/created = SSatoms.created_atoms
 	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
 		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
@@ -88,6 +88,13 @@
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
 		return 0
 	return -1
+
+//Return flags that may be added as part of a mobs sight
+/atom/proc/additional_sight_flags()
+	return 0
+
+/atom/proc/additional_see_invisible()
+	return 0
 
 /atom/proc/on_reagent_change()
 	return
@@ -234,8 +241,10 @@ its easier to just keep the beam vertical.
 	for(var/obj/effect/overlay/beam/O in orange(10,src)) if(O.BeamSource==src) qdel(O)
 
 
-//All atoms
-/atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
+// A type overriding /examine() should either return the result of ..() or return TRUE if not calling ..()
+// Calls to ..() should generally not supply any arguments and instead rely on BYOND's automatic argument passing
+// There is no need to check the return value of ..(), this is only done by the calling /examinate() proc to validate the call chain
+/atom/proc/examine(mob/user, distance, infix = "", suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
 	if(blood_color && !istype(src, /obj/effect/decal))
@@ -247,8 +256,7 @@ its easier to just keep the beam vertical.
 
 	to_chat(user, "\icon[src] That's [f_name] [suffix]")
 	to_chat(user, desc)
-
-	return distance == -1 || (get_dist(src, user) <= distance)
+	return TRUE
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
@@ -295,11 +303,9 @@ its easier to just keep the beam vertical.
 	qdel(src)
 	. = TRUE
 
-/atom/proc/hitby(atom/movable/AM as mob|obj)
+/atom/proc/hitby(var/atom/movable/AM)
 	if (density)
 		AM.throwing = 0
-	return
-
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)

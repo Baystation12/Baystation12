@@ -52,7 +52,7 @@
 		P.card_icon = "joker"
 		cards += P
 
-/obj/item/weapon/deck/attackby(obj/O as obj, mob/user as mob)
+/obj/item/weapon/deck/attackby(obj/O, mob/user)
 	if(istype(O,/obj/item/weapon/hand))
 		var/obj/item/weapon/hand/H = O
 		for(var/datum/playingcard/P in H.cards)
@@ -135,7 +135,7 @@
 		user.visible_message("\The [user] deals a card to \the [target].")
 	H.throw_at(get_step(target,target.dir),10,1,H)
 
-/obj/item/weapon/hand/attackby(obj/O as obj, mob/user as mob)
+/obj/item/weapon/hand/attackby(obj/O, mob/user)
 	if(istype(O,/obj/item/weapon/hand))
 		var/obj/item/weapon/hand/H = O
 		for(var/datum/playingcard/P in cards)
@@ -146,7 +146,7 @@
 		return
 	..()
 
-/obj/item/weapon/deck/attack_self(var/mob/user as mob)
+/obj/item/weapon/deck/attack_self(var/mob/user)
 
 	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
@@ -173,7 +173,7 @@
 	var/list/cards = list()
 
 
-/obj/item/weapon/pack/attack_self(var/mob/user as mob)
+/obj/item/weapon/pack/attack_self(var/mob/user)
 	user.visible_message("[user] rips open \the [src]!")
 	var/obj/item/weapon/hand/H = new()
 
@@ -194,47 +194,48 @@
 	var/concealed = 0
 	var/list/cards = list()
 
-/obj/item/weapon/hand/verb/discard()
-
-	set category = "Object"
-	set name = "Discard"
-	set desc = "Place a card from your hand in front of you."
-
-	var/list/to_discard = list()
-	for(var/datum/playingcard/P in cards)
-		to_discard[P.name] = P
-	var/discarding = input("Which card do you wish to put down?") as null|anything in to_discard
-
-	if(!discarding || !to_discard[discarding] || !usr || !src) return
-
-	var/datum/playingcard/card = to_discard[discarding]
-
-	var/obj/item/weapon/hand/H = new(src.loc)
-	H.cards += card
-	cards -= card
-	H.concealed = 0
-	H.update_icon()
-	src.update_icon()
-	usr.visible_message("\The [usr] plays \the [discarding].")
-	H.forceMove(loc = get_step(usr,usr.dir))
-
-	if(!cards.len)
-		qdel(src)
-
-/obj/item/weapon/hand/attack_self(var/mob/user as mob)
+/obj/item/weapon/hand/attack_self(var/mob/user)
 	concealed = !concealed
 	update_icon()
 	user.visible_message("\The [user] [concealed ? "conceals" : "reveals"] their hand.")
 
+/obj/item/weapon/hand/attack_hand(mob/user)
+	if(src.loc == user)
+		// build the list of cards in the hand
+		var/list/to_discard = list()
+		for(var/datum/playingcard/P in cards)
+			to_discard[P.name] = P
+		var/discarding = null
+		//don't prompt if only 1 card
+		if(to_discard.len == 1)
+			discarding = to_discard[1]
+		else
+			discarding = input(user, "Which card do you wish to take?") as null|anything in to_discard
+		if(!discarding || !to_discard[discarding] || !CanPhysicallyInteract(user)) return
+
+		var/datum/playingcard/card = to_discard[discarding]
+		var/obj/item/weapon/hand/new_hand = new(src.loc)
+		new_hand.cards += card
+		cards -= card
+		new_hand.concealed = 0
+		new_hand.update_icon()
+		src.update_icon()
+
+		if(!cards.len)
+			qdel(src)
+
+		user.put_in_hands(new_hand)
+	else
+		. = ..()
+
 /obj/item/weapon/hand/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if((!concealed || src.loc == user) && cards.len)
 		to_chat(user, "It contains: ")
 		for(var/datum/playingcard/P in cards)
 			to_chat(user, "The [P.name].")
 
 /obj/item/weapon/hand/on_update_icon(var/direction = 0)
-
 	if(!cards.len)
 		qdel(src)
 		return
@@ -250,7 +251,6 @@
 		desc = "[P.desc]"
 
 	overlays.Cut()
-
 
 	if(cards.len == 1)
 		var/datum/playingcard/P = cards[1]
@@ -292,16 +292,15 @@
 		overlays += I
 		i++
 
-/obj/item/weapon/hand/dropped(mob/user as mob)
+/obj/item/weapon/hand/dropped(mob/user)
 	..()
 	if(locate(/obj/structure/table, loc))
 		src.update_icon(user.dir)
 	else
 		update_icon()
 
-/obj/item/weapon/hand/pickup(mob/user as mob)
+/obj/item/weapon/hand/pickup(mob/user)
 	src.update_icon()
-
 
 /*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/
 /obj/item/weapon/hand/missing_card
@@ -309,7 +308,6 @@
 
 /obj/item/weapon/hand/missing_card/Initialize()
 	. = ..()
-
 	var/list/deck_list = list()
 	for(var/obj/item/weapon/deck/D in world)
 		if(isturf(D.loc))		//Decks hiding in inventories are safe. Respect the sanctity of loadout items.
@@ -322,7 +320,5 @@
 		if(the_card)
 			cards += the_card
 			the_deck.cards -= the_card
-
 			concealed = pick(0,1)	//Maybe up, maybe down.
-
 	update_icon()	//Automatically qdels if no card can be found.

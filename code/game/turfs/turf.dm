@@ -2,8 +2,7 @@
 	icon = 'icons/turf/floors.dmi'
 	level = 1
 
-	plane = TURF_PLANE
-	layer = BASE_TURF_LAYER
+	layer = TURF_LAYER
 
 	var/turf_flags
 
@@ -34,15 +33,22 @@
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
 
-/turf/New()
-	..()
+	var/tmp/changing_turf
+
+/turf/Initialize(mapload)
+	. = ..()
 	if(dynamic_lighting)
 		luminosity = 0
 	else
 		luminosity = 1
 
+	opaque_counter = opacity
+	if (mapload && permit_ao)
+		queue_ao()
+
 /turf/on_update_icon()
 	update_flood_overlay()
+	queue_ao(FALSE)
 
 /turf/proc/update_flood_overlay()
 	if(is_flooded(absolute = TRUE))
@@ -52,9 +58,17 @@
 		QDEL_NULL(flood_object)
 
 /turf/Destroy()
+	if (!changing_turf)
+		crash_with("Improper turf qdel. Do not qdel turfs directly.")
+
+	changing_turf = FALSE
+
 	remove_cleanables()
 	fluid_update()
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
+	if (ao_queued)
+		SSao.queue -= src
+		ao_queued = 0
 	..()
 	return QDEL_HINT_IWILLGC
 
@@ -69,13 +83,26 @@
 
 	if(user.restrained())
 		return 0
-	if(isnull(user.pulling) || user.pulling.anchored || !isturf(user.pulling.loc))
-		return 0
-	if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
-		return 0
-	if(user.pulling)
+	if (user.pulling)
+		if(user.pulling.anchored || !isturf(user.pulling.loc))
+			return 0
+		if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
+			return 0
 		do_pull_click(user, src)
-	return 1
+
+	.=handle_hand_interception(user)
+	if (!.)
+		return 1
+
+/turf/proc/handle_hand_interception(var/mob/user)
+	var/datum/extension/turf_hand/THE
+	for (var/A in src)
+		var/datum/extension/turf_hand/TH = get_extension(A, /datum/extension/turf_hand)
+		if (istype(TH) && TH.priority > THE?.priority) //Only overwrite if the new one is higher. For matching values, its first come first served
+			THE = TH
+
+	if (THE)
+		return THE.OnHandInterception(user)
 
 /turf/attack_robot(var/mob/user)
 	if(Adjacent(user))
@@ -87,7 +114,6 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 	return ..()
-
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 
@@ -309,3 +335,12 @@ var/const/enterloopsanity = 100
 		to_chat(vandal, "<span class='notice'>You feel much safer.</span>")
 
 	return TRUE
+
+/turf/proc/is_wall()
+	return FALSE
+
+/turf/proc/is_open()
+	return FALSE
+
+/turf/proc/is_floor()
+	return FALSE

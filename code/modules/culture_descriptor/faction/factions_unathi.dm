@@ -1,14 +1,15 @@
 /decl/cultural_info/faction/unathi
 	name = FACTION_UNATHI_POLAR
-	description = "These Unathi hail from the dense jungles of Moghes’ Poles. Generally they’re the most welcoming of outsiders and the most \
+	description = "These Unathi hail from the dense jungles of Moghes' Poles. Generally they're the most welcoming of outsiders and the most \
 	common to find off world. Most of these Unathi are followers of the Precursors or the Fruitful Lights, with technology and progress being \
 	an important concept in the polar city-states."
-	language = LANGUAGE_UNATHI
+	language = LANGUAGE_UNATHI_SINTA
+	secondary_langs = list(LANGUAGE_UNATHI_YEOSA)
 
 /decl/cultural_info/faction/unathi/desert
 	name = FACTION_UNATHI_DESERT
 	description = "These are the survivalists of the Unathi. They hunker down in long forgotten bunkers of the Precursors and survive on \
-	whatever creatures still live in the deserts. They’re incredibly self sufficient despite their living conditions.They have a heavy focus on \
+	whatever creatures still live in the deserts. They're incredibly self sufficient despite their living conditions.They have a heavy focus on \
 	the Precursors and the Grand Strategem in their clan faiths, and are often considered the most spiritual."
 
 /decl/cultural_info/faction/unathi/savannah
@@ -34,4 +35,5 @@
 	amphibious lifestyle, their culture focuses around the islands and seas of Moghes. They are very friendly and open to outsiders, often trading their goods and technologies \
 	to the Sinta of the land. Most strangely is their third sex, the Caretakers, of whom have given up masculine or feminine sexual characteristics to ascend to near-divine status in their clans, \
 	being in charge of taking care of children, and doing a majority of the medical work."
-	language = LANGUAGE_YEOSA
+	language = LANGUAGE_UNATHI_YEOSA
+	secondary_langs = list(LANGUAGE_UNATHI_SINTA)

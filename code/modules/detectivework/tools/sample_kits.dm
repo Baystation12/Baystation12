@@ -13,9 +13,9 @@
 		name = "[initial(name)] (\the [supplied])"
 		object = "[supplied], [get_area(supplied)]"
 
-/obj/item/weapon/sample/examine(var/user)
-	. = ..(user, 1)
-	if(. && object)
+/obj/item/weapon/sample/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 && object)
 		to_chat(user, "The label says: '[object]'")
 
 /obj/item/weapon/sample/print/New(var/newloc, var/atom/supplied)
@@ -168,7 +168,7 @@
 
 /obj/item/weapon/forensics/sample_kit/powder
 	name = "fingerprint powder"
-	desc = "A jar containing aluminum powder and a specialized brush."
+	desc = "A jar containing alumiinum powder and a specialized brush."
 	icon_state = "dust"
 	evidence_type = "fingerprint"
 	evidence_path = /obj/item/weapon/sample/print

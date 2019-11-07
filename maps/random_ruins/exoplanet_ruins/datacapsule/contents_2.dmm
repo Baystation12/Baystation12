@@ -1,0 +1,62 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/machinery/telecomms/server,
+/obj/structure/foamedmetal,
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/mob/living/simple_animal/hostile/viscerator,
+/turf/template_noop,
+/area/template_noop)
+"c" = (
+/obj/structure/foamedmetal,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/machinery/r_n_d/server/core{
+	id_with_upload_string = "";
+	id_with_download_string = ""
+	},
+/obj/structure/foamedmetal,
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/machinery/computer/modular/preset/library{
+	icon_state = "console";
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/obj/structure/backup_server,
+/turf/template_noop,
+/area/template_noop)
+"g" = (
+/obj/machinery/constructable_frame/machine_frame,
+/obj/structure/foamedmetal,
+/turf/template_noop,
+/area/template_noop)
+"h" = (
+/obj/structure/backup_server,
+/obj/structure/foamedmetal,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+g
+f
+h
+"}
+(2,1,1) = {"
+c
+c
+c
+b
+"}
+(3,1,1) = {"
+d
+e
+f
+h
+"}

@@ -101,13 +101,13 @@
 			I.pixel_y = -3
 		overlays += I
 
-/obj/structure/bigDelivery/examine(mob/user)
-	if(..(user, 4))
+/obj/structure/bigDelivery/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 4)
 		if(sortTag)
 			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
-	return
 
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
@@ -133,9 +133,14 @@
 	var/tag_x
 
 /obj/item/smallDelivery/proc/unwrap(var/mob/user)
-	if (!wrapped || !Adjacent(user))
+	if (!contents.len || !Adjacent(user))
 		return
+
 	user.put_in_hands(wrapped)
+	// Take out any other items that might be in the package
+	for(var/obj/item/I in src)
+		user.put_in_hands(I)
+
 	qdel(src)
 
 /obj/item/smallDelivery/attack_robot(mob/user as mob)
@@ -218,13 +223,13 @@
 				I.pixel_y = -3
 		overlays += I
 
-/obj/item/smallDelivery/examine(mob/user)
-	if(..(user, 4))
+/obj/item/smallDelivery/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 4)
 		if(sortTag)
 			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
-	return
 
 /obj/item/stack/package_wrap
 	name = "package wrapper"
@@ -404,7 +409,6 @@
 
 /obj/machinery/disposal/deliveryChute/Bumped(var/atom/movable/AM) //Go straight into the chute
 	if(istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))	return
-	if(istype(AM, /obj/mecha))	return
 	switch(dir)
 		if(NORTH)
 			if(AM.loc.y != src.loc.y+1) return
@@ -414,7 +418,10 @@
 			if(AM.loc.y != src.loc.y-1) return
 		if(WEST)
 			if(AM.loc.x != src.loc.x-1) return
-
+			
+	var/mob/living/L = AM
+	if (istype(L) && L.ckey)
+		log_and_message_admins("has flushed themselves down \the [src].", L)
 	if(istype(AM, /obj))
 		var/obj/O = AM
 		O.forceMove(src)
@@ -479,11 +486,8 @@
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
 				to_chat(user, "You sliced the floorweld off the delivery chute.")
-				var/obj/structure/disposalconstruct/C = new (src.loc)
-				C.ptype = 8 // 8 =  Delivery chute
+				var/obj/structure/disposalconstruct/C = new (loc, src)
 				C.update()
-				C.anchored = 1
-				C.set_density(1)
 				qdel(src)
 			return
 		else

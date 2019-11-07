@@ -43,4 +43,10 @@
 	var/related_accounts_ip = "Requires database"	//So admins know why it isn't working - Used to determine what other accounts previously logged in from this ip
 	var/related_accounts_cid = "Requires database"	//So admins know why it isn't working - Used to determine what other accounts previously logged in from this computer id
 
-	preload_rsc = 0 // This is 0 so we can set it to an URL once the player logs in and have them download the resources from a different server.
+	/*
+	As of byond 512, due to how broken preloading is, preload_rsc MUST be set to 1 at compile time if resource URLs are *not* in use,
+	BUT you still want resource preloading enabled (from the server itself). If using resource URLs, it should be set to 0 and
+	changed to a URL at runtime (see client_procs.dm for procs that do this automatically). More information about how goofy this broken setting works at
+	http://www.byond.com/forum/post/1906517?page=2#comment23727144
+	*/
+	preload_rsc = 0

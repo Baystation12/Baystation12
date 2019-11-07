@@ -89,7 +89,7 @@ var/global/list/stool_cache = list() //haha stool
 		user.do_attack_animation(target)
 		dismantle() //This deletes self.
 
-		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE)
+		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 20)
 		target.Weaken(10 * (1 - blocked))
 		target.apply_damage(20, BRUTE, hit_zone, src)
 		return 1
@@ -156,3 +156,8 @@ var/global/list/stool_cache = list() //haha stool
 		remove_padding()
 	else
 		..()
+
+//Generated subtypes for mapping porpoises
+
+/obj/item/weapon/stool/wood/New(var/newloc)
+	..(newloc,MATERIAL_WOOD)

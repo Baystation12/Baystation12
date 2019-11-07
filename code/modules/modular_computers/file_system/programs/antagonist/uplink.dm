@@ -18,20 +18,21 @@
 /datum/nano_module/program/uplink
 	name = "TaxQuickly 1.45b"
 
-/datum/nano_module/program/uplink/ui_interact(var/mob/user)
+/datum/nano_module/program/uplink/ui_interact(var/mob/user, var/ui_key = "main", datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/datum/computer_file/program/uplink/prog = program
-	var/obj/item/modular_computer/computer = host
-	if(istype(computer) && istype(prog))
-		if(computer.hidden_uplink && prog.password)
-			if(prog.authenticated)
-				if(alert(user, "Resume or close and secure?", name, "Resume", "Close") == "Resume")
-					computer.hidden_uplink.trigger(user)
-					return
-			else if(computer.hidden_uplink.check_trigger(user, input(user, "Please enter your unique tax ID:", "Authentication"), prog.password))
-				prog.authenticated = 1
+	var/obj/item/holder = program.computer.get_physical_host()
+	if(istype(holder) && holder.hidden_uplink && prog.password)
+		if(prog.authenticated)
+			if(!CanInteract(user, state))
 				return
-		else
-			to_chat(user, "<span class='warning'>[computer] displays an \"ID not found\" error.</span>")
+			if(alert(user, "Resume or close and secure?", name, "Resume", "Close") == "Resume")
+				holder.hidden_uplink.trigger(user)
+				return
+		else if(holder.hidden_uplink.check_trigger(user, input(user, "Please enter your unique tax ID:", "Authentication"), prog.password))
+			prog.authenticated = 1
+			return
+	else
+		program.computer.show_error(user, "ID not found")
 
 	prog.authenticated = 0
-	computer.kill_program()
+	program.computer.kill_program(program)

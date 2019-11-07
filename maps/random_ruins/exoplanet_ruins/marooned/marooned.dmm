@@ -42,7 +42,7 @@
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
-/obj/machinery/computer,
+/obj/machinery/computer/dummy,
 /obj/effect/floor_decal/corner/red/full,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
@@ -317,13 +317,13 @@
 /turf/simulated/wall/ocp_wall,
 /area/template_noop)
 "aW" = (
-/obj/item/weapon/computer_hardware/battery_module{
+/obj/item/weapon/stock_parts/computer/battery_module{
 	pixel_x = -7;
 	pixel_y = 0
 	},
-/obj/item/weapon/material/wirerod{
+/obj/item/weapon/melee/baton/cattleprod{
 	desc = "Metal rod with wire attached to it.";
-	name = "Jurry-rigged antenna";
+	name = "jury-rigged antenna";
 	pixel_x = 5;
 	pixel_y = 3
 	},
@@ -351,9 +351,9 @@
 /turf/template_noop,
 /area/template_noop)
 "aY" = (
-/obj/item/weapon/material/wirerod{
+/obj/item/weapon/melee/baton/cattleprod{
 	desc = "Metal rod with wire attached to it.";
-	name = "Jurry-rigged antenna";
+	name = "jury-rigged antenna";
 	pixel_x = 5;
 	pixel_y = 3
 	},

@@ -7,6 +7,7 @@
 #define CLONE       "clone"
 #define PAIN        "pain"
 #define ELECTROCUTE "electrocute"
+#define PSIONIC     "psi"
 
 #define CUT       "cut"
 #define BRUISE    "bruise"
@@ -59,6 +60,7 @@
 #define ORGAN_FLAG_FINGERPRINT    (1<<5) // The organ has a fingerprint.
 #define ORGAN_FLAG_GENDERED_ICON  (1<<6) // The icon state for this organ appends _m/_f.
 #define ORGAN_FLAG_HEALS_OVERKILL (1<<7) // The organ heals from overkill damage.
+#define ORGAN_FLAG_DEFORMED       (1<<8) // The organ is permanently disfigured.
 
 // Droplimb types.
 #define DROPLIMB_EDGE 0

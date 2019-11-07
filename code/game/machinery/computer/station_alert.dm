@@ -5,7 +5,7 @@
 	icon_keyboard = "tech_key"
 	icon_screen = "alert:0"
 	light_color = "#e6ffff"
-	circuit = /obj/item/weapon/circuitboard/stationalert
+	base_type = /obj/machinery/computer/station_alert
 	var/datum/nano_module/alarm_monitor/alarm_monitor
 	var/monitor_type = /datum/nano_module/alarm_monitor
 
@@ -42,11 +42,9 @@
 		qdel(alarm_monitor)
 		alarm_monitor = null
 
-/obj/machinery/computer/station_alert/attack_ai(mob/user)
+/obj/machinery/computer/station_alert/interface_interact(user)
 	ui_interact(user)
-
-/obj/machinery/computer/station_alert/attack_hand(mob/user)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/station_alert/ui_interact(mob/user)
 	if(alarm_monitor)

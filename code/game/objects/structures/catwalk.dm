@@ -5,9 +5,9 @@
 	icon_state = "catwalk"
 	density = 0
 	anchored = 1.0
-	plane = ABOVE_TURF_PLANE
 	layer = CATWALK_LAYER
-	footstep_type = FOOTSTEP_CATWALK
+	footstep_type = /decl/footsteps/catwalk
+	obj_flags = OBJ_FLAG_NOFALL
 	var/hatch_open = FALSE
 	var/obj/item/stack/tile/mono/plated_tile
 
@@ -46,8 +46,6 @@
 		I.color = plated_tile.color
 		overlays += I
 
-
-
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
 		if(1)
@@ -62,20 +60,33 @@
 		do_pull_click(user, src)
 	..()
 
+/obj/structure/catwalk/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
+
+/obj/structure/catwalk/proc/deconstruct(mob/user)
+	playsound(src, 'sound/items/Welder.ogg', 100, 1)
+	to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
+	new /obj/item/stack/material/rods(src.loc)
+	new /obj/item/stack/material/rods(src.loc)
+	//Lattice would delete itself, but let's save ourselves a new obj
+	if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
+		new /obj/structure/lattice/(src.loc)
+	if(plated_tile)
+		new plated_tile.build_type(src.loc)
+	qdel(src)
+
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
 	if(isWelder(C))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
-			new /obj/item/stack/material/rods(src.loc)
-			new /obj/item/stack/material/rods(src.loc)
-			//Lattice would delete itself, but let's save ourselves a new obj
-			if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
-				new /obj/structure/lattice/(src.loc)
-			if(plated_tile)
-				new plated_tile.build_type(src.loc)
-			qdel(src)
+			deconstruct(user)
+		return
+	if(istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = C
+		if(!cutter.slice(user))
+			return
+		deconstruct(user)
 		return
 	if(isCrowbar(C) && plated_tile)
 		hatch_open = !hatch_open
@@ -110,6 +121,9 @@
 						break
 				update_icon()
 
+/obj/structure/catwalk/refresh_neighbors()
+	return
+
 /obj/effect/catwalk_plated
 	name = "plated catwalk spawner"
 	icon = 'icons/obj/catwalks.dmi'
@@ -117,7 +131,7 @@
 	density = 1
 	anchored = 1.0
 	var/activated = FALSE
-	layer = ABOVE_TURF_PLANE
+	layer = CATWALK_LAYER
 	var/plating_type = /decl/flooring/tiling/mono
 
 /obj/effect/catwalk_plated/Initialize(mapload)

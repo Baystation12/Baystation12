@@ -11,6 +11,10 @@ var/datum/species/shapeshifter/promethean/prometheans
 	knockout_message = "collapses inwards, forming a disordered puddle of goo."
 	remains_type = /obj/effect/decal/cleanable/ash
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	blood_color = "#05ff9b"
 	flesh_color = "#05fffb"
 
@@ -64,7 +68,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 		/mob/living/carbon/human/proc/shapeshifter_select_gender
 		)
 
-	valid_transform_species = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_DIONA, "Monkey")
+	valid_transform_species = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_MANTID_ALATE, "Monkey")
 	monochromatic = 1
 
 	var/heal_rate = 5 // Temp. Regen per tick.
@@ -89,7 +93,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 		var/obj/effect/decal/cleanable/C = locate() in T
 		if(C)
 			if(H.nutrition < 300)
-				H.nutrition += rand(10,20)
+				H.adjust_nutrition(rand(10,20))
 			qdel(C)
 
 	// We need a handle_life() proc for this stuff.
@@ -107,10 +111,10 @@ var/datum/species/shapeshifter/promethean/prometheans
 	// Replace completely missing limbs.
 	for(var/limb_type in has_limbs)
 		var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-		if(E && !E.is_usable())
+		if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
 			E.removed()
-			qdel(E)
-			E = null
+			if(!QDELETED(E))
+				QDEL_NULL(E)
 		if(!E)
 			var/list/organ_data = has_limbs[limb_type]
 			var/limb_path = organ_data["path"]

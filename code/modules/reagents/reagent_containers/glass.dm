@@ -46,9 +46,11 @@
 	..()
 	base_name = name
 
-/obj/item/weapon/reagent_containers/glass/examine(var/mob/user)
-	if(!..(user, 2))
+/obj/item/weapon/reagent_containers/glass/examine(mob/user, distance)
+	. = ..()
+	if(distance > 2)
 		return
+	
 	if(reagents && reagents.reagent_list.len)
 		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
 	else
@@ -258,15 +260,16 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
 
-/obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob)
+/obj/item/weapon/reagent_containers/glass/bucket/wood
+	name = "bucket"
+	desc = "It's a wooden bucket. How rustic."
+	icon_state = "wbucket"
+	item_state = "wbucket"
+	matter = list(MATERIAL_WOOD = 280)
+	volume = 200
 
-	if(isprox(D))
-		to_chat(user, "You add [D] to [src].")
-		qdel(D)
-		user.put_in_hands(new /obj/item/weapon/bucket_sensor)
-		qdel(src)
-		return
-	else if(istype(D, /obj/item/weapon/mop))
+/obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob)
+	if(istype(D, /obj/item/weapon/mop))
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
 		else

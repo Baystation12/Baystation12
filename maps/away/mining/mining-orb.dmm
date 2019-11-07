@@ -222,10 +222,6 @@
 /obj/effect/shuttle_landmark/orb/nav1,
 /turf/space,
 /area/space)
-"bi" = (
-/obj/effect/landmark/random_gen/asteroid,
-/turf/space,
-/area/space)
 "cf" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -364,7 +360,7 @@
 /area/mine/unexplored)
 "SY" = (
 /obj/structure/fountain,
-/mob/living/simple_animal/parrot/space,
+/mob/living/simple_animal/hostile/retaliate/parrot/space,
 /turf/simulated/floor/airless/stone,
 /area/mine/explored)
 "TP" = (
@@ -572,7 +568,7 @@ aa
 aa
 aa
 aa
-bi
+aa
 "}
 (2,1,1) = {"
 aa

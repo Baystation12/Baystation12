@@ -6,31 +6,31 @@
 
 /datum/uplink_item/item/services/fake_ion_storm
 	name = "Ion Storm Announcement"
-	desc = "Interferes with ion sensors."
+	desc = "A single-use device, that when activated, fakes an announcement, so people think all their electronic readings are wrong."
 	item_cost = 8
 	path = /obj/item/device/uplink_service/fake_ion_storm
 
 /datum/uplink_item/item/services/suit_sensor_garble
 	name = "Complete Suit Sensor Jamming"
-	desc = "Garbles all suit sensor data for 10 minutes."
+	desc = "A single-use device, that when activated, garbles all suit sensor data for 10 minutes."
 	item_cost = 16
 	path = /obj/item/device/uplink_service/jamming/garble
 
 /datum/uplink_item/item/services/fake_rad_storm
 	name = "Radiation Storm Announcement"
-	desc = "Interferes with radiation sensors."
+	desc = "A single-use device, that when activated, fakes an announcement, so people run to the tunnels in fear of being irradiated! "
 	item_cost = 24
 	path = /obj/item/device/uplink_service/fake_rad_storm
 
 /datum/uplink_item/item/services/fake_crew_annoncement
 	name = "Crew Arrival Announcement and Records"
-	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Prepare well!"
+	desc = "A single-use device, that when activated, creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Prepare well!"
 	item_cost = 16
 	path = /obj/item/device/uplink_service/fake_crew_announcement
 
 /datum/uplink_item/item/services/suit_sensor_shutdown
 	name = "Complete Suit Sensor Shutdown"
-	desc = "Completely disables all suit sensors for 10 minutes."
+	desc = "A single-use device, that when activated, completely disables all suit sensors for 10 minutes."
 	item_cost = 40
 	path = /obj/item/device/uplink_service/jamming
 
@@ -68,9 +68,9 @@
 		deactivate()
 	. = ..()
 
-/obj/item/device/uplink_service/examine(var/user)
-	. = ..(user, 1)
-	if(.)
+/obj/item/device/uplink_service/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		switch(state)
 			if(AWAITING_ACTIVATION)
 				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
@@ -83,8 +83,9 @@
 	if(state != AWAITING_ACTIVATION)
 		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
 		return
-	if(!(user.z in GLOB.using_map.station_levels))
-		to_chat(user, SPAN_WARNING("You are too far away from \the [GLOB.using_map.name] to make use of this service."))
+	var/obj/effect/overmap/O = map_sectors["[get_z(src)]"]
+	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
+	if(choice != "Yes")
 		return
 	if(!enable())
 		return
@@ -157,7 +158,7 @@
 	service_label = "Ion Storm Announcement"
 
 /obj/item/device/uplink_service/fake_ion_storm/enable(var/mob/user = usr)
-	ion_storm_announcement()
+	ion_storm_announcement(GetConnectedZlevels(get_z(src)))
 	. = ..()
 
 /*****************
@@ -187,7 +188,7 @@
 
 	if(CanUseTopic(user, GLOB.hands_state) != STATUS_INTERACTIVE)
 		return FALSE
-	command_announcement.Announce(message, title, msg_sanitized = 1)
+	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = GetConnectedZlevels(get_z(src)))
 	return TRUE
 
 /*********************************

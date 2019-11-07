@@ -36,7 +36,7 @@
 
 	if(T0.x == x || T0.y == y)
 		// Check for border blockages
-		return T0.ClickCross(get_dir(T0,src), border_only = 1) && src.ClickCross(get_dir(src,T0), border_only = 1, target_atom = target)
+		return T0.ClickCross(get_dir(T0,src), border_only = 1, target_atom = neighbor) && src.ClickCross(get_dir(src,T0), border_only = 1, target_atom = target)
 
 	// Not orthagonal
 	var/in_dir = get_dir(neighbor,src) // eg. northwest (1+8)
@@ -44,7 +44,7 @@
 	var/d2 = in_dir - d1			// eg north		(1+8) - 8 = 1
 
 	for(var/d in list(d1,d2))
-		if(!T0.ClickCross(d, border_only = 1))
+		if(!T0.ClickCross(d, border_only = 1, target_atom = neighbor))
 			continue // could not leave T0 in that direction
 
 		var/turf/T1 = get_step(T0,d)
@@ -81,7 +81,7 @@ Quick adjacency (to turf):
 	This is not used in stock /tg/station currently.
 */
 /atom/movable/Adjacent(var/atom/neighbor)
-	if(neighbor == loc) return 1
+	if(neighbor == loc || (neighbor.loc == loc)) return 1
 	if(!isturf(loc)) return 0
 	for(var/turf/T in locs)
 		if(isnull(T)) continue
@@ -96,23 +96,6 @@ Quick adjacency (to turf):
 			return loc.Adjacent(neighbor,recurse - 1)
 		return 0
 	return ..()
-/*
-	Special case: This allows you to reach a door when it is visally on top of,
-	but technically behind, a fire door
-
-	You could try to rewrite this to be faster, but I'm not sure anything would be.
-	This can be safely removed if border firedoors are ever moved to be on top of doors
-	so they can be interacted with without opening the door.
-*/
-/obj/machinery/door/Adjacent(var/atom/neighbor)
-	var/obj/machinery/door/firedoor/border_only/BOD = locate() in loc
-	if(BOD)
-		BOD.throwpass = 1 // allow click to pass
-		. = ..()
-		BOD.throwpass = 0
-		return .
-	return ..()
-
 
 /*
 	This checks if you there is uninterrupted airspace between that turf and this one.

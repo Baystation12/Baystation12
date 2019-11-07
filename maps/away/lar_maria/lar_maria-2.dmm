@@ -718,7 +718,6 @@
 "by" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/alarm{
@@ -813,7 +812,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "bJ" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen{
+/obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1093,7 +1092,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cI" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/wood,
@@ -1163,7 +1162,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -1181,7 +1180,6 @@
 "cS" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/plating,
@@ -1272,7 +1270,7 @@
 /area/lar_maria/dorms)
 "dh" = (
 /obj/structure/window/basic,
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1295,13 +1293,13 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dl" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen{
+/obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1316,7 +1314,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dn" = (
-/obj/machinery/atmospherics/trinary/mixer/m_mixer{
+/obj/machinery/atmospherics/omni/mixer{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -1328,13 +1326,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dp" = (
-/obj/machinery/atmospherics/trinary/filter{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/lar_maria/atmos)
-"dq" = (
-/obj/machinery/atmospherics/trinary/filter/m_filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -1443,7 +1435,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1843,7 +1835,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eW" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eX" = (
@@ -2166,7 +2158,9 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fU" = (
-/obj/machinery/vending/engivend,
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fV" = (
@@ -2384,7 +2378,6 @@
 "gE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/window/basic{
@@ -3275,7 +3268,6 @@
 /obj/machinery/vending/snack,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -3520,7 +3512,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "rb" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen{
+/obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -3601,7 +3593,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "DG" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -24503,7 +24495,7 @@ qb
 cl
 cB
 cB
-dq
+dp
 dF
 ub
 bx

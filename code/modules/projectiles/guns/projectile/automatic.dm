@@ -3,6 +3,7 @@
 	desc = "A protoype lightweight, fast firing submachine gun."
 	icon = 'icons/obj/guns/prototype_smg.dmi'
 	icon_state = "prototype"
+	item_state = "saber"
 	w_class = ITEM_SIZE_NORMAL
 	bulk = -1
 	load_method = MAGAZINE
@@ -24,22 +25,15 @@
 		list(mode_name="long bursts",   burst=8, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,0,-1,-1,-1,-1,-2,-2), dispersion=list(0.0, 0.0, 0.5, 0.6, 0.8, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/on_update_icon()
-	..()
-	if(ammo_magazine)
-		icon_state = "prototype"
-	else
-		icon_state = "prototype-empty"
-
 /obj/item/weapon/gun/projectile/automatic/machine_pistol
 	name = "machine pistol"
 	desc = "The Hephaestus Industries MP6 Vesper, A fairly common machine pistol. Sometimes refered to as an 'uzi' by the backwater spacers it is often associated with."
 	icon = 'icons/obj/guns/machine_pistol.dmi'
 	icon_state = "mpistolen"
 	safety_icon = "safety"
-	item_state = "wt550"
+	item_state = "mpistolen"
 	caliber = CALIBER_PISTOL
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ESOTERIC = 3)
 	ammo_type = /obj/item/ammo_casing/pistol
 	magazine_type = /obj/item/ammo_magazine/machine_pistol
 	allowed_magazines = /obj/item/ammo_magazine/machine_pistol //more damage compared to the wt550, smaller mag size
@@ -53,10 +47,18 @@
 
 /obj/item/weapon/gun/projectile/automatic/machine_pistol/on_update_icon()
 	..()
+	icon_state = "mpistolen"
 	if(ammo_magazine)
-		icon_state = "mpistolen"
-	else
+		overlays += image(icon, "mag")
+
+	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 		icon_state = "mpistolen-empty"
+		overlays += image(icon, "ammo_bad")
+	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+		overlays += image(icon, "ammo_warn")
+		return
+	else
+		overlays += image(icon, "ammo_ok")
 
 /obj/item/weapon/gun/projectile/automatic/merc_smg
 	name = "submachine gun"
@@ -68,7 +70,7 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 10
 	caliber = CALIBER_PISTOL
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/smg
 	allowed_magazines = /obj/item/ammo_magazine/smg
@@ -102,7 +104,7 @@
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	caliber = CALIBER_RIFLE
-	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 5)
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ESOTERIC = 5)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
@@ -135,7 +137,7 @@
 	name = "submachine gun"
 	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced by Ward-Takahashi for paramilitary and private use."
 	icon = 'icons/obj/guns/sec_smg.dmi'
-	icon_state = "wt550"
+	icon_state = "smg"
 	item_state = "wt550"
 	safety_icon = "safety"
 	w_class = ITEM_SIZE_NORMAL
@@ -159,9 +161,11 @@
 /obj/item/weapon/gun/projectile/automatic/sec_smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "wt550-[round(ammo_magazine.stored_ammo.len,4)]"
+		overlays += image(icon, "mag-[round(ammo_magazine.stored_ammo.len,5)]")
+	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
+		overlays += image(icon, "ammo-ok")
 	else
-		icon_state = "wt550"
+		overlays += image(icon, "ammo-bad")
 
 /obj/item/weapon/gun/projectile/automatic/bullpup_rifle
 	name = "bullpup assault rifle"
@@ -250,7 +254,7 @@
 	slot_flags = 0
 	max_shells = 50
 	caliber = CALIBER_RIFLE
-	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ESOTERIC = 2)
 	slot_flags = 0 //need sprites for SLOT_BACK
 	ammo_type = /obj/item/ammo_casing/rifle
 	load_method = MAGAZINE

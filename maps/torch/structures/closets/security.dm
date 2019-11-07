@@ -24,9 +24,9 @@
 /decl/closet_appearance/secure_closet/torch/security/hos
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_NT_RED,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_NT_RED,
-		"security" = COLOR_GOLD
+		"security" = COLOR_CLOSET_GOLD
 	)
 
 /obj/structure/closet/secure_closet/security_torch
@@ -56,6 +56,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/weapon/storage/belt/security,
+		/obj/item/weapon/material/knife/folding/swiss/sec,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel/sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
@@ -93,16 +94,17 @@
 		/obj/item/device/flashlight/maglight,
 		/obj/item/device/taperecorder,
 		/obj/item/weapon/hand_labeler,
+		/obj/item/weapon/material/knife/folding/swiss/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel/sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
 
-/obj/structure/closet/secure_closet/brigofficer
-	name = "brig officer's locker"
+/obj/structure/closet/secure_closet/brigchief
+	name = "brig chief's locker"
 	req_access = list(access_armory)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/security/warden
 
-/obj/structure/closet/secure_closet/brigofficer/WillContain()
+/obj/structure/closet/secure_closet/brigchief/WillContain()
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
 		/obj/item/clothing/head/helmet/solgov/security,
@@ -124,6 +126,7 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/gloves/thick/duty/solgov/sec,
 		/obj/item/device/flashlight/maglight,
+		/obj/item/weapon/material/knife/folding/swiss/sec,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel/sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
@@ -153,6 +156,7 @@
 		/obj/item/weapon/storage/belt/holster/security,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/gloves/thick/duty/solgov/sec,
+		/obj/item/weapon/material/knife/folding/swiss/sec,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel/sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)

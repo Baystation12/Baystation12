@@ -58,9 +58,20 @@ default behaviour is:
 	return ..()
 
 /mob/living/Bump(atom/movable/AM, yes)
+
+	// This is boilerplate from /atom/movable/Bump() but in all honest
+	// I have no clue what is going on in the logic below this and I'm
+	// afraid to touch it in case it explodes and kills me.
+	if(throwing)
+		throw_impact(AM)
+		throwing = FALSE
+		return
+	// End boilerplate.
+
 	spawn(0)
 		if ((!( yes ) || now_pushing) || !loc)
 			return
+
 		now_pushing = 1
 		if (istype(AM, /mob/living))
 			var/mob/living/tmob = AM
@@ -76,13 +87,6 @@ default behaviour is:
 						to_chat(src, "<span class='warning'>[tmob] is restraining [M], you cannot push past</span>")
 					now_pushing = 0
 					return
-
-			//Leaping mobs just land on the tile, no pushing, no anything.
-			if(status_flags & LEAPING)
-				loc = tmob.loc
-				status_flags &= ~LEAPING
-				now_pushing = 0
-				return
 
 			if(can_swap_with(tmob)) // mutual brohugs all around!
 				var/turf/oldloc = loc
@@ -435,7 +439,7 @@ default behaviour is:
 	druggy = 0
 	jitteriness = 0
 	confused = 0
-		
+
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
 	// fix all of our organs
@@ -514,95 +518,15 @@ default behaviour is:
 	if (buckled)
 		return
 
-	if (restrained())
+	if(get_dist(src, pulling) > 1)
 		stop_pulling()
 
+	var/turf/old_loc = get_turf(src)
 
-	var/t7 = 1
-	if (restrained())
-		for(var/mob/living/M in range(src, 1))
-			if ((M.pulling == src && M.stat == 0 && !( M.restrained() )))
-				t7 = null
-	if ((t7 && (pulling && ((get_dist(src, pulling) <= 1 || pulling.loc == loc) && (moving)))))
-		var/turf/T = loc
-		. = ..()
+	. = ..()
 
-		if (pulling && pulling.loc)
-			if(!( isturf(pulling.loc) ))
-				stop_pulling()
-				return
-
-		/////
-		if(pulling && pulling.anchored)
-			stop_pulling()
-			return
-
-		if (!restrained())
-			var/diag = get_dir(src, pulling)
-			if ((diag - 1) & diag)
-			else
-				diag = null
-			if ((get_dist(src, pulling) > 1 || diag))
-				if (isliving(pulling))
-					var/mob/living/M = pulling
-					var/ok = 1
-					if (locate(/obj/item/grab, M.grabbed_by))
-						if (prob(75))
-							var/obj/item/grab/G = pick(M.grabbed_by)
-							if (istype(G, /obj/item/grab))
-								for(var/mob/O in viewers(M, null))
-									O.show_message(text("<span class='warning'>[] has been pulled from []'s grip by []</span>", G.affecting, G.assailant, src), 1)
-								//G = null
-								qdel(G)
-						else
-							ok = 0
-						if (locate(/obj/item/grab, M.grabbed_by.len))
-							ok = 0
-					if (ok)
-						var/atom/movable/t = M.pulling
-						M.stop_pulling()
-
-						if(!istype(M.loc, /turf/space))
-							var/area/A = get_area(M)
-							if(A.has_gravity)
-								//this is the gay blood on floor shit -- Added back -- Skie
-								if (M.lying && (prob(M.getBruteLoss() / 6)))
-									var/turf/location = M.loc
-									if (istype(location, /turf/simulated))
-										location.add_blood(M)
-								//pull damage with injured people
-									if(prob(25))
-										M.adjustBruteLoss(1)
-										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
-								if(M.pull_damage())
-									if(prob(25))
-										M.adjustBruteLoss(2)
-										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
-										var/turf/location = M.loc
-										if (istype(location, /turf/simulated))
-											location.add_blood(M)
-											if(ishuman(M))
-												var/mob/living/carbon/human/H = M
-												var/blood_volume = round(H.vessel.get_reagent_amount(/datum/reagent/blood))
-												if(blood_volume > 0)
-													H.vessel.remove_reagent(/datum/reagent/blood, 1)
-
-
-						step(pulling, get_dir(pulling.loc, T))
-						if(t)
-							M.start_pulling(t)
-				else
-					if (pulling)
-						if (istype(pulling, /obj/structure/window))
-							var/obj/structure/window/W = pulling
-							if(W.is_fulltile())
-								for(var/obj/structure/window/win in get_step(pulling,get_dir(pulling.loc, T)))
-									stop_pulling()
-					if (pulling)
-						step(pulling, get_dir(pulling.loc, T))
-	else
-		stop_pulling()
-		. = ..()
+	if(. && pulling)
+		handle_pulling_after_move(old_loc)
 
 	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
 		s_active.close(src)
@@ -611,6 +535,73 @@ default behaviour is:
 		for(var/mob/living/carbon/slime/M in view(1,src))
 			M.UpdateFeed()
 
+/mob/living/proc/can_pull()
+	if(!moving)
+		return FALSE
+	if(pulling.anchored)
+		return FALSE
+	if(!isturf(pulling.loc))
+		return FALSE
+	if(restrained())
+		return FALSE
+
+	if(get_dist(src, pulling) > 2)
+		return FALSE
+
+	if(pulling.z != z)
+		if(pulling.z < z)
+			return FALSE
+		var/turf/T = GetAbove(src)
+		if(!isopenspace(T))
+			return FALSE
+	return TRUE
+
+/mob/living/proc/handle_pulling_after_move(turf/old_loc)
+	if(!pulling)
+		return
+
+	if(!can_pull())
+		stop_pulling()
+		return
+	
+	if (!isliving(pulling))
+		step(pulling, get_dir(pulling.loc, old_loc))
+	else
+		var/mob/living/M = pulling
+		if(M.grabbed_by.len)
+			if (prob(75))
+				var/obj/item/grab/G = pick(M.grabbed_by)
+				if(istype(G))
+					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
+					qdel(G)
+		if (!M.grabbed_by.len)
+			M.handle_pull_damage(src)
+
+			var/atom/movable/t = M.pulling
+			M.stop_pulling()
+			step(M, get_dir(pulling.loc, old_loc))
+			if(t)
+				M.start_pulling(t)
+
+
+/mob/living/proc/handle_pull_damage(mob/living/puller)
+	var/area/A = get_area(src)
+	if(!A.has_gravity)
+		return
+	var/turf/location = get_turf(src)
+	if(lying && prob(getBruteLoss() / 6))
+		location.add_blood(src)
+		if(prob(25))
+			src.adjustBruteLoss(1)
+			visible_message("<span class='danger'>\The [src]'s [src.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
+			. = TRUE
+	if(src.pull_damage())
+		if(prob(25))
+			src.adjustBruteLoss(2)
+			visible_message("<span class='danger'>\The [src]'s [src.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
+			location.add_blood(src)
+			. = TRUE
+
 /mob/living/verb/resist()
 	set name = "Resist"
 	set category = "IC"
@@ -618,6 +609,8 @@ default behaviour is:
 	if(!incapacitated(INCAPACITATION_KNOCKOUT) && last_resist + 2 SECONDS <= world.time)
 		last_resist = world.time
 		resist_grab()
+		if(resting)
+			lay_down()
 		if(!weakened)
 			process_resist()
 
@@ -632,11 +625,11 @@ default behaviour is:
 		spawn() escape_buckle()
 		return TRUE
 
-	//Breaking out of a locker?
-	if( src.loc && (istype(src.loc, /obj/structure/closet)) )
-		var/obj/structure/closet/C = loc
-		spawn() C.mob_breakout(src)
-		return TRUE
+	//Breaking out of a structure?
+	if(istype(loc, /obj/structure))
+		var/obj/structure/C = loc
+		if(C.mob_breakout(src))
+			return TRUE
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return
@@ -696,6 +689,7 @@ default behaviour is:
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(override_blindness_check || !(disabilities & BLIND))
+		..()
 		overlay_fullscreen("flash", type)
 		spawn(25)
 			if(src)
@@ -779,8 +773,8 @@ default behaviour is:
 		to_chat(src, "<span class='notice'>You reach out with tendrils of ectoplasm and invade the mind of \the [src]...</span>")
 		to_chat(src, "<b>You have assumed direct control of \the [src].</b>")
 		to_chat(src, "<span class='notice'>Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly.</span>")
-		src.universal_speak = 1
-		src.universal_understand = 1
+		src.universal_speak = TRUE
+		src.universal_understand = TRUE
 		//src.cultify() // Maybe another time.
 		return
 
@@ -790,7 +784,6 @@ default behaviour is:
 
 /mob/living/reset_layer()
 	if(hiding)
-		plane = HIDING_MOB_PLANE
 		layer = HIDING_MOB_LAYER
 	else
 		..()
@@ -817,7 +810,7 @@ default behaviour is:
 
 /mob/living/proc/melee_accuracy_mods()
 	. = 0
-	if(incapacitated())
+	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
 	if(eye_blind)
 		. += 75
@@ -848,7 +841,7 @@ default behaviour is:
 	if(!can_drown() || !loc.is_flooded(lying))
 		return FALSE
 	if(prob(5))
-		to_chat(src, "<span class='danger'>You choke and splutter as you inhale water!</span>")
+		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale water!"))
 	var/turf/T = get_turf(src)
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.

@@ -11,6 +11,9 @@
 	density = 1
 	idle_power_usage = 40
 	active_power_usage = 300
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/stored_matter = 0
 	var/max_stored_matter = 0
@@ -20,15 +23,10 @@
 	// These should be subtypes of /obj/item/organ
 	var/list/products = list()
 
-/obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
-	if(default_deconstruction_screwdriver(user, O))
+/obj/machinery/organ_printer/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
 		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
-	return ..()
 
 /obj/machinery/organ_printer/on_update_icon()
 	overlays.Cut()
@@ -37,42 +35,39 @@
 	if(printing)
 		overlays += "[icon_state]_working"
 
-/obj/machinery/organ_printer/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	RefreshParts()
-
-/obj/machinery/organ_printer/examine(var/mob/user)
+/obj/machinery/organ_printer/examine(mob/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>It is loaded with [stored_matter]/[max_stored_matter] matter units.</span>")
 
 /obj/machinery/organ_printer/RefreshParts()
 	print_delay = initial(print_delay)
-	max_stored_matter = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/bin in component_parts)
-		max_stored_matter += bin.rating * 50
-	for(var/obj/item/weapon/stock_parts/manipulator/manip in component_parts)
-		print_delay -= (manip.rating-1)*10
-	print_delay = max(0,print_delay)
+	print_delay -= 10 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	print_delay += 10 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+	print_delay = max(0, print_delay)
+
+	max_stored_matter = 50 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 20)
 	. = ..()
 
-/obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
+/obj/machinery/organ_printer/components_are_accessible(path)
+	return !printing && ..()
 
-	if(printing || (stat & (BROKEN|NOPOWER)))
+/obj/machinery/organ_printer/cannot_transition_to(path)
+	if(printing)
+		return SPAN_NOTICE("You must wait for \the [src] to finish printing first!")
+	return ..()
+
+/obj/machinery/organ_printer/physical_attack_hand(mob/user, var/choice = null)
+	if(printing)
 		return
 
 	if(!choice)
 		choice = input("What would you like to print?") as null|anything in products
 
-	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
-		return
+	if(!choice || printing || !CanPhysicallyInteract(user))
+		return TRUE
 
 	if(!can_print(choice))
-		return
+		return TRUE
 
 	stored_matter -= products[choice][2]
 
@@ -87,7 +82,7 @@
 	update_icon()
 
 	if(!choice || !src || (stat & (BROKEN|NOPOWER)))
-		return
+		return TRUE
 
 	print_organ(choice)
 
@@ -109,6 +104,7 @@
 	name = "prosthetic organ fabricator"
 	desc = "It's a machine that prints prosthetic organs."
 	icon_state = "roboprinter"
+	base_type = /obj/machinery/organ_printer/robot
 
 	products = list(
 		BP_HEART    = list(/obj/item/organ/internal/heart,      25),
@@ -124,7 +120,8 @@
 		BP_L_FOOT   = list(/obj/item/organ/external/foot,       40),
 		BP_R_FOOT   = list(/obj/item/organ/external/foot/right, 40),
 		BP_L_HAND   = list(/obj/item/organ/external/hand,       40),
-		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40)
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40),
+		BP_CELL		= list(/obj/item/organ/internal/cell, 25)
 		)
 
 	var/matter_amount_per_sheet = 10
@@ -138,10 +135,6 @@
 	if(stored_matter >= matter_amount_per_sheet)
 		new /obj/item/stack/material/steel(get_turf(src), Floor(stored_matter/matter_amount_per_sheet))
 	return ..()
-
-/obj/machinery/organ_printer/robot/New()
-	..()
-	component_parts += new /obj/item/weapon/circuitboard/roboprinter
 
 /obj/machinery/organ_printer/robot/print_organ(var/choice)
 	var/obj/item/organ/O = ..()
@@ -173,11 +166,12 @@
 	name = "bioprinter"
 	desc = "It's a machine that prints replacement organs."
 	icon_state = "bioprinter"
+	base_type = /obj/machinery/organ_printer/flesh
 	var/list/amount_list = list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat = 50,
 		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet = 15
 		)
-	var/loaded_dna //Blood sample for DNA hashing.
+	var/datum/dna/loaded_dna_datum
 	var/datum/species/loaded_species //For quick refrencing
 
 /obj/machinery/organ_printer/flesh/mapped/Initialize()
@@ -192,22 +186,15 @@
 			new /obj/item/weapon/reagent_containers/food/snacks/meat(T)
 	return ..()
 
-/obj/machinery/organ_printer/flesh/New()
-	..()
-	component_parts += new /obj/item/device/healthanalyzer
-	component_parts += new /obj/item/weapon/circuitboard/bioprinter
-
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O
-	var/weakref/R = loaded_dna["donor"]
-	var/mob/living/carbon/human/H = R.resolve()
 	var/new_organ
 	if(loaded_species.has_organ[choice])
 		new_organ = loaded_species.has_organ[choice]
 	else if(loaded_species.has_limbs[choice])
 		new_organ = loaded_species.has_limbs[choice]["path"]
 	if(new_organ)
-		O = new new_organ(get_turf(src), H.dna)
+		O = new new_organ(get_turf(src), loaded_dna_datum)
 		O.status |= ORGAN_CUT_AWAY
 	else
 		O = ..()
@@ -218,8 +205,8 @@
 	visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
 	return O
 
-/obj/machinery/organ_printer/flesh/attack_hand(mob/user)
-	if(!loaded_dna || !loaded_dna["donor"] || !loaded_species)
+/obj/machinery/organ_printer/flesh/physical_attack_hand(mob/user)
+	if(!loaded_dna_datum || !loaded_species)
 		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
 		return
 
@@ -229,7 +216,6 @@
 		return
 
 	..(user, choice)
-
 
 /obj/machinery/organ_printer/flesh/attackby(obj/item/weapon/W, mob/user)
 	// Load with matter for printing.
@@ -248,14 +234,48 @@
 	if(istype(W,/obj/item/weapon/reagent_containers/syringe))
 		var/obj/item/weapon/reagent_containers/syringe/S = W
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
-		if(injected && injected.data)
-			loaded_dna = injected.data
-			to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
-		var/weakref/R = loaded_dna["donor"]
-		var/mob/living/carbon/human/H = R.resolve()
-		if(H && istype(H) && H.species)
-			loaded_species = H.species
-			products = loaded_species.bioprint_products
-		return
+		if(injected && LAZYLEN(injected.data))
+			var/loaded_dna = injected.data
+			var/weakref/R = loaded_dna["donor"]
+			var/mob/living/carbon/human/H = R.resolve()
+			if(H && istype(H) && H.species && H.dna)
+				loaded_species = H.species
+				loaded_dna_datum = H.dna && H.dna.Clone()
+				products = get_possible_products()
+				to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
+				return TRUE
+		to_chat(user, SPAN_NOTICE("\The [src] displays an error: no viable blood sample could be obtained from \the [W]."))
 	return ..()
+
+/obj/machinery/organ_printer/flesh/proc/get_possible_products()
+	. = list()
+	if(!loaded_species)
+		return
+	var/list/organs = list()
+	for(var/organ in loaded_species.has_organ)
+		organs += loaded_species.has_organ[organ]
+	for(var/organ in loaded_species.has_limbs)
+		organs += loaded_species.has_limbs[organ]["path"]
+	for(var/organ in organs)
+		var/obj/item/organ/O = organ
+		if(check_printable(organ))
+			var/cost = initial(O.print_cost)
+			if(!cost)
+				cost = round(0.75 * initial(O.max_damage))
+			.[initial(O.organ_tag)] = list(O, cost)
+
+/obj/machinery/organ_printer/flesh/proc/check_printable(var/organtype)
+	var/obj/item/organ/O = organtype
+	if(!initial(O.can_be_printed))
+		return FALSE
+	if(initial(O.vital))
+		return FALSE
+	if(initial(O.status) & ORGAN_ROBOTIC)
+		return FALSE
+	if(ispath(organtype, /obj/item/organ/external))
+		var/obj/item/organ/external/E = organtype
+		if(initial(E.limb_flags) & ORGAN_FLAG_HEALS_OVERKILL)
+			return FALSE
+	return TRUE
+
 // END FLESH ORGAN PRINTER

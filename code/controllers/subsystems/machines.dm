@@ -97,7 +97,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
 
-datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
+/datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	set background=1
 
 	report_progress("Initializing atmos machinery")
@@ -158,7 +158,25 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(!QDELETED(M) && (M.Process(wait) == PROCESS_KILL))
+
+		if(!istype(M)) // Below is a debugging and recovery effort. This should never happen, but has been observed recently.
+			if(!M)
+				continue // Hard delete; unlikely but possible. Soft deletes are handled below and expected.
+			if(M in processing)
+				processing.Remove(M)
+				M.is_processing = null
+				crash_with("[log_info_line(M)] was found illegally queued on SSmachines.")
+				continue
+			else if(resumed)
+				current_run.Cut() // Abandon current run; assuming that we were improperly resumed with the wrong process queue.
+				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on a resumed fire.")
+				process_machinery(0)
+				return
+			else // ??? possibly dequeued by another machine or something ???
+				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on an unresumed fire.")
+				continue
+
+		if(!QDELETED(M) && (M.ProcessAll(wait) == PROCESS_KILL))
 			processing.Remove(M)
 			M.is_processing = null
 		if(MC_TICK_CHECK)

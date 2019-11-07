@@ -176,7 +176,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -276,7 +276,7 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aO" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen{
+/obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 2;
 	volume = 3200
 	},
@@ -284,7 +284,7 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "aP" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen,
+/obj/machinery/atmospherics/unary/tank/hydrogen,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -537,7 +537,6 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bx" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/light/small{
 	dir = 4
@@ -549,6 +548,9 @@
 	icon_state = "alarm0";
 	pixel_x = 24;
 	req_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -595,9 +597,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bD" = (
@@ -609,9 +608,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/wall,
 /area/unishi/engineroom)
 "bE" = (
@@ -637,13 +634,14 @@
 /turf/simulated/wall/r_wall,
 /area/unishi/engineroom)
 "bG" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
+/obj/machinery/computer/air_control{
 	dir = 4;
 	frequency = 2001;
 	input_tag = "unishi_fuel_in";
 	name = "Fuel Supply Control";
 	output_tag = "unishi_fuel_out";
-	sensors = list("n2_sensor" = "Tank")
+	sensor_name = "Tank";
+	sensor_tag = "n2_sensor"
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -682,7 +680,7 @@
 /area/unishi/engineroom)
 "bL" = (
 /obj/machinery/sparker{
-	id = "unishi";
+	id_tag = "unishi";
 	pixel_x = -20
 	},
 /turf/simulated/floor,
@@ -748,7 +746,7 @@
 	dir = 8
 	},
 /obj/machinery/button/ignition{
-	id = "unishi";
+	id_tag = "unishi";
 	pixel_x = -28
 	},
 /turf/simulated/floor,
@@ -844,6 +842,18 @@
 	},
 /turf/space,
 /area/space)
+"FR" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor,
+/area/unishi/engineroom)
+"Ic" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/wall,
+/area/unishi/engineering)
 
 (1,1,1) = {"
 aa
@@ -5968,7 +5978,7 @@ ah
 ah
 ao
 av
-ai
+Ic
 aH
 aT
 bc
@@ -6076,7 +6086,7 @@ aU
 aU
 aU
 aU
-aU
+FR
 bC
 bH
 bQ

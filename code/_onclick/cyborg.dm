@@ -107,7 +107,7 @@
 	A.BorgShiftClick(src)
 
 /mob/living/silicon/robot/CtrlClickOn(var/atom/A)
-	A.BorgCtrlClick(src)
+	return A.BorgCtrlClick(src)
 
 /mob/living/silicon/robot/AltClickOn(var/atom/A)
 	A.BorgAltClick(src)
@@ -125,23 +125,26 @@
 	AIShiftClick()
 
 /atom/proc/BorgCtrlClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
-	CtrlClick(user)
+	return CtrlClick(user)
 
 /obj/machinery/door/airlock/BorgCtrlClick() // Bolts doors. Forwards to AI code.
-	AICtrlClick()
+	return AICtrlClick()
 
 /obj/machinery/power/apc/BorgCtrlClick() // turns off/on APCs. Forwards to AI code.
-	AICtrlClick()
+	return AICtrlClick()
 
 /obj/machinery/turretid/BorgCtrlClick() //turret control on/off. Forwards to AI code.
-	AICtrlClick()
+	return AICtrlClick()
 
 /atom/proc/BorgAltClick(var/mob/living/silicon/robot/user)
 	AltClick(user)
 	return
 
 /obj/machinery/door/airlock/BorgAltClick() // Eletrifies doors. Forwards to AI code.
-	AICtrlAltClick()
+	if (usr.a_intent != I_HELP)
+		AICtrlAltClick()
+	else
+		..()
 
 /obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
 	AIAltClick()
@@ -159,8 +162,10 @@
 */
 /mob/living/silicon/robot/UnarmedAttack(atom/A)
 	A.attack_robot(src)
-/mob/living/silicon/robot/RangedAttack(atom/A)
+
+/mob/living/silicon/robot/RangedAttack(atom/A, var/params)
 	A.attack_robot(src)
+	return TRUE
 
 /atom/proc/attack_robot(mob/user as mob)
 	attack_ai(user)

@@ -8,6 +8,8 @@
 
 #undef RESTRICTED_ROLES
 
+#undef DOCTOR_ROLES
+
 #undef MEDICAL_ROLES
 
 #undef STERILE_ROLES
@@ -21,6 +23,8 @@
 #undef SUPPLY_ROLES
 
 #undef SERVICE_ROLES
+
+#undef EXPLORATION_ROLES
 
 #undef RESEARCH_ROLES
 

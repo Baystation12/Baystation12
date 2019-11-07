@@ -2,7 +2,7 @@
 	MATERIAL DATUMS
 	This data is used by various parts of the game for basic physical properties and behaviors
 	of the metals/materials used for constructing many objects. Each var is commented and should be pretty
-	self-explanatory but the various object types may have their own documentation. ~Z
+	self-explanatory but the various object types may have their own documentation.
 
 	PATHS THAT USE DATUMS
 		turf/simulated/wall
@@ -41,6 +41,7 @@
 	var/display_name                      // Prettier name for display.
 	var/adjective_name
 	var/use_name
+	var/wall_name = "wall"                // Name given to walls of this material
 	var/flags = 0                         // Various status modifiers.
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
@@ -87,7 +88,7 @@
 	var/list/window_options = list()
 
 	// Damage values.
-	var/hardness = 60            // Prob of wall destruction by hulk, used for edge damage in weapons.
+	var/hardness = MATERIAL_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/weight = 20              // Determines blunt damage/throwforce for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
@@ -101,7 +102,7 @@
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
-	var/construction_difficulty = 0
+	var/construction_difficulty = MATERIAL_EASY_DIY
 
 	// Mining behavior.
 	var/alloy_product
@@ -114,6 +115,7 @@
 	var/ore_scan_icon
 	var/ore_icon_overlay
 	var/sale_price
+	var/value = 1
 
 	// Xenoarch behavior.
 	var/list/xarch_ages = list("thousand" = 999, "million" = 999)
@@ -121,12 +123,12 @@
 
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
-	if(used_stack.get_amount() < 1)
+	if(!used_stack.can_use(1))
 		to_chat(user, "<span class='warning'>You need need at least one [used_stack.singular_name] to reinforce [target_stack].</span>")
 		return
 
 	var/needed_sheets = 2 * used_stack.matter_multiplier
-	if(target_stack.get_amount() < needed_sheets)
+	if(!target_stack.can_use(needed_sheets))
 		to_chat(user, "<span class='warning'>You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack].</span>")
 		return
 
@@ -147,7 +149,7 @@
 	if(!wire_product)
 		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
 		return
-	if(used_stack.get_amount() < 5 || target_stack.get_amount() < 1)
+	if(!used_stack.can_use(5) || !target_stack.can_use(1))
 		to_chat(user, "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>")
 		return
 
@@ -187,9 +189,9 @@
 	return hardness //todo
 
 /material/proc/get_attack_cooldown()
-	if(weight < 19)
+	if(weight <= MATERIAL_LIGHT)
 		return FAST_WEAPON_COOLDOWN
-	if(weight > 23)
+	if(weight >= MATERIAL_HEAVY)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 
@@ -215,7 +217,7 @@
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
 /material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
-	place_sheet(target, is_devastated ? 2 : 3)
+	place_sheet(target, is_devastated ? 1 : 2)
 
 // Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target, var/amount = 1)

@@ -70,7 +70,7 @@
 	..()
 
 /obj/item/weapon/mop/advanced
-	desc = "The most advanced tool in a custodian's arsenal, complete with a condenser for self-wetting! Just think of all the viscera you will clean up with this!"
+	desc = "The most advanced tool in a custodian's arsenal, with a cleaner synthesizer to boot! Just think of all the viscera you will clean up with this!"
 	name = "advanced mop"
 	icon_state = "advmop"
 	item_state = "mop"
@@ -79,7 +79,7 @@
 	mopspeed = 20
 	var/refill_enabled = TRUE //Self-refill toggle for when a janitor decides to mop with something other than water.
 	var/refill_rate = 1 //Rate per process() tick mop refills itself
-	var/refill_reagent = /datum/reagent/water //Determins what reagent to use for refilling, just in case someone wanted to make a HOLY MOP OF PURGING
+	var/refill_reagent = /datum/reagent/space_cleaner //Determins what reagent to use for refilling, just in case someone wanted to make a HOLY MOP OF PURGING
 
 /obj/item/weapon/mop/advanced/Initialize()
 	. = ..()
@@ -99,7 +99,7 @@
 		reagents.add_reagent(refill_reagent, refill_rate)
 
 /obj/item/weapon/mop/advanced/examine(mob/user)
-	..()
+	. = ..()
 	to_chat(user, "<span class='notice'>The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>.</span>")
 
 /obj/item/weapon/mop/advanced/Destroy()

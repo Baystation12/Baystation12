@@ -3,6 +3,7 @@
 	//Multikey checks and logging
 	lastKnownIP	= client.address
 	computer_id	= client.computer_id
+	last_ckey = ckey
 	log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 	if(config.log_access)
 		var/is_multikeying = 0
@@ -95,3 +96,8 @@
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
+
+/mob/living/carbon/Login()
+	. = ..()
+	if(internals && internal)
+		internals.icon_state = "internal1"

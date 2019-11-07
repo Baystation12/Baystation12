@@ -18,7 +18,6 @@
 	name = "coat of paint"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "wall_paint_effect"
-	plane = TURF_PLANE
 	layer = TURF_DETAIL_LAYER
 	blend_mode = BLEND_MULTIPLY
 
@@ -60,7 +59,6 @@
 	name = "stripe of paint"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "white"
-	plane = TURF_PLANE
 	layer = TURF_DETAIL_LAYER
 	blend_mode = BLEND_MULTIPLY
 

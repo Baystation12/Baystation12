@@ -16,12 +16,13 @@
 
 	var/on = 0
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	level = 1
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	build_icon_state = "connector"
 
-/obj/machinery/atmospherics/portables_connector/Initialize()
-	initialize_directions = dir
-	. = ..()
+	pipe_class = PIPE_CLASS_UNARY
 
 /obj/machinery/atmospherics/portables_connector/on_update_icon()
 	icon_state = "connector"
@@ -150,5 +151,5 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)

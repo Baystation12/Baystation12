@@ -34,10 +34,14 @@
 	lore_text = "Good hide is hard to come by in certain regions of the galaxy. When they can't come across it, most TSCs will outfit their crews with toolbelts made of synthesized leather."
 	antag_text = "Only amateurs skip grabbing a tool-belt."
 
-/datum/codex_entry/toolbelt/vigil
-	associated_paths = list(/obj/item/weapon/storage/belt/utility/vigil)
+/datum/codex_entry/toolbelt/crystal
+	associated_paths = list(/obj/item/weapon/storage/belt/utility/crystal)
 	lore_text = "While some Vigil units have tools integrated directly into their bodies, less specialized units simply use toolbelts."
 
+/datum/codex_entry/toolbox/crystal
+	associated_paths = list(/obj/item/weapon/storage/toolbox/crystal)
+	lore_text = "The most basic of Vigil units may sometimes use toolboxes like these, which are surprisingly similar in design to ones of human origin. On occasion, some units have been known to harbor a slight preference for these archaic designs over something more streamlined, for whatever reason."
+	
 /datum/codex_entry/cable_painter
 	associated_paths = list(/obj/item/device/cable_painter)
 	mechanics_text = "Use this device to select a preferred cable color. Apply it to a bundle of cables on your person, or use it on installed cabling on the floor to paint it in your chosen color."

@@ -28,7 +28,7 @@
 **************/
 /datum/uplink_item/item/badassery/random_one
 	name = "Random Item"
-	desc = "Buys you a random item for at least 1TC. Careful: No upper price cap!"
+	desc = "Buys you a random item for at least 1 TC. Be careful, this can spend any amount of telecrystals!"
 	item_cost = 1
 
 /datum/uplink_item/item/badassery/random_one/buy(var/obj/item/device/uplink/U, var/mob/user)
@@ -72,7 +72,7 @@
 /datum/uplink_item/item/badassery/surplus/New()
 	..()
 	antag_roles = list(MODE_MERCENARY)
-	desc = "A crate containing [item_worth] telecrystal\s worth of surplus leftovers."
+	desc = "A crate containing [item_worth] telecrystal\s worth of surplus leftovers. If you can find some help to pay for it, you might strike gold."
 
 /datum/uplink_item/item/badassery/surplus/get_goods(var/obj/item/device/uplink/U, var/loc)
 	var/obj/structure/largecrate/C = new(loc)

@@ -60,9 +60,9 @@
 /turf/simulated/open/update_dirt()
 	return 0
 
-/turf/simulated/open/Entered(var/atom/movable/mover)
+/turf/simulated/open/Entered(var/atom/movable/mover, var/atom/oldloc)
 	..()
-	mover.fall()
+	mover.fall(oldloc)
 
 // Called when thrown object lands on this turf.
 /turf/simulated/open/hitby(var/atom/movable/AM, var/speed)
@@ -78,18 +78,23 @@
 
 
 /turf/simulated/open/examine(mob/user, distance, infix, suffix)
-	if(..(user, 2))
+	. = ..()
+	if(distance <= 2)
 		var/depth = 1
 		for(var/T = GetBelow(src); isopenspace(T); T = GetBelow(T))
 			depth += 1
 		to_chat(user, "It is about [depth] level\s deep.")
 
-
+/turf/simulated/open/is_open()
+	return TRUE
 
 /**
 * Update icon and overlays of open space to be that of the turf below, plus any visible objects on that turf.
 */
 /turf/simulated/open/on_update_icon()
+	
+	update_flood_overlay()
+	
 	overlays.Cut()
 	underlays.Cut()
 	var/turf/below = GetBelow(src)
@@ -159,11 +164,10 @@
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/floor/S = C
-			if (S.get_amount() < 1)
+			if (!S.use(1))
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			S.use(1)
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else

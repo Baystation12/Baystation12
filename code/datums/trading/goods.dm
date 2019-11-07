@@ -67,18 +67,12 @@
 				"bribe_accept"      = "Why not! Glad to be here for a few more minutes.",
 				)
 
-	possible_trading_items = list(/obj/item/weapon/computer_hardware/battery_module      = TRADER_SUBTYPES_ONLY,
-								/obj/item/weapon/circuitboard                            = TRADER_SUBTYPES_ONLY,
-								/obj/item/weapon/circuitboard/telecomms                  = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/unary_atmos                = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/arcade                     = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha                      = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/odysseus             = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/honker               = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/durand               = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/gygax                = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/ripley               = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/broken                     = TRADER_BLACKLIST,
+	possible_trading_items = list(/obj/item/weapon/stock_parts/computer/battery_module      = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/stock_parts/circuitboard                            = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/stock_parts/circuitboard/telecomms                  = TRADER_BLACKLIST,
+								/obj/item/weapon/stock_parts/circuitboard/unary_atmos                = TRADER_BLACKLIST,
+								/obj/item/weapon/stock_parts/circuitboard/arcade                     = TRADER_BLACKLIST,
+								/obj/item/weapon/stock_parts/circuitboard/broken                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil                               = TRADER_SUBTYPES_ONLY,
 								/obj/item/stack/cable_coil/cyborg                        = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil/random                        = TRADER_BLACKLIST,
@@ -203,11 +197,11 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/megaphone                 = TRADER_THIS_TYPE,
 								/obj/item/device/paicard                   = TRADER_THIS_TYPE,
 								/obj/item/device/pipe_painter              = TRADER_THIS_TYPE,
-								/obj/item/device/healthanalyzer            = TRADER_THIS_TYPE,
-								/obj/item/device/analyzer                  = TRADER_ALL,
-								/obj/item/device/mass_spectrometer         = TRADER_ALL,
-								/obj/item/device/reagent_scanner           = TRADER_ALL,
-								/obj/item/device/slime_scanner             = TRADER_THIS_TYPE,
+								/obj/item/device/scanner/health            = TRADER_THIS_TYPE,
+								/obj/item/device/scanner/gas                  = TRADER_ALL,
+								/obj/item/device/scanner/spectrometer         = TRADER_ALL,
+								/obj/item/device/scanner/reagent           = TRADER_ALL,
+								/obj/item/device/scanner/xenobio             = TRADER_THIS_TYPE,
 								/obj/item/device/suit_cooling_unit         = TRADER_THIS_TYPE,
 								/obj/item/device/t_scanner                 = TRADER_THIS_TYPE,
 								/obj/item/device/taperecorder              = TRADER_THIS_TYPE,
@@ -252,13 +246,7 @@ Sells devices, odds and ends, and medical stuff
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Robot Store"
 	possible_origins = list("AI for the Straight Guy", "Mechanical Buddies", "Bot Chop Shop", "Omni Consumer Projects")
-	possible_trading_items = list(/obj/item/weapon/secbot_assembly/ed209_assembly = TRADER_THIS_TYPE,
-								/obj/item/weapon/toolbox_tiles                    = TRADER_THIS_TYPE,
-								/obj/item/weapon/toolbox_tiles_sensor             = TRADER_THIS_TYPE,
-								/obj/item/weapon/secbot_assembly                  = TRADER_ALL,
-								/obj/item/weapon/farmbot_arm_assembly             = TRADER_THIS_TYPE,
-								/obj/item/weapon/firstaid_arm_assembly            = TRADER_THIS_TYPE,
-								/obj/item/weapon/bucket_sensor                    = TRADER_THIS_TYPE,
+	possible_trading_items = list(
 								/obj/item/device/bot_kit                          = TRADER_THIS_TYPE,
 								/obj/item/device/paicard                          = TRADER_THIS_TYPE,
 								/obj/item/weapon/aicard                           = TRADER_THIS_TYPE,
@@ -314,7 +302,7 @@ Sells devices, odds and ends, and medical stuff
 	possible_trading_items = list(/mob/living/simple_animal/hostile/carp= TRADER_THIS_TYPE,
 								/obj/item/device/dociler              = TRADER_THIS_TYPE,
 								/obj/item/weapon/beartrap			  = TRADER_THIS_TYPE,
-								/obj/item/device/slime_scanner = TRADER_THIS_TYPE)
+								/obj/item/device/scanner/xenobio = TRADER_THIS_TYPE)
 
 /datum/trader/medical
 	name = "Medical Supplier"

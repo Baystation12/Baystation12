@@ -50,6 +50,8 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 	if(href_list["new"])
 		var/datum/paiCandidate/candidate = locate(href_list["candidate"])
+		if(!istype(candidate))
+			return
 		var/option = href_list["option"]
 		var/t = ""
 

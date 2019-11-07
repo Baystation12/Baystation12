@@ -7,7 +7,7 @@
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
 	var/show_invalid_jobs = 0
-	universal_speak = 1
+	universal_speak = TRUE
 
 	invisibility = 101
 
@@ -28,20 +28,14 @@
 		return // Not ready yet.
 	var/output = list()
 	output += "<div align='center'>"
+	output += "<i>[GLOB.using_map.get_map_info()]</i>"
 	output +="<hr>"
-	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
+	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
 
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
-		else
-			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
+	if(GAME_STATE > RUNLEVEL_LOBBY)
+		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
 
-	else
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
-		output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
-
-	output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
+	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
 
 	if(!IsGuestKey(src.key))
 		establish_db_connection()
@@ -57,13 +51,22 @@
 				break
 
 			if(newpoll)
-				output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
+				output += "<b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b> "
 			else
-				output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
+				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
+
+	output += "<hr>Current character: <b>[client.prefs.real_name]</b>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
+	if(GAME_STATE <= RUNLEVEL_LOBBY)
+		if(ready)
+			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
+		else
+			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
+	else
+		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
 
 	output += "</div>"
 
-	panel = new(src, "Welcome","Welcome", 210, 280, src)
+	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(JOINTEXT(output))
 	panel.open()
@@ -315,7 +318,7 @@
 		return 0
 
 	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
-	equip_custom_items(character)
+	SScustomitems.equip_custom_items(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
 	if(character.mind.assigned_role == "AI")
@@ -475,7 +478,7 @@
 		mind.active = 0 //we wish to transfer the key manually
 		mind.original = new_character
 		if(client.prefs.memory)
-			mind.store_memory(client.prefs.memory)
+			mind.StoreMemory(client.prefs.memory)
 		if(client.prefs.relations.len)
 			for(var/T in client.prefs.relations)
 				var/TT = matchmaker.relation_types[T]
@@ -492,10 +495,6 @@
 		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 		new_character.dna.SetSEState(GLOB.GLASSESBLOCK,1,0)
 		new_character.disabilities |= NEARSIGHTED
-
-	// Give them their cortical stack if we're using them.
-	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack /*&& new_character.should_have_organ(BP_BRAIN)*/)
-		new_character.create_stack()
 
 	// Do the initial caching of the player's body icons.
 	new_character.force_update_limbs()
@@ -565,3 +564,12 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/say(var/message)
 	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
+
+/mob/new_player/verb/next_lobby_track()
+	set name = "Play Different Lobby Track"
+	set category = "OOC"
+
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
+		return
+	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	new_track.play_to(src)

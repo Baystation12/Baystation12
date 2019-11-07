@@ -19,6 +19,14 @@
 	parent_organ = BP_CHEST
 	color = "#0033cc"
 
+/obj/item/organ/internal/eyes/vox
+	eye_icon = 'icons/mob/human_races/species/vox/eyes.dmi'
+	color = "#0033cc"
+
+/obj/item/organ/internal/eyes/vox/armalis
+	eye_icon = 'icons/mob/human_races/species/vox/armalis_eyes.dmi'
+	color = "#0033cc"
+
 /obj/item/organ/internal/stomach/vox
 	name = "gizzard"
 	color = "#0033cc"
@@ -44,8 +52,7 @@
 		MATERIAL_MAPLE =       TRUE,
 		MATERIAL_EBONY =       TRUE,
 		MATERIAL_WALNUT =      TRUE,
-		MATERIAL_COTTON =      TRUE,
-		MATERIAL_LEATHER =     TRUE,
+		MATERIAL_LEATHER_GENERIC =     TRUE,
 		MATERIAL_PLASTIC =     TRUE,
 		MATERIAL_CARDBOARD =   TRUE,
 		MATERIAL_CLOTH =       TRUE,
@@ -67,7 +74,7 @@
 		MATERIAL_TITANIUM =    TRUE,
 		MATERIAL_OSMIUM =      TRUE,
 		MATERIAL_SAND =        TRUE,
-		MATERIAL_GRAPHENE =    TRUE,
+		MATERIAL_GRAPHITE =    TRUE,
 		MATERIAL_PITCHBLENDE = TRUE,
 		MATERIAL_HEMATITE =    TRUE,
 		MATERIAL_QUARTZ =      TRUE,
@@ -78,7 +85,8 @@
 		MATERIAL_POTASH =      TRUE,
 		MATERIAL_BAUXITE =     TRUE,
 		MATERIAL_COPPER =      TRUE,
-		MATERIAL_ALUMINIUM =   TRUE
+		MATERIAL_ALUMINIUM =   TRUE,
+		MATERIAL_RUTILE = 	   TRUE
 	)
 	var/list/stored_matter = list()
 
@@ -91,7 +99,7 @@
 			for(var/datum/reagent/R in ingested.reagent_list)
 				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[R.type]
 				if(inedible_nutriment_amount > 0)
-					owner.nutrition += inedible_nutriment_amount
+					owner.adjust_nutrition(inedible_nutriment_amount)
 
 		// Do we have any objects to digest?
 		var/list/check_materials
@@ -112,7 +120,7 @@
 
 				// Process it.
 				if(can_digest_matter[mat])
-					owner.nutrition += max(1, Floor(digested/100))
+					owner.adjust_nutrition(max(1, Floor(digested/100)))
 					updated_stacks = TRUE
 				else if(can_process_matter[mat])
 					LAZYDISTINCTADD(check_materials, mat)
@@ -148,10 +156,6 @@
 		if(updated_stacks && prob(5))
 			to_chat(owner, SPAN_NOTICE("Your [name] churns as it digests some material into a usable form."))
 
-/obj/item/organ/internal/stack/vox
-	name = "cortical stack"
-	invasive = 1
-
 /obj/item/organ/internal/hindtongue
 	name = "hindtongue"
 	desc = "Some kind of severed bird tongue."
@@ -159,10 +163,101 @@
 	icon_state = "hindtongue"
 	organ_tag = BP_HINDTONGUE
 
-/obj/item/organ/internal/stack/vox/removed()
+/obj/item/organ/internal/voxstack
+	name = "cortical stack"
+	parent_organ = BP_HEAD
+	icon_state = "cortical-stack"
+	organ_tag = BP_STACK
+	status = ORGAN_ROBOTIC
+	vital = 1
+	origin_tech = list(TECH_BIO = 4, TECH_MATERIAL = 4, TECH_MAGNET = 2, TECH_DATA = 3)
+	relative_size = 10
+	var/invasive = 1
+
+	var/ownerckey
+	var/default_language
+	var/list/languages = list()
+	var/datum/mind/backup
+	var/prompting = FALSE // Are we waiting for a user prompt?
+
+/obj/item/organ/internal/voxstack/New()
+	..()
+	do_backup()
+	robotize()
+
+/obj/item/organ/internal/voxstack/examine(mob/user)
+	. = ..()
+
+	var/user_vox = isspecies(user, SPECIES_VOX) || isspecies(user, SPECIES_VOX_ARMALIS)
+	if (istype(backup))
+		var/owner_viable = find_dead_player(ownerckey, TRUE)
+		if (user_vox)
+			to_chat(user, SPAN_NOTICE("The integrity light on [src] blinks [owner_viable ? "rapidly. It can be implanted." : "slowly. It is dormant."]"))
+		else
+			to_chat(user, SPAN_NOTICE("A light on [src] blinks [owner_viable ? "rapidly" : "slowly"]."))
+	else if (user_vox)
+		to_chat(user, SPAN_NOTICE("The integrity light on [src] is off. It is empty and lifeless."))
+
+/obj/item/organ/internal/voxstack/emp_act()
+	return
+
+/obj/item/organ/internal/voxstack/getToxLoss()
+	return 0
+
+/obj/item/organ/internal/voxstack/proc/do_backup()
+	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
+		languages = owner.languages.Copy()
+		backup = owner.mind
+		default_language = owner.default_language
+		if(owner.ckey)
+			ownerckey = owner.ckey
+
+/obj/item/organ/internal/voxstack/proc/backup_inviable()
+	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
+
+/obj/item/organ/internal/voxstack/replaced()
+	if(!..()) return 0
+	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+		return 0
+	if(owner && !backup_inviable())
+		var/current_owner = owner
+		prompting = TRUE
+		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
+		prompting = FALSE
+		if(src && response == "Yes" && owner == current_owner)
+			overwrite()
+	sleep(-1)
+	do_backup()
+
+	return 1
+
+/obj/item/organ/internal/voxstack/removed()
 	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
 	owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))
 	for(var/obj/item/organ/internal/O in head.contents)
 		O.take_internal_damage(rand(30,70))
+	do_backup()
 	..()
+
+/obj/item/organ/internal/voxstack/proc/overwrite()
+	if(owner.mind && owner.ckey) //Someone is already in this body!
+		if(owner.mind == backup) // Oh, it's the same mind in the backup. Someone must've spammed the 'Start Procedure' button in a panic.
+			return
+		owner.visible_message(SPAN_DANGER("\The [owner] spasms violently!"))
+		if(prob(66))
+			to_chat(owner, SPAN_DANGER("You fight off the invading tendrils of another mind, holding onto your own body!"))
+			return
+		owner.ghostize()
+	backup.active = 1
+	backup.transfer_to(owner)
+	if (default_language)
+		owner.default_language = default_language
+	owner.languages = languages.Copy()
+	to_chat(owner, SPAN_NOTICE("Consciousness slowly creeps over you as your new body awakens."))
+
+/datum/species/vox/handle_death(var/mob/living/carbon/human/H)
+	..()
+	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK)
+	if (stack)
+		stack.do_backup()

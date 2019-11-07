@@ -59,7 +59,7 @@
 
 /mob/living/silicon/robot/proc/power_down()
 	if (has_power)
-		to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
+		visible_message("[src] beeps stridently as it begins to run on emergency backup power!", SPAN_WARNING("You beep stridently as you begin to run on emergency backup power!"))
 		has_power = 0
 		set_stat(UNCONSCIOUS)
 	if(lights_on) // Light is on but there is no power!
@@ -135,7 +135,7 @@
 		src.druggy = max(0, src.druggy)
 
 	//update the state of modules and components here
-	if (src.stat != 0)
+	if (src.stat != CONSCIOUS)
 		uneq_all()
 
 	if(silicon_radio)
@@ -144,7 +144,7 @@
 		else
 			silicon_radio.on = 1
 
-	if(is_component_functioning("camera"))
+	if(isnull(components["camera"]) || is_component_functioning("camera"))
 		src.blinded = 0
 	else
 		src.blinded = 1

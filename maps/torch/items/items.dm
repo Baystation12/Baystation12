@@ -5,8 +5,8 @@ Random item spawning
 /obj/random/solgov
 	name = "random solgov equipment"
 	desc = "This is a random piece of solgov equipment or clothing."
-	icon = 'icons/obj/clothing/obj_head.dmi'
-	icon_state = "helmet_sol"
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	icon_state = "solsoft"
 
 /obj/random/solgov/spawn_choices()
 	return list(/obj/item/clothing/head/solgov/utility/fleet = 4,
@@ -104,7 +104,6 @@ Unique items
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = 4
 	startswith = list(
-			/obj/item/weapon/gun/projectile/pistol/holdout/liaison,
 			/obj/item/weapon/reagent_containers/pill/tox,
 			/obj/item/weapon/paper/liason_note
 	)

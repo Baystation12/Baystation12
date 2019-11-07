@@ -32,7 +32,7 @@
 	return list(
 		/obj/item/clothing/head/soft/green,
 		/obj/item/weapon/storage/plants,
-		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/device/scanner/plant,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
 		/obj/item/weapon/wirecutters/clippers,

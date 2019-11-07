@@ -2,6 +2,7 @@
 #define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
 #define ceil(x) (-round(-(x)))
 #define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
+#define MULT_BY_RANDOM_COEF(VAR,LO,HI) VAR =  round((VAR * rand(LO * 100, HI * 100))/100, 0.1)
 
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
@@ -130,3 +131,6 @@
 
 /proc/RoundUpToPowerOfTwo(var/val)
 	return 2 ** -round(-log(2,val))
+
+/matrix/proc/get_angle()
+	return Atan2(b,a)

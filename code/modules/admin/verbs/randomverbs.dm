@@ -42,26 +42,6 @@
 		log_and_message_admins("sent [key_name_admin(M)] to the prison station.")
 		SSstatistics.add_field_details("admin_verb","PRISON") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_subtle_message(mob/M as mob in SSmobs.mob_list)
-	set category = "Special Verbs"
-	set name = "Subtle Message"
-
-	if(!ismob(M))	return
-	if (!holder)
-		to_chat(src, "Only administrators may use this command.")
-		return
-
-	var/msg = sanitize(input("Message:", text("Subtle PM to [M.key]")) as text)
-
-	if (!msg)
-		return
-	if(usr)
-		if (usr.client)
-			if(usr.client.holder)
-				to_chat(M, "<b>You hear a voice in your head... <i>[msg]</i></b>")
-	log_and_message_staff(" - SubtleMessage -> [key_name_admin(M)] : [msg]")
-	SSstatistics.add_field_details("admin_verb","SMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /client/proc/cmd_check_new_players()	//Allows admins to determine who the newer players are.
 	set category = "Admin"
 	set name = "Check new Players"
@@ -102,14 +82,74 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text)
-
-	if (!msg)
+	var/result = cmd_admin_narrate_helper(src)
+	if (!result)
 		return
-	to_world(msg)
 
-	log_and_message_admins(" - GlobalNarrate: [msg]")
+	to_world(result[1])
+
+	log_and_message_admins(" - GlobalNarrate [result[2]]/[result[3]]: [result[4]]")
 	SSstatistics.add_field_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
+/proc/cmd_admin_narrate_helper(var/user, var/style, var/size, var/message)
+	if (!style)
+		style = input("Pick a text style:", "Text Style") as null|anything in list(
+			"default",
+			"italic",
+			"bold",
+			"subtle",
+			"notice",
+			"warning",
+			"danger",
+			"occult",
+			"unsafe"
+		)
+	if (!style)
+		return
+
+	if (style == "unsafe")
+		if (!config.allow_unsafe_narrates)
+			to_chat(user, SPAN_WARNING("Unsafe narrates are not permitted by the server configuration."))
+			return
+
+	if (style != "unsafe")
+		if (!size)
+			size = input("Pick a text size:", "Text Size") as null|anything in list(
+				"normal",
+				"small",
+				"large",
+				"huge",
+				"giant"
+			)
+		if (!size)
+			return
+
+	if (!message)
+		message = input("Message:", text("Enter the text you wish to appear to your target:")) as null|text
+		if (style != "unsafe")
+			message = sanitize(message)
+	if (!message)
+		return
+
+	var/result = message
+	if (style != "unsafe")
+		switch (style)
+			if ("italic")  result = "<i>[result]</i>"
+			if ("bold")    result = "<b>[result]</b>"
+			if ("subtle")  result = "<b>You hear a voice in your head... [result]</b>"
+			if ("notice")  result = SPAN_NOTICE(result)
+			if ("warning") result = SPAN_WARNING(result)
+			if ("danger")  result = SPAN_DANGER(result)
+			if ("occult")  result = SPAN_OCCULT(result)
+		switch (size)
+			if ("small")  result = FONT_SMALL(result)
+			if ("large")  result = FONT_LARGE(result)
+			if ("huge")   result = FONT_HUGE(result)
+			if ("giant")  result = FONT_GIANT(result)
+
+	return list(result, style, size, message)
+
 
 // Targetted narrate: will narrate to one specific mob
 /client/proc/cmd_admin_direct_narrate(var/mob/M)
@@ -117,22 +157,27 @@
 	set name = "Direct Narrate"
 	set desc = "Narrate to a specific mob."
 
-	if(!check_rights(R_ADMIN))
+	if (!check_rights(R_INVESTIGATE))
 		return
 
-	if(!M)
+	if (!M)
 		M = input("Direct narrate to who?", "Active Players") as null|anything in get_mob_with_client_list()
-
-	if(!M)
+	if (!M)
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+	var/style
+	var/size
 
-	if( !msg )
+	if (!check_rights(R_ADMIN, FALSE))
+		style = "subtle"
+		size = "normal"
+
+	var/result = cmd_admin_narrate_helper(src, style, size)
+	if (!result)
 		return
 
-	to_chat(M, msg)
-	log_and_message_admins(" - DirectNarrate to ([M.name]/[M.key]): [msg]")
+	to_chat(M, result[1])
+	log_and_message_admins(" - DirectNarrate [result[2]]/[result[3]] to ([M.name]/[M.key]): [result[4]]")
 	SSstatistics.add_field_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 // Local narrate, narrates to everyone who can see where you are regardless of whether they are blind or deaf.
@@ -144,16 +189,15 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
-
-	if( !msg )
+	var/result = cmd_admin_narrate_helper(src)
+	if (!result)
 		return
 
 	var/list/listening_hosts = hosts_in_view_range(usr)
 
 	for(var/listener in listening_hosts)
-		to_chat(listener, msg)
-	log_and_message_admins(" - LocalNarrate: [msg]")
+		to_chat(listener, result[1])
+	log_and_message_admins(" - LocalNarrate [result[2]]/[result[3]]: [result[4]]")
 
 // Visible narrate, it's as if it's a visible message
 /client/proc/cmd_admin_visible_narrate(var/atom/A)
@@ -170,13 +214,12 @@
 		to_chat(src, "You must be in control of a mob to use this.")
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
-
-	if( !msg )
+	var/result = cmd_admin_narrate_helper(src)
+	if (!result)
 		return
 
-	M.visible_message(msg, narrate = TRUE)
-	log_and_message_admins(" - VisibleNarrate on [A]: [msg]")
+	M.visible_message(result[1], result[1], narrate = TRUE)
+	log_and_message_admins(" - VisibleNarrate [result[2]]/[result[3]] on [A]: [result[4]]")
 
 // Visible narrate, it's as if it's a audible message
 /client/proc/cmd_admin_audible_narrate(var/atom/A)
@@ -194,13 +237,12 @@
 		to_chat(src, "You must be in control of a mob to use this.")
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
-
-	if( !msg )
+	var/result = cmd_admin_narrate_helper(src)
+	if (!result)
 		return
 
-	M.audible_message(msg, narrate = TRUE)
-	log_and_message_admins(" - AudibleNarrate on [A]: [msg]")
+	M.audible_message(result[1], result[1], narrate = TRUE)
+	log_and_message_admins(" - AudibleNarrate [result[2]]/[result[3]] on [A]: [result[4]]")
 
 /client/proc/cmd_admin_godmode(mob/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
@@ -574,7 +616,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		log_admin("[key_name(usr)] deleted [O] at ([O.x],[O.y],[O.z])")
 		message_admins("[key_name_admin(usr)] deleted [O] at ([O.x],[O.y],[O.z])", 1)
 		SSstatistics.add_field_details("admin_verb","DEL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		qdel(O)
+
+		// turfs are special snowflakes that'll explode if qdel'd
+		if (isturf(O))
+			var/turf/T = O
+			T.ChangeTurf(world.turf)
+		else
+			qdel(O)
 
 /client/proc/cmd_admin_list_open_jobs()
 	set category = "Admin"

@@ -3,7 +3,6 @@
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	name = "magboots"
 	icon_state = "magboots0"
-	can_hold_knife = 1
 	species_restricted = null
 	force = 3
 	overshoes = 1
@@ -85,7 +84,7 @@
 	wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	var/state = "disabled"
 	if(item_flags & ITEM_FLAG_NOSLIP)
 		state = "enabled"

@@ -27,9 +27,11 @@
 
 	..()
 
-/obj/structure/reagent_dispensers/examine(mob/user)
-	if(!..(user, 2))
+/obj/structure/reagent_dispensers/examine(mob/user, distance)
+	. = ..()
+	if(distance > 2)
 		return
+
 	to_chat(user, "<span class='notice'>It contains:</span>")
 	if(reagents && reagents.reagent_list.len)
 		for(var/datum/reagent/R in reagents.reagent_list)
@@ -88,7 +90,7 @@
 	possible_transfer_amounts = "10;25;50;100"
 	initial_capacity = 50000
 	initial_reagent_types = list(/datum/reagent/water = 1)
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/watertank/proc/drain_water()
 	if(reagents.total_volume <= 0)
@@ -118,7 +120,15 @@
 		to_chat(user, "<span class='warning'>Someone has wrenched open its tap - it's spilling everywhere!</span>")
 
 /obj/structure/reagent_dispensers/watertank/attackby(obj/item/weapon/W, mob/user)
+
 	src.add_fingerprint(user)
+
+	if((istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm)) && user.unEquip(W))
+		to_chat(user, "You add \the [W] arm to \the [src].")
+		qdel(W)
+		new /obj/item/weapon/farmbot_arm_assembly(loc, src)
+		return
+
 	if(isWrench(W))
 		modded = !modded
 		user.visible_message("<span class='notice'>\The [user] wrenches \the [src]'s tap [modded ? "open" : "shut"].</span>", \
@@ -272,6 +282,24 @@
 	anchored = 1
 	initial_capacity = 500
 	initial_reagent_types = list(/datum/reagent/water = 1)
+	var/cups = 12
+	var/cup_type = /obj/item/weapon/reagent_containers/food/drinks/sillycup
+
+/obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
+	if(cups > 0)
+		var/visible_messages = DispenserMessages(user)
+		visible_message(visible_messages[1], visible_messages[2])
+		var/cup = new cup_type(loc)
+		user.put_in_active_hand(cup)
+		cups--
+	else
+		to_chat(user, RejectionMessage(user))
+
+/obj/structure/reagent_dispensers/water_cooler/proc/DispenserMessages(var/mob/user)
+	return list("\The [user] grabs a paper cup from \the [src].", "You grab a paper cup from \the [src]'s cup compartment.")
+
+/obj/structure/reagent_dispensers/water_cooler/proc/RejectionMessage(var/mob/user)
+	return "The [src]'s cup dispenser is empty."
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W,/obj/item/weapon/wrench))
@@ -287,6 +315,7 @@
 			anchored = !anchored
 		return
 	else
+		flick("[icon_state]-vend", src)
 		return ..()
 
 /obj/structure/reagent_dispensers/beerkeg

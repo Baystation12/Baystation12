@@ -1,6 +1,6 @@
 /mob/living/carbon/slime
 	name = "baby slime"
-	icon = 'icons/mob/slimes.dmi'
+	icon = 'icons/mob/simple_animal/slimes.dmi'
 	icon_state = "grey baby slime"
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
@@ -18,6 +18,13 @@
 	// canstun and canweaken don't affect slimes because they ignore stun and weakened variables
 	// for the sake of cleanliness, though, here they are.
 	status_flags = CANPARALYSE|CANPUSH
+
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
 
 	var/toxloss = 0
 	var/is_adult = 0
@@ -311,10 +318,12 @@
 	return 0
 
 /mob/living/carbon/slime/proc/gain_nutrition(var/amount)
-	nutrition += amount
+	adjust_nutrition(amount)
 	if(prob(amount * 2)) // Gain around one level per 50 nutrition
 		powerlevel++
 		if(powerlevel > 10)
 			powerlevel = 10
 			adjustToxLoss(-10)
-	nutrition = min(nutrition, get_max_nutrition())
+
+/mob/living/carbon/slime/adjust_nutrition(var/amt)
+	nutrition = Clamp(nutrition + amt, 0, get_max_nutrition())

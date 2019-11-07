@@ -7,7 +7,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 20
 	attack_cooldown = 21
-	melee_accuracy_bonus = -20
+	melee_accuracy_bonus = -15
 	throwforce = 10
 	throw_speed = 1
 	throw_range = 7
@@ -20,7 +20,13 @@
 
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
-	startswith = list(/obj/item/weapon/crowbar/red, /obj/item/weapon/extinguisher/mini, /obj/item/device/radio)
+	startswith = list(
+		/obj/item/weapon/crowbar/red,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/device/radio,
+		/obj/item/weapon/weldingtool/mini,
+		/obj/item/weapon/welder_tank/mini
+	)
 
 /obj/item/weapon/storage/toolbox/emergency/Initialize()
 	. = ..()
@@ -33,7 +39,7 @@
 	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "blue"
 	item_state = "toolbox_blue"
-	startswith = list(/obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/device/analyzer, /obj/item/weapon/wirecutters)
+	startswith = list(/obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/device/scanner/gas, /obj/item/weapon/wirecutters)
 
 /obj/item/weapon/storage/toolbox/electrical
 	name = "electrical toolbox"
@@ -56,6 +62,6 @@
 	desc = "A toolbox in black, with stylish red trim. This one feels particularly heavy, yet balanced."
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
-	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
+	origin_tech = list(TECH_COMBAT = 1, TECH_ESOTERIC = 1)
 	attack_cooldown = 10
 	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/weapon/wirecutters, /obj/item/device/multitool)

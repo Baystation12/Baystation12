@@ -1,7 +1,7 @@
 /mob/living/carbon/human/gib()
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
-		if(istype(loc,/turf))
+		if(!QDELETED(I) && isturf(loc))
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 	for(var/obj/item/organ/external/E in src.organs)
@@ -11,7 +11,8 @@
 
 	for(var/obj/item/I in src)
 		drop_from_inventory(I)
-		I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)), rand(1,3), round(30/I.w_class))
+		if(!QDELETED(I))
+			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)), rand(1,3), round(30/I.w_class))
 
 	..(species.gibbed_anim)
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
@@ -29,12 +30,7 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
-
-	//backs up lace if available.
-	var/obj/item/organ/internal/stack/s = get_organ(BP_STACK)
-	if(s)
-		s.do_backup()
-
+	
 	//Handle species-specific deaths.
 	species.handle_death(src)
 

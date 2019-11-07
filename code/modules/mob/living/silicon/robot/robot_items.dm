@@ -37,8 +37,7 @@
 						M.death()
 					if(istype(I,/obj/item/stack/material))//Only deconstructs one sheet at a time instead of the entire stack
 						var/obj/item/stack/material/S = I
-						if(S.get_amount() > 1)
-							S.use(1)
+						if(S.use(1))
 							loaded_item = S
 						else
 							qdel(S)
@@ -389,9 +388,8 @@
 	max_walls = 10
 	max_doors = 5
 
-/obj/item/weapon/inflatable_dispenser/examine(var/mob/user)
-	if(!..(user))
-		return
+/obj/item/weapon/inflatable_dispenser/examine(mob/user)
+	. = ..()
 	to_chat(user, "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
 	to_chat(user, "It is set to deploy [mode ? "doors" : "walls"]")
 
@@ -515,3 +513,80 @@
 		O.attack_hand(user)
 		return
 	. = ..()
+
+/obj/item/bioreactor
+	name = "bioreactor"
+	desc = "An integrated power generator that runs on most kinds of biomass."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "portgen0"
+
+	var/base_power_generation = 75 KILOWATTS
+	var/max_fuel_items = 5
+	var/list/fuel_types = list(
+		/obj/item/weapon/reagent_containers/food/snacks/meat = 2,
+		/obj/item/weapon/reagent_containers/food/snacks/fish = 1.5
+	)
+
+/obj/item/bioreactor/attack_self(var/mob/user)
+	if(contents.len >= 1)
+		var/obj/item/removing = contents[1]
+		user.put_in_hands(removing)
+		to_chat(user, SPAN_NOTICE("You remove \the [removing] from \the [src]."))
+	else
+		to_chat(user, SPAN_WARNING("There is nothing loaded into \the [src]."))
+
+/obj/item/bioreactor/afterattack(var/atom/movable/target, var/mob/user, var/proximity_flag, var/click_parameters)
+	if(!proximity_flag || !istype(target))
+		return
+
+	var/is_fuel = istype(target, /obj/item/weapon/reagent_containers/food/snacks/grown)
+	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
+
+	if(!is_fuel)
+		to_chat(user, SPAN_WARNING("\The [target] cannot be used as fuel by \the [src]."))
+		return
+
+	if(contents.len >= max_fuel_items)
+		to_chat(user, SPAN_WARNING("\The [src] can fit no more fuel inside."))
+		return
+	target.forceMove(src)
+	to_chat(user, SPAN_NOTICE("You load \the [target] into \the [src]."))
+
+/obj/item/bioreactor/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/item/bioreactor/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/bioreactor/Process()
+	var/mob/living/silicon/robot/R = loc
+	if(!istype(R) || !R.cell || R.cell.fully_charged() || !contents.len)
+		return
+
+	var/generating_power
+	var/using_item
+
+	for(var/thing in contents)
+		var/atom/A = thing
+		if(istype(A, /obj/item/weapon/reagent_containers/food/snacks/grown))
+			generating_power = base_power_generation
+			using_item = A
+		else 
+			for(var/fuel_type in fuel_types)
+				if(istype(A, fuel_type))
+					generating_power = fuel_types[fuel_type] * base_power_generation
+					using_item = A
+					break
+		if(using_item)
+			break
+
+	if(istype(using_item, /obj/item/stack))
+		var/obj/item/stack/stack = using_item
+		stack.use(1)
+	else if(using_item)
+		qdel(using_item)
+
+	if(generating_power)
+		R.cell.give(generating_power * CELLRATE)

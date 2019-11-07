@@ -53,6 +53,7 @@
 		/obj/item/clothing/under/chameleon,
 		/obj/item/clothing/suit/chameleon,
 		/obj/item/clothing/shoes/chameleon,
+		/obj/item/clothing/head/chameleon,
 		/obj/item/clothing/mask/chameleon,
 		/obj/item/weapon/storage/box/syndie_kit/chameleon,
 		/obj/item/weapon/gun/energy/chameleon,
@@ -62,7 +63,10 @@
 	startswith = list(
 		/obj/item/clothing/gloves/chameleon,
 		/obj/item/clothing/glasses/chameleon,
-		/obj/item/clothing/head/chameleon,
+		/obj/item/device/radio/headset/chameleon,
+		/obj/item/clothing/accessory/chameleon,
+		/obj/item/clothing/accessory/chameleon,
+		/obj/item/clothing/accessory/chameleon
 		)
 
 // Clerical uplink kit
@@ -115,11 +119,11 @@
 	..()
 	var/obj/item/weapon/storage/fancy/cigarettes/pack
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)

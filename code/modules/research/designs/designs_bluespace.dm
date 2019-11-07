@@ -38,10 +38,19 @@
 	sort_string = "VAEAA"
 
 /datum/design/item/bluespace/bag_holding
-	name = "Bag of Holding"
+	name = "bag of holding"
 	desc = "Using localized pockets of bluespace this bag prototype offers incredible storage capacity with the contents weighting nothing. It's a shame the bag itself is pretty heavy."
 	id = "bag_holding"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
 	materials = list(MATERIAL_GOLD = 3000, MATERIAL_DIAMOND = 1500, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 250)
 	build_path = /obj/item/weapon/storage/backpack/holding
 	sort_string = "VAFAA"
+
+/datum/design/item/dufflebag_holding
+	name = "dufflebag of holding"
+	desc = "A variation of the popular Bag of Holding, the dufflebag of holding is, functionally, identical to the bag of holding, but comes in an easier to carry form."
+	id = "dufflebag_holding"
+	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
+	materials = list(MATERIAL_GOLD = 3000, MATERIAL_DIAMOND = 1500, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 250)
+	build_path = /obj/item/weapon/storage/backpack/holding/duffle
+	sort_string = "VAFAB"

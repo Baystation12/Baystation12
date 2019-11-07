@@ -17,7 +17,10 @@
 // Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
 /datum/proc/Destroy(force=FALSE)
 	tag = null
+	weakref = null // Clear this reference to ensure it's kept for as brief duration as possible.
+
 	SSnano && SSnano.close_uis(src)
+
 	var/list/timers = active_timers
 	active_timers = null
 	for(var/thing in timers)
@@ -25,6 +28,21 @@
 		if (timer.spent)
 			continue
 		qdel(timer)
+
+	if(extensions)
+		for(var/expansion_key in extensions)
+			var/list/extension = extensions[expansion_key]
+			if(islist(extension))
+				extension.Cut()
+			else
+				qdel(extension)
+		extensions = null
+
+	GLOB.destroyed_event && GLOB.destroyed_event.raise_event(src)
+
+	if (!isturf(src))	// Not great, but the 'correct' way to do it would add overhead for little benefit.
+		cleanup_events(src)
+
 	return QDEL_HINT_QUEUE
 
 /datum/proc/Process()

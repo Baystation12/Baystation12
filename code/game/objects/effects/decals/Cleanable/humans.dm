@@ -12,7 +12,7 @@ var/global/list/image/splatter_cache=list()
 	gender = PLURAL
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "mfloor1"
-	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
+	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7", "dir_splatter_1", "dir_splatter_2")
 	blood_DNA = list()
 	generic_filth = TRUE
 	persistent = TRUE
@@ -197,7 +197,7 @@ var/global/list/image/splatter_cache=list()
 		icon_state = "writing1"
 
 /obj/effect/decal/cleanable/blood/writing/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	to_chat(user, "It reads: <font color='[basecolor]'>\"[message]\"</font>")
 
 /obj/effect/decal/cleanable/blood/gibs

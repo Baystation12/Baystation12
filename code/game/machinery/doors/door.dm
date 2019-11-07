@@ -10,6 +10,7 @@
 	opacity = 1
 	density = 1
 	layer = CLOSED_DOOR_LAYER
+	interact_offline = TRUE
 
 	var/open_layer = OPEN_DOOR_LAYER
 	var/closed_layer = CLOSED_DOOR_LAYER
@@ -27,6 +28,7 @@
 	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
+	var/pry_mod = 1 //difficulty scaling for simple animal door prying
 	var/obj/item/stack/material/repairing
 	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
 	var/close_door_at = 0 //When to automatically close the door, if possible
@@ -38,6 +40,9 @@
 	//Multi-tile doors
 	dir = SOUTH
 	var/width = 1
+
+	//Used for intercepting clicks on our turf. Set 0 to disable click interception
+	var/turf_hand_priority = 3
 
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
@@ -71,6 +76,9 @@
 		else
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
+
+	if (turf_hand_priority)
+		set_extension(src, /datum/extension/turf_hand, /datum/extension/turf_hand, turf_hand_priority)
 
 	health = maxhealth
 	update_connections(1)
@@ -133,14 +141,6 @@
 				open()
 		return
 
-	if(istype(AM, /obj/mecha))
-		var/obj/mecha/mecha = AM
-		if(density)
-			if(mecha.occupant && (src.allowed(mecha.occupant) || src.check_access_list(mecha.operation_req_access)))
-				open()
-			else
-				do_animate("deny")
-		return
 	if(istype(AM, /obj/structure/bed/chair/wheelchair))
 		var/obj/structure/bed/chair/wheelchair/wheel = AM
 		if(density)
@@ -208,16 +208,10 @@
 	take_damage(tforce)
 	return
 
-/obj/machinery/door/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/door/attack_hand(mob/user as mob)
-	return src.attackby(user, user)
-
-/obj/machinery/door/attack_tk(mob/user as mob)
-	if(requiresID() && !allowed(null))
-		return
-	..()
+// This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
+/obj/machinery/door/interface_interact(user)
+	if(CanInteract(user, DefaultTopicState()))
+		return attackby(user, user)
 
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
@@ -458,6 +452,12 @@
 		qdel(fire)
 	return
 
+/obj/machinery/door/proc/toggle(forced = 0)
+	if(density)
+		open(forced)
+	else
+		close(forced)
+
 /obj/machinery/door/proc/requiresID()
 	return 1
 
@@ -521,7 +521,7 @@
 				W.update_connections(1)
 				W.update_icon()
 
-		else if( istype(T, /turf/simulated/shuttle/wall) ||  istype(T, /turf/unsimulated/wall))
+		else if( istype(T, /turf/simulated/shuttle/wall) ||	istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
 			for(var/obj/O in T)
@@ -560,10 +560,27 @@
 	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
 	fore = fore || aft
 	aft = aft || fore
-	
+
 	if (!fore && !aft)
 		req_access = list()
 	else if (fore.secure || aft.secure)
 		req_access = req_access_union(fore, aft)
 	else
 		req_access = req_access_diff(fore, aft)
+
+/obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
+	if(!requiresID() || allowed(null))
+		toggle()
+	return TRUE
+
+// Public access
+
+/decl/public_access/public_method/open_door
+	name = "open door"
+	desc = "Opens the door if possible."
+	call_proc = /obj/machinery/door/proc/open
+
+/decl/public_access/public_method/toggle_door
+	name = "toggle door"
+	desc = "Toggles whether the door is open or not, if possible."
+	call_proc = /obj/machinery/door/proc/toggle

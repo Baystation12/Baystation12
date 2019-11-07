@@ -16,10 +16,12 @@
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#c80000"
+	scannable = 1
 	taste_description = "iron"
 	taste_mult = 1.3
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
+	value = 2
 
 	chilling_products = list(/datum/reagent/coagulated_blood)
 	chilling_point = 249
@@ -111,6 +113,7 @@
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#0050f0"
+	value = 6
 
 /datum/reagent/antibodies/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(src.data)
@@ -121,9 +124,10 @@
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /datum/reagent/water
 	name = "Water"
-	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
+	description = "A ubiquitous chemical substance composed of hydrogen and oxygen."
 	reagent_state = LIQUID
 	color = "#0064c877"
+	scannable = 1
 	metabolism = REM * 10
 	taste_description = "water"
 	glass_name = "water"
@@ -132,6 +136,7 @@
 	chilling_point = T0C
 	heating_products = list(/datum/reagent/water/boiling)
 	heating_point = T100C
+	value = 0
 
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
@@ -142,6 +147,9 @@
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(2 * removed)
+
+/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	M.adjust_hydration(removed * 10)
 
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -216,6 +224,7 @@
 	reagent_state = SOLID
 	color = "#619494"
 	adj_temp = -5
+	hydration = 10
 
 	glass_name = "ice"
 	glass_desc = "Generally, you're supposed to put something else in there too..."
@@ -236,6 +245,7 @@
 
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
+	value = 6.8
 
 /datum/reagent/fuel/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
@@ -253,6 +263,10 @@
 	if(volume <= 50)
 		return
 	var/turf/T = get_turf(holder)
+	var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
+	var/gas_moles = 3 * volume
+	products.adjust_multi(GAS_NO, 0.1 * gas_moles, GAS_NO2, 0.1 * gas_moles, GAS_NITROGEN, 0.6 * gas_moles, GAS_HYDROGEN, 0.02 * gas_moles)
+	T.assume_air(products)
 	if(volume > 500)
 		explosion(T,1,2,4)
 	else if(volume > 100)

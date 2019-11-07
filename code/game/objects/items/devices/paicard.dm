@@ -224,9 +224,14 @@
 	onclose(user, "paicard")
 	return
 
-/obj/item/device/paicard/Topic(href, href_list)
+/obj/item/device/paicard/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	. = ..()
+	// possible NRE in Topic
+	if(href_list && (href_list["setdna"] || href_list["setlaws"] || href_list["wires"]) && !istype(pai))
+		return FALSE
 
-	if(!usr || usr.stat)
+/obj/item/device/paicard/Topic(href, href_list)
+	if ((. = ..()))
 		return
 
 	if(href_list["setdna"])

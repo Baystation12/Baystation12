@@ -20,6 +20,11 @@
 	description = "An abandoned supply base."
 	suffixes = list("lost_supply_base/lost_supply_base.dmm")
 	cost = 1
+	generate_mining_by_z = 1
+	area_usage_test_exempted_root_areas = list(/area/lost_supply_base)
+	apc_test_exempt_areas = list(
+		/area/lost_supply_base/solar = NO_SCRUBBER
+	)
 
 /obj/effect/shuttle_landmark/nav_lost_supply_base/nav1
 	name = "Abandoned Supply Base Navpoint #1"

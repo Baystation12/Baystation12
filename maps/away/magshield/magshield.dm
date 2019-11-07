@@ -20,6 +20,7 @@
 	description = "It's an orbital shield station."
 	suffixes = list("magshield/magshield.dmm")
 	cost = 1
+	area_usage_test_exempted_root_areas = list(/area/magshield)
 
 /obj/effect/shuttle_landmark/nav_magshield/nav1
 	name = "Orbital Station Navpoint #1"

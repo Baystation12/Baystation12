@@ -12,9 +12,11 @@
 
 	flash_mod =     0.9
 	oxy_mod =       1.1
+	breath_pressure = 18
 	radiation_mod = 0.5
 	brute_mod =     0.85
 	slowdown =      1
+	strength = STR_HIGH
 
 	descriptors = list(
 		/datum/mob_descriptor/height = -1,
@@ -33,6 +35,7 @@
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/spacer_preview.dmi'
 
 	oxy_mod =   0.8
+	breath_pressure = 14
 	toxins_mod =   0.9
 	flash_mod = 1.2
 	brute_mod = 1.1
@@ -115,3 +118,93 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+/datum/species/human/booster
+	name = SPECIES_BOOSTER
+	name_plural = "Boosters"
+	description = "The self-proclaimed 'boosters' are a loosely affiliated group of self-modifying \
+	bio-tinkers, engineers and radical philosophers dedicated to expanding the definition of what it \
+	means to be human. Conservatives frown on their excessive recklessness, and most booster habitats \
+	are found on the outskirts of systems - some even linger at the edge of human space.<br><br>The \
+	shared Booster genotype is extremely unstable and liable for rapid, apparently random change, \
+	but is certainly both unique and remarkable in its ability to cope with the extremes that the \
+	Universe can throw at it."
+	var/list/mods = list()
+
+#define MOD_BASE     0.85
+#define MOD_VARIANCE 0.35
+/datum/species/human/booster/proc/get_mod(var/mob/living/carbon/human/booster, var/mod_type)
+	if(istype(booster) && !booster.isSynthetic())
+		var/mob_ref = booster.ckey || "\ref[booster]"
+		if(!islist(mods[mob_ref]))
+			var/list/new_mods = list()
+			new_mods["brute"] =     MOD_BASE + (MOD_VARIANCE * rand())
+			new_mods["burn"] =      MOD_BASE + (MOD_VARIANCE * rand())
+			new_mods["toxins"] =    MOD_BASE + (MOD_VARIANCE * rand())
+			new_mods["radiation"] = MOD_BASE + (MOD_VARIANCE * rand())
+			new_mods["slowdown"] =  pick(-0.5, 0, 0.5)
+			mods[mob_ref] = new_mods
+		var/list/mob_mods = mods[mob_ref]
+		. = mob_mods[mod_type] || 1
+#undef MOD_BASE
+#undef MOD_VARIANCE
+
+/datum/species/human/booster/get_brute_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "brute")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_burn_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "burn")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_toxins_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "toxins")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_radiation_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "radiation")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_slowdown(var/mob/living/carbon/human/H)
+	. = get_mod(H, "slowdown")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/mule
+	name = SPECIES_MULE
+	name_plural = "Mules"
+	description = "There are a huge number of 'uncurated' genetic lines in human space, many of which fall under the \
+	general header of baseline humanity. One recently discovered genotype is remarkable for both being deeply feral, \
+	in the sense that it still has many of the inherited diseases and weaknesses that plagued pre-expansion humanity, \
+	and for a strange affinity for psionic operancy. The Mules, as they are called, are born on the very edges of \
+	civilization, and are physically diminutive and unimposing, with scrawny, often deformed bodies. Their physiology \
+	rejects prosthetics and synthetic organs, and their lifespans are short, but their raw psionic potential is unmatched."
+
+	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
+	brute_mod =     1.25
+	burn_mod =      1.25
+	oxy_mod =       1.25
+	toxins_mod =    1.25
+	radiation_mod = 1.25
+	flash_mod =     1.25
+	blood_volume =  SPECIES_BLOOD_DEFAULT * 0.85
+	min_age =       18
+	max_age =       45
+
+/datum/species/human/mule/handle_post_spawn(var/mob/living/carbon/human/H)
+	if(!H.psi)
+		H.psi = new(H)
+		var/list/faculties = list("[PSI_COERCION]", "[PSI_REDACTION]", "[PSI_ENERGISTICS]", "[PSI_PSYCHOKINESIS]")
+		for(var/i = 1 to rand(2,3))
+			H.set_psi_rank(pick_n_take(faculties), 1)
+	H.psi.max_stamina = 70
+	var/obj/item/organ/external/E = pick(H.organs)
+	if(!BP_IS_ROBOTIC(E))
+		E.mutate()
+		E.limb_flags |= ORGAN_FLAG_DEFORMED
+		E.status |= ORGAN_DISFIGURED
+		E.status |= ORGAN_MUTATED

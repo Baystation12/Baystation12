@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 		var/datum/map_template/ruin/ruin = R
 		if(ruin.id in GLOB.banned_ruin_ids)
 			ruins -= ruin //remove all prohibited ids from the candidate list; used to forbit global duplicates.
-
+	var/list/spawned_ruins = list()
 //Each iteration needs to either place a ruin or strictly decrease either the budget or ruins.len (or break).
 	while(budget > 0)
 		// Pick a ruin
@@ -59,6 +59,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 			log_world("Ruin \"[ruin.name]\" placed at ([T.x], [T.y], [T.z])")
 
 			load_ruin(T, ruin)
+			spawned_ruins += ruin
 			if(ruin.cost >= 0)
 				budget -= ruin.cost
 			if(!(ruin.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
@@ -68,8 +69,9 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 						ruins -= ruin //Remove all ruins with the same id if we don't allow duplicates
 				GLOB.banned_ruin_ids += ruin.id //and ban them globally too
 			break
+	return spawned_ruins
 
-proc/load_ruin(turf/central_turf, datum/map_template/template)
+/proc/load_ruin(turf/central_turf, datum/map_template/template)
 	if(!template)
 		return FALSE
 	for(var/i in template.get_affected_turfs(central_turf, 1))

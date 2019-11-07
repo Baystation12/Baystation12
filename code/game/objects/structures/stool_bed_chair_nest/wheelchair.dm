@@ -18,7 +18,6 @@
 	..()
 	overlays.Cut()
 	var/image/O = image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", dir = src.dir)
-	O.plane = ABOVE_HUMAN_PLANE
 	O.layer = ABOVE_HUMAN_LAYER
 	overlays += O
 	if(buckled_mob)
@@ -134,7 +133,8 @@
 			to_chat(usr, "You let go of \the [name]'s handles.")
 			pulling.pulledby = null
 			pulling = null
-		return
+		return TRUE
+	return FALSE
 
 /obj/structure/bed/chair/wheelchair/Bump(atom/A)
 	..()
@@ -149,7 +149,7 @@
 			occupant.throw_at(A, 3, 3, propelled)
 
 		var/def_zone = ran_zone()
-		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE)
+		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
 		occupant.throw_at(A, 3, 3, propelled)
 		occupant.apply_effect(6, STUN, blocked)
 		occupant.apply_effect(6, WEAKEN, blocked)
@@ -159,7 +159,7 @@
 		if(istype(A, /mob/living))
 			var/mob/living/victim = A
 			def_zone = ran_zone()
-			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE)
+			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
 			victim.apply_effect(6, STUN, blocked)
 			victim.apply_effect(6, WEAKEN, blocked)
 			victim.apply_effect(6, STUTTER, blocked)

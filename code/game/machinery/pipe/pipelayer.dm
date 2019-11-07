@@ -29,13 +29,13 @@
 	old_turf = new_turf
 	old_dir = turn(M_Dir,180)
 
-/obj/machinery/pipelayer/attack_hand(mob/user as mob)
+/obj/machinery/pipelayer/interface_interact(mob/user)
 	if(!metal&&!on)
 		to_chat(user, "<span class='warning'>\The [src] doesn't work without metal.</span>")
-		return
+		return TRUE
 	on=!on
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
-	return
+	return TRUE
 
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 
@@ -119,17 +119,14 @@
 	if(!use_metal(0.25))
 		return reset()
 	var/fdirn = turn(M_Dir,180)
-	var/p_type
 	var/p_dir
 
 	if (fdirn!=old_dir)
-		p_type=1+P_type
 		p_dir=old_dir+M_Dir
 	else
-		p_type=0+P_type
 		p_dir=M_Dir
 
-	var/obj/item/pipe/P = new (w_turf, pipe_type=p_type, dir=p_dir)
+	var/obj/item/pipe/P = new (w_turf, dir=p_dir)
 	P.attackby(W , src)
 
 	return 1

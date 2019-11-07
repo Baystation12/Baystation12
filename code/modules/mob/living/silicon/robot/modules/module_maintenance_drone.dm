@@ -29,8 +29,8 @@
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/rods/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
-		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/material/cyborg/glass,
+		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/tile/wood/cyborg,
 		/obj/item/stack/material/cyborg/wood,
 		/obj/item/stack/cable_coil/cyborg,
@@ -44,6 +44,12 @@
 		/datum/matter_synth/wire =    30
 	)
 	emag = /obj/item/weapon/gun/energy/plasmacutter
+	skills = list(
+		SKILL_ATMOS        = SKILL_EXPERT,
+		SKILL_ENGINES      = SKILL_EXPERT,
+		SKILL_CONSTRUCTION = SKILL_EXPERT,
+		SKILL_ELECTRICAL   = SKILL_EXPERT
+	)
 
 /obj/item/weapon/robot_module/drone/finalize_equipment(var/mob/living/silicon/robot/R)
 	. = ..()

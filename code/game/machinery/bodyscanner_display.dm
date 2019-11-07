@@ -8,6 +8,9 @@
 	density = 0
 	idle_power_usage = 75
 	active_power_usage = 300
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	w_class = ITEM_SIZE_HUGE
 	var/list/bodyscans = list()
 	var/selected = 0
@@ -34,15 +37,9 @@
 		bodyscans -= list(bodyscans[selection])
 		return TOPIC_REFRESH
 
-/obj/machinery/body_scan_display/attack_ai(user as mob)
-	return attack_hand(user)
-
-/obj/machinery/body_scan_display/attack_hand(mob/user)
-	if(..())
-		return
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/body_scan_display/interface_interact(user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/body_scan_display/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
 	var/list/data = list()

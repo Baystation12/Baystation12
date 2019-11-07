@@ -749,3 +749,10 @@ proc/dd_sortedTextList(list/incoming)
 	for(var/key in L)
 		if(ispath(T, key))
 			return key
+
+// Gets the first instance that is of the given type (strictly)
+/proc/get_instance_of_strict_type(var/list/L, var/T)
+	for(var/key in L)
+		var/atom/A = key
+		if(A.type == T)
+			return A

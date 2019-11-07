@@ -10,4 +10,4 @@
 
 /datum/extension/armor/psionic/on_blocking(damage, blocked)
 	var/datum/psi_complexus/psi = holder
-	psi.spend_power(round(blocked * 10))
+	psi.spend_power(round(damage * blocked))

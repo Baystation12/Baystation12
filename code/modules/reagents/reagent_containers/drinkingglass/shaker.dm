@@ -5,6 +5,7 @@
 	desc = "Big enough to contain enough protein to get perfectly swole. Don't mind the bits."
 	icon_state = "fitness-cup_black"
 	base_icon = "fitness-cup"
+	icon = 'icons/obj/drink_glasses/fitness.dmi'
 	volume = 100
 	matter = list(MATERIAL_PLASTIC = 2000)
 	filling_states = "10;20;30;40;50;60;70;80;90;100"

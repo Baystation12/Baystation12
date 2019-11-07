@@ -28,6 +28,10 @@ var/list/organ_cache = list()
 
 	var/death_time
 
+	// Bioprinter stats
+	var/can_be_printed = TRUE
+	var/print_cost
+
 /obj/item/organ/Destroy()
 	owner = null
 	dna = null
@@ -205,7 +209,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
 	damage = 0
-	status = 0
+	status = initial(status)
 	if(!ignore_prosthetic_prefs && owner && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
 		var/status = owner.client.prefs.organ_data[organ_tag]
 		if(status == "assisted")
@@ -238,7 +242,8 @@ var/list/organ_cache = list()
 	CRASH("Not Implemented")
 
 /obj/item/organ/proc/heal_damage(amount)
-	damage = between(0, damage - round(amount, 0.1), max_damage)
+	if (can_recover())
+		damage = between(0, damage - round(amount, 0.1), max_damage)
 
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
@@ -372,3 +377,6 @@ var/list/organ_cache = list()
 //used by stethoscope
 /obj/item/organ/proc/listen()
 	return
+
+/obj/item/organ/proc/get_mechanical_assisted_descriptor()
+	return "mechanically-assisted [name]"

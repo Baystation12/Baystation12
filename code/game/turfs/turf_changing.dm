@@ -32,9 +32,11 @@
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_corners = corners
+	var/old_ao_neighbors = ao_neighbors
 
 //	log_debug("Replacing [src.type] with [N]")
 
+	changing_turf = TRUE
 
 	if(connections) connections.erase_all()
 
@@ -52,6 +54,9 @@
 	for(var/atom/movable/A in src)
 		old_contents += A
 		A.forceMove(null)
+
+	// Run the Destroy() chain.
+	qdel(src)
 
 	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 	for(var/atom/movable/A in old_contents)
@@ -81,6 +86,7 @@
 	W.post_change()
 	. = W
 
+	W.ao_neighbors = old_ao_neighbors
 	if(lighting_overlays_initialised)
 		lighting_overlay = old_lighting_overlay
 		affecting_lights = old_affecting_lights
@@ -92,6 +98,9 @@
 				lighting_build_overlay()
 			else
 				lighting_clear_overlay()
+
+	for(var/turf/T in RANGE_TURFS(src, 1))
+		T.update_icon()
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))

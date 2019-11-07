@@ -8,7 +8,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
-	req_access = list(list(access_lawyer, access_bridge, access_armory, access_qm))
+	var/send_access = list(list(access_lawyer, access_bridge, access_armory, access_qm))
 
 	idle_power_usage = 30
 	active_power_usage = 200
@@ -25,7 +25,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	. = ..()
 
 	if(!admin_departments)
-		admin_departments = list("[GLOB.using_map.boss_name]", "Office of Civil Investigation and Enforcement", "[GLOB.using_map.boss_short] Supply") + GLOB.using_map.map_admin_faxes
+		admin_departments = list("[GLOB.using_map.boss_name]", "Sol Federal Police", "[GLOB.using_map.boss_short] Supply") + GLOB.using_map.map_admin_faxes
 	GLOB.allfaxes += src
 	if(!destination) destination = "[GLOB.using_map.boss_name]"
 	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
@@ -40,7 +40,11 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	else 
 		..()
 
-/obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
+/obj/machinery/photocopier/faxmachine/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/photocopier/faxmachine/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "Fax Machine<BR>"
@@ -131,7 +135,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	if(href_list["auth"])
 		if ( (!( authenticated ) && (scan)) )
-			if (check_access(scan))
+			if (has_access(send_access, scan.GetAccess()))
 				authenticated = 1
 
 	if(href_list["logout"])
@@ -208,7 +212,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	//message badmins that a fax has arrived
 	if (destination == GLOB.using_map.boss_name)
 		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#006100")
-	else if (destination == "Office of Civil Investigation and Enforcement")
+	else if (destination == "Sol Federal Police")
 		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#1f66a0")
 	else if (destination == "[GLOB.using_map.boss_short] Supply")
 		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#5f4519")

@@ -43,7 +43,7 @@
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
-		brainmob.add_language("Encoded Audio Language")
+		brainmob.add_language(LANGUAGE_EAL)
 
 /obj/item/organ/internal/posibrain/Destroy()
 	QDEL_NULL(brainmob)
@@ -82,8 +82,7 @@
 	return
 
 /obj/item/organ/internal/posibrain/examine(mob/user)
-	if(!..(user))
-		return
+	. = ..()
 
 	var/msg = "<span class='info'>*---------*</span>\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
 

@@ -125,7 +125,7 @@
 /datum/chemical_reaction/thermite
 	name = "Thermite"
 	result = /datum/reagent/thermite
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
 	mix_message = "The solution thickens into a coarse metallic paste."
 
@@ -273,6 +273,16 @@
 	maximum_temperature = -25 CELSIUS
 	mix_message = "The solution becomes sludge-like."
 
+/datum/chemical_reaction/nanitefluid
+	name = "Nanite Fluid"
+	result = /datum/reagent/nanitefluid
+	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/aluminium = 1, /datum/reagent/lube = 1)
+	catalysts = list(/datum/reagent/toxin/phoron = 5)
+	result_amount = 3
+	minimum_temperature = (-25 CELSIUS) - 100
+	maximum_temperature = -25 CELSIUS
+	mix_message = "The solution becomes a metallic slime."
+
 /datum/chemical_reaction/venaxilin
 	name = "Venaxilin"
 	result = /datum/reagent/dylovene/venaxilin
@@ -321,6 +331,12 @@
 	name = "Chloral Hydrate"
 	result = /datum/reagent/chloralhydrate
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/acid/hydrochloric = 3, /datum/reagent/water = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/vecuronium_bromide
+	name = "Vecuronium Bromide"
+	result = /datum/reagent/vecuronium_bromide
+	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/mercury = 2, /datum/reagent/hydrazine = 2)
 	result_amount = 1
 
 /datum/chemical_reaction/potassium_chloride
@@ -526,7 +542,7 @@
 /datum/chemical_reaction/flash_powder
 	name = "Flash powder"
 	result = null
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
 	result_amount = null
 	mix_message = "The solution bubbles vigorously!"
 
@@ -591,7 +607,7 @@
 /datum/chemical_reaction/phlogiston
 	name = "Phlogiston"
 	result = null
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
 	mix_message = "The solution thickens and begins to bubble."
 
@@ -605,7 +621,7 @@
 /datum/chemical_reaction/napalm
 	name = "Napalm"
 	result = /datum/reagent/napalm
-	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
 	result_amount = 2
 	mix_message = "The solution thickens and takes on a slimy sheen."
 
@@ -656,7 +672,7 @@
 /datum/chemical_reaction/metalfoam
 	name = "Metal Foam"
 	result = null
-	required_reagents = list(/datum/reagent/aluminum = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
+	required_reagents = list(/datum/reagent/aluminium = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"
 
@@ -914,14 +930,14 @@
 /datum/chemical_reaction/carbon_paint/send_data()
 	return "#333333"
 
-/datum/chemical_reaction/aluminum_paint
-	name = "Aluminum paint"
+/datum/chemical_reaction/aluminium_paint
+	name = "Aluminium paint"
 	result = /datum/reagent/paint
-	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/aluminum = 1)
+	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/aluminium = 1)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy white sheen."
 
-/datum/chemical_reaction/aluminum_paint/send_data()
+/datum/chemical_reaction/aluminium_paint/send_data()
 	return "#f0f8ff"
 
 /* Slime cores */
@@ -1091,7 +1107,7 @@
 		return
 
 	var/turf/location = get_turf(holder.my_atom)
-	location.assume_gas("phoron", 250, 1400)
+	location.assume_gas(GAS_PHORON, 250, 1400)
 	location.hotspot_expose(700, 400)
 
 //Yellow
@@ -1999,6 +2015,20 @@
 	result_amount = 2
 	mix_message = "The milk suffuses the coffee with pale shades."
 
+/datum/chemical_reaction/mocha_latte
+	name = "Mocha Latte"
+	result = /datum/reagent/drink/coffee/cafe_latte/mocha
+	required_reagents = list(/datum/reagent/drink/coffee/cafe_latte = 3, /datum/reagent/drink/syrup_chocolate = 1)
+	result_amount = 4
+	mix_message = "The chocolate swirls into the latte."
+
+/datum/chemical_reaction/pumpkin_latte
+	name = "Pumpkin Spice Latte"
+	result = /datum/reagent/drink/coffee/cafe_latte/pumpkin
+	required_reagents = list(/datum/reagent/drink/coffee/cafe_latte = 3, /datum/reagent/drink/syrup_pumpkin = 1)
+	result_amount = 4
+	mix_message = "The pumpkin spice swirls into the latte."
+
 /datum/chemical_reaction/acidspit
 	name = "Acid Spit"
 	result = /datum/reagent/ethanol/acid_spit
@@ -2243,7 +2273,7 @@
 /datum/chemical_reaction/anfo_plus
 	name = "ANFO+"
 	result = /datum/reagent/anfo/plus
-	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminum=5)
+	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminium=5)
 	result_amount = 20
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
@@ -2253,7 +2283,7 @@
 	result = /datum/reagent/three_eye
 	result_amount = 2
 	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
-	minimum_temperature = 100 CELSIUS
+	minimum_temperature = 40 CELSIUS
 	reaction_sound = 'sound/effects/psi/power_used.ogg'
 	hidden_from_codex = TRUE
 
@@ -2290,6 +2320,13 @@
 	result_amount = 4
 	mix_message = "The juice swirls into the tea."
 
+/datum/chemical_reaction/latte_barongrey
+	name = "London Fog"
+	result = /datum/reagent/drink/tea/barongrey/latte
+	required_reagents = list(/datum/reagent/drink/tea/barongrey = 2, /datum/reagent/drink/milk = 1)
+	result_amount = 3
+	mix_message = "The milk swirls into the tea."
+
 //green tea drinks
 /datum/chemical_reaction/icetea_green
 	name = "Iced Green Tea"
@@ -2313,6 +2350,41 @@
 	result_amount = 3
 	mix_message = "The mint swirls into the drink."
 
+/datum/chemical_reaction/icetea_chai
+	name = "Iced Chai Tea"
+	result = /datum/reagent/drink/tea/icetea/chai
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the tea."
+
+/datum/chemical_reaction/sweettea_chai
+	name = "Iced Chai Tea"
+	result = /datum/reagent/drink/tea/icetea/chai/sweet
+	required_reagents = list(/datum/reagent/drink/tea/icetea/chai = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
+	mix_message = "The ice clinks together in the sweet tea."
+
+/datum/chemical_reaction/latte_chai
+	name = "Chai Latte"
+	result = /datum/reagent/drink/tea/chai/latte
+	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk = 1)
+	result_amount = 3
+	mix_message = "The milk swirls into the drink."
+
+/datum/chemical_reaction/icetea_red
+	name = "Iced Rooibos tea"
+	result = /datum/reagent/drink/tea/icetea/red
+	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/red = 2)
+	result_amount = 3
+	mix_message = "The ice clinks together in the tea."
+
+/datum/chemical_reaction/sweettea_red
+	name = "Iced Rooibos tea"
+	result = /datum/reagent/drink/tea/icetea/red/sweet
+	required_reagents = list(/datum/reagent/drink/tea/icetea/red = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
+	mix_message = "The ice clinks together in the sweet tea."
+
 /datum/chemical_reaction/chazuke
 	name = "Chazuke"
 	result = /datum/reagent/nutriment/rice/chazuke
@@ -2324,7 +2396,7 @@
 	name = "Resin Globule"
 	result = null
 	required_reagents = list(
-		/datum/reagent/crystal = 1, 
+		/datum/reagent/crystal = 1,
 		/datum/reagent/silicon = 2
 	)
 	catalysts = list(
@@ -2340,3 +2412,10 @@
 		var/create_stacks = Floor(created_volume)
 		if(create_stacks > 0)
 			new /obj/item/stack/medical/resin/handmade(T, create_stacks)
+
+/datum/chemical_reaction/crystal_agent
+	result = /datum/reagent/crystal
+	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/tungsten = 1, /datum/reagent/acid/polyacid = 1)
+	minimum_temperature = 150 CELSIUS
+	maximum_temperature = 200 CELSIUS
+	result_amount = 3

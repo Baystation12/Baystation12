@@ -3,13 +3,24 @@
 		"Service" = TRUE
 	)
 	languages = list(
-		LANGUAGE_SOL_COMMON  = TRUE,
-		LANGUAGE_UNATHI      = TRUE,
-		LANGUAGE_SKRELLIAN   = TRUE,
-		LANGUAGE_LUNAR       = TRUE,
-		LANGUAGE_GUTTER      = TRUE,
-		LANGUAGE_INDEPENDENT = TRUE,
-		LANGUAGE_SPACER      = TRUE
+		LANGUAGE_HUMAN_EURO       = TRUE,
+		LANGUAGE_HUMAN_ARABIC     = TRUE,
+		LANGUAGE_HUMAN_INDIAN     = TRUE,
+		LANGUAGE_HUMAN_CHINESE    = TRUE,
+		LANGUAGE_HUMAN_IBERIAN    = TRUE,
+		LANGUAGE_HUMAN_RUSSIAN    = TRUE,
+		LANGUAGE_HUMAN_SELENIAN   = TRUE,
+		LANGUAGE_UNATHI_SINTA     = TRUE,
+		LANGUAGE_SKRELLIAN        = TRUE,
+		LANGUAGE_GUTTER           = TRUE,
+		LANGUAGE_SPACER           = TRUE
+		)
+	skills = list(
+		SKILL_BUREAUCRACY         = SKILL_PROF,
+		SKILL_FINANCE             = SKILL_PROF,
+		SKILL_COMPUTER            = SKILL_EXPERT,
+		SKILL_SCIENCE             = SKILL_EXPERT,
+		SKILL_DEVICES             = SKILL_EXPERT
 	)
 
 /obj/item/weapon/robot_module/clerical/butler
@@ -20,10 +31,7 @@
 		"Kent" = "toiletbot",
 		"Bro" = "Brobot",
 		"Rich" = "maximillion",
-		"Default" = "Service2",
-		"Drone - Service" = "drone-service",
-		"Drone - Hydro" = "drone-hydro",
-		"Doot" = "eyebot-standard"
+		"Default" = "Service2"
 	)
 	equipment = list(
 		/obj/item/device/flash,
@@ -31,7 +39,7 @@
 		/obj/item/weapon/reagent_containers/glass/bucket,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
-		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/device/scanner/plant,
 		/obj/item/weapon/storage/plants,
 		/obj/item/weapon/robot_harvester,
 		/obj/item/weapon/material/kitchen/rollingpin,
@@ -44,6 +52,14 @@
 		/obj/item/weapon/reagent_containers/borghypo/service
 	)
 	emag = /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer
+	skills = list(
+		SKILL_BUREAUCRACY         = SKILL_PROF,
+		SKILL_COMPUTER            = SKILL_EXPERT,
+		SKILL_COOKING             = SKILL_PROF,
+		SKILL_BOTANY              = SKILL_PROF,
+		SKILL_MEDICAL             = SKILL_BASIC,
+		SKILL_CHEMISTRY           = SKILL_ADEPT
+	)
 
 /obj/item/weapon/robot_module/clerical/butler/finalize_equipment()
 	. = ..()
@@ -79,8 +95,7 @@
 		"Kent" =     "toiletbot",
 		"Bro" =      "Brobot",
 		"Rich" =     "maximillion",
-		"Default" =  "Service2",
-		"Doot" =     "eyebot-standard"
+		"Default" =  "Service2"
 	)
 	equipment = list(
 		/obj/item/device/flash,

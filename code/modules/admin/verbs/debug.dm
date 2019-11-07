@@ -357,7 +357,7 @@
 		if(Rad.anchored)
 			if(!Rad.P)
 				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
-				Phoron.air_contents.gas["phoron"] = 70
+				Phoron.air_contents.gas[GAS_PHORON] = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron
 				Phoron.forceMove(Rad)
@@ -451,7 +451,6 @@
 /obj/effect/debugmarker
 	icon = 'icons/effects/lighting_overlay.dmi'
 	icon_state = "transparent"
-	plane = ABOVE_TURF_PLANE
 	layer = HOLOMAP_LAYER
 	alpha = 127
 
@@ -468,7 +467,8 @@
 		var/netcolor = rgb(rand(100,255),rand(100,255),rand(100,255))
 		for(var/obj/structure/cable/C in PN.cables)
 			var/image/I = image('icons/effects/lighting_overlay.dmi', get_turf(C), "transparent")
-			I.plane = ABOVE_TURF_PLANE
+			I.plane = DEFAULT_PLANE
+			I.layer = EXPOSED_WIRE_LAYER
 			I.alpha = 127
 			I.color = netcolor
 			I.maptext = "\ref[PN]"

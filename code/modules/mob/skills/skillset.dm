@@ -92,6 +92,13 @@
 	var/points = get_skill_value(skill_path)
 	return points >= needed
 
+//Passing a list in format of 'skill = level_needed'
+/mob/proc/skill_check_multiple(skill_reqs)
+	for(var/skill in skill_reqs)
+		. = skill_check(skill, skill_reqs[skill])
+		if(!.)
+			return
+
 /mob/proc/get_skill_difference(skill_path, mob/opponent)
 	return get_skill_value(skill_path) - opponent.get_skill_value(skill_path)
 
@@ -123,19 +130,19 @@
 
 // Show skills verb
 
-mob/living/verb/show_skills()
+/mob/living/verb/show_skills()
 	set category = "IC"
 	set name = "Show Own Skills"
 
 	skillset.open_ui()
 
-datum/skillset/proc/open_ui()
+/datum/skillset/proc/open_ui()
 	if(!owner)
 		return
 	if(!NM)
 		NM = new nm_type(owner)
 	NM.ui_interact(owner)
 
-datum/skillset/proc/refresh_uis()
+/datum/skillset/proc/refresh_uis()
 	for(var/nano_module in nm_viewing)
 		SSnano.update_uis(nano_module)

@@ -28,7 +28,7 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
+	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
@@ -37,7 +37,12 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
+	if(affecting == assailant)
+		G.done_struggle = TRUE
+		G.upgrade(TRUE)
+		return
+
+	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)

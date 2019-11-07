@@ -6,7 +6,6 @@
 	anchored = 1.0
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
-	circuit = /obj/item/weapon/circuitboard/operating
 	var/mob/living/carbon/human/victim = null
 	var/obj/machinery/optable/table = null
 
@@ -18,18 +17,9 @@
 			table.computer = src
 			break
 
-/obj/machinery/computer/operating/attack_ai(mob/user)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/operating/interface_interact(user)
 	interact(user)
-
-
-/obj/machinery/computer/operating/attack_hand(mob/user)
-	..()
-	if(stat & (BROKEN|NOPOWER))
-		return
-	interact(user)
-
+	return TRUE
 
 /obj/machinery/computer/operating/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )

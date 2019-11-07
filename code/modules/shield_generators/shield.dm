@@ -4,7 +4,6 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
 	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	invisibility = 0
@@ -27,8 +26,8 @@
 
 // Prevents shuttles, singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
-/obj/effect/shield/forceMove(var/newloc, var/qdeled = 0)
-	if(qdeled)
+/obj/effect/shield/forceMove()
+	if(QDELING(src))
 		return ..()
 	return 0
 

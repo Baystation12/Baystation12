@@ -8,7 +8,7 @@
 					/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 2,
 					/obj/item/weapon/material/hatchet,
 					/obj/item/weapon/material/minihoe,
-					/obj/item/device/analyzer/plant_analyzer,
+					/obj/item/device/scanner/plant,
 					/obj/item/clothing/gloves/thick/botany,
 					/obj/item/clothing/suit/apron,
 					/obj/item/weapon/material/minihoe,

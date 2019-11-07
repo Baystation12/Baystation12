@@ -2,6 +2,14 @@
 	gender = NEUTER
 	voice_name = "synthesized voice"
 	skillset = /datum/skillset/silicon
+
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
@@ -30,17 +38,17 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
-/mob/living/silicon/New()
+/mob/living/silicon/Initialize()
 	GLOB.silicon_mob_list += src
-	..()
+	. = ..()
 
 	if(silicon_radio)
 		silicon_radio = new silicon_radio(src)
 	if(silicon_camera)
 		silicon_camera = new silicon_camera(src)
 
-	add_language(LANGUAGE_GALCOM)
-	default_language = all_languages[LANGUAGE_GALCOM]
+	add_language(LANGUAGE_HUMAN_EURO)
+	default_language = all_languages[LANGUAGE_HUMAN_EURO]
 	init_id()
 	init_subsystems()
 
@@ -240,7 +248,7 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text)
+	pose =  sanitize(input(usr, "This is [src]. It...", "Pose", null)  as text)
 
 /mob/living/silicon/verb/set_flavor()
 	set name = "Set Flavour Text"
@@ -272,6 +280,8 @@
 	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
+	if(!(alarm.alarm_z() in GetConnectedZlevels(get_z(src))))
+		return // Didn't actually hear it as far as we're concerned.
 	if(!next_alarm_notice)
 		next_alarm_notice = world.time + SecondsToTicks(10)
 
@@ -368,3 +378,6 @@
 
 /mob/living/silicon/seizure()
 	flash_eyes(affect_silicon = TRUE)
+
+/mob/living/silicon/get_bullet_impact_effect_type(var/def_zone)
+	return BULLET_IMPACT_METAL

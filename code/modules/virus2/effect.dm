@@ -303,7 +303,7 @@
 	name = "Appetiser Effect"
 	stage = 2
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		mob.nutrition = max(0, mob.nutrition - 200)
+		mob.adjust_nutrition(-200)
 
 /datum/disease2/effect/fridge
 	name = "Refridgerator Syndrome"

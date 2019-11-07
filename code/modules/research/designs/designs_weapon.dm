@@ -74,6 +74,13 @@
 	build_path = /obj/item/weapon/gun/energy/stunrevolver/rifle
 	sort_string = "TADAC"
 
+/datum/design/item/weapon/confuseray
+	id = "confuseray"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 3)
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000)
+	build_path = /obj/item/weapon/gun/energy/confuseray
+	sort_string = "TADAD"
+
 /datum/design/item/weapon/nuclear_gun
 	id = "nuclear_gun"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
@@ -91,14 +98,14 @@
 
 /datum/design/item/weapon/xraypistol
 	id = "xraypistol"
-	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	materials = list(MATERIAL_STEEL = 4000, MATERIAL_GLASS = 500, MATERIAL_URANIUM = 500)
 	build_path = /obj/item/weapon/gun/energy/xray/pistol
 	sort_string = "TAFAA"
 
 /datum/design/item/weapon/xrayrifle
 	id = "xrayrifle"
-	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
+	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 1000, MATERIAL_URANIUM = 1000)
 	build_path = /obj/item/weapon/gun/energy/xray
 	sort_string = "TAFAB"
@@ -181,6 +188,7 @@
 	sort_string = "TBAAC"
 
 /datum/design/item/weapon/ammunition/ammo_emp_small
+	name = "haywire 7mm"
 	id = "ammo_emp_small"
 	desc = "A box of small pistol rounds with integrated EMP charges."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)
@@ -189,6 +197,7 @@
 	sort_string = "TBAAD"
 
 /datum/design/item/weapon/ammunition/ammo_emp_pistol
+	name = "haywire 10mm"
 	id = "ammo_emp_pistol"
 	desc = "A box of pistol rounds fitted with integrated EMP charges."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_URANIUM = 750)

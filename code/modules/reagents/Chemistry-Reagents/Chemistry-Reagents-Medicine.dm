@@ -10,6 +10,7 @@
 	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 3.5
 
 /datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -33,6 +34,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 4.9
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -57,6 +59,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 2.9
 
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -72,6 +75,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 3.9
 
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -85,6 +89,7 @@
 	color = "#00a000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 2.1
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
 		/datum/reagent/toxin/zombiepowder
@@ -119,11 +124,12 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 2.4
 
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
-	else if(alien != IS_DIONA)
+	else if(alien != IS_DIONA && alien != IS_MANTID)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
 	holder.remove_reagent(/datum/reagent/lexorin, 2 * removed)
 
@@ -136,6 +142,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 3.7
 
 /datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
@@ -152,6 +159,7 @@
 	color = "#8040ff"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 6
 
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -166,14 +174,21 @@
 	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 3.9
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-100 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
-		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(!BP_IS_ROBOTIC(I))
+					I.heal_damage(20*removed)
+
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
@@ -187,14 +202,39 @@
 	heating_products = list(/datum/reagent/cryoxadone, /datum/reagent/sodium)
 	heating_point = 50 CELSIUS
 	heating_message = "turns back to sludge."
+	value = 5.5
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-300 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
-		M.heal_organ_damage(30 * removed, 30 * removed)
+		M.heal_organ_damage(50 * removed, 50 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(!BP_IS_ROBOTIC(I))
+					I.heal_damage(30*removed)
+
+/datum/reagent/nanitefluid
+	name = "Nanite Fluid"
+	description = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
+	taste_description = "metallic sludge"
+	reagent_state = LIQUID
+	color = "#c2c2d6"
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/nanitefluid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 1)
+	if(M.bodytemperature < 170)
+		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(BP_IS_ROBOTIC(I))
+					I.heal_damage(20*removed)
 
 /* Painkillers */
 
@@ -209,6 +249,7 @@
 	scannable = 1
 	metabolism = 0.02
 	flags = IGNORE_MOB_SIZE
+	value = 3.3
 
 /datum/reagent/paracetamol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 35)
@@ -229,6 +270,7 @@
 	metabolism = 0.05
 	ingest_met = 0.02
 	flags = IGNORE_MOB_SIZE
+	value = 3.1
 	var/pain_power = 80 //magnitide of painkilling effect
 	var/effective_dose = 0.5 //how many units it need to process to reach max power
 
@@ -284,6 +326,7 @@
 	description = "An effective and very addictive painkiller. Don't mix with alcohol."
 	taste_description = "bitterness"
 	color = "#800080"
+	scannable = 1
 	overdose = 20
 	pain_power = 200
 	effective_dose = 2
@@ -324,6 +367,7 @@
 	metabolism = REM * 0.05
 	overdose = REAGENTS_OVERDOSE / 6 // 5
 	scannable = 1
+	value = 4.6
 
 /datum/reagent/synaptizine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -343,6 +387,7 @@
 	description = "Venixalin is a strong, specialised antivenom for dealing with advanced toxins and venoms."
 	taste_description = "overpowering sweetness"
 	color = "#dadd98"
+	scannable = 1
 	metabolism = REM * 2
 	remove_generic = 0
 	remove_toxins = list(
@@ -360,6 +405,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 5.9
 
 /datum/reagent/alkysine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -380,7 +426,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-
+	value = 4.2
 
 /datum/reagent/imidazoline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.eye_blurry = max(M.eye_blurry - 5, 0)
@@ -401,19 +447,19 @@
 	overdose = 10
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 6
 
 /datum/reagent/peridaxon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/internal/I in H.internal_organs)
-			if(BP_IS_ROBOTIC(I))
-				continue
-			if(I.organ_tag == BP_BRAIN)
-				H.confused++
-				H.drowsyness++
-				if(I.damage >= I.min_bruised_damage)
-					continue
-			I.damage = max(I.damage - removed, 0)
+			if(!BP_IS_ROBOTIC(I))
+				if(I.organ_tag == BP_BRAIN)
+					if(I.damage >= I.min_bruised_damage)
+						continue
+					H.confused++
+					H.drowsyness++
+				I.heal_damage(removed)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
@@ -421,19 +467,20 @@
 	taste_description = "acid"
 	reagent_state = SOLID
 	color = "#004000"
+	scannable = 1
 	overdose = REAGENTS_OVERDOSE
-
+	value = 3.6
+	
 /datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/needs_update = M.mutations.len > 0
 
-	M.mutations = list()
 	M.disabilities = 0
 	M.sdisabilities = 0
 
-	// Might need to update appearance for hulk etc.
 	if(needs_update && ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.update_mutations()
+		M.dna.ResetUI()
+		M.dna.ResetSE()
+		domutcheck(M, null, MUTCHK_FORCED)
 
 /datum/reagent/hyperzine
 	name = "Hyperzine"
@@ -443,6 +490,7 @@
 	color = "#ff3300"
 	metabolism = REM * 0.15
 	overdose = REAGENTS_OVERDOSE * 0.5
+	value = 3.9
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -450,14 +498,16 @@
 	if(prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
-	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_chemical_effect(CE_PULSE, 3)
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
 	description = "A powerful oxidizer that reacts with ethanol."
 	reagent_state = SOLID
 	color = "#605048"
+	scannable = 1
 	overdose = REAGENTS_OVERDOSE
+	value = 3.1
 
 /datum/reagent/ethylredoxrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -482,6 +532,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 2.3
 
 /datum/reagent/hyronalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.radiation = max(M.radiation - 30 * removed, 0)
@@ -495,6 +546,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 2.7
 
 /datum/reagent/arithrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.radiation = max(M.radiation - 70 * removed, 0)
@@ -511,6 +563,7 @@
 	metabolism = REM * 0.1
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
+	value = 2.5
 
 /datum/reagent/spaceacillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.immunity = max(M.immunity - 0.1, 0)
@@ -536,6 +589,7 @@
 	reagent_state = LIQUID
 	color = "#c8a5dc"
 	touch_met = 5
+	value = 2.2
 
 /datum/reagent/sterilizine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
@@ -569,6 +623,7 @@
 	heating_products = list(/datum/reagent/leporazine/hot)
 	heating_point = 110 CELSIUS
 	heating_message = "starts swirling, glowing occasionally."
+	value = 2
 
 /datum/reagent/leporazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature > 310)
@@ -584,7 +639,7 @@
 	heating_products = null
 	heating_point = null
 	heating_message = null
-	scannable = 0
+	scannable = 1
 
 /datum/reagent/leporazine/hot/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 330)
@@ -598,7 +653,7 @@
 	heating_products = list(/datum/reagent/leporazine)
 	heating_point = 100 CELSIUS
 	heating_message = "Becomes clear and smooth."
-	scannable = 0
+	scannable = 1
 
 /datum/reagent/leporazine/cold/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature > 290)
@@ -614,8 +669,10 @@
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#bf80bf"
+	scannable = 1
 	metabolism = 0.01
 	data = 0
+	value = 6
 
 /datum/reagent/methylphenidate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -634,8 +691,10 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#ff80ff"
+	scannable = 1
 	metabolism = 0.01
 	data = 0
+	value = 6
 
 /datum/reagent/citalopram/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -654,8 +713,10 @@
 	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
 	reagent_state = LIQUID
 	color = "#ff80bf"
+	scannable = 1
 	metabolism = 0.01
 	data = 0
+	value = 3.5
 
 /datum/reagent/paroxetine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -683,6 +744,7 @@
 	overdose = 6
 	scannable = 1
 	data = 0
+	value = 2
 
 /datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -709,6 +771,7 @@
 	color = "#684b3c"
 	scannable = 1
 	var/nicotine = REM * 0.2
+	value = 3
 
 /datum/reagent/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -717,10 +780,12 @@
 /datum/reagent/tobacco/fine
 	name = "Fine Tobacco"
 	taste_description = "fine tobacco"
+	value = 5
 
 /datum/reagent/tobacco/bad
 	name = "Terrible Tobacco"
 	taste_description = "acrid smoke"
+	value = 0
 
 /datum/reagent/tobacco/liquid
 	name = "Nicotine Solution"
@@ -757,6 +822,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	value = 5
 
 /datum/reagent/rezadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustCloneLoss(-20 * removed)
@@ -818,6 +884,7 @@
 	scannable = 1
 	overdose = 20
 	metabolism = 0.1
+	value = 2
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(alien == IS_DIONA)

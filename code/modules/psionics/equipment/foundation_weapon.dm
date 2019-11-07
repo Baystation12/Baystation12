@@ -10,7 +10,7 @@
 
 /obj/item/weapon/storage/briefcase/foundation
 	name = "\improper Foundation briefcase"
-	desc = "A handsome black leather briefcase embossed with the Cuchulain Foundation logo."
+	desc = "A handsome black leather briefcase embossed with a stylized radio telescope."
 	icon_state = "fbriefcase"
 	item_state = "fbriefcase"
 

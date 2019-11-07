@@ -4,10 +4,10 @@
 
 /obj/machinery/atmospherics/unary/outlet_injector
 	icon = 'icons/atmos/injector.dmi'
-	icon_state = "map_injector"
+	icon_state = "off"
 
-	name = "air injector"
-	desc = "Injects air into its surroundings using a passive or injection mode. Passive mode will only inject when internal pressure is greater."
+	name = "injector"
+	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
 
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
@@ -17,18 +17,36 @@
 
 	var/volume_rate = 50	//flow rate limit
 
-	var/frequency = 0
+	var/frequency = 1439
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
+
 	level = 1
 
-/obj/machinery/atmospherics/unary/outlet_injector/New()
-	..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 
-/obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()
-	if(!powered())
+	build_icon = 'icons/atmos/injector.dmi'
+	build_icon_state = "map_injector"
+
+/obj/machinery/atmospherics/unary/outlet_injector/Initialize()
+	. = ..()
+	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	
+
+/obj/machinery/atmospherics/unary/outlet_injector/Initialize()
+	. = ..()
+	set_frequency(frequency)
+
+/obj/machinery/atmospherics/unary/outlet_injector/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
+
+/obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()	
+	if (!node)
+		update_use_power(POWER_USE_OFF)
+
+	if(stat & NOPOWER)
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
@@ -39,7 +57,49 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		add_underlay(T, node, dir)
+		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+			return
+		else
+			if(node)
+				add_underlay(T, node, dir, node.icon_connect_type)
+			else
+				add_underlay(T,, dir)
+
+/obj/machinery/atmospherics/unary/outlet_injector/proc/get_console_data()
+	. = list()
+	. += "<table>"
+	. += "<tr><td><b>Name:</b></td><td>[name]</td>"
+	. += "<tr><td><b>Power:</b></td><td>[use_power?("<font color = 'green'>Injecting</font>"):("<font color = 'red'>Offline</font>")]</td><td><a href='?src=\ref[src];toggle_power=\ref[src]'>Toggle</a></td></tr>"
+	. += "<tr><td><b>ID Tag:</b></td><td>[id]</td><td><a href='?src=\ref[src];settag=\ref[id]'>Set ID Tag</a></td></td></tr>"
+	if(frequency%10)
+		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10]</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
+	else
+		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10].0</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
+	.+= "</table>"
+	. = JOINTEXT(.)
+
+/obj/machinery/atmospherics/unary/outlet_injector/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if((. = ..()))
+		return
+	if(href_list["toggle_power"])
+		use_power = update_use_power(!use_power)
+		queue_icon_update()
+		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+		return TOPIC_REFRESH
+	if(href_list["settag"])
+		var/t = sanitizeSafe(input(user, "Enter the ID tag for [src.name]", src.name, id), MAX_NAME_LEN)
+		if(t && CanInteract(user, state))
+			id = t
+			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
+	if(href_list["setfreq"])
+		var/freq = input(user, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
+		if(CanInteract(user, state))
+			set_frequency(freq)
+			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
 
 /obj/machinery/atmospherics/unary/outlet_injector/Process()
 	..()
@@ -113,10 +173,6 @@
 
 	return 1
 
-/obj/machinery/atmospherics/unary/outlet_injector/Initialize()
-	. = ..()
-	set_frequency(frequency)
-
 /obj/machinery/atmospherics/unary/outlet_injector/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || signal.data["tag"] != id || signal.data["sigtype"]!="command")
 		return 0
@@ -141,7 +197,20 @@
 
 	addtimer(CALLBACK(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
 
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
 	update_underlays()
+
+/obj/machinery/atmospherics/unary/outlet_injector/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(isMultitool(O))
+		var/datum/browser/popup = new (user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
+		popup.set_content(jointext(get_console_data(),"<br>"))
+		popup.open()
+		return
+		
+	if(isWrench(O))
+		new /obj/item/pipe(loc, src)
+		qdel(src)
+		return
+	return ..()

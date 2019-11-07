@@ -24,7 +24,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
-	plane = BASE_PLANE
+	plane = DEFAULT_PLANE
 	layer = BASE_AREA_LAYER
 	luminosity = 0
 	mouse_opacity = 0
@@ -74,7 +74,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_environ = 0
 	has_gravity = 0
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
+	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
 	secure = FALSE
 
 area/space/atmosalert()
@@ -183,18 +183,12 @@ area/space/atmosalert()
 	icon_state = "shuttlered2"
 	req_access = list(access_syndicate)
 
-/area/skipjack_station/start
-	name = "\improper Skipjack"
-	icon_state = "yellow"
-	req_access = list(access_syndicate)
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-
 /area/supply
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	req_access = list(access_cargo)
 
-/area/syndicate_mothership/elite_squad
+/area/syndicate_elite_squad
 	name = "\improper Elite Mercenary Squad"
 	icon_state = "syndie-elite"
 	req_access = list(access_syndicate)
@@ -213,13 +207,6 @@ area/space/atmosalert()
 /*
 * Special Areas
 */
-/area/wizard_station
-	name = "\improper Wizard's Den"
-	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 0
-	req_access = list(access_syndicate)
-
 /area/beach
 	name = "Keelin's private beach"
 	icon_state = "null"
@@ -242,6 +229,7 @@ area/space/atmosalert()
 	process()
 
 /area/beach/Entered(atom/movable/Obj,atom/OldLoc)
+	. = ..()
 	if(ismob(Obj))
 		var/mob/M = Obj
 		if(M.client)

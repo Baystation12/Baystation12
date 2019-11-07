@@ -57,7 +57,6 @@
 		/obj/item/weapon/storage/fancy/crayons,
 		/obj/item/weapon/storage/backpack/holding,
 		/obj/item/weapon/storage/belt/champion,
-		/obj/item/weapon/soap/deluxe,
 		/obj/item/weapon/pickaxe/silver,
 		/obj/item/weapon/pen/invisible,
 		/obj/item/weapon/lipstick/random,
@@ -83,7 +82,7 @@
 		/obj/item/toy/prize/mauler,
 		/obj/item/toy/prize/odysseus,
 		/obj/item/toy/prize/phazon,
-		/obj/item/toy/prize/ripley,
+		/obj/item/toy/prize/powerloader,
 		/obj/item/toy/prize/seraph,
 		/obj/item/toy/spinningtoy,
 		/obj/item/toy/sword,
@@ -146,7 +145,7 @@
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
-	var/amount = 2.5*base_storage_cost(ITEM_SIZE_HUGE)
+	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 
 /obj/item/weapon/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
@@ -183,8 +182,9 @@
 	return
 
 
-/obj/item/weapon/wrapping_paper/examine(mob/user)
-	if(..(user, 1))
+/obj/item/weapon/wrapping_paper/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)

@@ -6,6 +6,11 @@
 	pda_type = /obj/item/modular_computer/pda
 	id_type = /obj/item/weapon/card/id/torch/passenger
 
+/decl/hierarchy/outfit/job/torch/passenger/passenger/psychologist
+	name = OUTFIT_JOB_NAME("Passenger - Psychologist")
+	uniform = /obj/item/clothing/under/rank/psych/turtleneck
+	shoes = /obj/item/clothing/shoes/laceup
+
 /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist
 	name = OUTFIT_JOB_NAME("Journalist - Torch")
 	backpack_contents = list(/obj/item/device/camera/tvcamera = 1,
@@ -26,19 +31,6 @@
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda
 	id_type = /obj/item/weapon/card/id/torch/merchant
-
-/decl/hierarchy/outfit/job/torch/stowaway
-	name = OUTFIT_JOB_NAME("Stowaway - Torch")
-	id_type = null
-	pda_type = null
-	l_ear = null
-	l_pocket = /obj/item/weapon/wrench
-	r_pocket = /obj/item/weapon/crowbar
-
-/decl/hierarchy/outfit/job/torch/stowaway/post_equip(var/mob/living/carbon/human/H)
-	..()
-	var/obj/item/weapon/card/id/torch/stowaway/ID = new(H.loc)
-	H.put_in_hands(ID)
 
 /decl/hierarchy/outfit/job/torch/ert
 	name = OUTFIT_JOB_NAME("ERT - Torch")

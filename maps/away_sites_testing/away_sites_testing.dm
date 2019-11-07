@@ -1,6 +1,5 @@
 #if !defined(using_map_DATUM)
 	#include "away_sites_testing_lobby.dm"
-	#include "away_sites_testing_unit_testing.dm"
 
 	#include "blank.dmm"
 
@@ -18,7 +17,10 @@
 //	#include "../away/icarus/icarus.dm" temporarily removed while we investigate Travis failures
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lar_maria/lar_maria.dm"
+	#include "../away/skrellscoutship/skrellscoutship.dm"
 	#include "../away/unishi/unishi.dm"
+	#include "../away/ascent/ascent.dm"
+
 	#include "../away/voxship/voxship.dm"
 
 	#define using_map_DATUM /datum/map/away_sites_testing

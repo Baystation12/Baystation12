@@ -7,6 +7,9 @@
 	anchored = 1
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -145,6 +148,8 @@
 		harvest()
 
 /obj/machinery/portable_atmospherics/hydroponics/Initialize()
+	if(!mechanical)
+		construct_state = null
 	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
@@ -153,7 +158,7 @@
 	if(mechanical)
 		connect()
 	update_icon()
-	STOP_PROCESSING(SSmachines, src)
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	START_PROCESSING(SSplants, src)
 	return INITIALIZE_HINT_LATELOAD
 
@@ -291,10 +296,12 @@
 
 //Clears out a dead plant.
 /obj/machinery/portable_atmospherics/hydroponics/proc/remove_dead(var/mob/user, var/silent)
-	if(!user || !dead) return
+	if(!dead)
+		return
 
 	if(closed_system)
-		to_chat(user, "You can't remove the dead plant while the lid is shut.")
+		if(user)
+			to_chat(user, "You can't remove the dead plant while the lid is shut.")
 		return FALSE
 
 	seed = null
@@ -304,7 +311,8 @@
 	yield_mod = 0
 	mutation_mod = 0
 
-	if(!silent) to_chat(user, "You remove the dead plant.")
+	if(!silent && user)
+		to_chat(user, "You remove the dead plant.")
 	lastproduce = 0
 	check_health()
 	return TRUE
@@ -337,7 +345,7 @@
 		return
 
 	// Check if we should even bother working on the current seed datum.
-	if(seed.mutants. && seed.mutants.len && severity > 1)
+	if(seed.mutants && seed.mutants.len && severity > 1)
 		mutate_species()
 		return
 
@@ -401,27 +409,31 @@
 
 	return
 
-/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O, var/mob/user)
 
 	if (O.is_open_container())
 		return 0
 
-	if(isWirecutter(O) || istype(O, /obj/item/weapon/scalpel))
+	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
 
 		if(!seed)
-			to_chat(user, "There is nothing to take a sample from in \the [src].")
+			to_chat(user, SPAN_WARNING("There is nothing to take a sample from in \the [src]."))
 			return
 
 		if(sampled)
-			to_chat(user, "You have already sampled from this plant.")
+			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
 			return
 
 		if(dead)
-			to_chat(user, "The plant is dead.")
+			to_chat(user, SPAN_WARNING("The plant is dead."))
 			return
 
-		// Create a sample.
-		seed.harvest(user,yield_mod,1)
+		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
+			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
+		else
+			// Create a sample.
+			seed.harvest(user,yield_mod,1)
 		health -= (rand(3,5)*10)
 
 		if(prob(30))
@@ -507,7 +519,8 @@
 		if(!dead)
 			health -= O.force
 			check_health()
-	return
+	else if(mechanical)
+		return component_attackby(O, user)
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(var/mob/user, var/obj/item/seeds/S)
 
@@ -538,21 +551,16 @@
 	qdel(S)
 	check_health()
 
-/obj/machinery/portable_atmospherics/hydroponics/attack_tk(mob/user as mob)
-	if(dead)
-		remove_dead(user)
-	else if(harvest)
-		harvest(user)
+/obj/machinery/portable_atmospherics/hydroponics/attack_robot(mob/user)
+	return FALSE // no hands
 
-/obj/machinery/portable_atmospherics/hydroponics/attack_hand(mob/user as mob)
-
-	if(istype(usr,/mob/living/silicon))
-		return
-
+/obj/machinery/portable_atmospherics/hydroponics/physical_attack_hand(mob/user)
 	if(harvest)
 		harvest(user)
-	else if(dead)
+		return TRUE
+	if(dead)
 		remove_dead(user)
+		return TRUE
 
 /obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
 	. = ..(user)
@@ -625,3 +633,11 @@
 	lastcycle = world.time
 	qdel(S)
 	check_health()
+
+/obj/machinery/portable_atmospherics/hydroponics/do_simple_ranged_interaction(var/mob/user)
+	if(dead)
+		remove_dead()
+	else if(harvest)
+		harvest()
+	return TRUE
+

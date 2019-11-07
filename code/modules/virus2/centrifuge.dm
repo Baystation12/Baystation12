@@ -32,9 +32,9 @@
 	if(! (stat & (BROKEN|NOPOWER)))
 		icon_state = (isolating || curing) ? "centrifuge_moving" : "centrifuge"
 
-/obj/machinery/computer/centrifuge/attack_hand(var/mob/user as mob)
-	if(..()) return
+/obj/machinery/computer/centrifuge/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/centrifuge/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
@@ -78,7 +78,6 @@
 		ui.open()
 
 /obj/machinery/computer/centrifuge/Process()
-	..()
 	if (stat & (NOPOWER|BROKEN)) return
 
 	if (curing)
@@ -137,7 +136,7 @@
 					delay = delay/2
 
 			curing = round(delay)
-			playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
+			playsound(src.loc, 'sound/machines/juicer_old.ogg', 50, 1)
 			update_icon()
 			return TOPIC_REFRESH
 

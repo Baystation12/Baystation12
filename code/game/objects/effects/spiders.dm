@@ -117,7 +117,6 @@
 	desc = "It never stays still for long."
 	icon_state = "guard"
 	anchored = 0
-	plane = OBJ_PLANE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -198,11 +197,32 @@
 	if(health <= 0)
 		die()
 
+/obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
+		forceMove(get_turf(entry_vent))
+		entry_vent = null
+		return TRUE
+
+/obj/effect/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, var/travel_time)
+	if(check_vent(exit_vent))
+		return
+	if(prob(50))
+		src.visible_message("<span class='notice'>You hear something squeezing through the ventilation ducts.</span>",2)
+	forceMove(exit_vent)
+	addtimer(CALLBACK(src, .proc/end_vent_moving, exit_vent), travel_time)
+
+/obj/effect/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+	if(check_vent(exit_vent))
+		return
+	forceMove(get_turf(exit_vent))
+	travelling_in_vent = FALSE
+	entry_vent = null
+
 /obj/effect/spider/spiderling/Process()
 
 	if(loc)
 		var/datum/gas_mixture/environment = loc.return_air()
-		if(environment && environment.gas["methyl_bromide"] > 0)
+		if(environment && environment.gas[GAS_METHYL_BROMIDE] > 0)
 			die()
 			return
 
@@ -220,29 +240,12 @@
 					entry_vent = null
 					return
 				var/obj/machinery/atmospherics/unary/vent_pump/exit_vent = pick(vents)
-				/*if(prob(50))
-					src.visible_message("<B>[src] scrambles into the ventillation ducts!</B>")*/
 
-				spawn(rand(20,60))
-					forceMove(exit_vent)
-					var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
-					spawn(travel_time)
-
-						if(!exit_vent || exit_vent.welded)
-							forceMove(entry_vent)
-							entry_vent = null
-							return
-
-						if(prob(50))
-							src.visible_message("<span class='notice'>You hear something squeezing through the ventilation ducts.</span>",2)
-						sleep(travel_time)
-
-						if(!exit_vent || exit_vent.welded)
-							forceMove(entry_vent)
-							entry_vent = null
-							return
-						forceMove(exit_vent.loc)
-						entry_vent = null
+				forceMove(entry_vent)
+				var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
+				addtimer(CALLBACK(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
+				travelling_in_vent = TRUE
+				return
 			else
 				entry_vent = null
 	//=================
@@ -302,7 +305,6 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
 	anchored = 1
-	plane = ABOVE_TURF_PLANE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon

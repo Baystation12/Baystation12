@@ -13,7 +13,7 @@
 /mob/observer/ghost/DblClickOn(var/atom/A, var/params)
 	if(can_reenter_corpse && mind && mind.current)
 		if(A == mind.current || (mind.current in A)) // double click your corpse or whatever holds it
-			reenter_corpse()						// (cloning scanner, body bag, closet, mech, etc)
+			reenter_corpse()						// (cloning scanner, body bag, closet, exosuit, etc)
 			return
 
 	// Things you might plausibly want to follow
@@ -39,8 +39,11 @@
 		var/target_turf = get_turf(A)
 		if(target_turf)
 			AltClickOn(target_turf)
-	else
-		A.attack_ghost(src)
+		return
+	if(modifiers["shift"])
+		examinate(A)
+		return
+	A.attack_ghost(src)
 
 // Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
 /atom/proc/attack_ghost(mob/observer/ghost/user as mob)

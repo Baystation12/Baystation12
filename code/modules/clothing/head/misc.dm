@@ -301,19 +301,37 @@
 	item_state = "taqiyah"
 	body_parts_covered = 0
 
+/obj/item/clothing/head/rastacap
+	name = "rastacap"
+	desc = "A round, crocheted cap, often worn to tuck hair away or for religious purposes."
+	icon_state = "rastacap"
+	item_state = "rastacap"
+	body_parts_covered = 0
+	flags_inv = BLOCKHEADHAIR
+
 /obj/item/clothing/head/tank
 	name = "padded cap"
 	desc = "A padded skullcup for those prone to bumping their heads against hard surfaces."
 	icon_state = "tank"
 	flags_inv = BLOCKHEADHAIR
 	color = "#5f5f5f"
-	armor = list(melee = 20)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bomb = ARMOR_BOMB_PADDED
+		)
 
 /obj/item/clothing/head/tank/olive
 	color = "#727c58"
 
 /obj/item/clothing/head/tank/tan
 	color = "#ae9f79"
+
+/obj/item/clothing/head/beanie
+	name = "beanie"
+	desc = "A head-hugging brimless winter cap. This one is tight."
+	icon_state = "beanie"
+	item_state = "beanie"
+	body_parts_covered = 0
 
 /obj/item/clothing/head/helmet/facecover
 	name = "face cover"

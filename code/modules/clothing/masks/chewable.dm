@@ -19,7 +19,7 @@ obj/item/clothing/mask/chewable/New()
 
 /obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
 	..()
-	if(slot == SLOT_MASK)
+	if(slot == slot_wear_mask)
 		if(user.check_has_mouth())
 			START_PROCESSING(SSobj, src)
 		else
@@ -45,13 +45,9 @@ obj/item/clothing/mask/chewable/Destroy()
 			STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/chewable/Process()
-	if(!equipped())
-		STOP_PROCESSING(SSobj, src)
-		return
 	chew(1)
 	if(chewtime < 1)
 		extinguish()
-		return
 
 /obj/item/clothing/mask/chewable/tobacco
 	name = "wad"
@@ -188,3 +184,20 @@ obj/item/clothing/mask/chewable/Destroy()
 				/datum/reagent/kelotane,
 				/datum/reagent/inaprovaline)), 10)
 	color = reagents.get_color()
+
+/obj/item/clothing/mask/chewable/candy/lolli/weak_meds
+	name = "medicine lollipop"
+	desc = "A sucrose sphere on a small handle, it has been infused with medication."
+	filling = list(/datum/reagent/sugar = 6)
+
+/obj/item/clothing/mask/chewable/candy/lolli/weak_meds/New()
+	..()
+	var/datum/reagent/payload = pick(list(
+				/datum/reagent/antidexafen,
+				/datum/reagent/paracetamol,
+				/datum/reagent/tricordrazine,
+				/datum/reagent/dylovene,
+				/datum/reagent/inaprovaline))
+	reagents.add_reagent(payload, 15)
+	color = reagents.get_color()
+	desc = "[desc]. This one is labeled '[initial(payload.name)]'"

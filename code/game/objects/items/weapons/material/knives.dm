@@ -13,6 +13,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE
 	edge = TRUE
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 /obj/item/weapon/material/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
 	if(!istype(M))
@@ -37,6 +38,9 @@
 	attack_verb = list("prodded")
 	applies_material_name = FALSE
 	w_class = ITEM_SIZE_SMALL
+
+/obj/item/weapon/material/knife/table/plastic
+	default_material = MATERIAL_PLASTIC
 
 /obj/item/weapon/material/knife/table/unathi
 	name = "dueling knife"

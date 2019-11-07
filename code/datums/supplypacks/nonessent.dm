@@ -248,64 +248,15 @@
 	cost = 10
 	containername = "chaplain equipment crate"
 
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl1
-	name = "Mod - Ripley APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl2
-	name = "Mod - Death APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley/death)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
-	name = "Mod - Hot Rod APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley/flames_red)
+	name = "Mod - \"Firestarter\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/powerloader/flames_red)
 	cost = 50
-	containername = "\improper EXO modkit heavy crate"
+	containername = "heavy exosuit modkit crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl4
 	num_contained = 1
-	name = "Mod - Cool Ice APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley/flames_blue)
+	name = "Mod - \"Burning Chrome\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/powerloader/flames_blue)
 	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_durand1
-	name = "Mod - Durand exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/durand)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-	supply_method = /decl/supply_method/randomized
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_durand2
-	name = "Mod - Seraph Durand exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/durand/seraph)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_durand3
-	name = "Mod - Phazon Durand exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/durand/phazon)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_gygax1
-	name = "Mod - Gygax exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/gygax)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_gygax2
-	name = "Mod - Dark Gygax exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/gygax/darkgygax)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_gygax3
-	name = "Mod - Recitence Gygax exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/gygax/recitence)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
+	containername = "heavy exosuit modkit crate"

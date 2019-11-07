@@ -7,6 +7,7 @@
 	you away, knocking you cold unconcious.  Before this happened you were a crew member \
 	on this research vessel, SRV Verne, as it carried the members of the presitigous Ceti Technical institute in \
 	their pursuit of research. "
+	required_language = LANGUAGE_HUMAN_EURO
 
 /datum/job/submap/unishi_researcher
 	title = "Unishi Researcher"
@@ -15,6 +16,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/unishi/researcher
 	info = "You remember waking up to alarms blaring in your face. Before you could react, a gush of hot air blew \
 	you away, knocking you cold unconcious. Before this happened, you were a researcher, aboard SRV Verne."
+	required_language = LANGUAGE_HUMAN_EURO
 
 
 #define UNISHI_OUTFIT_JOB_NAME(job_name) ("CTI Research Vessel - Job - " + job_name)

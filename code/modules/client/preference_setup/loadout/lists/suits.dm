@@ -78,6 +78,10 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/suit/labcoat_blue
+	display_name = "blue trimmed labcoat"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
+
 /datum/gear/suit/labcoat_corp
 	display_name = "labcoat, corporate colors"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
@@ -132,7 +136,7 @@
 
 /datum/gear/suit/medcoat/New()
 	..()
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/storage/toggle/labcoat/blue, /obj/item/clothing/suit/surgicalapron)
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/surgicalapron)
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"

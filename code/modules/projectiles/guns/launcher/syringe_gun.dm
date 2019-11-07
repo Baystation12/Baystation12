@@ -145,8 +145,9 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 3
 	throw_distance = 7
-	release_force = 7
+	release_force = 10
 
-/obj/item/weapon/gun/launcher/syringe/disguised/examine(mob/user)
-	if(( . = ..(user, 0)))
+/obj/item/weapon/gun/launcher/syringe/disguised/examine(mob/user, distance)
+	. = ..()
+	if(distance == 0)
 		to_chat(user, "The button is a little stiff.")

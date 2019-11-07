@@ -104,6 +104,10 @@
 		return
 
 	var/list/signature_and_data = splittext(Ps, ":")
+
+	if(signature_and_data.len < 2)
+		return
+
 	var/signature = signature_and_data[1]
 	var/result = signature_and_data[2]
 

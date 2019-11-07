@@ -5,7 +5,15 @@
 	icon_state = "deathsquad"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
-	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 100, rad = 100)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_PISTOL, 
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 0.6
 
@@ -17,7 +25,15 @@
 /obj/item/clothing/head/helmet/space/void/skrell
 	name = "Skrellian helmet"
 	desc = "Smoothly contoured and polished to a shine. Still looks like a fishbowl."
-	armor = list(melee = 20, bullet = 20, laser = 50,energy = 50, bomb = 50, bio = 100, rad = 100)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_SMALL, 
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_STRONG, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SHIELDED
+		)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list(SPECIES_SKRELL,SPECIES_HUMAN)
 
@@ -30,7 +46,15 @@
 /obj/item/clothing/suit/space/void/skrell
 	name = "Skrellian voidsuit"
 	desc = "Seems like a wetsuit with reinforced plating seamlessly attached to it. Very chic."
-	armor = list(melee = 20, bullet = 20, laser = 50,energy = 50, bomb = 50, bio = 100, rad = 100)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_SMALL, 
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_STRONG, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SHIELDED
+		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE

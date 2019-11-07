@@ -8,6 +8,7 @@
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
+	obj_flags = OBJ_FLAG_ROTATABLE
 	alpha = 180
 	var/material/reinf_material
 	var/init_material = MATERIAL_GLASS
@@ -20,6 +21,7 @@
 	var/polarized = 0
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
+	rad_resistance_modifier = 0.5
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
@@ -52,10 +54,9 @@
 
 	maxhealth = material.integrity
 	if(reinf_material)
-		maxhealth += 0.25 * reinf_material.integrity
+		maxhealth += 0.5 * reinf_material.integrity
 
 	if(is_fulltile())
-		maxhealth *= 4
 		layer = FULL_WINDOW_LAYER
 
 	health = maxhealth
@@ -104,17 +105,20 @@
 		if(sound_effect)
 			playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
-			visible_message("<span class='notice'>\The [src] looks like it's about to shatter!</span>")
+			visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))
+			playsound(loc, "glasscrack", 100, 1)
 		else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
-			visible_message("\The [src] looks seriously damaged!" )
+			visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
+			playsound(loc, "glasscrack", 100, 1)
 		else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
-			visible_message("Cracks begin to appear in \the [src]!" )
+			visible_message(SPAN_WARNING("Cracks begin to appear in \the [src]!"))
+			playsound(loc, "glasscrack", 100, 1)
 	return
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
-		visible_message("<span class='notice'>\The [src] shatters!</span>")
+		visible_message("<span class='warning'>\The [src] shatters!</span>")
 
 	var/debris_count = is_fulltile() ? 4 : 1
 	for(var/i = 0 to debris_count)
@@ -172,10 +176,6 @@
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
 
-/obj/structure/window/attack_tk(mob/user as mob)
-	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
-	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
-
 /obj/structure/window/attack_hand(mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)
@@ -220,6 +220,11 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
 
+/obj/structure/window/do_simple_ranged_interaction(var/mob/user)
+	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))
+	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
+	return TRUE
+
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
 
@@ -249,13 +254,13 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
-			var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 2)
+			var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 1)
 			if(S && reinf_material)
 				S.reinf_material = reinf_material
 				S.update_strings()
 				S.update_icon()
 			qdel(src)
-	else if(isCoil(W) && reinf_material && !polarized)
+	else if(isCoil(W) && !polarized && is_fulltile())
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
@@ -270,6 +275,17 @@
 			src.id = t
 			to_chat(user, "<span class='notice'>The new ID of the window is [id]</span>")
 		return
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) && anchored)
+		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+		if(!cutter.slice(user))
+			return
+		playsound(src, 'sound/items/Welder.ogg', 80, 1)
+		visible_message("<span class='notice'>[user] has started slicing through the window's frame!</span>")
+		if(do_after(user,20,src))
+			visible_message("<span class='warning'>[user] has sliced through the window's frame!</span>")
+			playsound(src, 'sound/items/Welder.ogg', 80, 1)
+			construction_state = 0
+			set_anchored(0)
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -278,7 +294,6 @@
 			if(health <= 7)
 				set_anchored(FALSE)
 				step(src, get_dir(user, src))
-				update_verbs()
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
@@ -308,36 +323,17 @@
 	if(reinf_material) damage *= 0.5
 	take_damage(damage)
 
-/obj/structure/window/proc/rotate()
-	set name = "Rotate Window Counter-Clockwise"
-	set category = "Object"
-	set src in oview(1)
+/obj/structure/window/rotate(mob/user)
+	if(!CanPhysicallyInteract(user))
+		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
+		return
 
-	if(usr.incapacitated())
-		return 0
-
-	if(anchored)
-		to_chat(usr, "It is fastened to the floor therefore you can't rotate it!")
-		return 0
+	if (anchored)
+		to_chat(user, SPAN_NOTICE("\The [src] is secured to the floor!"))
+		return
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
 	set_dir(turn(dir, 90))
-	update_nearby_tiles(need_rebuild=1)
-
-/obj/structure/window/proc/revrotate()
-	set name = "Rotate Window Clockwise"
-	set category = "Object"
-	set src in oview(1)
-
-	if(usr.incapacitated())
-		return 0
-
-	if(anchored)
-		to_chat(usr, "It is fastened to the floor therefore you can't rotate it!")
-		return 0
-
-	update_nearby_tiles(need_rebuild=1) //Compel updates before
-	set_dir(turn(dir, 270))
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/structure/window/Move()
@@ -357,25 +353,14 @@
 	if(anchored == new_anchored)
 		return
 	anchored = new_anchored
-	update_verbs()
-	update_nearby_icons()
 	update_connections(1)
-	update_icon()
+	update_nearby_icons()
 
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
 	update_icon()
 	for(var/obj/structure/window/W in orange(src, 1))
 		W.update_icon()
-
-//Updates the availabiliy of the rotation verbs
-/obj/structure/window/proc/update_verbs()
-	if(anchored)
-		verbs -= /obj/structure/window/proc/rotate
-		verbs -= /obj/structure/window/proc/revrotate
-	else
-		verbs += /obj/structure/window/proc/rotate
-		verbs += /obj/structure/window/proc/revrotate
 
 // Visually connect with every type of window as long as it's full-tile.
 /obj/structure/window/can_visually_connect()
@@ -431,6 +416,9 @@
 /obj/structure/window/basic/full
 	dir = 5
 	icon_state = "window_full"
+
+/obj/structure/window/basic/full/polarized
+	polarized = 1
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"
@@ -508,13 +496,12 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
 	desc = "A remote control switch for electrochromic windows."
+	var/id
 	var/range = 7
-
-/obj/machinery/button/windowtint/attack_hand(mob/user as mob)
-	if(..())
-		return 1
-
-	toggle_tint()
+	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/apc
+	)
 
 /obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(isMultitool(W))
@@ -534,19 +521,18 @@
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
 
-/obj/machinery/button/windowtint/proc/toggle_tint()
-	use_power_oneoff(5)
-
-	active = !active
-	queue_icon_update()
+/obj/machinery/button/windowtint/activate()
+	if(operating)
+		return
 	for(var/obj/structure/window/W in range(src,range))
 		if(W.polarized && (W.id == src.id || !W.id))
 			W.toggle()
+	..()
 
 /obj/machinery/button/windowtint/power_change()
 	. = ..()
-	if(active && !powered(power_channel))
-		toggle_tint()
+	if(active && (stat & NOPOWER))
+		activate()
 
 /obj/machinery/button/windowtint/on_update_icon()
 	icon_state = "light[active]"
@@ -571,6 +557,10 @@
 	return
 
 /proc/place_window(mob/user, loc, dir_to_set, obj/item/stack/material/ST)
+	var/required_amount = (dir_to_set & (dir_to_set - 1)) ? 4 : 1
+	if (!ST.can_use(required_amount))
+		to_chat(user, "<span class='notice'>You do not have enough sheets.</span>")
+		return
 	for(var/obj/structure/window/WINDOW in loc)
 		if(WINDOW.dir == dir_to_set)
 			to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")
@@ -588,7 +578,11 @@
 				to_chat(user, "<span class='notice'>There is already a window there.</span>")
 				return
 
-		if (ST.use(1))
+		if (ST.use(required_amount))
 			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.name, ST.reinf_material && ST.reinf_material.name)
-			to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
-			WD.update_icon()
+			to_chat(user, "<span class='notice'>You place [WD].</span>")
+			WD.construction_state = 0
+			WD.set_anchored(FALSE)
+		else
+			to_chat(user, "<span class='notice'>You do not have enough sheets.</span>")
+			return

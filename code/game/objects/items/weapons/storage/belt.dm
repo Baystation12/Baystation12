@@ -79,7 +79,7 @@
 		. = ..(user)
 
 /obj/item/weapon/storage/belt/holster/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	H.examine_holster(user)
 
@@ -115,13 +115,13 @@
 		/obj/item/device/flashlight,
 		/obj/item/stack/cable_coil,
 		/obj/item/device/t_scanner,
-		/obj/item/device/analyzer,
+		/obj/item/device/scanner/gas,
 		/obj/item/taperoll/engineering,
 		/obj/item/inducer/,
 		/obj/item/device/robotanalyzer,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
-		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/device/scanner/plant,
 		/obj/item/taperoll,
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/marshalling_wand,
@@ -159,7 +159,7 @@
 	icon_state = "medicalbelt"
 	item_state = "medical"
 	can_hold = list(
-		/obj/item/device/healthanalyzer,
+		/obj/item/device/scanner/health,
 		/obj/item/weapon/reagent_containers/dropper,
 		/obj/item/weapon/reagent_containers/glass/beaker,
 		/obj/item/weapon/reagent_containers/glass/bottle,
@@ -389,9 +389,9 @@
 		/obj/item/device/flashlight,
 		/obj/item/device/radio,
 		/obj/item/device/gps,
-		/obj/item/weapon/mining_scanner,
-		/obj/item/device/slime_scanner,
-		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/device/scanner/mining,
+		/obj/item/device/scanner/xenobio,
+		/obj/item/device/scanner/plant,
 		/obj/item/weapon/folder,
 		/obj/item/weapon/paper,
 		/obj/item/weapon/pen,
@@ -400,7 +400,7 @@
 		/obj/item/weapon/pinpointer/radio,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
-		/obj/item/device/analyzer
+		/obj/item/device/scanner/gas
 		)
 	can_holster = list(/obj/item/weapon/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
@@ -470,3 +470,26 @@
 /obj/item/weapon/storage/belt/waistpack/big/Initialize()
 	.=..()
 	slowdown_per_slot[slot_belt] = 1
+
+/obj/item/weapon/storage/belt/fire_belt
+	name = "firefighting equipment belt"
+	desc = "A belt specially designed for firefighting."
+	icon_state = "firebelt"
+	item_state = "gear"
+	storage_slots = 5
+	overlay_flags = BELT_OVERLAY_ITEMS
+	can_hold = list(
+		/obj/item/weapon/grenade/chem_grenade/water,
+		/obj/item/weapon/crowbar/emergency_forcing_tool,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/inflatable/door
+		)
+
+
+/obj/item/weapon/storage/belt/fire_belt/full
+	startswith = list(
+		/obj/item/inflatable/door,
+		/obj/item/weapon/crowbar/emergency_forcing_tool,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/weapon/grenade/chem_grenade/water = 2
+	)

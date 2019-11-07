@@ -95,12 +95,12 @@
 			else
 				to_chat(user, "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>")
 
-/obj/item/weapon/paper_bundle/examine(mob/user)
-	if(..(user, 1))
+/obj/item/weapon/paper_bundle/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		src.show_content(user)
 	else
 		to_chat(user, "<span class='notice'>It is too far away.</span>")
-	return
 
 /obj/item/weapon/paper_bundle/proc/show_content(mob/user as mob)
 	var/dat
@@ -129,7 +129,7 @@
 	else if(istype(pages[page], /obj/item/weapon/photo))
 		var/obj/item/weapon/photo/P = W
 		dat += "<html><head><title>[P.name]</title></head><body style='overflow:hidden'>"
-		dat += "<div> <img src='tmp_photo.png' width = '180'[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : ]</body></html>"
+		dat += "<div> <img src='tmp_photo.png' width = '180'[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : null ]</body></html>"
 		user << browse_rsc(P.img, "tmp_photo.png")
 		show_browser(user, JOINTEXT(dat), "window=[name]")
 

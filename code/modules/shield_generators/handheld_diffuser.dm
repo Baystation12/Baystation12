@@ -3,7 +3,7 @@
 	desc = "A small handheld device designed to disrupt energy barriers."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "hdiffuser_off"
-	origin_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ESOTERIC = 2)
 	var/obj/item/weapon/cell/device/cell
 	var/enabled = 0
 
@@ -46,7 +46,7 @@
 		STOP_PROCESSING(SSobj, src)
 	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 
-/obj/item/weapon/shield_diffuser/examine()
+/obj/item/weapon/shield_diffuser/examine(mob/user)
 	. = ..()
-	to_chat(usr, "The charge meter reads [cell ? cell.percent() : 0]%")
-	to_chat(usr, "It is [enabled ? "enabled" : "disabled"].")
+	to_chat(user, "The charge meter reads [cell ? cell.percent() : 0]%")
+	to_chat(user, "It is [enabled ? "enabled" : "disabled"].")

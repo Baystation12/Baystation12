@@ -126,6 +126,12 @@ var/const/EXP_FREQ = 1361
 var/const/MED_I_FREQ = 1485
 var/const/SEC_I_FREQ = 1475
 
+// Device signal frequencies
+var/const/FUEL_FREQ         = 1447 // Used by fuel atmos stuff, and currently default for digital valves
+var/const/BUTTON_FREQ       = 1301 // Used by generic buttons controlling stuff
+var/const/BLAST_DOORS_FREQ  = 1303 // Used by blast doors, buttons controlling them, and mass drivers.
+var/const/AIRLOCK_FREQ      = 1305 // Used by airlocks and buttons controlling them.
+
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
 	"Science"		= SCI_FREQ,
@@ -228,6 +234,20 @@ var/const/RADIO_SECBOT = "radio_secbot"
 var/const/RADIO_MULEBOT = "radio_mulebot"
 var/const/RADIO_MAGNETS = "radio_magnet"
 
+// These are exposed to players, by name.
+GLOBAL_LIST_INIT(all_selectable_radio_filters, list(
+	RADIO_DEFAULT,
+	RADIO_TO_AIRALARM,
+	RADIO_FROM_AIRALARM,
+	RADIO_CHAT,
+	RADIO_ATMOSIA,
+	RADIO_NAVBEACONS,
+	RADIO_AIRLOCK,
+	RADIO_SECBOT,
+	RADIO_MULEBOT,
+	RADIO_MAGNETS
+))
+
 var/global/datum/controller/radio/radio_controller
 
 /hook/startup/proc/createRadioController()
@@ -236,6 +256,7 @@ var/global/datum/controller/radio/radio_controller
 
 //callback used by objects to react to incoming radio signals
 /obj/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
+	set waitfor = FALSE
 	return null
 
 //The global radio controller
@@ -299,34 +320,31 @@ var/global/datum/controller/radio/radio_controller
 
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
 /datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/radio_filter, var/turf/start_point = null, var/range = null)
-	if (range && !start_point)
-		return
+	var/list/z_levels
+	if(start_point)
+		z_levels = GetConnectedZlevels(start_point.z)
 
 	for(var/obj/device in devices[radio_filter])
 		if(device == source)
 			continue
-		if(range)
-			var/turf/end_point = get_turf(device)
-			if(!end_point)
-				continue
-			if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
-				continue
+		var/turf/end_point = get_turf(device)
+		if(!end_point)
+			continue
+		if(z_levels && !(end_point.z in z_levels))
+			continue
+		if(range && get_dist(start_point, end_point) > range)
+			continue
 
 		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
 /datum/radio_frequency/proc/add_listener(obj/device as obj, var/radio_filter as text|null)
 	if (!radio_filter)
 		radio_filter = RADIO_DEFAULT
-	//log_admin("add_listener(device=[device],filter=[filter]) frequency=[frequency]")
 	var/list/obj/devices_line = devices[radio_filter]
 	if (!devices_line)
 		devices_line = new
 		devices[radio_filter] = devices_line
-	devices_line+=device
-//			var/list/obj/devices_line___ = devices[filter_str]
-//			var/l = devices_line___.len
-	//log_admin("DEBUG: devices_line.len=[devices_line.len]")
-	//log_admin("DEBUG: devices(filter_str).len=[l]")
+	devices_line |= device
 
 /datum/radio_frequency/proc/remove_listener(obj/device)
 	for (var/devices_filter in devices)

@@ -244,8 +244,8 @@
 			if("ian")				M.change_mob_type( /mob/living/simple_animal/corgi/Ian , null, null, delmob )
 			if("crab")				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
 			if("coffee")			M.change_mob_type( /mob/living/simple_animal/crab/Coffee , null, null, delmob )
-			if("parrot")			M.change_mob_type( /mob/living/simple_animal/parrot , null, null, delmob )
-			if("polyparrot")		M.change_mob_type( /mob/living/simple_animal/parrot/Poly , null, null, delmob )
+			if("parrot")			M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot , null, null, delmob )
+			if("polyparrot")		M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot/Poly , null, null, delmob )
 			if("constructarmoured")	M.change_mob_type( /mob/living/simple_animal/construct/armoured , null, null, delmob )
 			if("constructbuilder")	M.change_mob_type( /mob/living/simple_animal/construct/builder , null, null, delmob )
 			if("constructwraith")	M.change_mob_type( /mob/living/simple_animal/construct/wraith , null, null, delmob )
@@ -327,7 +327,7 @@
 			to_chat(usr, "This can only be used on instances of type /mob")
 			return
 
-		if(!M.ckey)	//sanity
+		if(!(LAST_CKEY(M)))	//sanity
 			to_chat(usr, "This mob has no ckey")
 			return
 
@@ -592,7 +592,9 @@
 		jobs += "<tr bgcolor='ffeeaa'><th colspan='10'><a href='?src=\ref[src];jobban3=Syndicate;jobban4=\ref[M]'>Antagonist Positions</a></th></tr><tr align='center'>"
 
 		// Antagonists.
+		#define ANTAG_COLUMNS 5
 		var/list/all_antag_types = GLOB.all_antag_types_
+		var/i = 1
 		for(var/antag_type in all_antag_types)
 			var/datum/antagonist/antag = all_antag_types[antag_type]
 			if(!antag || !antag.id)
@@ -601,8 +603,11 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.id];jobban4=\ref[M]'><font color=red>[replacetext("[antag.role_text]", " ", "&nbsp")]</font></a></td>"
 			else
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[antag.id];jobban4=\ref[M]'>[replacetext("[antag.role_text]", " ", "&nbsp")]</a></td>"
-
+			if(i % ANTAG_COLUMNS == 0 && i < length(all_antag_types))
+				jobs += "</tr><tr align='center'>"
+			i++
 		jobs += "</tr></table>"
+		#undef ANTAG_COLUMNS
 
 		var/list/misc_roles = list("Dionaea", "Graffiti")
 		//Other roles  (BLUE, because I have no idea what other color to make this)
@@ -771,7 +776,7 @@
 							msg = job
 						else
 							msg += ", [job]"
-					notes_add(M.ckey, "Banned  from [msg] - [reason]", usr)
+					notes_add(LAST_CKEY(M), "Banned  from [msg] - [reason]", usr)
 					message_admins("[key_name_admin(usr)] banned [key_name_admin(M)] from [msg] for [mins] minutes", 1)
 					to_chat(M, "<span class='danger'>You have been jobbanned by [usr.client.ckey] from: [msg].</span>")
 					to_chat(M, "<span class='warning'>The reason is: [reason]</span>")
@@ -792,7 +797,7 @@
 							jobban_fullban(M, job, "[reason]; By [usr.ckey] on [time2text(world.realtime)]")
 							if(!msg)	msg = job
 							else		msg += ", [job]"
-						notes_add(M.ckey, "Banned  from [msg] - [reason]", usr)
+						notes_add(LAST_CKEY(M), "Banned  from [msg] - [reason]", usr)
 						message_admins("[key_name_admin(usr)] banned [key_name_admin(M)] from [msg]", 1)
 						to_chat(M, "<span class='danger'>You have been jobbanned by [usr.client.ckey] from: [msg].</span>")
 						to_chat(M, "<span class='warning'>The reason is: [reason]</span>")
@@ -874,6 +879,11 @@
 
 		if(M.client && M.client.holder)	return	//admins cannot be banned. Even if they could, the ban doesn't affect them anyway
 
+		var/given_key = href_list["last_key"]
+		if(!given_key)
+			to_chat(usr, SPAN_DANGER("This mob has no known last occupant and cannot be banned."))
+			return
+
 		switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
 			if("Yes")
 				var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
@@ -886,9 +896,14 @@
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
-				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
-				ban_unban_log_save("[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.")
-				notes_add(M.ckey,"[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.",usr)
+				var/mob_key = LAST_CKEY(M)
+				if(mob_key != given_key)
+					to_chat(usr, SPAN_DANGER("This mob's occupant has changed from [given_key] to [mob_key]. Please try again."))
+					show_player_panel(M)
+					return
+				AddBan(mob_key, M.computer_id, reason, usr.ckey, 1, mins)
+				ban_unban_log_save("[usr.client.ckey] has banned [mob_key]. - Reason: [reason] - This will be removed in [mins] minutes.")
+				notes_add(mob_key,"[usr.client.ckey] has banned [mob_key]. - Reason: [reason] - This will be removed in [mins] minutes.",usr)
 				to_chat(M, "<span class='danger'>You have been banned by [usr.client.ckey].\nReason: [reason].</span>")
 				to_chat(M, "<span class='warning'>This is a temporary ban, it will be removed in [mins] minutes.</span>")
 				SSstatistics.add_field("ban_tmp",1)
@@ -898,7 +913,7 @@
 					to_chat(M, "<span class='warning'>To try to resolve this matter head to [config.banappeals]</span>")
 				else
 					to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
-				log_and_message_admins("has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
+				log_and_message_admins("has banned [mob_key].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
 				qdel(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
@@ -907,21 +922,26 @@
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
+				var/mob_key = LAST_CKEY(M)
+				if(mob_key != given_key)
+					to_chat(usr, SPAN_DANGER("This mob's occupant has changed from [given_key] to [mob_key]. Please try again."))
+					show_player_panel(M)
+					return
 				switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))
 					if("Cancel")	return
 					if("Yes")
-						AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0, M.lastKnownIP)
+						AddBan(mob_key, M.computer_id, reason, usr.ckey, 0, 0, M.lastKnownIP)
 					if("No")
-						AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0)
+						AddBan(mob_key, M.computer_id, reason, usr.ckey, 0, 0)
 				to_chat(M, "<span class='danger'>You have been banned by [usr.client.ckey].\nReason: [reason].</span>")
 				to_chat(M, "<span class='warning'>This is a ban until appeal.</span>")
 				if(config.banappeals)
 					to_chat(M, "<span class='warning'>To try to resolve this matter head to [config.banappeals]</span>")
 				else
 					to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
-				ban_unban_log_save("[usr.client.ckey] has permabanned [M.ckey]. - Reason: [reason] - This is a ban until appeal.")
-				notes_add(M.ckey,"[usr.client.ckey] has permabanned [M.ckey]. - Reason: [reason] - This is a ban until appeal.",usr)
-				log_and_message_admins("has banned [M.ckey].\nReason: [reason]\nThis is a ban until appeal.")
+				ban_unban_log_save("[usr.client.ckey] has permabanned [mob_key]. - Reason: [reason] - This is a ban until appeal.")
+				notes_add(mob_key,"[usr.client.ckey] has permabanned [mob_key]. - Reason: [reason] - This is a ban until appeal.",usr)
+				log_and_message_admins("has banned [mob_key].\nReason: [reason]\nThis is a ban until appeal.")
 				SSstatistics.add_field("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
 
@@ -1359,7 +1379,7 @@
 		to_chat(src.owner, "Name = <b>[M.name]</b>; Real_name = [M.real_name]; Mind_name = [M.mind?"[M.mind.name]":""]; Key = <b>[M.key]</b>;")
 		to_chat(src.owner, "Location = [location_description];")
 		to_chat(src.owner, "[special_role_description]")
-		to_chat(src.owner, "(<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[M]'>VV</A>) (<A HREF='?src=\ref[src];subtlemessage=\ref[M]'>SM</A>) ([admin_jump_link(M, src)]) (<A HREF='?src=\ref[src];secretsadmin=check_antagonist'>CA</A>)")
+		to_chat(src.owner, "(<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[M]'>VV</A>) ([admin_jump_link(M, src)]) (<A HREF='?src=\ref[src];secretsadmin=check_antagonist'>CA</A>)")
 
 	else if(href_list["adminspawncookie"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
@@ -1537,16 +1557,10 @@
 		usr.client.sendmob(M)
 
 	else if(href_list["narrateto"])
-		if(!check_rights(R_ADMIN))	return
+		if(!check_rights(R_INVESTIGATE))	return
 
 		var/mob/M = locate(href_list["narrateto"])
 		usr.client.cmd_admin_direct_narrate(M)
-
-	else if(href_list["subtlemessage"])
-		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))  return
-
-		var/mob/M = locate(href_list["subtlemessage"])
-		usr.client.cmd_admin_subtle_message(M)
 
 	else if(href_list["traitor"])
 		if(!check_rights(R_ADMIN|R_MOD))	return
@@ -1905,10 +1919,6 @@
 		src.admincaster_signature = sanitize(input(usr, "Provide your desired signature", "Network Identity Handler", ""))
 		src.access_news_network()
 
-	else if(href_list["populate_inactive_customitems"])
-		if(check_rights(R_ADMIN|R_SERVER))
-			populate_inactive_customitems_list(src.owner)
-
 	else if(href_list["vsc"])
 		if(check_rights(R_ADMIN|R_SERVER))
 			if(href_list["vsc"] == "airflow")
@@ -1962,7 +1972,7 @@
 			if(!ckey)
 				var/mob/M = locate(href_list["mob"])
 				if(ismob(M))
-					ckey = M.ckey
+					ckey = LAST_CKEY(M)
 			show_player_info(ckey)
 		return
 	if(href_list["setstaffwarn"])
@@ -1973,16 +1983,17 @@
 
 		switch(alert("Really set staff warn?",,"Yes","No"))
 			if("Yes")
+				var/last_ckey = LAST_CKEY(M)
 				var/reason = sanitize(input(usr,"Staff warn message","Staff Warn","Problem Player") as text|null)
 				if (!reason || reason == "")
 					return
-				notes_add(M.ckey,"\[AUTO\] Staff warn enabled: [reason]",usr)
+				notes_add(last_ckey,"\[AUTO\] Staff warn enabled: [reason]",usr)
 				reason += "\n-- Set by [usr.client.ckey]([usr.client.holder.rank])"
-				DB_staffwarn_record(M.ckey, reason)
+				DB_staffwarn_record(last_ckey, reason)
 				if(M.client)
 					M.client.staffwarn = reason
 				SSstatistics.add_field("staff_warn",1)
-				log_and_message_admins("has enabled staffwarn on [M.ckey].\nMessage: [reason]\n")
+				log_and_message_admins("has enabled staffwarn on [last_ckey].\nMessage: [reason]\n")
 				show_player_panel(M)
 			if("No")
 				return
@@ -1992,15 +2003,22 @@
 
 		switch(alert("Really remove staff warn?",,"Yes","No"))
 			if("Yes")
-				if(!DB_staffwarn_remove(M.ckey))
+				var/last_ckey = LAST_CKEY(M)
+				if(!DB_staffwarn_remove(last_ckey))
 					return
-				notes_add(M.ckey,"\[AUTO\] Staff warn disabled",usr)
+				notes_add(last_ckey,"\[AUTO\] Staff warn disabled",usr)
 				if(M.client)
 					M.client.staffwarn = null
-				log_and_message_admins("has removed the staffwarn on [M.ckey].\n")
+				log_and_message_admins("has removed the staffwarn on [last_ckey].\n")
 				show_player_panel(M)
 			if("No")
 				return
+
+	if(href_list["pilot"])
+		var/mob/M = locate(href_list["pilot"])
+		if(!ismob(M)) return
+
+		show_player_panel(M)
 
 
 mob/living/proc/can_centcom_reply()

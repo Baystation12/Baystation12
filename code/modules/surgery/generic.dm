@@ -43,7 +43,7 @@
 	user.visible_message("<span class='notice'>[user] has made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>",)
 	affected.createwound(CUT, affected.min_broken_damage/2, 1)
-	affected.clamp()
+	affected.clamp_organ()
 	spread_germs_to_organ(affected, user)
 
 /decl/surgery_step/generic/cut_with_laser/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -76,7 +76,7 @@
 	user.visible_message("<span class='notice'>[user] has constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>",)
 	affected.createwound(CUT, affected.min_broken_damage/2, 1) // incision
-	affected.clamp() // clamp
+	affected.clamp_organ() // clamp
 	affected.open_incision() // retract
 
 /decl/surgery_step/generic/managed/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -166,7 +166,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] clamps bleeders in [target]'s [affected.name] with \the [tool].</span>",	\
 	"<span class='notice'>You clamp bleeders in [target]'s [affected.name] with \the [tool].</span>")
-	affected.clamp()
+	affected.clamp_organ()
 	spread_germs_to_organ(affected, user)
 	playsound(target.loc, 'sound/items/Welder.ogg', 15, 1)
 
@@ -301,19 +301,18 @@
 	max_duration = 160
 	surgery_candidate_flags = 0
 
-/decl/surgery_step/generic/amputate/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	. = FALSE
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		if(affected.how_open())
-			to_chat(user, SPAN_WARNING("You can't get a clean cut with incisions getting in the way."))
-		else
-			. = TRUE
-
 /decl/surgery_step/generic/amputate/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+	if(affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && !affected.how_open())
 		return affected
+
+/decl/surgery_step/generic/amputate/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	var/target_zone = user.zone_sel.selecting
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(BP_IS_ROBOTIC(affected))
+		return SURGERY_SKILLS_ROBOTIC
+	else
+		return ..()
 
 /decl/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

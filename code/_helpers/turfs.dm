@@ -6,12 +6,6 @@
 		mloc = mloc.loc
 	return mloc
 
-/proc/iswall(turf/T)
-	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
-
-/proc/isfloor(turf/T)
-	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
-
 /proc/turf_clear(turf/T)
 	for(var/atom/A in T)
 		if(A.simulated)
@@ -133,10 +127,9 @@
 		var/turf/target = translation[source]
 
 		if(target)
-			//update area first so that area/Entered() will be called with the correct area when atoms are moved
 			if(base_area)
-				source.loc.contents.Add(target)
-				base_area.contents.Add(source)
+				ChangeArea(target, get_area(source))
+				ChangeArea(source, base_area)
 			transport_turf_contents(source, target)
 
 	//change the old turfs

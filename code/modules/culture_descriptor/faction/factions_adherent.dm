@@ -4,7 +4,6 @@
 	the worlds they explore untouched and pristine, recording and indexing them for later review by the creators or whoever \
 	inherits their place. They are the most passive and appeasing of the Vigil factions and are the most likely to be found \
 	under the aegis of other spacefaring cultures like humanity."
-	language = LANGUAGE_ADHERENT
 
 /decl/cultural_info/faction/adherent/loyalists
 	name = FACTION_ADHERENT_LOYALISTS

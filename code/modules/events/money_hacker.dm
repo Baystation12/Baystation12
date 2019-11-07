@@ -38,22 +38,21 @@
 		message = "The hack attempt has succeeded."
 
 		//subtract the money
-		var/lost = affected_account.money * 0.8 + (rand(2,4) - 2) / 10
+		var/amount = affected_account.money * 0.8 + (rand(2,4) - 2) / 10
 
 		//create a taunting log entry
-		var/datum/transaction/T = new()
-		T.target_name = pick("","yo brotha from anotha motha","el Presidente","chieF smackDowN")
-		T.purpose = pick("Ne$ ---ount fu%ds init*&lisat@*n","PAY BACK YOUR MUM","Funds withdrawal","pWnAgE","l33t hax","liberationez")
-		T.amount = -lost
+		var/name = pick("","[pick("Biesel","New Gibson")] GalaxyNet Terminal #[rand(111,999)]","your mums place","nantrasen high CommanD")
+		var/purpose = pick("Ne$ ---ount fu%ds init*&lisat@*n","PAY BACK YOUR MUM","Funds withdrawal","pWnAgE","l33t hax","liberationez")
+		var/datum/transaction/singular/T = new(affected_account, name, -amount, purpose)
 		var/date1 = "31 December, 1999"
 		var/date2 = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [rand(1000,3000)]"
 		T.date = pick("", stationdate2text(), date1, date2)
 		var/time1 = rand(0, 99999999)
 		var/time2 = "[round(time1 / 36000)+12]:[(time1 / 600 % 60) < 10 ? add_zero(time1 / 600 % 60, 1) : time1 / 600 % 60]"
 		T.time = pick("", stationtime2text(), time2)
-		T.source_terminal = pick("","[pick("Biesel","New Gibson")] GalaxyNet Terminal #[rand(111,999)]","your mums place","nantrasen high CommanD")
+		
+		T.perform()
 
-		affected_account.do_transaction(T)
 	var/obj/machinery/message_server/MS = get_message_server()
 	if(MS)
 		var/my_department = "[location_name()] Firewall Subroutines"

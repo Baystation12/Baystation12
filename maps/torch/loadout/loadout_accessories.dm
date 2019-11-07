@@ -38,6 +38,13 @@
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
 
+/datum/gear/accessory/ec_scarf
+	display_name = "Expeditionary Corps scarf"
+	path = /obj/item/clothing/accessory/solgov/ec_scarf
+	description = "A section-specific scarf for Expeditionary Corps uniforms."
+	flags = GEAR_HAS_TYPE_SELECTION
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
 /datum/gear/accessory/ec_patch
 	display_name = "Expeditionary Corps patch"
 	path = /obj/item/clothing/accessory/solgov/ec_patch
@@ -53,7 +60,11 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/specialty/pilot
-	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot)
+	allowed_skills = list(SKILL_PILOT = SKILL_ADEPT)
+	allowed_branches = list(
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/expeditionary_corps
+	)
 
 /datum/gear/accessory/fleetpatch
 	display_name = "fleet patch"
@@ -76,12 +87,12 @@
 	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/accessory/armband_emt
-	allowed_roles = list(/datum/job/doctor)
+	allowed_roles = list(/datum/job/doctor, /datum/job/medical_trainee)
 
 /datum/gear/accessory/armband_corpsman
 	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/medblue
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/medical_trainee)
 
 /datum/gear/accessory/armband_engineering
 	allowed_roles = ENGINEERING_ROLES
@@ -106,26 +117,39 @@
 
 /datum/gear/storage/brown_vest
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/nt_pilot)
+						/datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/engineer_trainee, /datum/job/explorer, /datum/job/nt_pilot, /datum/job/pathfinder)
 
 /datum/gear/storage/black_vest
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/merchant)
 
 /datum/gear/storage/white_vest
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/medical_trainee, /datum/job/chemist, /datum/job/merchant, /datum/job/medical_trainee)
 
 /datum/gear/storage/brown_drop_pouches
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant)
+						/datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/engineer_trainee)
 
 /datum/gear/storage/black_drop_pouches
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/merchant)
 
 /datum/gear/storage/white_drop_pouches
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/roboticist, /datum/job/merchant)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/medical_trainee, /datum/job/chemist, /datum/job/merchant, /datum/job/medical_trainee)
 
 /datum/gear/tactical/holster
 	allowed_roles = ARMED_ROLES
+
+/datum/gear/tactical/holster/New()
+	..()
+	var/holsters = list()
+	holsters["shoulder holster"] = /obj/item/clothing/accessory/storage/holster
+	holsters["armpit holster"] = /obj/item/clothing/accessory/storage/holster/armpit
+	holsters["waist holster"] = /obj/item/clothing/accessory/storage/holster/waist
+	holsters["hip holster"] = /obj/item/clothing/accessory/storage/holster/hip
+	holsters["thigh holster"] = /obj/item/clothing/accessory/storage/holster/thigh
+	gear_tweaks += new/datum/gear_tweak/path(holsters)
+
+/datum/gear/tactical/sheath
+	allowed_roles = list(/datum/job/pathfinder, /datum/job/explorer)
 
 /datum/gear/tactical/armor_deco
 	allowed_roles = ARMORED_ROLES

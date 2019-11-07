@@ -2,13 +2,14 @@
 	name = "railing"
 	desc = "A simple bar railing designed to protect against careless trespass."
 	icon = 'icons/obj/railing.dmi'
+	icon_state = "railing0-1"
 	density = 1
 	throwpass = 1
-	layer = 5.2
+	layer = OBJ_LAYER
 	climb_speed_mult = 0.25
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
-	icon_state = "railing0-1"
+	obj_flags = OBJ_FLAG_ROTATABLE
 
 	var/broken =    FALSE
 	var/health =    70
@@ -121,7 +122,7 @@
 			neighbor_status |= 64
 			if (UpdateNeighbors)
 				R.update_icon(0)
-	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir))).
+	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir)))
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 4
 			if (UpdateNeighbors)
@@ -154,35 +155,6 @@
 						pix_offset_y = 32
 				overlays += image(icon, "mcorneroverlay[density]", pixel_x = pix_offset_x, pixel_y = pix_offset_y)
 
-/obj/structure/railing/verb/rotate()
-	set name = "Rotate Railing Counter-Clockwise"
-	set category = "Object"
-	set src in oview(1)
-
-	if(usr.incapacitated())
-		return 0
-
-	if(anchored)
-		to_chat(usr, "<span class='warning'>It is fastened to the floor and cannot be rotated.</span>")
-		return 0
-
-	set_dir(turn(dir, 90))
-	update_icon()
-
-/obj/structure/railing/verb/revrotate()
-	set name = "Rotate Railing Clockwise"
-	set category = "Object"
-	set src in oview(1)
-
-	if(usr.incapacitated())
-		return 0
-
-	if(anchored)
-		to_chat(usr, "<span class='warning'>It is fastened to the floor and cannot be rotated.</span>")
-		return 0
-
-	set_dir(turn(dir, -90))
-	update_icon()
 
 /obj/structure/railing/verb/flip() // This will help push railing to remote places, such as open space turfs
 	set name = "Flip Railing"
@@ -227,7 +199,7 @@
 				if(user.a_intent == I_HURT)
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE)
+					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
 						G.affecting.Weaken(5)
 					G.affecting.apply_damage(8, BRUTE, BP_HEAD)

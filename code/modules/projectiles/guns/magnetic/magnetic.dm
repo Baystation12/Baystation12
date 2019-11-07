@@ -6,7 +6,7 @@
 	item_state = "coilgun"
 	one_hand_penalty = 5
 	fire_delay = 20
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_ILLEGAL = 2, TECH_MAGNET = 4)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_ESOTERIC = 2, TECH_MAGNET = 4)
 	w_class = ITEM_SIZE_LARGE
 	bulk = GUN_BULK_RIFLE
 	combustion = 1
@@ -47,7 +47,8 @@
 			if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
 				capacitor.charge(power_per_tick)
 		else
-			capacitor.use(capacitor.charge * 0.05)
+			if(capacitor)
+				capacitor.use(capacitor.charge * 0.05)
 	update_icon()
 
 /obj/item/weapon/gun/magnetic/on_update_icon()
@@ -70,31 +71,26 @@
 		if(istype(mag))
 			if(mag.remaining)
 				overlays_to_add += image(icon, "[icon_state]_ammo")
-				
+
 	overlays += overlays_to_add
 
 /obj/item/weapon/gun/magnetic/proc/show_ammo(var/mob/user)
 	if(loaded)
 		to_chat(user, "<span class='notice'>It has \a [loaded] loaded.</span>")
 
-/obj/item/weapon/gun/magnetic/examine(var/mob/user)
-	. = ..(user, 2)
-	if(.)
-		show_ammo(user)
-
-		if(cell)
-			to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
-		if(capacitor)
-			to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
-
-		if(!cell || !capacitor)
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+/obj/item/weapon/gun/magnetic/examine(mob/user)
+	. = ..()
+	if(cell)
+		to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
+	if(capacitor)
+		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
+	if(!cell || !capacitor)
+		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+	else
+		if(capacitor.charge < power_cost)
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
 		else
-			if(capacitor.charge < power_cost)
-				to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
-			else
-				to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
-		return TRUE
+			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
 
 /obj/item/weapon/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
 
@@ -103,7 +99,7 @@
 			if(cell)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
 				return
-			if(!user.unEquip(cell, src))
+			if(!user.unEquip(thing, src))
 				return
 			cell = thing
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
@@ -126,7 +122,7 @@
 			if(capacitor)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
 				return
-			if(!user.unEquip(capacitor, src))
+			if(!user.unEquip(thing, src))
 				return
 			capacitor = thing
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
@@ -152,7 +148,7 @@
 				projectile_type = mag.projectile_type
 			if(!user.unEquip(thing, src))
 				return
-				
+
 			loaded = thing
 		else if(load_sheet_max > 1)
 			var ammo_count = 0

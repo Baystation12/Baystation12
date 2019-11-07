@@ -5,24 +5,17 @@
 	icon_keyboard = "power_key"
 	icon_screen = "power"
 	req_access = list(access_engine_equip)
-	circuit = /obj/item/weapon/circuitboard/drone_control
 
 	//Used when pinging drones.
 	var/drone_call_area = "Engineering"
 	//Used to enable or disable drone fabrication.
 	var/obj/machinery/drone_fabricator/dronefab
 
-/obj/machinery/computer/drone_control/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/computer/drone_control/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/drone_control/attack_hand(var/mob/user as mob)
-	if(..())
-		return
-
-	if(!allowed(user))
-		to_chat(user, "<span class='danger'>Access denied.</span>")
-		return
-
+/obj/machinery/computer/drone_control/interact(mob/user)
 	user.set_machine(src)
 	var/dat
 	dat += "<B>Maintenance Units</B><BR>"

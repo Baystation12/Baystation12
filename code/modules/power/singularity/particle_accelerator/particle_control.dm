@@ -18,26 +18,22 @@
 	var/list/obj/structure/particle_accelerator/connected_parts
 	var/assembled = 0
 	var/parts = null
-	var/datum/wires/particle_acc/control_box/wires = null
+	wires = /datum/wires/particle_acc/control_box
 
 /obj/machinery/particle_accelerator/control_box/Initialize()
 	. = ..()
-	wires = new(src)
 	connected_parts = list()
 	change_power_consumption(initial(active_power_usage) * (strength + 1), POWER_USE_ACTIVE)
 
 /obj/machinery/particle_accelerator/control_box/Destroy()
 	if(active)
 		toggle_power()
-	qdel(wires)
-	wires = null
 	return ..()
 
-/obj/machinery/particle_accelerator/control_box/attack_hand(mob/user as mob)
+/obj/machinery/particle_accelerator/control_box/interface_interact(mob/user)
 	if(construction_state >= 3)
 		interact(user)
-	else if(construction_state == 2) // Wires exposed
-		wires.Interact(user)
+		return TRUE
 
 /obj/machinery/particle_accelerator/control_box/update_state()
 	if(construction_state < 3)

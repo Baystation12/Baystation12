@@ -13,12 +13,14 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	base_parry_chance = 50
 	melee_accuracy_bonus = 10
+	worth_multiplier = 30
 
 /obj/item/weapon/material/sword/replica
 	edge = 0
 	sharp = 0
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2
+	worth_multiplier = 15
 
 /obj/item/weapon/material/sword/katana
 	name = "katana"
@@ -33,3 +35,14 @@
 	sharp = 0
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2
+
+/obj/item/weapon/material/sword/katana/vibro
+	name = "vibrokatana"
+	desc = "A high-tech take on a woefully underpowered weapon. Can't mistake its sound for anything."
+	default_material = MATERIAL_TITANIUM
+	hitsound = 'sound/weapons/anime_sword.wav'
+
+/obj/item/weapon/material/sword/katana/vibro/equipped(mob/user, slot)
+	if(slot == slot_l_hand || slot == slot_r_hand)
+		playsound(src, 'sound/weapons/katana_out.wav', 50, 1, -5)
+	

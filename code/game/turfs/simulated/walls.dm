@@ -25,7 +25,7 @@
 	var/paint_color
 	var/stripe_color
 	var/global/list/wall_stripe_cache = list()
-	var/list/blend_turfs = list(/turf/simulated/wall/cult)
+	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony)
 	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/phoronbasic/full, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
@@ -47,7 +47,6 @@
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
-	dismantle_wall(null,null,1)
 	. = ..()
 
 // Walls always hide the stuff below them.
@@ -76,6 +75,9 @@
 		burn(500)
 
 	var/proj_damage = Proj.get_structure_damage()
+
+	if(Proj.ricochet_sounds && prob(15))
+		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
 
 	if(reinf_material)
 		if(Proj.damage_type == BURN)
@@ -110,7 +112,6 @@
 			plant.update_icon()
 			plant.pixel_x = 0
 			plant.pixel_y = 0
-		plant.update_neighbors()
 
 /turf/simulated/wall/ChangeTurf(var/newtype)
 	clear_plants()
@@ -118,10 +119,7 @@
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)
-	. = ..(user)
-
-	if(!.)
-		return
+	. = ..()
 
 	if(!damage)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
@@ -290,3 +288,6 @@
 
 /turf/simulated/wall/can_engrave()
 	return (material && material.hardness >= 10 && material.hardness <= 100)
+
+/turf/simulated/wall/is_wall()
+	return TRUE

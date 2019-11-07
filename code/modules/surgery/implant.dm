@@ -103,7 +103,7 @@
 /decl/surgery_step/cavity/place_item/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected && affected.cavity)
-		var/max_volume = base_storage_capacity(affected.cavity_max_w_class)
+		var/max_volume = BASE_STORAGE_CAPACITY(affected.cavity_max_w_class)
 		if(tool.w_class > affected.cavity_max_w_class)
 			to_chat(user, SPAN_WARNING("\The [tool] is too big for [affected.cavity_name] cavity."))
 			return FALSE
@@ -179,7 +179,8 @@
 		loot = affected.implants
 	else
 		for(var/datum/wound/wound in affected.wounds)
-			loot |= wound.embedded_objects
+			if(LAZYLEN(wound.embedded_objects))
+				loot |= wound.embedded_objects
 			find_prob += 50
 
 	if (loot.len)

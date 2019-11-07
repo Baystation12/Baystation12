@@ -2,7 +2,7 @@
 	category_text = "Input"
 	power_draw_per_use = 5
 
-/obj/item/integrated_circuit/input/external_examine(var/mob/user)
+/obj/item/integrated_circuit/input/external_examine(mob/user)
 	var/initial_name = initial(name)
 	var/message
 	if(initial_name == name)
@@ -853,9 +853,9 @@
 /obj/item/integrated_circuit/input/microphone
 	name = "microphone"
 	desc = "Useful for spying on people, or for voice-activated machines."
-	extended_desc = "This will automatically translate most languages it hears to Galactic Common. \
+	extended_desc = "This will automatically translate most languages it hears to Zurich Accord Common. \
 	The first activation pin is always pulsed when the circuit hears someone talk, while the second one \
-	is only triggered if it hears someone speaking a language other than Galactic Common."
+	is only triggered if it hears someone speaking a language other than Zurich Accord Common."
 	icon_state = "recorder"
 	complexity = 8
 	inputs = list()
@@ -887,7 +887,7 @@
 
 	push_data()
 	activate_pin(1)
-	if(translated && !(speaking.name == LANGUAGE_GALCOM))
+	if(translated && !(speaking.name == LANGUAGE_HUMAN_EURO))
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/sensor

@@ -39,9 +39,8 @@
 	icon_state = "pit[open]"
 	if(istype(loc,/turf/simulated/floor/exoplanet))
 		var/turf/simulated/floor/exoplanet/E = loc
-		if(E.mudpit)
-			icon_state="pit[open]mud"
-			blend_mode = BLEND_OVERLAY
+		if(E.dirt_color)
+			color = E.dirt_color
 
 /obj/structure/pit/proc/open()
 	name = "pit"
@@ -118,7 +117,6 @@
 /obj/structure/pit/closed/grave/Initialize()
 	var/obj/structure/closet/coffin/C = new(src.loc)
 	var/obj/item/remains/human/bones = new(C)
-	bones.plane = LYING_MOB_PLANE
 	bones.layer = LYING_MOB_LAYER
 	var/obj/structure/gravemarker/random/R = new(src.loc)
 	R.generate()
@@ -137,9 +135,9 @@
 /obj/structure/gravemarker/cross
 	icon_state = "cross"
 
-/obj/structure/gravemarker/examine()
-	..()
-	to_chat(usr,"It says: '[message]'")
+/obj/structure/gravemarker/examine(mob/user)
+	. = ..()
+	to_chat(user, "It says: '[message]'")
 
 /obj/structure/gravemarker/random/Initialize()
 	generate()

@@ -18,8 +18,8 @@
 	var/obj/item/weapon/shockpaddles/linked/paddles
 	var/obj/item/weapon/cell/bcell = null
 
-/obj/item/weapon/defibrillator/New() //starts without a cell for rnd
-	..()
+/obj/item/weapon/defibrillator/Initialize() //starts without a cell for rnd
+	. = ..()
 	if(ispath(paddles))
 		paddles = new paddles(src, src)
 	else
@@ -59,11 +59,10 @@
 
 /obj/item/weapon/defibrillator/examine(mob/user)
 	. = ..()
-	if(.)
-		if(bcell)
-			to_chat(user, "The charge meter is showing [bcell.percent()]% charge left.")
-		else
-			to_chat(user, "There is no cell inside.")
+	if(bcell)
+		to_chat(user, "The charge meter is showing [bcell.percent()]% charge left.")
+	else
+		to_chat(user, "There is no cell inside.")
 
 /obj/item/weapon/defibrillator/ui_action_click()
 	toggle_paddles()
@@ -386,7 +385,7 @@
 /obj/item/weapon/shockpaddles/proc/lowskill_revive(mob/living/carbon/human/H, mob/living/user)
 	if(prob(60))
 		playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 100, 1, -1)
-		H.electrocute_act(burn_damage_amt*4, src, def_zone = BP_CHEST)	
+		H.electrocute_act(burn_damage_amt*4, src, def_zone = BP_CHEST)
 		user.visible_message("<span class='warning'><i>The paddles were misaligned! \The [user] shocks [H] with \the [src]!</i></span>", "<span class='warning'>The paddles were misaligned! You shock [H] with \the [src]!</span>")
 		return 0
 	if(prob(50))
@@ -520,6 +519,30 @@
 		var/mob/living/silicon/robot/R = src.loc
 		return (R.cell && R.cell.checked_use(charge_amt))
 
+/obj/item/weapon/shockpaddles/rig
+	name = "mounted defibrillator"
+	desc = "If you can see this something is very wrong, report this bug."
+	cooldowntime = (4 SECONDS)
+	chargetime = (1 SECOND)
+	chargecost = 150
+	safety = 0
+	wielded = 1
+
+/obj/item/weapon/shockpaddles/rig/check_charge(var/charge_amt)
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		return (module.holder && module.holder.cell && module.holder.cell.check_charge(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/checked_use(var/charge_amt)
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		return (module.holder && module.holder.cell && module.holder.cell.checked_use(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/set_cooldown(var/delay)
+	..()
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		module.next_use = world.time + delay
 /*
 	Shockpaddles that are linked to a base unit
 */
@@ -575,7 +598,8 @@
 
 /obj/item/weapon/shockpaddles/standalone/Process()
 	if(fail_counter > 0)
-		SSradiation.radiate(src, fail_counter--)
+		SSradiation.radiate(src, (fail_counter * 2))
+		fail_counter--
 	else
 		STOP_PROCESSING(SSobj, src)
 
