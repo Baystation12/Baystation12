@@ -788,7 +788,11 @@
 /datum/sprite_accessory/hair/booster/fingerwave
 	name = "Cat Biomods (Fingerwave)"
 	icon_state = "hair_fingerwave"
-
+	
+/datum/sprite_accessory/hair/booster/lowbunears
+	name = "Cat Biomods (Low bun)"
+	icon_state = "hair_lowbun"
+	
 /datum/sprite_accessory/hair/booster/ramhorns
 	name = "Horn Biomods (Ram Horns)"
 	icon_state = "ram_horns"
