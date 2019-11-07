@@ -497,3 +497,7 @@
 /obj/item/weapon/paper/travelvisa/New()
 	..()
 	icon_state = "travelvisa"
+
+/obj/item/weapon/paper/aromatherapy_disclaimer
+	name = "aromatherapy disclaimer"
+	info = "<I>The manufacturer and the retailer make no claims of the contained products' effacy.</I> <BR><BR><B>Use at your own risk.</B>"

@@ -43,7 +43,7 @@
 							/obj/item/weapon/dice,
 							/obj/item/weapon/soap,
 							/obj/item/weapon/flame/candle,
-							/obj/item/weapon/flame/candle/incense,
+							/obj/item/weapon/flame/candle/scented/incense,
 							/obj/item/weapon/caution,
 							/obj/item/weapon/towel,
 							/obj/item/weapon/tank/jetpack,

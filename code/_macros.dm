@@ -161,6 +161,8 @@
 
 #define SPAN_MFAUNA(X) "<span class='mfauna'>[X]</span>"
 
+#define SPAN_SUBTLE(X) "<span class='subtle'>[X]</span>"
+
 #define FONT_SMALL(X) "<font size='1'>[X]</font>"
 
 #define FONT_NORMAL(X) "<font size='2'>[X]</font>"
