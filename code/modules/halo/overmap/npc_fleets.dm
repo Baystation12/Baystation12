@@ -34,5 +34,5 @@
 	for(var/entry in ships_infleet)
 		if(isnull(entry))
 			ships_infleet -= entry
-	if(isnull(leader_ship))
+	if(isnull(leader_ship) && ships_infleet.len > 0)
 		assign_leader(pick(ships_infleet))
