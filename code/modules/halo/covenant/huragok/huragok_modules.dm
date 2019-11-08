@@ -12,6 +12,7 @@
 	src.modules += new /obj/item/device/reagent_scanner/adv(src)
 	src.modules += new /obj/item/roller_holder(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/crisis(src)
+	src.modules += new /obj/item/weapon/reagent_containers/borghypo/huragok(src)
 	src.modules += new /obj/item/weapon/shockpaddles/robot(src)
 	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
