@@ -35,6 +35,7 @@
 	desc = "An incredibly hot beam of pure light"
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret.dmi'
 	icon_state = ""
+	damage = 50
 	ship_damage_projectile = /obj/item/projectile/pulse_laser_damage_proj
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/pulse_laser_proj
