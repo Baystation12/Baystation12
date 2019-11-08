@@ -1,18 +1,7 @@
 
 /mob/living/simple_animal/mgalekgolo/bullet_act(var/obj/item/projectile/Proj)
 	if(!(get_dir(src,Proj.starting) in get_allowed_attack_dirs()))
-		if((Proj.penetrating >= 5) && (Proj.armor_penetration >= 80)) //Values taken from sniper rifle round.
-			Proj.damage *= 0.5
-			. = ..()
-			Proj.damage = initial(Proj.damage)
-		return
-		if(prob(25))
-			visible_message("<span class = 'danger'>The [Proj.name] is partially reflected by \the [name]'s armor plating.</span>")
-			Proj.damage *= 0.25 //So you can theoretically just shoot the hunter to death from the front.
-			. = ..()
-			Proj.damage = initial(Proj.damage)
-		else
-			visible_message("<span class = 'danger'>The [Proj.name] is stopped by \the [name]'s armor plating.</span>")
+		visible_message("<span class = 'danger'>The [Proj.name] is stopped by \the [name]'s armor plating.</span>")
 		return
 	. = ..()
 
