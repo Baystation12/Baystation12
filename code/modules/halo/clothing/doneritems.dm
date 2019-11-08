@@ -5,6 +5,9 @@
 #define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
 #define MARINE_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 
+//Obj sprites go in ITEM_INHAND or MARINE_INHAND
+//WORN sprites go in ODST_OVERRIDE or MARINE_OVERRIDE
+
 ////////ashvor\\\\\\\\
 
 //Marine
@@ -173,12 +176,12 @@
 
 //JIRALHANAE
 
-/obj/item/clothing/head/helmet/jiralhanae/boltersam
+/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam
 	icon_state = "bolter_helm"
-/obj/item/clothing/suit/armor/jiralhanae/boltersam
+/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam
 	icon_state = "bolter_armour"
 
-/obj/item/clothing/shoes/jiralhanae/boltersam
+/obj/item/clothing/shoes/jiralhanae/covenant/boltersam
 	icon_state = "bolter_greaves"
 
 /obj/item/weapon/grav_hammer/boltersam
@@ -187,8 +190,9 @@
 
 /decl/hierarchy/outfit/boltersam_jiralhanae
 	name = "boltersam - jiralhanae"
-	head = /obj/item/clothing/head/helmet/jiralhanae/boltersam
-	suit = /obj/item/clothing/suit/armor/jiralhanae/boltersam
+	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam
+	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam
+	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/boltersam
 	back = /obj/item/weapon/grav_hammer/boltersam
 
 ////////eonoc\\\\\\\\
