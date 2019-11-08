@@ -1392,7 +1392,6 @@
 	dir = 8;
 	id = "packageSort1"
 	},
-/obj/structure/plasticflaps/airtight,
 /turf/simulated/floor/plating,
 /area/quartermaster/sorting)
 "ep" = (
@@ -3250,15 +3249,17 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
 "kS" = (
+/obj/structure/disposalpipe/trunk,
 /obj/structure/disposaloutlet{
 	dir = 8;
 	name = "cargo outlet"
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/disposalpipe/trunk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/sorting)
 "kW" = (
@@ -3817,6 +3818,12 @@
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/corner/brown/half,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/office)
 "mB" = (
@@ -5545,7 +5552,7 @@
 /obj/effect/catwalk_plated,
 /obj/structure/disposalpipe/sortjunction{
 	dir = 1;
-	name = "Pathfinder's Office";
+	name = "Pathfinders Office";
 	sort_type = "Pathfinder's Office"
 	},
 /turf/simulated/floor/plating,
@@ -6046,6 +6053,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/substation/fourthdeck)
+"tz" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/quartermaster/sorting)
 "tA" = (
 /obj/effect/floor_decal/corner/brown/half,
 /turf/simulated/floor/tiled/monotile,
@@ -7784,7 +7797,6 @@
 	dir = 8;
 	id = "packageSort1"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/junk,
 /turf/simulated/floor/plating,
 /area/quartermaster/sorting)
@@ -7859,7 +7871,6 @@
 	dir = 8;
 	id = "packageSort1"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/junk,
 /obj/machinery/alarm{
 	dir = 1;
@@ -10346,17 +10357,13 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "IX" = (
+/obj/structure/disposalpipe/trunk{
+	dir = 8
+	},
 /obj/machinery/disposal/deliveryChute{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/obj/structure/disposalpipe/trunk{
-	dir = 8
-	},
 /turf/simulated/floor/plating,
 /area/quartermaster/sorting)
 "IY" = (
@@ -10800,6 +10807,12 @@
 /obj/machinery/fabricator,
 /obj/effect/floor_decal/corner/brown/half,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/office)
 "KE" = (
@@ -10808,13 +10821,11 @@
 	id_tag = null;
 	name = "Mail Room"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/sorting)
@@ -10896,26 +10907,22 @@
 /turf/simulated/floor/bluegrid,
 /area/maintenance/fourthdeck/starboard)
 "KQ" = (
-/obj/effect/floor_decal/industrial/warning,
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
-	},
 /obj/structure/disposalpipe/sortjunction{
 	dir = 8;
 	name = "Sorting Office";
 	sort_type = "Sorting Office"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/sorting)
@@ -12107,11 +12114,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/fourthdeck)
 "On" = (
-/obj/effect/floor_decal/industrial/warning,
 /obj/structure/disposalpipe/segment{
 	dir = 8;
 	icon_state = "pipe-c"
 	},
+/obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -12155,8 +12162,7 @@
 	dir = 8;
 	id = "packageSort1"
 	},
-/obj/structure/plasticflaps/airtight,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/plasticflaps,
 /turf/simulated/floor/plating,
 /area/quartermaster/sorting)
 "Oy" = (
@@ -12376,14 +12382,15 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage/upper)
 "Ph" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -12392,7 +12399,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/sorting)
 "Pi" = (
@@ -12605,6 +12611,15 @@
 	pixel_y = 32
 	},
 /obj/structure/ladder/up,
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /obj/machinery/camera/network/supply{
 	c_tag = "Supply Office - Sorting";
 	dir = 4
@@ -12673,16 +12688,16 @@
 "PQ" = (
 /obj/effect/floor_decal/corner/brown/half,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/office)
@@ -14825,19 +14840,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/port)
 "Vv" = (
-/obj/structure/disposaloutlet,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
+/obj/structure/disposaloutlet,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/sorting)
 "Vw" = (
@@ -15268,7 +15275,6 @@
 	dir = 8;
 	id = "packageSort1"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/junk,
 /obj/machinery/light/spot,
 /turf/simulated/floor/plating,
@@ -15798,15 +15804,18 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage/upper)
 "XY" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/structure/disposalpipe/segment{
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/structure/cable/green{
@@ -15814,8 +15823,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/sorting)
@@ -15992,23 +16003,20 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/center)
 "Yz" = (
+/obj/structure/disposalpipe/sortjunction/untagged/flipped,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/structure/disposalpipe/sortjunction/untagged/flipped,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
 	},
+/obj/random_multi/single_item/runtime,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/sorting)
 "YB" = (
@@ -16313,6 +16321,22 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "Zl" = (
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump{
+	controlled = 0;
+	dir = 8;
+	external_pressure_bound = 105;
+	icon_state = "map_vent_in";
+	pump_direction = 0;
+	use_power = 1
+	},
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
@@ -16321,16 +16345,8 @@
 	pixel_y = 3
 	},
 /obj/item/stack/package_wrap/twenty_five,
-/obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 1
-	},
 /obj/item/weapon/hand_labeler,
 /obj/item/weapon/wrapping_paper,
-/obj/structure/disposalpipe/segment{
-	dir = 2;
-	icon_state = "pipe-c"
-	},
 /obj/machinery/light/spot{
 	dir = 1
 	},
@@ -16388,50 +16404,34 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "Zu" = (
+/obj/effect/floor_decal/industrial/warning/full,
 /obj/machinery/conveyor_switch/oneway{
 	id = "packageSort1"
-	},
-/obj/effect/floor_decal/industrial/warning/full,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/sorting)
 "Zv" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
 	dir = 1
 	},
-/obj/structure/disposalpipe/segment{
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
 /obj/structure/cable/green{
-	d1 = 1;
+	d1 = 4;
 	d2 = 8;
-	icon_state = "1-8"
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/sorting)
@@ -37190,7 +37190,7 @@ yy
 uo
 yy
 KD
-FK
+tz
 kS
 KQ
 WJ

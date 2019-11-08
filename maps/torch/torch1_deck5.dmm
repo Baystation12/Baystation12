@@ -8385,7 +8385,7 @@
 	},
 /obj/structure/disposalpipe/sortjunction{
 	dir = 2;
-	name = "Pilot's Lounge";
+	name = "Pilots Lounge";
 	sort_type = "Pilot's Lounge"
 	},
 /turf/simulated/floor/plating,
