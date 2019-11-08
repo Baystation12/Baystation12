@@ -28,6 +28,18 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	for(var/symbol_name in syllable_names)
 		syllables.Add("<IMG CLASS=icon SRC=\ref[cov_alphabet] ICONSTATE='[symbol_name]'>")
 */
+
+/obj/item/clothing/glasses/hud/tactical/covenant/sangheili
+	darkness_view = 5
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+
+/obj/item/weapon/storage/backpack/sangheili
+	name = "Covenant Battle Pack"
+	desc = "An airtight storage compartment sometimes used by Sangheili to carry supplies into combat."
+	icon = 'code/modules/halo/covenant/backpack.dmi'
+	icon_state = "covpack"
+	item_state = null
+
 /obj/item/clothing/under/covenant/sangheili
 	name = "Sangheili Body-suit"
 	desc = "A sealed, airtight bodysuit. Meant to be worn underneath combat harnesses."
@@ -48,7 +60,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	item_flags = THICKMATERIAL
 	armor = list(melee = 40,bullet = 20,laser = 40,energy = 5,bomb = 30,bio = 0,rad = 0) //Slightly higher bullet resist than Spartan helmets. Lower laser, energy and melee.
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant/sangheili
 
 /obj/item/clothing/suit/armor/special/combatharness
 	name = "Sangheili Combat Harness"
@@ -60,6 +72,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
 	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 55, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
+	armor_thickness = 20
 	armor_thickness_modifiers = list()
 	allowed = list(/obj/item/weapon/melee/energy/elite_sword, /obj/item/weapon/grenade/plasma, /obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle)
 
