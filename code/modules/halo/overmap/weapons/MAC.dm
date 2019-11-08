@@ -89,7 +89,7 @@
 
 /obj/machinery/mac_cannon/capacitor/process()
 	if(recharging && (world.time > recharging))
-		var/drained = draw_powernet_power(CAPACITOR_MAX_STORED_CHARGE/charge_time)
+		var/drained = draw_powernet_power(CAPACITOR_MAX_STORED_CHARGE/(charge_time / 2)) //We're giving the charge time in seconds and we process every 2, so multiply our chargetime by 2.
 		var/new_stored = capacitor[1] + drained
 		if(new_stored > capacitor[2])
 			capacitor[1] = capacitor[2]
