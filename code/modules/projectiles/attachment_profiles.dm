@@ -25,9 +25,9 @@
 		"vertical grip" = "vertical-grip",
 		"underslung shotgun" = "Underbarrel-Shotgun",
 		"MA5 basic upper" = "MA5-Top-Basic",
-		"MA5 railed upper" = "MA5-Top-Rails",
 		"underslung grenade launcher" = "underslung grenade launcher",
-		"flashlight attachment" = "Underbarrel-Flashlight")
+		"flashlight attachment" = "Underbarrel-Flashlight",
+		"MA5 railed upper" = "MA5-Top-Rails")
 
 	weapon_pixel_offsets = list(\
 	"suppressor" = list(3,2),
@@ -40,9 +40,9 @@
 	"vertical grip" = list(-4,2),
 	"underslung shotgun" = list(0,0),
 	"MA5 basic upper" = list(0,0),
-	"MA5 railed upper" = list(0,0),
 	"underslung grenade launcher" = list(0,0),
-	"flashlight attachment" = list(0,0)
+	"flashlight attachment" = list(0,0),
+	"MA5 railed upper" = list(0,0)
 	)
 
 	attribute_modifications = list(\
@@ -55,9 +55,9 @@
 		"vertical grip" = list(-0.50,0.5,0),
 		"underslung shotgun" = list(0.5,0,0.2),
 		"MA5 basic upper" = list(0,0,0),
-		"MA5 railed upper" = list(0,0,0.1),
 		"underslung grenade launcher" = list(0,0,0,2),
-		"flashlight attachment" = list(0,0,0.1)
+		"flashlight attachment" = list(0,0,0.1),
+		"MA5 railed upper" = list(0,0,0.1)
 		)
 
 /datum/attachment_profile/BR55
