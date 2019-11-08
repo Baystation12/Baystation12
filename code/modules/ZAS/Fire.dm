@@ -37,7 +37,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	if(air_contents.check_combustability(liquid))
 		igniting = 1
-
+		var/datum/effect/effect/system/smoke_spread/bad/smoke = new /datum/effect/effect/system/smoke_spread/bad()
+		smoke.attach(src)
+		smoke.set_up(10, 0, usr.loc)
+		smoke.start()
 		create_fire(exposed_temperature)
 	return igniting
 
@@ -314,6 +317,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * (used_gas_fuel + used_liquid_fuel)) / heat_capacity()
 		update_values()
+
+		if (temperature<273)
+			firelevel = 0
+			return firelevel
 
 		#ifdef FIREDBG
 		log_debug("used_gas_fuel = [used_gas_fuel]; used_liquid_fuel = [used_liquid_fuel]; total = [used_fuel]")
