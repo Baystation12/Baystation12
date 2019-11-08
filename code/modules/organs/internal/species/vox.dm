@@ -7,8 +7,6 @@
 /obj/item/organ/internal/lungs/vox
 	name = "air capillary sack" //Like birds, Vox absorb gas via air capillaries.
 	icon_state = "vox lung"
-/obj/item/organ/internal/lungs/vox/check_rupturing(breath_pressure)
-	return
 
 /obj/item/organ/internal/kidneys/vox
 	name = "filtration bladder"
