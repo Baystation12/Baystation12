@@ -14,7 +14,7 @@
 	name = "Combat Ship"
 	desc=  "A ship specialised for combat."
 
-	hull = 3000 //Hardier than a civvie ship.
+	hull = 500 //Hardier than a civvie ship.
 	var/obj/effect/overmap/ship/npc_ship/target
 
 	var/target_range_from = 3 //Amount of tiles away from target ship will circle.
