@@ -17,6 +17,23 @@
 		/obj/item/weapon/melee/energy/elite_sword,\
 		/obj/item/clothing/gloves/shield_gauntlet)
 
+/obj/item/weapon/storage/belt/covenant_medic
+	name = "Covenant Medical Belt"
+
+	desc = "A belt with many holders for medical kits, with a few small ammunition pouches"
+	icon = 'tools.dmi'
+	item_state = "securitybelt"
+	color = "#ff99ff"
+	sprite_sheets = list(
+		"Tvaoan Kig-Yar" = null,\
+		"Sangheili" = null\
+		)
+
+	can_hold = list(/obj/item/weapon/storage/firstaid/unsc,\
+	/obj/item/weapon/storage/firstaid/erk,\
+	/obj/item/weapon/storage/firstaid/combat/unsc,\
+	/obj/item/projectile/bullet/covenant/needles)
+
 /obj/item/clothing/accessory/storage/bandolier/covenant
 	name = "Covenant Bandolier"
 	desc = "A lightweight synthetic bandolier made by the covenant to carry small items"

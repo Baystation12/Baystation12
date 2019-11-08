@@ -8,7 +8,6 @@
 	request_auth_levels = ALL_AUTHORITY_LEVELS
 	request_requires_processing = 1
 
-	var/obj/effect/overmap/ship/npc_ship/our_ship
 	var/atom/cargo_call_target
 	var/cargo_stay_time = BASE_CARGO_STAY_TIME
 	var/warn_depart_time = BASE_CARGO_DEPART_TIME
@@ -54,9 +53,6 @@
 				ship_source.pick_target_loc()
 		else
 			ship_source.target_loc = cargo_call_target.loc
-
-			walk(ship_source,get_dir(ship_source,ship_source.target_loc),ship_source.move_delay)
-			ship_source.dir = get_dir(ship_source,ship_source.target_loc)
 
 		return 1 //Don't let any normal move-processing happen.
 
@@ -174,6 +170,9 @@
 
 /datum/npc_ship_request/add_to_fleet/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
 	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
+	if(origin_ship && !origin_ship.our_fleet)
+		origin_ship.our_fleet = new /datum/npc_fleet
+		origin_ship.our_fleet.assign_leader(origin_ship)
 	if(!origin_ship || !istype(origin_ship) || !origin_ship.our_fleet)
 		return
 	origin_ship.our_fleet.add_tofleet(ship_source)
@@ -187,7 +186,7 @@
 	if(!origin_ship || !istype(origin_ship) || !origin_ship.our_fleet)
 		return
 	ship_source.our_fleet = origin_ship.our_fleet
-	origin_ship.our_fleet = new /datum/npc_fleet (origin_ship)
+	origin_ship.our_fleet = new /datum/npc_fleet
 	ship_source.our_fleet.assign_leader(ship_source)
 
 /datum/npc_ship_request/control_fleet/unsc

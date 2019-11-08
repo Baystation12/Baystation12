@@ -76,7 +76,6 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
-	armor_thickness = 20
 
 
 /obj/item/clothing/shoes/magboots/odst

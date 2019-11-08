@@ -210,7 +210,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 /obj/item/clothing/shoes/jiralhanae/covenant
 	name = "Jiralhanae Greaves"
 	desc = "The footwear of Jiralhanae soldiers within the covenant."
-	icon_state = "greaves_covenant"
+	icon_state = "greaves"
 	item_flags = NOSLIP
 	armor = list(melee = 50, bullet = 40, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
 
