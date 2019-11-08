@@ -30,7 +30,7 @@
 	templates_available = list(/obj/effect/overmap/ship/unsclightbrigade = "maps/UNSC_Halberd_Class/UNSC_Light_Brigade")
 
 	faction = "UNSC"
-	radio_channel = "FLEETCOM"
+	radio_channel = "SHIPCOM"
 
 /obj/effect/overmap/ship/npc_ship/shipyard/unsc/generate_ship_name()
 	name = "Shipyard [pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Kilo", "Lima", "Mike", "Sierra", "Tango", "Uniform", "Whiskey", "X-ray", "Zulu", "kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
