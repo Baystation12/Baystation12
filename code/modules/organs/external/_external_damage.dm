@@ -49,7 +49,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			var/total_damage = brute_dam + burn_dam + brute + burn + spillover
 			var/threshold = max_damage * config.organ_health_multiplier
 			if(total_damage > threshold)
-				if(attempt_dismemberment(pure_brute, burn, edge, used_weapon, spillover, total_damage > threshold*6))
+				if(attempt_dismemberment(pure_brute, burn, sharp, edge, used_weapon, spillover, total_damage > threshold*6))
 					return
 
 	//blunt damage is gud at fracturing
@@ -351,7 +351,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 //2. If the damage amount dealt exceeds the disintegrate threshold, the organ is completely obliterated.
 //3. If the organ has already reached or would be put over it's max damage amount (currently redundant),
 //   and the brute damage dealt exceeds the tearoff threshold, the organ is torn off.
-/obj/item/organ/external/proc/attempt_dismemberment(brute, burn, edge, used_weapon, spillover, force_droplimb)
+/obj/item/organ/external/proc/attempt_dismemberment(brute, burn, sharp, edge, used_weapon, spillover, force_droplimb)
 	//Check edge eligibility
 	var/edge_eligible = 0
 	if(edge)
@@ -361,7 +361,8 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 				edge_eligible = 1
 		else
 			edge_eligible = 1
-
+	else if(sharp)
+		brute = 0.5 * brute
 	if(force_droplimb)
 		if(burn)
 			droplimb(0, DROPLIMB_BURN)
