@@ -17,8 +17,6 @@
 		var/image/res = overlay_image('icons/skybox/radbox.dmi', "beam", null, RESET_COLOR)
 		res.alpha = rand(40,80)
 		return res
-	else
-		return
 
 /datum/event/radiation_storm/announce()
 	command_announcement.Announce("High levels of radiation detected in proximity of the [location_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
