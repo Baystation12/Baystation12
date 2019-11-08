@@ -61,13 +61,13 @@
 	req_access = list(308)
 	products = list(\
 	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
-	/obj/item/weapon_attachment/ma5_upper_railed =3,
-	/obj/item/weapon_attachment/barrel/suppressor = 2,
-	/obj/item/weapon_attachment/sight/ma5_scope = 3,
+	/obj/item/weapon_attachment/ma5_upper_railed =5,
+	/obj/item/weapon_attachment/barrel/suppressor = 5,
+	/obj/item/weapon_attachment/sight/acog = 5,
 	/obj/item/weapon_attachment/light/flashlight = 5,
 	/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun = 2,
-	/obj/item/weapon_attachment/barrel/suppressor = 2,
-	/obj/item/weapon_attachment/vertical_grip = 3)
+	/obj/item/weapon_attachment/barrel/suppressor = 3,
+	/obj/item/weapon_attachment/vertical_grip = 5)
 	//products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6)
 
 /obj/machinery/vending/armory/attachment/soe
