@@ -160,6 +160,10 @@
 	nutriment_factor = 1
 	color = "#482000"
 
+/datum/reagent/nutriment/coffee/instant
+	name = "Instant Coffee Powder"
+	description = "A bitter powder made by processing coffee beans."
+
 /datum/reagent/nutriment/tea
 	name = "Tea Powder"
 	description = "A dark, tart powder made from black tea leaves."
@@ -167,6 +171,9 @@
 	taste_mult = 1.3
 	nutriment_factor = 1
 	color = "#101000"
+
+/datum/reagent/nutriment/tea/instant
+	name = "Instant Tea Powder"
 
 /datum/reagent/nutriment/coco
 	name = "Coco Powder"
