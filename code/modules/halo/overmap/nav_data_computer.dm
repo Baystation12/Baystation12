@@ -208,6 +208,10 @@
 	chip_faction = "Insurrection"
 	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus Colony")
 
+/obj/item/nav_data_chip/civilian
+	chip_faction = "civilian"
+	known_sectors = list("Geminus Colony")
+
 /obj/item/nav_data_chip/fragmented/unsc
 	name = "Fragmented Nav Data Chip"
 	chip_faction = "UNSC"
@@ -250,3 +254,6 @@
 
 /obj/machinery/nav_computer/innie
 	data_chip = new /obj/item/nav_data_chip/innie
+
+/obj/machinery/nav_computer/civilian
+	data_chip = new /obj/item/nav_data_chip/civilian
