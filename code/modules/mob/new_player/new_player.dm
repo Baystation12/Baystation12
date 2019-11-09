@@ -96,7 +96,11 @@
 				if(player.ready)totalPlayersReady++
 
 /mob/new_player/Topic(href, href_list[])
-	if(!client)	return 0
+	// These return values are 0 as to not interfere with ..() calls in unexpected ways
+	if(!client)
+		return 0
+	if(usr != src)
+		return 0
 
 	if(href_list["show_preferences"])
 		client.prefs.ShowChoices(src)
