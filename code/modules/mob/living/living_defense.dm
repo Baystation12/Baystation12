@@ -123,7 +123,8 @@
 	visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] with [I.name] by [user]!</span>")
 
 	var/blocked = run_armor_check(hit_zone, "melee")
-	standard_weapon_hit_effects(I, user, effective_force, blocked, hit_zone)
+	if(!standard_weapon_hit_effects(I, user, effective_force, blocked, hit_zone))
+		degrade_affected_armor(I.damage,I.damtype,hit_zone)
 
 	if(I.damtype == BRUTE && prob(33)) // Added blood for whacking non-humans too
 		var/turf/simulated/location = get_turf(src)
