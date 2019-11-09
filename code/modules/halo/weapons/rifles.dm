@@ -135,7 +135,7 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
-	fire_delay = 2
+	fire_delay = 9
 	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.0, 0.6, 0.6)
