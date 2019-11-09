@@ -6,13 +6,17 @@
 	startWhen				= 2
 	announceWhen			= 1
 	endWhen					= revokeAccess
-	has_skybox_image = TRUE
+	has_skybox_image		= TRUE
 	var/postStartTicks 		= 0
 
+/datum/event/radiation_storm/syndicate
+	has_skybox_image = FALSE
+
 /datum/event/radiation_storm/get_skybox_image()
-	var/image/res = overlay_image('icons/skybox/radbox.dmi', "beam", null, RESET_COLOR)
-	res.alpha = rand(40,80)
-	return res
+	if(prob(75)) // Sometimes, give no skybox image, to avoid metagaming it
+		var/image/res = overlay_image('icons/skybox/radbox.dmi', "beam", null, RESET_COLOR)
+		res.alpha = rand(40,80)
+		return res
 
 /datum/event/radiation_storm/announce()
 	command_announcement.Announce("High levels of radiation detected in proximity of the [location_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
