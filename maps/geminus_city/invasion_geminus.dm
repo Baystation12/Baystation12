@@ -10,6 +10,10 @@
 
 #include "../UNSC_Halberd_Class/includes.dm"
 
+#include "../UNSC_Prowler/includes.dm"
+
+#include "../ONI_Prowler/includes.dm"
+
 #include "../SOE_Argentum/includes.dm"
 
 #include "../Asteroid Listening Post/includes.dm"
