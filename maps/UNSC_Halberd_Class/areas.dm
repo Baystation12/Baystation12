@@ -44,7 +44,7 @@
 	name = "UNSC Light Brigade Morgue"
 
 /area/destroyer/unsclightbrigade/odst
-	name = "UNSC Light Brigade ODST Staging Area"
+	name = "UNSC Light Brigade SOEIV Bay"
 
 /area/destroyer/unsclightbrigade/briefingroom
 	name = "UNSC Light Brigade Briefing Room"
@@ -56,7 +56,7 @@
 	name = "UNSC Light Brigade Cryo Bay"
 
 /area/destroyer/unsclightbrigade/crewbunk
-	name = "UNSC Light Brigade Crew Bunks"
+	name = "UNSC Light Brigade ODST Armory"
 
 
 /area/destroyer/unsclightbrigade/brig

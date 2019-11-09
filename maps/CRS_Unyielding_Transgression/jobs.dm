@@ -24,35 +24,6 @@
 	var/datum/job/to_modify = job_master.occupations_by_type[/datum/job/covenant/sangheili_honour_guard]
 	to_modify.total_positions = 2
 
-/datum/job/covenant/brute_captain
-	title = "Jiralhanae Captain"
-	total_positions = 1
-	spawn_positions = 1
-	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/jiralhanae/covenant/captain
-	access = list(240,250)
-	faction_whitelist = "Covenant"
-	whitelisted_species = list(/datum/species/brutes)
-
-/datum/job/covenant/brute_major
-	title = "Jiralhanae Major"
-	total_positions = 2
-	spawn_positions = 2
-	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/jiralhanae/covenant/major
-	access = list(240,250)
-	faction_whitelist = "Covenant"
-	whitelisted_species = list(/datum/species/brutes)
-
-/datum/job/covenant/brute_minor
-	title = "Jiralhanae Minor"
-	total_positions = 3
-	spawn_positions = 3
-	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/jiralhanae/covenant/minor
-	access = list(240,250)
-	faction_whitelist = "Covenant"
-	whitelisted_species = list(/datum/species/brutes)
 
 /datum/job/covenant/sangheili_shipmaster
 	title = "Sangheili Shipmaster"

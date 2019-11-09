@@ -61,30 +61,15 @@
 	req_access = list(308)
 	products = list(\
 	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
-	/obj/item/weapon_attachment/ma5_upper_railed =5,
-	/obj/item/weapon_attachment/barrel/suppressor = 5,
-	/obj/item/weapon_attachment/sight/acog = 5,
-	/obj/item/weapon_attachment/light/flashlight = 5,
+	/obj/item/weapon_attachment/ma5_grip = 3,
+	/obj/item/weapon_attachment/ma5_upper_railed =3,
+	/obj/item/weapon_attachment/barrel/suppressor = 2,
+	/obj/item/weapon_attachment/sight/ma5_scope = 3,
+	/obj/item/weapon_attachment/light/ma5_flashlight = 5,
 	/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun = 2,
-	/obj/item/weapon_attachment/barrel/suppressor = 3,
-	/obj/item/weapon_attachment/vertical_grip = 5)
+	/obj/item/weapon_attachment/barrel/suppressor/br55 = 2,
+	/obj/item/weapon_attachment/br55_grip = 3)
 	//products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6)
-
-/obj/machinery/vending/armory/attachment/soe
-	name = "SOE Attachments Vendor"
-	desc = "A vendor full? of attachments *the rest is scratched off*."
-	icon_state ="ironhammer"
-	product_ads = "ME WANT ATTACHMENTS!"
-	icon_deny = "ironhammer-deny"
-	req_access = list()
-	products = list(\
-	/obj/item/weapon_attachment/barrel/suppressor = 5,
-	/obj/item/weapon_attachment/light/flashlight = 5,
-	/obj/item/weapon_attachment/vertical_grip = 5,
-	/obj/item/weapon_attachment/sight/rds = 5,
-	/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe = 5,
-	/obj/item/weapon_attachment/sight/acog = 5,
-)
 
 /obj/machinery/vending/armory/odstvend
 	name = "Armtech 5530"
@@ -113,7 +98,6 @@
 	/obj/item/clothing/head/helmet/odst/medic = 4,
 	/obj/item/clothing/suit/armor/special/odst/medic = 4,
 	/obj/item/weapon/storage/backpack/odst/medic = 4,
-	/obj/item/clothing/glasses/hud/tactical/odst_hud/medic = 4,
 	/obj/item/clothing/gloves/thick/combat = 4,
 	/obj/item/weapon/storage/belt/marine_ammo = 4,
 	/obj/item/weapon/storage/belt/marine_medic = 4,
@@ -153,7 +137,6 @@
 	/obj/item/clothing/head/helmet/odst/medic = 4,
 	/obj/item/clothing/suit/armor/special/odst/medic = 4,
 	/obj/item/weapon/storage/backpack/odst/medic = 4,
-	/obj/item/clothing/glasses/hud/tactical/odst_hud/medic = 4,
 	/obj/item/clothing/head/helmet/odst/squadleader = 4,
 	/obj/item/clothing/suit/armor/special/odst/squadleader = 4,
 	/obj/item/clothing/head/helmet/odst/sharpshooter = 4,
@@ -167,6 +150,7 @@
 	/obj/item/weapon/material/knife/combat_knife = 4,
 	/obj/item/weapon/material/machete = 2,
 	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
+	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 3,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
 	/obj/item/weapon/gun/projectile/m392_dmr = 2,
 	/obj/item/weapon/gun/projectile/br55 = 2,
@@ -178,6 +162,7 @@
 	/obj/item/ammo_magazine/m5 = 24,
 	/obj/item/ammo_magazine/m95_sap = 10,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
+	/obj/item/ammo_magazine/m762_ap/MA3 = 16,
 	/obj/item/ammo_magazine/m145_ap = 2,
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
@@ -193,6 +178,7 @@
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
 	icon_state = "ironhammer"
 	icon_deny = "ironhammer-deny"
+	color = COLOR_DARK_GRAY
 	req_access = list()
 	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
