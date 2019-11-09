@@ -353,6 +353,8 @@ cloak disrupt override
 			if(prob(armor))
 				damage_flags &= ~(DAM_SHARP|DAM_EDGE)
 			created_wound = apply_damage(throw_damage, dtype, zone, armor, damage_flags, O)
+		else
+			degrade_affected_armor(throw_damage,dtype,zone)
 
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower
