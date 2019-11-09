@@ -142,6 +142,7 @@
 		return
 	if(locked_target)
 		redirect(locked_target.x, locked_target.y, loc)
+		dir = get_dir(loc,locked_target)
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"
