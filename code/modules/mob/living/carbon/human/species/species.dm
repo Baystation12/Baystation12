@@ -238,7 +238,7 @@
 
 	H.mob_size = mob_size
 	for(var/obj/item/organ/organ in H.contents)
-		if((organ in H.organs) || (organ in H.internal_organs))
+		if(((organ in H.organs) || (organ in H.internal_organs)) && !istype(organ,/obj/item/organ/internal/stack)) //Preserve neural laces / cortical stacks.
 			qdel(organ)
 
 	if(H.organs)                  H.organs.Cut()
