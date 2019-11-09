@@ -172,7 +172,9 @@ cloak disrupt override
 	visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name] with [I.name] by [user]!</span>")
 
 	var/blocked = run_armor_check(hit_zone, "melee", I.armor_penetration, "Your armor has protected your [affecting.name].", "Your armor has softened the blow to your [affecting.name].")
-	standard_weapon_hit_effects(I, user, effective_force, blocked, hit_zone)
+	if(!standard_weapon_hit_effects(I, user, effective_force, blocked, hit_zone))
+		var/mob/living/carbon/human/h = src
+		h.degrade_affected_armor(I.force,I.damtype,hit_zone)
 
 	return blocked
 
