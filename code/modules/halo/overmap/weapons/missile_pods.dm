@@ -36,6 +36,7 @@
 	name = "missile"
 	desc = "An explosive warhead on the end of a guided thruster."
 	icon = 'code/modules/halo/overmap/weapons/deck_missile_pod.dmi'
+	damage = 75
 	icon_state = "missile_om_proj"
 	ship_damage_projectile = /obj/item/projectile/missile_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/rocketpod_missile_impact.wav'

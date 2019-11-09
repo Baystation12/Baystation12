@@ -25,21 +25,14 @@
 	desc = "An ACOG which provides an increase in accuracy, resulting in a tighter grouping of consecutive shots."
 	icon_state = "acog-scope-obj"
 
-/obj/item/weapon_attachment/sight/ma5_scope
-	name = "MA5B scope"
-	desc = "A scope which provides slight magnification and an increase in accuracy."
-	icon_state = "MA5-Scope"
-
-	zoom_amount = 1.1
-
 /obj/item/weapon_attachment/sight/br55_scope
 	name = "BR55 scope"
 	desc = "A scope specific to the BR55 that allows 2x magnification."
-	icon_state = "BR55-CarryHandle-Scope"
+	icon_state = "BR55-CarryHandle-Scope-obj"
 	zoom_amount = 1.3
 
 /obj/item/weapon_attachment/sight/M395_scope
 	name = "M395 scope"
-	desc = "A scope specific to the BR55 that allows 2x magnification."
+	desc = "A scope specific to the M395 that allows 2x magnification."
 	icon_state = "M395-Scope"
 	zoom_amount = 1.35
