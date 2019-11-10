@@ -12,7 +12,7 @@
 	starting_accessories = /obj/item/clothing/accessory/badge/tags
 
 /obj/item/clothing/head/helmet/marine
-	name = "CH252 Helmet"
+	name = "CH251 Helmet"
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
@@ -32,14 +32,21 @@
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/marine/medic
-	name = "CH252 Helmet Medic"
+	name = "CH251 Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
 	item_state = "CH252 Helmet Medic"
 	icon_state = "helmet_novisor_medic"
 	body_parts_covered = HEAD|EYES
 
+/obj/item/clothing/head/helmet/marine/medic/visor
+	name = "CH251-V Helmet Medic"
+	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	item_state = "CH252 Helmet Medic"
+	icon_state = "helmet_medic"
+	body_parts_covered = HEAD|EYES
+
 /obj/item/clothing/head/helmet/marine/visor
-	name = "CH252-V Helmet"
+	name = "CH251-V Helmet"
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
@@ -47,8 +54,26 @@
 	icon_state = "helmet"
 	body_parts_covered = HEAD|EYES
 
+/obj/item/clothing/head/helmet/marine/brown
+	name = "CH251 Helmet"
+	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Visor Helmet B"
+	icon_state = "helmet_b"
+	body_parts_covered = HEAD|EYES
+
+/obj/item/clothing/head/helmet/marine/brownvisor
+	name = "CH251-V Helmet"
+	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Helmet B"
+	icon_state = "helmet_novisor_b"
+	body_parts_covered = HEAD|EYES
+
 /obj/item/clothing/suit/storage/marine
-	name = "M52B Body Armor"
+	name = "M52A Body Armor"
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
@@ -64,18 +89,40 @@
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
 /obj/item/clothing/suit/storage/marine/military_police
-	name = "M52B Body Armor NavSec"
+	name = "M52A Body Armor NavSec"
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps. This one is modified for the use of naval security officers."
 	armor = list(melee = 50, bullet = 50, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
 	armor_thickness = 20
 
 /obj/item/clothing/suit/storage/marine/medic
-	name = "M52B Body Armor Medic"
+	name = "M52A Body Armor Medic"
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "M52B Body Armor Medic"
 	icon_state = "M52B Body Armor Medic"
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/marine/medic/brown
+	name = "M52A Body Armor Medic"
+	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "M52B Body Armor Medic B"
+	icon_state = "M52B Body Armor Medic B"
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/marine/brown
+	name = "M52A Body Armor"
+	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "M52B Body Armor B"
+	icon_state = "M52B Body Armor B"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
@@ -98,6 +145,14 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/shoes/marine/brown
+	name = "VZG7 Armored Boots"
+	desc = "Standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "boots_b"
+	icon_state = "boots_b"
 
 /obj/item/weapon/storage/belt/marine_ammo
 	name = "Ammunition Storage Belt"
@@ -122,8 +177,8 @@
 	can_hold = list(/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/erk,/obj/item/weapon/storage/firstaid/combat/unsc)
 
 /obj/item/clothing/mask/marine
-	name = "marine bandana"
-	desc = "For masking your identity, keeping your face warm, and blocking dust or sand. Comes in a stylish olive drab marine camo."
+	name = "Marine Mask"
+	desc = "For masking your identity, keeping your face warm, and blocking dust or sand. This one is grey."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	icon_state = "marinemask"
@@ -283,6 +338,11 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
+/obj/item/clothing/gloves/thick/unsc/brown
+	desc = "Standard Issue UNSC Marine Gloves."
+	name = "UNSC Combat gloves"
+	icon_state = "unsc_gloves_b"
+	item_state = "unsc_gloves_b"
 
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND
