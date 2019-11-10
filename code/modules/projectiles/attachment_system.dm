@@ -46,6 +46,8 @@
 /obj/item/weapon_attachment/proc/remove_attachment_effects(var/obj/item/weapon/gun/gun)
 
 /obj/item/weapon_attachment/proc/get_attribute_mods(var/obj/item/gun_caller)
+	if(isnull(cached_profile))
+		return list(0,0,0)
 	if(!(gun_caller.name == cached_profile.weapon_name))
 		var/datum/attachment_profile/profile = get_attachment_profile(gun_caller)
 		if(isnull(profile))
