@@ -45,37 +45,30 @@
 			if(istype(M:head, /obj/item/clothing/head/helmet))
 				ear_safety += 1
 
-//Flashing everyone
-	if(eye_safety < FLASH_PROTECTION_MODERATE)
-		M.flash_eyes()
-		M.Stun(2)
-		M.Weaken(10)
 
-//Now applying sound
 	if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
-		if(ear_safety > 0)
-			M.Stun(2)
-			M.Weaken(1)
-		else
-			M.Stun(10)
-			M.Weaken(3)
-			if ((prob(14) || (M == src.loc && prob(70))))
-				M.ear_damage += rand(1, 10)
-			else
-				M.ear_damage += rand(0, 5)
-				M.ear_deaf = max(M.ear_deaf,15)
-
+		if(!ear_safety)
+			M.ear_damage += rand(0, 5)
+			M.ear_deaf = max(M.ear_deaf,15)
+			
+		
+		if(eye_safety < FLASH_PROTECTION_MODERATE)
+			M.flash_eyes()
+				
+			if(eye_safety < FLASH_PROTECTION_MINOR)
+				M.confused += 3
+	
+		
 	else if(get_dist(M, T) <= 5)
 		if(!ear_safety)
-			M.Stun(8)
 			M.ear_damage += rand(0, 3)
 			M.ear_deaf = max(M.ear_deaf,10)
 
-	else if(!ear_safety)
-		M.Stun(4)
-		M.ear_damage += rand(0, 1)
-		M.ear_deaf = max(M.ear_deaf,5)
+		if(eye_safety < FLASH_PROTECTION_MINOR)
+			M.flash_eyes()
+			
 
+			
 //This really should be in mob not every check
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
