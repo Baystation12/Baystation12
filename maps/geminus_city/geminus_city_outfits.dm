@@ -102,7 +102,7 @@
 /decl/hierarchy/outfit/job/police
 	name = "GCPD Officer"
 
-	head = /obj/item/clothing/head/soft/sec/corp
+	head = /obj/item/clothing/head/soft/police
 	uniform = /obj/item/clothing/under/police
 	belt = /obj/item/weapon/gun/projectile/m7_smg/rubber
 	shoes = /obj/item/clothing/shoes/dutyboots
@@ -116,7 +116,7 @@
 /decl/hierarchy/outfit/job/cop
 	name = "GCPD Chief of Police"
 
-	head = /obj/item/clothing/head/soft/sec/corp
+	head = /obj/item/clothing/head/soft/police
 	uniform = /obj/item/clothing/under/police
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	shoes = /obj/item/clothing/shoes/dutyboots
@@ -124,6 +124,6 @@
 	l_pocket = /obj/item/clothing/accessory/badge/police
 	l_ear = /obj/item/device/radio/headset/police
 	id_type = /obj/item/weapon/card/id/security/head
-	suit = /obj/item/clothing/suit/armor/hos
+	suit = /obj/item/clothing/suit/armor/vest/police_medium
 
 	flags = 0
