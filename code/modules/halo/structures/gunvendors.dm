@@ -176,6 +176,7 @@
 	/obj/item/weapon/material/machete = 2,
 	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
+	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 4,
 	/obj/item/weapon/gun/projectile/m392_dmr = 2,
 	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/gun/projectile/srs99_sniper = 1,
@@ -186,6 +187,7 @@
 	/obj/item/ammo_magazine/m5 = 24,
 	/obj/item/ammo_magazine/m95_sap = 10,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
+	/obj/item/weapon/gun/projectile/ma5b_ar = 15,
 	/obj/item/ammo_magazine/m145_ap = 2,
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
@@ -256,7 +258,6 @@
 	req_access = list()
 	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
-	/obj/item/weapon/gun/projectile/heavysniper/handgonne = 1,
 	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 2,
