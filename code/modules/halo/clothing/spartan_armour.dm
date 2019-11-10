@@ -52,8 +52,7 @@
 	species_restricted = list("Spartan")
 	max_suitstore_w_class = ITEM_SIZE_HUGE
 
-	specials = list(/*/datum/armourspecials/gear/human_tank,*/\
-		/datum/armourspecials/shields/spartan,
+	specials = list(/datum/armourspecials/shields/spartan,
 		/datum/armourspecials/shieldmonitor/)
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
