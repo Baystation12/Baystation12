@@ -24,6 +24,7 @@
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 	w_class = ITEM_SIZE_LARGE
+	wielded_item_state = "ma5b-wielded"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
