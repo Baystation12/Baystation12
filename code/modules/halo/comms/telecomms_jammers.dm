@@ -77,3 +77,4 @@
 #undef BERTELS_NAME
 #undef ONI_NAME
 #undef URFC_NAME
+#undef SPARTAN_NAME

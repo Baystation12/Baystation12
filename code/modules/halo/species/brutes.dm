@@ -26,6 +26,7 @@
 	default_faction = "Covenant"
 	pixel_offset_x = -12
 	item_icon_offsets = list(5,4)
+	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
@@ -46,3 +47,10 @@
 /datum/species/brutes/get_random_name(var/gender)
 	var/newname = pick(GLOB.first_names_jiralhanae)
 	return newname
+
+/datum/unarmed_attack/brute_punch
+    attack_verb = list("clobbers", "smashes", "backhands", "punches", "slams")
+    attack_noun = list("fist")
+    eye_attack_text = "fingers"
+    eye_attack_text_victim = "digits"
+    damage = 25

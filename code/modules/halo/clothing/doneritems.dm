@@ -487,6 +487,35 @@
 	icon_state = "osama-UNSCsuit_worn"
 	worn_state = "UNSC Marine Fatigues"
 
+////////Loafe\\\\\\\\
+
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/loafe
+	name = "Loafe's Helmet"
+	item_state = "loafe-helmet_worn"
+	icon_state = "loafe-helmet_obj"
+	item_state_novisr = "loafe-helmet_worn"
+	icon_state_novisr = "loafe-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/loafe
+	name = "Loafe's Armor"
+	icon_state = "loafe-armor_obj"
+	item_state = "loafe-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/loafe
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Loafe's Backpack"
+	item_state = "loafe-backpack_worn"
+	icon_state = "loafe-backpack_obj"
+
+/decl/hierarchy/outfit/loafe_odst
+	name = "loafe - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/loafe
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/loafe
+	back = /obj/item/weapon/storage/backpack/odst/loafe
 
 //Spartan
 

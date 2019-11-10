@@ -589,9 +589,10 @@
 	var/cumulative_slowdownmod = 0
 	for(var/obj/item/weapon_attachment/attachment in get_attachments())
 		var/list/attrib_mods = attachment.get_attribute_mods(src)
-		cumulative_dispmod += attrib_mods[1]
-		cumulative_accmod += attrib_mods[2]
-		cumulative_slowdownmod += attrib_mods[3]
+		if(!isnull(attrib_mods))
+			cumulative_dispmod += attrib_mods[1]
+			cumulative_accmod += attrib_mods[2]
+			cumulative_slowdownmod += attrib_mods[3]
 
 	dispersion += cumulative_dispmod
 	accuracy += cumulative_accmod

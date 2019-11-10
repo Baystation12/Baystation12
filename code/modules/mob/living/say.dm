@@ -17,6 +17,7 @@ var/list/department_radio_keys = list(
 	  ":m" = "MEDCOM",		".m" = "MEDCOM",
 	  ":o" = "ONICOM",		".o" = "ONICOM",
 	  ":v" = "CMDOCOM",		".v" = "CMDOCOM",
+	  ":z" = "SIERRACOM",	".z" = "SIERRACOM",
 
 	  ":R" = "right ear",	".R" = "right ear",
 	  ":L" = "left ear",	".L" = "left ear",
@@ -36,6 +37,7 @@ var/list/department_radio_keys = list(
 	  ":M" = "MEDCOM",		".M" = "MEDCOM",
 	  ":O" = "ONICOM",		".O" = "ONICOM",
 	  ":V" = "CMDOCOM",		".V" = "CMDOCOM",
+	  ":Z" = "SIERRACOM",	".Z" = "SIERRACOM",
 	/*
 	  ":r" = "right ear",	".r" = "right ear",
 	  ":l" = "left ear",	".l" = "left ear",

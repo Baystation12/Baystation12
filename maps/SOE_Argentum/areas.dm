@@ -37,20 +37,3 @@
 /area/soe_argentum/starboardingpods
 	name = "SOE Argentum Starboard Boarding Pods"
 	icon_state = "Tactical"
-
-
-/area/soe_argentum/portguns
-	name = "Soe Argentum Port Deck Gun"
-	icon_state = "red-blue"
-
-/area/soe_argentum/starboardguns
-	name = "SOE Argentum Starboard Deck Gun"
-	icon_state = "red-blue"
-
-
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/argentumport
-	deck_gun_area = /area/soe_argentum/portguns
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/argentumstarboard
-	deck_gun_area = /area/soe_argentum/starboardguns

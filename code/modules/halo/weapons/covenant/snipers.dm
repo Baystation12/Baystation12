@@ -4,7 +4,7 @@
 	desc = "One of the few covenant weapons that utilise magazines."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "type 51"
-	item_state = "w_carbine"
+	item_state = "carbine"
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/cov_carbine_fire.ogg'
@@ -15,6 +15,7 @@
 	reload_sound = 'code/modules/halo/sounds/cov_carbine_reload.ogg'
 	one_hand_penalty = -1
 	irradiate_non_cov = 10
+	wielded_item_state = "carbine-wielded"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -46,7 +47,7 @@
 	desc = "Fires a short-lived but powerful lance of plasma, repeated quick firing will overheat the weapon and leave it unsuable for a short while."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "beam rifle"
-	item_state = "w_beamrifle"
+	item_state = "beamrifle"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
@@ -55,6 +56,7 @@
 	projectile_type = /obj/item/projectile/covenant/beamrifle
 	one_hand_penalty = -1
 	irradiate_non_cov = 15
+	wielded_item_state = "beamrifle-wielded"
 
 	var/next_allowed_fire
 
@@ -97,7 +99,7 @@
 	desc = "A unique combination of the Type-33 and Type-51."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Needle rifle"
-	item_state = "w_needlerifle"
+	item_state = "needlerifle"
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/cov_needlerifle_fire.ogg'
@@ -107,6 +109,7 @@
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_needlerifle_reload.ogg'
 	one_hand_penalty = -1
+	wielded_item_state = "needlerifle-wielded"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

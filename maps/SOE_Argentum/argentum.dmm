@@ -41,7 +41,7 @@
 "aO" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "aP" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/boarding_pod,/turf/simulated/floor/tiled,/area/soe_argentum/portboardingpods)
 "aQ" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/portboardingpods)
-"aR" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/overmap_weapon_console/deck_gun_control/local/argentumport,/turf/simulated/floor/plating,/area/soe_argentum/portboardingpods)
+"aR" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-2"},/obj/structure/computerframe,/turf/simulated/floor/plating,/area/soe_argentum/portboardingpods)
 "aS" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/soe_argentum/portboardingpods)
 "aT" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
 "aU" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 9},/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
@@ -97,7 +97,6 @@
 "bS" = (/obj/structure/window/reinforced/treated,/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
 "bT" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
 "bU" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
-"bV" = (/obj/machinery/deck_gun/chaingun{icon_state = "deck_gatling3"; dir = 8},/turf/space,/area/soe_argentum/portguns)
 "bW" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "bX" = (/obj/docking_umbilical/east{name = "Argentum Docking Port"; pixel_x = 0},/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
 "bY" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
@@ -245,7 +244,6 @@
 "eK" = (/obj/structure/sign/neon/pizza,/turf/simulated/wall/r_wall,/area/soe_argentum/storageroom)
 "eL" = (/obj/structure/table/standard,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
 "eM" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
-"eN" = (/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "eO" = (/obj/structure/closet/secure_closet/engineering_electrical,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
 "eP" = (/obj/structure/closet/secure_closet/engineering_welding,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
 "eQ" = (/obj/structure/bed,/obj/effect/landmark/start/commando_spawn,/obj/item/weapon/bedsheet/hos,/obj/item/clothing/under/rank/clown,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
@@ -261,15 +259,12 @@
 "fa" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "fb" = (/obj/structure/table/rack,/obj/item/weapon/gun/energy/SDSR_10,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/obj/item/weapon/grenade/empgrenade,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
 "fc" = (/obj/structure/table/standard,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/clothing/shoes/clown_shoes,/turf/simulated/floor/plating,/area/soe_argentum/storageroom)
-"fd" = (/turf/space,/area/soe_argentum/portguns)
-"fe" = (/obj/machinery/deck_gun/chaingun{icon_state = "deck_gatling3"; dir = 8},/turf/space,/area/soe_argentum/starboardguns)
-"ff" = (/turf/space,/area/soe_argentum/starboardguns)
 "fg" = (/obj/structure/cable/blue{dir = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fh" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/effect/decal/cleanable/dirt,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fi" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fj" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fk" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
-"fl" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/argentumstarboard,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
+"fl" = (/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fm" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fn" = (/obj/effect/decal/cleanable/dirt,/obj/item/metalscrap,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
 "fo" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/escape_pod/bumblebee/south,/turf/simulated/floor/plating,/area/soe_argentum/starboardingpods)
@@ -279,7 +274,7 @@
 "fs" = (/obj/machinery/vending/armory/attachment/soe,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
 "ft" = (/obj/machinery/door/blast/regular,/turf/simulated/wall/r_wall,/area/soe_argentum/starboardingpods)
 "fu" = (/obj/structure/table/standard,/obj/item/device/flashlight,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
-"fv" = (/obj/machinery/nav_computer/innie,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"fv" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/south,/obj/machinery/nav_computer/civilian,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "fw" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/soe_argentum/Messhall)
 "fx" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/soe_argentum/powercore)
 "fy" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
@@ -338,7 +333,7 @@ eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUah
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadadararasaaaaaaatarauabakavawayazaAaBaCaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadadaDadararaEaaaaaaaFararabakazaGaHaIaJaxaKacacacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaMaLaOadaParaQaaaRaaaSbkarabaNaUaVaWaXaYaZaTacbbbcacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUbVfdadbdbebacFbhbibjadblaFaFbfbnbCaEaFblabbmbtbubrbsbrbtbtacbvbwbNaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadbdbebacFbhbibjadblaFaFbfbnbCaEaFblabbmbtbubrbsbrbtbtacbvbwbNaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadbybzbAbBbzbgbzfwbDaabEbFbGbFaaefaafxbHbtbIbJbtbtbtboacbxbwbwaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadbAbAadbLbMbqbgbObPbQbRbRbSbTbTbUbWabbKbtbYbZcacbccbpcecfcgchaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadcicjckfwcladcmadfwcncocpcqcrcsfyctcufzabcwcxabababcyabfAczacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
@@ -348,8 +343,8 @@ eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddhbzdiad
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddtcddvfwdwdxdxdxdydzcodAdBdCdDfydEcufBdFdFdGdFdFdFdHdFfAdIacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaddJdKdudMdNdOdedPdPeqdQbTdRdedSeHdUdVdUdWdXdYdZceeaebchaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadedeeeeeefCeresereIeJeIerererfBdFdFegeheiejekelacemendLaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUfeffdxdxdxdxdJeedKepdwcOeNeYdTfgfhfieoeMdFdYdYetdYeuevevewcPexbweyaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxezeeeAeedxfjfjfkerflerfmfjfjdFeBdYeteCeDeEeFeGacchchacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdJeedKepdwcOfleYdTfgfhfieoeMdFdYdYetdYeuevevewcPexbweyaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxezeeeAeedxfjfjfkercOerfmfjfjdFeBdYeteCeDeEeFeGacchchacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxfsdxfbdxfjfjfnerererfpfjfjdFdFeKegdYdYdYdYeLacacacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxdxdxfofjfqerererfreZfjdFeOePfcdYehdYdYeRaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUdxdxdxdxftftfDerererfDftftdHeSdYdYdYeTeVeWeXaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU

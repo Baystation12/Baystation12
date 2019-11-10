@@ -20,7 +20,6 @@
 	accuracy = 2
 	screen_shake = 0
 	burst = 1
-	burst_delay = 2
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
