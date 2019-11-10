@@ -261,6 +261,7 @@
 	req_access = list()
 	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
+	/obj/item/weapon/gun/projectile/heavysniper/handgonne = 1,
 	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 2,
