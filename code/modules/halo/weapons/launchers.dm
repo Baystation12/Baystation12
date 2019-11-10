@@ -8,7 +8,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M41closed"
 	item_state = "m41"
-	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/spnkr
 	fire_delay = 8

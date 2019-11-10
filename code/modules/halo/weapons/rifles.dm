@@ -11,9 +11,9 @@
 	item_state = "ma5b"
 	caliber = "a762"
 	slot_flags = SLOT_BACK
-	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
-	//fire_sound_burst = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
-	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Fire_New.wav'
+	//fire_sound_burst = 'code/modules/halo/sounds/Assault_Rifle_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Assault_Rifle_Reload_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA5B) //Disallows loading LMG boxmags into the MA5B
@@ -22,7 +22,7 @@
 	one_hand_penalty = -1
 	dispersion = list(0)
 	var/on = 0
-	var/activation_sound = 'sound/effects/flashlight.ogg'
+	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 	w_class = ITEM_SIZE_LARGE
 	wielded_item_state = "ma5b-wielded"
 
@@ -66,6 +66,9 @@
 	desc = "Also formally known as the MA5. Takes 7.62mm ammo."
 	icon_state = "MA37"
 	item_state = "ma37"
+	fire_sound = 'code/modules/halo/sounds/MA37_Fire_New.wav'
+	//fire_sound_burst = 'code/modules/halo/sounds/MA37_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/MA37_Reload_New.wav'
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
@@ -169,8 +172,8 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	caliber = "9.5mm"
 	slot_flags = SLOT_BACK
-	fire_sound = 'code/modules/halo/sounds/BattleRifleShotSoundEffect.ogg'
-	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Battle_Rifle_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Battle_Rifle_Reload_New.wav'
 	load_method = MAGAZINE
 	one_hand_penalty = -1
 	burst = 3
