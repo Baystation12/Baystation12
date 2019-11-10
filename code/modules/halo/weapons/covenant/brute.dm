@@ -13,7 +13,7 @@
 	item_state_slots = list(slot_l_hand_str = "spnade", slot_r_hand_str = "spnade")
 
 	force = 35
-	armour_penetration = 40
+	armor_penetration = 40
 
 	sharp = 1
 	edge = 1
@@ -61,7 +61,7 @@
 	sharp = 1
 	force = 40
 	is_heavy = 1
-	armour_penetration = 40
+	armor_penetration = 40
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 
@@ -121,7 +121,7 @@
 	sharp = 1
 	force = 40
 	is_heavy = 1
-	armour_penetration = 40
+	armor_penetration = 40
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 
@@ -170,7 +170,7 @@
 	force = 65
 	edge = 0
 	sharp = 0
-	armour_penetration = 40
+	armor_penetration = 40
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
 	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer", slot_back_str = "back_hammer")
 
@@ -216,7 +216,7 @@
 	var/reload_time = 30
 	force = 50
 	edge = 1
-	armour_penetration = 40
+	armor_penetration = 40
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)

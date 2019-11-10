@@ -11,7 +11,7 @@
 	sharp = 1
 	edge = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	armour_penetration = 40
+	armor_penetration = 40
 
 /obj/item/weapon/material/machete
 	name = "machete"
@@ -23,7 +23,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
-	armour_penetration = 40
+	armor_penetration = 40
 
 
 	w_class = ITEM_SIZE_LARGE
