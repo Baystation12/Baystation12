@@ -240,7 +240,7 @@ var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	if(!pref_mob || !pref_mob.client)
 		return 1
 	// If the usr isn't trying to alter their own mob then they must instead be an admin
-	if(usr != pref_mob || !check_rights(R_ADMIN, 0, usr))
+	if(usr != pref_mob && !check_rights(R_ADMIN, 0, usr))
 		return 1
 
 	. = OnTopic(href, href_list, usr)
