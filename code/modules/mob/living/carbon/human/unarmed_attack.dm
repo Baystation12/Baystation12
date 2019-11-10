@@ -11,6 +11,7 @@ var/global/list/sparring_attack_cache = list()
 	var/sharp = 0
 	var/edge = 0
 	var/delay = 0
+	var/critical_chance = 5
 
 	var/deal_halloss
 	var/sparring_variant_type = /datum/unarmed_attack/light_strike
@@ -49,7 +50,7 @@ var/global/list/sparring_attack_cache = list()
 
 	var/stun_chance = rand(0, 100)
 
-	if(attack_damage >= 5 && armour < 100 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
+	if(attack_damage >= 5 && armour < 100 && !(target == user) && stun_chance <= critical_chance) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit
 			if(BP_HEAD, BP_EYES, BP_MOUTH)
 				// Induce blurriness

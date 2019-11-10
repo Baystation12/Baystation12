@@ -24,6 +24,7 @@
 	item_icon_offsets = list(16,0)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	default_faction = "Covenant"
+	unarmed_types = list(/datum/unarmed_attack/elite_punch)
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
@@ -60,3 +61,10 @@
 	newname += " "
 	newname += pick(GLOB.last_names_sangheili)
 	return newname
+
+/datum/unarmed_attack/elite_punch
+    attack_verb = list("jabs", "strikes", "side-kicks", "punches", "knees", "kicks")
+    attack_noun = list("fist")
+    eye_attack_text = "fingers"
+    eye_attack_text_victim = "digits"
+    damage = 15
