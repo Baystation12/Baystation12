@@ -19,6 +19,7 @@
 	flags = NO_MINOR_CUT
 	item_icon_offsets = list(0,0)
 	default_faction = "Covenant"
+	unarmed_types = list(/datum/unarmed_attack/grunt_punch)
 
 	breath_type = "methane"
 	exhale_type = "carbon_dioxide"
@@ -64,3 +65,10 @@
 		//palindrome
 		newname += reverse_text(copytext(newname,1,lentext(newname)))
 	return capitalize(newname)
+
+/datum/unarmed_attack/grunt_punch
+    attack_verb = list("slaps", "smacks", "hits", "flails at", "scrabbles at", "punches", "kicks")
+    attack_noun = list("fist")
+    eye_attack_text = "fingers"
+    eye_attack_text_victim = "digits"
+    damage = 0

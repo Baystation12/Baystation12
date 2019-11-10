@@ -93,7 +93,7 @@
 	icon_state = "soe_spacesuit"
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	blood_overlay_type = "armor"
-	armor = list(melee = 20, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 100, rad = 25)
+	armor = list(melee = 20, bullet = 45, laser = 45,energy = 30, bomb = 25, bio = 100, rad = 25)
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS| FEET | HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL

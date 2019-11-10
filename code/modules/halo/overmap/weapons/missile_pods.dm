@@ -41,6 +41,22 @@
 	ship_damage_projectile = /obj/item/projectile/missile_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/rocketpod_missile_impact.wav'
 	step_delay = 0.75 SECOND
+	var/num_homing_steps = 5
+	var/atom/movable/homing_targ
+
+/obj/item/projectile/overmap/missile/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
+	. = ..()
+	if(istype(target,/obj/effect/overmap))
+		homing_targ = target
+
+/obj/item/projectile/overmap/missile/Move()
+	. = ..()
+	if(num_homing_steps <= 0)
+		homing_targ = null
+	if(homing_targ)
+		redirect(homing_targ.x, homing_targ.y, loc)
+		dir = get_dir(loc,homing_targ)
+		num_homing_steps--
 
 /obj/item/projectile/overmap/missile/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 

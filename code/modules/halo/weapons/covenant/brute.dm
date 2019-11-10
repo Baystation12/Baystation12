@@ -253,6 +253,9 @@
 	//automatically cycle the chamber
 	pump(user, 1)
 
+/obj/item/weapon/gun/launcher/grenade/brute_shot/can_embed()
+	return FALSE
+
 /obj/item/weapon/grenade/brute_shot
 	name = "belt of type-25 antipersonnel grenades"
 	desc = "A small explosive device designed to be propelled out of the type-25 grenade launcher. Can also be thrown manually."

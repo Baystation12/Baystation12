@@ -18,6 +18,7 @@
 	item_icon_offsets = list(-1,3)
 	slowdown = -1
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
+	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
 
 	metabolism_mod = 1.25 //Faster metabolism
 	breath_pressure = 14.5 //Better lungs!
@@ -83,3 +84,10 @@
 
 /datum/species/spartan/sanitize_name(name)
 	return sanitizeName(name, allow_numbers=TRUE)
+
+/datum/unarmed_attack/spartan_punch
+    attack_verb = list("jabs", "slams", "punches", "knees", "kicks", "strikes")
+    attack_noun = list("fist")
+    eye_attack_text = "fingers"
+    eye_attack_text_victim = "digits"
+    damage = 20
