@@ -140,7 +140,7 @@
 			var/turf/curloc = get_turf(user)
 
 			// redirect the projectile
-			P.redirect(new_x, new_y, curloc, user)
+			P.redirect(locate(new_x, new_y,curloc.z), curloc, user)
 
 			return PROJECTILE_CONTINUE // complete projectile permutation
 
