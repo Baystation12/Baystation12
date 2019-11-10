@@ -23,6 +23,7 @@
 	burst_accuracy = list(0,-1,-1,-2,-2)
 	dispersion = list(1.0, 1.2, 1.3, 1.4, 1.5)
 	w_class = ITEM_SIZE_HUGE
+	wielded_item_state = "SAW-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
