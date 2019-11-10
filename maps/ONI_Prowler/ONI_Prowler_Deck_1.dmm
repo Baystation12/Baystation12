@@ -297,6 +297,7 @@
 "fK" = (/obj/effect/overmap/ship/oni_aegis,/turf/space,/area/space)
 "fL" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Tool Storage"; req_access = list(117)},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fM" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/obj/effect/landmark/start{name = "Spartan II"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
+"fN" = (/obj/machinery/computer/cryopod,/turf/simulated/wall/r_wall,/area/corvette/onifox/cryodorms)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -329,7 +330,7 @@ aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNbJbKbLaNaNbnbMbnbnbMbnbnbnbNbObFbMbPaKbaaAaAbbaE
 aaaaaaaaaaaaaaaaaaaaaNaNaTbRaNbSaNaNbraNaNaKaKaKbUaKaKaKaKaKaKbTaKaKaKambVbwamamamamamaXaXcIaVbebWbebebebeaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNaNaNbXbYbXaNcdbLckcpbxbZcacbccbZcecfcgbZchcicfcjcfclcmcncfcocfcfcfbZcfcbcfcxbebebebeaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaacqcrcsctcucvcwcFcpcpcGcHcIcJcycIcIcJczcAcBcJcCcDcAcEcIaVcIcIcAcJcIcIczcJcWcIcIcJbebebebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNbYcKcLbYbLcMbLcNcOaNcPcPcQcPcRcRcRcRcRcRcScRcRcRcTcUcVcXcXcXcXcXcXcXcXcXcXcXcYcXcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNbYcKcLbYbLcMbLcNcOaNcPfNcQcPcRcRcRcRcRcRcScRcRcRcTcUcVcXcXcXcXcXcXcXcXcXcXcXcYcXcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaacqcZcsdacFdbdcddbLdedfaNdgdgeHcPdidjdkdldmdndodpdqcRdrdscVcXdtdudvdwdxdydzdAdBdCdDdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNaNaNdFbYdFaNdGdHdIaNdJdgdhcPdLdkdkdMdkdNdodOdPcRdQdRdScXdTdUdvdVdWdXdYdXdZeaebdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgdKcPeheidkdkdkejdodOdkdkcVcUekcXdvdvdvdVelemendYdXeoepdEcXcXaaaaaaaaaaaaaa

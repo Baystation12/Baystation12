@@ -15,14 +15,15 @@
 	name = "ONI Fox Armoury"
 	requires_power = 0
 
+/*
 /area/corvette/onifox/Crewquarters
 	name = "ONI Aegis Crew Quarters"
 	requires_power = 0
-
+*/
 /area/corvette/onifox/Crewmess
 	name = "ONI Aegis Crew Mess Hall"
 	requires_power = 0
-
+/*
 /area/corvette/onifox/crewbathroom
 	name = "ONI Aegis Crew Bathrooms"
 	requires_power = 0
@@ -30,7 +31,7 @@
 /area/corvette/onifox/storage
 	name = "ONI Aegis Storage Bay"
 	requires_power = 0
-
+*/
 /area/corvette/onifox/hallway
 	name = "ONI Aegis Hallway"
 	requires_power = 0
@@ -47,7 +48,7 @@
 
 /area/corvette/onifox/starboardengine
 	name = "ONI Aegis Starboard Engine"
-
+/*
 /area/corvette/onifox/janitorialcloset
 	name = "ONI Aegis Janitorial Closet"
 
@@ -62,7 +63,7 @@
 /area/corvette/onifox/nuclearstorage
 	name = "ONI Aegis Nuclear Payload Storage"
 	requires_power = 0
-
+*/
 /area/corvette/onifox/umbilical
 	name = "ONI Aegis Docking Umbilical"
 	requires_power = 0
@@ -70,17 +71,18 @@
 /area/corvette/onifox/cryodorms
 	name = "ONI Aegis Cryodorms"
 	requires_power = 0
-
+/*
 /area/corvette/onifox/morgue
 	name = "ONI Aegis Morgue"
 	requires_power = 0
-
+*/
 /area/corvette/onifox/communications
 	name = "ONI Aegis Communications Hub"
 	requires_power = 0
-
+/*
 /area/corvette/onifox/airlock
 	name = "ONI Aegis External Airlock"
 	requires_power = 0
 
+*/
 
