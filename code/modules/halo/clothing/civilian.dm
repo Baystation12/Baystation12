@@ -13,7 +13,7 @@
 		slot_l_hand_str = 'code/modules/halo/clothing/gcpd_leftinhands.dmi',
 		slot_r_hand_str = 'code/modules/halo/clothing/gcpd_rightinhands.dmi',
 		)
-	armor_thickness = 35//this had zero thickness lol
+	armor_thickness = 12
 
 /obj/item/clothing/suit/armor/vest/police/New()
 	..()
@@ -23,7 +23,7 @@
 	name = "medium ballistic vest"
 	desc = "A heavy vest designed for dangerous operations that features full upper and lower torso coverage. For room clearing and armed civilians."
 	armor = list(melee = 35, bullet = 30, laser = 15, energy = 15, bomb = 30, bio = 10, rad = 15)
-	armor_thickness = 15
+	armor_thickness = 9
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO//in case the parent ever gets touched, this will stay like this
 	icon = 'code/modules/halo/clothing/gcpd.dmi'
@@ -42,7 +42,7 @@
 	name = "light ballistic vest"
 	desc = "Lightweight ballistic vest designed to reduce damage from low caliber rounds or stab wounds specifically to the upper torso where your important guts are. For your average beatcop."
 	armor = list(melee = 35, bullet = 20, laser = 10, energy = 10, bomb = 20, bio = 10, rad = 15)
-	armor_thickness = 5
+	armor_thickness = 3
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	icon = 'code/modules/halo/clothing/gcpd.dmi'
 	item_icons = list(
