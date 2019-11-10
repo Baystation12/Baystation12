@@ -344,5 +344,23 @@
 	icon_state = "unsc_gloves_b"
 	item_state = "unsc_gloves_b"
 
+/obj/item/weapon/storage/backpack/marine
+	name = "Marine Backpack"
+	desc = "The standard issue Marine pack designed for Marines to carry their essentials to battle."
+	icon_state = "Marine Backpack"
+	item_state = "backpack"
+	w_class = ITEM_SIZE_HUGE
+	max_w_class = ITEM_SIZE_NORMAL
+	item_state_slots = null
+
+/obj/item/weapon/storage/backpack/marine/brown
+	name = "Marine Backpack"
+	desc = "The standard issue Marine pack designed for Marines to carry their essentials to battle."
+	icon_state = "Marine Backpack B"
+	item_state = "backpack_b"
+	w_class = ITEM_SIZE_HUGE
+	max_w_class = ITEM_SIZE_NORMAL
+	item_state_slots = null
+
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND

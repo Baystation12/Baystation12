@@ -57,7 +57,9 @@
 	/obj/item/weapon/storage/belt/marine_ammo = 8,
 	/obj/item/clothing/gloves/thick/unsc = 8,
 	/obj/item/clothing/gloves/thick/unsc/brown = 8,
-	/obj/item/weapon/armor_patch = 10)
+	/obj/item/weapon/armor_patch = 10,
+	/obj/item/weapon/storage/backpack/marine = 6,
+	/obj/item/weapon/storage/backpack/marine/brown = 6)
 
 /obj/machinery/vending/armory/attachment
 	name = "Attachment Vendor"
