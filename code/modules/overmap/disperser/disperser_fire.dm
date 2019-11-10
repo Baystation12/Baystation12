@@ -65,7 +65,7 @@
 	if(!length(candidates))
 		return TRUE
 
-	var/obj/effect/overmap/visitable/finaltarget = pick(candidates)
+	var/obj/effect/overmap/event/finaltarget = pick(candidates)
 	log_and_message_admins("A type [chargetype] disperser beam was launched at [finaltarget].", location=finaltarget)
 
 	fire_at_event(finaltarget, chargetype)
