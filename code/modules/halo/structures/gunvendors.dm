@@ -43,15 +43,23 @@
 	icon_deny = "ironhammer-deny"
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,
 	/obj/item/clothing/head/helmet/marine = 8,
+	/obj/item/clothing/head/helmet/marine/brown = 8,
 	/obj/item/clothing/head/helmet/marine/medic = 6,
+	/obj/item/clothing/head/helmet/marine/medic/visor = 6,
 	/obj/item/clothing/head/helmet/marine/visor = 8,
+	/obj/item/clothing/head/helmet/marine/brownvisor = 8,
 	/obj/item/clothing/suit/storage/marine = 5,
+	/obj/item/clothing/suit/storage/marine/brown = 5,
 	/obj/item/clothing/suit/storage/marine/medic = 3,
 	/obj/item/clothing/shoes/marine = 8,
+	/obj/item/clothing/shoes/marine/brown = 8,
 	/obj/item/clothing/mask/marine = 5,
 	/obj/item/weapon/storage/belt/marine_ammo = 8,
 	/obj/item/clothing/gloves/thick/unsc = 8,
-	/obj/item/weapon/armor_patch = 10)
+	/obj/item/clothing/gloves/thick/unsc/brown = 8,
+	/obj/item/weapon/armor_patch = 10,
+	/obj/item/weapon/storage/backpack/marine = 6,
+	/obj/item/weapon/storage/backpack/marine/brown = 6)
 
 /obj/machinery/vending/armory/attachment
 	name = "Attachment Vendor"
@@ -248,6 +256,7 @@
 	req_access = list()
 	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
+	/obj/item/weapon/gun/projectile/heavysniper/handgonne = 1,
 	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 2,
