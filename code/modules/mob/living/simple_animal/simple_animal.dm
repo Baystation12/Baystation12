@@ -122,8 +122,9 @@
 							allow_move = 1
 							break
 						moving_to = pick(dirs_pickfrom)
-						if(!istype(get_step(src,moving_to),/turf/simulated/open))
+						if(!istype(loc,/turf/simulated/open) && !istype(get_step(src,moving_to),/turf/simulated/open))
 							allow_move = 1
+						dirs_pickfrom -= moving_to
 					set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
 					Move(get_step(src,moving_to))
 					turns_since_move = 0
