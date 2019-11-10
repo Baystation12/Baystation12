@@ -1,16 +1,16 @@
 //The following is a list of defs to be used for the Torch loadout.
 
 //For jobs that allow for decorative or ceremonial clothing
-#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/detective, /datum/job/chaplain)
+#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/detective, /datum/job/chaplain, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/unishi_crew, /datum/job/submap/unishi_researcher, /datum/job/submap/colonist, /datum/job/submap/pod)
 
 //For civilian jobs that may have a uniform, but not a strict one
-#define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/chaplain, /datum/job/roboticist)
+#define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/chaplain, /datum/job/roboticist, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/unishi_crew, /datum/job/submap/unishi_researcher, /datum/job/submap/colonist, /datum/job/submap/pod)
 
 //For civilian jobs that may have a strict uniform.
-#define SEMIANDFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative, /datum/job/detective, /datum/job/chaplain)
+#define SEMIANDFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/bodyguard, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative, /datum/job/detective, /datum/job/chaplain, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/unishi_crew, /datum/job/submap/unishi_researcher, /datum/job/submap/colonist, /datum/job/submap/pod)
 
 //For roles with no uniform or formal clothing requirements
-#define RESTRICTED_ROLES list(/datum/job/assistant, /datum/job/bartender, /datum/job/merchant)
+#define RESTRICTED_ROLES list(/datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/unishi_crew, /datum/job/submap/unishi_researcher, /datum/job/submap/colonist, /datum/job/submap/pod)
 
 //For roles that would have a higher level of education, typically doctors and other scientists
 #define DOCTOR_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist)
