@@ -60,7 +60,10 @@
 	allowed = list(/obj/item/weapon/tank)
 	totalshields = 150
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
-	var/list/available_abilities = list(\
+	var/list/available_abilities = list()
+
+/obj/item/clothing/suit/armor/special/spartan/AA
+	available_abilities = list(	\
 		"Hologram Decoy Emitter" = /datum/armourspecials/holo_decoy,\
 		"Personal Cloaking Device" = /datum/armourspecials/cloaking/limited,\
 		"Personal Regeneration Field" = /datum/armourspecials/regeneration,\
