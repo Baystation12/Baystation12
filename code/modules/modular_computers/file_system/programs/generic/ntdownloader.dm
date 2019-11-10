@@ -59,7 +59,7 @@
 	if(PRG.available_on_syndinet && !computer.emagged())
 		return 0
 
-	if(!computer || !computer.store_file(PRG))
+	if(!computer || !computer.try_store_file(PRG))
 		return 0
 
 	return 1
