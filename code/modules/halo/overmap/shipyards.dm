@@ -24,6 +24,7 @@
 //PLACEHOLDER TYPEPATHS//
 /obj/effect/overmap/ship/unsclightbrigade
 /obj/effect/overmap/ship/covenant_light_cruiser
+/obj/effect/overmap/ship/oni_aegis
 
 /obj/effect/overmap/ship/npc_ship/shipyard/unsc
 	icons_pickfrom_list = list()
