@@ -8,7 +8,7 @@
 	icon_state = "base_unsc"
 	faction = "UNSC"
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/odst_corvette)
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsclightbrigade)
 	base = 1
 
 GLOBAL_LIST_EMPTY(unsc_base_spawns)
@@ -38,21 +38,6 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 	..()
 	GLOB.unsc_base_spawns += loc
 
-/area/faction_base/unsc/upperlevel
-	name = "UNSC Cassius Station (Upper)"
-	icon_state = "green"
-
-/area/faction_base/unsc/lowerlevel
-	name = "UNSC Cassius Station (Lower)"
-	icon_state = "yellow"
-
-/area/faction_base/unsc/mac
-	name = "UNSC Cassius Station MAC"
-	icon_state = "firingrange"
-
-/area/faction_base/unsc/engineering
-	name = "UNSC Cassius Station Shuttle"
-	icon_state = "engine"
 
 /area/faction_base/unsc_defense_platform
 	name = "UNSC Defense Platform"

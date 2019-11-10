@@ -20,10 +20,6 @@
 
 /datum/npc_fleet/proc/add_tofleet(var/obj/effect/overmap/ship/add_to)
 	ships_infleet |= add_to
-	if(add_to.our_fleet.ships_infleet.len == 1 && leader_ship == add_to)
-		var/fleet_holder = add_to.our_fleet
-		add_to.our_fleet = null
-		qdel(fleet_holder)
 	add_to.our_fleet = src
 	clear_target_locs()
 
@@ -38,5 +34,5 @@
 	for(var/entry in ships_infleet)
 		if(isnull(entry))
 			ships_infleet -= entry
-	if(isnull(leader_ship))
+	if(isnull(leader_ship) && ships_infleet.len > 0)
 		assign_leader(pick(ships_infleet))

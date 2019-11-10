@@ -97,7 +97,13 @@
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
 
+	var/list/modules_available = list()
+
 /mob/living/silicon/robot/New(loc,var/unfinished = 0)
+
+	if(modules_available.len == 0)
+		modules_available = GLOB.robot_module_types
+
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -260,7 +266,7 @@
 	if(module)
 		return
 	var/list/modules = list()
-	modules.Add(GLOB.robot_module_types)
+	modules.Add(modules_available)
 	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		to_chat(src, "<span class='warning'>Crisis mode active. Combat module available.</span>")
 		modules+="Combat"
@@ -461,6 +467,7 @@
 	..(Proj)
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
+
 
 /mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
@@ -674,7 +681,7 @@
 		if(H.species.can_shred(H))
 			attack_generic(H, rand(30,50), "slashed")
 			return
-
+	/*
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
@@ -691,6 +698,7 @@
 			var/obj/item/broken_device = cell_component.wrapped
 			to_chat(user, "You remove \the [broken_device].")
 			user.put_in_active_hand(broken_device)
+	*/
 
 //Robots take half damage from basic attacks.
 /mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)

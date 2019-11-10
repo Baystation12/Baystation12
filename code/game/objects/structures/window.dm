@@ -129,12 +129,12 @@
 	return (dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && (mover.checkpass(PASSGLASS) || mover.elevation != elevation))
 		return 1
 	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) & dir)
-		return !density
+		return (!density || (mover && mover.elevation != elevation))
 	else
 		return 1
 

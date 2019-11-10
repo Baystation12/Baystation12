@@ -65,13 +65,24 @@
 /obj/item/weapon_attachment/secondary_weapon/underslung_shotgun
 	name = "underslung shotgun"
 	desc = "An attachment designed to provide secondary tactical weapon usage."
-	icon_state = "MA5-Shotgun"
+	icon_state = "Underbarrel-Shotgun"
 	weapon_slot = "underbarrel rail"
 	alt_fire_ammo_typepath = /obj/item/ammo_casing/shotgun
 	alt_fire_ammo_max = 4
 	alt_fire_sound = 'code/modules/halo/sounds/Shotgun_Shot_Sound_Effect.ogg'
 	alt_fire_loadsound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
 	fire_delay = 15
+
+/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe
+	name = "SOE underslung shotgun"
+	desc = "An attachment designed to provide secondary tactical weapon usage."
+	icon_state = "Underbarrel-Shotgun-SOE-obj"
+	weapon_slot = "underbarrel rail"
+	alt_fire_ammo_typepath = /obj/item/ammo_casing/shotgun
+	alt_fire_ammo_max = 2
+	alt_fire_sound = 'code/modules/halo/sounds/Shotgun_Shot_Sound_Effect.ogg'
+	alt_fire_loadsound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
+	fire_delay = 7
 
 /obj/item/weapon_attachment/secondary_weapon/underslung_grenadelauncher
 	name = "underslung grenade launcher"

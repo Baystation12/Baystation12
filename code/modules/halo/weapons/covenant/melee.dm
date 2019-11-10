@@ -35,6 +35,9 @@
 	. = ..()
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 
+/obj/item/weapon/melee/energy/elite_sword/can_embed()
+	return FALSE
+
 /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe()
 	set name = "Enable weapon failsafe"
 	set category = "IC"
@@ -271,3 +274,10 @@
 
 /obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
 	return
+
+/obj/item/weapon/melee/baton/humbler/covenant
+	name = "Type-12 Antipersonnel Incapacitator"
+	desc = "A retractable baton capable of inducing a large amount of pain via electrical shocks."
+	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon_state = "Type-12 Antipersonnel Incapacitator"
+	item_state = "telebaton_0"

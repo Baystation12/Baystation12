@@ -29,9 +29,9 @@
 	damage = 60
 	icon_state = "Overcharged_Plasmapistol shot"
 
-/obj/item/projectile/covenant/plasmapistol/overcharge/on_impact()
+/obj/item/projectile/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
-	empulse(src.loc,1,2)
+	empulse(impacted,0,1)
 
 /obj/item/projectile/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
@@ -142,6 +142,7 @@
 		return
 	if(locked_target)
 		redirect(locked_target.x, locked_target.y, loc)
+		dir = get_dir(loc,locked_target)
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"

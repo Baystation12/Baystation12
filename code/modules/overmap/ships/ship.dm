@@ -1,7 +1,11 @@
+#define SHIP_DEFAULT_PIXEL_SPEED 5
+#define SHIP_DEFAULT_PIXEL_ACCEL 1
+
 /obj/effect/overmap/ship
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
+	var/icon_state_moving = "ship_moving"
 	var/vessel_mass = 100 				//tonnes, arbitrary number, affects acceleration provided by engines
 	var/default_delay = 6 SECONDS 		//time it takes to move to next tile on overmap
 	var/list/speed = list(0,0)			//speed in x,y direction
@@ -16,6 +20,10 @@
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
 	var/datum/npc_fleet/our_fleet
+
+	var/moving_dir = 0
+	var/lock_thrust = 0
+	var/braking = 0
 
 /obj/effect/overmap/ship/New()
 	. = ..()
@@ -41,6 +49,10 @@
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
 	GLOB.processing_objects.Add(src)
+
+	my_pixel_transform = init_pixel_transform(src)
+	my_pixel_transform.max_pixel_speed = SHIP_DEFAULT_PIXEL_SPEED
+	my_pixel_transform.my_observers = my_observers
 
 /obj/effect/overmap/ship/proc/assign_fleet(var/assign)
 	if(our_fleet == assign)
@@ -90,36 +102,34 @@
 		return null
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
-	accelerate(direction)
+	if(moving_dir == direction)
+		moving_dir = 0
+	else
+		braking = 0
+		if(lock_thrust)
+			moving_dir = direction
+		accelerate(direction)
 
 /obj/effect/overmap/ship/proc/is_still()
-	return !(speed[1] || speed[2])
+	return my_pixel_transform.is_still()
+	//return !(speed[1] || speed[2])
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/ship/proc/get_acceleration()
-	return round(get_total_thrust()/vessel_mass, 0.1)
+	return SHIP_DEFAULT_PIXEL_ACCEL
+	//return round(get_total_thrust()/vessel_mass, 0.1)
 
 //Does actual burn and returns the resulting acceleration
 /obj/effect/overmap/ship/proc/get_burn_acceleration()
 	return round(burn() / vessel_mass, 0.1)
 
 /obj/effect/overmap/ship/proc/get_speed()
-	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]), 0.1)
+	return round(sqrt(my_pixel_transform.pixel_speed_x*my_pixel_transform.pixel_speed_x + my_pixel_transform.pixel_speed_y*my_pixel_transform.pixel_speed_y), 0.1)
 
 /obj/effect/overmap/ship/proc/get_heading()
-	var/res = 0
-	if(speed[1])
-		if(speed[1] > 0)
-			res |= EAST
-		else
-			res |= WEST
-	if(speed[2])
-		if(speed[2] > 0)
-			res |= NORTH
-		else
-			res |= SOUTH
-	return res
+	return my_pixel_transform.heading
 
+/*
 /obj/effect/overmap/ship/proc/adjust_speed(n_x, n_y)
 	speed[1] = round(Clamp(speed[1] + n_x, -default_delay, default_delay),0.1)
 	speed[2] = round(Clamp(speed[2] + n_y, -default_delay, default_delay),0.1)
@@ -129,24 +139,44 @@
 		else
 			toggle_move_stars(zz, fore_dir)
 	update_icon()
+	*/
 
 /obj/effect/overmap/ship/proc/get_brake_path()
 	if(!get_acceleration())
 		return INFINITY
 	return get_speed()/get_acceleration()
 
+/obj/effect/overmap/ship/proc/brake()
+	moving_dir = 0
+	if(braking)
+		braking = 0
+	else if(lock_thrust)
+		braking = 1
+	decelerate()
+
 /obj/effect/overmap/ship/proc/decelerate()
 	if(!is_still() && can_burn())
+		my_pixel_transform.brake(get_acceleration())
+		/*
 		if (speed[1])
 			adjust_speed(-SIGN(speed[1]) * min(get_burn_acceleration(),abs(speed[1])), 0)
 		if (speed[2])
 			adjust_speed(0, -SIGN(speed[2]) * min(get_burn_acceleration(),abs(speed[2])))
+			*/
 		last_burn = world.time
+		if(is_still())
+			icon_state = initial(icon_state)
+		else
+			icon_state = icon_state_moving
 
 /obj/effect/overmap/ship/proc/accelerate(direction)
 	if(can_burn())
 		last_burn = world.time
 
+		my_pixel_transform.add_pixel_speed_direction(get_acceleration(), direction)
+		my_pixel_transform.turn_to_dir(direction, 15)
+		icon_state = icon_state_moving
+		/*
 		if(direction & EAST)
 			adjust_speed(get_burn_acceleration(), 0)
 		if(direction & WEST)
@@ -155,9 +185,23 @@
 			adjust_speed(0, get_burn_acceleration())
 		if(direction & SOUTH)
 			adjust_speed(0, -get_burn_acceleration())
+			*/
 
 /obj/effect/overmap/ship/process()
 	. = ..()
+	if(moving_dir)
+		accelerate(moving_dir)
+		break_umbilicals()
+		if(!lock_thrust)
+			moving_dir = 0
+			icon_state = initial(icon_state)
+	else if(braking)
+		decelerate()
+		break_umbilicals()
+		if(!lock_thrust)
+			braking = 0
+			icon_state = initial(icon_state)
+/*
 	if(!is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)
@@ -169,6 +213,7 @@
 		if(newloc)
 			Move(newloc)
 		update_icon()
+		*/
 
 /obj/effect/overmap/ship/proc/break_umbilicals()
 	for(var/obj/docking_umbilical/umbi in connectors)
@@ -178,12 +223,14 @@
 			umbi.current_connected.umbi_rip()
 			umbi.umbi_rip()
 
+/*
 /obj/effect/overmap/ship/update_icon()
 	if(!is_still())
 		icon_state = "ship_moving"
 		dir = get_heading()
 	else
 		icon_state = "ship"
+		*/
 
 /obj/effect/overmap/ship/proc/burn()
 	for(var/datum/ship_engine/E in engines)

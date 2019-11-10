@@ -17,12 +17,6 @@
 	icon_state = "MA5-Butt-Extended"
 	weapon_slot = "stock"
 
-/obj/item/weapon_attachment/ma5_grip
-	name = "MA5 underbarrel grip"
-	desc = "An underbarrel grip."
-	icon_state = "MA5-Grip-Compact"
-	weapon_slot = "underbarrel rail"
-
 /obj/item/weapon_attachment/ma5_upper
 	name = "MA5 basic upper"
 	desc = "An upper part of an MA5B."
@@ -47,10 +41,10 @@
 	icon_state = "BR55-Cheekrest"
 	weapon_slot = "upper stock"
 
-/obj/item/weapon_attachment/br55_grip
-	name = "BR55 vertical grip"
+/obj/item/weapon_attachment/vertical_grip
+	name = "vertical grip"
 	desc = "A vertical grip which reduces horizontal sway when firing."
-	icon_state = "BR55-Grip"
+	icon_state = "vertical-grip-obj"
 	weapon_slot = "underbarrel rail"
 
 /obj/item/weapon_attachment/br55_upper

@@ -1,4 +1,8 @@
 
+/obj/item/clothing/glasses/hud/tactical/spartan_hud
+	darkness_view = 7
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+
 /obj/item/clothing/head/helmet/spartan
 	name = "MJOLNIR Powered Assault Armor Helmet Mark IV"
 	desc = "Ave, Imperator, morituri te salutant."
@@ -25,7 +29,7 @@
 	on = 0
 	item_state_slots = list(slot_l_hand_str = "syndicate-helm-black", slot_r_hand_str = "syndicate-helm-black")
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/spartan_hud
 
 /obj/item/clothing/suit/armor/special/spartan
 	name = "MJOLNIR Powered Assault Armor Mark IV"
@@ -56,7 +60,10 @@
 	allowed = list(/obj/item/weapon/tank)
 	totalshields = 150
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
-	var/list/available_abilities = list(\
+	var/list/available_abilities = list()
+
+/obj/item/clothing/suit/armor/special/spartan/AA
+	available_abilities = list(	\
 		"Hologram Decoy Emitter" = /datum/armourspecials/holo_decoy,\
 		"Personal Cloaking Device" = /datum/armourspecials/cloaking/limited,\
 		"Personal Regeneration Field" = /datum/armourspecials/regeneration,\

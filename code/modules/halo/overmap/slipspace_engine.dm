@@ -60,6 +60,7 @@
 
 /obj/machinery/slipspace_engine/proc/overload_engine(var/mob/user)
 	jump_charging = -1
+	src.density = 0
 	var/obj/core = new core_to_spawn(loc)
 	icon_state = "[initial(icon_state)]_coreremoved"
 	core.attack_hand(user)
@@ -260,6 +261,7 @@
 /obj/payload/slipspace_core
 	name = "Slipspace Core"
 	desc = "The core of a slipspace device, detached and armed."
+	w_class = ITEM_SIZE_HUGE
 	free_explode = 1
 	explodetype = /datum/explosion/slipspace_core
 	seconds_to_explode = 300 //5 minutes to explode.

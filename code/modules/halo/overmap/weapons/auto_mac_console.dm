@@ -1,6 +1,8 @@
 
 /obj/item/modular_computer/console/preset/auto_mac
 	name = "MAC Automated Fire Control"
+	icon = 'code/modules/halo/structures/AI Stuff.dmi'
+	icon_state= "console"
 
 /obj/item/modular_computer/console/preset/auto_mac/install_default_programs()
 	..()

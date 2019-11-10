@@ -8,10 +8,10 @@
 )
 #define ON_DEATH_MESSAGES list(\
 "Do you feel like a hero yet?","Oof-",\
-"You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
+"You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required.","Automated Alert: CAPTAIN OVERRIDE: I think we just failed the vibe check."\
 )
 #define ALL_CIVILIANS_SHIPNAMES list(\
-"Pete's Cube","The Nomad","The Alexander","Free Range","Heavenly Punisher","Sky Ruler","Bare Necessities","Arizona Killer","Iron Horse","Linebacker","Last Light","Hopes Eclipse","Fleeting Dawn","Titans Might","Despacito","Skippy","No True Scotsman","Blade Of Mars","Targeting Solution","Wooden Cat","The Cerberus","Message of Peace","Persian Persuader","Beowulf","Trojan Horse","Jade Dragon","Danger Zone","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home","Mileage May Vary","Pimp Hand"\
+"Pete's Cube","The Nomad","The Alexander","Free Range","Heavenly Punisher","Sky Ruler","Bare Necessities","Arizona Killer","Iron Horse","Linebacker","Last Light","Hopes Eclipse","Fleeting Dawn","Titans Might","Despacito","Skippy","No True Scotsman","Blade Of Mars","Targeting Solution","Wooden Cat","The Cerberus","Message of Peace","Persian Persuader","Beowulf","Trojan Horse","Jade Dragon","Danger Zone","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home","Mileage May Vary","Pimp Hand","Vibe Check"\
 )
 
 #define STOP_WAIT_TIME 5 MINUTES
@@ -24,6 +24,7 @@
 #define LIGHTRANGE_LIKELY_UNUSED 99
 
 #define FLEET_STICKBY_RANGE 2 //The max range a fleet-bound ship will stay from the fleet leader.
+#define NPC_SHIP_TARGET_TOLERANCE 2 //At this range, the ship will start braking instead of accelerating.
 
 /obj/effect/overmap/ship/npc_ship
 	name = "Ship"
@@ -42,7 +43,6 @@
 
 	var/hull = 1500 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
-	var/move_delay = 6 SECONDS //The amount of ticks to delay for when auto-moving across the system map.
 	var/turf/target_loc
 
 	var/unload_at = 0
@@ -146,13 +146,15 @@
 		shipmap_handler.free_map(z_level)
 		map_z -= z_level
 	GLOB.processing_objects -= src
-	my_faction.npc_ships -= src
+	if(my_faction)
+		my_faction.npc_ships -= src
 	qdel(src)
 
 /obj/effect/overmap/ship/npc_ship/proc/ship_targetedby_defenses()
 	target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
+	walk(src,0)
 	if(our_fleet && our_fleet.leader_ship != src)
 		target_loc = pick(range(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
 		return
@@ -167,8 +169,16 @@
 		var/obj/chosen = pick(sectors_onmap)
 		var/list/turfs_nearobj = list()
 		for(var/turf/unsimulated/map/t in range(7,chosen))
+			if(istype(t,/turf/unsimulated/map/edge))
+				continue
 			turfs_nearobj += t
 		target_loc = pick(turfs_nearobj)
+
+/obj/effect/overmap/ship/npc_ship/can_burn()
+	if(!is_player_controlled())
+		return 1
+	else
+		return ..()
 
 /obj/effect/overmap/ship/npc_ship/process()
 	//despawn after a while
@@ -188,14 +198,18 @@
 				stop_normal_operations = request.do_request_process(src)
 		if(stop_normal_operations || is_player_controlled())
 			return ..()
-		if(loc == target_loc)
+		if(!target_loc || is_still())
 			pick_target_loc()
+		if(get_dist(src,target_loc) < NPC_SHIP_TARGET_TOLERANCE)
+			decelerate() //NPC ships process less often so we let them cheat with multiple calls at the same time.
+			decelerate()
+			decelerate()
 		else
-			walk(src,get_dir(src,target_loc),move_delay)
-			dir = get_dir(src,target_loc)
-			is_still() //A way to ensure umbilicals break when we move.
-			if(our_fleet && our_fleet.ships_infleet.len > 1 && target_loc != null)
-				pick_target_loc()
+			accelerate(get_dir(src,target_loc))
+			accelerate(get_dir(src,target_loc))
+		break_umbilicals()
+		if(our_fleet && our_fleet.leader_ship != src)
+			pick_target_loc()
 	else
 		if(is_player_controlled())
 			. = ..()
@@ -229,6 +243,21 @@
 	chosen_ship_datum = pick(ship_datums)
 	chosen_ship_datum = new chosen_ship_datum
 
+/obj/effect/overmap/ship/npc_ship/proc/mapload_reset_lights(var/list/light_list)
+	if(isnull(light_list))
+		light_list = map_z
+	var/list/lights_reset = list() //FORMAT light ref, original light val
+	for(var/obj/machinery/light/light in GLOB.machines)
+		if(!(text2num("[light.z]") in light_list))
+			continue
+		var/orig_range = light.light_range
+		light.set_light(LIGHTRANGE_LIKELY_UNUSED)
+		lights_reset[light] = "[orig_range]"
+	var/datum/controller/process/lighting_controller = processScheduler.nameToProcessMap["lighting"]
+	lighting_controller.doWork(0)
+	for(var/obj/machinery/light/l in lights_reset)
+		l.set_light(text2num(lights_reset[l]))
+
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
 	set background = 1
 	if(unload_at)
@@ -239,6 +268,7 @@
 	map_bounds = chosen_ship_datum.map_bounds
 	fore_dir = chosen_ship_datum.fore_dir
 	map_z = list()
+	lighting_overlays_initialised = FALSE
 	for(var/link in chosen_ship_datum.mapfile_links)
 		to_world("Loading Ship-Map: [link]... This may cause lag.")
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
@@ -250,17 +280,12 @@
 		var/obj/effect/landmark/map_data/md = new(locate(1,1,z_to_load_at))
 		src.link_zlevel(md)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
+		create_lighting_overlays_zlevel(z_to_load_at)
 
-	for(var/z_level in map_z)
-		create_lighting_overlays_zlevel(z_level)
-		sleep(10) //Wait a tick or so.
-		for(var/obj/machinery/light/light in GLOB.machines)
-			if(!(text2num("[light.z]") in map_z))
-				continue
-			var/orig_range = light.light_range
-			light.set_light(LIGHTRANGE_LIKELY_UNUSED)
-			spawn(30) //Wait 3 ticks
-				light.set_light(orig_range)
+	mapload_reset_lights()
+
+	lighting_overlays_initialised = TRUE
+
 	cargo_init()
 	damage_spawned_ship()
 	GLOB.processing_objects += src

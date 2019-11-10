@@ -33,6 +33,30 @@
 	assembly_type = /obj/structure/door_assembly/multi_tile
 	maxhealth = 2000
 
+obj/machinery/door/airlock/multi_tile/halo/triple
+	icon = 'code/modules/halo/doors/blastdoor.dmi'
+	maxhealth = 2000
+	dir = NORTH
+	width = 3
+
+obj/machinery/door/airlock/multi_tile/halo/quadruple
+	icon = 'code/modules/halo/doors/Longer Blastdoor.dmi'
+	maxhealth = 2500
+	dir = NORTH
+	width = 4
+
+obj/machinery/door/airlock/multi_tile/halo/triplens
+	icon = 'code/modules/halo/doors/3xblastdoorsns.dmi'
+	maxhealth = 2000
+	dir = EAST
+	width = 3
+
+obj/machinery/door/airlock/multi_tile/halo/quadruplens
+	icon = 'code/modules/halo/doors/4xBlastdoorns.dmi'
+	maxhealth = 2500
+	dir = EAST
+	width = 4
+
 /obj/machinery/door/airlock/multi_tile/secure
 	name = "Secure Airlock"
 	icon = 'code/modules/halo/doors/Secure2x1.dmi'

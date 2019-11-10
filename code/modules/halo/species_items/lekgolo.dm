@@ -11,8 +11,8 @@
 
 	layer = ABOVE_HUMAN_LAYER
 
-	maxHealth = 400
-	health = 400
+	maxHealth = 500
+	health = 500
 	unsuitable_atoms_damage = 0
 	var/crouched = 0
 
@@ -20,7 +20,7 @@
 	wander = 0
 	mob_size = MOB_LARGE
 	speed = 2
-	var/crouch_speed = 20
+	var/crouch_speed = 15
 
 	bound_width = 64
 	bound_height = 64

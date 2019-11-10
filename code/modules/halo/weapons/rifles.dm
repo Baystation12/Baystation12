@@ -24,6 +24,7 @@
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 	w_class = ITEM_SIZE_LARGE
+	wielded_item_state = "ma5b-wielded"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -36,7 +37,7 @@
 		)
 
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock", "stock")
-	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper)
+	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper,/obj/item/weapon_attachment/light/flashlight)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/can_use_when_prone()
 	return 1
@@ -106,13 +107,16 @@
 		list(mode_name="short bursts", 	burst=6, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1,-2,-2), dispersion=list(0.3, 0.7, 1.2, 1.2, 1.6, 1.6)),
 		)
 
+	attachment_slots = list("underbarrel rail","sight","barrel")
+	attachments_on_spawn = list(/obj/item/weapon_attachment/light/flashlight)
+
+
 /obj/item/weapon/gun/projectile/ma5b_ar/MA3/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA3"
 	else
 		icon_state = "MA3_unloaded"
-
 
 //BR85 battle
 
@@ -132,7 +136,7 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
-	fire_delay = 2
+	fire_delay = 9
 	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.0, 0.6, 0.6)

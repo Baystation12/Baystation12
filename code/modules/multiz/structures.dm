@@ -143,7 +143,7 @@
 	return M.Move(T)
 
 /obj/structure/ladder/CanPass(obj/mover, turf/source, height, airflow)
-	return airflow || !density
+	return airflow || (!density || (mover && mover.elevation != elevation))
 
 /obj/structure/ladder/update_icon()
 	icon_state = "ladder[!!(allowed_directions & UP)][!!(allowed_directions & DOWN)]"

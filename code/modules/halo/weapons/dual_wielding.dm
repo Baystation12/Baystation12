@@ -18,6 +18,9 @@
 	name = "Dual Wield Placeholder"
 	desc = "You're holding two guns in such a way as to allow you to fire both at once."
 
+	w_class = 9
+	slot_flags = 0
+
 	one_hand_penalty = -1
 	var/list/weapons_wielded = list()
 	var/weapon_delay = 2 //The time in ticks between each weapon firing.

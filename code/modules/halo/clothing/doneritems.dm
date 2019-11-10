@@ -5,6 +5,61 @@
 #define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
 #define MARINE_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 
+//Obj sprites go in ITEM_INHAND or MARINE_INHAND
+//WORN sprites go in ODST_OVERRIDE or MARINE_OVERRIDE
+
+////////ashvor\\\\\\\\
+
+//Marine
+
+/obj/item/clothing/under/unsc/marine_fatigues/ashvor
+	desc = "A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps"
+	name = "UNSC Cross Branch Battle Dress Uniform"
+	item_state = "ashvor-uniform"
+	icon_state = "ashvor-uniform_obj"
+	worn_state = "ashvor-uniform"
+
+/obj/item/clothing/head/helmet/eva/marine/ashvor
+	desc = "The ECH252 is an enclosed variant of the standard CH252 helmet. The helmet can be fully enclosed and environmentally sealed,"
+	name = "ECH252 Enclosed Helmet"
+	item_state = "ashvor-helmet_worn"
+	icon_state = "ashvor-helmet_obj"
+
+/obj/item/clothing/suit/spaceeva/eva/ashvor
+	desc = "A pressurized Atmospheric/Exoatmospheric (A/X) version of the standard M52 Body Armor, Worn mitigate the atmospheric hazards caused by nearby glassing,"
+	name = "M52A/X Body Armor"
+	item_state = "ashvor-armor_worn"
+	icon_state = "ashvor-armor_obj"
+
+/obj/item/clothing/gloves/thick/unsc/ashvor
+	desc = "The pressurized and sealed combat gloves worn with the A/X armor for the members of the UNSC Marine Corps."
+	name = "A/X Combat_Gloves"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "ashvor-gloves_worn"
+	icon_state = "ashvor-gloves_obj"
+
+/obj/item/clothing/shoes/eva/marine/ashvor
+	desc = "The Atmospheric/Exoatmospheric sealed variant of the standard combat boots worn by the members of the UNSC Marine Corps."
+	name = "A/X Combat Boots"
+	item_state = "ashvor-boots_worn"
+	icon_state = "ashvor-boots_obj"
+
+/obj/item/weapon/storage/backpack/odst/regular/ashvor
+	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force."
+	name = "UNSC Tactical Backpack"
+	item_state = "ashvor-backpack_worn"
+	icon_state = "ashvor-backpack_obj"
+
+/decl/hierarchy/outfit/ashvor_marine
+	name = "ashvor - marine"
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/ashvor
+	suit = /obj/item/clothing/suit/spaceeva/eva/ashvor
+	shoes = /obj/item/clothing/shoes/eva/marine/ashvor
+	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
+	head = /obj/item/clothing/head/helmet/eva/marine/ashvor
+	back = /obj/item/weapon/storage/backpack/odst/regular/ashvor
+
 
 ////////caelumz\\\\\\\\
 
@@ -74,11 +129,11 @@
 /decl/hierarchy/outfit/burnedsweetpotato_spartan
 	name = "BurnedSweetPotato - Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
-	suit = /obj/item/clothing/suit/armor/special/spartan/praetor
+	suit = /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	head = /obj/item/clothing/head/helmet/spartan/praetor
+	head = /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	l_pocket = /obj/item/ammo_magazine/m762_ap
@@ -86,22 +141,59 @@
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
+////////bobatnight\\\\\\\
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/bobatnight
+	name = "Sal's ODST Helmet"
+
+	item_state = "bobatnight-helmet_worn"
+	icon_state = "bobatnight-helmet_obj"
+	item_state_novisr = "bobatnight-helmet_worn"
+	icon_state_novisr = "bobatnight-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/bobatnight
+	name = "Sal's ODST Armour"
+
+	icon_state = "bobatnight-armor_obj"
+	item_state = "bobatnight-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/bobatnight
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Sal's ODST Backpack"
+	item_state = "bobatnight-backpack_worn"
+	icon_state = "bobatnight-backpack_obj"
+
+/decl/hierarchy/outfit/bobatnight_odst
+	name = "bobatnight - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/bobatnight
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/bobatnight
+	back = /obj/item/weapon/storage/backpack/odst/bobatnight
+
 ////////Boltersam\\\\\\\\
 
 //JIRALHANAE
 
-/obj/item/clothing/head/helmet/jiralhanae/boltersam
+/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam
 	icon_state = "bolter_helm"
-/obj/item/clothing/suit/armor/jiralhanae/boltersam
+/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam
 	icon_state = "bolter_armour"
 
-/obj/item/clothing/shoes/jiralhanae/boltersam
+/obj/item/clothing/shoes/jiralhanae/covenant/boltersam
 	icon_state = "bolter_greaves"
+
+/obj/item/weapon/grav_hammer/boltersam
+	icon_state = "goremaul"
+	item_state_slots = list(slot_l_hand_str = "goremaul", slot_r_hand_str = "goremaul", slot_back_str = "back_maul")
 
 /decl/hierarchy/outfit/boltersam_jiralhanae
 	name = "boltersam - jiralhanae"
-	head = /obj/item/clothing/head/helmet/jiralhanae/boltersam
-	suit = /obj/item/clothing/suit/armor/jiralhanae/boltersam
+	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam
+	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam
+	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/boltersam
+	back = /obj/item/weapon/grav_hammer/boltersam
 
 ////////eonoc\\\\\\\\
 
@@ -117,13 +209,20 @@
 
 /obj/item/clothing/suit/armor/special/odst/donator/eonoc
 	name = "Barnabus's ODST Armor"
-
 	icon_state = "eonoc-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/eonoc
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Barnabus's ODST Backpack"
+	item_state = "eonoc-backpack_worn"
+	icon_state = "eonoc-backpack_obj"
 
 /decl/hierarchy/outfit/eonoc_odst
 	name = "eonoc - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/eonoc
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/eonoc
+	back = /obj/item/weapon/storage/backpack/odst/eonoc
 
 ////////flaksim\\\\\\\\
 
@@ -247,14 +346,15 @@
 /obj/item/clothing/suit/storage/marine/karmac
 	item_state = "karmac-marine_worn"
 	icon_state = "karmac-marine_obj"
+
 //For whatever goddamn reason I can only get jumpsuits to work with the urfc path... If you can change this to /unsc/marine_fatigues/ or whatever it is, please do and tell me what I did wrong -Stingray
-/obj/item/clothing/under/urfc_jumpsuit/karmac
-	desc = "Standard issue uniform for UNSC marine corps."
+
+/obj/item/clothing/under/unsc/marine_fatigues/karmac
+	desc = "Standard issue uniform for UNSC Marine Corps."
 	name = "UNSC Marine fatigues"
-	icon = 'code/modules/halo/clothing/marine_items.dmi'
-	icon_override = 'code/modules/halo/clothing/marine_items.dmi'
-	item_state = "Karmac_uniform"
-	icon_state = "Karmac_uniform"
+	item_state = "karmac-uniform"
+	icon_state = "karmac-uniform_obj"
+	worn_state = "karmac-uniform"
 
 /obj/item/clothing/shoes/marine/karmac
 	item_state = "karmac-marineboots_worn"
@@ -262,12 +362,13 @@
 
 /obj/item/clothing/gloves/thick/unsc/karmac
 	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
 	item_state = "karmac-marinegloves_worn"
 	icon_state = "karmac-marinegloves_obj"
 
 /decl/hierarchy/outfit/karmac_marine
 	name = "karmac - marine"
-	uniform = /obj/item/clothing/under/urfc_jumpsuit/karmac
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/karmac
 	suit = /obj/item/clothing/suit/storage/marine/karmac
 	shoes = /obj/item/clothing/shoes/marine/karmac
 	gloves = /obj/item/clothing/gloves/thick/unsc/karmac
@@ -908,13 +1009,12 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "sleepy-marine_worn"
 	icon_state = "sleepy-marine_obj"
 
-/obj/item/clothing/under/urfc_jumpsuit/sleepy_retard
-	desc = "Standard issue uniform for UNSC marine corps."
+/obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard
+	desc = "Standard issue uniform for UNSC Marine Corps."
 	name = "UNSC Marine fatigues"
-	icon = 'code/modules/halo/clothing/marine_items.dmi'
-	icon_override = 'code/modules/halo/clothing/marine_items.dmi'
-	item_state = "sleepy_uniform"
-	icon_state = "sleepy_uniform"
+	item_state = "sleepy-uniform"
+	icon_state = "sleepy-uniform_obj"
+	worn_state = "sleepy-uniform"
 
 /obj/item/clothing/shoes/marine/sleepy_retard
 	name = "VZG-S Armored Boots."
@@ -927,8 +1027,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	desc = "Standard issue UNSC gloves, but with a coarse material for better grip. Or just poor materials."
 	icon = MARINE_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "sleepy-gloves"
-	icon_state = "sleepy-gloves"
+	item_state = "sleepy-gloves_worn"
+	icon_state = "sleepy-gloves_obj"
 
 /obj/item/clothing/mask/marine/sleepy_retard
 	name = "UNSC Bandana"
@@ -940,12 +1040,41 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /decl/hierarchy/outfit/sleepy_marine
 	name = "sleepy - marine"
-	uniform = /obj/item/clothing/under/urfc_jumpsuit/sleepy_retard
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard
 	mask = /obj/item/clothing/mask/marine/sleepy_retard
 	suit = /obj/item/clothing/suit/storage/marine/sleepy_retard
 	shoes = /obj/item/clothing/shoes/marine/sleepy_retard
 	gloves = /obj/item/clothing/gloves/thick/unsc/sleepy_retard
 	head = /obj/item/clothing/head/helmet/marine/sleepy_retard
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/engineer/sleepy
+	name = "ODST Mechanist Helmet"
+	desc = "Standard issue short-EVA capable helmet issued to ODST forces. This one is highlighted yellow, in accordance to the now-defunct Mechanist Corps."
+	item_state = "sleepy odst-helmet_worn"
+	icon_state = "sleepy odst-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/sleepy
+	name = "ODST Mechanist Armour"
+	desc = "Lightweight, durable armour issued to Orbital Drop Shock Troopers for increased survivability in the field. This one is highlighted yellow, in accordance to the now-defunct Mechanist Corps."
+	item_state = "sleepy odst-armor_worn"
+	icon_state = "sleepy odst-armour_obj"
+
+/obj/item/weapon/storage/backpack/odst/sleepy
+	name = "ODST Servo Arm Carriage"
+	desc = "Standard issue Servo Arm Carriage for the ODST Mechanist Corps. The servo arm seems to be staring at you, with an intense smug aura. No eyes are seen."
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	item_state = "sleepy odst-backpack_worn"
+	icon_state = "sleepy odst-backpack_obj"
+
+/decl/hierarchy/outfit/sleepy_odst
+	name = "sleepy - odst Mechanist"
+	suit = /obj/item/clothing/suit/armor/special/odst/sleepy
+	head = /obj/item/clothing/head/helmet/odst/engineer/sleepy
+	back = /obj/item/weapon/storage/backpack/odst/sleepy
+
 
 ////////Spartankiller\\\\\\\\
 
@@ -1065,6 +1194,43 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	back = /obj/item/weapon/gun/projectile/ma5b_ar
+
+//Sangheili (MAJOR)
+
+/obj/item/clothing/head/helmet/sangheili/socks
+	name = "‘Nasan Clan - Major Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "socks_helm_obj"
+	item_state = "socks_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/socks
+	name = "‘Nasan Clan - Major Combat Harness"
+	icon_state = "socks_chest_obj"
+	item_state = "socks_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/socks
+	name = "‘Nasan Clan - Major Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "socks_legs_obj"
+	item_state = "socks_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/socks
+	name = "‘Nasan Clan - Major Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "socks_gloves_obj"
+	item_state = "socks_gloves"
+
+/decl/hierarchy/outfit/socks_sangheili
+	name = "socks - sangheili"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/socks
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/socks
+	shoes = /obj/item/clothing/shoes/sangheili/socks
+	head = /obj/item/clothing/head/helmet/sangheili/socks
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 ////////Stingray\\\\\\\\
 
