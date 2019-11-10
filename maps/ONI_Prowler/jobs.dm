@@ -2,8 +2,8 @@
 	title = "Spartan II"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/onispartan
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 	account_allowed = 0
 	is_whitelisted = 1
 	selection_color = "#0A0A95"
@@ -40,7 +40,7 @@
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
-/datum/job/ONI_Spartan_II/equip()
+/datum/job/ONI_Spartan_II_Commander/equip()
 	. = ..()
 	var/player_pop = 0
 	for(var/client/C in GLOB.clients)
