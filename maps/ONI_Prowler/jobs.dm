@@ -2,8 +2,8 @@
 	title = "Spartan II"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/onispartan
-	total_positions = 3
-	spawn_positions = 4
+	total_positions = 0
+	spawn_positions = 0
 	account_allowed = 0
 	is_whitelisted = 1
 	economic_modifier = 1.0
@@ -15,12 +15,22 @@
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
+/datum/job/ONI_Spartan_II/equip()
+	. = ..()
+	var/player_pop = 0
+	for(var/client/C in GLOB.clients)
+		if(!C.mob)
+			continue
+		player_pop++
+	var/datum/job/to_modify = job_master.occupations_by_type[type]
+	to_modify.total_positions = min(round(player_pop/10),3)
+
 /datum/job/ONI_Spartan_II_Commander
 	title = "Spartan II Commander"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/onispartan
 	total_positions = 1
-	spawn_positions = 4
+	spawn_positions = 1
 	account_allowed = 0
 	is_whitelisted = 1
 	economic_modifier = 1.0
@@ -31,3 +41,13 @@
 	latejoin_at_spawnpoints = 1
 	loadout_allowed = TRUE
 	lace_access = TRUE
+
+/datum/job/ONI_Spartan_II/equip()
+	. = ..()
+	var/player_pop = 0
+	for(var/client/C in GLOB.clients)
+		if(!C.mob)
+			continue
+		player_pop++
+	var/datum/job/to_modify = job_master.occupations_by_type[/datum/job/ONI_Spartan_II]
+	to_modify.total_positions = min(round(player_pop/10),3)
