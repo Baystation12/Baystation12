@@ -4,17 +4,14 @@
 	power_environ = 1
 	power_light = 1
 	poweralm = 1
-	requires_power = 1
+	requires_power = 0
 
 //deck 1 areas
 /area/corvette/onifox/Bridge
 	name = "ONI Aegis Bridge"
-	requires_power = 0
 
 /area/corvette/onifox/Armoury
 	name = "ONI Fox Armoury"
-	requires_power = 0
-
 /*
 /area/corvette/onifox/Crewquarters
 	name = "ONI Aegis Crew Quarters"
@@ -22,7 +19,6 @@
 */
 /area/corvette/onifox/Crewmess
 	name = "ONI Aegis Crew Mess Hall"
-	requires_power = 0
 /*
 /area/corvette/onifox/crewbathroom
 	name = "ONI Aegis Crew Bathrooms"
@@ -34,11 +30,9 @@
 */
 /area/corvette/onifox/hallway
 	name = "ONI Aegis Hallway"
-	requires_power = 0
 
 /area/corvette/onifox/Reactorcore
 	name = "ONI Aegis Main Reactor Core"
-	requires_power = 0
 
 /area/corvette/onifox/medbay
 	name = "ONI Aegis Medical Bay"

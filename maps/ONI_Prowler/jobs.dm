@@ -6,7 +6,6 @@
 	spawn_positions = 0
 	account_allowed = 0
 	is_whitelisted = 1
-	economic_modifier = 1.0
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,110,192,310,311,117,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	//spawnpoint_override = "ONI Aegis Spawns"
@@ -22,7 +21,7 @@
 		if(!C.mob)
 			continue
 		player_pop++
-	var/datum/job/to_modify = job_master.occupations_by_type[type]
+	var/datum/job/to_modify = job_master.occupations_by_title[title]
 	to_modify.total_positions = min(round(player_pop/10),3)
 
 /datum/job/ONI_Spartan_II_Commander
@@ -33,7 +32,6 @@
 	spawn_positions = 1
 	account_allowed = 0
 	is_whitelisted = 1
-	economic_modifier = 1.0
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,110,192,310,311,117,access_unsc_bridge,access_unsc_shuttles,access_unsc_armoury,access_unsc_supplies,access_unsc_officers,access_unsc_marine)
 	//spawnpoint_override = "ONI Aegis Spawns"
@@ -49,5 +47,5 @@
 		if(!C.mob)
 			continue
 		player_pop++
-	var/datum/job/to_modify = job_master.occupations_by_type[/datum/job/ONI_Spartan_II]
+	var/datum/job/to_modify = job_master.occupations_by_title["Spartan II"]
 	to_modify.total_positions = min(round(player_pop/10),3)
