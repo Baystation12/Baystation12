@@ -19,9 +19,9 @@
 	cold_protection = HEAD|FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
-	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 35,bio = 100,rad = 25)
+	armor = list(melee = 60,bullet = 75,laser = 50,energy = 55,bomb = 60,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
-	armor_thickness = 20
+	armor_thickness = 30
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -40,7 +40,7 @@
 	icon_override = 'code/modules/halo/clothing/spartan_armour.dmi'
 
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
+	armor = list(melee = 60, bullet = 75, laser = 50, energy = 55, bomb = 60, bio = 100, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDETAIL
@@ -50,14 +50,14 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	armor_thickness = 30
 	species_restricted = list("Spartan")
+	max_suitstore_w_class = ITEM_SIZE_HUGE
 
-	specials = list(/datum/armourspecials/gear/human_tank,\
+	specials = list(/*/datum/armourspecials/gear/human_tank,*/\
 		/datum/armourspecials/shields/spartan,
 		/datum/armourspecials/shieldmonitor/)
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
-	allowed = list(/obj/item/weapon/tank)
 	totalshields = 150
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 	var/list/available_abilities = list()
