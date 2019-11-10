@@ -61,7 +61,8 @@
 	if(!room.has_gravity())
 		return
 	var/atom/blocker
-	for(var/atom/A in target_down)
+	var/turf/landing = get_turf(target_down)
+	for(var/atom/A in landing)
 		if(!A.CanPass(I, I.loc, 1.5, 0))
 			blocker = A
 			break
@@ -69,7 +70,8 @@
 		visible_message(SPAN_WARNING("\The [I] fails to go down \the [src], blocked by the [blocker]!"))
 	else
 		visible_message(SPAN_WARNING("\The [I] goes down \the [src]!"))
-		I.forceMove(target_down)
+		I.forceMove(landing)
+		landing.visible_message(SPAN_WARNING("\The [I] falls from the top of \the [target_down]!"))
 
 /obj/structure/ladder/attack_hand(var/mob/M)
 	climb(M)
