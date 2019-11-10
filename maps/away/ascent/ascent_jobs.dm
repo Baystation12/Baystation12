@@ -22,7 +22,7 @@
 /datum/submap/ascent
 	var/gyne_name
 
-/datum/submap/ascent/sync_cell(obj/effect/overmap/cell)
+/datum/submap/ascent/sync_cell(obj/effect/overmap/visitable/cell)
 	return
 
 /datum/submap/ascent/check_general_join_blockers(var/mob/new_player/joining, var/datum/job/submap/job)

@@ -6687,7 +6687,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/overmap/ship/landable/aquila,
+/obj/effect/overmap/visitable/ship/landable/aquila,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/airlock)
 "nn" = (
@@ -13451,7 +13451,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "HK" = (
-/obj/effect/overmap/ship/torch,
+/obj/effect/overmap/visitable/ship/torch,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HP" = (

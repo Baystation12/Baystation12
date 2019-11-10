@@ -1844,11 +1844,11 @@
 	},
 /area/voxship/base)
 "eY" = (
-/obj/effect/overmap/sector/vox_base,
+/obj/effect/overmap/visitable/sector/vox_base,
 /turf/space,
 /area/space)
 "eZ" = (
-/obj/effect/overmap/ship/landable/vox,
+/obj/effect/overmap/visitable/ship/landable/vox,
 /turf/space,
 /area/space)
 "fa" = (

@@ -1,4 +1,4 @@
-/obj/effect/overmap/sector/exoplanet/garbage
+/obj/effect/overmap/visitable/sector/exoplanet/garbage
 	name = "ruined exoplanet"
 	desc = "An arid exoplanet with unnatural formations covering the surface. Hotspots of radiation detected."
 	color = "#a5a18b"
@@ -9,18 +9,18 @@
 	surface_color = "#a5a18b"
 	water_color = null
 
-/obj/effect/overmap/sector/exoplanet/garbage/generate_map()
+/obj/effect/overmap/visitable/sector/exoplanet/garbage/generate_map()
 	if(prob(50))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
 	..()
 
-/obj/effect/overmap/sector/exoplanet/garbage/generate_atmosphere()
+/obj/effect/overmap/visitable/sector/exoplanet/garbage/generate_atmosphere()
 	..()
 	if(atmosphere)
 		atmosphere.temperature = T20C + rand(20, 100)
 		atmosphere.update_values()
 
-/obj/effect/overmap/sector/exoplanet/garbage/update_biome()
+/obj/effect/overmap/visitable/sector/exoplanet/garbage/update_biome()
 	..()
 	for(var/datum/seed/S in seeds)
 		if(prob(90))
@@ -31,11 +31,11 @@
 		if(prob(40))
 			S.set_trait(TRAIT_STINGS,1)
 
-/obj/effect/overmap/sector/exoplanet/garbage/adapt_animal(var/mob/living/simple_animal/A)
+/obj/effect/overmap/visitable/sector/exoplanet/garbage/adapt_animal(var/mob/living/simple_animal/A)
 	..()
 	A.faction = "Guardian" //stops bots form hitting each other
 
-/obj/effect/overmap/sector/exoplanet/garbage/get_base_image()
+/obj/effect/overmap/visitable/sector/exoplanet/garbage/get_base_image()
 	var/image/I = ..()
 	I.overlays += image('icons/skybox/planet.dmi', "ruins")
 	return I

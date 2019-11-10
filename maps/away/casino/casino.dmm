@@ -1483,7 +1483,7 @@
 /turf/simulated/floor/shuttle/yellow,
 /area/casino/casino_cutter)
 "eb" = (
-/obj/effect/overmap/ship/casino,
+/obj/effect/overmap/visitable/ship/casino,
 /turf/space,
 /area/space)
 "ec" = (

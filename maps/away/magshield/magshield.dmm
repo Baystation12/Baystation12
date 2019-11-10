@@ -2279,7 +2279,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "fH" = (
-/obj/effect/overmap/sector/magshield,
+/obj/effect/overmap/visitable/sector/magshield,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "fI" = (

@@ -2546,7 +2546,7 @@
 /area/outpost/abandoned)
 "hL" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/overmap/sector/away,
+/obj/effect/overmap/visitable/sector/away,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "ib" = (

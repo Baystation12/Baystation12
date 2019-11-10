@@ -1,6 +1,6 @@
 #include "lar_maria_areas.dm"
 
-/obj/effect/overmap/sector/lar_maria
+/obj/effect/overmap/visitable/sector/lar_maria
 	name = "Lar Maria space station"
 	desc = "Sensors detect an orbital station with low energy profile and sporadic life signs."
 	icon_state = "object"

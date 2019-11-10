@@ -1,6 +1,6 @@
 #include "errant_pisces_areas.dm"
 
-/obj/effect/overmap/ship/errant_pisces
+/obj/effect/overmap/visitable/ship/errant_pisces
 	name = "XCV Ahab's Harpoon"
 	desc = "Sensors detect civilian vessel with unusual signs of life aboard."
 	color = "#bd6100"

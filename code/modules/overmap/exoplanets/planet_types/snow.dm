@@ -1,4 +1,4 @@
-/obj/effect/overmap/sector/exoplanet/snow
+/obj/effect/overmap/visitable/sector/exoplanet/snow
 	name = "snow exoplanet"
 	desc = "Cold planet with limited plant life."
 	color = "#e8faff"
@@ -9,7 +9,7 @@
 	surface_color = "#e8faff"
 	water_color = "#b5dfeb"
 
-/obj/effect/overmap/sector/exoplanet/snow/generate_atmosphere()
+/obj/effect/overmap/visitable/sector/exoplanet/snow/generate_atmosphere()
 	..()
 	if(atmosphere)
 		var/limit = 0

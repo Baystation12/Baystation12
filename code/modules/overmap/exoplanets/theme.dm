@@ -1,7 +1,7 @@
 /datum/exoplanet_theme
 	var/name = "Nothing Special"
 
-/datum/exoplanet_theme/proc/before_map_generation(obj/effect/overmap/sector/exoplanet/E)
+/datum/exoplanet_theme/proc/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 
 /datum/exoplanet_theme/proc/get_planet_image_extra()
 
@@ -9,7 +9,7 @@
 	name = "Mountains"
 	var/rock_color
 
-/datum/exoplanet_theme/mountains/before_map_generation(obj/effect/overmap/sector/exoplanet/E)
+/datum/exoplanet_theme/mountains/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	rock_color = pick(E.rock_colors)
 	for(var/zlevel in E.map_z)
 		new /datum/random_map/automata/cave_system/mountains(null,TRANSITIONEDGE,TRANSITIONEDGE,zlevel,E.maxx-TRANSITIONEDGE,E.maxy-TRANSITIONEDGE,0,1,1, E.planetary_area, rock_color)

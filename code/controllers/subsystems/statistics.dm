@@ -162,7 +162,7 @@ SUBSYSTEM_DEF(statistics)
 		death.brainloss = dead.getBrainLoss()
 		death.oxyloss =   dead.getOxyLoss()
 		death.using_map_name = GLOB.using_map.full_name
-		var/obj/effect/overmap/cell = map_sectors ? map_sectors["[dead.z]"] : null
+		var/obj/effect/overmap/visitable/cell = map_sectors ? map_sectors["[dead.z]"] : null
 		death.overmap_location_name = cell ? cell.name : "Unknown"
 		LAZYADD(deaths, death)
 

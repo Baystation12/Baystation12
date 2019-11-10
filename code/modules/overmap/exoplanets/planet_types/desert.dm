@@ -1,4 +1,4 @@
-/obj/effect/overmap/sector/exoplanet/desert
+/obj/effect/overmap/visitable/sector/exoplanet/desert
 	name = "desert exoplanet"
 	desc = "An arid exoplanet with sparse biological resources but rich mineral deposits underground."
 	color = "#d6cca4"
@@ -9,12 +9,12 @@
 	surface_color = "#d6cca4"
 	water_color = null
 
-/obj/effect/overmap/sector/exoplanet/desert/generate_map()
+/obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
 	..()
 
-/obj/effect/overmap/sector/exoplanet/desert/generate_atmosphere()
+/obj/effect/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()
 	..()
 	if(atmosphere)
 		var/limit = 1000
@@ -24,7 +24,7 @@
 		atmosphere.temperature = min(T20C + rand(20, 100), limit)
 		atmosphere.update_values()
 
-/obj/effect/overmap/sector/exoplanet/desert/adapt_seed(var/datum/seed/S)
+/obj/effect/overmap/visitable/sector/exoplanet/desert/adapt_seed(var/datum/seed/S)
 	..()
 	if(prob(90))
 		S.set_trait(TRAIT_REQUIRES_WATER,0)
