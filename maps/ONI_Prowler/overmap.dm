@@ -7,6 +7,5 @@
 	fore_dir = WEST
 	vessel_mass = 1
 	faction = "UNSC"
-
-	map_bounds = list(1,2,2,1) //This essentially means it's impossible to hit.
-
+	map_bounds = list(1,105,132,70)
+	weapon_miss_chance = 75
