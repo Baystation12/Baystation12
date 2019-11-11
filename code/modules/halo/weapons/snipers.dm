@@ -13,8 +13,8 @@
 	caliber = "14.5mm"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m145_ap
-	fire_sound = 'code/modules/halo/sounds/SniperShotSoundEffect.ogg'
-	reload_sound = 'code/modules/halo/sounds/SniperRifleReloadSoundEffect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Sniper_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Sniper_Reload_New.wav'
 	one_hand_penalty = -1
 	scoped_accuracy = 7
 	accuracy = 2
@@ -56,8 +56,9 @@
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m762_ap/M392
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392) //Disallows loading LMG boxmags into the DMR.
-	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
-	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/DMR_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/DMR_Reload_New.wav'
+	handle_casings = CASELESS
 	one_hand_penalty = -1
 	w_class = ITEM_SIZE_LARGE
 	accuracy = 2
@@ -65,7 +66,7 @@
 	fire_delay = 4
 	burst_delay = 4
 	var/on = 0
-	var/activation_sound = 'sound/effects/flashlight.ogg'
+	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -95,6 +96,7 @@
 	burst = 1
 	magazine_type = /obj/item/ammo_magazine/m762_ap/M392/innie
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392)
+	handle_casings = CASELESS
 	accuracy = 1
 	scoped_accuracy = 2
 	dispersion = list(0.2)
