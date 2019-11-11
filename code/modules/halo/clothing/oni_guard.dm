@@ -79,8 +79,10 @@
 /obj/item/clothing/gloves/thick/oni_guard
 	desc = "Standard Issue ONI security gloves."
 	name = "ONI Combat gloves"
-	icon_state = "unsc_gloves"
+	icon_state = "unsc gloves_obj"
 	item_state = "unsc_gloves"
+	icon = ITEM_INHAND
+	icon_override = ONI_OVERRIDE
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS

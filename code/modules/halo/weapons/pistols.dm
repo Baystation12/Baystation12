@@ -12,8 +12,8 @@
 	magazine_type = /obj/item/ammo_magazine/m127_saphe
 	caliber = "12.7mm"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
-	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Magnum_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Magnum_Reload_New.wav'
 	load_method = MAGAZINE
 	w_class = ITEM_SIZE_NORMAL
 

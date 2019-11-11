@@ -6,8 +6,8 @@
 	name = "UNSC Marine fatigues"
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "uniform"
-	icon_state = "uniform"
+	item_state = "UNSC Marine Fatigues"
+	icon_state = "uniform_obj"
 	worn_state = "UNSC Marine Fatigues"
 	starting_accessories = /obj/item/clothing/accessory/badge/tags
 
@@ -68,8 +68,8 @@
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "CH252 Helmet B"
-	icon_state = "helmet_novisor_b"
+	item_state = "CH252 Visor Helmet B"
+	icon_state = "helmet_b"
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/suit/storage/marine
@@ -327,8 +327,10 @@
 /obj/item/clothing/gloves/thick/unsc //Combined effect of SWAT gloves and insulated gloves
 	desc = "Standard Issue UNSC Marine Gloves."
 	name = "UNSC Combat gloves"
-	icon_state = "unsc_gloves"
-	item_state = "unsc_gloves"
+	icon_state = "unsc gloves_obj"
+	item_state = "unsc gloves"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS
@@ -341,14 +343,18 @@
 /obj/item/clothing/gloves/thick/unsc/brown
 	desc = "Standard Issue UNSC Marine Gloves."
 	name = "UNSC Combat gloves"
-	icon_state = "unsc_gloves_b"
-	item_state = "unsc_gloves_b"
+	icon_state = "unsc gloves-b_obj"
+	item_state = "unsc gloves-b"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
 
 /obj/item/weapon/storage/backpack/marine
 	name = "Marine Backpack"
 	desc = "The standard issue Marine pack designed for Marines to carry their essentials to battle."
-	icon_state = "Marine Backpack"
-	item_state = "backpack"
+	icon_state = "backpack_obj"
+	item_state = "marine backpack"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_NORMAL
 	item_state_slots = null
@@ -356,8 +362,10 @@
 /obj/item/weapon/storage/backpack/marine/brown
 	name = "Marine Backpack"
 	desc = "The standard issue Marine pack designed for Marines to carry their essentials to battle."
-	icon_state = "Marine Backpack B"
-	item_state = "backpack_b"
+	icon_state = "backpack-b_obj"
+	item_state = "marine backpack-b"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_NORMAL
 	item_state_slots = null
