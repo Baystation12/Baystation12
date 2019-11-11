@@ -1,0 +1,9 @@
+author: "Flying_loulou"
+delete-after: True
+changes: 
+  - bugfix: "The nitrogen tanks again look like nitrogen tanks."
+  - tweak: "Changes the fire (red) oxygen tank name to 'self contained breathing apparatus' (SCBA)"
+  - rscadd: "Adds the Emergency Management Bureau helmetto the loadout"
+  - rscadd: "Adds the ancient Emergency Management Bureau helmet to the loadout (credits to Sin2 for the sprites)"
+  - rscadd: "Adds the light damage control helmet to the loadout"
+  - rscadd: "Adds the SCBA mask, and adds it to the engineering crew survival kit, instead of the breath mask.(credits to Sin2 for the sprites)"
