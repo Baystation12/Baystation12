@@ -14,7 +14,7 @@
 	icon_deny = "ironhammer-deny"
 	req_access = list(308)
 	products = list(/obj/item/ammo_magazine/m127_saphe =20,/obj/item/ammo_magazine/m127_saphp =20,/obj/item/ammo_magazine/m762_ap/MA5B = 40,/obj/item/ammo_magazine/m762_ap/MA5B/TTR = 15,/obj/item/ammo_magazine/m762_ap/M392 = 30
-					,/obj/item/ammo_magazine/m95_sap = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/ammo_box/shotgun = 10,/obj/item/ammo_box/shotgun/slug = 10,/obj/item/weapon/material/knife/combat_knife =15,/obj/item/weapon/material/machete = 2
+					,/obj/item/ammo_magazine/m95_sap/br55 = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/ammo_box/shotgun = 10,/obj/item/ammo_box/shotgun/slug = 10,/obj/item/weapon/material/knife/combat_knife =15,/obj/item/weapon/material/machete = 2
 					,/obj/item/weapon/gun/projectile/m6d_magnum = 15,/obj/item/weapon/gun/projectile/ma5b_ar = 15,/obj/item/weapon/gun/projectile/br55 = 2
 					,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 8,/obj/item/weapon/gun/projectile/m7_smg = 8,/obj/item/weapon/gun/projectile/m392_dmr = 5,/obj/item/weapon/grenade/frag/m9_hedp = 5,/obj/item/weapon/grenade/smokebomb = 5, /obj/item/weapon/armor_patch = 5,/obj/item/drop_pod_beacon = 1)
 
@@ -43,15 +43,23 @@
 	icon_deny = "ironhammer-deny"
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,
 	/obj/item/clothing/head/helmet/marine = 8,
+	/obj/item/clothing/head/helmet/marine/brown = 8,
 	/obj/item/clothing/head/helmet/marine/medic = 6,
+	/obj/item/clothing/head/helmet/marine/medic/visor = 6,
 	/obj/item/clothing/head/helmet/marine/visor = 8,
+	/obj/item/clothing/head/helmet/marine/brownvisor = 8,
 	/obj/item/clothing/suit/storage/marine = 5,
+	/obj/item/clothing/suit/storage/marine/brown = 5,
 	/obj/item/clothing/suit/storage/marine/medic = 3,
 	/obj/item/clothing/shoes/marine = 8,
+	/obj/item/clothing/shoes/marine/brown = 8,
 	/obj/item/clothing/mask/marine = 5,
 	/obj/item/weapon/storage/belt/marine_ammo = 8,
 	/obj/item/clothing/gloves/thick/unsc = 8,
-	/obj/item/weapon/armor_patch = 10)
+	/obj/item/clothing/gloves/thick/unsc/brown = 8,
+	/obj/item/weapon/armor_patch = 10,
+	/obj/item/weapon/storage/backpack/marine = 6,
+	/obj/item/weapon/storage/backpack/marine/brown = 6)
 
 /obj/machinery/vending/armory/attachment
 	name = "Attachment Vendor"
@@ -166,18 +174,23 @@
 	/obj/item/clothing/shoes/magboots/odst = 8,
 	/obj/item/weapon/material/knife/combat_knife = 4,
 	/obj/item/weapon/material/machete = 2,
+	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
 	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
+	/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 4,
 	/obj/item/weapon/gun/projectile/m392_dmr = 2,
 	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/gun/projectile/srs99_sniper = 1,
 	/obj/item/weapon/plastique = 9,
 	/obj/item/weapon/storage/firstaid/unsc = 6,
 	/obj/item/device/binoculars = 4,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 40,
 	/obj/item/ammo_magazine/m127_saphe = 16,
+	/obj/item/ammo_magazine/m127_saphp = 16,
 	/obj/item/ammo_magazine/m5 = 24,
-	/obj/item/ammo_magazine/m95_sap = 10,
+	/obj/item/ammo_magazine/m95_sap/br55 = 10,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
+	/obj/item/weapon/gun/projectile/ma5b_ar = 15,
 	/obj/item/ammo_magazine/m145_ap = 2,
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
@@ -205,6 +218,7 @@
 	/obj/item/clothing/head/helmet/spartan/mkv_gungnir = 4,
 	/obj/item/clothing/suit/armor/special/spartan/mkv_gungnir = 4,
 	/obj/item/clothing/glasses/hud/tactical/odst_hud/medic = 4,
+	/obj/item/weapon/storage/backpack/odst/regular = 4,
 	/obj/item/weapon/storage/belt/marine_ammo = 4,
 	/obj/item/weapon/storage/belt/marine_medic = 4,
 	/obj/item/clothing/accessory/storage/odst = 4,
@@ -227,12 +241,15 @@
 	/obj/item/ammo_magazine/m127_saphe =20,
 	/obj/item/ammo_magazine/m127_saphp =20,
 	/obj/item/ammo_magazine/m762_ap/MA5B = 40,
+	/obj/item/ammo_box/shotgun = 10,
+	/obj/item/ammo_box/shotgun/slug = 10,
 	/obj/item/ammo_magazine/a762_box_ap = 16,
 	/obj/item/ammo_magazine/spnkr = 16,
 	/obj/item/ammo_magazine/m127_saphe = 16,
 	/obj/item/ammo_magazine/m5 = 16,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
 	/obj/item/ammo_magazine/m145_ap = 16,
+	/obj/item/ammo_magazine/m95_sap/br55 = 16,
 	/obj/item/weapon/grenade/smokebomb = 16,
 	/obj/item/weapon/grenade/frag/m9_hedp = 16,
 	/obj/item/weapon/armor_patch = 8,

@@ -97,18 +97,9 @@
 
 /decl/hierarchy/outfit/caelumz_spartan
 	name = "caelumz - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/praetor
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/praetor
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////BurnedSweetPotato\\\\\\\\
 
@@ -128,18 +119,9 @@
 
 /decl/hierarchy/outfit/burnedsweetpotato_spartan
 	name = "BurnedSweetPotato - Spartan II"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////bobatnight\\\\\\\
 
@@ -268,18 +250,8 @@
 
 /decl/hierarchy/outfit/flaksim_spartan
 	name = "flaksim - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkiv_flak
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkiv_flak
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 
 //Focks in a bocks
@@ -298,19 +270,8 @@
 
 /decl/hierarchy/outfit/focks_spartan
 	name = "focks - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkiv_security
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkiv_security
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
-
 
 ////////Gulag\\\\\\\\
 
@@ -391,18 +352,8 @@
 
 /decl/hierarchy/outfit/kelso_spartan
 	name = "kelso - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkiv_kelso
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkiv_kelso
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////Kozi\\\\\\\\
 
@@ -487,6 +438,35 @@
 	icon_state = "osama-UNSCsuit_worn"
 	worn_state = "UNSC Marine Fatigues"
 
+////////Loafe\\\\\\\\
+
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/loafe
+	name = "Loafe's Helmet"
+	item_state = "loafe-helmet_worn"
+	icon_state = "loafe-helmet_obj"
+	item_state_novisr = "loafe-helmet_worn"
+	icon_state_novisr = "loafe-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/loafe
+	name = "Loafe's Armor"
+	icon_state = "loafe-armor_obj"
+	item_state = "loafe-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/loafe
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Loafe's Backpack"
+	item_state = "loafe-backpack_worn"
+	icon_state = "loafe-backpack_obj"
+
+/decl/hierarchy/outfit/loafe_odst
+	name = "loafe - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/loafe
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/loafe
+	back = /obj/item/weapon/storage/backpack/odst/loafe
 
 //Spartan
 
@@ -506,22 +486,8 @@
 
 /decl/hierarchy/outfit/liam_gallagher_spartan
 	name = "liam_gallagher - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/liam_gallagher
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/liam_gallagher
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
-
-/decl/hierarchy/outfit/liam_gallagher_spartan/kozi_spartan
-	name = "kozi - spartan"
-	//they share the armour this is literally to make spawning it x100 easier
 
 //Spartan
 
@@ -537,18 +503,8 @@
 
 /decl/hierarchy/outfit/liam_gallagher_spartan
 	name = "liam_gallagher_spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_grenadier
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkv_grenadier
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 
 ////////mann\\\\\\\\\
@@ -587,18 +543,8 @@
 
 /decl/hierarchy/outfit/mann_spartan
 	name = "mann - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_gungnir_mann
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkv_gungnir_mann
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 
 ////////maxattacker\\\\\\\\
@@ -656,18 +602,9 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 
 /decl/hierarchy/outfit/maxattacker_spartan
 	name = "maxattacker - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_gungnir_navy
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkv_gungnir_navy
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////MCLOVIN\\\\\\\\
 
@@ -958,18 +895,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /decl/hierarchy/outfit/pinstripe_spartan
 	name = "pinstripe - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/pinstripe
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/pinstripe
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////ragnarok\\\\\\\\
 
@@ -1120,18 +1047,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /decl/hierarchy/outfit/spartan_spartan
 	name = "spartan - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////Socks\\\\\\\\
 
@@ -1182,18 +1099,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /decl/hierarchy/outfit/socks_spartan
 	name = "socks - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkiv_domeprotector
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkiv_domeprotector
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 //Sangheili (MAJOR)
 
@@ -1237,32 +1144,21 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //Spartan
 
 /obj/item/clothing/head/helmet/spartan/stingray
-	name = "Ryan-074's MJOLNIR Powered Assault Armour Helmet"
-	desc = "Ave, Imperator, morituri te salutant. The man who wore this looks as though he was very important."
+	name = "Ryan-073's MJOLNIR Powered Assault Armour Helmet"
+	desc = "Ave, Imperator, morituri te salutant."
 	icon_state = "stingray-spartanhelm_obj"
 	item_state = "stingray-spartanhelm_worn"
 
 /obj/item/clothing/suit/armor/special/spartan/stingray
-	name = "Ryan-074's MJOLNIR Powered Assault Armour"
+	name = "Ryan-073's MJOLNIR Powered Assault Armour"
 	desc = "a technologically-advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a SPARTAN-II, supersoldier in the field of combat.This one appears to have been heavily modified per the user's tactical needs."
 	icon_state = "stingray-spartanarmor_obj"
 	item_state = "stingray-spartanarmor_worn"
 
 /decl/hierarchy/outfit/stingray_spartan
 	name = "stingray - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/stingray
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/stingray
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
-
 
 ////////wehraboo\\\\\\\\\
 
@@ -1299,18 +1195,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /decl/hierarchy/outfit/wehraboo_spartan
 	name = "wehraboo - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/markvi_wehraboo
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/markvi_wehraboo
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////winterume\\\\\\\\
 
@@ -1349,18 +1235,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /decl/hierarchy/outfit/winterume_spartan
 	name = "winterume - spartan"
-	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_airassault_amy
-	gloves = /obj/item/clothing/gloves/spartan
-	shoes = /obj/item/clothing/shoes/magboots/spartan
-	belt = /obj/item/weapon/storage/belt/marine_ammo
 	head = /obj/item/clothing/head/helmet/spartan/mkv_airassault_amy
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
-	l_pocket = /obj/item/ammo_magazine/m762_ap
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	back = /obj/item/weapon/gun/projectile/ma5b_ar
 
 ////////Riley\\\\\\\
 

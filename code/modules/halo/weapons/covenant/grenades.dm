@@ -4,10 +4,10 @@
 	desc = "When activated, the coating of this grenade becomes a powerful adhesive, sticking to anyone it is thrown at."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
-	throw_speed = 1.2
-	throw_range = 4
-	var/alt_explosion_damage_max = 100 //The amount of damage done when grenade is stuck inside someone
-	var/alt_explosion_range = 2
+	throw_speed = 1.4
+	throw_range = 7
+	var/alt_explosion_damage_max = 500 //The amount of damage done when grenade is stuck inside someone
+	var/alt_explosion_range = 1
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
@@ -23,8 +23,9 @@
 	var/mob/living/L = A
 	if(!istype(L))
 		return
-	L.embed(src)
-	A.visible_message("<span class = 'danger'>[src.name] sticks to [L.name]!</span>")
+	if(prob(25))
+		L.embed(src)
+		A.visible_message("<span class = 'danger'>[src.name] sticks to [L.name]!</span>")
 
 /obj/item/weapon/grenade/plasma/detonate()
 	var/mob/living/carbon/human/mob_containing = loc
@@ -39,7 +40,7 @@
 						w.embedded_objects -= embedded //Removing the embedded item from the wound
 	else
 		for(var/mob/living/hit_mob in range(alt_explosion_range,src))
-			hit_mob.adjustFireLoss(alt_explosion_damage_max/2)
+			hit_mob.adjustFireLoss(alt_explosion_damage_max)
 			to_chat(hit_mob,"<span class = 'danger'>[src] explodes! Heat from the explosion washes over your body...</span>")
 
 	var/turf/epicenter = get_turf(src)

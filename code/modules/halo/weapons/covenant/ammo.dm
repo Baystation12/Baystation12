@@ -141,7 +141,7 @@
 	if(kill_count % 2 == 0)
 		return
 	if(locked_target)
-		redirect(locked_target.x, locked_target.y, loc)
+		redirect(locked_target, loc)
 		dir = get_dir(loc,locked_target)
 
 /obj/item/ammo_magazine/type51mag

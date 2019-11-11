@@ -45,7 +45,7 @@
 	ship_damage_projectile = /obj/item/projectile/plas_torp_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/plasma_torpedoes_impact.ogg'
 	damage = 100
-	step_delay = 0.8 SECOND
+	step_delay = 0.5 SECOND
 
 /obj/item/projectile/overmap/plas_torp/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 
