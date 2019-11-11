@@ -203,7 +203,7 @@
 "dU" = (/obj/machinery/door/window/eastleft,/obj/machinery/door/window/eastleft{tag = "icon-left"; icon_state = "left"; dir = 2},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dV" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dW" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{icon_state = "map"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
-"dX" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"dX" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dY" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{icon_state = "map"; dir = 1},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dZ" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 9},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "ea" = (/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/fusion_drive,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
@@ -218,7 +218,6 @@
 "ej" = (/obj/structure/table/glass,/obj/machinery/reagentgrinder,/obj/item/stack/material/phoron{amount = 10000},/obj/item/stack/material/phoron{amount = 10000},/obj/item/stack/material/phoron{amount = 10000},/obj/item/stack/material/phoron{amount = 10000},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "ek" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
 "el" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
-"em" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "en" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "eo" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/atmospherics/binary/fusion_cooling{icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "ep" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 9},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
@@ -338,7 +337,7 @@ aaaaaaaaaaaaaaaaaacqcrcsctcucvcwcFcpcpcGcHcIcJcycIcIcJczcAcBcJcCcDcAcEcIaVcIcIcA
 aaaaaaaaaaaaaaaaaaaNaNbYcKcLbYbLcMbLcNcOaNcPfNcQcPcRcRcRcRcRcRcScRcRcRcTcUcVcXcXcXcXcXcXcXcXcXcXcXcYcXcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaacqcZcsdacFdbdcddbLdedfaNdgdgeHcPdidjdkdldmdndodpdqcRdrdscVcXdtdudvdwdxdydzdAdBdCdDdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNaNaNdFbYdFaNdGdHdIaNdJdgdhcPdLdkdkdMdkdNdodOdPcRdQdRdScXdTdUdvdVdWdXdYdXdZeaebdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgdKcPeheidkdkdkejdodOdkdkcVcUekcXdvdvdvdVelemendYdXeoepdEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgdKcPeheidkdkdkejdodOdkdkcVcUekcXdvdvdvdVeldXendYdXeoepdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNeqeraNesaNdJdgfgcPdkdkdkdkdkdketeuevewexeyezeAeAeAeAeBeAeAeCeDeAeEdvdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNeFeGaNaNaNegdgfMcPeIeJdkeKeLfQeMeNeOcRcVcVcVePdvdvdveQdvdvdveRdvdveSdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcReTeUeVcXeWdvdveXeWdvdveRdveWeSdEcXcXaaaaaaaaaaaaaa
