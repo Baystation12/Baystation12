@@ -79,7 +79,9 @@
 				I = image('icons/turf/wall_masks.dmi', reinf_material.icon_reinf)
 				I.color = reinf_color
 				overlays += I
-
+	var/image/texture = material.get_wall_texture()
+	if(texture)
+		overlays += texture
 	if(stripe_color)
 		for(var/i = 1 to 4)
 			if(other_connections[i] != "0")

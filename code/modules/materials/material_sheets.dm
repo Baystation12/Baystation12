@@ -549,3 +549,8 @@
 	icon_state = "bone"
 	plural_icon_state = "bone-mult"
 	max_icon_state = "bone-max"
+
+/obj/item/stack/material/generic/brick
+	icon_state = "brick"
+	plural_icon_state = "brick-mult"
+	max_icon_state = "brick-max"
