@@ -1,0 +1,5 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Rapid Piping Device has been added!"
+  - rscadd: "RPD can be ordered from supply, at semi-reasonable cost of a 100 points a piece."
