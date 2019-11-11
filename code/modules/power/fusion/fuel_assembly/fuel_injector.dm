@@ -14,7 +14,7 @@
 	var/obj/item/weapon/fuel_assembly/cur_assembly
 
 /obj/machinery/fusion_fuel_injector/Initialize()
-	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member)
+	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)

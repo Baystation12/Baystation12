@@ -24,7 +24,7 @@
 /obj/item/device/taperecorder/New()
 	..()
 	wires = new(src)
-	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))
 		mytape = new mytape(src)
 	GLOB.listening_objects += src

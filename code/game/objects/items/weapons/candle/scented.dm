@@ -26,7 +26,7 @@
 /obj/item/weapon/flame/candle/scented/light(mob/user)
 	..()
 	if(lit)
-		set_extension(src, /datum/extension/scent, style.scent_datum)
+		set_extension(src, style.scent_datum)
 
 /obj/item/weapon/flame/candle/scented/proc/get_scent()
 	var/scent_type = safepick(scent_types)

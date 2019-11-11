@@ -11,7 +11,7 @@
 	var/reinforcing = 0
 
 /obj/structure/girder/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/simple, 100)
+	set_extension(src, /datum/extension/penetration/simple, 100)
 	. = ..()
 
 /obj/structure/girder/displaced

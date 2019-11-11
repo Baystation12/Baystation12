@@ -34,7 +34,7 @@
 
 /obj/item/weapon/gun/launcher/alien/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/voxform, /datum/extension/voxform)
+	set_extension(src, /datum/extension/voxform)
 
 //Vox pinning weapon.
 /obj/item/weapon/gun/launcher/alien/spikethrower

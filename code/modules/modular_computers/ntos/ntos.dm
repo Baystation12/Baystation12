@@ -1,4 +1,5 @@
 /datum/extension/interactive/ntos
+	base_type = /datum/extension/interactive/ntos
 	expected_type = /atom/movable
 	flags = EXTENSION_FLAG_IMMEDIATE
 	var/on = FALSE

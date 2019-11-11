@@ -105,7 +105,7 @@
 			return
 		if(install_component(thing, user))
 			armour = thing
-			set_extension(src, /datum/extension/armor, /datum/extension/armor, armour.armor)
+			set_extension(src, /datum/extension/armor, armour.armor)
 	else
 		return ..()
 

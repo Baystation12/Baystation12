@@ -62,7 +62,7 @@
 
 /obj/item/weapon/storage/belt/holster/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/holster, /datum/extension/holster, src, sound_in, sound_out, can_holster)
+	set_extension(src, /datum/extension/holster, src, sound_in, sound_out, can_holster)
 
 /obj/item/weapon/storage/belt/holster/attackby(obj/item/W as obj, mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)

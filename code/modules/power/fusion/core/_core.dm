@@ -23,7 +23,7 @@
 /obj/machinery/power/fusion_core/Initialize()
 	. = ..()
 	connect_to_network()
-	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member)
+	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)

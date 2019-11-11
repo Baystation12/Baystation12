@@ -75,7 +75,7 @@
 	terminal.master = src
 	GLOB.destroyed_event.register(terminal, src, .proc/unset_terminal)
 
-	set_extension(src, /datum/extension/event_registration/shuttle_stationary, /datum/extension/event_registration/shuttle_stationary, GLOB.moved_event, machine, .proc/machine_moved, get_area(src))
+	set_extension(src, /datum/extension/event_registration/shuttle_stationary, GLOB.moved_event, machine, .proc/machine_moved, get_area(src))
 	set_status(machine, PART_STAT_CONNECTED)
 	start_processing(machine)
 
