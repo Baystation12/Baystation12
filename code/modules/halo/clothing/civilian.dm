@@ -152,6 +152,13 @@
 	name = "police cap"
 	desc = "A soft patrol cap to identify officers or show support."
 
+/obj/item/clothing/gloves/thick/swat/police //swat subtype with no armor adjustments because hand meta is cancer
+	name = "police gloves"
+	desc = "Gray gloves with impact and shrapnel resistance with inbuilt fire retardant."
+	icon = 'code/modules/halo/clothing/gcpd.dmi'
+	icon_state = "gcpd-gloves"
+	item_state = "gcpd-gloves"
+
 /obj/item/clothing/under/marshall
 	name = "Marshall's uniform"
 	desc = "A black uniform worn by the Emsville Marshalls."

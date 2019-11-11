@@ -110,6 +110,7 @@
 	l_pocket = /obj/item/clothing/accessory/badge/police
 	l_ear = /obj/item/device/radio/headset/police
 	id_type = /obj/item/weapon/card/id/security/warden
+	gloves = /obj/item/clothing/gloves/thick/swat/police
 
 	flags = 0
 
@@ -125,5 +126,6 @@
 	l_ear = /obj/item/device/radio/headset/police
 	id_type = /obj/item/weapon/card/id/security/head
 	suit = /obj/item/clothing/suit/armor/vest/police_medium
+	gloves = /obj/item/clothing/gloves/thick/swat/police
 
 	flags = 0
