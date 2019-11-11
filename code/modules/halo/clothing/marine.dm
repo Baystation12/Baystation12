@@ -35,14 +35,14 @@
 	name = "CH251 Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
 	item_state = "CH252 Helmet Medic"
-	icon_state = "helmet_novisor_medic"
+	icon_state = "helmet novisor medic_obj"
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/helmet/marine/medic/visor
 	name = "CH251-V Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
 	item_state = "CH252 Helmet Medic"
-	icon_state = "helmet_medic"
+	icon_state = "helmet medic_obj"
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/helmet/marine/visor
@@ -78,7 +78,7 @@
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "M52B Body Armor regular"
-	icon_state = "M52B Body Armor regular"
+	icon_state = "M52B Body Armor regular_obj"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
@@ -100,7 +100,7 @@
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "M52B Body Armor Medic"
-	icon_state = "M52B Body Armor Medic"
+	icon_state = "M52B Body Armor Medic_obj"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
@@ -111,7 +111,7 @@
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "M52B Body Armor Medic B"
-	icon_state = "M52B Body Armor Medic B"
+	icon_state = "M52B Body Armor Medic B_obj"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
@@ -122,7 +122,7 @@
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "M52B Body Armor B"
-	icon_state = "M52B Body Armor B"
+	icon_state = "M52B Body Armor regular B_obj"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
