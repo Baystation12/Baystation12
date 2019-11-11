@@ -45,6 +45,11 @@
 	var/temperature_multiplier = 1
 	var/value = 1
 
+	var/scent //refer to _scent.dm
+	var/scent_intensity = /decl/scent_intensity/normal
+	var/scent_descriptor = SCENT_DESC_SMELL
+	var/scent_range = 1
+
 /datum/reagent/New(var/datum/reagents/holder)
 	if(!istype(holder))
 		CRASH("Invalid reagents holder: [log_info_line(holder)]")

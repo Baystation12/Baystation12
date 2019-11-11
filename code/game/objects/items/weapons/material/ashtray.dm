@@ -43,6 +43,7 @@
 
 		if(user.unEquip(W, src))
 			visible_message("[user] places [W] in [src].")
+			set_extension(src, /datum/extension/scent, /datum/extension/scent/ashtray)
 			update_icon()
 	else
 		..()
@@ -57,6 +58,7 @@
 			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 			for (var/obj/O in contents)
 				O.dropInto(loc)
+			remove_extension(src, /datum/extension/scent)
 		if (health < 1)
 			shatter()
 			return

@@ -296,7 +296,7 @@
 #include "code\datums\extensions\on_click\turf_hand.dm"
 #include "code\datums\extensions\scent\_scent.dm"
 #include "code\datums\extensions\scent\scent_candle.dm"
-#include "code\datums\extensions\scent\~scent_undefine.dm"
+#include "code\datums\extensions\scent\scent_misc.dm"
 #include "code\datums\graph\graph.dm"
 #include "code\datums\graph\node.dm"
 #include "code\datums\helper_datums\construction_datum.dm"
