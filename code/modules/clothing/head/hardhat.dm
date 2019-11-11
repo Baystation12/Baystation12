@@ -7,11 +7,11 @@
 	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
 		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_MINOR, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_MINOR,
 		rad = ARMOR_RAD_MINOR
 	)
 	flags_inv = 0
@@ -39,13 +39,12 @@
 	light_overlay = "EMS_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_MINOR,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_MINOR
 	)
-	max_heat_protection_temperature = 1300
 
 /obj/item/clothing/head/hardhat/firefighter
 	icon_state = "Firefighter-Helmet"
@@ -82,4 +81,26 @@
 	name = "chief damage control helmet"
 	icon_state = "Damage-Control-Helmet-White"
 
+/obj/item/clothing/head/hardhat/damage_control/EMB
+	name = "\improper Emergency Management Bureau helmet"
+	desc = "The helmet currently issued by the emergency management bureau, commonly used by engineers and first responders throughout the human space. Comes with a built-in flashlight."
+	icon_state = "Damage-Control-Helmet-EMB"
 
+/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient
+	name = "ancient red EMB helmet"
+	desc = "This helmet used to be issued by the emergency management bureau once upon a time, and is still being used in frontier systems. Comes with a built-in flashlight."
+	icon_state = "EMB-ancient-red"
+	light_overlay = "EMB-ancient_light"
+
+/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/yellow
+	name = "ancient yellow EMB helmet"
+	icon_state = "EMB-ancient-yellow"
+
+/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/white
+	name = "ancient white EMB helmet"
+	icon_state = "EMB-ancient-white"
+
+/obj/item/clothing/head/hardhat/EMS/DC_light
+	name = "light damage control helmet"
+	desc = "A lighter polymer helmet commonly used by engineers and first responders throughout the human space. It comes with a built-in flashlight and has 'Damage Control' written on its back in yellow lettering."
+	icon_state = "Damage-Control-Helmet-light"

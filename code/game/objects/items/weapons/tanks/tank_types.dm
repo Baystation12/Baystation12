@@ -24,7 +24,8 @@
 	icon_state = "oxygen_f"
 
 /obj/item/weapon/tank/oxygen/red
-	desc = "A tank of oxygen. This one is red."
+	name = "self contained breathing apparatus"
+	desc = "A self contained breathing apparatus, well known as SCBA. Generally filled with oxygen."
 	icon_state = "oxygen_fr"
 
 /*
@@ -127,7 +128,7 @@
 /obj/item/weapon/tank/nitrogen
 	name = "nitrogen tank"
 	desc = "A tank of nitrogen."
-	icon_state = "oxygen_fr"
+	icon_state = "nitrogen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
 	volume = 180

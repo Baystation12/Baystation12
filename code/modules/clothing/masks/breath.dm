@@ -40,3 +40,14 @@
 	item_state = "breath"
 	permeability_coefficient = 0.50
 
+/obj/item/clothing/mask/breath/scba
+	desc = "A close-fitting self contained breathing apparatus mask. Can be connected to an air supply."
+	name = "\improper SCBA mask"
+	icon_state = "scba_mask"
+	item_state = "scba_mask"
+	down_icon_state = "scba_maskdown"
+	item_flags = ITEM_FLAG_AIRTIGHT|ITEM_FLAG_FLEXIBLEMATERIAL
+	flags_inv = HIDEEYES
+	body_parts_covered = FACE|EYES
+	gas_transfer_coefficient = 0.01
+
