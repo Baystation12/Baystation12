@@ -5,7 +5,7 @@
 	var/obj/item/weapon/stock_parts/computer/hard_drive/portable/usb
 
 /obj/machinery/computer/modular/Initialize()
-	set_extension(src, /datum/extension/interactive/ntos, /datum/extension/interactive/ntos/console)
+	set_extension(src, /datum/extension/interactive/ntos/console)
 	. = ..()
 
 /obj/machinery/computer/modular/Destroy()

@@ -14,7 +14,7 @@
 
 /obj/machinery/pointdefense_control/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member/multilevel)
+	set_extension(src, /datum/extension/local_network_member/multilevel)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
@@ -116,7 +116,7 @@
 
 /obj/machinery/pointdefense/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member/multilevel)
+	set_extension(src, /datum/extension/local_network_member/multilevel)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)

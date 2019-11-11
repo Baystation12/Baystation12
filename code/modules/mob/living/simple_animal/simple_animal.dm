@@ -86,7 +86,7 @@
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	if(LAZYLEN(natural_armor))
-		set_extension(src, /datum/extension/armor, armor_type, natural_armor)
+		set_extension(src, armor_type, natural_armor)
 
 /mob/living/simple_animal/Life()
 	. = ..()

@@ -1,4 +1,5 @@
 /datum/extension/deity_be_near
+	base_type = /datum/extension/deity_be_near
 	expected_type = /obj/item
 	var/keep_away_instead = FALSE
 	var/mob/living/deity/connected_deity
