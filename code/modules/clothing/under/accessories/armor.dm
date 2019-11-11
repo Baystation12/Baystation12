@@ -57,10 +57,10 @@
 	icon_state = "armor_light"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_MINOR
 		)
 	slot = ACCESSORY_SLOT_ARMOR_C
@@ -73,10 +73,10 @@
 	desc = "A plasteel-reinforced synthetic armor plate, providing good protection. Attaches to a plate carrier."
 	icon_state = "armor_medium"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 		)
 
@@ -85,10 +85,10 @@
 	desc = "A heavier armor plate with additional ablative coating. Attaches to a plate carrier."
 	icon_state = "armor_tactical"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
-		laser = ARMOR_LASER_MAJOR, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slowdown = 0.5
@@ -98,10 +98,10 @@
 	desc = "A ceramics-reinforced synthetic armor plate, providing state of of the art protection. Attaches to a plate carrier."
 	icon_state = "armor_merc"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_RIFLE, 
-		laser = ARMOR_LASER_MAJOR, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slowdown = 0.5
@@ -117,10 +117,10 @@
 	gender = PLURAL
 	body_parts_covered = ARMS
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
@@ -146,10 +146,10 @@
 	desc = "A pair of red-trimmed black arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
 	icon_state = "armguards_merc"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
 
@@ -159,9 +159,9 @@
 	icon_state = "armguards_riot"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_MINOR, 
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
@@ -172,9 +172,9 @@
 	icon_state = "armguards_ballistic"
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_MINOR, 
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
@@ -185,9 +185,9 @@
 	icon_state = "armguards_ablative"
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_RIFLES, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_RIFLES,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0
@@ -203,10 +203,10 @@
 	gender = PLURAL
 	body_parts_covered = LEGS
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
@@ -232,10 +232,10 @@
 	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
 	icon_state = "legguards_merc"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
 
@@ -245,9 +245,9 @@
 	icon_state = "legguards_riot"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_MINOR, 
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
@@ -259,9 +259,9 @@
 	icon_state = "legguards_ballistic"
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_MINOR, 
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
@@ -273,9 +273,9 @@
 	icon_state = "legguards_ablative"
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_RIFLES, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_RIFLES,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0
