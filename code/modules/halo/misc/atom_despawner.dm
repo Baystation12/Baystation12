@@ -1,9 +1,9 @@
 
-var/global/datum/controller/process/atom_despawner/atom_despawner
+var/global/datum/controller/process/atom_despawner/atom_despawner = new
 
 /datum/controller/process/atom_despawner
 	var/list/cleanables = list()
-	var/atom_timeout = 1200		//deciseconds before despawning
+	var/atom_timeout = 10 MINUTES	//deciseconds before despawning
 	var/do_cleaning = 1
 	var/list_index = 1
 	var/max_cleanup_per_tick = 5
