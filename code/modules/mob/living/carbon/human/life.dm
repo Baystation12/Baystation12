@@ -151,12 +151,6 @@
 		if(zone_exposure >= 1)
 			return 1
 		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
-		for(var/obj/item/clothing/C in covers)
-			if(C.accessories.len)
-				for(var/obj/item/clothing/accessory/A in C.accessories)
-					if(A & zone)
-						if(pressure_adjustment_coefficient)
-							. += pressure_adjustment_coefficient
 	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
