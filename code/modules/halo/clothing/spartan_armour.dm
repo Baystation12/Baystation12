@@ -53,12 +53,13 @@
 
 	specials = list(/datum/armourspecials/gear/human_tank,\
 		/datum/armourspecials/shields/spartan,
-		/datum/armourspecials/shieldmonitor/)
+		/datum/armourspecials/shieldmonitor,\
+		/datum/armourspecials/self_destruct)
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
 	allowed = list(/obj/item/weapon/tank)
-	totalshields = 150
+	totalshields = 125
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 	var/list/available_abilities = list()
 
