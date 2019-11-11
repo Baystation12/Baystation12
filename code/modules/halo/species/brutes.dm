@@ -27,6 +27,7 @@
 	pixel_offset_x = -12
 	item_icon_offsets = list(5,4)
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
+	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
