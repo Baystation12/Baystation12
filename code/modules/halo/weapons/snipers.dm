@@ -58,6 +58,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392) //Disallows loading LMG boxmags into the DMR.
 	fire_sound = 'code/modules/halo/sounds/DMR_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_New.wav'
+	handle_casings = CASELESS
 	one_hand_penalty = -1
 	w_class = ITEM_SIZE_LARGE
 	accuracy = 2
@@ -95,6 +96,7 @@
 	burst = 1
 	magazine_type = /obj/item/ammo_magazine/m762_ap/M392/innie
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392)
+	handle_casings = CASELESS
 	accuracy = 1
 	scoped_accuracy = 2
 	dispersion = list(0.2)

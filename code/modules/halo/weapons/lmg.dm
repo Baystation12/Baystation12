@@ -16,6 +16,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/a762_box_ap) //Disallows loading normal ma5b mags into the LMG.
 	//fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'			//no halo firing sfx for this one yet
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
+	handle_casings = CASELESS
 	one_hand_penalty = -1
 	burst = 5
 	burst_delay = 1
@@ -54,6 +55,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/lmg_30cal_box_ap)
 	//fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
+	handle_casings = CASELESS
 	one_hand_penalty = -1
 	burst = 5
 	burst_delay = 1
