@@ -8,4 +8,4 @@
 	vessel_mass = 1
 	faction = "UNSC"
 	map_bounds = list(1,105,132,70)
-	weapon_miss_chance = 75
+	weapon_miss_chance = 99
