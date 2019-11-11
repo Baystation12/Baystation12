@@ -1,6 +1,7 @@
 /obj/item/projectile/beam
 	name = "laser"
 	icon_state = "laser"
+	temperature = T0C + 300
 	fire_sound='sound/weapons/Laser.ogg'
 	impact_sounds = list(BULLET_IMPACT_MEAT = SOUNDS_LASER_MEAT, BULLET_IMPACT_METAL = SOUNDS_LASER_METAL)
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
