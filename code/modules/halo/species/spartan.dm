@@ -37,8 +37,8 @@
 	cold_level_3 = 114 //-159C
 
 	//As of 2018-03-24 we're in 2525 - 2526, thus Spartans IIs were just augmented
-	min_age = 14
-	max_age = 15
+	min_age = 19
+	max_age = 20
 
 	//Spartan's have some better organs than normal humans. Also, we'll say the UNSC cut out their appendix already
 	has_organ = list(

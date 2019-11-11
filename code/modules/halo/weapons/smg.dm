@@ -14,7 +14,7 @@
 	slot_flags = SLOT_BACK|SLOT_BELT
 	fire_sound = 'code/modules/halo/sounds/SMG_Mini_Burst_Sound_Effect.ogg'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_Short_Burst_Sound_Effect.ogg'
-	reload_sound = 'code/modules/halo/sounds/SMG_Reload_Sound_Effect.ogg'
+	reload_sound = 'code/modules/halo/sounds/SMG_Reload_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m5
 	handle_casings = CASELESS
