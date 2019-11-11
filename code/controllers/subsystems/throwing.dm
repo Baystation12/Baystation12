@@ -158,10 +158,10 @@ SUBSYSTEM_DEF(throwing)
 
 		A = get_area(AM.loc)
 
-/datum/thrownthing/proc/finalize(hit = FALSE, target=null)
+/datum/thrownthing/proc/finalize(hit = FALSE, t_target=null)
 	set waitfor = FALSE
 	//done throwing, either because it hit something or it finished moving
-	if(!thrownthing)
+	if(QDELETED(thrownthing))
 		return
 	thrownthing.throwing = null
 	if (!hit)
@@ -178,7 +178,7 @@ SUBSYSTEM_DEF(throwing)
 		var/mob/M = thrownthing
 		M.inertia_dir = init_dir
 
-	if(target)
+	if(t_target)
 		thrownthing.throw_impact(target, src)
 
 	if (callback)
@@ -189,7 +189,7 @@ SUBSYSTEM_DEF(throwing)
 	qdel(src)
 
 /datum/thrownthing/proc/hit_atom(atom/A)
-	finalize(hit=TRUE, target=A)
+	finalize(hit=TRUE, t_target=A)
 
 /datum/thrownthing/proc/hitcheck()
 	for (var/thing in get_turf(thrownthing))
@@ -197,5 +197,5 @@ SUBSYSTEM_DEF(throwing)
 		if (AM == thrownthing || (AM == thrower && !ismob(thrownthing)))
 			continue
 		if (AM.density && !(AM.throwpass))//check if ATOM_FLAG_CHECKS_BORDER as an atom_flag is needed
-			finalize(hit=TRUE, target=AM)
+			finalize(hit=TRUE, t_target=AM)
 			return TRUE
