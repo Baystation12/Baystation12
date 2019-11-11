@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Body bag label overlays will now properly persist through opening/closing, instead of disappearing."

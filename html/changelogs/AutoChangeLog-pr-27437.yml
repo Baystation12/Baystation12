@@ -1,6 +1,0 @@
-author: "Imienny"
-delete-after: True
-changes: 
-  - rscadd: "adds zipgun, knock-off pistol, small energy gun, ion pistol, ion slug, duct tape, combat defibrillator, stasis bag, stabilisation kit, balaclava and \"exceptionally robust MRE\" to uplink"
-  - tweak: "MRE coffee and tea powder no longer require heating"
-  - bugfix: "fixed MRE menu 8 (chilli) spawning with pizza instead of chilli"
