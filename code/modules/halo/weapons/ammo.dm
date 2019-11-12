@@ -27,9 +27,32 @@
 	damage = 50		//deadly but inaccurate
 	accuracy = -1
 
+/obj/item/projectile/bullet/a127
+	damage = 25
+
 /obj/item/weapon/storage/box/m127_saphe
 	name = "box of 12.7mm M225 magazines"
 	startswith = list(/obj/item/ammo_magazine/m127_saphe = 7)
+
+//Made for M6B
+
+/obj/item/ammo_casing/a127
+	desc = "A 12.7mm bullet casing."
+	caliber = "12.7mm"
+	projectile_type = /obj/item/projectile/bullet/a127
+
+/obj/item/ammo_magazine/r127
+	name = "magazine (12.7mm)"
+	desc = "12.7x40mm magazine containing 12 rounds. Civilian variant."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "m6bmag"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/a127
+	matter = list(DEFAULT_WALL_MATERIAL = 1000) //12.7mm casing = 83.3 metal each
+	caliber = "12.7mm"
+	max_ammo = 12
+	multiple_sprites = 1
+
 
 //used by: Magnum M6D, Magnum M6S
 

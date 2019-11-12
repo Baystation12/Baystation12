@@ -36,6 +36,38 @@
 
 	toggle_scope(usr, 1.1)
 
+//M6B Civvie and GCPD pistol
+
+/obj/item/weapon/gun/projectile/m6d_magnum/m6b
+	name = "\improper M6B Magnum"
+	desc = "Common handgun accessible to civilians with a lack of a scope. Takes 12.7mm calibre magazines."
+	icon_state = "m6b"
+	item_state = "m6b"
+	magazine_type = /obj/item/ammo_magazine/r127
+
+/obj/item/weapon/gun/projectile/m6d_magnum/m6b/update_icon()
+	. = ..()
+	if(ammo_magazine)
+		icon_state = "m6b"
+	else
+		icon_state = "m6b_unloaded"
+
+/obj/item/weapon/gun/projectile/m6d_magnum/m6b/scope()
+	..()
+	return
+
+/obj/item/weapon/gun/projectile/m6d_magnum/m6b/police
+	icon_state = "m6b_police"
+	item_state = "m6b_police"
+	desc = "Common handgun accessible to civilians with a lack of a scope, in drab gray GCPD colors. Takes 12.7mm calibre magazines."
+
+/obj/item/weapon/gun/projectile/m6d_magnum/m6b/police/update_icon()
+	. = ..()
+	if(ammo_magazine)
+		icon_state = "m6b_police"
+	else
+		icon_state = "m6b_police_unloaded"
+
 //Magnum M6S silenced pistol
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s
