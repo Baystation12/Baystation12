@@ -41,7 +41,7 @@
 	var/radio_language = "Galactic Common"
 	var/radio_channel = "System"
 
-	var/hull = 1500 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
+	var/hull = 1000 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
 	var/turf/target_loc
 
