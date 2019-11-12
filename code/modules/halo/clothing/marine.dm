@@ -290,7 +290,7 @@
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
-/obj/item/clothing/shoes/eva/marine
+/obj/item/clothing/shoes/magboots/eva/marine
 	name = "\improper EVA Armoured Boots"
 	desc = "A universally used helmet to protect one's feet against the vacuum when doing EVA."
 	icon = 'code/modules/halo/clothing/marine.dmi'
