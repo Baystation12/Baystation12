@@ -51,7 +51,7 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
-	charge_meter = 1
+	charge_meter = 0
 	max_shots = 10
 	projectile_type = /obj/item/projectile/covenant/beamrifle
 	one_hand_penalty = -1

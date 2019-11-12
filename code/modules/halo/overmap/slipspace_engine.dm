@@ -265,7 +265,7 @@
 	free_explode = 1
 	explodetype = /datum/explosion/slipspace_core
 	seconds_to_explode = 300 //5 minutes to explode.
-	seconds_to_disarm = 120 // 2 minutes to disarm.
+	seconds_to_disarm = 30 // 30 sesconds to disarm.
 
 /obj/payload/slipspace_core/attack_hand(var/mob/living/carbon/human/user)
 	. = ..()
