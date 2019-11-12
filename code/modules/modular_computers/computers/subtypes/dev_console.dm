@@ -34,6 +34,8 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		if(!os.on)
+			if(!CanInteract(user, DefaultTopicState()))
+				return FALSE // Do full interactivity check before state change.
 			os.system_boot()
 
 		os.ui_interact(user)
