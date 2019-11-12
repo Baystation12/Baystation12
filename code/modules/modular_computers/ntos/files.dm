@@ -34,6 +34,11 @@
 	else
 		return TRUE
 
+/datum/extension/interactive/ntos/proc/try_store_file(var/datum/computer_file/file, var/obj/item/weapon/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
+	if(!disk)
+		return FALSE
+	return disk.try_store_file(file)
+
 /datum/extension/interactive/ntos/proc/save_file(var/newname, var/data, var/file_type = /datum/computer_file/data, var/list/metadata, var/obj/item/weapon/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
 	if(!disk)
 		return FALSE
