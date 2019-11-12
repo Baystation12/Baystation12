@@ -100,6 +100,7 @@
 /obj/item/weapon/gun/projectile/proc/process_chambered()
 	if (!chambered) return
 	if(handle_casings == EJECT_CASINGS)
+		atom_despawner.mark_for_despawn(chambered)
 		chambered.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))
 	if(handle_casings == CYCLE_CASINGS)
 		if(ammo_magazine)

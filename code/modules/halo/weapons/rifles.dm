@@ -17,7 +17,6 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA5B) //Disallows loading LMG boxmags into the MA5B
-	handle_casings = CASELESS
 	burst = 3
 	burst_delay = 1.5
 	one_hand_penalty = -1
@@ -71,7 +70,6 @@
 	//fire_sound_burst = 'code/modules/halo/sounds/MA37_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/MA37_Reload_New.wav'
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
-	handle_casings = CASELESS
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
 	attachment_slots = null
@@ -102,7 +100,6 @@
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA3
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
-	handle_casings = CASELESS
 	attachment_slots = null
 	attachments_on_spawn = null
 	burst_delay = 0.9
@@ -139,14 +136,13 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m95_sap
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
-	handle_casings = CASELESS
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
 	fire_delay = 9
-	accuracy = 2
+	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.0, 0.6, 0.6)
+	dispersion=list(0.1, 0.6, 0.8)
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -179,14 +175,13 @@
 	fire_sound = 'code/modules/halo/sounds/Battle_Rifle_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/Battle_Rifle_Reload_New.wav'
 	load_method = MAGAZINE
-	handle_casings = CASELESS
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
 	fire_delay = 9
 	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.1, 0.8, 0.8)
+	dispersion=list(0.1, 0.8, 1.0)
 	wielded_item_state = "br55-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
