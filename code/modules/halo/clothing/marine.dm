@@ -292,7 +292,7 @@
 
 /obj/item/clothing/shoes/eva/marine
 	name = "\improper EVA Armoured Boots"
-	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
+	desc = "A universally used helmet to protect one's feet against the vacuum when doing EVA."
 	icon = 'code/modules/halo/clothing/marine.dmi'
 	body_parts_covered = LEGS|FEET
 	icon = ITEM_INHAND
