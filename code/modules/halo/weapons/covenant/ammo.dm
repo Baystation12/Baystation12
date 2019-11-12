@@ -49,7 +49,7 @@
 	desc = ""
 	damage = 75
 	accuracy = 3
-	armor_penetration = 70
+	armor_penetration = 90
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	step_delay = 0
