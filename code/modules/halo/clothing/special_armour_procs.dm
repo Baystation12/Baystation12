@@ -47,3 +47,4 @@
 					m.dust()
 		if("No")
 			return
+#undef SELF_DESTRUCT_EXPLODE_AFTER
