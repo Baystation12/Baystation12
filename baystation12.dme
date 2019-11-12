@@ -1633,6 +1633,7 @@
 #include "code\modules\halo\misc\armourspecials\holo_decoy.dm"
 #include "code\modules\halo\misc\armourspecials\overshield.dm"
 #include "code\modules\halo\misc\armourspecials\regeneration.dm"
+#include "code\modules\halo\misc\armourspecials\self_destruct.dm"
 #include "code\modules\halo\misc\armourspecials\shieldmonitor.dm"
 #include "code\modules\halo\misc\armourspecials\shields.dm"
 #include "code\modules\halo\misc\armourspecials\speed.dm"
