@@ -251,7 +251,7 @@ var/list/mob/living/forced_ambiance_list = new
 	else
 		if(L.client.ambience_playing)
 			L.client.ambience_playing = 0
-			sound_to(L, sound(null, channel = 2))
+			sound_to(L, sound(null, channel = GLOB.ambience_sound_channel))
 
 	if(L.lastarea != src)
 		if(LAZYLEN(forced_ambience))
