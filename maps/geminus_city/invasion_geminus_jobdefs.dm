@@ -30,7 +30,10 @@
 		/datum/job/covenant/sangheili_ultra,\
 		/datum/job/covenant/sangheili_shipmaster,\
 		/datum/job/covenant/kigyarminor,\
-		/datum/job/covenant/unggoy_minor,\
+		/datum/job/covenant/unggoy_minor,
+		/datum/job/covenant/unggoy_major,\
+		/datum/job/covenant/unggoy_ultra,\
+		/datum/job/covenant/unggoy_deacon,\
 		/datum/job/covenant/skirmmurmillo,\
 		/datum/job/covenant/skirmcommando,\
 		/datum/job/covenant/brute_minor,\
