@@ -76,12 +76,12 @@
 	default_cultural_info = list(
 		TAG_CULTURE = CULTURE_HUMAN_VATGROWN
 	)
-	/datum/species/human/vatgrown/skills_from_age(age)
-		switch(age)
-			if(17 to 19)	. = -4
-			if(20 to 25)	. = 0
-			if(26 to 35)	. = 4
-			else			. = 8
+/datum/species/human/vatgrown/skills_from_age(age)
+	switch(age)
+		if(17 to 19)	. = -4
+		if(20 to 25)	. = 0
+		if(26 to 35)	. = 4
+		else			. = 8
 			
 
 /datum/species/human/tritonian
