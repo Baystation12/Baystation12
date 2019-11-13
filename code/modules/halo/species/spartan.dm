@@ -16,7 +16,7 @@
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	pain_mod = 0.40 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(-1,3)
-	slowdown = -1
+	slowdown = -0.75
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
 
