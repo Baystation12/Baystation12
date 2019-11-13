@@ -169,6 +169,7 @@
 		armour_state = SHIELD_IDLE
 		GLOB.processing_objects -= src
 		update_overlay("shield_overlay")
+		user.update_icons()
 
 /datum/armourspecials/shields/tryemp(severity)
 	switch(severity)
