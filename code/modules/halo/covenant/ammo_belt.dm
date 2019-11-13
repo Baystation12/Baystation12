@@ -13,7 +13,6 @@
 	can_hold = list(/obj/item/ammo_magazine,\
 		/obj/item/ammo_box,\
 		/obj/item/ammo_casing,\
-		/obj/item/weapon/grenade,\
 		/obj/item/weapon/melee/energy/elite_sword,\
 		/obj/item/clothing/gloves/shield_gauntlet)
 

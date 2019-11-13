@@ -2,6 +2,14 @@
 	title = "Spartan II"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/onispartan
+	alt_titles = list("Spartan II PO3" = /decl/hierarchy/outfit/onispartan/po3,\
+	"Spartan II PO2" = /decl/hierarchy/outfit/onispartan/po2,\
+	"Spartan II PO1" = /decl/hierarchy/outfit/onispartan/po1,\
+	"Spartan II CPO" = /decl/hierarchy/outfit/onispartan/cpo,\
+	"Spartan II SCPO" = /decl/hierarchy/outfit/onispartan/scpo,\
+	"Spartan II MCPO" = /decl/hierarchy/outfit/onispartan/mcpo,\
+	"Spartan II LJG" = /decl/hierarchy/outfit/onispartan/ljg,\
+	"Spartan II LT" = /decl/hierarchy/outfit/onispartan/lt)
 	total_positions = 1
 	spawn_positions = 1
 	account_allowed = 0
