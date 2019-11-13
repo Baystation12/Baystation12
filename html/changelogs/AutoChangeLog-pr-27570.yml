@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Different pen types (blue, red, multicoloured, black) now have different names. They will now appear as differently named items on the autolathe list."
