@@ -185,6 +185,7 @@
 	item_state = "marinemask"
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = HEAD|FACE
+	flags_inv = HIDEEARS|BLOCKHAIR
 
 /obj/item/clothing/suit/space/void/unsc
 	name = "\improper Salvage Suit"
