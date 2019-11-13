@@ -39,7 +39,7 @@
 	short_text = "Capture Insurrectionists for ONI interrogation"
 	explanation_text = "The Insurrection worsens every year. Put some on ice in ONI cryopods for later black site interrogation. Kill the rest"
 	var/points_per_capture = 50
-	var/points_per_kill = 25
+	var/points_per_kill = 10
 	var/list/minds_captured = list()
 	var/list/minds_killed = list()
 

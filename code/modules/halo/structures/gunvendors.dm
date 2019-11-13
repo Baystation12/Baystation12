@@ -243,7 +243,7 @@
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
 	/obj/item/ammo_magazine/a762_box_ap = 16,
-	/obj/item/ammo_magazine/spnkr = 16,
+	/obj/item/weapon/storage/box/spnkr = 8,
 	/obj/item/ammo_magazine/m127_saphe = 16,
 	/obj/item/ammo_magazine/m5 = 16,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,

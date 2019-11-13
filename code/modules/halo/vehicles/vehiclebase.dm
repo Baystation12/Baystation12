@@ -340,6 +340,8 @@
 		var/list/mobs = list()
 		for(var/mob/m in occupants)
 			mobs += m
+		if(!mobs)
+			return
 		mob_to_dam = pick(mobs)
 		if(!isnull(mob_to_dam))
 			mob_to_dam.bullet_act(P)
