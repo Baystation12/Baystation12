@@ -151,11 +151,12 @@
 	update_clothing_icon()	//so our overlays update
 
 /obj/item/clothing/accessory/toggleable/vest
-	name = "black vest"
+	name = "vest"
 	desc = "A slick suit vest."
 	icon_state = "det_vest"
 
 /obj/item/clothing/accessory/toggleable/vest/black
+	name = "black vest"
 	color = COLOR_GRAY15
 
 /obj/item/clothing/accessory/toggleable/tan_jacket
