@@ -165,7 +165,7 @@
 
 	var/msg = "[name] process hung at tick #[ticks]. Process was unresponsive for [(TimeOfGame - run_start) / 10] seconds and was restarted. Last task: [last_task]. Last Object Type: [lastObjType]"
 	log_debug(msg)
-	message_admins(msg)
+	message_admins(msg,1)
 
 #ifdef UNIT_TEST
 	to_world_log("## PROCESS HANG ##: [msg] | [tg_list2text(getContextData())]")
