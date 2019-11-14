@@ -10,7 +10,7 @@
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks
-	hardness = MATERIAL_FLEXIBLE
+	hardness = MATERIAL_FLEXIBLE + 10
 	brute_armor = 1
 	weight = 18
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood

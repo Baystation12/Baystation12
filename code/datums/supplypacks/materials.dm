@@ -47,6 +47,12 @@
 	cost = 20
 	containername = "plasteel sheets crate"
 
+/decl/hierarchy/supply_pack/materials/titanium50
+	name = "50 titanium sheets"
+	contains = list(/obj/item/stack/material/titanium/fifty)
+	cost = 20
+	containername = "titanium sheets crate"
+
 /decl/hierarchy/supply_pack/materials/ocp50
 	name = "50 osmium carbide plasteel sheets"
 	contains = list(/obj/item/stack/material/ocp/fifty)
@@ -65,6 +71,12 @@
 	contains = list(/obj/item/stack/material/plasteel/ten)
 	cost = 10
 	containername = "plasteel sheets crate"
+
+/decl/hierarchy/supply_pack/materials/titanium10
+	name = "10 titanium sheets"
+	contains = list(/obj/item/stack/material/titanium/ten)
+	cost = 20
+	containername = "titanium sheets crate"
 
 /decl/hierarchy/supply_pack/materials/ocp10
 	name = "10 osmium carbide plasteel sheets"
