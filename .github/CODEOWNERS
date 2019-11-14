@@ -1,3 +1,5 @@
+# By default developer team gets assigned
+* @Baystation12/Developers
 # Require reviews from Core team for changes to CI or infra stuff
 .github/ @Baystation12/Core
 .azure-pipelines.yml @Baystation12/Core
