@@ -190,7 +190,7 @@
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock")
 	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/br55,/obj/item/weapon_attachment/br55_stock_cheekrest,/obj/item/weapon_attachment/br55_bottom,/obj/item/weapon_attachment/br55_upper,/obj/item/weapon_attachment/sight/br55_scope)
 
-/obj/item/weapon/gun/projectile/br85/br55/update_icon()
+/obj/item/weapon/gun/projectile/br55/update_icon()
 	if(ammo_magazine)
 		icon_state = "BR55-Loaded-Base"
 	else
