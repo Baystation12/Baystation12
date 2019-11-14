@@ -111,3 +111,16 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		os.open_terminal(user)
+
+/obj/machinery/computer/modular/verb/emergency_shutdown()
+	set name = "Forced Shutdown"
+	set category = "Object"
+	set src in view(1)
+
+	if(!CanPhysicallyInteract(usr))
+		return
+
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os && os.on)
+		to_chat(usr, "You press a hard-reset button on \the [src].")
+		os.system_shutdown()
