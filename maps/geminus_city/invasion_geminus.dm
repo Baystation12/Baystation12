@@ -10,7 +10,7 @@
 
 #include "../UNSC_Halberd_Class/includes.dm"
 
-#include "../ONI_Prowler/includes.dm"
+//#include "../ONI_Prowler/includes.dm"
 
 #include "../SOE_Argentum/includes.dm"
 

@@ -39,7 +39,7 @@
 		/datum/job/covenant/brute_minor,\
 		/datum/job/covenant/brute_major,\
 		/datum/job/covenant/brute_captain,\
-		/datum/job/ONI_Spartan_II,\
+		/*/datum/job/ONI_Spartan_II,\*/
 		)
 
 	allowed_spawns = list(\
