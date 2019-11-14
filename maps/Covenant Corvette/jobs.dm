@@ -100,8 +100,8 @@
 
 /datum/job/covenant/skirmmurmillo
 	title = "T-Voan Murmillo"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo
 	access = list(240,250)
