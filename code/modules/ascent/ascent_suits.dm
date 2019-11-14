@@ -3,12 +3,12 @@
 	desc = "An articulated spacesuit helmet of mantid manufacture."
 	icon_state = "ascent_general"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
@@ -21,12 +21,12 @@
 	icon_state = "ascent_general"
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
 	species_restricted = list(SPECIES_MANTID_ALATE)
@@ -39,4 +39,4 @@
 		/obj/item/device/multitool/mantid,
 		/obj/item/stack/medical/resin,
 		/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent
-	) 
+	)

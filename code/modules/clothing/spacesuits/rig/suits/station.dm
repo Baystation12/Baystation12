@@ -38,12 +38,12 @@
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	online_slowdown = 3
@@ -92,12 +92,12 @@
 	desc = "A light rig for repairs and maintenance to the outside of habitats and vessels."
 	icon_state = "eva_rig"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_MINOR, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_MINOR,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 0
@@ -160,12 +160,12 @@
 	desc = "An advanced hardsuit that protects against hazardous, low pressure environments. Shines with a high polish. Appears compatible with the physiology of most species."
 	icon_state = "ce_rig"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 0
@@ -206,11 +206,12 @@
 	desc = "An Anomalous Material Interaction hardsuit, a cutting-edge NanoTrasen design, protects the wearer against the strangest energies the universe can throw at it."
 	icon_state = "science_rig"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_STRONG, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_STRONG,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 1
@@ -254,12 +255,12 @@
 	desc = "A durable suit designed for medical rescue in high risk areas."
 	icon_state = "medical_rig"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 1
@@ -318,11 +319,11 @@
 	icon_state = "hazard_rig"
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	online_slowdown = 1
@@ -366,7 +367,7 @@
 	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you're wearing nothing at all."
 	icon_state = "null_rig"
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED, 
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	online_slowdown = 0
