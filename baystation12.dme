@@ -2015,6 +2015,7 @@
 #include "code\modules\mob\living\carbon\carbon_defense.dm"
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
 #include "code\modules\mob\living\carbon\carbon_powers.dm"
+#include "code\modules\mob\living\carbon\damage_procs.dm"
 #include "code\modules\mob\living\carbon\give.dm"
 #include "code\modules\mob\living\carbon\hallucinations.dm"
 #include "code\modules\mob\living\carbon\life.dm"
