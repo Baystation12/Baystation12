@@ -122,6 +122,7 @@
 	force = 40
 	is_heavy = 1
 	armor_penetration = 35
+	accuracy = -3
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 
@@ -138,7 +139,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	caliber = "mauler"
 	max_ammo = 5
-	accuracy = -3
 
 /obj/item/ammo_casing/mauler
 	desc = "A mauler round casing."
