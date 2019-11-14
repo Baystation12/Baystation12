@@ -178,7 +178,7 @@
 	if (!killed)
 		var/msg = "[name] process was killed at tick #[ticks]."
 		log_debug(msg)
-		message_admins(msg)
+		message_admins(msg,1)
 		//finished()
 
 		// Allow inheritors to clean up if needed
