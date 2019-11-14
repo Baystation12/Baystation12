@@ -1,0 +1,5 @@
+author: "Higgin"
+delete-after: True
+changes: 
+  - tweak: "Readded different furniture/structure recipes to wood."
+  - tweak: "Added orderable titanium sheets to supply."
