@@ -1,0 +1,4 @@
+author: "Higgin"
+delete-after: True
+changes: 
+  - tweak: "Limits the range within which escaping cuffs/unbuckling yourself while cuffed is visible."
