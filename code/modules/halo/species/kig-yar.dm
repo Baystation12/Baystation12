@@ -90,7 +90,7 @@
 
 	pain_mod = 0.8
 	brute_mod = 1.2
-	slowdown = -2
+	slowdown = -1.5
 
 	total_health = 200
 	pixel_offset_x = -4
