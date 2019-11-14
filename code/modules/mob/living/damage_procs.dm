@@ -1,4 +1,3 @@
-
 /*
 	apply_damage() args
 	damage - How much damage to take
@@ -37,9 +36,17 @@
 		if(ELECTROCUTE)
 			electrocute_act(damage, used_weapon, 1, def_zone)
 		if(IRRADIATE)
-			radiation += damage
+			apply_radiation(damage)
 
 	updatehealth()
+	return 1
+
+
+/mob/living/proc/apply_radiation(var/damage = 0)
+	if(!damage)
+		return 0
+
+	radiation += damage
 	return 1
 
 
