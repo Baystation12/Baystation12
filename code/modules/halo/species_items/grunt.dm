@@ -183,8 +183,8 @@
 
 	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 60, bio = 0, rad = 0)
 
-	totalshields = 100
-	specials = list(/datum/armourspecials/shields/unggoy)
+	//totalshields = 100
+	//specials = list(/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	name = "Unggoy Combat Harness (Spec-Ops)"
