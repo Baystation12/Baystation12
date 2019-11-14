@@ -1106,8 +1106,15 @@
 		if(alert(usr, "Send [key_name(M)] back to Lobby?", "Message", "Yes", "No") != "Yes")
 			return
 
-		log_admin("[key_name(usr)] has sent [key_name(M)] back to the Lobby.")
-		message_admins("[key_name(usr)] has sent [key_name(M)] back to the Lobby.")
+		if(!isobserver(M))
+			to_chat(usr, "<span class='notice'>You can only send ghost players back to the Lobby.</span>")
+			return
+
+		if(!M.client)
+			to_chat(usr, "<span class='warning'>[M] doesn't seem to have an active client.</span>")
+			return
+
+		log_and_message_admins("has sent [key_name(M)] back to the Lobby.")
 
 		var/mob/new_player/NP = new()
 		NP.ckey = M.ckey
