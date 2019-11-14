@@ -930,13 +930,13 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 
 //URFC
 
-/obj/item/clothing/head/helmet/urfc/pantascmdo
+/obj/item/clothing/head/helmet/soe/pantascmdo
 	name = "Eridanus Order's Helmet"
 
 	item_state = "pantascmdo_worn"
 	icon_state = "pantascmdo_helmet"
 
-/obj/item/clothing/suit/armor/special/urfc/pantascmdo
+/obj/item/clothing/suit/armor/special/soe/pantascmdo
 	name = "Eridanus Order's Armour"
 
 	item_state = "pantascmdo_armour_worn"
@@ -982,14 +982,14 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 		icon_state = "pantasAK47_unloaded"
 
 /obj/item/weapon/storage/box/large/donator/pantas_urfc
-	startswith = list(/obj/item/clothing/head/helmet/urfc/pantascmdo,
-					/obj/item/clothing/suit/armor/special/urfc/pantascmdo,
+	startswith = list(/obj/item/clothing/head/helmet/soe/pantascmdo,
+					/obj/item/clothing/suit/armor/special/soe/pantascmdo,
 					/obj/item/weapon/storage/backpack/cmdo/pantascmdo,
 					/obj/item/weapon/material/machete/pantascmdo,
 					/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
 					)
-	can_hold = list(/obj/item/clothing/head/helmet/urfc/pantascmdo,
-					/obj/item/clothing/suit/armor/special/urfc/pantascmdo,
+	can_hold = list(/obj/item/clothing/head/helmet/soe/pantascmdo,
+					/obj/item/clothing/suit/armor/special/soe/pantascmdo,
 					/obj/item/weapon/storage/backpack/cmdo/pantascmdo,
 					/obj/item/weapon/material/machete/pantascmdo,
 					/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
@@ -997,8 +997,8 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 
 /decl/hierarchy/outfit/pantas_urfc
 	name = "pantas - urfc"
-	head = /obj/item/clothing/head/helmet/urfc/pantascmdo
-	suit = /obj/item/clothing/suit/armor/special/urfc/pantascmdo
+	head = /obj/item/clothing/head/helmet/soe/pantascmdo
+	suit = /obj/item/clothing/suit/armor/special/soe/pantascmdo
 	back = /obj/item/weapon/storage/backpack/cmdo/pantascmdo
 	l_hand = /obj/item/weapon/material/machete/pantascmdo
 	r_hand = /obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
