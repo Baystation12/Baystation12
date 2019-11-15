@@ -15,6 +15,7 @@
 /obj/item/weapon/storage/box/large/donator
 	name = "Snowflake Crate"
 	desc = "Contains gear for those special snowflakes."
+	w_class = ITEM_SIZE_HUGE
 	max_storage_space = 46
 	max_w_class = ITEM_SIZE_GARGANTUAN
 	startswith = list()
