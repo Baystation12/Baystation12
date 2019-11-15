@@ -702,14 +702,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 #define ARMOR_DAMAGED 0
 
 /obj/item/proc/degrade_armor_thickness(var/damage,var/damage_type)
-	var/current_thickness_percentile = (armor_thickness / initial(armor_thickness))*100
-	damage *= (current_thickness_percentile/100)/10 //The lower the thickness of the armor, the harder it gets to damage it further. Divided by 10 to keep loss-per-shot sane.
+	damage /= 10 //The lower the thickness of the armor, the harder it gets to damage it further. Divided by 10 to keep loss-per-shot sane.
 	var/thickness_dam_cap = (initial(armor_thickness)/10)
 	if(damage_type in armor_thickness_modifiers)
 		thickness_dam_cap /= armor_thickness_modifiers[damage_type]
 	if(damage > thickness_dam_cap)
 		damage = thickness_dam_cap
-	var/new_thickness = (armor_thickness - damage)
+	var/new_thickness = (armor_thickness - min(damage,thickness_dam_cap))
 	if(new_thickness < 0)
 		armor_thickness = 0
 		update_damage_description()
