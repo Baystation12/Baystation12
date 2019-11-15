@@ -58,7 +58,7 @@
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
-	totalshields = 150
+	totalshields = 125
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 	var/list/available_abilities = list()
 
