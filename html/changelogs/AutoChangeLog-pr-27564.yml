@@ -1,0 +1,4 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - bugfix: "Fixed Roboticist JumpSkirt appearing invisible"
