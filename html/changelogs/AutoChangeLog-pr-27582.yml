@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Engine emitter control button (and other buttons of this type) no longer go invisible for a couple of seconds when clicked."
