@@ -1420,7 +1420,7 @@
 	maximum_temperature = INFINITY
 	minimum_temperature = 0
 	mix_message = "The solution thickens into black beverage."
-	
+
 /datum/chemical_reaction/hot_coco
 	name = "Hot Coco"
 	result = /datum/reagent/drink/hot_coco
@@ -2531,3 +2531,10 @@
 	minimum_temperature = 150 CELSIUS
 	maximum_temperature = 200 CELSIUS
 	result_amount = 3
+
+
+/datum/chemical_reaction/immunobooster
+	result = /datum/reagent/immunobooster
+	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/dylovene = 1)
+	minimum_temperature = 40 CELSIUS
+	result_amount = 2
