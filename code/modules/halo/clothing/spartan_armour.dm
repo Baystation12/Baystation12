@@ -21,7 +21,7 @@
 	siemens_coefficient = 1
 	armor = list(melee = 60,bullet = 75,laser = 50,energy = 55,bomb = 60,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
-	armor_thickness = 25
+	armor_thickness = 30
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -58,7 +58,7 @@
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
-	totalshields = 125
+	totalshields = 150
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 	var/list/available_abilities = list()
 
