@@ -106,7 +106,7 @@
 	if(isnull(fire_sound))
 		return
 
-	playsound(loc_sound_origin, fire_sound, 50, 1, 5, 5,1)
+	playsound(loc_sound_origin, fire_sound, 25, 1, 5, 5,1)
 
 /obj/machinery/overmap_weapon_console/proc/can_fire(var/atom/target,var/mob/living/user,var/click_params)
 	scan_linked_devices()
