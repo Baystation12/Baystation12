@@ -101,3 +101,7 @@
 
 /obj/item/usedcryobag/covenant
 	icon = 'code/modules/halo/covenant/medical.dmi'
+
+/obj/machinery/chem_master/covenant
+	icon = 'code/modules/halo/covenant/medical.dmi'
+	icon_state = "mixer0"
