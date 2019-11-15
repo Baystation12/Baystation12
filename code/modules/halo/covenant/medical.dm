@@ -1,3 +1,4 @@
+//Medkits
 
 /obj/item/weapon/storage/firstaid/erk/cov
 	desc = "A hull breach kit for Covenant damage control teams. It appears to be bulkier than general medical kits."
@@ -13,6 +14,9 @@
 /obj/item/weapon/storage/firstaid/combat/unsc/cov
 	icon = 'code/modules/halo/covenant/medical.dmi'
 	icon_state = "purplefirstaid"
+
+
+//Sleepers & Body Scanners
 
 /obj/machinery/sleeper/covenant
 	icon = 'code/modules/halo/covenant/medical.dmi'
@@ -34,6 +38,9 @@
 		src.connected = locate(/obj/machinery/bodyscanner/covenant, get_step(src, WEST))
 		return
 	return
+
+
+//Roller Beds
 
 /obj/structure/bed/roller/covenant
 	icon = 'code/modules/halo/covenant/medical.dmi'
@@ -69,3 +76,28 @@
 		var/obj/structure/bed/roller/covenant/R = new /obj/structure/bed/roller/covenant(user.loc)
 		R.add_fingerprint(user)
 		qdel(src)
+
+//Cryo(Stasis)Bags
+
+/obj/item/bodybag/cryobag/covenant
+	icon = 'code/modules/halo/covenant/medical.dmi'
+	icon_state = "bodybag_folded"
+
+/obj/item/bodybag/cryobag/covenant/attack_self(mob/user)
+	var/obj/structure/closet/body_bag/cryobag/covenant/R = new /obj/structure/closet/body_bag/cryobag/covenant(user.loc)
+	R.add_fingerprint(user)
+	qdel(src)
+
+/obj/structure/closet/body_bag/cryobag/covenant
+	icon = 'code/modules/halo/covenant/medical.dmi'
+	item_path = /obj/item/bodybag/cryobag/covenant
+
+/obj/structure/closet/body_bag/cryobag/covenant/Entered(atom/movable/AM)
+	if(ishuman(AM))
+		var/mob/living/carbon/human/H = AM
+		H.in_stasis = 1
+		src.used = 1
+	..()
+
+/obj/item/usedcryobag/covenant
+	icon = 'code/modules/halo/covenant/medical.dmi'
