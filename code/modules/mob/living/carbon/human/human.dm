@@ -121,18 +121,18 @@
 			f_loss = 60
 
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage += 30
-				ear_deaf += 120
+				ear_damage = min(ear_damage + 30,100)
+				ear_deaf = min(ear_damage + 120,200)
 			if (prob(70))
-				confused += 10
+				confused = min(confused + 10,50)
 
 		if(3.0)
 			b_loss = 30
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage += 15
-				ear_deaf += 60
+				ear_damage = min(ear_damage + 15,100)
+				ear_deaf = min(ear_damage + 60,200)
 			if (prob(50))
-				confused += 10
+				confused = min(confused + 10,50)
 
 	// factor in armour / degrade armor
 	var/protection = blocked_mult(getarmor(null, "bomb"))
