@@ -138,12 +138,6 @@
 	tank = null
 	return ..()
 
-/obj/structure/closet/body_bag/cryobag/open()
-	. = ..()
-	if(used)
-		new/obj/item/usedcryobag(src.loc)
-		qdel(src)
-
 /obj/structure/closet/body_bag/cryobag/Entered(atom/movable/AM)
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
