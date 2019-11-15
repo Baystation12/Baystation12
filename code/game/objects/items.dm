@@ -78,6 +78,7 @@
 	// Species-specific sprite sheets for inventory sprites
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
+	var/dam_desc = ""
 
 /obj/item/New()
 	..()
@@ -171,7 +172,8 @@
 			size = "bulky"
 		if(ITEM_SIZE_HUGE + 1 to INFINITY)
 			size = "huge"
-	return ..(user, distance, "", "It is a [size] item.")
+	. = ..(user, distance, "", "It is a [size] item.")
+	to_chat(user,dam_desc) 
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -731,7 +733,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		desc_addition_to_apply = "<span class = 'warning'> It is [damage_type == BURN ? "mostly melted" : "scarred and shattered"].</span>"
 	if(armor_thickness <= 0)
 		desc_addition_to_apply = "<span class = 'warning'> It has [damage_type == BURN ? "melted away" : "become scarred and deformed"].</span>"
-	desc = initial(desc) + desc_addition_to_apply
+	dam_desc = desc_addition_to_apply
 
 /obj/item/proc/can_use_when_prone()
 	return (w_class <= ITEM_SIZE_NORMAL)
