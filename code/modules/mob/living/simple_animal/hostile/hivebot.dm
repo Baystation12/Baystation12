@@ -12,7 +12,7 @@
 	melee_damage_flags = DAM_SHARP|DAM_EDGE
 	attacktext = "clawed"
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	projectiletype = /obj/item/projectile/bullet/pistol/holdout/hivebot
+	projectiletype = /obj/item/projectile/beam/smalllaser
 	faction = "hivebot"
 	min_gas = null
 	max_gas = null
@@ -33,6 +33,7 @@
 /mob/living/simple_animal/hostile/hivebot/range
 	desc = "A junky looking robot with four spiky legs. It's equipped with some kind of small-bore gun."
 	ranged = 1
+	speed = 7
 
 /mob/living/simple_animal/hostile/hivebot/rapid
 	ranged = 1
@@ -117,9 +118,6 @@ Teleporter beacon, and its subtypes
 /*
 Special projectiles
 */
-/obj/item/projectile/bullet/pistol/holdout/hivebot
-	damage = 20
-
 /obj/item/projectile/bullet/gyro/megabot
 	name = "microrocket"
 	gyro_light_impact = 1
