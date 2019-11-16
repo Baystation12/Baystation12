@@ -1,4 +1,3 @@
-
 /turf/simulated/floor/exoplanet
 	name = "space land"
 	icon = 'icons/turf/desert.dmi'
@@ -121,9 +120,9 @@
 	dirt_color = "#e3e7e8"
 	footstep_type = /decl/footsteps/snow
 
-/turf/simulated/floor/exoplanet/snow/New()
+/turf/simulated/floor/exoplanet/snow/Initialize()
+	. = ..()
 	icon_state = pick("snow[rand(1,12)]","snow0")
-	..()
 
 /turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	melt()
@@ -173,9 +172,9 @@
 	dirt_color = "#ae9e66"
 	footstep_type = /decl/footsteps/sand
 
-/turf/simulated/floor/exoplanet/desert/New()
+/turf/simulated/floor/exoplanet/desert/Initialize()
+	. = ..()
 	icon_state = "desert[rand(0,5)]"
-	..()
 
 /turf/simulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
