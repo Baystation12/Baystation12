@@ -377,6 +377,58 @@
 	head = /obj/item/clothing/head/helmet/odst/donator/gulag
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/gulag
 
+
+///////Jul\\\\\\\
+
+//Ship/Oni Crew
+
+
+/obj/item/clothing/head/dress/Jul
+	name = "UNSC Officer Dress Cap"
+	item_state = "Jul Jul Cap_worn"
+	icon_state = "Jul Jul Cap_obj"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	desc = "A formal cap worn with the UNSC Dress Uniform."
+
+/obj/item/clothing/under/mildress/Jul
+	name = "UNSC Officer Dress Uniform"
+	item_state = "Jul Jul Dress"
+	icon_state = "Jul Jul Dress_obj"
+	worn_state = "Jul Jul Dress"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	desc = "A presentable dress uniform worn by UNSC Officers."
+
+/obj/item/clothing/shoes/black/Jul
+	name = "UNSC Dress Shoes"
+	item_state = "Jul Jul Shoes_worn"
+	icon_state = "Jul Jul Shoes_obj"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+
+decl/hierarchy/outfit/Jul
+	name = "karmac - officer"
+	uniform = /obj/item/clothing/under/mildress/Jul
+	shoes = /obj/item/clothing/shoes/black/Jul
+	head = /obj/item/clothing/head/dress/Jul
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+
+
+/obj/item/weapon/storage/box/large/donator/Jul
+	startswith = list(/obj/item/clothing/head/dress/Jul,
+					/obj/item/clothing/shoes/black/Jul,
+					/obj/item/clothing/under/mildress/Jul,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
+					)
+	can_hold = list(/obj/item/clothing/head/dress/Jul,
+					/obj/item/clothing/shoes/black/Jul,
+					/obj/item/clothing/under/mildress/Jul,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
+					)
+
+
+
 ////////karmac\\\\\\\
 
 //Marine
