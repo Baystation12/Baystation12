@@ -24,6 +24,7 @@
 	metabolism_mod = 1.25 //Faster metabolism
 	breath_pressure = 14.5 //Better lungs!
 	darksight = 4 //Better night vision!
+	explosion_affect_mod = 0.5
 
 	//Spartans have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes
