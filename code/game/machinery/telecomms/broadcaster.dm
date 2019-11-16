@@ -357,7 +357,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/rank_text = ""
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		if(freq != halo_frequencies.civ_freq)
+		if((job != "Unknown" || job != "No id") && freq != halo_frequencies.civ_freq && freq != halo_frequencies.all_frequencies["EBAND"])
 			rank_text = "\[[job]\]"
 		var/part_a = "<span class='[halo_frequency_span_class(display_freq)]'>\icon[radio]<b>\[[freq_text]\][rank_text][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
