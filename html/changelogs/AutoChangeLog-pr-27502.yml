@@ -1,0 +1,4 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - rscadd: "Improved a bit Vox hardsuit, now you can store more useful stuff in hardsuit storage slot and use claws attack through now-insulated hardsuit gloves."
