@@ -2,7 +2,6 @@
 	var/name = "unknown"
 	var/effect = EFFECT_TOUCH
 	var/effectrange = 4
-	var/trigger = TRIGGER_TOUCH
 	var/atom/holder
 	var/activated = 0
 	var/chargelevel = 0
@@ -10,11 +9,14 @@
 	var/artifact_id = ""
 	var/effect_type = 0
 
+	var/datum/artifact_trigger/trigger
+
 /datum/artifact_effect/New(var/atom/location)
 	..()
 	holder = location
 	effect = rand(0, MAX_EFFECT)
-	trigger = rand(0, MAX_TRIGGER)
+	var/triggertype = pick(subtypesof(/datum/artifact_trigger))
+	trigger = new triggertype
 
 	//this will be replaced by the excavation code later, but it's here just in case
 	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
@@ -34,6 +36,10 @@
 			chargelevelmax = rand(20, 120)
 			effectrange = rand(20, 200)
 
+/datum/artifact_effect/Destroy()
+	QDEL_NULL(trigger)
+	. = ..()
+	
 /datum/artifact_effect/proc/ToggleActivate(var/reveal_toggle = 1)
 	//so that other stuff happens first
 	spawn(0)
@@ -105,15 +111,7 @@
 
 	. += "</b>"
 
-	switch(trigger)
-		if(TRIGGER_TOUCH, TRIGGER_WATER, TRIGGER_ACID, TRIGGER_VOLATILE, TRIGGER_TOXIN)
-			. += " Activation index involves <b>physical interaction</b> with artifact surface."
-		if(TRIGGER_FORCE, TRIGGER_ENERGY, TRIGGER_HEAT, TRIGGER_COLD)
-			. += " Activation index involves <b>energetic interaction</b> with artifact surface."
-		if(TRIGGER_PHORON, TRIGGER_OXY, TRIGGER_CO2, TRIGGER_NITRO)
-			. += " Activation index involves <b>precise local atmospheric conditions</b>."
-		else
-			. += " Unable to determine any data about activation trigger."
+	. += " Activation index involves [trigger]."
 
 //returns 0..1, with 1 being no protection and 0 being fully protected
 /proc/GetAnomalySusceptibility(var/mob/living/carbon/human/H)
