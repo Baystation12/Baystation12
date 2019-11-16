@@ -1,0 +1,4 @@
+author: "Technetium"
+delete-after: True
+changes: 
+  - rscadd: "Wound infection speed is now twice as fast at 50-70% immunity as it was before, and 10 times as fast at 0% immunity."
