@@ -719,7 +719,7 @@
 	name = "Gentle 2"
 	icon_state = "hair_gentle2"
 	flags = HAIR_TIEABLE
-	
+
 /datum/sprite_accessory/hair/gentle2long
 	name = "Gentle 2 Long"
 	icon_state = "hair_gentle2long"
@@ -788,11 +788,11 @@
 /datum/sprite_accessory/hair/booster/fingerwave
 	name = "Cat Biomods (Fingerwave)"
 	icon_state = "hair_fingerwave"
-	
+
 /datum/sprite_accessory/hair/booster/lowbunears
 	name = "Cat Biomods (Low bun)"
 	icon_state = "hair_lowbun"
-	
+
 /datum/sprite_accessory/hair/booster/ramhorns
 	name = "Horn Biomods (Ram Horns)"
 	icon_state = "ram_horns"
@@ -816,3 +816,11 @@
 /datum/sprite_accessory/hair/booster/short_horns
 	name = "Horn Biomods (Short)"
 	icon_state = "soghun_horns"
+
+/datum/sprite_accessory/hair/booster/bun_bun
+	name = "Rabbit Biomods (Low bun)"
+	icon_state = "hair_lowbunbun"
+
+/datum/sprite_accessory/hair/booster/bunbangs
+	name = "Rabbit Biomods (Bangs)"
+	icon_state = "hair_bunbangs"
