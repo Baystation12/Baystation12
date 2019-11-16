@@ -125,7 +125,7 @@
 		"Your chilly flesh stands out in goosebumps."
 		)
 
-	var/explosion_affect_mod = 1.0 //Modifier on how much a species can resist explosive sideeffects
+	var/explosion_effect_mod = 1.0 //Modifier on how much a species can resist explosive sideeffects
 
 	// HUD data vars.
 	var/datum/hud_data/hud

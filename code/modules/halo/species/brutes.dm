@@ -23,7 +23,7 @@
 	brute_mod = 0.7 //receives 70% of brute damage
 	pain_mod = 0.25 //receives 25% pain damage.
 	burn_mod = 0.7  // receives 70% of burn damage
-	explosion_affect_mod = 0.5
+	explosion_effect_mod = 0.5
 	default_faction = "Covenant"
 	pixel_offset_x = -12
 	item_icon_offsets = list(5,4)
