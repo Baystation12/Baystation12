@@ -92,9 +92,9 @@
 	spawn_positions = 32
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine
 	selection_color = "#0A0A95"
-	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
-	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
-	"EVA Combat Marine","Marine Combat Technician")
+	alt_titles = list("Machine Gunner Marine" = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmachinegunner,"Marine Combat Medic" = /decl/hierarchy/outfit/job/UNSC_ship/bertelscombatmedic,"Assault Recon Marine",\
+	"Designated Marksman Marine","Scout Sniper Marine" = /decl/hierarchy/outfit/job/UNSC_ship/bertelsscoutsniper,"Anti-Tank Missile Gunner Marine",\
+	"EVA Combat Marine","Marine Combat Technician" = /decl/hierarchy/outfit/job/UNSC_ship/bertelscombattechie)
 	access = list(access_unsc,144,192)
 	spawnpoint_override = "UNSC Base Spawns"
 	open_slot_on_death = 1

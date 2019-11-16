@@ -107,6 +107,7 @@
 	name = "UNSC Marine"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
+	mask = obj/item/clothing/mask/marine
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
@@ -114,7 +115,83 @@
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/unsc
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsevamarine
+	name = "EVA Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	mask = /obj/item/clothing/mask/breath
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/magboots/eva/marine
+	head = /obj/item/clothing/head/helmet/eva/marine
+	suit = /obj/item/clothing/suit/space/void/unsc
+	belt = /obj/item/weapon/tank/emergency/oxygen/double
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelscombatmedic
+	name = "Marine Combat Medic"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine/medic
+	suit = /obj/item/clothing/suit/storage/marine/medic
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmachinegunner
+	name = "Machine Gunner Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine/medic
+	suit = /obj/item/clothing/suit/storage/marine/medic
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelscombattechie
+	name = "Marine Combat Technician"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine/medic
+	suit = /obj/item/clothing/suit/storage/marine/medic
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsscoutsniper
+	name = "Scout Sniper Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine/medic
+	suit = /obj/item/clothing/suit/storage/marine/medic
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -130,10 +207,25 @@
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/unsc
-	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
+	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/offier/o1, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_so
+	name = "Marine Squad Leader"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	mask = obj/item/clothing/mask/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
 
 //ODST Outfits
 

@@ -63,7 +63,7 @@
 	icon_state = "helmet_b"
 	body_parts_covered = HEAD|EYES
 
-/obj/item/clothing/head/helmet/marine/medio/brown
+/obj/item/clothing/head/helmet/marine/medic/brown
 	name = "Brown Camo CH251 Helmet"
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
@@ -72,7 +72,7 @@
 	icon_state = "helmet medic-b_obj"
 	body_parts_covered = HEAD|EYES
 
-/obj/item/clothing/head/helmet/marine/medio/brownvisor
+/obj/item/clothing/head/helmet/marine/medic/brownvisor
 	name = "Brown Camo CH251 Helmet"
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
