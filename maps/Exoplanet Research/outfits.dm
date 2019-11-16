@@ -62,7 +62,7 @@
 	shoes = /obj/item/clothing/shoes/oni_guard
 	belt = /obj/item/weapon/storage/belt/marine_ammo/oni
 	l_pocket = /obj/item/clothing/accessory/badge/onib
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o1, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
