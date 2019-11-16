@@ -138,7 +138,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 1
+	burst_delay = 0.5
 	fire_delay = 9
 	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
@@ -177,7 +177,7 @@
 	load_method = MAGAZINE
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 1
+	burst_delay = 0.5
 	fire_delay = 9
 	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
