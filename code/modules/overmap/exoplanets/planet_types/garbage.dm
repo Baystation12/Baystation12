@@ -91,7 +91,15 @@
 	return land_type
 
 /area/exoplanet/garbage
-	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
+	ambience = list(
+		'sound/effects/wind/desert0.ogg',
+		'sound/effects/wind/desert1.ogg',
+		'sound/effects/wind/desert2.ogg',
+		'sound/effects/wind/desert3.ogg',
+		'sound/ambience/ominous1.ogg',
+		'sound/ambience/ominous2.ogg',
+		'sound/ambience/ominous3.ogg'
+	)
 	base_turf = /turf/simulated/floor/exoplanet/desert
 
 /turf/simulated/floor/exoplanet/concrete
