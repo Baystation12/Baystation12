@@ -83,8 +83,8 @@
 
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
 	..()
-	if(planetary_area)
-		T.mined_turf = prob(90) ? planetary_area.base_turf : /turf/simulated/floor/exoplanet/lava
+	if(use_area)
+		T.mined_turf = prob(90) ? use_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava
 	name = "lava"
