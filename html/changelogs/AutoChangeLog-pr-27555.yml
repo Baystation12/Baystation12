@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Geiger counter thresholds have been tweaked upwards, 'high' is now for rads that will breach most non-radproof suits, 'very high' is dangerous even to 'radproof' suits."
