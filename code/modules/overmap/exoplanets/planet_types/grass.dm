@@ -66,32 +66,3 @@
 	flora_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
-
-/turf/simulated/floor/exoplanet/grass
-	name = "grass"
-	icon = 'icons/turf/jungle.dmi'
-	icon_state = "greygrass"
-	color = "#799c4b"
-	footstep_type = /decl/footsteps/grass
-
-/turf/simulated/floor/exoplanet/grass/Initialize()
-	. = ..()
-	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E) && E.grass_color)
-			color = E.grass_color
-	if(!resources)
-		resources = list()
-	if(prob(70))
-		resources[MATERIAL_GRAPHITE] = rand(3,5)
-	if(prob(5))
-		resources[MATERIAL_URANIUM] = rand(1,3)
-	if(prob(2))
-		resources[MATERIAL_DIAMOND] = 1
-
-/turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
-		SetName("scorched ground")
-		icon_state = "scorched"
-		footstep_type = /decl/footsteps/asteroid
-		color = null

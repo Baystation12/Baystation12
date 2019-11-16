@@ -102,11 +102,11 @@
 	)
 	base_turf = /turf/simulated/floor/exoplanet/desert
 
-/turf/simulated/floor/exoplanet/concrete
-	name = "concrete"
-	desc = "Stone-like artificial material."
-	icon = 'icons/turf/flooring/misc.dmi'
-	icon_state = "concrete"
+/turf/simulated/floor/exoplanet/concrete/reinforced
+	name = "reinforced concrete"
+	desc = "Stone-like artificial material. It has been reinforced with an unknown compound"
+	icon_state = "hexacrete"
+
 
 /turf/simulated/floor/exoplanet/concrete/on_update_icon()
 	return
