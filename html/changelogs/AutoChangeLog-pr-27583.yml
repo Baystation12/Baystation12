@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Stationary consoles now have a 'Forced Shutdown' verb, just like other kinds of modular computer."
