@@ -140,7 +140,6 @@
 /decl/hierarchy/outfit/job/bertelsfacil_ODST
 	name = "Bertels ODST Rifleman"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -156,7 +155,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTSharpshooter
 	name = "Bertels ODST Sharpshooter"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -172,7 +170,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTMedic
 	name = "Bertels ODST Field Medic"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -188,7 +185,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTCQC
 	name = "Bertels ODST CQC Specialist"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -204,7 +200,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTengineer
 	name = "Bertels ODST Combat Engineer"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -220,7 +215,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTRifleman
 	name = "Bertels ODST corporal"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -236,7 +230,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTRifleman2
 	name = "Bertels ODST sarge"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -252,7 +245,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTstaffsergeant
 	name = "Bertels ODST staffsarge"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -268,7 +260,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTgunnerysergeant
 	name = "Bertels ODST gunnysarge"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -284,7 +275,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTFireteamLead
 	name = "Bertels ODST Fireteam Leader"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -300,7 +290,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant
 	name = "Bertels ODST Second Lieutenant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -316,7 +305,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTfirstlieutenant
 	name = "Bertels ODST First Lieutenant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -333,7 +321,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTcaptain
 	name = "Bertels ODST odstCaptain"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -349,7 +336,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTmajor
 	name = "Bertels ODST Major"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -365,7 +351,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTltcolonel
 	name = "Bertels ODST LtColonel"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -381,7 +366,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTcolonel
 	name = "Bertels ODST Colonel"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
