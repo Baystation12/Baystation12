@@ -408,7 +408,7 @@
 	icon_override = MARINE_OVERRIDE
 
 decl/hierarchy/outfit/Jul
-	name = "karmac - officer"
+	name = "Jul Waters - officer"
 	uniform = /obj/item/clothing/under/mildress/Jul
 	shoes = /obj/item/clothing/shoes/black/Jul
 	head = /obj/item/clothing/head/dress/Jul
