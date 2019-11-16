@@ -23,8 +23,8 @@
 /datum/game_mode/outer_colonies/reclamation/setup_objectives()
 	. = ..()
 
-	var/datum/objective/capture_innies/obj = locate() in GLOB.UNSC.all_objectives
-	obj.fake = 1
+/*	var/datum/objective/capture_innies/obj = locate() in GLOB.UNSC.all_objectives
+	obj.fake = 1*/
 
 	var/datum/objective/colony_capture/unsc/obj2 = locate() in GLOB.UNSC.all_objectives
 	obj2.fake = 1
