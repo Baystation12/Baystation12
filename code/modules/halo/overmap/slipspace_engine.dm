@@ -241,6 +241,7 @@
 	core_to_spawn = /obj/payload/slipspace_core/cov
 	precise_jump = 1
 
+/*
 /obj/machinery/slipspace_engine/covenant/allow_user_operate(var/mob/user)
 	var/mob/living/carbon/human/h = user
 	if(istype(h) && h.species.type in COVENANT_SPECIES_AND_MOBS)
@@ -248,6 +249,7 @@
 	if(user && user.type in COVENANT_SPECIES_AND_MOBS)
 		return 1
 	return 0
+*/
 
 /obj/machinery/slipspace_engine/human
 	name = "\improper Shaw-Fujikawa Translight Engine"

@@ -9,7 +9,7 @@
 	species_restricted = list("Tvaoan Kig-Yar")
 	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
 	armor_thickness_modifiers = list()
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/suit/armor/special/skirmisher/major
 	name = "T'Voan Major harness"

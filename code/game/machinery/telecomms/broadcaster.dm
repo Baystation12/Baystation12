@@ -354,9 +354,12 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/freq_text = get_frequency_name(display_freq)
 
 		var/part_b_extra = ""
+		var/rank_text = ""
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_a = "<span class='[halo_frequency_span_class(display_freq)]'>\icon[radio]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
+		if((job != "Unknown" || job != "No id") && freq != halo_frequencies.civ_freq && freq != halo_frequencies.all_frequencies["EBAND"])
+			rank_text = "\[[job]\]"
+		var/part_a = "<span class='[halo_frequency_span_class(display_freq)]'>\icon[radio]<b>\[[freq_text]\][rank_text][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE

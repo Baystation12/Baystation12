@@ -17,12 +17,14 @@
 	pain_mod = 0.40 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(-1,3)
 	slowdown = -0.75
+	additional_langs = list("Sign Language")
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
 
 	metabolism_mod = 1.25 //Faster metabolism
 	breath_pressure = 14.5 //Better lungs!
 	darksight = 4 //Better night vision!
+	explosion_effect_mod = 0.5
 
 	//Spartans have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes
@@ -36,7 +38,7 @@
 	cold_level_2 = 190 //-83C
 	cold_level_3 = 114 //-159C
 
-	//As of 2018-03-24 we're in 2525 - 2526, thus Spartans IIs were just augmented
+	//As of 2018-03-24 we're in 2525 - 2526, thus Spartans IIs were just augmented - updated as of server timeline moving to 2531
 	min_age = 19
 	max_age = 20
 

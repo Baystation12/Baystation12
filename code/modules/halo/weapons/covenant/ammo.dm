@@ -166,7 +166,6 @@
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
 	damage = 45
-	accuracy = 2
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
@@ -208,7 +207,6 @@
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
 	damage = 30
-	accuracy = 2
 	shards_to_explode = 3
 	shard_name = "Rifle Needle shrapnel"
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle

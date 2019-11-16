@@ -15,6 +15,7 @@
 	reload_sound = 'code/modules/halo/sounds/cov_carbine_reload.ogg'
 	one_hand_penalty = -1
 	irradiate_non_cov = 10
+	accuracy = 2
 	wielded_item_state = "carbine-wielded"
 
 	item_icons = list(
@@ -109,6 +110,7 @@
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_needlerifle_reload.ogg'
 	one_hand_penalty = -1
+	accuracy = 2
 	wielded_item_state = "needlerifle-wielded"
 
 	item_icons = list(

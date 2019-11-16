@@ -86,7 +86,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS
-	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 20, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 50, laser = 45, energy = 45, bomb = 40, bio = 5, rad = 5)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS

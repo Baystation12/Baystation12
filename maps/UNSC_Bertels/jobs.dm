@@ -92,9 +92,9 @@
 	spawn_positions = 32
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine
 	selection_color = "#0A0A95"
-	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
-	"Designated Marksman Marine","Scout Sniper Marine","Anti-Tank Missile Gunner Marine",\
-	"EVA Combat Marine","Marine Combat Technician")
+	alt_titles = list("Machine Gunner Marine" = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmachinegunner,"Marine Combat Medic" = /decl/hierarchy/outfit/job/UNSC_ship/bertelscombatmedic,"Assault Recon Marine",\
+	"Designated Marksman Marine","Scout Sniper Marine" = /decl/hierarchy/outfit/job/UNSC_ship/bertelsscoutsniper,"Anti-Tank Missile Gunner Marine",\
+	"EVA Combat Marine","Marine Combat Technician" = /decl/hierarchy/outfit/job/UNSC_ship/bertelscombattechie)
 	access = list(access_unsc,144,192)
 	spawnpoint_override = "UNSC Base Spawns"
 	open_slot_on_death = 1
@@ -104,14 +104,30 @@
 	economic_modifier = 0.5
 	lace_access = TRUE
 
-/datum/job/unsc_ship_marineplatoon
-	title = "UNSC Marine Platoon Leader"
+/datum/job/unsc_ship_marinesquad
+	title = "UNSC Marine Squad Leader"
 	spawn_faction = "UNSC"
 	total_positions = 2
 	spawn_positions = 2
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_so
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_armoury,access_unsc_marine)
+	spawnpoint_override = "UNSC Base Spawns"
+	open_slot_on_death = 1
+	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
+	lace_access = TRUE
+
+/datum/job/unsc_ship_marineplatoon
+	title = "UNSC Marine Platoon Leader"
+	spawn_faction = "UNSC"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
+	selection_color = "#0A0A95"
+	access = list(access_unsc,142,144,145,192,access_unsc_armoury,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
 	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)

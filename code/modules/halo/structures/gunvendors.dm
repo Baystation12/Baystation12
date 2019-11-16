@@ -45,12 +45,15 @@
 	/obj/item/clothing/head/helmet/marine = 8,
 	/obj/item/clothing/head/helmet/marine/brown = 8,
 	/obj/item/clothing/head/helmet/marine/medic = 6,
+	/obj/item/clothing/head/helmet/marine/medic/brown = 6,
 	/obj/item/clothing/head/helmet/marine/medic/visor = 6,
+	/obj/item/clothing/head/helmet/marine/medic/brownvisor = 6,
 	/obj/item/clothing/head/helmet/marine/visor = 8,
 	/obj/item/clothing/head/helmet/marine/brownvisor = 8,
 	/obj/item/clothing/suit/storage/marine = 5,
 	/obj/item/clothing/suit/storage/marine/brown = 5,
 	/obj/item/clothing/suit/storage/marine/medic = 3,
+	/obj/item/clothing/suit/storage/marine/medic/brown = 3,
 	/obj/item/clothing/shoes/marine = 8,
 	/obj/item/clothing/shoes/marine/brown = 8,
 	/obj/item/clothing/mask/marine = 5,
@@ -60,6 +63,21 @@
 	/obj/item/weapon/armor_patch = 10,
 	/obj/item/weapon/storage/backpack/marine = 6,
 	/obj/item/weapon/storage/backpack/marine/brown = 6)
+
+/obj/machinery/vending/armory/oni
+	name = "ONI Vendor"
+	desc = "A machine full of spare ONI guard equipment."
+	icon_state = "ironhammer"
+	icon_deny = "ironhammer-deny"
+	products = list(/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform = 12,
+	/obj/item/clothing/head/helmet/oni_guard = 8,
+	/obj/item/clothing/head/helmet/oni_guard/visor = 8,
+	/obj/item/clothing/suit/storage/oni_guard = 5,
+	/obj/item/clothing/shoes/oni_guard = 8,
+	/obj/item/clothing/mask/marine = 5,
+	/obj/item/weapon/storage/belt/marine_ammo/oni = 8,
+	/obj/item/clothing/gloves/thick/oni_guard = 8,
+	/obj/item/weapon/armor_patch = 10)
 
 /obj/machinery/vending/armory/attachment
 	name = "Attachment Vendor"
