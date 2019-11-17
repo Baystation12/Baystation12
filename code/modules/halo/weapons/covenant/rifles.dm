@@ -19,6 +19,7 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
+		slot_s_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
 	firemodes = list(
