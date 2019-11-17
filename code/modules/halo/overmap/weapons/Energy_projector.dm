@@ -12,7 +12,11 @@
 /turf/unsimulated/floor/lava/glassed_turf/process()
 	if(world.time >= cool_at)
 		GLOB.processing_objects -= src
-		new turf_replacewith (locate(x,y,z))
+		ChangeTurf(turf_replacewith)
+
+/turf/unsimulated/floor/lava/glassed_turf/to_space
+	turf_replacewith = /turf/space
+	cooling_delay = 1 MINUTE
 
 /obj/machinery/mac_cannon/ammo_loader/energy_projector
 	weapon_name = "Energy Projector"
@@ -70,7 +74,7 @@
 	tracer_delay_time = 2 SECONDS
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/eprojector_hit_sound.wav'
 
-/obj/item/projectile/overmap/beam/proc/do_glassing_effect(var/turf/to_glass,var/glass_radius = 20)
+/obj/item/projectile/overmap/beam/proc/do_glassing_effect(var/turf/to_glass,var/glass_radius = 20,var/glassed_turf_use = /turf/unsimulated/floor/lava/glassed_turf)
 	if(istype(to_glass,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
 		to_glass = GetBelow(to_glass)
 	if(isnull(to_glass))
@@ -82,11 +86,11 @@
 				var/turf/under_loc = GetBelow(F)
 				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated))
 					F.ChangeTurf(/turf/simulated/open)
-					under_loc.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
+					under_loc.ChangeTurf(glassed_turf_use)
 				else
-					F.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
+					F.ChangeTurf(glassed_turf_use)
 			else
-				F.ChangeTurf(/turf/unsimulated/floor/lava/glassed_turf)
+				F.ChangeTurf(glassed_turf_use)
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	if(initial(kill_count) - kill_count > 1)
@@ -115,6 +119,7 @@
 	tracer_type = /obj/effect/projectile/projector_laser_proj
 	tracer_delay_time = 5 SECONDS
 	var/warned = 0
+	var/obj/item/projectile/overmap/beam/glass_effect_beam
 
 /obj/item/projectile/projector_laser_damage_proj/attack_mob()
 	damage_type = BURN
@@ -130,11 +135,18 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
+	if(isnull(glass_effect_beam))
+		glass_effect_beam = new
 	explosion(a,2,3,4,5, adminlog = 0)
+	glass_effect_beam.do_glassing_effect(a,2,/turf/unsimulated/floor/lava/glassed_turf/to_space)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 		S.adminwarn_attack()
+
+/obj/item/projectile/projector_laser_damage_proj/Destroy()
+	. = ..()
+	qdel(glass_effect_beam)
 
 #undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE

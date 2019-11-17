@@ -8,7 +8,7 @@
 	name = "UNSC Ship Engineer"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/technician
+	uniform = /obj/item/clothing/under/unsc/orange
 	shoes = /obj/item/clothing/shoes/workboots
 	belt = /obj/item/weapon/storage/belt/utility/full
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
@@ -19,7 +19,7 @@
 	name = "UNSC Ship Helmsman"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/pilot
+	uniform = /obj/item/clothing/under/unsc/blue
 	shoes =  /obj/item/clothing/shoes/black
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
 
@@ -29,9 +29,19 @@
 	name = "UNSC Ship Bridge Crew"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/command
+	uniform = /obj/item/clothing/under/unsc/yellow
 	shoes =  /obj/item/clothing/shoes/black
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmedicalcrew
+	name = "UNSC Medical Crew"
+
+	l_ear = /obj/item/device/radio/headset/unsc
+	uniform = /obj/item/clothing/under/unsc/lblue
+	shoes =  /obj/item/clothing/shoes/black
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
 
 	flags = 0
 
@@ -39,9 +49,9 @@
 	name = "UNSC Ship Pelican Pilot"
 
 	l_ear = /obj/item/device/radio/headset/unsc/pilot
-	uniform = /obj/item/clothing/under/unsc/pilot
-	shoes = /obj/item/clothing/shoes/black
-	head = /obj/item/clothing/head/helmet/pilot
+	uniform = /obj/item/clothing/under/unsc/newpilot
+	shoes = /obj/item/clothing/shoes/jackboots
+	head = /obj/item/clothing/head/helmet/newpilot
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
 
 	flags = 0
@@ -50,7 +60,7 @@
 	name = "UNSC Ship Janitor"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/logistics
+	uniform = /obj/item/clothing/under/unsc/brown
 	shoes = /obj/item/clothing/shoes/black
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted)
 
@@ -60,7 +70,7 @@
 	name = "UNSC Ship Ship Crew"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/tactical
+	uniform = /obj/item/clothing/under/unsc/red
 	shoes = /obj/item/clothing/shoes/black
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
 
@@ -70,7 +80,7 @@
 	name = "UNSC Ship Commanding Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/commander
-	uniform = /obj/item/clothing/under/unsc/command
+	uniform = /obj/item/clothing/under/unsc/co
 	shoes = /obj/item/clothing/shoes/brown
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o6)
@@ -81,7 +91,7 @@
 	name = "UNSC Ship Executive Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/officer
-	uniform = /obj/item/clothing/under/unsc/command
+	uniform = /obj/item/clothing/under/unsc/grey
 	shoes = /obj/item/clothing/shoes/brown
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o4)
 
