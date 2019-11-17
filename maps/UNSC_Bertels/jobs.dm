@@ -6,6 +6,7 @@
 	"UNSC Helmsman"= /decl/hierarchy/outfit/job/UNSC_ship/bertelshelmsman,
 	"UNSC Bridge Crew"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsbridgecrew ,
 	"UNSC Janitor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsjanitor ,
+	"UNSC Doctor"= /decl/hierarchy/outfit/job/UNSC_ship/bertelsmedicalcrew ,
 	"UNSC Pelican Pilot"= /decl/hierarchy/outfit/job/UNSC_ship/bertelspilot,)
 	total_positions = 8
 	spawn_positions = 8
