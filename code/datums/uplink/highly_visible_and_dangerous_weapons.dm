@@ -187,3 +187,10 @@
 	name = "Explosive Harpoon"
 	item_cost = 12
 	path = /obj/item/weapon/material/harpoon/bomb
+
+/datum/uplink_item/item/visible_weapons/incendiary_laser
+	name = "Incendiary Laser Blaster"
+	desc = "A laser weapon developed and subsequently banned in Sol space, it sets its targets on fire with dispersed laser technology. \
+			Most of these blasters were swiftly bought back and destroyed - but not this one."
+	item_cost = 40
+	path = /obj/item/weapon/gun/energy/incendiary_laser
