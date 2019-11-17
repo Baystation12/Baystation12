@@ -23,9 +23,13 @@
 	accuracy = -3
 	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5/rubber)
 	w_class = ITEM_SIZE_NORMAL
+	wielded_item_state = "m7-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
+		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
 	firemodes = list(

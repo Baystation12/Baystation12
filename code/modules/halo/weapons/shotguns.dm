@@ -15,9 +15,12 @@
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 	w_class = ITEM_SIZE_LARGE
+	wielded_item_state = "m90-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
 

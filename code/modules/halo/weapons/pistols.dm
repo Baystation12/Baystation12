@@ -20,6 +20,7 @@
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
 /obj/item/weapon/gun/projectile/m6d_magnum/update_icon()
