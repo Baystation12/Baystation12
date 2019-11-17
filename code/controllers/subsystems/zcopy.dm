@@ -114,14 +114,14 @@ SUBSYSTEM_DEF(zcopy)
 		var/depth = 0
 		var/turf/Td = T
 
-		while (Td.above)
-			Td = Td.above
+		while (Td.below)
+			Td = Td.below
 			depth += 1
 
 		if (depth > OPENTURF_MAX_DEPTH)
 			depth = OPENTURF_MAX_DEPTH
 
-		var/t_target = OPENTURF_MAX_PLANE	// this is where the openturf gets put
+		var/t_target = OPENTURF_MAX_PLANE - depth	// this is where the openturf gets put
 
 		// Handle space parallax.
 		if (T.below.z_eventually_space)
@@ -148,7 +148,7 @@ SUBSYSTEM_DEF(zcopy)
 			T.desc = initial(T.desc)
 			T.gender = NEUTER
 			T.opacity = FALSE
-			T.plane = t_target - depth
+			T.plane = t_target
 
 		T.queue_ao()	// No need to recalculate ajacencies, shouldn't have changed.
 
@@ -229,9 +229,6 @@ SUBSYSTEM_DEF(zcopy)
 		OO.dir = OO.associated_atom.dir
 		OO.appearance = OO.associated_atom
 		OO.plane = OPENTURF_MAX_PLANE - OO.depth
-		switch (OO.mimiced_type)
-			if (/atom/movable/openspace/multiplier, /atom/movable/openspace/turf_overlay)
-				OO.plane -= 1
 
 		OO.opacity = FALSE
 		OO.queued = FALSE
@@ -282,7 +279,7 @@ SUBSYSTEM_DEF(zcopy)
 		if (istype(A, /atom/movable/openspace/overlay))
 			var/atom/movable/openspace/overlay/OO = A
 			var/atom/movable/AA = OO.associated_atom
-			out += "<li>\icon[A] plane [A.plane], layer [A.layer], depth [OO.depth], associated Z-level [AA.z] - [OO.type] copying [AA] ([AA.type])</li>"
+			out += "<li>\icon[A] plane [A.plane], layer [A.layer], depth [OO.depth], associated Z-level [AA.z] - [OO.type] copying [AA] ([AA.type], eventually [OO.mimiced_type])</li>"
 		else if (isturf(A) && A != T)	// foreign turfs - not visible here, but good for figuring out layering
 			out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]) - <font color='red'>FOREIGN</font></li>"
 		else

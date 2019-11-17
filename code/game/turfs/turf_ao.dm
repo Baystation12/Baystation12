@@ -1,10 +1,11 @@
-#define AO_TURF_CHECK(T) (!T.density || !T.permit_ao)
+#define AO_TURF_CHECK(T) (!T.density || !T.opacity || !T.permit_ao)
+#define AO_SELF_CHECK(T) (!T.density && !T.opacity)
 
 /turf
 	var/permit_ao = TRUE
 	var/tmp/list/ao_overlays	// Current ambient occlusion overlays. Tracked so we can reverse them without dropping all priority overlays.
-	var/tmp/list/ao_overlays_mimic
 	var/tmp/ao_neighbors
+	var/tmp/list/ao_overlays_mimic
 	var/tmp/ao_neighbors_mimic
 	var/ao_queued = AO_UPDATE_NONE
 
@@ -15,19 +16,21 @@
 		regenerate_ao()
 
 /turf/proc/regenerate_ao()
-	for(var/turf/T in RANGE_TURFS(src, 1))
+	for (var/thing in RANGE_TURFS(src, 1))
+		var/turf/T = thing
 		if (T.permit_ao)
 			T.queue_ao(TRUE)
 
 /turf/proc/calculate_ao_neighbors()
 	ao_neighbors = 0
+	ao_neighbors_mimic = 0
 	if (!permit_ao)
 		return
 
 	var/turf/T
 	if (z_flags & ZM_MIMIC_BELOW)
 		CALCULATE_NEIGHBORS(src, ao_neighbors_mimic, T, (T.z_flags & ZM_MIMIC_BELOW))
-	if (AO_TURF_CHECK(src))
+	if (AO_SELF_CHECK(src) && !(z_flags & ZM_MIMIC_NO_AO))
 		CALCULATE_NEIGHBORS(src, ao_neighbors, T, AO_TURF_CHECK(T))
 
 /proc/make_ao_image(corner, i, px = 0, py = 0, pz = 0, pw = 0)
@@ -50,7 +53,9 @@
 	. = cache[key] = I
 
 /turf/proc/queue_ao(rebuild = TRUE)
-	SSao.queue |= src
+	if (!ao_queued)
+		SSao.queue += src
+
 	var/new_level = rebuild ? AO_UPDATE_REBUILD : AO_UPDATE_OVERLAY
 	if (ao_queued < new_level)
 		ao_queued = new_level
@@ -99,10 +104,15 @@
 	CUT_AO(src, ao_overlays)
 	if (z_flags & ZM_MIMIC_BELOW)
 		REGEN_AO(shadower, ao_overlays_mimic, ao_neighbors_mimic)
-	if(AO_TURF_CHECK(src) && !(z_flags & ZM_MIMIC_NO_AO))
+	if (AO_TURF_CHECK(src) && !(z_flags & ZM_MIMIC_NO_AO))
 		REGEN_AO(src, ao_overlays, ao_neighbors)
 
+	update_above()
+
+#undef REGEN_AO
 #undef PROCESS_AO_CORNER
+#undef AO_TURF_CHECK
+#undef AO_SELF_CHECK
 
 /turf/ChangeTurf()
 	var/old_density = density
