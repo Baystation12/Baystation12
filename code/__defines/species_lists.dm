@@ -10,5 +10,4 @@
 	/mob/living/simple_animal/engineer,\
 	/mob/living/simple_animal/hostile/done,\
 	/mob/living/simple_animal/mgalekgolo,\
-	/mob/living/carbon/human/covenant/sanshyuum,\
-	/mob/living/carbon/human/spartan)
+	/mob/living/carbon/human/covenant/sanshyuum,)
