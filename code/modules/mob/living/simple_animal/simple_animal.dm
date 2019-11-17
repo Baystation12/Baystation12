@@ -60,6 +60,7 @@
 	var/can_ignite = 0
 	var/ignite_overlay = "Generic_mob_burning"
 	var/image/fire_overlay_image
+	var/move_to_delay = 3 //delay for the automated movement.
 
 	//Null rod stuff
 	var/supernatural = 0
@@ -81,11 +82,77 @@
 	. = ..()
 	spawn_turf = get_turf(src)
 
+/mob/living/simple_animal/verb/verb_set_leader()
+	set name = "Follow Me"
+	set category = "AI Command"
+
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+	if(user.faction != faction)
+		to_chat(user,"<span class = 'notice'>[name] is not in your faction!</span>")
+		return
+	if(leader_follow && leader_follow.stat == CONSCIOUS)
+		if(user == leader_follow)
+			set_leader(null)
+		else
+			to_chat(user,"<span class = 'notice'>[name] is already following [leader_follow.name].</span>")
+			return
+	else
+		set_leader(user)
+
+/mob/living/simple_animal/verb/verb_hold_fire()
+	set name = "Hold Fire"
+	set category = "AI Command"
+
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+	if(user.faction != faction)
+		to_chat(user,"<span class = 'notice'>[name] is not in your faction!</span>")
+		return
+	toggle_hold_fire()
+
 /mob/living/simple_animal/proc/set_leader(var/mob/leader)
+	var/msg = "[name] starts following [leader.name]"
+	if(!leader)
+		if(leader_follow)
+			msg = "[name] stops following [leader_follow.name]"
+		else
+			msg = "[name] stops following."
+	visible_message("<span class = 'notice'>[msg]</span>")
 	leader_follow = leader
 
 /mob/living/simple_animal/proc/toggle_hold_fire()
 	hold_fire = !hold_fire
+	if(hold_fire == FALSE)
+		visible_message("<span class = 'danger'>[src.name] seems to become more aggressive.</span>")
+	else
+		visible_message("<span class = 'notice'>[src.name] seems to become more docile.</span>")
+
+/mob/living/simple_animal/proc/handle_leader_pathing()
+	if(leader_follow && get_dist(loc,leader_follow.loc) < 10 && loc != leader_follow.loc)//A bit higher than a single screen
+		if(istype(loc,/obj/vehicles))
+			var/obj/vehicles/v = loc
+			v.exit_vehicle(src,1)
+		walk_to(src,pick(range(1,leader_follow.loc)),0,move_to_delay)
+		if(istype(leader_follow.loc,/obj/vehicles))
+			var/obj/vehicles/v = leader_follow.loc
+			if(v.Adjacent(src))
+				if(!v.enter_as_position(src,"gunner"))
+					v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s gunner seat.</span>")
+					if(!v.enter_as_position(src,"passenger"))
+						v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s passenger seat.</span>")
+						set_leader(null)
+					else
+						v.visible_message("<span class = 'notice'>[name] enters [v.name]'s passenger seat.</span>")
+				else
+					v.visible_message("<span class = 'notice'>[name] enters [v.name]'s gunner seat.</span>")
+		return 1
+	else
+		walk(src,0)
+		set_leader(null)
+		return 0
 
 /mob/living/simple_animal/Life()
 	..()
@@ -124,20 +191,22 @@
 			turns_since_move++
 			if(turns_since_move >= turns_per_move)
 				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
-					var/moving_to = 0 // otherwise it always picks 4, fuck if I know.   Did I mention fuck BYOND
-					var/list/dirs_pickfrom = GLOB.cardinal.Copy()
-					var/allow_move = 0
-					while(!allow_move)
-						if(dirs_pickfrom.len == 0)
-							allow_move = 1
-							break
-						moving_to = pick(dirs_pickfrom)
-						if(!istype(get_step(src,moving_to),/turf/simulated/open))
-							allow_move = 1
-						dirs_pickfrom -= moving_to
-					set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
-					Move(get_step(src,moving_to))
-					turns_since_move = 0
+					if(handle_leader_pathing())
+					else
+						var/moving_to = 0 // otherwise it always picks 4, fuck if I know.   Did I mention fuck BYOND
+						var/list/dirs_pickfrom = GLOB.cardinal.Copy()
+						var/allow_move = 0
+						while(!allow_move)
+							if(dirs_pickfrom.len == 0)
+								allow_move = 1
+								break
+							moving_to = pick(dirs_pickfrom)
+							if(!istype(get_step(src,moving_to),/turf/simulated/open))
+								allow_move = 1
+							dirs_pickfrom -= moving_to
+						set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
+						Move(get_step(src,moving_to))
+						turns_since_move = 0
 
 	//Speaking
 	if(!client && speak_chance)

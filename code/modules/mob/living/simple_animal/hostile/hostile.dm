@@ -10,7 +10,6 @@
 	var/projectilesound
 	var/list/attack_sfx = list()
 	var/obj/item/ammo_casing/casingtype
-	var/move_to_delay = 4 //delay for the automated movement.
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
 	var/break_stuff_probability = 10
@@ -47,7 +46,6 @@
 			sorted = 1
 		if(!sorted)
 			our_overmind.other_troops += src
-
 
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
@@ -97,7 +95,7 @@
 			var/obj/vehicles/v = A
 			var/attack_vehicle = 0
 			for(var/mob/m in v.occupants)
-				if(m.stat == CONSCIOUS && m.faction != src.faction)
+				if((m.stat == CONSCIOUS || istype(m,/mob/living/simple_animal/hostile)) && m.faction != src.faction)
 					attack_vehicle = 1
 					break
 			if(attack_vehicle)
@@ -120,7 +118,7 @@
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(7))
 		if(ranged || istype(loc,/obj/vehicles))
-			if(get_dist(loc, target_mob) <= 6)
+			if(target_mob in ListTargets(6))
 				walk(src, 0)
 				OpenFire(target_mob)
 			else
@@ -130,14 +128,17 @@
 			walk_to(src, target_mob, 1, move_to_delay)
 			spawn(get_dist(src,target_mob)*move_to_delay) //If the target is within range after our original move, we attack them.
 				AttackTarget()
+	else
+		target_mob = null
+		stance = HOSTILE_STANCE_IDLE
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
-		LoseTarget()
+		LostTarget()
 		return 0
 	if(!(target_mob in ListTargets(7)))
-		LostTarget()
+		LoseTarget()
 		return 0
 	if(next_move >= world.time)
 		return 0
@@ -220,6 +221,9 @@
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 8)
+	if(istype(loc,/obj/vehicles))
+		var/obj/vehicles/v = loc
+		dist *= v.vehicle_view_modifier
 	var/list/L = list()
 
 	for(var/A in view(dist,src.loc))
@@ -235,12 +239,6 @@
 
 	return L
 
-/mob/living/simple_animal/hostile/proc/handle_leader_pathing()
-	if(leader_follow && get_dist(src,leader_follow) > 14) //Two screens.
-		walk_to(src,leader_follow)
-	else
-		walk(src,0)
-
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	if(our_overmind)
 		var/list/targlist = ListTargets(7)
@@ -249,6 +247,16 @@
 	stop_automated_movement = 0
 	walk(src, 0)
 
+/mob/living/simple_animal/hostile/adjustFireLoss(var/amount)
+	. = ..()
+	if(hold_fire == TRUE)
+		toggle_hold_fire()
+
+/mob/living/simple_animal/hostile/adjustBruteLoss(var/amount)
+	. = ..()
+	if(hold_fire == TRUE)
+		toggle_hold_fire()
+
 /mob/living/simple_animal/hostile/Life()
 
 	. = ..()
@@ -256,6 +264,7 @@
 		walk(src, 0)
 		return 0
 	if(client || ckey)
+		walk(src,0)
 		return 0
 	if(isturf(src.loc) || istype(src.loc,/obj/vehicles))
 		if(!stat)

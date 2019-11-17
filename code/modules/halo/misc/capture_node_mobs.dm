@@ -11,6 +11,13 @@
 	. = ..()
 	process_weapon()
 
+/mob/living/simple_animal/hostile/defender_mob/toggle_hold_fire()
+	hold_fire = !hold_fire
+	if(hold_fire == FALSE)
+		visible_message("<span class = 'danger'>[src] raises their weapon, ready to fire.</span>")
+	else
+		visible_message("<span class = 'notice'>[src] lowers their weapon, warily watching.</span>")
+
 /mob/living/simple_animal/hostile/defender_mob/proc/process_weapon()
 	if(possible_weapons.len == 0)
 		return
