@@ -311,7 +311,7 @@
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
 	. = ..()
-	if(M.a_intent == I_HURT && M.faction != faction !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(M.a_intent == I_HURT && M.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = M
 		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
