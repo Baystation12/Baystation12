@@ -60,7 +60,7 @@
 		/datum/objective/overmap/unsc_ship,\
 		/datum/objective/retrieve/artifact/unsc,\
 		/datum/objective/protect/leader,\
-		/datum/objective/capture_innies,\
+//		/datum/objective/capture_innies,
 		/datum/objective/retrieve/steal_ai/cole_protocol,\
 		/datum/objective/retrieve/nav_data/cole_protocol,\
 		/datum/objective/overmap/unsc_cov_ship,\
@@ -292,15 +292,14 @@
 /datum/game_mode/outer_colonies/handle_mob_death(var/mob/M, var/unsc_capture = 0)
 	. = ..()
 
-	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander","Insurrectionist Officer") || M.mind.faction == "Insurrectionist")
+/*	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander","Insurrectionist Officer") || M.mind.faction == "Insurrectionist")
 		var/datum/faction/unsc/unsc = locate() in factions
-		if(unsc)
-			var/datum/objective/capture_innies/capture_innies = locate() in unsc.all_objectives
+		if(unsc)			var/datum/objective/capture_innies/capture_innies = locate() in unsc.all_objectives
 			if(capture_innies)
 				if(unsc_capture)
 					capture_innies.minds_captured.Add(M.mind)
 				else
-					capture_innies.minds_killed.Add(M.mind)
+					capture_innies.minds_killed.Add(M.mind)*/
 
 	if(M.mind)
 		for(var/datum/faction/F in factions)

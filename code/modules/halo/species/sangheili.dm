@@ -20,6 +20,7 @@
 	brute_mod = 0.9
 	pain_mod = 0.75 //Pain has quarter an effect on them
 	slowdown = -0.5
+	explosion_effect_mod = 0.5
 	pixel_offset_x = -8
 	item_icon_offsets = list(16,0)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)

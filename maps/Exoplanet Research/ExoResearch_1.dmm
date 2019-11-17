@@ -268,7 +268,7 @@
 "fh" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/exo_research_facility/ground/interior/hangar)
 "fi" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/barracks)
 "fj" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Marine Armory"; req_access = list(311)},/obj/machinery/door/blast/regular{_wifi_id = "Research Compound Armory Blast Doors"; begins_closed = 0; closed_layer = 8; icon_state = "pdoor0"; id = "Research Compound Armory Blast Doors"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/barracks)
-"fk" = (/obj/machinery/vending/armory/armor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/barracks)
+"fk" = (/obj/machinery/vending/armory/oni,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/barracks)
 "fl" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/obj/machinery/vending/armory/hybrid{req_access = list()},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/barracks)
 "fm" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (NORTH)"; icon_state = "officechair_dark_preview"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/hangar)
 "fn" = (/obj/structure/table/steel,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/hangar)

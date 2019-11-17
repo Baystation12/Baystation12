@@ -35,7 +35,7 @@
 
 //todo: oni agent job role
 
-/datum/objective/capture_innies
+/*/datum/objective/capture_innies
 	short_text = "Capture Insurrectionists for ONI interrogation"
 	explanation_text = "The Insurrection worsens every year. Put some on ice in ONI cryopods for later black site interrogation. Kill the rest"
 	var/points_per_capture = 50
@@ -48,7 +48,7 @@
 	win_points += minds_captured.len * points_per_capture
 	win_points += minds_killed.len * points_per_kill
 	return win_points > 0
-
+*/
 /datum/objective/retrieve/artifact/unsc
 	short_text = "Secure the alien artifact"
 	explanation_text = "ONI reports a high value unidentified alien artifact in the sector. It must be secured by the UNSC to prevent falling into the wrong hands."
