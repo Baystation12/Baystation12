@@ -267,6 +267,7 @@
 
 		is_charging = 1
 		if (!do_after(user,arm_time,src))
+			is_charging = 0
 			return
 		Fire(A,user,params)
 		is_charging = 0
