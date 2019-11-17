@@ -260,3 +260,18 @@
 
 /obj/effect/projectile/pointdefense/impact
 	icon_state = "impact_pointdef_d"
+
+//----------------------------
+// incendiary laser
+//----------------------------
+/obj/effect/projectile/incen
+	light_color = COLOR_PALE_ORANGE
+
+/obj/effect/projectile/incen/tracer
+	icon_state = "beam_incen"
+
+/obj/effect/projectile/incen/muzzle
+	icon_state = "muzzle_incen"
+
+/obj/effect/projectile/incen/impact
+	icon_state = "impact_incen"
