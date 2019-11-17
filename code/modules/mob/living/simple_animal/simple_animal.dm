@@ -85,7 +85,7 @@
 /mob/living/simple_animal/verb/verb_set_leader()
 	set name = "Follow Me"
 	set category = "AI Command"
-	set src in range(2)
+	set src in range(7)
 
 	var/mob/living/user = usr
 	if(!istype(user))
@@ -105,7 +105,7 @@
 /mob/living/simple_animal/verb/verb_hold_fire()
 	set name = "Hold Fire"
 	set category = "AI Command"
-	set src in range(2)
+	set src in range(7)
 
 	var/mob/living/user = usr
 	if(!istype(user))
