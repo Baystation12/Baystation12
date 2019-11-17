@@ -273,6 +273,9 @@
 						h_style = "Bald"
 						f_style = "Shaved"
 						update_hair()
+			else
+				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
+					to_chat(src, SPAN_WARNING("Your MMI beeps a damage alert code."))
 
 		if (radiation > 75)
 			damage = 3
@@ -284,6 +287,9 @@
 					to_chat(src, "<span class='warning'>You feel strange!</span>")
 					adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
 					emote("gasp")
+			else
+				if(prob(1))
+					to_chat(src, SPAN_WARNING("Your MMI beeps an urgent damage alert code!"))
 		if(radiation > 150)
 			damage = 8
 			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
@@ -295,6 +301,9 @@
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)
 				if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
+			else if(isSynthetic())
+				var/obj/item/organ/internal/mmi_holder/mmi = internal_organs_by_name[BP_BRAIN]
+				mmi.take_internal_damage(damage * RADIATION_SPEED_COEFFICIENT)
 
 	/** breathing **/
 

@@ -243,6 +243,9 @@
 	color = "#660000"
 	touch_met = 5
 
+	var/adj_temp = 2
+	var/targ_temp = 400
+
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 	value = 6.8
@@ -258,6 +261,15 @@
 /datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
+
+/datum/reagent/fuel/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(M.isSynthetic())
+		var/obj/item/organ/internal/cell/C = M.internal_organs_by_name[BP_CELL]
+		C.cell.give(rand(50,75))
+
+		if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+			M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /datum/reagent/fuel/ex_act(obj/item/weapon/reagent_containers/holder, severity)
 	if(volume <= 50)

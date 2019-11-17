@@ -21,6 +21,27 @@
 					crew_data["pulse_span"] = "average"
 				if(PULSE_THREADY)
 					crew_data["pulse_span"] = "bad"
+	crew_data["charge"] = "N/A"
+	crew_data["charge_span"] = "N/A"
+	if(H.isSynthetic())
+		var/obj/item/organ/internal/cell/cell = H.internal_organs_by_name[BP_CELL]
+		if(cell)
+			crew_data["charge"] = cell.percent()
+			switch(cell.percent())
+				if(0)
+					crew_data["charge_span"] = "empty"
+					crew_data["alert"] = TRUE
+				if(0 to 10)
+					crew_data["charge_span"] = "critically low"
+				if(10 to 33)
+					crew_data["charge_span"] = "low"
+				if(33 to 66)
+					crew_data["charge_span"] = "medium"
+				if(66 to 100)
+					crew_data["charge_span"] = "high"
+		else
+			crew_data["charge_span"] = "No cell"
+			crew_data["alert"] = TRUE
 
 	crew_data["pressure"] = "N/A"
 	crew_data["true_oxygenation"] = -1

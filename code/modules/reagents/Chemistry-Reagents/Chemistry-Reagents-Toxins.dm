@@ -111,6 +111,9 @@
 	heating_point = null
 	heating_products = null
 
+	var/adj_temp = 0
+	var/targ_temp = 310
+
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
@@ -130,6 +133,15 @@
 		return
 	T.assume_gas(GAS_PHORON, volume, T20C)
 	remove_self(volume)
+
+/datum/reagent/toxin/phoron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(M.isSynthetic())
+		var/obj/item/organ/internal/cell/C = M.internal_organs_by_name[BP_CELL]
+		C.cell.give(rand(100,150))
+
+		if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+			M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
 /datum/reagent/toxin/phoron/oxygen

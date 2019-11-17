@@ -42,10 +42,14 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.heal_organ_damage(0.5 * removed, 0) //what
+	if(!M.isSynthetic())
+		M.heal_organ_damage(0.5 * removed, 0) //what
 
-	adjust_nutrition(M, alien, removed)
-	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
+		adjust_nutrition(M, alien, removed)
+		M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
+	else
+		var/obj/item/organ/internal/cell/C = M.internal_organs_by_name[BP_CELL]
+		C.cell.give(rand(10,20))
 
 /datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	var/nut_removed = removed

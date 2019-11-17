@@ -602,3 +602,140 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	SPAN_WARNING("\The [user]'s hand slips, damaging \the [target]'s [affected.name] with \the [tool]!"), \
 	SPAN_WARNING("Your hand slips, damaging \the [target]'s [affected.name] with \the [tool]!"))
 	affected.take_external_damage(3, 0, used_weapon = tool)
+
+//////////////////////////////////////////////////////////////////
+//					BROKEN PROSTHETIC SURGERY					//
+//////////////////////////////////////////////////////////////////
+
+/decl/surgery_step/robone
+	surgery_candidate_flags = SURGERY_NO_FLESH | SURGERY_NO_CRYSTAL | SURGERY_NEEDS_ENCASEMENT
+	var/required_stage = 0
+
+/decl/surgery_step/robone/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = ..()
+	if(affected && (affected.status & ORGAN_BROKEN) && affected.stage == required_stage)
+		return affected
+
+/decl/surgery_step/robone/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	if(target.isSynthetic())
+		return SURGERY_SKILLS_ROBOTIC 
+	else
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT 
+
+//////////////////////////////////////////////////////////////////
+//	welding surgery step
+//////////////////////////////////////////////////////////////////
+/decl/surgery_step/robone/weld
+	name = "Begin structural support repair"
+	allowed_tools = list(
+		/obj/item/weapon/weldingtool = 100,
+		/obj/item/weapon/tape_roll = 75
+	)
+	min_duration = 50
+	max_duration = 60
+
+/decl/surgery_step/robone/weld/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural supports in \the [target]'s [affected.name]"
+	if (affected.stage == 0)
+		user.visible_message("\The [user] starts applying \the [tool] to [prosthetic]." , \
+		"You start applying \the [tool] to [prosthetic].")
+	..()
+
+/decl/surgery_step/robone/weld/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural supports in \the [target]'s [affected.name]"
+	user.visible_message("<span class='notice'>[user] applies some [tool.name] to [prosthetic]</span>", \
+		"<span class='notice'>You apply some [tool.name] to [prosthetic].</span>")
+	if(affected.stage == 0)
+		affected.stage = 1
+	affected.status &= ~ORGAN_BRITTLE
+
+/decl/surgery_step/robone/weld/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message("<span class='warning'>[user]'s hand slips, causing damage with [tool] in the open panel on [target]'s [affected.name]!</span>" , \
+	"<span class='warning'>Your hand slips, causing damage with [tool] in the open panel on [target]'s [affected.name]!</span>")
+
+//////////////////////////////////////////////////////////////////
+//	prosthetic realignment surgery step
+//////////////////////////////////////////////////////////////////
+/decl/surgery_step/robone/realign_support
+	name = "Realign support"
+	allowed_tools = list(
+		/obj/item/weapon/wrench = 100,
+		/obj/item/weapon/bonesetter = 75
+	)
+	min_duration = 60
+	max_duration = 70
+	shock_level = 40
+	delicate = 1
+	surgery_candidate_flags = SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
+	required_stage = 1
+
+/decl/surgery_step/robone/realign_support/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
+	if(affected.encased == "skull")
+		user.visible_message("[user] is beginning to piece [prosthetic] back together with \the [tool]." , \
+			"You are beginning to piece [prosthetic] back together with \the [tool].")
+	else
+		user.visible_message("[user] is beginning to twist [prosthetic] in place with \the [tool]." , \
+			"You are beginning to twist [prosthetic] in place with \the [tool].")
+	..()
+
+/decl/surgery_step/robone/realign_support/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
+	if (affected.status & ORGAN_BROKEN)
+		if(affected.encased == "skull")
+			user.visible_message("<span class='notice'>\The [user] pieces [prosthetic] back together with \the [tool].</span>", \
+				"<span class='notice'>You piece [prosthetic] back together with \the [tool].</span>")
+		else
+			user.visible_message("<span class='notice'>\The [user] twists [prosthetic] in place with \the [tool].</span>", \
+				"<span class='notice'>You twist [prosthetic] in place with \the [tool].</span>")
+		affected.stage = 2
+	else
+		user.visible_message("<span class='notice'>\The [user] twists [prosthetic]</span> <span class='warning'>in the WRONG place with \the [tool].</span>", \
+			"<span class='notice'>You twist [prosthetic]</span> <span class='warning'>in the WRONG place with \the [tool].</span>")
+		affected.fracture()
+
+/decl/surgery_step/robone/realign_support/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message("<span class='warning'>\The [user]'s hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in \the [target]'s [affected.name] with \the [tool]!</span>" , \
+		"<span class='warning'>Your hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in \the [target]'s [affected.name] with \the [tool]!</span>")
+	affected.fracture()
+	affected.take_external_damage(5, used_weapon = tool)
+
+//////////////////////////////////////////////////////////////////
+//	post realignment surgery step
+//////////////////////////////////////////////////////////////////
+/decl/surgery_step/robone/finish
+	name = "Finish structural support repair"
+	allowed_tools = list(
+		/obj/item/weapon/weldingtool = 100,
+		/obj/item/weapon/tape_roll = 75
+	)
+	min_duration = 50
+	max_duration = 60
+	required_stage = 2
+
+/decl/surgery_step/robone/finish/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged structural support in \the [target]'s [affected.name]"
+	user.visible_message("[user] starts to finish mending [prosthetic] with \the [tool].", \
+	"You start to finish mending [prosthetic] with \the [tool].")
+	..()
+
+/decl/surgery_step/robone/finish/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged structural support in [target]'s [affected.name]"
+	user.visible_message("<span class='notice'>[user] has mended [prosthetic] with \the [tool].</span>"  , \
+		"<span class='notice'>You have mended [prosthetic] with \the [tool].</span>" )
+	affected.status &= ~ORGAN_BROKEN
+	affected.stage = 0
+	affected.update_wounds()
+
+/decl/surgery_step/robone/finish/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message("<span class='warning'>[user]'s hand slips, causing damage with \the [tool] in the open panel in [target]'s [affected.name]!</span>" , \
+	"<span class='warning'>Your hand slips, causing damage with \the [tool] in the open panel in [target]'s [affected.name]!</span>")

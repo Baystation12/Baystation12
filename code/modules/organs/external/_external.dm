@@ -166,7 +166,7 @@
 	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
 	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
 
-	var/power = 4 - severity //stupid reverse severity
+	var/power = (4 - severity)/5 //stupid reverse severity
 	for(var/obj/item/I in implants)
 		if(I.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 			burn_damage += I.w_class * rand(power, 3*power)
@@ -1026,8 +1026,6 @@ obj/item/organ/external/proc/remove_clamps()
 /obj/item/organ/external/proc/fracture()
 	if(!config.bones_can_break)
 		return
-	if(BP_IS_ROBOTIC(src))
-		return	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if((status & ORGAN_BROKEN) || !(limb_flags & ORGAN_FLAG_CAN_BREAK))
 		return
 

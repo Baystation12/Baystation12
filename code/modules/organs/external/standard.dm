@@ -57,6 +57,13 @@
 	cavity_name = "abdominal"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
+/obj/item/organ/external/groin/robotize()
+	if(..())
+		// Give them a new cell.
+		var/obj/item/organ/internal/stomach/reactor/R = owner.internal_organs_by_name[BP_REACTOR]
+		if(!istype(R))
+			owner.internal_organs_by_name[BP_REACTOR] = new /obj/item/organ/internal/stomach/reactor(owner,1)
+
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
 	name = "left arm"

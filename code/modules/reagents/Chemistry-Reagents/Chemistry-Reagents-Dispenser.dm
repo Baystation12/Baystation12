@@ -136,6 +136,9 @@
 		strength_mod *= 5
 	if(alien == IS_DIONA)
 		strength_mod = 0
+	if(M.isSynthetic())
+		var/obj/item/organ/internal/cell/C = M.internal_organs_by_name[BP_CELL]
+		C.cell.give(rand(20,30))
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
