@@ -247,15 +247,19 @@
 	stop_automated_movement = 0
 	walk(src, 0)
 
+/mob/living/simple_animal/hostile/proc/damage_toggle_hold_fire()
+	for(var/mob/living/simple_animal/hostile/h in range(7,src))
+		if(h.faction == faction)
+			if(h.hold_fire == TRUE)
+				h.toggle_hold_fire()
+
 /mob/living/simple_animal/hostile/adjustFireLoss(var/amount)
 	. = ..()
-	if(hold_fire == TRUE)
-		toggle_hold_fire()
+	damage_toggle_hold_fire()
 
 /mob/living/simple_animal/hostile/adjustBruteLoss(var/amount)
 	. = ..()
-	if(hold_fire == TRUE)
-		toggle_hold_fire()
+	damage_toggle_hold_fire()
 
 /mob/living/simple_animal/hostile/Life()
 
@@ -297,7 +301,7 @@
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
 	var/oldhealth = health
 	. = ..()
-	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(health < oldhealth && user.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
 		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
@@ -305,7 +309,7 @@
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
 	. = ..()
-	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(M.a_intent == I_HURT && M.faction != faction !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = M
 		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
