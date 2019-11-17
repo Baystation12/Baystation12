@@ -49,7 +49,7 @@
 /datum/job/geminus_innie/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	. = ..()
 
-	antag.add_antagonist_mind(H.mind, 1, 1)
+	antag.add_antagonist_mind(H.mind, 1, "Geminus Insurrectionist")
 
 /datum/job/geminus_innie/officer
 	title = "Insurrectionist Officer"
