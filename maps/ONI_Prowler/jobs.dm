@@ -24,10 +24,10 @@
 
 /datum/job/ONI_Spartan_II/equip()
 	. = ..()
-	var/player_pop = 0
+	var/player_pop_nonunsc = 0
 	for(var/client/C in GLOB.clients)
-		if(!C.mob)
+		if(!C.mob || C.mob.faction != "UNSC")
 			continue
-		player_pop++
+		player_pop_nonunsc++
 	var/datum/job/to_modify = job_master.occupations_by_title[title]
-	to_modify.total_positions = min(round(player_pop/10),4)
+	to_modify.total_positions = min(round(player_pop_nonunsc/10),4)

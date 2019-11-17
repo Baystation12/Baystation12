@@ -42,12 +42,14 @@
 				canremove = 0
 				to_chat(our_mob,"<span class = 'notice'>Your armor locks down as the self-destruct activates.</span>")
 				spawn(SELF_DESTRUCT_EXPLODE_AFTER) //I really don't want to add an entirely new variable to all /special armors just to deal with this.
+					for(var/mob/living/m_kill in range(1,our_mob.loc))
+						if(m_kill == our_mob)
+							continue
+						m_kill.dust()
 					explosion(our_mob.loc,0,1,2,7,guaranteed_damage = 77,guaranteed_damage_range = 2)
 					m.ghostize()
 					m.loc = null
 					qdel(m)
-					for(var/mob/living/m_kill in range(1,our_mob.loc))
-						m_kill.dust()
 		if("No")
 			return
 #undef SELF_DESTRUCT_EXPLODE_AFTER
