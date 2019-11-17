@@ -32,7 +32,7 @@
 	var/species_type = /datum/species/human
 	var/datum/species/my_species
 
-	unsuitable_atoms_damage = 15
+	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/mobcorpse/pirate
 	var/weapon1 = /obj/item/weapon/melee/energy/sword/pirate
 
