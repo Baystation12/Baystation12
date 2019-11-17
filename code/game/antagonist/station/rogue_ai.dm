@@ -2,8 +2,8 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 
 /datum/antagonist/rogue_ai
 	id = MODE_MALFUNCTION
-	role_text = "Rampant AI"
-	role_text_plural = "Rampant AIs"
+	role_text = "Malfunctioning AI"
+	role_text_plural = "Malfunctioning AIs"
 	mob_path = /mob/living/silicon/ai
 	landmark_id = "AI"
 	welcome_text = "You are malfunctioning! You do not have to follow any laws."
