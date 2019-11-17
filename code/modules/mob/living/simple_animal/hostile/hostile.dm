@@ -51,6 +51,8 @@
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
 		. = v.relaymove(src,dir)
+		if(v.guns_disabled)
+			qdel(using_vehicle_gun)
 	else
 		if(using_vehicle_gun)
 			qdel(using_vehicle_gun)
@@ -180,11 +182,11 @@
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	var/obj/vehicles/v = loc
 	if(istype(v))
-		if(!using_vehicle_gun && src in v.get_occupants_in_position("gunner"))
+		if(!using_vehicle_gun && !v.guns_disabled && src in v.get_occupants_in_position("gunner"))
 			var/using_vehicle_gun_type = pick(v.comp_prof.gunner_weapons)
 			using_vehicle_gun = new using_vehicle_gun_type
 	else if(using_vehicle_gun)
-		using_vehicle_gun = null
+		qdel(using_vehicle_gun)
 
 	if(!ranged && !using_vehicle_gun)
 		return
@@ -193,7 +195,7 @@
 	var/casingtype_use = casingtype
 	var/burstsize_use = burst_size
 	var/burstdelay_use = burst_delay
-	if(using_vehicle_gun)
+	if(using_vehicle_gun && !v.guns_disabled)
 		casingtype_use = null
 		burstsize_use = using_vehicle_gun.burst
 		burstdelay_use = using_vehicle_gun.burst_delay
@@ -207,7 +209,7 @@
 					casing.expend()
 			sleep(burstdelay_use)
 	var/fire_delay_use = 6 //Same as base gun fire delay.
-	if(using_vehicle_gun)
+	if(using_vehicle_gun && !v.guns_disabled)
 		fire_delay_use = using_vehicle_gun.fire_delay
 	setClickCooldown(fire_delay_use)
 
@@ -334,11 +336,12 @@
 	target_mob = null
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
+	var/obj/vehicles/v = loc
 	if(target == start)
 		return
 	var/projtype_use = projectiletype
 	var/projsound_use = projectilesound
-	if(using_vehicle_gun)
+	if(using_vehicle_gun && !v.guns_disabled)
 		projtype_use = using_vehicle_gun.projectile_fired
 		projsound_use = using_vehicle_gun.fire_sound
 
