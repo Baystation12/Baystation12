@@ -608,12 +608,8 @@
 	dir = 8;
 	pixel_x = 21
 	},
-/obj/machinery/camera/network/exploration_shuttle,
-/obj/machinery/alarm{
-	alarm_id = "petrov2";
-	frequency = 1439;
-	pixel_y = 23;
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = 28
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -1098,6 +1094,11 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
+/obj/machinery/alarm{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_y = -22
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cv" = (
@@ -1117,6 +1118,9 @@
 	dir = 10
 	},
 /obj/item/bodybag/cryobag,
+/obj/machinery/camera/network/exploration_shuttle{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cw" = (
@@ -1427,7 +1431,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cV" = (
-/obj/structure/table/rack,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
@@ -1440,6 +1443,10 @@
 	id_tag = "guppy_shuttle";
 	pixel_x = 24;
 	pixel_y = 0
+	},
+/obj/structure/closet/crate/secure/shuttle{
+	dir = 8;
+	req_access = list("ACCESS_TORCH_GUP")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -4416,6 +4423,9 @@
 	pixel_x = -5;
 	pixel_y = -1
 	},
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
 "jX" = (

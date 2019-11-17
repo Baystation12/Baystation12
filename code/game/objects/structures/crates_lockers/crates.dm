@@ -194,6 +194,12 @@
 	desc = "A secure phoron crate."
 	closet_appearance = /decl/closet_appearance/crate/secure/hazard
 
+/obj/structure/closet/crate/secure/shuttle
+	name = "storage compartment"
+	desc = "A secure storage compartment bolted to the floor, to secure loose objects on Zero-G flights."
+	anchored = 1
+	closet_appearance = /decl/closet_appearance/crate/secure/shuttle
+
 /obj/structure/closet/crate/secure/gear
 	name = "gear crate"
 	desc = "A secure gear crate."

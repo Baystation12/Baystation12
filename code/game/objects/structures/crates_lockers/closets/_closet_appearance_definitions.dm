@@ -601,6 +601,12 @@
 		"crate_stripe_right" = COLOR_GREEN_GRAY
 	)
 
+/decl/closet_appearance/crate/secure/shuttle
+	extra_decals = list(
+		"crate_stripe_left" = COLOR_YELLOW_GRAY,
+		"crate_stripe_right" = COLOR_YELLOW_GRAY
+	)
+
 // Large crates.
 /decl/closet_appearance/large_crate
 	base_icon =  'icons/obj/closets/bases/large_crate.dmi'
