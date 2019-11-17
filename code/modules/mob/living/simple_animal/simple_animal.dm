@@ -85,6 +85,7 @@
 /mob/living/simple_animal/verb/verb_set_leader()
 	set name = "Follow Me"
 	set category = "AI Command"
+	set src in range(1)
 
 	var/mob/living/user = usr
 	if(!istype(user))
@@ -104,6 +105,7 @@
 /mob/living/simple_animal/verb/verb_hold_fire()
 	set name = "Hold Fire"
 	set category = "AI Command"
+	set src in range(1)
 
 	var/mob/living/user = usr
 	if(!istype(user))
@@ -114,12 +116,14 @@
 	toggle_hold_fire()
 
 /mob/living/simple_animal/proc/set_leader(var/mob/leader)
-	var/msg = "[name] starts following [leader.name]"
+	var/msg = null
 	if(!leader)
 		if(leader_follow)
 			msg = "[name] stops following [leader_follow.name]"
 		else
 			msg = "[name] stops following."
+	if(isnull(msg))
+		msg ="[name] starts following [leader.name]"
 	visible_message("<span class = 'notice'>[msg]</span>")
 	leader_follow = leader
 
@@ -135,7 +139,7 @@
 		if(istype(loc,/obj/vehicles))
 			var/obj/vehicles/v = loc
 			v.exit_vehicle(src,1)
-		walk_to(src,pick(range(1,leader_follow.loc)),0,move_to_delay)
+		walk_to(src,pick(orange(2,leader_follow.loc)),0,move_to_delay)
 		if(istype(leader_follow.loc,/obj/vehicles))
 			var/obj/vehicles/v = leader_follow.loc
 			if(v.Adjacent(src))
@@ -146,12 +150,14 @@
 						set_leader(null)
 					else
 						v.visible_message("<span class = 'notice'>[name] enters [v.name]'s passenger seat.</span>")
+						return 1
 				else
 					v.visible_message("<span class = 'notice'>[name] enters [v.name]'s gunner seat.</span>")
-		return 1
+					return 1
 	else
+		if(leader_follow && loc != leader_follow.loc)
+			set_leader(null)
 		walk(src,0)
-		set_leader(null)
 		return 0
 
 /mob/living/simple_animal/Life()
