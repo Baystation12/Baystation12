@@ -320,7 +320,7 @@
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
-	if(!target_mob && Proj.firer && Proj.faction != faction && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(!target_mob && Proj.firer && Proj.firer.faction != faction && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
 		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
