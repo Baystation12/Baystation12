@@ -135,7 +135,7 @@
 		visible_message("<span class = 'notice'>[src.name] seems to become more docile.</span>")
 
 /mob/living/simple_animal/proc/handle_leader_pathing()
-	if(leader_follow && get_dist(loc,leader_follow.loc) < 10 && loc != leader_follow.loc)//A bit higher than a single screen
+	if(leader_follow && get_dist(loc,leader_follow.loc) < 14 && loc != leader_follow.loc)//A bit higher than a single screen
 		if(istype(loc,/obj/vehicles))
 			var/obj/vehicles/v = loc
 			v.exit_vehicle(src,1)
@@ -386,6 +386,9 @@
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message = 1)
+	if(istype(loc,/obj/vehicles))
+		var/obj/vehicles/v = loc
+		v.exit_vehicle(src,1)
 	timeofdeath = world.time
 	icon_state = icon_dead
 	density = 0
