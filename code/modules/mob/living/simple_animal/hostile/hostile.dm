@@ -61,6 +61,8 @@
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
+	if(hold_fire)
+		return null
 	var/atom/T = null
 	//stop_automated_movement = 0
 	for(var/atom/A in ListTargets(7))
@@ -233,6 +235,12 @@
 
 	return L
 
+/mob/living/simple_animal/hostile/proc/handle_leader_pathing()
+	if(leader_follow && get_dist(src,leader_follow) > 14) //Two screens.
+		walk_to(src,leader_follow)
+	else
+		walk(src,0)
+
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	if(our_overmind)
 		var/list/targlist = ListTargets(7)
@@ -257,6 +265,7 @@
 
 					if(!target_mob)
 						handle_assault_pathing()
+						handle_leader_pathing()
 
 				if(HOSTILE_STANCE_ATTACK)
 					if(destroy_surroundings)
@@ -303,6 +312,10 @@
 		Life()
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
+	if(hold_fire)
+		target_mob = null
+		stance = HOSTILE_STANCE_IDLE
+		return
 	RangedAttack(target_mob)
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
@@ -324,6 +337,7 @@
 	A.launch(target, def_zone)
 
 GLOBAL_LIST_INIT(hostile_attackables, list(\
+	/obj/structure/table,\
 	/obj/structure/window,\
 	/obj/structure/closet,\
 	/obj/structure/table,\

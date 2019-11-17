@@ -46,7 +46,7 @@
 	//Atmos effect - Yes, you can make creatures that require phoron or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/min_gas = list("oxygen" = 5)
 	var/max_gas = list("phoron" = 1, "carbon_dioxide" = 5)
-	var/unsuitable_atoms_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
+	var/unsuitable_atmos_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
@@ -73,9 +73,19 @@
 	var/respawn_timer = 3 MINUTES
 	var/turf/spawn_turf
 
+	//Simple Command Stuff//
+	var/mob/leader_follow
+	var/hold_fire = FALSE
+
 /mob/living/simple_animal/New()
 	. = ..()
 	spawn_turf = get_turf(src)
+
+/mob/living/simple_animal/proc/set_leader(var/mob/leader)
+	leader_follow = leader
+
+/mob/living/simple_animal/proc/toggle_hold_fire()
+	hold_fire = !hold_fire
 
 /mob/living/simple_animal/Life()
 	..()
@@ -177,7 +187,7 @@
 		fire_alert = 0
 
 	if(!atmos_suitable)
-		adjustBruteLoss(unsuitable_atoms_damage)
+		adjustBruteLoss(unsuitable_atmos_damage)
 	return 1
 
 /mob/living/simple_animal/proc/handle_supernatural()
