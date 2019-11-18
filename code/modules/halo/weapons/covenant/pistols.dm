@@ -14,6 +14,7 @@
 	screen_shake = 0
 	irradiate_non_cov = 5
 	var/overcharge_cost = 1
+	accuracy = 1
 	sprite_sheets = list(
 		"Tvaoan Kig-Yar" = null,\
 		"Jiralhanae" = null,\
