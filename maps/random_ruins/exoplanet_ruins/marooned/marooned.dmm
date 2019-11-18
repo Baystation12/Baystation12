@@ -22,7 +22,7 @@
 "af" = (
 /obj/structure/lattice,
 /obj/item/stack/material/ocp,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ag" = (
@@ -33,12 +33,12 @@
 /turf/simulated/wall/ocp_wall,
 /area/map_template/marooned)
 "ai" = (
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
 /obj/item/stack/material/ocp,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
@@ -78,7 +78,7 @@
 /area/map_template/marooned)
 "ao" = (
 /obj/structure/lattice,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ap" = (
@@ -185,7 +185,8 @@
 /area/map_template/marooned)
 "aC" = (
 /obj/structure/shuttle/engine/propulsion,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aD" = (
@@ -288,17 +289,20 @@
 	icon_state = "2-5";
 	dir = 2
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aR" = (
 /obj/structure/inflatable/door,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aS" = (
 /obj/structure/inflatable/wall,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aT" = (
@@ -306,7 +310,8 @@
 	icon_state = "2-5";
 	dir = 1
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aU" = (
@@ -337,7 +342,8 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aX" = (
@@ -347,7 +353,8 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aY" = (
@@ -361,12 +368,31 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aZ" = (
 /obj/effect/decal/cleanable/blood/drip,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"hi" = (
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"tb" = (
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"Wb" = (
+/obj/structure/shuttle/engine/propulsion,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 
@@ -447,14 +473,14 @@ ai
 ah
 ah
 aC
-ai
-ai
-ai
-ai
-ai
-ai
-ai
-ai
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+hi
 aa
 aa
 aa
@@ -479,15 +505,15 @@ ai
 ah
 ah
 aC
-ai
-ai
-ai
-ai
-ai
-ai
-ai
-ai
-ai
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+hi
 aa
 aa
 aa
@@ -513,13 +539,13 @@ ah
 ah
 ah
 ah
-ai
-ai
-ai
-ai
-ai
-ai
-ai
+hi
+hi
+hi
+hi
+hi
+hi
+hi
 ai
 aa
 aa
@@ -546,12 +572,12 @@ aD
 aH
 ah
 ah
-ai
-ai
+hi
+hi
 aW
-ai
-ai
-ai
+hi
+hi
+hi
 aa
 aa
 aa
@@ -581,9 +607,9 @@ ah
 aQ
 aT
 aX
-ai
-ai
-ai
+hi
+hi
+hi
 aa
 aa
 aa
@@ -611,11 +637,11 @@ aJ
 aM
 aO
 aR
-ai
+hi
 aX
-ai
-ai
-ai
+hi
+hi
+hi
 aa
 aa
 aa
@@ -643,11 +669,11 @@ aG
 aN
 ah
 aS
-ai
+hi
 aX
-ai
-ai
-ai
+hi
+hi
+hi
 ai
 aa
 aa
@@ -674,12 +700,12 @@ ax
 ax
 ah
 aP
-ai
-ai
+hi
+hi
 aX
-ai
-ai
-ai
+hi
+hi
+hi
 ai
 aa
 aa
@@ -705,12 +731,12 @@ ah
 ah
 ah
 ah
-ai
-ai
-ai
+hi
+hi
+hi
 aX
 aZ
-ai
+hi
 aa
 aa
 aa
@@ -737,9 +763,9 @@ ao
 ai
 ai
 aj
-ai
-ai
-ai
+hi
+hi
+hi
 aY
 ai
 ai
@@ -1221,11 +1247,11 @@ ai
 ai
 aU
 aV
-aC
-aa
-aa
-aa
-aa
+Wb
+tb
+tb
+tb
+tb
 aa
 aa
 aa
@@ -1253,11 +1279,11 @@ ai
 ai
 aV
 aV
-aC
-aa
-aa
-aa
-aa
+Wb
+tb
+tb
+tb
+tb
 aa
 aa
 aa

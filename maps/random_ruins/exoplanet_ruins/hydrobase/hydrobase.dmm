@@ -3021,12 +3021,17 @@
 	pixel_y = 24;
 	req_access = newlist()
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "NL" = (
 /mob/living/simple_animal/hostile/retaliate/goat/hydro,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
+"RI" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
 aa
@@ -3927,8 +3932,8 @@ gu
 gA
 gF
 gp
-aa
-aa
+RI
+RI
 "}
 (23,1,1) = {"
 aa
@@ -3969,7 +3974,7 @@ gB
 gG
 gK
 gL
-aa
+RI
 "}
 (24,1,1) = {"
 aa
@@ -4009,8 +4014,8 @@ gw
 gC
 gH
 gn
-aa
-aa
+RI
+RI
 "}
 (25,1,1) = {"
 aa
