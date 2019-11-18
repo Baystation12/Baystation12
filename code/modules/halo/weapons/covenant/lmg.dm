@@ -13,9 +13,8 @@
 	burst = 6
 	max_shots =200
 	burst_delay = 1.3
-	fire_delay = 5
 	charge_meter = 0
-	burst_accuracy = list(-3,-3,-3,-2,-1,-1) //Values might look off, but this offsets the increased accuracy from plasrifle projectiles.
+	burst_accuracy = list(-2,-2,-2,-1,0,0)
 	dispersion = list(2, 1.8, 1.5, 1.2,0.8, 0.8)
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 5
