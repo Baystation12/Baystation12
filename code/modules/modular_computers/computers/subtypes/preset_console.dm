@@ -33,7 +33,6 @@
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/aidiag())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 // Administrator
@@ -47,7 +46,6 @@
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/aidiag())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
@@ -99,7 +97,6 @@
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor/ert())
 	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/comm())
-	hard_drive.store_file(new/datum/computer_file/program/aidiag())
 
 // Mercenary
 /obj/item/modular_computer/console/preset/mercenary/
@@ -115,7 +112,6 @@
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
 	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/aidiag())
 
 // Merchant
 /obj/item/modular_computer/console/preset/merchant/install_default_programs()

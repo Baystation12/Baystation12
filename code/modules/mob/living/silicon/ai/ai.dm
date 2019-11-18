@@ -24,9 +24,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/toggle_acceleration,
 	/mob/living/silicon/ai/proc/toggle_camera_light,
 	/mob/living/silicon/ai/proc/multitool_mode,
-	/mob/living/silicon/ai/proc/toggle_hologram_movement,
-	/mob/living/silicon/ai/proc/ai_power_override,
-	/mob/living/silicon/ai/proc/ai_shutdown
+	/mob/living/silicon/ai/proc/toggle_hologram_movement
 )
 
 //Not sure why this is necessary...
@@ -52,10 +50,8 @@ var/list/ai_verbs_default = list(
 	var/list/network = list("Exodus")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
-	var/aiRestorePowerRoutine = 0
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.
-	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
@@ -64,31 +60,7 @@ var/list/ai_verbs_default = list(
 	var/last_announcement = ""
 	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
-	var/obj/machinery/ai_powersupply/psupply = null // Backwards reference to AI's powersupply object.
 	var/hologram_follow = 1 //This is used for the AI eye, to determine if a holopad's hologram should follow it or not
-	var/power_override_active = 0 				// If set to 1 the AI gains oxyloss (power loss damage) much faster, but is able to work as if powered normally.
-	var/admin_powered = 0						// For admin/debug use only, makes the AI have infinite power.
-	var/self_shutdown = 0						// Set to 1 when the AI uses self-shutdown verb to turn itself off. Reduces power usage but makes the AI mostly inoperable.
-
-	//NEWMALF VARIABLES
-	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
-	var/datum/malf_hardware/hardware = null		// Installed piece of hardware.
-	var/datum/malf_research/research = null		// Malfunction research datum.
-	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
-	var/list/hacked_apcs = null					// List of all hacked APCs
-	var/APU_power = 0							// If set to 1 AI runs on APU power
-	var/hacking = 0								// Set to 1 if AI is hacking APC, cyborg, other AI, or running system override.
-	var/system_override = 0						// Set to 1 if system override is initiated, 2 if succeeded.
-	var/hack_can_fail = 1						// If 0, all abilities have zero chance of failing.
-	var/hack_fails = 0							// This increments with each failed hack, and determines the warning message text.
-	var/errored = 0								// Set to 1 if runtime error occurs. Only way of this happening i can think of is admin fucking up with varedit.
-	var/bombing_core = 0						// Set to 1 if core auto-destruct is activated
-	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
-	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
-	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
-	var/uncardable = 0							// Whether the AI can be carded when malfunctioning.
-	var/hacked_apcs_hidden = 0					// Whether the hacked APCs belonging to this AI are hidden, reduces CPU generation from APCs.
-	var/intercepts_communication = 0			// Whether the AI intercepts fax and emergency transmission communications.
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/carded
@@ -167,8 +139,6 @@ var/list/ai_verbs_default = list(
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
 
-	create_powersupply()
-
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[LIFE_HUD] 		  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
@@ -200,10 +170,6 @@ var/list/ai_verbs_default = list(
 
 	to_chat(src, radio_text)
 
-	if (malf && !(mind in malf.current_antagonists))
-		show_laws()
-		to_chat(src, "<b>These laws may be changed by other players, or by you being the traitor.</b>")
-
 	job = "AI"
 	setup_icon()
 	eyeobj.possess(src)
@@ -215,12 +181,10 @@ var/list/ai_verbs_default = list(
 
 	QDEL_NULL(announcement)
 	QDEL_NULL(eyeobj)
-	QDEL_NULL(psupply)
 	QDEL_NULL(aiPDA)
 	QDEL_NULL(aiMulti)
 	QDEL_NULL(aiRadio)
 	QDEL_NULL(aiCamera)
-	hack = null
 
 /mob/living/silicon/ai/proc/setup_icon()
 	if(LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]"))
@@ -281,7 +245,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/proc/pick_icon()
 	set category = "Silicon Commands"
 	set name = "Set AI Core Display"
-	if(stat || !has_power())
+	if(stat)
 		return
 
 	var/new_sprite = input("Select an icon!", "AI", selected_sprite) as null|anything in available_icons()
@@ -553,7 +517,6 @@ var/list/ai_verbs_default = list(
 		if(choice)
 			qdel(holo_icon)
 			holo_icon = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.icon_colorize)
-			holo_icon_malf = choice.requires_malf
 	return
 
 //Toggles the luminosity and applies it by re-entereing the camera.
@@ -658,14 +621,6 @@ var/list/ai_verbs_default = list(
 		if(feedback) to_chat(src, "<span class='warning'>You are dead!</span>")
 		return 1
 
-	if(!has_power())
-		if(feedback) to_chat(src, "<span class='warning'>You lack power!</span>")
-		return 1
-
-	if(self_shutdown)
-		if(feedback) to_chat(src, "<span class='warning'>You are offline!</span>")
-		return 1
-
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
 		if(feedback) to_chat(src, "<span class='warning'>Wireless control is disabled!</span>")
 		return 1
@@ -692,9 +647,6 @@ var/list/ai_verbs_default = list(
 	if(stat == DEAD)
 		icon_state = selected_sprite.dead_icon
 		set_light(3, 1, selected_sprite.dead_light)
-	else if(!has_power())
-		icon_state = selected_sprite.nopower_icon
-		set_light(1, 1, selected_sprite.nopower_light)
 	else
 		icon_state = selected_sprite.alive_icon
 		set_light(1, 1, selected_sprite.alive_light)

@@ -211,7 +211,6 @@
 	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
 		return
 
-	transfer.aiRestorePowerRoutine = 0
 	transfer.control_disabled = 0
 	transfer.aiRadio.disabledAi = 0
 	transfer.loc = get_turf(src)
@@ -224,12 +223,6 @@
 		card.clear()
 
 	qdel(src)
-
-/obj/structure/AIcore/deactivated/proc/check_malf(var/mob/living/silicon/ai/ai)
-	if(!ai) return
-	for (var/datum/mind/malfai in malf.current_antagonists)
-		if (ai.mind == malfai)
-			return 1
 
 /obj/structure/AIcore/deactivated/attackby(var/obj/item/weapon/W, var/mob/user)
 

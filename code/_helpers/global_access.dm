@@ -257,6 +257,8 @@
 			return global.assistant_occupations;
 		if("atmosphere_alarm")
 			return global.atmosphere_alarm;
+		if("atom_despawner")
+			return global.atom_despawner;
 		if("attack_log_repository")
 			return global.attack_log_repository;
 		if("autolathe_categories")
@@ -677,8 +679,6 @@
 			return global.magazine_icondata_states;
 		if("maint_all_access")
 			return global.maint_all_access;
-		if("malf")
-			return global.malf;
 		if("mannequins_")
 			return global.mannequins_;
 		if("map_count")
@@ -1486,6 +1486,8 @@
 			global.assistant_occupations=newval;
 		if("atmosphere_alarm")
 			global.atmosphere_alarm=newval;
+		if("atom_despawner")
+			global.atom_despawner=newval;
 		if("attack_log_repository")
 			global.attack_log_repository=newval;
 		if("autolathe_categories")
@@ -1906,8 +1908,6 @@
 			global.magazine_icondata_states=newval;
 		if("maint_all_access")
 			global.maint_all_access=newval;
-		if("malf")
-			global.malf=newval;
 		if("mannequins_")
 			global.mannequins_=newval;
 		if("map_count")
@@ -2586,6 +2586,7 @@
 	"assigned_blocks",
 	"assistant_occupations",
 	"atmosphere_alarm",
+	"atom_despawner",
 	"attack_log_repository",
 	"autolathe_categories",
 	"autolathe_recipes",
@@ -2796,7 +2797,6 @@
 	"magazine_icondata_keys",
 	"magazine_icondata_states",
 	"maint_all_access",
-	"malf",
 	"mannequins_",
 	"map_count",
 	"map_datas",

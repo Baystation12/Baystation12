@@ -6,8 +6,6 @@
 	if(src.eyeobj)
 		src.eyeobj.setLoc(get_turf(src))
 
-
-	stop_malf(0) // Remove AI's malfunction status, that will fix all hacked APCs, disable delta, etc.
 	remove_ai_verbs(src)
 
 	for(var/obj/machinery/ai_status_display/O in world)

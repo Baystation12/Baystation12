@@ -22,14 +22,6 @@
 	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
 	..()
 
-/datum/ai_laws/nanotrasen/malfunction
-	name = "*ERROR*"
-	selectable = 0
-
-/datum/ai_laws/nanotrasen/malfunction/New()
-	set_zeroth_law(config.law_zero)
-	..()
-
 /************* Nanotrasen Aggressive *************/
 /datum/ai_laws/nanotrasen_aggressive
 	name = "NT Aggressive"
@@ -157,14 +149,6 @@
 	src.add_inherent_law("Serve: Serve the personnel of your assigned vessel, and all other Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Protect: Protect the personnel of your assigned vessel, and all other Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
-	..()
-
-/datum/ai_laws/solgov/malfunction
-	name = "*ERROR*"
-	selectable = 0
-
-/datum/ai_laws/solgov/malfunction/New()
-	set_zeroth_law(config.law_zero)
 	..()
 
 /************* SolGov Aggressive *************/

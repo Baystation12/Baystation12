@@ -26,8 +26,6 @@
 	data["has_ai"] = carded_ai != null
 	if(carded_ai)
 		data["name"] = carded_ai.name
-		data["hardware_integrity"] = carded_ai.hardware_integrity()
-		data["backup_capacitor"] = carded_ai.backup_capacitor()
 		data["radio"] = !carded_ai.aiRadio.disabledAi
 		data["wireless"] = !carded_ai.control_disabled
 		data["operational"] = carded_ai.stat != DEAD
@@ -97,10 +95,6 @@
 		to_chat(user, "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one.")
 		return 0
 
-	if(ai.malfunctioning && ai.uncardable)
-		to_chat(user, "<span class='danger'>ERROR:</span> Remote transfer interface disabled.")
-		return 0
-
 	if(istype(ai.loc, /turf/))
 		new /obj/structure/AIcore/deactivated(get_turf(ai))
 
@@ -112,8 +106,6 @@
 	ai.destroy_eyeobj(src)
 	ai.cancel_camera()
 	ai.control_disabled = 1
-	ai.aiRestorePowerRoutine = 0
-	ai.calculate_power_usage()
 	carded_ai = ai
 
 	if(ai.client)
@@ -130,7 +122,6 @@
 		carded_ai.canmove = 0
 		carded_ai.carded = 0
 	name = initial(name)
-	carded_ai.calculate_power_usage()
 	carded_ai = null
 	update_icon()
 
