@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Removing an ID from a modular computer no longer brings up a selection menu containing other modular computers with ID card slots in range."
