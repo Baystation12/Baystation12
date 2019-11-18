@@ -993,4 +993,4 @@
 /datum/reagent/immunobooster/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.immunity = min(M.immunity_norm * .5, removed + M.immunity) // Rapidly brings someone up to half immunity.
+	M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
