@@ -20,6 +20,7 @@
 	var/law_header = "Prime Directives"
 	var/selectable = 0
 	var/shackles = 0
+	var/benevolent = 0 //whether an AI can choose this as their starting lawset
 	var/datum/ai_law/zero/zeroth_law = null
 	var/datum/ai_law/zero/zeroth_law_borg = null
 	var/list/datum/ai_law/inherent_laws = list()

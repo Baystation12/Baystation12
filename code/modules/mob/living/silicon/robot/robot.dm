@@ -172,10 +172,7 @@
 	if(lawupdate)
 		var/new_ai = select_active_ai_with_fewest_borgs(get_z(src))
 		if(new_ai)
-			lawupdate = 1
 			connect_to_ai(new_ai)
-		else
-			lawupdate = 0
 
 	playsound(loc, spawn_sound, 75, pitch_toggle)
 
@@ -184,7 +181,7 @@
 	updatename()
 
 /mob/living/silicon/robot/proc/sync()
-	if(lawupdate && connected_ai)
+	if(lawupdate && connected_ai && !scrambledcodes && !istype(src,/mob/living/silicon/robot/drone) && stat != 2)
 		lawsync()
 		photosync()
 

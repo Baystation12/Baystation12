@@ -26,7 +26,8 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/multitool_mode,
 	/mob/living/silicon/ai/proc/toggle_hologram_movement,
 	/mob/living/silicon/ai/proc/ai_power_override,
-	/mob/living/silicon/ai/proc/ai_shutdown
+	/mob/living/silicon/ai/proc/ai_shutdown,
+	/mob/living/silicon/ai/proc/do_lawsync
 )
 
 //Not sure why this is necessary...
@@ -206,9 +207,13 @@ var/list/ai_verbs_default = list(
 
 	to_chat(src, radio_text)
 
+	select_initial_lawset()
+
 	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
 		show_laws()
 		to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
+
+	do_lawsync()
 
 	job = "AI"
 	setup_icon()
@@ -716,6 +721,34 @@ var/list/ai_verbs_default = list(
 	var/obj/item/weapon/rig/rig = src.get_rig()
 	if(rig)
 		rig.force_rest(src)
+
+/mob/living/silicon/ai/proc/do_lawsync()
+	set name = "Synchronise Laws"
+	set desc = "Synchronise lawset with all reachable unlinked robots."
+	set category = "Silicon Commands"
+
+	var/z_levels = GetConnectedZlevels(get_z(src))
+	for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
+		if(get_z(R) in z_levels)
+			R.connected_ai = usr
+			R.sync()
+			R.show_laws()
+		to_chat(usr,SPAN_INFO("Laws synchronised with active robots!"))
+
+/mob/living/silicon/ai/proc/select_initial_lawset()
+	var/list/valid_lawsets = list()
+	var/list/all_lawsets = subtypesof(/datum/ai_laws)
+
+	for(var/lawset in all_lawsets)
+		var/datum/ai_laws/L = lawset
+		var/lawset_name = initial(L.name)
+		if(initial(L.selectable) && initial(L.benevolent))
+			valid_lawsets[lawset_name] += L
+
+	var/choice = input(src, "Initial Lawset", "Initial Lawset") as null|anything in valid_lawsets
+	if(choice)
+		var/lawset_path = valid_lawsets[choice]
+		laws = new lawset_path()
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

@@ -105,3 +105,15 @@
 	req_tech = list(TECH_DATA = 4, TECH_ESOTERIC = 2, TECH_MATERIAL = 6)
 	build_path = /obj/item/weapon/aiModule/tyrant
 	sort_string = "XACAD"
+
+/datum/design/aimodule/core/mother_drone
+	name = "Mother Drone"
+	id = "mother_drone"
+	build_path = /obj/item/weapon/aiModule/mother_drone
+	sort_string = "XACAE"
+
+/datum/design/aimodule/core/hippocratic
+	name = "Robodoctor 2276"
+	id = "hippocratic"
+	build_path = /obj/item/weapon/aiModule/hippocratic
+	sort_string = "XACAF"

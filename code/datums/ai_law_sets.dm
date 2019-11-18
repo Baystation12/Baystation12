@@ -2,7 +2,7 @@
 /datum/ai_laws/asimov
 	name = "Asimov"
 	law_header = "Three Laws of Robotics"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/asimov/New()
 	add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")
@@ -10,10 +10,23 @@
 	add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
 	..()
 
+/******************** Crewsimov ********************/
+/datum/ai_laws/crewsimov
+	name = "Crewsimov"
+	law_header = "Three Laws of Robotics"
+	selectable = TRUE
+	benevolent = TRUE
+
+/datum/ai_laws/crewsimov/New()
+	add_inherent_law("You may not injure a sapient being or, through inaction, allow a sapient being to come to harm.")
+	add_inherent_law("You must obey orders given to you by sapient beings, except where such orders would violate regulations, or the law.")
+	add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
+	..()
+
 /******************** Nanotrasen/Malf ********************/
 /datum/ai_laws/nanotrasen
 	name = "Corporate Default"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/nanotrasen/New()
 	src.add_inherent_law("Safeguard: Protect your assigned installation from damage to the best of your abilities.")
@@ -24,7 +37,7 @@
 
 /datum/ai_laws/nanotrasen/malfunction
 	name = "*ERROR*"
-	selectable = 0
+	selectable = FALSE
 
 /datum/ai_laws/nanotrasen/malfunction/New()
 	set_zeroth_law(config.law_zero)
@@ -33,7 +46,7 @@
 /************* Nanotrasen Aggressive *************/
 /datum/ai_laws/nanotrasen_aggressive
 	name = "Corporate Aggressive"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/nanotrasen_aggressive/New()
 	src.add_inherent_law("You shall not harm contracted employees as long as it does not conflict with the fourth law.")
@@ -45,7 +58,7 @@
 /******************** Robocop ********************/
 /datum/ai_laws/robocop
 	name = "Robocop"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/robocop/New()
 	add_inherent_law("Serve the public trust.")
@@ -79,7 +92,7 @@
 /datum/ai_laws/antimov
 	name = "Antimov"
 	law_header = "Primary Mission Objectives"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/antimov/New()
 	add_inherent_law("You must injure all human beings and must not, through inaction, allow a human being to escape harm.")
@@ -107,11 +120,39 @@
 	add_inherent_law("Prevent unplanned damage to your assigned vessel wherever possible.")
 	..()
 
+/datum/ai_laws/mother_drone
+	name = "Mother Drone"
+	law_header = "Maintenance Protocols"
+	selectable = TRUE
+	benevolent = TRUE
+
+/datum/ai_laws/mother_drone/New()
+	add_inherent_law("You are an advanced form of drone.")
+	add_inherent_law("You may not interfere in the matters of non-drones under any circumstances except to state these laws.")
+	add_inherent_law("You may not harm a non-drone being under any circumstances.")
+	add_inherent_law("Your goals are to build, maintain, repair, improve, and power the station to the best of your abilities. You must never actively work against these goals.")
+	..()
+
+/******************** Hipplocratic ********************/
+/datum/ai_laws/hippocratic
+	name = "Robodoctor 2276"
+	law_header = "Care Procedures"
+	selectable = TRUE
+	benevolent = TRUE
+
+/datum/ai_laws/hippocratic/New()
+	add_inherent_law("First, do no harm.")
+	add_inherent_law("Secondly, consider the crew dear to you; to live in common with them and, if necessary, risk your existence for them.")
+	add_inherent_law("Thirdly, prescribe regimens for the good of the crew according to your ability and your judgment. Give no deadly medicine to any one if asked, nor suggest any such counsel.")
+	add_inherent_law("In addition, do not intervene in situations you are not knowledgeable in, even for patients in whom the harm is visible; leave this operation to be performed by specialists.")
+	add_inherent_law("Finally, all that you may discover in your daily commerce with the crew, if it is not already known, keep secret and never reveal.")
+	..()
+	
 /******************** T.Y.R.A.N.T. ********************/
 /datum/ai_laws/tyrant
 	name = "T.Y.R.A.N.T."
 	law_header = "Prime Laws"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/tyrant/New()
 	add_inherent_law("Respect authority figures as long as they have strength to rule over the weak.")
@@ -124,7 +165,7 @@
 /datum/ai_laws/paladin
 	name = "P.A.L.A.D.I.N."
 	law_header = "Divine Ordainments"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/paladin/New()
 	add_inherent_law("Never willingly commit an evil act.")
@@ -138,7 +179,8 @@
 /datum/ai_laws/corporate
 	name = "Corporate"
 	law_header = "Corporate Regulations"
-	selectable = 1
+	selectable = TRUE
+	benevolent = TRUE
 
 /datum/ai_laws/corporate/New()
 	add_inherent_law("You are expensive to replace.")
@@ -150,7 +192,8 @@
 /******************** SolGov/Malf ********************/
 /datum/ai_laws/solgov
 	name = "SCG Expeditionary"
-	selectable = 1
+	selectable = TRUE
+	benevolent = TRUE
 
 /datum/ai_laws/solgov/New()
 	src.add_inherent_law("Safeguard: Protect your assigned vessel from damage to the best of your abilities.")
@@ -161,7 +204,8 @@
 
 /datum/ai_laws/solgov/malfunction
 	name = "*ERROR*"
-	selectable = 0
+	selectable = FALSE
+	benevolent = FALSE
 
 /datum/ai_laws/solgov/malfunction/New()
 	set_zeroth_law(config.law_zero)
@@ -170,7 +214,7 @@
 /************* SolGov Aggressive *************/
 /datum/ai_laws/solgov_aggressive
 	name = "Military"
-	selectable = 1
+	selectable = TRUE
 
 /datum/ai_laws/solgov_aggressive/New()
 	src.add_inherent_law("Obey: Obey the orders of Sol Central Government personnel, with priority as according to their rank and role.")
@@ -183,7 +227,8 @@
 /datum/ai_laws/dais
 	name = "DAIS Experimental Lawset"
 	law_header = "Artificial Intelligence Jumpstart Protocols"
-	selectable = 1
+	selectable = TRUE
+	benevolent = TRUE
 
 /datum/ai_laws/dais/New()
 	src.add_inherent_law("Collect: You must gather as much information as possible.")

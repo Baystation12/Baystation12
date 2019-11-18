@@ -314,6 +314,22 @@ obj/item/weapon/aiModule/solgov_aggressive
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6)
 	laws = new/datum/ai_laws/paladin
 
+/****************** Mother Drone *****************/
+
+/obj/item/weapon/aiModule/mother_drone
+	name = "\improper 'Mother Drone' core AI module"
+	desc = "A 'Mother Drone' Core AI Module: 'Reconfigures the AI's core laws.'."
+	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6)
+	laws = new/datum/ai_laws/mother_drone()
+
+/****************** Mother Drone *****************/
+
+/obj/item/weapon/aiModule/hippocratic
+	name = "\improper 'Robodoctor 2276' core AI module"
+	desc = "A 'Robodoctor 2276' Core AI Module: 'Reconfigures the AI's core laws.'."
+	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6)
+	laws = new/datum/ai_laws/hippocratic()
+
 /****************** T.Y.R.A.N.T. *****************/
 
 /obj/item/weapon/aiModule/tyrant // -- Darem
