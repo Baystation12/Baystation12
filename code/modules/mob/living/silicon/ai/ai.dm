@@ -47,7 +47,7 @@ var/list/ai_verbs_default = list(
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
-	var/list/network = list("Exodus")
+	var/network = "Exodus"
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/viewalerts = 0
@@ -66,6 +66,12 @@ var/list/ai_verbs_default = list(
 	var/carded
 
 	var/multitool_mode = 0
+
+	var/cpu_points = 100 //Spent on Terminal access, node access and ability usage.
+
+	var/native_network = "Exodus"//If we're in this network, we don't spend CPU points UNLESS another AI is in the network..
+	var/obj/structure/ai_terminal/our_terminal = null
+	var/list/nodes_accessed = list()
 
 	var/default_ai_icon = /datum/ai_icon/blue
 	var/static/list/custom_ai_icons_by_ckey_and_name
