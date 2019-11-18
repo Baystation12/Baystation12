@@ -121,6 +121,22 @@
 	economic_modifier = 1
 	lace_access = TRUE
 
+/datum/job/unsc_ship_marinesergeant
+	title = "UNSC Marine Platoon Sergeant"
+	spawn_faction = "UNSC"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_so
+	selection_color = "#0A0A95"
+	access = list(access_unsc,144,145,192,access_unsc_armoury,access_unsc_marine)
+	spawnpoint_override = "UNSC Base Spawns"
+	open_slot_on_death = 1
+	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
+	account_allowed = 1
+	economic_modifier = 1
+	lace_access = TRUE
+
 /datum/job/unsc_ship_marineplatoon
 	title = "UNSC Marine Platoon Leader"
 	spawn_faction = "UNSC"
