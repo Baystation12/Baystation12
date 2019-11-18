@@ -30,4 +30,4 @@
 			continue
 		player_pop_nonunsc++
 	var/datum/job/to_modify = job_master.occupations_by_title[title]
-	to_modify.total_positions = min(round(player_pop_nonunsc/10),4)
+	to_modify.total_positions = min(round(player_pop_nonunsc/5),4)
