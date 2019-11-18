@@ -29,6 +29,8 @@
 	skin_material = MATERIAL_SKIN_FEATHERS
 
 	var/enrage_potency = 3
+	var/enrage_potency_loose = 4
+	var/loose_threshold = 15
 	var/max_lower = 16
 	var/max_upper = 24
 	var/loose = FALSE //goose loose status
@@ -52,11 +54,24 @@
 /mob/living/simple_animal/hostile/retaliate/goose/proc/enrage(var/potency)
 	melee_damage_lower = min((melee_damage_lower + potency), max_lower)
 	melee_damage_upper = min((melee_damage_upper + potency), max_upper)
-	if(!loose && prob(25) && (melee_damage_lower >= 15)) //second wind
+	if(!loose && prob(25) && (melee_damage_lower >= loose_threshold)) //second wind
 		loose = TRUE
-		health = 80
-		maxHealth = 80
-		enrage_potency = 4
-		desc = "The goose is loose! Oh no!"
+		health = (initial(health) * 1.5)
+		maxHealth = (initial(maxHealth) * 1.5)
+		enrage_potency = enrage_potency_loose
+		desc += " The [name] is loose! Oh no!"
 		update_icon()
 
+/mob/living/simple_animal/hostile/retaliate/goose/dire
+	name = "dire goose"
+	desc = "A large bird. It radiates destructive energy."
+	icon_state = "dire"
+	icon_living = "dire"
+	icon_dead = "dire_dead"
+	health = 250
+	maxHealth = 250
+	enrage_potency = 3
+	loose_threshold = 20
+	max_lower = 25
+	max_upper = 35
+	skull_type = /obj/item/weapon/pen/fancy/quill
