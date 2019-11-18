@@ -119,7 +119,7 @@
 	name = "pathfinder's headset"
 	desc = "A headset with access to the command and exploration channels. It has an inbuilt subspace antenna for better reception."
 	icon_state = "exp_headset"
-	item_state = "exp_headset"
+	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/pathfinder
 
 /obj/item/device/radio/headset/pathfinder/alt
@@ -137,7 +137,7 @@
 	name = "medical headset"
 	desc = "A headset to yell into while patching open wounds. It has an inbuilt subspace antenna for better reception."
 	icon_state = "par_headset"
-	item_state = "par_headset"
+	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_med
 
 /obj/item/device/radio/headset/headset_corpsman/alt
@@ -149,7 +149,7 @@
 	name = "pilot's headset"
 	desc = "A headset for cool-tempered smugglers, cocky flyboys, and bus-drivers like you. It has an inbuilt subspace antenna for better reception."
 	icon_state = "pilot_headset"
-	item_state = "pilot_headset"
+	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_pilot
 
 /obj/item/device/radio/headset/headset_pilot/alt
