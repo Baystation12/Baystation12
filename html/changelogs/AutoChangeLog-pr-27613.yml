@@ -1,5 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Swallowing pills now displays a message to people within a 2 tile radius. This message does not tell them what pill you swallowed."
-  - tweak: "Initiating a give (Right click > Give) now displays a message that you 'hold out an item' to the target."

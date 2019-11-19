@@ -1,6 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - tweak: "Ion rifle and pistol has its capacity reduce to 8/4 shots respective and had their delay between shots increased to 3 seconds."
-  - tweak: "Uplink implant is now more EMP resistant, it can still be disabled by an EMP but its chance of permanently breaking is significantly lowered."
-  - tweak: "Imprinting implant cannot be implanted into synthetic being and must now be imprinted where the brain organ is eg. For a GAS that would be their thorax; for humans, their head."

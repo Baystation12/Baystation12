@@ -1,5 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "You can now remove splints from yourself."
-  - tweak: "'Remove Splints' is now a verb (right click your target to find it) rather than in the stripping menu."
