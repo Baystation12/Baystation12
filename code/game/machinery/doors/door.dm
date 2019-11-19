@@ -81,13 +81,13 @@
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
 
 	health = maxhealth
-	update_connections(1)
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/machinery/door/Initialize()
-	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	update_connections(1)
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	. = ..()
 	if(autoset_access)
 #ifdef UNIT_TEST

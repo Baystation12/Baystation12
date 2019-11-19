@@ -24,6 +24,13 @@
 	. = ..()
 	color = COLOR_GUNMETAL // They're not painted!
 
+/obj/structure/railing/mapped/no_density
+	density = 0
+
+/obj/structure/railing/mapped/no_density/Initialize()
+	. = ..()
+	update_icon()
+
 /obj/structure/railing/New(var/newloc, var/material_key = DEFAULT_FURNITURE_MATERIAL)
 	material = material_key // Converted to datum in initialize().
 	..(newloc)

@@ -52,6 +52,8 @@
 
 /area/map_template/syndicate_mothership/raider_base
 	name = "\improper Raider Base"
+	requires_power = 0
+	dynamic_lighting = 0
 	req_access = list(access_syndicate)
 
 // The following mirror is ~special~.

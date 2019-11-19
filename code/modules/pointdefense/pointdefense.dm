@@ -11,6 +11,7 @@
 	base_type =       /obj/machinery/pointdefense_control
 	construct_state = /decl/machine_construction/default/panel_closed
 	var/list/targets = list()
+	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/machinery/pointdefense_control/Initialize()
 	. = ..()
@@ -100,10 +101,12 @@
 	desc = "A Kuiper pattern anti-meteor battery. Capable of destroying most threats in a single salvo."
 	density = TRUE
 	anchored = TRUE
+	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	idle_power_usage = 0.1 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(/obj/item/weapon/stock_parts = 10)         //null - no max. list(type part = number max).
 	base_type = /obj/machinery/pointdefense
+	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 	uncreated_component_parts = null
 	appearance_flags = PIXEL_SCALE
 	var/active = TRUE
@@ -120,16 +123,6 @@
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
-
-/obj/machinery/pointdefense/populate_parts(full_populate)
-	. = ..()
-	var/obj/machinery/power/terminal/term = locate() in loc
-	if(!istype(term))
-		return
-	if(!term.master)
-		var/obj/item/weapon/stock_parts/power/terminal/t = locate() in src
-		if(istype(t))
-			t.set_terminal(src, term)
 
 /obj/machinery/pointdefense/attackby(var/obj/item/thing, var/mob/user)
 	if(isMultitool(thing))
