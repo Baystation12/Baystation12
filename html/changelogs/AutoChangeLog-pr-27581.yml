@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Supermatter hallucination effect now checks for any source of meson vision, rather than just meson glasses. Other sources of meson vision, e.g. the hardsuit module will now properly stop hallucinations from developing when active."
