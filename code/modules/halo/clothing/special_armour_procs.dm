@@ -29,16 +29,20 @@
 
 /obj/item/clothing/suit/armor/special/proc/self_destruct(var/mob/living/m)
 	var/mob/living/carbon/human/our_mob = loc
-	if(m.incapacitated())
+	if(m && m.incapacitated())
 		to_chat(m,"<span class = 'notice'>You can't do that in your current state.</span>")
 		return
 	if(!istype(our_mob))
 		to_chat(m,"<span class = 'notice'>[src] will not activate self destruct unless it is on a person.</span>")
 		return
-	switch (alert("Are you sure you want to activate the self destruct mechanism? This cannot be stopped and will cause instant death on detonation.","Self Destruct","Yes","No"))
+	var/choice = "Yes"
+	if(!isnull(m))
+		choice = alert("Are you sure you want to activate the self destruct mechanism? This cannot be stopped and will cause instant death on detonation.","Self Destruct","Yes","No")
+	switch (choice)
 		if("Yes")
 			if(istype(our_mob))
-				m.visible_message(m,"<span class = 'danger'>[m.name] arms [our_mob.name]'s self destruct mechanism.</span>")
+				if(m)
+					m.visible_message("<span class = 'danger'>[m.name] arms [our_mob.name]'s self destruct mechanism.</span>")
 				canremove = 0
 				to_chat(our_mob,"<span class = 'notice'>Your armor locks down as the self-destruct activates.</span>")
 				spawn(SELF_DESTRUCT_EXPLODE_AFTER) //I really don't want to add an entirely new variable to all /special armors just to deal with this.
@@ -47,9 +51,9 @@
 							continue
 						m_kill.dust()
 					explosion(our_mob.loc,0,1,2,7,guaranteed_damage = 77,guaranteed_damage_range = 2)
-					m.ghostize()
-					m.loc = null
-					qdel(m)
+					our_mob.ghostize()
+					our_mob.loc = null
+					qdel(our_mob)
 		if("No")
 			return
 #undef SELF_DESTRUCT_EXPLODE_AFTER

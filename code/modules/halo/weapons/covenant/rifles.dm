@@ -14,6 +14,7 @@
 	is_heavy = 1
 	fire_delay = 10 //4 more ticks than usual
 	dispersion=list(0.0, 0.6, 0.8)
+	accuracy = 1
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -65,8 +66,9 @@
 /obj/item/weapon/gun/energy/plasmarifle/brute
 	name = "Type-25 Directed Energy Rifle (overcharged)"
 	icon_state = "Brute Plasma Rifle"
-	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for extra damage."
+	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for fire speed."
 	projectile_type = /obj/item/projectile/covenant/plasmarifle/brute
-	fire_delay = 3
+	fire_delay = 6
+	accuracy = 0
 	burst_delay = 1
 	irradiate_non_cov = 8
