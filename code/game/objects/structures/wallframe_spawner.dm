@@ -9,6 +9,8 @@
 	var/grille_path = /obj/structure/grille
 	var/activated = FALSE
 	var/fulltile = TRUE
+	var/paint_color
+	var/stripe_color
 
 /obj/effect/wallframe_spawn/CanPass()
 	return 0
@@ -76,6 +78,12 @@
 		if(!other.activated) other.activate()
 
 /obj/effect/wallframe_spawn/proc/handle_frame_spawn(var/obj/structure/wall_frame/F)
+	if(paint_color)
+		F.paint_color = paint_color
+		F.queue_icon_update()
+	if(stripe_color)
+		F.stripe_color = paint_color
+		F.queue_icon_update()
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		for(var/obj/O in T)

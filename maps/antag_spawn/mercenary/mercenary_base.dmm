@@ -3,22 +3,26 @@
 /turf/space,
 /area/space)
 "ab" = (
-/obj/machinery/pointdefense,
 /obj/structure/catwalk,
 /obj/machinery/power/terminal,
 /obj/structure/cable{
 	icon_state = "0-2";
 	d2 = 2
 	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
+	},
 /turf/simulated/floor/plating,
 /area/merc_shuttle)
 "ac" = (
-/obj/machinery/porta_turret/crescent,
 /obj/structure/catwalk,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/plating,
 /area/merc_shuttle)
@@ -28,6 +32,10 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/merc_shuttle)
@@ -41,11 +49,12 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
+/obj/effect/paint/red,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0"
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
 	},
-/obj/effect/paint/red,
 /turf/simulated/floor/plating,
 /area/merc_shuttle)
 "ag" = (
@@ -59,11 +68,12 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/effect/paint/red,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0"
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
 	},
-/obj/effect/paint/red,
 /turf/simulated/floor/plating,
 /area/merc_shuttle)
 "ah" = (
@@ -113,6 +123,10 @@
 /area/merc_shuttle)
 "al" = (
 /obj/machinery/computer/ship/engines,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
+	},
 /turf/simulated/floor/shuttle/darkred,
 /area/merc_shuttle)
 "am" = (
@@ -120,7 +134,7 @@
 /turf/simulated/wall/r_titanium,
 /area/merc_shuttle)
 "an" = (
-/obj/machinery/door/blast/regular/open{
+/obj/machinery/door/blast/regular{
 	id_tag = "merc_bsa"
 	},
 /turf/simulated/floor/reinforced,
@@ -185,14 +199,17 @@
 /area/merc_shuttle)
 "ar" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/turretid{
-	req_access = list("ACCESS_SYNDICATE")
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
+	},
+/obj/machinery/turretid/lethal{
+	ailock = 1;
+	check_arrest = 0;
+	check_records = 0;
+	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/merc_shuttle)
@@ -382,6 +399,7 @@
 /area/merc_shuttle)
 "aI" = (
 /obj/machinery/pointdefense_control{
+	initial_id_tag = "merc_pd";
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -398,12 +416,13 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/merc_shuttle)
 "aK" = (
-/obj/machinery/porta_turret/crescent,
 /obj/structure/catwalk,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/merc_shuttle)
@@ -434,7 +453,7 @@
 	icon_state = "1-4"
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/power/apc/hyper/shuttle{
+/obj/machinery/power/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
 	req_access = list("ACCESS_SYNDICATE")
@@ -520,17 +539,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1441;
-	id_tag = "merc_shuttle";
-	pixel_x = 25;
-	pixel_y = 0;
-	req_access = list("ACCESS_SYNDICATE")
-	},
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
+	},
+/obj/machinery/dummy_airlock_controller{
+	id_tag = "merc_shuttle";
+	pixel_x = 25
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/merc_shuttle)
@@ -548,6 +564,9 @@
 	},
 /obj/machinery/atmospherics/unary/freezer,
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/merc_shuttle)
 "aU" = (
@@ -565,8 +584,14 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/merc_shuttle)
 "aV" = (
-/obj/machinery/power/smes,
 /obj/structure/cable,
+/obj/machinery/power/smes/buildable/preset{
+	_fully_charged = 1;
+	_input_on = 1;
+	_output_maxed = 1;
+	_output_on = 1;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/super_io = 1, /obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle)
 "aW" = (
@@ -588,6 +613,7 @@
 "aX" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/light,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -24;
@@ -605,7 +631,7 @@
 	level = 2
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1441;
+	frequency = 1435;
 	master_tag = "merc_shuttle";
 	pixel_x = 23;
 	pixel_y = -23;
@@ -654,8 +680,7 @@
 	dir = 5
 	},
 /obj/structure/closet/medical_wall/filled{
-	pixel_x = -30;
-	pixel_y = 6
+	pixel_x = -32
 	},
 /obj/item/weapon/reagent_containers/spray/cleaner,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
@@ -663,7 +688,9 @@
 /obj/item/weapon/storage/firstaid/combat,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/surgical,
-/obj/structure/closet/body_bag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/storage/firstaid/adv,
 /turf/simulated/floor/tiled/white,
 /area/merc_shuttle)
 "bc" = (
@@ -675,6 +702,7 @@
 	dir = 9
 	},
 /obj/structure/iv_drip,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
 /turf/simulated/floor/tiled/white,
 /area/merc_shuttle)
 "bd" = (
@@ -733,7 +761,7 @@
 /area/merc_shuttle)
 "bh" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1441;
+	frequency = 1435;
 	id_tag = "merc_shuttle_inner";
 	name = "Ship External Access"
 	},
@@ -745,16 +773,21 @@
 /turf/simulated/wall/r_titanium,
 /area/merc_shuttle)
 "bj" = (
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/structure/table/standard,
+/obj/item/stack/nanopaste,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/machinery/bodyscanner{
-	icon_state = "body_scanner_0";
-	dir = 4
-	},
+/obj/item/weapon/storage/box/freezer,
 /turf/simulated/floor/tiled/white,
 /area/merc_shuttle)
 "bk" = (
@@ -763,13 +796,6 @@
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
-	},
-/obj/machinery/body_scanconsole{
-	dir = 1;
-	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
-	icon_state = "body_scannerconsole";
-	pixel_x = -32;
-	pixel_y = 16
 	},
 /turf/simulated/floor/tiled/white,
 /area/merc_shuttle)
@@ -826,42 +852,57 @@
 /turf/simulated/floor/shuttle/black,
 /area/merc_shuttle)
 "bp" = (
-/obj/machinery/door/blast/regular/open{
-	dir = 4;
-	id_tag = "merc_cell"
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 8;
 	icon_state = "map"
 	},
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "merc_cell"
+	},
 /turf/simulated/floor/shuttle/black,
 /area/merc_shuttle)
 "bq" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1435;
+	id_tag = "merc_shuttle_pump_out_external"
+	},
+/obj/machinery/airlock_sensor/airlock_exterior{
+	frequency = 1435;
+	id_tag = "merc_shuttle_exterior_sensor";
+	pixel_x = 5;
+	pixel_y = -36
+	},
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1435;
+	master_tag = "merc_shuttle";
+	pixel_x = 5;
+	pixel_y = -28;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
+	},
+/turf/simulated/floor/plating,
+/area/merc_shuttle)
+"br" = (
 /obj/machinery/door/window{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
 	dir = 8;
-	frequency = 1441;
+	frequency = 1435;
 	id_tag = "merc_shuttle_pump"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/merc_shuttle)
-"br" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 4;
-	frequency = 1441;
-	id_tag = "merc_shuttle_pump_out_internal"
-	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	cycle_to_external_air = 1;
-	frequency = 1441;
-	id_tag = "merc_shuttle";
-	pixel_x = 0;
-	pixel_y = 25;
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/obj/structure/handrai,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle)
 "bs" = (
@@ -873,22 +914,22 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 4;
-	frequency = 1441;
+	frequency = 1435;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle)
 "bt" = (
-/obj/item/weapon/storage/firstaid/surgery,
-/obj/item/weapon/reagent_containers/ivbag/nanoblood,
-/obj/item/weapon/reagent_containers/ivbag/nanoblood,
-/obj/structure/table/standard,
-/obj/item/stack/nanopaste,
+/obj/machinery/bodyscanner{
+	icon_state = "body_scanner_0";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/merc_shuttle)
 "bu" = (
 /obj/machinery/optable,
+/obj/machinery/body_scanconsole,
 /turf/simulated/floor/tiled/white,
 /area/merc_shuttle)
 "bv" = (
@@ -927,6 +968,7 @@
 	},
 /obj/effect/shuttle_landmark/merc/start,
 /obj/effect/overmap/ship/landable/merc,
+/obj/machinery/light/small,
 /turf/simulated/floor/shuttle/black,
 /area/merc_shuttle)
 "by" = (
@@ -940,42 +982,44 @@
 	dir = 5;
 	icon_state = "intact"
 	},
-/obj/machinery/door/blast/regular/open{
+/obj/machinery/door/blast/regular{
 	dir = 4;
 	id_tag = "merc_cell"
 	},
 /turf/simulated/floor/shuttle/black,
 /area/merc_shuttle)
 "bA" = (
-/obj/machinery/door/window{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8;
-	frequency = 1441;
-	id_tag = "merc_shuttle_pump"
+	controlled = 0;
+	dir = 4;
+	frequency = 1435;
+	id_tag = "merc_shuttle_pump_out_internal"
 	},
-/obj/structure/handrai{
-	icon_state = "handrail";
+/obj/structure/handrai,
+/obj/machinery/light/small{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle)
 "bB" = (
+/obj/machinery/door/window{
+	dir = 8
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
 /obj/machinery/airlock_sensor{
-	frequency = 1331;
+	frequency = 1435;
 	id_tag = "merc_shuttle_sensor";
 	pixel_x = 0;
 	pixel_y = -25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 4;
-	frequency = 1441;
-	id_tag = "merc_shuttle_pump_out_internal"
-	},
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 1
+	controlled = 0;
+	dir = 8;
+	frequency = 1435;
+	id_tag = "merc_shuttle_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle)
@@ -988,7 +1032,7 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 4;
-	frequency = 1441;
+	frequency = 1435;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1003,7 +1047,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle)
 "bE" = (
@@ -1015,10 +1058,15 @@
 /turf/simulated/wall/titanium,
 /area/merc_shuttle/rear)
 "bG" = (
-/obj/machinery/atmospherics/unary/tank/air,
+/obj/machinery/atmospherics/unary/tank/air{
+	start_pressure = 8000
+	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
+	},
+/obj/machinery/light/small{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
@@ -1054,46 +1102,75 @@
 /turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "bJ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume,
-/obj/machinery/air_sensor,
-/turf/simulated/floor/reinforced/carbon_dioxide,
-/area/merc_shuttle/rear)
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
+	frequency = 1435;
+	id_tag = "merc_shuttle";
+	pixel_x = 0;
+	pixel_y = -25;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
+	dir = 4;
+	frequency = 1435;
+	id_tag = "merc_shuttle_pump_out_internal"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/merc_shuttle)
 "bK" = (
-/obj/machinery/igniter,
-/obj/machinery/atmospherics/unary/outlet_injector,
-/obj/machinery/sparker{
-	pixel_y = 26
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
+	frequency = 1437;
+	icon_state = "map_vent_in";
+	id_tag = "fuel_out";
+	internal_pressure_bound = 15000;
+	internal_pressure_bound_default = 15000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 1
+	},
+/obj/machinery/air_sensor{
+	frequency = 1437;
+	id_tag = "fuel_sensor"
+	},
+/obj/machinery/light/small{
+	dir = 1
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/merc_shuttle/rear)
 "bL" = (
-/obj/machinery/door/blast/regular/open{
+/obj/machinery/door/blast/regular{
+	dir = 4;
 	id_tag = "merc_fuel_vent"
 	},
 /turf/simulated/floor/reinforced,
 /area/merc_shuttle/rear)
 "bM" = (
-/obj/machinery/pointdefense,
 /obj/structure/catwalk,
-/obj/machinery/power/terminal,
-/obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/light/spot{
+	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/merc_shuttle/rear)
+/area/merc_shuttle)
 "bN" = (
-/obj/machinery/pointdefense,
-/obj/structure/catwalk,
-/obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+/obj/machinery/atmospherics/unary/outlet_injector{
+	frequency = 1437;
+	id_tag = "fuel_in"
 	},
-/obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 4
+/obj/machinery/sparker{
+	id_tag = "merc_igniter";
+	pixel_y = 26
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/reinforced/carbon_dioxide,
 /area/merc_shuttle/rear)
 "bO" = (
 /obj/structure/cable{
@@ -1152,6 +1229,7 @@
 	id_tag = "merc_fuel"
 	},
 /obj/effect/paint/black,
+/obj/machinery/meter,
 /turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "bS" = (
@@ -1191,7 +1269,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "bX" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -1201,7 +1278,10 @@
 	dir = 10;
 	icon_state = "warning"
 	},
-/obj/machinery/atmospherics/binary/passive_gate,
+/obj/machinery/atmospherics/binary/passive_gate{
+	unlocked = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor,
 /area/merc_shuttle/rear)
 "bY" = (
@@ -1223,8 +1303,13 @@
 	id_tag = "merc_fuel";
 	name = "Fuel Storage Shutters";
 	pixel_x = -6;
-	pixel_y = 32;
+	pixel_y = 36;
 	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/button/ignition{
+	id_tag = "merc_igniter";
+	pixel_x = -6;
+	pixel_y = 26
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/merc_shuttle/rear)
@@ -1237,15 +1322,32 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/merc_shuttle/rear)
 "ca" = (
-/obj/machinery/computer/air_control,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 5
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 2;
-	icon_state = "warning"
+/obj/structure/closet/crate{
+	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/item/weapon/tank/hydrogen,
+/obj/item/weapon/tank/hydrogen,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/item/stack/material/plasteel/ten,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/plastic/ten,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cb" = (
 /obj/effect/paint/black,
@@ -1253,7 +1355,7 @@
 	dir = 8;
 	name = "External to Fuel Storage"
 	},
-/turf/simulated/wall/titanium,
+/turf/simulated/wall/ocp_wall,
 /area/merc_shuttle/rear)
 "cc" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -1279,23 +1381,35 @@
 /turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "cd" = (
-/obj/structure/catwalk,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8
+/obj/machinery/computer/air_control{
+	frequency = 1437;
+	input_tag = "fuel_in";
+	name = "Fuel Supply Control";
+	output_tag = "fuel_out";
+	sensor_name = "Fuel Supply";
+	sensor_tag = "fuel_sensor"
 	},
-/turf/simulated/floor/plating,
-/area/merc_shuttle/rear)
-"ce" = (
-/obj/machinery/porta_turret/crescent,
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 5
 	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/merc_shuttle/rear)
+"ce" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 4
+	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
 	},
 /turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
@@ -1319,7 +1433,7 @@
 	dir = 4;
 	frequency = 1331
 	},
-/obj/machinery/power/apc/hyper/shuttle{
+/obj/machinery/power/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
 	req_access = list("ACCESS_SYNDICATE")
@@ -1335,6 +1449,7 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
+/obj/structure/handrai,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "ci" = (
@@ -1383,23 +1498,27 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/merc_shuttle/rear)
-"cl" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/merc_shuttle/rear)
+"cl" = (
+/obj/machinery/fabricator/hacked,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
@@ -1430,12 +1549,10 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/handrai,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "co" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
 	d2 = 8;
@@ -1456,8 +1573,15 @@
 /turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "cp" = (
-/obj/machinery/porta_turret/crescent,
 /obj/structure/catwalk,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
+	},
 /turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "cq" = (
@@ -1475,77 +1599,62 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cs" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1;
+	stock_part_presets = list(/decl/stock_part_preset/terminal_setup);
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/terminal/buildable = 1)
 	},
-/obj/structure/railing/mapped{
-	icon_state = "railing0-1";
-	dir = 8
-	},
-/obj/structure/ship_munition/disperser_charge/explosive,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	icon_state = "intact-supply";
-	dir = 5
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/merc_shuttle/rear)
-"ct" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+/obj/machinery/power/terminal{
+	icon_state = "term";
 	dir = 1
 	},
-/obj/effect/landmark{
-	name = "Nuclear-Bomb"
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable,
+/turf/simulated/floor/plating,
+/area/merc_shuttle/rear)
+"ct" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	icon_state = "intact-supply";
-	dir = 9
+	dir = 4
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
 	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cu" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
 	},
-/obj/machinery/fabricator/hacked,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+/obj/structure/cable,
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1;
+	stock_part_presets = list(/decl/stock_part_preset/terminal_setup);
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/terminal/buildable = 1)
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "cv" = (
-/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+/obj/machinery/atmospherics/valve/shutoff{
+	level = 2
 	},
-/obj/structure/closet/crate,
-/obj/item/weapon/tank/hydrogen,
-/obj/item/weapon/tank/hydrogen,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+	dir = 9
 	},
-/obj/item/stack/material/plasteel/ten,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/glass/phoronrglass/ten,
-/obj/item/stack/material/aluminium/ten,
-/obj/item/stack/material/plastic/ten,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 8
 	},
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cw" = (
@@ -1562,9 +1671,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cx" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 10
-	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 4
@@ -1574,18 +1680,28 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 10
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cy" = (
-/obj/machinery/power/smes,
 /obj/structure/cable{
 	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/power/smes/buildable/preset{
+	_fully_charged = 1;
+	_input_maxed = 1;
+	_input_on = 1;
+	_output_maxed = 1;
+	_output_on = 1;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/super_io = 1, /obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cz" = (
@@ -1605,37 +1721,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cB" = (
-/obj/machinery/atmospherics/valve/shutoff,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
+/obj/machinery/atmospherics/valve/shutoff{
+	level = 2
 	},
-/obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/merc_shuttle/rear)
-"cC" = (
-/obj/machinery/atmospherics/unary/engine{
-	dir = 1
-	},
-/obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
-	},
-/obj/structure/cable,
-/turf/simulated/floor/plating,
-/area/merc_shuttle/rear)
-"cD" = (
-/obj/machinery/door/blast/regular/open{
-	density = 0;
-	icon_state = "pdoor0"
-	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating,
-/area/merc_shuttle/rear)
-"cE" = (
-/obj/machinery/atmospherics/valve/shutoff,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -1644,6 +1732,54 @@
 	icon_state = "handrail";
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/shutoff,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/merc_shuttle/rear)
+"cC" = (
+/obj/effect/floor_decal/industrial/outline/orange,
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide{
+	start_pressure = 15000
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/merc_shuttle/rear)
+"cD" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/merc_shuttle/rear)
+"cE" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/ship_munition/disperser_charge/explosive,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cF" = (
@@ -1663,21 +1799,31 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cG" = (
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
-/obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/atmospherics/portables_connector,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/merc_shuttle/rear)
-"cH" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 2;
 	icon_state = "warning"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
 /obj/machinery/atmospherics/portables_connector{
 	icon_state = "map_connector";
 	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide{
+	start_pressure = 15000
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/merc_shuttle/rear)
+"cH" = (
+/obj/structure/fuel_port{
+	pixel_x = -32
+	},
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
@@ -1707,13 +1853,13 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cK" = (
-/obj/structure/fuel_port{
-	pixel_x = -32
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	target_pressure = 15000
 	},
-/obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
+/obj/machinery/mech_recharger,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
@@ -1729,10 +1875,19 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/merc_shuttle/rear)
 "cM" = (
-/obj/machinery/atmospherics/binary/pump/high_power/on,
-/obj/machinery/mech_recharger,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
+	dir = 8;
+	icon_state = "map_vent_in";
+	initialize_directions = 8;
+	internal_pressure_bound = 8000;
+	internal_pressure_bound_default = 8000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0
+	},
+/turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "cN" = (
 /obj/machinery/teleport/hub,
@@ -1811,55 +1966,24 @@
 /turf/space,
 /area/space)
 "cW" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
 	},
-/obj/machinery/door/blast/regular/open{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "merc_external"
-	},
-/obj/effect/paint/black,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
-/turf/simulated/floor/plating,
-/area/merc_shuttle/rear)
-"cX" = (
-/obj/machinery/pointdefense,
-/obj/structure/catwalk,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1441;
-	id_tag = "merc_shuttle_pump_out_external"
-	},
-/obj/machinery/airlock_sensor/airlock_exterior{
-	frequency = 1441;
-	id_tag = "merc_shuttle_exterior_sensor";
-	pixel_x = 5;
-	pixel_y = -36
-	},
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1441;
-	master_tag = "merc_shuttle";
-	pixel_x = 5;
-	pixel_y = -28;
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/obj/machinery/power/terminal{
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
 	dir = 8
 	},
-/obj/structure/cable{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	icon_state = "intact-supply";
+	dir = 5
 	},
-/turf/simulated/floor/plating,
-/area/merc_shuttle)
+/obj/effect/landmark{
+	name = "Nuclear-Bomb"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/merc_shuttle/rear)
 
 (1,1,1) = {"
 aa
@@ -5599,7 +5723,7 @@ aa
 aa
 aa
 aa
-ce
+aK
 bV
 bV
 bF
@@ -5704,7 +5828,7 @@ bU
 cf
 bV
 cz
-cH
+cG
 cN
 cT
 aa
@@ -5801,7 +5925,7 @@ bj
 bt
 aR
 aa
-bN
+ce
 bV
 cg
 cq
@@ -5903,11 +6027,11 @@ bk
 bu
 aR
 bF
-cW
+cD
 bF
 ch
 cr
-cB
+cv
 cJ
 cP
 cT
@@ -6008,7 +6132,7 @@ bG
 bO
 bW
 ci
-cs
+cW
 bF
 bF
 bF
@@ -6110,8 +6234,8 @@ bH
 bP
 bX
 cj
-ct
-cC
+cE
+cs
 aa
 aa
 aa
@@ -6212,8 +6336,8 @@ bI
 bQ
 bY
 ck
+cl
 cu
-cD
 aa
 aa
 aa
@@ -6310,12 +6434,12 @@ bf
 bo
 by
 bE
-bJ
+bK
 bR
 bZ
-cl
-cv
-cC
+ct
+ca
+cu
 aa
 aa
 aa
@@ -6412,9 +6536,9 @@ bg
 bp
 bz
 bE
-bK
+bN
 bS
-ca
+cd
 cm
 cw
 bF
@@ -6511,16 +6635,16 @@ ae
 aQ
 aY
 bh
-bq
-bA
+br
+bB
 ae
 bL
 bT
 cb
 cn
 cx
-cE
-cK
+cB
+cH
 cQ
 cT
 aa
@@ -6613,11 +6737,11 @@ ae
 ae
 aZ
 ae
-br
-bB
+bA
+bJ
 ae
 aa
-bM
+cp
 cc
 co
 cy
@@ -6712,19 +6836,19 @@ cU
 aa
 aa
 aa
-ac
-cX
+bM
+bq
 bi
 bs
 bC
 ae
 aa
 aa
-cd
-bV
-bV
-cG
 cM
+bV
+bV
+cC
+cK
 cS
 cT
 aa
@@ -6823,7 +6947,7 @@ aa
 aa
 aa
 aa
-cp
+bM
 bV
 bV
 bF

@@ -20,7 +20,7 @@
 	shuttle = "Merc Shuttle"
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
-	vessel_mass = 5000
+	vessel_mass = 15000
 
 /obj/effect/overmap/ship/landable/merc/Initialize()
 	. = ..()

@@ -31,6 +31,9 @@
 	if(WF)
 		WF.paint_color = color
 		WF.update_icon()
+	var/obj/effect/wallframe_spawn/S = locate() in loc
+	if(S)
+		S.paint_color = color
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/paint/pink
@@ -71,6 +74,9 @@
 	var/obj/structure/wall_frame/WF = locate() in loc
 	if(WF)
 		WF.stripe_color = color
+	var/obj/effect/wallframe_spawn/S = locate() in loc
+	if(S)
+		S.stripe_color = color
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/paint_stripe/green
@@ -99,3 +105,20 @@
 
 /obj/effect/paint/brown
 	color = COLOR_DARK_BROWN
+
+/*obj/effect/gas_setup
+
+/obj/effect/gas_setup/Initialize()
+	..()
+	var/turf/simulated/wall/W = get_turf(src)
+	if(istype(W))
+		W.paint_color = color
+		W.update_icon()
+	var/obj/structure/wall_frame/WF = locate() in loc
+	if(WF)
+		WF.paint_color = color
+		WF.update_icon()
+	var/obj/effect/wallframe_spawn/S = locate() in loc
+	if(S)
+		S.paint_color = color
+	return INITIALIZE_HINT_QDEL*/
