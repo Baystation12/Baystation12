@@ -60,8 +60,6 @@
 	one_hand_penalty = -1
 	irradiate_non_cov = 15
 	wielded_item_state = "beamrifle-wielded"
-	accuracy = -1
-	scoped_accuracy = 7
 
 	var/next_allowed_fire
 
