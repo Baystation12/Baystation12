@@ -76,7 +76,7 @@
 //deadly but inaccurate
 /obj/item/projectile/bullet/a127_saphp
 	damage = 20
-	armor_penetration = 35
+	armor_penetration = 20
 	accuracy = 1
 
 /obj/item/weapon/storage/box/m127_saphp
@@ -156,7 +156,7 @@
 	damage = 30
 
 /obj/item/projectile/bullet/a762_ttr
-	armor_penetration = 1
+	armor_penetration = 0
 	nodamage = 1
 	agony = 10
 	damage_type = PAIN
@@ -164,7 +164,7 @@
 
 /obj/item/projectile/bullet/a762_M392
 	damage = 40
-	armor_penetration = 60
+	armor_penetration = 45
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"
@@ -262,13 +262,13 @@
 	damage = 80
 	step_delay = 0.1
 	penetrating = 5
-	armor_penetration = 80
+	armor_penetration = 65
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
-	damage = 70
-	penetrating = 2
+	damage = 75
+	armor_penetration = 70
 	tracer_type = null
 	tracer_delay_time = null
 

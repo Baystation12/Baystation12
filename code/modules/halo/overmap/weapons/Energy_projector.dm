@@ -81,7 +81,7 @@
 		return
 
 	for(var/turf/simulated/F in circlerange(to_glass,glass_radius))
-		if(!istype(F,/turf/simulated/open) && !istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
+		if(!istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
 			if(!isnull(GetBelow(F)))
 				var/turf/under_loc = GetBelow(F)
 				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated))
