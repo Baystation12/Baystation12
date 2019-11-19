@@ -119,10 +119,6 @@
 /obj/effect/shuttle_landmark/ert/internim,
 /turf/space/bluespace,
 /area/space)
-"r" = (
-/obj/effect/shuttle_landmark/merc/internim,
-/turf/space/bluespace,
-/area/space)
 "s" = (
 /obj/effect/step_trigger/thrower{
 	direction = 1;
@@ -15894,7 +15890,7 @@ f
 f
 f
 f
-r
+f
 f
 f
 f
