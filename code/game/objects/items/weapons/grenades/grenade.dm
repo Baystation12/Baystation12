@@ -12,6 +12,12 @@
 	var/active = 0
 	var/det_time = 50
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
+	var/can_adjust_timer = 1
+
+	var/alt_explosion_damage_max = 500 //The amount of armour + shield piercing damage done when grenade is stuck inside someone.
+	var/multiplier_non_direct = 0.5 //The multiplier to apply to the alt explosion max damage if the grenade is not directly on top of or inside someone.
+	var/alt_explosion_range = -1 //if set to -1, no armor bypass explosion
+	var/alt_explosion_type = BURN //Supports BRUTE or BURN
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))
@@ -90,7 +96,7 @@
 
 
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(isscrewdriver(W))
+	if(isscrewdriver(W) && can_adjust_timer)
 		switch(det_time)
 			if (1)
 				det_time = 10
@@ -107,6 +113,18 @@
 		add_fingerprint(user)
 	..()
 	return
+
+/obj/item/weapon/grenade/proc/do_alt_explosion()
+	if(alt_explosion_range != -1)
+		for(var/mob/living/m in range(alt_explosion_range,loc))
+			var/mult = 1
+			if(get_dist(m,loc) > 0)
+				mult = multiplier_non_direct
+			switch(alt_explosion_type)
+				if(BRUTE)
+					m.adjustBruteLoss(alt_explosion_damage_max*mult)
+				if(BURN)
+					m.adjustFireLoss(alt_explosion_damage_max*mult)
 
 /obj/item/weapon/grenade/attack_hand()
 	walk(src, null, null)
