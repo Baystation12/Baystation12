@@ -13,22 +13,21 @@
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
-		/datum/job/bertelsODST,\
-		/datum/job/bertelsODSTO,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
-		/datum/job/covenant/sangheili_honour_guard,\
-		/datum/job/covenant/sangheili_shipmaster,\
 		/datum/job/covenant/sangheili_ultra,\
-		/datum/job/covenant/lesser_prophet,\
+		/datum/job/covenant/sangheili_shipmaster,\
 		/datum/job/covenant/kigyarminor,\
-		/datum/job/covenant/kigyarmajor,\
-		/datum/job/covenant/unggoy_minor,\
+		/datum/job/covenant/unggoy_minor,
 		/datum/job/covenant/unggoy_major,\
-		/datum/job/covenant/skirmminor,\
-		/datum/job/covenant/skirmmajor,\
+		/datum/job/covenant/unggoy_ultra,\
+		/datum/job/covenant/unggoy_deacon,\
+		/datum/job/covenant/skirmmurmillo,\
 		/datum/job/covenant/skirmcommando,\
-		/datum/job/covenant/skirmmurmillo)
+		/datum/job/covenant/brute_minor,\
+		/datum/job/covenant/brute_major,\
+		/datum/job/covenant/brute_captain,\
+		/datum/job/ONI_Spartan_II,)
 
 /datum/game_mode/outer_colonies/revolution/setup_objectives()
 	. = ..()

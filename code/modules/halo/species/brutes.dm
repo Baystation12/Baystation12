@@ -24,6 +24,7 @@
 	pain_mod = 0.25 //receives 25% pain damage.
 	burn_mod = 0.7  // receives 70% of burn damage
 	explosion_effect_mod = 0.5
+	can_force_door = 1
 	default_faction = "Covenant"
 	pixel_offset_x = -12
 	item_icon_offsets = list(5,4)

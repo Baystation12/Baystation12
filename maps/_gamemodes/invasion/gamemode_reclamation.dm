@@ -18,7 +18,10 @@
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
 		/datum/job/police,\
-		/datum/job/police_chief)
+		/datum/job/police_chief,\
+		/datum/job/colonist,\
+		/datum/job/colonist_mayor,\
+		/datum/job/colony_ai)
 
 /datum/game_mode/outer_colonies/reclamation/setup_objectives()
 	. = ..()
