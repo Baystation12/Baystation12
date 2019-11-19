@@ -60,10 +60,17 @@
 		if(istype(A,/obj/effect/landmark/map_load_mark))
 			subtemplates_to_spawn += A
 
+	var/notsuspended
+	if(!SSmachines.suspended)
+		SSmachines.suspend()
+		notsuspended = TRUE
+
 	SSatoms.InitializeAtoms() // The atoms should have been getting queued there. This flushes the queue.
 
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines)
+	if(notsuspended)
+		SSmachines.wake()
 
 	for (var/i in machines)
 		var/obj/machinery/machine = i
@@ -76,6 +83,9 @@
 			T.turf_flags |= TURF_FLAG_NORUINS
 		if(template_flags & TEMPLATE_FLAG_NO_RADS)
 			qdel(SSradiation.sources_assoc[i])
+		if(istype(T,/turf/simulated))
+			var/turf/simulated/sim = T
+			sim.update_air_properties()
 
 /datum/map_template/proc/pre_init_shuttles()
 	. = SSshuttle.block_queue

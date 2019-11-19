@@ -44,6 +44,7 @@
 	playsound(start, 'sound/machines/disperser_fire.ogg', 100, 1)
 	handle_beam(start, direction)
 	handle_overbeam()
+	qdel(atomcharge)
 
 	//Some moron disregarded the cooldown warning. Let's blow in their face.
 	if(prob(cool_failchance()))
@@ -69,7 +70,6 @@
 	log_and_message_admins("A type [chargetype] disperser beam was launched at [finaltarget].", location=finaltarget)
 
 	fire_at_event(finaltarget, chargetype)
-	qdel(atomcharge)
 	return TRUE
 
 /obj/machinery/computer/ship/disperser/proc/fire_at_event(obj/effect/overmap/event/finaltarget, chargetype)

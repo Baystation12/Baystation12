@@ -47,3 +47,4 @@
 /obj/item/clothing/suit/space/void/merc/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/merc
 	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/weapon/tank/oxygen

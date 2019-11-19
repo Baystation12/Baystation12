@@ -59,6 +59,8 @@
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
+	req_access = list(list(access_security, access_bridge))
+
 /obj/machinery/porta_turret/crescent
 	enabled = 0
 	ailock = 1
@@ -68,6 +70,7 @@
 	check_records = 1
 	check_weapons = 1
 	check_anomalies = 1
+	req_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/stationary
 	ailock = 1
@@ -87,7 +90,6 @@
 
 /obj/machinery/porta_turret/New()
 	..()
-	req_access = list(list(access_security, access_bridge))
 
 	//Sets up a spark system
 	spark_system = new /datum/effect/effect/system/spark_spread
@@ -95,10 +97,6 @@
 	spark_system.attach(src)
 
 	setup()
-
-/obj/machinery/porta_turret/crescent/New()
-	..()
-	req_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/Destroy()
 	qdel(spark_system)
@@ -403,12 +401,15 @@ var/list/turret_icons
 		if(prob(5))
 			emagged = 1
 
-		enabled=0
-		spawn(rand(60,600))
-			if(!enabled)
-				enabled=1
+	disabled = 1
+	var/power = 4 - severity
+	addtimer(CALLBACK(src,/obj/machinery/porta_turret/proc/enable), rand(60*power,600*power))
 
 	..()
+
+/obj/machinery/porta_turret/proc/enable()
+	if(disabled)
+		disabled = 0
 
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
