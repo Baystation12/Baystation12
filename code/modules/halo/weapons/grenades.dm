@@ -9,7 +9,6 @@
 	det_time = 30
 	alt_explosion_range = 2
 	alt_explosion_damage_max = 70
-	alt_explosion_type = BRUTE
 
 /obj/item/weapon/grenade/frag/m9_hedp/on_explosion(var/turf/O)
 	if(explosion_size)

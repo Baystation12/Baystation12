@@ -10,7 +10,6 @@
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 	alt_explosion_range = 1
 	alt_explosion_damage_max = 300
-	alt_explosion_type = BURN
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
 	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))
@@ -43,5 +42,5 @@
 	do_alt_explosion()
 	if(istype(mob_containing))
 		mob_containing.contents -= src
-		loc = null
-		qdel(src)
+	loc = null
+	qdel(src)
