@@ -1,0 +1,4 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - bugfix: "You can leap over objects once again."
