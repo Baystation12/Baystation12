@@ -117,7 +117,7 @@
 	if(alt_explosion_range == -1)
 		return 0
 
-	for(var/mob/living/m in range(alt_explosion_range,src.loc))
+	for(var/mob/living/m in range(alt_explosion_range,loc))
 		var/mult = 1
 		if(get_dist(m,loc) > 0)
 			mult = multiplier_non_direct
