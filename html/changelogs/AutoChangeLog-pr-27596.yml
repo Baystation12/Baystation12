@@ -1,0 +1,4 @@
+author: "Technetium"
+delete-after: True
+changes: 
+  - rscadd: "Adds immunobooster, an immune-system restoring drug that will rapidly bring a ruined immune system up to half strength. Will not replace a proper immune system, though, so be careful with those rads and spaceacillin."
