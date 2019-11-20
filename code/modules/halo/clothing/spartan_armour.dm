@@ -53,8 +53,6 @@
 	species_restricted = list("Spartan")
 	max_suitstore_w_class = ITEM_SIZE_HUGE
 
-	action_button_name = "Activate Self Destruct"
-
 	specials = list(/datum/armourspecials/shields/spartan,\
 		/datum/armourspecials/shieldmonitor,\
 		/datum/armourspecials/self_destruct)
@@ -64,9 +62,6 @@
 	totalshields = 125
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 	var/list/available_abilities = list()
-
-/obj/item/clothing/suit/armor/special/spartan/ui_action_click()
-	self_destruct()
 
 /obj/item/clothing/suit/armor/special/spartan/AA
 	available_abilities = list(	\
