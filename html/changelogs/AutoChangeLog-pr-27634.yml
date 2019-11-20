@@ -1,0 +1,4 @@
+author: "WezYo"
+delete-after: True
+changes: 
+  - bugfix: "Clicking on first aid kits (or other crafting objects) with certain items will no longer delete the first aid kit."
