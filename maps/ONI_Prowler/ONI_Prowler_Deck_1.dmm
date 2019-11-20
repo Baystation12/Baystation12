@@ -167,7 +167,7 @@
 "dk" = (/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dl" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dm" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
-"dn" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/structure/table/glass/white,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
+"dn" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/structure/table/glass/white,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/reagent_containers/glass/beaker/bluespace,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "do" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dp" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dq" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
@@ -314,7 +314,8 @@
 "gb" = (/obj/machinery/button/remote/blast_door{_wifi_id = "prowlerportreactor"; id = "prowlerportreactor"; name = "Blast Door Control"; pixel_x = 24; pixel_y = 0; req_access = list(117)},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
 "gc" = (/obj/machinery/button/remote/blast_door{_wifi_id = "prowlerportreactor"; id = "prowlerportreactor"; name = "Blast Door Control"; pixel_x = -24; pixel_y = 0; req_access = list(117)},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "gd" = (/obj/machinery/organ_printer/flesh/mapped{stored_matter = 10000},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
-"ge" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"ge" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"gf" = (/obj/machinery/chemical_dispenser/ert,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -350,7 +351,7 @@ aaaaaaaaaaaaaaaaaacqcrcsctcucvcwcFcpcpcGcHcIcJcycIcIcJczcAcBcJcCcDcAcJcIaVcIcTcA
 aaaaaaaaaaaaaaaaaaaNaNbYcKcLbYbLcMbLcNcOaNcPfNcQcPcRcRcRcRcRcRcScRcRcRcUdQfTcXcXcXcXcXcXcXcXcXcXcXcYcXcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaacqcZcsdacFdbdcddbLdedfaNdgdgeHcPdidjdkdldmdndodpdqcRezdsfYcXdtdudvdwdxdydzdAdBdCdDdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNaNaNdFbYdFaNdGdHdIaNdJdgdhcPdLdkdkdMdkdNdodOdPcRfXdRdScXdTdUdvdVdWdXdYdXdZeaebdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgdKcPeheidkdkdkejdodOdkewcVePcEekeAeAfUdVelemendYdXeoepdEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgdKcPeheidkgfdkejdodOdkewcVePcEekeAeAfUdVelemendYdXeoepdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNeqeraNesaNdJdgfgcPdkdkdkdkdkdketeuevgaexfVcVeydvdvfWeBeAeAeCeDeAeEdvdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNeFeGaNaNaNegdgfMcPeIeJfZeKeLgdeMeNeOcRdrcVgbdEgcdvdveQdvdvdveRdvdveSdEcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcReTeUeVcXeWgegeeXeWdvdveRdveWeSdEcXcXaaaaaaaaaaaaaa

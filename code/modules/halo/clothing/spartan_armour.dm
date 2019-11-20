@@ -19,6 +19,7 @@
 	cold_protection = HEAD|FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
+	flash_protection = FLASH_PROTECTION_MAJOR
 	armor = list(melee = 60,bullet = 75,laser = 50,energy = 55,bomb = 60,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
 	armor_thickness = 30
