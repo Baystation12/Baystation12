@@ -1,0 +1,4 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - tweak: "Flashbangs nerfs! No flooring, stun durations are now very short (you have 4-6 seconds against non-protected, 2 against anyone with a helmet. Added confusion effect (generally 2-3 times longer than stun) to them too."
