@@ -227,6 +227,7 @@
 "aJ" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 4;
 	display_name = "Starboard Dock C";
 	frequency = 1380;
 	id_tag = "admin_shuttle_dock_airlock";
@@ -1842,6 +1843,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 8;
 	frequency = 1380;
 	id_tag = "escape_pod_7_berth";
 	name = "escape pod two berth controller";
@@ -3507,6 +3509,7 @@
 "lQ" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 4;
 	display_name = "Port Dock C";
 	frequency = 1331;
 	id_tag = "rescue_shuttle_dock_airlock";
@@ -9694,6 +9697,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 8;
+	does_spin = null;
 	frequency = 1380;
 	id_tag = "escape_pod_9_berth";
 	name = "escape pod four berth controller";
@@ -9735,11 +9740,12 @@
 "GB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 8;
 	display_name = "Port Dock A";
 	frequency = 1380;
 	id_tag = "skipjack_shuttle_dock_airlock";
 	pixel_x = 24;
-	pixel_y = -24;
+	pixel_y = 0;
 	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
 	tag_airpump = "skipjack_shuttle_dock_pump";
 	tag_chamber_sensor = "skipjack_shuttle_dock_sensor";
@@ -11966,6 +11972,7 @@
 	pixel_x = 21
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 1;
 	frequency = 1380;
 	id_tag = "escape_pod_8";
 	name = "escape pod three controller";
@@ -13642,6 +13649,7 @@
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 1;
 	frequency = 1380;
 	id_tag = "escape_pod_9";
 	name = "escape pod four controller";
@@ -14340,6 +14348,7 @@
 /area/crew_quarters/safe_room/fourthdeck)
 "Ud" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 4;
 	frequency = 1380;
 	id_tag = "escape_pod_8_berth";
 	name = "escape pod three berth controller";
@@ -14663,6 +14672,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "US" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 4;
 	frequency = 1380;
 	id_tag = "escape_pod_6_berth";
 	name = "escape pod one berth controller";
