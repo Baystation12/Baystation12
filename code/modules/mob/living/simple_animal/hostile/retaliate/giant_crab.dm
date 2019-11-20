@@ -24,6 +24,8 @@
 	maxHealth = 350
 	melee_damage_lower = 15
 	melee_damage_upper = 18
+	return_damage_min = 2
+	return_damage_max = 5
 	harm_intent_damage = 1
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
@@ -31,8 +33,6 @@
 		)
 	ability_cooldown = 2 MINUTES
 
-	var/return_damage_min = 2 //damage inflicted on attacker if they're not using a weapon
-	var/return_damage_max = 5
 	var/mob/living/carbon/human/victim //the human we're grabbing
 	var/grab_duration = 3 //duration of disable in life ticks to simulate a grab
 	var/grab_damage = 6 //brute damage before reductions, per crab's life tick
@@ -51,15 +51,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/attack_hand(mob/living/carbon/human/H)
 	. = ..()
-	if(H.a_intent == I_HURT)
-		var/hand_hurtie
-		if(H.hand)
-			hand_hurtie = BP_L_HAND
-		else
-			hand_hurtie = BP_R_HAND
-		H.apply_damage(rand(return_damage_min, return_damage_max), BRUTE, hand_hurtie, used_weapon = "crab carapace")
-		if(rand(25))
-			to_chat(H, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s armoured carapace!"))
+	reflect_unarmed_damage(H, BRUTE, "armoured carapace")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Life()
 	. = ..()

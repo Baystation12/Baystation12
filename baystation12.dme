@@ -2270,6 +2270,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\exoplanet.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\giant_crab.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\goose.dm"
+#include "code\modules\mob\living\simple_animal\hostile\retaliate\jelly.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\king_of_goats.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\parrot.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\retaliate.dm"
