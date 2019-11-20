@@ -19,6 +19,7 @@
 	cold_protection = HEAD|FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
+	flash_protection = FLASH_PROTECTION_MAJOR
 	armor = list(melee = 60,bullet = 75,laser = 50,energy = 55,bomb = 60,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
 	armor_thickness = 30
@@ -52,6 +53,8 @@
 	species_restricted = list("Spartan")
 	max_suitstore_w_class = ITEM_SIZE_HUGE
 
+	action_button_name = "Activate Self Destruct"
+
 	specials = list(/datum/armourspecials/shields/spartan,\
 		/datum/armourspecials/shieldmonitor,\
 		/datum/armourspecials/self_destruct)
@@ -61,6 +64,9 @@
 	totalshields = 125
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 	var/list/available_abilities = list()
+
+/obj/item/clothing/suit/armor/special/spartan/ui_action_click()
+	self_destruct()
 
 /obj/item/clothing/suit/armor/special/spartan/AA
 	available_abilities = list(	\
