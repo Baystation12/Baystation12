@@ -1,0 +1,4 @@
+author: "Technetium"
+delete-after: True
+changes: 
+  - rscadd: "Carbon mobs now take immune damage from radiation."
