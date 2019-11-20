@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - soundadd: "Vending machines now play a sound when dispensing an item."
