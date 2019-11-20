@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "SolGov Employees now have clothing in their uniform vendor, the same as the civilian uniform set."
