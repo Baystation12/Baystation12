@@ -23,8 +23,13 @@ var/repository/cameras/camera_repository = new()
 	if(!invalidated)
 		return
 	invalidated = 0
+	var/list/all_cams = list()
+	for(var/name in all_networks)
+		var/datum/visualnet/camera/cnet = all_networks[name]
+		for(var/cam in cnet.cameras)
+			all_cams += cam
 
-	for(var/obj/machinery/camera/C in cameranet.cameras)
+	for(var/obj/machinery/camera/C in all_cams)
 		var/cam = C.nano_structure()
 		for(var/network in C.network)
 			if(!networks[network])

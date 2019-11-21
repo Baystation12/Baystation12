@@ -9,19 +9,15 @@
 
 /mob/observer/eye/cameranet/New()
 	..()
-	visualnet = cameranet
 
 /mob/observer/eye/aiEye
 	name = "Inactive AI Eye"
 	name_sufix = "AI Eye"
 	icon_state = "AI-eye"
 
-/mob/observer/eye/aiEye/New()
-	..()
-	visualnet = cameranet
-
 /mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
 	. = ..()
+	visualnet = owner.our_visualnet
 	if(. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
 		if(cancel_tracking)
@@ -62,6 +58,7 @@
 	if(eyeobj) destroy_eyeobj()
 	if(!newloc) newloc = get_turf(src)
 	eyeobj = new /mob/observer/eye/aiEye(newloc)
+	eyeobj.visualnet = our_visualnet
 	eyeobj.possess(src)
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.

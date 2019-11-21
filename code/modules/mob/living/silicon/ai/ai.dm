@@ -85,6 +85,12 @@ var/list/ai_verbs_default = list(
 	src.verbs -= ai_verbs_default
 	src.verbs += /mob/living/verb/ghost
 
+/mob/living/silicon/ai/proc/switch_to_net_by_name(var/name)
+	var/new_net = all_networks[name]
+	if(!isnull(new_net))
+		our_visualnet = new_net
+		eyeobj.possess(src)
+
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
@@ -120,6 +126,9 @@ var/list/ai_verbs_default = list(
 	additional_law_channels["Holopad"] = ":h"
 
 	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
+	our_visualnet = all_networks[network]
+	if(isnull(our_visualnet))
+		all_networks[network] = new /datum/visualnet/camera
 
 	if (istype(loc, /turf))
 		add_ai_verbs(src)
@@ -160,7 +169,7 @@ var/list/ai_verbs_default = list(
 	..()
 
 /mob/living/silicon/ai/proc/on_mob_init()
-	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
+	to_chat(src, "<B>You are playing as an AI. AIs cannot move normally, but can interact with many objects while viewing them (through cameras).</B>")
 	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
 	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
 	to_chat(src, "To use something, simply click on it.")
@@ -180,6 +189,9 @@ var/list/ai_verbs_default = list(
 	job = "AI"
 	setup_icon()
 	eyeobj.possess(src)
+	var/obj/structure/ai_terminal/terminal = locate(/obj/structure/ai_terminal) in loc.contents
+	if(!isnull(terminal))
+		terminal.move_to_node(src)
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src
@@ -275,6 +287,8 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/proc/check_access_level(var/atom/a)
 	var/area/atom_area = a.loc.loc
 	if(!istype(atom_area) || !istype(atom_area.ai_routing_node))
+		return -1
+	if(!(atom_area.ai_routing_node in nodes_accessed))
 		return -1
 	var/our_access = atom_area.ai_routing_node.ais_to_access_levels[src]
 	if(isnull(our_access))
@@ -401,7 +415,8 @@ var/list/ai_verbs_default = list(
 		unset_machine()
 		src << browse(null, t1)
 	if (href_list["switchcamera"])
-		switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
+		var/datum/visualnet/camera/our_cameranet = our_visualnet
+		switchCamera(locate(href_list["switchcamera"])) in our_cameranet.cameras
 	if (href_list["showalerts"])
 		open_subsystem(/datum/nano_module/alarm_monitor/all)
 	//Carn: holopad requests
@@ -456,6 +471,9 @@ var/list/ai_verbs_default = list(
 	//src.cameraFollow = null
 	src.view_core()
 
+/mob/living/silicon/ai/proc/get_network_from_name(var/name)
+	return all_networks[name]
+/*
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
 //Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
 //Addition by Mord_Sith to define AI's network change ability
@@ -473,7 +491,7 @@ var/list/ai_verbs_default = list(
 
 	cameralist = sortAssoc(cameralist)
 	return cameralist
-/*
+
 /mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
 	set category = "Silicon Commands"
 	set name = "Jump To Network"

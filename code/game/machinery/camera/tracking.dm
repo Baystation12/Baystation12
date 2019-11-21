@@ -13,10 +13,9 @@
 		return
 
 	var/list/T = list()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
-		var/list/tempnetwork = C.network&src.network
-		if (tempnetwork.len)
-			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
+	var/datum/visualnet/camera/our_cameranet = our_visualnet
+	for (var/obj/machinery/camera/C in our_cameranet.cameras)
+		T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 	track = new()
 	track.cameras = T
@@ -211,10 +210,10 @@
 	return L
 
 
-mob/living/proc/near_camera()
+mob/living/proc/near_camera(var/datum/visualnet/camera/cam_net)
 	if (!isturf(loc))
 		return 0
-	else if(!cameranet.is_visible(src))
+	else if(!cam_net.is_visible(src))
 		return 0
 	return 1
 

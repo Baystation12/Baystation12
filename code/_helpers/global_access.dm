@@ -209,6 +209,8 @@
 			return global.all_languages;
 		if("all_money_accounts")
 			return global.all_money_accounts;
+		if("all_networks")
+			return global.all_networks;
 		if("all_objectives")
 			return global.all_objectives;
 		if("all_robolimbs")
@@ -299,10 +301,6 @@
 			return global.camera_range_display_status;
 		if("camera_repository")
 			return global.camera_repository;
-		if("cameranet")
-			return global.cameranet;
-		if("cameranet_")
-			return global.cameranet_;
 		if("can_call_ert")
 			return global.can_call_ert;
 		if("captain_announcement")
@@ -919,8 +917,6 @@
 			return global.req_console_supplies;
 		if("responsive_carriers")
 			return global.responsive_carriers;
-		if("restricted_camera_networks")
-			return global.restricted_camera_networks;
 		if("revdata")
 			return global.revdata;
 		if("revs")
@@ -1438,6 +1434,8 @@
 			global.all_languages=newval;
 		if("all_money_accounts")
 			global.all_money_accounts=newval;
+		if("all_networks")
+			global.all_networks=newval;
 		if("all_objectives")
 			global.all_objectives=newval;
 		if("all_robolimbs")
@@ -1528,10 +1526,6 @@
 			global.camera_range_display_status=newval;
 		if("camera_repository")
 			global.camera_repository=newval;
-		if("cameranet")
-			global.cameranet=newval;
-		if("cameranet_")
-			global.cameranet_=newval;
 		if("can_call_ert")
 			global.can_call_ert=newval;
 		if("captain_announcement")
@@ -2148,8 +2142,6 @@
 			global.req_console_supplies=newval;
 		if("responsive_carriers")
 			global.responsive_carriers=newval;
-		if("restricted_camera_networks")
-			global.restricted_camera_networks=newval;
 		if("revdata")
 			global.revdata=newval;
 		if("revs")
@@ -2562,6 +2554,7 @@
 	"all_grabstates",
 	"all_languages",
 	"all_money_accounts",
+	"all_networks",
 	"all_objectives",
 	"all_robolimbs",
 	"all_species",
@@ -2607,8 +2600,6 @@
 	"camera_alarm",
 	"camera_range_display_status",
 	"camera_repository",
-	"cameranet",
-	"cameranet_",
 	"can_call_ert",
 	"captain_announcement",
 	"cargo_positions",
@@ -2917,7 +2908,6 @@
 	"req_console_information",
 	"req_console_supplies",
 	"responsive_carriers",
-	"restricted_camera_networks",
 	"revdata",
 	"revs",
 	"robot_custom_icons",

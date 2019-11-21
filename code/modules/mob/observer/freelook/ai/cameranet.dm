@@ -2,12 +2,6 @@
 //
 // The datum containing all the chunks.
 
-var/datum/visualnet/camera/cameranet_
-/proc/cameranet()
-	if(!cameranet_)
-		cameranet_ = new()
-	return cameranet_
-
 /datum/visualnet/camera
 	// The cameras on the map, no matter if they work or not.
 	var/list/cameras

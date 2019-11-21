@@ -13,13 +13,13 @@
 	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/atmos_control())
 	hard_drive.store_file(new/datum/computer_file/program/rcon_console())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 
 // Medical
 /obj/item/modular_computer/console/preset/medical/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	set_autorun("sensormonitor")
 
 // Research
@@ -32,7 +32,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 // Administrator
@@ -45,7 +45,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
@@ -60,13 +60,13 @@
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	hard_drive.store_file(new/datum/computer_file/program/card_mod())
 	hard_drive.store_file(new/datum/computer_file/program/comm())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 // Security
 /obj/item/modular_computer/console/preset/security/install_default_programs()
 	..()
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
 
 // Civilian
@@ -75,7 +75,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	hard_drive.store_file(new/datum/computer_file/program/newsbrowser())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/supply())
 
@@ -94,7 +94,7 @@
 /obj/item/modular_computer/console/preset/ert/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor/ert())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor/ert())
 	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/comm())
 
@@ -110,7 +110,7 @@
 
 /obj/item/modular_computer/console/preset/mercenary/install_default_programs()
 	..()
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
+	//hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
 	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 
 // Merchant
