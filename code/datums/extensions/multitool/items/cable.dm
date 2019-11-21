@@ -1,5 +1,5 @@
 /obj/item/stack/cable_coil/New()
-	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/items/cable)
+	set_extension(src, /datum/extension/interactive/multitool/items/cable)
 	..()
 
 /datum/extension/interactive/multitool/items/cable/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)

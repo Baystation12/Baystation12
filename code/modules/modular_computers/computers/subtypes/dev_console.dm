@@ -5,7 +5,7 @@
 	var/obj/item/weapon/stock_parts/computer/hard_drive/portable/usb
 
 /obj/machinery/computer/modular/Initialize()
-	set_extension(src, /datum/extension/interactive/ntos, /datum/extension/interactive/ntos/console)
+	set_extension(src, /datum/extension/interactive/ntos/console)
 	. = ..()
 
 /obj/machinery/computer/modular/Destroy()
@@ -34,6 +34,8 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		if(!os.on)
+			if(!CanInteract(user, DefaultTopicState()))
+				return FALSE // Do full interactivity check before state change.
 			os.system_boot()
 
 		os.ui_interact(user)
@@ -111,3 +113,16 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		os.open_terminal(user)
+
+/obj/machinery/computer/modular/verb/emergency_shutdown()
+	set name = "Forced Shutdown"
+	set category = "Object"
+	set src in view(1)
+
+	if(!CanPhysicallyInteract(usr))
+		return
+
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os && os.on)
+		to_chat(usr, "You press a hard-reset button on \the [src].")
+		os.system_shutdown()

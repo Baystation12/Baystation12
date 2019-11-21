@@ -33,7 +33,7 @@
 	update_icon()
 
 
-	set_extension(src, /datum/extension/turf_hand, /datum/extension/turf_hand)
+	set_extension(src, /datum/extension/turf_hand)
 
 
 /obj/structure/ladder/Destroy()

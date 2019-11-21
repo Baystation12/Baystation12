@@ -456,7 +456,8 @@
 			src.visible_message("<span class='notice'>\The [src] makes an odd grinding noise before coming to a halt as \a [S.name] slurmps out from the receptacle.</span>")
 		else //Just a normal vend, then
 			R.get_product(get_turf(src))
-			src.visible_message("\The [src] whirs as it vends \the [R.item_name].")
+			src.visible_message("\The [src] clunks as it vends \the [R.item_name].")
+			playsound(src, 'sound/machines/vending_machine.ogg', 25, 1)
 			if(prob(1)) //The vending gods look favorably upon you
 				sleep(3)
 				if(R.get_product(get_turf(src)))

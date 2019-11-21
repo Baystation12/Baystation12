@@ -1,4 +1,5 @@
 /datum/extension/holster
+	base_type = /datum/extension/holster
 	var/atom/atom_holder
 	var/obj/item/weapon/storage/storage
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'

@@ -234,3 +234,7 @@
 
 /material/proc/combustion_effect(var/turf/T, var/temperature)
 	return
+
+// Dumb overlay to apply over wall sprite for cheap texture effect
+/material/proc/get_wall_texture()
+	return

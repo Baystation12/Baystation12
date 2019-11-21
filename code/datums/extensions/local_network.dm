@@ -1,4 +1,5 @@
 /datum/extension/local_network_member
+	base_type = /datum/extension/local_network_member
 	var/id_tag
 
 /datum/extension/local_network_member/Destroy()

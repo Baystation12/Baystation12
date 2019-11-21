@@ -1,13 +1,13 @@
-// Armor will turn attacks into less dangerous (e.g. turning cut into bruise), so keep that in mind when decided what armor value to use. 
+// Armor will turn attacks into less dangerous (e.g. turning cut into bruise), so keep that in mind when decided what armor value to use.
 // Some levels are marked with what they intend to block in such way.
 
 #define  ARMOR_BALLISTIC_MINOR		10
 #define  ARMOR_BALLISTIC_SMALL		25
-#define  ARMOR_BALLISTIC_PISTOL		30	//Blocks holdout and normal pistol ammo
-#define  ARMOR_BALLISTIC_RESISTANT	50
-#define  ARMOR_BALLISTIC_RIFLE		60	//Blocks rifle rounds
-#define  ARMOR_BALLISTIC_AP			80
-#define  ARMOR_BALLISTIC_HEAVY		100
+#define  ARMOR_BALLISTIC_PISTOL		50	//Blocks holdout and normal pistol ammo
+#define  ARMOR_BALLISTIC_RESISTANT	65
+#define  ARMOR_BALLISTIC_RIFLE		80	//Blocks rifle rounds
+#define  ARMOR_BALLISTIC_AP			95
+#define  ARMOR_BALLISTIC_HEAVY		110
 
 #define  ARMOR_LASER_MINOR			10
 #define  ARMOR_LASER_SMALL			25	//Blocks small e-guns

@@ -160,7 +160,7 @@ var/global/photo_count = 0
 	else
 		icon_state = "[bis.base_icon_state]_off"
 /obj/item/device/camera/Initialize()
-	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
 	. = ..()
 

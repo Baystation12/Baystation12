@@ -1,6 +1,7 @@
 /obj/item/projectile/energy
 	name = "energy"
 	icon_state = "spark"
+	temperature = T0C + 300
 	damage = 0
 	damage_type = BURN
 	damage_flags = 0

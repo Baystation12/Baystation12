@@ -3,6 +3,7 @@
 	desc = "A thing to keep your butts in."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ashtray"
+	max_force = 10
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	randpixel = 5
@@ -43,7 +44,7 @@
 
 		if(user.unEquip(W, src))
 			visible_message("[user] places [W] in [src].")
-			set_extension(src, /datum/extension/scent, /datum/extension/scent/ashtray)
+			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
 	else
 		..()

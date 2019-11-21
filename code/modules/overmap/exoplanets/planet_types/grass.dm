@@ -65,7 +65,7 @@
 	large_flora_prob = 30
 	flora_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
-	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna)
+	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
 
 /turf/simulated/floor/exoplanet/grass
 	name = "grass"

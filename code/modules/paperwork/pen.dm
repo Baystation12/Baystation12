@@ -26,25 +26,28 @@
 	var/colour = "black"	//what colour the ink is!
 	var/color_description = "black ink"
 
-
 /obj/item/weapon/pen/blue
+	name = "blue pen"
 	desc = "It's a normal blue ink pen."
 	icon_state = "pen_blue"
 	colour = "blue"
 	color_description = "blue ink"
 
 /obj/item/weapon/pen/red
+	name = "red pen"
 	desc = "It's a normal red ink pen."
 	icon_state = "pen_red"
 	colour = "red"
 	color_description = "red ink"
 
 /obj/item/weapon/pen/green
+	name = "green pen"
 	desc = "It's a normal green ink pen."
 	icon_state = "pen_green"
 	colour = "green"
 
 /obj/item/weapon/pen/multi
+	name = "multicoloured pen"
 	desc = "It's a pen with multiple colors of ink!"
 	var/selectedColor = 1
 	var/colors = list("black","blue","red","green")
@@ -219,3 +222,8 @@
 	throwforce = 1 //pointy
 	colour = "#1c1713" //dark ashy brownish
 	matter = list(MATERIAL_STEEL = 15)
+
+/obj/item/weapon/pen/fancy/quill
+	name = "dire goose quill"
+	desc = "A quill fashioned from a feather of the dire goose makes an excellent writing instrument, as well as a valuable trophy."
+	matter = null

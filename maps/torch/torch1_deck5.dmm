@@ -1435,6 +1435,7 @@
 /obj/random/tech_supply,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/embedded_controller/radio/airlock/tin_can{
+	dir = 8;
 	frequency = 1431;
 	id_tag = "guppy_shuttle";
 	pixel_x = 24;
@@ -4284,6 +4285,7 @@
 	dir = 1
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 8;
 	display_name = "Aft Dock (Petrov)";
 	frequency = 1380;
 	id_tag = "petrov_shuttle_dock_airlock";
@@ -17887,6 +17889,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 0;
+	dir = 4;
 	frequency = 1380;
 	id_tag = "petrov_shuttle_airlock";
 	pixel_x = -24;

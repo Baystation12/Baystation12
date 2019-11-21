@@ -1,5 +1,5 @@
 /obj/item/clothing/under/New()
-	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/items/clothing)
+	set_extension(src, /datum/extension/interactive/multitool/items/clothing)
 	..()
 
 /datum/extension/interactive/multitool/items/clothing/interact(var/obj/item/device/multitool/M, var/mob/user)

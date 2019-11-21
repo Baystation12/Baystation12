@@ -30,13 +30,14 @@ Scent intensity
  Scent extensions
  Usage:
 	To add:
-		set_extension(atom, /datum/extension/scent, /datum/extension/scent/PATH/TO/SPECIFIC/SCENT)
+		set_extension(atom, /datum/extension/scent/PATH/TO/SPECIFIC/SCENT)
 		This will set up the extension and will make it begin to emit_scent.
 	To remove:
 		remove_extension(atom, /datum/extension/scent)
 *****/
 
 /datum/extension/scent
+	base_type = /datum/extension/scent
 	expected_type = /atom
 	flags = EXTENSION_FLAG_IMMEDIATE
 
@@ -57,27 +58,25 @@ Scent intensity
 
 /datum/extension/scent/Process()
 	if(!holder)
-		CRASH("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
-		qdel_self()
+		crash_with("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
+		qdel(src)
+		return PROCESS_KILL
 	emit_scent()
 
 /datum/extension/scent/proc/emit_scent()
-	if(holder)
-		for(var/mob/living/carbon/human/H in all_hearers(holder, range))
-			var/turf/T = get_turf(H.loc)
-			if(!T)
-				continue
-			if(H.stat != CONSCIOUS || H.failed_last_breath || H.wear_mask || H.head && H.head.permeability_coefficient < 1 || !T.return_air())
-				continue
-			if(H.last_smelt < world.time)
-				intensity.PrintMessage(H, descriptor, scent)
-				H.last_smelt = world.time + intensity.cooldown
-	else
-		CRASH("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
+	for(var/mob/living/carbon/human/H in all_hearers(holder, range))
+		var/turf/T = get_turf(H.loc)
+		if(!T)
+			continue
+		if(H.stat != CONSCIOUS || H.failed_last_breath || H.wear_mask || H.head && H.head.permeability_coefficient < 1 || !T.return_air())
+			continue
+		if(H.last_smelt < world.time)
+			intensity.PrintMessage(H, descriptor, scent)
+			H.last_smelt = world.time + intensity.cooldown
 
 /*****
 Custom subtype
-	set_extension(atom, /datum/extension/scent, /datum/extension/scent/custom, scent = "scent", intensity = SCENT_INTENSITY_, ... etc)
+	set_extension(atom, /datum/extension/scent/custom, scent = "scent", intensity = SCENT_INTENSITY_, ... etc)
 This will let you set an extension without needing to define it beforehand. Note that all vars are required if generating.
 *****/
 /datum/extension/scent/custom/New(var/datum/holder, var/provided_scent, var/provided_intensity, var/provided_descriptor, var/provided_range)
@@ -89,8 +88,7 @@ This will let you set an extension without needing to define it beforehand. Note
 		descriptor = provided_descriptor
 		range = provided_range
 	else
-		crash_with("Attempted to generate a scent extension on [holder], but at least one of the required vars was not provided.")
-		qdel_self()
+		CRASH("Attempted to generate a scent extension on [holder], but at least one of the required vars was not provided.")
 
 /*****
 Reagents have the following vars, which coorelate to the vars on the standard scent extension:
@@ -116,4 +114,4 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 			smelliest = R
 			scent_intensity = r_scent_intensity 
 	if(smelliest)
-		set_extension(smelly_atom, /datum/extension/scent, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)
+		set_extension(smelly_atom, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)

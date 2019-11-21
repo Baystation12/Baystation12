@@ -71,7 +71,7 @@
 /datum/psi_complexus/New(var/mob/_owner)
 	owner = _owner
 	START_PROCESSING(SSpsi, src)
-	set_extension(src, /datum/extension/armor, /datum/extension/armor/psionic)
+	set_extension(src, /datum/extension/armor/psionic)
 
 /datum/psi_complexus/Destroy()
 	destroy_aura_image(_aura_image)

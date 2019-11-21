@@ -470,8 +470,7 @@
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/spider/Initialize()
-	.=..()
-	name = "giant spider leg" //since most mobs use a generic meat type and append the name of the mob onto it ('parrot meat')
+	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
 
 /obj/item/weapon/reagent_containers/food/snacks/spider/cooked

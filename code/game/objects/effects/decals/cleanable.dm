@@ -45,4 +45,4 @@
 
 /obj/effect/decal/cleanable/proc/set_cleanable_scent()
 	if(cleanable_scent)
-		set_extension(src, /datum/extension/scent, /datum/extension/scent/custom, cleanable_scent, scent_intensity, scent_descriptor, scent_range)
+		set_extension(src, /datum/extension/scent/custom, cleanable_scent, scent_intensity, scent_descriptor, scent_range)

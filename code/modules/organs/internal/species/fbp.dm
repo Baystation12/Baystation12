@@ -29,15 +29,17 @@
 		return 0
 	return round(cell.charge*(1 - damage/max_damage))
 
-/obj/item/organ/internal/cell/proc/check_charge(var/amount)
-	return get_charge() >= amount
+/obj/item/organ/internal/cell/proc/checked_use(var/amount)
+	if(!is_usable())
+		return FALSE
+	return cell && cell.checked_use(amount)
 
 /obj/item/organ/internal/cell/proc/use(var/amount)
-	if(check_charge(amount))
-		cell.use(amount)
-		return 1
+	if(!is_usable())
+		return 0
+	return cell && cell.use(amount)
 
-/obj/item/organ/internal/cell/proc/get_servo_cost()
+/obj/item/organ/internal/cell/proc/get_power_drain()	
 	var/damage_factor = 1 + 10 * damage/max_damage
 	return servo_cost * damage_factor
 
@@ -47,13 +49,10 @@
 		return
 	if(owner.stat == DEAD)	//not a drain anymore
 		return
-	if(!is_usable())
-		owner.Paralyse(3)
-		return
-	var/cost = get_servo_cost()
+	var/cost = get_power_drain()
 	if(world.time - owner.l_move_time < 15)
 		cost *= 2
-	if(!use(cost))
+	if(!checked_use(cost) && owner.isSynthetic())
 		if(!owner.lying && !owner.buckled)
 			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
 		owner.Paralyse(3)
