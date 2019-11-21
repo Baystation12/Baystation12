@@ -21,6 +21,7 @@
 #include "code\__defines\_compile_options.dm"
 #include "code\__defines\_planes+layers.dm"
 #include "code\__defines\admin.dm"
+#include "code\__defines\ai_routing_access.dm"
 #include "code\__defines\appearance.dm"
 #include "code\__defines\atmos.dm"
 #include "code\__defines\atmospherics.dm"
