@@ -213,7 +213,10 @@
 
 /obj/item/weapon/robot_module/proc/grant_skills(var/mob/living/silicon/robot/R)
 	reset_skills(R) // for safety
-	R.buff_skill(skills, buff_type = /datum/skill_buff/robot)
+	var/list/skill_mod = list()
+	for(var/skill_type in skills)
+		skill_mod[skill_type] = skills[skill_type] - SKILL_MIN // the buff is additive, so normalize accordingly
+	R.buff_skill(skill_mod, buff_type = /datum/skill_buff/robot)
 
 /obj/item/weapon/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
 	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
