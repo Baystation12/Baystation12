@@ -107,12 +107,15 @@
 /turf/simulated/floor/plating,
 /area/merc_shuttle)
 "aj" = (
-/obj/machinery/computer/ship/helm,
+/obj/machinery/computer/ship/helm{
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
 /turf/simulated/floor/shuttle/darkred,
 /area/merc_shuttle)
 "ak" = (
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_SYNDICATE");
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -122,7 +125,9 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/merc_shuttle)
 "al" = (
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/ship/engines{
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
 /obj/machinery/light/spot{
 	icon_state = "tube_map";
 	dir = 1
