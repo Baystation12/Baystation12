@@ -67,7 +67,14 @@
 	else
 	*/
 	A.add_hiddenprint(src)
-	A.attack_ai(src)
+	if(A.ai_access_level > 0 && !(check_access_level(A) >= A.ai_access_level))
+		to_chat(src,"<span class = 'notice'>Insufficient access level in local area to access this machinery.</span>")
+		return
+	if(A.ai_access_cost > 0)
+		if(spend_cpu(ai_access_cost))
+			A.attack_ai(src)
+	else
+		A.attack_ai(src)
 
 /*
 	AI has no need for the UnarmedAttack() and RangedAttack() procs,
