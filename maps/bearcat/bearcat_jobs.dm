@@ -82,17 +82,17 @@
 	total_positions = 1
 	spawn_positions = 1
 	hud_icon = "hudmedicaldoctor"
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_MEDICAL     = SKILL_EXPERT,
-	                    SKILL_ANATOMY     = SKILL_EXPERT,
-	                    SKILL_CHEMISTRY   = SKILL_BASIC,
-	                    SKILL_VIROLOGY    = SKILL_BASIC)
+	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
+						SKILL_MEDICAL     = SKILL_EXPERT,
+						SKILL_ANATOMY     = SKILL_EXPERT,
+						SKILL_CHEMISTRY   = SKILL_BASIC,
+						SKILL_VIROLOGY    = SKILL_BASIC)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX,
 	                    SKILL_VIROLOGY    = SKILL_MAX)
-	skill_points = 28
+	skill_points = 20
 
 /datum/job/hop
 	title = "First Mate"

@@ -74,6 +74,15 @@ GLOBAL_LIST_EMPTY(skills)
 	ID	 = "medical"
 	difficulty = SKILL_HARD
 
+/decl/hierarchy/skill/medical/get_cost(var/level)
+	switch(level)
+		if(SKILL_BASIC, SKILL_ADEPT)
+			return difficulty
+		if(SKILL_EXPERT, SKILL_PROF)
+			return 0.5*difficulty
+		else
+			return 0
+
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
 

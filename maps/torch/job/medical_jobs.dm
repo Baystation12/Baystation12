@@ -4,7 +4,7 @@
 	department_flag = MED
 	minimal_player_age = 2
 	minimum_character_age = list(SPECIES_HUMAN = 29)
-	ideal_character_age = 45
+	ideal_character_age = 35
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
@@ -35,7 +35,6 @@
 	                    SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX,
 	                    SKILL_VIROLOGY    = SKILL_MAX)
-	skill_points = 28
 
 	access = list(access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
 			            access_crematorium, access_chemistry, access_surgery,
@@ -51,7 +50,7 @@
 	supervisors = "Physicians and the Chief Medical Officer"
 	economic_power = 7
 	minimum_character_age = list(SPECIES_HUMAN = 19)
-	ideal_character_age = 40
+	ideal_character_age = 25
 	minimal_player_age = 0
 	alt_titles = list(
 		"Paramedic",
@@ -85,7 +84,6 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
-	skill_points = 26
 
 /datum/job/medical_trainee
 	title = "Trainee Medical Technician"
@@ -152,7 +150,6 @@
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
-	skill_points = 26
 
 	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
 	minimal_access = list()
@@ -161,7 +158,7 @@
 	title = "Counselor"
 	total_positions = 1
 	spawn_positions = 1
-	ideal_character_age = 40
+	ideal_character_age = 30
 	economic_power = 5
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
