@@ -13,6 +13,9 @@
 	var/simulated = 1 //filter for actions - used by lighting overlays
 	var/fluorescent // Shows up under a UV light.
 
+	var/ai_access_cost = 0//The cost of CPU points for accessing this item's attack_ai()
+	var/ai_access_level = 0
+
 	///Chemistry.
 	var/datum/reagents/reagents = null
 
