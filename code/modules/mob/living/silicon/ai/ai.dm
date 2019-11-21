@@ -4,14 +4,14 @@
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_announcement,
-	/mob/living/silicon/ai/proc/ai_call_shuttle,
-	/mob/living/silicon/ai/proc/ai_emergency_message,
+	//mob/living/silicon/ai/proc/ai_call_shuttle,
+	//mob/living/silicon/ai/proc/ai_emergency_message,
 	/mob/living/silicon/ai/proc/ai_camera_track,
 	/mob/living/silicon/ai/proc/ai_camera_list,
 	/mob/living/silicon/ai/proc/ai_goto_location,
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
-	/mob/living/silicon/ai/proc/ai_network_change,
+	//mob/living/silicon/ai/proc/ai_network_change,
 	/mob/living/silicon/ai/proc/ai_roster,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
@@ -67,6 +67,7 @@ var/list/ai_verbs_default = list(
 
 	var/multitool_mode = 0
 
+	var/cpu_points_max = 100
 	var/cpu_points = 100 //Spent on Terminal access, node access and ability usage.
 
 	var/native_network = "Exodus"//If we're in this network, we don't spend CPU points UNLESS another AI is in the network..
@@ -271,6 +272,26 @@ var/list/ai_verbs_default = list(
 	// Placing custom icons first to have them be at the top
 	. = LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]") | .
 
+/mob/living/silicon/ai/proc/check_access_level(var/atom/a)
+	var/area/atom_area = a.loc.loc
+	if(!istype(atom_area) || !istype(atom_area.ai_routing_node))
+		return -1
+	var/our_access = atom_area.ai_routing_node.ais_to_access_levels[src]
+	if(isnull(our_access))
+		return -1
+	return our_access
+
+/mob/living/silicon/ai/proc/spend_cpu(var/amt,var/check_only = 0)
+	var/new_cpu = cpu_points - amt
+	if(new_cpu < 0)
+		return 0
+	if(new_cpu > cpu_points_max)
+		new_cpu = cpu_points_max
+
+	if(!check_only)
+		cpu_points = new_cpu
+	return 1
+
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
 	set category = "Silicon Commands"
@@ -317,7 +338,7 @@ var/list/ai_verbs_default = list(
 
 	post_status("shuttle")
 
-/mob/living/silicon/ai/proc/ai_recall_shuttle()
+/*/mob/living/silicon/ai/proc/ai_recall_shuttle()
 	set category = "Silicon Commands"
 	set name = "Cancel Evacuation"
 
@@ -353,7 +374,7 @@ var/list/ai_verbs_default = list(
 	emergency_message_cooldown = 1
 	spawn(300)
 		emergency_message_cooldown = 0
-
+*/
 
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!camera)
@@ -452,7 +473,7 @@ var/list/ai_verbs_default = list(
 
 	cameralist = sortAssoc(cameralist)
 	return cameralist
-
+/*
 /mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
 	set category = "Silicon Commands"
 	set name = "Jump To Network"
@@ -475,7 +496,7 @@ var/list/ai_verbs_default = list(
 			break
 	to_chat(src, "<span class='notice'>Switched to [network] camera network.</span>")
 //End of code by Mord_Sith
-
+*/
 /mob/living/silicon/ai/proc/ai_statuschange()
 	set category = "Silicon Commands"
 	set name = "AI Status"
