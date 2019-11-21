@@ -918,7 +918,7 @@
 	},
 /obj/machinery/door/airlock/external{
 	density = 1;
-	dir = 4;
+	dir = 2;
 	frequency = 1435;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
@@ -1169,7 +1169,9 @@
 "bN" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	frequency = 1437;
-	id_tag = "fuel_in"
+	id = "fuel_in";
+	id_tag = null;
+	use_power = 1
 	},
 /obj/machinery/sparker{
 	id_tag = "merc_igniter";
@@ -1256,7 +1258,9 @@
 /area/merc_shuttle/rear)
 "bU" = (
 /obj/structure/catwalk,
-/obj/machinery/atmospherics/unary/outlet_injector,
+/obj/machinery/atmospherics/unary/outlet_injector{
+	use_power = 1
+	},
 /turf/simulated/floor/plating,
 /area/merc_shuttle/rear)
 "bV" = (
