@@ -41,7 +41,7 @@
 /obj/item/clothing/head/helmet/marine/medic/visor
 	name = "Olive Camo CH251-V Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "CH252 Helmet Medic"
+	item_state = "CH252 Visor Helmet Medic"
 	icon_state = "helmet medic_obj"
 	body_parts_covered = HEAD|EYES
 

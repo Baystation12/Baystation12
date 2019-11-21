@@ -218,6 +218,7 @@
 	edge = 1
 	armor_penetration = 35
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
+	advanced_covenant = 1
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 

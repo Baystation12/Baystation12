@@ -18,6 +18,7 @@
 	dispersion = list(2, 1.8, 1.5, 1.2,0.8, 0.8)
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 5
+	advanced_covenant = 1
 
 
 /obj/item/weapon/gun/energy/plasmarepeater/proc/cov_plasma_recharge_tick()
