@@ -1,5 +1,6 @@
 /datum/artifact_trigger/temperature
 	name = "specific temperature range"
+	toggle = FALSE
 	var/min_temp
 	var/max_temp
 
