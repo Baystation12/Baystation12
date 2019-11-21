@@ -49,7 +49,7 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
 	selection_color = "#008000"
-	access = list(311)
+	access = list(310,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
