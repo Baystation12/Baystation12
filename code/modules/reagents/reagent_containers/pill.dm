@@ -11,7 +11,7 @@
 	possible_transfer_amounts = null
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	volume = 60
+	volume = 30
 
 /obj/item/weapon/reagent_containers/pill/New()
 	..()
@@ -84,6 +84,7 @@
 	name = "toxins pill"
 	desc = "Highly toxic."
 	icon_state = "pill4"
+	volume = 50
 /obj/item/weapon/reagent_containers/pill/tox/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin, 50)
@@ -94,6 +95,7 @@
 	name = "strange pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
+	volume = 50
 /obj/item/weapon/reagent_containers/pill/cyanide/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)

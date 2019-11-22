@@ -162,7 +162,7 @@
 				return
 
 			var/amount_per_pill = reagents.total_volume/count
-			if (amount_per_pill > 60) amount_per_pill = 60
+			if (amount_per_pill > 30) amount_per_pill = 30
 
 			var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill]u)"), MAX_NAME_LEN)
 
@@ -303,7 +303,7 @@
 //Use to add extra stuff to the end of the menu.
 /obj/machinery/chem_master/proc/extra_options()
 	. = list()
-	. += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (60 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
+	. += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (30 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
 	. += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
 	. += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"[bottlesprite].png\" /></A>"
 	return JOINTEXT(.)
