@@ -24,7 +24,7 @@
 
 /obj/item/weapon/implant/uplink/emp_act(severity)
 	var/power = 4 - severity
-	if(prob(power * 15))
+	if(prob(power))
 		meltdown()
 	else if(prob(power * 40))
 		disable(rand(power*100,power*1000))

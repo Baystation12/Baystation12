@@ -338,3 +338,9 @@
 	if(isSynthetic())
 		return // Can't cure disabilites, so don't give them.
 	..()
+
+/mob/living/carbon/human/proc/has_meson_effect()
+	. = FALSE
+	for(var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
+		if (equipment_screen.icon_state == "meson_hud")
+			return TRUE

@@ -17,6 +17,7 @@
 	handle_icon = "swissknf_handle"
 	takes_colour = FALSE
 	valid_colors = null
+	max_force = 10
 
 	var/active_tool = SWISSKNF_CLOSED
 	var/tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER)

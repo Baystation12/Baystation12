@@ -255,3 +255,15 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	if (href_list["viewing"])
 		viewing_overmap(user) ? unlook(user) : look(user)
 		return TOPIC_REFRESH
+
+/obj/machinery/computer/ship/navigation/telescreen	//little hacky but it's only used on one ship so it should be okay
+	icon_state = "tele_nav"
+	density = 0
+
+/obj/machinery/computer/ship/navigation/telescreen/on_update_icon()
+	if(reason_broken & MACHINE_BROKEN_NO_PARTS || stat & NOPOWER || stat & BROKEN)
+		icon_state = "tele_off"
+		set_light(0)
+	else
+		icon_state = "tele_nav"
+		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)

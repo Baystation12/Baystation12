@@ -1,4 +1,5 @@
 /datum/extension/armor
+	base_type = /datum/extension/armor
 	expected_type = /atom/movable
 	var/list/armor_values
 	var/full_block_message = "Your armor absorbs the blow!"
@@ -15,7 +16,7 @@
 	var/over_armor_mult = 1
 
 /datum/extension/armor/New(atom/movable/holder, list/armor)
-	..(holder)
+	..()
 	if(armor)
 		armor_values = armor.Copy()
 

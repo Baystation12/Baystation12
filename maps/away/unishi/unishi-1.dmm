@@ -836,12 +836,6 @@
 /obj/effect/shuttle_landmark/nav_unishi/nav3,
 /turf/space,
 /area/space)
-"lB" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "FR" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -4460,7 +4454,7 @@ aa
 aa
 aa
 aa
-lB
+aa
 aa
 aa
 aa
@@ -7713,7 +7707,7 @@ aa
 aa
 aa
 aa
-lB
+aa
 aa
 aa
 aa

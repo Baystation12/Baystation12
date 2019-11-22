@@ -47,15 +47,12 @@
 						list_of_accesses += "RD_ERR"
 				. += jointext(list_of_accesses, ", ") + "\n" // Should append a proper, comma separated list.
 
-/obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id(mob/user)
+/obj/item/weapon/stock_parts/computer/card_slot/proc/verb_eject_id()
 	set name = "Remove ID"
 	set category = "Object"
 	set src in view(1)
 
-	if(!user)
-		user = usr
-
-	if(!CanPhysicallyInteract(user))
+	if(!CanPhysicallyInteract(usr))
 		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
 		return
 
@@ -64,10 +61,11 @@
 		device = locate() in src
 
 	if(!device.stored_card)
-		to_chat(user, "There is no card in \the [src]")
+		if(usr)
+			to_chat(usr, "There is no card in \the [src]")
 		return
 
-	device.eject_id(user)
+	device.eject_id(usr)
 
 /obj/item/weapon/stock_parts/computer/card_slot/proc/eject_id(mob/user)
 	if(!stored_card)
@@ -83,7 +81,7 @@
 	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)
 	if(os)
 		os.event_idremoved()
-	loc.verbs -= /obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id
+	loc.verbs -= /obj/item/weapon/stock_parts/computer/card_slot/proc/verb_eject_id
 	return TRUE
 
 /obj/item/weapon/stock_parts/computer/card_slot/proc/insert_id(var/obj/item/weapon/card/id/I, mob/user)
@@ -100,7 +98,7 @@
 	stored_card = I
 	to_chat(user, "You insert [I] into [src].")
 	if(isobj(loc))
-		loc.verbs |= /obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id
+		loc.verbs |= /obj/item/weapon/stock_parts/computer/card_slot/proc/verb_eject_id
 	return TRUE
 
 /obj/item/weapon/stock_parts/computer/card_slot/attackby(obj/item/weapon/card/id/I, mob/living/user)
@@ -118,7 +116,7 @@
 	usage_flags = PROGRAM_PDA
 
 /obj/item/weapon/stock_parts/computer/card_slot/Destroy()
-	loc.verbs -= /obj/item/weapon/stock_parts/computer/card_slot/verb/verb_eject_id
+	loc.verbs -= /obj/item/weapon/stock_parts/computer/card_slot/proc/verb_eject_id
 	if(stored_card)
 		QDEL_NULL(stored_card)
 	return ..()

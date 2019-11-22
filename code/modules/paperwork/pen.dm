@@ -26,7 +26,6 @@
 	var/colour = "black"	//what colour the ink is!
 	var/color_description = "black ink"
 
-
 /obj/item/weapon/pen/blue
 	name = "blue pen"
 	desc = "It's a normal blue ink pen."
@@ -223,3 +222,8 @@
 	throwforce = 1 //pointy
 	colour = "#1c1713" //dark ashy brownish
 	matter = list(MATERIAL_STEEL = 15)
+
+/obj/item/weapon/pen/fancy/quill
+	name = "dire goose quill"
+	desc = "A quill fashioned from a feather of the dire goose makes an excellent writing instrument, as well as a valuable trophy."
+	matter = null

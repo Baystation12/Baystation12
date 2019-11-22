@@ -6,6 +6,7 @@
 	When multiple of these components are in the tile, the one with the highest priority wins it.
 */
 /datum/extension/turf_hand
+	base_type = /datum/extension/turf_hand
 	var/priority = 1
 	expected_type = /atom
 

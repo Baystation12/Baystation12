@@ -11,7 +11,7 @@
 	shuttle_tag = M.shuttle_tag
 
 /obj/item/weapon/stock_parts/circuitboard/shuttle_console/Initialize()
-	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/circuitboards/shuttle_console)
+	set_extension(src, /datum/extension/interactive/multitool/circuitboards/shuttle_console)
 	. = ..()
 
 /obj/item/weapon/stock_parts/circuitboard/shuttle_console/proc/is_valid_shuttle(datum/shuttle/shuttle)

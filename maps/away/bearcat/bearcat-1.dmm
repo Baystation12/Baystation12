@@ -2752,12 +2752,6 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/broken1)
-"oJ" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "vU" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -7493,7 +7487,7 @@ aa
 aa
 aa
 aa
-oJ
+aa
 aa
 aa
 aa
@@ -9716,7 +9710,7 @@ aa
 aa
 aa
 aa
-oJ
+aa
 aa
 aa
 aa
@@ -12130,7 +12124,7 @@ aa
 aa
 aa
 aa
-oJ
+aa
 aa
 aa
 aa

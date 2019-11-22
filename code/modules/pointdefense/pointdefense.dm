@@ -14,7 +14,7 @@
 
 /obj/machinery/pointdefense_control/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member/multilevel)
+	set_extension(src, /datum/extension/local_network_member/multilevel)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
@@ -116,7 +116,7 @@
 
 /obj/machinery/pointdefense/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/local_network_member, /datum/extension/local_network_member/multilevel)
+	set_extension(src, /datum/extension/local_network_member/multilevel)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
@@ -200,7 +200,8 @@
 	var/obj/machinery/pointdefense_control/PC = null
 	if(lan)
 		var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-		PC = pointdefense_controllers[1]
+		if(pointdefense_controllers)
+			PC = LAZYACCESS(pointdefense_controllers, 1)
 	if(!istype(PC))
 		return
 

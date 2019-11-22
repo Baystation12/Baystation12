@@ -99,6 +99,10 @@
 	name = T_BOARD("navigation console")
 	build_path = /obj/machinery/computer/ship/navigation
 
+/obj/item/weapon/stock_parts/circuitboard/nav/tele
+	name = T_BOARD("navigation telescreen")
+	build_path = /obj/machinery/computer/ship/navigation/telescreen
+
 /obj/item/weapon/stock_parts/circuitboard/sensors
 	name = T_BOARD("sensors console")
 	build_path = /obj/machinery/computer/ship/sensors

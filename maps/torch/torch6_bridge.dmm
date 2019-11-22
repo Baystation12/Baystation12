@@ -4434,6 +4434,7 @@
 /area/hallway/primary/bridge/fore)
 "ip" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	dir = 4;
 	frequency = 1379;
 	id_tag = "bridge_eva_airlock";
 	name = "Engineering Airlock Console";
@@ -15900,6 +15901,7 @@
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 8;
 	display_name = "Bridge Deck Dock";
 	frequency = 1331;
 	id_tag = "aquila_shuttle_dock_airlock";
@@ -16468,12 +16470,6 @@
 /obj/structure/bed/chair/padded/green,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
-"Ut" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "Uu" = (
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -22671,7 +22667,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -22914,7 +22910,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -23297,7 +23293,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -27507,7 +27503,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -27771,7 +27767,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -34382,7 +34378,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -34433,7 +34429,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -38608,7 +38604,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -38690,7 +38686,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -42865,7 +42861,7 @@ aa
 aa
 aa
 aa
-Ut
+aa
 aa
 ad
 ad
@@ -43120,7 +43116,7 @@ ad
 ae
 aa
 aa
-Ut
+aa
 aa
 aa
 aa
@@ -47726,7 +47722,6 @@ aa
 aa
 aa
 aa
-Ut
 aa
 aa
 aa
@@ -47751,7 +47746,8 @@ aa
 aa
 aa
 aa
-Ut
+aa
+aa
 aa
 aa
 aa

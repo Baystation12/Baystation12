@@ -3079,12 +3079,6 @@
 /obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
-"Ul" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 
 (1,1,1) = {"
 aa
@@ -6399,7 +6393,7 @@ aa
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa
@@ -8092,7 +8086,7 @@ aa
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa
@@ -9178,7 +9172,7 @@ gJ
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa
@@ -9766,7 +9760,7 @@ aa
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa

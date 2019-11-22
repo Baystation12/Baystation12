@@ -53,4 +53,4 @@
 
 /obj/item/robot_parts/robot_component/armour/exosuit/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/armor, /datum/extension/armor, armor)
+	set_extension(src, /datum/extension/armor, armor)

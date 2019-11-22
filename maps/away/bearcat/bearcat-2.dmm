@@ -5732,12 +5732,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/power)
-"mB" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "nS" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -9219,7 +9213,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -10107,7 +10101,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -12929,7 +12923,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -13103,7 +13097,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -15598,7 +15592,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -16903,7 +16897,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa

@@ -14,12 +14,6 @@
 /obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle,
 /turf/space,
 /area/space)
-"aae" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "aaf" = (
 /turf/simulated/wall/r_wall/hull,
 /area/medical/virology)
@@ -803,6 +797,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/embedded_controller/radio/airlock/access_controller{
+	dir = 1;
 	id_tag = "virology_airlock_control";
 	name = "Virology Access Console";
 	pixel_x = -24;
@@ -1638,6 +1633,7 @@
 	pixel_y = -6
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	dir = 8;
 	frequency = 1379;
 	id_tag = "bridgestarboard_airlock";
 	pixel_x = 25;
@@ -4105,6 +4101,9 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
+/obj/machinery/computer/cryopod{
+	pixel_x = -32
+	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod12/station)
 "ake" = (
@@ -4801,6 +4800,9 @@
 "anb" = (
 /obj/machinery/cryopod{
 	dir = 2
+	},
+/obj/machinery/computer/cryopod{
+	pixel_x = -32
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod13/station)
@@ -10505,6 +10507,9 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
+/obj/machinery/computer/cryopod{
+	pixel_x = -32
+	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod14/station)
 "aMy" = (
@@ -11344,6 +11349,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 1;
 	frequency = 1380;
 	id_tag = "escape_pod_15_berth";
 	name = "escape pod ten berth controller";
@@ -11423,6 +11429,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 1;
 	frequency = 1380;
 	id_tag = "escape_pod_16_berth";
 	name = "escape pod eleven berth controller";
@@ -11465,6 +11472,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 1;
 	frequency = 1380;
 	id_tag = "escape_pod_17_berth";
 	name = "escape pod twelve berth controller";
@@ -12737,6 +12745,7 @@
 /area/maintenance/firstdeck/centralport)
 "aTB" = (
 /obj/machinery/embedded_controller/radio/airlock/access_controller{
+	dir = 4;
 	id_tag = "xeno_airlock_control";
 	name = "Xenobiology Access Console";
 	pixel_x = -24;
@@ -13249,6 +13258,7 @@
 	dir = 10
 	},
 /obj/machinery/embedded_controller/radio/airlock/access_controller{
+	dir = 1;
 	id_tag = "xeno_airlock_control";
 	name = "Xenobiology Access Console";
 	pixel_x = 8;
@@ -13903,6 +13913,7 @@
 /area/crew_quarters/safe_room/firstdeck)
 "aYb" = (
 /obj/machinery/embedded_controller/radio/airlock/access_controller{
+	dir = 4;
 	id_tag = "virology_airlock_control";
 	name = "Virology Access Console";
 	pixel_x = -24;
@@ -14594,13 +14605,13 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/machinery/computer/cryopod{
-	pixel_x = -32
-	},
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod12/station)
@@ -14615,13 +14626,13 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/machinery/computer/cryopod{
-	pixel_x = -32
-	},
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod13/station)
@@ -14642,25 +14653,23 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/machinery/computer/cryopod{
-	pixel_x = -32
-	},
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/turf/simulated/floor/plating,
-/area/shuttle/escape_pod14/station)
-"bQb" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
+/turf/simulated/floor/plating,
+/area/shuttle/escape_pod14/station)
+"bQb" = (
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 4;
 	frequency = 1380;
 	id_tag = "escape_pod_12";
 	name = "escape pod seven controller";
@@ -14676,14 +14685,12 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod12/station)
 "bRb" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 4;
 	frequency = 1380;
 	id_tag = "escape_pod_13";
 	name = "escape pod eight controller";
@@ -14699,14 +14706,12 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod13/station)
 "bSb" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 4;
 	frequency = 1380;
 	id_tag = "escape_pod_14";
 	name = "escape pod nine controller";
@@ -14746,6 +14751,7 @@
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 8;
 	frequency = 1380;
 	id_tag = "escape_pod_15";
 	name = "escape pod ten controller";
@@ -14765,6 +14771,7 @@
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 8;
 	frequency = 1380;
 	id_tag = "escape_pod_16";
 	name = "escape pod eleven controller";
@@ -14809,6 +14816,7 @@
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 8;
 	frequency = 1380;
 	id_tag = "escape_pod_17";
 	name = "escape pod twelve controller";
@@ -29433,6 +29441,7 @@
 	pixel_y = 12
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	dir = 8;
 	frequency = 1379;
 	id_tag = "bridgeport_airlock";
 	pixel_x = 25;
@@ -34819,7 +34828,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -36449,7 +36458,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -37049,7 +37058,6 @@ aaa
 aaa
 aaa
 aaa
-aae
 aaa
 aaa
 aaa
@@ -37079,7 +37087,8 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -37263,7 +37272,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -39645,7 +39654,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -41124,7 +41133,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -41267,7 +41276,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -44501,7 +44510,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -44565,7 +44574,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -45709,7 +45718,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -46780,7 +46789,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -49415,7 +49424,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -49747,7 +49756,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -50820,7 +50829,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -54668,7 +54677,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -55201,7 +55210,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -58293,7 +58302,7 @@ aUu
 xPU
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -58635,7 +58644,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -61316,7 +61325,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -61483,7 +61492,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -61703,7 +61712,7 @@ acd
 aaa
 acd
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -62123,7 +62132,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa
@@ -63709,7 +63718,7 @@ aaa
 aaa
 aaa
 aaa
-aae
+aaa
 aaa
 aaa
 aaa

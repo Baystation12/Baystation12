@@ -178,7 +178,7 @@
 		if(islist(armor))
 			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
-			set_extension(piece, /datum/extension/armor, /datum/extension/armor/rig, armor)
+			set_extension(piece, /datum/extension/armor/rig, armor)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)

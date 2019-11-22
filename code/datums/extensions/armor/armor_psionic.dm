@@ -1,4 +1,3 @@
-
 /datum/extension/armor/psionic
 	expected_type = /datum/psi_complexus
 	full_block_message = "You block the blow with your mind!"

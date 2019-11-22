@@ -470,7 +470,7 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	value = 3.6
-	
+
 /datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/needs_update = M.mutations.len > 0
 
@@ -976,3 +976,21 @@
 	if(do_giggle && prob(20))
 		M.emote(pick("giggle", "laugh"))
 	M.add_chemical_effect(CE_PULSE, -1)
+
+
+	// Immunity-restoring reagent
+/datum/reagent/immunobooster
+	name = "Immunobooster"
+	description = "A drug that helps restore the immune system. Will not replace a normal immunity."
+	taste_description = "chalky"
+	reagent_state = LIQUID
+	color = "#ffc0cb"
+	metabolism = REM
+	overdose = REAGENTS_OVERDOSE * 2
+	value = 1.5
+	scannable = 1
+
+/datum/reagent/immunobooster/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.

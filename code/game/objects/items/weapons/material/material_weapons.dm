@@ -11,16 +11,20 @@
 	sharp = 0
 	edge = 0
 
-	var/applies_material_colour = 1
-	var/applies_material_name = 1 //if false, does not rename item to 'material item.name'
-	var/unbreakable
-	var/force_divisor = 0.5
-	var/thrown_force_divisor = 0.5
-	var/attack_cooldown_modifier
 	var/default_material = MATERIAL_STEEL
 	var/material/material
-	var/drops_debris = 1
+
+	var/applies_material_colour = 1
+	var/applies_material_name = 1 //if false, does not rename item to 'material item.name'
 	var/furniture_icon  //icon states for non-material colorable overlay, i.e. handles
+	
+	var/max_force = 40	 //any damage above this is added to armor penetration value
+	var/force_divisor = 0.5	// multiplier (sic) to material's generic damage value for this specific type of weapon
+	var/thrown_force_divisor = 0.5
+
+	var/attack_cooldown_modifier
+	var/unbreakable
+	var/drops_debris = 1
 	var/worth_multiplier = 1
 
 /obj/item/weapon/material/New(var/newloc, var/material_key)
@@ -43,11 +47,18 @@
 	return material
 
 /obj/item/weapon/material/proc/update_force()
+	var/new_force
 	if(edge || sharp)
-		force = material.get_edge_damage()
+		new_force = material.get_edge_damage()
 	else
-		force = material.get_blunt_damage()
-	force = round(force*force_divisor)
+		new_force = material.get_blunt_damage()
+	new_force = round(new_force*force_divisor)
+	force = min(new_force, max_force)
+
+	if(new_force > max_force)
+		armor_penetration = initial(armor_penetration) + new_force - max_force
+	armor_penetration += 2*max(0, material.brute_armor - 2)
+
 	throwforce = round(material.get_blunt_damage()*thrown_force_divisor)
 	attack_cooldown = material.get_attack_cooldown() + attack_cooldown_modifier
 	//spawn(1)

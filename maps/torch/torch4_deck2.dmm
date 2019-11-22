@@ -30,6 +30,7 @@
 	pixel_y = -28
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 4;
 	frequency = 1380;
 	id_tag = "escape_pod_11";
 	name = "escape pod six controller";
@@ -39,12 +40,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
-"ad" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "ae" = (
 /obj/machinery/keycard_auth/torch{
 	pixel_x = -24;
@@ -384,6 +379,7 @@
 /area/vacant/armory)
 "aL" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	dir = 8;
 	frequency = 1379;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
@@ -6754,6 +6750,7 @@
 	pixel_y = 23
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
+	dir = 4;
 	frequency = 1380;
 	id_tag = "escape_pod_10";
 	name = "escape pod five controller";
@@ -9104,6 +9101,7 @@
 "uc" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
+	dir = 1;
 	frequency = 1380;
 	id_tag = "escape_pod_10_berth";
 	name = "escape pod five berth controller";
@@ -12740,6 +12738,7 @@
 /area/maintenance/incinerator)
 "Eg" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	dir = 8;
 	frequency = 1379;
 	id_tag = "solar_port_airlock";
 	pixel_x = 24;
@@ -18173,6 +18172,7 @@
 /area/hallway/primary/seconddeck)
 "Wj" = (
 /obj/machinery/embedded_controller/radio/airlock/access_controller{
+	dir = 1;
 	id_tag = "prototype_controller";
 	name = "Fusion Maintenance Access Controller";
 	pixel_x = 0;
@@ -24851,7 +24851,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -26654,7 +26654,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -27085,7 +27085,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -27254,7 +27254,6 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
 aa
@@ -27264,7 +27263,8 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
 aa
 aa
 aa
@@ -28716,7 +28716,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -32292,7 +32292,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -33568,7 +33568,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -34118,7 +34118,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -36122,7 +36122,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -41379,7 +41379,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -42253,7 +42253,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -44473,7 +44473,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -44613,7 +44613,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -46497,7 +46497,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -47245,7 +47245,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
@@ -49488,7 +49488,6 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
 aa
@@ -49504,7 +49503,6 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
 aa
@@ -49514,7 +49512,9 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
 aa
 aa
 aa
@@ -49885,7 +49885,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 aa
 aa
 aa
