@@ -188,6 +188,17 @@ var/list/ai_verbs_default = list(
 	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad.")
 	to_chat(src, "For department channels, use the following say commands:")
 
+	job = "AI"
+	setup_icon()
+	eyeobj.possess(src)
+	var/obj/structure/ai_terminal/terminal = locate(/obj/structure/ai_terminal) in loc.contents
+	if(!isnull(terminal))
+		terminal.move_to_node(src)
+		switch_to_net_by_name(network)
+		for(var/channel in terminal.radio_channels_access)
+			common_radio.channels[channel] = 1
+		terminal.radio_channels_access.Cut()
+
 	var/radio_text = ""
 	for(var/i = 1 to common_radio.channels.len)
 		var/channel = common_radio.channels[i]
@@ -197,14 +208,6 @@ var/list/ai_verbs_default = list(
 			radio_text += ", "
 
 	to_chat(src, radio_text)
-
-	job = "AI"
-	setup_icon()
-	eyeobj.possess(src)
-	var/obj/structure/ai_terminal/terminal = locate(/obj/structure/ai_terminal) in loc.contents
-	if(!isnull(terminal))
-		terminal.move_to_node(src)
-		switch_to_net_by_name(network)
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src

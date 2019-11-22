@@ -123,6 +123,22 @@
 	icon_state = "ai-empty"
 	allow_remote_moveto = 0
 
+/obj/structure/ai_terminal/spawn_terminal/unsc
+	radio_channels_access = list("SHIPCOM","TEAMCOM","SQUADCOM","FLEETCOM","EBAND","TACCOM","ONICOM","SIERRACOM")
+
+/obj/structure/ai_terminal/spawn_terminal/city
+	radio_channels_access = list("GCPD","MEDCOM","EBAND")
+
+/obj/structure/ai_terminal/spawn_terminal/covenant
+	radio_channels_access = list("BattleNet","EBAND")
+
+/obj/structure/ai_terminal/spawn_terminal/innie
+	radio_channels_access = list("CMDOCOM","EBAND")
+
+/obj/structure/ai_terminal/spawn_terminal/innie/Initialize()
+	. = ..()
+	radio_channels_access += halo_frequencies.innie_channel_name
+
 /obj/structure/ai_terminal/debug
 	name = "Forerunner Access Terminal"
 	desc = "Limitless power for any construct.... (Inform an admin if you see this)"
