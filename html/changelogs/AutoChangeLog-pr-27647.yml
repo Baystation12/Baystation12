@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Firing a gun successfully will now switch off RIG-based cloaking devices."
