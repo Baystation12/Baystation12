@@ -1411,11 +1411,6 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_robotics)
 
-/area/engineering/engine_eva
-	name = "\improper Engine EVA"
-	icon_state = "engine_eva"
-	req_access = list(access_engine, access_eva)
-
 /area/engineering/engine_monitoring
 	name = "\improper Engine Monitoring Room"
 	icon_state = "engine_monitoring"
@@ -1439,6 +1434,11 @@
 
 /area/engineering/locker_room
 	name = "\improper Engineering Locker Room"
+	icon_state = "engineering_locker"
+	req_access = list(access_engine)
+
+/area/engineering/engineering_bay
+	name = "\improper Engineering Bay"
 	icon_state = "engineering_locker"
 	req_access = list(access_engine)
 
@@ -1605,12 +1605,6 @@
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
 	ambience = list('sound/ambience/ambimalf.ogg')
-	req_access = list(access_ai_upload)
-
-/area/turret_protected/ai_cyborg_station
-	name = "\improper Cyborg Station"
-	icon_state = "ai_cyborg"
-	sound_env = SMALL_ENCLOSED
 	req_access = list(access_ai_upload)
 
 /area/turret_protected/ai_upload
