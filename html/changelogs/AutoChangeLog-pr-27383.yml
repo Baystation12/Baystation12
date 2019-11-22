@@ -1,0 +1,6 @@
+author: "ghostsheet"
+delete-after: True
+changes: 
+  - rscadd: "Carp migration event got reworked! They will now be launched into the ship at slow speed, over a period of time."
+  - rscadd: "Overmap carp hazard, has been tweaked in same maner as the carp migration event, carps will be launched at the ships over a period of time. The speed of carps hitting ships will be dependent on the ship's speed, multiplied by the pilot's skill. (Go fast for road kills, you want to go fast to escape the carp event either way)."
+  - tweak: "Structures and machine such as windows and computers, will hurt any mob thrown against it, similar to being thrown against a wall. (Throwing people against things now deals the same damage as a wall)"
