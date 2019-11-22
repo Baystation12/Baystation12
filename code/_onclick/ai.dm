@@ -26,6 +26,17 @@
 	if(stat)
 		return
 
+	if(A.ai_access_level > 0 && !(check_access_level(A) >= A.ai_access_level))
+		to_chat(src,"<span class = 'notice'>Insufficient access level in local area to access this machinery.</span>")
+		return
+
+	if(console_operating)
+		if(!istype(A,/turf/unsimulated/map) || !istype(A,/obj/effect/overmap))
+			cancel_camera()
+			console_operating = null
+		else
+			console_operating.fire(A,src)
+
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
@@ -67,9 +78,6 @@
 	else
 	*/
 	A.add_hiddenprint(src)
-	if(A.ai_access_level > 0 && !(check_access_level(A) >= A.ai_access_level))
-		to_chat(src,"<span class = 'notice'>Insufficient access level in local area to access this machinery.</span>")
-		return
 	if(A.ai_access_cost > 0)
 		if(spend_cpu(ai_access_cost))
 			A.attack_ai(src)

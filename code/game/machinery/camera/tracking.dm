@@ -12,6 +12,7 @@
 	if(src.stat == 2)
 		return
 
+	switch_to_net_by_name(network)
 	var/list/T = list()
 	var/datum/visualnet/camera/our_cameranet = our_visualnet
 	for (var/obj/machinery/camera/C in our_cameranet.cameras)

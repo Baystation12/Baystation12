@@ -7,6 +7,7 @@
 	var/mob/living/silicon/ai/held_ai = null
 	var/allow_remote_moveto = 1
 	var/inherent_network = "Exodus" //Our inherent camera network.
+	var/radio_channels_access = list() //Accessing this node will permenantly add these radio channels. This should only be placed on spawn_terminal subtypes.
 
 	var/area_nodescan_override = null //If set, this will scan this area and all subtypes of this area for nodes to add to inherent_nodes
 	var/list/inherent_nodes = list()// This should only really be fully populated for roundstart terminals, aka the ones AI cores spawn.
@@ -58,11 +59,12 @@
 
 	if(move_to_node(ai) && clear_old)
 		clear_old_nodes(ai)
+		invalidateCameraCache()
 	to_chat(ai,"<span class = 'notice'>Consciousness moved to new AI node.</span>")
 
 /obj/structure/ai_terminal/proc/check_move_to(var/mob/living/silicon/ai/ai)
 	var/obj/structure/ai_terminal/o_t = ai.our_terminal
-	if(!istype(o_t) && !o_t.can_exit_node())
+	if(istype(o_t) && !o_t.can_exit_node())
 		to_chat(ai,"<span class = 'danger'>Could not exit current node.</span>")
 		return
 	if(!allow_remote_moveto)
@@ -76,11 +78,43 @@
 		return 0
 	return 1
 
+/obj/structure/ai_terminal/proc/can_card_ai()
+	if(held_ai)
+		return !held_ai.resist_carding
+
+/obj/structure/ai_terminal/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/aicard))
+		var/obj/item/weapon/aicard/card = W
+		if(card.carded_ai && !held_ai)
+			move_to_node(card.carded_ai)
+			card.carded_ai.control_disabled = 0
+			card.carded_ai.aiRadio.disabledAi = 0
+			card.carded_ai.create_eyeobj(loc)
+			card.carded_ai.cancel_camera()
+			to_chat(user, "<span class='notice'>Transfer successful:</span> [card.carded_ai.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
+			to_chat(card.carded_ai, "You have been uploaded to a stationary terminal. Remote device connection restored.")
+			card.clear()
+
+		else if(held_ai)
+			if(!can_exit_node(held_ai) || !can_card_ai())
+				to_chat(user,"<span class = 'notice'>Connection to construct failed. Network locks active. Construct resisting carding or system is locked down..</span>")
+				to_chat(held_ai,"<span class = 'danger'>External forced consciousness shift detected at current terminal.</span>")
+				return
+			var/ai_to_transfer = held_ai
+			if(held_ai.our_terminal)
+				ai_exit_node(ai_to_transfer)
+
+			card.grab_ai(ai_to_transfer, user,1)
+		else
+			to_chat(user,"<span class = 'notice'>Unable to pull or place any construct in [name].</span>")
+
 /obj/structure/ai_terminal/proc/move_to_node(var/mob/living/silicon/ai/ai)
 	held_ai = ai
-	contents += ai
-	ai.our_terminal = ai
-	ai.nodes_accessed += inherent_nodes.Copy()
+	ai.forceMove(src)
+	ai.our_terminal = src
+	ai.network = inherent_network
+	ai.nodes_accessed |= inherent_nodes.Copy()
+	ai.switch_to_net_by_name(inherent_network)
 
 /obj/structure/ai_terminal/spawn_terminal
 	name = "AI Core"

@@ -3,7 +3,8 @@
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
-	/mob/living/silicon/ai/proc/ai_announcement,
+	/mob/living/silicon/ai/proc/toggle_resist_carding,
+	//mob/living/silicon/ai/proc/ai_announcement,
 	//mob/living/silicon/ai/proc/ai_call_shuttle,
 	//mob/living/silicon/ai/proc/ai_emergency_message,
 	/mob/living/silicon/ai/proc/ai_camera_track,
@@ -13,7 +14,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_hologram_change,
 	//mob/living/silicon/ai/proc/ai_network_change,
 	/mob/living/silicon/ai/proc/ai_roster,
-	/mob/living/silicon/ai/proc/ai_statuschange,
+	//mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
 	/mob/living/silicon/ai/proc/ai_checklaws,
 	/mob/living/silicon/ai/proc/control_integrated_radio,
@@ -61,6 +62,7 @@ var/list/ai_verbs_default = list(
 	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
 	var/hologram_follow = 1 //This is used for the AI eye, to determine if a holopad's hologram should follow it or not
+	var/resist_carding = 1
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/carded
@@ -73,6 +75,8 @@ var/list/ai_verbs_default = list(
 	var/native_network = "Exodus"//If we're in this network, we don't spend CPU points UNLESS another AI is in the network..
 	var/obj/structure/ai_terminal/our_terminal = null
 	var/list/nodes_accessed = list()
+
+	var/obj/machinery/overmap_weapon_console/console_operating = null
 
 	var/default_ai_icon = /datum/ai_icon/blue
 	var/static/list/custom_ai_icons_by_ckey_and_name
@@ -87,9 +91,17 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/switch_to_net_by_name(var/name)
 	var/new_net = all_networks[name]
-	if(!isnull(new_net))
+	if(!isnull(new_net) && !isnull(eyeobj))
 		our_visualnet = new_net
+		eyeobj.visualnet = our_visualnet
 		eyeobj.possess(src)
+
+/mob/living/silicon/ai/proc/toggle_resist_carding()
+	set name = "Toggle Resist Carding"
+	set category = "Silicon Commands"
+
+	resist_carding = !resist_carding
+	to_chat(usr,"<span class = 'notice'>You will [resist_carding ? "now" : "no longer"] resist any carding.</span>")
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
@@ -192,6 +204,7 @@ var/list/ai_verbs_default = list(
 	var/obj/structure/ai_terminal/terminal = locate(/obj/structure/ai_terminal) in loc.contents
 	if(!isnull(terminal))
 		terminal.move_to_node(src)
+		switch_to_net_by_name(network)
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src
@@ -311,7 +324,7 @@ var/list/ai_verbs_default = list(
 	set category = "Silicon Commands"
 	set name = "Show Crew Manifest"
 	show_station_manifest()
-
+/*
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()
 	set category = "Silicon Commands"
@@ -352,7 +365,7 @@ var/list/ai_verbs_default = list(
 
 	post_status("shuttle")
 
-/*/mob/living/silicon/ai/proc/ai_recall_shuttle()
+/mob/living/silicon/ai/proc/ai_recall_shuttle()
 	set category = "Silicon Commands"
 	set name = "Cancel Evacuation"
 
@@ -470,6 +483,12 @@ var/list/ai_verbs_default = list(
 
 	//src.cameraFollow = null
 	src.view_core()
+	if(console_operating)
+		unset_machine()
+		if(eyeobj)
+			reset_view(eyeobj)
+		else
+			reset_view(null)
 
 /mob/living/silicon/ai/proc/get_network_from_name(var/name)
 	return all_networks[name]

@@ -17,7 +17,6 @@
 
 /mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
 	. = ..()
-	visualnet = owner.our_visualnet
 	if(. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
 		if(cancel_tracking)
