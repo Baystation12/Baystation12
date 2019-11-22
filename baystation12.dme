@@ -2440,6 +2440,7 @@
 #include "code\modules\organs\external\_external.dm"
 #include "code\modules\organs\external\_external_damage.dm"
 #include "code\modules\organs\external\_external_icons.dm"
+#include "code\modules\organs\external\diagnostics.dm"
 #include "code\modules\organs\external\head.dm"
 #include "code\modules\organs\external\standard.dm"
 #include "code\modules\organs\external\stump.dm"
