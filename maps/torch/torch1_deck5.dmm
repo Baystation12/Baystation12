@@ -4584,6 +4584,15 @@
 	icon_state = "warningcorner";
 	dir = 4
 	},
+/obj/machinery/mech_recharger,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 5
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/mob/living/exosuit/premade/light/exploration,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kv" = (

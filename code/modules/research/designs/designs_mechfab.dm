@@ -294,6 +294,13 @@
 	build_path = /obj/item/mech_component/propulsion/tracks
 	req_tech = list(TECH_MATERIAL = 4)
 
+/datum/design/item/mechfab/exosuit/powerloader_torso
+	name = "spherical chassis"
+	id = "sphere_body"
+	build_path = /obj/item/mech_component/chassis/pod
+	time = 50
+	materials = list(MATERIAL_STEEL = 18000)
+
 /datum/design/item/robot_upgrade
 	build_type = MECHFAB
 	time = 12
