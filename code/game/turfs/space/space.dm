@@ -10,6 +10,8 @@
 	var/static/list/dust_cache
 	permit_ao = FALSE
 
+	z_eventually_space = TRUE
+
 /turf/space/proc/build_dust_cache()
 	LAZYINITLIST(dust_cache)
 	for (var/i in 0 to 25)
