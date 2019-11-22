@@ -124,7 +124,7 @@
 			dish.growth = 0
 			dish.virus2 = null
 			SSnano.update_uis(src)
-		infect_nearby(dish.virus2, 10 * 2**threshold_mod, SKILL_BASIC + threshold_mod)
+		infect_nearby(dish.virus2, 20 * 2**threshold_mod)
 	else if(!dish)
 		on = 0
 		icon_state = "incubator"

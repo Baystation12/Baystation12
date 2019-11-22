@@ -72,7 +72,7 @@
 /obj/machinery/disease2/diseaseanalyser/proc/get_fake_effects()
 	. = list()
 	for(var/datum/disease2/effect/E in dish.virus2.effects)
-		if((operator_skill <= SKILL_BASIC && prob(60)) || (operator_skill == SKILL_ADEPT && prob(80)) || (operator_skill > SKILL_ADEPT))
+		if(operator_skill >= HAS_PERK || prob(60))
 			. += E //Passed skill check, use real effect
 		else
 			. += get_random_virus2_effect(E.stage, VIRUS_ENGINEERED) //Failed check, get a fake effect

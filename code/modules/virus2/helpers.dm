@@ -1,10 +1,10 @@
 /obj/machinery/disease2
 	core_skill = SKILL_VIROLOGY
 
-/obj/machinery/proc/infect_nearby(datum/disease2/disease/disease, base_chance = 10, skill_threshold = SKILL_BASIC, dist = 2)
-	if(istype(disease) && operator_skill <= skill_threshold)
+/obj/machinery/proc/infect_nearby(datum/disease2/disease/disease, base_chance = 20, dist = 2)
+	if(istype(disease) && operator_skill <= HAS_PERK)
 		for(var/mob/living/carbon/victim in range(dist, src))
-			if(prob(base_chance * 2**(SKILL_MIN - operator_skill)))
+			if(prob(base_chance))
 				infect_virus2(victim, disease)
 
 //Returns 1 if mob can be infected, 0 otherwise.

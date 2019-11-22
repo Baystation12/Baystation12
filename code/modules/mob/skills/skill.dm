@@ -320,6 +320,15 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You are a senior nurse or paramedic, or a practicing doctor. You know how to use all of the medical devices available to treat a patient. Your deep knowledge of the body and medications will let you diagnose and come up with a course of treatment for most ailments. You can perform a full-body scan thoroughly and find important information.<br>- You can fully operate Body Scanners. You can perform all surgery steps if you have Experienced Anatomy skill",
 						"Master"		= "You are an experienced doctor or an expert nurse or EMT. You've seen almost everything there is to see when it comes to injuries and illness and even when it comes to something you haven't seen, you can apply your wide knowledge base to put together a treatment. In a pinch, you can do just about any medicine-related task, but your specialty, whatever it may be, is where you really shine.")
 
+/decl/hierarchy/skill/medical/medical/virology
+	ID = "virology"
+	name = "Virology"
+	desc = "This skill implies an understanding of microorganisms and their effects on humans."
+	levels = list( "Untrained"			= "You know that diseases are contagious; you've probably heard you should wash your hands to stop their spread. You know that if you're sick, you can go to Medical and get treatment. <br>- You don't have laboratory training, and will probably cause a viral leak if you try to use machines there.",
+					"Trained"				= "You have training in virology, and can operate the machinery in virology lab safely. You can isolate antibodies and modify viruses. <br>- Can use virology machinery without a risk of viral leak.")
+	prerequisites = list(SKILL_MEDICAL = SKILL_ADEPT)
+	default_max = SKILL_BASIC
+
 /decl/hierarchy/skill/medical/anatomy
 	ID = "anatomy"
 	name = "Anatomy"
@@ -329,16 +338,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Trained"			= "You have some training in anatomy. Diagnosing broken bones, damaged ligaments, shrapnel wounds, and other trauma is straightforward for you. You can splint limbs with a good chance of success, operate a defibrillator competently, and perform CPR well. Surgery is still outside your training.<br>- You can do surgery (requires Trained Medicine skill too) but you are very likely to fail at every step. Its speed increases with level. You can perform the cybernethics procedures if you have Trained Complex Devices skill",
 						"Experienced"		= "You're a surgical resident, or an experienced medical doctor. You can put together broken bones, fix a damaged lung, patch up a liver, or remove an appendix without problems. But tricky surgeries, with an unstable patient or delicate manipulation of vital organs like the heart and brain, are at the edge of your ability, and you prefer to leave them to specialized surgeons. You can recognize when someone's anatomy is noticeably unusual. You're trained in working with several species, but you're probably better at surgery on your own species.<br>- You can do all surgery steps safely, if you have Experienced Medicine skill too.",
 						"Master"		= "You are an experienced surgeon. You can handle anything that gets rolled, pushed, or dragged into the OR, and you can keep a patient alive and stable even if there's no one to assist you. You can handle severe trauma cases or multiple organ failure, repair brain damage, and perform heart surgery. By now, you've probably specialized in one field, where you may have made new contributions to surgical technique. You can detect even small variations in the anatomy of a patient--even a changeling probably wouldn't slip by your notice, provided you could get one on the operating table.<br>- The penalty from operating on improper operating surfaces is reduced.")
-
-/decl/hierarchy/skill/medical/virology
-	ID = "virology"
-	name = "Virology"
-	desc = "This skill implies an understanding of microorganisms and their effects on humans."
-	levels = list( "Unskilled"			= "You know that diseases are contagious; you've probably heard you should wash your hands to stop their spread. You know that if you're sick, you can go to Medical and get treatment.",
-						"Basic"				= "You know how viruses work, and you can use the machinery in the virology lab to analyze a virus or create an antibody. You know the principles of quarantine and you know how to keep a virus from spreading. You know that spaceacillin will help the body fight off a virus. However, you're not specialized in virology, and you probably don't have a whole lot of experience in dealing with viruses. If you are a medical doctor, you know how to treat symptoms and keep sick patients stable.<br>- You can read virus reports more or less precisely. This increases with level.",
-						"Trained"			= "You know the full process of creating antibodies for a viral strain. You will generally be able to contain an infection and see that it is treated quickly.<br>- You can safely use the Disease Splicer and the Pathogenic Incubator.",
-						"Experienced"		= "You know how to analyze, modify, and cure viruses, and could probably do so even without most of the equipment in the virology lab. You know how to trigger mutations in a virus and how to isolate genes. If you really wanted to, you could create a deadly virus, provided you got lucky with the mutations.<br>- You can fully operate the Disease Analyser.<br>- You can fully read virus reports.<br>- You can splice and mutate viruses more or less precisely.",
-						"Master"		= "You are a specialized virologist - either a medical doctor or a scientific researcher. You may be well-known in the field, having published in prestigious journals; or you may be a mad scientist working away in secret. You know how to use a virus as a tool or a weapon. You can cure any epidemic and if you wanted to, you could start one so deadly and contagious that your targets wouldn't know what hit them.<br>- You can splice and mutate viruses precisely.")
 
 /decl/hierarchy/skill/medical/chemistry
 	ID = "chemistry"
