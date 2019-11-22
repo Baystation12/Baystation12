@@ -214,7 +214,7 @@
 	return
 
 /mob/living/silicon/proc/toggle_sensor_mode()
-	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Medical","Disable") //Security would immediately allow people to tell who is/isn't an innie.
 	switch(sensor_type)
 		if ("Security")
 			sensor_mode = SEC_HUD

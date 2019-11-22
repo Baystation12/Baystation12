@@ -273,10 +273,7 @@ var/const/NO_EMAG_ACT = -50
 	icon_state = "id-robot"
 	item_state = "tdgreen"
 	assignment = "Synthetic"
-
-/obj/item/weapon/card/id/synthetic/New()
-	access = get_all_station_access() + access_synth
-	..()
+	access = list("SILICON ALL ACCESS")
 
 /obj/item/weapon/card/id/centcom
 	name = "\improper CentCom. ID"
