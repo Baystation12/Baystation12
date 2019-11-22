@@ -986,11 +986,20 @@
 	reagent_state = LIQUID
 	color = "#ffc0cb"
 	metabolism = REM
-	overdose = REAGENTS_OVERDOSE * 2
+	overdose = REAGENTS_OVERDOSE
 	value = 1.5
 	scannable = 1
 
 /datum/reagent/immunobooster/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
+	if(volume < REAGENTS_OVERDOSE && !M.chem_effects[CE_ANTIVIRAL])
+		M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
+	if(M.chem_effects[CE_ANTIVIRAL]) //don't take with 'cillin
+		M.add_chemical_effect(CE_TOXIN, 4) // as strong as taking vanilla 'toxin'
+
+
+/datum/reagent/immunobooster/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.add_chemical_effect(CE_TOXIN, 1)
+	M.immunity -= 0.5 //inverse effects when abused
