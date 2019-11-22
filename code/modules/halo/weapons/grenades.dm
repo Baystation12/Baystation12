@@ -6,7 +6,7 @@
 	icon_state = "M9 HEDP"
 	num_fragments = 100
 	can_adjust_timer = 0
-	det_time = 30
+	det_time = 50
 	alt_explosion_range = 2
 	alt_explosion_damage_max = 70
 
