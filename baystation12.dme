@@ -277,6 +277,7 @@
 #include "code\datums\extensions\appearance\appearance.dm"
 #include "code\datums\extensions\appearance\base_icon_state.dm"
 #include "code\datums\extensions\appearance\cardborg.dm"
+#include "code\datums\extensions\armor\ablative.dm"
 #include "code\datums\extensions\armor\armor.dm"
 #include "code\datums\extensions\armor\armor_psionic.dm"
 #include "code\datums\extensions\armor\armor_rig.dm"

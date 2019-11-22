@@ -160,8 +160,8 @@
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
-	var/datum/extension/armor/armor_datum = get_extension(src, /datum/extension/armor)
-	if(armor_datum && LAZYLEN(armor_datum.get_visible_damage()))
+	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
+	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
 		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
 
 /obj/item/clothing/CanUseTopic(var/user)
@@ -177,7 +177,7 @@
 			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
 		return TOPIC_HANDLED
 	if(href_list["list_armor_damage"])
-		var/datum/extension/armor/armor_datum = get_extension(src, /datum/extension/armor)
+		var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
 		var/list/damages = armor_datum.get_visible_damage()
 		to_chat(user, "\The [src] \icon[src] has some damage:")
 		for(var/key in damages)
