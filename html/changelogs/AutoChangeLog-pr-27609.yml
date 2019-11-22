@@ -1,6 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - rscadd: "Added a navigation telescreen to the Charon crew compartment."
-  - rscadd: "Replaced the rack on the Guppy with a storage compartment crate"
-  - rscadd: "Added binoculars to mining prep."
