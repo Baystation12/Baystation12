@@ -343,3 +343,6 @@
 	name="HRUNTING Mark I Armour Plates"
 	icon_state = "gygax_armour"
 	origin_tech = list(TECH_MATERIAL = 6, TECH_COMBAT = 4, TECH_ENGINEERING = 5)
+
+
+

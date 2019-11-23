@@ -65,6 +65,22 @@
 	item_state = "ashvor-backpack_worn"
 	icon_state = "ashvor-backpack_obj"
 
+/obj/item/weapon/gun/projectile/m6d_magnum/ashvor
+	name = "\improper M6G Magnum"
+	desc = "A UNSC sidearm and one of the variants of Misriah Armory's M6 handgun series. Takes 12.7mm calibre magazines."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "m6g"
+	item_state = "m6g"
+	fire_sound = 'code/modules/halo/sounds/Magnum_Reach_Fire.wav'
+	reload_sound = 'code/modules/halo/sounds/Magnum_Reach_Reload.wav'
+
+/obj/item/weapon/gun/projectile/m6d_magnum/ashvor/update_icon()
+	if(ammo_magazine)
+		icon_state = "m6g"
+	else
+		icon_state = "m6g_unloaded"
+
+
 /obj/item/weapon/storage/box/large/donator/ashvor
 	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/ashvor,
 					/obj/item/clothing/suit/spaceeva/eva/ashvor,
@@ -1317,6 +1333,20 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_override = ODST_OVERRIDE
 	item_state = "sleepy odst-backpack_worn"
 	icon_state = "sleepy odst-backpack_obj"
+
+/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/sleepy
+	name = "\improper M6G Golden Magnum"
+	desc = "A luxury firearm obtained by paycutting your fellow ODSTs."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "m6gold"
+	item_state = "m6gold"
+
+/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/sleepy/update_icon()
+	if(ammo_magazine)
+		icon_state = "m6gold"
+	else
+		icon_state = "m6gold_unloaded"
+
 
 /obj/item/weapon/storage/box/large/donator/sleepy
 	startswith = list(/obj/item/clothing/suit/armor/special/odst/sleepy,

@@ -220,3 +220,4 @@
 				welder_salvage += part
 				parts -= part
 		return
+
