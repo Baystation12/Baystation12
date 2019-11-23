@@ -96,10 +96,9 @@ var/const/FALLOFF_SOUNDS = 0.5
 	
 	S.volume *= get_sound_volume_multiplier()
 
+	var/turf/T = get_turf(src)
+	// 3D sounds, the technology is here!
 	if(isturf(turf_source))
-		// 3D sounds, the technology is here!
-		var/turf/T = get_turf(src)
-
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
@@ -145,6 +144,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 			else if (M.confused)
 				S.environment = DIZZY
 			else if (M.stat == UNCONSCIOUS)
+				S.environment = UNDERWATER
+			else if (T?.is_flooded(M.lying))
 				S.environment = UNDERWATER
 			else if (pressure_factor < 0.5)
 				S.environment = SPACE
