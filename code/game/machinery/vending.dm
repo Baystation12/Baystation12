@@ -403,7 +403,7 @@
 		coin = null
 		categories &= ~CAT_COIN
 
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
+	if ((usr.contents.Find(src) || ((in_range(src, usr) || istype(usr,/mob/living/silicon/ai)) && istype(src.loc, /turf))))
 		if ((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
 			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 				to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
