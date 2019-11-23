@@ -437,6 +437,9 @@
 	reset_view(null)
 
 /mob/Topic(href, href_list)
+	if(usr != src)
+		return 0
+
 	if(href_list["mach_close"])
 		var/t1 = text("window=[href_list["mach_close"]]")
 		unset_machine()
@@ -447,9 +450,6 @@
 		onclose(usr, "[name]")
 	if(href_list["flavor_change"])
 		update_flavor_text()
-
-//	..()
-	return
 
 /mob/proc/pull_damage()
 	return 0

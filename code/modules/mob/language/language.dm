@@ -116,7 +116,7 @@
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-	
+
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
@@ -240,6 +240,8 @@
 	src << browse(dat, "window=checklanguage")
 
 /mob/living/Topic(href, href_list)
+	if(usr != src)
+		return 0
 	if(href_list["default_lang"])
 		if(href_list["default_lang"] == "reset")
 

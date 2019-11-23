@@ -878,75 +878,98 @@ About the new airlock wires panel:
 	if(operating < 0) //emagged
 		to_chat(user, "<span class='warning'>Unable to interface: Internal error.</span>")
 		return STATUS_CLOSE
-	if(issilicon(user) && !src.canAIControl())
-		if(src.canAIHack(user))
-			src.hack(user)
+	if(issilicon(user))
+		if(canAIControl())
+			return STATUS_INTERACTIVE
 		else
-			if (src.isAllPowerLoss()) //don't really like how this gets checked a second time, but not sure how else to do it.
-				to_chat(user, "<span class='warning'>Unable to interface: Connection timed out.</span>")
+			if(canAIHack(user))
+				hack(user)
 			else
-				to_chat(user, "<span class='warning'>Unable to interface: Connection refused.</span>")
-		return STATUS_CLOSE
+				if (isAllPowerLoss()) //don't really like how this gets checked a second time, but not sure how else to do it.
+					to_chat(user, SPAN_WARNING("Unable to interface: Connection timed out."))
+				else
+					to_chat(user, SPAN_WARNING("Unable to interface: Connection refused."))
+			return STATUS_CLOSE
 
 	return ..()
 
-/obj/machinery/door/airlock/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/door/airlock/OnTopic(user, href_list)
 	var/activate = text2num(href_list["activate"])
-	switch (href_list["command"])
+	switch(href_list["command"])
 		if("idscan")
 			set_idscan(activate, 1)
+			return TOPIC_REFRESH
+
 		if("main_power")
 			if(!main_power_lost_until)
-				src.loseMainPower()
+				loseMainPower()
+			return TOPIC_REFRESH
+
 		if("backup_power")
 			if(!backup_power_lost_until)
-				src.loseBackupPower()
+				loseBackupPower()
+			return TOPIC_REFRESH
+
 		if("bolts")
-			if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
+			if(isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
 				to_chat(usr, "The door bolt control wire is cut - Door bolts permanently dropped.")
-			else if(activate && src.lock())
+				return TOPIC_NOACTION
+			else if(activate && lock())
 				to_chat(usr, "The door bolts have been dropped.")
-			else if(!activate && src.unlock())
+			else if(!activate && unlock())
 				to_chat(usr, "The door bolts have been raised.")
+			return TOPIC_REFRESH
+
 		if("electrify_temporary")
 			electrify(30 * activate, 1)
+			return TOPIC_REFRESH
+
 		if("electrify_permanently")
 			electrify(-1 * activate, 1)
+			return TOPIC_REFRESH
+
 		if("open")
-			if(src.welded)
+			if(welded)
 				to_chat(usr, text("The airlock has been welded shut!"))
-			else if(src.locked)
+				return TOPIC_NOACTION
+			else if(locked)
 				to_chat(usr, text("The door bolts are down!"))
+				return TOPIC_NOACTION
 			else if(activate && density)
 				open()
 			else if(!activate && !density)
 				close()
+			return TOPIC_REFRESH
+
 		if("safeties")
 			set_safeties(!activate, 1)
+			return TOPIC_REFRESH
+
 		if("timing")
 			// Door speed control
-			if(src.isWireCut(AIRLOCK_WIRE_SPEED))
+			if(isWireCut(AIRLOCK_WIRE_SPEED))
 				to_chat(usr, text("The timing wire is cut - Cannot alter timing."))
-			else if (activate && src.normalspeed)
+				return TOPIC_NOACTION
+			else if (activate && normalspeed)
 				normalspeed = 0
-			else if (!activate && !src.normalspeed)
+			else if (!activate && !normalspeed)
 				normalspeed = 1
+			return TOPIC_REFRESH
+
 		if("lights")
 			// Lights
-			if(src.isWireCut(AIRLOCK_WIRE_LIGHT))
+			if(isWireCut(AIRLOCK_WIRE_LIGHT))
 				to_chat(usr, "The lights wire is cut - The door lights are permanently disabled.")
+				return TOPIC_NOACTION
 			else if (!activate && src.lights)
 				lights = 0
 				to_chat(usr, "The door lights have been disabled.")
 			else if (activate && !src.lights)
 				lights = 1
 				to_chat(usr, "The door lights have been enabled.")
+			return TOPIC_REFRESH
 
 	update_icon()
-	return 1
 
 //returns 1 on success, 0 on failure
 /obj/machinery/door/airlock/proc/cut_bolts(var/obj/item/item, var/mob/user)

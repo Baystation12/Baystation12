@@ -227,9 +227,7 @@
 	else
 		return
 
-/obj/machinery/atm/Topic(var/href, var/href_list)
-	if((. = ..()))
-		return
+/obj/machinery/atm/OnTopic(user, href_list)
 	if(href_list["choice"])
 		switch(href_list["choice"])
 			if("transfer")
@@ -249,12 +247,18 @@
 
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
+				return TOPIC_REFRESH
+
 			if("view_screen")
 				view_screen = text2num(href_list["view_screen"])
+				return TOPIC_REFRESH
+
 			if("change_security_level")
 				if(authenticated_account)
 					var/new_sec_level = max( min(text2num(href_list["new_security_level"]), 2), 0)
 					authenticated_account.security_level = new_sec_level
+				return TOPIC_REFRESH
+
 			if("attempt_auth")
 
 				//Look to see if we're holding an ID, if so scan the data from that and use it, if not scan the user for the data
@@ -313,6 +317,8 @@
 						to_chat(usr, "\icon[src] <span class='info'>Access granted. Welcome user '[authenticated_account.owner_name].'</span>")
 
 					previous_account_number = tried_account_num
+				return TOPIC_REFRESH
+
 			if("e_withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
@@ -325,6 +331,9 @@
 						spawn_ewallet(amount,src.loc,usr)
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
+				return TOPIC_REFRESH
+
+
 			if("withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
@@ -337,6 +346,8 @@
 						spawn_money(amount,src.loc,usr)
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
+				return TOPIC_REFRESH
+
 			if("balance_statement")
 				if(authenticated_account)
 					var/obj/item/weapon/paper/R = new(src.loc)
@@ -361,6 +372,9 @@
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
 				else
 					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+
+				return TOPIC_REFRESH
+
 			if ("print_transaction")
 				if(authenticated_account)
 					var/obj/item/weapon/paper/R = new(src.loc)
@@ -404,6 +418,8 @@
 				else
 					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 
+				return TOPIC_REFRESH
+
 			if("insert_card")
 				if(!held_card)
 					//this might happen if the user had the browser window open when somebody emagged it
@@ -413,15 +429,16 @@
 						var/obj/item/I = usr.get_active_hand()
 						if (istype(I, /obj/item/weapon/card/id))
 							if(!usr.unEquip(I, src))
-								return
+								return TOPIC_HANDLED
 							held_card = I
 				else
 					release_held_id(usr)
+				return TOPIC_REFRESH
+
 			if("logout")
 				authenticated_account = null
 				account_security_level = 0
-
-	interact(usr)
+				return TOPIC_REFRESH
 
 /obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user as mob)
 	if(!authenticated_account)

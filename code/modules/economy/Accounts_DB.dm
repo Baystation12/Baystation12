@@ -99,21 +99,20 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/computer/account_database/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/computer/account_database/OnTopic(user, href_list)
 	var/datum/nanoui/ui = SSnano.get_open_ui(usr, src, "main")
 
 	if(href_list["choice"])
 		switch(href_list["choice"])
 			if("create_account")
 				creating_new_account = 1
+				return TOPIC_REFRESH
 
 			if("toggle_suspension")
 				if(detailed_account_view)
 					detailed_account_view.suspended = !detailed_account_view.suspended
 					callHook("change_account_status", list(detailed_account_view))
+				return TOPIC_REFRESH
 
 			if("finalise_create_account")
 				var/account_name = href_list["holder_name"]
@@ -134,6 +133,8 @@
 					ui.close()
 
 				creating_new_account = 0
+				return TOPIC_REFRESH
+
 			if("insert_card")
 				if(held_card)
 					held_card.dropInto(loc)
@@ -146,23 +147,27 @@
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/weapon/card/id))
 						if(!usr.unEquip(I, src))
-							return
+							return TOPIC_NOACTION
 						held_card = I
+				return TOPIC_REFRESH
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])
 				if(index && index <= all_money_accounts.len)
 					detailed_account_view = all_money_accounts[index]
+				return TOPIC_REFRESH
 
 			if("view_accounts_list")
 				detailed_account_view = null
 				creating_new_account = 0
+				return TOPIC_REFRESH
 
 			if("revoke_payroll")
 				var/funds = detailed_account_view.money
 				detailed_account_view.transfer(station_account, funds, "Revocation of payroll")
 
 				callHook("revoke_payroll", list(detailed_account_view))
+				return TOPIC_REFRESH
 
 			if("print")
 				var/text
@@ -240,5 +245,4 @@
 
 				P.info = text
 				state("The terminal prints out a report.")
-
-	return 1
+				return TOPIC_REFRESH

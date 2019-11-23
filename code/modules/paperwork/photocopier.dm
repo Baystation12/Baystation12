@@ -41,10 +41,10 @@
 	onclose(user, "copier")
 	return
 
-/obj/machinery/photocopier/Topic(href, href_list)
+/obj/machinery/photocopier/OnTopic(user, href_list)
 	if(href_list["copy"])
 		if(stat & (BROKEN|NOPOWER))
-			return
+			return TOPIC_NOACTION
 
 		for(var/i = 0, i < copies, i++)
 			if(toner <= 0)
@@ -63,34 +63,40 @@
 				break
 
 			use_power_oneoff(active_power_usage)
-		updateUsrDialog()
-	else if(href_list["remove"])
+		return TOPIC_REFRESH
+
+	if(href_list["remove"])
 		if(copyitem)
 			usr.put_in_hands(copyitem)
 			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
 			copyitem = null
-			updateUsrDialog()
-	else if(href_list["min"])
+		return TOPIC_REFRESH
+
+	if(href_list["min"])
 		if(copies > 1)
 			copies--
-			updateUsrDialog()
+		return TOPIC_REFRESH
+
 	else if(href_list["add"])
 		if(copies < maxcopies)
 			copies++
-			updateUsrDialog()
+		return TOPIC_REFRESH
+
 	else if(href_list["aipic"])
-		if(!istype(usr,/mob/living/silicon)) return
-		if(stat & (BROKEN|NOPOWER)) return
+		if(!istype(usr,/mob/living/silicon))
+			return TOPIC_NOACTION
+		if(stat & (BROKEN|NOPOWER))
+			return TOPIC_NOACTION
 
 		if(toner >= 5)
 			var/mob/living/silicon/tempAI = usr
 			var/obj/item/device/camera/siliconcam/camera = tempAI.silicon_camera
 
 			if(!camera)
-				return
+				return TOPIC_HANDLED
 			var/obj/item/weapon/photo/selection = camera.selectpicture()
 			if (!selection)
-				return
+				return TOPIC_HANDLED
 
 			var/obj/item/weapon/photo/p = photocopy(selection)
 			if (p.desc == "")
@@ -99,7 +105,7 @@
 				p.desc += " - Copied by [tempAI.name]"
 			toner -= 5
 			sleep(15)
-		updateUsrDialog()
+		return TOPIC_REFRESH
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo) || istype(O, /obj/item/weapon/paper_bundle))
