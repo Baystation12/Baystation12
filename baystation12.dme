@@ -1440,6 +1440,7 @@
 #include "code\modules\halo\clothing\spartan_gear.dm"
 #include "code\modules\halo\clothing\special_armour.dm"
 #include "code\modules\halo\clothing\special_armour_procs.dm"
+#include "code\modules\halo\clothing\tvoan_ranger.dm"
 #include "code\modules\halo\clothing\urc_commando_variants.dm"
 #include "code\modules\halo\clothing\urf_commando.dm"
 #include "code\modules\halo\clothing\urf_commando_sets.dm"

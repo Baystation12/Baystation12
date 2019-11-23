@@ -212,13 +212,13 @@
 	result = /datum/reagent/lube
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/silicon = 1, /datum/reagent/acetone = 1)
 	result_amount = 4
-
+/*
 /datum/chemical_reaction/pacid
 	name = "Polytrinic acid"
 	result = /datum/reagent/acid/polyacid
 	required_reagents = list(/datum/reagent/acid = 1, /datum/reagent/acid/hydrochloric = 1, /datum/reagent/potassium = 1)
 	result_amount = 3
-
+*/
 /datum/chemical_reaction/synaptizine
 	name = "Synaptizine"
 	result = /datum/reagent/synaptizine
