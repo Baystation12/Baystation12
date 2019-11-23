@@ -1,5 +1,4 @@
 #define OPENTURF_MAX_PLANE -70
-#define OPENTURF_CAP_PLANE -69
 #define OPENTURF_MAX_DEPTH 10		// The maxiumum number of planes deep we'll go before we just dump everything on the same plane.
 #define SHADOWER_DARKENING_FACTOR 0.6	// The multiplication factor for openturf shadower darkness. Lighting will be multiplied by this.
 
@@ -38,7 +37,7 @@ SUBSYSTEM_DEF(zcopy)
 			var/turf/Tloc = A.loc
 			if (TURF_IS_MIMICING(Tloc))
 				Tloc.update_mimic()
-				num_upd += 1
+				num_amupd += 1
 			else
 				qdel(A)
 				num_del += 1
@@ -106,7 +105,7 @@ SUBSYSTEM_DEF(zcopy)
 				break
 			continue
 
-		if (!T.shadower)	// If we don't have our shadower yet, create it.
+		if (!T.shadower)	// If we don't have a shadower yet, something has gone horribly wrong.
 			WARNING("Turf [T] at [T.x],[T.y],[T.z] was queued, but had no shadower.")
 			continue
 
@@ -137,6 +136,7 @@ SUBSYSTEM_DEF(zcopy)
 			var/atom/movable/openspace/turf_overlay/TO = T.below.bound_overlay
 			TO.appearance = T.below
 			TO.name = T.name
+			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
 			TO.opacity = FALSE
 			TO.plane = t_target
 		else
@@ -150,7 +150,7 @@ SUBSYSTEM_DEF(zcopy)
 			T.opacity = FALSE
 			T.plane = t_target
 
-		T.queue_ao()	// No need to recalculate ajacencies, shouldn't have changed.
+		T.queue_ao()
 
 		// Add everything below us to the update queue.
 		for (var/thing in T.below)
@@ -280,11 +280,14 @@ SUBSYSTEM_DEF(zcopy)
 			var/atom/movable/openspace/overlay/OO = A
 			var/atom/movable/AA = OO.associated_atom
 			out += "<li>\icon[A] plane [A.plane], layer [A.layer], depth [OO.depth], associated Z-level [AA.z] - [OO.type] copying [AA] ([AA.type], eventually [OO.mimiced_type])</li>"
-		else if (isturf(A) && A != T)	// foreign turfs - not visible here, but good for figuring out layering
-			out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]) - <font color='red'>FOREIGN</font></li>"
+		else if (isturf(A))
+			if (A == T)
+				out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]) - <font color='green'>SELF</font></li>"
+			else	// foreign turfs - not visible here, but good for figuring out layering
+				out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]) - <font color='red'>FOREIGN</font></li>"
 		else
 			out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])</li>"
 
 	out += "</ul>"
 
-	show_browser(usr, out.Join("<br>"), "window=openturfanalysis-\ref[T]")
+	show_browser(usr, out.Join("<br>"), "size=980x580;window=openturfanalysis-\ref[T]")

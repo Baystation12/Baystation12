@@ -8,7 +8,8 @@
 		// The overlay will handle cleaning itself up on non-openspace turfs.
 		if (isturf(dest))
 			bound_overlay.forceMove(get_step(src, UP))
-			bound_overlay.set_dir(dir)
+			if (dir != bound_overlay.dir)
+				bound_overlay.set_dir(dir)
 		else	// Not a turf, so we need to destroy immediately instead of waiting for the destruction timer to proc.
 			qdel(bound_overlay)
 
@@ -75,8 +76,8 @@
 	desc = "You shouldn't see this."
 	icon = 'icons/effects/lighting_overlay.dmi'
 	icon_state = "dark"
-	plane = OPENTURF_CAP_PLANE
-	layer = LIGHTING_LAYER
+	plane = OPENTURF_MAX_PLANE
+	layer = MIMICED_LIGHTING_LAYER
 	blend_mode = BLEND_MULTIPLY
 	color = list(
 		SHADOWER_DARKENING_FACTOR, 0, 0,
@@ -93,8 +94,8 @@
 
 /atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO)
 	appearance = LO
-	layer = LIGHTING_LAYER + 0.001
-	plane = OPENTURF_CAP_PLANE
+	layer = MIMICED_LIGHTING_LAYER
+	plane = OPENTURF_MAX_PLANE
 	invisibility = 0
 	blend_mode = BLEND_MULTIPLY
 	if (icon_state == null)
@@ -134,7 +135,7 @@
 
 // Object used to hold a mimiced atom's appearance.
 /atom/movable/openspace/overlay
-	plane = OPENTURF_CAP_PLANE
+	plane = OPENTURF_MAX_PLANE
 	var/atom/movable/associated_atom
 	var/depth
 	var/queued = FALSE

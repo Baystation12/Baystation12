@@ -90,4 +90,4 @@
 	loc.attack_generic(user)
 
 /atom/movable/openspace/turf_overlay/examine(mob/examiner)
-	loc.examine(examiner)
+	. = loc.examine(examiner)
