@@ -1,5 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Malfunctioning AIs will now properly get the ai-select-hardware, ai-select-research and display-help and set-ambition verbs."
-  - tweak: "Malfunctioning AI is now consistently called Malfunctioning AI everywhere. (This will not affect your character role settings.)"
