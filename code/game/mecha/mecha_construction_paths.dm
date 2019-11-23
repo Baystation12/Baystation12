@@ -1573,4 +1573,3 @@
 		..()
 		feedback_inc("mecha_hrunting_created",1)
 		return
-
