@@ -2,12 +2,12 @@
 /obj/structure/ai_terminal
 	name = "AI Auxilliary Storage Terminal"
 	desc = "This terminal contains hardware to store, upload and download AI constructs."
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "pflash1"
+	icon = 'code/modules/halo/icons/machinery/ai_terminals.dmi'
+	icon_state = "unscterminal"
 	var/mob/living/silicon/ai/held_ai = null
 	var/allow_remote_moveto = 1
 	var/inherent_network = "Exodus" //Our inherent camera network.
-	var/radio_channels_access = list() //Accessing this node will permenantly add these radio channels. This should only be placed on spawn_terminal subtypes.
+	var/list/radio_channels_access = list() //Accessing this node will permenantly add these radio channels. This should only be placed on spawn_terminal subtypes.
 
 	var/area_nodescan_override = null //If set, this will scan this area and all subtypes of this area for nodes to add to inherent_nodes
 	var/list/inherent_nodes = list()// This should only really be fully populated for roundstart terminals, aka the ones AI cores spawn.
@@ -37,6 +37,19 @@
 	if(held_ai == user)
 		held_ai.cancel_camera()
 
+/obj/structure/ai_terminal/proc/set_terminal_active(var/is_resisting_carding)
+	if(!is_resisting_carding)
+		icon_state = "[initial(icon_state)]_on"
+	else
+		icon_state = "[initial(icon_state)]"
+
+/obj/structure/ai_terminal/proc/apply_radio_channels(var/mob/living/silicon/ai/ai)
+	var/obj/item/device/radio/headset/our_radio = ai.common_radio
+	var/obj/item/device/encryptionkey/key = our_radio.keyslot2
+	for(var/channel in radio_channels_access)
+		key.channels[channel] = 1
+	our_radio.recalculateChannels()
+
 /obj/structure/ai_terminal/proc/clear_old_nodes(var/mob/living/silicon/ai/ai)
 	ai.nodes_accessed.Cut()
 
@@ -48,6 +61,7 @@
 		held_ai = null
 		contents -= ai
 		ai.loc = null
+		set_terminal_active(1)
 
 /obj/structure/ai_terminal/proc/pre_move_to_node(var/mob/living/silicon/ai/ai)
 	var/clear_old = 0
@@ -115,6 +129,8 @@
 	ai.network = inherent_network
 	ai.nodes_accessed |= inherent_nodes.Copy()
 	ai.switch_to_net_by_name(inherent_network)
+	set_terminal_active(ai.resist_carding)
+	apply_radio_channels(ai)
 
 /obj/structure/ai_terminal/spawn_terminal
 	name = "AI Core"
@@ -138,6 +154,18 @@
 /obj/structure/ai_terminal/spawn_terminal/innie/Initialize()
 	. = ..()
 	radio_channels_access += halo_frequencies.innie_channel_name
+
+/obj/structure/ai_terminal/unsc_debug
+	icon_state = "unscterminal"
+	inherent_network = "UNSC Ship"
+
+/obj/structure/ai_terminal/cov_debug
+	icon_state = "covterminal"
+	inherent_network = "Covenant Ship"
+
+/obj/structure/ai_terminal/innie_debug
+	icon_state = "urfterminal"
+	inherent_network = "Innie Ship"
 
 /obj/structure/ai_terminal/debug
 	name = "Forerunner Access Terminal"

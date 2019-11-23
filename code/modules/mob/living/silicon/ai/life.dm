@@ -20,7 +20,8 @@
 			process_sec_hud(src,0,src.eyeobj)
 		if (MED_HUD)
 			process_med_hud(src,0,src.eyeobj)
-
+	if(stunned == 0)
+		spend_cpu(-2)
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)

@@ -3,6 +3,9 @@
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
+	/mob/living/silicon/ai/proc/prep_EWAR_command,
+	/mob/living/silicon/ai/proc/prep_ewar_command_macroable,
+	/mob/living/silicon/ai/proc/check_EWAR_command,
 	/mob/living/silicon/ai/proc/toggle_resist_carding,
 	//mob/living/silicon/ai/proc/ai_announcement,
 	//mob/living/silicon/ai/proc/ai_call_shuttle,
@@ -78,6 +81,11 @@ var/list/ai_verbs_default = list(
 
 	var/obj/machinery/overmap_weapon_console/console_operating = null
 
+	//CyberWarfare Stuff//
+	var/datum/cyberwarfare_command/prepped_command
+	var/list/active_cyberwarfare_effects = list() //Commands are placed in here if their code requires processing on life ticks.
+	var/list/cyberwarfare_commands = newlist(/datum/cyberwarfare_command/network_scan,/datum/cyberwarfare_command/network_scan/l2,/datum/cyberwarfare_command/network_scan/l3,/datum/cyberwarfare_command/hack_routing_node,/datum/cyberwarfare_command/node_lockdown)
+
 	var/default_ai_icon = /datum/ai_icon/blue
 	var/static/list/custom_ai_icons_by_ckey_and_name
 
@@ -102,6 +110,72 @@ var/list/ai_verbs_default = list(
 
 	resist_carding = !resist_carding
 	to_chat(usr,"<span class = 'notice'>You will [resist_carding ? "now" : "no longer"] resist any carding.</span>")
+	if(our_terminal)
+		our_terminal.set_terminal_active(resist_carding)
+
+/mob/living/silicon/ai/proc/get_command_list(var/apply_categories = 1)
+	var/list/name_to_command = list()
+	for(var/datum/cyberwarfare_command/cmd in cyberwarfare_commands)
+		if(apply_categories)
+			name_to_command["\[[cmd.category]\] [cmd.name]"] = cmd
+		else
+			name_to_command["[cmd.name]"] = cmd
+	return name_to_command
+
+/mob/living/silicon/ai/proc/prep_ewar_command_macroable(var/command as text)
+	set name = "prepare-ewar-command-macro"
+	set category = "EWAR"
+	set hidden = 1
+
+	prep_EWAR_command(command)
+
+/mob/living/silicon/ai/proc/prep_EWAR_command(var/command_pick = "" as null)
+	set name = "Prepare EWAR Command"
+	set category = "EWAR"
+
+	var/do_list_pick = isnull(command_pick) || command_pick == ""
+
+	var/list/name_to_command = get_command_list((do_list_pick ? 1 : 0))
+	if(do_list_pick)
+		command_pick = input(src,"Pick a cyberwarfare command to prepare.\n(If you want to macro this, use prepare-ewar-command-macro \"command_name\", ignoring the category.)","EWAR command selection","Cancel") in name_to_command + list("Cancel")
+		if(command_pick == "Cancel")
+			to_chat(src,"<span class = 'notice'>EWAR command selection cancelled.</span>")
+			return
+	var/datum/cyberwarfare_command/picked = name_to_command[command_pick]
+	if(isnull(picked))
+		return
+	var/datum/cyberwarfare_command/new_cmd = new picked.type
+	to_chat(src,"<span class = 'notice'>Command \[[new_cmd.name]\] primed for sending.</span>")
+	new_cmd.prime_command(src)
+
+/mob/living/silicon/ai/proc/check_EWAR_command()
+	set name = "Check EWAR Command"
+	set category = "EWAR"
+
+	var/list/name_to_command = get_command_list()
+
+	var/command_pick = input(src,"Pick a cyberwarfare command to check.","EWAR command selection","Cancel") in name_to_command + list("Cancel")
+	if(command_pick == "Cancel")
+		to_chat(src,"<span class = 'notice'>EWAR command selection cancelled.</span>")
+		return
+	var/datum/cyberwarfare_command/picked = name_to_command[command_pick]
+	to_chat(src,"<span class = 'notice'>\[[picked.name]\]\n[picked.desc]\nCost:[picked.cpu_cost]</span>")
+
+/mob/living/silicon/ai/proc/get_ais_in_network(var/net_name)
+	var/list/ais_in_net = list()
+	for(var/ai_untyped in ai_list)
+		var/mob/living/silicon/ai/ai = ai_untyped
+		if(ai.network == net_name || ai.native_network == net_name)
+			ais_in_net += ai
+	return ais_in_net
+
+/mob/living/silicon/ai/proc/do_network_alert(var/message,var/severity = "danger")
+	message = "\[NETWORK ALERT\] \[[network]\] [message]"
+	for(var/ai_untyped in get_ais_in_network(network))
+		var/tmp_msg = message
+		if(ai_untyped == src)
+			tmp_msg = "Previous EWAR action triggered network alert!"
+		to_chat(ai_untyped,"<span class = '[severity]'>[tmp_msg]</span>")
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
@@ -180,6 +254,15 @@ var/list/ai_verbs_default = list(
 	ai_list += src
 	..()
 
+/mob/living/silicon/ai/Stat()
+	if(statpanel("Status"))
+		stat(null, text("CPU : [cpu_points]"))
+		if(prepped_command)
+			stat(null, text("Prepped EWAR Command: [prepped_command.name]"))
+		else
+			stat(null, text("Prepped EWAR Command: None"))
+	. = ..()
+
 /mob/living/silicon/ai/proc/on_mob_init()
 	to_chat(src, "<B>You are playing as an AI. AIs cannot move normally, but can interact with many objects while viewing them (through cameras).</B>")
 	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
@@ -195,9 +278,7 @@ var/list/ai_verbs_default = list(
 	if(!isnull(terminal))
 		terminal.move_to_node(src)
 		switch_to_net_by_name(network)
-		for(var/channel in terminal.radio_channels_access)
-			common_radio.channels[channel] = 1
-		terminal.radio_channels_access.Cut()
+		terminal.apply_radio_channels(src)
 
 	var/radio_text = ""
 	for(var/i = 1 to common_radio.channels.len)
@@ -306,14 +387,17 @@ var/list/ai_verbs_default = list(
 		return -1
 	if(!(atom_area.ai_routing_node in nodes_accessed))
 		return -1
-	var/our_access = atom_area.ai_routing_node.ais_to_access_levels[src]
-	if(isnull(our_access))
-		return -1
-	return our_access
+	return atom_area.ai_routing_node.get_access_for_ai(src)
 
 /mob/living/silicon/ai/proc/spend_cpu(var/amt,var/check_only = 0)
 	var/new_cpu = cpu_points - amt
 	if(new_cpu < 0)
+		if(!check_only)
+			var/new_stunned = stunned + -new_cpu
+			if(new_stunned > (cpu_points_max/2))
+				Stun((cpu_points_max/2))
+			else
+				Stun(new_stunned)
 		return 0
 	if(new_cpu > cpu_points_max)
 		new_cpu = cpu_points_max

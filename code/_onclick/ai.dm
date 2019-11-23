@@ -26,12 +26,21 @@
 	if(stat)
 		return
 
-	if(A.ai_access_level > 0 && !(check_access_level(A) >= A.ai_access_level))
+	if(prepped_command && prepped_command.is_target_valid(A))
+		to_chat(src,"<span class = 'notice'>Sending command \[[prepped_command.name]\] to [A.name]</span>")
+		if(do_after(src,prepped_command.command_delay,eyeobj,needhand = 0,same_direction = 1))
+
+			prepped_command.send_command(A)
+			to_chat(src,"<span class = 'notice'>Prepared command \[[prepped_command.name]\] sent to [A.name].<span>")
+			return
+
+
+	if(A.ai_access_level > 0 && check_access_level(A) < A.ai_access_level)
 		to_chat(src,"<span class = 'notice'>Insufficient access level in local area to access this machinery.</span>")
 		return
 
 	if(console_operating)
-		if(!istype(A,/turf/unsimulated/map) || !istype(A,/obj/effect/overmap))
+		if(!istype(A,/turf/unsimulated/map) && !istype(A,/obj/effect/overmap))
 			cancel_camera()
 			console_operating = null
 		else

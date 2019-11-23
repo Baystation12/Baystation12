@@ -12,11 +12,11 @@
 /obj/machinery/camera/autoname/invis/setPowerUsage() //Takes no power, is invis.
 	return 0
 
-/obj/machinery/camera/autoname/invis/cov_ship
+/obj/machinery/camera/autoname/invis/debug_cov
 	network = "Covenant Ship"
 
-/obj/machinery/camera/autoname/invis/unsc_ship
+/obj/machinery/camera/autoname/invis/debug_unsc
 	network = "UNSC Ship"
 
-/obj/machinery/camera/autoname/invis/innie_ship
+/obj/machinery/camera/autoname/invis/debug_innie
 	network = "Innie Ship"
