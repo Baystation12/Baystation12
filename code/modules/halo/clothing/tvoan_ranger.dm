@@ -1,6 +1,6 @@
 /obj/item/clothing/head/helmet/ranger_tvoan
-	name = "T-Voan Kig-yar ranger helmet"
-	desc = "A helmet made for ranger T-voan kig-yars. Useful in harsh, low gravity enviroments"
+	name = "T-Vaoan Kig-yar ranger helmet"
+	desc = "A helmet made for ranger T-Vaoan kig-yars. Useful in harsh, low gravity enviroments"
 	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
 	icon_state = "rangerhelm_obj"
 	item_state = "rangerhelmet"
@@ -21,7 +21,7 @@
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
 
 /obj/item/clothing/suit/armor/covenant/ranger_tvoan
-	name = "T-Voan Kig-yar ranger armor"
+	name = "T-Vaoan Kig-yar ranger armor"
 	desc = "Lightweight, durable armour specially made for low gravity and low pressure enviroments"
 	species_restricted = list("Tvaoan Kig-Yar")
 	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
@@ -41,8 +41,8 @@
 	slowdown_general = 1
 
 /obj/item/clothing/under/covenant/ranger_tvoan
-	name = "T-Voan Kig-yar ranger suit"
-	desc = "A T-Voan Kig-yar ranger suit. Made for combat in low gravity and low pressure enviroments"
+	name = "T-Vaoan Kig-yar ranger suit"
+	desc = "A T-Vaoan Kig-yar ranger suit. Made for combat in low gravity and low pressure enviroments"
 	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
 	icon_state = "jackal_bodysuit_s"
 	worn_state = "jackal_bodysuit"
