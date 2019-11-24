@@ -119,6 +119,45 @@
 
 	return TRUE
 
+/datum/unit_test/extensions/get_or_create_extension_shall_initialize_as_expected
+	name = "EXTENSIONS - get_or_create() shall initialize as expected"
+
+/datum/unit_test/extensions/get_or_create_extension_shall_initialize_as_expected/start_test()
+	var/turf/start = get_safe_turf()
+	var/obj/O = new(start)
+	var/datum/extension/test_one/one = get_or_create_extension(O, /datum/extension/test_one)
+
+	var/number_of_failures = 0
+	if(one.type != /datum/extension/test_one)
+		log_unit_test("[log_info_line(one)] was not strictly of the type [/datum/extension/test_one]")
+		number_of_failures++
+
+	if(one.holder != O)
+		log_unit_test("[log_info_line(one)] had an unexpected holder: [log_info_line(one.holder)]")
+		number_of_failures++
+
+	if(number_of_failures)
+		fail("[number_of_failures] failed assertion\s.")
+	else
+		pass("All assertions passed.")
+
+	return TRUE
+
+/datum/unit_test/extensions/get_or_create_extension_with_arguments_shall_initialize_as_expected
+	name = "EXTENSIONS - get_or_create() with arguments shall initialize as expected"
+
+/datum/unit_test/extensions/get_or_create_extension_with_arguments_shall_initialize_as_expected/start_test()
+	var/turf/start = get_safe_turf()
+	var/obj/O = new(start)
+
+	var/datum/extension/test_four/four = get_or_create_extension(O, /datum/extension/test_four, list("a", "b"), list("c", "d"))
+	if(four.holder == O && islist(four.first_argument) && islist(four.second_argument) && four.first_argument[1] == "a" && four.first_argument[2] == "b" &&	four.second_argument[1] == "c" && four.second_argument[2] == "d")
+		pass("All assertions passed.")
+	else
+		fail("[log_info_line(four)] had unexpected arguments:\n[log_info_line(four.holder)]\n[log_info_line(four.first_argument)]\n[log_info_line(four.second_argument)]")
+
+	return TRUE
+
 /datum/extension/test_one
 	base_type = /datum/extension/test_one
 
