@@ -23,10 +23,8 @@
 	mechanics_text = "The place to start with <span codexlink='codex'>The Codex</span><br>" 
 
 /datum/codex_entry/nexus/get_text(var/mob/presenting_to)
-	var/list/dat = list("<h3>CODEX NEXUS</h3>")
+	var/list/dat = list(get_header(presenting_to))
 	dat += "[mechanics_text]"
-	dat += "You can use <a href='?src=\ref[presenting_to.client];codex_search=1'><b>Search-Codex <i>topic</i></b></a> to look something up, or you can click the links provided when examining some objects.<br>"
-	dat += "You can also use <a href='?src=\ref[presenting_to.client];codex_index=1'><b>List-Codex-Entries</b></a> to get a comprehensive index of all entries.<br><br>"
 	dat += "<h3>Categories</h3>"
 	var/list/categories = list()
 	for(var/type in subtypesof(/datum/codex_category))
@@ -34,7 +32,7 @@
 		var/key = "[initial(C.name)] (category)"
 		var/datum/codex_entry/entry = SScodex.get_codex_entry(key)
 		if(entry)
-			categories += "<span codexlink='[key]'>[initial(C.name)]</span>"
+			categories += "<li><span codexlink='[key]'>[initial(C.name)]</span> - [initial(C.desc)]"
 	dat += jointext(categories, " ")
 	return "<font color = '[CODEX_COLOR_MECHANICS]'>[jointext(dat, null)]</font>"
 
