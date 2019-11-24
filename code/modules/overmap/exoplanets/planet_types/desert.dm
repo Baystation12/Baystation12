@@ -62,21 +62,6 @@
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
 	base_turf = /turf/simulated/floor/exoplanet/desert
 
-/turf/simulated/floor/exoplanet/desert
-	name = "sand"
-	dirt_color = "#ae9e66"
-	footstep_type = /decl/footsteps/sand
-
-/turf/simulated/floor/exoplanet/desert/New()
-	icon_state = "desert[rand(0,5)]"
-	..()
-
-/turf/simulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
-		SetName("molten silica")
-		icon_state = "sandglass"
-		diggable = 0
-
 /obj/structure/quicksand
 	name = "sand"
 	icon = 'icons/obj/quicksand.dmi'

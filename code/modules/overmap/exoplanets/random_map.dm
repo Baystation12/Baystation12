@@ -1,7 +1,6 @@
 /datum/random_map/noise/exoplanet
 	descriptor = "exoplanet"
 	smoothing_iterations = 1
-	var/area/planetary_area = /area/exoplanet
 
 	var/water_level
 	var/water_level_min = 0
@@ -25,10 +24,9 @@
 	var/list/plantcolors = list("RANDOM")
 	var/list/grass_cache
 
-/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/_planetary_area, var/list/_plant_colors)
+/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/used_area, var/list/_plant_colors)
 	target_turf_type = world.turf
 	water_level = rand(water_level_min,water_level_max)
-	planetary_area = _planetary_area
 	//automagically adjust probs for bigger maps to help with lag
 	var/size_mod = intended_x / tlx * intended_y / tly
 	flora_prob *= size_mod
@@ -60,6 +58,8 @@
 
 /datum/random_map/noise/exoplanet/get_additional_spawns(var/value, var/turf/T)
 	if(is_edge_turf(T))
+		return
+	if(T.is_wall())
 		return
 	var/parsed_value = noise2value(value)
 	switch(parsed_value)

@@ -185,7 +185,7 @@
 				var/datum/random_map/noise/exoplanet/RM = new map_type(null,padding,padding,zlevel,maxx-padding,maxy-padding,0,1,1,planetary_area, plant_colors)
 				get_biostuff(RM)
 			else
-				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1)
+				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_features()
 	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
