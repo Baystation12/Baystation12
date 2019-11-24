@@ -770,8 +770,12 @@
 	reagent_state = SOLID
 	color = "#684b3c"
 	scannable = 1
-	var/nicotine = REM * 0.2
 	value = 3
+	scent = "cigarette smoke"
+	scent_descriptor = SCENT_DESC_ODOR
+	scent_range = 4
+
+	var/nicotine = REM * 0.2
 
 /datum/reagent/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -781,11 +785,16 @@
 	name = "Fine Tobacco"
 	taste_description = "fine tobacco"
 	value = 5
+	scent = "fine tobacco smoke"
+	scent_descriptor = SCENT_DESC_FRAGRANCE
 
 /datum/reagent/tobacco/bad
 	name = "Terrible Tobacco"
 	taste_description = "acrid smoke"
 	value = 0
+	scent = "acrid tobacco smoke"
+	scent_intensity = /decl/scent_intensity/strong
+	scent_descriptor = SCENT_DESC_ODOR
 
 /datum/reagent/tobacco/liquid
 	name = "Nicotine Solution"
@@ -794,6 +803,10 @@
 	taste_mult = 0
 	color = "#fcfcfc"
 	nicotine = REM * 0.1
+	scent = null
+	scent_intensity = null
+	scent_descriptor = null
+	scent_range = null
 
 /datum/reagent/menthol
 	name = "Menthol"
