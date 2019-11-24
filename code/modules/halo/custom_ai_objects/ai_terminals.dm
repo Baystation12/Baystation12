@@ -121,6 +121,7 @@
 			to_chat(user,"<span class = 'notice'>Unable to pull or place any construct in [name].</span>")
 
 /obj/structure/ai_terminal/proc/move_to_node(var/mob/living/silicon/ai/ai)
+	ai.process_trap_trigger()
 	held_ai = ai
 	ai.forceMove(src)
 	ai.our_terminal = src

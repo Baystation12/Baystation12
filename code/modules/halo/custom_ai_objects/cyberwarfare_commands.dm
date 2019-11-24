@@ -19,7 +19,7 @@
 	to_chat(our_ai,"<span class = 'notice'>Commencing a Level [scan_level] system scan.</span>")
 	if(scan_level > 1)
 		our_ai.do_network_alert("Level [scan_level] system scan detected on network \[[our_ai.network]\]")
-	var/list/ais_in_net = our_ai.get_ais_in_network(our_ai.network)
+	var/list/ais_in_net = get_ais_in_network(our_ai.network,our_ai.native_network)
 	switch(scan_level)
 		if(1)
 			ais_in_net -= our_ai
@@ -72,9 +72,9 @@
 
 /datum/cyberwarfare_command/investigate_node
 	name = "Investigate Routing Node"
-	desc = "Scans a routing node, providing you with a readout of all accesses stored. This may alert AIs linked to the node."
+	desc = "Scans a routing node, providing you with a readout of all accesses stored. This will also disarm active traps, however, this action will cause the hostile AI to be alerted."
 	category = "Recon"
-	cpu_cost = 20
+	cpu_cost = 10
 
 /datum/cyberwarfare_command/investigate_node/is_target_valid(var/obj/structure/ai_routing_node/node)
 	if(istype(node))
@@ -90,6 +90,7 @@
 		var/access = node.get_access_for_ai(ai)
 		if(access > 0)
 			to_chat(our_ai,"<span class = 'notice'>AI: [ai.name]\nAccess:[access]</span>")
+			our_ai.process_trap_trigger(node,1)
 
 //OFFENSIVE//
 
@@ -135,6 +136,7 @@
 		to_chat(our_ai,"<span class = 'notice'>Access level increased.<span>")
 		if(curr_access >= 2) // uses >= instead of > because our curr_access is the pre-increased access value.
 			our_ai.do_network_alert("An AI has brute-forced level [curr_access + 1] access on [node] at [node.loc.loc.name]!")
+			our_ai.process_trap_trigger(node)
 
 #undef LEVEL_1_MULT
 #undef LEVEL_2_MULT
@@ -169,6 +171,7 @@
 	node.lockdown_until = world.time + LOCKDOWN_TIME
 	to_chat(our_ai,"<span class = 'notice'>Routing Node lockdown enacted.</span>")
 	our_ai.do_network_alert("An AI has enacted a connection lockdown on a routing node.")
+	our_ai.process_trap_trigger(node)
 	expire()
 
 #undef LOCKDOWN_TIME
@@ -232,7 +235,7 @@
 	if(!.)
 		return 0
 	var/hit_someone = 0
-	for(var/a in our_ai.get_ais_in_network(our_ai.network))
+	for(var/a in get_ais_in_network(our_ai.network,our_ai.native_network))
 		if(a == our_ai)
 			continue
 		var/mob/living/silicon/ai/ai = a
@@ -275,6 +278,68 @@
 	our_ai.do_network_alert("An AI has wiped the access routing node at [node.loc.loc.name].!")
 	expire()
 
+//TRAPS//
+/datum/cyberwarfare_command/trap
+	name = "DONOTADD"
+	desc = "A precoursor define for a /trap subtype."
+	category = "Trap"
+	lifespan = -1 //CHANGE ON EACH TRAP
+
+	var/obj/trap_target
+	var/trap_damage = 0
+
+/datum/cyberwarfare_command/trap/proc/tripped(var/mob/living/silicon/ai/ai,var/do_disarm)
+	if(do_disarm)
+		to_chat(our_ai,"<span class = 'warning;>Trap \[[name]\], placed on [trap_target] at [trap_target.loc.loc.name] was disarmed by [ai]</span>")
+		expire()
+		return 0
+	return 1
+
+/datum/cyberwarfare_command/trap/send_command(var/atom/A)
+	. = ..()
+	if(!.)
+		return 0
+	trap_target = A
+	set_expire()
+	return 1
+
+/datum/cyberwarfare_command/trap/logic_bomb
+	name = "Routing Node Logic Bomb"
+	desc = "Injects a fragment of code into the access routines of a Routing Node. Many attacks against a routing node will trigger this 40 CPU bomb."
+	cpu_cost = 30 //High cost, but this lingers in a node.
+	lifespan = 2 MINUTES
+	trap_damage = 40
+
+/datum/cyberwarfare_command/trap/logic_bomb/is_target_valid(var/obj/structure/ai_routing_node/node)
+	if(istype(node))
+		return 1
+	return 0
+
+/datum/cyberwarfare_command/trap/logic_bomb/tripped(var/mob/living/silicon/ai/ai,var/do_disarm)
+	. = ..()
+	if(!.)
+		return 0
+	to_chat(our_ai,"<span class = 'warning'>[ai] just tripped your [name] on [trap_target] at [trap_target.loc.loc.name].</span>")
+	to_chat(ai,"<span class = 'danger'>A hidden fragment of malicious code disrupts your core routines, stripping you of processing power!</span>")
+	ai.spend_cpu(trap_damage)
+	expire()
+
+/datum/cyberwarfare_command/trap/terminal_tripwire
+	name = "Terminal Tripwire"
+	desc = "Injects a fragment of code into the consciousness transfer routines of a terminal, causing you to be alerted when an AI enters that terminal."
+	lifespan = 3 MINUTES
+	cpu_cost = 20
+
+/datum/cyberwarfare_command/terminal_tripwire/is_target_valid(var/obj/structure/ai_terminal/term)
+	if(istype(term))
+		return 1
+	return 0
+
+/datum/cyberwarfare_command/trap/terminal_tripwire/tripped(var/mob/living/silicon/ai/ai,var/do_disarm)
+	. = ..()
+	if(!.)
+		return 0
+	to_chat(our_ai,"<span class = 'warning'>[ai] has just entered [trap_target] at [trap_target.loc.loc.name].</span>")
 //DEFENSIVE//
 
 /datum/cyberwarfare_command/switch_terminal
@@ -301,6 +366,7 @@
 				old_term.ai_exit_node(our_ai)
 			term.pre_move_to_node(our_ai)
 			our_ai.cancel_camera()
+		our_ai.process_trap_trigger(term)
 
 /datum/cyberwarfare_command/switch_terminal/stealth
 	name = "Switch Terminal (Infiltration)"

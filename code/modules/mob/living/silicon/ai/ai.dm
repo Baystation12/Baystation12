@@ -101,6 +101,8 @@ var/list/ai_verbs_default = list(
 	/datum/cyberwarfare_command/shock_terminal,
 	/datum/cyberwarfare_command/shock_terminal/siphon,
 	/datum/cyberwarfare_command/flash_network,
+	/datum/cyberwarfare_command/trap/logic_bomb,
+	/datum/cyberwarfare_command/trap/terminal_tripwire,
 	/datum/cyberwarfare_command/disconnect_protect,
 	/datum/cyberwarfare_command/switch_terminal,
 	/datum/cyberwarfare_command/switch_terminal/stealth)
@@ -191,17 +193,9 @@ var/list/ai_verbs_default = list(
 		return
 	switch_to_net_by_name(our_terminal.inherent_network)
 
-/mob/living/silicon/ai/proc/get_ais_in_network(var/net_name)
-	var/list/ais_in_net = list()
-	for(var/ai_untyped in ai_list)
-		var/mob/living/silicon/ai/ai = ai_untyped
-		if(ai.network == net_name || ai.native_network == net_name)
-			ais_in_net += ai
-	return ais_in_net
-
 /mob/living/silicon/ai/proc/do_network_alert(var/message,var/severity = "danger")
 	message = "\[NETWORK ALERT\] \[[network]\] [message]"
-	for(var/ai_untyped in get_ais_in_network(network))
+	for(var/ai_untyped in get_ais_in_network(network,native_network))
 		var/tmp_msg = message
 		if(ai_untyped == src)
 			tmp_msg = "Previous EWAR action triggered network alert!"
@@ -259,6 +253,10 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_SKRELLIAN, 1)
 	add_language(LANGUAGE_TRADEBAND, 1)
 	add_language(LANGUAGE_GUTTER, 1)
+	add_language("Balahese",1)
+	add_language("Ruuhti",1)
+	add_language("Doisacci",1)
+	add_language(LANGUAGE_SANGHEILI,1)
 	add_language(LANGUAGE_SIGN, 0)
 	add_language(LANGUAGE_INDEPENDENT, 1)
 
@@ -847,6 +845,13 @@ var/list/ai_verbs_default = list(
 	else
 		icon_state = selected_sprite.alive_icon
 		set_light(1, 1, selected_sprite.alive_light)
+
+/mob/living/silicon/ai/proc/process_trap_trigger(var/atom/trap_on,var/disarm = 0) //Used to make an AI process all of the traps they have triggered on a given object.
+	for(var/a in get_ais_in_network(network,native_network))
+		var/mob/living/silicon/ai/ai = a
+		for(var/datum/cyberwarfare_command/trap/t in ai.active_cyberwarfare_effects)
+			if(t.trap_target == trap_on)
+				t.tripped(src,disarm)
 
 // Pass lying down or getting up to our pet human, if we're in a rig.
 /mob/living/silicon/ai/lay_down()

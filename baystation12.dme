@@ -2108,6 +2108,7 @@
 #include "code\modules\mob\living\silicon\ai\ai_movement.dm"
 #include "code\modules\mob\living\silicon\ai\death.dm"
 #include "code\modules\mob\living\silicon\ai\examine.dm"
+#include "code\modules\mob\living\silicon\ai\helpers.dm"
 #include "code\modules\mob\living\silicon\ai\icons.dm"
 #include "code\modules\mob\living\silicon\ai\latejoin.dm"
 #include "code\modules\mob\living\silicon\ai\laws.dm"

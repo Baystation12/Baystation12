@@ -32,6 +32,7 @@
 	else
 		expire_at = world.time + lifespan
 		our_ai.active_cyberwarfare_effects |= src
+		our_ai.prepped_command = null //If we've added this to our effects, then we need to make sure the player can't switch it out for another command and thus end the effect early.
 
 /datum/cyberwarfare_command/proc/expire()
 	if(our_ai.prepped_command == src)
