@@ -1,5 +1,6 @@
 #define AI_CHECK_WIRELESS 1
 #define AI_CHECK_RADIO 2
+#define AI_CPULOSS_STUNMAX_DIVISOR 3
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
@@ -422,7 +423,7 @@ var/list/ai_verbs_default = list(
 	if(new_cpu < 0)
 		if(!check_only)
 			var/new_stunned = stunned + -new_cpu
-			Stun(max(new_stunned,(cpu_points_max/2)))
+			Stun(min(new_stunned,(initial(cpu_points_max)/AI_CPULOSS_STUNMAX_DIVISOR)))
 			cpu_points = 0
 		return 0
 
@@ -863,5 +864,6 @@ var/list/ai_verbs_default = list(
 	if(rig)
 		rig.force_rest(src)
 
+#undef AI_CPULOSS_STUNMAX_DIVISOR
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO
