@@ -49,7 +49,10 @@
 	. = FALSE
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		var/triggered = call(effect.trigger, trigger_proc)(arglist(args.Copy(2)))
-		if(triggered) 
+		if(effect.trigger.toggle && triggered)
+			effect.ToggleActivate(1)
+			. = TRUE
+		else if(effect.activated != triggered)
 			effect.ToggleActivate(1)
 			. = TRUE
 

@@ -1,5 +1,6 @@
 /datum/artifact_trigger/gas
 	name = "concentration of a specific gas"
+	toggle = FALSE
 	var/list/gas_needed	//list of gas=percentage needed in air to activate
 
 /datum/artifact_trigger/gas/New()
