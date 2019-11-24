@@ -25,3 +25,24 @@
 /area/admin/forest
 	name = "Admin Area Forest"
 	icon_state = "green"
+
+/area/admin/ewar_test/aispawn1
+	name = "Admin Area AI test spawn 1"
+
+/area/admin/ewar_test/aispawn2
+	name = "Admin Area AI test spawn 2"
+
+/area/admin/ewar_test/aispawn3
+	name = "Admin Area AI test spawn 3"
+
+/area/admin/ewar_test/aimid1
+	name = "Admin Area AI test mid 1"
+
+/area/admin/ewar_test/aimid2
+	name = "Admin Area AI test mid 2"
+
+/area/admin/ewar_test/aimid3
+	name = "Admin Area AI test mid 3"
+
+/area/admin/ewar_test/center
+	name = "Admin Area AI test center"
