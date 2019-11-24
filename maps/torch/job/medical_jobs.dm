@@ -162,6 +162,7 @@
 	spawn_positions = 1
 	ideal_character_age = 40
 	economic_power = 5
+	minimum_character_age = list(SPECIES_HUMAN = 24)
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
